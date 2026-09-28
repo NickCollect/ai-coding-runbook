@@ -1,5 +1,42 @@
 # Changelog
 
+## [7.23.0](https://github.com/openai/openai-node/compare/v7.22.0...v7.23.0) (2026-09-23)
+
+
+### Features
+
+* **api:** add GCP external storage support ([#2794](https://github.com/openai/openai-node/issues/2794)) ([7cd0629](https://github.com/openai/openai-node/commit/7cd0629a8897b34df07d12fe1ec76050cce5a5a0))
+* **api:** add GPT-Rosalind research model ([#2792](https://github.com/openai/openai-node/issues/2792)) ([d0e6fcd](https://github.com/openai/openai-node/commit/d0e6fcd686dfe5415df110a83e4923abadb8419c))
+
+
+### Chores
+
+* **api:** document exact Chat Completions seed bounds ([#2796](https://github.com/openai/openai-node/issues/2796)) ([13b844f](https://github.com/openai/openai-node/commit/13b844fad0b6a7206fb81fe8b7285593119488ac))
+
+## [7.22.0](https://github.com/openai/openai-node/compare/v7.21.0...v7.22.0) (2026-09-22)
+
+
+### Features
+
+* **api:** add GPT-6 Sol and Luna model identifiers ([#2790](https://github.com/openai/openai-node/issues/2790)) ([cff2135](https://github.com/openai/openai-node/commit/cff2135ff75c54d04be256d19d99fad8ca4a9d3b))
+
+## [7.21.0](https://github.com/openai/openai-node/compare/v7.20.0...v7.21.0) (2026-09-22)
+
+
+### Features
+
+* **api:** add session environment reset events ([#2777](https://github.com/openai/openai-node/issues/2777)) ([5de2360](https://github.com/openai/openai-node/commit/5de2360474aba30a3176ba2dde9ac5e55783efb5))
+
+
+### Bug Fixes
+
+* **api:** preserve model choices and improve request handling ([#2787](https://github.com/openai/openai-node/issues/2787)) ([a4a4396](https://github.com/openai/openai-node/commit/a4a439633e41880108624460c62bf13fd94c171b))
+
+
+### Chores
+
+* **api:** document response management resources ([#2775](https://github.com/openai/openai-node/issues/2775)) ([0472fb3](https://github.com/openai/openai-node/commit/0472fb3d9979c238c552da4a7403fe4631e3707b))
+
 ## [7.20.0](https://github.com/openai/openai-node/compare/v7.19.0...v7.20.0) (2026-09-19)
 
 

@@ -663,8 +663,10 @@ At the `'debug'` level, HTTP request and response metadata and headers are logge
 Authentication-related headers are redacted. Serialized string request bodies, including JSON, and
 parsed JSON response bodies are summarized by their format and JavaScript string length instead of
 being logged in full. This avoids inspecting or copying large payloads for logging and leaves the
-actual request and response data unchanged. Other body types retain their existing diagnostic
-representation and may contain sensitive data.
+actual request and response data unchanged. Log arguments are additionally sanitized to redact
+credential-like fields and URL credentials. Multipart bodies and raw responses are logged as
+sanitized diagnostic objects; streams and binary values are redacted without being read or consumed.
+Remaining diagnostics may still contain sensitive data.
 
 #### Custom logger
 
@@ -899,4 +901,7 @@ for lifecycle, deprecation, and release rules.
 
 ## Contributing
 
-See [the contributing documentation](./.github/CONTRIBUTING.md).
+Please share bug reports and feature requests through [GitHub issues](https://github.com/openai/openai-node/issues).
+Pull requests are limited to repository collaborators; we do not accept pull requests from non-collaborators.
+See [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for the contribution policy and development guide.
+For security vulnerabilities, follow [SECURITY.md](.github/SECURITY.md).

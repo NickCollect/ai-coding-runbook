@@ -15,6 +15,7 @@ use codex_app_server_protocol::JSONRPCRequest;
 use codex_app_server_protocol::JSONRPCResponse;
 use codex_app_server_protocol::SortDirection;
 use codex_app_server_protocol::ThreadHistoryMode;
+use codex_app_server_protocol::ThreadItemsListCursor;
 use codex_app_server_protocol::ThreadItemsListParams;
 use codex_app_server_protocol::ThreadItemsListResponse;
 use codex_app_server_protocol::ThreadStatus;
@@ -276,6 +277,7 @@ pub(super) async fn start_recording_app_server_with_realtime_speech(
         /*log_db*/ None,
         state_db,
         Arc::new(codex_exec_server::EnvironmentManager::default_for_tests()),
+        Default::default(),
     )
     .await?;
     let codex_home = config.codex_home.display().to_string();
@@ -664,7 +666,7 @@ pub(super) fn recorded_params(requests: &RecordedRequests, method: &str) -> Vec<
         .collect()
 }
 
-async fn make_history_test_app() -> Result<(App, tempfile::TempDir)> {
+async fn make_history_test_app() -> Result<(Box<App>, tempfile::TempDir)> {
     let mut app = make_test_app().await;
     let codex_home = tempdir()?;
     app.config.codex_home = codex_home.path().to_path_buf().abs();
@@ -1121,6 +1123,7 @@ async fn local_daemon_registers_approval_gated_mcp_tools_for_both_start_paths() 
         .request_typed(ClientRequest::McpServerStatusList {
             request_id: AppServerRequestId::String("tui-tool-inventory".to_string()),
             params: codex_app_server_protocol::ListMcpServerStatusParams {
+                server_name: None,
                 cursor: None,
                 limit: None,
                 detail: Some(codex_app_server_protocol::McpServerStatusDetail::ToolsAndAuthOnly),
@@ -1314,13 +1317,14 @@ async fn local_daemon_registers_approval_gated_mcp_tools_for_both_start_paths() 
         }
     };
     let AppEvent::DynamicToolThreadStarted {
-        thread_id: child_thread_id,
+        thread,
         task_tools_available,
         registered,
     } = registration
     else {
         panic!("expected the MCP-created task to register")
     };
+    let child_thread_id = ThreadId::from_string(&thread.id)?;
     assert!(task_tools_available);
     assert!(registered.send(()).is_ok());
     let created = creation.await??;
@@ -1335,14 +1339,34 @@ async fn local_daemon_registers_approval_gated_mcp_tools_for_both_start_paths() 
         child["config"]["mcp_servers.codex_tui"],
         starts[0]["config"]["mcp_servers.codex_tui"]
     );
-    let forked = call_tool(
-        3,
-        "fork_thread",
-        serde_json::json!({"threadId": delegation_source}),
-    )
-    .send()
-    .await?;
+    // Fork another task: this synthetic MCP call has no active turn to cut before.
+    let fork_source =
+        create_history_rollout(&app.config, ThreadHistoryMode::Legacy, "Task to fork")?;
+    let forked = tokio::spawn(
+        call_tool(
+            3,
+            "fork_thread",
+            serde_json::json!({"threadId": fork_source}),
+        )
+        .send(),
+    );
+    let registration = tokio::time::timeout(Duration::from_secs(/*secs*/ 5), events.recv())
+        .await?
+        .expect("fork registration event");
+    let AppEvent::DynamicToolThreadStarted { thread, .. } = &registration else {
+        panic!("expected the MCP fork to register")
+    };
+    let forked_thread_id = ThreadId::from_string(&thread.id)?;
+    let expected_thread = thread.clone();
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+    Box::pin(app.handle_event(&mut tui, &mut app_server, registration)).await?;
+    assert_eq!(
+        app.agents_overview.threads[&forked_thread_id],
+        Some(expected_thread)
+    );
+    let forked = forked.await??;
     assert!(forked.status().is_success());
+    assert!(forked.text().await?.contains(&forked_thread_id.to_string()));
     let forked = recorded_params(&requests, "thread/fork")
         .pop()
         .expect("MCP-created fork request");
@@ -1763,7 +1787,7 @@ async fn dynamic_tool_requests_ignore_other_namespaces_and_dispatch_tui_namespac
             .await?
             .expect("background task registration event");
     let AppEvent::DynamicToolThreadStarted {
-        thread_id: created_thread_id,
+        thread,
         task_tools_available,
         registered,
     } = registration
@@ -1771,16 +1795,22 @@ async fn dynamic_tool_requests_ignore_other_namespaces_and_dispatch_tui_namespac
         panic!("expected background task registration before its first turn: {registration:?}")
     };
     assert!(recorded_params(&requests, "turn/start").is_empty());
+    let created_thread_id = ThreadId::from_string(&thread.id)?;
+    let expected_thread = thread.clone();
     Box::pin(app.handle_event(
         &mut tui,
         &mut app_server,
         AppEvent::DynamicToolThreadStarted {
-            thread_id: created_thread_id,
+            thread,
             task_tools_available,
             registered,
         },
     ))
     .await?;
+    assert_eq!(
+        app.agents_overview.threads[&created_thread_id],
+        Some(expected_thread)
+    );
     assert!(
         app.agents_overview
             .dispatched_requests
@@ -1848,7 +1878,7 @@ async fn dynamic_tool_requests_ignore_other_namespaces_and_dispatch_tui_namespac
         },
     );
     let AppEvent::DynamicToolThreadStarted {
-        thread_id: continued_thread_id,
+        thread,
         task_tools_available,
         registered,
     } = tokio::time::timeout(std::time::Duration::from_secs(/*secs*/ 5), events.recv())
@@ -1857,13 +1887,13 @@ async fn dynamic_tool_requests_ignore_other_namespaces_and_dispatch_tui_namespac
     else {
         panic!("expected follow-up task registration before its next turn")
     };
-    assert_eq!(continued_thread_id, creation_source);
+    assert_eq!(ThreadId::from_string(&thread.id)?, creation_source);
     assert_eq!(recorded_params(&requests, "turn/start").len(), 1);
     Box::pin(app.handle_event(
         &mut tui,
         &mut app_server,
         AppEvent::DynamicToolThreadStarted {
-            thread_id: continued_thread_id,
+            thread,
             task_tools_available,
             registered,
         },
@@ -2062,7 +2092,7 @@ async fn older_pagination_reconciles_review_prompts_across_page_boundaries() -> 
             params: ThreadItemsListParams {
                 thread_id: thread_id.to_string(),
                 turn_id: None,
-                cursor: Some(cursor.clone()),
+                cursor: Some(ThreadItemsListCursor::Opaque(cursor.clone())),
                 limit: Some(crate::app_server_session::HISTORY_ITEM_PAGE_LIMIT),
                 sort_direction: Some(SortDirection::Desc),
             },
@@ -3264,7 +3294,7 @@ model_reasoning_effort = "low"
     )
     .await?;
     let mut tui = crate::tui::test_support::make_test_tui()?;
-    app.start_fresh_session_with_summary_hint(
+    app.start_fresh_session(
         &mut tui,
         &mut server,
         /*session_start_source*/ None,
@@ -3627,7 +3657,7 @@ terminal_visualization_instructions = true
             .map(|entry| &entry.owner),
         Some(&crate::worktree_browser::Owner::Unavailable(missing_owner))
     );
-    app.start_fresh_session_with_summary_hint(
+    app.start_fresh_session(
         &mut tui,
         &mut server,
         /*session_start_source*/ None,
@@ -3790,7 +3820,7 @@ async fn changing_directory_preserves_project_trust_permissions_history_and_hook
     let (rec, plain, req) = (recorded_params, crate::key_hint::plain, &requests);
     let mut tui = crate::tui::test_support::make_test_tui()?;
     let (source, message, name) = (None, None, Some("Previous project".to_string()));
-    app.start_fresh_session_with_summary_hint(&mut tui, &mut server, source, message, name)
+    app.start_fresh_session(&mut tui, &mut server, source, message, name)
         .await;
     let original = app.chat_widget.thread_id().expect("original thread");
     let rollout = app.chat_widget.rollout_path().expect("original rollout");
@@ -4086,7 +4116,7 @@ fn fresh_session_applies_requested_name() -> Result<()> {
                 .await?;
                 let mut tui = crate::tui::test_support::make_test_tui()?;
 
-                app.start_fresh_session_with_summary_hint(
+                app.start_fresh_session(
                     &mut tui,
                     &mut app_server,
                     /*session_start_source*/ None,
@@ -4264,7 +4294,7 @@ fn session_lifecycle_avoids_redundant_subagent_metadata_reads() -> Result<()> {
                 );
                 assert!(matches!(take_backfill_counts(&requests), (0, 0) | (0, 1)));
 
-                app.start_fresh_session_with_summary_hint(
+                app.start_fresh_session(
                     &mut tui,
                     &mut app_server,
                     /*session_start_source*/ None,

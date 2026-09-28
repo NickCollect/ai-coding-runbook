@@ -9,6 +9,13 @@ import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
 
+function resolveResourceRequestOptions(
+  options: RequestOptions | undefined,
+  buildOptions: (options: RequestOptions | undefined) => RequestOptions | Promise<RequestOptions>,
+): Promise<RequestOptions> {
+  return Promise.resolve(options).then(buildOptions);
+}
+
 // Recognizable options across SDK runtime versions. Keep this independent of
 // private RequestOptions fields so older handwritten runtimes still compile.
 const normalizeRequestOptionsForQueryKeys = new Set([
@@ -139,12 +146,15 @@ export class Credentials extends APIResource {
    * ```
    */
   create(vaultID: string, body: CredentialCreateParams, options?: RequestOptions): APIPromise<Credential> {
-    return this._client.post(path`/vaults/${vaultID}/credentials`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.post(
+      path`/vaults/${vaultID}/credentials`,
+      resolveResourceRequestOptions(options, (options) => ({
+        body,
+        ...options,
+        headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 
   /**
@@ -166,16 +176,18 @@ export class Credentials extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Credential> {
     const { vault_id } = params;
-    return this._client.get(path`/vaults/${vault_id}/credentials/${credentialID}`, {
-      ...options,
-      headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.get(
+      path`/vaults/${vault_id}/credentials/${credentialID}`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 
   /**
-   * Rotates a vault credential's write-only secret and returns only credential
-   * metadata. See
+   * Updates credential metadata or rotates its write-only secret. See
    * [vaults](https://developers.openai.com/api/docs/guides/agents-api/tools/vaults).
    *
    * @example
@@ -183,10 +195,7 @@ export class Credentials extends APIResource {
    * const credential =
    *   await client.beta.agents.vaults.credentials.update(
    *     'credential_id',
-   *     {
-   *       vault_id: 'vault_id',
-   *       auth: { type: 'mcp_oauth' },
-   *     },
+   *     { vault_id: 'vault_id', metadata: {} },
    *   );
    * ```
    */
@@ -196,12 +205,15 @@ export class Credentials extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Credential> {
     const { vault_id, ...body } = params;
-    return this._client.post(path`/vaults/${vault_id}/credentials/${credentialID}`, {
-      body,
-      ...options,
-      headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.post(
+      path`/vaults/${vault_id}/credentials/${credentialID}`,
+      resolveResourceRequestOptions(options, (options) => ({
+        body,
+        ...options,
+        headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 
   /**
@@ -318,12 +330,16 @@ export class Credentials extends APIResource {
       query = {};
     }
     query = query as CredentialListParams | null | undefined;
-    return this._client.getAPIList(path`/vaults/${vaultID}/credentials`, CursorPage<Credential>, {
-      query,
-      ...options,
-      headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.getAPIList(
+      path`/vaults/${vaultID}/credentials`,
+      CursorPage<Credential>,
+      resolveResourceRequestOptions(options, (options) => ({
+        query,
+        ...options,
+        headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 
   /**
@@ -345,11 +361,14 @@ export class Credentials extends APIResource {
     options?: RequestOptions,
   ): APIPromise<CredentialDeleted> {
     const { vault_id } = params;
-    return this._client.delete(path`/vaults/${vault_id}/credentials/${credentialID}`, {
-      ...options,
-      headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.delete(
+      path`/vaults/${vault_id}/credentials/${credentialID}`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 }
 
@@ -373,6 +392,11 @@ export interface Credential {
    * The Unix timestamp, in seconds, when the credential was created.
    */
   created_at: number;
+
+  /**
+   * Application-defined key-value pairs associated with this credential.
+   */
+  metadata: { [key: string]: string };
 
   /**
    * The human-readable name of the credential.
@@ -979,6 +1003,12 @@ export interface CredentialCreateParams {
    * trimming.
    */
   name: string;
+
+  /**
+   * Up to 16 string key-value pairs, with keys up to 64 and values up to 512
+   * characters. Defaults to an empty map.
+   */
+  metadata?: { [key: string]: string };
 }
 
 export interface CredentialRetrieveParams {
@@ -998,7 +1028,14 @@ export interface CredentialUpdateParams {
    * Body param: Replacement values for the credential's existing authentication
    * method.
    */
-  auth: CredentialAuthRotateParam;
+  auth?: CredentialAuthRotateParam;
+
+  /**
+   * Body param: Replaces all metadata. Omit to preserve it, or pass {} to clear it.
+   * Up to 16 string key-value pairs, with keys up to 64 and values up to 512
+   * characters.
+   */
+  metadata?: { [key: string]: string };
 }
 
 export interface CredentialListParams extends Omit<CursorPageParams, 'limit'> {

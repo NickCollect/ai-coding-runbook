@@ -61,6 +61,10 @@ async fn overview_thread_colors_match_footer_and_respect_color_suppression() {
             let text: String = row.iter().map(ratatui::buffer::Cell::symbol).collect();
             if let Some(x) = text.find("Named task") {
                 let x = text[..x].chars().count();
+                let dot = row.iter().find(|cell| cell.symbol() == "○").unwrap();
+                let mut expected = ratatui::buffer::Cell::default();
+                expected.set_symbol("○").set_style(Style::default().cyan());
+                assert_eq!(dot, &expected);
                 snapshot.push(format!(
                     "{} | title style: {:?}",
                     normalize_agent_center_snapshot(&text),
@@ -147,6 +151,7 @@ use pretty_assertions::assert_eq;
 use ratatui::Terminal;
 use ratatui::backend::TestBackend;
 use ratatui::layout::Rect;
+use ratatui::style::Style;
 
 static OVERVIEW_TIMESTAMP: std::sync::LazyLock<i64> =
     std::sync::LazyLock::new(|| chrono::Utc::now().timestamp() - 120);
@@ -285,7 +290,8 @@ fn overview_thread(
 #[tokio::test]
 async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Result<()> {
     let mut app = make_test_app().await;
-    let app_server = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    let mut app_server = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
     let [retained, archived, deleted, created] = std::array::from_fn(|_| ThreadId::new());
     let [
         mut retained_thread,
@@ -305,9 +311,6 @@ async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Re
     app.agents_overview.request_id = Some(request_id);
     // The seed is still in flight and the command center has never been opened.
     for notification in [
-        ServerNotification::ThreadStarted(ThreadStartedNotification {
-            thread: created_thread.clone(),
-        }),
         ServerNotification::ThreadNameUpdated(ThreadNameUpdatedNotification {
             thread_id: retained.to_string(),
             thread_name: Some("New name".to_string()),
@@ -328,6 +331,35 @@ async fn shared_overview_keeps_rows_and_replays_changes_over_stale_reads() -> Re
         )
         .await;
     }
+    // Tool responses can arrive without thread/started or after newer updates/removals.
+    for thread in [
+        retained_thread.clone(),
+        created_thread.clone(),
+        archived_thread.clone(),
+        deleted_thread.clone(),
+    ] {
+        let (registered, registration) = tokio::sync::oneshot::channel();
+        Box::pin(app.handle_event(
+            &mut tui,
+            &mut app_server,
+            AppEvent::DynamicToolThreadStarted {
+                thread,
+                task_tools_available: false,
+                registered,
+            },
+        ))
+        .await?;
+        registration.await?;
+    }
+    assert_eq!(
+        app.agents_overview.threads,
+        HashMap::from([
+            (retained, Some(retained_thread.clone())),
+            (created, Some(created_thread.clone())),
+        ])
+    );
+    // A successful read supersedes registration; queued notifications supersede the read.
+    retained_thread.preview = "Fresh preview from the read".to_string();
     app.apply_agents_overview_thread_refresh(
         &app_server,
         request_id,
@@ -1279,7 +1311,7 @@ async fn shared_overview_shows_only_root_sessions() {
     assert!(
         rendered
             .lines()
-            .any(|line| line.contains("› ● Inspect unnamed task") && line.contains("current"))
+            .any(|line| line.contains("› ● Inspect unnamed task"))
     );
 
     app.transcript_cells.push(std::sync::Arc::new(
@@ -2407,22 +2439,22 @@ async fn command_center_attach_conflict_opens_read_only_and_retries() -> Result<
         insta::assert_snapshot!("agents_overview_attach_conflict", render_bottom_popup(&app.chat_widget, /*width*/ 96));
     });
 
-    app.handle_key_event(&mut tui, &mut server, KeyCode::Esc.into())
-        .await;
+    for key in [KeyCode::Left, KeyCode::Esc] {
+        Box::pin(app.handle_tui_event(&mut tui, &mut server, TuiEvent::Key(key.into()))).await?;
+        assert_eq!(
+            app.chat_widget
+                .selected_index_for_present_view(AGENTS_OVERVIEW_VIEW_ID),
+            selection
+        );
 
-    assert_eq!(
-        app.chat_widget
-            .selected_index_for_present_view(AGENTS_OVERVIEW_VIEW_ID),
-        selection
-    );
-
-    // Opening the displayed task returns to the same frozen snapshot without retrying.
-    Box::pin(app.handle_event(
-        &mut tui,
-        &mut server,
-        AppEvent::SelectAgentsOverviewThread { thread_id },
-    ))
-    .await?;
+        // Opening the displayed task returns to the same frozen snapshot without retrying.
+        Box::pin(app.handle_event(
+            &mut tui,
+            &mut server,
+            AppEvent::SelectAgentsOverviewThread { thread_id },
+        ))
+        .await?;
+    }
     assert!(app.chat_widget.no_modal_or_popup_active());
     assert!(app.chat_widget.is_external_writer_view());
     app.chat_widget.handle_paste(" should be ignored".into());

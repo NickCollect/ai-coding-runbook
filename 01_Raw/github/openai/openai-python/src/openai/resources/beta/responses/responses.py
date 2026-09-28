@@ -112,6 +112,7 @@ class Responses(SyncAPIResource):
     def create(
         self,
         *,
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -124,6 +125,8 @@ class Responses(SyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -143,6 +146,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -227,6 +231,7 @@ class Responses(SyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -276,6 +281,8 @@ class Responses(SyncAPIResource):
         to use your own data as input for the model's response.
 
         Args:
+          access_programs: Domain-specific access programs to use for this request.
+
           background: Whether to run the model response in the background.
               [Learn more](https://developers.openai.com/api/docs/guides/background).
 
@@ -515,6 +522,7 @@ class Responses(SyncAPIResource):
         self,
         *,
         stream: Literal[True],
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -527,6 +535,8 @@ class Responses(SyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -546,6 +556,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -630,6 +641,7 @@ class Responses(SyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -684,6 +696,8 @@ class Responses(SyncAPIResource):
               See the
               [Streaming section below](https://developers.openai.com/api/reference/resources/responses/streaming-events)
               for more information.
+
+          access_programs: Domain-specific access programs to use for this request.
 
           background: Whether to run the model response in the background.
               [Learn more](https://developers.openai.com/api/docs/guides/background).
@@ -917,6 +931,7 @@ class Responses(SyncAPIResource):
         self,
         *,
         stream: bool,
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -929,6 +944,8 @@ class Responses(SyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -948,6 +965,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -1032,6 +1050,7 @@ class Responses(SyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -1086,6 +1105,8 @@ class Responses(SyncAPIResource):
               See the
               [Streaming section below](https://developers.openai.com/api/reference/resources/responses/streaming-events)
               for more information.
+
+          access_programs: Domain-specific access programs to use for this request.
 
           background: Whether to run the model response in the background.
               [Learn more](https://developers.openai.com/api/docs/guides/background).
@@ -1317,6 +1338,7 @@ class Responses(SyncAPIResource):
     def create(
         self,
         *,
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -1329,6 +1351,8 @@ class Responses(SyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -1348,6 +1372,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -1432,6 +1457,7 @@ class Responses(SyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -1474,6 +1500,7 @@ class Responses(SyncAPIResource):
             "/responses?beta=true",
             body=maybe_transform(
                 {
+                    "access_programs": access_programs,
                     "background": background,
                     "context_management": context_management,
                     "conversation": conversation,
@@ -1812,6 +1839,8 @@ class Responses(SyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -1831,6 +1860,7 @@ class Responses(SyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -1915,6 +1945,7 @@ class Responses(SyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
             None,
@@ -2094,6 +2125,7 @@ class AsyncResponses(AsyncAPIResource):
     async def create(
         self,
         *,
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -2106,6 +2138,8 @@ class AsyncResponses(AsyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -2125,6 +2159,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -2209,6 +2244,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -2258,6 +2294,8 @@ class AsyncResponses(AsyncAPIResource):
         to use your own data as input for the model's response.
 
         Args:
+          access_programs: Domain-specific access programs to use for this request.
+
           background: Whether to run the model response in the background.
               [Learn more](https://developers.openai.com/api/docs/guides/background).
 
@@ -2497,6 +2535,7 @@ class AsyncResponses(AsyncAPIResource):
         self,
         *,
         stream: Literal[True],
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -2509,6 +2548,8 @@ class AsyncResponses(AsyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -2528,6 +2569,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -2612,6 +2654,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -2666,6 +2709,8 @@ class AsyncResponses(AsyncAPIResource):
               See the
               [Streaming section below](https://developers.openai.com/api/reference/resources/responses/streaming-events)
               for more information.
+
+          access_programs: Domain-specific access programs to use for this request.
 
           background: Whether to run the model response in the background.
               [Learn more](https://developers.openai.com/api/docs/guides/background).
@@ -2899,6 +2944,7 @@ class AsyncResponses(AsyncAPIResource):
         self,
         *,
         stream: bool,
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -2911,6 +2957,8 @@ class AsyncResponses(AsyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -2930,6 +2978,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -3014,6 +3063,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -3068,6 +3118,8 @@ class AsyncResponses(AsyncAPIResource):
               See the
               [Streaming section below](https://developers.openai.com/api/reference/resources/responses/streaming-events)
               for more information.
+
+          access_programs: Domain-specific access programs to use for this request.
 
           background: Whether to run the model response in the background.
               [Learn more](https://developers.openai.com/api/docs/guides/background).
@@ -3299,6 +3351,7 @@ class AsyncResponses(AsyncAPIResource):
     async def create(
         self,
         *,
+        access_programs: response_create_params.AccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[response_create_params.ContextManagement]] | Omit = omit,
         conversation: Optional[response_create_params.Conversation] | Omit = omit,
@@ -3311,6 +3364,8 @@ class AsyncResponses(AsyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -3330,6 +3385,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -3414,6 +3470,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -3456,6 +3513,7 @@ class AsyncResponses(AsyncAPIResource):
             "/responses?beta=true",
             body=await async_maybe_transform(
                 {
+                    "access_programs": access_programs,
                     "background": background,
                     "context_management": context_management,
                     "conversation": conversation,
@@ -3794,6 +3852,8 @@ class AsyncResponses(AsyncAPIResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -3813,6 +3873,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -3897,6 +3958,7 @@ class AsyncResponses(AsyncAPIResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
             None,
@@ -4521,7 +4583,7 @@ class AsyncResponsesConnectionManager:
         data = (
             event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
             if isinstance(event, BaseModel)
-            else json.dumps(event)
+            else json.dumps(maybe_transform(event, BetaResponsesClientEventParam))
         )
         self.__send_queue.enqueue(data)
 
@@ -5007,7 +5069,7 @@ class ResponsesConnectionManager:
         data = (
             event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
             if isinstance(event, BaseModel)
-            else json.dumps(event)
+            else json.dumps(maybe_transform(event, BetaResponsesClientEventParam))
         )
         self.__send_queue.enqueue(data)
 
@@ -5155,6 +5217,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
     def create(
         self,
         *,
+        access_programs: beta_responses_client_event_param.ResponseCreateAccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[beta_responses_client_event_param.ResponseCreateContextManagement]]
         | Omit = omit,
@@ -5168,6 +5231,8 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -5187,6 +5252,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -5271,6 +5337,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -5315,6 +5382,7 @@ class ResponsesResponseResource(BaseResponsesConnectionResource):
                 strip_not_given(
                     {
                         "type": "response.create",
+                        "access_programs": access_programs,
                         "background": background,
                         "context_management": context_management,
                         "conversation": conversation,
@@ -5405,6 +5473,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
     async def create(
         self,
         *,
+        access_programs: beta_responses_client_event_param.ResponseCreateAccessPrograms | Omit = omit,
         background: Optional[bool] | Omit = omit,
         context_management: Optional[Iterable[beta_responses_client_event_param.ResponseCreateContextManagement]]
         | Omit = omit,
@@ -5418,6 +5487,8 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
         model: Union[
             Literal[
                 "gpt-6-astra",
+                "gpt-6-sol",
+                "gpt-6-luna",
                 "gpt-5.6-sol",
                 "gpt-5.6-terra",
                 "gpt-5.6-luna",
@@ -5437,6 +5508,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                 "gpt-5.1",
                 "gpt-5.1-2025-11-13",
                 "gpt-5.1-codex",
+                "gpt-5.1-mini",
                 "gpt-5.1-chat-latest",
                 "gpt-5",
                 "gpt-5-mini",
@@ -5521,6 +5593,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                 "gpt-daybreak-blue-latest",
                 "gpt-daybreak-red-latest",
                 "gpt-5.6-cyber",
+                "gpt-rosalind-research",
             ],
             str,
         ]
@@ -5565,6 +5638,7 @@ class AsyncResponsesResponseResource(BaseAsyncResponsesConnectionResource):
                 strip_not_given(
                     {
                         "type": "response.create",
+                        "access_programs": access_programs,
                         "background": background,
                         "context_management": context_management,
                         "conversation": conversation,

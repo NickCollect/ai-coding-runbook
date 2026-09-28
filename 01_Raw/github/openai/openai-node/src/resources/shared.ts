@@ -21,10 +21,13 @@ export type AllModels =
   | 'gpt-5.1-codex-max'
   | 'gpt-daybreak-blue-latest'
   | 'gpt-daybreak-red-latest'
-  | 'gpt-5.6-cyber';
+  | 'gpt-5.6-cyber'
+  | 'gpt-rosalind-research';
 
 export type ChatModel =
   | 'gpt-6-astra'
+  | 'gpt-6-sol'
+  | 'gpt-6-luna'
   | 'gpt-5.6-sol'
   | 'gpt-5.6-terra'
   | 'gpt-5.6-luna'
@@ -485,4 +488,5 @@ export type ResponsesModel =
   | 'gpt-5.1-codex-max'
   | 'gpt-daybreak-blue-latest'
   | 'gpt-daybreak-red-latest'
-  | 'gpt-5.6-cyber';
+  | 'gpt-5.6-cyber'
+  | 'gpt-rosalind-research';

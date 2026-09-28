@@ -13,6 +13,120 @@ import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+function resolveResourceRequestOptions(
+  options: RequestOptions | undefined,
+  buildOptions: (options: RequestOptions | undefined) => RequestOptions | Promise<RequestOptions>,
+): Promise<RequestOptions> {
+  return Promise.resolve(options).then(buildOptions);
+}
+
+// Recognizable options across SDK runtime versions. Keep this independent of
+// private RequestOptions fields so older handwritten runtimes still compile.
+const normalizeRequestOptionsForQueryKeys = new Set([
+  'method',
+  'path',
+  'query',
+  'body',
+  'headers',
+  'maxRetries',
+  'stream',
+  'timeout',
+  'httpAgent',
+  'fetchOptions',
+  'signal',
+  'idempotencyKey',
+  'defaultBaseURL',
+  '__metadata',
+  '__binaryRequest',
+  '__binaryResponse',
+  '__streamClass',
+  '__security',
+  '__synthesizeEventData',
+]);
+
+function normalizeRequestOptionsForQuery(
+  value: unknown,
+  queryKeys: ReadonlyArray<string>,
+  options: RequestOptions | undefined,
+):
+  | ({
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    })
+  | undefined {
+  if (typeof value !== 'object' || value === null) return undefined;
+  // Optional never fields can still be explicitly undefined unless consumers
+  // enable exactOptionalPropertyTypes. Snapshot data without invoking getters.
+  const entries = Object.entries(Object.getOwnPropertyDescriptors(value)).filter(
+    ([, descriptor]) => descriptor.enumerable && (!('value' in descriptor) || descriptor.value !== undefined),
+  );
+  const keys = entries.map(([key]) => key);
+  const requestOnly = keys.some(
+    (key) => normalizeRequestOptionsForQueryKeys.has(key) && !queryKeys.includes(key),
+  );
+  if (!requestOnly) return undefined;
+  // Declared query fields, including stream, must use the query argument.
+  // Mixing them with request-only options is ambiguous and could change the return type.
+  if (
+    options !== undefined ||
+    keys.some((key) => !normalizeRequestOptionsForQueryKeys.has(key) || queryKeys.includes(key))
+  ) {
+    throw new TypeError('Query parameters and request options must be passed as separate arguments.');
+  }
+  // The query position must not gain authority to change the request destination
+  // or transport. Those overrides require the explicit request options argument.
+  if (
+    keys.some(
+      (key) => !['headers', 'maxRetries', 'timeout', 'signal', 'idempotencyKey', 'query'].includes(key),
+    )
+  ) {
+    throw new TypeError('Pass transport overrides in the explicit request options argument.');
+  }
+  // Copy only the validated fields. Spreading value would reintroduce undefined
+  // transport overrides, and deleting them would mutate the caller's object.
+  return Object.fromEntries(
+    entries.map(([key, descriptor]) => {
+      if ('value' in descriptor) return [key, descriptor.value];
+      return [key, descriptor.get ? Reflect.apply(descriptor.get, value, []) : undefined];
+    }),
+  ) as {
+    [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+  } & {
+    [
+      K in
+        | 'method'
+        | 'path'
+        | 'body'
+        | 'stream'
+        | 'httpAgent'
+        | 'fetchOptions'
+        | 'defaultBaseURL'
+        | '__metadata'
+        | '__binaryRequest'
+        | '__binaryResponse'
+        | '__streamClass'
+        | '__security'
+        | '__synthesizeEventData'
+    ]?: never;
+  };
+}
+
 /**
  * Create and manage model responses.
  */
@@ -52,16 +166,19 @@ export class Responses extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>> {
     const { betas, ...body } = params;
-    return this._client.post('/responses?beta=true', {
-      body,
-      ...options,
-      headers: buildHeaders([
-        { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
-        options?.headers,
-      ]),
-      stream: params.stream ?? false,
-      __security: { bearerAuth: true },
-    }) as APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>>;
+    return this._client.post(
+      '/responses?beta=true',
+      resolveResourceRequestOptions(options, (options) => ({
+        body,
+        ...options,
+        headers: buildHeaders([
+          { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
+          options?.headers,
+        ]),
+        stream: params.stream ?? false,
+        __security: { bearerAuth: true },
+      })),
+    ) as APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>>;
   }
 
   /**
@@ -76,35 +193,178 @@ export class Responses extends APIResource {
    */
   retrieve(
     responseID: string,
-    params?: ResponseRetrieveParamsNonStreaming,
+    params?: ResponseRetrieveParamsNonStreaming &
+      (
+        | {
+            [
+              K in
+                | 'method'
+                | 'path'
+                | 'query'
+                | 'body'
+                | 'headers'
+                | 'maxRetries'
+                | 'timeout'
+                | 'httpAgent'
+                | 'fetchOptions'
+                | 'signal'
+                | 'idempotencyKey'
+                | 'defaultBaseURL'
+                | '__metadata'
+                | '__binaryRequest'
+                | '__binaryResponse'
+                | '__streamClass'
+                | '__security'
+                | '__synthesizeEventData'
+            ]?: never;
+          }
+        | null
+        | undefined
+      ),
     options?: RequestOptions,
   ): APIPromise<BetaResponse>;
   retrieve(
     responseID: string,
-    params: ResponseRetrieveParamsStreaming,
+    params: ResponseRetrieveParamsStreaming &
+      (
+        | {
+            [
+              K in
+                | 'method'
+                | 'path'
+                | 'query'
+                | 'body'
+                | 'headers'
+                | 'maxRetries'
+                | 'timeout'
+                | 'httpAgent'
+                | 'fetchOptions'
+                | 'signal'
+                | 'idempotencyKey'
+                | 'defaultBaseURL'
+                | '__metadata'
+                | '__binaryRequest'
+                | '__binaryResponse'
+                | '__streamClass'
+                | '__security'
+                | '__synthesizeEventData'
+            ]?: never;
+          }
+        | null
+        | undefined
+      ),
     options?: RequestOptions,
   ): APIPromise<Stream<BetaResponseStreamEvent>>;
   retrieve(
     responseID: string,
-    params?: ResponseRetrieveParamsBase | undefined,
+    params?:
+      | (ResponseRetrieveParamsBase &
+          (
+            | {
+                [
+                  K in
+                    | 'method'
+                    | 'path'
+                    | 'query'
+                    | 'body'
+                    | 'headers'
+                    | 'maxRetries'
+                    | 'timeout'
+                    | 'httpAgent'
+                    | 'fetchOptions'
+                    | 'signal'
+                    | 'idempotencyKey'
+                    | 'defaultBaseURL'
+                    | '__metadata'
+                    | '__binaryRequest'
+                    | '__binaryResponse'
+                    | '__streamClass'
+                    | '__security'
+                    | '__synthesizeEventData'
+                ]?: never;
+              }
+            | null
+            | undefined
+          ))
+      | undefined,
     options?: RequestOptions,
   ): APIPromise<Stream<BetaResponseStreamEvent> | BetaResponse>;
   retrieve(
     responseID: string,
-    params: ResponseRetrieveParams | undefined = {},
+    options?: {
+      [K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query']?: RequestOptions[K];
+    } & {
+      [
+        K in
+          | 'method'
+          | 'path'
+          | 'body'
+          | 'stream'
+          | 'httpAgent'
+          | 'fetchOptions'
+          | 'defaultBaseURL'
+          | '__metadata'
+          | '__binaryRequest'
+          | '__binaryResponse'
+          | '__streamClass'
+          | '__security'
+          | '__synthesizeEventData'
+      ]?: never;
+    },
+  ): APIPromise<BetaResponse>;
+  retrieve(
+    responseID: string,
+    params:
+      | ResponseRetrieveParamsBase
+      | ({
+          [
+            K in 'headers' | 'maxRetries' | 'timeout' | 'signal' | 'idempotencyKey' | 'query'
+          ]?: RequestOptions[K];
+        } & {
+          [
+            K in
+              | 'method'
+              | 'path'
+              | 'body'
+              | 'stream'
+              | 'httpAgent'
+              | 'fetchOptions'
+              | 'defaultBaseURL'
+              | '__metadata'
+              | '__binaryRequest'
+              | '__binaryResponse'
+              | '__streamClass'
+              | '__security'
+              | '__synthesizeEventData'
+          ]?: never;
+        })
+      | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>> {
+    const normalizeRequestOptionsForQueryOptions = normalizeRequestOptionsForQuery(
+      params,
+      ['betas', 'include', 'include_obfuscation', 'starting_after', 'stream'],
+      options,
+    );
+    if (normalizeRequestOptionsForQueryOptions !== undefined) {
+      options = normalizeRequestOptionsForQueryOptions;
+      params = {};
+    }
+    params = params as ResponseRetrieveParams | undefined;
     const { betas, ...query } = params ?? {};
-    return this._client.get(path`/responses/${responseID}?beta=true`, {
-      query,
-      ...options,
-      headers: buildHeaders([
-        { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
-        options?.headers,
-      ]),
-      stream: params?.stream ?? false,
-      __security: { bearerAuth: true },
-    }) as APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>>;
+    return this._client.get(
+      path`/responses/${responseID}?beta=true`,
+      resolveResourceRequestOptions(options, (options) => ({
+        query,
+        ...options,
+        headers: buildHeaders([
+          { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
+          options?.headers,
+        ]),
+        stream: params?.stream ?? false,
+        __security: { bearerAuth: true },
+      })),
+    ) as APIPromise<BetaResponse> | APIPromise<Stream<BetaResponseStreamEvent>>;
   }
 
   /**
@@ -123,14 +383,20 @@ export class Responses extends APIResource {
     options?: RequestOptions,
   ): APIPromise<void> {
     const { betas } = params ?? {};
-    return this._client.delete(path`/responses/${responseID}?beta=true`, {
-      ...options,
-      headers: buildHeaders([
-        { Accept: '*/*', ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
-        options?.headers,
-      ]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.delete(
+      path`/responses/${responseID}?beta=true`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        headers: buildHeaders([
+          {
+            Accept: '*/*',
+            ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined),
+          },
+          options?.headers,
+        ]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 
   /**
@@ -151,14 +417,17 @@ export class Responses extends APIResource {
     options?: RequestOptions,
   ): APIPromise<BetaResponse> {
     const { betas } = params ?? {};
-    return this._client.post(path`/responses/${responseID}/cancel?beta=true`, {
-      ...options,
-      headers: buildHeaders([
-        { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
-        options?.headers,
-      ]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.post(
+      path`/responses/${responseID}/cancel?beta=true`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        headers: buildHeaders([
+          { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
+          options?.headers,
+        ]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 
   /**
@@ -179,15 +448,18 @@ export class Responses extends APIResource {
    */
   compact(params: ResponseCompactParams, options?: RequestOptions): APIPromise<BetaCompactedResponse> {
     const { betas, ...body } = params;
-    return this._client.post('/responses/compact?beta=true', {
-      body,
-      ...options,
-      headers: buildHeaders([
-        { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
-        options?.headers,
-      ]),
-      __security: { bearerAuth: true },
-    });
+    return this._client.post(
+      '/responses/compact?beta=true',
+      resolveResourceRequestOptions(options, (options) => ({
+        body,
+        ...options,
+        headers: buildHeaders([
+          { ...(betas?.toString() != null ? { 'openai-beta': betas?.toString() } : undefined) },
+          options?.headers,
+        ]),
+        __security: { bearerAuth: true },
+      })),
+    );
   }
 }
 
@@ -1104,6 +1376,8 @@ export interface BetaResponse {
    */
   id: string;
 
+  access_programs: BetaResponse.AccessPrograms | null;
+
   /**
    * Unix timestamp (in seconds) of when this Response was created.
    */
@@ -1147,6 +1421,8 @@ export interface BetaResponse {
    */
   model:
     | 'gpt-6-astra'
+    | 'gpt-6-sol'
+    | 'gpt-6-luna'
     | 'gpt-5.6-sol'
     | 'gpt-5.6-terra'
     | 'gpt-5.6-luna'
@@ -1251,6 +1527,7 @@ export interface BetaResponse {
     | 'gpt-daybreak-blue-latest'
     | 'gpt-daybreak-red-latest'
     | 'gpt-5.6-cyber'
+    | 'gpt-rosalind-research'
     | (string & {});
 
   /**
@@ -1524,6 +1801,13 @@ export interface BetaResponse {
 }
 
 export namespace BetaResponse {
+  export interface AccessPrograms {
+    /**
+     * The effective Cyber access program used for this response.
+     */
+    cyber: 'standard' | 'daybreak_blue' | 'daybreak_red';
+  }
+
   /**
    * Details about why the response is incomplete.
    */
@@ -11630,6 +11914,11 @@ export namespace BetaResponsesClientEvent {
     type: 'response.create';
 
     /**
+     * Domain-specific access programs to use for this request.
+     */
+    access_programs?: ResponseCreate.AccessPrograms;
+
+    /**
      * Whether to run the model response in the background.
      * [Learn more](https://developers.openai.com/api/docs/guides/background).
      */
@@ -11726,6 +12015,8 @@ export namespace BetaResponsesClientEvent {
      */
     model?:
       | 'gpt-6-astra'
+      | 'gpt-6-sol'
+      | 'gpt-6-luna'
       | 'gpt-5.6-sol'
       | 'gpt-5.6-terra'
       | 'gpt-5.6-luna'
@@ -11830,6 +12121,7 @@ export namespace BetaResponsesClientEvent {
       | 'gpt-daybreak-blue-latest'
       | 'gpt-daybreak-red-latest'
       | 'gpt-5.6-cyber'
+      | 'gpt-rosalind-research'
       | (string & {});
 
     /**
@@ -12076,6 +12368,25 @@ export namespace BetaResponsesClientEvent {
   }
 
   export namespace ResponseCreate {
+    /**
+     * Domain-specific access programs to use for this request.
+     */
+    export interface AccessPrograms {
+      /**
+       * The Cyber access program to use for this request. Supported values are
+       * `standard`, `daybreak_blue`, and `daybreak_red`. If omitted, the API resolves
+       * the program from the model's Cyber tier and your organization and project
+       * access, subject to model-specific eligibility restrictions. By default, models
+       * without a Cyber tier use Standard. Blue-tier models use Daybreak Blue when
+       * authorized; otherwise they fall back to Standard unless the model requires
+       * Daybreak access. Red-tier models use Daybreak Red and require authorization.
+       * Requests that require unavailable Daybreak access return 403. An implicit
+       * Standard fallback is represented by null in the response's access_programs
+       * field, rather than an explicit Standard selection.
+       */
+      cyber?: 'standard' | 'daybreak_blue' | 'daybreak_red';
+    }
+
     export interface ContextManagement {
       /**
        * The context management entry type. Currently only 'compaction' is supported.
@@ -13759,14 +14070,18 @@ export interface BetaWebSearchPreviewTool {
   search_context_size?: 'low' | 'medium' | 'high';
 
   /**
-   * The user's location.
+   * The approximate location of the user. If omitted or null, defaults to the United
+   * States. To avoid this fallback, pass `{"type": "approximate"}` without location
+   * fields. To localize results, provide the relevant location fields.
    */
   user_location?: BetaWebSearchPreviewTool.UserLocation | null;
 }
 
 export namespace BetaWebSearchPreviewTool {
   /**
-   * The user's location.
+   * The approximate location of the user. If omitted or null, defaults to the United
+   * States. To avoid this fallback, pass `{"type": "approximate"}` without location
+   * fields. To localize results, provide the relevant location fields.
    */
   export interface UserLocation {
     /**
@@ -13827,7 +14142,9 @@ export interface BetaWebSearchTool {
   search_context_size?: 'low' | 'medium' | 'high';
 
   /**
-   * The approximate location of the user.
+   * The approximate location of the user. If omitted or null, defaults to the United
+   * States. To avoid this fallback, pass `{"type": "approximate"}` without location
+   * fields. To localize results, provide the relevant location fields.
    */
   user_location?: BetaWebSearchTool.UserLocation | null;
 }
@@ -13847,7 +14164,9 @@ export namespace BetaWebSearchTool {
   }
 
   /**
-   * The approximate location of the user.
+   * The approximate location of the user. If omitted or null, defaults to the United
+   * States. To avoid this fallback, pass `{"type": "approximate"}` without location
+   * fields. To localize results, provide the relevant location fields.
    */
   export interface UserLocation {
     /**
@@ -13882,6 +14201,11 @@ export namespace BetaWebSearchTool {
 export type ResponseCreateParams = ResponseCreateParamsNonStreaming | ResponseCreateParamsStreaming;
 
 export interface ResponseCreateParamsBase {
+  /**
+   * Body param: Domain-specific access programs to use for this request.
+   */
+  access_programs?: ResponseCreateParams.AccessPrograms;
+
   /**
    * Body param: Whether to run the model response in the background.
    * [Learn more](https://developers.openai.com/api/docs/guides/background).
@@ -13980,6 +14304,8 @@ export interface ResponseCreateParamsBase {
    */
   model?:
     | 'gpt-6-astra'
+    | 'gpt-6-sol'
+    | 'gpt-6-luna'
     | 'gpt-5.6-sol'
     | 'gpt-5.6-terra'
     | 'gpt-5.6-luna'
@@ -14084,6 +14410,7 @@ export interface ResponseCreateParamsBase {
     | 'gpt-daybreak-blue-latest'
     | 'gpt-daybreak-red-latest'
     | 'gpt-5.6-cyber'
+    | 'gpt-rosalind-research'
     | (string & {});
 
   /**
@@ -14331,6 +14658,25 @@ export interface ResponseCreateParamsBase {
 }
 
 export namespace ResponseCreateParams {
+  /**
+   * Domain-specific access programs to use for this request.
+   */
+  export interface AccessPrograms {
+    /**
+     * The Cyber access program to use for this request. Supported values are
+     * `standard`, `daybreak_blue`, and `daybreak_red`. If omitted, the API resolves
+     * the program from the model's Cyber tier and your organization and project
+     * access, subject to model-specific eligibility restrictions. By default, models
+     * without a Cyber tier use Standard. Blue-tier models use Daybreak Blue when
+     * authorized; otherwise they fall back to Standard unless the model requires
+     * Daybreak access. Red-tier models use Daybreak Red and require authorization.
+     * Requests that require unavailable Daybreak access return 403. An implicit
+     * Standard fallback is represented by null in the response's access_programs
+     * field, rather than an explicit Standard selection.
+     */
+    cyber?: 'standard' | 'daybreak_blue' | 'daybreak_red';
+  }
+
   export interface ContextManagement {
     /**
      * The context management entry type. Currently only 'compaction' is supported.
@@ -14650,6 +14996,8 @@ export interface ResponseCompactParams {
    */
   model:
     | 'gpt-6-astra'
+    | 'gpt-6-sol'
+    | 'gpt-6-luna'
     | 'gpt-5.6-sol'
     | 'gpt-5.6-terra'
     | 'gpt-5.6-luna'
@@ -14754,6 +15102,7 @@ export interface ResponseCompactParams {
     | 'gpt-daybreak-blue-latest'
     | 'gpt-daybreak-red-latest'
     | 'gpt-5.6-cyber'
+    | 'gpt-rosalind-research'
     | (string & {})
     | null;
 

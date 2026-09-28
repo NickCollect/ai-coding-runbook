@@ -6,6 +6,13 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../../../core/pa
 import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
+function resolveResourceRequestOptions(
+  options: RequestOptions | undefined,
+  buildOptions: (options: RequestOptions | undefined) => RequestOptions | Promise<RequestOptions>,
+): Promise<RequestOptions> {
+  return Promise.resolve(options).then(buildOptions);
+}
+
 // Recognizable options across SDK runtime versions. Keep this independent of
 // private RequestOptions fields so older handwritten runtimes still compile.
 const normalizeRequestOptionsForQueryKeys = new Set([
@@ -134,11 +141,14 @@ export class ExternalStorage extends APIResource {
     body: ExternalStorageCreateParams,
     options?: RequestOptions,
   ): APIPromise<ExternalStorageConfiguration> {
-    return this._client.post('/organization/external_storage', {
-      body,
-      ...options,
-      __security: { adminAPIKeyAuth: true },
-    });
+    return this._client.post(
+      '/organization/external_storage',
+      resolveResourceRequestOptions(options, (options) => ({
+        body,
+        ...options,
+        __security: { adminAPIKeyAuth: true },
+      })),
+    );
   }
 
   /**
@@ -153,10 +163,13 @@ export class ExternalStorage extends APIResource {
    * ```
    */
   retrieve(externalStorageID: string, options?: RequestOptions): APIPromise<ExternalStorageConfiguration> {
-    return this._client.get(path`/organization/external_storage/${externalStorageID}`, {
-      ...options,
-      __security: { adminAPIKeyAuth: true },
-    });
+    return this._client.get(
+      path`/organization/external_storage/${externalStorageID}`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        __security: { adminAPIKeyAuth: true },
+      })),
+    );
   }
 
   /**
@@ -269,12 +282,19 @@ export class ExternalStorage extends APIResource {
     return this._client.getAPIList(
       '/organization/external_storage',
       CursorPage<ExternalStorageConfiguration>,
-      { query, ...options, __security: { adminAPIKeyAuth: true } },
+      resolveResourceRequestOptions(options, (options) => ({
+        query,
+        ...options,
+        __security: { adminAPIKeyAuth: true },
+      })),
     );
   }
 
   /**
-   * Soft-delete one customer-managed external storage configuration.
+   * Disconnect a customer-managed external storage configuration. Removing the
+   * project's last configuration restores organization-default retention if
+   * customer-managed retention was active. Repeating a deletion also completes any
+   * interrupted retention update. Cloud storage is unchanged.
    *
    * @example
    * ```ts
@@ -285,10 +305,13 @@ export class ExternalStorage extends APIResource {
    * ```
    */
   delete(externalStorageID: string, options?: RequestOptions): APIPromise<ExternalStorageDeleted> {
-    return this._client.delete(path`/organization/external_storage/${externalStorageID}`, {
-      ...options,
-      __security: { adminAPIKeyAuth: true },
-    });
+    return this._client.delete(
+      path`/organization/external_storage/${externalStorageID}`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        __security: { adminAPIKeyAuth: true },
+      })),
+    );
   }
 
   /**
@@ -303,10 +326,13 @@ export class ExternalStorage extends APIResource {
    * ```
    */
   validate(externalStorageID: string, options?: RequestOptions): APIPromise<ExternalStorageConfiguration> {
-    return this._client.post(path`/organization/external_storage/${externalStorageID}/validate`, {
-      ...options,
-      __security: { adminAPIKeyAuth: true },
-    });
+    return this._client.post(
+      path`/organization/external_storage/${externalStorageID}/validate`,
+      resolveResourceRequestOptions(options, (options) => ({
+        ...options,
+        __security: { adminAPIKeyAuth: true },
+      })),
+    );
   }
 }
 
@@ -353,7 +379,7 @@ export interface ExternalStorageConfiguration {
 
   project_id: string;
 
-  provider: AwsExternalStorageProvider | AzureExternalStorageProvider;
+  provider: AwsExternalStorageProvider | AzureExternalStorageProvider | GcpExternalStorageProvider;
 
   status: 'pending' | 'validated' | 'unhealthy';
 }
@@ -366,10 +392,29 @@ export interface ExternalStorageDeleted {
   object: 'organization.external_storage.deleted';
 }
 
+export interface GcpExternalStorageProvider {
+  audience: string;
+
+  bucket: string;
+
+  region: string;
+
+  type: 'gcp';
+
+  workload_identity_pool_id: string;
+
+  workload_identity_project_number: string;
+
+  workload_identity_provider_id: string;
+}
+
 export interface ExternalStorageCreateParams {
   project_id: string;
 
-  provider: ExternalStorageCreateParams.Aws | ExternalStorageCreateParams.Azure;
+  provider:
+    | ExternalStorageCreateParams.Aws
+    | ExternalStorageCreateParams.Azure
+    | ExternalStorageCreateParams.Gcp;
 }
 
 export namespace ExternalStorageCreateParams {
@@ -394,6 +439,18 @@ export namespace ExternalStorageCreateParams {
 
     type: 'azure';
   }
+
+  export interface Gcp {
+    bucket: string;
+
+    type: 'gcp';
+
+    workload_identity_pool_id: string;
+
+    workload_identity_project_number: string;
+
+    workload_identity_provider_id: string;
+  }
 }
 
 export interface ExternalStorageListParams extends Omit<CursorPageParams, 'after'> {
@@ -413,6 +470,7 @@ export declare namespace ExternalStorage {
     type AzureExternalStorageProvider as AzureExternalStorageProvider,
     type ExternalStorageConfiguration as ExternalStorageConfiguration,
     type ExternalStorageDeleted as ExternalStorageDeleted,
+    type GcpExternalStorageProvider as GcpExternalStorageProvider,
     type ExternalStorageConfigurationsPage as ExternalStorageConfigurationsPage,
     type ExternalStorageCreateParams as ExternalStorageCreateParams,
     type ExternalStorageListParams as ExternalStorageListParams,

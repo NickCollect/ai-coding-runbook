@@ -465,7 +465,7 @@ class AsyncForksConnectionManager:
         data = (
             event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
             if isinstance(event, BaseModel)
-            else json.dumps(event)
+            else json.dumps(maybe_transform(event, ForkClientEventParam))
         )
         self.__send_queue.enqueue(data)
 
@@ -594,9 +594,9 @@ class AsyncForksConnectionManager:
             ws_scheme = "ws" if scheme == "http" else "wss"
             base_url = self.__client._base_url.copy_with(scheme=ws_scheme)
 
-        merge_raw_path = base_url.raw_path.rstrip(b"/") + path_template(
-            "/live/sessions/{session_id}/fork", session_id=self.__session_id
-        ).encode("utf-8")
+        path, separator, query = base_url.raw_path.partition(b"?")
+        endpoint = path_template("/live/sessions/{session_id}/fork", session_id=self.__session_id).encode("utf-8")
+        merge_raw_path = path.rstrip(b"/") + endpoint + separator + query
         return base_url.copy_with(raw_path=merge_raw_path)
 
     async def __aexit__(
@@ -952,7 +952,7 @@ class ForksConnectionManager:
         data = (
             event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
             if isinstance(event, BaseModel)
-            else json.dumps(event)
+            else json.dumps(maybe_transform(event, ForkClientEventParam))
         )
         self.__send_queue.enqueue(data)
 
@@ -1081,9 +1081,9 @@ class ForksConnectionManager:
             ws_scheme = "ws" if scheme == "http" else "wss"
             base_url = self.__client._base_url.copy_with(scheme=ws_scheme)
 
-        merge_raw_path = base_url.raw_path.rstrip(b"/") + path_template(
-            "/live/sessions/{session_id}/fork", session_id=self.__session_id
-        ).encode("utf-8")
+        path, separator, query = base_url.raw_path.partition(b"?")
+        endpoint = path_template("/live/sessions/{session_id}/fork", session_id=self.__session_id).encode("utf-8")
+        merge_raw_path = path.rstrip(b"/") + endpoint + separator + query
         return base_url.copy_with(raw_path=merge_raw_path)
 
     def __exit__(
