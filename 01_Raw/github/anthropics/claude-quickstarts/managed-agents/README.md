@@ -32,6 +32,18 @@ Projects built on [Claude Managed Agents](https://platform.claude.com/docs/en/ma
   timelines, growth projections, budgets) inline in the
   conversation, with sliders that recompute client-side.
 
+- **[daily-brief/](daily-brief/)** posts one short brief to Slack
+  every weekday morning from your Slack channels and GitHub pull
+  requests, with no host process. All six resources (agent,
+  environment, two memory stores, vault, cron deployment) are files
+  applied with `ant apply`, so setup is one script plus two vault
+  credentials. The run steps are written to fail well unattended: a
+  bookmark per source instead of "the last 24 hours", a ledger
+  against repeats, a source that could not be read reported as
+  unreadable rather than as a quiet day, a read-only preferences
+  store the agent re-reads every run, and the Slack token as a vault
+  credential the sandbox never sees.
+
 - **[knowledge-wiki/](knowledge-wiki/)** distills a document corpus
   once into a knowledge wiki (a versioned memory store) using
   parallel extraction sessions, a resolve pass, and a steered
@@ -77,7 +89,14 @@ Projects built on [Claude Managed Agents](https://platform.claude.com/docs/en/ma
   all-CLI baseline; `docker-memory/` runs the Python SDK worker in the
   container so each session mounts a memory store at `/mnt/memory`
   and syncs it back, and keeps the environment key out of the
-  containers with a per-session token.
+  containers with a per-session token. `archil/` swaps the containers
+  for Archil persistent sandboxes that all mount one SEC EDGAR disk, so
+  parallel analyst sessions work on 70 GB of filings in place.
+  Five more variants start the sandbox from the
+  `session.status_run_started` webhook instead of a poller, on
+  Cloudflare Containers, a Cloudflare Worker with no container,
+  Daytona, Modal, and Vercel Sandbox. They share one agent and
+  environment, created with `ant apply .` from `webhook-demo/`.
 
 - **[sentry/](sentry/)** runs a Sentry triage agent on a schedule
   with no host process. A deployment starts a session on a cron
