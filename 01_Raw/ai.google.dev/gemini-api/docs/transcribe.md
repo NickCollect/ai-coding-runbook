@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=de
-fetched_at: 2026-09-21T05:50:43.621049+00:00
-title: "Audiotranskript \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=id
+fetched_at: 2026-09-28T06:25:55.156807+00:00
+title: "Transkripsi audio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Feedback geben
+Kirim masukan
 
-# Audiotranskript
+# Transkripsi audio
 
-Die Gemini API wandelt Sprache in Audiodateien mit dem Gemini 3.5 Transcribe-Modell (`gemini-3.5-transcribe`) in Text um. Dank der Audio-Analysefunktionen von Gemini bietet sie eine genaue Transkription mit automatischer Spracherkennung, Sprecherzuordnung, Zeitstempeln auf Wortebene und benutzerdefinierten Vokabelhinweisen. Außerdem gibt es einen [intelligenten Transkriptionsmodus](#transcription-modes), in dem Füllwörter entfernt und die Formatierung optimiert wird.
+Gemini API mengonversi ucapan dalam file audio menjadi teks menggunakan model Transcribe Gemini 3.5 (`gemini-3.5-transcribe`). Berdasarkan kemampuan pemahaman audio Gemini, API ini memberikan transkripsi yang akurat dengan identifikasi bahasa otomatis, diarisasi penutur, stempel waktu tingkat kata, dan petunjuk kosakata kustom. Fitur ini juga menyediakan mode [transkripsi cerdas](#transcription-modes) yang menampilkan penghapusan ketidaklancaran dan pemformatan cerdas.
 
-Wenn Sie eine Audiodatei transkribieren möchten, laden Sie die Audiodatei hoch und übergeben Sie sie an `gemini-3.5-transcribe`:
+Untuk mentranskripsikan file audio, upload audio dan teruskan ke `gemini-3.5-transcribe`:
 
 ### Python
 
@@ -71,6 +71,52 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-transcribe"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.AudioContent{
+                    URI:      genai.Ptr(audioFile.URI),
+                    MimeType: interactions.AudioContentMimeType(audioFile.MIMEType).ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -90,26 +136,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Übersicht
+## Ringkasan
 
-Gemini 3.5 Transcribe ist für Speech-to-Text-Aufgaben optimiert. Sie kann mit verschiedenen Akzenten, Hintergrundgeräuschen und mehrsprachigen Unterhaltungen umgehen.
+Transkripsi Gemini 3.5 dioptimalkan untuk tugas speech-to-text. Model ini menangani beragam aksen, suara bising di latar belakang, dan percakapan multibahasa.
 
-Zu den wichtigsten Funktionen gehören:
+Kemampuan utama meliputi:
 
-- **Automatische Spracherkennung (ASR)**: Erkennt automatisch Sprachen in [über 85 Regionen](#supported-languages). Es werden Code-Switching innerhalb und zwischen Sätzen ohne manuelle Konfiguration unterstützt.
-- **Benutzerdefiniertes Vokabular**:Die Erkennung wird auf fachspezifische Begriffe, Akronyme und Eigennamen ausgerichtet, indem bis zu 1.000 Ausdrücke übergeben werden.
-- **Sprecherzuordnung**:Unterscheidet zwischen mehreren Sprechern und weist gesprochene Segmente bestimmten Labels zu.
-- **Zeitstempel auf Wortebene**:Generiert genaue Start- und Endzeit-Offsets für jedes erkannte Wort.
-- **Intelligente Transkription**:Unflüssigkeiten, Füllwörter und Wiederholungen werden entfernt und eine strukturierte Formatierung wird angewendet.
-- **Formatierung und Normalisierung**:Hier werden Großschreibung, Zeichensetzung und inverse Textnormalisierung angewendet, z. B. wird „twenty six million dollars“ in „$26M“ umgewandelt.
+- **Pengenalan ucapan otomatis (ASR):** Mendeteksi bahasa secara otomatis di lebih dari [85 lokalitas](#supported-languages). Menangani peralihan kode intra-kalimat dan antar-kalimat tanpa konfigurasi manual.
+- **Kosakata kustom:** Membiasakan pengenalan terhadap istilah khusus domain, akronim, dan nama diri dengan meneruskan hingga 1.000 frasa.
+- **Diarisasi pembicara:** Membedakan beberapa pembicara dan mengatribusikan segmen yang diucapkan ke label yang berbeda.
+- **Stempel waktu tingkat kata:** Membuat offset waktu mulai dan berakhir yang akurat untuk setiap kata yang dikenali.
+- **Transkripsi pintar:** Menghapus ketidaklancaran, kata pengisi, pengulangan, dan menerapkan format terstruktur.
+- **Pemformatan dan normalisasi:** Menerapkan kapitalisasi, tanda baca, dan normalisasi teks terbalik, seperti mengonversi "dua puluh enam juta dolar" menjadi "$26M".
 
-Wenn Sie Audioinhalte allgemein analysieren oder Fragen zu Audioinhalten beantworten lassen möchten, verwenden Sie [Audio-Analyse](https://ai.google.dev/gemini-api/docs/audio?hl=de). Für die Audiosynthese mit Text-to-Speech verwenden Sie [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de).
+Untuk penalaran audio umum atau menjawab pertanyaan melalui konten audio, gunakan [Pemahaman audio](https://ai.google.dev/gemini-api/docs/audio?hl=id). Untuk sintesis audio text-to-speech, gunakan [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
 
-## Spracherkennung und Hinweise
+## Deteksi dan petunjuk bahasa
 
-Standardmäßig wird die gesprochene Sprache automatisch erkannt. Die Sprache wird dynamisch gewechselt, wenn die Sprecher die Sprache wechseln.
+Secara default, model akan mendeteksi bahasa lisan secara otomatis. Fitur ini beralih antarbahasa secara dinamis saat pembicara melakukan peralihan kode.
 
-Wenn Sie die automatische Erkennung verwenden möchten, lassen Sie `language_codes` weg oder geben Sie eine leere Liste an:
+Untuk menggunakan deteksi otomatis, hapus `language_codes` atau berikan daftar kosong:
 
 ### Python
 
@@ -151,6 +197,57 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-transcribe"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.AudioContent{
+                    URI:      genai.Ptr(audioFile.URI),
+                    MimeType: interactions.AudioContentMimeType(audioFile.MIMEType).ToPointer(),
+                }),
+            }),
+            GenerationConfig: &interactions.GenerationConfig{
+                TranscriptionConfig: &interactions.TranscriptionConfig{
+                    LanguageCodes: []string{},
+                },
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -174,7 +271,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Wenn Sie die Sprache im Voraus kennen, geben Sie BCP-47-Sprachcodes in `language_codes` an, um die Genauigkeit der Transkription zu verbessern (siehe [Unterstützte Sprachen](#supported-languages)):
+Jika Anda mengetahui bahasa sebelumnya, tentukan kode bahasa BCP-47 di `language_codes` untuk meningkatkan akurasi transkripsi (lihat [Bahasa yang didukung](#supported-languages)):
 
 ### Python
 
@@ -196,6 +293,25 @@ const generationConfig = {
 };
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "google.golang.org/genai/interactions/models/interactions"
+)
+
+func main() {
+    generationConfig := &interactions.GenerationConfig{
+        TranscriptionConfig: &interactions.TranscriptionConfig{
+            LanguageCodes: []string{"es-ES"},
+        },
+    }
+    _ = generationConfig
+}
+```
+
 ### REST
 
 ```
@@ -208,9 +324,9 @@ const generationConfig = {
 }
 ```
 
-## Benutzerdefiniertes Vokabular
+## Kosakata kustom
 
-Sie können das Sprachmodell auf ungewöhnliche Wörter, Fachjargon, Markennamen oder Eigennamen ausrichten. Geben Sie bis zu 1.000 Begriffe im `custom_vocabulary`-Array an. Die besten Ergebnisse werden in der Regel mit bis zu 100 Begriffen erzielt:
+Anda dapat mengarahkan model ucapan ke kata-kata yang tidak umum, jargon teknis, nama merek, atau nama diri. Berikan hingga 1.000 istilah dalam array `custom_vocabulary` (hasil terbaik biasanya dicapai dengan hingga 100 istilah):
 
 ### Python
 
@@ -252,6 +368,57 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-transcribe"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.AudioContent{
+                    URI:      genai.Ptr(audioFile.URI),
+                    MimeType: interactions.AudioContentMimeType(audioFile.MIMEType).ToPointer(),
+                }),
+            }),
+            GenerationConfig: &interactions.GenerationConfig{
+                TranscriptionConfig: &interactions.TranscriptionConfig{
+                    CustomVocabulary: []string{"Gemini", "Kubernetes", "BigQuery"},
+                },
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -275,11 +442,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Sprecherbestimmung
+## Diarisasi pembicara
 
-Bei der Sprecherbestimmung werden verschiedene Stimmen in der Aufnahme identifiziert und jedes Segment wird mit einer Sprecher-ID wie `spk_1` oder `spk_2` getaggt. Es werden bis zu acht Sprecher unterstützt. Die Zuordnung für drei oder mehr Sprecher ist experimentell.
+Diarisasi pembicara mengidentifikasi suara yang berbeda dalam rekaman dan memberi tag pada setiap segmen dengan ID pembicara seperti `spk_1` atau `spk_2`. Hingga 8 pembicara didukung (atribusi untuk 3 pembicara atau lebih bersifat eksperimental).
 
-Aktivieren Sie die Sprecherbestimmung, indem Sie `diarization_mode` in `mode` konfigurieren:
+Aktifkan diarisasi dengan mengonfigurasi `diarization_mode` dalam `mode`:
 
 ### Python
 
@@ -327,6 +494,59 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-transcribe"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.AudioContent{
+                    URI:      genai.Ptr(audioFile.URI),
+                    MimeType: interactions.AudioContentMimeType(audioFile.MIMEType).ToPointer(),
+                }),
+            }),
+            GenerationConfig: &interactions.GenerationConfig{
+                TranscriptionConfig: &interactions.TranscriptionConfig{
+                    Mode: genai.Ptr(interactions.NewTranscriptionConfigMode(interactions.NewTranscriptionMode(interactions.VerbatimTranscriptionMode{
+                        DiarizationMode: genai.Ptr("speaker"),
+                    }))),
+                },
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -353,11 +573,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Zeitstempel auf Wortebene
+## Stempel waktu tingkat kata
 
-Zeitstempel auf Wortebene geben den genauen Start- und End-Offset für jedes erkannte Wort im Audio-Stream an.
+Stempel waktu tingkat kata memberikan offset awal dan akhir yang tepat untuk setiap kata yang dikenali dalam aliran audio.
 
-Aktivieren Sie Zeitstempel, indem Sie `timestamp_granularities` in `mode` konfigurieren:
+Aktifkan stempel waktu dengan mengonfigurasi `timestamp_granularities` dalam `mode`:
 
 ### Python
 
@@ -405,6 +625,59 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-transcribe"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.AudioContent{
+                    URI:      genai.Ptr(audioFile.URI),
+                    MimeType: interactions.AudioContentMimeType(audioFile.MIMEType).ToPointer(),
+                }),
+            }),
+            GenerationConfig: &interactions.GenerationConfig{
+                TranscriptionConfig: &interactions.TranscriptionConfig{
+                    Mode: genai.Ptr(interactions.NewTranscriptionConfigMode(interactions.NewTranscriptionMode(interactions.VerbatimTranscriptionMode{
+                        TimestampGranularities: []string{"word"},
+                    }))),
+                },
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -431,14 +704,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Sie können `diarization_mode` und `timestamp_granularities` in `mode` kombinieren, um sowohl Sprecherlabels als auch Wortzeitstempel zu erhalten:
+Anda dapat menggabungkan `diarization_mode` dan `timestamp_granularities` di `mode` untuk menerima label pembicara dan stempel waktu kata:
 
 ### Python
 
 ```
 generation_config = {
     "transcription_config": {
-        "custom_vocabulary": ["Gemini"],
         "mode": {
             "type": "verbatim",
             "diarization_mode": "speaker",
@@ -453,7 +725,6 @@ generation_config = {
 ```
 const generationConfig = {
   transcription_config: {
-    custom_vocabulary: ["Gemini"],
     mode: {
       type: "verbatim",
       diarization_mode: "speaker",
@@ -463,13 +734,35 @@ const generationConfig = {
 };
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+)
+
+func main() {
+    generationConfig := &interactions.GenerationConfig{
+        TranscriptionConfig: &interactions.TranscriptionConfig{
+            Mode: genai.Ptr(interactions.NewTranscriptionConfigMode(interactions.NewTranscriptionMode(interactions.VerbatimTranscriptionMode{
+                DiarizationMode:        genai.Ptr("speaker"),
+                TimestampGranularities: []string{"word"},
+            }))),
+        },
+    }
+    _ = generationConfig
+}
+```
+
 ### REST
 
 ```
 {
   "generation_config": {
     "transcription_config": {
-      "custom_vocabulary": ["Gemini"],
       "mode": {
         "type": "verbatim",
         "diarization_mode": "speaker",
@@ -480,21 +773,21 @@ const generationConfig = {
 }
 ```
 
-## Transkriptionsmodi
+## Mode transkripsi
 
-Gemini 3.5 Transcribe unterstützt zwei Transkriptionsmodi über den Parameter `mode`:
+Gemini 3.5 Transcribe mendukung dua mode transkripsi melalui parameter `mode`:
 
-- **`verbatim` (Standard)**: Gibt ein exaktes Wort-für-Wort-Transkript von allem Gesprochenen zurück, wobei Füllwörter („um“, „äh“, „wie“, „du weißt schon“), Wiederholungen, Pausen und Fehlstarts beibehalten werden. In diesem Modus (`{"type": "verbatim", ...}`) werden Zeitstempel und Sprecherbestimmung konfiguriert.
-- **`smart` (Smart Transcription)**: Optimiert das Transkript für die Lesbarkeit durch intelligente Nachbearbeitung:
-  - **Entfernen von Füllwörtern**: Füllwörter, Stottern und Fehlstarts werden entfernt.
-  - **Inline-Selbstkorrekturen**: Gesprochene Korrekturen werden direkt berücksichtigt (z. B. wird aus *„Lass uns am Dienstag treffen, nein, am Mittwoch um 14:00 Uhr“* *„Lass uns am Mittwoch um 14:00 Uhr treffen“*).
-  - **Automatische strukturierte Formatierung**: Gesprochene Gedanken werden automatisch in Absätze, nummerierte Listen, Aufzählungszeichen, formatierte Datumsangaben, Währungen und Zahlen strukturiert.
-  - **Grammatische Bereinigung**: Wendet natürliche Zeichensetzung, Groß- und Kleinschreibung und einen natürlichen Fluss an.
+- **`verbatim` (default)**: Menampilkan transkrip kata demi kata yang persis dari semua yang diucapkan, dengan mempertahankan kata pengisi mentah ("um", "eh", "kayak", "tahu"), pengulangan, jeda, dan awal yang salah. Stempel waktu dan diarisasi pembicara dikonfigurasi dalam mode ini (`{"type": "verbatim", ...}`).
+- **`smart` (Transkripsi pintar)**: Mengoptimalkan transkrip untuk dibaca dengan menerapkan pasca-pemrosesan cerdas:
+  - **Penghapusan ketidaklancaran**: Menghapus kata pengisi percakapan, gagap, dan awal yang salah.
+  - **Koreksi mandiri inline**: Menyelesaikan koreksi lisan secara langsung (misalnya, *"Mari bertemu pada hari Selasa, eh tidak, hari Rabu pukul dua"* menjadi *"Mari bertemu pada hari Rabu pukul 14.00"*).
+  - **Pemformatan terstruktur otomatis**: Secara otomatis menyusun pemikiran yang diucapkan menjadi paragraf, daftar bernomor, poin-poin, tanggal, mata uang, dan angka yang diformat.
+  - **Pembersihan tata bahasa**: Menerapkan tanda baca, kapitalisasi kalimat, dan alur yang alami.
 
-| Gesprochene Audioinhalte | `verbatim`-Ausgabe | `smart`-Ausgabe (Smart Transcription) |
+| Audio lisan | `verbatim` output | Output `smart` (Transkripsi cerdas) |
 | --- | --- | --- |
-| „Ähm, also für die Besprechung sollten wir, äh, Alice einladen und, nein, Bob und Carol.“ | „Für die Besprechung sollten wir Alice und äh Bob und Carol einladen.“ | „Ich denke, wir sollten Bob und Carol zu dem Meeting einladen.“ |
-| „First item review budget second item finalize timeline third item send recap“ (Erster Punkt: Budget prüfen, zweiter Punkt: Zeitachse fertigstellen, dritter Punkt: Zusammenfassung senden) | „first item review budget second item finalize timeline third item send recap“ (erstes Element: Budget prüfen; zweites Element: Zeitachse fertigstellen; drittes Element: Zusammenfassung senden) | "1. Prüfen Sie das Budget 2. Zeitachse fertigstellen 3. Zusammenfassung senden“ |
+| "Um, jadi untuk rapat, saya pikir kita harus, eh, mengundang Alice dan, tunggu, bukan, Bob dan Carol." | "Jadi untuk rapat, saya rasa kita harus mengundang Alice, eh bukan, Bob dan Carol." | "Untuk rapat, sebaiknya kita mengundang Budi dan Ari." |
+| "Item pertama tinjau anggaran, item kedua selesaikan linimasa, item ketiga kirim ringkasan" | "tinjau anggaran item pertama selesaikan linimasa item kedua kirim ringkasan item ketiga" | "1. Tinjau anggaran 2. Menyelesaikan linimasa 3. Kirim ringkasan" |
 
 ### Python
 
@@ -538,6 +831,57 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-transcribe"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.AudioContent{
+                    URI:      genai.Ptr(audioFile.URI),
+                    MimeType: interactions.AudioContentMimeType(audioFile.MIMEType).ToPointer(),
+                }),
+            }),
+            GenerationConfig: &interactions.GenerationConfig{
+                TranscriptionConfig: &interactions.TranscriptionConfig{
+                    Mode: genai.Ptr(interactions.NewTranscriptionConfigMode(interactions.TranscriptionConfigModeEnumSmart)),
+                },
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -561,13 +905,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Transkriptionsausgabe parsen
+## Mengurai output transkripsi
 
-Der vollständige Transkripttext wird in `interaction.output_text` zurückgegeben.
+Teks transkrip lengkap ditampilkan di `interaction.output_text`.
 
-Wenn `timestamp_granularities` oder `diarization_mode` aktiviert ist, gibt die API auch detaillierte Anmerkungen auf Wortebene zurück, die an den Interaktionsinhalt angehängt sind.
+Jika `timestamp_granularities` atau `diarization_mode` diaktifkan, API juga akan menampilkan anotasi tingkat kata mendetail yang dilampirkan pada konten interaksi.
 
-So extrahieren und durchlaufen Sie Wortzeitstempel und Sprecherwechsel:
+Berikut cara mengekstrak dan melakukan iterasi pada stempel waktu kata dan pergantian pembicara:
 
 ### Python
 
@@ -617,6 +961,56 @@ for (const w of words) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "fmt"
+
+    "google.golang.org/genai/interactions/models/interactions"
+)
+
+func extractWordAnnotations(interaction *interactions.Interaction) []*interactions.WordInfo {
+    var words []*interactions.WordInfo
+    if interaction == nil {
+        return words
+    }
+    for _, step := range interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    for _, annotation := range content.TextContent.Annotations {
+                        if annotation.WordInfo != nil {
+                            words = append(words, annotation.WordInfo)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return words
+}
+
+func main() {
+    var interaction *interactions.Interaction
+    words := extractWordAnnotations(interaction)
+
+    for _, w := range words {
+        speaker := ""
+        if w.Speaker != nil && *w.Speaker != "" {
+            speaker = fmt.Sprintf("[%s] ", *w.Speaker)
+        }
+        timing := ""
+        if w.StartOffset != nil && w.EndOffset != nil {
+            timing = fmt.Sprintf("(%s -> %s) ", *w.StartOffset, *w.EndOffset)
+        }
+        fmt.Printf("%s%s%s\n", speaker, timing, w.GetText())
+    }
+}
+```
+
 ### REST
 
 ```
@@ -654,117 +1048,117 @@ for (const w of words) {
 }
 ```
 
-## Unterstützte Sprachen
+## Bahasa yang didukung
 
-Die folgenden Sprachen und BCP-47-Sprachcodes werden für Gemini 3.5 Transcribe unterstützt:
+Bahasa dan kode bahasa BCP-47 berikut didukung untuk Transkripsi Gemini 3.5:
 
-| Sprache | BCP-47-Code | Sprache | BCP-47-Code |
+| Language | Kode BCP-47 | Language | Kode BCP-47 |
 | --- | --- | --- | --- |
-| Afrikaans | `af-ZA` | Japanisch | `ja-JP` |
-| Amharisch | `am-ET` | Javanisch | `jv-ID` |
-| Arabisch (Ägypten) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Armenisch | `hy-AM` | Kannada | `kn-IN` |
-| Assamesisch | `as-IN` | Kasachisch | `kk-KZ` |
-| Aserbaidschanisch | `az-AZ` | Koreanisch | `ko-KR` |
-| Belarussisch | `be-BY` | Kirgisisch | `ky-KG` |
-| Bengalisch (Bangladesch) | `bn-BD` | Lettisch | `lv-LV` |
-| Bengalisch (Indien) | `bn-IN` | Lingala | `ln-CD` |
-| Bosnisch | `bs-BA` | Litauisch | `lt-LT` |
-| Bulgarisch | `bg-BG` | Mazedonisch | `mk-MK` |
-| Bulgarisch (Aromanisch) | `rup-BG` | Malaiisch | `ms-MY` |
-| Burmesisch | `my-MM` | Malayalam | `ml-IN` |
-| Kantonesisch (traditionell) | `yue-Hant-HK` | Maltesisch | `mt-MT` |
-| Katalanisch | `ca-ES` | Chinesisch (Mandarin, vereinfacht) | `cmn-Hans-CN` |
+| Afrika | `af-ZA` | Jepang | `ja-JP` |
+| Amharik | `am-ET` | Jawa | `jv-ID` |
+| Arab (Mesir) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Armenia | `hy-AM` | Kannada | `kn-IN` |
+| Assam | `as-IN` | Kazak | `kk-KZ` |
+| Azerbaijan | `az-AZ` | Korea | `ko-KR` |
+| Belarusia | `be-BY` | Kirgiz | `ky-KG` |
+| Bengali (Bangladesh) | `bn-BD` | Latvia | `lv-LV` |
+| Bengali (India) | `bn-IN` | Lingala | `ln-CD` |
+| Bosnia | `bs-BA` | Lituania | `lt-LT` |
+| Bulgaria | `bg-BG` | Makedonia | `mk-MK` |
+| Bulgaria (Aromania) | `rup-BG` | Melayu | `ms-MY` |
+| Burma | `my-MM` | Malayalam | `ml-IN` |
+| Kanton (Tradisional) | `yue-Hant-HK` | Malta | `mt-MT` |
+| Katalan | `ca-ES` | China Mandarin (Aksara Sederhana) | `cmn-Hans-CN` |
 | Cebuano | `ceb` | Marathi | `mr-IN` |
-| Standard-Khmer | `km-KH` | Mongolisch | `mn-MN` |
-| Kroatisch | `hr-HR` | Nepalesisch | `ne-NP` |
-| Tschechien | `cs-CZ` | Norwegisch | `nb-NO` |
-| Dänisch | `da-DK` | Oriya | `or-IN` |
-| Niederländisch | `nl-NL` | Polnisch | `pl-PL` |
-| Englisch (Vereinigtes Königreich) | `en-GB` | Portugiesisch (Brasilien) | `pt-BR` |
-| Englisch (Indien) | `en-IN` | Portugiesisch (Portugal) | `pt-PT` |
-| Englisch (USA) | `en-US` | Punjabi | `pa-IN` |
-| Estnisch | `et-EE` | Panjabi (Gurmukhi-Schrift) | `pa-Guru-IN` |
-| Farsi | `fa-IR` | Rumänisch | `ro-RO` |
-| Filipino | `fil-PH` | Russisch | `ru-RU` |
-| Finnisch | `fi-FI` | Serbisch | `sr-RS` |
-| Französisch | `fr-FR` | Sindhi (arabische Schrift) | `sd-Arab-IN` |
-| Galizisch | `gl-ES` | Slowakisch | `sk-SK` |
-| Georgisch | `ka-GE` | Slowenisch | `sl-SI` |
-| Deutsch | `de-DE` | Spanisch (Lateinamerika) | `es-419` |
-| Griechisch | `el-GR` | Spanisch (USA) | `es-US` |
-| Gujarati | `gu-IN` | Swahili (Kenia) | `sw-KE` |
-| Hausa | `ha-NG` | Schwedisch | `sv-SE` |
-| Hebräisch | `he-IL` | Tadschikisch | `tg-TJ` |
+| Khmer Tengah | `km-KH` | Mongolia | `mn-MN` |
+| Kroasia | `hr-HR` | Nepal | `ne-NP` |
+| Ceko | `cs-CZ` | Norwegia | `nb-NO` |
+| Denmark | `da-DK` | Oriya | `or-IN` |
+| Belanda | `nl-NL` | Polandia | `pl-PL` |
+| Inggris (Britania Raya) | `en-GB` | Portugis (Brasil) | `pt-BR` |
+| Inggris (India) | `en-IN` | Portugis (Portugal) | `pt-PT` |
+| Inggris (Amerika Serikat) | `en-US` | Punjabi | `pa-IN` |
+| Estonia | `et-EE` | Punjabi (skrip Gurmukhi) | `pa-Guru-IN` |
+| Persia | `fa-IR` | Rumania | `ro-RO` |
+| Filipino | `fil-PH` | Rusia | `ru-RU` |
+| Finlandia | `fi-FI` | Serbia | `sr-RS` |
+| Prancis | `fr-FR` | Sindhi (skrip Arab) | `sd-Arab-IN` |
+| Galisia | `gl-ES` | Slovakia | `sk-SK` |
+| Georgia | `ka-GE` | Slovenia | `sl-SI` |
+| Jerman | `de-DE` | Spanyol (Amerika Latin) | `es-419` |
+| Yunani | `el-GR` | Spanyol (Amerika Serikat) | `es-US` |
+| Gujarat | `gu-IN` | Swahili (Kenya) | `sw-KE` |
+| Hausa | `ha-NG` | Swedia | `sv-SE` |
+| Ibrani | `he-IL` | Tajik | `tg-TJ` |
 | Hindi | `hi-IN` | Telugu | `te-IN` |
-| Ungarisch | `hu-HU` | Thailändisch | `th-TH` |
-| Isländisch | `is-IS` | Türkisch | `tr-TR` |
-| Indisches Englisch | `en-IN` | Ukrainisch | `uk-UA` |
-| Indonesisch | `id-ID` | Usbekisch | `uz-UZ` |
-| Italienisch | `it-IT` | Vietnamesisch | `vi-VN` |
+| Hungaria | `hu-HU` | Thai | `th-TH` |
+| Islandia | `is-IS` | Turki | `tr-TR` |
+| Inggris India | `en-IN` | Ukraina | `uk-UA` |
+| Indonesia | `id-ID` | Uzbek | `uz-UZ` |
+| Italia | `it-IT` | Vietnam | `vi-VN` |
 
-## Unterstützte Audioformate
+## Format audio yang didukung
 
-Gemini 3.5 Transcribe unterstützt die folgenden MIME-Typen für Audioformate:
+Transkripsi Gemini 3.5 mendukung jenis MIME format audio berikut:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
-- AIFF – `audio/aiff`
+- AIFF - `audio/aiff`
 - AAC - `audio/aac`
 - OGG - `audio/ogg`
 - FLAC - `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
-- L16 – `audio/l16`
-- Opus – `audio/opus`
+- L16 - `audio/l16`
+- Opus - `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-Eine vollständige Liste der unterstützten MIME-Typen und Parameterschemas finden Sie in der [Interactions API-Referenz](https://ai.google.dev/api/interactions-api?hl=de#Resource:Content).
+Untuk mengetahui daftar lengkap jenis MIME dan skema parameter yang didukung, lihat [Referensi Interactions API](https://ai.google.dev/api/interactions-api?hl=id#Resource:Content).
 
-## Parameterverweis
+## Referensi parameter
 
-Konfigurieren Sie die Transkription, indem Sie Felder im `transcription_config`-Objekt in `generation_config` festlegen:
+Konfigurasi transkripsi dengan menyetel kolom dalam objek `transcription_config` di `generation_config`:
 
-| Feld | Typ | Beschreibung |
+| Kolom | Jenis | Deskripsi |
 | --- | --- | --- |
-| `language_codes` | String-Array | BCP-47-Sprachcodes (z.B. `["en-US"]`). Wenn dieser Parameter weggelassen oder leer ist (`[]`), erkennt das Modell die Sprache automatisch und verarbeitet Sprachwechsel. |
-| `custom_vocabulary` | String-Array | Bis zu 1.000 benutzerdefinierte Begriffe, Akronyme oder Eigennamen, um die Spracherkennung zu optimieren. |
-| `mode` | Objekt oder String | Konfiguration des Transkriptionsmodus. Akzeptiert `"smart"` oder ein Objekt im Wortlautmodus (`{"type": "verbatim", ...}`). Die Standardeinstellung ist die wortgetreue Transkription. |
-| `mode.type` | String | *(Nur Modus „Wort für Wort“)* Modus-ID. Immer auf `"verbatim"` gesetzt. |
-| `mode.timestamp_granularities` | String-Array | *(Nur wortwörtlicher Modus)* Granularität der zurückzugebenden Zeitstempel. Übergeben Sie `["word"]`, um den zeitlichen Versatz für Wortanfang und ‑ende zu aktivieren. |
-| `mode.diarization_mode` | String | *(Nur wortwörtlicher Modus)* Diarisierungsmodus. Übergeben Sie `"speaker"`, um verschiedene Sprecher zu identifizieren und mit Labels zu versehen. |
+| `language_codes` | Array string | Kode bahasa BCP-47 (misalnya, `["en-US"]`). Jika tidak disertakan atau kosong (`[]`), model akan otomatis mendeteksi bahasa dan menangani pengalihan kode. |
+| `custom_vocabulary` | Array string | Hingga 1.000 istilah kustom, akronim, atau nama diri untuk memengaruhi pengenalan ucapan. Tidak kompatibel dengan diarisasi pembicara dan stempel waktu tingkat kata. |
+| `mode` | Objek atau String | Konfigurasi mode transkripsi. Menerima `"smart"` atau objek mode kata demi kata (`{"type": "verbatim", ...}`). Secara default, transkripsi kata demi kata. |
+| `mode.type` | String | *(Khusus mode kata demi kata)* ID mode. Selalu ditetapkan ke `"verbatim"`. |
+| `mode.timestamp_granularities` | Array string | *(Hanya mode Kata demi kata)* Tingkat perincian stempel waktu yang akan ditampilkan. Teruskan `["word"]` untuk mengaktifkan offset awal dan akhir kata. Tidak kompatibel dengan kosakata kustom. |
+| `mode.diarization_mode` | String | *(Khusus mode kata demi kata)* Mode diarisasi. Teruskan `"speaker"` untuk mengidentifikasi dan melabeli pembicara yang berbeda. Tidak kompatibel dengan kosakata kustom. |
 
-## Best Practices
+## Praktik terbaik
 
-- **Saubere Audioinhalte bereitstellen**:Achten Sie darauf, dass die Sprachaufnahmen klar getrennt sind und es nicht zu starkem Clipping kommt.
-- **Sprachhinweise angeben, wenn bekannt**:Wenn Sie die Sprache des Audios im Voraus kennen, geben Sie `language_codes` an, um die Genauigkeit zu maximieren.
-- **Benutzerdefiniertes Vokabular für das Zielvorhaben**:Verwenden Sie in `custom_vocabulary` nur eindeutige Fachbegriffe, Markennamen oder Eigennamen und keine gängigen Alltagswörter.
-- **Files API für lange Aufnahmen verwenden**:Bei Dateien, die länger als einige Sekunden sind, laden Sie die Datei mit `client.files.upload` hoch und übergeben Sie den zurückgegebenen Datei-URI an das Modell.
+- **Berikan audio yang jernih:** Pastikan rekaman audio memiliki pemisahan suara yang jelas dan hindari pemangkasan yang parah.
+- **Berikan petunjuk bahasa jika diketahui:** Jika Anda mengetahui bahasa audio sebelumnya, tentukan `language_codes` untuk memaksimalkan akurasi.
+- **Targetkan kosakata kustom:** Hanya sertakan istilah domain, nama merek, atau kata benda yang berbeda dalam `custom_vocabulary`, bukan kata-kata umum sehari-hari.
+- **Gunakan Files API untuk rekaman berukuran besar:** Untuk file yang berdurasi lebih dari beberapa detik, upload file menggunakan `client.files.upload` dan teruskan URI file yang ditampilkan ke model.
 
-## Beschränkungen
+## Batasan
 
-- **Audiodauer**:Standardmäßige unäre Anfragen unterstützen Audiodateien mit einer Länge von bis zu einer Stunde. Die Audioverarbeitung ist auf 30 Minuten begrenzt, wenn Funktionen wie die Sprecherbestimmung oder Zeitstempel auf Wortebene aktiviert sind.
-- **Zeitstempel auf Wortebene**:Wenn Sie Zeitstempel auf Wortebene aktivieren, kann sich die allgemeine Transkriptionsgenauigkeit verschlechtern.
-- **Sprecherbestimmung**:Die Sprecherbestimmung unterstützt bis zu 8 Sprecher. Die Sprecherzuordnung für mindestens drei Sprecher ist eine experimentelle Funktion.
-- **Benutzerdefiniertes Vokabular**:Sie können bis zu 1.000 Begriffe in `custom_vocabulary` angeben. Die besten Ergebnisse werden jedoch in der Regel mit bis zu 100 Begriffen erzielt.
-- **Moduskompatibilität**:Die intelligente Transkription (`"smart"`) kann nicht mit `timestamp_granularities` oder `diarization_mode` kombiniert werden.
+- **Durasi audio:** Permintaan unary standar mendukung file audio hingga 1 jam. Pemrosesan audio dibatasi hingga 30 menit jika fitur seperti diarisasi speaker atau stempel waktu tingkat kata diaktifkan.
+- **Stempel waktu tingkat kata:** Mengaktifkan stempel waktu tingkat kata dapat menurunkan akurasi transkripsi secara keseluruhan.
+- **Diarisasi pembicara:** Diarisasi pembicara mendukung hingga 8 pembicara. Atribusi speaker untuk 3 speaker atau lebih bersifat eksperimental.
+- **Kosakata kustom:** Anda dapat memberikan hingga 1.000 istilah dalam `custom_vocabulary`, tetapi hasil terbaik biasanya dicapai dengan hingga 100 istilah. Anda tidak dapat menggabungkan `custom_vocabulary` dengan diarisasi speaker atau stempel waktu tingkat kata; API menolak permintaan yang menentukan `custom_vocabulary` bersama dengan salah satu fitur tersebut.
+- **Kompatibilitas mode:** Transkripsi cerdas (`"smart"`) tidak dapat digabungkan dengan `timestamp_granularities` atau `diarization_mode`.
 
-## Nächste Schritte
+## Langkah berikutnya
 
-- Mit der Live API können Sie Audio in Echtzeit streamen. Eine Anleitung dazu finden Sie im [Leitfaden zur Live-Transkription](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=de).
-- Mit [Audio-Analyse](https://ai.google.dev/gemini-api/docs/audio?hl=de) können Sie Audioinhalte analysieren, zusammenfassen oder abfragen.
-- Hier erfahren Sie, wie Sie mit [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de) Audioinhalte aus Text synthetisieren.
-- Informationen zu Modellpreisen und Tokenlimits finden Sie auf der [Seite „Preise“](https://ai.google.dev/gemini-api/docs/pricing?hl=de#gemini-3.5-transcribe).
-- Weitere Informationen zum Hochladen und Verwalten von Media-Dateien finden Sie im [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de)-Leitfaden.
+- Streaming audio real-time dengan [Panduan transkripsi langsung](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=id) menggunakan Live API.
+- Jelajahi [Pemahaman audio](https://ai.google.dev/gemini-api/docs/audio?hl=id) untuk menganalisis, meringkas, atau membuat kueri konten audio.
+- Pelajari cara menyintesis audio dari teks menggunakan [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
+- Lihat [halaman Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.5-transcribe) untuk mengetahui harga model dan batas token.
+- Lihat panduan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk mengetahui detail tentang cara mengupload dan mengelola file media.
 
-Feedback geben
+Kirim masukan
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Zuletzt aktualisiert: 2026-08-28 (UTC).
+Terakhir diperbarui pada 2026-09-24 UTC.
 
-Haben Sie Feedback für uns?
+Ada masukan untuk kami?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-08-28 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]

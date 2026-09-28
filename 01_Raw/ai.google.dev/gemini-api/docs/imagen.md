@@ -1,42 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=pt-BR
-fetched_at: 2026-09-21T05:47:19.873001+00:00
-title: "Gerar imagens usando o Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=de
+fetched_at: 2026-09-28T06:32:01.230851+00:00
+title: "Bilder mit Imagen generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
 
-Envie comentários
+Feedback geben
 
-# Gerar imagens usando o Imagen
+# Bilder mit Imagen generieren
 
-O Imagen é o modelo legado de geração de imagens do Google. Ele foi desativado e não está mais disponível na API Gemini.
+Imagen ist das alte Modell zur Bildgenerierung von Google. Sie wurde jetzt eingestellt und ist nicht mehr in der Gemini API verfügbar.
 
-## Migrar para o Nano Banana
+## Zu Nano Banana migrieren
 
-Migre para o Nano Banana para geração de imagens:
+Auf Nano Banana für die Bildgenerierung umstellen:
 
-- **Nome do modelo**: use `gemini-2.5-flash-image` (ou modelos do Nano Banana 2, como `gemini-3.1-flash-image`) em vez dos nomes de modelos do Imagen.
-- **Método**: use `client.models.generate_content` em vez de
-  `client.models.generate_images`.
-- **Processamento de respostas**: o Nano Banana retorna partes de conteúdo com dados de imagem
-  em vez de um objeto de resposta de imagem específico.
+- **Modellname**: Verwenden Sie `gemini-2.5-flash-image` (oder Nano Banana 2-Modelle wie `gemini-3.1-flash-image`) anstelle von Imagen-Modellnamen.
+- **Methode**: Verwenden Sie `client.models.generate_content` anstelle von `client.models.generate_images`.
+- **Antwortverarbeitung**: Nano Banana gibt Inhaltsteile mit Bilddaten anstelle eines bestimmten Bildantwortobjekts zurück.
 
-Consulte o [guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) para mais detalhes e exemplos.
+Weitere Informationen und Beispiele finden Sie im [Leitfaden zur Bilderstellung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de).
 
-Envie comentários
+Feedback geben
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Última atualização 2026-09-18 UTC.
+Zuletzt aktualisiert: 2026-09-18 (UTC).
 
-Quer enviar seu feedback?
+Haben Sie Feedback für uns?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-18 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-18 (UTC)."],[],[]]

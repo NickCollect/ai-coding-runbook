@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=zh-CN
-fetched_at: 2026-09-21T05:48:25.363430+00:00
-title: "\u6587\u6863\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=pt-BR
+fetched_at: 2026-09-28T06:18:31.569190+00:00
+title: "Entendimento de documentos \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
 
-发送反馈
+Envie comentários
 
-# 文档理解
+# Entendimento de documentos
 
-Gemini 模型可以处理 PDF 格式的文档，并使用原生视觉功能来理解整个文档的上下文。这不仅仅是提取文本，还让 Gemini 能够：
+Os modelos do Gemini podem processar documentos em formato PDF usando a visão nativa para entender contextos completos. Isso vai além da extração de texto, permitindo que o Gemini:
 
-- 分析和解读内容，包括文本、图片、图表、图表和表格，即使是长达 1000 页的文档也能轻松应对。
-- 以[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)格式提取信息。
-- 根据文档中的视觉和文本元素总结内容并回答问题。
-- 转写文档内容（例如转写为 HTML），同时保留布局和格式，以便在下游应用中使用。
+- Analisar e interpretar conteúdo, incluindo texto, imagens, diagramas, gráficos e tabelas, mesmo em documentos longos de até 1.000 páginas.
+- Extrair informações em formatos de [saída estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br).
+- Resumir e responder a perguntas com base nos elementos visuais e textuais de um documento.
+- Transcrever o conteúdo do documento (por exemplo, para HTML), preservando layouts e formatação, para uso em aplicativos downstream.
 
-您也可以通过相同的方式传递非 PDF 文档，但 Gemini 会将这些文档视为普通文本，从而消除图表或格式等上下文。
+Você também pode enviar documentos que não sejam em PDF da mesma forma, mas o Gemini vai considerá-los como texto normal, o que elimina o contexto, como gráficos ou formatação.
 
-## 以内嵌方式传递 PDF 数据
+## Como transmitir dados de PDF inline
 
-您可以在对 `generateContent` 的请求中内嵌传递 PDF 数据。此方法最适合处理小型文档或临时处理，因为您无需在后续请求中引用该文件。对于需要在多轮对话中参考的较大文档，我们建议使用 [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn#large-pdfs)，以缩短请求延迟时间并减少带宽使用量。
+É possível transmitir dados de PDF inline na solicitação para `generateContent`. Essa opção é mais adequada para documentos menores ou processamento temporário em que não é necessário referenciar o arquivo em solicitações subsequentes. Recomendamos usar a [API Files](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br#large-pdfs) para documentos maiores que você precisa consultar em interações multiturno para melhorar a latência da solicitação e reduzir o uso da largura de banda.
 
-以下示例展示了如何从网址提取 PDF 并将其转换为字节以进行处理：
+O exemplo a seguir mostra como buscar um PDF de um URL e convertê-lo em bytes para processamento:
 
 ### Python
 
@@ -190,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-您还可以从本地文件读取 PDF 以进行处理：
+Também é possível ler um PDF de um arquivo local para processamento:
 
 ### Python
 
@@ -291,13 +291,13 @@ func main() {
 }
 ```
 
-## 使用 Files API 上传 PDF
+## Fazer upload de PDFs usando a API Files
 
-对于较大的文件，或者当您打算在多个请求中重复使用文档时，建议您使用 Files API。这样可以将文件上传与模型请求分离，从而缩短请求延迟时间并减少带宽用量。
+Recomendamos usar a API Files para arquivos maiores ou quando você pretende reutilizar um documento em várias solicitações. Isso melhora a latência da solicitação e reduz o uso de largura de banda ao desacoplar o upload de arquivos das solicitações de modelo.
 
-### 来自网址的大型 PDF 文件
+### PDFs grandes de URLs
 
-使用 File API 可简化通过网址上传和处理大型 PDF 文件的流程：
+Use a API File para simplificar o upload e o processamento de arquivos PDF grandes de URLs:
 
 ### Python
 
@@ -505,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### 本地存储的大型 PDF
+### PDFs grandes armazenados localmente
 
 ### Python
 
@@ -677,7 +677,7 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-您可以调用 [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=zh-cn) 来验证 API 是否已成功存储上传的文件并获取其元数据。只有 `name`（以及扩展的 `uri`）是唯一的。
+Para verificar se a API armazenou o arquivo enviado e receber os metadados dele, chame [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=pt-br). Somente o `name` (e, por extensão, o `uri`) são exclusivos.
 
 ### Python
 
@@ -709,9 +709,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## 传递多个 PDF
+## Enviar vários PDFs
 
-Gemini API 能够在单个请求中处理多个 PDF 文档（最多 1, 000 页），前提是文档和文本提示的总大小不超过模型的上下文窗口大小。
+A API Gemini pode processar vários documentos PDF (até 1.000 páginas) em uma única solicitação, desde que o tamanho combinado dos documentos e do comando de texto permaneça dentro da janela de contexto do modelo.
 
 ### Python
 
@@ -963,50 +963,62 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 技术详情
+## Detalhes técnicos
 
-Gemini 支持不超过 50MB 或 1,000 页的 PDF 文件。此限制适用于内嵌数据和 Files API 上传。每个文档页面相当于 258 个词元。
+O Gemini aceita arquivos PDF de até 50 MB ou 1.000 páginas. Esse limite se aplica
+a dados inline e uploads da API Files. Cada página do documento equivale a 258
+tokens.
 
-虽然除了模型的[上下文窗口](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-cn)之外，对文档中的像素数量没有具体限制，但较大的页面会被缩小到最大分辨率 (3072 x 3072)，同时保留其原始宽高比，而较小的页面会被放大到 768 x 768 像素。除了带宽之外，较小尺寸的网页不会降低费用，而较高分辨率的网页也不会提高性能。
+Não há limites específicos para o número de pixels em um documento além da [janela de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=pt-br) do modelo. No entanto, páginas maiores são reduzidas para uma resolução máxima de 3072 x 3072, preservando a proporção original, enquanto páginas menores são aumentadas para 768 x 768 pixels. Não há redução de custo para páginas em tamanhos menores, além da largura de banda, ou melhoria de desempenho para páginas em resolução mais alta.
 
-### Gemini 3 模型
+### Modelos do Gemini 3
 
-Gemini 3 通过 `media_resolution` 参数引入了对多模态视觉处理的精细控制。您现在可以为每个媒体部分分别设置低、中或高分辨率。添加此功能后，PDF 文档的处理方式已更新：
+O Gemini 3 apresenta controle granular sobre o processamento de visão multimodal com o parâmetro
+`media_resolution`. Agora você pode definir a resolução como baixa, média ou alta para cada trecho de áudio individual. Com essa adição, o processamento de documentos PDF foi atualizado:
 
-1. **原生文本纳入**：提取 PDF 中原生嵌入的文本并将其提供给模型。
-2. **结算和代币报告**：
-   - 您**无需付费**即可使用从 PDF 中的提取的**原生文本**生成的令牌。
-   - 在 API 响应的 `usage_metadata` 部分中，通过处理 PDF 页面（作为图片）生成的 token 现在计入 `IMAGE` 模态，而不是像某些早期版本那样计入单独的 `DOCUMENT` 模态。
+1. **Inclusão de texto nativo**:o texto incorporado nativamente no PDF é extraído
+   e fornecido ao modelo.
+2. **Faturamento e relatórios de tokens**:
+   - Você **não é cobrado** por tokens originados do
+     **texto nativo** extraído em PDFs.
+   - Na seção `usage_metadata` da resposta da API, os tokens gerados
+     pelo processamento de páginas PDF (como imagens) agora são contados na modalidade `IMAGE`
+     , e não em uma modalidade `DOCUMENT` separada, como em algumas versões
+     anteriores.
 
-如需详细了解媒体分辨率参数，请参阅[媒体分辨率](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-cn)指南。
+Para mais detalhes sobre o parâmetro de resolução de mídia, consulte o guia [Resolução de mídia](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pt-br).
 
-### 文档类型
+### Tipos de documentos
 
-从技术上讲，您可以传递其他 MIME 类型以进行文档理解，例如 TXT、Markdown、HTML、XML 等。不过，文档视觉 ***仅能有意义地理解 PDF***。其他类型的文件将被提取为纯文本，模型将无法解读我们在这些文件的呈现中看到的内容。所有特定于文件类型的信息（例如图表、示意图、HTML 标记、Markdown 格式等）都将丢失。
+Tecnicamente, é possível transmitir outros tipos MIME para o entendimento de documentos, como TXT, Markdown, HTML, XML etc. No entanto, a visão de documentos ***só entende PDFs de maneira significativa***. Outros tipos serão extraídos como texto puro, e o modelo não poderá interpretar o que vemos na renderização desses arquivos. Todas as especificidades de tipo de arquivo, como gráficos, diagramas, tags HTML, formatação Markdown etc., serão perdidas.
 
-如需了解其他文件输入方法，请参阅[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
+Para conhecer outros métodos de entrada de arquivos, consulte o guia [Métodos de entrada de arquivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pt-br).
 
-### 最佳做法
+### Práticas recomendadas
 
-为了达到最佳效果，请注意以下事项：
+Para conseguir os melhores resultados:
 
-- 请先将页面旋转到正确的方向，然后再上传。
-- 避免页面模糊。
-- 如果使用单页，请将文本提示放在该页之后。
+- Gire as páginas para a orientação correta antes de fazer o upload.
+- Evite páginas desfocadas.
+- Se você estiver usando uma única página, coloque o comando de texto depois dela.
 
-## 后续步骤
+## A seguir
 
-如需了解详情，请参阅以下资源：
+Para saber mais, consulte os seguintes recursos:
 
-- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：Gemini API 支持使用文本、图片、音频和视频数据进行提示，也称为多模态提示。
-- [系统指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：系统指令可让您根据自己的特定需求和使用情形来控制模型的行为。
+- [Estratégias de comandos de arquivo](https://ai.google.dev/gemini-api/docs/files?hl=pt-br#prompt-guide): a
+  API Gemini aceita comandos com dados de texto, imagem, áudio e vídeo, também
+  conhecidas como comandos multimodais.
+- [Instruções do sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#system-instructions):
+  Com elas, é possível orientar o comportamento do modelo com base nas suas
+  necessidades e casos de uso específicos.
 
-发送反馈
+Envie comentários
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最后更新时间 (UTC)：2026-09-12。
+Última atualização 2026-09-12 UTC.
 
-需要向我们提供更多信息？
+Quer enviar seu feedback?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-12 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ja
-fetched_at: 2026-09-21T05:55:21.347372+00:00
+fetched_at: 2026-09-28T06:11:05.707122+00:00
 title: "Google AI Studio \u306e\u30af\u30a4\u30c3\u30af\u30b9\u30bf\u30fc\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

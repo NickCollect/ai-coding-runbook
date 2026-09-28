@@ -1,45 +1,53 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=he
-fetched_at: 2026-09-21T05:58:02.713147+00:00
-title: "\u05d4\u05e1\u05d1\u05e8 \u05e2\u05dc \u05d0\u05e1\u05d9\u05de\u05d5\u05e0\u05d9\u05dd \u05d5\u05e1\u05e4\u05d9\u05e8\u05d4 \u05e9\u05dc\u05d4\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=th
+fetched_at: 2026-09-28T06:13:02.022651+00:00
+title: "\u0e17\u0e4d\u0e32\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e41\u0e25\u0e30\u0e19\u0e31\u0e1a\u0e42\u0e17\u0e40\u0e04\u0e47\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-# הסבר על אסימונים וספירה שלהם
+# ทําความเข้าใจและนับโทเค็น
 
-‫Gemini ומודלים אחרים של AI גנרטיבי מעבדים קלט ופלט ברמת פירוט שנקראת *טוקן*.
+Gemini และโมเดล Generative AI อื่นๆ จะประมวลผลอินพุตและเอาต์พุตที่ระดับความละเอียด
+ที่เรียกว่า*โทเค็น*
 
-**במודלים של Gemini, טוקן שווה בערך ל-4 תווים.
-‫100 טוקנים שווים לכ-60-80 מילים באנגלית.**
+**สำหรับโมเดล Gemini โทเค็นจะเท่ากับอักขระประมาณ 4 ตัว
+โดย 100 โทเค็นจะเท่ากับคำภาษาอังกฤษประมาณ 60-80 คำ**
 
-## מידע על טוקנים
+## เกี่ยวกับโทเค็น
 
-אסימונים יכולים להיות תווים בודדים כמו `z` או מילים שלמות כמו `cat`. מילים ארוכות
-מפוצלות לכמה טוקנים. קבוצת כל האסימונים שבהם נעשה שימוש במודל נקראת אוצר מילים, והתהליך של פיצול טקסט לאסימונים נקרא *טוקניזציה*.
+โทเค็นอาจเป็นอักขระเดียว เช่น `z` หรือทั้งคำ เช่น `cat` คำยาวๆ
+จะถูกแบ่งออกเป็นหลายโทเค็น ชุดโทเค็นทั้งหมดที่โมเดลใช้เรียกว่า
+คำศัพท์ และกระบวนการแยกข้อความเป็นโทเค็นเรียกว่า
+*การโทเค็น*
 
-כשמופעל חיוב, [העלות של קריאה ל-Gemini API](https://ai.google.dev/pricing?hl=he) נקבעת בין היתר לפי מספר הטוקנים של הקלט והפלט, ולכן כדאי לדעת איך לספור טוקנים.
+เมื่อเปิดใช้การเรียกเก็บเงิน [ค่าใช้จ่ายในการเรียกใช้ Gemini API](https://ai.google.dev/pricing?hl=th) จะขึ้นอยู่กับจำนวนโทเค็นอินพุตและเอาต์พุตบางส่วน ดังนั้นการทราบวิธีนับโทเค็นจึงอาจเป็นประโยชน์
 
-## ספירת טוקנים
+## นับโทเค็น
 
-כל הקלט והפלט של Gemini API עוברים טוקניזציה, כולל טקסט, קובצי תמונות וסוגים אחרים של נתונים שאינם טקסט.
+อินพุตและเอาต์พุตทั้งหมดจาก Gemini API จะได้รับการโทเค็น รวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ
 
-אפשר לספור טוקנים בדרכים הבאות:
+คุณนับโทเค็นได้ด้วยวิธีต่อไปนี้
 
-- **מתקשרים אל `count_tokens` ומזינים את הבקשה.** הפונקציה מחזירה את המספר הכולל של הטוקנים *בקלט בלבד*. כדאי לבצע את השיחה הזו לפני שליחת קלט כדי לבדוק את גודל הבקשות.
-- **משתמשים בלחצן `usage` בתגובה לאינטראקציה.** הפונקציה מחזירה את מספר הטוקנים של הקלט (`total_input_tokens`), הפלט (`total_output_tokens`), החשיבה (`total_thought_tokens`), התוכן שנשמר במטמון (`total_cached_tokens`), השימוש בכלי (`total_tool_use_tokens`) והסך הכולל (`total_tokens`).
+- **โทรหา `count_tokens` พร้อมข้อมูลคำขอ** แสดงผลจำนวนโทเค็นทั้งหมดใน*อินพุตเท่านั้น* เรียกใช้ฟังก์ชันนี้ก่อนส่งอินพุต
+  เพื่อตรวจสอบขนาดของคำขอ
+- **ใช้ `usage` ในการตอบกลับการโต้ตอบ** แสดงจำนวนโทเค็น
+  สำหรับอินพุต (`total_input_tokens`), เอาต์พุต (`total_output_tokens`),
+  การคิด (`total_thought_tokens`), เนื้อหาที่แคช
+  (`total_cached_tokens`), การใช้เครื่องมือ (`total_tool_use_tokens`)
+  และทั้งหมด (`total_tokens`)
 
-### ספירת טוקנים של טקסט
+### นับโทเค็นข้อความ
 
 ### Python
 
@@ -120,6 +128,36 @@ Interaction interaction =
 System.out.println(interaction.usage().orElse(null));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    modelInfo, err := client.Models.Get(ctx, "gemini-3.8-flash", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Input token limit: %d\n", modelInfo.InputTokenLimit)
+    fmt.Printf("Output token limit: %d\n", modelInfo.OutputTokenLimit)
+}
+```
+
 ### REST
 
 ```
@@ -130,9 +168,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### ספירת טוקנים רב-שלביים
+### นับโทเค็นการสนทนาไปมา
 
-כדי לספור את הטוקנים בהיסטוריית השיחות, משתמשים ב-`previous_interaction_id`:
+นับโทเค็นในประวัติการสนทนาโดยใช้ `previous_interaction_id` ดังนี้
 
 ### Python
 
@@ -221,16 +259,80 @@ if (interaction2.usage().isPresent()) {
 }
 ```
 
-### ספירת טוקנים מולטי-מודאליים
+### Go
 
-כל הקלט ל-Gemini API עובר טוקניזציה, כולל תמונות, סרטונים ואודיו.
-נקודות חשובות לגבי יצירת טוקנים:
+```
+package main
 
-- **תמונות**: תמונות בגודל של ‎384 פיקסלים או פחות בשני הממדים נחשבות כ-258 טוקנים. תמונות גדולות יותר מחולקות למקטעים בגודל ‎768x768 פיקסלים, וכל מקטע נחשב כ-258 טוקנים.
-- **סרטון**: 263 אסימונים לשנייה (רלוונטי לעיבוד סטטי). במקרה של עיבוד מבוסס-סוכן, השימוש בטוקנים משתנה. [מידע נוסף על השימוש באסימוני וידאו לפי מצב עיבוד](#video-token-usage)
-- **אודיו**: 32 טוקנים לשנייה
+import (
+    "context"
+    "fmt"
+    "log"
 
-#### טוקנים של תמונות
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "The quick brown fox jumps over the lazy dog."
+
+    // Count input tokens before sending
+    totalTokens, err := client.Models.CountTokens(ctx, "gemini-3.8-flash", genai.Text(prompt), nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("total_tokens: %d\n", totalTokens.TotalTokens)
+
+    // Create the interaction and inspect the returned usage metadata
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(prompt),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    interaction := res.Interaction
+    if interaction.OutputText != nil {
+        fmt.Println(*interaction.OutputText)
+    }
+    if interaction.Usage != nil {
+        if interaction.Usage.TotalInputTokens != nil {
+            fmt.Printf("Input tokens: %d\n", *interaction.Usage.TotalInputTokens)
+        }
+        if interaction.Usage.TotalOutputTokens != nil {
+            fmt.Printf("Output tokens: %d\n", *interaction.Usage.TotalOutputTokens)
+        }
+        if interaction.Usage.TotalThoughtTokens != nil {
+            fmt.Printf("Thought tokens: %d\n", *interaction.Usage.TotalThoughtTokens)
+        }
+        if interaction.Usage.TotalTokens != nil {
+            fmt.Printf("Total tokens: %d\n", *interaction.Usage.TotalTokens)
+        }
+    }
+}
+```
+
+### นับโทเค็นหลายรูปแบบ
+
+อินพุตทั้งหมดไปยัง Gemini API จะได้รับการแปลงเป็นโทเค็น ซึ่งรวมถึงรูปภาพ วิดีโอ และเสียง
+ประเด็นสำคัญเกี่ยวกับการแปลงเป็นโทเค็น
+
+- **รูปภาพ**: รูปภาพที่มีขนาด ≤384 พิกเซลทั้ง 2 ด้านจะนับเป็น 258 โทเค็น ระบบจะแบ่งรูปภาพที่ใหญ่กว่า
+  ออกเป็นไทล์ขนาด 768x768 พิกเซล โดยแต่ละไทล์จะนับเป็น 258 โทเค็น
+- **วิดีโอ**: 263 โทเค็นต่อวินาที (ใช้กับการประมวลผลแบบคงที่) สำหรับการประมวลผลแบบเอเจนต์ การใช้โทเค็นจะแตกต่างกันไป ดู[การใช้โทเค็นวิดีโอตามโหมดการประมวลผล](#video-token-usage)
+- **เสียง**: 32 โทเค็นต่อวินาที
+
+#### โทเค็นรูปภาพ
 
 ### Python
 
@@ -334,7 +436,62 @@ Interaction interaction =
 System.out.println(interaction.usage().orElse(null));
 ```
 
-**דוגמה לנתונים מוטבעים:**
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("Explain the history of the internet in 3 paragraphs."),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+        if completed := event.GetDataInteractionCompleted(); completed != nil {
+            usage := completed.Interaction.Usage
+            if usage != nil && usage.TotalTokens != nil {
+                fmt.Printf("\nTotal tokens: %d\n", *usage.TotalTokens)
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+**ตัวอย่างข้อมูลในบรรทัด**
 
 ### Python
 
@@ -359,7 +516,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### אסימונים של סרטונים
+#### โทเค็นวิดีโอ
 
 ### Python
 
@@ -392,25 +549,25 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### שימוש באסימוני וידאו לפי מצב עיבוד
+#### การใช้โทเค็นวิดีโอตามโหมดการประมวลผล
 
-השימוש באסימונים עבור סרטונים תלוי במצב העיבוד:
+การใช้โทเค็นสำหรับวิดีโอจะขึ้นอยู่กับโหมดการประมวลผล ดังนี้
 
-| **מצב עיבוד** | **חישוב של טוקנים** | **שימוש רגיל** |
+| **โหมดการประมวลผล** | **การคำนวณโทเค็น** | **การใช้งานทั่วไป** |
 | --- | --- | --- |
-| **סטטי** (ברירת מחדל) | כ-100 טוקנים לשנייה כברירת מחדל (רזולוציה נמוכה) או כ-300 טוקנים לשנייה (רזולוציה גבוהה). כל הפריימים נדגמים בקצב של 1 FPS. | צפוי, ביחס למשך נכס הווידאו. |
-| **Agentic** | משתנה בהתאם למורכבות התוכן. המערכת טוענת רק את התמליל, את הפריימים או את האודיו שנדרשים כדי לענות על ההנחיה. | עד 88% פחות טוקנים לתוכן ארוך. |
+| **คงที่** (ค่าเริ่มต้น) | โดยค่าเริ่มต้นจะอยู่ที่ประมาณ 100 โทเค็น/วินาที (ความละเอียดต่ำ) หรือประมาณ 300 โทเค็น/วินาที (ความละเอียดสูง) เฟรมทั้งหมดจะสุ่มตัวอย่างที่ 1 FPS | คาดการณ์ได้ตามสัดส่วนของความยาววิดีโอ |
+| **การทำงานแบบเป็น Agent** | แตกต่างกันไปตามความซับซ้อนของเนื้อหา โมเดลจะโหลดเฉพาะข้อความถอดเสียงและ/หรือเฟรมและ/หรือเสียงที่จำเป็นต่อการตอบพรอมต์ | โทเค็นน้อยลงสูงสุด 88% สำหรับเนื้อหาแบบยาว |
 
-בעיבוד מבוסס-סוכן, הרצאה של שעה שבה נעשה שימוש ב-1.08 מיליון טוקנים במצב סטטי, עשויה להשתמש ב-108,000 טוקנים, בהתאם להנחיה ולתוכן.
+การประมวลผลแบบเอเจนต์อาจใช้โทเค็นประมาณ 108,000 รายการสำหรับเลคเชอร์ 1 ชั่วโมง ซึ่งในโหมดคงที่จะใช้โทเค็นประมาณ 1.08 ล้านรายการ ทั้งนี้ขึ้นอยู่กับพรอมต์และเนื้อหา
 
-כדי לבדוק את השימוש בפועל בטוקנים עבור בקשה, בודקים את `interaction.usage`. אסימונים של סרטונים עם סוכנים מדווחים בשדות הבאים:
+หากต้องการตรวจสอบการใช้โทเค็นจริงสำหรับคำขอ ให้ตรวจสอบ `interaction.usage` ระบบจะรายงานโทเค็นวิดีโอของเอเจนต์ในช่องต่อไปนี้
 
-- **ההנחיה הראשונית** (קובץ עזר של סרטון + הנחיית משתמש): `total_input_tokens`
-- **חשיבה על ניווט**: `total_thought_tokens`
-- **תמליל, פריימים ואודיו נטענים לפי דרישה**: `total_tool_use_tokens`
-- **תשובה סופית**: `total_output_tokens`
+- **พรอมต์เริ่มต้น** (วิดีโออ้างอิง + พรอมต์ของผู้ใช้): `total_input_tokens`
+- **การคิดเกี่ยวกับการนำทาง**: `total_thought_tokens`
+- **ข้อความถอดเสียง เฟรม และเสียงจะโหลดตามคำขอ**: `total_tool_use_tokens`
+- **คำตอบสุดท้าย**: `total_output_tokens`
 
-#### טוקנים של אודיו
+#### โทเค็นเสียง
 
 ### Python
 
@@ -436,9 +593,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### ספירת טוקנים של הוראות למערכת
+### นับโทเค็นคำสั่งของระบบ
 
-ההוראות למערכת נספרות כחלק מאסימוני הקלט:
+คำสั่งของระบบจะนับเป็นส่วนหนึ่งของโทเค็นอินพุต
 
 ### Python
 
@@ -454,9 +611,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### ספירת טוקנים בכלי
+### โทเค็นเครื่องมือนับ
 
-גם כלים (פונקציות, ביצוע קוד, חיפוש Google) נספרים:
+ระบบจะนับรวมเครื่องมือ (ฟังก์ชัน การเรียกใช้โค้ด Google Search) ด้วย
 
 ### Python
 
@@ -486,11 +643,12 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## חלון ההקשר
+## หน้าต่างบริบท
 
-לכל מודל Gemini יש מספר מקסימלי של טוקנים שהוא יכול לטפל בהם. חלון ההקשר מגדיר את המגבלה המשולבת של טוקנים של קלט ופלט.
+โมเดล Gemini แต่ละรุ่นมีจำนวนโทเค็นสูงสุดที่จัดการได้ บริบท
+หน้าต่างกำหนดขีดจำกัดรวมของโทเค็นอินพุตและเอาต์พุต
 
-### קבלת גודל חלון ההקשר באופן פרוגרמטי
+### รับขนาดหน้าต่างบริบทโดยใช้โปรแกรม
 
 ### Python
 
@@ -523,20 +681,93 @@ System.out.println("Input token limit: " + modelInfo.inputTokenLimit().orElse(0)
 System.out.println("Output token limit: " + modelInfo.outputTokenLimit().orElse(0));
 ```
 
-אפשר לראות את גודל חלון ההקשר בדף [מודלים](https://ai.google.dev/gemini-api/docs/models?hl=he).
+### Go
 
-## המאמרים הבאים
+```
+package main
 
-- [יצירת טקסט](https://ai.google.dev/gemini-api/docs/text-generation?hl=he): יסודות היצירה
-- [שמירה במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he): הפחתת עלויות באמצעות שמירה במטמון
-- [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he): הסבר על העלויות
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
 
-שליחת משוב
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-עדכון אחרון: 2026-09-18 (שעון UTC).
+    prompt := "Tell me about this instrument"
+    imageBytes, err := os.ReadFile("/path/to/organ.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Image := base64.StdEncoding.EncodeToString(imageBytes)
 
-רוצה לתת לנו משוב?
+    // Count tokens before creating the interaction
+    parts := []*genai.Part{
+        genai.NewPartFromText(prompt),
+        genai.NewPartFromBytes(imageBytes, "image/jpeg"),
+    }
+    totalTokens, err := client.Models.CountTokens(ctx, "gemini-3.8-flash", []*genai.Content{
+        genai.NewContentFromParts(parts, genai.RoleUser),
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Printf("Estimated input tokens: %d\n", totalTokens.TotalTokens)
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]
+    // Create the multimodal interaction and inspect the usage metadata
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Image),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    interaction := res.Interaction
+    if interaction.OutputText != nil {
+        fmt.Println(*interaction.OutputText)
+    }
+    if interaction.Usage != nil && interaction.Usage.TotalTokens != nil {
+        fmt.Printf("Total tokens billed: %d\n", *interaction.Usage.TotalTokens)
+    }
+}
+```
+
+ดูขนาดหน้าต่างบริบทได้ในหน้า[โมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)
+
+## ขั้นตอนถัดไป
+
+- [การสร้างข้อความ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th): พื้นฐานการสร้าง
+- [การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th): ลดค่าใช้จ่ายด้วยการแคช
+- [ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th): ทำความเข้าใจค่าใช้จ่าย
+
+ส่งความคิดเห็น
+
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+
+อัปเดตล่าสุด 2026-09-24 UTC
+
+หากต้องการบอกให้เราทราบเพิ่มเติม
+
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

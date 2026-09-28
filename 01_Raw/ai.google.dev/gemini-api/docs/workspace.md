@@ -1,51 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=he
-fetched_at: 2026-09-21T05:49:48.481591+00:00
-title: "\u05d2\u05d9\u05e9\u05d4 \u05dc-Google AI Studio \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05d7\u05e9\u05d1\u05d5\u05df Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=pl
+fetched_at: 2026-09-28T06:32:55.182938+00:00
+title: "Dost\u0119p do Google AI Studio za pomoc\u0105 konta Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-שליחת משוב
+Prześlij opinię
 
-# גישה ל-Google AI Studio באמצעות חשבון Workspace
+# Dostęp do Google AI Studio za pomocą konta Workspace
 
-לכל משתמשי [Google Workspace](https://workspace.google.com?hl=he) יש גישה ל-AI
-Studio כברירת מחדל. אם אתם משתמשים ב-Workspace ורוצים להתחיל להשתמש ב-AI Studio, כדאי לעיין ב[מדריך למתחילים בנושא AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=he).
+Wszyscy użytkownicy [Google Workspace](https://workspace.google.com?hl=pl) mają domyślnie dostęp do AI Studio. Jeśli korzystasz z Workspace i chcesz zacząć używać AI Studio, zapoznaj się z [krótkim przewodnikiem po AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=pl).
 
-## פתרון בעיות
+## Rozwiązywanie problemów
 
-אם הגישה ל-AI Studio מושבתת בחשבון Google Workspace שלכם, יכול להיות שתופיע שגיאה כמו זו שבהמשך:
+Jeśli dostęp do AI Studio jest wyłączony na Twoim koncie Google Workspace, możesz zobaczyć taki błąd:
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-אם לדעתכם צריכה להיות לכם גישה ל-AI Studio, אתם צריכים לפנות לאדמין שלכם ב-Workspace.
+Jeśli uważasz, że przysługuje Ci dostęp do AI Studio, skontaktuj się z administratorem Workspace.
 
-## הפעלת AI Studio למשתמשי Workspace
+## Włączanie AI Studio dla użytkowników Workspace
 
-אדמינים ב-Google Workspace יכולים לקבוע מי יכול להשתמש ב-AI Studio:
+Jako administrator Google Workspace możesz kontrolować, kto może korzystać z AI Studio:
 
-- ‫AI Studio מופעל כברירת מחדל בכל המהדורות.
-- אתם יכולים להפעיל או להשבית את AI Studio לקבוצות של משתמשים ביחידות ארגוניות שונות או בתוך יחידה ארגונית מסוימת.
-- מהדורות של Google Workspace for Education: משתמשים מתחת לגיל 18 לא יכולים להשתמש ב-AI Studio בחשבונות שלהם ב-Google Workspace for Education. זה נכון גם כשההגדרה AI Studio מופעלת. פרטים נוספים זמינים במאמר בנושא [הגדרת הגישה לשירותי Google לפי גיל](https://support.google.com/a/answer/10651918?hl=he).
+- AI Studio jest domyślnie włączone we wszystkich wersjach.
+- Możesz włączać i wyłączać AI Studio dla grup użytkowników w różnych jednostkach organizacyjnych lub w ich obrębie.
+- Wersje Google Workspace for Education: użytkownicy poniżej 18 roku życia nie mogą korzystać z AI Studio na swoich kontach Google Workspace for Education. To ograniczenie obowiązuje, nawet jeśli ustawienie AI Studio jest włączone. Więcej informacji znajdziesz w artykule [Kontrolowanie dostępu do usług Google na podstawie wieku](https://support.google.com/a/answer/10651918?hl=pl).
 
-כדי להפעיל או להשבית את AI Studio למשתמשים בארגון, אפשר לעיין במאמר בנושא [הפעלה או השבתה של Google AI Studio למשתמשים](https://support.google.com/a/answer/15004095?hl=he).
+Aby włączyć lub wyłączyć AI Studio dla użytkowników w organizacji, zapoznaj się z artykułem [Włączanie i wyłączanie Google AI Studio na kontach użytkowników](https://support.google.com/a/answer/15004095?hl=pl).
 
-שליחת משוב
+Prześlij opinię
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-רוצה לתת לנו משוב?
+Chcesz przekazać coś jeszcze?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

@@ -1,80 +1,83 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=ar
-fetched_at: 2026-09-21T05:46:52.286290+00:00
-title: "\u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0648\u0645\u0634\u0627\u0631\u0643\u062a\u0647\u0627 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=it
+fetched_at: 2026-09-28T06:19:21.768061+00:00
+title: "Registrazione e condivisione dei dati \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-إرسال ملاحظات
+Invia feedback
 
-# تسجيل البيانات ومشاركتها
+# Registrazione e condivisione dei dati
 
-توضّح هذه الصفحة كيفية تخزين سجلّات
-[Gemini API](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ar) وإدارتها، وهي بيانات واجهة برمجة التطبيقات التي يملكها المطوّرون من طلبات Gemini API المتوافقة للمشاريع التي تم تفعيل الفوترة فيها. تشمل السجلّات العملية بأكملها بدءًا من طلب المستخدم إلى ردّ النموذج.
-تختلف هذه السجلّات الخاصة بمشروعك على Google Cloud عن أي
-سجلّات يتم الاحتفاظ بها لأغراض [مراقبة إساءة الاستخدام](https://ai.google.dev/gemini-api/docs/usage-policies?hl=ar)
-فقط.
+Questa pagina descrive l'archiviazione e la gestione dei
+[log dell'API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=it), che sono dati API di proprietà dello sviluppatore
+provenienti da chiamate API Gemini supportate per i progetti con la fatturazione abilitata. I log comprendono l'intero processo, dalla richiesta di un utente alla risposta del modello.
+Questi log, che sono privati per il tuo progetto Google Cloud, sono separati da tutti i
+log conservati esclusivamente per [scopi di monitoraggio degli abusi](https://ai.google.dev/gemini-api/docs/usage-policies?hl=it).
 
-## البيانات التي يمكن مشاركتها
+## Dati che possono essere condivisi
 
-بصفتك مالك مشروع، يمكنك الموافقة على تسجيل طلبات Gemini API لاستخدامك الخاص أو لتقديم ملاحظات ومشاركتها مع Google لمساعدتنا في تحسين نماذجنا باستمرار.
+In qualità di proprietario del progetto, puoi scegliere di attivare la registrazione delle chiamate API Gemini per uso personale o per fornire feedback e condividerli con Google per aiutarci a migliorare continuamente i nostri modelli.
 
-عند تفعيل التسجيل، يمكنك مساعدتنا في إنشاء أنظمة ذكاء اصطناعي تظل قيّمة للمطوّرين في مختلف المجالات وحالات الاستخدام من خلال اختيار المساهمة بالبيانات التالية لتحسين المنتجات وتدريب النماذج:
+Se attivi la registrazione, puoi aiutarci a creare sistemi di AI che continuano a essere utili per gli sviluppatori in vari campi e casi d'uso scegliendo di contribuire con i seguenti dati per i miglioramenti del prodotto e l'addestramento del modello:
 
-- **مجموعات البيانات:** استخدِم واجهة "السجلّات ومجموعات البيانات" في Google AI Studio لاختيار السجلّات (الطلبات والردود والبيانات الوصفية وما إلى ذلك) التي تهمّك من طلبات Gemini API المتوافقة، والتي يتم تقديمها من خلال تضمينها في مجموعات البيانات، مع خيار إيقاف هذه الميزة أثناء إنشاء مجموعة البيانات.
-- **الملاحظات:** عند مراجعة السجلّات، يمكنك تقديم ملاحظاتك، بما في ذلك التقييمات "يعجبني" و"لا يعجبني" وأي تعليقات مكتوبة تقدّمها.
+- **Set di dati:** utilizza l'interfaccia Log e set di dati di Google AI Studio per scegliere i log (richieste, risposte, metadati e così via) di interesse dalle chiamate API Gemini supportate; i dati vengono forniti tramite l'inclusione nei set di dati, con la possibilità di disattivare questa opzione durante la creazione del set di dati.
+- **Feedback:** quando esamini i log, puoi fornire feedback, inclusi i punteggi con i pollici in su e in giù e tutti i commenti scritti che fornisci.
 
-عند مشاركة مجموعة بيانات مع Google، ستتم معالجة سجلّاتك في مجموعة البيانات هذه، بما في ذلك
-الطلبات والردود، وفقًا لـ
-[بنود](https://developers.google.com/terms?hl=ar)
-"[الخدمات غير المدفوعة](https://ai.google.dev/gemini-api/terms?hl=ar#data-use-unpaid)،"
-ما يعني أنّه قد يتم استخدام مجموعة البيانات لتطوير وتحسين منتجات Google
-وخدماتها وتكنولوجيات تعلُّم الآلة، بما في ذلك تحسين
-نماذجنا وتدريبها. **يُرجى عدم تضمين معلومات شخصية أو حساسة أو سرية.**
+Quando condividi un set di dati con Google, i log in quel set di dati, incluse
+richieste e risposte, verranno trattati in conformità con i nostri
+[Termini](https://developers.google.com/terms?hl=it) per
+"[Servizi non a pagamento](https://ai.google.dev/gemini-api/terms?hl=it#data-use-unpaid),"
+il che significa che il set di dati può essere utilizzato per sviluppare e migliorare i
+prodotti, i servizi e le tecnologie di machine learning di Google, inclusi il miglioramento e
+l'addestramento dei nostri modelli. **Non includere informazioni personali, sensibili o riservate.**
 
-## طريقة استخدامنا لبياناتك
+## Come utilizziamo i tuoi dati
 
-يتم الاحتفاظ بالسجلّات لمدة أقصاها 55 يومًا بشكلٍ تلقائي. وبعد هذه المدة، يتم وضع علامة على السجلّات لحذفها تلقائيًا. يمكن تعديل فترة الاحتفاظ بالتخزين لمشروع في AI Studio لوضع علامة تلقائيًا على السجلّات لحذفها بعد 7 أو 14 أو 28 أو 55 يومًا.
+I log vengono conservati per un periodo massimo predefinito di 55 giorni. Trascorso questo periodo, i log vengono contrassegnati automaticamente per l'eliminazione. La finestra di conservazione dell'archiviazione per un progetto può essere aggiornata in AI Studio per contrassegnare automaticamente i log per l'eliminazione dopo 7, 14, 28 o 55 giorni.
 
-[يمكن إنشاء مجموعات بيانات](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ar) للاحتفاظ بالسجلّات التي تهمّك بعد فترة الاحتفاظ المحدّدة لحالات الاستخدام اللاحقة والمساهمة الاختيارية في تحسينات النموذج. لا تتضمّن السجلّات المخزّنة في مجموعات البيانات فترات احتفاظ محدّدة.
+[È possibile creare](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=it)set di dati per conservare i log di
+interesse oltre il periodo di conservazione impostato per i casi d'uso downstream e il
+contributo facoltativo ai miglioramenti del modello. I log archiviati nei set di dati non hanno periodi di conservazione impostati.
 
-بشكلٍ تلقائي، بما أنّ التسجيل متاح فقط للمشاريع التي تم تفعيل الفوترة فيها،
-لا يتم استخدام الطلبات والردود في السجلّات لتحسين المنتجات أو
-تطويرها، وفقًا لـ [بنود الاستخدام](https://developers.google.com/terms?hl=ar)
-المتعلّقة باستخدام البيانات.
+Per impostazione predefinita, poiché la registrazione è disponibile solo per i progetti con la fatturazione abilitata,
+i prompt e le risposte nei log non vengono utilizzati per il miglioramento o lo
+sviluppo del prodotto, in conformità con i nostri [Termini](https://developers.google.com/terms?hl=it)
+sull'utilizzo dei dati.
 
-إذا اخترت مشاركة مجموعات بيانات سجلّاتك مع Google، سيتم استخدام مجموعات البيانات هذه كبيانات توضيحية من العالم الحقيقي لفهم تنوّع النطاقات والسياقات التي يتم فيها استخدام أنظمة وتطبيقات الذكاء الاصطناعي بشكلٍ أفضل. قد يتم استخدام هذه البيانات لتحسين جودة النموذج، وتوجيه تدريب النماذج والخدمات المستقبلية وتقييمها. تتم معالجة هذه البيانات وفقًا لبنود استخدام البيانات
-ل[لخدمات غير المدفوعة](https://ai.google.dev/gemini-api/terms?hl=ar#data-use-unpaid).
+Se scegli di condividere i set di dati dei tuoi log con Google, questi set di dati verranno utilizzati come dati dimostrativi reali per comprendere meglio la diversità di domini e contesti in cui vengono utilizzati i sistemi e le applicazioni di AI. Questi dati possono essere utilizzati per migliorare la qualità del modello e per informare l'addestramento e la valutazione di modelli e servizi futuri. Questi dati vengono trattati in conformità con i nostri termini di utilizzo dei dati
+per i [servizi non a pagamento](https://ai.google.dev/gemini-api/terms?hl=it#data-use-unpaid).
 
-بناءً على ذلك، يمكن للمراجعين قراءة مدخلات ومخرجات واجهة برمجة التطبيقات التي تشاركها وإضافة تعليقات توضيحية إليها ومعالجتها. قبل استخدام البيانات لتحسين النموذج، تتّخذ Google خطوات لحماية خصوصية المستخدم كجزء من هذه العملية. ويشمل ذلك إلغاء ربط هذه البيانات بحساب Google ومفتاح واجهة برمجة التطبيقات ومشروعك على السحابة الإلكترونية قبل أن يراها المراجعون أو يضيفوا تعليقات توضيحية إليها.
+Di conseguenza, i revisori umani potrebbero leggere, annotare ed elaborare gli input e gli output delle API che condividi. Prima che i dati vengano utilizzati per il miglioramento del modello, Google adotta misure volte a proteggere la privacy degli utenti nell'ambito di questa procedura. Ciò include la disconnessione di questi dati dal tuo Account Google, dalla chiave API e dal progetto Cloud prima che i revisori li vedano o li annotino.
 
-## أذونات البيانات
+## Autorizzazioni dati
 
-من خلال الموافقة على المساهمة ببيانات واجهة برمجة التطبيقات، أنت تؤكّد أنّ لديك الأذونات اللازمة لكي تعالج Google البيانات وتستخدمها كما هو موضّح في هذا المستند. **يُرجى عدم المساهمة بسجلّات تحتوي على معلومات حساسة أو سرية أو خاصة تم الحصول عليها من خلال الخدمة المدفوعة**.
-يمتد الترخيص الذي تمنحه لشركة Google بموجب قسم "[إرسال المحتوى](https://developers.google.com/terms?hl=ar#b_submission_of_content)"
-في بنود واجهة برمجة التطبيقات، إلى أي محتوى (مثل الطلبات، بما في ذلك تعليمات النظام المرتبطة والمحتوى المخزّن مؤقتًا والملفات مثل الصور أو الفيديوهات أو المستندات)
-ترسله إلى الخدمات وأي ردود من إنشائها، وذلك بالقدر المطلوب بموجب القانون الساري
-لاستخدامنا.
+Se scegli di contribuire con i dati API, confermi di disporre delle autorizzazioni necessarie affinché Google possa trattare e utilizzare i dati come descritto in questa documentazione. **Non contribuire con log contenenti informazioni sensibili, riservate o proprietarie ottenute tramite il servizio a pagamento**.
+La licenza che concedi a Google ai sensi della sezione "[Invio di contenuti](https://developers.google.com/terms?hl=it#b_submission_of_content)"
+dei Termini per le API si estende anche, nella misura in cui ciò è richiesto dalle leggi applicabili
+per il nostro utilizzo, a qualsiasi contenuto (ad es. prompt, incluse le istruzioni di sistema associate,
+i contenuti memorizzati nella cache e i file come immagini, video o documenti)
+che invii ai Servizi e a qualsiasi risposta generata.
 
-## مشاركة البيانات والملاحظات
+## Condivisione dei dati e feedback
 
-يمكنك مساعدتنا في تطوير أبحاث الذكاء الاصطناعي وGemini API وGoogle AI Studio من خلال الموافقة على مشاركة بياناتك كأمثلة، ما يتيح لنا تحسين نماذجنا باستمرار في مختلف السياقات وإنشاء أنظمة ذكاء اصطناعي تظل قيّمة للمطوّرين في مختلف المجالات وحالات الاستخدام.
+Puoi aiutarci a far progredire la ricerca sull'AI, l'API Gemini e Google AI Studio scegliendo di condividere i tuoi dati come esempi, consentendoci di migliorare continuamente i nostri modelli in vari contesti e di creare sistemi di AI che continuano a essere utili per gli sviluppatori in vari campi e casi d'uso.
 
-إرسال ملاحظات
+Invia feedback
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-تاريخ التعديل الأخير: 2026-09-08 (حسب التوقيت العالمي المتفَّق عليه)
+Ultimo aggiornamento 2026-09-08 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Vuoi dirci altro?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-08 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-08 UTC."],[],[]]

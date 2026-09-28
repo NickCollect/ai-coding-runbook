@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=fr
-fetched_at: 2026-09-21T05:45:15.062894+00:00
-title: "Appel de fonction avec l'API Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=tr
+fetched_at: 2026-09-28T06:15:20.050567+00:00
+title: "Gemini API ile i\u015flev \u00e7a\u011f\u0131rma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-# Appel de fonction avec l'API Gemini
+# Gemini API ile işlev çağırma
 
-L'appel de fonction vous permet de connecter des modèles à des outils et API externes.
-Au lieu de générer des réponses textuelles, le modèle détermine quand appeler des fonctions spécifiques et fournit les paramètres nécessaires pour exécuter des actions concrètes.
-Cela permet au modèle de servir de passerelle entre le langage naturel et les actions et données réelles. L'appel de fonctions présente trois principaux cas d'utilisation :
+İşlev çağırma, modelleri harici araçlara ve API'lere bağlamanıza olanak tanır.
+Model, metin yanıtları oluşturmak yerine belirli işlevlerin ne zaman çağrılacağını belirler ve gerçek dünyadaki işlemleri gerçekleştirmek için gerekli parametreleri sağlar.
+Bu sayede model, doğal dil ile gerçek dünyadaki işlemler ve veriler arasında köprü görevi görebilir. İşlev çağrısının 3 temel kullanım alanı vardır:
 
-- [**Effectuer des actions**](#meeting) : interagir avec des systèmes externes à l'aide d'API, par exemple pour planifier des rendez-vous, créer des factures, envoyer des e-mails ou contrôler des appareils domotiques.
-- [**Augmenter les connaissances**](#weather) : accéder à des informations provenant de sources externes telles que des bases de données, des API et des bases de connaissances.
-- [**Étendre les capacités**](#chart) : utilisez des outils externes pour effectuer des calculs et étendre les limites du modèle, par exemple en utilisant une calculatrice ou en créant des graphiques.
+- [**İşlemler Yapın:**](#meeting) API'leri kullanarak harici sistemlerle etkileşim kurun. Örneğin, randevu planlayın, fatura oluşturun, e-posta gönderin veya akıllı ev cihazlarını kontrol edin.
+- [**Bilgileri Artırma:**](#weather) Veritabanları, API'ler ve bilgi tabanları gibi harici kaynaklardaki bilgilere erişin.
+- [**Özellikleri genişletme:**](#chart) Hesaplama yapmak ve modelin sınırlamalarını genişletmek için harici araçlar kullanın (ör. hesap makinesi kullanma veya grafik oluşturma).
 
-Vous trouverez ci-dessous des exemples de ces cas d'utilisation :
+Bu kullanım alanlarının örneklerine aşağıdan göz atabilirsiniz:
 
-### Planifier une réunion
+### Toplantı planlama
 
-Cet exemple montre comment définir une fonction qui planifie une réunion avec des participants à une heure spécifique, ce qui permet au modèle d'analyser les demandes des utilisateurs et de renvoyer des arguments structurés pour déclencher des actions dans des systèmes externes.
+Bu örnekte, katılımcılarla belirli bir zamanda toplantı planlayan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu işlev, modelin kullanıcı isteklerini ayrıştırmasına ve harici sistemlerdeki işlemleri tetiklemek için yapılandırılmış bağımsız değişkenler döndürmesine olanak tanır.
 
 ### Python
 
@@ -290,9 +290,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### Obtenir la météo
+### Hava Durumu'nu alma
 
-Cet exemple montre comment définir une fonction qui récupère les données de température pour un lieu, ce qui permet au modèle d'appeler des API externes pour répondre aux requêtes nécessitant des informations externes ou en temps réel.
+Bu örnekte, bir konumun sıcaklık verilerini alan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu sayede model, gerçek zamanlı veya harici bilgi gerektiren sorgulara yanıt vermek için harici API'leri çağırabilir.
 
 ### Python
 
@@ -499,9 +499,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### Créer un graphique
+### Grafik oluşturma
 
-Cet exemple montre comment définir une fonction qui génère un graphique à barres à partir de données structurées. Il illustre la façon dont le modèle peut utiliser des outils externes pour effectuer des calculs ou créer des éléments visuels :
+Bu örnekte, yapılandırılmış verilerden çubuk grafik oluşturan bir işlevin nasıl tanımlanacağı gösterilmektedir. Bu sayede, modelin hesaplama yapmak veya görsel öğeler oluşturmak için harici araçları nasıl kullanabileceği gösterilmektedir:
 
 ### Python
 
@@ -749,26 +749,27 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## Fonctionnement des appels de fonction
+## İşlev çağrısının işleyiş şekli
 
-![Présentation de l'appel de fonction](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=fr)
+![işlev çağırma
+genel bakış](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=tr)
 
-L'appel de fonction implique une interaction structurée entre votre application, le modèle et les fonctions externes. Voici le détail :
+İşlev çağırma, uygulamanız, model ve harici işlevler arasında yapılandırılmış bir etkileşim içerir. Süreç şöyle işler:
 
-1. **Définissez la déclaration de fonction** : définissez la déclaration de fonction dans le code de votre application. Les déclarations de fonction décrivent au modèle le nom, les paramètres et l'objectif de la fonction.
-2. **Appeler l'API avec des déclarations de fonctions** : envoyez la requête de l'utilisateur ainsi que la ou les déclarations de fonctions au modèle. Il analyse la requête et détermine si un appel de fonction serait utile. Si c'est le cas, il répond avec un objet JSON structuré contenant le nom de la fonction, les arguments et un `id` unique (ce `id` est désormais toujours renvoyé par l'API pour les modèles Gemini 3\*).
-3. **Exécuter le code de la fonction (votre responsabilité)** : le modèle *n'exécute pas* la fonction lui-même. Il incombe à votre application de traiter la réponse et de vérifier s'il y a un appel de fonction. Si
-   - **Oui** : extraire le nom, les arguments et `id` de la fonction, puis exécuter la fonction correspondante dans votre application.
-   - **Non** : le modèle a fourni une réponse textuelle directe à la requête (ce flux est moins mis en avant dans l'exemple, mais il s'agit d'un résultat possible).
-4. **Crée une réponse conviviale** : si une fonction a été exécutée, capture le résultat et renvoie-le au modèle en veillant à inclure le `id` correspondant, lors d'un tour de conversation ultérieur. Il utilisera le résultat pour générer une réponse finale et conviviale qui intègre les informations de l'appel de fonction.
+1. **İşlev bildirimini tanımlayın:** Uygulama kodunuzda işlev bildirimini tanımlayın. İşlev Bildirimleri, işlevin adını, parametrelerini ve amacını modele açıklar.
+2. **İşlev bildirimleriyle API'yi çağırma:** Kullanıcı istemini, işlev bildirimiyle birlikte modele gönderin. İsteği analiz eder ve bir işlev çağrısının faydalı olup olmayacağını belirler. Bu durumda, işlev adı, bağımsız değişkenler ve benzersiz bir `id` içeren yapılandırılmış bir JSON nesnesiyle yanıt verir (`id`, Gemini 3 modelleri için API tarafından artık her zaman döndürülür\*).
+3. **İşlev kodunu yürütme (sizin sorumluluğunuzdadır):** Model, işlevi *yürütmez*. Yanıtı işlemek ve işlev çağrısı olup olmadığını kontrol etmek uygulamanızın sorumluluğundadır. Şu durumlarda:
+   - **Evet**: İşlevin adını, args'ını ve `id`'ını çıkarın ve uygulamanızda ilgili işlevi yürütün.
+   - **Hayır:** Model, isteme doğrudan metin yanıtı vermiş (bu akış, örnekte daha az vurgulanmıştır ancak olası bir sonuçtur).
+4. **Kullanıcı dostu yanıt oluşturma:** Bir işlev yürütüldüyse sonucu yakalayın ve eşleşen `id` karakterini de ekleyerek sohbetin sonraki dönüşünde modele geri gönderin. Bu sonuç, işlev çağrısından alınan bilgileri içeren son ve kullanıcı dostu bir yanıt oluşturmak için kullanılır.
 
-Ce processus peut être répété sur plusieurs tours, ce qui permet des interactions et des workflows complexes. Le modèle permet également d'appeler plusieurs fonctions en un seul tour ([appel de fonction parallèle](#parallel_function_calling)), de manière séquentielle ([appel de fonction compositionnel](#compositional_function_calling)) et avec les outils Gemini intégrés ([utilisation de plusieurs outils](#native-tools)).
+Bu işlem birden fazla kez tekrarlanabilir ve karmaşık etkileşimlere ve iş akışlarına olanak tanır. Model ayrıca tek bir dönüşte birden fazla işlevi ([paralel işlev çağırma](#parallel_function_calling)), sırayla ([bileşik işlev çağırma](#compositional_function_calling)) ve yerleşik Gemini araçlarıyla ([çoklu araç kullanımı](#native-tools)) çağırmayı da destekler.
 
-\* **Toujours mapper les ID de fonction** : Gemini 3 renvoie désormais toujours un `id` unique avec chaque `functionCall`. Incluez exactement `id` dans votre `functionResponse` afin que le modèle puisse mapper précisément votre résultat à la requête d'origine.
+\* **İşlev kimliklerini her zaman eşleyin:** Gemini 3 artık her `functionCall` ile benzersiz bir `id` döndürüyor. Modelin sonucunuzu orijinal istekle doğru şekilde eşleştirebilmesi için `id` karakterini `functionResponse` bölümüne ekleyin.
 
-### Étape 1 : Définir une déclaration de fonction
+### 1. adım: Bir fonksiyon bildirimi tanımlayın
 
-Définissez une fonction et sa déclaration dans le code de votre application pour permettre aux utilisateurs de définir des valeurs de luminosité et d'effectuer une requête d'API. Cette fonction peut appeler des services ou des API externes.
+Uygulama kodunuzda, kullanıcıların ışık değerlerini ayarlamasına ve API isteğinde bulunmasına olanak tanıyan bir işlev ve işlev bildirimi tanımlayın. Bu işlev, harici hizmetleri veya API'leri çağırabilir.
 
 ### Python
 
@@ -886,9 +887,9 @@ func setLightValues(brightness int, colorTemp string) map[string]any {
 }
 ```
 
-### Étape 2 : Appeler le modèle avec les déclarations de fonction
+### 2. adım: İşlev beyanlarıyla modeli çağırın
 
-Une fois que vous avez défini vos déclarations de fonctions, vous pouvez demander au modèle de les utiliser. Il analyse le prompt et les déclarations de fonction, et décide s'il doit répondre directement ou appeler une fonction. Si une fonction est appelée, l'objet de réponse contient une suggestion d'appel de fonction.
+İşlev bildirimlerinizi tanımladıktan sonra, modelden bunları kullanmasını isteyebilirsiniz. İstem ve işlev bildirimlerini analiz eder ve doğrudan yanıt vermeye mi yoksa bir işlevi çağırmaya mı karar verir. Bir işlev çağrılırsa yanıt nesnesi, işlev çağrısı önerisi içerir.
 
 ### Python
 
@@ -980,7 +981,7 @@ if err != nil {
 fmt.Println(response.FunctionCalls()[0])
 ```
 
-Le modèle renvoie ensuite un objet `functionCall` dans un schéma compatible avec OpenAPI, qui indique comment appeler une ou plusieurs des fonctions déclarées pour répondre à la question de l'utilisateur.
+Model daha sonra, kullanıcının sorusuna yanıt vermek için bildirilen işlevlerden bir veya daha fazlasının nasıl çağrılacağını belirten, OpenAPI uyumlu bir şemada `functionCall` nesnesi döndürür.
 
 ### Python
 
@@ -1004,9 +1005,9 @@ id='8f2b1a3c' args={'color_temp': 'warm', 'brightness': 25} name='set_light_valu
 &{ID:8f2b1a3c Args:map[brightness:25 color_temp:warm] Name:set_light_values}
 ```
 
-### Étape 3 : Exécutez le code de la fonction set\_light\_values
+### 3. adım: set\_light\_values işlev kodunu yürütün
 
-Extrayez les détails de l'appel de fonction de la réponse du modèle, analysez les arguments et exécutez la fonction `set_light_values`.
+Modelin yanıtından işlev çağrısı ayrıntılarını çıkarın, bağımsız değişkenleri ayrıştırın ve `set_light_values` işlevini yürütün.
 
 ### Python
 
@@ -1047,9 +1048,9 @@ if toolCall.Name == "set_light_values" {
 }
 ```
 
-### Étape 4 : Créez une réponse conviviale avec le résultat de la fonction et appelez à nouveau le modèle
+### 4. adım: İşlev sonucuyla kullanıcı dostu bir yanıt oluşturun ve modeli tekrar çağırın
 
-Enfin, renvoyez le résultat de l'exécution de la fonction au modèle afin qu'il puisse intégrer ces informations dans sa réponse finale à l'utilisateur.
+Son olarak, işlev yürütme sonucunu modele geri gönderin. Böylece model, bu bilgiyi kullanıcıya verdiği nihai yanıta dahil edebilir.
 
 ### Python
 
@@ -1130,54 +1131,54 @@ if err != nil {
 fmt.Println(finalResponse.Text())
 ```
 
-Le flux d'appel de fonction est terminé. Le modèle a utilisé la fonction `set_light_values` pour effectuer l'action demandée par l'utilisateur.
+Böylece işlev çağrısı akışı tamamlanır. Model, kullanıcının istek işlemini gerçekleştirmek için `set_light_values` işlevini başarıyla kullandı.
 
-## Déclarations de fonctions
+## İşlev beyanları
 
-Lorsque vous implémentez l'appel de fonction dans une requête, vous créez un objet `tools`, qui contient un ou plusieurs `function declarations`. Vous définissez des fonctions à l'aide de JSON, en particulier avec un [sous-ensemble sélectionné](https://ai.google.dev/api/caching?hl=fr#Schema) du format de [schéma OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). Une déclaration de fonction peut inclure les paramètres suivants :
+Bir istemde işlev çağrısını uyguladığınızda, bir veya daha fazla `function declarations` içeren bir `tools` nesnesi oluşturursunuz. İşlevleri JSON kullanarak tanımlarsınız. Özellikle [OpenAPI şema](https://spec.openapis.org/oas/v3.0.3#schemaw) biçiminin [alt kümesini seç](https://ai.google.dev/api/caching?hl=tr#Schema) işleviyle tanımlarsınız. Tek bir işlev bildirimi aşağıdaki parametreleri içerebilir:
 
-- `name` (chaîne) : nom unique de la fonction (`get_weather_forecast`, `send_email`). Utilisez des noms descriptifs sans espaces ni caractères spéciaux (utilisez des traits de soulignement ou la casse mixte).
-- `description` (chaîne) : explication claire et détaillée de l'objectif et des fonctionnalités de la fonction. C'est essentiel pour que le modèle comprenne quand utiliser la fonction. Soyez précis et fournissez des exemples si nécessaire ("Trouve les cinémas en fonction de la localisation et, éventuellement, du titre du film actuellement à l'affiche.").
-- `parameters` (objet) : définit les paramètres d'entrée attendus par la fonction.
-  - `type` (chaîne) : spécifie le type de données global, tel que `object`.
-  - `properties` (objet) : liste les paramètres individuels, chacun avec les éléments suivants :
-    - `type` (chaîne) : type de données du paramètre, tel que `string`, `integer` ou `boolean, array`.
-    - `description` (chaîne) : description de l'objectif et du format du paramètre. Fournis des exemples et des contraintes ("La ville et l'État, par exemple "San Francisco, CA", ou un code postal, par exemple "95616"").
-    - `enum` (tableau, facultatif) : si les valeurs des paramètres proviennent d'un ensemble fixe, utilisez "enum" pour lister les valeurs autorisées au lieu de simplement les décrire dans la description. Cela améliore la précision ("enum":
-      ["daylight", "cool", "warm"]).
-  - `required` (tableau) : tableau de chaînes listant les noms des paramètres obligatoires pour le bon fonctionnement de la fonction.
+- `name` (dize): İşlev için benzersiz bir ad (`get_weather_forecast`,
+  `send_email`). Boşluk veya özel karakter içermeyen açıklayıcı adlar kullanın (alt çizgi veya camelCase kullanın).
+- `description` (dize): İşlevin amacının ve yeteneklerinin net ve ayrıntılı açıklaması. Bu, modelin işlevi ne zaman kullanacağını anlaması için çok önemlidir. Net olun ve gerekirse örnekler verin ("Konuma ve isteğe bağlı olarak sinemalarda gösterilen film başlığına göre sinema bulur.").
+- `parameters` (nesne): İşlevin beklediği giriş parametrelerini tanımlar.
+  - `type` (dize): Genel veri türünü belirtir (ör. `object`).
+  - `properties` (nesne): Her biri şu öğeleri içeren ayrı parametreleri listeler:
+    - `type` (dize): Parametrenin veri türü (ör. `string`, `integer`, `boolean, array`).
+    - `description` (dize): Parametrenin amacı ve biçimiyle ilgili açıklama. Örnekler ve kısıtlamalar sağlayın ("Şehir ve eyalet, örneğin "San Francisco, CA" veya posta kodu, örneğin "95616").
+    - `enum` (dizi, isteğe bağlı): Parametre değerleri sabit bir kümeden geliyorsa izin verilen değerleri açıklamada yalnızca tanımlamak yerine listelemek için "enum"u kullanın. Bu, doğruluğu artırır ("enum":["daylight", "cool", "warm"]).
+  - `required` (dizi): İşlevin çalışması için zorunlu olan parametre adlarını listeleyen bir dizidir.
 
-Vous pouvez également construire des `FunctionDeclarations` à partir de fonctions Python directement à l'aide de `types.FunctionDeclaration.from_callable(client=client, callable=your_function)`.
+Ayrıca, `FunctionDeclarations` işlevini doğrudan Python işlevlerinden `types.FunctionDeclaration.from_callable(client=client, callable=your_function)` kullanarak da oluşturabilirsiniz.
 
-## Appel de fonction avec des modèles à raisonnement
+## Düşünebilen modellerle işlev çağırma
 
-Les modèles des séries Gemini 3 et 2.5 utilisent un processus de [raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr) interne pour traiter les requêtes. Cela améliore considérablement les performances des appels de fonction, ce qui permet au modèle de mieux déterminer quand appeler une fonction et quels paramètres utiliser. Étant donné que l'API Gemini est sans état, les modèles utilisent des [signatures de pensée](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr) pour conserver le contexte dans les conversations multitours.
+Gemini 3 ve 2.5 serisi modeller, istekleri değerlendirmek için dahili bir ["düşünme"](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) süreci kullanır. Bu sayede, işlev çağrısı performansı önemli ölçüde iyileştirilir ve modelin, işlev çağrısı yapma zamanını ve hangi parametrelerin kullanılacağını daha iyi belirlemesi sağlanır. Gemini API durum bilgisiz olduğundan, modeller çok aşamalı etkileşimlerde bağlamı korumak için [düşünce imzalarını](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr) kullanır.
 
-Cette section traite de la gestion avancée des signatures de pensée. Elle n'est nécessaire que si vous créez manuellement des requêtes API (par exemple, via REST) ou si vous manipulez l'historique des conversations.
+Bu bölümde, düşünce imzalarının gelişmiş yönetimi ele alınmaktadır ve yalnızca API isteklerini manuel olarak oluşturuyorsanız (ör. REST aracılığıyla) veya görüşme geçmişini değiştiriyorsanız gereklidir.
 
-**Si vous utilisez les [SDK Google GenAI](https://ai.google.dev/gemini-api/docs/libraries?hl=fr) (nos bibliothèques officielles), vous n'avez pas besoin de gérer ce processus.** Les SDK gèrent automatiquement les étapes nécessaires, comme indiqué dans l'[exemple](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#step-4) précédent.
+**[Google Üretken Yapay Zeka SDK'larını](https://ai.google.dev/gemini-api/docs/libraries?hl=tr) (resmi kitaplıklarımız) kullanıyorsanız bu süreci yönetmeniz gerekmez**. SDK'lar, önceki [örnekte](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#step-4) gösterildiği gibi gerekli adımları otomatik olarak işler.
 
-### Gérer manuellement l'historique des conversations
+### Sohbet geçmişini manuel olarak yönetme
 
-Si vous modifiez manuellement l'historique des conversations au lieu d'envoyer la [réponse précédente complète](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#step-4), vous devez gérer correctement le `thought_signature` inclus dans le tour du modèle.
+Sohbet geçmişini manuel olarak değiştirirseniz [önceki yanıtın tamamını](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#step-4) göndermek yerine modelin dönüşünde yer alan `thought_signature` öğesini doğru şekilde işlemeniz gerekir.
 
-Suivez ces règles pour vous assurer que le contexte du modèle est préservé :
+Modelin bağlamının korunmasını sağlamak için aşağıdaki kurallara uyun:
 
-- Renvoie toujours le `thought_signature` au modèle dans son [`Part`](https://ai.google.dev/api?hl=fr#request-body-structure) d'origine.
-- **Incluez toujours le `id` exact du `function_call` dans votre `function_response` afin que l'API puisse mapper le résultat à la requête appropriée.**
-- Ne fusionnez pas un `Part` contenant une signature avec un autre qui n'en contient pas. Cela rompt le contexte positionnel de la pensée.
-- Ne combinez pas deux `Parts` contenant des signatures, car les chaînes de signature ne peuvent pas être fusionnées.
+- `thought_signature` her zaman orijinal [`Part`](https://ai.google.dev/api?hl=tr#request-body-structure) içindeki modele geri gönderin.
+- **API'nin sonucu doğru istekle eşleyebilmesi için `function_response` içinde her zaman `function_call`'deki tam `id` değerini ekleyin.**
+- İmza içeren bir `Part` ile içermeyen bir'yı birleştirmeyin. Bu, düşüncenin konumsal bağlamını bozar.
+- İmza dizeleri birleştirilemediği için her ikisi de imza içeren iki `Parts` öğesini birleştirmeyin.
 
-#### Signatures de réflexion Gemini 3
+#### Gemini 3 düşünce imzaları
 
-Dans Gemini 3, tout [`Part`](https://ai.google.dev/api?hl=fr#request-body-structure) d'une réponse de modèle peut contenir une signature de pensée.
-Bien que nous recommandions généralement de renvoyer des signatures de tous les types `Part`, le renvoi de signatures de réflexion est obligatoire pour l'appel de fonction. Sauf si vous manipulez manuellement l'historique des conversations, le SDK Google GenAI gérera automatiquement les signatures de pensée.
+Gemini 3'te, model yanıtının herhangi bir [`Part`](https://ai.google.dev/api?hl=tr#request-body-structure) düşünce imzası içerebilir.
+Genellikle tüm `Part` türlerinden imzaların döndürülmesini önersek de işlev çağrısı için düşünce imzalarının geri iletilmesi zorunludur. Görüşme geçmişini manuel olarak değiştirmediğiniz sürece Google GenAI SDK, düşünce imzalarını otomatik olarak işler.
 
-Si vous manipulez l'historique des conversations manuellement, consultez la page [Signatures de pensée](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr) pour obtenir des conseils complets et des informations sur la gestion des signatures de pensée pour Gemini 3.
+Sohbet geçmişini manuel olarak değiştiriyorsanız Gemini 3 için düşünce imzalarını işleme konusunda eksiksiz rehberlik ve ayrıntılı bilgi için [Düşünce İmzaları](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr) sayfasına bakın.
 
-##### Inspecter les signatures de réflexion
+##### Düşünce imzalarını inceleme
 
-Bien que cela ne soit pas nécessaire pour l'implémentation, vous pouvez inspecter la réponse pour voir le `thought_signature` à des fins de débogage ou pédagogiques.
+Uygulama için gerekli olmasa da hata ayıklama veya eğitim amaçlarıyla yanıtı inceleyerek `thought_signature` değerini görebilirsiniz.
 
 ### Python
 
@@ -1218,13 +1219,13 @@ if len(part.ThoughtSignature) > 0 {
 }
 ```
 
-Pour en savoir plus sur les limites et l'utilisation des signatures de pensée, ainsi que sur les modèles de pensée en général, consultez la page [Pensée](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#signatures).
+Düşünce imzalarının sınırlamaları ve kullanımı ile düşünce modelleri hakkında daha fazla bilgiyi [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#signatures) sayfasında bulabilirsiniz.
 
-## Appel de fonction en parallèle
+## Paralel işlev çağırma
 
-En plus de l'appel de fonction unique, vous pouvez également appeler plusieurs fonctions à la fois. L'appel de fonction parallèle vous permet d'exécuter plusieurs fonctions à la fois. Il est utilisé lorsque les fonctions ne sont pas dépendantes les unes des autres. Cela peut être utile dans des scénarios tels que la collecte de données provenant de plusieurs sources indépendantes (par exemple, la récupération des informations client à partir de différentes bases de données ou la vérification des niveaux d'inventaire dans différents entrepôts) ou l'exécution de plusieurs actions (par exemple, transformer votre appartement en discothèque).
+Tek dönüşlü işlev çağrısının yanı sıra birden fazla işlevi aynı anda da çağırabilirsiniz. Paralel fonksiyon çağırma, birden fazla fonksiyonu aynı anda çalıştırmanıza olanak tanır ve fonksiyonlar birbirine bağlı olmadığında kullanılır. Bu özellik, birden fazla bağımsız kaynaktan veri toplama (ör. farklı veritabanlarından müşteri ayrıntılarını alma veya çeşitli depolardaki envanter seviyelerini kontrol etme) ya da dairenizi diskoya dönüştürme gibi birden fazla işlem gerçekleştirme gibi senaryolarda kullanışlıdır.
 
-Lorsque le modèle lance plusieurs appels de fonction en un seul tour, vous n'avez pas besoin de renvoyer les objets `function_result` dans le même ordre que celui dans lequel les objets `function_call` ont été reçus. L'API Gemini associe chaque résultat à l'appel correspondant à l'aide de `id` à partir de la sortie du modèle. Cela vous permet d'exécuter vos fonctions de manière asynchrone et d'ajouter les résultats à votre liste à mesure qu'ils sont terminés.
+Model tek bir dönüşte birden fazla işlev çağrısı başlattığında `function_result` nesnelerini, `function_call` nesnelerinin alındığı sırayla döndürmeniz gerekmez. Gemini API, modelin çıkışındaki `id` kullanarak her sonucu ilgili çağrıyla eşler. Bu sayede işlevlerinizi eşzamansız olarak yürütebilir ve tamamlandıkça sonuçları listenize ekleyebilirsiniz.
 
 ### Python
 
@@ -1391,8 +1392,8 @@ var dimLights = &genai.FunctionDeclaration{
 }
 ```
 
-Configurez le mode d'appel de fonction pour autoriser l'utilisation de tous les outils spécifiés.
-Pour en savoir plus, consultez [Configurer l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#function_calling_modes).
+Belirtilen tüm araçların kullanılmasına izin vermek için işlev çağırma modunu yapılandırın.
+Daha fazla bilgi edinmek için [işlev çağrısını yapılandırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#function_calling_modes) hakkında bilgi edinebilirsiniz.
 
 ### Python
 
@@ -1506,9 +1507,9 @@ for _, fn := range response.FunctionCalls() {
 }
 ```
 
-Chacun des résultats imprimés reflète un seul appel de fonction demandé par le modèle. Pour renvoyer les résultats, incluez les réponses dans le même ordre que celui dans lequel elles ont été demandées.
+Yazdırılan sonuçların her biri, modelin istediği tek bir işlev çağrısını yansıtır. Sonuçları geri göndermek için yanıtları, istendikleri sırayla ekleyin.
 
-Le SDK Python est compatible avec l'[appel de fonction automatique](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#automatic_function_calling_python_only), qui convertit automatiquement les fonctions Python en déclarations et gère le cycle d'exécution et de réponse des appels de fonction pour vous. Voici un exemple pour le cas d'utilisation de la découverte.
+Python SDK, [otomatik işlev çağrısını](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#automatic_function_calling_python_only) destekler. Bu özellik, Python işlevlerini otomatik olarak bildirimlere dönüştürür, işlev çağrısı yürütme ve yanıt döngüsünü sizin için yönetir. Aşağıda, disco kullanım alanıyla ilgili bir örnek verilmiştir.
 
 ### Python
 
@@ -1571,15 +1572,15 @@ print(response.text)
 # I've turned on the disco ball, started playing loud and energetic music, and dimmed the lights to 50% brightness. Let's get this party started!
 ```
 
-## Appel de fonction compositionnel
+## Bileşik işlev çağrısı
 
-L'appel de fonction compositionnel ou séquentiel permet à Gemini d'associer plusieurs appels de fonction pour répondre à une requête complexe. Par exemple, pour répondre à la requête "Obtiens la température à mon emplacement actuel", l'API Gemini peut d'abord appeler une fonction `get_current_location()`, puis une fonction `get_weather()` qui prend l'emplacement comme paramètre.
+Birleştirilmiş veya ardışık fonksiyon çağırma, Gemini'ın karmaşık bir isteği yerine getirmek için birden fazla fonksiyon çağrısını birlikte kullanmasına olanak tanır. Örneğin, "Bulunduğum konumdaki sıcaklığı öğren" sorusunu yanıtlamak için Gemini API önce bir `get_current_location()` işlevini, ardından konumu parametre olarak alan bir `get_weather()` işlevini çağırabilir.
 
-L'exemple suivant montre comment implémenter l'appel de fonction compositionnel à l'aide du SDK Python et de l'appel de fonction automatique.
+Aşağıdaki örnekte, Python SDK ve otomatik işlev çağrısı kullanılarak kompozisyon işlev çağrısının nasıl uygulanacağı gösterilmektedir.
 
 ### Python
 
-Cet exemple utilise la fonctionnalité d'appel de fonction automatique du SDK Python `google-genai`. Le SDK convertit automatiquement les fonctions Python au schéma requis, exécute les appels de fonction lorsque le modèle le demande et renvoie les résultats au modèle pour terminer la tâche.
+Bu örnekte, `google-genai` Python SDK'sının otomatik işlev çağrısı özelliği kullanılmaktadır. SDK, Python işlevlerini otomatik olarak gerekli şemaya dönüştürür, işlev çağrılarını model tarafından istendiğinde yürütür ve görevi tamamlamak için sonuçları modele geri gönderir.
 
 ```
 import os
@@ -1618,9 +1619,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-**Résultat attendu**
+**Beklenen Çıkış**
 
-Lorsque vous exécutez le code, vous voyez le SDK orchestrer les appels de fonction. Le modèle appelle d'abord `get_weather_forecast`, reçoit la température, puis appelle `set_thermostat_temperature` avec la valeur correcte en fonction de la logique de la requête.
+Kodu çalıştırdığınızda, SDK'nın işlev çağrılarını düzenlediğini görürsünüz. Model önce `get_weather_forecast` işlevini çağırır, sıcaklığı alır ve ardından istemdeki mantığa göre doğru değerle `set_thermostat_temperature` işlevini çağırır.
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1632,7 +1633,7 @@ OK. I've set the thermostat to 20°C.
 
 ### JavaScript
 
-Cet exemple montre comment utiliser le SDK JavaScript/TypeScript pour effectuer un appel de fonction de composition à l'aide d'une boucle d'exécution manuelle.
+Bu örnekte, manuel yürütme döngüsü kullanarak bileşik işlev çağrısı yapmak için JavaScript/TypeScript SDK'sının nasıl kullanılacağı gösterilmektedir.
 
 ```
 import { GoogleGenAI, Type } from "@google/genai";
@@ -1761,9 +1762,9 @@ while (true) {
 }
 ```
 
-**Résultat attendu**
+**Beklenen Çıkış**
 
-Lorsque vous exécutez le code, vous voyez le SDK orchestrer les appels de fonction. Le modèle appelle d'abord `get_weather_forecast`, reçoit la température, puis appelle `set_thermostat_temperature` avec la valeur correcte en fonction de la logique de la requête.
+Kodu çalıştırdığınızda, SDK'nın işlev çağrılarını düzenlediğini görürsünüz. Model önce `get_weather_forecast` işlevini çağırır, sıcaklığı alır ve ardından istemdeki mantığa göre doğru değerle `set_thermostat_temperature` işlevini çağırır.
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1775,7 +1776,7 @@ OK. It's 25°C in London, so I've set the thermostat to 20°C.
 
 ### Go
 
-Cet exemple montre comment utiliser le SDK Go pour effectuer des appels de fonctions de composition à l'aide d'une boucle d'exécution manuelle.
+Bu örnekte, manuel yürütme döngüsü kullanarak kompozisyon işlevi çağırma işlemi yapmak için Go SDK'sının nasıl kullanılacağı gösterilmektedir.
 
 ```
 package main
@@ -1884,7 +1885,7 @@ func main() {
 }
 ```
 
-**Résultat attendu**
+**Beklenen Çıkış**
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1894,7 +1895,7 @@ Tool Response: map[status:success]
 OK. It's 25°C in London, so I've set the thermostat to 20°C.
 ```
 
-L'appel de fonction compositionnel est une fonctionnalité native de l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr). Cela signifie que l'API Live peut gérer les appels de fonction de la même manière que le SDK Python.
+Kompozisyonel işlev çağrısı, yerel bir [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) özelliğidir. Bu, Live API'nin işlev çağrısını Python SDK'sına benzer şekilde işleyebileceği anlamına gelir.
 
 ### Python
 
@@ -1934,16 +1935,16 @@ const tools = [
 await run(prompt, tools=tools, modality="AUDIO")
 ```
 
-## Modes d'appel de fonction
+## İşlev çağırma modları
 
-L'API Gemini vous permet de contrôler la façon dont le modèle utilise les outils fournis (déclarations de fonction). Plus précisément, vous pouvez définir le mode dans le fichier.`function_calling_config`.
+Gemini API, modelin sağlanan araçları (işlev bildirimleri) nasıl kullanacağını kontrol etmenize olanak tanır. Özellikle, modu `function_calling_config` içinde ayarlayabilirsiniz.
 
-- `VALIDATED` : mode par défaut pour la combinaison d'outils (lorsque les outils intégrés ou les sorties structurées sont également activés). Le modèle est contraint de prédire des appels de fonction ou du langage naturel, et garantit le respect du schéma de fonction. Si `allowed_function_names` n'est pas fourni, le modèle sélectionne toutes les déclarations de fonction disponibles. Si `allowed_function_names` est fourni, le modèle choisit parmi l'ensemble de fonctions autorisées. Ce mode réduit les appels de fonction mal formés (par rapport au mode `AUTO`).
-- `AUTO` : mode par défaut lorsque seul l'outil function\_declarations est activé.
-  Le modèle décide s'il faut générer une réponse en langage naturel ou suggérer un appel de fonction en fonction de la requête et du contexte.
-- `ANY` : le modèle est contraint de toujours prédire un appel de fonction et garantit le respect du schéma de la fonction. Si `allowed_function_names` n'est pas spécifié, le modèle peut choisir parmi l'une des déclarations de fonction fournies.
-  Si `allowed_function_names` est fourni sous forme de liste, le modèle ne peut choisir que parmi les fonctions de cette liste. Utilisez ce mode lorsque vous avez besoin d'une réponse d'appel de fonction pour chaque requête (le cas échéant).
-- `NONE` : le modèle est *interdit* d'effectuer des appels de fonction. Cela équivaut à envoyer une requête sans aucune déclaration de fonction. Utilisez cette option pour désactiver temporairement l'appel de fonction sans supprimer vos définitions d'outils.
+- `VALIDATED`: Araç kombinasyonu için varsayılan mod (yerleşik araçlar veya yapılandırılmış çıktılar da etkinleştirildiğinde). Model, işlev çağrılarını veya doğal dili tahmin etmekle sınırlıdır ve işlev şemasına uygunluğu sağlar. `allowed_function_names` sağlanmazsa model, mevcut tüm işlev bildirimleri arasından seçim yapar. `allowed_function_names` sağlanırsa model, izin verilen işlevler arasından seçim yapar. Bu mod, hatalı biçimlendirilmiş işlev çağrılarını (`AUTO` moduna kıyasla) azaltır.
+- `AUTO`: Yalnızca function\_declarations aracı etkinleştirildiğinde varsayılan mod.
+  Model, isteme ve bağlama göre doğal dil yanıtı oluşturmaya veya bir işlev çağrısı önermeye karar verir.
+- `ANY`: Model, her zaman bir işlev çağrısı tahmin edecek şekilde kısıtlanır ve işlev şemasına uygunluğu sağlar. `allowed_function_names` belirtilmezse model, sağlanan işlev bildirimlerinden herhangi birini seçebilir.
+  `allowed_function_names` liste olarak sağlanırsa model yalnızca bu listedeki işlevleri seçebilir. Her isteme bir işlev çağrısı yanıtı verilmesini istediğinizde bu modu kullanın (geçerliyse).
+- `NONE`: Modelin işlev çağrısı yapması *yasaktır*. Bu, herhangi bir işlev bildirimi olmadan istek göndermeye eşdeğerdir. Bu özelliği, araç tanımlarınızı kaldırmadan işlev çağrılarını geçici olarak devre dışı bırakmak için kullanın.
 
 ### Python
 
@@ -2002,18 +2003,18 @@ config := &genai.GenerateContentConfig{
 }
 ```
 
-## Appel de fonction automatique (Python uniquement)
+## Otomatik işlev çağırma (yalnızca Python)
 
-Lorsque vous utilisez le SDK Python, vous pouvez fournir des fonctions Python directement en tant qu'outils.
-Le SDK convertit ces fonctions en déclarations, gère l'exécution des appels de fonction et gère le cycle de réponse pour vous. Définissez votre fonction avec des indications de type et une docstring. Pour des résultats optimaux, nous vous recommandons d'utiliser des [docstrings de style Google](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods).
-Le SDK effectue ensuite automatiquement les opérations suivantes :
+Python SDK'sını kullanırken Python işlevlerini doğrudan araç olarak sağlayabilirsiniz.
+SDK bu işlevleri bildirimlere dönüştürür, işlev çağrısı yürütülmesini yönetir ve yanıt döngüsünü sizin için işler. Fonksiyonunuzu tür ipuçları ve bir docstring ile tanımlayın. En iyi sonuçlar için [Google tarzı docstring'ler](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods) kullanmanız önerilir.
+SDK daha sonra otomatik olarak:
 
-1. Détectez les réponses d'appel de fonction du modèle.
-2. Appelez la fonction Python correspondante dans votre code.
-3. Renvoyez la réponse de la fonction au modèle.
-4. Renvoie la réponse textuelle finale du modèle.
+1. Modelden gelen işlev çağrısı yanıtlarını algılar.
+2. Kodunuzda ilgili Python işlevini çağırın.
+3. İşlevin yanıtını modele geri gönderin.
+4. Modelin son metin yanıtını döndürür.
 
-Actuellement, le SDK n'analyse pas les descriptions des arguments dans les emplacements de description des propriétés de la déclaration de fonction générée. Au lieu de cela, il envoie l'intégralité de la docstring comme description de la fonction de premier niveau.
+SDK şu anda bağımsız değişken açıklamalarını, oluşturulan işlev bildiriminin özellik açıklaması yuvalarına ayrıştırmamaktadır. Bunun yerine, tüm docstring'i üst düzey işlev açıklaması olarak gönderir.
 
 ### Python
 
@@ -2050,7 +2051,7 @@ response = client.models.generate_content(
 print(response.text)  # The SDK handles the function call and returns the final text
 ```
 
-Vous pouvez désactiver l'appel de fonction automatique avec :
+Otomatik işlev çağrısını devre dışı bırakmak için:
 
 ### Python
 
@@ -2061,9 +2062,9 @@ config = types.GenerateContentConfig(
 )
 ```
 
-### Déclaration automatique du schéma de fonction
+### Otomatik işlev şeması bildirimi
 
-L'API est capable de décrire les types suivants. Les types `Pydantic` sont autorisés, à condition que les champs définis sur eux soient également composés de types autorisés. Les types Dict (comme `dict[str: int]`) ne sont pas bien pris en charge ici. Ne les utilisez pas.
+API, aşağıdaki türlerin herhangi birini açıklayabilir. `Pydantic` türlerine izin verilir. Ancak bu türlerde tanımlanan alanlar da izin verilen türlerden oluşmalıdır. Sözlük türleri (ör. `dict[str: int]`) burada iyi desteklenmez. Bu türleri kullanmayın.
 
 ### Python
 
@@ -2072,7 +2073,7 @@ AllowedType = (
   int | float | bool | str | list['AllowedType'] | pydantic.BaseModel)
 ```
 
-Pour voir à quoi ressemble le schéma inféré, vous pouvez le convertir à l'aide de [`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable) :
+Çıkarılan şemanın nasıl göründüğünü görmek için [`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable) kullanarak dönüştürebilirsiniz:
 
 ### Python
 
@@ -2091,11 +2092,11 @@ fn_decl = types.FunctionDeclaration.from_callable(callable=multiply, client=clie
 print(fn_decl.to_json_dict())
 ```
 
-## Utilisation de plusieurs outils : combiner les outils intégrés avec l'appel de fonction
+## Çoklu araç kullanımı: Yerleşik araçları işlev çağrısıyla birleştirme
 
-Vous pouvez activer plusieurs outils, en combinant des outils intégrés avec l'appel de fonction dans la même requête.
+Yerleşik araçları işlev çağrısıyla birleştirerek aynı istekte birden fazla aracı etkinleştirebilirsiniz.
 
-Les modèles Gemini 3 peuvent combiner des outils intégrés avec l'appel de fonction prêt à l'emploi, grâce à la fonctionnalité de circulation du contexte d'outil. Pour en savoir plus, consultez la page [Combiner les outils intégrés et l'appel de fonction](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
+Gemini 3 modelleri, araç bağlamı dolaşımı özelliği sayesinde yerleşik araçları işlev çağrısıyla birleştirebilir. Daha fazla bilgi edinmek için [Yerleşik araçları ve işlev çağrılarını birleştirme](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) sayfasını inceleyin.
 
 ### Python
 
@@ -2316,21 +2317,23 @@ func main() {
 }
 ```
 
-Pour les modèles antérieurs à la gamme Gemini 3, utilisez l'[API Live](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=fr).
+Gemini 3 serisinden önceki modeller için [Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=tr)'yi kullanın.
 
-## Réponses de fonction multimodales
+## Çok formatlı işlev yanıtları
 
-Pour les modèles de la série Gemini 3, vous pouvez inclure du contenu multimodal dans les parties de réponse de fonction que vous envoyez au modèle. Le modèle peut traiter ce contenu multimodal lors de son prochain tour pour produire une réponse plus pertinente.
-Les types MIME suivants sont acceptés pour le contenu multimodal dans les réponses de fonction :
+Gemini 3 serisi modellerde, modele gönderdiğiniz işlev yanıtı bölümlerine çok formatlı içerik ekleyebilirsiniz. Model, daha bilinçli bir yanıt üretmek için bu çok formatlı içeriği bir sonraki turda işleyebilir.
+İşlev yanıtlarındaki çok formatlı içerik için aşağıdaki MIME türleri desteklenir:
 
-- **Images** : `image/png`, `image/jpeg`, `image/webp`
-- **Documents** : `application/pdf`, `text/plain`
+- **Görseller**: `image/png`, `image/jpeg`, `image/webp`
+- **Dokümanlar**: `application/pdf`, `text/plain`
 
-Pour inclure des données multimodales dans une réponse de fonction, ajoutez-les sous forme d'une ou plusieurs parties imbriquées dans la partie `functionResponse`. Chaque partie multimodale doit contenir `inlineData`. Si vous référencez une partie multimodale à partir du champ `response` structuré, elle doit contenir un `displayName` unique.
+Çok formatlı verileri bir işlev yanıtına dahil etmek için bu verileri `functionResponse` bölümüne yerleştirilmiş bir veya daha fazla bölüm olarak ekleyin. Her çok formatlı bölüm `inlineData` içermelidir. Yapılandırılmış `response` alanında çok formatlı bir bölümden bahsediyorsanız bu bölüm benzersiz bir `displayName` içermelidir.
 
-Vous pouvez également référencer une partie multimodale à partir du champ `response` structuré de la partie `functionResponse` en utilisant le format de référence JSON `{"$ref": "<displayName>"}`. Le modèle remplace la référence par le contenu multimodal lors du traitement de la réponse. Chaque `displayName` ne peut être référencé qu'une seule fois dans le champ `response` structuré.
+Ayrıca, JSON referans biçimini kullanarak `response`
+alanındaki çok formatlı bir bölüme `functionResponse` bölümünden de referans verebilirsiniz
+`{"$ref": "<displayName>"}`. Model, yanıtı işlerken referansı çok formatlı içerikle değiştirir. Her `displayName`, yapılandırılmış `response` alanında yalnızca bir kez referans verilebilir.
 
-L'exemple suivant montre un message contenant un `functionResponse` pour une fonction nommée `get_image` et une partie imbriquée contenant des données d'image avec `displayName: "instrument.jpg"`. Le champ `response` de `functionResponse` fait référence à cette partie de l'image :
+Aşağıdaki örnekte, `get_image` adlı bir işlev için `functionResponse` içeren bir mesaj ve `displayName: "instrument.jpg"` ile resim verileri içeren yerleştirilmiş bir bölüm gösterilmektedir. `functionResponse`'nın `response` alanı bu resim bölümüne referans veriyor:
 
 ### Python
 
@@ -2686,22 +2689,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## Appel de fonction avec sortie structurée
+## Yapılandırılmış çıkışla işlev çağırma
 
-Pour les modèles de la famille Gemini 3, vous pouvez utiliser l'appel de fonction avec une [sortie structurée](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr). Cela permet au modèle de prédire des appels de fonction ou des sorties qui respectent un schéma spécifique. Par conséquent, vous recevez des réponses mises en forme de manière cohérente lorsque le modèle ne génère pas d'appels de fonction.
+Gemini 3 serisi modellerde, [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) ile işlev çağrısı özelliğini kullanabilirsiniz. Bu, modelin belirli bir şemaya uyan işlev çağrılarını veya çıkışları tahmin etmesini sağlar. Sonuç olarak, model işlev çağrıları oluşturmadığında tutarlı bir şekilde biçimlendirilmiş yanıtlar alırsınız.
 
-## Protocole MCP (Model Context Protocol)
+## Model Context Protocol (MCP)
 
-Le [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) est une norme ouverte permettant de connecter des applications d'IA à des outils et des données externes.
-Le protocole MCP fournit un protocole commun permettant aux modèles d'accéder au contexte, comme les fonctions (outils), les sources de données (ressources) ou les requêtes prédéfinies.
+[Model Bağlam Protokolü (MCP)](https://modelcontextprotocol.io/introduction), yapay zeka uygulamalarını harici araçlara ve verilere bağlamak için kullanılan açık bir standarttır.
+MCP, modellerin bağlama (ör. işlevler [araçlar], veri kaynakları [kaynaklar] veya önceden tanımlanmış istemler) erişmesi için ortak bir protokol sağlar.
 
-Les SDK Gemini sont compatibles avec le MCP, ce qui réduit le code récurrent et offre l'[appel d'outils automatique](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#automatic_function_calling_python_only) pour les outils MCP. Lorsque le modèle génère un appel d'outil MCP, les SDK clients Python et JavaScript peuvent exécuter automatiquement l'outil MCP et renvoyer la réponse au modèle dans une requête ultérieure, en poursuivant cette boucle jusqu'à ce qu'aucun autre appel d'outil ne soit effectué par le modèle.
+Gemini SDK'ları, MCP için yerleşik destek sunar. Bu sayede ortak metin kodu azaltılır ve MCP araçları için [otomatik araç çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#automatic_function_calling_python_only) özelliği sunulur. Model bir MCP aracı çağrısı oluşturduğunda Python ve JavaScript istemci SDK'sı, MCP aracını otomatik olarak yürütebilir ve yanıtı sonraki bir istekte modele geri göndererek bu döngüyü model tarafından başka araç çağrıları yapılmayana kadar sürdürebilir.
 
-Vous trouverez ici un exemple d'utilisation d'un serveur MCP local avec Gemini et le SDK `mcp`.
+Burada, Gemini ve `mcp` SDK ile yerel bir MCP sunucusunu kullanma örneğini bulabilirsiniz.
 
 ### Python
 
-Assurez-vous que la dernière version du [SDK `mcp`](https://modelcontextprotocol.io/introduction) est installée sur la plate-forme de votre choix.
+Seçtiğiniz platformda [`mcp` SDK'sının](https://modelcontextprotocol.io/introduction) en son sürümünün yüklü olduğundan emin olun.
 
 ```
 pip install mcp
@@ -2754,7 +2757,7 @@ asyncio.run(run())
 
 ### JavaScript
 
-Assurez-vous que la dernière version du SDK `mcp` est installée sur la plate-forme de votre choix.
+Seçtiğiniz platformda `mcp` SDK'nın en son sürümünün yüklü olduğundan emin olun.
 
 ```
 npm install @modelcontextprotocol/sdk
@@ -2802,77 +2805,77 @@ console.log(response.text)
 await client.close();
 ```
 
-### Limites de la compatibilité MCP intégrée
+### Yerleşik MCP desteğiyle ilgili sınırlamalar
 
-La prise en charge MCP intégrée est une fonctionnalité [expérimentale](https://ai.google.dev/gemini-api/docs/models?hl=fr#preview) dans nos SDK et présente les limites suivantes :
+Yerleşik MCP desteği, SDK'larımızda [deneysel](https://ai.google.dev/gemini-api/docs/models?hl=tr#preview) bir özelliktir ve aşağıdaki sınırlamalara sahiptir:
 
-- Seuls les outils sont acceptés, pas les ressources ni les requêtes
-- Il est disponible pour les SDK Python et JavaScript/TypeScript.
-- Des modifications destructives peuvent se produire dans les prochaines versions.
+- Yalnızca araçlar desteklenir, kaynaklar veya istemler desteklenmez.
+- Python ve JavaScript/TypeScript SDK'sında kullanılabilir.
+- Gelecekteki sürümlerde zarar veren değişiklikler olabilir.
 
-L'intégration manuelle des serveurs MCP est toujours possible si ces limites vous empêchent de créer ce que vous souhaitez.
+Bu sınırlamalar, oluşturduğunuz öğeleri etkiliyorsa MCP sunucularını manuel olarak entegre edebilirsiniz.
 
-## Modèles compatibles
+## Desteklenen modeller
 
-Cette section liste les modèles et leurs capacités d'appel de fonction. Les modèles expérimentaux ne sont pas inclus. Vous trouverez une présentation complète des fonctionnalités sur la page [Présentation du modèle](https://ai.google.dev/gemini-api/docs/models?hl=fr).
+Bu bölümde, modeller ve işlev çağrısı özellikleri listelenmektedir. Deneysel modeller dahil değildir. Kapsamlı bir özelliklere genel bakış için [modele genel bakış](https://ai.google.dev/gemini-api/docs/models?hl=tr) sayfasına gidebilirsiniz.
 
-| Modèle | Appel de fonction | Appel de fonction en parallèle | Appel de fonction compositionnel |
+| Model | İşlev çağırma | Paralel işlev çağırma | Bileşik işlev çağrısı |
 | --- | --- | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Preview Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fr) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Pro Önizlemesi](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=tr) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=tr) | ✔️ | ✔️ | ✔️ |
 
-## Bonnes pratiques
+## En iyi uygulamalar
 
-- **Descriptions des fonctions et des paramètres** : soyez extrêmement clair et précis dans vos descriptions. Le modèle s'appuie sur ces informations pour choisir la bonne fonction et fournir les arguments appropriés.
-- **Nommage** : utilisez des noms de fonctions descriptifs (sans espaces, points ni tirets).
-- **Typage fort** : utilisez des types spécifiques (entier, chaîne, enum) pour les paramètres afin de réduire les erreurs. Si un paramètre dispose d'un ensemble limité de valeurs valides, utilisez un enum.
-- **Sélection d'outils** : bien que le modèle puisse utiliser un nombre arbitraire d'outils, en fournir trop peut augmenter le risque de sélectionner un outil incorrect ou non optimal. Pour obtenir les meilleurs résultats, essayez de ne fournir que les outils pertinents pour le contexte ou la tâche, en gardant idéalement l'ensemble actif à un maximum de 10 à 20. Envisagez de sélectionner des outils de manière dynamique en fonction du contexte de la conversation si vous disposez d'un grand nombre d'outils.
-- **Ingénierie des prompts** :
-  - Fournissez du contexte : indiquez au modèle son rôle (par exemple, "Vous êtes un assistant météo serviable.").
-  - Donnez des instructions : précisez comment et quand utiliser les fonctions (par exemple, "Ne devinez pas les dates. Utilisez toujours une date future pour les prévisions.").
-  - Encouragez la clarification : demandez au modèle de poser des questions de clarification si nécessaire.
-  - Pour découvrir d'autres stratégies de conception de ces requêtes, consultez [Workflows agentiques](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=fr#agentic-workflows). Voici un exemple d'[instruction système](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=fr#agentic-si-template) testée.
-- **Température** : utilisez une température basse (par exemple, 0) pour des appels de fonction plus déterministes et fiables.
-- **Validation** : si un appel de fonction a des conséquences importantes (par exemple, passer une commande), validez l'appel auprès de l'utilisateur avant de l'exécuter.
-- **Vérifier la raison de la fin** : vérifiez toujours [`finishReason`](https://ai.google.dev/api/generate-content?hl=fr#FinishReason) dans la réponse du modèle pour gérer les cas où le modèle n'a pas réussi à générer un appel de fonction valide.
-- **Gestion des erreurs** : implémentez une gestion des erreurs robuste dans vos fonctions pour gérer correctement les entrées inattendues ou les échecs d'API. Renvoyez des messages d'erreur informatifs que le modèle peut utiliser pour générer des réponses utiles à l'utilisateur.
-- **Sécurité** : faites attention à la sécurité lorsque vous appelez des API externes. Utilisez des mécanismes d'authentification et d'autorisation appropriés. Évitez d'exposer des données sensibles dans les appels de fonction.
-- **Limites de jetons** : les descriptions et les paramètres des fonctions sont comptabilisés dans la limite de jetons d'entrée. Si vous atteignez les limites de jetons, envisagez de limiter le nombre de fonctions ou la longueur des descriptions, et de décomposer les tâches complexes en ensembles de fonctions plus petits et plus ciblés.
-- **Combinaison de bash et d'outils personnalisés** : pour ceux qui créent des applications avec une combinaison de bash et d'outils personnalisés, la version Preview de Gemini 3.1 Pro est fournie avec un point de terminaison distinct disponible via l'API, appelé [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr#gemini-31-pro-preview-customtools).
+- **İşlev ve Parametre Açıklamaları:** Açıklamalarınızda son derece net ve spesifik olun. Model, doğru işlevi seçmek ve uygun argümanlar sağlamak için bunlardan yararlanır.
+- **Adlandırma:** Tanımlayıcı işlev adları kullanın (boşluk, nokta veya tire içermeyen).
+- **Güçlü Türlendirme:** Hataları azaltmak için parametrelerde belirli türler (tam sayı, dize, enum) kullanın. Bir parametrenin sınırlı bir geçerli değerler kümesi varsa enum kullanın.
+- **Araç Seçimi:** Model, rastgele sayıda araç kullanabilir ancak çok fazla araç sağlamak yanlış veya yetersiz bir aracın seçilme riskini artırabilir. En iyi sonuçları elde etmek için bağlam veya görevle alakalı araçları sağlamayı hedefleyin. İdeal olarak, etkin küme en fazla 10-20 araçtan oluşmalıdır. Toplam araç sayınız çok fazlaysa sohbet bağlamına göre dinamik araç seçimini göz önünde bulundurun.
+- **İstem Mühendisliği:**
+  - Bağlam sağlayın: Modele rolünü söyleyin (ör. "Faydalı bir hava durumu asistanısın.").
+  - Talimat verin: İşlevlerin nasıl ve ne zaman kullanılacağını belirtin (ör. "Tarihleri tahmin etmeyin. Tahminler için her zaman gelecekteki bir tarihi kullanın.").
+  - Açıklama yapmaya teşvik etme: Gerekirse modele açıklayıcı sorular sorması talimatını verin.
+  - Bu istemleri tasarlamayla ilgili diğer stratejiler için [Agentic iş akışları](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr#agentic-workflows) bölümüne bakın. Aşağıda test edilmiş bir [sistem talimatı](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr#agentic-si-template) örneği verilmiştir.
+- **Sıcaklık:** Daha kontrollü ve güvenilir işlev çağrıları için düşük bir sıcaklık (ör. 0) kullanın.
+- **Doğrulama:** Bir işlev çağrısının önemli sonuçları varsa (ör. sipariş verme), yürütmeden önce kullanıcıyla birlikte çağrıyı doğrulayın.
+- **Tamamlama Nedenini Kontrol Edin:** Modelin geçerli bir işlev çağrısı oluşturamadığı durumları ele almak için modelin yanıtındaki [`finishReason`](https://ai.google.dev/api/generate-content?hl=tr#FinishReason) öğesini her zaman kontrol edin.
+- **Hata İşleme**: Beklenmedik girişleri veya API hatalarını sorunsuz şekilde işlemek için işlevlerinizde etkili hata işleme yöntemleri uygulayın. Modele, kullanıcıya faydalı yanıtlar oluşturmak için kullanabileceği bilgilendirici hata mesajları döndürün.
+- **Güvenlik:** Harici API'leri çağırırken güvenliğe dikkat edin. Uygun kimlik doğrulama ve yetkilendirme mekanizmalarını kullanın. İşlev çağrılarında hassas verileri açığa çıkarmaktan kaçının.
+- **Jeton Sınırları:** İşlev açıklamaları ve parametreler, giriş jetonu sınırınıza dahil edilir. Parça sınırlarına ulaşıyorsanız işlev sayısını veya açıklamaların uzunluğunu sınırlamayı, karmaşık görevleri daha küçük ve daha odaklanmış işlev kümelerine ayırmayı deneyin.
+- **Bash ve özel araçların karışımı** Bash ve özel araçların karışımıyla geliştirme yapanlar için Gemini 3.1 Pro Önizleme, [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr#gemini-31-pro-preview-customtools) adlı API üzerinden kullanılabilen ayrı bir uç nokta ile birlikte gelir.
 
-## Solutions de contournement pour les exigences relatives au texte avant l'outil
+## Araç öncesi metin şartları için geçici çözümler
 
-**Problème** : votre requête exige que le modèle génère du texte structuré (XML, YAML, JSON, etc.). (par exemple, `<UPDATE>...</UPDATE>`) immédiatement avant d'effectuer un appel d'outil, l'appel d'outil peut parfois échouer et générer une erreur `Malformed_Function_Call`.
+**Sorun:** İsteminizde modelin yapılandırılmış metin (XML, YAML, JSON vb.) çıkışı vermesi gerekiyorsa (ör. `<UPDATE>...</UPDATE>`) hemen önce yaparsanız araç çağrısı bazen `Malformed_Function_Call` ile başarısız olabilir.
 
-**Solutions** : les solutions de contournement suivantes permettent de résoudre ce problème :
+**Çözümler:** Aşağıdaki geçici çözümler bu sorunu giderir:
 
-- **RECOMMANDÉ** : Demandez au modèle de placer ses notes avant l'outil dans un appel de fonction `update()` dédié au lieu d'un texte brut (voir ci-dessous).
-- Demandez au modèle d'écrire des notes sous forme d'en-têtes Markdown (`# UPDATE`, `## PLAN`) au lieu de texte structuré.
-- Ne demandez pas au modèle de générer du texte avant les appels d'outils.
+- **TERCİH EDİLEN:** Modele, araç öncesi notlarını ham metin yerine özel bir `update()` işlev çağrısının içine yerleştirmesini söyleyin (ayrıntılar aşağıda).
+- Modele, notları yapılandırılmış metin yerine Markdown başlıkları (`# UPDATE`, `## PLAN`) olarak yazmasını söyleyin.
+- Modelin, araç çağrılarından önce metin çıkışı yapmasını gerektirmeyin.
 
-### Solution de contournement recommandée : encapsuler les notes de travail dans un appel de fonction dédié
+### Tercih edilen geçici çözüm: Çalışma notlarını özel bir işlev çağrısına sarmalama
 
-Au lieu de l'instruction d'origine :
+Orijinal talimat yerine:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
 ```
 
-Utilisez cette nouvelle instruction :
+Güncellenen bu talimatı kullanın:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-Mettez également à jour toutes les références à l'ancien format XML `<UPDATE>` dans la demande du client. Ajoutez ensuite la déclaration de fonction correspondante pour la fonction de mise à jour :
+Ayrıca, müşteri isteğindeki eski `<UPDATE>` XML biçimine yapılan tüm referansları güncelleyin. Ardından, güncelleme işlevi için ilgili işlev beyanını ekleyin:
 
 ```
 {
@@ -2908,22 +2911,22 @@ Mettez également à jour toutes les références à l'ancien format XML `<UPDAT
 }
 ```
 
-Le modèle effectue ensuite deux appels au cours de la même étape : l'appel `update()` qui remplace le code XML structuré et l'appel de fonction qu'il souhaite effectuer.
+Ardından model, aynı adımda iki çağrı yapar: yapılandırılmış XML'nin yerini alan `update()` çağrısı ve yapmak istediği gerçek işlev çağrısı.
 
-## Remarques et limites
+## Notlar ve sınırlamalar
 
-- Positionnement des parties d'un appel de fonction : lorsque vous utilisez des déclarations de fonction personnalisées [avec des outils intégrés](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr) (comme la recherche Google), le modèle peut renvoyer un mélange de parties `functionCall`, `toolCall` et `toolResponse` en un seul tour. Par conséquent, ne partez pas du principe que `functionCall` sera toujours le dernier élément du tableau "parts". Si vous analysez manuellement la réponse JSON, parcourez toujours le tableau des pièces au lieu de vous fier à la position.
-- Seul un [sous-ensemble du schéma OpenAPI](https://ai.google.dev/api/caching?hl=fr#FunctionDeclaration) est accepté.
-- En mode `ANY`, l'API peut refuser les schémas très volumineux ou profondément imbriqués. Si vous rencontrez des erreurs, essayez de simplifier les schémas des paramètres et des réponses de votre fonction en raccourcissant les noms des propriétés, en réduisant l'imbrication ou en limitant le nombre de déclarations de fonctions.
-- Les types de paramètres acceptés dans Python sont limités.
-- L'appel de fonction automatique est une fonctionnalité du SDK Python uniquement.
+- İşlev çağrısı bölümlerinin konumlandırılması: [Yerleşik araçlarla birlikte](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) (ör. Google Arama) özel işlev bildirimleri kullanılırken model, tek bir dönüşte `functionCall`, `toolCall` ve `toolResponse` bölümlerinin bir karışımını döndürebilir. Bu nedenle, `functionCall` öğesinin her zaman parçalar dizisindeki son öğe olacağını varsaymayın. JSON yanıtını manuel olarak ayrıştırıyorsanız konuma güvenmek yerine her zaman parts dizisinde yineleme yapın.
+- Yalnızca [OpenAPI şemasının bir alt kümesi](https://ai.google.dev/api/caching?hl=tr#FunctionDeclaration) desteklenir.
+- `ANY` modunda API, çok büyük veya derin iç içe yerleştirilmiş şemaları reddedebilir. Hata alırsanız özellik adlarını kısaltarak, iç içe yerleştirmeyi azaltarak veya işlev bildirimlerinin sayısını sınırlayarak işlev parametrenizi ve yanıt şemalarınızı basitleştirmeyi deneyin.
+- Python'da desteklenen parametre türleri sınırlıdır.
+- Otomatik işlev çağırma yalnızca Python SDK'sında bulunan bir özelliktir.
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Dernière mise à jour le 2026/09/18 (UTC).
+Son güncelleme tarihi: 2026-09-18 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/18 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-18 UTC."],[],[]]

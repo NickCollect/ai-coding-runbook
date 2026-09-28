@@ -1,27 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=ja
-fetched_at: 2026-09-21T05:50:39.420422+00:00
-title: "\u7d44\u307f\u8fbc\u307f\u30c4\u30fc\u30eb\u3068\u95a2\u6570\u547c\u3073\u51fa\u3057\u3092\u7d44\u307f\u5408\u308f\u305b\u308b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=th
+fetched_at: 2026-09-28T06:33:53.681948+00:00
+title: "\u0e23\u0e27\u0e21\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e21\u0e37\u0e2d\u0e43\u0e19\u0e15\u0e31\u0e27\u0e41\u0e25\u0e30\u0e01\u0e32\u0e23\u0e40\u0e23\u0e35\u0e22\u0e01\u0e43\u0e0a\u0e49\u0e1f\u0e31\u0e07\u0e01\u0e4c\u0e0a\u0e31\u0e19 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-# 組み込みツールと関数呼び出しを組み合わせる
+# รวมเครื่องมือในตัวและการเรียกใช้ฟังก์ชัน
 
-Gemini では、ツール呼び出しのコンテキスト履歴を保持して公開することで、`google_search` などの[組み込みツール](https://ai.google.dev/gemini-api/docs/tools?hl=ja)と[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)（カスタムツールとも呼ばれます）を 1 回の生成で組み合わせることができます。組み込みツールとカスタムツールの組み合わせにより、複雑なエージェント ワークフローが可能になります。たとえば、モデルは特定のビジネス ロジックを呼び出す前に、リアルタイムのウェブデータに基づいてグラウンディングできます。
+Gemini ช่วยให้คุณสามารถรวม[เครื่องมือในตัว](https://ai.google.dev/gemini-api/docs/tools?hl=th) เช่น `google_search` และ[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
+(หรือที่เรียกว่า*เครื่องมือที่กำหนดเอง*) ไว้ในการสร้างครั้งเดียวได้โดยการเก็บรักษาและแสดงประวัติบริบทของการเรียกใช้เครื่องมือ การผสมผสานเครื่องมือในตัวและเครื่องมือที่กำหนดเองช่วยให้
+เวิร์กโฟลว์ที่ซับซ้อนและมีเอเจนต์ทำงานได้ เช่น โมเดลสามารถอ้างอิง
+ข้อมูลเว็บแบบเรียลไทม์ก่อนที่จะเรียกตรรกะทางธุรกิจที่เฉพาะเจาะจงของคุณ
 
-`google_search` とカスタム関数 `getWeather` を使用して、組み込みツールとカスタムツールの組み合わせを有効にする例を次に示します。
+ตัวอย่างที่เปิดใช้ชุดค่าผสมของเครื่องมือในตัวและเครื่องมือที่กำหนดเองด้วย
+`google_search` และฟังก์ชันที่กำหนดเอง `getWeather` มีดังนี้
 
 ### Python
 
@@ -388,53 +392,73 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## 仕組み
+## วิธีการทำงาน
 
-Gemini 3 モデルは、*ツール コンテキストの循環*を使用して、組み込みツールとカスタムツールの組み合わせを可能にします。ツール コンテキストの循環により、組み込みツールのコンテキストを保持して公開し、ターンごとに同じ呼び出しでカスタムツールと共有できます。
+โมเดล Gemini 3 ใช้*การหมุนเวียนบริบทของเครื่องมือ*เพื่อเปิดใช้ชุดค่าผสมของเครื่องมือในตัวและเครื่องมือที่กำหนดเอง
+การหมุนเวียนบริบทของเครื่องมือช่วยให้สามารถรักษาและ
+แสดงบริบทของเครื่องมือในตัว รวมถึงแชร์กับเครื่องมือที่กำหนดเองในการเรียกใช้เดียวกัน
+ได้ตั้งแต่ต้นจนจบ
 
-### ツールの組み合わせを有効にする
+### เปิดใช้การรวมเครื่องมือ
 
-- ツール コンテキストの循環を有効にするには、`include_server_side_tool_invocations` フラグを `true` に設定する必要があります。
-- [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#function-declarations) と、使用する組み込みツールを含めて、組み合わせの動作をトリガーします。
-  - `function_declarations` を含めない場合でも、フラグが設定されていれば、ツール コンテキストの循環は、含まれている組み込みツールに対して機能します。
+- คุณต้องตั้งค่าแฟล็ก `include_server_side_tool_invocations` เป็น `true` เพื่อ
+  เปิดใช้การหมุนเวียนบริบทของเครื่องมือ
+- ใส่ [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#function-declarations) พร้อมกับเครื่องมือในตัวที่คุณต้องการใช้เพื่อเรียกใช้ลักษณะการทำงานร่วมกัน
+  - หากคุณไม่รวม `function_declarations` การหมุนเวียนบริบทของเครื่องมือ
+    จะยังคงทำงานกับเครื่องมือในตัวที่รวมไว้ ตราบใดที่ตั้งค่าสถานะไว้
 
-### API の戻り値のパーツ
+### API แสดงผลชิ้นส่วน
 
-API は、1 つのレスポンスで、組み込みツール呼び出しの `toolCall` 部分と `toolResponse` 部分を返します。関数（カスタムツール）呼び出しの場合、API は `functionCall` 呼び出し部分を返します。ユーザーは次のターンで `functionResponse` 部分を提供します。
+ในคำตอบเดียว API จะแสดงผลส่วน `toolCall` และ `toolResponse`
+สำหรับการเรียกเครื่องมือในตัว สำหรับการเรียกฟังก์ชัน (เครื่องมือที่กำหนดเอง) API จะ
+แสดงส่วนการเรียก `functionCall` ซึ่งผู้ใช้จะระบุส่วน `functionResponse` ในรอบถัดไป
 
-- `toolCall` と `toolResponse`: API は、サーバーサイドで実行されるツールのコンテキストと、その実行結果を次のターンで保持するために、これらの部分を返します。
-- `functionCall` と `functionResponse`: API は関数呼び出しをユーザーに送信して入力させ、ユーザーは関数レスポンスで結果を返します（これらの部分は Gemini API のすべての[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)に共通であり、ツール組み合わせ機能に固有のものではありません）。
-- （[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)ツールのみ）
-  `executableCode` と `codeExecutionResult`:
-  コード実行ツールを使用する場合、API は `functionCall` と `functionResponse` の代わりに、`executableCode`（実行されるモデルによって生成されたコード）と `codeExecutionResult`（実行可能コードの結果）を返します。
+- `toolCall` และ `toolResponse`: API จะแสดงส่วนเหล่านี้เพื่อรักษาบริบทของเครื่องมือที่ทำงานฝั่งเซิร์ฟเวอร์และผลลัพธ์ของการดำเนินการสำหรับรอบถัดไป
+- `functionCall` และ `functionResponse`: API จะส่งการเรียกฟังก์ชันให้ผู้ใช้กรอก และผู้ใช้จะส่งผลลัพธ์กลับมาในการตอบกลับฟังก์ชัน (ส่วนเหล่านี้เป็นมาตรฐานสำหรับการ[เรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ทั้งหมดใน Gemini API ไม่ได้มีเฉพาะฟีเจอร์การรวมเครื่องมือ)
+- (เครื่องมือ[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)เท่านั้น)
+  `executableCode` และ `codeExecutionResult`:
+  เมื่อใช้เครื่องมือการเรียกใช้โค้ด แทนที่จะเป็น `functionCall` และ
+  `functionResponse` API จะแสดง `executableCode` (โค้ดที่โมเดลสร้างขึ้น
+  ซึ่งมีไว้เพื่อเรียกใช้) และ `codeExecutionResult` (ผลลัพธ์ของโค้ดที่เรียกใช้ได้)
 
-コンテキストを維持してツールの組み合わせを有効にするには、各ターンで、すべての[フィールド](#critical-fields)を含むすべての部分をモデルに返す必要があります。
+คุณต้องส่งคืนชิ้นส่วนทั้งหมด รวมถึง[ฟิลด์](#critical-fields)ทั้งหมดที่ชิ้นส่วนนั้นมี กลับไปยังโมเดลในแต่ละรอบเพื่อรักษาบริบทและเปิดใช้การรวมเครื่องมือ
 
-### 返された部品の重要なフィールド
+### ฟิลด์ที่สำคัญในชิ้นส่วนที่ส่งคืน
 
-[API から返される特定の部分](#api-returns-parts)には、`id`、`tool_type`、`thought_signature` フィールドが含まれます。これらのフィールドは、ツールのコンテキストを維持するために重要です（したがって、ツールの組み合わせにとっても重要です）。後続のリクエストでは、*レスポンスで指定されたとおり*にすべての部分を返す必要があります。
+[ชิ้นส่วนบางอย่างที่ API แสดงผล](#api-returns-parts)จะมีฟิลด์ `id`,
+`tool_type` และ `thought_signature` ฟิลด์เหล่านี้มีความสําคัญต่อ
+การรักษาบริบทของเครื่องมือ (และด้วยเหตุนี้จึงมีความสําคัญต่อการรวมเครื่องมือ) คุณต้อง
+ส่งคืนทุกส่วน*ตามที่ระบุไว้ในการตอบกลับ*ในคําขอที่ตามมา
 
-- `id`: 呼び出しをレスポンスにマッピングする一意の識別子。`id` は、ツールのコンテキストの循環に関係なく、**すべての関数呼び出しレスポンスで設定**されます。API が関数呼び出しで提供するのと同じ `id` を関数レスポンスで提供する*必要があります*。組み込みツールは、ツール呼び出しとツール レスポンスの間で `id` を自動的に共有します。
-  - すべてのツール関連部分に存在: `toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
-- `tool_type`: 使用されている特定のツールを識別します。リテラル組み込みツール（`URL_CONTEXT` など）または関数（`getWeather` など）の名前。
-  - `toolCall` パーツと `toolResponse` パーツにあります。
-- `thought_signature`: **API によって返される各部分**に埋め込まれた実際の暗号化コンテキスト。思考シグネチャがないとコンテキストを再構築できません。すべてのターンのすべての部分の思考シグネチャを返さないと、モデルはエラーを返します。
-  - *すべての*パーツにあります。
+- `id`: ตัวระบุที่ไม่ซ้ำกันซึ่งแมปการเรียกไปยังการตอบกลับ `id` จะ**ตั้งค่าเป็น
+  การตอบกลับการเรียกใช้ฟังก์ชันทั้งหมด** ไม่ว่าบริบทของเครื่องมือจะหมุนเวียนอย่างไรก็ตาม
+  คุณ*ต้อง*ระบุ `id` เดียวกันในคำตอบของฟังก์ชัน
+  กับที่ API ระบุในการเรียกฟังก์ชัน เครื่องมือในตัวจะแชร์ `id` โดยอัตโนมัติ
+  ระหว่างการเรียกใช้เครื่องมือและการตอบกลับเครื่องมือ
+  - พบในส่วนที่เกี่ยวข้องกับเครื่องมือทั้งหมด: `toolCall`, `toolResponse`,
+    `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: ระบุเครื่องมือที่ใช้ ชื่อเครื่องมือหรือฟังก์ชันในตัว (เช่น `URL_CONTEXT`) หรือชื่อฟังก์ชัน (เช่น `getWeather`)
+  - พบในส่วน `toolCall` และ `toolResponse`
+- `thought_signature`: บริบทที่เข้ารหัสจริงซึ่งฝังอยู่ใน**แต่ละ
+  ส่วนที่ API แสดงผล** ระบบจะสร้างบริบทขึ้นใหม่ไม่ได้หากไม่มีลายเซ็นความคิด หากคุณไม่ส่งคืนลายเซ็นความคิดสำหรับทุกส่วนในทุกรอบ โมเดลจะแสดงข้อผิดพลาด
+  - พบได้ใน*ทุก*ส่วน
 
-### ツール固有のデータ
+### ข้อมูลเฉพาะเครื่องมือ
 
-一部の組み込みツールは、ツールタイプに固有のユーザーに表示されるデータ引数を返します。
+เครื่องมือในตัวบางอย่างจะแสดงอาร์กิวเมนต์ข้อมูลที่ผู้ใช้มองเห็นได้ซึ่งเจาะจงสำหรับประเภทเครื่องมือ
 
-| ツール | ユーザーに表示されるツール呼び出し引数（ある場合） | ユーザーに表示されるツール レスポンス（ある場合） |
+| เครื่องมือ | อาร์กิวเมนต์การเรียกใช้เครื่องมือที่ผู้ใช้มองเห็น (หากมี) | การตอบกลับของเครื่องมือที่ผู้ใช้มองเห็น (หากมี) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` ブラウジングする URL | `urls_metadata` `retrieved_url`: 閲覧した URL `url_retrieval_status`: 閲覧ステータス |
-| **FILE\_SEARCH** | なし | なし |
+| **URL\_CONTEXT** | `urls` URL ที่จะเรียกดู | `urls_metadata` `retrieved_url`: URL ที่เข้าชม `url_retrieval_status`: สถานะการเรียกดู |
+| **FILE\_SEARCH** | ไม่มี | ไม่มี |
 
-## ツール組み合わせリクエスト構造の例
+## ตัวอย่างโครงสร้างคำขอรวมเครื่องมือ
 
-次のリクエスト構造は、「米国最北端の都市はどこですか？」というプロンプトのリクエスト構造を示しています。今日の天気はどうですか？」組み込みの Gemini ツール `google_search` と `code_execution`、カスタム関数 `get_weather` の 3 つのツールを組み合わせたものです。
+โครงสร้างคำขอต่อไปนี้แสดงโครงสร้างคำขอของพรอมต์ "เมืองที่อยู่เหนือสุดในสหรัฐอเมริกาคือเมืองอะไร
+วันนี้อากาศที่นั่นเป็นยังไงบ้าง" โดยจะรวมเครื่องมือ 3 อย่าง ได้แก่ เครื่องมือ Gemini ในตัว `google_search`
+และ `code_execution` รวมถึงฟังก์ชันที่กำหนดเอง `get_weather`
 
 ```
 {
@@ -503,48 +527,53 @@ API は、1 つのレスポンスで、組み込みツール呼び出しの `too
 }
 ```
 
-## トークンと料金
+## โทเค็นและการกำหนดราคา
 
-リクエストの `toolCall` 部分と `toolResponse` 部分は `prompt_token_count` にカウントされます。これらの中間ツールステップは表示され、ユーザーに返されるため、会話履歴の一部となります。これは*リクエスト*の場合のみであり、*レスポンス*には適用されません。
+โปรดทราบว่าส่วน `toolCall` และ `toolResponse` ในคำขอจะนับรวมใน `prompt_token_count` เนื่องจากตอนนี้คุณสามารถเห็นขั้นตอนเครื่องมือระดับกลางเหล่านี้และระบบจะส่งคืนให้คุณ ขั้นตอนเหล่านี้จึงเป็นส่วนหนึ่งของประวัติการสนทนา ซึ่งจะเกิดขึ้นกับ*คำขอ*เท่านั้น ไม่ใช่*การตอบกลับ*
 
-Google 検索ツールはこのルールの例外です。Google 検索では、クエリレベルで独自の料金モデルがすでに適用されているため、トークンが二重に課金されることはありません（[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)ページを参照）。
+เครื่องมือ Google Search เป็นข้อยกเว้นของกฎนี้ Google Search ใช้โมเดลราคาของตัวเองที่ระดับคำค้นหาอยู่แล้ว จึงไม่มีการเรียกเก็บค่าโทเค็นซ้ำ (ดูหน้า[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th))
 
-詳細については、[トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)のページをご覧ください。
+อ่านข้อมูลเพิ่มเติมได้ที่หน้า[โทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
 
-## 制限事項
+## ข้อจำกัด
 
-- `include_server_side_tool_invocations` フラグが有効の場合、デフォルトは `VALIDATED` モード（`AUTO` モードは対象外）
-- `google_search` などの組み込みツールは、位置情報と現在時刻の情報に依存しています。そのため、`system_instruction` または `function_declaration.description` に矛盾する位置情報と時刻情報が含まれていると、ツールを組み合わせた機能が正常に動作しないことがあります。
+- ค่าเริ่มต้นจะเป็นโหมด `VALIDATED` (ไม่รองรับโหมด `AUTO`) เมื่อเปิดใช้ฟีเจอร์`include_server_side_tool_invocations`
+- เครื่องมือในตัว เช่น `google_search` อาศัยข้อมูลตำแหน่งและเวลาปัจจุบัน
+  ดังนั้นหาก `system_instruction` หรือ
+  `function_declaration.description` มีข้อมูลตำแหน่งและเวลา
+  ที่ขัดแย้งกัน ฟีเจอร์การรวมเครื่องมืออาจทำงานได้ไม่ดี
 
-## サポートされているツール
+## เครื่องมือที่รองรับ
 
-標準のツール コンテキストの循環は、サーバーサイド（組み込み）ツールに適用されます。Code Execution もサーバーサイド ツールですが、コンテキスト循環のための独自の組み込みソリューションがあります。コンピュータ使用と関数呼び出しはクライアントサイドのツールであり、コンテキスト循環の組み込みソリューションも備えています。
+การหมุนเวียนบริบทของเครื่องมือมาตรฐานจะใช้กับเครื่องมือฝั่งเซิร์ฟเวอร์ (ในตัว)
+การดำเนินการโค้ดเป็นเครื่องมือฝั่งเซิร์ฟเวอร์เช่นกัน แต่มีโซลูชันในตัวของตัวเองสำหรับการหมุนเวียนบริบท การใช้คอมพิวเตอร์และการเรียกใช้ฟังก์ชันเป็นเครื่องมือฝั่งไคลเอ็นต์
+และยังมีโซลูชันในตัวสำหรับการหมุนเวียนบริบทด้วย
 
-| ツール | 実行側 | コンテキストの循環のサポート |
+| เครื่องมือ | ฝั่งที่ดำเนินการ | การสนับสนุนการหมุนเวียนบริบท |
 | --- | --- | --- |
-| [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja) | サーバー側 | サポート対象 |
-| [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja) | サーバー側 | サポート対象 |
-| [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja) | サーバー側 | サポート対象 |
-| [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) | サーバー側 | サポート対象 |
-| [コードの実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja) | サーバー側 | サポート対象（内蔵、`executableCode` と `codeExecutionResult` の部品を使用） |
-| [コンピュータの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja) | クライアントサイド | サポート対象（内蔵、`functionCall` と `functionResponse` の部品を使用） |
-| [カスタム関数](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja) | クライアントサイド | サポート対象（内蔵、`functionCall` と `functionResponse` の部品を使用） |
+| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
+| [บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
+| [ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
+| [การรันโค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `executableCode` และ `codeExecutionResult`) |
+| [การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) | ฝั่งไคลเอ็นต์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `functionCall` และ `functionResponse`) |
+| [ฟังก์ชันที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/function-calling?hl=th) | ฝั่งไคลเอ็นต์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `functionCall` และ `functionResponse`) |
 
-## 次のステップ
+## ขั้นตอนถัดไป
 
-- Gemini API の[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)の詳細を確認する。
-- サポートされているツールを確認します。
-  - [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)
-  - [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)
-  - [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)
-  - [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
+- ดูข้อมูลเพิ่มเติมเกี่ยวกับ[การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ใน Gemini API
+- สำรวจเครื่องมือที่รองรับ
+  - [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)
+  - [บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)
+  - [ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最終更新日 2026-09-12 UTC。
+อัปเดตล่าสุด 2026-09-12 UTC
 
-ご意見をお聞かせください
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]

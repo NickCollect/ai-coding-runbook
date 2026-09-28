@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=hi
-fetched_at: 2026-09-21T05:47:39.956445+00:00
-title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=fr
+fetched_at: 2026-09-28T06:16:54.617663+00:00
+title: "Imagen\u00a04 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-सुझाव भेजें
+Envoyer des commentaires
 
-# Imagen 4
+# Imagen 4
 
-यह एक हाई-परफ़ॉर्मेंस इंजन है, जो बेहतर विज़ुअल सिंथेसिस की सुविधा देता है. इससे क्रिएटिविटी पर बेहतर कंट्रोल मिलता है और फ़ोटो जैसा आउटपुट मिलता है. प्रोफ़ेशनल ब्रैंडिंग, जटिल सीन कंपोज़िशन, और हाई-फ़िडेलिटी डिज़ाइन के लिए, Imagen 4 का इस्तेमाल करें. इसके लिए, सटीक टेक्स्ट रेंडरिंग और जटिल लाइटिंग की ज़रूरत होती है.
+Moteur hautes performances pour la synthèse visuelle avancée, offrant un contrôle créatif sophistiqué et un résultat photoréaliste. Utilisez Imagen 4 pour le branding professionnel, la composition de scènes complexes et les tâches de conception haute fidélité nécessitant un rendu de texte précis et un éclairage complexe.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=hi)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=fr)
 
-## दस्तावेज़
+## Documentation
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=hi) पेज पर जाएं.
+Consultez la page [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=fr) pour obtenir une couverture complète des
+fonctionnalités.
 
 ## imagen-4.0-generate-001
 
-| प्रॉपर्टी | ब्यौरा |
+| Propriété | Description |
 | --- | --- |
-| id\_cardModel कोड | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveकौन-कौनसे डेटा टाइप इसके साथ काम करते हैं | **इनपुट**  टेक्स्ट  **आउटपुट**  इमेज |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  480 टोकन (टेक्स्ट)  **आउटपुट इमेज**  1 से 4 (अल्ट्रा/स्टैंडर्ड/फ़ास्ट) |
-| calendar\_monthसबसे नया अपडेट | जून 2025 |
+| id\_cardCode du modèle | **API Gemini**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveTypes de données acceptés | **Entrée**  Texte  **Résultat**  Images |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  480 jetons (texte)  **Images de sortie**  Entre 1 et 4 (Ultra/Standard/Rapide) |
+| calendar\_monthDernière mise à jour | Juin 2025 |
 
-सुझाव भेजें
+Envoyer des commentaires
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-आखिरी बार 2026-06-15 (UTC) को अपडेट किया गया.
+Dernière mise à jour le 2026/06/15 (UTC).
 
-क्या आपको हमें और कुछ बताना है?
+Voulez-vous nous donner plus d'informations ?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-15 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/15 (UTC)."],[],[]]

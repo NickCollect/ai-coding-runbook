@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-TW
-fetched_at: 2026-09-21T05:46:01.959891+00:00
-title: "\u5716\u50cf\u89e3\u8b80 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-CN
+fetched_at: 2026-09-28T06:13:27.691341+00:00
+title: "\u56fe\u7247\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-提供意見
+发送反馈
 
-# 圖像解讀
+# 图片理解
 
-Gemini 模型從一開始就建構於多模態的基礎上，因此可執行各種圖像處理和電腦視覺工作，包括但不限於生成圖像說明文字、分類和回答圖像問題，無須訓練專門的機器學習模型。
+Gemini 模型从一开始就具有多模态特性，可用于执行各种图片处理和计算机视觉任务，包括但不限于图片配文、分类和视觉问答，而无需训练专门的机器学习模型。
 
-除了提供一般多模態功能，Gemini 模型還透過額外訓練，針對特定用途 (例如[物件偵測](#object-detection)和[區隔](#segmentation)) **提升準確度**。
+除了通用多模态功能之外，Gemini 模型还通过额外训练，针对特定应用场景（例如[对象检测](#object-detection)和[分割](#segmentation)）提供**更高的准确率**。
 
-## 將圖片傳送給 Gemini
+## 将图片传递给 Gemini
 
-你可以透過下列幾種方式，將圖片做為 Gemini 的輸入內容：
+您可以使用多种方法向 Gemini 提供图片作为输入：
 
-- [使用網址傳遞圖片](#url-image)：適合公開存取的圖片。
-- [傳遞內嵌圖片資料](#inline-image)：適用於採用 Base64 編碼的圖片資料。
-- [使用 File API 上傳圖片](#upload-image)：建議用於較大的檔案，或在多個要求中重複使用圖片。
+- [使用网址传递图片](#url-image)：非常适合可公开访问的图片。
+- [传递内嵌图片数据](#inline-image)：用于传递 base64 编码的图片数据。
+- [使用 File API 上传图片](#upload-image)：建议用于较大的文件，或在多个请求中重复使用图片。
 
-### 使用網址傳遞圖片
+### 使用网址传递图片
 
-您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳圖片，並在要求中傳遞圖片：
+您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 上传图片，并在请求中传递该图片：
 
 ### Python
 
@@ -128,6 +128,58 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/organ.jpg", &genai.UploadFileConfig{
+        MIMEType: "image/jpeg",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Caption this image.",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:      genai.Ptr(uploadedFile.URI),
+                    MimeType: interactions.ImageContentMimeType(uploadedFile.MIMEType).ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -148,9 +200,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 傳遞內嵌圖片資料
+### 传递内嵌图片数据
 
-您可以提供採用 Base64 編碼的字串做為圖片資料：
+您可以以 base64 编码的字符串形式提供图片数据：
 
 ### Python
 
@@ -246,6 +298,59 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    imageBytes, err := os.ReadFile("path/to/small-sample.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Image := base64.StdEncoding.EncodeToString(imageBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Caption this image.",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Image),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -273,9 +378,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 使用 File API 上傳圖片
+### 使用 File API 上传图片
 
-如要處理大型檔案或重複使用同一張圖片，請使用 Files API。請參閱 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
+对于大型文件，或者为了能够重复使用同一图片文件，请使用 Files API。请参阅 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)。
 
 ### Python
 
@@ -371,6 +476,58 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    myFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.jpg", &genai.UploadFileConfig{
+        MIMEType: "image/jpeg",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Caption this image.",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:      genai.Ptr(myFile.URI),
+                    MimeType: interactions.ImageContentMimeType(myFile.MIMEType).ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -393,9 +550,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 使用多張圖片撰寫提示
+## 使用多张图片进行提示
 
-您可以在單一提示中提供多張圖片，方法是在 `input` 陣列中加入多個圖片物件：
+您可以在单个提示中提供多张图片，只需在 `input` 数组中添加多个图片对象即可：
 
 ### Python
 
@@ -493,6 +650,55 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "What is different between these two images?",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:      genai.Ptr("https://example.com/image1.jpg"),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:      genai.Ptr("https://example.com/image2.jpg"),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -517,9 +723,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 物件偵測
+## 对象检测
 
-模型經過訓練後，可偵測圖片中的物件並取得定界框座標。座標會根據圖片尺寸縮放至 [0, 1000]。您需要根據原始圖片大小，縮放這些座標。
+模型经过训练，可以检测图片中的对象并获取其边界框坐标。相对于图片尺寸的坐标会缩放到 [0, 1000]。您需要根据原始图片大小对这些坐标进行反缩放。
 
 ### Python
 
@@ -678,6 +884,93 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
+
+    boundingBoxSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "box_2d": map[string]any{
+                "type":        "array",
+                "items":       map[string]any{"type": "integer"},
+                "description": "The 2D bounding box of the item as [ymin, xmin, ymax, xmax] normalized to 0-1000.",
+            },
+            "mask": map[string]any{
+                "type":        "array",
+                "items":       map[string]any{"type": "array", "items": map[string]any{"type": "integer"}},
+                "description": "The segmentation mask of the item as a polygon of [x,y] coordinates, normalized to 0-1000.",
+            },
+            "label": map[string]any{
+                "type":        "string",
+                "description": "A descriptive label for the item.",
+            },
+        },
+        "required": []string{"box_2d", "mask", "label"},
+    }
+
+    boundingBoxesSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "boxes": map[string]any{
+                "type":  "array",
+                "items": boundingBoxSchema,
+            },
+        },
+        "required": []string{"boxes"},
+    }
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   boundingBoxesSchema,
+        }),
+    )
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:      genai.Ptr("https://example.com/image.png"),
+                    MimeType: interactions.ImageContentMimeTypeImagePng.ToPointer(),
+                }),
+            }),
+            ResponseFormat: genai.Ptr(format),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -719,13 +1012,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需更多範例，請參閱 [Gemini 教戰手冊](https://github.com/google-gemini/cookbook)。
+如需查看更多示例，请访问 [Gemini Cookbook](https://github.com/google-gemini/cookbook)。
 
-## 區隔
+## 分割
 
-Gemini 模型不僅能偵測項目，還能區隔項目並提供輪廓遮罩。
+Gemini 模型不仅可以检测商品，还可以对商品进行分割并提供其轮廓遮罩。
 
-模型會預測 JSON 清單，其中每個項目代表一個區隔遮罩。每個項目都有一個定界框 (「`box_2d`」)，格式為 `[ymin, xmin, ymax, xmax]`，內含介於 0 到 1000 之間的正規化座標、識別物件的標籤 (「`label`」)，以及定界框內的區隔遮罩 (以正規化為 0 到 1000 的 `[x, y]` 座標多邊形表示)。
+模型会预测一个 JSON 列表，其中每个项都表示一个分割掩码。每个商品都有一个边界框（“`box_2d`”），格式为 `[ymin, xmin, ymax, xmax]`，其中包含介于 0 到 1000 之间的归一化坐标；一个用于标识对象的标签（“`label`”）；最后是边界框内的分割掩码，以归一化为 0-1000 的 `[x, y]` 坐标多边形表示。
 
 ### Python
 
@@ -908,6 +1201,99 @@ Interaction interaction =
 System.out.println("Segmentation results: " + interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Give the segmentation masks for the wooden and glass items.\n" +
+        "Output a JSON list of segmentation masks where each entry contains the 2D\n" +
+        "bounding box in the key \"box_2d\", the segmentation mask in key \"mask\", and\n" +
+        "the text label in the key \"label\". Use descriptive labels."
+
+    boundingBoxSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "box_2d": map[string]any{
+                "type":        "array",
+                "items":       map[string]any{"type": "integer"},
+                "description": "The 2D bounding box of the item as [ymin, xmin, ymax, xmax] normalized to 0-1000.",
+            },
+            "mask": map[string]any{
+                "type":        "array",
+                "items":       map[string]any{"type": "array", "items": map[string]any{"type": "integer"}},
+                "description": "The segmentation mask of the item as a polygon of [x,y] coordinates, normalized to 0-1000.",
+            },
+            "label": map[string]any{
+                "type":        "string",
+                "description": "A descriptive label for the item.",
+            },
+        },
+        "required": []string{"box_2d", "mask", "label"},
+    }
+
+    boundingBoxesSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "boxes": map[string]any{
+                "type":  "array",
+                "items": boundingBoxSchema,
+            },
+        },
+        "required": []string{"boxes"},
+    }
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   boundingBoxesSchema,
+        }),
+    )
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:      genai.Ptr("https://example.com/image.png"),
+                    MimeType: interactions.ImageContentMimeTypeImagePng.ToPointer(),
+                }),
+            }),
+            ResponseFormat: genai.Ptr(format),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel: interactions.ThinkingLevelMinimal.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println("Segmentation results: " + *res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -952,75 +1338,73 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![桌上擺著杯子蛋糕，木製和玻璃物品以醒目方式顯示](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=zh-tw)
+![一张放有纸杯蛋糕的桌子，其中木制和玻璃物品突出显示](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=zh-cn)
 
-含有物件和區隔遮罩的區隔輸出範例
+包含对象和分割遮盖的分割输出示例
 
-## 支援的圖片格式
+## 支持的图片格式
 
-Gemini 支援下列圖片格式 MIME 類型：
+Gemini 支持以下图片格式 MIME 类型：
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
-- WebP - `image/webp`
+- WEBP - `image/webp`
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
+如需了解其他文件输入方法，请参阅[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
 
 ## 功能
 
-所有 Gemini 模型版本都是多模態模型，可用於各種圖像處理和電腦視覺工作，包括但不限於圖像說明文字、圖像問答、圖像分類、物件偵測和分割。
+所有 Gemini 模型版本都是多模态模型，可用于各种图像处理和计算机视觉任务，包括但不限于图片配文、视觉问答、图像分类、对象检测和分割。
 
-視品質和效能需求而定，Gemini 可減少使用專業機器學習模型的需求。
+Gemini 可以减少对专业机器学习模型的需求，具体取决于您的质量和性能要求。
 
-最新模型版本經過特別訓練，除了通用功能外，還能提升特定工作的準確度，例如強化[物件偵測](#object-detection)和[區隔](#segmentation)。
+最新模型版本经过专门训练，除了通用功能外，还可提高专业任务的准确性，例如增强的[对象检测](#object-detection)和[分割](#segmentation)。
 
-## 限制和重要技術資訊
+## 限制和关键技术信息
 
-### 檔案限制
+### 文件数量限制
 
-Gemini 模型每項要求最多支援 3,600 個圖片檔案。
+Gemini 模型支持的每个请求的图片文件数量上限为 3,600 个。
 
-### 代幣計算
+### token 计算
 
-- 如果兩個維度都 <= 384 像素，則為 258 個權杖。
-  較大的圖片會分割成 768x768 像素的圖塊，每個圖塊需支付 258 個權杖。
+- 如果两个维度均小于或等于 384 像素，则为 258 个 token。
+  较大的图片会被分块为 768x768 像素的图块，每个图块需要 258 个 token。
 
-計算圖塊數量的粗略公式如下：
+计算图块数量的粗略公式如下：
 
-- 計算裁剪單元大小，大約是 `floor(min(width, height)` / 1.5)。
-- 將每個維度除以裁剪單元大小，然後相乘，即可取得圖塊數量。
+- 计算裁剪单元大小（大致为：`floor(min(width, height)` / 1.5）。
+- 将每个维度除以裁剪单元大小，然后将结果相乘，即可得到图块数量。
 
-舉例來說，如果圖片尺寸為 960x540，裁剪單位大小為 360。將每個維度除以 360，圖塊數量為 3 \* 2 = 6。
+例如，对于尺寸为 960x540 的图片，剪裁单位大小为 360。将每个维度除以 360，得到的图块数量为 3 \* 2 = 6。
 
-### 媒體解析度
+### 媒体分辨率
 
-Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。`media_resolution` 參數會決定**每個輸入圖片或影片影格分配到的詞元數量上限。**
-解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。
+Gemini 3 通过 `media_resolution` 参数引入了对多模态视觉处理的精细控制。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限**。分辨率越高，模型读取细小文字或识别细微细节的能力就越强，但 token 用量和延迟时间也会增加。
 
-## 提示與最佳做法
+## 技巧和最佳做法
 
-- 確認圖片已正確旋轉。
-- 使用清晰的圖片，避免模糊不清。
-- 使用含有文字的單一圖片時，請將文字提示詞*放在* `input` 陣列中的圖片前面。
+- 验证图片是否已正确旋转。
+- 使用清晰且不模糊的图片。
+- 如果使用包含文本的单张图片，请在 `input` 数组中将文本提示放在图片之前。
 
-## 後續步驟
+## 后续步骤
 
-本指南說明如何上傳圖片檔案，以及如何從圖片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
+本指南介绍了如何上传图片文件并根据图片输入生成文本输出。如需了解详情，请参阅以下资源：
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以便搭配 Gemini 使用。
-- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
-  系統指令可根據特定需求和用途，引導模型行為。
-- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也稱為多模態提示。
-- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：生成式 AI 模型有時會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的步驟，有助於降低這類輸出內容造成危害的風險。
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)：详细了解如何上传和管理文件以供 Gemini 使用。
+- [系统指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：系统指令可让您根据自己的特定需求和使用情形来控制模型的行为。
+- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：Gemini API 支持使用文本、图片、音频和视频数据进行提示，也称为多模态提示。
+- [安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-cn)：生成式 AI 模型有时会生成意料之外的输出，例如不准确、有偏见或令人反感的输出。后处理和人工评估对于限制此类输出造成的危害风险至关重要。
 
-提供意見
+发送反馈
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-上次更新時間：2026-09-18 (世界標準時間)。
+最后更新时间 (UTC)：2026-09-24。
 
-想進一步說明嗎？
+需要向我们提供更多信息？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-18 (世界標準時間)。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=hi
-fetched_at: 2026-09-21T05:54:13.038612+00:00
-title: "\u092e\u0948\u0928\u0947\u091c \u0915\u093f\u090f \u091c\u093e \u0930\u0939\u0947 \u090f\u091c\u0947\u0902\u091f \u092e\u0947\u0902 \u0915\u094d\u0930\u0947\u0921\u0947\u0902\u0936\u093f\u092f\u0932 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-TW
+fetched_at: 2026-09-28T06:15:30.669793+00:00
+title: "\u53d7\u7ba1\u7406\u4ee3\u7406\u7a0b\u5f0f\u4e2d\u7684\u6191\u8b49 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-सुझाव भेजें
+提供意見
 
-# मैनेज किए जा रहे एजेंट में क्रेडेंशियल
+# 受管理代理程式中的憑證
 
-क्रेडेंशियल, सर्वर से मैनेज किए जाने वाले सीक्रेट होते हैं. इनकी मदद से, आपके एजेंट तीसरे पक्ष की सेवाओं तक पहुंच सकते हैं. हालांकि, इस दौरान सीक्रेट कभी भी एजेंट के एनवायरमेंट में नहीं जाता है. क्रेडेंशियल को एक बार सेव किया जाता है. इसके बाद, इसे आईडी के हिसाब से रेफ़रंस किया जाता है. साथ ही, इग्रेस प्रॉक्सी इसे अनुरोध के समय हल करके इंजेक्ट करती है.
+憑證是由伺服器管理的密鑰，可讓代理存取第三方服務，且密鑰不會進入代理的環境。您只需儲存一次憑證，然後依 ID 參照憑證，出口 Proxy 就會在要求時解析並注入憑證。
 
-सीक्रेट की वैल्यू सिर्फ़ लिखी जा सकती हैं. सेव होने के बाद, इन्हें किसी भी एंडपॉइंट से कभी वापस नहीं भेजा जाता. इसलिए, कोई ऐसा एजेंट जो सुरक्षा से समझौता करता है, उन टोकन को वापस नहीं पढ़ सकता जिनका वह इस्तेमाल कर रहा है.
+密鑰值只能寫入，儲存後，任何端點都不會傳回這些權杖，因此遭入侵的代理程式無法讀取正在使用的權杖。
 
-क्रेडेंशियल का इस्तेमाल मुख्य रूप से, [`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi) पर नेटवर्क की अनुमति वाली सूची में किया जाता है. सबसे पहले, सीक्रेट सेव करें:
+您主要會在 [`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw) 的網路許可清單中使用憑證。請先儲存密鑰：
 
 ### Python
 
@@ -56,6 +56,42 @@ const credential = await client.credentials.create({
 console.log(`Credential ID: ${credential.id}, Status: ${credential.status}`);
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Create(ctx, operations.CreateCredentialRequest{
+        Body: credentials.NewCredentialCreateParams(credentials.HTTPBearerConfig{
+            ID:    "github-production",
+            Token: "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Credential ID: %s, Status: %v\n", res.Credential.ID, res.Credential.GetStatus())
+}
+```
+
 ### REST
 
 ```
@@ -69,7 +105,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-इसके बाद, इसे उस डोमेन से अटैच करें जिसकी पुष्टि की जाती है:
+然後附加至驗證的網域：
 
 ### Python
 
@@ -107,6 +143,50 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("antigravity-preview-09-2026"),
+            Input: interactions.NewInteractionsInput("Triage the open issues in my-org/my-repo."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(interactions.Environment{
+                Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+                    Allowlist: []interactions.AllowlistEntry{
+                        {Domain: "api.github.com", Credential: genai.Ptr("github-production")},
+                        {Domain: "*"},
+                    },
+                }))),
+            })),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -128,23 +208,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-अब एजेंट, `api.github.com` से पुष्टि किए गए अनुरोध करता है. साथ ही, टोकन कभी भी सैंडबॉक्स में मौजूद नहीं होता.
+現在，代理程式會向 `api.github.com` 發出經過驗證的要求，且權杖絕不會出現在沙箱中。
 
-## क्रेडेंशियल के टाइप
+## 認證類型
 
-हर क्रेडेंशियल में एक `type` होता है. इससे यह तय होता है कि क्रेडेंशियल किन फ़ील्ड को स्वीकार करता है और प्रॉक्सी इसे कैसे लागू करती है.
+每項憑證都有 `type`，可決定憑證接受哪些欄位，以及 Proxy 如何套用憑證。
 
-| टाइप | इस्तेमाल का उदाहरण | व्यवहार |
+| 類型 | 用途 | 行為 |
 | --- | --- | --- |
-| `bearer_token` | निजी ऐक्सेस टोकन, बॉट टोकन, स्टैटिक एपीआई कुंजियां | प्रॉक्सी, टोकन को अनुरोध के हेडर के तौर पर इंजेक्ट करता है. रीफ़्रेश करने का कोई लॉजिक नहीं है. |
-| `oauth2` | OAuth ऐप्लिकेशन और उपयोगकर्ता के तौर पर काम करने वाले फ़्लो | प्रॉक्सी, रीफ़्रेश टोकन को ऐक्सेस टोकन के लिए बदलता है और खत्म होने पर उन्हें रीफ़्रेश करता है. |
-| `environment_variable` | ऐसे क्लाइंट SDK टूल जो प्रोसेस एनवायरमेंट से सीक्रेट पढ़ते हैं | एजेंट के एनवायरमेंट को एक प्लेसहोल्डर मिलता है. प्रॉक्सी, आउटबाउंड अनुरोधों पर असली सीक्रेट की जगह दूसरा सीक्रेट इस्तेमाल करता है. |
+| `bearer_token` | 個人存取權杖、機器人權杖、靜態 API 金鑰 | Proxy 會將權杖插入要求標頭。沒有重新整理邏輯。 |
+| `oauth2` | OAuth 應用程式和使用者委派流程 | Proxy 會將更新權杖換成存取權杖，並在權杖過期時更新。 |
+| `environment_variable` | 從程序環境讀取密鑰的用戶端 SDK | 代理程式的環境會收到預留位置。Proxy 會在傳出要求中替換實際密鑰。 |
 
-## नेटवर्क की अनुमति वाली सूची में मौजूद क्रेडेंशियल का इस्तेमाल करना
+## 使用網路許可清單中的憑證
 
-अनुमति वाली सूची के नियम में `credential` जोड़ें. इसके बाद, प्रॉक्सी उस डोमेन के लिए किए गए हर आउटबाउंड अनुरोध की पुष्टि करती है. किसी एजेंट को निजी एपीआई, निजी डेटा सेव करने की जगह या निजी बकेट का ऐक्सेस देने का यह सबसे सही तरीका है.
+將 `credential` 加入許可清單規則，Proxy 就會驗證傳送至該網域的每個外送要求。建議您採用這種方式，授予代理程式非公開 API、私人存放區或私人儲存空間的存取權。
 
-एक ही अनुमति वाली सूची में, पुष्टि किए गए और पुष्टि नहीं किए गए नियमों को मिक्स किया जा सकता है:
+您可以在同一個允許清單中混用已驗證和未驗證的規則：
 
 ### Python
 
@@ -198,6 +278,58 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("antigravity-preview-09-2026"),
+            Input: interactions.NewInteractionsInput("Sync the open Jira issues into the tracking sheet in my repo."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(interactions.Environment{
+                Sources: []interactions.Source{
+                    {
+                        Type:   interactions.SourceTypeRepository.ToPointer(),
+                        Source: genai.Ptr("https://github.com/your-org/backend"),
+                        Target: genai.Ptr("/backend-app"),
+                    },
+                },
+                Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+                    Allowlist: []interactions.AllowlistEntry{
+                        {Domain: "github.com", Credential: genai.Ptr("github-production")},
+                        {Domain: "api.atlassian.com", Credential: genai.Ptr("jira-oauth")},
+                        {Domain: "*.googleapis.com"},
+                    },
+                }))),
+            })),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -227,22 +359,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-प्रॉक्सी, हर अनुरोध के लिए क्रेडेंशियल को हल करता है. इसलिए, `oauth2` क्रेडेंशियल, अपने ऐक्सेस टोकन को पारदर्शी तरीके से रीफ़्रेश करता है. ऐक्सेस टोकन की समयसीमा खत्म होने पर, लंबे समय तक चलने वाला इंटरैक्शन नहीं रुकता.
+由於 Proxy 會為每個要求解析憑證，因此 `oauth2` 憑證會以透明方式重新整理存取權杖。存取權杖過期時，長時間執行的互動不會中斷。
 
-### `credential` और `transform` को मिलाकर बनाई गई इमेज
+### 合併 `credential` 和 `transform`
 
-अनुमति वाली सूची के नियमों में, इनलाइन [`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#private-sources) ऑब्जेक्ट भी स्वीकार किया जाता है. यह ऑब्जेक्ट, नियम पर सीधे तौर पर हेडर सेट करता है. दोनों ही तरीके, वायर पर इग्रेस प्रॉक्सी लागू करते हैं. इसलिए, दोनों ही मामलों में हेडर वैल्यू, सैंडबॉक्स में कभी मौजूद नहीं होती. दोनों फ़ील्ड, एक ही नियम में दिख सकते हैं.
+允許清單規則也接受內嵌的 [`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#private-sources) 物件，可直接在規則中設定標頭。這兩種機制都會由線路上的輸出 Proxy 套用，因此在兩種情況下，標頭值都不會出現在沙箱中。這兩個欄位可以出現在同一條規則中。
 
-| नियम का कॉन्फ़िगरेशन | व्यवहार |
+| 規則設定 | 行為 |
 | --- | --- |
-| सिर्फ़ `credential` | प्रॉक्सी, क्रेडेंशियल को हल करता है और डोमेन के हर अनुरोध पर उसका हेडर डालता है. |
-| सिर्फ़ `transform` | स्टैटिक हेडर इंजेक्शन. आपने जो हेडर लिखे हैं उन्हें उसी तरह भेजा जाता है. |
-| दोनों | सबसे पहले क्रेडेंशियल लागू होता है. इसके बाद, `transform` सबसे ऊपर मर्ज हो जाता है. अगर दोनों हेडर एक ही कुंजी सेट करते हैं, तो साफ़ तौर पर बताए गए `transform` हेडर को प्राथमिकता दी जाती है. |
-| न तो सक्षम और न ही असक्षम | डोमेन को अनुमति है और कोई भी हेडर इंजेक्ट नहीं किया गया है. |
+| 僅觀看`credential` | Proxy 會解析憑證，並在每次向網域發出的要求中插入憑證標頭。 |
+| 僅觀看`transform` | 靜態標頭插入。您撰寫的標頭會照常傳送。 |
+| 兩者皆有 | 系統會先套用憑證，然後在頂端合併 `transform`。如果兩者都設定相同的鍵，則以明確的 `transform` 標頭為準。 |
+| 以上皆非 | 網域已獲准，且未插入任何標頭。 |
 
-क्रेडेंशियल का इस्तेमाल तब किया जाता है, जब आपको किसी सीक्रेट को एक बार सेव करना हो और उसे अपने प्रोजेक्ट के हर एनवायरमेंट, एजेंट, और ट्रिगर से रेफ़रंस करना हो. साथ ही, जब आपको ऐक्सेस टोकन को रीफ़्रेश और रोटेट करने की सुविधा चाहिए हो. इनलाइन `transform` तब काम करता है, जब वैल्यू किसी एक कॉल से जुड़ी हो. उदाहरण के लिए, कोई ऐसा टोकन जिसे आपने इंटरैक्शन बनाने से ठीक पहले जनरेट किया हो.
+如果您想儲存一次密碼，並從專案中的每個環境、代理程式和觸發程序參照該密碼，以及想讓系統為您處理存取權杖重新整理和輪替作業，就適合使用憑證。如果值屬於單一呼叫，則適合使用內嵌 `transform`，例如您在建立互動前自行產生的權杖。
 
-इन दोनों को मिलाकर इस्तेमाल करना आम बात है. क्रेडेंशियल में पुष्टि करने वाला हेडर होता है. साथ ही, `transform` उसी अनुरोध में वह जानकारी जोड़ता है जो अपस्ट्रीम सेवा को चाहिए:
+這兩者通常會合併使用。憑證會攜帶驗證標頭，而 `transform` 會在同一要求中新增上游服務預期的任何其他內容：
 
 ```
 {
@@ -254,11 +386,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-किसी सीक्रेट को इनलाइन `transform` से क्रेडेंशियल में ले जाने के लिए, उसे `POST /credentials` के साथ सेव करें. इसके बाद, `transform` में मौजूद auth हेडर को `"credential": "<id>"` से बदलें. साथ ही, `transform` ऑब्जेक्ट के बाकी हिस्से को वैसे ही छोड़ दें.
+如要將密鑰從內嵌 `transform` 移至憑證，請使用 `POST /credentials` 儲存密鑰，將 `transform` 中的驗證標頭替換為 `"credential": "<id>"`，並保留 `transform` 物件的其餘部分。
 
-## एमसीपी सर्वर के साथ क्रेडेंशियल का इस्तेमाल करना
+## 搭配 MCP 伺服器使用憑證
 
-रिमोट एमसीपी सर्वर, एक ही `credential` फ़ील्ड का इस्तेमाल करते हैं. इसे `mcp_server` टूल पर सेट करें. इसके बाद, प्रॉक्सी उस सर्वर पर किए गए हर अनुरोध में पुष्टि करने वाला हेडर जोड़ देगा:
+遠端 MCP 伺服器會採用相同的 `credential` 欄位。在 `mcp_server` 工具上設定，Proxy 會將驗證標頭插入傳送至該伺服器的每個要求：
 
 ### Python
 
@@ -292,6 +424,55 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("antigravity-preview-09-2026"),
+            Input: interactions.NewInteractionsInput("Create a new issue in my-org/my-repo"),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(interactions.Environment{
+                Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+                    Allowlist: []interactions.AllowlistEntry{
+                        {Domain: "api.githubcopilot.com", Credential: genai.Ptr("github-production")},
+                    },
+                }))),
+            })),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.MCPServer{
+                    Name: genai.Ptr("github"),
+                    URL:  genai.Ptr("https://api.githubcopilot.com/mcp"),
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -313,8 +494,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential` और `headers`, अनुमति वाली सूची के लिए लागू होने वाले प्राथमिकता के नियम का पालन करते हैं.
-क्रेडेंशियल पहले लागू होता है और `headers` सबसे ऊपर मर्ज होता है. इसलिए, अगर दोनों एक ही कुंजी सेट करते हैं, तो साफ़ तौर पर बताए गए हेडर को प्राथमिकता दी जाती है:
+`credential` 和 `headers` 遵循與許可清單相同的優先順序規則。
+系統會先套用憑證，然後合併 `headers`，因此如果兩者都設定相同的金鑰，則會採用明確的標頭：
 
 ```
 {
@@ -328,14 +509,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-किसी सीक्रेट को इनलाइन `headers` से क्रेडेंशियल में ले जाने के लिए, उसे `POST /credentials` के साथ सेव करें. इसके बाद, `headers` में मौजूद पुष्टि करने की एंट्री को `credential` से बदलें.
-अन्य हेडर को उनकी जगह पर ही रहने दें.
+如要將密鑰從內嵌 `headers` 移至憑證，請使用 `POST /credentials` 儲存密鑰，並將 `headers` 中的驗證項目替換為 `credential`。
+其他標題則維持原位。
 
-## क्रेडेंशियल को एनवायरमेंट वैरिएबल के तौर पर इस्तेमाल करना
+## 將憑證設為環境變數
 
-कुछ क्लाइंट लाइब्रेरी, अनुरोध हेडर के तौर पर स्वीकार करने के बजाय, प्रोसेस एनवायरमेंट से सीक्रेट पढ़ती हैं. सॉकेट मोड और लॉन्ग-पोलिंग क्लाइंट, सामान्य तौर पर इस्तेमाल किए जाते हैं.
+部分用戶端程式庫會從程序環境讀取密鑰，而不是將密鑰當做要求標頭接受。Socket 模式和長輪詢用戶端是常見情況。
 
-`environment_variable` में मौजूद किसी वैरिएबल के नाम से `environment.env` क्रेडेंशियल को बाइंड करें:
+將 `environment_variable` 憑證繫結至 `environment.env` 下的變數名稱：
 
 ### Python
 
@@ -369,6 +550,48 @@ const interaction = await client.interactions.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("antigravity-preview-09-2026"),
+            Input: interactions.NewInteractionsInput("Run the sync script and check notifications."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(interactions.Environment{
+                Env: genai.Ptr(interactions.NewEnv(map[string]interactions.EnvVar{
+                    "NODE_ENV":        {Value: genai.Ptr("production")},
+                    "SLACK_BOT_TOKEN": {Credential: genai.Ptr("slack-bot-token")},
+                })),
+            })),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -388,21 +611,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`env`, लिटरल स्ट्रिंग और क्रेडेंशियल रेफ़रंस को साथ-साथ स्वीकार करता है. इस विकल्प का इस्तेमाल करके, कंटेनर में लिटरल स्ट्रिंग को सामान्य टेक्स्ट वैरिएबल के तौर पर इंजेक्ट किया जाता है.
+`env` 會並排接受字串和憑證參照。系統會將字串常值以一般純文字變數的形式，插入容器中。
 
-क्रेडेंशियल रेफ़रंस नहीं है. इस वैरिएबल को प्लेसहोल्डर `__GEMINI_CRED_<credential-id>__` मिलता है. साथ ही, प्रॉक्सी सिर्फ़ उन आउटबाउंड अनुरोधों के लिए असली सीक्रेट को स्वैप करता है जो क्रेडेंशियल के `trusted_domains` में मौजूद किसी डोमेन पर जाते हैं. किसी दूसरे डोमेन के अनुरोध को अस्वीकार कर दिया जाता है. इसलिए, सीक्रेट कभी भी पेरीमीटर से बाहर नहीं जाता है और उसकी जगह पर प्लेसहोल्डर नहीं भेजा जाता है.
+憑證參照則否。變數會收到預留位置 `__GEMINI_CRED_<credential-id>__`，且 Proxy 只會針對傳送至憑證 `trusted_domains` 中網域的外送要求，替換為實際密鑰。系統會拒絕傳送至任何其他網域的要求，因此密碼絕不會離開 perimeter，也不會傳送預留位置。
 
-हर `environment_variable` क्रेडेंशियल पर `trusted_domains` सेट करें. यह एक कंट्रोल है, जिससे यह तय होता है कि सीक्रेट का इस्तेमाल कहां किया जा सकता है.
+在每個 `environment_variable` 憑證上設定 `trusted_domains`。這項控制項會指定密鑰的使用範圍。
 
-## क्रेडेंशियल बनाना
+## 建立憑證
 
-हर क्रिएट अनुरोध के लिए, `type` और उस टाइप के लिए ज़रूरी फ़ील्ड की ज़रूरत होती है.
+每項建立要求都需要 `type`，以及該類型要求的任何欄位。
 
-REST को सीधे तौर पर कॉल करते समय, सभी फ़ील्ड के नाम snake\_case का इस्तेमाल करते हैं. camelCase फ़ील्ड भेजने पर, `400` दिखता है.
+直接呼叫 REST 時，所有欄位名稱都會使用 snake\_case。傳送 camelCase 欄位會傳回 `400`。
 
-### बियरर टोकन
+### 不記名權杖
 
-बेयरर टोकन क्रेडेंशियल के लिए सिर्फ़ `token` की ज़रूरत होती है:
+持有人權杖憑證只需要：`token`
 
 ### Python
 
@@ -424,6 +647,42 @@ const credential = await client.credentials.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Create(ctx, operations.CreateCredentialRequest{
+        Body: credentials.NewCredentialCreateParams(credentials.HTTPBearerConfig{
+            ID:    "github-production",
+            Token: "ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Created credential: %s\n", res.Credential.ID)
+}
+```
+
 ### REST
 
 ```
@@ -437,7 +696,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-जवाब में सिर्फ़ मेटाडेटा मिलता है, टोकन कभी नहीं:
+回應只會傳回中繼資料，絕不會傳回權杖：
 
 ```
 {
@@ -449,7 +708,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-डिफ़ॉल्ट रूप से, प्रॉक्सी `Authorization: Bearer <token>` भेजता है. किसी ऐसी सेवा को टारगेट करने के लिए `header_name` और `prefix` को बदलें जो कुछ और चाहती है:
+根據預設，Proxy 會傳送 `Authorization: Bearer <token>`。覆寫
+`header_name` 和 `prefix`，以指定預期其他內容的服務：
 
 ### Python
 
@@ -475,6 +735,44 @@ const credential = await client.credentials.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Create(ctx, operations.CreateCredentialRequest{
+        Body: credentials.NewCredentialCreateParams(credentials.HTTPBearerConfig{
+            ID:         "my-api-key",
+            Token:      "key_xxxxxxxxxxxx",
+            HeaderName: genai.Ptr("x-goog-api-key"),
+            Prefix:     genai.Ptr(""),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Created credential: %s\n", res.Credential.ID)
+}
+```
+
 ### REST
 
 ```
@@ -490,11 +788,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-इस कॉन्फ़िगरेशन से, `x-goog-api-key: key_xxxxxxxxxxxx` हेडर जनरेट होता है.
+這項設定會產生 `x-goog-api-key: key_xxxxxxxxxxxx` 標頭。
 
-इस टेबल में दिखाया गया है कि `header_name` और `prefix` को कैसे जोड़ा जाता है:
+下表顯示 `header_name` 和 `prefix` 的組合方式：
 
-| कॉन्फ़िगरेशन | इंजेक्ट किया गया हेडर |
+| 設定 | 插入的標頭 |
 | --- | --- |
 | `{"token": "ghp_xxx"}` | `Authorization: Bearer ghp_xxx` |
 | `{"token": "sk_live_xxx"}` | `Authorization: Bearer sk_live_xxx` |
@@ -503,7 +801,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 
 ### OAuth2
 
-OAuth2 क्रेडेंशियल के लिए `client_id`, `client_secret`, `refresh_token`, और `token_url` की ज़रूरत होती है. `scopes` फ़ील्ड की वैल्यू देना ज़रूरी नहीं है:
+OAuth2 憑證需要 `client_id`、`client_secret`、`refresh_token` 和 `token_url`。`scopes` 欄位為選填：
 
 ### Python
 
@@ -533,6 +831,46 @@ const credential = await client.credentials.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Create(ctx, operations.CreateCredentialRequest{
+        Body: credentials.NewCredentialCreateParams(credentials.OAuth2Config{
+            ID:           "jira-oauth",
+            ClientID:     "my-client-id",
+            ClientSecret: "my-client-secret",
+            TokenURL:     "https://auth.atlassian.com/oauth/token",
+            RefreshToken: "rt_xxxxxxxxxxxxxxxxxxxx",
+            Scopes:       []string{"read:jira-work", "write:jira-work"},
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Created OAuth2 credential: %s\n", res.Credential.ID)
+}
+```
+
 ### REST
 
 ```
@@ -550,9 +888,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-OAuth2 क्रेडेंशियल बनाने पर, `token_url` के साथ लाइव टोकन एक्सचेंज किया जाता है, ताकि यह पुष्टि की जा सके कि कॉन्फ़िगरेशन काम कर रहा है. क्रेडेंशियल सिर्फ़ तब सेव किया जाता है, जब प्रोवाइडर `access_token` वाला टोकन रिस्पॉन्स भेजता है. JSON और form-urlencoded, दोनों तरह के रिस्पॉन्स स्वीकार किए जाते हैं.
+建立 OAuth2 憑證時，系統會對 `token_url` 執行即時權杖交換，確認設定是否正常運作。只有在提供者傳回含有 `access_token` 的成功權杖回應時，系統才會儲存憑證。系統接受 JSON 和 form-urlencoded 回應。
 
-इसका मतलब है कि आपको खाता बनाते समय, एक मान्य और समयसीमा खत्म न हुआ रीफ़्रेश टोकन चाहिए. अगर सेवा देने वाली कंपनी, एक्सचेंज करने का अनुरोध अस्वीकार कर देती है, तो आपको गड़बड़ी का यह मैसेज दिखेगा:
+也就是說，您必須在建立時提供有效且未過期的更新權杖。如果供應商拒絕兌換，系統會傳回錯誤：
 
 ```
 {
@@ -563,11 +901,11 @@ OAuth2 क्रेडेंशियल बनाने पर, `token_url` क
 }
 ```
 
-स्टोर किए जाने के बाद, प्रॉक्सी ऐक्सेस टोकन की समयसीमा खत्म होने पर उन्हें रीफ़्रेश करता है. अगर सेवा देने वाली कंपनी, रीफ़्रेश टोकन को रोटेट करती है और रीफ़्रेश के दौरान नया टोकन देती है, तो नया टोकन, सेव किए गए टोकन की जगह अपने-आप ले लेता है.
+儲存後，Proxy 會在存取權杖到期時重新整理。如果供應商輪替更新權杖，並在更新期間傳回新權杖，系統會自動以新權杖取代儲存的權杖。
 
-### एनवायरमेंट वैरिएबल
+### 環境變數
 
-`environment_variable` क्रेडेंशियल के लिए, `value` और `injection_location` की ज़रूरत होती है:
+`environment_variable` 認證需要 `value` 和 `injection_location`：
 
 ### Python
 
@@ -593,6 +931,44 @@ const credential = await client.credentials.create({
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Create(ctx, operations.CreateCredentialRequest{
+        Body: credentials.NewCredentialCreateParams(credentials.EnvironmentVariableConfig{
+            ID:                "slack-bot-token",
+            Value:             "xoxb-xxxxxxxxxxxx-xxxxxxxxxxxx",
+            TrustedDomains:    []string{"*.slack.com", "slack.com"},
+            InjectionLocation: credentials.NewEnvironmentVariableConfigInjectionLocation(credentials.InjectionLocationEnumHeader),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Created environment variable credential: %s\n", res.Credential.ID)
+}
+```
+
 ### REST
 
 ```
@@ -608,19 +984,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-`injection_location` फ़ील्ड, प्रॉक्सी को यह बताता है कि आउटबाउंड अनुरोध में सीक्रेट को कहां बदलना है. यह `header`, `query` या `body` को स्वीकार करता है. अगर किसी सेवा के लिए एक से ज़्यादा की ज़रूरत होती है, तो इसे एक स्ट्रिंग या एक कलेक्शन के तौर पर स्वीकार किया जाता है:
+`injection_location` 欄位會告知 Proxy 要在傳出要求中的哪個位置替換密鑰。這個方法接受 `header`、`query` 或 `body`，可做為單一字串，或在服務需要多個時做為陣列：
 
 ```
 "injection_location": ["header", "query"]
 ```
 
-बदलाव सिर्फ़ उन जगहों पर होता है जिनकी जानकारी आपने दी है. अगर किसी अनुरोध में प्लेसहोल्डर को कहीं और रखा गया है, तो उसे आगे भेजने के बजाय अस्वीकार कर दिया जाता है.
+系統只會在您列出的位置進行替換。如果要求在其他位置攜帶預留位置，系統會拒絕要求，而不是傳送要求。
 
-क्रेडेंशियल को वैरिएबल के नाम से बाइंड करने के लिए, [क्रेडेंशियल को एनवायरमेंट वैरिएबल के तौर पर इस्तेमाल करना](#environment-variables) लेख पढ़ें.
+如要將憑證繫結至變數名稱，請參閱「[將憑證做為環境變數使用](#environment-variables)」。
 
-### जनरेट किए गए आईडी
+### 產生的 ID
 
-`id` फ़ील्ड ज़रूरी नहीं है. इसे हटा दें. इसके बाद, सेवा यूयूआईडी जनरेट करेगी:
+`id` 欄位為選填。省略此項，服務會產生 UUID：
 
 ```
 {
@@ -632,11 +1008,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-जब आपको सभी इंटरैक्शन में इस्तेमाल करने के लिए, ऐसा रेफ़रंस चाहिए जिसे जल्दी बदला न जाए और जिसे आसानी से पढ़ा जा सके, तब अपना आईडी दें. आईडी, संसाधन के पाथ में दिखता है. इसलिए, हाइफ़न या अंडरस्कोर वाले छोटे अक्षरों और अंकों का इस्तेमाल करें.
+如果您想在互動中使用穩定且可讀取的參照，請提供自己的 ID。由於 ID 會顯示在資源路徑中，建議使用含連字號或底線的小寫英數字元。
 
-## क्रेडेंशियल की सूची बनाना
+## 列出憑證
 
-अपने प्रोजेक्ट से जुड़े क्रेडेंशियल की सूची बनाएं. जवाब के बैच के साइज़ को कंट्रोल करने के लिए, पेज नंबर के पैरामीटर इस्तेमाल करें.
+列出專案所屬的憑證。使用分頁參數控制回應批次大小。
 
 ### Python
 
@@ -655,6 +1031,40 @@ for (const credential of response.credentials) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.List(ctx, operations.ListCredentialsRequest{
+        PageSize: genai.Ptr(10),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, cred := range res.CredentialListResponse.Credentials {
+        fmt.Printf("Credential ID: %s, Type: %v\n", cred.ID, cred.GetType())
+    }
+}
+```
+
 ### REST
 
 ```
@@ -662,7 +1072,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-जवाब में सिर्फ़ मेटाडेटा शामिल होता है:
+回應只包含中繼資料：
 
 ```
 {
@@ -686,16 +1096,16 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 }
 ```
 
-अगला पेज फ़ेच करने के लिए, `next_page_token` को `page_token` के तौर पर पास करें. ज़्यादा नतीजे न होने पर, इस फ़ील्ड को शामिल नहीं किया जाता.
+將 `next_page_token` 做為 `page_token` 傳回，即可擷取下一頁。如果沒有其他結果，則會省略此欄位。
 
-| पैरामीटर | टाइप | ब्यौरा |
+| 參數 | 類型 | 說明 |
 | --- | --- | --- |
-| `page_size` | पूर्णांक | हर पेज पर क्रेडेंशियल की ज़्यादा से ज़्यादा संख्या. |
-| `page_token` | स्ट्रिंग | पिछले जवाब के `next_page_token` से मिला टोकन. |
+| `page_size` | 整數 | 每頁的憑證數量上限。 |
+| `page_token` | 字串 | 前一則回覆的 `next_page_token` 中的權杖。 |
 
-## क्रेडेंशियल पाना
+## 取得憑證
 
-किसी क्रेडेंशियल का मेटाडेटा, उसकी आईडी के हिसाब से वापस पाएं.
+依 ID 擷取特定憑證的中繼資料。
 
 ### Python
 
@@ -711,6 +1121,38 @@ const credential = await client.credentials.get("github-production");
 console.log(`Credential ID: ${credential.id}, Status: ${credential.status}`);
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Get(ctx, operations.GetCredentialRequest{
+        ID: "github-production",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Credential ID: %s, Status: %v\n", res.Credential.ID, res.Credential.GetStatus())
+}
+```
+
 ### REST
 
 ```
@@ -718,7 +1160,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-जवाब कुछ ऐसा दिखता है:
+回應類似下列內容：
 
 ```
 {
@@ -730,7 +1172,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-ऐसे क्रेडेंशियल का अनुरोध करने पर जो मौजूद नहीं है, `404` दिखता है:
+要求不存在的憑證會傳回 `404`：
 
 ```
 {
@@ -741,13 +1183,13 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-## क्रेडेंशियल बदलना
+## 輪替憑證
 
-किसी सीक्रेट को बदलें. हालांकि, ऐसा करते समय, अनुमति वाली सूची के किसी नियम, टूल की परिभाषा या एनवायरमेंट वैरिएबल में कोई बदलाव न करें जो उसे रेफ़रंस करता है. अगले प्रॉक्सी रिज़ॉल्यूशन पर रोटेशन लागू होता है.
+替換密鑰，但不要變更任何參照該密鑰的許可清單規則、工具定義或環境變數。輪替會在下次 Proxy 解析時生效。
 
-अनुरोध में `type` और वे फ़ील्ड शामिल होने चाहिए जिनमें आपको बदलाव करना है. जिन फ़ील्ड को नहीं बदला जाता उनकी मौजूदा वैल्यू बनी रहती हैं.
+要求必須包含 `type`，以及要變更的欄位。如果省略欄位，系統會保留目前的值。
 
-बियरर टोकन को रोटेट करना:
+輪替不記名權杖：
 
 ### Python
 
@@ -768,6 +1210,42 @@ const credential = await client.credentials.update("github-production", {
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Update(ctx, operations.UpdateCredentialRequest{
+        ID: "github-production",
+        Body: credentials.NewCredentialUpdate(credentials.HTTPBearerUpdateConfig{
+            Token: genai.Ptr("ghp_new_xxxxxxxxxxxxxxxxxxxx"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Updated credential %s at %v\n", res.Credential.ID, res.Credential.GetUpdateTime())
+}
+```
+
 ### REST
 
 ```
@@ -780,7 +1258,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/gith
 }'
 ```
 
-OAuth2 रीफ़्रेश टोकन को रोटेट करने का तरीका:
+輪替 OAuth2 更新權杖：
 
 ### Python
 
@@ -801,6 +1279,42 @@ const credential = await client.credentials.update("jira-oauth", {
 });
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/credentials"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Credentials.Update(ctx, operations.UpdateCredentialRequest{
+        ID: "jira-oauth",
+        Body: credentials.NewCredentialUpdate(credentials.OAuth2UpdateConfig{
+            RefreshToken: genai.Ptr("rt_new_xxxxxxxxxxxxxxxxxxxx"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Updated credential %s at %v\n", res.Credential.ID, res.Credential.GetUpdateTime())
+}
+```
+
 ### REST
 
 ```
@@ -813,7 +1327,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }'
 ```
 
-जवाब में नया `update_time` दिखता है:
+回覆內容會反映新的 `update_time`：
 
 ```
 {
@@ -825,11 +1339,11 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }
 ```
 
-क्रेडेंशियल का `type`, क्रेडेंशियल बनाते समय तय किया जाता है. इसे बदलने के लिए, क्रेडेंशियल मिटाएं और नया क्रेडेंशियल बनाएं.
+憑證的 `type` 在建立時即固定，如要變更，請刪除憑證並重新建立。
 
-## क्रेडेंशियल मिटाना
+## 刪除憑證
 
-जब किसी क्रेडेंशियल की ज़रूरत न हो, तो उसे और उससे जुड़े सेव किए गए सीक्रेट को मिटाएं.
+不再需要憑證時，請刪除憑證和儲存的密鑰。
 
 ### Python
 
@@ -843,6 +1357,35 @@ client.credentials.delete(id="github-production")
 await client.credentials.delete("github-production");
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Credentials.Delete(ctx, operations.DeleteCredentialRequest{
+        ID: "github-production",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -850,55 +1393,55 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-सही तरीके से मिटने पर, जवाब के तौर पर खाली ऑब्जेक्ट दिखता है:
+如果刪除成功，會傳回空白物件：
 
 ```
 {}
 ```
 
-अगर अनुमति वाली सूची का कोई नियम, टूल या एनवायरमेंट वैरिएबल अब भी आईडी को रेफ़रंस कर रहा है, तो वह काम नहीं करेगा. इसलिए, उन्हें पहले अपडेट करें.
+如果任何允許清單規則、工具或環境變數仍參照該 ID，將無法解析，因此請先更新這些項目。
 
-## फ़ील्ड रेफ़रंस
+## 欄位參照
 
-हर क्रेडेंशियल में मौजूद सामान्य फ़ील्ड:
+所有憑證都有的欄位：
 
-| फ़ील्ड | प्रकार | ज़रूरी है | ब्यौरा |
+| 欄位 | 類型 | 必要 | 說明 |
 | --- | --- | --- | --- |
-| `id` | स्ट्रिंग | नहीं | यूनीक आइडेंटिफ़ायर. अगर इसे शामिल नहीं किया जाता है, तो इसे यूयूआईडी के तौर पर जनरेट किया जाता है. |
-| `type` | स्ट्रिंग | हां | `bearer_token`, `oauth2`, `environment_variable` में से कोई एक. |
-| `status` | स्ट्रिंग | रीड-ओनली | क्रेडेंशियल की मौजूदा स्थिति. |
-| `create_time` | स्ट्रिंग | रीड-ओनली | आरएफ़सी 3339 फ़ॉर्मैट में बनाए जाने का टाइमस्टैंप. |
-| `update_time` | स्ट्रिंग | रीड-ओनली | यह आखिरी अपडेट का आरएफ़सी 3339 टाइमस्टैंप है. |
+| `id` | 字串 | 否 | 專屬 ID。如果省略，系統會以 UUID 形式產生。 |
+| `type` | 字串 | 是 | 可能的值為 `bearer_token`、`oauth2` 或 `environment_variable`。 |
+| `status` | 字串 | 唯讀 | 憑證的目前狀態。 |
+| `create_time` | 字串 | 唯讀 | RFC 3339 建立時間戳記。 |
+| `update_time` | 字串 | 唯讀 | 上次更新的 RFC 3339 時間戳記。 |
 
-`bearer_token` के लिए फ़ील्ड:
+「`bearer_token`」的欄位：
 
-| फ़ील्ड | प्रकार | ज़रूरी है | ब्यौरा |
+| 欄位 | 類型 | 必要 | 說明 |
 | --- | --- | --- | --- |
-| `token` | स्ट्रिंग | हां | सिर्फ़ लिखने के लिए. टोकन की वैल्यू. |
-| `header_name` | स्ट्रिंग | नहीं | इंजेक्ट किया जाने वाला हेडर. डिफ़ॉल्ट रूप से, यह `Authorization` पर सेट होता है. |
-| `prefix` | स्ट्रिंग | नहीं | कीमत का प्रीफ़िक्स. डिफ़ॉल्ट रूप से, यह `Bearer` पर सेट होता है. किसी भी विकल्प को चुनने के लिए, `""` पर सेट करें. |
+| `token` | 字串 | 是 | 唯寫。權杖值。 |
+| `header_name` | 字串 | 否 | 要插入的標頭。預設值為 `Authorization`。 |
+| `prefix` | 字串 | 否 | 值前置字元。預設為 `Bearer`。如要停用，請設為 `""`。 |
 
-`oauth2` के लिए फ़ील्ड:
+「`oauth2`」的欄位：
 
-| फ़ील्ड | प्रकार | ज़रूरी है | ब्यौरा |
+| 欄位 | 類型 | 必要 | 說明 |
 | --- | --- | --- | --- |
-| `client_id` | स्ट्रिंग | हां | OAuth2 क्लाइंट आईडी. |
-| `client_secret` | स्ट्रिंग | हां | सिर्फ़ लिखने के लिए. OAuth2 क्लाइंट सीक्रेट. |
-| `refresh_token` | स्ट्रिंग | हां | सिर्फ़ लिखने के लिए. ऐक्सेस टोकन पाने के लिए इस्तेमाल किया गया रीफ़्रेश टोकन. |
-| `token_url` | स्ट्रिंग | हां | टोकन सेवा देने वाली कंपनी का टोकन एंडपॉइंट. |
-| `scopes` | ऐरे | नहीं | अनुरोध करने के लिए OAuth के दायरे. |
+| `client_id` | 字串 | 是 | OAuth2 用戶端 ID。 |
+| `client_secret` | 字串 | 是 | 唯寫。OAuth2 用戶端密鑰。 |
+| `refresh_token` | 字串 | 是 | 唯寫。用於取得存取權杖的更新權杖。 |
+| `token_url` | 字串 | 是 | 提供者權杖端點。 |
+| `scopes` | 陣列 | 否 | 要要求的 OAuth 範圍。 |
 
-`environment_variable` के लिए फ़ील्ड:
+「`environment_variable`」的欄位：
 
-| फ़ील्ड | प्रकार | ज़रूरी है | ब्यौरा |
+| 欄位 | 類型 | 必要 | 說明 |
 | --- | --- | --- | --- |
-| `value` | स्ट्रिंग | हां | सिर्फ़ लिखने के लिए. सीक्रेट वैल्यू. |
-| `injection_location` | स्ट्रिंग या अरे | हां | सीक्रेट टोकन को कहां बदलना है. `header`, `query`, `body` में से एक या उससे ज़्यादा. |
-| `trusted_domains` | ऐरे | नहीं | बदलाव करने के लिए, मंज़ूरी पा चुके डोमेन पैटर्न. |
+| `value` | 字串 | 是 | 唯寫。密鑰值。 |
+| `injection_location` | 字串或陣列 | 是 | 要替換密鑰的位置。`header`、`query`、`body` 其中一或多個。 |
+| `trusted_domains` | 陣列 | 否 | 可替換的授權網域模式。 |
 
-## गड़बड़ियां
+## 錯誤
 
-गड़बड़ियों के लिए, `message` और `code` के साथ JSON ऑब्जेक्ट मिलता है:
+錯誤會傳回含有 `message` 和 `code` 的 JSON 物件：
 
 ```
 {
@@ -909,13 +1452,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 }
 ```
 
-| एचटीटीपी कोड स्थिति | `code` | वजह |
+| HTTP 狀態 | `code` | 原因 |
 | --- | --- | --- |
-| 400 | `invalid_request` | ज़रूरी फ़ील्ड मौजूद नहीं है, अज्ञात फ़ील्ड है, `type` काम नहीं करता या OAuth2 की पुष्टि नहीं हो पाई. |
-| 404 | `not_found` | इस आईडी वाला कोई क्रेडेंशियल नहीं है. |
-| 409 | `aborted` | उस आईडी वाला क्रेडेंशियल पहले से मौजूद है. |
+| 400 | `invalid_request` | 缺少必填欄位、欄位不明、不支援 `type`，或 OAuth2 驗證失敗。 |
+| 404 | `not_found` | 找不到該 ID 的憑證。 |
+| 409 | `aborted` | 已有 ID 相同的憑證。 |
 
-जिन फ़ील्ड की पहचान नहीं हो पाती उन्हें अनदेखा करने के बजाय अस्वीकार कर दिया जाता है. साथ ही, गड़बड़ी के नाम में फ़ील्ड का नाम शामिल होता है:
+系統會拒絕不明欄位，而非忽略，且錯誤會命名該欄位：
 
 ```
 {
@@ -926,18 +1469,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 }
 ```
 
-## आगे क्या करना है
+## 後續步驟
 
-- [एनवायरमेंट](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi): जानें कि एजेंट कोड कैसे चलाते हैं और फ़ाइलों को कैसे सेव करते हैं.
-- [एजेंट की खास जानकारी](https://ai.google.dev/gemini-api/docs/agents?hl=hi): मैनेज किए जाने वाले एजेंट के मुख्य सिद्धांतों के बारे में जानें.
-- [कस्टम एजेंट बनाना](https://ai.google.dev/gemini-api/docs/custom-agents?hl=hi): `AGENTS.md` और `SKILL.md` का इस्तेमाल करके, अपने एजेंट तय करें.
+- [環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw)：瞭解代理程式如何執行程式碼及保存檔案。
+- [代理程式總覽](https://ai.google.dev/gemini-api/docs/agents?hl=zh-tw)：瞭解受管理代理程式的核心概念。
+- [建構自訂代理](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-tw)：使用 `AGENTS.md` 和 `SKILL.md` 定義專屬代理。
 
-सुझाव भेजें
+提供意見
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया.
+上次更新時間：2026-09-24 (世界標準時間)。
 
-क्या आपको हमें और कुछ बताना है?
+想進一步說明嗎？
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]

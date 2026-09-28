@@ -1,201 +1,235 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-TW
-fetched_at: 2026-09-21T05:51:08.155026+00:00
-title: "\u63d0\u793a\u8a2d\u8a08\u7b56\u7565 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id
+fetched_at: 2026-09-28T06:16:34.853325+00:00
+title: "Strategi desain prompt \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-提供意見
+Kirim masukan
 
-# 提示設計策略
+# Strategi desain prompt
 
-*提示設計*是指建立提示或自然語言要求的程序，目的是讓語言模型提供準確、高品質的回覆。
+*Desain prompt* adalah proses pembuatan perintah, atau permintaan dalam bahasa alami,
+yang mendapatkan respons yang akurat dan berkualitas tinggi dari model bahasa.
 
-本頁面將介紹基本概念、策略和最佳做法，協助您開始設計提示，充分發揮 Gemini AI 模型的效用。
+Halaman ini memperkenalkan konsep dasar, strategi, dan praktik terbaik untuk membantu Anda mulai mendesain perintah agar dapat memanfaatkan model AI Gemini secara maksimal.
 
-## 主題專屬提示指南
+## Panduan perintah khusus topik
 
-想瞭解更多具體的提示策略嗎？歡迎參閱其他提示詞指南，瞭解如何：
+Mencari strategi perintah yang lebih spesifik? Lihat panduan perintah lainnya di:
 
-- [使用媒體檔案提示](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)
-- [圖像生成提示](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw#prompt-guide)
-- [提示生成影片](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw#prompt-guide)
+- [Memberi perintah dengan file media](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide)
+- [Membuat perintah untuk pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#prompt-guide)
+- [Memberikan perintah untuk pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id#prompt-guide)
 
-如要查看其他提示範例，請前往[提示範例庫](https://ai.google.dev/gemini-api/prompts?hl=zh-tw)，以互動方式瞭解本指南中分享的許多概念。
+Anda dapat menemukan contoh perintah lainnya di [galeri perintah](https://ai.google.dev/gemini-api/prompts?hl=id) yang dimaksudkan untuk menampilkan banyak konsep yang dibagikan dalam panduan ini secara interaktif.
 
-## 清楚明確的指令
+## Petunjuk yang jelas dan spesifik
 
-如要有效率地自訂模型行為，請提供清楚明確的指令。指令可以是問題、逐步完成的任務，也可以是複雜的指令，例如繪製使用者體驗和思維模式。
+Cara yang efektif dan efisien untuk menyesuaikan perilaku model adalah dengan memberikan instruksi yang jelas dan spesifik. Petunjuk dapat berupa pertanyaan,
+tugas langkah demi langkah, atau serumit memetakan pengalaman dan pola pikir pengguna.
 
-### 輸入
+### Input
 
-輸入內容是提示中必須提供的文字，模型會根據這些文字生成回覆。輸入內容可以是模型回答的問題 (問題型輸入內容)、模型執行的工作 (工作型輸入內容)、模型操作的實體 (實體型輸入內容)，或是模型補完或繼續編寫的不完整輸入內容 (補完型輸入內容)。
+Input adalah teks yang diperlukan dalam perintah yang harus diberikan respons oleh model. Input dapat berupa pertanyaan yang menjadi model jawaban (masukan pertanyaan), tugas yang dilakukan model (masukan tugas), suatu entitas model beroperasi (input entitas), atau sebagian input yang diselesaikan model atau berlanjut (input penyelesaian).
 
-| **輸入類型** | **提示** | **生成內容** |
+| **Jenis input** | **Perintah** | **Output yang dihasilkan** |
 | --- | --- | --- |
-| Question | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| 工作 | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| 實體 | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| Pertanyaan | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| Tugas | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| Entitas | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### 部分輸入完成
+#### Penyelesaian input sebagian
 
-生成式語言模型就像進階的自動完成工具，當您提供部分內容，模型就能補足其餘的部分，或提供模型認為是該內容的延續部分做為回覆。如果提供範例或脈絡資訊，模型就會將這些資訊納入考量。
+Model bahasa generatif berfungsi seperti alat pelengkapan otomatis canggih. Jika Anda menyediakan konten sebagian, model dapat memberikan konten lainnya atau yang dianggapnya sebagai kelanjutan dari konten tersebut sebagai respons. Saat melakukannya, jika Anda menyertakan contoh atau konteks, model dapat mempertimbangkan contoh atau konteks tersebut.
 
-以下範例提供含有指令和實體輸入內容的提示：
-
-|  |
-| --- |
-| **提示：**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **回覆：**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
-
-雖然模型已按照提示執行，但以自然語言撰寫指令有時可能很困難，而且模型會根據自己的解讀執行指令。舉例來說，餐廳菜單可能包含許多項目。如要縮減 JSON 回應的大小，您可能想省略未訂購的項目。在這種情況下，您可以提供範例和回覆前置字串，讓模型完成後續內容：
+Contoh berikut memberikan perintah dengan petunjuk dan input entity:
 
 |  |
 | --- |
-| **提示：**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **回覆：**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **Perintah:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Respons:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
 
-請注意，輸出內容中不包含「起司漢堡」，因為這不是訂單的一部分。
-
-雖然您可以使用提示指定簡單 JSON 回覆物件的格式，但我們建議您使用 Gemini API 的[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)功能，為回覆指定更複雜的 JSON 結構定義。
-
-### 限制
-
-指定讀取提示或生成回覆的任何限制。您可以告知模型該做什麼和不該做什麼。舉例來說，您可以在提示中指定摘要長度限制：
+Meskipun model melakukan seperti yang diminta, menulis petunjuk dalam bahasa alami
+terkadang dapat menjadi tantangan dan banyak bergantung pada interpretasi model.
+Misalnya, menu restoran mungkin berisi banyak item. Untuk mengurangi ukuran respons JSON, Anda mungkin ingin menghilangkan item yang tidak dipesan. Dalam
+hal ini, Anda dapat memberikan contoh dan awalan respons lalu membiarkan model
+menyelesaikannya:
 
 |  |
 | --- |
-| **提示：**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **回覆：**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **Perintah:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Respons:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
 
-### 回覆格式
+Perhatikan bagaimana "cheeseburger" dikecualikan dari output karena bukan bagian
+dari pesanan.
 
-你可以下指令，指定回覆格式。舉例來說，你可以要求回覆內容採用表格、項目符號清單、電梯簡報、關鍵字、句子或段落格式。下列系統指令會要求模型以對話口吻回覆：
+Meskipun Anda dapat menentukan format objek respons JSON sederhana menggunakan perintah, sebaiknya gunakan fitur [output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) Gemini API saat menentukan Skema JSON yang lebih kompleks untuk respons.
 
-|  |
-| --- |
-| **系統指令**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **提示**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **回覆：**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+### Batasan
 
-#### 使用完成策略設定回覆格式
-
-[完成策略](#completion)也有助於設定回覆格式。
-以下範例會提示模型建立文章大綱：
+Tentukan batasan apa pun dalam membaca perintah atau membuat respons. Anda dapat
+memberi tahu model apa yang boleh dan tidak boleh dilakukan. Misalnya, Anda dapat menentukan batasan
+dalam perintah tentang durasi ringkasan yang Anda inginkan:
 
 |  |
 | --- |
-| **提示：**    ``` Create an outline for an essay about hummingbirds. ```  **回覆：**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
+| **Perintah:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Respons:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
 
-提示未指定大綱格式，因此模型為您選擇了格式。如要讓模型以特定格式傳回大綱，可以加入代表大綱開頭的文字，讓模型根據您啟動的模式完成大綱。
+### Format respons
 
-|  |
-| --- |
-| **提示：**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **回覆：**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
-
-## 零樣本提示與少量樣本提示
-
-您可以在提示中加入範例，說明正確答案的樣貌。模型會嘗試從範例中找出模式和關係，並在生成回覆時套用這些模式和關係。含有少量範例的提示稱為「少量樣本」提示，而未提供範例的提示則稱為「零樣本」提示。Few-shot 提示通常用於控管模型回覆的格式、措辭、範圍或一般模式。使用具體且多樣化的示例協助模型縮小範圍，生成更準確的結果。
-
-建議您一律在提示中加入少量樣本範例。如果提示沒有少量樣本，效果可能較差。事實上，如果範例已清楚說明手邊的工作，您可以從提示中移除指令。
-
-下列零樣本提示會要求模型選擇最佳說明。
+Anda dapat memberikan petunjuk yang menentukan format respons. Misalnya, Anda dapat meminta agar respons diformat sebagai tabel, daftar berbutir, presentasi singkat, kata kunci, kalimat, atau paragraf. Petunjuk sistem berikut memberi tahu model untuk memberikan respons yang lebih komunikatif:
 
 |  |
 | --- |
-| **提示：**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **回覆：**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **Petunjuk sistem**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **Perintah**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Respons:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
 
-如果您的用途需要模型產生簡潔的回覆，可以在提示中加入偏好簡潔回覆的範例。
+#### Memformat respons dengan strategi penyelesaian
 
-以下提示提供兩個範例，說明偏好較短的說明。在回覆中，您可以看到範例引導模型選擇較短的說明 (`Explanation2`)，而非像先前一樣選擇較長的說明 (`Explanation1`)。
-
-|  |
-| --- |
-| **提示：**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **回覆：**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
-
-### 最佳範例數量
-
-Gemini 等模型通常可以從幾個範例中找出模式，但您可能需要嘗試在提示中提供不同數量的範例，才能獲得最佳結果。但如果提供太多範例，模型可能會開始[過度配適](https://developers.google.com/machine-learning/glossary?hl=zh-tw#overfitting)範例的回覆。
-
-### 格式一致
-
-請確保少量樣本的結構和格式相同，以免回應的格式不符預期。在提示中加入少量樣本的主要目標之一，是向模型展示回覆格式。因此，請務必確保所有範例的格式一致，特別是 XML 標記、空白字元、換行符號和範例分隔符號。
-
-## 新增情境
-
-您可以在提示中加入模型解決問題所需的指示和資訊，而非假設模型包含所有必要資訊。這類脈絡資訊可協助模型瞭解限制，以及您要求模型執行的詳細內容。
-
-以下範例要求模型提供路由器疑難排解指南：
+[Strategi penyelesaian](#completion) juga dapat membantu memformat respons.
+Contoh berikut meminta model untuk membuat garis besar esai:
 
 |  |
 | --- |
-| **提示：**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **回覆：**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **Perintah:**    ``` Create an outline for an essay about hummingbirds. ```  **Respons:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
 
-回覆內容看起來是通用的疑難排解資訊，與路由器或 LED 指示燈的狀態無關。
-
-如要自訂特定路由器的回覆，可以在提示中加入路由器的疑難排解指南，做為模型提供回覆時的參考情境。
+Perintah tidak menentukan format untuk garis besar dan model telah memilih format untuk Anda. Agar model mengembalikan garis besar dalam format tertentu, Anda dapat menambahkan teks yang mewakili awal garis besar dan membiarkan model menyelesaikannya berdasarkan pola yang Anda mulai.
 
 |  |
 | --- |
-| **提示：**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **回覆：**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **Perintah:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Respons:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
 
-## 將提示拆解為多個部分
+## Prompt zero-shot vs few-shot
 
-如果應用情境需要複雜提示，您可以將提示拆解成簡單的組成部分，協助模型管理這類複雜性。
+Anda dapat menyertakan contoh dalam prompt yang menunjukkan tampilan penerapannya dengan benar pada model. Model mencoba mengidentifikasi pola dan hubungan dari contoh-contoh tersebut dan menerapkannya saat membuat respons. Perintah yang berisi beberapa contoh disebut perintah *few-shot*, sedangkan perintah yang tidak memberikan contoh disebut perintah *zero-shot*. Prompt few-shot sering digunakan
+untuk mengatur pemformatan, frasa, cakupan, atau pola umum respons model. Gunakan contoh yang spesifik dan bervariasi untuk membantu model mempersempit fokusnya dan menghasilkan hasil yang lebih akurat.
 
-1. **將指令細分成多個提示：**不要在一個提示中加入多個指令，而是為每個指令建立一個提示。您可以根據使用者的輸入內容，選擇要處理的提示。
-2. **串連提示：**如要處理涉及多個連續步驟的複雜工作，請將每個步驟變成一個提示，並將提示串連在一起。在這個提示的連續鏈結中，序列中一個提示的輸出內容會成為下一個提示的輸入內容。序列中最後一個提示的輸出內容就是最終輸出內容。
-3. **匯總回應：**匯總是指您想對資料的不同部分執行不同的平行工作，並匯總結果以產生最終輸出內容。舉例來說，您可以指示模型對資料的第一部分執行一項作業，對其餘資料執行另一項作業，然後彙整結果。
+Sebaiknya selalu sertakan contoh few-shot dalam perintah Anda. Perintah tanpa few-shot examples cenderung kurang efektif. Bahkan, Anda dapat menghapus
+petunjuk dari perintah jika contoh Anda cukup jelas dalam menunjukkan
+tugas yang sedang dilakukan.
 
-## 嘗試各種模型參數
+Petunjuk zero-shot berikut meminta model untuk memilih penjelasan terbaik.
 
-您傳送至模型的每個呼叫都含有參數值，用來控制模型生成回覆的方式，參數值不同，生成的結果也可能會不同。實驗不同參數值，取得最適合工作目標的結果。不同模型可用的參數不盡相同。最常見的參數如下：
+|  |
+| --- |
+| **Perintah:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Respons:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
 
-1. **輸出詞元數量上限：**指定回覆中可生成的詞元數量上限。一個符記約為四個字元，100 個符記約為 60 到 80 個字。
-2. **溫度：**溫度參數會決定選取詞元時的隨機程度。生成回覆時會使用溫度參數進行取樣，這發生在套用 `topP` 和 `topK` 時。如果您想藉由提示生成更具確定性、較不具開放性的回覆，建議調低溫度參數。另一方面，如果溫度參數較高，則可能產生較多元或有創意的結果。溫度為 0 代表具有確定性，即模型一律會選取可能性最高的回覆。
-3. **`topK`：**`topK` 參數會影響模型選取輸出詞元的方式。如果 `topK` 設為 1，代表所選詞元是模型詞彙表所有詞元中可能性最高者 (也稱為「貪婪解碼」)。如果 `topK` 設為 3，則代表模型會依據溫度參數，從可能性最高的 3 個詞元中選取下一個詞元。在每個符記選取步驟中，模型會對機率最高的「Top-K」`topK`符記取樣，接著進一步根據 `topP` 篩選詞元，最後依 temperature 選出最終詞元。
-4. **`topP`：**`topP` 參數會影響模型選取輸出詞元的方式。模型會按照可能性最高到最低的順序選取詞元，直到所選詞元的可能性總和等於 `topP` 值。舉例來說，假設詞元 A、B 和 C 的可能性分別為 0.3、0.2 和 0.1，而 `topP` 值為 0.5，模型會依據 temperature 選擇 A 或 B 做為下一個詞元，並排除 C。預設 `topP` 值為 0.95。
-5. **`stop_sequences`：**設定停止序列，告知模型停止生成內容。停止序列可以是任何字元序列。請盡量避免使用可能會出現在生成內容中的字元序列。
+Jika kasus penggunaan Anda memerlukan model untuk menghasilkan respons yang ringkas, Anda dapat menyertakan
+contoh dalam perintah yang memberikan preferensi pada respons yang ringkas.
 
-## 反覆修正提示詞的策略
+Perintah berikut memberikan dua contoh yang menunjukkan preferensi terhadap penjelasan yang lebih singkat. Dalam respons, Anda dapat melihat bahwa contoh memandu model untuk memilih penjelasan yang lebih pendek (`Explanation2`) dibandingkan dengan penjelasan yang lebih panjang (`Explanation1`) seperti sebelumnya.
 
-有時需要經過幾次疊代，才能獲得想要的提示設計，並持續獲得所需的回應。本節提供一些指引，說明在疊代提示時可以嘗試哪些做法：
+|  |
+| --- |
+| **Perintah:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Respons:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
 
-1. **使用不同措辭：**即使提示的意義相同，使用不同字詞或措辭，模型通常也會產生不同的回覆。如果提示未產生預期結果，請嘗試重新措辭。
+### Jumlah contoh yang optimal
+
+Model seperti Gemini sering kali dapat memahami pola menggunakan beberapa contoh, meskipun Anda mungkin perlu bereksperimen dengan jumlah contoh yang akan diberikan dalam perintah untuk mendapatkan hasil terbaik. Pada saat yang sama, jika Anda menyertakan terlalu banyak contoh, model mungkin akan mulai [melebihi](https://developers.google.com/machine-learning/glossary?hl=id#overfitting) respons terhadap contoh.
+
+### Format yang konsisten
+
+Pastikan struktur dan format contoh few-shot sama untuk menghindari respons dengan format yang tidak diinginkan. Salah satu tujuan utama menambahkan contoh few-shot dalam perintah adalah untuk menunjukkan format respons kepada model. Oleh karena itu, penting untuk memastikan format yang konsisten di semua contoh, terutama dengan memperhatikan tag XML, spasi kosong, baris baru, dan pemisah contoh.
+
+## Tambahkan konteks
+
+Anda dapat menyertakan petunjuk dan informasi dalam perintah yang diperlukan model
+untuk memecahkan masalah, bukan mengasumsikan bahwa model memiliki semua informasi
+yang diperlukan. Informasi kontekstual ini membantu model memahami batasan dan detail tugas yang Anda minta.
+
+Contoh berikut meminta model untuk memberikan panduan pemecahan masalah untuk router:
+
+|  |
+| --- |
+| **Perintah:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Respons:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+
+Responsnya terlihat seperti informasi pemecahan masalah umum yang tidak spesifik
+untuk router atau status lampu indikator LED.
+
+Guna menyesuaikan respons untuk router tertentu, Anda dapat menambahkan prompt dalam panduan pemecahan masalah router sebagai konteks yang dirujuk saat memberikan respons.
+
+|  |
+| --- |
+| **Perintah:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Respons:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+
+## Menguraikan perintah menjadi beberapa komponen
+
+Untuk kasus penggunaan yang memerlukan perintah kompleks, Anda dapat membantu model mengelola kompleksitas ini dengan memecah perintah menjadi komponen yang lebih sederhana.
+
+1. **Memecah petunjuk:** Daripada memiliki banyak petunjuk dalam satu perintah, buat satu perintah per petunjuk. Anda dapat memilih perintah mana yang akan diproses berdasarkan input pengguna.
+2. **Rangkai perintah:** Untuk tugas kompleks yang melibatkan beberapa langkah berurutan,
+   jadikan setiap langkah sebagai perintah dan rangkai perintah tersebut secara berurutan. Dalam rangkaian perintah berurutan ini, output satu perintah dalam urutan menjadi input perintah berikutnya. Output perintah terakhir dalam urutan
+   adalah output akhir.
+3. **Menggabungkan respons:** Penggabungan dilakukan saat Anda ingin menjalankan berbagai tugas paralel pada berbagai bagian data dan menggabungkan hasilnya untuk menghasilkan output akhir. Misalnya, Anda dapat memberi tahu model untuk melakukan satu
+   operasi pada bagian pertama data, melakukan operasi lain pada bagian data
+   lainnya, dan menggabungkan hasilnya.
+
+## Bereksperimen dengan parameter model
+
+Setiap panggilan yang Anda kirim ke model menyertakan parameter value yang mengontrol cara model menghasilkan respons. Model ini dapat memberikan hasil yang berbeda untuk parameter value yang berbeda. Bereksperimenlah dengan parameter value yang berbeda untuk mendapatkan nilai terbaik untuk tugas. Parameter yang tersedia untuk model yang berbeda mungkin berbeda. Parameter yang paling umum adalah sebagai berikut:
+
+1. **Token output maks:** Menentukan jumlah maksimum token yang dapat
+   dibuat dalam respons. Token terdiri atas sekitar empat karakter. 100
+   token setara dengan sekitar 60-80 kata.
+2. **Suhu:** Suhu mengontrol tingkat keacakan dalam pemilihan token. Suhu digunakan untuk pengambilan sampel selama pembuatan respons,
+   yang terjadi saat `topP` dan `topK` diterapkan. Suhu yang lebih rendah cocok untuk perintah yang memerlukan respons yang lebih deterministik atau kurang terbuka, sedangkan suhu yang lebih tinggi dapat memberikan hasil yang lebih beragam atau kreatif. Temperatur 0 bersifat deterministik, yang berarti bahwa respons probabilitas tertinggi akan selalu dipilih.
+3. **`topK`:** Parameter `topK` mengubah cara model memilih token untuk
+   output. Nilai `topK` 1 berarti token yang dipilih adalah yang paling mungkin di antara semua token dalam kosakata model (juga disebut greedy decoding), sedangkan nilai `topK` 3 berarti token berikutnya dipilih dari antara 3 token yang paling mungkin menggunakan temperatur. Untuk setiap langkah pemilihan token, token `topK` dengan probabilitas tertinggi akan diambil sampelnya. Kemudian, token akan
+   difilter lebih lanjut berdasarkan `topP` dengan token akhir dipilih menggunakan
+   pengambilan sampel suhu.
+4. **`topP`:** Parameter `topP` mengubah cara model memilih token untuk
+   output. Token dipilih dari yang paling mungkin hingga yang paling tidak mungkin sampai jumlah probabilitasnya sama dengan nilai `topP`. Misalnya, jika token A, B, dan C memiliki probabilitas 0,3, 0,2, dan 0,1 serta nilai `topP` adalah 0,5, maka model akan memilih A atau B sebagai token berikutnya dengan menggunakan temperatur dan mengecualikan C sebagai kandidat. Nilai `topP` default adalah 0,95.
+5. **`stop_sequences`:** Tetapkan urutan berhenti untuk
+   memberi tahu model agar berhenti membuat konten. Urutan berhenti dapat berupa urutan karakter apa pun. Coba hindari penggunaan urutan karakter yang
+   mungkin muncul dalam konten yang dihasilkan.
+
+## Strategi iterasi prompt
+
+Desain prompt terkadang memerlukan beberapa iterasi sebelum
+Anda mendapatkan respons yang diinginkan secara konsisten. Bagian ini memberikan
+panduan tentang beberapa hal yang dapat Anda coba saat melakukan iterasi pada perintah Anda:
+
+1. **Gunakan frasa yang berbeda:** Penggunaan kata atau frasa yang berbeda dalam perintah Anda sering kali menghasilkan respons yang berbeda dari model meskipun semuanya memiliki arti yang sama. Jika Anda tidak mendapatkan hasil yang diharapkan dari perintah Anda, coba
+   susun ulang perintah tersebut.
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **改用類似工作：**如果模型無法按照工作指令執行，請嘗試提供類似工作的指令，以達到相同結果。
+2. **Beralih ke tugas analog:** Jika Anda tidak dapat membuat model agar mengikuti petunjuk untuk suatu tugas, coba berikan petunjuk untuk tugas analog yang mencapai hasil yang sama.
 
-   這個提示會指示模型使用預先定義的類別，將書籍分類：
-
-   |  |
-   | --- |
-   | **提示：**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **回覆：**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
-
-   答案正確，但模型未遵守選項範圍。您也希望模型只回覆其中一個選項，而不是完整的句子。在這種情況下，您可以將指令改寫為選擇題，並要求模型選擇選項。
+   Perintah ini memberi tahu model untuk mengategorikan buku dengan menggunakan kategori yang telah ditentukan:
 
    |  |
    | --- |
-   | **提示：**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **Perintah:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Respons:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
+
+   Responsnya benar, tetapi modelnya tidak tetap dalam batas opsi. Anda juga ingin membuat model untuk merespons hanya dengan salah satu opsi, bukan
+   menggunakan kalimat lengkap. Dalam hal ini, Anda dapat menulis ulang petunjuk sebagai
+   pertanyaan pilihan ganda dan meminta model untuk memilih opsi.
+
+   |  |
+   | --- |
+   | **Perintah:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **回覆：**
+     **Respons:**
 
      ```
      The correct answer is mythology.
      ```
 
      (gemini-2.5-flash)
-   - **變更提示內容的順序：**提示中的內容順序有時會影響回覆結果，因此不妨嘗試變更內容順序，看看回覆會有什麼變化。
+   - **Mengubah urutan konten perintah:** Urutan konten dalam perintah terkadang dapat memengaruhi respons. Coba ubah urutan konten dan lihat pengaruhnya terhadap respons.
 
      ```
      Version 1:
@@ -214,50 +248,61 @@ Gemini 等模型通常可以從幾個範例中找出模式，但您可能需要�
      [context]
      ```
 
-## 備用回覆
+## Respons penggantian
 
-如果提示或回覆觸發安全篩選器，模型就會傳回備用回覆。例如：「我只能提供語言模型服務，無法協助處理這項要求。」
+Respons penggantian adalah respons yang ditampilkan oleh model saat prompt
+atau respons memicu filter keamanan. Contoh respons penggantian adalah
+"Saya tidak dapat membantu, karena saya hanya model bahasa".
 
-如果模型提供備用回覆，請嘗試調高溫度參數。
+Jika model merespons dengan respons penggantian, coba tingkatkan suhu.
 
-## 建立基準和執行程式碼
+## Perujukan dan eksekusi kode
 
-在可能產生不正確回覆的情況下，Gemini 會使用工具避免出現幻覺。
+Gemini dapat menggunakan alat untuk menghindari halusinasi dalam skenario yang berpotensi menghasilkan respons yang salah.
 
-[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)可讓 Gemini 模型取得即時網路內容。如果模型可能需要瞭解冷門或近期事實，請務必啟用這項功能。
+[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) menghubungkan model Gemini ke konten web real-time, dan harus diaktifkan setiap kali model mungkin perlu mengetahui fakta-fakta yang tidak jelas atau terbaru.
 
-Gemini 的[執行程式碼工具](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)可讓模型生成及執行 Python 程式碼，因此模型需要執行任何算術、計數或計算時，都應啟用這項工具。
+[Alat eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id) Gemini memungkinkan model membuat dan menjalankan kode Python, dan harus diaktifkan setiap kali model perlu melakukan penghitungan, perhitungan, atau kalkulasi apa pun.
 
 ## Gemini 3
 
-[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw#gemini-3)專為進階推論和指令遵循而設計。提示詞越直接、結構越完整，且清楚定義工作和任何限制，模型的回覆效果就越好。為獲得最佳 Gemini 3 結果，建議採取下列做法：
+[Model Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=id#gemini-3) dirancang untuk penalaran dan pemahaman petunjuk yang canggih.
+Model ini merespons perintah yang langsung, terstruktur dengan baik, dan mendefinisikan tugas serta batasan dengan jelas. Praktik berikut direkomendasikan untuk
+hasil optimal dengan Gemini 3:
 
-### 核心提示原則
+### Prinsip dasar perintah
 
-- **明確且直接：**清楚簡潔地說明目標。避免使用不必要的語言或過於強烈的說服性語言。
-- **使用一致的結構：**使用明確的分隔符號分隔提示的不同部分。XML 樣式的標記 (例如 `<context>`、`<task>`) 或 Markdown 標題都很有效。選擇一種格式，並在單一提示中保持一致。
-- **定義參數：**明確說明任何模稜兩可的字詞或參數。
-- **控制輸出內容的詳細程度：**Gemini 3 模型預設會提供直接且有效率的答案。如需更自然流暢或詳細的回覆，請在指令中明確要求。
-- **一致處理多模態輸入內容：**使用文字、圖片、音訊或影片時，請將這些內容視為同類輸入內容。請確保說明清楚提及各個模式。
-- **優先提供重要指令：**將必要的行為限制、角色定義 (角色) 和輸出格式要求放在系統指令中，或使用者提示的開頭。
-- **長篇脈絡資料的結構：**提供大量脈絡資料 (例如文件、程式碼) 時，請先提供所有脈絡資料。將具體指示或問題放在提示的*最後*。
-- **錨定情境：**在大量資料後，使用清楚的轉場片語來連結情境和查詢，例如「根據上述資訊...」。
+- **Tepat dan langsung:** Nyatakan tujuan Anda dengan jelas dan ringkas. Hindari
+  bahasa yang tidak perlu atau terlalu persuasif.
+- **Gunakan struktur yang konsisten:** Gunakan pembatas yang jelas untuk memisahkan berbagai bagian perintah Anda. Tag gaya XML (misalnya, `<context>`, `<task>`) atau
+  judul Markdown efektif. Pilih satu format dan gunakan secara konsisten
+  dalam satu perintah.
+- **Tentukan parameter:** Jelaskan secara eksplisit istilah atau parameter yang ambigu.
+- **Mengontrol kejelasan output:** Secara default, model Gemini 3 memberikan jawaban yang langsung dan efisien. Jika Anda memerlukan respons yang lebih bersifat percakapan atau lebih mendetail,
+  Anda harus memintanya secara eksplisit dalam petunjuk Anda.
+- **Menangani input multimodal secara koheren:** Saat menggunakan teks, gambar, audio, atau video, perlakukan semuanya sebagai input kelas yang sama. Pastikan petunjuk Anda dengan jelas
+  mereferensikan setiap modalitas sesuai kebutuhan.
+- **Prioritaskan petunjuk penting:** Tempatkan batasan perilaku penting, definisi peran (persona), dan persyaratan format output dalam Petunjuk Sistem atau di awal perintah pengguna.
+- **Struktur untuk konteks panjang:** Saat memberikan konteks dalam jumlah besar (misalnya, dokumen, kode), berikan semua konteks terlebih dahulu. Tempatkan petunjuk atau pertanyaan spesifik Anda di *akhir* perintah.
+- **Konteks penanda:** Setelah blok data yang besar, gunakan frasa transisi
+  yang jelas untuk menghubungkan konteks dan kueri Anda, seperti "Berdasarkan
+  informasi di atas..."
 
-### Gemini 3 Flash 策略
+### Strategi Gemini 3 Flash
 
-- **當天準確度：**在系統指令中加入下列子句，協助模型注意當天是 2026 年：
+- **Akurasi hari ini:** Tambahkan klausa berikut ke petunjuk sistem untuk membantu model memperhatikan bahwa hari ini berada pada tahun 2026:
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **知識截點準確率：**在系統指令中加入下列子句，讓模型瞭解知識截點：
+- **Akurasi batas informasi:** Tambahkan klausa berikut ke petunjuk sistem agar model mengetahui batas informasinya:
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **建立基準成效：**在系統指令中加入下列子句 (視需要編輯)，提升模型根據所提供脈絡資訊建立回覆基準的能力：
+- **Performa perujukan:** Tambahkan klausa berikut ke petunjuk sistem (dengan pengeditan jika sesuai) untuk meningkatkan kemampuan model dalam merujuk respons pada konteks yang diberikan:
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -273,17 +318,17 @@ Gemini 的[執行程式碼工具](https://ai.google.dev/gemini-api/docs/code-exe
   the context, you must state that the information is not available.
   ```
 
-### 提升推論和規劃能力
+### Meningkatkan penalaran dan perencanaan
 
-Gemini 2.5 和 3 系列模型會自動生成內部「思考」文字，以提升推論效能。因此，模型通常不需要在回覆內容中列出大綱、規劃或詳細說明推論步驟。對於需要大量推論的問題，簡單的要求 (例如「請先仔細思考再回答」) 就能提升效能，但會耗用額外的思考詞元。
+Model seri Gemini 2.5 dan 3 secara otomatis membuat teks "pemikiran" internal untuk meningkatkan performa penalaran. Oleh karena itu, umumnya tidak perlu membuat model menguraikan, merencanakan, atau menjelaskan langkah-langkah penalaran dalam respons yang ditampilkan. Untuk masalah yang memerlukan penalaran berat, permintaan sederhana seperti "Berpikir keras sebelum menjawab" dapat meningkatkan performa, meskipun dengan biaya token pemikiran tambahan.
 
-詳情請參閱 [Gemini 思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)說明文件。
+Lihat dokumentasi [Proses berpikir Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=id) untuk mengetahui detail selengkapnya.
 
-### 結構化提示範例
+### Contoh perintah terstruktur
 
-使用標記或 Markdown 有助於模型區分指令、情境和工作。
+Penggunaan tag atau Markdown membantu model membedakan antara petunjuk, konteks, dan tugas.
 
-**XML 範例：**
+**Contoh XML:**
 
 ```
 <role>
@@ -304,7 +349,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**Markdown 範例：**
+**Contoh Markdown:**
 
 ```
 # Identity
@@ -318,11 +363,12 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### 結合最佳做法的範本範例
+### Contoh template yang menggabungkan praktik terbaik
 
-這個範本涵蓋 Gemini 3 提示的核心原則。請務必根據特定用途進行疊代和修改。
+Template ini mencakup prinsip inti untuk memberikan perintah dengan Gemini 3. Selalu
+pastikan untuk melakukan iterasi dan modifikasi untuk kasus penggunaan spesifik Anda.
 
-**系統操作說明：**
+**Petunjuk Sistem:**
 
 ```
 <role>
@@ -349,7 +395,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**使用者提示：**
+**Perintah Pengguna:**
 
 ```
 <context>
@@ -365,41 +411,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## 代理工作流程
+## Alur kerja agentic
 
-對於深入的代理工作流程，通常需要特定指令來控管模型如何推論、規劃及執行工作。雖然 Gemini 的一般效能很強大，但複雜的代理通常需要您在運算成本 (延遲時間和詞元) 與任務準確率之間取得平衡。
+Untuk alur kerja agentik yang mendalam, sering kali diperlukan petunjuk khusus untuk mengontrol cara model bernalar, merencanakan, dan mengeksekusi tugas. Meskipun Gemini memberikan performa umum yang kuat, agen yang kompleks sering kali mengharuskan Anda mengonfigurasi pertimbangan antara biaya komputasi (latensi dan token) dan akurasi tugas.
 
-為代理程式設計提示時，請考量以下可引導代理程式的行為面向：
+Saat mendesain perintah untuk agen, pertimbangkan dimensi perilaku berikut yang dapat Anda arahkan di agen:
 
-### 推論與策略
+### Penalaran dan strategi
 
-模型採取行動前思考和規劃的方式設定。
+Konfigurasi cara model berpikir dan merencanakan sebelum mengambil tindakan.
 
-- **邏輯分解：**定義模型必須分析限制、先決條件和作業順序的詳盡程度。
-- **問題診斷**：控管找出原因時的分析深度，以及模型使用溯因推論的程度。決定模型應接受最明顯的答案，還是探索複雜且可能性較低的解釋。
-- **資訊詳盡程度：**分析所有可用政策和文件，與優先考量效率和速度之間的取捨。
+- **Dekomposisi logis:** Menentukan seberapa menyeluruh model harus menganalisis batasan, prasyarat, dan urutan operasi.
+- **Diagnosis masalah**: Mengontrol kedalaman analisis saat mengidentifikasi penyebab dan penggunaan penalaran abduktif model. Menentukan apakah model harus menerima jawaban yang paling jelas atau menjelajahi penjelasan yang kompleks dan kurang mungkin.
+- **Kelengkapan informasi:** Kompromi antara menganalisis setiap kebijakan dan dokumen yang tersedia versus memprioritaskan efisiensi dan kecepatan.
 
-### 執行和可靠性
+### Eksekusi dan keandalan
 
-代理程式自主運作和處理障礙的設定。
+Konfigurasi cara agen beroperasi secara mandiri dan menangani hambatan.
 
-- **適應性：**模型對新資料的反應。決定是否應嚴格遵守初始計畫，或在觀察結果與假設相矛盾時立即調整。
-- **持續性和復原：**模型嘗試自行修正錯誤的程度。高持續性可提高成功率，但代幣成本或迴圈風險也會隨之增加。
-- **風險評估：**評估後果的邏輯。明確區分低風險的探索性動作 (讀取) 和高風險的狀態變更 (寫入)。
+- **Kemampuan beradaptasi:** Cara model bereaksi terhadap data baru. Menentukan apakah harus mematuhi rencana awalnya secara ketat atau langsung mengubah arah saat pengamatan bertentangan dengan asumsi.
+- **Persistensi dan Pemulihan:** Tingkat upaya model untuk mengoreksi sendiri error. Persistensi tinggi meningkatkan tingkat keberhasilan, tetapi berisiko menimbulkan biaya token atau loop yang lebih tinggi.
+- **Penilaian Risiko:** Logika untuk mengevaluasi konsekuensi. Secara eksplisit membedakan antara tindakan eksplorasi berisiko rendah (baca) dan perubahan status berisiko tinggi (tulis).
 
-### 互動和輸出
+### Interaksi dan output
 
-代理程式與使用者通訊及格式化結果的方式設定。
+Konfigurasi cara agen berkomunikasi dengan pengguna dan memformat hasil.
 
-- **模糊不清和權限處理：**定義模型何時可進行假設，以及何時必須暫停執行，要求使用者提供說明或權限。
-- **詳細程度：**控制工具呼叫時產生的文字量。這項設定會決定模型是否向使用者說明其動作，或是在執行期間保持沉默。
-- **精確度和完整度：**輸出內容的必要精確度。指定模型是否必須解決所有極端情況並提供確切數字，或可接受概略估算。
+- **Ambiguitas dan penanganan izin:** Menentukan kapan model diizinkan untuk membuat asumsi dan kapan model harus menjeda eksekusi untuk meminta klarifikasi atau izin kepada pengguna.
+- **Panjang Teks:** Mengontrol volume teks yang dihasilkan bersama dengan panggilan alat. Hal ini menentukan apakah model menjelaskan tindakannya kepada pengguna atau tetap diam selama eksekusi.
+- **Presisi dan kelengkapan:** Tingkat kecermatan output yang diperlukan. Menentukan apakah model harus menyelesaikan setiap kasus ekstrem dan memberikan angka yang tepat atau apakah perkiraan kasar dapat diterima.
 
-### 系統指令範本
+### Template petunjuk sistem
 
-以下系統指令範例已由研究人員評估，可提升代理程式基準的效能，模型必須遵守複雜的規則手冊並與使用者互動。這會促使代理成為強大的推理和規劃者，在上述各個層面強制執行特定行為，並要求模型在採取任何行動前主動規劃。
+Petunjuk sistem berikut adalah contoh yang telah dievaluasi oleh peneliti untuk meningkatkan performa pada tolok ukur agentik di mana model harus mematuhi buku peraturan yang kompleks dan berinteraksi dengan pengguna. Hal ini mendorong agen untuk bertindak sebagai pemikir dan perencana yang andal, menerapkan perilaku tertentu di seluruh dimensi yang tercantum di atas, dan mewajibkan model untuk merencanakan secara proaktif sebelum mengambil tindakan apa pun.
 
-您可以根據特定用途限制調整這個範本。
+Anda dapat menyesuaikan template ini agar sesuai dengan batasan kasus penggunaan spesifik Anda.
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -447,19 +493,20 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## 後續步驟
+## Langkah berikutnya
 
-- 現在您已深入瞭解提示設計，不妨使用 [Google AI Studio](http://aistudio.google.com?hl=zh-tw) 撰寫自己的提示。
-- 如要瞭解多模態提示，請參閱「[使用媒體檔案撰寫提示](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)」。
-- 如要瞭解圖片提示詞，請參閱 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw#prompt-guide) 提示詞指南。
-- 如要瞭解影片提示詞，請參閱 [Veo 提示詞指南](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw#prompt-guide)。
+- Setelah Anda memahami desain perintah dengan lebih baik, coba tulis perintah Anda sendiri menggunakan [Google AI Studio](http://aistudio.google.com?hl=id).
+- Untuk mempelajari multimodal prompting, lihat
+  [Membuat perintah dengan file media](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide).
+- Untuk mempelajari perintah gambar, lihat panduan perintah [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#prompt-guide).
+- Untuk mempelajari perintah video, lihat [panduan perintah Veo](https://ai.google.dev/gemini-api/docs/video?hl=id#prompt-guide).
 
-提供意見
+Kirim masukan
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-上次更新時間：2026-09-18 (世界標準時間)。
+Terakhir diperbarui pada 2026-09-18 UTC.
 
-想進一步說明嗎？
+Ada masukan untuk kami?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-18 (世界標準時間)。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-18 UTC."],[],[]]

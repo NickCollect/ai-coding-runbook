@@ -1,24 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/openai?hl=ko
-fetched_at: 2026-09-21T05:56:35.608701+00:00
-title: "OpenAI \ud638\ud658\uc131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/openai?hl=th
+fetched_at: 2026-09-28T06:19:49.044637+00:00
+title: "\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e01\u0e31\u0e19\u0e44\u0e14\u0e49\u0e01\u0e31\u0e1a OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-의견 보내기
+ส่งความคิดเห็น
 
-# OpenAI 호환성
+# ความเข้ากันได้กับ OpenAI
 
-코드 3줄을 업데이트하고 [Gemini API 키](https://aistudio.google.com/apikey?hl=ko)를 사용하여 REST API와 함께 OpenAI 라이브러리 (Python 및 TypeScript/JavaScript)를 통해 Gemini 모델에 액세스할 수 있습니다. 아직 OpenAI 라이브러리를 사용하고 있지 않다면 [Gemini API를 직접 호출](https://ai.google.dev/gemini-api/docs/get-started?hl=ko)하는 것이 좋습니다.
+คุณเข้าถึงโมเดล Gemini ได้โดยใช้ไลบรารี OpenAI (Python และ TypeScript/
+JavaScript) พร้อมกับ REST API โดยอัปเดตโค้ด 3 บรรทัด
+และใช้[คีย์ Gemini API](https://aistudio.google.com/apikey?hl=th) หากยังไม่ได้ใช้ไลบรารี OpenAI เราขอแนะนำให้คุณเรียกใช้
+[Gemini API โดยตรง](https://ai.google.dev/gemini-api/docs/get-started?hl=th)
 
 ### Python
 
@@ -46,7 +49,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -89,17 +92,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-변경사항 단 3줄이면 됩니다.
+สิ่งที่เปลี่ยนแปลง มีเพียง 3 บรรทัด
 
-- **`api_key="GEMINI_API_KEY"`**: [Google AI Studio](https://aistudio.google.com?hl=ko)에서 가져올 수 있는 실제 Gemini API 키로 '`GEMINI_API_KEY`'를 바꿉니다.
-- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** OpenAI 라이브러리에 기본 URL 대신 Gemini API 엔드포인트에 요청을 전송하도록 지시합니다.
-- **`model="gemini-3.6-flash"`**: 호환되는 Gemini 모델을 선택합니다.
+- **`api_key="GEMINI_API_KEY"`**: แทนที่ "`GEMINI_API_KEY`" ด้วยคีย์ Gemini
+  API จริง ซึ่งคุณรับได้ใน [Google AI Studio](https://aistudio.google.com?hl=th)
+- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** นี่
+  บอกให้ไลบรารี OpenAI ส่งคำขอไปยังปลายทาง Gemini API แทน
+  URL เริ่มต้น
+- **`model="gemini-3.6-flash"`**: เลือกโมเดล Gemini ที่เข้ากันได้
 
-## 사고
+## การคิด
 
-Gemini 모델은 복잡한 문제를 해결하도록 학습되어 추론 능력이 크게 향상되었습니다. Gemini API에는 모델이 얼마나 사고할지 세부적으로 제어할 수 있는 [사고 파라미터](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)가 제공됩니다.
+โมเดล Gemini ได้รับการฝึกให้คิดแก้ปัญหาที่ซับซ้อน ซึ่งนำไปสู่การใช้เหตุผลที่ดีขึ้นอย่างมาก Gemini API มาพร้อมกับ [พารามิเตอร์
+การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)ที่ช่วยให้คุณควบคุมได้อย่างละเอียด
+ว่าโมเดลจะคิดมากน้อยเพียงใด
 
-Gemini 모델마다 추론 구성이 다릅니다. OpenAI의 추론 노력과 어떻게 매핑되는지 다음을 참고하세요.
+โมเดล Gemini แต่ละโมเดลมีการกำหนดค่าการใช้เหตุผลที่แตกต่างกัน คุณสามารถดูวิธีที่โมเดลเหล่านี้แมปกับการใช้เหตุผลของ OpenAI ได้ดังนี้
 
 | `reasoning_effort` (OpenAI) | `thinking_level` (Gemini 3.1 Pro) | `thinking_level` (Gemini 3.1 Flash-Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
@@ -108,9 +116,11 @@ Gemini 모델마다 추론 구성이 다릅니다. OpenAI의 추론 노력과 �
 | `medium` | `medium` | `medium` | `medium` | `8,192` |
 | `high` | `high` | `high` | `high` | `24,576` |
 
-`reasoning_effort`가 지정되지 않으면 Gemini는 모델의 기본 [수준](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#levels) 또는 [예산](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#set-budget)을 사용합니다.
+หากไม่ได้ระบุ `reasoning_effort` ไว้ Gemini จะใช้
+ระดับ [เริ่มต้น](https://ai.google.dev/gemini-api/docs/thinking?hl=th#levels) หรืองบประมาณ [ของโมเดล](https://ai.google.dev/gemini-api/docs/thinking?hl=th#set-budget)
 
-사고를 사용 중지하려면 2.5 모델의 경우 `reasoning_effort`를 `"none"`로 설정하면 됩니다. Gemini 2.5 Pro 또는 3 모델에서는 추론을 사용 중지할 수 없습니다.
+หากต้องการปิดใช้การคิด คุณสามารถตั้งค่า `reasoning_effort` เป็น `"none"` สำหรับ
+โมเดล 2.5 คุณจะปิดการใช้เหตุผลสำหรับโมเดล Gemini 2.5 Pro หรือ 3 ไม่ได้
 
 ### Python
 
@@ -139,7 +149,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -184,10 +194,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Gemini 사고 모델은 [사고 요약](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#summaries)도 생성합니다.
-[`extra_body`](#extra-body) 필드를 사용하여 요청에 Gemini 필드를 포함할 수 있습니다.
+โมเดลการคิดของ Gemini ยังสร้าง[สรุปความคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th#summaries)ด้วย
+คุณสามารถใช้ช่อง [`extra_body`](#extra-body) เพื่อรวมช่อง Gemini ไว้ในคำขอ
 
-`reasoning_effort`와 `thinking_level`/`thinking_budget`는 기능이 중복되므로 동시에 사용할 수 없습니다.
+โปรดทราบว่า `reasoning_effort` และ `thinking_level`/`thinking_budget` มีฟังก์ชันการทำงานที่ทับซ้อนกัน จึงใช้พร้อมกันไม่ได้
 
 ### Python
 
@@ -217,7 +227,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -263,11 +273,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
       }'
 ```
 
-Gemini 3는 채팅 완성 API에서 사고 서명에 대한 OpenAI 호환성을 지원합니다. 전체 예는 [생각 서명](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ko#openai) 페이지에서 확인할 수 있습니다.
+Gemini 3 รองรับความเข้ากันได้กับ OpenAI สำหรับลายเซ็นความคิดใน Chat Completion API คุณดูตัวอย่างทั้งหมดได้ในหน้า[ลายเซ็นความคิด](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=th#openai)
 
-## 스트리밍
+## สตรีมมิง
 
-Gemini API는 [스트리밍 응답](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=ko#generate-a-text-stream)을 지원합니다.
+Gemini API รองรับ[การสตรีมมิงคำตอบ](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=th#generate-a-text-stream)
 
 ### Python
 
@@ -297,7 +307,7 @@ for chunk in response:
     print(chunk.choices[0].delta)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -346,9 +356,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
     }'
 ```
 
-## 함수 호출
+## การเรียกใช้ฟังก์ชัน
 
-함수 호출을 사용하면 생성형 모델에서 구조화된 데이터 출력을 더 쉽게 가져올 수 있는데, 이는 [Gemini API에서 지원](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=ko)됩니다.
+การเรียกใช้ฟังก์ชันช่วยให้คุณรับเอาต์พุตข้อมูลที่มีโครงสร้างจาก
+โมเดล Generative ได้ง่ายขึ้น และ [Gemini API รองรับฟีเจอร์นี้](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=th)
 
 ### Python
 
@@ -392,7 +403,7 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -479,9 +490,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 }'
 ```
 
-## 이미지 이해
+## การทำความเข้าใจรูปภาพ
 
-Gemini 모델은 네이티브 멀티모달이며 [다양한 일반적인 비전 작업](https://ai.google.dev/gemini-api/docs/vision?hl=ko)에서 동급 최고의 성능을 제공합니다.
+โมเดล Gemini เป็นโมเดลมัลติโมดัลโดยกำเนิดและมีประสิทธิภาพดีที่สุดใน
+[งานด้านวิชันซิสติกส์ทั่วไปหลายอย่าง](https://ai.google.dev/gemini-api/docs/vision?hl=th)
 
 ### Python
 
@@ -526,7 +538,7 @@ response = client.chat.completions.create(
 print(response.choices[0])
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -610,9 +622,9 @@ bash -c '
 '
 ```
 
-## 이미지 생성
+## สร้างรูปภาพ
 
-`gemini-2.5-flash-image` 또는 `gemini-3-pro-image-preview`를 사용하여 이미지를 생성해 줘. 지원되는 매개변수에는 `prompt`, `model`, `n`, `size`, `response_format`이 있습니다. 여기에 나열되지 않거나 [`extra_body`](#extra-body) 섹션에 나열되지 않은 다른 매개변수는 호환성 레이어에서 자동으로 무시됩니다.
+สร้างรูปภาพโดยใช้ `gemini-2.5-flash-image` หรือ `gemini-3-pro-image-preview` พารามิเตอร์ที่รองรับ ได้แก่ `prompt`, `model`, `n`, `size`, และ `response_format` ระบบจะละเว้นพารามิเตอร์อื่นๆ ที่ไม่ได้ระบุไว้ที่นี่หรือในส่วน [`extra_body`](#extra-body) โดยไม่มีการแจ้งเตือน
 
 ### Python
 
@@ -639,7 +651,7 @@ for image_data in response.data:
   image.show()
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -679,11 +691,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
       }'
 ```
 
-## 동영상 생성
+## สร้างวิดีโอ
 
-Sora 호환 `/v1/videos` 엔드포인트를 통해 `veo-3.1-generate-preview`를 사용하여 동영상을 생성합니다. 지원되는 최상위 매개변수는 `prompt` 및 `model`입니다. `duration_seconds`, `image`, `aspect_ratio`과 같은 추가 매개변수는 `extra_body`와 함께 전달해야 합니다. 사용 가능한 모든 매개변수는 [`extra_body`](#extra-body) 섹션을 참고하세요.
+สร้างวิดีโอโดยใช้ `veo-3.1-generate-preview` ผ่านปลายทาง `/v1/videos` ที่เข้ากันได้กับ Sora พารามิเตอร์ระดับบนสุดที่รองรับคือ `prompt` และ `model` คุณต้องส่งพารามิเตอร์เพิ่มเติม เช่น `duration_seconds`, `image` และ `aspect_ratio` พร้อมกับ `extra_body` ดูพารามิเตอร์ทั้งหมดที่ใช้ได้ในส่วน [`extra_body`](#extra-body)
 
-동영상 생성은 완료 여부를 폴링할 수 있는 작업 ID를 반환하는 장기 실행 작업입니다.
+การสร้างวิดีโอเป็นการดำเนินการที่ใช้เวลานาน ซึ่งจะแสดงผลรหัสการดำเนินการที่คุณสามารถโพลเพื่อตรวจสอบสถานะการดำเนินการได้
 
 ### Python
 
@@ -705,7 +717,7 @@ print(f"Operation ID: {response.id}")
 print(f"Status: {response.status}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -738,9 +750,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
   -F "prompt=A cinematic drone shot of a waterfall"
 ```
 
-### 동영상 상태 확인
+### ตรวจสอบสถานะวิดีโอ
 
-동영상 생성은 비동기식입니다. `GET /v1/videos/{id}`를 사용하여 상태를 폴링하고 완료되면 최종 동영상 URL을 가져옵니다.
+การสร้างวิดีโอเป็นการดำเนินการแบบอะซิงโครนัส ใช้ `GET /v1/videos/{id}` เพื่อโพลสถานะและดึงข้อมูล URL วิดีโอสุดท้ายเมื่อเสร็จสมบูรณ์
 
 ### Python
 
@@ -767,7 +779,7 @@ while True:
     time.sleep(10)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -804,9 +816,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
   -H "Authorization: Bearer $GEMINI_API_KEY"
 ```
 
-## 오디오 이해
+## การทำความเข้าใจเสียง
 
-오디오 입력 분석:
+วิเคราะห์อินพุตเสียง
 
 ### Python
 
@@ -847,7 +859,7 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import fs from "fs";
@@ -919,9 +931,9 @@ bash -c '
 '
 ```
 
-## 구조화된 출력
+## เอาต์พุตที่มีโครงสร้าง
 
-Gemini 모델은 [내가 정의한 구조](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)로 JSON 객체를 출력할 수 있습니다.
+โมเดล Gemini สามารถแสดงผลออบเจ็กต์ JSON ใน[โครงสร้างใดก็ได้ที่คุณกำหนด](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)
 
 ### Python
 
@@ -951,7 +963,7 @@ completion = client.beta.chat.completions.parse(
 print(completion.choices[0].message.parsed)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -982,9 +994,10 @@ const event = completion.choices[0].message.parsed;
 console.log(event);
 ```
 
-## 임베딩
+## การฝัง
 
-텍스트 임베딩은 텍스트 문자열의 관련성을 측정하며 [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=ko)를 사용하여 생성할 수 있습니다. 멀티모달 임베딩에는 `gemini-embedding-2-preview`를 사용하고 텍스트 전용 임베딩에는 `gemini-embedding-001`를 사용할 수 있습니다.
+การฝังข้อความจะวัดความเกี่ยวข้องของสตริงข้อความและสร้างได้
+โดยใช้ [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=th) คุณสามารถใช้ `gemini-embedding-2-preview` สำหรับการฝังมัลติโมดัล หรือ `gemini-embedding-001` สำหรับการฝังข้อความเท่านั้น
 
 ### Python
 
@@ -1004,7 +1017,7 @@ response = client.embeddings.create(
 print(response.data[0].embedding)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -1040,18 +1053,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
 
 ## Batch API
 
-OpenAI 라이브러리를 사용하여 [일괄 작업](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ko)을 만들고, 제출하고, 상태를 확인할 수 있습니다.
+คุณสามารถสร้าง[งานแบบกลุ่ม](https://ai.google.dev/gemini-api/docs/batch-mode?hl=th) ส่งงาน และตรวจสอบ
+สถานะของงานได้โดยใช้ไลบรารี OpenAI
 
-OpenAI 입력 형식으로 JSONL 파일을 준비해야 합니다. 예를 들면 다음과 같습니다.
+คุณจะต้องเตรียมไฟล์ JSONL ในรูปแบบอินพุตของ OpenAI เช่น
 
 ```
 {"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
 {"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
 ```
 
-Batch의 OpenAI 호환성은 배치 생성, 작업 상태 모니터링, 배치 결과 보기를 지원합니다.
+ความเข้ากันได้กับ OpenAI สำหรับ Batch รองรับการสร้างกลุ่ม การตรวจสอบสถานะงาน และการดูผลลัพธ์แบบกลุ่ม
 
-업로드 및 다운로드 호환성은 현재 지원되지 않습니다. 대신 다음 예에서는 Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ko#input-file)를 사용할 때와 마찬가지로 `genai` 클라이언트를 사용하여 [파일](https://ai.google.dev/gemini-api/docs/files?hl=ko)을 업로드하고 다운로드합니다.
+ปัจจุบันระบบยังไม่รองรับความเข้ากันได้สำหรับการอัปโหลดและดาวน์โหลด ตัวอย่างต่อไปนี้จึงใช้ไคลเอ็นต์ `genai` สำหรับการอัปโหลดและดาวน์โหลด
+[ไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th) ซึ่งเป็นวิธีเดียวกับที่ใช้เมื่อใช้ Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=th#input-file)
 
 ### Python
 
@@ -1097,7 +1112,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-OpenAI SDK는 [Batch API를 사용한 임베딩 생성](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko#batch-embeddings)도 지원합니다. 이렇게 하려면 `create` 메서드의 `endpoint` 필드를 삽입 엔드포인트로 바꾸고 JSONL 파일의 `url` 및 `model` 키도 바꿉니다.
+OpenAI SDK ยังรองรับ[การสร้างการฝังด้วย Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th#batch-embeddings) ด้วย หากต้องการทำเช่นนั้น ให้เปลี่ยนช่อง `endpoint` ของเมธอด `create` เป็นปลายทางการฝัง รวมถึงคีย์ `url` และ `model` ในไฟล์ JSONL
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1114,11 +1129,12 @@ batch = openai_client.batches.create(
 )
 ```
 
-전체 예시는 OpenAI 호환성 쿡북의 [일괄 삽입 생성](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb) 섹션을 참고하세요.
+ดูตัวอย่างฉบับเต็มได้ในส่วน[การสร้างการฝังแบบกลุ่ม](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
+ของคู่มือความเข้ากันได้กับ OpenAI
 
-## Flex 및 우선순위 추론
+## Flex และ Priority Inference
 
-Gemini API는 이름과 로직이 OpenAI의 `service_tier` 파라미터와 일치하며, Flex 및 Priority 추론 등급 모두에 대해 제한을 적용하고 트래픽을 적절하게 안내합니다.
+Gemini API ตรงกับพารามิเตอร์ `service_tier` ของ OpenAI ในชื่อและตรรกะ โดยบังคับใช้ขีดจำกัดและกำหนดเส้นทางการรับส่งข้อมูลอย่างเหมาะสมสำหรับทั้งระดับ Flex และ Priority Inference
 
 ### Python
 
@@ -1141,38 +1157,38 @@ completion = client.chat.completions.create(
 print(completion)
 ```
 
-명시적으로 할당되지 않은 경우 `service_tier`는 `standard`로 기본 설정되며, 이는 OpenAI의 경우 `default`와 동일합니다.
-[최적화](https://ai.google.dev/gemini-api/docs/optimization?hl=ko) 문서에서 추론 티어에 대해 자세히 알아보세요.
+เมื่อไม่ได้กำหนดไว้อย่างชัดเจน `service_tier` จะใช้ `standard` เป็นค่าเริ่มต้น ซึ่งเทียบเท่ากับ `default` สำหรับ OpenAI
+ดูข้อมูลเพิ่มเติมเกี่ยวกับระดับ Inference ได้ในเอกสารประกอบการ[เพิ่มประสิทธิภาพ](https://ai.google.dev/gemini-api/docs/optimization?hl=th)
 
-## `extra_body`로 Gemini 기능 사용 설정하기
+## เปิดใช้ฟีเจอร์ Gemini ด้วย `extra_body`
 
-Gemini에서 지원되지만 OpenAI 모델에서는 사용할 수 없는 몇 가지 기능이 있으며, `extra_body` 필드를 사용하여 사용 설정할 수 있습니다.
+Gemini รองรับฟีเจอร์หลายอย่างที่โมเดล OpenAI ไม่มี แต่คุณสามารถเปิดใช้ได้โดยใช้ช่อง `extra_body`
 
-| 매개변수 | 유형 | 엔드포인트 | 설명 |
+| พารามิเตอร์ | ประเภท | ปลายทาง | คำอธิบาย |
 | --- | --- | --- | --- |
-| **`cached_content`** | 텍스트 | 채팅 | Gemini의 일반 콘텐츠 캐시에 해당합니다. |
-| **`thinking_config`** | 객체 | 채팅 | Gemini의 ThinkingConfig에 해당합니다. |
-| **`aspect_ratio`** | 텍스트 | 이미지 | 출력 가로세로 비율 (예: `"16:9"`, `"1:1"`, `"9:16"`) |
-| **`generation_config`** | 객체 | 이미지 | Gemini 생성 구성 객체 (예: `{"responseModalities": ["IMAGE"], "candidateCount": 2}`) |
-| **`safety_settings`** | 목록 | 이미지 | 맞춤 안전 기준 필터 (예: `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`) |
-| **`tools`** | 목록 | 이미지 | 그라운딩 (예: `[{"google_search": {}}]`)을 사용 설정합니다. `gemini-3-pro-image-preview`에만 해당합니다. |
-| **`aspect_ratio`** | 텍스트 | 동영상 | 출력 동영상의 크기 (가로 모드의 경우 `16:9`, 세로 모드의 경우 `9:16`) 지정하지 않으면 `size`에서 매핑됩니다. |
-| **`resolution`** | 텍스트 | 동영상 | 출력 해상도 (`720p`, `1080p`, `4K`). 참고: `1080p` 및 `4K`는 업샘플러 파이프라인을 트리거합니다. |
-| **`duration_seconds`** | 정수 | 동영상 | 생성 길이 (값: `4`, `6`, `8`). `reference_images`, 보간 또는 확장을 사용하는 경우 `8`여야 합니다. |
-| **`frame_rate`** | 텍스트 | 동영상 | 동영상 출력의 프레임 속도입니다 (예: `"24"`). |
-| **`input_reference`** | 텍스트 | 동영상 | 동영상 생성을 위한 참조 입력입니다. |
-| **`extend_video_id`** | 텍스트 | 동영상 | 연장할 기존 동영상의 ID입니다. |
-| **`negative_prompt`** | 텍스트 | 동영상 | 제외할 항목 (예: `"shaky camera"`) |
-| **`seed`** | 정수 | 동영상 | 결정론적 생성을 위한 정수입니다. |
-| **`style`** | 텍스트 | 동영상 | 시각적 스타일 (`cinematic` 기본값, `creative` 소셜 미디어 최적화). |
-| **`person_generation`** | 텍스트 | 동영상 | 인물 생성 (`allow_adult`, `allow_all`, `dont_allow`)을 제어합니다. |
-| **`reference_images`** | 목록 | 동영상 | 스타일/캐릭터 참조용 이미지 (base64 확장 소재) 최대 3개 |
-| **`image`** | 텍스트 | 동영상 | 동영상 생성을 조건화하기 위한 base64로 인코딩된 초기 입력 이미지입니다. |
-| **`last_frame`** | 객체 | 동영상 | 보간을 위한 최종 이미지입니다 (`image`가 첫 번째 프레임으로 필요함). |
+| **`cached_content`** | ข้อความ | แชท | สอดคล้องกับแคชเนื้อหาทั่วไปของ Gemini |
+| **`thinking_config`** | วัตถุ | แชท | สอดคล้องกับ ThinkingConfig ของ Gemini |
+| **`aspect_ratio`** | ข้อความ | รูปภาพ | สัดส่วนภาพเอาต์พุต (เช่น `"16:9"`, `"1:1"`, `"9:16"`) |
+| **`generation_config`** | วัตถุ | รูปภาพ | ออบเจ็กต์การกำหนดค่าการสร้างของ Gemini (เช่น `{"responseModalities": ["IMAGE"], "candidateCount": 2}`) |
+| **`safety_settings`** | รายการ | รูปภาพ | ตัวกรองเกณฑ์ความปลอดภัยที่กำหนดเอง (เช่น `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`) |
+| **`tools`** | รายการ | รูปภาพ | เปิดใช้การอ้างอิง (เช่น `[{"google_search": {}}]`) สำหรับ `gemini-3-pro-image-preview` เท่านั้น |
+| **`aspect_ratio`** | ข้อความ | วิดีโอ | ขนาดของวิดีโอเอาต์พุต (`16:9` สำหรับแนวนอน, `9:16` สำหรับแนวตั้ง) แมปจาก `size` หากไม่ได้ระบุไว้ |
+| **`resolution`** | ข้อความ | วิดีโอ | ความละเอียดเอาต์พุต (`720p`, `1080p`, `4K`) หมายเหตุ: `1080p` และ `4K` จะทริกเกอร์ไปป์ไลน์การเพิ่มขนาด |
+| **`duration_seconds`** | จำนวนเต็ม | วิดีโอ | ความยาวการสร้าง (ค่า: `4`, `6`, `8`) ต้องเป็น `8` เมื่อใช้ `reference_images`, การประมาณค่า หรือส่วนขยาย |
+| **`frame_rate`** | ข้อความ | วิดีโอ | อัตราเฟรมสำหรับเอาต์พุตวิดีโอ (เช่น `"24"`) |
+| **`input_reference`** | ข้อความ | วิดีโอ | อินพุตอ้างอิงสำหรับการสร้างวิดีโอ |
+| **`extend_video_id`** | ข้อความ | วิดีโอ | รหัสของวิดีโอที่มีอยู่เพื่อขยาย |
+| **`negative_prompt`** | ข้อความ | วิดีโอ | รายการที่จะยกเว้น (เช่น `"shaky camera"`) |
+| **`seed`** | จำนวนเต็ม | วิดีโอ | จำนวนเต็มสำหรับการสร้างแบบดีเทอร์มินิสติก |
+| **`style`** | ข้อความ | วิดีโอ | การจัดสไตล์ภาพ (`cinematic` เป็นค่าเริ่มต้น, `creative` สำหรับการเพิ่มประสิทธิภาพโซเชียลมีเดีย) |
+| **`person_generation`** | ข้อความ | วิดีโอ | ควบคุมการสร้างบุคคล (`allow_adult`, `allow_all`, `dont_allow`) |
+| **`reference_images`** | รายการ | วิดีโอ | รูปภาพสูงสุด 3 รูปสำหรับการอ้างอิงสไตล์/ตัวละคร (ชิ้นงาน Base64) |
+| **`image`** | ข้อความ | วิดีโอ | รูปภาพอินพุตเริ่มต้นที่เข้ารหัส Base64 เพื่อกำหนดเงื่อนไขการสร้างวิดีโอ |
+| **`last_frame`** | วัตถุ | วิดีโอ | รูปภาพสุดท้ายสำหรับการประมาณค่า (ต้องมี `image` เป็นเฟรมแรก) |
 
-### `extra_body` 사용 예시
+### ตัวอย่างการใช้ `extra_body`
 
-다음은 `extra_body`를 사용하여 `cached_content`를 설정하는 예입니다.
+ตัวอย่างการใช้ `extra_body` เพื่อตั้งค่า `cached_content`
 
 ### Python
 
@@ -1210,9 +1226,9 @@ for chunk in stream:
     print(chunk.usage.to_dict())
 ```
 
-## 모델 나열
+## แสดงรายการโมเดล
 
-사용 가능한 Gemini 모델 목록을 가져옵니다.
+รับรายการโมเดล Gemini ที่พร้อมใช้งาน
 
 ### Python
 
@@ -1229,7 +1245,7 @@ for model in models:
   print(model.id)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -1256,9 +1272,9 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## 모델 가져오기
+## ดึงข้อมูลโมเดล
 
-Gemini 모델을 가져옵니다.
+ดึงข้อมูลโมเดล Gemini
 
 ### Python
 
@@ -1274,7 +1290,7 @@ model = client.models.retrieve("gemini-3.6-flash")
 print(model.id)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import OpenAI from "openai";
@@ -1299,22 +1315,23 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.6-f
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## 현재 제한사항
+## ข้อจำกัดปัจจุบัน
 
-기능 지원을 확대하고는 있지만, OpenAI 라이브러리 지원은 아직 베타 버전입니다.
+การรองรับไลบรารี OpenAI ยังอยู่ในเวอร์ชันเบต้าในขณะที่เราขยายการรองรับฟีเจอร์
 
-지원되는 매개변수, 예정된 기능에 관해 궁금한 점이 있거나 Gemini를 시작하는 데 문제가 있는 경우 [개발자 포럼](https://discuss.ai.google.dev/c/gemini-api/4?hl=ko)에 참여하세요.
+หากมีคำถามเกี่ยวกับพารามิเตอร์ที่รองรับ ฟีเจอร์ที่จะเปิดตัว หรือพบปัญหาในการเริ่มต้นใช้งาน Gemini โปรดเข้าร่วม
+ฟอรัมนักพัฒนาแอป
 
-## 다음 단계
+## ขั้นตอนถัดไป
 
-[OpenAI 호환성 Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=ko)을 사용해 더 자세한 예시를 살펴보세요.
+ลองใช้ [Colab ความเข้ากันได้กับ OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=th) เพื่อดูตัวอย่างโดยละเอียดเพิ่มเติม
 
-의견 보내기
+ส่งความคิดเห็น
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-최종 업데이트: 2026-09-12(UTC)
+อัปเดตล่าสุด 2026-09-12 UTC
 
-의견을 전달하고 싶나요?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-12(UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]

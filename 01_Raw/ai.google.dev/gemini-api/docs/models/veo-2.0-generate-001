@@ -1,44 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=tr
-fetched_at: 2026-09-21T05:47:43.336984+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=ar
+fetched_at: 2026-09-28T06:17:06.524509+00:00
 title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
 # Veo 2.0
 
-Üretime hazır iş akışlarında tutarlı performans sağlayan sağlam ve güvenilir sabit video üretme modelimiz. Veo 2.0, standart 1080p içerik oluşturma, sosyal medya öğeleri ve güvenilir karakter tutarlılığı ile öngörülebilir bir saniyeden kısa sürede üretim hızına öncelik veren yüksek hacimli video görevleri için en uygun seçenektir.
+هذا النموذج قوي وموثوق به لإنشاء فيديوهات ثابتة، ويقدّم أداءً ثابتًا لسير العمل الجاهز للاستخدام في عملية الإنتاج. يُعدّ Veo 2.0 الخيار الأفضل لإنشاء محتوى عادي بدقة 1080p ومواد عرض لوسائل التواصل الاجتماعي ومهام الفيديوهات الكبيرة التي تعطي الأولوية للاتساق الموثوق به للشخصيات وسرعات الإنشاء المتوقّعة التي تقلّ عن ثانية واحدة.
 
-## Belgeler
+## الوثائق
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Video oluşturma](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin.
+يُرجى الانتقال إلى صفحة [إنشاء الفيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar) للاطّلاع على تغطية كاملة لـ
+الميزات والإمكانات.
 
 ## veo-2.0-generate-001
 
-| Mülk | Açıklama |
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `veo-2.0-generate-001` |
-| saveDesteklenen veri türleri | **Giriş**  Metin, resim  **Çıkış**  Video |
-| token\_autoSınırlar | **Metin girişi**  Yok  **Resim girişi**  Dosya boyutu 20 MB'a kadar olan tüm görüntü çözünürlükleri ve en boy oranları  **Çıkış videosu**  2'ye kadar |
-| calendar\_monthSon güncelleme | Nisan 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `veo-2.0-generate-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص، صورة  **الناتج**  فيديو |
+| token\_autoالحدود | **إدخال نص**  لا ينطبق  **إدخال صورة**  أي دقة صورة ونسبة عرض إلى ارتفاع، ضمن ملف لا يتجاوز حجمه 20 ميغابايت  **فيديو الناتج**  ما يصل إلى 2 |
+| calendar\_monthآخر تعديل | أبريل 2025 |
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-09-07 UTC.
+تاريخ التعديل الأخير: 2026-09-07 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-07 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-07 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

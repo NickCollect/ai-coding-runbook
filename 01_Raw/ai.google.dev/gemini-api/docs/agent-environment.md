@@ -1,28 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=id
-fetched_at: 2026-09-21T05:52:03.852424+00:00
-title: "Lingkungan di agen terkelola \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr
+fetched_at: 2026-09-28T06:22:37.906126+00:00
+title: "Environnements dans les agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Kirim masukan
+Envoyer des commentaires
 
-# Lingkungan di agen terkelola
+# Environnements dans les agents gérés
 
-Lingkungan adalah sandbox Linux terkelola yang memberi agen tempat terisolasi untuk
-mengeksekusi kode dan mempertahankan file. Lingkungan ini tidak terikat dengan konteks interaksi, sehingga Anda dapat menggunakan kembali lingkungan yang sama di beberapa interaksi atau memulai dari awal kapan saja.
+Les environnements sont des bacs à sable Linux gérés qui offrent aux agents un espace isolé pour exécuter du code et conserver des fichiers. Ils sont dissociés du contexte d'interaction. Vous pouvez donc réutiliser le même environnement pour plusieurs interactions ou repartir de zéro à tout moment.
 
-Contoh berikut menunjukkan cara membuat interaksi dengan lingkungan jarak jauh
-baru dan mengambil ID-nya:
+L'exemple suivant montre comment créer une interaction avec un environnement distant et récupérer son ID :
 
 ### Python
 
@@ -79,6 +77,45 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println("Environment ID: " + interaction.environmentId().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Install pandas and matplotlib, verify the imports, and print the versions."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.EnvironmentID != nil {
+        fmt.Printf("Environment ID: %s\n", *res.Interaction.EnvironmentID)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -92,17 +129,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Parameter `environment`
+## Paramètre `environment`
 
-Parameter `environment` menerima tiga bentuk:
+Le paramètre `environment` accepte trois formes :
 
-| Formulir | Contoh | Kapan digunakan |
+| Formulaire | Exemple | Quand les utiliser ? |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Sediakan sandbox baru. |
-| ID Lingkungan | `environment="env_abc123"` | Menggunakan kembali sandbox yang ada dengan semua file dan paketnya. |
-| Objek konfigurasi | `environment={...}` | Sediakan sandbox baru dengan sumber, aturan jaringan, variabel lingkungan, atau kombinasi. |
+| `"remote"` | `environment="remote"` | Provisionnez un bac à sable. |
+| ID de l'environnement | `environment="env_abc123"` | Réutilisez un bac à sable existant avec tous ses fichiers et packages. |
+| Objet de configuration | `environment={...}` | Provisionnez un bac à sable avec des sources, des règles réseau, des variables d'environnement ou une combinaison de ces éléments. |
 
-Contoh berikut menunjukkan tiga cara menggunakan parameter `environment`.
+Les exemples suivants illustrent les trois façons d'utiliser le paramètre `environment`.
 
 ### Python
 
@@ -241,6 +278,84 @@ Interaction interaction3 = client.interactions.create(CreateInteractionRequestBo
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Fresh sandbox
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Write a hello world script."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    interaction := res1.Interaction
+
+    // Reuse an existing sandbox
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:                 interactions.NewInteractionsInput("Modify the script to accept a name argument."),
+            Environment:           genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(*interaction.EnvironmentID)),
+            PreviousInteractionID: interaction.ID,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = res2
+
+    // New sandbox with sources
+    env3 := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:   interactions.SourceTypeRepository.ToPointer(),
+                Source: genai.Ptr("https://github.com/octocat/Spoon-Knife"),
+                Target: genai.Ptr("/workspace/spoon-knife"),
+            },
+        },
+    }
+
+    res3, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("List all files and summarize the project."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env3)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = res3
+
+    if interaction.OutputText != nil {
+        fmt.Println(*interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -285,10 +400,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Mengonfigurasi lingkungan
+## Configurer un environnement
 
-Salah satu cara untuk menyiapkan lingkungan adalah dengan memberi tahu agen apa yang perlu diinstal.
-API ini menangani penyelesaian dan pemecahan masalah dependensi. Setelah lingkungan siap, simpan `environment_id` dan gunakan kembali.
+Une façon de configurer un environnement consiste à indiquer à l'agent ce que vous devez installer.
+Il gère la résolution des dépendances et le dépannage. Une fois l'environnement prêt, enregistrez le `environment_id` et réutilisez-le.
 
 ### Python
 
@@ -392,6 +507,74 @@ Interaction interaction3 = client.interactions.create(CreateInteractionRequestBo
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Install pandas, matplotlib, and seaborn. Verify all imports work and print the installed versions."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    interaction := res1.Interaction
+
+    // Reuse the configured environment
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:                 interactions.NewInteractionsInput("Clone https://github.com/octocat/Spoon-Knife into /workspace/tools. Run the test suite and fix any missing dependencies."),
+            Environment:           genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(*interaction.EnvironmentID)),
+            PreviousInteractionID: interaction.ID,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    interaction2 := res2.Interaction
+
+    // Reuse the configured environment
+    res3, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:                 interactions.NewInteractionsInput("Using the tools in /workspace/tools, list the files."),
+            Environment:           genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(*interaction.EnvironmentID)),
+            PreviousInteractionID: interaction2.ID,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = res3
+
+    if interaction.OutputText != nil {
+        fmt.Println(*interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -406,16 +589,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Memasang dari sumber
+### Monter à partir d'une source
 
-Jika Anda tahu persis file yang dibutuhkan agen, pasang file tersebut dalam satu panggilan, bukan melakukan iterasi. Objek konfigurasi `environment` menerima array `sources`
-dengan tiga jenis:
+Si vous savez exactement quels fichiers l'agent a besoin, installez-les en un seul appel au lieu d'itérer. L'objet de configuration `environment` accepte un tableau `sources` avec trois types :
 
-| Jenis sumber | Nilai `type` | Deskripsi | Batas |
+| Type de source | Valeur `type` | Description | Limite |
 | --- | --- | --- | --- |
-| Repositori Git | `repository` | Meng-clone repositori dari URL ke sandbox di `target`. | 500 MB |
-| Cloud Storage | `gcs` | Menyalin file atau direktori dari Cloud Storage ke sandbox di `target`. | 2 GB |
-| Konten inline | `inline` | Menulis konten teks mentah ke file di sandbox pada `target`. | 1 MB per file, total 2 MB |
+| Dépôt Git | `repository` | Clone un dépôt à partir d'une URL dans le bac à sable à l'adresse `target`. | 500 Mo |
+| Cloud Storage | `gcs` | Copie un fichier ou un répertoire depuis Cloud Storage dans le bac à sable à l'emplacement `target`. | 2 Go |
+| Contenu intégré | `inline` | Écrit le contenu du texte brut dans un fichier du bac à sable à l'emplacement `target`. | 1 Mo par fichier, 2 Mo au total |
 
 ### Python
 
@@ -534,6 +716,64 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:   interactions.SourceTypeRepository.ToPointer(),
+                Source: genai.Ptr("https://github.com/octocat/Spoon-Knife"),
+                Target: genai.Ptr("/workspace/spoon-knife"),
+            },
+            {
+                Type:   interactions.SourceTypeGcs.ToPointer(),
+                Source: genai.Ptr("gs://cloud-samples-data/bigquery/us-states/"),
+                Target: genai.Ptr("/workspace/gcs-data"),
+            },
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Content: genai.Ptr("# Project Notes\n\n- Analyze state population data\n- Create visualizations\n"),
+                Target:  genai.Ptr("/workspace/notes/readme.md"),
+            },
+        },
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("List all files under /workspace and describe what you find."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -567,21 +807,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Anda dapat menggabungkan kedua pendekatan: pasang sumber yang diketahui secara deklaratif, lalu lakukan iterasi dengan interaksi lanjutan untuk menginstal paket atau menjalankan skrip penyiapan. Anda tidak dapat
-menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan
-subdirektori.
+Vous pouvez combiner les deux approches : monter les sources connues de manière déclarative, puis itérer avec des interactions de suivi pour installer des packages ou exécuter des scripts de configuration. Vous ne pouvez pas définir la racine (`/`) comme cible lorsque vous ajoutez une source personnalisée. Vous devez toujours spécifier un sous-répertoire.
 
-### Hook
+### Accroches
 
-Anda juga dapat memasang file konfigurasi `.agents/hooks.json` dan skrip pencegatan kustom ke sandbox untuk menerapkan batas keamanan atau menjalankan validasi otomatis setiap kali alat dijalankan. Untuk definisi skema dan contoh kode, lihat [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=id).
+Vous pouvez également monter un fichier de configuration `.agents/hooks.json` et des scripts d'interception personnalisés dans le bac à sable pour appliquer des mesures de sécurité ou exécuter des validations automatiques chaque fois que des outils sont exécutés. Pour obtenir des définitions de schéma et des exemples de code, consultez [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fr).
 
-### Sumber pribadi
+### Sources privées
 
-Anda juga dapat mendownload dari repositori GitHub pribadi atau bucket Cloud Storage pribadi dengan mengautentikasi domain sumber dalam konfigurasi jaringan.
+Vous pouvez également télécharger des fichiers à partir de dépôts GitHub privés ou de buckets Cloud Storage privés en authentifiant le domaine source dans la configuration réseau.
 
-Salah satu opsi adalah [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) yang disimpan
-dan dirujuk berdasarkan ID, sehingga Anda menyimpan secret satu kali dan setiap lingkungan yang memerlukan
-sumber tersebut dapat merujuknya:
+Une option consiste à utiliser des [identifiants](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stockés référencés par ID. Vous stockez ainsi le secret une seule fois, et chaque environnement qui a besoin de cette source peut le référencer :
 
 ```
 "network": {
@@ -592,12 +828,10 @@ sumber tersebut dapat merujuknya:
 }
 ```
 
-Anda juga dapat menyetel header sebaris dengan `transform`, seperti yang dilakukan contoh berikut. Proxy keluar menerapkan kedua bentuk dengan cara yang sama, dan dalam kedua kasus tersebut, rahasia tidak berada di dalam sandbox.
+Vous pouvez également définir l'en-tête en ligne avec `transform`, comme le font les exemples suivants. Le proxy de sortie applique les deux formes de la même manière, et dans aucun des cas, le secret n'atterrit dans le bac à sable.
 
-Untuk **repositori Git pribadi**, gunakan autentikasi `Basic` dengan
-[Token Akses Pribadi GitHub
-(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) Anda.
-Encode token menggunakan `x-oauth-basic` sebagai nama pengguna:
+Pour les **dépôts Git privés**, utilisez l'authentification `Basic` avec votre [jeton d'accès personnel (PAT) GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Encodez le jeton en utilisant `x-oauth-basic` comme nom d'utilisateur :
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -725,6 +959,67 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:   interactions.SourceTypeRepository.ToPointer(),
+                Source: genai.Ptr("https://github.com/your-org/backend"),
+                Target: genai.Ptr("/backend-app"),
+            },
+        },
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "github.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Basic YOUR_BASE64_TOKEN",
+                    })),
+                },
+                {
+                    Domain: "*",
+                },
+            },
+        }))),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Run the test for my backend app and fix any issue."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -760,7 +1055,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Untuk **bucket Cloud Storage pribadi**, gunakan token OAuth 2.0 Bearer standar:
+Pour les **buckets Cloud Storage privés**, utilisez un jeton de support OAuth 2.0 standard :
 
 ```
 gcloud auth print-access-token
@@ -888,6 +1183,67 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:   interactions.SourceTypeGcs.ToPointer(),
+                Source: genai.Ptr("gs://my-private-bucket/data"),
+                Target: genai.Ptr("/workspace"),
+            },
+        },
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "*.googleapis.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Bearer YOUR_GCS_TOKEN",
+                    })),
+                },
+                {
+                    Domain: "*",
+                },
+            },
+        }))),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Analyze the discrepancies across the data in workspace"),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -923,27 +1279,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Software yang sudah diinstal sebelumnya
+## Logiciel pré-installé
 
-Sandbox berjalan di Ubuntu dan dilengkapi dengan runtime dan paket umum yang telah diinstal sebelumnya. Agen dapat menginstal paket tambahan saat runtime menggunakan `pip
-install` atau `npm install`. Paket yang diinstal selama interaksi akan tetap ada saat Anda menggunakan kembali `environment_id` yang sama.
+Le bac à sable s'exécute sur Ubuntu et est fourni avec des environnements d'exécution et des packages courants préinstallés. L'agent peut installer des packages supplémentaires au moment de l'exécution à l'aide de `pip
+install` ou `npm install`. Les packages installés lors d'une interaction persistent lorsque vous réutilisez le même `environment_id`.
 
-| Kategori | Paket yang telah diinstal sebelumnya |
+| Catégorie | Packages pré-installés |
 | --- | --- |
-| **Alat UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
-| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
-| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
+| **Outils UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
+| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## Variabel lingkungan
+## Variables d'environnement
 
-Gunakan kolom `env` untuk menetapkan variabel lingkungan di dalam sandbox. Setiap entri
-memetakan nama variabel ke string literal untuk konfigurasi atau
-referensi ke [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) yang disimpan untuk
-secret. Agen melihatnya seperti di shell mana pun, sehingga alat dan skrip yang membaca dari lingkungan proses akan mengambilnya tanpa penyiapan tambahan.
+Utilisez le champ `env` pour définir les variables d'environnement dans le bac à sable. Chaque entrée mappe un nom de variable à une chaîne littérale pour la configuration ou à une référence à un [identifiant](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stocké pour un secret. L'agent les voit comme dans n'importe quel shell. Les outils et les scripts qui lisent l'environnement de processus les récupèrent donc sans câblage supplémentaire.
 
-| Kolom | Jenis | Deskripsi |
+| Champ | Type | Description |
 | --- | --- | --- |
-| `env` | `object` | Peta nama variabel ke nilai. Nilai dapat berupa literal `string` atau referensi kredensial dalam bentuk `{"credential": "credential-id"}`. |
+| `env` | `object` | Mappage du nom de la variable à la valeur. Une valeur est soit un littéral `string`, soit une référence d'identifiant au format `{"credential": "credential-id"}`. |
 
 ### Python
 
@@ -1011,27 +1364,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Variabel berlaku untuk setiap perintah yang dijalankan agen dalam interaksi tersebut, termasuk
-perintah shell, langkah-langkah build, dan proses apa pun yang dimulainya.
+Les variables s'appliquent à chaque commande exécutée par l'agent lors de cette interaction, y compris les commandes shell, les étapes de compilation et tout processus qu'il lance.
 
-Kedua jenis nilai ini berperilaku berbeda. String literal ditulis ke dalam
-penampung sebagai teks biasa. Referensi kredensial bukan: variabel menerima
-placeholder, dan proxy egress mengganti rahasia sebenarnya hanya pada permintaan
-keluar ke domain tepercaya kredensial tersebut. Lihat
-[Menggunakan kredensial sebagai variabel lingkungan](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id#environment-variables)
-untuk mengetahui cara kerjanya.
+Ces deux types de valeurs se comportent différemment. Une chaîne littérale est écrite dans le conteneur en tant que texte brut. Une référence d'identifiant n'est pas : la variable reçoit un espace réservé, et le proxy de sortie remplace le véritable secret uniquement dans les requêtes sortantes vers les domaines de confiance de cet identifiant. Pour en savoir plus, consultez [Utiliser des identifiants comme variables d'environnement](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr#environment-variables).
 
-## Konfigurasi jaringan
+## Configuration du réseau
 
-Secara default, lingkungan memiliki akses jaringan keluar yang tidak dibatasi. Gunakan kolom
-`network` untuk membatasi traffic keluar ke domain tertentu. Setiap aturan menentukan `domain`, ditambah `credential` opsional untuk menyisipkan rahasia tersimpan dan objek `transform` opsional untuk menyisipkan header ke dalam permintaan yang cocok.
-Header ini dapat bersifat unik per interaksi, dan Anda dapat memperbaruinya untuk lingkungan yang sama.
+Par défaut, les environnements disposent d'un accès réseau sortant illimité. Utilisez le champ `network` pour limiter le trafic sortant à des domaines spécifiques. Chaque règle spécifie un `domain`, ainsi qu'un `credential` facultatif pour injecter un secret stocké et un objet `transform` facultatif pour injecter des en-têtes dans les requêtes correspondantes.
+Ces en-têtes peuvent être uniques pour chaque interaction et vous pouvez les mettre à jour pour le même environnement.
 
-| Kolom | Jenis | Deskripsi |
+| Champ | Type | Description |
 | --- | --- | --- |
-| `domain` | `string` | Domain yang akan dicocokkan. Gunakan nama host yang sama persis atau `*` untuk semua domain. |
-| `credential` | `string` | ID [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) yang disimpan. Proxy keluar akan menyelesaikannya dan menyuntikkan header autentikasi pada waktu permintaan. |
-| `transform` | `object` | Objek yang berisi pasangan nilai kunci datar yang merepresentasikan header untuk disisipkan ke dalam permintaan yang cocok, misalnya `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | Domaine à mettre en correspondance. Utilisez un nom d'hôte exact ou `*` pour tous les domaines. |
+| `credential` | `string` | ID d'un [identifiant](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stocké. Le proxy de sortie le résout et injecte l'en-tête d'authentification au moment de la requête. |
+| `transform` | `object` | Objet contenant des paires clé/valeur plates représentant les en-têtes à injecter dans les requêtes correspondantes, par exemple `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -1141,6 +1487,63 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "api.github.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Bearer ghp_your_github_token",
+                    })),
+                },
+                {
+                    Domain: "pypi.org",
+                },
+                {
+                    Domain: "*",
+                },
+            },
+        }))),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Fetch the latest issues from the GitHub API for my-org/my-repo."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1168,16 +1571,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Jika daftar yang diizinkan ditetapkan, hanya permintaan ke domain yang tercantum secara eksplisit yang
-diizinkan. Anda dapat menggunakan karakter pengganti untuk mencocokkan subdomain (misalnya, `{"domain":
-"*.example.com"}`), tetapi perhatikan bahwa karakter ini tidak cocok dengan domain root `example.com`, yang harus ditambahkan secara terpisah. Untuk mengizinkan semua traffic lainnya, seperti merutekan domain yang tidak tercantum tanpa header yang disisipkan, tambahkan `{"domain": "*"}` sebagai entri catch-all.
+Lorsqu'une liste d'autorisation est définie, seules les requêtes adressées aux domaines explicitement listés sont autorisées. Vous pouvez utiliser des caractères génériques pour faire correspondre des sous-domaines (par exemple, `{"domain":
+"*.example.com"}`), mais notez que cela ne correspond pas au domaine racine `example.com`, qui doit être ajouté séparément. Pour autoriser tout autre trafic, comme le routage de domaines non listés sans en-têtes injectés, ajoutez `{"domain": "*"}` en tant qu'entrée générique.
 
-### Kredensial
+### Identifiants
 
-Ada dua cara untuk mengautentikasi traffic keluar, yaitu kredensial tersimpan yang dirujuk oleh ID dan `transform` inline pada aturan daftar yang diizinkan. Proxy keluar diterapkan di jaringan, sehingga dalam kedua kasus tersebut, rahasia tidak pernah masuk ke sandbox dan tidak pernah muncul di payload interaksi Anda.
+Il existe deux façons d'authentifier le trafic sortant : un identifiant d'informations d'identification stockées et un `transform` intégré à la règle de liste d'autorisation. Le proxy de sortie s'applique à la fois sur le réseau. Dans les deux cas, le secret n'entre jamais dans le bac à sable et n'apparaît jamais dans vos charges utiles d'interaction.
 
-[Kredensial terkelola](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) adalah kredensial yang harus dijangkau
-saat Anda ingin menyimpan rahasia sekali dan menggunakannya kembali. Setiap lingkungan, agen, dan pemicu dalam project Anda dapat mereferensikan ID yang sama, dan Anda dapat menggantinya di satu tempat.
+Les [identifiants gérés](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) sont ceux à utiliser lorsque vous souhaitez stocker le secret une seule fois et le réutiliser. Chaque environnement, agent et déclencheur de votre projet peut faire référence au même ID, et vous pouvez le faire pivoter à un seul endroit.
 
 ### Python
 
@@ -1272,14 +1673,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Kredensial `oauth2` juga merefresh token aksesnya sendiri, sehingga interaksi yang berjalan lama tidak akan terganggu saat token berakhir. Lihat
-[Kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) untuk mengetahui daftar lengkap
-jenis kredensial dan operasi pengelolaan.
+Un identifiant `oauth2` actualise également son jeton d'accès de manière autonome. Ainsi, une interaction de longue durée ne s'interrompt pas lorsque le jeton expire. Pour obtenir la liste complète des types d'identifiants et des opérations de gestion, consultez [Identifiants](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr).
 
-Anda juga dapat menyetel header sebaris dengan `transform`. Hal ini cocok jika nilai
-termasuk dalam satu panggilan, misalnya token yang Anda buat tepat sebelum membuat
-interaksi. Header yang ditetapkan dengan cara ini disuntikkan oleh proxy keluar yang sama,
-header tersebut tidak pernah diekspos di dalam sandbox sebagai variabel lingkungan atau file.
+Vous pouvez également définir des en-têtes en ligne avec `transform`. Cela convient lorsque la valeur appartient à un seul appel, par exemple un jeton que vous générez juste avant de créer l'interaction. Les en-têtes définis de cette manière sont injectés par le même proxy de sortie. Ils ne sont jamais exposés dans le bac à sable en tant que variables d'environnement ou fichiers.
 
 ### Python
 
@@ -1398,6 +1794,67 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os/exec"
+    "strings"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+
+    // Fetch a short-lived access token from your local gcloud CLI
+    out, err := exec.Command("gcloud", "auth", "print-access-token").Output()
+    if err != nil {
+        log.Fatal(err)
+    }
+    gcloudToken := strings.TrimSpace(string(out))
+
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "storage.googleapis.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Bearer " + gcloudToken,
+                    })),
+                },
+            },
+        }))),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("List the files in gs://my-bucket/reports/ using the GCS JSON API."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1423,13 +1880,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential` dan `transform` dapat muncul pada aturan yang sama. Kredensial diterapkan terlebih dahulu dan `transform` digabungkan di atas, sehingga header `transform` eksplisit akan menang jika keduanya menetapkan kunci yang sama. Pola umum adalah kredensial untuk
-header autentikasi ditambah `transform` untuk header tambahan yang diharapkan layanan
-bersama dengan kredensial tersebut.
+`credential` et `transform` peuvent apparaître dans la même règle. L'identifiant est appliqué en premier, et `transform` est fusionné par-dessus. Par conséquent, un en-tête `transform` explicite est prioritaire si les deux définissent la même clé. Un modèle courant est un identifiant pour l'en-tête d'authentification, plus un `transform` pour les en-têtes supplémentaires attendus par le service.
 
-### Menonaktifkan akses jaringan
+### Désactiver l'accès au réseau
 
-Untuk memblokir semua akses jaringan keluar, tetapkan `network` ke `disabled`:
+Pour bloquer tous les accès réseau sortants, définissez `network` sur `disabled` :
 
 ### Python
 
@@ -1499,6 +1954,48 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NetworkEnumDisabled)),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Analyze the local files only."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1515,13 +2012,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Memperbarui kredensial
+### Actualiser les identifiants
 
-Token inline seperti token akses dan kunci API yang memiliki masa aktif singkat akan habis masa berlakunya.
-Anda dapat memperbaruinya dengan meneruskan `environment_id` yang ada bersama dengan
-konfigurasi `network` baru pada interaksi berikutnya. Aturan jaringan baru sepenuhnya menggantikan aturan sebelumnya, sementara status sistem file lingkungan (paket, file, repositori yang diinstal) dipertahankan.
+Les jetons intégrés tels que les jetons d'accès et les clés API de courte durée expirent.
+Vous pouvez les actualiser en transmettant le `environment_id` existant avec une nouvelle configuration `network` lors de la prochaine interaction. Les nouvelles règles réseau remplacent entièrement les précédentes, tandis que l'état du système de fichiers de l'environnement (packages, fichiers, dépôts installés) est conservé.
 
-Jika Anda menggunakan [kredensial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=id) tersimpan sebagai gantinya, Anda tidak memerlukan ini. Kredensial `oauth2` diperbarui dengan sendirinya, dan merotasi kredensial apa pun adalah `PATCH` pada kredensial yang membuat setiap aturan daftar yang diizinkan yang mereferensikannya tidak berubah.
+Si vous utilisez un [identifiant](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stocké, vous n'en avez pas besoin. Un identifiant `oauth2` s'actualise automatiquement. La rotation d'un identifiant est une `PATCH` sur l'identifiant qui laisse intactes toutes les règles de liste autorisée le référençant.
 
 ### Python
 
@@ -1693,6 +2189,85 @@ Interaction result = client.interactions.create(CreateInteractionRequestBody.of(
 System.out.println(result.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // First interaction: use an initial token
+    initialEnv := interactions.Environment{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "storage.googleapis.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Bearer INITIAL_TOKEN",
+                    })),
+                },
+            },
+        }))),
+    }
+
+    firstRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("List the files in gs://my-bucket/reports/ using the GCS JSON API."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(initialEnv)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    first := firstRes.Interaction
+
+    // Later: refresh the token on the same environment
+    refreshedEnv := interactions.Environment{
+        EnvironmentID: first.EnvironmentID,
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "storage.googleapis.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Bearer REFRESHED_TOKEN",
+                    })),
+                },
+            },
+        }))),
+    }
+
+    secondRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Now download the file reports/q1.csv from the same bucket."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(refreshedEnv)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if secondRes.Interaction.OutputText != nil {
+        fmt.Println(*secondRes.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1720,28 +2295,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Siklus proses lingkungan
+## Cycle de vie de l'environnement
 
-Lingkungan mengikuti siklus proses ini:
+Les environnements suivent ce cycle de vie :
 
-| Negara bagian/Provinsi | Perilaku |
+| État | Comportement |
 | --- | --- |
-| **Dibuat** | Disediakan saat interaksi menentukan `environment: "remote"` atau objek konfigurasi. |
-| **Aktif** | Berjalan saat interaksi sedang berlangsung. |
-| **Idle** | Snapshot otomatis dan dihentikan setelah 15 menit tidak ada aktivitas. |
-| **Offline** | Dipertahankan selama 7 hari sejak terakhir aktif. Dapat dilanjutkan dengan meneruskan ID-nya. |
-| **Dihapus** | Dihapus dari sistem secara otomatis setelah retensi TTL 7 hari berakhir atau saat penghapusan manual. |
+| **Créé** | Fourni lorsqu'une interaction spécifie `environment: "remote"` ou un objet de configuration. |
+| **Actif** | S'exécuter pendant qu'une interaction est en cours. |
+| **Inactif** | Instantané automatique et arrêt après 15 minutes d'inactivité. |
+| **Hors connexion** | Conservées pendant sept jours après la dernière activité. Vous pouvez la reprendre en transmettant son ID. |
+| **Supprimé** | Supprimés automatiquement du système une fois le délai de conservation de sept jours expiré ou en cas de suppression manuelle. |
 
-## Environments API
+## API Environments
 
-Anda dapat menggunakan Environments API untuk mengelola sesi sandbox secara terprogram.
-Dengan menghitung lingkungan, Anda dapat menemukan ID sesi aktif dan memulihkan status
-jika koneksi klien berakhir selama tugas yang berjalan lama. Anda juga dapat memeriksa metadata sesi dan menghapus lingkungan secara eksplisit saat alur kerja selesai, bukan menunggu masa berlaku TTL otomatis berakhir.
+Vous pouvez utiliser l'API Environments pour gérer les sessions de bac à sable de manière programmatique.
+L'énumération des environnements vous permet de découvrir les ID de session actifs et de récupérer l'état si une connexion client se termine lors d'une tâche de longue durée. Vous pouvez également inspecter les métadonnées de session et supprimer explicitement les environnements à la fin des workflows au lieu d'attendre l'expiration automatique de la durée de vie.
 
-### Mencantumkan lingkungan
+### Répertorier les environnements
 
-Mencantumkan lingkungan aktif yang termasuk dalam project Anda. Gunakan parameter penomoran halaman
-untuk mengontrol ukuran batch respons.
+Répertoriez les environnements actifs appartenant à votre projet. Utilisez les paramètres de pagination pour contrôler la taille de lot des réponses.
 
 ### Python
 
@@ -1789,6 +2362,44 @@ for (Environment env : response.environments().orElse(List.of())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    interactionssdk "google.golang.org/genai/interactions"
+    "google.golang.org/genai/interactions/models/components"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    sdk := interactionssdk.New(interactionssdk.WithSecurity(components.Security{
+        APIKey: genai.Ptr(os.Getenv("GEMINI_API_KEY")),
+    }))
+
+    res, err := sdk.Environments.ListEnvironments(ctx, operations.ListEnvironmentsRequest{
+        PageSize: genai.Ptr(10),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.ListEnvironmentsResponse != nil {
+        for _, env := range res.ListEnvironmentsResponse.Environments {
+            fmt.Printf("Environment ID: %s, Status: %v\n", env.ID, env.Status)
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1796,7 +2407,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-Responsnya akan terlihat seperti berikut:
+La réponse ressemble à ce qui suit :
 
 ```
 {
@@ -1814,10 +2425,9 @@ Responsnya akan terlihat seperti berikut:
 }
 ```
 
-### Mendapatkan lingkungan
+### Obtenir un environnement
 
-Mengambil metadata dan detail konfigurasi untuk lingkungan tertentu berdasarkan
-nama resource-nya.
+Récupérez les métadonnées et les informations de configuration d'un environnement spécifique à l'aide de son nom de ressource.
 
 ### Python
 
@@ -1853,6 +2463,41 @@ Environment env = client.environments.getEnvironment("YOUR_ENVIRONMENT_ID").envi
 System.out.println("Environment ID: " + env.id().orElse("") + ", Status: " + env.status().orElse(null));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    interactionssdk "google.golang.org/genai/interactions"
+    "google.golang.org/genai/interactions/models/components"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    sdk := interactionssdk.New(interactionssdk.WithSecurity(components.Security{
+        APIKey: genai.Ptr(os.Getenv("GEMINI_API_KEY")),
+    }))
+
+    res, err := sdk.Environments.GetEnvironment(ctx, operations.GetEnvironmentRequest{
+        ID: "YOUR_ENVIRONMENT_ID",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := res.Environment
+    fmt.Printf("Environment ID: %s, Status: %v\n", env.ID, env.Status)
+}
+```
+
 ### REST
 
 ```
@@ -1860,7 +2505,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-Responsnya akan terlihat seperti berikut:
+La réponse ressemble à ce qui suit :
 
 ```
 {
@@ -1886,10 +2531,9 @@ Responsnya akan terlihat seperti berikut:
 }
 ```
 
-### Menghapus lingkungan
+### Supprimer un environnement
 
-Hentikan dan hapus lingkungan secara eksplisit untuk membersihkan resource sandbox
-saat tugas atau pipeline Anda selesai.
+Mettez fin à un environnement et supprimez-le explicitement pour nettoyer les ressources du bac à sable une fois vos tâches ou pipelines terminés.
 
 ### Python
 
@@ -1921,6 +2565,37 @@ Client client = new Client();
 client.environments.deleteEnvironment("YOUR_ENVIRONMENT_ID");
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    interactionssdk "google.golang.org/genai/interactions"
+    "google.golang.org/genai/interactions/models/components"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    sdk := interactionssdk.New(interactionssdk.WithSecurity(components.Security{
+        APIKey: genai.Ptr(os.Getenv("GEMINI_API_KEY")),
+    }))
+
+    _, err := sdk.Environments.DeleteEnvironment(ctx, operations.DeleteEnvironmentRequest{
+        ID: "YOUR_ENVIRONMENT_ID",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1928,23 +2603,19 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Mengelola file di lingkungan
+## Gérer les fichiers dans l'environnement
 
-Agen membuat dan mengubah file di dalam sandbox selama eksekusi. Anda
-dapat menjelajahi konten direktori, mendapatkan metadata file, mendownload file satu per satu atau
-seluruh direktori sebagai arsip tar, dan mengupload file atau mengekstrak arsip
-langsung ke lingkungan. Penyimpanan di lingkungan sandbox tunduk pada
-batas penggunaan wajar.
+L'agent crée et modifie des fichiers dans le bac à sable lors de l'exécution. Vous pouvez parcourir le contenu des répertoires, obtenir les métadonnées des fichiers, télécharger des fichiers individuels ou des répertoires entiers sous forme d'archives TAR, et importer des fichiers ou extraire des archives directement dans l'environnement. Le stockage dans les environnements de bac à sable est soumis à des limites d'utilisation équitable.
 
-### Mencantumkan file dalam direktori
+### Lister les fichiers d'un répertoire
 
-Mencantumkan isi direktori di lingkungan. Secara default, mencantumkan direktori root.
+Affichez le contenu d'un répertoire dans l'environnement. Par défaut, la liste affiche le répertoire racine.
 
-#### Parameter kueri
+#### Paramètres de requête
 
-| Parameter | Jenis | Deskripsi |
+| Paramètre | Type | Description |
 | --- | --- | --- |
-| `recursive` | boolean | Saat `true`, mencantumkan semua file dan direktori secara rekursif. Default: `false`. |
+| `recursive` | booléen | Lorsque la valeur est `true`, liste tous les fichiers et répertoires de manière récursive. Valeur par défaut : `false`. |
 
 ### Python
 
@@ -2014,7 +2685,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-Respons menampilkan array `files` dengan metadata untuk setiap entri:
+La réponse renvoie un tableau `files` avec les métadonnées de chaque entrée :
 
 ```
 {
@@ -2039,21 +2710,21 @@ Respons menampilkan array `files` dengan metadata untuk setiap entri:
 }
 ```
 
-#### Kolom entri file
+#### Champs de saisie de fichier
 
-| Kolom | Jenis | Deskripsi |
+| Champ | Type | Description |
 | --- | --- | --- |
-| `name` | string | Nama file atau direktori. |
-| `path` | string | Jalur lengkap relatif terhadap root lingkungan. |
-| `type` | string | `FILE` atau `DIRECTORY`. |
-| `size_bytes` | string | Ukuran file dalam byte (khusus file). |
-| `mime_type` | string | Jenis MIME (khusus file). |
-| `created` | string | Stempel waktu pembuatan ISO 8601. |
-| `modified` | string | Stempel waktu terakhir diubah ISO 8601. |
+| `name` | chaîne | Nom du fichier ou du répertoire. |
+| `path` | chaîne | Chemin d'accès complet par rapport à la racine de l'environnement. |
+| `type` | chaîne | `FILE` ou `DIRECTORY`. |
+| `size_bytes` | chaîne | Taille du fichier en octets (fichiers uniquement). |
+| `mime_type` | chaîne | Type MIME (fichiers uniquement). |
+| `created` | chaîne | Code temporel de création au format ISO 8601. |
+| `modified` | chaîne | Code temporel de la dernière modification au format ISO 8601. |
 
-### Mendapatkan metadata file
+### Obtenir les métadonnées d'un fichier
 
-Mendapatkan metadata untuk file tertentu berdasarkan jalur.
+Obtenez les métadonnées d'un fichier spécifique par chemin d'accès.
 
 ### Python
 
@@ -2092,7 +2763,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-Respons menampilkan metadata file yang dienkapsulasi dalam array `files`:
+La réponse renvoie les métadonnées du fichier encapsulées dans un tableau `files` :
 
 ```
 {
@@ -2110,7 +2781,7 @@ Respons menampilkan metadata file yang dienkapsulasi dalam array `files`:
 }
 ```
 
-Jika file tidak ada, API akan menampilkan error `404`:
+Si le fichier n'existe pas, l'API renvoie une erreur `404` :
 
 ```
 {
@@ -2121,9 +2792,9 @@ Jika file tidak ada, API akan menampilkan error `404`:
 }
 ```
 
-### Mendownload satu file
+### Télécharger un seul fichier
 
-Mendownload konten file tertentu. Di SDK, gunakan metode `download()`. Dalam permintaan REST, tambahkan parameter kueri `?alt=media` ke jalur file. Server merespons dengan `200 OK` dan melakukan streaming konten file mentah.
+Téléchargez le contenu d'un fichier spécifique. Dans les SDK, utilisez la méthode `download()`. Dans les requêtes REST, ajoutez le paramètre de requête `?alt=media` au chemin d'accès au fichier. Le serveur répond avec `200 OK` et diffuse le contenu brut du fichier.
 
 ### Python
 
@@ -2165,11 +2836,9 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
   -o main.py
 ```
 
-### Mendownload direktori sebagai arsip tar
+### Télécharger un répertoire en tant qu'archive tar
 
-Download seluruh direktori sebagai arsip tar dengan meminta jalur direktori
-dengan `?alt=media`. Perintah ini akan menampilkan file tar POSIX (tidak di-gzip). Gunakan
-`recursive=true` untuk menyertakan subdirektori bertingkat.
+Téléchargez un répertoire entier sous forme d'archive tar en demandant le chemin d'accès au répertoire avec `?alt=media`. Cela renvoie un fichier tar POSIX (non compressé). Utilisez `recursive=true` pour inclure les sous-répertoires imbriqués.
 
 ### Python
 
@@ -2233,30 +2902,30 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
 tar xf snapshot.tar -C ./extracted
 ```
 
-#### Matriks perilaku
+#### Matrice de comportement
 
-Matriks perilaku berikut merangkum respons dan perilaku pengarsipan yang diharapkan di seluruh endpoint file dan direktori, metode HTTP, dan parameter kueri:
+La matrice de comportement suivante récapitule la réponse attendue et le comportement d'archivage pour les points de terminaison de fichiers et de répertoires, les méthodes HTTP et les paramètres de requête :
 
-| Permintaan | `alt` | `recursive` | `extract` | `overwrite` | Respons |
+| Requête | `alt` | `recursive` | `extract` | `overwrite` | Réponse |
 | --- | --- | --- | --- | --- | --- |
-| `GET /files` | (tidak ada) | (tidak ada) | - | - | Listingan JSON direktori root |
-| `GET /files/{path}` (file) | (tidak ada) | - | - | - | Metadata JSON untuk file |
-| `GET /files/{path}` (dir) | (tidak ada) | `false` | - | - | Daftar JSON anak langsung |
-| `GET /files/{path}` (dir) | (tidak ada) | `true` | - | - | Listingan JSON dari semua turunan |
-| `GET /files/{path}?alt=media` (file) | `media` | - | - | - | Konten file mentah |
-| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | Arsip tar file langsung di direktori |
-| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | Arsip tar semua file secara rekursif |
-| `GET /files?alt=media` | `media` | `false` | - | - | Arsip tar hanya berisi file tingkat root |
-| `PUT /files/{path}` (file) | - | - | `false` | `false` | Menulis file di jalur. Menampilkan `409 Conflict` jika sudah ada |
-| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | Menulis atau mengganti file di jalur |
-| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | Mengekstrak arsip ke direktori tujuan. Menampilkan `409 Conflict` jika ada file target |
-| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | Mengekstrak arsip, menggantikan file yang ada |
+| `GET /files` | (aucun) | (aucun) | - | - | Liste JSON du répertoire racine |
+| `GET /files/{path}` (fichier) | (aucun) | - | - | - | Métadonnées JSON du fichier |
+| `GET /files/{path}` (dir) | (aucun) | `false` | - | - | Liste JSON des enfants immédiats |
+| `GET /files/{path}` (dir) | (aucun) | `true` | - | - | Liste JSON de tous les descendants |
+| `GET /files/{path}?alt=media` (fichier) | `media` | - | - | - | Contenu brut du fichier |
+| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | Archive tar des fichiers immédiats dans le répertoire |
+| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | Archive TAR de tous les fichiers de manière récursive |
+| `GET /files?alt=media` | `media` | `false` | - | - | Archive TAR des fichiers de niveau racine uniquement |
+| `PUT /files/{path}` (fichier) | - | - | `false` | `false` | Écrit le fichier au chemin d'accès. Renvoie `409 Conflict` s'il existe déjà |
+| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | Écrit ou écrase le fichier au chemin d'accès |
+| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | Décompresse l'archive dans le répertoire de destination. Renvoie `409 Conflict` si un fichier cible existe. |
+| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | Décompresse l'archive en remplaçant les fichiers existants |
 
-### Mengupload file ke lingkungan
+### Importer des fichiers dans l'environnement
 
-Upload file individual atau arsip direktori langsung ke sandbox lingkungan yang ada menggunakan HTTP `PUT`. Direktori induk dibuat secara otomatis jika belum ada. Penyimpanan di lingkungan tunduk pada batas penggunaan yang wajar.
+Importez des fichiers individuels ou des archives de répertoire directement dans un bac à sable d'environnement existant à l'aide de HTTP `PUT`. Les répertoires parents sont créés automatiquement s'ils n'existent pas. Le stockage dans les environnements est soumis à des limites d'utilisation équitable.
 
-#### Mengupload satu file
+#### Importer un seul fichier
 
 ### Python
 
@@ -2308,8 +2977,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @local_file.txt
 ```
 
-Respons menampilkan metadata untuk file yang diupload, yang di-wrap dalam array `files`
-agar konsisten dengan endpoint daftar dan pengambilan:
+La réponse renvoie les métadonnées du fichier importé, encapsulées dans un tableau `files` pour assurer la cohérence avec les points de terminaison list et get :
 
 ```
 {
@@ -2325,10 +2993,9 @@ agar konsisten dengan endpoint daftar dan pengambilan:
 }
 ```
 
-#### Mengupload dan mengekstrak arsip direktori
+#### Importer et extraire une archive de répertoire
 
-Untuk mengisi seluruh codebase atau struktur direktori dalam satu permintaan, upload arsip
-`.tar` atau `.tar.gz` dengan `extract=true`.
+Pour amorcer une codebase ou une structure de répertoire entières en une seule requête, importez une archive `.tar` ou `.tar.gz` avec `extract=true`.
 
 ### Python
 
@@ -2379,7 +3046,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @source.tar.gz
 ```
 
-Respons mencantumkan setiap file yang ditulis oleh arsip:
+La réponse liste tous les fichiers écrits par l'archive :
 
 ```
 {
@@ -2402,13 +3069,11 @@ Respons mencantumkan setiap file yang ditulis oleh arsip:
 }
 ```
 
-#### Mengupload file besar dengan sesi yang dapat dilanjutkan
+#### Importer des fichiers volumineux avec une session avec reprise
 
-Untuk payload besar, atau saat mengupload melalui koneksi yang tidak andal, gunakan sesi yang dapat dilanjutkan, bukan mengirim seluruh isi dalam satu permintaan. Upload yang dapat dilanjutkan membagi transfer menjadi beberapa bagian yang dapat dicoba ulang satu per satu, sehingga kegagalan di tengah proses tidak mengharuskan Anda memulai dari awal.
+Pour les charges utiles volumineuses ou lorsque vous importez des données sur une connexion peu fiable, utilisez une session avec reprise au lieu d'envoyer l'intégralité du corps dans une seule requête. Une importation avec reprise divise le transfert en blocs qui peuvent être réessayés individuellement. Ainsi, en cas d'échec en cours de transfert, vous n'avez pas besoin de tout recommencer.
 
-Mulai dengan memulai sesi menggunakan `uploadType=resumable`. Kirim isi kosong
-dan gunakan header `X-Upload-Content-Type` dan `X-Upload-Content-Length` untuk
-mendeklarasikan jenis media dan total ukuran payload yang ingin Anda upload:
+Commencez par lancer la session avec `uploadType=resumable`. Envoyez un corps vide et utilisez les en-têtes `X-Upload-Content-Type` et `X-Upload-Content-Length` pour déclarer le type de contenu et la taille totale de la charge utile que vous souhaitez importer :
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable HTTP/1.1
@@ -2419,7 +3084,7 @@ Content-Length: 0
 x-goog-api-key: $GEMINI_API_KEY
 ```
 
-Respons membawa URL sesi di header `Location`. URL ini sudah berisi `upload_id`, sehingga tidak memerlukan kunci API lagi:
+La réponse contient l'URL de la session dans l'en-tête `Location`. Cette URL contient déjà un `upload_id`. La clé API n'est donc pas nécessaire :
 
 ```
 HTTP/1.1 200 OK
@@ -2427,8 +3092,7 @@ Location: https://generativelanguage.googleapis.com/upload/v1beta/environments/$
 Content-Length: 0
 ```
 
-Upload payload ke URL tersebut dalam potongan. Setiap bagian menyatakan rentang byte dan
-ukuran total dengan header `Content-Range`:
+Importez la charge utile à cette URL par blocs. Chaque bloc déclare sa plage d'octets et la taille totale avec un en-tête `Content-Range` :
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -2440,7 +3104,7 @@ Content-Length: 10485760
 <10 MB binary payload>
 ```
 
-Setiap bagian kecuali yang terakhir menampilkan `308 Resume Incomplete`. Header `Range` memberi tahu Anda jumlah byte yang telah di-commit server, yang merupakan titik tempat Anda melanjutkan jika chunk gagal:
+Chaque bloc, à l'exception du dernier, renvoie `308 Resume Incomplete`. L'en-tête `Range` indique le nombre d'octets validés par le serveur, à partir duquel vous pouvez reprendre l'importation en cas d'échec d'un bloc :
 
 ```
 HTTP/1.1 308 Resume Incomplete
@@ -2448,7 +3112,7 @@ Range: bytes=0-10485759
 Content-Length: 0
 ```
 
-Kirimkan bagian yang tersisa dengan cara yang sama:
+Envoyez les autres blocs de la même manière :
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -2460,8 +3124,7 @@ Content-Length: 10485760
 <remaining 10 MB binary payload>
 ```
 
-Chunk terakhir menyelesaikan upload dan menampilkan metadata file, dalam amplop
-`files` yang sama seperti upload sekali kirim:
+Le dernier bloc termine l'importation et renvoie les métadonnées du fichier, dans la même enveloppe `files` qu'une importation en une seule fois :
 
 ```
 {
@@ -2477,11 +3140,11 @@ Chunk terakhir menyelesaikan upload dan menampilkan metadata file, dalam amplop
 }
 ```
 
-Sesi yang dapat dilanjutkan juga berfungsi dengan `extract` dan `overwrite`. Tetapkan parameter kueri tersebut pada permintaan inisiasi, bukan pada setiap bagian.
+Les sessions réactivables fonctionnent également avec `extract` et `overwrite`. Définissez ces paramètres de requête sur la requête d'origine, et non sur les blocs individuels.
 
-#### Perlindungan penimpaan
+#### Protection contre l'écrasement
 
-Secara default, `overwrite` adalah `false`. Jika jalur tujuan sudah ada, permintaan akan menampilkan error `409 Conflict` dan tidak ada yang ditulis:
+La valeur par défaut de `overwrite` est `false`. Si le chemin de destination existe déjà, la requête renvoie une erreur `409 Conflict` et rien n'est écrit :
 
 ```
 {
@@ -2492,15 +3155,13 @@ Secara default, `overwrite` adalah `false`. Jika jalur tujuan sudah ada, permint
 }
 ```
 
-Untuk mengganti file atau direktori yang ada, tetapkan `overwrite=true` (atau tambahkan
-`?overwrite=true` di REST). Dengan `extract=true`, pemeriksaan konflik berlaku untuk
-setiap file dalam arsip, sehingga permintaan akan gagal jika ada file target.
+Pour remplacer un fichier ou un répertoire existant, définissez `overwrite=true` (ou ajoutez `?overwrite=true` dans REST). Avec `extract=true`, la vérification des conflits s'applique à chaque fichier de l'archive. La requête échoue donc si un fichier cible existe.
 
-### Download snapshot lengkap (tidak digunakan lagi)
+### Télécharger l'instantané complet (obsolète)
 
-Untuk memigrasikan kode yang ada ke API file lingkungan:
+Pour migrer le code existant vers l'API Environment Files :
 
-- **Python**: Ganti permintaan download file lama dengan:
+- **Python** : remplacez les anciennes requêtes de téléchargement de fichiers par :
 
   ```
   archive = client.environments.files.download(
@@ -2510,7 +3171,7 @@ Untuk memigrasikan kode yang ada ke API file lingkungan:
   with open("snapshot.tar", "wb") as f:
       f.write(archive)
   ```
-- **JavaScript**: Ganti permintaan download file lama dengan:
+- **JavaScript** : remplacez les anciennes requêtes de téléchargement de fichiers par :
 
   ```
   const bytes = await client.environments.files.download({
@@ -2519,7 +3180,7 @@ Untuk memigrasikan kode yang ada ke API file lingkungan:
   });
   fs.writeFileSync("snapshot.tar", Buffer.from(bytes));
   ```
-- **REST**: Ganti `GET /v1beta/files/environment-$ENV_ID:download?alt=media` dengan:
+- **REST** : remplacez `GET /v1beta/files/environment-$ENV_ID:download?alt=media` par :
 
   ```
   curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?alt=media" \
@@ -2527,43 +3188,41 @@ Untuk memigrasikan kode yang ada ke API file lingkungan:
     -o snapshot.tar
   ```
 
-## Harga & referensi
+## Tarifs et ressources
 
-Setiap lingkungan berjalan dengan alokasi resource tetap:
+Chaque environnement s'exécute avec des allocations de ressources fixes :
 
-| Resource | Nilai |
+| Ressource | Valeur |
 | --- | --- |
-| **CPU** | 4 core |
-| **Memori** | 16 GB |
+| **Processeur** | 4 cœurs |
+| **Mémoire** | 16 Go |
 
-Komputasi lingkungan (CPU, memori, eksekusi sandbox) **tidak ditagih** selama
-periode pratinjau. Lihat
-[Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents) untuk mengetahui biaya token agen.
+Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est **pas facturé** pendant la période de preview. Pour en savoir plus sur les coûts des jetons d'agent, consultez la page [Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#pricing-for-agents).
 
-## Batasan
+## Limites
 
-- **Status pratinjau:** Lingkungan dan agen terkelola dalam pratinjau. Fitur dan skema dapat berubah.
-- **Ukuran sumber inline:** Sumber inline dibatasi hingga 1 MB per file, dan total 2 MB di semua file.
-- **Ukuran sumber**: Repositori Git dibatasi hingga 500 MB dan repositori Cloud Storage hingga 2 GB.
-- **Startup lingkungan:** Penyediaan lingkungan baru membutuhkan waktu hingga ~5 detik. Repositori sumber yang besar dapat memperpanjang waktu ini.
-- **Masa berlaku lingkungan:** Lingkungan offline yang tidak aktif dipertahankan selama 7 hari sebelum masa berlakunya berakhir menggunakan pembersihan TTL otomatis. Meneruskan ID lingkungan yang sudah tidak berlaku atau tidak valid akan menampilkan error `404 Not Found`.
-- **Dukungan file:** Saat ini, agen hanya dapat membaca file teks dan gambar. Dukungan file biner belum tersedia.
-- **Tidak ada pemasangan dari root:** Anda tidak dapat menetapkan root (`/`) sebagai target saat menambahkan sumber kustom, Anda harus selalu menentukan subdirektori.
+- **État de l'aperçu** : les environnements et les agents gérés sont en version bêta. Les fonctionnalités et les schémas peuvent changer.
+- **Taille des sources intégrées** : les sources intégrées sont limitées à 1 Mo par fichier et à 2 Mo au total pour tous les fichiers.
+- **Taille de la source** : les dépôts Git sont limités à 500 Mo et les dépôts Cloud Storage à 2 Go.
+- **Démarrage de l'environnement** : le provisionnement d'un nouvel environnement prend environ cinq secondes. Les dépôts sources volumineux peuvent augmenter ce délai.
+- **Expiration de l'environnement** : les environnements hors connexion inactifs sont conservés pendant sept jours avant d'expirer à l'aide du nettoyage automatique de la valeur TTL. Si vous transmettez un ID d'environnement expiré ou non valide, une erreur `404 Not Found` s'affiche.
+- **Fichiers compatibles** : l'agent est actuellement limité à la lecture des fichiers texte et image. La prise en charge des fichiers binaires n'est pas encore disponible.
+- **Pas de montage à partir de la racine** : vous ne pouvez pas définir la racine (`/`) comme cible lorsque vous ajoutez une source personnalisée. Vous devez toujours spécifier un sous-répertoire.
 
-## Langkah berikutnya
+## Étape suivante
 
-- [Ringkasan Agen](https://ai.google.dev/gemini-api/docs/agents?hl=id): Pelajari konsep inti agen terkelola.
-- [Panduan memulai](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id): Mulai membangun dengan percakapan multi-turn dan streaming.
-- [Agen Antigravitasi](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id): Jelajahi kemampuan, alat, pemilihan model, dan harga untuk agen default.
-- [Membangun Agen Kustom](https://ai.google.dev/gemini-api/docs/custom-agents?hl=id): Tentukan agen Anda sendiri menggunakan `AGENTS.md` dan `SKILL.md`.
-- [Hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=id): Menerapkan perlindungan keamanan dan menjalankan validasi efek samping di dalam sandbox.
+- [Présentation des agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) : découvrez les concepts de base des agents gérés.
+- [Guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) : commencez à créer des conversations multitours et du streaming.
+- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) : découvrez les fonctionnalités, les outils, la sélection de modèles et la tarification de l'agent par défaut.
+- [Créer des agents personnalisés](https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr) : définissez vos propres agents à l'aide de `AGENTS.md` et `SKILL.md`.
+- [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fr) : appliquez des garde-fous de sécurité et exécutez des validations d'effets secondaires dans le bac à sable.
 
-Kirim masukan
+Envoyer des commentaires
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Terakhir diperbarui pada 2026-09-18 UTC.
+Dernière mise à jour le 2026/09/24 (UTC).
 
-Ada masukan untuk kami?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-18 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]

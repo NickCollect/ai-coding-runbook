@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=vi
-fetched_at: 2026-09-21T05:50:11.549430+00:00
-title: "Lyria RealTime (th\u1eed nghi\u1ec7m) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=tr
+fetched_at: 2026-09-28T06:24:58.390216+00:00
+title: "Lyria RealTime deneysel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Lyria RealTime (thử nghiệm)
+# Lyria RealTime deneysel
 
-Một công cụ thử nghiệm để tổng hợp nhạc có độ trung thực cao, cung cấp các tính năng cải tiến để tạo và chuyển đổi nội dung âm thanh. Lyria RealTime phù hợp nhất với việc viết bài hát có sự hỗ trợ của AI, tạo nhạc cụ độc đáo và quy trình làm việc sáng tạo với âm thanh đòi hỏi khả năng kiểm soát sâu sắc giai điệu và nhịp điệu, không có giọng hát.
+Ses içeriği oluşturma ve dönüştürme konusunda yenilikçi özellikler sunan, yüksek kaliteli müzik sentezi için deneysel bir motor. Lyria RealTime; yapay zeka destekli şarkı yazma, benzersiz enstrümantal müzik üretme ve melodi ile ritim üzerinde derin kontrol gerektiren, vokal içermeyen yaratıcı ses iş akışları için en uygun seçenektir.
 
-[Dùng thử Lyria RealTime](https://deepmind.google/models/lyria/lyria-realtime/?hl=vi)
+[Lyria RealTime'ı deneyin](https://deepmind.google/models/lyria/lyria-realtime/?hl=tr)
 
-## Tài liệu
+## Belgeler
 
-Hãy truy cập [trang Tạo nhạc theo thời gian thực](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=vi) để xem đầy đủ các tính năng và chức năng.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Anlık müzik üretimi](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) sayfasını ziyaret edin.
 
 ## lyria-realtime-exp
 
-| Thuộc tính | Mô tả |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardMã mô hình | **Gemini API**  `lyria-realtime-exp` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản (Câu lệnh có trọng số)  **Đầu ra**  Âm thanh (PCM 16 bit thô) |
-| token\_autoGiới hạn xem trực tuyến | **Tần số lấy mẫu**  48kHz (Âm thanh nổi)  **Độ trễ của tính năng điều khiển**  Tối đa 2 giây |
-| 123Phiên bản | Hãy đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Thử nghiệm: `lyria-realtime-exp` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 5 năm 2025 |
+| id\_cardModel kodu | **Gemini API**  `lyria-realtime-exp` |
+| saveDesteklenen veri türleri | **Giriş**  Metin (Ağırlıklı istemler)  **Çıkış**  Ses (Raw 16 bit PCM) |
+| token\_autoYayın sınırları | **Örnekleme hızı**  48kHz (Stereo)  **Gecikmeyi kontrol etme**  Maksimum 2 saniye |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Deneysel: `lyria-realtime-exp` |
+| calendar\_monthSon güncelleme | Mayıs 2025 |
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

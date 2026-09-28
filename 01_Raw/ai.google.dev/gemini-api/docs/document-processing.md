@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ar
-fetched_at: 2026-09-21T05:44:54.527082+00:00
+fetched_at: 2026-09-28T06:29:03.195067+00:00
 title: "\u0641\u0647\u0645 \u0627\u0644\u0645\u0633\u062a\u0646\u062f\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,22 +18,23 @@ title: "\u0641\u0647\u0645 \u0627\u0644\u0645\u0633\u062a\u0646\u062f\u0627\u062
 
 # فهم المستندات
 
-يمكن لنماذج Gemini معالجة المستندات بتنسيق PDF باستخدام ميزة الرؤية الأصلية لفهم سياقات المستندات بأكملها. يتجاوز ذلك مجرد استخراج النص، ما يتيح لـ Gemini ما يلي:
+يمكن لنماذج Gemini معالجة المستندات بتنسيق PDF، وذلك باستخدام ميزة &quot;الرؤية الأصلية&quot; لفهم سياقات المستندات بأكملها. يتجاوز ذلك مجرد استخراج النص، ويتيح لـ Gemini ما يلي:
 
-- تحليل المحتوى وتفسيره، بما في ذلك النصوص والصور والرسوم البيانية والمخططات والجداول، حتى في المستندات الطويلة التي تصل إلى 1000 صفحة
-- استخراج المعلومات بتنسيقات إخراج [منظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
+- تحليل المحتوى وتفسيره، بما في ذلك النصوص والصور والمخططات والرسوم البيانية والجداول، حتى في المستندات الطويلة التي تصل إلى 1,000 صفحة
+- استخراج المعلومات إلى تنسيقات [ناتج منظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)
 - تلخيص المستندات والإجابة عن الأسئلة استنادًا إلى العناصر المرئية والنصية فيها
-- تحويل محتوى المستند (مثل تحويله إلى HTML)، مع الحفاظ على التنسيقات والتخطيطات، لاستخدامه في التطبيقات اللاحقة
+- تحويل محتوى المستند إلى نص (مثلاً إلى HTML)، مع الحفاظ على التنسيقات والتصاميم، لاستخدامه في التطبيقات اللاحقة
 
-يمكنك أيضًا تمرير مستندات غير PDF بالطريقة نفسها، ولكن سيراها Gemini كنص عادي، ما سيؤدي إلى إزالة السياق، مثل المخططات أو التنسيق.
+يمكنك أيضًا تمرير مستندات غير PDF بالطريقة نفسها، ولكن سيتعامل معها Gemini كنص عادي، ما سيؤدي إلى إزالة السياق، مثل الرسوم البيانية أو التنسيق.
 
-## تمرير بيانات PDF مضمّنة
+## تمرير بيانات ملف PDF مضمّنة
 
-يمكنك تمرير بيانات PDF مضمّنة في الطلب. هذا الخيار هو الأنسب للمستندات الأصغر حجمًا أو المعالجة المؤقتة التي لا تحتاج فيها إلى الإشارة إلى الملف في الطلبات اللاحقة. ننصحك باستخدام
+يمكنك تمرير بيانات PDF مضمّنة في الطلب. هذه الطريقة هي الأنسب للمستندات الصغيرة أو المعالجة المؤقتة التي لا تحتاج فيها إلى الرجوع إلى الملف في الطلبات اللاحقة. ننصحك باستخدام
 [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar#large-pdfs)
-للمستندات الأكبر حجمًا التي تحتاج إلى الإشارة إليها في محادثة مترابطة لتحسين وقت استجابة الطلب وتقليل استخدام معدّل نقل البيانات.
+للمستندات الأكبر حجمًا التي تحتاج إلى الرجوع إليها في المحادثات المترابطة
+لتحسين وقت استجابة الطلب وتقليل استخدام معدل نقل البيانات.
 
-يوضّح لك المثال التالي كيفية تمرير بيانات PDF مضمّنة:
+يوضّح المثال التالي كيفية تمرير بيانات PDF مضمّنة:
 
 ### Python
 
@@ -133,6 +134,59 @@ CreateModelInteraction params =
 Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 System.out.println(interaction.outputText().orElse(""));
+```
+
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    pdfBytes, err := os.ReadFile("path/to/document.pdf")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Pdf := base64.StdEncoding.EncodeToString(pdfBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.DocumentContent{
+                    Data:     genai.Ptr(base64Pdf),
+                    MimeType: interactions.DocumentContentMimeTypeApplicationPdf.ToPointer(),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Summarize this document",
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
 ```
 
 ### REST
@@ -258,6 +312,58 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "file.pdf", &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr(uploadedFile.URI),
+                    MimeType: interactions.DocumentContentMimeType(uploadedFile.MIMEType).ToPointer(),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Summarize this document",
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -311,11 +417,11 @@ jq -r ".steps[-1].content[0].text" response.json
 
 ## تحميل ملفات PDF باستخدام Files API
 
-ننصحك باستخدام Files API للملفات الأكبر حجمًا أو عندما تريد إعادة استخدام مستند في طلبات متعدّدة. يؤدي ذلك إلى تحسين وقت استجابة الطلب وتقليل استخدام معدّل نقل البيانات من خلال فصل عملية تحميل الملف عن طلبات النموذج.
+ننصحك باستخدام Files API للملفات الأكبر حجمًا أو عندما تريد إعادة استخدام مستند في طلبات متعددة. يؤدي ذلك إلى تحسين وقت استجابة الطلبات وتقليل معدل نقل البيانات من خلال فصل عملية تحميل الملف عن طلبات النموذج.
 
-### ملفات PDF الكبيرة من عناوين URL
+### ملفات PDF كبيرة من عناوين URL
 
-استخدِم File API لتبسيط عملية تحميل ملفات PDF الكبيرة ومعالجتها من عناوين URL:
+استخدِم File API لتبسيط عملية تحميل ملفات PDF كبيرة ومعالجتها من عناوين URL:
 
 ### Python
 
@@ -453,6 +559,74 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "bytes"
+    "context"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    longContextPdfPath := "https://arxiv.org/pdf/2312.11805"
+    resp, err := http.Get(longContextPdfPath)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer resp.Body.Close()
+    pdfBytes, err := io.ReadAll(resp.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    sampleDoc, err := client.Files.Upload(ctx, bytes.NewReader(pdfBytes), &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Summarize this document"
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr(sampleDoc.URI),
+                    MimeType: interactions.DocumentContentMimeType(sampleDoc.MIMEType).ToPointer(),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -523,7 +697,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### ملفات PDF الكبيرة المخزَّنة محليًا
+### ملفات PDF كبيرة مخزَّنة على الجهاز
 
 ### Python
 
@@ -637,6 +811,58 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    sampleFile, err := client.Files.UploadFromPath(ctx, "large_file.pdf", &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr(sampleFile.URI),
+                    MimeType: interactions.DocumentContentMimeType(sampleFile.MIMEType).ToPointer(),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Summarize this document",
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -688,8 +914,7 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية
-من خلال طلب [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ar). يكون `name` (وبالتالي `uri`) فريدًا فقط.
+يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ar). `name` فقط (وبالتالي `uri`) هي المعرّفات الفريدة.
 
 ### Python
 
@@ -755,6 +980,46 @@ File fileInfo = client.files.get(file.name().orElse(""), null);
 System.out.println(fileInfo.toJson());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if err := os.WriteFile("example.pdf", []byte("hello"), 0644); err != nil {
+        log.Fatal(err)
+    }
+
+    file, err := client.Files.UploadFromPath(ctx, "example.pdf", &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fileInfo, err := client.Files.Get(ctx, file.Name, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(fileInfo)
+}
+```
+
 ### REST
 
 ```
@@ -768,9 +1033,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## تمرير ملفات PDF متعدّدة
+## تمرير ملفات PDF متعددة
 
-يمكن لـ Gemini API معالجة مستندات PDF متعدّدة (تصل إلى 1000 صفحة) في طلب واحد، طالما أنّ الحجم المجمّع للمستندات والمطلوب النصي يظل ضمن قدرة استيعاب النموذج.
+يمكن لواجهة Gemini API معالجة مستندات PDF متعددة (تصل إلى 1, 000 صفحة) في طلب واحد، طالما أنّ الحجم المجمّع للمستندات وطلب النص يقع ضمن قدرة استيعاب النموذج.
 
 ### Python
 
@@ -938,6 +1203,96 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "bytes"
+    "context"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    docURL1 := "https://arxiv.org/pdf/2312.11805"
+    docURL2 := "https://arxiv.org/pdf/2403.05530"
+
+    resp1, err := http.Get(docURL1)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer resp1.Body.Close()
+    docData1, err := io.ReadAll(resp1.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp2, err := http.Get(docURL2)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer resp2.Body.Close()
+    docData2, err := io.ReadAll(resp2.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    samplePdf1, err := client.Files.Upload(ctx, bytes.NewReader(docData1), &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    samplePdf2, err := client.Files.Upload(ctx, bytes.NewReader(docData2), &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "What is the difference between each of the main benchmarks between these two papers? Output these in a table."
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr(samplePdf1.URI),
+                    MimeType: interactions.DocumentContentMimeType(samplePdf1.MIMEType).ToPointer(),
+                }),
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr(samplePdf2.URI),
+                    MimeType: interactions.DocumentContentMimeType(samplePdf2.MIMEType).ToPointer(),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1035,52 +1390,51 @@ rm "file_info_${DISPLAY_NAME_2}.json"
 
 ## التفاصيل الفنية
 
-تتيح Gemini معالجة ملفات PDF التي يصل حجمها إلى 50 ميغابايت أو 1000 صفحة. وينطبق هذا الحدّ على كلٍّ من البيانات المضمّنة وعمليات التحميل باستخدام Files API. تعادل كل صفحة من المستند 258 رمزًا.
+يمكن استخدام ملفات PDF يصل حجمها إلى 50 ميغابايت أو 1,000 صفحة في Gemini. وينطبق هذا الحدّ على كلّ من البيانات المضمّنة وعمليات التحميل من خلال Files API. تعادل كل صفحة مستند 258 رمزًا مميزًا.
 
-على الرغم من عدم وجود حدود معيّنة لعدد وحدات البكسل في المستند باستثناء قدرة استيعاب النموذج ، يتم تصغير الصفحات الأكبر حجمًا إلى درجة دقة قصوى تبلغ 3072 × 3072 مع الحفاظ على نسبة العرض إلى الارتفاع الأصلية، بينما يتم تكبير الصفحات الأصغر حجمًا إلى 768 × 768 بكسل. لا يتم خفض التكلفة للصفحات ذات الأحجام الأصغر، باستثناء معدّل نقل البيانات، أو تحسين الأداء للصفحات ذات الدقة الأعلى.
+مع أنّه لا توجد حدود معيّنة لعدد وحدات البكسل في المستندات باستثناء [قدرة استيعاب](https://ai.google.dev/gemini-api/docs/long-context?hl=ar) النموذج، يتم تصغير حجم الصفحات الأكبر إلى دقة قصوى تبلغ 3072 × 3072 مع الحفاظ على نسبة العرض إلى الارتفاع الأصلية، بينما يتم تكبير حجم الصفحات الأصغر إلى 768 × 768 بكسل. لا يمكن خفض تكلفة الصفحات ذات الأحجام الأصغر، باستثناء تكلفة النطاق الترددي، ولا يمكن تحسين أداء الصفحات ذات الدقة الأعلى.
 
 ### نماذج Gemini 3
 
-تقدّم Gemini 3 تحكّمًا دقيقًا في معالجة الرؤية المتعدّدة الوسائط باستخدام المَعلمة `media_resolution`. يمكنك الآن ضبط الدقة على منخفضة أو متوسطة أو عالية لكل جزء من الوسائط على حدة. باستخدام هذه الإضافة، تم تعديل معالجة مستندات PDF:
+يقدّم Gemini 3 تحكّمًا دقيقًا في معالجة الصور المتعدّدة الوسائط باستخدام المَعلمة
+`media_resolution`. يمكنك الآن ضبط درجة الدقة على منخفضة أو متوسطة أو عالية لكل جزء من الوسائط على حدة. بعد إضافة هذه الميزة، تم تعديل طريقة معالجة مستندات PDF على النحو التالي:
 
-1. **تضمين النص الأصلي:** يتم استخراج النص المضمّن أصلاً في ملف PDF وتقديمه إلى النموذج.
-2. **الفوترة وإعداد تقارير الرموز:**
-   - **لا يتم تحصيل رسوم** منك مقابل الرموز التي تم إنشاؤها من **النص الأصلي** المستخرَج في ملفات PDF.
-   - في قسم `usage_metadata` من ردّ واجهة برمجة التطبيقات، يتم الآن احتساب الرموز التي تم إنشاؤها من معالجة صفحات PDF (كصور) ضمن وسائط `IMAGE`، وليس وسائط `DOCUMENT` منفصلة كما في بعض الإصدارات السابقة.
+1. **تضمين النص الأصلي:** يتم استخراج النص المضمّن بشكل أصلي في ملف PDF وتقديمه إلى النموذج.
+2. **الفوترة وإعداد تقارير الرموز المميزة:**
+   - **لا يتم تحصيل رسوم** منك مقابل الرموز المميزة التي مصدرها **النص الأصلي** المستخرَج من ملفات PDF.
+   - في قسم `usage_metadata` من استجابة واجهة برمجة التطبيقات، يتم الآن احتساب الرموز المميزة التي تم إنشاؤها من معالجة صفحات PDF (كصور) ضمن نوع البيانات `IMAGE`، وليس ضمن نوع بيانات `DOCUMENT` منفصل كما كان في بعض الإصدارات السابقة.
 
-لمزيد من التفاصيل حول مَعلمة دقة الوسائط، يُرجى الاطّلاع على الـ
-[دليل دقة الوسائط](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=ar).
+لمزيد من التفاصيل حول مَعلمة دقة الوسائط، يُرجى الاطّلاع على دليل
+[دقة الوسائط](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=ar).
 
 ### أنواع المستندات
 
-من الناحية الفنية، يمكنك تمرير أنواع MIME أخرى لفهم المستندات، مثل TXT وMarkdown وHTML وXML وما إلى ذلك. ومع ذلك، فإنّ ميزة رؤية المستندات ***لا تفهم إلا ملفات PDF بشكل مفيد***. سيتم استخراج الأنواع الأخرى كنص عادي، ولن يتمكّن النموذج من تفسير ما نراه في عرض هذه الملفات. سيتم فقدان أي تفاصيل خاصة بنوع الملف، مثل المخططات والرسوم البيانية وعلامات HTML وتنسيق Markdown وما إلى ذلك.
+من الناحية الفنية، يمكنك ضبط أنواع MIME أخرى لفهم المستندات، مثل TXT وMarkdown وHTML وXML وما إلى ذلك، ولكن ***لا يفهم Document Vision سوى ملفات PDF***. سيتم استخراج الأنواع الأخرى كنص عادي، ولن يتمكّن النموذج من تفسير ما نراه في عرض هذه الملفات. سيتم فقدان أي تفاصيل خاصة بنوع الملف، مثل الرسوم البيانية والمخططات وعلامات HTML وتنسيق Markdown وما إلى ذلك.
 
-للتعرّف على طرق إدخال الملفات الأخرى، يُرجى الاطّلاع على دليل
-[طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
+لمزيد من المعلومات حول طرق إدخال الملفات الأخرى، يُرجى الاطّلاع على دليل [طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
 
 ### أفضل الممارسات
 
 للحصول على أفضل النتائج:
 
-- يمكنك تدوير الصفحات إلى الاتجاه الصحيح قبل تحميلها.
+- يجب تدوير الصفحات إلى الاتجاه الصحيح قبل تحميلها.
 - تجنَّب الصفحات غير الواضحة.
-- إذا كنت تستخدم صفحة واحدة، ضَع المطلوب النصي بعد الصفحة.
+- في حال استخدام صفحة واحدة، ضَع طلب النص بعد الصفحة.
 
 ## الخطوات التالية
 
-لمزيد من المعلومات، يُرجى الاطّلاع على المَراجع التالية:
+لمزيد من المعلومات، يُرجى الاطّلاع على المراجع التالية:
 
-- [استراتيجيات إنشاء الطلبات بالملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح Gemini API إنشاء الطلبات باستخدام بيانات نصية وصور ومقاطع صوتية وفيديوهات، ويُعرف ذلك أيضًا باسم إنشاء الطلبات المتعددة الوسائط.
+- [استراتيجيات إنشاء الطلبات باستخدام الملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح واجهة Gemini API إنشاء الطلبات باستخدام بيانات نصية وصور وملفات صوتية وفيديوهات، ويُعرف ذلك أيضًا باسم إنشاء الطلبات المتعددة الوسائط.
 - [تعليمات النظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions):
-  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى
-  احتياجاتك وحالات استخدامك المحدّدة.
+  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى احتياجاتك وحالات الاستخدام المحدّدة.
 
 إرسال ملاحظات
 
 إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-تاريخ التعديل الأخير: 2026-09-18 (حسب التوقيت العالمي المتفَّق عليه)
+تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)
 
 هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-18 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=id
-fetched_at: 2026-09-21T05:55:27.782724+00:00
-title: "Eksekusi kode \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=he
+fetched_at: 2026-09-28T06:17:23.455663+00:00
+title: "\u05d4\u05e8\u05e6\u05ea \u05e7\u05d5\u05d3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
 
-Kirim masukan
+שליחת משוב
 
-# Eksekusi kode
+# הרצת קוד
 
-Gemini API menyediakan alat eksekusi kode yang memungkinkan model membuat dan menjalankan kode Python. Model ini kemudian dapat belajar secara berulang dari hasil eksekusi kode hingga mencapai output akhir. Anda dapat menggunakan eksekusi kode untuk membuat aplikasi yang memanfaatkan penalaran berbasis kode. Misalnya, Anda dapat menggunakan eksekusi kode untuk menyelesaikan persamaan atau memproses teks. Anda juga dapat menggunakan [library](#supported-libraries) yang disertakan dalam lingkungan eksekusi kode untuk melakukan tugas yang lebih khusus.
+‫Gemini API כולל כלי להרצת קוד שמאפשר למודל ליצור ולהריץ קוד Python. לאחר מכן המודל יכול ללמוד באופן איטרטיבי מתוצאות הביצוע של הקוד עד שהוא מגיע לפלט סופי. אתם יכולים להשתמש בהרצת קוד כדי ליצור אפליקציות שמרוויחות מהיכולת להסיק מסקנות על סמך קוד. לדוגמה, אפשר להשתמש בהרצת קוד כדי לפתור משוואות או לעבד טקסט. אפשר גם להשתמש ב[ספריות](#supported-libraries) שכלולות בסביבת ההפעלה של הקוד כדי לבצע משימות ספציפיות יותר.
 
-Gemini hanya dapat mengeksekusi kode di Python. Anda masih dapat meminta Gemini untuk membuat kode dalam bahasa lain, tetapi model tidak dapat menggunakan alat eksekusi kode untuk menjalankannya.
+‫Gemini יכול להריץ קוד רק ב-Python. עדיין אפשר לבקש מ-Gemini ליצור קוד בשפה אחרת, אבל המודל לא יכול להשתמש בכלי להרצת קוד כדי להריץ אותו.
 
-## Mengaktifkan eksekusi kode
+## הפעלת ביצוע קוד
 
-Untuk mengaktifkan eksekusi kode, konfigurasi alat eksekusi kode pada model. Hal ini memungkinkan model membuat dan menjalankan kode.
+כדי להפעיל את הרצת הקוד, צריך להגדיר את כלי הרצת הקוד במודל. כך המודל יכול ליצור ולהריץ קוד.
 
 ### Python
 
@@ -143,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-Outputnya mungkin terlihat seperti berikut, yang telah diformat agar mudah dibaca:
+הפלט יכול להיראות כך, אחרי שעיצבנו אותו כדי שיהיה קל לקריאה:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -192,31 +192,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Output ini menggabungkan beberapa bagian konten yang ditampilkan model saat menggunakan eksekusi kode:
+הפלט הזה משלב כמה חלקים של תוכן שהמודל מחזיר כשמשתמשים בהרצת קוד:
 
-- `text`: Teks inline yang dihasilkan oleh model
-- `executableCode`: Kode yang dihasilkan oleh model yang dimaksudkan untuk dieksekusi
-- `codeExecutionResult`: Hasil kode yang dapat dieksekusi
+- ‫`text`: טקסט מוטבע שנוצר על ידי המודל
+- ‫`executableCode`: קוד שנוצר על ידי המודל ומיועד להרצה
+- `codeExecutionResult`: התוצאה של קוד ההפעלה
 
-Konvensi penamaan untuk bagian ini bervariasi menurut bahasa pemrograman.
+מוסכמות השמות של החלקים האלה משתנות בהתאם לשפת התכנות.
 
-## Eksekusi Kode dengan gambar (Gemini 3)
+## הפעלת קוד עם תמונות (Gemini 3)
 
-Model Gemini 3 Flash kini dapat menulis dan mengeksekusi kode Python untuk memanipulasi dan memeriksa gambar secara aktif.
+מודל Gemini 3 Flash יכול עכשיו לכתוב ולהריץ קוד Python כדי לשנות ולבדוק תמונות באופן פעיל.
 
-**Kasus penggunaan**
+**תרחישים לדוגמה**
 
-- **Zoom dan periksa**: Model secara implisit mendeteksi saat detail terlalu kecil
-  (misalnya, membaca pengukur yang jauh) dan menulis kode untuk memangkas dan memeriksa ulang area tersebut
-  pada resolusi yang lebih tinggi.
-- **Matematika visual**: Model dapat menjalankan perhitungan multi-langkah menggunakan kode (misalnya,
-  menjumlahkan item baris pada tanda terima).
-- **Anotasi gambar**: Model dapat menganotasi gambar untuk menjawab pertanyaan, seperti
-  menggambar panah untuk menunjukkan hubungan.
+- **התקרבות ובדיקה**: המודל מזהה באופן מובנה מתי הפרטים קטנים מדי (למשל, קריאת מד מרחק) וכותב קוד לחיתוך ולבדיקה מחדש של האזור ברזולוציה גבוהה יותר.
+- **מתמטיקה ויזואלית**: המודל יכול לבצע חישובים מרובי-שלבים באמצעות קוד (לדוגמה, סיכום פריטים בחשבונית).
+- **הערות לתמונות**: המודל יכול להוסיף הערות לתמונות כדי לענות על שאלות, למשל לצייר חצים כדי להראות קשרים.
 
-### Mengaktifkan Eksekusi Kode dengan gambar
+### הפעלת ביצוע קוד באמצעות תמונות
 
-Eksekusi Kode dengan gambar secara resmi didukung di Gemini 3 Flash. Anda dapat mengaktifkan perilaku ini dengan mengaktifkan Eksekusi Kode sebagai alat dan Pemikiran.
+החל מ-Gemini 3 Flash, יש תמיכה רשמית בהרצת קוד עם תמונות. כדי להפעיל את ההתנהגות הזו, צריך להפעיל גם את ההגדרה 'הפעלת קוד ככלי' וגם את ההגדרה 'חשיבה'.
 
 ### Python
 
@@ -431,9 +427,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## Menggunakan eksekusi kode dalam chat
+## איך משתמשים בהרצת קוד בצ'אט
 
-Anda juga dapat menggunakan eksekusi kode sebagai bagian dari chat.
+אפשר גם להשתמש בהרצת קוד כחלק משיחה.
 
 ### Python
 
@@ -591,81 +587,73 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-## Input/output (I/O)
+## קלט/פלט (I/O)
 
-Eksekusi kode mendukung input file dan output grafik. Dengan menggunakan kemampuan input dan
-output ini, Anda dapat mengupload file CSV dan teks, mengajukan pertanyaan tentang
-file, dan membuat [Matplotlib](https://matplotlib.org/) grafik sebagai bagian
-dari respons. File output ditampilkan sebagai gambar inline dalam respons.
+הרצת קוד תומכת בקלט של קבצים ובפלט של גרפים. בעזרת היכולות האלה של קלט ופלט, אתם יכולים להעלות קובצי CSV וקובצי טקסט, לשאול שאלות לגבי הקבצים ולקבל תשובה שכוללת גרפים של [Matplotlib](https://matplotlib.org/). קבצי הפלט מוחזרים כתמונות מוטמעות בתשובה.
 
-### Harga I/O
+### תמחור של קלט/פלט
 
-Saat menggunakan I/O eksekusi kode, Anda akan dikenai biaya untuk token input dan token output:
+כשמשתמשים בקלט/פלט של ביצוע קוד, מחויבים על טוקנים של קלט וטוקנים של פלט:
 
-**Token input:**
+**טוקנים של קלט:**
 
-- Perintah pengguna
+- הנחיה למשתמש
 
-**Token output:**
+**טוקנים של פלט:**
 
-- Kode yang dihasilkan oleh model
-- Output eksekusi kode di lingkungan kode
-- Token pemikiran
-- Ringkasan yang dihasilkan oleh model
+- קוד שנוצר על ידי המודל
+- פלט של הרצת קוד בסביבת הקוד
+- טוקנים של חשיבה
+- סיכום שנוצר על ידי המודל
 
-### Detail I/O
+### פרטי קלט/פלט
 
-Saat menggunakan I/O eksekusi kode, perhatikan detail teknis berikut:
+כשעובדים עם קלט/פלט של ביצוע קוד, חשוב לשים לב לפרטים הטכניים הבאים:
 
-- Runtime maksimum lingkungan kode adalah 30 detik.
-- Jika lingkungan kode menghasilkan error, model dapat memutuskan untuk membuat ulang output kode. Hal ini dapat terjadi hingga 5 kali.
-- Ukuran input file maksimum dibatasi oleh jendela token model. Di AI Studio, ukuran file input maksimum adalah 1 juta token (sekitar 2 MB untuk file teks dari jenis input yang didukung). Jika Anda mengupload file yang terlalu besar, AI Studio tidak akan mengizinkan Anda mengirimkannya.
-- Eksekusi kode berfungsi paling baik dengan file teks dan CSV.
-- File input dapat diteruskan di `part.inlineData` atau `part.fileData` (diupload
-  melalui [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id)), dan file output selalu
-  ditampilkan sebagai `part.inlineData`.
+- זמן הריצה המקסימלי של סביבת הקוד הוא 30 שניות.
+- אם סביבת הקוד יוצרת שגיאה, יכול להיות שהמודל יחליט ליצור מחדש את פלט הקוד. אפשר לנסות עד 5 פעמים.
+- הגודל המקסימלי של קובץ קלט מוגבל על ידי חלון הטוקנים של המודל. ב-AI Studio, גודל הקובץ המקסימלי של קובץ קלט הוא מיליון טוקנים (בערך 2MB לקובצי טקסט מסוגי הקלט הנתמכים). אם תעלו קובץ גדול מדי, לא תוכלו לשלוח אותו ב-AI Studio.
+- התכונה 'ביצוע קוד' פועלת הכי טוב עם קובצי טקסט ו-CSV.
+- אפשר להעביר את קובץ הקלט ב-`part.inlineData` או ב-`part.fileData` (העלאה דרך [Files API](https://ai.google.dev/gemini-api/docs/files?hl=he)), וקובץ הפלט תמיד מוחזר כ-`part.inlineData`.
 
-## Penagihan
+## חיוב
 
-Tidak ada biaya tambahan untuk mengaktifkan eksekusi kode dari Gemini API.
-Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan model Gemini yang Anda gunakan.
+הפעלת ביצוע קוד מ-Gemini API לא כרוכה בתשלום נוסף.
+תחויבו לפי התעריף הנוכחי של טוקנים של קלט ופלט, בהתאם למודל Gemini שבו אתם משתמשים.
 
-Berikut beberapa hal lain yang perlu diketahui tentang penagihan untuk eksekusi kode:
+ריכזנו כאן כמה דברים נוספים שכדאי לדעת על חיוב על הפעלת קוד:
 
-- Anda hanya akan ditagih satu kali untuk token input yang Anda teruskan ke model, dan Anda akan ditagih untuk token output akhir yang ditampilkan kepada Anda oleh model.
-- Token yang mewakili kode yang dihasilkan dihitung sebagai token output. Kode yang dihasilkan dapat mencakup teks dan output multimodal seperti gambar.
-- Hasil eksekusi kode juga dihitung sebagai token output.
+- אתם מחויבים רק פעם אחת על טוקני הקלט שאתם מעבירים למודל, ועל טוקני הפלט הסופי שהמודל מחזיר לכם.
+- טוקנים שמייצגים קוד שנוצר נספרים כטוקנים של פלט. הקוד שנוצר יכול לכלול טקסט ופלט מולטי-מודאלי כמו תמונות.
+- תוצאות של הרצת קוד נספרות גם הן כטוקנים של פלט.
 
-Model penagihan ditampilkan dalam diagram berikut:
+מודל החיוב מוצג בתרשים הבא:
 
-![model penagihan eksekusi kode](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=id)
+![מודל חיוב על הרצת קוד](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=he)
 
-- Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan model Gemini yang Anda gunakan.
-- Jika Gemini menggunakan eksekusi kode saat membuat respons Anda, perintah asli, kode yang dihasilkan, dan hasil kode yang dieksekusi akan diberi label *token perantara* dan ditagih sebagai *token input*.
-- Gemini kemudian membuat ringkasan dan menampilkan kode yang dihasilkan, hasil kode yang dieksekusi, dan ringkasan akhir. Hal ini ditagih sebagai *token output*.
-- Gemini API menyertakan jumlah token perantara dalam respons API, sehingga Anda mengetahui alasan Anda mendapatkan token input tambahan di luar perintah awal.
+- החיוב מתבצע לפי התעריף הנוכחי של טוקנים של קלט ופלט, על סמך מודל Gemini שבו אתם משתמשים.
+- אם Gemini משתמש בהרצת קוד כדי ליצור את התשובה, ההנחיה המקורית, הקוד שנוצר והתוצאה של הקוד שהורץ מסומנים כ*טוקנים של תוצאות ביניים*, והחיוב הוא על *טוקנים של קלט*.
+- ‫Gemini ייצור סיכום ויחזיר את הקוד שנוצר, את התוצאה של הקוד שהופעל ואת הסיכום הסופי. החיוב הוא על *טוקנים של פלט*.
+- ‫Gemini API כולל ספירת אסימונים ביניים בתגובת ה-API, כדי שתדעו למה אתם מקבלים אסימוני קלט נוספים מעבר להנחיה הראשונית.
 
-## Batasan
+## מגבלות
 
-- Model hanya dapat membuat dan mengeksekusi kode. Model ini tidak dapat menampilkan artefak lain seperti file media.
-- Dalam beberapa kasus, mengaktifkan eksekusi kode dapat menyebabkan regresi di area output model lainnya (misalnya, menulis cerita).
-- Ada beberapa variasi dalam kemampuan model yang berbeda untuk menggunakan eksekusi kode dengan berhasil.
+- המודל יכול רק ליצור ולהריץ קוד. הוא לא יכול להחזיר פריטים אחרים, כמו קובצי מדיה.
+- במקרים מסוימים, הפעלת ביצוע קוד עלולה להוביל לרגרסיות בתחומים אחרים של פלט המודל (לדוגמה, כתיבת סיפור).
+- יש הבדלים בין המודלים השונים ביכולת שלהם להשתמש בהרצת קוד בהצלחה.
 
-## Kombinasi alat yang didukung
+## שילובים נתמכים של כלים
 
-Alat eksekusi kode dapat dikombinasikan dengan
-[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=id) untuk
-mendukung kasus penggunaan yang lebih kompleks.
+אפשר לשלב את הכלי להרצת קוד עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) כדי להפעיל תרחישי שימוש מורכבים יותר.
 
-Model Gemini 3 mendukung kombinasi alat bawaan (seperti Eksekusi Kode) dengan alat kustom (panggilan fungsi). Anda harus meneruskan kembali kolom `id` dan `thought_signature` agar kombinasi alat berfungsi. Pelajari lebih lanjut di halaman
-[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
+מודלים של Gemini 3 תומכים בשילוב של כלים מובנים (כמו הפעלת קוד) עם כלים מותאמים אישית (הפעלת פונקציות). כדי שהשילוב של הכלים יפעל, צריך להעביר בחזרה את השדות `id` ו-`thought_signature`. מידע נוסף זמין בדף [שילובים של כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he).
 
-## Library yang didukung
+## ספריות נתמכות
 
-Lingkungan eksekusi kode mencakup library berikut:
+סביבת ההפעלה של הקוד כוללת את הספריות הבאות:
 
 - attrs
-- chess
+- שחמט
 - contourpy
 - fpdf
 - geopandas
@@ -680,9 +668,9 @@ Lingkungan eksekusi kode mencakup library berikut:
 - numpy
 - opencv-python
 - openpyxl
-- packaging
-- pandas
-- pillow
+- מארז
+- פנדות
+- כרית
 - protobuf
 - pylatex
 - pyparsing
@@ -694,30 +682,29 @@ Lingkungan eksekusi kode mencakup library berikut:
 - scikit-learn
 - scipy
 - seaborn
-- six
+- שש
 - striprtf
 - sympy
-- tabulate
+- לרכז בטבלה
 - tensorflow
 - toolz
 - xlrd
 
-Anda tidak dapat menginstal library sendiri.
+אי אפשר להתקין ספריות משלכם.
 
-## Langkah berikutnya
+## המאמרים הבאים
 
-- Coba
-  [Colab eksekusi kode](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=id).
-- Pelajari alat Gemini API lainnya:
-  - [Panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
-  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=id)
+- אפשר לנסות את [הפעלת הקוד ב-Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=he).
+- מידע על כלים אחרים של Gemini API:
+  - [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)
+  - [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/grounding?hl=he)
 
-Kirim masukan
+שליחת משוב
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Terakhir diperbarui pada 2026-09-12 UTC.
+עדכון אחרון: 2026-09-12 (שעון UTC).
 
-Ada masukan untuk kami?
+רוצה לתת לנו משוב?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-12 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]

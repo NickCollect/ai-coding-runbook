@@ -1,49 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=zh-CN
-fetched_at: 2026-09-21T05:50:27.386884+00:00
-title: "\u4f7f\u7528 Live API \u8fdb\u884c\u4f1a\u8bdd\u7ba1\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=zh-TW
+fetched_at: 2026-09-28T06:13:34.474952+00:00
+title: "\u4f7f\u7528 Live API \u7ba1\u7406\u5de5\u4f5c\u968e\u6bb5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
-# 使用 Live API 进行会话管理
+# 使用 Live API 管理工作階段
 
-在 Live API 中，会话是指通过同一连接持续流式传输输入和输出的持久
-连接（详细了解[其工作原理](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)）。
-这种独特的会话设计可实现低延迟并支持独特的功能，但也可能会带来一些挑战，例如会话时间限制和提前终止。
-本指南介绍了克服使用 Live API 时可能出现的会话管理挑战的策略。
+在 Live API 中，工作階段是指持續連線，輸入和輸出內容會透過同一連線持續串流 (進一步瞭解[運作方式](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw))。這種獨特的會期設計可實現低延遲，並支援獨特功能，但也會帶來一些挑戰，例如會期時間限制和提前終止。本指南涵蓋相關策略，可協助您克服使用 Live API 時可能發生的工作階段管理問題。
 
-## 会话生命周期
+## 工作階段生命週期
 
-如果不进行压缩，仅限音频的会话时长上限为 15 分钟，音频-视频会话时长上限为 2 分钟。超出这些限制
-将会终止会话（以及连接），但您可以使用
-[上下文窗口压缩](#context-window-compression)将会话时长延长至
-无限。
+如果沒有壓縮，純音訊工作階段的長度上限為 15 分鐘，音訊/視訊工作階段的長度上限則為 2 分鐘。如果超過這些限制，工作階段 (以及連線) 就會終止，但您可以使用[內容視窗壓縮](#context-window-compression)功能，將工作階段延長至無限時間。
 
-连接的生命周期也有限制，约为 10 分钟。连接终止时，会话也会终止。在这种情况下，您可以使用
-[会话恢复](#session-resumption)功能将单个会话配置为在多个连接中保持活跃状态。
-您还会在连接结束前收到 [GoAway 消息](#goaway-message)，以便采取进一步的操作。
+連線的生命週期也有所限制，大約為 10 分鐘。連線終止時，工作階段也會終止。在這種情況下，您可以設定單一工作階段，透過[工作階段續傳](#session-resumption)在多個連線中保持有效。連線結束前，您也會收到 [GoAway 訊息](#goaway-message)，可採取進一步行動。
 
-## 上下文窗口压缩
+## 壓縮脈絡窗口
 
-如需延长会话时长并避免连接突然终止，您可以
-在会话配置中设置 [contextWindowCompression](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
-字段，以启用上下文窗口压缩。
+如要延長工作階段時間，並避免連線突然終止，您可以啟用內容視窗壓縮功能，方法是在工作階段設定中將 [contextWindowCompression](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) 欄位設為啟用。
 
-在 [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=zh-cn#contextwindowcompressionconfig) 中，您可以配置
-[滑动窗口机制](https://ai.google.dev/api/live?hl=zh-cn#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
-和[触发压缩的令牌数量](https://ai.google.dev/api/live?hl=zh-cn#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
-。
+在 [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=zh-tw#contextwindowcompressionconfig) 中，您可以設定[滑動視窗機制](https://ai.google.dev/api/live?hl=zh-tw#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)和觸發壓縮的[權杖數量](https://ai.google.dev/api/live?hl=zh-tw#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)。
 
 ### Python
 
@@ -70,15 +57,13 @@ const config = {
 };
 ```
 
-## 会话恢复
+## 繼續工作階段
 
-如需防止服务器定期重置 WebSocket
-连接时会话终止，请在 [设置配置](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentSetup)中配置 [sessionResumption](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-字段。
+如要避免伺服器定期重設 WebSocket 連線時終止工作階段，請在[設定設定](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentSetup)中設定 [sessionResumption](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) 欄位。
 
-传递此配置会导致服务器发送 [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=zh-cn#SessionResumptionUpdate) 消息，您可以通过将上次恢复令牌作为后续连接的 [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=zh-cn#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) 传递来恢复会话。
+傳遞這項設定會導致伺服器傳送 [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=zh-tw#SessionResumptionUpdate) 訊息，這些訊息可用於恢復工作階段，方法是將最後一個恢復權杖做為後續連線的 [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=zh-tw#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) 傳遞。
 
-恢复令牌在上次会话终止后 2 小时内有效。
+工作階段終止後，續傳權杖的效期為 2 小時。
 
 ### Python
 
@@ -213,12 +198,9 @@ async function main() {
 main();
 ```
 
-## 在会话断开连接之前接收消息
+## 在工作階段中斷前收到訊息
 
-服务器会发送 [GoAway](https://ai.google.dev/api/live?hl=zh-cn#GoAway) 消息，表明当前
-连接即将终止。此消息包含 [timeLeft](https://ai.google.dev/api/live?hl=zh-cn#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)，
-表示剩余时间，让您可以在
-连接终止为 ABORTED 之前采取进一步的操作。
+伺服器會傳送「GoAway」[GoAway](https://ai.google.dev/api/live?hl=zh-tw#GoAway)訊息，表示目前的連線即將終止。這則訊息包含 [timeLeft](https://ai.google.dev/api/live?hl=zh-tw#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)，指出剩餘時間，並讓您在連線因 ABORTED 而終止前採取進一步行動。
 
 ### Python
 
@@ -241,10 +223,9 @@ for (const turn of turns) {
 }
 ```
 
-## 在生成完成后接收消息
+## 在生成完成時收到訊息
 
-服务器会发送 [generationComplete](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-消息，表明模型已完成生成响应。
+伺服器會傳送 [generationComplete](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete) 訊息，表示模型已完成生成回覆。
 
 ### Python
 
@@ -266,19 +247,16 @@ for (const turn of turns) {
 }
 ```
 
-## 后续步骤
+## 後續步驟
 
-如需了解更多使用 Live API 的方法，请参阅完整
-[的功能](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)指南、
-工具[使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn)页面或
-[Live API 食谱](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=zh-cn)。
+如要進一步瞭解如何使用 Live API，請參閱[完整的功能指南](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw)、[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-tw)頁面或 [Live API 食譜](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=zh-tw)。
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-09-17。
+上次更新時間：2026-09-17 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-17。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-17 (世界標準時間)。"],[],[]]

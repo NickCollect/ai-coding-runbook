@@ -1,93 +1,119 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=vi
-fetched_at: 2026-09-21T05:50:24.679708+00:00
-title: "C\u00e1c ph\u01b0\u01a1ng ph\u00e1p hay nh\u1ea5t khi s\u1eed d\u1ee5ng Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=th
+fetched_at: 2026-09-28T06:21:43.326156+00:00
+title: "\u0e41\u0e19\u0e27\u0e17\u0e32\u0e07\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e41\u0e19\u0e30\u0e19\u0e33\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-# Các phương pháp hay nhất khi sử dụng Live API
+# แนวทางปฏิบัติแนะนำสำหรับ Live API
 
-Hướng dẫn này trình bày các phương pháp hay nhất mà bạn có thể làm theo để tối ưu hoá việc sử dụng Live API.
-Hãy xem trang [Bắt đầu sử dụng Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) để biết thông tin tổng quan và mã mẫu cho các trường hợp sử dụng phổ biến.
+คู่มือนี้จะอธิบายแนวทางปฏิบัติแนะนำที่คุณทำตามได้เพื่อ
+เพิ่มประสิทธิภาพการใช้ Live API
+ดูภาพรวมและโค้ดตัวอย่างสำหรับ Use Case ทั่วไปได้ที่หน้า[เริ่มต้นใช้งาน Live API](https://ai.google.dev/gemini-api/docs/live?hl=th)
 
-## Thiết kế hướng dẫn rõ ràng cho hệ thống
+## ออกแบบวิธีการของระบบให้ชัดเจน
 
-Để khai thác tối đa hiệu suất của Live API, bạn nên có một bộ hướng dẫn hệ thống (SI) được xác định rõ ràng để xác định tính cách của tác nhân, các quy tắc đàm thoại và các biện pháp bảo vệ, theo thứ tự này.
+หากต้องการให้ Live API ทำงานได้อย่างมีประสิทธิภาพสูงสุด เราขอแนะนำให้คุณมี
+ชุดคำสั่งของระบบ (SI) ที่กำหนดไว้อย่างชัดเจนซึ่งกำหนดตัวตนของเอเจนต์
+กฎการสนทนา และขอบเขตการใช้งานตามลำดับ
 
-Để có kết quả tốt nhất, hãy tách từng tác nhân thành một SI riêng biệt.
+แยกเอเจนต์แต่ละรายเป็น SI ที่แตกต่างกันเพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
 
-1. **Chỉ định tính cách của trợ lý ảo:** Cung cấp thông tin chi tiết về tên, vai trò và mọi đặc điểm ưu tiên của trợ lý ảo. Nếu bạn muốn chỉ định giọng, hãy nhớ chỉ định cả ngôn ngữ đầu ra ưu tiên (chẳng hạn như giọng Anh cho người nói tiếng Anh).
-2. **Chỉ định các quy tắc trò chuyện:** Đặt các quy tắc này theo thứ tự mà bạn muốn mô hình tuân theo. Phân biệt giữa các yếu tố chỉ xuất hiện một lần trong cuộc trò chuyện và các vòng lặp trò chuyện. Ví dụ:
+1. **ระบุตัวตนของเอเจนต์:** ระบุรายละเอียดเกี่ยวกับชื่อ บทบาท และ
+   ลักษณะที่ต้องการของเอเจนต์ หากต้องการระบุสำเนียง ให้ระบุภาษาเอาต์พุตที่ต้องการด้วย (เช่น สำเนียงอังกฤษสำหรับผู้พูดภาษาอังกฤษ)
+2. **ระบุกฎการสนทนา:** จัดเรียงกฎเหล่านี้ตามลำดับที่คุณคาดหวัง
+   ให้โมเดลปฏิบัติตาม แยกแยะองค์ประกอบแบบครั้งเดียวของการสนทนา
+   และลูปการสนทนา เช่น
 
-   - **Phần tử dùng một lần:** Thu thập thông tin chi tiết của khách hàng một lần (chẳng hạn như tên, vị trí, số thẻ khách hàng thân thiết).
-   - **Vòng lặp trò chuyện:** Người dùng có thể thảo luận về đề xuất, giá cả, việc trả lại hàng và giao hàng, đồng thời có thể muốn chuyển từ chủ đề này sang chủ đề khác. Cho mô hình biết rằng mô hình có thể tham gia vào vòng lặp trò chuyện này miễn là người dùng muốn.
-3. **Chỉ định các lệnh gọi công cụ trong một quy trình bằng các câu riêng biệt:** Ví dụ: nếu một bước duy nhất để thu thập thông tin chi tiết của khách hàng yêu cầu bạn phải gọi một hàm `get_user_info`, bạn có thể nói: *Bước đầu tiên là thu thập thông tin người dùng. Trước tiên, hãy yêu cầu người dùng cung cấp tên, vị trí và số thẻ khách hàng thân thiết của họ. Sau đó, hãy gọi `get_user_info` kèm theo những thông tin chi tiết này.*
-4. **Thêm mọi biện pháp bảo vệ cần thiết:** Cung cấp mọi biện pháp bảo vệ chung trong cuộc trò chuyện mà bạn không muốn mô hình thực hiện. Bạn có thể cung cấp các ví dụ cụ thể về trường hợp nếu *x* xảy ra, bạn muốn mô hình thực hiện *y*. Nếu bạn vẫn chưa nhận được mức độ chính xác như mong muốn, hãy dùng từ *rõ ràng* để hướng dẫn mô hình đưa ra kết quả chính xác.
+   - **องค์ประกอบแบบครั้งเดียว:** รวบรวมรายละเอียดของลูกค้าเพียงครั้งเดียว (เช่น ชื่อ
+     สถานที่ตั้ง หมายเลขบัตรสะสมคะแนน)
+   - **ลูปการสนทนา:** ผู้ใช้สามารถพูดคุยเกี่ยวกับสินค้าแนะนำ ราคา
+     การคืนสินค้า และการนำส่ง และอาจต้องการเปลี่ยนจากหัวข้อหนึ่งไปยังอีกหัวข้อหนึ่ง แจ้งให้โมเดลทราบว่าสามารถวนซ้ำการสนทนานี้ได้ตราบใดที่ผู้ใช้ต้องการ
+3. **ระบุการเรียกใช้เครื่องมือภายในโฟลว์ในประโยคที่แตกต่างกัน:** ตัวอย่างเช่น หากขั้นตอนแบบครั้งเดียวในการรวบรวมรายละเอียดของลูกค้าต้องเรียกใช้`get_user_info`ฟังก์ชัน คุณอาจพูดว่า *ขั้นตอนแรกคือการรวบรวมข้อมูลผู้ใช้ ก่อนอื่น
+   ขอให้ผู้ใช้ระบุชื่อ สถานที่ และหมายเลขบัตรสะสมคะแนน จากนั้นเรียกใช้ `get_user_info` พร้อมรายละเอียดต่อไปนี้*
+4. **เพิ่มขอบเขตที่จำเป็น:** ระบุขอบเขตการสนทนาทั่วไปที่คุณไม่ต้องการให้โมเดลทำ โปรดระบุตัวอย่างที่เฉพาะเจาะจงหากเกิด *x* คุณต้องการให้โมเดลทำ *y* หากยังคงได้รับความแม่นยำในระดับที่ไม่ต้องการ ให้ใช้คำว่า*อย่างชัดเจน*เพื่อเป็นแนวทางให้โมเดลมีความแม่นยำ
 
-## Xác định chính xác các công cụ
+## กำหนดเครื่องมืออย่างแม่นยำ
 
-Khi sử dụng các công cụ có Live API, hãy xác định cụ thể trong định nghĩa công cụ.
-Hãy nhớ cho Gemini biết những điều kiện mà lệnh gọi công cụ cần được thực hiện. Để biết thêm thông tin chi tiết, hãy xem phần [Định nghĩa công cụ](#tool-definitions-example) trong phần ví dụ.
+เมื่อใช้เครื่องมือกับ Live API ให้ระบุคำจำกัดความของเครื่องมืออย่างชัดเจน
+อย่าลืมบอก Gemini ว่าควรเรียกใช้การเรียกใช้เครื่องมือภายใต้เงื่อนไขใด
+ดูรายละเอียดเพิ่มเติมได้ที่[คำจำกัดความของเครื่องมือ](#tool-definitions-example)ในส่วนตัวอย่าง
 
-## Tạo câu lệnh hiệu quả
+## สร้างพรอมต์ที่มีประสิทธิภาพ
 
-- **Sử dụng câu lệnh rõ ràng:** Đưa ra ví dụ về những việc mà mô hình nên và không nên làm trong câu lệnh, đồng thời cố gắng giới hạn câu lệnh ở một câu lệnh cho mỗi nhân vật hoặc vai trò tại một thời điểm. Thay vì sử dụng các câu lệnh dài, nhiều trang, hãy cân nhắc sử dụng tính năng liên kết câu lệnh. Mô hình này hoạt động hiệu quả nhất đối với các tác vụ có một lệnh gọi hàm.
-- **Cung cấp các lệnh và thông tin bắt đầu:** Live API cần có hoạt động đầu vào của người dùng trước khi phản hồi. Để Live API bắt đầu cuộc trò chuyện, hãy thêm một câu lệnh yêu cầu Live API chào người dùng hoặc bắt đầu cuộc trò chuyện. Bao gồm thông tin về người dùng để Live API cá nhân hoá lời chào đó.
+- **ใช้พรอมต์ที่ชัดเจน:** ระบุตัวอย่างสิ่งที่โมเดลควรและไม่ควรทำในพรอมต์ และพยายามจำกัดพรอมต์ให้เป็นพรอมต์เดียวต่อลักษณะตัวตนหรือบทบาทหนึ่งๆ ในแต่ละครั้ง ลองใช้การเชื่อมโยงพรอมต์แทนพรอมต์หลายหน้าที่มีความยาว โมเดลจะทำงานได้ดีที่สุดในงานที่มีการเรียกใช้ฟังก์ชันเดียว
+- **ระบุคำสั่งและข้อมูลเริ่มต้น:** Live API คาดหวังข้อมูลจากผู้ใช้ก่อนที่จะตอบกลับ หากต้องการให้ Live API เริ่มการสนทนา ให้ใส่พรอมต์ที่ขอให้ทักทายผู้ใช้หรือเริ่มการสนทนา รวมข้อมูลเกี่ยวกับผู้ใช้เพื่อให้ Live API
+  ปรับคำทักทายให้เป็นแบบเฉพาะบุคคล
 
-## Chỉ định ngôn ngữ
+## ระบุภาษา
 
-Các mô hình âm thanh Live API tự động phát hiện và điều chỉnh theo ngôn ngữ nói của người dùng mà không cần mã ngôn ngữ rõ ràng.
+โมเดลเสียงของ Live API จะตรวจหาและปรับให้เข้ากับภาษาพูดของผู้ใช้โดยอัตโนมัติ
+โดยไม่ต้องใช้รหัสภาษาที่ชัดเจน
 
-Nếu bạn muốn mô hình phản hồi bằng một ngôn ngữ cụ thể, hãy thêm một chỉ dẫn vào chỉ dẫn hệ thống:
+หากต้องการให้โมเดลตอบกลับในภาษาที่เฉพาะเจาะจง ให้ใส่คำสั่ง
+เป็นส่วนหนึ่งของคำสั่งระบบ
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## Phát trực tiếp
+## สตรีมมิง
 
-Khi triển khai âm thanh theo thời gian thực, hãy làm theo các phương pháp hay nhất sau đây:
+เมื่อใช้เสียงแบบเรียลไทม์ ให้ทำตามแนวทางปฏิบัติแนะนำต่อไปนี้
 
-- **Kích thước phân đoạn và độ trễ**: Gửi âm thanh theo phân đoạn từ 20 mili giây đến 40 mili giây.
-- **Xử lý gián đoạn**: Khi người dùng nói trong lúc mô hình đang trả lời, máy chủ sẽ gửi thông báo `server_content` kèm theo `"interrupted": true`. Bạn phải huỷ ngay bộ đệm âm thanh phía máy khách để ngăn tác nhân tiếp tục nói chuyện với người dùng.
+- **ขนาดกลุ่มและเวลาในการตอบสนอง**: ส่งเสียงเป็นกลุ่มขนาด 20-40 มิลลิวินาที
+- **การจัดการการขัดจังหวะ**: เมื่อผู้ใช้พูดขณะที่โมเดลกำลังตอบกลับ
+  เซิร์ฟเวอร์จะส่งข้อความ `server_content` พร้อม `"interrupted": true` คุณต้องทิ้งบัฟเฟอร์เสียงฝั่งไคลเอ็นต์ทันทีเพื่อป้องกันไม่ให้เอเจนต์
+  พูดแทรกผู้ใช้ต่อไป
 
-## Quản lý ngữ cảnh
+## การจัดการบริบท
 
-Sử dụng `ContextWindowCompressionConfig` cho các phiên dài, vì mã thông báo âm thanh gốc tích luỹ nhanh chóng (khoảng 25 mã thông báo trên mỗi giây âm thanh).
+ใช้ `ContextWindowCompressionConfig` สำหรับเซสชันที่ยาว เนื่องจากโทเค็นเสียงดั้งเดิมจะสะสมอย่างรวดเร็ว (ประมาณ 25 โทเค็นต่อเสียง 1 วินาที)
 
-## Lưu vào bộ đệm phía máy khách
+## การบัฟเฟอร์ฝั่งไคลเอ็นต์
 
-Đừng đệm âm thanh đầu vào một cách đáng kể (chẳng hạn như 1 giây) trước khi gửi. Gửi các đoạn nhỏ (20 mili giây – 100 mili giây) để giảm thiểu độ trễ.
+อย่าบัฟเฟอร์เสียงที่ป้อนนานเกินไป (เช่น 1 วินาที) ก่อนส่ง ส่ง
+เป็นก้อนเล็กๆ (20-100 มิลลิวินาที) เพื่อลดเวลาในการตอบสนอง
 
-## Lấy mẫu lại
+## การสุ่มตัวอย่างใหม่
 
-Đảm bảo ứng dụng khách của bạn lấy mẫu lại dữ liệu đầu vào từ micrô (thường là 44,1 kHz hoặc 48 kHz) thành 16 kHz trước khi truyền.
+ตรวจสอบว่าแอปพลิเคชันไคลเอ็นต์ของคุณสุ่มตัวอย่างอินพุตไมโครโฟน (มักจะเป็น 44.1kHz หรือ 48kHz) เป็น 16kHz ก่อนส่ง
 
-## Quản lý phiên
+## การจัดการเซสชัน
 
-Hãy làm theo các nguyên tắc này để xử lý vòng đời phiên và đảm bảo mang lại trải nghiệm đáng tin cậy cho người dùng:
+ทำตามหลักเกณฑ์ต่อไปนี้เพื่อจัดการวงจรเซสชันและรับประกันประสบการณ์ของผู้ใช้ที่เชื่อถือได้
 
-- **Bật tính năng nén cửa sổ ngữ cảnh:** Các mã thông báo âm thanh tích luỹ với tốc độ khoảng 25 mã thông báo mỗi giây. Nếu không nén, các phiên chỉ có âm thanh sẽ bị giới hạn ở 15 phút và các phiên có cả âm thanh và video sẽ bị giới hạn ở 2 phút. Bật tính năng [nén cửa sổ ngữ cảnh](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#context-window-compression) để kéo dài phiên đến thời lượng không giới hạn.
-- **Triển khai tính năng tiếp tục phiên:** Máy chủ có thể định kỳ đặt lại kết nối WebSocket. Sử dụng tính năng [tiếp tục phiên](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#session-resumption) để kết nối lại một cách liền mạch mà không bị mất ngữ cảnh. Giữ lại mã thông báo tiếp tục mới nhất từ `SessionResumptionUpdate` thông báo và truyền mã thông báo đó dưới dạng mã nhận dạng khi kết nối lại. Mã thông báo tiếp tục có hiệu lực trong 2 giờ sau khi phiên gần nhất kết thúc.
-- **Xử lý thông báo GoAway:** Máy chủ gửi thông báo [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#goaway-message) trước khi chấm dứt kết nối. Lắng nghe thông báo này và sử dụng trường `timeLeft` để kết thúc hoặc kết nối lại một cách suôn sẻ trước khi kết nối đóng.
-- **Xử lý tín hiệu generationComplete:** Sử dụng thông báo [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi#generation-complete-message) để biết thời điểm mô hình đã hoàn tất việc tạo câu trả lời, nhờ đó ứng dụng của bạn có thể cập nhật giao diện người dùng hoặc tiến hành hành động tiếp theo.
+- **เปิดใช้การบีบอัดหน้าต่างบริบท:** โทเค็นเสียงจะสะสมที่ประมาณ 25 โทเค็นต่อวินาที หากไม่มีการบีบอัด เซสชันเสียงอย่างเดียวจะจำกัดไว้ที่ 15 นาที และเซสชันเสียงและวิดีโอจะจำกัดไว้ที่ 2 นาที เปิดใช้[การบีบอัดหน้าต่างบริบท](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=th#context-window-compression)
+  เพื่อขยายเซสชันให้มีระยะเวลาไม่จำกัด
+- **ใช้การกลับมาใช้เซสชันต่อ:** เซิร์ฟเวอร์อาจรีเซ็ตการเชื่อมต่อ WebSocket เป็นระยะ ใช้
+  [การกลับมาใช้เซสชันต่อ](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=th#session-resumption)
+  เพื่อเชื่อมต่ออีกครั้งได้อย่างราบรื่นโดยไม่สูญเสียบริบท เก็บโทเค็นการกลับมาทำงานต่อล่าสุดจากข้อความ `SessionResumptionUpdate` และส่งเป็นแฮนเดิลเมื่อ
+  เชื่อมต่ออีกครั้ง โทเค็นการดำเนินการต่อจะใช้งานได้ 2 ชั่วโมงหลังจากเซสชันสุดท้ายสิ้นสุดลง
+- **จัดการข้อความ GoAway:** เซิร์ฟเวอร์จะส่งข้อความ
+  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=th#goaway-message)
+  ก่อนที่จะสิ้นสุดการเชื่อมต่อ โปรดฟังข้อความนี้และใช้ฟิลด์
+  `timeLeft` เพื่อปิดหรือเชื่อมต่อใหม่ก่อนที่การเชื่อมต่อจะปิด
+- **จัดการสัญญาณ generationComplete:** ใช้ข้อความ
+  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=th#generation-complete-message)
+  เพื่อดูว่าโมเดลสร้างคำตอบเสร็จแล้วเมื่อใด เพื่อให้แอปพลิเคชัน
+  อัปเดต UI หรือดำเนินการต่อไปได้
 
-Để biết thông tin chi tiết về cách triển khai, hãy xem phần [Quản lý phiên](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi).
+ดูรายละเอียดการนำไปใช้งานได้ที่[การจัดการเซสชัน](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=th)
 
-## Ví dụ
+## ตัวอย่าง
 
-Ví dụ này kết hợp cả các phương pháp hay nhất và [hướng dẫn về thiết kế chỉ dẫn hệ thống](#system-instruction-guidelines) để hướng dẫn hiệu suất của mô hình với vai trò là huấn luyện viên nghề nghiệp.
+ตัวอย่างนี้รวมทั้งแนวทางปฏิบัติแนะนำและ[หลักเกณฑ์ในการออกแบบคำสั่งของระบบ](#system-instruction-guidelines)เพื่อเป็นแนวทางในการปรับปรุงประสิทธิภาพของโมเดลในฐานะโค้ชด้านอาชีพ
 
 ```
 **Persona:**
@@ -139,10 +165,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Định nghĩa về công cụ
+### คำจำกัดความของเครื่องมือ
 
-JSON này xác định các hàm có liên quan được gọi trong ví dụ về huấn luyện viên nghề nghiệp.
-Để có kết quả tốt nhất khi xác định các hàm, hãy thêm tên, nội dung mô tả, tham số và điều kiện gọi của các hàm đó.
+JSON นี้กำหนดฟังก์ชันที่เกี่ยวข้องซึ่งเรียกใช้ในตัวอย่างโค้ชด้านอาชีพ
+หากต้องการผลลัพธ์ที่ดีที่สุดเมื่อกำหนดฟังก์ชัน ให้ระบุชื่อ คำอธิบาย พารามิเตอร์ และเงื่อนไขการเรียกใช้
 
 ```
 [
@@ -232,45 +258,51 @@ JSON này xác định các hàm có liên quan được gọi trong ví dụ v�
 ]
 ```
 
-## Tính năng đặt giá và thanh toán
+## การกำหนดราคาและการเรียกเก็บเงิน
 
-Gemini Live API tính phí hoàn toàn dựa trên mức sử dụng mã thông báo. Vì Live API duy trì một phiên WebSocket liên tục, nên việc tính phí tuân theo mô hình kết hợp dựa trên cửa sổ ngữ cảnh đang hoạt động.
+Gemini Live API จะเรียกเก็บเงินตามการใช้โทเค็นอย่างเคร่งครัด เนื่องจาก Live API จะรักษาเซสชัน WebSocket แบบถาวร การเรียกเก็บเงินจึงเป็นไปตามรูปแบบการทบต้นตามหน้าต่างบริบทที่ใช้งานอยู่
 
-### Cửa sổ ngữ cảnh của phiên (chi phí cộng dồn)
+### หน้าต่างบริบทของเซสชัน (ค่าใช้จ่ายแบบทบต้น)
 
-API này tính phí cho bạn theo lượt đối với tất cả các token có trong cửa sổ ngữ cảnh của phiên. "Lượt tương tác" được định nghĩa là một hoạt động đầu vào của người dùng và câu trả lời tương ứng của mô hình.
+API จะเรียกเก็บเงินต่อรอบสำหรับโทเค็นทั้งหมดที่อยู่ในหน้าต่างบริบทของเซสชัน "เทิร์น" หมายถึงข้อมูลจากผู้ใช้ 1 รายการและคำตอบที่เกี่ยวข้องของโมเดล
 
-- **Tích luỹ:** Cửa sổ ngữ cảnh bao gồm các mã thông báo mới từ lượt hiện tại, cộng với tất cả các mã thông báo tích luỹ từ các lượt trước đó.
-- **Lập hoá đơn lại:** Các mã thông báo trước đây sẽ được xử lý lại và tính vào mỗi lượt mới, tối đa bằng kích thước cửa sổ ngữ cảnh mà bạn đã định cấu hình. Khi phiên trò chuyện kéo dài, chi phí cho mỗi lượt tương tác sẽ tăng lên vì nhật ký trò chuyện được xử lý lại.
+- **การสะสม:** หน้าต่างบริบทมีโทเค็นใหม่จากรอบปัจจุบัน รวมถึงโทเค็นทั้งหมดที่สะสมจากรอบก่อนหน้า
+- **การเรียกเก็บเงินอีกครั้ง:** ระบบจะประมวลผลโทเค็นที่ผ่านมาอีกครั้งและนำไปรวมไว้ในแต่ละรอบใหม่ โดยจะพิจารณาตามขนาดหน้าต่างบริบทที่คุณกำหนดค่าไว้ เมื่อเซสชันยาวขึ้น ต้นทุนต่อรอบจะเพิ่มขึ้นเนื่องจากระบบจะประมวลผลประวัติการสนทนาใหม่
 
-### Mã thông báo âm thanh và bản chép lời
+### โทเค็นเสียงและการถอดเสียงเป็นคำ
 
-Live API là một API đa phương thức gốc. Công cụ này lưu giữ nhật ký trò chuyện dưới dạng mã thông báo âm thanh thô để giữ lại sắc thái và giọng điệu âm thanh.
+Live API เป็นแบบหลายรูปแบบโดยกำเนิด โดยจะเก็บประวัติการสนทนาเป็นโทเค็นเสียงดิบเพื่อรักษาความแตกต่างและโทนเสียง
 
-- **Thanh toán âm thanh:** API sẽ tính phí bạn cho các mã thông báo âm thanh gốc tích luỹ theo mức đầu vào âm thanh tiêu chuẩn ở mỗi lượt.
-- **Phụ phí phiên âm:** Khi bạn bật tính năng phiên âm âm thanh sang văn bản (`inputAudioTranscription` hoặc `outputAudioTranscription`), API sẽ tính phí cho tất cả mã thông báo văn bản được tạo để phiên âm theo mức phí đầu ra mã thông báo văn bản, ngoài chi phí mã thông báo âm thanh tiêu chuẩn.
+- **การเรียกเก็บเงินสำหรับเสียง:** API จะเรียกเก็บเงินจากคุณสำหรับโทเค็นเสียงเนทีฟที่สะสมในอัตราอินพุตเสียงมาตรฐานในทุกๆ รอบ
+- **ค่าธรรมเนียมเพิ่มเติมสำหรับการถอดเสียงเป็นคำ:** เมื่อเปิดใช้การถอดเสียงจากเสียงเป็นข้อความ (`inputAudioTranscription` หรือ `outputAudioTranscription`) API จะเรียกเก็บเงินสำหรับโทเค็นข้อความทั้งหมดที่สร้างขึ้นสำหรับการถอดเสียงเป็นคำตามอัตราเอาต์พุตโทเค็นข้อความ นอกเหนือจากต้นทุนโทเค็นเสียงมาตรฐาน
 
-### Quản lý chi phí bằng giới hạn theo bối cảnh
+### การจัดการค่าใช้จ่ายด้วยขีดจำกัดบริบท
 
-Để ngăn chặn chi phí tăng không giới hạn trong các phiên dài, hãy định cấu hình kích thước cửa sổ ngữ cảnh bằng cách sử dụng `contextWindowCompression`.
+หากไม่ต้องการให้ค่าใช้จ่ายเพิ่มขึ้นอย่างไม่มีที่สิ้นสุดในเซสชันที่ยาวนาน ให้กำหนดค่าขนาดหน้าต่างบริบทโดยใช้ `contextWindowCompression`
 
-Bằng cách thiết lập một điều kiện kích hoạt nén (ví dụ: 25.000 mã thông báo) và một cửa sổ trượt (ví dụ: 8.000 mã thông báo), API sẽ tự động loại bỏ các mã thông báo cũ hơn khi đạt đến ngưỡng. Sau đó, API chỉ tính phí các lượt tiếp theo cho nhật ký được giữ lại cộng với mọi mã thông báo mới.
+การตั้งค่าทริกเกอร์การบีบอัด (เช่น 25,000 โทเค็น) และหน้าต่างเลื่อน
+(เช่น 8,000 โทเค็น) จะทำให้ API นำโทเค็นเก่าออกโดยอัตโนมัติเมื่อถึง
+เกณฑ์ จากนั้น API จะเรียกเก็บเงินสำหรับรอบถัดๆ ไปเฉพาะประวัติที่เก็บไว้
+รวมถึงโทเค็นใหม่
 
-### Âm thanh chủ động
+### เสียงเชิงรุก
 
-Khi bạn bật tính năng âm thanh chủ động, API sẽ tính phí mã thông báo đầu vào trong toàn bộ thời gian Live API đang nghe và chỉ tính phí mã thông báo đầu ra khi API phản hồi.
+เมื่อเปิดใช้เสียงเชิงรุก API จะเรียกเก็บเงินสำหรับโทเค็นอินพุตตลอดเวลาที่ Live API กำลังฟัง และจะเรียกเก็บเงินสำหรับโทเค็นเอาต์พุตเฉพาะเมื่อ API ตอบกลับเท่านั้น
 
-- **Lưu ý đối với Gemini 3.8:** Âm thanh chủ động sẽ được bật vĩnh viễn ở `gemini-3.8-live` và `gemini-3.8-live-extended-thinking`.
-- **Lưu ý đối với Gemini 3.1:** Tính năng âm thanh chủ động không được hỗ trợ trong `gemini-3.1-flash-live-preview`. Đối với mô hình này, API chỉ tính phí cho âm thanh khi bạn chủ động truyền trực tuyến dữ liệu đầu vào.
+- **หมายเหตุสำหรับ Gemini 3.8:** ระบบจะเปิดใช้เสียงเชิงรุกอย่างถาวรใน
+  `gemini-3.8-live` และ `gemini-3.8-live-extended-thinking`
+- **หมายเหตุสำหรับ Gemini 3.1:** `gemini-3.1-flash-live-preview` ไม่รองรับเสียงเชิงรุก
+  สำหรับโมเดลนี้ API จะเรียกเก็บเงินเฉพาะ
+  เสียงเมื่อคุณสตรีมอินพุตอย่างต่อเนื่อง
 
-Để biết thông tin chi tiết về giá, hãy xem [trang định giá Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
+ดูข้อมูลการกำหนดราคาโดยละเอียดได้ที่[หน้าราคาของ Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Cập nhật lần gần đây nhất: 2026-09-17 UTC.
+อัปเดตล่าสุด 2026-09-17 UTC
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-17 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-17 UTC"],[],[]]

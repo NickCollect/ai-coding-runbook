@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=fr
-fetched_at: 2026-09-21T05:54:01.350139+00:00
-title: "Utiliser les derniers mod\u00e8les Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=de
+fetched_at: 2026-09-28T06:32:26.245878+00:00
+title: "Neueste Gemini-Modelle verwenden \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-Envoyer des commentaires
+Feedback geben
 
-# Utiliser les derniers modèles Gemini
+# Neueste Gemini-Modelle verwenden
 
-[Cette page](#)
-[3.5 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=fr)
+[Diese Seite](#)
+[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=de)
 
-Gemini 3.6 Flash (`gemini-3.6-flash`) et Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) sont disponibles pour tous les utilisateurs et prêts à être utilisés en production.
+Gemini 3.6 Flash (`gemini-3.6-flash`) und Gemini 3.5 Flash-Lite (`gemini-3.5-flash-lite`) sind allgemein verfügbar und können in der Produktion eingesetzt werden.
 
-- **Gemini 3.6 Flash** : performances améliorées pour les tâches agentiques et multimodales complexes, tout en réduisant l'utilisation de jetons, à un prix inférieur à celui de 3.5 Flash.
-- **Gemini 3.5 Flash-Lite** : le modèle le plus rapide et le moins coûteux de la famille 3.5. Surpasse les générations Flash-Lite précédentes pour l'exécution à haut débit.
+- **Gemini 3.6 Flash**: Bessere Leistung bei komplexen agentischen und multimodalen Aufgaben bei geringerer Tokennutzung und zu einem niedrigeren Preis als Gemini 3.5 Flash.
+- **Gemini 3.5 Flash-Lite**: Das schnellste und kostengünstigste Modell der 3.5-Familie. Übertrifft frühere Flash-Lite-Generationen bei der Ausführung mit hohem Durchsatz.
 
-Ce guide explique les nouveautés de chaque modèle, les modifications d'API qui affectent votre code et comment effectuer la migration.
+In diesem Leitfaden erfahren Sie, was es Neues in den einzelnen Modellen gibt, welche API-Änderungen sich auf Ihren Code auswirken und wie Sie migrieren.
 
 ### Gemini 3.6 Flash
 
-1. Installez la compétence :
+1. Skill installieren:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Appliquez la compétence :
+2. Skill anwenden:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.6 Flash
@@ -44,34 +44,34 @@ Ce guide explique les nouveautés de chaque modèle, les modifications d'API qui
 
 ### Gemini 3.5 Flash-Lite
 
-1. Installez la compétence :
+1. Skill installieren:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Appliquez la compétence :
+2. Skill anwenden:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
    ```
 
-## Nouveaux modèles
+## Neue Modelle
 
-| Modèle | ID du modèle | Niveau de réflexion par défaut | Tarifs | Description |
+| Modell | Modell-ID | Standard-Denkstufe | Preise | Beschreibung |
 | --- | --- | --- | --- | --- |
-| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | 1,50 $/1 million de jetons d'entrée et 7,50 $/1 million de jetons de sortie | Équilibre la vitesse et l'intelligence pour les tâches agentiques et multimodales. |
-| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | 0,30 $/1 million de jetons d'entrée et 2,50 $/1 million de jetons de sortie | Le modèle 3.5 le plus rapide et le moins coûteux pour l'exécution à haut débit. |
+| Gemini 3.6 Flash | `gemini-3.6-flash` | `medium` | 1,50 $ pro 1 Mio.Eingabetokens und 7,50 $ pro 1 Mio.Ausgabetokens | Bietet ein ausgewogenes Verhältnis zwischen Geschwindigkeit und Intelligenz für agentische und multimodale Aufgaben. |
+| Gemini 3.5 Flash-Lite | `gemini-3.5-flash-lite` | `minimal` | 0,30 $ pro 1 Mio.Eingabetokens und 2,50 $ pro 1 Mio.Ausgabetokens | Das schnellste und kostengünstigste Modell der 3.5-Familie für die Ausführung mit hohem Durchsatz. |
 
-Les deux modèles sont compatibles avec la fenêtre de contexte de 1 million de jetons, 64 000 jetons de sortie maximum, la réflexion et la suite complète d'outils intégrés, y compris [l'utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr).
+Beide Modelle unterstützen das Kontextfenster mit 1 Mio. Tokens, maximal 64.000 Ausgabetokens, Denkprozesse und die gesamte Palette der integrierten Tools, einschließlich [der Computernutzung](https://ai.google.dev/gemini-api/docs/computer-use?hl=de).
 
-Pour obtenir les spécifications complètes, consultez les pages des modèles :
+Die vollständigen Spezifikationen finden Sie auf den Modellseiten:
 
-- [Page du modèle Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fr)
-- [Page du modèle Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fr)
+- [Gemini 3.6 Flash-Modellseite](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=de)
+- [Gemini 3.5 Flash-Lite-Modellseite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de)
 
-Pour en savoir plus sur les tarifs, consultez la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
+Ausführliche Informationen zu den Preisen finden Sie auf der [Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
 
-## Guide de démarrage rapide
+## Kurzanleitung
 
 ### Python
 
@@ -120,42 +120,42 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Nouveautés de Gemini 3.6 Flash
+## Neuerungen in Gemini 3.6 Flash
 
-- **Réduction des jetons et des tours** : exécute des workflows en plusieurs étapes avec moins d'étapes de raisonnement, de tours de conversation et d'appels d'outils que Gemini 3.5. Il réduit également la spirale de la boucle d'exécution.
-- **Génération de code améliorée** : produit un code de qualité supérieure prêt pour la production avec moins de modifications indésirables et moins de boucles de débogage.
-- **Meilleure application des instructions** : réduit les modifications de fichiers indésirables lors des tâches de diagnostic.
-- **Raisonnement multimodal et spatial puissant** : amélioration des performances en matière d'interprétation de graphiques, de conversion de plans visuels et de génération de mises en page Web multi-éléments.
-- **Inspection programmatique anticipée** : préfère exécuter des scripts de code de diagnostic avant d'apporter des modifications plus fréquemment que Gemini 3.5 Flash. Cela améliore la précision des tâches complexes, mais peut ajouter des étapes exploratoires supplémentaires pour les tâches frontend simples.
-- **Compatibilité avec l'utilisation de l'ordinateur** : compatible en tant qu'outil natif pour l'automatisation de l'interface utilisateur agentique.
-- **Préférence de style d'interface utilisateur** : meilleure création de code fonctionnel, bien que les évaluateurs humains aient préféré les modèles précédents pour la présentation visuelle et le style. Vous pouvez atténuer ce problème en fournissant des consignes de conception explicites.
-- **Effort de réflexion par défaut (moyen)** : utilise le même niveau de réflexion par défaut `medium` que Gemini 3.5 Flash.
-- **Prix réduit** : coûts des jetons de sortie inférieurs (7,50 $/1 million contre 9,00 $/1 million pour 3.5 Flash). Les jetons d'entrée restent à 1,50 $/1 million.
+- **Weniger Tokens und weniger Turns**:Erledigt mehrstufige Workflows mit weniger Denkprozessen, Konversations-Turns und Tool-Aufrufen als Gemini 3.5. Außerdem wird die Spirale der Ausführungsschleife reduziert.
+- **Verbesserte Codeerstellung**:Erstellt hochwertigeren, produktionsfertigen Code mit weniger unerwünschten Änderungen und weniger Debugging-Schleifen.
+- **Bessere Befolgung von Anweisungen**: Reduziert unerwünschte Dateiänderungen bei Diagnoseaufgaben.
+- **Starkes multimodales und räumliches Denken**:Verbesserte Leistung bei der Diagramminterpretation, der visuellen Blueprint-Konvertierung und der Erstellung von Web-Layouts mit mehreren Elementen.
+- **Vorab-Programmierprüfung**:Führt häufiger Diagnose-Code-Skripts aus, bevor Änderungen vorgenommen werden, als Gemini 3.5 Flash. Dies verbessert die Genauigkeit bei komplexen Aufgaben, kann aber bei einfachen Frontend-Aufgaben zusätzliche explorative Schritte erfordern.
+- **Unterstützung der Computernutzung**:Wird als natives Tool für die agentische UI-Automatisierung unterstützt.
+- **UI-Stilpräferenz**: Erstellt besseren funktionalen Code, aber menschliche Tester bevorzugten frühere Modelle für visuelles Layout und Styling. Sie können dies durch explizite Designrichtlinien abmildern.
+- **Standard-Denkaufwand (mittel)** : Verwendet dieselbe Standard-Denkstufe `medium` wie Gemini 3.5 Flash.
+- **Niedrigere Preise**: Geringere Kosten für Ausgabetokens (7,50 $ pro 1 Mio. gegenüber 9,00 $ pro 1 Mio. für Gemini 3.5 Flash). Die Kosten für Eingabetokens bleiben bei 1,50 $ pro 1 Mio.
 
-## Nouveautés de Gemini 3.5 Flash-Lite
+## Neuerungen in Gemini 3.5 Flash-Lite
 
-- **Latence d'exécution des tâches réduite** : débit le plus élevé de la famille 3.5 pour l'analyse de données à fort volume et l'extraction de documents.
-- **Performances de raisonnement et multimodales améliorées** : chemin de migration solide depuis Gemini 2.5 Flash, avec des scores plus élevés pour les tâches de raisonnement telles que HLE (18,0% contre 11,0%) et les benchmarks multimodaux tels que CharXIV (74,5% contre 63,7%).
-- **Orchestration des sous-agents et fiabilité des outils** : améliore la fiabilité de l'exécution des outils pour l'exécution de code, la recherche et les workflows MCP. Augmentez le niveau de réflexion pour la planification autonome et les tâches complexes des sous-agents.
-- **Compréhension améliorée des documents** : améliore la justesse de l'analyse des documents et de l'extraction des données structurées. Testez les niveaux de réflexion minimal et élevé en fonction de la complexité du document.
-- **Codage Web interactif et traitement des données tabulaires** : excellentes performances pour le JavaScript frontend et le traitement des données tabulaires en planifiant via une exécution de code légère.
-- **Chatbot et persistance du persona** : meilleure application des instructions multitours et cohérence du persona par rapport à Gemini 3.1 Flash-Lite.
-- **Compatibilité avec l'utilisation de l'ordinateur** : compatible en tant qu'outil natif pour l'automatisation de l'interface utilisateur agentique.
+- **Geringere Latenz bei der Aufgabenausführung**:Höchster Durchsatz in der 3.5-Familie für das Parsen großer Datenmengen und die Dokumentextraktion.
+- **Verbesserte Denk- und multimodale Leistung**:Starker Migrationspfad von Gemini 2.5 Flash mit höheren Werten bei Denkaufgaben wie HLE (18,0% gegenüber 11,0%) und multimodalen Benchmarks wie CharXIV (74,5% gegenüber 63,7%).
+- **Orchestrierung von Sub-Agenten und Tool-Zuverlässigkeit**:Verbessert die Zuverlässigkeit der Tool-Ausführung für Code-Ausführung, Suche und MCP-Workflows. Erhöhen Sie die Denkstufe für die autonome Planung und komplexe Sub-Agenten-Aufgaben.
+- **Verbessertes Dokumentverständnis**:Verbessert die Genauigkeit beim Parsen von Dokumenten und bei der Extraktion strukturierter Daten. Je nach Komplexität des Dokuments können Sie sowohl die minimale als auch die hohe Denkstufe verwenden.
+- **Interaktive Webprogrammierung und Verarbeitung von Tabellendaten**:Erbringt eine starke Leistung bei der Frontend-JavaScript- und Tabellendatenverarbeitung durch Planung über eine einfache Codeausführung.
+- **Chatbot- und Persona-Persistenz**:Bessere Befolgung von Anweisungen in Mehrfachdialogen und Persona-Konsistenz als bei Gemini 3.1 Flash-Lite.
+- **Unterstützung der Computernutzung**:Wird als natives Tool für die agentische UI-Automatisierung unterstützt.
 
-## Choisir le bon modèle Flash ou Flash-Lite
+## Das richtige Flash- oder Flash-Lite-Modell auswählen
 
-Utilisez ce tableau pour sélectionner le bon modèle et le bon chemin de migration pour vos charges de travail.
+In dieser Tabelle können Sie das richtige Modell und den richtigen Migrationspfad für Ihre Arbeitslasten auswählen.
 
-Les deux modèles nécessitent la suppression des paramètres d'échantillonnage obsolètes (`temperature`, `top_p`, `top_k`) et des tours de modèle préremplis. Pour en savoir plus, consultez la section [Modifications de l'API](#api-changes-and-parameter-updates).
+Bei beiden Modellen müssen die veralteten Parameter für die Stichprobenerhebung (`temperature`, `top_p`, `top_k`) und die vorab ausgefüllten Modell-Turns entfernt werden. Weitere Informationen finden Sie unter [API-Änderungen](#api-changes-and-parameter-updates).
 
-| Modèle | Cas d'utilisation principaux | Cible de migration recommandée |
+| Modell | Primäre Anwendungsfälle | Empfohlenes Migrationsziel |
 | --- | --- | --- |
-| **Gemini 3.6 Flash** `gemini-3.6-flash` | Génération de code, raisonnement spatial/multimodal, workflows agentiques en plusieurs étapes | **Gemini 3.5 Flash**, **Gemini 3 Flash (preview)** ou **Gemini 3.1 Pro** |
-| **Gemini 3.5 Flash-Lite**  `gemini-3.5-flash-lite` | Exécution autonome des sous-agents, analyse de données à fort volume et extraction de documents, analyse JSON structurée | **Gemini 3.1 Flash-Lite** ou **Gemini 2.5 Flash** |
+| **Gemini 3.6 Flash** `gemini-3.6-flash` | Codeerstellung, räumliches/multimodales Denken, mehrstufige agentische Workflows | **Gemini 3.5 Flash**, **Gemini 3 Flash (Vorschau)** oder **Gemini 3.1 Pro** |
+| **Gemini 3.5 Flash-Lite**  `gemini-3.5-flash-lite` | Autonome Sub-Agenten-Ausführung, Analyse großer Datenmengen und Dokumentextraktion, strukturiertes JSON-Parsing | **Gemini 3.1 Flash-Lite** oder **Gemini 2.5 Flash** |
 
-## Agent Antigravity mis à jour
+## Aktualisierter Antigravity-Agent
 
-Grâce à ses performances améliorées, Gemini 3.6 Flash est désormais le nouveau modèle par défaut qui alimente l'agent [Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agentn?hl=fr) dans Gemini Managed Agents. Vous pouvez modifier ce paramètre en définissant un nouveau champ dans l'API.
+Aufgrund seiner verbesserten Leistung ist Gemini 3.6 Flash jetzt das neue Standardmodell für den [Antigravity-Agenten](https://ai.google.dev/gemini-api/docs/antigravity-agentn?hl=de) in Verwaltete KI-Agenten. Dies kann durch Festlegen eines neuen Felds in der API geändert werden.
 
 ### Python
 
@@ -202,18 +202,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Modifications de l'API et mises à jour des paramètres
+## API-Änderungen und Parameteraktualisierungen
 
-À partir de Gemini 3.6 Flash et Gemini 3.5 Flash-Lite, les modifications d'API suivantes s'appliquent à ces modèles et à toutes les futures versions de modèles Gemini.
+Ab Gemini 3.6 Flash und Gemini 3.5 Flash-Lite gelten die folgenden API-Änderungen für diese Modelle und alle zukünftigen Gemini-Modellversionen.
 
-- **Abandon du paramètre d'échantillonnage** : `temperature`, `top_p` et `top_k` sont obsolètes. L'API ignore ces paramètres et renvoie une erreur dans les futures générations de modèles.
-- **Validation du tour de modèle prérempli** : le préremplissage des tours de modèle n'est plus compatible. Si le dernier tour non vide de la requête est un tour `model`, l'API renvoie une erreur `400`.
+- **Veraltete Parameter für die Stichprobenerhebung**: `temperature`, `top_p` und `top_k` sind veraltet. Die API ignoriert diese Parameter und gibt in zukünftigen Modellgenerationen einen Fehler zurück.
+- **Validierung vorab ausgefüllter Modell-Turns**: Das Vorab-Ausfüllen von Modell-Turns wird nicht mehr unterstützt. Wenn der letzte nicht leere Turn in der Anfrage ein `model`-Turn ist, gibt die API einen `400`-Fehler zurück.
 
-Vous trouverez ci-dessous des explications détaillées et des exemples de code pour chaque modification de l'API.
+Im Folgenden finden Sie detaillierte Erklärungen und Codebeispiele für jede API-Änderung.
 
-### 1. Abandon du paramètre d'échantillonnage (`temperature`, `top_p`, `top_k`)
+### 1. Veraltete Parameter für die Stichprobenerhebung (`temperature`, `top_p`, `top_k`)
 
-`temperature`, `top_p` et `top_k` sont obsolètes et ignorés. Dans les futures générations de modèles, la fourniture de ces paramètres renvoie une erreur HTTP 400. **Supprimez ces paramètres de toutes les requêtes.**
+`temperature`, `top_p` und `top_k` sind veraltet und werden ignoriert. In zukünftigen Modellgenerationen führt die Angabe dieser Parameter zu einem HTTP 400-Fehler. **Entfernen Sie diese Parameter aus allen Anfragen.**
 
 ```
 # ⚠️ Remove these parameters (deprecated)
@@ -224,15 +224,15 @@ generation_config = {
 }
 ```
 
-Pour améliorer le déterminisme, définissez une instruction système avec des règles explicites pour votre cas d'utilisation spécifique.
+Um die Deterministik zu verbessern, definieren Sie eine Systemanweisung mit expliziten Regeln für Ihren Anwendungsfall.
 
-### 2. Validation du tour de modèle prérempli
+### 2. Validierung vorab ausgefüllter Modell-Turns
 
-Les requêtes API se terminant par un tour de rôle de modèle non vide ne sont pas autorisées et renvoient une **erreur HTTP 400**.
+API-Anfragen, die mit einem nicht leeren Turn der Modellrolle enden, sind nicht zulässig und geben einen **HTTP 400-Fehler** zurück.
 
-#### ⚠️ À éviter
+#### ⚠️ Vermeiden
 
-Dans les charges utiles REST brutes ou `generateContent` héritées, il n'est plus autorisé de terminer par un tour de rôle de modèle :
+In Legacy-`generateContent`- oder Raw-REST-Nutzlasten ist das Beenden mit einem Turn der Modellrolle jetzt nicht mehr zulässig:
 
 ```
 /* ❌ DO NOT: End payload contents with a 'model' role turn */
@@ -244,9 +244,9 @@ Dans les charges utiles REST brutes ou `generateContent` héritées, il n'est pl
 }
 ```
 
-#### ✅ Migration recommandée
+#### ✅ Empfohlene Migration
 
-Si votre application préremplissait auparavant un tour de modèle pour supprimer les préambules ou forcer la mise en forme JSON, utilisez plutôt `system_instruction` ou [des sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr).
+Wenn Ihre Anwendung zuvor einen Modell-Turn vorab ausgefüllt hat, um Präambeln zu unterdrücken oder die JSON-Formatierung zu erzwingen, verwenden Sie stattdessen `system_instruction` oder [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de).
 
 ```
 # ✅ RECOMMENDED: Use system_instruction to specify output format
@@ -257,16 +257,16 @@ response = client.models.generate_content(
 )
 ```
 
-## Checklist de migration
+## Checkliste für die Migration
 
 ### Gemini 3.6 Flash
 
-1. Installez la compétence :
+1. Skill installieren:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Appliquez la compétence :
+2. Skill anwenden:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.6 Flash
@@ -274,55 +274,55 @@ response = client.models.generate_content(
 
 ### Gemini 3.5 Flash-Lite
 
-1. Installez la compétence :
+1. Skill installieren:
 
    ```
    npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
    ```
-2. Appliquez la compétence :
+2. Skill anwenden:
 
    ```
    /gemini-interactions-api migrate my app to Gemini 3.5 Flash-Lite
    ```
 
-### Migrer vers gemini-3.6-flash
+### Zu Gemini 3.6 Flash migrieren
 
-- **Mettre à jour l'ID du modèle** : remplacez la chaîne de votre modèle cible par `gemini-3.6-flash`.
-- **Supprimer les paramètres d'échantillonnage obsolètes**
-  - Supprimez `temperature`, `top_p` et `top_k` des configurations de génération.
-  - Remplacez `thinking_budget` par l'énumération de chaîne `thinking_level` définie sur `"medium"` ou `"high"`.
-  - Supprimez `candidate_count` (non compatible avec Gemini 3.x).
-- **Appliquer les règles de validation des tours**
-  - Supprimez les tours de modèle préremplis.
-  - Assurez-vous que le tour final de l'utilisateur contient du texte non vide.
-- **Auditer l'appel de fonction**
-  - Assurez-vous que tous les objets `FunctionResponse` incluent `call_id` et `name`.
-  - Placez les éléments multimodaux dans la charge utile de la réponse.
-  - Mettez en forme les instructions intégrées à l'aide de `\\n\\n`.
-  - Si vous voyez des erreurs `Malformed_Function_Call` liées au texte pré-outil, consultez [Solutions de contournement pour les exigences concernant le texte pré-outil](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=fr#workarounds-for-pre-tool-text-requirements).
-- **Exigences de base pour Gemini 3.x** : pour les mises à jour du SDK et la préservation de la signature de pensée, consultez la [checklist de migration de Gemini 3.5](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=fr#migration).
+- **Modell-ID aktualisieren**:Ändern Sie den String des Zielmodells in `gemini-3.6-flash`.
+- **Veraltete Parameter für die Stichprobenerhebung entfernen:**
+  - Entfernen Sie `temperature`, `top_p` und `top_k` aus den Erstellungskonfigurationen.
+  - Ersetzen Sie `thinking_budget` durch die String-Enum `thinking_level`, die auf `"medium"` oder `"high"` festgelegt ist.
+  - Entfernen Sie `candidate_count` (wird in Gemini 3.x nicht unterstützt).
+- **Regeln für die Turn-Validierung erzwingen:**
+  - Entfernen Sie vorab ausgefüllte Modell-Turns.
+  - Achten Sie darauf, dass der letzte Nutzer-Turn nicht leeren Text enthält.
+- **Funktionsaufrufe prüfen**
+  - Achten Sie darauf, dass alle `FunctionResponse`-Objekte `call_id` und `name` enthalten.
+  - Platzieren Sie multimodale Assets in der Antwortnutzlast.
+  - Formatieren Sie Inline-Anweisungen mit `\\n\\n`.
+  - Wenn `Malformed_Function_Call` Fehler im Zusammenhang mit Text vor dem Tool auftreten, finden Sie unter [Problemumgehungen für Anforderungen an Text vor dem Tool](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=de#workarounds-for-pre-tool-text-requirements) weitere Informationen.
+- **Grundlegende Anforderungen für Gemini 3.x**:Informationen zu SDK-Updates und zur Beibehaltung der Denk-Signatur finden Sie in der [Checkliste für die Migration zu Gemini 3.5](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=de#migration).
 
-### Migrer vers gemini-3.5-flash-lite
+### Zu Gemini 3.5 Flash-Lite migrieren
 
-- **Mettre à jour l'ID du modèle** : remplacez la chaîne de votre modèle cible par `gemini-3.5-flash-lite`.
-- **Configurer le niveau d'effort de réflexion**
-  - Pour l'extraction, le routage ou la classification à fort volume, laissez `thinking_level` sur `"minimal"` (par défaut) pour un débit maximal.
-  - Pour les sous-agents autonomes avec des appels d'outils, l'exécution de code ou le raisonnement en plusieurs étapes, définissez `thinking_level` sur `"medium"` ou `"high"` pour éviter l'arrêt prématuré de l'outil.
-- **Supprimer les paramètres obsolètes et valider l'appel de fonction** : appliquez les [mêmes règles que pour 3.6 Flash](#migrate-to-gemini-3-6-flash).
-- **Exigences de base pour Gemini 3.x** : consultez la [checklist de migration de Gemini 3.5](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=fr#migration).
+- **Modell-ID aktualisieren**:Ändern Sie den String des Zielmodells in `gemini-3.5-flash-lite`.
+- **Denkaufwand konfigurieren**
+  - Für die Extraktion, das Routing oder die Klassifizierung großer Datenmengen: Lassen Sie `thinking_level` auf `"minimal"` (Standard) eingestellt, um den Durchsatz zu maximieren.
+  - Für autonome Sub-Agenten mit Tool-Aufrufen, Code-Ausführung oder mehrstufiger Problemlösung: Legen Sie `thinking_level` auf `"medium"` oder `"high"` fest, um eine vorzeitige Beendigung des Tools zu verhindern.
+- **Veraltete Parameter entfernen und Funktionsaufrufe validieren**:Wenden Sie die [gleichen Regeln wie für Gemini 3.6 Flash an](#migrate-to-gemini-3-6-flash).
+- **Grundlegende Anforderungen für Gemini 3.x**:Informationen finden Sie in der [Checkliste für die Migration zu Gemini 3.5](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=de#migration).
 
-## Étapes suivantes
+## Nächste Schritte
 
-- Consultez les spécifications de l'API dans la [présentation des modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr).
-- Découvrez l'orchestration multi-agent dans le [guide de l'API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr).
-- Testez et affinez les prompts dans [Google AI Studio](https://aistudio.google.com/?hl=fr).
+- API-Spezifikationen in der [Modellübersicht](https://ai.google.dev/gemini-api/docs/models?hl=de) ansehen
+- Informationen zur Orchestrierung mehrerer Agenten im [Leitfaden zur Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=de)
+- Prompts in [Google AI Studio](https://aistudio.google.com/?hl=de) testen und optimieren
 
-Envoyer des commentaires
+Feedback geben
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Dernière mise à jour le 2026/09/12 (UTC).
+Zuletzt aktualisiert: 2026-09-12 (UTC).
 
-Voulez-vous nous donner plus d'informations ?
+Haben Sie Feedback für uns?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/12 (UTC)."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]

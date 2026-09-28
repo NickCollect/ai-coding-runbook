@@ -1,40 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=id
-fetched_at: 2026-09-21T05:46:46.735921+00:00
-title: "Panggilan fungsi dengan Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=he
+fetched_at: 2026-09-28T06:21:40.476118+00:00
+title: "\u05e7\u05e8\u05d9\u05d0\u05d4 \u05dc\u05e4\u05d5\u05e0\u05e7\u05e6\u05d9\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Kirim masukan
+שליחת משוב
 
-# Panggilan fungsi dengan Gemini API
+# קריאה לפונקציות באמצעות Gemini API
 
-Panggilan fungsi memungkinkan Anda menghubungkan model ke alat dan API eksternal.
-Daripada membuat respons teks, model menentukan kapan harus memanggil fungsi tertentu dan memberikan parameter yang diperlukan untuk menjalankan tindakan di dunia nyata.
-Hal ini memungkinkan model bertindak sebagai jembatan antara bahasa alami dan tindakan serta data dunia nyata. Panggilan fungsi memiliki 3 kasus penggunaan utama:
+התכונה 'קריאה לפונקציה' מאפשרת לכם לחבר מודלים לכלים ולממשקי API חיצוניים.
+במקום ליצור תשובות טקסטואליות, המודל קובע מתי לקרוא לפונקציות ספציפיות ומספק את הפרמטרים הנדרשים לביצוע פעולות בעולם האמיתי.
+כך המודל יכול לשמש גשר בין שפה טבעית לבין פעולות ונתונים בעולם האמיתי. יש 3 תרחישי שימוש עיקריים לבקשה להפעלת פונקציה:
 
-- [**Mengambil Tindakan:**](#meeting) Berinteraksi dengan sistem eksternal menggunakan API, seperti
-  menjadwalkan janji temu, membuat invoice, mengirim email, atau mengontrol
-  perangkat smart home.
-- [**Augment Knowledge (Meningkatkan Pengetahuan):**](#weather) Mengakses informasi dari sumber eksternal seperti database, API, dan pusat informasi.
-- [**Memperluas Kemampuan:**](#chart) Menggunakan alat eksternal untuk melakukan komputasi dan
-  memperluas batasan model, seperti menggunakan kalkulator atau membuat
-  diagram.
+- [**ביצוע פעולות:**](#meeting) אינטראקציה עם מערכות חיצוניות באמצעות ממשקי API, כמו קביעת פגישות, יצירת חשבוניות, שליחת אימיילים או שליטה במכשירים חכמים לבית.
+- [**העשרת הידע:**](#weather) גישה למידע ממקורות חיצוניים כמו מסדי נתונים, ממשקי API ומאגרי מידע.
+- [**הרחבת היכולות:**](#chart) אפשר להשתמש בכלים חיצוניים כדי לבצע חישובים ולהרחיב את המגבלות של המודל, למשל באמצעות מחשבון או יצירת תרשימים.
 
-Anda dapat menjelajahi contoh kasus penggunaan ini di bawah:
+בהמשך מופיעות דוגמאות לתרחישי שימוש כאלה:
 
-### Menjadwalkan Rapat
+### קביעת פגישה
 
-Contoh ini menunjukkan cara menentukan fungsi yang menjadwalkan rapat dengan peserta pada waktu tertentu, sehingga model dapat mengurai permintaan pengguna dan menampilkan argumen terstruktur untuk memicu tindakan di sistem eksternal.
+בדוגמה הזו מוסבר איך להגדיר פונקציה שמתזמנת פגישה עם משתתפים בשעה ספציפית, כדי שהמודל יוכל לנתח בקשות של משתמשים ולהחזיר ארגומנטים מובנים להפעלת פעולות במערכות חיצוניות.
 
 ### Python
 
@@ -195,6 +191,8 @@ import (
     "log"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -204,60 +202,52 @@ func main() {
         log.Fatal(err)
     }
 
-    // Define the function declaration for the model
-    scheduleMeetingFunc := &genai.FunctionDeclaration{
-        Name:        "schedule_meeting",
-        Description: "Schedules a meeting with specified attendees at a given time and date.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "attendees": {
-                    Type:        genai.TypeArray,
-                    Items:       &genai.Schema{Type: genai.TypeString},
-                    Description: "List of people attending the meeting.",
+    scheduleMeetingFunction := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("schedule_meeting"),
+        Description: genai.Ptr("Schedules a meeting with specified attendees at a given time and date."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "attendees": map[string]any{
+                    "type":  "array",
+                    "items": map[string]any{"type": "string"},
                 },
-                "date": {
-                    Type:        genai.TypeString,
-                    Description: "Date (e.g., '2024-07-29')",
+                "date": map[string]any{
+                    "type":        "string",
+                    "description": "Date (e.g., '2024-07-29')",
                 },
-                "time": {
-                    Type:        genai.TypeString,
-                    Description: "Time (e.g., '15:00')",
+                "time": map[string]any{
+                    "type":        "string",
+                    "description": "Time (e.g., '15:00')",
                 },
-                "topic": {
-                    Type:        genai.TypeString,
-                    Description: "The meeting topic.",
+                "topic": map[string]any{
+                    "type":        "string",
+                    "description": "The meeting topic.",
                 },
             },
-            Required: []string{"attendees", "date", "time", "topic"},
+            "required": []string{"attendees", "date", "time", "topic"},
         },
-    }
+    })
 
-    config := &genai.GenerateContentConfig{
-        Tools: []*genai.Tool{
-            {FunctionDeclarations: []*genai.FunctionDeclaration{scheduleMeetingFunc}},
-        },
-    }
-
-    // Send request with function declarations
-    response, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.8-flash",
-        genai.Text("Schedule a meeting with Bob and Alice for 03/14/2025 at 10:00 AM about Q3 planning."),
-        config,
-    )
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Schedule a meeting with Bob and Alice for 03/14/2025 at 10:00 AM about Q3 planning."),
+                Tools: []interactions.Tool{scheduleMeetingFunction},
+            },
+        ),
+    })
     if err != nil {
         log.Fatal(err)
     }
 
-    // Check for a function call
-    if len(response.FunctionCalls()) > 0 {
-        functionCall := response.FunctionCalls()[0]
-        fmt.Printf("Function to call: %s\n", functionCall.Name)
-        fmt.Printf("Arguments: %v\n", functionCall.Args)
-    } else {
-        fmt.Println("No function call found in the response.")
-        fmt.Println(response.Text())
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fc := step.FunctionCallStep
+            fmt.Println("Function to call:", fc.Name)
+            fmt.Println("Arguments:", fc.Arguments)
+        }
     }
 }
 ```
@@ -289,9 +279,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Dapatkan Cuaca
+### קבלת מידע על מזג האוויר
 
-Contoh ini menunjukkan cara menentukan fungsi yang mengambil data suhu untuk suatu lokasi, sehingga model dapat memanggil API eksternal untuk menjawab kueri yang memerlukan informasi eksternal atau real-time.
+בדוגמה הזו מוסבר איך להגדיר פונקציה שמקבלת נתוני טמפרטורה של מיקום מסוים, וכך לאפשר למודל לקרוא לממשקי API חיצוניים כדי לענות על שאילתות שדורשות מידע בזמן אמת או מידע חיצוני.
 
 ### Python
 
@@ -434,6 +424,8 @@ import (
     "log"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -443,47 +435,40 @@ func main() {
         log.Fatal(err)
     }
 
-    // Define the function declaration for the model
-    weatherFunc := &genai.FunctionDeclaration{
-        Name:        "get_current_temperature",
-        Description: "Gets the current temperature for a given location.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "location": {
-                    Type:        genai.TypeString,
-                    Description: "The city name, e.g. San Francisco",
+    weatherFunction := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_current_temperature"),
+        Description: genai.Ptr("Gets the current temperature for a given location."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{
+                    "type":        "string",
+                    "description": "The city name, e.g. San Francisco",
                 },
             },
-            Required: []string{"location"},
+            "required": []string{"location"},
         },
-    }
+    })
 
-    config := &genai.GenerateContentConfig{
-        Tools: []*genai.Tool{
-            {FunctionDeclarations: []*genai.FunctionDeclaration{weatherFunc}},
-        },
-    }
-
-    // Send request with function declarations
-    response, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.8-flash",
-        genai.Text("What's the temperature in London?"),
-        config,
-    )
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("What's the temperature in London?"),
+                Tools: []interactions.Tool{weatherFunction},
+            },
+        ),
+    })
     if err != nil {
         log.Fatal(err)
     }
 
-    // Check for a function call
-    if len(response.FunctionCalls()) > 0 {
-        functionCall := response.FunctionCalls()[0]
-        fmt.Printf("Function to call: %s\n", functionCall.Name)
-        fmt.Printf("Arguments: %v\n", functionCall.Args)
-    } else {
-        fmt.Println("No function call found in the response.")
-        fmt.Println(response.Text())
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fc := step.FunctionCallStep
+            fmt.Println("Function to call:", fc.Name)
+            fmt.Println("Arguments:", fc.Arguments)
+        }
     }
 }
 ```
@@ -512,9 +497,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Buat Diagram
+### יצירת תרשים
 
-Contoh ini menunjukkan cara menentukan fungsi yang menghasilkan diagram batang dari data terstruktur, yang menunjukkan cara model dapat menggunakan alat eksternal untuk melakukan komputasi atau membuat aset visual:
+בדוגמה הזו מוגדרת פונקציה שמייצרת תרשים עמודות מנתונים מובְנים. הדוגמה הזו ממחישה איך המודל יכול להשתמש בכלים חיצוניים כדי לבצע חישובים או ליצור נכסים חזותיים:
 
 ### Python
 
@@ -666,6 +651,8 @@ import (
     "log"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -675,55 +662,48 @@ func main() {
         log.Fatal(err)
     }
 
-    // Define the function declaration for the model
-    createChartFunc := &genai.FunctionDeclaration{
-        Name:        "create_bar_chart",
-        Description: "Creates a bar chart given a title, labels, and values.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "title": {
-                    Type:        genai.TypeString,
-                    Description: "The title for the chart.",
+    createChartFunction := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("create_bar_chart"),
+        Description: genai.Ptr("Creates a bar chart given a title, labels, and values."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "title": map[string]any{
+                    "type":        "string",
+                    "description": "The title for the chart.",
                 },
-                "labels": {
-                    Type:  genai.TypeArray,
-                    Items: &genai.Schema{Type: genai.TypeString},
+                "labels": map[string]any{
+                    "type":  "array",
+                    "items": map[string]any{"type": "string"},
                 },
-                "values": {
-                    Type:  genai.TypeArray,
-                    Items: &genai.Schema{Type: genai.TypeNumber},
+                "values": map[string]any{
+                    "type":  "array",
+                    "items": map[string]any{"type": "number"},
                 },
             },
-            Required: []string{"title", "labels", "values"},
+            "required": []string{"title", "labels", "values"},
         },
-    }
+    })
 
-    config := &genai.GenerateContentConfig{
-        Tools: []*genai.Tool{
-            {FunctionDeclarations: []*genai.FunctionDeclaration{createChartFunc}},
-        },
-    }
-
-    // Send request with function declarations
-    response, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.8-flash",
-        genai.Text("Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000."),
-        config,
-    )
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000."),
+                Tools: []interactions.Tool{createChartFunction},
+            },
+        ),
+    })
     if err != nil {
         log.Fatal(err)
     }
 
-    // Check for a function call
-    if len(response.FunctionCalls()) > 0 {
-        functionCall := response.FunctionCalls()[0]
-        fmt.Printf("Function to call: %s\n", functionCall.Name)
-        fmt.Printf("Arguments: %v\n", functionCall.Args)
-    } else {
-        fmt.Println("No function call found in the response.")
-        fmt.Println(response.Text())
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fc := step.FunctionCallStep
+            fmt.Println("Function to call:", fc.Name)
+            fmt.Println("Arguments:", fc.Arguments)
+        }
     }
 }
 ```
@@ -754,25 +734,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cara kerja panggilan fungsi
+## איך פועל שימוש בפונקציות
 
-![ringkasan pemanggilan fungsi](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=id)
+![סקירה כללית על קריאה להפעלת פונקציות](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=he)
 
-Panggilan fungsi melibatkan interaksi terstruktur antara aplikasi, model, dan fungsi eksternal:
+השימוש בפונקציות כולל אינטראקציה מובנית בין האפליקציה, המודל ופונקציות חיצוניות:
 
-1. **Tentukan Deklarasi Fungsi:** Tentukan nama, parameter, dan
-   tujuan fungsi ke model.
-2. **Panggil LLM dengan deklarasi fungsi:** Kirim perintah pengguna beserta
-   deklarasi fungsi ke model.
-3. **Jalankan Kode Fungsi (Tanggung Jawab Anda):** Model *tidak*
-   menjalankan fungsi itu sendiri. Ekstrak nama dan argumen, lalu jalankan di
-   aplikasi Anda.
-4. **Buat respons yang mudah dipahami pengguna:** Kirim kembali hasil ke model untuk mendapatkan respons akhir yang mudah dipahami pengguna.
+1. **הגדרת הצהרת פונקציה:** מגדירים למודל את השם, הפרמטרים והמטרה של הפונקציה.
+2. **קוראים למודל LLM עם הצהרות על פונקציות:** שולחים את הנחיית המשתמש יחד עם ההצהרות על הפונקציות למודל.
+3. **הפעלת קוד הפונקציה (באחריותכם):** המודל *לא* מפעיל את הפונקציה בעצמו. מחלקים את השם ואת הארגומנטים ומבצעים את הפעולה באפליקציה.
+4. **יצירת תשובה ידידותית למשתמש:** שליחת התוצאה בחזרה למודל כדי לקבל תשובה סופית וידידותית למשתמש.
 
-Proses ini dapat diulang di beberapa giliran. Model ini mendukung pemanggilan
-beberapa fungsi dalam satu giliran ([pemanggilan fungsi paralel](#parallel_function_calling)) dan secara berurutan ([pemanggilan fungsi komposit](#compositional_function_calling)).
+אפשר לחזור על התהליך הזה כמה פעמים. המודל תומך בהפעלת כמה פונקציות בתור אחד ([קריאה להפעלת פונקציות במקביל](#parallel_function_calling)) וברצף ([קריאה להפעלת פונקציות בהרכבה](#compositional_function_calling)).
 
-### Langkah 1: Tentukan deklarasi fungsi
+### שלב 1: מגדירים הצהרה על פונקציה
 
 ### Python
 
@@ -873,34 +848,43 @@ BiFunction<Integer, String, Map<String, Object>> setLightValues =
 ```
 package main
 
-import "google.golang.org/genai"
-
-var setLightValuesDeclaration = &genai.FunctionDeclaration{
-    Name:        "set_light_values",
-    Description: "Sets the brightness and color temperature of a light.",
-    Parameters: &genai.Schema{
-        Type: genai.TypeObject,
-        Properties: map[string]*genai.Schema{
-            "brightness": {
-                Type:        genai.TypeInteger,
-                Description: "Light level from 0 to 100",
-            },
-            "color_temp": {
-                Type:        genai.TypeString,
-                Enum:        []string{"daylight", "cool", "warm"},
-                Description: "Color temperature",
-            },
-        },
-        Required: []string{"brightness", "color_temp"},
-    },
-}
+import (
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+)
 
 func setLightValues(brightness int, colorTemp string) map[string]any {
-    return map[string]any{"brightness": brightness, "colorTemperature": colorTemp}
+    return map[string]any{
+        "brightness":       brightness,
+        "colorTemperature": colorTemp,
+    }
+}
+
+func main() {
+    setLightValuesDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("set_light_values"),
+        Description: genai.Ptr("Sets the brightness and color temperature of a light."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "brightness": map[string]any{
+                    "type":        "integer",
+                    "description": "Light level from 0 to 100",
+                },
+                "color_temp": map[string]any{
+                    "type":        "string",
+                    "enum":        []string{"daylight", "cool", "warm"},
+                    "description": "Color temperature",
+                },
+            },
+            "required": []string{"brightness", "color_temp"},
+        },
+    })
+    _ = setLightValuesDeclaration
 }
 ```
 
-### Langkah 2: Panggil model dengan deklarasi fungsi
+### שלב 2: קוראים למודל עם הצהרות על פונקציות
 
 ### Python
 
@@ -1004,31 +988,70 @@ System.out.println(fcStep);
 ### Go
 
 ```
-ctx := context.Background()
-client, err := genai.NewClient(ctx, nil)
-if err != nil {
-    log.Fatal(err)
-}
+package main
 
-config := &genai.GenerateContentConfig{
-    Tools: []*genai.Tool{
-        {FunctionDeclarations: []*genai.FunctionDeclaration{setLightValuesDeclaration}},
-    },
-}
+import (
+    "context"
+    "fmt"
+    "log"
 
-contents := []*genai.Content{
-    genai.NewContentFromText("Turn the lights down to a romantic level", genai.RoleUser),
-}
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-response, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", contents, config)
-if err != nil {
-    log.Fatal(err)
-}
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-fmt.Println(response.FunctionCalls()[0])
+    setLightValuesDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("set_light_values"),
+        Description: genai.Ptr("Sets the brightness and color temperature of a light."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "brightness": map[string]any{
+                    "type":        "integer",
+                    "description": "Light level from 0 to 100",
+                },
+                "color_temp": map[string]any{
+                    "type":        "string",
+                    "enum":        []string{"daylight", "cool", "warm"},
+                    "description": "Color temperature",
+                },
+            },
+            "required": []string{"brightness", "color_temp"},
+        },
+    })
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Turn the lights down to a romantic level"),
+                Tools: []interactions.Tool{setLightValuesDeclaration},
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var fcStep *interactions.FunctionCallStep
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fcStep = step.FunctionCallStep
+            break
+        }
+    }
+    fmt.Println(fcStep)
+}
 ```
 
-Model menampilkan langkah `function_call` dengan `type`, `name`, dan `arguments`:
+המודל מחזיר שלב `function_call` עם `type`, `name` ו-`arguments`:
 
 ```
 type='function_call'
@@ -1036,7 +1059,7 @@ name='set_light_values'
 arguments={'color_temp': 'warm', 'brightness': 25}
 ```
 
-### Langkah 3: Jalankan fungsi
+### שלב 3: מריצים את הפונקציה
 
 ### Python
 
@@ -1142,18 +1165,86 @@ if (interaction.steps().isPresent()) {
 ### Go
 
 ```
-toolCall := response.FunctionCalls()[0]
+package main
 
-var result map[string]any
-if toolCall.Name == "set_light_values" {
-    brightness := int(toolCall.Args["brightness"].(float64))
-    colorTemp := toolCall.Args["color_temp"].(string)
-    result = setLightValues(brightness, colorTemp)
-    fmt.Printf("Function execution result: %v\n", result)
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func setLightValues(brightness int, colorTemp string) map[string]any {
+    return map[string]any{
+        "brightness":       brightness,
+        "colorTemperature": colorTemp,
+    }
+}
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    setLightValuesDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("set_light_values"),
+        Description: genai.Ptr("Sets the brightness and color temperature of a light."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "brightness": map[string]any{
+                    "type":        "integer",
+                    "description": "Light level from 0 to 100",
+                },
+                "color_temp": map[string]any{
+                    "type":        "string",
+                    "enum":        []string{"daylight", "cool", "warm"},
+                    "description": "Color temperature",
+                },
+            },
+            "required": []string{"brightness", "color_temp"},
+        },
+    })
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Turn the lights down to a romantic level"),
+                Tools: []interactions.Tool{setLightValuesDeclaration},
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fcStep := step.FunctionCallStep
+            if fcStep.Name == "set_light_values" {
+                brightness := 25
+                if b, ok := fcStep.Arguments["brightness"].(float64); ok {
+                    brightness = int(b)
+                }
+                colorTemp := "warm"
+                if c, ok := fcStep.Arguments["color_temp"].(string); ok {
+                    colorTemp = c
+                }
+                result := setLightValues(brightness, colorTemp)
+                fmt.Println("Function execution result:", result)
+            }
+        }
+    }
 }
 ```
 
-### Langkah 4: Kirim hasil kembali ke model
+### שלב 4: שליחת התוצאה בחזרה למודל
 
 ### Python
 
@@ -1294,36 +1385,105 @@ if (fcStep != null) {
 ### Go
 
 ```
-functionResponsePart := &genai.Part{
-    FunctionResponse: &genai.FunctionResponse{
-        ID:       toolCall.ID,
-        Name:     toolCall.Name,
-        Response: result,
-    },
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    setLightValuesDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("set_light_values"),
+        Description: genai.Ptr("Sets the brightness and color temperature of a light."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "brightness": map[string]any{
+                    "type":        "integer",
+                    "description": "Light level from 0 to 100",
+                },
+                "color_temp": map[string]any{
+                    "type":        "string",
+                    "enum":        []string{"daylight", "cool", "warm"},
+                    "description": "Color temperature",
+                },
+            },
+            "required": []string{"brightness", "color_temp"},
+        },
+    })
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Turn the lights down to a romantic level"),
+                Tools: []interactions.Tool{setLightValuesDeclaration},
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var fcStep *interactions.FunctionCallStep
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fcStep = step.FunctionCallStep
+            break
+        }
+    }
+
+    if fcStep != nil {
+        resultJson := `{"brightness": 25, "colorTemperature": "warm"}`
+        resultStep := interactions.NewStep(interactions.FunctionResultStep{
+            Name:   genai.Ptr(fcStep.Name),
+            CallID: fcStep.ID,
+            Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                interactions.NewFunctionResultSubcontent(interactions.TextContent{
+                    Text: resultJson,
+                }),
+            }),
+        })
+
+        finalResp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+            Body: operations.NewCreateInteractionRequestBody(
+                interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3.8-flash"),
+                    PreviousInteractionID: resp.Interaction.ID,
+                    Tools:                 []interactions.Tool{setLightValuesDeclaration},
+                    Input:                 interactions.NewInteractionsInput([]interactions.Step{resultStep}),
+                },
+            ),
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        fmt.Println(finalResp.Interaction.GetOutputText())
+    }
 }
-
-contents = append(contents, response.Candidates[0].Content)
-contents = append(contents, &genai.Content{
-    Role:  genai.RoleUser,
-    Parts: []*genai.Part{functionResponsePart},
-})
-
-finalResponse, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", contents, config)
-if err != nil {
-    log.Fatal(err)
-}
-
-fmt.Println(finalResponse.Text())
 ```
 
-### Pemanggilan fungsi tanpa status
+### קריאה להפעלת פונקציות ללא שמירת מצב
 
-Anda juga dapat menggunakan panggilan fungsi dalam mode tanpa status dengan mengelola histori percakapan di sisi klien dan menyetel `store=false`.
+אפשר גם להשתמש בהפעלת פונקציות במצב חסר מצב (stateless) על ידי ניהול היסטוריית השיחות בצד הלקוח והגדרת `store=false`.
 
-Dalam mode stateless, Anda harus meneruskan histori lengkap percakapan di kolom `input` setiap permintaan berikutnya. Histori ini harus mencakup:
-1. Langkah `user_input` awal.
-2. Semua langkah yang dihasilkan model ditampilkan di Turn 1 (termasuk langkah `thought` dan `function_call`) persis seperti yang diterima.
-3. Langkah `function_result` yang berisi output fungsi yang dijalankan.
+במצב ללא שמירת סטטוס, צריך להעביר את ההיסטוריה המלאה של השיחה בשדה `input` של כל בקשה עוקבת. ההיסטוריה הזו צריכה לכלול:
+‫1. השלב הראשוני `user_input`.
+2. כל השלבים שנוצרו על ידי המודל והוחזרו בתור 1 (כולל השלבים `thought` ו-`function_call`) בדיוק כפי שהתקבלו.
+3. השלב `function_result` שמכיל את הפלט של הפונקציה שהופעלה.
 
 ### Python
 
@@ -1537,52 +1697,107 @@ if (fcStep != null) {
 ### Go
 
 ```
-ctx := context.Background()
-client, err := genai.NewClient(ctx, nil)
-if err != nil {
-    log.Fatal(err)
-}
+package main
 
-config := &genai.GenerateContentConfig{
-    Tools: []*genai.Tool{
-        {FunctionDeclarations: []*genai.FunctionDeclaration{setLightValuesDeclaration}},
-    },
-}
+import (
+    "context"
+    "fmt"
+    "log"
 
-history := []*genai.Content{
-    genai.NewContentFromText("Turn the lights down to a romantic level", genai.RoleUser),
-}
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-response, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", history, config)
-if err != nil {
-    log.Fatal(err)
-}
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-toolCall := response.FunctionCalls()[0]
-brightness := int(toolCall.Args["brightness"].(float64))
-colorTemp := toolCall.Args["color_temp"].(string)
-result := setLightValues(brightness, colorTemp)
-
-history = append(history, response.Candidates[0].Content)
-history = append(history, &genai.Content{
-    Role: genai.RoleUser,
-    Parts: []*genai.Part{
-        {
-            FunctionResponse: &genai.FunctionResponse{
-                ID:       toolCall.ID,
-                Name:     toolCall.Name,
-                Response: result,
+    setLightValuesDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("set_light_values"),
+        Description: genai.Ptr("Sets the brightness and color temperature of a light."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "brightness": map[string]any{
+                    "type":        "integer",
+                    "description": "Light level from 0 to 100",
+                },
+                "color_temp": map[string]any{
+                    "type":        "string",
+                    "enum":        []string{"daylight", "cool", "warm"},
+                    "description": "Color temperature",
+                },
             },
+            "required": []string{"brightness", "color_temp"},
         },
-    },
-})
+    })
 
-finalResponse, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", history, config)
-if err != nil {
-    log.Fatal(err)
+    history := []interactions.Step{
+        interactions.NewStep(interactions.UserInputStep{
+            Content: []interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Turn the lights down to a romantic level",
+                }),
+            },
+        }),
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Store: genai.Ptr(false),
+                Input: interactions.NewInteractionsInput(history),
+                Tools: []interactions.Tool{setLightValuesDeclaration},
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    history = append(history, resp.Interaction.Steps...)
+    var fcStep *interactions.FunctionCallStep
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fcStep = step.FunctionCallStep
+            break
+        }
+    }
+
+    if fcStep != nil {
+        resultJson := `{"brightness": 25, "colorTemperature": "warm"}`
+        history = append(history, interactions.NewStep(interactions.FunctionResultStep{
+            Name:   genai.Ptr(fcStep.Name),
+            CallID: fcStep.ID,
+            Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                interactions.NewFunctionResultSubcontent(interactions.TextContent{
+                    Text: resultJson,
+                }),
+            }),
+        }))
+
+        finalResp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+            Body: operations.NewCreateInteractionRequestBody(
+                interactions.CreateModelInteraction{
+                    Model: interactions.Model("gemini-3.8-flash"),
+                    Store: genai.Ptr(false),
+                    Input: interactions.NewInteractionsInput(history),
+                    Tools: []interactions.Tool{setLightValuesDeclaration},
+                },
+            ),
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+
+        fmt.Println(finalResp.Interaction.GetOutputText())
+    }
 }
-
-fmt.Println(finalResponse.Text())
 ```
 
 ### REST
@@ -1659,25 +1874,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Deklarasi fungsi
+## הצהרות על פונקציות
 
-Deklarasi fungsi diteruskan sebagai alat dan mencakup:
+הצהרה על פונקציה מועברת ככלי וכוללת:
 
-- `type` (string): Harus berupa `"function"` untuk fungsi kustom.
-- `name` (string): Nama fungsi unik (gunakan garis bawah atau camelCase).
-- `description` (string): Penjelasan yang jelas tentang tujuan fungsi.
-- `parameters` (objek): Parameter input yang diharapkan fungsi.
-  - `type` (string): Jenis data keseluruhan, seperti `object`.
-  - `properties` (objek): Parameter individual dengan jenis dan deskripsi.
-  - `required` (array): Nama parameter wajib.
+- ‫`type` (מחרוזת): צריך להיות `"function"` עבור פונקציות בהתאמה אישית.
+- ‫`name` (מחרוזת): שם ייחודי של הפונקציה (אפשר להשתמש בקו תחתון או ב-camelCase).
+- ‫`description` (string): הסבר ברור על מטרת הפונקציה.
+- ‫`parameters` (object): פרמטרי הקלט שהפונקציה מצפה לקבל.
+  - ‫`type` (string): סוג הנתונים הכולל, כמו `object`.
+  - ‫`properties` (object): פרמטרים נפרדים עם סוג ותיאור.
+  - ‫`required` (מערך): שמות פרמטרים שהם חובה.
 
-## Panggilan fungsi dengan model penalaran
+## בקשה להפעלת פונקציה עם מודלים של חשיבה
 
-Model seri Gemini 3 menggunakan proses ["pemikiran"](https://ai.google.dev/gemini-api/docs/thinking?hl=id) internal yang meningkatkan kualitas panggilan fungsi. SDK akan otomatis menangani [tanda tangan pikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk Anda.
+מודלים מסדרת Gemini 3 משתמשים בתהליך פנימי של ["חשיבה"](https://ai.google.dev/gemini-api/docs/thinking?hl=he) שמשפר את השימוש בפונקציות. ערכות ה-SDK מטפלות אוטומטית ב[חתימות מחשבה](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=he) בשבילכם.
 
-## Pemanggilan fungsi paralel
+## קריאה להפעלת פונקציות במקביל
 
-Panggil beberapa fungsi sekaligus jika fungsi tersebut independen:
+הפעלת כמה פונקציות בבת אחת כשהן בלתי תלויות:
 
 ### Python
 
@@ -1825,6 +2040,8 @@ import (
     "log"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -1834,64 +2051,64 @@ func main() {
         log.Fatal(err)
     }
 
-    powerDiscoBall := &genai.FunctionDeclaration{
-        Name:        "power_disco_ball",
-        Description: "Powers the disco ball.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "power": {Type: genai.TypeBoolean},
+    powerDiscoBall := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("power_disco_ball"),
+        Description: genai.Ptr("Powers the disco ball."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "power": map[string]any{"type": "boolean"},
             },
-            Required: []string{"power"},
+            "required": []string{"power"},
         },
-    }
-    startMusic := &genai.FunctionDeclaration{
-        Name:        "start_music",
-        Description: "Play music.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "energetic": {Type: genai.TypeBoolean},
-                "loud":      {Type: genai.TypeBoolean},
-            },
-            Required: []string{"energetic", "loud"},
-        },
-    }
-    dimLights := &genai.FunctionDeclaration{
-        Name:        "dim_lights",
-        Description: "Dim the lights.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "brightness": {Type: genai.TypeNumber},
-            },
-            Required: []string{"brightness"},
-        },
-    }
+    })
 
-    config := &genai.GenerateContentConfig{
-        Tools: []*genai.Tool{
-            {FunctionDeclarations: []*genai.FunctionDeclaration{powerDiscoBall, startMusic, dimLights}},
-        },
-        ToolConfig: &genai.ToolConfig{
-            FunctionCallingConfig: &genai.FunctionCallingConfig{
-                Mode: genai.FunctionCallingConfigModeAny,
+    startMusic := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("start_music"),
+        Description: genai.Ptr("Play music."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "energetic": map[string]any{"type": "boolean"},
+                "loud":      map[string]any{"type": "boolean"},
             },
+            "required": []string{"energetic", "loud"},
         },
-    }
+    })
 
-    response, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.8-flash",
-        genai.Text("Turn this place into a party!"),
-        config,
-    )
+    dimLights := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("dim_lights"),
+        Description: genai.Ptr("Dim the lights."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "brightness": map[string]any{"type": "number"},
+            },
+            "required": []string{"brightness"},
+        },
+    })
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Turn this place into a party!"),
+                Tools: []interactions.Tool{powerDiscoBall, startMusic, dimLights},
+                GenerationConfig: &interactions.GenerationConfig{
+                    ToolChoice: genai.Ptr(interactions.NewToolChoice(interactions.ToolChoiceTypeAny)),
+                },
+            },
+        ),
+    })
     if err != nil {
         log.Fatal(err)
     }
 
-    for _, fn := range response.FunctionCalls() {
-        fmt.Printf("%s(%v)\n", fn.Name, fn.Args)
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fc := step.FunctionCallStep
+            fmt.Printf("%s(%v)\n", fc.Name, fc.Arguments)
+        }
     }
 }
 ```
@@ -1947,9 +2164,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Panggilan fungsi komposit
+## קריאה להפעלת פונקציות בהרכבה
 
-Rangkai beberapa panggilan fungsi untuk permintaan yang kompleks (misalnya, dapatkan lokasi terlebih dahulu, lalu dapatkan cuaca untuk lokasi tersebut).
+אפשר לשרשר כמה קריאות לפונקציות כדי לבצע בקשות מורכבות (למשל, קודם לקבל את המיקום ואז לקבל את נתוני מזג האוויר במיקום הזה).
 
 ### Python
 
@@ -2165,6 +2382,8 @@ import (
     "log"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -2174,49 +2393,61 @@ func main() {
         log.Fatal(err)
     }
 
-    getWeatherForecastDecl := &genai.FunctionDeclaration{
-        Name:        "get_weather_forecast",
-        Description: "Gets the current weather temperature for a given location.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "location": {Type: genai.TypeString, Description: "The location"},
+    getWeatherForecastDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_weather_forecast"),
+        Description: genai.Ptr("Gets the current weather temperature for a given location."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{
+                    "type":        "string",
+                    "description": "The location",
+                },
             },
-            Required: []string{"location"},
+            "required": []string{"location"},
         },
-    }
+    })
 
-    setThermostatTemperatureDecl := &genai.FunctionDeclaration{
-        Name:        "set_thermostat_temperature",
-        Description: "Sets the thermostat to a desired temperature.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "temperature": {Type: genai.TypeInteger, Description: "The temperature in Celsius"},
+    setThermostatTemperatureDeclaration := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("set_thermostat_temperature"),
+        Description: genai.Ptr("Sets the thermostat to a desired temperature."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "temperature": map[string]any{
+                    "type":        "integer",
+                    "description": "The temperature in Celsius",
+                },
             },
-            Required: []string{"temperature"},
+            "required": []string{"temperature"},
         },
-    }
+    })
 
-    config := &genai.GenerateContentConfig{
-        Tools: []*genai.Tool{
-            {FunctionDeclarations: []*genai.FunctionDeclaration{getWeatherForecastDecl, setThermostatTemperatureDecl}},
-        },
-    }
-
-    response, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.8-flash",
-        genai.Text("If it's warmer than 20°C in London, set the thermostat to 20°C, otherwise 18°C."),
-        config,
-    )
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("If it's warmer than 20°C in London, set the thermostat to 20°C, otherwise 18°C."),
+                Tools: []interactions.Tool{getWeatherForecastDeclaration, setThermostatTemperatureDeclaration},
+            },
+        ),
+    })
     if err != nil {
         log.Fatal(err)
     }
 
-    for _, fn := range response.FunctionCalls() {
-        fmt.Printf("Function to call: %s\n", fn.Name)
-        fmt.Printf("Arguments: %v\n", fn.Args)
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fc := step.FunctionCallStep
+            fmt.Println("Function to call:", fc.Name)
+            fmt.Println("Arguments:", fc.Arguments)
+        } else if step.ModelOutputStep != nil {
+            for _, part := range step.ModelOutputStep.Content {
+                if part.TextContent != nil {
+                    fmt.Println(part.TextContent.Text)
+                }
+            }
+        }
     }
 }
 ```
@@ -2259,14 +2490,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Mode panggilan fungsi
+## מצבים של בקשה להפעלת פונקציה
 
-Mengontrol cara model menggunakan alat menggunakan `tool_choice` di `generation_config`:
+הגדרת האופן שבו המודל משתמש בכלים באמצעות `tool_choice` ב-`generation_config`:
 
-- `auto` (Default): Model memutuskan apakah akan memanggil fungsi atau merespons secara langsung.
-- `any`: Model dibatasi untuk selalu memprediksi panggilan fungsi.
-- `none`: Model dilarang melakukan panggilan fungsi.
-- `validated`: Model memastikan kepatuhan skema fungsi.
+- ‫`auto` (ברירת מחדל): המודל מחליט אם להפעיל פונקציה או להגיב ישירות.
+- ‫`any`: המודל מוגבל כך שתמיד יחזה קריאה לפונקציה.
+- ‫`none`: המודל לא יכול לבצע קריאות לפונקציות.
+- ‫`validated`: המודל מוודא שהפונקציה תואמת לסכימה.
 
 ### Python
 
@@ -2321,18 +2552,23 @@ GenerationConfig generationConfig =
 ### Go
 
 ```
-// Configure function calling mode
-toolConfig := &genai.ToolConfig{
-    FunctionCallingConfig: &genai.FunctionCallingConfig{
-        Mode:                 genai.FunctionCallingConfigModeAny,
-        AllowedFunctionNames: []string{"get_current_temperature"},
-    },
-}
+package main
 
-// Create the generation config
-config := &genai.GenerateContentConfig{
-    Tools:      tools, // not defined here.
-    ToolConfig: toolConfig,
+import (
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+)
+
+func main() {
+    generationConfig := interactions.GenerationConfig{
+        ToolChoice: genai.Ptr(interactions.NewToolChoice(interactions.ToolChoiceConfig{
+            AllowedTools: &interactions.AllowedTools{
+                Mode:  interactions.ToolChoiceTypeAny.ToPointer(),
+                Tools: []string{"get_current_temperature"},
+            },
+        })),
+    }
+    _ = generationConfig
 }
 ```
 
@@ -2368,11 +2604,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Penggunaan alat serbaguna
+## שימוש במולטיטול
 
-Anda dapat mengaktifkan beberapa alat, menggabungkan alat bawaan dengan panggilan fungsi dalam
-permintaan yang sama. Model Gemini 3 dapat menggabungkan alat bawaan dengan panggilan fungsi secara langsung di Interaksi. Meneruskan `previous_interaction_id`
-secara otomatis menyebarkan konteks alat bawaan.
+אפשר להפעיל כמה כלים ולשלב בין כלים מובנים לבין קריאות לפונקציות באותה בקשה. מודלים של Gemini 3 יכולים לשלב כלים מובנים עם קריאה לפונקציות (function calling) מחוץ לקופסה באינטראקציות. העברת `previous_interaction_id`
+מפיצה באופן אוטומטי את ההקשר של הכלי המובנה.
 
 ### Python
 
@@ -2593,6 +2828,8 @@ import (
     "log"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -2602,62 +2839,72 @@ func main() {
         log.Fatal(err)
     }
 
-    getWeather := &genai.FunctionDeclaration{
-        Name:        "get_weather",
-        Description: "Gets the weather for a given location.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "location": {
-                    Type:        genai.TypeString,
-                    Description: "The city and state, e.g. San Francisco, CA",
+    getWeather := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_weather"),
+        Description: genai.Ptr("Gets the weather for a requested city."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "city": map[string]any{
+                    "type":        "string",
+                    "description": "The city and state, e.g. Utqiaġvik, Alaska",
                 },
             },
-            Required: []string{"location"},
+            "required": []string{"city"},
         },
+    })
+
+    tools := []interactions.Tool{
+        interactions.NewTool(interactions.GoogleSearch{}),
+        getWeather,
     }
 
-    tools := []*genai.Tool{
-        {GoogleSearch: &genai.GoogleSearch{}},
-        {FunctionDeclarations: []*genai.FunctionDeclaration{getWeather}},
-    }
-
-    config := &genai.GenerateContentConfig{
-        Tools: tools,
-    }
-
-    prompt := "What is the northernmost city in the United States? What's the weather like there today?"
-    response1, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", genai.Text(prompt), config)
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("What is the northernmost city in the United States? What's the weather like there today?"),
+                Tools: tools,
+            },
+        ),
+    })
     if err != nil {
         log.Fatal(err)
     }
 
-    toolCall := response1.FunctionCalls()[0]
-    fmt.Printf("Function call: %s (ID: %s)\n", toolCall.Name, toolCall.ID)
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            fcStep := step.FunctionCallStep
+            fmt.Printf("Function call: %s (ID: %s)\n", fcStep.Name, fcStep.ID)
+            resultJson := `{"response": "Very cold. 22 degrees Fahrenheit."}`
 
-    history := []*genai.Content{
-        genai.NewContentFromText(prompt, genai.RoleUser),
-        response1.Candidates[0].Content,
-        {
-            Role: genai.RoleUser,
-            Parts: []*genai.Part{
-                {
-                    FunctionResponse: &genai.FunctionResponse{
-                        ID:       toolCall.ID,
-                        Name:     toolCall.Name,
-                        Response: map[string]any{"response": "Very cold. 22 degrees Fahrenheit."},
+            resultStep := interactions.NewStep(interactions.FunctionResultStep{
+                Name:   genai.Ptr(fcStep.Name),
+                CallID: fcStep.ID,
+                Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                    interactions.NewFunctionResultSubcontent(interactions.TextContent{
+                        Text: resultJson,
+                    }),
+                }),
+            })
+
+            resp2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+                Body: operations.NewCreateInteractionRequestBody(
+                    interactions.CreateModelInteraction{
+                        Model:                 interactions.Model("gemini-3.8-flash"),
+                        PreviousInteractionID: resp.Interaction.ID,
+                        Tools:                 tools,
+                        Input:                 interactions.NewInteractionsInput([]interactions.Step{resultStep}),
                     },
-                },
-            },
-        },
-    }
+                ),
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
 
-    response2, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", history, config)
-    if err != nil {
-        log.Fatal(err)
+            fmt.Println(resp2.Interaction.GetOutputText())
+        }
     }
-
-    fmt.Println(response2.Text())
 }
 ```
 
@@ -2721,13 +2968,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Respons fungsi multimodal
+## תשובות של פונקציות מולטי-מודאליות
 
-Untuk model seri Gemini 3, Anda dapat menyertakan konten multimodal di bagian respons fungsi yang Anda kirim ke model. Model dapat memproses konten multimodal ini pada giliran berikutnya untuk menghasilkan respons yang lebih informatif.
+במודלים מסדרת Gemini 3, אפשר לכלול תוכן מולטימודאלי בחלקים של תגובת הפונקציה ששולחים למודל. המודל יכול לעבד את התוכן הרב-מודאלי הזה בתור הבא כדי לספק תשובה מושכלת יותר.
 
-Untuk menyertakan data multimodal dalam respons fungsi, sertakan sebagai satu atau beberapa blok konten di kolom `result` pada langkah `function_result`. Setiap blok konten harus menentukan `type` (misalnya, `"text"`, `"image"`).
+כדי לכלול נתונים מרובי-אופנים בתשובה של פונקציה, צריך לכלול אותם כאחד או יותר בלוקים של תוכן בשדה `result` של שלב `function_result`. בכל בלוק תוכן צריך לציין את `type` (למשל, `"text"`, ‏ `"image"`).
 
-Contoh berikut menunjukkan cara mengirim respons fungsi yang berisi data gambar kembali ke model dalam interaksi:
+בדוגמה הבאה אפשר לראות איך לשלוח בחזרה למודל בתגובה לפונקציה נתונים של תמונה באינטראקציה:
 
 ### Python
 
@@ -2897,11 +3144,11 @@ package main
 import (
     "context"
     "fmt"
-    "io"
     "log"
-    "net/http"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
 
 func main() {
@@ -2911,93 +3158,67 @@ func main() {
         log.Fatal(err)
     }
 
-    // 1. Define the function tool
-    getImageDeclaration := &genai.FunctionDeclaration{
-        Name:        "get_image",
-        Description: "Retrieves the image file reference for a specific order item.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "item_name": {
-                    Type:        genai.TypeString,
-                    Description: "The name or description of the item ordered (e.g., 'instrument').",
-                },
-            },
-            Required: []string{"item_name"},
+    getInstrumentImage := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_instrument_image"),
+        Description: genai.Ptr("Gets an image of an instrument."),
+        Parameters: map[string]any{
+            "type": "object",
         },
-    }
+    })
 
-    tools := []*genai.Tool{
-        {FunctionDeclarations: []*genai.FunctionDeclaration{getImageDeclaration}},
-    }
-
-    // 2. Send a message that triggers the tool
-    prompt := "Show me the instrument I ordered last month."
-    response1, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", genai.Text(prompt), &genai.GenerateContentConfig{
-        Tools: tools,
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Show me the instrument."),
+                Tools: []interactions.Tool{getInstrumentImage},
+            },
+        ),
     })
     if err != nil {
         log.Fatal(err)
     }
 
-    // 3. Handle the function call
-    functionCall := response1.FunctionCalls()[0]
-    requestedItem := functionCall.Args["item_name"]
-    fmt.Printf("Model wants to call: %s\n", functionCall.Name)
-    fmt.Printf("Calling external tool for: %v\n", requestedItem)
-
-    resp, err := http.Get("https://goo.gle/instrument-img")
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer resp.Body.Close()
-    imageBytes, err := io.ReadAll(resp.Body)
-    if err != nil {
-        log.Fatal(err)
+    var toolCall *interactions.FunctionCallStep
+    for _, step := range resp.Interaction.Steps {
+        if step.FunctionCallStep != nil {
+            toolCall = step.FunctionCallStep
+            break
+        }
     }
 
-    functionResponseData := map[string]any{
-        "image_ref": map[string]any{"$ref": "instrument.jpg"},
-    }
+    if toolCall != nil {
+        base64ImageData := "BASE64_IMAGE_DATA"
 
-    functionResponseMultimodalData := &genai.FunctionResponsePart{
-        InlineData: &genai.FunctionResponseBlob{
-            MIMEType:    "image/jpeg",
-            DisplayName: "instrument.jpg",
-            Data:        imageBytes,
-        },
-    }
+        resultStep := interactions.NewStep(interactions.FunctionResultStep{
+            Name:   genai.Ptr(toolCall.Name),
+            CallID: toolCall.ID,
+            Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                interactions.NewFunctionResultSubcontent(interactions.TextContent{
+                    Text: "instrument.jpg",
+                }),
+                interactions.NewFunctionResultSubcontent(interactions.ImageContent{
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                    Data:     genai.Ptr(base64ImageData),
+                }),
+            }),
+        })
 
-    // 4. Send the tool's result back
-    history := []*genai.Content{
-        genai.NewContentFromText(prompt, genai.RoleUser),
-        response1.Candidates[0].Content,
-        {
-            Role: genai.RoleUser,
-            Parts: []*genai.Part{
-                {
-                    FunctionResponse: &genai.FunctionResponse{
-                        ID:       functionCall.ID,
-                        Name:     functionCall.Name,
-                        Response: functionResponseData,
-                        Parts:    []*genai.FunctionResponsePart{functionResponseMultimodalData},
-                    },
+        finalResp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+            Body: operations.NewCreateInteractionRequestBody(
+                interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3.8-flash"),
+                    PreviousInteractionID: resp.Interaction.ID,
+                    Input:                 interactions.NewInteractionsInput([]interactions.Step{resultStep}),
                 },
-            },
-        },
-    }
+            ),
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
 
-    response2, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", history, &genai.GenerateContentConfig{
-        Tools: tools,
-        ThinkingConfig: &genai.ThinkingConfig{
-            IncludeThoughts: true,
-        },
-    })
-    if err != nil {
-        log.Fatal(err)
+        fmt.Println(finalResp.Interaction.GetOutputText())
     }
-
-    fmt.Printf("\nFinal model response: %s\n", response2.Text())
 }
 ```
 
@@ -3028,30 +3249,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Pemanggilan fungsi dengan Output terstruktur
+## בקשה להפעלת פונקציה עם פלט מובנה
 
-Untuk model seri Gemini 3, gabungkan panggilan fungsi dengan
-[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) untuk
-respons yang diformat secara konsisten.
+במודלים מסדרת Gemini 3, אפשר לשלב קריאה לפונקציה עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כדי לקבל תשובות בפורמט עקבי.
 
-## MCP (Model Context Protocol) Jarak Jauh
+## ‫MCP (Model Context Protocol) מרוחק
 
-Interactions API mendukung koneksi ke server MCP jarak jauh untuk memberikan akses model ke alat dan layanan eksternal. Anda memberikan server `name` dan `url` dalam konfigurasi alat.
+‫Interactions API תומך בחיבור לשרתי MCP מרוחקים כדי לתת למודל גישה לכלים ולשירותים חיצוניים. אתם מציינים את השרת `name` ואת `url` בהגדרות של הכלי.
 
-Saat menggunakan MCP Jarak Jauh, perhatikan batasan berikut:
+כשמשתמשים ב-Remote MCP, חשוב לשים לב למגבלות הבאות:
 
-- **Jenis server**: MCP jarak jauh hanya berfungsi dengan server HTTP yang dapat di-streaming. Server SSE (Server-Sent Events) tidak didukung.
-- **Penamaan**: Nama server MCP tidak boleh menyertakan karakter `-`. Sebagai gantinya, gunakan nama server `snake_case`.
+- **סוגי שרתים**: שרת MCP מרוחק פועל רק עם שרתי HTTP שניתן להזרים מהם. אין תמיכה בשרתי SSE (אירועים שנשלחים מהשרת).
+- **שמות**: שמות של שרתי MCP לא יכולים לכלול את התו `-`. במקום זאת, צריך להשתמש בשמות השרתים `snake_case`.
 
-| Kolom | Jenis | Wajib diisi | Deskripsi |
+| שדה | סוג | נדרש | תיאור |
 | --- | --- | --- | --- |
-| `type` | `string` | Ya | Harus berupa `"mcp_server"`. |
-| `name` | `string` | Tidak | Nama tampilan untuk server MCP. |
-| `url` | `string` | Tidak | URL lengkap untuk endpoint server MCP. |
-| `headers` | `object` | Tidak | Pasangan nilai kunci yang dikirim sebagai header HTTP dengan setiap permintaan ke server (misalnya, token autentikasi). |
-| `allowed_tools` | `array` | Tidak | Membatasi alat dari server yang dapat dipanggil oleh agen. |
+| `type` | `string` | כן | חייב להיות `"mcp_server"`. |
+| `name` | `string` | לא | השם המוצג של שרת ה-MCP. |
+| `url` | `string` | לא | כתובת ה-URL המלאה של נקודת הקצה של שרת ה-MCP. |
+| `headers` | `object` | לא | צמדי מפתח/ערך שנשלחים ככותרות HTTP עם כל בקשה לשרת (לדוגמה, אסימוני אימות). |
+| `allowed_tools` | `array` | לא | הגבלת הכלים בשרת שהסוכן יכול להשתמש בהם. |
 
-### Contoh
+### דוגמה
 
 ### Python
 
@@ -3123,6 +3342,48 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Check the weather in San Francisco."),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.MCPServer{
+                        Name: genai.Ptr("weather"),
+                        URL:  genai.Ptr("https://gemini-api-demos.uc.r.appspot.com/mcp"),
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = resp
+}
+```
+
 ### REST
 
 ```
@@ -3142,11 +3403,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Panggilan alat streaming
+## העברת קריאות לכלי בסטרימינג
 
-Saat menggunakan alat dengan streaming, model menghasilkan panggilan fungsi sebagai
-urutan peristiwa `step.delta` di stream. Argumen alat dapat di-streaming
-sebagai argumen parsial menggunakan `arguments`. Anda harus menggabungkan delta ini untuk merekonstruksi panggilan alat lengkap sebelum mengeksekusinya.
+כשמשתמשים בכלים עם סטרימינג, המודל יוצר קריאות לפונקציות כרצף של אירועי `step.delta` בסטרים. אפשר להזרים ארגומנטים של כלים כארגומנטים חלקיים באמצעות `arguments`. כדי להפעיל את קריאות הכלים, צריך לצבור את ערכי הדלתא האלה כדי לשחזר את קריאות הכלים המלאות.
 
 ### Python
 
@@ -3403,9 +3662,18 @@ import (
     "context"
     "fmt"
     "log"
+    "strings"
 
     "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
+
+type callState struct {
+    id        string
+    name      string
+    arguments *strings.Builder
+}
 
 func main() {
     ctx := context.Background()
@@ -3414,39 +3682,76 @@ func main() {
         log.Fatal(err)
     }
 
-    getWeather := &genai.FunctionDeclaration{
-        Name:        "get_weather",
-        Description: "Gets the weather for a given location.",
-        Parameters: &genai.Schema{
-            Type: genai.TypeObject,
-            Properties: map[string]*genai.Schema{
-                "location": {
-                    Type:        genai.TypeString,
-                    Description: "The city and state",
+    weatherTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_weather"),
+        Description: genai.Ptr("Gets the weather for a given location."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{
+                    "type":        "string",
+                    "description": "The city and state",
                 },
             },
-            Required: []string{"location"},
+            "required": []string{"location"},
         },
-    }
+    })
 
-    config := &genai.GenerateContentConfig{
-        Tools: []*genai.Tool{
-            {FunctionDeclarations: []*genai.FunctionDeclaration{getWeather}},
-        },
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model:  interactions.Model("gemini-3.8-flash"),
+                Input:  interactions.NewInteractionsInput("What is the weather in Paris?"),
+                Tools:  []interactions.Tool{weatherTool},
+                Stream: genai.Ptr(true),
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
     }
+    defer resp.InteractionSSEStreamEvent.Close()
 
-    for resp, err := range client.Models.GenerateContentStream(
-        ctx,
-        "gemini-3.8-flash",
-        genai.Text("What is the weather in Paris?"),
-        config,
-    ) {
-        if err != nil {
-            log.Fatal(err)
-        }
-        for _, fc := range resp.FunctionCalls() {
-            fmt.Printf("Function to call: %s\n", fc.Name)
-            fmt.Printf("Arguments: %v\n", fc.Args)
+    currentCalls := make(map[int]*callState)
+    var toolCalls []map[string]any
+
+    for resp.InteractionSSEStreamEvent.Next() {
+        event := resp.InteractionSSEStreamEvent.Value()
+        if stepStart := event.GetDataStepStart(); stepStart != nil {
+            if fcStep := stepStart.GetStepFunctionCall(); fcStep != nil {
+                idx := stepStart.Index
+                builder := &strings.Builder{}
+                if len(fcStep.Arguments) > 0 {
+                    builder.WriteString(fmt.Sprint(fcStep.Arguments))
+                }
+                currentCalls[idx] = &callState{
+                    id:        fcStep.ID,
+                    name:      fcStep.Name,
+                    arguments: builder,
+                }
+            }
+        } else if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            idx := stepDelta.Index
+            if argsDelta := stepDelta.GetDeltaArgumentsDelta(); argsDelta != nil {
+                if argsDelta.Arguments != nil {
+                    if call, ok := currentCalls[idx]; ok {
+                        call.arguments.WriteString(*argsDelta.Arguments)
+                    }
+                }
+            } else if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        } else if completed := event.GetDataInteractionCompleted(); completed != nil {
+            for _, call := range currentCalls {
+                toolCalls = append(toolCalls, map[string]any{
+                    "type":      "function_call",
+                    "id":        call.id,
+                    "name":      call.name,
+                    "arguments": call.arguments.String(),
+                })
+            }
+            fmt.Println("\nFinal tool calls ready to execute:")
+            fmt.Println(toolCalls)
         }
     }
 }
@@ -3477,42 +3782,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## Praktik terbaik
+## שיטות מומלצות
 
-- **Deskripsi Fungsi dan Parameter:** Harus jelas dan spesifik.
-- **Penamaan:** Gunakan nama deskriptif tanpa spasi atau karakter khusus.
-- **Pengetikan Kuat:** Gunakan jenis tertentu (integer, string, enum).
-- **Pemilihan Alat:** Tetapkan alat aktif maksimal 10-20.
-- **Rekayasa Perintah:** Berikan konteks dan petunjuk.
-- **Validasi:** Validasi panggilan fungsi sebelum dieksekusi.
-- **Penanganan Error:** Terapkan penanganan error yang andal.
-- **Keamanan:** Gunakan autentikasi yang sesuai untuk API eksternal.
+- **תיאורים של פונקציות ופרמטרים:** התיאורים צריכים להיות ברורים וספציפיים.
+- **שמות:** צריך להשתמש בשמות תיאוריים ללא רווחים או תווים מיוחדים.
+- **הקלדה חזקה:** שימוש בסוגים ספציפיים (מספר שלם, מחרוזת, enum).
+- **בחירת כלים:** כדאי להגדיר את האפשרות 'פעיל' ל-10 עד 20 כלים לכל היותר.
+- **הנדסת הנחיות:** מספקים הקשר והוראות.
+- **אימות:** אימות של קריאות לפונקציות לפני ההפעלה.
+- **טיפול בשגיאות:** צריך להטמיע טיפול בשגיאות בצורה חזקה.
+- **אבטחה:** השתמשו באימות מתאים לממשקי API חיצוניים.
 
-## Solusi untuk persyaratan teks sebelum alat
+## פתרונות עקיפים לדרישות הטקסט של הכלי
 
-**Masalah:** Jika perintah Anda mengharuskan model menghasilkan teks terstruktur (XML, YAML, JSON, dll.) (misalnya, `<UPDATE>...</UPDATE>`) tepat sebelum melakukan panggilan alat, panggilan alat terkadang dapat gagal dengan `Malformed_Function_Call`.
+**בעיה:** אם ההנחיה שלכם מחייבת את המודל להפיק טקסט מובנה (XML,‏ YAML,‏ JSON וכו') (לדוגמה, `<UPDATE>...</UPDATE>`) מיד לפני ביצוע קריאה לכלי, יכול להיות שהקריאה לכלי תיכשל מדי פעם עם `Malformed_Function_Call`.
 
-**Solusi:** Solusi berikut dapat mengatasi masalah ini:
+**פתרונות:** הפתרונות הבאים יעזרו לכם לפתור את הבעיה:
 
-- **DISARANKAN:** Beri petunjuk kepada model untuk menempatkan catatan pra-alatnya di dalam panggilan fungsi `update()` khusus, bukan teks mentah (detail di bawah).
-- Instruksikan model untuk menulis catatan sebagai header Markdown (`# UPDATE`, `## PLAN`) dan bukan teks terstruktur.
-- Jangan mewajibkan model untuk menampilkan teks sebelum panggilan alat.
+- **מומלץ:** מנחים את המודל להוסיף את ההערות שלו לפני השימוש בכלי בתוך קריאה ייעודית לפונקציה `update()` במקום בטקסט גולמי (פרטים בהמשך).
+- מנחים את המודל לכתוב הערות ככותרות Markdown ‏ (`# UPDATE`, `## PLAN`) במקום כטקסט מובנה.
+- אל תדרשו מהמודל להפיק טקסט לפני קריאות לכלים.
 
-### Solusi pilihan: Bungkus catatan kerja dalam panggilan fungsi khusus
+### פתרון עדיף: עוטפים את ההערות לעבודה בקריאה ייעודית לפונקציה
 
-Daripada petunjuk asli:
+במקום ההוראה המקורית:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
 ```
 
-Gunakan petunjuk yang diperbarui ini:
+משתמשים בהוראה המעודכנת הזו:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-Perbarui semua referensi ke format XML `<UPDATE>` lama dalam permintaan pelanggan. Kemudian, tambahkan deklarasi fungsi yang sesuai untuk fungsi update:
+צריך לעדכן את כל ההפניות לפורמט ה-XML הישן של `<UPDATE>` בבקשת הלקוח. אחר כך מוסיפים את הצהרת הפונקציה המתאימה לפונקציית העדכון:
 
 ```
 {
@@ -3548,20 +3853,20 @@ Perbarui semua referensi ke format XML `<UPDATE>` lama dalam permintaan pelangga
 }
 ```
 
-Kemudian, model akan melakukan dua panggilan dalam langkah yang sama: panggilan `update()` yang menggantikan XML terstruktur, dan panggilan fungsi sebenarnya yang ingin dilakukan.
+לאחר מכן, המודל יבצע שתי קריאות באותו השלב: קריאת `update()` שמחליפה את ה-XML המובנה, וקריאת הפונקציה בפועל שהוא רוצה לבצע.
 
-## Catatan dan batasan
+## הערות ומגבלות
 
-- Hanya [subset skema OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=id#FunctionDeclaration) yang didukung.
-- Untuk mode `any`, API dapat menolak skema yang sangat besar atau bertingkat dalam.
-- Jenis parameter yang didukung di Python terbatas.
+- יש תמיכה רק ב[קבוצת משנה של סכימת OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=he#FunctionDeclaration).
+- במצב `any`, יכול להיות שה-API ידחה סכימות גדולות מאוד או סכימות עם קינון עמוק.
+- יש מגבלה על סוגי הפרמטרים הנתמכים ב-Python.
 
-Kirim masukan
+שליחת משוב
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Terakhir diperbarui pada 2026-09-18 UTC.
+עדכון אחרון: 2026-09-24 (שעון UTC).
 
-Ada masukan untuk kami?
+רוצה לתת לנו משוב?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-18 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]

@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr
-fetched_at: 2026-09-21T05:46:16.143086+00:00
-title: "Medya \u00e7\u00f6z\u00fcn\u00fcrl\u00fc\u011f\u00fc \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ar
+fetched_at: 2026-09-28T06:25:26.463202+00:00
+title: "\u062f\u0631\u062c\u0629 \u062f\u0642\u0629 \u0627\u0644\u0648\u0633\u0627\u0626\u0637 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+‫Gemini 3.8 Flash متاح الآن. [جرِّبه](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ar).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-# Medya çözünürlüğü
+# درجة دقة الوسائط
 
-`media_resolution` parametresi, medya girişleri için ayrılan **maksimum jeton sayısını** belirleyerek Gemini API'nin resim, video, ses ve PDF belgeleri gibi medya girişlerini nasıl işleyeceğini kontrol eder. Bu sayede, yanıt kalitesini gecikme ve maliyetle dengelemenize olanak tanır. Görsel ve belge girişleri, çözünürlük ayarına göre jeton dağıtımını ölçeklendirirken ses girişleri, tüm çözünürlük seviyelerinde saniyede sabit bir hızda jetonlaştırılır. Farklı ayarlar, varsayılan değerler ve bunların jetonlarla nasıl eşleştiği hakkında bilgi edinmek için [Jeton sayıları](#token-counts) bölümüne bakın.
+يتحكّم المَعلمة `media_resolution` في طريقة معالجة Gemini API لمدخلات الوسائط، مثل الصور والفيديوهات والصوت ومستندات PDF، من خلال تحديد **الحد الأقصى لعدد الرموز المميزة** المخصّصة لمدخلات الوسائط، ما يتيح لك تحقيق التوازن بين جودة الردود ووقت الاستجابة والتكلفة. في حين أنّ المدخلات المرئية ومدخلات المستندات تحدّد عدد الرموز المميزة المخصّصة استنادًا إلى إعداد درجة الدقة، يتم تحويل المدخلات الصوتية إلى رموز مميزة بمعدّل ثابت في الثانية على جميع مستويات الدقة. للاطّلاع على الإعدادات المختلفة والقيم التلقائية وكيفية توافقها مع الرموز المميّزة، يُرجى الانتقال إلى قسم [عدد الرموز المميّزة](#token-counts).
 
-Medya çözünürlüğünü iki şekilde yapılandırabilirsiniz:
+يمكنك ضبط دقة الوسائط بطريقتَين:
 
-- [Bölüm başına](#per-part-media-resolution) (yalnızca Gemini 3)
-- `generateContent` isteğinin tamamı (tüm çok formatlı modeller) için [küresel olarak](#global-media-resolution)
+- [لكل جزء](#per-part-media-resolution) (Gemini 3 فقط)
+- [على مستوى العالم](#global-media-resolution) لطلب `generateContent` كامل (جميع النماذج المتعدّدة الوسائط)
 
-## Bölüm başına medya çözünürlüğü (yalnızca Gemini 3)
+## دقة الوسائط لكل جزء (في Gemini 3 فقط)
 
-Gemini 3, isteğinizdeki her bir medya nesnesi için medya çözünürlüğünü ayarlamanıza olanak tanır. Böylece, jeton kullanımını ayrıntılı bir şekilde optimize edebilirsiniz. Tek bir istekte çözünürlük seviyelerini karıştırabilirsiniz. Örneğin, karmaşık bir şema için yüksek çözünürlük, bağlamsal bir resim için ise düşük çözünürlük kullanabilirsiniz. Bu ayar, belirli bir bölüm için tüm genel yapılandırmaları geçersiz kılar. Varsayılan ayarlar için [Jeton sayıları](#token-counts) bölümüne bakın.
+يتيح لك Gemini 3 ضبط دقة الوسائط لكائنات الوسائط الفردية ضمن طلبك، ما يوفّر تحسينًا دقيقًا لاستخدام الرموز المميزة. يمكنك الجمع بين مستويات الدقة المختلفة في طلب واحد. على سبيل المثال، يمكنك استخدام دقة عالية لمخطط بياني معقّد ودقة منخفضة لصورة سياقية. يلغي هذا الإعداد أي ضبط عام لجزء معيّن. للاطّلاع على الإعدادات التلقائية، راجِع قسم [عدد الرموز المميزة](#token-counts).
 
 ### Python
 
@@ -131,9 +131,10 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## Genel medya çözünürlüğü
+## درجة دقة الوسائط على مستوى العالم
 
-`GenerationConfig` kullanarak bir istekteki tüm medya bölümleri için varsayılan bir çözünürlük ayarlayabilirsiniz. Bu özellik tüm çok formatlı modellerde desteklenir. Bir istek hem genel hem de [bölüm bazında ayarları](#per-part-media-resolution) içeriyorsa söz konusu öğe için bölüm bazında ayar öncelikli olur.
+يمكنك ضبط دقة تلقائية لجميع أجزاء الوسائط في الطلب باستخدام
+`GenerationConfig`. تتوفّر هذه الميزة في جميع النماذج المتعدّدة الوسائط. إذا تضمّن الطلب إعدادات عامة و[إعدادات خاصة بكل جزء](#per-part-media-resolution)، ستكون الأولوية للإعدادات الخاصة بكل جزء بالنسبة إلى هذا العنصر المحدّد.
 
 ### Python
 
@@ -201,95 +202,99 @@ curl -s -X POST \
   }'
 ```
 
-## Kullanılabilir çözünürlük değerleri
+## قيم الدقة المتاحة
 
-Gemini API, medya çözünürlüğü için aşağıdaki düzeyleri tanımlar:
+تحدّد Gemini API المستويات التالية لدقة الوسائط:
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`: Varsayılan ayardır. Bu seviyenin jeton sayısı, Gemini 3 ile önceki Gemini modelleri arasında önemli ölçüde farklılık gösterir.
-- `MEDIA_RESOLUTION_LOW`: Daha düşük jeton sayısı, daha hızlı işlem ve daha düşük maliyet sağlar ancak daha az ayrıntı içerir.
-- `MEDIA_RESOLUTION_MEDIUM`: Ayrıntı, maliyet ve gecikme arasında denge.
-- `MEDIA_RESOLUTION_HIGH`: Daha yüksek jeton sayısı, gecikme ve maliyet artışı karşılığında modelin çalışması için daha fazla ayrıntı sağlar.
-- `MEDIA_RESOLUTION_ULTRA_HIGH` (Yalnızca bölüm başına): En yüksek jeton sayısı, [bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) gibi belirli kullanım alanları için gereklidir.
+- `MEDIA_RESOLUTION_UNSPECIFIED`: هذا هو الإعداد التلقائي. يختلف عدد الرموز المميزة لهذا المستوى بشكل كبير بين Gemini 3 ونماذج Gemini السابقة.
+- `MEDIA_RESOLUTION_LOW`: عدد أقل من الرموز المميزة، ما يؤدي إلى معالجة أسرع
+  وتكلفة أقل، ولكن مع تفاصيل أقل
+- ‫`MEDIA_RESOLUTION_MEDIUM`: تحقيق التوازن بين التفاصيل والتكلفة ووقت الاستجابة
+- ‫`MEDIA_RESOLUTION_HIGH`: عدد الرموز المميزة أكبر، ما يوفّر تفاصيل أكثر للنموذج للعمل عليها، ولكن مع زيادة وقت الاستجابة والتكلفة.
+- `MEDIA_RESOLUTION_ULTRA_HIGH` (لكل جزء فقط): أعلى عدد من الرموز المميزة، وهو مطلوب لحالات استخدام محدّدة، مثل [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar).
 
-`MEDIA_RESOLUTION_HIGH`'nın çoğu kullanım alanı için optimum performans sağladığını unutmayın.
+يُرجى العِلم أنّ `MEDIA_RESOLUTION_HIGH` يوفّر الأداء الأمثل لمعظم حالات الاستخدام.
 
-Bu seviyelerin her biri için oluşturulan jetonların tam sayısı hem **medya türüne** (resim, video, ses, PDF) hem de **model sürümüne** bağlıdır.
+يعتمد العدد الدقيق للرموز المميزة التي يتم إنشاؤها لكل مستوى من هذه المستويات على **نوع الوسائط** (صورة أو فيديو أو صوت أو ملف PDF) و**إصدار النموذج**.
 
-## Jeton sayıları
+## عدد الرموز المميّزة
 
-Aşağıdaki tablolarda, her model ailesi için `media_resolution` değeri ve medya türü başına yaklaşık jeton sayıları özetlenmektedir.
+تلخّص الجداول أدناه عدد الرموز المميزة التقريبي لكل قيمة `media_resolution` ونوع وسائط لكل مجموعة نماذج.
 
-**Gemini 3 modelleri**
+**نماذج Gemini 3**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **Resim** | **Video** | **Ses** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (Varsayılan) | 1120 | 70 | 25 (saniyede) | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 25 (saniyede) | 280 + Yerel Metin |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 25 (saniyede) | 560 + Yerel Metin |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 25 (saniyede) | 1.120 + Yerel Metin |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | Yok | Yok | Yok |
+| **MediaResolution** | **صورة** | **الفيديو** | **الصوت** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | 1120 | 70 | ‫25 (في الثانية) | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | ‫25 (في الثانية) | ‫280 + نص أصلي |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | ‫25 (في الثانية) | ‫560 + نص أصلي |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | ‫25 (في الثانية) | ‫1120 + نص إعلاني على المنصة نفسها |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | لا ينطبق | لا ينطبق | لا ينطبق |
 
-**Gemini 2.5 modelleri**
+**نماذج Gemini 2.5**
 
 |  |  |  |  |  |  |
 | --- | --- | --- | --- | --- | --- |
-| **MediaResolution** | **Resim** | **Video** | **Ses** | **PDF (taranmış)** | **PDF (Yerel)** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (Varsayılan) | 256 + Pan & Scan (~2048) | 256 | 32 (saniyede) | 256 + OCR | 256 + Yerel Metin |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 32 (saniyede) | 64 + OCR | 64 + Yerel Metin |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 32 (saniyede) | 256 + OCR | 256 + Yerel Metin |
-| `MEDIA_RESOLUTION_HIGH` | 256 + Pan & Scan | 256 | 32 (saniyede) | 256 + OCR | 256 + Yerel Metin |
+| **MediaResolution** | **صورة** | **الفيديو** | **الصوت** | **ملف PDF (ممسوح ضوئيًا)** | **ملف PDF (مدمَج مع المحتوى)** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | ‫256 + Pan & Scan (~2048) | 256 | ‫32 (في الثانية) | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | ‫32 (في الثانية) | ‫64 + OCR | ‫64 + نص أصلي |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | ‫32 (في الثانية) | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
+| `MEDIA_RESOLUTION_HIGH` | ‫256 + Pan & Scan | 256 | ‫32 (في الثانية) | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
 
-## Doğru çözünürlüğü seçme
+## اختيار درجة الدقة المناسبة
 
-- **Varsayılan (`UNSPECIFIED`):** Varsayılanla başlayın. En yaygın kullanım alanlarında kalite, gecikme ve maliyet arasında iyi bir denge sağlamak için ayarlanmıştır.
-- **`LOW`:** Maliyet ve gecikmenin öncelikli olduğu, ayrıntılı bilgilerin daha az önemli olduğu senaryolarda kullanılır.
-- **`MEDIUM` / `HIGH`:** Görev, medyada yer alan karmaşık ayrıntıların anlaşılmasını gerektirdiğinde çözünürlüğü artırın. Bu özellik genellikle karmaşık görsel analiz, grafik okuma veya yoğun belge anlama için gereklidir.
-- **`ULTRA HIGH`**: Yalnızca parça başına ayar için kullanılabilir. Bilgisayar kullanımı gibi belirli kullanım alanları veya testlerin `HIGH` üzerinde net bir iyileşme gösterdiği durumlarda önerilir.
-- **Bölüm bazında kontrol (Gemini 3):** Jeton kullanımını optimize eder. Örneğin, birden fazla resim içeren bir istemde karmaşık bir diyagram için `HIGH`, daha basit bağlamsal resimler için ise `LOW` veya `MEDIUM` kullanın.
+- **تلقائي (`UNSPECIFIED`):** ابدأ بالخيار التلقائي. تم تحسين هذا الخيار لتحقيق توازن جيد بين الجودة والوقت المستغرَق والتكلفة في معظم حالات الاستخدام الشائعة.
+- **`LOW`:** استخدِم هذا الخيار في الحالات التي تكون فيها التكلفة ووقت الاستجابة في غاية الأهمية،
+  ويكون الحصول على تفاصيل دقيقة أقل أهمية.
+- ‫**`MEDIUM` / `HIGH`:** زيادة درجة الدقة عندما تتطلّب المهمة فهم تفاصيل دقيقة في الوسائط وغالبًا ما تكون هذه الميزة مطلوبة
+  لتحليل الصور المعقّدة أو قراءة الرسوم البيانية أو فهم المستندات الكبيرة.
+- **`ULTRA HIGH`**: يتوفّر هذا الخيار فقط لإعدادات كل جزء. يُنصح باستخدامها في حالات استخدام معيّنة، مثل استخدام الكمبيوتر أو عندما تُظهر الاختبارات تحسّنًا واضحًا مقارنةً بـ `HIGH`.
+- **التحكّم في كل جزء (Gemini 3):** يحسِّن استخدام الرموز المميزة. على سبيل المثال، في طلب يتضمّن صورًا متعددة، استخدِم `HIGH` لرسم تخطيطي معقّد و`LOW` أو `MEDIUM` لصور سياقية أبسط.
 
-**Önerilen ayarlar**
+**الإعدادات المقترَحة**
 
-Aşağıda, desteklenen her medya türü için önerilen medya çözünürlüğü ayarları listelenmiştir.
+في ما يلي قائمة بإعدادات دقة الوسائط المقترَحة لكل نوع من أنواع الوسائط المتوافقة.
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **Medya Türü** | **Önerilen Ayar** | **Maksimum Jeton Sayısı** | **Kullanım Yönergeleri** |
-| **Resimler** | `MEDIA_RESOLUTION_HIGH` | 1120 | Maksimum kaliteyi sağlamak için çoğu görüntü analizi görevinde önerilir. |
-| **PDF'ler** | `MEDIA_RESOLUTION_MEDIUM` | 560 | Belge anlamak için idealdir. Kalite genellikle `medium`'da doygunluğa ulaşır. `high`'ya yükseltmek, standart belgeler için OCR sonuçlarını nadiren iyileştirir. |
-| **Video** (Genel) | `MEDIA_RESOLUTION_LOW` (veya `MEDIA_RESOLUTION_MEDIUM`) | 70 (kare başına) | **Not:** Video için `low` ve `medium` ayarları, bağlam kullanımını optimize etmek amacıyla aynı şekilde (70 jeton) değerlendirilir. Bu, çoğu eylem tanıma ve açıklama görevi için yeterlidir. |
-| **Video** (Metin ağırlıklı) | `MEDIA_RESOLUTION_HIGH` | 280 (kare başına) | Yalnızca kullanım alanında yoğun metinlerin (OCR) veya video karelerindeki küçük ayrıntıların okunması gerektiğinde zorunludur. |
-| **Ses** | `MEDIA_RESOLUTION_UNSPECIFIED` (Varsayılan) | Gemini 3 için 25 (saniyede), Gemini 2.5 için 32 (saniyede) | Ses, desteklenen tüm çözünürlük ayarlarında (`unspecified`, `low`, `medium` ve `high`) saniyede sabit bir hızda belirteçleştirilir. |
+| **نوع الوسائط** | **الإعدادات المقترَحة** | **الحد الأقصى لعدد الرموز المميزة** | **إرشادات الاستخدام** |
+| **الصور** | `MEDIA_RESOLUTION_HIGH` | 1120 | يُنصح باستخدامها لمعظم مهام تحليل الصور لضمان الحصول على أعلى جودة. |
+| **ملفات PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | الأفضل لفهم المستندات، وعادةً ما تصل الجودة إلى الحد الأقصى عند `medium`. لا تؤدي الزيادة إلى `high` في أغلب الأحيان إلى تحسين نتائج التعرّف البصري على الأحرف للمستندات العادية. |
+| **الفيديو** (عام) | ‫`MEDIA_RESOLUTION_LOW` (أو `MEDIA_RESOLUTION_MEDIUM`) | ‫70 (لكل إطار) | **ملاحظة:** بالنسبة إلى الفيديو، يتم التعامل مع إعدادات `low` و`medium` بشكل مماثل (70 رمزًا مميزًا) لتحسين استخدام السياق. وهذا يكفي لمعظم مهام التعرّف على الإجراءات ووصفها. |
+| **الفيديو** (يحتوي على الكثير من النصوص) | `MEDIA_RESOLUTION_HIGH` | ‫280 (لكل إطار) | يجب توفُّرها فقط عندما تتضمّن حالة الاستخدام قراءة نص كثيف (التعرّف البصري على الأحرف) أو تفاصيل صغيرة ضمن إطارات الفيديو. |
+| **الصوت** | `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | ‫25 (في الثانية) لنموذج Gemini 3 و32 (في الثانية) لنموذج Gemini 2.5 | يتم تحويل الصوت إلى رموز بمعدل ثابت في الثانية الواحدة على مستوى جميع إعدادات الدقة المتوافقة (`unspecified` و`low` و`medium` و`high`). |
 
-Kalite, gecikme ve maliyet arasında en iyi dengeyi bulmak için farklı çözünürlük ayarlarının uygulamanız üzerindeki etkisini her zaman test edin ve değerlendirin.
+ننصحك دائمًا باختبار وتقييم تأثير إعدادات الدقة المختلفة على تطبيقك المحدّد للعثور على أفضل موازنة بين الجودة ووقت الاستجابة والتكلفة.
 
-## Video işleme modlarıyla ilişki
+## العلاقة بأوضاع معالجة الفيديو
 
-`media_resolution` ve işleme parametreleri, video girişinin farklı yönlerini kontrol eder:
+تتحكّم المَعلمتَين `media_resolution` والمعالجة في جوانب مختلفة من إدخال الفيديو:
 
-- `media_resolution`, her karenin **çözünürlüğünü** (kare başına jeton sayısı) kontrol eder.
-- `processing` / `media_processing` kontrolleri, **videodaki hangi içeriğin** bağlama yükleneceğini belirler.
+- يتحكّم `media_resolution` في **دقة** كل إطار (عدد الرموز المميزة لكل إطار).
+- تتحكّم `processing` / `media_processing` في **المحتوى الذي يتم تحميله من الفيديو** إلى السياق.
 
-İkisini de aynı video girişinde ayarlayabilirsiniz. Örneğin, uzun bir videoda toplam jeton kullanımını en aza indirmek için düşük medya çözünürlüğüyle agentic işlemeyi kullanabilirsiniz.
+يمكنك ضبط كليهما على إدخال الفيديو نفسه. على سبيل المثال، يمكنك استخدام المعالجة المستندة إلى الوكيل مع درجة دقة منخفضة للوسائط لتقليل إجمالي استخدام الرموز المميزة لفيديو طويل.
 
-Video işleme modları hakkında ayrıntılı bilgi için [Agentic video understanding](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr#agentic-video-understanding) (Agentic video anlama) kılavuzuna bakın.
+للحصول على تفاصيل حول أوضاع معالجة الفيديو، يُرجى الاطّلاع على دليل [فهم الفيديو المستند إلى الذكاء الاصطناعي](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ar#agentic-video-understanding).
 
-## Sürüm uyumluluğu özeti
+## ملخّص التوافق مع الإصدارات
 
-- `MediaResolution` numaralandırması, medya girişi destekleyen tüm modellerde kullanılabilir.
-- Her enum düzeyiyle ilişkili jeton sayıları, Gemini 3 modelleri ile önceki Gemini sürümleri arasında **farklıdır**.
-- `media_resolution` ayarını tek tek `Part` nesnelerde belirleme **yalnızca Gemini 3 modellerinde** kullanılabilir.
+- تتوفّر السمة `MediaResolution` enum لجميع النماذج التي تتيح إدخال الوسائط.
+- تختلف أعداد الرموز المميزة المرتبطة بكل مستوى من مستويات التعداد بين نماذج Gemini 3 وإصدارات Gemini السابقة.
+- يقتصر ضبط `media_resolution` على عناصر `Part` الفردية **على نماذج Gemini 3**.
 
-## Sonraki adımlar
+## الخطوات التالية
 
-- Gemini API'nin çok formatlı özellikleri hakkında daha fazla bilgiyi [görüntü anlama](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=tr), [Video Anlama](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr), [Ses Anlama](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=tr) ve [Doküman Anlama](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=tr) kılavuzlarında bulabilirsiniz.
+- يمكنك الاطّلاع على مزيد من المعلومات حول إمكانات Gemini API المتعددة الوسائط في أدلة
+  [فهم الصور](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ar) و[فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ar) و[فهم الصوت](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=ar) و[فهم المستندات](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ar).
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-09-19 UTC.
+تاريخ التعديل الأخير: 2026-09-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-19 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

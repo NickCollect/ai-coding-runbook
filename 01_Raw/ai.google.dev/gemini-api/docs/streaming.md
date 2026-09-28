@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=he
-fetched_at: 2026-09-21T05:53:15.140986+00:00
-title: "\u05d0\u05d9\u05e0\u05d8\u05e8\u05d0\u05e7\u05e6\u05d9\u05d5\u05ea \u05e2\u05dd \u05e1\u05d8\u05e8\u05d9\u05de\u05d9\u05e0\u05d2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=es-419
+fetched_at: 2026-09-28T06:33:18.742632+00:00
+title: "Interacciones de transmisi\u00f3n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-שליחת משוב
+Enviar comentarios
 
-# אינטראקציות עם סטרימינג
+# Interacciones de transmisión
 
-כשיוצרים אינטראקציה, אפשר להגדיר את `stream: true` להזרמה מצטברת של התגובה באמצעות [אירועים שנשלחים מהשרת](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
+Cuando creas una interacción, puedes configurar `stream: true` para transmitir la respuesta de forma incremental con [eventos enviados por el servidor](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
 
 ### Python
 
@@ -100,6 +100,55 @@ try (EventStream<InteractionSSEStreamEvent> events = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("Explain quantum computing in simple terms."),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -151,24 +200,24 @@ event: done
 data: [DONE]
 ```
 
-## סוגי אירועים
+## Tipos de eventos
 
-כל אירוע שנשלח מהשרת כולל שם `event_type` ונתוני JSON משויכים. ב-Interactions API נעשה שימוש במודל סימטרי של סטרימינג, שבו כל התוכן – טקסט, קריאות לכלים, חשיבה – עובר דרך אירוע **מבוסס-שלבים** עקבי.
+Cada evento enviado por el servidor incluye un `event_type` con nombre y datos JSON asociados. La API de Interactions usa un modelo de transmisión simétrico en el que todo el contenido (texto, llamadas a herramientas y pensamiento) fluye a través de un evento **basado en pasos** coherente.
 
-כל עדכון תוכן פועל לפי רצף האירועים הבא:
+Cada transmisión sigue este flujo de eventos:
 
-1. ‫`interaction.created`: האינטראקציה נוצרת וכוללת מטא-נתונים (מזהה, מודל, סטטוס).
-2. סדרה של **שלבים**, שכל אחד מהם מורכב מ:
-   - אירוע `step.start` שמציין את סוג השלב (למשל, `model_output`,‏ `thought`,‏ `function_call`).
-   - אירוע `step.delta` אחד או יותר עם נתונים מצטברים של השלב הזה.
-   - אירוע `step.stop` שמסמן את השלב כהושלם.
-3. אירוע `interaction.completed` עם נתוני `usage` סופיים.
+1. `interaction.created`: Se crea la interacción y se incluyen metadatos (ID, modelo, estado).
+2. Una serie de **pasos**, cada uno de los cuales consta de lo siguiente:
+   - Es un evento `step.start` que indica el tipo de paso (p.ej., `model_output`, `thought`, `function_call`).
+   - Uno o más eventos `step.delta` con datos incrementales para ese paso.
+   - Es un evento `step.stop` que marca el paso como completado.
+3. Es un evento `interaction.completed` con estadísticas finales de `usage`.
 
-כשמגדירים את הערך `stream: false`, ה-API מחזיר אובייקט `interaction` יחיד עם מערך `steps`. כל אלמנט ב-`steps` הוא הגרסה המורכבת במלואה של מחזור אחד של `step.start` → `step.delta`(s) → `step.stop`.
+Cuando configuras `stream: false`, la API devuelve un solo objeto `interaction` con un array `steps`. Cada elemento de `steps` es la versión completamente ensamblada de un ciclo `step.start` → `step.delta`(s) → `step.stop`.
 
 ### `interaction.created`
 
-האירוע הזה נשלח כשיוצרים את האינטראקציה בפעם הראשונה. מכיל את מזהה האינטראקציה, המודל והסטטוס הראשוני.
+Se envía cuando se crea la interacción por primera vez. Contiene el ID de interacción, el modelo y el estado inicial.
 
 ```
 event: interaction.created
@@ -177,7 +226,7 @@ data: {"interaction": {"id": "...", "model": "gemini-3.8-flash", "status": "in_p
 
 ### `interaction.status_update`
 
-האות הזה מציין מעבר סטטוס ברמת האינטראקציה. יכול להיות שיופיע בין השלבים.
+Indica una transición de estado a nivel de la interacción. Puede aparecer entre los pasos.
 
 ```
 event: interaction.status_update
@@ -186,23 +235,23 @@ data: {"interaction_id": "...", "status": "in_progress", "event_type": "interact
 
 ### `step.start`
 
-מציין את תחילתו של שלב חדש. מכיל את השלבים `type` ו-`index`. סוג השלב קובע אילו סוגי דלתא צפויים ואיך השלב יופיע בתגובה שלא מועברת בסטרימינג:
+Marca el comienzo de un nuevo paso. Contiene los pasos `type` y `index`. El tipo de paso determina qué tipos de delta se esperan y cómo aparece el paso en una respuesta sin transmisión:
 
-| סוג השלב | סוגי הדלתא הצפויים | תיאור |
+| Tipo de paso | Tipos de delta esperados | Descripción |
 | --- | --- | --- |
-| `model_output` | `text`,‏ `image`,‏ `audio` | תוכן התשובה הסופית של המודל. |
-| `thought` | `thought_signature`, `thought_summary` | נימוק לפי שרשרת מחשבות. האפשרות `summary` מופיעה רק אם האפשרות `thinking_summaries` מופעלת. |
-| `function_call` | `arguments_delta` | בקשה מהלקוח להפעיל פונקציה. הסטטוס של האינטראקציה מוגדר ל`requires_action`. |
-| כלים בצד השרת | משתנה בהתאם לכלי | כלים שמופעלים על ידי ה-API (לדוגמה, `google_search_call`, ‏ `google_search_result`, ‏ `code_execution_call`, ‏ `code_execution_result`). |
+| `model_output` | `text`, `image`, `audio` | Es el contenido de la respuesta final del modelo. |
+| `thought` | `thought_signature`, `thought_summary` | Es el razonamiento de cadena de pensamiento. `summary` solo está presente cuando `thinking_summaries` está habilitado. |
+| `function_call` | `arguments_delta` | Es una solicitud para que el cliente ejecute una función. Establece el estado de interacción en `requires_action`. |
+| Herramientas del servidor | Varía según la herramienta | Herramientas que ejecuta la API (p. ej., `google_search_call`, `google_search_result`, `code_execution_call`, `code_execution_result`) |
 
-הרשימה המלאה מופיעה ב[הפניית API של אינטראקציות](https://ai.google.dev/api/interactions-api?hl=he).
+Consulta la [referencia de la API de Interactions](https://ai.google.dev/api/interactions-api?hl=es-419) para ver la lista completa.
 
 ```
 event: step.start
 data: {"index": 0, "step": {"type": "model_output"}, "event_type": "step.start"}
 ```
 
-במקרה של קריאות לפונקציות, השלב כולל את שם הפונקציה, המזהה שלה וארגומנטים ריקים `{}`.
+En el caso de las llamadas a funciones, el paso incluye el nombre, el ID y los argumentos vacíos de la función `{}`.
 
 ```
 event: step.start
@@ -211,11 +260,11 @@ data: {"index": 0, "step": {"type": "function_call", "id":"un6k8t18", "name": "g
 
 ### `step.delta`
 
-נתונים מצטברים של השלב הנוכחי. האובייקט `delta` מכיל שדה `type` שקובע את הצורה שלו.
+Son los datos incrementales del paso actual. El objeto `delta` contiene un campo `type` que determina su forma.
 
-**לדוגמה:**
+**Ejemplos:**
 
-‫**`text`:** אסימון טקסט מצטבר משלב `model_output`:
+**`text`:** Es un token de texto incremental de un paso `model_output`:
 
 ```
 event: step.delta
@@ -225,42 +274,42 @@ event: step.delta
 data: {"index": 0, "delta": {"type": "text", "text": ", and I live in Germany." }, "event_type": "step.delta"}
 ```
 
-‫**`image`:** נתוני תמונה בקידוד Base64 משלב `model_output`:
+**`image`:** Datos de imagen codificados en Base64 de un paso `model_output`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCg..."}, "event_type": "step.delta"}
 ```
 
-‫**`thought_summary`:** סיכום של תהליך החשיבה משלב `thought`:
+**`thought_summary`:** Resumen del contenido de la reflexión de un paso `thought`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "thought_summary", "content": {"type": "text", "text": "I need to find the GCD..."}}, "event_type": "step.delta"}
 ```
 
-‫**`arguments_delta`:** מחרוזת JSON (חלקית) של ארגומנטים לקריאה לפונקציה. צריך לצבור את הנקודות הנדרשות בשינויים:
+**`arguments_delta`:** Cadena JSON (parcial) para los argumentos de la llamada a la función. Se debe acumular en todos los deltas:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "arguments_delta", "arguments": "{\"location\": \"San Francisco, CA\"}"}, "event_type": "step.delta"}
 ```
 
-אלה כמה מהסוגים הנפוצים ביותר של דלתא. רשימה מלאה של כל סוגי הדלתא זמינה במאמר [Interactions API reference](https://ai.google.dev/api/interactions-api?hl=he).
+Estos son algunos de los tipos de delta más comunes. Para obtener la lista completa de todos los tipos de delta, consulta la [referencia de la API de Interactions](https://ai.google.dev/api/interactions-api?hl=es-419).
 
 ### `step.stop`
 
-סימון סוף השלב. הוא מכיל את השלב `index`.
+Marca el final de un paso. Contiene el paso `index`.
 
 ```
 event: step.stop
 data: {"index": 0, "event_type": "step.stop"}
 ```
 
-כשמשתמשים ב-[Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he), יכול להיות שאירוע `step.stop` יכלול גם נתוני שימוש:
+Cuando se usa el [Agente antigravedad](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419), el evento `step.stop` también puede incluir estadísticas de uso:
 
-- ‫**`usage`**: השימוש המצטבר (הסכום הכולל) מאז תחילת האינטראקציה.
-- ‫**`step_usage`**: השימוש בשלב הספציפי הזה.
+- **`usage`**: Es el uso acumulado (total acumulado) desde el inicio de la interacción.
+- **`step_usage`**: Es el uso de este paso específico.
 
 ```
 event: step.stop
@@ -269,7 +318,7 @@ data: {"index": 2, "event_type": "step.stop", "usage": {"total_tokens": 4650, "t
 
 ### `interaction.completed`
 
-האירוע נשלח בסיום האינטראקציה. מכיל את אובייקט האינטראקציה הסופי עם נתוני `usage`. במצב לא סטרימינג, זהו אובייקט התגובה ברמה העליונה. לא כולל את `steps` בתשובה.
+Se envía cuando finaliza la interacción. Contiene el objeto de interacción final con estadísticas de `usage`. En el modo sin transmisión, este es el objeto de respuesta de nivel superior. No incluye `steps` en la respuesta.
 
 ```
 event: interaction.completed
@@ -278,24 +327,24 @@ data: {"interaction": {"id": "v1_abc123", "status": "completed", "usage": {"tota
 
 ### `error`
 
-האירוע נשלח כשמתרחשת שגיאה במהלך האינטראקציה. מכיל אובייקט שגיאה עם הודעה וקוד.
+Se envía cuando se produce un error durante la interacción. Contiene un objeto de error con un mensaje y un código.
 
 ```
 event: error
 data: {"error":{"message":"Deadline expired before operation could complete.","code":"gateway_timeout"},"event_type":"error"}
 ```
 
-## סטרימינג באמצעות כלים
+## Transmisión con herramientas
 
-ממשק Interactions API תומך בסטרימינג גם עם כלים בצד הלקוח (הפעלת פונקציות) וגם עם כלים בצד השרת (חיפוש Google, הפעלת קוד וכו') בבקשה אחת. במהלך הסטרימינג, הפעלות של כלים מופיעות כשלבים מוקלדים בסטרימינג של האירועים. במקרה של קריאות לפונקציות, האירוע `step.start` מעביר את שם הפונקציה, והאירועים `step.delta` מעבירים את הארגומנטים כמחרוזות JSON‏ (`arguments_delta`). כדי לקבל את הארגומנטים המלאים, צריך לצבור את הדלתאות האלה.
-כלים בצד השרת כמו חיפוש Google מופעלים אוטומטית על ידי ה-API, וכך נוצרים שלבים `google_search_call` ו-`google_search_result`.
+La API de Interactions admite la transmisión con herramientas del cliente (llamadas a funciones) y del servidor (Búsqueda de Google, ejecución de código, etcétera) en una sola solicitud. Durante la transmisión, las invocaciones de herramientas aparecen como pasos escritos en el flujo de eventos. En el caso de las llamadas a funciones, el evento `step.start` entrega el nombre de la función, y los eventos `step.delta` transmiten los argumentos como cadenas JSON (`arguments_delta`). Debes acumular estos deltas para obtener los argumentos completos.
+Las herramientas del servidor, como la Búsqueda de Google, se ejecutan automáticamente a través de la API, lo que genera los pasos `google_search_call` y `google_search_result`.
 
-### הזרמה עם בקשה להפעלת פונקציה
+### Transmisión con llamadas a funciones
 
-כדי לבצע קריאה להפעלת פונקציות עם סטרימינג, הלקוח צריך לנהל שיחה רב-שלבית:
+Para realizar llamadas a funciones con transmisión, el cliente debe controlar una conversación de varios turnos:
 
-1. **תור 1 (בקשת פונקציה):** קוראים לפונקציה `interactions.create` עם `stream: true` והפונקציה `tools` שהגדרתם. ה-API ישדר שלב `function_call`. צריך לצבור את מחרוזות ה-JSON של הארגומנטים המצטברים (`arguments_delta`) מאירועי `step.delta` עד שהאינטראקציה מסתיימת עם הסטטוס `requires_action`.
-2. **תור 2 (שליחת התוצאה):** קוראים שוב לפונקציה `interactions.create`, מעבירים את `previous_interaction_id` (שמתאים למזהה של האינטראקציה הראשונה) ושולחים בלוק `function_result` במערך `input`. הפעולה הזו מחדשת את הסטרימינג, ומאפשרת למודל ליצור את התשובה הסופית שלו.
+1. **Turn 1 (Function Request):** Llama a `interactions.create` con `stream: true` y tu `tools` definido. La API transmitirá un paso `function_call`. Debes acumular las cadenas JSON de argumentos incrementales (`arguments_delta`) de los eventos `step.delta` hasta que la interacción se complete con el estado `requires_action`.
+2. **Turn 2 (Sending Result):** Vuelve a llamar a `interactions.create` y pasa `previous_interaction_id` (que coincide con el ID de la primera interacción) y envía un bloque `function_result` dentro del array `input`. Esto reanuda la transmisión, lo que permite que el modelo genere su respuesta final.
 
 ### Python
 
@@ -574,9 +623,67 @@ if (funcCallId != null && firstInteractionId != null && funcCallName != null) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-pro"),
+            Input: interactions.NewInteractionsInput("Solve the Monty Hall problem step-by-step."),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel:     interactions.ThinkingLevelHigh.ToPointer(),
+                ThinkingSummaries: interactions.ThinkingSummariesAuto.ToPointer(),
+            },
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if thoughtDelta := stepDelta.GetDeltaThoughtSummary(); thoughtDelta != nil {
+                if textContent := thoughtDelta.GetContentText(); textContent != nil {
+                    fmt.Printf("[Thought] %s\n", textContent.Text)
+                }
+            }
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
-**תור 1:** בקשה להפעלת פונקציה
+**Turno 1:** Solicita la llamada a función
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -607,7 +714,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**תור 2:** שליחת התוצאה של הפונקציה באמצעות `previous_interaction_id` ו-`call_id` מתור 1
+**Turno 2:** Envía el resultado de la función con `previous_interaction_id` y `call_id` del turno 1
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -636,9 +743,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### סטרימינג באמצעות כמה כלים
+### Transmisión con varias herramientas
 
-בדוגמה הבאה נעשה שימוש גם בכלי `function` וגם ב-`google_search` בבקשה אחת:
+En el siguiente ejemplo, se usan una herramienta `function` y `google_search` en una misma solicitud:
 
 ### Python
 
@@ -872,6 +979,82 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    weatherTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_weather"),
+        Description: genai.Ptr("Gets the current weather for a given location."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{"type": "string"},
+            },
+            "required": []string{"location"},
+        },
+    })
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("What is the weather in Tokyo and Paris?"),
+            Tools:  []interactions.Tool{weatherTool},
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepStart := event.GetDataStepStart(); stepStart != nil {
+            if call := stepStart.GetStepFunctionCall(); call != nil {
+                fmt.Printf("\n[Function Call Started] %s (id: %s)\n", call.Name, call.ID)
+            }
+        }
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if argsDelta := stepDelta.GetDeltaArgumentsDelta(); argsDelta != nil && argsDelta.Arguments != nil {
+                fmt.Printf("[Args Delta] %s\n", *argsDelta.Arguments)
+            }
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+        if completed := event.GetDataInteractionCompleted(); completed != nil {
+            interaction := completed.Interaction
+            if interaction.Status == interactions.InteractionSseEventInteractionStatusRequiresAction {
+                fmt.Printf("\nStream paused: Waiting for tool outputs for interaction %s\n", interaction.ID)
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -954,9 +1137,9 @@ event: done
 data: [DONE]
 ```
 
-## סטרימינג עם חשיבה
+## Transmisión con pensamiento
 
-כשמשתמשים במודל חשיבה, מקבלים `thought` שלבים עם שני סוגים שונים של דלתא: `thought_summary` (תוכן מצטבר של סיכום טקסט או תמונה) ו-`thought_signature` (ייצוג מוצפן של ההיגיון הפנימי של המודל, שנשלח כדלתא האחרונה לפני `step.stop`). אם האפשרות `thinking_summaries` מופעלת, הדלתאות `thought_summary` מעבירות בסטרימינג סיכום של ההיגיון של המודל. מידע נוסף על חשיבה זמין ב[מדריך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
+Cuando el modelo usa el pensamiento, recibirás pasos de `thought` con dos tipos de delta distintos: `thought_summary` (contenido incremental de resumen de texto o imagen) y `thought_signature` (una representación encriptada del razonamiento interno del modelo, que se envía como el último delta antes de `step.stop`). Si `thinking_summaries` está habilitado, los deltas de `thought_summary` transmiten un resumen del razonamiento del modelo. Para obtener más detalles sobre el pensamiento, consulta la [guía de pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419).
 
 ### Python
 
@@ -1074,6 +1257,77 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("What are the top news stories in AI today, and calculate 2^64 - 1?"),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepStart := event.GetDataStepStart(); stepStart != nil {
+            step := stepStart.Step
+            if searchCall := step.GoogleSearchCallStep; searchCall != nil {
+                fmt.Printf("[Google Search Started] id: %s\n", searchCall.ID)
+            } else if searchRes := step.GoogleSearchResultStep; searchRes != nil {
+                fmt.Printf("[Google Search Results Received] for call_id: %s\n", searchRes.CallID)
+            } else if codeCall := step.CodeExecutionCallStep; codeCall != nil {
+                fmt.Printf("[Code Execution Started] id: %s\n", codeCall.ID)
+            } else if codeRes := step.CodeExecutionResultStep; codeRes != nil {
+                fmt.Printf("[Code Execution Finished] output: %s\n", codeRes.Result)
+            }
+        }
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if searchDelta := stepDelta.GetDeltaGoogleSearchCall(); searchDelta != nil {
+                fmt.Printf("[Search Queries] %v\n", searchDelta.Arguments.Queries)
+            }
+            if codeDelta := stepDelta.GetDeltaCodeExecutionCall(); codeDelta != nil {
+                fmt.Printf("[Code Delta] %s\n", codeDelta.Arguments.Code)
+            }
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1116,9 +1370,9 @@ data: {"index":1,"step":{"type":"model_output"},"event_type":"step.start"}
 ...
 ```
 
-## שידור באמצעות סוכנים
+## Transmisión con agentes
 
-‫Interactions API תומך בסוכנים כמו Deep Research. סוכנים משתמשים ב-`background=True` ומחזירים תוצאות באופן אסינכרוני, אבל אפשר גם להזרים אינטראקציות עם סוכנים כדי לקבל עדכוני התקדמות ושלבי ביניים בזמן שהם מתרחשים. פרטים נוספים זמינים [במדריך להרצת אפליקציות ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) וב[מדריך Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he).
+La API de Interactions admite agentes como Deep Research. Los agentes usan `background=True` y devuelven resultados de forma asíncrona, pero también puedes transmitir interacciones del agente para recibir actualizaciones de progreso y pasos intermedios a medida que ocurren. Para obtener más detalles, consulta la [guía de ejecución en segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=es-419) y la [guía de Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419).
 
 ### Python
 
@@ -1255,6 +1509,75 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-flash-image-preview"),
+            Input: interactions.NewInteractionsInput("Generate a watercolor illustration of a lighthouse at sunset and describe the scene."),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat([]interactions.ResponseFormat{
+                interactions.NewResponseFormat(interactions.TextResponseFormat{}),
+                interactions.NewResponseFormat(interactions.ImageResponseFormat{}),
+            })),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+            if imgDelta := stepDelta.GetDeltaImage(); imgDelta != nil && imgDelta.Data != nil {
+                imageBytes, err := base64.StdEncoding.DecodeString(*imgDelta.Data)
+                if err != nil {
+                    log.Fatal(err)
+                }
+                if err := os.WriteFile("lighthouse.png", imageBytes, 0644); err != nil {
+                    log.Fatal(err)
+                }
+                fmt.Println("\n[Saved lighthouse.png]")
+            }
+        }
+        if completed := event.GetDataInteractionCompleted(); completed != nil {
+            // You can also access the final image using interaction.GetOutputImage() on a non-streamed or retrieved interaction
+            fmt.Println("\nGeneration complete!")
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1308,11 +1631,11 @@ event: done
 data: [DONE]
 ```
 
-## יצירת תמונות בסטרימינג
+## Generación de imágenes en transmisión
 
-‫Interactions API תומך בסטרימינג של כמה מצבי פלט בו-זמנית. אם תבקשו גם `text` וגם `image` ב-`response_format`, תקבלו באותו הזרם טקסט משולב ותמונות שנוצרו.
+La API de Interactions admite la transmisión simultánea de varias modalidades de salida. Si solicitas `text` y `image` en `response_format`, puedes recibir texto intercalado e imágenes generadas en la misma transmisión.
 
-בדוגמה הבאה נעשה שימוש ב-`gemini-3.1-flash-image` (Nano Banana 2) כדי לחפש מידע וליצור סיפור עם איורים משולבים.
+En el siguiente ejemplo, se usa `gemini-3.1-flash-image` (Nano Banana 2) para buscar información y generar un cuento con ilustraciones intercaladas.
 
 ### Python
 
@@ -1437,6 +1760,92 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var interactionID string
+    var lastEventID *string
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-pro"),
+            Input:  interactions.NewInteractionsInput("Write a detailed 5-section guide to distributed consensus algorithms."),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if created := event.GetDataInteractionCreated(); created != nil {
+            interactionID = created.Interaction.ID
+            if created.EventID != nil {
+                lastEventID = created.EventID
+            }
+        }
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if stepDelta.EventID != nil {
+                lastEventID = stepDelta.EventID
+            }
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+
+    if err := stream.Err(); err != nil {
+        fmt.Printf("\nStream interrupted (%v). Resuming...\n", err)
+        if interactionID != "" && lastEventID != nil {
+            resumedRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+                ID:          interactionID,
+                Stream:      genai.Ptr(true),
+                LastEventID: lastEventID,
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
+            resumedStream := resumedRes.InteractionSSEStreamEvent
+            defer resumedStream.Close()
+
+            for resumedStream.Next() {
+                event := resumedStream.Value()
+                if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+                    if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                        fmt.Print(textDelta.GetText())
+                    }
+                }
+            }
+            if err := resumedStream.Err(); err != nil {
+                log.Fatal(err)
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1533,24 +1942,24 @@ event: done
 data: [DONE]
 ```
 
-## טיפול באירועים לא ידועים
+## Cómo controlar eventos desconocidos
 
-בהתאם למדיניות בנושא ניהול גרסאות של ה-API, יכול להיות שנוסיף עם הזמן סוגים חדשים של אירועים וסוגים חדשים של שינויים מצטברים. הקוד צריך לטפל בסוגי אירועים לא מוכרים בצורה חלקה – לתעד ולדלג על אירועים שלא מזוהים במקום להציג שגיאה.
+De acuerdo con la política de control de versiones de la API, es posible que se agreguen nuevos tipos de eventos y tipos de delta con el tiempo. Tu código debe controlar los tipos de eventos desconocidos de forma correcta: registra y omite los eventos que no reconozcas en lugar de arrojar un error.
 
-## המאמרים הבאים
+## ¿Qué sigue?
 
-- [מידע נוסף על Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he)
-- [הסבר על שימוש בפונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) בעזרת כלים
-- מידע נוסף על [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=he) לשיפור החשיבה הרציונלית.
-- כדאי לנסות את [Deep Research agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) למשימות לטווח ארוך.
-- ב[הפניה ל-Interactions API](https://ai.google.dev/api/interactions-api?hl=he) מפורטים כל סוגי האירועים וסוגי הדלתא.
+- Obtén más información sobre la [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419).
+- Explora la [llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) con herramientas.
+- Obtén información sobre [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419) para un razonamiento mejorado.
+- Prueba el [agente de Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) para tareas de larga duración.
+- Consulta la [referencia de la API de Interactions](https://ai.google.dev/api/interactions-api?hl=es-419) para conocer todos los tipos de eventos y de deltas.
 
-שליחת משוב
+Enviar comentarios
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-עדכון אחרון: 2026-09-18 (שעון UTC).
+Última actualización: 2026-09-24 (UTC)
 
-רוצה לתת לנו משוב?
+¿Quieres brindar más información?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-24 (UTC)"],[],[]]

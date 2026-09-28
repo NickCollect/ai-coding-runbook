@@ -1,69 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=vi
-fetched_at: 2026-09-21T05:52:53.427294+00:00
-title: "B\u1eaft \u0111\u1ea7u s\u1eed d\u1ee5ng Gemini Live API b\u1eb1ng WebSocket \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=de
+fetched_at: 2026-09-28T06:24:55.005234+00:00
+title: "Erste Schritte mit der Gemini Live API \u00fcber WebSockets \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Bắt đầu sử dụng Gemini Live API bằng WebSocket
+# Erste Schritte mit der Gemini Live API über WebSockets
 
-Gemini Live API cho phép tương tác hai chiều theo thời gian thực với các mô hình Gemini, hỗ trợ đầu vào âm thanh, video và văn bản cũng như đầu ra âm thanh gốc. Hướng dẫn này giải thích cách tích hợp trực tiếp với API bằng cách sử dụng WebSocket thô.
+Die Gemini Live API ermöglicht die bidirektionale Interaktion mit Gemini-Modellen in Echtzeit und unterstützt Audio-, Video- und Texteingaben sowie native Audioausgaben. In dieser Anleitung wird beschrieben, wie Sie die API direkt mit WebSockets verwenden.
 
-[Dùng Live API trong Google AI Studiomic](https://aistudio.google.com/live?hl=vi)
-[Sao chép ứng dụng mẫu từ GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-ephemeral-tokens-websocket)
-[Sử dụng các kỹ năng của tác nhân lập trìnhterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=vi)
+[Live API in Google AI Studio ausprobierenmic](https://aistudio.google.com/live?hl=de)
+[Beispiel-App von GitHub klonencode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-ephemeral-tokens-websocket)
+[Code-Agent-Skills verwendenterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=de)
 
-## Tổng quan
+## Übersicht
 
-Gemini Live API sử dụng WebSockets để giao tiếp theo thời gian thực. Không giống như việc sử dụng SDK, phương pháp này liên quan đến việc quản lý trực tiếp kết nối WebSocket và gửi/nhận thông báo ở một định dạng JSON cụ thể do API xác định.
+Die Gemini Live API verwendet WebSockets für die Echtzeitkommunikation. Im Gegensatz zur Verwendung eines SDK müssen Sie bei diesem Ansatz die WebSocket-Verbindung direkt verwalten und Nachrichten in einem bestimmten JSON-Format senden und empfangen, das von der API definiert wird.
 
-Các khái niệm chính:
+Wichtige Konzepte:
 
-- **Điểm cuối WebSocket**: URL cụ thể để kết nối.
-- **Định dạng thông báo**: Mọi hoạt động giao tiếp đều được thực hiện thông qua các thông báo JSON tuân thủ cấu trúc [`BidiGenerateContentClientMessage`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentclientmessage) và [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentservermessage).
-- **Quản lý phiên**: Bạn chịu trách nhiệm duy trì kết nối WebSocket.
+- **WebSocket-Endpunkt**: Die spezifische URL, mit der eine Verbindung hergestellt werden soll.
+- **Nachrichtenformat**: Die gesamte Kommunikation erfolgt über JSON-Nachrichten, die den Strukturen [`BidiGenerateContentClientMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentclientmessage) und [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservermessage) entsprechen.
+- **Sitzungsverwaltung**: Sie sind für die Aufrechterhaltung der WebSocket-Verbindung verantwortlich.
 
-## Xác thực
+## Authentifizierung
 
-Bạn có thể xử lý việc xác thực bằng cách thêm khoá API dưới dạng tham số truy vấn trong URL WebSocket.
+Die Authentifizierung erfolgt durch Einbeziehung Ihres API-Schlüssels als Abfrageparameter in die WebSocket-URL.
 
-Định dạng điểm cuối là:
+Das Endpunktformat ist:
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=YOUR_API_KEY
 ```
 
-Thay thế `YOUR_API_KEY` bằng khoá API thực tế của bạn.
+Ersetzen Sie `YOUR_API_KEY` durch Ihren tatsächlichen API-Schlüssel.
 
-## Xác thực bằng mã thông báo tạm thời
+## Authentifizierung mit kurzlebigen Tokens
 
-Nếu đang sử dụng [mã thông báo tạm thời](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=vi), bạn cần kết nối với điểm cuối `v1beta`.
-Bạn cần truyền mã thông báo tạm thời dưới dạng tham số truy vấn `access_token`.
+Wenn Sie [kurzlebige Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=de) verwenden, müssen Sie eine Verbindung zum `v1beta` Endpunkt herstellen.
+Das kurzlebige Token muss als Abfrageparameter `access_token` übergeben werden.
 
-Định dạng điểm cuối cho khoá tạm thời là:
+Das Endpunktformat für kurzlebige Schlüssel ist:
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContentConstrained?access_token={short-lived-token}
 ```
 
-Thay thế `{short-lived-token}` bằng mã thông báo tạm thời thực tế.
+Ersetzen Sie `{short-lived-token}` durch das tatsächliche kurzlebige Token.
 
-## Kết nối với Live API
+## Verbindung zur Live API herstellen
 
-Để bắt đầu một phiên trực tiếp, hãy thiết lập kết nối WebSocket với điểm cuối đã xác thực.
-Thông báo đầu tiên được gửi qua WebSocket phải là [`BidiGenerateContentSetup`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentsetup) chứa `config`.
-Để biết các lựa chọn cấu hình đầy đủ, hãy xem [Live API - Tài liệu tham khảo API WebSockets](https://ai.google.dev/api/live?hl=vi).
+Um eine Live-Sitzung zu starten, stellen Sie eine WebSocket-Verbindung zum authentifizierten Endpunkt her.
+Die erste Nachricht, die über den WebSocket gesendet wird, muss eine [`BidiGenerateContentSetup`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentsetup)-Nachricht mit der `config` sein.
+Die vollständigen Konfigurationsoptionen finden Sie in der API-Referenz zur [Live API – WebSockets](https://ai.google.dev/api/live?hl=de).
 
 ### Python
 
@@ -144,9 +144,9 @@ websocket.onclose = () => {
 };
 ```
 
-## Gửi tin nhắn văn bản
+## Nachricht senden
 
-Để gửi dữ liệu đầu vào là văn bản, hãy tạo một thông báo [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentrealtimeinput) có trường `text`.
+Um eine Texteingabe zu senden, erstellen Sie eine [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentrealtimeinput)-Nachricht mit dem Feld `text`.
 
 ### Python
 
@@ -185,9 +185,9 @@ function sendTextMessage(text) {
 sendTextMessage("Hello, how are you?");
 ```
 
-## Gửi âm thanh
+## Audiotrack senden
 
-Bạn cần gửi âm thanh dưới dạng dữ liệu PCM thô (âm thanh PCM thô 16 bit, 16 kHz, little-endian). Tạo một thông báo [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentrealtimeinput) bằng dữ liệu âm thanh. `mimeType` là yếu tố quan trọng.
+Audio muss als unformatierte PCM-Daten gesendet werden (unformatiertes 16-Bit-PCM-Audio, 16 kHz, Little Endian). Erstellen Sie eine [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentrealtimeinput)-Nachricht mit den Audiodaten. Der `mimeType` ist entscheidend.
 
 ### Python
 
@@ -232,11 +232,11 @@ function sendAudioChunk(chunk) {
 // Example usage: sendAudioChunk(audioBuffer);
 ```
 
-Để biết ví dụ về cách lấy âm thanh từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L38-L74).
+Ein Beispiel dafür, wie Sie Audio vom Clientgerät (z.B. dem Browser) abrufen, finden Sie im End-to-End-Beispiel auf [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L38-L74).
 
-## Gửi video
+## Video senden
 
-Khung hình video được gửi dưới dạng hình ảnh riêng lẻ (ví dụ: JPEG hoặc PNG). Tương tự như âm thanh, hãy sử dụng `realtimeInput` với `Blob`, chỉ định `mimeType` chính xác.
+Videoframes werden als einzelne Bilder gesendet (z.B. JPEG oder PNG). Ähnlich wie bei Audio verwenden Sie `realtimeInput` mit einem `Blob` und geben den richtigen `mimeType` an.
 
 ### Python
 
@@ -281,11 +281,11 @@ function sendVideoFrame(frame, mimeType = 'image/jpeg') {
 // Example usage: sendVideoFrame(jpegBuffer);
 ```
 
-Để biết ví dụ về cách lấy video từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L185-L222).
+Ein Beispiel dafür, wie Sie Video vom Clientgerät (z.B. dem Browser) abrufen, finden Sie im End-to-End-Beispiel auf [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L185-L222).
 
-## Nhận phản hồi
+## Antworten erhalten
 
-WebSocket sẽ gửi lại thông báo [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentservermessage). Bạn cần phân tích cú pháp các thông báo JSON này và xử lý nhiều loại nội dung.
+Der WebSocket sendet [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservermessage)-Nachrichten zurück. Sie müssen diese JSON-Nachrichten parsen und verschiedene Arten von Inhalten verarbeiten.
 
 ### Python
 
@@ -356,11 +356,11 @@ websocket.onmessage = (event) => {
 };
 ```
 
-Để biết ví dụ về cách xử lý phản hồi, hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/geminilive.js#L22-L75).
+Ein Beispiel für die Verarbeitung der Antwort finden Sie im End-to-End-Beispiel auf [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/geminilive.js#L22-L75).
 
-## Xử lý lệnh gọi công cụ
+## Toolaufrufe verarbeiten
 
-Khi mô hình yêu cầu một lệnh gọi công cụ, [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontentservermessage) sẽ chứa một trường `toolCall`. Bạn phải thực thi hàm cục bộ và gửi kết quả trở lại WebSocket bằng thông báo [`BidiGenerateContentToolResponse`](https://ai.google.dev/api/live?hl=vi#bidigeneratecontenttoolresponse).
+Wenn das Modell einen Toolaufruf anfordert, enthält die [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservermessage) ein `toolCall`-Feld. Sie müssen die Funktion lokal ausführen und das Ergebnis mit einer [`BidiGenerateContentToolResponse`](https://ai.google.dev/api/live?hl=de#bidigeneratecontenttoolresponse)-Nachricht an den WebSocket zurücksenden.
 
 ### Python
 
@@ -447,20 +447,20 @@ function handleToolCall(toolCall) {
 // This function is called within websocket.onmessage when a toolCall is detected.
 ```
 
-## Bước tiếp theo
+## Nächste Schritte
 
-- Đọc hướng dẫn đầy đủ về [Các chức năng](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi) của Live API để biết các chức năng và cấu hình chính, bao gồm cả tính năng Phát hiện hoạt động bằng giọng nói và các tính năng âm thanh gốc.
-- Đọc hướng dẫn về [Sử dụng công cụ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi) để tìm hiểu cách tích hợp Live API với các công cụ và tính năng gọi hàm.
-- Hãy đọc hướng dẫn [Quản lý phiên](https://ai.google.dev/gemini-api/docs/live-session?hl=vi) để quản lý các cuộc trò chuyện kéo dài.
-- Đọc hướng dẫn về [Mã thông báo tạm thời](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=vi) để xác thực an toàn trong các ứng dụng [từ ứng dụng đến máy chủ](#implementation-approach).
-- Để biết thêm thông tin về API WebSockets cơ bản, hãy xem [Tài liệu tham khảo API WebSockets](https://ai.google.dev/api/live?hl=vi).
+- Im vollständigen Leitfaden zu den Funktionen der Live API [Funktionen](https://ai.google.dev/gemini-api/docs/live-guide?hl=de) finden Sie Informationen zu den wichtigsten Funktionen und Konfigurationen, einschließlich der Erkennung von Sprachaktivitäten und nativen Audiofunktionen.
+- Lesen Sie den [Leitfaden zur Toolnutzung](https://ai.google.dev/gemini-api/docs/live-tools?hl=de), um zu erfahren, wie Sie die Live API in Tools und Funktionsaufrufe einbinden.
+- Im [Leitfaden zur Sitzungsverwaltung](https://ai.google.dev/gemini-api/docs/live-session?hl=de) erfahren Sie, wie Sie lange Unterhaltungen verwalten.
+- Im [Leitfaden zu kurzlebigen Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=de) finden Sie Informationen zur sicheren Authentifizierung in [Client-Server-Anwendungen](#implementation-approach).
+- Weitere Informationen zur zugrunde liegenden WebSockets API finden Sie in der [WebSockets API-Referenz](https://ai.google.dev/api/live?hl=de).
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-09-17 UTC.
+Zuletzt aktualisiert: 2026-09-17 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-17 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-17 (UTC)."],[],[]]

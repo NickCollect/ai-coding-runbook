@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=zh-TW
-fetched_at: 2026-09-21T05:47:00.572087+00:00
-title: "\u4ee5 Google \u641c\u5c0b\u5efa\u7acb\u57fa\u6e96 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=pl
+fetched_at: 2026-09-28T06:24:15.212409+00:00
+title: "Grounding z\u00a0u\u017cyciem wyszukiwarki Google \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-提供意見
+Prześlij opinię
 
-# 以 Google 搜尋建立基準
+# Grounding z użyciem wyszukiwarki Google
 
-有了「以 Google 搜尋強化事實基礎」，Gemini 模型就能取得即時網路內容。這項功能支援所有可用語言，可讓 Gemini 提供更準確的回覆，並引用知識截點以外的可驗證來源。
+Powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google łączy model Gemini z treściami z internetu w czasie rzeczywistym i działa we wszystkich dostępnych językach. Pozwala to Gemini udzielać dokładniejszych odpowiedzi i cytować zweryfikowane źródła poza jego granicą wiedzy.
 
-透過基礎化，您可以建構下列應用程式：
+Uziemienie pomaga tworzyć aplikacje, które mogą:
 
-- **提高事實查核準確度：**以真實世界資訊為依據生成回覆，減少模型幻覺。
-- **取得即時資訊：**回答近期事件和主題相關問題。
-- **提供引文：**顯示模型聲明的來源，贏得使用者信任。
+- **Zwiększanie dokładności:** zmniejsz halucynacje modelu, opierając odpowiedzi na informacjach ze świata rzeczywistego.
+- **Dostęp do informacji w czasie rzeczywistym:** odpowiadanie na pytania dotyczące ostatnich wydarzeń i tematów.
+- **Podawaj cytaty:** buduj zaufanie użytkowników, podając źródła twierdzeń modelu.
 
 ### Python
 
@@ -85,6 +85,47 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Who won the euro 2024?"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleSearch{}),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -98,21 +139,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 如何運用 Google 搜尋建立基準
+## Jak działa powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google
 
-啟用 `google_search` 工具後，模型會自動處理搜尋、處理及引用資訊的整個工作流程。
+Gdy włączysz to `google_search`narzędzie, model automatycznie obsłuży cały przepływ pracy związany z wyszukiwaniem, przetwarzaniem i cytowaniem informacji.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=zh-tw)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=pl)
 
-1. **使用者提示：**應用程式會將使用者提示傳送至 Gemini API，並啟用 `google_search` 工具。
-2. **提示分析：**模型會分析提示，判斷 Google 搜尋是否能提供更完善的答案。
-3. **Google 搜尋：**如有需要，模型會自動生成一或多個搜尋查詢並執行。
-4. **處理搜尋結果：**模型會處理搜尋結果、整合資訊並生成回覆。
-5. **根據搜尋結果生成的回覆：**API 會根據搜尋結果，傳回最終的易讀回覆。這項回覆包含模型提供的文字答案，以及內含引文的 `annotations`，還有 `google_search_call` 和 `google_search_result` 步驟，其中包含搜尋查詢和搜尋建議。
+1. **Prompt użytkownika:** Twoja aplikacja wysyła prompt użytkownika do interfejsu Gemini API z włączonym narzędziem `google_search`.
+2. **Analiza promptu:** model analizuje prompt i określa, czy wyszukiwarka Google może ulepszyć odpowiedź.
+3. **Wyszukiwarka Google:** w razie potrzeby model automatycznie generuje jedno lub kilka zapytań i je wykonuje.
+4. **Przetwarzanie wyników wyszukiwania:** model przetwarza wyniki wyszukiwania, syntetyzuje informacje i formułuje odpowiedź.
+5. **Odpowiedź oparta na wynikach wyszukiwania:** interfejs API zwraca ostateczną, przyjazną dla użytkownika odpowiedź, która jest oparta na wynikach wyszukiwania. Odpowiedź zawiera tekstową odpowiedź modelu z wstawionymi elementami `annotations` zawierającymi cytaty, a także kroki `google_search_call` i `google_search_result` z wyszukiwanymi hasłami i sugestiami wyszukiwania.
 
-## 瞭解基礎回應
+## Informacje o odpowiedzi uzasadniającej
 
-如果模型成功根據資訊來源生成回覆，文字輸出內容會直接在文字內容區塊中加入 `annotations`。這些註解會提供引用資訊，將回覆內容的各個部分連結至來源。
+Gdy odpowiedź zostanie prawidłowo ugruntowana, wygenerowany przez model tekst będzie zawierać wstawiony symbol `annotations` bezpośrednio w bloku treści tekstowej. Te adnotacje
+zawierają informacje o cytowaniu, które łączą części odpowiedzi z ich źródłami.
 
 ```
 {
@@ -171,17 +213,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-回應中的主要欄位：
+Kluczowe pola w odpowiedzi:
 
-- `google_search_call`：包含模型執行的搜尋`queries`。
-- `google_search_result`：包含 `search_suggestions`，這是用於在 UI 中算繪搜尋建議的 HTML 片段。完整使用規定詳見《[服務條款](https://ai.google.dev/gemini-api/terms?hl=zh-tw#grounding-with-google-search)》。
-- `text`：模型合成的答案，內含引文。`annotations`每個 `url_citation` 註解都會將文字區段 (由 `start_index` 和 `end_index` 定義) 連結至來源網址。這是建立內文引文的關鍵。
+- `google_search_call` : zawiera wyszukiwanie `queries` wykonane przez model.
+- `google_search_result` : zawiera `search_suggestions`, czyli fragment kodu HTML do renderowania sugestii wyszukiwania w interfejsie. Pełne wymagania dotyczące korzystania z usługi są szczegółowo opisane w [Warunkach korzystania z usługi](https://ai.google.dev/gemini-api/terms?hl=pl#grounding-with-google-search).
+- `text` z `annotations` : wygenerowana przez model odpowiedź z cytatami w tekście. Każda adnotacja `url_citation` łączy segment tekstu (zdefiniowany przez `start_index` i `end_index`) z adresem URL źródła. To klucz do tworzenia cytatów w tekście.
 
-您也可以搭配[網址內容工具](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)使用以 Google 搜尋強化事實基礎，以公開網路資料和您提供的特定網址做為回覆的基準。
+Powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google można też stosować w połączeniu z [narzędziem do kontekstu adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl), aby powiązać odpowiedzi ze źródłami informacji zarówno na podstawie danych z publicznej sieci, jak i określonych adresów URL.
 
-## 使用內嵌引文註明出處
+## Podawanie źródeł za pomocą cytatów w tekście
 
-API 會在文字內容區塊中傳回內嵌`url_citation`註解，讓您完全掌控如何在使用者介面中顯示來源。每則註解都會包含 `start_index` 和 `end_index`，指出註解引用的文字部分。以下說明如何擷取及顯示這些資料。
+Interfejs API zwraca w bloku tekstu adnotacje wstawione w tekście `url_citation`, dzięki czemu masz pełną kontrolę nad sposobem wyświetlania źródeł w interfejsie użytkownika.
+Każda adnotacja zawiera znaki `start_index` i `end_index`, które wskazują, do której części tekstu się odnosi. Dowiedz się, jak je wyodrębnić i wyświetlić.
 
 ### Python
 
@@ -290,7 +333,87 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-輸出內容會顯示文字及其引文：
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Who won the euro 2024?"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleSearch{}),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    text := content.TextContent.Text
+                    fmt.Println(text)
+                    if len(content.TextContent.Annotations) > 0 {
+                        fmt.Println("\nCitations:")
+                        for _, annotation := range content.TextContent.Annotations {
+                            if annotation.URLCitation != nil {
+                                c := annotation.URLCitation
+                                start := 0
+                                if c.StartIndex != nil {
+                                    start = *c.StartIndex
+                                }
+                                end := 0
+                                if c.EndIndex != nil {
+                                    end = *c.EndIndex
+                                }
+                                citedText := ""
+                                if start >= 0 && end <= len(text) && start <= end {
+                                    citedText = text[start:end]
+                                }
+                                title := ""
+                                if c.Title != nil {
+                                    title = *c.Title
+                                }
+                                url := ""
+                                if c.URL != nil {
+                                    url = *c.URL
+                                }
+                                fmt.Printf("  [%s](%s)\n", title, url)
+                                fmt.Printf("    Cited text: %q\n", citedText)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+Wynik będzie zawierać tekst wraz z cytatami:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -302,48 +425,48 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## 定價
+## Ceny
 
-使用 Gemini 3 搭配「以 Google 搜尋強化事實基礎」功能時，系統會針對模型執行的每項搜尋查詢向專案收費。如果模型決定執行多個搜尋查詢來回答單一提示 (例如在同一個 API 呼叫中搜尋 `"UEFA Euro 2024 winner"` 和 `"Spain vs England Euro 2024 final
-score"`)，則該要求會計為兩次工具使用次數。為計費起見，計算不重複查詢時，我們會忽略空白的網路搜尋查詢。這項計費模式僅適用於 Gemini 3 模型；如果您使用 Gemini 2.5 或更舊版本的模型進行搜尋基礎作業，系統會依提示次數向您的專案收費。
+Gdy używasz funkcji powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google w Gemini 3, za każde zapytanie, które model zdecyduje się wykonać, Twój projekt jest obciążany opłatą. Jeśli model zdecyduje się wykonać kilka zapytań, aby odpowiedzieć na jeden prompt (np. wyszukać `"UEFA Euro 2024 winner"` i `"Spain vs England Euro 2024 final
+score"` w ramach jednego wywołania interfejsu API), będzie to liczone jako 2 płatne użycia narzędzia w przypadku tego żądania. Na potrzeby rozliczeń ignorujemy puste zapytania w wyszukiwarce internetowej podczas zliczania unikalnych zapytań. Ten model rozliczeń dotyczy tylko modeli Gemini 3. Jeśli używasz groundingu w wyszukiwarce z modelami Gemini 2.5 lub starszymi, za każdy prompt w Twoim projekcie zostanie naliczona opłata.
 
-如需詳細的定價資訊，請參閱 [Gemini API 定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。
+Szczegółowe informacje o cenach znajdziesz na [stronie z cennikiem Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=pl).
 
-## 支援的模型
+## Obsługiwane modele
 
-如要查看完整功能，請前往[模型總覽](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)頁面。
+Pełną listę funkcji znajdziesz na stronie [Przegląd modelu](https://ai.google.dev/gemini-api/docs/models?hl=pl).
 
-| 模型 | 以 Google 搜尋建立基準 |
+| Model | Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google |
 | --- | --- |
-| Gemini 3.8 Flash | ✔️ |
-| Gemini 3.7 Flash | ✔️ |
-| Gemini 3.6 Flash | ✔️ |
-| Gemini 3.5 Flash-Lite | ✔️ |
-| Gemini 3.5 Flash | ✔️ |
-| Gemini 3.1 Flash Image 預先發布版 | ✔️ |
-| Gemini 3.1 Pro 預先發布版 | ✔️ |
-| Gemini 3 Pro Image 預先發布版 | ✔️ |
-| Gemini 3 Flash 預先發布版 | ✔️ |
-| Gemini 2.5 Pro | ✔️ |
-| Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash-Lite | ✔️ |
-| Gemini 2.0 Flash | ✔️ |
+| Gemini 3.8 Flash | ✔️ |
+| Gemini 3.7 Flash | ✔️ |
+| Gemini 3.6 Flash | ✔️ |
+| Gemini 3.5 Flash-Lite | ✔️ |
+| Gemini 3.5 Flash | ✔️ |
+| Gemini 3.1 Flash Image (wersja testowa) | ✔️ |
+| Gemini 3.1 Pro (wersja testowa) | ✔️ |
+| Gemini 3 Pro Image (wersja testowa) | ✔️ |
+| Gemini 3 Flash (wersja testowa) | ✔️ |
+| Gemini 2.5 Pro | ✔️ |
+| Gemini 2.5 Flash | ✔️ |
+| Gemini 2.5 Flash-Lite | ✔️ |
+| Gemini 2.0 Flash | ✔️ |
 
-## 支援的工具組合
+## Obsługiwane kombinacje narzędzi
 
-您可以將「以 Google 搜尋強化事實基礎」功能與其他工具搭配使用，例如[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)、[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)，以及[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw) (Gemini 3.5 Flash 和後續版本支援)，以處理更複雜的用途。Gemini 3 模型也支援將這些內建工具與自訂工具 (函式呼叫) 結合使用。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
+Możesz używać powiązania ze źródłami informacji przy użyciu wyszukiwarki Google z innymi narzędziami, takimi jak [wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl), [kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl) i [powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl) (obsługiwane w przypadku Gemini 3.5 Flash i nowszych modeli), aby obsługiwać bardziej złożone przypadki użycia. Modele Gemini 3 obsługują też łączenie tych wbudowanych narzędzi z narzędziami niestandardowymi (wywoływanie funkcji). Więcej informacji znajdziesz na stronie [kombinacje narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
 
-## 後續步驟
+## Co dalej?
 
-- 瞭解其他可用工具，例如[呼叫函式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
-- 瞭解如何使用[網址背景資訊工具](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)，在提示中加入特定網址。
+- Poznaj inne dostępne narzędzia, takie jak [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl).
+- Dowiedz się, jak wzbogacać prompty o konkretne adresy URL za pomocą [narzędzia do sprawdzania kontekstu adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl).
 
-提供意見
+Prześlij opinię
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-上次更新時間：2026-09-18 (世界標準時間)。
+Ostatnia aktualizacja: 2026-09-24 UTC.
 
-想進一步說明嗎？
+Chcesz przekazać coś jeszcze?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-18 (世界標準時間)。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-24 UTC."],[],[]]

@@ -1,86 +1,86 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=he
-fetched_at: 2026-09-21T05:54:45.153898+00:00
-title: "\u05e9\u05d2\u05d9\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=tr
+fetched_at: 2026-09-28T06:13:37.858703+00:00
+title: "API hatalar\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-# שגיאות API
+# API hataları
 
-בדף הזה מפורטים כל קודי השגיאה של Interactions API, מתואר הפורמט של תגובת השגיאה ומוסבר איך ה-API מספק שגיאות לסוגים שונים של בקשות.
+Bu sayfada, tüm Interactions API hata kodları için referans sağlanmakta, hata yanıtı biçimi açıklanmakta ve API'nin farklı istek türleri için hataları nasıl ilettiği anlatılmaktadır.
 
-## קודי שגיאה של Standard API
+## Standart API hata kodları
 
-קודי השגיאה הכלליים האלה ברמת הבקשה תואמים לקודי סטטוס רגילים של HTTP.
-משתמשים בשדה `code` בלוגיקה של האפליקציה כדי לטפל בשגיאות באופן פרוגרמטי.
+Bu genel istek düzeyindeki hata kodları, standart HTTP durum kodlarına karşılık gelir.
+Hataları programatik olarak işlemek için uygulama mantığınızdaki `code` alanını kullanın.
 
-| קוד | סטטוס HTTP | תיאור | הפעולה המומלצת |
+| Kod | HTTP Durumu | Açıklama | Önerilen işlem |
 | --- | --- | --- | --- |
-| `invalid_request` | ‫400 בקשה שגויה | מטען הייעודי (payload) של הבקשה לא תקין או שהוא מכיל פרמטרים לא תקינים. | כדאי לבדוק את התחביר והפרמטרים של הבקשה בהשוואה ל[מאמרי העזרה של ה-API](https://ai.google.dev/api/interactions-api?hl=he). |
-| `failed_precondition` | ‫400 בקשה שגויה | אי אפשר לעבד את הבקשה כי לא מתקיימת דרישה מוקדמת (לדוגמה, חיוב מושבת). | צריך לבדוק את סטטוס החיוב של הפרויקט או את הדרישות המוקדמות של החשבון. |
-| `out_of_range` | ‫‎416 Requested Range Not Satisfiable | פרמטר הבקשה חורג מהטווח התקין. | בודקים את ערכי הפרמטרים והמגבלות. |
-| `parameter_unknown` | ‫400 בקשה שגויה | הבקשה מכילה פרמטר לא מוכר. | צריך להסיר את הפרמטר הלא מזוהה ולנסות שוב. |
-| `authentication` | ‫401 אין הרשאה | מפתח ה-API חסר, לא תקין או שתוקפו פג. | מאמתים את [מפתח ה-API](https://ai.google.dev/gemini-api/docs/api-key?hl=he). |
-| `payment_required` | ‫402 נדרש תשלום | יתרת הזיכוי בתשלום מראש אזלה. | [מוסיפים קרדיטים](https://ai.google.dev/gemini-api/docs/billing?hl=he#buy-credits) לחשבון לחיוב או מפעילים את התכונה [הוספת כסף אוטומטית](https://ai.google.dev/gemini-api/docs/billing?hl=he#auto-reload). לא כדאי לנסות שוב: הבקשה לא תצליח עד שיוספו קרדיטים. |
-| `permission_denied` | ‫403 Forbidden | למפתח ה-API שלך אין הרשאה למשאב הזה. | בודקים את ההרשאות של מפתח ה-API ואת הגישה לפרויקט. |
-| `not_found` | שגיאת 404 | המשאב המבוקש לא נמצא. | בודקים את נתיב המשאב והפרמטרים. |
-| `model_not_found` | שגיאת 404 | המודל שצוין לא נמצא. | צריך לאמת את שם המודל או להשתמש במודל אחר. |
-| `already_exists` | ‎409 Conflict | הישות שניסית ליצור כבר קיימת. | לפני שיוצרים מחדש משאב, בודקים אם הוא כבר קיים. |
-| `aborted` | ‎409 Conflict | הפעולה בוטלה בגלל קונפליקט או בגלל כשל בבדיקת מקבילות. | כדאי לנסות לשלוח את הבקשה שוב ברמה גבוהה יותר של האפליקציה. |
-| `rate_limit_exceeded` | ‫429 יותר מדי בקשות | חרגתם מהמגבלה של בקשות או טוקנים לדקה או לשנייה. | צריך להמתין ולנסות שוב עם השהיה מעריכית לפני ניסיון חוזר (exponential backoff). |
-| `quota_exceeded` | ‫429 יותר מדי בקשות | חרגתם מהמכסה היומית. | צריך לחכות עד שהמכסה תתאפס או לבקש להגדיל את המכסה. |
-| `too_many_requests` | ‫429 יותר מדי בקשות | שלחת יותר מדי בקשות בפרק זמן קצר. | צריך להמתין ולנסות שוב עם השהיה מעריכית לפני ניסיון חוזר (exponential backoff). |
-| `cancelled` | ‫499 Client Closed Request | הלקוח ביטל את הבקשה לפני שהיא הושלמה. | אין צורך בפעולה נוספת. בדרך כלל זה אומר שהלקוח התנתק. |
-| `api_error` | ‫‎500 Internal Server Error | קרתה שגיאה לא צפויה בשרת. | מנסים לשלוח את הבקשה שוב. אם הבעיה נמשכת, אפשר לפנות לתמיכה. |
-| `unimplemented` | ‫501 Not Implemented | הפעולה או התכונה לא יושמו או לא נתמכות. | בודקים את היכולות של ה-API או עוברים לתכונה נתמכת. |
-| `service_unavailable` | ‫‎503 Service Unavailable | יש כרגע עומס על השרות או שהוא מושבת. | צריך להמתין ולנסות שוב עם השהיה מעריכית לפני ניסיון חוזר (exponential backoff). |
-| `deadline_exceeded` | ‫‎504 Gateway Timeout | הבקשה לא הושלמה עד המועד האחרון. | מסירים את הגדרת הזמן הקצוב לתפוגה של הלקוח או מגדילים אותה כדי להשתמש בברירת המחדל של השרת. |
+| `invalid_request` | 400 Hatalı İstek | İstek yükü yanlış biçimlendirilmiş veya geçersiz parametreler içeriyor. | İstek söz diziminizi ve parametrelerinizi [API referansıyla](https://ai.google.dev/api/interactions-api?hl=tr) karşılaştırarak kontrol edin. |
+| `failed_precondition` | 400 Hatalı İstek | Bir ön koşul karşılanmadığı için (ör. faturalandırma devre dışı bırakılmış) istek işlenemiyor. | Proje faturalandırma durumunu veya hesap ön koşullarını doğrulayın. |
+| `out_of_range` | 416 İstenen Aralık Karşılanamıyor | İstek parametresi geçerli aralığın dışında. | Parametre değerlerini ve sınırlarını kontrol edin. |
+| `parameter_unknown` | 400 Hatalı İstek | İstek bilinmeyen bir parametre içeriyor. | Tanınmayan parametreyi kaldırıp tekrar deneyin. |
+| `authentication` | 401 Yetkilendirilmedi | API anahtarı eksik, geçersiz veya süresi dolmuş. | [API anahtarınızı](https://ai.google.dev/gemini-api/docs/api-key?hl=tr) doğrulayın. |
+| `payment_required` | 402 Ödeme Gerekli | Ön ödeme kredisi bakiyeniz tükendi. | Faturalandırma hesabınıza [kredi ekleyin](https://ai.google.dev/gemini-api/docs/billing?hl=tr#buy-credits) veya [otomatik para yükleme](https://ai.google.dev/gemini-api/docs/billing?hl=tr#auto-reload) özelliğini etkinleştirin. Yeniden denemeyin: Kredi eklenene kadar istek başarılı olmaz. |
+| `permission_denied` | 403 Yasak | API anahtarınızın bu kaynak için izni yok. | API anahtarı izinlerinizi ve proje erişiminizi kontrol edin. |
+| `not_found` | 404 Bulunamadı | İstenen kaynak bulunamadı. | Kaynak yolunu ve parametreleri doğrulayın. |
+| `model_not_found` | 404 Bulunamadı | Belirtilen model bulunamadı. | Model adını doğrulayın veya farklı bir modele geri dönün. |
+| `already_exists` | 409 Çakışma | Oluşturmayı denediğiniz varlık zaten mevcut. | Yeniden oluşturmadan önce kaynağın mevcut olup olmadığını kontrol edin. |
+| `aborted` | 409 Çakışma | İşlem, çakışma veya eşzamanlılık kontrolü hatası nedeniyle iptal edildi. | İsteği daha yüksek bir uygulama düzeyinde yeniden deneyin. |
+| `rate_limit_exceeded` | 429 Çok Fazla İstek Var | Dakika veya saniye başına istek ya da jeton sınırını aştınız. | Bekleyin ve eksponansiyel geri yüklemeyle yeniden deneyin. |
+| `quota_exceeded` | 429 Çok Fazla İstek Var | Günlük kotanızı aştınız. | Kota sıfırlanana kadar bekleyin veya kota artışı isteyin. |
+| `too_many_requests` | 429 Çok Fazla İstek Var | Kısa süre içinde çok fazla istek gönderdiniz. | Bekleyin ve eksponansiyel geri yüklemeyle yeniden deneyin. |
+| `cancelled` | 499 İstemci İsteği Kapattı | İstemci, istek tamamlanmadan önce iptal etti. | Herhangi bir işlem yapmanız gerekmez. Bu durum genellikle istemcinin bağlantısının kesildiği anlamına gelir. |
+| `api_error` | 500 Dahili Sunucu Hatası | Sunucuda beklenmeyen bir hata oluştu. | İsteği yeniden deneyin. Sorun devam ederse destek ekibiyle iletişime geçin. |
+| `unimplemented` | 501 Uygulanmadı | İşlem veya özellik uygulanmamış ya da desteklenmiyor. | API özelliklerini kontrol edin veya desteklenen bir özelliğe geçin. |
+| `service_unavailable` | 503 Hizmet Kullanılamıyor | Hizmet geçici olarak aşırı yüklü veya kapalı. | Bekleyin ve eksponansiyel geri yüklemeyle yeniden deneyin. |
+| `deadline_exceeded` | 504 Ağ Geçidi Zaman Aşımı | İstek, son tarihe kadar tamamlanmadı. | Sunucu varsayılanını kullanmak için istemci son tarihi ayarını kaldırın veya artırın. |
 
-## קודים שחסימת היצירה שלהם
+## Oluşturma engellenen kodlar
 
-קודי השגיאה האלה מציינים שהגבלות מדיניות, בטיחות או הגבלות תוכן חסמו את הפלט של המודל. אם מקבלים אחד מהקודים האלה, צריך לשנות את הקלט ולנסות שוב.
+Bu hata kodları, politika, güvenlik veya içerik kısıtlamaları nedeniyle modelin çıkışının engellendiğini gösterir. Bu kodlardan birini aldığınızda girişinizi değiştirip tekrar deneyin.
 
-| קוד | תיאור |
+| Kod | Açıklama |
 | --- | --- |
-| `safety` | הבקשה נחסמה בגלל הפרות של כללי הבטיחות (תוכן פוגעני). |
-| `recitation` | הבקשה נחסמה בגלל הגבלות שקשורות לזכויות יוצרים או להקראה. |
-| `language` | הבקשה נחסמה בגלל שפה שלא נתמכת. |
-| `prohibited_content` | הבקשה נחסמה בגלל הנחיות לתוכן אסור. |
-| `spii` | הבקשה נחסמה בגלל הגבלות על פרטים אישיים מזהים בעלי רגישות גבוהה. |
-| `blocklist` | הבקשה נחסמה כי מונחים אסורים ברשימת החסימה חסמו אותה. |
-| `image_safety` | הפרות של כללי הבטיחות חסמו את יצירת התמונה. |
-| `image_prohibited_content` | ההנחיות בנושא תוכן אסור חסמו את יצירת התמונה. |
-| `image_recitation` | הגבלות על זכויות יוצרים או על הקראה חסמו את יצירת התמונה. |
-| `image_other` | יצירת התמונות נחסמה מסיבות לא מוגדרות. |
-| `content_blocked` | הבקשה נחסמה בגלל סיבה שקשורה למדיניות, שלא צוינה. |
+| `safety` | Güvenlik ihlalleri (zararlı içerik) nedeniyle istek engellendi. |
+| `recitation` | Telif hakkı veya alıntı kısıtlamaları nedeniyle istek engellendi. |
+| `language` | Desteklenmeyen bir dil, isteği engelledi. |
+| `prohibited_content` | Yasaklanmış içerik kuralları nedeniyle istek engellendi. |
+| `spii` | Hassas kimlik bilgileri kısıtlamaları nedeniyle istek engellendi. |
+| `blocklist` | Engellenenler listesindeki yasaklanmış terimler isteği engelledi. |
+| `image_safety` | Güvenlik ihlalleri nedeniyle görüntü oluşturma engellendi. |
+| `image_prohibited_content` | Yasaklanmış içerik kuralları, görüntü oluşturmayı engelledi. |
+| `image_recitation` | Telif hakkı veya alıntı kısıtlamaları, görüntü oluşturmayı engelledi. |
+| `image_other` | Belirtilmeyen nedenlerle görüntü üretme işlemi engellendi. |
+| `content_blocked` | Belirtilmeyen bir politika nedeniyle istek engellendi. |
 
-## קודי שגיאה ביצירה
+## Üretim hata kodları
 
-קודי השגיאה האלה מציינים בעיה מבנית בפלט שנוצר על ידי המודל (למשל בקשה להפעלת פונקציה שגויה או בקשה להפעלת כלי שלא הוגדרה).
+Bu hata kodları, modelin oluşturduğu çıkışla ilgili yapısal bir sorun olduğunu (ör. hatalı biçimlendirilmiş bir işlev çağrısı veya bildirilmemiş bir araç çağrısı) gösterir.
 
-| קוד | תיאור |
+| Kod | Açıklama |
 | --- | --- |
-| `malformed_function_call` | המודל יצר בקשה להפעלת פונקציה שלא ניתן לנתח. |
-| `malformed_tool_call` | המודל יצר קריאה לכלי שלא ניתן לנתח. |
-| `unexpected_tool_call` | המודל הפעיל כלי שלא הוגדר בבקשה. |
-| `no_image` | המודל לא הצליח ליצור תמונה. |
-| `too_many_tool_calls` | המודל יצר יותר קריאות לכלים מהמותר. |
-| `missing_thought_signature` | בתגובה חסרה חתימת מחשבה נדרשת. |
+| `malformed_function_call` | Model, ayrıştırılamayan bir işlev çağrısı oluşturdu. |
+| `malformed_tool_call` | Model, ayrıştırılamayan bir araç çağrısı oluşturdu. |
+| `unexpected_tool_call` | Model, istekte belirtilmeyen bir aracı çağırdı. |
+| `no_image` | Model, resim üretemedi. |
+| `too_many_tool_calls` | Model, izin verilenden daha fazla araç çağrısı oluşturdu. |
+| `missing_thought_signature` | Yanıtta gerekli düşünce imzası eksik. |
 
-## פורמט של תגובת שגיאה
+## Hata yanıtı biçimi
 
-כל השגיאות מ-Interactions API מחזירות אובייקט `error` שמכיל `code` ו-`message`. לדוגמה, העברת סוג כלי שלא נתמך מחזירה:
+Etkileşimler API'sinden gelen tüm hatalar, `error` ve `message` içeren bir `code` nesnesi döndürür. Örneğin, desteklenmeyen bir araç türü iletildiğinde şu yanıt döndürülür:
 
 ```
 {
@@ -91,18 +91,18 @@ title: "\u05e9\u05d2\u05d9\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0
 }
 ```
 
-| שדה | סוג | תיאור |
+| Alan | Tür | Açıklama |
 | --- | --- | --- |
-| `code` | מחרוזת | קוד שגיאה שקריא למחשב ב`snake_case`. |
-| `message` | מחרוזת | תיאור קריא לאנשים של מה שהשתבש. |
+| `code` | dize | `snake_case` içinde makine tarafından okunabilir bir hata kodu. |
+| `message` | dize | Neyin yanlış gittiğine dair, kullanıcılar tarafından okunabilir bir açıklama. |
 
-## איך השגיאות מועברות
+## Hatalar nasıl iletilir?
 
-ה-API מחזיר שגיאות בצורה שונה, בהתאם לסוג הבקשה ששולחים: בקשת HTTP רגילה או בקשת סטרימינג (SSE).
+API, standart bir HTTP isteği mi yoksa akış (SSE) isteği mi gönderdiğinize bağlı olarak hataları farklı şekilde iletir.
 
-### בקשות HTTP רגילות
+### Standart HTTP istekleri
 
-בבקשות רגילות (לא סטרימינג), ה-API מגדיר את קוד הסטטוס של תגובת ה-HTTP (למשל `400 Bad Request`, `401 Unauthorized` או `429 Too Many Requests`) ומחזיר אובייקט `error` בגוף תגובת ה-JSON:
+Standart (akış olmayan) istekler için API, HTTP yanıt durum kodunu (ör. `400 Bad Request`, `401 Unauthorized` veya `429 Too Many Requests`) ayarlar ve JSON yanıt gövdesinde bir `error` nesnesi döndürür:
 
 ```
 {
@@ -113,9 +113,9 @@ title: "\u05e9\u05d2\u05d9\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0
 }
 ```
 
-### בקשות סטרימינג (SSE)
+### Akış (SSE) istekleri
 
-בבקשות סטרימינג (`stream: true`), ה-API שולח אירועי שגיאה דרך הסטרימינג של Server-Sent Events‏ (SSE) עם הערך `"error"` של `event_type`. השדה `error` מכיל את אותו מבנה של `code` ושל `message`:
+Akış istekleri (`stream: true`) için API, `event_type` değeri `"error"` olarak ayarlanmış Server-Sent Events (SSE) akışı üzerinden hata etkinlikleri gönderir. `error` alanı aynı `code` ve `message` yapısını içerir:
 
 ```
 {
@@ -127,19 +127,19 @@ title: "\u05e9\u05d2\u05d9\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0
 }
 ```
 
-סכימת האירועים המלאה של SSE זמינה במאמר [Interactions API Reference](https://ai.google.dev/api/interactions-api?hl=he).
+Tam SSE etkinlik şeması için [Interactions API Referansı](https://ai.google.dev/api/interactions-api?hl=tr)'na bakın.
 
-## המאמרים הבאים
+## Sırada ne var?
 
-- [פתרון בעיות ב-API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=he): פתרון בעיות נפוצות ותרחישי שגיאה.
-- [מגבלות קצב](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he): מידע על מגבלות בקשות וניהול מכסות.
+- [API sorunlarını giderme](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr): Sık karşılaşılan sorunları ve hata senaryolarını çözün.
+- [Hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr): İstek sınırları ve kota işleme hakkında bilgi edinin.
 
-שליחת משוב
+Geri bildirim gönderin
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-עדכון אחרון: 2026-09-20 (שעון UTC).
+Son güncelleme tarihi: 2026-09-20 UTC.
 
-רוצה לתת לנו משוב?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-20 (שעון UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-20 UTC."],[],[]]

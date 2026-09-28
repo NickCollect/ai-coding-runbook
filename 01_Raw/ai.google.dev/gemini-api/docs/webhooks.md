@@ -1,51 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=fr
-fetched_at: 2026-09-21T05:51:28.572427+00:00
-title: "Webhooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=he
+fetched_at: 2026-09-28T06:26:35.388486+00:00
+title: "\u05ea\u05d2\u05d5\u05d1\u05d5\u05ea \u05dc\u05e4\u05e2\u05d5\u05dc\u05d4 \u05de\u05d0\u05ea\u05e8 \u05d0\u05d7\u05e8 (webhook) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envoyer des commentaires
+שליחת משוב
 
-# Webhooks
+# תגובות לפעולה מאתר אחר (webhook)
 
-Les webhooks permettent à l'API Gemini d'envoyer des notifications en temps réel à votre serveur lorsque des opérations asynchrones ou de longue durée (LRO) sont terminées. Vous n'avez ainsi plus besoin d'interroger l'API pour obtenir des mises à jour de l'état, ce qui réduit la latence et la surcharge.
+‫Webhooks מאפשרים ל-Gemini API לשלוח התראות בזמן אמת לשרת שלכם כשפעולות אסינכרוניות או פעולות ארוכות טווח (LRO) מסתיימות. השיטה הזו מחליפה את הצורך לשלוח בקשות ל-API כדי לקבל עדכוני סטטוס, וכך מקטינה את זמן האחזור ואת התקורה.
 
-Les webhooks sont disponibles pour des opérations telles que les tâches [par lot](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr),
-[les interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) et [la génération de vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr).
+אפשר להשתמש ב-Webhooks לפעולות כמו משימות [Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=he), [אינטראקציות](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) ו[יצירת סרטונים](https://ai.google.dev/gemini-api/docs/video?hl=he).
 
-## Fonctionnement
+## איך זה עובד
 
-Au lieu d'interroger `GET /operations` de manière répétée pour vérifier si une tâche est terminée, vous pouvez configurer les webhooks de l'API Gemini pour qu'ils envoient une requête HTTP POST à l'URL de votre écouteur immédiatement après le déclenchement d'un événement.
+במקום לבצע סקר `GET /operations` שוב ושוב כדי לבדוק אם משימה הסתיימה, אפשר להגדיר Webhooks של Gemini API כדי לשלוח בקשת HTTP POST לכתובת ה-URL של רכיב ה-listener מיד כשמופעל אירוע.
 
-L'API Gemini permet de configurer les webhooks de deux manières :
+‫Gemini API תומך בשתי דרכים להגדרת ווּבְּהוּק:
 
-- [**Webhooks statiques**](#static-webhooks) : points de terminaison au niveau du projet configurés
-  avec l'API Gemini [WebhookService](https://ai.google.dev/api?hl=fr). Idéal pour les intégrations globales (par exemple, pour envoyer des notifications à Slack, synchroniser une base de données, etc.).
-- [**Webhooks dynamiques**](#dynamic-webhooks) : remplacements au niveau de la requête qui transmettent une
-  URL de webhook dans la charge utile de configuration d'un appel de tâches spécifique. Idéal pour acheminer des tâches spécifiques vers des points de terminaison dédiés.
+- ‫[**Static webhooks**](#static-webhooks): נקודות קצה ברמת הפרויקט שהוגדרו באמצעות [Gemini WebhookService API](https://ai.google.dev/api?hl=he). מתאים לשילובים גלובליים (לדוגמה, שליחת התראות ל-Slack, סנכרון מסד נתונים וכו').
+- [**וווב-הוקים דינמיים**](#dynamic-webhooks): שינויים ברמת הבקשה שמעבירים webhook URL במטען הייעודי (payload) של ההגדרה של קריאה ספציפית למשרות. אידיאלי לניתוב משימות ספציפיות לנקודות קצה ייעודיות.
 
-## Webhooks statiques
+## Webhooks סטטיים
 
-Les webhooks statiques sont enregistrés pour l'ensemble d'un [projet](https://ai.google.dev/gemini-api/docs/api-key?hl=fr#google-cloud-projects) et se déclenchent pour tout événement
-correspondant.
+הרישום של וווב-הוקים סטטיים מתבצע עבור [פרויקט](https://ai.google.dev/gemini-api/docs/api-key?hl=he#google-cloud-projects) שלם, והם מופעלים לכל אירוע תואם.
 
-### Créer un webhook
+### יצירת webhook
 
-Vous pouvez créer des points de terminaison à l'aide du SDK ou de l'API REST.
+אפשר ליצור נקודות קצה באמצעות ה-SDK או REST API.
 
-**IMPORTANT** : Lorsque vous créez un webhook, l'API renvoie un **secret de signature**
-**une seule fois**. Vous devez le stocker de manière sécurisée (par exemple, dans vos variables d'environnement) pour vérifier les signatures ultérieurement. Si vous perdez le secret de signature, vous devrez le
-[faire pivoter](#rotate-signing-secret).
+**חשוב**: כשיוצרים webhook, ה-API מחזיר **סוד חתימה**
+**רק פעם אחת**. כדי לאמת חתימות בהמשך, צריך לאחסן את המפתח הזה בצורה מאובטחת (למשל, במשתני הסביבה).
+אם תאבדו את הסוד לחתימה, תצטרכו [להחליף](#rotate-signing-secret) אותו.
 
 ### Python
 
@@ -115,6 +111,49 @@ System.out.println(
     "Created webhook: " + webhook.name().orElse("") + ", " + webhook.id().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+    "google.golang.org/genai/interactions/models/webhooks"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Webhooks.Create(ctx, operations.CreateWebhookRequest{
+        Body: webhooks.WebhookInput{
+            Name: genai.Ptr("MyBatchWebhook"),
+            SubscribedEvents: []webhooks.WebhookSubscribedEvent{
+                webhooks.WebhookSubscribedEventBatchSucceeded,
+                webhooks.WebhookSubscribedEventBatchFailed,
+            },
+            URI: "https://my-api.com/gemini-callback",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    webhook := res.Webhook
+    // Store webhook.GetNewSigningSecret() securely
+    _ = webhook.GetNewSigningSecret()
+    fmt.Printf("Created webhook: %v, %v\n", webhook.GetName(), webhook.GetID())
+}
+```
+
 ### REST
 
 ```
@@ -129,12 +168,11 @@ curl -X POST \
   }'
 ```
 
-Pour savoir comment configurer votre serveur afin qu'il reçoive des données, consultez la
-[section Gérer les requêtes de webhook](#handle-webhook-requests).
+פרטים על הגדרת השרת לקבלת נתונים מופיעים בקטע [טיפול בבקשות של webhook](#handle-webhook-requests).
 
-### Obtenir un webhook
+### קבלת webhook
 
-Récupérez les détails d'un webhook spécifique à l'aide de son nom de ressource.
+אחזור פרטים על webhook ספציפי לפי שם המשאב שלו.
 
 ### Python
 
@@ -184,6 +222,43 @@ System.out.println("URI: " + webhook.uri().orElse(""));
 System.out.println("Events: " + webhook.subscribedEvents().orElse(Collections.emptyList()));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Webhooks.Get(ctx, operations.GetWebhookRequest{
+        ID: "<your_webhook_id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    webhook := res.Webhook
+    if webhook.Name != nil {
+        fmt.Printf("Webhook: %s\n", *webhook.Name)
+    }
+    fmt.Printf("URI: %s\n", webhook.URI)
+    fmt.Printf("Events: %v\n", webhook.SubscribedEvents)
+}
+```
+
 ### REST
 
 ```
@@ -192,9 +267,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Répertorier les webhooks
+### הצגת רשימת ה-webhooks
 
-Répertoriez tous les webhooks configurés pour le projet en cours, avec pagination facultative.
+רשימה של כל ה-webhook שהוגדרו בפרויקט הנוכחי, עם אפשרות להוספת מספור עמודים.
 
 ### Python
 
@@ -246,6 +321,40 @@ for (Webhook wh : response.webhooks().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Webhooks.List(ctx, operations.ListWebhooksRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.WebhookListResponse != nil {
+        for _, wh := range res.WebhookListResponse.Webhooks {
+            fmt.Printf("%v: %v -> %s\n", wh.GetID(), wh.GetName(), wh.URI)
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -254,9 +363,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Mettre à jour un webhook
+### עדכון webhook
 
-Mettez à jour les propriétés d'un webhook existant, telles que le nom à afficher, l'URI cible ou les événements auxquels il est abonné.
+עדכון המאפיינים של webhook קיים, כמו שם התצוגה, ה-URI של היעד או האירועים שנרשמתם אליהם.
 
 ### Python
 
@@ -327,6 +436,49 @@ Webhook updatedWebhook =
 System.out.println("Updated webhook: " + updatedWebhook.name().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+    "google.golang.org/genai/interactions/models/webhooks"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Webhooks.Update(ctx, operations.UpdateWebhookRequest{
+        ID:         "<your_webhook_id>",
+        UpdateMask: genai.Ptr("subscribed_events"),
+        Body: &webhooks.WebhookUpdate{
+            SubscribedEvents: []webhooks.WebhookUpdateSubscribedEvent{
+                webhooks.WebhookUpdateSubscribedEventBatchSucceeded,
+                webhooks.WebhookUpdateSubscribedEventBatchFailed,
+                webhooks.WebhookUpdateSubscribedEvent("batch.cancelled"),
+            },
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Webhook.Name != nil {
+        fmt.Printf("Updated webhook: %s\n", *res.Webhook.Name)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -339,9 +491,9 @@ curl -X PATCH \
   }'
 ```
 
-### Supprimer un webhook
+### מחיקת webhook
 
-Supprimez un point de terminaison de webhook du projet. Les événements ne seront plus envoyés à ce point de terminaison.
+הסרה של נקודת קצה של webhook מהפרויקט. הפעולה הזו תמנע מסירת אירועים עתידיים לנקודת הקצה הזו.
 
 ### Python
 
@@ -383,6 +535,38 @@ client.webhooks.delete("<your_webhook_id>");
 System.out.println("Webhook deleted.");
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Webhooks.Delete(ctx, operations.DeleteWebhookRequest{
+        ID: "<your_webhook_id>",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("Webhook deleted.")
+}
+```
+
 ### REST
 
 ```
@@ -391,12 +575,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Faire pivoter un secret de signature
+### סיבוב של סוד חתימה
 
-Faites pivoter le secret de signature d'un webhook. Vous pouvez configurer si les secrets précédemment actifs sont révoqués immédiatement ou après un délai de grâce de 24 heures.
+סיבוב של ערך ה-Secret לחתימה של webhook. אתם יכולים להגדיר אם סודות שהיו פעילים בעבר יבוטלו באופן מיידי או אחרי תקופת חסד של 24 שעות.
 
-**IMPORTANT** : Le nouveau secret de signature n'est renvoyé qu'**une seule fois** au moment de la rotation
-time. Stockez-le de manière sécurisée avant de mettre à jour votre logique de validation.
+**חשוב**: הסוד החדש לחתימה מוחזר **רק פעם אחת** בזמן הרוטציה. חשוב לשמור אותו במקום בטוח לפני שמעדכנים את לוגיקת האימות.
 
 ### Python
 
@@ -466,6 +649,44 @@ String newSecret = response.secret().orElse("");
 System.out.println("New signing secret generated. Update your server configuration.");
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/operations"
+    "google.golang.org/genai/interactions/models/webhooks"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Webhooks.RotateSigningSecret(ctx, operations.RotateSigningSecretRequest{
+        ID: "<your_webhook_id>",
+        Body: &webhooks.RotateSigningSecretRequest{
+            RevocationBehavior: webhooks.RevocationBehaviorRevokePreviousSecretsAfterH24.ToPointer(),
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Store res.WebhookRotateSigningSecretResponse.GetSecret() securely, then update your server's verification config
+    _ = res.WebhookRotateSigningSecretResponse.GetSecret()
+    fmt.Println("New signing secret generated. Update your server configuration.")
+}
+```
+
 ### REST
 
 ```
@@ -478,14 +699,14 @@ curl -X POST \
   }'
 ```
 
-### Gérer les requêtes de webhook sur un serveur
+### טיפול בבקשות webhook בשרת
 
-Lorsqu'un événement auquel vous êtes abonné se produit, votre URL de webhook reçoit une requête HTTP POST. Votre point de terminaison doit répondre avec un code d'état 2xx dans les quelques secondes pour éviter une nouvelle tentative. Pour garantir la diffusion, l'API Gemini relance automatiquement les requêtes ayant échoué pendant 24 heures à l'aide d'un intervalle exponentiel entre les tentatives.
+כשמתרחש אירוע שנרשמתם לקבלת עדכונים לגביו, כתובת ה-webhook URL שלכם תקבל בקשת HTTP POST. נקודת הקצה צריכה להגיב עם קוד סטטוס 2xx תוך כמה שניות כדי למנוע ניסיון חוזר. כדי לוודא שהבקשות יועברו, Gemini API מבצע ניסיון חוזר אוטומטי של בקשות שנכשלו למשך 24 שעות באמצעות השהיה מעריכית לפני ניסיון חוזר (exponential backoff).
 
-Gemini respecte strictement la spécification des [webhooks standards](https://github.com/standard-webhooks/standard-webhooks) pour
-les en-têtes de sécurité. Vérifiez la charge utile sur votre serveur à l'aide des signatures d'en-tête signées et de votre secret de signature statique stocké. Pour obtenir des informations sur la charge utile, consultez la section [Enveloppe de webhook](#webhook-envelope).
+‫Gemini פועל בהתאם למפרט [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) לגבי כותרות אבטחה. מאמתים את מטען הייעודי (payload) בשרת באמצעות הכותרת החתומה
+signatures והסוד הסטטי החתום ששמור אצלכם. מידע על מטען הייעודי (payload) מופיע בקטע [Webhook envelope](#webhook-envelope).
 
-Voici un exemple d'utilisation de Flask pour l'écouteur HTTP :
+דוגמה לשימוש ב-Flask בשביל מאזין HTTP:
 
 ### Python
 
@@ -656,14 +877,92 @@ server.createContext(
 server.start();
 ```
 
-## Webhooks dynamiques
+### Go
 
-Les webhooks dynamiques vous permettent de lier un point de terminaison de webhook à une **configuration de requête
-spécifique**, ce qui est idéal pour les files d'attente d'orchestration d'agents. Les webhooks dynamiques utilisent des signatures JWKS de clé publique asymétriques au lieu de secrets symétriques.
+```
+package main
 
-### Envoyer une requête dynamique
+import (
+    "crypto/hmac"
+    "crypto/sha256"
+    "encoding/base64"
+    "encoding/json"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+    "os"
+    "strings"
 
-Ajoutez un `webhook_config` lorsque vous déclenchez une tâche asynchrone (par exemple, lorsque vous créez un lot).
+)
+
+func main() {
+    signingSecret := os.Getenv("WEBHOOK_SIGNING_SECRET")
+
+    http.HandleFunc("/gemini-callback", func(w http.ResponseWriter, r *http.Request) {
+        payloadBytes, err := io.ReadAll(r.Body)
+        if err != nil {
+            http.Error(w, `{"error": "Failed to read body"}`, http.StatusBadRequest)
+            return
+        }
+        payload := string(payloadBytes)
+        msgID := r.Header.Get("webhook-id")
+        msgTimestamp := r.Header.Get("webhook-timestamp")
+        msgSignature := r.Header.Get("webhook-signature")
+
+        secretBytes, err := base64.StdEncoding.DecodeString(strings.TrimPrefix(signingSecret, "whsec_"))
+        if err != nil {
+            http.Error(w, `{"error": "Invalid secret"}`, http.StatusBadRequest)
+            return
+        }
+
+        toSign := fmt.Sprintf("%s.%s.%s", msgID, msgTimestamp, payload)
+        mac := hmac.New(sha256.New, secretBytes)
+        mac.Write([]byte(toSign))
+        expectedSig := "v1," + base64.StdEncoding.EncodeToString(mac.Sum(nil))
+
+        if msgSignature == "" || !strings.Contains(msgSignature, expectedSig) {
+            http.Error(w, `{"error": "Signature invalid"}`, http.StatusBadRequest)
+            return
+        }
+
+        var event struct {
+            Type string `json:"type"`
+            Data struct {
+                ID            string `json:"id"`
+                OutputFileURI string `json:"output_file_uri"`
+            } `json:"data"`
+        }
+        _ = json.Unmarshal(payloadBytes, &event)
+
+        switch event.Type {
+        case "batch.succeeded":
+            fmt.Printf("Batch completed! ID: %s\n", event.Data.ID)
+            if event.Data.OutputFileURI != "" {
+                fmt.Printf("Batch file: %s\n", event.Data.OutputFileURI)
+            }
+        case "interaction.completed":
+            fmt.Printf("Interaction completed! ID: %s\n", event.Data.ID)
+        case "video.generated":
+            fmt.Printf("Video generated! URI: %s\n", event.Data.OutputFileURI)
+        }
+
+        w.Header().Set("Content-Type", "application/json")
+        w.WriteHeader(http.StatusOK)
+        _, _ = w.Write([]byte(`{"status": "received"}`))
+    })
+
+    log.Fatal(http.ListenAndServe(":8000", nil))
+}
+```
+
+## ‫Webhooks דינמיים
+
+בעזרת webhooks דינמיים, אפשר לקשר נקודת קצה של webhook ל**הגדרת בקשה ספציפית**, וזה אידיאלי לתורים של תיאום בין נציגים. ב-webhooks דינמיים נעשה שימוש בחתימות JWKS של מפתח ציבורי אסימטרי במקום בסודות סימטריים.
+
+### שליחת בקשה דינמית
+
+מוסיפים `webhook_config` כשמפעילים עבודה אסינכרונית (למשל, יצירת Batch).
 
 ### Python
 
@@ -755,6 +1054,53 @@ System.out.println(
     "Status: " + response.status().map(InteractionStatus::value).orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:      interactions.Model("gemini-3.8-flash"),
+            Input:      interactions.NewInteractionsInput("Tell me a short joke about programming."),
+            Background: genai.Ptr(true), // Required when WebhookConfig is specified
+            WebhookConfig: &interactions.WebhookConfig{
+                Uris: []string{"https://my-api.com/gemini-webhook-dynamic"},
+                UserMetadata: map[string]any{
+                    "job_group": "nightly-eval",
+                    "priority":  "high",
+                },
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.ID != nil {
+        fmt.Printf("Interaction created! ID: %s\n", *res.Interaction.ID)
+    }
+    fmt.Printf("Status: %s\n", res.Interaction.Status)
+}
+```
+
 ### REST
 
 ```
@@ -774,10 +1120,9 @@ curl -X POST \
   }'
 ```
 
-### Vérifier les signatures dynamiques (JWKS)
+### אימות חתימות דינמיות (JWKS)
 
-Les requêtes de webhook dynamiques émettent une signature de jeton Web JSON (JWT). Votre écouteur
-doit extraire la signature et la vérifier à l'aide des points de terminaison de certificat public de [Google](https://www.googleapis.com/oauth2/v3/certs).
+בקשות דינמיות של webhook פולטות חתימה של JSON Web Token‏ (JWT). המאזין צריך לחלץ את החתימה ולאמת אותה באמצעות [נקודות הקצה של אישור הציבורי של Google](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -971,11 +1316,103 @@ server.createContext(
 server.start();
 ```
 
-## Enveloppe de webhook
+### Go
 
-Pour éviter la congestion de la bande passante, les webhooks Gemini utilisent un modèle de **charge utile légère** pour diffuser les données. Les diffusions envoient un instantané contenant des détails sur l'état et des pointeurs vers les résultats, plutôt que le fichier de sortie brut lui-même.
+```
+package main
 
-Voici un exemple de format de charge utile :
+import (
+    "crypto"
+    "crypto/rsa"
+    "crypto/sha256"
+    "encoding/base64"
+    "encoding/json"
+    "fmt"
+    "io"
+    "log"
+    "math/big"
+    "net/http"
+    "strings"
+
+)
+
+func main() {
+    jwksURI := "https://generativelanguage.googleapis.com/.well-known/jwks.json"
+
+    http.HandleFunc("/gemini-webhook-dynamic", func(w http.ResponseWriter, r *http.Request) {
+        token := r.Header.Get("Webhook-Signature")
+        parts := strings.Split(token, ".")
+        if len(parts) != 3 {
+            http.Error(w, `{"error": "No signature header"}`, http.StatusBadRequest)
+            return
+        }
+
+        headerBytes, err := base64.RawURLEncoding.DecodeString(parts[0])
+        if err != nil {
+            http.Error(w, `{"error": "Invalid header"}`, http.StatusBadRequest)
+            return
+        }
+        var header struct {
+            Kid string `json:"kid"`
+        }
+        _ = json.Unmarshal(headerBytes, &header)
+
+        resp, err := http.Get(jwksURI)
+        if err != nil {
+            http.Error(w, `{"error": "Failed to fetch JWKS"}`, http.StatusBadRequest)
+            return
+        }
+        defer resp.Body.Close()
+        jwksBytes, _ := io.ReadAll(resp.Body)
+
+        var jwks struct {
+            Keys []struct {
+                Kid string `json:"kid"`
+                N   string `json:"n"`
+                E   string `json:"e"`
+            } `json:"keys"`
+        }
+        _ = json.Unmarshal(jwksBytes, &jwks)
+
+        var pubKey *rsa.PublicKey
+        for _, k := range jwks.Keys {
+            if k.Kid == header.Kid {
+                nBytes, _ := base64.RawURLEncoding.DecodeString(k.N)
+                eBytes, _ := base64.RawURLEncoding.DecodeString(k.E)
+                pubKey = &rsa.PublicKey{
+                    N: new(big.Int).SetBytes(nBytes),
+                    E: int(new(big.Int).SetBytes(eBytes).Int64()),
+                }
+                break
+            }
+        }
+        if pubKey == nil {
+            http.Error(w, `{"error": "Matching key not found"}`, http.StatusBadRequest)
+            return
+        }
+
+        sigBytes, _ := base64.RawURLEncoding.DecodeString(parts[2])
+        hashed := sha256.Sum256([]byte(parts[0] + "." + parts[1]))
+        if err := rsa.VerifyPKCS1v15(pubKey, crypto.SHA256, hashed[:], sigBytes); err != nil {
+            http.Error(w, `{"error": "Invalid Dynamic signature"}`, http.StatusBadRequest)
+            return
+        }
+
+        fmt.Println("Verified Dynamic payload success.")
+        w.Header().Set("Content-Type", "application/json")
+        w.WriteHeader(http.StatusOK)
+        _, _ = w.Write([]byte(`{"status": "received"}`))
+    })
+
+    log.Fatal(http.ListenAndServe(":8000", nil))
+}
+```
+
+## מעטפת webhook
+
+כדי למנוע עומס על רוחב הפס, ה-webhooks של Gemini משתמשים במודל של **מטען ייעודי (payload) דק** כדי להעביר נתונים. ההעברות שולחות snapshot שמכיל פרטי סטטוס ונקודות להפניה לתוצאות, ולא את קובץ הפלט הגולמי עצמו.
+
+דוגמה לפורמט של מטען ייעודי (payload):
 
 ```
 {
@@ -989,40 +1426,40 @@ Voici un exemple de format de charge utile :
 }
 ```
 
-## Documentation de référence sur le catalogue d'événements
+## הפניה לקטלוג האירועים
 
-Les événements suivants sont déclenchés pour les tâches compatibles :
+האירועים הבאים מופעלים עבור משרות תומכות:
 
-| Type d'événement | Déclencheur | Élément de charge utile (`data`) |
+| סוג אירוע | טריגר | פריט מטען ייעודי (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | Traitement terminé. | `id`, `output_file_uri` |
-| `batch.cancelled` | Requête annulée par l'utilisateur | `id` |
-| `batch.expired` | Le lot n'a pas été traité (terminé) dans un délai de 24 heures | `id` |
-| `batch.failed` | Échec de la tâche par lot (erreur système ou de validation). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | Appel de fonction, l'utilisateur doit effectuer une action | `id` |
-| `interaction.completed` | LRO dans l'API Interactions réussi | `id` |
-| `interaction.failed` | Échec de la LRO dans l'API Interactions (erreur système ou de validation). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | LRO dans l'API Interactions annulée | `id` |
-| `video.generated` | LRO de génération de vidéo terminée. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | העיבוד הסתיים בהצלחה. | `id`, `output_file_uri` |
+| `batch.cancelled` | המשתמש ביטל את הבקשה | `id` |
+| `batch.expired` | העיבוד של הקובץ לא הסתיים בתוך 24 שעות | `id` |
+| `batch.failed` | משימת אצווה נכשלה (שגיאת מערכת או שגיאת אימות). | `id`,‏ `error_code`,‏ `error_message` |
+| `interaction.requires_action` | קריאה לפונקציה, המשתמש צריך לעשות משהו | `id` |
+| `interaction.completed` | הפעולה הממושכת ב-API של האינטראקציות הסתיימה בהצלחה | `id` |
+| `interaction.failed` | הפעולה LRO ב-API של האינטראקציות נכשלה (שגיאת מערכת או שגיאת אימות). | `id`,‏ `error_code`,‏ `error_message` |
+| `interaction.cancelled` | בוטלה פעולת LRO בממשק API של אינטראקציות | `id` |
+| `video.generated` | תהליך LRO של יצירת הסרטון הושלם. | `id`,‏ `output_file_uri`,‏ `file_name` |
 
-## Bonnes pratiques
+## שיטות מומלצות
 
-Pour garantir un fonctionnement fiable et évolutif :
+כדי להבטיח פעולה אמינה וניתנת להרחבה:
 
-- **Vérification stricte de la protection contre la relecture** : toutes les requêtes comportent un en-tête `webhook-timestamp`. Validez toujours cet horodatage sur la couche de configuration de votre serveur pour refuser les charges utiles datant de plus de **5 minutes** (afin d'atténuer les attaques par relecture).
-- **Traitement asynchrone** : répondez immédiatement avec `2xx OK` lors de la détection d'une signature valide, et mettez en file d'attente les opérations d'analyse en interne. Si les temps d'attente de l'écouteur sont prolongés, un cycle de nouvelles tentatives de diffusion sera déclenché.
-- **Gestion de la déduplication** : les webhooks standards diffusent les données "au moins une fois". Utilisez l'en-tête `webhook-id` cohérent pour gérer les doublons potentiels dans les flux de congestion plus élevés.
+- **בדיקה קפדנית של הגנה מפני שידור חוזר**: כל הבקשות כוללות כותרת `webhook-timestamp`. חשוב תמיד לאמת את חותמת הזמן הזו בשכבת הגדרות השרת כדי לדחות נתוני payload ישנים יותר מ**5 דקות** (כדי לצמצם את הסיכון למתקפות שידור חוזר).
+- **עיבוד אסינכרוני**: תגובה עם `2xx OK` מיד לאחר זיהוי חתימה תקינה, והוספת פעולות הניתוח לתור באופן פנימי. זמני המתנה ארוכים של המאזינים יפעילו מחזור של ניסיונות מסירה.
+- **טיפול בהסרת כפילויות**: ווּבּהוּקים רגילים מספקים את הנתונים בשיטת 'לפחות פעם אחת'. כדאי להשתמש בכותרת `webhook-id`consistent כדי לטפל בכפילויות פוטנציאליות בזרימות עם עומס גבוה יותר.
 
-## Étape suivante
+## מה השלב הבא?
 
-- [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr) : utilisez des webhooks pour automatiser les points de terminaison à volume élevé.
+- ‫[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he): שימוש ב-webhooks כדי לבצע אוטומציה של נקודות קצה עם נפח גבוה.
 
-Envoyer des commentaires
+שליחת משוב
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Dernière mise à jour le 2026/09/18 (UTC).
+עדכון אחרון: 2026-09-24 (שעון UTC).
 
-Voulez-vous nous donner plus d'informations ?
+רוצה לתת לנו משוב?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/18 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]

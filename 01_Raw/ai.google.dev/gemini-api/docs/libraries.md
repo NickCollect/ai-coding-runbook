@@ -1,55 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=es-419
-fetched_at: 2026-09-21T05:54:40.169019+00:00
-title: "Bibliotecas de la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=pl
+fetched_at: 2026-09-28T06:25:58.492129+00:00
+title: "Biblioteki Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Enviar comentarios
+Prześlij opinię
 
-# Bibliotecas de la API de Gemini
+# Biblioteki Gemini API
 
-Cuando compiles con la API de Gemini, te recomendamos que uses el **SDK de IA generativa de Google**.
-Estas son las bibliotecas oficiales listas para producción que desarrollamos y mantenemos para los lenguajes más populares. [Están disponibles para el público general y se usan en toda nuestra documentación y ejemplos oficiales.](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#new-libraries)
+Podczas tworzenia aplikacji za pomocą interfejsu Gemini API zalecamy korzystanie z **pakietu Google GenAI SDK**.
+Są to oficjalne biblioteki gotowe do użycia w środowisku produkcyjnym, które rozwijamy i utrzymujemy w przypadku najpopularniejszych języków. Są one w fazie [ogólnej dostępności](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#new-libraries) i używane w całej naszej oficjalnej
+dokumentacji oraz we wszystkich przykładach.
 
-Si no conoces la API de Gemini, sigue nuestra [guía de introducción](https://ai.google.dev/gemini-api/docs/get-started?hl=es-419) para comenzar.
+Jeśli dopiero zaczynasz korzystać z interfejsu Gemini API, zapoznaj się z naszym [przewodnikiem dla początkujących](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
 
-## Compatibilidad con lenguajes e instalación
+## Obsługa języków i instalacja
 
-El SDK de IA generativa de Google está disponible para los lenguajes Python, JavaScript/TypeScript, Go y Java. Puedes instalar la biblioteca de cada lenguaje con los administradores de paquetes o visitar sus repositorios de GitHub para obtener más información:
+Pakiet Google GenAI SDK jest dostępny w językach Python, JavaScript/TypeScript, Go i Java. Bibliotekę każdego języka możesz zainstalować za pomocą menedżerów pakietów lub odwiedzić repozytoria GitHub, aby uzyskać więcej informacji:
 
 ### Python
 
-- Biblioteca: [`google-genai`](https://pypi.org/project/google-genai)
-- Repositorio de GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- Instalación: `pip install google-genai`
+- Biblioteka: [`google-genai`](https://pypi.org/project/google-genai)
+- Repozytorium GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- Instalacja: `pip install google-genai`
 
 ### JavaScript
 
-- Biblioteca: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- Repositorio de GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- Instalación: `npm install @google/genai`
+- Biblioteka: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- Repozytorium GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- Instalacja: `npm install @google/genai`
 
 ### Go
 
-- Biblioteca: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- Repositorio de GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- Instalación: `go get google.golang.org/genai`
+- Biblioteka: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- Repozytorium GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- Instalacja: `go get google.golang.org/genai`
 
 ### Java
 
-- Biblioteca: `google-genai`
-- Repositorio de GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- Instalación: Si usas Maven, agrega lo siguiente a tus dependencias:
+- Biblioteka: `google-genai`
+- Repozytorium GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- Instalacja: jeśli używasz Maven, dodaj do zależności ten kod:
 
 ```
 <dependencies>
@@ -63,46 +64,47 @@ El SDK de IA generativa de Google está disponible para los lenguajes Python, Ja
 
 ### C#
 
-- Biblioteca: `Google.GenAI`
-- Repositorio de GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- Instalación: `dotnet add package Google.GenAI`
+- Biblioteka: `Google.GenAI`
+- Repozytorium GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- Instalacja: `dotnet add package Google.GenAI`
 
-## Disponibilidad general
+## Ogólna dostępność
 
-A partir de mayo de 2025, el SDK de IA generativa de Google alcanzó la disponibilidad general (GA) en todas las plataformas compatibles y son las bibliotecas recomendadas para acceder a la API de Gemini.
-Son estables, totalmente compatibles para el uso en producción y se mantienen de forma activa.
-Proporcionan acceso a las funciones más recientes y ofrecen el mejor rendimiento cuando se trabaja con Gemini.
+Od maja 2025 r. pakiet Google GenAI SDK jest ogólnie dostępny na wszystkich obsługiwanych platformach i jest zalecaną biblioteką do uzyskiwania dostępu do interfejsu Gemini API.
+Jest stabilny, w pełni obsługiwany w środowisku produkcyjnym i aktywnie utrzymywany.
+Zapewnia dostęp do najnowszych funkcji i najlepszą wydajność podczas pracy z Gemini.
 
-Si usas una de nuestras bibliotecas heredadas, te recomendamos que migres para que puedas acceder a las funciones más recientes y obtener el mejor rendimiento cuando trabajes con Gemini. Consulta la sección de [bibliotecas heredadas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#previous-sdks) para obtener más información.
+Jeśli używasz jednej z naszych starszych bibliotek, zdecydowanie zalecamy przejście na nową wersję, aby uzyskać dostęp do najnowszych funkcji i najlepszą wydajność podczas pracy z Gemini. Więcej informacji znajdziesz w sekcji [Starsze biblioteki](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#previous-sdks).
 
-## Bibliotecas heredadas y migración
+## Starsze biblioteki i migracja
 
-Si usas una de nuestras bibliotecas heredadas, te recomendamos que
-[migres a las bibliotecas nuevas](https://ai.google.dev/gemini-api/docs/migrate?hl=es-419).
+[Jeśli używasz jednej z naszych starszych bibliotek, zalecamy przejście na nowe biblioteki.](https://ai.google.dev/gemini-api/docs/migrate?hl=pl)
 
-Las bibliotecas heredadas no proporcionan acceso a funciones recientes (como
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=es-419) y [Veo](https://ai.google.dev/gemini-api/docs/video?hl=es-419)) y dejaron de estar disponibles el 30 de noviembre de 2025.
+Starsze biblioteki nie zapewniają dostępu do najnowszych funkcji (takich jak
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl) i [Veo](https://ai.google.dev/gemini-api/docs/video?hl=pl)) i są
+wycofywane z dniem 30 listopada 2025 r.
 
-El estado de compatibilidad de cada biblioteca heredada varía, como se detalla en la siguiente tabla:
+Stan obsługi każdej starszej biblioteki jest inny. Szczegółowe informacje znajdziesz w tabeli poniżej:
 
-| Idioma | Biblioteca heredada | Estado de compatibilidad | Biblioteca recomendada |
+| Język | Starsza biblioteka | Stan obsługi | Zalecana biblioteka |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | No se mantiene de forma activa | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | No se mantiene de forma activa | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | No se mantiene de forma activa | `google.golang.org/genai` |
-| **Dart y Flutter** | `google_generative_ai` | No se mantiene de forma activa | Usa [Genkit Dart](https://genkit.dev/docs/dart/get-started/) o [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | No se mantiene de forma activa | Usa [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=es-419) |
-| **Android** | `generative-ai-android` | No se mantiene de forma activa | Usa [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=es-419) |
+| **Python** | `google-generativeai` | Nie jest aktywnie utrzymywana | `google-genai` |
+| **JavaScript/TypeScript** | `@google/generativeai` | Nie jest aktywnie utrzymywana | `@google/genai` |
+| **Go** | `google.golang.org/generative-ai` | Nie jest aktywnie utrzymywana | `google.golang.org/genai` |
+| **Dart i Flutter** | `google_generative_ai` | Nie jest aktywnie utrzymywana | Użyj [Genkit Dart](https://genkit.dev/docs/dart/get-started/) lub [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
+| **Swift** | `generative-ai-swift` | Nie jest aktywnie utrzymywana | Użyj [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pl) |
+| **Android** | `generative-ai-android` | Nie jest aktywnie utrzymywana | Użyj [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pl) |
 
-**Nota para desarrolladores de Java:** No había un SDK de Java heredado proporcionado por Google para la API de Gemini, por lo que no se requiere ninguna migración desde una biblioteca anterior de Google. Puedes comenzar directamente con la biblioteca nueva en la
-[sección Compatibilidad con lenguajes e instalación](#install).
+**Uwaga dla programistów w Javie:** nie było starszego pakietu SDK Java dostarczonego przez Google dla interfejsu Gemini API, więc nie jest wymagana migracja z poprzedniej biblioteki Google. Możesz
+od razu zacząć korzystać z nowej biblioteki opisanej w
+[sekcji Obsługa języków i instalacja](#install).
 
-Enviar comentarios
+Prześlij opinię
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Última actualización: 2026-06-22 (UTC)
+Ostatnia aktualizacja: 2026-06-22 UTC.
 
-¿Quieres brindar más información?
+Chcesz przekazać coś jeszcze?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=th
-fetched_at: 2026-09-21T05:45:30.489395+00:00
+fetched_at: 2026-09-28T06:14:43.838953+00:00
 title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

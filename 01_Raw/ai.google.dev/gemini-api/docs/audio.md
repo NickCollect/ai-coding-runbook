@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=id
-fetched_at: 2026-09-21T05:54:34.316906+00:00
-title: "Pemahaman audio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=pt-BR
+fetched_at: 2026-09-28T06:35:15.408910+00:00
+title: "Compreens\u00e3o de \u00e1udio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-# Pemahaman audio
+# Compreensão de áudio
 
-Gemini dapat menganalisis input audio dan menghasilkan respons teks.
+O Gemini pode analisar entradas de áudio e gerar respostas de texto.
 
 ### Python
 
@@ -115,6 +115,61 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", &genai.UploadFileConfig{
+        MIMEType: "audio/mp3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    contents := []interactions.Content{
+        interactions.NewContent(interactions.TextContent{
+            Text: "Describe this audio clip",
+        }),
+        interactions.NewContent(interactions.AudioContent{
+            URI:      genai.Ptr(uploadedFile.URI),
+            MimeType: interactions.AudioContentMimeType(uploadedFile.MIMEType).ToPointer(),
+        }),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(contents),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -135,26 +190,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Ringkasan
+## Visão geral
 
-Gemini dapat menganalisis dan memahami input audio serta menghasilkan respons teks, sehingga memungkinkan kasus penggunaan seperti:
+O Gemini pode analisar e entender entradas de áudio e gerar respostas de texto, permitindo casos de uso como:
 
-- Mendeskripsikan, meringkas, atau menjawab pertanyaan tentang konten audio
-- Transkripsi dan terjemahan (speech to text)
-- Diarisasi pembicara (mengidentifikasi pembicara yang berbeda)
-- Deteksi emosi dalam ucapan dan musik
-- Menganalisis segmen tertentu dengan stempel waktu
+- Descrever, resumir ou responder a perguntas sobre conteúdo de áudio
+- Transcrição e tradução (voz para texto)
+- Diarização de locutor (identificação de diferentes locutores)
+- Detecção de emoções na fala e na música
+- Analisar segmentos específicos com carimbos de data/hora
 
-Untuk interaksi suara dan video real-time, lihat
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=id).
-Untuk model speech-to-text khusus dengan dukungan untuk transkripsi real-time,
-gunakan [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=id).
+Para interações de voz e vídeo em tempo real, consulte a
+[API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
+Para modelos dedicados de conversão de voz em texto com suporte à transcrição em tempo real, use a [API Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text?hl=pt-br).
 
-## Mentranskripsikan ucapan menjadi teks
+## Transcrever voz em texto
 
-Contoh ini menunjukkan cara mentranskripsikan, menerjemahkan, dan meringkas ucapan dengan
-stempel waktu, diarization pembicara, dan deteksi emosi menggunakan
-[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id).
+Este exemplo mostra como transcrever, traduzir e resumir falas com
+carimbos de data/hora, diarização de falantes e detecção de emoções usando
+[saídas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br).
 
 ### Python
 
@@ -361,6 +415,93 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    youtubeURL := "https://www.youtube.com/watch?v=ku-N-eS1lgM"
+
+    prompt := "Process the audio file and generate a detailed transcription.\n\n" +
+        "Requirements:\n" +
+        "1. Identify distinct speakers (e.g., Speaker 1, Speaker 2).\n" +
+        "2. Provide accurate timestamps for each segment (Format: MM:SS).\n" +
+        "3. Detect the primary language of each segment.\n" +
+        "4. If not English, provide the English translation.\n" +
+        "5. Identify the primary emotion: Happy, Sad, Angry, or Neutral.\n" +
+        "6. Provide a brief summary at the beginning."
+
+    responseSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "summary": map[string]any{"type": "string"},
+            "segments": map[string]any{
+                "type": "array",
+                "items": map[string]any{
+                    "type": "object",
+                    "properties": map[string]any{
+                        "speaker":   map[string]any{"type": "string"},
+                        "timestamp": map[string]any{"type": "string"},
+                        "content":   map[string]any{"type": "string"},
+                        "language":  map[string]any{"type": "string"},
+                        "emotion": map[string]any{
+                            "type": "string",
+                            "enum": []string{"happy", "sad", "angry", "neutral"},
+                        },
+                    },
+                    "required": []string{"speaker", "timestamp", "content", "emotion"},
+                },
+            },
+        },
+        "required": []string{"summary", "segments"},
+    }
+
+    contents := []interactions.Content{
+        interactions.NewContent(interactions.VideoContent{
+            URI:      genai.Ptr(youtubeURL),
+            MimeType: interactions.VideoContentMimeTypeVideoMp4.ToPointer(),
+        }),
+        interactions.NewContent(interactions.TextContent{
+            Text: prompt,
+        }),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(contents),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(responseSchema),
+            )),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -401,18 +542,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Aplikasi Gemini transkripsi audio multibahasa](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=id)
+![Um app Gemini de transcrição de áudio multilíngue](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=pt-br)
 
-## Input audio
+## Áudio de entrada
 
-Anda dapat memberikan data audio dengan cara berikut:
+Você pode fornecer dados de áudio das seguintes maneiras:
 
-- [Upload file audio](#upload-audio) sebelum membuat permintaan.
-- [Teruskan data audio inline](#inline-audio) dengan permintaan.
+- [Faça upload de um arquivo de áudio](#upload-audio) antes de fazer um pedido.
+- [Transmita dados de áudio inline](#inline-audio) com a solicitação.
 
-### Mengupload file audio
+### Fazer upload de um arquivo de áudio
 
-Gunakan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk file yang lebih besar dari 20 MB.
+Use a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) para arquivos maiores que 20 MB.
 
 ### Python
 
@@ -509,6 +650,62 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+// Upload an audio file using the Files API (recommended for files > 20 MB)
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", &genai.UploadFileConfig{
+        MIMEType: "audio/mp3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    contents := []interactions.Content{
+        interactions.NewContent(interactions.TextContent{
+            Text: "Describe this audio clip",
+        }),
+        interactions.NewContent(interactions.AudioContent{
+            URI:      genai.Ptr(uploadedFile.URI),
+            MimeType: interactions.AudioContentMimeType(uploadedFile.MIMEType).ToPointer(),
+        }),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(contents),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -529,9 +726,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Meneruskan data audio inline
+### Transmitir dados de áudio inline
 
-Untuk file audio kecil dengan ukuran total permintaan di bawah 20 MB:
+Para arquivos de áudio pequenos com menos de 20 MB de tamanho total da solicitação:
 
 ### Python
 
@@ -629,6 +826,62 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    audioBytes, err := os.ReadFile("path/to/small-sample.mp3")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Audio := base64.StdEncoding.EncodeToString(audioBytes)
+
+    contents := []interactions.Content{
+        interactions.NewContent(interactions.TextContent{
+            Text: "Describe this audio clip",
+        }),
+        interactions.NewContent(interactions.AudioContent{
+            Data:     genai.Ptr(base64Audio),
+            MimeType: interactions.AudioContentMimeTypeAudioMp3.ToPointer(),
+        }),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(contents),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -656,13 +909,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Catatan tentang data audio inline:
-\* Ukuran permintaan maksimum adalah total 20 MB (termasuk perintah dan semua file)
-\* Untuk penggunaan ulang, [upload file](#upload-audio) saja
+Observações sobre dados de áudio inline:
+\* O tamanho máximo da solicitação é de 20 MB no total (incluindo comandos e todos os arquivos)
+\* Para reutilização, [faça upload do arquivo](#upload-audio)
 
-## Mendapatkan transkrip
+## Acessar uma transcrição
 
-Untuk mendapatkan transkrip, minta di perintah:
+Para receber uma transcrição, peça no comando:
 
 ### Python
 
@@ -743,9 +996,64 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-## Merujuk pada stempel waktu
+### Go
 
-Gunakan format `MM:SS` untuk merujuk bagian tertentu:
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", &genai.UploadFileConfig{
+        MIMEType: "audio/mp3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    contents := []interactions.Content{
+        interactions.NewContent(interactions.TextContent{
+            Text: "Generate a transcript of the speech.",
+        }),
+        interactions.NewContent(interactions.AudioContent{
+            URI:      genai.Ptr(uploadedFile.URI),
+            MimeType: interactions.AudioContentMimeType(uploadedFile.MIMEType).ToPointer(),
+        }),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(contents),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
+## Consulte os carimbos de data/hora
+
+Use o formato `MM:SS` para fazer referência a seções específicas:
 
 ### Python
 
@@ -821,9 +1129,64 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-## Menghitung token
+### Go
 
-Menghitung token dalam file audio:
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", &genai.UploadFileConfig{
+        MIMEType: "audio/mp3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    contents := []interactions.Content{
+        interactions.NewContent(interactions.TextContent{
+            Text: "Provide a transcript from 02:30 to 03:29.",
+        }),
+        interactions.NewContent(interactions.AudioContent{
+            URI:      genai.Ptr(uploadedFile.URI),
+            MimeType: interactions.AudioContentMimeType(uploadedFile.MIMEType).ToPointer(),
+        }),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(contents),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
+## Contar tokens
+
+Contar tokens em um arquivo de áudio:
 
 ### Python
 
@@ -875,9 +1238,52 @@ CountTokensResponse response =
 System.out.println(response);
 ```
 
-## Format audio yang didukung
+### Go
 
-Gemini mendukung jenis MIME format audio berikut:
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/sample.mp3", &genai.UploadFileConfig{
+        MIMEType: "audio/mp3",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    response, err := client.Models.CountTokens(
+        ctx,
+        "gemini-3.8-flash",
+        []*genai.Content{
+            genai.NewContentFromURI(uploadedFile.URI, uploadedFile.MIMEType, genai.RoleUser),
+        },
+        nil,
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(response.TotalTokens)
+}
+```
+
+## Formatos de áudio compatíveis
+
+O Gemini é compatível com os seguintes tipos MIME de formato de áudio:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -887,36 +1293,36 @@ Gemini mendukung jenis MIME format audio berikut:
 - FLAC - `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
-- L16 - `audio/l16`
+- L16: `audio/l16`
 - Opus - `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-Untuk mengetahui daftar lengkap jenis MIME dan skema parameter yang didukung, lihat [referensi Interactions API](https://ai.google.dev/api/interactions-api?hl=id#Resource:Content).
+Para conferir a lista completa de tipos MIME e esquemas de parâmetros aceitos, consulte a [Referência da API Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br#Resource:Content).
 
-## Detail teknis tentang audio
+## Detalhes técnicos sobre o áudio
 
-- **Token**: 32 token per detik audio (1 menit = 1.920 token)
-- **Non-ucapan**: Gemini memahami suara non-ucapan (kicauan burung, sirene, dll.)
-- **Panjang maksimum**: audio berdurasi 9,5 jam per perintah
-- **Resolusi**: Di-downsample menjadi 16 Kbps
-- **Saluran**: Audio multisaluran digabungkan ke satu saluran
+- **Tokens**: 32 tokens por segundo de áudio (1 minuto = 1.920 tokens)
+- **Não verbal**: o Gemini entende sons não verbais (canto de pássaros, sirenes etc.).
+- **Duração máxima**: 9,5 horas de áudio por comando
+- **Resolução**: redução da taxa de amostragem para 16 Kbps
+- **Canais**: áudio multicanal combinado em um único canal
 
-## Langkah berikutnya
+## A seguir
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id): Mengupload dan mengelola file audio
-- [Petunjuk sistem](https://ai.google.dev/gemini-api/docs/text-generation?hl=id#system-instructions):
-  Menyesuaikan perilaku model
-- [Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id):
-  Mendapatkan hasil transkripsi dalam format JSON
+- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br): faça upload e gerencie arquivos de áudio.
+- [Instruções do sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#system-instructions):
+  Personalize o comportamento do modelo
+- [Resposta estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br):
+  receba resultados de transcrição no formato JSON
 
-Kirim masukan
+Envie comentários
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Terakhir diperbarui pada 2026-09-18 UTC.
+Última atualização 2026-09-24 UTC.
 
-Ada masukan untuk kami?
+Quer enviar seu feedback?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-18 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-24 UTC."],[],[]]

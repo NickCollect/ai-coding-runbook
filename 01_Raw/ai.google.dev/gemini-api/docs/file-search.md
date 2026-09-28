@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=ja
-fetched_at: 2026-09-21T05:55:04.835313+00:00
-title: "\u30d5\u30a1\u30a4\u30eb\u691c\u7d22 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=he
+fetched_at: 2026-09-28T06:15:57.694502+00:00
+title: "\u05d7\u05d9\u05e4\u05d5\u05e9 \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-フィードバックを送信
+שליחת משוב
 
-# ファイル検索
+# חיפוש קבצים
 
-Gemini API では、ファイル検索ツールを使用して検索拡張生成（RAG）が可能です。ファイル検索は、データをインポート、チャンク化、インデックス登録して、指定されたプロンプトに基づいて関連情報をすばやく取得できるようにします。取得した情報はモデルのコンテキストとして使用され、より正確で関連性の高い回答を提供できるようになります。ファイル検索では、`gemini-embedding-001` でサポートされているテキスト エンベディングと、`gemini-embedding-2` でサポートされている画像/マルチモーダル エンベディングを使用して、マルチモーダル機能を提供することもできます。
+‫Gemini API מאפשר יצירה משולבת-אחזור (RAG) באמצעות הכלי File Search. התכונה 'חיפוש קבצים' מייבאת את הנתונים, מחלקת אותם לחלקים ויוצרת אינדקס כדי לאפשר שליפה מהירה של מידע רלוונטי על סמך הנחיה שסופקה. המידע הזה משמש כהקשר למודל, וכך הוא יכול לספק תשובות מדויקות ורלוונטיות יותר. חיפוש קבצים יכול גם לספק יכולות מולטי-מודאליות עם הטמעות טקסט שנתמכות על ידי `gemini-embedding-001`, והטמעות תמונות/מולטי-מודאליות שנתמכות על ידי `gemini-embedding-2`.
 
-クエリ時のファイル ストレージとエンベディング生成は無料です。エンベディングの作成に対してのみ料金が発生します。これは、最初にファイルをインデックス登録するときと、通常の Gemini モデルの入力 / 出力トークンの費用です。この新しい課金パラダイムにより、ファイル検索ツールをより簡単に、費用対効果の高い方法で構築してスケーリングできます。詳細については、[料金](#pricing)セクションをご覧ください。
+אחסון קבצים ויצירת הטמעה בזמן השאילתה הם בחינם, ותשלמו רק על יצירת הטמעות כשמבצעים אינדוקס לקבצים בפעם הראשונה, ועל העלות הרגילה של טוקנים של קלט / פלט במודל Gemini. הפרדיגמה החדשה הזו של חיוב מאפשרת לבנות את הכלי לחיפוש קבצים ולהרחיב אותו בקלות וביעילות מבחינת עלויות. פרטים נוספים מופיעים בקטע [תמחור](#pricing).
 
-## ファイル検索ストアに直接アップロードする
+## העלאה ישירה למאגר של חיפוש קבצים
 
-この例は、[ファイル検索ストア](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-media.uploadtofilesearchstore)にファイルを直接アップロードする方法を示しています。
+בדוגמה הזו אפשר לראות איך מעלים קובץ ישירות אל [מאגר הקבצים לחיפוש](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore):
 
 ### Python
 
@@ -219,6 +219,103 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fileSearchStore, err := client.FileSearchStores.Create(ctx, &genai.CreateFileSearchStoreConfig{
+        DisplayName:    "your-fileSearchStore-name",
+        EmbeddingModel: "models/gemini-embedding-2",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    operation, err := client.FileSearchStores.UploadToFileSearchStoreFromPath(
+        ctx,
+        "sample.txt",
+        fileSearchStore.Name,
+        &genai.UploadToFileSearchStoreConfig{
+            DisplayName: "display-file-name",
+        },
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for !operation.Done {
+        time.Sleep(5 * time.Second)
+        operation, err = client.Operations.GetUploadToFileSearchStoreOperation(ctx, operation, nil)
+        if err != nil {
+            log.Fatal(err)
+        }
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Can you tell me about [insert question]"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{fileSearchStore.Name},
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    fmt.Println(content.TextContent.Text)
+                    if len(content.TextContent.Annotations) > 0 {
+                        fmt.Println("\nSources:")
+                        for _, annotation := range content.TextContent.Annotations {
+                            if annotation.FileCitation != nil {
+                                c := annotation.FileCitation
+                                fileName := ""
+                                if c.FileName != nil {
+                                    fileName = *c.FileName
+                                }
+                                source := ""
+                                if c.Source != nil {
+                                    source = *c.Source
+                                }
+                                fmt.Printf("  - %s: %s\n", fileName, source)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -268,11 +365,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-詳しくは、[`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-media.uploadtofilesearchstore) の API リファレンスをご覧ください。
+מידע נוסף זמין במאמרי העזרה של ה-API בנושא [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore).
 
-## ファイルのインポート
+## ייבוא קבצים
 
-または、既存のファイルをアップロードして、[ファイル検索ストアにインポート](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-filesearchstores.importfile)することもできます。
+לחלופין, אפשר להעלות קובץ קיים ו[לייבא אותו למאגר של חיפוש הקבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile):
 
 ### Python
 
@@ -444,6 +541,86 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    sampleFile, err := client.Files.UploadFromPath(ctx, "sample.txt", &genai.UploadFileConfig{
+        DisplayName: "display_file_name",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fileSearchStore, err := client.FileSearchStores.Create(ctx, &genai.CreateFileSearchStoreConfig{
+        DisplayName:    "your-fileSearchStore-name",
+        EmbeddingModel: "models/gemini-embedding-2",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    operation, err := client.FileSearchStores.ImportFile(ctx, fileSearchStore.Name, sampleFile.Name, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for !operation.Done {
+        time.Sleep(5 * time.Second)
+        operation, err = client.Operations.GetImportFileOperation(ctx, operation, nil)
+        if err != nil {
+            log.Fatal(err)
+        }
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Can you tell me about [insert question]"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{fileSearchStore.Name},
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    fmt.Println(content.TextContent.Text)
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -498,11 +675,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-詳しくは、[`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#method:-filesearchstores.importfile) の API リファレンスをご覧ください。
+מידע נוסף זמין במאמרי העזרה של ה-API בנושא [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile).
 
-## チャンク構成
+## הגדרות חלוקה לחלקים
 
-ファイルをファイル検索ストアにインポートすると、ファイルは自動的にチャンクに分割され、埋め込み、インデックス登録され、ファイル検索ストアにアップロードされます。チャンク分割戦略をより詳細に制御する必要がある場合は、[`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=ja#request-body_5) 設定を指定して、チャンクあたりの最大トークン数と重複するトークンの最大数を設定できます。
+כשמייבאים קובץ למאגר חיפוש קבצים, הוא מפורק אוטומטית לחלקים, מוטמע, עובר אינדוקס ועולה למאגר חיפוש הקבצים. אם אתם רוצים שליטה רבה יותר באסטרטגיית חלוקת הטקסט לחלקים, אתם יכולים לציין הגדרה של [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#request-body_5) כדי להגדיר מספר מקסימלי של טוקנים לכל חלק ומספר מקסימלי של טוקנים חופפים.
 
 ### Python
 
@@ -596,6 +773,57 @@ while (!operation.done().orElse(false)) {
 System.out.println("Custom chunking complete.");
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    operation, err := client.FileSearchStores.UploadToFileSearchStoreFromPath(
+        ctx,
+        "sample.txt",
+        "fileSearchStores/my-file-search-store",
+        &genai.UploadToFileSearchStoreConfig{
+            DisplayName: "file-name",
+            ChunkingConfig: &genai.ChunkingConfig{
+                WhiteSpaceConfig: &genai.WhiteSpaceConfig{
+                    MaxTokensPerChunk: genai.Ptr(int32(200)),
+                    MaxOverlapTokens:  genai.Ptr(int32(20)),
+                },
+            },
+        },
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for !operation.Done {
+        time.Sleep(5 * time.Second)
+        operation, err = client.Operations.GetUploadToFileSearchStoreOperation(ctx, operation, nil)
+        if err != nil {
+            log.Fatal(err)
+        }
+    }
+
+    fmt.Println("Custom chunking complete.")
+}
+```
+
 ### REST
 
 ```
@@ -629,33 +857,37 @@ curl "${upload_url}" \
 cat upload_response.json
 ```
 
-ファイル検索ストアを使用するには、[アップロード](#upload)と[インポート](#importing-files)の例に示すように、ツールとして `interactions.create` メソッドに渡します。
+כדי להשתמש בחנות שלכם לחיפוש קבצים, מעבירים אותה ככלי לשיטה `interactions.create`, כמו בדוגמאות של [העלאה](#upload) ו[ייבוא](#importing-files).
 
-## 仕組み
+## איך זה עובד
 
-ファイル検索では、セマンティック検索と呼ばれる手法を使用して、ユーザーのプロンプトに関連する情報を見つけます。標準的なキーワード ベースの検索とは異なり、セマンティック検索はクエリの意味とコンテキストを理解します。
+חיפוש הקבצים משתמש בטכניקה שנקראת חיפוש סמנטי כדי למצוא מידע שרלוונטי להנחיה של המשתמש. בניגוד לחיפוש רגיל שמבוסס על מילות מפתח, חיפוש סמנטי מבין את המשמעות וההקשר של השאילתה.
 
-ファイルをインポートすると、アップロードされたコンテンツのセマンティックな意味を捉えた[エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)と呼ばれる数値表現に変換されます。これらのエンベディングは、専用のファイル検索データベースに保存されます。クエリを行うと、クエリもエンベディングに変換されます。次に、システムはファイル検索を実行して、ファイル検索ストアから最も類似した関連性の高いドキュメント チャンクを見つけます。
+כשמייבאים קובץ, הוא מומר לייצוגים מספריים שנקראים [הטמעות](https://ai.google.dev/gemini-api/docs/embeddings?hl=he), שמשקפים את המשמעות הסמנטית של התוכן שהועלה. ההטמעות האלה מאוחסנות במסד נתונים ייעודי של חיפוש קבצים.
+כשמבצעים שאילתה, היא מומרת גם להטמעה. לאחר מכן, המערכת מבצעת חיפוש בקובץ כדי למצוא את חלקי המסמך הדומים והרלוונטיים ביותר ממאגר החיפוש בקובץ.
 
-エンベディングには有効期間（TTL）はありません。手動で削除されるか、モデルが非推奨になるまで保持されます。ただし、ファイルは 48 時間後に削除されます。
+אין אורך חיים (TTL) להטמעות. הן נשמרות עד למחיקה ידנית או עד שהמודל יוצא משימוש. אבל הקבצים נמחקים אחרי 48 שעות.
 
-ファイル検索 `uploadToFileSearchStore` API を使用する手順は次のとおりです。
+פירוט התהליך לשימוש ב-File Search
+`uploadToFileSearchStore` API:
 
-1. **ファイル検索ストアを作成する**: ファイル検索ストアには、ファイルから処理されたデータが含まれます。これは、セマンティック検索が動作するエンベディングの永続コンテナです。
-2. **ファイルをアップロードしてファイル検索ストアにインポートする**: ファイルをアップロードすると同時に、結果をファイル検索ストアにインポートします。これにより、未加工ドキュメントへの参照である一時的な `File` オブジェクトが作成されます。このデータはチャンク化され、ファイル検索エンベディングに変換されて、インデックスが作成されます。`File` オブジェクトは 48 時間後に削除されますが、ファイル検索ストアにインポートされたデータは、削除するまで無期限に保存されます。
-3. **ファイル検索でクエリを実行する**: 最後に、`generateContent` 呼び出しで `FileSearch` ツールを使用します。ツール構成で、検索する `FileSearchStore` を指す `FileSearchRetrievalResource` を指定します。これにより、モデルは特定のファイル検索ストアに対してセマンティック検索を実行し、回答のグラウンディングに関連する情報を検索します。
+1. **יצירת מאגר חיפוש קבצים**: מאגר חיפוש קבצים מכיל את הנתונים המעובדים מהקבצים שלכם. זהו מאגר קבוע של ההטמעות שעליהן יפעל החיפוש הסמנטי.
+2. **העלאת קובץ וייבוא שלו למאגר של חיפוש קבצים**: אפשר להעלות קובץ ולייבא את התוצאות למאגר של חיפוש קבצים בו-זמנית. הפעולה הזו יוצרת אובייקט `File` זמני, שהוא הפניה למסמך הגולמי. הנתונים האלה מחולקים לחלקים, מומרים להטמעות של חיפוש קבצים ומתווספים לאינדקס. האובייקט `File`
+   יימחק אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש הקבצים יישמרו ללא הגבלת זמן עד שתבחרו למחוק אותם.
+3. **שאילתה באמצעות חיפוש קבצים**: לבסוף, משתמשים בכלי `FileSearch` בשיחה עם `generateContent`. בהגדרת הכלי, מציינים `FileSearchRetrievalResource`, שמפנה אל `FileSearchStore` שרוצים לחפש. ההוראה הזו אומרת למודל לבצע חיפוש סמנטי במאגר הספציפי הזה של חיפושי קבצים כדי למצוא מידע רלוונטי שיוכל לשמש בסיס לתשובה.
 
-![ファイル検索のインデックス登録とクエリのプロセス](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=ja)
+![תהליך ההוספה לאינדקס והשאילתה בחיפוש הקבצים](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=he)
 
-ファイル検索のインデックス登録とクエリのプロセス
+תהליך ההוספה לאינדקס והשאילתות בחיפוש הקבצים
 
-この図では、*ドキュメント*から*エンベディング モデル*（[`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja) を使用）への点線は、`uploadToFileSearchStore` API（*ファイル ストレージ*をバイパス）を表しています。それ以外の場合、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してファイルを個別に作成してからインポートすると、インデックス登録プロセスが *Documents* から *File storage* に移動し、*Embedding model* に移動します。
+בתרשים הזה, הקו המקווקו מ*מסמכים* אל *מודל הטמעה* (באמצעות [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)) מייצג את `uploadToFileSearchStore` API (עוקף את *אחסון הקבצים*).
+אחרת, שימוש ב-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=he) כדי ליצור בנפרד ואז לייבא קבצים מעביר את תהליך יצירת האינדקס מ-*Documents* ל-*File storage* ואז ל-*Embedding model*.
 
-## ファイル検索ストア
+## מאגרי חיפוש קבצים
 
-ファイル検索ストアは、ドキュメント エンベディングのコンテナです。File API を介してアップロードされた未加工ファイルは 48 時間後に削除されますが、ファイル検索ストアにインポートされたデータは、手動で削除するまで無期限に保存されます。複数のファイル検索ストアを作成して、ドキュメントを整理できます。`FileSearchStore` API を使用すると、ファイル検索ストアの作成、一覧表示、取得、削除を行って管理できます。ファイル検索ストア名はグローバル スコープです。
+מאגר חיפוש קבצים הוא מאגר להטמעות של המסמכים שלכם. קובצי RAW שהועלו דרך File API נמחקים אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש קבצים נשמרים ללא הגבלת זמן עד שמחקים אותם באופן ידני. אתם יכולים ליצור כמה מאגרי חיפוש קבצים כדי לארגן את המסמכים שלכם. ‫`FileSearchStore` API מאפשר לכם ליצור, להציג, לקבל ולמחוק כדי לנהל את חנויות החיפוש של הקבצים. שמות המאגרים של חיפוש הקבצים הם בהיקף גלובלי.
 
-ファイル検索ストアの管理方法の例を次に示します。
+הנה כמה דוגמאות לניהול מאגרי חיפוש קבצים:
 
 ### Python
 
@@ -728,6 +960,56 @@ client.fileSearchStores.delete(
     fileSearchStore.name().get(), DeleteFileSearchStoreConfig.builder().force(true).build());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fileSearchStore, err := client.FileSearchStores.Create(ctx, &genai.CreateFileSearchStoreConfig{
+        DisplayName:    "myfilesearchstore123",
+        EmbeddingModel: "models/gemini-embedding-2",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for store, err := range client.FileSearchStores.All(ctx) {
+        if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Println(store)
+    }
+
+    myFileSearchStore, err := client.FileSearchStores.Get(ctx, fileSearchStore.Name, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = myFileSearchStore
+
+    err = client.FileSearchStores.Delete(ctx, fileSearchStore.Name, &genai.DeleteFileSearchStoreConfig{
+        Force: genai.Ptr(true),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -742,9 +1024,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123?key=${GEMINI_API_KEY}"
 ```
 
-## ファイル検索のドキュメント
+## מסמכים בחיפוש קבצים
 
-[ファイル検索ドキュメント](https://ai.google.dev/api/file-search/documents?hl=ja) API を使用して、ファイル ストア内の個々のドキュメントを管理できます。この API を使用すると、ファイル検索ストア内の各ドキュメントの `list`、ドキュメントに関する情報の `get`、名前によるドキュメントの `delete` を行うことができます。
+אתם יכולים לנהל מסמכים בודדים במאגרי הקבצים באמצעות [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=he) API כדי `list` כל מסמך במאגר קבצים לחיפוש, `get` מידע על מסמך ו`delete` מסמך לפי שם.
 
 ### Python
 
@@ -802,6 +1084,48 @@ client.fileSearchStores.documents.delete(
     DeleteDocumentConfig.builder().force(true).build());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for documentInStore, err := range client.FileSearchStores.Documents.All(ctx, "fileSearchStores/myfilesearchstore123") {
+        if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Println(documentInStore)
+    }
+
+    fileSearchDocument, err := client.FileSearchStores.Documents.Get(ctx, "fileSearchStores/myfilesearchstore123/documents/sampletxt123", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(fileSearchDocument)
+
+    err = client.FileSearchStores.Documents.Delete(ctx, "fileSearchStores/myfilesearchstore123/documents/sampletxt123", &genai.DeleteDocumentConfig{
+        Force: genai.Ptr(true),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -812,9 +1136,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123/documents/sampletxt123?key=${GEMINI_API_KEY}&force=true"
 ```
 
-## ファイルのメタデータ
+## מטא-נתונים של קבצים
 
-ファイルにカスタム メタデータを追加すると、ファイルをフィルタしたり、追加のコンテキストを提供したりするのに役立ちます。メタデータは Key-Value ペアのセットです。
+אתם יכולים להוסיף מטא-נתונים מותאמים אישית לקבצים כדי לסנן אותם או לספק הקשר נוסף. מטא-נתונים הם קבוצה של צמדי מפתח/ערך.
 
 ### Python
 
@@ -869,7 +1193,44 @@ ImportFileOperation op =
             .build());
 ```
 
-これは、ファイル検索ストアに複数のドキュメントがあり、そのサブセットのみを検索する場合に便利です。
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    op, err := client.FileSearchStores.ImportFile(
+        ctx,
+        "fileSearchStores/myfilesearchstore123",
+        "files/samplefile123",
+        &genai.ImportFileConfig{
+            CustomMetadata: []*genai.CustomMetadata{
+                {Key: "author", StringValue: "Robert Graves"},
+                {Key: "year", NumericValue: genai.Ptr(float32(1934))},
+            },
+        },
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = op
+}
+```
+
+האפשרות הזו שימושית אם יש לכם כמה מסמכים במאגר של חיפוש קבצים ואתם רוצים לחפש רק בחלק מהם.
 
 ### Python
 
@@ -965,6 +1326,58 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Tell me about the book 'I, Claudius'"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{"fileSearchStores/myfilesearchstore123"},
+                        MetadataFilter:       genai.Ptr(`author="Robert Graves"`),
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    fmt.Println(content.TextContent.Text)
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -985,15 +1398,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-`metadata_filter` のリストフィルタ構文の実装に関するガイダンスについては、[google.aip.dev/160](https://google.aip.dev/160) をご覧ください。
+הנחיות להטמעה של תחביר מסנן רשימה עבור `metadata_filter` זמינות בכתובת [google.aip.dev/160](https://google.aip.dev/160)
 
-## マルチモーダル ファイル検索
+## חיפוש קבצים מרובה מצבים
 
-マルチモーダル ファイル検索を使用すると、画像をネイティブに埋め込んで検索できるため、リッチなマルチモーダル RAG アプリケーションを構築できます。
+התכונה 'חיפוש קבצים מולטימודאלי' מאפשרת להטמיע תמונות ולחפש בתוכן שלהן באופן מקורי,
+וכך ליצור אפליקציות RAG מולטימודאליות ועשירות.
 
-### エンベディング モデルを構成する
+### הגדרת מודל ההטמעה
 
-`FileSearchStore` を作成する場合は、デフォルトのテキストのみのエンベディング モデルをオーバーライドして、マルチモーダル モデルを使用する必要があります。`models/gemini-embedding-2` を使用して、テキストと画像の両方を処理します。
+כשיוצרים `FileSearchStore`, צריך להחליף את מודל ברירת המחדל להטמעה של טקסט בלבד במודל multi-modal. משתמשים ב-`models/gemini-embedding-2` כדי לעבד טקסט ותמונות.
 
 ### Python
 
@@ -1034,6 +1448,36 @@ FileSearchStore store =
             .build());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    store, err := client.FileSearchStores.Create(ctx, &genai.CreateFileSearchStoreConfig{
+        DisplayName:    "Multimodal Catalog",
+        EmbeddingModel: "models/gemini-embedding-2",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = store
+}
+```
+
 ### REST
 
 ```
@@ -1045,20 +1489,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### 画像のアップロード
+### העלאת תמונות
 
-マルチモーダル エンベディング モデルを使用してストアを作成したら、[ファイル検索ストアに直接アップロードする](#upload)または[ファイルのインポート](#importing-files)で説明されている同じアップロード API を使用して、画像ファイルを直接アップロードできます。
+אחרי שיוצרים את המאגר באמצעות מודל הטמעה מולטימודאלי, אפשר להעלות קבצי תמונות ישירות באמצעות אותם ממשקי API להעלאה שמתוארים במאמרים [העלאה ישירה למאגר של חיפוש קבצים](#upload) או [ייבוא קבצים](#importing-files).
 
-**画像ファイルの要件:**
+**הדרישות לגבי קובץ תמונה:**
 
-- 画像ファイルの解像度は 4K x 4K ピクセル以下にする必要があります。
-- サポートされている形式は PNG、JPEG です。
+- קבצי התמונות צריכים להיות ברזולוציה של 4K x 4K פיקסלים לכל היותר.
+- הפורמטים הנתמכים הם PNG ו-JPEG.
 
-## 引用
+## ציטוטים ביבליוגרפיים
 
-ファイル検索を使用すると、モデルの回答に、アップロードしたドキュメントのどの部分が回答の生成に使用されたかを指定する引用が含まれることがあります。これはファクト チェックと検証に役立ちます。
+כשמשתמשים בחיפוש קבצים, התשובה של המודל עשויה לכלול ציטוטים שמציינים אילו חלקים מהמסמכים שהועלו שימשו ליצירת התשובה. המידע הזה עוזר בבדיקת עובדות ובאימות.
 
-引用情報には、レスポンスの `model_output` ステップの `content` ブロック内の `annotations` 属性を介してアクセスできます。
+אפשר לגשת לפרטי הציטוט דרך מאפיין `annotations` בתוך בלוקים של תגובה `content` בשלב `model_output`.
 
 ### Python
 
@@ -1135,6 +1579,57 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Can you tell me about [insert question]"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{"fileSearchStores/myfilesearchstore123"},
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil && len(content.TextContent.Annotations) > 0 {
+                    fmt.Println(content.TextContent.Annotations)
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1160,11 +1655,12 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-引用の構造の詳細については、[インタラクションの API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja#Resource:FileCitation)をご覧ください。
+מידע מפורט על מבנה הציטוטים זמין במאמר [מאמרי העזרה של ה-API לאינטראקציות](https://ai.google.dev/api/interactions-api?hl=he#Resource:FileCitation).
 
-### ページ番号
+### מספרי דפים
 
-ページがあるドキュメント（PDF など）でファイル検索を使用すると、モデルの回答に情報が見つかったページ番号が含まれることがあります。この情報には、`file_citation` アノテーションの `page_number` 属性からアクセスできます。
+כשמשתמשים בחיפוש קבצים עם מסמכים שיש להם דפים (כמו קובצי PDF), התשובה של המודל עשויה לכלול את מספר הדף שבו נמצא המידע.
+אפשר לגשת למידע הזה דרך מאפיין `page_number` של הערה מסוג `file_citation`.
 
 ### Python
 
@@ -1256,6 +1752,61 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Can you tell me about [insert question]"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{"fileSearchStores/myfilesearchstore123"},
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    for _, annotation := range content.TextContent.Annotations {
+                        if annotation.FileCitation != nil && annotation.FileCitation.PageNumber != nil {
+                            fmt.Println("Cited Page:", *annotation.FileCitation.PageNumber)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1282,11 +1833,11 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### メディアでの引用
+### ציטוטים של מדיה
 
-モデルが生成中に画像チャンクを参照すると、API は `media_id` を含むアノテーションで `file_citation` 型のアノテーションを返します。この ID を使用して、モデルが参照した正確な画像チャンクをダウンロードできます。この `media_id` は複数の検索呼び出しにわたって永続化されるため、ID を使用して同じ画像を確実に取得したり、キャッシュに保存したりできます。
+כשהמודל מתייחס לחלק של תמונה במהלך היצירה, ה-API מחזיר הערה מהסוג `file_citation` בהערות שכוללת `media_id`. אפשר להשתמש במזהה הזה כדי להוריד את נתח התמונה המדויק שהמודל התייחס אליו. הערך הזה `media_id` נשמר בכמה קריאות חיפוש, כך שאפשר לאחזר את אותה תמונה באופן מהימן או לשמור אותה במטמון באמצעות המזהה.
 
-次のスニペットは、REST レスポンス ステップの例です。
+קטע הקוד הבא הוא דוגמה לשלב של תגובת REST:
 
 ```
 {
@@ -1307,7 +1858,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-次のコード スニペットは、`media_id` を取得してメディアをダウンロードする方法を示しています。
+בדוגמאות הקוד הבאות אפשר לראות איך מאחזרים את `media_id` ומורידים את המדיה:
 
 ### Python
 
@@ -1405,6 +1956,66 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Can you tell me about [insert question]"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{"fileSearchStores/myfilesearchstore123"},
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    for _, annotation := range content.TextContent.Annotations {
+                        if annotation.FileCitation != nil && annotation.FileCitation.MediaID != nil {
+                            fmt.Println("Cited Media ID:", *annotation.FileCitation.MediaID)
+                            blobContent, err := client.FileSearchStores.DownloadMedia(ctx, *annotation.FileCitation.MediaID, nil)
+                            if err != nil {
+                                log.Fatal(err)
+                            }
+                            _ = blobContent
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1412,9 +2023,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## カスタム メタデータ
+## מטא-נתונים בהתאמה אישית
 
-ファイルにカスタム メタデータを追加した場合は、モデルのレスポンスのアノテーションでアクセスできます。これは、ソースドキュメントからアプリケーション ロジックに追加のコンテキスト（URL、ページ番号、著者など）を渡す場合に便利です。`file_citation` タイプの各引用アノテーションには、このカスタム メタデータが含まれます。
+אם הוספתם מטא-נתונים מותאמים אישית לקבצים, תוכלו לגשת אליהם בהערות של תשובת המודל. האפשרות הזו שימושית להעברת הקשר נוסף (כמו כתובות URL, מספרי דפים או מחברים) ממסמכי המקור ללוגיקה של האפליקציה. כל הערת ציטוט מסוג `file_citation` מכילה את המטא-נתונים המותאמים אישית האלה.
 
 ### Python
 
@@ -1515,6 +2126,59 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Tell me about [insert question]"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{"fileSearchStores/myfilesearchstore123"},
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    for _, annotation := range content.TextContent.Annotations {
+                        fmt.Println(annotation)
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1549,9 +2213,9 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-## 構造化出力
+## פלט מובנה
 
-Gemini 3 モデル以降では、ファイル検索ツールと[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を組み合わせることができます。
+החל ממודלים של Gemini 3, אפשר לשלב את הכלי לחיפוש קבצים עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
 
 ### Python
 
@@ -1680,6 +2344,72 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    moneyJsonSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "amount": map[string]any{
+                "type":        "string",
+                "description": "The numerical part of the amount.",
+            },
+            "currency": map[string]any{
+                "type":        "string",
+                "description": "The currency of amount.",
+            },
+        },
+        "required": []string{"amount", "currency"},
+    }
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   moneyJsonSchema,
+        }),
+    )
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("What is the minimum hourly wage in Tokyo right now?"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.FileSearch{
+                        FileSearchStoreNames: []string{"fileSearchStores/myfilesearchstore123"},
+                    }),
+                },
+                ResponseFormat: &format,
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -1709,26 +2439,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## サポートされているモデル
+## מודלים נתמכים
 
-次のモデルはファイル検索をサポートしています。
+המודלים הבאים תומכים בחיפוש קבצים:
 
-| モデル | ファイル検索 |
+| מודל | חיפוש קבצים |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=ja) | ✔️ |
-| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=ja) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ja) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
-| [Gemini 3.1 Pro プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
+| ‫[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=he) | ✔️ |
+| ‫[Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=he) | ✔️ |
+| ‫[Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=he) | ✔️ |
+| ‫[Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=he) | ✔️ |
+| ‫[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | ✔️ |
+| ‫[Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
+| [תצוגה מקדימה של Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
 
-## サポートされているファイル形式
+## סוגי קבצים נתמכים
 
-ファイル検索は、次のセクションに記載されている幅広いファイル形式をサポートしています。
+החיפוש בקבצים תומך במגוון רחב של פורמטים של קבצים, שמפורטים בקטעים הבאים.
 
-### アプリケーション ファイルの種類
+### סוגי קבצים של אפליקציות
 
 - `application/dart`
 - `application/ecmascript`
@@ -1761,7 +2491,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `application/xml`
 - `application/zip`
 
-### テキスト ファイル形式
+### סוגים של קובצי טקסט
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1920,40 +2650,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## 制限事項
+## מגבלות
 
-- **Live API:** [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) ではファイル検索は対象外です。
-- **ツールの互換性がない:** 組み込みのグラウンディング ツールを組み合わせることはできません。たとえば、同じリクエストでファイル検索を [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)や [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)と同時に使用することはできません。
+- ‫**Live API:** חיפוש קבצים לא נתמך ב-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
+- **אי-תאימות בין כלים:** אי אפשר לשלב בין כלי העיגון המובנים. לדוגמה, אי אפשר להשתמש בחיפוש קבצים בו-זמנית עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) או עם [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he) באותה בקשה.
 
-### レート上限
+### מגבלות קצב
 
-File Search API には、サービスの安定性を維持するため、次の制限が適用されます。
+כדי לשמור על יציבות השירות, יש מגבלות על File Search API:
 
-- **最大ファイルサイズ / ドキュメントあたりの上限**: 100 MB
-- **プロジェクト ファイル検索ストアの合計サイズ**（ユーザーの階層に基づく）:
-  - **無料**: 1 GB
-  - **Tier 1**: 10 GB
-  - **Tier 2**: 100 GB
-  - **Tier 3**: 1 TB
-- **推奨事項**: 最適な取得レイテンシを確保するため、各ファイル検索ストアのサイズを 20 GB 未満に制限します。
+- **גודל קובץ מקסימלי / מגבלה לכל מסמך**: 100MB
+- **הגודל הכולל של מאגרי חיפוש הקבצים בפרויקט** (על סמך רמת המשתמש):
+  - **בחינם**: 1GB
+  - **רמה 1**: 10GB
+  - **רמה 2**: 100GB
+  - **רמה 3**: 1TB
+- **המלצה**: כדי להבטיח חביון אופטימלי של אחזור נתונים, כדאי להגביל את הגודל של כל מאגר של חיפוש קבצים ל-20GB.
 
-## 料金
+## תמחור
 
-- エンベディングの料金は、既存の[エンベディングの料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-embedding-2)に基づいて、インデックス登録時に請求されます。
-- ストレージは無料です。
-- クエリタイム エンベディングは無料です。
-- 取得したドキュメント トークンは、通常の[コンテキスト トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)として課金されます。
+- החיוב על הטמעות מתבצע בזמן יצירת האינדקס, על סמך [תמחור ההטמעות](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-embedding-2) הקיים.
+- האחסון הוא בחינם.
+- הטמעות של שאילתות בזמן אמת הן בחינם.
+- האסימונים של המסמכים שאוחזרו מחויבים בתור [אסימוני הקשר](https://ai.google.dev/gemini-api/docs/tokens?hl=he) רגילים.
 
-## 次のステップ
+## המאמרים הבאים
 
-- [ファイル検索ストア](https://ai.google.dev/api/file-search/file-search-stores?hl=ja)とファイル検索[ドキュメント](https://ai.google.dev/api/file-search/documents?hl=ja)の API リファレンスをご覧ください。
+- אפשר לעיין במאמרי העזרה של ה-API בנושא [מאגרי חיפוש קבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he) ו[מסמכים](https://ai.google.dev/api/file-search/documents?hl=he) של חיפוש קבצים.
 
-フィードバックを送信
+שליחת משוב
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最終更新日 2026-09-18 UTC。
+עדכון אחרון: 2026-09-24 (שעון UTC).
 
-ご意見をお聞かせください
+רוצה לתת לנו משוב?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-18 UTC。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]

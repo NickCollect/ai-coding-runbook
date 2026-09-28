@@ -1,55 +1,75 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=es-419
-fetched_at: 2026-09-21T05:48:09.848454+00:00
-title: "Comentarios \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=th
+fetched_at: 2026-09-28T06:19:04.142962+00:00
+title: "\u0e41\u0e2a\u0e14\u0e07\u0e04\u0e27\u0e32\u0e21\u0e04\u0e34\u0e14\u0e40\u0e2b\u0e47\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Comentarios
+# แสดงความคิดเห็น
 
-## Votación de preferencias intercalada
+Google AI Studio มีหลายวิธีให้คุณส่งความคิดเห็นเกี่ยวกับเอาต์พุตของโมเดล
+อาร์ติแฟกต์ที่สร้างขึ้น และบันทึกคำขอ API นโยบายนี้มีผลกับความคิดเห็นทั้งหมดที่ส่งใน Google AI Studio ซึ่งรวมถึงการให้คะแนนคำตอบ (เช่น ชอบและไม่ชอบ) ความคิดเห็นที่เขียน และการโหวตความชอบ (เช่น การโหวตความชอบในบรรทัดและโหมด Build Arena)
 
-En Google AI Studio, es posible que, en ocasiones, veas una comparación en paralelo de dos respuestas diferentes a tu instrucción. Esto forma parte de nuestro sistema de votación de preferencias intercalada. Se te pedirá que elijas la respuesta que prefieras. Esto nos ayuda a comprender qué resultados del modelo les resultan más útiles a los usuarios.
+## เหตุผลที่เราดำเนินการนี้
 
-### ¿Por qué lo haremos?
+เราทำงานอย่างต่อเนื่องเพื่อปรับปรุงโมเดลและบริการ AI ความคิดเห็นของคุณ
+ช่วยเราในการให้บริการ ปรับปรุง และพัฒนาผลิตภัณฑ์และบริการของ Google รวมถึงเทคโนโลยีแมชชีน
+เลิร์นนิง ซึ่งรวมถึงฟีเจอร์ ผลิตภัณฑ์ และ
+บริการสำหรับองค์กรของ Google โดยสอดคล้องกับ[ข้อกำหนดในการให้บริการเพิ่มเติมของ Gemini API](https://ai.google.dev/gemini-api/terms?hl=th) และ[นโยบายความเป็นส่วนตัว](https://policies.google.com/privacy?hl=th)
 
-Trabajamos constantemente para mejorar nuestros modelos y servicios de IA. Tus comentarios a través de la votación de preferencias intercalada nos ayudan a proporcionar, mejorar y desarrollar los productos y servicios de Google, así como las tecnologías de aprendizaje automático, incluidas las funciones, los productos y los servicios empresariales de Google, de conformidad con las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419) y la [Política de Privacidad](https://policies.google.com/privacy?hl=es-419).
+## ข้อมูลใดบ้างที่รวมอยู่ในความคิดเห็น
 
-### ¿Qué datos se incluyen en los comentarios?
+เราจะเก็บรวบรวมข้อมูลบางอย่างเมื่อคุณส่งความคิดเห็นใน Google AI Studio เพื่อใช้ประกอบการตัดสินใจเกี่ยวกับโมเดลและฟีเจอร์ของเรา
 
-Para tomar decisiones fundamentadas sobre nuestros modelos, recopilamos ciertos datos cuando participas en la votación de preferencias intercalada:
+- **พรอมต์และคำตอบ:** เราจะบันทึกพรอมต์และคำตอบ รวมถึงไฟล์หรือสื่อใดๆ ที่อัปโหลดจากการโต้ตอบหรือการสนทนาที่คุณส่งความคิดเห็น เมื่อคุณเข้าร่วมการประเมินความชอบเชิงเปรียบเทียบ เราจะบันทึกตัวเลือกคำตอบหลายรายการที่แสดงด้วย เพื่อให้เราเข้าใจบริบทของตัวเลือกที่คุณเลือก
+- **การให้คะแนน การโหวต หรือความคิดเห็นของคุณ:** เราจะบันทึกคะแนนที่คุณให้ (เช่น กดชอบหรือไม่ชอบ) คำตอบที่คุณต้องการในการโหวต หมวดหมู่ความคิดเห็นที่เลือก และความคิดเห็นเป็นลายลักษณ์อักษรที่คุณส่ง
+- **รายละเอียดการใช้งาน:** ซึ่งรวมถึงรายละเอียดทางเทคนิคและการปฏิบัติการจากการโต้ตอบหรือการสนทนา เช่น ข้อมูลเกี่ยวกับโมเดลที่สร้างคำตอบ พารามิเตอร์ของโมเดล และข้อมูลเมตาของระบบ
 
-- **Instrucciones y respuestas:** Registramos todas las instrucciones y respuestas, incluido el contenido que se subió, en la conversación sobre la que enviaste comentarios. También registramos las dos opciones de respuesta que seleccionaste. Esto nos ayuda a comprender el contexto de tu preferencia.
-- **Tu voto:** Registramos qué respuesta preferiste. Este es el núcleo de los comentarios que recopilamos.
-- **Detalles de uso:** Incluyen información sobre qué modelo generó la respuesta y otros detalles técnicos y operativos sobre tu uso de esta función.
+### ความคิดเห็นตามแพลตฟอร์ม
 
-### Tu privacidad
+คุณส่งความคิดเห็นได้ในแพลตฟอร์มต่างๆ ใน Google AI Studio โดยมี
+ความแตกต่างเล็กน้อยในบริบทที่บันทึกไว้ ดังนี้
 
-En Google nos tomamos tu privacidad en serio. En este proceso, Google toma medidas para proteger tu privacidad. Esto incluye desvincular estos datos de tu Cuenta de Google, clave de API y proyecto de Cloud antes de que los revisores los vean o les agreguen anotaciones. **No envíes comentarios sobre conversaciones que incluyan información personal, confidencial o sensible.**
+- **Playground ของ AI Studio:** ใน Playground คุณสามารถส่งความคิดเห็นได้โดยใช้
+  การให้คะแนนคำตอบ (ชอบหรือไม่ชอบ) หรือการโหวตความชอบแบบเปรียบเทียบ
+  แบบอินไลน์ ข้อมูลที่บันทึกไว้ประกอบด้วยประวัติการสนทนา พรอมต์ คำตอบของโมเดล สื่อหรือไฟล์ที่อัปโหลด การตั้งค่าพารามิเตอร์ ความคิดเห็น และรายละเอียดการใช้งาน
+- **การสร้างใน AI Studio:** ในส่วนสร้าง (รวมถึง Build Arena) คุณสามารถส่งความคิดเห็นเกี่ยวกับโค้ดที่สร้างขึ้น เอาต์พุตของแอป และการประเมินโมเดลเปรียบเทียบได้
+  ข้อมูลที่บันทึกไว้ประกอบด้วยวิธีการสร้างและพรอมต์ โค้ดแอปพลิเคชันและเอาต์พุตที่สร้างขึ้น คะแนนหรือการให้คะแนนเปรียบเทียบ ความคิดเห็นและรายละเอียดการใช้งานที่เกี่ยวข้อง
+- **บันทึก Gemini API:** ในโปรแกรมดูบันทึกและชุดข้อมูล คุณสามารถส่งความคิดเห็นเกี่ยวกับบันทึกคำขอ API ของ Gemini แต่ละรายการได้ ข้อมูลที่บันทึกไว้ประกอบด้วย
+  รายการบันทึก API ที่เฉพาะเจาะจง (รวมถึงเพย์โหลดคำขอ คำตอบของโมเดล พารามิเตอร์
+  และข้อมูลเมตา) พร้อมด้วยความคิดเห็นและรายละเอียดการใช้งาน ดูรายละเอียดเพิ่มเติมเกี่ยวกับ
+  การจัดเก็บข้อมูลบันทึกและการแชร์ชุดข้อมูลได้ที่นโยบาย[การบันทึกและการแชร์ข้อมูล](https://ai.google.dev/gemini-api/docs/logs-policy?hl=th)
 
-### Cómo inhabilitar la función
+## การลงคะแนนเสียงในบรรทัด
 
-Podrás omitir la votación de preferencias intercalada cuando aparezca.
+ใน Google AI Studio คุณอาจเห็นการเปรียบเทียบข้อมูลคู่กันของคำตอบ 2 แบบที่แตกต่างกันสำหรับพรอมต์ของคุณเป็นครั้งคราว ซึ่งเป็นส่วนหนึ่งของระบบการโหวตตามค่ากำหนด
+ระบบจะขอให้คุณเลือกคำตอบที่ต้องการ ซึ่งจะช่วยให้เรา
+เข้าใจว่าเอาต์พุตของโมเดลใดที่ผู้ใช้เห็นว่ามีประโยชน์มากที่สุด
 
-Gracias por ayudarnos a mejorar Google AI Studio.
+## ความเป็นส่วนตัวของคุณ
 
-Enviar comentarios
+**อย่าส่งความคิดเห็นเกี่ยวกับบทสนทนา พรอมต์ คำตอบ หรือบันทึกที่มีข้อมูลที่ละเอียดอ่อน ข้อมูลที่เป็นความลับ หรือข้อมูลส่วนบุคคล** การแสดงความคิดเห็น
+เป็นไปโดยสมัครใจเสมอ
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+ขอขอบคุณที่ช่วยเราปรับปรุง Google AI Studio
 
-Última actualización: 2026-04-29 (UTC)
+ส่งความคิดเห็น
 
-¿Quieres brindar más información?
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+อัปเดตล่าสุด 2026-09-25 UTC
+
+หากต้องการบอกให้เราทราบเพิ่มเติม
+
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-25 UTC"],[],[]]

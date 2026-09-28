@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=id
-fetched_at: 2026-09-21T05:55:36.454948+00:00
-title: "Penalaran spasial \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=es-419
+fetched_at: 2026-09-28T06:32:22.374992+00:00
+title: "Razonamiento espacial \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Kirim masukan
+Enviar comentarios
 
-# Penalaran spasial
+# Razonamiento espacial
 
-Model Gemini Robotics ER dapat menunjuk objek, melacaknya dalam video, mendeteksinya dengan kotak pembatas, dan membuat lintasan pergerakan.
+Los modelos ER de Gemini Robotics pueden apuntar a objetos, hacerles un seguimiento en video, detectarlos con cuadros delimitadores y generar trayectorias de movimiento.
 
-Untuk kode yang dapat dijalankan sepenuhnya, lihat
-[Cookbook Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Para obtener el código ejecutable completo, consulta el
+[libro de recetas de Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Menunjuk objek
+## Apunta a los objetos
 
-Contoh berikut menemukan objek tertentu dalam gambar dan menampilkan koordinat `[y, x]` yang dinormalisasi:
+En el siguiente ejemplo, se buscan objetos específicos en una imagen y se muestran sus coordenadas `[y, x]` normalizadas:
 
 ### Python
 
@@ -93,7 +93,7 @@ curl -X POST \
   }'
 ```
 
-Outputnya akan berupa array JSON yang berisi objek, masing-masing dengan `point` (koordinat `[y, x]` yang dinormalisasi) dan `label` yang mengidentifikasi objek.
+El resultado será un array JSON que contiene objetos, cada uno con un `point` (coordenadas `[y, x]` normalizadas) y una `label` que identifica el objeto.
 
 ### JSON
 
@@ -112,14 +112,14 @@ Outputnya akan berupa array JSON yang berisi objek, masing-masing dengan `point`
 ]
 ```
 
-Gambar berikut adalah contoh cara titik-titik ini dapat ditampilkan:
+La siguiente imagen es un ejemplo de cómo se pueden mostrar estos puntos:
 
-![Contoh yang menampilkan titik objek dalam gambar](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=id)
+![Un ejemplo que muestra los puntos de los objetos en una imagen](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=es-419)
 
-## Melacak objek dalam video
+## Seguimiento de objetos en un video
 
-Gemini Robotics ER 2 juga dapat menganalisis frame video untuk melacak objek dari waktu ke waktu. Lihat [Input video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id#supported-formats)
-untuk mengetahui daftar format video yang didukung.
+Gemini Robotics ER 2 también puede analizar fotogramas de video para hacer un seguimiento de los objetos a lo largo del tiempo. Consulta [Entradas de video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419#supported-formats)
+para obtener una lista de los formatos de video compatibles.
 
 ### Python
 
@@ -153,9 +153,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## Deteksi objek dan kotak pembatas
+## Detección de objetos y cuadros delimitadores
 
-Selain titik, Anda dapat meminta model untuk menampilkan kotak pembatas 2D, yang memberikan detail spasial yang lebih banyak untuk objek yang terdeteksi.
+Además de los puntos, puedes solicitarle al modelo que muestre cuadros delimitadores 2D, que proporcionan más detalles espaciales para los objetos detectados.
 
 ### Python
 
@@ -189,11 +189,11 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## Lintasan
+## Trayectorias
 
-Gemini Robotics ER 2 dapat membuat urutan titik yang menentukan lintasan, yang berguna untuk memandu pergerakan robot.
+Gemini Robotics ER 2 puede generar secuencias de puntos que definen una trayectoria, lo que es útil para guiar el movimiento del robot.
 
-Contoh ini meminta lintasan untuk memindahkan pena merah ke organizer, termasuk perkiraan titik jalan menengah. Kode telah dikurangi untuk hanya menampilkan perintah.
+En este ejemplo, se solicita una trayectoria para mover un bolígrafo rojo a un organizador, incluida una estimación de los puntos de ruta intermedios. El código se redujo para mostrar solo la instrucción.
 
 ### Python
 
@@ -206,9 +206,9 @@ prompt = """
         """
 ```
 
-## Membuat ruang untuk laptop
+## Crear espacio para una laptop
 
-Contoh ini menunjukkan bagaimana Gemini Robotics ER dapat memahami ruang. Perintah meminta model untuk mengidentifikasi objek mana yang perlu dipindahkan untuk membuat ruang bagi item lain.
+En este ejemplo, se muestra cómo Gemini Robotics ER puede razonar sobre un espacio. La instrucción le pide al modelo que identifique qué objeto se debe mover para crear espacio para otro elemento.
 
 ### Python
 
@@ -240,7 +240,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-Respons berisi koordinat 2D objek yang menjawab pertanyaan pengguna, dalam hal ini, objek yang harus dipindahkan untuk memberi ruang bagi laptop.
+La respuesta contiene una coordenada 2D del objeto que responde la pregunta del usuario, en este caso, el objeto que debe moverse para crear espacio para una laptop.
 
 ```
 [
@@ -248,11 +248,11 @@ Respons berisi koordinat 2D objek yang menjawab pertanyaan pengguna, dalam hal i
 ]
 ```
 
-![Contoh yang menunjukkan objek mana yang perlu dipindahkan untuk objek lain](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=id)
+![Un ejemplo que muestra qué objeto se debe mover para otro objeto](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=es-419)
 
-## Mengemas makan siang
+## Preparar un almuerzo
 
-Model ini juga dapat memberikan petunjuk untuk tugas multi-langkah dan menunjuk objek yang relevan untuk setiap langkah. Contoh ini menunjukkan cara model merencanakan serangkaian langkah untuk mengemas tas makan siang.
+El modelo también puede proporcionar instrucciones para tareas de varios pasos y apuntar a los objetos relevantes para cada paso. En este ejemplo, se muestra cómo el modelo planifica una serie de pasos para preparar una bolsa de almuerzo.
 
 ### Python
 
@@ -285,13 +285,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-Respons perintah ini adalah serangkaian petunjuk langkah demi langkah tentang cara mengemas tas makan siang dari input gambar.
+La respuesta de esta instrucción es un conjunto de instrucciones paso a paso sobre cómo preparar una bolsa de almuerzo a partir de la entrada de imagen.
 
-**Gambar input**
+**Imagen de entrada**
 
-![Gambar kotak makan siang dan item yang akan dimasukkan ke dalamnya](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=id)
+![Imagen de una lonchera y elementos para poner en ella](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=es-419)
 
-**Output model**
+**Resultado del modelo**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -314,19 +314,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## Langkah berikutnya
+## ¿Qué sigue?
 
-- [Kemampuan agen](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=id) — eksekusi kode, pembacaan instrumen, anotasi gambar.
-- [Orkestrasi tugas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=id) — tugas jangka panjang dengan API robot kustom.
-- [Robotika dengan streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=id) — streaming dua arah real-time (khusus Gemini Robotics ER 2).
-- [Pemahaman video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=id) — menemukan momen dan klasifikasi progres (khusus Gemini Robotics ER 2).
+- [Capacidades de agente](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=es-419): ejecución de código, lectura de instrumentos y anotación de imágenes
+- [Organización de tareas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=es-419): tareas de largo plazo con APIs de robot personalizadas
+- [Robótica con transmisión](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=es-419): transmisión bidireccional en tiempo real (solo Gemini Robotics ER 2).
+- [Comprensión de video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=es-419): búsqueda de momentos y clasificación de progreso (solo Gemini Robotics ER 2)
 
-Kirim masukan
+Enviar comentarios
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Terakhir diperbarui pada 2026-09-08 UTC.
+Última actualización: 2026-09-08 (UTC)
 
-Ada masukan untuk kami?
+¿Quieres brindar más información?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-08 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-08 (UTC)"],[],[]]

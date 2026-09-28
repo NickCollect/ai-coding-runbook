@@ -1,68 +1,80 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=pt-BR
-fetched_at: 2026-09-21T05:49:27.177771+00:00
-title: "Reten\u00e7\u00e3o de dados zero na API Gemini Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=it
+fetched_at: 2026-09-28T06:19:56.144587+00:00
+title: "Nessuna conservazione dei dati nell'API Gemini Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Retenção de dados zero na API Gemini Developer
+# Nessuna conservazione dei dati nell'API Gemini Developer
 
-Esta página descreve detalhes do que é comumente chamado de "retenção de dados zero"
-na API Gemini Developer.
+Questa pagina descrive in dettaglio ciò che viene comunemente definito "zero data retention"
+nell'API Gemini Developer.
 
-## Restrição de treinamento
+## Limitazione all'addestramento
 
-Conforme descrito nos [Termos de Serviço da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br), quando você usa Serviços pagos, o Google não usa seus comandos (incluindo instruções do sistema associadas, conteúdo em cache e arquivos como imagens, vídeos ou documentos) nem respostas para melhorar nossos produtos. Os Serviços pagos são definidos [aqui](https://ai.google.dev/gemini-api/terms?hl=pt-br#paid-services).
+Come indicato nei [Termini di servizio dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it), quando utilizzi i servizi a pagamento, Google non utilizza i tuoi prompt (incluse le istruzioni di sistema associate, i contenuti memorizzati nella cache e i file come immagini, video o documenti) o le risposte per migliorare i propri prodotti. I Servizi a pagamento sono definiti
+[qui](https://ai.google.dev/gemini-api/terms?hl=it#paid-services).
 
-## Retenção de dados do cliente e como alcançar a retenção zero de dados
+## Conservazione dei dati dei clienti e raggiungimento della conservazione zero dei dati
 
-Os dados dos clientes geralmente são retidos por períodos limitados nos seguintes cenários e condições. Para alcançar a retenção zero de dados, os clientes precisam tomar
-ações específicas ou evitar recursos específicos em cada uma destas áreas:
+I dati dei clienti vengono in genere conservati per periodi di tempo limitati nei seguenti
+scenari e condizioni. Per ottenere la conservazione zero dei dati, i clienti devono intraprendere azioni specifiche o evitare funzionalità specifiche in ciascuna di queste aree:
 
-- **Registro de comandos para monitoramento de abuso**: conforme descrito nos [Termos adicionais de serviço da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br), para Serviços Pagos, o Google registra comandos e respostas por um período limitado apenas para detectar violações da [Política de uso proibido](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br). Se sua
-  carga de trabalho exigir retenção de dados zero garantida ou contratos de
-  processamento de dados empresariais, use a Vertex AI. Para mais detalhes, consulte
-  [Gemini Enterprise Agent Platform e retenção de dados zero](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=pt-br).
-- **Embasamento com a Pesquisa Google**: conforme descrito nos [Termos de Serviço adicionais da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br#grounding-with-google-search), o Google armazena comandos, informações contextuais e resultados gerados por 30 dias para criar resultados embasados e sugestões de pesquisa.
-  Essas informações armazenadas podem ser usadas para depuração e teste de sistemas
-  que oferecem suporte ao embasamento. **Não é possível desativar o armazenamento dessas informações se você usa o Embasamento com a Pesquisa Google.**
-- **Embasamento com o Google Maps**: conforme descrito nos [Termos de Serviço adicionais da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br), o Google armazena comandos, informações contextuais e resultados gerados por 30 dias para criar resultados embasados. Essas informações armazenadas só podem ser usadas para engenharia de confiabilidade, como depuração em caso de problemas no serviço.
-  **Não é possível desativar o armazenamento dessas informações se você usa o embasamento com o Google Maps.**
-- **API Interactions**: gerencia o estado ativo de uma conversa para permitir turnos multiturno. **Por padrão, a API Interactions
-  ativa o armazenamento de estado**. Para garantir uma pegada de dados zero, defina explicitamente o parâmetro `store` como `false` nas solicitações de API para desativar a retenção de estado padrão.
-- **API Live**: essa API com estado permite a reconexão em tempo real armazenando o estado da conversa. Para alcançar retenção de dados zero, **não configure
-  SessionResumptionConfig**. Se um identificador de sessão for gerado, o estado da conversa (incluindo texto, áudio e vídeo) será retido por até 24 horas.
-- **Armazenamento da API File**: a API File permite que os usuários façam upload de recursos grandes.
-  Os arquivos são armazenados em repouso até serem excluídos pelo usuário ou expirarem.
-  O uso da API File é independente do registro do ZDR. Os usuários precisam excluir arquivos manualmente para garantir uma pegada de dados zero.
-- **Cache de contexto explícito**: os usuários podem armazenar em cache manualmente conjuntos de dados grandes (por exemplo,
-  vídeos longos ou bibliotecas de documentos) usando o campo `cached_content`. Embora os registros dessas solicitações sigam as políticas de descarte de ZDR, o contexto armazenado em cache é armazenado com um `ttl` ou `expire_time` definido pelo usuário. Para alcançar uma pegada de dados zero absoluta, não use o recurso cached\_content.
-- **Armazenamento em cache implícito na memória**: por padrão, os modelos do Gemini armazenam dados em cache na memória para reduzir a latência e o custo para os desenvolvedores. Esses dados ficam estritamente na RAM (não em repouso), são isolados no nível do projeto e têm um TTL de 24 horas.
-  **Isso não viola a retenção de dados zero.**
+- **Registrazione dei prompt per il monitoraggio degli abusi**: come indicato nei [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it), per i Servizi a pagamento, Google registra i prompt e le risposte per un periodo di tempo limitato esclusivamente per rilevare violazioni delle [Norme relative all'uso vietato](https://policies.google.com/terms/generative-ai/use-policy?hl=it). Se il tuo
+  carico di lavoro richiede la garanzia di zero conservazione dei dati o contratti di trattamento dei dati aziendali, utilizza Vertex AI. Per maggiori dettagli, vedi
+  [Gemini Enterprise Agent Platform e conservazione dei dati pari a zero](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=it).
+- **Grounding con la Ricerca Google**: come indicato nei [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it#grounding-with-google-search), Google memorizza prompt, informazioni contestuali e output generati per trenta (30) giorni allo scopo di creare risultati fondati e suggerimenti di ricerca.
+  Queste informazioni archiviate possono essere utilizzate per il debug e il test dei sistemi
+  che supportano la messa a terra. **Non è possibile disattivare l'archiviazione di queste
+  informazioni se utilizzi Grounding con la Ricerca Google.**
+- **Grounding con Google Maps**: come descritto nei [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it), Google memorizza prompt, informazioni contestuali e output generati per trenta (30) giorni allo scopo di creare risultati fondati. Queste informazioni memorizzate possono essere utilizzate solo per
+  l'ingegneria dell'affidabilità, ad esempio il debug in caso di problemi con il servizio.
+  **Non è possibile disattivare l'archiviazione di queste informazioni se utilizzi
+  Grounding con Google Maps.**
+- **API Interactions**: l'API Interactions gestisce lo stato attivo di una conversazione per consentire turni multi-turno. **Per impostazione predefinita, l'API Interactions
+  consente l'archiviazione dello stato**. Per garantire un'impronta di dati pari a zero, devi
+  impostare esplicitamente il parametro `store` su `false` nelle richieste API per disattivare
+  la conservazione dello stato predefinita.
+- **API Live**: questa API stateful consente la riconnessione in tempo reale memorizzando
+  lo stato della conversazione. Per ottenere una conservazione dei dati pari a zero, **non configurare
+  SessionResumptionConfig**. Se viene generato un handle di sessione, lo stato della conversazione (inclusi testo, audio e video) viene conservato per un massimo di 24 ore.
+- **Archiviazione API File**: l'API File consente agli utenti di caricare asset di grandi dimensioni.
+  I file vengono archiviati inattivi finché non vengono eliminati dall'utente o finché non scadono.
+  L'utilizzo dell'API File è indipendente dalla registrazione ZDR; gli utenti devono eliminare manualmente i file per garantire un'impronta zero di dati.
+- **Memorizzazione nella cache del contesto esplicito**: gli utenti possono memorizzare manualmente nella cache set di dati di grandi dimensioni (ad es.
+  video lunghi o librerie di documenti) utilizzando il campo `cached_content`. Anche se
+  i log di queste richieste seguono le norme di eliminazione ZDR, il contesto memorizzato nella cache
+  viene archiviato con un `ttl` o un `expire_time` definito dall'utente. Per ottenere un'impronta
+  di dati assolutamente nulla, non utilizzare la funzionalità cached\_content.
+- **Memorizzazione nella cache in memoria implicita**: per impostazione predefinita, i modelli Gemini memorizzano nella cache i dati
+  in memoria per ridurre la latenza e i costi per gli sviluppatori. Questi dati sono rigorosamente
+  nella RAM (non at-rest), isolati a livello di progetto e hanno un TTL di 24 ore.
+  **Ciò non viola la conservazione zero dei dati.**
 
-## A seguir
+## Passaggi successivi
 
-- Saiba mais sobre a [Política de uso proibido da IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br).
-- Leia os [Termos adicionais de serviço da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br).
-- Se você precisar de controles de ZDR de nível empresarial e autoatendimento, consulte o [guia de retenção de dados zero da Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=pt-br).
+- Scopri di più sulle [Norme relative all'uso vietato dell'AI generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=it).
+- Consulta i [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it).
+- Se hai bisogno di controlli ZDR self-service di livello enterprise, consulta la [guida alla zero data retention
+  di Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=it).
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-09-16 UTC.
+Ultimo aggiornamento 2026-09-16 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-16 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-16 UTC."],[],[]]

@@ -1,50 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=it
-fetched_at: 2026-09-21T05:44:39.176201+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=zh-TW
+fetched_at: 2026-09-28T06:30:23.009338+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Invia feedback
+提供意見
 
 # Gemini Omni Flash
 
-Gemini Omni Flash è un modello di anteprima progettato per la generazione e la modifica di video
-conversazionali rapidi. È ideale per trasformare testo e immagini in video,
-consente di perfezionare e modificare i video generati tramite conversazioni in linguaggio naturale
-utilizzando l'API Interactions.
+Gemini Omni Flash 是預先發布版模型，可快速生成及編輯影片，並透過對話進行操作。這項技術擅長將文字和圖片轉換為影片，並可透過 Interactions API，以自然語言對話方式調整及編輯生成的影片。
 
-[Prova in Google AI Studio](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=it)
+[在 Google AI Studio 中試用](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=zh-tw)
 
-## Documentazione
+## 說明文件
 
-Visita la pagina [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=it)
-per una copertura completa delle funzionalità.
+如要瞭解完整的功能和用途，請前往 [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=zh-tw) 頁面。
 
 ## gemini-omni-flash-preview
 
-| Proprietà | Descrizione |
+| 屬性 | 說明 |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `gemini-omni-flash-preview` |
-| saveTipi di dati supportati | **Ingresso**  Testo, immagine, video (fino a 10 secondi per la modifica)  **Output**  Video |
-| Limiti di token\_auto | **Finestra contestuale**  1.048.576 token  **Video di output**  3s-10s (720p, 24 FPS) |
-| calendar\_monthUltimo aggiornamento | Giugno 2026 |
+| id\_card 模型代碼 | **Gemini API**  `gemini-omni-flash-preview` |
+| save支援的資料類型 | **輸入功率**  文字、圖片、影片 (編輯時間上限為 10 秒)  **輸出內容**  影片 |
+| token\_auto 限制 | **脈絡窗口**  1,048,576 個權杖  **輸出影片**  3 至 10 秒 (720p，24 FPS) |
+| calendar\_month最新更新 | 2026 年 6 月 |
 
-Invia feedback
+提供意見
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ultimo aggiornamento 2026-06-30 UTC.
+上次更新時間：2026-06-30 (世界標準時間)。
 
-Vuoi dirci altro?
+想進一步說明嗎？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-30 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-30 (世界標準時間)。"],[],[]]

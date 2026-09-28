@@ -1,41 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ko
-fetched_at: 2026-09-21T05:48:54.746768+00:00
-title: "\uad6c\uc870\ud654\ub41c \ucd9c\ub825 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=he
+fetched_at: 2026-09-28T06:28:24.055501+00:00
+title: "\u05e4\u05dc\u05d8\u05d9\u05dd \u05de\u05d5\u05d1\u05b0\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-의견 보내기
+שליחת משוב
 
-# 구조화된 출력
+# פלטים מובְנים
 
-제공된 JSON 스키마를 준수하는 응답을 생성하도록 Gemini 모델을 구성할 수 있습니다. 이렇게 하면 예측 가능하고 유형이 안전한 결과를 얻을 수 있으며 구조화되지 않은 텍스트에서 구조화된 데이터를 추출하는 작업이 간소화됩니다.
+אתם יכולים להגדיר את מודלי Gemini כך שיפיקו תשובות לפי סכימת JSON שסיפקתם. כך אפשר להבטיח תוצאות צפויות ובטוחות מבחינת סוג הנתונים, ולפשט את תהליך החילוץ של נתונים מובנים מטקסט לא מובנה.
 
-구조화된 출력은 다음 작업에 적합합니다.
+שימוש בפלט מובנה מתאים במיוחד למקרים הבאים:
 
-- **데이터 추출:** 텍스트에서 이름, 날짜와 같은 특정 정보를 가져옵니다.
-- **구조화된 분류:** 텍스트를 사전 정의된 카테고리로 분류합니다.
-- **에이전트 워크플로:** 도구 또는 API의 구조화된 입력을 생성합니다.
+- **חילוץ נתונים:** חילוץ מידע ספציפי כמו שמות ותאריכים מטקסט.
+- **סיווג מובנה:** סיווג טקסט לקטגוריות מוגדרות מראש.
+- **תהליכי עבודה מבוססי-סוכן:** יצירת קלט מובנה לכלים או לממשקי API.
 
-REST API에서 JSON 스키마를 지원하는 것 외에도 Google GenAI SDK를 사용하면
-다음과 같이 스키마를 정의할 수 있습니다.
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) 및
-[Zod](https://zod.dev/) (JavaScript).
+בנוסף לתמיכה בסכימת JSON ב-API בארכיטקטורת REST, ערכות ה-SDK של Google GenAI מאפשרות להגדיר סכימות באמצעות [Pydantic](https://docs.pydantic.dev/latest/) (Python) ו-[Zod](https://zod.dev/) (JavaScript).
 
-## 구조화된 출력 예
+## דוגמאות לפלט מובנה
 
-### 레시피 추출기
+### חילוץ מתכונים
 
-이 예에서는 `object`, `array`, `string`, `integer`와 같은 기본 JSON 스키마 유형을 사용하여 텍스트에서 구조화된 데이터를 추출하는 방법을 보여줍니다.
+בדוגמה הזו מוסבר איך לחלץ נתונים מובְנים מטקסט באמצעות סוגים בסיסיים של סכימת JSON, כמו `object`, `array`, `string` ו-`integer`.
 
 ### Python
 
@@ -153,7 +150,7 @@ const recipe = recipeSchema.parse(JSON.parse(interaction.output_text));
 console.log(recipe);
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -251,6 +248,102 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    recipeJsonSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "recipe_name": map[string]any{
+                "type":        "string",
+                "description": "The name of the recipe.",
+            },
+            "prep_time_minutes": map[string]any{
+                "type":        "integer",
+                "description": "Optional time in minutes to prepare the recipe.",
+            },
+            "ingredients": map[string]any{
+                "type": "array",
+                "items": map[string]any{
+                    "type": "object",
+                    "properties": map[string]any{
+                        "name": map[string]any{
+                            "type":        "string",
+                            "description": "Name of the ingredient.",
+                        },
+                        "quantity": map[string]any{
+                            "type":        "string",
+                            "description": "Quantity of the ingredient, including units.",
+                        },
+                    },
+                    "required": []string{"name", "quantity"},
+                },
+            },
+            "instructions": map[string]any{
+                "type": "array",
+                "items": map[string]any{
+                    "type": "string",
+                },
+            },
+        },
+        "required": []string{"recipe_name", "ingredients", "instructions"},
+    }
+
+    prompt := `Please extract the recipe from the following text.
+The user wants to make delicious chocolate chip cookies.
+They need 2 and 1/4 cups of all-purpose flour, 1 teaspoon of baking soda,
+1 teaspoon of salt, 1 cup of unsalted butter (softened), 3/4 cup of granulated sugar,
+3/4 cup of packed brown sugar, 1 teaspoon of vanilla extract, and 2 large eggs.
+For the best part, they'll need 2 cups of semisweet chocolate chips.
+First, preheat the oven to 375°F (190°C). Then, in a small bowl, whisk together the flour,
+baking soda, and salt. In a large bowl, cream together the butter, granulated sugar, and brown sugar
+until light and fluffy. Beat in the vanilla and eggs, one at a time. Gradually beat in the dry
+ingredients until just combined. Finally, stir in the chocolate chips. Drop by rounded tablespoons
+onto ungreased baking sheets and bake for 9 to 11 minutes.`
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   recipeJsonSchema,
+        }),
+    )
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model:          interactions.Model("gemini-3.8-flash"),
+                Input:          interactions.NewInteractionsInput(prompt),
+                ResponseFormat: &format,
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -297,7 +390,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**응답 예:**
+**דוגמה לתשובה:**
 
 ```
 {
@@ -325,9 +418,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 콘텐츠 검토
+### ניהול תוכן
 
-이 예에서는 조건부 스키마의 `anyOf`와 분류의 `enum`을 보여주며, 이를 통해 콘텐츠에 따라 출력 구조를 다르게 지정할 수 있습니다.
+בדוגמה הזו מוצגות התכונות `anyOf` לסכימות מותנות ו-`enum` לסיווג, שמאפשרות לשנות את מבנה הפלט בהתאם לתוכן.
 
 ### Python
 
@@ -429,7 +522,7 @@ const result = moderationResultSchema.parse(JSON.parse(interaction.output_text))
 console.log(result);
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -519,6 +612,98 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    spamDetailsSchema := map[string]any{
+        "type":  "object",
+        "title": "SpamDetails",
+        "properties": map[string]any{
+            "reason": map[string]any{
+                "type":        "string",
+                "description": "The reason why the content is considered spam.",
+            },
+            "spam_type": map[string]any{
+                "type":        "string",
+                "enum":        []string{"phishing", "scam", "unsolicited promotion", "other"},
+                "description": "The type of spam.",
+            },
+        },
+        "required": []string{"reason", "spam_type"},
+    }
+
+    notSpamDetailsSchema := map[string]any{
+        "type":  "object",
+        "title": "NotSpamDetails",
+        "properties": map[string]any{
+            "summary": map[string]any{
+                "type":        "string",
+                "description": "A brief summary of the content.",
+            },
+            "is_safe": map[string]any{
+                "type":        "boolean",
+                "description": "Whether the content is safe for all audiences.",
+            },
+        },
+        "required": []string{"summary", "is_safe"},
+    }
+
+    moderationResultJsonSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "decision": map[string]any{
+                "anyOf": []any{spamDetailsSchema, notSpamDetailsSchema},
+            },
+        },
+        "required": []string{"decision"},
+    }
+
+    prompt := "Please moderate the following content and provide a decision.\n" +
+        "Content: 'Congratulations! You've won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'"
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   moderationResultJsonSchema,
+        }),
+    )
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model:          interactions.Model("gemini-3.8-flash"),
+                Input:          interactions.NewInteractionsInput(prompt),
+                ResponseFormat: &format,
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -566,7 +751,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**응답 예:**
+**דוגמה לתשובה:**
 
 ```
 {
@@ -577,9 +762,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 재귀 구조
+### מבנים רקורסיביים
 
-이 예에서는 조직도와 같은 재귀 스키마를 정의하는 방법을 보여줍니다.
+בדוגמה הזו אפשר לראות איך מגדירים סכימה רקורסיבית כמו תרשים ארגוני.
 
 ### Python
 
@@ -664,7 +849,7 @@ const employee = employeeSchema.parse(JSON.parse(interaction.output_text));
 console.log(employee);
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -730,6 +915,75 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    employeeJsonSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "name": map[string]any{
+                "type": "string",
+            },
+            "employee_id": map[string]any{
+                "type": "integer",
+            },
+            "reports": map[string]any{
+                "type":        "array",
+                "description": "A list of employees reporting to this employee.",
+                "items": map[string]any{
+                    "$ref": "#",
+                },
+            },
+        },
+        "required": []string{"name", "employee_id", "reports"},
+    }
+
+    prompt := "Generate an organization chart for a small team.\n" +
+        "The manager is Alice, who manages Bob and Charlie. Bob manages David."
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   employeeJsonSchema,
+        }),
+    )
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model:          interactions.Model("gemini-3.8-flash"),
+                Input:          interactions.NewInteractionsInput(prompt),
+                ResponseFormat: &format,
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -762,7 +1016,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**응답 예:**
+**דוגמה לתשובה:**
 
 ```
 {
@@ -789,9 +1043,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## 스트리밍 결과
+## תוצאות סטרימינג
 
-구조화된 출력을 스트리밍하여 응답이 생성되는 즉시 처리를 시작할 수 있습니다. 스트리밍된 청크는 최종 JSON 객체를 형성하기 위해 연결할 수 있는 유효한 부분 JSON 문자열입니다.
+אפשר להזרים פלט מובנה, וכך להתחיל לעבד את התשובה בזמן שהיא נוצרת. החלקים שמועברים בסטרימינג הם מחרוזות JSON חלקיות תקינות שאפשר לשרשר כדי ליצור את אובייקט ה-JSON הסופי.
 
 ### Python
 
@@ -863,7 +1117,7 @@ for await (const event of stream) {
 }
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -938,6 +1192,77 @@ try (EventStream<InteractionSSEStreamEvent> events = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    feedbackJsonSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "sentiment": map[string]any{
+                "type": "string",
+                "enum": []string{"positive", "neutral", "negative"},
+            },
+            "summary": map[string]any{
+                "type": "string",
+            },
+        },
+        "required": []string{"sentiment", "summary"},
+    }
+
+    prompt := "The new UI is incredibly intuitive. Add a very long summary to test streaming!"
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   feedbackJsonSchema,
+        }),
+    )
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model:          interactions.Model("gemini-3.8-flash"),
+                Input:          interactions.NewInteractionsInput(prompt),
+                ResponseFormat: &format,
+                Stream:         genai.Ptr(true),
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer resp.InteractionSSEStreamEvent.Close()
+
+    for resp.InteractionSSEStreamEvent.Next() {
+        event := resp.InteractionSSEStreamEvent.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -963,14 +1288,9 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## 도구를 사용한 구조화된 출력
+## פלט מובנה באמצעות כלים
 
-Gemini 3를 사용하면 Google 검색을 사용한 그라운딩
-, URL 컨텍스트
-, 코드 실행
-, 파일 검색
-, 함수 호출
-을 비롯한 기본 제공 도구와 구조화된 출력을 결합할 수 있습니다.
+‫Gemini 3 מאפשר לכם לשלב פלט מובנה עם כלים מובנים, כולל [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he),‏ [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he),‏ [הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he),‏ [File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=he#structured-output) ו-[קריאה להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
 
 ### Python
 
@@ -1037,7 +1357,7 @@ const match = matchSchema.parse(JSON.parse(interaction.output_text));
 console.log(match);
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1104,6 +1424,78 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    matchJsonSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "winner": map[string]any{
+                "type":        "string",
+                "description": "The name of the winner.",
+            },
+            "final_match_score": map[string]any{
+                "type":        "string",
+                "description": "The final match score.",
+            },
+            "scorers": map[string]any{
+                "type":        "array",
+                "description": "The name of the scorer.",
+                "items": map[string]any{
+                    "type": "string",
+                },
+            },
+        },
+        "required": []string{"winner", "final_match_score", "scorers"},
+    }
+
+    format := interactions.NewCreateModelInteractionResponseFormat(
+        interactions.NewResponseFormat(interactions.TextResponseFormat{
+            MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+            Schema:   matchJsonSchema,
+        }),
+    )
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.1-pro-preview"),
+                Input: interactions.NewInteractionsInput("Search for all details for the latest Euro."),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleSearch{}),
+                    interactions.NewTool(interactions.URLContext{}),
+                },
+                ResponseFormat: &format,
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -1130,80 +1522,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## JSON 스키마 지원
+## תמיכה בסכימת JSON
 
-JSON 객체를 생성하려면 `text` 유형의 객체 (또는 객체를 포함하는 배열)로 `response_format`을 구성하고 `mime_type`을 `application/json`으로 설정합니다. 스키마는 `schema` 필드에 제공되어야 합니다.
+כדי ליצור אובייקט JSON, מגדירים את `response_format` עם אובייקט (או מערך שמכיל אובייקט) מהסוג `text` ומגדירים את `mime_type` שלו ל-`application/json`. צריך לספק את הסכימה בשדה `schema`.
 
-Gemini의 구조화된 출력 모드는
-[JSON 스키마](https://json-schema.org/) 사양의 하위 집합을 지원합니다.
+מצב הפלט המובנה של Gemini תומך בחלק ממפרט [JSON Schema](https://json-schema.org/).
 
-다음 `type` 값이 지원됩니다.
+הערכים הבאים של `type` נתמכים:
 
-- **`string`**: 텍스트용
-- **`number`**: 부동 소수점 수용
-- **`integer`**: 정수용
-- **`boolean`**: true 또는 false 값용
-- **`object`**: 키-값 쌍이 있는 구조화된 데이터용
-- **`array`**: 항목 목록용
-- **`null`**: 속성이 null이 되도록 허용하려면 유형 배열에 `"null"`을 포함합니다 (예: `{"type": ["string", "null"]}`).
+- ‫**`string`**: לטקסט.
+- ‫**`number`**: למספרים בשיטת נקודה צפה.
+- ‫**`integer`**: למספרים שלמים.
+- ‫**`boolean`**: לערכים true או false.
+- ‫**`object`**: לנתונים מובְנים עם צמדי מפתח/ערך.
+- ‫**`array`**: לרשימות של פריטים.
+- ‫**`null`**: כדי לאפשר שמאפיין יהיה null, צריך לכלול את `"null"` במערך הסוגים (לדוגמה, `{"type": ["string", "null"]}`).
 
-이러한 설명 속성은 모델을 안내하는 데 도움이 됩니다.
+מאפייני התיאור האלה עוזרים להנחות את המודל:
 
-- **`title`**: 속성에 대한 간단한 설명입니다.
-- **`description`**: 속성에 대한 더 길고 자세한 설명입니다.
+- ‫**`title`**: תיאור קצר של מאפיין.
+- **`description`**: תיאור ארוך ומפורט יותר של נכס.
 
-### 유형별 속성
+### מאפיינים שספציפיים לסוג
 
-**`object` 값의 경우:**
+**לערכים של `object`:**
 
-- **`properties`**: 각 키가 속성 이름이고 각 값이 해당 속성의 스키마인 객체입니다.
-- **`required`**: 필수 속성을 나열하는 문자열 배열입니다.
-- **`additionalProperties`**: `properties`에 나열되지 않은 속성이 허용되는지 여부를 제어합니다. 불리언 또는 스키마일 수 있습니다.
+- ‫**`properties`**: אובייקט שבו כל מפתח הוא שם מאפיין וכל ערך הוא סכימה של המאפיין הזה.
+- ‫**`required`**: מערך של מחרוזות, שבו מפורטות התכונות שהן חובה.
+- ‫**`additionalProperties`**: קובע אם מותר להשתמש בנכסים שלא מופיעים ב-`properties`. יכול להיות ערך בוליאני או סכמה.
 
-**`string` 값의 경우:**
+**לערכים של `string`:**
 
-- **`enum`**: 분류 작업에 사용할 수 있는 특정 문자열 집합을 나열합니다.
-- **`format`**: `date-time`, `date`, `time`과 같은 문자열의 구문을 지정합니다.
+- ‫**`enum`**: רשימה של קבוצה ספציפית של מחרוזות אפשריות למשימות סיווג.
+- ‫**`format`**: מציין תחביר למחרוזת, כמו `date-time`, ‏ `date`, ‏ `time`.
 
-**`number` 및 `integer` 값의 경우:**
+**לערכים `number` ו-`integer`:**
 
-- **`enum`**: 가능한 숫자 값의 특정 집합을 나열합니다.
-- **`minimum`**: 최소 포함 값입니다.
-- **`maximum`**: 최대 포함 값입니다.
+- ‫**`enum`**: רשימה של קבוצה ספציפית של ערכים מספריים אפשריים.
+- ‫**`minimum`**: ערך המינימום כולל.
+- ‫**`maximum`**: הערך המקסימלי כולל.
 
-**`array` 값의 경우:**
+**לערכים של `array`:**
 
-- **`items`**: 배열의 모든 항목에 대한 스키마를 정의합니다.
-- **`prefixItems`**: 첫 번째 N개 항목의 스키마 목록을 정의하여 튜플과 같은 구조를 허용합니다.
-- **`minItems`**: 배열의 최소 항목 수입니다.
-- **`maxItems`**: 배열의 최대 항목 수입니다.
+- ‫**`items`**: מגדיר את הסכימה של כל הפריטים במערך.
+- ‫**`prefixItems`**: מגדיר רשימה של סכימות עבור הפריטים הראשונים, ומאפשר מבנים דמויי-tuple.
+- ‫**`minItems`**: המספר המינימלי של פריטים במערך.
+- ‫**`maxItems`**: המספר המקסימלי של פריטים במערך.
 
-## 구조화된 출력과 함수 호출 비교
+## פלט מובנה לעומת קריאה להפעלת פונקציות
 
-| 기능 | 주된 사용 사례 |
+| תכונה | תרחיש ראשי לדוגמה |
 | --- | --- |
-| **구조화된 출력** | **최종 응답의 형식을 지정합니다.** 모델의 *답변* 을 특정 형식으로 지정하려는 경우에 사용합니다. |
-| **함수 호출** | **대화 중에 작업을 실행합니다.** 모델이 최종 답변을 제공하기 전에 작업을 실행하도록 *요청* 해야 하는 경우에 사용합니다. |
+| **תשובות מובנות** | **עיצוב התשובה הסופית.** משתמשים בה כשרוצים ש*התשובה* של המודל תהיה בפורמט מסוים. |
+| **בקשה להפעלת פונקציה** | **ביצוע פעולות במהלך שיחה** משתמשים בה כשצריך שהמודל *ישאל אתכם* לבצע משימה לפני שהוא מספק תשובה סופית. |
 
-## 권장사항
+## שיטות מומלצות
 
-- **명확한 설명:** `description` 필드를 사용하여 모델을 안내합니다.
-- **강력한 유형 지정:** 특정 유형 (`integer`, `string`, `enum`)을 사용합니다.
-- **프롬프트 엔지니어링:** 모델이 수행해야 하는 작업을 명확하게 명시합니다.
-- **유효성 검사:** 출력은 구문상 올바른 JSON이지만 항상 애플리케이션에서 값을 검증합니다.
-- **오류 처리:** 스키마를 준수하지만 의미상 올바르지 않은 출력에 대해 강력한 오류 처리를 구현합니다.
+- **תיאורים ברורים:** השתמשו בשדה `description` כדי להנחות את המודל.
+- **הקלדה חזקה:** שימוש בסוגים ספציפיים (`integer`, ‏`string`, ‏`enum`).
+- **הנדסת פרומפטים:** חשוב לציין בבירור מה רוצים שהמודל יעשה.
+- **אימות:** למרות שהפלט הוא JSON עם תחביר תקין, תמיד צריך לאמת את הערכים באפליקציה.
+- **טיפול בשגיאות:** הטמיעו טיפול בשגיאות כדי לטפל בפלט שעומד בדרישות הסכימה אבל לא נכון מבחינה סמנטית.
 
-## 제한사항
+## מגבלות
 
-- **스키마 하위 집합:** 일부 JSON 스키마 기능은 지원되지 않습니다.
-- **스키마 복잡성:** 매우 크거나 깊게 중첩된 스키마는 거부될 수 있습니다.
+- **קבוצת משנה של סכימה:** לא כל התכונות של סכימת JSON נתמכות.
+- **מורכבות הסכימה:** יכול להיות שסכימות גדולות מאוד או כאלה עם קינון עמוק יידחו.
 
-의견 보내기
+שליחת משוב
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-최종 업데이트: 2026-09-18(UTC)
+עדכון אחרון: 2026-09-24 (שעון UTC).
 
-의견을 전달하고 싶나요?
+רוצה לתת לנו משוב?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-18(UTC)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]

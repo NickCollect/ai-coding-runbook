@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=it
-fetched_at: 2026-09-21T05:51:13.917534+00:00
-title: "Agente ReAct da zero con Gemini e LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ar
+fetched_at: 2026-09-28T06:31:27.204613+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0648\u0643\u064a\u0644 ReAct \u0645\u0646 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini \u0648LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-# Agente ReAct da zero con Gemini e LangGraph
+# إنشاء وكيل ReAct من البداية باستخدام Gemini وLangGraph
 
-LangGraph è un framework per la creazione di applicazioni LLM stateful, il che lo rende una buona scelta per la creazione di agenti ReAct (Reasoning and Acting).
+‫LangGraph هو إطار عمل لإنشاء تطبيقات ذات حالة للنماذج اللغوية الكبيرة، ما يجعله خيارًا جيدًا لإنشاء وكلاء الاستدلال واتخاذ الإجراءات (ReAct).
 
-Gli agenti ReAct combinano il ragionamento LLM con l'esecuzione delle azioni. Pensano, utilizzano strumenti e agiscono in base alle osservazioni per raggiungere gli obiettivi degli utenti, adattando dinamicamente il loro approccio. Introdotto in ["ReAct: Synergizing Reasoning and Acting
-in Language Models"](https://arxiv.org/abs/2210.03629) (2023), questo pattern
-cerca di imitare la risoluzione di problemi flessibile e simile a quella umana rispetto a flussi di lavoro rigidi.
+يجمع وكلاء الاستدلال واتخاذ الإجراءات بين استدلال النموذج اللغوي الكبير وتنفيذ الإجراءات. ويفكرون بشكل متكرر ويستخدمون الأدوات ويتخذون إجراءات بناءً على الملاحظات لتحقيق أهداف المستخدمين، مع تكييف طريقتهم بشكل ديناميكي. تم تقديم هذا النمط في ["الاستدلال واتخاذ الإجراءات: الجمع بين الاستدلال واتخاذ الإجراءات
+في النماذج اللغوية"](https://arxiv.org/abs/2210.03629) (2023)، ويحاول هذا النمط
+محاكاة حلّ المشاكل المرن الذي يشبه الطريقة البشرية بدلاً من سير العمل الصارم.
 
-LangGraph offre un agente ReAct predefinito ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
-ideale quando hai bisogno di maggiore controllo e personalizzazione per le implementazioni ReAct. Questa guida ti mostrerà una versione semplificata.
+تقدّم LangGraph وكيلاً للاستدلال واتخاذ الإجراءات تم إنشاؤه مسبقًا ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent))،
+وهو مفيد عندما تحتاج إلى مزيد من التحكّم والتخصيص لعمليات تنفيذ الاستدلال واتخاذ الإجراءات. سيعرض لك هذا الدليل إصدارًا مبسطًا.
 
-LangGraph modella gli agenti come grafici utilizzando tre componenti chiave:
+تُصنّف LangGraph الوكلاء على أنّهم رسوم بيانية باستخدام ثلاثة مكوّنات رئيسية:
 
-- `State`: struttura dati condivisa (in genere `TypedDict` o `Pydantic BaseModel`) che rappresenta lo snapshot attuale dell'applicazione.
-- `Nodes`: codifica la logica degli agenti. Ricevono lo stato attuale come input, eseguono alcuni calcoli o effetti collaterali e restituiscono uno stato aggiornato, ad esempio chiamate LLM o chiamate di strumenti.
-- `Edges`: definisci il successivo `Node` da eseguire in base all'`State` corrente, consentendo la logica condizionale e le transizioni fisse.
+- `State`: بنية بيانات مشترَكة (عادةً `TypedDict` أو `Pydantic BaseModel`) تمثّل اللقطة الحالية للتطبيق.
+- ‫`Nodes`: ترمّز منطق الوكلاء. وتتلقّى هذه العُقد الحالة الحالية كإدخال، وتُجري بعض العمليات الحسابية أو الآثار الجانبية، وتعرض حالة معدَّلة، مثل طلبات النموذج اللغوي الكبير أو طلبات الأدوات.
+- `Edges`: تحدّد `Node` التالية التي سيتم تنفيذها استنادًا إلى `State` الحالية، ما يسمح بالمنطق الشرطي والانتقالات الثابتة.
 
-Se non hai ancora una chiave API, puoi ottenerla da [Google AI
-Studio](https://aistudio.google.com/apikey?hl=it).
+إذا لم يكن لديك مفتاح واجهة برمجة تطبيقات بعد، يمكنك الحصول عليه من [Google AI
+Studio](https://aistudio.google.com/apikey?hl=ar).
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-Imposta la chiave API nella variabile di ambiente `GEMINI_API_KEY`.
+اضبط مفتاح واجهة برمجة التطبيقات في متغيّر البيئة `GEMINI_API_KEY`.
 
 ```
 import os
@@ -49,13 +49,12 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-Per capire meglio come implementare un agente ReAct utilizzando LangGraph, questa guida
-illustra un esempio pratico. Creerai un agente il cui obiettivo è utilizzare uno strumento per trovare il meteo attuale per una località specificata.
+لفهم كيفية تنفيذ وكيل الاستدلال واتخاذ الإجراءات باستخدام LangGraph بشكل أفضل، سيوضّح هذا الدليل مثالاً عمليًا. ستنشئ وكيلاً يهدف إلى استخدام أداة للعثور على حالة الطقس الحالية لموقع جغرافي محدّد.
 
-Per questo agente meteo, `State` manterrà la cronologia della conversazione in corso (come elenco di messaggi) e un contatore (come numero intero) del numero di passi eseguiti, a scopo illustrativo.
+بالنسبة إلى وكيل الطقس هذا، ستحتفظ `State` بسجلّ المحادثة الجارية (كقائمة من الرسائل) وعداد (كرقم صحيح) لعدد الخطوات المتّخذة، لأغراض توضيحية.
 
-LangGraph fornisce una funzione helper, `add_messages`, per l'aggiornamento degli elenchi di messaggi di stato. Funziona come un [riduttore](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers),
-che prende l'elenco attuale, più i nuovi messaggi, e restituisce un elenco combinato. Gestisce gli aggiornamenti in base all'ID messaggio e per impostazione predefinita adotta un comportamento di "aggiunta" per i nuovi messaggi non letti.
+توفّر LangGraph دالة مساعِدة، هي `add_messages`، لتعديل قوائم رسائل الحالة. وتعمل هذه الدالة كدالة [اختزال](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers)،
+حيث تأخذ القائمة الحالية، بالإضافة إلى الرسائل الجديدة، وتعرض قائمة مدمَجة. وتتعامل مع التعديلات حسب رقم تعريف الرسالة، وتكون تلقائيًا "إضافة فقط" للرسائل الجديدة التي لم تتم رؤيتها.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -69,7 +68,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-Poi, definisci lo strumento meteo.
+بعد ذلك، حدّد أداة الطقس.
 
 ```
 from langchain_core.tools import tool
@@ -108,7 +107,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-Ora inizializza il modello e associa gli strumenti al modello.
+الآن، ابدأ النموذج واربط الأدوات بالنموذج.
 
 ```
 from datetime import datetime
@@ -131,19 +130,16 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-L'ultimo passaggio prima di poter eseguire l'agente è definire i nodi e gli archi.
-In questo esempio, hai due nodi e un arco.
+الخطوة الأخيرة قبل أن تتمكّن من تشغيل وكيلك هي تحديد العُقد والحواف.
+في هذا المثال، لديك عُقدتان وحافة واحدة.
 
-- `call_tool` che esegue il metodo dello strumento. LangGraph ha un nodo predefinito
-  per questo chiamato
+- عُقدة `call_tool` التي تنفّذ طريقة الأداة. لدى LangGraph عُقدة تم إنشاؤها مسبقًا
+  لهذا الغرض تُسمى
   [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- nodo `call_model` che utilizza `model_with_tools` per chiamare il modello.
-- `should_continue` che decide se chiamare lo strumento o il modello.
+- عُقدة `call_model` التي تستخدم `model_with_tools` لاستدعاء النموذج.
+- حافة `should_continue` التي تحدّد ما إذا كان يجب استدعاء الأداة أو النموذج.
 
-Il numero di nodi e archi non è fisso. Puoi aggiungere tutti i nodi e gli archi
-che vuoi al grafico. Ad esempio, puoi aggiungere un nodo per aggiungere
-un output strutturato o un nodo di autoverifica/riflessione per controllare l'output
-del modello prima di chiamare lo strumento o il modello.
+عدد العُقد والحواف ليس ثابتًا. يمكنك إضافة أي عدد تريده من العُقد والحواف إلى الرسم البياني. على سبيل المثال، يمكنك إضافة عُقدة لإضافة ناتج منظَّم أو عُقدة للتحقّق الذاتي أو التفكير للتحقّق من ناتج النموذج قبل استدعاء الأداة أو النموذج.
 
 ```
 from langchain_core.messages import ToolMessage
@@ -187,7 +183,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-Ora che tutti i componenti dell'agente sono pronti, puoi assemblarli.
+بعد أن تصبح جميع مكوّنات الوكيل جاهزة، يمكنك الآن تجميعها.
 
 ```
 from langgraph.graph import StateGraph, END
@@ -223,7 +219,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-Puoi visualizzare il grafico utilizzando il metodo `draw_mermaid_png`.
+يمكنك تصوّر الرسم البياني باستخدام طريقة `draw_mermaid_png`.
 
 ```
 from IPython.display import Image, display
@@ -231,9 +227,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=it)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=ar)
 
-Ora esegui l'agente.
+الآن، شغِّل الوكيل.
 
 ```
 from datetime import datetime
@@ -246,7 +242,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Ora puoi continuare la conversazione, chiedere informazioni sul meteo in un'altra città o richiedere un confronto.
+يمكنك الآن مواصلة المحادثة أو طلب حالة الطقس في مدينة أخرى أو طلب إجراء مقارنة.
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -256,12 +252,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-09-12 UTC.
+تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

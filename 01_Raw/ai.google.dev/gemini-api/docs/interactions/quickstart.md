@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/quickstart?hl=ar
-fetched_at: 2026-09-21T05:50:28.340469+00:00
+fetched_at: 2026-09-28T06:16:07.301862+00:00
 title: "\u0627\u0644\u0628\u062f\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,7 +18,7 @@ title: "\u0627\u0644\u0628\u062f\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Go
 
 # البدء
 
-يساعدك هذا الدليل في بدء استخدام Gemini API من خلال [واجهة Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar). ستُجري أول طلب بيانات من واجهة برمجة التطبيقات في أقل من دقيقة، وستستكشف ميزات فهم المحتوى المتعدّد الوسائط، وإنشاء الصور، والناتج المنظَّم، والأدوات، واستدعاء الدوال، والوكلاء، والتنفيذ في الخلفية.
+يساعدك هذا الدليل في بدء استخدام Gemini API من خلال [واجهة Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar). ستتمكّن من إجراء أول طلب بيانات من واجهة برمجة التطبيقات في أقل من دقيقة، وستستكشف ميزات إنشاء النصوص، وفهم المحتوى المتعدّد الوسائط، وإنشاء الصور، والناتج المنظَّم، والأدوات، واستدعاء الدوال، والوكلاء، والتنفيذ في الخلفية.
 
 تتوفّر واجهة Interactions API من خلال حزمتَي تطوير البرامج (SDK) [Python](https://github.com/googleapis/python-genai) و[JavaScript](https://github.com/googleapis/js-genai)، بالإضافة إلى REST.
 
@@ -27,8 +27,8 @@ title: "\u0627\u0644\u0628\u062f\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Go
 لاستخدام Gemini API، يجب أن يكون لديك مفتاح واجهة برمجة تطبيقات للمصادقة على طلباتك وفرض حدود الأمان وتتبُّع الاستخدام في حسابك.
 
 - ينشئ Google AI Studio تلقائيًا مشروعًا ومفتاح واجهة برمجة تطبيقات للمستخدمين الجدد.
-  يمكنك نسخه من [صفحة مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar).
-- إذا كنت بحاجة إلى مفتاح جديد، انقر على **إنشاء مفتاح واجهة برمجة تطبيقات** في AI Studio واتّبِع مربع الحوار لإضافة زوج جديد من المفتاح والمشروع.
+  يمكنك نسخها من [صفحة مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar).
+- إذا كنت بحاجة إلى مفتاح جديد، انقر على **إنشاء مفتاح واجهة برمجة تطبيقات** في AI Studio واتّبِع التعليمات الواردة في مربّع الحوار لإضافة زوج جديد من المفتاح والمشروع.
 
 [إنشاء مفتاح Gemini API](https://aistudio.google.com/apikey?hl=ar)
 
@@ -38,20 +38,20 @@ title: "\u0627\u0644\u0628\u062f\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Go
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### الترقية إلى الفئة المدفوعة
+### الترقية إلى فئة الاشتراك المدفوع
 
-تؤدي الترقية إلى الفئة المدفوعة إلى زيادة حدود معدّل الطلبات وتتطلّب إعداد Cloud Billing.
+تؤدي الترقية إلى الفئة المدفوعة إلى زيادة حدود معدّل الاستخدام وتتطلّب إعداد Cloud Billing.
 
 - انقر على **إعداد الفوترة** في صفحة [مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar) أو [المشاريع](https://aistudio.google.com/projects?hl=ar) في AI Studio.
-- اتّبِع تعليمات مربّع الحوار "الفوترة في Cloud" لإنشاء حساب فوترة أو ربطه، وإضافة طريقة دفع، ودفع مبلغ مسبق لا يقل عن 5 دولار أمريكي (أو ما يعادله بالعملة المحلية) في شكل أرصدة مدفوعة.
+- اتّبِع مربّع الحوار "الفوترة في Cloud" لإنشاء حساب فوترة أو ربطه، وإضافة طريقة دفع، ودفع مبلغ مسبق لا يقل عن 5 دولار أمريكي (أو ما يعادله بالعملة المحلية) في شكل أرصدة مدفوعة.
 - يمكنك الاطّلاع على استخدامك لواجهة برمجة التطبيقات في [Google AI Studio](https://aistudio.google.com/usage?hl=ar)
   ضمن **لوحة البيانات** > **الاستخدام**.
 
-لمزيد من المعلومات، يُرجى الاطّلاع على [صفحة الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
+يمكنك الاطّلاع على [صفحة "الفوترة"](https://ai.google.dev/gemini-api/docs/billing?hl=ar) لمزيد من المعلومات.
 
-## 2. تثبيت حزمة تطوير البرامج (SDK) وإجراء مكالمتك الأولى
+## 2. تثبيت حزمة SDK وإجراء مكالمتك الأولى
 
-ثبِّت حزمة تطوير البرامج (SDK) وأنشئ نصًا من خلال طلب واحد من واجهة برمجة التطبيقات.
+ثبِّت حزمة تطوير البرامج (SDK) وأنشئ نصًا من خلال طلب واحد إلى واجهة برمجة التطبيقات.
 
 ### Python
 
@@ -121,6 +121,44 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Explain how AI works in a few words."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -165,9 +203,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-عند استخدام REST، تعرض واجهة برمجة التطبيقات مورد `Interaction` الكامل الذي يحتوي على البيانات الوصفية وإحصاءات الاستخدام وسجلّ الخطوات التفصيلية للرد.
+عند استخدام REST، تعرض واجهة برمجة التطبيقات مورد `Interaction` الكامل الذي يحتوي على البيانات الوصفية وإحصاءات الاستخدام وسجلّ الخطوات التفصيلية للعبة.
 
-في حين تعرض حِزم تطوير البرامج (SDK) الرد الكامل، فإنّها توفّر أيضًا خصائص ملائمة، مثل `interaction.output_text` و`interaction.output_image`، للوصول إلى النتائج النهائية مباشرةً. يمكنك الاطّلاع على مزيد من المعلومات حول بنية الرد في [نظرة عامة على التفاعلات](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) أو قراءة [دليل إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar) للحصول على تفاصيل حول تعليمات النظام وإعدادات الإنشاء.
+في حين تعرض حِزم تطوير البرامج الرد الكامل، فإنّها توفّر أيضًا خصائص ملائمة، مثل `interaction.output_text` و`interaction.output_image` للوصول إلى النتائج النهائية مباشرةً. يمكنك الاطّلاع على مزيد من المعلومات حول بنية الرد في [نظرة عامة على التفاعلات](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) أو قراءة [دليل إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar) للحصول على تفاصيل حول تعليمات النظام وإعدادات الإنشاء.
 
 ## 3- عرض الرد تدريجيًا
 
@@ -238,6 +276,44 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Write a haiku about coding."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -252,7 +328,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-عند البث، يستجيب الخادم بتدفق أحداث Server-Sent Events (SSE). يتضمّن كل حدث نوعًا وبيانات JSON.
+عند البث، يستجيب الخادم من خلال بث أحداث Server-Sent Events (SSE). يتضمّن كل حدث نوعًا وبيانات JSON.
 
 **الردّ:**
 
@@ -285,16 +361,16 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-لإلقاء نظرة تفصيلية على كيفية التعامل مع أحداث البث وأنواع التغييرات، يُرجى الاطّلاع على [دليل التفاعلات مع البث](https://ai.google.dev/gemini-api/docs/streaming?hl=ar).
+للحصول على نظرة تفصيلية حول التعامل مع أحداث البث وأنواع التغييرات، يُرجى الاطّلاع على [دليل التفاعلات عبر البث](https://ai.google.dev/gemini-api/docs/streaming?hl=ar).
 
 ## 4. محادثات مترابطة
 
-تتيح Interactions API إجراء محادثات مترابطة بطريقتَين:
+تتيح Interactions API المحادثات المترابطة من خلال طريقتَين:
 
-- **الاحتفاظ بالحالة (يُنصح به)**: مواصلة محادثة على الخادم باستخدام `previous_interaction_id` خيار مثالي لمعظم عمليات الدردشة وسير العمل بالذكاء الاصطناعي الوكيل التي تريد أن يدير فيها الخادم السجلّ ويحسّن التخزين المؤقت.
-- **عدم الاحتفاظ بالحالة**: يمكنك إدارة سجلّ المحادثات على جهاز العميل من خلال تمرير جميع الجوانب السابقة (بما في ذلك خطوات التفكير والأدوات الوسيطة للنموذج) في كل طلب.
+- **الحفاظ على الحالة (يُنصح به)**: مواصلة محادثة على الخادم باستخدام `previous_interaction_id` خيار مثالي لمعظم عمليات الدردشة وسير العمل بالذكاء الاصطناعي الوكيل حيث تريد أن يدير الخادم السجلّ ويحسّن التخزين المؤقت.
+- **بدون حالة**: يمكنك إدارة سجلّ المحادثات على العميل من خلال تمرير جميع الجوانب السابقة (بما في ذلك أفكار النموذج الوسيطة وخطوات الأداة) في كل طلب.
 
-### حالة مستمرة (مُقترَحة)
+### حفظ الحالة (يُنصح به)
 
 يمكنك ربط التفاعلات من خلال تمرير `previous_interaction_id`. يتولّى الخادم إدارة سجلّ المحادثات الكامل نيابةً عنك.
 
@@ -377,6 +453,55 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("Explain quantum computing in simple terms."),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -403,7 +528,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ### بلا حالة
 
-ضبط `store=false` وإدارة سجلّ المحادثات من جهة العميل يجب الاحتفاظ بجميع الخطوات التي تم إنشاؤها بواسطة النموذج (بما في ذلك الخطوتان `thought` و`function_call`) وإعادة إرسالها تمامًا كما تم استلامها.
+ضبط `store=false` وإدارة سجلّ المحادثات من جهة العميل يجب الاحتفاظ بجميع الخطوات التي تم إنشاؤها باستخدام النموذج (بما في ذلك الخطوتان `thought` و`function_call`) وإعادة إرسالها تمامًا كما تم استلامها.
 
 ### Python
 
@@ -532,6 +657,59 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 1. First turn
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Hi, my name is Alex."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res1.Interaction.OutputText != nil {
+        fmt.Println(*res1.Interaction.OutputText)
+    }
+
+    // 2. Second turn (passing PreviousInteractionID)
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            Input:                 interactions.NewInteractionsInput("What's my name?"),
+            PreviousInteractionID: res1.Interaction.ID,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res2.Interaction.OutputText != nil {
+        fmt.Println(*res2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -596,11 +774,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-تعرض التفاعلات الثانية كائن استجابة كاملاً يتضمّن الخطوات الجديدة فقط، ولكنّه يستند إلى سياق المحادثة السابقة. يمكنك الاطّلاع على مزيد من المعلومات حول الحفاظ على الحالة في [دليل المحادثات المترابطة](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#multi-turn-conversations)، أو استكشاف [الوضع غير الاحتفاظ بالحالة](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#stateless-conversations) لإدارة السجلّ من جهة العميل.
+تعرض التفاعل الثاني كائن استجابة كاملاً يتضمّن الخطوات الجديدة فقط، ولكنّه يستند إلى سياق الجولة السابقة. يمكنك الاطّلاع على مزيد من المعلومات حول الحفاظ على الحالة في [دليل المحادثات المترابطة](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#multi-turn-conversations)، أو استكشاف [وضع عدم الاحتفاظ بالحالة](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#stateless-conversations) لإدارة السجلّ من جهة العميل.
 
 ## 5- فهم المحتوى المتعدّد الوسائط
 
-تستطيع نماذج Gemini فهم الصور والمحتوى الصوتي والفيديوهات والمستندات بشكلٍ مباشر. تمرير الوسائط إلى جانب النص في طلب واحد
+تستطيع نماذج Gemini فهم الصور والملفات الصوتية والفيديوهات والمستندات بشكلٍ مباشر. تمرير الوسائط إلى جانب النص في طلب واحد
 
 ### Python
 
@@ -714,6 +892,60 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    imageBytes, err := os.ReadFile("path/to/organ.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Image := base64.StdEncoding.EncodeToString(imageBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "What is in this image?",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Image),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -772,7 +1004,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 
 فهم الصوت
 
-تحويل الملفات الصوتية إلى نص أو تلخيصها أو الإجابة عن أسئلة بشأنها](https://ai.google.dev/gemini-api/docs/audio?hl=ar)
+تحويل الملفات الصوتية إلى نص أو تلخيصها أو الإجابة عن الأسئلة المتعلقة بها](https://ai.google.dev/gemini-api/docs/audio?hl=ar)
 [videocam
 
 فهم الفيديوهات
@@ -859,6 +1091,87 @@ if (interaction.outputImage().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    weatherTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_current_weather"),
+        Description: genai.Ptr("Gets the current weather for a given location."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{
+                    "type":        "string",
+                    "description": "The city and state, e.g. San Francisco, CA",
+                },
+            },
+            "required": []string{"location"},
+        },
+    })
+
+    // 1. Send prompt with tool declaration
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("What is the weather like in Boston?"),
+            Tools: []interactions.Tool{weatherTool},
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 2. Check if the model requested a function call
+    for _, step := range res.Interaction.Steps {
+        if call := step.FunctionCallStep; call != nil {
+            fmt.Printf("Function to call: %s\n", call.Name)
+            fmt.Printf("Arguments: %v\n", call.Arguments)
+
+            // 3. Execute your local function and send the result back
+            finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+                Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3.8-flash"),
+                    PreviousInteractionID: res.Interaction.ID,
+                    Input: interactions.NewInteractionsInput([]interactions.Step{
+                        interactions.NewStep(interactions.FunctionResultStep{
+                            Name:   genai.Ptr(call.Name),
+                            CallID: call.ID,
+                            Result: interactions.NewFunctionResultStepResultUnion(`{"temperature": "72F", "condition": "Sunny"}`),
+                        }),
+                    }),
+                }),
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
+
+            if finalRes.Interaction.OutputText != nil {
+                fmt.Println(*finalRes.Interaction.OutputText)
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -896,7 +1209,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-عندما ينشئ النموذج صورة، يعرض بيانات الصورة المشفّرة بتنسيق base64 في خطوة ضمن مصفوفة `steps`، وكذلك من خلال السمة `output_image`. اطّلِع على [دليل إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) للتعرّف على نسب العرض إلى الارتفاع وتعديل الصور والمراجع.
+عندما ينشئ النموذج صورة، يعرض بيانات الصورة المشفّرة بتنسيق base64 في خطوة ضمن مصفوفة `steps`، وكذلك من خلال السمة `output_image`. يمكنك الاطّلاع على [دليل إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) للتعرّف على نسب العرض إلى الارتفاع وتعديل الصور والمراجع.
 
 [record\_voice\_over
 
@@ -909,9 +1222,9 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 
 يمكنك إنشاء مقاطع وأغانٍ كاملة باستخدام Lyria 3.5.](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar)
 
-## 7. استخدام ناتج منظَّم
+## 7. استخدام الناتج المنظَّم
 
-اضبط النموذج لعرض JSON يطابق مخططًا تحدّده. تعمل المخرجات المنظَّمة مع [Pydantic](https://docs.pydantic.dev/latest/) (بايثون) و[Zod](https://zod.dev/) (جافاسكريبت).
+ضبط النموذج لعرض JSON يتطابق مع مخطّط تحدّده تعمل المخرجات المنظَّمة مع [Pydantic](https://docs.pydantic.dev/latest/) (بايثون) و[Zod](https://zod.dev/) (جافاسكريبت).
 
 ### Python
 
@@ -1047,6 +1360,71 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Who won the latest Super Bowl and what was the score?"),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+
+    // Optional: Inspect search queries and citations
+    for _, step := range res.Interaction.Steps {
+        if searchCall := step.GoogleSearchCallStep; searchCall != nil {
+            fmt.Printf("Search queries: %v\n", searchCall.Arguments.Queries)
+        } else if modelOut := step.ModelOutputStep; modelOut != nil {
+            for _, part := range modelOut.Content {
+                if textPart := part.TextContent; textPart != nil {
+                    for _, annotation := range textPart.Annotations {
+                        if citation := annotation.URLCitation; citation != nil {
+                            var title, url string
+                            if citation.Title != nil {
+                                title = *citation.Title
+                            }
+                            if citation.URL != nil {
+                                url = *citation.URL
+                            }
+                            fmt.Printf("Source: %s (%s)\n", title, url)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1101,7 +1479,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-يحتوي قسم النص الناتج على سلسلة JSON صالحة تتوافق تمامًا مع المخطط المطلوب. لمعرفة كيفية تحديد بنى أكثر تعقيدًا ومخططات متكررة، يُرجى الاطّلاع على [دليل الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
+يحتوي قسم النص الناتج على سلسلة JSON صالحة تتوافق تمامًا مع المخطط المطلوب. لمعرفة كيفية تحديد بنى أكثر تعقيدًا ومخططات متكرّرة، يُرجى الاطّلاع على [دليل الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
 
 ## 8. استخدام الأدوات
 
@@ -1215,6 +1593,55 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Calculate the 20th Fibonacci number and verify if it is prime."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res.Interaction.Steps {
+        if codeCall := step.CodeExecutionCallStep; codeCall != nil {
+            fmt.Printf("Generated Code:\n%s\n", codeCall.Arguments.Code)
+        } else if codeRes := step.CodeExecutionResultStep; codeRes != nil {
+            fmt.Printf("Execution Output:\n%s\n", codeRes.Result)
+        }
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1280,7 +1707,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 يتم تفصيل خطوات البحث ضمن سجلّ التفاعل، ويتضمّن الناتج النهائي اقتباسات مضمّنة تشير إلى مصادر الويب.
 
-يمكنك التعرّف على كيفية استخراج الاقتباسات من نتائج البحث في [دليل التأسيس في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)، أو الاطّلاع على كيفية دمج أدوات متعددة في [دليل دمج الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar).
+يمكنك التعرّف على كيفية استخراج اقتباسات من البحث في [دليل التأسيس في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)، أو الاطّلاع على كيفية دمج أدوات متعددة في [دليل دمج الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar).
 
 [code
 
@@ -1291,12 +1718,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 سياق عناوين URL
 
-تمرير عناوين URL الخاصة بالويب المتاحة للجميع مباشرةً لتأسيس الردود على محتوى صفحات الويب](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)
+يمكنك تمرير عناوين URL الخاصة بالويب مباشرةً لإنشاء ردود تستند إلى محتوى صفحات الويب.](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)
 [search
 
-البحث عن ملف
+البحث عن الملفات
 
-فهرسة المستندات وملفات الوسائط التي تم تحميلها والبحث فيها](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
+فهرسة المستندات والملفات الإعلامية التي تم تحميلها والبحث فيها](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
 [map
 
 خرائط Google
@@ -1310,9 +1737,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ## 9. استدعاء الدوال الخاصة بك
 
-تتيح لك ميزة "استدعاء الدوال" ربط النموذج بالرمز البرمجي. عليك تحديد اسم الدالة ومَعلماتها، ويقرّر النموذج وقت استدعائها ويعرض وسيطات منظَّمة، ثم تنفّذها محليًا وتعيد النتيجة.
+تتيح لك ميزة "استدعاء الدوال" ربط النموذج بالرمز البرمجي. يمكنك تحديد اسم الدالة ومَعلماتها، ويقرّر النموذج متى يتم استدعاؤها ويعرض وسيطات منظَّمة، ويمكنك تنفيذها محليًا وإرسال النتيجة مرة أخرى.
 
-### حالة مستمرة (مُقترَحة)
+### حفظ الحالة (مُقترَحة)
 
 ### Python
 
@@ -1529,6 +1956,69 @@ while (true) {
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Turn 1: Create a CSV file in the sandbox
+    turn1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Write a Python script to save a CSV file 'sales.csv' with 5 rows of sample data."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var env *interactions.CreateModelInteractionEnvironment
+    if turn1.Interaction.EnvironmentID != nil {
+        env = genai.Ptr(interactions.NewCreateModelInteractionEnvironment(*turn1.Interaction.EnvironmentID))
+    }
+
+    // Turn 2: Reuse the sandbox environment to analyze the file created in Turn 1
+    turn2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            PreviousInteractionID: turn1.Interaction.ID,
+            Environment:           env,
+            Input:                 interactions.NewInteractionsInput("Now read 'sales.csv' and compute the total revenue."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if turn2.Interaction.OutputText != nil {
+        fmt.Println(*turn2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1588,7 +2078,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ### بلا حالة
 
-يمكنك أيضًا استخدام ميزة "استدعاء الدوال" في الوضع غير الاحتفاظ بالحالة من خلال إدارة سجلّ المحادثات من جهة العميل وتعيين `store=false`. في الوضع غير المرتبط بحالة، يجب تمرير السجلّ الكامل للمحادثة في الحقل `input` لكل طلب لاحق. يجب أن يتضمّن هذا السجلّ ما يلي:
+يمكنك أيضًا استخدام ميزة "استدعاء الدوال" في الوضع غير الاحتفاظ بالحالة من خلال إدارة سجلّ المحادثات من جهة العميل وتعيين `store=false`. في الوضع غير الاحتفاظ بالحالة، يجب تمرير السجلّ الكامل للمحادثة في الحقل `input` لكل طلب لاحق. يجب أن يتضمّن هذا السجلّ ما يلي:
 
 1. الخطوة `user_input` الأولية
 2. جميع الخطوات التي أنشأها النموذج والتي تم عرضها في الجولة الأولى (بما في ذلك الخطوتان `thought` و`function_call`) كما تم تلقّيها تمامًا
@@ -1822,6 +2312,63 @@ while (true) {
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    recipeSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "recipe_name":       map[string]any{"type": "string"},
+            "prep_time_minutes": map[string]any{"type": "integer"},
+            "ingredients": map[string]any{
+                "type":  "array",
+                "items": map[string]any{"type": "string"},
+            },
+        },
+        "required": []string{"recipe_name", "prep_time_minutes", "ingredients"},
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Give me a quick recipe for chocolate chip cookies."),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.TextResponseFormat{
+                    MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+                    Schema:   recipeSchema,
+                }),
+            )),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1895,7 +2442,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 **الردّ:**
 
-خلال الجولة الأولى، يعرض النموذج ردًا بالحالة `requires_action` والخطوة `function_call`:
+خلال الجولة الأولى، يعرض النموذج ردًا مع الحالة `requires_action` والخطوة `function_call`:
 
 ```
 {
@@ -1916,7 +2463,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-بعد تشغيل الدالة محليًا وإرسال النتيجة (الجولة 2)، يعرض التفاعل النهائي المكتمل ما يلي:
+بعد تشغيل الدالة محليًا وإرسال النتيجة (الجولة 2)، يتم عرض التفاعل النهائي المكتمل:
 
 ```
 {
@@ -2011,6 +2558,59 @@ System.out.println("Environment: " + interaction.environmentId().orElse(""));
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-pro"),
+            Input: interactions.NewInteractionsInput("Solve this logic puzzle: Three gods A, B, and C are called True, False, and Random..."),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel:     interactions.ThinkingLevelHigh.ToPointer(),
+                ThinkingSummaries: interactions.ThinkingSummariesAuto.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Print thought summaries if returned
+    for _, step := range res.Interaction.Steps {
+        if thought := step.ThoughtStep; thought != nil {
+            for _, part := range thought.Summary {
+                if part.TextContent != nil {
+                    fmt.Printf("Thought Summary: %s\n", part.TextContent.Text)
+                }
+            }
+        }
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Printf("Answer: %s\n", *res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2040,7 +2640,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 الوكلاء في AI Studio
 
-مساحة تجريبية مرئية لإنشاء نماذج أوّلية للوكلاء بدون كتابة رموز برمجية](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ar)
+مساحة تجريبية مرئية لإنشاء نماذج أولية للوكلاء بدون كتابة رموز برمجية](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ar)
 
 ## 11. تنفيذ المهام في الخلفية
 
@@ -2151,6 +2751,67 @@ while (true) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Start a Deep Research agent in the background
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:      interactions.AgentOption("deep-research-pro-preview-12-2025"),
+            Input:      interactions.NewInteractionsInput("Research the competitive landscape of solid-state EV batteries in 2026."),
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    interaction := res.Interaction
+    fmt.Printf("Started research job: %s\n", *interaction.ID)
+
+    // Poll until completion
+    for interaction.Status != interactions.InteractionStatusCompleted && interaction.Status != interactions.InteractionStatusFailed {
+        time.Sleep(10 * time.Second)
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        interaction = getRes.Interaction
+        fmt.Printf("Current status: %s\n", interaction.Status)
+    }
+
+    if interaction.Status == interactions.InteractionStatusCompleted {
+        if interaction.OutputText != nil {
+            fmt.Println(*interaction.OutputText)
+        }
+    } else {
+        fmt.Printf("Research failed: %v\n", interaction.Errors)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2187,7 +2848,7 @@ done
 
 **الردّ:**
 
-يتم عرض الردّ الأوّلي على الفور مع الحالة `in_progress`:
+يتم عرض الاستجابة الأولية على الفور مع الحالة `in_progress`:
 
 ```
 {
@@ -2198,7 +2859,7 @@ done
 }
 ```
 
-بعد تنفيذ مهمة الخلفية بالكامل، ستعرض حالة التفاعل ما يلي:
+بعد تنفيذ مهمة الخلفية بالكامل، ستؤدي عملية التحقّق من حالة التفاعل إلى عرض ما يلي:
 
 ```
 {
@@ -2224,23 +2885,23 @@ done
 
 ## الخطوات التالية
 
-- [التنفيذ في الخلفية](https://ai.google.dev/gemini-api/docs/background-execution?hl=ar): تنفيذ المهام الطويلة المدى بشكل غير متزامن وإدارة الحالة
+- [التنفيذ في الخلفية](https://ai.google.dev/gemini-api/docs/background-execution?hl=ar): تنفيذ المهام الطويلة بشكل غير متزامن وإدارة الحالة
 - [إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar): تعليمات النظام وإعدادات الإنشاء وأنماط النصوص المتقدّمة
 - [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar): نِسب العرض إلى الارتفاع وتعديل الصور والمراجع المتعلقة بالأنماط
 - [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar): التصنيف ورصد العناصر والأسئلة والأجوبة المرئية
 - [التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar): استخدام أسلوب "سلسلة الأفكار" للاستدلال في المهام المعقّدة
 - [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar): أوضاع الدوال المتوازية والتركيبية والمقيّدة
-- [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar): التأسيس والاقتباسات واقتراحات البحث
+- [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar): تحديد المصدر والاقتباسات واقتراحات البحث
 - [الوكلاء المُدارون](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar): وكلاء مُعدّون مسبقًا مع إمكانية تنفيذ الرموز البرمجية وإدارة الملفات.
-- [‫Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar): بحث مستقل ومتعدّد الخطوات مع التخطيط والتجميع
-- [الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar): مخطّطات JSON، والتعدادات، وتعريفات الأنواع المتكرّرة
+- [‫Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar): بحث مستقل ومتعدّد الخطوات يتضمّن التخطيط والتجميع.
+- [الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar): مخططات JSON وقيم التعداد وتعريفات الأنواع المتكررة
 
 إرسال ملاحظات
 
 إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-تاريخ التعديل الأخير: 2026-09-18 (حسب التوقيت العالمي المتفَّق عليه)
+تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)
 
 هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-18 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

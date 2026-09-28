@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=fr
-fetched_at: 2026-09-21T05:46:13.080922+00:00
+fetched_at: 2026-09-28T06:17:13.489447+00:00
 title: "R\u00e9soudre les probl\u00e8mes li\u00e9s \u00e0 Google\u00a0AI\u00a0Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

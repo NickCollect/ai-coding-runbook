@@ -1,56 +1,73 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-overview?hl=tr
-fetched_at: 2026-09-21T05:56:55.005004+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-overview
+fetched_at: 2026-09-28T06:11:30.413628+00:00
 title: "Gemini Robotics ER \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 3.8 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
-
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
-
-Geri bildirim gönderin
+Send feedback
 
 # Gemini Robotics ER
 
-Gemini Robotics ER (embodied reasoning) modelleri, robotların fiziksel dünyayı algılamasına ve bu dünyayla etkileşime girmesine olanak tanıyan görme-dil modelleridir (VLMs). Görsel verileri yorumlar, mekansal ve zamansal akıl yürütme yapar, çok adımlı görevleri planlar, robotları ve araçları yönetir.
+Gemini Robotics ER (embodied reasoning) models are vision-language models
+(VLMs) that let robots
+perceive and interact with the physical world. They interpret visual data,
+perform spatial and temporal reasoning, plan multi-step tasks, and orchestrate
+robots and tools.
 
-## Modeller
+## Models
 
-Gemini Robotics ER 2 modeli, Gemini Robotics'in en yeni modelidir.
-Bu, robotların çevrelerini tam olarak anlamalarını sağlayan güncellenmiş akıl yürütme modelimizdir. Robotların ajan tabanlı düzenlemesi (ör. VLA'ları kullanma), ilerleme anlayışı ve başarı tespiti dahil olmak üzere robot videosunu anlama, enstrüman okuma, işaret etme ve uzamsal akıl yürütme gibi somut akıl yürütme yetenekleri konusunda uzmanlaşmıştır.
+The Gemini Robotics ER 2 model is the latest model in Gemini Robotics.
+It is our updated reasoning model that enable robots to
+understand their environments precisely. It specializes in embodied reasoning
+capabilities, such as agentic orchestration of robots (e.g. using VLAs), robot
+video understanding including progress understanding and success detection,
+instrument reading, pointing, and spatial reasoning.
 
-Gemini Robotics ER 2 modeli iki model uç noktası sunar:
+The Gemini Robotics ER 2 model introduces two model endpoints:
 
-- **`gemini-robotics-er-2-preview`**: Standart ER 2 modeli. Geliştirilmiş uzamsal akıl yürütme, video anı bulma, video ilerleme sınıflandırması, çoklu robot düzenleme ve çok adımlı araç kullanımı ile Gemini 3.5 Flash'ın üzerine inşa edilmiştir.
-- **`gemini-robotics-er-2-streaming-preview`**: [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=tr) aracılığıyla gerçek zamanlı yayın için optimize edilmiştir. Sürekli ses ve görüntü girişini işleyen düşük gecikmeli robot aracıları için bu modeli kullanın.
+- **`gemini-robotics-er-2-preview`**: The standard ER 2 model. Builds on
+  Gemini 3.5 Flash with improved spatial reasoning, video moment finding,
+  video progress classification, multi-robot orchestration, and multi-step
+  tool use.
+- **`gemini-robotics-er-2-streaming-preview`**: Optimized for real-time
+  streaming via the [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming). Use this
+  model for low-latency robot agents that process continuous audio and video
+  input.
 
-Gemini Robotics ER 1.6 kullanıyorsanız API çağrılarınızda `model="gemini-robotics-er-1.6-preview"` yerine `model="gemini-robotics-er-2-preview"` veya `model="gemini-robotics-er-2-streaming-preview"` koyarak Gemini Robotics ER 2'ye yükseltin. Gemini Robotics ER 1.6 modelinin [Ağustos ayının sonunda](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#robotics-models) kapatılacağını unutmayın.
+If you are using Gemini Robotics ER 1.6, upgrade to Gemini Robotics ER 2 by replacing
+`model="gemini-robotics-er-1.6-preview"` with
+`model="gemini-robotics-er-2-preview"` or
+`model="gemini-robotics-er-2-streaming-preview"` in your API calls. Note that
+the Gemini Robotics ER 1.6 model will be shut down at the
+[end of August](https://ai.google.dev/gemini-api/docs/deprecations#robotics-models).
 
-[Google AI Studio'da Gemini Robotics ER 2'yi deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=tr)
+[Try Gemini Robotics ER 2 in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview)
 
-## Robotik özellikleri
+## Robotics capabilities
 
-Gemini Robotics ER, bir dizi somut akıl yürütme özelliğini destekler.
-Daha fazla bilgi edinmek için bir özellik seçin:
+Gemini Robotics ER supports a range of embodied reasoning capabilities.
+Select a capability to learn more:
 
-| Kapasite | Açıklama | Kılavuz |
+| Capability | Description | Guide |
 | --- | --- | --- |
-| Uzamsal akıl yürütme | Nesneleri işaretleme, videoda izleme, sınırlayıcı kutularla algılama ve yörünge planlama | [Uzamsal akıl yürütme](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=tr) |
-| Ajan tabanlı vizyon | Resim işleme araçlarından yararlanarak diğer özellikleri geliştirmek için kod yürütmeyi kullanın. | [Temsilci tabanlı vizyon](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=tr) |
-| Görev düzenleme | Uzun vadeli görevleri tamamlamak için uzamsal akıl yürütmeyi özel robot API'leriyle birleştirin. | [Görev düzenleme](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=tr) |
-| Akış (yalnızca Gemini Robotics ER 2 Akış uç noktası) | Düşük gecikmeli işlev çağrısıyla anlık robot temsilciler için çift yönlü akış. | [Robotik için akış](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=tr) |
-| Video ilerleme (yalnızca Gemini Robotics ER 2) | Sürekli video feed'lerinden anları bulma ve ilerleme sınıflandırması. | [Video anlama](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=tr) (Video understanding) |
+| Spatial reasoning | Point to objects, track them in video, detect with bounding boxes, plan trajectories. | [Spatial reasoning](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial) |
+| Agentic vision | Use code execution to enhance other capabilities by leveraging image manipulation tools. | [Agentic vision](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic) |
+| Task orchestration | Combine spatial reasoning with custom robot APIs to complete long-horizon tasks. | [Task orchestration](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration) |
+| Streaming (Gemini Robotics ER 2 Streaming endpoint only) | Bidirectional streaming for real-time robot agents with low-latency function calling. | [Streaming for robotics](https://ai.google.dev/gemini-api/docs/robotics-streaming) |
+| Video progress (Gemini Robotics ER 2 only) | Moment finding and progress classification from continuous video feeds. | [Video understanding](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress) |
 
-## Başlarken
+## Getting started
 
-Aşağıdaki örnekte, bir resimdeki nesneler bulunur ve bunların normalleştirilmiş 2D koordinatları ile etiketleri döndürülür. Bu çıkışı, robot işlemleri oluşturmak için doğrudan bir robotik API'ye veya VLA modeline iletebilirsiniz.
+The following example finds objects in an image and returns their normalized 2D
+coordinates and labels. You can pass this output directly to a robotics API or a
+VLA model to generate robot actions.
 
 ### Python
 
@@ -121,7 +138,8 @@ curl -X POST \
   }'
 ```
 
-Çıktı, her biri `point` (normalleştirilmiş `[y, x]` koordinatları) ve nesneyi tanımlayan bir `label` içeren nesnelerden oluşan bir JSON dizisi olacaktır.
+The output will be a JSON array containing objects, each with a `point`
+(normalized `[y, x]` coordinates) and a `label` identifying the object.
 
 ### JSON
 
@@ -140,110 +158,152 @@ curl -X POST \
 ]
 ```
 
-Aşağıdaki resimde, bu noktaların nasıl gösterilebileceğine dair bir örnek verilmiştir:
+The following image is an example of how these points can be displayed:
 
-![Resimdeki nesnelerin noktalarını gösteren bir örnek](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=tr)
+![An example that displays the points of objects in an image](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png)
 
-## İşleyiş şekli
+## How it works
 
-Gemini Robotics ER, doğal dil istemleriyle resim, video veya ses girişlerini kabul eder. Nesneleri tanımlar, sahne bağlamı ve mekansal ilişkiler hakkında akıl yürütür ve koordinatlar veya sınırlayıcı kutular gibi yapılandırılmış çıkışlar döndürür.
+Gemini Robotics ER takes image, video, or audio input with natural language
+prompts. It identifies objects, reasons about scene context and spatial
+relationships, and returns structured output like coordinates or bounding boxes.
 
-Gemini Robotics ER de temsilci tabanlıdır: Karmaşık görevleri alt görevlere ayırır ve robot işlevlerinizi çağırarak veya oluşturulan kodu çalıştırarak bunları yerine getirir. Örneğin, "elmaları kaseye koy" ifadesi; bulma, kavrama ve yerleştirme adımlarından oluşan bir diziye dönüşür.
+Gemini Robotics ER is also agentic: it breaks complex tasks into sub-tasks and
+executes them by calling your robot functions or running generated code. For
+example, "put the apple in the bowl" becomes a sequence of locate, grasp, and
+place steps.
 
-Gemini'ın araç çağrılarını nasıl yürüttüğü hakkında ayrıntılı bilgi için [İşlev
-çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=tr#how-it-works) bölümüne bakın.
+See [Function
+calling](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting#how-it-works) for
+details on how Gemini executes tool calls.
 
-## Güvenlik
+## Safety
 
-Gemini Robotics ER, güvenlik göz önünde bulundurularak üretilmiş olsa da robotun etrafında güvenli bir ortam sağlamak sizin sorumluluğunuzdadır. Üretken yapay zeka modelleri hata yapabilir ve fiziksel robotlar hasara neden olabilir. Daha fazla bilgi edinmek için [Google DeepMind robotik güvenlik sayfasını](https://deepmind.google/models/gemini-robotics/safety?hl=tr) ziyaret edin.
+While Gemini Robotics ER was built with safety in mind, it is your
+responsibility to maintain a safe environment around the robot. Generative AI
+models can make mistakes, and physical robots can cause damage. To learn more,
+visit the
+[Google DeepMind robotics safety page](https://deepmind.google/models/gemini-robotics/safety).
 
-## En iyi uygulamalar
+## Best practices
 
-1. Sade ve doğal dil kullanın. Robottan ne yapmasını istediğinizi bir kişiye anlatır gibi açıklayın. Bir terim çalışmıyorsa yaygın bir eş anlamlıyı deneyin.
-2. Görsel girişi optimize edin. Resmi göndermeden önce küçük veya net olmayan nesneleri kırpın ya da yakınlaştırın. Işık ve düşük renk kontrastı algılamayı etkileyebilir.
-3. Karmaşık görevleri adımlara ayırın. Modelin odaklanmasını sağlamak ve doğruluğu artırmak için her adımı ayrı bir istem olarak gönderin.
-4. Yüksek hassasiyetli görevler için birden çok kez sorgulama yapın ve sonuçların ortalamasını alın. Bu fikir birliği yaklaşımı, mekansal çıktılardaki varyansı azaltır.
+1. Use plain, natural language. Describe what you want the robot to do as you
+   would to a person. If a term isn't working, try a common synonym.
+2. Optimize visual input. Crop or zoom into small or unclear objects before
+   sending the image. Lighting and low color contrast can affect detection.
+3. Break complex tasks into steps. Send each step as a separate prompt to
+   keep the model focused and improve accuracy.
+4. Query multiple times and average results for high-precision tasks. This
+   consensus approach reduces variance on spatial outputs.
 
-## Sınırlamalar
+## Limitations
 
-Gemini Robotics ER ile geliştirme yaparken aşağıdaki sınırlamaları göz önünde bulundurun:
+Consider the following limitations when developing with Gemini Robotics ER:
 
-- **API anahtarı kısıtlamaları:** Gemini API, kısıtlanmamış API anahtarlarından gelen istekleri kabul etmez ve `403 Forbidden` hatasını döndürür. [AI Studio](https://aistudio.google.com/api-keys?hl=tr)'da kısıtlamalar ekleyerek API anahtarınızı güvenli hale getirin.
-  Ayrıntılar için [Sınırsız API anahtarlarını güvenli hale getirme](https://ai.google.dev/gemini-api/docs/api-key?hl=tr#secure-unrestricted-keys) konusuna bakın.
-- **Gecikme süresi ve performans:** Karmaşık sorgular, yüksek çözünürlüklü girişler veya yüksek düşünce seviyeleri, işleme sürelerinin artmasına neden olabilir. Düşünme seviyesi için gecikme ve performans arasında iyi bir denge sağlamak üzere orta seviyeyi kullanın.
-- **Halüsinasyonlar:** Tüm büyük dil modelleri gibi Gemini Robotics ER modelleri de zaman zaman "halüsinasyon" görebilir veya yanlış bilgi verebilir. Bu durum özellikle belirsiz istemlerde ya da dağıtım dışı girişlerde görülür.
-- **İstem kalitesine bağlılık:** Çıkış kalitesi, giriş isteminin netliğine bağlıdır. Net ve iyi yapılandırılmış istemler kullanın.
-- **Hesaplama maliyeti:** Özellikle video girişleriyle veya yüksek `thinking_budget` ile modelin çalıştırılması, hesaplama kaynaklarını tüketir ve maliyetlere neden olur.
-  Daha fazla bilgi için [Düşünme](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=tr) sayfasına bakın.
-- **Giriş türleri:** Her moddaki sınırlamalarla ilgili ayrıntılar için aşağıdaki konulara bakın.
-  - [Resim girişleri](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=tr#technical-details-image)
-  - [Video girişleri](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr#supported-formats)
-  - [Ses girişleri](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=tr#supported-formats)
+- **API key restrictions:** The Gemini API does not accept requests from
+  unrestricted API keys and returns a `403 Forbidden` error. Secure your API
+  key by adding restrictions in [AI Studio](https://aistudio.google.com/api-keys).
+  See [Secure unrestricted API keys](https://ai.google.dev/gemini-api/docs/api-key#secure-unrestricted-keys)
+  for details.
+- **Latency vs performance:** Complex queries, high-resolution inputs or high
+  thinking levels can lead to increased processing times. For thinking level
+  use medium for a good balance between latency and performance.
+- **Hallucinations:** Like all large language models, Gemini Robotics ER models
+  can occasionally "hallucinate" or provide incorrect information, especially
+  for ambiguous prompts or out-of-distribution inputs.
+- **Dependence on prompt quality:** Output quality depends on the clarity
+  of the input prompt. Use specific, well-structured prompts.
+- **Computational cost:** Running the model, especially with video inputs or
+  high `thinking_budget`, consumes computational resources and incurs costs.
+  See the [Thinking](https://ai.google.dev/gemini-api/docs/generate-content/thinking) page for more details.
+- **Input types:** See the following topics for details on limitations for each mode.
+  - [Image inputs](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding#technical-details-image)
+  - [Video inputs](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding#supported-formats)
+  - [Audio inputs](https://ai.google.dev/gemini-api/docs/generate-content/audio#supported-formats)
 
-## Gizlilik Uyarısı
+## Privacy Notice
 
-Bu belgede referans verilen modellerin ("Robotik Modeller") çalışmak ve donanımınızı talimatlarınıza uygun şekilde hareket ettirmek için video ve ses verilerinden yararlandığını kabul edersiniz. Bu nedenle, Robotik Modelleri, tanımlanabilir kişilerden elde edilen veriler (ör. ses, görüntü ve benzerlik verileri ("Kişisel Veriler")) Robotik Modeller tarafından toplanacak şekilde çalıştırabilirsiniz. Robotik Modelleri Kişisel Veri toplayacak şekilde çalıştırmayı seçerseniz, bu tür tanımlanabilir kişilerin, Kişisel Verilerinin [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=tr) adresinde bulunan Gemini API Ek Hizmet Şartları'nda ("Şartlar") belirtildiği şekilde Google'a sağlanabileceği ve Google tarafından kullanılabileceği konusunda yeterince bilgilendirilip onay vermediği sürece Robotik Modellerle etkileşime girmesine veya Robotik Modellerin bulunduğu alanda bulunmasına izin vermeyeceğinizi kabul edersiniz. Bu durum, "Google Verilerinizi Nasıl Kullanır?" başlıklı bölüm uyarınca da geçerlidir. Bu tür bir bildirimin, Şartlar'da belirtildiği şekilde Kişisel Verilerin toplanmasına ve kullanılmasına izin vermesini sağlayacak ve yüz bulanıklaştırma gibi teknikler kullanarak ve Robotik Modelleri, mümkün olduğunca kimliği belirlenebilen kişilerin bulunmadığı alanlarda çalıştırarak Kişisel Verilerin toplanmasını ve dağıtılmasını en aza indirmek için ticari olarak makul çabayı göstereceksiniz.
+You acknowledge that the models referenced in this document (the "Robotics
+Models") leverage video and audio data in order to operate and move your
+hardware in accordance with your instructions. You therefore may operate the
+Robotics Models such that data from identifiable persons, such as voice,
+imagery, and likeness data ("Personal Data"), will be collected by the Robotics
+Models. If you elect to operate the Robotics Models in a manner that collects
+Personal Data, you agree that you will not permit any identifiable persons to
+interact with, or be present in the area surrounding, the Robotics Models,
+unless and until such identifiable persons have been sufficiently notified of
+and consented to the fact that their Personal Data may be provided to and used
+by Google as outlined in the Gemini API Additional Terms of Service found at
+<https://ai.google.dev/gemini-api/terms>
+(the "Terms"), including in accordance
+with the section entitled "How Google Uses Your Data". You will ensure that such
+notice permits the collection and use of Personal Data as outlined in the Terms,
+and you will use commercially reasonable efforts to minimize the collection and
+distribution of Personal Data by using techniques such as face blurring and
+operating the Robotics Models in areas not containing identifiable persons to
+the extent practicable.
 
-## Fiyatlandırma
+## Pricing
 
-Fiyatlandırma ve kullanılabilir bölgeler hakkında ayrıntılı bilgi için [fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) sayfasına bakın.
+For detailed information on pricing and available regions, refer to the
+[pricing](https://ai.google.dev/gemini-api/docs/pricing) page.
 
-## Model uç noktaları
+## Model endpoints
 
-### Gemini Robotics ER 2 Önizlemesi
+### Gemini Robotics ER 2 Preview
 
-| Mülk | Açıklama |
+| Property | Description |
 | --- | --- |
-| id\_cardModel kodu | `gemini-robotics-er-2-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Destekleniyor  **[Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr)**  Destekleniyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Destekleniyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Destekleniyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Destekleniyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - Önizleme: `gemini-robotics-er-2-preview` |
-| calendar\_monthSon güncelleme | Temmuz 2026 |
-| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=tr) |
+| id\_cardModel code | `gemini-robotics-er-2-preview` |
+| saveSupported data types | **Inputs**  Text, images, video, audio  **Output**  Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens) | **Input token limit**  131,072  **Output token limit**  65,536 |
+| handymanCapabilities | **[Audio generation](https://ai.google.dev/gemini-api/docs/speech-generation)**  Not supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Supported  **[Computer use](https://ai.google.dev/gemini-api/docs/computer-use)**  Supported  **[File search](https://ai.google.dev/gemini-api/docs/file-search)**  Supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Supported  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding)**  Supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Live API](https://ai.google.dev/gemini-api/docs/live-api)**  Not supported  **[Search grounding](https://ai.google.dev/gemini-api/docs/google-search)**  Supported  **[Structured outputs](https://ai.google.dev/gemini-api/docs/structured-output)**  Supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Supported  **[URL context](https://ai.google.dev/gemini-api/docs/url-context)**  Supported |
+| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Not supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Not supported |
+| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - Preview: `gemini-robotics-er-2-preview` |
+| calendar\_monthLatest update | July 2026 |
+| id\_cardModel card | [Model card](https://deepmind.google/models/model-cards/gemini-robotics-er-2/) |
 
 ### Gemini Robotics ER 2 Streaming Preview
 
-| Mülk | Açıklama |
+| Property | Description |
 | --- | --- |
-| id\_cardModel kodu | `gemini-robotics-er-2-streaming-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Destekleniyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Desteklenmiyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - Önizleme: `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthSon güncelleme | Temmuz 2026 |
-| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=tr) |
+| id\_cardModel code | `gemini-robotics-er-2-streaming-preview` |
+| saveSupported data types | **Inputs**  Text, images, video, audio  **Output**  Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens) | **Input token limit**  131,072  **Output token limit**  65,536 |
+| handymanCapabilities | **[Audio generation](https://ai.google.dev/gemini-api/docs/speech-generation)**  Not supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Not supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Not supported  **[Computer use](https://ai.google.dev/gemini-api/docs/computer-use)**  Not supported  **[File search](https://ai.google.dev/gemini-api/docs/file-search)**  Not supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Supported  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding)**  Not supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Live API](https://ai.google.dev/gemini-api/docs/live-api)**  Supported  **[Search grounding](https://ai.google.dev/gemini-api/docs/google-search)**  Supported  **[Structured outputs](https://ai.google.dev/gemini-api/docs/structured-output)**  Not supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Supported  **[URL context](https://ai.google.dev/gemini-api/docs/url-context)**  Not supported |
+| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Not supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Not supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Not supported |
+| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - Preview: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthLatest update | July 2026 |
+| id\_cardModel card | [Model card](https://deepmind.google/models/model-cards/gemini-robotics-er-2/) |
 
-### Gemini Robotics ER 1.6 Önizlemesi
+### Gemini Robotics ER 1.6 Preview
 
-| Mülk | Açıklama |
+| Property | Description |
 | --- | --- |
-| id\_cardModel kodu | `gemini-robotics-er-1.6-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video, ses  **Çıkış**  Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Destekleniyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Destekleniyor  **[Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr)**  Destekleniyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Destekleniyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Destekleniyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Destekleniyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Destekleniyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Destekleniyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - Önizleme: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthSon güncelleme | Aralık 2025 |
-| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
+| id\_cardModel code | `gemini-robotics-er-1.6-preview` |
+| saveSupported data types | **Inputs**  Text, images, video, audio  **Output**  Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens) | **Input token limit**  131,072  **Output token limit**  65,536 |
+| handymanCapabilities | **[Audio generation](https://ai.google.dev/gemini-api/docs/speech-generation)**  Not supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Supported  **[Computer use](https://ai.google.dev/gemini-api/docs/computer-use)**  Supported  **[File search](https://ai.google.dev/gemini-api/docs/file-search)**  Supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Supported  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding)**  Supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Live API](https://ai.google.dev/gemini-api/docs/live-api)**  Not supported  **[Search grounding](https://ai.google.dev/gemini-api/docs/google-search)**  Supported  **[Structured outputs](https://ai.google.dev/gemini-api/docs/structured-output)**  Supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Supported  **[URL context](https://ai.google.dev/gemini-api/docs/url-context)**  Supported |
+| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Not supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Not supported |
+| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - Preview: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthLatest update | December 2025 |
+| cognition\_2Knowledge cutoff | January 2025 |
 
-## Sırada ne var?
+## What's next
 
-- [Uzamsal akıl yürütme](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=tr): işaretleme, izleme, sınırlayıcı kutular, yörüngeler.
-- [Ajan tabanlı yetenekler](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=tr): Kod yürütme, enstrüman okuma, görüntü açıklama.
-- [Görev düzenleme](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=tr): Özel robot API'leri içeren uzun vadeli görevler.
-- [Yayın özellikli robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=tr): Gerçek zamanlı çift yönlü yayın (yalnızca Gemini Robotics ER 2).
-- [Video anlama](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=tr): Anları bulma ve ilerleme sınıflandırması (yalnızca Gemini Robotics ER 2).
-- [Google DeepMind robotik güvenlik](https://deepmind.google/models/gemini-robotics/safety?hl=tr): Model ailesinin arkasındaki güvenlik araştırması.
+- [Spatial reasoning](https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial) — pointing, tracking, bounding boxes, trajectories.
+- [Agentic capabilities](https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic) — code execution, instrument reading, image annotation.
+- [Task orchestration](https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration) — long-horizon tasks with custom robot APIs.
+- [Robotics with streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming) — real-time bidirectional streaming (Gemini Robotics ER 2 only).
+- [Video understanding](https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress) — moment finding and progress classification (Gemini Robotics ER 2 only).
+- [Google DeepMind robotics safety](https://deepmind.google/models/gemini-robotics/safety) — safety research behind the model family.
 
-Geri bildirim gönderin
+Send feedback
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Son güncelleme tarihi: 2026-09-08 UTC.
+Last updated 2026-09-04 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Need to tell us more?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-08 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-09-04 UTC."],[],[]]

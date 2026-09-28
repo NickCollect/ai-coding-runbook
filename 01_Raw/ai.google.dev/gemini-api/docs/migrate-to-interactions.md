@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=he
-fetched_at: 2026-09-21T05:50:05.926575+00:00
-title: "\u05de\u05e2\u05d1\u05e8 \u05dc-Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=th
+fetched_at: 2026-09-28T06:18:18.567985+00:00
+title: "\u0e01\u0e32\u0e23\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1b\u0e22\u0e31\u0e07 Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-# מעבר ל-Interactions API
+# การย้ายข้อมูลไปยัง Interactions API
 
-המדריך הזה יעזור לכם לעבור מ-`generateContent` API ל-Interactions API.
+คู่มือนี้จะช่วยคุณย้ายข้อมูลจาก `generateContent` API ไปยัง Interactions API
 
-‫Interactions API הוא הדרך הכי פשוטה וטובה לבנות עם מודלים וסוכנים של Gemini. למרות ש-`generateContent` עדיין נתמך באופן מלא, מומלץ להשתמש ב-Interactions API לכל פיתוח חדש.
+Interactions API เป็นวิธีที่ง่ายที่สุดและดีที่สุดในการสร้างด้วยโมเดลและเอเจนต์ Gemini แม้ว่าเราจะยังคงรองรับ `generateContent` อย่างเต็มที่ แต่ขอแนะนำให้ใช้ Interactions API สำหรับการพัฒนาใหม่ทั้งหมด
 
-### למה כדאי לעבור?
+### ทำไมต้องย้ายข้อมูล
 
-‫Interactions API הוא הדרך הכי פשוטה וטובה לבנות עם מודלים וסוכנים של Gemini:
+Interactions API เป็นวิธีที่ง่ายที่สุดและดีที่สุดในการสร้างด้วยโมเดลและเอเจนต์ของ Gemini
 
-- **ניהול היסטוריה בצד השרת**: תהליכים פשוטים יותר של שיחות רב-שלביות באמצעות `previous_interaction_id`. השרת מפעיל את המצב כברירת מחדל (`store=true`), אבל אפשר להגדיר התנהגות ללא מצב על ידי הגדרת `store=false`.
-- **שלבי ביצוע שניתן לצפות בהם**: שלבים מוקלדים מקלים על ניפוי באגים בתהליכים מורכבים ועל עיבוד ממשק משתמש לאירועים ביניים (כמו מחשבות או ווידג'טים של חיפוש).
-- **שימוש בכלים ותהליכי עבודה שמבוססים על סוכנים**: תמיכה מובנית בשימוש בכלים מרובי-שלבים, בתזמור ובזרימות מורכבות של חשיבה רציונלית באמצעות שלבי ביצוע מוקלדים.
-- **משימות ארוכות וברקע**: תמיכה בהעברת פעולות שדורשות הרבה זמן, כמו Deep Think ו-Deep Research, לתהליכים ברקע באמצעות `background=true`.
+- **การจัดการประวัติฝั่งเซิร์ฟเวอร์**: ลดความซับซ้อนของโฟลว์การสนทนาไปมาผ่าน `previous_interaction_id` เซิร์ฟเวอร์จะเปิดใช้สถานะโดยค่าเริ่มต้น (`store=true`) แต่คุณเลือกใช้ลักษณะการทำงานแบบไม่มีสถานะได้โดยการตั้งค่า `store=false`
+- **ขั้นตอนการดำเนินการที่สังเกตได้**: ขั้นตอนที่พิมพ์ทำให้การแก้ไขข้อบกพร่องของโฟลว์ที่ซับซ้อนและการแสดงผล UI สำหรับเหตุการณ์ระดับกลาง (เช่น ความคิดหรือวิดเจ็ตการค้นหา) เป็นเรื่องง่าย
+- **การใช้เครื่องมือและเวิร์กโฟลว์แบบเป็น Agent**: รองรับการใช้เครื่องมือแบบหลายขั้นตอน การจัดการเป็นกลุ่ม และโฟลว์การให้เหตุผลที่ซับซ้อนผ่านขั้นตอนการดำเนินการที่พิมพ์
+- **งานที่ใช้เวลานานและงานเบื้องหลัง**: รองรับการส่งต่อการดำเนินการที่ใช้เวลานาน เช่น Deep Think และ Deep Research ไปยังกระบวนการเบื้องหลังโดยใช้ `background=true`
 
-## קלט/פלט בסיסי
+## อินพุต/เอาต์พุตพื้นฐาน
 
-בקטע הזה נסביר איך להעביר בקשה פשוטה ליצירת טקסט.
+ส่วนนี้แสดงวิธีเปลี่ยนคำขอการสร้างข้อความอย่างง่าย
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-‫`generateContent` API הוא בלי שמירת מצב ומחזיר את התגובה ישירות. מבנה התגובה עוטף את הפלט ברשימה של `candidates`, שכל אחת מהן מכילה `content` עם רשימה של `parts` לניתוח.
+`generateContent` API ไม่มีการเก็บสถานะและจะแสดงการตอบกลับโดยตรง โครงสร้างการตอบกลับจะรวมเอาต์พุตไว้ในรายการของ `candidates` ซึ่งแต่ละรายการจะมี `content` ที่มีรายการของ `parts` เพื่อแยกวิเคราะห์
 
 ### Python
 
@@ -79,6 +79,39 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    response, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-2.5-flash-lite",
+        genai.Text("Tell me a joke."),
+        nil,
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(response.Text())
+}
+```
+
 ### REST
 
 ```
@@ -118,10 +151,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-‫Interactions API מחזיר משאב אינטראקציה מאוחסן עם `steps`ציר זמן. אפשר לבדוק את המערך `steps` באופן ידני כדי למצוא אירועי ביניים, אבל ערכות ה-SDK של GenAI מבית Google מספקות מאפיינים נוחים ישירות באובייקט `Interaction` שמוחזר כדי לגשת לפלט הסופי.
+Interaction API จะแสดงผลแหล่งข้อมูลการโต้ตอบที่จัดเก็บไว้พร้อม`steps`
+ไทม์ไลน์ แม้ว่าคุณจะตรวจสอบอาร์เรย์ `steps` ด้วยตนเองเพื่อค้นหาเหตุการณ์ระดับกลางได้ แต่ Google GenAI SDK มีพร็อพเพอร์ตี้ที่สะดวก
+ในออบเจ็กต์ `Interaction` ที่ส่งคืนโดยตรงเพื่อให้เข้าถึงเอาต์พุตสุดท้ายได้
 
-מאפיין הנוחות הנפוץ ביותר הוא **`.output_text`** (מחרוזת), שמחלץ באופן אוטומטי בלוקים עוקבים של `TextContent` ומצרף אותם בסוף התשובה של המודל. השיטה הזו מתאימה לתשובות פשוטות, אבל היא לא כוללת בלוקים קודמים של טקסט שמפריד ביניהם תוכן שאינו טקסט (כמו מחשבות, תמונות, אודיו או קריאות לכלים). לתשובות מורכבות או משולבות
-ממגוון סוגים, צריך להשתמש בשיטה `steps` באופן ידני.
+พร็อพเพอร์ตี้ความสะดวกที่พบบ่อยที่สุดคือ **`.output_text`** (String) ซึ่งจะ
+แยกและรวมบล็อก `TextContent` ที่ต่อเนื่องกันโดยอัตโนมัติที่
+ส่วนท้ายของคำตอบของโมเดล แม้ว่าวิธีนี้จะใช้ได้ดีกับคำตอบง่ายๆ
+แต่จะไม่มีบล็อกข้อความก่อนหน้าซึ่งคั่นด้วยเนื้อหาที่ไม่ใช่ข้อความ (เช่น
+ความคิด รูปภาพ เสียง หรือการเรียกใช้เครื่องมือ) สำหรับคำตอบแบบมัลติโมดอลที่ซับซ้อนหรือสลับกัน คุณต้องวนซ้ำผ่าน `steps` ด้วยตนเองแทน
 
 ### Python
 
@@ -176,6 +214,43 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Tell me a joke."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -217,17 +292,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## שיחות רב-שלביות
+## การสนทนาไปมา
 
-ה-Interactions API מאחסן אינטראקציות כברירת מחדל, וכך מאפשר ניהול מצב בצד השרת לשיחות רב-שלביות.
+Interactions API จะจัดเก็บการโต้ตอบโดยค่าเริ่มต้น ซึ่งช่วยให้การจัดการสถานะฝั่งเซิร์ฟเวอร์สำหรับการสนทนาไปมา
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-ב-`generateContent`, צריך לנהל את היסטוריית השיחות באופן ידני באמצעות מערך `contents` או כלי עזר לצ'אט בצד הלקוח.
+ใน `generateContent` คุณต้องจัดการประวัติการสนทนาด้วยตนเองโดยใช้อาร์เรย์ `contents` หรือตัวช่วยแชทฝั่งไคลเอ็นต์
 
 ### Python
 
-**שימוש בכלי העזר לצ'אט (מומלץ)**
+**ใช้ผู้ช่วยแชท (แนะนำ)**
 
 ```
 from google import genai
@@ -242,7 +317,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**ניהול ההיסטוריה באופן ידני**
+**การจัดการประวัติด้วยตนเอง**
 
 ```
 from google import genai
@@ -270,7 +345,7 @@ print(response.text)
 
 ### JavaScript
 
-**שימוש בכלי העזר לצ'אט (מומלץ)**
+**ใช้ผู้ช่วยแชท (แนะนำ)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -285,7 +360,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**ניהול ההיסטוריה באופן ידני**
+**การจัดการประวัติด้วยตนเอง**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -344,6 +419,57 @@ GenerateContentResponse manualResponse =
 System.out.println(manualResponse.text());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Using the chat helper (recommended)
+    chat, err := client.Chats.Create(ctx, "gemini-2.5-flash-lite", nil, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    response1, err := chat.SendMessage(ctx, genai.Part{Text: "Hi, my name is Phil."})
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(response1.Text())
+
+    response2, err := chat.SendMessage(ctx, genai.Part{Text: "What is my name?"})
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(response2.Text())
+
+    // Manually managing history
+    history := []*genai.Content{
+        genai.NewContentFromText("Hi, my name is Phil.", genai.RoleUser),
+        genai.NewContentFromText("Hi Phil, how can I help you?", genai.RoleModel),
+        genai.NewContentFromText("What is my name?", genai.RoleUser),
+    }
+    manualResponse, err := client.Models.GenerateContent(ctx, "gemini-2.5-flash-lite", history, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(manualResponse.Text())
+}
+```
+
 ### REST
 
 ```
@@ -378,9 +504,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ה-API של האינטראקציות מנהל את המצב בשרת. כדי להמשיך שיחה, מציינים את `previous_interaction_id`.
+Interactions API จัดการสถานะในเซิร์ฟเวอร์ คุณสนทนาต่อได้โดยอ้างอิงถึง `previous_interaction_id`
 
 ### Python
 
@@ -457,6 +583,57 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Hi, my name is Phil."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res1.Interaction.OutputText != nil {
+        fmt.Println("Response 1:", *res1.Interaction.OutputText)
+    }
+
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            PreviousInteractionID: res1.Interaction.ID,
+            Input:                 interactions.NewInteractionsInput("What is my name?"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res2.Interaction.OutputText != nil {
+        fmt.Println("Response 2:", *res2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -507,13 +684,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## קלט מרובה מצבים
+## อินพุตหลายรูปแบบ
 
-שני ממשקי ה-API תומכים בקלט מולטי-מודאלי (טקסט, תמונות, סרטונים וכו').
+API ทั้ง 2 รายการรองรับอินพุตหลายรูปแบบ (ข้อความ รูปภาพ วิดีโอ ฯลฯ)
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-ב-`generateContent`, מעבירים רשימה של `parts` במערך `contents`. התגובה מחזירה פלט ב-`parts` של המועמד הראשון.
+ใน `generateContent` คุณจะส่งรายการ `parts` ภายในอาร์เรย์ `contents` การตอบกลับจะแสดงเอาต์พุตใน `parts` ของผู้สมัครคนแรก
 
 ### Python
 
@@ -584,6 +761,47 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    imageBytes, err := os.ReadFile("sample.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    contents := []*genai.Content{
+        genai.NewContentFromParts([]*genai.Part{
+            genai.NewPartFromBytes(imageBytes, "image/jpeg"),
+            genai.NewPartFromText("Describe this image."),
+        }, genai.RoleUser),
+    }
+
+    response, err := client.Models.GenerateContent(ctx, "gemini-2.5-flash-lite", contents, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(response.Text())
+}
+```
+
 ### REST
 
 ```
@@ -624,9 +842,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-API של אינטראקציות, מעבירים מערך לשדה `input`. כדי לאחזר את תוכן הפלט, מאתרים את השלב `model_output` בציר הזמן.
+ใน Interactions API คุณจะส่งอาร์เรย์ไปยังฟิลด์ `input` คุณดึงเนื้อหาเอาต์พุตได้โดยค้นหา`model_output`ในไทม์ไลน์
 
 ### Python
 
@@ -721,6 +939,59 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    imageBytes, err := os.ReadFile("sample.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64ImageData := base64.StdEncoding.EncodeToString(imageBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.ImageContent{
+                    MimeType: interactions.ImageContentMimeType("image/jpeg").ToPointer(),
+                    Data:     genai.Ptr(base64ImageData),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Describe this image.",
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -776,13 +1047,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## פלט מובנה
+## เอาต์พุตที่มีโครงสร้าง
 
-כדי שהמודל יחזיר JSON שתואם לסכימה ספציפית, צריך להגדיר את פורמט התגובה.
+หากต้องการให้โมเดลแสดงผล JSON ที่ตรงกับสคีมาที่เฉพาะเจาะจง ให้กำหนดค่ารูปแบบการตอบกลับ
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-ב-`generateContent`, מגדירים את פורמט הפלט באמצעות השדות `response_mime_type` ו-`response_schema` שמוטמעים באובייקט `config` (או `generationConfig`).
+ใน `generateContent` คุณจะกำหนดค่ารูปแบบเอาต์พุตโดยใช้ฟิลด์ `response_mime_type` และ `response_schema` ที่ซ้อนอยู่ภายในออบเจ็กต์ `config` (หรือ `generationConfig`)
 
 ### Python
 
@@ -874,6 +1145,54 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    recipeSchema := &genai.Schema{
+        Type: genai.TypeObject,
+        Properties: map[string]*genai.Schema{
+            "recipe_name": {Type: genai.TypeString},
+            "ingredients": {
+                Type:  genai.TypeArray,
+                Items: &genai.Schema{Type: genai.TypeString},
+            },
+        },
+        Required: []string{"recipe_name", "ingredients"},
+    }
+
+    response, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-2.5-flash-lite",
+        genai.Text("Give me a recipe for chocolate chip cookies."),
+        &genai.GenerateContentConfig{
+            ResponseMIMEType: "application/json",
+            ResponseSchema:   recipeSchema,
+        },
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(response.Text())
+}
+```
+
 ### REST
 
 ```
@@ -920,9 +1239,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, אמצעי הבקרה של פורמט הפלט עוברים למערך `response_format` ברמה העליונה.
+ใน Interactions API การควบคุมรูปแบบเอาต์พุตจะย้ายไปอยู่ที่อาร์เรย์ `response_format` ระดับบนสุด
 
 ### Python
 
@@ -1029,6 +1348,61 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    schema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "recipe_name": map[string]any{"type": "string"},
+            "ingredients": map[string]any{
+                "type":  "array",
+                "items": map[string]any{"type": "string"},
+            },
+        },
+        "required": []string{"recipe_name", "ingredients"},
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Give me a recipe for chocolate chip cookies."),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.TextResponseFormat{
+                    MimeType: interactions.TextResponseFormatMimeType("application/json").ToPointer(),
+                    Schema:   schema,
+                }),
+            )),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1081,13 +1455,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## יצירה מולטי-מודאלית
+## การสร้างแบบหลายรูปแบบ
 
-כשיוצרים תוכן במודאליות שאינה טקסט (כמו תמונות או אודיו), ההבדל העיקרי הוא במבנה התשובה של המדיה שנוצרה.
+เมื่อสร้างเนื้อหาในรูปแบบอื่นๆ นอกเหนือจากข้อความ (เช่น รูปภาพหรือเสียง) ความแตกต่างหลักคือวิธีที่คำตอบจัดโครงสร้างสื่อที่สร้างขึ้น
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-ב-`generateContent`, התשובה מחזירה מדיה שנוצרה ישירות ב-`parts` של המועמד, בדרך כלל כנתוני base64 ב-`inlineData`.
+ใน `generateContent` คำตอบจะแสดงสื่อที่สร้างขึ้นโดยตรงใน `parts` ของผู้สมัคร โดยปกติจะเป็นข้อมูล base64 ใน `inlineData`
 
 ```
 # Response structure concept
@@ -1112,9 +1486,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, מדיה שנוצרה מופיעה כפריטים נפרדים במערך `content` של שלב `model_output` בציר הזמן, וכך נשמר הסדר הכרונולוגי של האינטראקציה.
+ใน Interactions API สื่อที่สร้างขึ้นจะปรากฏเป็นรายการที่แตกต่างกันภายในอาร์เรย์ `content` ของขั้นตอน `model_output` ในไทม์ไลน์ ซึ่งจะรักษาลำดับเวลาของการโต้ตอบไว้
 
 ```
 # Response structure concept
@@ -1140,15 +1514,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-כך ניתוח התגובה יהיה עקבי עם האופן שבו קלטים ופלט טקסט מטופלים – כל דבר הוא שלב בציר הזמן.
+วิธีนี้จะช่วยให้การแยกวิเคราะห์การตอบกลับสอดคล้องกับวิธีจัดการอินพุตและเอาต์พุตข้อความ โดยทุกอย่างจะเป็นขั้นตอนในไทม์ไลน์
 
-## כלים בצד השרת
+## เครื่องมือฝั่งเซิร์ฟเวอร์
 
-‫Gemini תומך בכלים מובנים בצד השרת, כמו עיגון נתונים של חיפוש Google. ההבדל העיקרי הוא באופן שבו התשובה מייצגת את הפעלת הכלי.
+Gemini รองรับเครื่องมือฝั่งเซิร์ฟเวอร์ในตัว เช่น การอ้างอิงข้อมูลของ Google Search ความแตกต่างหลักๆ คือวิธีที่คำตอบแสดงการดำเนินการของเครื่องมือ
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-ב-`generateContent`, הכלים בצד השרת הם ברובם אטומים. מפעילים את הכלי ומקבלים תשובה סופית עם אובייקט `groundingMetadata` נפרד. חשוב לציין שהציטוטים לא מוצגים בתוך הטקסט, אלא `groundingSupports` נעשה שימוש באינדקסים של התווים כדי למפות את פלחי הטקסט בחזרה למקורות באינטרנט ב-`groundingChunks`.
+ใน `generateContent` เครื่องมือฝั่งเซิร์ฟเวอร์ส่วนใหญ่จะทำงานแบบไม่โปร่งใส คุณเปิดใช้เครื่องมือและรับคำตอบสุดท้ายพร้อม`groundingMetadata`ออบเจ็กต์แยกต่างหาก ที่สำคัญคือ การอ้างอิงไม่ได้อยู่ในบรรทัด `groundingSupports` ใช้ดัชนีอักขระเพื่อแมปข้อความกลับไปยังแหล่งที่มาบนเว็บใน `groundingChunks`
 
 ### Python
 
@@ -1240,6 +1614,54 @@ if (!candidates.isEmpty() && candidates.get(0).groundingMetadata().isPresent()) 
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    response, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-2.5-flash-lite",
+        genai.Text("Who won Euro 2024?"),
+        &genai.GenerateContentConfig{
+            Tools: []*genai.Tool{
+                {GoogleSearch: &genai.GoogleSearch{}},
+            },
+        },
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if len(response.Candidates) > 0 && response.Candidates[0].GroundingMetadata != nil {
+        metadata := response.Candidates[0].GroundingMetadata
+        if metadata.SearchEntryPoint != nil {
+            fmt.Println("Search Entry Point:", metadata.SearchEntryPoint.RenderedContent)
+        }
+        for _, support := range metadata.GroundingSupports {
+            if support.Segment != nil {
+                fmt.Println("Citation:", support.Segment.Text)
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1298,11 +1720,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, כלים בצד השרת מספקים שקיפות מלאה של ציר הזמן. ה-API מתעד את הקריאה ואת התוצאה כביצועים נפרדים `steps` (`google_search_call` ו-`google_search_result`), וחושף בדיוק אילו נתונים המודל אחזר.
+ใน Interactions API เครื่องมือฝั่งเซิร์ฟเวอร์จะให้ความโปร่งใสของไทม์ไลน์ทั้งหมด API จะบันทึกการเรียกและผลลัพธ์เป็นการดำเนินการที่แตกต่างกัน `steps` (`google_search_call` และ `google_search_result`) ซึ่งจะแสดงข้อมูลที่โมเดลดึงมาอย่างชัดเจน
 
-בנוסף, ה-API מחזיר ציטוטים **בגוף הטקסט**. במקום למפות אינדקסים מאובייקט מטא-נתונים נפרד, פריט הטקסט בשלב `model_output` מכיל מערך `annotations` משלו שמקשר ישירות למקור.
+นอกจากนี้ API ยังแสดงการอ้างอิง**ในบรรทัด**ด้วย รายการข้อความภายใน`model_output` ขั้นตอนจะมีอาร์เรย์ `annotations` ของตัวเองที่ลิงก์ไปยังแหล่งที่มาโดยตรง แทนที่จะแมปดัชนีจากออบเจ็กต์ข้อมูลเมตาแยกต่างหาก
 
 ### Python
 
@@ -1412,6 +1834,64 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Who won Euro 2024?"),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res.Interaction.Steps {
+        if searchStep := step.GoogleSearchResultStep; searchStep != nil {
+            for _, r := range searchStep.Result {
+                if r.SearchSuggestions != nil {
+                    fmt.Println("Search Suggestions:", *r.SearchSuggestions)
+                }
+            }
+        } else if modelOutput := step.ModelOutputStep; modelOutput != nil {
+            for _, contentBlock := range modelOutput.Content {
+                if textContent := contentBlock.TextContent; textContent != nil {
+                    fmt.Println("Answer:", textContent.Text)
+                    for _, anno := range textContent.Annotations {
+                        if cit := anno.URLCitation; cit != nil {
+                            fmt.Printf("Citation: %s (%s)\n", cit.GetTitle(), cit.GetURL())
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1471,13 +1951,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## בקשה להפעלת פונקציה
+## การเรียกใช้ฟังก์ชัน
 
-גם המבנה של קריאות לפונקציות והתוצאות שלהן השתנה כדי להתאים לסכימת השלבים.
+นอกจากนี้ โครงสร้างของการเรียกใช้ฟังก์ชันและผลลัพธ์ยังเปลี่ยนไปเพื่อให้เข้ากับสคีมาขั้นตอน
 
-### לפני (`generateContent`)
+### ก่อน (`generateContent`)
 
-ב-`generateContent`, התגובה מחזירה קריאות לפונקציות בתוך המועמדים.\* {Python}
+ใน `generateContent` คำตอบจะแสดงการเรียกใช้ฟังก์ชันภายในผู้สมัคร\* {Python}
 
 ```
 ```python
@@ -1623,6 +2103,78 @@ GenerateContentResponse finalResponse =
 System.out.println(finalResponse.text());
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    weatherTool := &genai.Tool{
+        FunctionDeclarations: []*genai.FunctionDeclaration{
+            {
+                Name:        "get_weather",
+                Description: "Gets weather",
+                Parameters: &genai.Schema{
+                    Type: genai.TypeObject,
+                    Properties: map[string]*genai.Schema{
+                        "location": {Type: genai.TypeString},
+                    },
+                },
+            },
+        },
+    }
+
+    config := &genai.GenerateContentConfig{
+        Tools: []*genai.Tool{weatherTool},
+    }
+
+    response, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-2.5-flash-lite",
+        genai.Text("What's the weather in Boston?"),
+        config,
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    calls := response.FunctionCalls()
+    if len(calls) > 0 {
+        functionCall := calls[0]
+        fmt.Println("Requested tool:", functionCall.Name)
+
+        result := "52°F and rain"
+        history := []*genai.Content{
+            genai.NewContentFromText("What's the weather in Boston?", genai.RoleUser),
+            response.Candidates[0].Content,
+            genai.NewContentFromParts([]*genai.Part{
+                genai.NewPartFromFunctionResponse(functionCall.Name, map[string]any{"result": result}),
+            }, genai.RoleUser),
+        }
+
+        finalResponse, err := client.Models.GenerateContent(ctx, "gemini-2.5-flash-lite", history, config)
+        if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Println(finalResponse.Text())
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1673,9 +2225,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-עכשיו, קריאות לכלים ותוצאות הן שלבים נפרדים בציר הזמן.
+ตอนนี้การเรียกใช้เครื่องมือและผลลัพธ์เป็นขั้นตอนที่แยกกันในไทม์ไลน์แล้ว
 
 ### Python
 
@@ -1854,6 +2406,82 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    weatherTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_weather"),
+        Description: genai.Ptr("Gets weather"),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{"type": "string"},
+            },
+            "required": []string{"location"},
+        },
+    })
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("What's the weather in Boston?"),
+            Tools: []interactions.Tool{weatherTool},
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res.Interaction.Steps {
+        if fcStep := step.FunctionCallStep; fcStep != nil {
+            fmt.Printf("Executing %s for %v\n", fcStep.Name, fcStep.Arguments)
+
+            result := "52°F and rain"
+            funcResult := interactions.NewStep(interactions.FunctionResultStep{
+                CallID: fcStep.ID,
+                Name:   genai.Ptr(fcStep.Name),
+                Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                    interactions.NewFunctionResultSubcontent(interactions.TextContent{Text: result}),
+                }),
+            })
+
+            nextRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+                Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3.8-flash"),
+                    PreviousInteractionID: res.Interaction.ID,
+                    Input:                 interactions.NewInteractionsInput([]interactions.Step{funcResult}),
+                }),
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
+            if nextRes.Interaction.OutputText != nil {
+                fmt.Println(*nextRes.Interaction.OutputText)
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1941,15 +2569,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## סטרימינג
+## สตรีมมิง
 
-ההבדל העיקרי בסטרימינג הוא שב-Interactions API משתמשים באותה נקודת קצה עם `"stream": true` בגוף הבקשה, בעוד שב-`generateContent` API נדרשה קריאה לנקודת קצה ייעודית (`:streamGenerateContent`).
+ความแตกต่างที่สำคัญในการสตรีมคือ Interactions API ใช้ปลายทางเดียวกันกับ `"stream": true` ในเนื้อหาคำขอ ในขณะที่ `generateContent` API ต้องเรียกปลายทางเฉพาะ (`:streamGenerateContent`)
 
-בנוסף, אירועים של סטרימינג משתמשים עכשיו בסוגים מיוחדים כדי לעקוב אחרי מחזור החיים של האינטראקציה ולעקוב אחרי שלבי הביצוע לאורך ציר הזמן.
+นอกจากนี้ ตอนนี้กิจกรรมการสตรีมยังใช้ประเภทเฉพาะเพื่อตรวจสอบวงจรการโต้ตอบและติดตามขั้นตอนการดำเนินการตามไทม์ไลน์ด้วย
 
-### לפני (`generateContentStream`)
+### ก่อน (`generateContentStream`)
 
-עם `generateContent`, אתם צורכים זרם של חלקי תגובה.
+เมื่อใช้ `generateContent` คุณจะใช้สตรีมของก้อนการตอบกลับ
 
 ### Python
 
@@ -1994,6 +2622,40 @@ try (ResponseStream<GenerateContentResponse> responseStream =
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for chunk, err := range client.Models.GenerateContentStream(
+        ctx,
+        "gemini-2.5-flash-lite",
+        genai.Text("Tell me a story"),
+        nil,
+    ) {
+        if err != nil {
+            log.Fatal(err)
+        }
+        fmt.Print(chunk.Text())
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2024,9 +2686,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### ‫After (Interactions API)
+### After (Interactions API)
 
-ב-Interactions API, הסטרימינג משתמש ב-Server-Sent Events ‏ (SSE) ובסוגי דלתא מיוחדים כדי לייצג שלבי ביצוע בזמן שהם מתרחשים.
+ใน Interactions API การสตรีมจะใช้เหตุการณ์ที่เซิร์ฟเวอร์ส่ง (SSE) และประเภทเดลต้าเฉพาะเพื่อแสดงขั้นตอนการดำเนินการตามที่เกิดขึ้น
 
 ### Python
 
@@ -2116,9 +2778,60 @@ try (EventStream<InteractionSSEStreamEvent> stream =
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("Tell me a story"),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        } else if event.GetDataInteractionCompleted() != nil {
+            fmt.Println("\n\n--- Stream Finished ---")
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
-‫# פלט לדוגמה של מקור נתונים מסוג SSE
+# เอาต์พุตสตรีม SSE ตัวอย่าง
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -2139,13 +2852,13 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### כלים לסטרימינג וקריאות לפונקציות
+### เครื่องมือการสตรีมและการเรียกฟังก์ชัน
 
-התנהגות הכלים בסטרימינג השתנתה באופן משמעותי מגרסה `generateContent` כדי לספק שליטה מפורטת יותר ושקיפות רבה יותר.
+ลักษณะการทำงานของเครื่องมือในสตรีมเปลี่ยนไปอย่างมากจาก `generateContent` เพื่อให้การควบคุมและการมองเห็นที่ละเอียดยิ่งขึ้น
 
-#### לפני (`generateContent`)
+#### ก่อน (`generateContent`)
 
-עם `generateContent`, קריאות לפונקציות סטרימינג מגיעות בשלמותן בחלק אחד. לא הייתה אפשרות לראות את הטיעונים שנוצרו בזמן אמת, ולכן הפונקציה לבדיקת בקשות פשוט בדקה אם יש אובייקט `functionCall` שלם.
+เมื่อใช้ `generateContent` ฟังก์ชันการโทรแบบสตรีมมิงจะมาถึงอย่างสมบูรณ์ในก้อนเดียว คุณไม่สามารถดูอาร์กิวเมนต์ที่สร้างขึ้นแบบเรียลไทม์ได้ ตัวแฮนเดิลจึงเพียงตรวจสอบออบเจ็กต์ `functionCall` ที่สมบูรณ์
 
 ### Python
 
@@ -2239,6 +2952,62 @@ try (ResponseStream<GenerateContentResponse> stream =
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    weatherTool := &genai.Tool{
+        FunctionDeclarations: []*genai.FunctionDeclaration{
+            {
+                Name:        "get_weather",
+                Description: "Gets weather",
+                Parameters: &genai.Schema{
+                    Type: genai.TypeObject,
+                    Properties: map[string]*genai.Schema{
+                        "location": {Type: genai.TypeString},
+                    },
+                },
+            },
+        },
+    }
+
+    for chunk, err := range client.Models.GenerateContentStream(
+        ctx,
+        "gemini-2.5-flash-lite",
+        genai.Text("What's the weather in Boston?"),
+        &genai.GenerateContentConfig{
+            Tools: []*genai.Tool{weatherTool},
+        },
+    ) {
+        if err != nil {
+            log.Fatal(err)
+        }
+        if calls := chunk.FunctionCalls(); len(calls) > 0 {
+            fc := calls[0]
+            fmt.Printf("Call: %s(%v)\n", fc.Name, fc.Args)
+        } else if text := chunk.Text(); text != "" {
+            fmt.Print(text)
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2255,9 +3024,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### ‫After (Interactions API)
+#### After (Interactions API)
 
-ה-Interactions API מעביר את הארגומנטים של הקריאה לפונקציה כזרם של אירועים, תו אחר תו, כשהוא משתמש ב-`arguments`. מחזור החיים המלא של הכלי – מחשבה, קריאה, תוצאה ופלט – מתרחש כסדרה של שלבים נפרדים.
+Interactions API จะสตรีมอาร์กิวเมนต์การเรียกฟังก์ชันทีละอักขระเป็นเหตุการณ์ `arguments` วงจรทั้งหมดของเครื่องมือ ซึ่งประกอบด้วย ความคิด การเรียกใช้ ผลลัพธ์ และเอาต์พุต จะทำงานเป็นชุดขั้นตอนที่แตกต่างกัน
 
 ### Python
 
@@ -2394,6 +3163,76 @@ try (EventStream<InteractionSSEStreamEvent> stream =
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    getWeatherTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_weather"),
+        Description: genai.Ptr("Gets weather"),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{"type": "string"},
+            },
+            "required": []string{"location"},
+        },
+    })
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("What's the weather in Boston?"),
+            Tools:  []interactions.Tool{getWeatherTool},
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepStart := event.GetDataStepStart(); stepStart != nil {
+            if fcStep := stepStart.GetStepFunctionCall(); fcStep != nil {
+                fmt.Println("Calling:", fcStep.Name)
+            }
+        } else if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if argsDelta := stepDelta.GetDeltaArgumentsDelta(); argsDelta != nil {
+                fmt.Println("  args:", argsDelta.GetArguments())
+            } else if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        } else if event.GetDataInteractionCompleted() != nil {
+            fmt.Println("\n--- Done ---")
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2479,12 +3318,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-שליחת משוב
+ส่งความคิดเห็น
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-עדכון אחרון: 2026-09-18 (שעון UTC).
+อัปเดตล่าสุด 2026-09-24 UTC
 
-רוצה לתת לנו משוב?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

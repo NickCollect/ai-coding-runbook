@@ -1,69 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=it
-fetched_at: 2026-09-21T05:52:47.758941+00:00
-title: "Guida introduttiva \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=hi
+fetched_at: 2026-09-28T06:24:43.743020+00:00
+title: "\u0936\u0941\u0930\u0942 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Invia feedback
+सुझाव भेजें
 
-# Guida introduttiva
+# शुरू करना
 
-Questa guida ti aiuta a iniziare a utilizzare l'API Gemini utilizzando l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it). Eseguirai la tua prima chiamata API in meno di un minuto ed esplorerai la generazione di testo, la comprensione multimodale, la generazione di immagini, l'output strutturato, gli strumenti, la chiamata di funzione, gli agenti e l'esecuzione in background.
+इस गाइड में, [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) का इस्तेमाल करके, Gemini API को शुरू करने के बारे में बताया गया है. इसमें एक मिनट से भी कम समय में, पहला एपीआई कॉल किया जा सकेगा. साथ ही, टेक्स्ट जनरेट करने, मल्टीमॉडल को समझने, इमेज जनरेट करने, स्ट्रक्चर्ड आउटपुट, टूल, फ़ंक्शन कॉल करने, एजेंट, और बैकग्राउंड में प्रोसेस करने की सुविधा के बारे में जाना जा सकेगा.
 
-L'API Interactions è disponibile tramite gli SDK [Python](https://github.com/googleapis/python-genai) e [JavaScript](https://github.com/googleapis/js-genai), nonché tramite REST.
+Interactions API, [Python](https://github.com/googleapis/python-genai) और [JavaScript](https://github.com/googleapis/js-genai) SDK के साथ-साथ REST के ज़रिए उपलब्ध है.
 
-## 1. Ottieni una chiave API
+## 1. एपीआई पासकोड पाना
 
-Per utilizzare l'API Gemini, devi disporre di una chiave API per autenticare le richieste, applicare limiti di sicurezza e monitorare l'utilizzo del tuo account.
+Gemini API का इस्तेमाल करने के लिए, आपके पास एक एपीआई पासकोड होना चाहिए. इससे आपके अनुरोधों की पुष्टि की जा सकेगी, सुरक्षा से जुड़ी सीमाओं को लागू किया जा सकेगा, और आपके खाते के इस्तेमाल को ट्रैक किया जा सकेगा.
 
-- Google AI Studio crea automaticamente un progetto e una chiave API per i nuovi utenti.
-  Puoi copiarla dalla [pagina Chiavi API](https://aistudio.google.com/api-keys?hl=it).
-- Se hai bisogno di una nuova chiave, fai clic su **Crea chiave API** in AI Studio e segui la
-  finestra di dialogo per aggiungere una nuova coppia chiave-progetto.
+- Google AI Studio, नए उपयोगकर्ताओं के लिए प्रोजेक्ट और एपीआई पासकोड अपने-आप बना देता है.
+  इसे [एपीआई पासकोड वाले पेज](https://aistudio.google.com/api-keys?hl=hi) से कॉपी किया जा सकता है.
+- अगर आपको नई कुंजी चाहिए, तो AI Studio में **एपीआई पासकोड बनाएं** पर क्लिक करें. इसके बाद, नई कुंजी-प्रोजेक्ट का जोड़ा जोड़ने के लिए, डायलॉग बॉक्स में दिए गए निर्देशों का पालन करें.
 
-[Crea una chiave API Gemini](https://aistudio.google.com/apikey?hl=it)
+[Gemini API पासकोड बनाना](https://aistudio.google.com/apikey?hl=hi)
 
-Imposta la chiave come variabile di ambiente:
+अपनी कुंजी को एनवायरमेंट वैरिएबल के तौर पर सेट करें:
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### Eseguire l'upgrade al livello a pagamento
+### पैसे चुकाकर इस्तेमाल किए जाने वाले टियर पर अपग्रेड करना
 
-L'upgrade al livello a pagamento aumenta i limiti di frequenza e richiede la configurazione
-di fatturazione Cloud.
+पैसे चुकाकर इस्तेमाल किए जाने वाले टियर पर अपग्रेड करने से, अनुरोध करने की सीमा बढ़ जाती है. इसके लिए, क्लाउड बिलिंग को सेट अप करना ज़रूरी है.
 
-- Fai clic su **Configura la fatturazione** nelle pagine [Chiavi API](https://aistudio.google.com/api-keys?hl=it) o [Progetti](https://aistudio.google.com/projects?hl=it) di AI Studio.
-- Segui la finestra di dialogo Fatturazione Cloud per creare o collegare un account di fatturazione, aggiungere un metodo di pagamento e pagare in anticipo un minimo di 5 $ (o l'equivalente in valuta) in crediti a pagamento.
-- Visualizza l'utilizzo dell'API in [Google AI Studio](https://aistudio.google.com/usage?hl=it)
-  in **Dashboard** > **Utilizzo**.
+- AI Studio के [एपीआई पासकोड](https://aistudio.google.com/api-keys?hl=hi) या [प्रोजेक्ट](https://aistudio.google.com/projects?hl=hi) पेजों पर जाकर, **बिलिंग सेट अप करें** पर क्लिक करें.
+- बिलिंग खाता बनाने या लिंक करने के लिए, Cloud Billing डायलॉग बॉक्स में दिए गए निर्देशों का पालन करें. साथ ही, पेमेंट का तरीका जोड़ें और कम से कम 5 डॉलर (या मुद्रा के हिसाब से इसके बराबर) के पेड क्रेडिट का ऐडवांस पेमेंट करें.
+- [Google AI Studio](https://aistudio.google.com/usage?hl=hi) में, **डैशबोर्ड** > **इस्तेमाल** में जाकर, एपीआई के इस्तेमाल की जानकारी देखें.
 
-Per ulteriori informazioni, consulta la [pagina Fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it).
+ज़्यादा जानकारी के लिए, [बिलिंग पेज](https://ai.google.dev/gemini-api/docs/billing?hl=hi) देखें.
 
-## 2. Installa l'SDK ed effettua la tua prima chiamata
+## 2. एसडीके इंस्टॉल करना और पहला कॉल करना
 
-Installa l'SDK e genera il testo con una singola chiamata API.
+एसडीके इंस्टॉल करें और एक एपीआई कॉल से टेक्स्ट जनरेट करें.
 
 ### Python
 
-Installa l'SDK:
+एसडीके इंस्टॉल करें:
 
 ```
 pip install -U google-genai
 ```
 
-Inizializza il client ed effettua una richiesta:
+क्लाइंट को शुरू करें और अनुरोध करें:
 
 ```
 from google import genai
@@ -79,13 +76,13 @@ print(interaction.output_text)
 
 ### JavaScript
 
-Installa l'SDK:
+एसडीके इंस्टॉल करें:
 
 ```
 npm install @google/genai
 ```
 
-Inizializza il client ed effettua una richiesta:
+क्लाइंट को शुरू करें और अनुरोध करें:
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -123,6 +120,44 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Explain how AI works in a few words."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -135,7 +170,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta:**
+**जवाब:**
 
 ```
 {
@@ -167,13 +202,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Quando utilizzi REST, l'API restituisce la risorsa `Interaction` completa contenente metadati, statistiche di utilizzo e la cronologia passo passo della svolta.
+REST का इस्तेमाल करने पर, एपीआई पूरा `Interaction` रिसॉर्स दिखाता है. इसमें मेटाडेटा, इस्तेमाल के आंकड़े, और बातचीत के हर चरण का इतिहास शामिल होता है.
 
-Sebbene gli SDK espongano la risposta completa, forniscono anche proprietà pratiche come `interaction.output_text` e `interaction.output_image` per accedere direttamente agli output finali. Scopri di più sulla struttura della risposta nella [panoramica delle interazioni](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) o leggi la [guida alla generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it) per informazioni dettagliate sulle istruzioni di sistema e sulla configurazione della generazione.
+एसडीके, पूरा जवाब दिखाते हैं. साथ ही, ये सीधे तौर पर फ़ाइनल आउटपुट को ऐक्सेस करने के लिए, `interaction.output_text` और `interaction.output_image` जैसी सुविधाएं भी देते हैं. [इंटरैक्शन की खास जानकारी](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) में, रिस्पॉन्स के स्ट्रक्चर के बारे में ज़्यादा जानें. इसके अलावा, सिस्टम के निर्देशों और जनरेशन कॉन्फ़िगरेशन के बारे में जानकारी पाने के लिए, [टेक्स्ट जनरेट करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi) पढ़ें.
 
-## 3. Visualizzare in streaming la risposta
+## 3. जवाब को स्ट्रीम करना
 
-Per interazioni più fluide, riproduci in streaming la risposta man mano che viene generata. Ogni evento `step.delta` fornisce un blocco di testo che puoi visualizzare immediatamente.
+बेहतर इंटरैक्शन के लिए, जवाब जनरेट होते ही उसे स्ट्रीम करें. हर `step.delta` इवेंट, टेक्स्ट का एक हिस्सा डिलीवर करता है. इसे तुरंत दिखाया जा सकता है.
 
 ### Python
 
@@ -240,6 +275,44 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Write a haiku about coding."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -254,9 +327,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-Durante lo streaming, il server risponde con un flusso di eventi inviati dal server (SSE). Ogni evento include un tipo e dati JSON.
+स्ट्रीमिंग के दौरान, सर्वर, Server-Sent Events (एसएसई) की स्ट्रीम के साथ जवाब देता है. हर इवेंट में एक टाइप और JSON डेटा शामिल होता है.
 
-**Risposta:**
+**जवाब:**
 
 ```
 event: interaction.created
@@ -287,18 +360,18 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-Per un'analisi dettagliata della gestione degli eventi di streaming e dei tipi di delta, consulta la [guida alle interazioni di streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=it).
+स्ट्रीमिंग इवेंट और डेल्टा टाइप को मैनेज करने के बारे में ज़्यादा जानने के लिए, [स्ट्रीमिंग इंटरैक्शन गाइड](https://ai.google.dev/gemini-api/docs/streaming?hl=hi) देखें.
 
-## 4. Conversazioni a più turni
+## 4. सिलसिलेवार बातचीत
 
-L'API Interactions supporta le conversazioni multi-turno con due approcci:
+Interactions API, दो तरीकों से सिलसिलेवार बातचीत को सपोर्ट करता है:
 
-- **Stateful (consigliato)**: continua una conversazione sul server utilizzando `previous_interaction_id`. Ideale per la maggior parte dei workflow di chat e agentici in cui vuoi che il server gestisca la cronologia e ottimizzi la memorizzazione nella cache.
-- **Senza stato**: gestisci la cronologia della conversazione sul client passando tutti i turni precedenti (inclusi i passaggi intermedi del modello e degli strumenti) in ogni richiesta.
+- **स्टेटफ़ुल (सुझाया गया)**: `previous_interaction_id` का इस्तेमाल करके, सर्वर पर बातचीत जारी रखें. यह ज़्यादातर चैट और एजेंटिक वर्कफ़्लो के लिए सबसे सही है. इनमें आपको सर्वर से इतिहास को मैनेज करने और कैश मेमोरी को ऑप्टिमाइज़ करने की ज़रूरत होती है.
+- **स्टेटलेस**: क्लाइंट पर बातचीत के इतिहास को मैनेज करने के लिए, हर अनुरोध में पिछले सभी टर्न (इसमें इंटरमीडिएट मॉडल थॉट और टूल के चरण शामिल हैं) पास करें.
 
-### Stateful (consigliato)
+### स्टेटफ़ुल (सुझाया गया)
 
-Concatenare le interazioni passando `previous_interaction_id`. Il server gestisce l'intera cronologia delle conversazioni per te.
+`previous_interaction_id` पास करके, इंटरैक्शन को एक-दूसरे से जोड़ें. सर्वर, आपकी पूरी बातचीत के इतिहास को मैनेज करता है.
 
 ### Python
 
@@ -379,6 +452,55 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("Explain quantum computing in simple terms."),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -403,9 +525,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Stateless
+### स्टेटलेस
 
-Imposta `store=false` e gestisci la cronologia delle conversazioni sul lato client. Devi conservare e inviare nuovamente tutti i passaggi generati dal modello (inclusi i passaggi `thought` e `function_call`) esattamente come li hai ricevuti.
+क्लाइंट-साइड पर `store=false` सेट करें और बातचीत के इतिहास को मैनेज करें. आपको मॉडल से जनरेट किए गए सभी चरणों (`thought` और `function_call` चरणों सहित) को उसी तरह से सेव करना होगा और फिर से भेजना होगा जैसा कि आपको मिला था.
 
 ### Python
 
@@ -534,6 +656,59 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 1. First turn
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Hi, my name is Alex."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res1.Interaction.OutputText != nil {
+        fmt.Println(*res1.Interaction.OutputText)
+    }
+
+    // 2. Second turn (passing PreviousInteractionID)
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            Input:                 interactions.NewInteractionsInput("What's my name?"),
+            PreviousInteractionID: res1.Interaction.ID,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res2.Interaction.OutputText != nil {
+        fmt.Println(*res2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -571,7 +746,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Risposta:**
+**जवाब:**
 
 ```
 {
@@ -598,11 +773,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-La seconda interazione restituisce un oggetto di risposta completo che include solo i nuovi passaggi, ma si basa sul contesto del turno precedente. Scopri di più sul mantenimento dello stato nella [guida alle conversazioni multi-turn](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#multi-turn-conversations) o esplora la [modalità stateless](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#stateless-conversations) per la gestione della cronologia lato client.
+दूसरे इंटरैक्शन में, जवाब के तौर पर पूरा ऑब्जेक्ट मिलता है. इसमें सिर्फ़ नए चरण शामिल होते हैं. हालांकि, यह पिछले टर्न के कॉन्टेक्स्ट पर आधारित होता है. [सिलसिलेवार बातचीत से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#multi-turn-conversations) में, स्टेट बनाए रखने के बारे में ज़्यादा जानें. इसके अलावा, क्लाइंट-साइड पर इतिहास मैनेज करने के लिए, [स्टेटलेस मोड](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#stateless-conversations) के बारे में जानें.
 
-## 5. Comprensione multimodale
+## 5. टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाला मॉडल
 
-I modelli Gemini comprendono immagini, audio, video e documenti in modo nativo. Trasmetti contenuti multimediali insieme al testo in un'unica richiesta.
+Gemini मॉडल, इमेज, ऑडियो, वीडियो, और दस्तावेज़ों को आसानी से समझ सकते हैं. एक ही अनुरोध में टेक्स्ट के साथ-साथ मीडिया भी पास करें.
 
 ### Python
 
@@ -716,6 +891,60 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    imageBytes, err := os.ReadFile("path/to/organ.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Image := base64.StdEncoding.EncodeToString(imageBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "What is in this image?",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Image),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -743,7 +972,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
   }'
 ```
 
-**Risposta:**
+**जवाब:**
 
 ```
 {
@@ -768,27 +997,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 }
 ```
 
-Scopri come passare immagini, video e file audio nella [guida alla comprensione delle immagini](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it).
+[इमेज समझने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi) में जाकर, इमेज, वीडियो, और ऑडियो फ़ाइलें पास करने का तरीका जानें.
 
 [hearing
 
-Comprensione dell'audio
+ऑडियो को समझने की सुविधा
 
-Trascrivi, riassumi o rispondi a domande sui file audio.](https://ai.google.dev/gemini-api/docs/audio?hl=it)
+ऑडियो फ़ाइलों को लेख में बदलना, उनकी खास जानकारी पाना या उनसे जुड़े सवालों के जवाब पाना.](https://ai.google.dev/gemini-api/docs/audio?hl=hi)
 [videocam
 
-Comprensione dei video
+वीडियो को समझने की क्षमता
 
-Analizza i contenuti video, individua gli eventi e descrivi le azioni.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=it)
+वीडियो कॉन्टेंट का विश्लेषण करना, इवेंट ढूंढना, और कार्रवाइयों के बारे में बताना.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=hi)
 [description
 
-Elaborazione di documenti
+दस्तावेज़ प्रोसेस करना
 
-Estrai informazioni da PDF e altri formati di documenti.](https://ai.google.dev/gemini-api/docs/document-processing?hl=it)
+PDF और अन्य दस्तावेज़ फ़ॉर्मैट से जानकारी एक्सट्रैक्ट करें.](https://ai.google.dev/gemini-api/docs/document-processing?hl=hi)
 
-## 6. Generazione multimodale
+## 6. मल्टीमॉडल जनरेशन
 
-Gemini può generare immagini in modo nativo utilizzando i modelli di immagini [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it).
+Gemini, [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) इमेज मॉडल का इस्तेमाल करके, इमेज जनरेट कर सकता है.
 
 ### Python
 
@@ -861,6 +1090,87 @@ if (interaction.outputImage().isPresent()) {
 }
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    weatherTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_current_weather"),
+        Description: genai.Ptr("Gets the current weather for a given location."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "location": map[string]any{
+                    "type":        "string",
+                    "description": "The city and state, e.g. San Francisco, CA",
+                },
+            },
+            "required": []string{"location"},
+        },
+    })
+
+    // 1. Send prompt with tool declaration
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("What is the weather like in Boston?"),
+            Tools: []interactions.Tool{weatherTool},
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // 2. Check if the model requested a function call
+    for _, step := range res.Interaction.Steps {
+        if call := step.FunctionCallStep; call != nil {
+            fmt.Printf("Function to call: %s\n", call.Name)
+            fmt.Printf("Arguments: %v\n", call.Arguments)
+
+            // 3. Execute your local function and send the result back
+            finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+                Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3.8-flash"),
+                    PreviousInteractionID: res.Interaction.ID,
+                    Input: interactions.NewInteractionsInput([]interactions.Step{
+                        interactions.NewStep(interactions.FunctionResultStep{
+                            Name:   genai.Ptr(call.Name),
+                            CallID: call.ID,
+                            Result: interactions.NewFunctionResultStepResultUnion(`{"temperature": "72F", "condition": "Sunny"}`),
+                        }),
+                    }),
+                }),
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
+
+            if finalRes.Interaction.OutputText != nil {
+                fmt.Println(*finalRes.Interaction.OutputText)
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -875,7 +1185,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }'
 ```
 
-**Risposta:**
+**जवाब:**
 
 ```
 {
@@ -898,22 +1208,22 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-Quando il modello genera un'immagine, restituisce i dati dell'immagine codificati in base64 in un passaggio all'interno dell'array `steps`, nonché tramite la proprietà di convenienza `output_image`. Consulta la [guida alla generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) per scoprire di più su proporzioni, modifica delle immagini e riferimenti.
+जब मॉडल कोई इमेज जनरेट करता है, तो वह `steps` ऐरे में मौजूद किसी चरण में, base64-encoded इमेज डेटा दिखाता है. साथ ही, `output_image` प्रॉपर्टी के ज़रिए भी यह डेटा दिखाता है. आसपेक्ट रेशियो, इमेज में बदलाव करने, और रेफ़रंस के बारे में जानने के लिए, [इमेज जनरेट करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) देखें.
 
 [record\_voice\_over
 
-Generazione di sintesi vocale
+बोलकर जवाब देने की सुविधा
 
-Genera un parlato espressivo con più relatori con Gemini 3.1 Flash TTS.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)
+Gemini 3.1 Flash TTS की मदद से, अलग-अलग आवाज़ों में बोलकर जानकारी जनरेट करें.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)
 [music\_note
 
-Generazione di musica
+संगीत जनरेट करने की सुविधा
 
-Crea clip e brani completi con Lyria 3.5.](https://ai.google.dev/gemini-api/docs/music-generation?hl=it)
+Lyria 3.5 की मदद से क्लिप और पूरे गाने बनाएँ.](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi)
 
-## 7. Utilizzare l'output strutturato
+## 7. स्ट्रक्चर्ड आउटपुट का इस्तेमाल करना
 
-Configura il modello in modo che restituisca JSON che corrisponda a uno schema che definisci. L'output strutturato funziona con [Pydantic](https://docs.pydantic.dev/latest/) (Python) e [Zod](https://zod.dev/) (JavaScript).
+मॉडल को इस तरह कॉन्फ़िगर करें कि वह आपके तय किए गए स्कीमा से मेल खाने वाला JSON जवाब दे. स्ट्रक्चर्ड आउटपुट, [Pydantic](https://docs.pydantic.dev/latest/) (Python) और [Zod](https://zod.dev/) (JavaScript) के साथ काम करता है.
 
 ### Python
 
@@ -1049,6 +1359,71 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Who won the latest Super Bowl and what was the score?"),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+
+    // Optional: Inspect search queries and citations
+    for _, step := range res.Interaction.Steps {
+        if searchCall := step.GoogleSearchCallStep; searchCall != nil {
+            fmt.Printf("Search queries: %v\n", searchCall.Arguments.Queries)
+        } else if modelOut := step.ModelOutputStep; modelOut != nil {
+            for _, part := range modelOut.Content {
+                if textPart := part.TextContent; textPart != nil {
+                    for _, annotation := range textPart.Annotations {
+                        if citation := annotation.URLCitation; citation != nil {
+                            var title, url string
+                            if citation.Title != nil {
+                                title = *citation.Title
+                            }
+                            if citation.URL != nil {
+                                url = *citation.URL
+                            }
+                            fmt.Printf("Source: %s (%s)\n", title, url)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1081,7 +1456,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta:**
+**जवाब:**
 
 ```
 {
@@ -1103,11 +1478,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-Il blocco di testo di output contiene una stringa JSON valida conforme esattamente allo schema richiesto. Per scoprire come definire strutture più complesse e schemi ricorsivi, consulta la [guida all'output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it).
+आउटपुट टेक्स्ट ब्लॉक में, मान्य JSON स्ट्रिंग मौजूद है. यह स्ट्रिंग, अनुरोध किए गए स्कीमा के मुताबिक है. ज़्यादा जटिल स्ट्रक्चर और रिकर्सिव स्कीमा तय करने का तरीका जानने के लिए, [स्ट्रक्चर्ड आउटपुट गाइड](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) देखें.
 
-## 8. Utilizzare gli strumenti
+## 8. टूल इस्तेमाल करना
 
-Basare la risposta del modello su informazioni in tempo reale con la Ricerca Google. L'API esegue automaticamente la ricerca, elabora i risultati e restituisce le citazioni.
+Google Search की मदद से, मॉडल के जवाब में रीयल-टाइम की जानकारी शामिल करना. यह एपीआई, अपने-आप खोज करता है, नतीजों को प्रोसेस करता है, और उद्धरण दिखाता है.
 
 ### Python
 
@@ -1217,6 +1592,55 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Calculate the 20th Fibonacci number and verify if it is prime."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res.Interaction.Steps {
+        if codeCall := step.CodeExecutionCallStep; codeCall != nil {
+            fmt.Printf("Generated Code:\n%s\n", codeCall.Arguments.Code)
+        } else if codeRes := step.CodeExecutionResultStep; codeRes != nil {
+            fmt.Printf("Execution Output:\n%s\n", codeRes.Result)
+        }
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1230,7 +1654,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Risposta:**
+**जवाब:**
 
 ```
 {
@@ -1280,41 +1704,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-I passaggi della ricerca sono descritti in dettaglio nella cronologia delle interazioni e l'output finale include citazioni in linea che rimandano a fonti web.
+खोज के चरणों के बारे में, इंटरैक्शन के इतिहास में पूरी जानकारी दी गई है. साथ ही, फ़ाइनल आउटपुट में वेब सोर्स की ओर इशारा करने वाले इनलाइन उद्धरण शामिल हैं.
 
-Puoi scoprire come estrarre le citazioni della ricerca nella [guida alla base della Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) o vedere come combinare più strumenti nella [guida alla combinazione di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
+[Google Search के जवाब में शामिल जानकारी के सोर्स के बारे में बताने वाली गाइड](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) में, खोज के नतीजों में शामिल उद्धरणों को निकालने का तरीका जानें. इसके अलावा, [एक से ज़्यादा टूल को एक साथ इस्तेमाल करने के बारे में बताने वाली गाइड](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) में, एक से ज़्यादा टूल को एक साथ इस्तेमाल करने का तरीका जानें.
 
 [code
 
-Eseguire il codice
+कोड एक्ज़ीक्यूट करना
 
-Esegui il codice Python in un ambiente Borg sandbox sicuro.](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)
+Python कोड को सुरक्षित सैंडबॉक्स वाले Borg एनवायरमेंट में चलाएं.](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)
 [link
 
-Contesto URL
+यूआरएल कॉन्टेक्स्ट
 
-Trasmetti gli URL web pubblici direttamente per basare le risposte sui contenuti delle pagine web.](https://ai.google.dev/gemini-api/docs/url-context?hl=it)
+वेबपेज के कॉन्टेंट में मौजूद जानकारी के आधार पर जवाब पाने के लिए, सार्वजनिक वेब यूआरएल सीधे तौर पर पास करें.](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)
 [search
 
-Ricerca di file
+फ़ाइल खोजने की सुविधा
 
-Indicizza ed esegui ricerche nei documenti e nei file multimediali caricati.](https://ai.google.dev/gemini-api/docs/file-search?hl=it)
+अपलोड किए गए दस्तावेज़ों और मीडिया फ़ाइलों को इंडेक्स करना और उनमें खोजना.](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)
 [map
 
 Google Maps
 
-Basare le risposte su dati geospaziali e di posizione reali.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)
+जवाबों को असल दुनिया के जियोस्पेशल और जगह की जानकारी के डेटा पर आधारित करें.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)
 [computer
 
-Uso del computer
+कंप्यूटर का इस्तेमाल
 
-Automazione del browser e interazione con lo schermo.](https://ai.google.dev/gemini-api/docs/computer-use?hl=it)
+ब्राउज़र ऑटोमेशन और स्क्रीन इंटरैक्शन.](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)
 
-## 9. Chiamare le proprie funzioni
+## 9. अपने फ़ंक्शन कॉल करना
 
-La chiamata di funzione consente di connettere il modello al codice. Dichiari il nome e i parametri di una funzione, il modello decide quando chiamarla e restituisce argomenti strutturati, tu la esegui localmente e invii il risultato.
+फ़ंक्शन कॉलिंग की सुविधा की मदद से, मॉडल को अपने कोड से कनेक्ट किया जा सकता है. इसमें फ़ंक्शन का नाम और पैरामीटर तय किए जाते हैं. मॉडल यह तय करता है कि इसे कब कॉल करना है और स्ट्रक्चर्ड आर्ग्युमेंट दिखाता है. इसके बाद, इसे स्थानीय तौर पर लागू किया जाता है और नतीजे वापस भेजे जाते हैं.
 
-### Stateful (consigliato)
+### स्टेटफ़ुल (सुझाया गया)
 
 ### Python
 
@@ -1531,6 +1955,69 @@ while (true) {
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Turn 1: Create a CSV file in the sandbox
+    turn1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Write a Python script to save a CSV file 'sales.csv' with 5 rows of sample data."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var env *interactions.CreateModelInteractionEnvironment
+    if turn1.Interaction.EnvironmentID != nil {
+        env = genai.Ptr(interactions.NewCreateModelInteractionEnvironment(*turn1.Interaction.EnvironmentID))
+    }
+
+    // Turn 2: Reuse the sandbox environment to analyze the file created in Turn 1
+    turn2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            PreviousInteractionID: turn1.Interaction.ID,
+            Environment:           env,
+            Input:                 interactions.NewInteractionsInput("Now read 'sales.csv' and compute the total revenue."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if turn2.Interaction.OutputText != nil {
+        fmt.Println(*turn2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1588,13 +2075,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Stateless
+### स्टेटलेस
 
-Puoi anche utilizzare la chiamata di funzioni in modalità stateless gestendo la cronologia della conversazione sul lato client e impostando `store=false`. In modalità stateless, devi trasmettere la cronologia completa della conversazione nel campo `input` di ogni richiesta successiva. Questa cronologia deve includere:
+स्टेटलेस मोड में फ़ंक्शन कॉलिंग का इस्तेमाल भी किया जा सकता है. इसके लिए, क्लाइंट साइड पर बातचीत के इतिहास को मैनेज करें और `store=false` सेट करें. स्टेटलेस मोड में, आपको बातचीत का पूरा इतिहास, हर अनुरोध के `input` फ़ील्ड में पास करना होगा. इस इतिहास में यह जानकारी शामिल होनी चाहिए:
 
-1. Il passaggio iniziale `user_input`.
-2. Tutti i passaggi generati dal modello restituiti nel Turno 1 (inclusi i passaggi `thought` e `function_call`) esattamente come ricevuti.
-3. Il passaggio `function_result` contenente l'output della funzione eseguita.
+1. शुरुआती `user_input` चरण.
+2. पहले राउंड में, मॉडल से जनरेट किए गए सभी चरणों (`thought` और `function_call` चरणों सहित) को ठीक वैसे ही दिखाया गया है जैसे वे मिले थे.
+3. `function_result` चरण में, आपके फ़ंक्शन का आउटपुट शामिल होता है.
 
 ### Python
 
@@ -1824,6 +2311,63 @@ while (true) {
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    recipeSchema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "recipe_name":       map[string]any{"type": "string"},
+            "prep_time_minutes": map[string]any{"type": "integer"},
+            "ingredients": map[string]any{
+                "type":  "array",
+                "items": map[string]any{"type": "string"},
+            },
+        },
+        "required": []string{"recipe_name", "prep_time_minutes", "ingredients"},
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Give me a quick recipe for chocolate chip cookies."),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.TextResponseFormat{
+                    MimeType: interactions.TextResponseFormatMimeTypeApplicationJSON.ToPointer(),
+                    Schema:   recipeSchema,
+                }),
+            )),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1895,9 +2439,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**Risposta:**
+**जवाब:**
 
-Durante il Turno 1, il modello restituisce una risposta con lo stato `requires_action` e il passaggio `function_call`:
+पहले टर्न के दौरान, मॉडल `requires_action` स्टेटस और `function_call` चरण के साथ जवाब देता है:
 
 ```
 {
@@ -1918,7 +2462,7 @@ Durante il Turno 1, il modello restituisce una risposta con lo stato `requires_a
 }
 ```
 
-Dopo aver eseguito la funzione in locale e inviato il risultato (Turno 2), viene restituita l'interazione finale completata:
+फ़ंक्शन को स्थानीय तौर पर चलाने और नतीजा सबमिट करने (टर्न 2) के बाद, पूरी हो चुकी बातचीत का नतीजा इस तरह दिखता है:
 
 ```
 {
@@ -1948,11 +2492,11 @@ Dopo aver eseguito la funzione in locale e inviato il risultato (Turno 2), viene
 }
 ```
 
-Per funzionalità avanzate come la chiamata di funzione parallela o le modalità di scelta della funzione, consulta la [guida alla chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
+पैरलल फ़ंक्शन कॉलिंग या फ़ंक्शन चुनने के मोड जैसी ऐडवांस सुविधाओं के बारे में जानने के लिए, [फ़ंक्शन कॉलिंग गाइड](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) देखें.
 
-## 10. Eseguire un agente gestito
+## 10. मैनेज किए जा रहे एजेंट को चलाना
 
-Gli agenti gestiti vengono eseguiti in una sandbox remota con accesso a strumenti come l'esecuzione di codice e la gestione dei file. Passa un `agent` anziché un `model` e imposta `environment="remote"`.
+मैनेज किए गए एजेंट, रिमोट सैंडबॉक्स में काम करते हैं. इनके पास कोड एक्ज़ीक्यूशन और फ़ाइल मैनेजमेंट जैसे टूल का ऐक्सेस होता है. `model` के बजाय `agent` पास करें और `environment="remote"` सेट करें.
 
 ### Python
 
@@ -2013,6 +2557,59 @@ System.out.println("Environment: " + interaction.environmentId().orElse(""));
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-pro"),
+            Input: interactions.NewInteractionsInput("Solve this logic puzzle: Three gods A, B, and C are called True, False, and Random..."),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel:     interactions.ThinkingLevelHigh.ToPointer(),
+                ThinkingSummaries: interactions.ThinkingSummariesAuto.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Print thought summaries if returned
+    for _, step := range res.Interaction.Steps {
+        if thought := step.ThoughtStep; thought != nil {
+            for _, part := range thought.Summary {
+                if part.TextContent != nil {
+                    fmt.Printf("Thought Summary: %s\n", part.TextContent.Text)
+                }
+            }
+        }
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Printf("Answer: %s\n", *res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2026,27 +2623,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Puoi anche definire e salvare [agenti personalizzati](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it) con istruzioni, competenze e origini dati personalizzate.
+आपके पास अपने निर्देशों, कौशल, और डेटा सोर्स के साथ [कस्टम एजेंट](https://ai.google.dev/gemini-api/docs/custom-agents?hl=hi) को तय करने और सेव करने का विकल्प भी है.
 
 [rocket\_launch
 
-Guida rapida
+क्विकस्टार्ट
 
-Effettua la tua prima chiamata all'agente, trasmetti in streaming le risposte e crea un agente personalizzato.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it)
+अपना पहला एजेंट कॉल करें, जवाब स्ट्रीम करें, और कस्टम एजेंट बनाएं.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=hi)
 [smart\_toy
 
-Agente Antigravity
+Antigravity एजेंट
 
-Funzionalità, strumenti, input multimodale e prezzi per l'agente predefinito.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it)
+डिफ़ॉल्ट एजेंट के लिए केपबिलिटी, टूल, मल्टीमॉडल इनपुट, और कीमत.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi)
 [experiment
 
-Agent in AI Studio
+AI Studio में एजेंट
 
-Playground visivo per la prototipazione di agenti senza scrivere codice.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=it)
+बिना कोड लिखे एजेंट के प्रोटोटाइप बनाने के लिए विज़ुअल प्लेग्राउंड.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=hi)
 
-## 11. Eseguire attività in background
+## 11. बैकग्राउंड में टास्क चलाने की अनुमति
 
-Imposta `background=True` per eseguire attività di lunga durata in modo asincrono. Sondaggio per i risultati con `interactions.get()`. Per maggiori dettagli, consulta la [Guida all'esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it).
+लंबे समय तक चलने वाले टास्क को एसिंक्रोनस तरीके से चलाने के लिए, `background=True` को सेट करें. `interactions.get()` के साथ नतीजों के लिए पोल. ज़्यादा जानकारी के लिए, [बैकग्राउंड में प्रोसेस चलाने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/background-execution?hl=hi) देखें.
 
 ### Python
 
@@ -2153,6 +2750,67 @@ while (true) {
 }
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Start a Deep Research agent in the background
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:      interactions.AgentOption("deep-research-pro-preview-12-2025"),
+            Input:      interactions.NewInteractionsInput("Research the competitive landscape of solid-state EV batteries in 2026."),
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    interaction := res.Interaction
+    fmt.Printf("Started research job: %s\n", *interaction.ID)
+
+    // Poll until completion
+    for interaction.Status != interactions.InteractionStatusCompleted && interaction.Status != interactions.InteractionStatusFailed {
+        time.Sleep(10 * time.Second)
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        interaction = getRes.Interaction
+        fmt.Printf("Current status: %s\n", interaction.Status)
+    }
+
+    if interaction.Status == interactions.InteractionStatusCompleted {
+        if interaction.OutputText != nil {
+            fmt.Println(*interaction.OutputText)
+        }
+    } else {
+        fmt.Printf("Research failed: %v\n", interaction.Errors)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -2187,9 +2845,9 @@ while true; do
 done
 ```
 
-**Risposta:**
+**जवाब:**
 
-La risposta iniziale viene restituita immediatamente con lo stato `in_progress`:
+शुरुआती रिस्पॉन्स, `in_progress` स्टेटस के साथ तुरंत दिखता है:
 
 ```
 {
@@ -2200,7 +2858,7 @@ La risposta iniziale viene restituita immediatamente con lo stato `in_progress`:
 }
 ```
 
-Una volta eseguita completamente l'attività in background, il controllo dello stato dell'interazione restituisce:
+बैकग्राउंड टास्क पूरी तरह से लागू होने के बाद, इंटरैक्शन की स्थिति की जांच करने पर यह दिखता है:
 
 ```
 {
@@ -2222,27 +2880,27 @@ Una volta eseguita completamente l'attività in background, il controllo dello s
 }
 ```
 
-Scopri di più sull'esecuzione asincrona di modelli e agenti nella [guida all'esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it).
+[बैकग्राउंड में प्रोसेस करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/background-execution?hl=hi) में, मॉडल और एजेंट को एसिंक्रोनस तरीके से चलाने के बारे में पढ़ें.
 
-## Passaggi successivi
+## आगे क्या करना है
 
-- [Esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it): esegui attività di lunga durata in modo asincrono e gestisci lo stato.
-- [Generazione di testo](https://ai.google.dev/gemini-api/docs/text-generation?hl=it): istruzioni di sistema, configurazione della generazione e pattern di testo avanzati.
-- [Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it): proporzioni, modifica delle immagini e riferimenti di stile.
-- [Comprensione delle immagini](https://ai.google.dev/gemini-api/docs/image-understanding?hl=it): classificazione, rilevamento di oggetti e domande e risposte visive.
-- [Ragionamento](https://ai.google.dev/gemini-api/docs/thinking?hl=it): utilizza il chain-of-thought per attività complesse.
-- [Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it): modalità di funzione parallela, compositiva e vincolata.
-- [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it): grounding, citazioni e suggerimenti di ricerca.
-- [Managed Agents](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): agenti predefiniti con esecuzione del codice e gestione dei file.
-- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it): ricerca autonoma in più passaggi con pianificazione e sintesi.
-- [Output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it): schemi JSON, enumerazioni e definizioni di tipi ricorsivi.
+- [बैकग्राउंड में कोड एक्ज़ीक्यूट होने की सुविधा](https://ai.google.dev/gemini-api/docs/background-execution?hl=hi): लंबे समय तक चलने वाले टास्क को एसिंक्रोनस तरीके से चलाएं और स्थिति को मैनेज करें.
+- [टेक्स्ट जनरेट करना](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi): सिस्टम के निर्देश, जनरेशन कॉन्फ़िगरेशन, और ऐडवांस टेक्स्ट पैटर्न.
+- [इमेज जनरेट करना](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi): आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात), इमेज में बदलाव करना, और स्टाइल के रेफ़रंस.
+- [इमेज की बारीक़ी से पहचान](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi): इमेज को कैटगरी में बांटना, ऑब्जेक्ट का पता लगाने की सुविधा, और विज़ुअल के बारे में सवाल-जवाब का सेशन.
+- [सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi): मुश्किल कामों के लिए, सोच-समझकर एक-एक करके जवाब देना.
+- [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi): पैरलल, कंपोज़िशनल, और कंस्ट्रेंट फ़ंक्शन मोड.
+- [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi): जवाब में भरोसेमंद स्रोतों से जानकारी शामिल करना, जवाब में उद्धरण देना, और खोज से जुड़े सुझाव देना.
+- [मैनेज किए गए एजेंट](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=hi): ये पहले से बनाए गए एजेंट होते हैं. इनमें कोड एक्ज़ीक्यूट करने और फ़ाइल मैनेज करने की सुविधा होती है.
+- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi): यह सुविधा, कई चरणों में अपने-आप रिसर्च करती है. साथ ही, रिसर्च के लिए प्लान बनाती है और जानकारी को व्यवस्थित करती है.
+- [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi): JSON स्कीमा, enum, और रिकर्सिव टाइप की परिभाषाएं.
 
-Invia feedback
+सुझाव भेजें
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Ultimo aggiornamento 2026-09-18 UTC.
+आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
 
-Vuoi dirci altro?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-18 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]

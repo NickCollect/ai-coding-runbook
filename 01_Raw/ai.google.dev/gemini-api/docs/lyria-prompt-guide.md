@@ -1,122 +1,122 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=th
-fetched_at: 2026-09-21T05:47:37.677798+00:00
-title: "\u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d\u0e01\u0e32\u0e23\u0e43\u0e0a\u0e49\u0e1e\u0e23\u0e2d\u0e21\u0e15\u0e4c\u0e02\u0e2d\u0e07 Lyria \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=tr
+fetched_at: 2026-09-28T06:30:57.670998+00:00
+title: "Lyria istem rehberi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# คู่มือการใช้พรอมต์ของ Lyria
+# Lyria istem rehberi
 
-Gemini API มี 2 วิธีในการสร้างเพลงด้วย Lyria ดังนี้
+Gemini API, Lyria ile müzik üretmek için iki yöntem sunar:
 
-- **Lyria 3.5 และ Lyria 3 Clip**: การสร้างแบบไม่สตรีมสำหรับคลิปความยาว 30 วินาทีหรือเพลงแบบเต็มพร้อมเนื้อเพลงและเสียงร้อง ดู[สร้างเพลงด้วย Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=th)
-- **Lyria RealTime**: การสตรีมเพลงแบบเรียลไทม์และแบบอินเทอร์แอกทีฟ รวมถึงการควบคุมแบบเรียลไทม์ผ่าน WebSockets ดู[การสร้างเพลงแบบเรียลไทม์ด้วย Lyria RealTime](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=th)
+- **Lyria 3.5 ve Lyria 3 Clip**: Şarkı sözleri ve vokaller içeren 30 saniyelik klipler veya tam uzunluktaki şarkılar için akışsız üretim. [Lyria 3.5 ile müzik üretme](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) başlıklı makaleyi inceleyin.
+- **Lyria RealTime**: WebSocket'ler üzerinden anlık, etkileşimli müzik yayını ve canlı yönlendirme. [Lyria RealTime ile gerçek zamanlı müzik üretme](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) başlıklı makaleyi inceleyin.
 
-ทั้ง 2 โมเดลตอบสนองต่อพรอมต์ข้อความอธิบาย คำศัพท์ทางดนตรี และคำสั่งโครงสร้าง คู่มือนี้ครอบคลุมวิธีเขียนพรอมต์ที่มีประสิทธิภาพสำหรับการสร้างแบบกลุ่มและการควบคุมแบบเรียลไทม์
+Her iki model de açıklayıcı metin istemlerine, müzik terminolojisine ve yapısal talimatlara yanıt verir. Bu kılavuzda, hem toplu oluşturma hem de anlık yönlendirme için etkili istemlerin nasıl yazılacağı açıklanmaktadır.
 
-## พื้นฐานของพรอมต์
+## İstemlerle ilgili temel bilgiler
 
-พรอมต์ของคุณอาจเป็นวลีสั้นๆ ดังนี้
+İsteminiz kısa bir ifade olabilir:
 
 ```
 A folk song about cute cats avoiding puddles, female vocals, acoustic guitar, sound of rain
 ```
 
-หรือคำอธิบายแบบละเอียดที่มีโครงสร้าง
+Veya yapılandırılmış, ayrıntılı bir açıklama:
 
 ```
 A 1980s-style synth-pop track with a driving beat, shimmering synthesizers, and a catchy, anthemic chorus. The song should have a retro-futuristic feel with modern production polish. Upbeat tempo around 120 BPM, clear verse-chorus structure, and a memorable instrumental hook. The lyrics describe getting ready for a party.
 ```
 
-ทั้งพรอมต์แบบสั้นและแบบละเอียดให้ผลลัพธ์ที่ยอดเยี่ยม ใช้กลยุทธ์ต่อไปนี้เพื่อนำโมเดลไปสู่เสียงที่คุณต้องการ
+Hem kısa hem de ayrıntılı istemler iyi sonuçlar verir. Modeli istediğiniz sese yönlendirmek için aşağıdaki stratejileri kullanın.
 
-## แนวเพลงและสไตล์
+## Tür ve stil
 
-นำหน้าพรอมต์ด้วยประเภทหลัก คุณสามารถผสมผสานแนวเพลงเพื่อสร้างแนวเพลงลูกผสมที่ไม่เหมือนใครได้ดังนี้
+İsteminize birincil türle başlayın. Benzersiz karışımlar oluşturmak için türleri birleştirebilirsiniz:
 
-- การผสมผสานระหว่างเมทัลและฮิปฮอป
-- เดธเมทัลผสมกับเสียงร้องแบบโอเปร่า
-- ดนตรีคลาสสิกสำหรับวงเครื่องดนตรีขนาดเล็กที่มีองค์ประกอบดรอนอิเล็กทรอนิกส์มืดหม่น
-- เพลงอิเล็กทรอนิกส์แดนซ์ (EDM) สมัยใหม่ผสมกับเพลงป๊อปยุโรป
+- Metal ve hip-hop'ın birleşimi
+- Opera vokalleriyle birleşen death metal
+- Karanlık elektronik drone öğeleri içeren klasik oda müziği
+- Europop ile karıştırılmış modern elektronik dans müziği (EDM)
 
-นอกจากนี้ คุณยังระบุยุคดนตรีหรือรูปแบบตามภูมิภาคได้ด้วย
+Ayrıca bir müzik dönemi veya bölgesel varyant da belirtebilirsiniz:
 
-- ฮิปฮอปบูมแบ็ปช่วงต้นทศวรรษ 1990
-- เพลงป๊อปเยเย่ของฝรั่งเศสในยุค 1960
-- โพสต์พังก์และนิวเวฟยุค 1980
-- อาร์แอนด์บีกระแสหลักยุค 2000
-- เทคโนมินิมอลของเบอร์ลินหรือไฮฟีของเบย์แอเรีย
+- 1990'ların başlarındaki boom-bap hip-hop
+- 1960'ların Fransız yé-yé pop müziği
+- 1980'lerin post-punk ve new wave müzikleri
+- 2000'lerin popüler R&B müzikleri
+- Berlin minimal tekno veya Bay Area hyphy
 
-### คีย์เวิร์ดประเภท
+### Tür anahtar kelimeleri
 
-ใช้คำศัพท์แนวเพลงที่รู้จักเหล่านี้ในพรอมต์สำหรับ Lyria 3.5 และ Lyria RealTime
+Lyria 3.5 ve Lyria RealTime istemlerinizde şu tür terimlerini kullanın:
 
-- **อิเล็กทรอนิกและแดนซ์**: `Acid House, Breakbeat, Chillout, Chiptune, Deep House, Drum & Bass, Dubstep, EDM, Electro Swing, Glitch Hop, Hyperpop, Minimal Techno, Moombahton, Psytrance, Synthpop, Techno, Trance, Trip Hop, Vaporwave`
-- **ฮิปฮอปและอาร์แอนด์บี**: `808 Hip Hop, Boom-Bap, Contemporary R&B, G-funk, Grime, Lo-Fi Hip Hop, Neo-Soul, New Jack Swing, Trap Beat`
-- **ร็อกและอัลเทอร์เนทีฟ**: `Alternative Country, Blues Rock, Classic Rock, Funk Metal, Garage Rock, Indie Folk, Indie Pop, Post-Punk, 60s Psychedelic Rock, Shoegaze, Surf Rock`
-- **แจ๊ส โซล และฟังก์**: `Acid Jazz, Afrobeat, Bossa Nova, Disco Funk, Funk, Jazz Fusion, Latin Jazz`
-- **เพลงพื้นบ้านและเพลงดั้งเดิม**: `Bengal Baul, Bhangra, Bluegrass, Celtic Folk, Cumbia, Indian Classical, Irish Folk, Merengue, Polka, Reggae, Reggaeton, Renaissance Music, Salsa`
-- **คลาสสิกและอะคูสติก**: `Baroque, Orchestral Score, Piano Ballad`
+- **Elektronik ve Dans**: `Acid House, Breakbeat, Chillout, Chiptune, Deep House, Drum & Bass, Dubstep, EDM, Electro Swing, Glitch Hop, Hyperpop, Minimal Techno, Moombahton, Psytrance, Synthpop, Techno, Trance, Trip Hop, Vaporwave`
+- **Hip-Hop ve R&B**: `808 Hip Hop, Boom-Bap, Contemporary R&B, G-funk, Grime, Lo-Fi Hip Hop, Neo-Soul, New Jack Swing, Trap Beat`
+- **Rock ve Alternatif**: `Alternative Country, Blues Rock, Classic Rock, Funk Metal, Garage Rock, Indie Folk, Indie Pop, Post-Punk, 60s Psychedelic Rock, Shoegaze, Surf Rock`
+- **Caz, Soul ve Funk**: `Acid Jazz, Afrobeat, Bossa Nova, Disco Funk, Funk, Jazz Fusion, Latin Jazz`
+- **Folk ve Geleneksel**: `Bengal Baul, Bhangra, Bluegrass, Celtic Folk, Cumbia, Indian Classical, Irish Folk, Merengue, Polka, Reggae, Reggaeton, Renaissance Music, Salsa`
+- **Klasik ve Akustik**: `Baroque, Orchestral Score, Piano Ballad`
 
-## เครื่องดนตรีและพื้นผิว
+## Enstrümanlar ve dokular
 
-Lyria จะเลือกเครื่องดนตรีที่เหมาะสมกับแนวเพลงที่ขอโดยอัตโนมัติ หากต้องการเครื่องดนตรีที่เฉพาะเจาะจงหรือการผสมผสานที่แปลกใหม่ ให้ประกาศอย่างชัดเจนดังนี้
+Lyria, istenen tür için uygun enstrümanı otomatik olarak seçer. Belirli enstrümanlar veya alışılmadık kombinasyonlar istiyorsanız bunları açıkça belirtin:
 
 ```
 A dance track with a driving beat, shimmering synthesizers, and a catchy, anthemic chorus. A saxophone solo enters during the bridge.
 ```
 
-อธิบายลักษณะเสียงของเครื่องดนตรีและการทำงานร่วมกันเพื่อสร้างอารมณ์และพื้นผิว
+Enstrümanların ruh halini ve dokuyu belirlemek için nasıl ses çıkardığını ve etkileşime girdiğini açıklayın:
 
-- เสียงเบสไลน์ 303 ที่ดัดแปลงซึ่งตัดผ่านเสียงไฮแฮตที่คมชัดและแน่น
-- เสียงสังเคราะห์แบบอนาล็อกที่อบอุ่นค่อยๆ ดังขึ้นใต้เสียงกีตาร์โปร่งที่แห้งและใกล้ชิด
-- กำแพงเสียงที่สร้างขึ้นจากกีตาร์ฟัซหลายเลเยอร์ พร้อมเสียงร้องที่อยู่ไกลๆ ซึ่งเต็มไปด้วยรีเวิร์บ
+- Net ve sıkı hi-hat'lerin arasından geçen bozuk bir 303 bas hattı
+- Sıcak, analog synth pad'ler, kuru, samimi bir akustik gitarın altında yükseliyor.
+- Uzaktan gelen, yankı efektli vokallerle birlikte, birden fazla kat fuzz gitarla oluşturulmuş bir ses duvarı
 
-### คีย์เวิร์ดของเครื่องมือ
+### Enstrüman anahtar kelimeleri
 
-- **คีย์บอร์ดและซินธิไซเซอร์**: `Buchla Synths, Clavichord, Dirty Synths, Harpsichord, Mellotron, Moog Oscillations, Ragtime Piano, Rhodes Piano, Smooth Pianos, Spacey Synths, Synth Pads`
-- **เบสและกลอง**: `303 Acid Bass, 808 Hip Hop Beat, Boomy Bass, Conga Drums, Drumline, Funk Drums, Precision Bass, Tabla, TR-909 Drum Machine`
-- **กีตาร์และสาย**: `Banjo, Balalaika, Bouzouki, Cello, Charango, Dulcimer, Fiddle, Flamenco Guitar, Guitar, Harp, Koto, Lyre, Mandolin, Pipa, Shamisen, Shredding Guitar, Sitar, Slide Guitar, Viola Ensemble, Warm Acoustic Guitar`
-- **เครื่องลมและเครื่องทองเหลือง**: `Alto Saxophone, Bagpipes, Bass Clarinet, Didgeridoo, Harmonica, Ocarina, Trumpet, Tuba, Woodwinds`
-- **เครื่องเพอร์คัชชัน**: `Bongos, Djembe, Glockenspiel, Hang Drum, Kalimba, Maracas, Marimba, Mbira, Steel Drum, Vibraphone`
+- **Klavyeler ve Synthesizer'lar**: `Buchla Synths, Clavichord, Dirty Synths, Harpsichord, Mellotron, Moog Oscillations, Ragtime Piano, Rhodes Piano, Smooth Pianos, Spacey Synths, Synth Pads`
+- **Bas ve Davul**: `303 Acid Bass, 808 Hip Hop Beat, Boomy Bass, Conga Drums, Drumline, Funk Drums, Precision Bass, Tabla, TR-909 Drum Machine`
+- **Gitarlar ve Teller**: `Banjo, Balalaika, Bouzouki, Cello, Charango, Dulcimer, Fiddle, Flamenco Guitar, Guitar, Harp, Koto, Lyre, Mandolin, Pipa, Shamisen, Shredding Guitar, Sitar, Slide Guitar, Viola Ensemble, Warm Acoustic Guitar`
+- **Üflemeli ve Bakır**: `Alto Saxophone, Bagpipes, Bass Clarinet, Didgeridoo, Harmonica, Ocarina, Trumpet, Tuba, Woodwinds`
+- **Vurmalı çalgılar**: `Bongos, Djembe, Glockenspiel, Hang Drum, Kalimba, Maracas, Marimba, Mbira, Steel Drum, Vibraphone`
 
-## โครงสร้างและจังหวะเวลาของเพลง
+## Şarkı yapısı ve zamanlama
 
-สำหรับ Lyria 3.5 ให้กำหนดความคืบหน้าของเพลงโดยใช้แท็กหรือลูกศร
+Lyria 3.5'te şarkı ilerlemesini etiketleri veya okları kullanarak tanımlayın:
 
 - `[Intro] -> [Verse 1] -> [Chorus] -> [Verse 2] -> [Chorus] -> [Bridge] -> [Outro]`
-- เริ่มด้วยอินโทรเปียโนที่นุ่มนวล ค่อยๆ เพิ่มจังหวะให้เป็นท่อนเวิร์สที่กระฉับกระเฉง หยุดพักเพื่อช่วงเวลาแห่งความเงียบ แล้วระเบิดออกมาเป็นท่อนคอรัส
+- Sakin bir piyano girişiyle başlayın, enerjik bir verse ile devam edin, bir anlık sessizlik için duraklayın ve ardından nakaratla patlayın.
 
-คุณสามารถกำหนดพลวัตและการเปลี่ยนผ่านด้านพลังงานได้ดังนี้
+Enerji dinamiklerini ve geçişlerini yönlendirebilirsiniz:
 
-- สร้างความตึงเครียดผ่านท่อนก่อนฮุก จากนั้นก็เงียบก่อนที่จะเข้าท่อนฮุกที่ทรงพลัง
-- ค่อยๆ เพิ่มความเข้มข้นของเพลงตลอดทั้งเพลง โดยเพิ่มเครื่องดนตรีทีละชิ้นในแต่ละท่อน
-- หยุดกะทันหันหลังท่อนบริดจ์ ตามด้วยคอรัสแบบอะแคปเปลลา
+- Nakarat öncesi bölümle gerilimi artırın, ardından patlayıcı bir nakarattan önce sessizliğe geçin.
+- Şarkı boyunca kademeli olarak artan, her bölüme bir enstrüman eklenen crescendo
+- Köprüden sonra aniden durulur ve a cappella koro başlar.
 
-นอกจากนี้ คุณยังแจ้งให้ใส่เครื่องหมายเวลาที่เฉพาะเจาะจงได้ด้วย
+Ayrıca belirli zamanlama işaretleri de isteyebilirsiniz:
 
-- สร้างช่วงดรอปของเพลงที่ 12 วินาที
-- ตัวอย่างเสียงร้องจะเล่นซ้ำทุกๆ 4 บาร์
-- ท่อนฮุกเริ่มที่ 22 วินาที
+- 12. saniyede ritmin düşeceği bir bölüm oluşturun.
+- Vokal örneği her 4 ölçüde bir tekrarlanır
+- Koro 22. saniyede başlıyor
 
-## เนื้อเพลงและเสียงร้อง
+## Şarkı sözleri ve vokaller
 
-Lyria 3.5 จะสร้างแทร็กเสียงร้องพร้อมเนื้อเพลงโดยค่าเริ่มต้น คุณสามารถระบุเนื้อเพลงของคุณเอง ขอให้โมเดลสร้างเนื้อเพลง หรือขอแทร็กบรรเลงได้
+Lyria 3.5, varsayılan olarak şarkı sözleri içeren vokal parçaları üretir. Kendi şarkı sözlerinizi sağlayabilir, modelden şarkı sözü oluşturmasını isteyebilir veya enstrümantal parça isteğinde bulunabilirsiniz.
 
-### การใช้เนื้อเพลงของคุณเอง
+### Kendi şarkı sözlerinizi kullanma
 
-ใส่เนื้อเพลงลงในพรอมต์โดยตรงใต้ส่วนหัว `Lyrics:` ติดแท็กแต่ละส่วนเพื่อเป็นแนวทางในการนำเสนอเสียงร้อง
+Şarkı sözlerinizi doğrudan `Lyrics:` başlığının altındaki isteme ekleyin. Vokal sunumunu yönlendirmek için her bölümü etiketleyin:
 
 ```
 Lyrics:
@@ -135,56 +135,56 @@ Until the morning light
 Everything will be alright
 ```
 
-ใช้เครื่องหมายวงเล็บสำหรับเสียงร้องประสาน เสียงก้อง หรือการด้นสด เช่น `(moving on)`
+Geri vokaller, ekolar veya doğaçlamalar için parantez kullanın (ör. `(moving on)`).
 
-### การกำกับเนื้อเพลงที่สร้างขึ้น
+### Oluşturulan şarkı sözlerini yönlendirme
 
-เมื่อขอให้ Lyria 3.5 เขียนเนื้อเพลง ให้ระบุโครงเรื่อง อารมณ์ หรือวลีสำคัญ
+Lyria 3.5'ten şarkı sözü yazmasını isterken anlatıyı, duyguyu veya anahtar ifadeleri özetleyin:
 
 ```
 The lyrics describe driving down the Pacific Coast Highway at sunset. The mood is nostalgic and reflective. Include an uplifting, anthemic chorus about second chances and starting over.
 ```
 
-สำหรับแนวเพลงอิเล็กทรอนิกส์และแดนซ์ ให้ขอท่อนฮุกเสียงร้องสั้นๆ ที่ร้องซ้ำ
+Elektronik ve dans türleri için kısa ve tekrarlayan vokal bölümleri isteyin:
 
 ```
 An upbeat dance-pop track with a repetitive, high-energy vocal hook: "Feel the rhythm all night long."
 ```
 
-### การนำส่งเสียงร้องและโปรไฟล์นักร้อง
+### Vokal sunumu ve şarkıcı profilleri
 
-ระบุเพศ ช่วงเสียง และโทนเสียงเพื่อให้ได้ผลลัพธ์ที่แม่นยำ
+Cinsiyeti, vokal aralığını ve tınıyı belirterek daha iyi sonuçlar elde edin:
 
-- **โซปราโนหญิง**: เสียงใสราวคริสตัลที่มีความคล่องตัวและทรงพลัง โทนสว่างที่ให้พื้นผิวโปร่งและมีลม
-- **อัลโตหญิง**: เสียงทุ้มที่อบอุ่นและแหบพร่า เสียงทุ้มต่ำที่เต็มไปด้วยจิตวิญญาณและก้องกังวาน
-- **เสียงเทเนอร์ชาย**: สดใส ก้องกังวาน และมีพลัง เสียงที่สดใสพร้อมพลังเสียงสูงที่โดดเด่นในมิกซ์ที่ซับซ้อน
-- **บาร์ริโทนชาย**: เสียงทุ้มต่ำนุ่มละมุนจากอกพร้อมการนำเสนอที่อบอุ่น นุ่มนวล และขับกล่อม
-- **ร็อกเกอร์ผู้ผ่านร้อนผ่านหนาว**: เสียงแหบแห้งที่ชวนให้นึกถึงร็อกอัลเทอร์เนทีฟยุค 90 ความเข้มข้นทางอารมณ์ที่ดิบเถื่อนพร้อมโน้ตสูงที่ตึงเครียด
+- **Kadın Soprano**: Çevik ve yükselen bir performansla net, kristal tını. Hafif ve nefesli dokular oluşturabilen parlak ton.
+- **Kadın Alto**: Zengin, sıcak ve kısık alt aralık. Duygusal ve rezonanslı bir göğüs sesiyle dumanlı bir tını.
+- **Erkek Tenor**: Parlak, keskin ve enerjik. Yoğun mikslerde öne çıkan, yüksek belting gücüne sahip genç bir tını.
+- **Erkek Bariton**: Derin, kadife gibi pürüzsüz, sıcak, rahatlatıcı ve yumuşak bir ses.
+- **Weathered Rocker**: 1990'ların alternatif rock müziğini anımsatan, pürüzlü ve sert tını. Gergin üst notalarla birlikte ham duygusal yoğunluk.
 
-### เอฟเฟกต์เสียงร้องที่ไม่มีเนื้อร้อง
+### Söz içermeyen vokal efektleri
 
-นอกจากนี้ คุณยังแจ้งให้สร้างบทสนทนาที่พูด เสียงร้อง และเอฟเฟกต์การแซมเปิลได้ด้วย
+Ayrıca, konuşma diyalogları, vokal kesintileri ve örnekleme efektleri için de istemde bulunabilirsiniz:
 
-- เสียงประกาศจากวิทยุโบราณจะแนะนำเพลงก่อนที่จังหวะจะเริ่มขึ้น
-- เสียงพูดกระซิบก่อนดรอป ตามด้วยซินธ์ที่มีพลังสูง
-- ตัวอย่างเสียงร้องที่ตัดต่อและเปลี่ยนระดับเสียงซึ่งวนซ้ำเป็นองค์ประกอบจังหวะของเครื่องดนตรี
+- Bir radyo yayını sesi, ritim başlamadan önce şarkıyı tanıtıyor.
+- Drop'tan hemen önce fısıldayan bir ses ve ardından yüksek enerjili synth sesleri
+- Enstrümantal ritim öğesi olarak döngüye alınan, kesilmiş ve perdesi değiştirilmiş vokal örnekleri
 
-## พารามิเตอร์ทางดนตรี
+## Müzikal parametreler
 
-ปรับแต่งพรอมต์ด้วยคุณสมบัติทางดนตรีมาตรฐาน
+İsteminizi standart müzik özellikleriyle iyileştirin:
 
-- **เทมโป (BPM)**: ตั้งค่าเทมโปโดยตรง (เช่น `120 BPM`, `slow tempo around 72 BPM`, `fast 160 BPM`)
-- **คีย์และสเกล**: ระบุคีย์รูทและโทนเสียง (เช่น `in G major`, `in D minor`, `in C pentatonic`)
-- **อารมณ์และบรรยากาศ**: ใช้คำคุณศัพท์ที่สื่อถึงอารมณ์
+- **Tempo (BPM)**: Tempoyu doğrudan ayarlayın (ör. `120 BPM`, `slow tempo around 72 BPM`, `fast 160 BPM`).
+- **Ton ve Ölçek**: Anahtarı ve tonu belirtin (ör. `in G major`, `in D minor`, `in C pentatonic`).
+- **Ruh Hali ve Atmosfer**: Duygusal sıfatlar kullanın:
   `Ambient, Bright, Chill, Dark, Dreamy, Emotional, Ethereal, Euphoric, Funky, Groovy, Melancholic, Nostalgic, Ominous, Psychedelic, Relaxed, Soulful, Triumphant, Upbeat, Whimsical`
 
-## การแจ้ง Lyria RealTime
+## Lyria RealTime'ı isteme
 
-Lyria RealTime ใช้**พรอมต์แบบถ่วงน้ำหนัก**แทนสตริงพรอมต์แบบโมโนลิธเดียว ซึ่งช่วยให้คุณผสมผสานอิทธิพลทางดนตรีหลายอย่างได้อย่างไดนามิกและควบคุมเพลงอย่างต่อเนื่องผ่านการเชื่อมต่อ WebSocket
+Lyria RealTime, tek bir monolitik istem dizesi yerine **ağırlıklı istemler** kullanır. Bu sayede, birden fazla müzik etkisini dinamik olarak harmanlayabilir ve WebSocket bağlantısı üzerinden müziği sürekli olarak yönlendirebilirsiniz.
 
-### โครงสร้างพรอมต์แบบถ่วงน้ำหนัก
+### Ağırlıklı istem yapısı
 
-พรอมต์ที่มีการถ่วงน้ำหนักแต่ละรายการประกอบด้วยวลีข้อความอธิบายและน้ำหนักจุดลอยตัว
+Her ağırlıklı istem, açıklayıcı bir metin ifadesi ve kayan noktalı bir ağırlıktan oluşur:
 
 ```
 prompts = [
@@ -194,35 +194,35 @@ prompts = [
 ]
 ```
 
-### กลยุทธ์การปรับแบบเรียลไทม์
+### Gerçek zamanlı yönlendirme stratejileri
 
-- **การผสมผสานแนวเพลง**: ผสมผสานสไตล์ที่แตกต่างกันโดยกำหนดน้ำหนักที่สมดุล ดังนี้
+- **Türleri karıştırma**: Dengeli ağırlıklar atayarak farklı stilleri karıştırın:
   - `ambient synth pads (weight: 0.8)` + `lo-fi hip-hop drums (weight: 0.6)`
   - `flamenco guitar (weight: 0.7)` + `deep house groove (weight: 0.5)`
-- **การเปลี่ยนผ่านที่ลื่นไหล**: หากต้องการเปลี่ยนเพลงอย่างราบรื่น ให้ปรับน้ำหนักของพรอมต์เมื่อเวลาผ่านไปโดยทำดังนี้
-  1. เริ่มต้นด้วย `chill jazz piano (weight: 1.0)`
-  2. ค่อยๆ เพิ่ม `electronic breakbeat (weight: 0.3)`
-  3. เพิ่ม `electronic breakbeat` เป็น `0.8` ขณะที่ลด `chill jazz piano` เป็น `0.3`
-- **การวางเลเยอร์องค์ประกอบ**: แยกแท็กเครื่องดนตรีและแท็กอารมณ์ออกจากกันเพื่อให้ปรับแยกกันได้ โดยทำดังนี้
-  - พรอมต์ 1: `bossa nova guitar (weight: 0.9)`
-  - พรอมต์ 2: `warm acoustic bass (weight: 0.7)`
-  - พรอมต์ 3: `subtle vinyl crackle (weight: 0.3)`
+- **Dinamik geçişler**: Müzik geçişini sorunsuz hale getirmek için zaman içinde istem ağırlıklarını ayarlayın:
+  1. `chill jazz piano (weight: 1.0)` ile başlayın.
+  2. `electronic breakbeat (weight: 0.3)` değerini kademeli olarak ekleyin.
+  3. `electronic breakbeat` değerini `0.8` olarak artırırken `chill jazz piano` değerini `0.3` olarak düşürün.
+- **Öğeleri katmanlama**: Enstrüman etiketlerini ve ruh hali etiketlerini ayrı tutarak bunları bağımsız olarak ayarlayabilirsiniz:
+  - 1. istem: `bossa nova guitar (weight: 0.9)`
+  - İstem 2: `warm acoustic bass (weight: 0.7)`
+  - 3. İstem: `subtle vinyl crackle (weight: 0.3)`
 
-## ตัวอย่างพรอมต์
+## Örnek istemler
 
-### ตัวอย่าง Lyria 3.5
+### Lyria 3.5 örnekleri
 
-- **Lo-Fi Study Beat**
+- **Lo-Fi Study Beat**:
   `none
   A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes piano chords, a relaxed boom-bap drum groove at 82 BPM, and a warm upright bassline. Instrumental only.`
-- **เพลงป๊อป**
+- **Pop Anthem**:
   `none
   An upbeat, feel-good indie-pop song in G major at 122 BPM. Bright acoustic guitar strumming, driving kick drum, handclaps, and warm female vocal harmonies. The lyrics describe an unforgettable summer road trip with friends.`
-- **ไซเบอร์พังก์แบบภาพยนตร์**
+- **Sinematik Cyberpunk**:
   `none
   Dark, cinematic cyberpunk synthwave at 110 BPM in D minor. Heavy distorted bass, ominous arpeggiated analog synthesizers, distant metallic percussion, and an ethereal female vocalise swelling during the climax.`
 
-### ชุดการบังคับเลี้ยวแบบเรียลไทม์ของ Lyria
+### Lyria RealTime yönlendirme seti
 
 ```
 # Initial high-energy groove
@@ -243,17 +243,17 @@ await session.set_weighted_prompts(
 )
 ```
 
-## ขั้นตอนถัดไป
+## Sırada ne var?
 
-- [สร้างเพลงด้วย Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=th): สร้างเพลงเต็มและคลิปความยาว 30 วินาทีโดยใช้ Interactions API
-- [การสร้างเพลงแบบเรียลไทม์ด้วย Lyria RealTime](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=th): สร้างแอปพลิเคชันการสตรีมเพลงแบบอินเทอร์แอกทีฟแบบเรียลไทม์ผ่าน WebSockets
+- [Lyria 3.5 ile müzik üretme](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr): Interactions API'yi kullanarak tam şarkılar ve 30 saniyelik klipler oluşturun.
+- [Lyria RealTime ile anlık müzik üretme](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr): WebSockets üzerinden anlık ve etkileşimli müzik akışı uygulamaları oluşturun.
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-09-18 UTC
+Son güncelleme tarihi: 2026-09-18 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-18 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-18 UTC."],[],[]]

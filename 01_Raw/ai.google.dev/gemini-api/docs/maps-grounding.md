@@ -1,31 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi
-fetched_at: 2026-09-21T05:45:41.085773+00:00
-title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it
+fetched_at: 2026-09-28T06:27:55.508186+00:00
+title: "Grounding con Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Gửi ý kiến phản hồi
+Invia feedback
 
-# Căn cứ vào Google Maps
+# Grounding con Google Maps
 
-Tính năng Bám sát nguồn bằng Google Maps kết nối các khả năng tạo sinh của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng tích hợp chức năng nhận biết vị trí vào các ứng dụng của họ. Khi một cụm từ tìm kiếm của người dùng có bối cảnh liên quan đến dữ liệu trên Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời chính xác về mặt thực tế và mới nhất, đồng thời liên quan đến vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
+Grounding con Google Maps collega le funzionalità generative di Gemini ai dati ricchi, reali e aggiornati di Google Maps. Questa funzionalità consente
+agli sviluppatori di incorporare facilmente funzionalità basate sulla posizione nelle loro
+applicazioni. Quando una query dell'utente ha un contesto correlato ai dati di Maps, il modello Gemini sfrutta Google Maps per fornire risposte oggettive e aggiornate pertinenti alla posizione o all'area generale specificata dall'utente.
 
-- **Câu trả lời chính xác, nhận biết vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các cụm từ tìm kiếm theo địa lý cụ thể.
-- **Cá nhân hoá nâng cao:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
+- **Risposte accurate e basate sulla posizione**:sfrutta i dati estesi e
+  aggiornati di Google Maps per le query geograficamente specifiche.
+- **Personalizzazione avanzata:** personalizza i consigli e le informazioni in base alle località fornite dagli utenti.
 
-## Bắt đầu
+## Inizia
 
-Ví dụ này minh hoạ cách tích hợp tính năng Neo bám vào Google Maps vào ứng dụng của bạn để cung cấp câu trả lời có độ chính xác cao, nhận biết vị trí cho các truy vấn của người dùng. Câu lệnh yêu cầu đề xuất địa điểm ở địa phương kèm theo vị trí người dùng (không bắt buộc), cho phép mô hình Gemini sử dụng dữ liệu của Google Maps.
+Questo esempio mostra come integrare Grounding con Google Maps nella tua
+applicazione per fornire risposte accurate e basate sulla posizione alle query degli utenti. Il
+prompt chiede consigli locali con una posizione utente facoltativa, consentendo
+al modello Gemini di utilizzare i dati di Google Maps.
 
 ### Python
 
@@ -163,6 +169,76 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("What are the best Italian restaurants within a 15-minute walk from here?"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleMaps{
+                        Latitude:  genai.Ptr(34.050481),
+                        Longitude: genai.Ptr(-118.248526),
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Print the model's text response and annotations
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    fmt.Println(content.TextContent.Text)
+                    if len(content.TextContent.Annotations) > 0 {
+                        fmt.Println("\nSources:")
+                        for _, annotation := range content.TextContent.Annotations {
+                            if annotation.PlaceCitation != nil {
+                                c := annotation.PlaceCitation
+                                name := ""
+                                if c.Name != nil {
+                                    name = *c.Name
+                                }
+                                url := ""
+                                if c.URL != nil {
+                                    url = *c.URL
+                                }
+                                fmt.Printf("  - %s: %s\n", name, url)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -181,38 +257,53 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cách hoạt động của tính năng Neo bám vào Google Maps
+## Come funziona Grounding con Google Maps
 
-Tính năng neo bám vào Google Maps tích hợp Gemini API với hệ sinh thái Google Geo bằng cách sử dụng Maps API làm nguồn neo bám. Khi cụm từ tìm kiếm của người dùng có ngữ cảnh địa lý, mô hình Gemini có thể gọi công cụ Nền tảng với Google Maps. Sau đó, mô hình có thể tạo ra câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
+Grounding con Google Maps integra l'API Gemini con l'ecosistema Google Geo utilizzando l'API di Google Maps come fonte di grounding. Quando la query di un utente
+contiene un contesto geografico, il modello Gemini può richiamare lo strumento Grounding con
+Google Maps. Il modello può quindi generare risposte basate sui dati di Google Maps pertinenti alla posizione fornita.
 
-Quy trình này thường bao gồm:
+In genere, la procedura prevede:
 
-1. **Cụm từ tìm kiếm của người dùng:** Người dùng gửi một cụm từ tìm kiếm đến ứng dụng của bạn, có thể bao gồm cả bối cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
-2. **Gọi công cụ:** Mô hình Gemini, khi nhận ra ý định về địa lý, sẽ gọi công cụ Grounding with Google Maps. Bạn có thể cung cấp cho công cụ này `latitude` và `longitude` của người dùng (không bắt buộc). Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như khi bạn tìm kiếm trên Maps, trong đó các cụm từ tìm kiếm tại địa phương ("gần tôi") sẽ sử dụng toạ độ, trong khi các cụm từ tìm kiếm cụ thể hoặc không phải tại địa phương sẽ khó bị ảnh hưởng bởi vị trí rõ ràng.
-3. **Truy xuất dữ liệu:** Dịch vụ Grounding with Google Maps truy vấn Google Maps để tìm thông tin liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
-4. **Tạo câu trả lời dựa trên dữ liệu:** Dữ liệu được truy xuất từ Maps được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ phù hợp của thông tin.
-5. **Phản hồi và chú thích:** Mô hình này trả về một phản hồi bằng văn bản kèm theo chú thích nội tuyến liên kết đến các nguồn trên Google Maps, cho phép nhà phát triển hiển thị nội dung trích dẫn.
+1. **Query dell'utente:** un utente invia una query alla tua applicazione, potenzialmente
+   incluso il contesto geografico (ad es. "caffetterie vicino a me", "musei a
+   San Francisco").
+2. **Richiamo dello strumento**:il modello Gemini, riconoscendo l'intento geografico,
+   richiama lo strumento Grounding con Google Maps. Questo strumento può essere fornito facoltativamente con `latitude` e `longitude` dell'utente. Lo strumento è uno strumento di ricerca
+   testuale e si comporta in modo simile alla ricerca su Maps, in quanto le query
+   locali ("vicino a me") utilizzano le coordinate, mentre è improbabile che le query specifiche o non locali
+   siano influenzate dalla posizione esplicita.
+3. **Recupero dei dati:** il servizio Grounding con Google Maps esegue query su Google
+   Maps per informazioni pertinenti (ad es. luoghi, recensioni, foto, indirizzi,
+   orari di apertura).
+4. **Generazione fondata**:i dati di Maps recuperati vengono utilizzati per informare la risposta del modello Gemini, garantendo accuratezza e pertinenza.
+5. **Risposta e annotazioni**:il modello restituisce una risposta di testo con annotazioni in linea che rimandano alle fonti di Google Maps, consentendo agli sviluppatori di visualizzare le citazioni.
 
-## Lý do và thời điểm nên sử dụng tính năng Neo bám vào Google Maps
+## Perché e quando utilizzare Grounding con Google Maps
 
-Neo bám vào Google Maps là lựa chọn lý tưởng cho những ứng dụng cần thông tin chính xác, mới nhất và theo vị trí cụ thể. Nhờ cơ sở dữ liệu phong phú của Google Maps với hơn 250 triệu địa điểm trên toàn thế giới, tính năng này mang đến nội dung phù hợp và được cá nhân hoá, giúp nâng cao trải nghiệm người dùng.
+Il grounding con Google Maps è ideale per le applicazioni che richiedono informazioni accurate,
+aggiornate e specifiche per la posizione. Migliora l'esperienza utente
+fornendo contenuti pertinenti e personalizzati supportati dall'ampio
+database di Google Maps di oltre 250 milioni di luoghi in tutto il mondo.
 
-Bạn nên sử dụng tính năng Neo bám vào Google Maps khi ứng dụng của bạn cần:
+Devi utilizzare Grounding con Google Maps quando la tua applicazione deve:
 
-- Đưa ra câu trả lời đầy đủ và chính xác cho các câu hỏi theo vị trí địa lý.
-- Xây dựng công cụ lập kế hoạch chuyến đi và hướng dẫn viên địa phương dựa trên cuộc trò chuyện.
-- Đề xuất các địa điểm yêu thích dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
-- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ xã hội, bán lẻ hoặc giao đồ ăn.
+- Fornisci risposte complete e accurate alle domande specifiche per area geografica.
+- Crea agenti di viaggio e guide locali conversazionali.
+- Consiglia punti d'interesse in base alla posizione e alle preferenze dell'utente, come ristoranti o negozi.
+- Crea esperienze basate sulla posizione per servizi social, di vendita al dettaglio o di consegna di cibo.
 
-Neo bám vào Google Maps vượt trội trong các trường hợp sử dụng mà dữ liệu thực tế hiện tại và khoảng cách là yếu tố quan trọng, chẳng hạn như tìm "quán cà phê ngon nhất gần tôi" hoặc nhận chỉ đường.
+La base con Google Maps eccelle nei casi d'uso in cui la vicinanza e i dati
+fattuali attuali sono fondamentali, ad esempio per trovare il "miglior bar vicino a me" o
+ricevere indicazioni stradali.
 
-## Trường hợp sử dụng
+## Casi d'uso
 
-Tính năng liên kết với Google Maps hỗ trợ nhiều trường hợp sử dụng có nhận biết vị trí.
+Grounding con Google Maps supporta una serie di casi d'uso basati sulla posizione.
 
-### Xử lý các câu hỏi về địa điểm cụ thể
+### Gestione delle domande specifiche per luogo
 
-Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên các bài đánh giá của người dùng trên Google và dữ liệu khác trên Maps.
+Fai domande dettagliate su un luogo specifico per ottenere risposte basate sulle recensioni degli utenti di Google e su altri dati di Maps.
 
 ### Python
 
@@ -347,9 +438,78 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Cung cấp tính năng cá nhân hoá dựa trên vị trí
+### Go
 
-Nhận đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Is there a cafe near the corner of 1st and Main that has outdoor seating?"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleMaps{
+                        Latitude:  genai.Ptr(34.050481),
+                        Longitude: genai.Ptr(-118.248526),
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    fmt.Println(content.TextContent.Text)
+                    if len(content.TextContent.Annotations) > 0 {
+                        fmt.Println("\nSources:")
+                        for _, annotation := range content.TextContent.Annotations {
+                            if annotation.PlaceCitation != nil {
+                                c := annotation.PlaceCitation
+                                name := ""
+                                if c.Name != nil {
+                                    name = *c.Name
+                                }
+                                url := ""
+                                if c.URL != nil {
+                                    url = *c.URL
+                                }
+                                fmt.Printf("  - %s: %s\n", name, url)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Fornire personalizzazione basata sulla posizione
+
+Ricevi consigli personalizzati in base alle preferenze di un utente e a una specifica area geografica.
 
 ### Python
 
@@ -483,9 +643,79 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### Hỗ trợ lập kế hoạch cho hành trình
+### Go
 
-Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput("Which family-friendly restaurants near here have the best playground reviews?"),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleMaps{
+                        Latitude:  genai.Ptr(30.2672),
+                        Longitude: genai.Ptr(-97.7431),
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range resp.Interaction.Steps {
+        if step.ModelOutputStep != nil {
+            for _, content := range step.ModelOutputStep.Content {
+                if content.TextContent != nil {
+                    fmt.Println(content.TextContent.Text)
+                    if len(content.TextContent.Annotations) > 0 {
+                        fmt.Println("\nSources:")
+                        for _, annotation := range content.TextContent.Annotations {
+                            if annotation.PlaceCitation != nil {
+                                c := annotation.PlaceCitation
+                                name := ""
+                                if c.Name != nil {
+                                    name = *c.Name
+                                }
+                                url := ""
+                                if c.URL != nil {
+                                    url = *c.URL
+                                }
+                                fmt.Printf("  - %s: %s\n", name, url)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+### Aiuto con la pianificazione dell'itinerario
+
+Genera piani di più giorni con indicazioni stradali e informazioni su varie
+località, perfetti per le applicazioni di viaggio.
 
 ### Python
 
@@ -564,6 +794,53 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Plan a day in San Francisco for me. I want to see the Golden Gate Bridge, visit a museum, and have a nice dinner."
+
+    resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(
+            interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput(prompt),
+                Tools: []interactions.Tool{
+                    interactions.NewTool(interactions.GoogleMaps{
+                        Latitude:  genai.Ptr(37.78193),
+                        Longitude: genai.Ptr(-122.40476),
+                    }),
+                },
+            },
+        ),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // ... code to process response
+    fmt.Println(resp.Interaction.GetOutputText())
+}
+```
+
 ### REST
 
 ```
@@ -582,100 +859,112 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Yêu cầu về việc sử dụng dịch vụ
+## Requisiti per l'utilizzo del servizio
 
-Phần này mô tả các yêu cầu về việc sử dụng dịch vụ để sử dụng tính năng Grounding with Google Maps.
+Questa sezione descrive i requisiti di utilizzo del servizio per Grounding con Google Maps.
 
-### Thông báo cho người dùng về việc sử dụng các nguồn của Google Maps
+### Informa l'utente dell'utilizzo delle fonti di Google Maps
 
-Với mỗi kết quả dựa trên dữ liệu thực tế trên Google Maps, bạn sẽ nhận được chú thích nguồn trên các khối nội dung của bước `model_output` hỗ trợ từng câu trả lời. Hệ thống sẽ trả về siêu dữ liệu sau:
+Per ogni risultato fondato di Google Maps, riceverai annotazioni delle fonti nei blocchi di contenuti del passaggio `model_output` che supportano ogni risposta. Vengono restituiti i seguenti metadati:
 
-- URL nguồn
-- tên
+- URL di origine
+- nome
 
-Khi trình bày kết quả từ tính năng Grounding with Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng về những điều sau:
+Quando presenti i risultati di Grounding con Google Maps, devi specificare le fonti di Google Maps associate e informare gli utenti di quanto segue:
 
-- Các nguồn trên Google Maps phải nằm ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả dựa trên vị trí thực tế trên Google Maps.
-- Người dùng phải xem được các nguồn dữ liệu của Google Maps trong một lượt tương tác của người dùng.
+- Le fonti di Google Maps devono seguire immediatamente i contenuti generati che
+  supportano le fonti. Questi contenuti generati sono anche chiamati Risultato fondato di Google Maps.
+- Le fonti di Google Maps devono essere visualizzabili in una sola interazione dell'utente.
 
-### Hiển thị các nguồn trên Google Maps bằng đường liên kết đến Google Maps
+### Visualizzare le fonti di Google Maps con i link di Google Maps
 
-Đối với mỗi chú thích nguồn, bạn phải tạo bản xem trước đường liên kết theo các yêu cầu sau:
+Per ogni annotazione della fonte, deve essere generata un'anteprima del link
+che soddisfi i seguenti requisiti:
 
-- Ghi công từng nguồn cho Google Maps theo [nguyên tắc ghi công](#maps-attribution-guidelines) văn bản của Google Maps.
-- Hiển thị tên nguồn có trong phản hồi.
-- Liên kết đến nguồn bằng cách sử dụng `url` từ chú giải.
+- Attribuisci ogni sorgente a Google Maps seguendo le [linee guida per l'attribuzione](#maps-attribution-guidelines) del testo di Google Maps.
+- Mostra il nome della fonte fornito nella risposta.
+- Link alla fonte utilizzando `url` dell'annotazione.
 
-### Nguyên tắc ghi công bằng văn bản của Google Maps
+### Linee guida per l'attribuzione di testo di Google Maps
 
-Khi ghi nguồn cho Google Maps bằng văn bản, hãy tuân thủ các nguyên tắc sau:
+Quando attribuisci le fonti a Google Maps nel testo, segui queste linee guida:
 
-- Không sửa đổi văn bản Google Maps theo bất kỳ cách nào:
-  - Không thay đổi kiểu viết hoa của Google Maps.
-  - Đừng xuống dòng Google Maps.
-  - Đừng bản địa hoá Google Maps sang một ngôn ngữ khác.
-  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
+- Non modificare in alcun modo il testo Google Maps:
+  - Non modificare le maiuscole di Google Maps.
+  - Non mandare a capo Google Maps su più righe.
+  - Non localizzare Google Maps in un'altra lingua.
+  - Impedisci ai browser di tradurre Google Maps utilizzando l'attributo HTML
+    translate="no".
 
-Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và điều khoản cấp phép của họ, hãy xem [Thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
+Per ulteriori informazioni su alcuni dei nostri fornitori di dati di Google Maps e sui relativi termini di licenza, consulta le [note legali di Google Maps e Google Earth](https://www.google.com/help/legalnotices_maps/?hl=it).
 
-## Các phương pháp hay nhất
+## Best practice
 
-- **Cung cấp vị trí của người dùng:** Để nhận được câu trả lời phù hợp và được cá nhân hoá nhất, hãy luôn thêm `latitude` và `longitude` vào cấu hình công cụ `google_maps` khi bạn biết vị trí của người dùng.
-- **Thông báo cho Người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu trên Google Maps đang được dùng để trả lời các câu hỏi của họ, đặc biệt là khi công cụ này được bật.
-- **Tắt khi không cần thiết:** Theo mặc định, tính năng tiếp đất bằng Google Maps sẽ ở trạng thái tắt. Chỉ bật (`"tools": [{"type": "google_maps"}]`) khi truy vấn có ngữ cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
+- **Fornisci la posizione dell'utente**:per ottenere le risposte più pertinenti e personalizzate,
+  includi sempre `latitude` e `longitude` nella configurazione dello strumento `google_maps` quando la posizione dell'utente è nota.
+- **Informa gli utenti finali**:informa chiaramente gli utenti finali che i dati di Google Maps vengono utilizzati per rispondere alle loro query, soprattutto quando lo strumento è abilitato.
+- **Disattivazione quando non è necessario:** il grounding con Google Maps è disattivato per
+  impostazione predefinita. Attivala (`"tools": [{"type": "google_maps"}]`) solo quando una query ha un contesto geografico chiaro, per ottimizzare prestazioni e costi.
 
-## Các điểm hạn chế
+## Limitazioni
 
-- Tính năng căn cứ vào Google Maps hiện chỉ hỗ trợ câu lệnh và câu trả lời bằng tiếng Anh.
-- Công cụ này có thể không dùng được ở một số khu vực.
-- Kết quả có thể khác nhau tuỳ thuộc vào độ chính xác của vị trí và dữ liệu có sẵn trên Maps.
-- **Phạm vi địa lý:** Tính năng neo bám vào Google Maps được cung cấp trên toàn cầu.
-- **Trạng thái mặc định:** Công cụ Neo bám vào Google Maps sẽ tắt theo mặc định.
-  Bạn phải bật tính năng này một cách rõ ràng trong các yêu cầu API.
+- Al momento, il grounding con Google Maps supporta solo prompt e risposte in lingua inglese.
+- Lo strumento potrebbe non essere disponibile in tutte le regioni.
+- I risultati possono variare in base all'accuratezza della posizione e ai dati di Maps disponibili.
+- **Ambito geografico**:il grounding con Google Maps è disponibile a livello globale.
+- **Stato predefinito**:lo strumento Grounding con Google Maps è disattivato per impostazione predefinita.
+  Devi abilitarla esplicitamente nelle richieste API.
 
-## Mức giá và hạn mức
+## Prezzi e limiti di frequenza
 
-Mức giá của tính năng neo bám vào Google Maps sẽ khác nhau tuỳ thuộc vào thế hệ mô hình:
+I prezzi di Grounding con Google Maps variano a seconda della generazione del modello:
 
-- **Mô hình Gemini 3:** Dự án của bạn sẽ bị tính phí cho mỗi **cụm từ tìm kiếm** mà mô hình quyết định thực hiện. Một **câu lệnh tìm kiếm** (yêu cầu API của bạn đối với mô hình) có thể khiến mô hình thực hiện nhiều truy vấn tìm kiếm để tìm thông tin cần thiết. Mỗi truy vấn này được tính là một lần sử dụng có tính phí của công cụ.
-- **Gemini 2.5 và các mô hình cũ:** Dự án của bạn sẽ được tính phí theo **câu lệnh tìm kiếm**.
-  Bạn chỉ bị tính phí cho yêu cầu nếu câu lệnh trả về thành công ít nhất một kết quả có căn cứ trên Google Maps, bất kể mô hình đã thực hiện bao nhiêu truy vấn tìm kiếm riêng lẻ ở nội bộ để nhận được kết quả đó.
+- **Modelli Gemini 3:** al tuo progetto viene addebitato il costo di ogni **query di ricerca** che
+  il modello decide di eseguire. Un singolo **prompt di ricerca** (la tua richiesta API al modello) potrebbe comportare l'esecuzione di più query di ricerca da parte del modello per trovare le informazioni necessarie. Ciascuna di queste query viene conteggiata come utilizzo fatturabile
+  dello strumento.
+- **Gemini 2.5 e modelli precedenti**:il tuo progetto viene fatturato per **prompt di ricerca**.
+  Una richiesta viene fatturata solo se il prompt restituisce correttamente almeno un risultato fondato di Google Maps, indipendentemente dal numero di singole query di ricerca eseguite internamente dal modello per ottenere quel risultato.
 
-Để biết thông tin chi tiết về giá, hãy xem [trang định giá Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
+Per informazioni più dettagliate sui prezzi, consulta la [pagina dei prezzi dell'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=it).
 
-## Mô hình được hỗ trợ
+## Modelli supportati
 
-Các mô hình sau đây hỗ trợ tính năng Neo bám vào Google Maps:
+I seguenti modelli supportano Grounding con Google Maps:
 
-| Mô hình | Neo bám vào Google Maps |
+| Modello | Grounding con Google Maps |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=vi) | ✔️ |
-| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=vi) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=vi) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=vi) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
-| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
-| [Bản dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=it) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=it) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=it) | ✔️ |
+| [Gemini 3.1 Pro (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=it) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it) | ✔️ |
+| [Gemini 3 Flash (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=it) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=it) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=it) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=it) | ✔️ |
 
-## Các tổ hợp công cụ được hỗ trợ
+## Combinazioni di strumenti supportate
 
-Bạn có thể sử dụng tính năng Nền tảng kiến thức dựa trên Google Maps cùng với các công cụ tích hợp khác như [Nền tảng kiến thức dựa trên Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) (được hỗ trợ trên Gemini 3.5 Flash và các mô hình sau này) để hỗ trợ các trường hợp sử dụng phức tạp hơn. Các mô hình Gemini 3 cũng hỗ trợ kết hợp những công cụ tích hợp này với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+Puoi utilizzare Grounding con Google Maps con altri strumenti integrati come
+[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) (supportato su
+Gemini 3.5 Flash e modelli successivi) per supportare casi d'uso più complessi. I modelli Gemini 3
+supportano anche la combinazione di questi strumenti integrati con strumenti personalizzati (chiamata
+di funzioni). Scopri di più nella pagina
+[Combinazioni di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
 
-## Bước tiếp theo
+## Passaggi successivi
 
-- Tìm hiểu về [các công cụ khác hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi).
-- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [hướng dẫn về Chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
+- Scopri di più sugli altri [strumenti disponibili](https://ai.google.dev/gemini-api/docs/tools?hl=it).
+- Per saperne di più sulle best practice per l'AI responsabile e sui filtri di sicurezza dell'API Gemini, consulta la [guida alle impostazioni di sicurezza](https://ai.google.dev/gemini-api/docs/safety-settings?hl=it).
 
-Gửi ý kiến phản hồi
+Invia feedback
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Cập nhật lần gần đây nhất: 2026-09-18 UTC.
+Ultimo aggiornamento 2026-09-24 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Vuoi dirci altro?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-18 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-24 UTC."],[],[]]

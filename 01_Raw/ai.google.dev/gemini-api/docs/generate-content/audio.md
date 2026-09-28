@@ -1,25 +1,25 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=zh-TW
-fetched_at: 2026-09-21T05:56:07.203859+00:00
-title: "\u97f3\u8a0a\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=hi
+fetched_at: 2026-09-28T06:14:07.950807+00:00
+title: "\u0911\u0921\u093f\u092f\u094b \u0915\u094b \u0938\u092e\u091d\u0928\u093e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
 
-提供意見
+सुझाव भेजें
 
-# 音訊理解
+# ऑडियो को समझना
 
-Gemini 可以分析音訊輸入內容，並生成文字回覆。
+Gemini, ऑडियो इनपुट का विश्लेषण करके टेक्स्ट वाले जवाब जनरेट कर सकता है.
 
 ### Python
 
@@ -67,7 +67,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -166,23 +166,22 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 總覽
+## खास जानकारी
 
-Gemini 可以分析及理解音訊輸入內容，並生成文字回覆，
-適用於下列應用情境：
+Gemini, ऑडियो इनपुट का विश्लेषण कर सकता है और उसे समझ सकता है. साथ ही, इसके जवाब में टेक्स्ट जनरेट कर सकता है. इससे इन जैसे इस्तेमाल के उदाहरणों को लागू किया जा सकता है:
 
-- 描述、摘要或回答音訊內容相關問題。
-- 提供音訊的轉錄稿和翻譯 (語音轉文字)。
-- 偵測語音和音樂中的情緒。
-- 分析音訊的特定片段，並提供時間戳記。
+- ऑडियो कॉन्टेंट के बारे में जानकारी देना, उसकी खास जानकारी देना या उससे जुड़े सवालों के जवाब देना.
+- ऑडियो (स्पीच टू टेक्स्ट) की ट्रांसक्रिप्शन और अनुवाद की सुविधा उपलब्ध कराएं.
+- इससे, बोली और संगीत में मौजूद भावना का पता लगाया जा सकता है.
+- ऑडियो के खास सेगमेंट का विश्लेषण करना और टाइमस्टैंप देना.
 
-Gemini API 目前不支援即時轉錄功能。
-如需即時語音和視訊互動，請參閱 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw)。
-如要使用支援即時轉錄的專用語音轉文字模型，請使用 [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=zh-tw)。
+फ़िलहाल, Gemini API, रीयल-टाइम में ट्रांसक्रिप्ट बनाने की सुविधा के साथ काम नहीं करता.
+रीयल-टाइम में आवाज़ और वीडियो से इंटरैक्ट करने के लिए, [Live API](https://ai.google.dev/gemini-api/docs/live?hl=hi) का इस्तेमाल करें.
+रीयल-टाइम ट्रांसक्रिप्शन की सुविधा के साथ काम करने वाले, बोली को लिखाई में बदलने वाले मॉडल के लिए, [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=hi) का इस्तेमाल करें.
 
-## 將語音轉錄成文字
+## बोले जा रहे शब्दों को टेक्स्ट में बदलना
 
-這個範例應用程式說明如何提示 Gemini API 轉錄、翻譯及摘要語音內容，包括使用[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)功能偵測時間戳記和情緒。
+इस उदाहरण ऐप्लिकेशन में, Gemini API को बोलकर दिए गए निर्देश को टेक्स्ट में बदलने, उसका अनुवाद करने, और उसकी खास जानकारी तैयार करने के लिए प्रॉम्प्ट करने का तरीका दिखाया गया है. इसमें [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) का इस्तेमाल करके, टाइमस्टैंप और भावनाओं का पता लगाने की सुविधा भी शामिल है.
 
 ### Python
 
@@ -410,25 +409,25 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-只要按一下按鈕，就能提示 [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=zh-tw) 建立應用程式，就像[這個轉錄應用程式範例](https://aistudio.google.com/apps/bundled/echoscript?hl=zh-tw)一樣。
+[AI Studio Build](https://aistudio.google.com/apps?e=0&hl=hi) को प्रॉम्प्ट देकर, सिर्फ़ एक बटन पर क्लिक करके [इस उदाहरण में दिए गए ट्रांसक्रिप्शन ऐप्लिकेशन](https://aistudio.google.com/apps/bundled/echoscript?hl=hi) जैसा ऐप्लिकेशन बनाया जा सकता है.
 
-![支援多種語言的語音轉錄 Gemini 應用程式](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=zh-tw)
+![Gemini ऐप्लिकेशन में, कई भाषाओं में ऑडियो ट्रांसक्रिप्शन की सुविधा](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=hi)
 
-## 輸入音訊
+## ऑडियो इनपुट करना
 
-你可以透過下列方式向 Gemini 提供音訊資料：
+Gemini को ऑडियो डेटा देने के लिए, इन तरीकों का इस्तेमाल किया जा सकता है:
 
-- 請先[上傳音訊檔案](#upload-audio)，再向 `generateContent` 提出要求。
-- 透過要求將[內嵌音訊資料](#inline-audio)傳遞至 `generateContent`。
+- `generateContent` से अनुरोध करने से पहले, [ऑडियो फ़ाइल अपलोड करें](#upload-audio).
+- `generateContent` को किए गए अनुरोध के साथ, [इनलाइन ऑडियो डेटा पास करें](#inline-audio).
 
-如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
+फ़ाइल इनपुट करने के अन्य तरीकों के बारे में जानने के लिए, [फ़ाइल इनपुट करने के तरीके](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=hi) गाइड देखें.
 
-### 上傳音訊檔案
+### ऑडियो फ़ाइल अपलोड करना
 
-您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳音訊檔。
-如果要求總大小 (包括檔案、文字提示、系統指令等) 超過 20 MB，請一律使用 Files API。
+ऑडियो फ़ाइल अपलोड करने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल किया जा सकता है.
+जब अनुरोध का कुल साइज़ (इसमें फ़ाइलें, टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश वगैरह शामिल हैं) 20 एमबी से ज़्यादा हो, तब हमेशा Files API का इस्तेमाल करें.
 
-下列程式碼會上傳音訊檔案，然後在呼叫 `generateContent` 時使用該檔案。
+यहां दिया गया कोड, एक ऑडियो फ़ाइल अपलोड करता है. इसके बाद, `generateContent` को कॉल करने के लिए इस फ़ाइल का इस्तेमाल करता है.
 
 ### Python
 
@@ -476,7 +475,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -575,11 +574,11 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-如要進一步瞭解如何處理媒體檔案，請參閱 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
+मीडिया फ़ाइलों के साथ काम करने के बारे में ज़्यादा जानने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) देखें.
 
-### 內嵌傳遞音訊資料
+### ऑडियो डेटा को इनलाइन पास करना
 
-您可以將內嵌音訊資料傳遞至 `generateContent`，而非上傳音訊檔案：
+ऑडियो फ़ाइल अपलोड करने के बजाय, `generateContent` को भेजे गए अनुरोध में ऑडियो डेटा को इनलाइन किया जा सकता है:
 
 ### Python
 
@@ -633,7 +632,7 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -678,14 +677,14 @@ func main() {
 }
 ```
 
-使用內嵌音訊資料時，請注意下列事項：
+इनलाइन ऑडियो डेटा के बारे में कुछ बातें ध्यान में रखें:
 
-- 要求大小上限為 20 MB，包括文字提示、系統指令和內嵌提供的檔案。如果檔案大小會導致*要求總大小*超過 20 MB，請使用 Files API [上傳音訊檔案](#upload-audio)，以供要求使用。
-- 如果多次使用音訊樣本，建議[上傳音訊檔案](#upload-audio)，這樣效率更高。
+- अनुरोध का साइज़ ज़्यादा से ज़्यादा 20 एमबी हो सकता है. इसमें टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश, और इनलाइन फ़ाइलें शामिल हैं. अगर आपकी फ़ाइल का साइज़ इतना बड़ा है कि *कुल अनुरोध का साइज़* 20 एमबी से ज़्यादा हो जाता है, तो Files API का इस्तेमाल करके, अनुरोध में इस्तेमाल करने के लिए [कोई ऑडियो फ़ाइल अपलोड करें](#upload-audio).
+- अगर आपको किसी ऑडियो सैंपल का कई बार इस्तेमाल करना है, तो [ऑडियो फ़ाइल अपलोड करना](#upload-audio) ज़्यादा बेहतर है.
 
-## 取得轉錄稿
+## ट्रांसक्रिप्ट पाना
 
-如要取得音訊資料的轉錄稿，只要在提示中提出要求即可：
+ऑडियो डेटा की ट्रांसक्रिप्ट पाने के लिए, प्रॉम्प्ट में बस इतना पूछें:
 
 ### Python
 
@@ -729,7 +728,7 @@ const result = await ai.models.generateContent({
 console.log("result.text=", result.text);
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -774,12 +773,12 @@ func main() {
 }
 ```
 
-## 參考時間戳記
+## टाइमस्टैंप देखें
 
-你可以使用 `MM:SS` 格式的時間戳記，參照音訊檔案的特定部分。舉例來說，下列提示會要求轉錄稿
+ऑडियो फ़ाइल के किसी खास सेक्शन का रेफ़रंस देने के लिए, `MM:SS` फ़ॉर्मैट वाले टाइमस्टैंप का इस्तेमाल किया जा सकता है. उदाहरण के लिए, यहां दिए गए प्रॉम्प्ट में ऐसी ट्रांसक्रिप्ट का अनुरोध किया गया है
 
-- 從檔案開頭算起，2 分 30 秒處開始。
-- 結束時間為檔案開頭算起的 3 分 29 秒。
+- यह फ़ाइल की शुरुआत से 2 मिनट 30 सेकंड पर शुरू होता है.
+- यह फ़ाइल की शुरुआत से 3 मिनट 29 सेकंड पर खत्म होती है.
 
 ### Python
 
@@ -795,7 +794,7 @@ prompt = "Provide a transcript of the speech from 02:30 to 03:29."
 const prompt = "Provide a transcript of the speech from 02:30 to 03:29."
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -841,9 +840,9 @@ func main() {
 }
 ```
 
-## 計算詞元數
+## टोकन गिनना
 
-呼叫 `countTokens` 方法，即可取得音訊檔案中的權杖數量。例如：
+किसी ऑडियो फ़ाइल में मौजूद टोकन की संख्या जानने के लिए, `countTokens` तरीके को कॉल करें. उदाहरण के लिए:
 
 ### Python
 
@@ -883,7 +882,7 @@ const countTokensResponse = await ai.models.countTokens({
 console.log(countTokensResponse.totalTokens);
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -927,9 +926,9 @@ func main() {
 }
 ```
 
-## 支援的音訊格式
+## इस्तेमाल किए जा सकने वाले ऑडियो फ़ॉर्मैट
 
-Gemini 支援下列音訊格式 MIME 類型：
+Gemini, इन ऑडियो फ़ॉर्मैट के MIME टाइप के साथ काम करता है:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -938,30 +937,30 @@ Gemini 支援下列音訊格式 MIME 類型：
 - OGG Vorbis - `audio/ogg`
 - FLAC - `audio/flac`
 
-## 音訊技術詳細資料
+## ऑडियो के बारे में तकनीकी जानकारी
 
-- Gemini 會將每秒音訊表示為 32 個權杖；舉例來說，一分鐘的音訊會表示為 1,920 個權杖。
-- Gemini 可以「瞭解」非語音成分，例如鳥鳴或警報聲。
-- 單一提示支援的音訊資料長度上限為 9.5 小時。
-  Gemini 不會限制單一提示中的音訊檔案*數量*，但單一提示中所有音訊檔案的總長度不得超過 9.5 小時。
-- Gemini 會將音訊檔案降採樣至 16 Kbps 的資料解析度。
-- 如果音訊來源包含多個聲道，Gemini 會將這些聲道合併為單一聲道。
+- Gemini, ऑडियो के हर सेकंड को 32 टोकन के तौर पर दिखाता है. उदाहरण के लिए, एक मिनट के ऑडियो को 1,920 टोकन के तौर पर दिखाया जाता है.
+- Gemini, आवाज़ के अलावा अन्य कॉम्पोनेंट को भी "समझ" सकता है. जैसे, पक्षियों का चहचहाना या सायरन.
+- एक प्रॉम्प्ट में, ज़्यादा से ज़्यादा 9.5 घंटे का ऑडियो डेटा इस्तेमाल किया जा सकता है.
+  Gemini, एक प्रॉम्प्ट में ऑडियो फ़ाइलों की *संख्या* को सीमित नहीं करता. हालांकि, एक प्रॉम्प्ट में सभी ऑडियो फ़ाइलों की कुल अवधि 9.5 घंटे से ज़्यादा नहीं होनी चाहिए.
+- Gemini, ऑडियो फ़ाइलों को 16 केबीपीएस के डेटा रिज़ॉल्यूशन में डाउनसैंपल करता है.
+- अगर ऑडियो सोर्स में एक से ज़्यादा चैनल हैं, तो Gemini उन चैनलों को एक ही चैनल में जोड़ देता है.
 
-## 後續步驟
+## आगे क्या करना है
 
-本指南說明如何產生回應音訊資料的文字。如要瞭解詳情，請參閱下列資源：
+इस गाइड में, ऑडियो डेटा के जवाब में टेक्स्ट जनरेट करने का तरीका बताया गया है. ज़्यादा जानने के लिए, यहां दिए गए संसाधन देखें:
 
-- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
-- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
-  系統指令可根據特定需求和用途，引導模型行為。
-- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：有時生成式 AI 模型會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的步驟，有助於降低這類輸出內容造成危害的風險。
+- [फ़ाइल प्रॉम्प्ट करने की रणनीतियां](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide): Gemini API, टेक्स्ट, इमेज, ऑडियो, और वीडियो डेटा के साथ प्रॉम्प्ट करने की सुविधा देता है. इसे मल्टीमॉडल प्रॉम्प्टिंग भी कहा जाता है.
+- [सिस्टम के लिए निर्देश](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#system-instructions):
+  सिस्टम के लिए निर्देश देने की सुविधा की मदद से, अपनी खास ज़रूरतों और इस्तेमाल के उदाहरणों के आधार पर, मॉडल के व्यवहार को कंट्रोल किया जा सकता है.
+- [सुरक्षा से जुड़ी गाइडलाइन](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=hi): कभी-कभी जनरेटिव एआई मॉडल ऐसे आउटपुट जनरेट करते हैं जिनकी उम्मीद नहीं होती. जैसे, गलत, पक्षपात करने वाले या आपत्तिजनक आउटपुट. इस तरह के आउटपुट से होने वाले नुकसान के जोखिम को कम करने के लिए, पोस्ट-प्रोसेसिंग और मैन्युअल तरीके से आकलन करना ज़रूरी है.
 
-提供意見
+सुझाव भेजें
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-上次更新時間：2026-09-12 (世界標準時間)。
+आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया.
 
-想進一步說明嗎？
+क्या आपको हमें और कुछ बताना है?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-12 (UTC) को अपडेट किया गया."],[],[]]

@@ -1,274 +1,272 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=it
-fetched_at: 2026-09-21T05:55:23.164332+00:00
-title: "Regioni disponibili per Google AI Studio e l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=he
+fetched_at: 2026-09-28T06:18:20.858751+00:00
+title: "\u05d4\u05d0\u05d6\u05d5\u05e8\u05d9\u05dd \u05e9\u05d1\u05d4\u05dd \u05d0\u05e4\u05e9\u05e8 \u05dc\u05d4\u05e9\u05ea\u05de\u05e9 \u05d1-Google AI Studio \u05d5\u05d1-Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
-# Regioni disponibili per Google AI Studio e l'API Gemini
+# האזורים שבהם אפשר להשתמש ב-Google AI Studio וב-Gemini API
 
-Se hai raggiunto questa pagina mentre tentavi di accedere a [Google AI Studio](https://aistudio.google.com/?hl=it), la ragione potrebbe
-essere una delle seguenti:
+אם הגעתם לדף הזה כשניסיתם לגשת אל [Google AI Studio](https://aistudio.google.com/?hl=he), יכול להיות שהסיבה לכך היא אחת מהסיבות הבאות:
 
-- **Limitazioni regionali**: Google AI Studio non è disponibile nella tua regione. Consulta la sezione di seguito per un elenco delle regioni supportate.
-- **Requisiti di età**: non soddisfi il requisito di età minima (18 anni) per accedere a questo servizio.
-- **Verifica dell'account**: potresti avere accesso al servizio, ma non hai ancora [verificato la tua età](https://support.google.com/accounts/answer/10071085?hl=it) nel tuo Account Google.
+- **הגבלות אזוריות**: Google AI Studio לא זמין באזור שלכם. בהמשך מופיעה רשימה של אזורים נתמכים.
+- **דרישות גיל**: אתם לא עומדים בדרישת הגיל המינימלית (18 ומעלה) כדי לגשת לשירות הזה.
+- **אימות החשבון**: יכול להיות שיש לכם גישה לשירות, אבל עדיין לא [אימתתם את הגיל](https://support.google.com/accounts/answer/10071085?hl=he) בחשבון Google.
 
-Per ulteriori dettagli sui requisiti, consulta i nostri [Termini di servizio](https://ai.google.dev/gemini-api/terms?hl=it).
+לפרטים נוספים על הדרישות, אפשר לעיין [בתנאים ובהגבלות](https://ai.google.dev/gemini-api/terms?hl=he) שלנו.
 
-## Aree geografiche disponibili
+## אזורים זמינים
 
-L'API Gemini e Google AI Studio sono disponibili nei seguenti paesi e territori. Se non ti trovi in uno di questi paesi o territori, prova l'
-[API Gemini nella piattaforma agentica Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=it):
+‫Gemini API ו-Google AI Studio זמינים במדינות ובאזורים הבאים. אם אתם לא נמצאים באחת מהמדינות או הטריטוריות האלה, אתם יכולים לנסות את [Gemini API בפלטפורמת הסוכנים של Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=he):
 
-- Albania
-- Algeria
-- Samoa Americane
-- Andorra
-- Angola
-- Anguilla
-- Antartide
-- Antigua e Barbuda
-- Argentina
-- Armenia
-- Aruba
-- Australia
-- Austria
-- Azerbaigian
-- Bahamas
-- Bahrein
-- Bangladesh
-- Barbados
-- Belgio
-- Belize
-- Benin
-- Bermuda
-- Bhutan
-- Bolivia
-- Bosnia ed Erzegovina
-- Botswana
-- Brasile
-- Territorio Britannico dell'Oceano Indiano
-- Isole Vergini Britanniche
-- Brunei
-- Bulgaria
-- Burkina Faso
-- Burundi
-- Capo Verde
-- Cambogia
-- Camerun
-- Canada
-- Caraibi olandesi
-- Isole Cayman
-- Repubblica Centrafricana
-- Ciad
-- Cile
-- Isola Christmas
-- Isole Cocos (Keeling)
-- Colombia
-- Comore
-- Isole Cook
-- Costa Rica
-- Costa d'Avorio
-- Croazia
-- Curaçao
-- Repubblica Ceca
-- Repubblica Democratica del Congo
-- Danimarca
-- Gibuti
-- Dominica
-- Repubblica Dominicana
-- Ecuador
-- Egitto
-- El Salvador
-- Guinea Equatoriale
-- Eritrea
-- Estonia
-- Eswatini
-- Etiopia
-- Isole Falkland (Isole Malvine)
-- Isole Fær Øer
-- Figi
-- Finlandia
-- Francia
-- Guyana Francese
-- Gabon
-- Gambia
-- Georgia
-- Germania
-- Ghana
-- Gibilterra
-- Grecia
-- Groenlandia
-- Grenada
-- Guam
-- Guatemala
-- Guernsey
-- Guinea
-- Guinea-Bissau
-- Guiana
-- Haiti
-- Isole Heard e McDonald
-- Honduras
-- Ungheria
-- Islanda
-- India
-- Indonesia
-- Iraq
-- Irlanda
-- Isola di Man
-- Israele
-- Italia
-- Giamaica
-- Giappone
-- Jersey
-- Giordania
-- Kazakistan
-- Kenya
-- Kiribati
-- Kosovo
-- Kuwait
-- Kirghizistan
-- Laos
-- Lettonia
-- Libano
-- Lesotho
-- Liberia
-- Libia
-- Liechtenstein
-- Lituania
-- Lussemburgo
-- Madagascar
-- Malawi
-- Malaysia
-- Maldive
-- Mali
-- Malta
-- Isole Marshall
-- Mauritania
-- Mauritius
-- Messico
-- Micronesia
-- Moldavia
-- Monaco
-- Mongolia
-- Montenegro
-- Montserrat
-- Marocco
-- Mozambico
-- Namibia
-- Nauru
-- Nepal
-- Paesi Bassi
-- Nuova Caledonia
-- Nuova Zelanda
-- Nicaragua
-- Niger
-- Nigeria
-- Niue
-- Isola Norfolk
-- Macedonia del Nord
-- Isole Marianne Settentrionali
-- Norvegia
-- Oman
-- Pakistan
-- Palau
-- Palestina
-- Panama
-- Papua Nuova Guinea
-- Paraguay
-- Perù
-- Filippine
-- Isole Pitcairn
-- Polonia
-- Portogallo
-- Portorico
-- Qatar
-- Repubblica di Cipro
-- Repubblica del Congo
-- Romania
-- Ruanda
-- La Riunione
-- Saint-Barthélemy
-- Sant'Elena, Ascensione e Tristan da Cunha
-- Saint Kitts e Nevis
-- Saint Lucia
-- Saint-Pierre e Miquelon
-- Saint Vincent e Grenadine
-- Samoa
-- San Marino
-- São Tomé e Príncipe
-- Arabia Saudita
-- Senegal
-- Serbia
-- Seychelles
-- Sierra Leone
-- Singapore
-- Slovacchia
-- Slovenia
-- Isole Salomone
-- Somalia
-- Sudafrica
-- Georgia del Sud e Sandwich Australi
-- Corea del Sud
-- Sud Sudan
-- Spagna
-- Sri Lanka
-- Sudan
-- Suriname
-- Svezia
-- Svizzera
-- Taiwan
-- Tagikistan
-- Tanzania
-- Thailandia
-- Timor Est
-- Togo
-- Tokelau
-- Tonga
-- Trinidad e Tobago
-- Tunisia
-- Turkmenistan
-- Isole Turks e Caicos
-- Tuvalu
-- Turchia
-- Uganda
-- Ucraina
-- Emirati Arabi Uniti
-- Regno Unito
-- Stati Uniti
-- Isole Minori Esterne degli Stati Uniti
-- Uruguay
-- Isole Vergini Americane
-- Uzbekistan
-- Vanuatu
-- Città del Vaticano
-- Venezuela
-- Vietnam
-- Wallis e Futuna
-- Sahara occidentale
-- Yemen
-- Zambia
-- Zimbabwe
-- Isole Åland
+- אלבניה
+- אלג'יריה
+- סמואה האמריקנית
+- אנדורה
+- אנגולה
+- אנגווילה
+- אנטארקטיקה
+- אנטיגואה וברבודה
+- ארגנטינה
+- ארמניה
+- ארובה
+- אוסטרליה
+- אוסטריה
+- אזרבייג'ן
+- איי בהאמה
+- בחריין
+- בנגלדש
+- ברבדוס
+- בלגיה
+- בליז
+- בנין
+- ברמודה
+- בהוטן
+- בוליביה
+- בוסניה והרצגובינה
+- בוטסואנה
+- ברזיל
+- הטריטוריה הבריטית באוקיינוס ההודי
+- איי הבתולה הבריטיים
+- ברוניי
+- בולגריה
+- בורקינה פאסו
+- בורונדי
+- כף ורדה
+- קמבודיה
+- קמרון
+- קנדה
+- האיים הקריביים ההולנדיים
+- איי קיימן
+- הרפובליקה המרכז-אפריקאית
+- צ'אד
+- צ'ילה
+- אי חג המולד
+- איי קוקוס (קילינג)
+- קולומביה
+- איי קומורו
+- איי קוק
+- קוסטה ריקה
+- חוף השנהב
+- קרואטיה
+- קוראסאו
+- צ'כיה
+- הרפובליקה הדמוקרטית של קונגו
+- דנמרק
+- ג'יבוטי
+- דומיניקה
+- הרפובליקה הדומיניקנית
+- אקוודור
+- מצרים
+- אל סלבדור
+- גינאה המשוונית
+- אריתריאה
+- אסטוניה
+- אסוואטיני
+- אתיופיה
+- איי פוקלנד (איי מלווינס)
+- איי פארו
+- פיג'י
+- פינלנד
+- צרפת
+- גיאנה הצרפתית
+- גאבון
+- גמביה
+- גאורגיה
+- גרמניה
+- גאנה
+- גיברלטר
+- יוון
+- גרינלנד
+- גרנדה
+- גואם
+- גואטמלה
+- גרנזי
+- גינאה
+- גינאה-ביסאו
+- גיאנה
+- האיטי
+- האי הרד ואיי מקדונלד
+- הונדורס
+- הונגריה
+- איסלנד
+- הודו
+- אינדונזיה
+- עיראק
+- אירלנד
+- האי מאן
+- ישראל
+- איטליה
+- ג'מייקה
+- יפן
+- ג'רזי
+- ירדן
+- קזחסטן
+- קניה
+- קיריבאטי
+- קוסובו
+- כווית
+- קירגיזסטן
+- לאוס
+- לטביה
+- לבנון
+- לסוטו
+- ליבריה
+- לוב
+- ליכטנשטיין
+- ליטא
+- לוקסמבורג
+- מדגסקר
+- מלאווי
+- מלזיה
+- האיים המלדיביים
+- מאלי
+- מלטה
+- איי מרשל
+- מאוריטניה
+- מאוריציוס
+- מקסיקו
+- מיקרונזיה
+- מולדובה
+- מונקו
+- מונגוליה
+- מונטנגרו
+- מונסראט
+- מרוקו
+- מוזמביק
+- נמיביה
+- נאורו
+- נפאל
+- הולנד
+- קלדוניה החדשה
+- ניו זילנד
+- ניקרגואה
+- ניז'ר
+- ניגריה
+- ניואה
+- האי נורפוק
+- מקדוניה הצפונית
+- איי מריאנה הצפוניים
+- נורווגיה
+- עומאן
+- פקיסטן
+- פלאו
+- הרשות הפלסטינית
+- פנמה
+- פפואה גינאה החדשה
+- פרגוואי
+- פרו
+- הפיליפינים
+- איי פיטקרן
+- פולין
+- פורטוגל
+- פוארטו ריקו
+- קטאר
+- הרפובליקה של קפריסין
+- הרפובליקה של קונגו
+- רומניה
+- רואנדה
+- ראוניון
+- סנט ברתולומיאו
+- סנט הלנה, אסנשן וטריסטן דה קונה
+- סנט קיטס ונוויס
+- סנט לוסיה
+- סנט פייר ומיקלון
+- סנט וינסנט והגרנדינים
+- סמואה
+- סן מרינו
+- סאו טומה ופרינסיפה
+- ערב הסעודית
+- סנגל
+- סרביה
+- איי סיישל
+- סיירה לאון
+- סינגפור
+- סלובקיה
+- סלובניה
+- איי שלמה
+- סומליה
+- דרום אפריקה
+- איי ג'ורג'יה הדרומית ואיי סנדוויץ' הדרומיים
+- דרום קוריאה
+- דרום סודן
+- ספרד
+- סרי לנקה
+- סודן
+- סורינאם
+- שוודיה
+- שווייץ
+- טייוואן
+- טג'יקיסטן
+- טנזניה
+- תאילנד
+- מזרח טימור
+- טוגו
+- טוקלאו
+- טונגה
+- טרינידד וטובגו
+- תוניסיה
+- טורקמניסטן
+- איי טורקס וקאיקוס
+- טובאלו
+- טורקיה
+- אוגנדה
+- אוקראינה
+- איחוד האמירויות הערביות
+- בריטניה
+- ארצות הברית
+- איים בשליטת ארצות הברית
+- אורוגוואי
+- איי הבתולה של ארה"ב
+- אוזבקיסטן
+- ונואטו
+- הוותיקן
+- ונצואלה
+- וייטנאם
+- וואליס ופוטונה
+- מערב הסהרה
+- תימן
+- זמביה
+- זימבבואה
+- איי אולנד
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

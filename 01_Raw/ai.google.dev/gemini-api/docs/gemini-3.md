@@ -1,27 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-TW
-fetched_at: 2026-09-21T05:57:52.046072+00:00
-title: "Gemini 3 \u958b\u767c\u4eba\u54e1\u6307\u5357 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=it
+fetched_at: 2026-09-28T06:12:17.265830+00:00
+title: "Guida per gli sviluppatori di Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
 
-提供意見
+Invia feedback
 
-# Gemini 3 開發人員指南
+# Guida per gli sviluppatori di Gemini 3
 
-Gemini 3 是我們至今最強大的模型系列，以最先進的推論技術為基礎。這項技術旨在運用代理工作流程、自主編碼和複雜的多模態工作，將任何想法化為現實。本指南將介紹 Gemini 3 模型系列的主要功能，以及如何充分發揮這些功能。
+Gemini 3 è la nostra famiglia di modelli più intelligente di sempre, basata su un ragionamento allo stato dell'arte. È progettato per dare vita a qualsiasi idea
+padroneggiando workflow agentici, programmazione autonoma e attività multimodali complesse.
+Questa guida illustra le funzionalità principali della famiglia di modelli Gemini 3 e come sfruttarle al meglio.
 
-歡迎瀏覽 [Gemini 3 應用程式系列](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=zh-tw)，瞭解這款模型如何處理進階推論、自主程式設計和複雜的多模態工作。
+Esplora la nostra [raccolta di app Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=it) per
+vedere come il modello gestisce il ragionamento avanzato, la programmazione autonoma e le attività
+multimodali complesse.
 
-只要編寫幾行程式碼，即可開始使用：
+Inizia con poche righe di codice:
 
 ### Python
 
@@ -83,6 +87,43 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-pro-preview"),
+            Input: interactions.NewInteractionsInput("Find the race condition in this multi-threaded C++ snippet: [code here]"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -95,48 +136,55 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 認識 Gemini 3 系列
+## Scopri la serie Gemini 3
 
-Gemini 3.1 Pro 最適合處理複雜工作，
-需要廣泛的世界知識，以及跨模態的進階推論能力。
+Gemini 3.1 Pro è ideale per le attività complesse che
+richiedono un'ampia conoscenza del mondo e un ragionamento avanzato tra le varie modalità.
 
-Gemini 3 Flash 是我們最新的第 3 系列模型，具備 Pro 級智慧，但速度和價格與 Flash 相同。
+Gemini 3 Flash è il nostro ultimo modello della serie 3, con intelligenza di livello Pro alla velocità e al prezzo di Flash.
 
-Nano Banana Pro (又稱 Gemini 3 Pro Image) 是 Google 最高品質的圖像生成模型，而 Nano Banana 2 (又稱 Gemini 3.1 Flash Image) 則具備高產量、高效率和低價位等優勢。
+Nano Banana Pro (noto anche come Gemini 3 Pro Image) è il nostro modello di generazione di immagini di qualità più elevata, mentre Nano Banana 2 (noto anche come Gemini 3.1 Flash Image) è l'equivalente ad alto volume, alta efficienza e prezzo più basso.
 
-Gemini 3.1 Flash-Lite 是我們的主力模型，專為符合成本效益的模型和大量工作而打造。
+Gemini 3.1 Flash-Lite è il nostro modello di riferimento progettato per l'efficienza dei costi e
+per attività ad alto volume.
 
-所有 Gemini 3 模型目前皆為預先發布版。
+Al momento, tutti i modelli Gemini 3 sono in anteprima.
 
-| 模型 ID | 背景期間 (內 / 外) | 知識截點 | 定價 (輸入 / 輸出)\* |
+| ID modello | Finestra contestuale (in entrata / in uscita) | Knowledge Cutoff | Prezzi (input / output)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $0.25 (文字、圖片、影片)、$0.50 (音訊) / $1.50 |
-| **gemini-3.1-flash-image-preview** | 128k / 32k | 2025 年 1 月 | $0.25 美元 (文字輸入) / $0.067 美元 (圖片輸出)\*\* |
-| **gemini-3.1-pro-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $2 美元 / $12 美元 (少於 20 萬個權杖)   $4 美元 / $18 美元 (超過 20 萬個權杖) |
-| **gemini-3-flash-preview** | 100 萬次 / 6.4 萬次 | 2025 年 1 月 | $0.50 / $3 |
-| **gemini-3-pro-image-preview** | 65,000 / 32,000 | 2025 年 1 月 | $2 (文字輸入) / $0.134 (圖片輸出)\*\* |
+| **gemini-3.1-flash-lite** | 1 milione / 64.000 | Gennaio 2025 | 0,25 $ (testo, immagine, video), 0,50 $ (audio) / 1,50 $ |
+| **gemini-3.1-flash-image-preview** | 128.000 / 32.000 | Gennaio 2025 | 0,25 $ (input di testo) / 0,067 $ (output di immagine)\*\* |
+| **gemini-3.1-pro-preview** | 1 milione / 64.000 | Gennaio 2025 | $2 / $12 (<200.000 token)   $4 / $18 (>200.000 token) |
+| **gemini-3-flash-preview** | 1 milione / 64.000 | Gennaio 2025 | 0,50 $ / 3 $ |
+| **gemini-3-pro-image-preview** | 65.000 / 32.000 | Gennaio 2025 | 2 $ (input di testo) / 0,134 $ (output di immagine)\*\* |
 
-*\* 除非另有註明，否則價格以每 100 萬個權杖為單位。*
-*\*\* 圖片價格會因解析度而異。詳情請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。*
+*\* I prezzi si riferiscono a 1 milione di token, se non diversamente indicato.*
+*\*\* Il prezzo delle immagini varia in base alla risoluzione. Per maggiori dettagli, consulta la [pagina dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it).*
 
-如需詳細的限制、定價和其他資訊，請參閱[模型頁面](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw)。
+Per limiti, prezzi e informazioni aggiuntive dettagliati, consulta la
+[pagina dei modelli](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it).
 
-## Gemini 3 的新 API 功能
+## Nuove funzionalità dell'API in Gemini 3
 
-Gemini 3 推出全新參數，讓開發人員進一步掌控延遲時間、成本和多模態準確度。
+Gemini 3 introduce nuovi parametri progettati per offrire agli sviluppatori un maggiore controllo su latenza, costi e fedeltà multimodale.
 
-### 思考程度
+### Livello di ragionamento
 
-Gemini 3 系列模型預設會使用動態思考功能，根據提示進行推論。您可以使用 `thinking_level` 參數，控制模型產生回覆前內部推論過程的**最大**深度。Gemini 3 會將這些層級視為思考的相對配額，而非嚴格的權杖保證。
+I modelli della serie Gemini 3 utilizzano per impostazione predefinita il ragionamento dinamico per analizzare i prompt. Puoi utilizzare il parametro `thinking_level`, che controlla la
+**profondità massima** del processo di ragionamento interno del modello prima che produca una
+risposta. Gemini 3 tratta questi livelli come quote relative per il ragionamento
+piuttosto che come garanzie di token rigorose.
 
-如未指定 `thinking_level`，Gemini 3 會預設為 `high`。如果不需要複雜的推論，可以將模型的思考層級限制為 `low`，加快回應速度並降低延遲。
+Se `thinking_level` non è specificato, Gemini 3 utilizzerà `high` come valore predefinito. Per
+risposte più rapide e a bassa latenza quando non è necessario un ragionamento complesso, puoi
+limitare il livello di pensiero del modello a `low`.
 
-| 思考程度 | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | 說明 |
+| Livello di ragionamento | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Descrizione |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | 不支援 | 支援 (預設) | 支援 | 對於大多數查詢，這項設定與「不思考」相同。模型可能會以極少的思考時間處理複雜的程式碼編寫工作。將聊天或高處理量應用程式的延遲時間降到最低。請注意，`minimal` 無法保證思考功能已關閉。 |
-| **`low`** | 支援 | 支援 | 支援 | 盡量縮短延遲時間並降低成本。最適合用於簡單的指令遵循、即時通訊或高處理量應用程式。 |
-| **`medium`** | 支援 | 支援 | 支援 | 思考能力均衡，適合處理多數工作。 |
-| **`high`** | 支援 (預設、動態) | 支援 (動態) | 支援 (預設、動態) | 盡可能深入推論。模型可能需要較長時間才能輸出第一個 (非思考) 輸出權杖，但輸出內容會經過更仔細的推論。 |
+| **`minimal`** | Non supportato | Supportato (predefinito) | Supportato | Corrisponde all'impostazione "nessun pensiero" per la maggior parte delle query. Il modello potrebbe pensare in modo molto minimale per attività di programmazione complesse. Riduce al minimo la latenza per le applicazioni di chat o a throughput elevato. Tieni presente che `minimal` non garantisce che il pensiero sia disattivato. |
+| **`low`** | Supportato | Supportato | Supportato | Riduce al minimo la latenza e i costi. Ideale per seguire istruzioni semplici, chat o applicazioni con velocità effettiva elevata. |
+| **`medium`** | Supportato | Supportato | Supportato | Pensiero equilibrato per la maggior parte delle attività. |
+| **`high`** | Supportato (predefinito, dinamico) | Supportato (dinamico) | Supportato (predefinito, dinamico) | Massimizza la profondità del ragionamento. Il modello potrebbe impiegare molto più tempo per raggiungere un primo token di output (non di pensiero), ma l'output sarà più ragionato. |
 
 ### Python
 
@@ -202,6 +250,46 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-pro-preview"),
+            Input: interactions.NewInteractionsInput("How does AI work?"),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel: interactions.ThinkingLevelLow.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -217,24 +305,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 溫度
+### Temperatura
 
-對於所有 Gemini 3 模型，我們強烈建議將溫度參數維持預設值 `1.0`。
+Per tutti i modelli Gemini 3, ti consigliamo vivamente di mantenere il parametro di temperatura
+sul valore predefinito di `1.0`.
 
-先前的模型通常會調整溫度參數，以控制創意與確定性，但 Gemini 3 的推論能力已針對預設設定進行最佳化。變更溫度參數 (設為低於 1.0) 可能會導致異常行為，例如迴圈或效能降低，特別是在複雜的數學或推論任務。
+Mentre i modelli precedenti spesso traevano vantaggio dalla regolazione della temperatura per controllare
+la creatività rispetto al determinismo, le capacità di ragionamento di Gemini 3 sono ottimizzate
+per l'impostazione predefinita. La modifica della temperatura (impostandola su un valore inferiore a 1.0) può
+comportare un comportamento imprevisto, come loop o prestazioni ridotte,
+in particolare in attività matematiche o di ragionamento complesse.
 
-### 想法簽名
+### Firme del pensiero
 
-Gemini 3 模型會使用思維簽章，在 API 呼叫之間維持推理脈絡。這些簽章是模型內部思考過程的加密表示法。
+I modelli Gemini 3 utilizzano le firme del pensiero per mantenere il contesto del ragionamento tra le chiamate API. Queste firme sono rappresentazioni criptate del processo di pensiero interno del modello.
 
-- **有狀態模式 (建議)**：在有狀態模式下使用 Interactions API (提供 `previous_interaction_id` 時)，伺服器會自動管理對話記錄和想法簽章。
-- **無狀態模式**：如果手動管理對話記錄，後續要求必須包含附有簽章的思維方塊，才能驗證真偽。
+- **Modalità con stato (consigliata)**: quando utilizzi l'API Interactions in modalità con stato (fornendo `previous_interaction_id`), il server gestisce automaticamente la cronologia delle conversazioni e le firme dei pensieri.
+- **Modalità stateless**: se gestisci manualmente la cronologia delle conversazioni, devi includere i blocchi di pensiero con le relative firme nelle richieste successive per convalidare l'autenticità.
 
-詳情請參閱「[Thought Signatures](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)」頁面。
+Per informazioni dettagliate, consulta la pagina [Thought Signatures](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
 
-### 使用工具輸出結構化內容
+### Output strutturati con strumenti
 
-Gemini 3 模型可讓您結合[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)與內建工具，包括[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
+I modelli Gemini 3 ti consentono di combinare gli [output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) con strumenti integrati, tra cui
+[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it), [contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it), [esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) e [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
 
 ### Python
 
@@ -371,6 +465,73 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    schema := map[string]any{
+        "type": "object",
+        "properties": map[string]any{
+            "winner": map[string]any{
+                "type":        "string",
+                "description": "The name of the winner.",
+            },
+            "final_match_score": map[string]any{
+                "type":        "string",
+                "description": "The final match score.",
+            },
+            "scorers": map[string]any{
+                "type":        "array",
+                "items":       map[string]any{"type": "string"},
+                "description": "The name of the scorer.",
+            },
+        },
+        "required": []string{"winner", "final_match_score", "scorers"},
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-pro-preview"),
+            Input: interactions.NewInteractionsInput("Search for all details for the latest Euro."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+                interactions.NewTool(interactions.URLContext{}),
+            },
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.TextResponseFormat{
+                    MimeType: interactions.TextResponseFormatMimeType("application/json").ToPointer(),
+                    Schema:   schema,
+                }),
+            )),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -404,17 +565,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 圖像生成
+### Generazione di immagini
 
-Gemini 3.1 Flash Image 和 Gemini 3 Pro Image 可根據文字提示生成及編輯圖像。這項功能會運用推論能力「思考」提示詞，並擷取即時資料 (例如天氣預報或股票圖表)，然後使用 [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)建立基準，生成高擬真度的圖片。
+Gemini 3.1 Flash Image e Gemini 3 Pro Image ti consentono di generare e modificare immagini
+a partire da prompt di testo. Utilizza il
+ragionamento per "pensare" a un prompt e può recuperare dati in tempo reale, come
+previsioni meteo o grafici azionari, prima di utilizzare la [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) per generare immagini
+di alta fedeltà.
 
-**全新與改良功能：**
+**Funzionalità nuove e migliorate:**
 
-- **4K 和文字算繪：**生成清晰易讀的文字和圖表，最高可達 2K 和 4K 解析度。
-- **以真實資訊為依據生成圖片：**使用 `google_search` 工具驗證事實，並根據真實世界資訊生成圖像。透過 Google *圖片*搜尋建立基準，適用於 Gemini 3.1 Flash Image。
-- **對話式修圖：**只要提出變更要求 (例如「將背景改成日落」)，即可多輪編輯圖像。這個工作流程會使用**想法簽章**，在回合之間保留視覺情境。
+- **Rendering di testo e 4K:** genera testo e diagrammi nitidi e leggibili con risoluzioni fino a 2K e 4K.
+- **Generazione fondata:** utilizza lo strumento `google_search` per verificare i fatti e
+  generare immagini basate su informazioni del mondo reale. Grounding con la Ricerca *Immagini*
+  Google disponibile per Gemini 3.1 Flash Image.
+- **Modifica conversazionale**:modifica di immagini in più passaggi semplicemente chiedendo di apportare modifiche (ad es. "Rendi lo sfondo un tramonto"). Questo workflow si basa sulle
+  **Firme del pensiero** per preservare il contesto visivo tra i turni.
 
-如要進一步瞭解長寬比、編輯工作流程和設定選項，請參閱[圖片生成指南](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)。
+Per informazioni dettagliate su proporzioni, flussi di lavoro di modifica e opzioni di configurazione, consulta la [guida alla generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it).
 
 ### Python
 
@@ -522,6 +690,60 @@ if (generatedImage.isPresent() && generatedImage.get().data().isPresent()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3-pro-image-preview"),
+            Input: interactions.NewInteractionsInput("Generate an infographic of the current weather in Tokyo."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+            },
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.ImageResponseFormat{
+                    AspectRatio: interactions.ImageResponseFormatAspectRatioOneHundredAndSixtyNine.ToPointer(),
+                    ImageSize:   interactions.ImageResponseFormatImageSize("4K").ToPointer(),
+                }),
+            )),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if generatedImage := res.Interaction.GetOutputImage(); generatedImage != nil && generatedImage.Data != nil {
+        imageBytes, err := base64.StdEncoding.DecodeString(*generatedImage.Data)
+        if err != nil {
+            log.Fatal(err)
+        }
+        if err := os.WriteFile("weather_tokyo.png", imageBytes, 0644); err != nil {
+            log.Fatal(err)
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -540,21 +762,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**範例回應**
+**Risposta di esempio**
 
-![東京天氣](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=zh-tw)
+![Meteo Tokyo](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=it)
 
-### 使用圖片執行程式碼
+### Esecuzione di codice con immagini
 
-Gemini 3 Flash 可將視覺內容視為主動調查，而不只是靜態瀏覽。模型會結合推論和[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)功能，制定計畫，然後編寫及執行 Python 程式碼，逐步放大、裁剪、註解或以其他方式處理圖片，以便根據視覺內容提供答案。
+Gemini 3 Flash può trattare la visione come un'indagine attiva, non solo come uno sguardo statico. Combinando il ragionamento con l'[esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it), il modello formula un piano, quindi scrive ed esegue codice Python per ingrandire, ritagliare, annotare o manipolare in altro modo le immagini passo dopo passo per basare visivamente le sue risposte.
 
-**用途：**
+**Casi d'uso:**
 
-- **縮放及檢查：**模型會隱含地偵測細節是否過小 (例如讀取遠處的儀表或序號)，並編寫程式碼來裁剪及重新檢查高解析度的區域。
-- **視覺化數學和繪圖：**模型可使用程式碼執行多步驟計算 (例如加總收據上的項目，或從擷取的資料生成 Matplotlib 圖表)。
-- **圖片註解：**模型可以直接在圖片上繪製箭頭、標示框或其他註解，回答「這個項目應該放在哪裡？」等空間問題。
+- **Zoom e ispezione**:il modello rileva implicitamente quando i dettagli sono troppo
+  piccoli (ad es. la lettura di un indicatore o di un numero di serie distante) e scrive codice per ritagliare
+  e riesaminare l'area a una risoluzione più elevata.
+- **Matematica visiva e grafici**:il modello può eseguire calcoli in più passaggi utilizzando
+  il codice (ad es. la somma delle voci di una ricevuta o la generazione di un grafico Matplotlib
+  dai dati estratti).
+- **Annotazione delle immagini:** il modello può disegnare frecce, rettangoli di selezione o altre annotazioni direttamente sulle immagini per rispondere a domande spaziali come "Dove va questo oggetto?".
 
-如要啟用視覺化思考功能，請將「程式碼執行」設定為工具。如有需要，模型會自動使用程式碼來處理圖片。
+Per attivare il pensiero visivo, configura [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) come strumento. Il modello utilizzerà automaticamente
+il codice per manipolare le immagini quando necessario.
 
 ### Python
 
@@ -715,6 +942,81 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    httpRes, err := http.Get("https://goo.gle/instrument-img")
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer httpRes.Body.Close()
+    imageBytes, err := io.ReadAll(httpRes.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64ImageData := base64.StdEncoding.EncodeToString(imageBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3-flash-preview"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.ImageContent{
+                    MimeType: interactions.ImageContentMimeType("image/jpeg").ToPointer(),
+                    Data:     genai.Ptr(base64ImageData),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Zoom into the expression pedals and tell me how many pedals are there?",
+                }),
+            }),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res.Interaction.Steps {
+        if modelOutput := step.ModelOutputStep; modelOutput != nil {
+            for _, contentBlock := range modelOutput.Content {
+                if textContent := contentBlock.TextContent; textContent != nil {
+                    fmt.Println("Text:", textContent.Text)
+                }
+            }
+        } else if callStep := step.CodeExecutionCallStep; callStep != nil {
+            if callStep.Arguments.Code != nil {
+                fmt.Println("Code:", *callStep.Arguments.Code)
+            }
+        } else if resultStep := step.CodeExecutionResultStep; resultStep != nil {
+            fmt.Println("Output:", resultStep.Result)
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -751,13 +1053,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-如要進一步瞭解如何使用圖片執行程式碼，請參閱「[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw#images)」。
+Per maggiori dettagli sull'esecuzione del codice con le immagini, vedi [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it#images).
 
-### 多模態函式回覆
+### Risposte di funzioni multimodali
 
-[多模態函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw#multimodal)
-可讓使用者取得含有多模態物件的函式回應，
-進而提升模型函式呼叫功能的運用效率。標準函式呼叫僅支援以文字為基礎的函式回應：
+[Chiamata di funzioni multimodali](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#multimodal)
+consente agli utenti di avere risposte di funzioni contenenti
+oggetti multimodali, consentendo un migliore utilizzo delle funzionalità
+di chiamata di funzioni del modello. La chiamata di funzione standard supporta solo risposte di funzione basate su testo:
 
 ### Python
 
@@ -992,6 +1295,106 @@ if (fcStep != null) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    getImageTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("get_image"),
+        Description: genai.Ptr("Retrieves the image file reference for a specific order item."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "item_name": map[string]any{
+                    "type":        "string",
+                    "description": "The name or description of the item ordered (e.g., 'instrument').",
+                },
+            },
+            "required": []string{"item_name"},
+        },
+    })
+
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3-flash-preview"),
+            Input: interactions.NewInteractionsInput("Use the get_image tool to show me the instrument I ordered last month."),
+            Tools: []interactions.Tool{getImageTool},
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res1.Interaction.Steps {
+        if fcStep := step.FunctionCallStep; fcStep != nil {
+            fmt.Println("Tool Call:", fcStep.Name)
+
+            httpRes, err := http.Get("https://goo.gle/instrument-img")
+            if err != nil {
+                log.Fatal(err)
+            }
+            defer httpRes.Body.Close()
+            imageBytes, err := io.ReadAll(httpRes.Body)
+            if err != nil {
+                log.Fatal(err)
+            }
+            base64ImageData := base64.StdEncoding.EncodeToString(imageBytes)
+
+            funcResult := interactions.NewStep(interactions.FunctionResultStep{
+                Name:   genai.Ptr(fcStep.Name),
+                CallID: fcStep.ID,
+                Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                    interactions.NewFunctionResultSubcontent(interactions.TextContent{
+                        Text: "instrument.jpg",
+                    }),
+                    interactions.NewFunctionResultSubcontent(interactions.ImageContent{
+                        MimeType: interactions.ImageContentMimeType("image/jpeg").ToPointer(),
+                        Data:     genai.Ptr(base64ImageData),
+                    }),
+                }),
+            })
+
+            res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+                Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3-flash-preview"),
+                    PreviousInteractionID: res1.Interaction.ID,
+                    Tools:                 []interactions.Tool{getImageTool},
+                    Input:                 interactions.NewInteractionsInput([]interactions.Step{funcResult}),
+                }),
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
+            if res2.Interaction.OutputText != nil {
+                fmt.Println("Final model response:", *res2.Interaction.OutputText)
+            }
+            break
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1040,9 +1443,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 結合使用內建工具和函式呼叫
+### Combinare strumenti integrati e chiamata di funzione
 
-Gemini 3 允許在同一個 API 呼叫中使用內建工具 (例如 Google 搜尋、網址內容和[更多](https://ai.google.dev/gemini-api/docs/tools?hl=zh-tw)) 和自訂[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)工具，因此可執行更複雜的工作流程。
+Gemini 3 consente l'utilizzo di strumenti integrati (come la Ricerca Google, il contesto dell'URL e [altro](https://ai.google.dev/gemini-api/docs/tools?hl=it)) e di strumenti di [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) personalizzati nella stessa chiamata API, consentendo workflow più complessi.
 
 ### Python
 
@@ -1235,51 +1638,170 @@ if (fcStep != null) {
 }
 ```
 
-## 從 Gemini 2.5 遷移
+### Go
 
-Gemini 3 是我們迄今最強大的模型系列，相較於 Gemini 2.5，效能有顯著提升。遷移時，請注意以下事項：
+```
+package main
 
-- **思考：**如果您先前使用複雜的提示工程 (例如思緒鏈) 強迫 Gemini 2.5 推理，請嘗試使用 `thinking_level: "high"` 和簡化提示的 Gemini 3。
-- **溫度設定：**如果現有程式碼明確設定溫度參數 (尤其是將溫度設為低值，以取得確定性輸出內容)，建議您移除這個參數，並使用 Gemini 3 的預設值 1.0，以免在複雜工作上發生潛在的迴圈問題或效能下降。
-- **PDF 和文件理解：**
-  如果您依賴特定行為來剖析密集文件，請測試新的 `media_resolution_high` 設定，確保準確度不受影響。
-- **詞元用量：**改用 Gemini 3 預設模型後，PDF 的詞元用量可能會**增加**，但影片的詞元用量會**減少**。如果預設解析度提高後，要求超出脈絡窗口，建議您明確降低媒體解析度。
-- **影像分割：**Gemini 3 Pro 或 Gemini 3 Flash 不支援影像分割功能 (傳回物件的像素層級遮罩)。如要處理需要內建影像分割的工作負載，建議繼續使用 Gemini 2.5 Flash，並關閉思考功能。
-- **電腦用途：**Gemini 3 Pro 和 Gemini 3 Flash 支援[電腦用途](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-tw)。與 2.5 系列不同，您不必使用其他模型就能存取電腦使用工具。
-- **工具支援**：Gemini 3 模型現在支援[結合內建工具和函式呼叫](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)。Gemini 3 模型現在也支援[地圖基礎](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)。
+import (
+    "context"
+    "fmt"
+    "log"
 
-## OpenAI 相容性
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-如果使用者採用 [OpenAI 相容性層](https://ai.google.dev/gemini-api/docs/openai?hl=zh-tw)，系統會自動將標準參數 (OpenAI 的 `reasoning_effort`) 對應至 Gemini (`thinking_level`) 的對等項目。
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-## 提示最佳做法
+    getWeather := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("getWeather"),
+        Description: genai.Ptr("Gets the weather for a requested city."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "city": map[string]any{
+                    "type":        "string",
+                    "description": "The city and state, e.g. Utqiaġvik, Alaska",
+                },
+            },
+            "required": []string{"city"},
+        },
+    })
 
-Gemini 3 是推論模型，因此提示方式有所不同。
+    tools := []interactions.Tool{
+        interactions.NewTool(interactions.GoogleSearch{}),
+        getWeather,
+    }
 
-- **明確的指令：**輸入提示時請簡潔扼要。Gemini 3 最適合直接且清楚的指令。如果使用舊版模型，系統可能會過度分析冗長或過於複雜的提示工程技術。
-- **輸出詳細程度：**Gemini 3 預設會提供簡潔的回覆，偏好直接且有效率地回答問題。如果您的用途需要更具對話感或「健談」的角色，請務必在提示中明確引導模型 (例如「以友善健談的助理身分說明這件事」)。
-- **脈絡管理：**處理大型資料集 (例如整本書、程式碼集或長篇影片) 時，請將具體指令或問題放在提示結尾的資料脈絡之後。在問題開頭使用「根據上述資訊...」等詞組，讓模型根據提供的資料進行推論。
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3-flash-preview"),
+            Input: interactions.NewInteractionsInput("What is the northernmost city in the United States? What's the weather like there today?"),
+            Tools: tools,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-如要進一步瞭解提示設計策略，請參閱[提示工程指南](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-tw)。
+    for _, step := range res.Interaction.Steps {
+        if fcStep := step.FunctionCallStep; fcStep != nil {
+            funcResult := interactions.NewStep(interactions.FunctionResultStep{
+                Name:   genai.Ptr(fcStep.Name),
+                CallID: fcStep.ID,
+                Result: interactions.NewFunctionResultStepResultUnion(`{"response": "Very cold. 22 degrees Fahrenheit."}`),
+            })
 
-## 常見問題
+            finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+                Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                    Model:                 interactions.Model("gemini-3-flash-preview"),
+                    PreviousInteractionID: res.Interaction.ID,
+                    Tools:                 tools,
+                    Input:                 interactions.NewInteractionsInput([]interactions.Step{funcResult}),
+                }),
+            })
+            if err != nil {
+                log.Fatal(err)
+            }
+            if finalRes.Interaction.OutputText != nil {
+                fmt.Println(*finalRes.Interaction.OutputText)
+            }
+            break
+        }
+    }
+}
+```
 
-1. **Gemini 3 的知識截點為何？**Gemini 3 模型可存取的知識截點為 2025 年 1 月。如需最新資訊，請使用[搜尋基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)工具。
-2. **脈絡窗口的限制為何？**Gemini 3 模型支援 100 萬個詞元的輸入脈絡窗口，以及最多 64,000 個詞元的輸出。
-3. **Gemini 3 是否提供免費方案？**Gemini 3 Flash
-   `gemini-3-flash-preview` 在 Gemini API 中提供免費方案。您可以在 Google AI Studio 免付費試用 Gemini 3.1 Pro 和 3 Flash，但 Gemini API 的 `gemini-3.1-pro-preview` 沒有免付費方案。
-4. **舊的 `thinking_budget` 程式碼是否仍可運作？**可以，`thinking_budget` 仍支援回溯相容性，但建議遷移至 `thinking_level`，以獲得更可預測的成效。請勿在同一項要求中同時使用這兩者。
-5. **Gemini 3 是否支援 Batch API？**可以，Gemini 3 支援 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)。
-6. **是否支援脈絡快取？**是，Gemini 3 支援[脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)。
-7. **Gemini 3 支援哪些工具？**Gemini 3 支援 [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)、[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)、[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)和[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)。此外，這項功能也支援標準的[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)，可搭配自訂工具和[內建工具](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)使用。
-8. **什麼是 `gemini-3.1-pro-preview-customtools`？**如果您使用 `gemini-3.1-pro-preview`，但模型忽略您的自訂工具，改用 bash 指令，請改用 `gemini-3.1-pro-preview-customtools` 模型。詳情請參閱 [這篇文章][customtools-model]。
+## Migrazione da Gemini 2.5
 
-提供意見
+Gemini 3 è la nostra famiglia di modelli più potente di sempre e offre un miglioramento graduale rispetto a Gemini 2.5. Quando esegui la migrazione, tieni presente quanto segue:
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+- **Ragionamento**:se in precedenza utilizzavi tecniche di ingegneria dei prompt complesse (come
+  la catena di pensiero) per forzare Gemini 2.5 a ragionare, prova Gemini 3 con
+  `thinking_level: "high"` e prompt semplificati.
+- **Impostazioni della temperatura**:se il codice esistente imposta esplicitamente la temperatura
+  (soprattutto su valori bassi per output deterministici), ti consigliamo di rimuovere questo
+  parametro e utilizzare il valore predefinito di Gemini 3 pari a 1.0 per evitare potenziali problemi di loop
+  o un peggioramento delle prestazioni per attività complesse.
+- **PDF e comprensione dei documenti**:se ti affidi a un comportamento specifico per l'analisi dei documenti densi, prova la nuova
+  impostazione `media_resolution_high` per garantire una precisione continua.
+- **Consumo di token**:la migrazione alle impostazioni predefinite di Gemini 3 potrebbe **aumentare** l'utilizzo di token
+  per i PDF, ma **diminuire** l'utilizzo di token per i video. Se le richieste ora superano
+  la finestra contestuale a causa di risoluzioni predefinite più elevate, ti consigliamo di
+  ridurre esplicitamente la risoluzione dei contenuti multimediali.
+- **Segmentazione delle immagini**:le funzionalità di segmentazione delle immagini (che restituiscono maschere a livello di pixel per gli oggetti) non sono supportate in Gemini 3 Pro o Gemini 3 Flash. Per
+  i carichi di lavoro che richiedono la segmentazione delle immagini integrata, ti consigliamo di continuare a
+  utilizzare Gemini 2.5 Flash con la funzionalità di pensiero disattivata.
+- **Utilizzo del computer**:Gemini 3 Pro e Gemini 3 Flash supportano l'[utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it). A differenza della serie 2.5, non è necessario
+  utilizzare un modello separato per accedere allo strumento Utilizzo del computer.
+- **Supporto degli strumenti**: [la combinazione di strumenti integrati con la chiamata di funzione](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it) è ora supportata per i modelli Gemini 3. Ora è supportato anche il [grounding di Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it) per i modelli Gemini 3.
 
-上次更新時間：2026-09-18 (世界標準時間)。
+## Compatibilità con OpenAI
 
-想進一步說明嗎？
+Per gli utenti che utilizzano il [livello di compatibilità con OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=it),
+i parametri standard (`reasoning_effort` di OpenAI) vengono mappati automaticamente
+agli equivalenti di Gemini (`thinking_level`).
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-18 (世界標準時間)。"],[],[]]
+## Best practice per la creazione di prompt
+
+Gemini 3 è un modello di ragionamento che cambia il modo in cui devi creare i prompt.
+
+- **Istruzioni precise:** sii conciso nei prompt di input. Gemini 3 risponde
+  meglio a istruzioni dirette e chiare. Potrebbe analizzare in modo eccessivo tecniche di prompt engineering complesse o troppo dettagliate utilizzate per i modelli precedenti.
+- **Livello di dettaglio dell'output:** per impostazione predefinita, Gemini 3 è meno prolisso e preferisce
+  fornire risposte dirette ed efficienti. Se il tuo caso d'uso richiede una persona più
+  conversazionale o "loquace", devi indirizzare esplicitamente il modello nel
+  prompt (ad es. "Spiega questo come un assistente amichevole e loquace").
+- **Gestione del contesto**:quando lavori con set di dati di grandi dimensioni (ad es. libri interi,
+  codebase o video lunghi), inserisci le istruzioni o le domande specifiche alla
+  fine del prompt, dopo il contesto dei dati. Ancora il ragionamento del modello ai
+  dati forniti iniziando la domanda con una frase come "In base alle
+  informazioni precedenti…".
+
+Scopri di più sulle strategie di progettazione dei prompt nella [guida all'ingegneria dei prompt](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it).
+
+## Domande frequenti
+
+1. **Qual è il knowledge cutoff per Gemini 3?** I modelli Gemini 3 hanno un knowledge cutoff di gennaio 2025. Per informazioni più recenti, utilizza lo strumento
+   [Search Grounding](https://ai.google.dev/gemini-api/docs/google-search?hl=it).
+2. **Quali sono i limiti della finestra contestuale?** I modelli Gemini 3 supportano una finestra contestuale di input di 1 milione di token e fino a 64.000 token di output.
+3. **Esiste un livello senza costi per Gemini 3?** Gemini 3 Flash
+   `gemini-3-flash-preview` ha un livello senza costi nell'API Gemini. Puoi provare
+   Gemini 3.1 Pro e 3 Flash senza costi in Google AI Studio, ma non
+   è disponibile un livello senza costi per `gemini-3.1-pro-preview` nell'API Gemini.
+4. **Il mio vecchio codice `thinking_budget` continuerà a funzionare?** Sì, `thinking_budget` è
+   ancora supportato per la compatibilità con le versioni precedenti, ma ti consigliamo di eseguire la migrazione a
+   `thinking_level` per un rendimento più prevedibile. Non utilizzare entrambi nella stessa
+   richiesta.
+5. **Gemini 3 supporta l'API Batch?** Sì, Gemini 3 supporta l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it).
+6. **La memorizzazione nella cache del contesto è supportata?** Sì, la [memorizzazione nella cache del contesto](https://ai.google.dev/gemini-api/docs/caching?hl=it) è supportata per Gemini 3.
+7. **Quali strumenti sono supportati in Gemini 3?** Gemini 3 supporta
+   [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it),
+   [Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it),
+   [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it),
+   [Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) e
+   [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it). Supporta anche
+   la [chiamata di funzioni](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) standard
+   per i tuoi strumenti personalizzati e in
+   [combinazione con strumenti integrati](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
+8. **Che cos'è `gemini-3.1-pro-preview-customtools`?** Se utilizzi
+   `gemini-3.1-pro-preview` e il modello ignora i tuoi strumenti personalizzati a favore dei
+   comandi bash, prova invece il modello `gemini-3.1-pro-preview-customtools`.
+   Scopri di più [qui][customtools-model].
+
+Invia feedback
+
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+
+Ultimo aggiornamento 2026-09-24 UTC.
+
+Vuoi dirci altro?
+
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-24 UTC."],[],[]]

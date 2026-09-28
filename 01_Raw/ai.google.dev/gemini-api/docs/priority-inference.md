@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=ko
-fetched_at: 2026-09-21T05:44:22.265098+00:00
-title: "\uc6b0\uc120\uc21c\uc704 \ucd94\ub860 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi
+fetched_at: 2026-09-28T06:23:34.514468+00:00
+title: "\u092a\u094d\u0930\u093e\u0925\u092e\u093f\u0915\u0924\u093e \u0915\u0947 \u0906\u0927\u093e\u0930 \u092a\u0930 \u0905\u0928\u0941\u092e\u093e\u0928 \u0932\u0917\u093e\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-의견 보내기
+सुझाव भेजें
 
-# 우선순위 추론
+# प्राथमिकता के आधार पर अनुमान लगाना
 
-설명: Interactions API의 우선순위 추론 등급으로 지연 시간을 최적화하는 방법을 알아봅니다.
+ब्यौरा: Interactions API में Priority inference tier का इस्तेमाल करके, लेटेन्सी को ऑप्टिमाइज़ करने का तरीका जानें
 
-Gemini Priority API는 지연 시간이 짧고 안정성이 가장 높은 비즈니스에 중요한 워크로드를 위해 설계된 프리미엄 추론 등급입니다. 우선순위 등급 트래픽은 표준 API 및 Flex 등급 트래픽보다 우선순위가 높습니다.
+Gemini Priority API, अनुमान लगाने के लिए प्रीमियम टियर है. इसे कारोबार के लिए ज़रूरी वर्कलोड के लिए डिज़ाइन किया गया है. इसके लिए, कम समय में जवाब देने और सबसे ज़्यादा भरोसेमंद होने की ज़रूरत होती है. इसके लिए, प्रीमियम कीमत चुकानी पड़ती है. प्रायोरिटी टियर के ट्रैफ़िक को स्टैंडर्ड एपीआई और फ़्लेक्स टियर के ट्रैफ़िक से ज़्यादा प्राथमिकता दी जाती है.
 
-우선순위 추론은 Interactions API 엔드포인트에서 사용할 수 있습니다.
+प्राथमिकता के आधार पर अनुमान लगाने की सुविधा, Interactions API के सभी एंडपॉइंट पर उपलब्ध है.
 
-## 우선순위를 사용하는 방법
+## 'प्राथमिकता' फ़ील्ड का इस्तेमाल कैसे करें
 
-우선순위 등급을 사용하려면 요청에서 `service_tier` 필드를 `priority`로 설정합니다. 필드가 생략되면 기본 등급은 표준입니다.
+प्रायॉरिटी टियर का इस्तेमाल करने के लिए, अपने अनुरोध में `service_tier` फ़ील्ड को `priority` पर सेट करें. अगर फ़ील्ड को शामिल नहीं किया जाता है, तो डिफ़ॉल्ट टियर स्टैंडर्ड होता है.
 
 ### Python
 
@@ -36,7 +36,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Triage this critical customer support ticket immediately.",
     service_tier='priority'
 )
@@ -52,7 +52,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
     const interaction = await ai.interactions.create({
-        model: "gemini-3.6-flash",
+        model: "gemini-3.8-flash",
         input: "Triage this critical customer support ticket immediately.",
         service_tier: "priority"
     });
@@ -62,6 +62,70 @@ async function main() {
 await main();
 ```
 
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Interaction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.interactions.ServiceTier;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+
+Client client = new Client();
+
+CreateModelInteraction params =
+    CreateModelInteraction.builder()
+        .model(Model.of("gemini-3.8-flash"))
+        .input(InteractionsInput.of("Perform a priority inference task."))
+        .serviceTier(ServiceTier.PRIORITY)
+        .build();
+
+Interaction interaction =
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+
+System.out.println(interaction.outputText().orElse(""));
+```
+
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:       interactions.Model("gemini-3.8-flash"),
+            Input:       interactions.NewInteractionsInput("Perform a priority inference task."),
+            ServiceTier: interactions.ServiceTierPriority.ToPointer(),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -69,91 +133,84 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Triage this critical customer support ticket immediately.",
     "service_tier": "priority"
   }'
 ```
 
-## 우선순위 추론 작동 방식
+## प्राथमिकता का अनुमान लगाने की सुविधा कैसे काम करती है
 
-우선순위 추론은 요청을 중요도가 높은 컴퓨팅 대기열로 라우팅하여 사용자 대상 애플리케이션에 예측 가능하고 빠른 성능을 제공합니다. 기본 메커니즘은 동적 한도를 초과하는 트래픽에 대해 서버 측에서 표준 처리로 점진적으로 다운그레이드하는 것입니다. 이렇게 하면 요청이 실패하는 대신 애플리케이션 안정성이 보장됩니다.
+प्राथमिकता वाली इन्फ़रेंस राउटिंग, अनुरोधों को कंप्यूट की ज़्यादा ज़रूरी कतारों पर भेजती है. इससे, लोगों के इस्तेमाल वाले ऐप्लिकेशन के लिए अनुमानित और तेज़ परफ़ॉर्मेंस मिलती है. इसका मुख्य तरीका यह है कि सर्वर साइड से, डाइनैमिक सीमाओं से ज़्यादा ट्रैफ़िक को स्टैंडर्ड प्रोसेसिंग पर डाउनग्रेड किया जाता है. इससे अनुरोध को पूरा न करने के बजाय, ऐप्लिकेशन को स्थिर रखा जाता है.
 
-| 기능 | 우선순위 | 표준 | Flex | 일괄 |
+| सुविधा | प्राथमिकता | स्टैंडर्ड | Flex | बैच |
 | --- | --- | --- | --- | --- |
-| **가격 책정** | 표준보다 75~100% 더 높음 | 정상가 | 50% 할인 | 50% 할인 |
-| **지연 시간** | 초 | 수 초에서 수 분 | 분 (1~15분 목표) | 최대 24시간 |
-| **안정성** | 높음 (삭제 불가) | 높음 / 중간-높음 | 최대한 노력 (삭제 가능) | 높음 (처리량) |
-| **인터페이스** | 동기식 | 동기식 | 동기식 | 비동기식 |
+| **कीमत** | स्टैंडर्ड वर्शन की तुलना में 75 से 100% ज़्यादा | फ़ुल टिकट | 50% की छूट | 50% की छूट |
+| **लेटेंसी** | सेकंड | सेकंड से मिनट | मिनट (1 से 15 मिनट का टारगेट) | 24 घंटे तक |
+| **भरोसेमंद होना** | ज़्यादा (नॉन-शेडेबल) | ज़्यादा / सामान्य से ज़्यादा | उपलब्ध कनेक्शन के हिसाब से सबसे अच्छी क्वालिटी (शेड की जा सकने वाली) | ज़्यादा (थ्रूपुट के लिए) |
+| **इंटरफ़ेस** | सिंक्रोनस | सिंक्रोनस | सिंक्रोनस | एसिंक्रोनस |
 
-### 주요 이점
+### मुख्य फ़ायदे
 
-- **지연 시간 단축**: 대화형
-  사용자 대상 AI 도구의 초 단위 응답 시간을 위해 설계되었습니다.
-- **높은 안정성**: 트래픽은 중요도가 가장 높게 처리되며
-  엄격하게 삭제할 수 없습니다.
-- **점진적 대처**: 동적 한도를 초과하는 트래픽 급증은 실패하는 대신 처리를 위해
-  자동으로 표준 등급으로 다운그레이드되어
-  서비스 중단을 방지합니다.
-- **마찰 감소**: 표준 및 Flex 등급과 동일한 동기식 `create` 메서드를 사용합니다.
+- **कम समय में जवाब मिलना**: इसे इंटरैक्टिव और उपयोगकर्ता के लिए उपलब्ध एआई टूल के लिए डिज़ाइन किया गया है. इससे कुछ ही सेकंड में जवाब मिल जाता है.
+- **ज़्यादा भरोसेमंद**: ट्रैफ़िक को सबसे ज़्यादा प्राथमिकता दी जाती है और इसे किसी भी हाल में कम नहीं किया जा सकता.
+- **ग्रेसफ़ुल डिग्रेडेशन**: डाइनैमिक सीमा से ज़्यादा ट्रैफ़िक बढ़ने पर, उसे प्रोसेस करने के लिए स्टैंडर्ड टियर पर अपने-आप डाउनग्रेड कर दिया जाता है. इससे सेवा में रुकावट नहीं आती.
+- **कम रुकावट**: इसमें स्टैंडर्ड और फ़्लेक्स टियर की तरह ही, सिंक्रोनस `create` तरीके का इस्तेमाल किया जाता है.
 
-### 사용 사례
+### उपयोग के उदाहरण
 
-우선순위 처리는 성능과 안정성이 가장 중요한 비즈니스에 중요한 워크로드에 적합합니다.
+प्रायॉरिटी प्रोसेसिंग, कारोबार के लिए ज़रूरी वर्कफ़्लो के लिए सबसे सही है. इनमें परफ़ॉर्मेंस और भरोसेमंद सेवा सबसे अहम होती है.
 
-- **대화형 AI 애플리케이션**: 사용자가 프리미엄을 지불하고 빠르고 일관된 응답을 기대하는 고객 서비스 챗봇 및 코파일럿입니다.
-- **실시간 의사결정 엔진**: 실시간 티켓 분류 또는 사기 감지와 같이 안정성이 높고 지연 시간이 짧은
-  결과가 필요한 시스템입니다.
-- **프리미엄 고객 기능**: 유료 고객에게 더 높은 서비스
-  수준 목표 (SLO)를 보장해야 하는 개발자입니다.
+- **इंटरैक्टिव एआई ऐप्लिकेशन**: ग्राहक सेवा के लिए चैटबॉट और कोपायलट. इनमें उपयोगकर्ता प्रीमियम चुकाते हैं और उन्हें तुरंत और लगातार जवाब मिलने की उम्मीद होती है.
+- **रीयल-टाइम में फ़ैसले लेने वाले इंजन**: ऐसे सिस्टम जिनके लिए भरोसेमंद और कम समय में नतीजे पाना ज़रूरी होता है. जैसे, लाइव टिकट की प्राथमिकता तय करना या धोखाधड़ी का पता लगाना.
+- **पैसे चुकाकर सदस्यता लेने वाले ग्राहकों के लिए उपलब्ध सुविधाएं**: ऐसे डेवलपर जिन्हें पैसे चुकाकर सदस्यता लेने वाले ग्राहकों के लिए, सेवा स्तर के ज़्यादा लक्ष्यों (एसएलओ) की गारंटी देनी होती है.
 
-### 비율 제한
+### तय सीमाएं
 
-우선순위 소비는 소비가 [전체 대화형 트래픽 비율 제한](https://aistudio.google.com/rate-limit?hl=ko)에 포함되더라도 자체 비율 제한을 유지합니다. 우선순위 추론의 기본 비율 제한은 **모델 / 등급의 표준 비율 제한의 0.3배** 입니다.
+प्राथमिकता के आधार पर इस्तेमाल किए जाने वाले संसाधनों के लिए, दर से जुड़ी अपनी सीमाएं होती हैं. भले ही, इस्तेमाल को [इंटरैक्टिव ट्रैफ़िक की दर से जुड़ी कुल सीमाओं](https://aistudio.google.com/rate-limit?hl=hi) में गिना जाता हो. प्राथमिकता के आधार पर अनुमान लगाने के लिए, डिफ़ॉल्ट रूप से तय की गई दर की सीमाएं **मॉडल / टियर के लिए, दर की स्टैंडर्ड सीमा का 0.3 गुना** होती हैं
 
-### 점진적 다운그레이드 로직
+### ग्रेसफ़ुल डाउनग्रेड लॉजिक
 
-정체로 인해 우선순위 한도를 초과하는 경우 오버플로 요청은 503 또는 429 오류로 실패하는 대신 표준 처리로 **자동으로 점진적으로** 다운그레이드됩니다. 다운그레이드된 요청은 우선순위 프리미엄 요금이 아닌 표준 요금으로 청구됩니다.
+अगर नेटवर्क में ज़्यादा ट्रैफ़िक की वजह से प्राथमिकता की सीमाएं पार हो जाती हैं, तो ज़्यादा अनुरोधों को 503 या 429 गड़बड़ी के साथ फ़ेल करने के बजाय, **अपने-आप और आसानी से** स्टैंडर्ड प्रोसेसिंग पर डाउनग्रेड कर दिया जाता है. डाउनग्रेड किए गए अनुरोधों के लिए, स्टैंडर्ड दर से बिल भेजा जाता है. इसके लिए, Priority प्रीमियम दर लागू नहीं होती.
 
-### 클라이언트 책임
+### क्लाइंट की ज़िम्मेदारी
 
-- **응답 모니터링**: 개발자는 요청이 `x-gemini-service-tier`
-  로 자주 다운그레이드되는지 감지하기 위해 API 응답의
-  헤더를 모니터링해야 합니다.`standard`
-- **재시도**: 클라이언트는
-  표준 오류(예: `DEADLINE_EXCEEDED`)에 대해 재시도 로직/지수 백오프를 구현해야 합니다.
+- **जवाब की निगरानी करना**: डेवलपर को एपीआई के जवाब में `x-gemini-service-tier` हेडर की निगरानी करनी चाहिए, ताकि यह पता लगाया जा सके कि अनुरोधों को बार-बार `standard` पर डाउनग्रेड किया जा रहा है या नहीं.
+- **फिर से कोशिश करना**: क्लाइंट को स्टैंडर्ड गड़बड़ियों, जैसे कि `DEADLINE_EXCEEDED` के लिए, फिर से कोशिश करने का लॉजिक/एक्सपोनेंशियल बैकऑफ़ लागू करना होगा.
 
-## 가격 책정
+## कीमत
 
-우선순위 추론은 [표준 API](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)보다 75~100% 더 비싸며 토큰당 청구됩니다.
+प्राथमिकता के आधार पर अनुमान लगाने की सुविधा, [स्टैंडर्ड एपीआई](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) की तुलना में 75 से 100% ज़्यादा महंगी है. इसके लिए, हर टोकन के हिसाब से बिल भेजा जाता है.
 
-## 지원되는 모델
+## इन मॉडल के साथ काम करता है
 
-다음 모델은 우선순위 추론을 지원합니다.
+इन मॉडल में प्राथमिकता के आधार पर अनुमान लगाने की सुविधा काम करती है:
 
-| 모델 | 우선순위 추론 |
+| मॉडल | प्राथमिकता का अनुमान लगाने की सुविधा |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ko) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ko) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ko) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko) | ✔️ |
-| [Gemini 3.1 Pro 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko) | ✔️ |
-| [Gemini 3 Flash 프리뷰](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ko) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ko) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=hi) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=hi) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=hi) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=hi) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=hi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi) | ✔️ |
+| [Gemini 3.1 Pro की झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=hi) | ✔️ |
+| [Gemini 3 Flash की झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=hi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=hi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi) | ✔️ |
 
-## 다음 단계
+## आगे क्या करना है
 
-- [비용 절감을 위한 Flex 추론](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ko)
-- [토큰](https://ai.google.dev/gemini-api/docs/tokens?hl=ko): 토큰 이해하기
+- लागत कम करने के लिए, [फ़्लेक्स इन्फ़रेंस](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi) का इस्तेमाल करें.
+- [टोकन](https://ai.google.dev/gemini-api/docs/tokens?hl=hi): टोकन के बारे में जानें.
 
-의견 보내기
+सुझाव भेजें
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-최종 업데이트: 2026-09-12(UTC)
+आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
 
-의견을 전달하고 싶나요?
+क्या आपको हमें और कुछ बताना है?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-12(UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]

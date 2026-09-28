@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=ko
-fetched_at: 2026-09-21T05:48:32.654114+00:00
-title: "Deep Research Max \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=id
+fetched_at: 2026-09-28T06:27:46.329386+00:00
+title: "Pratinjau Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-의견 보내기
+Kirim masukan
 
-# Deep Research Max 미리보기
+# Pratinjau Deep Research Max
 
-자동화된 컨텍스트 수집 및 종합을 위한 최대 포괄성입니다. Deep Research Max는 수백 개의 공개 웹 소스와 비공개 Workspace 데이터의 복잡한 정보를 포괄적이고 인용된 보고서로 종합하는 장기 실행되고 정확성이 중요한 조사를 위해 최적화되었습니다. 공동 계획, 시각화, MCP 서버, 파일 검색을 지원합니다.
+Keluasan maksimum untuk pengumpulan dan sintesis konteks otomatis. Deep
+Research Max dioptimalkan untuk penyelidikan yang berjalan lama dan sangat penting akurasinya, yang menyintesis informasi kompleks dari ratusan sumber web publik dan data ruang kerja pribadi menjadi laporan komprehensif yang menyertakan kutipan. Aplikasi ini mendukung perencanaan kolaboratif, visualisasi, server MCP, dan Penelusuran File.
 
-## 문서
+## Dokumentasi
 
-기능 및 기능의 전체 적용 범위는 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko) 페이지를 참고하세요.
+Buka halaman [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) untuk mengetahui cakupan lengkap fitur dan kapabilitas.
 
 ## deep-research-max-preview-04-2026
 
-| 속성 | 설명 |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_card에이전트 코드 | **Interactions API**  `deep-research-max-preview-04-2026` |
-| save지원되는 데이터 유형 | **입력**  텍스트, 이미지, PDF, 오디오, 동영상  **출력**  텍스트 (인용된 보고서), 이미지 |
-| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 컨텍스트 윈도우**  1,048,576  **출력 토큰 한도**  65,536 |
-| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `deep-research-max-preview-04-2026` |
-| calendar\_month최근 업데이트 | 2026년 4월 |
+| Kode agen id\_card | **Interactions API**  `deep-research-max-preview-04-2026` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, PDF, Audio, Video  **Output**  Teks (Laporan yang Dikutip), Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576  **Batas token output**  65.536 |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `deep-research-max-preview-04-2026` |
+| calendar\_monthPembaruan terbaru | April 2026 |
 
-의견 보내기
+Kirim masukan
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-최종 업데이트: 2026-04-29(UTC)
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Ada masukan untuk kami?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

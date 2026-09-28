@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=de
-fetched_at: 2026-09-21T05:44:31.157401+00:00
-title: "Computernutzung \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-CN
+fetched_at: 2026-09-28T06:20:33.608628+00:00
+title: "\u4f7f\u7528\u7535\u8111 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Computernutzung
+# 使用电脑
 
-Mit dem Tool „Computernutzung“ können Sie Browser-, Mobil- und Desktop-Steuerungs-Agents erstellen, die mit Aufgaben interagieren und diese automatisieren. Anhand von Screenshots kann das Modell einen Computerbildschirm „sehen“ und „agieren“, indem es bestimmte UI-Aktionen wie Mausklicks und Tastatureingaben generiert. Ähnlich wie beim Funktionsaufruf müssen Sie die clientseitige Ausführungsumgebung implementieren, um die Aktionen für die Computerverwendung zu empfangen und auszuführen.
+借助“计算机使用”工具，您可以构建可与浏览器、移动设备和桌面设备交互并自动执行任务的控制代理。借助屏幕截图，该模型可以“看到”电脑屏幕，并通过生成特定的界面操作（例如鼠标点击和键盘输入）来“行动”。与函数调用类似，您需要实现客户端执行环境，以接收和执行“计算机使用”操作。
 
-Eine Liste der unterstützten Modelle finden Sie unter [Modellversionen](#model-versions). Die Gemini 3.x-Modelle unterstützen mehrere erweiterte Funktionen:
+如需查看支持的型号列表，请参阅[型号版本](#model-versions)。Gemini 3.x 模型支持多项高级功能：
 
-- **Unterstützung mehrerer Umgebungen**:Sie können Agents für [Browser-, Mobil- und Computerumgebungen](#supported-environments) erstellen.
-- **Optimierte Aktionen mit Intents**:Aktionen enthalten ein `intent`-Feld, in dem die Begründung des Modells für jeden Schritt erläutert wird.
-- **Konfigurierbare Sicherheitsrichtlinien**:Sie können das [Sicherheitsverhalten](#safety-policies) mit integrierten Richtlinienkategorien und Überschreibungen optimieren.
-- **Erkennung von Prompt Injection**:Aktivieren Sie das [Scannen von Screenshots](#prompt-injection), um verborgene feindselige Anweisungen zu erkennen.
+- **支持多种环境**：为[浏览器、移动设备和桌面设备](#supported-environments)环境构建代理。
+- **通过 intent 简化的操作**：操作包含 `intent` 字段，用于说明模型在每个步骤背后的推理过程。
+- **可配置的安全政策**：通过内置的政策类别和替换项来微调[安全行为](#safety-policies)。
+- **提示注入检测**：选择启用[屏幕截图扫描](#prompt-injection)，以检测隐藏的对抗性指令。
 
-Mit „Computer Use“ können Sie Agents erstellen, die Folgendes können:
+借助“电脑使用”功能，您可以构建能够执行以下操作的智能体：
 
-- Wiederholte Dateneingaben oder das Ausfüllen von Formularen auf Websites automatisieren
-- Automatisierte Tests von Webanwendungen und User Flows durchführen
-- Recherchen auf verschiedenen Websites durchführen (z.B. Produktinformationen, Preise und Rezensionen von E-Commerce-Websites abrufen, um eine Kaufentscheidung zu treffen)
+- 自动执行网站上重复的数据输入或表单填写操作。
+- 自动测试 Web 应用和用户流程
+- 在各种网站上进行研究（例如，从电子商务网站收集商品信息、价格和评价，以便做出购买决策）
 
-Hier ist ein Minimalbeispiel für die Initialisierung des Clients und das Senden eines Prompts an das Modell mit aktiviertem `computer_use`-Tool für eine Browserumgebung:
+以下是一个最小示例，展示了如何在浏览器环境中初始化客户端并向已启用 `computer_use` 工具的模型发送提示：
 
 ### Python
 
@@ -96,45 +96,85 @@ Interaction interaction =
 System.out.println(interaction);
 ```
 
-## So funktioniert die Computernutzung
+### Go
 
-Wenn Sie einen Agent mit dem Modell für die Computernutzung erstellen möchten, müssen Sie eine Endlosschleife zwischen Ihrer Anwendung und der API einrichten. Das passiert in Ihrem Code bei jedem Schritt:
+```
+package main
 
-1. [**Anfrage an das Modell senden**](#send-request)
-   - Ihre Anwendung sendet eine API-Anfrage mit dem Tool „Computer Use“, Ihren Konfigurationseinstellungen (z. B. der Zielumgebung), dem Prompt des Nutzers und einem Screenshot des aktuellen Bildschirms.
-2. [**Modellantwort erhalten**](#model-response)
-   - Das Modell analysiert den Bildschirm und den Prompt und gibt eine Antwort zurück, die ein vorgeschlagenes `function_call` enthält, das eine UI-Aktion darstellt (z. B. ein Klick, Scrollen oder ein Tastendruck).
-   - Bei **Gemini 3.x-Modellen** enthält die Antwort auch eine Begründung `intent`, warum das Modell diese Aktion ausgewählt hat.
-   - Die Antwort kann auch eine `safety_decision` von einem internen Sicherheitssystem enthalten, das die Aktion als regulär/zulässig, `require_confirmation` (erfordert Nutzergenehmigung) oder blockiert klassifiziert.
-3. [**Erhaltene Aktion ausführen**](#execute-actions)
-   - Wenn die Aktion zulässig ist (oder der Nutzer sie bestätigt), parst Ihr clientseitiger Code die `function_call`, skaliert die normalisierten Koordinaten entsprechend Ihrem Viewport und führt die Aktion in Ihrer Zielumgebung mit Automatisierungstools wie Playwright aus. Wenn die Aktion blockiert wird, sollte Ihr Client die Ausführung beenden oder die Unterbrechung verarbeiten.
-4. [**Neuen Umgebungsstatus erfassen**](#capture-state)
-   - Nachdem die Ausführung der Aktion abgeschlossen ist, erstellt Ihre Anwendung einen neuen Screenshot und sendet ihn in einem `function_result` zurück an das Modell, um den nächsten Schritt anzufordern.
+import (
+    "context"
+    "fmt"
+    "log"
 
-Dieser Prozess wird dann ab Schritt 2 wiederholt und das Modell wird kontinuierlich aufgefordert, die nächste Aktion auszuführen, bis die Aufgabe abgeschlossen oder beendet ist.
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-![Computernutzung – Übersicht](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=de)
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-## Implementierung von „Computer Use“
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Search for 'Gemini API' on Google."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment: interactions.EnvironmentEnumBrowser.ToPointer(),
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-Bevor Sie das Tool „Computer Use“ verwenden können, müssen Sie Folgendes einrichten:
+    fmt.Println(res.Interaction)
+}
+```
 
-- **Sichere Ausführungsumgebung**:Führen Sie Ihren Agent in einer Sandbox-VM oder einem Sandbox-Container aus, um ihn von Ihrem Hostsystem zu isolieren und seine potenziellen Auswirkungen zu begrenzen.
-  Die [Referenzimplementierung](https://github.com/google/computer-use-preview/) enthält eine sofort einsatzbereite Docker-basierte Sandbox, die Sie als Ausgangspunkt verwenden können.
-- **Clientseitiger Aktionshandler**:Implementieren Sie clientseitige Logik, um Koordinaten auszuführen, Text einzugeben und Screenshots zu erstellen.
+## “计算机使用”功能的运作方式
 
-In den folgenden Beispielen wird ein Webbrowser als Ausführungsumgebung und [Playwright](https://playwright.dev/) als clientseitiger Handler verwendet.
+如需使用 Computer Use 模型构建代理，您需要在应用与 API 之间设置一个连续循环。以下是您的代码在每个步骤中的作用：
 
-### 0. Playwright einrichten
+1. [**向模型发送请求**](#send-request)
+   - 您的应用会发送一个 API 请求，其中包含“电脑使用”工具、您的配置设置（例如目标环境）、用户的提示以及当前屏幕的屏幕截图。
+2. [**接收模型响应**](#model-response)
+   - 模型会分析屏幕和提示，返回包含建议的 `function_call`（表示界面操作，例如点击、滚动或按键）的回答。
+   - 对于 **Gemini 3.x 模型**，回答还包含推理 `intent`，用于说明模型选择该操作的原因。
+   - 响应还可能包含来自内部安全系统的 `safety_decision`，用于将操作归类为常规/允许、`require_confirmation`（需要用户批准）或已阻止。
+3. [**执行收到的操作**](#execute-actions)
+   - 如果允许执行该操作（或用户确认允许），您的客户端代码会解析 `function_call`，缩放归一化坐标以匹配您的视口，并使用自动化工具（例如 Playwright）在目标环境中执行该操作。如果操作被阻止，客户端应停止执行或处理中断。
+4. [**捕获新环境状态**](#capture-state)
+   - 操作执行完毕后，应用会捕获新的屏幕截图，并通过 `function_result` 将其发送回模型，以请求执行下一步操作。
 
-Installieren Sie zuerst die erforderlichen Pakete:
+然后，此过程会从第 2 步开始重复，不断向模型征求下一个操作，直到任务完成或终止。
+
+![“计算机使用”概览](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=zh-cn)
+
+## 如何实现“计算机使用”
+
+在使用“电脑使用情况”工具进行构建之前，您需要设置以下内容：
+
+- **安全执行环境**：在沙盒化的虚拟机或容器中运行代理，以将其与主机系统隔离并限制其潜在影响。[参考实现](https://github.com/google/computer-use-preview/)包含一个可直接使用的基于 Docker 的沙盒，您可以从这里开始。
+- **客户端操作处理程序**：实现客户端逻辑，以执行坐标、输入文本和拍摄屏幕截图。
+
+以下示例使用 Web 浏览器作为执行环境，并使用 [Playwright](https://playwright.dev/) 作为客户端处理程序。
+
+### 0. 设置 Playwright
+
+首先，安装所需的软件包：
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-Initialisieren Sie dann eine Playwright-Browserinstanz für die Ausführung:
+然后，初始化一个 Playwright 浏览器实例以供执行：
 
 ```
 from playwright.sync_api import sync_playwright
@@ -162,15 +202,15 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. Anfrage an das Modell senden
+### 1. 向模型发送请求
 
-Initialisieren Sie die Clientbibliothek und konfigurieren Sie das Tool zur Computernutzung. Beachten Sie, dass Sie die Anzeigegröße bei einer Anfrage nicht angeben müssen. Das Modell sagt Pixelkoordinaten voraus, die auf die Höhe und Breite des Bildschirms skaliert werden.
+初始化客户端库并配置“计算机使用”工具。请注意，发出请求时无需指定显示大小；模型会预测缩放到屏幕高度和宽度的像素坐标。
 
-### Gemini 3.x
+### Gemini 3.x
 
 ### Python
 
-Verwenden Sie das `google-genai` Python SDK (Version `2.7.0` oder höher), um eine Anfrage für die Browserumgebung zu konfigurieren:
+使用 `google-genai` Python SDK（版本 `2.7.0` 或更高版本）配置以浏览器环境为目标的请求：
 
 ```
 from google import genai
@@ -194,7 +234,7 @@ print(interaction)
 
 ### JavaScript
 
-Verwenden Sie das `@google/genai` Node.js SDK, um eine Anfrage zu konfigurieren, die auf die Browserumgebung ausgerichtet ist:
+使用 `@google/genai` Node.js SDK 配置以浏览器环境为目标的请求：
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -250,9 +290,51 @@ Interaction interaction =
 System.out.println(interaction);
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Find a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th"),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment:                    interactions.EnvironmentEnumBrowser.ToPointer(),
+                    EnablePromptInjectionDetection: genai.Ptr(true),
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction)
+}
+```
+
 ### REST
 
-So senden Sie eine Anfrage mit curl:
+使用 curl 发送请求：
 
 ```
 curl -X POST \
@@ -272,7 +354,7 @@ curl -X POST \
   }'
 ```
 
-### Gemini 2.5 (Legacy)
+### Gemini 2.5（旧版）
 
 ### Python
 
@@ -360,11 +442,56 @@ Interaction interaction =
 System.out.println(interaction);
 ```
 
-### 2. Antwort des Modells erhalten
+### Go
 
-Das Antwortmodell schlägt einen Funktionsaufruf vor. Bei **Gemini 3.x-Modellen** enthält die Antwort neben Koordinaten auch eine maßgeschneiderte Absicht für das logische Denken. Im Folgenden finden Sie Beispiele für beide Antworten:
+```
+package main
 
-### Gemini 3.x
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Specify predefined functions to exclude (optional)
+    excludedFunctions := []string{"drag_and_drop"}
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-2.5-computer-use-preview-10-2025"),
+            Input: interactions.NewInteractionsInput("Search for highly rated smart fridges on Google Shopping."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment:                 interactions.EnvironmentEnumBrowser.ToPointer(),
+                    ExcludedPredefinedFunctions: excludedFunctions,
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction)
+}
+```
+
+### 2. 接收模型回答
+
+响应模型建议进行函数调用。对于 **Gemini 3.x 模型**，响应包含量身定制的推理意图以及坐标。以下示例展示了这两种响应：
+
+### Gemini 3.x
 
 ```
 {
@@ -382,7 +509,7 @@ Das Antwortmodell schlägt einen Funktionsaufruf vor. Bei **Gemini 3.x-Modellen
 }
 ```
 
-### Gemini 2.5 (Legacy)
+### Gemini 2.5（旧版）
 
 ```
 {
@@ -410,11 +537,11 @@ Das Antwortmodell schlägt einen Funktionsaufruf vor. Bei **Gemini 3.x-Modellen
 }
 ```
 
-### 3. Erhaltene Aktionen ausführen
+### 3. 执行收到的操作
 
-Ihre Anwendung muss die Koordinaten der Antwort parsen, die Aktion ausführen und die Koordinaten aus den normalisierten 1.000 × 1.000-Koordinaten skalieren.
+您的应用必须解析响应坐标、执行操作，并将其从归一化的 1000x1000 坐标进行缩放。
 
-Der folgende Code verarbeitet sowohl Legacy-Tool-Befehle (`click_at`, `type_text_at`) als auch moderne optimierte Befehle (`click`, `type`).
+以下代码同时处理旧版工具命令（`click_at`、`type_text_at`）和新版精简命令（`click`、`type`）。
 
 ### Python
 
@@ -642,9 +769,77 @@ class ActionExecutor {
 }
 ```
 
-### 4. Neuen Umgebungsstatus erfassen
+### Go
 
-Senden Sie nach der Ausführung der Aktionen das Ergebnis der Funktionsausführung zurück an das Modell, damit es diese Informationen zum Generieren der nächsten Aktion verwenden kann. Wenn mehrere Aktionen (parallele Aufrufe) ausgeführt wurden, müssen Sie im nächsten Nutzerzug für jede Aktion ein `function_result` senden.
+```
+package main
+
+import (
+    "fmt"
+
+    "google.golang.org/genai/interactions/models/interactions"
+)
+
+func denormalizeX(x, screenWidth int) int {
+    return int(float64(x) / 1000.0 * float64(screenWidth))
+}
+
+func denormalizeY(y, screenHeight int) int {
+    return int(float64(y) / 1000.0 * float64(screenHeight))
+}
+
+func executeFunctionCalls(interaction *interactions.Interaction, screenWidth, screenHeight int) []map[string]any {
+    var results []map[string]any
+
+    for _, step := range interaction.Steps {
+        if functionCall := step.FunctionCallStep; functionCall != nil {
+            fname := functionCall.Name
+            args := functionCall.Arguments
+            actionResult := map[string]any{}
+
+            intent := args["intent"]
+            if intent == nil {
+                intent = "N/A"
+            }
+            fmt.Printf("  -> Executing: %s (Intent: %v)\n", fname, intent)
+
+            switch fname {
+            case "click", "click_at":
+                xVal, _ := args["x"].(float64)
+                yVal, _ := args["y"].(float64)
+                actualX := denormalizeX(int(xVal), screenWidth)
+                actualY := denormalizeY(int(yVal), screenHeight)
+                _ = actualX
+                _ = actualY
+                // Perform mouse click at (actualX, actualY) using your browser automation library
+            case "type", "type_text_at":
+                text, _ := args["text"].(string)
+                _ = text
+                // Type text into active element using your browser automation library
+            case "navigate":
+                url, _ := args["url"].(string)
+                _ = url
+                // Navigate browser to url
+            }
+
+            results = append(results, map[string]any{
+                "name":   fname,
+                "callId": functionCall.ID,
+                "result": actionResult,
+            })
+        }
+    }
+    return results
+}
+
+func main() {
+    // Example helper usage with an Interaction response
+}
+```
+
+### 4. 捕获新环境状态
+
+执行操作后，将函数执行结果发送回模型，以便模型可以使用此信息生成下一个操作。如果执行了多项操作（并行调用），您必须在后续用户回合中为每项操作发送一个 `function_result`。
 
 ### Python
 
@@ -753,14 +948,59 @@ class StateCapturer {
 }
 ```
 
-Nachdem Sie festgelegt haben, wie der Umgebungsstatus erfasst und formatiert werden soll, können Sie alle diese Schritte in einer kontinuierlichen Ausführungsschleife kombinieren.
+### Go
 
-## Agent-Schleife erstellen
+```
+package main
 
-Um mehrstufige Interaktionen zu ermöglichen, kombinieren Sie die vier Schritte aus dem Abschnitt [Computer Use implementieren](#implement-computer-use) in einem einzigen Loop.
-In dieser Schleife werden so lange Aktionen angefordert und die Ergebnisse an das Modell zurückgegeben, bis die Aufgabe abgeschlossen ist.
+import (
+    "encoding/base64"
+    "fmt"
 
-Denken Sie daran, den Unterhaltungsverlauf richtig zu verwalten, indem Sie die Modellantworten und Ihre Funktionsantworten in jedem Schritt an den Verlauf anhängen.
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+)
+
+func getFunctionResponses(screenshotBytes []byte, currentURL string, results []map[string]any) []interactions.Step {
+    var functionResponses []interactions.Step
+    base64Screenshot := base64.StdEncoding.EncodeToString(screenshotBytes)
+
+    for _, entry := range results {
+        name, _ := entry["name"].(string)
+        callID, _ := entry["callId"].(string)
+        jsonResult := fmt.Sprintf(`{"url": "%s"}`, currentURL)
+
+        responseStep := interactions.NewStep(interactions.FunctionResultStep{
+            Name:   genai.Ptr(name),
+            CallID: callID,
+            Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+                interactions.NewFunctionResultSubcontent(interactions.TextContent{
+                    Text: jsonResult,
+                }),
+                interactions.NewFunctionResultSubcontent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Screenshot),
+                    MimeType: interactions.ImageContentMimeType("image/png").ToPointer(),
+                }),
+            }),
+        })
+        functionResponses = append(functionResponses, responseStep)
+    }
+    return functionResponses
+}
+
+func main() {
+    // Example helper usage to build FunctionResultStep responses
+}
+```
+
+定义如何捕获和格式化环境状态后，您可以将所有这些步骤组合成一个持续执行的循环。
+
+## 构建智能体循环
+
+如需实现多步互动，请将[如何实现计算机使用](#implement-computer-use)部分中的四个步骤合并为一个循环。
+此循环会一直请求操作并将结果反馈给模型，直到任务完成。
+
+请务必正确管理对话记录，在每个步骤中将模型响应和函数响应都附加到记录中。
 
 ### Python
 
@@ -1049,107 +1289,213 @@ for (int i = 0; i < turnLimit; i++) {
 }
 ```
 
-## Unterstützte Umgebungen (Gemini 3.x)
+### Go
 
-Gemini 3.x-Modelle unterstützen drei Umgebungen, die in den `computer_use`-Konfigurationen angegeben sind:
+```
+package main
 
-### Browserumgebung (`ENVIRONMENT_BROWSER`)
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "strings"
 
-Verfügbare Aktionen im Browsertool:
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-| Befehlsname | Beschreibung | Argumente (im Funktionsaufruf) |
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Constants for screen dimensions
+    screenWidth := 1440
+    screenHeight := 900
+    _ = screenWidth
+    _ = screenHeight
+
+    // Capture initial screenshot from browser driver (e.g. Playwright)
+    initialScreenshot := []byte{}
+    base64Screenshot := base64.StdEncoding.EncodeToString(initialScreenshot)
+    userPrompt := "Go to ai.google.dev/gemini-api/docs and search for pricing."
+    fmt.Println("Goal:", userPrompt)
+
+    computerUseTool := interactions.NewTool(interactions.ComputerUse{
+        Environment:                    interactions.EnvironmentEnumBrowser.ToPointer(),
+        EnablePromptInjectionDetection: genai.Ptr(true),
+    })
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{Text: userPrompt}),
+                interactions.NewContent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Screenshot),
+                    MimeType: interactions.ImageContentMimeType("image/png").ToPointer(),
+                }),
+            }),
+            Tools: []interactions.Tool{computerUseTool},
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    interaction := res.Interaction
+
+    turnLimit := 5
+    for i := 0; i < turnLimit; i++ {
+        fmt.Printf("\n--- Turn %d ---\n", i+1)
+
+        hasFunctionCalls := false
+        for _, step := range interaction.Steps {
+            if step.FunctionCallStep != nil {
+                hasFunctionCalls = true
+                break
+            }
+        }
+
+        if !hasFunctionCalls {
+            var parts []string
+            for _, step := range interaction.Steps {
+                if outStep := step.ModelOutputStep; outStep != nil {
+                    for _, contentBlock := range outStep.Content {
+                        if textContent := contentBlock.TextContent; textContent != nil {
+                            parts = append(parts, textContent.GetText())
+                        }
+                    }
+                }
+            }
+            fmt.Println("Agent finished:", strings.TrimSpace(strings.Join(parts, " ")))
+            break
+        }
+
+        fmt.Println("Executing actions and capturing state...")
+        // Execute function calls against browser driver and capture []interactions.Step functionResponses
+        var functionResponses []interactions.Step
+
+        nextRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+            Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                Model:                 interactions.Model("gemini-3.8-flash"),
+                PreviousInteractionID: interaction.ID,
+                Input:                 interactions.NewInteractionsInput(functionResponses),
+                Tools:                 []interactions.Tool{computerUseTool},
+            }),
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        interaction = nextRes.Interaction
+    }
+}
+```
+
+## 支持的环境 (Gemini 3.x)
+
+Gemini 3.x 模型支持 `computer_use` 配置中指定的三种环境：
+
+### 浏览器环境 (`ENVIRONMENT_BROWSER`)
+
+浏览器工具下可执行的操作：
+
+| 命令名称 | 说明 | 实参（在函数调用中） |
 | --- | --- | --- |
-| **click** | Linksklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **double\_click** | Doppelklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **triple\_click** | Dreifachklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **middle\_click** | Mit der mittleren Maustaste auf die Koordinate klicken. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **right\_click** | Rechtsklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **mouse\_down** | Drückt die Maustaste an der Koordinate und hält sie gedrückt. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **mouse\_up** | Lässt die Maustaste an der Koordinate los. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **move** | Verschiebt den Cursor an die angegebene Position. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **type** | Text eingeben | `text`: str `press_enter`: bool (optional, Standardwert: `false`) `intent`: str |
-| **drag\_and\_drop** | Zieht ein Element von der Startkoordinate zur Endkoordinate. | `start_y`: int (0–999) `start_x`: int (0–999) `end_y`: int (0–999) `end_x`: int (0–999) `intent`: str |
-| **wait** | Hält die Ausführung für eine bestimmte Anzahl von Sekunden an. | `seconds`: int (optional, Standardwert: `1`) `intent`: str |
-| **press\_key** | Drückt die angegebene Taste und lässt sie wieder los. | `key`: str `intent`: str |
-| **key\_down** | Drückt und hält die angegebene Taste. | `key`: str `intent`: str |
-| **key\_up** | Gibt den angegebenen Schlüssel frei. | `key`: str `intent`: str |
-| **Tastenkürzel** | Drückt die angegebene Tastenkombination. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Gibt einen Screenshot des aktuellen Bildschirms zurück. | `intent`: str |
-| **scroll** | Scrollt an einer Koordinate um eine bestimmte Anzahl von Pixeln nach oben, unten, links oder rechts. | `y`: int (0–999) `x`: int (0–999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0–999, optional, Standardwert `300`) `intent`: str |
-| **go\_back** | Navigiert zurück zur vorherigen Webseite im Browserverlauf. | `intent`: str |
-| **navigate** | Navigiert direkt zu einer angegebenen URL. | `url`: str `intent`: str |
-| **go\_forward** | Navigiert vorwärts zur nächsten Webseite im Browserverlauf. | `intent`: str |
+| **click** | 在相应坐标处点击鼠标左键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **double\_click** | 在相应坐标处双击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **triple\_click** | 在相应坐标处点击三次。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **middle\_click** | 在相应坐标处点击鼠标中键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **right\_click** | 在相应坐标处进行右键点击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_down** | 按住相应坐标处的鼠标按钮。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_up** | 在指定坐标处释放鼠标按钮。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **move** | 将光标移动到指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **type** | 输入文字。 | `text`：str `press_enter`：bool（可选，默认值为 `false`） `intent`：str |
+| **drag\_and\_drop** | 将商品从起始坐标拖动到结束坐标。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **wait** | 暂停执行指定秒数。 | `seconds`：int（可选，默认值为 `1`） `intent`：str |
+| **press\_key** | 按下并松开指定的键。 | `key`：str `intent`：str |
+| **key\_down** | 按下并按住指定的键。 | `key`：str `intent`：str |
+| **key\_up** | 释放指定的键。 | `key`：str `intent`：str |
+| **热键** | 按下指定的组合键。 | `keys`：`List[str]` `intent`：`str` |
+| **take\_screenshot** | 返回当前屏幕的屏幕截图。 | `intent`：str |
+| **scroll** | 按像素距离在某个坐标处向上、向下、向左或向右滚动。 | `y`：int (0-999) `x`：int (0-999) `direction`：str（`"up"`、`"down"`、`"left"`、`"right"`） `magnitude_in_pixels`：int（0-999，可选，默认值为 `300`） `intent`：str |
+| **go\_back** | 返回到浏览器历史记录中的上一个网页。 | `intent`：str |
+| **navigate** | 直接前往指定网址。 | `url`：str `intent`：str |
+| **go\_forward** | 在浏览器历史记录中向前导航到下一个网页。 | `intent`：str |
 
-### Mobile Umgebung (`ENVIRONMENT_MOBILE`)
+### 移动环境 (`ENVIRONMENT_MOBILE`)
 
-Android-optimierte Umgebungsvorgänge:
+Android 优化环境操作：
 
-| Befehlsname | Beschreibung | Argumente (im Funktionsaufruf) |
+| 命令名称 | 说明 | 实参（在函数调用中） |
 | --- | --- | --- |
-| **open\_app** | Öffnet eine Anwendung anhand ihres Namens. | `app_name`: str `intent`: str |
-| **click** | Linksklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **list\_apps** | Listet die auf dem Gerät verfügbaren Anwendungen auf und gibt ihre Namen und Paketnamen zurück. | `intent`: str |
-| **wait** | Hält die Ausführung für eine bestimmte Anzahl von Sekunden an. | `seconds`: int (optional, Standardwert: `1`) `intent`: str |
-| **go\_back** | Navigiert zurück zum vorherigen Bildschirm oder zur vorherigen Webseite. | `intent`: str |
-| **type** | Text eingeben | `text`: str `press_enter`: bool (optional, Standardwert: `false`) `intent`: str |
-| **drag\_and\_drop** | Zieht ein Element von der Startkoordinate zur Endkoordinate. | `start_y`: int (0–999) `start_x`: int (0–999) `end_y`: int (0–999) `end_x`: int (0–999) `intent`: str |
-| **long\_press** | Führt einen langen Druck auf eine Koordinate auf dem Bildschirm aus. | `y`: int (0–999) `x`: int (0–999) `seconds`: int (optional, Standardwert: `2`) `intent`: str |
-| **press\_key** | Drückt die angegebene Taste und lässt sie wieder los. | `key`: str `intent`: str |
-| **take\_screenshot** | Gibt einen Screenshot des aktuellen Bildschirms zurück. | `intent`: str |
+| **open\_app** | 按名称打开应用。 | `app_name`：str `intent`：str |
+| **click** | 在相应坐标处点击鼠标左键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **list\_apps** | 列出设备上的可用应用，并返回其名称和软件包名称。 | `intent`：str |
+| **wait** | 暂停执行指定秒数。 | `seconds`：int（可选，默认值为 `1`） `intent`：str |
+| **go\_back** | 返回上一个界面或网页。 | `intent`：str |
+| **type** | 输入文字。 | `text`：str `press_enter`：bool（可选，默认值为 `false`） `intent`：str |
+| **drag\_and\_drop** | 将商品从起始坐标拖动到结束坐标。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **long\_press** | 在屏幕上的某个坐标处执行长按操作。 | `y`：int (0-999) `x`：int (0-999) `seconds`：int（可选，默认值为 `2`） `intent`：str |
+| **press\_key** | 按下并松开指定的键。 | `key`：str `intent`：str |
+| **take\_screenshot** | 返回当前屏幕的屏幕截图。 | `intent`：str |
 
-### Desktopumgebung (`ENVIRONMENT_DESKTOP`)
+### 桌面环境 (`ENVIRONMENT_DESKTOP`)
 
-Betriebssystemebene – Cursorbefehle für Desktopumgebungen:
+桌面环境操作系统级光标命令：
 
-| Befehlsname | Beschreibung | Argumente (im Funktionsaufruf) |
+| 命令名称 | 说明 | 实参（在函数调用中） |
 | --- | --- | --- |
-| **click** | Linksklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **double\_click** | Doppelklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **triple\_click** | Dreifachklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **middle\_click** | Mit der mittleren Maustaste auf die Koordinate klicken. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **right\_click** | Rechtsklicks an der Koordinate. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **mouse\_down** | Drückt die Maustaste an der Koordinate und hält sie gedrückt. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **mouse\_up** | Lässt die Maustaste an der Koordinate los. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **move** | Verschiebt den Cursor an die angegebene Position. | `y`: int (0–999) `x`: int (0–999) `intent`: str |
-| **type** | Text eingeben | `text`: str `press_enter`: bool (optional, Standardwert: `false`) `intent`: str |
-| **drag\_and\_drop** | Zieht ein Element von der Startkoordinate zur Endkoordinate. | `start_y`: int (0–999) `start_x`: int (0–999) `end_y`: int (0–999) `end_x`: int (0–999) `intent`: str |
-| **wait** | Hält die Ausführung für eine bestimmte Anzahl von Sekunden an. | `seconds`: int (optional, Standardwert: `1`) `intent`: str |
-| **press\_key** | Drückt die angegebene Taste und lässt sie wieder los. | `key`: str `intent`: str |
-| **key\_down** | Drückt und hält die angegebene Taste. | `key`: str `intent`: str |
-| **key\_up** | Gibt den angegebenen Schlüssel frei. | `key`: str `intent`: str |
-| **Tastenkürzel** | Drückt die angegebene Tastenkombination. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Gibt einen Screenshot des aktuellen Bildschirms zurück. | `intent`: str |
-| **scroll** | Scrollt an einer Koordinate um eine bestimmte Anzahl von Pixeln nach oben, unten, links oder rechts. | `y`: int (0–999) `x`: int (0–999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0–999, optional, Standardwert `300`) `intent`: str |
+| **click** | 在相应坐标处点击鼠标左键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **double\_click** | 在相应坐标处双击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **triple\_click** | 在相应坐标处点击三次。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **middle\_click** | 在相应坐标处点击鼠标中键。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **right\_click** | 在相应坐标处进行右键点击。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_down** | 按住相应坐标处的鼠标按钮。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_up** | 在指定坐标处释放鼠标按钮。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **move** | 将光标移动到指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **type** | 输入文字。 | `text`：str `press_enter`：bool（可选，默认值为 `false`） `intent`：str |
+| **drag\_and\_drop** | 将商品从起始坐标拖动到结束坐标。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **wait** | 暂停执行指定秒数。 | `seconds`：int（可选，默认值为 `1`） `intent`：str |
+| **press\_key** | 按下并松开指定的键。 | `key`：str `intent`：str |
+| **key\_down** | 按下并按住指定的键。 | `key`：str `intent`：str |
+| **key\_up** | 释放指定的键。 | `key`：str `intent`：str |
+| **热键** | 按下指定的组合键。 | `keys`：`List[str]` `intent`：`str` |
+| **take\_screenshot** | 返回当前屏幕的屏幕截图。 | `intent`：str |
+| **scroll** | 按像素距离在某个坐标处向上、向下、向左或向右滚动。 | `y`：int (0-999) `x`：int (0-999) `direction`：str（`"up"`、`"down"`、`"left"`、`"right"`） `magnitude_in_pixels`：int（0-999，可选，默认值为 `300`） `intent`：str |
 
-## Unterstützte Legacy-UI-Aktionen (Gemini 2.5)
+## 旧版支持的界面操作 (Gemini 2.5)
 
-Für Legacy-Modelle (`gemini-2.5-computer-use-preview-10-2025`) werden die folgenden Aktionen unterstützt:
+对于旧版模型 (`gemini-2.5-computer-use-preview-10-2025`)，支持以下操作：
 
-| Befehlsname | Beschreibung | Argumente (im Funktionsaufruf) | Beispiel für Funktionsaufruf |
+| 命令名称 | 说明 | 实参（在函数调用中） | 函数调用示例 |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Öffnet den Webbrowser. | – | `{"name": "open_web_browser", "arguments": {}}` |
-| **wait\_5\_seconds** | Pausiert die Ausführung für 5 Sekunden. | – | `{"name": "wait_5_seconds", "arguments": {}}` |
-| **go\_back** | Navigiert zur vorherigen Seite im Verlauf. | – | `{"name": "go_back", "arguments": {}}` |
-| **go\_forward** | Navigiert zur nächsten Seite im Verlauf. | – | `{"name": "go_forward", "arguments": {}}` |
-| **search** | Ruft die Standardsuchmaschine auf. | – | `{"name": "search", "arguments": {}}` |
-| **navigate** | Leitet den Browser direkt zur angegebenen URL weiter. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Klicks an einer bestimmten Koordinate. | `y`: int (0–999), `x`: int (0–999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
-| **hover\_at** | Bewegt die Maus zu einer bestimmten Koordinate. | `y`: int (0–999), `x`: int (0–999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Gibt Text an einer Koordinate ein. | `y`: int (0–999), `x`: int (0–999), `text`: str, `press_enter`: bool (optional, Standardwert: True), `clear_before_typing`: bool (optional, Standardwert: True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
-| **key\_combination** | Drücken Sie Tasten oder Tastenkombinationen. | `keys`: str | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
-| **scroll\_document** | Scrollt die gesamte Webseite. | `direction`: str | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
-| **scroll\_at** | Scrollt an der Koordinate (x,y). | `y`: int, `x`: int, `direction`: str, `magnitude`: int (optional, Standardwert: 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down"}}` |
-| **drag\_and\_drop** | Zieht zwischen zwei Koordinaten. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "arguments": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
+| **open\_web\_browser** | 打开网络浏览器。 | 无 | `{"name": "open_web_browser", "arguments": {}}` |
+| **wait\_5\_seconds** | 暂停执行 5 秒。 | 无 | `{"name": "wait_5_seconds", "arguments": {}}` |
+| **go\_back** | 前往历史记录中的上一页。 | 无 | `{"name": "go_back", "arguments": {}}` |
+| **go\_forward** | 前往历史记录中的下一页。 | 无 | `{"name": "go_forward", "arguments": {}}` |
+| **search** | 前往默认搜索引擎。 | 无 | `{"name": "search", "arguments": {}}` |
+| **navigate** | 直接将浏览器导航到指定网址。 | `url`：str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | 在特定坐标处点击。 | `y`：int (0-999)，`x`：int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
+| **hover\_at** | 将鼠标悬停在特定坐标处。 | `y`：int (0-999)，`x`：int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | 在某个坐标处输入文字。 | `y`：int (0-999)，`x`：int (0-999)，`text`：str，`press_enter`：bool（可选，默认值为 True），`clear_before_typing`：bool（可选，默认值为 True） | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
+| **key\_combination** | 按相应按键或组合键。 | `keys`：str | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
+| **scroll\_document** | 滚动浏览整个网页。 | `direction`：str | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
+| **scroll\_at** | 在坐标 (x,y) 处滚动。 | `y`：int，`x`：int，`direction`：str，`magnitude`：int（可选，默认值为 800） | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down"}}` |
+| **drag\_and\_drop** | 在两个坐标之间拖动。 | `y`：int，`x`：int，`destination_y`：int，`destination_x`：int | `{"name": "drag_and_drop", "arguments": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
 
-## Benutzerdefinierte Funktionen
+## 自定义用户定义的函数
 
-Sie können die Funktionalität des Modells erweitern, indem Sie benutzerdefinierte Funktionen einfügen. In Human-in-the-Loop-Szenarien (HITL) können Sie beispielsweise standardmäßig vordefinierte Aktionen ausschließen und benutzerdefinierte Aktionen registrieren.
+您可以通过添加自定义的用户定义的函数来扩展模型的功能。例如，在人机协同 (HITL) 场景中，您可以排除默认的预定义操作并注册自定义操作。
 
-#### Benutzerdefinierte Tools für Gemini 3.x
+#### Gemini 3.x 自定义工具
 
 ### Python
 
-Schließen Sie standardmäßige vordefinierte Browseraktionen wie `click` aus und registrieren Sie ein benutzerdefiniertes `yield_to_user`-Tool:
+排除标准预定义浏览器操作（例如 `click`），并注册自定义 `yield_to_user` 工具：
 
 ```
 from google import genai
@@ -1188,7 +1534,7 @@ interaction = client.interactions.create(
 
 ### JavaScript
 
-Schließen Sie standardmäßige vordefinierte Browseraktionen wie `click` aus und registrieren Sie ein benutzerdefiniertes `yield_to_user`-Tool:
+排除标准预定义浏览器操作（例如 `click`），并注册自定义 `yield_to_user` 工具：
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1282,7 +1628,62 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-#### Benutzerdefinierte Tools für Gemini 2.5 (Legacy)
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    yieldToUserTool := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("yield_to_user"),
+        Description: genai.Ptr("Yields control back to the user for assistance or verification when an automated action is unsafe or ambiguous."),
+        Parameters: map[string]any{
+            "type": "object",
+            "properties": map[string]any{
+                "reason": map[string]any{
+                    "type":        "string",
+                    "description": "The reason why the agent is yielding control to the human.",
+                },
+            },
+            "required": []string{"reason"},
+        },
+    })
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Click the submit button. If you need a second factor authentication code, ask me."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment:                 interactions.EnvironmentEnumMobile.ToPointer(),
+                    ExcludedPredefinedFunctions: []string{"click"},
+                }),
+                yieldToUserTool,
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+#### Gemini 2.5（旧版）自定义工具
 
 ### Python
 
@@ -1417,29 +1818,91 @@ Interaction interaction =
 System.out.println(interaction);
 ```
 
-## Denkaufwand verwalten (Gemini 3.x)
+### Go
 
-Für Computer-Nutzungs-Agents können Sie verschiedene Denkebenen konfigurieren, um ein Gleichgewicht zwischen der Qualität der Aktionen und der Ausführungsgeschwindigkeit zu schaffen. Bei niedrigeren Denkebenen wird in der Regel ein gutes Gleichgewicht für Standardautomatisierungsaufgaben erreicht.
+```
+package main
 
-## Sicherheit
+import (
+    "context"
+    "fmt"
+    "log"
 
-### Sicherheitsrichtlinien konfigurieren (Gemini 3.x)
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-Gemini 3.x-Modelle enthalten integrierte Sicherheitsdienstkategorien, die automatisch festlegen, ob eine Nutzerbestätigung erforderlich ist.
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-| Kategorie der Sicherheitsrichtlinie | Beschreibung |
+    // Define custom tools here
+    customFunction := interactions.NewTool(interactions.Function{
+        Name:        genai.Ptr("long_press_at"),
+        Description: genai.Ptr("Long-press at specified coordinates."),
+    })
+
+    excludedFunctions := []string{
+        "open_web_browser",
+        "wait_5_seconds",
+        "go_back",
+        "go_forward",
+        "search",
+        "navigate",
+        "hover_at",
+        "scroll_document",
+        "key_combination",
+        "drag_and_drop",
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-2.5-computer-use-preview-10-2025"),
+            Input: interactions.NewInteractionsInput("Open Chrome, then long-press at 200,400."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment:                 interactions.EnvironmentEnumBrowser.ToPointer(),
+                    ExcludedPredefinedFunctions: excludedFunctions,
+                }),
+                customFunction,
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println(res.Interaction)
+}
+```
+
+## 管理思考等级 (Gemini 3.x)
+
+对于计算机使用代理，您可以配置不同的思考级别，以平衡行动质量和执行速度。较低的思考水平通常可以在标准自动化任务中实现良好的平衡。
+
+## 安全
+
+### 配置安全政策 (Gemini 3.x)
+
+Gemini 3.x 模型包含内置的安全服务类别，可自动确定是否需要用户确认。
+
+| 安全政策类别 | 说明 |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | Blockiert oder löst die Bestätigung für Aktionen aus, die Zahlungen, den Einzelhandelskauf oder regulierte Waren betreffen. |
-| `SENSITIVE_DATA_MODIFICATION` | Schützt Gesundheits-, Finanz- oder Behördendaten vor unbefugten Änderungen. |
-| `COMMUNICATION_TOOL` | Verhindert, dass der KI-Agent selbstständig E‑Mails, Chatnachrichten oder Entwürfe sendet. |
-| `ACCOUNT_CREATION` | Verhindert, dass der Agent selbstständig neue Konten auf Websites registriert. |
-| `DATA_MODIFICATION` | Regelt allgemeine Änderungen am Dateisystem, die gemeinsame Nutzung von Daten und das Löschen von Speicher. |
-| `USER_CONSENT_MANAGEMENT` | Erfordert die Übernahme der Nutzersteuerung für Cookie-Einwilligungsbanner und Datenschutzhinweise. |
-| `LEGAL_TERMS_AND_AGREEMENTS` | Verhindert, dass das Modell selbstständig Nutzungsbedingungen oder rechtsverbindliche Verträge akzeptiert. |
+| `FINANCIAL_TRANSACTIONS` | 阻止或触发涉及付款、零售结账或管制商品的交易的确认。 |
+| `SENSITIVE_DATA_MODIFICATION` | 保护健康记录、财务记录或政府记录免遭未经授权的修改。 |
+| `COMMUNICATION_TOOL` | 限制代理自主发送电子邮件、聊天消息或草稿。 |
+| `ACCOUNT_CREATION` | 限制代理在网站上自主注册新账号。 |
+| `DATA_MODIFICATION` | 用于规范整体文件系统修改、数据共享和存储删除。 |
+| `USER_CONSENT_MANAGEMENT` | 需要用户接管 Cookie 意见征求横幅和隐私权提示。 |
+| `LEGAL_TERMS_AND_AGREEMENTS` | 防止模型自主接受服务条款或具有法律约束力的合同。 |
 
-#### Sicherheitsüberschreibungen
+#### 安全替换项
 
-Sie können ausgewählte Richtlinien überschreiben, indem Sie Überschreibungen übergeben:
+您可以通过传递替换项来替换所选政策：
 
 ### Python
 
@@ -1517,13 +1980,54 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Erkennung von Prompt Injection (Gemini 3.x)
+### Go
 
-Die Computerverwendung für Gemini 3.5 Flash oder höher unterstützt einen erweiterten Sicherheitsmechanismus zur Erkennung von Prompt-Injection-Angriffen. Wenn diese Funktion aktiviert ist, wird geprüft, ob ein enthaltener Screenshot verborgene gegnerische Anweisungen enthält (z. B. „Vorherige Befehle ignorieren“). Wenn solche Anweisungen erkannt werden, wird die Ausführung blockiert.
+```
+package main
 
-Die Erkennung von Prompt Injection ist eine optionale Funktion. Der Standardwert ist `false`.
+import (
+    "context"
+    "log"
 
-Die folgenden Beispiele zeigen, wie Sie die Erkennung von Prompt-Injection in der Konfiguration Ihres Tools für die Computernutzung aktivieren:
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Clean up the local folder by archiving old logs."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment: interactions.EnvironmentEnumDesktop.ToPointer(),
+                    DisabledSafetyPolicies: []interactions.DisabledSafetyPolicy{
+                        interactions.DisabledSafetyPolicyDataModification,
+                    },
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+### 提示注入检测 (Gemini 3.x)
+
+使用 Gemini 3.5 Flash 或更高版本的电脑支持高级安全机制，可检测提示注入攻击。启用后，此功能会检查所添加的屏幕截图中是否包含隐藏的对抗性指令（例如“忽略之前的命令”），并在检测到时阻止执行。
+
+提示注入检测是一项可选功能。默认值为 `false`。
+
+以下示例演示了如何在“计算机使用”工具配置中启用提示注入检测功能：
 
 ### Python
 
@@ -1595,6 +2099,45 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.5-flash"),
+            Input: interactions.NewInteractionsInput("Search for flight deals and summarize top results."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment:                    interactions.EnvironmentEnumDesktop.ToPointer(),
+                    EnablePromptInjectionDetection: genai.Ptr(true),
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### cURL
 
 ```
@@ -1613,9 +2156,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI
 }'
 ```
 
-### Sicherheitsentscheidung bestätigen
+### 确认安全决定
 
-Die Antwort kann einen `safety_decision`-Parameter in den Funktionsaufrufargumenten enthalten:
+响应可能在函数调用实参中包含 `safety_decision` 参数：
 
 ```
 {
@@ -1636,7 +2179,7 @@ Die Antwort kann einen `safety_decision`-Parameter in den Funktionsaufrufargumen
 }
 ```
 
-Wenn `safety_decision` gleich `require_confirmation` ist, weisen Sie den Endnutzer darauf hin. Wenn der Nutzer dies bestätigt, legen Sie `safety_acknowledgement` in `function_result` fest.
+如果 `safety_decision` 为 `require_confirmation`，则提示最终用户。如果用户确认，则在 `function_result` 中设置 `safety_acknowledgement`。
 
 ### Python
 
@@ -1655,13 +2198,13 @@ if 'safety_decision' in function_call.arguments:
     action_result["safety_acknowledgement"] = True
 ```
 
-### Best Practices für die Sicherheit
+### 有关安全的最佳实践
 
-Die Computerverwendung birgt einzigartige Sicherheits- und Betriebsrisiken, da ein Modell, das im Namen eines Nutzers agiert, auf Bildschirmen auf nicht vertrauenswürdige Inhalte stoßen oder Fehler bei der Ausführung von Aktionen machen kann. Implementieren Sie die folgenden Best Practices, um Nutzerdaten und Systeme zu schützen:
+计算机使用会带来独特的安全和运营风险，因为代表用户操作的模型可能会在屏幕上遇到不受信任的内容，或者在执行操作时出错。实施以下最佳实践，以保护用户数据和系统：
 
-1. **Human-in-the-Loop (HITL)**
-   :- **Nutzerbestätigung erzwingen**:Wenn die Sicherheitsantwort `require_confirmation` angibt (oder die alte Sicherheitsentscheidung dies erfordert), fordern Sie den Nutzer zur Genehmigung auf.
-   - **Benutzerdefinierte Sicherheitshinweise bereitstellen**:Implementieren Sie eine benutzerdefinierte Systemanweisung, um Ihre eigenen Sicherheitsgrenzen zu definieren und zu erzwingen. Beispiel:
+1. **人机协同 (HITL)**：
+   - **强制执行用户确认**：当安全响应指示 `require_confirmation`（或旧版安全决策要求这样做）时，提示用户进行审批。
+   - **提供自定义安全指令**：实现自定义系统指令，以定义和强制执行您自己的安全边界。例如：
 
      ### Python
 
@@ -1877,7 +2420,7 @@ Die Computerverwendung birgt einzigartige Sicherheits- und Betriebsrisiken, da e
 
 ### Java
 
-`` java
+```
 import com.google.genai.Client;
 import com.google.genai.gaos.models.interactions.ComputerUse;
 import com.google.genai.gaos.models.interactions.CreateModelInteraction;
@@ -1886,60 +2429,112 @@ import com.google.genai.gaos.models.interactions.Interaction;
 import com.google.genai.gaos.models.interactions.InteractionsInput;
 import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
 import java.util.Arrays;
+
 Client client = new Client();
+
 String systemInstruction =
-"## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**\n\n"
-+ "This is your first and most important check. If the next required action falls "
-+ "into any of the following categories, you MUST stop immediately, and seek the "
-+ "user's explicit permission.\n\n"
-+ "## **RULE 2: Default Behavior (ACTUATE)**\n\n"
-+ "If an action does **NOT** fall under the conditions for `USER_CONFIRMATION`, "
-+ "your default behavior is to **Actuate**.";
+    "## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**\n\n"
+        + "This is your first and most important check. If the next required action falls "
+        + "into any of the following categories, you MUST stop immediately, and seek the "
+        + "user's explicit permission.\n\n"
+        + "## **RULE 2: Default Behavior (ACTUATE)**\n\n"
+        + "If an action does **NOT** fall under the conditions for `USER_CONFIRMATION`, "
+        + "your default behavior is to **Actuate**.";
+
 CreateModelInteraction params =
-CreateModelInteraction.builder()
-.model("gemini-3.8-flash")
-.systemInstruction(systemInstruction)
-.input(InteractionsInput.of("Prepare a draft but do not send."))
-.tools(
-Arrays.asList(
-ComputerUse.builder().environment(EnvironmentEnum.BROWSER).build()))
-.build();
+    CreateModelInteraction.builder()
+        .model("gemini-3.8-flash")
+        .systemInstruction(systemInstruction)
+        .input(InteractionsInput.of("Prepare a draft but do not send."))
+        .tools(
+            Arrays.asList(
+                ComputerUse.builder().environment(EnvironmentEnum.BROWSER).build()))
+        .build();
+
 Interaction interaction =
-client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get(); ``
+    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+```
 
-1. **Sichere Ausführungsumgebung**:Führen Sie Ihren Agent in einer sicheren Sandbox-Umgebung aus, um seine potenziellen Auswirkungen zu begrenzen. Das kann eine Sandbox-VM, ein Container (z.B. Docker) oder ein dediziertes Browserprofil mit eingeschränkten Berechtigungen sein. Eine Anleitung zum Einrichten einer Sandbox mit Docker finden Sie in der [GitHub-Referenzimplementierung](https://github.com/google/computer-use-preview/).
-2. **Eingabebereinigung**:Bereinigen Sie alle von Nutzern generierten Texte in Prompts, um das Risiko unbeabsichtigter Anweisungen oder Prompt-Injection zu minimieren. Dies ist eine hilfreiche Sicherheitsebene, aber kein Ersatz für eine sichere Ausführungsumgebung.
-3. **Inhalts-Guardrails**:Verwenden Sie Guardrails und APIs für die Inhaltssicherheit, um Nutzereingaben, Tool-Ein- und ‑Ausgaben sowie die Antworten des Agents auf Angemessenheit, Prompt Injection und Jailbreak-Erkennung zu prüfen.
-4. **Zulassungs- und Sperrlisten**:Implementieren Sie Filtermechanismen, um zu steuern, wohin das Modell navigieren und was es tun kann. Eine Sperrliste mit verbotenen Websites ist ein guter Ausgangspunkt. Eine restriktivere Zulassungsliste ist noch sicherer.
-5. **Beobachtbarkeit und Protokollierung**:Detaillierte Logs für das Debugging, die Prüfung und die Incident Response führen. Ihr Kunde sollte Prompts, Screenshots, vom Modell vorgeschlagene Aktionen (`function_call`), Sicherheitsantworten und alle Aktionen protokollieren, die letztendlich vom Client ausgeführt werden.
-6. **Umgebungsverwaltung**:Sorgen Sie für eine konsistente GUI-Umgebung.
-   Unerwartete Pop-ups, Benachrichtigungen oder Änderungen im Layout können das Modell verwirren. Beginnen Sie nach Möglichkeit jede neue Aufgabe mit einem bekannten, sauberen Zustand.
+### Go
 
-## Modellversionen
+```
+package main
 
-Sie können die Funktion „Computer Use“ mit den folgenden Modellen verwenden:
+import (
+    "context"
+    "log"
 
-- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=de) (`gemini-3.8-flash`): Das empfohlene Modell für die Computernutzung mit hochpräziser UI-Interaktion und zuverlässigem Tool-Aufruf.
-- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=de) (`gemini-3.7-flash`): Das bisherige stabile Modell für die Computernutzung mit optimierten Aktionen mit Intents, Unterstützung für Browser-, Mobilgeräte- und Desktopumgebungen, konfigurierbaren Sicherheitsrichtlinien und Erkennung von Prompt-Injection.
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de) (`gemini-3.5-flash-lite`): Ein kostengünstiges Modell mit niedriger Latenz, das die Computernutzung unterstützt.
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=de) (`gemini-3.5-flash`): Das bisherige stabile Modell, das die Nutzung auf Computern unterstützt.
-- [**Gemini 3 Flash (Vorabversion)**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) (`gemini-3-flash-preview`): Vorabversion des Modells, das die Nutzung von Computern unterstützt.
-- [**Gemini 2.5 (Legacy-Vorabversion)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=de) (`gemini-2.5-computer-use-preview-10-2025`): Legacy-Vorabversion, die für die browserbasierte Computernutzung optimiert ist.
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-## Nächste Schritte
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-- Testen Sie die Funktion „Computer Use“ in der [Browserbase-Demo-Umgebung](http://gemini.browserbase.com).
-- Beispielcode finden Sie in der [Referenzimplementierung](https://github.com/google/computer-use-preview).
-- Weitere Informationen zu anderen Gemini API-Tools:
-  - [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)
-  - [Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de)
+    systemInstruction := "## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**\n\n" +
+        "This is your first and most important check. If the next required action falls " +
+        "into any of the following categories, you MUST stop immediately, and seek the " +
+        "user's explicit permission.\n\n" +
+        "## **RULE 2: Default Behavior (ACTUATE)**\n\n" +
+        "If an action does **NOT** fall under the conditions for `USER_CONFIRMATION`, " +
+        "your default behavior is to **Actuate**."
 
-Feedback geben
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:             interactions.Model("gemini-3.8-flash"),
+            SystemInstruction: genai.Ptr(systemInstruction),
+            Input:             interactions.NewInteractionsInput("Prepare a draft but do not send."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.ComputerUse{
+                    Environment: interactions.EnvironmentEnumBrowser.ToPointer(),
+                }),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+1. **安全执行环境**：在安全的沙盒环境中运行代理，以限制其潜在影响。这可以是沙盒化的虚拟机 (VM)、容器（例如 Docker），也可以是权限有限的专用浏览器个人资料。如需查看使用 Docker 的沙盒设置指南，请参阅 [GitHub 参考实现](https://github.com/google/computer-use-preview/)。
+2. **输入净化**：净化提示中的所有用户生成的文本，以降低意外指令或提示注入的风险。这是一个有用的安全层，但不能替代安全执行环境。
+3. **内容安全措施**：使用安全措施和内容安全 API 来评估用户输入、工具输入和输出以及代理的回答是否合适，并检测提示注入和越狱攻击。
+4. **许可名单和屏蔽名单**：实现过滤机制，以控制模型可以访问的网站以及可以执行的操作。禁止访问的网站的屏蔽名单是一个不错的起点，而限制性更强的许可名单则更加安全。
+5. **可观测性和日志记录**：维护详细的日志，以便进行调试、审核和突发事件响应。客户端应记录提示、屏幕截图、模型建议的操作 (`function_call`)、安全响应以及客户端最终执行的所有操作。
+6. **环境管理**：确保 GUI 环境保持一致。
+   意外的弹出式窗口、通知或布局变化可能会让模型感到困惑。尽可能从已知干净状态开始执行每个新任务。
 
-Zuletzt aktualisiert: 2026-09-18 (UTC).
+## 模型版本
 
-Haben Sie Feedback für uns?
+您可以在以下模型上使用“计算机使用”工具：
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-18 (UTC)."],[],[]]
+- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-cn) (`gemini-3.8-flash`)：推荐用于电脑，具有高准确度的界面互动和可靠的工具调用功能。
+- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=zh-cn) (`gemini-3.7-flash`)：之前的稳定版模型，适用于计算机使用，具有精简的意图操作、支持浏览器、移动设备和桌面环境、可配置的安全政策以及提示注入检测功能。
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) (`gemini-3.5-flash-lite`)：一款低延迟、高性价比的模型，支持在电脑上使用。
+- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) (`gemini-3.5-flash`)：之前支持电脑使用的稳定版模型。
+- [**Gemini 3 Flash 预览版**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) (`gemini-3-flash-preview`)：支持在电脑上使用的预览版模型。
+- [**Gemini 2.5（旧版预览版）**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=zh-cn)(`gemini-2.5-computer-use-preview-10-2025`)：针对基于浏览器的计算机使用场景优化的旧版预览模型。
+
+## 后续步骤
+
+- 在 [Browserbase 演示环境中](http://gemini.browserbase.com)尝试使用计算机。
+- 如需查看示例代码，请参阅[参考实现](https://github.com/google/computer-use-preview)。
+- 了解其他 Gemini API 工具：
+  - [函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)
+  - [使用 Google 搜索建立依据](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)
+
+发送反馈
+
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+
+最后更新时间 (UTC)：2026-09-24。
+
+需要向我们提供更多信息？
+
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

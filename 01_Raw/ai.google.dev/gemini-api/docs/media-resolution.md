@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=he
-fetched_at: 2026-09-21T05:56:21.930642+00:00
-title: "\u05e8\u05d6\u05d5\u05dc\u05d5\u05e6\u05d9\u05d9\u05ea \u05d4\u05de\u05d3\u05d9\u05d4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja
+fetched_at: 2026-09-28T06:13:05.573560+00:00
+title: "\u30e1\u30c7\u30a3\u30a2\u306e\u89e3\u50cf\u5ea6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-שליחת משוב
+フィードバックを送信
 
-# רזולוציית המדיה
+# メディアの解像度
 
-הפרמטר `media_resolution` קובע איך Gemini API מעבד קלט של מדיה, כמו תמונות, סרטונים, אודיו ומסמכי PDF, על ידי קביעת **מספר הטוקנים המקסימלי** שמוקצה לקלט של מדיה. כך אפשר לאזן בין איכות התשובה לבין זמן האחזור והעלות. בעוד שהקצאת הטוקנים בקלט של תמונות ומסמכים מותאמת להגדרת הרזולוציה, קלט של אודיו עובר טוקניזציה בקצב קבוע לשנייה בכל רמות הרזולוציה. בקטע [ספירת טוקנים](#token-counts) מפורטים ערכי ברירת המחדל של הגדרות שונות וההתאמה שלהם לטוקנים.
+`media_resolution` パラメータは、メディア入力に割り当てられる**トークンの最大数**を決定することで、Gemini API が画像、動画、音声、PDF ドキュメントなどのメディア入力を処理する方法を制御します。これにより、レスポンスの品質とレイテンシ、費用を調整できます。画像入力とドキュメント入力では、解像度の設定に基づいてトークンの割り当てがスケーリングされますが、音声入力はすべての解像度レベルで 1 秒あたりの固定レートでトークン化されます。さまざまな設定、デフォルト値、トークンとの対応については、[トークン数](#token-counts)セクションをご覧ください。
 
-אתם יכולים להגדיר את רזולוציית המדיה לאובייקטים נפרדים של מדיה (פריטי תוכן) בבקשה (רק ב-Gemini 3).
+リクエスト内の個々のメディア オブジェクト（コンテンツ アイテム）のメディア解像度を設定できます（Gemini 3 のみ）。
 
-## רזולוציית מדיה לכל פריט תוכן (Gemini 3 בלבד)
+## コンテンツ アイテムごとのメディア解像度（Gemini 3 のみ）
 
-‫Gemini 3 מאפשר לכם להגדיר רזולוציית מדיה לאובייקטים ספציפיים של מדיה בבקשה, וכך לבצע אופטימיזציה פרטנית של השימוש בטוקנים. אפשר לשלב רמות רזולוציה שונות בבקשה אחת. לדוגמה, שימוש ברזולוציה גבוהה לתרשים מורכב וברזולוציה נמוכה לתמונה פשוטה שמוסיפה הקשר.
+Gemini 3 では、リクエスト内の個々のメディア オブジェクトのメディア解像度を設定できるため、トークン使用量をきめ細かく最適化できます。1 つのリクエストで解像度レベルを混在させることができます。たとえば、複雑な図には高解像度を使用し、シンプルなコンテキスト画像には低解像度を使用します。
 
 ### Python
 
@@ -120,6 +120,57 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    uploadedFile, err := client.Files.UploadFromPath(ctx, "path/to/image.jpg", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Describe the details in this high-resolution image.",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    URI:        genai.Ptr(uploadedFile.URI),
+                    MimeType:   interactions.ImageContentMimeType(uploadedFile.MIMEType).ToPointer(),
+                    Resolution: interactions.MediaResolutionHigh.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -141,81 +192,81 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ערכי הרזולוציה הזמינים
+## 使用可能な解決策の値
 
-ב-Gemini API מוגדרות רמות הרזולוציה הבאות של מדיה:
+Gemini API は、メディアの解像度に対して次のレベルを定義します。
 
-- ‫`unspecified`: הגדרת ברירת המחדל. מספר הטוקנים ברמה הזו משתנה באופן משמעותי בין Gemini 3 לבין מודלים קודמים של Gemini.
-- ‫`low`: מספר הטוקנים נמוך יותר, ולכן העיבוד מהיר יותר והעלות נמוכה יותר, אבל יש פחות פרטים.
-- ‫`medium`: איזון בין רמת הפירוט, העלות וזמן האחזור.
-- ‫`high`: מספר גבוה יותר של טוקנים, שמספק למודל יותר פרטים לעבודה, אבל על חשבון עלות גבוהה יותר וזמן אחזור ארוך יותר.
-- ‫`ultra_high` (לכל פריט תוכן בלבד): כמות הטוקנים הגבוהה ביותר, נדרש לתרחישי שימוש ספציפיים כמו [שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he).
+- `unspecified`: デフォルト設定。このレベルのトークン数は、Gemini 3 とそれ以前の Gemini モデルで大きく異なります。
+- `low`: トークン数が減り、処理が高速化され、コストが削減されますが、詳細が少なくなります。
+- `medium`: 詳細、費用、レイテンシのバランス。
+- `high`: トークン数が多いほど、モデルが処理する詳細が増えますが、レイテンシと費用が増加します。
+- `ultra_high`（コンテンツ アイテムごと）: トークン数が最も多く、[パソコンの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)などの特定のユースケースで必要です。
 
-חשוב לזכור שההגדרה `high` מספקת את הביצועים האופטימליים ברוב תרחישי השימוש.
+`high` は、ほとんどのユースケースで最適なパフォーマンスを提供します。
 
-המספר המדויק של הטוקנים שנוצרים בכל אחת מהרמות האלה תלוי ב**סוג המדיה** (תמונה, סרטון, אודיו, PDF) וב**גרסת המודל**.
+これらの各レベルで生成されるトークンの正確な数は、**メディアタイプ**（画像、動画、音声、PDF）と**モデル バージョン**の両方によって異なります。
 
-## מספר הטוקנים
+## トークン数
 
-בטבלאות הבאות מפורטות ספירות האסימונים המשוערות לכל ערך של `media_resolution` ולכל סוג מדיה לכל משפחת מודלים.
+次の表は、モデル ファミリーごとに、各 `media_resolution` 値とメディアタイプのおおよそのトークン数をまとめたものです。
 
-**מודלים של Gemini 3**
+**Gemini 3 モデル**
 
-| MediaResolution | תמונה | וידאו | אודיו | PDF |
+| MediaResolution | 画像 | 動画 | 音声 | PDF |
 | --- | --- | --- | --- | --- |
-| ‫`unspecified` (ברירת מחדל) | 1120 | 70 | ‫25 (לשנייה) | 560 |
-| `low` | 280 | 70 | ‫25 (לשנייה) | ‫280 + טקסט חי |
-| `medium` | 560 | 70 | ‫25 (לשנייה) | ‫560 + טקסט חי |
-| `high` | 1120 | 280 | ‫25 (לשנייה) | ‫1120 + טקסט חי |
-| `ultra_high` | 2240 | לא רלוונטי | לא רלוונטי | לא רלוונטי |
+| `unspecified`（デフォルト） | 1120 | 70 | 25（1 秒あたり） | 560 |
+| `low` | 280 | 70 | 25（1 秒あたり） | 280 + ネイティブ テキスト |
+| `medium` | 560 | 70 | 25（1 秒あたり） | 560 + ネイティブ テキスト |
+| `high` | 1120 | 280 | 25（1 秒あたり） | 1120 + ネイティブ テキスト |
+| `ultra_high` | 2240 | なし | 該当なし | なし |
 
-## בחירת הרזולוציה המתאימה
+## 適切な解決策の選択
 
-- **ברירת מחדל (`unspecified`):** מתחילים עם ברירת המחדל. הוא מותאם לאיזון טוב בין איכות, זמן אחזור ועלות ברוב תרחישי השימוש הנפוצים.
-- ‫**`low`:** מתאים לתרחישים שבהם העלות והחביון הם בעלי חשיבות עליונה, ופרטים מדויקים פחות קריטיים.
-- ‫**`medium` / `high`:** הגדלת הרזולוציה כשנדרשת הבנה של פרטים מורכבים במדיה. היכולת הזו נדרשת לעיתים קרובות לניתוח חזותי מורכב, לקריאת תרשימים או להבנת מסמכים עמוסים במידע.
-- ‫**`ultra_high`** – זמין רק להגדרה של כל פריט תוכן. מומלץ לתרחישי שימוש ספציפיים, כמו שימוש במחשב, או במקרים שבהם בדיקות מראות שיפור ברור לעומת `high`.
-- **שליטה בכל פריט תוכן (Gemini 3):** אופטימיזציה של השימוש בטוקנים. לדוגמה, בהנחיה עם כמה תמונות, אפשר להשתמש ב-`high` לדיאגרמה מורכבת וב-`low` או ב-`medium` לתמונות פשוטות יותר שמוצגות בהקשר.
+- **デフォルト（`unspecified`）:** デフォルトから開始します。最も一般的なユースケースで品質、レイテンシ、費用のバランスが取れるように調整されています。
+- **`low`:** 費用とレイテンシが最優先で、詳細な粒度が重要でないシナリオで使用します。
+- **`medium` / `high`:** メディア内の複雑な詳細を理解する必要があるタスクでは、解像度を上げます。これは、複雑な視覚分析、グラフの読み取り、密度の高いドキュメントの理解に必要になることがよくあります。
+- **`ultra_high`** - コンテンツ アイテムごとの設定でのみ使用できます。パソコンの使用など、特定のユースケースや、テストで `high` よりも明確な改善が見られる場合に推奨されます。
+- **コンテンツ アイテムごとの制御（Gemini 3）:** トークンの使用量を最適化します。たとえば、複数の画像を含むプロンプトでは、複雑な図には `high` を使用し、シンプルなコンテキスト画像には `low` または `medium` を使用します。
 
-**הגדרות מומלצות**
+**推奨設定**
 
-ברשימה הבאה מפורטות הגדרות הרזולוציה המומלצות של המדיה לכל סוג מדיה נתמך.
+以下に、サポートされているメディアの種類ごとに推奨されるメディア解像度設定を示します。
 
-| סוג מדיה | הגדרה מומלצת | מספר הטוקנים המקסימלי | הנחיות לשימוש |
+| メディアタイプ | 推奨される設定 | 最大トークン数 | 使用ガイダンス |
 | --- | --- | --- | --- |
-| **תמונות** | `high` | 1120 | מומלץ לרוב משימות ניתוח התמונות כדי להבטיח איכות מקסימלית. |
-| **קובצי PDF** | `medium` | 560 | אופטימלי להבנת מסמכים. האיכות מגיעה בדרך כלל לנקודת רוויה ב-`medium`. הגדלה ל-`high` משפרת לעיתים רחוקות את תוצאות ה-OCR במסמכים רגילים. |
-| **סרטון** (כללי) | `low` (או `medium`) | ‫70 (לכל פריים) | **הערה:** כשמדובר בסרטונים, ההגדרות `low` ו-`medium` מטופלות באופן זהה (70 טוקנים) כדי לייעל את השימוש בהקשר. זה מספיק לרוב המשימות של זיהוי פעולות ותיאור. |
-| **סרטון** (עם הרבה טקסט) | `high` | ‫280 (לכל פריים) | נדרש רק אם תרחיש השימוש כולל קריאה של טקסט צפוף (OCR) או פרטים קטנים בתוך פריים של סרטון. |
-| **אודיו** | ‫`unspecified` (ברירת מחדל) | ‫25 (לשנייה) | האודיו עובר טוקניזציה בקצב קבוע של 25 טוקנים לשנייה בכל הגדרות הרזולוציה הנתמכות (`unspecified`, ‏`low`, ‏`medium` ו-`high`). |
+| **画像** | `high` | 1120 | 品質を最大限に高めるため、ほとんどの画像分析タスクに推奨されます。 |
+| **PDF** | `medium` | 560 | ドキュメントの理解に最適です。通常、品質は `medium` で飽和します。`high` に増やしても、標準的なドキュメントの OCR 結果が改善されることはほとんどありません。 |
+| **動画**（一般） | `low`（または `medium`） | 70（フレームあたり） | **注:** 動画の場合、コンテキストの使用を最適化するために、`low` と `medium` の設定は同じ（70 個のトークン）として扱われます。ほとんどのアクション認識と説明のタスクでは、これで十分です。 |
+| **動画**（テキストが多い） | `high` | 280（フレームあたり） | ユースケースで密度の高いテキスト（OCR）や動画フレーム内の細部を読み取る場合にのみ必要です。 |
+| **音声** | `unspecified`（デフォルト） | 25（1 秒あたり） | 音声は、サポートされているすべての解像度設定（`unspecified`、`low`、`medium`、`high`）で、1 秒あたり 25 トークンの固定レートでトークン化されます。 |
 
-חשוב תמיד לבדוק ולהעריך את ההשפעה של הגדרות רזולוציה שונות על האפליקציה, כדי למצוא את האיזון הטוב ביותר בין איכות, זמן אחזור ועלות.
+さまざまな解像度設定がアプリケーションに与える影響を常にテストして評価し、品質、レイテンシ、費用の最適なトレードオフを見つけてください。
 
-## הקשר בין מצבי העיבוד של הסרטון
+## 動画処理モードとの関係
 
-הפרמטרים של `media_resolution` ושל העיבוד שולטים בהיבטים שונים של קלט הווידאו:
+`media_resolution` パラメータと処理パラメータは、動画入力のさまざまな側面を制御します。
 
-- ‫`media_resolution` שולט ב**רזולוציה** של כל פריים (מספר הטוקנים לכל פריים).
-- ‫`processing` / `media_processing` קובעים **איזה תוכן מהסרטון** ייטען בהקשר.
+- `media_resolution` は各フレームの**解像度**（フレームあたりのトークン数）を制御します。
+- `processing` / `media_processing` は、**動画のどのコンテンツ**がコンテキストに読み込まれるかを制御します。
 
-אפשר להגדיר את שניהם באותו קלט וידאו. לדוגמה, אפשר להשתמש בעיבוד מבוסס-סוכן עם רזולוציית מדיה נמוכה כדי למזער את השימוש הכולל בטוקנים בסרטון ארוך.
+同じ動画入力に両方を設定できます。たとえば、メディアの解像度を低くしてエージェント処理を使用すると、長い動画の合計トークン使用量を最小限に抑えることができます。
 
-פרטים על מצבי עיבוד של סרטונים זמינים במדריך [הבנת סרטונים באמצעות AI](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#agentic-video-understanding).
+動画処理モードの詳細については、[エージェント動画理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#agentic-video-understanding)ガイドをご覧ください。
 
-## סיכום תאימות הגרסה
+## バージョンの互換性の概要
 
-- ההגדרה `resolution` בפריטי תוכן ספציפיים **זמינה רק במודלים של Gemini 3**.
+- 個々のコンテンツ アイテムに `resolution` を設定できるのは、**Gemini 3 モデルのみ**です。
 
-## השלבים הבאים
+## 次のステップ
 
-- במדריכים [הבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he), [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he), [הבנת אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[הבנת מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he) אפשר לקרוא מידע נוסף על היכולות המולטי-מודאליות של Gemini API.
+- Gemini API のマルチモーダル機能の詳細については、[画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画の理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声の理解](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメントの理解](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)のガイドをご覧ください。
 
-שליחת משוב
+フィードバックを送信
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-עדכון אחרון: 2026-09-19 (שעון UTC).
+最終更新日 2026-09-24 UTC。
 
-רוצה לתת לנו משוב?
+ご意見をお聞かせください
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-19 (שעון UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

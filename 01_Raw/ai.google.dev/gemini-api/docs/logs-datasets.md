@@ -1,43 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=he
-fetched_at: 2026-09-21T05:56:38.227930+00:00
-title: "\u05d9\u05d5\u05de\u05e0\u05d9\u05dd \u05d5\u05de\u05e2\u05e8\u05db\u05d9 \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=th
+fetched_at: 2026-09-28T06:26:02.407447+00:00
+title: "\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e41\u0e25\u0e30\u0e0a\u0e38\u0e14\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-# יומנים ומערכי נתונים
+# บันทึกและชุดข้อมูล
 
-במדריך הזה נסביר איך לצפות ביומנים של השימוש ב-Gemini API בלוח הבקרה של Google AI Studio, כדי להבין טוב יותר את התנהגות המודל ואת האינטראקציות של המשתמשים עם האפליקציות שלכם. אפשר להשתמש ברישום ביומן כדי לצפות, לנפות באגים ו*לשתף משוב על השימוש עם Google כדי לעזור לשפר את Gemini בתרחישי שימוש שונים של מפתחים*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=he)
+ในคู่มือนี้ คุณจะได้เรียนรู้วิธี
+ดูบันทึกจากการใช้งาน Gemini API ในแดชบอร์ด Google AI Studio
+เพื่อให้เข้าใจพฤติกรรมของโมเดลได้ดียิ่งขึ้น และวิธีที่ผู้ใช้อาจโต้ตอบกับแอปพลิเคชันของคุณ ใช้การบันทึกเพื่อสังเกต แก้ไขข้อบกพร่อง และ*แชร์ความคิดเห็นเกี่ยวกับการใช้งานกับ Google (ไม่บังคับ) เพื่อช่วยปรับปรุง Gemini ในกรณีการใช้งานของนักพัฒนาซอฟต์แวร์*[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=th)
 
-כל הקריאות ל-API של `GenerateContent`,‏ `BatchGenerateContent` ו-`StreamGenerateContent`, וקריאות ל-API של [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=he), נתמכות, למעט קריאות ל-API של סוכנים מנוהלים. הם כוללים שיחות שמתבצעות דרך נקודות קצה (endpoints) של [תאימות ל-OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=he).
+ระบบรองรับการเรียก API ทั้งหมดของ `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent` และการเรียก API ของ [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th) ยกเว้น Agent ที่ได้รับการจัดการ ซึ่งรวมถึงการโทรผ่านปลายทาง[ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th)
 
-## הגדרת רישום ביומן של פרויקט
+## กำหนดค่าการบันทึกโปรเจ็กต์
 
-כברירת מחדל, ה-API שומר את כל אובייקטי האינטראקציה (`store=true`) כדי לפשט את השימוש בתכונות של ניהול מצב בצד השרת. לעומת זאת, ב-Generate Content API, הבקשות לא נשמרות כברירת מחדל, וצריך להפעיל את השמירה לכל בקשה או ברמת הפרויקט מ-AI Studio.
+โดยค่าเริ่มต้น API จะจัดเก็บออบเจ็กต์การโต้ตอบทั้งหมด (`store=true`) เพื่อ
+ลดความซับซ้อนในการใช้ฟีเจอร์การจัดการสถานะฝั่งเซิร์ฟเวอร์ ในทางตรงกันข้าม Generate Content API จะไม่จัดเก็บคำขอโดยค่าเริ่มต้น และต้องเปิดใช้พื้นที่เก็บข้อมูลต่อคำขอหรือที่ระดับโปรเจ็กต์จาก AI Studio
 
-ב-[AI Studio](https://aistudio.google.com/logs?hl=he) של Google אפשר להפעיל או להשבית את הרישום ביומן לכל הפרויקטים או לפרויקטים ספציפיים, ולשנות את ההעדפות האלה בכל שלב דרך החלונית **הגדרות** בדף [יומנים ומערכי נתונים](https://aistudio.google.com/logs?hl=he). אפשר להפעיל או להשבית את הרישום ביומן בנפרד עבור `generateContent` API ו-[Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=he) API כדי לשנות את התנהגות ברירת המחדל של האחסון בפרויקט.
+ใน [AI Studio](https://aistudio.google.com/logs?hl=th) ของ Google คุณสามารถเปิดหรือปิดใช้การบันทึกสำหรับทุกโปรเจ็กต์หรือโปรเจ็กต์ที่เฉพาะเจาะจง และเปลี่ยนค่ากำหนดเหล่านี้ได้ทุกเมื่อผ่านแผง**การตั้งค่า**ในหน้า[บันทึกและชุดข้อมูล](https://aistudio.google.com/logs?hl=th) คุณสามารถเปิดหรือปิดการบันทึก
+แยกกันสำหรับ `generateContent` API และ
+[Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th) API
+เพื่อเปลี่ยนลักษณะการทำงานของการจัดเก็บเริ่มต้นสำหรับโปรเจ็กต์
 
-### רישום ביומן ברמת הבקשה
+### การบันทึกระดับคำขอ
 
-ההתנהגות של האחסון והרישום ביומן שונה בהתאם ל-API:
+ลักษณะการทำงานของพื้นที่เก็บข้อมูลและการบันทึกจะแตกต่างกันไปตาม API ดังนี้
 
-- ‫**[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he):** מאחסן בקשות כברירת מחדל (`store=true`) כדי לפשט את ניהול המצב בצד השרת.
-- **יצירת Content API ‏ (`generateContent`):** לא שומר בקשות כברירת מחדל (`store=false`).
+- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th):** จัดเก็บคำขอโดยค่าเริ่มต้น (`store=true`) เพื่อลดความซับซ้อนในการจัดการสถานะฝั่งเซิร์ฟเวอร์
+- **สร้าง Content API (`generateContent`):** ไม่จัดเก็บคำขอโดยค่าเริ่มต้น (`store=false`)
 
-כך מגדירים את המאפיין `store`:
+วิธีตั้งค่าพร็อพเพอร์ตี้ `store` มีดังนี้
 
-‫**GenerateContent API**
+**GenerateContent API**
 
 ### Python
 
@@ -90,6 +96,40 @@ GenerateContentResponse response =
         GenerateContentConfig.builder().build());
 
 System.out.println(response.text());
+```
+
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // The GenerateContent API does not store requests by default
+    response, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-3.8-flash",
+        genai.Text("Explain quantum entanglement in simple terms."),
+        &genai.GenerateContentConfig{},
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println(response.Text())
+}
 ```
 
 **Interactions API**
@@ -151,60 +191,104 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-## צפייה ביומני הפרויקט ב-AI Studio
+### Go
 
-1. עוברים לדף 'יומנים' ב-[AI Studio](https://aistudio.google.com/logs?hl=he).
-2. בוחרים פרויקט מהתפריט הנפתח.
-3. אם יש יומנים של Interactions API, הם יופיעו בטבלה בסדר כרונולוגי הפוך.
-4. כדי לראות את יומני הפרויקט של Generate Content API, צריך קודם להפעיל את האפשרות הזו ב[חלונית ההגדרות](#configure-logging).
+```
+package main
 
-כדי לראות תצוגה מקדימה של המטען הייעודי (payload), לוחצים על רשומה. אתם יכולים לבדוק את ההנחיה המלאה ואת התשובה מ-Gemini, ואת ההקשר מהתורות הקודמות. בבקשות של **Interactions API**, היומנים כוללים גם קישור ישיר אל `previous_interaction_id`.
+import (
+    "context"
+    "fmt"
+    "log"
 
-## הגדרת תקופת השמירה של נתוני האחסון בפרויקט
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-היומנים יאבדו תוקף ויסומנו למחיקה אחרי חלון שמירה שמוגדר כברירת מחדל של 55 ימים (אלא אם [נשמרו במערך נתונים](#create), שאז הם לא יאבדו תוקף).
-אפשר להגדיר את חלון השמירה של יומני פרויקט ל-7, ל-14, ל-28 או ל-55 ימים לכל היותר.
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-## יצירה ושיתוף של מערכי נתונים
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Explain quantum entanglement in simple terms."),
+            Store: genai.Ptr(true), // Set to false to disable logging of this request
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
 
-אפשר לשמור יומנים במערכי נתונים כדי לארגן אותם ולייצא אותם בצורה יעילה יותר.
+## ดูบันทึกของโปรเจ็กต์ใน AI Studio
 
-- בדף [Logs](https://aistudio.google.com/logs?hl=he), מאתרים את סרגל הסינון בחלק העליון ובוחרים מאפיין לסינון.
-- בתצוגה המסוננת, מסמנים את התיבות כדי לבחור את כל היומנים או יומנים ספציפיים.
-- לוחצים על הלחצן **Create dataset** (יצירת מערך נתונים) שמופיע בראש הרשימה.
-- נותנים שם למערך הנתונים החדש, ואפשר גם להוסיף תיאור.
-- מערך הנתונים שיצרתם יופיע עם קבוצת היומנים שנאספו.
-- אפשר לייצא את מערך הנתונים לניתוח נוסף כקובצי CSV או JSONL, או ל-Google Sheets.
+1. ไปที่หน้าบันทึกใน [AI Studio](https://aistudio.google.com/logs?hl=th)
+2. เลือกโปรเจ็กต์จากเมนูแบบเลื่อนลง
+3. บันทึกจะปรากฏในตารางตามลำดับเวลาแบบย้อนหลังสำหรับ Interactions API หากมี
+4. หากต้องการดูบันทึกของโปรเจ็กต์สำหรับ Generate Content API ให้เปิดใช้ใน[แผงการตั้งค่า](#configure-logging)ก่อน
 
-מערכי נתונים יכולים לעזור במגוון תרחישי שימוש שונים.
+คลิกรายการเพื่อดูตัวอย่างเพย์โหลด คุณสามารถ
+ตรวจสอบพรอมต์และคำตอบทั้งหมดจาก Gemini รวมถึงบริบทจาก
+การสนทนาก่อนหน้าได้ สำหรับคำขอ **Interactions API** บันทึกจะรวมลิงก์โดยตรงไปยัง `previous_interaction_id` ด้วย
 
-- **יצירת קבוצות של אתגרים:** אתם יכולים להשתמש בנתונים כדי לשפר את התחומים שבהם אתם רוצים שה-AI ישתפר.
-- **יצירת קבוצות של דוגמאות:** לדוגמה, דוגמה משימוש אמיתי כדי ליצור תגובות ממודל אחר, או אוסף של מקרים קיצוניים לבדיקות שגרתיות לפני הפריסה.
-- **קבוצות הערכה:** קבוצות שמייצגות שימוש אמיתי ביכולות חשובות, לצורך השוואה בין מודלים אחרים או איטרציות של הוראות מערכת.
+## กำหนดค่าการเก็บรักษาพื้นที่เก็บข้อมูลของโปรเจ็กต์
 
-אתם יכולים לתרום למחקר ולפיתוח של Gemini על ידי שיתוף מערכי הנתונים שלכם עם Google כדוגמאות להדגמה.
+บันทึกจะหมดอายุและมีการทำเครื่องหมายว่าต้องลบหลังจากระยะเวลาเก็บรักษาเริ่มต้นที่ 55 วัน (เว้นแต่จะ[บันทึกลงในชุดข้อมูล](#create) ซึ่งจะไม่มีวันหมดอายุ)
+คุณกำหนดค่ากรอบเวลาการเก็บรักษาบันทึกของโปรเจ็กต์ได้สูงสุด 7, 14, 28 หรือ 55 วัน
 
-## מגבלות
+## สร้างและแชร์ชุดข้อมูล
 
-כרגע אין תמיכה ברישום ביומן עבור הפעולות הבאות:
+คุณสามารถบันทึกบันทึกลงในชุดข้อมูลเพื่อจัดระเบียบและส่งออกได้อย่างมีประสิทธิภาพมากขึ้น
 
-- מודלים של Imagen ו-Veo
-- מודלים של Gemini להטמעה
-- מודל Gemini Robotics
-- קלטים שמכילים סרטונים, קובצי GIF או קובצי PDF
-- סוכנים בתוכנית Public Preview ב-Gemini API
+- จาก[หน้าบันทึก](https://aistudio.google.com/logs?hl=th) ให้ค้นหาแถบตัวกรอง
+  ที่ด้านบนเพื่อเลือกพร็อพเพอร์ตี้ที่จะใช้กรอง
+- จากมุมมองที่กรองแล้ว ให้ใช้ช่องทําเครื่องหมายเพื่อเลือกบันทึกทั้งหมดหรือบันทึกแต่ละรายการ
+- คลิกปุ่ม**สร้างชุดข้อมูล**ที่ปรากฏที่ด้านบนของรายการ
+- ตั้งชื่อและใส่คำอธิบาย (ไม่บังคับ) ให้กับชุดข้อมูลใหม่
+- คุณจะเห็นชุดข้อมูลที่เพิ่งสร้างขึ้นพร้อมชุดบันทึกที่ดูแลจัดการแล้ว
+- ส่งออกชุดข้อมูลเพื่อวิเคราะห์เพิ่มเติมเป็นไฟล์ CSV, JSONL หรือไปยัง Google ชีต
 
-## המאמרים הבאים
+ชุดข้อมูลอาจเป็นประโยชน์สำหรับ Use Case ที่แตกต่างกันจำนวนหนึ่ง
 
-- **יצירת אב טיפוס עם היסטוריית סשנים:** אפשר להשתמש ב-[AI Studio Build](https://aistudio.google.com/apps?hl=he) כדי ליצור אפליקציות בשיטת Vibe code ולהוסיף את מפתח ה-API כדי להפעיל היסטוריה של יומני Gemini API לתכונות מבוססות-AI.
-- **הפעלה מחדש של יומנים באמצעות Gemini Batch API:** אפשר להשתמש במערכי נתונים לדגימת תגובות ולהערכה של מודלים או של לוגיקת אפליקציה על ידי הפעלה מחדש של יומנים באמצעות [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+- **ดูแลชุดความท้าทาย:** ขับเคลื่อนการปรับปรุงในอนาคตซึ่งมุ่งเน้นไปยังส่วนที่คุณต้องการให้ AI ปรับปรุง
+- **ดูแลชุดตัวอย่าง:** เช่น ตัวอย่างจากการใช้งานจริงเพื่อสร้างคำตอบจากโมเดลอื่น หรือรวบรวมกรณีที่พบได้ยากเพื่อตรวจสอบตามปกติก่อนการติดตั้งใช้งาน
+- **ชุดการประเมิน:** ชุดที่แสดงถึงการใช้งานจริงในความสามารถที่สำคัญ เพื่อใช้เปรียบเทียบกับโมเดลอื่นๆ หรือการทำซ้ำคำสั่งของระบบ
 
-שליחת משוב
+คุณสามารถมีส่วนร่วมในการวิจัยและพัฒนา Gemini ได้โดยเลือกแชร์
+ชุดข้อมูลกับ Google เป็นตัวอย่างการสาธิต
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+## ข้อจำกัด
 
-עדכון אחרון: 2026-09-18 (שעון UTC).
+ปัจจุบันระบบยังไม่รองรับการบันทึกสำหรับรายการต่อไปนี้
 
-רוצה לתת לנו משוב?
+- โมเดล Imagen และ Veo
+- โมเดลการฝังของ Gemini
+- โมเดล Gemini Robotics
+- อินพุตที่มีวิดีโอ, GIF หรือ PDF
+- Agent เวอร์ชันตัวอย่างแบบสาธารณะใน Gemini API
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]
+## ขั้นตอนถัดไป
+
+- **สร้างต้นแบบด้วยประวัติเซสชัน:** ใช้ [AI Studio Build](https://aistudio.google.com/apps?hl=th) เพื่อสร้างแอปโค้ดและเพิ่มคีย์ API เพื่อเปิดใช้ประวัติบันทึก Gemini API สำหรับฟีเจอร์ AI
+- **เรียกใช้บันทึกอีกครั้งด้วย Gemini Batch API:** ใช้ชุดข้อมูลสำหรับการสุ่มตัวอย่างคำตอบ
+  และการประเมินโมเดลหรือตรรกะของแอปพลิเคชันโดยการเรียกใช้บันทึกอีกครั้งด้วย
+  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb)
+
+ส่งความคิดเห็น
+
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+
+อัปเดตล่าสุด 2026-09-24 UTC
+
+หากต้องการบอกให้เราทราบเพิ่มเติม
+
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

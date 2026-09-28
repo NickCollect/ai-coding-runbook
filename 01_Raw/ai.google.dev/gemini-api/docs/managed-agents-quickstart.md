@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de
-fetched_at: 2026-09-21T05:48:58.478253+00:00
-title: "Kurzanleitung f\u00fcr verwaltete Agents \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he
+fetched_at: 2026-09-28T06:16:51.821729+00:00
+title: "\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05dc\u05d9\u05dd \u05d1\u05e0\u05d5\u05e9\u05d0 \u05e0\u05d9\u05d4\u05d5\u05dc \u05e1\u05d5\u05db\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Feedback geben
+שליחת משוב
 
-# Kurzanleitung für verwaltete Agents
+# מדריך למתחילים בנושא ניהול סוכנים
 
-In diesem Leitfaden wird beschrieben, wie Sie verwaltete KI-Agenten in der Gemini API erstellen und verwenden. Dazu wird der [Antigravity-Agent](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=de) verwendet. Sie führen Ihren ersten Agent-Aufruf aus, setzen eine Unterhaltung mit mehreren Schritten fort, streamen die Antwort, laden Dateien aus der Sandbox herunter und arbeiten mit dem verwalteten Antigravity-Agent.
+במדריך הזה נסביר איך ליצור סוכנים מנוהלים ב-Gemini API ולהשתמש בהם באמצעות [סוכן Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=he). תבצעו את השיחה הראשונה עם סוכן, תמשיכו שיחה מרובת שלבים, תצפו בתשובה בזמן אמת, תורידו קבצים מהארגז חול ותעבדו עם הסוכן המנוהל Antigravity.
 
-## Erste Interaktion mit einem KI-Agenten ausführen
+## הפעלת אינטראקציה ראשונה עם נציג
 
-Bei einem einzelnen Aufruf der [Interactions API](https://ai.google.dev/gemini-api/docs?hl=de) wird eine Linux-Sandbox bereitgestellt, die Agentenschleife ausgeführt und das Ergebnis zurückgegeben. Sie definieren drei Parameter:
+קריאה יחידה ל-[Interactions API](https://ai.google.dev/gemini-api/docs?hl=he) מספקת ארגז חול של Linux, מריצה את לולאת הסוכן ומחזירה את התוצאה. תגדירו שלושה פרמטרים:
 
-- Übergeben Sie `agent` als `"antigravity-preview-09-2026",`. Das ist die aktuelle Version unseres vordefinierten und universellen verwalteten Agents.
-- Definieren Sie `environment="remote"`, um eine neue, frische Sandbox-Umgebung bereitzustellen.
-- Erstellen Sie eine Eingabe, in der Sie definieren, was der KI-Agent tun soll.
+- מעבירים את `agent` בתור `"antigravity-preview-09-2026"`, שהיא הגרסה הנוכחית של הסוכן המנוהל שלנו שמוגדר מראש ומתאים לשימוש כללי.
+- מגדירים את `environment="remote"` כדי להקצות סביבת ארגז חול חדשה ורעננה.
+- יוצרים קלט ומגדירים מה רוצים שהסוכן יעשה.
 
 ### Python
 
@@ -93,6 +93,47 @@ System.out.println("Environment ID: " + interaction.environmentId().orElse(""));
 System.out.println("Output: " + interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Write a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt. Then read the file and print its contents."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    interaction := res.Interaction
+    // Print the agent's final output
+    fmt.Printf("Interaction ID: %s\n", *interaction.ID)
+    fmt.Printf("Environment ID: %s\n", *interaction.EnvironmentID)
+    fmt.Printf("Output: %s\n", *interaction.OutputText)
+}
+```
+
 ### REST
 
 ```
@@ -106,16 +147,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Die Antwort gibt ein `Interaction`-Objekt zurück. Speichern Sie `interaction.id` und `interaction.environment_id`, um die Unterhaltung in derselben Sandbox fortzusetzen. Verwenden Sie `interaction.output_text`, um auf die endgültige Antwort des Agenten zuzugreifen. `interaction.steps` listet jeden Schritt auf, den der Agent ausgeführt hat (Begründung, Tool-Aufrufe, Code-Ausführung).
+התגובה מחזירה אובייקט `Interaction`. אחסון של `interaction.id` ו-`interaction.environment_id` כדי להמשיך את השיחה באותו ארגז חול. משתמשים ב-`interaction.output_text` כדי לגשת לתשובה הסופית של הסוכן. ‫`interaction.steps` מפרט כל שלב שהסוכן ביצע (חשיבה רציונלית, קריאות לכלים, הרצת קוד).
 
-## Unterhaltung fortsetzen (Mehrfachdialog)
+## המשך השיחה (רב-שלבית)
 
-Die API erfasst zwei unabhängige Zustandsdimensionen:
+ה-API עוקב אחרי שני ממדי מצב בלתי תלויים:
 
-- **Kontext der Unterhaltung**:Chatverlauf, Begründungsablauf, Tool-Nutzung, Verwendung von `previous_interaction_id`.
-- [**Umgebungsstatus**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de):Dateien, installierte Pakete und Sandbox-Status mit `environment`.
+- **הקשר השיחה:** היסטוריית הצ'אט, מעקב אחר נימוקים, שימוש בכלי, שימוש ב-`previous_interaction_id`.
+- [**מצב הסביבה:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he) קבצים, חבילות מותקנות ומצב ארגז החול, באמצעות `environment`.
 
-Geben Sie beide an der entsprechenden Stelle ein, um fortzufahren:
+כדי להמשיך, צריך להזין את שניהם במקום המתאים:
 
 ### Python
 
@@ -169,6 +210,48 @@ Interaction interaction2 = client.interactions.create(CreateInteractionRequestBo
 System.out.println(interaction2.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    interactionID := "INTERACTION_ID"
+    environmentID := "ENVIRONMENT_ID"
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("antigravity-preview-09-2026"),
+            PreviousInteractionID: genai.Ptr(interactionID),
+            Environment:           genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(environmentID)),
+            Input:                 interactions.NewInteractionsInput("Now plot the Fibonacci sequence as a line chart and save it as chart.png."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -183,20 +266,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Dateien aus Runde 1 (`fibonacci.txt`) sind auch in Runde 2 verfügbar. Der KI-Agent behält auch den Kontext der Unterhaltung bei.
+קבצים מתור 1 (`fibonacci.txt`) נשארים בתור 2. הסוכן גם שומר את ההקשר של השיחה.
 
-Sie können diese unabhängig voneinander kombinieren:
+אפשר לשלב בין האפשרויות הבאות באופן עצמאי:
 
-- **Unterhaltung löschen, Dateien behalten**:Lassen Sie `previous_interaction_id` weg und übergeben Sie nur die Umgebungs-ID mit `environment`, um eine neue Unterhaltung im selben Arbeitsbereich zu starten.
-- **Unterhaltung beibehalten, neuer Arbeitsbereich**:Übergeben Sie `previous_interaction_id` und legen Sie `environment="remote"` für eine neue Sandbox fest.
+- **ניקוי השיחה, שמירת הקבצים:** לא כוללים את `previous_interaction_id`, מעבירים רק את מזהה הסביבה באמצעות `environment` כדי ליצור שיחה חדשה באותו מרחב.
+- **שמירת השיחה, סביבת עבודה חדשה:** מעבירים את `previous_interaction_id`, מגדירים את `environment="remote"` לארגז חול חדש.
 
-### Automatische Kontextverdichtung
+### דחיסה אוטומטית של ההקשר
 
-Bei langen Mehrfachdialogen kann der Rohverlauf von Begründungsschritten, Tool-Aufrufen und großen Dateiinhalten schnell anwachsen und viel Kontextspeicherplatz belegen. Um Fehler aufgrund von Tokenlimits zu vermeiden und den Fokus des Agents aufrechtzuerhalten (um „Context Rot“ zu verhindern), enthält die Managed Agents API einen nativen Schritt zur Kontextkomprimierung bei etwa 135.000 Tokens. Dies geschieht automatisch.
+בשיחות ארוכות ורב-שלביות, ההיסטוריה הגולמית של שלבי החשיבה הרציונלית, קריאות הכלים ותוכן הקבצים הגדולים יכולה לגדול במהירות ולתפוס נפח משמעותי של הקשר. כדי למנוע שגיאות שקשורות למגבלת הטוקנים ולשמור על המיקוד של הסוכן (ולמנוע 'הידרדרות ההקשר'), ב-API של ניהול סוכנים יש שלב דחיסה של ההקשר בסביבות 135,000 טוקנים. פעולה זו מתבצעת באופן אוטומטי.
 
-## Antwort streamen
+## הצגת התשובה באופן שוטף
 
-Bei zeitaufwendigen Aufgaben können Sie die Antwort streamen, um zu sehen, wie der KI-Agent in Echtzeit arbeitet:
+במשימות ארוכות, אפשר להזרים את התשובה כדי לראות את הסוכן פועל בזמן אמת:
 
 ### Python
 
@@ -273,6 +356,56 @@ try (EventStream<InteractionSSEStreamEvent> stream =
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Read Hacker News, summarize the top 5 stories, and save the results as a PDF."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
+            Stream:      genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        fmt.Printf("%+v\n", event)
+        if stepStop := event.GetDataStepStop(); stepStop != nil && stepStop.Usage != nil {
+            fmt.Printf("%+v\n", stepStop.Usage)
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -287,11 +420,12 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-Beim Streaming werden Schrittdeltas mit inkrementellen Updates zurückgegeben. Wenn ein Schritt abgeschlossen ist, enthält das `step.stop`-Ereignis die zusammengefassten Nutzungsstatistiken. Weitere Informationen finden Sie im [Streaming-Leitfaden](https://ai.google.dev/gemini-api/docs/streaming?hl=de).
+הסטרימינג מחזיר דלתאות של שלבים עם עדכונים מצטברים. כששלב מסתיים,
+האירוע `step.stop` כולל נתונים סטטיסטיים מצטברים של השימוש. מידע נוסף מפורט [במדריך לסטרימינג](https://ai.google.dev/gemini-api/docs/streaming?hl=he).
 
-## Dateien aus der Umgebung herunterladen
+## הורדת קבצים מהסביבה
 
-Wenn der Agent Dateien in der Sandbox erstellt. Laden Sie sie mit der Files API über eine direkte HTTP-Anfrage herunter (noch keine SDK-Methode):
+כשהסוכן יוצר קבצים בארגז החול. אפשר להוריד אותם באמצעות Files API עם בקשת HTTP ישירה (עדיין אין שיטה ב-SDK):
 
 ### Python
 
@@ -376,6 +510,49 @@ Files.write(Paths.get("snapshot.tar"), response.body());
 System.out.println("Saved snapshot to snapshot.tar");
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+    "os"
+)
+
+func main() {
+    ctx := context.Background()
+    envID := "ENVIRONMENT_ID"
+    apiKey := os.Getenv("GEMINI_API_KEY")
+
+    url := fmt.Sprintf("https://generativelanguage.googleapis.com/v1beta/files/environment-%s:download?alt=media", envID)
+    req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    req.Header.Set("x-goog-api-key", apiKey)
+
+    resp, err := http.DefaultClient.Do(req)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer resp.Body.Close()
+
+    data, err := io.ReadAll(resp.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if err := os.WriteFile("snapshot.tar", data, 0644); err != nil {
+        log.Fatal(err)
+    }
+    fmt.Println("Saved snapshot to snapshot.tar")
+}
+```
+
 ### REST
 
 ```
@@ -389,13 +566,13 @@ mkdir -p extracted_snapshot
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## Verwalteten Agent speichern
+## שמירת סוכן מנוהל
 
-In den vorherigen Schritten haben wir den Standard-Antigravity-Agent verwendet und ihn inline angepasst. Wenn Sie Ihre Konfiguration (Anweisungen, Skills, Modellauswahl und Umgebung) optimiert haben, können Sie sie als wiederverwendbaren verwalteten Agent speichern. So können Sie sie anhand der ID aufrufen, ohne die Konfiguration zu wiederholen.
+בשלבים הקודמים השתמשנו בסוכן Antigravity שמוגדר כברירת מחדל והתאמנו אותו ישירות. אחרי שמשפרים את ההגדרה (הוראות, יכולות, בחירת מודל וסביבה), אפשר לשמור אותה כסוכן מנוהל לשימוש חוזר. כך אפשר להפעיל אותו באמצעות מזהה בלי לחזור על ההגדרה.
 
-Wenn Sie einen Agent speichern, sehen Sie die architektonische Symmetrie mit Inline-Interaktionen: Sie geben `base_agent: "antigravity-preview-09-2026"` an und können ein `agent_config` mit dem von Ihnen ausgewählten `model` übergeben, genau wie bei `interactions.create`. Sie definieren auch eine `base_environment` (entweder aus Quellen oder durch Forking einer vorhandenen Umgebung). Der Agent verwendet diese Umgebung und Modellkonfiguration für jede neue Interaktion.
+כששומרים סוכן, אפשר לראות את הסימטריה הארכיטקטונית עם אינטראקציות מוטבעות: מציינים `base_agent: "antigravity-preview-09-2026"` ויכולים להעביר `agent_config` עם `model` שבחרתם בדיוק כמו ב-`interactions.create`. אתם גם מגדירים `base_environment` (ממקורות או על ידי יצירת עותק של סביבה קיימת). הסוכן ישתמש בסביבה הזו ובהגדרות המודל האלה בכל אינטראקציה חדשה.
 
-**Aus Quellen**:Definieren Sie Quellen inline oder aus anderen Quellen wie GitHub oder Cloud Storage.
+**ממקורות:** הגדרת מקורות בשורה או ממקורות אחרים כמו GitHub או Cloud Storage.
 
 ### Python
 
@@ -505,6 +682,63 @@ Agent agent = client.agents.create(agentParams).agent().get();
 System.out.println("Saved agent: " + agent.id().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/agents"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr(".agents/AGENTS.md"),
+                Content: genai.Ptr("Always include a chart and a summary table in your reports."),
+            },
+            {
+                Type:   interactions.SourceTypeRepository.ToPointer(),
+                Source: genai.Ptr("https://github.com/your-org/skills"),
+                Target: genai.Ptr(".agents/skills"),
+            },
+        },
+    }
+
+    res, err := client.Agents.Create(ctx, operations.CreateAgentRequest{
+        Body: agents.Agent{
+            ID:        genai.Ptr("fibonacci-analyst"),
+            BaseAgent: genai.Ptr("antigravity-preview-09-2026"),
+            AgentConfig: genai.Ptr(agents.NewAgentConfig(interactions.AntigravityAgentConfig{
+                Model: genai.Ptr("gemini-3.8-flash"),
+            })),
+            SystemInstruction: genai.Ptr("You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports."),
+            BaseEnvironment:   genai.Ptr(agents.NewBaseEnvironment(env)),
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Printf("Saved agent: %s\n", *res.Agent.ID)
+}
+```
+
 ### REST
 
 ```
@@ -537,9 +771,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## Verwalteten Agent aufrufen
+## הפעלת הסוכן המנוהל
 
-Nachdem Sie einen verwalteten Agent gespeichert haben, können Sie ihn über die ID aufrufen. Bei jedem Aufruf wird die Basisumgebung verzweigt, sodass jeder Lauf sauber beginnt:
+אחרי ששומרים סוכן מנוהל, אפשר להפעיל אותו באמצעות המזהה שלו. כל הפעלה יוצרת עותק של סביבת הבסיס, כך שכל הרצה מתחילה בצורה נקייה:
 
 ### Python
 
@@ -590,6 +824,44 @@ Interaction result = client.interactions.create(CreateInteractionRequestBody.of(
 System.out.println(result.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("fibonacci-analyst"),
+            Input:       interactions.NewInteractionsInput("Generate the first 50 prime numbers, plot their distribution, and save a PDF report."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -603,19 +875,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Nächste Schritte
+## המאמרים הבאים
 
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de): Funktionen, unterstützte Tools, multimodale Eingabe, Preise und Einschränkungen.
-- [Verwaltete KI-Agenten erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de): Erweitern Sie Antigravity mit Ihren eigenen Anweisungen, Skills und Daten.
-- [Umgebungen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de): Quellen, Netzwerk, Lebenszyklus, Ressourcenlimits.
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de): Die zugrunde liegende API für Modelle und Agents.
+- [סוכן Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he): יכולות, כלים נתמכים, קלט מולטימודאלי, תמחור ומגבלות.
+- [יצירת סוכנים מנוהלים](https://ai.google.dev/gemini-api/docs/custom-agents?hl=he): הרחבת Antigravity באמצעות הוראות, מיומנויות ונתונים משלכם.
+- [סביבות](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he): מקורות, רשת, מחזור חיים, מגבלות משאבים.
+- ‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he): ממשק ה-API הבסיסי למודלים ולאגנטים.
 
-Feedback geben
+שליחת משוב
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Zuletzt aktualisiert: 2026-09-18 (UTC).
+עדכון אחרון: 2026-09-25 (שעון UTC).
 
-Haben Sie Feedback für uns?
+רוצה לתת לנו משוב?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-18 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-25 (שעון UTC)."],[],[]]

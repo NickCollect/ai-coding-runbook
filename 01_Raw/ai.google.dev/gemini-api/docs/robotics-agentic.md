@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=it
-fetched_at: 2026-09-21T05:52:59.467573+00:00
+fetched_at: 2026-09-28T06:22:49.849126+00:00
 title: "Agentic Vision \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

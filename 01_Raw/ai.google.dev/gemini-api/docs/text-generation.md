@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-CN
-fetched_at: 2026-09-21T05:46:26.121827+00:00
-title: "\u6587\u672c\u751f\u6210 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=th
+fetched_at: 2026-09-28T06:28:40.281415+00:00
+title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-发送反馈
+ส่งความคิดเห็น
 
-# 文本生成
+# การสร้างข้อความ
 
-Gemini API 可以通过文本、图片、视频和音频输入生成文本输出。
+Gemini API สามารถสร้างเอาต์พุตข้อความจากอินพุตข้อความ รูปภาพ วิดีโอ และเสียง
 
-下面是一个基本示例：
+ตัวอย่างพื้นฐานมีดังนี้
 
 ### Python
 
@@ -78,6 +78,44 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("How does AI work?"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -90,22 +128,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Google GenAI SDK 直接在返回的 `Interaction` 对象上提供便捷属性，以访问模型的响应。
+Google GenAI SDK มีพร็อพเพอร์ตี้ความสะดวกโดยตรงในออบเจ็กต์ `Interaction` ที่ส่งกลับมาเพื่อเข้าถึงการตอบกลับของโมเดล
 
-最常见的帮助程序是 **`interaction.output_text`** (String)，它会返回模型响应中的最后一个文本块。如果响应拆分到多个连续的
-`TextContent` 块中，它会自动将这些块联接起来。
-请注意，`.output_text` 不包含由非文本内容（例如想法、图片、音频或工具调用）分隔的较早文本块。对于复杂或交错的多模态响应，您必须改为手动迭代
-`steps`。如需详细了解其他媒体便捷属性，请参阅
-[互动概览](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn#convenience-properties)。
+ตัวช่วยที่พบบ่อยที่สุดคือ **`interaction.output_text`** (String) ซึ่งจะแสดงผล
+บล็อกข้อความสุดท้ายในคำตอบของโมเดล หากคำตอบแยก
+เป็นหลาย`TextContent`บล็อกที่ต่อเนื่องกัน ระบบจะรวมบล็อกเหล่านั้นโดยอัตโนมัติ
+โปรดทราบว่า `.output_text` ไม่รวมบล็อกข้อความก่อนหน้าซึ่งคั่นด้วยเนื้อหาที่ไม่ใช่ข้อความ (เช่น ความคิด รูปภาพ เสียง หรือการเรียกใช้เครื่องมือ) สำหรับคำตอบแบบมัลติโมดัลที่ซับซ้อน
+หรือสลับกัน คุณต้องวนซ้ำผ่าน `steps`
+ด้วยตนเองแทน ดูข้อมูลเพิ่มเติมเกี่ยวกับพร็อพเพอร์ตี้ความสะดวกของสื่ออื่นๆ ได้ที่[ภาพรวมของการโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions?hl=th#convenience-properties)
 
-## 与 Gemini 一起思考
+## การคิดด้วย Gemini
 
-Gemini 模型通常默认启用 [“思考”](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)
-功能，这允许模型在响应
-请求之前进行推理。
+โมเดล Gemini มักจะ["คิด"](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
+โดยค่าเริ่มต้น ซึ่งช่วยให้โมเดลใช้เหตุผลก่อนที่จะตอบคำขอได้
 
-每种模型都支持不同的思考配置，让您可以控制费用、延迟时间和智能。如需了解详情，请参阅
-[思考指南](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#set-budget)。
+แต่ละโมเดลรองรับการกำหนดค่าการคิดที่แตกต่างกัน ซึ่งช่วยให้คุณควบคุม
+ต้นทุน เวลาในการตอบสนอง และความอัจฉริยะได้ ดูรายละเอียดเพิ่มเติมได้ที่[คู่มือการคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th#set-budget)
 
 ### Python
 
@@ -172,6 +210,47 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("How does AI work?"),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel: interactions.ThinkingLevelMinimal.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -187,9 +266,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 系统指令和其他配置
+## วิธีการของระบบและการกำหนดค่าอื่นๆ
 
-您可以使用系统指令来引导 Gemini 模型的行为。传递 `system_instruction` 参数以配置模型的行为。
+คุณสามารถกำหนดลักษณะการทำงานของโมเดล Gemini ได้ด้วยคำสั่งของระบบ ส่งพารามิเตอร์ `system_instruction` เพื่อกำหนดค่าลักษณะการทำงานของโมเดล
 
 ### Python
 
@@ -251,6 +330,45 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:             interactions.Model("gemini-3.8-flash"),
+            Input:             interactions.NewInteractionsInput("Hello there"),
+            SystemInstruction: genai.Ptr("You are a cat. Your name is Neko."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -264,7 +382,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-您还可以使用 `generation_config` 参数替换默认生成参数，例如温度。
+นอกจากนี้ คุณยังลบล้างพารามิเตอร์การสร้างเริ่มต้น เช่น
+อุณหภูมิ โดยใช้`generation_config`พารามิเตอร์ได้ด้วย
 
 ### Python
 
@@ -330,6 +449,47 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Explain the concept of Occam's Razor and provide a simple, everyday example."),
+            GenerationConfig: &interactions.GenerationConfig{
+                MaxOutputTokens: genai.Ptr(500),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -345,12 +505,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需查看可配置参数及其说明的完整列表，请参阅 [Interactions API 参考文档](https://ai.google.dev/api/interactions-api?hl=zh-cn)
-。
+ดูรายการพารามิเตอร์ที่กำหนดค่าได้ทั้งหมดและคำอธิบายได้ที่[ข้อมูลอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th)
 
-## 多模态输入
+## อินพุตหลายรูปแบบ
 
-Gemini API 支持多模态输入，让您可以将文本与媒体文件相结合。以下示例演示了如何提供图片：
+Gemini API รองรับอินพุตหลายรูปแบบ ซึ่งช่วยให้คุณรวมข้อความกับ
+ไฟล์สื่อได้ ตัวอย่างต่อไปนี้แสดงการระบุรูปภาพ
 
 ### Python
 
@@ -448,6 +608,60 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    imageBytes, err := os.ReadFile("/path/to/organ.jpg")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Image := base64.StdEncoding.EncodeToString(imageBytes)
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: "Tell me about this instrument",
+                }),
+                interactions.NewContent(interactions.ImageContent{
+                    Data:     genai.Ptr(base64Image),
+                    MimeType: interactions.ImageContentMimeTypeImageJpeg.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -468,19 +682,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需了解提供图片的其他方法和更高级的图片处理，
-请参阅我们的[图片理解指南](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)。
-该 API 还支持 [文档](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)、[视频](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn)和
-[音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn)输入及理解。
+ดูวิธีการอื่นๆ ในการระบุรูปภาพและการประมวลผลรูปภาพขั้นสูงเพิ่มเติมได้ที่[คู่มือการทำความเข้าใจรูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th)
+นอกจากนี้ API ยังรองรับอินพุตและทำความเข้าใจ[เอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th) [วิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th) และ
+[เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)ด้วย
 
-## 流式响应
+## การสตรีมคำตอบ
 
-默认情况下，模型仅在整个生成过程完成后才会返回响应。
+โดยค่าเริ่มต้น โมเดลจะแสดงคำตอบหลังจากกระบวนการสร้างทั้งหมดเสร็จสมบูรณ์แล้วเท่านั้น
 
-如需实现更流畅的互动，请使用流式传输在生成响应块时处理这些块。如需查看涵盖事件类型、
-使用工具进行流式传输、思考、代理和图片生成的综合指南，请参阅
-专门的 [流式互动](https://ai.google.dev/gemini-api/docs/streaming?hl=zh-cn)
-指南。
+หากต้องการให้การโต้ตอบราบรื่นยิ่งขึ้น ให้ใช้การสตรีมเพื่อจัดการก้อนคำตอบ
+ขณะที่ระบบสร้างคำตอบ ดูคำแนะนำแบบละเอียดเกี่ยวกับประเภทเหตุการณ์
+การสตรีมด้วยเครื่องมือ การคิด เอเจนต์ และการสร้างรูปภาพได้ที่
+คำแนะนำ[การโต้ตอบผ่านการสตรีม](https://ai.google.dev/gemini-api/docs/streaming?hl=th)
+โดยเฉพาะ
 
 ### Python
 
@@ -567,6 +781,55 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:  interactions.Model("gemini-3.8-flash"),
+            Input:  interactions.NewInteractionsInput("Explain how AI works"),
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -581,9 +844,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 多轮对话
+## การสนทนาไปมา
 
-Interactions API 支持使用 `previous_interaction_id` 将互动链接在一起，从而实现多轮对话。每一轮都是单独的互动，并且 API 会自动管理对话历史记录。
+Interactions API รองรับการสนทนาไปมาโดยการเชื่อมโยงการโต้ตอบ เข้าด้วยกันโดยใช้ `previous_interaction_id` แต่ละรอบคือการโต้ตอบแยกกัน
+และ API จะจัดการประวัติการสนทนาโดยอัตโนมัติ
 
 ### Python
 
@@ -665,6 +929,59 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // First turn
+    turn1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Hello, I have 2 dogs in my house."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if turn1.Interaction.OutputText != nil {
+        fmt.Printf("Model: %s\n", *turn1.Interaction.OutputText)
+    }
+
+    // Second turn (chained using PreviousInteractionID)
+    turn2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            PreviousInteractionID: turn1.Interaction.ID,
+            Input:                 interactions.NewInteractionsInput("How many paws are in my house?"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if turn2.Interaction.OutputText != nil {
+        fmt.Printf("Model: %s\n", *turn2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -688,7 +1005,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-您还可以将 `previous_interaction_id` 与流式传输方法相结合，将流式传输用于多轮对话。
+นอกจากนี้ คุณยังใช้การสตรีมสำหรับการสนทนาไปมาได้ด้วยการรวม `previous_interaction_id` เข้ากับวิธีการสตรีม
 
 ### Python
 
@@ -800,6 +1117,66 @@ try (EventStream<InteractionSSEStreamEvent> stream = response2.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    turn1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Hello, I have 2 dogs in my house."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-flash"),
+            PreviousInteractionID: turn1.Interaction.ID,
+            Input:                 interactions.NewInteractionsInput("How many paws are in my house?"),
+            Stream:                genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res2.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -824,14 +1201,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 无状态对话
+## การสนทนาแบบไม่เก็บสถานะ
 
-默认情况下，当您使用 `previous_interaction_id` 时，Interactions API 会在服务器端管理对话状态。不过，您也可以通过在客户端自行管理对话历史记录，以无状态模式运行。
+โดยค่าเริ่มต้น Interactions API จะจัดการสถานะการสนทนาฝั่งเซิร์ฟเวอร์เมื่อคุณใช้ `previous_interaction_id` อย่างไรก็ตาม คุณยังสามารถดำเนินการในโหมดแบบไม่เก็บสถานะได้ด้วยการจัดการประวัติการสนทนาด้วยตนเองในฝั่งไคลเอ็นต์
 
-如需使用无状态模式，请执行以下操作：
-1. 在请求中设置 `store=false`，以选择停用服务器端存储。
-2. 在客户端将对话历史记录维护为一系列**步骤** 。
-3. 在后续请求中，在 `input` 字段中传递累积的步骤，并将新一轮对话作为 `user_input` 步骤附加到其中。
+วิธีใช้โหมดไม่เก็บสถานะ
+1. ตั้งค่า `store=false` ในคำขอเพื่อเลือกไม่ใช้พื้นที่เก็บข้อมูลฝั่งเซิร์ฟเวอร์
+2. เก็บประวัติการสนทนาเป็นอาร์เรย์ของ**ขั้นตอน**ในฝั่งไคลเอ็นต์
+3. ในคำขอต่อๆ ไป ให้ส่งขั้นตอนที่สะสมไว้ในช่อง `input` และต่อท้ายคำพูดใหม่เป็นขั้นตอน `user_input`
 
 ### Python
 
@@ -964,6 +1341,66 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Step{
+                interactions.NewStep(interactions.UserInputStep{
+                    Content: []interactions.Content{
+                        interactions.NewContent(interactions.TextContent{
+                            Text: "Hello, I have 2 dogs in my house.",
+                        }),
+                    },
+                }),
+                interactions.NewStep(interactions.ModelOutputStep{
+                    Content: []interactions.Content{
+                        interactions.NewContent(interactions.TextContent{
+                            Text: "That's great! Two dogs must keep your house lively.",
+                        }),
+                    },
+                }),
+                interactions.NewStep(interactions.UserInputStep{
+                    Content: []interactions.Content{
+                        interactions.NewContent(interactions.TextContent{
+                            Text: "How many paws are in my house?",
+                        }),
+                    },
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1006,31 +1443,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## 撰写提示的技巧！
+## เคล็ดลับการเขียนพรอมต์
 
-如需了解如何充分利用 Gemini，请参阅我们的[提示工程指南](https://ai.google.dev/gemini/docs/prompting-strategies?hl=zh-cn)，以获取
-建议。
+โปรดดู[คู่มือการทำวิศวกรรมพรอมต์](https://ai.google.dev/gemini/docs/prompting-strategies?hl=th)เพื่อดูคำแนะนำในการใช้ประโยชน์จาก Gemini ให้ได้มากที่สุด
 
-## 后续步骤
+## ขั้นตอนถัดไป
 
-- 在 Google AI Studio 中试用 [Gemini](https://aistudio.google.com?hl=zh-cn)。
-- 试用
-  [结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)以获得
-  JSON 样式的响应。
-- 探索 Gemini 的 [图片](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)、
-  [视频](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn)、
-  [音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn) 和
-  [文档](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn) 理解
-  功能。
-- 了解多模态
-  [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)。
+- ลองใช้ [Gemini ใน Google AI Studio](https://aistudio.google.com?hl=th)
+- ทดลองใช้[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)สำหรับ
+  การตอบกลับที่คล้ายกับ JSON
+- สำรวจความสามารถในการทำความเข้าใจ[รูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th)
+  [วิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th)
+  [เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ
+  [เอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)ของ Gemini
+- ดูข้อมูลเกี่ยวกับ[กลยุทธ์การแจ้งไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide)แบบมัลติโมดัล
 
-发送反馈
+ส่งความคิดเห็น
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最后更新时间 (UTC)：2026-09-18。
+อัปเดตล่าสุด 2026-09-24 UTC
 
-需要向我们提供更多信息？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-18。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

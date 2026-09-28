@@ -1,75 +1,86 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=vi
-fetched_at: 2026-09-21T05:54:20.707044+00:00
-title: "T\u00e1c nh\u00e2n AI b\u1ec1n v\u1eefng v\u1edbi Gemini v\u00e0 Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=ja
+fetched_at: 2026-09-28T06:25:22.125112+00:00
+title: "Gemini \u3068 Temporal \u3092\u4f7f\u7528\u3057\u305f\u6c38\u7d9a\u7684\u306a AI \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Tác nhân AI bền vững với Gemini và Temporal
+# Gemini と Temporal を使用した永続的な AI エージェント
 
-Hướng dẫn này hướng dẫn bạn cách xây dựng một vòng lặp có tác nhân [theo kiểu ReAct](https://arxiv.org/abs/2210.03629) sử dụng Gemini API để suy luận và [Temporal](https://temporal.io/) để duy trì.
-Bạn có thể xem toàn bộ mã nguồn của hướng dẫn này trên [GitHub](https://github.com/temporal-community/durable-react-agent-gemini).
+このチュートリアルでは、推論に
+[Gemini API](https://arxiv.org/abs/2210.03629) を使用し、永続化に [Temporal](https://temporal.io/) を使用する
+ReAct スタイルのエージェント ループを構築する手順について説明します。このチュートリアルの完全なソースコードは
+[GitHub](https://github.com/temporal-community/durable-react-agent-gemini)で入手できます。
 
-Trợ lý có thể gọi các công cụ, chẳng hạn như tra cứu cảnh báo thời tiết hoặc xác định vị trí địa lý của địa chỉ IP và sẽ lặp lại cho đến khi có đủ thông tin để phản hồi.
+エージェントは、天気予報の検索や IP アドレスのジオロケーションなどのツールを呼び出すことができ、応答に必要な十分な情報が得られるまでループします。
 
-Điểm khác biệt giữa bản minh hoạ này và bản minh hoạ tác nhân thông thường là **độ bền**. Mọi lệnh gọi LLM, mọi lệnh gọi công cụ và mọi bước của vòng lặp dựa trên tác nhân đều được Temporal duy trì. Nếu quy trình gặp sự cố, mạng bị ngắt hoặc API hết thời gian chờ, Temporal sẽ tự động thử lại và tiếp tục từ bước đã hoàn tất gần đây nhất. Không có nhật ký cuộc trò chuyện nào bị mất và không có lệnh gọi công cụ nào bị lặp lại không chính xác.
+一般的なエージェント デモとの違いは**耐久性** です。すべての LLM 呼び出し、すべてのツール呼び出し、エージェント
+ループのすべてのステップは Temporal によって永続化されます。プロセスがクラッシュした場合、ネットワークが切断された場合、API
+がタイムアウトした場合、Temporal は自動的に再試行し、最後に完了したステップから再開します。会話履歴が失われることも、ツール呼び出しが誤って繰り返されることもありません。
 
-## Kiến trúc
+## アーキテクチャ
 
-Cấu trúc này bao gồm 3 phần:
+このアーキテクチャは次の 3 つの部分で構成されます。
 
-- **Quy trình công việc:** Vòng lặp có tác nhân điều phối logic thực thi.
-- **Hoạt động:** Các đơn vị công việc riêng lẻ (lệnh gọi LLM, lệnh gọi công cụ) mà Temporal duy trì.
-- **Worker:** Quy trình thực thi quy trình công việc và hoạt động.
+- **ワークフロー:** 実行ロジックをオーケストレートするエージェント ループ。
+- **アクティビティ:** Temporal が永続化する個々の作業単位（LLM 呼び出し、ツール呼び出し）。
+- **ワーカー:** ワークフローとアクティビティを実行するプロセス。
 
-Trong ví dụ này, bạn sẽ đặt cả 3 phần này vào một tệp duy nhất (`durable_agent_worker.py`). Trong quá trình triển khai thực tế, bạn sẽ tách chúng ra để có nhiều lợi thế về việc triển khai và khả năng mở rộng. Bạn sẽ đặt mã cung cấp lời nhắc cho tác nhân trong tệp thứ hai (`start_workflow.py`).
+この例では、これら 3 つの要素をすべて 1 つのファイル（`durable_agent_worker.py`）に配置します。実際の環境では、さまざまなデプロイとスケーラビリティのメリットを得るために、これらを分離します。エージェントにプロンプトを提供するコードは、2 つ目のファイル（`start_workflow.py`）に配置します。
 
-## Điều kiện tiên quyết
+## 前提条件
 
-Để hoàn tất hướng dẫn này, bạn cần:
+このガイドを完了するには、次のものが必要です。
 
-- Khoá Gemini API. Bạn có thể tạo một khoá API miễn phí trong [Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
-- [Python](https://www.python.org/downloads/) phiên bản 3.10 trở lên.
-- [Temporal CLI](https://docs.temporal.io/cli) để chạy máy chủ phát triển cục bộ.
+- Gemini API キー。[Google AI Studio で無料で作成できます。](https://aistudio.google.com/apikey?hl=ja)
+- [Python](https://www.python.org/downloads/) バージョン 3.10 以降。
+- ローカル
+  開発用サーバーを実行するための [Temporal CLI](https://docs.temporal.io/cli)。
 
-## Thiết lập
+## 設定
 
-Trước khi bắt đầu, hãy đảm bảo bạn có một [máy chủ phát triển Temporal](https://docs.temporal.io/cli#start-dev-server) đang chạy cục bộ:
+始める前に、
+[Temporal 開発用サーバー](https://docs.temporal.io/cli#start-dev-server)
+がローカルで実行されていることを確認してください。
 
 ```
 temporal server start-dev
 ```
 
-Tiếp theo, hãy cài đặt các phần phụ thuộc bắt buộc:
+次に、必要な依存関係をインストールします。
 
 ```
 pip install temporalio google-genai httpx pydantic python-dotenv
 ```
 
-Tạo một tệp `.env` trong thư mục dự án bằng khoá Gemini API của bạn. Bạn có thể lấy khoá API từ [Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
+Gemini API キーを使用して、プロジェクト ディレクトリに `.env` ファイルを作成します。API キーは
+[Google AI Studio](https://aistudio.google.com/apikey?hl=ja)から取得できます。
 
 ```
 echo "GOOGLE_API_KEY=your-api-key-here" > .env
 ```
 
-## Triển khai
+## 実装
 
-Phần còn lại của hướng dẫn này sẽ trình bày về `durable_agent_worker.py` từ trên xuống dưới, từng bước xây dựng tác nhân. Tạo tệp và làm theo.
+このチュートリアルの残りの部分では、`durable_agent_worker.py` を上から下まで順に説明し、エージェントを段階的に構築していきます。ファイルを作成して、手順に沿って進めてください。
 
-### Nhập và thiết lập hộp cát
+### インポートとサンドボックスの設定
 
-Bắt đầu bằng những nội dung nhập phải được xác định trước. Khối `workflow.unsafe.imports_passed_through()` cho biết hộp cát quy trình công việc của Temporal cho phép một số mô-đun nhất định đi qua mà không bị hạn chế. Điều này là cần thiết vì một số thư viện (đáng chú ý là `httpx`, phân lớp con `urllib.request.Request`) sử dụng các mẫu mà hộp cát sẽ chặn.
+最初に、事前に定義する必要があるインポートから始めます。`workflow.unsafe.imports_passed_through()`
+ブロックは、特定のモジュールを制限なく通過させるように Temporal のワークフロー
+サンドボックスに指示します。これは、いくつかのライブラリ（特に `urllib.request.Request` をサブクラス化する
+`httpx`）が、サンドボックスでブロックされるパターンを使用しているため必要です。
 
 ```
 from temporalio import workflow
@@ -84,9 +95,9 @@ with workflow.unsafe.imports_passed_through():
     from google.genai import types
 ```
 
-### Hướng dẫn về hệ thống
+### システム指示
 
-Tiếp theo, hãy xác định tính cách của trợ lý. Các chỉ dẫn hệ thống cho mô hình biết cách hoạt động. Nhân viên hỗ trợ này được hướng dẫn phản hồi bằng thơ hai câu khi không cần dùng công cụ.
+次に、エージェントの個性を定義します。システムの指示は、モデルの動作方法を指定します。このエージェントは、ツールが必要ない場合は俳句で応答するように指示されています。
 
 ```
 SYSTEM_INSTRUCTIONS = """
@@ -97,9 +108,11 @@ If no tools are needed, respond in haikus.
 """
 ```
 
-### Định nghĩa về công cụ
+### ツール定義
 
-Bây giờ, hãy xác định những công cụ mà tác nhân có thể sử dụng. Mỗi công cụ là một hàm không đồng bộ có chuỗi tài liệu mô tả. Các công cụ nhận tham số sẽ sử dụng một mô hình Pydantic làm đối số duy nhất. Đây là phương pháp hay nhất của Temporal giúp chữ ký hoạt động ổn định khi bạn thêm các trường không bắt buộc theo thời gian.
+次に、エージェントが使用できるツールを定義します。各ツールは、説明的なドキュメント文字列を持つ非同期関数です。パラメータを受け取るツールは、単一の引数として
+Pydantic モデルを使用します。これは Temporal
+のベストプラクティスであり、時間の経過とともにオプションのフィールドを追加してもアクティビティの署名を安定させることができます。
 
 ```
 import json
@@ -128,7 +141,7 @@ async def get_weather_alerts(request: GetWeatherAlertsRequest) -> str:
         return json.dumps(response.json())
 ```
 
-Tiếp theo, hãy xác định các công cụ để xác định vị trí địa lý theo địa chỉ IP:
+次に、IP アドレスのジオロケーションのツールを定義します。
 
 ```
 class GetLocationRequest(BaseModel):
@@ -157,9 +170,11 @@ async def get_location_info(request: GetLocationRequest) -> str:
         return f"{result['city']}, {result['regionName']}, {result['country']}"
 ```
 
-### Sổ đăng ký công cụ
+### ツール レジストリ
 
-Tiếp theo, hãy tạo một sổ đăng ký ánh xạ tên công cụ đến các hàm trình xử lý. Hàm `get_tools()` tạo các đối tượng `FunctionDeclaration` tương thích với Gemini từ các lệnh gọi bằng cách sử dụng `FunctionDeclaration.from_callable_with_api_option()`.
+次に、ツール名をハンドラ関数にマッピングするレジストリを作成します。
+`get_tools()` 関数は、`FunctionDeclaration` オブジェクト
+を呼び出し可能オブジェクトから `FunctionDeclaration.from_callable_with_api_option()` を使用して生成します。
 
 ```
 from typing import Any, Awaitable, Callable
@@ -197,11 +212,13 @@ def get_tools() -> types.Tool:
     )
 ```
 
-### Hoạt động của LLM
+### LLM アクティビティ
 
-Bây giờ, hãy xác định hoạt động gọi Gemini API. Các lớp dữ liệu `GeminiChatRequest` và `GeminiChatResponse` xác định hợp đồng.
+Gemini API を呼び出すアクティビティを定義します。`GeminiChatRequest` と `GeminiChatResponse`
+のデータクラスはコントラクトを定義します。
 
-Bạn sẽ tắt tính năng tự động gọi hàm để lời gọi LLM và lời gọi công cụ được xử lý dưới dạng các tác vụ riêng biệt, giúp tăng độ bền cho tác nhân của bạn. Bạn cũng sẽ tắt các lần thử lại tích hợp của SDK (`attempts=1`) vì Temporal xử lý các lần thử lại một cách bền bỉ.
+LLM 呼び出しとツール呼び出しが別々のタスクとして処理されるように、自動関数呼び出しを無効にします。これにより、エージェントの永続性が向上します。Temporal
+は永続的に再試行を処理するため、SDK の組み込み再試行（`attempts=1`）も無効にします。
 
 ```
 import os
@@ -277,11 +294,15 @@ async def generate_content(request: GeminiChatRequest) -> GeminiChatResponse:
     )
 ```
 
-### Hoạt động của công cụ động
+### 動的ツール アクティビティ
 
-Tiếp theo, hãy xác định hoạt động thực thi các công cụ. Thao tác này sử dụng tính năng hoạt động động của Temporal: trình xử lý công cụ (một đối tượng có thể gọi) được lấy từ sổ đăng ký công cụ thông qua hàm `get_handler`. Nhờ đó, bạn có thể xác định nhiều tác nhân chỉ bằng cách cung cấp một bộ công cụ và hướng dẫn hệ thống khác; quy trình triển khai vòng lặp dựa trên tác nhân không cần thay đổi.
+次に、ツールを実行するアクティビティを定義します。これには Temporal の動的アクティビティ機能を使用します。ツール
+ハンドラ（呼び出し可能オブジェクト）は、`get_handler` 関数を使用してツール
+レジストリから取得されます。これにより、さまざまなツールとシステム指示を指定するだけで、さまざまなエージェントを定義できます。エージェント
+ループを実装するワークフローを変更する必要はありません。
 
-Hoạt động này kiểm tra chữ ký của trình xử lý để xác định cách truyền đối số. Nếu trình xử lý dự kiến nhận một mô hình Pydantic, thì trình xử lý đó sẽ xử lý định dạng đầu ra lồng nhau mà Gemini tạo ra (ví dụ: `{"request": {"state": "CA"}}` thay vì `{"state": "CA"}` đơn giản).
+アクティビティはハンドラの署名を調べて、引数を渡す方法を決定します。ハンドラが Pydantic モデルを想定している場合、Gemini が生成するネストされた出力
+形式（フラットな `{"state": "CA"}` ではなく `{"request": {"state": "CA"}}` など）を処理します。
 
 ```
 import inspect
@@ -321,11 +342,14 @@ async def dynamic_tool_activity(args: Sequence[RawValue]) -> dict:
     return result
 ```
 
-### Quy trình công việc của vòng lặp AI tác nhân
+### エージェント ループ ワークフロー
 
-Giờ đây, bạn đã có tất cả các thành phần để hoàn tất việc tạo tác nhân. Lớp `AgentWorkflow` triển khai một quy trình công việc chứa vòng lặp của tác nhân. Trong vòng lặp đó, LLM được gọi thông qua hoạt động (giúp hoạt động này bền vững), đầu ra được kiểm tra và nếu LLM đã chọn một công cụ, thì công cụ đó sẽ được gọi thông qua `dynamic_tool_activity`.
+これで、エージェントの構築を完了するためのすべての要素が揃いました。`AgentWorkflow` クラスは、エージェント
+ループを含むワークフローを実装します。このループ内で、LLM はアクティビティを介して呼び出され（永続化されます）、出力が検査されます。LLM
+によってツールが選択された場合は、`dynamic_tool_activity` を介して呼び出されます。
 
-Trong tác nhân kiểu ReAct đơn giản này, sau khi LLM chọn không sử dụng một công cụ, vòng lặp sẽ được coi là hoàn tất và kết quả LLM cuối cùng sẽ được trả về.
+このシンプルな ReAct スタイルのエージェントでは、LLM がツールを使用しないことを選択すると、ループは完了とみなされ、最終的な LLM
+の結果が返されます。
 
 ```
 from datetime import timedelta
@@ -393,13 +417,17 @@ class AgentWorkflow:
         return result
 ```
 
-Vòng lặp có tác nhân hoàn toàn bền vững. Nếu worker của tác nhân gặp sự cố sau một số lần lặp lại trong vòng lặp, Temporal sẽ tiếp tục chính xác từ nơi worker dừng lại mà không cần gọi lại các lệnh gọi LLM hoặc lệnh gọi công cụ đã thực thi.
+エージェント ループは完全に永続化されます。ループを数回繰り返した後にエージェント ワーカーがクラッシュした場合、Temporal
+は中断したところから正確に再開します。すでに実行された LLM 呼び出しやツール呼び出しを再度呼び出す必要はありません。
 
-### Khởi động worker
+### ワーカーの起動
 
-Cuối cùng, hãy kết nối mọi thứ với nhau. Mặc dù mã này triển khai logic nghiệp vụ cần thiết theo cách khiến mã có vẻ đang chạy trong một quy trình duy nhất, nhưng việc sử dụng Temporal sẽ biến mã này thành một hệ thống dựa trên sự kiện (cụ thể là dựa trên nguồn sự kiện) trong đó hoạt động giao tiếp giữa quy trình công việc và các hoạt động diễn ra thông qua tính năng nhắn tin do Temporal cung cấp.
+最後に、すべてを接続します。コードは、単一のプロセスで実行されているように見える方法で必要なビジネス
+ロジックを実装しますが、Temporal を使用すると、ワークフローとアクティビティ間の通信が Temporal
+によって提供されるメッセージングを介して行われるイベント ドリブン システム（具体的にはイベント ソーシング）になります。
 
-Worker Temporal kết nối với dịch vụ Temporal và đóng vai trò là trình lập lịch biểu cho các tác vụ quy trình làm việc và hoạt động. Worker đăng ký quy trình và cả hai hoạt động, sau đó bắt đầu nghe các tác vụ.
+Temporal ワーカーは Temporal
+サービスに接続し、ワークフローとアクティビティのタスクのスケジューラとして機能します。ワーカーはワークフローと両方のアクティビティを登録し、タスクのリッスンを開始します。
 
 ```
 import asyncio
@@ -438,9 +466,11 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Tập lệnh phía máy khách
+## クライアント スクリプト
 
-Tạo tập lệnh máy khách (`start_workflow.py`). Tập lệnh này gửi một truy vấn và chờ kết quả. Lưu ý rằng nó kết nối với cùng một hàng đợi tác vụ được tham chiếu trong worker của tác nhân – tập lệnh `start_workflow` sẽ gửi một tác vụ quy trình làm việc có lời nhắc của người dùng đến hàng đợi tác vụ đó, bắt đầu quá trình thực thi tác nhân.
+クライアント スクリプト（`start_workflow.py`）を作成します。クエリを送信して結果を待ちます。エージェント
+ワーカーで参照されているのと同じタスクキューに接続します。`start_workflow` スクリプトは、ユーザー
+プロンプトを含むワークフロー タスクをそのタスクキューにディスパッチし、エージェントの実行を開始します。
 
 ```
 import asyncio
@@ -470,29 +500,31 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Chạy tác nhân
+## エージェントを実行する
 
-Nếu bạn chưa làm, hãy khởi động máy chủ phát triển Temporal:
+まだの場合は、Temporal 開発用サーバーを起動します。
 
 ```
 temporal server start-dev
 ```
 
-Trong một cửa sổ dòng lệnh mới, hãy bắt đầu trình chạy tác nhân:
+新しいターミナル ウィンドウで、エージェント ワーカーを起動します。
 
 ```
 python -m durable_agent_worker
 ```
 
-Trong cửa sổ dòng lệnh thứ ba, hãy gửi một truy vấn đến tác nhân của bạn:
+3 つ目のターミナル ウィンドウで、エージェントにクエリを送信します。
 
 ```
 python -m start_workflow "are there any weather alerts for where I am?"
 ```
 
-Lưu ý đầu ra trong thiết bị đầu cuối của `durable_agent_worker` cho biết các hành động xảy ra trong mỗi lần lặp của vòng lặp dựa trên tác nhân. LLM có thể đáp ứng yêu cầu của người dùng bằng cách gọi một loạt công cụ theo ý mình. Bạn có thể xem các bước đã thực hiện thông qua giao diện người dùng Temporal tại `http://localhost:8233/namespaces/default/workflows`.
+`durable_agent_worker` のターミナルに出力される、エージェント
+ループの各イテレーションで発生するアクションを確認します。LLM は、使用可能な一連のツールを呼び出すことで、ユーザー
+リクエストを満たすことができます。実行されたステップは、Temporal UI（`http://localhost:8233/namespaces/default/workflows`）で確認できます。
 
-Hãy thử một vài câu lệnh khác nhau để xem lý do của nhân viên và các công cụ gọi:
+いくつかのプロンプトを試して、エージェントが推論してツールを呼び出すことを確認します。
 
 ```
 python -m start_workflow "are there any weather alerts for New York?"
@@ -501,64 +533,67 @@ python -m start_workflow "what is my ip address?"
 python -m start_workflow "tell me a joke"
 ```
 
-Câu lệnh cuối cùng không yêu cầu bất kỳ công cụ nào, vì vậy, tác nhân sẽ phản hồi bằng một bài thơ haiku dựa trên `SYSTEM_INSTRUCTIONS`.
+最後のプロンプトではツールは必要ないため、エージェントは `SYSTEM_INSTRUCTIONS` に基づいて俳句で応答します。
 
-## Kiểm tra độ bền (Không bắt buộc)
+## 耐久性をテストする（省略可）
 
-Việc xây dựng trên Temporal đảm bảo tác nhân của bạn hoạt động liền mạch khi gặp sự cố. Bạn có thể kiểm thử việc này bằng hai thử nghiệm riêng biệt.
+Temporal を基盤に構築することで、エージェントは障害からシームレスに復旧できます。これは、2 つの異なるテストで確認できます。
 
-### Mô phỏng tình trạng mất mạng
+### ネットワーク停止をシミュレートする
 
-Trong thử nghiệm này, bạn sẽ tạm thời tắt kết nối Internet của máy tính, gửi một quy trình làm việc, xem Temporal tự động thử lại, sau đó khôi phục mạng để xem quy trình này khôi phục.
+このテストでは、パソコンのインターネット接続を一時的に無効にし、ワークフローを送信して、Temporal
+が自動的に再試行するのを確認してから、ネットワークを復元して復旧を確認します。
 
-1. Ngắt kết nối máy tính với Internet (ví dụ: tắt Wi-Fi).
-2. Gửi quy trình công việc:
+1. パソコンをインターネットから切断します（Wi-Fi をオフにするなど）。
+2. ワークフローを送信します。
 
    ```
    python -m start_workflow "tell me a joke"
    ```
-3. Kiểm tra giao diện người dùng Temporal (`http://localhost:8233`). Bạn sẽ thấy hoạt động LLM không thành công và Temporal tự động quản lý các lần thử lại ở chế độ nền.
-4. Kết nối lại với Internet.
-5. Lần thử lại tự động tiếp theo sẽ kết nối thành công với Gemini API và thiết bị đầu cuối của bạn sẽ in kết quả cuối cùng.
+3. Temporal UI（`http://localhost:8233`）を確認します。LLM アクティビティが失敗し、Temporal がバックグラウンドで再試行を自動的に管理していることがわかります。
+4. インターネットに再接続します。
+5. 次の自動再試行で Gemini API に正常に到達し、ターミナルに最終結果が出力されます。
 
-### Sống sót sau sự cố của worker
+### ワーカーのクラッシュから復旧する
 
-Trong kiểm thử này, bạn sẽ huỷ worker khi đang thực thi và khởi động lại worker đó. Phát lại tạm thời nhật ký quy trình làm việc (nguồn sự kiện) và tiếp tục từ hoạt động đã hoàn thành gần đây nhất – các lệnh gọi LLM và lệnh gọi công cụ đã hoàn thành sẽ không được lặp lại.
+このテストでは、実行中にワーカーを強制終了して再起動します。Temporal はワークフロー履歴（イベント
+ソーシング）を再生し、最後に完了したアクティビティから再開します。すでに完了した LLM 呼び出しとツール呼び出しは繰り返されません。
 
-1. Để có thời gian dừng worker, hãy mở `durable_agent_worker.py` và tạm thời bỏ chú thích `await asyncio.sleep(10)` bên trong vòng lặp `AgentWorkflow`
-   `run`.
-2. Khởi động lại worker:
+1. ワーカーを強制終了する時間を確保するため、`durable_agent_worker.py` を開き、`AgentWorkflow`
+   `run` ループ内の `await asyncio.sleep(10)` のコメント化を一時的に解除します。
+2. ワーカーを再起動します。
 
    ```
    python -m durable_agent_worker
    ```
-3. Gửi một cụm từ tìm kiếm kích hoạt nhiều công cụ:
+3. 複数のツールをトリガーするクエリを送信します。
 
    ```
    python -m start_workflow "are there any weather alerts where I am?"
    ```
-4. Huỷ quy trình worker bất cứ lúc nào trước khi hoàn tất (`Ctrl-C` trong thiết bị đầu cuối worker hoặc sử dụng `kill %1` nếu đang chạy ở chế độ nền).
-5. Khởi động lại worker:
+4. 完了する前にいつでもワーカー プロセスを強制終了します（ワーカー ターミナルで `Ctrl-C` を押すか、バックグラウンドで実行している場合は `kill %1` を使用します）。
+5. ワーカーを再起動します。
 
    ```
    python -m durable_agent_worker
    ```
 
-Temporal phát lại nhật ký quy trình làm việc. Các lệnh gọi LLM và lệnh gọi công cụ đã hoàn tất sẽ **không** được thực thi lại – kết quả của các lệnh gọi này sẽ được phát lại ngay lập tức từ nhật ký (nhật ký sự kiện). Quy trình công việc hoàn tất thành công.
+Temporal はワークフロー履歴を再生します。すでに完了した LLM 呼び出しとツール呼び出しは**再実行されません**
+。結果は履歴（イベントログ）から即座に再生されます。ワークフローは正常に完了します。
 
-## Tài nguyên khác
+## その他のリソース
 
-- [Tài liệu về Temporal](https://docs.temporal.io/)
+- [Temporal のドキュメント](https://docs.temporal.io/)
 - [Temporal Python SDK](https://docs.temporal.io/develop/python)
-- [SDK AI tạo sinh của Google](https://googleapis.github.io/python-genai/)
-- [Mã nguồn cho hướng dẫn này](https://github.com/temporal-community/durable-react-agent-gemini)
+- [Google GenAI SDK](https://googleapis.github.io/python-genai/)
+- [このチュートリアルのソースコード](https://github.com/temporal-community/durable-react-agent-gemini)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-09-12 UTC.
+最終更新日 2026-09-12 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-12 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-12 UTC。"],[],[]]

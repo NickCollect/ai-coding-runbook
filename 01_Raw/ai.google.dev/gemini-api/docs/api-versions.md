@@ -1,47 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=zh-TW
-fetched_at: 2026-09-21T05:45:36.293253+00:00
-title: "API \u7248\u672c\u8aaa\u660e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=fr
+fetched_at: 2026-09-28T06:21:56.907310+00:00
+title: "Pr\u00e9sentation des versions de l'API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [API 參考資料](https://ai.google.dev/api?hl=zh-tw)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Documentation de référence de l'API](https://ai.google.dev/api?hl=fr)
 
-提供意見
+Envoyer des commentaires
 
-# API 版本說明
+# Présentation des versions de l'API
 
-本文將概略說明 Gemini API 的 `v1` 和 `v1beta` 版本之間的差異。
+Ce document présente les principales différences entre les versions `v1` et `v1beta` de l'API Gemini.
 
-- **v1**：API 穩定版。穩定版中的功能在主要版本生命週期內完全受支援。如有任何重大變更，系統會建立下一個 API 主要版本，並在一段合理時間後淘汰現有版本。API 導入非破壞性變更時，不必變更主要版本。自 2026 年 6 月起，**Interactions API** 將全面開放使用，並支援 `v1`。
-- **v1beta**：這個版本包含正在積極開發的早期功能。`v1beta` 中的功能可能會根據意見回饋進行調整，但您可以在這些功能升級為穩定版之前搶先試用。
+- **v1** : version stable de l'API. Les fonctionnalités de la version stable sont entièrement prises en charge pendant toute la durée de vie de la version majeure. En cas de modifications destructives, une nouvelle version majeure de l'API sera créée et la version existante sera obsolète après un délai raisonnable.
+  Des modifications non destructives peuvent être apportées à l'API sans modifier la version majeure. L'**API Interactions** et ses principales fonctionnalités sont généralement disponibles dans `v1`.
+- **v1beta** : cette version inclut des fonctionnalités et des capacités préliminaires en cours de développement. Bien que les fonctionnalités de `v1beta` puissent être modifiées à mesure que nous les affinons en fonction des commentaires, elles vous permettent d'essayer de nouvelles fonctionnalités avant qu'elles ne soient promues à la version stable.
 
-| 功能 | v1 | v1beta |
+## Compatibilité des fonctionnalités
+
+Le tableau suivant détaille la disponibilité des fonctionnalités dans `v1` (disponibilité générale) et `v1beta` (bêta). Les outils et les fonctionnalités principales de l'API s'appliquent à l'API Interactions et à `generateContent`, sauf indication contraire :
+
+| Fonctionnalité | v1 | v1beta |
 | --- | --- | --- |
-| Interactions API |  |  |
-| 生成內容 - 僅輸入文字 |  |  |
-| 生成內容 - 輸入文字和圖片 |  |  |
-| 生成內容 - 文字輸出 |  |  |
-| 生成內容 - 多輪對話 (聊天) |  |  |
-| 生成內容 - 函式呼叫 |  |  |
-| 生成內容 - 串流 |  |  |
-| 嵌入內容 - 僅輸入文字 |  |  |
-| 生成答案 |  |  |
-| 語意檢索器 |  |  |
+| **Fonctionnalités principales de l'API** |  |  |
+| [API Interactions](https://ai.google.dev/gemini-api/docs/get-started?hl=fr) |  |  |
+| [Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) |  |  |
+| [Sortie structurée](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr) |  |  |
+| [Réflexion / Raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr) |  |  |
+| [Instructions système](https://ai.google.dev/gemini-api/docs/system-instructions?hl=fr) |  |  |
+| [Sortie audio (configuration vocale)](https://ai.google.dev/gemini-api/docs/audio?hl=fr) |  |  |
+| [Niveau de service (Priorité / Flex)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr) |  |  |
+| **Outils** |  |  |
+| [Outil d'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr) |  |  |
+| [Ancrage avec la recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) |  |  |
+| [Ancrage Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr) |  |  |
+| [Outil de contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) |  |  |
+| [Outil de recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr) |  |  |
+| [Outil d'utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) |  |  |
+| [Outil Serveurs MCP](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#mcp) |  |  |
+| **API en temps réel** |  |  |
+| [API Live (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=fr) |  |  |
+| [API Live Music](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=fr) |  |  |
+| [Jetons éphémères (API Live)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=fr) |  |  |
+| **API de la plate-forme** |  |  |
+| [API Models](https://ai.google.dev/gemini-api/docs/models?hl=fr) |  |  |
+| [Route du service Files](https://ai.google.dev/gemini-api/docs/files?hl=fr) |  |  |
+| [Route de stockage de la recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr) |  |  |
+| [API Agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) |  |  |
+| [API Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=fr) |  |  |
+| [Mise en cache du contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr) |  |  |
 
-- - 支援
-- - Will never be supported
+- : compatible
 
-## 在 SDK 中設定 API 版本
+## Configurer la version de l'API dans un SDK
 
-Gemini API SDK 預設為 `v1beta`，但您可以明確指定版本，方法是設定 API 版本，如下列程式碼範例所示：
+Les SDK de l'API Gemini sont définis par défaut sur `v1beta`, mais vous pouvez spécifier explicitement les versions en définissant la version de l'API, comme indiqué dans l'exemple de code suivant :
 
 ### Python
 
@@ -51,7 +72,7 @@ from google import genai
 client = genai.Client(http_options={'api_version': 'v1'})
 
 interaction = client.interactions.create(
-    model='gemini-3.6-flash',
+    model='gemini-3.8-flash',
     input="Explain how AI works",
 )
 
@@ -69,13 +90,76 @@ const ai = new GoogleGenAI({
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     input: "Explain how AI works",
   });
   console.log(interaction.output_text);
 }
 
 await main();
+```
+
+### Java
+
+```
+import com.google.genai.Client;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.InteractionsInput;
+import com.google.genai.gaos.models.interactions.Model;
+import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
+import com.google.genai.types.HttpOptions;
+
+Client client = Client.builder()
+    .httpOptions(HttpOptions.builder().apiVersion("v1").build())
+    .build();
+
+CreateModelInteraction req = CreateModelInteraction.builder()
+    .model(Model.of("gemini-3.6-flash"))
+    .input(InteractionsInput.of("Explain how AI works"))
+    .build();
+var interaction = client.interactions.create(CreateInteractionRequestBody.of(req)).interaction().get();
+System.out.println(interaction.outputText().orElse(""));
+```
+
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, &genai.ClientConfig{
+        HTTPOptions: genai.HTTPOptions{
+            APIVersion: "v1",
+        },
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.6-flash"),
+            Input: interactions.NewInteractionsInput("Explain how AI works"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
 ```
 
 ### REST
@@ -85,17 +169,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.6-flash",
-    "input": "Explain how AI works"
+    "model": "gemini-3.8-flash",
+    "input": "Explain how AI works",
   }'
 ```
 
-提供意見
+Envoyer des commentaires
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-上次更新時間：2026-09-12 (世界標準時間)。
+Dernière mise à jour le 2026/09/24 (UTC).
 
-想進一步說明嗎？
+Voulez-vous nous donner plus d'informations ?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]

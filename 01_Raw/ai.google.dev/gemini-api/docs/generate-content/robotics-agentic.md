@@ -1,36 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=de
-fetched_at: 2026-09-21T05:56:29.741653+00:00
-title: "Agentische Vision-Funktionen \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-agentic?hl=zh-TW
+fetched_at: 2026-09-28T06:25:17.624466+00:00
+title: "\u4ee3\u7406\u8996\u89ba\u529f\u80fd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-Feedback geben
+提供意見
 
-# Agentische Vision-Funktionen
+# 代理視覺功能
 
-Gemini Robotics ER-Modelle können Python-Code schreiben und ausführen, um Bilder zu bearbeiten und Logik anzuwenden, bevor sie antworten. Auf dieser Seite finden Sie Beispiele für die Code-Ausführung: Objekterkennung mit Zoom und Zuschneiden, Instrumentenablesung, Flüssigkeitsmessung, Lesen von Leiterplatten und Bildannotation.
+Gemini Robotics ER 模型可以撰寫及執行 Python 程式碼來處理圖片，並在回答問題前套用邏輯。本頁面涵蓋程式碼執行範例：使用縮放和裁剪功能進行物件偵測、儀表讀取、液體測量、電路板讀取，以及圖像註解。
 
-Wenn Sie diese Beispiele an Ihren eigenen Anwendungsfall anpassen möchten, ersetzen Sie den Prompt-Text und die hochgeladene Bilddatei durch Ihre eigenen. Sie können auch das angeforderte JSON-Schema im Prompt an die Ausgabestruktur anpassen, die Ihre Anwendung benötigt, oder eine `system_instruction` hinzufügen, um das Ausgabeformat und die Genauigkeit zu erzwingen.
+如要根據自己的用途調整這些範例，請將提示文字和上傳的圖片檔案換成自己的內容。您也可以在提示中調整要求的 JSON 結構定義，以符合應用程式所需的輸出結構，或新增 `system_instruction` 來強制執行輸出格式和精確度。
 
-Vollständigen ausführbaren Code finden Sie im
-[Robotics-Kochbuch](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+如需完整的可執行程式碼，請參閱「[機器人食譜](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)」。
 
-## Denkaufwand
+## 思考程度
 
-Sie können den Denkaufwand steuern, um Latenz gegen Genauigkeit abzuwägen. Räumliche Aufgaben wie die Objekterkennung funktionieren gut mit einem niedrigen Denkaufwand. Komplexe Aufgaben wie das Zählen oder die Gewichtsschätzung profitieren von einem höheren Denkaufwand.
+您可以控制思考層級，以延遲換取準確度。物件偵測等空間工作在低思考層級下表現良好。對於計數或重量估算等複雜工作，較高的思考層次有助於提升準確度。
 
-Im folgenden Beispiel wird der Denkaufwand für eine komplexe Zählaufgabe auf `high` gesetzt:
+以下範例會將複雜的計數工作思考層級設為 `high`：
 
 ### Python
 
@@ -60,11 +59,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Weitere Informationen finden Sie unter [Denkaufwand](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=de).
+詳情請參閱「[思考](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=zh-tw)」一節。
 
-## Objekterkennung (Zoom und Zuschneiden)
+## 物件偵測 (縮放及裁剪)
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um ein Bild zu zoomen und zuzuschneiden, um die Ansicht bei der Objekterkennung zu verbessern und Begrenzungsrahmen zurückzugeben.
+以下範例說明如何使用執行程式碼功能，在偵測物件及傳回定界框時，縮放及裁剪圖片，以便更清楚地查看。
 
 ### Python
 
@@ -102,7 +101,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Die Modellausgabe würde in etwa so aussehen:
+模型輸出內容會類似下列 JSON 回應：
 
 ```
 [
@@ -114,13 +113,13 @@ Die Modellausgabe würde in etwa so aussehen:
 ]
 ```
 
-Das folgende Bild zeigt die vom Modell zurückgegebenen Rahmen.
+下圖顯示模型傳回的方塊。
 
-![Beispiel für Begrenzungsrahmen für gefundene Objekte](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=de)
+![範例：顯示找到的物件的定界框](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=zh-tw)
 
-## Analoges Messgerät ablesen und Logik anwenden
+## 讀取類比儀表並套用邏輯
 
-Im folgenden Beispiel wird gezeigt, wie Sie das Modell verwenden, um ein analoges Messgerät abzulesen und Zeitberechnungen durchzuführen. Dabei wird eine Systemanweisung verwendet, um eine JSON-Ausgabe zu erzwingen.
+以下範例說明如何使用模型讀取類比儀表，並執行時間計算。並使用系統指令強制輸出 JSON 格式。
 
 ### Python
 
@@ -156,9 +155,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Flüssigkeit in einem Behälter messen
+## 測量容器中的液體
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um den Flüssigkeitsstand in einem Behälter zu messen.
+以下範例說明如何使用執行程式碼功能，測量容器中的液體量。
 
 ### Python
 
@@ -193,9 +192,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-## Markierungen auf einer Leiterplatte lesen
+## 解讀電路板上的標記
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um die Markierungen auf einer Leiterplatte zu lesen.
+以下範例說明如何使用程式碼執行功能，讀取電路板上的標記。
 
 ### Python
 
@@ -230,11 +229,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-![Beispiel für Markierungen auf einer Leiterplatte](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=de)
+![電路板上標記的範例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=zh-tw)
 
-## Bildannotation
+## 圖片註解
 
-Im folgenden Beispiel wird gezeigt, wie Sie die Codeausführung verwenden, um ein Bild zu annotieren (z.B. Pfeile für Entsorgungsanweisungen zu zeichnen) und das geänderte Bild zurückzugeben.
+以下範例說明如何使用執行程式碼功能為圖片加上註解 (例如繪製箭頭表示處理說明)，並傳回修改後的圖片。
 
 ### Python
 
@@ -271,11 +270,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Im Folgenden finden Sie ein Beispiel für eine Bildeingabe.
+以下是圖片輸入內容範例。
 
-![Beispiel für eine Uhr zum Ablesen](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=de)
+![顯示時鐘的範例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=zh-tw)
 
-Die Modellausgabe würde in etwa so aussehen:
+模型輸出內容會與下列內容類似：
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -284,18 +283,18 @@ Die Modellausgabe würde in etwa so aussehen:
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## Nächste Schritte
+## 後續步驟
 
-- [Aufgabenorchestrierung](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de) – Aufgaben mit langer Laufzeit mit benutzerdefinierten Roboter-APIs.
-- [Robotik mit Streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de) – bidirektionales Streaming in Echtzeit (nur Gemini Robotics ER 2).
-- [Videoanalyse](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de) – Momente finden und Fortschritt klassifizieren (nur Gemini Robotics ER 2).
+- [工作流程協調](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-tw)：使用自訂機器人 API 執行長期任務。
+- [串流機器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)：即時雙向串流 (僅限 Gemini Robotics ER 2)。
+- [影片理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-tw)：尋找特定時刻和進度分類 (僅限 Gemini Robotics ER 2)。
 
-Feedback geben
+提供意見
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Zuletzt aktualisiert: 2026-09-08 (UTC).
+上次更新時間：2026-09-08 (世界標準時間)。
 
-Haben Sie Feedback für uns?
+想進一步說明嗎？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-08 (UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-08 (世界標準時間)。"],[],[]]

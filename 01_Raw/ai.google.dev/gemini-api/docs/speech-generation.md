@@ -1,174 +1,195 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl
-fetched_at: 2026-09-21T05:49:46.116731+00:00
-title: "Generowanie tekstu na mow\u0119 (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi
+fetched_at: 2026-09-28T06:20:51.608328+00:00
+title: "T\u1ea1o l\u1eddi n\u00f3i t\u1eeb v\u0103n b\u1ea3n (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-# Generowanie tekstu na mowę (TTS)
+# Tạo lời nói từ văn bản (TTS)
 
-Interfejs Gemini API może przekształcać tekst wejściowy w dźwięk z jednym lub wieloma mówcami za pomocą funkcji generowania tekstu na mowę (TTS) Gemini.
-Generowanie tekstu na mowę (TTS) jest *[kontrolowane](#controllable)*, co oznacza, że możesz używać języka naturalnego do strukturyzowania interakcji i określania *stylu*, *akcentu*, *tempa* i *tonu* dźwięku.
+Gemini API có thể chuyển đổi văn bản đầu vào thành âm thanh một người nói hoặc nhiều người nói bằng cách sử dụng các chức năng tạo lời nói từ văn bản (TTS) của Gemini.
+Tính năng tạo văn bản thành lời nói có thể *[kiểm soát](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#controllable)*, tức là bạn có thể kết hợp siêu dữ liệu lượt có cấu trúc (`speech_metadata`) và thẻ thoại nội dòng để hướng dẫn *phong cách*, *giọng*, *tốc độ* và *giọng điệu* của âm thanh.
 
-Funkcja TTS różni się od generowania mowy za pomocą [interfejsu Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl), który jest przeznaczony do interaktywnych, nieustrukturyzowanych danych audio oraz multimodalnych danych wejściowych i wyjściowych. Interfejs Live API sprawdza się w dynamicznych kontekstach konwersacyjnych, a TTS za pomocą interfejsu Gemini API jest dostosowany do scenariuszy, które wymagają dokładnego odczytania tekstu z precyzyjną kontrolą stylu i dźwięku, takich jak generowanie podcastów lub audiobooków.
+Khả năng TTS khác với khả năng tạo lời nói được cung cấp thông qua [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi). API này được thiết kế cho âm thanh tương tác, không có cấu trúc, cũng như đầu vào và đầu ra đa phương thức. Mặc dù Live API vượt trội trong các ngữ cảnh trò chuyện linh hoạt, nhưng TTS thông qua Gemini API được điều chỉnh cho phù hợp với những trường hợp yêu cầu đọc văn bản chính xác với khả năng kiểm soát chi tiết về phong cách và âm thanh, chẳng hạn như tạo podcast hoặc sách nói.
 
-Z tego przewodnika dowiesz się, jak generować dźwięk z tekstu dla jednego lub wielu mówców.
+Hướng dẫn này cho bạn biết cách tạo âm thanh một người nói và nhiều người nói từ văn bản bằng [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`).
 
-## Zanim zaczniesz
+## Trước khi bắt đầu
 
-Używaj wariantu modelu Gemini 2.5 z funkcjami zamiany tekstu na mowę (TTS) Gemini, jak podano w sekcji [Obsługiwane modele](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl#supported-models). Aby uzyskać optymalne wyniki, zastanów się, który model najlepiej pasuje do Twojego konkretnego przypadku użycia.
+Đảm bảo bạn sử dụng một mô hình TTS của Gemini có trong phần [Các mô hình được hỗ trợ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#supported-models).
+Để có kết quả tối ưu, hãy xem phần [Thời điểm sử dụng mô hình nào](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#when-to-use-which-model) để chọn mô hình phù hợp nhất cho khối lượng công việc của bạn.
 
-Zanim zaczniesz tworzyć, możesz [przetestować modele TTS Gemini w AI Studio](https://aistudio.google.com/generate-speech?hl=pl).
+Bạn có thể thấy việc [kiểm thử các mô hình TTS của Gemini trong AI Studio](https://aistudio.google.com/generate-speech?hl=vi) là hữu ích trước khi bắt đầu xây dựng.
 
-## TTS z jednym głosem
+## TTS một người nói
 
-Aby przekonwertować tekst na dźwięk z jednym mówcą, ustaw tryb odpowiedzi na „audio” i przekaż obiekt `speech_config` z nazwą głosu.
-Musisz wybrać nazwę głosu z gotowych [głosów wyjściowych](#voices).
+Để chuyển văn bản thành âm thanh của một người nói bằng các mô hình TTS Gemini 3.8, hãy truyền bản chép lời nguyên văn trong `input`, đính kèm kiểu theo lượt bằng chú thích `speech_metadata` và định cấu hình giọng nói của bạn trong `generation_config.speech_config`. Bạn có thể chọn một giọng nói trong [Các lựa chọn về giọng nói](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#voices) được tạo sẵn, Thư viện giọng nói mở rộng (`GET /v1beta/voices`), [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) tuỳ chỉnh (`voice_...`) hoặc [Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi) (`voice_...` hoặc `voicekey_...` không trạng thái không bắt buộc).
 
-W tym przykładzie zapisujemy wyjściowy dźwięk z modelu w pliku wave:
+Ví dụ này lưu âm thanh đầu ra WAV mặc định (`audio/wav`) từ mô hình trực tiếp vào một tệp:
 
 ### Python
 
 ```
-from google import genai
-import wave
 import base64
-
-def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
-    with wave.open(filename, "wb") as wf:
-        wf.setnchannels(channels)
-        wf.setsampwidth(sample_width)
-        wf.setframerate(rate)
-        wf.writeframes(pcm)
+from google import genai
 
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-tts-preview",
-    input="Say cheerfully: Have a wonderful day!",
+    model="gemini-3.8-flash-tts",
+    input=[{
+        "type": "user_input",
+        "content": [{
+            "type": "text",
+            "text": "Have a wonderful day!",
+            "annotations": [{
+                "type": "speech_metadata",
+                "style": "cheerful and friendly",
+            }],
+        }],
+    }],
     response_format={"type": "audio"},
     generation_config={
         "speech_config": [
-            {"voice": "Kore"}
+            {"voice": "Kore"},
         ]
-    }
+    },
 )
 
-wave_file('out.wav', base64.b64decode(interaction.output_audio.data))
+with open("out.wav", "wb") as f:
+    f.write(base64.b64decode(interaction.output_audio.data))
 ```
 
 ### JavaScript
 
 ```
+import * as fs from 'node:fs';
 import {GoogleGenAI} from '@google/genai';
-import wav from 'wav';
-
-async function saveWaveFile(
-   filename,
-   pcmData,
-   channels = 1,
-   rate = 24000,
-   sampleWidth = 2,
-) {
-   return new Promise((resolve, reject) => {
-      const writer = new wav.FileWriter(filename, {
-            channels,
-            sampleRate: rate,
-            bitDepth: sampleWidth * 8,
-      });
-
-      writer.on('finish', resolve);
-      writer.on('error', reject);
-
-      writer.write(pcmData);
-      writer.end();
-   });
-}
 
 async function main() {
    const client = new GoogleGenAI({});
 
    const interaction = await client.interactions.create({
-      model: "gemini-3.1-flash-tts-preview",
-      input: "Say cheerfully: Have a wonderful day!",
+      model: 'gemini-3.8-flash-tts',
+      input: [{
+         type: 'user_input',
+         content: [{
+            type: 'text',
+            text: 'Have a wonderful day!',
+            annotations: [{
+               type: 'speech_metadata',
+               style: 'cheerful and friendly',
+            }],
+         }],
+      }],
       response_format: { type: 'audio' },
       generation_config: {
          speech_config: [
-            { voice: 'Kore' }
-         ]
+            { voice: 'Kore' },
+         ],
       },
-    });
+   });
 
    const audioBuffer = Buffer.from(interaction.output_audio.data, 'base64');
-
-   await saveWaveFile('out.wav', audioBuffer);
+   fs.writeFileSync('out.wav', audioBuffer);
 }
 await main();
 ```
 
-### Java
+### Go
 
 ```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AudioResponseFormat;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ResponseFormat;
-import com.google.genai.gaos.models.interactions.SpeechConfig;
-import com.google.genai.gaos.models.interactions.SpeechConfigUnion;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.util.Arrays;
-import java.util.Base64;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
+package main
 
-Client client = new Client();
+import (
+    "context"
+    "encoding/base64"
+    "encoding/binary"
+    "log"
+    "os"
 
-SpeechConfig speechConfig = SpeechConfig.builder().voice("Kore").build();
-GenerationConfig generationConfig =
-    GenerationConfig.builder()
-        .speechConfig(SpeechConfigUnion.of(Arrays.asList(speechConfig)))
-        .build();
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-tts-preview"))
-        .input(InteractionsInput.of("Say cheerfully: Have a wonderful day!"))
-        .responseFormat(
-            CreateModelInteractionResponseFormat.of(
-                ResponseFormat.of(AudioResponseFormat.builder().build())))
-        .generationConfig(generationConfig)
-        .build();
+func saveWaveFile(filename string, pcmData []byte) error {
+    f, err := os.Create(filename)
+    if err != nil {
+        return err
+    }
+    defer f.Close()
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+    sampleRate := uint32(24000)
+    numChannels := uint16(1)
+    bitsPerSample := uint16(16)
+    byteRate := sampleRate * uint32(numChannels) * uint32(bitsPerSample/8)
+    blockAlign := numChannels * (bitsPerSample / 8)
+    dataSize := uint32(len(pcmData))
 
-if (interaction.outputAudio().isPresent() && interaction.outputAudio().get().data().isPresent()) {
-  byte[] pcmBytes = Base64.getDecoder().decode(interaction.outputAudio().get().data().get());
-  AudioFormat format = new AudioFormat(24000, 16, 1, true, false);
-  AudioInputStream audioInputStream =
-      new AudioInputStream(
-          new ByteArrayInputStream(pcmBytes), format, pcmBytes.length / format.getFrameSize());
-  AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, new File("out.wav"));
+    f.WriteString("RIFF")
+    binary.Write(f, binary.LittleEndian, uint32(36+dataSize))
+    f.WriteString("WAVEfmt ")
+    binary.Write(f, binary.LittleEndian, uint32(16))
+    binary.Write(f, binary.LittleEndian, uint16(1))
+    binary.Write(f, binary.LittleEndian, numChannels)
+    binary.Write(f, binary.LittleEndian, sampleRate)
+    binary.Write(f, binary.LittleEndian, byteRate)
+    binary.Write(f, binary.LittleEndian, blockAlign)
+    binary.Write(f, binary.LittleEndian, bitsPerSample)
+    f.WriteString("data")
+    binary.Write(f, binary.LittleEndian, dataSize)
+    _, err = f.Write(pcmData)
+    return err
+}
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    generationConfig := &interactions.GenerationConfig{
+        SpeechConfig: genai.Ptr(interactions.NewSpeechConfigUnion([]interactions.SpeechConfig{
+            {Voice: genai.Ptr("Kore")},
+        })),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Input: interactions.NewInteractionsInput("Say cheerfully: Have a wonderful day!"),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
+            )),
+            GenerationConfig: generationConfig,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputAudio != nil && res.Interaction.OutputAudio.Data != nil {
+        pcmBytes, err := base64.StdEncoding.DecodeString(*res.Interaction.OutputAudio.Data)
+        if err != nil {
+            log.Fatal(err)
+        }
+        if err := saveWaveFile("out.wav", pcmBytes); err != nil {
+            log.Fatal(err)
+        }
+    }
 }
 ```
 
@@ -179,175 +200,225 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-tts-preview",
-    "input": "Say cheerfully: Have a wonderful day!",
+    "model": "gemini-3.8-flash-tts",
+    "input": [{
+      "type": "user_input",
+      "content": [{
+        "type": "text",
+        "text": "Have a wonderful day!",
+        "annotations": [{
+          "type": "speech_metadata",
+          "style": "cheerful and friendly"
+        }]
+      }]
+    }],
     "response_format": {
-       "type": "audio"
-     },
+      "type": "audio"
+    },
     "generation_config": {
       "speech_config": [
         { "voice": "Kore" }
       ]
     }
-  }'
+  }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-Wygenerowane dane audio możesz pobrać za pomocą właściwości `interaction.output_audio`, która zwraca ostatni wygenerowany blok audio. Więcej informacji o właściwościach ułatwiających korzystanie z usługi znajdziesz w [omówieniu interakcji](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl#convenience-properties).
+Trong SDK Python và JavaScript, bạn có thể truy xuất dữ liệu âm thanh đã tạo bằng cách sử dụng thuộc tính tiện lợi `interaction.output_audio`. Thuộc tính này trả về khối âm thanh được tạo gần đây nhất (trong các phản hồi JSON REST thô, âm thanh được mã hoá base64 sẽ được lưu trữ trong `steps[].content[].data`). Để biết thông tin chi tiết về các thuộc tính tiện lợi, hãy xem phần [Tổng quan về các hoạt động tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi#convenience-properties).
 
-## TTS z wieloma rozmówcami
+## TTS nhiều người nói
 
-W przypadku dźwięku z wielu głośników potrzebny jest obiekt `multi_speaker_voice_config`, w którym każdy głośnik (maksymalnie 2) jest skonfigurowany jako `speaker_voice_config`.
-Każdy parametr `speaker` musisz zdefiniować za pomocą tych samych nazw, które zostały użyte w [prompcie](#controllable):
+Đối với đoạn hội thoại có nhiều người nói, hãy định cấu hình 2 người nói trong `speech_config.speakers` và truyền từng lượt nói dưới dạng một mục văn bản riêng biệt có chú thích `speech_metadata` chỉ định `speaker` và `style` ở cấp lượt nói (không bắt buộc). Sử dụng `"mode": "conversational"` để có nhịp độ trò chuyện tự nhiên:
 
 ### Python
 
 ```
-from google import genai
-import wave
 import base64
-
-def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
-   with wave.open(filename, "wb") as wf:
-      wf.setnchannels(channels)
-      wf.setsampwidth(sample_width)
-      wf.setframerate(rate)
-      wf.writeframes(pcm)
+from google import genai
 
 client = genai.Client()
 
-prompt = """TTS the following conversation between Joe and Jane:
-         Joe: How's it going today Jane?
-         Jane: Not too bad, how about you?"""
+interaction = client.interactions.create(
+    model="gemini-3.8-flash-tts",
+    input=[{
+        "type": "user_input",
+        "content": [
+            {
+                "type": "text",
+                "text": "How's it going today Jane?",
+                "annotations": [{
+                    "type": "speech_metadata",
+                    "speaker": "Joe",
+                    "style": "cheerful and friendly",
+                }],
+            },
+            {
+                "type": "text",
+                "text": "Not too bad, how about you? Ready to test these new voices?",
+                "annotations": [{
+                    "type": "speech_metadata",
+                    "speaker": "Jane",
+                    "style": "calm and relaxed",
+                }],
+            },
+        ],
+    }],
+    response_format={"type": "audio"},
+    generation_config={
+        "speech_config": {
+            "mode": "conversational",
+            "speakers": [
+                {"speaker": "Joe", "voice": "Puck"},
+                {"speaker": "Jane", "voice": "Kore"},
+            ],
+        }
+    },
+)
 
- interaction = client.interactions.create(
-     model="gemini-3.1-flash-tts-preview",
-     input=prompt,
-     response_format={"type": "audio"},
-     generation_config={
-         "speech_config": [
-             {"speaker": "Joe", "voice": "Kore"},
-             {"speaker": "Jane", "voice": "Puck"}
-         ]
-     }
- )
-
-wave_file('out.wav', base64.b64decode(interaction.output_audio.data))
+with open("out.wav", "wb") as f:
+    f.write(base64.b64decode(interaction.output_audio.data))
 ```
 
 ### JavaScript
 
 ```
+import * as fs from 'node:fs';
 import {GoogleGenAI} from '@google/genai';
-import wav from 'wav';
-
-async function saveWaveFile(
-   filename,
-   pcmData,
-   channels = 1,
-   rate = 24000,
-   sampleWidth = 2,
-) {
-   return new Promise((resolve, reject) => {
-      const writer = new wav.FileWriter(filename, {
-            channels,
-            sampleRate: rate,
-            bitDepth: sampleWidth * 8,
-      });
-
-      writer.on('finish', resolve);
-      writer.on('error', reject);
-
-      writer.write(pcmData);
-      writer.end();
-   });
-}
 
 async function main() {
    const client = new GoogleGenAI({});
 
-   const prompt = `TTS the following conversation between Joe and Jane:
-         Joe: How's it going today Jane?
-         Jane: Not too bad, how about you?`;
-
    const interaction = await client.interactions.create({
-      model: "gemini-3.1-flash-tts-preview",
-      input: prompt,
+      model: 'gemini-3.8-flash-tts',
+      input: [{
+         type: 'user_input',
+         content: [
+            {
+               type: 'text',
+               text: "How's it going today Jane?",
+               annotations: [{
+                  type: 'speech_metadata',
+                  speaker: 'Joe',
+                  style: 'cheerful and friendly',
+               }],
+            },
+            {
+               type: 'text',
+               text: 'Not too bad, how about you? Ready to test these new voices?',
+               annotations: [{
+                  type: 'speech_metadata',
+                  speaker: 'Jane',
+                  style: 'calm and relaxed',
+               }],
+            },
+         ],
+      }],
       response_format: { type: 'audio' },
       generation_config: {
-         speech_config: [
-            { speaker: 'Joe', voice: 'Kore' },
-            { speaker: 'Jane', voice: 'Puck' }
-         ]
+         speech_config: {
+            mode: 'conversational',
+            speakers: [
+               { speaker: 'Joe', voice: 'Puck' },
+               { speaker: 'Jane', voice: 'Kore' },
+            ],
+         },
       },
    });
 
    const audioBuffer = Buffer.from(interaction.output_audio.data, 'base64');
-
-   await saveWaveFile('out.wav', audioBuffer);
+   fs.writeFileSync('out.wav', audioBuffer);
 }
 
 await main();
 ```
 
-### Java
+### Go
 
 ```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AudioResponseFormat;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ResponseFormat;
-import com.google.genai.gaos.models.interactions.SpeechConfig;
-import com.google.genai.gaos.models.interactions.SpeechConfigUnion;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.util.Arrays;
-import java.util.Base64;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
+package main
 
-Client client = new Client();
+import (
+    "context"
+    "encoding/base64"
+    "encoding/binary"
+    "log"
+    "os"
 
-String prompt =
-    "TTS the following conversation between Joe and Jane:\n"
-        + "Joe: How's it going today Jane?\n"
-        + "Jane: Not too bad, how about you?";
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-SpeechConfig joeConfig = SpeechConfig.builder().speaker("Joe").voice("Kore").build();
-SpeechConfig janeConfig = SpeechConfig.builder().speaker("Jane").voice("Puck").build();
+func saveWaveFile(filename string, pcmData []byte) error {
+    f, err := os.Create(filename)
+    if err != nil {
+        return err
+    }
+    defer f.Close()
 
-GenerationConfig generationConfig =
-    GenerationConfig.builder()
-        .speechConfig(SpeechConfigUnion.of(Arrays.asList(joeConfig, janeConfig)))
-        .build();
+    sampleRate := uint32(24000)
+    numChannels := uint16(1)
+    bitsPerSample := uint16(16)
+    byteRate := sampleRate * uint32(numChannels) * uint32(bitsPerSample/8)
+    blockAlign := numChannels * (bitsPerSample / 8)
+    dataSize := uint32(len(pcmData))
 
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-tts-preview"))
-        .input(InteractionsInput.of(prompt))
-        .responseFormat(
-            CreateModelInteractionResponseFormat.of(
-                ResponseFormat.of(AudioResponseFormat.builder().build())))
-        .generationConfig(generationConfig)
-        .build();
+    f.WriteString("RIFF")
+    binary.Write(f, binary.LittleEndian, uint32(36+dataSize))
+    f.WriteString("WAVEfmt ")
+    binary.Write(f, binary.LittleEndian, uint32(16))
+    binary.Write(f, binary.LittleEndian, uint16(1))
+    binary.Write(f, binary.LittleEndian, numChannels)
+    binary.Write(f, binary.LittleEndian, sampleRate)
+    binary.Write(f, binary.LittleEndian, byteRate)
+    binary.Write(f, binary.LittleEndian, blockAlign)
+    binary.Write(f, binary.LittleEndian, bitsPerSample)
+    f.WriteString("data")
+    binary.Write(f, binary.LittleEndian, dataSize)
+    _, err = f.Write(pcmData)
+    return err
+}
 
-Interaction interaction =
-    client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-if (interaction.outputAudio().isPresent() && interaction.outputAudio().get().data().isPresent()) {
-  byte[] pcmBytes = Base64.getDecoder().decode(interaction.outputAudio().get().data().get());
-  AudioFormat format = new AudioFormat(24000, 16, 1, true, false);
-  AudioInputStream audioInputStream =
-      new AudioInputStream(
-          new ByteArrayInputStream(pcmBytes), format, pcmBytes.length / format.getFrameSize());
-  AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, new File("out.wav"));
+    prompt := "TTS the following conversation between Joe and Jane:\n" +
+        "Joe: How's it going today Jane?\n" +
+        "Jane: Not too bad, how about you?"
+
+    generationConfig := &interactions.GenerationConfig{
+        SpeechConfig: genai.Ptr(interactions.NewSpeechConfigUnion([]interactions.SpeechConfig{
+            {Speaker: genai.Ptr("Joe"), Voice: genai.Ptr("Kore")},
+            {Speaker: genai.Ptr("Jane"), Voice: genai.Ptr("Puck")},
+        })),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Input: interactions.NewInteractionsInput(prompt),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
+            )),
+            GenerationConfig: generationConfig,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputAudio != nil && res.Interaction.OutputAudio.Data != nil {
+        pcmBytes, err := base64.StdEncoding.DecodeString(*res.Interaction.OutputAudio.Data)
+        if err != nil {
+            log.Fatal(err)
+        }
+        if err := saveWaveFile("out.wav", pcmBytes); err != nil {
+            log.Fatal(err)
+        }
+    }
 }
 ```
 
@@ -358,186 +429,150 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-  "model": "gemini-3.1-flash-tts-preview",
-  "input": "TTS the following conversation between Joe and Jane: Joe: Hows it going today Jane? Jane: Not too bad, how about you?",
-  "response_format": {
-       "type": "audio"
-     },
-  "generation_config": {
-    "speech_config": [
-      { "speaker": "Joe", "voice": "Kore" },
-      { "speaker": "Jane", "voice": "Puck" }
-    ]
-  }
-}'
-```
-
-## Sterowanie stylem mowy za pomocą promptów
-
-Możesz kontrolować styl, ton, akcent i tempo za pomocą promptów w języku naturalnym w przypadku zamiany tekstu na mowę z jednym lub wieloma mówcami.
-Na przykład w prompcie z jednym głośnikiem możesz powiedzieć:
-
-```
-Say in an spooky whisper:
-"By the pricking of my thumbs...
-Something wicked this way comes"
-```
-
-W prompcie z wieloma mówcami podaj modelowi imię i nazwisko każdego z nich oraz odpowiednią transkrypcję. Możesz też podać wskazówki dla każdego głośnika z osobna:
-
-```
-Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
-
-Speaker1: So... what's on the agenda today?
-Speaker2: You're never going to guess!
-```
-
-Aby jeszcze bardziej podkreślić styl lub emocje, które chcesz przekazać, użyj [opcji głosu](#voices), która do nich pasuje. Na przykład w poprzednim prompcie *Enceladus* może podkreślać słowa „zmęczony” i „znudzony”, a *Puck* może uzupełniać słowa „podekscytowany” i „szczęśliwy”.
-
-## Generowanie prompta do przekształcenia w dźwięk
-
-Modele TTS generują tylko dźwięk, ale możesz użyć [innych modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl), aby najpierw wygenerować transkrypcję, a potem przekazać ją do modelu TTS, który ją odczyta.
-
-### Python
-
-```
-from google import genai
-
-client = genai.Client()
-
-transcript_interaction = client.interactions.create(
-   model="gemini-3.8-flash",
-   input="""Generate a short transcript around 100 words that reads
-            like it was clipped from a podcast by excited herpetologists.
-            The hosts names are Dr. Anya and Liam."""
-)
-transcript = transcript_interaction.output_text
-
-tts_interaction = client.interactions.create(
-   model="gemini-3.1-flash-tts-preview",
-   input=transcript,
-   response_format={"type": "audio"},
-   generation_config={
-      "speech_config": [
-         {"speaker": "Dr. Anya", "voice": "Kore"},
-         {"speaker": "Liam", "voice": "Puck"}
+    "model": "gemini-3.8-flash-tts",
+    "input": [{
+      "type": "user_input",
+      "content": [
+        {
+          "type": "text",
+          "text": "How'\''s it going today Jane?",
+          "annotations": [{
+            "type": "speech_metadata",
+            "speaker": "Joe",
+            "style": "cheerful and friendly"
+          }]
+        },
+        {
+          "type": "text",
+          "text": "Not too bad, how about you? Ready to test these new voices?",
+          "annotations": [{
+            "type": "speech_metadata",
+            "speaker": "Jane",
+            "style": "calm and relaxed"
+          }]
+        }
       ]
-   }
+    }],
+    "response_format": {
+      "type": "audio"
+    },
+    "generation_config": {
+      "speech_config": {
+        "mode": "conversational",
+        "speakers": [
+          { "speaker": "Joe", "voice": "Puck" },
+          { "speaker": "Jane", "voice": "Kore" }
+        ]
+      }
+    }
+  }'
+```
+
+## Kiểm soát kiểu giọng nói bằng siêu dữ liệu và thẻ
+
+Công nghệ chuyển văn bản sang lời nói (TTS) Gemini 3.8 coi trường `text` hoàn toàn là bản chép lời nguyên văn. Để kiểm soát việc truyền tải mà không cần đọc to chỉ dẫn sân khấu, hãy chia chỉ dẫn theo phạm vi:
+
+- **Phân phối liên tục theo lượt (`speech_metadata.style`):** Đặt cảm xúc, kiểu phân phối, ngữ điệu, nhịp độ và âm lượng áp dụng cho toàn bộ lượt trong trường `style` (ví dụ: `"style": "whispered urgently"`, `"style": "out of breath"` hoặc `"style": "warm and enthusiastic"`).
+- **Sự kiện tại một thời điểm (thẻ nội tuyến):** Đặt các đoạn giọng nói không phải lời nói hoặc khoảng dừng ngắn ngay trong bản chép lời bằng dấu ngoặc nhọn (ví dụ: `"Wait... <short pause> did you hear that? <sigh>"` hoặc `"Excuse me <cough> as I was saying..."`).
+
+Hãy xem [Hướng dẫn tạo câu lệnh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#prompting-guide) để biết các phương pháp hay nhất toàn diện.
+
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
 )
-```
 
-### JavaScript
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-```
-import { GoogleGenAI } from "@google/genai";
+    transcriptRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput(
+                "Generate a short transcript around 100 words that reads " +
+                    "like it was clipped from a podcast by excited herpetologists. " +
+                    "The hosts names are Dr. Anya and Liam.",
+            ),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-const client = new GoogleGenAI({});
+    var transcript string
+    if transcriptRes.Interaction.OutputText != nil {
+        transcript = *transcriptRes.Interaction.OutputText
+    }
 
-async function main() {
+    generationConfig := &interactions.GenerationConfig{
+        SpeechConfig: genai.Ptr(interactions.NewSpeechConfigUnion([]interactions.SpeechConfig{
+            {Speaker: genai.Ptr("Dr. Anya"), Voice: genai.Ptr("Kore")},
+            {Speaker: genai.Ptr("Liam"), Voice: genai.Ptr("Puck")},
+        })),
+    }
 
-const transcriptInteraction = await client.interactions.create({
-   model: "gemini-3.8-flash",
-   input: "Generate a short transcript around 100 words that reads like it was clipped from a podcast by excited herpetologists. The hosts names are Dr. Anya and Liam.",
-   })
-
-const ttsInteraction = await client.interactions.create({
-   model: "gemini-3.1-flash-tts-preview",
-   input: transcriptInteraction.output_text,
-   response_format: { type: 'audio' },
-   generation_config: {
-      speech_config: [
-         { speaker: "Dr. Anya", voice: "Kore" },
-         { speaker: "Liam", voice: "Puck" }
-      ]
-   }
-  });
+    ttsRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Input: interactions.NewInteractionsInput(transcript),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
+            )),
+            GenerationConfig: generationConfig,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    _ = ttsRes
 }
-
-await main();
 ```
 
-### Java
+## Tạo lời nói phát trực tuyến
 
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AudioResponseFormat;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.Interaction;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ResponseFormat;
-import com.google.genai.gaos.models.interactions.SpeechConfig;
-import com.google.genai.gaos.models.interactions.SpeechConfigUnion;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import java.util.Arrays;
-
-Client client = new Client();
-
-CreateModelInteraction transcriptParams =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.8-flash"))
-        .input(
-            InteractionsInput.of(
-                "Generate a short transcript around 100 words that reads "
-                    + "like it was clipped from a podcast by excited herpetologists. "
-                    + "The hosts names are Dr. Anya and Liam."))
-        .build();
-
-Interaction transcriptInteraction =
-    client
-        .interactions
-        .create(CreateInteractionRequestBody.of(transcriptParams))
-        .interaction()
-        .get();
-
-String transcript = transcriptInteraction.outputText().orElse("");
-
-SpeechConfig anyaConfig = SpeechConfig.builder().speaker("Dr. Anya").voice("Kore").build();
-SpeechConfig liamConfig = SpeechConfig.builder().speaker("Liam").voice("Puck").build();
-
-GenerationConfig generationConfig =
-    GenerationConfig.builder()
-        .speechConfig(SpeechConfigUnion.of(Arrays.asList(anyaConfig, liamConfig)))
-        .build();
-
-CreateModelInteraction ttsParams =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-tts-preview"))
-        .input(InteractionsInput.of(transcript))
-        .responseFormat(
-            CreateModelInteractionResponseFormat.of(
-                ResponseFormat.of(AudioResponseFormat.builder().build())))
-        .generationConfig(generationConfig)
-        .build();
-
-Interaction ttsInteraction =
-    client.interactions.create(CreateInteractionRequestBody.of(ttsParams)).interaction().get();
-```
-
-## Generowanie mowy strumieniowej
-
-Możesz przesyłać strumieniowo wygenerowany dźwięk w trakcie jego generowania przez model, ustawiając `stream: true`.
+Bạn có thể phát trực tuyến âm thanh được tạo khi âm thanh đó đang được tổng hợp bằng cách đặt `stream: true`. Không giống như các yêu cầu đơn phương (trả về một tệp WAV hoàn chỉnh có tiêu đề RIFF), **các yêu cầu truyền trực tuyến sẽ trả về các đoạn PCM tuyến tính 16 bit không có tiêu đề (`audio/l16`, 24 kHz, đơn âm) theo mặc định** để các đoạn âm thanh có thể được phát hoặc nối liên tục mà không cần tiêu đề vùng chứa.
 
 ### Python
 
 ```
-from google import genai
 import base64
+from google import genai
 
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.1-flash-tts-preview",
-    input="Say cheerfully: Have a wonderful day!",
+    model="gemini-3.8-flash-tts",
+    input=[{
+        "type": "user_input",
+        "content": [{
+            "type": "text",
+            "text": "Have a wonderful day!",
+            "annotations": [{
+                "type": "speech_metadata",
+                "style": "cheerful and friendly",
+            }],
+        }],
+    }],
     response_format={"type": "audio"},
     generation_config={
         "speech_config": [
-            {"voice": "Kore"}
+            {"voice": "Kore"},
         ]
     },
-    stream=True
+    stream=True,
 )
 
 for event in stream:
@@ -556,15 +591,25 @@ async function main() {
    const client = new GoogleGenAI({});
 
    const stream = await client.interactions.create({
-      model: "gemini-3.1-flash-tts-preview",
-      input: "Say cheerfully: Have a wonderful day!",
+      model: 'gemini-3.8-flash-tts',
+      input: [{
+         type: 'user_input',
+         content: [{
+            type: 'text',
+            text: 'Have a wonderful day!',
+            annotations: [{
+               type: 'speech_metadata',
+               style: 'cheerful and friendly',
+            }],
+         }],
+      }],
       response_format: { type: 'audio' },
       generation_config: {
          speech_config: [
-            { voice: 'Kore' }
-         ]
+            { voice: 'Kore' },
+         ],
       },
-      stream: true
+      stream: true,
    });
 
    for await (const event of stream) {
@@ -579,75 +624,26 @@ async function main() {
 await main();
 ```
 
-### Java
-
-```
-import com.google.genai.Client;
-import com.google.genai.gaos.models.interactions.AudioDelta;
-import com.google.genai.gaos.models.interactions.AudioResponseFormat;
-import com.google.genai.gaos.models.interactions.CreateModelInteraction;
-import com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat;
-import com.google.genai.gaos.models.interactions.GenerationConfig;
-import com.google.genai.gaos.models.interactions.InteractionSSEEvent;
-import com.google.genai.gaos.models.interactions.InteractionSSEStreamEvent;
-import com.google.genai.gaos.models.interactions.InteractionsInput;
-import com.google.genai.gaos.models.interactions.Model;
-import com.google.genai.gaos.models.interactions.ResponseFormat;
-import com.google.genai.gaos.models.interactions.SpeechConfig;
-import com.google.genai.gaos.models.interactions.SpeechConfigUnion;
-import com.google.genai.gaos.models.interactions.StepDelta;
-import com.google.genai.gaos.models.interactions.StepDeltaData;
-import com.google.genai.gaos.models.operations.CreateInteractionRequestBody;
-import com.google.genai.gaos.models.operations.CreateInteractionResponse;
-import com.google.genai.gaos.utils.EventStream;
-import java.util.Arrays;
-import java.util.Base64;
-
-Client client = new Client();
-
-SpeechConfig speechConfig = SpeechConfig.builder().voice("Kore").build();
-GenerationConfig generationConfig =
-    GenerationConfig.builder()
-        .speechConfig(SpeechConfigUnion.of(Arrays.asList(speechConfig)))
-        .build();
-
-CreateModelInteraction params =
-    CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-tts-preview"))
-        .input(InteractionsInput.of("Say cheerfully: Have a wonderful day!"))
-        .responseFormat(
-            CreateModelInteractionResponseFormat.of(
-                ResponseFormat.of(AudioResponseFormat.builder().build())))
-        .generationConfig(generationConfig)
-        .stream(true)
-        .build();
-
-CreateInteractionResponse response =
-    client.interactions.create(CreateInteractionRequestBody.of(params));
-
-try (EventStream<InteractionSSEStreamEvent> events = response.events()) {
-  for (InteractionSSEStreamEvent streamEvent : events) {
-    InteractionSSEEvent event = streamEvent.data().orElse(null);
-    if (event instanceof StepDelta) {
-      StepDeltaData deltaData = ((StepDelta) event).delta().orElse(null);
-      if (deltaData instanceof AudioDelta) {
-        AudioDelta audioDelta = (AudioDelta) deltaData;
-        if (audioDelta.data().isPresent()) {
-          byte[] audioData = Base64.getDecoder().decode(audioDelta.data().get());
-          // Process the audio chunk (e.g. play it or write to a file)
-        }
-      }
-    }
-  }
-}
-```
-
 ### REST
 
 ```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"       -H "x-goog-api-key: $GEMINI_API_KEY"       -H "Content-Type: application/json"       -H "Api-Revision: 2026-05-20"       --no-buffer       -d '{
-    "model": "gemini-3.1-flash-tts-preview",
-    "input": "Say cheerfully: Have a wonderful day!",
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  --no-buffer \
+  -d '{
+    "model": "gemini-3.8-flash-tts",
+    "input": [{
+      "type": "user_input",
+      "content": [{
+        "type": "text",
+        "text": "Have a wonderful day!",
+        "annotations": [{
+          "type": "speech_metadata",
+          "style": "cheerful and friendly"
+        }]
+      }]
+    }],
     "response_format": {
       "type": "audio"
     },
@@ -660,374 +656,605 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"    
   }'
 ```
 
-## Opcje głosowe
+## Định dạng đầu ra âm thanh
 
-Modele TTS obsługują te 30 opcji głosowych w polu `voice_name`:
+Các mô hình TTS Gemini 3.8 sử dụng các định dạng âm thanh mặc định khác nhau, tuỳ thuộc vào việc yêu cầu là đơn phương hay truyền trực tuyến:
+
+- **Yêu cầu một ngôi sao (`stream=False`):** Trả về âm thanh **WAV (`audio/wav`)** hoàn chỉnh có tiêu đề RIFF tiêu chuẩn (24 kHz, đơn âm, PCM có dấu 16 bit little-endian). Bạn có thể lưu trực tiếp các byte âm thanh đã giải mã vào tệp `.wav` mà không cần thêm tiêu đề WAV theo cách thủ công.
+- **Yêu cầu phát trực tuyến (`stream=True`):** Trả về các đoạn **PCM tuyến tính thô không có tiêu đề (`audio/l16`)** (24 kHz, đơn âm, PCM little-endian có dấu 16 bit) theo mặc định để các đoạn có thể được phát trực tuyến hoặc nối liên tục mà không có tiêu đề vùng chứa trên mỗi đoạn.
+
+Để yêu cầu tốc độ lấy mẫu hoặc phương thức mã hoá âm thanh khác, hãy định cấu hình `mime_type` và `sample_rate` (không bắt buộc) trong `response_format`:
+
+| Định dạng | Giá trị `mime_type` | Mô tả |
+| --- | --- | --- |
+| **WAV** *(mặc định đơn nguyên)* | `"audio/wav"` | Tệp WAV chưa nén có tiêu đề RIFF (PCM 16 bit có dấu little-endian, đơn âm, mặc định là 24 kHz). Mặc định cho các yêu cầu đơn phương. |
+| **PCM thô (L16)** *(mặc định khi phát trực tuyến)* | `"audio/l16"` | Âm thanh PCM tuyến tính 16 bit đã ký, không nén, không có tiêu đề, little-endian (24 kHz, đơn âm). Mặc định cho các yêu cầu phát trực tuyến. |
+| **Mu-law** | `"audio/mulaw"` | Âm thanh được mã hoá theo chuẩn mu-law G.711 8 bit (thường được dùng trong hệ thống điện thoại/IVR ở Bắc Mỹ và Nhật Bản). |
+| **A-law** | `"audio/alaw"` | Âm thanh được mã hoá theo luật A G.711 8 bit (thường dùng trong các hệ thống điện thoại quốc tế và của Châu Âu). |
+
+Bạn cũng có thể chỉ định `sample_rate` theo đơn vị Hertz (ví dụ: `24000`, `16000` hoặc `8000`).
+
+### Python
+
+```
+import base64
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3.8-flash-tts",
+    input=[{
+        "type": "user_input",
+        "content": [{
+            "type": "text",
+            "text": "Have a wonderful day!",
+            "annotations": [{
+                "type": "speech_metadata",
+                "style": "cheerful and friendly",
+            }],
+        }],
+    }],
+    response_format={
+        "type": "audio",
+        "mime_type": "audio/l16",  # "audio/wav" (default), "audio/l16", "audio/mulaw", or "audio/alaw"
+        "sample_rate": 24000,
+    },
+    generation_config={
+        "speech_config": [
+            {"voice": "Kore"},
+        ]
+    },
+)
+
+with open("out.pcm", "wb") as f:
+    f.write(base64.b64decode(interaction.output_audio.data))
+```
+
+### JavaScript
+
+```
+import * as fs from 'node:fs';
+import {GoogleGenAI} from '@google/genai';
+
+async function main() {
+   const client = new GoogleGenAI({});
+
+   const interaction = await client.interactions.create({
+      model: 'gemini-3.8-flash-tts',
+      input: [{
+         type: 'user_input',
+         content: [{
+            type: 'text',
+            text: 'Have a wonderful day!',
+            annotations: [{
+               type: 'speech_metadata',
+               style: 'cheerful and friendly',
+            }],
+         }],
+      }],
+      response_format: {
+         type: 'audio',
+         mime_type: 'audio/l16', // 'audio/wav' (default), 'audio/l16', 'audio/mulaw', or 'audio/alaw'
+         sample_rate: 24000,
+      },
+      generation_config: {
+         speech_config: [
+            { voice: 'Kore' },
+         ],
+      },
+   });
+
+   const audioBuffer = Buffer.from(interaction.output_audio.data, 'base64');
+   fs.writeFileSync('out.pcm', audioBuffer);
+}
+await main();
+```
+
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    generationConfig := &interactions.GenerationConfig{
+        SpeechConfig: genai.Ptr(interactions.NewSpeechConfigUnion([]interactions.SpeechConfig{
+            {Voice: genai.Ptr("Kore")},
+        })),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Input: interactions.NewInteractionsInput("Say cheerfully: Have a wonderful day!"),
+            ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
+                interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
+            )),
+            GenerationConfig: generationConfig,
+            Stream:           genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if audioDelta := stepDelta.GetDeltaAudio(); audioDelta != nil && audioDelta.Data != nil {
+                audioData, err := base64.StdEncoding.DecodeString(*audioDelta.Data)
+                if err != nil {
+                    log.Fatal(err)
+                }
+                // Process the audio chunk (e.g. play it or write to a file)
+                _ = audioData
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-3.8-flash-tts",
+    "input": [{
+      "type": "user_input",
+      "content": [{
+        "type": "text",
+        "text": "Have a wonderful day!",
+        "annotations": [{
+          "type": "speech_metadata",
+          "style": "cheerful and friendly"
+        }]
+      }]
+    }],
+    "response_format": {
+      "type": "audio",
+      "mime_type": "audio/l16",
+      "sample_rate": 24000
+    },
+    "generation_config": {
+      "speech_config": [
+        { "voice": "Kore" }
+      ]
+    }
+  }'
+```
+
+## Lựa chọn giọng nói
+
+Công nghệ TTS Gemini 3.8 hỗ trợ 4 cách chọn hoặc tạo giọng nói:
+
+1. **Giọng nói được tạo sẵn trong Studio:** 30 giọng nói được tuyển chọn có trong bảng sau.
+2. **Thư viện giọng nói mở rộng:** Hàng trăm giọng nói bổ sung thuộc nhiều ngôn ngữ, giọng điệu và nguyên mẫu nhân vật có thể truy cập bằng `client.voices.list()` (`GET /v1beta/voices`).
+3. **[Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi):** Tạo một nhân vật giọng nói tuỳ chỉnh từ nội dung mô tả bằng ngôn ngữ tự nhiên trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi) hoặc sử dụng `POST /v1beta/voices` (`type="prompted"`, trả về một mã nhận dạng `voice_...` liên tục và bản xem trước `sample_audio` WAV trong `CreateVoice` và `GetVoice`).
+4. **[Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi):** Nhân bản giọng nói của người nói từ âm thanh tham chiếu và âm thanh có sự đồng ý trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi) hoặc bằng cách sử dụng `POST /v1beta/voices` (`type="replicated"`, `store=True` liên tục theo mặc định hoặc `store=False` không trạng thái tuỳ chọn).
+
+### Hạn mức và TTL cho giọng nói tuỳ chỉnh
+
+| Loại giọng nói | Chế độ lưu trữ | Hạn mức / giới hạn | Thời gian lưu giữ (TTL) |
+| --- | --- | --- | --- |
+| **Giọng nói có trạng thái** (`voice_...`, được nhắc hoặc sao chép) | `store=True` | **200 giọng nói cho mỗi dự án** (được chia sẻ giữa giọng nói được nhắc và giọng nói được sao chép) | **1 năm** |
+| **Khoá thoại không trạng thái** (`voicekey_...`, được sao chép) | `store=False` | Do ứng dụng quản lý | **7 ngày** |
+
+### Giọng nói tạo sẵn
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** – *jasny* | **Puck** – *Upbeat* | **Charon** – *Zawiera przydatne informacje* |
-| **Kore** – *firma* | **Fenrir** – *pobudliwy* | **Leda** -- *Youthful* |
-| **Orus** – *firma* | **Aoede** – *Breezy* | **Callirrhoe** – *spokojny* |
-| **Autonoe** – *jasny* | **Enceladus** – *Breathy* | **Iapetus** – *Clear* |
-| **Umbriel** – *spokojny* | **Algieba** – *Smooth* | **Despina** – *Smooth* |
-| **Erinome** – *Clear* | **Algenib** – *żwirowy* | **Rasalgethi** – *zawiera przydatne informacje* |
-| **Laomedeia** – *Upbeat* | **Achernar** – *miękka* | **Alnilam** – *Firm* |
-| **Schedar** – *Równomierna* | **Gacrux** – *treści dla dorosłych* | **Pulcherrima** – *Przekaż dalej* |
-| **Achird** – *przyjazny* | **Zubenelgenubi** – *zwykłe* | **Vindemiatrix** – *delikatny* |
-| **Sadachbia** – *Lively* | **Sadaltager** – *wiedza* | **Sulafat** – *ciepły* |
+| **Zephyr** – *Tươi sáng* | **Puck** – *Rộn ràng* | **Charon** – *Cung cấp nhiều thông tin* |
+| **Kore** – *Firm* | **Fenrir** – *Dễ kích động* | **Leda** – *Trẻ trung* |
+| **Orus** – *Firm* | **Aoede** – *Breezy* | **Callirrhoe** – *Dễ chịu* |
+| **Autonoe** – *Sáng* | **Enceladus** – *Breathy* | **Iapetus** – *Clear* (Rõ ràng) |
+| **Umbriel** – *Dễ tính* | **Algieba** – *Làm mịn* | **Despina** – *Smooth* |
+| **Erinome** – *Clear* | **Algenib** – *Gravelly* | **Rasalgethi** – *Cung cấp nhiều thông tin* |
+| **Laomedeia** – *Rộn ràng* | **Achernar** – *Dịu êm* | **Alnilam** – *Firm* |
+| **Schedar** – *Even* | **Gacrux** – *Trưởng thành* | **Pulcherrima** – *Chuyển tiếp* |
+| **Achird** – *Thân thiện* | **Zubenelgenubi** – *Thông thường* | **Vindemiatrix** – *Êm dịu* |
+| **Sadachbia** – *Lively* | **Sadaltager** – *Hiểu biết* | **Sulafat** – *Ấm* |
 
-Wszystkie opcje głosowe możesz usłyszeć w [AI Studio](https://aistudio.google.com/generate-speech?hl=pl).
+### Thư viện giọng nói mở rộng và tính năng lọc
 
-## Obsługiwane języki
+Ngoài 30 giọng nói nổi bật của phòng thu trong bảng trước đó, **Thư viện giọng nói mở rộng** còn cung cấp hàng trăm giọng nói khác theo ngôn ngữ, giọng địa phương, tính cách nhân vật và lĩnh vực. Bạn có thể duyệt xem, lọc và nghe thử toàn bộ Thư viện giọng nói một cách tương tác trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi) hoặc truy vấn theo phương thức lập trình bằng `client.voices.list()` (`GET /v1beta/voices`, sử dụng `google-genai` 2.25.0 trở lên / `@google/genai` 2.24.0 trở lên).
 
-Modele TTS automatycznie wykrywają język wejściowy. Obsługiwane języki:
+`ListVoices` sẽ trả về các giọng nói tuỳ chỉnh đã lưu (sắp xếp theo thứ tự mới nhất trước) rồi đến các giọng nói có sẵn trong danh mục khớp với tiêu chí lọc của bạn. Khi nhiều giá trị được truyền cho một bộ lọc danh sách, những giọng nói khớp với **bất kỳ** giá trị nào trong bộ lọc đó sẽ được trả về (`OR`), trong khi các tham số bộ lọc riêng biệt kết hợp với `AND`:
 
-| Język | Kod BCP-47 | Język | Kod BCP-47 |
-| --- | --- | --- | --- |
-| arabski | ar | filipiński | fil |
-| bengalski | bn | fiński | fi |
-| niderlandzki | nl | galicyjski | gl |
-| angielski | en | gruziński | ka |
-| francuski | fr | grecki | el |
-| niemiecki | de | gudżarati | gu |
-| hindi | hi | kreolski haitański | ht |
-| indonezyjski | id | hebrajski | on |
-| włoski | it | węgierski | hu |
-| japoński | ja | islandzki | jest |
-| koreański | ko | jawajski | jv |
-| marathi | mr | kannada | kn |
-| polski | pl | konkani | kok |
-| portugalski | pt | laotański | lo |
-| rumuński | ro | łaciński | la |
-| rosyjski | ru | łotewski | lv |
-| hiszpański | es | litewski | lt |
-| tamilski | ta | luksemburski | lb |
-| telugu | te | macedoński | mk |
-| tajski | th | maithili | mai |
-| turecki | tr | malgaski | mg |
-| ukraiński | uk | malajski | ms |
-| wietnamski | vi | malajalam | ml |
-| afrikaans | af | mongolski | mn |
-| albański | sq | nepalski | ne |
-| amharski | am | norweski (bokmål), | nb |
-| ormiański | hy | norweski (nynorsk), | nn |
-| azerski | az | orija | lub |
-| baskijski | eu | paszto | ps |
-| białoruski | be | perski | fa |
-| bułgarski | bg | pendżabski | pa |
-| birmański | my | serbski | sr |
-| kataloński | ca | sindhi | sd |
-| cebuański | ceb | syngaleski | si |
-| chiński (mandaryński), | cmn | słowacki | sk |
-| chorwacki | godz. | słoweński | sl |
-| czeski | cs | suahili | sw |
-| duński | da | szwedzki | sv |
-| estoński | et | urdu | ur |
-
-## Obsługiwane modele
-
-| Model | Pojedynczy rozmówca | Wielogłośnikowy |
+| Tham số | Loại | Mô tả |
 | --- | --- | --- |
-| [Gemini 3.1 Flash TTS (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=pl) | ✔️ | ✔️ |
-| [Gemini 2.5 Flash Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=pl) | ✔️ | ✔️ |
-| [Wersja testowa Gemini 2.5 Pro TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=pl) | ✔️ | ✔️ |
+| `language_code` | `list[str]` | (Các) thẻ ngôn ngữ BCP-47 (ví dụ: `["en-US", "en-GB"]`). So khớp chính xác không phân biệt chữ hoa chữ thường. |
+| `region_code` | `list[str]` | (Các) mã khu vực theo tiêu chuẩn ISO 3166-1 alpha-2 hoặc UN M.49 (ví dụ: `["US", "GB"]`). |
+| `accent` | `list[str]` | (Các) phần mô tả giọng địa phương (ví dụ: `["American", "British"]`). |
+| `gender` | `list[str]` | Giới tính thể hiện được cảm nhận (`"female"`, `"male"` hoặc `"neutral"`). |
+| `pitch` | `list[str]` | Phân loại cao độ giọng nói (`"low"`, `"medium"` hoặc `"high"`). |
+| `persona` | `list[str]` | Nhân vật hoặc nguyên mẫu giọng nói (ví dụ: `["Warm, Friendly"]`, `["Narrator"]`). |
+| `contexts` (`context` trong REST) | `list[str]` | Miền sử dụng tối ưu (ví dụ: `["Audiobook", "Conversational", "News"]`). |
+| `type` (`type_` trong Python) | `list[str]` | Lọc theo nguồn giọng nói: `"prebuilt"`, `"prompted"` ([Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi)) hoặc `"replicated"` ([Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi)). |
+| `search` | `str` | Cụm từ tìm kiếm con bằng văn bản tự do được so khớp không phân biệt chữ hoa chữ thường với cả `display_name` và `description`. |
+| `page_size` | `int` | Số lượng giọng nói tối đa được trả về trên mỗi trang (mặc định là `50`, tối đa là `1000`). |
+| `page_token` | `str` | Mã thông báo từ `response.next_page_token` để tìm nạp trang kết quả tiếp theo. |
 
-## Przewodnik po promptach
+### Python
 
-Model **Gemini Native Audio Generation Text-to-Speech (TTS)** różni się od tradycyjnych modeli TTS tym, że korzysta z dużego modelu językowego, który ***wie nie tylko, co powiedzieć, ale też jak to zrobić***.
+```
+from google import genai
 
-Zaawansowany prompt to instrukcja systemowa dla modelu. Dzięki temu model ma więcej kontekstu i większą kontrolę nad skutecznością.
+client = genai.Client()
 
-Aby odblokować tę funkcję, użytkownicy mogą wyobrazić sobie, że są reżyserami, którzy przygotowują scenę dla wirtualnego aktora głosowego. Aby utworzyć prompt, zalecamy uwzględnienie tych elementów: **profilu audio**, który określa podstawową tożsamość i archetyp postaci; **opisu sceny**, który określa środowisko fizyczne i emocjonalny „klimat”; oraz **notatek reżysera**, które zawierają bardziej precyzyjne wskazówki dotyczące stylu, akcentu i tempa.
+# Filter the Voice Library by language, gender, pitch, domain context, and keyword
+response = client.voices.list(
+    language_code=["en-US", "en-GB"],
+    gender=["female"],
+    pitch=["medium", "low"],
+    contexts=["Audiobook", "Conversational"],
+    type_=["prebuilt"],
+    search="warm",
+    page_size=50,
+)
 
-Dzięki podawaniu szczegółowych instrukcji, takich jak precyzyjny akcent regionalny, konkretne cechy paralingwistyczne (np. oddech) czy tempo, użytkownicy mogą wykorzystywać świadomość kontekstu modelu do generowania bardzo dynamicznych, naturalnych i ekspresyjnych nagrań audio. Aby uzyskać optymalną skuteczność, zalecamy, aby **transkrypcja** i prompty reżyserskie były zgodne, *czyli aby „kto to mówi”* pasowało do *„co jest powiedziane”* i *„jak to jest powiedziane”*.
+for voice in response.voices or []:
+    print(
+        f"{voice.id} | {voice.display_name} ({voice.language_code},"
+        f" {voice.accent}, {voice.gender}, pitch={voice.pitch}):"
+        f" {voice.description}"
+    )
+```
 
-Celem tego przewodnika jest dostarczenie podstawowych wskazówek i inspiracji podczas tworzenia funkcji audio z wykorzystaniem generowania dźwięku za pomocą Gemini TTS. Z niecierpliwością czekamy na Twoje projekty!
+### JavaScript
 
-### Tagi audio
+```
+import { GoogleGenAI } from "@google/genai";
 
-Tagi to modyfikatory wstawiane w tekście, np. `[whispers]` lub `[laughs]`, które zapewniają precyzyjną kontrolę nad wyświetlaniem. Możesz ich używać do zmiany tonu, tempa i emocjonalnego wydźwięku wiersza lub fragmentu transkrypcji. Możesz też używać ich do dodawania do występu wykrzykników i innych dźwięków niewerbalnych, takich jak `[cough]`, `[sighs]` czy `[gasp]`.
+const ai = new GoogleGenAI();
 
-Nie ma wyczerpującej listy tagów, które działają, a które nie. Zalecamy eksperymentowanie z różnymi emocjami i wyrażeniami, aby sprawdzić, jak zmienia się wynik.
+// Filter the Voice Library by language, gender, pitch, domain context, and keyword
+const response = await ai.voices.list({
+  language_code: ["en-US", "en-GB"],
+  gender: ["female"],
+  pitch: ["medium", "low"],
+  contexts: ["Audiobook", "Conversational"],
+  type: ["prebuilt"],
+  search: "warm",
+  page_size: 50,
+});
 
-Jeśli transkrypcja nie jest w języku angielskim, zalecamy używanie tagów audio w języku angielskim, aby uzyskać najlepsze wyniki.
+for (const voice of response.voices ?? []) {
+  console.log(
+    `${voice.id} | ${voice.display_name} (${voice.language_code}, ${voice.accent}, ${voice.gender}, pitch=${voice.pitch}): ${voice.description}`
+  );
+}
+```
 
-**Kreatywne wykorzystanie tagów audio**
+### REST
 
-Aby pokazać, jak bardzo mogą się różnić tagi audio, przedstawiamy zestaw przykładów, w których przekaz jest taki sam, ale sposób jego przedstawienia zmienia się w zależności od użytych tagów.
+```
+curl -G "https://generativelanguage.googleapis.com/v1beta/voices" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  --data-urlencode "language_code=en-US" \
+  --data-urlencode "language_code=en-GB" \
+  --data-urlencode "gender=female" \
+  --data-urlencode "pitch=medium" \
+  --data-urlencode "context=Audiobook" \
+  --data-urlencode "type=prebuilt" \
+  --data-urlencode "search=warm" \
+  --data-urlencode "page_size=50"
+```
 
-Możesz zmienić sposób przekazu, dodając na początku wiersza tagi, które sprawią, że lektor będzie podekscytowany, znudzony lub niechętny:
+## Ngôn ngữ được hỗ trợ
 
-- `[excitedly]` Cześć, jestem nowym modelem zamiany tekstu na mowę i mogę mówić na wiele sposobów. W czym mogę Ci pomóc?
-- `[bored]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
-- `[reluctantly]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
+Các mô hình TTS tự động phát hiện ngôn ngữ đầu vào.
+[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) hỗ trợ **hơn 130 ngôn ngữ** và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`) hỗ trợ **hơn 100 ngôn ngữ**:
 
-Tagi mogą też służyć do zmiany tempa odczytu lub łączenia tempa z podkreśleniem:
+| Ngôn ngữ | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
+| --- | --- | --- |
+| Tiếng Aceh (Chữ Ả Rập) | ✔️ | ✔️ |
+| Tiếng Hà Lan ở Nam Phi | ✔️ | ✔️ |
+| Tiếng Akan | ✔️ | ✔️ |
+| Tiếng Amhara | ✔️ | ✔️ |
+| Tiếng Armenia | ✔️ | ✔️ |
+| Tiếng Assam | ✔️ | ✔️ |
+| Tiếng Awadhi | ✔️ | ✔️ |
+| Chữ Bali | ✔️ | ✔️ |
+| Tiếng Bangla | ✔️ | ✔️ |
+| Banjar (chữ Ả Rập) | ✔️ | — |
+| Banjar (chữ Latinh) | ✔️ | ✔️ |
+| Tiếng Bashkir | ✔️ | — |
+| Tiếng Basque | ✔️ | ✔️ |
+| Tiếng Belarus | ✔️ | ✔️ |
+| Tiếng Bemba | ✔️ | — |
+| Tiếng Bhojpuri | ✔️ | ✔️ |
+| Tiếng Bosnia | ✔️ | ✔️ |
+| Chữ Bugin | ✔️ | ✔️ |
+| Tiếng Bungary | ✔️ | ✔️ |
+| Tiếng Miến Điện | ✔️ | — |
+| Tiếng Quảng Đông | ✔️ | ✔️ |
+| Tiếng Catalan | ✔️ | ✔️ |
+| Tiếng Cebuano | ✔️ | ✔️ |
+| Tiếng Trung Kurd | ✔️ | ✔️ |
+| Tiếng Chhattisgarhi | ✔️ | ✔️ |
+| Tiếng Trung (chữ Hán) | ✔️ | ✔️ |
+| Tiếng Trung (chữ Hán phồn thể) | ✔️ | ✔️ |
+| Tiếng Tatar Krym | ✔️ | — |
+| Tiếng Croatia | ✔️ | ✔️ |
+| Tiếng Séc | ✔️ | ✔️ |
+| Tiếng Đan Mạch | ✔️ | ✔️ |
+| Tiếng Hà Lan | ✔️ | ✔️ |
+| Dyula | ✔️ | — |
+| Tiếng Dzongkha | ✔️ | — |
+| Tiếng Ả Rập | ✔️ | ✔️ |
+| Tiếng Anh | ✔️ | ✔️ |
+| Tiếng Estonia | ✔️ | ✔️ |
+| Tiếng Philippines | ✔️ | ✔️ |
+| Tiếng Phần Lan | ✔️ | — |
+| Tiếng Pháp | ✔️ | ✔️ |
+| Tiếng Galicia | ✔️ | ✔️ |
+| Tiếng Ganda | ✔️ | ✔️ |
+| Tiếng Gruzia | ✔️ | ✔️ |
+| Tiếng Đức | ✔️ | ✔️ |
+| Tiếng Hy Lạp | ✔️ | ✔️ |
+| Tiếng Guarani | ✔️ | — |
+| Tiếng Gujarat | ✔️ | ✔️ |
+| Tiếng Creole ở Haiti | ✔️ | ✔️ |
+| Tiếng Mông Cổ Khalkha | ✔️ | ✔️ |
+| Tiếng Hausa | ✔️ | ✔️ |
+| Tiếng Do Thái | ✔️ | ✔️ |
+| Tiếng Hindi | ✔️ | ✔️ |
+| Tiếng Hungary | ✔️ | ✔️ |
+| Tiếng Iceland | ✔️ | ✔️ |
+| Tiếng Igbo | ✔️ | — |
+| Tiếng Iloko | ✔️ | ✔️ |
+| Tiếng Indonesia | ✔️ | ✔️ |
+| Tiếng Ba Tư của người Iran | ✔️ | ✔️ |
+| Tiếng Ý | ✔️ | ✔️ |
+| Tiếng Nhật | ✔️ | ✔️ |
+| Tiếng Java | ✔️ | ✔️ |
+| Tiếng Kabyle | ✔️ | — |
+| Tiếng Kamba | ✔️ | ✔️ |
+| Tiếng Kannada | ✔️ | ✔️ |
+| Tiếng Kashmiri (Chữ Ả Rập) | ✔️ | ✔️ |
+| Kashmiri (chữ Deva) | ✔️ | ✔️ |
+| Tiếng Kazakh | ✔️ | ✔️ |
+| Tiếng Khmer | ✔️ | ✔️ |
+| Tiếng Kikuyu | ✔️ | ✔️ |
+| Tiếng Kinyarwanda | ✔️ | ✔️ |
+| Tiếng Kongo | ✔️ | ✔️ |
+| Tiếng Hàn | ✔️ | ✔️ |
+| Tiếng Kyrgyz | ✔️ | ✔️ |
+| Tiếng Lào | ✔️ | ✔️ |
+| Tiếng Latgale | ✔️ | — |
+| Tiếng Lingala | ✔️ | ✔️ |
+| Tiếng Lithuania | ✔️ | — |
+| Tiếng Luxembourg | ✔️ | — |
+| Tiếng Macedonia | ✔️ | ✔️ |
+| Tiếng Magahi | ✔️ | ✔️ |
+| Tiếng Maithili | ✔️ | ✔️ |
+| Tiếng Malayalam | ✔️ | ✔️ |
+| Tiếng Malta | ✔️ | ✔️ |
+| Tiếng Manipur | ✔️ | ✔️ |
+| Tiếng Marathi | ✔️ | ✔️ |
+| Tiếng Minangkabau (chữ Ả Rập) | ✔️ | ✔️ |
+| Tiếng Minangkabau (chữ Latinh) | ✔️ | — |
+| Tiếng Mizo | ✔️ | ✔️ |
+| Tiếng Nepal (ngôn ngữ riêng lẻ) | ✔️ | ✔️ |
+| Tiếng Fulfulde ở Nigeria | ✔️ | ✔️ |
+| Tiếng Azerbaijan miền Bắc | ✔️ | ✔️ |
+| Tiếng Bắc Sotho | ✔️ | ✔️ |
+| Tiếng Uzbek ở miền Bắc | ✔️ | ✔️ |
+| Tiếng Bokmål ở Na Uy | ✔️ | ✔️ |
+| Tiếng Na Uy Nynorsk | ✔️ | ✔️ |
+| Tiếng Nyanja | ✔️ | ✔️ |
+| Tiếng Occitan | ✔️ | — |
+| Tiếng Odia (ngôn ngữ riêng lẻ) | ✔️ | ✔️ |
+| Tiếng Pangasinan | ✔️ | — |
+| Tiếng Ba Tư (Afghanistan) | ✔️ | ✔️ |
+| Tiếng Ba Lan | ✔️ | ✔️ |
+| Tiếng Bồ Đào Nha | ✔️ | ✔️ |
+| Tiếng Punjab | ✔️ | ✔️ |
+| Tiếng Rumani | ✔️ | ✔️ |
+| Tiếng Nga | ✔️ | ✔️ |
+| Tiếng Santali | ✔️ | ✔️ |
+| Tiếng Serbia | ✔️ | ✔️ |
+| Tiếng Sindh | ✔️ | — |
+| Tiếng Sinhala | ✔️ | ✔️ |
+| Tiếng Slovak | ✔️ | ✔️ |
+| Tiếng Slovenia | ✔️ | — |
+| Tiếng Somali | ✔️ | — |
+| Tiếng Azerbaijan miền Nam | ✔️ | ✔️ |
+| Tiếng Pashto miền Nam | ✔️ | ✔️ |
+| Tiếng Nam Sotho | ✔️ | — |
+| Tiếng Tây Ban Nha | ✔️ | ✔️ |
+| Tiếng Ả Rập chuẩn (chữ Ả Rập) | ✔️ | ✔️ |
+| Tiếng Ả Rập chuẩn (chữ Latinh) | ✔️ | ✔️ |
+| Tiếng Latvia tiêu chuẩn | ✔️ | ✔️ |
+| Tiếng Mã Lai chuẩn | ✔️ | ✔️ |
+| Tiếng Swahili (ngôn ngữ riêng lẻ) | ✔️ | — |
+| Tiếng Swati | ✔️ | — |
+| Tiếng Thuỵ Điển | ✔️ | — |
+| Tiếng Tajik | ✔️ | — |
+| Tiếng Tamil | ✔️ | ✔️ |
+| Tiếng Telugu | ✔️ | ✔️ |
+| Tiếng Thái | ✔️ | — |
+| Tiếng Tigrinya | ✔️ | — |
+| Tiếng Albania ở vùng Tosk | ✔️ | — |
+| Tiếng Thổ Nhĩ Kỳ | ✔️ | ✔️ |
+| Tiếng Duy Ngô Nhĩ | ✔️ | — |
+| Tiếng Việt | ✔️ | ✔️ |
 
-- `[very fast]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
-- `[very slow]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
-- `[sarcastically, one painfully slow word at a time]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
+## Mô hình được hỗ trợ
 
-Masz też precyzyjną kontrolę nad poszczególnymi sekcjami, co oznacza, że możesz szeptać jedną część, a krzyczeć inną.
+| Mô hình | Loa đơn | Nhiều loa | Thiết kế giọng nói | Nhân bản giọng nói |
+| --- | --- | --- | --- | --- |
+| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Bản xem trước tính năng chuyển văn bản sang lời nói của Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=vi) | ✔️ | ✔️ | — | — |
+| [TTS xem trước Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=vi) | ✔️ | ✔️ | — | — |
 
-- `[whispers]` Cześć, jestem nowym modelem zamiany tekstu na mowę `[shouting]` i mogę mówić na wiele różnych sposobów. `[whispers]` W czym mogę Ci dziś pomóc?
+### Trường hợp sử dụng mô hình nào
 
-Możesz też eksperymentować z dowolnym pomysłem na kreację:
+Cả hai mô hình TTS Gemini 3.8 đều có cùng một lược đồ API và định dạng câu lệnh, cho phép bạn chuyển đổi giữa chúng chỉ bằng một thay đổi về thông số:
 
-- `[like a cartoon dog]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
-- `[like dracula]` Cześć, jestem nowym modelem zamiany tekstu na mowę…
+- **Sử dụng [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi)
+  (`gemini-3.8-flash-tts`)** khi độ trung thực âm thanh tối đa, diễn xuất tinh tế và khả năng kiểm soát biểu cảm là ưu tiên hàng đầu. Đây là lựa chọn lý tưởng cho công việc sáng tạo ở cấp độ chuyên nghiệp, đoạn hội thoại phức tạp của nhiều người nói, các thẻ có nhiều đoạn lời thoại, cách phát âm khó, phương ngữ của khu vực hoặc nhóm thiểu số và những đoạn tường thuật dài đòi hỏi giọng nói và âm thanh môi trường ổn định.
+- **Sử dụng [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi)
+  (`gemini-3.8-flash-lite-tts`)** làm công cụ thay thế nhanh chóng, tiết kiệm chi phí cho `gemini-3.1-flash-tts-preview`. Nền tảng này được tối ưu hoá cho hoạt động sản xuất hàng loạt với số lượng lớn, các tầng tác nhân giọng nói đàm thoại, các tính năng đọc to, khả năng nhân bản giọng nói đáng tin cậy và lời nói hằng ngày của một người nói bằng các ngôn ngữ chính.
 
-Często używane tagi:
+### Hướng dẫn di chuyển
+
+Nếu bạn đang di chuyển từ `gemini-3.1-flash-tts-preview` hoặc các mô hình TTS Gemini cũ hơn sang TTS Gemini 3.8:
+
+1. **Di chuyển chỉ dẫn theo từng lượt vào `speech_metadata`:** TTS Gemini 3.8 coi văn bản đầu vào hoàn toàn là bản chép lời nguyên văn. Di chuyển hướng dẫn phân phối liên tục (`style`, chẳng hạn như `"whispering"`, `"out of breath"` hoặc `"speaking slowly"`) và nhãn người nói (`speaker`) vào chú thích có cấu trúc `speech_metadata` thay vì nhúng chỉ dẫn sân khấu vào văn bản bản chép lời.
+2. **Chỉ sử dụng thẻ nội tuyến dấu ngoặc nhọn cho các sự kiện âm thanh tại một thời điểm:** Giữ các đoạn âm thanh không phải lời nói và khoảng dừng ngắn trong bản chép lời bằng dấu ngoặc nhọn (chẳng hạn như `<laugh>`, `<sigh>`, `<cough>`, `<breath>` hoặc `<short pause>`). Tránh thẻ hiệu ứng âm thanh (chẳng hạn như tiếng vỗ tay hoặc tiếng động mạnh) và đặt kiểu truyền tải trong `speech_metadata.style`.
+3. **Chỉ định `speaker` ở mỗi lượt trong yêu cầu có nhiều người nói:** Mỗi lượt trong yêu cầu có nhiều người nói phải bao gồm rõ ràng `speaker` bên trong `speech_metadata` khớp với một trong những người nói đã định cấu hình.
+4. **Thiết kế các nhân vật giả định trước bằng tính năng Thiết kế giọng nói:** Thay thế các khối `"Audio Profile"` hoặc `"Director's Notes"` có nhiều đoạn bằng giọng nói tuỳ chỉnh được tạo trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi), sau đó truyền mã nhận dạng `voice_...` đó qua các yêu cầu TTS của bạn với chuỗi `style` tối thiểu hoặc trống.
+5. **Tài khoản cho đầu ra WAV mặc định (`audio/wav`) trên các yêu cầu đơn phương:** Không giống như `gemini-3.1-flash-tts-preview` và các mô hình TTS trước đó (trả về PCM thô không có tiêu đề `audio/l16` theo mặc định), Gemini 3.8 TTS trả về âm thanh WAV (`audio/wav`) có tiêu đề RIFF tiêu chuẩn theo mặc định cho các yêu cầu đơn phương.
+   - Nếu trước đây mã của bạn đã bao bọc các byte PCM thô trong một tiêu đề WAV (ví dụ: sử dụng mô-đun `wave` của Python hoặc `ffmpeg`), hãy xoá trình bao bọc tiêu đề theo cách thủ công và ghi trực tiếp các byte được trả về vào tệp `.wav`.
+   - Nếu quy trình của bạn yêu cầu âm thanh PCM thô không có tiêu đề, mu-law hoặc A-law, hãy đặt `response_format` một cách rõ ràng thành `"audio/l16"`, `"audio/mulaw"` hoặc `"audio/alaw"`. Xem [Định dạng đầu ra âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#audio-output-formats).
+
+## Hướng dẫn đặt câu lệnh
+
+Các mô hình TTS Gemini 3.8 coi văn bản đầu vào hoàn toàn là **bản chép lời nguyên văn**.
+Không giống như các mô hình xem trước trước đây, trong đó chỉ dẫn sân khấu được nhúng trong văn bản thuần tuý, TTS Gemini 3.8 tách biệt chỉ dẫn duy trì ở cấp lượt (`speech_metadata`) với thẻ thoại nội dòng tại một thời điểm.
+
+### Trường kiểu so với thẻ nội tuyến
+
+Chia chỉ dẫn về hiệu suất theo phạm vi:
+
+- **Mức độ chuyển lời (`speech_metadata.style`):** Đặt các thuộc tính chuyển lời bền vững (chẳng hạn như cảm xúc, ngữ điệu, tốc độ tổng thể hoặc phong cách chuyển lời (như `"whispering"`, `"out of breath"`, `"muttering"` hoặc `"sarcastic"`)) vào trường `style` của `speech_metadata`. Để tạo một nhân vật và hiệu suất ổn định qua các lượt, hãy thiết kế nhân vật trước trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) và chỉ sử dụng `style` cho các tinh chỉnh không bắt buộc ở cấp lượt.
+- **Sự kiện tại một thời điểm (thẻ nội tuyến):** Đặt các đoạn âm thanh không phải lời nói, tiếng thở hoặc khoảng dừng ngắn vào nội tuyến bên trong bản chép lời bằng dấu ngoặc nhọn (`<cough>`, `<breath>`, `<sigh>`, `<short pause>`). Sử dụng dấu ngoặc nhọn (`<...>`) để có chất lượng âm thanh cao nhất và chỉ sử dụng giọng nói của con người thay vì hiệu ứng âm thanh không phải giọng nói.
+
+| Phạm vi | Vị trí đặt | Ví dụ |
+| --- | --- | --- |
+| **Cấp lượt** (duy trì trong suốt lượt) | `speech_metadata.style` | `"angry tone"`, `"speaking rapidly"`, `"out of breath"`, `"whispers"`, `"sarcastic"` |
+| **Tại một thời điểm cụ thể** (xảy ra tại một từ cụ thể) | Nội tuyến trong `text` (`<...>`) | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
+
+### Nhịp độ và khoảng dừng
+
+Bạn có thể kiểm soát nhịp điệu và khoảng lặng ở 3 mức độ chi tiết:
+
+- **Dấu chấm câu và dấu ba chấm:** Sử dụng dấu phẩy, dấu gạch ngang (`--`) và dấu ba chấm (`...`) để tạo cảm giác do dự tự nhiên trong cuộc trò chuyện.
+- **Thẻ tạm dừng cùng dòng:** Chèn `<short pause>` hoặc `<long pause>` vào đúng vị trí trong kịch bản mà người nói cần tạm dừng:
+  `text
+  Hold on, let me think... <short pause> Alright, I've got it.`
+- **Tốc độ theo lượt:** Đặt `"style": "speaking rapidly"` hoặc `"style": "speaking slowly"` trong `speech_metadata` để kiểm soát tốc độ nói trong toàn bộ lượt.
+
+### Ngữ điệu và cao độ
+
+Sử dụng **`speech_metadata.style`** để kiểm soát ngữ điệu, cao độ và biến tố trong một lượt lời (ví dụ: `"style": "high pitch, cheerful and excited inflection"` hoặc `"style": "monotone and flat"`). Nếu cảm xúc hoặc ngữ điệu thay đổi giữa cuộc trò chuyện, hãy chia kịch bản thành các lượt lời riêng biệt với các giá trị `style` riêng biệt cho mỗi lượt lời.
+
+### Điểm nhấn
+
+Viết hoa một số từ trong bản chép lời, kết hợp với dấu câu và thẻ thanh nhạc nội dòng để nhấn giọng tự nhiên vào các từ khoá:
+
+```
+This is a VERY important point!
+It was a VERY long day <sigh> ... nobody listens anymore.
+```
+
+### Tiếng bật âm và âm thanh không phải lời nói
+
+Đặt các âm thanh không phải lời nói của con người vào dòng bằng dấu ngoặc nhọn (`<...>`) tại đúng thời điểm mà âm thanh đó xuất hiện. Các thẻ giọng nói nên dùng bao gồm:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| `[amazed]` | `[crying]` | `[curious]` | `[excited]` |
-| `[sighs]` | `[gasp]` | `[giggles]` | `[laughs]` |
-| `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
-| `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
+| `<argh>` | `<breath>` | `<heavy breath>` | `<exhales>` |
+| `<cackle>` | `<cheer>` | `<chuckle>`/`<chuckles>` | `<cough>` |
+| `<cry>` | `<gasp>` | `<giggle>` | `<groan>` |
+| `<growl>` | `<grunt>` | `<grr>` | `<hiss>` |
+| `<laugh>`/`<laughter>` | `<moan>` | `<pant>` | `<pff>`/`<phew>` |
+| `<scream>` | `<shout>` | `<shriek>` | `<sigh>`/`<sighs>` |
+| `<sneeze>` | `<snicker>` | `<snort>` | `<sob>` |
+| `<throat-clearing>` | `<tsk>` | `<whimper>` | `<whispers>`/`<whispering>` |
+| `<yawn>` | `<short pause>` | `<long pause>` |  |
 
-Tagi umożliwiają szybkie kontrolowanie dostarczania transkrypcji. Aby mieć jeszcze większą kontrolę, możesz połączyć je z promptem kontekstowym, aby ustawić ogólny ton i atmosferę występu.
+### Kênh phụ và lời nói chồng chéo
 
-### Struktura prompta
+Trong đoạn hội thoại có nhiều người nói, hãy đặt các phản ứng của người nghe trong dấu gạch dọc (`|reaction|`) trong lượt lời của người nói để tạo kênh liên lạc bí mật tự nhiên hoặc lời nói chồng chéo mà không bị ngắt thành một lượt lời riêng cho mỗi phản ứng.
 
-Dobry prompt powinien zawierać te elementy, które razem tworzą świetny wynik:
+- **Trao đổi qua kênh phụ trong thời gian ngắn:** Lồng ghép phản ứng ngắn của người nghe (`|oh hmm|`, `|oh really?|`, `|absolutely|`) trong lượt nói của người đang nói:
+  - **Lượt 1 (Người nói A):** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
+  - **Lượt 2 (Người nói B):** `"Ready enough |oh really?| The last blocker cleared this morning."`
+  - **Lượt 3 (Người nói A):** `"Then let's ship it |absolutely| and watch the dashboards."`
+- **Lời nói chồng chéo và xen kẽ:** Sử dụng nhiều đoạn dấu gạch đứng để mô phỏng lời nói đồng thời hoặc xen kẽ giữa hai người nói (phù hợp nhất với `gemini-3.8-flash-tts`):
+  - **Đếm ngược/hát đồng thanh cùng lúc:** `"Let's surprise him on three |ok| ready?"` rồi đến `"one. two. three. |happy| happy |birthday| birthday!"`
+  - **Full speaker overlap** (Chồng chéo hoàn toàn giữa các diễn giả): `"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
 
-- **Profil audio** – określa osobowość głosu, definiując tożsamość postaci, archetyp i inne cechy, takie jak wiek, pochodzenie itp.
-- **Scena** – przygotowuje scenę. Opisuje zarówno środowisko fizyczne, jak i „klimat”.
-- **Notatki reżysera** – wskazówki dotyczące skuteczności, w których możesz określić, które instrukcje są ważne dla Twojego wirtualnego talentu. Są to m.in. styl, oddech, tempo, artykulacja i akcent.
-- **Przykładowy kontekst** – zapewnia modelowi kontekstowy punkt wyjścia, dzięki czemu wirtualny aktor wchodzi do skonfigurowanej przez Ciebie sceny w naturalny sposób.
-- **Transkrypcja** – tekst, który model będzie odczytywać. Aby uzyskać najlepsze wyniki, pamiętaj, że temat transkrypcji i styl pisania powinny być powiązane z podawanymi przez Ciebie wskazówkami.
-- **Tagi audio** – modyfikatory, które możesz umieścić w transkrypcji, aby zmienić sposób odczytywania danej części tekstu, np. `[whispers]` lub `[shouting]`.
+### Tính nhất quán giữa các thế hệ và những điều cần tránh
 
-Przykładowy pełny prompt:
+Hãy làm theo các nguyên tắc sau để duy trì giọng nói ổn định trong suốt cuộc trò chuyện:
 
-```
-# AUDIO PROFILE: Jaz R.
-## "The Morning Hype"
+- **Thiết kế nhân vật đại diện ngay từ đầu trong Thiết kế giọng nói thay vì các khối kiểu dài:**
+  Các đoạn văn `"Audio Profile"` dạng dài và nhiều dấu đầu dòng `"Director's Notes"` được chuyển từ các mô hình trước đó là nguyên nhân phổ biến nhất gây ra sự thay đổi về giọng nói.
+  Hãy sử dụng trực giác sáng tạo đó ngay từ đầu trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) để tạo ra một `voice_...` nhân vật tuỳ chỉnh lâu dài, sau đó truyền mã nhận dạng giọng nói đó qua các lệnh gọi TTS.
+- **Dựa vào giọng nói tham chiếu để đảm bảo tính ổn định (bỏ qua các chỉ dẫn meta):**
+  Các mô hình TTS 3.8 của Gemini được huấn luyện để ưu tiên giọng nói tham chiếu.
+  Không được đưa ra hướng dẫn yêu cầu mô hình giữ giọng nói ổn định (chẳng hạn như `"do not switch speaker identity"` hoặc `"maintain identical timbre"`) – văn bản câu lệnh bổ sung sẽ làm tăng độ lệch. Loại bỏ những hướng dẫn không cần thiết về phong cách và để mô hình thay đổi một cách tự nhiên xung quanh điểm ổn định do giọng nói tham khảo cung cấp.
+- **Đừng cố gắng thay đổi các đặc điểm không thay đổi của người nói trong `style`:** Tránh đưa tuổi, giới tính, tên hoặc các thay đổi về giọng điệu vĩnh viễn vào `speech_metadata.style`.
+  Thay vào đó, hãy chọn một giọng nói theo khu vực trong Thư viện giọng nói mở rộng hoặc tạo một giọng nói bằng tính năng [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi).
 
-## THE SCENE: The London Studio
-It is 10:00 PM in a glass-walled studio overlooking the moonlit London skyline,
-but inside, it is blindingly bright. The red "ON AIR" tally light is blazing.
-Jaz is standing up, not sitting, bouncing on the balls of their heels to the
-rhythm of a thumping backing track. Their hands fly across the faders on a
-massive mixing desk. It is a chaotic, caffeine-fueled cockpit designed to wake
-up an entire nation.
+### Quy trình làm việc được đề xuất
 
-### DIRECTOR'S NOTES
-Style:
-* The "Vocal Smile": You must hear the grin in the audio. The soft palate is
-always raised to keep the tone bright, sunny, and explicitly inviting.
-* Dynamics: High projection without shouting. Punchy consonants and elongated
-vowels on excitement words (e.g., "Beauuutiful morning").
+1. **Tạo nhân vật một lần:** Tạo nhân vật trong phần [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) hoặc chọn một giọng nói theo khu vực trong Thư viện giọng nói mở rộng phù hợp với ngôn ngữ đích và tính cách của bạn.
+2. **Viết bản chép lời tự nhiên như lời nói, có cả những đoạn ngắt lời:** Để đạt được mức độ tự nhiên cao nhất, hãy viết `text` dưới dạng bản chép lời thực tế như lời nói, bao gồm cả những đoạn ngắt lời và do dự tự nhiên trong cuộc trò chuyện (ví dụ: `"Oh uh yeah I think... hm, so that's interesting"`).
+3. **Trước tiên, hãy kiểm thử TTS thông thường:** Trước tiên, hãy tổng hợp bản chép lời của bạn bằng một trường `style` trống – hầu hết các yêu cầu đều không cần hướng dẫn `style`.
+4. **Chỉ thêm câu lệnh ngắn `style` để tinh chỉnh:** Chỉ thêm một chuỗi `style` ngắn gọn (chẳng hạn như `"casual, friendly"` hoặc `"muttering, then reassuring"`) cho những lượt cần điều chỉnh cụ thể về cách phân phối và sử dụng lại chính xác chuỗi ngắn đó trong các lượt khi bạn muốn có một đường cơ sở nhất quán.
 
-Pace: Speaks at an energetic pace, keeping up with the fast music.  Speaks
-with A "bouncing" cadence. High-speed delivery with fluid transitions - no dead
-air, no gaps.
+### Hội thoại nhiều lượt và tác nhân thoại
 
-Accent: Jaz is from Brixton, London
+Khi xây dựng các tác nhân giọng nói đàm thoại theo thời gian thực hoặc các ứng dụng nhiều lượt tương tác:
 
-### SAMPLE CONTEXT
-Jaz is the industry standard for Top 40 radio, high-octane event promos, or any
-script that requires a charismatic Estuary accent and 11/10 infectious energy.
+- Thực hiện **một lệnh gọi TTS cho mỗi lượt** khi các đoạn văn bản LLM đến.
+- Cho phép `voice` đã định cấu hình (được tạo sẵn, được thiết kế `voice_...` hoặc được sao chép `voice_...` / `voicekey_...`) mang danh tính của người nói qua các lượt trò chuyện – không bao giờ gửi lại một nhân vật dài ở mỗi lượt.
+- Để trống trường `style` cho mỗi lượt hoặc gửi một chuỗi hằng số ngắn (chẳng hạn như `"casual, friendly"`) cho toàn bộ cuộc trò chuyện.
+- Chia câu trả lời dài của trợ lý thành các lượt ngắn hơn thay vì sử dụng các câu lệnh có phong cách mạnh mẽ hơn.
 
-#### TRANSCRIPT
-Yes, massive vibes in the studio! You are locked in and it is absolutely
-popping off in London right now. If you're stuck on the tube, or just sat
-there pretending to work... stop it. Seriously, I see you. Turn this up!
-We've got the project roadmap landing in three, two... let's go!
-```
+## Các điểm hạn chế
 
-### Szczegółowe strategie tworzenia promptów
+- Các mô hình TTS chấp nhận đầu vào chỉ có văn bản và tạo ra đầu ra chỉ có âm thanh.
+- Tính năng tạo nhiều người nói bằng một yêu cầu (`speech_config.speakers`) hỗ trợ tối đa 2 người nói bằng giọng nói được tạo sẵn. Để kết hợp giọng nói được thiết kế riêng (`voice_...`) hoặc giọng nói được sao chép (`voice_...` / `voicekey_...`) trong đoạn hội thoại có nhiều nhân vật, hãy tổng hợp từng lượt lời của người nói một cách riêng lẻ.
+  Vì các yêu cầu đơn phương trả về `audio/wav` với tiêu đề RIFF 44 byte theo mặc định, hãy yêu cầu PCM thô (`{"type": "audio", "mime_type": "audio/l16"}`) hoặc loại bỏ tiêu đề WAV khỏi mỗi lượt trước khi nối các khung âm thanh PCM 24 kHz.
+- **Hạn mức bộ nhớ và TTL cho giọng nói tuỳ chỉnh:**
+  - **Giọng nói có trạng thái (`store=True`, được nhắc hoặc sao chép):** Tối đa **200 giọng nói cho mỗi dự án** với **TTL (thời gian tồn tại) là 1 năm**.
+  - **Khoá thoại không trạng thái (`store=False`, `voicekey_...`):** **TTL 7 ngày** (thời gian tồn tại).
+- Xem phần [Ngôn ngữ được hỗ trợ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#languages) để biết phạm vi hỗ trợ ngôn ngữ.
 
-Rozbij każdy element promptu w ten sposób:
+## Bước tiếp theo
 
-#### Profil audio
+- Tạo nhân vật ảo có giọng nói tuỳ chỉnh bằng ngôn ngữ tự nhiên thông qua tính năng [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi).
+- Nhân bản giọng nói của một người nói hiện có trong tính năng [Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi).
+- So sánh thông số kỹ thuật của mô hình trên các trang mô hình [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi).
+- Khám phá âm thanh tương tác hai chiều bằng [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
 
-Krótko opisz osobowość postaci.
+Gửi ý kiến phản hồi
 
-- **Nazwa** Nadanie postaci imienia pomaga modelowi i zapewnia spójność działania. Podczas określania sceny i kontekstu odwołuj się do postaci po imieniu.
-- **Rola** Główna tożsamość i archetyp postaci, która występuje w scenie, np. DJ radiowy, podcaster, reporter itp.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Przykłady:
+Cập nhật lần gần đây nhất: 2026-09-24 UTC.
 
-```
-# AUDIO PROFILE: Jaz R.
-## "The Morning Hype"
-```
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-```
-# AUDIO PROFILE: Monica A.
-## "The Beauty Influencer"
-```
-
-#### Sceneria
-
-Określ kontekst sceny, w tym lokalizację, nastrój i szczegóły środowiskowe, które nadają ton i klimat. Opisz, co dzieje się wokół postaci i jak to na nią wpływa. Scena zapewnia kontekst środowiskowy dla całej interakcji i w subtelny, naturalny sposób kieruje działaniami aktora.
-
-Przykłady:
-
-```
-## THE SCENE: The London Studio
-It is 10:00 PM in a glass-walled studio overlooking the moonlit London skyline,
-but inside, it is blindingly bright. The red "ON AIR" tally light is blazing.
-Jaz is standing up, not sitting, bouncing on the balls of their heels to the
-rhythm of a thumping backing track. Their hands fly across the faders on a
-massive mixing desk. It is a chaotic, caffeine-fueled cockpit designed to
-wake up an entire nation.
-```
-
-```
-## THE SCENE: Homegrown Studio
-A meticulously sound-treated bedroom in a suburban home. The space is
-deadened by plush velvet curtains and a heavy rug, but there is a
-distinct "proximity effect."
-```
-
-#### Notatki reżysera
-
-Ta kluczowa sekcja zawiera szczegółowe wskazówki dotyczące skuteczności. Możesz pominąć wszystkie inne elementy, ale zalecamy uwzględnienie tego elementu.
-
-Określ tylko to, co jest ważne dla wydajności, uważając, aby nie przesadzić. Zbyt wiele ścisłych reguł ograniczy kreatywność modeli i może pogorszyć ich skuteczność. Zrównoważ opis roli i sceny ze szczegółowymi zasadami dotyczącymi występu.
-
-Najczęstsze wskazówki to **Styl, tempo i akcent**, ale model nie jest ograniczony do tych wskazówek ani ich nie wymaga. Możesz dodać niestandardowe instrukcje, aby uwzględnić dodatkowe szczegóły ważne dla skuteczności, i podać tyle szczegółów, ile uznasz za konieczne.
-
-Na przykład:
-
-```
-### DIRECTOR'S NOTES
-
-Style: Enthusiastic and Sassy GenZ beauty YouTuber
-
-Pacing: Speaks at an energetic pace, keeping up with the extremely fast, rapid
-delivery influencers use in short form videos.
-
-Accent: Southern california valley girl from Laguna Beach |
-```
-
-**Styl:**
-
-Określa ton i styl wygenerowanej mowy. Wybierz np. „radosny”, „energiczny”, „zrelaksowany”, „znudzony” itp., aby nadać kierunek wykonaniu. Opisz je i podaj jak najwięcej szczegółów: *„Zaraźliwy entuzjazm. Słuchacz powinien czuć, że jest częścią ogromnego, ekscytującego wydarzenia społecznościowego”.* Lepiej jest użyć tego sformułowania niż *„energetyczny i entuzjastyczny”*.
-
-Możesz nawet wypróbować terminy popularne w branży voiceover, takie jak „uśmiech w głosie”. Możesz nałożyć na siebie dowolną liczbę cech stylu.
-
-Przykłady:
-
-Simple Emotion
-
-```
-DIRECTORS NOTES
-...
-Style: Frustrated and angry developer who can't get the build to run.
-...
-```
-
-Większa głębia
-
-```
-DIRECTORS NOTES
-...
-Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts.
-...
-```
-
-Złożony
-
-```
-DIRECTORS NOTES
-Style:
-* The "Vocal Smile": You must hear the grin in the audio. The soft palate is
-always raised to keep the tone bright, sunny, and explicitly inviting.
-*Dynamics: High projection without shouting. Punchy consonants and
-elongated vowels on excitement words (e.g., "Beauuutiful morning").
-```
-
-**Akcent:**
-
-Opisz wybrany akcent. Im bardziej szczegółowe informacje podasz, tym lepsze będą wyniki. Na przykład użyj „*akcentu brytyjskiego angielskiego, jakiego używa się w Croydon w Anglii*” zamiast „*akcentu brytyjskiego*”.
-
-Przykłady:
-
-```
-### DIRECTORS NOTES
-...
-Accent: Southern california valley girl from Laguna Beach
-...
-```
-
-```
-### DIRECTORS NOTES
-...
-Accent: Jaz is a from Brixton, London
-...
-```
-
-**Tempo:**
-
-Ogólne tempo i jego zmiany w całym utworze.
-
-Przykłady:
-
-Prosty
-
-```
-### DIRECTORS NOTES
-...
-Pacing: Speak as fast as possible
-...
-```
-
-Większa głębia
-
-```
-### DIRECTORS NOTES
-...
-Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
-...
-```
-
-Złożony
-
-```
-### DIRECTORS NOTES
-...
-Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into each other. There is zero urgency.
-...
-```
-
-### Wypróbuj
-
-Możesz wypróbować te przykłady w [Bibliotece głosów](https://aistudio.google.com/apps/bundled/voice-library?showPreview=true&hl=pl). Aby uzyskać świetne wykonanie wokalne, postępuj zgodnie z tymi wskazówkami:
-
-- Pamiętaj, aby cały prompt był spójny – skrypt i instrukcje są ze sobą ściśle powiązane i wspólnie tworzą świetne wykonanie.
-- Nie musisz opisywać wszystkiego. Czasami pozostawienie modelu miejsca na wypełnienie luk pomaga w naturalności. (Jak utalentowany aktor)
-- Jeśli utkniesz w martwym punkcie, poproś Gemini o pomoc w przygotowaniu scenariusza lub występu.
-
-## Ograniczenia
-
-- Modele TTS mogą otrzymywać tylko dane wejściowe w postaci tekstu i generować dane wyjściowe w postaci dźwięku.
-- Sesja TTS ma limit [okna kontekstu](https://ai.google.dev/gemini-api/docs/long-context?hl=pl) wynoszący 32 tys. tokenów.
-- Więcej informacji o obsługiwanych językach znajdziesz w sekcji [Języki](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl#languages).
-- Usługa TTS nie obsługuje przesyłania strumieniowego, z wyjątkiem korzystania z `gemini-3.1-flash-tts-preview`.
-
-Poniższe ograniczenia obowiązują w przypadku korzystania z modelu Gemini 3.1 Flash TTS Preview do generowania mowy:
-
-- **Niespójność głosu z instrukcjami prompta:** wygenerowane przez model dane wyjściowe mogą nie zawsze ściśle pasować do wybranego głosu, przez co dźwięk może brzmieć inaczej niż oczekiwano. Aby uniknąć niedopasowania tonów (np. gdy głęboki męski głos próbuje mówić jak mała dziewczynka), upewnij się, że ton i kontekst tekstu w promcie są naturalnie zgodne z profilem wybranego lektora.
-- **Jakość dłuższych wyjść:** jakość i spójność mowy mogą zacząć się pogarszać w przypadku wygenerowanych wyjść, które trwają dłużej niż kilka minut. Zalecamy podzielenie transkrypcji na mniejsze części.
-- **Sporadyczne zwracanie tokenów tekstowych:** model sporadycznie zwraca tokeny tekstowe zamiast tokenów audio, co powoduje, że serwer odrzuca żądanie z błędem `500`. Dzieje się to losowo w bardzo małym odsetku żądań, dlatego w aplikacji należy zaimplementować automatyczną logikę ponawiania, aby sobie z tym radzić.
-- **Fałszywe odrzucenia klasyfikatora promptów:** niejasne prompty mogą nie wywołać klasyfikatora syntezy mowy, co spowoduje odrzucenie żądania (`PROHIBITED_CONTENT`) lub odczytanie przez model instrukcji dotyczących stylu i notatek reżysera. Sprawdzaj skuteczność promptów, dodając jasny wstęp, który instruuje model, aby syntetyzował mowę, i wyraźnie oznaczaj miejsce, w którym zaczyna się rzeczywisty zapis wypowiedzi.
-
-## Co dalej?
-
-- [Interfejs Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl) Gemini oferuje interaktywne opcje generowania dźwięku, które możesz przeplatać z innymi trybami.
-- Informacje o pracy z *wejściowymi danymi audio* znajdziesz w przewodniku [Rozumienie dźwięku](https://ai.google.dev/gemini-api/docs/audio?hl=pl).
-
-Prześlij opinię
-
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
-
-Ostatnia aktualizacja: 2026-09-18 UTC.
-
-Chcesz przekazać coś jeszcze?
-
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-18 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-24 UTC."],[],[]]

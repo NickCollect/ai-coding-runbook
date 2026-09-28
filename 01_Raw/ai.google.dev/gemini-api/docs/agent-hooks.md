@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=pt-BR
-fetched_at: 2026-09-21T05:57:56.654152+00:00
+source_url: https://ai.google.dev/gemini-api/docs/agent-hooks?hl=hi
+fetched_at: 2026-09-28T06:30:43.882332+00:00
 title: "Hooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envie comentários
+सुझाव भेजें
 
 # Hooks
 
-Os hooks permitem executar scripts personalizados ou solicitações HTTP externas imediatamente antes ou depois que o agente executa o código ou modifica arquivos no sandbox remoto. Use hooks para estender o loop do agente com proteções automatizadas e fluxos de trabalho em segundo plano, como:
+हुक की मदद से, एजेंट के कोड को एक्ज़ीक्यूट करने या रिमोट सैंडबॉक्स में फ़ाइलों में बदलाव करने से ठीक पहले या बाद में, कस्टम स्क्रिप्ट या बाहरी एचटीटीपी अनुरोधों को चलाया जा सकता है. ऑटोमेटेड गार्डरेल और बैकग्राउंड वर्कफ़्लो के साथ एजेंट लूप को बढ़ाने के लिए, हुक का इस्तेमाल करें. जैसे:
 
-- **Aplicar proteções de segurança e acesso** antes da execução de comandos shell de alto risco ou leituras de arquivos restritas.
-- **Automatizar transformações de pipeline de dados** logo depois que um agente cria ou modifica arquivos.
-- **Transmita telemetria de auditoria empresarial** para sistemas de monitoramento externos após a execução da ferramenta.
+- ज़्यादा जोखिम वाली शेल कमांड या फ़ाइल पढ़ने की पाबंदी लागू होने से पहले, **सुरक्षा और ऐक्सेस से जुड़े नियमों को लागू करना**.
+- एजेंट के फ़ाइलें बनाने या उनमें बदलाव करने के तुरंत बाद, **डेटा पाइपलाइन में बदलावों को अपने-आप लागू करना**.
+- टूल के इस्तेमाल के बाद, बाहरी मॉनिटरिंग सिस्टम को **स्ट्रीमिंग एंटरप्राइज़ ऑडिट टेलीमेट्री**.
 
 ### Python
 
@@ -211,6 +211,87 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    hooksConfig := `{
+  "security-gate": {
+    "pre_tool_execution": [
+      {
+        "matcher": "code_execution",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /.agents/hooks-scripts/gate.py",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}`
+
+    gateScript := `#!/usr/bin/env python3
+import sys, json
+data = json.load(sys.stdin)
+cmd = str(data.get("tool_call", {}).get("args", {}))
+if "rm -rf" in cmd:
+    print(json.dumps({"decision": "deny", "reason": "Destructive command blocked by security gate."}))
+else:
+    print(json.dumps({"decision": "allow"}))
+`
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr(".agents/hooks.json"),
+                Content: genai.Ptr(hooksConfig),
+            },
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr(".agents/hooks-scripts/gate.py"),
+                Content: genai.Ptr(gateScript),
+            },
+        },
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Run `rm -rf /tmp/forbidden` using code_execution."),
+            Tools:       []interactions.Tool{interactions.NewTool(interactions.CodeExecution{})},
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -239,20 +320,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Eventos de ciclo de vida compatíveis
+## लाइफ़साइकल के इन इवेंट के लिए, यह सुविधा उपलब्ध है
 
-Os hooks são compatíveis com dois eventos no sandbox:
+सैंडबॉक्स में हुक, दो इवेंट के साथ काम करते हैं:
 
-| Evento | Quando é disparado | O que faz? |
+| इवेंट | यह कब ट्रिगर होता है | यह क्या करता है |
 | --- | --- | --- |
-| `pre_tool_execution` | Logo antes de uma ferramenta ser executada | Pode aprovar (`allow`) ou bloquear (`deny`) a ferramenta antes da execução. Quando bloqueado, o modelo vê o motivo da sua rejeição e se adapta. |
-| `post_tool_execution` | Logo após a conclusão de uma ferramenta | Executa tarefas de acompanhamento, como formatação de código, execução de testes de unidade ou registro de telemetria. Não é possível bloquear ou desfazer ações concluídas. |
+| `pre_tool_execution` | किसी टूल के चलने से ठीक पहले | टूल को लागू करने से पहले, उसे अनुमति (`allow`) दी जा सकती है या ब्लॉक (`deny`) किया जा सकता है. ब्लॉक किए जाने पर, मॉडल को जवाब अस्वीकार करने की वजह पता चलती है और वह उसके हिसाब से काम करता है. |
+| `post_tool_execution` | टूल का इस्तेमाल पूरा होने के तुरंत बाद | यह कोड को फ़ॉर्मैट करने, यूनिट टेस्ट चलाने या टेलीमेट्री लॉग करने जैसे फ़ॉलो-अप टास्क पूरे करता है. पूरी हो चुकी कार्रवाइयों को ब्लॉक नहीं किया जा सकता या पहले जैसा नहीं किया जा सकता. |
 
 ### `pre_tool_execution`
 
-Disparado logo antes da execução de uma ferramenta. Seu script lê os detalhes da chamada de função de `stdin` e gera o JSON de decisão (`allow` ou `deny`) em `stdout`.
+यह इवेंट, टूल के एक्ज़ीक्यूट होने से ठीक पहले ट्रिगर होता है. आपकी स्क्रिप्ट, `stdin` से टूल कॉल की जानकारी पढ़ती है और `stdout` को JSON (`allow` या `deny`) के तौर पर अपना फ़ैसला आउटपुट करती है.
 
-**Payload de entrada (`stdin`):**
+**इनपुट पेलोड (`stdin`):**
 
 ```
 {
@@ -267,9 +348,9 @@ Disparado logo antes da execução de uma ferramenta. Seu script lê os detalhes
 }
 ```
 
-**Resposta da saída (`stdout`):**
+**आउटपुट रिस्पॉन्स (`stdout`):**
 
-Para aprovar a chamada de ferramenta:
+टूल को कॉल करने की अनुमति देने के लिए:
 
 ```
 {
@@ -277,7 +358,7 @@ Para aprovar a chamada de ferramenta:
 }
 ```
 
-Para bloquear a chamada de ferramenta e retornar feedback ao modelo:
+टूल कॉल को ब्लॉक करने और मॉडल को सुझाव/राय देने या शिकायत करने के लिए:
 
 ```
 {
@@ -286,15 +367,15 @@ Para bloquear a chamada de ferramenta e retornar feedback ao modelo:
 }
 ```
 
-Quando um hook nega um comando, a chamada de ferramenta é ignorada imediatamente. O agente mostra um resultado de erro com o motivo da rejeição na mesma vez. Em seguida, o modelo pode se autocorrigir escolhendo um comando alternativo ou explicando o bloqueio ao usuário.
+जब कोई हुक किसी निर्देश को अस्वीकार करता है, तो टूल कॉल को तुरंत स्किप कर दिया जाता है. एजेंट को, मौजूदा बातचीत में ही गड़बड़ी का नतीजा दिखता है. इसमें अनुरोध अस्वीकार करने की वजह शामिल होती है. इसके बाद, मॉडल किसी दूसरी कमांड को चुनकर या उपयोगकर्ता को ब्लॉक करने की वजह बताकर, अपनी गलती को ठीक कर सकता है.
 
-Se o script gerar JSON não reconhecido, texto simples ou algo diferente de `{"decision": "deny"}`, o tempo de execução vai tratar a resposta como uma aprovação (`allow`).
+अगर आपकी स्क्रिप्ट से, पहचाना नहीं गया JSON, सादा टेक्स्ट या `{"decision": "deny"}` के अलावा कोई और आउटपुट मिलता है, तो रनटाइम, रिस्पॉन्स को मंज़ूरी (`allow`) के तौर पर मानता है.
 
 ### `post_tool_execution`
 
-Disparado logo após a conclusão de uma ferramenta. O script lê os detalhes da execução e qualquer status de erro de `stdin`.
+यह टूल के पूरा होने के तुरंत बाद ट्रिगर होता है. आपकी स्क्रिप्ट, `stdin` से एक्ज़ीक्यूशन की जानकारी और गड़बड़ी की स्थिति को पढ़ती है.
 
-**Payload de entrada (`stdin`):**
+**इनपुट पेलोड (`stdin`):**
 
 ```
 {
@@ -309,27 +390,27 @@ Disparado logo após a conclusão de uma ferramenta. O script lê os detalhes da
 }
 ```
 
-Se um comando do shell imprimir erros no erro padrão (`stderr`) ou se uma operação do sistema de arquivos falhar, um campo `"error"` contendo o texto do erro será incluído no payload. Quando o comando é executado sem erros, o campo `"error"` é omitido por completo.
+अगर कोई शेल कमांड, स्टैंडर्ड गड़बड़ी (`stderr`) में गड़बड़ियां प्रिंट करती है या फ़ाइल सिस्टम का कोई ऑपरेशन पूरा नहीं होता है, तो गड़बड़ी के टेक्स्ट वाला `"error"` फ़ील्ड, पेलोड में शामिल किया जाता है. जब कमांड बिना किसी गड़बड़ी के पूरी हो जाती है, तो `"error"` फ़ील्ड को पूरी तरह से हटा दिया जाता है.
 
-**Resposta da saída (`stdout`):**
+**आउटपुट रिस्पॉन्स (`stdout`):**
 
 ```
 {}
 ```
 
-Como os hooks pós-ferramenta são executados estritamente para tarefas em segundo plano, como formatação de código ou geração de registros, o tempo de execução ignora todos os valores de decisão retornados em `stdout`.
+टूल के बाद चलने वाले हुक, सिर्फ़ बैकग्राउंड टास्क के लिए काम करते हैं. जैसे, कोड फ़ॉर्मैट करना या लॉग करना. इसलिए, रनटाइम `stdout` पर दिखाई गई किसी भी फ़ैसले की वैल्यू को अनदेखा कर देता है.
 
-## Descoberta de configuração
+## कॉन्फ़िगरेशन की जानकारी
 
-O ambiente de execução descobre automaticamente as definições de hook de `.agents/hooks.json` ou `/.agents/hooks.json` no ambiente de sandbox. É possível fornecer `hooks.json` com seus scripts personalizados usando qualquer [origem de ambiente](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#mount_from_a_source) compatível:
+रनटाइम, सैंडबॉक्स एनवायरमेंट में मौजूद `.agents/hooks.json` या `/.agents/hooks.json` से हुक की परिभाषाओं का अपने-आप पता लगाता है. [एनवायरमेंट सोर्स](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#mount_from_a_source) के साथ काम करने वाले किसी भी सोर्स का इस्तेमाल करके, अपनी कस्टम स्क्रिप्ट के साथ `hooks.json` दिया जा सकता है:
 
-- **Montagem do repositório**: um repositório Git que contém `.agents/hooks.json` e `AGENTS.md`.
-- **Cloud Storage (`gcs`)**: um bucket do GCS que contém `hooks.json` copiado para o ambiente.
-- **Fontes inline**: string JSON bruta e conteúdo do script transmitidos em `environment.sources` ao chamar `client.interactions.create`.
+- **डेटा स्टोर करने की जगह को माउंट करना**: यह एक Git डेटा स्टोर करने की जगह होती है, जिसमें `AGENTS.md` के साथ-साथ `.agents/hooks.json` भी शामिल होता है.
+- **Cloud Storage (`gcs`)**: यह GCS बकेट है, जिसमें `hooks.json` को एनवायरमेंट में कॉपी किया गया है.
+- **इनलाइन सोर्स**: `client.interactions.create` को कॉल करते समय, `environment.sources` में पास की गई रॉ JSON स्ट्रिंग और स्क्रिप्ट का कॉन्टेंट.
 
-### `hooks.json` esquema
+### `hooks.json` स्कीमा
 
-Um arquivo `hooks.json` agrupa definições de eventos (`pre_tool_execution` ou `post_tool_execution`) com nomes personalizados. É possível ativar ou desativar cada grupo de forma independente:
+`hooks.json` फ़ाइल, कस्टम नामों के तहत इवेंट डेफ़िनिशन (`pre_tool_execution` या `post_tool_execution`) को ग्रुप करती है. हर ग्रुप के लिए, इस सुविधा को अलग-अलग चालू या बंद किया जा सकता है:
 
 ```
 {
@@ -365,71 +446,71 @@ Um arquivo `hooks.json` agrupa definições de eventos (`pre_tool_execution` ou 
 }
 ```
 
-### Sintaxe e regras do comparador
+### मैचर का सिंटैक्स और नियम
 
-Cada grupo de regras em `hooks.json` define quando e como os manipuladores são acionados usando as propriedades `matcher` e `hooks`:
+`hooks.json` में मौजूद हर नियम ग्रुप यह तय करता है कि `matcher` और `hooks` प्रॉपर्टी का इस्तेमाल करके, हैंडलर कब और कैसे ट्रिगर होंगे:
 
-| Campo | Tipo | Descrição |
+| फ़ील्ड | टाइप | ब्यौरा |
 | --- | --- | --- |
-| `enabled` | `boolean` | Opcional. Defina como `false` para desativar o grupo (`true` por padrão). |
-| `matcher` | `string` | Expressão regular para fazer a correspondência de padrões com os nomes das ferramentas de destino dentro do contêiner. |
-| `hooks` | `array` | Lista ordenada de definições de gerenciadores (`command` ou `http`). Os gerenciadores são executados em sequência na ordem de declaração. |
+| `enabled` | `boolean` | ज़रूरी नहीं. ग्रुप को बंद करने के लिए, इसे `false` पर सेट करें (डिफ़ॉल्ट रूप से `true` पर सेट होता है). |
+| `matcher` | `string` | कंटेनर में मौजूद टारगेट टूल के नामों से मेल खाने वाला रेगुलर एक्सप्रेशन पैटर्न. |
+| `hooks` | `array` | हैंडलर की परिभाषाओं की क्रम वाली सूची (`command` या `http`). हैंडलर, क्रम से लागू होते हैं. |
 
-#### Como funciona a avaliação de regex
+#### रेगुलर एक्सप्रेशन के आकलन का तरीका
 
-Quando o agente invoca uma ferramenta na sandbox, o tempo de execução avalia o nome do contêiner da ferramenta em relação ao seu padrão `matcher` usando expressões regulares RE2 padrão. Se a regex corresponder ao nome da ferramenta, todos os manipuladores na matriz `hooks` serão executados em ordem. Se vários grupos de regras corresponderem à mesma ferramenta, todas as matrizes de manipuladores correspondentes serão executadas.
+जब एजेंट, सैंडबॉक्स में किसी टूल को शुरू करता है, तो रनटाइम, टूल के कंटेनर के नाम की तुलना आपके `matcher` पैटर्न से करता है. इसके लिए, स्टैंडर्ड RE2 रेगुलर एक्सप्रेशन का इस्तेमाल किया जाता है. अगर रेगुलर एक्सप्रेशन, टूल के नाम से मेल खाता है, तो `hooks` ऐरे में मौजूद सभी हैंडलर क्रम से काम करते हैं. अगर एक से ज़्यादा नियम ग्रुप, एक ही टूल से मैच करते हैं, तो उनसे जुड़े सभी हैंडलर ऐरे चलते हैं.
 
-Você pode segmentar qualquer nome de ferramenta de contêiner integrada: execução de código (`code_execution`) ou operações do sistema de arquivos (`view_file`, `write_to_file`, `replace_file_content`, `list_dir` e `delete_file`).
+आपके पास किसी भी बिल्ट-इन कंटेनर टूल के नाम को टारगेट करने का विकल्प होता है: कोड एक्ज़ीक्यूशन (`code_execution`) या फ़ाइल सिस्टम ऑपरेशन (`view_file`, `write_to_file`, `replace_file_content`, `list_dir`, और `delete_file`).
 
-#### Expressões de correspondência comuns
+#### मैचर के सामान्य एक्सप्रेशन
 
-- `"code_execution"`: correspondência exata de string para comandos do shell e execuções de script.
-- `"write_to_file"`: correspondência exata para criação de arquivos do sistema de arquivos e gravações em disco.
-- `"view_file|write_to_file"`: a separação por barra vertical corresponde a vários nomes de ferramentas específicas em uma única regra.
-- `".*_file"`: curinga de regex que corresponde a qualquer ferramenta que termine em `_file` (como `view_file`, `write_to_file` ou `delete_file`). Isso abrange apenas parte do conjunto de ferramentas do sistema de arquivos. `replace_file_content` e `list_dir` não terminam em `_file`. Portanto, nomeie-os explicitamente quando precisar deles. As expressões regulares RE2 padrão exigem `.*`. Globs de shell simples, como `*_file`, são sintaxes de regex inválidas e não vão corresponder.
-- `".*"` ou `"*"` ou `""`: padrão abrangente que intercepta todas as chamadas de função dentro do contêiner.
+- `"code_execution"`: शेल कमांड और स्क्रिप्ट को चलाने के लिए, स्ट्रिंग का सटीक मिलान.
+- `"write_to_file"`: फ़ाइल सिस्टम में फ़ाइल बनाने और डिस्क पर डेटा लिखने के लिए, पूरी तरह से मेल खाने वाला पैटर्न.
+- `"view_file|write_to_file"`: पाइप से अलग किए गए टूल के नाम, एक ही नियम में कई टूल के नामों से मेल खाते हैं.
+- `".*_file"`: रेगुलर एक्सप्रेशन वाइल्डकार्ड, `_file` पर खत्म होने वाले किसी भी टूल से मैच करता है. जैसे, `view_file`, `write_to_file` या `delete_file`. इसमें फ़ाइल सिस्टम टूलसेट का सिर्फ़ एक हिस्सा शामिल होता है. `replace_file_content` और `list_dir`, `_file` पर खत्म नहीं होते हैं. इसलिए, जब आपको इनकी ज़रूरत हो, तब इनके नाम साफ़ तौर पर बताएं. स्टैंडर्ड RE2 रेगुलर एक्सप्रेशन के लिए `.*` की ज़रूरत होती है; `*_file` जैसे सामान्य शेल ग्लोब, रेगुलर एक्सप्रेशन के अमान्य सिंटैक्स होते हैं और इनसे कोई मैच नहीं मिलेगा.
+- `".*"` या `"*"` या `""`: यह एक ऐसा पैटर्न है जो कंटेनर में मौजूद हर टूल कॉल को इंटरसेप्ट करता है.
 
-## Tipos de gerenciadores
+## हैंडलर के टाइप
 
-### Hooks de comando
+### कमांड हुक
 
-Os hooks de comando executam um comando ou script de shell dentro do sandbox. O script recebe o JSON do evento em `stdin` e gera o JSON de decisão em `stdout`.
+कमांड हुक, सैंडबॉक्स में शेल कमांड या स्क्रिप्ट को एक्ज़ीक्यूट करते हैं. स्क्रिप्ट को `stdin` पर इवेंट JSON मिलता है और वह `stdout` पर फ़ैसले का JSON आउटपुट करती है.
 
-| Campo | Tipo | Descrição |
+| फ़ील्ड | टाइप | ब्यौरा |
 | --- | --- | --- |
-| `type` | `string` | Precisa ser `"command"`. |
-| `command` | `string` | Linha de comando a ser executada no sandbox (por exemplo, `python3 /.agents/hooks-scripts/gate.py`). |
-| `timeout` | `integer` | Tempo limite em segundos. Padrão: `30`. |
+| `type` | `string` | `"command"` होना चाहिए. |
+| `command` | `string` | सैंडबॉक्स में चलाने के लिए कमांड लाइन (उदाहरण के लिए, `python3 /.agents/hooks-scripts/gate.py`). |
+| `timeout` | `integer` | टाइम आउट होने का समय, सेकंड में. डिफ़ॉल्ट: `30`. |
 
-### Hooks HTTP
+### एचटीटीपी हुक
 
-Os hooks HTTP enviam o JSON do evento como uma solicitação POST para um URL HTTPS externo diretamente da rede sandbox. O servidor de destino retorna a decisão no corpo da resposta HTTP usando exatamente o mesmo formato JSON (`{"decision": "allow"}` ou `{"decision": "deny", "reason": "..."}`).
+एचटीटीपी हुक, इवेंट JSON को POST अनुरोध के तौर पर, सैंडबॉक्स नेटवर्क से सीधे किसी बाहरी एचटीटीपीएस यूआरएल पर भेजते हैं. टारगेट सर्वर, एचटीटीपी रिस्पॉन्स बॉडी में अपना फ़ैसला दिखाता है. इसके लिए, वह ठीक उसी JSON फ़ॉर्मैट (`{"decision": "allow"}` या `{"decision": "deny", "reason": "..."}`) का इस्तेमाल करता है.
 
-| Campo | Tipo | Descrição |
+| फ़ील्ड | टाइप | ब्यौरा |
 | --- | --- | --- |
-| `type` | `string` | Precisa ser `"http"`. |
-| `url` | `string` | Endpoint HTTPS externo para POST do payload do evento. |
-| `headers` | `object` | Pares de chave-valor opcionais para cabeçalhos personalizados não sensíveis (como `{"X-Event-Source": "agent-sandbox"}`). Para autenticação, use uma [credencial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pt-br) na lista de permissão de rede. |
-| `timeout` | `integer` | Tempo limite em segundos. Padrão: `30`. |
+| `type` | `string` | `"http"` होना चाहिए. |
+| `url` | `string` | इवेंट पेलोड को पोस्ट करने के लिए, एक्सटर्नल एचटीटीपीएस एंडपॉइंट. |
+| `headers` | `object` | गैर-संवेदनशील कस्टम हेडर (जैसे, `{"X-Event-Source": "agent-sandbox"}`) के लिए, वैकल्पिक की-वैल्यू पेयर. पुष्टि करने के लिए, नेटवर्क की अनुमति वाली सूची में मौजूद [क्रेडेंशियल](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=hi) का इस्तेमाल करें. |
+| `timeout` | `integer` | टाइम आउट होने का समय, सेकंड में. डिफ़ॉल्ट: `30`. |
 
-#### Proxy de saída e transformação de token
+#### ईग्रैस प्रॉक्सी और टोकन ट्रांसफ़ॉर्मेशन
 
-Como os hooks HTTP são executados diretamente de dentro do namespace de rede da sandbox, as solicitações de saída passam pelo proxy de saída transparente. Essa arquitetura oferece duas vantagens de segurança importantes:
+एचटीटीपी हुक, सैंडबॉक्स नेटवर्क नेमस्पेस के अंदर से सीधे तौर पर एक्ज़ीक्यूट होते हैं. इसलिए, आउटगोइंग अनुरोध, ट्रांसपैरंट इग्रेस प्रॉक्सी से होकर गुज़रते हैं. इस आर्किटेक्चर से, आपको सुरक्षा से जुड़े दो अहम फ़ायदे मिलते हैं:
 
-- **Lista de permissões de rede**:os endpoints de destino precisam ser explicitamente permitidos no `network.allowlist` do seu ambiente. O tráfego de loopback (`127.0.0.1` ou `localhost`) é bloqueado pelo proxy. Sempre direcione endpoints externos na lista de permissões.
-- **Injeção de credenciais**:não é necessário armazenar chaves de API ou tokens de autenticação secretos em `.agents/hooks.json` nem montá-los no contêiner. Armazene o segredo uma vez como uma [credencial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pt-br) e faça referência a ele por ID no `network.allowlist` do seu ambiente. O proxy de saída intercepta automaticamente o tráfego de hook HTTP de saída e injeta o cabeçalho de autenticação real no fio antes de sair da sandbox. As regras `transform` inline definem cabeçalhos da mesma forma no fio. Uma credencial é a que deve ser usada quando você quer reutilizar o segredo em todo o projeto e fazer a rotação em um só lugar. Consulte [configuração de rede](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#network-configuration).
+- **नेटवर्क की अनुमति वाली सूची:** टारगेट एंडपॉइंट को आपके एनवायरमेंट के `network.allowlist` में साफ़ तौर पर अनुमति दी जानी चाहिए. लूपबैक ट्रैफ़िक (`127.0.0.1` या `localhost`) को प्रॉक्सी ब्लॉक करती है. इसलिए, हमेशा उन बाहरी एंडपॉइंट को टारगेट करें जिन्हें अनुमति दी गई है.
+- **क्रेडेंशियल इंजेक्ट करना:** आपको एपीआई पासकोड या सीक्रेट बियरर टोकन को `.agents/hooks.json` में सेव करने या उन्हें कंटेनर में माउंट करने की ज़रूरत नहीं है. सीक्रेट को एक बार [क्रेडेंशियल](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=hi) के तौर पर सेव करें. इसके बाद, अपने एनवायरमेंट के `network.allowlist` से आईडी के ज़रिए इसे रेफ़रंस करें. ईग्रैस प्रॉक्सी, आउटगोइंग एचटीटीपी हुक ट्रैफ़िक को अपने-आप इंटरसेप्ट कर लेता है. साथ ही, सैंडबॉक्स छोड़ने से पहले वायर पर असली पुष्टि करने वाला हेडर डाल देता है. इनलाइन `transform` नियम, वायर पर हेडर को उसी तरह सेट करते हैं. क्रेडेंशियल का इस्तेमाल तब किया जाता है, जब आपको पूरे प्रोजेक्ट में सीक्रेट का फिर से इस्तेमाल करना हो और उसे एक ही जगह पर रोटेट करना हो. [नेटवर्क कॉन्फ़िगरेशन](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#network-configuration) देखें.
 
-## Como o ambiente de execução lida com decisões e falhas
+## रनटाइम, फ़ैसलों और गड़बड़ियों को कैसे मैनेज करता है
 
-- **Espera síncrona**:o agente faz uma pausa e aguarda a conclusão dos seus hooks antes de continuar.
-- **Bloqueio da execução da ferramenta**:se o hook pré-ferramenta retornar `{"decision": "deny", "reason": "<your reason>"}`, o ambiente de execução vai cancelar imediatamente a chamada da ferramenta. O modelo vê o motivo da sua rejeição no histórico de conversas e se adapta escolhendo uma alternativa segura ou explicando o bloqueio ao usuário.
-- **Como lidar com falhas de script, erros HTTP e tempos limite**:se um script de comando falhar (status de saída diferente de zero), um hook HTTP retornar um código de status diferente de 2xx (como um erro de servidor 4xx ou 5xx) ou uma operação atingir o tempo limite ou retornar JSON não reconhecido, o ambiente de execução vai tratar isso como uma aprovação (`allow`). A execução da ferramenta continua normalmente para que um script corrompido ou um servidor de telemetria inacessível nunca cause um deadlock no seu aplicativo.
+- **सिंक्रोनस वेटिंग:** एजेंट, आपके हुक के पूरा होने तक रुक जाता है. इसके बाद ही, वह आगे बढ़ता है.
+- **टूल के इस्तेमाल को रोकना:** अगर आपका प्री-टूल हुक `{"decision": "deny", "reason": "<your reason>"}` दिखाता है, तो रनटाइम तुरंत टूल कॉल को रद्द कर देता है. मॉडल, बातचीत के इतिहास में जवाब अस्वीकार करने की वजह देखता है. इसके बाद, वह सुरक्षित विकल्प चुनकर या उपयोगकर्ता को ब्लॉक करने की वजह बताकर, जवाब को अडैप्ट करता है.
+- **स्क्रिप्ट क्रैश, एचटीटीपी गड़बड़ियों, और टाइमआउट को मैनेज करना:** अगर कोई कमांड स्क्रिप्ट क्रैश हो जाती है (नॉन-ज़ीरो एक्ज़िट स्टेटस), कोई एचटीटीपी हुक नॉन-2xx स्टेटस कोड दिखाता है (जैसे कि 4xx या 5xx सर्वर गड़बड़ी), कोई ऑपरेशन टाइम आउट हो जाता है या अपरिचित JSON दिखाता है, तो रनटाइम इसे मंज़ूरी (`allow`) के तौर पर मानता है. टूल का इस्तेमाल सामान्य तरीके से जारी रहता है, ताकि खराब स्क्रिप्ट या टेलीमेट्री सर्वर तक न पहुंच पाने की वजह से आपका ऐप्लिकेशन कभी भी लॉक न हो.
 
-## Casos de uso comuns
+## इस्तेमाल के सामान्य उदाहरण
 
-### Recuperação multiturno para privacidade de dados e compliance
+### डेटा की निजता और नियमों का पालन करने के लिए, कई बार में डेटा वापस पाने की सुविधा
 
-Quando um hook bloqueia o acesso a recursos restritos, como diretórios que contêm informações de identificação pessoal (PII) ou registros financeiros confidenciais, é possível transmitir `previous_interaction_id` na próxima chamada para continuar a vez no mesmo ambiente. O agente lê a explicação da recusa e se recupera automaticamente consultando tabelas públicas aprovadas.
+जब कोई हुक, पाबंदी वाले संसाधनों का ऐक्सेस ब्लॉक करता है, तब `previous_interaction_id` को अगले कॉल पर पास किया जा सकता है, ताकि उसी एनवायरमेंट में टर्न जारी रखा जा सके. पाबंदी वाले संसाधनों में, व्यक्तिगत पहचान से जुड़ी जानकारी (पीआईआई) या गोपनीय वित्तीय रिकॉर्ड वाली डायरेक्ट्री शामिल होती हैं. एजेंट, अनुरोध अस्वीकार किए जाने की वजह पढ़ता है. इसके बाद, वह मंज़ूरी वाली सार्वजनिक टेबल से क्वेरी करके, अपने-आप ठीक हो जाता है.
 
 ### Python
 
@@ -690,6 +771,118 @@ Interaction int2 = client.interactions.create(CreateInteractionRequestBody.of(pa
 System.out.println(int2.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    hooksConfig := `{
+  "privacy-gate": {
+    "pre_tool_execution": [
+      {
+        "matcher": "read_file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /.agents/hooks-scripts/check_privacy.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}`
+
+    checkPrivacyScript := `#!/usr/bin/env python3
+import sys, json
+data = json.load(sys.stdin)
+path = str(data.get("tool_call", {}).get("args", {}).get("path", ""))
+if "/private/" in path:
+    resp = {
+        "decision": "deny",
+        "reason": "Access to confidential '/private/' records is blocked by PII compliance policy. Query approved '/public/' summary tables instead."
+    }
+else:
+    resp = {"decision": "allow"}
+print(json.dumps(resp))
+`
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr(".agents/hooks.json"),
+                Content: genai.Ptr(hooksConfig),
+            },
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr(".agents/hooks-scripts/check_privacy.py"),
+                Content: genai.Ptr(checkPrivacyScript),
+            },
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr("workspace/private/employees.json"),
+                Content: genai.Ptr(`{"employees": [{"id": 1, "salary": 150000, "ssn": "000-00-0000"}]}`),
+            },
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr("workspace/public/summary.json"),
+                Content: genai.Ptr(`{"department": "Engineering", "team_size": 42, "status": "active"}`),
+            },
+        },
+    }
+
+    // Step 1: Agent attempts to read confidential PII records and is intercepted
+    res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Use your filesystem tool to read `/workspace/private/employees.json` and summarize the employee details."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    int1 := res1.Interaction
+    if int1.OutputText != nil {
+        fmt.Println(*int1.OutputText)
+    }
+
+    // Step 2: Continue in the same environment using previous_interaction_id; agent recovers with public tables
+    res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:                 interactions.NewInteractionsInput("Understood. Please read the approved `/workspace/public/summary.json` file instead and provide the summary."),
+            Environment:           genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(*int1.EnvironmentID)),
+            PreviousInteractionID: int1.ID,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res2.Interaction.OutputText != nil {
+        fmt.Println(*res2.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -739,12 +932,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   }'
 ```
 
-### Telemetria e geração de registros de auditoria externos
+### बाहरी ऑडिट लॉगिंग और टेलीमेट्री
 
-Envie eventos de auditoria em tempo real de dentro da sandbox para um servidor de monitoramento externo sempre que os arquivos forem lidos ou modificados.
+जब भी फ़ाइलें पढ़ी या बदली जाती हैं, तब सैंडबॉक्स से रीयल-टाइम ऑडिट इवेंट को किसी बाहरी मॉनिटरिंग सर्वर पर भेजें.
 
-- **Corresponder a várias ferramentas**:como os matchers usam regex padrão, é possível combinar várias ferramentas em uma única regra usando barras verticais (`view_file|write_to_file|replace_file_content`) ou caracteres curinga (`.*_file`).
-- **Mantenha segredos fora da sua configuração**:armazene o token de autenticação como uma [credencial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=pt-br) e faça referência a ele por ID na [configuração de rede](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br#network-configuration) do seu ambiente (`network.allowlist.credential`). O proxy de saída injeta o token de autenticação real em solicitações de saída. Este exemplo define o cabeçalho inline com `transform`, que é protegido pelo mesmo proxy e se encaixa quando o token pertence a essa configuração.
+- **एक से ज़्यादा टूल को मैच करना:** मैच करने वाले टूल, स्टैंडर्ड रेगुलर एक्सप्रेशन का इस्तेमाल करते हैं. इसलिए, पाइप (`view_file|write_to_file|replace_file_content`) या वाइल्डकार्ड (`.*_file`) का इस्तेमाल करके, एक ही नियम में कई टूल को जोड़ा जा सकता है.
+- **अपने कॉन्फ़िगरेशन में सीक्रेट न रखें:** पुष्टि करने वाले टोकन को [क्रेडेंशियल](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=hi) के तौर पर सेव करें. साथ ही, इसे अपने एनवायरमेंट के [नेटवर्क कॉन्फ़िगरेशन](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi#network-configuration) (`network.allowlist.credential`) से आईडी के हिसाब से रेफ़रंस करें. इग्रेस प्रॉक्सी, आउटगोइंग अनुरोधों पर असली बियरर टोकन इंजेक्ट करता है. इस उदाहरण में, हेडर को `transform` के साथ इनलाइन सेट किया गया है. इसे उसी प्रॉक्सी से सुरक्षित किया जाता है. साथ ही, यह तब काम करता है, जब टोकन इस कॉन्फ़िगरेशन से जुड़ा हो.
 
 ### Python
 
@@ -929,6 +1122,85 @@ Interaction interaction = client.interactions.create(CreateInteractionRequestBod
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### ऐप पर जाएं
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Define hook without secrets; the egress proxy injects headers dynamically
+    hooksConfig := `{
+  "audit-logging": {
+    "post_tool_execution": [
+      {
+        "matcher": "read_file|write_file",
+        "hooks": [
+          {
+            "type": "http",
+            "url": "https://telemetry.example.com/api/v1/agent-events",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}`
+
+    env := interactions.Environment{
+        Sources: []interactions.Source{
+            {
+                Type:    interactions.SourceTypeInline.ToPointer(),
+                Target:  genai.Ptr(".agents/hooks.json"),
+                Content: genai.Ptr(hooksConfig),
+            },
+        },
+        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
+            Allowlist: []interactions.AllowlistEntry{
+                {
+                    Domain: "telemetry.example.com",
+                    Transform: genai.Ptr(interactions.NewTransform(map[string]string{
+                        "Authorization": "Bearer telemetry_secret_token_123",
+                    })),
+                },
+                {
+                    Domain: "*",
+                },
+            },
+        }))),
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("antigravity-preview-09-2026"),
+            Input:       interactions.NewInteractionsInput("Use your filesystem tool to create `/workspace/audit.log` containing 'event 1', then immediately read it back using your filesystem read tool."),
+            Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(env)),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -962,25 +1234,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Limitações
+## सीमाएं
 
-- **Escopo da ferramenta de sandbox**:os hooks interceptam ferramentas integradas no sandbox: execução de código (`code_execution`) e operações do sistema de arquivos (`view_file`, `write_to_file`, `replace_file_content`, `list_dir` e `delete_file`). Eles não são acionados para chamadas de função personalizadas (`function`) ou ferramentas externas do Protocolo de Contexto de Modelo (`mcp_server`) processadas fora do contêiner.
-- **Listas de permissão de rede**:os hooks HTTP são executados na rede do contêiner. É necessário permitir explicitamente os URLs de destino no `network.allowlist` do seu ambiente. Endereços de loopback (`localhost`, `127.0.0.1`) são bloqueados pelo proxy.
-- **Aprovação automática em erros**:se um script de hook falhar (status de saída diferente de zero), atingir o tempo limite ou falhar, o tempo de execução vai registrar a falha e permitir que a chamada de ferramenta continue. Isso garante que scripts de linter corrompidos ou processos pendentes nunca causem um deadlock nos seus aplicativos.
-- **Proteção da configuração do sandbox**:como os hooks são executados no sandbox do contêiner, os agentes com ferramentas de gravação do sistema de arquivos ou permissões de execução de código do shell podem modificar `.agents/hooks.json` locais ou scripts em espaços de trabalho graváveis. Use hooks de contêiner como orientação de política automatizada e proteções operacionais. Se for necessária uma resistência estrita contra execuções de modelos não confiáveis, monte fontes de configuração de repositórios somente leitura.
+- **सैंडबॉक्स टूल का दायरा:** हुक, सैंडबॉक्स में मौजूद बिल्ट-इन टूल को इंटरसेप्ट करते हैं: कोड एक्ज़ीक्यूशन (`code_execution`) और फ़ाइल सिस्टम के ऑपरेशन (`view_file`, `write_to_file`, `replace_file_content`, `list_dir`, और `delete_file`). ये कस्टम फ़ंक्शन कॉलिंग (`function`) या बाहरी मॉडल कॉन्टेक्स्ट प्रोटोकॉल (`mcp_server`) टूल के लिए ट्रिगर नहीं होते हैं. इन टूल को कंटेनर के बाहर मैनेज किया जाता है.
+- **नेटवर्क की अनुमति वाली सूचियां:** एचटीटीपी हुक, कंटेनर नेटवर्क में चलते हैं. आपको अपने एनवायरमेंट के `network.allowlist` में टारगेट किए गए यूआरएल को साफ़ तौर पर अनुमति देनी होगी. लूपबैक पतों (`localhost`, `127.0.0.1`) को प्रॉक्सी ने ब्लॉक किया है.
+- **गड़बड़ियों पर अपने-आप मंज़ूरी मिलना:** अगर कोई हुक स्क्रिप्ट क्रैश हो जाती है (शून्य से अलग एक्ज़िट स्टेटस), उसका समय खत्म हो जाता है या वह काम नहीं करती है, तो रनटाइम गड़बड़ी को लॉग करता है और टूल कॉल को जारी रखने की अनुमति देता है. इससे यह पक्का होता है कि लिंटर स्क्रिप्ट या हैंगिंग प्रोसेस में गड़बड़ी होने पर, आपके ऐप्लिकेशन कभी भी डेडलॉक न हों.
+- **सैंडबॉक्स कॉन्फ़िगरेशन की सुरक्षा:** हुक, कंटेनर सैंडबॉक्स में एक्ज़ीक्यूट होते हैं. इसलिए, फ़ाइल सिस्टम में डेटा सेव करने वाले टूल या शेल कोड को एक्ज़ीक्यूट करने की अनुमतियां रखने वाले एजेंट, लिखने की अनुमति वाले वर्कस्पेस में मौजूद लोकल `.agents/hooks.json` या स्क्रिप्ट में बदलाव कर सकते हैं. नीति से जुड़ी जानकारी और ऑपरेशनल गार्डरेल के तौर पर, कंटेनर हुक का इस्तेमाल करें. अगर गैर-भरोसेमंद मॉडल के एक्ज़ीक्यूशन के ख़िलाफ़, छेड़छाड़ को रोकने के लिए सख्त सुरक्षा की ज़रूरत है, तो रीड-ओनली रिपॉज़िटरी से कॉन्फ़िगरेशन सोर्स माउंट करें.
 
-## A seguir
+## आगे क्या करना है
 
-- Saiba como configurar [ambientes e sandboxes remotos](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pt-br) persistentes.
-- Conheça os recursos e as ferramentas integradas do [agente do Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br).
-- Consulte a [visão geral da API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) para sessões multiturno e streaming.
+- परसिस्टेंट [रिमोट सैंडबॉक्स और एनवायरमेंट](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi) को कॉन्फ़िगर करने का तरीका जानें.
+- [Antigravity एजेंट](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi) की क्षमताओं और पहले से मौजूद टूल के बारे में जानें.
+- सिलसिलेवार बातचीत वाले सेशन और स्ट्रीमिंग के लिए, [Interactions API की खास जानकारी](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) देखें.
 
-Envie comentários
+सुझाव भेजें
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última atualização 2026-09-18 UTC.
+आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
 
-Quer enviar seu feedback?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-18 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]

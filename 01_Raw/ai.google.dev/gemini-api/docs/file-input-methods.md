@@ -1,28 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=he
-fetched_at: 2026-09-21T05:53:56.470664+00:00
-title: "\u05e9\u05d9\u05d8\u05d5\u05ea \u05e7\u05dc\u05d8 \u05e9\u05dc \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th
+fetched_at: 2026-09-28T06:23:57.664950+00:00
+title: "\u0e27\u0e34\u0e18\u0e35\u0e01\u0e32\u0e23\u0e1b\u0e49\u0e2d\u0e19\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1f\u0e25\u0e4c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-# שיטות קלט של קבצים
+# วิธีการป้อนข้อมูลไฟล์
 
-במדריך הזה מוסברות הדרכים השונות שבהן אפשר לכלול קובצי מדיה כמו תמונות, אודיו, סרטונים ומסמכים כששולחים בקשות ל-Gemini API.
-השיטות החדשות נתמכות בכל נקודות הקצה (endpoints) של Gemini API, כולל Batch, ‏ Interactions ו-Live API.
-השיטה המתאימה תלויה בגודל הקובץ, במיקום שבו הנתונים מאוחסנים ובתדירות שבה אתם מתכננים להשתמש בקובץ.
+คู่มือนี้จะอธิบายวิธีต่างๆ ในการรวมไฟล์สื่อ เช่น รูปภาพ เสียง วิดีโอ และเอกสาร เมื่อส่งคำขอไปยัง Gemini API
+วิธีการใหม่นี้รองรับในปลายทาง Gemini API ทั้งหมด ซึ่งรวมถึง Batch, Interactions และ Live API
+การเลือกวิธีการที่เหมาะสมขึ้นอยู่กับขนาดของไฟล์ ตำแหน่งที่จัดเก็บข้อมูล และความถี่ที่คุณวางแผนจะใช้ไฟล์
 
-הדרך הכי פשוטה לכלול קובץ כקלט היא לקרוא קובץ מקומי ולכלול אותו בהנחיה. בדוגמה הבאה אפשר לראות איך קוראים קובץ PDF מקומי. בשיטה הזו, קובצי PDF מוגבלים ל-50MB. רשימה מלאה של סוגי קבצים ומגבלות מופיעה [בטבלת ההשוואה של שיטות הקלט](#method-comparison).
+วิธีที่ง่ายที่สุดในการรวมไฟล์เป็นอินพุตคือการอ่านไฟล์ในเครื่องและ
+รวมไว้ในพรอมต์ ตัวอย่างต่อไปนี้แสดงวิธีอ่านไฟล์ PDF ในเครื่อง
+ไฟล์ PDF มีขนาดได้ไม่เกิน 50 MB สำหรับวิธีนี้ ดูรายการประเภทไฟล์อินพุตและขีดจำกัดทั้งหมดได้ใน
+[ตารางเปรียบเทียบวิธีการป้อนข้อมูล](#method-comparison)
 
 ### Python
 
@@ -121,6 +124,61 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "os"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    pdfBytes, err := os.ReadFile("my_local_file.pdf")
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Pdf := base64.StdEncoding.EncodeToString(pdfBytes)
+
+    prompt := "Summarize this document"
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+                interactions.NewContent(interactions.DocumentContent{
+                    Data:     genai.Ptr(base64Pdf),
+                    MimeType: interactions.DocumentContentMimeTypeApplicationPdf.ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -143,26 +201,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## השוואה בין שיטות קלט
+## การเปรียบเทียบวิธีการป้อนข้อมูล
 
-בטבלה הבאה מוצגת השוואה בין כל שיטות הקלט, עם מגבלות הקבצים והתרחישים המומלצים לשימוש. שימו לב שמגבלת גודל הקובץ עשויה להשתנות בהתאם לסוג הקובץ ולמודל או לטוקנייזר שמשמשים לעיבוד הקובץ.
+ตารางต่อไปนี้เปรียบเทียบวิธีการป้อนข้อมูลแต่ละวิธีกับขีดจำกัดของไฟล์และกรณีการใช้งานที่ดีที่สุด
+โปรดทราบว่าการจำกัดขนาดไฟล์อาจแตกต่างกันไปตามประเภทไฟล์และ
+โมเดลหรือโทเค็นไนเซอร์ที่ใช้ประมวลผลไฟล์
 
-| שיטה | מתאים במיוחד בשביל | גודל קובץ מקסימלי | התמדה |
+| วิธีการ | เหมาะสำหรับ | ขนาดไฟล์สูงสุด | ความต่อเนื่อง |
 | --- | --- | --- | --- |
-| **נתונים מוטבעים** | בדיקה מהירה, קבצים קטנים, אפליקציות בזמן אמת. | ‫100MB לכל בקשה או מטען ייעודי   (**50MB לקובצי PDF**) | ללא (נשלח עם כל בקשה) |
-| **העלאה דרך File API** | קבצים גדולים, קבצים שנעשה בהם שימוש כמה פעמים. | ‫2GB לכל קובץ,   עד 20GB לכל פרויקט | ‫48 שעות |
-| **רישום של URI של GCS ב-File API** | קבצים גדולים שכבר נמצאים ב-Google Cloud Storage, קבצים שנמצאים בשימוש כמה פעמים. | ‫2GB לכל קובץ, ללא מגבלות אחסון כוללות | ללא (מאוחזר לכל בקשה). רישום חד-פעמי יכול להעניק גישה למשך 30 ימים לכל היותר. |
-| **כתובות URL חיצוניות** | נתונים ציבוריים או נתונים בדליים בענן (AWS, ‏ Azure, ‏ GCS) בלי להעלות אותם מחדש. | ‫100MB לכל בקשה או מטען ייעודי (payload) | ללא (מאוחזר לפי בקשה) |
+| **ข้อมูลในบรรทัด** | การทดสอบอย่างรวดเร็ว ไฟล์ขนาดเล็ก และแอปพลิเคชันแบบเรียลไทม์ | 100 MB ต่อคำขอหรือเพย์โหลด   (**50 MB สำหรับ PDF**) | ไม่มี (ส่งพร้อมกับทุกคำขอ) |
+| **การอัปโหลดไฟล์ผ่าน API** | ไฟล์ขนาดใหญ่ ไฟล์ที่ใช้หลายครั้ง | 2 GB ต่อไฟล์   สูงสุด 20 GB ต่อโปรเจ็กต์ | 48 ชั่วโมง |
+| **การลงทะเบียน URI ของ GCS สำหรับ File API** | ไฟล์ขนาดใหญ่ที่อยู่ใน Google Cloud Storage อยู่แล้ว ไฟล์ที่ใช้หลายครั้ง | 2 GB ต่อไฟล์ ไม่มีขีดจำกัดพื้นที่เก็บข้อมูลโดยรวม | ไม่มี (ดึงข้อมูลต่อคำขอ) การลงทะเบียนครั้งเดียวจะให้สิทธิ์เข้าถึงได้นานสูงสุด 30 วัน |
+| **URL ภายนอก** | ข้อมูลสาธารณะหรือข้อมูลในที่เก็บข้อมูลบนระบบคลาวด์ (AWS, Azure, GCS) โดยไม่ต้องอัปโหลดซ้ำ | 100 MB ต่อคำขอ/เพย์โหลด | ไม่มี (ดึงข้อมูลต่อคำขอ) |
 
-## נתונים מוטבעים
+## ข้อมูลแบบอินไลน์
 
-בקבצים קטנים יותר (עד 100MB, או עד 50MB בקובצי PDF), אפשר להעביר את הנתונים ישירות במטען הייעודי (payload) של הבקשה. זו השיטה הפשוטה ביותר לבדיקות מהירות או לאפליקציות שמטפלות בנתונים זמניים בזמן אמת. אפשר לספק נתונים כמחרוזות מקודדות ב-Base64 או על ידי קריאה ישירה של קבצים מקומיים.
+สำหรับไฟล์ขนาดเล็ก (ไม่เกิน 100 MB หรือ 50 MB สำหรับ PDF) คุณสามารถส่งข้อมูล
+ในเพย์โหลดคำขอได้โดยตรง นี่เป็นวิธีที่ง่ายที่สุดสำหรับการทดสอบอย่างรวดเร็วหรือแอปพลิเคชันที่จัดการข้อมูลแบบเรียลไทม์และข้อมูลชั่วคราว คุณระบุข้อมูลเป็นสตริงที่เข้ารหัส Base64 หรือโดยการอ่านไฟล์ในเครื่องโดยตรงก็ได้
 
-דוגמה לקריאה מקובץ מקומי מופיעה בתחילת הדף הזה.
+ดูตัวอย่างการอ่านจากไฟล์ในเครื่องได้ที่ตัวอย่างที่ส่วนต้นของ
+หน้านี้
 
-### אחזור מכתובת URL
+### ดึงข้อมูลจาก URL
 
-אפשר גם לאחזר קובץ מכתובת URL, להמיר אותו לבייטים ולכלול אותו בקלט.
+นอกจากนี้ คุณยังดึงข้อมูลไฟล์จาก URL แปลงเป็นไบต์ และรวมไว้ใน
+อินพุตได้ด้วย
 
 ### Python
 
@@ -268,6 +331,68 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "io"
+    "log"
+    "net/http"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    docURL := "https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf"
+    resp, err := http.Get(docURL)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer resp.Body.Close()
+    docData, err := io.ReadAll(resp.Body)
+    if err != nil {
+        log.Fatal(err)
+    }
+    base64Pdf := base64.StdEncoding.EncodeToString(docData)
+
+    prompt := "Summarize this document"
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.DocumentContent{
+                    Data:     genai.Ptr(base64Pdf),
+                    MimeType: interactions.DocumentContentMimeTypeApplicationPdf.ToPointer(),
+                }),
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -313,11 +438,13 @@ jq ".outputs[] | select(.type == \"text\") | .text" response.json
 
 ## Gemini File API
 
-ממשק File API מיועד לקבצים גדולים יותר (עד 2GB) או לקבצים שרוצים להשתמש בהם בכמה בקשות.
+File API ออกแบบมาสำหรับไฟล์ขนาดใหญ่ (สูงสุด 2 GB) หรือไฟล์ที่คุณต้องการ
+ใช้ในคำขอหลายรายการ
 
-### העלאה רגילה של קבצים
+### การอัปโหลดไฟล์แบบมาตรฐาน
 
-מעלים קובץ מקומי ל-Gemini API. קבצים שמועלים בדרך הזו מאוחסנים באופן זמני (48 שעות) ועוברים עיבוד כדי שהמודל יוכל לאחזר אותם ביעילות.
+อัปโหลดไฟล์ในเครื่องไปยัง Gemini API ไฟล์ที่อัปโหลดด้วยวิธีนี้จะได้รับการจัดเก็บ
+ชั่วคราว (48 ชั่วโมง) และประมวลผลเพื่อให้โมเดลเรียกข้อมูลได้อย่างมีประสิทธิภาพ
 
 ### Python
 
@@ -415,6 +542,60 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    docFile, err := client.Files.UploadFromPath(ctx, "path/to/your/sample.pdf", &genai.UploadFileConfig{
+        MIMEType: "application/pdf",
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Summarize this document"
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{
+                    Text: prompt,
+                }),
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr(docFile.URI),
+                    MimeType: interactions.DocumentContentMimeType(docFile.MIMEType).ToPointer(),
+                }),
+            }),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -461,43 +642,51 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### רישום קבצים ב-Google Cloud Storage
+### ลงทะเบียนไฟล์ Google Cloud Storage
 
-אם הנתונים שלכם כבר נמצאים ב-Google Cloud Storage, אתם לא צריכים להוריד אותם ולהעלות אותם מחדש. אפשר לרשום אותו ישירות באמצעות File API.
+หากข้อมูลอยู่ใน Google Cloud Storage อยู่แล้ว คุณไม่จำเป็นต้องดาวน์โหลดและอัปโหลดอีกครั้ง คุณลงทะเบียนได้โดยตรงด้วย File API
 
-1. הענקת גישה לכל קטגוריה ל**סוכן השירות**
+1. ให้สิทธิ์เข้าถึงแต่ละถังแก่ **Service Agent**
 
-   1. מפעילים את Gemini API בפרויקט בענן ב-Google Cloud.
-   2. יוצרים את סוכן השירות:
+   1. เปิดใช้ Gemini API ในโปรเจ็กต์ที่อยู่ในระบบคลาวด์ของ Google
+   2. สร้าง Service Agent โดยทำดังนี้
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **נותנים לסוכן השירות של Gemini API הרשאות** לקריאה של קטגוריות האחסון.
+   3. **ให้สิทธิ์ Agent บริการ Gemini API** ในการอ่านที่เก็บข้อมูล
+      Bucket
 
-      המשתמש צריך להקצות את `Storage Object Viewer`
-      [תפקיד ה-IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=he#storage.objectViewer) לסוכן השירות הזה בקטגוריות האחסון הספציפיות שהוא מתכוון להשתמש בהן.
+      ผู้ใช้ต้องมอบหมาย`Storage Object Viewer`
+      [บทบาท IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=th#storage.objectViewer)
+      ให้กับตัวแทนบริการนี้ในที่เก็บข้อมูลที่ต้องการใช้
 
-   הגישה הזו לא פגה כברירת מחדל, אבל אפשר לשנות את זה בכל שלב. אפשר גם להשתמש בפקודות של [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=he) כדי להעניק הרשאות.
-2. אימות השירות
+   โดยค่าเริ่มต้นแล้ว สิทธิ์เข้าถึงนี้จะไม่มีวันหมดอายุ แต่คุณสามารถเปลี่ยนแปลงได้ทุกเมื่อ คุณยังใช้คำสั่ง [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=th)
+   เพื่อให้สิทธิ์ได้ด้วย
+2. ตรวจสอบสิทธิ์บริการ
 
-   **דרישות מוקדמות**
+   **ข้อกำหนดเบื้องต้น**
 
-   - הפעלת ה-API
-   - יוצרים חשבון שירות או סוכן עם ההרשאות המתאימות.
+   - เปิดใช้ API
+   - สร้างบัญชีบริการหรือตัวแทนที่มีสิทธิ์ที่เหมาะสม
 
-   קודם צריך לבצע אימות בתור השירות שיש לו הרשאות לצפייה באובייקט אחסון. אופן הגבייה תלוי בסביבה שבה יפעל קוד ניהול הקבצים.
+   ก่อนอื่นคุณต้องตรวจสอบสิทธิ์ในฐานะบริการที่มีสิทธิ์เข้าถึง Storage Object Viewer
+   ซึ่งวิธีการนี้จะขึ้นอยู่กับสภาพแวดล้อมที่โค้ดการจัดการไฟล์จะทำงาน
 
-   **מחוץ ל-Google Cloud**
+   **ภายนอก Google Cloud**
 
-   אם הקוד שלכם מורץ מחוץ ל-Google Cloud, למשל מהמחשב, אתם יכולים להוריד את פרטי הכניסה לחשבון מ-Google Cloud Console באמצעות השלבים הבאים:
+   หากโค้ดของคุณทำงานจากภายนอก Google Cloud เช่น เดสก์ท็อป
+   ให้ดาวน์โหลดข้อมูลเข้าสู่ระบบของบัญชีจากคอนโซล Google Cloud โดยทำตาม
+   ขั้นตอนต่อไปนี้
 
-   1. עוברים אל [מסוף חשבון השירות](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=he).
-   2. בוחרים את חשבון השירות הרלוונטי.
-   3. בוחרים בכרטיסייה **Keys** ואז באפשרות **Add key, Create new key**.
-   4. בוחרים את סוג המפתח **JSON** ורושמים את המיקום במחשב שאליו הקובץ הורד.
+   1. ไปที่[คอนโซลบัญชีบริการ](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=th)
+   2. เลือกบัญชีบริการที่เกี่ยวข้อง
+   3. เลือกแท็บ**คีย์** แล้วเลือก**เพิ่มคีย์ สร้างคีย์ใหม่**
+   4. เลือกประเภทคีย์ **JSON** และจดบันทึกตำแหน่งที่ดาวน์โหลดไฟล์ในเครื่อง
 
-   פרטים נוספים זמינים במאמרי העזרה הרשמיים של Google Cloud בנושא [ניהול מפתחות של חשבונות שירות](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=he).
+   ดูรายละเอียดเพิ่มเติมได้ในเอกสารประกอบอย่างเป็นทางการของ Google Cloud เกี่ยวกับ
+   [การจัดการคีย์บัญชีบริการ](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=th)
 
-   אחר כך משתמשים בפקודות הבאות כדי לבצע אימות. הפקודות האלה מניחות שקובץ חשבון השירות נמצא בספרייה הנוכחית, ושמו `service-account.json`.
+   จากนั้นใช้คำสั่งต่อไปนี้เพื่อตรวจสอบสิทธิ์ คำสั่งเหล่านี้ถือว่าไฟล์บัญชีบริการของคุณอยู่ในไดเรกทอรีปัจจุบันและมีชื่อว่า
+   `service-account.json`
 
    ### Python
 
@@ -543,13 +732,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **ב-Google Cloud**
+   **ใน Google Cloud**
 
-   אם אתם מריצים את האפליקציה ישירות ב-Google Cloud, למשל באמצעות [פונקציות של Cloud Run](https://cloud.google.com/functions?hl=he) או [מכונה של Compute Engine](https://cloud.google.com/products/compute?hl=he), יהיו לכם פרטי כניסה מרומזים, אבל תצטרכו לבצע אימות מחדש כדי להעניק את ההיקפים המתאימים.
+   หากคุณเรียกใช้ใน Google Cloud โดยตรง เช่น ใช้[ฟังก์ชัน Cloud Run](https://cloud.google.com/functions?hl=th) หรือ[อินสแตนซ์ Compute Engine](https://cloud.google.com/products/compute?hl=th) คุณจะมีข้อมูลเข้าสู่ระบบโดยนัย แต่จะต้องตรวจสอบสิทธิ์อีกครั้งเพื่อให้ขอบเขตที่เหมาะสม
 
    ### Python
 
-   הקוד הזה מניח שהשירות פועל בסביבה שבה אפשר לקבל [Application Default Credentials](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=he) באופן אוטומטי, כמו Cloud Run או Compute Engine.
+   โค้ดนี้คาดหวังว่าบริการจะทำงานในสภาพแวดล้อมที่สามารถรับ
+   [ข้อมูลรับรองเริ่มต้นของแอปพลิเคชัน](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=th)
+   ได้โดยอัตโนมัติ เช่น Cloud Run หรือ Compute Engine
 
    ```
    import google.auth
@@ -564,7 +755,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
    ### JavaScript
 
-   הקוד הזה מניח שהשירות פועל בסביבה שבה אפשר לקבל [Application Default Credentials](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=he) באופן אוטומטי, כמו Cloud Run או Compute Engine.
+   โค้ดนี้คาดหวังว่าบริการจะทำงานในสภาพแวดล้อมที่สามารถรับ
+   [ข้อมูลรับรองเริ่มต้นของแอปพลิเคชัน](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=th)
+   ได้โดยอัตโนมัติ เช่น Cloud Run หรือ Compute Engine
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -579,31 +772,55 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ### Java
 
-`java
+```
 import com.google.auth.oauth2.GoogleCredentials;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.List;
+
 List<String> gcsReadScopes =
-Arrays.asList(
-"https://www.googleapis.com/auth/devstorage.read_only",
-"https://www.googleapis.com/auth/cloud-platform");
+    Arrays.asList(
+        "https://www.googleapis.com/auth/devstorage.read_only",
+        "https://www.googleapis.com/auth/cloud-platform");
+
 String serviceAccountFile = "service-account.json";
+
 GoogleCredentials credentials =
-GoogleCredentials.fromStream(new FileInputStream(serviceAccountFile))
-.createScoped(gcsReadScopes);`
+    GoogleCredentials.fromStream(new FileInputStream(serviceAccountFile))
+        .createScoped(gcsReadScopes);
+```
+
+### Go
+
+```
+package main
+
+import (
+    "log"
+
+    "google.golang.org/genai"
+)
+
+func main() {
+    cc := &genai.ClientConfig{}
+    if err := cc.UseDefaultCredentials(); err != nil {
+        log.Fatal(err)
+    }
+    _ = cc.Credentials
+}
+```
 
 ### CLI
 
-זוהי פקודה אינטראקטיבית. בשירותים כמו Compute Engine, אפשר לצרף היקפי הרשאות לשירות הפועל ברמת ההגדרה. דוגמה מופיעה ב[מסמכים בנושא שירותים בניהול המשתמשים](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=he#using).
+นี่คือคำสั่งแบบอินเทอร์แอกทีฟ สำหรับบริการอย่าง Compute Engine คุณสามารถแนบขอบเขตกับบริการที่กำลังทำงานที่ระดับการกำหนดค่าได้ ดูตัวอย่างได้ที่[เอกสารประกอบเกี่ยวกับบริการที่ผู้ใช้จัดการ](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=th#using)
 
 ```
 gcloud auth application-default login \
 --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
 ```
 
-1. רישום קבצים (Files API)
-   משתמשים ב-Files API כדי לרשום קבצים וליצור נתיב Files API שאפשר להשתמש בו ישירות ב-Gemini API.
+1. การลงทะเบียนไฟล์ (Files API)
+   ใช้ Files API เพื่อลงทะเบียนไฟล์และสร้างเส้นทาง Files API ที่ใช้ใน Gemini API ได้โดยตรง
 
    ### Python
 
@@ -720,6 +937,70 @@ for (File f : registeredGcsFiles.files().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    cc := &genai.ClientConfig{}
+    if err := cc.UseDefaultCredentials(); err != nil {
+        log.Fatal(err)
+    }
+    client, err := genai.NewClient(ctx, cc)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    registeredGcsFiles, err := client.Files.RegisterFiles(
+        ctx,
+        []string{"gs://my_bucket/some_object.pdf", "gs://bucket2/object2.txt"},
+        cc.Credentials,
+        nil,
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Summarize this file."
+
+    for _, f := range registeredGcsFiles.Files {
+        fmt.Println(f.Name)
+        res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+            Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+                Model: interactions.Model("gemini-3.8-flash"),
+                Input: interactions.NewInteractionsInput([]interactions.Content{
+                    interactions.NewContent(interactions.TextContent{
+                        Text: prompt,
+                    }),
+                    interactions.NewContent(interactions.DocumentContent{
+                        URI:      genai.Ptr(f.URI),
+                        MimeType: interactions.DocumentContentMimeType(f.MIMEType).ToPointer(),
+                    }),
+                }),
+            }),
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        if res.Interaction.OutputText != nil {
+            fmt.Println(*res.Interaction.OutputText)
+        }
+    }
+}
+```
+
 ### CLI
 
 ```
@@ -732,10 +1013,10 @@ curl -X POST https://generativelanguage.googleapis.com/v1beta/files:register \
     -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
 ```
 
-## כתובות URL חיצוניות מסוג HTTP / כתובות URL חתומות
+## HTTP ภายนอก / URL ที่ลงนาม
 
-אפשר להעביר כתובות URL מסוג HTTPS שנגישות לכולם או כתובות URL חתומות מראש ישירות בבקשה. ‫Gemini API יאחזר את התוכן באופן מאובטח במהלך העיבוד.
-האפשרות הזו מתאימה לקבצים בגודל של עד 100MB שאתם לא רוצים להעלות מחדש.
+คุณส่ง URL HTTPS ที่เข้าถึงได้แบบสาธารณะหรือ URL ที่ลงนามล่วงหน้าได้โดยตรงในคำขอ Gemini API จะดึงข้อมูลเนื้อหาอย่างปลอดภัยในระหว่างการประมวลผล
+วิธีนี้เหมาะสำหรับไฟล์ขนาดไม่เกิน 100 MB ที่คุณไม่ต้องการอัปโหลดซ้ำ
 
 ### Python
 
@@ -800,21 +1081,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### נגישות
+### การช่วยเหลือพิเศษ
 
-מוודאים שכתובות ה-URL שציינתם לא מובילות לדפים שנדרשת בהם התחברות או לדפים שמוגנים על ידי חומת תשלום. במסדי נתונים פרטיים, חשוב לוודא שאתם יוצרים כתובת URL חתומה עם הרשאות גישה ותאריך תפוגה נכונים.
+ตรวจสอบว่า URL ที่คุณระบุไม่ได้นำไปยังหน้าที่ต้องมีการเข้าสู่ระบบหรือ
+อยู่หลังเพย์วอลล์ สำหรับฐานข้อมูลส่วนตัว โปรดตรวจสอบว่าคุณสร้าง URL ที่ลงชื่อแล้ว
+พร้อมสิทธิ์การเข้าถึงและวันหมดอายุที่ถูกต้อง
 
-### בדיקות אבטחה
+### การตรวจสอบความปลอดภัย
 
-המערכת מבצעת בדיקה של ניהול התוכן בכתובת ה-URL כדי לוודא שהיא עומדת בתקני הבטיחות והמדיניות. אם כתובת ה-URL תיכשל בבדיקה הזו, תקבלו הודעה
-`url_retrieval_status` של `URL_RETRIEVAL_STATUS_UNSAFE`.
+ระบบจะตรวจสอบการกลั่นกรองเนื้อหาใน URL เพื่อยืนยันว่า URL เป็นไปตาม
+มาตรฐานด้านความปลอดภัยและนโยบาย หาก URL ไม่ผ่านการตรวจสอบนี้ คุณจะได้รับ
+`url_retrieval_status`ของ `URL_RETRIEVAL_STATUS_UNSAFE`
 
-### סוגי התוכן הנתמכים
+### ประเภทเนื้อหาที่รองรับ
 
-הרשימה הזו של סוגי קבצים נתמכים ומגבלות נועדה לספק הנחיות ראשוניות, והיא לא מקיפה. קבוצת הסוגים הנתמכים בפועל עשויה להשתנות, והיא תלויה במודל הספציפי ובגרסת הטוקנייזר שנמצאים בשימוש. סוגים שלא נתמכים יגרמו לשגיאה.
-בנוסף, אחזור תוכן עבור סוגי הקבצים האלה תומך רק בכתובות URL שזמינות לכל.
+รายการประเภทไฟล์ที่รองรับและข้อจำกัดนี้มีไว้เพื่อเป็นคำแนะนำเบื้องต้นและไม่ได้ครอบคลุมข้อมูลทั้งหมด ชุดประเภทที่รองรับที่มีผลอาจมีการเปลี่ยนแปลงและอาจแตกต่างกันไปตามโมเดลและเวอร์ชันโทเค็นไนเซอร์ที่เฉพาะเจาะจงที่ใช้งานอยู่ ประเภทที่ไม่รองรับจะทำให้เกิดข้อผิดพลาด
+นอกจากนี้ การดึงข้อมูลเนื้อหาสำหรับไฟล์ประเภทเหล่านี้จะรองรับเฉพาะ URL ที่เข้าถึงได้แบบสาธารณะเท่านั้น
 
-#### סוגים של קובצי טקסט
+#### ประเภทไฟล์ข้อความ
 
 - `text/html`
 - `text/css`
@@ -824,19 +1108,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/rtf`
 - `text/javascript`
 
-#### סוגי קבצים של אפליקציות
+#### ประเภทไฟล์แอปพลิเคชัน
 
 - `application/json`
 - `application/pdf`
 
-#### סוגים של קובצי תמונות
+#### ไฟล์ประเภทรูปภาพ
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### סוגים של קובצי וידאו
+#### ไฟล์ประเภทวิดีโอ
 
 - `video/mp4`
 - `video/mpeg`
@@ -848,32 +1132,34 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `video/wmv`
 - `video/3gpp`
 
-## שיטות מומלצות
+## แนวทางปฏิบัติแนะนำ
 
-- **בחירת השיטה הנכונה:** משתמשים בנתונים מוטבעים לקבצים קטנים וזמניים.
-  כדאי להשתמש ב-File API לקבצים גדולים או לקבצים שמשתמשים בהם לעיתים קרובות. שימוש בכתובות URL חיצוניות
-  לנתונים שכבר מתארחים אונליין.
-- **צריך לציין סוגי MIME:** חשוב לספק תמיד את סוג ה-MIME הנכון של נתוני הקובץ כדי להבטיח עיבוד תקין.
-- **טיפול בשגיאות:** כדאי להטמיע טיפול בשגיאות בקוד כדי לנהל בעיות פוטנציאליות כמו כשלים ברשת, בעיות בגישה לקבצים או שגיאות ב-API.
+- **เลือกวิธีที่เหมาะสม:** ใช้ข้อมูลแบบอินไลน์สำหรับไฟล์ขนาดเล็กที่ใช้ชั่วคราว
+  ใช้ File API สำหรับไฟล์ที่มีขนาดใหญ่หรือใช้บ่อย ใช้ URL ภายนอก
+  สำหรับข้อมูลที่โฮสต์ออนไลน์อยู่แล้ว
+- **ระบุประเภท MIME:** ระบุประเภท MIME ที่ถูกต้องสำหรับข้อมูลไฟล์เสมอเพื่อให้ประมวลผลได้อย่างเหมาะสม
+- **จัดการข้อผิดพลาด:** ใช้การจัดการข้อผิดพลาดในโค้ดเพื่อจัดการ
+  ปัญหาที่อาจเกิดขึ้น เช่น เครือข่ายล่ม ปัญหาการเข้าถึงไฟล์ หรือข้อผิดพลาดของ API
 
-## מגבלות
+## ข้อจำกัด
 
-- מגבלות גודל הקובץ משתנות בהתאם לשיטה (ראו [טבלת השוואה](#method-comparison)) וסוג הקובץ.
-- נתונים מוטמעים מגדילים את גודל המטען הייעודי (payload) של הבקשה.
-- ההעלאות באמצעות File API הן זמניות והתוקף שלהן פג אחרי 48 שעות.
-- הגודל של מטען ייעודי (payload) שמתקבל מכתובת URL חיצונית מוגבל ל-100MB, ויש תמיכה בסוגי תוכן ספציפיים.
+- ขีดจำกัดขนาดไฟล์จะแตกต่างกันไปตามวิธีการ (ดู[ตารางเปรียบเทียบ](#method-comparison))
+  และประเภทไฟล์
+- ข้อมูลแบบอินไลน์จะเพิ่มขนาดเพย์โหลดของคำขอ
+- การอัปโหลด File API เป็นแบบชั่วคราวและจะหมดอายุหลังจาก 48 ชั่วโมง
+- การดึงข้อมูล URL ภายนอกจำกัดไว้ที่ 100 MB ต่อเพย์โหลด และรองรับเนื้อหาบางประเภท
 
-## המאמרים הבאים
+## ขั้นตอนถัดไป
 
-- אתם יכולים לנסות לכתוב הנחיות מולטימודאליות משלכם באמצעות [Google AI Studio](http://aistudio.google.com/?hl=he).
-- מידע על הוספת קבצים להנחיות זמין במדריכים בנושא [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=he), [אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[עיבוד מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he).
+- ลองเขียนพรอมต์มัลติโมดัลของคุณเองโดยใช้ [Google AI Studio](http://aistudio.google.com/?hl=th)
+- ดูข้อมูลเกี่ยวกับการรวมไฟล์ไว้ในพรอมต์ได้ในคำแนะนำเกี่ยวกับ[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=th), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ[การประมวลผลเอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)
 
-שליחת משוב
+ส่งความคิดเห็น
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-עדכון אחרון: 2026-09-18 (שעון UTC).
+อัปเดตล่าสุด 2026-09-24 UTC
 
-רוצה לתת לנו משוב?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-18 (שעון UTC)."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

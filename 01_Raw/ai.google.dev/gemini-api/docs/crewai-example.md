@@ -1,41 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=vi
-fetched_at: 2026-09-21T05:51:35.729264+00:00
-title: "Ph\u00e2n t\u00edch d\u1ecbch v\u1ee5 h\u1ed7 tr\u1ee3 kh\u00e1ch h\u00e0ng b\u1eb1ng Gemini v\u00e0 CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=pt-BR
+fetched_at: 2026-09-28T06:17:40.818113+00:00
+title: "An\u00e1lise de suporte ao cliente com o Gemini e a CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-# Phân tích dịch vụ hỗ trợ khách hàng bằng Gemini và CrewAI
+# Análise de suporte ao cliente com o Gemini e a CrewAI
 
-[CrewAI](https://docs.crewai.com/introduction) là một khung để điều phối các tác nhân AI tự quản cộng tác nhằm đạt được các mục tiêu phức tạp. Nó cho phép bạn xác định các tác nhân bằng cách chỉ định vai trò, mục tiêu và bối cảnh, sau đó xác định các nhiệm vụ cho các tác nhân đó.
+[CrewAI](https://docs.crewai.com/introduction) é um framework para orquestrar
+agentes de IA autônomos que colaboram para alcançar metas complexas. Ele permite
+definir agentes especificando papéis, metas e histórias de fundo e, em seguida, definir tarefas
+para eles.
 
-Ví dụ này minh hoạ cách xây dựng một hệ thống đa tác nhân để phân tích dữ liệu hỗ trợ khách hàng nhằm xác định vấn đề và đề xuất các điểm cải tiến quy trình bằng Gemini 3 Flash, tạo một báo cáo dành cho Giám đốc vận hành (COO).
+Este exemplo demonstra como criar um sistema multiagente para analisar dados de suporte ao cliente para identificar problemas e propor melhorias de processo usando o Gemini 3 Flash, gerando um relatório destinado a ser lido por um diretor de operações (COO).
 
-Hướng dẫn này sẽ hướng dẫn bạn cách tạo một "nhóm" gồm các tác nhân AI có thể thực hiện những việc sau:
+O guia mostra como criar uma "equipe" de agentes de IA que podem realizar as seguintes tarefas:
 
-1. Tìm nạp và phân tích dữ liệu hỗ trợ khách hàng (mô phỏng trong ví dụ này).
-2. Xác định các vấn đề tái diễn và nút thắt cổ chai trong quy trình.
-3. Đề xuất các điểm cải thiện có thể thực hiện.
-4. Tổng hợp các phát hiện thành một báo cáo ngắn gọn phù hợp với COO.
+1. Buscar e analisar dados de suporte ao cliente (simulados neste exemplo).
+2. Identificar problemas recorrentes e gargalos de processo.
+3. Sugerir melhorias práticas.
+4. Compilar as descobertas em um relatório conciso adequado para um COO.
 
-Bạn cần có khoá Gemini API. Nếu chưa có, bạn có thể [tạo một khoá API trong Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
+Você precisa de uma chave da API Gemini. Se ainda não tiver, você pode [conseguir uma no
+Google AI Studio](https://aistudio.google.com/apikey?hl=pt-br).
 
 ```
 pip install "crewai[tools]"
 ```
 
-Đặt khoá Gemini API làm biến môi trường có tên là `GEMINI_API_KEY`, sau đó định cấu hình CrewAI để sử dụng mô hình Gemini.
+Defina a chave da API Gemini como uma variável de ambiente chamada `GEMINI_API_KEY` e configure o CrewAI para usar o modelo do Gemini.
 
 ```
 import os
@@ -50,13 +54,15 @@ gemini_llm = LLM(
 )
 ```
 
-## Xác định các thành phần
+## Definir componentes
 
-Xây dựng các ứng dụng CrewAI bằng **Công cụ**, **Tác nhân**, **Nhiệm vụ** và chính **Nhóm**. Các phần sau đây sẽ giải thích từng thành phần này.
+Crie aplicativos do CrewAI usando **ferramentas**, **agentes**, **tarefas** e a
+**equipe**. As seções a seguir explicam cada um desses componentes.
 
-### Công cụ
+### Ferramentas
 
-Công cụ là những chức năng mà các đặc vụ có thể dùng để tương tác với thế giới bên ngoài hoặc thực hiện các hành động cụ thể. Tại đây, bạn xác định một công cụ giữ chỗ để mô phỏng việc tìm nạp dữ liệu hỗ trợ khách hàng. Trong một ứng dụng thực tế, bạn sẽ kết nối với cơ sở dữ liệu, API hoặc hệ thống tệp. Để biết thêm thông tin về các công cụ, hãy xem [hướng dẫn về các công cụ CrewAI](https://docs.crewai.com/concepts/tools).
+As ferramentas são recursos que os agentes podem usar para interagir com o mundo externo ou realizar ações específicas. Aqui, você define uma ferramenta de marcador de posição para simular a busca de dados de suporte ao cliente. Em um aplicativo real, você se conectaria a um banco de dados, API ou sistema de arquivos. Para mais informações sobre ferramentas, consulte o [guia de ferramentas
+do CrewAI](https://docs.crewai.com/concepts/tools).
 
 ```
 from crewai.tools import BaseTool
@@ -86,9 +92,10 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### Nhân viên hỗ trợ
+### Agentes
 
-Tác nhân là những nhân viên AI riêng lẻ trong nhóm của bạn. Mỗi tác nhân có một `role`, `goal`, `backstory` cụ thể, được chỉ định `llm` và `tools` không bắt buộc. Để biết thêm thông tin về trợ lý ảo, hãy xem [hướng dẫn về trợ lý ảo CrewAI](https://docs.crewai.com/concepts/agents).
+Os agentes são os trabalhadores de IA individuais na sua equipe. Cada agente tem um `role`, `goal`, `backstory`, `llm` atribuído e `tools` opcionais. Para mais
+informações sobre agentes, consulte o [guia de agentes do CrewAI](https://docs.crewai.com/concepts/agents).
 
 ```
 from crewai import Agent
@@ -135,9 +142,10 @@ report_writer = Agent(
 )
 ```
 
-### Tasks
+### Tarefas
 
-Các nhiệm vụ xác định những việc cụ thể được giao cho nhân viên hỗ trợ. Mỗi việc cần làm đều có `description`, `expected_output` và được giao cho một `agent`. Theo mặc định, các tác vụ được chạy tuần tự và bao gồm cả bối cảnh của tác vụ trước đó. Để biết thêm thông tin về các tác vụ, hãy xem [hướng dẫn về các tác vụ của CrewAI](https://docs.crewai.com/concepts/tasks).
+As tarefas definem as atribuições específicas para os agentes. Cada tarefa tem uma `description`, `expected_output` e é atribuída a um `agent`. As tarefas são executadas sequencialmente por padrão e incluem o contexto da tarefa anterior. Para mais
+informações sobre tarefas, consulte o [guia de tarefas do CrewAI](https://docs.crewai.com/concepts/tasks).
 
 ```
 from crewai import Task
@@ -196,9 +204,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### Nhóm sản xuất
+### Gangue
 
-`Crew` kết hợp các tác nhân và tác vụ, xác định quy trình công việc (chẳng hạn như "tuần tự").
+A `Crew` reúne os agentes e as tarefas, definindo o processo de fluxo de trabalho (como "sequencial").
 
 ```
 from crewai import Crew, Process
@@ -211,9 +219,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## Run the crew
+## Executar a equipe
 
-Cuối cùng, hãy bắt đầu thực thi nhóm bằng mọi thông tin đầu vào cần thiết.
+Por fim, inicie a execução da equipe com as entradas necessárias.
 
 ```
 # Start the crew's work
@@ -227,17 +235,19 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-Tập lệnh sẽ thực thi. `Data Analyst` sẽ sử dụng công cụ này, `Process
-Optimizer` sẽ phân tích các kết quả và `Report Writer` sẽ biên soạn báo cáo cuối cùng, sau đó báo cáo này sẽ được in ra bảng điều khiển. Chế độ cài đặt `verbose=True` sẽ cho thấy quy trình suy nghĩ và hành động chi tiết của từng tác nhân.
+O script será executado. O `Data Analyst` vai usar a ferramenta, o `Process
+Optimizer` vai analisar as descobertas e o `Report Writer` vai compilar o
+relatório final, que será impresso no console. A configuração `verbose=True` mostra o processo de pensamento detalhado e as ações de cada agente.
 
-Để tìm hiểu thêm về CrewAI, hãy xem [giới thiệu về CrewAI](https://docs.crewai.com/introduction).
+Para saber mais sobre o CrewAI, confira a [introdução
+do CrewAI](https://docs.crewai.com/introduction).
 
-Gửi ý kiến phản hồi
+Envie comentários
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Cập nhật lần gần đây nhất: 2026-09-12 UTC.
+Última atualização 2026-09-12 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Quer enviar seu feedback?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-12 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-12 UTC."],[],[]]

@@ -1,40 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=de
-fetched_at: 2026-09-21T05:54:24.476445+00:00
-title: "Gemini-Denken \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=zh-TW
+fetched_at: 2026-09-28T06:18:40.130222+00:00
+title: "Gemini \u601d\u8003 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Feedback geben
+提供意見
 
-# Gemini-Denken
+# Gemini 思考
 
-Die Modelle der [Gemini 3- und 2.5-Serie](https://ai.google.dev/gemini-api/docs/models?hl=de) verwenden einen
-„Denkprozess“, der ihre Fähigkeiten zum logischen Schlussfolgern und zur mehrstufigen
-Planung erheblich verbessert. Dadurch sind sie sehr effektiv für komplexe Aufgaben wie
-Programmieren, fortgeschrittene Mathematik und Datenanalyse.
+[Gemini 3 和 2.5 系列模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)採用「思考過程」，大幅提升推論和多步驟規劃能力，因此非常適合處理複雜工作，例如程式設計、高等數學和資料分析。
 
-Wenn Sie ein Thinking Model verwenden, schlussfolgert Gemini intern, bevor es antwortet. Die Interactions API stellt diese Schlussfolgerung über `thought`-Schritte dar. Das sind spezielle Schritte, die chronologisch neben Funktionsaufrufen, Nutzereingaben oder Modellausgaben im `steps`-Array angezeigt werden.
+使用思考型模型時，Gemini 會先進行內部推論，再做出回覆。Interactions API 會透過 `thought` 步驟顯示這項推論過程，這些專屬步驟會依時間順序顯示在 `steps` 陣列中，與函式呼叫、使用者輸入內容或模型輸出內容並列。
 
-Jeder Denkprozessschritt enthält zwei Felder:
+每個思考步驟都包含兩個欄位：
 
-| Feld | Erforderlich? | Beschreibung |
+| 欄位 | 必要 | 說明 |
 | --- | --- | --- |
-| `signature` | ✅ Ja | Eine verschlüsselte Darstellung des internen Denkzustands des Modells. Immer vorhanden, auch wenn das Modell nur minimal schlussfolgert. |
-| `summary` | ❌ Nein | Ein Array mit Inhalten (Text und/oder Bilder), die die Schlussfolgerung zusammenfassen. Je nach der [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=de)-Konfiguration, ob das Modell ausreichend schlussfolgert hat oder je nach Inhaltstyp kann es leer sein (z. B. haben Bildlatente möglicherweise keine Textzusammenfassungen). |
+| `signature` | ✅ 是 | 模型內部推論狀態的加密表示法。一律會顯示，即使模型只執行最少的推論作業。 |
+| `summary` | ❌ 否 | 一系列內容 (文字和/或圖片)，總結推理過程。視 [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=zh-tw) 設定、模型是否執行足夠的推論，或內容類型而定，可能為空白 (例如，圖片潛在空間可能沒有文字摘要)。 |
 
-## Interaktionen mit Thinking
+## 與思考型模型的互動
 
-Das Initiieren einer Interaktion mit einem Thinking Model ähnelt jeder anderen Interaktionsanfrage. Geben Sie im `model` Feld eines der [Modelle mit Thinking-Unterstützung](#thinking-levels) an:
+與思考型模型互動的程序與其他互動要求類似。在 `model` 欄位中，指定[支援思考輔助功能的模型](#thinking-levels)：
 
 ### Python
 
@@ -90,6 +87,44 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-pro"),
+            Input: interactions.NewInteractionsInput("Explain the concept of Occam's Razor and provide a simple, everyday example."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -102,10 +137,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Zusammenfassungen der Gedanken
+## 想法重點摘要
 
-Zusammenfassungen der Gedanken geben Einblicke in den internen Denkprozess des Modells.
-Standardmäßig wird nur die endgültige Ausgabe zurückgegeben. Sie können Zusammenfassungen der Gedanken mit `thinking_summaries` aktivieren:
+想法摘要可深入瞭解模型的內部推論過程。
+根據預設，系統只會傳回最終輸出內容。你可以使用 `thinking_summaries` 啟用想法摘要：
 
 ### Python
 
@@ -225,6 +260,47 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("Provide a list of 3 famous physicists and their key contributions"),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel: interactions.ThinkingLevelLow.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -240,23 +316,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Ein Denkprozessblock kann in den folgenden Fällen **nur eine Signatur ohne Zusammenfassung** enthalten:
+在下列情況下，思想區塊可能**只包含簽名，沒有摘要**：
 
-- Einfache Anfragen, bei denen das Modell nicht genug schlussfolgert hat, um eine Zusammenfassung zu generieren
-- `thinking_summaries: "none"`, wobei Zusammenfassungen explizit deaktiviert sind
-- Bestimmte Arten von Denkprozessinhalten wie Bilder haben möglicherweise keine Textzusammenfassungen
+- 簡單要求：模型未充分推理，因此無法生成摘要
+- `thinking_summaries: "none"`，其中摘要功能已明確停用
+- 某些想法內容類型 (例如圖片) 可能沒有文字摘要
 
-Ihr Code sollte immer Denkprozessblöcke verarbeiten, bei denen `summary` leer oder nicht vorhanden ist.
+您的程式碼應一律處理 `summary` 為空或不存在的思考區塊。
 
-## Streaming mit Thinking
+## 串流與思考
 
-Mit Streaming können Sie während der Generierung schrittweise Zusammenfassungen der Gedanken erhalten.
-Denkprozessblöcke werden mit vom Server gesendeten Ereignissen (SSE, Server-Sent Events) mit zwei verschiedenen Deltatyps bereitgestellt:
+在生成期間使用串流功能，接收逐步生成的想法摘要。
+系統會使用伺服器傳送事件 (SSE) 傳送思維方塊，並提供兩種不同的增量類型：
 
-| Deltatyp | Enthält | Wann werden die Daten gesendet? |
+| 差異類型 | 包含 | 傳送時間 |
 | --- | --- | --- |
-| `thought_summary` | Zusammenfassung von Text- oder Bildinhalten | Ein oder mehrere Deltas mit schrittweiser Zusammenfassung |
-| `thought_signature` | Die kryptografische Signatur | Das letzte Delta vor `step.stop` |
+| `thought_summary` | 文字或圖片摘要內容 | 一或多個增量摘要的差異 |
+| `thought_signature` | 密碼編譯簽章 | `step.stop`之前的最後一個增量 |
 
 ### Python
 
@@ -416,6 +492,58 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-flash"),
+            Input: interactions.NewInteractionsInput("What is the sum of the first 50 prime numbers?"),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel:     interactions.ThinkingLevelHigh.ToPointer(),
+                ThinkingSummaries: interactions.ThinkingSummariesAuto.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    for _, step := range res.Interaction.Steps {
+        if thought := step.ThoughtStep; thought != nil {
+            for _, part := range thought.Summary {
+                if part.TextContent != nil {
+                    fmt.Printf("Thought summary:\n%s\n\n", part.TextContent.Text)
+                }
+            }
+        }
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Printf("Answer:\n%s\n", *res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -433,7 +561,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Die Streaming-Antwort verwendet vom Server gesendete Ereignisse (SSE) und besteht aus Schritten und Ereignissen, z. B.:
+串流回應會使用伺服器傳送事件 (SSE)，並由步驟和事件組成，例如：
 
 ```
 event: interaction.created
@@ -464,24 +592,25 @@ event: done
 data: [DONE]
 ```
 
-## Thinking steuern
+## 控制思考
 
-Gemini-Modelle verwenden standardmäßig dynamisches Thinking und passen den Aufwand für die Schlussfolgerung automatisch an die Komplexität der Anfrage an. Sie können dieses Verhalten mit dem Parameter `thinking_level` steuern.
+Gemini 模型預設會進行動態思考，根據要求的複雜程度自動調整推論量。您可以使用 `thinking_level` 參數控制這項行為。
 
-| Modell | Standard-Thinking | Unterstützte Stufen |
+| 模型 | 預設思考 | 支援的等級 |
 | --- | --- | --- |
-| gemini-3.8-flash | An (Medium) | niedrig, mittel, hoch |
-| gemini-3.7-flash | An (Medium) | niedrig, mittel, hoch |
-| gemini-3.6-flash | An (Medium) | minimal, niedrig, mittel, hoch |
-| gemini-3.5-flash-lite | An (minimal) | minimal, niedrig, mittel, hoch |
-| gemini-3.1-pro-preview | An (hoch) | niedrig, mittel, hoch |
-| gemini-3.1-flash-lite-image | An (minimal) | minimal, hoch |
-| gemini-3-flash-preview | An (hoch) | minimal, niedrig, mittel, hoch |
-| gemini-3-pro-preview | An (hoch) | niedrig, hoch |
-| gemini-3.5-flash | An (Medium) | minimal, niedrig, mittel, hoch |
-| gemini-2.5-pro | An | niedrig, mittel, hoch |
-| gemini-2.5-flash | An | niedrig, mittel, hoch |
-| gemini-2.5-flash-lite | Aus | niedrig, mittel, hoch |
+| gemini-3.8-flash | 開啟 (媒介) | 低、中、高 |
+| gemini-3.7-flash | 開啟 (媒介) | 低、中、高 |
+| gemini-3.6-flash | 開啟 (媒介) | 極低、低、中、高 |
+| gemini-3.5-flash-lite | 開啟 (極簡) | 極低、低、中、高 |
+| gemini-3.1-pro-preview | 開啟 (高) | 低、中、高 |
+| gemini-3.1-flash-lite-image | 開啟 (極簡) | 極簡、高 |
+| gemini-3-flash-preview | 開啟 (高) | 極低、低、中、高 |
+| gemini-3-pro-preview | 開啟 (高) | 低、高 |
+| gemini-3.5-flash | 開啟 (媒介) | 極低、低、中、高 |
+| gemini-2.5-pro | 開啟 | 低、中、高 |
+| gemini-2.5-flash | 開啟 | 低、中、高 |
+| gemini-2.5-flash-lite | 關閉 | 低、中、高 |
+| gemini-robotics-er-2-preview | 開啟 (高) | 極低、低、中、高 |
 
 ### Python
 
@@ -546,6 +675,64 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-pro"),
+            Input: interactions.NewInteractionsInput("What is the sum of the first 50 prime numbers?"),
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel:     interactions.ThinkingLevelHigh.ToPointer(),
+                ThinkingSummaries: interactions.ThinkingSummariesAuto.ToPointer(),
+            },
+            Stream: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    stream := res.InteractionSSEStreamEvent
+    defer stream.Close()
+
+    for stream.Next() {
+        event := stream.Value()
+        if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if thoughtDelta := stepDelta.GetDeltaThoughtSummary(); thoughtDelta != nil {
+                if textContent := thoughtDelta.GetContentText(); textContent != nil {
+                    fmt.Printf("[Thought Summary] %s\n", textContent.Text)
+                }
+            }
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            }
+        }
+    }
+    if err := stream.Err(); err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -561,37 +748,35 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Tokenlimits und `max_output_tokens`
+### 詞元數量上限和 `max_output_tokens`
 
-Der [`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=de#request-body) Generierungsparameter legt die maximale Anzahl an Tokens fest, die eine Antwort generieren kann, einschließlich
-der Denkprozesstokens.
+[`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=zh-tw#request-body) 生成參數會設定回覆可生成的詞元數量上限，包括思考詞元。
 
-Wenn dieser Parameter festgelegt ist, fungiert er als harte Begrenzung, die von der Infrastruktur erzwungen wird, ohne dass sich ändert, wie das Modell sein Thinking-Budget (`thinking_level`) zuweist.
+設定後，這項參數會做為基礎架構強制執行的硬性截斷，不會改變模型分配思考預算 (`thinking_level`) 的方式。
 
-Wenn das Modell dieses Limit beim Schlussfolgern erreicht, wird die Generierung mit dem Status
-`"incomplete"` beendet und eine gekürzte oder leere Ausgabe zurückgegeben. Die generierten Denkprozesstokens werden jedoch weiterhin in Rechnung gestellt. Wenn Sie Kosten oder Latenz reduzieren möchten, ohne Antworten zu kürzen, sollten Sie stattdessen `thinking_level` auf `low` oder `medium` setzen, anstatt einen niedrigen Wert für `max_output_tokens` festzulegen.
+如果模型在推論時達到這項限制，就會停止生成內容，並傳回 `"incomplete"` 狀態和截斷或空白的輸出內容 (但仍會針對產生的任何思考詞元計費)。如要降低費用或延遲時間，但不想截斷回應，請降低 `thinking_level` (`low` 或 `medium`)，而不是設定較小的 `max_output_tokens`。
 
-## Gedankensignaturen
+## 想法簽名
 
-Gedankensignaturen sind verschlüsselte Darstellungen der internen Schlussfolgerung des Modells. Sie sind erforderlich, um die Kontinuität der Schlussfolgerung bei Mehrfachdialogen aufrechtzuerhalten.
+思維簽章是模型內部推理過程的加密表示法。在多輪對話中，必須維持推論的連貫性。
 
-Mit der Interactions API ist die Verarbeitung von Gedankensignaturen viel einfacher als mit der `generateContent` API.
+與 `generateContent` API 相比，Interactions API 可大幅簡化思維簽章的處理程序。
 
-### Zustandsorientierter Modus (empfohlen)
+### 有狀態模式 (建議)
 
-Wenn Sie die Interactions API standardmäßig im zustandsorientierten Modus verwenden (indem Sie `store: true` festlegen und die `previous_interaction_id` in nachfolgenden Schritten übergeben), verwaltet der Server automatisch den Unterhaltungsstatus, einschließlich aller Denkprozessblöcke und Signaturen. In diesem Modus müssen Sie nichts in Bezug auf Signaturen tun. Sie werden vollständig serverseitig verarbeitet.
+根據預設，在有狀態模式下使用 Interactions API 時 (設定 `store: true` 並在後續回合中傳遞 `previous_interaction_id`)，伺服器會自動管理對話狀態，包括所有思維區塊和簽章。在這個模式下，您不需要對簽章採取任何行動。這些作業完全在伺服器端處理。
 
-### Zustandsloser Modus
+### 無狀態模式
 
-Wenn Sie den Unterhaltungsstatus selbst verwalten (zustandsloser Modus) und die vollständige Historie der Ein- und Ausgaben in jeder Anfrage übergeben:
+如果您自行管理對話狀態 (無狀態模式)，並在每個要求中傳遞完整的輸入和輸出記錄：
 
-- Sie **MÜSSEN** immer alle `thought`-Blöcke genau so noch einmal senden, wie sie vom Modell empfangen wurden.
-- Sie sollten **Denkprozessblöcke nicht aus dem Verlauf entfernen oder ändern, da sie die Signaturen enthalten, die das Modell für die Fortsetzung der Schlussfolgerung benötigt.**
-- Wenn Sie das Modell innerhalb einer Sitzung wechseln, sollten Sie trotzdem die Denkprozessblöcke des vorherigen Modells noch einmal senden. Das Back-End verwaltet die Kompatibilität.
+- 你**必須**一律重新傳送所有 `thought` 區塊，且內容必須與模型傳送的完全一致。
+- 請**勿**從記錄中移除或修改思維方塊，因為這些方塊包含模型繼續推理所需的簽章。
+- 在工作階段中切換模型時，您仍應重新傳送先前模型的思維區塊。後端會管理相容性。
 
-## Preise
+## 定價
 
-Wenn Thinking aktiviert ist, setzen sich die Preise für Antworten aus der Summe der Ausgabetokens und der Denkprozesstokens zusammen. Die Gesamtzahl der generierten Denkprozesstokens finden Sie im Feld `total_thought_tokens`.
+開啟思考功能後，回覆價格為輸出詞元和思考詞元的總和。您可以從 `total_thought_tokens` 欄位取得產生的思考權杖總數。
 
 ### Python
 
@@ -636,34 +821,89 @@ if (interaction.usage().isPresent()) {
 }
 ```
 
-Thinking Models generieren vollständige Gedanken, um die Qualität der endgültigen
-Antwort zu verbessern, und geben dann [Zusammenfassungen](#summaries) aus, um Einblicke in den
-Denkprozess zu geben. Die Preise basieren auf den vollständigen Denkprozesstokens, die das Modell generieren muss, obwohl nur die Zusammenfassung von der API ausgegeben wird.
+### Go
 
-Weitere Informationen zu Tokens finden Sie im [Leitfaden zum Zählen von Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
+```
+package main
 
-## Best Practices
+import (
+    "context"
+    "fmt"
+    "log"
 
-Beachten Sie diese Richtlinien, um Thinking Models effizient zu nutzen.
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
 
-- **Schlussfolgerung überprüfen**: Analysieren Sie Zusammenfassungen der Gedanken, um Fehler zu verstehen und Prompts zu verbessern.
-- **Thinking-Budget steuern**: Fordern Sie das Modell auf, bei längeren Ausgaben weniger zu denken, um Tokens zu sparen.
-- **Einfache Aufgaben**: Verwenden Sie minimales oder niedriges Thinking für die Faktenabfrage oder Klassifizierung (z.B. „Wo wurde DeepMind gegründet?“).
-- **Mittelschwere Aufgaben**: Verwenden Sie das Standard-Thinking, um Konzepte zu vergleichen oder kreativ zu schlussfolgern (z.B. „Vergleichen Sie Elektro- und Hybridautos“).
-- **Komplexe Aufgaben**: Verwenden Sie das maximale Thinking für fortgeschrittenes Programmieren, Mathematik oder mehrstufige Planung (z.B. „Lösen Sie AIME-Mathematikaufgaben“).
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-## Nächste Schritte
+    // Turn 1: Execute a reasoning + tool use interaction
+    turn1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model: interactions.Model("gemini-3.8-pro"),
+            Input: interactions.NewInteractionsInput("Compare the GDP growth of Japan and Germany in 2025."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+            },
+            GenerationConfig: &interactions.GenerationConfig{
+                ThinkingLevel: interactions.ThinkingLevelHigh.ToPointer(),
+            },
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-- [Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de): Einfache Textantworten
-- [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de): Verbindung zu Tools herstellen
-- [Gemini 3-Leitfaden](https://ai.google.dev/gemini-api/docs/gemini-3?hl=de): Modellspezifische Funktionen
+    // Turn 2: Pass PreviousInteractionID so thought signatures are automatically preserved
+    turn2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.8-pro"),
+            PreviousInteractionID: turn1.Interaction.ID,
+            Input:                 interactions.NewInteractionsInput("Now summarize that comparison in a 3-row markdown table."),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
 
-Feedback geben
+    if turn2.Interaction.OutputText != nil {
+        fmt.Println(*turn2.Interaction.OutputText)
+    }
+}
+```
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+思考模型會生成完整想法，提升最終回覆的品質，然後輸出[摘要](#summaries)，深入瞭解思考過程。即使 API 只會輸出摘要，但計價依據仍是模型需要生成的所有思考權杖。
 
-Zuletzt aktualisiert: 2026-09-18 (UTC).
+如要進一步瞭解權杖，請參閱[權杖計數](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)指南。
 
-Haben Sie Feedback für uns?
+## 最佳做法
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-18 (UTC)."],[],[]]
+請按照下列指南，有效運用思考模型。
+
+- **查看推論過程**：分析思考摘要，瞭解失敗原因並改善提示。
+- **控管思考預算**：提示模型減少思考，以節省詞元。
+- **簡單工作**：使用最少或低程度的思考來擷取事實或分類 (例如「DeepMind 在哪裡成立？」)。
+- **中等難度的工作**：使用預設的思考方式比較概念或進行創意推理 (例如比較電動車和油電混合車)。
+- **複雜工作**：使用最高思考量，進行進階程式設計、數學或多步驟規劃 (例如解決 AIME 數學問題)。
+
+## 後續步驟
+
+- [生成文字](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw)：基本文字回覆
+- [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)：連結至工具
+- [Gemini 3 指南](https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-tw)：模型專屬功能
+
+提供意見
+
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+
+上次更新時間：2026-09-25 (世界標準時間)。
+
+想進一步說明嗎？
+
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-25 (世界標準時間)。"],[],[]]

@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-CN
-fetched_at: 2026-09-21T05:47:14.664890+00:00
-title: "Gemini Deep Research \u667a\u80fd\u4f53 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-TW
+fetched_at: 2026-09-28T06:29:30.138658+00:00
+title: "Gemini Deep Research \u4ee3\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-发送反馈
+提供意見
 
-# Gemini Deep Research 智能体
+# Gemini Deep Research 代理
 
-Gemini Deep Research 智能体可自主规划、执行和整合多步骤研究任务。在 Gemini 的支持下，它能够驾驭复杂的信息环境，生成详细且包含引用的报告。借助新功能，您可以与智能体协作规划，使用 MCP 服务器连接到外部工具，添加可视化内容（例如图表和图形），以及直接提供文档作为输入内容。
+Gemini Deep Research 代理程式會自主規劃、執行及統整多步驟研究工作。這項功能採用 Gemini，可瀏覽複雜的資訊環境，生成詳細且附有出處的報告。新功能可讓您與代理共同規劃、使用 MCP 伺服器連線至外部工具、加入視覺化內容 (例如圖表)，以及直接提供文件做為輸入內容。
 
-研究任务涉及迭代搜索和阅读，可能需要几分钟才能完成。您必须使用[后台执行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-cn)（设置 `background=true`）来异步运行代理并轮询结果或流式传输更新。如需了解详情，请参阅[处理长时间运行的任务](#long-running-tasks)。
+研究工作需要反覆搜尋和閱讀，可能需要幾分鐘才能完成。您必須使用[背景執行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-tw) (設定 `background=true`)，以非同步方式執行代理程式，並輪詢結果或串流更新。詳情請參閱「[處理長時間執行的工作](#long-running-tasks)」。
 
-以下示例展示了如何在后台启动研究任务并轮询结果。
+以下範例說明如何在背景啟動研究工作，並輪詢結果。
 
 ### Python
 
@@ -122,6 +122,66 @@ while (true) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:      interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:      interactions.NewInteractionsInput("Research the history of Google TPUs."),
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    interaction := res.Interaction
+    if interaction.ID != nil {
+        fmt.Printf("Research started: %s\n", *interaction.ID)
+    }
+
+    for {
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        interaction = getRes.Interaction
+        if interaction.Status == interactions.InteractionStatusCompleted {
+            if interaction.OutputText != nil {
+                fmt.Println(*interaction.OutputText)
+            }
+            break
+        } else if interaction.Status == interactions.InteractionStatusFailed {
+            fmt.Printf("Research failed: %v\n", interaction.Errors)
+            break
+        }
+        time.Sleep(10 * time.Second)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -140,20 +200,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 支持的版本
+## 支援的版本
 
-Deep Research 智能体分为两个版本：
+Deep Research 代理有兩種版本：
 
-- **深度研究** (`deep-research-preview-04-2026`)：旨在提高速度和效率，非常适合流式传输回客户端界面。
-- **Deep Research Max** (`deep-research-max-preview-04-2026`)：自动收集和整合上下文信息，实现最全面的研究。
+- **深入研究** (`deep-research-preview-04-2026`)：專為速度和效率而設計，非常適合串流回用戶端 UI。
+- **Deep Research Max** (`deep-research-max-preview-04-2026`)：自動收集及統整內容，提供最全面的資訊。
 
-## 协作规划
+## 共同規劃
 
-通过协作式规划，您可以在代理开始工作之前控制研究方向，方法是在执行之前查看和完善研究计划。启用后，代理会返回建议的研究计划，而不是立即执行。然后，您可以通过多轮对话查看、修改或批准该计划。
+協作規劃功能可讓您在代理程式開始工作前，先查看並修正研究計畫，控管研究方向。啟用後，代理程式會傳回建議的研究計畫，而不是立即執行。接著，您可以透過多輪互動查看、修改或核准計畫。
 
-### 第 1 步：申请方案
+### 步驟 1：申請方案
 
-在第一次互动中设置 `collaborative_planning=True`。智能体返回的是研究计划，而不是完整报告。
+在第一次互動中設定 `collaborative_planning=True`。代理會傳回研究計畫，而不是完整報告。
 
 ### Python
 
@@ -248,6 +308,68 @@ while (true) {
 System.out.println(result.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    agentCfg := interactions.NewCreateAgentInteractionAgentConfig(interactions.DeepResearchAgentConfig{
+        ThinkingSummaries:     interactions.ThinkingSummariesAuto.ToPointer(),
+        CollaborativePlanning: genai.Ptr(true),
+    })
+
+    // First interaction: request a research plan
+    planRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:       interactions.NewInteractionsInput("Do some research on Google TPUs."),
+            AgentConfig: &agentCfg,
+            Background:  genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    // Wait for and retrieve the plan
+    var result *interactions.Interaction
+    for {
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *planRes.Interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        result = getRes.Interaction
+        if result.Status == interactions.InteractionStatusCompleted {
+            break
+        }
+        time.Sleep(5 * time.Second)
+    }
+    if result.OutputText != nil {
+        fmt.Println(*result.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -266,9 +388,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 第 2 步：优化方案（可选）
+### 步驟 2：修正計畫 (選用)
 
-使用 `previous_interaction_id` 继续对话并迭代计划。按住 `collaborative_planning=True` 可保持在规划模式下。
+使用 `previous_interaction_id` 繼續對話，並反覆修正行程。按住 `collaborative_planning=True` 即可繼續規劃模式。
 
 ### Python
 
@@ -363,6 +485,69 @@ while (true) {
 System.out.println(result.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    planInteractionID := "PLAN_INTERACTION_ID"
+    agentCfg := interactions.NewCreateAgentInteractionAgentConfig(interactions.DeepResearchAgentConfig{
+        ThinkingSummaries:     interactions.ThinkingSummariesAuto.ToPointer(),
+        CollaborativePlanning: genai.Ptr(true),
+    })
+
+    // Second interaction: refine the plan
+    refinedRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:                 interactions.NewInteractionsInput("Focus more on the differences between Google TPUs and competitor hardware, and less on the history."),
+            AgentConfig:           &agentCfg,
+            PreviousInteractionID: genai.Ptr(planInteractionID),
+            Background:            genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var result *interactions.Interaction
+    for {
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *refinedRes.Interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        result = getRes.Interaction
+        if result.Status == interactions.InteractionStatusCompleted {
+            break
+        }
+        time.Sleep(5 * time.Second)
+    }
+    if result.OutputText != nil {
+        fmt.Println(*result.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -382,9 +567,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 第 3 步：批准并执行
+### 步驟 3：核准並執行
 
-设置 `collaborative_planning=False`（或省略此参数）以批准计划并开始研究。
+設為 `collaborative_planning=False` (或省略)，即可核准計畫並開始研究。
 
 ### Python
 
@@ -477,6 +662,69 @@ while (true) {
 System.out.println(result.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    refinedPlanID := "REFINED_PLAN_ID"
+    agentCfg := interactions.NewCreateAgentInteractionAgentConfig(interactions.DeepResearchAgentConfig{
+        ThinkingSummaries:     interactions.ThinkingSummariesAuto.ToPointer(),
+        CollaborativePlanning: genai.Ptr(false),
+    })
+
+    // Third interaction: approve the plan and kick off research
+    finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:                 interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:                 interactions.NewInteractionsInput("Plan looks good!"),
+            AgentConfig:           &agentCfg,
+            PreviousInteractionID: genai.Ptr(refinedPlanID),
+            Background:            genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    var result *interactions.Interaction
+    for {
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *finalRes.Interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        result = getRes.Interaction
+        if result.Status == interactions.InteractionStatusCompleted {
+            break
+        }
+        time.Sleep(5 * time.Second)
+    }
+    if result.OutputText != nil {
+        fmt.Println(*result.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -496,10 +744,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 可视化
+## 圖表
 
-当 `visualization` 设置为 `"auto"` 时，智能体可以生成图表、图形和其他视觉元素来支持其研究发现。
-生成的图片包含在回答步骤中，并以 `image` delta 的形式进行流式传输。为获得最佳结果，请在查询中明确要求生成图文内容，例如“包含显示随时间变化的趋势的图表”或“生成比较市场份额的图表”。将 `visualization` 设置为 `"auto"` 可启用此功能，但智能体仅在提示要求时生成视觉效果。
+如果 `visualization` 設為 `"auto"`，代理程式可以生成圖表和其他視覺元素，為研究發現提供證據。生成圖片會納入回覆步驟，並以 `image` 差異串流傳輸。為獲得最佳結果，請在查詢中明確要求提供圖像，例如「請附上顯示一段時間內趨勢的圖表」或「請生成比較市占率的圖形」。將 `visualization` 設為 `"auto"` 即可啟用這項功能，但只有在提示要求時，代理程式才會生成圖像。
 
 ### Python
 
@@ -640,6 +887,81 @@ for (Step step : result.steps().orElse(Collections.emptyList())) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "encoding/base64"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    agentCfg := interactions.NewCreateAgentInteractionAgentConfig(interactions.DeepResearchAgentConfig{
+        Visualization: interactions.VisualizationAuto.ToPointer(),
+    })
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:       interactions.NewInteractionsInput("Analyze global semiconductor market trends. Include graphics showing market share changes."),
+            AgentConfig: &agentCfg,
+            Background:  genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Interaction.ID != nil {
+        fmt.Printf("Research started: %s\n", *res.Interaction.ID)
+    }
+
+    var result *interactions.Interaction
+    for {
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *res.Interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        result = getRes.Interaction
+        if result.Status == interactions.InteractionStatusCompleted {
+            break
+        }
+        time.Sleep(5 * time.Second)
+    }
+
+    for _, step := range result.Steps {
+        if outStep := step.ModelOutputStep; outStep != nil {
+            for _, contentItem := range outStep.Content {
+                if textContent := contentItem.TextContent; textContent != nil {
+                    fmt.Println(textContent.GetText())
+                } else if imgContent := contentItem.ImageContent; imgContent != nil && imgContent.Data != nil {
+                    imageBytes, err := base64.StdEncoding.DecodeString(*imgContent.Data)
+                    if err == nil {
+                        fmt.Printf("Received image: %d bytes\n", len(imageBytes))
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
 ### REST
 
 ```
@@ -657,21 +979,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 支持的工具
+## 支援的工具
 
-Deep Research 支持多种内置工具和外部工具。默认情况下（未提供 `tools` 参数时），代理可以访问 Google 搜索、网址上下文和代码执行功能。您可以明确指定工具来限制或扩展代理的功能。
+Deep Research 支援多種內建和外部工具。根據預設 (未提供 `tools` 參數時)，代理程式可存取 Google 搜尋、網址背景資訊和程式碼執行功能。您可以明確指定工具，限制或擴展代理程式的功能。
 
-| 工具 | 类型值 | 说明 |
+| 工具 | 輸入值 | 說明 |
 | --- | --- | --- |
-| Google 搜索 | `google_search` | 在公共网络中搜索。默认处于启用状态。 |
-| 网址上下文 | `url_context` | 阅读和总结网页内容。默认处于启用状态。 |
-| 代码执行 | `code_execution` | 执行代码以进行计算和数据分析。默认处于启用状态。 |
-| MCP 服务器 | `mcp_server` | 连接到远程 MCP 服务器以访问外部工具。 |
-| 文件搜索 | `file_search` | 搜索您上传的文档语料库。 |
+| Google 搜尋 | `google_search` | 搜尋公開網路。(預設為啟用)。 |
+| 網址背景資訊 | `url_context` | 閱讀並摘要網頁內容。(預設為啟用)。 |
+| 程式碼執行 | `code_execution` | 執行程式碼以進行計算和資料分析。(預設為啟用)。 |
+| MCP 伺服器 | `mcp_server` | 連線至遠端 MCP 伺服器，存取外部工具。 |
+| 檔案搜尋 | `file_search` | 搜尋上傳的文件語料庫。 |
 
-### Google 搜索
+### Google 搜尋
 
-明确启用 Google 搜索作为唯一工具：
+明確啟用 Google 搜尋做為唯一工具：
 
 ### Python
 
@@ -720,6 +1042,43 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput("What are the latest developments in quantum computing?"),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.GoogleSearch{}),
+            },
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -734,9 +1093,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 网址上下文
+### 網址背景資訊
 
-让代理能够读取和总结特定网页的内容：
+讓代理程式讀取及摘要特定網頁內容：
 
 ### Python
 
@@ -785,6 +1144,43 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput("Summarize the content of https://www.wikipedia.org/."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.URLContext{}),
+            },
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -799,9 +1195,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 代码执行
+### 程式碼執行
 
-允许代理执行代码以进行计算和数据分析：
+允許代理執行程式碼，進行計算和資料分析：
 
 ### Python
 
@@ -850,6 +1246,43 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput("Calculate the 50th Fibonacci number."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.CodeExecution{}),
+            },
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -864,19 +1297,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP 服务器
+### MCP 伺服器
 
-连接到远程 MCP 服务器，以便智能体访问外部工具和服务。
+連線至遠端 MCP 伺服器，讓代理存取外部工具和服務。
 
-在工具配置中提供服务器 `name` 和 `url`。您还可以传递身份验证凭据，并限制代理可以调用的工具。
+在工具設定中提供伺服器 `name` 和 `url`。您也可以傳遞驗證憑證，並限制代理程式可呼叫的工具。
 
-| 字段 | 类型 | 是否必需 | 说明 |
+| 欄位 | 類型 | 必要 | 說明 |
 | --- | --- | --- | --- |
-| `type` | `string` | 是 | 必须为 `"mcp_server"`。 |
-| `name` | `string` | 否 | MCP 服务器的显示名称。 |
-| `url` | `string` | 否 | MCP 服务器端点的完整网址。 |
-| `headers` | `object` | 否 | 作为 HTTP 标头随每个请求一起发送到服务器的键值对（例如身份验证令牌）。 |
-| `allowed_tools` | `array` | 否 | 限制智能体可调用的服务器工具。 |
+| `type` | `string` | 是 | 必須為 `"mcp_server"`。 |
+| `name` | `string` | 否 | MCP 伺服器的顯示名稱。 |
+| `url` | `string` | 否 | MCP 伺服器端點的完整網址。 |
+| `headers` | `object` | 否 | 以 HTTP 標頭形式傳送至伺服器的鍵/值配對 (例如驗證權杖)。 |
+| `allowed_tools` | `array` | 否 | 限制代理程式可呼叫伺服器的哪些工具。 |
 
 #### 基本用法
 
@@ -948,6 +1381,49 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput("Check the status of my last server deployment."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.MCPServer{
+                    Name: genai.Ptr("Deployment Tracker"),
+                    URL:  genai.Ptr("https://mcp.example.com/mcp"),
+                    Headers: map[string]string{
+                        "Authorization": "Bearer my-token",
+                    },
+                }),
+            },
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -969,9 +1445,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 文件搜索
+### 檔案搜尋
 
-使用[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)工具授予智能体对您自有数据的访问权限。
+使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，授予代理存取自有資料的權限。
 
 ### Python
 
@@ -1038,6 +1514,45 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput("Compare our 2025 fiscal year report against current public web news."),
+            Tools: []interactions.Tool{
+                interactions.NewTool(interactions.FileSearch{
+                    FileSearchStoreNames: []string{"fileSearchStores/my-store-name"},
+                }),
+            },
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1054,11 +1569,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 可操纵性和格式设置
+## 可控性和格式
 
-您可以在提示中提供具体的格式设置说明，从而引导代理的输出。这样，您就可以将报告划分为特定部分和子部分，添加数据表格，或针对不同受众群体调整语气（例如“技术”“高管”“随意”）。
+您可以在提示中提供具體的格式設定指示，引導代理程式輸出內容。您可以將報表劃分為特定章節和子章節、加入資料表，或針對不同目標對象調整語氣 (例如「技術」、「高階主管」、「輕鬆」)。
 
-在输入文本中明确定义所需的输出格式。
+在輸入文字中明確定義所需的輸出格式。
 
 ### Python
 
@@ -1127,6 +1642,46 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Research the competitive landscape of EV batteries.\n\n" +
+        "Format the output as a technical report with the following structure:\n" +
+        "1. Executive Summary\n" +
+        "2. Key Players (Must include a data table comparing capacity and chemistry)\n" +
+        "3. Supply Chain Risks"
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:      interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:      interactions.NewInteractionsInput(prompt),
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1140,9 +1695,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 多模态输入
+## 多模態輸入內容
 
-Deep Research 支持多模态输入，包括图片和文档 (PDF)，让智能体能够分析视觉内容并根据提供的输入进行情境化网络研究。
+Deep Research 支援多模態輸入內容，包括圖片和文件 (PDF)，可讓代理程式分析視覺內容，並根據提供的輸入內容進行網路研究。
 
 ### Python
 
@@ -1290,6 +1845,79 @@ while (true) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "time"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    prompt := "Analyze the interspecies dynamics and behavioral risks present " +
+        "in the provided image of the African watering hole. Specifically, investigate " +
+        "the symbiotic relationship between the avian species and the pachyderms " +
+        "shown, and conduct a risk assessment for the reticulated giraffes based on " +
+        "their drinking posture relative to the specific predator visible in the " +
+        "foreground."
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{Text: prompt}),
+                interactions.NewContent(interactions.ImageContent{
+                    MimeType: interactions.ImageContentMimeType("image/jpeg").ToPointer(),
+                    URI:      genai.Ptr("https://storage.googleapis.com/generativeai-downloads/images/generated_elephants_giraffes_zebras_sunset.jpg"),
+                }),
+            }),
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    interaction := res.Interaction
+    if interaction.ID != nil {
+        fmt.Printf("Research started: %s\n", *interaction.ID)
+    }
+
+    for {
+        getRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: *interaction.ID,
+        })
+        if err != nil {
+            log.Fatal(err)
+        }
+        interaction = getRes.Interaction
+        if interaction.Status == interactions.InteractionStatusCompleted {
+            if interaction.OutputText != nil {
+                fmt.Println(*interaction.OutputText)
+            }
+            break
+        } else if interaction.Status == interactions.InteractionStatusFailed {
+            fmt.Printf("Research failed: %v\n", interaction.Errors)
+            break
+        }
+        time.Sleep(10 * time.Second)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1311,10 +1939,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 文档理解
+### 文件解讀
 
-文档理解功能可让您直接将文档作为多模态输入传递。
-智能体分析提供的文档，并根据文档内容进行研究。
+文件解讀功能可直接將文件做為多模態輸入內容傳遞。代理程式會分析提供的文件，並根據文件內容進行研究。
 
 ### Python
 
@@ -1391,6 +2018,46 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent: interactions.AgentOption("deep-research-preview-04-2026"),
+            Input: interactions.NewInteractionsInput([]interactions.Content{
+                interactions.NewContent(interactions.TextContent{Text: "What is this document about?"}),
+                interactions.NewContent(interactions.DocumentContent{
+                    URI:      genai.Ptr("https://arxiv.org/pdf/1706.03762"),
+                    MimeType: interactions.DocumentContentMimeType("application/pdf").ToPointer(),
+                }),
+            }),
+            Background: genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1408,27 +2075,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 处理长时间运行的任务
+## 處理長時間執行的工作
 
-Deep Research 是一个多步骤流程，包括规划、搜索、阅读和撰写。此周期通常会超出同步 API 调用的标准超时限制。
+Deep Research 包含規劃、搜尋、閱讀和撰寫等多個步驟。這個週期通常會超過同步 API 呼叫的標準逾時限制。
 
-必须使用代理才能使用 `background=True`。该 API 会立即返回部分 `Interaction` 对象。您可以使用 `id` 属性检索用于轮询的互动。互动状态将从 `in_progress` 转换为 `completed` 或 `failed`。如需查看有关管理后台任务的全面指南，请参阅[后台执行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-cn)。
+服務專員必須使用 `background=True`。API 會立即傳回部分 `Interaction` 物件。您可以使用 `id` 屬性擷取輪詢的互動。互動狀態會從 `in_progress` 轉換為 `completed` 或 `failed`。如需管理背景工作的完整指南，請參閱「[背景執行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-tw)」。
 
-### 流式
+### 串流
 
-Deep Research 支持流式传输，可实时接收研究进度更新，包括思路总结、文本输出和生成的图片。您必须设置 `stream=True` 和 `background=True`。
+Deep Research 支援串流功能，可即時更新研究進度，包括想法摘要、文字輸出內容和生成的圖片。您必須設定 `stream=True` 和 `background=True`。
 
-如需接收中间推理步骤（想法）和进度更新，您必须通过在 `agent_config` 中将 `thinking_summaries` 设置为 `"auto"` 来启用**思考总结**。如果不设置此值，流可能只会提供最终结果。
+如要接收中介推論步驟 (想法) 和進度更新，請在 `agent_config` 中將 `thinking_summaries` 設為 `"auto"`，啟用**思考摘要**。否則串流可能只會提供最終結果。
 
-#### 数据流事件类型
+#### 串流事件類型
 
-| 事件类型 | 增量类型 | 说明 |
+| 事件類型 | 差異類型 | 說明 |
 | --- | --- | --- |
-| `step.delta` | `thought` | 智能体的中间推理步骤。 |
-| `step.delta` | `text` | 最终文本输出的一部分。 |
-| `step.delta` | `image` | 生成的图片（采用 base64 编码）。 |
+| `step.delta` | `thought` | 代理程式的中間推論步驟。 |
+| `step.delta` | `text` | 最終文字輸出內容的一部分。 |
+| `step.delta` | `image` | 生成的圖片 (Base64 編碼)。 |
 
-以下示例启动了一项研究任务，并处理了具有自动重新连接功能的流。它会跟踪 `interaction_id` 和 `last_event_id`，以便在连接断开（例如，在 600 秒超时后）时，可以从中断处继续。
+以下範例會啟動研究工作，並處理自動重新連線的串流。這項功能會追蹤 `interaction_id` 和 `last_event_id`，因此如果連線中斷 (例如在 600 秒逾時後)，可以從中斷處繼續。
 
 ### Python
 
@@ -1629,6 +2296,101 @@ while (!processor.isComplete && processor.interactionId != null) {
 }
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+    "google.golang.org/genai/interactions/types/stream"
+)
+
+type StreamProcessor struct {
+    interactionID string
+    lastEventID   *string
+    isComplete    bool
+}
+
+func (p *StreamProcessor) processStream(s *stream.EventStream[interactions.InteractionSSEStreamEvent]) {
+    defer s.Close()
+    for s.Next() {
+        event := s.Value()
+        if created := event.GetDataInteractionCreated(); created != nil {
+            p.interactionID = created.Interaction.ID
+            if created.EventID != nil {
+                p.lastEventID = created.EventID
+            }
+        } else if stepDelta := event.GetDataStepDelta(); stepDelta != nil {
+            if stepDelta.EventID != nil {
+                p.lastEventID = stepDelta.EventID
+            }
+            if textDelta := stepDelta.GetDeltaText(); textDelta != nil {
+                fmt.Print(textDelta.GetText())
+            } else if thoughtDelta := stepDelta.GetDeltaThoughtSummary(); thoughtDelta != nil {
+                if textContent := thoughtDelta.GetContentText(); textContent != nil {
+                    fmt.Printf("Thought: %s\n", textContent.GetText())
+                }
+            }
+        } else if event.GetDataInteractionCompleted() != nil || event.GetDataError() != nil {
+            p.isComplete = true
+        }
+    }
+}
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    processor := &StreamProcessor{}
+    agentCfg := interactions.NewCreateAgentInteractionAgentConfig(interactions.DeepResearchAgentConfig{
+        ThinkingSummaries: interactions.ThinkingSummariesAuto.ToPointer(),
+    })
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:       interactions.NewInteractionsInput("Research the history of Google TPUs."),
+            Background:  genai.Ptr(true),
+            Stream:      genai.Ptr(true),
+            AgentConfig: &agentCfg,
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    processor.processStream(res.InteractionSSEStreamEvent)
+
+    // Reconnect if the connection drops
+    for !processor.isComplete && processor.interactionID != "" {
+        statusRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID: processor.interactionID,
+        })
+        if err != nil || statusRes.Interaction.Status != interactions.InteractionStatusInProgress {
+            break
+        }
+        streamRes, err := client.Interactions.Get(ctx, operations.GetInteractionByIDRequest{
+            ID:          processor.interactionID,
+            Stream:      genai.Ptr(true),
+            LastEventID: processor.lastEventID,
+        })
+        if err != nil {
+            break
+        }
+        processor.processStream(streamRes.InteractionSSEStreamEvent)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1653,9 +2415,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 后续问题和互动
+## 後續問題和互動
 
-在代理返回最终报告后，您可以使用 `previous_interaction_id` 继续对话。这样，您就可以针对研究的特定部分请求澄清、总结或详细说明，而无需重新开始整个任务。
+代理傳回最終報告後，你可以使用 `previous_interaction_id` 繼續對話。這樣一來，您就能要求釐清、總結或詳細說明研究的特定部分，不必重新啟動整項工作。
 
 ### Python
 
@@ -1709,6 +2471,45 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
+            Model:                 interactions.Model("gemini-3.1-pro-preview"),
+            Input:                 interactions.NewInteractionsInput("Can you elaborate on the second point in the report?"),
+            PreviousInteractionID: genai.Ptr("COMPLETED_INTERACTION_ID"),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    if res.Interaction.OutputText != nil {
+        fmt.Println(*res.Interaction.OutputText)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1722,28 +2523,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 何时使用 Gemini Deep Research 智能体
+## Gemini Deep Research 代理程式的使用時機
 
-Deep Research 是一种**智能体**，而不仅仅是一种模型。它最适合需要“开箱即用的分析师”方法而非低延迟聊天的工作负载。
+Deep Research 是**代理**，而不只是模型。這項功能最適合需要「分析師即時服務」方法的工作負載，而非低延遲的即時通訊。
 
-| 功能 | 标准 Gemini 模型 | Gemini Deep Research 智能体 |
+| 功能 | 標準 Gemini 模型 | Gemini Deep Research 代理 |
 | --- | --- | --- |
-| **延迟时间** | 秒 | 分钟（异步/后台） |
-| **流程** | 生成 -> 输出 | 规划 -> 搜索 -> 阅读 -> 迭代 -> 输出 |
-| **输出** | 对话文本、代码、简短摘要 | 详细报告、长篇分析、比较表格 |
-| **适用场景** | 聊天机器人、提取、创意写作 | 市场分析、尽职调查、文献综述、竞争格局 |
+| **延遲** | 秒 | 分鐘 (非同步/背景) |
+| **流程** | 生成 -> 輸出內容 | 規劃 -> 搜尋 -> 閱讀 -> 疊代 -> 輸出 |
+| **輸出內容** | 對話文字、程式碼、簡短摘要 | 詳細報表、長篇分析、比較表 |
+| **最佳用途** | 聊天機器人、擷取、創意寫作 | 市場分析、盡職調查、文獻回顧、競爭環境 |
 
-## 代理配置
+## 代理程式設定
 
-Deep Research 使用 `agent_config` 参数来控制行为。
-以字典形式传递，其中包含以下字段：
+Deep Research 使用 `agent_config` 參數控制行為。以字典形式傳遞，並包含下列欄位：
 
-| 字段 | 类型 | 默认值 | 说明 |
+| 欄位 | 類型 | 預設 | 說明 |
 | --- | --- | --- | --- |
-| `type` | `string` | 必填 | 必须为 `"deep-research"`。 |
-| `thinking_summaries` | `string` | `"none"` | 设置为 `"auto"` 可在流式传输期间接收中间推理步骤。设置为 `"none"` 即可停用。 |
-| `visualization` | `string` | `"auto"` | 设置为 `"auto"` 可启用智能体生成的图表和图片。设置为 `"off"` 即可停用。 |
-| `collaborative_planning` | `boolean` | `false` | 设置为 `true` 可在研究开始前启用多轮计划审核。 |
+| `type` | `string` | 必填 | 必須為 `"deep-research"`。 |
+| `thinking_summaries` | `string` | `"none"` | 設為 `"auto"` 即可在串流期間接收中間推論步驟。如要停用，請設為 `"none"`。 |
+| `visualization` | `string` | `"auto"` | 設為 `"auto"` 即可啟用代理生成的圖表和圖片。如要停用，請設為 `"off"`。 |
+| `collaborative_planning` | `boolean` | `false` | 設為 `true`，即可在開始研究前啟用多輪計畫審查。 |
 
 ### Python
 
@@ -1812,6 +2612,47 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
+### Go
+
+```
+package main
+
+import (
+    "context"
+    "log"
+
+    "google.golang.org/genai"
+    "google.golang.org/genai/interactions/models/interactions"
+    "google.golang.org/genai/interactions/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    agentCfg := interactions.NewCreateAgentInteractionAgentConfig(interactions.DeepResearchAgentConfig{
+        ThinkingSummaries:     interactions.ThinkingSummariesAuto.ToPointer(),
+        Visualization:         interactions.VisualizationAuto.ToPointer(),
+        CollaborativePlanning: genai.Ptr(false),
+    })
+
+    _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
+        Body: operations.NewCreateInteractionRequestBody(interactions.CreateAgentInteraction{
+            Agent:       interactions.AgentOption("deep-research-preview-04-2026"),
+            Input:       interactions.NewInteractionsInput("Research the competitive landscape of cloud GPUs."),
+            AgentConfig: &agentCfg,
+            Background:  genai.Ptr(true),
+        }),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+}
+```
+
 ### REST
 
 ```
@@ -1831,57 +2672,58 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 适用范围和定价
+## 適用情形與定價
 
-您可以使用 Google AI Studio 和 Gemini API 中的 Interactions API 访问 Gemini Deep Research 智能体。
+您可以使用 Google AI Studio 和 Gemini API 中的 Interactions API，存取 Gemini Deep Research 代理程式。
 
-价格遵循[随用随付模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#pricing-for-agents)，具体取决于底层 Gemini 模型和智能体使用的特定工具。与标准聊天请求（一个请求对应一个输出）不同，深度研究任务是一种智能体工作流。只需一个请求，即可触发自主规划、搜索、阅读和推理循环。
+定價採用[即付即用模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#pricing-for-agents)，依據基礎 Gemini 模型和代理使用的特定工具計費。標準的聊天要求會產生一個輸出結果，但 Deep Research 工作是代理式工作流程。只要提出要求，系統就會自主規劃、搜尋、閱讀和推論。
 
-### 估算费用
+### 預估費用
 
-费用因所需研究的深度而异。智能体可自主确定需要阅读和搜索多少内容才能回答您的提示。
+費用會因所需研究的深度而異。代理會自主判斷回答提示詞需要多少閱讀和搜尋量。
 
-- **Deep Research** (`deep-research-preview-04-2026`)：对于需要中等程度分析的典型查询，该智能体可能会使用约 80 个搜索查询、约 25 万个输入 token（约 50-70% 为缓存 token）和约 6 万个输出 token。
-  - **估计总价**：每项任务约 1.00 美元至 3.00 美元
-- **Deep Research Max** (`deep-research-max-preview-04-2026`)：对于深入的竞争格局分析或广泛的尽职调查，智能体可能会使用多达约 160 次搜索查询、约 90 万个输入 token（约 50-70% 为缓存）和约 8 万个输出 token。
-  - **估计总价**：每项任务约 3.00 美元 - 7.00 美元
+- **Deep Research** (`deep-research-preview-04-2026`)：對於需要中等程度分析的典型查詢，代理程式可能會使用約 80 個搜尋查詢、約 25 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 6 萬個輸出權杖。
+  - **預估總金額：**每項工作約$1.00 美元至 $3.00 美元
+- **Deep Research Max** (`deep-research-max-preview-04-2026`)：如要深入分析競爭環境或進行詳盡的盡職調查，代理程式最多可能會使用約 160 個搜尋查詢、約 90 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 8 萬個輸出權杖。
+  - **預估總金額：**每項工作約$3.00 美元至 $7.00 美元
 
-## 安全注意事项
+## 安全考量
 
-让智能体访问网络和您的私密文件需要仔细考虑安全风险。
+授予代理程式網路和私人檔案的存取權時，請務必謹慎評估安全風險。
 
-- **使用文件进行提示注入**：代理会读取您提供的文件的内容。确保上传的文档（PDF、文本文件）来自可信来源。恶意文件可能包含旨在操纵代理输出的隐藏文字。
-- **网络内容风险**：智能体会在公开网络中搜索内容。虽然我们实现了强大的安全过滤功能，但代理仍有可能遇到并处理恶意网页。建议您查看回答中提供的 `citations`，以验证来源。
-- **数据渗出**：如果您还允许代理浏览网页，那么在要求代理总结敏感的内部数据时，请务必谨慎。
+- **使用檔案進行提示詞注入：**代理程式會讀取您提供的檔案內容。請確認上傳的文件 (PDF、文字檔) 來自可信來源。惡意檔案可能含有隱藏的文字，用於操縱代理程式的輸出內容。
+- **網路內容風險：**代理程式會搜尋公開網路，雖然我們導入了強大的安全篩選器，但代理程式仍可能遇到並處理惡意網頁。建議您查看回覆中`citations`提供的資訊
+  ，確認來源是否正確。
+- **資料外洩：**如果允許代理程式瀏覽網頁，要求代理程式摘要說明機密內部資料時，請務必謹慎。
 
 ## 最佳做法
 
-- **提示未知内容**：指示代理如何处理缺失的数据。
-  例如，在提示中添加*“如果无法提供 2025 年的具体数据，请明确说明这些数据是预测数据或无法提供，而不是进行估计”*。
-- **提供背景信息**：直接在输入提示中提供背景信息或限制条件，以便为代理的研究提供背景信息。
-- **使用协作规划**：对于复杂查询，请启用协作规划，以便在执行之前查看和优化研究计划。
-- **多模态输入**：Deep Research 智能体支持多模态输入。
-  请谨慎使用，因为这会增加费用并导致上下文窗口溢出风险。
+- **提示未知事項：**指示代理程式如何處理遺漏的資料。
+  舉例來說，在提示中加入「如果無法取得 2025 年的具體數據，請明確指出這些是預測或無法取得，而非估算」。
+- **提供脈絡：**直接在輸入提示中提供背景資訊或限制，做為代理程式研究的基準。
+- **使用協作規劃功能：**對於複雜的查詢，請啟用協作規劃功能，以便在執行前查看及修正研究計畫。
+- **多模態輸入內容：**Deep Research 代理支援多模態輸入內容。
+  請謹慎使用，因為這會增加成本，並可能導致脈絡窗口溢位。
 
 ## 限制
 
-- **自定义工具**：目前，您无法提供自定义的函数调用工具，但可以将远程 MCP（模型上下文协议）服务器与深度研究智能体搭配使用。
-- **结构化输出**：Deep Research 智能体目前不支持结构化输出。
-- **最长研究时间**：Deep Research 智能体的最长研究时间为 60 分钟。大多数任务应该会在 20 分钟内完成。
-- **商店要求**：使用 `background=True` 执行代理需要 `store=True`。
-- **Google 搜索**： [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)默认处于启用状态，并且[特定限制](https://ai.google.dev/gemini-api/terms?hl=zh-cn#use-restrictions2)适用于接地结果。
+- **自訂工具：**目前無法提供自訂函式呼叫工具，但您可以搭配 Deep Research 代理使用遠端 MCP (Model Context Protocol) 伺服器。
+- **結構化輸出內容：**Deep Research 代理程式目前不支援結構化輸出內容。
+- **研究時間上限：**Deep Research 代理的研究時間上限為 60 分鐘。大多數工作應會在 20 分鐘內完成。
+- **商店規定：**使用 `background=True` 執行代理程式時，必須提供 `store=True`。
+- **Google 搜尋：** [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)預設為啟用，且[特定限制](https://ai.google.dev/gemini-api/terms?hl=zh-tw#use-restrictions2)適用於有依據的結果。
 
-## 后续步骤
+## 後續步驟
 
-- 详细了解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)。
-- 了解如何使用[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)工具来使用您自己的数据。
+- 進一步瞭解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)。
+- 瞭解如何使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，存取自己的資料。
 
-发送反馈
+提供意見
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最后更新时间 (UTC)：2026-09-18。
+上次更新時間：2026-09-24 (世界標準時間)。
 
-需要向我们提供更多信息？
+想進一步說明嗎？
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-18。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]

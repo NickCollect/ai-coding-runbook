@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=th
-fetched_at: 2026-09-21T05:44:15.048923+00:00
+fetched_at: 2026-09-28T06:33:25.653486+00:00
 title: "\u0e01\u0e32\u0e23\u0e43\u0e2b\u0e49\u0e40\u0e2b\u0e15\u0e38\u0e1c\u0e25\u0e40\u0e0a\u0e34\u0e07\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

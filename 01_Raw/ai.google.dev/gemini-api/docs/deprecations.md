@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=pl
-fetched_at: 2026-09-21T05:57:42.796499+00:00
+fetched_at: 2026-09-28T06:14:46.451812+00:00
 title: "Wycofanie Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -27,6 +27,8 @@ Modele, które zostały już wyłączone, są oznaczone szarym tłem.
 
 | **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
+| `gemini-3.8-flash-tts` | 22 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
+| `gemini-3.8-flash-lite-tts` | 22 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
 | `gemini-3.8-live` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
 | `gemini-3.8-live-extended-thinking` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
 | `gemini-3.8-flash` | 2 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
@@ -38,6 +40,7 @@ Modele, które zostały już wyłączone, są oznaczone szarym tłem.
 | `gemini-3-pro-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
 | `gemini-3.1-flash-lite` | 7 maja 2026 r. | 7 maja 2027 r. | `gemini-3.5-flash-lite` |
 | Podgląd modeli | | | |
+| `gemini-3.1-flash-tts-preview` | 26 lutego 2026 r. | Nie ogłoszono daty wyłączenia | `gemini-3.8-flash-tts` lub `gemini-3.8-flash-lite-tts` |
 | `gemini-3.1-flash-image-preview` | 26 lutego 2026 r. | 25 czerwca 2026 r. | `gemini-3.1-flash-image` |
 | `gemini-3.1-pro-preview` | 19 lutego 2026 r. | Nie ogłoszono daty wyłączenia |  |
 | `gemini-3-pro-image-preview` | 20 listopada 2025 r. | 25 czerwca 2026 r. | `gemini-3-pro-image` |
@@ -81,7 +84,7 @@ Modele, które zostały już wyłączone, są oznaczone szarym tłem.
 | `gemini-2.0-flash-lite-preview` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
 | `gemini-2.0-flash-lite-preview-02-05` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
 
-## Modele interfejsu Live API
+## Modele Live API
 
 | **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
 | --- | --- | --- | --- |
@@ -101,9 +104,8 @@ Modele, które zostały już wyłączone, są oznaczone szarym tłem.
 | --- | --- | --- | --- |
 | `gemini-3.5-transcribe` | Sierpień 2026 r. | Nie ogłoszono daty wyłączenia |  |
 | Podgląd modeli | | | |
-| `gemini-3.1-flash-tts-preview` | 13 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.5-flash-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-tts-preview` |
-| `gemini-2.5-pro-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.1-flash-tts-preview` |
+| `gemini-2.5-flash-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.8-flash-tts` lub `gemini-3.8-flash-lite-tts` |
+| `gemini-2.5-pro-preview-tts` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.8-flash-tts` lub `gemini-3.8-flash-lite-tts` |
 
 ## Modele wektorów dystrybucyjnych
 
@@ -183,8 +185,8 @@ Prześlij opinię
 
 O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Ostatnia aktualizacja: 2026-09-18 UTC.
+Ostatnia aktualizacja: 2026-09-24 UTC.
 
 Chcesz przekazać coś jeszcze?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-18 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-24 UTC."],[],[]]
