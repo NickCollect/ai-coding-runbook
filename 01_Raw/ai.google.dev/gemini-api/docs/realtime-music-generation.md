@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=hi
-fetched_at: 2026-09-28T06:31:54.573236+00:00
-title: "Lyria RealTime \u0915\u093e \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u0930\u0915\u0947, \u0930\u0940\u092f\u0932-\u091f\u093e\u0907\u092e \u092e\u0947\u0902 \u0938\u0902\u0917\u0940\u0924 \u091c\u0928\u0930\u0947\u091f \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr
+fetched_at: 2026-10-05T06:42:02.091704+00:00
+title: "Lyria RealTime ile an\u0131nda m\u00fczik \u00fcretme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-# Lyria RealTime का इस्तेमाल करके, रीयल-टाइम में संगीत जनरेट करना
+# Lyria RealTime ile anında müzik üretme
 
-Gemini API, [Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=hi) का इस्तेमाल करके, रीयल-टाइम में संगीत जनरेट करने वाले बेहतरीन मॉडल का ऐक्सेस देता है. इससे डेवलपर ऐसे ऐप्लिकेशन बना सकते हैं जिनमें उपयोगकर्ता, इंटरैक्टिव तरीके से संगीत बना सकते हैं, उसे लगातार चला सकते हैं, और वाद्य संगीत बना सकते हैं.
+[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=tr)'ı kullanan Gemini API, son teknoloji ürünü, gerçek zamanlı ve akışlı bir müzik üretme modeline erişim sağlar. Bu API, geliştiricilerin kullanıcıların etkileşimli olarak oluşturabileceği, sürekli yönlendirebileceği ve enstrümantal müzik yapabileceği uygulamalar geliştirmesine olanak tanır.
 
-Lyria RealTime की मदद से रीयल-टाइम में संगीत जनरेट करने की सुविधा का इस्तेमाल करने के लिए, लगातार काम करने वाले, दोनों दिशाओं में डेटा ट्रांसफ़र करने वाले, और कम इंतज़ार के समय वाले स्ट्रीमिंग कनेक्शन का इस्तेमाल किया जाता है. इसके लिए, [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) का इस्तेमाल किया जाता है.
+Lyria RealTime müzik üretimi, [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) kullanılarak kalıcı, çift yönlü ve düşük gecikmeli bir akış bağlantısı kullanır.
 
-Lyria RealTime का इस्तेमाल करके क्या-क्या बनाया जा सकता है, यह जानने के लिए इसे AI Studio पर आज़माएं. इसके लिए, [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=hi) या [MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=hi) ऐप्लिकेशन का इस्तेमाल करें.
+Lyria RealTime ile neler yapılabileceğini deneyimlemek için AI Studio'da [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=tr) veya [MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=tr) uygulamalarını kullanarak deneyin.
 
-## संगीत जनरेट करना और उसे कंट्रोल करना
+## Müzik üretme ve müziği kontrol etme
 
-Lyria RealTime, [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi) की तरह ही काम करता है. यह मॉडल के साथ रीयल-टाइम कम्यूनिकेशन बनाए रखने के लिए, Websockets का इस्तेमाल करता है.
+Lyria RealTime, modelle anlık iletişimi sürdürmek için Websocket'leri kullanması açısından [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'ye benzer şekilde çalışır.
 
-नीचे दिए गए कोड में, संगीत जनरेट करने का तरीका बताया गया है:
+Aşağıdaki kodda nasıl müzik oluşturulacağı gösterilmektedir:
 
 ### Python
 
-इस उदाहरण में, `client.aio.live.music.connect()` का इस्तेमाल करके Lyria RealTime सेशन को शुरू किया गया है. इसके बाद, `session.set_weighted_prompts()` का इस्तेमाल करके शुरुआती प्रॉम्प्ट भेजा गया है. साथ ही, `session.set_music_generation_config` का इस्तेमाल करके शुरुआती कॉन्फ़िगरेशन भेजा गया है. इसके बाद, `session.play()` का इस्तेमाल करके संगीत जनरेट करने की प्रोसेस शुरू की गई है. साथ ही, `receive_audio()` को सेट अप किया गया है, ताकि यह मिले हुए ऑडियो चंक को प्रोसेस कर सके.
+Bu örnekte, `client.aio.live.music.connect()` kullanılarak Lyria RealTime oturumu başlatılıyor, ardından `session.set_weighted_prompts()` ile ilk istem ve `session.set_music_generation_config` ile ilk yapılandırma gönderiliyor, `session.play()` kullanılarak müzik üretimi başlatılıyor ve `receive_audio()`, aldığı ses parçalarını işleyecek şekilde ayarlanıyor.
 
 ```
   import asyncio
@@ -75,7 +75,7 @@ Lyria RealTime, [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)
 
 ### JavaScript
 
-इस उदाहरण में, `client.live.music.connect()` का इस्तेमाल करके Lyria RealTime सेशन शुरू किया गया है. इसके बाद, `session.setWeightedPrompts()` के साथ शुरुआती प्रॉम्प्ट भेजा गया है. साथ ही, `session.setMusicGenerationConfig` का इस्तेमाल करके शुरुआती कॉन्फ़िगरेशन सेट अप किया गया है. इसके बाद, `session.play()` का इस्तेमाल करके संगीत जनरेट करने की सुविधा शुरू की गई है. साथ ही, `onMessage` कॉलबैक सेट अप किया गया है, ताकि मिले हुए ऑडियो चंक को प्रोसेस किया जा सके.
+Bu örnekte, `client.live.music.connect()` kullanılarak Lyria RealTime oturumu başlatılıyor, ardından `session.setWeightedPrompts()` ile ilk istem ve `session.setMusicGenerationConfig` kullanılarak ilk yapılandırma gönderiliyor, `session.play()` kullanılarak müzik oluşturma işlemi başlatılıyor ve alınan ses parçalarını işlemek için `onMessage` geri çağırma işlevi ayarlanıyor.
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -131,17 +131,18 @@ async function main() {
 main().catch(console.error);
 ```
 
-इसके बाद, सेशन को शुरू करने, रोकने, बंद करने या रीसेट करने के लिए, `session.play()`, `session.pause()`, `session.stop()`, और `session.reset_context()` का इस्तेमाल किया जा सकता है.
+Ardından oturumu başlatmak, duraklatmak, durdurmak veya sıfırlamak için `session.play()`, `session.pause()`, `session.stop()` ve `session.reset_context()` simgelerini kullanabilirsiniz.
 
-## रीयल-टाइम में संगीत को कंट्रोल करना
+## Müziği anlık olarak yönlendirme
 
-रीयल-टाइम में संगीत जनरेट करने के लिए, प्रॉम्प्ट भेजे जा सकते हैं. साथ ही, जनरेशन पैरामीटर को रीयल टाइम में अपडेट किया जा सकता है.
+İstem göndererek ve üretim parametrelerini anlık olarak güncelleyerek müzik üretimini anlık olarak yönlendirebilirsiniz.
 
-### Lyria RealTime को प्रॉम्प्ट करना
+### Prompt Lyria RealTime
 
-स्ट्रीम चालू रहने के दौरान, जनरेट किए गए संगीत में बदलाव करने के लिए, किसी भी समय नए `WeightedPrompt` मैसेज भेजे जा सकते हैं. नया इनपुट मिलने पर, मॉडल आसानी से ट्रांज़िशन कर लेगा.
+Yayın etkin durumdayken, oluşturulan müziği değiştirmek için istediğiniz zaman yeni `WeightedPrompt` mesajları gönderebilirsiniz. Model, yeni girişe göre sorunsuz bir şekilde geçiş yapar.
 
-प्रॉम्प्ट सही फ़ॉर्मैट में होने चाहिए. इनमें `text` (असल प्रॉम्प्ट) और `weight` शामिल होना चाहिए. `weight` में `0` को छोड़कर कोई भी वैल्यू हो सकती है. `1.0`से शुरुआत करना आम तौर पर अच्छा होता है.
+İstemler, `text` (asıl istem) ve `weight` ile doğru biçimde olmalıdır. `weight`, `0` hariç herhangi bir değeri alabilir. `1.0`
+genellikle iyi bir başlangıç noktasıdır.
 
 ### Python
 
@@ -168,13 +169,13 @@ main().catch(console.error);
   });
 ```
 
-ध्यान दें कि प्रॉम्प्ट में अचानक बदलाव करने पर, मॉडल ट्रांज़िशन में कुछ समय लग सकता है. इसलिए, हमारा सुझाव है कि मॉडल को इंटरमीडिएट वेट वैल्यू भेजकर, किसी तरह का क्रॉस-फ़ेडिंग लागू करें.
+İstemler önemli ölçüde değiştirildiğinde model geçişlerinin biraz ani olabileceğini unutmayın. Bu nedenle, modele ara ağırlık değerleri göndererek bir tür çapraz geçiş uygulamanız önerilir.
 
-### कॉन्फ़िगरेशन अपडेट करना
+### Yapılandırmayı güncelleme
 
-रीयल टाइम में संगीत जनरेट करने की सुविधा के पैरामीटर अपडेट करके, संगीत जनरेट करने की प्रोसेस को कंट्रोल किया जा सकता है. सिर्फ़ किसी पैरामीटर को अपडेट नहीं किया जा सकता. आपको पूरा कॉन्फ़िगरेशन सेट करना होगा. ऐसा न करने पर, अन्य फ़ील्ड की वैल्यू वापस डिफ़ॉल्ट वैल्यू पर रीसेट हो जाएंगी.
+Müzik üretme parametrelerini anında güncelleyerek müzik üretme sürecini yönlendirebilirsiniz. Yalnızca bir parametreyi güncelleyemezsiniz. Diğer alanların varsayılan değerlerine sıfırlanmaması için yapılandırmanın tamamını ayarlamanız gerekir.
 
-बीपीएम या स्केल को अपडेट करने से, मॉडल में काफ़ी बदलाव होता है. इसलिए, आपको मॉडल को यह भी बताना होगा कि वह `reset_context()` का इस्तेमाल करके अपने कॉन्टेक्स्ट को रीसेट करे, ताकि वह नई कॉन्फ़िगरेशन को ध्यान में रख सके. इससे स्ट्रीम बंद नहीं होगी, लेकिन यह एक मुश्किल ट्रांज़िशन होगा. आपको अन्य पैरामीटर के लिए ऐसा करने की ज़रूरत नहीं है.
+BPM'yi veya ölçeği güncellemek model için önemli bir değişiklik olduğundan, yeni yapılandırmayı dikkate alması için `reset_context()` kullanarak bağlamını sıfırlamasını da söylemeniz gerekir. Bu işlem yayını durdurmaz ancak geçiş zor olur. Diğer parametreler için bu işlemi yapmanız gerekmez.
 
 ### Python
 
@@ -204,103 +205,103 @@ main().catch(console.error);
   await session.reset_context();
 ```
 
-## Lyria RealTime को प्रॉम्प्ट करना
+## Lyria RealTime'ı isteme
 
-Lyria RealTime, म्यूज़िकल जॉनर, इंस्ट्रूमेंट, और मूड को डाइनैमिक तरीके से मिक्स करने के लिए, वेटेज वाले प्रॉम्प्ट का इस्तेमाल करता है. प्रॉम्प्ट स्टीयरिंग की रणनीतियों, कीवर्ड टैग की शब्दावलियों, और प्रॉम्प्ट के पूरे उदाहरणों के बारे में जानने के लिए, [Lyria की प्रॉम्प्ट के लिए गाइड](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=hi#realtime-prompting) देखें.
+Lyria RealTime, müzik türlerini, enstrümanları ve ruh hallerini dinamik olarak harmanlamak için ağırlıklı istemler kullanır. İstem yönlendirme stratejilerini, anahtar kelime etiketi sözlüklerini ve tam istem örneklerini incelemek için [Lyria istem kılavuzuna](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=tr#realtime-prompting) bakın.
 
-## सबसे सही तरीके
+## En iyi uygulamalar
 
-- क्लाइंट ऐप्लिकेशन में, ऑडियो बफ़रिंग की मज़बूत सुविधा लागू होनी चाहिए, ताकि ऑडियो को बिना किसी रुकावट के चलाया जा सके. इससे नेटवर्क जिटर और जनरेशन में लगने वाले समय में मामूली अंतर का पता लगाने में मदद मिलती है.
-- असरदार प्रॉम्प्ट लिखना:
-  - ब्यौरा दें. मूड, शैली, और इंस्ट्रुमेंट के बारे में बताने वाले विशेषणों का इस्तेमाल करें.
-  - धीरे-धीरे बदलाव करें और आगे बढ़ें. प्रॉम्प्ट को पूरी तरह से बदलने के बजाय, संगीत को ज़्यादा आसानी से बदलने के लिए, उसमें एलिमेंट जोड़ें या उनमें बदलाव करें.
-  - `WeightedPrompt` पर वेट के साथ एक्सपेरिमेंट करें, ताकि यह तय किया जा सके कि नया प्रॉम्प्ट, मौजूदा जनरेशन पर कितना असर डालेगा.
+- İstemci uygulamaları, sorunsuz oynatma sağlamak için güçlü bir ses arabelleği oluşturma özelliği uygulamalıdır. Bu, ağ titremesini ve oluşturma gecikmesindeki küçük farklılıkları hesaba katmaya yardımcı olur.
+- Etkili istemler:
+  - Açıklayıcı olun. Ruh halini, türü ve enstrümanları açıklayan sıfatlar kullanın.
+  - İterasyon yapın ve yavaş yavaş yönlendirin. İstemi tamamen değiştirmek yerine, müziği daha sorunsuz bir şekilde dönüştürmek için öğeler eklemeyi veya değiştirmeyi deneyin.
+  - Yeni bir istemin devam eden üretimi ne kadar etkileyeceğini belirlemek için `WeightedPrompt` ağırlığıyla denemeler yapın.
 
-## तकनीकी जानकारी
+## Teknik ayrıntılar
 
-इस सेक्शन में, Lyria RealTime की संगीत जनरेट करने की सुविधा को इस्तेमाल करने के बारे में खास जानकारी दी गई है.
+Bu bölümde, Lyria RealTime müzik üretme özelliğinin nasıl kullanılacağıyla ilgili ayrıntılar açıklanmaktadır.
 
-### विशेषताएं
+### Teknik Özellikler
 
-- आउटपुट फ़ॉर्मैट: रॉ 16-बिट पीसीएम ऑडियो
-- सैंपल रेट: 48 किलोहर्ट्ज़
-- चैनल: 2 (स्टीरियो)
+- Çıkış biçimi: Ham 16 bit PCM Ses
+- Örnek hızı: 48 kHz
+- Kanallar: 2 (stereo)
 
-### कंट्रोल
+### Denetimler
 
-संगीत जनरेट करने की सुविधा पर, रीयल टाइम में असर डाला जा सकता है. इसके लिए, ऐसे मैसेज भेजें जिनमें ये शामिल हों:
+Müzik üretimi, aşağıdakileri içeren mesajlar gönderilerek anlık olarak etkilenebilir:
 
-- `WeightedPrompt`: यह एक टेक्स्ट स्ट्रिंग होती है. इसमें संगीत के आइडिया, शैली, वाद्य यंत्र, मूड या विशेषता के बारे में बताया जाता है. अलग-अलग स्टाइल को मिक्स करने के लिए, एक से ज़्यादा प्रॉम्प्ट दिए जा सकते हैं. Lyria RealTime को बेहतर तरीके से प्रॉम्प्ट करने के बारे में ज़्यादा जानने के लिए, [ऊपर](#steer-music) देखें.
-- `MusicGenerationConfig`: संगीत जनरेट करने की प्रोसेस के लिए कॉन्फ़िगरेशन. इससे आउटपुट ऑडियो की विशेषताओं पर असर पड़ता है. पैरामीटर
-  include:
-  - `guidance`: (फ़्लोट) रेंज: `[0.0, 6.0]`. डिफ़ॉल्ट: `4.0`.
-    इससे यह कंट्रोल किया जाता है कि मॉडल, प्रॉम्प्ट का कितनी सख्ती से पालन करे. ज़्यादा गाइडेंस से, प्रॉम्प्ट के हिसाब से वीडियो बनाने में मदद मिलती है. हालांकि, इससे वीडियो के ट्रांज़िशन अचानक होते हैं.
-  - `bpm`: (int) रेंज: `[60, 200]`.
-    इससे जनरेट किए गए संगीत के लिए, बीट प्रति मिनट की संख्या सेट की जाती है. आपको मॉडल के कॉन्टेक्स्ट को रोकना/चलाना या रीसेट करना होगा, ताकि वह नए बीपीएम को ध्यान में रख सके.
-  - `density`: (फ़्लोट) रेंज: `[0.0, 1.0]`.
-    इससे म्यूज़िकल नोट/आवाज़ की डेंसिटी को कंट्रोल किया जाता है. कम वैल्यू से, कम म्यूज़िक जनरेट होता है. वहीं, ज़्यादा वैल्यू से "ज़्यादा" म्यूज़िक जनरेट होता है.
-  - `brightness`: (फ़्लोट) रेंज: `[0.0, 1.0]`.
-    इससे टोनल क्वालिटी को अडजस्ट किया जाता है. ज़्यादा वैल्यू से, ऑडियो "ज़्यादा चमकदार" लगता है. इससे आम तौर पर, ज़्यादा फ़्रीक्वेंसी पर ज़ोर दिया जाता है.
+- `WeightedPrompt`: Müzikal bir fikri, türü, enstrümanı, ruh halini veya özelliği açıklayan bir metin dizesi. Etkileri karıştırmak için birden fazla istem sağlanabilir. Lyria RealTime'ı en iyi şekilde isteme hakkında daha fazla bilgi için [yukarıdaki](#steer-music) bölüme bakın.
+- `MusicGenerationConfig`: Müzik üretme sürecinin yapılandırması (çıktı sesinin özelliklerini etkiler). Parametreler
+  şunları içerir:
+  - `guidance`: (kayan nokta) Aralık: `[0.0, 6.0]`. Varsayılan: `4.0`.
+    Modelin istemlere ne kadar sıkı uyacağını kontrol eder. Daha yüksek yönlendirme, isteme uyumu artırır ancak geçişleri daha ani hale getirir.
+  - `bpm`: (int) Aralık: `[60, 200]`.
+    Oluşturulan müzik için istediğiniz dakikadaki vuruş sayısını ayarlar. Yeni BPM'yi dikkate alması için modeli durdurmanız/oynatmanız veya bağlamı sıfırlamanız gerekir.
+  - `density`: (kayan nokta) Aralık: `[0.0, 1.0]`.
+    Müzik notalarının/seslerin yoğunluğunu kontrol eder. Düşük değerler daha seyrek müzikler üretir. Yüksek değerler ise daha "yoğun" müzikler üretir.
+  - `brightness`: (kayan nokta) Aralık: `[0.0, 1.0]`.
+    Ton kalitesini ayarlar. Daha yüksek değerler, genellikle daha yüksek frekansları vurgulayan "daha parlak" sesler üretir.
   - `scale`: (Enum)
-    इससे जनरेट किए जाने वाले संगीत का स्केल (की और मोड) सेट किया जाता है. SDK टूल की ओर से दी गई [`Scale` enum वैल्यू](#scale-enum) का इस्तेमाल करें. आपको मॉडल के लिए कॉन्टेक्स्ट को रोकना/चलाना या रीसेट करना होगा, ताकि वह नए स्केल को ध्यान में रख सके.
-  - `mute_bass`: (bool) डिफ़ॉल्ट: `False`.
-    इससे यह कंट्रोल किया जाता है कि मॉडल, आउटपुट के बेस को कम करे या नहीं.
-  - `mute_drums`: (bool) डिफ़ॉल्ट: `False`.
-    इस विकल्प से यह कंट्रोल किया जाता है कि मॉडल के आउटपुट में ड्रम की आवाज़ कम हो.
-  - `only_bass_and_drums`: (bool) डिफ़ॉल्ट: `False`.
-    मॉडल को सिर्फ़ बास और ड्रम का आउटपुट देने के लिए निर्देश दें.
+    Üretim için müzik ölçeğini (anahtar ve mod) ayarlar. SDK tarafından sağlanan [`Scale` enum değerlerini](#scale-enum) kullanın. Modelin yeni ölçeği dikkate alması için bağlamı durdurmanız/oynatmanız veya sıfırlamanız gerekir.
+  - `mute_bass`: (bool) Varsayılan: `False`.
+    Modelin çıkışlardaki bası azaltıp azaltmayacağını kontrol eder.
+  - `mute_drums`: (bool) Varsayılan: `False`.
+    Model çıktısının, çıkışlardaki davul sesini azaltıp azaltmayacağını kontrol eder.
+  - `only_bass_and_drums`: (bool) Varsayılan: `False`.
+    Modeli yalnızca bas ve davul sesleri çıkaracak şekilde yönlendirin.
   - `music_generation_mode`: (Enum)
-    इससे मॉडल को यह पता चलता है कि उसे संगीत के `QUALITY` (डिफ़ॉल्ट वैल्यू) या `DIVERSITY` पर फ़ोकस करना चाहिए. इसे `VOCALIZATION` पर भी सेट किया जा सकता है, ताकि मॉडल किसी दूसरे इंस्ट्रुमेंट के तौर पर आवाज़ें जनरेट कर सके. इसके लिए, उन्हें नए प्रॉम्प्ट के तौर पर जोड़ें.
-- `PlaybackControl`: प्लेबैक को कंट्रोल करने के लिए निर्देश. जैसे, चलाना, रोकना, बंद करना या कॉन्टेक्स्ट रीसेट करना.
+    Modele, müziğin `QUALITY` (varsayılan değer) veya `DIVERSITY` kısmına odaklanıp odaklanmaması gerektiğini belirtir. Ayrıca, modelin başka bir enstrüman olarak seslendirme oluşturmasına (yeni istemler olarak ekleme) izin vermek için `VOCALIZATION` olarak da ayarlanabilir.
+- `PlaybackControl`: Oynatma, duraklatma, durdurma veya bağlamı sıfırlama gibi oynatma özelliklerini kontrol etme komutları.
 
-`bpm`, `density`, `brightness`, और `scale` के लिए, अगर कोई वैल्यू नहीं दी जाती है, तो मॉडल आपके शुरुआती प्रॉम्प्ट के हिसाब से सबसे सही वैल्यू तय करेगा.
+`bpm`, `density`, `brightness` ve `scale` için değer sağlanmazsa model, ilk istemlerinize göre en iyi seçeneğe karar verir.
 
-`MusicGenerationConfig` में, ज़्यादा क्लासिकल पैरामीटर भी पसंद के मुताबिक बनाए जा सकते हैं. जैसे, `temperature` (0.0 से 3.0, डिफ़ॉल्ट 1.1), `top_k` (1 से 1000, डिफ़ॉल्ट 40), और `seed` (0 से 2,147,483,647, डिफ़ॉल्ट रूप से रैंडम तरीके से चुना जाता है).
+`temperature` (0,0-3,0, varsayılan 1,1), `top_k` (1-1000, varsayılan 40) ve `seed` (0-2.147.483.647, varsayılan olarak rastgele seçilir) gibi daha klasik parametreler de `MusicGenerationConfig` içinde özelleştirilebilir.
 
-#### स्केल Enum वैल्यू
+#### Ölçek Enum Değerleri
 
-यहां स्केल की वे सभी वैल्यू दी गई हैं जिन्हें मॉडल स्वीकार कर सकता है:
+Modelin kabul edebileceği tüm ölçek değerleri şunlardır:
 
-| Enum वैल्यू | स्केल / कुंजी |
+| Enum Değeri | Ölçek / Anahtar |
 | --- | --- |
-| `C_MAJOR_A_MINOR` | सी मेजर / ए माइनर |
-| `D_FLAT_MAJOR_B_FLAT_MINOR` | D♭ मेजर / B♭ माइनर |
-| `D_MAJOR_B_MINOR` | डी मेजर / बी माइनर |
-| `E_FLAT_MAJOR_C_MINOR` | E♭ मेजर / C माइनर |
-| `E_MAJOR_D_FLAT_MINOR` | E major / C♯/D♭ minor |
-| `F_MAJOR_D_MINOR` | एफ़ मेजर / डी माइनर |
-| `G_FLAT_MAJOR_E_FLAT_MINOR` | G♭ मेजर / E♭ माइनर |
-| `G_MAJOR_E_MINOR` | जी मेजर / ई माइनर |
-| `A_FLAT_MAJOR_F_MINOR` | A♭ मेजर / F माइनर |
-| `A_MAJOR_G_FLAT_MINOR` | ए मेजर / एफ़♯/जी♭ माइनर |
-| `B_FLAT_MAJOR_G_MINOR` | B♭ मेजर / G माइनर |
-| `B_MAJOR_A_FLAT_MINOR` | B मेजर / G♯/A♭ माइनर |
-| `SCALE_UNSPECIFIED` | डिफ़ॉल्ट / मॉडल तय करता है |
+| `C_MAJOR_A_MINOR` | Do majör / La minör |
+| `D_FLAT_MAJOR_B_FLAT_MINOR` | Re bemol majör / Si bemol minör |
+| `D_MAJOR_B_MINOR` | D major / B minor |
+| `E_FLAT_MAJOR_C_MINOR` | Mi bemol majör / Do minör |
+| `E_MAJOR_D_FLAT_MINOR` | Mi majör / Do diyez/Re bemol minör |
+| `F_MAJOR_D_MINOR` | F majör / D minör |
+| `G_FLAT_MAJOR_E_FLAT_MINOR` | Sol Bemol majör / Mi Bemol minör |
+| `G_MAJOR_E_MINOR` | Sol majör / Mi minör |
+| `A_FLAT_MAJOR_F_MINOR` | La bemol majör / Fa minör |
+| `A_MAJOR_G_FLAT_MINOR` | La majör / Fa diyez/Sol bemol minör |
+| `B_FLAT_MAJOR_G_MINOR` | Si bemol majör / Sol minör |
+| `B_MAJOR_A_FLAT_MINOR` | Si majör / Sol diyez/La bemol minör |
+| `SCALE_UNSPECIFIED` | Varsayılan / Model karar verir |
 
-यह मॉडल, बजाए जाने वाले नोट के बारे में जानकारी दे सकता है. हालांकि, यह रिलेटिव की के बीच अंतर नहीं कर सकता. इसलिए, हर enum, रिलेटिव मेजर और माइनर, दोनों से मेल खाता है. उदाहरण के लिए, `C_MAJOR_A_MINOR` पियानो की सभी सफ़ेद कुंजियों के बराबर होगा. वहीं, `F_MAJOR_D_MINOR` बी फ़्लैट को छोड़कर, सभी सफ़ेद कुंजियों के बराबर होगा.
+Model, çalınan notalara rehberlik edebilir ancak göreceli tuşlar arasında ayrım yapmaz. Bu nedenle her enum hem göreceli majör hem de minöre karşılık gelir. Örneğin, `C_MAJOR_A_MINOR`, piyanodaki tüm beyaz tuşlara, `F_MAJOR_D_MINOR` ise si bemol dışındaki tüm beyaz tuşlara karşılık gelir.
 
-### सीमाएं
+### Sınırlamalar
 
-- सिर्फ़ इंस्ट्रुमेंटल संगीत: मॉडल सिर्फ़ इंस्ट्रुमेंटल संगीत जनरेट करता है.
-- सुरक्षा: प्रॉम्प्ट की जांच, सुरक्षा फ़िल्टर करते हैं. फ़िल्टर को ट्रिगर करने वाले प्रॉम्प्ट को अनदेखा कर दिया जाएगा. ऐसे मामले में, आउटपुट के `filtered_prompt` फ़ील्ड में इसकी वजह बताई जाएगी.
-- वॉटरमार्किंग: आउटपुट ऑडियो में हमेशा वॉटरमार्क लगाया जाता है, ताकि उसकी पहचान की जा सके. ऐसा [ज़िम्मेदारी के साथ एआई का इस्तेमाल करने](https://ai.google/responsibility/principles/?hl=hi) से जुड़े हमारे सिद्धांतों के तहत किया जाता है.
+- Yalnızca enstrümantal: Model yalnızca enstrümantal müzik üretir.
+- Güvenlik: İstemler, güvenlik filtreleriyle kontrol edilir. Filtreleri tetikleyen istemler yoksayılır. Bu durumda, çıkışın `filtered_prompt` alanına bir açıklama yazılır.
+- Filigran ekleme: Çıkış sesi, [Sorumlu Yapay Zeka](https://ai.google/responsibility/principles/?hl=tr) ilkelerimize uygun olarak tanımlama için her zaman filigranlıdır.
 
-## आगे क्या करना है
+## Sırada ne var?
 
-- [Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi) की मदद से पूरे गाने और वोकल ट्रैक जनरेट करें,
-- संगीत के बजाय, [टीटीएस मॉडल](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi) का इस्तेमाल करके, एक से ज़्यादा स्पीकर की आवाज़ में बातचीत जनरेट करने का तरीका जानें,
-- [इमेज](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) या [वीडियो](https://ai.google.dev/gemini-api/docs/video?hl=hi) जनरेट करने का तरीका जानें,
-- संगीत या ऑडियो जनरेट करने के बजाय, जानें कि Gemini [ऑडियो फ़ाइलों को कैसे समझ सकता है](https://ai.google.dev/gemini-api/docs/audio?hl=hi),
-- [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi) का इस्तेमाल करके, Gemini के साथ रीयल-टाइम में बातचीत करें.
+- [Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) ile eksiksiz şarkılar ve vokal parçaları üretin.
+- Müzik yerine, [TTS modellerini](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) kullanarak birden fazla konuşmacının yer aldığı sohbetler oluşturmayı öğrenin.
+- [Resim](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) veya [video](https://ai.google.dev/gemini-api/docs/video?hl=tr) oluşturmayı öğrenin.
+- Müzik veya ses üretmek yerine Gemini'ın [ses dosyalarını nasıl anlayabileceğini](https://ai.google.dev/gemini-api/docs/audio?hl=tr) öğrenin.
+- [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'yi kullanarak Gemini ile anlık sohbet edin.
 
-कोड के ज़्यादा उदाहरणों और ट्यूटोरियल के लिए, [कुकिंग बुक](https://github.com/google-gemini/cookbook) देखें.
+Daha fazla kod örneği ve eğitim için [Cookbook](https://github.com/google-gemini/cookbook)'u inceleyin.
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया.
+Son güncelleme tarihi: 2026-09-18 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-18 UTC."],[],[]]

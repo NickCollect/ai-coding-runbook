@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=es-419
-fetched_at: 2026-09-28T06:12:54.650625+00:00
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi
+fetched_at: 2026-10-05T06:48:46.541894+00:00
 title: "Gemini Robotics ER \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
 # Gemini Robotics ER
 
-Los modelos de Gemini Robotics ER (razonamiento incorporado) son modelos de lenguaje de visión (VLM) que permiten a los robots percibir el mundo físico y, además, interactuar con él. Interpretan datos visuales, realizan razonamiento espacial y temporal, planifican tareas de varios pasos y coordinan robots y herramientas.
+Các mô hình ER (lý luận dựa trên dữ liệu thực tế) của Gemini Robotics là các mô hình ngôn ngữ thị giác (VLM) cho phép robot nhận biết và tương tác với thế giới thực. Các mô hình này diễn giải dữ liệu trực quan, thực hiện suy luận không gian và thời gian, lập kế hoạch cho các nhiệm vụ có nhiều bước, đồng thời điều phối các robot và công cụ.
 
-## Modelos
+## Mô hình
 
-El modelo Gemini Robotics ER 2 es el más reciente de Gemini Robotics.
-Es nuestro modelo de razonamiento actualizado que permite a los robots comprender su entorno con precisión. Se especializa en capacidades de razonamiento incorporado, como la orquestación de agentes de robots (p.ej., con VLA), la comprensión de videos de robots, incluida la comprensión del progreso y la detección de éxito, la lectura de instrumentos, el señalamiento y el razonamiento espacial.
+Mô hình Gemini Robotics ER 2 là mô hình mới nhất của Gemini Robotics.
+Đây là mô hình suy luận mới nhất của chúng tôi, giúp robot hiểu chính xác môi trường của chúng. Mô hình này chuyên về khả năng suy luận dựa trên cơ thể, chẳng hạn như điều phối tác nhân của robot (ví dụ: sử dụng VLA), khả năng hiểu video về robot, bao gồm cả khả năng hiểu tiến trình và phát hiện thành công, khả năng đọc thiết bị, chỉ và suy luận không gian.
 
-El modelo Gemini Robotics ER 2 presenta dos extremos de modelos:
+Mô hình Gemini Robotics ER 2 giới thiệu 2 điểm cuối mô hình:
 
-- **`gemini-robotics-er-2-preview`**: Es el modelo estándar de ER 2. Se basa en Gemini 3.5 Flash con razonamiento espacial mejorado, búsqueda de momentos en videos, clasificación del progreso de videos, orquestación de varios robots y uso de herramientas de varios pasos.
-- **`gemini-robotics-er-2-streaming-preview`**: Se optimizó para la transmisión en tiempo real a través de la [API de Live](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=es-419). Usa este modelo para agentes robóticos de baja latencia que procesan entrada continua de audio y video.
+- **`gemini-robotics-er-2-preview`**: Mô hình ER 2 tiêu chuẩn. Dựa trên Gemini 3.5 Flash với khả năng suy luận không gian, tìm khoảnh khắc trong video, phân loại tiến trình video, điều phối nhiều robot và sử dụng công cụ nhiều bước được cải thiện.
+- **`gemini-robotics-er-2-streaming-preview`**: Được tối ưu hoá để phát trực tiếp theo thời gian thực thông qua [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=vi). Sử dụng mô hình này cho các tác nhân robot có độ trễ thấp, xử lý liên tục tín hiệu âm thanh và video đầu vào.
 
-Si usas Gemini Robotics ER 1.6, actualiza a Gemini Robotics ER 2 reemplazando `model="gemini-robotics-er-1.6-preview"` por `model="gemini-robotics-er-2-preview"` o `model="gemini-robotics-er-2-streaming-preview"` en tus llamadas a la API. Ten en cuenta que el modelo Gemini Robotics ER 1.6 se dará de baja a [fines de agosto](https://ai.google.dev/gemini-api/docs/deprecations?hl=es-419#robotics-models).
+Nếu đang sử dụng Gemini Robotics ER 1.6, hãy nâng cấp lên Gemini Robotics ER 2 bằng cách thay thế `model="gemini-robotics-er-1.6-preview"` bằng `model="gemini-robotics-er-2-preview"` hoặc `model="gemini-robotics-er-2-streaming-preview"` trong các lệnh gọi API. Xin lưu ý rằng mô hình Gemini Robotics ER 1.6 sẽ ngừng hoạt động vào [cuối tháng 8](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi#robotics-models).
 
-[Prueba Gemini Robotics ER 2 en Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=es-419)
+[Dùng thử Gemini Robotics ER 2 trong Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=vi)
 
-## Capacidades de robótica
+## Khả năng của robot
 
-Gemini Robotics ER admite una variedad de capacidades de razonamiento incorporado.
-Selecciona una capacidad para obtener más información:
+Gemini Robotics ER hỗ trợ nhiều khả năng suy luận dựa trên dữ liệu thực tế.
+Chọn một khả năng để tìm hiểu thêm:
 
-| Función | Descripción | Guía |
+| Chức năng | Mô tả | Hướng dẫn |
 | --- | --- | --- |
-| Razonamiento espacial | Señalar objetos, hacer un seguimiento de ellos en videos, detectarlos con cuadros de límite y planificar trayectorias | [Razonamiento espacial](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=es-419) |
-| Visión de agentes | Usar la ejecución de código para mejorar otras capacidades aprovechando las herramientas de manipulación de imágenes | [Visión de agente](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=es-419) |
-| Organización de tareas | Combina el razonamiento espacial con las APIs de robots personalizadas para completar tareas a largo plazo. | [Organización de tareas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=es-419) |
-| Transmisión (solo el extremo de transmisión de Gemini Robotics ER 2) | Transmisión bidireccional para agentes robóticos en tiempo real con llamadas a funciones de baja latencia. | [Transmisión para robótica](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=es-419) |
-| Progreso del video (solo en Gemini Robotics ER 2) | Clasificación del progreso y búsqueda de momentos en transmisiones de video continuas. | [Comprensión de videos](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=es-419) |
+| Suy luận không gian | Chỉ vào các đối tượng, theo dõi chúng trong video, phát hiện bằng khung hình chữ nhật, lên kế hoạch cho quỹ đạo. | [Suy luận không gian](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=vi) |
+| Tầm nhìn về tác nhân | Sử dụng tính năng thực thi mã để nâng cao các khả năng khác bằng cách tận dụng các công cụ chỉnh sửa hình ảnh. | [Thị giác dựa trên trợ lý AI](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=vi) |
+| Điều phối tác vụ | Kết hợp khả năng suy luận không gian với các API robot tuỳ chỉnh để hoàn thành các nhiệm vụ dài hạn. | [Điều phối tác vụ](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=vi) |
+| Truyền trực tuyến (chỉ điểm cuối Truyền trực tuyến Gemini Robotics ER 2) | Truyền trực tuyến hai chiều cho các tác nhân robot theo thời gian thực với chức năng gọi có độ trễ thấp. | [Truyền trực tuyến cho ngành robot học](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=vi) |
+| Tiến trình video (chỉ Gemini Robotics ER 2) | Tính năng tìm khoảnh khắc và phân loại tiến trình từ nguồn cấp dữ liệu video liên tục. | [Hiểu video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=vi) |
 
-## Cómo comenzar
+## Bắt đầu
 
-En el siguiente ejemplo, se buscan objetos en una imagen y se devuelven sus etiquetas y coordenadas 2D normalizadas. Puedes pasar este resultado directamente a una API de robótica o a un modelo de VLA para generar acciones del robot.
+Ví dụ sau đây tìm các đối tượng trong một hình ảnh và trả về nhãn cũng như toạ độ 2D được chuẩn hoá của các đối tượng đó. Bạn có thể chuyển trực tiếp đầu ra này đến một API về robot học hoặc một mô hình VLA để tạo các hành động của robot.
 
 ### Python
 
@@ -264,7 +264,7 @@ curl -X POST \
   }'
 ```
 
-El resultado será un array JSON que contiene objetos, cada uno con un `point` (coordenadas `[y, x]` normalizadas) y un `label` que identifica el objeto.
+Đầu ra sẽ là một mảng JSON chứa các đối tượng, mỗi đối tượng có một `point` (toạ độ `[y, x]` được chuẩn hoá) và một `label` xác định đối tượng.
 
 ### JSON
 
@@ -283,109 +283,109 @@ El resultado será un array JSON que contiene objetos, cada uno con un `point` (
 ]
 ```
 
-En la siguiente imagen, se muestra un ejemplo de cómo se pueden mostrar estos puntos:
+Hình ảnh sau đây là ví dụ về cách hiển thị các điểm này:
 
-![Un ejemplo que muestra los puntos de los objetos en una imagen](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=es-419)
+![Ví dụ minh hoạ các điểm của đối tượng trong hình ảnh](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=vi)
 
-## Cómo funciona
+## Cách hoạt động
 
-La ER de Gemini Robotics toma entradas de imagen, video o audio con instrucciones en lenguaje natural. Identifica objetos, razona sobre el contexto de la escena y las relaciones espaciales, y devuelve resultados estructurados, como coordenadas o cuadros delimitadores.
+Gemini Robotics ER nhận đầu vào là hình ảnh, video hoặc âm thanh bằng câu lệnh ngôn ngữ tự nhiên. Mô hình này xác định các đối tượng, lý do về bối cảnh cảnh và mối quan hệ không gian, đồng thời trả về đầu ra có cấu trúc như toạ độ hoặc khung hình chữ nhật.
 
-Gemini Robotics ER también es agentic: divide las tareas complejas en subtareas y las ejecuta llamando a las funciones de tu robot o ejecutando el código generado. Por ejemplo, "pon la manzana en el tazón" se convierte en una secuencia de pasos para ubicar, agarrar y colocar.
+Gemini Robotics ER cũng có khả năng dựa trên tác nhân: mô hình này chia các tác vụ phức tạp thành các tác vụ phụ và thực thi chúng bằng cách gọi các hàm robot hoặc chạy mã đã tạo. Ví dụ: "đặt quả táo vào bát" sẽ trở thành một chuỗi các bước tìm, nắm và đặt.
 
-Consulta [Llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=es-419#how-it-works) para obtener detalles sobre cómo Gemini ejecuta las llamadas a herramientas.
+Hãy xem phần [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=vi#how-it-works) để biết thông tin chi tiết về cách Gemini thực hiện lệnh gọi công cụ.
 
-## Seguridad
+## An toàn
 
-Si bien el ER de Gemini Robotics se creó pensando en la seguridad, es tu responsabilidad mantener un entorno seguro alrededor del robot. Los modelos de IA generativa pueden cometer errores, y los robots físicos pueden causar daños. Para obtener más información, visita la [página de seguridad de robótica de Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=es-419).
+Mặc dù Gemini Robotics ER được xây dựng với mục tiêu đảm bảo an toàn, nhưng bạn vẫn phải chịu trách nhiệm duy trì một môi trường an toàn xung quanh robot. Các mô hình AI tạo sinh có thể mắc lỗi và robot thực có thể gây hư hỏng. Để tìm hiểu thêm, hãy truy cập vào [trang an toàn về robot của Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=vi).
 
-## Prácticas recomendadas
+## Các phương pháp hay nhất
 
-1. Usa un lenguaje natural y sencillo. Describe lo que quieres que haga el robot como si se lo dijeras a una persona. Si un término no funciona, prueba con un sinónimo común.
-2. Optimiza la entrada visual. Recorta o acerca objetos pequeños o poco claros antes de enviar la imagen. La iluminación y el bajo contraste de color pueden afectar la detección.
-3. Divide las tareas complejas en pasos. Envía cada paso como una instrucción separada para mantener el enfoque del modelo y mejorar la precisión.
-4. Realiza consultas varias veces y calcula el promedio de los resultados para tareas de alta precisión. Este enfoque de consenso reduce la varianza en los resultados espaciales.
+1. Sử dụng ngôn ngữ tự nhiên, đơn giản. Mô tả những việc bạn muốn robot làm giống như cách bạn mô tả cho một người. Nếu một cụm từ không hoạt động, hãy thử một từ đồng nghĩa phổ biến.
+2. Tối ưu hoá dữ liệu đầu vào trực quan. Cắt hoặc phóng to các đối tượng nhỏ hoặc không rõ ràng trước khi gửi hình ảnh. Ánh sáng và độ tương phản màu thấp có thể ảnh hưởng đến khả năng phát hiện.
+3. Chia nhỏ các việc phức tạp thành nhiều bước. Gửi từng bước dưới dạng một câu lệnh riêng biệt để giữ cho mô hình tập trung và cải thiện độ chính xác.
+4. Truy vấn nhiều lần và tính trung bình kết quả cho các tác vụ có độ chính xác cao. Phương pháp đồng thuận này giúp giảm sự khác biệt về đầu ra không gian.
 
-## Limitaciones
+## Các điểm hạn chế
 
-Ten en cuenta las siguientes limitaciones cuando desarrolles con Gemini Robotics ER:
+Hãy cân nhắc những hạn chế sau đây khi phát triển bằng Gemini Robotics ER:
 
-- **Restricciones de la clave de API:** La API de Gemini no acepta solicitudes de claves de API sin restricciones y devuelve un error `403 Forbidden`. Protege tu clave de API agregando restricciones en [AI Studio](https://aistudio.google.com/api-keys?hl=es-419).
-  Consulta [Protege las claves de API sin restricciones](https://ai.google.dev/gemini-api/docs/api-key?hl=es-419#secure-unrestricted-keys) para obtener más detalles.
-- **Latencia vs. rendimiento:** Las consultas complejas, las entradas de alta resolución o los niveles de pensamiento altos pueden aumentar los tiempos de procesamiento. Para el nivel de pensamiento, usa el nivel medio para lograr un buen equilibrio entre la latencia y el rendimiento.
-- **Alucinaciones:** Al igual que todos los modelos de lenguaje grandes, los modelos ER de Gemini Robotics pueden "alucinar" ocasionalmente o proporcionar información incorrecta, en especial para las instrucciones ambiguas o las entradas fuera de la distribución.
-- **Dependencia de la calidad de la instrucción:** La calidad del resultado depende de la claridad de la instrucción de entrada. Usa instrucciones específicas y bien estructuradas.
-- **Costo de procesamiento:** Ejecutar el modelo, en especial con entradas de video o un valor de `thinking_budget` alto, consume recursos de procesamiento y genera costos.
-  Consulta la página [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419) para obtener más detalles.
-- **Tipos de entrada:** Consulta los siguientes temas para obtener detalles sobre las limitaciones de cada modo.
-  - [Entradas de imágenes](https://ai.google.dev/gemini-api/docs/image-understanding?hl=es-419#technical-details-image)
-  - [Entradas de video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419#supported-formats)
-  - [Entradas de audio](https://ai.google.dev/gemini-api/docs/audio?hl=es-419#supported-formats)
+- **Các quy tắc hạn chế đối với khoá API:** Gemini API không chấp nhận các yêu cầu từ khoá API không bị hạn chế và trả về lỗi `403 Forbidden`. Bảo mật khoá API bằng cách thêm các quy tắc hạn chế trong [AI Studio](https://aistudio.google.com/api-keys?hl=vi).
+  Hãy xem bài viết [Bảo mật khoá API không bị hạn chế](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#secure-unrestricted-keys) để biết thông tin chi tiết.
+- **Độ trễ so với hiệu suất:** Các truy vấn phức tạp, dữ liệu đầu vào có độ phân giải cao hoặc mức độ tư duy cao có thể dẫn đến thời gian xử lý tăng lên. Đối với cấp độ suy nghĩ, hãy sử dụng mức trung bình để cân bằng tốt giữa độ trễ và hiệu suất.
+- **Ảo tưởng:** Giống như mọi mô hình ngôn ngữ lớn, các mô hình ER của Gemini Robotics đôi khi có thể "ảo tưởng" hoặc cung cấp thông tin không chính xác, đặc biệt là đối với những câu lệnh mơ hồ hoặc đầu vào nằm ngoài phạm vi phân phối.
+- **Phụ thuộc vào chất lượng câu lệnh:** Chất lượng đầu ra phụ thuộc vào độ rõ ràng của câu lệnh đầu vào. Sử dụng câu lệnh cụ thể và có cấu trúc rõ ràng.
+- **Chi phí điện toán:** Việc chạy mô hình, đặc biệt là với dữ liệu đầu vào là video hoặc `thinking_budget` cao, sẽ tiêu tốn tài nguyên điện toán và phát sinh chi phí.
+  Hãy xem trang [Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) để biết thêm thông tin chi tiết.
+- **Loại đầu vào:** Xem các chủ đề sau đây để biết thông tin chi tiết về hạn chế đối với từng chế độ.
+  - [Đầu vào hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi#technical-details-image)
+  - [Đầu vào video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#supported-formats)
+  - [Đầu vào âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi#supported-formats)
 
-## Aviso de privacidad
+## Thông báo về quyền riêng tư
 
-Reconoces que los modelos a los que se hace referencia en este documento (los "Modelos de Robótica") aprovechan los datos de audio y video para operar y mover tu hardware de acuerdo con tus instrucciones. Por lo tanto, es posible que opere los Modelos Robóticos de manera tal que estos recopilen datos de personas identificables, como datos de voz, imágenes y similitud ("Datos Personales"). Si decides operar los Modelos Robóticos de una manera que recopile Datos Personales, aceptas que no permitirás que ninguna persona identificable interactúe con los Modelos Robóticos ni esté presente en el área que los rodea, a menos que y hasta que se les haya notificado de manera suficiente a esas personas identificables y hayan dado su consentimiento para que Google pueda proporcionar y usar sus Datos Personales según se describe en las Condiciones del Servicio Adicionales de la API de Gemini que se encuentran en [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=es-419) (las "Condiciones"), incluso de conformidad con la sección titulada "Cómo usa Google tus datos". Te asegurarás de que dicho aviso permita la recopilación y el uso de Datos Personales según se describe en las Condiciones, y realizarás esfuerzos comercialmente razonables para minimizar la recopilación y distribución de Datos Personales utilizando técnicas como el desenfoque de rostros y operando los Modelos de Robótica en áreas que no contengan personas identificables en la medida en que sea factible.
+Bạn xác nhận rằng các mô hình được đề cập trong tài liệu này ("Mô hình robot") tận dụng dữ liệu video và âm thanh để vận hành và di chuyển phần cứng theo hướng dẫn của bạn. Do đó, bạn có thể vận hành Các mô hình robot sao cho Các mô hình robot sẽ thu thập dữ liệu của những người có thể nhận dạng, chẳng hạn như dữ liệu về giọng nói, hình ảnh và dữ liệu về hình ảnh khuôn mặt ("Dữ liệu cá nhân"). Nếu chọn vận hành Các mô hình robot theo cách thu thập Dữ liệu cá nhân, bạn đồng ý rằng bạn sẽ không cho phép bất kỳ cá nhân nào có thể nhận dạng tương tác hoặc xuất hiện trong khu vực xung quanh Các mô hình robot, trừ phi và cho đến khi những cá nhân có thể nhận dạng đó được thông báo đầy đủ và đồng ý với việc Dữ liệu cá nhân của họ có thể được Google cung cấp và sử dụng như được nêu trong Điều khoản dịch vụ bổ sung của Gemini API tại [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=vi) ("Điều khoản"), kể cả theo phần có tiêu đề "Cách Google sử dụng dữ liệu của bạn". Bạn sẽ đảm bảo rằng thông báo đó cho phép thu thập và sử dụng dữ liệu cá nhân như quy định trong Điều khoản, đồng thời bạn sẽ nỗ lực hợp lý về phương diện thương mại để giảm thiểu việc thu thập và phân phối dữ liệu cá nhân bằng cách sử dụng các kỹ thuật như làm mờ khuôn mặt và vận hành Mô hình robot ở những khu vực không có người có thể nhận dạng được trong phạm vi có thể thực hiện được.
 
-## Precios
+## Giá
 
-Para obtener información detallada sobre los precios y las regiones disponibles, consulta la página de [precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419).
+Để biết thông tin chi tiết về giá và các khu vực có sẵn, hãy tham khảo trang [định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
 
-## Extremos de modelos
+## Điểm cuối của mô hình
 
-### Versión preliminar de Gemini Robotics ER 2
+### Bản xem trước Gemini Robotics ER 2
 
-| Propiedad | Descripción |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| Código del modelo id\_card | `gemini-robotics-er-2-preview` |
-| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, video y audio  **Resultado**  Texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072  **Límite de tokens de salida**  65,536 |
-| handymanFunciones | **[Generación de audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419)**  No compatible  **[Almacenamiento en caché](https://ai.google.dev/gemini-api/docs/caching?hl=es-419)**  Admitido  **[Ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419)**  Admitido  **[Uso de la computadora](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419)**  Admitido  **[Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419)**  Admitido  **[Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)**  Admitido  **[Fundamentación con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)**  Admitido  **[Generación de imágenes](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419)**  No compatible  **[API de Live](https://ai.google.dev/gemini-api/docs/live-api?hl=es-419)**  No compatible  **[Fundamentación con la Búsqueda](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)**  Admitido  **[Resultados estructurados](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419)**  Admitido  **[Pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419)**  Admitido  **[Contexto de la URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419)**  Admitido |
-| speedOpciones de consumo | **[API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419)**  Admitido  **[Inferencia Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419)**  No compatible  **[Inferencia de prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419)**  No compatible |
-| Versiones de 123 | Lee los [patrones de versiones del modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `gemini-robotics-er-2-preview` |
-| calendar\_monthÚltima actualización | Julio de 2026 |
-| Ficha del modelo de id\_card | [Ficha del modelo](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=es-419) |
+| id\_cardMã kiểu máy | `gemini-robotics-er-2-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  131.072  **Giới hạn số token đầu ra**  65.536 |
+| handymanChức năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Không được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Được hỗ trợ  **[Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi)**  Được hỗ trợ  **[Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Được hỗ trợ  **[Neo bám vào Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Không được hỗ trợ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Không được hỗ trợ  **[Tìm trong phần liên kết thực tế](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Được hỗ trợ  **[Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Được hỗ trợ |
+| speedCác lựa chọn thưởng thức nội dung | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Được hỗ trợ  **[Suy luận linh hoạt](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi)**  Không được hỗ trợ  **[Suy luận mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi)**  Không được hỗ trợ |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Xem trước: `gemini-robotics-er-2-preview` |
+| calendar\_monthBản cập nhật mới nhất | Tháng 7 năm 2026 |
+| Thẻ mô hình id\_card | [Thẻ mô hình](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=vi) |
 
-### Versión preliminar de transmisión de Gemini Robotics ER 2
+### Bản xem trước Gemini Robotics ER 2 Streaming
 
-| Propiedad | Descripción |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| Código del modelo id\_card | `gemini-robotics-er-2-streaming-preview` |
-| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, video y audio  **Resultado**  Texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072  **Límite de tokens de salida**  65,536 |
-| handymanFunciones | **[Generación de audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419)**  No compatible  **[Almacenamiento en caché](https://ai.google.dev/gemini-api/docs/caching?hl=es-419)**  No compatible  **[Ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419)**  No compatible  **[Uso de la computadora](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419)**  No compatible  **[Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419)**  No compatible  **[Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)**  Admitido  **[Fundamentación con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)**  No compatible  **[Generación de imágenes](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419)**  No compatible  **[API de Live](https://ai.google.dev/gemini-api/docs/live-api?hl=es-419)**  Admitido  **[Fundamentación con la Búsqueda](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)**  Admitido  **[Resultados estructurados](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419)**  No compatible  **[Pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419)**  Admitido  **[Contexto de la URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419)**  No compatible |
-| speedOpciones de consumo | **[API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419)**  No compatible  **[Inferencia Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419)**  No compatible  **[Inferencia de prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419)**  No compatible |
-| Versiones de 123 | Lee los [patrones de versiones del modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `gemini-robotics-er-2-streaming-preview` |
-| calendar\_monthÚltima actualización | Julio de 2026 |
-| Ficha del modelo de id\_card | [Ficha del modelo](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=es-419) |
+| id\_cardMã kiểu máy | `gemini-robotics-er-2-streaming-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  131.072  **Giới hạn số token đầu ra**  65.536 |
+| handymanChức năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Không được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Không được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Không được hỗ trợ  **[Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi)**  Không được hỗ trợ  **[Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Không được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Được hỗ trợ  **[Neo bám vào Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Không được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Không được hỗ trợ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Được hỗ trợ  **[Tìm trong phần liên kết thực tế](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Không được hỗ trợ  **[Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Không được hỗ trợ |
+| speedCác lựa chọn thưởng thức nội dung | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Không được hỗ trợ  **[Suy luận linh hoạt](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi)**  Không được hỗ trợ  **[Suy luận mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi)**  Không được hỗ trợ |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Xem trước: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthBản cập nhật mới nhất | Tháng 7 năm 2026 |
+| Thẻ mô hình id\_card | [Thẻ mô hình](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=vi) |
 
-### Versión preliminar de Gemini Robotics ER 1.6
+### Bản xem trước Gemini Robotics ER 1.6
 
-| Propiedad | Descripción |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| Código del modelo id\_card | `gemini-robotics-er-1.6-preview` |
-| saveTipos de datos admitidos | **Entradas**  Texto, imágenes, video y audio  **Resultado**  Texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  131,072  **Límite de tokens de salida**  65,536 |
-| handymanFunciones | **[Generación de audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=es-419)**  No compatible  **[Almacenamiento en caché](https://ai.google.dev/gemini-api/docs/caching?hl=es-419)**  Admitido  **[Ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419)**  Admitido  **[Uso de la computadora](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419)**  Admitido  **[Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419)**  Admitido  **[Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)**  Admitido  **[Fundamentación con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)**  Admitido  **[Generación de imágenes](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419)**  No compatible  **[API de Live](https://ai.google.dev/gemini-api/docs/live-api?hl=es-419)**  No compatible  **[Fundamentación con la Búsqueda](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)**  Admitido  **[Resultados estructurados](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419)**  Admitido  **[Pensamiento](https://ai.google.dev/gemini-api/docs/thinking?hl=es-419)**  Admitido  **[Contexto de la URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419)**  Admitido |
-| speedOpciones de consumo | **[API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419)**  Admitido  **[Inferencia Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419)**  No compatible  **[Inferencia de prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419)**  No compatible |
-| Versiones de 123 | Lee los [patrones de versiones del modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthÚltima actualización | Diciembre de 2025 |
-| cognition\_2Fecha límite de conocimiento | Enero de 2025 |
+| id\_cardMã kiểu máy | `gemini-robotics-er-1.6-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản, hình ảnh, video, âm thanh  **Đầu ra**  Văn bản |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  131.072  **Giới hạn số token đầu ra**  65.536 |
+| handymanChức năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Không được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Được hỗ trợ  **[Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi)**  Được hỗ trợ  **[Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Được hỗ trợ  **[Neo bám vào Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Không được hỗ trợ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Không được hỗ trợ  **[Tìm trong phần liên kết thực tế](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Được hỗ trợ  **[Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Được hỗ trợ |
+| speedCác lựa chọn thưởng thức nội dung | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Được hỗ trợ  **[Suy luận linh hoạt](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi)**  Không được hỗ trợ  **[Suy luận mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi)**  Không được hỗ trợ |
+| 123Phiên bản | Đọc [các mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin chi tiết.  - Xem trước: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthBản cập nhật mới nhất | Tháng 12 năm 2025 |
+| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
 
-## ¿Qué sigue?
+## Bước tiếp theo
 
-- [Razonamiento espacial](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=es-419): Señalamiento, seguimiento, cuadros de límite y trayectorias.
-- [Capacidades de agente](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=es-419): Ejecución de código, lectura de instrumentos y anotación de imágenes.
-- [Orquestación de tareas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=es-419): Tareas a largo plazo con APIs de robots personalizadas.
-- [Robótica con transmisión](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=es-419): Transmisión bidireccional en tiempo real (solo Gemini Robotics ER 2).
-- [Comprensión de video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=es-419): Búsqueda de momentos y clasificación del progreso (solo en Gemini Robotics ER 2)
-- [Seguridad de la robótica de Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=es-419): Investigación sobre la seguridad detrás de la familia de modelos.
+- [Lý luận không gian](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=vi) – trỏ, theo dõi, hộp giới hạn, quỹ đạo.
+- [Khả năng của tác nhân AI](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=vi) – thực thi mã, đọc công cụ, chú thích hình ảnh.
+- [Điều phối tác vụ](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=vi) – các tác vụ dài hạn bằng API robot tuỳ chỉnh.
+- [Robot học có tính năng truyền phát trực tiếp](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=vi) – truyền phát trực tiếp hai chiều theo thời gian thực (chỉ có trên Gemini Robotics ER 2).
+- [Hiểu video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=vi) – tìm khoảnh khắc và phân loại tiến trình (chỉ Gemini Robotics ER 2).
+- [An toàn trong lĩnh vực robot của Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=vi) – nghiên cứu về độ an toàn đằng sau dòng mô hình này.
 
-Enviar comentarios
+Gửi ý kiến phản hồi
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última actualización: 2026-09-24 (UTC)
+Cập nhật lần gần đây nhất: 2026-09-24 UTC.
 
-¿Quieres brindar más información?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-24 (UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-24 UTC."],[],[]]

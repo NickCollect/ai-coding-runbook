@@ -1,68 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he
-fetched_at: 2026-09-28T06:31:01.601187+00:00
-title: "\u05e8\u05d5\u05d1\u05d5\u05d8\u05d9\u05e7\u05d4 \u05e2\u05dd \u05e1\u05d8\u05e8\u05d9\u05de\u05d9\u05e0\u05d2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fr
+fetched_at: 2026-10-05T06:43:27.327929+00:00
+title: "Robotique avec streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# רובוטיקה עם סטרימינג
+# Robotique avec streaming
 
-נקודת הקצה של מודל `gemini-robotics-er-2-streaming-preview` חושפת נקודת קצה ייעודית לסטרימינג שמשולבת עם [Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=he), ומאפשרת אינטראקציה דו-כיוונית בזמן אמת בין האפליקציה לבין הרובוט. התכונה הזו מתאימה לסוכנים שצריכים לולאות משוב מהירות ותגובות מהירות לסביבה.
+Le point de terminaison du modèle `gemini-robotics-er-2-streaming-preview` expose un point de terminaison de streaming dédié qui s'intègre à l'[API Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=fr), ce qui permet une interaction bidirectionnelle en temps réel entre votre application et le robot. Elle convient donc aux agents qui ont besoin de boucles de rétroaction rapides et de réponses réactives à l'environnement.
 
-[אפשר לנסות ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=he)
-[שיבוט של אפליקציות לדוגמה מ-GitHub](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=fr)
+[Cloner des exemples d'applications depuis GitHub](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
 
-## תרחישים לדוגמה
+## Cas d'utilisation
 
-- **תיאום בין כמה רובוטים**: כמה רובוטים שמתקשרים ביניהם לגבי סטטוס המשימה ומעבירים משימות משנה באמצעות סשן משותף.
-- **מעקב רציף**: רובוטים שצופים בסצנה ומפעילים פעולות כשמתרחשים אירועים ספציפיים, כמו מיכל שמגיע לרמת מילוי מסוימת.
-- **מחסן ולוגיסטיקה**: סוכני ליקוט ואריזה שמאמתים פריטים באופן ויזואלי, עוקבים אחרי התקדמות האריזה ומתקנים שגיאות.
+- **Coordination de plusieurs robots** : plusieurs robots communiquent l'état des tâches et délèguent des sous-tâches par le biais d'une session partagée.
+- **Surveillance continue** : robots qui observent une scène et déclenchent des actions lorsque des événements spécifiques se produisent, par exemple lorsqu'un conteneur atteint un certain niveau de remplissage.
+- **Entrepôt et logistique** : agents de préparation et d'emballage qui vérifient visuellement les articles, suivent la progression de l'emballage et corrigent les erreurs.
 
-## מפרטים טכניים
+## Spécifications techniques
 
-בטבלה הבאה מפורטות המפרטים הטכניים של Live API:
+Le tableau suivant présente les spécifications techniques de l'API Live :
 
-| קטגוריה | פרטים |
+| Catégorie | Détails |
 | --- | --- |
-| אופני קלט | אודיו (אודיו PCM גולמי של 16 ביט, 16kHz, little-endian), תמונות (JPEG <= 1FPS), טקסט |
-| אופנויות פלט | טקסט |
-| פרוטוקול | חיבור WebSocket עם שמירת מצב (WSS) |
+| Modes d'entrée | Audio (audio PCM 16 bits brut, 16 kHz, little-endian), images (JPEG <= 1 FPS), texte |
+| Modes de sortie | Texte |
+| Protocole | Connexion WebSocket avec état (WSS) |
 
-## איך יוצרים הגדרה סוכנית
+## Créer une configuration agentique
 
-כל סוכן רובוטיקה שמבוסס על Live API פועל לפי שלושה שלבים:
+Chaque agent robotique basé sur l'API Live suit trois étapes :
 
-1. **הצהרה על יכולות הרובוט ככלים.** כל פעולה שהרובוט יכול לבצע – ניווט, אחיזה, דיבור – הופכת להצהרת פונקציה עם שם, תיאור וסכימת פרמטרים. בפעולות פיזיות צריך להשתמש ב-`"behavior": "BLOCKING"` כדי שהמודל ימתין לסיום הפעולה של הרובוט לפני שיבחר את השלב הבא.
-2. **הזרמת קלט מרובה מצבים לסשן מתמשך.** פותחים סשן `live.connect`
-   ומשאירים אותו פתוח למשך כל זמן ביצוע המשימה. לשלוח פריים של סרטון, אודיו או טקסט כשהם מגיעים מהחיישנים של הרובוט.
-3. **טיפול בקריאות לכלים בלולאת קבלה.** בכל פעם שהמודל בוחר פעולה, הוא שולח הודעה מסוג `tool_call`. לולאת הקבלה מפעילה את הפונקציה מול ה-SDK של הרובוט ושולחת בחזרה את הערך `tool_response`. הסשן נשאר פתוח, והמודל בוחר את הפעולה הבאה על סמך התוצאה.
+1. **Déclarez les capacités du robot en tant qu'outils.** Chaque action que le robot peut effectuer (naviguer, saisir, parler, etc.) devient une déclaration de fonction avec un nom, une description et un schéma de paramètres. Les actions physiques doivent utiliser `"behavior": "BLOCKING"` pour que le modèle attende que le robot ait terminé avant de choisir l'étape suivante.
+2. **Transmettre des entrées multimodales dans une session persistante** Ouvrez une session `live.connect` et laissez-la ouverte pendant toute la durée de la tâche. Envoyez des images vidéo, de l'audio ou du texte à mesure qu'ils arrivent des capteurs de votre robot.
+3. **Gérer les appels d'outils dans une boucle de réception** Chaque fois que le modèle sélectionne une action, il envoie un message `tool_call`. Votre boucle de réception exécute la fonction par rapport à votre SDK de robot et renvoie un `tool_response`. La session reste ouverte et le modèle choisit la prochaine action en fonction du résultat.
 
-בקטעים הבאים מוסבר איך להשתמש בשלבים האלה בשלושה תרחישים נפוצים:
-לולאת סוכן בסיסית, מעקב פרואקטיבי אחרי סצנות באמצעות אות פעימה וניתוב
-של דיבור דרך TTS ככלי.
+Les sections suivantes montrent comment appliquer ces étapes à trois modèles courants : une boucle d'agent de référence, la surveillance proactive de scènes avec un signal de présence et le routage de la parole via TTS en tant qu'outil.
 
-## תיאום פעולות של רובוט באמצעות הפעלת פונקציות
+## Orchestrer un robot à l'aide de l'appel de fonction
 
-בדוגמה הבאה מוצגים שלושת השלבים שמחוברים יחד בסקריפט Python יחיד.
+L'exemple suivant montre les trois étapes connectées dans un seul script Python.
 
-שלב 1 – הגדרות כלי – מגדיר את היכולות של הרובוט כהצהרות פונקציה. הפונקציה `navigate` משתמשת ב-`"behavior": "BLOCKING"`, ולכן המודל מחכה שהרובוט יגיע לנקודת הציון לפני שהוא קורא לכלי אחר.
-כדי לחשוף יכולות נוספות של הרובוט, אפשר להוסיף עוד הצהרות על פונקציות באותה רשימה.
+L'étape 1 (définitions d'outils) déclare les capacités du robot sous forme de déclarations de fonctions. La fonction `navigate` utilise `"behavior": "BLOCKING"`. Le modèle attend donc que le robot atteigne le point de cheminement avant d'appeler un autre outil.
+Ajoutez d'autres déclarations de fonction dans la même liste pour exposer des capacités de robot supplémentaires.
 
-שלב 2 – עזרה בהזנת קלט – מוצגות שלוש פונקציות שמעבירות קלט של אופנויות שונות לשיחה: `send_text` לפקודות, `send_image` לפריימים של המצלמה עם פרומפט טקסטואלי אופציונלי, ו-`send_audio` לאודיו גולמי בפורמט PCM ממיקרופון.
+L'étape 2 (assistants d'entrée) présente trois fonctions qui transmettent en flux continu différentes entrées de modalités dans la session : `send_text` pour les commandes, `send_image` pour les images de caméra avec un prompt textuel facultatif et `send_audio` pour l'audio PCM brut provenant d'un micro.
 
-שלב 3 – לולאת הקבלה – פועל במקביל ומטפל בשני סוגים של הודעות:
-הודעות `server_content` (פלט הטקסט של המודל) והודעות `tool_call` (המודל מבקש פעולה של רובוט). כשמתקבלת קריאה לכלי, הלולאה קוראת ל-`execute_tool` – קובץ stub שצריך להחליף ב-SDK הרובוט האמיתי – ואז שולחת בחזרה `tool_response` כדי שהמודל יוכל לבחור את הפעולה הבאה.
+L'étape 3 (boucle de réception) s'exécute simultanément et gère deux types de messages : les messages `server_content` (sortie de texte du modèle) et les messages `tool_call` (le modèle demandant une action du robot). Lorsqu'un appel d'outil arrive, la boucle appelle `execute_tool` (un stub que vous remplacez par votre véritable SDK de robot), puis renvoie un `tool_response` afin que le modèle puisse sélectionner la prochaine action.
 
 ```
 import asyncio
@@ -167,18 +163,18 @@ async def main():
 asyncio.run(main())
 ```
 
-לולאת הקבלה נשארת פעילה אחרי כל תשובה של הכלי. המודל בונה ומשנה תוכנית לטווח ארוך בלי שתצטרכו לקודד מראש את כל רצף הפעולות.
+La boucle de réception reste active après chaque réponse de l'outil. Le modèle construit et révise un plan à long terme sans que vous ayez à encoder toute la séquence d'actions à l'avance.
 
-## חשיבה מרחבית-זמנית פרואקטיבית
+## Raisonnement spatio-temporel proactif
 
-ה-Live API מעביר את הווידאו בסטרימינג, אבל פריימים של וידאו לבד לא מפעילים תור חדש של ניתוח. כדי להפעיל את התגובה של המודל, צריך לצרף למסגרות של הסרטון הנחיה בטקסט או באודיו. פרטים נוספים זמינים במאמר בנושא [יכולות של API פעיל](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=he).
+L'API Live diffuse des vidéos, mais les images vidéo seules ne déclenchent pas de nouveau tour de raisonnement. Les images vidéo doivent être accompagnées d'une requête textuelle ou audio pour déclencher une réponse du modèle. Pour en savoir plus, consultez [Fonctionnalités de l'API Live](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=fr).
 
-כדי להפעיל חשיבה רציונלית, צריך להטמיע **פעימת לב**: לשלוח מעת לעת את הפריים האחרון מהמצלמה, ואחריו פרומפט טקסטואלי קצר שמאלץ את המודל לבדוק את הסצנה ולקבל החלטה מפורשת. קצב הפריימים של קלט הווידאו מוגבל לפרים אחד לשנייה.
+Pour activer le raisonnement proactif, implémentez un **signal de présence** : envoyez régulièrement la dernière image de la caméra, suivie d'un court prompt textuel qui force le modèle à inspecter la scène et à prendre une décision explicite. L'entrée vidéo est limitée à une image par seconde.
 
-### הטמעה של פעימת הלב
+### Implémenter le signal de pulsation
 
-קורוטינת הדופק פועלת כמשימת `asyncio` נפרדת באותו סשן.
-הוא מכוון באופן אופטימלי לקצב של 1 הרץ (בהתאם למגבלת קצב קלט הווידאו) בזמן ההמתנה להשלמת כל תור (`er_turn_done`) כדי למנוע שיבוש של תהליך ההסקה:
+La coroutine heartbeat s'exécute en tant que tâche `asyncio` distincte dans la même session.
+Il cible de manière opportuniste une cadence de 1 Hz (correspondant à la limite de fréquence d'entrée vidéo) en attendant la fin de chaque tour (`er_turn_done`) pour éviter d'interrompre le raisonnement en cours :
 
 ```
 async def heartbeat(session, camera, er_turn_done: asyncio.Event):
@@ -212,10 +208,9 @@ async def heartbeat(session, camera, er_turn_done: asyncio.Event):
             await asyncio.sleep(remaining)
 ```
 
-### עדכון לולאת הקבלה
+### Mettre à jour la boucle de réception
 
-כדי לציין מתי המודל סיים את התור שלו, צריך לעדכן את `receive_loop`
-כדי להגדיר את `er_turn_done`:
+Pour indiquer que le modèle a terminé son tour, mettez à jour votre `receive_loop` pour définir `er_turn_done` :
 
 ```
 # In receive_loop: signal when the model finishes its turn
@@ -223,12 +218,12 @@ if sc.turn_complete:
     er_turn_done.set()
 ```
 
-## פלט אודיו דרך TTS חיצוני
+## Sortie audio via un système TTS externe
 
-‫Gemini Robotics ER 2 מחזיר טקסט. האפליקציה שלכם מעבירה תשובות מלאות לספק TTS נפרד (כמו [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)) באמצעות קריאה חוזרת (callback) שמוזרקת.
-כך תוכלו לשלוט בהשהיה של הדיבור, בבחירת הקול ובהתנהגות של ההפרעה, ולהחליף את מערכות ה-TTS בלי לשנות את הלוגיקה של הסוכן.
+Gemini Robotics ER 2 renvoie du texte. Votre application achemine les réponses complètes vers un fournisseur de synthèse vocale distinct (tel que [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)) via un rappel injecté.
+Cela vous permet de contrôler la latence vocale, la sélection de la voix et le comportement d'interruption, et d'échanger les backends de synthèse vocale sans modifier la logique de l'agent.
 
-אפשר גם להגדיר את ה-TTS ככלי, כדי שהמודל יתייחס ל "say something" באותו אופן כמו "move the arm". מוסיפים את הצהרת הפונקציה הבאה לרשימת `tools` מהקטע הראשון:
+Vous pouvez également déclarer la synthèse vocale comme un outil afin que le modèle traite "dis quelque chose" de la même manière que "bouge le bras". Ajoutez la déclaration de fonction suivante à votre liste `tools` de la première section :
 
 ```
 TOOLS = [
@@ -258,24 +253,24 @@ TOOLS = [
 ]
 ```
 
-כשעוטפים את ה-TTS בהצהרת פונקציה, המודל מטפל בדיבור דרך אותו נתיב של קריאה לכלי כמו כל פעולה אחרת של הרובוט. האפליקציה ממלאת את הקריאה באמצעות קריאה חוזרת (callback) מוזרקת.
+En encapsulant la synthèse vocale dans une déclaration de fonction, le modèle gère la parole via le même chemin d'appel d'outil que toute autre action du robot. Votre application traite l'appel avec un rappel injecté.
 
-## דוגמאות ב-GitHub
+## Exemples sur GitHub
 
-דוגמאות מלאות שעובדות, כולל הדגמה של רובוט Spot שמביא חטיפים ו-Tinybot pan-tilt hello world, זמינות במאמר [דוגמאות ל-API של Robotics Live](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
+Pour obtenir des exemples fonctionnels complets, y compris la démonstration de récupération de snacks par le robot Spot et le bonjour du Tinybot avec panoramique et inclinaison, consultez les [exemples d'API Robotics Live](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
 
-## המאמרים הבאים
+## Étape suivante
 
-- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות.
-- [תזמור משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח ללא סטרימינג.
-- [סקירה כללית של Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=he) – תיעוד מלא של Live API.
+- [Compréhension des vidéos](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=fr) : recherche de moments et classification de la progression.
+- [Orchestration des tâches](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=fr) : tâches à long terme sans streaming.
+- [Présentation de l'API Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=fr) : documentation complète de l'API Live.
 
-שליחת משוב
+Envoyer des commentaires
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-עדכון אחרון: 2026-09-16 (שעון UTC).
+Dernière mise à jour le 2026/09/16 (UTC).
 
-רוצה לתת לנו משוב?
+Voulez-vous nous donner plus d'informations ?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-16 (שעון UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/16 (UTC)."],[],[]]

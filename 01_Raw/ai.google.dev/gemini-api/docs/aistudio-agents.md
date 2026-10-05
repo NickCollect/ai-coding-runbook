@@ -1,139 +1,139 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=th
-fetched_at: 2026-09-28T06:11:22.226434+00:00
-title: "\u0e40\u0e2d\u0e40\u0e08\u0e19\u0e15\u0e4c\u0e43\u0e19\u0e1e\u0e37\u0e49\u0e19\u0e17\u0e35\u0e48\u0e17\u0e14\u0e25\u0e2d\u0e07\u0e02\u0e2d\u0e07 AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=pl
+fetched_at: 2026-10-05T06:27:28.704798+00:00
+title: "Agenty na placu zabaw AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# เอเจนต์ในพื้นที่ทดลองของ AI Studio
+# Agenty na placu zabaw AI Studio
 
-Google AI Studio Playground มีอินเทอร์เฟซแบบภาพเพื่อสร้างต้นแบบและเรียนรู้วิธีสร้าง Agent ที่มีการจัดการโดยไม่ต้องสร้างและเขียนการเรียก API
+Plac zabaw Google AI Studio udostępnia wizualny interfejs do tworzenia prototypów i uczenia się, jak tworzyć zarządzanych agentów bez konieczności tworzenia i pisania wywołań interfejsu API.
 
-หากต้องการเริ่มต้นใช้งาน ให้ไปที่แท็บ **Playground** ในแผงการนำทางของ Google AI Studio แล้วเปลี่ยนปุ่มเปิด/ปิดเป็น **Agents**
+Aby rozpocząć, w panelu nawigacyjnym Google AI Studio otwórz kartę **Playground** i przesuń przełącznik na **Agenci**.
 
-## เทมเพลตที่สร้างไว้ล่วงหน้า
+## Gotowe szablony
 
-แท็บ **Agents** มีชุดเทมเพลตที่กำหนดค่า Agent Antigravity พื้นฐานไว้ล่วงหน้าโดยการตั้งค่าเครื่องมือและการกำหนดค่าสภาพแวดล้อม เทมเพลตทั้งหมดเป็นโอเพนซอร์สและเผยแพร่ภายใต้
-ที่เก็บ [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) การสำรวจเทมเพลตเหล่านี้เป็นวิธีที่ยอดเยี่ยมในการเรียนรู้วิธีสร้างและจัดโครงสร้าง Agent ที่มีการจัดการของคุณเอง
+Na karcie **Agenci** znajduje się szereg szablonów, które wstępnie konfigurują podstawowego agenta Antigravity, ustawiając konfiguracje narzędzi i środowiska. Wszystkie szablony są dostępne na licencji open source i opublikowane w repozytorium [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/). Zapoznanie się z tymi szablonami to świetny sposób na nauczenie się, jak tworzyć własnego agenta zarządzanego i jak go strukturyzować.
 
-ตัวอย่างเช่น เมื่อคุณเลือกเทมเพลต AI Radio ระบบจะเปิดใช้เครื่องมือที่อนุญาตทั้งหมด และลิงก์ไฟล์ `AGENTS.md` และทักษะเฉพาะสำหรับการผลิตรายการวิทยุ คุณสามารถดูการตั้งค่าเหล่านี้ใน UI ของ Playground ในส่วน**สภาพแวดล้อม** โดยคลิกปุ่ม**แหล่งที่มา**
+Na przykład po wybraniu szablonu AI Radio włączone zostaną wszystkie dozwolone narzędzia i połączone specjalistyczne `AGENTS.md` pliki i umiejętności do produkcji audycji radiowych. Te ustawienia możesz wyświetlić w interfejsie Playground w sekcji **Środowisko**, klikając przycisk **Źródła**.
 
-## การกำหนดค่าเครื่องมือ
+## Konfiguracja narzędzia
 
-ในการตั้งค่า Agent ใน Playground คุณสามารถเปิด/ปิดสิทธิ์เข้าถึงเครื่องมือในตัวต่อไปนี้ได้
+W ustawieniach agenta w Playground możesz włączyć lub wyłączyć dostęp do tych wbudowanych narzędzi:
 
-- **Google Search:** เข้าถึงเว็บแบบเปิดเพื่อรับข้อมูลแบบเรียลไทม์
-- **บริบท URL:** ดึงและแยกวิเคราะห์เนื้อหาข้อความของ URL เว็บเพจที่เฉพาะเจาะจง
-- **การดำเนินการโค้ด:** เรียกใช้คำสั่ง Bash และ Python ได้โดยตรงภายในสภาพแวดล้อมแซนด์บ็อกซ์ที่แยกไว้
-- **เครื่องมือระบบไฟล์:** อ่าน เขียน แสดงรายการ และลบไฟล์ภายในพื้นที่ทำงาน
+- **Wyszukiwarka Google:** dostęp do otwartego internetu w celu uzyskania informacji w czasie rzeczywistym.
+- **Kontekst adresu URL:** pobieranie i analizowanie treści tekstowych z określonych adresów URL stron internetowych.
+- **Wykonywanie kodu:** uruchamiaj polecenia Bash i Python bezpośrednio w izolowanym środowisku piaskownicy.
+- **Narzędzia systemu plików:** odczytywanie, zapisywanie, wyświetlanie listy i usuwanie plików w obszarze roboczym.
 
-## การกำหนดค่าสภาพแวดล้อม
+## Konfiguracja środowiska
 
-Agent ที่มีการจัดการจะทำงานภายในแซนด์บ็อกซ์ Linux ชั่วคราวที่ปลอดภัย (สภาพแวดล้อม) ซึ่งมีพื้นที่ทำงานและเครื่องมือที่ Agent จำเป็นต้องใช้ ดูข้อมูลเพิ่มเติมได้ที่คู่มือ[สภาพแวดล้อมของ Agent ที่มีการจัดการ](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th)
+Zarządzane agenty działają w bezpiecznej, tymczasowej piaskownicy Linuksa (środowisku), która zapewnia im przestrzeń roboczą i narzędzia potrzebne do działania. Więcej informacji znajdziesz w przewodniku po [zarządzanym środowisku agenta](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl).
 
-### การควบคุมพฤติกรรมของ Agent
+### Kontrolowanie zachowania agenta
 
-พฤติกรรม ลักษณะตัวตน และความสามารถของ Agent ส่วนใหญ่กำหนดโดยไฟล์ที่มีอยู่ในสภาพแวดล้อมของ Agent Agent จะตรวจหาและโหลดการกำหนดค่าจากโฟลเดอร์ `.agents` พิเศษโดยอัตโนมัติ
+Zachowanie, osobowość i możliwości agenta są w głównej mierze określone przez pliki znajdujące się w jego środowisku. Agent automatycznie wykrywa i wczytuje konfiguracje ze specjalnego folderu `.agents`:
 
-- **`AGENTS.md`**: โหลดไว้ล่วงหน้าในบริบทของ Agent เพื่อกำหนดคำแนะนำและลักษณะตัวตนของระบบ
-- **`SKILL.md`**: อยู่ในโฟลเดอร์ทักษะที่เกี่ยวข้อง (เช่น `.agents/skills/my-skill/SKILL.md`) เพื่อกำหนดความสามารถและเวิร์กโฟลว์ที่เฉพาะเจาะจง
+- **`AGENTS.md`**: wstępnie załadowane do kontekstu agenta w celu zdefiniowania instrukcji systemowych i profilu.
+- **`SKILL.md`**: znajdują się w odpowiednich folderach umiejętności (np. `.agents/skills/my-skill/SKILL.md`) i służą do definiowania konkretnych funkcji i przepływów pracy.
 
-### การจัดเตรียมสภาพแวดล้อม
+### Provisioning the Environment
 
-คุณสามารถกำหนดค่าสภาพแวดล้อมที่ Agent จะใช้ได้โดยการต่อเชื่อมไฟล์กับสภาพแวดล้อมก่อนเริ่มเซสชัน คุณสามารถสร้างสภาพแวดล้อมใหม่โดยการต่อเชื่อมแหล่งที่มา หรือกู้คืนสภาพแวดล้อมก่อนหน้าก็ได้
+Środowisko, z którego będzie korzystać agent, możesz skonfigurować, montując w nim pliki przed rozpoczęciem sesji. Możesz utworzyć nowe środowisko, montując źródła, lub przywrócić poprzednie:
 
-- **หากต้องการสร้างสภาพแวดล้อมใหม่** ให้คลิก **เพิ่มแหล่งที่มา** ในแผงการตั้งค่าสภาพแวดล้อม แล้วเลือกจากประเภทแหล่งที่มาต่อไปนี้
+- **Aby utworzyć nowe środowisko**, w panelu Ustawienia środowiska kliknij **Dodaj źródła** i wybierz jeden z tych typów źródeł:
 
-| ประเภทแหล่งที่มา | คำอธิบาย | เส้นทางการต่อเชื่อม |
+| Typ źródła | Opis | Ścieżka montażu |
 | --- | --- | --- |
-| **ไฟล์อินไลน์** | เขียนหรือวางไฟล์การกำหนดค่า ชุดข้อมูลจำลอง หรือสคริปต์ยูทิลิตี (สูงสุด 100 KB) ลงใน UI ของ Playground โดยตรง | เส้นทางปลายทางที่ผู้ใช้กำหนด (เช่น `/workspace/scripts/parser.py`) |
-| **Google Cloud Storage** | ต่อเชื่อม Bucket ของ Cloud Storage แบบสาธารณะหรือส่วนตัว  Bucket ส่วนตัวต้องใช้โทเค็น Bearer ของ OAuth 2.0 มาตรฐาน ดูข้อมูลเพิ่มเติมได้ที่ [แหล่งที่มาส่วนตัว](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#private-sources) | แมปเส้นทาง Bucket ของ GCS (เช่น `gs://your-bucket-name/data/`) กับไดเรกทอรีพื้นที่ทำงาน (เช่น `/workspace/data/`) |
-| **ที่เก็บใน GitHub** | โคลนฐานของโค้ดแบบสาธารณะหรือส่วนตัว  ที่เก็บส่วนตัวต้องมีการตรวจสอบสิทธิ์พื้นฐานด้วยโทเค็นเพื่อการเข้าถึงส่วนบุคคล (PAT) ของ GitHub ดูข้อมูลเพิ่มเติมได้ที่ [แหล่งที่มาส่วนตัว](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#private-sources) | โคลนลงใน `/workspace/` โดยตรง (โดยปกติจะอยู่ใน `/workspace/<repo-name>`) |
+| **Pliki w treści** | Pisz lub wklejaj pliki konfiguracyjne, przykładowe zbiory danych lub skrypty narzędziowe (do 100 KB) bezpośrednio w interfejsie Playground. | Ścieżka docelowa zdefiniowana przez użytkownika (np. `/workspace/scripts/parser.py`). |
+| **Google Cloud Storage** | Zamontuj publiczny lub prywatny zasobnik Cloud Storage.  Prywatne zasobniki wymagają standardowego tokena okaziciela OAuth 2.0. Więcej informacji znajdziesz w sekcji [Źródła prywatne](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#private-sources). | Mapuje ścieżkę zasobnika GCS (np. `gs://your-bucket-name/data/`) na katalog obszaru roboczego (np. `/workspace/data/`). |
+| **Repozytoria GitHub** | Klonuj publiczne i prywatne bazy kodu.  Prywatne repozytoria wymagają uwierzytelniania podstawowego za pomocą osobistego tokena dostępu (PAT) GitHub. Więcej informacji znajdziesz w sekcji [Źródła prywatne](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#private-sources). | Sklonowane bezpośrednio do `/workspace/` (zwykle w ciągu `/workspace/<repo-name>`). |
 
-- **หากต้องการกู้คืนสภาพแวดล้อมก่อนหน้า** คุณสามารถ[ใช้รหัสสภาพแวดล้อมที่มีอยู่](#reusing-an-existing-environment-id)เพื่อโคลนและแยกสถานะที่แน่นอนของสภาพแวดล้อมนั้นได้
+- **Aby przywrócić poprzednie środowisko**, możesz [użyć istniejącego identyfikatora środowiska](#reusing-an-existing-environment-id), aby sklonować i rozwidlić jego dokładny stan.
 
-### การใช้รหัสสภาพแวดล้อมที่มีอยู่ซ้ำ
+### Ponowne użycie istniejącego identyfikatora środowiska
 
-หากคุณใช้เวลาในการตั้งค่าสภาพแวดล้อมแซนด์บ็อกซ์ไปแล้ว ก็ไม่จำเป็นต้องเริ่มต้นใหม่ วิธีใช้สภาพแวดล้อมที่มีอยู่
+Jeśli masz już skonfigurowane środowisko piaskownicy, nie musisz zaczynać od zera. Aby użyć istniejącego środowiska:
 
-1. ไปที่แผงสภาพแวดล้อมใน AI Studio แล้วเปลี่ยน**ประเภท** เป็น**ที่มีอยู่**
-2. ป้อน**รหัสสภาพแวดล้อม** (เช่น `env_abc123`)
+1. Otwórz panel Środowiska w AI Studio i przełącz **Typ** na **Istniejące**.
+2. Wpisz **identyfikator środowiska** (np.`env_abc123`).
 
-ดูข้อมูลเพิ่มเติมได้ที่หัวข้อ [กำหนดค่าสภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#configure-an-environment) นอกจากนี้ คุณยังดึงรหัสสภาพแวดล้อมของเซสชันปัจจุบันได้จากแท็บสภาพแวดล้อมใน UI
+Więcej informacji znajdziesz w artykule [Konfigurowanie środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#configure-an-environment). Identyfikator środowiska bieżącej sesji możesz też pobrać z karty Środowisko w interfejsie.
 
-เมื่อคุณส่งข้อความแรกไปยัง Agent การกำหนดค่าสภาพแวดล้อมจะคงที่สำหรับเซสชันนั้น คุณจะต่อเชื่อมแหล่งที่มาใหม่หรือแก้ไขรายการที่อนุญาตของเครือข่ายไม่ได้ในขณะที่การโต้ตอบกำลังทำงานอยู่
+Gdy wyślesz pierwszą wiadomość do agenta, konfiguracja środowiska zostanie ustalona na potrzeby tej sesji. Nie możesz montować nowych źródeł ani modyfikować listy dozwolonych sieci, gdy interakcja jest aktywna.
 
-## ดาวน์โหลดสภาพแวดล้อม
+## Pobieranie środowiska
 
-เมื่อสร้างสภาพแวดล้อมแล้ว คุณสามารถดาวน์โหลดสแนปช็อตของสภาพแวดล้อมได้ทุกเมื่อโดยใช้ปุ่ม**ดาวน์โหลด** ในการตั้งค่าสภาพแวดล้อมของ AI Studio Playground เพื่อดึงไฟล์สภาพแวดล้อมเป็นไฟล์ tarball
+Po utworzeniu środowiska możesz w dowolnym momencie pobrać jego zrzut, klikając przycisk **Pobierz** w ustawieniach środowiska na platformie AI Studio Playground, aby pobrać pliki środowiska jako plik tar.
 
-## การจัดการความปลอดภัยและค่าใช้จ่าย
+## Bezpieczeństwo i zarządzanie kosztami
 
-### การจัดการการใช้โทเค็น
+### Zarządzanie wykorzystaniem tokenów
 
-Agent Antigravity จะดำเนินการเวิร์กโฟลว์อัตโนมัติ ซึ่งแตกต่างจากคำขอแชทมาตรฐานที่สร้างเอาต์พุตเดียว โดยจะวางแผน เรียกใช้โค้ด สังเกตผลลัพธ์ และทำซ้ำ ซึ่งหมายความว่าพรอมต์เดียวอาจทำให้เกิดการใช้โทเค็นแบบไม่จำกัด
+W odróżnieniu od standardowej prośby o czat, która generuje pojedyncze dane wyjściowe, Antigravity Agent wykonuje autonomiczny przepływ pracy. Planuje, uruchamia kod, obserwuje wyniki i powtarza proces. Oznacza to, że jeden prompt może spowodować nieograniczone zużycie tokenów.
 
-**ระบุเกณฑ์การสิ้นสุดที่ชัดเจนในพรอมต์และจำกัดขอบเขตงานให้แคบลงสำหรับ Agent** เพื่อจัดการค่าใช้จ่าย ตัวอย่างที่ดีคือพรอมต์ เช่น *ตรวจสอบ Pull Request และหยุดเมื่อสร้างสรุป Markdown แล้ว
-อย่าพยายามเขียนการแก้ไขด้วยตนเอง*
+Aby zarządzać kosztami, **podaj w promptach jasne kryteria zakończenia i zawęź zakres zadań agenta**. Dobrym przykładem może być prompt:*Sprawdź żądanie pull i zatrzymaj się po wygenerowaniu podsumowania w formacie Markdown.
+Nie próbuj samodzielnie pisać poprawki*.
 
-### ค่าใช้จ่ายเพิ่มเติม
+### Dodatkowe koszty
 
-โดยค่าเริ่มต้น เทมเพลต Agent ทั้งหมดใน Playground จะมีสิทธิ์เข้าถึงบริการ Gemini API และสามารถเรียกใช้ API จากสภาพแวดล้อมเพื่อทำตามคำขอได้ ซึ่งอาจทำให้เกิดค่าใช้จ่ายเพิ่มเติมซึ่งจะไม่แสดงในการใช้โทเค็น
+Domyślnie wszystkie szablony agentów w Playground mają dostęp do usługi Gemini API i mogą wykonywać wywołania interfejsu API ze środowiska, aby realizować żądania. Mogą się one wiązać z dodatkowymi kosztami, które nie będą odzwierciedlone w zużyciu tokenów.
 
-ในทำนองเดียวกัน หากคุณเพิ่มบริการภายนอกอื่นๆ Agent อาจทำให้เกิดค่าใช้จ่ายเพิ่มเติมโดยการเรียกใช้บริการเหล่านี้ในนามของคุณ
+Podobnie, jeśli dodasz inne usługi zewnętrzne, agent może ponieść dodatkowe koszty, wywołując te usługi w Twoim imieniu.
 
-### รายการที่อนุญาตของเครือข่าย
+### Lista dozwolonych sieci
 
-โดยค่าเริ่มต้น ใน AI Studio ระบบจะควบคุมและจำกัดคำขอเครือข่ายขาออกจากสภาพแวดล้อมแซนด์บ็อกซ์ของ Agent อย่างเข้มงวดเพื่อให้มั่นใจในความปลอดภัย หากต้องการให้สิทธิ์ Agent ในการเข้าถึง API ภายนอก เว็บเซอร์วิส หรือตัวจัดการแพ็กเกจ คุณต้องประกาศอย่างชัดเจนดังนี้
+Domyślnie w AI Studio wszystkie wychodzące żądania sieciowe z piaskownicy Twojego agenta są ściśle kontrolowane i ograniczone, aby zapewnić bezpieczeństwo. Aby przyznać agentowi możliwość korzystania z zewnętrznych interfejsów API, usług internetowych lub menedżerów pakietów, musisz je wyraźnie zadeklarować:
 
-1. ไปที่แผงสภาพแวดล้อมใน AI Studio
-2. เลือกปุ่ม**กฎ** ข้าง**เครือข่าย**
-3. ในแผง**การกำหนดค่าเครือข่าย** ให้คลิก**เพิ่มลงในรายการที่อนุญาต** แล้วกรอกรายละเอียดที่เกี่ยวข้อง ดังนี้
-   - **การจำกัดโดเมน:** เครื่องเสมือนของ Agent จะเข้าถึงได้เฉพาะโดเมนหรือรูปแบบไวลด์การ์ดที่เฉพาะเจาะจงซึ่งเพิ่มลงในรายการ ตัวอย่างเช่น คุณสามารถป้อนโดเมนที่แน่นอน เช่น `api.github.com` หรือรูปแบบกว้างๆ เช่น `*.googleapis.com`
-   - **เพิ่มส่วนหัว HTTP และการแทรกโทเค็น:** ใช้ตัวเลือก**เพิ่มส่วนหัว HTTP** เพื่อแทรกข้อมูลเข้าสู่ระบบที่จำเป็น (เช่น โทเค็น API) สำหรับโดเมนที่เฉพาะเจาะจงอย่างปลอดภัย ข้อมูลเข้าสู่ระบบเหล่านี้จะส่งผ่านพร็อกซีขาออกอย่างปลอดภัยและจะไม่แสดงเป็นข้อความธรรมดาภายในแซนด์บ็อกซ์ของ Agent โดยตรง
+1. Otwórz panel Środowiska w AI Studio.
+2. Kliknij przycisk **reguły** obok opcji **Sieć**.
+3. W panelu **Konfiguracja sieci** kliknij **Dodaj do listy dozwolonych** i wpisz odpowiednie informacje:
+   - **Ograniczenie domeny:** maszyna wirtualna agenta może uzyskiwać dostęp tylko do określonych domen lub wzorców z symbolami wieloznacznymi dodanych do listy. Możesz na przykład wpisać dokładne domeny, takie jak `api.github.com`, lub ogólne wzorce, takie jak `*.googleapis.com`.
+   - **Dodawanie nagłówka HTTP i wstrzykiwanie tokena:** użyj opcji **Dodaj nagłówek HTTP**, aby bezpiecznie wstrzyknąć wymagane dane logowania (np. token API) dla określonej domeny. Te dane logowania są bezpiecznie przekazywane przez serwer proxy ruchu wychodzącego i nigdy nie są bezpośrednio ujawniane w formie nieprzetworzonego tekstu w piaskownicy agenta.
 
-โปรดใช้ความระมัดระวังเสมอเมื่อเพิ่มโดเมนลงในรายการที่อนุญาต การให้สิทธิ์ Agent เข้าถึงบริการที่ต้องมีการตรวจสอบสิทธิ์หมายความว่า Agent สามารถดำเนินการในนามของคุณได้ ซึ่งอาจนำไปสู่การดำเนินการที่ไม่พึงประสงค์หากไม่ได้รับการตรวจสอบอย่างละเอียด
+Zawsze zachowuj ostrożność podczas dodawania domen do listy dozwolonych. Przyznanie agentowi dostępu do uwierzytelnionych usług oznacza, że może on działać w Twoim imieniu, co w przypadku braku starannego monitorowania może prowadzić do niezamierzonych działań.
 
-### แนวทางปฏิบัติแนะนำสำหรับข้อมูลเข้าสู่ระบบ
+### Sprawdzone metody dotyczące danych logowania
 
-หากเวิร์กโฟลว์กำหนดให้ Agent ต้องตรวจสอบสิทธิ์กับบริการภายนอก คุณมีหน้าที่รับผิดชอบในการจัดเตรียมและกำหนดขอบเขตข้อมูลเข้าสู่ระบบเหล่านั้น ทำตามหลักเกณฑ์ต่อไปนี้เพื่อลดความเสี่ยง
+Jeśli Twój przepływ pracy wymaga uwierzytelniania agenta w usługach zewnętrznych, musisz udostępnić i określić zakres tych danych logowania. Aby zmniejszyć ryzyko, postępuj zgodnie z tymi wytycznymi:
 
-- **ใช้ข้อมูลเข้าสู่ระบบที่มีสิทธิ์ขั้นต่ำที่สุด:** สร้างบัญชีบริการหรือคีย์ API ที่มีเฉพาะสิทธิ์ที่ Agent ต้องการ หลีกเลี่ยงการส่งข้อมูลเข้าสู่ระบบที่มีสิทธิ์เข้าถึงแบบกว้างหรือสิทธิ์เข้าถึงระดับผู้ดูแลระบบ
-- **ใช้โทเค็นที่มีอายุสั้น:** ใช้ข้อมูลเข้าสู่ระบบหรือโทเค็นที่มีการจำกัดเวลาหรือหมดอายุแทนคีย์ API ที่มีอายุยาวนาน หากเป็นไปได้
-- **ถือว่ามีสิทธิ์เข้าถึงแบบเต็ม:** Agent อาจใช้ข้อมูลเข้าสู่ระบบที่เข้าถึงได้เพื่อทำงานที่คุณมอบหมายให้เสร็จสมบูรณ์ ให้เฉพาะข้อมูลเข้าสู่ระบบที่คุณยินดีให้สิทธิ์เข้าถึงแบบเต็ม
-- **หมุนเวียนข้อมูลเข้าสู่ระบบเป็นประจำ:** จัดการข้อมูลเข้าสู่ระบบที่แชร์กับ Agent ในลักษณะเดียวกับที่คุณจัดการข้อมูลเข้าสู่ระบบแบบเป็นโปรแกรม โดยหมุนเวียนข้อมูลเข้าสู่ระบบตามกำหนดเวลาปกติ
+- **Używaj danych logowania o jak najmniejszych uprawnieniach:** utwórz konta usługi lub klucze API
+  z uprawnieniami, których potrzebuje Twój agent. Unikaj przekazywania danych logowania z szerokim lub administracyjnym dostępem.
+- **Preferuj tokeny o krótkim czasie ważności:** w miarę możliwości używaj danych logowania lub tokenów o ograniczonym czasie ważności, które wygasają, zamiast kluczy API o długim czasie ważności.
+- **Załóż pełny dostęp:** agent może używać dowolnych danych logowania, do których ma dostęp, aby wykonać zadanie, które mu zlecisz. Podawaj tylko dane logowania, w przypadku których chcesz przyznać pełny zakres dostępu.
+- **Regularnie wykonuj rotację danych logowania:** traktuj dane logowania udostępniane agentowi tak samo jak inne dane logowania zautomatyzowane. Wykonuj ich rotację zgodnie z regularnym harmonogramem.
 
-### การเชื่อมต่อเครื่องมือและ API ภายนอก
+### Łączenie narzędzi zewnętrznych i interfejsów API
 
-คุณสามารถเชื่อมต่อเครื่องมือและ API ภายนอก (เช่น เซิร์ฟเวอร์ Model Context Protocol / MCP) เพื่อขยายความสามารถของ Agent โดยมีข้อควรระวังดังนี้
+Możesz połączyć narzędzia zewnętrzne i interfejsy API (np. serwery Model Context Protocol / MCP), aby rozszerzyć możliwości agenta. Pamiętaj, aby:
 
-- เชื่อมต่อเครื่องมือจากแหล่งที่มาที่คุณเชื่อถือเท่านั้น เครื่องมือที่เป็นอันตรายหรือเขียนมาไม่ดีอาจเปิดเผยข้อมูลหรือดำเนินการที่ไม่พึงประสงค์
-- กำหนดค่าเครื่องมือด้วยสิทธิ์ขั้นต่ำที่จำเป็นสำหรับกรณีการใช้งานของคุณ หากเครื่องมือรองรับโหมดอ่านอย่างเดียว ให้ใช้โหมดดังกล่าว เว้นแต่ว่าจำเป็นต้องมีการเขียน
-- ทดสอบเครื่องมือกับข้อมูลตัวอย่างหรือข้อมูลสังเคราะห์ก่อนเชื่อมต่อเครื่องมือกับแหล่งข้อมูลการใช้งานจริง เพื่อยืนยันว่า Agent ใช้เครื่องมือตามที่คาดไว้
+- Łącz tylko narzędzia pochodzące z zaufanych źródeł. Złośliwe lub źle napisane narzędzie może ujawniać dane lub wykonywać niezamierzone działania.
+- Skonfiguruj narzędzia z minimalnymi uprawnieniami wymaganymi w Twoim przypadku. Jeśli narzędzie obsługuje tryb tylko do odczytu, używaj go, chyba że zapisywanie jest bezwzględnie konieczne.
+- Zanim połączysz narzędzie ze źródłem danych produkcyjnych, przetestuj je na przykładowych lub syntetycznych danych, aby sprawdzić, czy agent używa go zgodnie z oczekiwaniami.
 
-### การกำกับดูแลจากเจ้าหน้าที่
+### Nadzór ze strony człowieka
 
-Agent สามารถให้เหตุผล วางแผน และดำเนินการเวิร์กโฟลว์แบบหลายขั้นตอนได้อย่างอิสระในระดับสูง แม้ว่าจะมีประสิทธิภาพ แต่ก็หมายความว่าคุณควรมีการกำกับดูแลที่เหมาะสม โดยเฉพาะอย่างยิ่งสำหรับงานที่แก้ไขข้อมูลหรือโต้ตอบกับระบบภายนอก
+Agenty mogą rozumować, planować i wykonywać wieloetapowe przepływy pracy z dużą autonomią. Jest to bardzo przydatne, ale oznacza też, że należy sprawować odpowiedni nadzór, zwłaszcza w przypadku zadań, które modyfikują dane lub wchodzą w interakcje z systemami zewnętrznymi.
 
-ตรวจสอบเอาต์พุตที่สำคัญเสมอ เช่น โค้ดที่สร้างขึ้น การแปลงข้อมูล หรือการเปลี่ยนแปลงการกำหนดค่าก่อนที่จะนำไปใช้
+Przed wdrożeniem zawsze sprawdzaj krytyczne dane wyjściowe, takie jak wygenerowany kod, transformacje danych czy zmiany konfiguracji.
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-08-19 UTC
+Ostatnia aktualizacja: 2026-08-19 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-08-19 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-08-19 UTC."],[],[]]

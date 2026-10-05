@@ -1,38 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr
-fetched_at: 2026-09-28T06:30:31.941664+00:00
-title: "Ses tasar\u0131m\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=fr
+fetched_at: 2026-10-05T06:38:49.892044+00:00
+title: "Conception de la voix \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-# Ses tasarımı
+# Conception de la voix
 
-Ses tasarımı, Gemini API Voices uç noktasını (`POST /v1beta/voices`) kullanarak doğal dil açıklamasıyla yepyeni ve kalıcı bir sesli karakter oluşturmanıza olanak tanır. Önceden oluşturulmuş seslerle veya referans ses kaydıyla sınırlı kalmak yerine bir karakterin yaşını, ses tonunu, aksanını ve temel sunumunu açıklayabilir ve projenize kaydedilen, yeniden kullanılabilir bir `voice_...` kimliği alabilirsiniz.
+La conception de voix vous permet de créer une toute nouvelle personnalité vocale persistante à partir d'une description en langage naturel à l'aide du point de terminaison Voices de l'API Gemini (`POST /v1beta/voices`). Au lieu d'être limité aux voix prédéfinies ou à l'enregistrement d'un audio de référence, vous pouvez décrire l'âge, le timbre de voix, l'accent et le ton de base d'un personnage, et recevoir un ID `voice_...` réutilisable enregistré dans votre projet.
 
-Özel sesleri tasarlamanın, denemenin ve yinelemenin en hızlı yolu, [Google AI Studio](https://aistudio.google.com/generate-speech?hl=tr)'daki etkileşimli **Ses Tasarımı** stüdyosunu kullanmaktır. Metin istemlerinden özel karakterler oluşturabilir, bunları örnek senaryolarla test edebilir ve sonuçtaki `voice_...` kimliğini doğrudan uygulama kodunuza kopyalayabilirsiniz.
+Le moyen le plus rapide de concevoir, d'essayer et d'itérer des voix personnalisées est d'utiliser le studio interactif **Voice Design** dans [Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr). Vous pouvez générer des personas personnalisés à partir de requêtes textuelles, les tester avec des exemples de scripts et copier l'ID `voice_...` obtenu directement dans le code de votre application.
 
-[Google AI Studio'da deneme](https://aistudio.google.com/generate-speech?hl=tr)
+[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
 
-Hem [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr)
-(`gemini-3.8-flash-tts`) hem de
-[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr)
-(`gemini-3.8-flash-lite-tts`) Voice tasarımını destekler.
+[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=fr) (`gemini-3.8-flash-tts`) et [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=fr) (`gemini-3.8-flash-lite-tts`) sont compatibles avec la conception de voix.
 
-## Tasarlanmış bir ses oluşturma
+## Créer une voix conçue
 
-Metin açıklamasından özel bir ses oluşturmak için Google GenAI SDK'sını (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) veya REST API'yi kullanın. `"prompted"` sesleri için hem `voices.create` (`CreateVoice`) hem de `voices.get` (`GetVoice`), yalnızca çıkış `sample_audio` alanı (`mime_type: "audio/wav"`, base64 kodlu `data`) döndürür. Böylece, oluşturulan sesi hemen dinleyebilirsiniz:
+Utilisez le SDK Google GenAI (`google-genai` 2.25.0 ou version ultérieure / `@google/genai` 2.24.0 ou version ultérieure) ou l'API REST pour créer une voix personnalisée à partir d'une description textuelle. Pour les voix `"prompted"`, `voices.create` (`CreateVoice`) et `voices.get` (`GetVoice`) renvoient un champ `sample_audio` en sortie uniquement (`mime_type: "audio/wav"`, `data` encodé en base64) pour que vous puissiez écouter immédiatement la voix générée :
 
 ### Python
 
@@ -125,16 +122,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }' | tee created_voice.json | jq -r '.sample_audio.data' | base64 --decode > voice_preview.wav
 ```
 
-## Sesli tasarımın işleyiş şekli
+## Fonctionnement de la conception vocale
 
-1. **İstemli ses oluşturma:** `type="prompted"` ve `store=True` ile `voices.create` (`POST /v1beta/voices`) numarasını arayın.
-2. **Kalıcı bir `voice_id` ve `sample_audio` önizlemesi alma:** API, ses kimliğini oluşturur, projenizde saklar ve ses için oluşturulan önizleme sesini içeren `sample_audio` (`mime_type: "audio/wav"`, base64 kodlu `data`) ile birlikte kalıcı bir kimlik (ör. `voice_abc123...`) döndürür.
-3. **Konuşma sentezleme:** `generateContent`'i ararken `speechConfig.voiceConfig.voice` içindeki `voice_id`'ı iletin.
+1. **Créer une voix guidée** : appelez `voices.create` (`POST /v1beta/voices`) avec `type="prompted"` et `store=True`.
+2. **Recevoir un aperçu permanent `voice_id` et `sample_audio`** : l'API génère l'identité vocale, la stocke dans votre projet et renvoie un ID permanent (par exemple, `voice_abc123...`) avec `sample_audio` (`mime_type: "audio/wav"`, `data` encodé en base64) contenant l'aperçu audio généré pour la voix.
+3. **Synthétiser la parole** : transmettez `voice_id` dans `speechConfig.voiceConfig.voice` lorsque vous appelez `generateContent`.
 
-## Tasarladığınız sesle konuşma sentezleme
+## Synthétiser la voix avec la voix que vous avez conçue
 
-Arama yaparken döndürülen `id` (`voice_...`) değerini `voiceConfig.voice` içinde iletin
-`generateContent`:
+Transmettez le `id` renvoyé (`voice_...`) dans `voiceConfig.voice` lorsque vous appelez `generateContent` :
 
 ### Python
 
@@ -227,13 +223,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
   }'
 ```
 
-## Seslerinizi yönetme
+## Gérer vos voix
 
-Voices API'yi kullanarak kayıtlı seslerinizi istediğiniz zaman listeleyebilir, filtreleyebilir, inceleyebilir ve silebilirsiniz (tüm filtre parametreleri için [Genişletilmiş Ses Kitaplığı ve filtreleme](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#voice-library) bölümüne bakın).
+Vous pouvez lister, filtrer, inspecter et supprimer vos voix stockées à tout moment à l'aide de l'API Voices (consultez [Bibliothèque de voix étendue et filtrage](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr#voice-library) pour tous les paramètres de filtre).
 
-- **Depolama sınırları ve TTL:** Durumlu sesler (`store=True`, istemli ve kopyalanmış sesler arasında paylaşılır) için **proje başına 200 ses** sınırı ve **1 yıllık TTL** (geçerlilik süresi) vardır.
-- **`sample_audio` availability:** `voices.create()` (`CreateVoice`) ve `voices.get()` (`GetVoice`), `"prompted"` sesleri için `sample_audio` (`mime_type:
-  "audio/wav"`, base64 kodlu `data`) değerini doldurur. Listelemenin hafif olması için `voices.list()` (`ListVoices`), `sample_audio` öğesini atlar (`"replicated"` ve `"prebuilt"` sesleri için `sample_audio` ayarlanmamıştır).
+- **Limites de stockage et valeur TTL** : les voix avec état (`store=True`, partagées entre les voix incitées et répliquées) sont limitées à **200 voix par projet** et ont une **valeur TTL (Time To Live) d'un an**.
+- **Disponibilité de `sample_audio`** : `voices.create()` (`CreateVoice`) et `voices.get()` (`GetVoice`) renseignent `sample_audio` (`mime_type:
+  "audio/wav"`, `data` encodé en base64) pour les voix `"prompted"`. Pour que la fiche reste légère, `voices.list()` (`ListVoices`) omet `sample_audio` (et `sample_audio` n'est pas défini pour les voix `"replicated"` et `"prebuilt"`).
 
 ### Python
 
@@ -299,23 +295,23 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Sesli tasarım için istem yazmayla ilgili en iyi uygulamalar
+## Bonnes pratiques concernant les requêtes pour la conception vocale
 
-- **Kalıcı vokal özelliklerini `style` yerine Voice tasarımına yerleştirin:** `voices.create`'da sesi oluştururken yaş, cinsiyet, tını, vokal dokusu ve bölgesel aksan gibi değişmez özellikleri tanımlayın.
-- **`speech_metadata.style` karakterini duruma bağlı duygular için kullanın:** Özel sesiniz oluşturulduktan sonra, konuşmacının temel kimliğini değiştirmeden adım adım oyunculuğu yönlendirmek için kısa `style` istemler (örneğin, `"whispered urgently"` veya `"cheerful and energetic"`) kullanın.
-- **Net ve kısa olun:** 1-2 cümlelik net bir açıklama (ör. *"30'lu yaşlarında, hafif Orta Batı aksanlı, canlı ve enerjik bir spor spikeri"*) çelişkili veya çok uzun paragraflara kıyasla daha temiz ve tutarlı sonuçlar verir.
+- **Définissez les caractéristiques vocales permanentes dans la conception de la voix, et non dans `style`** : définissez les caractéristiques immuables (âge, genre, timbre, texture vocale et accent régional, par exemple) lorsque vous créez la voix dans `voices.create`.
+- **Réservez `speech_metadata.style` pour les émotions situationnelles** : une fois votre voix personnalisée créée, utilisez de courtes requêtes `style` (par exemple, `"whispered urgently"` ou `"cheerful and energetic"`) pour orienter le jeu d'acteur tour par tour sans modifier l'identité principale du locuteur.
+- **Soyez précis et concis** : une description claire en une ou deux phrases (par exemple, *une commentatrice sportive énergique et dynamique d'une trentaine d'années avec un léger accent du Midwest*) produit des résultats plus clairs et plus cohérents que des paragraphes contradictoires ou trop longs.
 
-## Sırada ne var?
+## Étape suivante
 
-- [Ses kopyalama](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=tr) özelliğinde mevcut bir konuşmacının sesini nasıl kopyalayacağınızı öğrenin.
-- [Metin okuma kılavuzunda](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr) dönüş seviyesinde stil oluşturma, satır içi etiketler ve birden fazla konuşmacının yer aldığı diyaloglar hakkında bilgi edinin.
+- Découvrez comment répliquer la voix d'un locuteur existant dans [Réplication de la voix](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=fr).
+- Découvrez la mise en forme au niveau du tour, les balises intégrées et les dialogues à plusieurs locuteurs dans le [guide Text-to-Speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr).
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Son güncelleme tarihi: 2026-09-24 UTC.
+Dernière mise à jour le 2026/09/24 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]

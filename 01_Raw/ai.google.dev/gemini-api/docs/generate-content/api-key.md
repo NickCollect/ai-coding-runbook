@@ -1,134 +1,133 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-key?hl=tr
-fetched_at: 2026-09-28T06:12:21.052714+00:00
-title: "Gemini API anahtarlar\u0131n\u0131 kullanma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-key?hl=de
+fetched_at: 2026-10-05T06:44:21.985933+00:00
+title: "Gemini API-Schl\u00fcssel verwenden \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-Geri bildirim gönderin
+Feedback geben
 
-# Gemini API anahtarlarını kullanma
+# Gemini API-Schlüssel verwenden
 
-Gemini API'yi kullanmak için isteklerinizin kimliğini doğrulamanız gerekir. Standart veya yetkilendirme API anahtarı kullanarak kimliğinizi doğrulayabilirsiniz.
+Wenn Sie die Gemini API verwenden möchten, müssen Sie Ihre Anfragen authentifizieren. Sie können sich mit einem Standard- oder Autorisierungs-API-Schlüssel authentifizieren.
 
-[Gemini API anahtarı oluşturma veya görüntüleme](https://aistudio.google.com/apikey?hl=tr)
+[Gemini API-Schlüssel erstellen oder ansehen](https://aistudio.google.com/apikey?hl=de)
 
-## API anahtarı türleri: standart ve yetkilendirme
+## API-Schlüsseltypen: Standard- und Autorisierungsschlüssel
 
-API anahtarları, Gemini API'ye erişim sağlar ancak güvenlik özellikleri farklıdır. Gemini API, güvenliği artırmak için standart API anahtarlarından yetkilendirme anahtarlarına geçiş yapıyor:
+API-Schlüssel ermöglichen den Zugriff auf die Gemini API, aber ihre Sicherheitsmerkmale unterscheiden sich. Die Gemini API wird von Standard-API-Schlüsseln auf Autorisierungsschlüssel umgestellt, um die Sicherheit zu verbessern:
 
-- **Standart API anahtarları**: Faturalandırma ve kota amacıyla istekleri bir Google Cloud projesiyle ilişkilendirin. Standart anahtarlar arayanı tanımlamadığından destekleyebilecekleri izinlerin ve erişim denetiminin ayrıntı düzeyi sınırlıdır.
-- **Yetkilendirme (auth) anahtarları**: Doğrudan bir Google Cloud hizmet hesabına bağlıdır. Yetkilendirme anahtarı kullandığınızda istekleriniz, bu bağlı hizmet hesabının kimliği altında işlenir ve ayrıntılı erişim kontrolü sağlanır. Yetkilendirme anahtarları varsayılan olarak Generative Language API (Gemini API) ile sınırlıdır ve sistemlerimiz tarafından algılanan sızdırılmış anahtarların kullanımını hızlı bir şekilde durduran, hızlı etkili sızdırılmış anahtar zorunluluğu sağlar.
+- **Standard-API-Schlüssel**: Verknüpfen Anfragen mit einem Google Cloud-Projekt für Abrechnungs- und Kontingentzwecke. Mit Standardschlüsseln wird kein Aufrufer identifiziert, was die Granularität der Berechtigungen und der Zugriffssteuerung einschränkt, die sie unterstützen können.
+- **Autorisierungsschlüssel**: Direkt an ein Google Cloud-Dienstkonto gebunden. Wenn Sie einen Autorisierungsschlüssel verwenden, werden Ihre Anfragen unter der Identität des verknüpften Dienstkontos verarbeitet. So können Sie den Zugriff detailliert steuern. Autorisierungsschlüssel sind standardmäßig auf die Generative Language API (Gemini API) beschränkt und ermöglichen eine schnelle Durchsetzung bei geleakten Schlüsseln. Die Verwendung von geleakten Schlüsseln, die von unseren Systemen erkannt werden, wird so schnell unterbunden.
 
-Gemini API, güvenli kullanımı sağlamak için standart anahtarlardan kimlik doğrulama anahtarlarına geçiş yapacak:
+Um eine sichere Nutzung zu gewährleisten, wird bei der Gemini API von Standardschlüsseln auf Authentifizierungsschlüssel umgestellt:
 
-- **Varsayılan kimlik doğrulama anahtarları**: 28 Mayıs 2026'dan itibaren Google AI Studio'da oluşturulan tüm yeni API anahtarları otomatik olarak kimlik doğrulama anahtarı olarak oluşturulacak.
-- **Kısıtlanmamış anahtarlar reddedildi**: Gemini API, **kısıtlanmamış standart anahtarlardan** gelen istekleri reddeder. Açık kısıtlamalar uygulanmış standart API anahtarları çalışmaya devam eder. Bu kısıtlama, herkese açık olarak paylaşılan veya diğer hizmetlere bağlanan anahtarların yetkisiz kullanımını engeller.
+- **Standardmäßige Autorisierungsschlüssel**: Ab dem 28. Mai 2026 werden alle neuen API-Schlüssel, die in Google AI Studio erstellt werden, automatisch als Autorisierungsschlüssel erstellt.
+- **Uneingeschränkte Schlüssel abgelehnt**: Die Gemini API lehnt Anfragen von **uneingeschränkten Standardschlüsseln** ab. Standardschlüssel mit expliziten Einschränkungen funktionieren weiterhin. Diese Einschränkung verhindert die unbefugte Verwendung von Schlüsseln, die möglicherweise öffentlich geteilt oder mit anderen Diensten verknüpft sind.
 
-## Google AI Studio'da API anahtarlarını yönetme
+## API-Schlüssel in Google AI Studio verwalten
 
-Projelerinizi ve anahtarlarınızı doğrudan [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'da yönetebilirsiniz.
+Sie können Ihre Projekte und Schlüssel direkt in [Google AI Studio](https://aistudio.google.com/apikey?hl=de) verwalten.
 
-### Google Cloud projeleri
+### Google Cloud-Projekte
 
-Her Gemini API anahtarı bir [Google Cloud projesiyle](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=tr) ilişkilendirilir.
-Google Cloud projeleri faturalandırmayı, ortak çalışanları ve izinleri yönetir. Google AI Studio, bu projelere erişmek için basit bir arayüz sunar.
+Jeder Gemini API-Schlüssel ist mit einem [Google Cloud-Projekt](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=de) verknüpft.
+In Google Cloud-Projekten werden Abrechnung, Mitbearbeiter und Berechtigungen verwaltet. Google AI Studio bietet eine einfache Oberfläche für den Zugriff auf diese Projekte.
 
-- **Varsayılan proje**: Yeni bir kullanıcıysanız Google AI Studio, Hizmet Şartları'nı kabul ettikten sonra otomatik olarak varsayılan bir Google Cloud projesi ve API anahtarı oluşturur. Kontrol panelinizdeki **Projeler** görünümüne giderek bu projeyi yeniden adlandırabilirsiniz.
-- **Mevcut projeler**: Google Cloud hesabınız varsa AI Studio varsayılan bir proje oluşturmaz. Bunun yerine mevcut projelerinizi içe aktarmanız gerekir.
+- **Standardprojekt**: Wenn Sie ein neuer Nutzer sind, werden in Google AI Studio automatisch ein Standard-Google Cloud-Projekt und ein API-Schlüssel erstellt, nachdem Sie die Nutzungsbedingungen akzeptiert haben. Sie können dieses Projekt umbenennen, indem Sie in Ihrem Dashboard zur Ansicht **Projekte** wechseln.
+- **Vorhandene Projekte**: Wenn Sie bereits ein Google Cloud-Konto haben, wird in AI Studio kein Standardprojekt erstellt. Stattdessen müssen Sie Ihre vorhandenen Projekte importieren.
 
-### Projeleri içe aktarma
+### Projekte importieren
 
-Google AI Studio, varsayılan olarak Google Cloud projelerinizin tümünü göstermez. Kullanmak istediğiniz projeleri içe aktarmanız gerekir:
+Standardmäßig werden in Google AI Studio nicht alle Ihre Google Cloud-Projekte angezeigt. Sie müssen die Projekte importieren, die Sie verwenden möchten:
 
-1. [Google AI Studio](https://aistudio.google.com?hl=tr)'ya gidin.
-2. Soldaki panelden **Kontrol Paneli**'ni açın ve **Projeler**'i seçin.
-3. **Projeleri içe aktar** düğmesini tıklayın.
-4. İçe aktarmak istediğiniz Google Cloud projesini arayıp seçin ve **İçe aktar**'ı tıklayın.
-5. İçe aktarıldıktan sonra, kontrol panelindeki **API Anahtarları** sayfasına giderek bu projede anahtar oluşturun.
+1. Rufen Sie [Google AI Studio](https://aistudio.google.com?hl=de) auf.
+2. Öffnen Sie im Menü auf der linken Seite das **Dashboard** und wählen Sie **Projekte** aus.
+3. Klicken Sie auf die Schaltfläche **Projekte importieren**.
+4. Suchen Sie nach dem Google Cloud-Projekt, das Sie importieren möchten, und wählen Sie es aus. Klicken Sie dann auf **Importieren**.
+5. Rufen Sie nach dem Importieren im Dashboard die Seite **API-Schlüssel** auf, um einen Schlüssel in diesem Projekt zu erstellen.
 
-### Anahtar oluşturma izinleriyle ilgili sorunları giderme
+### Fehlerbehebung bei Berechtigungen zum Erstellen von Schlüsseln
 
-**API anahtarı oluştur** düğmesi kullanılamıyorsa ve şu mesajı gösteriyorsa:
-*"Bu projede anahtar oluşturma izniniz yok"*, gerekli IAM izinlerine sahip değilsiniz demektir.
+Wenn die Schaltfläche **API-Schlüssel erstellen** nicht verfügbar ist und die Meldung *Sie sind nicht berechtigt, in diesem Projekt einen Schlüssel zu erstellen* angezeigt wird, fehlen Ihnen die erforderlichen IAM-Berechtigungen.
 
-Google Cloud projenizin veya kuruluşunuzun yöneticisinden size aşağıdaki izinleri içeren bir rol (ör. Proje Düzenleyici) vermesini isteyin:
+Bitten Sie Ihren Google Cloud-Projekt- oder Organisationsadministrator, Ihnen eine Rolle mit den folgenden Berechtigungen zuzuweisen, z. B. „Projektbearbeiter“:
 
-- `resourcemanager.projects.get`: AI Studio'nun projeyi doğrulamasını sağlar.
-- `apikeys.keys.create`: Anahtar oluşturmaya izin verir.
-- `serviceusage.services.enable`: Generative Language API'nin etkinleştirilmesini sağlar.
-- `iam.serviceAccounts.create`: Bağlı hizmet hesabını oluşturmak için gereklidir.
-- `iam.serviceAccountApiKeyBindings.create`: Hizmet hesabını API anahtarına bağlar.
+- `resourcemanager.projects.get`: Ermöglicht AI Studio, das Projekt zu überprüfen.
+- `apikeys.keys.create`: Ermöglicht die Schlüsselgenerierung.
+- `serviceusage.services.enable`: Stellt sicher, dass die Generative Language API aktiviert ist.
+- `iam.serviceAccounts.create`: Erforderlich, um das verknüpfte Dienstkonto zu erstellen.
+- `iam.serviceAccountApiKeyBindings.create`: Bindet das Dienstkonto an den API-Schlüssel.
 
-Yönetici erişimi alamıyorsanız anahtarlarınızı oluşturmak için bir kuruluşla ilişkili olmayan yeni bir Google Cloud projesi oluşturabilirsiniz.
+Wenn Sie keinen Administratorzugriff erhalten können, können Sie ein neues Google Cloud-Projekt erstellen, das nicht mit einer Organisation verknüpft ist, um Ihre Schlüssel zu generieren.
 
-## Ortamınızı kurma
+## Umgebung einrichten
 
-Anahtarınız olduğunda ortamınızı, uygulamalarınızda güvenli bir şekilde kullanacak şekilde yapılandırın.
+Nachdem Sie einen Schlüssel haben, konfigurieren Sie Ihre Umgebung so, dass er sicher in Ihren Anwendungen verwendet wird.
 
-### Ortam değişkenlerini kullanın (önerilir)
+### Umgebungsvariablen verwenden (empfohlen)
 
-`GEMINI_API_KEY` veya `GOOGLE_API_KEY` ortam değişkenini ayarlayın. Gemini API istemci kitaplıkları bu değişkenleri otomatik olarak algılar ve kullanır. Her ikisi de ayarlanmışsa `GOOGLE_API_KEY` öncelikli olur.
+Legen Sie die Umgebungsvariable `GEMINI_API_KEY` oder `GOOGLE_API_KEY` fest. Die Gemini API-Clientbibliotheken erkennen und verwenden diese Variablen automatisch. Wenn beide festgelegt sind, hat `GOOGLE_API_KEY` Vorrang.
 
-Değişkeni ayarlamak için işletim sisteminizi seçin:
+Wählen Sie Ihr Betriebssystem aus, um die Variable festzulegen:
 
-### Linux/macOS - Bash
+### Linux/macOS – Bash
 
-Bir bash yapılandırma dosyanızın olup olmadığını doğrulayın:
+Prüfen Sie, ob Sie eine Bash-Konfigurationsdatei haben:
 
 ```
 ~/.bashrc
 ```
 
-Yoksa bir tane oluşturup açın:
+Falls nicht, erstellen Sie eine und öffnen Sie sie:
 
 ```
 touch ~/.bashrc && open ~/.bashrc
 ```
 
-Dosyanın sonuna dışa aktarma komutunu ekleyin:
+Fügen Sie den Exportbefehl am Ende der Datei hinzu:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Dosyayı kaydedin ve değişiklikleri uygulayın:
+Speichern Sie die Datei und wenden Sie dann die Änderungen an:
 
 ```
 source ~/.bashrc
 ```
 
-### macOS - Zsh
+### macOS – Zsh
 
-zsh yapılandırma dosyanızın olup olmadığını doğrulayın:
+Prüfen Sie, ob Sie eine ZSH-Konfigurationsdatei haben:
 
 ```
 ~/.zshrc
 ```
 
-Yoksa bir tane oluşturup açın:
+Falls nicht, erstellen Sie eine und öffnen Sie sie:
 
 ```
 touch ~/.zshrc && open ~/.zshrc
 ```
 
-Dışa aktarma komutunu ekleyin:
+Fügen Sie den Exportbefehl hinzu:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Dosyayı kaydedin ve değişiklikleri uygulayın:
+Speichern Sie die Datei und wenden Sie dann die Änderungen an:
 
 ```
 source ~/.zshrc
@@ -136,15 +135,15 @@ source ~/.zshrc
 
 ### Windows
 
-1. Windows arama çubuğunda "Environment Variables" (Ortam Değişkenleri) ifadesini arayın.
-2. Sistem Özellikleri iletişim kutusunda **Ortam Değişkenleri**'ni tıklayın.
-3. **Kullanıcı değişkenleri** veya **Sistem değişkenleri** altında **Yeni...** seçeneğini tıklayın.
-4. Değişken adını `GEMINI_API_KEY`, değeri ise API anahtarınız olarak ayarlayın.
-5. Kaydetmek için **Tamam**'ı tıklayın. Değişkeni yüklemek için yeni bir terminal oturumu açın.
+1. Suchen Sie in der Windows-Suchleiste nach „Umgebungsvariablen“.
+2. Klicken Sie im Dialogfeld „Systemeigenschaften“ auf **Umgebungsvariablen**.
+3. Klicken Sie unter **Nutzervariablen** oder **Systemvariablen** auf **Neu…**.
+4. Legen Sie den Variablennamen auf `GEMINI_API_KEY` und den Wert auf Ihren API-Schlüssel fest.
+5. Klicken Sie zum Speichern auf **OK**. Öffnen Sie eine neue Terminalsitzung, um die Variable zu laden.
 
-### API anahtarını kodda açıkça belirtme
+### API-Schlüssel explizit im Code angeben
 
-İstemciyi başlatırken API anahtarını açıkça iletebilirsiniz. Bu işlemi yalnızca ortam değişkenlerini kullanamıyorsanız yapın.
+Sie können den API-Schlüssel explizit übergeben, wenn Sie den Client initialisieren. Tun Sie dies nur, wenn Sie keine Umgebungsvariablen verwenden können.
 
 ### Python
 
@@ -178,7 +177,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -252,98 +251,98 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-## Güvenlik ve sır yönetimi
+## Sicherheits- und Secret-Verwaltung
 
-Gemini API anahtarınızı şifre gibi kullanın. Tehlikeye girerse diğer kullanıcılar projenizin kotasını kullanabilir, beklenmedik faturalandırma ücretlerine neden olabilir ve özel kaynaklara erişebilir.
+Behandeln Sie Ihren Gemini API-Schlüssel wie ein Passwort. Wenn Ihr Projekt kompromittiert wird, können andere das Kontingent Ihres Projekts nutzen, unerwartete Abrechnungsgebühren verursachen und auf private Ressourcen zugreifen.
 
-### Önemli güvenlik kuralları
+### Kritische Sicherheitsregeln
 
-- **Anahtarları gizli tutun**: API anahtarlarını asla Git gibi kaynak kontrol sistemlerine işlemeyin.
-- **Üretimde anahtarları asla istemci tarafında kullanmayın**: API anahtarlarını doğrudan web veya mobil uygulamalara sabit kodlamayın. İstemci tarafı kodunda derlenen anahtarlar kullanıcılar tarafından çıkarılabilir. İstemci tarafı uygulamaları güvenli hale getirmek için gerçek API çağrılarını yapmak üzere bir arka uç proxy sunucusu çalıştırın.
+- **Schlüssel vertraulich behandeln**: API-Schlüssel dürfen niemals in Quellcodeverwaltungssysteme wie Git eingecheckt werden.
+- **Schlüssel niemals clientseitig in der Produktion preisgeben**: API-Schlüssel nicht direkt in Web- oder mobilen Apps hartcodieren. Schlüssel, die in clientseitigem Code kompiliert werden, können von Nutzern extrahiert werden. Um clientseitige Apps zu schützen, können Sie einen Backend-Proxyserver ausführen, über den die eigentlichen API-Aufrufe erfolgen.
 
-### Gizli veri yönetimiyle ilgili en iyi uygulamalar
+### Best Practices für die Secret-Verwaltung
 
-- **Ortam değişkenleri**: Anahtarları yapılandırma dosyaları yerine ortam değişkenlerinden okuyun.
-- **Secret Manager**: Üretim için anahtarlarınızı [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=tr) gibi güvenli bir gizli anahtar deposunda saklayın.
-- **Faturalandırma uyarıları**: Kullanım veya maliyetlerde artış olması durumunda sizi bilgilendirmek için Google Cloud Console'da faturalandırma uyarıları ayarlayın.
+- **Umgebungsvariablen**: Schlüssel werden aus Umgebungsvariablen anstatt aus Konfigurationsdateien gelesen.
+- **Secret Manager**: Speichern Sie Ihre Schlüssel für die Produktion in einem sicheren Secret-Speicher wie [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=de).
+- **Abrechnungsbenachrichtigungen**: Richten Sie in der Google Cloud Console Abrechnungsbenachrichtigungen ein, um benachrichtigt zu werden, wenn die Nutzung oder die Kosten steigen.
 
-### Sızıntı yanıtı kontrol listesi
+### Checkliste für die Reaktion auf Datenlecks
 
-API anahtarınızın sızdırıldığından şüpheleniyorsanız:
+Wenn Sie vermuten, dass Ihr API-Schlüssel offengelegt wurde, gehen Sie so vor:
 
-1. **Yeni bir anahtar oluşturun**: Google AI Studio veya Cloud Console'da yedek bir anahtar oluşturun.
-2. **Uygulamanızı güncelleyin**: Kodunuzu yeni anahtarı kullanarak dağıtın.
-3. **Güvenliği ihlal edilmiş anahtarı devre dışı bırakma veya silme**: Yeni anahtar doğrulandıktan sonra Cloud Console'da sızdırılmış anahtarı devre dışı bırakın. Uygulama kapalı kalma süresini önlemek için yeni anahtar tamamen etkinleşene kadar eski anahtarı silmeyin.
-4. **Kullanımı denetleme**: Yetkisiz etkinliği belirlemek için Google Cloud Console'da faturalandırma günlüklerini ve API kullanımını kontrol edin.
+1. **Neuen Schlüssel generieren**: Erstellen Sie einen Ersatzschlüssel in Google AI Studio oder in der Cloud Console.
+2. **Anwendung aktualisieren**: Stellen Sie Ihren Code mit dem neuen Schlüssel bereit.
+3. **Manipulierten Schlüssel deaktivieren oder löschen**: Deaktivieren Sie den geleakten Schlüssel in der Cloud Console, sobald der neue Schlüssel bestätigt wurde. Löschen Sie den alten Schlüssel erst, wenn der neue Schlüssel vollständig aktiv ist, um Ausfallzeiten der Anwendung zu vermeiden.
+4. **Nutzung prüfen**: Prüfen Sie Abrechnungslogs und API-Nutzung in der Google Cloud Console, um unautorisierte Aktivitäten zu erkennen.
 
-## Anahtarlarınızı kısıtlama ve güvenliğini sağlama
+## Schlüssel einschränken und schützen
 
-API anahtarlarınıza kısıtlamalar eklemek, bir anahtarın güvenliği ihlal edilirse oluşabilecek olası zararı en aza indirir.
+Wenn Sie Ihren API-Schlüsseln Einschränkungen hinzufügen, minimieren Sie den potenziellen Schaden, falls ein Schlüssel manipuliert wird.
 
-### İstek kaynağı kısıtlamaları uygulama
+### Einschränkungen für den Ursprung von Anfragen anwenden
 
-Kaynak kısıtlamaları, anahtarınızı kullanabilecek IP adreslerini, web sitelerini veya uygulamaları sınırlar.
+Mit Ursprungseinschränkungen wird eingeschränkt, welche IP-Adressen, Websites oder Anwendungen Ihren Schlüssel verwenden können.
 
-1. [Google Cloud Console Kimlik Bilgileri sayfasına](https://console.cloud.google.com/apis/credentials?hl=tr) gidin.
-2. Projenizi seçin ve kısıtlamak istediğiniz API anahtarının adını tıklayın.
-3. **Uygulama kısıtlamaları** bölümünde **IP adresleri**'ni (veya ortamınız için uygun kısıtlama türünü) seçin.
-4. İzin verilen IP adreslerini veya aralıklarını belirtin, ardından **Kaydet**'i tıklayın.
+1. Rufen Sie in der Google Cloud Console die [Seite „Anmeldedaten“](https://console.cloud.google.com/apis/credentials?hl=de) auf.
+2. Wählen Sie Ihr Projekt aus und klicken Sie auf den Namen des API-Schlüssels, den Sie einschränken möchten.
+3. Wählen Sie unter **Anwendungseinschränkungen** die Option **IP-Adressen** (oder den für Ihre Umgebung geeigneten Einschränkungstyp) aus.
+4. Geben Sie die zulässigen IP-Adressen oder ‑Bereiche an und klicken Sie auf **Speichern**.
 
-### Sınırsız standart API anahtarlarının güvenliğini sağlama
+### Uneingeschränkte Standard-API-Schlüssel sichern
 
-Gemini API'yi kullanmaya devam etmek için tüm sınırsız anahtarları güvenli hale getirmeniz gerekir.
+Wenn Sie die Gemini API weiterhin verwenden möchten, müssen Sie alle uneingeschränkten Schlüssel schützen.
 
-#### Anahtarı yalnızca AI Studio üzerinden Gemini API ile kısıtlama
+#### Schlüssel über AI Studio nur auf die Gemini API beschränken
 
-Anahtarı yalnızca Gemini API için kullanıyorsanız doğrudan AI Studio'da güvenli hale getirin:
+Wenn Sie den Schlüssel nur für die Gemini API verwenden, können Sie ihn direkt in AI Studio schützen:
 
-1. [Google AI Studio](https://aistudio.google.com/api-keys?hl=tr)'daki **API Anahtarları** sayfasında, **Sınırsız** etiketiyle işaretlenmiş anahtarları bulun.
-2. İmleci etiketin üzerine getirip iletişim kutusunda **Kısıtlama ekle**'yi tıklayın.
-3. **Yalnızca Gemini API ile kısıtla**'yı seçin.
-4. Onaylamak için **Anahtarı kısıtla**'yı tıklayın.
+1. Suchen Sie auf der Seite **API-Schlüssel** in [Google AI Studio](https://aistudio.google.com/api-keys?hl=de) nach Schlüsseln, die mit dem Label **Uneingeschränkt** gekennzeichnet sind.
+2. Bewegen Sie den Mauszeiger auf das Label und klicken Sie im Dialogfeld auf **Einschränkungen hinzufügen**.
+3. Wählen Sie **Nur auf Gemini API beschränken** aus.
+4. Klicken Sie zur Bestätigung auf **Schlüssel einschränken**.
 
-#### Google Cloud Console üzerinden anahtarı diğer hizmetler için kısıtlama
+#### Schlüssel für andere Dienste über die Google Cloud Console einschränken
 
-Anahtar diğer Google API'leriyle paylaşılıyorsa (önerilmez) Cloud Console'da kısıtlayın. **Not: Bu anahtarı kullanan Gemini API istekleri, bu kısıtlamalar uygulandıktan sonra başarısız olur.**
+Wenn der Schlüssel für andere Google-APIs freigegeben ist (nicht empfohlen), schränken Sie ihn in der Cloud Console ein. **Hinweis: Gemini API-Anfragen mit diesem Schlüssel schlagen fehl, nachdem diese Einschränkungen angewendet wurden.**
 
-1. [Google Cloud Console Kimlik Bilgileri sayfasını](https://console.cloud.google.com/apis/credentials?hl=tr) ziyaret edin.
-2. Projeyi ve API anahtarını seçin.
-3. **API kısıtlamaları** bölümünde **Anahtarı kısıtla**'yı seçin.
-4. Açılır listeden, bu anahtarın erişmesini istediğiniz API'leri seçin. **Generative Language API**'yi seçmeyin.
-5. **Kaydet**'i tıklayın. Gemini API'yi kullanmaya devam etmek için AI Studio'da ayrı ve kısıtlanmış bir anahtar oluşturun.
+1. Rufen Sie die [Seite „Anmeldedaten“ in der Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=de) auf.
+2. Wählen Sie das Projekt und den API-Schlüssel aus.
+3. Wählen Sie unter **API-Einschränkungen** die Option **Schlüssel einschränken** aus.
+4. Wählen Sie im Drop-down-Menü die APIs aus, auf die mit diesem Schlüssel zugegriffen werden soll. Wählen Sie nicht die **Generative Language API** aus.
+5. Klicken Sie auf **Speichern**. Erstellen Sie in AI Studio einen separaten, eingeschränkten Schlüssel, um die Gemini API weiterhin verwenden zu können.
 
-### Etkin olmayan engellenmiş anahtarlar
+### Blockierte inaktive Schlüssel
 
-7 Mayıs 2026'dan itibaren Gemini API, uzun süredir kullanılmayan sınırsız API anahtarlarını engeller. Bu anahtarlar, AI Studio'da **Engellendi** etiketini gösterir. Devam etmek için yeni bir anahtar oluşturmanız veya mevcut bir kısıtlanmış anahtarı kullanmanız gerekir.
+Ab dem 7. Mai 2026 werden nicht eingeschränkte API-Schlüssel, die über einen längeren Zeitraum nicht verwendet wurden, von der Gemini API blockiert. Für diese Schlüssel wird in AI Studio das Tag **Gesperrt** angezeigt. Sie müssen einen neuen Schlüssel generieren oder einen vorhandenen eingeschränkten Schlüssel verwenden, um fortzufahren.
 
-## Kimlik doğrulama anahtarına geçiş yapma
+## Zu einem Authentifizierungsschlüssel migrieren
 
-Yeni bir kimlik doğrulama API anahtarı oluşturmak ve uygulamalarınızı güncellemek için aşağıdaki adımları uygulayın:
+So erstellen Sie einen neuen API-Schlüssel für die Authentifizierung und aktualisieren Ihre Anwendungen:
 
-1. [AI Studio API anahtarları sayfasına](https://aistudio.google.com/api-keys?hl=tr) gidin.
-2. **Standart** olarak listelenen anahtarları belirlemek için **Anahtar Türü** sütununu kontrol edin.
-3. Yeni bir anahtar oluşturmak için **API anahtarı oluştur**'u tıklayın. AI Studio'da oluşturulan tüm yeni anahtarlar otomatik olarak kimlik doğrulama anahtarı olarak oluşturulur.
-4. Yeni kimlik doğrulama API anahtarını kopyalayın.
-5. Uygulama kodunuzu, ortam değişkenlerinizi ve tüm dağıtım yapılandırmalarınızı yeni kimlik doğrulama API anahtarını kullanacak şekilde güncelleyin.
-6. Uygulamanızı test ederek yeni anahtarla doğru şekilde çalıştığını doğrulayın.
-7. Doğrulama işlemi tamamlandıktan sonra kötüye kullanımı önlemek için eski trafik anahtarınızı silin veya iptal edin.
+1. Rufen Sie die Seite [AI Studio-API-Schlüssel](https://aistudio.google.com/api-keys?hl=de) auf.
+2. Sehen Sie in der Spalte **Key Type** (Schlüsseltyp) nach, ob Schlüssel als **Standard** aufgeführt sind.
+3. Klicken Sie auf **API-Schlüssel erstellen**, um einen neuen Schlüssel zu generieren. Alle neuen Schlüssel, die in AI Studio erstellt werden, sind automatisch Autorisierungsschlüssel.
+4. Kopieren Sie den neuen API-Schlüssel für die Authentifizierung.
+5. Aktualisieren Sie Ihren Anwendungscode, Ihre Umgebungsvariablen und alle Bereitstellungskonfigurationen, um den neuen API-Schlüssel für die Authentifizierung zu verwenden.
+6. Testen Sie Ihre Anwendung, um zu prüfen, ob sie mit dem neuen Schlüssel ordnungsgemäß funktioniert.
+7. Löschen oder widerrufen Sie nach der Bestätigung Ihren alten Traffic-Schlüssel, um Missbrauch zu verhindern.
 
-## Sınırlamalar
+## Beschränkungen
 
-Google AI Studio, proje ve anahtar yönetimiyle ilgili aşağıdaki sınırlamaları uygular:
+Für Google AI Studio gelten die folgenden Einschränkungen für die Projekt- und Schlüsselverwaltung:
 
-- Google AI Studio'nun **Projeler** sayfasında tek seferde en fazla 10 proje oluşturabilirsiniz.
-- **API anahtarları** ve **Projeler** sayfalarında en fazla 100 anahtar ve 50 proje gösterilir.
-- Yalnızca kısıtlanmamış veya özellikle Generative Language API (Gemini API) ile kısıtlanmış API anahtarları gösterilir.
+- Sie können maximal 10 Projekte gleichzeitig über die Seite **Projekte** in Google AI Studio erstellen.
+- Auf den Seiten **API-Schlüssel** und **Projekte** werden maximal 100 Schlüssel und 50 Projekte angezeigt.
+- Es werden nur API-Schlüssel angezeigt, die uneingeschränkt sind oder speziell auf die Generative Language API (Gemini API) beschränkt sind.
 
-Gelişmiş proje yönetimi için veya anahtarları başka kısıtlamalarla değiştirmek için [Google Cloud Console kimlik bilgileri sayfasını](https://console.cloud.google.com/apis/credentials?hl=tr) kullanın.
+Für die erweiterte Projektverwaltung oder zum Ändern von Schlüsseln mit anderen Einschränkungen verwenden Sie die [Seite „Anmeldedaten“ in der Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=de).
 
-Geri bildirim gönderin
+Feedback geben
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Son güncelleme tarihi: 2026-09-25 UTC.
+Zuletzt aktualisiert: 2026-09-25 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Haben Sie Feedback für uns?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-25 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-25 (UTC)."],[],[]]

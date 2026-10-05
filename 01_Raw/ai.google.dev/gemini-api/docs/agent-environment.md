@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr
-fetched_at: 2026-09-28T06:22:37.906126+00:00
+fetched_at: 2026-10-05T06:47:52.053326+00:00
 title: "Environnements dans les agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

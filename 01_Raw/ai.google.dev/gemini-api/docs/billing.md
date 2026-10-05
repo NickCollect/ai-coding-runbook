@@ -1,433 +1,452 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/billing?hl=ja
-fetched_at: 2026-09-28T06:10:59.003459+00:00
-title: "\u8ab2\u91d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/billing?hl=de
+fetched_at: 2026-10-05T06:47:14.738343+00:00
+title: "Abrechnung \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-フィードバックを送信
+Feedback geben
 
-# 課金
+# Abrechnung
 
-このガイドでは、Gemini API のさまざまな課金オプションの概要、課金を有効にして使用状況をモニタリングする方法、課金に関するよくある質問（FAQ）の回答について説明します。
+In diesem Leitfaden finden Sie einen Überblick über die verschiedenen Abrechnungsoptionen für die Gemini API. Außerdem wird erläutert, wie Sie die Abrechnung aktivieren und die Nutzung im Blick behalten können. Darüber hinaus werden häufig gestellte Fragen zur Abrechnung beantwortet.
 
-## お支払いと階層について
+## Abrechnung und Stufen
 
-Gemini API の請求階層は、お支払い履歴に基づいて決まります。
+Die Abrechnung für die Gemini API basiert auf Ihrem Zahlungsverlauf.
 
-| 使用量ティア | 予選 | [課金ティアの上限](#spend-caps) |
+| Nutzungsstufe | Qualifikation | [Obergrenze für die Abrechnungsstufe](#spend-caps) |
 | --- | --- | --- |
-| **無料** | [有効なプロジェクト](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#google-cloud-projects)または無料トライアル | なし |
-| **Tier 1** | [有効な請求先アカウントを設定してリンクしている](#setup-billing) | $250 |
-| **Tier 2** | $100 のお支払い + 最初のお支払いが完了してから 3 日 | $2,000 |
-| **Tier 3** | $1,000 のお支払い + 最初のお支払いが完了してから 30 日 | 20,000 ～ 100,000 ドル以上 |
+| **Kostenlos** | [Aktives Projekt](https://ai.google.dev/gemini-api/docs/api-key?hl=de#google-cloud-projects) oder kostenloser Testzeitraum | – |
+| **Stufe 1** | [Aktives Rechnungskonto einrichten und verknüpfen](#setup-billing) | 250 $ |
+| **Tier 2** | 100 $ + 3 Tage seit erster eingegangener Zahlung | 2.000 $ |
+| **Stufe 3** | 1.000 $ bezahlt + 30 Tage seit erster erfolgreicher Zahlung | 20.000 $ bis 100.000 $ und mehr |
 
-新しいアカウントは無料枠から始まり、Gemini API と AI Studio の[特定のモデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)に、モデルの無料枠の[レート上限](https://aistudio.google.com/rate-limit?hl=ja)までアクセスできます。
+Neue Konten beginnen mit der Kostenlosen Stufe, die den Zugriff auf [bestimmte Modelle](https://ai.google.dev/gemini-api/docs/pricing?hl=de) in der Gemini API und AI Studio ermöglicht, bis zu den [Ratenbeschränkungen](https://aistudio.google.com/rate-limit?hl=de) der Kostenlosen Stufe der Modelle.
 
-ビルドモードからアプリケーションを直接デプロイするには、**Google Cloud Starter Tier** を使用します。このティアでは、Google Cloud プロジェクトや請求先アカウントを設定せずに、最大 2 つのフルスタック アプリケーションを公開できます。詳細については、[Google AI Studio からのデプロイ](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ja)をご覧ください。詳細については、[Google Cloud スターター ティアのドキュメント](https://docs.cloud.google.com/docs/starter-tier?hl=ja)をご覧ください。
+Um Ihre Anwendungen direkt über den Build-Modus bereitzustellen, können berechtigte Konten die **Google Cloud Starter-Stufe** verwenden. Mit dieser Stufe können Sie bis zu zwei Full-Stack-Anwendungen veröffentlichen, ohne ein Google Cloud-Projekt oder ein Rechnungskonto einzurichten.
+Weitere Informationen zu den Voraussetzungen finden Sie unter [Bereitstellung über Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=de#starter-tier-eligibility). Weitere Informationen finden Sie in der [Dokumentation zum Google Cloud-Starter-Tier](https://docs.cloud.google.com/docs/starter-tier?hl=de).
 
-より高いレート上限にアクセスし、高度なモデルを使用し、プロンプトとレスポンスが Google プロダクトの改善に**使用されない**ようにするには、[請求先アカウントをリンク](#setup-billing)して[前払い](#prepay)し、有料階層に移行します。\*その後、累計費用とアカウントの開設期間に基づいて上位のティアに移行します。
+Wenn Sie auf höhere Ratenbeschränkungen zugreifen, erweiterte Modelle verwenden und dafür sorgen möchten, dass Ihre Prompts und Antworten **nicht** zur Verbesserung von Google-Produkten verwendet werden\*, können Sie [ein Abrechnungskonto verknüpfen](#setup-billing) und [Vorauszahlungen leisten](#prepay), um zu den kostenpflichtigen Stufen zu wechseln.
+Anschließend steigen Sie basierend auf den kumulativen Ausgaben und dem Kontoalter in höhere Stufen auf.
 
-ティア、レートの上限、請求先アカウントの上限はすべて、[請求先アカウント](#cloud-billing) レベルで決定されます。
+Stufen, Ratenbeschränkungen und Abrechnungskontolimits werden alle auf [Rechnungskontoebene](#cloud-billing) festgelegt.
 
-\* *エンタープライズ グレードのデータ プライバシー: 有料サービスのデータ使用について詳しくは、[利用規約](https://ai.google.dev/gemini-api/terms?hl=ja#data-use-paid)をご覧ください。*
+\* *Datenschutz auf Unternehmensniveau: Weitere Informationen zur Datennutzung für kostenpflichtige Dienste finden Sie in den [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de#data-use-paid).*
 
-## お支払い情報を設定して有料枠にアクセスする
+## Abrechnung einrichten, um auf das kostenpflichtige Abo zuzugreifen
 
-[Google AI Studio](https://aistudio.google.com/projects?hl=ja) でプロジェクトを作成してお支払い情報を設定するか、既存のプロジェクトをインポートして、有料枠にアップグレードできます。無料枠から有料枠にアップグレードするには、請求先アカウントをリンクして[前払い](#prepay)を行い、アカウントに最低 5 ドル（または他の通貨での同等額）のクレジットを追加します。
+Sie können ein Projekt erstellen und die Abrechnung einrichten oder ein vorhandenes Projekt importieren, um in [Google AI Studio](https://aistudio.google.com/projects?hl=de) ein Upgrade auf die kostenpflichtige Version durchzuführen.
+Wenn Sie von der kostenlosen Stufe auf die kostenpflichtige Stufe upgraden, müssen Sie ein Rechnungskonto verknüpfen und [Vorauszahlungen](#prepay) leisten, um Ihrem Konto ein Guthaben von mindestens 5 $ (oder dem entsprechenden Betrag in anderen Währungen) hinzuzufügen.
 
-1. AI Studio の [API キー](https://aistudio.google.com/api-keys?hl=ja)ページ、[プロジェクト](https://aistudio.google.com/projects?hl=ja) ページ、または AI Studio の [**お支払い情報を設定**] ボタンが表示されている任意の場所に移動します。
-   - 新規ユーザーには、デフォルトで[プロジェクトと API キー](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#google-cloud-projects)が作成されます。
-   - 新しいキーが必要な場合は、[[**API キーを作成**](https://aistudio.google.com/api-keys?hl=ja)] をクリックし、ダイアログに沿ってキーとプロジェクトのペアをテーブルに追加します。
-2. 有料階層にアップグレードする無料枠プロジェクトを見つけ、[*課金階層*] 列の [**課金を設定**] をクリックします。
-3. Google 請求先アカウントをまだ設定していない場合:
-   - 利用規約に同意するために、国を選択するよう求められます。
-   - 次に、連絡先情報とお支払い方法を入力または確認して、続行します。
-4. 過去に Google 請求先アカウントを設定したことがある場合:
-   - 既存の請求先アカウントから選択するよう求められます。
-   - 既存のアカウントを使用しない場合は、[**新しい請求先アカウントを追加**] をクリックして、連絡先情報とお支払い方法を入力または確認してから続行します。
-5. 次に、以下のいずれかになります。
-   - 請求設定を完了するために最低 $5 の前払いを求められた（つまり、アカウントが[前払い](#prepay)請求プランに自動的に割り当てられている）。
-   - アカウントの[前払い](#prepay)と[後払い](#postpay)の請求プランを選択できます。
-   - 新しい前払いシステムがすべてのユーザーに反映されるまでの間（2026 年 3 月 23 日から）、[後払い](#postpay)の請求プランに割り当てられます。
-6. 前払いまたは後払いを選択すると、アカウントの設定が完了します。
+1. Rufen Sie in AI Studio die Seite [API-Schlüssel](https://aistudio.google.com/api-keys?hl=de), die Seite [Projekte](https://aistudio.google.com/projects?hl=de) oder eine andere Seite auf, auf der die Schaltfläche **Abrechnung einrichten** angezeigt wird.
+   - Für neue Nutzer werden standardmäßig ein [Projekt und ein API-Schlüssel](https://ai.google.dev/gemini-api/docs/api-key?hl=de#google-cloud-projects) erstellt.
+   - Wenn Sie einen neuen Schlüssel benötigen, klicken Sie auf [**API-Schlüssel erstellen**](https://aistudio.google.com/api-keys?hl=de) und folgen Sie dem Dialogfeld, um der Tabelle ein Schlüssel-Projekt-Paar hinzuzufügen.
+2. Suchen Sie das Kostenlose Stufe-Projekt, das Sie auf das Paid Tier upgraden möchten, und klicken Sie in der Spalte *Billing Tier* (Abrechnungsstufe) auf **Set up billing** (Abrechnung einrichten).
+3. Wenn Sie noch nie ein Google-Rechnungskonto eingerichtet haben:
+   - Sie werden aufgefordert, Ihr Land auszuwählen, um den Nutzungsbedingungen zuzustimmen.
+   - Geben Sie dann Ihre Kontaktdaten und Zahlungsmethode ein oder bestätigen Sie sie, um fortzufahren.
+4. Wenn Sie in der Vergangenheit Google-Rechnungskonten eingerichtet haben:
+   - Sie werden aufgefordert, eines Ihrer bestehenden Rechnungskonten auszuwählen.
+   - Wenn Sie keines Ihrer bestehenden Konten verwenden möchten, klicken Sie auf **Neues Abrechnungskonto hinzufügen** und geben Sie Ihre Kontaktinformationen und Zahlungsmethode ein oder bestätigen Sie sie, um fortzufahren.
+5. Als Nächstes haben Sie folgende Möglichkeiten:
+   - Sie werden aufgefordert, eine Vorauszahlung von mindestens 5 $ zu leisten, um die Abrechnung einzurichten. Das bedeutet, dass Ihrem Konto automatisch der Abrechnungsplan [Vorauszahlung](#prepay) zugewiesen wird.
+   - Sie haben die Wahl zwischen den Abrechnungsmodellen [Vorauszahlung](#prepay) und [Nachträgliche Zahlung](#postpay) für Ihr Konto.
+   - Für einen Übergangszeitraum bis zur Einführung des neuen Prepay-Systems für alle Nutzer (ab dem 23. März 2026) wird ein [Postpay](#postpay)-Abrechnungsmodell zugewiesen.
+6. Nachdem Sie eine Vorauszahlung geleistet oder die nachträgliche Zahlung ausgewählt haben, ist die Kontoeinrichtung abgeschlossen.
 
-### 次の有料プランにアップグレードする
+### Upgrade auf die nächste kostenpflichtige Stufe durchführen
 
-すでに有料プランをご利用で、プラン変更の[条件](#about-billing)を満たしている場合は、自動的に次の階層にアップグレードされます（[処理時間](#processing-times)が適用されます）。
+Wenn Sie bereits ein kostenpflichtiges Abo haben und die [Kriterien](#about-billing) für eine Aboänderung erfüllen, werden Sie automatisch auf das nächste Abo hochgestuft (vorbehaltlich der [Verarbeitungszeiten](#processing-times)).
 
-## 課金ステータスを確認する
+## Abrechnungsstatus prüfen
 
-プロジェクトに[請求先アカウントをリンク](#setup-billing)すると、[AI Studio の [お支払い] ページ](https://aistudio.google.com/billing?hl=ja)でステータスをモニタリングできます。無料枠とは異なり、有料枠のステータスは動的です。使用枠はアカウント履歴によって決まりますが、Gemini API は、[前払い](#prepay)のクレジット残高がプラスの場合にのみリクエストを処理します。
+Nachdem Sie ein [Rechnungskonto mit Ihrem Projekt verknüpft](#setup-billing) haben, können Sie den Status auf der [AI Studio-Abrechnungsseite](https://aistudio.google.com/billing?hl=de) einsehen. Im Gegensatz zur kostenlosen Stufe ist der Status der kostenpflichtigen Stufe dynamisch. Ihre Nutzungsstufe wird zwar durch Ihren Konto-Verlauf bestimmt, die Gemini API verarbeitet Anfragen jedoch nur, wenn Sie ein positives [Prepay](#prepay)-Guthaben haben.
 
-[[プロジェクト](https://aistudio.google.com/projects?hl=ja)] ページで、[*課金階層*] 列にプロジェクトの階層と課金プランが表示されます。プロジェクトで必要な課金ステータスのアクションは、[*課金ティア*] 列または [*ステータス*] 列に表示されます。
+Auf der Seite [Projekte](https://aistudio.google.com/projects?hl=de) können Sie in der Spalte *Abrechnungsstufe* die Stufe und den Abrechnungsplan Ihres Projekts sehen. Alle Abrechnungsstatusaktionen, die Sie für ein Projekt ausführen müssen, werden in den Spalten *Abrechnungsstufe* oder *Status* angezeigt:
 
-- プロジェクトに請求先アカウントがリンクされていない場合は、[***請求先アカウントを設定***] をクリックします。
-- プロジェクトに請求先アカウントが関連付けられているが、設定が必要な[前払い](#prepay)のお支払いプランを使用する必要がある場合は、[***前払いを設定***] をクリックします。
-- 請求先アカウントでクレジットの購入が必要であるにもかかわらず、前払いのお支払いアカウントが設定されていないか、利用可能なクレジット残高がなくなった場合は、「***クレジットなし***」と表示されます。
+- ***Abrechnung einrichten***, wenn dem Projekt kein Rechnungskonto zugewiesen ist.
+- ***Vorauszahlung einrichten***: Das Projekt hat ein verknüpftes Rechnungskonto, muss aber ein [Vorauszahlungsmodell](#prepay) verwenden, das eingerichtet werden muss.
+- ***Keine Guthabenpunkte***: Diese Meldung wird angezeigt, wenn für das Rechnungskonto Guthabenpunkte gekauft werden müssen, das Konto für Vorauszahlungen aber nicht eingerichtet ist oder das verfügbare Guthaben aufgebraucht ist.
 
-いずれかのメッセージをクリックして、必要な操作を続行します。
+Klicken Sie auf eine der Meldungen, um die erforderlichen Maßnahmen zu ergreifen.
 
-## 使用量のモニタリング
+## Nutzung überwachen
 
-Gemini API の使用状況は、[Google AI Studio](https://aistudio.google.com/usage?hl=ja) の [**ダッシュボード**] > [**使用量**] でモニタリングできます。
+Sie können Ihre Nutzung der Gemini API in [Google AI Studio](https://aistudio.google.com/usage?hl=de) unter **Dashboard** > **Nutzung** überwachen.
 
-## お支払いプラン
+## Abrechnungsoptionen
 
-Gemini API と AI Studio の課金プランは、使用料金の支払い時期を決定する前払いと後払いの 2 つのカテゴリに分類されます。割り当てられたお支払いプランの確認とお支払い方法の管理は、[AI Studio のお支払い](https://aistudio.google.com/billing?hl=ja)ページで行うことができます。
+Abrechnungsmodelle für die Gemini API und AI Studio fallen in zwei Kategorien, die bestimmen, wann Sie für die Nutzung bezahlen: Vorauszahlung und Nachträgliche Zahlung. Auf der Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) können Sie Ihren zugewiesenen Abrechnungsplan einsehen und Zahlungsmethoden verwalten.
 
-### 前払い
+### Vorauszahlung
 
-前払いプランでは、Gemini API の使用前に前払い残高にクレジットを購入し、API の使用料金は前払いクレジット残高から[ほぼリアルタイム](#processing-times)で差し引かれます。前払いするには、アカウントに[クレジットを追加](#buy-credits)するか、[オートチャージ](#auto-reload)を設定します。クレジットを購入した後、未使用のクレジットは 12 か月後に有効期限切れとなり、[後払いアカウントに切り替えた](#postpay)場合を除き、[払い戻しはできません](#refunds)。
+Beim Prepaid-Abrechnungsmodell kaufen Sie Guthaben für Ihr Prepaidguthaben im Voraus für die Nutzung der Gemini API. Die Kosten für die API-Nutzung werden [in Echtzeit](#processing-times) von Ihrem Prepaidguthaben abgezogen.
+Sie können im Voraus bezahlen, indem Sie [Guthaben auf Ihr Konto einzahlen](#buy-credits) oder [das automatische Aufladen einrichten](#auto-reload). Nach dem Kauf von Guthabenpunkten verfallen nicht verwendete Guthabenpunkte nach 12 Monaten und sind [nicht erstattungsfähig](#refunds), außer nach dem [Wechsel zu einem Postpay-Konto](#postpay).
 
-請求先アカウントのプリペイド クレジット残高が 0 ドルになると、その請求先アカウントにリンクされているすべてのプロジェクトのすべての API キーが同時に機能しなくなります。クレジットを追加するまで、リクエストは [HTTP 402 Payment Required](https://ai.google.dev/gemini-api/docs/api-errors?hl=ja) エラーで失敗します。前払いクレジットは Gemini API の使用料金にのみ適用されます。他の Google Cloud サービスの支払いに使用することはできません。
+Wenn das Guthaben auf dem Rechnungskonto 0 $ erreicht, funktionieren alle API-Schlüssel in allen Projekten, die mit diesem Rechnungskonto verknüpft sind, nicht mehr.
+Anfragen schlagen dann mit dem Fehler [HTTP 402 Payment Required](https://ai.google.dev/gemini-api/docs/api-errors?hl=de) fehl, bis Sie Guthaben hinzufügen.
+Vorauszahlungsguthaben gilt nur für die Nutzungskosten der Gemini API. Sie können damit nicht für andere Google Cloud-Dienste bezahlen.
 
-新規ユーザーはデフォルトで前払いのお支払いプランになります。前払いと後払いのお支払いプランの導入前に作成されたプロジェクトでは、Gemini API を引き続き使用する前に、[プロジェクトの請求先情報を更新](#verify-billing)する必要がある場合があります。
+Für neue Nutzer wird standardmäßig das Preismodell mit Vorauszahlung verwendet. Bei Projekten, die vor der Einführung von Preismodellen mit Vorauszahlung und Nachträglicher Zahlung erstellt wurden, müssen möglicherweise die [Abrechnungsdetails des Projekts aktualisiert](#verify-billing) werden, bevor die Gemini API weiterhin verwendet werden kann.
 
-*前払いは[請求書発行（オフライン）](https://docs.cloud.google.com/billing/docs/concepts?hl=ja#billing_account_types)アカウントではご利用いただけません。*
+*Hinweis: Die Vorauszahlung ist für [Konten mit Rechnungsstellung (Offlinekonten)](https://docs.cloud.google.com/billing/docs/concepts?hl=de#billing_account_types)
+nicht verfügbar.*
 
-#### 既存の後払いアカウントに前払いを追加する
+#### Einem bestehenden Konto mit nachträglicher Zahlung ein Konto mit Vorauszahlung hinzufügen
 
-既存の Cloud 請求先アカウントで**後払い**プランを使用している場合は、**前払い**機能を追加して、クレジットを事前に購入できます。これらの前払いクレジットを使用すると、新しい Cloud 請求先アカウントを作成せずに Gemini API を使用できます。
+Wenn für Ihr bestehendes Cloud-Rechnungskonto ein **Abrechnungsmodell mit nachträglicher Zahlung** verwendet wird, können Sie **Vorauszahlungsfunktionen** hinzufügen, um Guthaben im Voraus zu kaufen. Mit diesem Guthaben können Sie die Gemini API nutzen, ohne ein neues Cloud-Rechnungskonto zu erstellen.
 
-既存のアカウントに**前払い**を追加する設定中に、選択した Cloud 請求先アカウントが変更されることを説明する確認画面が必ず表示されます。
+Wenn Sie die Zahlungseinstellung **Vorauszahlung** einem bestehenden Konto hinzufügen, wird ein obligatorischer Bestätigungsbildschirm angezeigt, auf dem erläutert wird, dass das ausgewählte Cloud-Rechnungskonto geändert wird.
 
-前払いを行う*前に*、システムがアカウントの状態を変更する必要があります。そのため、変更を確認した後、前払いの設定を完了する前にプロセスをキャンセルすると、その Cloud 請求先アカウントにすでにリンクされているプロジェクトでサービスが一時的に中断される可能性があります。移行を確認する前に、前払い手続きを完了する準備ができていることを確認してください。問題が発生した場合は、[**前払い**の設定をキャンセルした後にサービスが中断される](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ja#prepay-issue)をご覧ください。
+Der Kontostatus muss vom System geändert werden, *bevor* Sie die Vorauszahlung senden.
+Wenn Sie den Vorgang also nach der Bestätigung der Änderung, aber vor Abschluss der Einrichtung der Vorauszahlung abbrechen, kann es zu vorübergehenden Dienstunterbrechungen für Projekte kommen, die bereits mit diesem Cloud-Rechnungskonto verknüpft sind. Stellen Sie sicher, dass Sie bereit sind, die Vorauszahlung abzuschließen, bevor Sie die Umstellung bestätigen. Bei Problemen lesen Sie den Hilfeartikel [Dienste werden nach dem Abbrechen einer **Vorauszahlung** unterbrochen](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=de#prepay-issue).
 
-前払いサイクルから後払いサイクルに手動で切り替えることができる場合、前払いクレジット残高は、前払いに使用した元のお支払い方法に自動的に払い戻されます。ただし、他の理由で Cloud 請求先アカウントを閉鎖した場合、残りの前払いクレジットは没収され、払い戻しは行われません。
+Wenn Sie berechtigt sind und manuell von einem **Prepay**-Abrechnungszeitraum zu einem **Postpay**-Abrechnungszeitraum wechseln, wird ein verbleibendes Guthaben automatisch über die ursprüngliche Zahlungsmethode erstattet, die für die Vorauszahlung verwendet wurde. Wenn Sie Ihr Cloud-Rechnungskonto jedoch aus einem anderen Grund schließen, verfällt das verbleibende Guthaben und wird nicht erstattet.
 
-#### クレジットを購入する
+#### Guthabenpunkte erwerben
 
-Gemini API の使用に先立ってクレジットを手動で購入し、前払いアカウントのクレジット残高にチャージできます。
+Sie können Guthaben manuell im Voraus kaufen, bevor Sie die Gemini API nutzen, um es in Ihr Prepaid-Konto einzuzahlen.
 
-クレジットを購入するには、[AI Studio のお支払い](https://aistudio.google.com/billing?hl=ja)ページに移動して、[**クレジットを購入**] を選択します。最小購入額は 5 ドルです。前払いできるクレジットの最大額は $5,000 です。
+Wenn Sie Guthaben kaufen möchten, rufen Sie die Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) auf und wählen Sie **Guthaben kaufen** aus.
+Der Mindestkaufbetrag beträgt 5 $. Sie können maximal 5.000 $ im Voraus bezahlen.
 
-#### 自動再読み込み
+#### Automatische Aktualisierung
 
-オートチャージは、前払いクレジット残高が少なくなったときに自動的にチャージされるオプション機能です。これは、サービスの中断を防ぐのに役立ちます。
+Das automatische Aufladen ist eine optionale Funktion, mit der Ihr Guthaben automatisch aufgeladen wird, wenn es fast aufgebraucht ist. Das ist nützlich, um Dienstunterbrechungen zu vermeiden.
 
-オートチャージの設定とオートチャージのステータスは、[[AI Studio のお支払い](https://aistudio.google.com/billing?hl=ja)] ページの [*利用可能なクレジット*] カードで確認できます。[**オートチャージを設定**] または [**オートチャージを管理**] をクリックして、お支払い方法、チャージ額、チャージ支払いをトリガーする最低残高を設定します。
+Sie können das automatische Aufladen einrichten und den Status des automatischen Aufladens auf der Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) auf der Karte *Verfügbare Guthabenpunkte* einsehen. Klicken Sie auf **Automatisches Aufladen einrichten** oder **Automatisches Aufladen verwalten**, um Ihre Zahlungsmethode, den Aufladebetrag und den Mindestguthabenstand festzulegen, bei dem eine Aufladezahlung ausgelöst wird.
 
-#### 1 か月あたりの自動チャージの上限
+#### Monatliches Limit für automatisches Aufladen
 
-毎月の自動チャージの上限は、前払いユーザーが利用できる機能です。この上限を設定すると、頻繁なクレジットの自動チャージによる予期せぬ費用の発生を防ぐことができます。この機能を使用すると、1 回の請求期間内で自動的にチャージされるクレジットの上限を設定できます。請求期間内のオートチャージの合計額がこの上限に達すると、翌月の初めまでオートチャージは無効になります。手動で開始した 1 回限りの支払いは、この上限にカウントされません。
+Das monatliche Limit für die automatische Aufladung ist für Nutzer mit Vorauszahlung verfügbar und hilft, unerwartete Kosten durch häufige automatische Aufladungen zu vermeiden.
+Mit dieser Funktion können Sie ein maximales Limit für automatische Guthabenaufladungen innerhalb eines einzelnen Abrechnungszeitraums festlegen. Sobald der Gesamtbetrag der automatischen Aufladungen in einem Abrechnungszeitraum dieses Limit erreicht, wird die automatische Aufladung bis zum Beginn des nächsten Monats deaktiviert. Einmalzahlungen, die Sie manuell veranlassen, werden nicht auf dieses Limit angerechnet.
 
-オートチャージが有効になっている場合に、1 か月の自動チャージの上限額を設定するには:
+So legen Sie das monatliche Limit für die automatische Aufladung fest, wenn das automatische Aufladen aktiviert ist:
 
-1. [AI Studio の [お支払い]](https://aistudio.google.com/billing?hl=ja) ページに移動します。
-2. [**オートチャージを管理**] をクリックします。
-3. [**Monthly Limit**] セクションを開き、オートチャージの 1 か月の上限額を入力します。
-4. [**保存**] をクリックします。
+1. Rufen Sie die Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) auf.
+2. Klicken Sie auf **Automatisches Aufladen verwalten**.
+3. Maximieren Sie den Bereich **Monatliches Limit** und geben Sie das maximale monatliche Limit für das automatische Aufladen ein.
+4. Klicken Sie auf **Speichern**.
 
-### 後払い
+### Nachträgliche Zahlung
 
-後払いプランでは、Cloud 請求先アカウントに費用が蓄積され、月末に自動的に請求されます。また、アカウントの階層に基づいて[自動的に割り当てられた費用上限](#tier-spend-caps)に達した時点でも請求されます。お支払いは、後払いのお支払いアカウントに登録されているお支払い方法に請求されます。このお支払い方法は、[AI Studio のお支払い](https://aistudio.google.com/billing?hl=ja)ページで管理できます。[**お支払い**] ページでは、残高、お支払い期日、過去のお支払いの確認、お支払いの実行、お支払い方法の管理を行うことができます。
+Beim Abrechnungsmodell mit nachträglicher Zahlung fallen auf Ihrem Cloud-Rechnungskonto Kosten an. Sie werden automatisch am Monatsende oder wenn Ihre Kosten einen [automatisch zugewiesenen Ausgabenlimit](#tier-spend-caps) basierend auf Ihrer Kontostufe erreichen, belastet.
+Die Zahlung wird über die Zahlungsmethode abgerechnet, die mit Ihrem Konto für die nachträgliche Zahlung verknüpft ist. Sie können sie auf der Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) verwalten. Auf der Seite **Abrechnung** können Sie Ihren Kontostand, Fälligkeitsdaten und bisherigen Zahlungen einsehen sowie Zahlungen vornehmen und Zahlungsmethoden verwalten.
 
-新しいプロジェクトの[お支払い情報を設定](#setup-billing)する際に、後払いの対象となる場合は、[[お支払い設定](#setup-billing)] ダイアログで前払いと後払いを選択できます。
+Wenn Sie [die Abrechnung für ein neues Projekt einrichten](#setup-billing) und die Voraussetzungen für die nachträgliche Zahlung erfüllen, können Sie im Dialogfeld [Abrechnungseinrichtung](#setup-billing) zwischen Vorauszahlung und nachträglicher Zahlung wählen.
 
-Cloud 請求先アカウントを後払いプランに変更すると、その請求先アカウントにリンクされているすべてのプロジェクトが後払いプランに変更されます。[前払いに移行する](#migrate-to-prepay)の手順に沿って、対象となるアカウントを前払いに移行できます。プロジェクトを別の料金プランの請求先アカウントに移動して、そのプロジェクトの課金サイクルを変更することもできます。Cloud ドキュメントの[プロジェクトの課金の管理](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ja)をご覧ください。
+Nachdem Sie ein Cloud-Rechnungskonto auf den Postpay-Abrechnungsplan umgestellt haben, werden alle mit diesem Rechnungskonto verknüpften Projekte auf den Postpay-Plan umgestellt. Sie können ein berechtigtes Konto auf Vorauszahlung umstellen, indem Sie der Anleitung unter [Auf Vorauszahlung umstellen](#migrate-to-prepay) folgen. Sie können ein Projekt auch in ein Rechnungskonto mit einem anderen Abrechnungsmodell verschieben, um den Abrechnungszyklus für dieses Projekt zu ändern. Weitere Informationen finden Sie in der Cloud-Dokumentation unter [Abrechnung für Projekte verwalten](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=de).
 
-後払いの請求サイクルの詳細については、[Cloud Billing のガイド](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ja)をご覧ください。
+Weitere Informationen zum Abrechnungszeitraum für die nachträgliche Zahlung finden Sie im [Cloud Billing-Leitfaden](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=de).
 
-### 前払いに移行する
+### Auf Vorauszahlung umstellen
 
-Google AI Studio では、Gemini API の使用料金の請求が後払いから前払いに移行します。この変更は Gemini API にのみ適用されます。請求先アカウントにリンクされている他の Google Cloud サービスは、引き続き後払いでご利用いただけます。
+Google AI Studio stellt die Abrechnung für die Nutzung der Gemini API für Entwicklerkonten von Postpaid auf Prepaid um. Diese Änderung gilt nur für die Gemini API. Für andere Google Cloud-Dienste, die mit Ihrem Rechnungskonto verknüpft sind, gilt weiterhin die Nachzahlung.
 
-サービスの中断を避けるため、アカウント通知に記載されているカットオーバー日より前に、前払いに切り替えてクレジットを追加してください。無料枠の機能のみを使用しているアカウントは、対応の必要はありません。
+Stellen Sie auf Vorauszahlung um und fügen Sie Guthaben hinzu, bevor das Umstellungsdatum in Ihrer Kontobenachrichtigung erreicht ist, um Dienstunterbrechungen zu vermeiden. Für Konten, die nur Funktionen der Kostenlosen Stufe verwenden, sind keine Maßnahmen erforderlich.
 
-既存の後払いアカウントを前払いに切り替えるには:
+So stellen Sie ein bestehendes Konto mit nachträglicher Zahlung auf Vorauszahlung um:
 
-1. [AI Studio の [お支払い]](https://aistudio.google.com/billing?hl=ja) ページに移動します。
-2. 請求先アカウントの [**前払いへの切り替え**] を選択します。
-3. [クレジットを購入](#buy-credits)（最低 $5）して、初期残高をチャージします。
+1. Rufen Sie die Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) auf.
+2. Wählen Sie für Ihr Rechnungskonto **Auf Vorauszahlung umstellen** aus.
+3. [Guthaben kaufen](#buy-credits) (mindestens 5 $), um dein Startguthaben aufzuladen.
 
-切り替え後にサービスが中断されないように、クレジット残高が少なくなったときにチャージされるように[オートチャージ](#auto-reload)を設定します。
+Um Dienstunterbrechungen nach dem Wechsel zu vermeiden, konfigurieren Sie das [automatische Aufladen](#auto-reload), damit Ihr Guthaben automatisch aufgeladen wird, wenn es niedrig ist.
 
-## 利用額上限
+## Ausgabenobergrenzen
 
-Gemini API は、請求先アカウント レベルとプロジェクト レベルの両方で月間利用額上限をサポートしています。これらの制御は、アカウントを予期しない超過料金から保護し、サービス可用性を確保するためにエコシステムを保護するように設計されています。
+Die Gemini API unterstützt monatliche Ausgabenlimits sowohl auf Rechnungskonto- als auch auf Projektebene. Diese Kontrollen sollen Ihr Konto vor unerwarteten Überschreitungen und das Ökosystem vor Beeinträchtigungen der Dienstverfügbarkeit schützen.
 
-*費用の上限は、[請求書発行（オフライン）](https://docs.cloud.google.com/billing/docs/concepts?hl=ja#billing_account_types)アカウントでは使用できません。*
+*Ausgabenobergrenzen sind nicht für [Konten mit Rechnungsstellung (Offlinekonten)](https://docs.cloud.google.com/billing/docs/concepts?hl=de#billing_account_types) verfügbar.*
 
-### プロジェクトの費用上限
+### Ausgabenobergrenzen für Projekte
 
-AI Studio では、独自の[プロジェクト レベル](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#google-cloud-projects)の費用上限を設定できます。これは、同じ請求先アカウントに複数のプロジェクトがあり、各プロジェクトが累積費用上限に十分アクセスできるようにする場合に便利です。
+Sie können in AI Studio eigene [Ausgabenlimits auf Projektebene](https://ai.google.dev/gemini-api/docs/api-key?hl=de#google-cloud-projects) festlegen.
+Das ist nützlich, wenn Sie mehrere Projekte unter demselben Abrechnungskonto haben und sicherstellen möchten, dass jedes Projekt Zugriff auf einen ausreichenden Teil des kumulativen Ausgabenlimits hat.
 
-プロジェクトの編集者、オーナー、管理者の[ロール](https://docs.cloud.google.com/iam/docs/roles-overview?hl=ja)を持つアカウントは、AI Studio の [[費用](https://aistudio.google.com/spend?hl=ja)] ページで、[**月間の費用上限**] > [**費用上限を編集**] の順に選択して、プロジェクトごとに費用上限を設定できます。
+Konten mit den [Rollen](https://docs.cloud.google.com/iam/docs/roles-overview?hl=de) „Projektbearbeiter“, „Inhaber“ oder „Administrator“ können in AI Studio auf der Seite [Ausgaben](https://aistudio.google.com/spend?hl=de) unter **Monatliches Ausgabenlimit** > **Ausgabenlimit bearbeiten** Ausgabenlimits pro Projekt festlegen.
 
-AI Studio で費用上限とお支払い情報を表示または編集するために必要な特定の Google Cloud IAM 権限の詳細については、[AI Studio のトラブルシューティング ガイド](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=ja#iam-permissions)をご覧ください。
+Details zu den spezifischen Google Cloud IAM-Berechtigungen, die zum Aufrufen oder Bearbeiten von Ausgabenlimits und Abrechnungsinformationen in AI Studio erforderlich sind, finden Sie in der [Fehlerbehebung für AI Studio](https://ai.google.dev/gemini-api/docs/troubleshoot-ai-studio?hl=de#iam-permissions).
 
-[プロジェクトを別の請求先アカウントに移動](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ja#change_the_billing_account_for_a_project)すると、そのプロジェクトに設定した費用の上限は維持されますが、累積費用は新しい請求期間で $0 にリセットされます。
+Wenn Sie ein [Projekt in ein anderes Rechnungskonto verschieben](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=de#change_the_billing_account_for_a_project), bleibt das für dieses Projekt festgelegte Ausgabenlimit bestehen. Die angefallenen Ausgaben werden jedoch für den neuen Abrechnungszeitraum auf 0 $ zurückgesetzt.
 
-[バッチモード](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)の完了やエージェント セッションなどの長時間実行されるタスクでは、プロジェクトの費用上限を超える超過料金が発生する可能性があります。
+Bei zeitaufwendigen Aufgaben wie [Batchmodus](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)-Abschlüssen und Agentsitzungen können Überschreitungen des Ausgabenlimits Ihres Projekts auftreten.
 
-AI Studio では、課金データの処理時間が最大 10 分程度遅れることがあります。請求データが処理される前に料金が加算されると、プロジェクトの上限を超過する可能性があります。
+Die Verarbeitungszeiten für Abrechnungsdaten können in AI Studio um bis zu 10 Minuten verzögert sein. Wenn Abrechnungsdaten nicht verarbeitet werden, bevor weitere Kosten anfallen, können Überschreitungen über das Projektlimit hinaus auftreten.
 
-### 請求先アカウントの階層の費用上限
+### Ausgabenobergrenzen für Rechnungskontostufen
 
-各[ティア](#about-billing)には、月間の費用の上限が設定されています。
+Für jede [Stufe](#about-billing) gilt ein maximales monatliches Ausgabenlimit:
 
-| 使用量ティア | 利用額上限 |
+| Nutzungsstufe | Ausgabenobergrenze |
 | --- | --- |
-| **無料** | なし |
-| **Tier 1** | $250 |
-| **Tier 2** | $2,000 |
-| **Tier 3** | 20,000 ～ 100,000 ドル |
+| **Kostenlos** | – |
+| **Stufe 1** | 250 $ |
+| **Tier 2** | 2.000 $ |
+| **Stufe 3** | 20.000–100.000 $ |
 
-Gemini API の月間使用量上限は、[請求先アカウント](#cloud-billing)単位で適用されます。デフォルトの上限は事前に設定されていますが、使用量が増加した場合は、[引き上げをリクエスト](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=ja)できます。合計費用は、Gemini API サービスが有効になっているリンクされたすべてのプロジェクトで集計されます。アカウントの合計が階層の上限に達すると、次の請求期間（毎月 1 日）が始まるまで、その請求先アカウントにリンクされているすべてのプロジェクトでサービスが一時停止されます。
+Für die Gemini API gelten monatliche Nutzungslimits auf [Rechnungskontoebene](#cloud-billing). Die Standardlimits sind zwar voreingestellt, Sie können jedoch eine [Erhöhung beantragen](https://docs.google.com/forms/d/e/1FAIpQLSdiP6BWJyNNN65lnwnlOr-5Kv0MOFp0jLQyqi_ixVCfddqWBw/viewform?hl=de), um eine höhere Nutzung zu ermöglichen. Die Gesamtausgaben werden für alle verknüpften Projekte mit aktiviertem Gemini API-Dienst zusammengefasst. Sobald die kumulative Gesamtsumme des Kontos das Stufenlimit erreicht, wird der Dienst für alle Projekte, die mit diesem Rechnungskonto verknüpft sind, bis zum Beginn des nächsten Abrechnungszeitraums (dem 1. eines jeden Monats) pausiert.
 
-#### 請求先アカウントの費用を評価する
+#### Ausgaben für das Rechnungskonto analysieren
 
-過去の月間費用を評価して、新しい[請求先アカウントのティア別費用上限](#tier-spend-caps)が進行中のプロジェクトに影響するかどうかを確認する手順は次のとおりです。
+So prüfen Sie Ihre bisherigen monatlichen Ausgaben, um festzustellen, ob sich die neuen [Ausgabenlimits für Abrechnungskontoebenen](#tier-spend-caps) auf Ihre laufenden Projekte auswirken:
 
-1. Google Cloud コンソールで、[Cloud 請求先アカウントの [レポート]](https://console.cloud.google.com/billing/reports?hl=ja) ページを表示します。
-   - 請求先アカウントが複数ある場合は、プロンプトが表示されます。このプロンプトで、費用レポートを表示する Cloud 請求先アカウントを選択します。
-2. レポートはデフォルトで、[当月] の [サービス別にグループ化] に設定されています。テーブルの [**サービス**] 列に **Gemini API** が表示され、[**使用料金**] 列に合計費用が表示されます。
-3. Gemini API の使用量に限定した詳細な費用を表示するには、[**グループ条件**] フィルタを [**SKU**] でグループ化するように設定し、[**サービス**] フィルタを [**Gemini API**] に設定します。
-4. [**使用日別の期間**] フィルタを目的の範囲に調整して、特定の期間の過去の費用を評価します。
+1. Rufen Sie in der Google Cloud Console die Seite [Berichte zum Cloud-Rechnungskonto](https://console.cloud.google.com/billing/reports?hl=de) auf.
+   - Wenn Sie mehr als ein Rechnungskonto haben, wählen Sie das Cloud-Rechnungskonto aus, für das Sie Kostenberichte aufrufen möchten.
+2. Im Bericht ist standardmäßig „Nach Dienst gruppieren“ für den aktuellen Monat ausgewählt. In der Spalte **Dienst** der Tabelle wird **Gemini API** angezeigt und in der Spalte **Nutzungskosten** die Gesamtausgaben.
+3. Wenn Sie detaillierte Kosten sehen möchten, die auf die Nutzung der Gemini API beschränkt sind, legen Sie den Filter **Gruppieren nach** auf **SKU** und den Filter **Dienste** auf **Gemini API** fest.
+4. Passen Sie den Filter **Zeitraum nach Nutzungsdatum** an den gewünschten Zeitraum an, um Ihre bisherigen Ausgaben in einem Zeitraum zu analysieren.
 
-## 処理時間
+## Verarbeitungszeit
 
-請求シグナルと更新は必ずしもリアルタイムで行われるわけではありません。
+Abrechnungssignale und ‑aktualisierungen erfolgen nicht immer in Echtzeit.
 
-- **クレジットの使用量**: 通常、使用料金は数分以内に残高から引き落とされます。
-- **お支払いの確認**: ほとんどのカード支払いは即時に行われますが、お支払い方法によっては（銀行振込など）、清算に数日かかることがあります。サービスは、クレジットの購入が正式に確認された後にのみ再開またはアップグレードされます。
-- **ティアのアップグレード**: お支払いが完了した場合、または[アップグレード条件](#about-billing)を満たした場合、通常は 10 分以内にティアのアップグレードが反映されます。
-- **合計費用の内訳グラフ**: [[お支払い](https://aistudio.google.com/billing?hl=ja)] ページと [[費用](https://aistudio.google.com/spend?hl=ja)] ページに表示される合計費用の内訳グラフは、更新に最大 24 時間かかることがあります。
+- **Guthabennutzung**: Nutzungskosten werden in der Regel innerhalb von Minuten von Ihrem Guthaben abgebucht.
+- **Zahlungsbestätigung**: Die meisten Kartenzahlungen erfolgen sofort, bei einigen Zahlungsmethoden (z. B. Banküberweisungen) kann es jedoch mehrere Tage dauern, bis die Zahlung erfolgt. Dienste werden erst fortgesetzt oder aktualisiert, wenn der Kauf von Guthabenpunkten offiziell bestätigt wurde.
+- **Stufen-Upgrades**: Nach einer erfolgreichen Zahlung oder wenn du die [Upgrade-Kriterien](#about-billing) erfüllst, werden Stufen-Upgrades in der Regel innerhalb von 10 Minuten angezeigt.
+- **Diagramme zur Aufschlüsselung der Gesamtkosten**: Die Diagramme zur Aufschlüsselung der Gesamtkosten auf der Seite [Abrechnung](https://aistudio.google.com/billing?hl=de) und der Seite [Ausgaben](https://aistudio.google.com/spend?hl=de) werden möglicherweise erst nach 24 Stunden aktualisiert.
 
-課金の遅延の可能性について詳しくは、[課金サイクル](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ja#delayed-billing)と[トランザクション](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=ja#missing-transactions) レイテンシに関する Cloud Billing ガイドをご覧ください。
+In den Cloud Billing-Anleitungen zu [Abrechnungszeitraum](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=de#delayed-billing) und [Transaktionslatenzen](https://docs.cloud.google.com/billing/docs/how-to/view-history?hl=de#missing-transactions) finden Sie weitere Informationen zu potenziellen Abrechnungsverzögerungen.
 
-## 払い戻し
+## Erstattungen
 
-アカウント タイプの切り替えの場合を除き、**前払い**の請求先アカウントでは払い戻しはできません。
+Erstattungen sind für **Prepay**-Abrechnungskonten nicht zulässig, außer beim Wechsel des Kontotyps.
 
-**前払いアカウントが後払いアカウント タイプに切り替わる場合**（[条件](#about-billing)を満たし、アカウントを[手動でアップグレード](#postpay)した後）、前払いアカウントは閉鎖され、残りの前払いクレジットは登録されているお支払い方法に自動的に払い戻されます。
+**Wenn ein Konto mit Vorauszahlung zum Kontotyp „Nachträgliche Zahlung“ wechselt** (nachdem Sie die [Kriterien](#about-billing) erfüllt und Ihr Konto [manuell aktualisiert](#postpay) haben), wird das Konto mit Vorauszahlung geschlossen und alle verbleibenden Prepaid-Guthaben werden automatisch auf die hinterlegte Zahlungsmethode erstattet.
 
-後払いへのアップグレード以外の理由で前払いアカウントを[閉鎖](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=ja#close-a-billing-account)した場合、残りの前払いクレジットは失効します。
+Wenn Sie Ihr Prepaid-Konto aus einem anderen Grund als einem Upgrade auf die nachträgliche Zahlung [schließen](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=de#close-a-billing-account), verfallen alle verbleibenden Prepaid-Guthaben.
 
-購入したクレジットの有効期限は 1 年です。有効期限が切れると、クレジットは没収され、取得できなくなります。
+Guthabenpunkte verfallen nach einem Jahr. Nach Ablauf verfallen die Guthaben und können nicht mehr abgerufen werden.
 
-**後払い**アカウントには、[Google Cloud の払い戻しポリシー](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=ja#request_a_refund)が適用されます。
+Für **Postpay-Konten** gilt die [Google Cloud-Richtlinie für Erstattungen](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=de#request_a_refund).
 
-## Cloud 請求先アカウント
+## Cloud-Rechnungskonten
 
-Gemini API は、請求サービスに [Cloud 請求先アカウント](https://cloud.google.com/billing/docs/concepts?hl=ja)を使用します。これは、[AI Studio で直接設定](#setup-billing)できます。AI Studio を使用すると、費用の追跡、費用の把握、支払いができます。
+Für die Abrechnung der Gemini API werden [Cloud-Rechnungskonten](https://cloud.google.com/billing/docs/concepts?hl=de) verwendet, die Sie [direkt in AI Studio einrichten](#setup-billing) können.
+Mit AI Studio können Sie Ausgaben im Blick behalten, Kosten nachvollziehen und Zahlungen vornehmen.
 
-階層、レート上限、請求先アカウントの上限はすべて、請求先アカウント レベルで決定されます。
+Stufen, Ratenbeschränkungen und Obergrenzen für Rechnungskonten werden alle auf Ebene des Rechnungskontos festgelegt.
 
-### プロジェクトと API キー
+### Projekte und API-Schlüssel
 
-Cloud 請求先アカウントにリンクされているすべての[プロジェクト](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#google-cloud-projects)は、請求先アカウントの使用量階層と、関連するレート上限とアカウント上限を継承します。[プロジェクトをある請求先アカウントから別の請求先アカウントに変更](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ja#change_the_billing_account_for_a_project)すると、その階層と、それに伴うレート制限とアカウント上限が、新しい請求先アカウントの階層に切り替わります。
+Alle [Projekte](https://ai.google.dev/gemini-api/docs/api-key?hl=de#google-cloud-projects), die mit einem Cloud-Rechnungskonto verknüpft sind, übernehmen die Nutzungsebene des Rechnungskontos sowie die zugehörigen Ratenlimits und Kontolimits. Wenn Sie ein [Projekt von einem Rechnungskonto in ein anderes verschieben](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=de#change_the_billing_account_for_a_project), wird die Stufe des Projekts und damit auch die Ratenbeschränkungen und Kontolimits auf die Stufe des neuen Rechnungskontos umgestellt.
 
-請求先アカウントに関連付けられたすべてのプロジェクトの累積費用（すべての Google Cloud プロダクトの合計）とアカウントの有効期間は、その請求先アカウントの[階層の資格要件](#about-billing)の対象となります。
+Die kumulativen Ausgaben (für alle Google Cloud-Produkte) und das Kontoalter für alle Projekte, die mit einem Rechnungskonto verknüpft sind, werden auf die [Stufenanforderungen](#about-billing) dieses Rechnungskontos angerechnet.
 
-[プロジェクトと請求先アカウントのリンクを解除](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ja#disable_billing_for_a_project)して、無料枠に戻ることができます。
+Sie können die [Verknüpfung eines Projekts mit seinem Rechnungskonto aufheben](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=de#disable_billing_for_a_project), um zum kostenlosen Kontingent zurückzukehren.
 
-[API キー](https://ai.google.dev/gemini-api/docs/api-key?hl=ja)は、プロジェクト内で生成される認証情報です。独立した課金設定はなく、プロジェクトの階層上限と課金ステータスを継承します。プロジェクト内のすべてのキーの累積使用量は、そのプロジェクトの費用上限と請求先アカウントの合計費用にカウントされます。
+[API-Schlüssel](https://ai.google.dev/gemini-api/docs/api-key?hl=de) sind Anmeldedaten, die in einem Projekt generiert werden.
+Sie haben keine unabhängigen Abrechnungseinstellungen, sondern übernehmen die Stufenlimits und den Abrechnungsstatus des Projekts. Die kumulative Nutzung aller Schlüssel in einem Projekt wird auf die Ausgabenobergrenze dieses Projekts und die Gesamtausgaben des Rechnungskontos angerechnet.
 
-## よくある質問
+## Häufig gestellte Fragen
 
-以降のセクションでは、よくある質問とその回答を紹介します。
+In den folgenden Abschnitten finden Sie Antworten auf häufig gestellte Fragen.
 
-### 何に対して料金が発生しますか？
+### Was wird mir in Rechnung gestellt?
 
-Gemini API の料金は、次の要素に基づきます。
+Die Preise für die Gemini API basieren auf Folgendem:
 
-- 入力トークン数
-- 出力トークン数
-- キャッシュに保存されたトークン数
-- キャッシュに保存されたトークンの保存期間
+- Anzahl der Eingabetokens
+- Anzahl der Ausgabetokens
+- Anzahl der im Cache gespeicherten Tokens
+- Speicherdauer für im Cache gespeicherte Tokens
 
-料金については、[料金ページ](https://ai.google.dev/pricing?hl=ja)をご覧ください。
+Informationen zu den Preisen finden Sie auf der [Preisseite](https://ai.google.dev/pricing?hl=de).
 
-### 割り当てはどこで確認できますか？
+### Wo kann ich mein Kontingent einsehen?
 
-割り当てとシステム上限は [AI Studio](https://aistudio.google.com/usage?hl=ja) で確認できます。
+Sie können Ihr Kontingent und Ihre Systemlimits in [AI Studio](https://aistudio.google.com/usage?hl=de) einsehen.
 
-### より高いレート上限の階層に移行するにはどうすればよいですか？また、割り当ての増加をリクエストするにはどうすればよいですか？
+### Wie wechsle ich zu einer höheren Ratenbegrenzung oder fordere mehr Kontingent an?
 
-アカウントが次の[階層の要件](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja#usage-tiers)を満たすと、割り当てが自動的に増加します。
+Sie erhalten automatisch mehr Kontingent, wenn Ihr Konto die [Anforderungen für die nächste Stufe](https://ai.google.dev/gemini-api/docs/rate-limits?hl=de#usage-tiers) erfüllt.
 
-### EEA（EU を含む）、英国、スイスで Gemini API を無料で使用できますか？
+### Kann ich die Gemini API im EWR (einschließlich der EU), im Vereinigten Königreich und in der Schweiz kostenlos nutzen?
 
-はい。無料枠と有料枠は[多くのリージョン](https://ai.google.dev/gemini-api/docs/available-regions?hl=ja)でご利用いただけます。
+Ja, die kostenlose und die kostenpflichtige Stufe sind [in vielen Regionen](https://ai.google.dev/gemini-api/docs/available-regions?hl=de) verfügbar.
 
-### Gemini API でお支払い情報を設定した場合、Google AI Studio の使用料金は請求されますか？
+### Wenn ich die Abrechnung für die Gemini API einrichte, werden mir dann die Gebühren für die Nutzung von Google AI Studio in Rechnung gestellt?
 
-有料機能にアクセスするために有料の API キーをリンクしない限り、AI Studio の使用は無料です。AI Studio の有料プロジェクトの一部として有料 API キーをリンクすると、そのキーの AI Studio の使用量に対して課金されます。各タイプにリンクされているそれぞれの API キーを使用して、必要に応じて有料枠プロジェクトと無料枠プロジェクトを切り替えることができます。
+Die Nutzung von AI Studio ist weiterhin kostenlos, sofern Nutzer keinen kostenpflichtigen API-Schlüssel verknüpfen, um auf kostenpflichtige Funktionen zuzugreifen.
+Wenn Sie einen kostenpflichtigen API-Schlüssel im Rahmen eines kostenpflichtigen Projekts in AI Studio verknüpfen, werden Ihnen die AI Studio-Nutzungsgebühren für diesen Schlüssel in Rechnung gestellt. Sie können nach Bedarf zwischen Projekten der kostenpflichtigen Stufe und Projekten der kostenlosen Stufe wechseln, indem Sie die entsprechenden API-Schlüssel verwenden, die mit den einzelnen Typen verknüpft sind.
 
-### 無料枠から上位の Tier にアップグレードするにはどうすればよいですか？
+### Wie führe ich ein Upgrade auf höhere Stufen durch, wenn ich die Kostenlose Stufe nutze?
 
-上位の階層にアクセスするには、プロジェクトで課金を設定する必要があります。Google AI Studio で [[**お支払い情報を設定**](#setup-billing)] をクリックします。Cloud 請求先アカウントの選択または作成の手順が表示されます。前払い請求モデルを使用する必要がある場合は、**課金の設定**プロセスで、Cloud 請求先アカウントにリンクされた前払いアカウントを作成する手順が説明されます。
+Wenn Sie auf höhere Stufen zugreifen möchten, müssen Sie die Abrechnung für Ihr Projekt einrichten. Klicken Sie in Google AI Studio auf [**Abrechnung einrichten**](#setup-billing). Dort wird beschrieben, wie Sie ein Cloud-Rechnungskonto auswählen oder erstellen. Wenn Sie das Prepaid-Abrechnungsmodell verwenden müssen, werden Sie beim **Einrichten der Abrechnung** durch den Prozess zum Erstellen Ihres Prepaid-Kontos geführt, das mit Ihrem Cloud-Rechnungskonto verknüpft ist.
 
-### 無料枠で 100 万個のトークンを使用できますか？
+### Kann ich 1 Million Tokens in der kostenlosen Stufe verwenden?
 
-Gemini API の無料枠は、選択したモデルによって異なります。現時点では、次の方法で 100 万トークンのコンテキスト ウィンドウを試すことができます。
+Das kostenlose Kontingent für die Gemini API variiert je nach ausgewähltem Modell. Derzeit können Sie das Kontextfenster mit 1 Million Tokens auf folgende Weise testen:
 
-- Google AI Studio で
-- 一部のモデルでは無料プランをご利用いただけます
-- 後払いプランの場合
+- In Google AI Studio
+- Kostenlose Tarife für ausgewählte Modelle
+- Mit Tarifen mit nachträglicher Zahlung
 
-### 上位（有料）階層にアップグレードした後、無料枠に戻すことはできますか？
+### Kann ich nach einem Upgrade auf höhere (kostenpflichtige) Stufen wieder zur kostenlosen Stufe zurückkehren?
 
-無料枠にダウングレードするには、ダウングレードする各プロジェクトで[課金を無効](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ja#disable_billing_for_a_project)にします。
+Wenn Sie ein Downgrade auf das kostenlose Kontingent durchführen möchten, können Sie die [Abrechnung für jedes Projekt deaktivieren](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=de#disable_billing_for_a_project), für das Sie ein Downgrade durchführen möchten.
 
-### 使用しているトークンの数を計算するにはどうすればよいですか？
+### Wie kann ich die Anzahl der verwendeten Tokens berechnen?
 
-[`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=ja#count_tokens) メソッドを使用して、トークン数をカウントします。トークンの詳細については、[トークンガイド](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)をご覧ください。
+Verwenden Sie die Methode [`GenerativeModel.count_tokens`](https://ai.google.dev/api/python/google/generativeai/GenerativeModel?hl=de#count_tokens), um die Anzahl der Tokens zu zählen. Weitere Informationen zu Tokens finden Sie im [Leitfaden zu Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
 
-### AI Studio から初めて Cloud 請求先アカウントに登録した場合でも、Google Cloud の無料トライアルを利用できますか？
+### Wenn ich mich über AI Studio für mein erstes Cloud-Rechnungskonto registriere, erhalte ich dann trotzdem einen kostenlosen Testzeitraum für Google Cloud?
 
-初めて Cloud 請求先アカウントに登録すると、[Google Cloud の無料トライアル](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=ja#free-trial)が開始され、$300 の[ウェルカム クレジット](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ja#welcome-credits)が付与されます。ただし、これらのクレジットは AI Studio の使用料金の支払いには使用できません。ウェルカム クレジットは、Google Cloud 内の他の対象サービスのお支払いに使用できます（クレジットが消費されるか、有効期限（90 日以内）が切れると、追加の使用料金は設定されたお支払い方法に自動的に請求されます）。
+Wenn Sie sich für Ihr erstes Cloud-Rechnungskonto registrieren, beginnt Ihr [kostenloser Testzeitraum für Google Cloud](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=de#free-trial) und Sie erhalten ein [Startguthaben](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=de#welcome-credits) in Höhe von 300 $.
+Diese Guthaben können jedoch nicht zur Bezahlung der AI Studio-Nutzung verwendet werden. Sie können das Willkommensguthaben für die Bezahlung anderer berechtigter Dienste in Google Cloud verwenden. Wenn das Guthaben aufgebraucht ist oder innerhalb von 90 Tagen abläuft, werden alle zusätzlichen Nutzungskosten automatisch über die von Ihnen angegebene Zahlungsmethode abgerechnet.
 
-### Google Cloud ウェルカム クレジットを Gemini API で使用できますか？
+### Kann ich mein Google Cloud-Startguthaben für die Gemini API verwenden?
 
-いいえ。Google Cloud の[ウェルカム クレジット](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ja#welcome-credits)または無料トライアル クレジットは、Gemini API または AI Studio に使用できません。
+Nein, das [Startguthaben](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=de#welcome-credits) oder das Guthaben für den kostenlosen Testzeitraum von Google Cloud kann nicht für die Gemini API oder AI Studio verwendet werden.
 
-Google Cloud ウェルカム クレジットの対象外になる前にクレジットが付与された場合は、クレジットの有効期限（90 日後）が切れるまで、残りのクレジットを Gemini API と AI Studio で使用できます。
+Wenn Sie ein Google Cloud-Startguthaben erhalten haben, bevor es nicht mehr infrage kam, dürfen Sie Ihr verbleibendes Guthaben bis zum Ablauf (nach 90 Tagen) für die Gemini API und AI Studio ausgeben.
 
-### Google Cloud の無料トライアルは Gemini API の使用量に適用されますか？
+### Gilt die kostenlose Testversion von Google Cloud für die Nutzung der Gemini API?
 
-いいえ。2026 年 3 月より、Gemini API の使用料金は [300 ドルの Google Cloud 無料トライアル](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=ja#free-trial) プログラムの対象外となります。
+Nein. Ab März 2026 sind die Nutzungskosten für die Gemini API ausdrücklich vom Programm [Kostenlose Testversion von Google Cloud mit einem Guthaben von 300 $](https://docs.cloud.google.com/free/docs/free-cloud-features?hl=de#free-trial) ausgeschlossen.
 
-### Google Cloud クレジットは前払いとどのように連携しますか？
+### Wie funktioniert Google Cloud-Guthaben mit Vorauszahlungen?
 
-前払いユーザーは、Gemini API の使用に適用できる Google Cloud クレジットを使用する前に、まず[前払いクレジットを購入](#buy-credits)する必要があります。前払いクレジットの残高が有効になると、Gemini API の対象となる Google Cloud クレジットは、前払いクレジットの残高よりも先に使用されます。請求先アカウントのプリペイド クレジット残高が $0 になると、Google Cloud クレジットは使用されなくなります。
+Nutzer mit Prepaid-Guthaben müssen zuerst [Prepaid-Guthaben kaufen](#buy-credits), bevor infrage kommende Google Cloud-Guthaben auf die Nutzung der Gemini API angewendet werden können. Wenn Sie ein aktives Vorauszahlungsguthaben haben, werden Google Cloud-Guthaben, die für die Gemini API infrage kommen, vor Ihrem Vorauszahlungsguthaben aufgebraucht. Wenn das Guthaben Ihres Vorauszahlungskontos im Rechnungskonto 0 $ erreicht, werden keine Google Cloud-Guthaben mehr verwendet.
 
-[Google Cloud ウェルカム クレジット](#cloud-credits)など、一部の Google Cloud クレジットは Gemini API と AI Studio に使用できません。
+Nicht alle Google Cloud-Guthaben, z. B. das [Google Cloud-Startguthaben](#cloud-credits), können für die Gemini API und AI Studio verwendet werden.
 
-### 請求はどのように処理されますか？
+### Wie erfolgt die Abrechnung?
 
-Gemini API の課金は、[Cloud Billing](https://cloud.google.com/billing/docs/concepts?hl=ja) システムによって処理されます。プロダクト内の Cloud Billing のお支払い情報の設定については、[Cloud Billing のドキュメント](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ja)をご覧ください。
+Die Abrechnung für die Gemini API erfolgt über das [Cloud Billing](https://cloud.google.com/billing/docs/concepts?hl=de)-System. Informationen zur Abrechnungseinrichtung in Cloud Billing im Produkt finden Sie in der [Cloud Billing-Dokumentation](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=de).
 
-### 失敗したリクエストに対して課金されますか？
+### Werden mir fehlgeschlagene Anfragen in Rechnung gestellt?
 
-リクエストが 400 エラーまたは 500 エラーで失敗した場合、使用されたトークンに対して課金されることはありません。ただし、リクエストは割り当てに対してカウントされます。
+Wenn Ihre Anfrage mit einem 400- oder 500-Fehler fehlschlägt, werden Ihnen die verwendeten Tokens nicht in Rechnung gestellt. Die Anfrage wird jedoch weiterhin auf Ihr Kontingent angerechnet.
 
-### `GetTokens` は課金対象ですか？
+### Wird `GetTokens` in Rechnung gestellt?
 
-`GetTokens` API へのリクエストは課金されず、推論割り当てにもカウントされません。
+Anfragen an die `GetTokens` API werden nicht in Rechnung gestellt und nicht auf das Inferenzkontingent angerechnet.
 
-### 有料の API アカウントを使用している場合、Google AI Studio のデータはどのように処理されますか？
+### Wie werden meine Google AI Studio-Daten verarbeitet, wenn ich ein kostenpflichtiges API-Konto habe?
 
-Cloud 請求が有効になっている場合のデータの取り扱いについては、[利用規約](https://ai.google.dev/gemini-api/terms?hl=ja#paid-services)（「有料サービス」の「Google による使用者のデータの利用方法」を参照）をご覧ください。少なくとも 1 つの API プロジェクトで課金が有効になっている限り、Google AI Studio のプロンプトは同じ「有料サービス」の条件で扱われます。これは、[プラン] で「有料」とマークされているプロジェクトがあるかどうかを [Gemini API キーページ](https://aistudio.google.com/api-keys?hl=ja)で確認できます。
+Weitere Informationen zum Umgang mit Daten, wenn die Cloud-Abrechnung aktiviert ist, finden Sie in den [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de#paid-services) unter „Nutzung Ihrer Daten durch Google“ im Abschnitt „Kostenpflichtige Dienste“. Ihre Google AI Studio-Prompts unterliegen denselben Bedingungen für „kostenpflichtige Dienste“, sofern für mindestens ein API-Projekt die Abrechnung aktiviert ist. Sie können dies auf der [Seite mit den Gemini API-Schlüsseln](https://aistudio.google.com/api-keys?hl=de) überprüfen, wenn unter „Plan“ Projekte als „Kostenpflichtig“ gekennzeichnet sind.
 
-### 前払いによるお支払いとは何ですか？また、前払いによるお支払いモデルを使用する必要があるのは誰ですか？
+### Was ist die Prepay-Abrechnung und wer muss sie verwenden?
 
-前払い請求では、AI Studio の Gemini API のユーザーがクレジットを事前に購入できます。2026 年 3 月 23 日以降、AI Studio の新規ユーザーは、プリペイド課金プランへの登録が必要になる場合があります。AI Studio の[お支払い設定](#setup-billing)プロセスでは、UI に沿ってお支払い設定フローを進めます。前払いが必須かどうかは、UI に表示されます。
+Mit der Prepaid-Abrechnung können Nutzer der Gemini API in AI Studio Guthaben im Voraus kaufen.
+Ab dem 23. März 2026 müssen neue AI Studio-Nutzer möglicherweise den Prepaid-Abrechnungsplan verwenden. Während des Prozesses [Abrechnung einrichten](#setup-billing) in AI Studio werden Sie durch den Abrechnungseinrichtungsprozess geführt und es wird angegeben, ob Sie im Voraus bezahlen müssen.
 
-### 前払いクレジットを購入するにはどうすればよいですか？購入できる金額に上限や下限はありますか？
+### Wie kaufe ich Prepay-Guthabenpunkte und gibt es einen Mindest- oder Höchstbetrag?
 
-AI Studio の [お支払い] ページで[クレジットを購入](#buy-credits)できます。購入手続きの際、UI には、お住まいの地域とティアレベルに必要な事前購入の最小額と、アカウントに一度にチャージできる最大額が表示されます。
+Sie können [Guthabenpunkte auf der Abrechnungsseite von AI Studio kaufen](#buy-credits). Während des Kaufvorgangs wird in der Benutzeroberfläche der für deine Region und Stufe erforderliche Mindestbetrag für die Vorabzahlung sowie der Höchstbetrag angezeigt, der sich jeweils in deinem Konto befinden darf.
 
-### 必要に応じてクレジットを自動的に購入するように前払いアカウントを設定できますか？
+### Kann ich mein Prepay-Konto so konfigurieren, dass bei Bedarf automatisch zusätzliches Guthaben gekauft wird?
 
-はい。AI Studio の課金設定で[オートチャージ](#auto-reload)を構成することをおすすめします。「トリガー」となるクレジット残高（「残高が 30 ドルを下回った場合」など）と「チャージ金額」（「100 ドルを追加」など）を指定します。
+Ja, wir empfehlen, [automatisches Aufladen](#auto-reload) in den Abrechnungseinstellungen von AI Studio zu konfigurieren. Sie geben ein „Auslöse“-Guthaben an (z.B. „wenn mein Guthaben unter 30 € fällt“) und einen „Aufladebetrag“ (z.B. „100 € hinzufügen“).
 
-### 自動リチャージの金額を制限できますか？
+### Kann ich die Anzahl der automatischen Aufladungen begrenzen?
 
-はい。プリペイド ユーザーは、[**オートチャージ**] ウィジェットで [[1 か月の上限額](#monthly-auto-charge-limit)] を設定できます。請求期間内のオートチャージの合計額がこの上限に達すると、翌月までオートチャージは無効になります。手動でクレジットを購入しても、この上限にはカウントされません。
+Ja, Nutzer mit Prepaid-Tarif können im **Widget für das automatische Aufladen** ein [monatliches Limit für das automatische Aufladen](#monthly-auto-charge-limit) festlegen. Wenn der Gesamtbetrag der automatischen Aufladungen in einem Abrechnungszeitraum dieses Limit erreicht, wird die automatische Aufladung bis zum nächsten Monat deaktiviert. Manuelle Guthabenkäufe werden nicht auf dieses Limit angerechnet.
 
-### 未使用のクレジットの払い戻しを受けることはできますか？
+### Kann ich eine Erstattung für meine nicht genutzten Credits erhalten?
 
-プリペイド API クレジットはすべて 1 年後に期限切れとなり、払い戻しはできません。[前払いアカウントの払い戻しポリシー](#refunds)をご確認ください。
+Alle Prepaid-API-Guthaben verfallen nach einem Jahr und können nicht erstattet werden. [Erstattungsrichtlinie für Konten mit Vorauszahlung](#refunds)
 
-### プリペイド クレジットに有効期限はありますか？
+### Verfällt mein Prepaid-Guthaben?
 
-はい。クレジットは購入日から 12 か月後に有効期限が切れます。
+Ja, Guthabenpunkte verfallen 12 Monate nach dem Kaufdatum.
 
-### プリペイド クレジットの残高が $0 になるとどうなりますか？
+### Was passiert, wenn mein Prepaid-Guthaben 0 $ erreicht?
 
-その Cloud Billing 先払いアカウントで支払われたすべてのプロジェクトの Gemini API サービスは、追加の料金が発生しないように直ちに停止します。プロジェクトは自動的に無料枠にダウングレードされません。
+Alle Gemini API-Dienste in allen Projekten, die über dieses Cloud Billing-Konto mit Vorauszahlung bezahlt werden, werden sofort beendet, um weitere Gebühren zu vermeiden. Ihre Projekte werden nicht automatisch auf den kostenlosen Tarif herabgestuft.
 
-現在の有料階層レベルでサービスを復元するには、[追加のクレジットを購入](#buy-credits)する必要があります。クレジットを購入すると、Gemini API を使用できるようになります。なお、クレジット残高が反映されるまで、[遅延](#processing-times)が生じることがあります。
+Wenn Sie den Dienst auf Ihrer aktuellen kostenpflichtigen Stufe wiederherstellen möchten, müssen Sie [zusätzliche Credits kaufen](#buy-credits). Nachdem Sie Guthaben gekauft haben, sollten Sie die Gemini API verwenden können. Es kann zu einer [Verzögerung](#processing-times) kommen, bis dein Guthaben in unseren Systemen aktualisiert wird.
 
-必要に応じて、無料枠にダウングレードするには、ダウングレードするプロジェクトの[課金を無効](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=ja#disable_billing_for_a_project)にします。
+Optional können Sie ein Downgrade auf das kostenlose Kontingent durchführen, indem Sie die [Abrechnung für die Projekte deaktivieren](https://docs.cloud.google.com/billing/docs/how-to/modify-project?hl=de#disable_billing_for_a_project), für die Sie ein Downgrade durchführen möchten.
 
-### プリペイド クレジットの残高が 0 ドルを超えているのに、使用量が停止したのはなぜですか？
+### Warum wurde die Nutzung eingestellt, obwohl mein Guthaben für die Vorauszahlung höher als 0 € ist?
 
-現在のプランの[使用量上限](#tier-spend-caps)に達した可能性があります。上位のティアに進むと、使用量の上限が自動的に引き上げられます。Gemini API AI Studio の使用状況は、[Cloud 請求先アカウントのステータス](#missed-payment)によっても影響を受ける可能性があります。
+Möglicherweise haben Sie das [Nutzungslimit](#tier-spend-caps) für Ihr aktuelles Abo erreicht.
+Die Nutzungslimits werden automatisch erhöht, wenn Sie in höhere Stufen aufsteigen. Die Nutzung der Gemini API in AI Studio kann auch durch den [Status Ihres Cloud-Rechnungskontos](#missed-payment) beeinträchtigt werden.
 
-### プリペイド アカウントのクレジット残高がマイナスになっているのはなぜですか？
+### Warum ist das Guthaben meines Prepay-Kontos negativ?
 
-請求システムと処理システムが複雑なため、クレジットをすべて使用した後、使用を停止するまでに[遅延](#processing-times)が生じる可能性があります。この超過使用量は、AI Studio の課金ダッシュボードにマイナスのクレジット残高として表示されることがあります。この場合、サービスは一時停止され、マイナス残高は次回のクレジット購入時に差し引かれます。
+Aufgrund der Komplexität unserer Abrechnungs- und Verarbeitungssysteme kann es zu [Verzögerungen](#processing-times) kommen, bis die Nutzung beendet wird, nachdem Sie alle Ihre Guthaben aufgebraucht haben. Diese zusätzliche Nutzung wird möglicherweise als negatives Guthaben in Ihrem Abrechnungsdashboard für AI Studio angezeigt. In diesem Fall wird Ihr Dienst pausiert und Ihr negatives Guthaben wird von Ihrem nächsten Guthabenkauf abgezogen.
 
-Gemini API サービスが一時停止しないようにするには、クレジット残高が指定した値を下回ったときに自動的にクレジットを購入する[オートチャージ](#auto-reload)を設定することをおすすめします。
+Um eine Unterbrechung Ihres Gemini API-Dienstes zu vermeiden, empfehlen wir, die [automatische Aufladung](#auto-reload) einzurichten. So werden automatisch weitere Guthabenpunkte gekauft, wenn Ihr Guthaben unter einen von Ihnen angegebenen Wert sinkt.
 
-### 前払いクレジットを Gemini Enterprise Agent Platform などの他の Google Cloud サービスに使用できますか？
+### Kann ich mein Prepaid-Guthaben für andere Google Cloud-Dienste wie die Gemini Enterprise Agent Platform verwenden?
 
-いいえ。前払いクレジットは Gemini API の使用にのみ使用できます。使用する他の Google Cloud サービス（Compute、Storage、Gemini Enterprise Agent Platform）は、標準の [Cloud 請求サイクル](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ja)で請求されます。
+Nein. Prepaid-Guthaben kann nur für die Nutzung der Gemini API verwendet werden. Alle anderen Google Cloud-Dienste, die Sie verwenden (Compute, Storage, Gemini Enterprise Agent Platform), werden über den standardmäßigen [Cloud-Abrechnungszyklus](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=de) abgerechnet.
 
-### 前払いから後払いに切り替えることはできますか？
+### Kann ich von der Vorauszahlung zur nachträglichen Zahlung wechseln?
 
-いいえ。前払い請求プランから後払い請求プランへの切り替えはサポートされていません。
+Nein, ein Wechsel von einem Abrechnungstarif mit Vorauszahlung zu einem Abrechnungstarif mit Nachträglicher Zahlung wird nicht unterstützt.
 
-### 後払いから前払いに切り替えることはできますか？
+### Kann ich von der Abrechnung mit nachträglicher Zahlung zur Abrechnung mit Vorauszahlung wechseln?
 
-はい。[AI Studio のお支払い](https://aistudio.google.com/billing?hl=ja)ページで、既存の後払いアカウントを移行できます。手順については、[前払いに移行する](#migrate-to-prepay)をご覧ください。
+Ja, Sie können ein bestehendes Konto mit nachträglicher Zahlung auf der Seite [AI Studio-Abrechnung](https://aistudio.google.com/billing?hl=de) umstellen. Eine Anleitung finden Sie unter [Auf Vorauszahlung umstellen](#migrate-to-prepay).
 
-### 後払いプランに切り替えた場合、前払いクレジットはどうなりますか？
+### Was passiert mit meinem Prepaid-Guthaben, wenn ich zu einem Postpay-Tarif wechsle?
 
-[後払い](#postpay)にアップグレードすると、Cloud Billing は前払いのお支払いアカウントを閉鎖し、[オートチャージ](#auto-reload)を無効にして、未使用の前払いクレジットを自動的に払い戻します（標準の払い戻し処理時間に従います）。
+Wenn Sie ein Upgrade auf [Postpay](#postpay) durchführen, schließt Cloud Billing Ihr Zahlungskonto, deaktiviert das [automatische Aufladen](#auto-reload) und erstattet Ihnen automatisch alle nicht verwendeten Vorauszahlungsguthaben (vorbehaltlich der standardmäßigen Bearbeitungszeit für Erstattungen).
 
-### 現在のプリペイド クレジットの残高と取引履歴はどこで確認できますか？
+### Wo kann ich mein aktuelles Prepay-Guthaben und meinen Transaktionsverlauf sehen?
 
-Gemini API の残高管理と取引履歴はすべて、Google AI Studio の [お支払い] タブで直接行う必要があります。
+Die Verwaltung des Guthabens und des Transaktionsverlaufs für die Gemini API muss direkt auf dem Tab „Abrechnung“ in Google AI Studio erfolgen.
 
-### 「請求先アカウントの種類が無効であるか、サポートされていません」というメッセージが表示されるのはなぜですか？
+### Warum wird die Meldung „Der Typ des Rechnungskontos ist inaktiv oder wird nicht unterstützt“ angezeigt?
 
-選択した請求先アカウントの種類または請求先アカウントのステータスが AI Studio の有料階層の対象でない場合、[AI Studio のお支払いページ](https://aistudio.google.com/billing?hl=ja)でのお支払い操作がブロックされ、「請求先アカウントの種類が無効またはサポートされていません」というメッセージが表示されることがあります。
+Zahlungsinteraktionen auf der [Abrechnungsseite für AI Studio](https://aistudio.google.com/billing?hl=de) werden möglicherweise blockiert und durch die Meldung „Der Abrechnungskontotyp ist inaktiv oder wird nicht unterstützt“ ersetzt, wenn der ausgewählte Abrechnungskontotyp oder der Abrechnungskontostatus nicht für die kostenpflichtige Version von AI Studio infrage kommt.
 
-[Cloud Console](https://console.cloud.google.com/billing/?hl=ja) で、お支払いアカウントのステータスを確認します。対象外のタイプの 1 つに*無料トライアル アカウント*があります。この場合は、AI Studio で[課金を有効](#setup-billing)にすると、対象となります。無効な状態の 1 つに [*閉鎖*] があります。この場合は、[アカウントを再開](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=ja)できます。
+Prüfen Sie in der [Cloud Console](https://console.cloud.google.com/billing/?hl=de) den Status Ihres Abrechnungskontos. Ein nicht berechtigter Typ könnte *Konto für kostenlosen Testzeitraum* sein. In diesem Fall können Sie die [Abrechnung in AI Studio aktivieren](#setup-billing), um die Berechtigung zu erhalten. Ein inaktiver Status kann *Geschlossen* sein. In diesem Fall können Sie [das Konto wieder öffnen](https://docs.cloud.google.com/billing/docs/how-to/close-or-reopen-billing-account?hl=de).
 
-### Gemini API の使用料金は Google Cloud コンソールに表示されますか？
+### Werden meine Nutzungskosten für die Gemini API in der Google Cloud Console angezeigt?
 
-はい。Gemini API の費用は、Cloud 請求先アカウントで支払われる他の Google Cloud サービスの費用とともに、[Cloud Billing コンソール](https://console.cloud.google.com/billing?hl=ja)の[費用管理ページ](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=ja#cost-reports)で確認できます。プリペイド クレジット残高は AI Studio でのみ管理できます。
+Ja. Die Kosten für die Gemini API sowie die Kosten für alle anderen Google Cloud-Dienste, die über Ihr Cloud-Rechnungskonto bezahlt werden, können Sie in der [Cloud Billing Console](https://console.cloud.google.com/billing?hl=de) auf den [Seiten zur Kostenverwaltung](https://docs.cloud.google.com/billing/docs/how-to/split-charging-cycle?hl=de#cost-reports) einsehen. Hinweis: Sie können Ihr Prepaid-Guthaben nur in AI Studio verwalten.
 
-### AI Studio の課金ではクレジットの使用量とともに Gemini API の使用量が表示されるのに、Cloud Billing コンソールには表示されないのはなぜですか？
+### Warum wird meine Gemini API-Nutzung nicht in der Cloud Billing Console angezeigt, obwohl ich sie zusammen mit der Nutzung meiner Guthaben in der AI Studio-Abrechnung sehen kann?
 
-Google Cloud と AI Studio は、さまざまな間隔で使用量データを Cloud Billing に報告します。請求システムと処理システムの複雑さにより、サービスの使用と、Cloud Billing に表示される使用量や費用との間に遅延が生じる場合があります。通常、費用の詳細は 1 日以内に確認できますが、24 時間以上かかる場合もあります。遅延請求の詳細については、[Cloud Billing のドキュメント](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=ja#delayed-billing)をご覧ください。
+Google Cloud und AI Studio melden Nutzungsdaten in unterschiedlichen Intervallen an Cloud Billing. Aufgrund der Komplexität unserer Abrechnungs- und Verarbeitungssysteme kann es zu einer Verzögerung zwischen der Nutzung von Diensten und der Nutzung und Kosten kommen, die in Cloud Billing angezeigt werden. In der Regel sind Ihre Kostendetails innerhalb eines Tages verfügbar, manchmal kann es aber auch mehr als 24 Stunden dauern.
+Weitere Informationen zur verzögerten Abrechnung finden Sie in der [Dokumentation zu Cloud Billing](https://docs.cloud.google.com/billing/docs/how-to/billing-cycle?hl=de#delayed-billing).
 
-### 後払い請求サイクルの対象となる費用が発生する他の Google Cloud サービスを使用している場合、支払いを忘れるとどうなりますか？
+### Was passiert, wenn ich eine Zahlung verpasse, wenn ich andere Google Cloud-Dienste mit Kosten verwende, die einem Postpay-Abrechnungszyklus unterliegen?
 
-他の Google Cloud サービスの支払いが滞ると、**利用可能なプリペイド クレジットの残高に関係なく**、AI Studio での Gemini API へのアクセスが停止される可能性があります。AI Studio の使用量は Google Cloud 請求先アカウントで管理されます。このアカウントでは、AI Studio の前払い請求と他の Cloud サービスの後払い請求の両方を共有できます。後払い残高に問題があると、そのアカウントに関連付けられているすべてのサービスが停止します。Cloud 請求先アカウントに次のような問題が報告された場合、Gemini API の使用は一時停止されます。
+Wenn Sie eine Zahlung für andere Google Cloud-Dienste versäumt haben, kann Ihr Gemini API-Zugriff in AI Studio gesperrt werden, **unabhängig davon, wie viele Prepaid-Guthaben Sie haben**. Die Nutzung von AI Studio wird über ein Google Cloud-Rechnungskonto abgerechnet, das sowohl die Vorauszahlungsabrechnung für AI Studio als auch die Abrechnung im Nachhinein für andere Cloud-Dienste nutzen kann. Wenn es ein Problem mit Ihrem Postpay-Guthaben gibt, werden alle mit diesem Konto verknüpften Dienste eingestellt. Ihre Nutzung der Gemini API wird ausgesetzt, wenn Ihr Cloud-Rechnungskonto aufgrund von Problemen wie den folgenden gekennzeichnet wird:
 
-- 未払いまたは支払い期限が過ぎている残高
-- お支払いが承認されなかった場合
-- 無効または期限切れのお支払い方法
+- Ein überfälliger Betrag
+- Eine abgelehnte Zahlung
+- Eine ungültige oder abgelaufene Zahlungsmethode
 
-サービスを復元するには、Google Cloud Billing コンソールで[後払いアカウントの問題を解決](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=ja#resolving-declined-payments)する必要があります。問題を解決すると、プリペイド Gemini API クレジットとサービスに再びアクセスできるようになります。
+Um den Dienst wiederherzustellen, müssen Sie das [Problem mit dem Postpay-Konto](https://docs.cloud.google.com/billing/docs/how-to/resolve-issues?hl=de#resolving-declined-payments) in der Google Cloud Billing Console beheben. Sobald Sie das Problem behoben haben, erhalten Sie wieder Zugriff auf Ihr Prepaid-Guthaben für die Gemini API und die Dienste.
 
-### 前払い設定をキャンセルした後、プロジェクトが中断されるのはなぜですか？
+### Warum werden meine Projekte unterbrochen, nachdem ich eine Vorauszahlung eingerichtet habe?
 
-**問題:** 既存の後払い請求先アカウントに前払い機能を追加するフローを開始しましたが、前払い設定を完了する前にウィンドウを閉じるか、プロセスをキャンセルしました。その請求先アカウントにリンクされている他のプロジェクトは、Gemini API へのアクセス権を失いました。
+**Problem**:Sie haben den Vorgang zum Hinzufügen von Vorauszahlungsfunktionen zu einem bestehenden Rechnungskonto mit nachträglicher Zahlung gestartet, das Fenster jedoch geschlossen oder den Vorgang abgebrochen, bevor Sie die Einrichtung der Vorauszahlung abgeschlossen haben. Andere mit diesem Rechnungskonto verknüpfte Projekte haben den Zugriff auf die Gemini API verloren.
 
-**原因:** 移行フローでは、確認ダイアログを承認すると、前払いをサポートするインフラストラクチャが請求先アカウントに直ちに作成されます。前払いの手順を完了しないと、構成は課金できない状態のままになります。この状態は請求先アカウント レベルで適用されるため、前払いサービスを利用するその請求先アカウントにリンクされているすべてのプロジェクトへのアクセスが制限されます。
+**Ursache**:Während der Umstellung wird die Infrastruktur zur Unterstützung von Vorauszahlungen in Ihrem Abrechnungskonto erstellt, sobald Sie das Bestätigungsdialogfeld akzeptieren. Wenn Sie die Schritte für die Vorauszahlung nicht ausführen, bleibt die Konfiguration in einem nicht abrechenbaren Status. Da dieser Status auf Rechnungskontoebene gilt, wird der Zugriff für alle Projekte eingeschränkt, die mit diesem Rechnungskonto verknüpft sind und auf Prepay-Dienste angewiesen sind.
 
-**解決策:** アカウントの状態はすでに変更されているため、お支払いフローを中断した場合に状態を自動的に元に戻す方法はありません。リンクされたプロジェクトへのサービスを復元するには、次のいずれかを行います。
+**Lösung**:Da sich der Kontostatus bereits geändert hat, gibt es keine automatische Möglichkeit, den Status zurückzusetzen, wenn Sie den Zahlungsablauf abbrechen. So stellen Sie den Dienst für Ihre verknüpften Projekte wieder her:
 
-- **設定を完了する:** Google AI Studio に戻り、お支払い情報の設定フローを再開して、前払い手続きを完了します。お支払いが処理されると、前払い請求プランが有効になり、サービスが復元されます。
-- **サポートに連絡する:** 前払いプランを使用せず、請求先アカウントを後払いに戻す場合は、[Cloud Billing サポートにお問い合わせ](https://cloud.google.com/support/billing?hl=ja)のうえ、アカウントの状態を手動でリセットしてください。
+- **Einrichtung abschließen**:Kehren Sie zu Google AI Studio zurück, starten Sie den Abrechnungseinrichtungsvorgang neu und schließen Sie die Vorauszahlung ab. Nachdem die Zahlung verarbeitet wurde, wird der Abrechnungsplan mit Vorauszahlung aktiviert und der Dienst wird wiederhergestellt.
+- **Support kontaktieren**:Wenn Sie das Prepay-Abrechnungsmodell nicht verwenden und Ihr Rechnungskonto wieder auf Postpay zurücksetzen möchten, [wenden Sie sich an den Cloud Billing-Support](https://cloud.google.com/support/billing?hl=de), um den Kontostatus manuell zurücksetzen zu lassen.
 
-### 請求に関するサポートはどこで受けられますか？
+### Wo erhalte ich Hilfe bei der Abrechnung?
 
-課金に関するサポートについては、[Cloud Billing サポートを利用する](https://cloud.google.com/support/billing?hl=ja)をご覧ください。
+Hilfe bei der Abrechnung erhalten Sie unter [Cloud Billing-Support erhalten](https://cloud.google.com/support/billing?hl=de).
 
-フィードバックを送信
+Feedback geben
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最終更新日 2026-09-20 UTC。
+Zuletzt aktualisiert: 2026-09-28 (UTC).
 
-ご意見をお聞かせください
+Haben Sie Feedback für uns?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-20 UTC。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-28 (UTC)."],[],[]]

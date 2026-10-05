@@ -1,100 +1,100 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=ko
-fetched_at: 2026-09-28T06:34:57.097425+00:00
-title: "\uc5d0\uc774\uc804\ud2b8 \uac1c\uc694 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=de
+fetched_at: 2026-10-05T06:45:05.783171+00:00
+title: "Agenten\u00a0\u2013 \u00dcbersicht \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-의견 보내기
+Feedback geben
 
-# 에이전트 개요
+# Agenten – Übersicht
 
-Gemini API의 관리형 에이전트는 구성 가능한 에이전트 하네스를 제공합니다. 단일 API 호출은 에이전트가 추론하고, 코드를 실행하고, 파일을 관리하고, 웹을 자율적으로 탐색하는 Linux 샌드박스를 프로비저닝합니다.
+Verwaltete KI-Agenten in der Gemini API bieten Ihnen eine konfigurierbare Agent-Umgebung. Mit einem einzigen API-Aufruf wird eine Linux-Sandbox bereitgestellt, in der der Agent autonom Schlussfolgerungen zieht, Code ausführt, Dateien verwaltet und im Web surft.
 
 [rocket\_launch
 
-빠른 시작
+Kurzanleitung
 
-첫 번째 에이전트 호출을 하고, 응답을 스트리밍하고, 맞춤 에이전트를 빌드합니다.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko)
+Ersten Agent-Aufruf starten, Antworten streamen und benutzerdefinierten Agenten erstellen](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de)
 [smart\_toy
 
-Antigravity 에이전트
+Antigravity-Agent
 
-기본 에이전트의 기능, 도구, 멀티모달 입력, 가격 책정](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko)
+Funktionen, Tools, multimodale Eingabe und Preise für den Standard-Agenten.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de)
 [experiment
 
-AI Studio의 에이전트
+KI-Agenten in AI Studio
 
-코드를 작성하지 않고 에이전트의 프로토타입을 제작할 수 있는 시각적 플레이그라운드입니다.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ko)
+Visuelle Umgebung zum Erstellen von Agentenprototypen ohne Code.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de)
 
-## 사용 가능한 관리형 에이전트
+## Verfügbare verwaltete KI-Agenten
 
-- **[Antigravity agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko)**: Gemini 3.8 Flash로 빌드된 범용 관리형 에이전트입니다. Google에서 호스팅하는 안전한 Linux 샌드박스 내에서 코드를 실행하고, 파일을 관리하고, 웹을 검색합니다. `agent_config`를 사용하여 기본 모델 (예: Gemini 3.7 Flash, Gemini 3.6 Flash, Gemini 3.5 Flash)을 구성하고 자체 안내, 기술, 데이터로 확장하여 [맞춤 에이전트를 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko)할 수 있습니다.
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)**: 시장 분석, 실사, 문헌 검토와 같은 사용 사례를 위해 다단계 연구 작업을 계획, 실행, 종합하는 자율 연구 에이전트입니다.
+- **[Antigravity-Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de)**: Für allgemeine Zwecke verwalteter Agent, basierend auf Gemini 3.8 Flash. Führt Code aus, verwaltet Dateien und durchsucht das Web in einer sicheren Linux-Sandbox, die von Google gehostet wird. Sie können das zugrunde liegende Modell (z. B. Gemini 3.7 Flash, Gemini 3.6 Flash oder Gemini 3.5 Flash) mit `agent_config` konfigurieren und mit eigenen Anweisungen, Skills und Daten erweitern, um [einen benutzerdefinierten Agent zu erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de).
+- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de)**: Autonomer Recherche-Agent, der mehrstufige Rechercheaufgaben für Anwendungsfälle wie Marktanalysen, Due-Diligence-Prüfung und Literaturübersichten plant, ausführt und zusammenfasst.
 
-## 보안 및 권장사항
+## Sicherheit und Best Practices
 
-모든 에이전트는 OS 수준에서 격리된 샌드박스 환경에서 실행됩니다.
-샌드박스는 기본적으로 아웃바운드 네트워크 액세스가 무제한입니다. 허용 목록을 사용하여 네트워크 액세스를 제한하거나 사용 중지할 수 있습니다.
+Jeder Agent wird in einer Sandbox-Umgebung ausgeführt, die auf Betriebssystemebene isoliert ist.
+Die Sandbox hat standardmäßig uneingeschränkten ausgehenden Netzwerkzugriff. Sie können den Netzwerkzugriff mithilfe einer Zulassungsliste einschränken oder deaktivieren.
 
-### 네트워크 액세스
+### Netzwerkzugriff
 
-기본적으로 환경에는 제한 없는 아웃바운드 네트워크 액세스 권한이 있습니다. `network` 허용 목록을 사용하여 아웃바운드 트래픽을 특정 도메인 또는 와일드카드 패턴으로 제한합니다. 구성 세부정보는 [네트워크 허용 목록](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ko#network_allow_list) (AI Studio) 또는 [네트워크 규칙](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko#with_network_rules)(API)을 참고하세요.
+Standardmäßig haben Umgebungen uneingeschränkten ausgehenden Netzwerkzugriff. Verwenden Sie eine `network`-Zulassungsliste, um ausgehenden Traffic auf bestimmte Domains oder Platzhaltermuster zu beschränken. Weitere Informationen zur Konfiguration finden Sie unter [Network Allow List](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de#network_allow_list) (AI Studio) oder [Network rules](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de#with_network_rules) (API).
 
-### 외부 도구 및 API
+### Externe Tools und APIs
 
-외부 도구와 API를 연결하여 에이전트를 확장할 수 있습니다. 신뢰할 수 있는 출처의 도구만 사용하고 필요한 최소한의 권한으로 범위를 지정합니다. 보안 비밀을 관리 사용자 인증 정보로 저장하고 ID로 참조하여 이그레스 프록시가 요청 시에 삽입하고 샌드박스 내부에 노출되지 않도록 합니다. 에이전트는 액세스할 수 있는 사용자 인증 정보를 사용할 수 있으므로 전체 범위를 부여하려는 사용자 인증 정보만 제공하세요.
+Sie können externe Tools und APIs verbinden, um den Agenten zu erweitern. Verwenden Sie nur Tools von vertrauenswürdigen Quellen und beschränken Sie die Berechtigungen auf das erforderliche Minimum. Speichern Sie Secrets als verwaltete Anmeldedaten und verweisen Sie anhand der ID darauf, damit der Egress-Proxy sie zur Anfragezeit einfügt und sie nie in der Sandbox verfügbar sind. Der Agent kann alle Anmeldedaten verwenden, auf die er Zugriff hat. Geben Sie daher nur Anmeldedaten an, deren vollständigen Umfang Sie gewähren möchten.
 
-- 최소 권한 서비스 계정 또는 API 키를 사용합니다.
-- 수명이 긴 키보다 수명이 짧은 토큰을 선호합니다.
-- 전체 범위를 부여할 의향이 있는 사용자 인증 정보만 제공하세요.
-- 정기적인 일정에 따라 사용자 인증 정보를 순환합니다.
+- Verwenden Sie Dienstkonten oder API-Schlüssel mit geringsten Berechtigungen.
+- Kurzlebige Tokens gegenüber langlebigen Schlüsseln bevorzugen
+- Geben Sie nur Anmeldedaten an, deren vollen Umfang Sie gewähren möchten.
+- Anmeldedaten regelmäßig rotieren.
 
-사용자 인증 정보 유형 및 관리 작업은 [사용자 인증 정보](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko)를 참고하세요. 허용 목록 규칙에서 인라인으로 헤더를 설정할 수도 있습니다([네트워크 구성](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#network-configuration) 참고).
+Informationen zu den Anmeldedatentypen und Verwaltungsoperationen finden Sie unter [Anmeldedaten](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=de). Sie können Header auch inline in einer Zulassungslistenregel festlegen. Weitere Informationen finden Sie unter [Netzwerkkonfiguration](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#network-configuration).
 
-### 인간의 감독
+### Menschliche Aufsicht
 
-특히 데이터를 수정하거나 외부 시스템과 상호작용하는 작업의 경우 출력을 배포하기 전에 항상 확인하세요 (생성된 코드, 데이터 변환, 구성 변경사항).
+Überprüfen Sie die Ausgaben (generierter Code, Datentransformationen, Konfigurationsänderungen) immer, bevor Sie sie bereitstellen, insbesondere bei Aufgaben, bei denen Daten geändert oder mit externen Systemen interagiert wird.
 
-## 가격 책정
+## Preise
 
-관리형 에이전트는 Gemini 모델 토큰 및 도구 사용량에 기반한 [사용한 만큼만 지불 모델](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을 사용합니다. 단일 상호작용은 여러 추론 루프를 트리거할 수 있으며, 일반적으로 100,000~3,000,000개의 토큰을 소비합니다. 환경 컴퓨팅은 미리보기 기간 동안 **청구되지 않습니다**. 작업별 분석은 [예상 비용](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko#availability-and-pricing)을 참고하세요. 관리형 에이전트는 무료 비율 제한 및 사용량 할당량이 있는 무료 등급에서도 사용할 수 있습니다.
+Verwaltete Agents verwenden ein [Pay-as-you-go-Modell](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing-for-agents) basierend auf Gemini-Modell-Tokens und der Tool-Nutzung. Eine einzelne Interaktion kann mehrere Reasoning-Schleifen auslösen, die in der Regel 100.000 bis 3 Millionen Tokens verbrauchen. Die Rechenleistung der Umgebung wird während der Vorschau **nicht in Rechnung gestellt**. Eine Aufschlüsselung nach Aufgabe finden Sie unter [Geschätzte Kosten](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de#availability-and-pricing). Verwaltete Agents sind auch in der kostenlosen Stufe mit einem kostenlosen Ratenlimit und Nutzungskontingent verfügbar.
 
-## 한도
+## Limits
 
-| 한도 | 설명 |
+| Limit | Beschreibung |
 | --- | --- |
-| **환경 전체 기간** | 환경은 7일 동안 비활성 상태가 되면 영구적으로 삭제됩니다. |
-| **VM 스핀다운** | VM은 리소스를 절약하기 위해 잠시 활동이 없으면 종료됩니다. 다음 요청은 콜드 스타트로 상태를 복원합니다. |
-| **사전 설치된 소프트웨어** | Python 3.12 및 Node.js 22가 설치된 Ubuntu 기반 환경 환경의 기본 이미지에 관한 자세한 내용은 [사전 설치된 소프트웨어](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#pre-installed-software)를 참고하세요. |
-| **최대 상담사 수** | 관리 에이전트는 최대 1,000개까지 보유할 수 있습니다. |
+| **Lebensdauer der Umgebung** | Umgebungen werden nach 7 Tagen Inaktivität endgültig gelöscht. |
+| **VM-Spin-down** | VMs werden nach kurzer Inaktivität heruntergefahren, um Ressourcen zu sparen. Bei der nächsten Anfrage wird der Status wiederhergestellt (mit einem Kaltstart). |
+| **Vorinstallierte Software** | Ubuntu-basierte Umgebung mit Python 3.12 und Node.js 22. Weitere Informationen zum Basis-Image der Umgebung finden Sie unter [Vorinstallierte Software](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#pre-installed-software). |
+| **Maximale Anzahl von Kundenservicemitarbeitern** | Sie können bis zu 1.000 verwaltete Agents haben. |
 
-## 에이전트 프레임워크
+## Frameworks für KI-Agenten
 
-다음 프레임워크와 SDK를 사용하여 Gemini로 에이전트를 빌드할 수도 있습니다.
+Sie können auch mit diesen Frameworks und SDKs KI-Agenten mit Gemini erstellen:
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ko): 그래프 구조를 사용하여 상태 저장 복잡한 애플리케이션 흐름과 멀티 에이전트 시스템을 빌드합니다.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=ko): RAG가 강화된 워크플로를 위해 Gemini 에이전트를 비공개 데이터에 연결합니다.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=ko): 협업적이고 롤플레잉을 하는 자율 AI 에이전트를 조정합니다.
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=ko): JavaScript/TypeScript로 AI 기반 사용자 인터페이스 및 에이전트를 빌드합니다.
-- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): 상호 운용 가능한 AI 에이전트를 빌드하고 오케스트레이션하기 위한 오픈소스 프레임워크입니다.
-- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=ko): Google Antigravity를 지원하는 동일한 도구, 에이전트 루프, 컨텍스트 관리를 사용하여 자율 AI 에이전트를 빌드합니다. Python으로 프로그래밍할 수 있습니다.
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=de): Erstellen Sie zustandsbehaftete, komplexe Anwendungsabläufe und Multi-Agent-Systeme mithilfe von Graphstrukturen.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=de): Verbinden Sie Gemini-Agents mit Ihren privaten Daten für RAG-optimierte Workflows.
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=de): Orchestrieren Sie kollaborative, autonome KI-Agents, die Rollenspiele spielen.
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=de): Erstellen Sie KI-basierte Benutzeroberflächen und Agents in JavaScript/TypeScript.
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): Ein Open-Source-Framework zum Erstellen und Orchestrieren interoperabler KI-Agenten.
+- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=de): Erstellen Sie autonome KI-Agents mit denselben Tools, derselben Agentenschleife und derselben Kontextverwaltung, die Google Antigravity zugrunde liegen. Die Programmierung erfolgt in Python.
 
-의견 보내기
+Feedback geben
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-최종 업데이트: 2026-09-18(UTC)
+Zuletzt aktualisiert: 2026-09-18 (UTC).
 
-의견을 전달하고 싶나요?
+Haben Sie Feedback für uns?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-18(UTC)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-18 (UTC)."],[],[]]

@@ -1,143 +1,145 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=es-419
-fetched_at: 2026-09-28T06:20:39.371351+00:00
-title: "Integraciones de socios y bibliotecas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=it
+fetched_at: 2026-10-05T06:48:33.603357+00:00
+title: "Integrazioni con partner e biblioteche \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Enviar comentarios
+Invia feedback
 
-# Integraciones de socios y bibliotecas
+# Integrazioni con partner e biblioteche
 
-En esta guía, se describen las estrategias de arquitectura para compilar bibliotecas, plataformas y puertas de enlace sobre la API de Gemini. Detalla las compensaciones técnicas entre el uso de los SDKs oficiales de IA generativa, la API directa (REST/gRPC) y la capa de compatibilidad con OpenAI.
+Questa guida illustra le strategie di architettura per la creazione di librerie, piattaforme e gateway basati sull'API Gemini. Descrive in dettaglio i compromessi tecnici tra l'utilizzo degli SDK GenAI ufficiali, dell'API diretta (REST/gRPC) e del livello di compatibilità OpenAI.
 
-Usa esta guía si compilas herramientas para otros desarrolladores, como frameworks de código abierto, puertas de enlace empresariales o agregadores de SaaS, y necesitas optimizar la higiene de las dependencias, el tamaño del paquete o la paridad de funciones.
+Utilizza questa guida se stai creando strumenti per altri sviluppatori, come framework open source, gateway aziendali o aggregatori SaaS, e devi ottimizzare l'igiene delle dipendenze, le dimensioni del bundle o la parità delle funzionalità.
 
-## ¿Qué es la integración de socios?
+## Che cos'è l'integrazione dei partner?
 
-Un socio es cualquier persona que cree una integración entre la API de Gemini y los desarrolladores de usuarios finales. Categorizamos a los socios en cuatro arquetipos. Identificar con cuál te identificas más te ayudará a elegir la ruta de integración adecuada.
+Un partner è chiunque crei un'integrazione tra l'API Gemini e gli sviluppatori di utenti finali. Classifichiamo i partner in quattro archetipi. Identificare quello che ti corrisponde maggiormente ti aiuterà a scegliere il percorso di integrazione giusto.
 
-#### Marco del ecosistema
+#### Framework dell'ecosistema
 
-- **Quién eres:** Mantenedor de un framework de código abierto (p. ej., LangChain, LlamaIndex, Spring AI) o clientes específicos del idioma
-- **Tu objetivo:** Amplia compatibilidad. Quieres que tu biblioteca funcione en cualquier entorno que elija el usuario sin forzar conflictos.
+- **Chi sei:** gestore di un framework open source (ad es. LangChain, LlamaIndex, Spring AI) o di client specifici per la lingua.
+- **Il tuo obiettivo:** ampia compatibilità. Vuoi che la tua libreria funzioni in qualsiasi ambiente scelto dall'utente senza forzare conflitti.
 
-#### Plataforma de tiempo de ejecución y de borde
+#### Piattaforma di runtime ed edge
 
-- **Quién eres:** Plataformas de SaaS, puertas de enlace de IA o proveedores de infraestructura en la nube (p.ej., Vercel, Cloudflare, Zapier) en los que la ejecución de código se realiza en entornos restringidos.
-- **Tu objetivo:** Rendimiento Necesitas baja latencia, un tamaño de paquete mínimo y rápidos inicios en frío.
+- **Chi sei:** piattaforme SaaS, gateway AI o provider di infrastrutture cloud (ad es. Vercel, Cloudflare, Zapier) in cui l'esecuzione del codice avviene in ambienti con limitazioni.
+- **Il tuo obiettivo:** rendimento. Hai bisogno di una bassa latenza, dimensioni minime del bundle e avvii a freddo rapidi.
 
-#### Agregador
+#### Aggregatore
 
-- **Quién eres:** Plataformas, proxies o "Model Gardens" internos que normalizan el acceso a muchos proveedores diferentes de LLM (p.ej., OpenAI, Anthropic, Google) en una sola interfaz.
-- **Tu objetivo:** Portabilidad y uniformidad.
+- **Chi sei:** piattaforme, proxy o "Model Garden" interni che normalizzano l'accesso a molti provider LLM diversi (ad es. OpenAI, Anthropic, Google) in un'unica interfaccia.
+- **Il tuo obiettivo:** portabilità e uniformità.
 
-#### Puerta de enlace empresarial
+#### Gateway aziendale
 
-- **Quién eres:** Equipos internos de ingeniería de plataformas en grandes empresas que crean "rutas doradas" para cientos de desarrolladores internos.
-- **Tu objetivo:** Estandarización, administración y autenticación unificada.
+- **Chi sei:** team di ingegneria delle piattaforme interne di grandi aziende che creano "percorsi consigliati" per centinaia di sviluppatori interni.
+- **Il tuo obiettivo:** standardizzazione, governance e autenticazione unificata.
 
-## Comparación rápida
+## Confronto riepilogativo
 
-**Práctica recomendada global:** Todos los socios deben enviar el [encabezado `x-goog-api-client`](#client-id), independientemente de la ruta elegida.
+**Best practice globale:** tutti i partner devono inviare l'[`x-goog-api-client`
+intestazione](#client-id) indipendentemente dal percorso scelto.
 
-| Si eres… | Ruta recomendada | Beneficio clave | Compensación clave | Práctica recomendada |
+| Se sei... | Percorso consigliato | Vantaggio principale | Compromesso principale | Best practice |
 | --- | --- | --- | --- | --- |
-| **Puerta de enlace empresarial, framework del ecosistema** | **[SDK de IA generativa de Google](#genai-sdk)** | **Paridad y velocidad de Gemini Enterprise Agent Platform.** Control integrado para tipos, autenticación y funciones complejas (p. ej., cargas de archivos) Migración sin interrupciones a Google Cloud | **Peso de la dependencia:** Las dependencias transitivas pueden ser complejas y estar fuera de tu control. Se limita a los lenguajes compatibles (Python/Node/Go/Java). | **Bloquea versiones.** Fija las versiones del SDK en tus imágenes base internas para garantizar la estabilidad en todos los equipos. |
-| **Framework del ecosistema, plataformas perimetrales y agregadores** | **[API directa](#rest)**  *(REST / gRPC)* | **Sin dependencias.** Controlas el cliente HTTP y el tamaño exacto del paquete. Acceso completo a todas las funciones de la API y el modelo. | **Sobrecarga alta para el desarrollador** Las estructuras JSON pueden estar profundamente anidadas y requieren una validación manual y una verificación de tipos estrictas. | **Usa especificaciones de OpenAPI.** Automatiza la generación de tipos con nuestras especificaciones oficiales en lugar de escribirlas a mano. |
-| **Agregador que usa los SDKs de OpenAI que solo requieren flujos de trabajo basados en texto**  *(Optimización para la portabilidad heredada)* | **[Compatibilidad con OpenAI](#openai)** | **Portabilidad instantánea.** Reutiliza código o bibliotecas existentes compatibles con OpenAI. | **Límite de funciones:** Es posible que no estén disponibles las funciones específicas del modelo (video nativo, almacenamiento en caché). | **Plan de migración.** Úsala para la validación rápida, pero planifica actualizar a la API directa para obtener la función completa de la API. |
+| **Gateway aziendale, framework dell'ecosistema** | **[SDK Google GenAI](#genai-sdk)** | **Parità e velocità di Gemini Enterprise Agent Platform.** Gestione integrata per tipi, autenticazione e funzionalità complesse (ad es. caricamenti di file). Migrazione senza problemi a Google Cloud. | **Peso delle dipendenze.** Le dipendenze transitive possono essere complesse e al di fuori del tuo controllo. Limitato alle lingue supportate (Python/Node/Go/Java). | **Blocca le versioni.** Fissa le versioni dell'SDK nelle immagini di base interne per garantire la stabilità tra i team. |
+| **Framework dell'ecosistema, piattaforme edge e aggregatori** | **[API diretta](#rest)**  *(REST / gRPC)* | **Nessuna dipendenza.** Controlli il client HTTP e le dimensioni esatte del bundle. Accesso completo a tutte le funzionalità dell'API e del modello. | **Elevato overhead per gli sviluppatori.** Le strutture JSON possono essere nidificate in profondità e richiedono una rigorosa convalida manuale e un controllo dei tipi. | **Utilizza le specifiche OpenAPI.** Automatizza la generazione dei tipi utilizzando le nostre specifiche ufficiali anziché scriverle a mano. |
+| **Aggregatore che utilizza gli SDK OpenAI che richiedono solo workflow basati su testo**  *(Ottimizzazione per la portabilità legacy)* | **[Compatibilità OpenAI](#openai)** | **Portabilità immediata.** Riutilizza il codice o le librerie esistenti compatibili con OpenAI. | **Limite di funzionalità.** Le funzionalità specifiche del modello (video nativo, memorizzazione nella cache) potrebbero non essere disponibili. | **Piano di migrazione.** Utilizza questo piano per una convalida rapida, ma pianifica l'upgrade all'API diretta per la funzionalità completa dell'API. |
 
-## Integración del SDK de IA generativa de Google
+## Integrazione dell'SDK Google GenAI
 
-En el caso de los frameworks, implementar el [SDK de IA generativa de Google](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) suele ser la ruta más sencilla, ya que requiere la menor cantidad de líneas de código en los lenguajes admitidos.
+Per i framework, l'implementazione dell'[SDK Google GenAI](https://ai.google.dev/gemini-api/docs/libraries?hl=it)
+è spesso il percorso più semplice, dato che richiede il minor numero di righe di codice nelle lingue supportate.
 
-En el caso de los equipos internos de la plataforma, el principal producto entregable suele ser una "ruta dorada" que permite a los ingenieros de productos avanzar rápido y, al mismo tiempo, cumplir con las políticas de seguridad.
+Per i team di piattaforme interne, il risultato principale è spesso un "percorso consigliato" che consente agli ingegneri di prodotto di muoversi rapidamente rispettando le norme di sicurezza.
 
-**Beneficios:**
+**Vantaggi:**
 
-- **Interfaz unificada para la migración de Gemini Enterprise Agent Platform:** Los desarrolladores internos suelen crear prototipos con claves de API (API de Gemini) y realizar implementaciones en Gemini Enterprise Agent Platform (IAM) para cumplir con los requisitos de producción. El SDK abstrae estas diferencias de autenticación.
-  Del mismo modo, para los frameworks, puedes implementar una ruta de código y admitir dos conjuntos de usuarios.
-- **Asistentes del cliente:** El SDK incluye utilidades idiomáticas que reducen el código repetitivo para tareas complejas.
-  - *Ejemplos:* Compatibilidad con objetos de imagen `PIL` directamente en las instrucciones, llamadas a funciones automáticas y tipos integrales.
-- **Acceso a las funciones el día del lanzamiento:** Las nuevas funciones de la API están disponibles en el momento del lanzamiento a través de los SDKs.
-- **Mejor compatibilidad con la generación de código:** La instalación local del SDK expone definiciones de tipos y cadenas de documentación a los asistentes de programación (p.ej., Cursor y Copilot).
-  Este contexto mejora la precisión de la generación de código en comparación con la generación de solicitudes REST sin procesar.
+- **Interfaccia unificata per la migrazione della piattaforma agentica Gemini Enterprise:** gli sviluppatori interni spesso creano prototipi utilizzando le chiavi API (API Gemini) ed eseguono il deployment sulla piattaforma agentica Gemini Enterprise (IAM) per la conformità alla produzione. L'SDK astrae queste differenze di autenticazione.
+  Allo stesso modo, per i framework puoi implementare un percorso di codice e supportare due gruppi di utenti.
+- **Helper lato client:** l'SDK include utilità idiomatiche che riducono il codice boilerplate per le attività complesse.
+  - *Esempi:* supporto degli oggetti immagine `PIL` direttamente negli inviti all'azione, chiamata di funzione automatica e tipi completi.
+- **Accesso alle funzionalità del giorno zero:** le nuove funzionalità dell'API sono disponibili al momento del lancio tramite gli SDK.
+- **Supporto migliorato per la generazione di codice:** l'installazione dell'SDK locale espone le definizioni dei tipi e le stringhe di documentazione agli assistenti di codifica (ad es. Cursor, Copilot).
+  Questo contesto migliora l'accuratezza della generazione del codice rispetto alla generazione di richieste REST non elaborate.
 
-**La compensación:**
+**Il compromesso:**
 
-- **Peso y complejidad de las dependencias:** Los SDKs tienen sus propias dependencias, lo que puede aumentar el tamaño del paquete y el riesgo de la cadena de suministro.
-- **Control de versiones:** Las nuevas funciones de la API suelen estar vinculadas a versiones mínimas del SDK.
-  Es posible que debas enviar actualizaciones a los usuarios para que accedan a funciones o modelos nuevos, lo que, en algunos casos, puede requerir cambios en las dependencias transitivas que afecten a tus usuarios.
-- **Límites de protocolo:** Los SDKs solo admiten HTTPS para la API principal y WebSockets (WSS) para la API de Live. gRPC no se admite con los clientes de SDK de alto nivel.
-- **Compatibilidad con idiomas:** Los SDKs admiten versiones de idiomas *actuales*. Si necesitas admitir versiones EOL (p.ej., Python 3.9), deberás mantener una bifurcación.
+- **Peso e complessità delle dipendenze:** gli SDK hanno le proprie dipendenze, che possono aumentare le dimensioni del bundle e potenzialmente il rischio della supply chain.
+- **Controllo delle versioni:** le nuove funzionalità dell'API sono spesso associate alle versioni minime dell'SDK.
+  Potresti dover inviare aggiornamenti agli utenti per accedere a nuove funzionalità o modelli, il che in alcuni casi potrebbe richiedere modifiche nelle dipendenze transitive che interessano i tuoi utenti.
+- **Limiti di protocollo:** gli SDK supportano solo HTTPS per l'API principale e WebSocket (WSS) per l'API Live. gRPC non è supportato utilizzando i client SDK di alto livello.
+- **Supporto linguistico:** gli SDK supportano le versioni linguistiche *correnti*. Se devi supportare le versioni EOL (ad es. Python 3.9), dovrai gestire un fork.
 
-**Práctica recomendada:**
+**Best practice:**
 
-- **Bloquea las versiones:** Fija la versión del SDK en tus imágenes base internas para garantizar la estabilidad en todos los equipos.
+- **Blocca le versioni:** fissa la versione dell'SDK nelle immagini di base interne per garantire la stabilità tra i team.
 
-## Integración directa con la API
+## Integrazione dell'API diretta
 
-Si distribuyes una biblioteca a miles de desarrolladores, ejecutas en un entorno restringido o compilas un agregador que requiere las funciones de vanguardia de Gemini, es posible que debas realizar la integración directamente con la API a través de REST o gRPC.
+Se stai distribuendo una libreria a migliaia di sviluppatori, eseguendo in un ambiente con limitazioni o creando un aggregatore che richiede le funzionalità all'avanguardia di Gemini, potresti dover integrare l'API direttamente utilizzando REST o gRPC.
 
-**Beneficios:**
+**Vantaggi:**
 
-- **Acceso completo a las funciones:** A diferencia de la capa de compatibilidad con OpenAI, usar la API directamente habilita funciones específicas de Gemini, como la carga en la API de File, la creación de almacenamiento en caché de contenido y el uso de la API de Live bidireccional.
-- **Dependencias mínimas:** En un entorno en el que las dependencias son sensibles debido al tamaño o a los costos de auditoría. Usar la API directamente a través de una biblioteca estándar como `fetch` o a través de un wrapper como `httpx` garantiza que tu biblioteca siga siendo ligera.
-- **Independiente del lenguaje:** Esta es la única ruta para los lenguajes que no cubren los SDKs, como Rust, PHP y Ruby, ya que no hay restricciones de lenguaje.
-- **Rendimiento:** La API de Direct no tiene sobrecarga de inicialización, lo que minimiza los inicios en frío en las funciones sin servidores.
+- **Accesso completo alle funzionalità:** a differenza del livello di compatibilità OpenAI, l'utilizzo diretto dell'API consente di utilizzare funzionalità specifiche di Gemini, come il caricamento nell'API File, la creazione della memorizzazione nella cache dei contenuti e l'utilizzo dell'API Live bidirezionale.
+- **Dipendenze minime:** in un ambiente in cui le dipendenze sono sensibili a causa delle dimensioni o dei costi di audit. L'utilizzo diretto dell'API tramite una libreria standard come `fetch` o tramite un wrapper come `httpx` garantisce che la libreria rimanga leggera.
+- **Indipendente dalla lingua:** questo è l'unico percorso per le lingue non coperte dagli SDK, come Rust, PHP e Ruby, poiché non esistono limitazioni linguistiche.
+- **Rendimento:** l'API diretta non ha overhead di inizializzazione, il che riduce al minimo gli avvii a freddo nelle funzioni serverless.
 
-**La compensación:**
+**Il compromesso:**
 
-- **Implementación manual de Gemini Enterprise Agent Platform:** A diferencia del SDK, usar la API directamente no controla automáticamente las diferencias de autenticación entre AI Studio (clave de API) y Gemini Enterprise Agent Platform (IAM). Debes implementar controladores de autenticación separados si deseas admitir ambos entornos.
-- **Sin tipos ni asistentes nativos:** No obtienes finalizaciones de código ni verificaciones en tiempo de compilación para los objetos de solicitud, a menos que los implementes por tu cuenta. No hay "ayudantes" del cliente (p.ej., convertidores de funciones a esquemas), por lo que debes escribir esta lógica de forma manual.
+- **Implementazione manuale della piattaforma agentica Gemini Enterprise:** a differenza dell'SDK, l'utilizzo diretto dell'API non gestisce automaticamente le differenze di autenticazione tra AI Studio (chiave API) e la piattaforma agentica Gemini Enterprise (IAM). Se vuoi supportare entrambi gli ambienti, devi implementare gestori di autenticazione separati.
+- **Nessun tipo o helper nativo:** non ricevi completamenti di codice o controlli in fase di compilazione per gli oggetti di richiesta, a meno che non li implementi tu. Non esistono "helper" client (ad es. convertitori da funzione a schema), quindi devi scrivere manualmente questa logica.
 
-**Práctica recomendada**
+**Best practice**
 
-Exponemos una especificación legible por máquina que puedes usar para generar definiciones de tipos para tu biblioteca, lo que te ahorra tener que escribirlas a mano. Descarga la especificación durante el proceso de compilación, genera los tipos y envía el código compilado.
+Esporiamo una specifica leggibile dalla macchina che puoi utilizzare per generare definizioni di tipi per la tua libreria, evitando di scriverle a mano. Scarica la specifica durante il processo di compilazione, genera i tipi e distribuisci il codice compilato.
 
-- **Extremo:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **Endpoint:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## Integración del SDK de OpenAI
+## Integrazione dell'SDK OpenAI
 
-Si eres una plataforma que prioriza un esquema unificado (finalizaciones de chat de OpenAI) por sobre las funciones específicas del modelo, esta es la ruta más rápida.
+Se sei una piattaforma che dà la priorità a uno schema unificato (OpenAI Chat Completions) rispetto alle funzionalità specifiche del modello, questo è il percorso più veloce.
 
-**Beneficios:**
+**Vantaggi:**
 
-- **Baja fricción:** A menudo, puedes agregar compatibilidad con Gemini cambiando `baseURL` y `apiKey`. Esta es una forma rápida de integrar implementaciones de "Aporta tu propia clave", lo que permite agregar compatibilidad con Gemini sin escribir código nuevo.
-- **Restricciones:** Esta ruta solo se recomienda si estás limitado al SDK de OpenAI y no necesitas funciones avanzadas de Gemini, como la API de File, o agregar manualmente compatibilidad con herramientas como la fundamentación con la Búsqueda de Google.
+- **Basso attrito:** spesso puoi aggiungere il supporto di Gemini modificando `baseURL` e `apiKey`. Questo è un modo rapido per integrare le implementazioni "Bring Your Own Key", aggiungendo il supporto di Gemini senza scrivere nuovo codice.
+- **Vincoli:** questo percorso è consigliato solo se sei limitato all'SDK OpenAI e non hai bisogno di funzionalità avanzate di Gemini come l'API File o l'aggiunta manuale del supporto per strumenti come Grounding con la Ricerca Google.
 
-**La compensación:**
+**Il compromesso:**
 
-- **Limitaciones de las funciones:** La capa de compatibilidad proporciona limitaciones a las capacidades principales de Gemini. Las herramientas disponibles del servidor difieren entre las plataformas y pueden requerir un manejo manual para trabajar con las herramientas de la API de Gemini.
-- **Sobrecarga de traducción:** Debido a que el esquema de OpenAI no se asigna 1:1 a la arquitectura de Gemini, depender de la capa de compatibilidad introduce algunas complejidades que requieren trabajo de implementación adicional para resolver, como asignar una herramienta de "búsqueda" del usuario a la herramienta de plataforma correcta.
-  Si necesitas una gran cantidad de casos especiales, puede ser más valioso usar un SDK o una API dedicados para cada plataforma.
+- **Limitazioni delle funzionalità:** il livello di compatibilità fornisce limitazioni alle funzionalità principali di Gemini. Gli strumenti lato server disponibili variano a seconda delle piattaforme e potrebbero richiedere una gestione manuale per funzionare con gli strumenti dell'API Gemini.
+- **Overhead di traduzione:** poiché lo schema OpenAI non esegue il mapping 1:1 all'architettura di Gemini, l'utilizzo del livello di compatibilità introduce alcune complessità che richiedono un lavoro di implementazione aggiuntivo per essere risolte, ad esempio il mapping di uno strumento di "ricerca" utente allo strumento della piattaforma corretta.
+  Se hai bisogno di una quantità significativa di casi speciali, potrebbe essere più utile utilizzare un SDK o un'API dedicati per ogni piattaforma.
 
-**Práctica recomendada**
+**Best practice**
 
-Siempre que sea posible, intégrate directamente con la API de Gemini. Sin embargo, para lograr la máxima compatibilidad, considera usar una biblioteca que conozca los diferentes proveedores y pueda controlar la asignación de herramientas y mensajes por ti.
+Se possibile, esegui l'integrazione direttamente con l'API Gemini. Tuttavia, per la massima compatibilità, valuta la possibilità di utilizzare una libreria che riconosca i diversi provider e possa gestire il mapping di strumenti e messaggi.
 
-## Práctica recomendada para todos los socios: identificación del cliente
+## Best practice per tutti i partner: identificazione del client
 
-Cuando realices llamadas a la API de Gemini como plataforma o biblioteca, debes identificar tu cliente con el encabezado `x-goog-api-client`.
+Quando effettui chiamate all'API Gemini come piattaforma o libreria, devi identificare il tuo client utilizzando l'intestazione `x-goog-api-client`.
 
-Esto le permite a Google identificar tus segmentos de tráfico específicos y, si tu biblioteca produce un patrón de error específico, podemos comunicarnos contigo para ayudarte a depurar.
+In questo modo, Google può identificare i segmenti di traffico specifici e, se la tua libreria produce un pattern di errore specifico, possiamo contattarti per aiutarti a eseguire il debug.
 
-Usa el formato `company-product/version` (p.ej., `acme-framework/1.2.0`).
+Utilizza il formato `company-product/version` (ad es. `acme-framework/1.2.0`).
 
-### Ejemplos de implementación
+### Esempi di implementazione
 
-### SDK de IA generativa
+### SDK GenAI
 
-Cuando proporcionas el cliente de API, el SDK agrega automáticamente tu encabezado personalizado a sus encabezados internos.
+Fornendo il client API, l'SDK aggiunge automaticamente l'intestazione personalizzata alle intestazioni interne.
 
 ```
 from google import genai
@@ -152,16 +154,17 @@ client = genai.Client(
 )
 ```
 
-### API directa (REST)
+### API diretta (REST)
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H 'Content-Type: application/json' \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'x-goog-api-client: acme-framework/1.2.0' \
     -d '{...}'
 ```
 
-### SDK de OpenAI
+### SDK OpenAI
 
 ```
 from openai import OpenAI
@@ -175,18 +178,19 @@ client = OpenAI(
 )
 ```
 
-## Próximos pasos
+## Passaggi successivi
 
-- Visita la [descripción general de la biblioteca](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) para obtener información sobre los SDKs de IA generativa.
-- Explora la [referencia de la API](https://ai.google.dev/api?hl=es-419)
-- Lee la [guía de compatibilidad de OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419)
+- Visita la [panoramica della libreria](https://ai.google.dev/gemini-api/docs/libraries?hl=it) per scoprire di più su
+  gli SDK GenAI
+- Sfoglia il [riferimento API](https://ai.google.dev/api?hl=it)
+- Leggi la [guida alla compatibilità con OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=it)
 
-Enviar comentarios
+Invia feedback
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última actualización: 2026-09-12 (UTC)
+Ultimo aggiornamento 2026-09-30 UTC.
 
-¿Quieres brindar más información?
+Vuoi dirci altro?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-12 (UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-30 UTC."],[],[]]

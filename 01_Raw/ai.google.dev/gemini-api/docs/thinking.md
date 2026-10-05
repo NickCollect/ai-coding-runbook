@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=zh-TW
-fetched_at: 2026-09-28T06:18:40.130222+00:00
-title: "Gemini \u601d\u8003 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=vi
+fetched_at: 2026-10-05T06:49:32.024623+00:00
+title: "T\u01b0 duy c\u1ee7a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# Gemini 思考
+# Tư duy của Gemini
 
-[Gemini 3 和 2.5 系列模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)採用「思考過程」，大幅提升推論和多步驟規劃能力，因此非常適合處理複雜工作，例如程式設計、高等數學和資料分析。
+[Các mô hình thuộc dòng Gemini 3 và 2.5](https://ai.google.dev/gemini-api/docs/models?hl=vi) sử dụng "quy trình tư duy" giúp cải thiện đáng kể khả năng suy luận và lập kế hoạch nhiều bước, nhờ đó, các mô hình này có hiệu quả cao đối với các tác vụ phức tạp như lập trình, toán học nâng cao và phân tích dữ liệu.
 
-使用思考型模型時，Gemini 會先進行內部推論，再做出回覆。Interactions API 會透過 `thought` 步驟顯示這項推論過程，這些專屬步驟會依時間順序顯示在 `steps` 陣列中，與函式呼叫、使用者輸入內容或模型輸出內容並列。
+Khi bạn sử dụng mô hình tư duy, Gemini sẽ suy luận nội bộ trước khi trả lời. Interactions API cho thấy lý do này thông qua các bước `thought`, đây là các bước chuyên dụng xuất hiện theo trình tự thời gian cùng với các lệnh gọi hàm, thông tin đầu vào của người dùng hoặc đầu ra của mô hình trong mảng `steps`.
 
-每個思考步驟都包含兩個欄位：
+Mỗi bước suy nghĩ đều chứa 2 trường:
 
-| 欄位 | 必要 | 說明 |
+| Trường | Bắt buộc | Mô tả |
 | --- | --- | --- |
-| `signature` | ✅ 是 | 模型內部推論狀態的加密表示法。一律會顯示，即使模型只執行最少的推論作業。 |
-| `summary` | ❌ 否 | 一系列內容 (文字和/或圖片)，總結推理過程。視 [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=zh-tw) 設定、模型是否執行足夠的推論，或內容類型而定，可能為空白 (例如，圖片潛在空間可能沒有文字摘要)。 |
+| `signature` | ✅ Có | Một bản biểu diễn được mã hoá về trạng thái suy luận nội bộ của mô hình. Luôn xuất hiện, ngay cả khi mô hình thực hiện suy luận tối thiểu. |
+| `summary` | ❌ Không | Một mảng nội dung (văn bản và/hoặc hình ảnh) tóm tắt lý do. Có thể trống tuỳ thuộc vào cấu hình [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=vi), việc mô hình có thực hiện đủ quy trình suy luận hay không hoặc loại nội dung (ví dụ: hình ảnh có thể không có bản tóm tắt bằng văn bản). |
 
-## 與思考型模型的互動
+## Tương tác với mô hình tư duy
 
-與思考型模型互動的程序與其他互動要求類似。在 `model` 欄位中，指定[支援思考輔助功能的模型](#thinking-levels)：
+Việc bắt đầu tương tác với một mô hình tư duy cũng tương tự như mọi yêu cầu tương tác khác. Chỉ định một trong các [mô hình có hỗ trợ tư duy](#thinking-levels) trong trường `model`:
 
 ### Python
 
@@ -137,10 +137,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 想法重點摘要
+## Tóm tắt suy nghĩ
 
-想法摘要可深入瞭解模型的內部推論過程。
-根據預設，系統只會傳回最終輸出內容。你可以使用 `thinking_summaries` 啟用想法摘要：
+Bản tóm tắt suy nghĩ cung cấp thông tin chi tiết về quy trình suy luận nội bộ của mô hình.
+Theo mặc định, chỉ kết quả đầu ra cuối cùng được trả về. Bạn có thể bật tính năng tóm tắt suy nghĩ bằng `thinking_summaries`:
 
 ### Python
 
@@ -316,23 +316,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-在下列情況下，思想區塊可能**只包含簽名，沒有摘要**：
+Khối suy nghĩ có thể **chỉ chứa chữ ký mà không có nội dung tóm tắt** trong những trường hợp sau:
 
-- 簡單要求：模型未充分推理，因此無法生成摘要
-- `thinking_summaries: "none"`，其中摘要功能已明確停用
-- 某些想法內容類型 (例如圖片) 可能沒有文字摘要
+- Yêu cầu đơn giản, trong đó mô hình không suy luận đủ để tạo bản tóm tắt
+- `thinking_summaries: "none"`, trong đó tính năng tóm tắt bị tắt một cách rõ ràng
+- Một số loại nội dung tư duy, chẳng hạn như hình ảnh, có thể không có bản tóm tắt bằng văn bản
 
-您的程式碼應一律處理 `summary` 為空或不存在的思考區塊。
+Mã của bạn phải luôn xử lý các khối suy nghĩ khi `summary` trống hoặc không có.
 
-## 串流與思考
+## Phát trực tiếp cùng tư duy
 
-在生成期間使用串流功能，接收逐步生成的想法摘要。
-系統會使用伺服器傳送事件 (SSE) 傳送思維方塊，並提供兩種不同的增量類型：
+Sử dụng tính năng truyền trực tuyến để nhận bản tóm tắt ý tưởng gia tăng trong quá trình tạo.
+Các khối suy nghĩ được phân phối bằng cách sử dụng Sự kiện được gửi bởi máy chủ (SSE) với 2 loại delta riêng biệt:
 
-| 差異類型 | 包含 | 傳送時間 |
+| Loại Delta | Chứa | Thời điểm gửi |
 | --- | --- | --- |
-| `thought_summary` | 文字或圖片摘要內容 | 一或多個增量摘要的差異 |
-| `thought_signature` | 密碼編譯簽章 | `step.stop`之前的最後一個增量 |
+| `thought_summary` | Nội dung tóm tắt bằng văn bản hoặc hình ảnh | Một hoặc nhiều delta có bản tóm tắt gia tăng |
+| `thought_signature` | Chữ ký mật mã | delta cuối cùng trước `step.stop` |
 
 ### Python
 
@@ -561,7 +561,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-串流回應會使用伺服器傳送事件 (SSE)，並由步驟和事件組成，例如：
+Phản hồi truyền trực tuyến sử dụng Sự kiện được gửi bởi máy chủ (SSE) và bao gồm các bước và sự kiện, ví dụ:
 
 ```
 event: interaction.created
@@ -592,25 +592,25 @@ event: done
 data: [DONE]
 ```
 
-## 控制思考
+## Tư duy kiểm soát
 
-Gemini 模型預設會進行動態思考，根據要求的複雜程度自動調整推論量。您可以使用 `thinking_level` 參數控制這項行為。
+Theo mặc định, các mô hình Gemini tham gia vào quá trình tư duy linh hoạt bằng cách tự động điều chỉnh mức độ nỗ lực suy luận dựa trên độ phức tạp của yêu cầu. Bạn có thể kiểm soát hành vi này bằng cách sử dụng tham số `thinking_level`.
 
-| 模型 | 預設思考 | 支援的等級 |
+| Mô hình | Tư duy mặc định | Các cấp độ được hỗ trợ |
 | --- | --- | --- |
-| gemini-3.8-flash | 開啟 (媒介) | 低、中、高 |
-| gemini-3.7-flash | 開啟 (媒介) | 低、中、高 |
-| gemini-3.6-flash | 開啟 (媒介) | 極低、低、中、高 |
-| gemini-3.5-flash-lite | 開啟 (極簡) | 極低、低、中、高 |
-| gemini-3.1-pro-preview | 開啟 (高) | 低、中、高 |
-| gemini-3.1-flash-lite-image | 開啟 (極簡) | 極簡、高 |
-| gemini-3-flash-preview | 開啟 (高) | 極低、低、中、高 |
-| gemini-3-pro-preview | 開啟 (高) | 低、高 |
-| gemini-3.5-flash | 開啟 (媒介) | 極低、低、中、高 |
-| gemini-2.5-pro | 開啟 | 低、中、高 |
-| gemini-2.5-flash | 開啟 | 低、中、高 |
-| gemini-2.5-flash-lite | 關閉 | 低、中、高 |
-| gemini-robotics-er-2-preview | 開啟 (高) | 極低、低、中、高 |
+| gemini-3.8-flash | Bật (trung bình) | thấp, trung bình, cao |
+| gemini-3.7-flash | Bật (trung bình) | thấp, trung bình, cao |
+| gemini-3.6-flash | Bật (trung bình) | tối thiểu, thấp, trung bình, cao |
+| gemini-3.5-flash-lite | Bật (tối thiểu) | tối thiểu, thấp, trung bình, cao |
+| gemini-3.1-pro-preview | Bật (cao) | thấp, trung bình, cao |
+| gemini-3.1-flash-lite-image | Bật (tối thiểu) | tối thiểu, cao |
+| gemini-3-flash-preview | Bật (cao) | tối thiểu, thấp, trung bình, cao |
+| gemini-3-pro-preview | Bật (cao) | thấp, cao |
+| gemini-3.5-flash | Bật (trung bình) | tối thiểu, thấp, trung bình, cao |
+| gemini-2.5-pro | Bật | thấp, trung bình, cao |
+| gemini-2.5-flash | Bật | thấp, trung bình, cao |
+| gemini-2.5-flash-lite | Tắt | thấp, trung bình, cao |
+| gemini-robotics-er-2-preview | Bật (cao) | tối thiểu, thấp, trung bình, cao |
 
 ### Python
 
@@ -748,35 +748,35 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 詞元數量上限和 `max_output_tokens`
+### Giới hạn mã thông báo và `max_output_tokens`
 
-[`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=zh-tw#request-body) 生成參數會設定回覆可生成的詞元數量上限，包括思考詞元。
+Tham số tạo [`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=vi#request-body) đặt số lượng mã thông báo tối đa mà một câu trả lời có thể tạo, bao gồm cả mã thông báo ý tưởng.
 
-設定後，這項參數會做為基礎架構強制執行的硬性截斷，不會改變模型分配思考預算 (`thinking_level`) 的方式。
+Khi được đặt, tham số này hoạt động như một ngưỡng cắt cứng do cơ sở hạ tầng thực thi mà không thay đổi cách mô hình phân bổ ngân sách suy nghĩ (`thinking_level`).
 
-如果模型在推論時達到這項限制，就會停止生成內容，並傳回 `"incomplete"` 狀態和截斷或空白的輸出內容 (但仍會針對產生的任何思考詞元計費)。如要降低費用或延遲時間，但不想截斷回應，請降低 `thinking_level` (`low` 或 `medium`)，而不是設定較小的 `max_output_tokens`。
+Nếu đạt đến giới hạn này trong khi suy luận, mô hình sẽ ngừng tạo với trạng thái `"incomplete"` và trả về đầu ra bị cắt bớt hoặc trống (trong khi vẫn tính phí cho mọi mã thông báo tư duy được tạo). Để giảm chi phí hoặc độ trễ mà không làm giảm phản hồi, hãy giảm `thinking_level` (`low` hoặc `medium`) thay vì đặt `max_output_tokens` nhỏ.
 
-## 想法簽名
+## Chữ ký của suy nghĩ
 
-思維簽章是模型內部推理過程的加密表示法。在多輪對話中，必須維持推論的連貫性。
+Chữ ký suy nghĩ là biểu thị được mã hoá về quá trình suy luận nội bộ của mô hình. Chúng phải duy trì tính liên tục của quá trình suy luận trong các lượt tương tác nhiều lượt.
 
-與 `generateContent` API 相比，Interactions API 可大幅簡化思維簽章的處理程序。
+Interactions API giúp việc xử lý chữ ký tư duy trở nên đơn giản hơn nhiều so với `generateContent` API.
 
-### 有狀態模式 (建議)
+### Chế độ có trạng thái (Nên dùng)
 
-根據預設，在有狀態模式下使用 Interactions API 時 (設定 `store: true` 並在後續回合中傳遞 `previous_interaction_id`)，伺服器會自動管理對話狀態，包括所有思維區塊和簽章。在這個模式下，您不需要對簽章採取任何行動。這些作業完全在伺服器端處理。
+Theo mặc định, khi bạn sử dụng Interactions API ở chế độ có trạng thái (bằng cách đặt `store: true` và truyền `previous_interaction_id` trong các lượt tiếp theo), máy chủ sẽ tự động quản lý trạng thái cuộc trò chuyện, bao gồm tất cả các khối suy nghĩ và chữ ký. Ở chế độ này, bạn không cần làm gì liên quan đến chữ ký. Các thao tác này được xử lý hoàn toàn ở phía máy chủ.
 
-### 無狀態模式
+### Chế độ không trạng thái
 
-如果您自行管理對話狀態 (無狀態模式)，並在每個要求中傳遞完整的輸入和輸出記錄：
+Nếu bạn tự quản lý trạng thái cuộc trò chuyện (chế độ không trạng thái) và truyền toàn bộ nhật ký đầu vào và đầu ra trong mỗi yêu cầu:
 
-- 你**必須**一律重新傳送所有 `thought` 區塊，且內容必須與模型傳送的完全一致。
-- 請**勿**從記錄中移除或修改思維方塊，因為這些方塊包含模型繼續推理所需的簽章。
-- 在工作階段中切換模型時，您仍應重新傳送先前模型的思維區塊。後端會管理相容性。
+- Bạn **PHẢI** luôn gửi lại tất cả các khối `thought` chính xác như khi nhận được từ mô hình.
+- Bạn **KHÔNG** nên xoá hoặc sửa đổi các khối suy nghĩ trong nhật ký, vì chúng chứa các chữ ký cần thiết để mô hình tiếp tục suy luận.
+- Khi chuyển đổi mô hình trong một phiên, bạn vẫn nên gửi lại các khối suy nghĩ của mô hình trước đó. Phần phụ trợ quản lý khả năng tương thích.
 
-## 定價
+## Giá
 
-開啟思考功能後，回覆價格為輸出詞元和思考詞元的總和。您可以從 `total_thought_tokens` 欄位取得產生的思考權杖總數。
+Khi tính năng suy nghĩ được bật, giá phản hồi là tổng của các mã thông báo đầu ra và mã thông báo suy nghĩ. Bạn có thể lấy tổng số mã thông báo tư duy được tạo từ trường `total_thought_tokens`.
 
 ### Python
 
@@ -878,32 +878,32 @@ func main() {
 }
 ```
 
-思考模型會生成完整想法，提升最終回覆的品質，然後輸出[摘要](#summaries)，深入瞭解思考過程。即使 API 只會輸出摘要，但計價依據仍是模型需要生成的所有思考權杖。
+Các mô hình tư duy tạo ra những suy nghĩ hoàn chỉnh để cải thiện chất lượng của câu trả lời cuối cùng, sau đó đưa ra [bản tóm tắt](#summaries) để cung cấp thông tin chi tiết về quy trình tư duy. Giá được tính dựa trên số lượng mã thông báo đầy đủ mà mô hình cần tạo, mặc dù API chỉ xuất ra bản tóm tắt.
 
-如要進一步瞭解權杖，請參閱[權杖計數](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw)指南。
+Bạn có thể tìm hiểu thêm về mã thông báo trong hướng dẫn [Đếm mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi).
 
-## 最佳做法
+## Các phương pháp hay nhất
 
-請按照下列指南，有效運用思考模型。
+Sử dụng hiệu quả các mô hình tư duy bằng cách làm theo các nguyên tắc sau.
 
-- **查看推論過程**：分析思考摘要，瞭解失敗原因並改善提示。
-- **控管思考預算**：提示模型減少思考，以節省詞元。
-- **簡單工作**：使用最少或低程度的思考來擷取事實或分類 (例如「DeepMind 在哪裡成立？」)。
-- **中等難度的工作**：使用預設的思考方式比較概念或進行創意推理 (例如比較電動車和油電混合車)。
-- **複雜工作**：使用最高思考量，進行進階程式設計、數學或多步驟規劃 (例如解決 AIME 數學問題)。
+- **Xem xét suy luận**: Phân tích bản tóm tắt suy nghĩ để hiểu rõ những điểm thất bại và cải thiện câu lệnh.
+- **Kiểm soát ngân sách tư duy**: Yêu cầu mô hình suy nghĩ ít hơn để có đầu ra dài nhằm tiết kiệm mã thông báo.
+- **Tác vụ đơn giản**: Sử dụng ít hoặc không cần suy nghĩ để truy xuất hoặc phân loại thông tin (ví dụ: "DeepMind được thành lập ở đâu?").
+- **Nhiệm vụ vừa phải**: Sử dụng tư duy mặc định để so sánh các khái niệm hoặc suy luận sáng tạo (ví dụ: So sánh xe điện và xe lai).
+- **Các tác vụ phức tạp**: Sử dụng khả năng tư duy tối đa cho hoạt động lập trình, toán học nâng cao hoặc lập kế hoạch nhiều bước (ví dụ: Giải các bài toán trong kỳ thi AIME).
 
-## 後續步驟
+## Bước tiếp theo
 
-- [生成文字](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw)：基本文字回覆
-- [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)：連結至工具
-- [Gemini 3 指南](https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-tw)：模型專屬功能
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi): Phản hồi văn bản cơ bản
+- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi): Kết nối với các công cụ
+- [Hướng dẫn về Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi): Các tính năng dành riêng cho mô hình
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-09-25 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-09-25 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-25 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-25 UTC."],[],[]]

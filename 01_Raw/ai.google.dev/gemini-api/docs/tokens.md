@@ -1,53 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=th
-fetched_at: 2026-09-28T06:13:02.022651+00:00
-title: "\u0e17\u0e4d\u0e32\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e41\u0e25\u0e30\u0e19\u0e31\u0e1a\u0e42\u0e17\u0e40\u0e04\u0e47\u0e19 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=pl
+fetched_at: 2026-10-05T06:36:39.757691+00:00
+title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# ทําความเข้าใจและนับโทเค็น
+# Zrozumienie i liczenie tokenów
 
-Gemini และโมเดล Generative AI อื่นๆ จะประมวลผลอินพุตและเอาต์พุตที่ระดับความละเอียด
-ที่เรียกว่า*โทเค็น*
+Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe w jednostkach zwanych *tokenami*.
 
-**สำหรับโมเดล Gemini โทเค็นจะเท่ากับอักขระประมาณ 4 ตัว
-โดย 100 โทเค็นจะเท่ากับคำภาษาอังกฤษประมาณ 60-80 คำ**
+**W przypadku modeli Gemini token odpowiada około 4 znakom.
+100 tokenów to około 60–80 słów w języku angielskim.**
 
-## เกี่ยวกับโทเค็น
+## Informacje o tokenach
 
-โทเค็นอาจเป็นอักขระเดียว เช่น `z` หรือทั้งคำ เช่น `cat` คำยาวๆ
-จะถูกแบ่งออกเป็นหลายโทเค็น ชุดโทเค็นทั้งหมดที่โมเดลใช้เรียกว่า
-คำศัพท์ และกระบวนการแยกข้อความเป็นโทเค็นเรียกว่า
-*การโทเค็น*
+Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa
+są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny to *tokenizacja*.
 
-เมื่อเปิดใช้การเรียกเก็บเงิน [ค่าใช้จ่ายในการเรียกใช้ Gemini API](https://ai.google.dev/pricing?hl=th) จะขึ้นอยู่กับจำนวนโทเค็นอินพุตและเอาต์พุตบางส่วน ดังนั้นการทราบวิธีนับโทเค็นจึงอาจเป็นประโยชน์
+Gdy płatności są włączone, [koszt wywołania interfejsu Gemini API](https://ai.google.dev/pricing?hl=pl) jest częściowo określany przez liczbę tokenów wejściowych i wyjściowych, więc wiedza o tym, jak je zliczać, może być przydatna.
 
-## นับโทเค็น
+## Liczba tokenów
 
-อินพุตและเอาต์พุตทั้งหมดจาก Gemini API จะได้รับการโทเค็น รวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ
+Wszystkie dane wejściowe i wyjściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki obrazów i inne formaty nietekstowe.
 
-คุณนับโทเค็นได้ด้วยวิธีต่อไปนี้
+Tokeny możesz zliczać na te sposoby:
 
-- **โทรหา `count_tokens` พร้อมข้อมูลคำขอ** แสดงผลจำนวนโทเค็นทั้งหมดใน*อินพุตเท่านั้น* เรียกใช้ฟังก์ชันนี้ก่อนส่งอินพุต
-  เพื่อตรวจสอบขนาดของคำขอ
-- **ใช้ `usage` ในการตอบกลับการโต้ตอบ** แสดงจำนวนโทเค็น
-  สำหรับอินพุต (`total_input_tokens`), เอาต์พุต (`total_output_tokens`),
-  การคิด (`total_thought_tokens`), เนื้อหาที่แคช
-  (`total_cached_tokens`), การใช้เครื่องมือ (`total_tool_use_tokens`)
-  และทั้งหมด (`total_tokens`)
+- **Wywołaj funkcję `count_tokens` z danymi wejściowymi żądania.** Zwraca łączną liczbę tokenów *tylko w danych wejściowych*. Zanim wyślesz dane wejściowe, wywołaj tę funkcję, aby sprawdzić rozmiar żądań.
+- **Użyj `usage` w odpowiedzi na interakcję.** Zwraca liczbę tokenów dla danych wejściowych (`total_input_tokens`), wyjściowych (`total_output_tokens`), myślenia (`total_thought_tokens`), treści w pamięci podręcznej (`total_cached_tokens`), korzystania z narzędzi (`total_tool_use_tokens`) i łączną (`total_tokens`).
 
-### นับโทเค็นข้อความ
+### Zliczanie tokenów tekstowych
 
 ### Python
 
@@ -168,9 +160,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### นับโทเค็นการสนทนาไปมา
+### Zliczanie tokenów w przypadku wieloetapowych rozmów
 
-นับโทเค็นในประวัติการสนทนาโดยใช้ `previous_interaction_id` ดังนี้
+Zlicz tokeny w historii rozmów za pomocą funkcji `previous_interaction_id`:
 
 ### Python
 
@@ -322,17 +314,16 @@ func main() {
 }
 ```
 
-### นับโทเค็นหลายรูปแบบ
+### Liczba tokenów multimodalnych
 
-อินพุตทั้งหมดไปยัง Gemini API จะได้รับการแปลงเป็นโทเค็น ซึ่งรวมถึงรูปภาพ วิดีโอ และเสียง
-ประเด็นสำคัญเกี่ยวกับการแปลงเป็นโทเค็น
+Wszystkie dane wejściowe do interfejsu Gemini API są tokenizowane, w tym obrazy, filmy i dźwięk.
+Najważniejsze informacje o tokenizacji:
 
-- **รูปภาพ**: รูปภาพที่มีขนาด ≤384 พิกเซลทั้ง 2 ด้านจะนับเป็น 258 โทเค็น ระบบจะแบ่งรูปภาพที่ใหญ่กว่า
-  ออกเป็นไทล์ขนาด 768x768 พิกเซล โดยแต่ละไทล์จะนับเป็น 258 โทเค็น
-- **วิดีโอ**: 263 โทเค็นต่อวินาที (ใช้กับการประมวลผลแบบคงที่) สำหรับการประมวลผลแบบเอเจนต์ การใช้โทเค็นจะแตกต่างกันไป ดู[การใช้โทเค็นวิดีโอตามโหมดการประมวลผล](#video-token-usage)
-- **เสียง**: 32 โทเค็นต่อวินาที
+- **Obrazy:** obrazy o wymiarach ≤384 pikseli w każdym z wymiarów liczą się jako 258 tokenów. Większe obrazy są dzielone na kafelki o rozmiarze 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
+- **Wideo:** 263 tokeny na sekundę (dotyczy przetwarzania statycznego). W przypadku przetwarzania z użyciem agenta wykorzystanie tokenów jest różne. Zobacz [wykorzystanie tokenów wideo według trybu przetwarzania](#video-token-usage).
+- **Dźwięk:** 32 tokeny na sekundę
 
-#### โทเค็นรูปภาพ
+#### Tokeny obrazów
 
 ### Python
 
@@ -491,7 +482,7 @@ func main() {
 }
 ```
 
-**ตัวอย่างข้อมูลในบรรทัด**
+**Przykład danych wbudowanych:**
 
 ### Python
 
@@ -516,7 +507,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### โทเค็นวิดีโอ
+#### Tokeny wideo
 
 ### Python
 
@@ -549,25 +540,25 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### การใช้โทเค็นวิดีโอตามโหมดการประมวลผล
+#### Wykorzystanie tokenów wideo według trybu przetwarzania
 
-การใช้โทเค็นสำหรับวิดีโอจะขึ้นอยู่กับโหมดการประมวลผล ดังนี้
+Wykorzystanie tokenów w przypadku filmu zależy od trybu przetwarzania:
 
-| **โหมดการประมวลผล** | **การคำนวณโทเค็น** | **การใช้งานทั่วไป** |
+| **Tryb przetwarzania** | **Obliczanie tokenów** | **Typowe użycie** |
 | --- | --- | --- |
-| **คงที่** (ค่าเริ่มต้น) | โดยค่าเริ่มต้นจะอยู่ที่ประมาณ 100 โทเค็น/วินาที (ความละเอียดต่ำ) หรือประมาณ 300 โทเค็น/วินาที (ความละเอียดสูง) เฟรมทั้งหมดจะสุ่มตัวอย่างที่ 1 FPS | คาดการณ์ได้ตามสัดส่วนของความยาววิดีโอ |
-| **การทำงานแบบเป็น Agent** | แตกต่างกันไปตามความซับซ้อนของเนื้อหา โมเดลจะโหลดเฉพาะข้อความถอดเสียงและ/หรือเฟรมและ/หรือเสียงที่จำเป็นต่อการตอบพรอมต์ | โทเค็นน้อยลงสูงสุด 88% สำหรับเนื้อหาแบบยาว |
+| **Statyczny** (domyślnie) | Domyślnie ok. 100 tokenów na sekundę (niska rozdzielczość) lub ok. 300 tokenów na sekundę (wysoka rozdzielczość). Wszystkie klatki próbkowane z częstotliwością 1 klatki na sekundę. | Przewidywalne, proporcjonalne do czasu trwania filmu. |
+| **Agentic** | Zależy od złożoności treści. Model wczytuje tylko transkrypcję, klatki lub dźwięk potrzebne do udzielenia odpowiedzi na prompta. | Do 88% mniej tokenów w przypadku długich treści. |
 
-การประมวลผลแบบเอเจนต์อาจใช้โทเค็นประมาณ 108,000 รายการสำหรับเลคเชอร์ 1 ชั่วโมง ซึ่งในโหมดคงที่จะใช้โทเค็นประมาณ 1.08 ล้านรายการ ทั้งนี้ขึ้นอยู่กับพรอมต์และเนื้อหา
+W przypadku przetwarzania z użyciem agentów 1-godzinny wykład, który w trybie statycznym wykorzystuje około 1,08 mln tokenów, może wykorzystać około 108 tys.tokenów w zależności od promptu i treści.
 
-หากต้องการตรวจสอบการใช้โทเค็นจริงสำหรับคำขอ ให้ตรวจสอบ `interaction.usage` ระบบจะรายงานโทเค็นวิดีโอของเอเจนต์ในช่องต่อไปนี้
+Aby sprawdzić rzeczywiste wykorzystanie tokenów w przypadku żądania, sprawdź `interaction.usage`. Tokeny wideo agenta są raportowane w tych polach:
 
-- **พรอมต์เริ่มต้น** (วิดีโออ้างอิง + พรอมต์ของผู้ใช้): `total_input_tokens`
-- **การคิดเกี่ยวกับการนำทาง**: `total_thought_tokens`
-- **ข้อความถอดเสียง เฟรม และเสียงจะโหลดตามคำขอ**: `total_tool_use_tokens`
-- **คำตอบสุดท้าย**: `total_output_tokens`
+- **Prompt początkowy** (odniesienie do filmu + prompt użytkownika): `total_input_tokens`
+- **Myślenie nawigacyjne:** `total_thought_tokens`
+- **Transkrypcja, klatki i dźwięk wczytywane na żądanie:** `total_tool_use_tokens`
+- **Odpowiedź:** `total_output_tokens`
 
-#### โทเค็นเสียง
+#### Tokeny audio
 
 ### Python
 
@@ -593,9 +584,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### นับโทเค็นคำสั่งของระบบ
+### Zliczanie tokenów instrukcji systemowych
 
-คำสั่งของระบบจะนับเป็นส่วนหนึ่งของโทเค็นอินพุต
+Instrukcje systemowe są liczone jako tokeny wejściowe:
 
 ### Python
 
@@ -611,9 +602,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### โทเค็นเครื่องมือนับ
+### Zliczanie tokenów narzędzia
 
-ระบบจะนับรวมเครื่องมือ (ฟังก์ชัน การเรียกใช้โค้ด Google Search) ด้วย
+Narzędzia (funkcje, wykonywanie kodu, wyszukiwarka Google) są również uwzględniane:
 
 ### Python
 
@@ -643,12 +634,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## หน้าต่างบริบท
+## Okno kontekstu
 
-โมเดล Gemini แต่ละรุ่นมีจำนวนโทเค็นสูงสุดที่จัดการได้ บริบท
-หน้าต่างกำหนดขีดจำกัดรวมของโทเค็นอินพุตและเอาต์พุต
+Każdy model Gemini ma maksymalną liczbę tokenów, które może przetworzyć. Okno kontekstu określa łączny limit tokenów wejściowych i wyjściowych.
 
-### รับขนาดหน้าต่างบริบทโดยใช้โปรแกรม
+### Programowe uzyskiwanie rozmiaru okna kontekstu
 
 ### Python
 
@@ -754,20 +744,20 @@ func main() {
 }
 ```
 
-ดูขนาดหน้าต่างบริบทได้ในหน้า[โมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)
+Rozmiary okien kontekstu znajdziesz na stronie [modele](https://ai.google.dev/gemini-api/docs/models?hl=pl).
 
-## ขั้นตอนถัดไป
+## Co dalej?
 
-- [การสร้างข้อความ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th): พื้นฐานการสร้าง
-- [การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th): ลดค่าใช้จ่ายด้วยการแคช
-- [ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th): ทำความเข้าใจค่าใช้จ่าย
+- [Generowanie tekstu:](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl) podstawy generowania
+- [Pamięć podręczna:](https://ai.google.dev/gemini-api/docs/caching?hl=pl) zmniejszanie kosztów dzięki pamięci podręcznej
+- [Ceny:](https://ai.google.dev/gemini-api/docs/pricing?hl=pl) informacje o kosztach
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+Ostatnia aktualizacja: 2026-09-24 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-24 UTC."],[],[]]

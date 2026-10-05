@@ -1,113 +1,113 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=tr
-fetched_at: 2026-09-28T06:18:54.295384+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=zh-TW
+fetched_at: 2026-10-05T06:32:25.481348+00:00
 title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
 # Gemini 3.5 Transcribe
 
-Gemini 3.5 Transcribe, Gemini'ın ses anlama özelliklerine dayalı bir konuşma metni modelidir. Konuşmaya dayalı dil algılama, konuşmacı ayrımı, kelime düzeyinde zaman damgaları, akıllı metne dönüştürme ve özel kelime dağarcığına dayalı konuşma önyargısı ile düşük gecikmeli ve doğru metne dönüştürme sağlar.
+Gemini 3.5 Transcribe 是以 Gemini 的音訊理解功能為基礎的語音轉文字模型，這項技術可提供低延遲的準確轉錄稿，並支援以語句為準的語言偵測、說話者分段標記、個別字詞時間戳記、智慧轉錄和自訂詞彙語音優先辨識。
 
-[Google AI Studio'da deneme](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=tr)
+[在 Google AI Studio 中試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=zh-tw)
 
-## Belgeler
+## 說明文件
 
-Gemini 3.5 Transcribe, ses dosyalarındaki konuşmaları metne dönüştürür. 85'ten fazla dili otomatik olarak algılar, çok dilli kod geçişini yönetir, konuşmacıları ayrı ayrı tanımlar, kelime düzeyinde zaman damgaları oluşturur ve özel kelime hazinesi önyargısı sayesinde alana özgü terimlere uyum sağlar.
+Gemini 3.5 Transcribe 可將音訊檔案中的語音轉換為文字。這項功能可自動偵測 85 種以上的語言、處理交替使用不同語言的情況、識別個別說話者、輸出字詞層級的時間戳記，以及透過自訂詞彙偏誤調整功能，適應特定領域的用語。
 
-Akış dışı özelliklerin tamamı hakkında bilgi edinmek için [Ses transkripsiyonu](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr) kılavuzunu ziyaret edin. WebSockets üzerinden gerçek zamanlı ve düşük gecikmeli yayın transkripsiyonu için `gemini-3.5-transcribe-live` kullanarak [Canlı transkripsiyon](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=tr) kılavuzunu ziyaret edin. Ayrıntılı fiyatlandırma bilgileri için [Fiyatlandırma sayfasını](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-3.5-transcribe) inceleyin.
+如要全面瞭解非串流功能，請參閱[語音轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw)指南。如要透過 WebSockets 即時轉錄低延遲串流，請參閱 `gemini-3.5-transcribe-live` 的[即時轉錄](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=zh-tw)指南。如需詳細定價資訊，請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#gemini-3.5-transcribe)。
 
 ## gemini-3.5-transcribe
 
-| Mülk | Açıklama |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3.5-transcribe` |
-| saveDesteklenen veri türleri | **Girişler**  Ses (1 saate kadar)  **Çıkış**  Metin, Kelime notları |
-| token\_autoSes sınırları | **Tekli ses sınırı**  İstek başına 1 saate kadar (konuşmacı ayırma veya kelime düzeyinde zaman damgaları etkinleştirildiğinde 30 dakikaya kadar) |
-| handymanÖzellikler | **[Ses transkripsiyonu](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr)**  Destekleniyor  **[Konuşmacı ayrıştırma](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr#speaker-diarization)**  Destekleniyor  **[Kelime düzeyinde zaman damgaları](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr#word-timestamps)**  Destekleniyor  **[Özel kelime hazinesi](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr#custom-vocabulary)**  Destekleniyor  **[Akıllı transkripsiyon](https://ai.google.dev/gemini-api/docs/transcribe?hl=tr#transcription-modes)**  Destekleniyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Desteklenmiyor |
-| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Desteklenmiyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıpları](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) başlıklı makaleyi inceleyin.  - `gemini-3.5-transcribe` (Tekli) - `gemini-3.5-transcribe-live` (Live API) |
-| calendar\_monthSon güncelleme | Ağustos 2026 |
+| id\_card 模型代碼 | `gemini-3.5-transcribe` |
+| save支援的資料類型 | **輸入裝置**  音訊 (最多 1 小時)  **輸出內容**  文字、字詞註解 |
+| token\_auto音訊限制 | **單一音訊限制**  每個要求最多 1 小時 (啟用說話者分段標記或個別字詞時間戳記時，最多 30 分鐘) |
+| handyman功能 | **[語音轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw)**  支援  **[說話者分段標記](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#speaker-diarization)**  支援  **[字詞層級時間戳記](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#word-timestamps)**  支援  **[自訂詞彙](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#custom-vocabulary)**  支援  **[智慧轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#transcription-modes)**  支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  不支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  不支援  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  不支援  **[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  不支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  不支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  不支援 |
+| speed計費方案 | **[批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  不支援  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)**  不支援  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)**  不支援 |
+| 123 個版本 | 詳閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - `gemini-3.5-transcribe` (一元) - `gemini-3.5-transcribe-live` (Live API) |
+| calendar\_month最新更新 | 2026 年 8 月 |
 
-## Özellik desteği ve sınırlamalar
+## 功能支援與限制
 
-Gemini 3.5 Transcribe, iki uç noktasında aşağıdaki özellikleri destekler:
+Gemini 3.5 Transcribe 在兩個端點中支援下列功能：
 
-| Özellik | Canlı Yayın (`gemini-3.5-transcribe-live`) | Ses Dosyası İşleme (`gemini-3.5-transcribe`) | Notlar / Sınırlamalar |
+| 功能 | 即時串流 (`gemini-3.5-transcribe-live`) | 音訊檔案處理 (`gemini-3.5-transcribe`) | 注意事項 / 限制 |
 | --- | --- | --- | --- |
-| **Otomatik Dil Algılama** | Desteklenir (85'ten fazla dil) | Desteklenir (85'ten fazla dil) | Oturum ortasında kod karıştırma özelliği dahildir. |
-| **Kelime düzeyinde zaman damgaları** | Desteklenmiyor | Destekleniyor | Metne dönüştürme doğruluğunu düşürür. |
-| **Özel Kelime Bilgisi Önyargısı** (Custom Vocabulary Biasing) | Desteklenir (1.000 terime kadar) | Desteklenir (1.000 terime kadar) | Müşteriler genellikle 100 terime kadar olan listelerde en iyi sonuçları elde eder. |
-| **Akıllı Dikte ve Biçimlendirme** | Destekleniyor | Destekleniyor | Dolgu kelimelerini kaldırma ve amaca uygun alfanümerik biçimlendirme özelliklerini içerir. |
-| **Konuşmacı Ayrıştırma** | Desteklenmiyor | Desteklenir (8 hoparlöre kadar) | 3 veya daha fazla hoparlör için ilişkilendirme deneyseldir. |
-| **Maksimum Ses Süresi** | Oturum başına 10 dakika. | 1 saate kadar | Dosya işleme, konuşmacı ayrımı veya zaman damgaları gibi özellikler etkinleştirildiğinde 30 dakika ile sınırlıdır. |
+| **語言自動偵測** | 支援 (超過 85 種語言) | 支援 (超過 85 種語言) | 包括在工作階段中混合使用程式碼。 |
+| **字詞層級時間戳記** | 不支援 | 是否支援 | 降低轉錄準確度。 |
+| **自訂詞彙偏誤** | 支援 (最多 1,000 個字詞) | 支援 (最多 1,000 個字詞) | 通常最多 100 個字詞就能為顧客帶來最佳成效。 |
+| **智慧型語音輸入和格式設定** | 是否支援 | 是否支援 | 包括移除填充詞，以及根據意圖調整英數字元格式。 |
+| **說話者分段標記** | 不支援 | 支援 (最多 8 個音箱) | 3 個以上音箱的歸因功能仍在實驗階段。 |
+| **音訊長度上限** | 每節課程 10 分鐘。 | 最多 1 小時 | 啟用說話者區分或時間戳記等功能時，檔案處理時間上限為 30 分鐘。 |
 
-## Desteklenen diller
+## 支援的語言
 
-Gemini 3.5 Transcribe için aşağıdaki diller ve BCP-47 dil kodları desteklenir:
+Gemini 3.5 Transcribe 支援下列語言和 BCP-47 語言代碼：
 
-| Dil | BCP-47 kodu | Dil | BCP-47 kodu |
+| 語言 | BCP-47 代碼 | 語言 | BCP-47 代碼 |
 | --- | --- | --- | --- |
-| Afrikaanca | `af-ZA` | Japonca | `ja-JP` |
-| Amharca | `am-ET` | Cava dili | `jv-ID` |
-| Arapça (Mısır) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Ermenice | `hy-AM` | Kannada | `kn-IN` |
-| Assamca | `as-IN` | Kazakça | `kk-KZ` |
-| Azerice | `az-AZ` | Korece | `ko-KR` |
-| Belarusça | `be-BY` | Kırgızca | `ky-KG` |
-| Bengalce (Bangladeş) | `bn-BD` | Letonca | `lv-LV` |
-| Bengalce (Hindistan) | `bn-IN` | Lingala | `ln-CD` |
-| Boşnakça | `bs-BA` | Litvanca | `lt-LT` |
-| Bulgarca | `bg-BG` | Makedonca | `mk-MK` |
-| Bulgarca (Aromanca) | `rup-BG` | Malayca | `ms-MY` |
-| Burmaca | `my-MM` | Malayalamca | `ml-IN` |
-| Kantonca (Geleneksel) | `yue-Hant-HK` | Maltaca | `mt-MT` |
-| Katalanca | `ca-ES` | Mandarin Çincesi (Basitleştirilmiş) | `cmn-Hans-CN` |
-| Sabuanca | `ceb` | Marathi | `mr-IN` |
-| Orta Khmer | `km-KH` | Moğolca | `mn-MN` |
-| Hırvatça | `hr-HR` | Nepalce | `ne-NP` |
-| Çekya | `cs-CZ` | Norveççe | `nb-NO` |
-| Danca | `da-DK` | Oriya dili | `or-IN` |
-| Felemenkçe | `nl-NL` | Lehçe | `pl-PL` |
-| İngilizce (İngiltere) | `en-GB` | Portekizce (Brezilya) | `pt-BR` |
-| İngilizce (Hindistan) | `en-IN` | Portekizce (Portekiz) | `pt-PT` |
-| İngilizce (ABD) | `en-US` | Pencapça | `pa-IN` |
-| Estonca | `et-EE` | Pencapça (Gurmukhi alfabesi) | `pa-Guru-IN` |
-| Farsça | `fa-IR` | Rumence | `ro-RO` |
-| Filipince | `fil-PH` | Rusça | `ru-RU` |
-| Fince | `fi-FI` | Sırpça | `sr-RS` |
-| Fransızca | `fr-FR` | Sindice (Arapça alfabesi) | `sd-Arab-IN` |
-| Galiçyaca | `gl-ES` | Slovakça | `sk-SK` |
-| Gürcüce | `ka-GE` | Slovence | `sl-SI` |
-| Almanca | `de-DE` | İspanyolca (Latin Amerika) | `es-419` |
-| Greek | `el-GR` | İspanyolca (Amerika Birleşik Devletleri) | `es-US` |
-| Güceratça | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Hausaca | `ha-NG` | İsveççe | `sv-SE` |
-| İbranice | `he-IL` | Tacikçe | `tg-TJ` |
-| Hintçe | `hi-IN` | Telugu dili | `te-IN` |
-| Macarca | `hu-HU` | Tayca | `th-TH` |
-| İzlandaca | `is-IS` | Türkçe | `tr-TR` |
-| Hint İngilizcesi | `en-IN` | Ukraynaca | `uk-UA` |
-| Endonezce | `id-ID` | Özbekçe | `uz-UZ` |
-| İtalyanca | `it-IT` | Vietnamca | `vi-VN` |
+| 南非荷蘭文 | `af-ZA` | 日文 | `ja-JP` |
+| 阿姆哈拉文 | `am-ET` | 爪哇語 | `jv-ID` |
+| 阿拉伯文 (埃及) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| 亞美尼亞文 | `hy-AM` | 卡納達文 | `kn-IN` |
+| 阿薩姆文 | `as-IN` | 哈薩克文 | `kk-KZ` |
+| 亞塞拜然文 | `az-AZ` | 韓文 | `ko-KR` |
+| 白俄羅斯語 | `be-BY` | 吉爾吉斯文 | `ky-KG` |
+| 孟加拉文 (孟加拉) | `bn-BD` | 拉脫維亞文 | `lv-LV` |
+| 孟加拉文 (印度) | `bn-IN` | 林格拉文 | `ln-CD` |
+| 波士尼亞文 | `bs-BA` | 立陶宛文 | `lt-LT` |
+| 保加利亞文 | `bg-BG` | 馬其頓文 | `mk-MK` |
+| 保加利亞文 (阿羅馬尼亞文) | `rup-BG` | 馬來文 | `ms-MY` |
+| 緬甸文 | `my-MM` | 馬拉雅拉姆文 | `ml-IN` |
+| 粵語 (繁體) | `yue-Hant-HK` | 馬爾他文 | `mt-MT` |
+| 加泰隆尼亞文 | `ca-ES` | 中文 (簡體) | `cmn-Hans-CN` |
+| 宿霧文 | `ceb` | 馬拉地文 | `mr-IN` |
+| 中部高棉文 | `km-KH` | 蒙古文 | `mn-MN` |
+| 克羅埃西亞文 | `hr-HR` | 尼泊爾文 | `ne-NP` |
+| 捷克文 | `cs-CZ` | 挪威文 | `nb-NO` |
+| 丹麥文 | `da-DK` | 奧里雅文 | `or-IN` |
+| 荷蘭文 | `nl-NL` | 波蘭文 | `pl-PL` |
+| 英文 (英國) | `en-GB` | 葡萄牙文 (巴西) | `pt-BR` |
+| 英文 (印度) | `en-IN` | 葡萄牙文 (葡萄牙) | `pt-PT` |
+| 英文 (美國) | `en-US` | 旁遮普文 | `pa-IN` |
+| 愛沙尼亞文 | `et-EE` | 旁遮普文 (古爾穆基字母) | `pa-Guru-IN` |
+| 波斯文 | `fa-IR` | 羅馬尼亞文 | `ro-RO` |
+| 菲律賓文 | `fil-PH` | 俄文 | `ru-RU` |
+| 芬蘭文 | `fi-FI` | 塞爾維亞文 | `sr-RS` |
+| 法文 | `fr-FR` | 信德文 (阿拉伯字母) | `sd-Arab-IN` |
+| 加里西亞文 | `gl-ES` | 斯洛伐克文 | `sk-SK` |
+| 喬治亞文 | `ka-GE` | 斯洛維尼亞文 | `sl-SI` |
+| 德文 | `de-DE` | 西班牙文 (拉丁美洲) | `es-419` |
+| 希臘文 | `el-GR` | 西班牙文 (美國) | `es-US` |
+| 古吉拉特文 | `gu-IN` | 斯瓦希里文 (肯亞) | `sw-KE` |
+| 豪薩文 | `ha-NG` | 瑞典文 | `sv-SE` |
+| 希伯來文 | `he-IL` | 塔吉克文 | `tg-TJ` |
+| 北印度文 | `hi-IN` | 泰盧固文 | `te-IN` |
+| 匈牙利文 | `hu-HU` | 泰文 | `th-TH` |
+| 冰島文 | `is-IS` | 土耳其文 | `tr-TR` |
+| 印度英語 | `en-IN` | 烏克蘭文 | `uk-UA` |
+| 印尼文 | `id-ID` | 烏茲別克文 | `uz-UZ` |
+| 義大利文 | `it-IT` | 越南文 | `vi-VN` |
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-09-10 UTC.
+上次更新時間：2026-09-10 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-10 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-10 (世界標準時間)。"],[],[]]

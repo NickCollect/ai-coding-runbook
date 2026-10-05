@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=id
-fetched_at: 2026-09-28T06:25:55.156807+00:00
-title: "Transkripsi audio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/transcribe?hl=hi
+fetched_at: 2026-10-05T06:41:17.294711+00:00
+title: "\u0911\u0921\u093f\u092f\u094b \u0915\u094b \u091f\u0947\u0915\u094d\u0938\u094d\u091f \u092e\u0947\u0902 \u092c\u0926\u0932\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Kirim masukan
+सुझाव भेजें
 
-# Transkripsi audio
+# ऑडियो को टेक्स्ट में बदलना
 
-Gemini API mengonversi ucapan dalam file audio menjadi teks menggunakan model Transcribe Gemini 3.5 (`gemini-3.5-transcribe`). Berdasarkan kemampuan pemahaman audio Gemini, API ini memberikan transkripsi yang akurat dengan identifikasi bahasa otomatis, diarisasi penutur, stempel waktu tingkat kata, dan petunjuk kosakata kustom. Fitur ini juga menyediakan mode [transkripsi cerdas](#transcription-modes) yang menampilkan penghapusan ketidaklancaran dan pemformatan cerdas.
+Gemini API, ऑडियो फ़ाइलों में मौजूद बोली को Gemini 3.5 Transcribe मॉडल (`gemini-3.5-transcribe`) का इस्तेमाल करके टेक्स्ट में बदलता है. Gemini की ऑडियो समझने की क्षमताओं के आधार पर, यह सटीक ट्रांसक्रिप्शन उपलब्ध कराता है. इसमें भाषा की पहचान अपने-आप होती है, बोलने वाले की पहचान होती है, शब्द-लेवल के टाइमस्टैंप होते हैं, और कस्टम शब्दावली के बारे में सुझाव मिलते हैं. इसमें [स्मार्ट ट्रांसक्रिप्शन](#transcription-modes) मोड भी मिलता है. इसमें शब्दों को सही तरीके से व्यवस्थित करने और फ़ॉर्मैट करने की सुविधा होती है.
 
-Untuk mentranskripsikan file audio, upload audio dan teruskan ke `gemini-3.5-transcribe`:
+किसी ऑडियो फ़ाइल को टेक्स्ट में बदलने के लिए, ऑडियो अपलोड करें और उसे `gemini-3.5-transcribe` को भेजें:
 
 ### Python
 
@@ -71,7 +71,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -136,26 +136,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Ringkasan
+## खास जानकारी देने वाला बटन
 
-Transkripsi Gemini 3.5 dioptimalkan untuk tugas speech-to-text. Model ini menangani beragam aksen, suara bising di latar belakang, dan percakapan multibahasa.
+Gemini 3.5 Transcribe को, बोली को लिखाई में बदलने के टास्क के लिए ऑप्टिमाइज़ किया गया है. यह अलग-अलग लहज़ों, बैकग्राउंड के शोर, और कई भाषाओं में की गई बातचीत को समझ सकता है.
 
-Kemampuan utama meliputi:
+मुख्य सुविधाओं में ये शामिल हैं:
 
-- **Pengenalan ucapan otomatis (ASR):** Mendeteksi bahasa secara otomatis di lebih dari [85 lokalitas](#supported-languages). Menangani peralihan kode intra-kalimat dan antar-kalimat tanpa konfigurasi manual.
-- **Kosakata kustom:** Membiasakan pengenalan terhadap istilah khusus domain, akronim, dan nama diri dengan meneruskan hingga 1.000 frasa.
-- **Diarisasi pembicara:** Membedakan beberapa pembicara dan mengatribusikan segmen yang diucapkan ke label yang berbeda.
-- **Stempel waktu tingkat kata:** Membuat offset waktu mulai dan berakhir yang akurat untuk setiap kata yang dikenali.
-- **Transkripsi pintar:** Menghapus ketidaklancaran, kata pengisi, pengulangan, dan menerapkan format terstruktur.
-- **Pemformatan dan normalisasi:** Menerapkan kapitalisasi, tanda baca, dan normalisasi teks terbalik, seperti mengonversi "dua puluh enam juta dolar" menjadi "$26M".
+- **अपने-आप बोली पहचानने की सुविधा (एएसआर):** यह [85 से ज़्यादा स्थानीय भाषाओं](#supported-languages) का पता अपने-आप लगाती है. यह सुविधा, मैन्युअल कॉन्फ़िगरेशन के बिना, एक वाक्य और अलग-अलग वाक्यों के बीच कोड-स्विचिंग को मैनेज करती है.
+- **कस्टम शब्दावली:** इसमें 1,000 वाक्यांशों को पास करके, डोमेन के हिसाब से शब्दों, छोटे नामों, और सही नामों को पहचानने की सुविधा को बेहतर बनाया जाता है.
+- **स्पीकर डायराइज़ेशन:** यह सुविधा, एक से ज़्यादा लोगों की आवाज़ में अंतर करती है और बोले गए सेगमेंट को अलग-अलग लेबल असाइन करती है.
+- **शब्द-लेवल के टाइमस्टैंप:** इससे पहचाने गए हर शब्द के शुरू और खत्म होने के समय के सटीक ऑफ़सेट जनरेट होते हैं.
+- **स्मार्ट ट्रांसक्रिप्शन:** यह सुविधा, बोलने में होने वाली रुकावटों, फ़िलर शब्दों, और दोहराव को हटा देती है. साथ ही, टेक्स्ट को व्यवस्थित फ़ॉर्मैट में बदल देती है.
+- **फ़ॉर्मैट करना और सामान्य बनाना:** इसमें कैपिटल लेटर का इस्तेमाल करना, विराम चिह्न लगाना, और टेक्स्ट को सामान्य बनाना शामिल है. जैसे, "2 करोड़ 60 लाख डॉलर" को "2.6 करोड़ डॉलर" में बदलना.
 
-Untuk penalaran audio umum atau menjawab pertanyaan melalui konten audio, gunakan [Pemahaman audio](https://ai.google.dev/gemini-api/docs/audio?hl=id). Untuk sintesis audio text-to-speech, gunakan [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
+ऑडियो कॉन्टेंट के आधार पर तर्क करने या सवालों के जवाब देने के लिए, [ऑडियो समझने की सुविधा](https://ai.google.dev/gemini-api/docs/audio?hl=hi) का इस्तेमाल करें. टेक्स्ट-टू-स्पीच ऑडियो सिंथेसिस के लिए, [टेक्स्ट-टू-स्पीच](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi) का इस्तेमाल करें.
 
-## Deteksi dan petunjuk bahasa
+## भाषा की पहचान करने और सुझाव पाने की सुविधा
 
-Secara default, model akan mendeteksi bahasa lisan secara otomatis. Fitur ini beralih antarbahasa secara dinamis saat pembicara melakukan peralihan kode.
+डिफ़ॉल्ट रूप से, मॉडल बोली जा रही भाषा का पता अपने-आप लगा लेता है. यह सुविधा, बोलने वालों के कोड-स्विच करने पर, भाषाओं के बीच डाइनैमिक तरीके से स्विच करती है.
 
-Untuk menggunakan deteksi otomatis, hapus `language_codes` atau berikan daftar kosong:
+अपने-आप पहचान होने की सुविधा का इस्तेमाल करने के लिए, `language_codes` को शामिल न करें या खाली सूची दें:
 
 ### Python
 
@@ -197,7 +197,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -271,7 +271,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Jika Anda mengetahui bahasa sebelumnya, tentukan kode bahasa BCP-47 di `language_codes` untuk meningkatkan akurasi transkripsi (lihat [Bahasa yang didukung](#supported-languages)):
+अगर आपको पहले से ही भाषा के बारे में पता है, तो ट्रांसक्रिप्शन की सटीकता को बेहतर बनाने के लिए, `language_codes` में BCP-47 भाषा कोड डालें ([इस्तेमाल की जा सकने वाली भाषाएं](#supported-languages) देखें):
 
 ### Python
 
@@ -293,7 +293,7 @@ const generationConfig = {
 };
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -324,9 +324,9 @@ func main() {
 }
 ```
 
-## Kosakata kustom
+## कस्टम शब्दावली
 
-Anda dapat mengarahkan model ucapan ke kata-kata yang tidak umum, jargon teknis, nama merek, atau nama diri. Berikan hingga 1.000 istilah dalam array `custom_vocabulary` (hasil terbaik biasanya dicapai dengan hingga 100 istilah):
+आपके पास स्पीच मॉडल को, सामान्य तौर पर इस्तेमाल न होने वाले शब्दों, तकनीकी शब्दों, ब्रैंड के नामों या व्यक्तिवाचक संज्ञाओं के बारे में बताने का विकल्प होता है. `custom_vocabulary` ऐरे में ज़्यादा से ज़्यादा 1,000 शब्द डालें. आम तौर पर, 100 शब्दों तक के लिए सबसे अच्छे नतीजे मिलते हैं:
 
 ### Python
 
@@ -368,7 +368,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -442,11 +442,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Diarisasi pembicara
+## स्पीकर डायराइज़ेशन
 
-Diarisasi pembicara mengidentifikasi suara yang berbeda dalam rekaman dan memberi tag pada setiap segmen dengan ID pembicara seperti `spk_1` atau `spk_2`. Hingga 8 pembicara didukung (atribusi untuk 3 pembicara atau lebih bersifat eksperimental).
+स्पीकर डायराइज़ेशन की सुविधा, रिकॉर्डिंग में मौजूद अलग-अलग आवाज़ों की पहचान करती है. साथ ही, हर सेगमेंट को स्पीकर आइडेंटिफ़ायर के साथ टैग करती है. जैसे, `spk_1` या `spk_2`. ज़्यादा से ज़्यादा आठ स्पीकर इस्तेमाल किए जा सकते हैं. हालांकि, तीन या इससे ज़्यादा स्पीकर के लिए एट्रिब्यूशन की सुविधा, एक्सपेरिमेंट के तौर पर उपलब्ध है.
 
-Aktifkan diarisasi dengan mengonfigurasi `diarization_mode` dalam `mode`:
+`mode` में `diarization_mode` को कॉन्फ़िगर करके, डायराइज़ेशन की सुविधा चालू करें:
 
 ### Python
 
@@ -494,7 +494,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -573,11 +573,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Stempel waktu tingkat kata
+## शब्दों के लेवल पर टाइमस्टैंप
 
-Stempel waktu tingkat kata memberikan offset awal dan akhir yang tepat untuk setiap kata yang dikenali dalam aliran audio.
+शब्द-लेवल के टाइमस्टैंप से, ऑडियो स्ट्रीम में पहचाने गए हर शब्द के शुरू और खत्म होने के सटीक ऑफ़सेट मिलते हैं.
 
-Aktifkan stempel waktu dengan mengonfigurasi `timestamp_granularities` dalam `mode`:
+`mode` में जाकर `timestamp_granularities` को कॉन्फ़िगर करके, टाइमस्टैंप की सुविधा चालू करें:
 
 ### Python
 
@@ -625,7 +625,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -704,7 +704,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Anda dapat menggabungkan `diarization_mode` dan `timestamp_granularities` di `mode` untuk menerima label pembicara dan stempel waktu kata:
+स्पीकर लेबल और शब्द के टाइमस्टैंप, दोनों पाने के लिए `mode` में `diarization_mode` और `timestamp_granularities` को एक साथ इस्तेमाल किया जा सकता है:
 
 ### Python
 
@@ -734,7 +734,7 @@ const generationConfig = {
 };
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -773,21 +773,21 @@ func main() {
 }
 ```
 
-## Mode transkripsi
+## बोले जा रहे शब्दों को टेक्स्ट में बदलने के मोड
 
-Gemini 3.5 Transcribe mendukung dua mode transkripsi melalui parameter `mode`:
+Gemini 3.5 Transcribe, `mode` पैरामीटर के ज़रिए ट्रांसक्रिप्शन के दो मोड सपोर्ट करता है:
 
-- **`verbatim` (default)**: Menampilkan transkrip kata demi kata yang persis dari semua yang diucapkan, dengan mempertahankan kata pengisi mentah ("um", "eh", "kayak", "tahu"), pengulangan, jeda, dan awal yang salah. Stempel waktu dan diarisasi pembicara dikonfigurasi dalam mode ini (`{"type": "verbatim", ...}`).
-- **`smart` (Transkripsi pintar)**: Mengoptimalkan transkrip untuk dibaca dengan menerapkan pasca-pemrosesan cerdas:
-  - **Penghapusan ketidaklancaran**: Menghapus kata pengisi percakapan, gagap, dan awal yang salah.
-  - **Koreksi mandiri inline**: Menyelesaikan koreksi lisan secara langsung (misalnya, *"Mari bertemu pada hari Selasa, eh tidak, hari Rabu pukul dua"* menjadi *"Mari bertemu pada hari Rabu pukul 14.00"*).
-  - **Pemformatan terstruktur otomatis**: Secara otomatis menyusun pemikiran yang diucapkan menjadi paragraf, daftar bernomor, poin-poin, tanggal, mata uang, dan angka yang diformat.
-  - **Pembersihan tata bahasa**: Menerapkan tanda baca, kapitalisasi kalimat, dan alur yang alami.
+- **`verbatim` (डिफ़ॉल्ट)**: इसमें बोले गए हर शब्द की सटीक ट्रांसक्रिप्ट मिलती है. इसमें फ़िलर शब्दों ("अम्", "अह", "जैसे", "आपको पता है"), दोहराव, ठहराव, और गलत शुरुआत को भी शामिल किया जाता है. इस मोड (`{"type": "verbatim", ...}`) में, टाइमस्टैंप और स्पीकर डायराइज़ेशन की सुविधा कॉन्फ़िगर की जाती है.
+- **`smart` (स्मार्ट ट्रांसक्रिप्शन)**: यह सुविधा, ट्रांसक्रिप्ट को पढ़ने के लिए ऑप्टिमाइज़ करती है. इसके लिए, यह पोस्ट-प्रोसेसिंग की बेहतर तकनीक का इस्तेमाल करती है:
+  - **बातचीत में रुकावट डालने वाले शब्दों को हटाना**: बातचीत में रुकावट डालने वाले शब्दों, हकलाने, और गलत शुरुआत को हटाता है.
+  - **बोले गए शब्दों को तुरंत ठीक करना**: बोले गए शब्दों को तुरंत ठीक करता है. उदाहरण के लिए, *"चलो मंगलवार को मिलते हैं, नहीं नहीं, बुधवार को दो बजे"* को *"चलो बुधवार को दोपहर 2 बजे मिलते हैं"* में बदल देता है.
+  - **स्ट्रक्चर्ड फ़ॉर्मैटिंग अपने-आप होना**: यह सुविधा, बोले गए शब्दों को पैराग्राफ़, नंबर वाली सूचियों, बुलेट पॉइंट, फ़ॉर्मैट की गई तारीखों, मुद्राओं, और संख्याओं में अपने-आप व्यवस्थित करती है.
+  - **व्याकरण से जुड़ी अशुद्धियों को ठीक करना**: इसमें विराम चिह्न, वाक्य के पहले अक्षर को कैपिटल करना, और वाक्य के फ़्लो को ठीक करना शामिल है.
 
-| Audio lisan | `verbatim` output | Output `smart` (Transkripsi cerdas) |
+| ऑडियो कॉन्टेंट | `verbatim` आउटपुट | `smart` (स्मार्ट ट्रांसक्रिप्शन) आउटपुट |
 | --- | --- | --- |
-| "Um, jadi untuk rapat, saya pikir kita harus, eh, mengundang Alice dan, tunggu, bukan, Bob dan Carol." | "Jadi untuk rapat, saya rasa kita harus mengundang Alice, eh bukan, Bob dan Carol." | "Untuk rapat, sebaiknya kita mengundang Budi dan Ari." |
-| "Item pertama tinjau anggaran, item kedua selesaikan linimasa, item ketiga kirim ringkasan" | "tinjau anggaran item pertama selesaikan linimasa item kedua kirim ringkasan item ketiga" | "1. Tinjau anggaran 2. Menyelesaikan linimasa 3. Kirim ringkasan" |
+| "अरे, तो मीटिंग के लिए, मुझे लगता है कि हमें, अह, एलिस को न्योता देना चाहिए और, नहीं नहीं, बॉब और कैरल को न्योता देना चाहिए." | "मीटिंग के लिए, हमें एलिस को न्योता देना चाहिए. नहीं, हमें बॉब और कैरल को न्योता देना चाहिए." | "मीटिंग के लिए, हमें बॉब और कैरल को न्योता भेजना चाहिए." |
+| "पहले आइटम की समीक्षा करो, दूसरे आइटम के लिए बजट तय करो, तीसरे आइटम के लिए समयसीमा तय करो, और रीकैप भेजो" | "first item review budget second item finalize timeline third item send recap" | "1. बजट की समीक्षा करें 2. टाइमलाइन को फ़ाइनल करें 3. रीकैप भेजें" |
 
 ### Python
 
@@ -831,7 +831,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -905,13 +905,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Mengurai output transkripsi
+## ट्रांसक्रिप्शन के आउटपुट को पार्स किया जा रहा है
 
-Teks transkrip lengkap ditampilkan di `interaction.output_text`.
+पूरी ट्रांसक्रिप्ट का टेक्स्ट, `interaction.output_text` में दिखाया जाता है.
 
-Jika `timestamp_granularities` atau `diarization_mode` diaktifkan, API juga akan menampilkan anotasi tingkat kata mendetail yang dilampirkan pada konten interaksi.
+`timestamp_granularities` या `diarization_mode` चालू होने पर, एपीआई इंटरैक्शन के कॉन्टेंट से जुड़े शब्द-लेवल के एनोटेशन की ज़्यादा जानकारी भी दिखाता है.
 
-Berikut cara mengekstrak dan melakukan iterasi pada stempel waktu kata dan pergantian pembicara:
+शब्दों के टाइमस्टैंप और स्पीकर के बोलने की बारी की जानकारी निकालने और उसे दोहराने का तरीका यहां बताया गया है:
 
 ### Python
 
@@ -961,7 +961,7 @@ for (const w of words) {
 }
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -1048,58 +1048,58 @@ func main() {
 }
 ```
 
-## Bahasa yang didukung
+## इस्तेमाल की जा सकने वाली भाषाएं
 
-Bahasa dan kode bahasa BCP-47 berikut didukung untuk Transkripsi Gemini 3.5:
+Gemini 3.5 Transcribe के लिए, इन भाषाओं और BCP-47 भाषा कोड का इस्तेमाल किया जा सकता है:
 
-| Language | Kode BCP-47 | Language | Kode BCP-47 |
+| भाषा | BCP-47 कोड | भाषा | BCP-47 कोड |
 | --- | --- | --- | --- |
-| Afrika | `af-ZA` | Jepang | `ja-JP` |
-| Amharik | `am-ET` | Jawa | `jv-ID` |
-| Arab (Mesir) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Armenia | `hy-AM` | Kannada | `kn-IN` |
-| Assam | `as-IN` | Kazak | `kk-KZ` |
-| Azerbaijan | `az-AZ` | Korea | `ko-KR` |
-| Belarusia | `be-BY` | Kirgiz | `ky-KG` |
-| Bengali (Bangladesh) | `bn-BD` | Latvia | `lv-LV` |
-| Bengali (India) | `bn-IN` | Lingala | `ln-CD` |
-| Bosnia | `bs-BA` | Lituania | `lt-LT` |
-| Bulgaria | `bg-BG` | Makedonia | `mk-MK` |
-| Bulgaria (Aromania) | `rup-BG` | Melayu | `ms-MY` |
-| Burma | `my-MM` | Malayalam | `ml-IN` |
-| Kanton (Tradisional) | `yue-Hant-HK` | Malta | `mt-MT` |
-| Katalan | `ca-ES` | China Mandarin (Aksara Sederhana) | `cmn-Hans-CN` |
-| Cebuano | `ceb` | Marathi | `mr-IN` |
-| Khmer Tengah | `km-KH` | Mongolia | `mn-MN` |
-| Kroasia | `hr-HR` | Nepal | `ne-NP` |
-| Ceko | `cs-CZ` | Norwegia | `nb-NO` |
-| Denmark | `da-DK` | Oriya | `or-IN` |
-| Belanda | `nl-NL` | Polandia | `pl-PL` |
-| Inggris (Britania Raya) | `en-GB` | Portugis (Brasil) | `pt-BR` |
-| Inggris (India) | `en-IN` | Portugis (Portugal) | `pt-PT` |
-| Inggris (Amerika Serikat) | `en-US` | Punjabi | `pa-IN` |
-| Estonia | `et-EE` | Punjabi (skrip Gurmukhi) | `pa-Guru-IN` |
-| Persia | `fa-IR` | Rumania | `ro-RO` |
-| Filipino | `fil-PH` | Rusia | `ru-RU` |
-| Finlandia | `fi-FI` | Serbia | `sr-RS` |
-| Prancis | `fr-FR` | Sindhi (skrip Arab) | `sd-Arab-IN` |
-| Galisia | `gl-ES` | Slovakia | `sk-SK` |
-| Georgia | `ka-GE` | Slovenia | `sl-SI` |
-| Jerman | `de-DE` | Spanyol (Amerika Latin) | `es-419` |
-| Yunani | `el-GR` | Spanyol (Amerika Serikat) | `es-US` |
-| Gujarat | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Hausa | `ha-NG` | Swedia | `sv-SE` |
-| Ibrani | `he-IL` | Tajik | `tg-TJ` |
-| Hindi | `hi-IN` | Telugu | `te-IN` |
-| Hungaria | `hu-HU` | Thai | `th-TH` |
-| Islandia | `is-IS` | Turki | `tr-TR` |
-| Inggris India | `en-IN` | Ukraina | `uk-UA` |
-| Indonesia | `id-ID` | Uzbek | `uz-UZ` |
-| Italia | `it-IT` | Vietnam | `vi-VN` |
+| अफ़्रीकान्स | `af-ZA` | जापानी | `ja-JP` |
+| अमहैरिक | `am-ET` | जावानीज़ | `jv-ID` |
+| अरबी (मिस्र) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| आर्मीनियन | `hy-AM` | कन्नड़ | `kn-IN` |
+| असमिया | `as-IN` | कज़ाक | `kk-KZ` |
+| अज़रबैजानी | `az-AZ` | कोरियन | `ko-KR` |
+| बेलारूसी | `be-BY` | किर्गिज़ | `ky-KG` |
+| बांग्ला (बांग्लादेश) | `bn-BD` | लातवियन | `lv-LV` |
+| बांग्ला (भारत) | `bn-IN` | लिंगाला | `ln-CD` |
+| बोस्नियन | `bs-BA` | लिथुएनियन | `lt-LT` |
+| बल्गैरियन | `bg-BG` | मैसेडोनियन | `mk-MK` |
+| बल्गेरियन (ऐरोमेनियन) | `rup-BG` | मलय | `ms-MY` |
+| बर्मीज़ | `my-MM` | मलयालम | `ml-IN` |
+| कैंटोनीज़ (ट्रेडिशनल) | `yue-Hant-HK` | मोल्टीज़ | `mt-MT` |
+| कैटलैन | `ca-ES` | मैंडरिन चाइनीज़ (सिंप्लिफ़ाइड) | `cmn-Hans-CN` |
+| सेबुआनो | `ceb` | मराठी | `mr-IN` |
+| सेंट्रल खमेर | `km-KH` | मंगोलियन | `mn-MN` |
+| क्रोएशियन | `hr-HR` | नेपाली | `ne-NP` |
+| चेक | `cs-CZ` | नॉर्वीजन | `nb-NO` |
+| डैनिश | `da-DK` | ओड़िया | `or-IN` |
+| डच | `nl-NL` | पोलिश | `pl-PL` |
+| अंग्रेज़ी (ग्रेट ब्रिटेन) | `en-GB` | पॉर्चुगीज़ (ब्राज़ील) | `pt-BR` |
+| अंग्रेज़ी (भारत) | `en-IN` | पॉर्चगीज़ (पुर्तगाल) | `pt-PT` |
+| अंग्रेज़ी (संयुक्त राज्य अमेरिका) | `en-US` | पंजाबी | `pa-IN` |
+| एस्टोनियन | `et-EE` | पंजाबी (गुरमुखी लिपि) | `pa-Guru-IN` |
+| फ़ारसी | `fa-IR` | रोमानियन | `ro-RO` |
+| फ़िलिपीनी | `fil-PH` | रूसी | `ru-RU` |
+| फ़िनिश | `fi-FI` | सर्बियन | `sr-RS` |
+| फ़्रांसीसी | `fr-FR` | सिंधी (अरबी लिपि) | `sd-Arab-IN` |
+| गैलिशियन | `gl-ES` | स्लोवाक | `sk-SK` |
+| जॉर्जियन | `ka-GE` | स्लोवेनियन | `sl-SI` |
+| जर्मन | `de-DE` | स्पैनिश (लैटिन अमेरिका) | `es-419` |
+| ग्रीक | `el-GR` | स्पैनिश (संयुक्त राज्य अमेरिका) | `es-US` |
+| गुजराती | `gu-IN` | स्वाहिली (केन्या) | `sw-KE` |
+| हौसा | `ha-NG` | स्वीडिश | `sv-SE` |
+| हिब्रू | `he-IL` | ताजिक | `tg-TJ` |
+| हिन्दी | `hi-IN` | तेलुगु | `te-IN` |
+| हंगेरियन | `hu-HU` | थाई | `th-TH` |
+| आइसलैंडिक | `is-IS` | टर्किश | `tr-TR` |
+| इंडियन इंग्लिश | `en-IN` | यूक्रेनियन | `uk-UA` |
+| इंडोनेशियन | `id-ID` | उज़्बेक | `uz-UZ` |
+| इटैलियन | `it-IT` | वियतनामीज़ | `vi-VN` |
 
-## Format audio yang didukung
+## इस्तेमाल किए जा सकने वाले ऑडियो फ़ॉर्मैट
 
-Transkripsi Gemini 3.5 mendukung jenis MIME format audio berikut:
+Gemini 3.5 Transcribe में, इन ऑडियो फ़ॉर्मैट के MIME टाइप इस्तेमाल किए जा सकते हैं:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -1115,50 +1115,50 @@ Transkripsi Gemini 3.5 mendukung jenis MIME format audio berikut:
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-Untuk mengetahui daftar lengkap jenis MIME dan skema parameter yang didukung, lihat [Referensi Interactions API](https://ai.google.dev/api/interactions-api?hl=id#Resource:Content).
+इस्तेमाल किए जा सकने वाले MIME टाइप और पैरामीटर स्कीमा की पूरी सूची देखने के लिए, [Interactions API का रेफ़रंस](https://ai.google.dev/api/interactions-api?hl=hi#Resource:Content) देखें.
 
-## Referensi parameter
+## पैरामीटर का रेफ़रंस
 
-Konfigurasi transkripsi dengan menyetel kolom dalam objek `transcription_config` di `generation_config`:
+`generation_config` में मौजूद `transcription_config` ऑब्जेक्ट में फ़ील्ड सेट करके, ट्रांसक्रिप्शन की सुविधा कॉन्फ़िगर करें:
 
-| Kolom | Jenis | Deskripsi |
+| फ़ील्ड | टाइप | ब्यौरा |
 | --- | --- | --- |
-| `language_codes` | Array string | Kode bahasa BCP-47 (misalnya, `["en-US"]`). Jika tidak disertakan atau kosong (`[]`), model akan otomatis mendeteksi bahasa dan menangani pengalihan kode. |
-| `custom_vocabulary` | Array string | Hingga 1.000 istilah kustom, akronim, atau nama diri untuk memengaruhi pengenalan ucapan. Tidak kompatibel dengan diarisasi pembicara dan stempel waktu tingkat kata. |
-| `mode` | Objek atau String | Konfigurasi mode transkripsi. Menerima `"smart"` atau objek mode kata demi kata (`{"type": "verbatim", ...}`). Secara default, transkripsi kata demi kata. |
-| `mode.type` | String | *(Khusus mode kata demi kata)* ID mode. Selalu ditetapkan ke `"verbatim"`. |
-| `mode.timestamp_granularities` | Array string | *(Hanya mode Kata demi kata)* Tingkat perincian stempel waktu yang akan ditampilkan. Teruskan `["word"]` untuk mengaktifkan offset awal dan akhir kata. Tidak kompatibel dengan kosakata kustom. |
-| `mode.diarization_mode` | String | *(Khusus mode kata demi kata)* Mode diarisasi. Teruskan `"speaker"` untuk mengidentifikasi dan melabeli pembicara yang berbeda. Tidak kompatibel dengan kosakata kustom. |
+| `language_codes` | स्ट्रिंग का कलेक्शन | BCP-47 भाषा कोड (जैसे, `["en-US"]`). अगर इसे शामिल नहीं किया जाता है या यह खाली (`[]`) है, तो मॉडल अपने-आप भाषा की पहचान कर लेता है और कोड-स्विचिंग को मैनेज करता है. |
+| `custom_vocabulary` | स्ट्रिंग का कलेक्शन | बोली पहचानने की सुविधा को बेहतर बनाने के लिए,ज़्यादा से ज़्यादा 1, 000 कस्टम शब्द, संक्षिप्त नाम या व्यक्तिवाचक संज्ञाएं. यह सुविधा, स्पीकर डायराइज़ेशन और शब्द-लेवल के टाइमस्टैंप के साथ काम नहीं करती. |
+| `mode` | ऑब्जेक्ट या स्ट्रिंग | बोले जा रहे शब्दों को टेक्स्ट में बदलने की सुविधा का कॉन्फ़िगरेशन. यह `"smart"` या वर्बैटिम मोड ऑब्जेक्ट (`{"type": "verbatim", ...}`) स्वीकार करता है. डिफ़ॉल्ट रूप से, वर्बैटिम ट्रांसक्रिप्शन पर सेट होता है. |
+| `mode.type` | स्ट्रिंग | *(सिर्फ़ वर्बैटिम मोड के लिए)* मोड आइडेंटिफ़ायर. इसे हमेशा `"verbatim"` पर सेट किया जाता है. |
+| `mode.timestamp_granularities` | स्ट्रिंग का कलेक्शन | *(सिर्फ़ वर्बैटिम मोड के लिए)* जवाब में शामिल किए जाने वाले टाइमस्टैंप की फ़्रीक्वेंसी. शब्द की शुरुआत और खत्म होने के ऑफ़सेट चालू करने के लिए, `["word"]` पास करें. कस्टम शब्दावली के साथ काम नहीं करता. |
+| `mode.diarization_mode` | स्ट्रिंग | *(सिर्फ़ वर्बैटिम मोड के लिए)* डायराइज़ेशन मोड. अलग-अलग स्पीकर की पहचान करने और उन्हें लेबल करने के लिए, `"speaker"` पास करें. कस्टम शब्दावली के साथ काम नहीं करता. |
 
-## Praktik terbaik
+## सबसे सही तरीके
 
-- **Berikan audio yang jernih:** Pastikan rekaman audio memiliki pemisahan suara yang jelas dan hindari pemangkasan yang parah.
-- **Berikan petunjuk bahasa jika diketahui:** Jika Anda mengetahui bahasa audio sebelumnya, tentukan `language_codes` untuk memaksimalkan akurasi.
-- **Targetkan kosakata kustom:** Hanya sertakan istilah domain, nama merek, atau kata benda yang berbeda dalam `custom_vocabulary`, bukan kata-kata umum sehari-hari.
-- **Gunakan Files API untuk rekaman berukuran besar:** Untuk file yang berdurasi lebih dari beberapa detik, upload file menggunakan `client.files.upload` dan teruskan URI file yang ditampilkan ke model.
+- **साफ़ ऑडियो उपलब्ध कराएं:** पक्का करें कि ऑडियो रिकॉर्डिंग में आवाज़ साफ़ सुनाई दे और क्लिप में आवाज़ न कटे.
+- **ऑडियो की भाषा के बारे में जानकारी दें:** अगर आपको ऑडियो की भाषा के बारे में पहले से पता है, तो `language_codes` को सेट करें, ताकि ऑडियो को टेक्स्ट में ज़्यादा सटीक तरीके से बदला जा सके.
+- **कस्टम शब्दावली को टारगेट करना:** `custom_vocabulary` में, रोज़मर्रा के आम शब्दों के बजाय सिर्फ़ अलग-अलग डोमेन के शब्द, ब्रैंड के नाम या संज्ञाएं शामिल करें.
+- **ज़्यादा बड़ी रिकॉर्डिंग के लिए, Files API का इस्तेमाल करें:** अगर फ़ाइल कुछ सेकंड से ज़्यादा लंबी है, तो `client.files.upload` का इस्तेमाल करके फ़ाइल अपलोड करें. साथ ही, मॉडल को वापस मिला फ़ाइल यूआरआई पास करें.
 
-## Batasan
+## सीमाएं
 
-- **Durasi audio:** Permintaan unary standar mendukung file audio hingga 1 jam. Pemrosesan audio dibatasi hingga 30 menit jika fitur seperti diarisasi speaker atau stempel waktu tingkat kata diaktifkan.
-- **Stempel waktu tingkat kata:** Mengaktifkan stempel waktu tingkat kata dapat menurunkan akurasi transkripsi secara keseluruhan.
-- **Diarisasi pembicara:** Diarisasi pembicara mendukung hingga 8 pembicara. Atribusi speaker untuk 3 speaker atau lebih bersifat eksperimental.
-- **Kosakata kustom:** Anda dapat memberikan hingga 1.000 istilah dalam `custom_vocabulary`, tetapi hasil terbaik biasanya dicapai dengan hingga 100 istilah. Anda tidak dapat menggabungkan `custom_vocabulary` dengan diarisasi speaker atau stempel waktu tingkat kata; API menolak permintaan yang menentukan `custom_vocabulary` bersama dengan salah satu fitur tersebut.
-- **Kompatibilitas mode:** Transkripsi cerdas (`"smart"`) tidak dapat digabungkan dengan `timestamp_granularities` atau `diarization_mode`.
+- **ऑडियो की अवधि:** स्टैंडर्ड यूनरी अनुरोधों में, एक घंटे तक की ऑडियो फ़ाइलें इस्तेमाल की जा सकती हैं. स्पीकर के हिसाब से लेबलिंग या शब्द-लेवल के टाइमस्टैंप जैसी सुविधाएं चालू होने पर, ऑडियो प्रोसेसिंग सिर्फ़ 30 मिनट तक की जा सकती है.
+- **शब्द के लेवल पर टाइमस्टैंप:** शब्द के लेवल पर टाइमस्टैंप की सुविधा चालू करने से, ट्रांसक्रिप्शन की कुल सटीकता कम हो सकती है.
+- **स्पीकर डायराइज़ेशन:** स्पीकर डायराइज़ेशन की सुविधा, ज़्यादा से ज़्यादा आठ स्पीकर के लिए काम करती है. तीन या इससे ज़्यादा स्पीकर के लिए, स्पीकर एट्रिब्यूशन की सुविधा अभी एक्सपेरिमेंट के तौर पर उपलब्ध है.
+- **कस्टम शब्दावली:** `custom_vocabulary` में ज़्यादा से ज़्यादा 1,000 शब्द दिए जा सकते हैं. हालांकि, आम तौर पर 100 शब्दों से ही सबसे अच्छे नतीजे मिलते हैं. `custom_vocabulary` को स्पीकर के हिसाब से शब्दों को अलग-अलग करने या शब्द-लेवल के टाइमस्टैंप के साथ इस्तेमाल नहीं किया जा सकता. एपीआई, उन अनुरोधों को अस्वीकार कर देता है जिनमें `custom_vocabulary` के साथ इनमें से किसी भी सुविधा का इस्तेमाल किया गया हो.
+- **मोड के साथ काम करने की सुविधा:** स्मार्ट ट्रांसक्रिप्शन (`"smart"`) को `timestamp_granularities` या `diarization_mode` के साथ इस्तेमाल नहीं किया जा सकता.
 
-## Langkah berikutnya
+## आगे क्या करना है
 
-- Streaming audio real-time dengan [Panduan transkripsi langsung](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=id) menggunakan Live API.
-- Jelajahi [Pemahaman audio](https://ai.google.dev/gemini-api/docs/audio?hl=id) untuk menganalisis, meringkas, atau membuat kueri konten audio.
-- Pelajari cara menyintesis audio dari teks menggunakan [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
-- Lihat [halaman Harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id#gemini-3.5-transcribe) untuk mengetahui harga model dan batas token.
-- Lihat panduan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk mengetahui detail tentang cara mengupload dan mengelola file media.
+- लाइव एपीआई का इस्तेमाल करके, [बोली को लेख में बदलने की सुविधा से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=hi) की मदद से, रीयल-टाइम में ऑडियो स्ट्रीम करें.
+- ऑडियो कॉन्टेंट का विश्लेषण करने, उसकी खास जानकारी पाने या उससे जुड़े सवाल पूछने के लिए, [ऑडियो को समझने की सुविधा](https://ai.google.dev/gemini-api/docs/audio?hl=hi) का इस्तेमाल करें.
+- [लिखे गए शब्दों को सुनने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi) का इस्तेमाल करके, टेक्स्ट से ऑडियो बनाने का तरीका जानें.
+- मॉडल की कीमत और टोकन की सीमाओं के बारे में जानने के लिए, [कीमत वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-3.5-transcribe) देखें.
+- मीडिया फ़ाइलों को अपलोड करने और मैनेज करने के बारे में ज़्यादा जानने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) गाइड देखें.
 
-Kirim masukan
+सुझाव भेजें
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Terakhir diperbarui pada 2026-09-24 UTC.
+आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
 
-Ada masukan untuk kami?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]

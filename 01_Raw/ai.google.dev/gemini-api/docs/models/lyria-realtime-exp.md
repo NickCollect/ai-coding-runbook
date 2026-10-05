@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=tr
-fetched_at: 2026-09-28T06:24:58.390216+00:00
-title: "Lyria RealTime deneysel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=hi
+fetched_at: 2026-10-05T06:43:38.849424+00:00
+title: "Lyria RealTime \u090f\u0915\u094d\u0938\u092a\u0947\u0930\u093f\u092e\u0947\u0902\u091f \u0915\u0947 \u0924\u094c\u0930 \u092a\u0930 \u0909\u092a\u0932\u092c\u094d\u0927 \u0939\u0948 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Lyria RealTime deneysel
+# Lyria RealTime एक्सपेरिमेंट के तौर पर उपलब्ध है
 
-Ses içeriği oluşturma ve dönüştürme konusunda yenilikçi özellikler sunan, yüksek kaliteli müzik sentezi için deneysel bir motor. Lyria RealTime; yapay zeka destekli şarkı yazma, benzersiz enstrümantal müzik üretme ve melodi ile ritim üzerinde derin kontrol gerektiren, vokal içermeyen yaratıcı ses iş akışları için en uygun seçenektir.
+यह एक्सपेरिमेंट के तौर पर उपलब्ध एक इंजन है. इसका इस्तेमाल, संगीत को बेहतर तरीके से सिंथेसाइज़ करने के लिए किया जाता है. इसमें ऑडियो कॉन्टेंट जनरेट करने और उसे बदलने के लिए नई सुविधाएं मिलती हैं. Lyria RealTime, एआई की मदद से गाना लिखने, यूनीक इंस्ट्रुमेंटल जनरेट करने, और क्रिएटिव ऑडियो वर्कफ़्लो के लिए सबसे अच्छा है. इसके लिए, धुन और लय पर पूरा कंट्रोल होना ज़रूरी है. इसमें वोकल नहीं होते.
 
-[Lyria RealTime'ı deneyin](https://deepmind.google/models/lyria/lyria-realtime/?hl=tr)
+[Lyria RealTime को आज़माएँ](https://deepmind.google/models/lyria/lyria-realtime/?hl=hi)
 
-## Belgeler
+## दस्तावेज़
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Anlık müzik üretimi](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr) sayfasını ziyaret edin.
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [रीयलटाइम में संगीत जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=hi) वाले पेज पर जाएं.
 
 ## lyria-realtime-exp
 
-| Mülk | Açıklama |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_cardModel kodu | **Gemini API**  `lyria-realtime-exp` |
-| saveDesteklenen veri türleri | **Giriş**  Metin (Ağırlıklı istemler)  **Çıkış**  Ses (Raw 16 bit PCM) |
-| token\_autoYayın sınırları | **Örnekleme hızı**  48kHz (Stereo)  **Gecikmeyi kontrol etme**  Maksimum 2 saniye |
-| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Deneysel: `lyria-realtime-exp` |
-| calendar\_monthSon güncelleme | Mayıs 2025 |
+| id\_cardमॉडल कोड | **Gemini API**  `lyria-realtime-exp` |
+| saveइस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट (वज़न वाले प्रॉम्प्ट)  **आउटपुट**  ऑडियो (रॉ 16-बिट पीसीएम) |
+| token\_autoस्ट्रीमिंग की सीमाएं | **सैंपल लेने की दर**  48kHz (स्टीरियो)  **कंट्रोल के इंतज़ार का समय**  ज़्यादा से ज़्यादा दो सेकंड |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - एक्सपेरिमेंट के तौर पर उपलब्ध: `lyria-realtime-exp` |
+| calendar\_monthनया अपडेट | मई 2025 |
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

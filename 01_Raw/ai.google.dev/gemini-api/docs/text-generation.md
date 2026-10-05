@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=th
-fetched_at: 2026-09-28T06:28:40.281415+00:00
-title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ko
+fetched_at: 2026-10-05T06:29:58.244027+00:00
+title: "\ud14d\uc2a4\ud2b8 \uc0dd\uc131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-ส่งความคิดเห็น
+의견 보내기
 
-# การสร้างข้อความ
+# 텍스트 생성
 
-Gemini API สามารถสร้างเอาต์พุตข้อความจากอินพุตข้อความ รูปภาพ วิดีโอ และเสียง
+Gemini API는 텍스트, 이미지, 동영상, 오디오 입력에서 텍스트 출력을 생성할 수 있습니다.
 
-ตัวอย่างพื้นฐานมีดังนี้
+다음은 기본 예입니다.
 
 ### Python
 
@@ -36,7 +36,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -54,7 +54,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -128,22 +128,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Google GenAI SDK มีพร็อพเพอร์ตี้ความสะดวกโดยตรงในออบเจ็กต์ `Interaction` ที่ส่งกลับมาเพื่อเข้าถึงการตอบกลับของโมเดล
+Google 생성형 AI SDK는 모델의 대답에 액세스하기 위해 반환된 `Interaction` 객체에 직접 편의 속성을 제공합니다.
 
-ตัวช่วยที่พบบ่อยที่สุดคือ **`interaction.output_text`** (String) ซึ่งจะแสดงผล
-บล็อกข้อความสุดท้ายในคำตอบของโมเดล หากคำตอบแยก
-เป็นหลาย`TextContent`บล็อกที่ต่อเนื่องกัน ระบบจะรวมบล็อกเหล่านั้นโดยอัตโนมัติ
-โปรดทราบว่า `.output_text` ไม่รวมบล็อกข้อความก่อนหน้าซึ่งคั่นด้วยเนื้อหาที่ไม่ใช่ข้อความ (เช่น ความคิด รูปภาพ เสียง หรือการเรียกใช้เครื่องมือ) สำหรับคำตอบแบบมัลติโมดัลที่ซับซ้อน
-หรือสลับกัน คุณต้องวนซ้ำผ่าน `steps`
-ด้วยตนเองแทน ดูข้อมูลเพิ่มเติมเกี่ยวกับพร็อพเพอร์ตี้ความสะดวกของสื่ออื่นๆ ได้ที่[ภาพรวมของการโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions?hl=th#convenience-properties)
+가장 일반적인 도우미는 **`interaction.output_text`** (문자열)로, 모델의 대답에서 마지막 텍스트 블록을 반환합니다. 대답이 연속된 여러 `TextContent` 블록으로 분할된 경우 자동으로 결합됩니다.
+`.output_text`에는 텍스트가 아닌 콘텐츠 (예: 생각, 이미지, 오디오, 도구 호출)로 구분된 이전 텍스트 블록이 포함되지 않습니다. 복잡하거나 인터리브된 멀티모달 대답의 경우 대신 `steps`를 수동으로 반복해야 합니다. 기타 미디어 편의성 속성에 대해 자세히 알아보려면 [상호작용 개요](https://ai.google.dev/gemini-api/docs/interactions?hl=ko#convenience-properties)를 참고하세요.
 
-## การคิดด้วย Gemini
+## Gemini로 생각하기
 
-โมเดล Gemini มักจะ["คิด"](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
-โดยค่าเริ่มต้น ซึ่งช่วยให้โมเดลใช้เหตุผลก่อนที่จะตอบคำขอได้
+Gemini 모델은 기본적으로 ['사고'](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)가 사용 설정되어 있는 경우가 많으며, 이를 통해 모델은 요청에 대답하기 전에 추론할 수 있습니다.
 
-แต่ละโมเดลรองรับการกำหนดค่าการคิดที่แตกต่างกัน ซึ่งช่วยให้คุณควบคุม
-ต้นทุน เวลาในการตอบสนอง และความอัจฉริยะได้ ดูรายละเอียดเพิ่มเติมได้ที่[คู่มือการคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th#set-budget)
+각 모델은 다양한 사고 구성을 지원하므로 비용, 지연 시간, 인텔리전스를 제어할 수 있습니다. 자세한 내용은 [생각 가이드](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#set-budget)를 참고하세요.
 
 ### Python
 
@@ -162,7 +156,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -183,7 +177,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -266,9 +260,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## วิธีการของระบบและการกำหนดค่าอื่นๆ
+## 시스템 요청 사항 및 기타 구성
 
-คุณสามารถกำหนดลักษณะการทำงานของโมเดล Gemini ได้ด้วยคำสั่งของระบบ ส่งพารามิเตอร์ `system_instruction` เพื่อกำหนดค่าลักษณะการทำงานของโมเดล
+시스템 요청 사항을 사용하여 Gemini 모델의 동작을 안내할 수 있습니다. `system_instruction` 매개변수를 전달하여 모델의 동작을 구성합니다.
 
 ### Python
 
@@ -286,7 +280,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -305,7 +299,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -382,8 +376,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-นอกจากนี้ คุณยังลบล้างพารามิเตอร์การสร้างเริ่มต้น เช่น
-อุณหภูมิ โดยใช้`generation_config`พารามิเตอร์ได้ด้วย
+`generation_config` 매개변수를 사용하여 온도와 같은 기본 생성 매개변수를 재정의할 수도 있습니다.
 
 ### Python
 
@@ -402,7 +395,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -423,7 +416,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -505,12 +498,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ดูรายการพารามิเตอร์ที่กำหนดค่าได้ทั้งหมดและคำอธิบายได้ที่[ข้อมูลอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th)
+구성 가능한 매개변수와 설명의 전체 목록은 [Interactions API 참조](https://ai.google.dev/api/interactions-api?hl=ko)를 참고하세요.
 
-## อินพุตหลายรูปแบบ
+## 멀티모달 입력
 
-Gemini API รองรับอินพุตหลายรูปแบบ ซึ่งช่วยให้คุณรวมข้อความกับ
-ไฟล์สื่อได้ ตัวอย่างต่อไปนี้แสดงการระบุรูปภาพ
+Gemini API는 멀티모달 입력을 지원하므로 텍스트와 미디어 파일을 결합할 수 있습니다. 다음 예에서는 이미지를 제공하는 방법을 보여줍니다.
 
 ### Python
 
@@ -535,7 +527,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -565,7 +557,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -682,19 +674,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ดูวิธีการอื่นๆ ในการระบุรูปภาพและการประมวลผลรูปภาพขั้นสูงเพิ่มเติมได้ที่[คู่มือการทำความเข้าใจรูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th)
-นอกจากนี้ API ยังรองรับอินพุตและทำความเข้าใจ[เอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th) [วิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th) และ
-[เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th)ด้วย
+이미지를 제공하는 다른 방법과 고급 이미지 처리에 관한 내용은 [이미지 이해 가이드](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko)를 참고하세요.
+API는 [문서](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko), [동영상](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko), [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko) 입력 및 이해도 지원합니다.
 
-## การสตรีมคำตอบ
+## 스트리밍 응답
 
-โดยค่าเริ่มต้น โมเดลจะแสดงคำตอบหลังจากกระบวนการสร้างทั้งหมดเสร็จสมบูรณ์แล้วเท่านั้น
+기본적으로 모델은 전체 생성 프로세스가 완료된 후에만 대답을 반환합니다.
 
-หากต้องการให้การโต้ตอบราบรื่นยิ่งขึ้น ให้ใช้การสตรีมเพื่อจัดการก้อนคำตอบ
-ขณะที่ระบบสร้างคำตอบ ดูคำแนะนำแบบละเอียดเกี่ยวกับประเภทเหตุการณ์
-การสตรีมด้วยเครื่องมือ การคิด เอเจนต์ และการสร้างรูปภาพได้ที่
-คำแนะนำ[การโต้ตอบผ่านการสตรีม](https://ai.google.dev/gemini-api/docs/streaming?hl=th)
-โดยเฉพาะ
+더 원활한 상호작용을 위해 스트리밍을 사용하여 응답 청크가 생성될 때 이를 처리하세요. 이벤트 유형, 도구를 사용한 스트리밍, 사고, 에이전트, 이미지 생성을 다루는 포괄적인 가이드는 전용 [스트리밍 상호작용](https://ai.google.dev/gemini-api/docs/streaming?hl=ko) 가이드를 참고하세요.
 
 ### Python
 
@@ -714,7 +701,7 @@ for event in stream:
             print(event.delta.text, end="")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -740,7 +727,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -844,10 +831,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## การสนทนาไปมา
+## 멀티턴 대화
 
-Interactions API รองรับการสนทนาไปมาโดยการเชื่อมโยงการโต้ตอบ เข้าด้วยกันโดยใช้ `previous_interaction_id` แต่ละรอบคือการโต้ตอบแยกกัน
-และ API จะจัดการประวัติการสนทนาโดยอัตโนมัติ
+Interactions API는 `previous_interaction_id`를 사용하여 상호작용을 연결하여 멀티턴 대화를 지원합니다. 각 턴은 별도의 상호작용이며 API는 자동으로 대화 기록을 관리합니다.
 
 ### Python
 
@@ -870,7 +856,7 @@ interaction2 = client.interactions.create(
 print(interaction2.output_text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -895,7 +881,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1005,7 +991,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-นอกจากนี้ คุณยังใช้การสตรีมสำหรับการสนทนาไปมาได้ด้วยการรวม `previous_interaction_id` เข้ากับวิธีการสตรีม
+스트리밍은 `previous_interaction_id`을 스트리밍 메서드와 결합하여 멀티턴 대화에도 사용할 수 있습니다.
 
 ### Python
 
@@ -1032,7 +1018,7 @@ for event in stream:
             print(event.delta.text, end="")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1064,7 +1050,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1201,14 +1187,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## การสนทนาแบบไม่เก็บสถานะ
+## 스테이트리스 대화
 
-โดยค่าเริ่มต้น Interactions API จะจัดการสถานะการสนทนาฝั่งเซิร์ฟเวอร์เมื่อคุณใช้ `previous_interaction_id` อย่างไรก็ตาม คุณยังสามารถดำเนินการในโหมดแบบไม่เก็บสถานะได้ด้วยการจัดการประวัติการสนทนาด้วยตนเองในฝั่งไคลเอ็นต์
+기본적으로 `previous_interaction_id`를 사용하면 Interactions API가 대화 상태를 서버 측에서 관리합니다. 하지만 클라이언트 측에서 직접 대화 기록을 관리하여 상태 비저장 모드로 작동할 수도 있습니다.
 
-วิธีใช้โหมดไม่เก็บสถานะ
-1. ตั้งค่า `store=false` ในคำขอเพื่อเลือกไม่ใช้พื้นที่เก็บข้อมูลฝั่งเซิร์ฟเวอร์
-2. เก็บประวัติการสนทนาเป็นอาร์เรย์ของ**ขั้นตอน**ในฝั่งไคลเอ็นต์
-3. ในคำขอต่อๆ ไป ให้ส่งขั้นตอนที่สะสมไว้ในช่อง `input` และต่อท้ายคำพูดใหม่เป็นขั้นตอน `user_input`
+스테이트리스 모드를 사용하려면 다음 단계를 따르세요.
+1. 서버 측 스토리지를 선택 해제하려면 요청에서 `store=false`를 설정하세요.
+2. 클라이언트 측에서 대화 기록을 **단계** 배열로 유지합니다.
+3. 후속 요청에서는 누적된 단계를 `input` 필드에 전달하고 새 턴을 `user_input` 단계로 추가합니다.
 
 ### Python
 
@@ -1247,7 +1233,7 @@ interaction2 = client.interactions.create(
 print("Response 2:", interaction2.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1287,7 +1273,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -1443,27 +1429,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## เคล็ดลับการเขียนพรอมต์
+## 프롬프트 작성 팁
 
-โปรดดู[คู่มือการทำวิศวกรรมพรอมต์](https://ai.google.dev/gemini/docs/prompting-strategies?hl=th)เพื่อดูคำแนะนำในการใช้ประโยชน์จาก Gemini ให้ได้มากที่สุด
+Gemini를 최대한 활용하는 방법에 관한 제안은 [프롬프트 엔지니어링 가이드](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ko)를 참고하세요.
 
-## ขั้นตอนถัดไป
+## 다음 단계
 
-- ลองใช้ [Gemini ใน Google AI Studio](https://aistudio.google.com?hl=th)
-- ทดลองใช้[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)สำหรับ
-  การตอบกลับที่คล้ายกับ JSON
-- สำรวจความสามารถในการทำความเข้าใจ[รูปภาพ](https://ai.google.dev/gemini-api/docs/image-understanding?hl=th)
-  [วิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th)
-  [เสียง](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ
-  [เอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)ของ Gemini
-- ดูข้อมูลเกี่ยวกับ[กลยุทธ์การแจ้งไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide)แบบมัลติโมดัล
+- [Google AI Studio에서 Gemini](https://aistudio.google.com?hl=ko)를 사용해 보세요.
+- JSON과 유사한 대답을 위해 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)을 실험해 보세요.
+- Gemini의 [이미지](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko), [동영상](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko), [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko), [문서](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko) 이해 기능을 살펴보세요.
+- 멀티모달 [파일 프롬프팅 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide)에 대해 알아봅니다.
 
-ส่งความคิดเห็น
+의견 보내기
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+최종 업데이트: 2026-09-24(UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+의견을 전달하고 싶나요?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-24(UTC)"],[],[]]

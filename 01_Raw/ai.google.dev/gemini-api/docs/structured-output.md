@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=he
-fetched_at: 2026-09-28T06:28:24.055501+00:00
-title: "\u05e4\u05dc\u05d8\u05d9\u05dd \u05de\u05d5\u05d1\u05b0\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ja
+fetched_at: 2026-10-05T06:42:20.424449+00:00
+title: "\u69cb\u9020\u5316\u51fa\u529b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-שליחת משוב
+フィードバックを送信
 
-# פלטים מובְנים
+# 構造化出力
 
-אתם יכולים להגדיר את מודלי Gemini כך שיפיקו תשובות לפי סכימת JSON שסיפקתם. כך אפשר להבטיח תוצאות צפויות ובטוחות מבחינת סוג הנתונים, ולפשט את תהליך החילוץ של נתונים מובנים מטקסט לא מובנה.
+指定された JSON スキーマに準拠したレスポンスを生成するように Gemini モデルを構成できます。これにより、予測可能で型安全な結果が保証され、非構造化テキストから構造化データを抽出するプロセスが簡素化されます。
 
-שימוש בפלט מובנה מתאים במיוחד למקרים הבאים:
+構造化出力の使用は、次のような場合に最適です。
 
-- **חילוץ נתונים:** חילוץ מידע ספציפי כמו שמות ותאריכים מטקסט.
-- **סיווג מובנה:** סיווג טקסט לקטגוריות מוגדרות מראש.
-- **תהליכי עבודה מבוססי-סוכן:** יצירת קלט מובנה לכלים או לממשקי API.
+- **データ抽出:** テキストから名前や日付などの特定の情報を抽出します。
+- **構造化分類:** テキストを事前定義されたカテゴリに分類します。
+- **Agentic ワークフロー:** ツールまたは API の構造化された入力を生成します。
 
-בנוסף לתמיכה בסכימת JSON ב-API בארכיטקטורת REST, ערכות ה-SDK של Google GenAI מאפשרות להגדיר סכימות באמצעות [Pydantic](https://docs.pydantic.dev/latest/) (Python) ו-[Zod](https://zod.dev/) (JavaScript).
+REST API での JSON スキーマのサポートに加えて、Google GenAI SDK では、[Pydantic](https://docs.pydantic.dev/latest/)（Python）と [Zod](https://zod.dev/)（JavaScript）を使用してスキーマを定義できます。
 
-## דוגמאות לפלט מובנה
+## 構造化された出力の例
 
-### חילוץ מתכונים
+### レシピ エクストラクタ
 
-בדוגמה הזו מוסבר איך לחלץ נתונים מובְנים מטקסט באמצעות סוגים בסיסיים של סכימת JSON, כמו `object`, `array`, `string` ו-`integer`.
+この例では、`object`、`array`、`string`、`integer` などの基本的な JSON スキーマ型を使用して、テキストから構造化データを抽出する方法を示します。
 
 ### Python
 
@@ -390,7 +390,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**דוגמה לתשובה:**
+**回答の例:**
 
 ```
 {
@@ -418,9 +418,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### ניהול תוכן
+### コンテンツの管理
 
-בדוגמה הזו מוצגות התכונות `anyOf` לסכימות מותנות ו-`enum` לסיווג, שמאפשרות לשנות את מבנה הפלט בהתאם לתוכן.
+この例では、条件付きスキーマに `anyOf`、分類に `enum` を使用して、コンテンツに基づいて出力構造を変化させています。
 
 ### Python
 
@@ -751,7 +751,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**דוגמה לתשובה:**
+**レスポンスの例:**
 
 ```
 {
@@ -762,9 +762,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### מבנים רקורסיביים
+### 再帰的構造
 
-בדוגמה הזו אפשר לראות איך מגדירים סכימה רקורסיבית כמו תרשים ארגוני.
+この例は、組織図などの再帰的スキーマを定義する方法を示しています。
 
 ### Python
 
@@ -1016,7 +1016,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**דוגמה לתשובה:**
+**レスポンスの例:**
 
 ```
 {
@@ -1043,9 +1043,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## תוצאות סטרימינג
+## ストリーミング結果
 
-אפשר להזרים פלט מובנה, וכך להתחיל לעבד את התשובה בזמן שהיא נוצרת. החלקים שמועברים בסטרימינג הם מחרוזות JSON חלקיות תקינות שאפשר לשרשר כדי ליצור את אובייקט ה-JSON הסופי.
+構造化された出力をストリーミングできるため、レスポンスの生成中に処理を開始できます。ストリーミングされたチャンクは、最終的な JSON オブジェクトを形成するために連結できる有効な部分 JSON 文字列です。
 
 ### Python
 
@@ -1288,9 +1288,9 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## פלט מובנה באמצעות כלים
+## ツールを使用した構造化出力
 
-‫Gemini 3 מאפשר לכם לשלב פלט מובנה עם כלים מובנים, כולל [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he),‏ [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he),‏ [הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he),‏ [File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=he#structured-output) ו-[קריאה להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
+Gemini 3 では、構造化出力を [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)、[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)、[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)、[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja#structured-output)、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)などの組み込みツールと組み合わせることができます。
 
 ### Python
 
@@ -1522,79 +1522,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## תמיכה בסכימת JSON
+## JSON スキーマのサポート
 
-כדי ליצור אובייקט JSON, מגדירים את `response_format` עם אובייקט (או מערך שמכיל אובייקט) מהסוג `text` ומגדירים את `mime_type` שלו ל-`application/json`. צריך לספק את הסכימה בשדה `schema`.
+JSON オブジェクトを生成するには、`response_format` を `text` 型のオブジェクト（またはオブジェクトを含む配列）で構成し、その `mime_type` を `application/json` に設定します。スキーマは `schema` フィールドで指定する必要があります。
 
-מצב הפלט המובנה של Gemini תומך בחלק ממפרט [JSON Schema](https://json-schema.org/).
+Gemini の構造化出力モードは、[JSON スキーマ](https://json-schema.org/)仕様のサブセットをサポートしています。
 
-הערכים הבאים של `type` נתמכים:
+次の `type` 値がサポートされます。
 
-- ‫**`string`**: לטקסט.
-- ‫**`number`**: למספרים בשיטת נקודה צפה.
-- ‫**`integer`**: למספרים שלמים.
-- ‫**`boolean`**: לערכים true או false.
-- ‫**`object`**: לנתונים מובְנים עם צמדי מפתח/ערך.
-- ‫**`array`**: לרשימות של פריטים.
-- ‫**`null`**: כדי לאפשר שמאפיין יהיה null, צריך לכלול את `"null"` במערך הסוגים (לדוגמה, `{"type": ["string", "null"]}`).
+- **`string`**: テキストの場合。
+- **`number`**: 浮動小数点数。
+- **`integer`**: 整数の場合。
+- **`boolean`**: true または false の値。
+- **`object`**: Key-Value ペアを含む構造化データの場合。
+- **`array`**: 項目のリストの場合。
+- **`null`**: プロパティを null にするには、型配列に `"null"` を含めます（例: `{"type": ["string", "null"]}`）。
 
-מאפייני התיאור האלה עוזרים להנחות את המודל:
+これらの説明プロパティは、モデルのガイドに役立ちます。
 
-- ‫**`title`**: תיאור קצר של מאפיין.
-- **`description`**: תיאור ארוך ומפורט יותר של נכס.
+- **`title`**: プロパティの簡単な説明。
+- **`description`**: プロパティのより詳細な説明。
 
-### מאפיינים שספציפיים לסוג
+### タイプ固有のプロパティ
 
-**לערכים של `object`:**
+**`object` 値の場合:**
 
-- ‫**`properties`**: אובייקט שבו כל מפתח הוא שם מאפיין וכל ערך הוא סכימה של המאפיין הזה.
-- ‫**`required`**: מערך של מחרוזות, שבו מפורטות התכונות שהן חובה.
-- ‫**`additionalProperties`**: קובע אם מותר להשתמש בנכסים שלא מופיעים ב-`properties`. יכול להיות ערך בוליאני או סכמה.
+- **`properties`**: 各キーがプロパティ名で、各値がそのプロパティのスキーマであるオブジェクト。
+- **`required`**: 必須のプロパティを列挙した文字列の配列。
+- **`additionalProperties`**: `properties` にリストされていないプロパティを許可するかどうかを制御します。ブール値またはスキーマを指定できます。
 
-**לערכים של `string`:**
+**`string` 値の場合:**
 
-- ‫**`enum`**: רשימה של קבוצה ספציפית של מחרוזות אפשריות למשימות סיווג.
-- ‫**`format`**: מציין תחביר למחרוזת, כמו `date-time`, ‏ `date`, ‏ `time`.
+- **`enum`**: 分類タスクで使用できる文字列の特定のセットを一覧表示します。
+- **`format`**: 文字列の構文（`date-time`、`date`、`time` など）を指定します。
 
-**לערכים `number` ו-`integer`:**
+**`number` と `integer` の値の場合:**
 
-- ‫**`enum`**: רשימה של קבוצה ספציפית של ערכים מספריים אפשריים.
-- ‫**`minimum`**: ערך המינימום כולל.
-- ‫**`maximum`**: הערך המקסימלי כולל.
+- **`enum`**: 可能性のある数値の特定のセットを一覧表示します。
+- **`minimum`**: 最小値（包括的）。
+- **`maximum`**: 最大値（包括的）。
 
-**לערכים של `array`:**
+**`array` 値の場合:**
 
-- ‫**`items`**: מגדיר את הסכימה של כל הפריטים במערך.
-- ‫**`prefixItems`**: מגדיר רשימה של סכימות עבור הפריטים הראשונים, ומאפשר מבנים דמויי-tuple.
-- ‫**`minItems`**: המספר המינימלי של פריטים במערך.
-- ‫**`maxItems`**: המספר המקסימלי של פריטים במערך.
+- **`items`**: 配列内のすべての項目のスキーマを定義します。
+- **`prefixItems`**: 最初の N 個のアイテムのスキーマのリストを定義し、タプルのような構造を許可します。
+- **`minItems`**: 配列内のアイテムの最小数。
+- **`maxItems`**: 配列内のアイテムの最大数。
 
-## פלט מובנה לעומת קריאה להפעלת פונקציות
+## 構造化出力と関数呼び出し
 
-| תכונה | תרחיש ראשי לדוגמה |
+| 機能 | 主なユースケース |
 | --- | --- |
-| **תשובות מובנות** | **עיצוב התשובה הסופית.** משתמשים בה כשרוצים ש*התשובה* של המודל תהיה בפורמט מסוים. |
-| **בקשה להפעלת פונקציה** | **ביצוע פעולות במהלך שיחה** משתמשים בה כשצריך שהמודל *ישאל אתכם* לבצע משימה לפני שהוא מספק תשובה סופית. |
+| **構造化出力** | **最終的な回答のフォーマット設定。**モデルの*回答*を特定の形式で取得する場合に使用します。 |
+| **関数呼び出し** | **会話中にアクションを実行する。**最終的な回答を提供する前に、モデルがタスクの実行を*ユーザーに求める*必要がある場合に使用します。 |
 
-## שיטות מומלצות
+## ベスト プラクティス
 
-- **תיאורים ברורים:** השתמשו בשדה `description` כדי להנחות את המודל.
-- **הקלדה חזקה:** שימוש בסוגים ספציפיים (`integer`, ‏`string`, ‏`enum`).
-- **הנדסת פרומפטים:** חשוב לציין בבירור מה רוצים שהמודל יעשה.
-- **אימות:** למרות שהפלט הוא JSON עם תחביר תקין, תמיד צריך לאמת את הערכים באפליקציה.
-- **טיפול בשגיאות:** הטמיעו טיפול בשגיאות כדי לטפל בפלט שעומד בדרישות הסכימה אבל לא נכון מבחינה סמנטית.
+- **明確な説明:** `description` フィールドを使用してモデルをガイドします。
+- **強い型付け:** 特定の型（`integer`、`string`、`enum`）を使用します。
+- **プロンプト エンジニアリング:** モデルに実行してほしいことを明確に記述します。
+- **検証:** 出力は構文的に正しい JSON ですが、アプリケーションで常に値を検証してください。
+- **エラー処理:** スキーマに準拠しているが意味的に正しくない出力に対して、堅牢なエラー処理を実装します。
 
-## מגבלות
+## 制限事項
 
-- **קבוצת משנה של סכימה:** לא כל התכונות של סכימת JSON נתמכות.
-- **מורכבות הסכימה:** יכול להיות שסכימות גדולות מאוד או כאלה עם קינון עמוק יידחו.
+- **スキーマのサブセット:** JSON スキーマのすべての機能がサポートされているわけではありません。
+- **スキーマの複雑さ:** 非常に大きいスキーマや深くネストされたスキーマは拒否されることがあります。
 
-שליחת משוב
+フィードバックを送信
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-עדכון אחרון: 2026-09-24 (שעון UTC).
+最終更新日 2026-09-24 UTC。
 
-רוצה לתת לנו משוב?
+ご意見をお聞かせください
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

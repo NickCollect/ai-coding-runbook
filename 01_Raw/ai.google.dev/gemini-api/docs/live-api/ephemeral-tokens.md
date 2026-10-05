@@ -1,47 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar
-fetched_at: 2026-09-28T06:11:02.818070+00:00
-title: "\u0627\u0644\u0631\u0645\u0648\u0632 \u0627\u0644\u0645\u0645\u064a\u0651\u0632\u0629 \u0627\u0644\u0645\u0624\u0642\u062a\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=he
+fetched_at: 2026-10-05T06:27:48.917403+00:00
+title: "\u05d0\u05e1\u05d9\u05de\u05d5\u05e0\u05d9\u05dd \u05d6\u05de\u05e0\u05d9\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-إرسال ملاحظات
+שליחת משוב
 
-# الرموز المميّزة المؤقتة
+# אסימונים זמניים
 
-الرموز المميزة المؤقتة هي رموز مصادقة قصيرة الأجل للوصول إلى Gemini
-API من خلال [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). تم تصميمها لتعزيز الأمان عند
-الاتصال مباشرةً من جهاز المستخدم بواجهة برمجة التطبيقات (تنفيذ من
-[العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach)
-). على غرار مفاتيح واجهة برمجة التطبيقات العادية، يمكن استخراج الرموز المميزة المؤقتة من التطبيقات من جهة العميل، مثل متصفّحات الويب أو تطبيقات الأجهزة الجوّالة. ولكن نظرًا إلى أنّ الرموز المميزة المؤقتة تنتهي صلاحيتها بسرعة ويمكن تقييدها، فإنّها تقلّل بشكلٍ كبير من المخاطر الأمنية في بيئة التشغيل الفعلي. عليك استخدامها عند الوصول إلى Live API مباشرةً من التطبيقات من جهة العميل لتعزيز أمان مفتاح واجهة برمجة التطبيقات.
+אסימונים זמניים הם אסימוני אימות לטווח קצר לגישה ל-Gemini API דרך [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). הם נועדו לשפר את האבטחה כשמתחברים ישירות ממכשיר של משתמש ל-API (הטמעה של [לקוח לשרת](https://ai.google.dev/gemini-api/docs/live?hl=he#implementation-approach)). בדומה למפתחות API רגילים, אפשר לחלץ טוקנים זמניים מאפליקציות בצד הלקוח, כמו דפדפני אינטרנט או אפליקציות לנייד. אבל מכיוון שאסימונים זמניים פוקעים במהירות ואפשר להגביל אותם, הם מפחיתים באופן משמעותי את סיכוני האבטחה בסביבת ייצור. מומלץ להשתמש בהם כשניגשים ישירות ל-Live API מאפליקציות בצד הלקוח, כדי לשפר את האבטחה של מפתחות ה-API.
 
-## آلية عمل الرموز المميزة المؤقتة
+## איך פועלים טוקנים זמניים
 
-في ما يلي آلية عمل الرموز المميزة المؤقتة على مستوى عالٍ:
+כך פועלים טוקנים זמניים ברמה גבוהה:
 
-1. يتم التحقّق من هوية العميل (مثل تطبيق الويب) باستخدام الخلفية.
-2. تطلب الخلفية رمزًا مميزًا مؤقتًا من خدمة توفير Gemini API.
-3. يصدر Gemini API رمزًا مميزًا قصير الأجل.
-4. ترسل الخلفية الرمز المميز إلى العميل من أجل اتصالات WebSocket بـ Live API. يمكنك إجراء ذلك من خلال استبدال مفتاح واجهة برمجة التطبيقات برمز مميز مؤقت.
-5. يستخدم العميل بعد ذلك الرمز المميز كما لو كان مفتاح واجهة برمجة تطبيقات.
+1. הלקוח (לדוגמה, אפליקציית אינטרנט) עובר אימות עם ה-Backend.
+2. הבקשות מהקצה העורפי שולחות טוקן זמני משירות ההקצאה של Gemini API.
+3. ‫Gemini API מנפיק אסימון לטווח קצר.
+4. הקצה העורפי שולח את האסימון ללקוח לחיבורי WebSocket ל-Live
+   API. כדי לעשות זאת, צריך להחליף את מפתח ה-API באסימון זמני.
+5. לאחר מכן, הלקוח משתמש באסימון כאילו היה מפתח API.
 
-![نظرة عامة على الرموز المميزة المؤقتة](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=ar)
+![סקירה כללית על טוקנים זמניים](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=he)
 
-يؤدي ذلك إلى تعزيز الأمان لأنّه حتى في حال استخراج الرمز المميز، يكون قصير الأجل، على عكس مفتاح واجهة برمجة التطبيقات الطويل الأجل الذي يتم نشره من جهة العميل. بما أنّ العميل يرسل البيانات مباشرةً إلى Gemini، يؤدي ذلك أيضًا إلى تحسين وقت الاستجابة وتجنُّب حاجة الخلفيات إلى توجيه بيانات الوقت الفعلي.
+השימוש באסימון משפר את האבטחה, כי גם אם הוא נשלף, הוא תקף לזמן קצר, בניגוד למפתח API תקף לזמן ארוך שמוטמע בצד הלקוח. מכיוון שהלקוח שולח נתונים ישירות ל-Gemini, זה גם משפר את זמן האחזור ומונע את הצורך בשרתי קצה עורפיים (back-end) שיפעלו כשרתי proxy לנתונים בזמן אמת.
 
-## إنشاء رمز مميز مؤقت
+## יצירת טוקן זמני
 
-في ما يلي مثال مبسط على كيفية الحصول على رمز مميز مؤقت من Gemini.
-بشكلٍ تلقائي، سيكون لديك دقيقة واحدة لبدء جلسات Live API جديدة باستخدام الرمز المميز من هذا الطلب (`newSessionExpireTime`) و30 دقيقة لإرسال الرسائل عبر هذا الاتصال (`expireTime`).
+הנה דוגמה פשוטה שמראה איך לקבל מ-Gemini טוקן זמני.
+כברירת מחדל, יש לכם דקה אחת להתחיל סשנים חדשים של Live API באמצעות האסימון מהבקשה הזו (`newSessionExpireTime`), ו-30 דקות לשלוח הודעות דרך החיבור הזה (`expireTime`).
 
 ### Python
 
@@ -95,13 +92,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-للاطّلاع على قيود قيمة `expireTime` والإعدادات التلقائية ومواصفات الحقول الأخرى، يُرجى مراجعة مرجع واجهة برمجة التطبيقات
-.
-ضمن الإطار الزمني `expireTime`، ستحتاج إلى
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=ar#session-resumption) لإعادة ربط المكالمة كل 10 دقائق (يمكن إجراء ذلك باستخدام الرمز المميز نفسه حتى
-إذا كانت `uses: 1`).
+ב[הפניית ה-API](https://ai.google.dev/api/live?hl=he#ephemeral-auth-tokens) מפורטים אילוצים, ערכי ברירת מחדל ומפרטים אחרים של השדה `expireTime`.
+במהלך `expireTime` הזמן הזה, תצטרכו [`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=he#session-resumption) להתחבר מחדש לשיחה כל 10 דקות (אפשר לעשות את זה עם אותו אסימון גם אם `uses: 1`).
 
-من الممكن أيضًا ربط رمز مميز مؤقت بمجموعة من الإعدادات. قد يكون ذلك مفيدًا لزيادة تحسين أمان تطبيقك والاحتفاظ بتعليمات النظام من جهة الخادم.
+אפשר גם לנעול טוקן זמני לקבוצה של הגדרות. האפשרות הזו יכולה להיות שימושית לשיפור נוסף של האבטחה באפליקציה ולשמירה על הוראות המערכת בצד השרת.
 
 ### Python
 
@@ -170,15 +164,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-يمكنك أيضًا ربط مجموعة فرعية من الحقول، يُرجى الاطّلاع على [مستندات حزمة تطوير البرامج (SDK)](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
-لمزيد من المعلومات.
+אפשר גם לנעול קבוצת משנה של שדות. מידע נוסף זמין ב[מסמכי התיעוד של ה-SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields).
 
-## الاتصال بـ Live API باستخدام رمز مميز مؤقت
+## התחברות ל-Live API באמצעות טוקן זמני
 
-بعد الحصول على رمز مميز مؤقت، يمكنك استخدامه كما لو كان مفتاح واجهة برمجة تطبيقات (ولكن تذكَّر أنّه لا يعمل إلا مع Live API ومع الإصدار `v1beta` من واجهة برمجة التطبيقات فقط).
+אחרי שמקבלים אסימון זמני, משתמשים בו כאילו היה מפתח API (אבל חשוב לזכור שהוא פועל רק עם ה-API הפעיל, ורק עם גרסה `v1beta` של ה-API).
 
-لا تكون الرموز المميزة المؤقتة مفيدة إلا عند نشر التطبيقات
-التي تتّبع نهج التنفيذ من [العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach).
+השימוש בטוקנים זמניים מוסיף ערך רק כשפורסים אפליקציות שפועלות לפי גישת [הטמעה מלקוח לשרת](https://ai.google.dev/gemini-api/docs/live?hl=he#implementation-approach).
 
 ### JavaScript
 
@@ -208,30 +200,29 @@ async function main() {
 main();
 ```
 
-يُرجى الاطّلاع على مقالة [البدء في استخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) لمزيد من الأمثلة.
+דוגמאות נוספות מופיעות במאמר [תחילת העבודה עם Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
 
-## أفضل الممارسات
+## שיטות מומלצות
 
-- اضبط مدة انتهاء صلاحية قصيرة باستخدام المَعلمة `expire_time`.
-- تنتهي صلاحية الرموز المميزة، ما يتطلب إعادة بدء عملية التوفير.
-- تحقَّق من المصادقة الآمنة للخلفية. لن تكون الرموز المميزة المؤقتة آمنة إلا بقدر أمان طريقة المصادقة في الخلفية.
-- بشكلٍ عام، تجنَّب استخدام الرموز المميزة المؤقتة للاتصالات من الخلفية إلى Gemini، لأنّ هذا المسار يُعتبر آمنًا عادةً.
+- מגדירים משך תפוגה קצר באמצעות הפרמטר `expire_time`.
+- התוקף של האסימונים פג, ולכן צריך להפעיל מחדש את תהליך ההקצאה.
+- אימות מאובטח של ה-Backend שלכם. האבטחה של טוקנים זמניים תהיה זהה לזו של שיטת האימות של ה-Backend.
+- בדרך כלל, מומלץ להימנע משימוש בטוקנים זמניים לחיבורים בין קצה העורפי ל-Gemini, כי הנתיב הזה נחשב בדרך כלל למאובטח.
 
-## القيود
+## מגבלות
 
-في الوقت الحالي، تتوافق الرموز المميزة المؤقتة مع [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) فقط.
+בשלב הזה, טוקנים זמניים תואמים רק ל-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
 
-## الخطوات التالية
+## המאמרים הבאים
 
-- يُرجى قراءة مرجع Live API [حول الرموز المميزة المؤقتة](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens)
-  لمزيد من المعلومات.
+- מידע נוסף על טוקנים זמניים זמין [במאמר בנושא Live API](https://ai.google.dev/api/live?hl=he#ephemeral-auth-tokens).
 
-إرسال ملاحظات
+שליחת משוב
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-تاريخ التعديل الأخير: 2026-09-17 (حسب التوقيت العالمي المتفَّق عليه)
+עדכון אחרון: 2026-09-17 (שעון UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+רוצה לתת לנו משוב?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-17 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-17 (שעון UTC)."],[],[]]

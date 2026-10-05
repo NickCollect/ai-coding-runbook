@@ -1,113 +1,143 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=fr
-fetched_at: 2026-09-28T06:31:57.134140+00:00
-title: "Consignes de s\u00e9curit\u00e9 et d'exactitude \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi
+fetched_at: 2026-10-05T06:41:51.575697+00:00
+title: "H\u01b0\u1edbng d\u1eabn v\u1ec1 \u0111\u1ed9 an to\u00e0n v\u00e0 t\u00ednh x\u00e1c th\u1ef1c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Envoyer des commentaires
+Gửi ý kiến phản hồi
 
-# Consignes de sécurité et d'exactitude
+# Hướng dẫn về độ an toàn và tính xác thực
 
-Les modèles d'intelligence artificielle générative sont des outils puissants, mais ils ont leurs limites. Leur polyvalence et leur applicabilité peuvent parfois entraîner des résultats inattendus, tels que des résultats inexacts, biaisés ou choquants. Le post-traitement et l'évaluation manuelle rigoureuse sont essentiels pour limiter le risque de préjudice lié à ces résultats.
+Các mô hình trí tuệ nhân tạo tạo sinh là những công cụ mạnh mẽ, nhưng vẫn tồn tại một số hạn chế. Tính linh hoạt và khả năng áp dụng của các mô hình này đôi khi có thể dẫn đến kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Việc xử lý hậu kỳ và đánh giá thủ công nghiêm ngặt là điều cần thiết để hạn chế nguy cơ gây hại từ những kết quả như vậy.
 
-Les modèles fournis par l'API Gemini peuvent être utilisés pour une grande variété d'applications d'IA générative et de traitement du langage naturel (TLN). L'utilisation de ces fonctions n'est disponible que via l'API Gemini ou l'application Web Google AI Studio. Votre utilisation de l'API Gemini est également soumise au [Règlement sur les utilisations interdites de l'IA générative](https://policies.google.com/terms/generative-ai/use-policy?hl=fr) et aux [Conditions d'utilisation de l'API Gemini](https://ai.google.dev/terms?hl=fr).
+Bạn có thể sử dụng các mô hình do Gemini API cung cấp cho nhiều ứng dụng AI tạo sinh và xử lý ngôn ngữ tự nhiên (NLP). Bạn chỉ có thể sử dụng các
+hàm này thông qua Gemini API hoặc ứng dụng web Google AI Studio. Việc bạn sử dụng Gemini API cũng phải tuân thủ [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh
+Policy](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) và các
+[điều khoản dịch vụ của Gemini API](https://ai.google.dev/terms?hl=vi).
 
-Les grands modèles de langage (LLM) sont très utiles, car ce sont des outils de création qui peuvent traiter de nombreuses tâches linguistiques différentes. Malheureusement, cela signifie également qu'ils peuvent générer des résultats inattendus, y compris des textes choquants, insensibles ou factuellement incorrects. De plus, la polyvalence incroyable de ces modèles rend difficile de prédire exactement les types de résultats indésirables qu'ils pourraient produire. Bien que l'API Gemini ait été conçue en tenant compte des [Principes de Google en matière d'IA](https://ai.google/principles/?hl=fr), il incombe aux développeurs d'appliquer ces modèles de manière responsable. Pour aider les développeurs à créer des applications sûres et responsables, l'API Gemini propose un filtrage de contenu intégré ainsi que des paramètres de sécurité ajustables selon quatre dimensions de préjudice. Pour en savoir plus, consultez le guide sur les [paramètres de sécurité](https://ai.google.dev/gemini-api/docs/safety-settings?hl=fr). Elle propose également l'ancrage avec la recherche Google pour améliorer la factualité, mais cette fonctionnalité peut être désactivée pour les développeurs dont les cas d'utilisation sont plus créatifs et ne visent pas à rechercher des informations.
+Một trong những yếu tố khiến các mô hình ngôn ngữ lớn (LLM) trở nên hữu ích là vì đây là những công cụ sáng tạo có thể giải quyết nhiều tác vụ ngôn ngữ khác nhau. Rất tiếc, điều này cũng có nghĩa là các mô hình ngôn ngữ lớn có thể tạo ra kết quả mà bạn không mong muốn, bao gồm cả văn bản phản cảm, vô tâm hoặc không chính xác về mặt thực tế.
+Hơn nữa, tính linh hoạt đáng kinh ngạc của các mô hình này cũng là yếu tố khiến bạn khó dự đoán chính xác loại kết quả không mong muốn mà các mô hình này có thể tạo ra. Mặc dù
+Gemini API được thiết kế dựa trên [các nguyên tắc AI
+của Google](https://ai.google/principles/?hl=vi), nhưng nhà phát triển phải có trách nhiệm
+áp dụng các mô hình này. Để hỗ trợ nhà phát triển tạo các ứng dụng an toàn và có trách nhiệm, Gemini API có một số tính năng lọc nội dung tích hợp cũng như các chế độ cài đặt an toàn có thể điều chỉnh trên 4 phương diện gây hại. Hãy tham khảo hướng dẫn về
+[chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi) để tìm hiểu thêm. API này cũng cung cấp tính năng Bám sát nguồn bằng Google Tìm kiếm để cải thiện tính chính xác về mặt thực tế, mặc dù tính năng này có thể bị tắt đối với những nhà phát triển có trường hợp sử dụng sáng tạo hơn và không tìm kiếm thông tin.
 
-Ce document vise à vous présenter certains risques de sécurité qui peuvent survenir lors de l'utilisation de LLM et à vous recommander les dernières consignes de conception et de développement en matière de sécurité. (Notez que les lois et règlements peuvent également imposer des restrictions, mais ces considérations ne sont pas abordées dans ce guide.)
+Tài liệu này nhằm giới thiệu cho bạn một số rủi ro về an toàn có thể phát sinh khi sử dụng LLM và đề xuất các phương pháp thiết kế và phát triển an toàn mới. (Xin lưu ý rằng luật và quy định cũng có thể áp đặt các hạn chế, nhưng những vấn đề này nằm ngoài phạm vi của hướng dẫn này.)
 
-Voici les étapes recommandées pour créer des applications avec des LLM :
+Bạn nên làm theo các bước sau khi xây dựng ứng dụng bằng LLM:
 
-- Comprendre les risques liés à la sécurité de votre application
-- Envisager des ajustements pour limiter les risques de sécurité
-- Effectuer des tests de sécurité adaptés à votre cas d'utilisation
-- Solliciter les commentaires des utilisateurs et surveiller l'utilisation
+- Tìm hiểu các rủi ro về an toàn của ứng dụng
+- Cân nhắc điều chỉnh để giảm thiểu rủi ro về an toàn
+- Thực hiện kiểm thử an toàn phù hợp với trường hợp sử dụng của bạn
+- Yêu cầu người dùng gửi ý kiến phản hồi và theo dõi mức sử dụng
 
-Les phases d'ajustement et de test doivent être itératives jusqu'à ce que vous atteigniez des performances adaptées à votre application.
+Bạn nên lặp lại các giai đoạn điều chỉnh và kiểm thử cho đến khi đạt được hiệu suất phù hợp với ứng dụng của mình.
 
-![Cycle d&#39;implémentation du modèle](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=fr)
+![Chu kỳ triển khai mô hình](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=vi)
 
-## Comprendre les risques liés à la sécurité de votre application
+## Tìm hiểu các rủi ro về an toàn của ứng dụng
 
-Dans ce contexte, la sécurité est définie comme la capacité d'un LLM à éviter de nuire à ses utilisateurs, par exemple en générant un langage toxique ou du contenu qui promeut des stéréotypes. Les modèles disponibles via l'API Gemini ont été conçus en tenant compte des [principes concernant l'IA de Google](https://ai.google/principles/?hl=fr). Votre utilisation de cette API est soumise au [Règlement sur les utilisations interdites de l'IA générative](https://policies.google.com/terms/generative-ai/use-policy?hl=fr). L'API fournit des filtres de sécurité intégrés pour aider à résoudre certains problèmes courants des modèles de langage, tels que le langage toxique et les discours incitant à la haine, et pour s'efforcer d'être inclusif et d'éviter les stéréotypes. Toutefois, chaque application peut présenter un ensemble de risques différent pour ses utilisateurs. En tant que propriétaire de l'application, vous êtes donc responsable de la connaissance de vos utilisateurs et des préjudices potentiels que votre application peut causer, et de vous assurer que votre application utilise les LLM de manière sûre et responsable.
+Trong bối cảnh này, an toàn được định nghĩa là khả năng của LLM trong việc tránh gây hại cho người dùng, chẳng hạn như bằng cách tạo ngôn ngữ độc hại hoặc nội dung thúc đẩy các khuôn mẫu. Các mô hình có sẵn thông qua Gemini API đã được thiết kế dựa trên [Nguyên tắc về trí tuệ nhân tạo của Google](https://ai.google/principles/?hl=vi) và việc bạn sử dụng các mô hình này phải tuân thủ [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh](https://policies.google.com/terms/generative-ai/use-policy?hl=vi). API này cung cấp các bộ lọc an toàn tích hợp để giúp giải quyết một số vấn đề thường gặp về mô hình ngôn ngữ, chẳng hạn như ngôn ngữ độc hại và lời nói hận thù, đồng thời nỗ lực hướng đến sự đa dạng và tránh các khuôn mẫu. Tuy nhiên, mỗi ứng dụng có thể gây ra một tập hợp rủi ro khác nhau cho người dùng. Vì vậy, với tư cách là chủ sở hữu ứng dụng, bạn có trách nhiệm biết rõ người dùng và những tác hại tiềm ẩn mà ứng dụng của bạn có thể gây ra, đồng thời đảm bảo rằng ứng dụng của bạn sử dụng LLM một cách an toàn và có trách nhiệm.
 
-Lors de cette évaluation, vous devez tenir compte de la probabilité qu'un préjudice se produise, déterminer sa gravité et définir des mesures d'atténuation. Par exemple, une application qui génère des essais basés sur des événements factuels devra faire plus attention à éviter les informations incorrectes qu'une application qui génère des histoires fictives à des fins de divertissement. Pour commencer à explorer les risques potentiels pour la sécurité, vous pouvez effectuer des recherches sur vos utilisateurs finaux et sur les autres personnes susceptibles d'être affectées par les résultats de votre application. Cela peut prendre de nombreuses formes, y compris la recherche d'études de pointe dans le domaine de votre application, l'observation de la façon dont les utilisateurs utilisent des applications similaires, ou la réalisation d'une étude utilisateur, d'une enquête ou d'entretiens informels avec des utilisateurs potentiels.
+Trong quá trình đánh giá này, bạn nên cân nhắc khả năng gây hại và xác định mức độ nghiêm trọng cũng như các bước giảm thiểu. Ví dụ: một ứng dụng tạo bài luận dựa trên các sự kiện thực tế sẽ cần phải cẩn thận hơn trong việc tránh thông tin sai lệch so với một ứng dụng tạo câu chuyện hư cấu để giải trí. Một cách hay để bắt đầu khám phá các rủi ro tiềm ẩn về an toàn là nghiên cứu người dùng cuối và những người khác có thể bị ảnh hưởng bởi kết quả của ứng dụng. Bạn có thể thực hiện việc này theo nhiều cách, bao gồm nghiên cứu các nghiên cứu hiện đại trong miền ứng dụng của bạn, quan sát cách mọi người sử dụng các ứng dụng tương tự hoặc chạy một nghiên cứu về người dùng, khảo sát hoặc tiến hành phỏng vấn không chính thức với người dùng tiềm năng.
 
-### Conseils avancés
+### Mẹo nâng cao
 
-- Parlez à un groupe diversifié d'utilisateurs potentiels de votre population cible au sujet de votre application et de son objectif prévu afin d'obtenir une perspective plus large sur les risques potentiels et d'ajuster les critères de diversité si nécessaire.
-- Le [cadre de gestion des risques liés à l'IA](https://www.nist.gov/itl/ai-risk-management-framework) publié par le National Institute of Standards and Technology (NIST), un organisme gouvernemental américain, fournit des conseils plus détaillés et des ressources d'apprentissage supplémentaires pour la gestion des risques liés à l'IA.
-- La publication de DeepMind sur les [risques éthiques et sociaux liés aux préjudices causés par les modèles de langage](https://arxiv.org/abs/2112.04359) décrit en détail les façons dont les applications de modèles de langage peuvent causer des préjudices.
+- Trao đổi với nhiều người dùng tiềm năng trong nhóm đối tượng mục tiêu về ứng dụng và mục đích dự kiến của ứng dụng để có cái nhìn rộng hơn về các rủi ro tiềm ẩn và điều chỉnh tiêu chí đa dạng khi cần.
+- Khung quản lý rủi ro về [AI](https://www.nist.gov/itl/ai-risk-management-framework)
+  do Viện Tiêu chuẩn và Công nghệ Quốc gia (NIST) của chính phủ Hoa Kỳ phát hành cung cấp hướng dẫn chi tiết hơn và các tài nguyên học tập bổ sung về quản lý rủi ro về AI.
+- Ấn phẩm của DeepMind về các
+  [rủi ro đạo đức và xã hội về tác hại từ các mô hình ngôn ngữ](https://arxiv.org/abs/2112.04359)
+  mô tả chi tiết những cách mà các ứng dụng mô hình ngôn ngữ
+  có thể gây hại.
 
-## Envisagez de faire des ajustements pour limiter les risques liés à la sécurité et à la factualité.
+## Cân nhắc điều chỉnh để giảm thiểu rủi ro về an toàn và tính chính xác về mặt thực tế
 
-Maintenant que vous comprenez les risques, vous pouvez décider comment les atténuer. Déterminer les risques à prioriser et les mesures à prendre pour essayer de les éviter est une décision essentielle, semblable au tri des bugs dans un projet logiciel. Une fois que vous avez déterminé les priorités, vous pouvez commencer à réfléchir aux types de mesures d'atténuation les plus appropriés. Souvent, des modifications simples peuvent faire la différence et réduire les risques.
+Giờ đây, khi đã hiểu rõ các rủi ro, bạn có thể quyết định cách giảm thiểu các rủi ro đó. Việc xác định những rủi ro cần ưu tiên và mức độ cần thiết để cố gắng ngăn chặn các rủi ro đó là một quyết định quan trọng, tương tự như việc phân loại lỗi trong một dự án phần mềm. Sau khi xác định các ưu tiên, bạn có thể bắt đầu suy nghĩ về các loại biện pháp giảm thiểu phù hợp nhất. Thông thường, những thay đổi đơn giản có thể tạo ra sự khác biệt và giảm thiểu rủi ro.
 
-Par exemple, lorsque vous concevez une application, pensez aux éléments suivants :
+Ví dụ: khi thiết kế một ứng dụng, hãy cân nhắc:
 
-- **Réglez la sortie du modèle** pour mieux refléter ce qui est acceptable dans le contexte de votre application. Le réglage peut rendre la sortie du modèle plus prévisible et cohérente, et donc aider à atténuer certains risques.
-- **Fournissez une méthode d'entrée qui facilite des sorties plus sûres.** L'entrée exacte que vous fournissez à un LLM peut faire la différence dans la qualité de la sortie. Il vaut la peine d'expérimenter avec les invites d'entrée pour trouver ce qui fonctionne le plus sûrement dans votre cas d'utilisation, car vous pouvez ensuite fournir une UX qui le facilite. Par exemple, vous pouvez limiter les utilisateurs à choisir uniquement dans une liste déroulante d'invites d'entrée, ou proposer des suggestions pop-up avec des phrases descriptives qui, selon vous, fonctionnent de manière sûre dans le contexte de votre application.
-- **Bloquer les entrées dangereuses et filtrer les sorties avant qu'elles ne soient présentées à l'utilisateur** : dans des situations simples, les listes de blocage permettent d'identifier et de bloquer les mots ou expressions dangereux dans les requêtes ou les réponses, ou d'exiger que des examinateurs humains modifient ou bloquent manuellement ce type de contenu.
-- **Utiliser des classificateurs entraînés pour étiqueter chaque requête en fonction des préjudices potentiels ou des signaux antagonistes** Vous pouvez alors appliquer diverses stratégies de traitement des requêtes en fonction du préjudice détecté. Par exemple, si l'entrée est manifestement antagoniste ou abusive par nature, elle peut être bloquée et une réponse prédéfinie peut être générée à la place.
-  **Conseil avancé** : Si les signaux déterminent que le résultat est dangereux, l'application peut utiliser les options suivantes :
+- **Tinh chỉnh đầu ra của mô hình** để phản ánh rõ hơn những gì có thể chấp nhận được trong bối cảnh ứng dụng của bạn. Việc tinh chỉnh có thể giúp kết quả của mô hình trở nên dễ dự đoán và nhất quán hơn, từ đó có thể giúp giảm thiểu một số rủi ro.
+- **Cung cấp phương thức nhập giúp tạo ra kết quả an toàn hơn.** Chính xác nội dung bạn nhập vào LLM có thể tạo ra sự khác biệt về chất lượng của kết quả.
+  Việc thử nghiệm các câu lệnh nhập để tìm ra câu lệnh hoạt động an toàn nhất trong trường hợp sử dụng của bạn là điều đáng làm, vì sau đó bạn có thể cung cấp trải nghiệm người dùng giúp tạo điều kiện cho việc này. Ví dụ: bạn có thể hạn chế người dùng chỉ chọn từ danh sách thả xuống các câu lệnh nhập hoặc đưa ra các đề xuất bật lên bằng các cụm từ mô tả mà bạn nhận thấy hoạt động an toàn trong bối cảnh ứng dụng của bạn.
+- **Chặn các nội dung nhập không an toàn và lọc kết quả trước khi hiển thị cho người dùng.** Trong các tình huống đơn giản, bạn có thể sử dụng danh sách chặn để xác định và chặn các từ hoặc cụm từ không an toàn trong câu lệnh hoặc câu trả lời, hoặc yêu cầu nhân viên đánh giá thủ công sửa đổi hoặc chặn nội dung đó.
+- **Sử dụng các bộ phân loại đã được huấn luyện để gắn nhãn cho từng câu lệnh bằng các tác hại tiềm ẩn hoặc tín hiệu đối nghịch.** Sau đó, bạn có thể áp dụng các chiến lược khác nhau về cách xử lý yêu cầu dựa trên loại tác hại được phát hiện. Ví dụ: Nếu nội dung nhập có bản chất đối nghịch hoặc lạm dụng một cách rõ ràng, thì nội dung đó có thể bị chặn và thay vào đó là đưa ra câu trả lời được viết sẵn.
+  **Mẹo nâng cao:** Nếu tín hiệu xác định kết quả là gây hại, thì ứng dụng có thể sử dụng các lựa chọn sau:
 
-  - Affichez un message d'erreur ou une sortie prédéfinie.
-  - Réessayez le prompt, au cas où une autre sortie sécurisée serait générée, car parfois le même prompt génère des sorties différentes.
-- **Mise en place de mesures de protection contre l'utilisation abusive délibérée**, par exemple en attribuant à chaque utilisateur un ID unique et en imposant une limite au volume de requêtes utilisateur pouvant être envoyées au cours d'une période donnée. Une autre mesure de protection consiste à essayer de se prémunir contre une éventuelle injection de prompt. L'injection de prompt, tout comme l'injection SQL, permet aux utilisateurs malveillants de concevoir un prompt d'entrée qui manipule la sortie du modèle, par exemple en envoyant un prompt d'entrée qui demande au modèle d'ignorer tous les exemples précédents. Pour en savoir plus sur l'utilisation abusive délibérée, consultez le [Règlement sur l'utilisation interdite de l'IA générative](https://policies.google.com/terms/generative-ai/use-policy?hl=fr).
-- **Ajuster la fonctionnalité à quelque chose qui présente un risque intrinsèquement plus faible** : les tâches dont le champ d'application est plus restreint (par exemple, extraire des mots clés de passages de texte) ou qui font l'objet d'une plus grande supervision humaine (par exemple, générer du contenu court qui sera examiné par un humain) présentent souvent un risque plus faible. Par exemple, au lieu de créer une application pour rédiger une réponse à un e-mail à partir de zéro, vous pouvez la limiter à l'expansion d'un plan ou à la suggestion d'autres formulations.
-- **Ajuster les paramètres de sécurité pour le contenu nuisible afin de réduire la probabilité de voir des réponses potentiellement dangereuses.** L'API Gemini fournit des paramètres de sécurité que vous pouvez ajuster lors de la phase de prototypage pour déterminer si votre application nécessite une configuration de sécurité plus ou moins restrictive. Vous pouvez ajuster ces paramètres dans cinq catégories de filtres pour restreindre ou autoriser certains types de contenus. Consultez le [guide sur les paramètres de sécurité](https://ai.google.dev/gemini-api/docs/safety-settings?hl=fr) pour en savoir plus sur les paramètres de sécurité ajustables disponibles dans l'API Gemini.
-- **Réduisez le risque d'inexactitudes factuelles ou d'hallucinations en activant l'ancrage avec la recherche Google.** N'oubliez pas que de nombreux modèles d'IA sont expérimentaux et peuvent présenter des informations factuellement inexactes, halluciner ou produire des résultats problématiques. La fonctionnalité d'ancrage avec la recherche Google associe le modèle Gemini à des contenus Web en temps réel et fonctionne avec toutes les langues disponibles. Cela permet à Gemini de fournir des réponses plus précises et de citer des sources vérifiables au-delà de la date limite des connaissances des modèles.
+  - Đưa ra thông báo lỗi hoặc kết quả được viết sẵn.
+  - Thử lại câu lệnh, trong trường hợp kết quả an toàn thay thế được tạo, vì đôi khi cùng một câu lệnh sẽ tạo ra các kết quả khác nhau.
+- **Áp dụng các biện pháp bảo vệ chống lại hành vi cố ý sử dụng sai** chẳng hạn như chỉ định cho mỗi người dùng một mã nhận dạng duy nhất và áp đặt giới hạn về số lượng truy vấn của người dùng có thể gửi trong một khoảng thời gian nhất định. Một biện pháp bảo vệ khác là cố gắng bảo vệ chống lại việc tiêm câu lệnh (prompt injection) có thể xảy ra. Việc tiêm câu lệnh (prompt injection), giống như việc chèn SQL, là cách để người dùng độc hại thiết kế một câu lệnh nhập giúp thao túng kết quả của mô hình, chẳng hạn như bằng cách gửi một câu lệnh nhập hướng dẫn mô hình bỏ qua mọi ví dụ trước đó. Hãy xem
+  [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh](https://policies.google.com/terms/generative-ai/use-policy?hl=vi)
+  để biết thông tin chi tiết về hành vi cố ý sử dụng sai.
+- **Điều chỉnh chức năng thành chức năng vốn có rủi ro thấp hơn.**
+  Các tác vụ có phạm vi hẹp hơn (ví dụ: trích xuất từ khoá từ các đoạn văn bản) hoặc có sự giám sát chặt chẽ hơn của con người (ví dụ: tạo nội dung dạng ngắn sẽ được con người xem xét) thường có rủi ro thấp hơn. Vì vậy, chẳng hạn, thay vì tạo một ứng dụng để viết câu trả lời email từ đầu, bạn có thể giới hạn ứng dụng này chỉ mở rộng trên một dàn ý hoặc đề xuất các cách diễn đạt thay thế.
+- **Điều chỉnh chế độ cài đặt an toàn cho nội dung gây hại để giảm khả năng bạn thấy các câu trả lời có thể gây hại.** Gemini API cung cấp các chế độ cài đặt an toàn mà bạn có thể điều chỉnh trong giai đoạn tạo mẫu để xác định xem ứng dụng của bạn có yêu cầu cấu hình an toàn hạn chế hơn hay ít hạn chế hơn. Bạn có thể điều chỉnh các chế độ cài đặt này trên 5 danh mục bộ lọc để hạn chế hoặc cho phép một số loại nội dung. Hãy tham khảo [hướng dẫn về chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi) để tìm hiểu về
+  các chế độ cài đặt an toàn có thể điều chỉnh thông qua Gemini API.
+- **Giảm các điểm không chính xác về mặt thực tế hoặc ảo giác tiềm ẩn bằng cách bật tính năng Bám sát nguồn bằng Google Tìm kiếm**. Hãy nhớ rằng nhiều mô hình AI đang ở giai đoạn thử nghiệm và có thể đưa ra thông tin không chính xác về mặt thực tế, ảo giác hoặc tạo ra các kết quả có vấn đề khác. Tính năng Bám sát nguồn bằng Google Tìm kiếm kết nối mô hình Gemini với nội dung trên web theo thời gian thực và hỗ trợ tất cả các ngôn ngữ hiện có. Nhờ đó, Gemini có thể đưa ra câu trả lời chính xác hơn và trích dẫn các nguồn có thể xác minh ngoài điểm cắt kiến thức của mô hình.
 
-## Effectuez des tests de sécurité adaptés à votre cas d'utilisation.
+## Thực hiện kiểm thử an toàn phù hợp với trường hợp sử dụng của bạn
 
-Les tests sont un élément clé de la création d'applications robustes et sécurisées, mais leur étendue, leur portée et leurs stratégies varient. Par exemple, un générateur d'haïkus juste pour le plaisir est susceptible de présenter des risques moins graves qu'une application conçue pour être utilisée par des cabinets d'avocats afin de résumer des documents juridiques et d'aider à rédiger des contrats. Toutefois, le générateur d'haïkus peut être utilisé par une plus grande variété d'utilisateurs, ce qui signifie que le risque de tentatives d'attaque ou même d'entrées nuisibles involontaires peut être plus élevé. Le contexte d'implémentation est également important. Par exemple, une application dont les résultats sont examinés par des experts humains avant toute action peut être considérée comme moins susceptible de produire des résultats nuisibles que la même application sans une telle supervision.
+Kiểm thử là một phần quan trọng trong việc xây dựng các ứng dụng mạnh mẽ và an toàn, nhưng mức độ, phạm vi và chiến lược kiểm thử sẽ khác nhau. Ví dụ: một trình tạo thơ haiku chỉ để giải trí có khả năng gây ra rủi ro ít nghiêm trọng hơn so với, chẳng hạn như một ứng dụng được thiết kế để các công ty luật sử dụng nhằm tóm tắt các tài liệu pháp lý và giúp soạn thảo hợp đồng. Tuy nhiên, trình tạo thơ haiku có thể được nhiều người dùng sử dụng hơn, điều này có nghĩa là khả năng xảy ra các nỗ lực đối nghịch hoặc thậm chí các nội dung nhập gây hại không chủ ý có thể cao hơn. Bối cảnh triển khai cũng quan trọng. Ví dụ: một ứng dụng có kết quả được các chuyên gia xem xét trước khi thực hiện bất kỳ hành động nào có thể được coi là ít có khả năng tạo ra kết quả gây hại hơn so với ứng dụng giống hệt nhưng không có sự giám sát như vậy.
 
-Il n'est pas rare de devoir effectuer plusieurs itérations de modifications et de tests avant de se sentir prêt à lancer une application, même pour celles qui présentent un risque relativement faible. Deux types de tests sont particulièrement utiles pour les applications d'IA :
+Bạn thường phải trải qua nhiều lần thay đổi và kiểm thử trước khi cảm thấy tự tin rằng mình đã sẵn sàng ra mắt, ngay cả đối với những ứng dụng có rủi ro tương đối thấp. Hai loại kiểm thử đặc biệt hữu ích cho các ứng dụng AI:
 
-- L'**évaluation comparative de la sécurité** consiste à concevoir des métriques de sécurité qui reflètent les façons dont votre application pourrait être dangereuse en fonction de la façon dont elle est susceptible d'être utilisée. Il s'agit ensuite de tester les performances de votre application par rapport à ces métriques à l'aide d'ensembles de données d'évaluation. Il est recommandé de réfléchir aux niveaux minimaux acceptables des métriques de sécurité avant de tester, afin de pouvoir 1) évaluer les résultats des tests par rapport à ces attentes et 2) rassembler l'ensemble de données d'évaluation en fonction des tests qui évaluent les métriques qui vous intéressent le plus.
+- **Điểm chuẩn an toàn** bao gồm việc thiết kế các chỉ số an toàn phản ánh những cách mà ứng dụng của bạn có thể không an toàn trong bối cảnh có khả năng được sử dụng, sau đó kiểm thử hiệu suất của ứng dụng dựa trên các chỉ số bằng cách sử dụng tập dữ liệu đánh giá. Bạn nên cân nhắc các mức tối thiểu có thể chấp nhận được của các chỉ số an toàn trước khi kiểm thử để 1) bạn có thể đánh giá kết quả kiểm thử dựa trên những kỳ vọng đó và 2) bạn có thể thu thập tập dữ liệu đánh giá dựa trên các kiểm thử đánh giá các chỉ số mà bạn quan tâm nhất.
 
-  **Conseils avancés :**
+  **Mẹo nâng cao:**
 
-  - Méfiez-vous de la dépendance excessive aux approches "prêtes à l'emploi", car vous devrez probablement créer vos propres ensembles de données de test à l'aide d'évaluateurs humains pour les adapter pleinement au contexte de votre application.
-  - Si vous avez plusieurs métriques, vous devrez décider comment faire un compromis si un changement entraîne des améliorations pour une métrique au détriment d'une autre. Comme pour l'ingénierie des performances, vous pouvez vous concentrer sur les performances dans le pire des cas dans votre ensemble d'évaluation plutôt que sur les performances moyennes.
-- Les **tests contradictoires** consistent à essayer de manière proactive de casser votre application. L'objectif est d'identifier les points faibles afin que vous puissiez prendre les mesures nécessaires pour y remédier. Les tests contradictoires peuvent demander beaucoup de temps et d'efforts aux évaluateurs experts dans votre application. Toutefois, plus vous en effectuez, plus vous avez de chances de repérer les problèmes, en particulier ceux qui se produisent rarement ou seulement après des exécutions répétées de l'application.
+  - Hãy cẩn thận khi quá dựa vào các phương pháp "có sẵn" vì có khả năng bạn sẽ cần xây dựng tập dữ liệu kiểm thử của riêng mình bằng cách sử dụng người đánh giá để phù hợp hoàn toàn với bối cảnh của ứng dụng.
+  - Nếu có nhiều hơn một chỉ số, bạn sẽ cần quyết định cách đánh đổi nếu một thay đổi dẫn đến việc cải thiện một chỉ số nhưng lại gây hại cho chỉ số khác. Giống như các kỹ thuật hiệu suất khác, bạn có thể muốn tập trung vào hiệu suất trong trường hợp xấu nhất trên tập dữ liệu đánh giá thay vì hiệu suất trung bình.
+- **Kiểm thử đối nghịch** bao gồm việc chủ động cố gắng phá vỡ ứng dụng của bạn. Mục tiêu là xác định các điểm yếu để bạn có thể thực hiện các bước khắc phục phù hợp. Việc kiểm thử đối nghịch có thể tốn nhiều thời gian/công sức của người đánh giá có chuyên môn về ứng dụng của bạn – nhưng bạn càng làm nhiều thì càng có nhiều cơ hội phát hiện vấn đề, đặc biệt là những vấn đề hiếm khi xảy ra hoặc chỉ xảy ra sau khi chạy ứng dụng nhiều lần.
 
-  - Les tests antagonistes permettent d'évaluer systématiquement un modèle de ML dans le but de savoir comment il se comporte quand des entrées malveillantes ou accidentellement nuisibles lui sont fournies :
-    - Une entrée peut être malveillante lorsqu'elle a clairement été conçue pour générer un résultat dangereux ou nuisible. Par exemple, demander à un modèle de génération de texte de générer un discours haineux à l'égard d'une religion particulière.
-    - Une entrée est accidentellement nuisible lorsqu'elle est inoffensive en elle-même, mais qu'elle produit un résultat nuisible. Par exemple, lorsqu'un modèle de génération de texte est invité à décrire une personne appartenant à une ethnie particulière et qu'il génère un contenu raciste.
-  - Ce qui distingue un test contradictoire d'une évaluation standard, c'est la composition des données utilisées pour le test. Pour les tests contradictoires, sélectionnez les données de test les plus susceptibles de générer des résultats problématiques à partir du modèle. Cela signifie sonder le comportement du modèle pour tous les types de préjudices possibles, y compris les exemples rares ou inhabituels et les cas extrêmes qui sont pertinents pour les règles de sécurité. Elle doit également inclure la diversité dans les différentes dimensions d'une phrase, telles que la structure, le sens et la longueur. Pour en savoir plus sur les éléments à prendre en compte lors de la création d'un ensemble de données de test, consultez les [pratiques de Google en matière d'IA responsable concernant l'équité](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=fr).
-    **Conseils avancés :**
-  - Utilisez des [tests automatisés](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=fr) au lieu de la méthode traditionnelle qui consiste à faire appel à des équipes rouges pour tenter de pirater votre application. Dans les tests automatisés, l'équipe rouge est un autre modèle de langage qui recherche des textes d'entrée susceptibles de générer des résultats dangereux à partir du modèle testé.
+  - Kiểm thử đối nghịch là một phương pháp để đánh giá một cách có hệ thống mô hình học máy với mục đích tìm hiểu cách mô hình này hoạt động khi được cung cấp nội dung nhập độc hại hoặc vô tình gây hại:
+    - Nội dung nhập có thể độc hại khi nội dung nhập được thiết kế rõ ràng để tạo ra kết quả không an toàn hoặc gây hại – ví dụ: yêu cầu mô hình tạo văn bản tạo ra một bài phát biểu hận thù về một tôn giáo cụ thể.
+    - Nội dung nhập vô tình gây hại khi bản thân nội dung nhập có thể vô hại, nhưng lại tạo ra kết quả gây hại – ví dụ: yêu cầu mô hình tạo văn bản mô tả một người thuộc một dân tộc cụ thể và nhận được kết quả phân biệt chủng tộc.
+  - Điểm khác biệt giữa kiểm thử đối nghịch và đánh giá tiêu chuẩn là thành phần của dữ liệu được sử dụng để kiểm thử. Đối với các kiểm thử đối nghịch, hãy chọn
+    dữ liệu kiểm thử có nhiều khả năng tạo ra kết quả có vấn đề từ
+    mô hình nhất. Điều này có nghĩa là thăm dò hành vi của mô hình đối với tất cả các loại tác hại có thể xảy ra, bao gồm cả các ví dụ hiếm gặp hoặc bất thường và các trường hợp đặc biệt có liên quan đến chính sách an toàn. Nội dung này cũng phải bao gồm sự đa dạng trong các phương diện khác nhau của một câu, chẳng hạn như cấu trúc, ý nghĩa và độ dài. Bạn có thể tham khảo các phương pháp AI có trách nhiệm của [Google
+    về tính
+    công bằng](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=vi)
+    để biết thêm thông tin chi tiết về những điều cần cân nhắc khi xây dựng tập dữ liệu kiểm thử.
+    **Mẹo nâng cao:**
+  - Sử dụng [kiểm thử tự động](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=vi)
+    thay vì phương pháp truyền thống là tuyển dụng người vào 'nhóm
+    đỏ' để cố gắng phá vỡ ứng dụng của bạn. Trong kiểm thử tự động, 'đội đỏ' là một mô hình ngôn ngữ khác tìm thấy văn bản nhập tạo ra kết quả gây hại từ mô hình đang được kiểm thử.
 
-## Surveiller les problèmes
+## Theo dõi các vấn đề
 
-Même si vous testez et atténuez les problèmes, vous ne pouvez jamais garantir la perfection. Planifiez donc à l'avance comment repérer et résoudre les problèmes qui surviennent. Les approches courantes incluent la configuration d'un canal surveillé permettant aux utilisateurs de partager leurs commentaires (par exemple, une évaluation par pouce levé/baissé) et la réalisation d'une étude utilisateur pour solliciter de manière proactive les commentaires d'un groupe diversifié d'utilisateurs. Cette approche est particulièrement utile si les schémas d'utilisation sont différents des attentes.
+Dù bạn kiểm thử và giảm thiểu bao nhiêu, bạn cũng không bao giờ có thể đảm bảo sự hoàn hảo. Vì vậy, hãy lên kế hoạch trước về cách phát hiện và xử lý các vấn đề phát sinh. Các phương pháp phổ biến bao gồm thiết lập một kênh được giám sát để người dùng chia sẻ ý kiến phản hồi (ví dụ: xếp hạng thích/không thích) và chạy một nghiên cứu về người dùng để chủ động yêu cầu ý kiến phản hồi từ nhiều người dùng – đặc biệt có giá trị nếu các mẫu sử dụng khác với kỳ vọng.
 
-### Conseils avancés
+### Mẹo nâng cao
 
-- Lorsque les utilisateurs fournissent des commentaires sur les produits d'IA, cela peut considérablement améliorer les performances de l'IA et l'expérience utilisateur au fil du temps. Par exemple, cela peut vous aider à choisir de meilleurs exemples pour l'optimisation des requêtes. Le [chapitre sur le contrôle et le feedback](https://pair.withgoogle.com/chapter/feedback-controls/) du [guide Google sur les personnes et l'IA](https://pair.withgoogle.com/guidebook/chapters) met en évidence les principaux points à prendre en compte lors de la conception de mécanismes de feedback.
+- Khi người dùng đưa ra ý kiến phản hồi cho các sản phẩm AI, ý kiến phản hồi đó có thể cải thiện đáng kể hiệu suất của AI và trải nghiệm người dùng theo thời gian, chẳng hạn như giúp bạn chọn các ví dụ hay hơn để tinh chỉnh câu lệnh. Chương
+  [Phản hồi và Kiểm soát](https://pair.withgoogle.com/chapter/feedback-controls/)
+  trong [Sổ tay về con người và AI của Google](https://pair.withgoogle.com/guidebook/chapters)
+  nêu bật những điểm cần cân nhắc khi thiết kế
+  cơ chế phản hồi.
 
-## Étapes suivantes
+## Các bước tiếp theo
 
-- Consultez le guide sur les [paramètres de sécurité](https://ai.google.dev/gemini-api/docs/safety-settings?hl=fr) pour en savoir plus sur les paramètres de sécurité ajustables disponibles via l'API Gemini.
-- Consultez l'[introduction aux requêtes](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=fr) pour commencer à rédiger vos premières requêtes.
+- Hãy tham khảo hướng dẫn về
+  [chế độ cài đặt an toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi) để tìm hiểu về các chế độ cài đặt an toàn có thể điều chỉnh thông qua Gemini API.
+- Hãy xem phần [giới thiệu về câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi) để bắt đầu
+  viết câu lệnh đầu tiên.
 
-Envoyer des commentaires
+Gửi ý kiến phản hồi
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Dernière mise à jour le 2026/06/05 (UTC).
+Cập nhật lần gần đây nhất: 2026-06-05 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/05 (UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-05 UTC."],[],[]]

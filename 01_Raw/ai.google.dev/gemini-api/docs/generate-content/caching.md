@@ -1,67 +1,70 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=he
-fetched_at: 2026-09-28T06:25:42.127448+00:00
-title: "\u05e9\u05de\u05d9\u05e8\u05d4 \u05d1\u05de\u05d8\u05de\u05d5\u05df \u05e9\u05dc \u05d4\u05e7\u05e9\u05e8 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=id
+fetched_at: 2026-10-05T06:40:22.468297+00:00
+title: "Context caching \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
-שליחת משוב
+Kirim masukan
 
-# שמירה במטמון של הקשר
+# Context caching
 
-בתהליך עבודה טיפוסי של AI, יכול להיות שתעבירו את אותם אסימוני קלט שוב ושוב למודל. ‫Gemini API מציע שני מנגנוני שמירת נתונים במטמון:
+Dalam alur kerja AI yang umum, Anda mungkin meneruskan token input yang sama berulang kali ke model. Gemini API menawarkan dua mekanisme penyiapan cache yang berbeda:
 
-- שמירה במטמון באופן מרומז (מופעלת אוטומטית ב-Gemini 2.5 ובמודלים חדשים יותר, ללא הבטחה לחיסכון בעלויות)
-- שמירה במטמון באופן מפורש (אפשר להפעיל אותה באופן ידני ברוב המודלים, מובטח חיסכון בעלויות)
+- Caching implisit (diaktifkan secara otomatis di model Gemini 2.5 dan yang lebih baru, tidak ada jaminan penghematan biaya)
+- Caching eksplisit (dapat diaktifkan secara manual di sebagian besar model, jaminan penghematan biaya)
 
-שמירת נתונים במטמון באופן מפורש שימושית במקרים שבהם רוצים להבטיח חיסכון בעלויות, אבל צריך להשקיע קצת יותר עבודה בפיתוח.
+Penyimpanan dalam cache eksplisit berguna jika Anda ingin menjamin penghematan biaya, tetapi dengan beberapa pekerjaan developer tambahan.
 
-## שמירה מרומזת במטמון
+## Caching implisit
 
-האפשרות 'שמירת נתונים במטמון באופן מרומז' מופעלת כברירת מחדל בכל המודלים של Gemini 2.5 ומעלה. אם הבקשה שלכם מגיעה למטמון, אנחנו מעבירים את החיסכון בעלויות באופן אוטומטי. לא צריך לעשות שום דבר כדי להפעיל את התכונה הזו. בטבלה הבאה מפורטת כמות הטוקנים המינימלית של הקלט לשמירת הקשר במטמון לכל מודל:
+Penyimpanan cache implisit diaktifkan secara default untuk semua model Gemini 2.5 dan yang lebih baru. Kami secara otomatis
+meneruskan penghematan biaya jika permintaan Anda mencapai cache. Anda tidak perlu melakukan tindakan apa pun untuk mengaktifkannya. Jumlah token input
+minimum untuk penyiapan cache konteks tercantum dalam tabel berikut untuk setiap model:
 
-| מודל | מגבלת טוקנים מינימלית |
+| Model | Batas token minimum |
 | --- | --- |
-| Gemini 3.8 Flash | ‫4,096 |
-| Gemini 3.7 Flash | ‫4,096 |
-| Gemini 3.6 Flash | ‫4,096 |
-| Gemini 3.5 Flash | ‫4,096 |
-| ‫Gemini 3.1 Pro Preview | ‫4,096 |
-| Gemini ‎2.5 Flash | 2,048 |
-| Gemini ‎2.5 Pro | 2,048 |
+| Gemini 3.8 Flash | 4.096 |
+| Gemini 3.7 Flash | 4.096 |
+| Gemini 3.6 Flash | 4.096 |
+| Gemini 3.5 Flash | 4.096 |
+| Pratinjau Gemini 3.1 Pro | 4.096 |
+| Gemini 2.5 Flash | 2.048 |
+| Gemini 2.5 Pro | 2.048 |
 
-כדי להגדיל את הסיכוי לפגיעה במטמון משתמע:
+Untuk meningkatkan peluang terjadinya cache hit implisit:
 
-- כדאי לנסות להוסיף בתחילת ההנחיה תוכן גדול ונפוץ
-- ניסיון לשלוח בקשות עם קידומת דומה בפרק זמן קצר
+- Coba letakkan konten besar dan umum di awal perintah Anda
+- Mencoba mengirim permintaan dengan awalan yang serupa dalam waktu singkat
 
-אפשר לראות את מספר הטוקנים שהיו פגיעות במטמון בשדה `usage_metadata` של אובייקט התגובה.
+Anda dapat melihat jumlah token yang merupakan hit cache di kolom
+`usage_metadata` objek respons.
 
-## שמירה מפורשת במטמון
+## Caching eksplisit
 
-באמצעות התכונה של Gemini API לשמירה במטמון, אתם יכולים להעביר תוכן מסוים למודל פעם אחת, לשמור במטמון את טוקני הקלט ואז להפנות לטוקנים שנשמרו במטמון בבקשות הבאות. בנפחים מסוימים, העלות של שימוש בטוקנים שנשמרו במטמון נמוכה יותר מהעלות של העברה חוזרת של אותה קבוצת טוקנים.
+Dengan fitur caching eksplisit Gemini API, Anda dapat meneruskan beberapa konten ke model sekali, meng-cache token input, lalu merujuk token yang di-cache untuk permintaan berikutnya. Pada volume tertentu, penggunaan token yang di-cache lebih murah daripada meneruskan korpus token yang sama berulang kali.
 
-כשמטמנים במטמון קבוצה של טוקנים, אפשר לבחור כמה זמן המטמון יתקיים לפני שהטוקנים יימחקו אוטומטית. משך השמירה במטמון נקרא *אורך חיים* (TTL). אם לא מגדירים את ה-TTL, ברירת המחדל היא שעה אחת. העלות של שמירת נתונים במטמון תלויה בגודל של טוקן הקלט ובמשך הזמן שבו רוצים שהטוקנים יישמרו.
+Saat menyimpan cache sekumpulan token, Anda dapat memilih durasi yang diinginkan untuk cache sebelum token dihapus secara otomatis. Durasi caching ini disebut *time to live* (TTL). Jika tidak disetel, TTL defaultnya adalah 1 jam. Biaya untuk melakukan caching bergantung pada ukuran token input dan durasi token yang Anda inginkan.
 
-בקטע הזה מניחים שהתקנתם Gemini SDK (או שהתקנתם curl) והגדרתם מפתח API, כמו שמוסבר ב[מדריך לתחילת העבודה](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he).
+Bagian ini mengasumsikan bahwa Anda telah menginstal Gemini SDK (atau telah menginstal curl) dan telah mengonfigurasi kunci API, seperti yang ditunjukkan dalam [Panduan memulai](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id).
 
-### יצירת תוכן באמצעות מטמון
+### Membuat konten menggunakan cache
 
 ### Python
 
-בדוגמה הבאה מוצג תהליך יצירת תוכן באמצעות הוראה במערכת וקובץ וידאו שנשמרו במטמון.
+Contoh berikut menunjukkan cara membuat konten menggunakan petunjuk sistem yang di-cache dan file video.
 
-### סרטונים
+### Video
 
 ```
 import os
@@ -120,7 +123,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### קובצי PDF
+### PDF
 
 ```
 from google import genai
@@ -168,7 +171,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-הדוגמה הבאה מראה איך ליצור תוכן באמצעות הוראה במערכת שנשמרה במטמון וקובץ טקסט.
+Contoh berikut menunjukkan cara membuat konten menggunakan petunjuk sistem yang di-cache dan file teks.
 
 ```
 import {
@@ -209,7 +212,7 @@ await main();
 
 ### Go
 
-בדוגמה הבאה אפשר לראות איך ליצור תוכן באמצעות מטמון.
+Contoh berikut menunjukkan cara membuat konten menggunakan cache.
 
 ```
 package main
@@ -279,9 +282,10 @@ func main() {
 
 ### REST
 
-בדוגמה הבאה אפשר לראות איך ליצור מטמון ואז להשתמש בו כדי ליצור תוכן.
+Contoh berikut menunjukkan cara membuat cache, lalu menggunakannya untuk
+membuat konten.
 
-### סרטונים
+### Video
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -332,7 +336,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
     }'
 ```
 
-### קובצי PDF
+### PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -430,20 +434,21 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### הצגת רשימה של מטמונים
+### Mencantumkan cache
 
-אי אפשר לאחזר או להציג תוכן שנשמר במטמון, אבל אפשר לאחזר מטא-נתונים של המטמון (`name`,‏ `model`,‏ `display_name`,‏ `usage_metadata`,‏ `create_time`,‏ `update_time` ו-`expire_time`).
+Anda tidak dapat mengambil atau melihat konten dalam cache, tetapi Anda dapat mengambil metadata cache (`name`, `model`, `display_name`, `usage_metadata`,
+`create_time`, `update_time`, dan `expire_time`).
 
 ### Python
 
-כדי להציג רשימה של המטא-נתונים של כל המטמונים שהועלו, משתמשים בפקודה `CachedContent.list()`:
+Untuk mencantumkan metadata semua cache yang diupload, gunakan `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-כדי לאחזר את המטא-נתונים של אובייקט אחד במטמון, אם אתם יודעים את השם שלו, משתמשים בפקודה `get`:
+Untuk mengambil metadata satu objek cache, jika Anda mengetahui namanya, gunakan `get`:
 
 ```
 client.caches.get(name=name)
@@ -451,7 +456,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-כדי להציג רשימה של המטא-נתונים של כל המטמונים שהועלו, משתמשים בפקודה `GoogleGenAI.caches.list()`:
+Untuk mencantumkan metadata semua cache yang diupload, gunakan `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -468,7 +473,7 @@ while (true) {
 
 ### Go
 
-בדוגמה הבאה מוצגת רשימה של כל המטמונים.
+Contoh berikut mencantumkan semua cache.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -481,7 +486,7 @@ for _, item := range caches {
 }
 ```
 
-בדוגמה הבאה מוצגות רשימות של מטמונים עם גודל דף של 2.
+Contoh berikut mencantumkan cache menggunakan ukuran halaman 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -514,13 +519,15 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### עדכון מטמון
+### Memperbarui cache
 
-אפשר להגדיר `ttl` או `expire_time` חדשים למטמון. אין תמיכה בשינוי של פרטים אחרים במטמון.
+Anda dapat menyetel `ttl` atau `expire_time` baru untuk cache. Mengubah hal lain
+tentang cache tidak didukung.
 
 ### Python
 
-בדוגמה הבאה אפשר לראות איך מעדכנים את `ttl` של מטמון באמצעות `client.caches.update()`.
+Contoh berikut menunjukkan cara mengupdate `ttl` cache menggunakan
+`client.caches.update()`.
 
 ```
 from google import genai
@@ -534,7 +541,7 @@ client.caches.update(
 )
 ```
 
-כדי להגדיר את זמן התפוגה, אפשר להשתמש באובייקט `datetime` או במחרוזת של תאריך ושעה בפורמט ISO ‏ (`dt.isoformat()`, כמו `2025-01-27T16:02:36.473528+00:00`). צריך לציין את אזור הזמן (`datetime.utcnow()` לא מצרף אזור זמן, `datetime.now(datetime.timezone.utc)` כן מצרף אזור זמן).
+Untuk menetapkan waktu habis masa berlaku, API ini akan menerima objek `datetime` atau string tanggal dan waktu berformat ISO (`dt.isoformat()`, seperti `2025-01-27T16:02:36.473528+00:00`). Waktu Anda harus menyertakan zona waktu (`datetime.utcnow()` tidak melampirkan zona waktu, `datetime.now(datetime.timezone.utc)` melampirkan zona waktu).
 
 ```
 from google import genai
@@ -554,7 +561,8 @@ client.caches.update(
 
 ### JavaScript
 
-בדוגמה הבאה אפשר לראות איך מעדכנים את `ttl` של מטמון באמצעות `GoogleGenAI.caches.update()`.
+Contoh berikut menunjukkan cara mengupdate `ttl` cache menggunakan
+`GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -567,7 +575,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-בדוגמה הבאה אפשר לראות איך מעדכנים את `TTL` של מטמון.
+Contoh berikut menunjukkan cara memperbarui `TTL` cache.
 
 ```
 // Update the TTL (2 hours).
@@ -583,7 +591,7 @@ fmt.Println(cache)
 
 ### REST
 
-בדוגמה הבאה אפשר לראות איך מעדכנים את `ttl` של מטמון.
+Contoh berikut menunjukkan cara memperbarui `ttl` cache.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -591,9 +599,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### מחיקת מטמון
+### Menghapus cache
 
-שירות המטמון מספק פעולת מחיקה להסרת תוכן מהמטמון באופן ידני. בדוגמה הבאה אפשר לראות איך מוחקים מטמון:
+Layanan caching menyediakan operasi penghapusan untuk menghapus konten secara manual dari cache. Contoh berikut menunjukkan cara menghapus cache:
 
 ### Python
 
@@ -623,45 +631,52 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### שמירת נתונים במטמון באופן מפורש באמצעות ספריית OpenAI
+### Penyimpanan cache eksplisit menggunakan library OpenAI
 
-אם אתם משתמשים ב[ספרייה של OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=he), אתם יכולים להפעיל שמירה במטמון באופן מפורש באמצעות המאפיין `cached_content` ב-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=he#extra-body).
+Jika Anda menggunakan [library OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id), Anda dapat mengaktifkan
+penyimpanan cache eksplisit menggunakan properti `cached_content` di
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=id#extra-body).
 
-## מתי כדאי להשתמש בשמירת נתונים במטמון
+## Kapan harus menggunakan caching eksplisit
 
-שמירת נתונים במטמון לפי הקשר מתאימה במיוחד למקרים שבהם יש הקשר ראשוני משמעותי שאליו מתייחסות שוב ושוב בקשות קצרות יותר. כדאי להשתמש בשמירה במטמון של ההקשר בתרחישים כמו:
+Context caching sangat cocok untuk skenario saat konteks awal yang besar dirujuk berulang kali oleh permintaan yang lebih pendek. Pertimbangkan untuk menggunakan
+penyimpanan cache konteks untuk kasus penggunaan seperti:
 
-- צ'אטבוטים עם [הוראות מערכת](https://ai.google.dev/gemini-api/docs/system-instructions?hl=he) מפורטות
-- ניתוח חוזר של קובצי וידאו ארוכים
-- שאילתות חוזרות על קבוצות גדולות של מסמכים
-- ניתוח תכוף של מאגר קוד או תיקון באגים
+- Chatbot dengan [petunjuk sistem](https://ai.google.dev/gemini-api/docs/system-instructions?hl=id) yang ekstensif
+- Analisis berulang pada file video panjang
+- Kueri berulang terhadap set dokumen besar
+- Analisis repositori kode atau perbaikan bug yang sering
 
-### איך שמירת מטמון מפורשת מפחיתה עלויות
+### Cara caching eksplisit mengurangi biaya
 
-שמירת הקשר במטמון היא תכונה בתשלום שנועדה להפחית את העלויות. החיוב מבוסס על הגורמים הבאים:
+Caching konteks adalah fitur berbayar yang dirancang untuk mengurangi biaya. Penagihan didasarkan pada
+faktor-faktor berikut:
 
-1. **מספר הטוקנים במטמון:** מספר טוקני הקלט שנשמרו במטמון. אם הם נכללים בהנחיות הבאות, הם מחויבים במחיר מופחת.
-2. **משך האחסון:** משך הזמן שבו טוקנים במטמון מאוחסנים (TTL),
-   החיוב מתבצע על סמך משך ה-TTL של ספירת הטוקנים במטמון. אין גבולות מינימליים או מקסימליים לערך ה-TTL.
-3. **גורמים אחרים:** חלים חיובים אחרים, למשל על טוקנים של קלט ופלט שלא נשמרו במטמון.
+1. **Jumlah token cache:** Jumlah token input yang di-cache, ditagih dengan tarif yang lebih rendah jika disertakan dalam perintah berikutnya.
+2. **Durasi penyimpanan:** Jumlah waktu token yang di-cache disimpan (TTL),
+   ditagih berdasarkan durasi TTL jumlah token yang di-cache. Tidak ada batas minimum
+   atau maksimum pada TTL.
+3. **Faktor lain:** Biaya lain berlaku, seperti untuk token input dan output yang tidak di-cache.
 
-פרטים עדכניים על התמחור זמינים [בדף התמחור](https://ai.google.dev/pricing?hl=he) של Gemini API. ב[מדריך לאסימונים](https://ai.google.dev/gemini-api/docs/tokens?hl=he) מוסבר איך לספור אסימונים.
+Untuk mengetahui detail harga terbaru, lihat [halaman harga](https://ai.google.dev/pricing?hl=id) Gemini API. Untuk mempelajari cara menghitung token, lihat [panduan
+Token](https://ai.google.dev/gemini-api/docs/tokens?hl=id).
 
-### שיקולים נוספים
+### Pertimbangan tambahan
 
-כשמשתמשים בשמירת מטמון של הקשר, חשוב לזכור את הנקודות הבאות:
+Perhatikan hal-hal berikut saat menggunakan caching konteks:
 
-- כמות הטוקנים ה*מינימלית* של הקלט לשמירת הקשר במטמון משתנה בהתאם למודל. *הערך המקסימלי* זהה לערך המקסימלי של המודל הנתון. (מידע נוסף על ספירת אסימונים זמין ב[מדריך האסימונים](https://ai.google.dev/gemini-api/docs/tokens?hl=he)).
-- המודל לא מבחין בין טוקנים במטמון לבין טוקנים רגילים של קלט. התוכן שנשמר במטמון מופיע כתוספת לתחילת ההנחיה.
-- אין מגבלות מיוחדות על שיעור השימוש או על שיעור הבקשות במטמון ההקשר. חלות מגבלות השיעור הרגילות של `GenerateContent`, ומגבלות האסימונים כוללות אסימונים במטמון.
-- מספר האסימונים שנשמרו במטמון מוחזר ב-`usage_metadata` מפעולות היצירה, האחזור והרשימה של שירות המטמון, וגם ב-`GenerateContent` כשמשתמשים במטמון.
+- Jumlah token input *minimum* untuk penyiapan cache konteks bervariasi menurut model. *Maksimum*
+  sama dengan maksimum untuk model tertentu. (Untuk mengetahui informasi selengkapnya tentang menghitung token, lihat [Panduan token](https://ai.google.dev/gemini-api/docs/tokens?hl=id)).
+- Model tidak membedakan antara token yang di-cache dan token input reguler. Konten yang di-cache adalah awalan untuk perintah.
+- Tidak ada batas penggunaan atau tarif khusus untuk caching konteks; batas tarif standar untuk `GenerateContent` berlaku, dan batas token mencakup token yang di-cache.
+- Jumlah token yang di-cache ditampilkan di `usage_metadata` dari operasi buat, dapatkan, dan cantumkan layanan cache, serta di `GenerateContent` saat menggunakan cache.
 
-שליחת משוב
+Kirim masukan
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-עדכון אחרון: 2026-09-16 (שעון UTC).
+Terakhir diperbarui pada 2026-09-16 UTC.
 
-רוצה לתת לנו משוב?
+Ada masukan untuk kami?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-16 (שעון UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-16 UTC."],[],[]]

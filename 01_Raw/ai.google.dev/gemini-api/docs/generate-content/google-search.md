@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=de
-fetched_at: 2026-09-28T06:35:48.102350+00:00
-title: "Fundierung mit der Google Suche \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=zh-CN
+fetched_at: 2026-10-05T06:50:53.859067+00:00
+title: "\u4f7f\u7528 Google \u641c\u7d22\u5efa\u7acb\u4f9d\u636e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Fundierung mit der Google Suche
+# 使用 Google 搜索建立依据
 
-Durch die Fundierung mit der Google Suche wird das Gemini-Modell in Echtzeit mit Webinhalten verbunden und kann mit allen verfügbaren Sprachen genutzt werden. So kann Gemini genauere Antworten geben und überprüfbare Quellen zitieren, die über den Wissensstichtag des Modells hinausgehen.
+依托 Google 搜索进行接地可将 Gemini 模型与实时 Web 内容连接起来，该功能支持所有可用语言。这使 Gemini 能够提供更准确的回答，并引用其知识截点之外的可验证来源。
 
-Mit der Fundierung können Sie Anwendungen erstellen, die Folgendes können:
+接地有助于您构建可执行以下操作的应用：
 
-- **Sachliche Genauigkeit erhöhen**:Reduzieren Sie Modellhalluzinationen, indem Sie Antworten auf realen Informationen basieren.
-- **Auf Echtzeitinformationen zugreifen**:Beantworten Sie Fragen zu aktuellen Ereignissen und Themen.
-- **Quellenangaben machen**:Bauen Sie Vertrauen bei Nutzern auf, indem Sie die Quellen für die Aussagen des Modells angeben.
+- **提高事实准确性**：通过以真实世界的信息为依据来减少模型幻觉。
+- **获取实时信息**：回答有关近期活动和主题的问题。
+- **提供引用**：通过显示模型声明的来源来建立用户信任。
 
 ### Python
 
@@ -99,23 +99,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-Weitere Informationen finden Sie im [Notebook zum Suchtool](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=de).
+如需了解详情，请尝试使用[搜索工具笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=zh-cn)。
 
-## So funktioniert die Fundierung mit der Google Suche
+## “依托 Google 搜索进行接地”功能的运作方式
 
-Wenn Sie das Tool `google_search` aktivieren, verarbeitet das Modell den gesamten Workflow der Suche, Verarbeitung und Quellenangabe von Informationen automatisch.
+启用 `google_search` 工具后，模型会自动处理搜索、处理和引用信息的整个工作流程。
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=de)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=zh-cn)
 
-1. **Nutzer-Prompt**:Ihre Anwendung sendet einen Nutzer-Prompt an die Gemini API, wobei das Tool `google_search` aktiviert ist.
-2. **Prompt-Analyse**:Das Modell analysiert den Prompt und ermittelt, ob eine Google Suche die Antwort verbessern kann.
-3. **Google Suche**:Bei Bedarf generiert das Modell automatisch eine oder mehrere Suchanfragen und führt sie aus.
-4. **Verarbeitung der Suchergebnisse**:Das Modell verarbeitet die Suchergebnisse, fasst die Informationen zusammen und formuliert eine Antwort.
-5. **Fundierte Antwort**:Die API gibt eine endgültige, nutzerfreundliche Antwort zurück, die auf den Suchergebnissen basiert. Diese Antwort enthält die Textantwort des Modells und `groundingMetadata` mit den Suchanfragen, Webergebnissen und Quellenangaben.
+1. **用户提示**：您的应用在启用 `google_search` 工具的情况下，将用户提示发送到 Gemini API。
+2. **提示分析**：模型分析提示，确定 Google 搜索是否可以改进回答。
+3. **Google 搜索**：如果需要，模型会自动生成一个或多个搜索查询并执行这些查询。
+4. **搜索结果处理**：模型处理搜索结果，整合信息并生成回答。
+5. **以搜索结果为依据的回答**：API 会返回以搜索结果为依据的最终且用户友好的回答。此响应包含模型的文本回答以及 `groundingMetadata`，其中包含搜索查询、网页结果和引用。
 
-## Informationen zur Fundierungsantwort
+## 了解接地响应
 
-Wenn eine Antwort erfolgreich fundiert wurde, enthält sie das Feld `groundingMetadata`. Diese strukturierten Daten sind wichtig, um Aussagen zu überprüfen und eine umfassende Quellenangabe in Ihrer Anwendung zu erstellen.
+如果成功进行了事实依据核查，响应中会包含 `groundingMetadata` 字段。此结构化数据对于验证声明和在应用中打造丰富的引用体验至关重要。
 
 ```
 {
@@ -157,21 +157,18 @@ Wenn eine Antwort erfolgreich fundiert wurde, enthält sie das Feld `groundingMe
 }
 ```
 
-Die Gemini API gibt die folgenden Informationen mit `groundingMetadata` zurück:
+Gemini API 会通过 `groundingMetadata` 返回以下信息：
 
-- `webSearchQueries` : Array der verwendeten Suchanfragen. Dies ist nützlich für das Debugging und um den Denkprozess des Modells zu verstehen.
-- `searchEntryPoint` : Enthält das HTML und CSS, um die erforderlichen Suchvorschläge zu rendern. Die vollständigen Nutzungsanforderungen sind in den [Nutzungs
-  bedingungen](https://ai.google.dev/gemini-api/terms?hl=de#grounding-with-google-search) aufgeführt.
-- `groundingChunks` : Array von Objekten mit den Webquellen (`uri` und `title`).
-- `groundingSupports` : Array von Chunks, um die Modellantwort `text` mit den Quellen in `groundingChunks` zu verknüpfen. Jeder Chunk verknüpft ein Textsegment (`segment`), das durch `startIndex` und `endIndex` definiert wird, mit einem oder mehreren `groundingChunkIndices`. Dies ist der Schlüssel zum Erstellen von Inline-Quellenangaben.
+- `webSearchQueries`：所用搜索查询的数组。这有助于调试和了解模型的推理过程。
+- `searchEntryPoint`：包含用于呈现所需搜索建议的 HTML 和 CSS。如需了解完整的使用要求，请参阅[《服务条款》](https://ai.google.dev/gemini-api/terms?hl=zh-cn#grounding-with-google-search)。
+- `groundingChunks`：包含 Web 来源（`uri` 和 `title`）的对象数组。
+- `groundingSupports`：用于将模型响应 `text` 与 `groundingChunks` 中的来源相关联的块数组。每个块都将文本 `segment`（由 `startIndex` 和 `endIndex` 定义）与一个或多个 `groundingChunkIndices` 相关联。这是构建内嵌引文的关键。
 
-Die Fundierung mit der Google Suche kann auch in Kombination mit dem [URL
-Kontexttool](https://ai.google.dev/gemini-api/docs/url-context?hl=de) verwendet werden, um Antworten sowohl auf öffentlichen
-Webdaten als auch auf den von Ihnen angegebenen URLs zu fundieren.
+依托 Google 搜索进行接地还可以与[网址上下文工具](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)搭配使用，以便根据公开的 Web 数据和您提供的特定网址来生成回答。
 
-## Quellen mit Inline-Quellenangaben zuordnen
+## 使用内嵌引用注明来源
 
-Die API gibt strukturierte Quellenangabedaten zurück, sodass Sie die vollständige Kontrolle darüber haben, wie Sie Quellen in Ihrer Benutzeroberfläche anzeigen. Mit den Feldern `groundingSupports` und `groundingChunks` können Sie die Aussagen des Modells direkt mit ihren Quellen verknüpfen. Hier ist ein gängiges Muster für die Verarbeitung der Metadaten, um eine Antwort mit Inline-Quellenangaben zu erstellen, auf die geklickt werden kann.
+该 API 会返回结构化引用数据，让您可以完全控制在界面中显示来源的方式。您可以使用 `groundingSupports` 和 `groundingChunks` 字段将模型的陈述直接关联到其来源。以下是一种常见模式，用于处理元数据以创建包含内嵌可点击引用的回答。
 
 ### Python
 
@@ -246,64 +243,57 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-Die neue Antwort mit Inline-Quellenangaben sieht so aus:
+包含内嵌引用的新回答如下所示：
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## Preise
+## 价格
 
-Wenn Sie die Fundierung mit der Google Suche mit Gemini 3 verwenden, wird Ihrem Projekt jede Suchanfrage in Rechnung gestellt, die das Modell ausführt. Wenn das Modell mehrere Suchanfragen ausführt, um einen einzelnen Prompt zu beantworten (z. B. die Suche nach `"UEFA Euro 2024 winner"` und `"Spain vs England Euro 2024 final
-score"` im selben API-Aufruf), gilt dies als zwei kostenpflichtige Nutzungen des Tools für diese Anfrage. Für Abrechnungszwecke werden leere Websuchanfragen bei der Zählung eindeutiger Suchanfragen ignoriert. Dieses Abrechnungsmodell gilt nur für Gemini 3-Modelle. Wenn Sie die Suchfundierung mit Gemini 2.5 oder älteren Modellen verwenden, wird Ihrem Projekt pro Prompt eine Gebühr berechnet.
+如果您将“依托 Google 搜索进行接地”与 Gemini 3 搭配使用，则系统会针对模型决定执行的每项搜索查询向您的项目收取费用。如果模型决定执行多个搜索查询来回答单个提示（例如，在同一次 API 调用中搜索 `"UEFA Euro 2024 winner"` 和 `"Spain vs England Euro 2024 final
+score"`），则该请求会产生两次工具使用费。出于结算目的，我们在统计唯一查询时会忽略空白的网页搜索查询。此结算模式仅适用于 Gemini 3 模型；如果您将搜索关联标准答案功能与 Gemini 2.5 或更旧的模型搭配使用，系统会按提示向您的项目收取费用。
 
-Ausführliche Preisinformationen finden Sie auf der Seite [Gemini API-Preise
-page](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
+如需详细了解价格信息，请参阅 [Gemini API 价格页面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)。
 
-## Unterstützte Modelle
+## 支持的模型
 
-Eine vollständige Übersicht der Funktionen finden Sie auf der Seite [Modell
-übersicht](https://ai.google.dev/gemini-api/docs/models?hl=de).
+您可以在[模型概览](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面上找到完整的功能。
 
-| Modell | Fundierung mit der Google Suche |
+| 模型 | 依托 Google 搜索进行接地 |
 | --- | --- |
 | Gemini 3.6 Flash | ✔️ |
-| Gemini 3.5 Flash Lite | ✔️ |
+| Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
-| Gemini 3.1 Flash Lite | ✔️ |
-| Gemini 3.1 Flash Image (Vorabversion) | ✔️ |
-| Gemini 3.1 Pro (Vorabversion) | ✔️ |
-| Gemini 3 Pro Image (Vorabversion) | ✔️ |
-| Gemini 3 Flash (Vorabversion) | ✔️ |
-| Gemini 3.1 Flash Lite (Vorabversion) | ✔️ |
+| Gemini 3.1 Flash-Lite | ✔️ |
+| Gemini 3.1 Flash Image 预览版 | ✔️ |
+| Gemini 3 Pro 预览版 | ✔️ |
+| Gemini 3 Pro Image 预览版 | ✔️ |
+| Gemini 3 Flash 预览版 | ✔️ |
+| Gemini 3.1 Flash-Lite 预览版 | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash Lite | ✔️ |
+| Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## Unterstützte Toolkombinationen
+## 支持的工具组合
 
-Sie können die Fundierung mit der Google Suche mit anderen Tools wie
-[der Codeausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de) und
-[dem URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de) verwenden, um komplexere Anwendungsfälle zu ermöglichen.
+您可以将“依托 Google 搜索进行接地”与其他工具（例如[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)）搭配使用，以实现更复杂的用例。
 
-Gemini 3-Modelle unterstützen die Kombination von integrierten Tools (z. B. Fundierung mit der Google Suche) mit benutzerdefinierten Tools (Funktionsaufrufe). Weitere Informationen finden Sie auf der
-[Seite Toolkombinationen](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de).
+Gemini 3 模型支持将内置工具（例如“使用 Google 搜索进行接地”）与自定义工具（函数调用）相结合。如需了解详情，请参阅[工具组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)页面。
 
-## Nächste Schritte
+## 后续步骤
 
-- Probieren Sie die [Fundierung mit der Google Suche im Gemini API
-  Kochbuch](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=de) aus.
-- Informationen zu anderen verfügbaren Tools wie [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)
-- Informationen zum Erweitern von Prompts mit bestimmten URLs mithilfe des [URL-Kontext
-  tools](https://ai.google.dev/gemini-api/docs/url-context?hl=de)
+- 不妨试试 [Gemini API 实战宝典中的“依托 Google 搜索进行接地”](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=zh-cn)。
+- 了解其他可用工具，例如[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)。
+- 了解如何使用 [网址 上下文工具](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)通过特定网址扩充提示。
 
-Feedback geben
+发送反馈
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+最后更新时间 (UTC)：2026-09-12。
 
-Haben Sie Feedback für uns?
+需要向我们提供更多信息？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-12。"],[],[]]

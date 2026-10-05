@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=he
-fetched_at: 2026-09-28T06:11:19.621437+00:00
-title: "\u05d1\u05d9\u05e6\u05d5\u05e2 \u05d1\u05e8\u05e7\u05e2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ja
+fetched_at: 2026-10-05T06:46:15.918873+00:00
+title: "\u30d0\u30c3\u30af\u30b0\u30e9\u30a6\u30f3\u30c9\u5b9f\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-שליחת משוב
+フィードバックを送信
 
-# ביצוע ברקע
+# バックグラウンド実行
 
-במשימות ארוכות כמו Deep Research, חשיבה רציונלית מורכבת או הרצות של סוכנים מרובי-שלבים, זמן קצוב לתפוגה לחיבור עלול להפריע לבקשות HTTP רגילות (שבדרך כלל נסגרות אחרי 60 שניות). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) מספק **background execution** כדי להריץ את המשימות האלה באופן אסינכרוני.
+詳細な調査、複雑な推論、複数ステップのエージェント実行などの長時間実行タスクの場合、接続タイムアウトにより標準の HTTP リクエスト（通常は 60 秒後に終了）が中断されることがあります。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) は、これらのタスクを非同期で実行するための**バックグラウンド実行**を提供します。
 
-כדי לאפשר לאינטראקציה לפעול עד שהיא משלימה את המשימה בשרת, מגדירים את `"background": true` כשיוצרים את האינטראקציה. ה-API מחזיר באופן מיידי מזהה אינטראקציה, שאפליקציות לקוח יכולות להשתמש בו כדי לבדוק את הסטטוס, את התקדמות הסטרימינג או להתחבר מחדש לסטרימינג שהחיבור אליו נותק.
+サーバーでタスクが完了するまでインタラクションを実行するには、インタラクションの作成時に `"background": true` を設定します。API はすぐにインタラクション ID を返します。クライアント アプリケーションはこの ID を使用して、ステータスのポーリング、進行状況のストリーミング、切断されたストリームへの再接続を行うことができます。
 
-הביצוע ברקע נתמך במודלים רגילים של Gemini (כמו `gemini-3.8-flash` ו-`gemini-3.1-pro-preview`) ובסוכנים מנוהלים (כמו `antigravity-preview-09-2026`).
+バックグラウンド実行は、標準の Gemini モデル（`gemini-3.8-flash` や `gemini-3.1-pro-preview` など）と Managed Agents（`antigravity-preview-09-2026` など）でサポートされています。
 
-## יצירת אינטראקציה ברקע
+## バックグラウンド インタラクションを作成する
 
-כדי להתחיל אינטראקציה ברקע, מגדירים את הפרמטר `background` לערך `true` כשיוצרים את המשאב.
+バックグラウンド インタラクションを開始するには、リソースの作成時に `background` パラメータを `true` に設定します。
 
 ### Python
 
@@ -133,31 +133,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## איך הרצה ברקע פועלת
+## バックグラウンド実行の仕組み
 
-כשיוצרים אינטראקציה ברקע, המשימה פועלת באופן אסינכרוני בשרת. האינטראקציה עוברת בין מצבי ביצוע שונים:
+バックグラウンド操作を作成すると、タスクはサーバー上で非同期的に実行されます。インタラクションはさまざまな実行状態に移行します。
 
-- ‫`in_progress`: השרת מבצע באופן פעיל את האינטראקציה (למשל, מריץ קוד או מבצע מחקר).
-- ‫`requires_action`: האינטראקציה מושהית וממתינה לקלט מהלקוח (למשל, אישור של הפעלת כלי או מענה על שאלה).
-- ‫`completed`: האינטראקציה הסתיימה בהצלחה והפלט זמין.
-- ‫`failed`: אירעה שגיאה במהלך הביצוע (למשל, כשל בכלי או הגבלות קצב).
-- ‫`cancelled`: בקשה של לקוח עצרה את הביצוע.
+- `in_progress`: サーバーがインタラクション（コードの実行や調査など）をアクティブに実行しています。
+- `requires_action`: インタラクションが一時停止し、クライアントの入力（ツールの実行の確認や質問への回答など）を待機しています。
+- `completed`: インタラクションが正常に終了し、出力が利用可能です。
+- `failed`: 実行中にエラーが発生しました（ツールの障害やレート制限など）。
+- `cancelled`: クライアント リクエストにより実行が停止しました。
 
-### תרחישים לדוגמה
+### ユースケース
 
-שימוש בביצוע ברקע עבור:
+バックグラウンド実行は、次の目的で使用します。
 
-- **הרצות של סוכנים:** משימות שדורשות הרצת קוד, גלישה באינטרנט או תיאום בין סוכנים משניים (כמו `antigravity-preview-09-2026`).
-- **Deep Research:** פועל באמצעות `deep-research-preview-04-2026` או `deep-research-max-preview-04-2026`, והתהליך נמשך כמה דקות.
-- **הסקה ארוכה:** משימות שבהן שלבי החשיבה של המודל חורגים מהמגבלות הרגילות של חיבור HTTP.
+- **エージェントの実行:** コード実行、ウェブ閲覧、サブエージェントのオーケストレーション（`antigravity-preview-09-2026` など）を必要とするタスク。
+- **Deep Research:** `deep-research-preview-04-2026` または `deep-research-max-preview-04-2026` を使用して実行され、数分かかります。
+- **長い推論:** モデルの思考ステップが標準の HTTP 接続の上限を超えるタスク。
 
-## אחזור תוצאות
+## 結果を取得する
 
-אפשר לקבל תוצאות של אינטראקציות ברקע באמצעות **polling** או **סטרימינג**.
+**ポーリング**または**ストリーミング**を使用して、バックグラウンドでのインタラクションの結果を取得します。
 
-### תבנית דגימה (לא חוסמת)
+### ポーリング パターン（ブロックなし）
 
-התשאול בודק את סטטוס האינטראקציה באופן תקופתי באמצעות בקשות GET לא חוסמות, עד שהוא מגיע למצב סופי.
+ポーリングは、完了状態に達するまで、非ブロッキング GET リクエストを使用してインタラクションのステータスを定期的に確認します。
 
 ### Python
 
@@ -293,9 +293,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### תבנית סטרימינג
+### ストリーミング パターン
 
-אם השידור מתנתק בגלל הפרעה ברשת, אפשר להמשיך את השידור מהאירוע האחרון שהתקבל. כל דלתא מכילה `event_id` ייחודי במטען הייעודי שלה. העברת המזהה הזה כ-`last_event_id` מפעילה מחדש את הזרם מהאירוע הזה.
+ネットワークの中断によりストリームが切断された場合、最後に受信したイベントからストリーミングを再開できます。各差分には、ペイロードに一意の `event_id` が含まれています。この ID を `last_event_id` として渡すと、そのイベントからストリームが再開されます。
 
 ### Python
 
@@ -500,14 +500,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## שיחות רב-שלביות
+## マルチターンの会話
 
-אינטראקציות עוקבות יכולות להתבסס על שיחה ברקע באמצעות `previous_interaction_id`, בכפוף למגבלות הבאות:
+後続のインタラクションは、次の制約に従って `previous_interaction_id` を使用してバックグラウンド会話にチェーンできます。
 
-1. **ביצועים פעילים נחסמים:** שרשור של אינטראקציה עוקבת לאינטראקציה עם סטטוס `in_progress` מחזיר שגיאת `400 Bad Request`. צריך לחכות שהאינטראקציה תגיע למצב `completed` לפני שמתחילים את האינטראקציה הבאה.
-2. **פרמטר סביבה לסוכנים מנוהלים:** כשמשרשרים אינטראקציות לסוכנים מנוהלים (כמו `antigravity-preview-09-2026`), הבקשות צריכות לכלול גם את `previous_interaction_id` וגם את `environment`.
+1. **アクティブな実行がブロックされる:** `in_progress` ステータスのインタラクションに後続のインタラクションをチェーンすると、`400 Bad Request` エラーが返されます。インタラクションが `completed` 状態になるまで待ってから、次のインタラクションを開始します。
+2. **マネージド エージェントの環境パラメータ:** マネージド エージェント（`antigravity-preview-09-2026` など）のインタラクションをチェーンする場合、リクエストには `previous_interaction_id` と `environment` の両方を含める必要があります。
 
-בדוגמאות הבאות אפשר לראות איך יוצרים שרשור של אינטראקציות:
+次の例は、インタラクションをチェーンする方法を示しています。
 
 ### Python
 
@@ -717,12 +717,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ביטול ומחיקה
+## キャンセルと削除
 
-שליטה בהרצות פעולות וניהול האחסון באמצעות בקשות ביטול ומחיקה:
+実行中の実行を制御し、キャンセル リクエストと削除リクエストを使用してストレージを管理します。
 
-- **ביטול (`POST /interactions/{id}/cancel`):** מפסיק את המשימה הפעילה. הסטטוס משתנה ל`cancelled`. פעולות ניקוי בשרת יכולות לגרום לעיכוב קל לפני שהסטטוס מתעדכן בבקשות GET.
-- **מחיקה (`DELETE /interactions/{id}`):** רשומות האינטראקציות יוסרו מהשרת. בקשות GET הבאות מחזירות שגיאה `404 Not Found`.
+- **キャンセル（`POST /interactions/{id}/cancel`）:** 実行中のタスクを停止します。ステータスが `cancelled` に移行します。サーバーでのクリーンアップ アクションにより、GET リクエストでのステータスの更新がわずかに遅れることがあります。
+- **削除（`DELETE /interactions/{id}`）:** サーバーからインタラクション レコードを削除します。以降の GET リクエストは `404 Not Found` エラーを返します。
 
 ### Python
 
@@ -818,18 +818,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## השלבים הבאים
+## 次のステップ
 
-- במאמר [סקירה כללית על Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) מוסבר על ניהול סשנים ומצבים.
-- פרטים נוספים על עדכונים בזמן אמת של אירועים זמינים במדריך בנושא [אינטראקציות בסטרימינג](https://ai.google.dev/gemini-api/docs/streaming?hl=he).
-- כדי ליצור סוכנים עם שמירת מצב שמנהלים שיחות רב-שלביות, כדאי לעיין ב[מדריך למתחילים בנושא סוכנים מנוהלים](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he).
+- セッションと状態の管理については、[Interactions API の概要](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)をご覧ください。
+- リアルタイム イベントの更新について詳しくは、[ストリーミングのインタラクション](https://ai.google.dev/gemini-api/docs/streaming?hl=ja) ガイドをご覧ください。
+- [マネージド エージェントのクイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)を参照して、ステートフル マルチターン エージェントを構築します。
 
-שליחת משוב
+フィードバックを送信
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-עדכון אחרון: 2026-09-24 (שעון UTC).
+最終更新日 2026-09-24 UTC。
 
-רוצה לתת לנו משוב?
+ご意見をお聞かせください
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

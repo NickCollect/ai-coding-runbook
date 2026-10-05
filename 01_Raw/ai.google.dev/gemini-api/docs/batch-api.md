@@ -1,47 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=th
-fetched_at: 2026-09-28T06:14:43.838953+00:00
-title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=tr
+fetched_at: 2026-10-05T06:44:54.780695+00:00
+title: "Toplu API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# Batch API
+# Toplu API
 
-Gemini Batch API ออกแบบมาเพื่อประมวลผลคำขอจำนวนมาก
-แบบไม่พร้อมกันโดยคิดค่าใช้จ่าย [50% ของราคามาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
-เวลาดำเนินการที่ตั้งไว้คือ 24 ชั่วโมง แต่ในกรณีส่วนใหญ่จะเร็วกว่านั้นมาก
+Gemini Batch API, büyük hacimli istekleri [standart maliyetin% 50'si](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) karşılığında eşzamansız olarak işlemek üzere tasarlanmıştır.
+Hedeflenen yanıt süresi 24 saattir ancak çoğu durumda bu süre çok daha kısadır.
 
-ใช้ Batch API สำหรับงานขนาดใหญ่ที่ไม่เร่งด่วน เช่น การประมวลผลข้อมูลล่วงหน้าหรือการประเมินผลที่ไม่ได้ต้องการการตอบกลับทันที
+Veri ön işleme veya acil yanıt gerektirmeyen değerlendirmeleri çalıştırma gibi büyük ölçekli ve acil olmayan görevler için Batch API'yi kullanın.
 
-## การสร้างงานแบบกลุ่ม
+## Toplu iş oluşturma
 
-คุณส่งคำขอใน Batch API ได้ 2 วิธี ดังนี้
+Toplu API'de isteklerinizi göndermenin iki yolu vardır:
 
-- **[คำขอแบบอินไลน์](#inline-requests):** รายการออบเจ็กต์
-  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่รวมอยู่ในคำขอสร้างแบบกลุ่มโดยตรง วิธีนี้เหมาะสำหรับกลุ่มขนาดเล็กที่ทำให้ขนาดคำขอทั้งหมดไม่เกิน 20 MB **เอาต์พุต** ที่ส่งคืนจากโมเดลคือรายการออบเจ็กต์ `inlineResponse`
-- **[ไฟล์อินพุต](#input-file):** ไฟล์ [JSON Lines (JSONL)](https://jsonlines.org/)
-  ที่แต่ละบรรทัดมีออบเจ็กต์
-  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่สมบูรณ์
-  เราขอแนะนำให้ใช้วิธีนี้สำหรับคำขอขนาดใหญ่ **เอาต์พุต** ที่ส่งคืนจากโมเดลคือไฟล์ JSONL ที่แต่ละบรรทัดเป็น `GenerateContentResponse` หรือออบเจ็กต์สถานะ
+- **[Satır içi istekler](#inline-requests):** Toplu oluşturma isteğinize doğrudan dahil edilen [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnelerinin listesi. Bu yöntem, toplam istek boyutunu 20 MB'ın altında tutan daha küçük toplu işlemler için uygundur. Modelden döndürülen **çıktı**, `inlineResponse` nesnelerinin listesidir.
+- **[Giriş dosyası](#input-file):** Her satırın eksiksiz bir [JSON Lines (JSONL)](https://jsonlines.org/)
+  dosyası içerdiği [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnesi.
+  Bu yöntem, daha büyük istekler için önerilir. Modelden döndürülen **çıkış**, her satırın `GenerateContentResponse` veya durum nesnesi olduğu bir JSONL dosyasıdır.
 
-### คำขอแบบอินไลน์
+### Satır içi istekler
 
-สำหรับคำขอจำนวนเล็กน้อย คุณสามารถฝัง
-[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ออบเจ็กต์
-ไว้ใน [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#request-body) ได้โดยตรง ตัวอย่างต่อไปนี้จะเรียกใช้เมธอด
-[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-ด้วยคำขอแบบอินไลน์
+Küçük bir istek grubu için [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnelerini doğrudan [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#request-body) içine yerleştirebilirsiniz. Aşağıdaki örnekte, satır içi isteklerle [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=tr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) yöntemi çağrılıyor:
 
 ### Python
 
@@ -187,26 +180,22 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:ba
 }'
 ```
 
-### ไฟล์อินพุต
+### Giriş dosyası
 
-สำหรับคำขอจำนวนมาก ให้เตรียมไฟล์ JSON Lines (JSONL) แต่ละบรรทัดใน
-ไฟล์นี้ต้องเป็นออบเจ็กต์ JSON ที่มีคีย์ที่ผู้ใช้กำหนดและออบเจ็กต์คำขอ
-โดยคำขอต้องเป็นออบเจ็กต์
-[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่ถูกต้อง ระบบจะใช้คีย์ที่ผู้ใช้กำหนดในคำตอบเพื่อระบุว่าเอาต์พุตใดเป็นผลลัพธ์ของคำขอใด ตัวอย่างเช่น คำขอที่มีคีย์กำหนดเป็น `request-1` จะมีคำตอบที่ใส่คำอธิบายประกอบด้วยชื่อคีย์เดียวกัน
+Daha büyük istek grupları için JSON Lines (JSONL) dosyası hazırlayın. Bu dosyadaki her satır, kullanıcı tanımlı bir anahtar ve istek nesnesi içeren bir JSON nesnesi olmalıdır. İstek, geçerli bir [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnesi olmalıdır. Kullanıcı tanımlı anahtar, hangi çıktının hangi isteğin sonucu olduğunu belirtmek için yanıtta kullanılır. Örneğin, anahtarı `request-1` olarak tanımlanan isteğin yanıtı aynı anahtar adıyla açıklama eklenmiş olarak döndürülür.
 
-ระบบจะอัปโหลดไฟล์นี้โดยใช้ [File API](https://ai.google.dev/gemini-api/docs/files?hl=th) ขนาดไฟล์สูงสุดที่อนุญาตสำหรับไฟล์อินพุตคือ 2 GB
+Bu dosya, [File API](https://ai.google.dev/gemini-api/docs/files?hl=tr) kullanılarak yüklenir. Giriş dosyası için izin verilen maksimum dosya boyutu 2 GB'tır.
 
-ตัวอย่างไฟล์ JSONL มีดังนี้ คุณสามารถบันทึกไฟล์นี้ในชื่อ `my-batch-requests.json` ได้
+Aşağıda bir JSONL dosyası örneği verilmiştir. Dosyayı `my-batch-requests.json` adlı bir dosyaya kaydedebilirsiniz:
 
 ```
 {"key": "request-1", "request": {"contents": [{"parts": [{"text": "Describe the process of photosynthesis."}]}], "generation_config": {"temperature": 0.7}}}
 {"key": "request-2", "request": {"contents": [{"parts": [{"text": "What are the main ingredients in a Margherita pizza?"}]}]}}
 ```
 
-เช่นเดียวกับคำขอแบบอินไลน์ คุณสามารถระบุพารามิเตอร์อื่นๆ เช่น คำแนะนำของระบบ เครื่องมือ หรือการกำหนดค่าอื่นๆ ใน JSON ของคำขอแต่ละรายการได้
+Satır içi isteklerde olduğu gibi, her istek JSON'ında sistem talimatları, araçlar veya diğer yapılandırmalar gibi başka parametreler de belirtebilirsiniz.
 
-คุณสามารถอัปโหลดไฟล์นี้โดยใช้ [File API](https://ai.google.dev/gemini-api/docs/files?hl=th) ตามที่
-แสดงในตัวอย่างต่อไปนี้ หากใช้ข้อมูลอินพุตหลายรูปแบบ คุณสามารถอ้างอิงไฟล์อื่นๆ ที่อัปโหลดไว้ในไฟล์ JSONL ได้
+Bu dosyayı, aşağıdaki örnekte gösterildiği gibi [File API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükleyebilirsiniz. Çok formatlı girişle çalışıyorsanız JSONL dosyanızda yüklenen diğer dosyalara referans verebilirsiniz.
 
 ### Python
 
@@ -358,9 +347,7 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 ```
 
-ตัวอย่างต่อไปนี้จะเรียกใช้
-[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-เมธอดโดยใช้ไฟล์อินพุตที่อัปโหลดโดยใช้ File API
+Aşağıdaki örnekte, File API kullanılarak yüklenen giriş dosyasıyla [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=tr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) yöntemi çağrılıyor:
 
 ### Python
 
@@ -436,23 +423,18 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:ba
 }"
 ```
 
-เมื่อสร้างงานแบบกลุ่ม คุณจะได้รับชื่อของงาน ใช้ชื่อนี้
-เพื่อ [ตรวจสอบ](#batch-job-status)สถานะของงาน รวมถึง
-[ดึงข้อมูลผลลัพธ์](#retrieve-batch-results)เมื่องานเสร็จสมบูรณ์
+Bir toplu iş oluşturduğunuzda iş adı döndürülür. Bu adı, iş durumunu [izlemenin](#batch-job-status) yanı sıra iş tamamlandıktan sonra [sonuçları almak](#retrieve-batch-results) için kullanın.
 
-ตัวอย่างเอาต์พุตที่มีชื่อของงานมีดังนี้
+Aşağıda, iş adı içeren bir örnek çıkış verilmiştir:
 
 ```
 Created batch job from file: batches/123456789
 ```
 
-### การรองรับการฝังแบบกลุ่ม
+### Toplu yerleştirme desteği
 
-คุณสามารถใช้ Batch API เพื่อโต้ตอบกับ
-[โมเดลการฝัง](https://ai.google.dev/gemini-api/docs/embeddings?hl=th)เพื่อเพิ่มปริมาณงาน
-หากต้องการสร้างงานแบบกลุ่มการฝังด้วย[คำขอแบบอินไลน์](#inline-requests)
-หรือ[ไฟล์อินพุต](#input-file) ให้ใช้ API `batches.create_embeddings` และ
-ระบุโมเดลการฝัง
+Daha yüksek işleme hızı için Batch API'yi kullanarak [Embeddings modeli](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) ile etkileşim kurabilirsiniz.
+[Satır içi istekler](#inline-requests) veya [giriş dosyaları](#input-file) ile yerleştirme toplu işi oluşturmak için `batches.create_embeddings` API'yi kullanın ve yerleştirme modelini belirtin.
 
 ### Python
 
@@ -538,12 +520,11 @@ BatchJob batchJob =
 System.out.println("Created batch job: " + batchJob.name().orElse(""));
 ```
 
-อ่านส่วนการฝังใน[คู่มือการใช้งาน Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)
-เพื่อดูตัวอย่างเพิ่มเติม
+Daha fazla örnek için [Toplu API yemek kitabındaki](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) Yerleştirme bölümünü inceleyin.
 
-### การกำหนดค่าคำขอ
+### Yapılandırma isteği
 
-คุณสามารถรวมการกำหนดค่าคำขอใดก็ได้ที่จะใช้ในคำขอมาตรฐานที่ไม่ใช่แบบกลุ่ม เช่น คุณระบุอุณหภูมิ คำแนะนำของระบบ หรือแม้แต่ส่งต่อรูปแบบอื่นๆ ได้ ตัวอย่างต่อไปนี้แสดงคำขอแบบอินไลน์ที่มีคำแนะนำของระบบสำหรับคำขอรายการหนึ่ง
+Standart toplu olmayan bir istekte kullanacağınız tüm istek yapılandırmalarını ekleyebilirsiniz. Örneğin, sıcaklığı, sistem talimatlarını belirtebilir veya başka yöntemler de kullanabilirsiniz. Aşağıdaki örnekte, isteklerden biri için sistem talimatı içeren bir satır içi istek örneği gösterilmektedir:
 
 ### Python
 
@@ -596,8 +577,7 @@ List<InlinedRequest> inlineRequestsList =
             .build());
 ```
 
-เช่นเดียวกัน คุณสามารถระบุเครื่องมือที่จะใช้สำหรับคำขอได้ ตัวอย่างต่อไปนี้
-แสดงคำขอที่เปิดใช้เครื่องมือ [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
+Benzer şekilde, bir istek için kullanılacak araçları belirtebilirsiniz. Aşağıdaki örnekte, [Google Arama Aracı](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)'nı etkinleştiren bir istek gösterilmektedir:
 
 ### Python
 
@@ -644,8 +624,8 @@ List<InlinedRequest> inlinedRequests =
             .build());
 ```
 
-นอกจากนี้ คุณยังระบุ[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)ได้ด้วย
-ตัวอย่างต่อไปนี้แสดงวิธีระบุสำหรับคำขอแบบกลุ่ม
+[Yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) da belirtebilirsiniz.
+Aşağıdaki örnekte, toplu istekleriniz için nasıl belirteceğiniz gösterilmektedir.
 
 ### Python
 
@@ -913,7 +893,7 @@ for (int i = 0; i < responses.size(); i++) {
 }
 ```
 
-ตัวอย่างต่อไปนี้แสดงเอาต์พุตของงานนี้
+Aşağıda bu işin örnek çıkışı gösterilmektedir:
 
 ```
 --- Response 1 ---
@@ -1009,20 +989,20 @@ for (int i = 0; i < responses.size(); i++) {
 ]
 ```
 
-## การตรวจสอบสถานะของงาน
+## İş durumunu izleme
 
-ใช้ชื่อการดำเนินการที่ได้รับเมื่อสร้างงานแบบกลุ่มเพื่อสำรวจสถานะของงาน
-ฟิลด์สถานะของงานแบบกลุ่มจะระบุสถานะปัจจุบันของงาน งานแบบกลุ่มอาจมีสถานะอย่างใดอย่างหนึ่งต่อไปนี้
+Durumunu yoklamak için toplu iş oluşturulurken elde edilen işlem adını kullanın.
+Toplu işin durum alanı, mevcut durumu gösterir. Bir toplu iş aşağıdaki durumlardan birinde olabilir:
 
-- `JOB_STATE_PENDING`: ระบบสร้างงานแล้วและกำลังรอให้บริการประมวลผล
-- `JOB_STATE_RUNNING`: งานกำลังดำเนินการ
-- `JOB_STATE_SUCCEEDED`: งานเสร็จสมบูรณ์แล้ว ตอนนี้คุณสามารถดึงข้อมูลผลลัพธ์ได้แล้ว
-- `JOB_STATE_FAILED`: งานล้มเหลว ดูข้อมูลเพิ่มเติมได้ในรายละเอียดข้อผิดพลาด
-- `JOB_STATE_CANCELLED`: ผู้ใช้ยกเลิกงาน
-- `JOB_STATE_EXPIRED`: งานหมดอายุเนื่องจากทำงานหรือรอนานกว่า 48 ชั่วโมง งานจะไม่มีผลลัพธ์ให้ดึงข้อมูล
-  คุณลองส่งงานอีกครั้งหรือแบ่งคำขอออกเป็นกลุ่มย่อยๆ ได้
+- `JOB_STATE_PENDING`: İş oluşturuldu ve hizmet tarafından işlenmeyi bekliyor.
+- `JOB_STATE_RUNNING`: İş devam ediyor.
+- `JOB_STATE_SUCCEEDED`: İş başarıyla tamamlandı. Artık sonuçları alabilirsiniz.
+- `JOB_STATE_FAILED`: İş başarısız oldu. Daha fazla bilgi için hata ayrıntılarını kontrol edin.
+- `JOB_STATE_CANCELLED`: İş, kullanıcı tarafından iptal edildi.
+- `JOB_STATE_EXPIRED`: İş, 48 saatten uzun süredir çalıştığı veya beklemede olduğu için süresi doldu. İşin alınacak sonucu olmayacak.
+  İşi tekrar göndermeyi deneyebilir veya istekleri daha küçük gruplara ayırabilirsiniz.
 
-คุณสามารถสำรวจสถานะของงานเป็นระยะๆ เพื่อตรวจสอบว่างานเสร็จสมบูรณ์แล้วหรือไม่
+Tamamlanıp tamamlanmadığını kontrol etmek için iş durumunu düzenli olarak yoklayabilirsiniz.
 
 ### Python
 
@@ -1124,11 +1104,10 @@ if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_FAILED) {
 }
 ```
 
-### การสำรวจและเว็บฮุค
+### Anket ve webhook'lar
 
-**เบื่อการสำรวจแล้วใช่ไหม** ตอนนี้ Gemini รองรับ
-[เว็บฮุค](https://ai.google.dev/gemini-api/docs/webhooks?hl=th)สำหรับการประมวลผลการเติมข้อความแบบไม่พร้อมกันแล้ว
-แทนที่จะเรียกใช้ `GET / operations` อย่างต่อเนื่อง ให้สมัครใช้บริการ `batch.succeeded` โดยตรงเพื่ออนุญาตให้ Gemini API ส่งการแจ้งเตือนแบบเรียลไทม์ไปยังเซิร์ฟเวอร์ของคุณเมื่อการดำเนินการแบบไม่พร้อมกันหรือการดำเนินการที่ใช้เวลานานเสร็จสมบูรณ์
+**Anket yapmaktan sıkıldınız mı?** Gemini artık tamamlamaları eşzamansız olarak işlemek için [Web kancalarını](https://ai.google.dev/gemini-api/docs/webhooks?hl=tr) destekliyor.
+Sürekli olarak `GET / operations` numaralı telefonu aramak yerine, `batch.succeeded` numaralı telefona doğrudan abone olun. Böylece, eşzamansız veya uzun süren işlemler tamamlandığında Gemini API'nin sunucunuza anlık bildirimler göndermesine izin verebilirsiniz.
 
 ### Python
 
@@ -1206,10 +1185,10 @@ curl -X POST \
   }'
 ```
 
-## การดึงข้อมูลผลลัพธ์
+## Sonuçlar alınıyor
 
-เมื่อสถานะของงานระบุว่างานแบบกลุ่มเสร็จสมบูรณ์แล้ว ผลลัพธ์จะอยู่ในฟิลด์ `response`
-โดยค่าเริ่มต้น ระบบจะจัดเก็บผลลัพธ์ของงานแบบกลุ่มและให้ดาวน์โหลดได้เป็นเวลา 6 สัปดาห์ก่อนที่จะลบออกอย่างถาวร
+İş durumu, toplu işinizin başarılı olduğunu gösterdiğinde sonuçlar `response` alanında kullanılabilir.
+Varsayılan olarak, toplu iş sonuçları kalıcı olarak silinmeden önce 6 hafta boyunca depolanır ve indirilebilir.
 
 ### Python
 
@@ -1430,9 +1409,9 @@ elif [[ $batch_state == "JOB_STATE_EXPIRED" ]]; then
 fi
 ```
 
-## การแสดงรายการงานแบบกลุ่ม
+## Toplu işleri listeleme
 
-คุณสามารถแสดงรายการงานแบบกลุ่มล่าสุดได้
+Son toplu işlerinizi listeleyebilirsiniz.
 
 ### Python
 
@@ -1486,9 +1465,9 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## การยกเลิกงานแบบกลุ่ม
+## Toplu işi iptal etme
 
-คุณสามารถยกเลิกงานแบบกลุ่มที่กำลังดำเนินการอยู่ได้โดยใช้ชื่อของงาน เมื่อยกเลิกงาน ระบบจะหยุดประมวลผลคำขอใหม่
+Devam eden bir toplu işi adını kullanarak iptal edebilirsiniz. Bir iş iptal edildiğinde yeni istekleri işlemeyi durdurur.
 
 ### Python
 
@@ -1528,9 +1507,9 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 -H "Content-Type:application/json" 2> /dev/null | jq -r '.metadata.state'
 ```
 
-## การลบงานแบบกลุ่ม
+## Toplu işi silme
 
-คุณสามารถลบงานแบบกลุ่มที่มีอยู่ได้โดยใช้ชื่อของงาน เมื่อลบงาน ระบบจะหยุดประมวลผลคำขอใหม่และนำงานออกจากรายการงานแบบกลุ่ม
+Mevcut bir toplu işi adını kullanarak silebilirsiniz. Bir iş silindiğinde yeni isteklerin işlenmesi durdurulur ve iş, toplu işler listesinden kaldırılır.
 
 ### Python
 
@@ -1565,17 +1544,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME" \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## การสร้างรูปภาพแบบกลุ่ม
+## Toplu olarak resim oluşturma
 
-หากคุณใช้ [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=th) และต้องการสร้างรูปภาพจำนวนมาก
-คุณสามารถใช้ Batch API เพื่อรับ
-[ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th)ที่สูงขึ้นโดยแลกกับการดำเนินการที่ใช้เวลาสูงสุด
-24 ชั่วโมง
+[Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)'yı kullanıyorsanız ve çok sayıda görüntü oluşturmanız gerekiyorsa 24 saate kadar bekleme süresi karşılığında daha yüksek [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) elde etmek için Batch API'yi kullanabilirsiniz.
 
-คุณสามารถใช้[คำขอแบบอินไลน์](#inline-requests-images)สำหรับคำขอแบบกลุ่มขนาดเล็ก (ไม่เกิน 20 MB) หรือ
-ไฟล์อินพุต [JSONL](#input-file-images) สำหรับคำขอแบบกลุ่มขนาดใหญ่ (แนะนำสำหรับการสร้างรูปภาพ)
+Küçük istek grupları (20 MB'tan küçük) için [satır içi istekler](#inline-requests-images), büyük gruplar için ise [JSONL giriş dosyası](#input-file-images) (resim oluşturma için önerilir) kullanabilirsiniz:
 
-### คำขอแบบอินไลน์สำหรับรูปภาพ
+### Resimler için satır içi istekler
 
 ### Python
 
@@ -1887,7 +1862,7 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-### ไฟล์อินพุตสำหรับรูปภาพ
+### Resimler için giriş dosyası
 
 ### Python
 
@@ -2199,43 +2174,35 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-## รายละเอียดทางเทคนิค
+## Teknik ayrıntılar
 
-- **โมเดลที่รองรับ:** Batch API รองรับโมเดล Gemini หลายรุ่น
-  โปรดดูที่[หน้าโมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)เพื่อดูการรองรับ
-  Batch API ของแต่ละโมเดล รูปแบบที่รองรับสำหรับ Batch API จะเหมือนกับรูปแบบที่รองรับใน API แบบโต้ตอบ (หรือที่ไม่ใช่แบบกลุ่ม)
-- **ราคา:** การใช้งาน Batch API คิดราคา 50% ของราคา API แบบโต้ตอบมาตรฐานสำหรับโมเดลที่เทียบเท่า ดูรายละเอียดได้ใน[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
-  โปรดดูรายละเอียดเกี่ยวกับขีดจำกัดอัตราสำหรับฟีเจอร์นี้ได้ในหน้า[ขีดจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th#batch-mode)
-- **เป้าหมายระดับการให้บริการ (SLO):** งานแบบกลุ่มออกแบบมาให้เสร็จสมบูรณ์ภายในเวลาดำเนินการ 24 ชั่วโมง งานจำนวนมากอาจเสร็จสมบูรณ์เร็วกว่านั้นมาก ทั้งนี้ขึ้นอยู่กับขนาดของงานและภาระงานปัจจุบันของระบบ
-- **การแคช:** [ระบบรองรับการแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th)สำหรับคำขอแบบกลุ่ม ใช้เนื้อหาที่แคชไว้ซ้ำโดยระบุชื่อทรัพยากร `cached_content` ในการกำหนดค่าคำขอแต่ละรายการภายในกลุ่ม
-  หากคำขอในกลุ่มทำให้เกิดการพบแคช คุณจะต้องชำระเงินตามอัตราการแคชบริบทมาตรฐาน
+- **Desteklenen modeller:** Batch API, çeşitli Gemini modellerini destekler.
+  Her modelin Toplu API desteği için [Modeller sayfası](https://ai.google.dev/gemini-api/docs/models?hl=tr)'na bakın. Toplu API için desteklenen yöntemler, etkileşimli (veya toplu olmayan) API'de desteklenenlerle aynıdır.
+- **Fiyatlandırma:** Batch API kullanımı, eşdeğer model için standart etkileşimli API maliyetinin% 50'si olarak fiyatlandırılır. Ayrıntılar için [fiyatlandırma sayfasına](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) göz atın. Bu özelliğin sıklık sınırlarıyla ilgili ayrıntılar için [sıklık sınırları sayfasına](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr#batch-mode) bakın.
+- **Hizmet düzeyi hedefi (SLO):** Toplu işler, 24 saatlik bir işlem süresi içinde tamamlanacak şekilde tasarlanmıştır. Birçok iş, boyutuna ve mevcut sistem yüküne bağlı olarak çok daha hızlı tamamlanabilir.
+- **Önbelleğe alma:** Toplu istekler için [bağlam önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) desteklenir. Toplu işinizdeki tek tek isteklerin yapılandırmasında `cached_content` kaynak adını belirterek önbelleğe alınmış içeriği yeniden kullanın.
+  Toplu isteğinizdeki bir istek önbellek isabetiyle sonuçlanırsa [standart bağlam önbelleğe alma ücretlerini](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) ödersiniz.
 
-## แนวทางปฏิบัติแนะนำ
+## En iyi uygulamalar
 
-- **ใช้ไฟล์อินพุตสำหรับคำขอขนาดใหญ่:** สำหรับคำขอจำนวนมาก
-  ให้ใช้วิธีการป้อนไฟล์
-  เสมอเพื่อให้จัดการได้ง่ายขึ้นและหลีกเลี่ยงการถึงขีดจำกัดขนาดคำขอสำหรับ
-  การเรียก [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-  เอง โปรดทราบว่าไฟล์อินพุตแต่ละไฟล์มีขีดจำกัดขนาด 2 GB
-- **การจัดการข้อผิดพลาด:** ตรวจสอบ `batchStats` เพื่อดู `failedRequestCount` หลังจากงานเสร็จสมบูรณ์ หากใช้เอาต์พุตไฟล์ ให้แยกวิเคราะห์แต่ละบรรทัดเพื่อตรวจสอบว่าเป็น `GenerateContentResponse` หรือออบเจ็กต์สถานะที่ระบุข้อผิดพลาดสำหรับคำขอนั้นๆ ดูชุดรหัสข้อผิดพลาดทั้งหมดได้ใน[คู่มือ
-  การแก้ปัญหา](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=th#error-codes)
-- **ส่งงานเพียงครั้งเดียว:** การสร้างงานแบบกลุ่มไม่ใช่การดำเนินการที่ทำซ้ำได้
-  หากคุณส่งคำขอสร้างเดียวกัน 2 ครั้ง ระบบจะสร้างงานแบบกลุ่ม 2 งานแยกกัน
-- **แบ่งกลุ่มขนาดใหญ่มาก:** แม้ว่าเวลาดำเนินการที่ตั้งไว้คือ 24 ชั่วโมง แต่เวลาประมวลผลจริงอาจแตกต่างกันไปตามภาระงานของระบบและขนาดของงาน
-  สำหรับงานขนาดใหญ่ ให้พิจารณาแบ่งงานออกเป็นกลุ่มย่อยๆ หากต้องการผลลัพธ์ระดับกลางเร็วขึ้น
+- **Büyük istekler için giriş dosyalarını kullanın:** Çok sayıda istek için, yönetimi kolaylaştırmak ve [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=tr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) çağrısının kendisiyle ilgili istek boyutu sınırlarına ulaşmamak amacıyla her zaman dosya girişi yöntemini kullanın. Giriş dosyası başına 2 GB dosya boyutu sınırı olduğunu unutmayın.
+- **Hata işleme:** Bir iş tamamlandıktan sonra `batchStats` için `failedRequestCount` öğesini kontrol edin. Dosya çıkışı kullanıyorsanız her satırı ayrıştırarak `GenerateContentResponse` olup olmadığını veya söz konusu istekte hata olduğunu belirten bir durum nesnesi olup olmadığını kontrol edin. Hata kodlarının tam listesi için [sorun giderme kılavuzuna](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr#error-codes) bakın.
+- **İşleri bir kez gönderme:** Toplu iş oluşturma işlemi, idempotent değildir.
+  Aynı oluşturma isteğini iki kez gönderirseniz iki ayrı toplu iş oluşturulur.
+- **Çok büyük toplu işlemleri bölme:** Hedef işlem süresi 24 saat olsa da gerçek işlem süresi sistem yüküne ve iş boyutuna bağlı olarak değişebilir.
+  Büyük işlerde, ara sonuçlara daha erken ihtiyaç duyuluyorsa işleri daha küçük gruplara ayırabilirsiniz.
 
-## ขั้นตอนถัดไป
+## Sırada ne var?
 
-- ดูตัวอย่างเพิ่มเติมได้ในโน้ตบุ๊ก [Batch API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=th)
-- เลเยอร์ความเข้ากันได้กับ OpenAI รองรับ Batch API อ่านตัวอย่างในหน้า
-  [ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th#batch)
+- Daha fazla örnek için [Toplu API not defterine](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=tr) göz atın.
+- OpenAI uyumluluk katmanı, Batch API'yi destekler. [OpenAI Uyumluluğu](https://ai.google.dev/gemini-api/docs/openai?hl=tr#batch) sayfasındaki örnekleri inceleyin.
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-09-18 UTC
+Son güncelleme tarihi: 2026-09-18 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-18 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-18 UTC."],[],[]]

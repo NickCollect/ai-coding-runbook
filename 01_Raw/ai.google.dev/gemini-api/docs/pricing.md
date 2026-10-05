@@ -1,1314 +1,1251 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=th
-fetched_at: 2026-09-28T06:28:08.165744+00:00
-title: "\u0e23\u0e32\u0e04\u0e32 Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=fr
+fetched_at: 2026-10-05T06:50:42.205667+00:00
+title: "Tarifs de l'API Gemini\u00a0Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-# ราคา Gemini Developer API
+# Tarifs de l'API Gemini Developer
 
-เริ่มสร้างได้โดยไม่มีค่าใช้จ่ายพร้อมขีดจำกัดที่เพียงพอ จากนั้นเพิ่มทรัพยากรด้วย
-การกำหนดราคาแบบชำระล่วงหน้าและแบบจ่ายเมื่อใช้สำหรับแอปพลิเคชันที่พร้อมใช้งานจริง
+Commencez à créer des applications sans frais avec des limites généreuses, puis passez à une tarification prépayée, puis au paiement à l'usage pour vos applications prêtes pour la production.
 
-### ฟรี
+### Disponible
 
-สำหรับนักพัฒนาและโปรเจ็กต์ขนาดเล็กที่เพิ่งเริ่มต้นใช้งาน Gemini API
+Pour les développeurs et les petits projets qui débutent avec l'API Gemini.
 
-- check\_circleสิทธิ์เข้าถึงแบบจำกัดสำหรับบางโมเดล
-- check\_circleโทเค็นอินพุตและเอาต์พุตฟรี
-- check\_circleสิทธิ์เข้าถึง Google AI Studio
-- check\_circleเนื้อหาที่ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา[\*](https://ai.google.dev/gemini-api/terms?hl=th)
+- check\_circle Accès limité à certains modèles
+- check\_circleJetons d'entrée et de sortie sans frais
+- check\_circle Accès à Google AI Studio
+- check\_circleContenu utilisé pour améliorer nos produits[\*](https://ai.google.dev/gemini-api/terms?hl=fr)
 
-[เริ่มต้นใช้งานฟรี](https://aistudio.google.com?hl=th)
+[Profiter d'un essai sans frais](https://aistudio.google.com?hl=fr)
 
-### จ่ายเงิน
+### Payant
 
-สำหรับแอปพลิเคชันเวอร์ชันที่ใช้งานจริงซึ่งต้องการปริมาณที่สูงขึ้นและฟีเจอร์ขั้นสูง
+Pour les applications de production qui nécessitent des volumes plus importants et des fonctionnalités avancées.
 
-- check\_circleอัตราขีดจำกัดที่สูงขึ้นสำหรับการทำให้ใช้งานได้จริง
-- check\_circleสิทธิ์เข้าถึงการแคชบริบท
-- check\_circleBatch API (ลดต้นทุน 50%)
-- check\_circleสิทธิ์เข้าถึงโมเดลที่ทันสมัยที่สุดของ Google
-- check\_circleเนื้อหาที่**ไม่ได้**ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา[\*](https://ai.google.dev/gemini-api/terms?hl=th)
+- check\_circleLimites de débit plus élevées pour les déploiements en production
+- check\_circleAccès à la mise en cache du contexte
+- check\_circleAPI batch (réduction des coûts de 50 %)
+- check\_circle Accès aux modèles les plus avancés de Google
+- check\_circleContenu **non** utilisé pour améliorer nos produits[\*](https://ai.google.dev/gemini-api/terms?hl=fr)
 
-[อัปเกรดเป็นแบบชำระเงิน](https://aistudio.google.com/api-keys?hl=th)
+[Passer à un compte payant](https://aistudio.google.com/api-keys?hl=fr)
 
 ### Enterprise
 
-สำหรับการติดตั้งใช้งานระดับองค์กรที่ขับเคลื่อนโดย[แพลตฟอร์ม Agent ของ Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=th)
+Pour les déploiements d'entreprise, optimisé par [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=fr).
 
-- check\_circleฟีเจอร์ทั้งหมดในรุ่นแบบชำระเงิน รวมถึงสิทธิ์เข้าถึงแบบไม่บังคับสำหรับ
-- check\_circleช่องทางการสนับสนุนเฉพาะ
-- check\_circleการรักษาความปลอดภัยขั้นสูงและการปฏิบัติตามข้อกำหนด
-- check\_circleอัตราการส่งข้อมูลที่จัดสรร
-- check\_circleส่วนลดตามปริมาณ (อิงตามการใช้งาน)
-- check\_circleML Ops, Model Garden และอื่นๆ
+- check\_circle Toutes les fonctionnalités de la version payante, ainsi qu'un accès facultatif à :
+- check\_circle Canaux d'assistance dédiés
+- check\_circleSécurité et conformité avancées
+- check\_circle Débit provisionné
+- check\_circle Remises basées sur le volume (en fonction de l'utilisation)
+- check\_circleMLOps, Model Garden et plus
 
-[ติดต่อฝ่ายขาย](https://cloud.google.com/contact?hl=th)
+[Contacter le service commercial](https://cloud.google.com/contact?hl=fr)
 
-## Gemini 3.8 Flash
+## Gemini 3.8 Flash
 
-*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=th)*
+*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr)
 
-โมเดล Flash ที่ชาญฉลาดที่สุดของเรา ซึ่งออกแบบมาเพื่อวิศวกรรมซอฟต์แวร์ในระยะยาว เอเจนต์อัตโนมัติ และเวิร์กโฟลว์ที่ซับซ้อนขององค์กร
+Notre modèle Flash le plus intelligent, conçu pour l'ingénierie logicielle à long terme, les agents autonomes et les workflows d'entreprise complexes.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.75 จนถึงวันที่ 31 ธันวาคม 2026 $1.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $3.75 จนถึงวันที่ 31 ธันวาคม 2026 $7.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.075 จนถึงวันที่ 31 ธันวาคม 2026 $0.15 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 75 $ jusqu'au 31 décembre 2026. 1, 50 $ à partir du 1er janvier 2027. |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3, 75 $ jusqu'au 31 décembre 2026 7, 50 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,075 $ jusqu'au 31 décembre 2026 0,15 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.375 จนถึงวันที่ 31 ธันวาคม 2026 $0.75 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.875 จนถึงวันที่ 31 ธันวาคม 2026 $3.75 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0375 จนถึงวันที่ 31 ธันวาคม 2026 $0.075 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.375 จนถึงวันที่ 31 ธันวาคม 2026 $0.75 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.875 จนถึงวันที่ 31 ธันวาคม 2026 $3.75 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0375 จนถึงวันที่ 31 ธันวาคม 2026 $0.075 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.35 จนถึงวันที่ 31 ธันวาคม 2026 $2.70 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $6.75 จนถึงวันที่ 31 ธันวาคม 2026 $13.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.135 จนถึงวันที่ 31 ธันวาคม 2026 $0.27 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1, 35 $ jusqu'au 31 décembre 2026 2, 70 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 6, 75 $ jusqu'au 31 décembre 2026 13, 50 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,135 $ jusqu'au 31 décembre 2026 0,27 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 3.7 Flash
+## Gemini 3.7 Flash
 
-*[`gemini-3.7-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=th)*
+*[`gemini-3.7-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash&hl=fr)
 
-โมเดล Flash ที่รวดเร็วและมีประสิทธิภาพของเราสร้างขึ้นสำหรับการเขียนโค้ดในชีวิตประจำวัน การใช้เครื่องมือแบบ Agent และการดำเนินการแบบหลายขั้นตอนที่เชื่อถือได้
+Notre modèle Flash rapide et efficace, conçu pour le codage au quotidien, l'utilisation d'outils agentiques et une exécution fiable en plusieurs étapes.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.75 จนถึงวันที่ 31 ธันวาคม 2026 $1.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $3.75 จนถึงวันที่ 31 ธันวาคม 2026 $7.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.075 จนถึงวันที่ 31 ธันวาคม 2026 $0.15 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 75 $ jusqu'au 31 décembre 2026. 1, 50 $ à partir du 1er janvier 2027. |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3, 75 $ jusqu'au 31 décembre 2026 7, 50 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,075 $ jusqu'au 31 décembre 2026 0,15 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.375 จนถึงวันที่ 31 ธันวาคม 2026 $0.75 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.875 จนถึงวันที่ 31 ธันวาคม 2026 $3.75 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0375 จนถึงวันที่ 31 ธันวาคม 2026 $0.075 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.375 จนถึงวันที่ 31 ธันวาคม 2026 $0.75 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.875 จนถึงวันที่ 31 ธันวาคม 2026 $3.75 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0375 จนถึงวันที่ 31 ธันวาคม 2026 $0.075 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.35 จนถึงวันที่ 31 ธันวาคม 2026 $2.70 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $6.75 จนถึงวันที่ 31 ธันวาคม 2026 $13.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.135 จนถึงวันที่ 31 ธันวาคม 2026 $0.27 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1, 35 $ jusqu'au 31 décembre 2026 2, 70 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 6, 75 $ jusqu'au 31 décembre 2026 13, 50 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,135 $ jusqu'au 31 décembre 2026 0,27 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 3.6 Flash
+## Gemini 3.6 Flash
 
-*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=th)*
+*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=fr)
 
-โมเดล Flash รุ่นก่อนของเราที่ให้สมดุลระหว่างความเร็วและความสามารถแบบหลายรูปแบบในงานทั่วไปของเอเจนต์และงานประจำวัน
+Notre modèle Flash de génération précédente, qui offre un bon équilibre entre vitesse et capacités multimodales pour les tâches agentiques générales et quotidiennes.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.75 จนถึงวันที่ 31 ธันวาคม 2026 $1.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $3.75 จนถึงวันที่ 31 ธันวาคม 2026 $7.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.075 จนถึงวันที่ 31 ธันวาคม 2026 $0.15 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 75 $ jusqu'au 31 décembre 2026. 1, 50 $ à partir du 1er janvier 2027. |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3, 75 $ jusqu'au 31 décembre 2026 7, 50 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,075 $ jusqu'au 31 décembre 2026 0,15 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.375 จนถึงวันที่ 31 ธันวาคม 2026 $0.75 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.875 จนถึงวันที่ 31 ธันวาคม 2026 $3.75 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0375 จนถึงวันที่ 31 ธันวาคม 2026 $0.075 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.375 จนถึงวันที่ 31 ธันวาคม 2026 $0.75 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.875 จนถึงวันที่ 31 ธันวาคม 2026 $3.75 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0375 จนถึงวันที่ 31 ธันวาคม 2026 $0.075 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.35 จนถึงวันที่ 31 ธันวาคม 2026 $2.70 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $6.75 จนถึงวันที่ 31 ธันวาคม 2026 $13.50 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.135 จนถึงวันที่ 31 ธันวาคม 2026 $0.27 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1, 35 $ jusqu'au 31 décembre 2026 2, 70 $ à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 6, 75 $ jusqu'au 31 décembre 2026 13, 50 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,135 $ jusqu'au 31 décembre 2026 0,27 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 3.5 Flash
+## Gemini 3.5 Flash
 
-*[`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th)*
+*[`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash&hl=fr)
 
-โมเดล Flash รุ่นก่อนของเราสร้างขึ้นเพื่อความเร็วและประสิทธิภาพพื้นฐานในภาระงานที่มีปริมาณงานสูงและเป็นประจำ
+Notre modèle Flash précédent, conçu pour allier rapidité et performances de base sur les charges de travail de routine à haut débit.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.50 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | 270 บาท |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.15 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1,50 $ |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 9 $ |
+| Prix de la mise en cache du contexte | Sans frais | 0,15 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | 22.50 บาท |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $4.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.075 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,75 € |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 4,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,075 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | 22.50 บาท |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $4.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.08 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,75 € |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 4,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,08 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $2.70 |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $16.20 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.27 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 2,70 $ |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 16,20 $ |
+| Prix de la mise en cache du contexte | Sans frais | 0,27 $1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking และ Gemini 3.1 Flash Live Preview
+## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking et Gemini 3.1 Flash Live Preview
 
-*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=th), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=th) และ [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=th)*
+*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=fr), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=fr) et [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=fr)
 
-โมเดลเสียงต่อเสียงที่มีเวลาในการตอบสนองต่ำของเราได้รับการเพิ่มประสิทธิภาพสำหรับเอเจนต์เสียงแบบเรียลไทม์และ
-บทสนทนาสด ซึ่งรวมถึงการรองรับการให้เหตุผลเบื้องหลังด้วย Extended Thinking
+Nos modèles audio-à-audio à faible latence sont optimisés pour les agents vocaux en temps réel et les dialogues en direct, y compris la prise en charge du raisonnement en arrière-plan avec Extended Thinking.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.75 (ข้อความ) $3.00 หรือ $0.005/นาที (เสียง) $1.00 หรือ $0.002/นาที (รูปภาพ/วิดีโอ) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $4.50 (ข้อความ) $12.00 หรือ $0.018/นาที (เสียง) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | รองรับ | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,75 $ (texte) 3 $ ou 0,005 $/min (audio) 1 $ ou 0,002 $/min (image/vidéo) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ (texte) 12,00 $ ou 0,018 $/min (audio) |
+| Ancrage avec la recherche Google\* | Compatible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-## Gemini 3.5 Live Translate
+## Gemini 3.5 Live Translate
 
-*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=th)*
+*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=fr)
 
-โมเดลการแปลเสียงพูดเป็นเสียงพูดแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำ ซึ่งรองรับมากกว่า 70 ภาษา
+Notre modèle de traduction vocale en temps réel à faible latence, qui prend en charge plus de 70 langues.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $3.50 หรือ $0.0053/นาที\* (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $21.00 หรือ $0.0315/นาที\* (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 3,50 $ ou 0,0053 $/min\* (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 21,00 $ ou 0,0315 $/min\* (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* การเรียกเก็บเงินจะอิงตามการใช้โทเค็นเสียงอินพุตและเอาต์พุตทั้งหมด โดยคำนวณที่อัตรา 25 โทเค็นต่อเสียง 1 วินาที ซึ่งเท่ากับราคาที่มีผลประมาณ $0.0368 ต่อนาที
+\* La facturation est basée sur la consommation totale de jetons audio d'entrée et de sortie, calculée à un taux de 25 jetons par seconde d'audio, ce qui équivaut à un prix effectif d'environ 0,0368 $ par minute.
 
-## Gemini 3.5 Transcribe Live
+## Gemini 3.5 Transcribe Live
 
-*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=th)*
+*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=fr)
 
-โมเดลการแปลงเสียงพูดเป็นข้อความแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำสำหรับการถอดเสียงแบบสตรีมมิงแบบ 2 ทางผ่าน WebSockets
+Notre modèle de reconnaissance vocale en temps réel à faible latence pour la transcription audio en streaming bidirectionnel sur WebSockets.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | 105 บาทหรือ 0.15 บาท/นาที\* (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $21.00 หรือ $0.004/นาที\* (ข้อความ) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่รองรับ |  |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 3,50 $ ou 0,005 $/min\* (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 21 $ ou 0,004 $/min\* (texte) |
+| Ancrage avec la recherche Google | Non compatible |  |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* ราคาโดยประมาณอิงตามโทเค็นเสียง 25 รายการต่อวินาทีสำหรับอินพุต
-และโทเค็นข้อความ 175 รายการต่อนาทีสำหรับเอาต์พุต ซึ่งมีอัตราแบบผสมที่มีประสิทธิภาพอยู่ที่
-~$0.009 ต่อนาทีสำหรับ Live Transcribe
+\* L'estimation des tarifs est basée sur 25 jetons audio par seconde pour l'entrée et 175 jetons de texte par minute pour la sortie, pour un taux mixte effectif d'environ 0,009 $ par minute pour la transcription instantanée.
 
-## Gemini 3.5 Transcribe
+## Gemini 3.5 Transcribe
 
-*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=th)*
+*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=fr)
 
-โมเดลการแปลงเสียงเป็นข้อความของเรามาพร้อมการตรวจหาภาษาอัตโนมัติ การระบุผู้พูด การประทับเวลาที่ระดับคำ และการปรับคำศัพท์ที่กำหนดเอง
+Notre modèle de reconnaissance vocale avec détection automatique de la langue, identification des locuteurs, codes temporels au niveau du mot et pondération du vocabulaire personnalisé.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $2.00 หรือ $0.003/นาที\* (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $12.00 หรือ $0.002/นาที\* (ข้อความ) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่รองรับ |  |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 2 $ ou 0,003 $/min\* (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 12 $ ou 0,002 $/min\* (texte) |
+| Ancrage avec la recherche Google | Non compatible |  |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* ราคาโดยประมาณอิงตามโทเค็นเสียง 25 รายการต่อวินาทีสำหรับอินพุต
-และโทเค็นข้อความ 175 รายการต่อนาทีสำหรับเอาต์พุต ซึ่งมีอัตราแบบผสมที่มีประสิทธิภาพอยู่ที่
-~$0.005 ต่อนาทีสำหรับการถอดเสียง
+\* La tarification estimée est basée sur 25 jetons audio par seconde pour l'entrée et 175 jetons de texte par minute pour la sortie, pour un taux mixte effectif d'environ 0,005 $ par minute pour la transcription.
 
-## Gemini 3.5 Flash-Lite
+## Gemini 3.5 Flash-Lite
 
-*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=th)*
+*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=fr)
 
-โมเดลที่คุ้มค่าซึ่งได้รับการเพิ่มประสิทธิภาพสำหรับงานที่ต้องใช้เอเจนต์ปริมาณมาก
-การแปล และการประมวลผลข้อมูลอย่างง่าย
+Modèle économique, optimisé pour les tâches agentiques à fort volume, la traduction et le traitement de données simples.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.30 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $2.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.03 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,30 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,03 $ 1,00 $ par million de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.15 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | 37.50 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.02 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,15 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,25 € |
+| Prix de la mise en cache du contexte | Non disponible | 0,02 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.15 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | 37.50 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.02 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,15 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,25 € |
+| Prix de la mise en cache du contexte | Non disponible | 0,02 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.54 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $4.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.05 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,54 € (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,05 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 3.1 Flash-Lite
+## Gemini 3.1 Flash-Lite
 
-*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th)*
+*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=fr)
 
-โมเดลที่คุ้มค่าซึ่งได้รับการเพิ่มประสิทธิภาพสำหรับงานที่ต้องใช้เอเจนต์ปริมาณมาก
-การแปล และการประมวลผลข้อมูลอย่างง่าย
+Modèle économique, optimisé pour les tâches agentiques à fort volume, la traduction et le traitement de données simples.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.25 (ข้อความ / รูปภาพ / วิดีโอ) $0.50 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $1.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.025 (ข้อความ / รูปภาพ / วิดีโอ) $0.05 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,025 $ (texte/image/vidéo) 0,05 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.125 (ข้อความ / รูปภาพ / วิดีโอ) $0.25 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | 22.50 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0125 (ข้อความ / รูปภาพ / วิดีโอ) $0.025 (เสียง) $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,125 $ (texte / image / vidéo) 0,25 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,75 € |
+| Prix de la mise en cache du contexte | Non disponible | 0,0125 $ (texte/image/vidéo) 0,025 $ (audio) 0,50 $ pour 1 000 000 jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.125 (ข้อความ / รูปภาพ / วิดีโอ) $0.25 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | 22.50 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0125 (ข้อความ / รูปภาพ / วิดีโอ) $0.025 (เสียง) $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,125 $ (texte / image / vidéo) 0,25 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,75 € |
+| Prix de la mise en cache du contexte | Non disponible | 0,0125 $ (texte/image/vidéo) 0,025 $ (audio) 0,50 $ pour 1 000 000 jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.45 (ข้อความ / รูปภาพ / วิดีโอ) $0.90 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $2.70 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.045 (ข้อความ / รูปภาพ / วิดีโอ) $0.09 (เสียง) $1.80 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,45 $ (texte / image / vidéo) 0,90 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,70 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,045 $ (texte/image/vidéo) 0,09 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-## Gemini Omni Flash
+## Gemini Omni Flash
 
-*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=th)*
+*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=fr)
 
-โมเดลการสร้างและตัดต่อวิดีโอรุ่นถัดไปของเราพร้อมให้บริการแก่นักพัฒนาแอปในระดับการชำระเงินของ Gemini API แล้ว
+Notre modèle de génération et d'édition de vidéos nouvelle génération est désormais disponible pour les développeurs ayant souscrit au niveau payant de l'API Gemini.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | 45 บาท (ข้อความ / รูปภาพ / วิดีโอ / เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $9.00 (ข้อความ) $17.50 (วิดีโอ)\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1,50 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 9,00 $ (texte) 17,50 $ (vidéo)\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* การเรียกเก็บเงินจะอิงตามการใช้โทเค็นเอาต์พุตรวม โดยคำนวณที่
-อัตรา 5,792 โทเค็นต่อวินาทีของวิดีโอ 720p ภายใต้การกำหนดราคามาตรฐาน ราคาดังกล่าว
-เทียบเท่ากับราคาที่แท้จริงประมาณ $0.10 ต่อวินาที
+\* La facturation est basée sur la consommation totale de jetons de sortie, calculée à un taux de 5 792 jetons par seconde de vidéo 720p. Avec la tarification Standard, cela équivaut à un prix effectif d'environ 0,10 $ par seconde.
 
-## Gemini Omni Flash (เวอร์ชันตัวอย่าง)
+## Preview Gemini Omni Flash
 
-*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=th)*
+*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=fr)
 
-โมเดลการสร้างและแก้ไขวิดีโอรุ่นถัดไปของเรา
+Notre modèle de génération et de retouche de vidéos nouvelle génération.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | 45 บาท (ข้อความ / รูปภาพ / วิดีโอ / เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $9.00 (ข้อความ) $17.50 (วิดีโอ)\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1,50 $ (texte / image / vidéo / audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 9,00 $ (texte) 17,50 $ (vidéo)\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* การเรียกเก็บเงินจะอิงตามการใช้โทเค็นเอาต์พุตรวม โดยคำนวณที่อัตรา 5,792 โทเค็นต่อวินาทีของวิดีโอ 720p ภายใต้การกำหนดราคามาตรฐาน ราคาดังกล่าวจะเท่ากับราคาที่มีผลประมาณ $0.10 ต่อวินาที
+\* La facturation est basée sur la consommation totale de jetons de sortie, calculée à un taux de 5 792 jetons par seconde de vidéo en 720p. Avec la tarification Standard, cela équivaut à un prix effectif d'environ 0,10 $ par seconde.
 
-## เวอร์ชันตัวอย่างของ Gemini 3.1 Pro
+## Preview Gemini 3.1 Pro
 
-*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) และ [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th#gemini-31-pro-preview-customtools)*
+*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) et [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr#gemini-31-pro-preview-customtools)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=fr)
 
-โมเดล Pro รุ่นที่ 3 ของเราสร้างขึ้นเพื่อความเข้าใจข้อมูลหลายรูปแบบ ความสามารถด้าน Agentic AI และการเขียนโค้ดที่สอดคล้องกับความรู้สึก
+Notre modèle Pro de troisième génération, conçu pour la compréhension multimodale, les capacités agentiques et le vibe coding.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $2.00, พรอมต์ <= 200,000 โทเค็น $4.00, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $12.00, พรอมต์ <= 200,000 โทเค็น $18.00, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.20, พรอมต์ <= 200,000 โทเค็น $0.40, พรอมต์ > 200,000 โทเค็น $4.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 2,00 $, requêtes <= 200 000 jetons 4,00 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 12 $, requêtes <= 200 000 jetons 18 $, requêtes > 200 000 jetons |
+| Prix de la mise en cache du contexte | Non disponible | 0,20 $ pour les requêtes <= 200 000 jetons 0,40 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $1.00, พรอมต์ <= 200,000 โทเค็น $2.00, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $6.00, พรอมต์ <= 200,000 โทเค็น $9.00, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | *เหมือนกับรุ่น Standard*  $0.20, พรอมต์ <= 200,000 โทเค็น $0.40, พรอมต์ > 200,000 โทเค็น $4.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1 $, requêtes ≤ 200 000 jetons 2 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 6 $, requêtes <= 200 000 jetons 9 $, requêtes > 200 000 jetons |
+| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,20 $, requêtes <= 200 000 jetons 0,40 $, requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $1.00, พรอมต์ <= 200,000 โทเค็น $2.00, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $6.00, พรอมต์ <= 200,000 โทเค็น $9.00, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | *เหมือนกับรุ่น Standard*  $0.20, พรอมต์ <= 200,000 โทเค็น $0.40, พรอมต์ > 200,000 โทเค็น $4.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1 $, requêtes ≤ 200 000 jetons 2 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 6 $, requêtes <= 200 000 jetons 9 $, requêtes > 200 000 jetons |
+| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,20 $, requêtes <= 200 000 jetons 0,40 $, requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $3.60, พรอมต์ <= 200,000 โทเค็น $7.20, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $21.60, พรอมต์ <= 200,000 โทเค็น $32.40, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.36, พรอมต์ <= 200,000 โทเค็น $0.72, พรอมต์ > 200,000 โทเค็น $8.10 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 3,60 $, requêtes <= 200 000 jetons 7,20 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 21,60 $, requêtes <= 200 000 jetons 32,40 $, requêtes > 200 000 jetons |
+| Prix de la mise en cache du contexte | Non disponible | 0,36 $ pour les requêtes <= 200 000 jetons 0,72 $ pour les requêtes > 200 000 jetons 8,10 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-## รูปภาพ Gemini 3.1 Flash (Nano Banana 2) 🍌
+## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
-*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=th)*
+*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=fr)
 
-โมเดลการสร้างรูปภาพ Gemini 3.1 Flash ออกแบบมาเพื่อความเร็วและประสิทธิภาพ จึงเหมาะสำหรับคำตอบแบบอินเทอร์แอกทีฟที่รวดเร็วและมีปริมาณงานสูง
+Conçu pour la vitesse et l'efficacité, le modèle de génération d'images Gemini 3.1 Flash Image est efficace pour les réponses rapides et interactives, et pour le haut débit.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.50 (ข้อความ/รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $3 (ข้อความและความคิด)  $60.00 (รูปภาพ)  เทียบเท่า $0.045 ต่อรูปภาพ 0.5K\*  $0.067 ต่อรูปภาพ 1K\*, $0.101 ต่อรูปภาพ 2K\*, และ $0.151 ต่อรูปภาพ 4K\* |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Web Search และ Image Search\*\* | ไม่พร้อมใช้งาน\*\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นจะมีการเรียกเก็บเงิน $14 ต่อคำขอ 1,000 รายการสำหรับการอ้างอิงตามข้อความและรูปภาพ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,50 $ (texte/image) |
+| Prix de sortie | Non disponible | 3 $ (texte et réflexion)  60 $ (images)  Équivaut à 0,045 $ par tranche de 500 images\*  0,067 $ par tranche de 1 000 images\*, 0,101 $ par tranche de 2 000 images\*, et 0,151 $ par tranche de 4 000 images\*. |
+| Ancrage avec la recherche Google sur le Web et par images\*\* | Non disponible\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes pour l'ancrage basé sur du texte et des images. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $1.50 (ข้อความและความคิด)  $30.00 (รูปภาพ)  เทียบเท่ากับ $0.022 ต่อรูปภาพ 0.5K\*  $0.034 ต่อรูปภาพ 1K\*  $0.050 ต่อรูปภาพ 2K\*  และ $0.076 ต่อรูปภาพ 4K\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,25 $ (texte, image) |
+| Prix de sortie | Non disponible | 1,50 $ (texte et réflexion)  30,00 $ (images)  Équivalent à 0,022 $ par 0,5 K image\*  0,034 $ par 1 K image\*,  0,050 $ par 2 K image\*,  et 0,076 $ par 4 K image\*. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* เอาต์พุตรูปภาพมีราคาอยู่ที่ $60 ต่อโทเค็น 1,000,000 รายการ
-รูปภาพเอาต์พุตที่ 0.5K (512 พิกเซล) จะใช้โทเค็น 747 รายการและมีค่าเท่ากับ $0.045 ต่อรูปภาพ
-รูปภาพเอาต์พุตที่ 1K (1024x1024 พิกเซล) จะใช้โทเค็น 1120 โทเค็นและมีค่าเท่ากับ $0.067 ต่อรูปภาพ รูปภาพเอาต์พุตที่ 2K (2048x2048 พิกเซล) จะใช้โทเค็น 1680 รายการและ
-มีค่าเท่ากับ $0.101 ต่อรูปภาพ รูปภาพเอาต์พุตที่ความละเอียด 4K (4096x4096 พิกเซล) จะใช้โทเค็น 2520 โทเค็น และมีค่าเท่ากับ $0.151 ต่อรูปภาพ
+\* Les images générées sont facturées 60 $ par million de jetons.
+Les images générées en 0,5 K (512 px) consomment 747 jetons et coûtent 0,045 $ par image. Les images de sortie en 1K (1 024 x 1 024 px) consomment 1 120 jetons et coûtent 0,067 $ par image. Les images de sortie en 2K (2 048 x 2 048 pixels) consomment 1 680 jetons et coûtent 0,101 $ par image. Les images de sortie en 4K (4 096 x 4 096 px) consomment 2 520 jetons et coûtent 0,151 $ par image.
 
-\*\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจส่งผลให้มีการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ บริบทที่ดึงมา (ข้อความหรือรูปภาพ) ซึ่งได้จาก Grounding with Google
-Search จะไม่คิดค่าโทเค็นอินพุต
+\*\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes sur la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée. Le contexte récupéré (texte ou images) fourni par l'ancrage avec la recherche Google n'est pas facturé en tant que jetons d'entrée.
 
-\*\*\* ทดสอบได้ใน Google AI Studio
+\*\*\* Peut être testé dans Google AI Studio.
 
-## รูปภาพ Gemini 3.1 Flash Lite (Nano Banana 2 Lite) 🍌
+## Gemini 3.1 Flash-Lite Image (Nano Banana 2 Lite) 🍌
 
-*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=th)*
+*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=fr)
 
-โมเดลรูปภาพ Gemini 3.1 Flash Lite ได้รับการออกแบบมาให้เป็นผู้เชี่ยวชาญด้านประสิทธิภาพของตระกูลการสร้างรูปภาพ โดยออกแบบมาเพื่อการสร้างและแก้ไขรูปภาพที่มีเวลาในการตอบสนองต่ำมากและคุ้มค่า
+Conçu comme le spécialiste de l'efficacité de la famille de modèles de génération d'images, le modèle Gemini 3.1 Flash Lite Image est conçu pour la génération et la retouche d'images à latence ultra-faible et à faible coût.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ/รูปภาพ/วิดีโอ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $1.50 (ข้อความและความคิด)  $30.00 (รูปภาพ)  เทียบเท่ากับ $0.0336 ต่อรูปภาพความละเอียด 1K\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,25 $ (texte/image/vidéo) |
+| Prix de sortie | Non disponible | 1,50 $ (texte et réflexion)  30,00 $ (images)  Équivalent à 0,0336 $ par image de résolution 1K\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.125 (ข้อความ/รูปภาพ/วิดีโอ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $0.75 (ข้อความและความคิด)  $15.00 (รูปภาพ)  เทียบเท่า $0.0168 ต่อรูปภาพความละเอียด 1K\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,125 $ (texte/image/vidéo) |
+| Prix de sortie | Non disponible | 0,75 $ (texte et réflexion)  15,00 $ (images)  Équivaut à 0,0168 $ par image de résolution 1K\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* เอาต์พุตรูปภาพมีราคาอยู่ที่ $30 ต่อโทเค็น 1,000,000 รายการ รูปภาพเอาต์พุตที่ 1K (1024x1024 พิกเซล) จะใช้โทเค็น 1120 รายการและมีค่าเท่ากับ $0.0336 ต่อรูปภาพ
+\* Le prix des images générées est de 30 $ par million de jetons. Les images de sortie en 1K (1 024 x 1 024 px) consomment 1 120 jetons et coûtent 0,0336 $ par image.
 
-## TTS ของ Gemini 3.8 Flash
+## Gemini 3.8 Flash TTS
 
-*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=th)*
+*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=fr)
 
-โมเดลเสียงการอ่านออกเสียงข้อความ 3.8 Flash ของเราได้รับการออกแบบมาเพื่อความเที่ยงตรงของเสียงระดับสตูดิโอ การแสดงที่สื่ออารมณ์ และความเสถียรในรูปแบบขนาดยาว
+Notre modèle audio de synthèse vocale 3.8 Flash est conçu pour offrir une fidélité vocale de qualité studio, un jeu d'acteur expressif et une stabilité de longue durée.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.50 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $9.00 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $18.00 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เทียบเท่ากับ $0.00225 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.0045 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.125 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.25 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 50 $ (texte) jusqu'au 31 décembre 2026 1, 00 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Sans frais | 9 $ (audio) jusqu'au 31 décembre 2026 18 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,00225 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,0045 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,125 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,25 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $0.50 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $4.50 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $9.00 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เทียบเท่ากับ $0.001125 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.00225 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0625 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.125 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Non disponible | 4, 50 $ (audio) jusqu'au 31 décembre 2026. 9, 00 $ (audio) à partir du 1er janvier 2027. Équivaut à 0, 001125 $ par 10 secondes d'audio\* jusqu'au 31 décembre 2026. Équivaut à 0, 00225 $ par 10 secondes d'audio\* à partir du 1er janvier 2027. |
+| Prix de la mise en cache du contexte | Non disponible | 0,0625 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,125 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $0.50 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $4.50 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $9.00 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เทียบเท่ากับ $0.001125 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.00225 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.025 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.05 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Non disponible | 4, 50 $ (audio) jusqu'au 31 décembre 2026. 9, 00 $ (audio) à partir du 1er janvier 2027. Équivaut à 0, 001125 $ par 10 secondes d'audio\* jusqu'au 31 décembre 2026. Équivaut à 0, 00225 $ par 10 secondes d'audio\* à partir du 1er janvier 2027. |
+| Prix de la mise en cache du contexte | Non disponible | 0,025 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,05 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.90 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $1.80 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $16.20 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $32.40 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เทียบเท่ากับ $0.00405 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.0081 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.225 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.45 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 90 $ (texte) jusqu'au 31 décembre 2026 1, 80 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Sans frais | 16, 20 $ (audio) jusqu'au 31 décembre 2026. 32, 40 $ (audio) à partir du 1er janvier 2027. Équivaut à 0, 00405 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026. Équivaut à 0, 0081 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027. |
+| Prix de la mise en cache du contexte | Sans frais | 0,225 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,45 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* โทเค็นเสียงจะสอดคล้องกับโทเค็น 25 รายการต่อเสียง 1 วินาที
+\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
 
-## TTS ของ Gemini 3.8 Flash-Lite
+## Gemini 3.8 Flash-Lite TTS
 
-*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=th)*
+*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=fr)
 
-โมเดลเสียงการอ่านออกเสียงข้อความ Flash-Lite 3.8 ของเราได้รับการเพิ่มประสิทธิภาพเพื่อการพูดสนทนาที่มีปริมาณงานสูง เวลาในการตอบสนองต่ำ และคุ้มค่า
+Notre modèle audio Text-to-Speech 3.8 Flash-Lite est optimisé pour la parole conversationnelle à haut débit, à faible latence et économique.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.50 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $6.00 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $12.00 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป เทียบเท่ากับ $0.0015 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.003 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.125 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.25 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 50 $ (texte) jusqu'au 31 décembre 2026 1, 00 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Sans frais | 6 $ (audio) jusqu'au 31 décembre 2026 12 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,0015 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,003 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,125 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,25 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $0.50 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $3.00 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $6.00 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป เทียบเท่ากับ $0.00075 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.0015 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.0625 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.125 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Non disponible | 3 $ (audio) jusqu'au 31 décembre 2026 6 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,00075 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,0015 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,0625 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,125 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $0.50 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $3.00 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $6.00 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป เทียบเท่ากับ $0.00075 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.0015 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.025 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.05 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Non disponible | 3 $ (audio) jusqu'au 31 décembre 2026 6 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,00075 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,0015 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,025 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,05 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.90 (ข้อความ) จนถึงวันที่ 31 ธันวาคม 2026 $1.80 (ข้อความ) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $10.80 (เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $21.60 (เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป เทียบเท่ากับ $0.0027 ต่อเสียง 10 วินาที\* จนถึงวันที่ 31 ธันวาคม 2026 เทียบเท่ากับ $0.0054 ต่อเสียง 10 วินาที\* ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.225 (การแคชอินพุต) จนถึงวันที่ 31 ธันวาคม 2026 $0.45 (การแคชอินพุต) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0, 90 $ (texte) jusqu'au 31 décembre 2026 1, 80 $ (texte) à partir du 1er janvier 2027 |
+| Prix de sortie | Sans frais | 10, 80 $ (audio) jusqu'au 31 décembre 2026 21, 60 $ (audio) à partir du 1er janvier 2027 Équivalent à 0, 0027 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0, 0054 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Sans frais | 0,225 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,45 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* โทเค็นเสียงจะสอดคล้องกับโทเค็น 25 รายการต่อเสียง 1 วินาที
+\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
 
-## TTS ของ Gemini 3.1 Flash (เวอร์ชันตัวอย่าง)
+## Preview Gemini 3.1 Flash TTS
 
-*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=th)*
+*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=fr)
 
-โมเดลเสียง Text-to-Speech 3.1 Flash ของเราได้รับการเพิ่มประสิทธิภาพเพื่อราคาที่คุ้มค่า
-ความหน่วงต่ำ และการสร้างคำพูดที่ควบคุมได้
+Notre modèle audio 3.1 Flash Text-to-Speech est optimisé pour la génération de voix contrôlable, à faible latence et offrant un bon rapport qualité/prix.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.00 (ข้อความ) |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $20.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1,00 $ (texte) |
+| Prix de sortie | Sans frais | 20,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.50 (ข้อความ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $10.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,50 € (texte) |
+| Prix de sortie | Non disponible | 10,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* โทเค็นเสียงจะสอดคล้องกับโทเค็น 25 รายการต่อเสียง 1 วินาที
+\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
 
-## Gemini 3 Flash (เวอร์ชันตัวอย่าง)
+## Preview Gemini 3 Flash
 
-*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th)*
+*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=fr)
 
-โมเดล Flash รุ่นเดิมของเราซึ่งมีความเร็วและความชาญฉลาดพื้นฐาน
+Notre ancien modèle Flash, qui offre une vitesse et une intelligence de base.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.50 (ข้อความ / รูปภาพ / วิดีโอ) $1.00 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $3.00 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.05 (ข้อความ / รูปภาพ / วิดีโอ) $0.10 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,50 $ (texte / image / vidéo) 1,00 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3 $ |
+| Prix de la mise en cache du contexte | Sans frais | 0,05 $ (texte/image/vidéo) 0,10 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ / รูปภาพ / วิดีโอ) $0.50 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | *เหมือนกับรุ่นมาตรฐาน*  $0.05 (ข้อความ / รูปภาพ / วิดีโอ)  $0.10 (เสียง)  $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,05 $ (texte/image/vidéo)  0,10 $ (audio)  1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ / รูปภาพ / วิดีโอ) $0.50 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $1.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | *เหมือนกับรุ่นมาตรฐาน*  $0.05 (ข้อความ / รูปภาพ / วิดีโอ)  $0.10 (เสียง)  $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | คำขอ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / คำค้นหา 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,05 $ (texte/image/vidéo)  0,10 $ (audio)  1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.90 (ข้อความ / รูปภาพ / วิดีโอ) $1.80 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $5.40 |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | $0.09 (ข้อความ / รูปภาพ / วิดีโอ) $0.18 (เสียง) $1.80 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\* | ไม่พร้อมใช้งาน\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน\*\* | พรอมต์ 5,000 รายการต่อเดือน (ฟรี แชร์ใน Gemini 3) จากนั้น $14 / 1,000 คำค้นหา |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,90 $ (texte / image / vidéo) 1,80 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 5,40 $ |
+| Prix de la mise en cache du contexte | Sans frais | 0,09 $ (texte/image/vidéo) 0,18 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* คำขอที่ลูกค้าส่งไปยัง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\* ทดสอบได้ใน Google AI Studio
+\*\* Peut être testé dans Google AI Studio.
 
-## รูปภาพ Gemini 3 Pro (Nano Banana Pro) 🍌
+## Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
-*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=th)*
+*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=fr)
 
-โมเดลการสร้างรูปภาพในตัวของเราได้รับการเพิ่มประสิทธิภาพเพื่อความเร็ว ความยืดหยุ่น และ
-ความเข้าใจตามบริบท **ข้อความอินพุตและเอาต์พุต**มีราคาเท่ากับ
-[Gemini 3.1 Pro](#gemini-3.1-pro-preview)
+Notre modèle natif de génération d'images, optimisé pour la vitesse, la flexibilité et la compréhension contextuelle. Les **entrées et sorties textuelles** sont facturées au même prix que [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $2.00 (ข้อความ/รูปภาพ)  เทียบเท่า $0.0011 ต่อรูปภาพ\* |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $12.00 (ข้อความและความคิด)  $120.00 (รูปภาพ)  เทียบเท่ากับ $0.134 ต่อรูปภาพ 1K/2K\*\*  และ $0.24 ต่อรูปภาพ 4K\*\* |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\*\*\* | ไม่พร้อมใช้งาน\*\*\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 2,00 $ (texte/image),  soit 0,0011 $ par image\* |
+| Prix de sortie | Non disponible | 12 $ (texte et réflexion)  120 $ (images)  Équivalent à 0,134 $ par image 1K/2K\*\*  et 0,24 $ par image 4K\*\* |
+| Ancrage avec la recherche Google\*\*\* | Non disponible\*\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $1.00 (ข้อความ), $0.0006 (รูปภาพ)\* |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $6.00 (ข้อความและความคิด)  $0.067 ต่อรูปภาพ 1K/2K\*\*  $0.12 ต่อรูปภาพ 4K\*\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1 $ (texte), 0,0006 $ (image)\* |
+| Prix de sortie | Non disponible | 6,00 $ (texte et réflexion)  0,067 $ par image 1K/2K\*\*  0,12 $ par image 4K\*\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $1.00 (ข้อความ), $0.0006 (รูปภาพ)\* |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $6.00 (ข้อความและความคิด)  $0.067 ต่อรูปภาพ 1K/2K\*\*  $0.12 ต่อรูปภาพ 4K\*\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1 $ (texte), 0,0006 $ (image)\* |
+| Prix de sortie | Non disponible | 6,00 $ (texte et réflexion)  0,067 $ par image 1K/2K\*\*  0,12 $ par image 4K\*\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | 108 บาท (ข้อความ/รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $21.60 (ข้อความและความคิด)  $216.00 (รูปภาพ) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search\*\*\* | ไม่พร้อมใช้งาน\*\*\*\* | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 3,60 $ (texte/image) |
+| Prix de sortie | Non disponible | 21,60 $ (texte et réflexion)  216,00 $ (images) |
+| Ancrage avec la recherche Google\*\*\* | Non disponible\*\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-\* ระบบตั้งค่าอินพุตรูปภาพไว้ที่ 560 โทเค็นหรือ $0.0011 ต่อรูปภาพ
+\* L'entrée d'image est définie sur 560 jetons ou 0,0011 $ par image.
 
-\*\* เอาต์พุตรูปภาพมีราคาอยู่ที่ $120 ต่อโทเค็น 1,000,000 รายการ รูปภาพเอาต์พุตจาก 1024x1024 พิกเซล (1K) และสูงสุด 2048x2048 พิกเซล (2K) จะใช้โทเค็น 1120 รายการและ
-มีค่าเท่ากับ $0.134 ต่อรูปภาพ รูปภาพเอาต์พุตที่มีขนาดสูงสุด 4096x4096 พิกเซล (4K) จะใช้โทเค็น 2,000 โทเค็นและมีค่าเท่ากับ $0.24 ต่อรูปภาพ
+\*\* Le prix des images générées est de 120 $ par million de jetons. Les images de sortie de 1 024 x 1 024 px (1K) à 2 048 x 2 048 px (2K) consomment 1 120 jetons et coûtent 0,134 $ par image. Les images de sortie jusqu'à 4 096 x 4 096 px (4K) consomment 2 000 jetons et coûtent 0,24 $ par image.
 
-\*\*\* คำขอที่ลูกค้าส่งถึง Gemini อาจทำให้เกิดการค้นหาใน Google Search อย่างน้อย 1 รายการ
-ระบบจะเรียกเก็บเงินจากคุณสำหรับคำค้นหาแต่ละรายการ
-ที่ดำเนินการ
+\*\*\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
 
-\*\*\*\* ทดสอบได้ใน Google AI Studio
+\*\*\*\* Peut être testé dans Google AI Studio.
 
-## Gemini 2.5 Pro
+## Gemini 2.5 Pro
 
-*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th)*
+*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=fr)
 
-โมเดล Pro ที่โดดเด่นด้านการเขียนโค้ดและงานการให้เหตุผลที่ซับซ้อน
+Modèle Pro idéal pour le codage et les tâches de raisonnement complexes.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.25, พรอมต์ <= 200,000 โทเค็น $2.50, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $10.00, พรอมต์ <= 200,000 โทเค็น $15.00, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.125, พรอมต์ <= 200,000 โทเค็น $0.25, พรอมต์ > 200,000 โทเค็น $4.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | 10,000 RPD (ฟรี) จากนั้น $25 / 1,000 พรอมต์ที่อิงตามความรู้ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1,25 $, requêtes ≤ 200 000 jetons 2,50 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 10 $, requêtes <= 200 000 jetons 15 $, requêtes > 200 000 jetons |
+| Prix de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | 10 000 RPD (sans frais), puis 25 $ / 1 000 requêtes ancrées |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.625, พรอมต์ <= 200,000 โทเค็น $1.25, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $5.00, พรอมต์ <= 200,000 โทเค็น $7.50, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.125, พรอมต์ <= 200,000 โทเค็น $0.25, พรอมต์ > 200,000 โทเค็น $4.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 625 $ pour les requêtes <= 200 000 jetons 1, 25 $ pour les requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $, requêtes <= 200 000 jetons 7,50 $, requêtes > 200 000 |
+| Prix de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.625, พรอมต์ <= 200,000 โทเค็น $1.25, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $5.00, พรอมต์ <= 200,000 โทเค็น $7.50, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.125, พรอมต์ <= 200,000 โทเค็น $0.25, พรอมต์ > 200,000 โทเค็น $4.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 625 $ pour les requêtes <= 200 000 jetons 1, 25 $ pour les requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $, requêtes <= 200 000 jetons 7,50 $, requêtes > 200 000 |
+| Prix de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $2.25, พรอมต์ <= 200,000 โทเค็น $4.50, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $18.00, พรอมต์ <= 200,000 โทเค็น $27.00, พรอมต์ > 200,000 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.225, พรอมต์ <= 200,000 โทเค็น $0.45, พรอมต์ > 200,000 โทเค็น $8.10 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | 10,000 RPD (ฟรี) จากนั้น $25 / 1,000 พรอมต์ที่อิงตามความรู้ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 2,25 $, requêtes <= 200 000 jetons 4,50 $, requêtes > 200 000 jetons |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 18 $, requêtes <= 200 000 jetons 27 $, requêtes > 200 000 jetons |
+| Prix de la mise en cache du contexte | Non disponible | 0,225 $, requêtes <= 200 000 jetons 0,45 $, requêtes > 200 000 jetons 8,10 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | 10 000 RPD (sans frais), puis 25 $ / 1 000 requêtes ancrées |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Flash
+## Gemini 2.5 Flash
 
-*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th)*
+*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=fr)
 
-โมเดลการให้เหตุผลแบบไฮบริดรุ่นแรกของเราซึ่งรองรับหน้าต่างบริบทที่รองรับถึง 1 ล้านโทเค็นและ
-มีงบประมาณสำหรับการคิด
+Notre premier modèle de raisonnement hybride, qui accepte une fenêtre de contexte d'un million de jetons et dispose de budgets de réflexion.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.30 (ข้อความ / รูปภาพ / วิดีโอ) $1.00 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $2.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.03 (ข้อความ / รูปภาพ / วิดีโอ) $0.1 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ฟรี สูงสุด 500 RPD (จำกัดการแชร์กับ Flash-Lite RPD) | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ RPD ของ Flash-Lite) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | 500 RPD | 1,500 RPD (ฟรี) จากนั้น $25 / 1,000 พรอมต์ที่ได้รับการตรวจสอบ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,30 $ (texte / image / vidéo) 1,00 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash-Lite) | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.15 (ข้อความ / รูปภาพ / วิดีโอ) $0.50 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | 37.50 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.03 (ข้อความ / รูปภาพ / วิดีโอ) $0.1 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ RPD ของ Flash-Lite) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,15 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,25 € |
+| Prix de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.15 (ข้อความ / รูปภาพ / วิดีโอ) $0.50 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | 37.50 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.03 (ข้อความ / รูปภาพ / วิดีโอ) $0.1 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ RPD ของ Flash-Lite) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,15 $ (texte / image / vidéo) 0,50 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,25 € |
+| Prix de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.54 (ข้อความ / รูปภาพ / วิดีโอ) $1.80 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $4.50 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.054 (ข้อความ / รูปภาพ / วิดีโอ) $0.18 (เสียง) $1.80 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ฟรี สูงสุด 500 RPD (จำกัดการแชร์กับ Flash-Lite RPD) | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ RPD ของ Flash-Lite) จากนั้น $35 / 1,000 พรอมต์ที่ถูกบล็อก |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | 500 RPD | 1,500 RPD (ฟรี) จากนั้น $25 / 1,000 พรอมต์ที่ได้รับการตรวจสอบ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,54 $ (texte / image / vidéo) 1,80 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,054 $ (texte/image/vidéo) 0,18 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash-Lite) | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Flash-Lite
+## Gemini 2.5 Flash-Lite
 
-*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th)*
+*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=fr)
 
-โมเดลขนาดเล็กและคุ้มค่าที่สร้างขึ้นเพื่อการใช้งานในวงกว้าง
+Un modèle petit et économique, conçu pour une utilisation à grande échelle.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต (ข้อความ รูปภาพ วิดีโอ) | ไม่มีค่าใช้จ่าย | $0.10 (ข้อความ / รูปภาพ / วิดีโอ) $0.30 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | 12.00 บาท |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.01 (ข้อความ / รูปภาพ / วิดีโอ) $0.03 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ฟรี สูงสุด 500 RPD (จำกัดการแชร์กับ Flash RPD) | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ Flash RPD) จากนั้น $35 / 1,000 พรอมต์ที่ถูกระงับ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | 500 RPD | 1,500 RPD (ฟรี) จากนั้น $25 / 1,000 พรอมต์ที่ได้รับการตรวจสอบ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,10 $ (texte / image / vidéo) 0,30 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,40 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต (ข้อความ รูปภาพ วิดีโอ) | ไม่พร้อมใช้งาน | $0.05 (ข้อความ / รูปภาพ / วิดีโอ) $0.15 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $0.20 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.01 (ข้อความ / รูปภาพ / วิดีโอ) $0.03 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ Flash RPD) จากนั้น $35 / 1,000 พรอมต์ที่ถูกระงับ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต (ข้อความ รูปภาพ วิดีโอ) | ไม่พร้อมใช้งาน | $0.05 (ข้อความ / รูปภาพ / วิดีโอ) $0.15 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $0.20 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.01 (ข้อความ / รูปภาพ / วิดีโอ) $0.03 (เสียง) $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ Flash RPD) จากนั้น $35 / 1,000 พรอมต์ที่ถูกระงับ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต (ข้อความ รูปภาพ วิดีโอ) | ไม่มีค่าใช้จ่าย | $0.18 (ข้อความ / รูปภาพ / วิดีโอ) $0.54 (เสียง) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $0.72 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.018 (ข้อความ / รูปภาพ / วิดีโอ) $0.054 (เสียง) $1.80 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ฟรี สูงสุด 500 RPD (จำกัดการแชร์กับ Flash RPD) | 1,500 RPD (ฟรี โดยมีโควต้าร่วมกับ Flash RPD) จากนั้น $35 / 1,000 พรอมต์ที่ถูกระงับ |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Maps | 500 RPD | 1,500 RPD (ฟรี) จากนั้น $25 / 1,000 พรอมต์ที่ได้รับการตรวจสอบ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,18 $ (texte / image / vidéo) 0,54 $ (audio) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,72 $ |
+| Prix de la mise en cache du contexte | Non disponible | 0,018 $ (texte/image/vidéo) 0,054 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
+| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
+| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## เสียงของ Gemini 2.5 Flash (Live API)
+## Gemini 2.5 Flash Native Audio (API Live)
 
-*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=th)*
+*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/app/live?hl=th#gemini-2.5-flash-native-audio-preview-12-2025)
+[Essayer dans Google AI Studio](https://aistudio.google.com/app/live?hl=fr#gemini-2.5-flash-native-audio-preview-12-2025)
 
-โมเดลเสียงดั้งเดิมของ [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) ได้รับการเพิ่มประสิทธิภาพเพื่อให้เอาต์พุตเสียงมีคุณภาพสูงขึ้น
-พร้อมการเว้นวรรค ความเป็นธรรมชาติของเสียง ความละเอียด และ
-อารมณ์ที่ดีขึ้น
+Nos modèles audio natifs de l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr) sont optimisés pour des sorties audio de meilleure qualité, avec un rythme, une voix, une verbosité et une humeur plus naturels.
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.50 (ข้อความ) $3.00 (เสียง / วิดีโอ) |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $2.00 (ข้อความ) $12.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,50 $ (texte) 3,00 $ (audio / vidéo) |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,00 $ (texte) 12,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## รูปภาพ Gemini 2.5 Flash (Nano Banana) 🍌
+## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
-*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th)*
+*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=fr)
 
-โมเดลการสร้างรูปภาพดั้งเดิมที่ได้รับการเพิ่มประสิทธิภาพเพื่อความเร็ว ความยืดหยุ่น และ
-ความเข้าใจตามบริบท ระบบจะคิดราคาอินพุตและเอาต์พุตข้อความเหมือนกับ [2.5 Flash](#gemini-2.5-flash)
+Modèle de génération d'images natif, optimisé pour la vitesse, la flexibilité et la compréhension du contexte. Les entrées et sorties textuelles sont facturées au même prix que [2.5 Flash](#gemini-2.5-flash).
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.30 (ข้อความ / รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $0.039 ต่อรูปภาพ\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,30 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,039 $ par image\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.15 (ข้อความ / รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $0.0195 ต่อรูปภาพ\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,15 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,0195 $ par image\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### พับ
+### Flex
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.15 (ข้อความ / รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $0.0195 ต่อรูปภาพ\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,15 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,0195 $ par image\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### ลำดับความสำคัญ
+### Priorité
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.54 (ข้อความ / รูปภาพ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $0.0702 ต่อรูปภาพ\* |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,54 $ (texte / image) |
+| Prix de sortie | Non disponible | 0,0702 $ par image\* |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-[\*] เอาต์พุตรูปภาพมีราคาอยู่ที่ $30 ต่อโทเค็น 1,000,000 รายการ รูปภาพเอาต์พุตขนาดสูงสุด 1024x1024 พิกเซลจะใช้โทเค็น 1290 โทเค็น และมีค่าเท่ากับ $0.039 ต่อรูปภาพ
+[\*] Le prix des images générées est de 30 $ pour 1 000 000 de jetons. Les images de sortie jusqu'à 1 024 x 1 024 px consomment 1 290 jetons et coûtent 0,039 $ par image.
 
-## TTS ของ Gemini 2.5 Flash (เวอร์ชันตัวอย่าง)
+## Gemini 2.5 Flash Preview TTS
 
-*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=th)*
+*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/generate-speech?hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
 
-โมเดลเสียงข้อความเป็นคำพูด 2.5 Flash ของเราได้รับการเพิ่มประสิทธิภาพเพื่อราคาที่คุ้มค่า
-ความหน่วงต่ำ และการสร้างคำพูดที่ควบคุมได้
+Notre modèle audio de synthèse vocale 2.5 Flash est optimisé pour la génération de voix contrôlable, à faible latence et offrant un bon rapport qualité/prix.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $0.50 (ข้อความ) |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $10.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 0,50 € (texte) |
+| Prix de sortie | Sans frais | 10,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.25 (ข้อความ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $5.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,25 $ (texte) |
+| Prix de sortie | Non disponible | 5,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## TTS ของ Gemini 2.5 Pro (เวอร์ชันตัวอย่าง)
+## Preview Gemini 2.5 Pro TTS
 
-*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=th)*
+*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/generate-speech?hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
 
-โมเดลเสียงอ่านออกเสียงข้อความ 2.5 Pro ของเราได้รับการเพิ่มประสิทธิภาพเพื่อการสร้างคำพูดที่ทรงพลังและมีเวลาในการตอบสนองต่ำ
-เพื่อให้เอาต์พุตเป็นธรรมชาติมากขึ้นและควบคุมพรอมต์ได้ง่ายขึ้น
+Notre modèle audio de synthèse vocale 2.5 Pro est optimisé pour générer des voix puissantes et à faible latence, afin d'obtenir des résultats plus naturels et des requêtes plus faciles à orienter.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $1.00 (ข้อความ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $20.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 1,00 $ (texte) |
+| Prix de sortie | Non disponible | 20,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.50 (ข้อความ) |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $10.00 (เสียง) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0,50 € (texte) |
+| Prix de sortie | Non disponible | 10,00 $ (audio) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Veo 3.1
+## Veo 3.1
 
-*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=th), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=th), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=th)*
+*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=fr), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=fr), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=fr)*
 
-[ลองใช้ Veo 3.1](https://deepmind.google/models/veo/?hl=th)
+[Essayer Veo 3.1](https://deepmind.google/models/veo/?hl=fr)
 
-โมเดลการสร้างวิดีโอที่รวดเร็ว
+Modèle de génération de vidéos rapide.
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อวินาทีในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par seconde en USD |
 | --- | --- | --- |
-| ราคาของวิดีโอมาตรฐาน Veo 3.1 พร้อมเสียง (ค่าเริ่มต้น) | ไม่พร้อมใช้งาน | $0.40 (720p และ 1080p) $0.60 (4k) |
-| ราคาของวิดีโอ Veo 3.1 Fast พร้อมเสียง (ค่าเริ่มต้น) | ไม่พร้อมใช้งาน | $0.10 (720p) $0.12 (1080p) $0.30 (4k) |
-| ราคาของวิดีโอ Veo 3.1 Lite ที่มีเสียง (ค่าเริ่มต้น) | ไม่พร้อมใช้งาน | $0.05 (720p) $0.08 (1080p) (ไม่รองรับเอาต์พุต 4K) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix par défaut pour une vidéo Veo 3.1 Standard avec audio | Non disponible | 0,40 $ (720p et 1080p) 0,60 $ (4K) |
+| Prix par défaut pour une vidéo Veo 3.1 Fast avec audio | Non disponible | 0,10 $ (720p) 0,12 $ (1080p) 0,30 $ (4K) |
+| Vidéo Veo 3.1 Lite avec prix audio (par défaut) | Non disponible | 0,05 $ (720p) 0,08 $ (1080p) (sortie 4K non disponible) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Lyria 3.5
+## Lyria 3.5
 
-*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=th)*
+*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=fr)*
 
-โมเดลการสร้างเพลงของ Google
+Modèle de génération de musique de Google.
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อคำขอในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par requête en USD |
 | --- | --- | --- |
-| Lyria 3.5 (เพลงเต็ม) | ไม่พร้อมใช้งาน | $0.08 ต่อเพลง |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Lyria 3.5 (chanson complète) | Non disponible | 0,08 $ par titre |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Lyria 3
+## Lyria 3
 
-*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=th) และ [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=th)*
+*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=fr) et [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=fr)*
 
-กลุ่มโมเดลการสร้างเพลงรุ่นเดิมของ Google
+Famille de modèles de génération de musique anciens de Google.
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อคำขอในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par requête en USD |
 | --- | --- | --- |
-| ตัวอย่างคลิป Lyria 3 (30 วินาที) | ไม่พร้อมใช้งาน | $0.04 ต่อเพลง |
-| ตัวอย่าง Lyria 3 Pro (เพลงเต็ม) | ไม่พร้อมใช้งาน | $0.08 ต่อเพลง |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Aperçu du clip Lyria 3 (30 s) | Non disponible | 0,04 $ par titre |
+| Preview Lyria 3 Pro (chanson complète) | Non disponible | 0,08 $ par titre |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini Embedding 2
+## Gemini Embedding 2
 
-*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=th)*
+*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=fr)*
 
-[ลองใช้ API](https://ai.google.dev/gemini-api/docs/embeddings?hl=th)
+[Essayer l'API](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr)
 
-โมเดลการฝังแบบหลายรูปแบบตัวแรกของเรา ซึ่งจะเชื่อมโยงข้อความ รูปภาพ วิดีโอ เสียง และ PDF เข้ากับพื้นที่การฝังแบบรวม
+Notre premier modèle d'embedding multimodal, qui mappe le texte, les images, les vidéos, l'audio et les PDF dans un espace d'embedding unifié.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาการป้อนข้อความ | ไม่มีค่าใช้จ่าย | $0.20 |
-| ราคาอินพุตรูปภาพ | ไม่มีค่าใช้จ่าย | $0.45 ($0.00012 ต่อรูปภาพ) |
-| ราคาอินพุตเสียง | ไม่มีค่าใช้จ่าย | $6.50 ($0.00016 ต่อวินาที) |
-| ราคาอินพุตวิดีโอ | ไม่มีค่าใช้จ่าย | $12.00 (0.00079 THB ต่อเฟรม) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix de la saisie de texte | Sans frais | 0,20 $ |
+| Prix de l'entrée d'image | Sans frais | 0,45 $ (0,00012 $ par image) |
+| Prix de l'entrée audio | Sans frais | 6,50 $ (0,00016 $ par seconde) |
+| Prix de l'entrée vidéo | Sans frais | 12 $ (0,00079 $ par frame) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาการป้อนข้อความ | ไม่พร้อมใช้งาน | $0.10 |
-| ราคาอินพุตรูปภาพ | ไม่พร้อมใช้งาน | $0.225 ($0.00006 ต่อรูปภาพ) |
-| ราคาอินพุตเสียง | ไม่พร้อมใช้งาน | $3.25 ($0.00008 ต่อวินาที) |
-| ราคาอินพุตวิดีโอ | ไม่พร้อมใช้งาน | $6.00 ($0.000395 ต่อเฟรม) |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix de la saisie de texte | Non disponible | 0,10 $ |
+| Prix de l'entrée d'image | Non disponible | 0,225 $ (0,00006 $ par image) |
+| Prix de l'entrée audio | Non disponible | 3,25 $ (0,00008 $ par seconde) |
+| Prix de l'entrée vidéo | Non disponible | 6 $ (0,000395 $ par frame) |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini Robotics ER 2 (เวอร์ชันตัวอย่าง)
+## Gemini Robotics ER 2 Preview
 
-*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=th)*
+*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=fr)
 
-Gemini Robotics ER 2 หรือ Gemini Robotics Embodied Reasoning 2 เป็น
-ปลายทางของโมเดลภาษาภาพที่ช่วยให้หุ่นยนต์เข้าใจสภาพแวดล้อมของตนเอง
-ได้อย่างแม่นยำ รองรับการประสานงานแบบเอเจนต์ของหุ่นยนต์ ความเข้าใจความคืบหน้าของวิดีโอ
-การทำงานร่วมกันของหุ่นยนต์หลายตัว และการให้เหตุผลเชิงพื้นที่ขั้นสูง
+Gemini Robotics ER 2, abréviation de Gemini Robotics Embodied Reasoning 2, est un point de terminaison de modèle vision-langage qui permet aux robots de comprendre précisément leur environnement. Il prend en charge l'orchestration agentive des robots, la compréhension de la progression des vidéos, la collaboration entre plusieurs robots et le raisonnement spatial avancé.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.00 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $2.00 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่มีค่าใช้จ่าย | $5.00 จนถึงวันที่ 31 ธันวาคม 2026 $10.00 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.10 จนถึงวันที่ 31 ธันวาคม 2026 $0.20 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1 $ (texte / image / vidéo / audio) jusqu'au 31 décembre 2026 2 $ (texte / image / vidéo / audio) à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 5 $ jusqu'au 31 décembre 2026. 10 $ à partir du 1er janvier 2027. |
+| Prix de la mise en cache du contexte | Non disponible | 0,10 $ jusqu'au 31 décembre 2026. 0,20 $ à partir du 1er janvier 2027. 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026. 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027. |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-### กลุ่ม
+### Lot
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $0.50 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต (รวมโทเค็นการคิด) | ไม่พร้อมใช้งาน | $2.50 จนถึงวันที่ 31 ธันวาคม 2026 $5.00 ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาการแคชบริบท | ไม่พร้อมใช้งาน | $0.05 จนถึงวันที่ 31 ธันวาคม 2026 $0.10 ตั้งแต่วันที่ 1 มกราคม 2027 $0.50 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) จนถึงวันที่ 31 ธันวาคม 2026 $1.00 / 1,000,000 โทเค็นต่อชั่วโมง (ราคาพื้นที่เก็บข้อมูล) ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Non disponible | 0, 50 $ (texte / image / vidéo / audio) jusqu'au 31 décembre 2026 1, 00 $ (texte / image / vidéo / audio) à partir du 1er janvier 2027 |
+| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 2, 50 $ jusqu'au 31 décembre 2026 5, 00 $ à partir du 1er janvier 2027 |
+| Prix de la mise en cache du contexte | Non disponible | 0,05 $ jusqu'au 31 décembre 2026. 0,10 $ à partir du 1er janvier 2027. 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026. 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027. |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini Robotics ER 2 Streaming Preview
+## Aperçu du streaming Gemini Robotics ER 2
 
-*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=th)*
+*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=fr)*
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=fr)
 
-Gemini Robotics ER 2 Streaming คือปลายทางโมเดลภาษาภาพสำหรับหุ่นยนต์
-ที่ได้รับการเพิ่มประสิทธิภาพสำหรับการสตรีมข้อความแบบเรียลไทม์โดยใช้ Live API โดยรับอินพุตข้อความ รูปภาพ วิดีโอ และเสียง รวมถึงรองรับการสตรีมแบบ 2 ทางด้วยการเรียกใช้ฟังก์ชัน
+Gemini Robotics ER 2 Streaming est un point de terminaison de modèle vision-langage pour la robotique, optimisé pour le streaming de texte en temps réel à l'aide de l'API Live. Elle accepte du texte, des images, des vidéos et de l'audio en entrée, et prend en charge le streaming bidirectionnel avec l'appel de fonction.
 
-### มาตรฐาน
+### Standard
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | $1.00 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) จนถึงวันที่ 31 ธันวาคม 2026 $2.00 (ข้อความ / รูปภาพ / วิดีโอ / เสียง) ตั้งแต่วันที่ 1 มกราคม 2027 เป็นต้นไป |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | $5.00 จนถึงวันที่ 31 ธันวาคม 2026 $10.00 ตั้งแต่วันที่ 1 มกราคม 2027 |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | คำขอค้นหาฟรี 5,000 รายการต่อเดือน (ใช้ร่วมกันในโมเดล Gemini 3.x ทั้งหมด) จากนั้นคิดค่าบริการ $14 ต่อคำขอ 1,000 รายการ |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | 1 $ (texte / image / vidéo / audio) jusqu'au 31 décembre 2026 2 $ (texte / image / vidéo / audio) à partir du 1er janvier 2027 |
+| Prix de sortie | Sans frais | 5 $ jusqu'au 31 décembre 2026. 10 $ à partir du 1er janvier 2027. |
+| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## Gemini 2.5 Computer Use Preview
+## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=fr)
 
-*[`gemini-2.5-computer-use-preview-10-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=th)*
+Notre modèle ouvert, léger et de pointe, basé sur la même technologie que celle de nos modèles Gemini.
 
-โมเดลการใช้งานคอมพิวเตอร์ของเราได้รับการเพิ่มประสิทธิภาพเพื่อสร้างเอเจนต์ควบคุมเบราว์เซอร์ที่
-ทำงานโดยอัตโนมัติ
-
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
-| --- | --- | --- |
-| ราคาอินพุต | ไม่พร้อมใช้งาน | $1.25, พรอมต์ <= 200,000 โทเค็น $2.50, พรอมต์ > 200,000 โทเค็น |
-| ราคาเอาต์พุต | ไม่พร้อมใช้งาน | $10.00, พรอมต์ <= 200,000 โทเค็น $15.00, พรอมต์ > 200,000 |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
-
-## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=th)
-
-โมเดลแบบเปิดที่ล้ำสมัยและใช้ทรัพยากรน้อยของเรา ซึ่งสร้างขึ้นจากเทคโนโลยีเดียวกันกับที่ขับเคลื่อนโมเดล Gemini
-
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| ราคาอินพุต | ไม่มีค่าใช้จ่าย | ไม่พร้อมใช้งาน |
-| ราคาเอาต์พุต | ไม่มีค่าใช้จ่าย | ไม่พร้อมใช้งาน |
-| ราคาการแคชบริบท | ไม่มีค่าใช้จ่าย | ไม่พร้อมใช้งาน |
-| การแคชบริบท (พื้นที่เก็บข้อมูล) | ไม่มีค่าใช้จ่าย | ไม่พร้อมใช้งาน |
-| ราคาการปรับแต่ง | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| การเชื่อมต่อแหล่งข้อมูลกับ Google Search | ไม่พร้อมใช้งาน | ไม่พร้อมใช้งาน |
-| ใช้เพื่อปรับปรุงผลิตภัณฑ์ของเรา | [มี](https://ai.google.dev/gemini-api/terms?hl=th) | [ไม่](https://ai.google.dev/gemini-api/terms?hl=th) |
+| Prix d'entrée | Sans frais | Non disponible |
+| Prix de sortie | Sans frais | Non disponible |
+| Prix de la mise en cache du contexte | Sans frais | Non disponible |
+| Mise en cache du contexte (stockage) | Sans frais | Non disponible |
+| Prix de l'optimisation | Non disponible | Non disponible |
+| Ancrage avec la recherche Google | Non disponible | Non disponible |
+| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
 
-## การกำหนดราคาสำหรับเครื่องมือ
+## Tarifs des outils
 
-เครื่องมือจะมีราคาตามอัตราของตัวเอง ซึ่งจะนำไปใช้กับโมเดลที่ใช้เครื่องมือเหล่านั้น
-ดูหน้า[โมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)เพื่อดูว่าเครื่องมือใดบ้างที่พร้อมใช้งาน
-สำหรับแต่ละโมเดล
+Les outils sont facturés à leurs propres tarifs, appliqués au modèle qui les utilise.
+Consultez la page [Modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr) pour connaître les outils disponibles pour chaque modèle.
 
-|  | รุ่นฟรี | ระดับแบบชำระเงินต่อ 1 ล้านโทเค็นในสกุลเงิน USD |
+|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
 | --- | --- | --- |
-| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th#pricing) | RPD ฟรี 500 รายการ (จำกัดการแชร์สำหรับ Flash และ Flash-Lite) ไม่พร้อมใช้งานสำหรับ Pro | โมเดล Gemini 2.5:  RPD ฟรี 1,500 รายการ (จำกัดการแชร์สำหรับ Flash และ Flash-Lite) จากนั้น $35 / 1,000 พรอมต์ที่อิงตามข้อมูล   โมเดล Gemini 3:  คำขอค้นหาฟรี 5,000 รายการต่อเดือน (แชร์ในโมเดล Gemini ทั้งหมด) จากนั้น $14 ต่อคำขอ 1,000 รายการ |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th#pricing_and_rate_limits) | 500 RPD ไม่พร้อมใช้งานสำหรับ Pro | RPD ฟรี 1,500 รายการ (จำกัดการแชร์สำหรับ Flash และ Flash-Lite) RPD ฟรี 10,000 รายการสำหรับ Pro จากนั้น $25 / 1,000 พรอมต์ที่อิงตามข้อมูล |
-| [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th#billing) | ไม่มีค่าใช้จ่าย | ระบบจะเรียกเก็บเงินสำหรับการเรียกใช้โค้ดตามอัตราโทเค็นมาตรฐานสำหรับโมเดลที่เลือก ค่าใช้จ่ายจะพิจารณาจากการใช้งานเครื่องมือเท่านั้น โดยจะไม่มีการเรียกเก็บเงิน สำหรับเวลาในการทำงานของเซสชัน ระบบจะเรียกเก็บเงินสำหรับโค้ดที่สร้างขึ้นและผลการดำเนินการเป็น**โทเค็นเอาต์พุต**เมื่อสร้าง และเป็น**โทเค็นอินพุต**เมื่อโมเดลใช้โทเค็นเหล่านั้นเป็นส่วนหนึ่งของ กระบวนการให้เหตุผลแบบวนซ้ำ |
-| [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th#limitations) | ไม่มีค่าใช้จ่าย | ระบบจะเรียกเก็บเงินเป็นโทเค็นอินพุตตามราคาของแต่ละโมเดล |
-| [การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) | ไม่พร้อมใช้งาน | ระบบจะเรียกเก็บเงินเป็นโทเค็นปกติตามราคาของโมเดล (เช่น ราคาของ [Gemini 3.5 Flash](#gemini-3.6-flash) รุ่นมาตรฐาน) ดูตารางราคา[เวอร์ชันตัวอย่างการใช้งานคอมพิวเตอร์ของ Gemini 2.5](#gemini-2.5-computer-use-preview-10-2025) สำหรับอัตราค่าบริการของโมเดลเดิม |
-| [ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th#pricing) | ไม่มีค่าใช้จ่าย | เรียกเก็บเงินสำหรับ[การฝัง](#gemini-embedding-2)ที่ $0.15 / 1 ล้านโทเค็น โทเค็นเอกสารที่ดึงข้อมูลจะถูกเรียกเก็บเงินเป็นโทเค็นปกติตามราคาของแต่ละโมเดล |
-| [ปลายทางเครื่องมือที่กำหนดเอง (ตัวอย่าง Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) | ไม่พร้อมใช้งาน | ราคาเดียวกับ[เวอร์ชันตัวอย่างของ Gemini 3.1 Pro](#gemini-3.1-pro-preview) |
+| [La recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr#pricing) | 500 RPD sans frais (limite partagée pour Flash et Flash-Lite). Non disponible pour Pro. | Modèles Gemini 2.5 :  1 500 RPD sans frais (limite partagée pour Flash et Flash-Lite). Ensuite, 35 $ / 1 000 requêtes ancrées   Modèles Gemini 3 :  5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini), puis 14 $ pour 1 000 requêtes. |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr#pricing_and_rate_limits) | 500 RPD Non disponible pour Pro. | 1 500 RPD sans frais (limite partagée pour Flash et Flash-Lite) 10 000 RPD sans frais pour Pro. Puis 25 $ / 1 000 requêtes ancrées |
+| [Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr#billing) | Sans frais | L'exécution de code est facturée aux tarifs standards des jetons pour le modèle sélectionné. Les coûts sont déterminés uniquement par l'utilisation de l'outil. Aucun frais n'est facturé pour la durée d'exécution de la session. Le code généré et les résultats de l'exécution sont facturés en tant que **jetons de sortie** lors de leur création, et en tant que **jetons d'entrée** lorsque le modèle les utilise dans le cadre de son processus de raisonnement itératif. |
+| [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr#limitations) | Sans frais | Facturé en tant que jetons d'entrée selon la tarification par modèle. |
+| [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) | Non disponible | Facturés comme des jetons standards selon la tarification du modèle (par exemple, la tarification standard de [Gemini 3.8 Flash](#gemini-3.8-flash)). |
+| [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr#pricing) | Sans frais | Les [embeddings](#gemini-embedding-2) sont facturés 0,15 $ par million de jetons. Les jetons de documents récupérés sont facturés comme des jetons standards, selon la tarification du modèle. |
+| [Point de terminaison Custom Tools (version preview de Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | Non disponible | Identique aux tarifs de [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
 
-## การกำหนดราคาสำหรับตัวแทน
+## Tarifs pour les agents
 
-ค่าใช้จ่ายในการใช้งานเอเจนต์จะคำนวณตามการใช้โทเค็นพื้นฐาน
-และการใช้งานเครื่องมือ
+Les coûts d'utilisation des agents sont calculés en fonction de la consommation de jetons sous-jacente et de l'utilisation des outils.
 
-|  | รุ่น | เครื่องมือ |
+|  | Modèle | Outils |
 | --- | --- | --- |
-| [เอเจนต์ Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) | การอนุมานโมเดลทั้งหมดจะคิดค่าบริการตามอัตรามาตรฐานของรายการ Gemini ซึ่งรวมถึงโทเค็นอินพุต เอาต์พุต และอินพุต / การให้เหตุผลระดับกลางที่สร้างขึ้น ในระหว่างลูปของเอเจนต์ | ระบบจะเรียกเก็บค่าธรรมเนียมการใช้เครื่องมือตามโครงสร้างการกำหนดราคาที่มีอยู่ โดยจะยังคงใช้การแยกความแตกต่างมาตรฐานสำหรับการอ้างอิงจาก Search (ไม่รวมโทเค็นที่ดึงข้อมูล ) กับ Url\_context / File Search (รวมโทเค็นที่ดึงข้อมูลใน เครื่องมืออื่นๆ ทั้งหมด) |
-| [Agent ที่ได้รับการจัดการใน Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=th) | การอนุมานโมเดลทั้งหมดจะคิดค่าบริการตามอัตรามาตรฐานของรายการ Gemini ซึ่งรวมถึงโทเค็นอินพุต เอาต์พุต และอินพุต / การให้เหตุผลระดับกลางที่สร้างขึ้น ในระหว่างลูปของเอเจนต์ (ดู[รายละเอียดราคา](https://ai.google.dev/gemini-api/docs/agents?hl=th#pricing)) | ระบบจะไม่เรียกเก็บเงินสำหรับการประมวลผลสภาพแวดล้อม (CPU, หน่วยความจำ, การดำเนินการในแซนด์บ็อกซ์) ในช่วงระยะเวลาแสดงตัวอย่าง |
-| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th) | การอนุมานโมเดลทั้งหมดจะคิดค่าบริการตามอัตรามาตรฐานของรายการ Gemini ซึ่งรวมถึงโทเค็นอินพุต เอาต์พุต และอินพุต / การให้เหตุผลระดับกลางที่สร้างขึ้น ในระหว่างลูปของเอเจนต์ (ดู[รายละเอียดราคา](https://ai.google.dev/gemini-api/docs/agents?hl=th#pricing)) | ระบบจะไม่เรียกเก็บเงินสำหรับการประมวลผลสภาพแวดล้อม (CPU, หน่วยความจำ, การดำเนินการในแซนด์บ็อกซ์) ในช่วงระยะเวลาแสดงตัวอย่าง |
+| [Agent Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) | L'inférence de tous les modèles est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / raisonnement intermédiaires générés lors des boucles agentiques. | Les frais d'utilisation des outils s'appliquent selon la structure tarifaire existante, en conservant les distinctions standards pour l'ancrage de la recherche (jetons récupérés exclus) par rapport à Url\_context / Recherche de fichiers (jetons récupérés inclus dans tous les autres outils). |
+| [Managed Agents dans l'API Gemini](https://ai.google.dev/gemini-api/docs/agents?hl=fr) | L'inférence de tous les modèles est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / raisonnement intermédiaires générés lors des boucles agentiques. ([Consulter les informations tarifaires](https://ai.google.dev/gemini-api/docs/agents?hl=fr#pricing)) | Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est pas facturé pendant la période de preview. |
+| [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) | L'inférence de tous les modèles est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / raisonnement intermédiaires générés lors des boucles agentiques. ([Consulter les informations tarifaires](https://ai.google.dev/gemini-api/docs/agents?hl=fr#pricing)) | Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est pas facturé pendant la période de preview. |
 
-## หมายเหตุ
+## Remarques
 
-- **การทำความเข้าใจวิดีโอแบบเอเจนต์:** เมื่อใช้การทำความเข้าใจวิดีโอแบบเอเจนต์
-  การใช้โทเค็นจะแตกต่างกันไปตามเนื้อหาที่โมเดลโหลด ไม่ใช่
-  ความยาววิดีโอทั้งหมด โดยปกติแล้ว วิธีนี้จะช่วยลดโทเค็นอินพุตได้สูงสุด 88% สำหรับวิดีโอแบบยาว แม้ว่าจำนวนโทเค็นจะขึ้นอยู่กับความซับซ้อนของคำค้นหาและความลึกของการสุ่มตัวอย่างแบบไดนามิก (ซึ่งอาจเกิน 1 FPS สำหรับส่วนภาพที่มีรายละเอียด) ดู[การทำความเข้าใจวิดีโอแบบ Agentic](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th#agentic-video-understanding)
-- **การเรียกเก็บเงินตามโทเค็นเอกสาร:** ระบบจะเรียกเก็บเงินโทเค็นสำหรับรูปแบบ `DOCUMENT` (เช่น PDF) ในอัตราโทเค็นรูปภาพ ในการตอบกลับของ API โทเค็นเหล่านี้จะปรากฏในรูปแบบ `DOCUMENT` ภายใน `promptTokensDetails`
-- การใช้งาน Google AI Studio ไม่มีค่าใช้จ่ายใน[ภูมิภาคที่พร้อมให้บริการ](https://ai.google.dev/gemini-api/docs/available-regions?hl=th)ทั้งหมด ดูรายละเอียดได้ที่[คำถามที่พบบ่อยเกี่ยวกับการเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th)
-- ราคาอาจแตกต่างจากราคาที่ระบุไว้ที่นี่และราคาที่เสนอใน
-  แพลตฟอร์มเอเจนต์ Gemini Enterprise ดูราคาของแพลตฟอร์ม Agent ของ Gemini Enterprise ได้ที่[หน้าการกำหนดราคาของแพลตฟอร์ม Agent ของ Gemini Enterprise](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=th)
-- หากคุณใช้[การดึงข้อมูลแบบไดนามิก](https://ai.google.dev/gemini-api/docs/grounding?hl=th)เพื่อเพิ่มประสิทธิภาพค่าใช้จ่าย ระบบจะเรียกเก็บเงินเฉพาะคำขอที่มี URL การสนับสนุนการเชื่อมต่อแหล่งข้อมูลอย่างน้อย 1 รายการจากเว็บในการตอบกลับสำหรับการเชื่อมต่อแหล่งข้อมูลกับ Google Search
-  ระบบจะเรียกเก็บค่าใช้จ่ายสำหรับ Gemini เสมอ ทั้งนี้ ขีดจำกัดอัตราอาจมีการเปลี่ยนแปลง
+- **Compréhension agentique des vidéos** : lorsque vous utilisez la compréhension agentique des vidéos, l'utilisation de jetons est variable en fonction du contenu chargé par le modèle plutôt que de la durée totale de la vidéo. Cela permet généralement de réduire jusqu'à 88% le nombre de jetons d'entrée pour les vidéos longues, bien que le nombre de jetons dépende de la complexité de la requête et de la profondeur d'échantillonnage dynamique (qui peut dépasser 1 FPS pour les segments visuels détaillés). Consultez [Compréhension agentique des vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#agentic-video-understanding).
+- **Facturation des jetons pour les documents** : les jetons pour la modalité `DOCUMENT` (par exemple, les PDF) sont facturés au tarif des jetons d'image. Dans les réponses de l'API, ces jetons apparaissent sous la modalité `DOCUMENT` dans `promptTokensDetails`.
+- L'utilisation de Google AI Studio est sans frais dans toutes les [régions disponibles](https://ai.google.dev/gemini-api/docs/available-regions?hl=fr). Pour en savoir plus, consultez les [questions fréquentes sur la facturation](https://ai.google.dev/gemini-api/docs/billing?hl=fr).
+- Les prix peuvent différer de ceux indiqués ici et de ceux proposés sur Gemini Enterprise Agent Platform. Pour connaître les tarifs de Gemini Enterprise Agent Platform, consultez la [page des tarifs de Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=fr).
+- Si vous utilisez la [récupération dynamique](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) pour optimiser les coûts, l'ancrage avec la recherche Google n'est facturé que pour les requêtes qui contiennent au moins une URL d'ancrage issue du Web dans leur réponse.
+  Les coûts de Gemini s'appliquent toujours. Les limites de débit sont susceptibles d'être modifiées.
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+Dernière mise à jour le 2026/10/01 (UTC).
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/01 (UTC)."],[],[]]

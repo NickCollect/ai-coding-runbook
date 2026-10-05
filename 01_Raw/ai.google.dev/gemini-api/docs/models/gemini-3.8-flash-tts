@@ -1,134 +1,137 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=zh-TW
-fetched_at: 2026-09-28T06:20:08.916977+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=hi
+fetched_at: 2026-10-05T06:48:17.574205+00:00
 title: "Gemini 3.8 Flash TTS \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-提供意見
+सुझाव भेजें
 
 # Gemini 3.8 Flash TTS
 
-Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) 是 Google 的旗艦創意文字轉語音模型，專為提供錄音室等級的語音保真度、生動的演繹、道地的地域口音，以及穩定的長篇多輪對話而設計。
+Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`), Google का फ़्लैगशिप क्रिएटिव टेक्स्ट-टू-स्पीच मॉडल है. इसे स्टूडियो-ग्रेड की आवाज़, शानदार एक्टिंग, स्थानीय लहजे, और लंबी सिलसिलेवार बातचीत के दौरान स्थिरता बनाए रखने के लिए बनाया गया है.
 
-[在 Google AI Studio 中試用](https://aistudio.google.com?model=gemini-3.8-flash-tts&hl=zh-tw)
+[Google AI Studio में आज़माएं](https://aistudio.google.com?model=gemini-3.8-flash-tts&hl=hi)
 
-## 總覽與功能
+## खास जानकारी और सुविधाएं
 
-Gemini 3.8 Flash TTS 為生成生動的音訊樹立全新標竿：
+Gemini 3.8 Flash TTS, भावनात्मक ऑडियो जनरेट करने के लिए एक नया बेंचमार्क सेट करता है:
 
-- **高音訊保真度和細膩的演繹：**可呈現豐富的情緒、自然的語調，並精準遵循回合層級的`style`指示和內嵌語音事件 (`<laugh>`、`<sigh>`、`<short pause>`)。
-- **長時間多輪對話穩定性：**在長時間對話和數分鐘的旁白中，維持一致的聲音特徵、音色、音量和聲學室調，不會出現聲音漂移。
-- **道地的地區口音和發音：**支援地區口音和少數族群方言。
-- **支援完整的語音生態系統：**可與預先建構的語音、擴充語音庫 (`GET /v1beta/voices`)、自訂[語音設計](https://ai.google.dev/gemini-api/docs/voice-design?hl=zh-tw)角色和[語音複製](https://ai.google.dev/gemini-api/docs/voice-replication?hl=zh-tw) (預設為持續儲存語音，另提供選用的無狀態金鑰) 完美搭配運作。您也可以在 [Google AI Studio](https://aistudio.google.com/generate-speech?hl=zh-tw) 中，以互動方式設計及複製聲音。
+- **आवाज़ की क्वालिटी और ऐक्टिंग की बारीकियां:** इसमें भावनाएं ज़ाहिर करने के लिए अलग-अलग तरह के शब्दों का इस्तेमाल किया जाता है. साथ ही, बोलने का तरीका स्वाभाविक होता है. इसमें बारीकी से यह ध्यान रखा जाता है कि `style` लेवल के निर्देशों और इनलाइन वोकल इवेंट (`<laugh>`, `<sigh>`, `<short pause>`) का सही तरीके से पालन किया जाए.
+- **लंबे समय तक चलने वाली सिलसिलेवार बातचीत में आवाज़ की स्थिरता:** लंबे डायलॉग और कई मिनट तक चलने वाले नरेशन में, आवाज़ की पहचान, टोन, वॉल्यूम, और कमरे के ऐको को एक जैसा बनाए रखता है. साथ ही, आवाज़ में बदलाव नहीं होता.
+- **क्षेत्र के हिसाब से एक्सेंट और उच्चारण:** इसमें क्षेत्र के हिसाब से एक्सेंट और अल्पसंख्यक बोलियों का इस्तेमाल किया जाता है.
+- **आवाज़ से जुड़े पूरे ईकोसिस्टम के साथ काम करता है:** यह पहले से मौजूद आवाज़ों, एक्सटेंडेड वॉइस लाइब्रेरी (`GET /v1beta/voices`), कस्टम [वॉइस डिज़ाइन](https://ai.google.dev/gemini-api/docs/voice-design?hl=hi) पर्सोना, और [वॉइस रेप्लिकेशन](https://ai.google.dev/gemini-api/docs/voice-replication?hl=hi) के साथ बिना किसी रुकावट के काम करता है. इसमें डिफ़ॉल्ट रूप से, सेव की गई आवाज़ें और बिना स्टेटस वाली कुंजियां शामिल होती हैं. [Google AI Studio](https://aistudio.google.com/generate-speech?hl=hi) में, आवाज़ों को इंटरैक्टिव तरीके से डिज़ाइन और कॉपी भी किया जा सकता है.
 
-如要全面瞭解功能、提示最佳做法和程式碼範例，請參閱 [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw) 指南。
+सुविधाओं, प्रॉम्प्ट के सबसे सही तरीकों, और कोड के उदाहरणों के बारे में पूरी जानकारी के लिए, [टेक्स्ट को आवाज़ में बदलने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi) वाली गाइड पर जाएं.
 
-## 各個 TTS 模型的使用時機
+## किस टीटीएस मॉडल का इस्तेमाल कब करना चाहिए
 
-Gemini 3.8 TTS 模型共用相同的 API 架構和提示結構。選擇符合工作負載需求的模型：
+Gemini 3.8 के दोनों टीटीएस मॉडल, एक ही एपीआई स्कीमा और प्रॉम्प्टिंग स्ट्रक्चर का इस्तेमाल करते हैं.
+अपने वर्कलोड के हिसाब से मॉडल चुनें:
 
-| 功能 / 工作負載 | Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) | Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) |
+| सुविधा / वर्कलोड | Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) | Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) |
 | --- | --- | --- |
-| **主要優點** | 盡可能提高語音保真度、演技細節和方言涵蓋範圍 | 高處理量、低延遲和具成本效益 |
-| **最佳用途** | 有聲書、錄音室旁白、複雜的多人對話、大量爆發性演技、難以發音的字詞、地方方言 | 大量製作、即時語音代理串聯、朗讀功能、語音複製、日常單一說話者生成 |
-| **支援的語言** | 130 種語言 | 101 種語言 |
-| **建議更換為** | 全新旗艦廣告素材層級 | `gemini-3.1-flash-tts-preview` |
+| **प्राइमरी स्ट्रेंथ** | आवाज़ की क्वालिटी, ऐक्टिंग की बारीकियां, और बोली की विविधता | हाई थ्रूपुट, कम इंतज़ार का समय, और कम लागत |
+| **इस्तेमाल के सबसे सही उदाहरण** | ऑडियो बुक, स्टूडियो में की गई रिकॉर्डिंग, कई लोगों के बीच की गई मुश्किल बातचीत, तेज़ आवाज़ में की गई ऐक्टिंग, मुश्किल उच्चारण, क्षेत्रीय बोलियां | ज़्यादा मात्रा में प्रोडक्शन, रीयल-टाइम में वॉइस एजेंट कैस्केड, पढ़कर सुनाने की सुविधाएं, आवाज़ की नकल करना, और रोज़ाना एक स्पीकर जनरेट करना |
+| **इस्तेमाल की जा सकने वाली भाषाएं** | 130 भाषाएं | 101 भाषाएं |
+| **इसके बदले यह इस्तेमाल करने का सुझाव दिया गया है** | फ़्लैगशिप क्रिएटिव का नया टियर | `gemini-3.1-flash-tts-preview` |
 
-## 遷移指南
+## माइग्रेशन गाइड
 
-如要從 `gemini-3.1-flash-tts-preview` 或更早的 Gemini TTS 模型遷移，請更新 Gemini 3.8 TTS 架構的要求：
+अगर आपको `gemini-3.1-flash-tts-preview` या इससे पहले के Gemini TTS मॉडल से माइग्रेट करना है, तो Gemini 3.8 TTS स्कीमा के लिए अपने अनुरोधों को अपडेट करें:
 
-1. **將回合層級的指示移至 `speech_metadata`：**Gemini 3.8 TTS 會將輸入文字嚴格視為逐字稿。系統可能會朗讀行內文字方向，例如 `"Say cheerfully: Hello!"` 或 `"Speaker 1: Hello!"`。將持續傳送指示 (`style`) 和發言者標籤 (`speaker`) 移至結構化中繼資料：
-   - **互動 API：**使用 `"type":
-     "speech_metadata"`、`"speaker"` 和 `"style"` 為每個文字內容區塊附加註解。
-   - **GenerateContent API：**將 `"speech_metadata": {"speaker": "...",
-     "style": "..."}` 附加至每個 `part`。
-2. **只針對特定時間點的語音事件使用角括號內嵌標記：**使用角括號 (例如 `<laugh>`、`<sigh>`、`<cough>`、`<breath>` 或 `<short pause>`)，將短暫的非語音發聲和停頓內嵌在轉錄稿中。將耳語等傳達方式放在 `speech_metadata.style` 中。
-3. **在多位說話者要求中，為每個輪流發言指定 `speaker`：**多位說話者要求中的每個輪流發言，都必須在 `speech_metadata` 內明確包含 `speaker`，且與其中一位已設定的說話者相符。
-4. **預先使用 Voice Design 設計角色：**使用在 [Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=zh-tw) 中建立的自訂語音，取代舊版音訊設定檔 / 導演附註區塊，然後透過 TTS 要求傳送該 `voice_...` ID，並使用最少或空白的 `style` 字串。
-5. **單元要求預設會輸出 WAV (`audio/wav`)：**與 `gemini-3.1-flash-tts-preview` 和先前的 TTS 模型不同 (預設會傳回無標頭的原始 PCM `audio/l16`)，Gemini 3.8 TTS 預設會為單元要求傳回含有標準 RIFF 標頭的 WAV 音訊 (`audio/wav` / `AUDIO_WAV`)。
-   - 如果您的程式碼先前將原始 PCM 位元組包裝在 WAV 標頭中 (例如使用 Python 的 `wave` 模組或 `ffmpeg`)，請移除手動標頭包裝函式，並將傳回的位元組直接寫入 `.wav` 檔案。
-   - 如果管道需要無標頭的原始 PCM、mu-law 或 A-law 音訊，請將 `response_format` 明確設為 `"audio/l16"` (`"AUDIO_L16"`)、`"audio/mulaw"` (`"AUDIO_MULAW"`) 或 `"audio/alaw"` (`"AUDIO_ALAW"`)。請參閱[音訊輸出格式](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw#audio-output-formats)。
+1. **मोड़ के हिसाब से दिए गए निर्देशों को `speech_metadata` में ले जाएं:** Gemini 3.8 टीटीएस, इनपुट टेक्स्ट को हूबहू ट्रांसक्रिप्ट के तौर पर लेता है. `"Say cheerfully: Hello!"` या `"Speaker 1: Hello!"` जैसे इनलाइन टेक्स्ट निर्देशों को तेज़ आवाज़ में सुनाया जा सकता है.
+   सस्टेंड डिलीवरी के निर्देशों (`style`) और स्पीकर लेबल (`speaker`) को स्ट्रक्चर्ड मेटाडेटा में ले जाएं:
+   - **Interactions API:** हर टेक्स्ट कॉन्टेंट ब्लॉक में `"type":
+     "speech_metadata"`, `"speaker"`, और `"style"` के साथ एनोटेशन अटैच करें.
+   - **GenerateContent API:** हर `part` में `"speech_metadata": {"speaker": "...",
+     "style": "..."}` अटैच करें.
+2. **सिर्फ़ कुछ समय के लिए होने वाली आवाज़ की घटनाओं के लिए, ऐंगल-ब्रैकेट वाले इनलाइन टैग इस्तेमाल करें:** कुछ समय के लिए होने वाली आवाज़ और पॉज़ को ट्रांसक्रिप्ट में इनलाइन रखें. इसके लिए, ऐंगल ब्रैकेट (जैसे कि `<laugh>`, `<sigh>`, `<cough>`, `<breath>` या `<short pause>`) का इस्तेमाल करें. बोलने के तरीके, जैसे कि फुसफुसाना, `speech_metadata.style` में रखें.
+3. **एक से ज़्यादा स्पीकर वाले अनुरोधों में, हर बार `speaker` तय करें:** एक से ज़्यादा स्पीकर वाले अनुरोध में, हर बार
+   `speech_metadata` के अंदर `speaker` को साफ़ तौर पर शामिल किया जाना चाहिए. यह, कॉन्फ़िगर किए गए किसी स्पीकर से मेल खाना चाहिए.
+4. **आवाज़ के डिज़ाइन की मदद से, पहले से ही पर्सोना डिज़ाइन करें:** लेगसी ऑडियो प्रोफ़ाइल / डायरेक्टर के नोट वाले लंबे ब्लॉक को [आवाज़ के डिज़ाइन](https://ai.google.dev/gemini-api/docs/voice-design?hl=hi) में बनाई गई कस्टम आवाज़ से बदलें. इसके बाद, टीटीएस के अनुरोधों के साथ उस `voice_...` आईडी को कम से कम या खाली `style` स्ट्रिंग के साथ भेजें.
+5. **एकल अनुरोधों पर डिफ़ॉल्ट WAV (`audio/wav`) आउटपुट के लिए खाता:** `gemini-3.1-flash-tts-preview` और इससे पहले के टीटीएस मॉडल (जो डिफ़ॉल्ट रूप से हेडरलेस रॉ पीसीएम `audio/l16` दिखाते थे) के उलट, Gemini 3.8 टीटीएस, एकल अनुरोधों के लिए डिफ़ॉल्ट रूप से स्टैंडर्ड RIFF हेडर के साथ WAV ऑडियो (`audio/wav` / `AUDIO_WAV`) दिखाता है.
+   - अगर आपके कोड में पहले रॉ पीसीएम बाइट को WAV हेडर में रैप किया गया था (उदाहरण के लिए, Python के `wave` मॉड्यूल या `ffmpeg` का इस्तेमाल करके), तो मैन्युअल हेडर रैपर को हटा दें. साथ ही, लौटाए गए बाइट को सीधे `.wav` फ़ाइल में लिखें.
+   - अगर आपकी पाइपलाइन को हेडरलेस रॉ पीसीएम, म्यू-लॉ या ए-लॉ ऑडियो की ज़रूरत है, तो `response_format.mime_type` को `"audio/l16"`, `"audio/mulaw"` या `"audio/alaw"` पर सेट करें. उदाहरण के लिए, Interactions API में `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` या `generateContent` में `AUDIO_L16`, `AUDIO_MULAW` या `AUDIO_ALAW`. [ऑडियो आउटपुट फ़ॉर्मैट](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi#audio-output-formats) देखें.
 
 ## gemini-3.8-flash-tts
 
-| 屬性 | 說明 |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_card 模型代碼 | `gemini-3.8-flash-tts` |
-| save支援的資料類型 | **輸入裝置**  文字  **輸出內容**  音訊 |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  8,192  **輸出內容詞元限制**  16,384 (Gemini API 服務限制) |
-| handyman功能 | **[生成音訊](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)**  支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  不支援  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  不支援  **[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  不支援  **[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)**  不支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  不支援  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw)**  不支援  **[以搜尋為基準](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)**  不支援  **[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)**  不支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  不支援  **[網址環境](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)**  不支援 |
-| speed計費方案 | **[批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  支援  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)**  支援  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)**  支援 |
-| 123 個版本 | 詳情請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - `gemini-3.8-flash-tts` |
-| calendar\_month最新更新 | 2026 年 9 月 |
+| id\_cardमॉडल कोड | `gemini-3.8-flash-tts` |
+| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट  **आउटपुट**  ऑडियो |
+| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  8,192  **आउटपुट टोकन की सीमा**  16,384 (Gemini API की सेवा देने की सीमा) |
+| handymanसुविधाएं | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम नहीं करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम नहीं करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम नहीं करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम नहीं करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम नहीं करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम नहीं करता है  **[सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम नहीं करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम नहीं करता है |
+| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - `gemini-3.8-flash-tts` |
+| calendar\_monthनया अपडेट | सितंबर 2026 |
 
-## 支援的語言
+## इस्तेमाल की जा सकने वाली भाषाएं
 
-`gemini-3.8-flash-tts` 會自動偵測輸入語言，並支援**超過 130 種語言**：
+`gemini-3.8-flash-tts` इनपुट की भाषा का अपने-आप पता लगाता है और **130 से ज़्यादा भाषाओं** में काम करता है:
 
-| 語言 | 語言 | 語言 |
+| भाषा | भाषा | भाषा |
 | --- | --- | --- |
-| 亞齊文 (阿拉伯文字) | 希臘文 | 尼泊爾文 (單一語言) |
-| 南非荷蘭文 | 瓜拉尼語 | 奈及利亞富爾富爾德文 |
-| 阿肯文 | 古吉拉特文 | 北亞塞拜然文 |
-| 阿姆哈拉文 | 海地克里奧爾文 | 北索托文 |
-| 亞美尼亞文 | 喀爾喀蒙古文 | 北烏茲別克 |
-| 阿薩姆文 | 豪薩文 | 挪威博克馬爾文 |
-| 阿瓦德語 | 希伯來文 | 挪威文 (耐諾斯克) |
-| 峇里語 | 北印度文 | 尼揚賈文 |
-| 孟加拉文 | 匈牙利文 | 歐西坦語 |
-| 班查文 (阿拉伯文字) | 冰島文 | 歐利亞文 (個別語言) |
-| 班查文 (拉丁文字) | 伊博文 | 邦阿西楠語 |
-| 巴什噶爾文 | 伊洛果語 | 波斯文 (阿富汗) |
-| 巴斯克文 | 印尼文 | 波蘭文 |
-| 白俄羅斯文 | 伊朗波斯文 | 葡萄牙文 |
-| 本巴語 | 義大利文 | 旁遮普文 |
-| 博杰普爾文 | 日文 | 羅馬尼亞文 |
-| 波士尼亞文 | 爪哇語 | 俄文 |
-| 布吉斯文 | 卡比爾文 | 桑塔利文 |
-| 保加利亞文 | 坎巴文 | 塞爾維亞文 |
-| 緬甸文 | 卡納達文 | 信德文 |
-| 粵語 | 喀什米爾文 (阿拉伯文字) | 錫蘭文 |
-| 加泰隆尼亞文 | 喀什米爾文 (天城文) | 斯洛伐克文 |
-| 宿霧文 | 哈薩克文 | 斯洛維尼亞文 |
-| 中庫德文點字 | 高棉文 | 索馬里語 |
-| 切蒂斯格爾文 | 基庫猶文 | 南亞塞拜然文 |
-| 中文 (漢字) | 盧旺達文 | 南普什圖語 |
-| 中文 (繁體) | 剛果文 | 席索托文 |
-| 克里米亞韃靼語 | 韓文 | 西班牙文 |
-| 克羅埃西亞文 | 吉爾吉斯文 | 標準阿拉伯文 (阿拉伯文字) |
-| 捷克文 | 寮文 | 標準阿拉伯文 (拉丁字母) |
-| 丹麥文 | 拉特加萊語 | 標準拉脫維亞文 |
-| 荷蘭文 | 林格拉文 | 標準馬來文 |
-| 迪烏拉語 | 立陶宛文 | 斯瓦希里文 (個別語言) |
-| 宗喀語 | 盧森堡文 | 史瓦濟語 |
-| 阿拉伯文 (埃及) | 馬其頓文 | 瑞典文 |
-| 英文 | 摩揭陀文 | 塔吉克文 |
-| 愛沙尼亞文 | 邁蒂利文 | 泰米爾文 |
-| 菲律賓文 | 馬拉雅拉姆文 | 泰盧固文 |
-| 芬蘭文 | 馬爾他文 | 泰文 |
-| 法文 | 曼尼浦里文 | 蒂格里亞文 |
-| 加里西亞文 | 馬拉地文 | 托斯克阿爾巴尼亞文 |
-| 干達文 | 米南佳保文 (阿拉伯文字) | 土耳其文 |
-| 喬治亞文 | 米南佳保文 (拉丁文字) | 維吾爾文 |
-| 德文 | 米佐文 | 越南文 |
+| एचनीज़ (अरबी स्क्रिप्ट) | ग्रीक | नेपाली (अलग भाषा) |
+| अफ़्रीकान्स | गुअरानी | नाइजीरिया की फु़लफु़लदे |
+| आकान | गुजराती | उत्तरी अज़रबैजान |
+| अमहैरिक | हैतियन क्रिओल | नॉर्दर्न सोथो |
+| आर्मीनियन | हलह मंगोलियन | नॉर्दर्न उज़्बेक |
+| असमिया | हौसा | नॉर्वेजियन बोकमाल |
+| अवधी | हिब्रू | नार्वेजियन नॉर्स्क |
+| बालीनीज़ | Hindi | न्यान्जा |
+| बांग्ला | हंगेरियन | ओसीटन |
+| बंजार (अरबी लिपि) | आइसलैंडिक | ओड़िया (अलग भाषा) |
+| बंजार (लैटिन स्क्रिप्ट) | इग्बो | पंगासिनान |
+| बाश्कियर | ईलोको | पर्शन (अफ़ग़ानिस्तान) |
+| बॉस्क | इंडोनेशियन | Polish |
+| Belarusian | ईरानी फ़ारसी | Portuguese |
+| बेंबा | इटैलियन | पंजाबी |
+| भोजपुरी | जापानी | रोमानियन |
+| बोस्नियन | जावानीज़ | रूसी |
+| ब्‍यूगिनी | कबाइल | संथाली |
+| बल्गैरियन | कांबा | सर्बियन |
+| बर्मीज़ | कन्नड़ | सिंधी |
+| कैंटोनीज़ | कश्मीरी (अरबी लिपि) | सिंहला |
+| कैटलैन | कश्मीरी (देव स्क्रिप्ट) | स्लोवाक |
+| सेबुआनो | कज़ाक | स्लोवेनियन |
+| सेंट्रल कुर्दिश | ख्मेर | सोमाली |
+| छत्तीसगढ़ी | किकुयू | दक्षिणी अज़रबैजानी |
+| चाइनीज़ (हंस स्क्रिप्ट) | किनयारवांडा | दक्षिणी पश्तो |
+| चाइनीज़ (हंत स्क्रिप्ट) | कॉन्गो | सदर्न सुटू |
+| क्राइमियन टाटर | कोरियन | स्पैनिश |
+| क्रोएशियन | किर्गिज़ | स्टैंडर्ड ऐरेबिक (अरबी लिपि) |
+| चेक | लाओ | स्टैंडर्ड ऐरेबिक (लैटिन स्क्रिप्ट) |
+| डैनिश | लैजालियन | स्टैंडर्ड लातवियन |
+| डच | लिंगाला | स्टैंडर्ड मलय |
+| ड्यूला | लिथुएनियन | स्वाहीली (अलग भाषा) |
+| जोंगखा | लक्ज़मबर्गिश | स्वाटी |
+| मिस्री अरबी | मैसेडोनियन | स्वीडिश |
+| अंग्रेज़ी | मगही | ताजिक |
+| एस्टोनियन | मैथिली | तमिल |
+| फ़िलिपीनी | मलयालम | तेलुगु |
+| फ़िनिश | मोल्टीज़ | थाई |
+| फ़्रांसीसी | मणिपुरी | तिग्रिन्या |
+| गैलिशियन | मराठी | टॉस्क अल्बानियन |
+| गांदा | मिनांग्काबाउ (अरबी लिपि) | Turkish |
+| जॉर्जियन | मिनांग्काबाउ (लैटिन स्क्रिप्ट) | विगर |
+| जर्मन | मिज़ो | वियतनामीज़ |
 
-提供意見
+सुझाव भेजें
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-上次更新時間：2026-09-24 (世界標準時間)。
+आखिरी बार 2026-10-01 (UTC) को अपडेट किया गया.
 
-想進一步說明嗎？
+क्या आपको हमें और कुछ बताना है?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-01 (UTC) को अपडेट किया गया."],[],[]]

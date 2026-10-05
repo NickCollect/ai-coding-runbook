@@ -1,79 +1,79 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=de
-fetched_at: 2026-09-28T06:11:12.151425+00:00
-title: "Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/thinking?hl=zh-CN
+fetched_at: 2026-10-05T06:28:23.031562+00:00
+title: "Live API \u7684\u601d\u7ef4\u65b9\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Live API
+# Live API 的思维方式
 
-Die Gemini Live API ermöglicht bidirektionale Sprachunterhaltungen in Echtzeit mit Gemini-Modellen.
+借助 Gemini Live API，您可以与 Gemini 模型进行实时的双向语音对话。
 
-Standard-Sprachmodelle eignen sich gut für den direkten Dialog. Sie sprechen mit dem Modell und es generiert sofort eine gesprochene Antwort. Wenn für eine Anfrage jedoch Planung, komplexe Analysen oder externe Tools erforderlich sind, stoßen direkte Antworten an ihre Grenzen. Das Modell muss entweder ohne Begründung antworten oder still pausieren, während es auf den Abschluss der Tools wartet.
+标准语音模型非常适合即时对话。您对模型说话，模型会立即生成语音回复。但当请求需要规划、复杂分析或外部工具时，直接回答会受到限制。模型必须在不进行推理的情况下回答，或者在等待工具完成时静默暂停。
 
-Wenn Sie in der Live API (`gemini-3.8-live-extended-thinking`) denken, wird den Echtzeit-Sprachsitzungen eine Hintergrundbegründung hinzugefügt. Das Modell plant und ruft asynchrone Tools im Hintergrund auf, während es natürliche Gesprächsfüller verwendet, um die Interaktion aktiv zu halten.
+在 Live API (`gemini-3.8-live-extended-thinking`) 中思考可为实时语音会话添加背景推理。模型会在后台规划和调用异步工具，同时说出自然的对话填充语，以保持互动活跃。
 
-Diese Architektur ändert den Unterhaltungslebenszyklus auf zwei wichtige Arten:
+此架构通过以下两种主要方式改变了对话生命周期：
 
-- **Gesprächsfüller**: Das Modell gibt Zwischenupdates aus, z. B. „Ich suche jetzt nach Flugoptionen“, während es im Hintergrund Tools ausführt.
-- **Statusverfolgung von Interaktionen**: Da das Modell während einer einzelnen Anfrage mehrmals sprechen kann, gibt der Server während der Hintergrundverarbeitung `interaction_status: "IN_PROGRESS"` und nach Abschluss der Gesamtaufgabe `interaction_status: "IDLE"` aus.
+- **对话填充内容**：模型在后台执行工具时，会说出中间更新（例如“正在检查航班选项”）。
+- **互动状态跟踪**：由于模型可以在单个请求期间多次说话，因此服务器会在后台处理期间发出 `interaction_status: "IN_PROGRESS"`，并在整个任务完成时发出 `interaction_status: "IDLE"`。
 
-Im folgenden Diagramm werden die Interaktionslebenszyklen zwischen standardmäßigen Live-Sprachsitzungen und „Mit Hintergrundbegründung denken“ verglichen:
+下图比较了标准实时语音会话与“边想边推理”之间的互动生命周期：
 
-![Vergleich von Live-API-Funktionsaufrufen und Statusverfolgung](https://ai.google.dev/static/gemini-api/docs/images/thinking-model-comparison.svg?hl=de)
+![Live API 函数调用和状态跟踪比较](https://ai.google.dev/static/gemini-api/docs/images/thinking-model-comparison.svg?hl=zh-cn)
 
-## Das richtige Modell auswählen
+## 选择合适的模型
 
-Bei der Entscheidung zwischen `gemini-3.8-live` und `gemini-3.8-live-extended-thinking` sollten Sie drei Hauptaspekte berücksichtigen: Antwortlatenz, Komplexität der Aufgabe und Verarbeitung des Clientstatus.
+在 `gemini-3.8-live` 和 `gemini-3.8-live-extended-thinking` 之间做出选择时，请考虑以下三个主要因素：响应延迟时间、任务复杂程度和客户端状态处理。
 
-### Wann sollte Gemini 3.8 Live verwendet werden?
+### Gemini 3.8 Live 的适用场景
 
-Verwenden Sie `gemini-3.8-live` für Sprachagenten mit niedriger Latenz, bei denen ein sofortiger Sprecherwechsel erforderlich ist und die Aufgaben direkt sind.
+对于需要立即轮流对话且任务直接的低延迟对话语音代理，请使用 `gemini-3.8-live`。
 
-- **Konversationelle Sprachassistenten**: Kundenservice-Triage, Sprachübungen, Sprachsuche und interaktives Storytelling.
-- **Schnelle Tool-Ausführung**: Workflows, bei denen externe Tools innerhalb von Millisekunden zurückgegeben werden (z. B. beim Lesen von Sensorwerten oder Steuern von Smart-Home-Geräten).
-- **Einfache Clientlogik**: Anwendungen, in denen jeder Nutzerzug eine einzelne Modellantwort erhält und `turnComplete: true` zuverlässig signalisiert, wenn die Sitzung im Leerlauf ist.
+- **对话式语音助理**：客户服务分流、语言练习、语音搜索和互动式故事讲述。
+- **快速执行工具**：外部工具在几毫秒内返回的工作流（例如读取传感器值或控制智能设备）。
+- **简单的客户端逻辑**：应用中每个用户轮次都会收到单个模型响应，并且 `turnComplete: true` 会在会话空闲时可靠地发出信号。
 
-### Wann sollte Gemini 3.8 Live Extended Thinking verwendet werden?
+### 何时使用 Gemini 3.8 Live（扩展思考）
 
-Verwenden Sie `gemini-3.8-live-extended-thinking`, wenn Ihr Agent komplexe Daten auswerten, mehrere Schritte planen oder Tools verarbeiten muss, deren Ausführung mehrere Sekunden dauert.
+如果您的代理必须评估复杂数据、规划多个步骤或处理需要几秒钟才能运行的工具，请使用 `gemini-3.8-live-extended-thinking`。
 
-- **Mehrstufige Diagnose und Support**: Kundenservicemitarbeiter diagnostizieren Systemprobleme anhand mehrerer Protokolle, Fehlercodes und Konfigurationsprüfungen.
-- **Koordinierter Datenabruf**: Reise- und Buchungsagenten, die Flüge suchen, Hotels abfragen und Preise über parallele API-Aufrufe vergleichen.
-- **Nachhilfe in MINT-Fächern und Programmieren**: Bildungs-Agents, die Formeln überprüfen, Code debuggen oder mehrstufige Logik durchgehen, bevor sie eine Erklärung ausgeben.
-- **Latenz des Maskierungstools**: Sprachfunktionen, bei denen Funktionen mit langer Ausführungszeit ansonsten zu unangenehmer Stille für den Zuhörer führen würden.
+- **多步骤诊断和支持**：技术支持人员会诊断多个日志、错误代码和配置检查中的系统问题。
+- **协调的数据检索**：旅游和预订代理，可搜索航班、查询酒店，并通过并行 API 调用比较价格。
+- **STEM 和代码辅导**：在给出解释之前，验证公式、调试代码或处理多步逻辑的教育类智能体。
+- **遮盖工具延迟**：在语音体验中，长时间运行的函数可能会导致听众感到尴尬的沉默。
 
-### Zusammenfassung der wichtigsten Unterschiede
+### 主要区别总结
 
-In der folgenden Tabelle werden die technischen Unterschiede zwischen den beiden Modellen zusammengefasst:
+下表总结了这两种型号之间的技术差异：
 
-| Funktion | Gemini 3.8 Live | Gemini 3.8 Live Extended Thinking |
+| 功能 | Gemini 3.8 Live | Gemini 3.8 Live（扩展思考） |
 | --- | --- | --- |
-| **Primäre Anwendungsfälle** | Sprachagenten mit niedriger Latenz, direkte Befehle, schnelle Tools | Mehrstufige Problemlösung, komplexe Planung, Workflows mit mehreren Tools |
-| **Modell-Endpunkt** | `gemini-3.8-live` | `gemini-3.8-live-extended-thinking` |
-| **Reasoning-Architektur** | Verschachtelte Argumentation mit festem Latenzprofil (`thinking_level` wird nicht unterstützt) | Konfigurierbare Hintergrundinformationen (`thinking_level`: `low`, `medium`, `high`; `MINIMAL` wird nicht unterstützt) |
-| **Abbiegehinweise** | `turnComplete: true` beendet den Zug und kehrt in den Leerlauf zurück. | `turnComplete: true` beendet eine Äußerung; `interaction_status` steuert den Sitzungslebenszyklus |
-| **Füllwörter** | Das Modell wartet mit der Antwort, bis das Tool ausgeführt wurde | Das Modell streamt während der Verarbeitung Zwischeninhalte für die Unterhaltung. |
-| **Tool-Ausführung** | Unterstützt synchrone (`BLOCKING`) und asynchrone (`NON_BLOCKING`) Tools | Erfordert asynchrone (`NON_BLOCKING`) Tool-Deklarationen |
+| **主要使用场景** | 低延迟语音代理、直接命令、快速工具 | 多步骤问题解决、复杂规划、多工具工作流 |
+| **模型端点** | `gemini-3.8-live` | `gemini-3.8-live-extended-thinking` |
+| **推理架构** | 具有固定延迟配置的交错推理（不支持 `thinking_level`） | 可配置的后台推理（`thinking_level`：`low`、`medium`、`high`；不支持 `MINIMAL`） |
+| **开启边界** | `turnComplete: true` 结束回合并返回到空闲状态 | `turnComplete: true` 完成话语；`interaction_status` 控制会话生命周期 |
+| **对话填充词** | 模型在说话之前等待工具执行 | 模型在处理时会流式传输中间对话填充词 |
+| **工具执行** | 支持同步 (`BLOCKING`) 和异步 (`NON_BLOCKING`) 工具 | 需要异步 (`NON_BLOCKING`) 工具声明 |
 
-## Migrations- und Einbindungswege
+## 迁移和集成路径
 
-So aktualisieren Sie vorhandene Sprachanwendungen oder binden Thinking in Ihre Live API-Sitzungen ein:
+请按照以下步骤升级现有的语音应用，或将 Thinking 集成到您的 Live API 会话中。
 
-### Upgrade von Gemini 3.1 Flash Live
+### 从 Gemini 3.1 Flash Live 升级
 
-Bei vorhandenen Sprachanwendungen, die `gemini-3.1-flash-live-preview` verwenden, muss beim Upgrade auf `gemini-3.8-live` der Modellstring aktualisiert und `thinking_level` (oder `thinking_config`) aus der Einrichtungskonfiguration entfernt werden, da `thinking_level` für `gemini-3.8-live` nicht unterstützt wird:
+对于使用 `gemini-3.1-flash-live-preview` 的现有语音应用，升级到 `gemini-3.8-live` 需要更新模型字符串并从设置配置中省略 `thinking_level`（或 `thinking_config`），因为 `thinking_level` 不受 `gemini-3.8-live` 支持：
 
 ```
 {
@@ -83,13 +83,13 @@ Bei vorhandenen Sprachanwendungen, die `gemini-3.1-flash-live-preview` verwenden
 }
 ```
 
-Der Lebenszyklus des Zuges und die `turnComplete`-Signale bleiben unverändert.
+回合生命周期和 `turnComplete` 信号保持不变。
 
-### Denkprozess übernehmen
+### 采用思考
 
-Um `gemini-3.8-live-extended-thinking` zu übernehmen, müssen Sie drei Integrationspunkte aktualisieren:
+如需采用 `gemini-3.8-live-extended-thinking`，请更新以下三个集成点：
 
-1. **`interaction_status` anstelle von `turnComplete` verfolgen**: In Thinking-Sitzungen kann das Modell während der Argumentation Zwischenfüller ausgeben. Prüfen Sie das Feld `interaction_status` in eingehenden Servernachrichten, um den UI-Status zu verwalten. Nur in den Leerlauf zurückkehren, wenn `interaction_status` `IDLE` ist.
+1. **跟踪 `interaction_status` 而不是 `turnComplete`**：在思考会话中，模型可以在推理时发出中间对话填充词。检查传入服务器消息中的 `interaction_status` 字段，以管理界面状态。仅当 `interaction_status` 为 `IDLE` 时返回到空闲状态。
 
    ### Python
 
@@ -114,7 +114,7 @@ Um `gemini-3.8-live-extended-thinking` zu übernehmen, müssen Sie drei Integrat
      setUiState('thinking');
    }
    ```
-2. **Nicht blockierende Funktionen deklarieren**: Setzen Sie `"behavior": "NON_BLOCKING"` für alle Funktionsdeklarationen. Thinking-Modelle führen Tools asynchron im Hintergrund aus, während sie verbale Updates streamen. Synchrone Blockierungstools geben einen Fehler zurück.
+2. **声明非阻塞函数**：在所有函数声明中设置 `"behavior": "NON_BLOCKING"`。思考模型会在后台异步运行工具，同时以流式方式提供口头更新。同步阻塞工具会返回错误。
 
    ### Python
 
@@ -149,7 +149,7 @@ Um `gemini-3.8-live-extended-thinking` zu übernehmen, müssen Sie drei Integrat
      },
    };
    ```
-3. **Detailgrad der Problemlösung konfigurieren**: Legen Sie `thinking_config` in Ihrer Sitzungskonfiguration fest, um den Detailgrad der Problemlösung anzupassen (`low`, `medium` oder `high`; `MINIMAL` wird nicht unterstützt).
+3. **配置推理深度**：在会话配置中设置 `thinking_config` 以调整推理级别（`low`、`medium` 或 `high`；不支持 `MINIMAL`）。
 
    ### Python
 
@@ -175,24 +175,24 @@ Um `gemini-3.8-live-extended-thinking` zu übernehmen, müssen Sie drei Integrat
    };
    ```
 
-## Direkter Protokollvergleich
+## 协议对照比较
 
-In diesem Abschnitt werden die WebSocket-Nachrichten verglichen, die in den einzelnen Phasen einer Live API-Sitzung ausgetauscht werden.
+本部分比较了在实时 API 会话的每个阶段交换的 WebSocket 消息。
 
-### Schritt 1: Sitzung einrichten
+### 第 1 步：设置会话
 
-Beide Modelle stellen eine Verbindung zum selben WebSocket-Endpunkt her:
+这两个模型都连接到同一 WebSocket 端点：
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent?key=$API_KEY
 ```
 
-- **Identisch**: WebSocket-URL und API-Schlüssel-Authentifizierung.
-- **Modellstring**: `gemini-3.8-live` im Vergleich zu `gemini-3.8-live-extended-thinking`.
-- **Konfiguration des Denkprozesses**: Durch „Thinking“ wird `thinkingConfig` hinzugefügt, um die Tiefe des Denkprozesses anzupassen.
-- **Tool-Verhalten**: Für die Denkphase sind `"behavior": "NON_BLOCKING"` für Funktionsdeklarationen erforderlich.
+- **相同**：WebSocket 网址和 API 密钥身份验证。
+- **模型字符串**：`gemini-3.8-live` 与 `gemini-3.8-live-extended-thinking`。
+- **思考配置**：思考会添加 `thinkingConfig` 来调整推理深度。
+- **工具行为**：思考需要对函数声明使用 `"behavior": "NON_BLOCKING"`。
 
-### Gemini 3.8 Live
+### Gemini 3.8 Live
 
 ```
 {
@@ -212,7 +212,7 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-### Gemini 3.8 Live Extended Thinking
+### Gemini 3.8 Live（扩展思考）
 
 ```
 {
@@ -249,7 +249,7 @@ wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1alpha.
 }
 ```
 
-Beide Modelle erhalten bei der Verbindung dieselbe Serverbestätigung:
+两个模型在连接时都会收到相同的服务器确认：
 
 ```
 {
@@ -257,9 +257,9 @@ Beide Modelle erhalten bei der Verbindung dieselbe Serverbestätigung:
 }
 ```
 
-### Schritt 2: Audioeingabe des Nutzers
+### 第 2 步：用户音频输入
 
-Das Audiostreaming ist bei beiden Modellen identisch. Echtzeit-Audio-Chunks im rohen PCM-Format mit 16 kHz werden über `realtimeInput` gestreamt:
+这两款型号的音频流式传输功能完全相同。使用 `realtimeInput` 流式传输实时 16kHz 原始 PCM 音频块：
 
 ```
 {
@@ -272,14 +272,14 @@ Das Audiostreaming ist bei beiden Modellen identisch. Echtzeit-Audio-Chunks im r
 }
 ```
 
-### Schritt 3: Modellreaktion und Statuslebenszyklus
+### 第 3 步：模型响应和状态生命周期
 
-Beide Modelle streamen 24 kHz-PCM-Audioblöcke in `serverContent.modelTurn`. Die Lebenszyklusverwaltung unterscheidet sich jedoch:
+两款模型均以 `serverContent.modelTurn` 为单位串流 24kHz PCM 音频块。不过，生命周期管理有所不同：
 
-#### Gemini 3.8 – Live-Antwortablauf
+#### Gemini 3.8 Live 回答流程
 
-1. Der Server streamt Audio-Chunks für den Turn.
-2. Der Server sendet `turnComplete: true`, was darauf hinweist, dass das Modell mit dem Sprechen fertig ist und die Sitzung inaktiv ist.
+1. 服务器会流式传输相应回合的音频块。
+2. 服务器发送 `turnComplete: true`，表示模型已完成说话，会话处于空闲状态。
 
 ```
 // 1. Audio stream chunks
@@ -306,12 +306,12 @@ Beide Modelle streamen 24 kHz-PCM-Audioblöcke in `serverContent.modelTurn`. Di
 }
 ```
 
-#### Gemini 3.8 Live Extended Thinking-Antwortablauf
+#### Gemini 3.8 Live 扩展思考回答流程
 
-1. **Gesprochene Füllwörter**: Das Modell gibt Zwischenansagen aus (z. B. *„Suche nach Flügen nach Seattle…“*) mit `turnComplete: true` und `interactionStatus: "IN_PROGRESS"`.
-2. **Asynchroner Toolaufruf**: Der Server gibt den Toolaufruf aus, während `interactionStatus` weiterhin `"IN_PROGRESS"` ist. Das bedeutet, dass der Server den mehrstufigen Turn aktiv verarbeitet und auf die Toolantwort wartet.
-3. **Tool-Antwort**: Der Client führt die Funktion aus und gibt die Ausgabe zurück.
-4. **Endgültige Antwort**: Der Server liefert die vollständige Antwort mit `turnComplete: true` und `interactionStatus: "IDLE"`.
+1. **口语填充**：模型会使用 `turnComplete: true` 和 `interactionStatus: "IN_PROGRESS"` 发出中间语音（例如*“正在查询飞往西雅图的航班…”*）。
+2. **异步工具调用**：服务器在 `interactionStatus` 保持 `"IN_PROGRESS"` 的同时发出工具调用，表明服务器正在积极处理多步对话轮次，并等待工具响应。
+3. **工具响应**：客户端执行函数并返回输出。
+4. **最终回答**：服务器通过 `turnComplete: true` 和 `interactionStatus: "IDLE"` 传递完整答案。
 
 ```
 // 1. Spoken verbal filler while background reasoning proceeds
@@ -384,9 +384,9 @@ Beide Modelle streamen 24 kHz-PCM-Audioblöcke in `serverContent.modelTurn`. Di
 }
 ```
 
-## Beispiele für die SDK-Implementierung
+## SDK 实现示例
 
-In den folgenden Beispielen wird gezeigt, wie Sie die Denkphase konfigurieren und `interaction_status` mit dem Google GenAI SDK verarbeiten.
+以下示例展示了如何使用 Google GenAI SDK 配置思考并处理 `interaction_status`。
 
 ### Python
 
@@ -525,19 +525,19 @@ async function main() {
 main();
 ```
 
-## Nächste Schritte
+## 后续步骤
 
-- Lesen Sie die Modellseiten [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=de) und [Gemini 3.8 Live Extended Thinking](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=de).
-- In der [Modellvergleich](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=de#model-comparison)-Tabelle finden Sie einen detaillierten Vergleich der Funktionen aller Live-API-Modelle.
-- Weitere Informationen zu Funktionsaufrufen finden Sie im Leitfaden [Live API Tool use](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=de).
-- Informationen zum Verarbeiten von Sitzungswiederaufnahme und Kontextlebenszyklus finden Sie unter [Sitzungsverwaltung](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de).
+- 请参阅 [Gemini 3.8 Live](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=zh-cn) 和 [Gemini 3.8 Live（扩展思考）](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=zh-cn)模型页面。
+- 如需详细比较所有 Live API 模型的功能，请查看[模型对比](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-cn#model-comparison)表。
+- 如需详细了解函数调用，请参阅 [Live API 工具使用](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=zh-cn)指南。
+- 查看[会话管理](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=zh-cn)，以处理会话恢复和上下文生命周期。
 
-Feedback geben
+发送反馈
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Zuletzt aktualisiert: 2026-09-17 (UTC).
+最后更新时间 (UTC)：2026-09-17。
 
-Haben Sie Feedback für uns?
+需要向我们提供更多信息？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-17 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-17。"],[],[]]

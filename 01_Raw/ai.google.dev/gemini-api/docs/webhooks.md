@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=he
-fetched_at: 2026-09-28T06:26:35.388486+00:00
-title: "\u05ea\u05d2\u05d5\u05d1\u05d5\u05ea \u05dc\u05e4\u05e2\u05d5\u05dc\u05d4 \u05de\u05d0\u05ea\u05e8 \u05d0\u05d7\u05e8 (webhook) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=zh-TW
+fetched_at: 2026-10-05T06:38:42.508905+00:00
+title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-שליחת משוב
+提供意見
 
-# תגובות לפעולה מאתר אחר (webhook)
+# Webhook
 
-‫Webhooks מאפשרים ל-Gemini API לשלוח התראות בזמן אמת לשרת שלכם כשפעולות אסינכרוניות או פעולות ארוכות טווח (LRO) מסתיימות. השיטה הזו מחליפה את הצורך לשלוח בקשות ל-API כדי לקבל עדכוני סטטוס, וכך מקטינה את זמן האחזור ואת התקורה.
+當非同步或長時間執行的作業 (LRO) 完成時，Gemini API 可透過 Webhook 將即時通知推送至伺服器。這項功能可取代輪詢 API 以取得狀態更新的必要性，進而減少延遲和額外負荷。
 
-אפשר להשתמש ב-Webhooks לפעולות כמו משימות [Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=he), [אינטראקציות](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) ו[יצירת סרטונים](https://ai.google.dev/gemini-api/docs/video?hl=he).
+Webhook 適用於「批次」作業、「互動」和「影片生成」等作業。
 
-## איך זה עובד
+## 運作方式
 
-במקום לבצע סקר `GET /operations` שוב ושוב כדי לבדוק אם משימה הסתיימה, אפשר להגדיר Webhooks של Gemini API כדי לשלוח בקשת HTTP POST לכתובת ה-URL של רכיב ה-listener מיד כשמופעל אירוע.
+您不必重複輪詢 `GET /operations` 來檢查工作是否完成，可以設定 Gemini API Webhook，在觸發事件時立即將 HTTP POST 要求傳送至接聽程式網址。
 
-‫Gemini API תומך בשתי דרכים להגדרת ווּבְּהוּק:
+Gemini API 支援兩種設定 Webhook 的方式：
 
-- ‫[**Static webhooks**](#static-webhooks): נקודות קצה ברמת הפרויקט שהוגדרו באמצעות [Gemini WebhookService API](https://ai.google.dev/api?hl=he). מתאים לשילובים גלובליים (לדוגמה, שליחת התראות ל-Slack, סנכרון מסד נתונים וכו').
-- [**וווב-הוקים דינמיים**](#dynamic-webhooks): שינויים ברמת הבקשה שמעבירים webhook URL במטען הייעודי (payload) של ההגדרה של קריאה ספציפית למשרות. אידיאלי לניתוב משימות ספציפיות לנקודות קצה ייעודיות.
+- [**靜態 Webhook**](#static-webhooks)：使用 Gemini [WebhookService API](https://ai.google.dev/api?hl=zh-tw) 設定的專案層級端點。適合用於全域整合 (例如通知 Slack、同步資料庫等)。
+- [**動態 Webhook**](#dynamic-webhooks)：要求層級的覆寫，在特定工作呼叫的設定酬載中傳遞 Webhook 網址。適合將特定工作路徑導向專用端點。
 
-## Webhooks סטטיים
+## 靜態 Webhook
 
-הרישום של וווב-הוקים סטטיים מתבצע עבור [פרויקט](https://ai.google.dev/gemini-api/docs/api-key?hl=he#google-cloud-projects) שלם, והם מופעלים לכל אירוע תואם.
+系統會為整個[專案](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-tw#google-cloud-projects)註冊靜態 Webhook，並針對任何相符的事件觸發。
 
-### יצירת webhook
+### 建立 Webhook
 
-אפשר ליצור נקודות קצה באמצעות ה-SDK או REST API.
+您可以使用 SDK 或 REST API 建立端點。
 
-**חשוב**: כשיוצרים webhook, ה-API מחזיר **סוד חתימה**
-**רק פעם אחת**. כדי לאמת חתימות בהמשך, צריך לאחסן את המפתח הזה בצורה מאובטחת (למשל, במשתני הסביבה).
-אם תאבדו את הסוד לחתימה, תצטרכו [להחליף](#rotate-signing-secret) אותו.
+**重要事項**：建立 Webhook 時，API **只會傳回一次**
+**簽署密鑰**。您必須安全地儲存這項資訊 (例如儲存在環境變數中)，以便稍後驗證簽章。如果遺失簽署密鑰，就必須[輪換](#rotate-signing-secret)密鑰。
 
 ### Python
 
@@ -168,11 +167,11 @@ curl -X POST \
   }'
 ```
 
-פרטים על הגדרת השרת לקבלת נתונים מופיעים בקטע [טיפול בבקשות של webhook](#handle-webhook-requests).
+如要瞭解如何設定伺服器來接收資料，請參閱「[處理 Webhook 要求](#handle-webhook-requests)」一節。
 
-### קבלת webhook
+### 取得 Webhook
 
-אחזור פרטים על webhook ספציפי לפי שם המשאב שלו.
+依資源名稱擷取特定 Webhook 的詳細資料。
 
 ### Python
 
@@ -267,9 +266,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### הצגת רשימת ה-webhooks
+### 列出 Webhook
 
-רשימה של כל ה-webhook שהוגדרו בפרויקט הנוכחי, עם אפשרות להוספת מספור עמודים.
+列出目前專案的所有已設定 Webhook，並提供分頁選項。
 
 ### Python
 
@@ -363,9 +362,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### עדכון webhook
+### 更新 Webhook
 
-עדכון המאפיינים של webhook קיים, כמו שם התצוגה, ה-URI של היעד או האירועים שנרשמתם אליהם.
+更新現有 Webhook 的屬性，例如顯示名稱、目標 URI 或訂閱的事件。
 
 ### Python
 
@@ -491,9 +490,9 @@ curl -X PATCH \
   }'
 ```
 
-### מחיקת webhook
+### 刪除 Webhook
 
-הסרה של נקודת קצה של webhook מהפרויקט. הפעולה הזו תמנע מסירת אירועים עתידיים לנקודת הקצה הזו.
+從專案中移除 Webhook 端點。系統日後不會再將事件傳送至該端點。
 
 ### Python
 
@@ -575,11 +574,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### סיבוב של סוד חתימה
+### 輪替簽署密鑰
 
-סיבוב של ערך ה-Secret לחתימה של webhook. אתם יכולים להגדיר אם סודות שהיו פעילים בעבר יבוטלו באופן מיידי או אחרי תקופת חסד של 24 שעות.
+輪替 Webhook 的簽署密鑰。您可以設定要立即撤銷先前有效的密鑰，還是要在 24 小時的寬限期過後撤銷。
 
-**חשוב**: הסוד החדש לחתימה מוחזר **רק פעם אחת** בזמן הרוטציה. חשוב לשמור אותו במקום בטוח לפני שמעדכנים את לוגיקת האימות.
+**重要事項**：系統只會在輪替時間**傳回一次**新的簽署密鑰。請先妥善儲存，再更新驗證邏輯。
 
 ### Python
 
@@ -699,14 +698,13 @@ curl -X POST \
   }'
 ```
 
-### טיפול בבקשות webhook בשרת
+### 在伺服器上處理 Webhook 要求
 
-כשמתרחש אירוע שנרשמתם לקבלת עדכונים לגביו, כתובת ה-webhook URL שלכם תקבל בקשת HTTP POST. נקודת הקצה צריכה להגיב עם קוד סטטוס 2xx תוך כמה שניות כדי למנוע ניסיון חוזר. כדי לוודא שהבקשות יועברו, Gemini API מבצע ניסיון חוזר אוטומטי של בקשות שנכשלו למשך 24 שעות באמצעות השהיה מעריכית לפני ניסיון חוזר (exponential backoff).
+當您訂閱的事件發生時，Webhook 網址會收到 HTTP POST 要求。端點必須在幾秒內以 2xx 狀態碼回應，以免系統重試。為確保傳送成功，Gemini API 會使用指數輪詢，自動重試失敗的要求 24 小時。
 
-‫Gemini פועל בהתאם למפרט [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) לגבי כותרות אבטחה. מאמתים את מטען הייעודי (payload) בשרת באמצעות הכותרת החתומה
-signatures והסוד הסטטי החתום ששמור אצלכם. מידע על מטען הייעודי (payload) מופיע בקטע [Webhook envelope](#webhook-envelope).
+Gemini 會嚴格遵循[標準 Webhook](https://github.com/standard-webhooks/standard-webhooks) 規格，設定安全標頭。使用已簽署的標頭簽章和儲存的靜態簽署密鑰，在伺服器上驗證酬載。如需酬載資訊，請參閱「[Webhook 信封](#webhook-envelope)」一節。
 
-דוגמה לשימוש ב-Flask בשביל מאזין HTTP:
+以下是使用 Flask 的 HTTP 監聽器範例：
 
 ### Python
 
@@ -956,13 +954,13 @@ func main() {
 }
 ```
 
-## ‫Webhooks דינמיים
+## 動態 Webhook
 
-בעזרת webhooks דינמיים, אפשר לקשר נקודת קצה של webhook ל**הגדרת בקשה ספציפית**, וזה אידיאלי לתורים של תיאום בין נציגים. ב-webhooks דינמיים נעשה שימוש בחתימות JWKS של מפתח ציבורי אסימטרי במקום בסודות סימטריים.
+動態 Webhook 可將 Webhook 端點繫結至**特定要求設定**，非常適合用於代理程式協調佇列。動態 Webhook 會使用非對稱式公開金鑰 JWKS 簽章，而非對稱式密鑰。
 
-### שליחת בקשה דינמית
+### 提交動態要求
 
-מוסיפים `webhook_config` כשמפעילים עבודה אסינכרונית (למשל, יצירת Batch).
+觸發非同步工作 (例如建立 Batch) 時，請新增 `webhook_config`。
 
 ### Python
 
@@ -1120,9 +1118,9 @@ curl -X POST \
   }'
 ```
 
-### אימות חתימות דינמיות (JWKS)
+### 驗證動態簽章 (JWKS)
 
-בקשות דינמיות של webhook פולטות חתימה של JSON Web Token‏ (JWT). המאזין צריך לחלץ את החתימה ולאמת אותה באמצעות [נקודות הקצה של אישור הציבורי של Google](https://www.googleapis.com/oauth2/v3/certs).
+動態 Webhook 要求會發出 JSON Web Token (JWT) 簽章。接聽程式必須擷取簽章，並使用 [Google 的公開憑證端點](https://www.googleapis.com/oauth2/v3/certs)驗證簽章。
 
 ### Python
 
@@ -1408,11 +1406,11 @@ func main() {
 }
 ```
 
-## מעטפת webhook
+## Webhook 信封
 
-כדי למנוע עומס על רוחב הפס, ה-webhooks של Gemini משתמשים במודל של **מטען ייעודי (payload) דק** כדי להעביר נתונים. ההעברות שולחות snapshot שמכיל פרטי סטטוס ונקודות להפניה לתוצאות, ולא את קובץ הפלט הגולמי עצמו.
+為避免頻寬壅塞，Gemini 網路鉤子會使用**精簡的酬載**模型傳送資料。傳送的內容是包含狀態詳細資料和結果指標的快照，而非原始輸出檔案本身。
 
-דוגמה לפורמט של מטען ייעודי (payload):
+以下是酬載格式範例：
 
 ```
 {
@@ -1426,40 +1424,41 @@ func main() {
 }
 ```
 
-## הפניה לקטלוג האירועים
+## 活動目錄參考資料
 
-האירועים הבאים מופעלים עבור משרות תומכות:
+支援的工作會觸發下列事件：
 
-| סוג אירוע | טריגר | פריט מטען ייעודי (`data`) |
+| 事件類型 | 觸發條件 | 酬載項目 (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | העיבוד הסתיים בהצלחה. | `id`, `output_file_uri` |
-| `batch.cancelled` | המשתמש ביטל את הבקשה | `id` |
-| `batch.expired` | העיבוד של הקובץ לא הסתיים בתוך 24 שעות | `id` |
-| `batch.failed` | משימת אצווה נכשלה (שגיאת מערכת או שגיאת אימות). | `id`,‏ `error_code`,‏ `error_message` |
-| `interaction.requires_action` | קריאה לפונקציה, המשתמש צריך לעשות משהו | `id` |
-| `interaction.completed` | הפעולה הממושכת ב-API של האינטראקציות הסתיימה בהצלחה | `id` |
-| `interaction.failed` | הפעולה LRO ב-API של האינטראקציות נכשלה (שגיאת מערכת או שגיאת אימות). | `id`,‏ `error_code`,‏ `error_message` |
-| `interaction.cancelled` | בוטלה פעולת LRO בממשק API של אינטראקציות | `id` |
-| `video.generated` | תהליך LRO של יצירת הסרטון הושלם. | `id`,‏ `output_file_uri`,‏ `file_name` |
+| `batch.succeeded` | 已順利完成處理。 | `id`、`output_file_uri` |
+| `batch.cancelled` | 使用者取消要求 | `id` |
+| `batch.expired` | 批次作業未在 24 小時內處理 (完成) | `id` |
+| `batch.failed` | 批次工作失敗 (系統或驗證錯誤)。 | `id`、`error_code`、`error_message` |
+| `interaction.requires_action` | 函式呼叫，使用者需要執行某些操作 | `id` |
+| `interaction.completed` | 互動 API 中的 LRO 成功 | `id` |
+| `interaction.failed` | interactions API 中的 LRO 失敗 (系統或驗證錯誤)。 | `id`、`error_code`、`error_message` |
+| `interaction.cancelled` | 互動 API 中的 LRO 已取消 | `id` |
+| `video.generated` | 影片生成 LRO 已完成。 | `id`、`output_file_uri`、`file_name` |
 
-## שיטות מומלצות
+## 最佳做法
 
-כדי להבטיח פעולה אמינה וניתנת להרחבה:
+如要確保運作可靠且可擴充，請採取下列措施：
 
-- **בדיקה קפדנית של הגנה מפני שידור חוזר**: כל הבקשות כוללות כותרת `webhook-timestamp`. חשוב תמיד לאמת את חותמת הזמן הזו בשכבת הגדרות השרת כדי לדחות נתוני payload ישנים יותר מ**5 דקות** (כדי לצמצם את הסיכון למתקפות שידור חוזר).
-- **עיבוד אסינכרוני**: תגובה עם `2xx OK` מיד לאחר זיהוי חתימה תקינה, והוספת פעולות הניתוח לתור באופן פנימי. זמני המתנה ארוכים של המאזינים יפעילו מחזור של ניסיונות מסירה.
-- **טיפול בהסרת כפילויות**: ווּבּהוּקים רגילים מספקים את הנתונים בשיטת 'לפחות פעם אחת'. כדאי להשתמש בכותרת `webhook-id`consistent כדי לטפל בכפילויות פוטנציאליות בזרימות עם עומס גבוה יותר.
+- **嚴格的重送攻擊防護檢查**：所有要求都會攜帶 `webhook-timestamp`
+  標頭。請務必在伺服器設定層驗證這個時間戳記，拒絕超過 **5 分鐘**的酬載 (以防重送攻擊)。
+- **非同步處理**：偵測到有效簽章後，請立即以 `2xx OK` 回應，並在內部將剖析作業排入佇列。如果接聽者長時間保留通話，系統會觸發重試傳送週期。
+- **重複資料處理**：標準 Webhook 會「至少傳送一次」資料。使用一致的 `webhook-id` 標頭，處理高擁塞流量中可能出現的重複項目。
 
-## מה השלב הבא?
+## 後續步驟
 
-- ‫[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he): שימוש ב-webhooks כדי לבצע אוטומציה של נקודות קצה עם נפח גבוה.
+- [批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)：使用 Webhook 自動化處理大量端點。
 
-שליחת משוב
+提供意見
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-עדכון אחרון: 2026-09-24 (שעון UTC).
+上次更新時間：2026-09-24 (世界標準時間)。
 
-רוצה לתת לנו משוב?
+想進一步說明嗎？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]

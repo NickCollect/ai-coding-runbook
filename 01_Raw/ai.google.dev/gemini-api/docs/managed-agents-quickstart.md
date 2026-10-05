@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he
-fetched_at: 2026-09-28T06:16:51.821729+00:00
-title: "\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05dc\u05d9\u05dd \u05d1\u05e0\u05d5\u05e9\u05d0 \u05e0\u05d9\u05d4\u05d5\u05dc \u05e1\u05d5\u05db\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr
+fetched_at: 2026-10-05T06:45:15.453426+00:00
+title: "Guide de d\u00e9marrage rapide sur les agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# מדריך למתחילים בנושא ניהול סוכנים
+# Guide de démarrage rapide sur les agents gérés
 
-במדריך הזה נסביר איך ליצור סוכנים מנוהלים ב-Gemini API ולהשתמש בהם באמצעות [סוכן Antigravity](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=he). תבצעו את השיחה הראשונה עם סוכן, תמשיכו שיחה מרובת שלבים, תצפו בתשובה בזמן אמת, תורידו קבצים מהארגז חול ותעבדו עם הסוכן המנוהל Antigravity.
+Ce guide vous explique comment créer et utiliser des agents gérés sur l'API Gemini à l'aide de l'[agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr). Vous allez effectuer votre premier appel d'agent, poursuivre une conversation multitours, diffuser la réponse, télécharger des fichiers depuis le bac à sable et travailler avec l'agent géré Antigravity.
 
-## הפעלת אינטראקציה ראשונה עם נציג
+## Exécuter votre première interaction avec un agent
 
-קריאה יחידה ל-[Interactions API](https://ai.google.dev/gemini-api/docs?hl=he) מספקת ארגז חול של Linux, מריצה את לולאת הסוכן ומחזירה את התוצאה. תגדירו שלושה פרמטרים:
+Un seul appel à l'[API Interactions](https://ai.google.dev/gemini-api/docs?hl=fr) provisionne un bac à sable Linux, exécute la boucle de l'agent et renvoie le résultat. Vous allez définir trois paramètres :
 
-- מעבירים את `agent` בתור `"antigravity-preview-09-2026"`, שהיא הגרסה הנוכחית של הסוכן המנוהל שלנו שמוגדר מראש ומתאים לשימוש כללי.
-- מגדירים את `environment="remote"` כדי להקצות סביבת ארגז חול חדשה ורעננה.
-- יוצרים קלט ומגדירים מה רוצים שהסוכן יעשה.
+- Transmettez `agent` en tant que `"antigravity-preview-09-2026"`, qui est la version actuelle de notre agent géré prédéfini et à usage général.
+- Définissez `environment="remote"` pour provisionner un nouvel environnement de bac à sable.
+- Créez une entrée en définissant ce que vous attendez de l'agent.
 
 ### Python
 
@@ -147,16 +147,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-התגובה מחזירה אובייקט `Interaction`. אחסון של `interaction.id` ו-`interaction.environment_id` כדי להמשיך את השיחה באותו ארגז חול. משתמשים ב-`interaction.output_text` כדי לגשת לתשובה הסופית של הסוכן. ‫`interaction.steps` מפרט כל שלב שהסוכן ביצע (חשיבה רציונלית, קריאות לכלים, הרצת קוד).
+La réponse renvoie un objet `Interaction`. Stockez `interaction.id` et `interaction.environment_id` pour poursuivre la conversation dans le même bac à sable. Utilisez `interaction.output_text` pour accéder à la réponse finale de l'agent. `interaction.steps` liste chaque étape effectuée par l'agent (raisonnement, appels d'outils, exécution de code).
 
-## המשך השיחה (רב-שלבית)
+## Poursuivre la conversation (multitour)
 
-ה-API עוקב אחרי שני ממדי מצב בלתי תלויים:
+L'API suit deux dimensions d'état indépendantes :
 
-- **הקשר השיחה:** היסטוריית הצ'אט, מעקב אחר נימוקים, שימוש בכלי, שימוש ב-`previous_interaction_id`.
-- [**מצב הסביבה:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he) קבצים, חבילות מותקנות ומצב ארגז החול, באמצעות `environment`.
+- **Contexte de la conversation** : historique des discussions, trace de raisonnement, utilisation d'outils, utilisation de `previous_interaction_id`.
+- [**État de l'environnement**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr) : fichiers, packages installés et état du bac à sable, à l'aide de `environment`.
 
-כדי להמשיך, צריך להזין את שניהם במקום המתאים:
+Transmettez les deux dans leur emplacement respectif pour reprendre :
 
 ### Python
 
@@ -266,20 +266,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-קבצים מתור 1 (`fibonacci.txt`) נשארים בתור 2. הסוכן גם שומר את ההקשר של השיחה.
+Les fichiers du tour 1 (`fibonacci.txt`) sont conservés au tour 2. L'agent conserve également le contexte de la conversation.
 
-אפשר לשלב בין האפשרויות הבאות באופן עצמאי:
+Vous pouvez combiner ces éléments indépendamment :
 
-- **ניקוי השיחה, שמירת הקבצים:** לא כוללים את `previous_interaction_id`, מעבירים רק את מזהה הסביבה באמצעות `environment` כדי ליצור שיחה חדשה באותו מרחב.
-- **שמירת השיחה, סביבת עבודה חדשה:** מעבירים את `previous_interaction_id`, מגדירים את `environment="remote"` לארגז חול חדש.
+- **Effacer la conversation, conserver les fichiers** : omettez `previous_interaction_id` et ne transmettez que l'ID d'environnement à l'aide de `environment` pour une nouvelle conversation dans le même espace de travail.
+- **Conserver la conversation, nouvel espace de travail** : transmettez `previous_interaction_id` et définissez `environment="remote"` pour un nouvel bac à sable.
 
-### דחיסה אוטומטית של ההקשר
+### Compression automatique du contexte
 
-בשיחות ארוכות ורב-שלביות, ההיסטוריה הגולמית של שלבי החשיבה הרציונלית, קריאות הכלים ותוכן הקבצים הגדולים יכולה לגדול במהירות ולתפוס נפח משמעותי של הקשר. כדי למנוע שגיאות שקשורות למגבלת הטוקנים ולשמור על המיקוד של הסוכן (ולמנוע 'הידרדרות ההקשר'), ב-API של ניהול סוכנים יש שלב דחיסה של ההקשר בסביבות 135,000 טוקנים. פעולה זו מתבצעת באופן אוטומטי.
+Dans les conversations longues et multitours, l'historique brut des étapes de raisonnement, des appels d'outils et du contenu des fichiers volumineux peut rapidement s'allonger et consommer un espace de contexte important. Pour éviter les erreurs liées à la limite de jetons et maintenir la concentration de l'agent (en évitant la "détérioration du contexte"), l'API Managed Agents inclut une étape de compaction du contexte natif à environ 135 000 jetons. Ce processus est automatique.
 
-## הצגת התשובה באופן שוטף
+## Diffuser la réponse
 
-במשימות ארוכות, אפשר להזרים את התשובה כדי לראות את הסוכן פועל בזמן אמת:
+Pour les tâches de longue durée, vous pouvez diffuser la réponse en streaming pour voir l'agent travailler en temps réel :
 
 ### Python
 
@@ -420,12 +420,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-הסטרימינג מחזיר דלתאות של שלבים עם עדכונים מצטברים. כששלב מסתיים,
-האירוע `step.stop` כולל נתונים סטטיסטיים מצטברים של השימוש. מידע נוסף מפורט [במדריך לסטרימינג](https://ai.google.dev/gemini-api/docs/streaming?hl=he).
+Le streaming renvoie les deltas d'étapes avec des mises à jour incrémentielles. Lorsqu'une étape est terminée, l'événement `step.stop` inclut des statistiques d'utilisation cumulées. Pour en savoir plus, consultez le [guide sur le streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=fr).
 
-## הורדת קבצים מהסביבה
+## Télécharger des fichiers depuis l'environnement
 
-כשהסוכן יוצר קבצים בארגז החול. אפשר להוריד אותם באמצעות Files API עם בקשת HTTP ישירה (עדיין אין שיטה ב-SDK):
+Lorsque l'agent crée des fichiers dans le bac à sable. Téléchargez-les à l'aide de l'API Files avec une requête HTTP directe (aucune méthode SDK n'est encore disponible) :
 
 ### Python
 
@@ -566,13 +565,13 @@ mkdir -p extracted_snapshot
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## שמירת סוכן מנוהל
+## Enregistrer un agent géré
 
-בשלבים הקודמים השתמשנו בסוכן Antigravity שמוגדר כברירת מחדל והתאמנו אותו ישירות. אחרי שמשפרים את ההגדרה (הוראות, יכולות, בחירת מודל וסביבה), אפשר לשמור אותה כסוכן מנוהל לשימוש חוזר. כך אפשר להפעיל אותו באמצעות מזהה בלי לחזור על ההגדרה.
+Lors des étapes précédentes, nous avons utilisé l'agent Antigravity par défaut et l'avons personnalisé en ligne. Une fois que vous avez itéré sur votre configuration (instructions, compétences, sélection de modèle et environnement), vous pouvez l'enregistrer en tant qu'agent géré réutilisable. Cela vous permet de l'appeler par ID sans répéter la configuration.
 
-כששומרים סוכן, אפשר לראות את הסימטריה הארכיטקטונית עם אינטראקציות מוטבעות: מציינים `base_agent: "antigravity-preview-09-2026"` ויכולים להעביר `agent_config` עם `model` שבחרתם בדיוק כמו ב-`interactions.create`. אתם גם מגדירים `base_environment` (ממקורות או על ידי יצירת עותק של סביבה קיימת). הסוכן ישתמש בסביבה הזו ובהגדרות המודל האלה בכל אינטראקציה חדשה.
+Lorsque vous enregistrez un agent, notez la symétrie architecturale avec les interactions intégrées : vous spécifiez `base_agent: "antigravity-preview-09-2026"` et pouvez transmettre un `agent_config` avec votre `model` choisi, comme vous le feriez sur `interactions.create`. Vous définissez également un `base_environment` (à partir de sources ou en dupliquant un environnement existant). L'agent utilisera cette configuration d'environnement et de modèle pour chaque nouvelle interaction.
 
-**ממקורות:** הגדרת מקורות בשורה או ממקורות אחרים כמו GitHub או Cloud Storage.
+**À partir de sources** : définissez des sources intégrées ou à partir d'autres sources telles que GitHub ou Cloud Storage.
 
 ### Python
 
@@ -771,9 +770,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## הפעלת הסוכן המנוהל
+## Appeler l'agent géré
 
-אחרי ששומרים סוכן מנוהל, אפשר להפעיל אותו באמצעות המזהה שלו. כל הפעלה יוצרת עותק של סביבת הבסיס, כך שכל הרצה מתחילה בצורה נקייה:
+Une fois que vous avez enregistré un agent géré, vous pouvez l'appeler par son ID. Chaque appel duplique l'environnement de base, de sorte que chaque exécution commence de manière propre :
 
 ### Python
 
@@ -875,19 +874,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## המאמרים הבאים
+## Étape suivante
 
-- [סוכן Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he): יכולות, כלים נתמכים, קלט מולטימודאלי, תמחור ומגבלות.
-- [יצירת סוכנים מנוהלים](https://ai.google.dev/gemini-api/docs/custom-agents?hl=he): הרחבת Antigravity באמצעות הוראות, מיומנויות ונתונים משלכם.
-- [סביבות](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he): מקורות, רשת, מחזור חיים, מגבלות משאבים.
-- ‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he): ממשק ה-API הבסיסי למודלים ולאגנטים.
+- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) : fonctionnalités, outils compatibles, entrée multimodale, tarifs et limites.
+- [Créer des agents gérés](https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr) : étendez Antigravity avec vos propres instructions, compétences et données.
+- [Environnements](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr) : sources, mise en réseau, cycle de vie, limites de ressources.
+- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) : API sous-jacente pour les modèles et les agents.
 
-שליחת משוב
+Envoyer des commentaires
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-עדכון אחרון: 2026-09-25 (שעון UTC).
+Dernière mise à jour le 2026/10/01 (UTC).
 
-רוצה לתת לנו משוב?
+Voulez-vous nous donner plus d'informations ?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-25 (שעון UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/01 (UTC)."],[],[]]

@@ -1,41 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=th
-fetched_at: 2026-09-28T06:11:53.120629+00:00
-title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e40\u0e1e\u0e25\u0e07\u0e14\u0e49\u0e27\u0e22 Lyria 3.5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=id
+fetched_at: 2026-10-05T06:28:35.395566+00:00
+title: "Membuat musik dengan Lyria 3.5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# สร้างเพลงด้วย Lyria 3.5
+# Membuat musik dengan Lyria 3.5
 
-Lyria 3.5 คือกลุ่มโมเดลการสร้างเพลงของ Google ซึ่งพร้อมให้บริการผ่าน Gemini API Lyria 3.5 ช่วยให้คุณสร้างเสียงสเตอริโอคุณภาพสูง 44.1 kHz
-จากพรอมต์ข้อความหรือจากรูปภาพได้ โมเดลเหล่านี้ให้ความสอดคล้องเชิงโครงสร้าง
-ซึ่งรวมถึงเสียงร้อง เนื้อเพลงที่กำหนดเวลา และการเรียบเรียงดนตรีบรรเลงทั้งหมด
+Lyria 3.5 adalah serangkaian model pembuatan musik Google, yang tersedia melalui Gemini API. Dengan Lyria 3.5, Anda dapat menghasilkan audio stereo 44, 1 kHz berkualitas tinggi dari perintah teks atau dari gambar. Model ini memberikan koherensi struktural, termasuk vokal, lirik yang disesuaikan waktunya, dan aransemen instrumental lengkap.
 
-ตระกูล Lyria มีโมเดลต่อไปนี้
+Keluarga Lyria mencakup model:
 
-| รุ่น | รหัสโมเดล | เหมาะสำหรับ | ระยะเวลา | เอาต์พุต |
+| Model | ID Model | Paling cocok untuk | Durasi | Output |
 | --- | --- | --- | --- | --- |
-| **คลิป Lyria 3** | `lyria-3-clip-preview` | คลิปสั้น ลูป ตัวอย่าง | 30 วินาที | MP3 |
-| **Lyria 3.5** | `lyria-3.5` | เพลงเต็มความยาวที่มีท่อนร้อง คอรัส และบริดจ์ | 2-3 นาที (ควบคุมได้ผ่านพรอมต์) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Klip pendek, loop, pratinjau | 30 detik | MP3 |
+| **Lyria 3.5** | `lyria-3.5` | Lagu berdurasi penuh dengan bait, refrain, jembatan | Beberapa menit (dapat dikontrol melalui perintah) | MP3 |
 
-คุณสามารถใช้ทั้ง 2 โมเดลได้โดยใช้เมธอด `generateContent` มาตรฐานและ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) ใหม่ ซึ่งรองรับอินพุตแบบมัลติโมดัล (ข้อความและรูปภาพ) และสร้างเสียง **สเตอริโอความเที่ยงตรงสูง 44.1 kHz**
+Kedua model dapat digunakan menggunakan metode `generateContent` standar dan [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) baru, yang mendukung input multimodal (teks dan gambar), serta menghasilkan audio **stereo fidelitas tinggi 44,1 kHz**.
 
-## สร้างมิวสิกคลิป
+## Membuat klip musik
 
-โมเดลคลิป Lyria 3 จะสร้างคลิปความยาว **30 วินาที**เสมอ หากต้องการสร้าง
-คลิป ให้เรียกใช้เมธอด `generateContent` ด้วยพรอมต์ข้อความ คำตอบจะมีเนื้อเพลงและโครงสร้างเพลงที่สร้างขึ้นพร้อมกับเสียงเสมอ
+Model Klip Lyria 3 selalu menghasilkan klip **30 detik**. Untuk membuat klip, panggil metode `generateContent` dengan perintah teks. Respons selalu
+mencakup lirik dan struktur lagu yang dibuat bersama dengan audio.
 
 ### Python
 
@@ -216,10 +214,11 @@ public class GenerateMusicClip {
 }
 ```
 
-## สร้างเพลงแบบเต็มความยาว
+## Membuat lagu berdurasi penuh
 
-ใช้โมเดล `lyria-3.5` เพื่อสร้างเพลงแบบเต็มความยาว 2-3 นาที โมเดล Pro เข้าใจโครงสร้างดนตรีและสามารถสร้าง
-ผลงานที่มีท่อนร้อง คอรัส และบริดจ์ที่แตกต่างกัน คุณสามารถกำหนดระยะเวลาได้โดยระบุในพรอมต์ (เช่น "สร้างเพลง 2 นาที") หรือโดยใช้[การประทับเวลา](#timing)เพื่อกำหนดโครงสร้าง
+Gunakan model `lyria-3.5` untuk membuat lagu berdurasi penuh yang berdurasi beberapa menit. Model Pro memahami struktur musik dan dapat membuat komposisi dengan bait, refrain, dan jembatan yang berbeda. Anda dapat memengaruhi
+durasi dengan menentukannya dalam perintah (misalnya, "buat lagu berdurasi 2 menit") atau dengan
+menggunakan [stempel waktu](#timing) untuk menentukan struktur.
 
 ### Python
 
@@ -294,10 +293,11 @@ var response = await client.Models.GenerateContentAsync(
 );
 ```
 
-## เลือกรูปแบบเอาต์พุต
+## Pilih format output
 
-โดยค่าเริ่มต้น โมเดล Lyria 3.5 จะสร้างเสียงในรูปแบบ **MP3** สำหรับ Lyria 3.5 คุณยังขอเอาต์พุตในรูปแบบ **WAV** ได้ด้วยโดยตั้งค่า
-`response_format` ใน `generationConfig`
+Secara default, model Lyria 3.5 menghasilkan audio dalam format **MP3**. Untuk
+Lyria 3.5, Anda juga dapat meminta output dalam format **WAV** dengan menyetel
+`response_format` di `generationConfig`.
 
 ### Python
 
@@ -392,11 +392,10 @@ curl -s -X POST \
   }'
 ```
 
-## แยกวิเคราะห์คำตอบ
+## Mengurai respons
 
-การตอบกลับจาก Lyria 3.5 มีหลายส่วน ส่วนข้อความมีเนื้อเพลงที่
-สร้างขึ้นหรือคำอธิบายโครงสร้างเพลงในรูปแบบ JSON ส่วนที่มี
-`inline_data` จะมีไบต์เสียง
+Respons dari Lyria 3.5 berisi beberapa bagian. Bagian teks berisi lirik yang dibuat atau deskripsi JSON dari struktur lagu. Bagian dengan
+`inline_data` berisi byte audio.
 
 ### Python
 
@@ -522,11 +521,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## สร้างเพลงจากรูปภาพ
+## Membuat musik dari gambar
 
-Lyria 3.5 รองรับอินพุตหลายรูปแบบ โดยคุณสามารถระบุ**รูปภาพได้สูงสุด 10 ภาพ**
-พร้อมกับพรอมต์ข้อความ แล้วโมเดลจะแต่งเพลงที่ได้รับแรงบันดาลใจจาก
-เนื้อหาภาพ
+Lyria 3.5 mendukung input multimodal — Anda dapat memberikan hingga **10 gambar** bersama dengan perintah teks Anda dan model akan membuat musik yang terinspirasi oleh konten visual tersebut.
 
 ### Python
 
@@ -647,10 +644,11 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## ระบุเนื้อเพลงที่กำหนดเอง
+## Menyediakan lirik kustom
 
-คุณสามารถเขียนเนื้อเพลงของคุณเองและใส่ไว้ในพรอมต์ได้ ใช้แท็กส่วน
-เช่น `[Verse]`, `[Chorus]` และ `[Bridge]` เพื่อช่วยให้โมเดลเข้าใจโครงสร้างเพลง
+Anda dapat menulis lirik Anda sendiri dan menyertakannya dalam perintah. Gunakan tag bagian
+seperti `[Verse]`, `[Chorus]`, dan `[Bridge]` untuk membantu model memahami
+struktur lagu:
 
 ### Python
 
@@ -829,11 +827,10 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## ควบคุมเวลาและโครงสร้าง
+## Mengontrol waktu dan struktur
 
-คุณสามารถระบุสิ่งที่เกิดขึ้นในช่วงเวลาที่เฉพาะเจาะจงในเพลงได้โดยใช้
-การประทับเวลา ซึ่งมีประโยชน์ในการควบคุมเวลาที่เครื่องดนตรีเริ่มเล่น เวลาที่เนื้อเพลง
-ปรากฏ และวิธีที่เพลงดำเนินไป ดังนี้
+Anda dapat menentukan secara tepat apa yang terjadi pada momen tertentu dalam lagu menggunakan stempel waktu. Hal ini berguna untuk mengontrol kapan instrumen masuk, kapan lirik
+disampaikan, dan bagaimana progres lagu:
 
 ### Python
 
@@ -948,9 +945,9 @@ curl -s -X POST \
   }'
 ```
 
-## สร้างแทร็กบรรเลง
+## Membuat trek instrumental
 
-สำหรับเพลงประกอบ ซาวด์แทร็กเกม หรือกรณีการใช้งานใดๆ ที่ไม่จำเป็นต้องมีเสียงร้อง คุณสามารถแจ้งให้โมเดลสร้างแทร็กที่มีเฉพาะดนตรีได้โดยทำดังนี้
+Untuk musik latar, soundtrack game, atau kasus penggunaan apa pun yang tidak memerlukan vokal, Anda dapat meminta model untuk menghasilkan trek khusus instrumental:
 
 ### Python
 
@@ -1020,11 +1017,10 @@ curl -s -X POST \
   }'
 ```
 
-## สร้างเพลงในภาษาต่างๆ
+## Membuat musik dalam berbagai bahasa
 
-Lyria 3.5 จะสร้างเนื้อเพลงในภาษาของพรอมต์ หากต้องการสร้างเพลง
-ที่มีเนื้อร้องเป็นภาษาฝรั่งเศส ให้เขียนพรอมต์เป็นภาษาฝรั่งเศส โมเดลจะปรับรูปแบบการร้อง
-และการออกเสียงให้ตรงกับภาษา
+Lyria 3.5 membuat lirik dalam bahasa perintah Anda. Untuk membuat lagu dengan lirik dalam bahasa Prancis, tulis perintah Anda dalam bahasa Prancis. Model ini menyesuaikan gaya
+vokal dan pengucapannya agar sesuai dengan bahasa.
 
 ### Python
 
@@ -1099,17 +1095,15 @@ curl -s -X POST \
   }'
 ```
 
-## ความสามารถของโมเดล
+## Kecerdasan model
 
-Lyria 3.5 จะวิเคราะห์กระบวนการพรอมต์ของคุณ โดยโมเดลจะพิจารณาโครงสร้างดนตรี (ท่อนนำ ท่อนร้อง คอรัส บริดจ์ ฯลฯ)
-ตามพรอมต์ของคุณ
-ซึ่งจะเกิดขึ้นก่อนที่จะสร้างเสียง และช่วยให้มั่นใจได้ถึงความสอดคล้องของโครงสร้างและความเป็นดนตรี
+Lyria 3.5 menganalisis proses perintah Anda saat model melakukan penalaran melalui struktur musik (intro, bait, chorus, jembatan, dll.) berdasarkan perintah Anda.
+Hal ini terjadi sebelum audio dibuat dan memastikan koherensi struktural dan musikalitas.
 
 ## Interactions API
 
-คุณสามารถใช้โมเดล Lyria 3.5 กับ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) ซึ่งเป็นอินเทอร์เฟซแบบรวมสำหรับการโต้ตอบกับโมเดลและเอเจนต์ของ Gemini
-ซึ่งช่วยลดความซับซ้อน
-ในการจัดการสถานะและงานที่ใช้เวลานานสำหรับกรณีการใช้งานหลายรูปแบบที่ซับซ้อน
+Anda dapat menggunakan model Lyria 3.5 dengan [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id);
+antarmuka terpadu untuk berinteraksi dengan model dan agen Gemini. Alat ini menyederhanakan pengelolaan status dan tugas yang berjalan lama untuk kasus penggunaan multimodal yang kompleks.
 
 ### Python
 
@@ -1176,54 +1170,51 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## คำแนะนำในการเขียนพรอมต์
+## Panduan penulisan perintah
 
-ดูวิธีสร้างพรอมต์ที่มีประสิทธิภาพสำหรับแนวเพลง เครื่องดนตรี โครงสร้างเพลง เนื้อเพลงที่กำหนดเอง และสไตล์การร้องได้ที่[คู่มือการใช้พรอมต์ของ Lyria](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=th)
+Untuk mempelajari cara membuat perintah yang efektif untuk genre musik, instrumen,
+struktur lagu, lirik kustom, dan gaya penyampaian vokal, lihat
+[panduan perintah Lyria](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=id).
 
-## แนวทางปฏิบัติแนะนำ
+## Praktik terbaik
 
-- **ทำซ้ำด้วยฟีเจอร์คลิปก่อน** ใช้`lyria-3-clip-preview`โมเดลที่เร็วกว่าเพื่อ
-  ทดลองใช้พรอมต์ก่อนที่จะสร้างเนื้อหาแบบเต็มด้วย
-  `lyria-3.5`
-- **ใช้คำที่เฉพาะเจาะจง** พรอมต์ที่คลุมเครือจะให้ผลลัพธ์ทั่วไป ระบุเครื่องดนตรี
-  BPM, คีย์, อารมณ์ และโครงสร้างเพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
-- **เลือกภาษาที่ต้องการ** ป้อนพรอมต์ในภาษาที่คุณต้องการให้เนื้อเพลงเป็น
-- **ใช้แท็กส่วน** แท็ก `[Verse]`, `[Chorus]`, `[Bridge]` ช่วยให้โมเดลมีโครงสร้างที่ชัดเจน
-  ให้ทำตาม
-- **แยกเนื้อเพลงออกจากวิธีการ** เมื่อระบุเนื้อเพลงที่กำหนดเอง ให้แยกเนื้อเพลงออกจากคำสั่งเกี่ยวกับทิศทางดนตรีอย่างชัดเจน
+- **Lakukan iterasi dengan Klip terlebih dahulu.** Gunakan model `lyria-3-clip-preview` yang lebih cepat untuk bereksperimen dengan perintah sebelum melakukan pembuatan video panjang dengan `lyria-3.5`.
+- **Jadilah spesifik.** Perintah yang tidak jelas akan menghasilkan hasil yang umum. Sebutkan instrumen,
+  BPM, nada dasar, mood, dan struktur untuk output terbaik.
+- **Cocokkan bahasa Anda.** Berikan perintah dalam bahasa yang Anda inginkan untuk liriknya.
+- **Gunakan tag bagian.** Tag `[Verse]`, `[Chorus]`, `[Bridge]` memberikan struktur yang jelas untuk diikuti model.
+- **Pisahkan lirik dari petunjuk.** Saat memberikan lirik kustom, pisahkan dengan jelas dari petunjuk arahan musik Anda.
 
-## ข้อจำกัด
+## Batasan
 
-- **ความปลอดภัย**: ตัวกรองความปลอดภัยจะตรวจสอบพรอมต์ทั้งหมด ระบบจะบล็อกพรอมต์ที่ทริกเกอร์
-  ตัวกรอง ซึ่งรวมถึงพรอมต์ที่ขอเสียงของศิลปินที่เฉพาะเจาะจง
-  หรือการสร้างเนื้อเพลงที่มีลิขสิทธิ์
-- **การใส่ลายน้ำ**: เสียงที่สร้างขึ้นทั้งหมดจะมี[ลายน้ำเสียง SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=th) สำหรับการระบุตัวตน ลายน้ำนี้จะมองไม่เห็นด้วยตาเปล่าและ
-  ไม่ส่งผลต่อประสบการณ์การฟัง
-- **การแก้ไขแบบผ่านการสนทนาไปมา**: การสร้างเพลงเป็นกระบวนการแบบครั้งเดียว
-  การแก้ไขซ้ำหรือการปรับแต่งคลิปที่สร้างขึ้นผ่านพรอมต์หลายรายการ
-  ไม่รองรับใน Lyria เวอร์ชัน 3.5 ปัจจุบัน
-- **ความยาว**: โมเดลคลิปจะสร้างคลิปความยาว 30 วินาทีเสมอ โมเดล Pro
-  สร้างเพลงที่มีความยาว 2-3 นาที โดยระยะเวลาที่แน่นอนจะ
-  ขึ้นอยู่กับพรอมต์ของคุณ
-- **การกำหนด**: ผลลัพธ์อาจแตกต่างกันไปในแต่ละการเรียกใช้ แม้จะใช้พรอมต์เดียวกันก็ตาม
+- **Keamanan**: Semua perintah diperiksa oleh filter keamanan. Perintah yang memicu
+  filter akan diblokir. Hal ini mencakup perintah yang meminta suara artis tertentu atau pembuatan lirik yang dilindungi hak cipta.
+- **Pemberian watermark**: Semua audio yang dihasilkan menyertakan
+  [watermark audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=id) untuk
+  identifikasi. Watermark ini tidak dapat didengar oleh telinga manusia dan tidak memengaruhi pengalaman mendengarkan.
+- **Pengeditan berkelanjutan**: Pembuatan musik adalah proses satu putaran.
+  Pengeditan atau penyempurnaan klip yang dihasilkan secara berulang melalui beberapa perintah tidak didukung dalam Lyria 3.5 versi saat ini.
+- **Durasi**: Model Klip selalu menghasilkan klip berdurasi 30 detik. Model Pro membuat lagu berdurasi beberapa menit; durasi yang tepat dapat dipengaruhi melalui perintah Anda.
+- **Determinisme**: Hasil dapat bervariasi antar-panggilan, bahkan dengan perintah yang sama.
 
-## ขั้นตอนถัดไป
+## Langkah berikutnya
 
-- ดู[ราคา](https://ai.google.dev/gemini-api/docs/generate-content/pricing?hl=th)ของโมเดล Lyria 3.5
-- ลอง[การสร้างเพลงแบบสตรีมมิงแบบเรียลไทม์](https://ai.google.dev/gemini-api/docs/generate-content/realtime-music-generation?hl=th)ด้วย
-  Lyria RealTime
-- สร้างการสนทนาที่มีผู้พูดหลายคนด้วย[โมเดล TTS](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=th)
-- ดูวิธีสร้าง[รูปภาพ](https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=th)หรือ[วิดีโอ](https://ai.google.dev/gemini-api/docs/generate-content/video?hl=th)
-- ดูว่า Gemini [เข้าใจไฟล์เสียง](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=th)ได้อย่างไร
-- สนทนากับ Gemini แบบเรียลไทม์โดยใช้
-  [Live API](https://ai.google.dev/gemini-api/docs/generate-content/live?hl=th)
+- Lihat [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk model Lyria 3.5.
+- Coba [pembuatan musik streaming real-time](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=id) dengan Lyria RealTime.
+- Buat percakapan multi-pembicara dengan
+  [model TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
+- Temukan cara membuat [gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) atau
+  [video](https://ai.google.dev/gemini-api/docs/video?hl=id).
+- Cari tahu cara Gemini dapat [memahami file audio](https://ai.google.dev/gemini-api/docs/audio?hl=id).
+- Lakukan percakapan real-time dengan Gemini menggunakan
+  [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id).
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-09-18 UTC
+Terakhir diperbarui pada 2026-10-01 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-18 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-01 UTC."],[],[]]

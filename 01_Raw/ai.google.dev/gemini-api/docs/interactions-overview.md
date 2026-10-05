@@ -1,70 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar
-fetched_at: 2026-09-28T06:32:05.466789+00:00
-title: "\u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he
+fetched_at: 2026-10-05T06:48:27.873601+00:00
+title: "Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-إرسال ملاحظات
+שליחת משוב
 
-# واجهة برمجة التطبيقات Interactions API
+# Interactions API
 
-توفّر Interactions API أفضل طريقة لتصميم التطبيقات باستخدام نماذج Gemini ووكلاء Gemini. اعتبارًا من يونيو 2026، أصبحت هذه الميزة متاحة للجميع ويُنصح باستخدامها في جميع المشاريع الجديدة. على الرغم من أنّ واجهة برمجة التطبيقات الأصلية
-[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ar) أصبحت قديمة،
-إلا أنّها لا تزال متوافقة بشكل كامل.
+‫Interactions API הוא הדרך הכי טובה לבנות באמצעות מודלים וסוכנים של Gemini. החל מיוני 2026, הוא זמין לכלל המשתמשים ומומלץ לכל הפרויקטים החדשים. למרות שהוא נחשב עכשיו לגרסה קודמת, ה-API המקורי [`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=he) עדיין נתמך באופן מלא.
 
-## لماذا يجب استخدام Interactions API؟
+## למה כדאי להשתמש ב-Interactions API?
 
-- **واجهة عالمية لجميع التطبيقات**: تم تصميمها لتكون الواجهة العادية لكل حالات الاستخدام، بما في ذلك إنشاء النصوص في محادثة واحدة، وفهم الوسائط المتعددة، والنتائج المنظَّمة، وتنظيم الأدوات، وسير العمل المستند إلى الوكلاء.
-- **واجهة برمجة تطبيقات واحدة للنماذج والوكلاء**: نقطة نهاية ونمط موحّدان
-  لاستدعاء نماذج Gemini العادية والوكلاء المتخصّصين مباشرةً (مثل
-  Deep Research والوكلاء المخصّصين المُدارين).
-- **إمكانات جديدة جاهزة للاستخدام**: ميزات مثل حالة المحادثة الاختيارية من جهة الخادم باستخدام `previous_interaction_id`، وخطوات التنفيذ القابلة للمراقبة لتصحيح الأخطاء وعرض واجهة المستخدم، و[التنفيذ في الخلفية](https://ai.google.dev/gemini-api/docs/background-execution?hl=ar) للمهام الطويلة الأمد باستخدام `background=true`.
-- **تكلفة أقل مع معدّلات أعلى لنتيجة ذاكرة التخزين المؤقت**: عند استخدام المحادثات المترابطة، تتيح إدارة الحالة الاختيارية من جهة الخادم تخزينًا مؤقتًا أكثر كفاءة للسياق على مستوى الأدوار، ما يقلّل من تكاليف الرموز المميزة.
-- **مكان إطلاق الميزات الجديدة**: من الآن فصاعدًا، سيتم إطلاق جميع النماذج الجديدة والإمكانات والأدوات والميزات المستندة إلى وكيل الذكاء الاصطناعي على Interactions API.
+- **ממשק אוניברסלי לכל האפליקציות**: ממשק שנועד להיות הממשק הסטנדרטי לכל תרחישי השימוש, כולל יצירת טקסט בשיחה אחת, הבנה מולטי-מודאלית, פלט מובנה, תיאום בין כלים ותהליכי עבודה מבוססי-סוכנים.
+- **ממשק API יחיד למודלים ולסוכנים**: נקודת קצה ודפוס מאוחדים לקריאה ישירה למודלים רגילים של Gemini ולסוכנים מיוחדים (כמו Deep Research וסוכנים מנוהלים בהתאמה אישית).
+- **יכולות חדשות שזמינות מחוץ לקופסה**: תכונות כמו מצב שיחה אופציונלי בצד השרת באמצעות `previous_interaction_id`, שלבי ביצוע שניתנים לצפייה לצורך ניפוי באגים ועיבוד ממשק משתמש, ו[ביצוע ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) של משימות ארוכות טווח באמצעות `background=true`.
+- **עלות נמוכה יותר עם שיעורי פגיעה גבוהים יותר במטמון**: כשמשתמשים בשיחות מרובות תורות, ניהול מצב אופציונלי בצד השרת מאפשר שמירה יעילה יותר של הקשר במטמון בין התורות, וכך מצמצם את עלויות האסימונים.
+- **איפה יושקו תכונות חדשות**: בעתיד, כל המודלים החדשים, היכולות הרב-מודאליות, הכלים והתכונות המבוססות על סוכנים יושקו ב-Interactions API.
 
-تخزّن Interactions API الطلبات تلقائيًا حتى تتمكّن من الاستفادة من ميزات إدارة الحالة من جهة الخادم باستخدام `previous_interaction_id`. يمكنك تفعيل السلوك غير المرتبط بحالة معيّنة من خلال ضبط
-`store=false`. راجِع قسم [الاحتفاظ بالبيانات](#data-storage-retention) لمعرفة التفاصيل.
+כברירת מחדל, Interactions API שומר בקשות כדי שתוכלו להשתמש בתכונות של ניהול מצב בצד השרת באמצעות `previous_interaction_id`. כדי להפעיל התנהגות בלי שמירת מצב, צריך להגדיר את
+`store=false`. פרטים נוספים זמינים בקטע [שמירת נתונים](#data-storage-retention).
 
-## البدء
+## שנתחיל?
 
-- **إعداد وكيل الترميز**: اربط وكيل الترميز **ببروتوكول MCP الخاص بـ &quot;مستندات Gemini&quot;** وثبِّت مهارة `gemini-api-dev` لمنح مساعدك إذن الوصول المباشر إلى أحدث مستندات المطوّرين وأفضل الممارسات. لمعرفة الخطوات التفصيلية، يُرجى الاطّلاع على
-  [دليل إعداد وكيل الترميز](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ar).
-- **نقل البيانات من `generateContent`**: إذا كان لديك عملية دمج حالية، اتّبِع [دليل نقل البيانات](https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=ar) للانتقال إلى Interactions API.
-- **البدء**: اتّبِع الخطوات الواردة في [دليل "بدء استخدام Interactions API"](https://ai.google.dev/gemini-api/docs/get-started?hl=ar).
+- **הגדרת סוכן התכנות**: מתחברים ל-**Gemini Docs MCP** ומתקינים את מיומנות `gemini-api-dev` כדי לתת לעוזר הדיגיטלי גישה ישירה למסמכי העזרה העדכניים למפתחים ולשיטות המומלצות. שלבים מפורטים מופיעים במאמר בנושא [הגדרת סוכן תכנות](https://ai.google.dev/gemini-api/docs/coding-agents?hl=he).
+- **מעבר מ-`generateContent`**: אם יש לכם שילוב קיים, כדאי לעיין [במדריך למעבר](https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=he) כדי לעבור ל-Interactions API.
+- **איך מתחילים**: פועלים לפי השלבים שב[מדריך למתחילים בנושא Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=he).
 
-### أدلة الميزات
+### מדריכים לתכונות
 
-يمكنك الاطّلاع على الإمكانات المحدّدة لواجهة برمجة التطبيقات Interactions API من خلال هذه الأدلة. يمكنك استخدام زر التبديل في هذه الصفحات للتبديل بين generateContent وInteractions API:
+במדריכים האלה מוסבר על היכולות הספציפיות של Interactions API. אפשר להשתמש במתג בדפים האלה כדי לעבור בין generateContent לבין Interactions API:
 
-- [إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar)
-- [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)
-- [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar)
-- [فهم الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar)
-- [فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar)
-- [معالجة المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar)
-- [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)
-- [الناتج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)
-- [وكيل Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar)
-- [الاستنتاج المرن](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar)
-- [استنتاج الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)
+- [יצירת טקסט](https://ai.google.dev/gemini-api/docs/text-generation?hl=he)
+- [יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)
+- [הבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he)
+- [הבנת אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he)
+- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he)
+- [עיבוד מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he)
+- [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)
+- [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)
+- [Deep Research agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=he)
+- [היקש ברמת Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)
+- [היקש בעדיפות גבוהה](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)
 
-## طريقة عمل Interactions API
+## איך Interactions API פועל
 
-تتمحور واجهة Interactions API حول مورد أساسي هو [**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=ar#Resource:Interaction). يمثّل `Interaction` دورة كاملة في محادثة أو مهمة. يعمل هذا السجلّ كسجلّ جلسة، ويتضمّن السجلّ الكامل لتفاعل ما كسلسلة زمنية من **خطوات التنفيذ**. تشمل هذه الخطوات أفكار النموذج، ونتائج طلبات الأدوات من جهة الخادم أو العميل (مثل `function_call` و`function_result`)، و`model_output` النهائي. يتضمّن المرجع المخزّن (الذي تم استرجاعه من خلال `interactions.get`) أيضًا خطوات `user_input` للحصول على السياق الكامل، على الرغم من أنّ ردّ `interactions.create` يعرض الخطوات التي أنشأها النموذج فقط.
+ה-API של אינטראקציות מתמקד במשאב ליבה: [**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=he#Resource:Interaction). `Interaction` מייצג תור שלם בשיחה או במשימה. הוא משמש כתיעוד של סשן, ומכיל את ההיסטוריה המלאה של אינטראקציה כרצף כרונולוגי של **שלבי ביצוע**. השלבים האלה כוללים את המחשבות של המודל, קריאות לכלים ותוצאות בצד השרת או בצד הלקוח (כמו `function_call` ו-`function_result`) ואת `model_output` הסופי. המשאב המאוחסן (שאוחזר באמצעות `interactions.get`) כולל גם `user_input` שלבים להקשר מלא, אבל התשובה `interactions.create` מחזירה רק שלבים שנוצרו על ידי המודל.
 
-عند إجراء مكالمة إلى
-[`interactions.create`](https://ai.google.dev/api/interactions-api?hl=ar#CreateInteraction)، فإنّك
-تنشئ مورد `Interaction` جديدًا:
+כשמתקשרים אל [`interactions.create`](https://ai.google.dev/api/interactions-api?hl=he#CreateInteraction), יוצרים משאב חדש מסוג `Interaction`:
 
 ### Python
 
@@ -96,7 +89,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -169,9 +162,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### إدارة الحالة من جهة الخادم
+### ניהול מצב בצד השרת
 
-يمكنك استخدام `id` لتفاعل مكتمل في مكالمة لاحقة باستخدام المَعلمة `previous_interaction_id` لمواصلة المحادثة. يستخدم الخادم هذا المعرّف لاسترداد سجلّ المحادثات، ما يوفّر عليك عناء إعادة إرسال سجلّ المحادثات بأكمله:
+אפשר להשתמש ב-`id` של אינטראקציה שהסתיימה בקריאה הבאה באמצעות הפרמטר `previous_interaction_id` כדי להמשיך את השיחה. השרת משתמש במזהה הזה כדי לאחזר את היסטוריית השיחות, וכך לא צריך לשלוח מחדש את כל היסטוריית הצ'אט:
 
 ### Python
 
@@ -219,7 +212,7 @@ const turn2 = await client.interactions.create({
 console.log(turn2.output_text);
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -325,113 +318,106 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-تحتفظ المَعلمة `previous_interaction_id` بسجلّ المحادثات فقط (المدخلات والمخرجات) باستخدام `previous_interaction_id`. المَعلمات الأخرى هي **مَعلمات على مستوى التفاعل**
-ولا تنطبق إلا على التفاعل المحدّد الذي تُنشئه حاليًا:
+הפרמטר `previous_interaction_id` שומר רק את היסטוריית השיחות (קלט ופלט) באמצעות `previous_interaction_id`. הפרמטרים האחרים הם **במסגרת האינטראקציה** והם חלים רק על האינטראקציה הספציפית שאתם יוצרים כרגע:
 
 - `tools`
 - `system_instruction`
-- ‫`generation_config` (بما في ذلك `thinking_level` و`temperature` وما إلى ذلك)
+- ‫`generation_config` (כולל `thinking_level`,‏ `temperature` וכו')
 
-وهذا يعني أنّه عليك إعادة تحديد هذه المَعلمات في كل تفاعل جديد إذا كنت تريد تطبيقها. تكون إدارة الحالة من جهة الخادم اختيارية، ويمكنك أيضًا التشغيل في وضع بلا حالة من خلال إرسال سجلّ المحادثة الكامل في كل طلب.
+כלומר, אם רוצים שהפרמטרים האלה יחולו, צריך לציין אותם מחדש בכל אינטראקציה חדשה. ניהול המצב בצד השרת הוא אופציונלי. אפשר גם לפעול במצב חסר מצב על ידי שליחת היסטוריית השיחות המלאה בכל בקשה.
 
-### تخزين البيانات والاحتفاظ بها
+### אחסון נתונים ושמירתם
 
-تخزِّن واجهة برمجة التطبيقات تلقائيًا جميع عناصر Interaction (`store=true`) بهدف تسهيل استخدام ميزات إدارة الحالة من جهة الخادم (باستخدام `previous_interaction_id`) و[التنفيذ في الخلفية](https://ai.google.dev/gemini-api/docs/background-execution?hl=ar) (باستخدام `background=true`) ولأغراض إمكانية تتبّع البيانات.
+כברירת מחדל, ה-API שומר את כל אובייקטי האינטראקציה (`store=true`) כדי לפשט את השימוש בתכונות של ניהול מצב בצד השרת (עם `previous_interaction_id`), [הפעלה ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) (באמצעות `background=true`) ולמטרות ניטור.
 
-- **المستوى المدفوع**: يحتفظ النظام بالتفاعلات لمدة **55 يومًا**.
-- **المستوى المجاني**: يحتفظ النظام بالتفاعلات لمدة **يوم واحد**.
+- **רמה בתשלום**: המערכת שומרת את האינטראקציות למשך **55 ימים**.
+- **רמת שירות בחינם**: המערכת שומרת את האינטראקציות למשך **יום אחד**.
 
-إذا كنت لا تريد ذلك، يمكنك ضبط `store=false` في طلبك. يختلف عنصر التحكّم هذا عن إدارة الحالة، ويمكنك إيقاف مساحة التخزين لأي تفاعل. يُرجى العِلم أنّ
-`store=false` غير متوافق مع [التنفيذ في الخلفية](https://ai.google.dev/gemini-api/docs/background-execution?hl=ar) ويمنع استخدام
-`previous_interaction_id` في الأدوار اللاحقة.
+אם אתם לא רוצים את זה, אתם יכולים להגדיר `store=false` בבקשה. הפקד הזה נפרד מניהול המצב, ואפשר להשבית את האחסון בכל אינטראקציה. עם זאת, חשוב לזכור ש-`store=false` לא תואם ל[הרצה ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he) ומונע את השימוש ב-`previous_interaction_id` בתורות הבאות.
 
-بالنسبة إلى مشاريع &quot;المستوى المدفوع&quot;، يمكنك ضبط فترة الاحتفاظ بالبيانات في [AI Studio](https://aistudio.google.com/logs?hl=ar) لوضع علامة تلقائيًا على السجلات ليتم حذفها من مساحة تخزين المشروع بعد 7 أو 14 أو 28 أو 55 يومًا. قد يؤثّر تقليل مدة الاحتفاظ بالبيانات في استرجاع المحادثات السابقة.
+בפרויקטים במינוי בתשלום, אפשר להגדיר את חלון השמירה ב-[AI Studio](https://aistudio.google.com/logs?hl=he) כדי לסמן באופן אוטומטי יומנים למחיקה מאחסון הפרויקט אחרי 7, 14, 28 או 55 ימים. תקופת שמירה קצרה יותר עשויה להשפיע על אחזור שיחות קודמות.
 
-يمكنك حذف التفاعلات المخزّنة في أي وقت باستخدام طريقة [`delete`](https://ai.google.dev/api/interactions-api?hl=ar#deleteInteraction) آليًا، والتي تتطلّب معرّف التفاعل. يمكنك أيضًا عرض سجلّات التفاعلات المخزّنة وإدارتها، بما في ذلك حذفها من مساحة تخزين المشروع، في [AI Studio](https://aistudio.google.com/logs?hl=ar).
+אתם יכולים למחוק אינטראקציות שמורות בכל שלב באמצעות השיטה [`delete`](https://ai.google.dev/api/interactions-api?hl=he#deleteInteraction) באופן פרוגרמטי, שדורשת את מזהה האינטראקציה. בנוסף, אתם יכולים לראות ולנהל את יומני האינטראקציות המאוחסנים, כולל מחיקה מאחסון הפרויקט, ב-[AI Studio](https://aistudio.google.com/logs?hl=he).
 
-وبعد انتهاء فترة التخزين، سيتم حذف بياناتك تلقائيًا.
+אחרי שתקופת השמירה תסתיים, הנתונים יימחקו באופן אוטומטי.
 
-تتم معالجة عناصر التفاعل وفقًا [للبنود](https://ai.google.dev/gemini-api/terms?hl=ar).
+אובייקטים של אינטראקציות מעובדים בהתאם [לתנאים](https://ai.google.dev/gemini-api/terms?hl=he).
 
-### عرض التفاعلات في AI Studio
+### צפייה באינטראקציות ב-AI Studio
 
-تخزّن واجهة برمجة التطبيقات طلبات Interactions API التي تم تنفيذها باستخدام `store=true` للمشاريع في "الفئة المدفوعة". يمكنك الاطّلاع عليها مباشرةً من
-[صفحة "السجلات" في Google AI Studio](https://ai.google.dev/gemini-api/docs/www.aistudio.google.com/logs?hl=ar). اطّلِع على [دليل السجلات](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ar) لمزيد من المعلومات.
+ממשק ה-API שומר בקשות של Interactions API שמופעלות באמצעות `store=true` עבור פרויקטים ברמה בתשלום. אפשר לראות אותם ישירות ב[דף היומנים ב-Google AI Studio](https://aistudio.google.com/logs?hl=he). מידע נוסף זמין [במדריך ליומנים](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=he).
 
-## أفضل الممارسات
+## שיטות מומלצות
 
-- **نسبة نتيجة ذاكرة التخزين المؤقت**: تتوفّر ميزة التخزين المؤقت الضمني في كل من الوضعين الثابت وعديم الحالة (راجِع [البدء السريع](https://ai.google.dev/gemini-api/docs/get-started?hl=ar#4_multi-turn_conversations)). يتيح استخدام
-  `previous_interaction_id` (مع الاحتفاظ بالحالة) لمواصلة المحادثات للنظام الاستفادة بسهولة أكبر من التخزين المؤقت الضمني لسجلّ المحادثات، ما يحسّن الأداء ويقلّل التكاليف.
-- **دمج التفاعلات**: يمكنك دمج تفاعلات الوكيل والنموذج ومطابقتها ضمن محادثة واحدة. على سبيل المثال، يمكنك استخدام وكيل متخصص، مثل وكيل &quot;البحث المعمّق&quot;، لجمع البيانات الأولية، ثم استخدام نموذج Gemini عادي لتنفيذ مهام المتابعة، مثل التلخيص أو إعادة التنسيق، وربط هذه الخطوات باستخدام `previous_interaction_id`.
+- **שיעור מציאות במטמון**: שמירה במטמון מרומזת נתמכת במצב עם שמירת מצב ובמצב בלי שמירת מצב (ראו [מדריך למתחילים](https://ai.google.dev/gemini-api/docs/get-started?hl=he#4_multi-turn_conversations)). השימוש ב-`previous_interaction_id` (עם שמירת מצב) כדי להמשיך שיחות מאפשר למערכת להשתמש בקלות רבה יותר במטמון מרומז להיסטוריית השיחות, וכך לשפר את הביצועים ולהפחית את העלויות.
+- **שילוב אינטראקציות**: אתם יכולים לשלב בין אינטראקציות עם נציג ועם מודל במהלך שיחה. לדוגמה, אפשר להשתמש בסוכן מיוחד, כמו סוכן Deep Research, לאיסוף נתונים ראשוני, ואז להשתמש במודל Gemini רגיל למשימות המשך כמו סיכום או עיצוב מחדש, ולקשר בין השלבים האלה באמצעות `previous_interaction_id`.
 
-## الطُرز والوكلاء المتوافقون
+## מודלים וסוכנים נתמכים
 
-| اسم النموذج | النوع | رقم تعريف الطراز |
+| שם דגם | סוג | מזהה דגם |
 | --- | --- | --- |
-| Gemini 3.8 Flash | الطراز | `gemini-3.8-flash` |
-| Gemini 3.7 Flash | الطراز | `gemini-3.7-flash` |
-| Gemini 3.6 Flash | الطراز | `gemini-3.6-flash` |
-| Gemini 3.5 Flash | الطراز | `gemini-3.5-flash` |
-| معاينة Gemini 3.1 Pro | الطراز | `gemini-3.1-pro-preview` |
-| Gemini 3.5 Flash-Lite | الطراز | `gemini-3.5-flash-lite` |
-| Gemini 3.1 Flash-Lite | الطراز | `gemini-3.1-flash-lite` |
-| معاينة Gemini 3 Flash | الطراز | `gemini-3-flash-preview` |
-| Gemini 2.5 Pro | الطراز | `gemini-2.5-pro` |
-| Gemini 2.5 Flash | الطراز | `gemini-2.5-flash` |
-| ‫Gemini 2.5 Flash-lite | الطراز | `gemini-2.5-flash-lite` |
-| صورة Gemini 3 Pro | الطراز | `gemini-3-pro-image` |
-| صورة Gemini 3.1 Flash | الطراز | `gemini-3.1-flash-image` |
-| معاينة ميزة "تحويل النص إلى كلام" في Gemini 3.1 Flash | الطراز | `gemini-3.1-flash-tts-preview` |
-| Gemma 4 31B IT | الطراز | `gemma-4-31b-it` |
-| Gemma 4 26B MoE IT | الطراز | `gemma-4-26b-a4b-it` |
-| Lyria 3.5 | الطراز | `lyria-3.5` |
-| معاينة مقطع Lyria 3 | الطراز | `lyria-3-clip-preview` |
-| معاينة Lyria 3 Pro | الطراز | `lyria-3-pro-preview` |
-| معاينة Deep Research | الوكيل | `deep-research-preview-04-2026` |
-| معاينة Deep Research | الوكيل | `deep-research-max-preview-04-2026` |
-| معاينة Antigravity | الوكيل | `antigravity-preview-09-2026` |
+| Gemini 3.8 Flash | מודל | `gemini-3.8-flash` |
+| Gemini 3.7 Flash | מודל | `gemini-3.7-flash` |
+| Gemini 3.6 Flash | מודל | `gemini-3.6-flash` |
+| Gemini 3.5 Flash | מודל | `gemini-3.5-flash` |
+| ‫Gemini 3.1 Pro Preview | מודל | `gemini-3.1-pro-preview` |
+| Gemini 3.5 Flash-Lite | מודל | `gemini-3.5-flash-lite` |
+| Gemini 3.1 Flash-Lite | מודל | `gemini-3.1-flash-lite` |
+| ‫Gemini 3 Flash Preview | מודל | `gemini-3-flash-preview` |
+| Gemini ‎2.5 Pro | מודל | `gemini-2.5-pro` |
+| Gemini ‎2.5 Flash | מודל | `gemini-2.5-flash` |
+| Gemini 2.5 Flash-lite | מודל | `gemini-2.5-flash-lite` |
+| ‫Gemini 3 Pro Image | מודל | `gemini-3-pro-image` |
+| תמונה של Gemini 3.1 Flash | מודל | `gemini-3.1-flash-image` |
+| ‫Gemini 3.1 Flash TTS (גרסת טרום-השקה) | מודל | `gemini-3.1-flash-tts-preview` |
+| Gemma 4 31B IT | מודל | `gemma-4-31b-it` |
+| Gemma 4 26B MoE IT | מודל | `gemma-4-26b-a4b-it` |
+| Lyria 3.5 | מודל | `lyria-3.5` |
+| תצוגה מקדימה של קטע ב-Lyria 3 | מודל | `lyria-3-clip-preview` |
+| גרסת טרום-השקה של Lyria 3 Pro | מודל | `lyria-3-pro-preview` |
+| גרסת טרום-השקה (Preview) של Deep Research | סוכן | `deep-research-preview-04-2026` |
+| גרסת טרום-השקה (Preview) של Deep Research | סוכן | `deep-research-max-preview-04-2026` |
+| גרסת טרום-השקה של Antigravity | סוכן | `antigravity-preview-09-2026` |
 
-## حزم SDK
+## ערכות SDK
 
-يمكنك استخدام أحدث إصدار من حِزم تطوير البرامج (SDK) من Google GenAI للوصول إلى واجهة برمجة التطبيقات Interactions API.
+אתם יכולים להשתמש בגרסה העדכנית של Google GenAI SDK כדי לגשת אל Interactions API.
 
-- في Python، هذه هي حزمة `google-genai` من الإصدار `2.3.0` والإصدارات الأحدث.
-- في JavaScript، هذه هي حزمة `@google/genai` من الإصدار `2.3.0` والإصدارات الأحدث.
-- على Go، هذه هي حزمة `google.golang.org/genai`.
-- في Java، هذه هي حزمة `com.google.genai:google-genai`.
+- ב-Python, זו חבילת `google-genai` החל מגרסה `2.3.0`.
+- ב-JavaScript, מדובר בחבילה `@google/genai` מגרסה `2.3.0` ואילך.
+- ב-Go, זו חבילת `google.golang.org/genai`.
+- ב-Java, זה חבילת `com.google.genai:google-genai`.
 
-يمكنك الاطّلاع على مزيد من المعلومات حول كيفية تثبيت حِزم SDK في صفحة [المكتبات](https://ai.google.dev/gemini-api/docs/libraries?hl=ar).
+מידע נוסף על התקנת ערכות ה-SDK זמין בדף [Libraries](https://ai.google.dev/gemini-api/docs/libraries?hl=he).
 
-## القيود
+## מגבלות
 
-- **بروتوكول سياق النموذج (MCP) عن بُعد**: لا يتيح Gemini 3 استخدام بروتوكول سياق النموذج عن بُعد، ولكنّ هذه الميزة ستتوفّر قريبًا.
-- **توافق النماذج المتعددة الجولات**: عند استخدام نماذج مختلفة في محادثة (سواء كانت تتضمّن حالة أو لا تتضمّن حالة)، يجب أن تتوافق النماذج اللاحقة مع أساليب الإخراج الخاصة بالنماذج السابقة كمدخلات. على سبيل المثال، إذا أنشأت صورة باستخدام `gemini-3.1-flash-image`، لا يمكنك مواصلة المحادثة مع نموذج لا يقبل إدخال الصور (مثل نموذج نصي فقط أو نموذج لإنشاء الموسيقى مثل Lyria).
+- **MCP מרחוק**: Gemini 3 לא תומך ב-MCP מרחוק, אבל התמיכה הזו תגיע בקרוב.
+- **תאימות של מודלים רב-שלביים**: כשמשלבים בין מודלים שונים בשיחה (עם שמירת מצב או בלי שמירת מצב), המודלים הבאים צריכים לתמוך בשיטות הפלט של המודלים הקודמים כקלט. לדוגמה, אם יוצרים תמונה באמצעות `gemini-3.1-flash-image`, אי אפשר להמשיך את השיחה עם מודל שלא מקבל קלט של תמונות (כמו מודל שמקבל רק טקסט או מודל ליצירת מוזיקה כמו Lyria).
 
-تتوافق الميزات التالية مع واجهة
-[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ar) API، ولكنها **غير متاحة بعد** في Interactions API:
+התכונות הבאות נתמכות על ידי [`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=he) API, אבל **עדיין לא זמינות** ב-Interactions API:
 
-- **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**
-- **[استدعاء الدوال تلقائيًا (Python)](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=ar#automatic_function_calling_python_only)**
-- **[التخزين المؤقت الصريح](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**: يُرجى العِلم أنّ التخزين المؤقت الضمني من جهة الخادم متاح في Interactions API
-  من خلال `previous_interaction_id`.
-- **[إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar)**: إعدادات الأمان المخصّصة غير متاحة في Interactions API.
+- ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**
+- **[הפעלת פונקציות אוטומטית (Python)](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=he#automatic_function_calling_python_only)**
+- **[שמירה במטמון באופן מפורש](https://ai.google.dev/gemini-api/docs/caching?hl=he)**: שימו לב ששמירה במטמון באופן מרומז בצד השרת זמינה ב-Interactions API באמצעות `previous_interaction_id`.
+- **[הגדרות בטיחות](https://ai.google.dev/gemini-api/docs/safety-settings?hl=he)**: הגדרות בטיחות מותאמות אישית לא אפשריות ב-Interactions API.
 
-## الملاحظات
+## משוב
 
-تُعدّ ملاحظاتك مهمة جدًا لتطوير Interactions API.
-يمكنك مشاركة أفكارك أو الإبلاغ عن أخطاء أو طلب ميزات في [منتدى مطوّري الذكاء الاصطناعي من Google](https://discuss.ai.google.dev/c/gemini-api/4?hl=ar).
+המשוב שלכם חשוב לנו מאוד לפיתוח של Interactions API.
+אתם יכולים לשתף את המחשבות שלכם, לדווח על באגים או לבקש תכונות ב[פורום קהילת המפתחים של Google AI](https://discuss.ai.google.dev/c/gemini-api/4?hl=he).
 
-## الخطوات التالية
+## המאמרים הבאים
 
-- جرِّب [دفتر ملاحظات التشغيل السريع لواجهة Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=ar).
-- [مزيد من المعلومات حول وكيل Deep Research في Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar)
+- אפשר לנסות את [המדריך המהיר לשימוש ב-Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=he).
+- [מידע נוסף על סוכן Deep Research ב-Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=he)
 
-إرسال ملاحظات
+שליחת משוב
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)
+עדכון אחרון: 2026-10-01 (שעון UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+רוצה לתת לנו משוב?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-01 (שעון UTC)."],[],[]]

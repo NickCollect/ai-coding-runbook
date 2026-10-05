@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=ar
-fetched_at: 2026-09-28T06:30:54.446058+00:00
-title: "\u0627\u0644\u0646\u0633\u062e \u0627\u0644\u0645\u0628\u0627\u0634\u0631 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=de
+fetched_at: 2026-10-05T06:51:21.146299+00:00
+title: "Live-Transkription mit der Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-# النسخ المباشر باستخدام Gemini Live API
+# Live-Transkription mit der Gemini Live API
 
-تتيح واجهة Gemini Live API تحويل الكلام إلى نص في الوقت الفعلي وبزمن استجابة منخفض باستخدام نموذج [`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=ar). من خلال الربط بواجهة Live API عبر WebSockets أو استخدام حزمة تطوير البرامج (SDK) الخاصة بالذكاء الاصطناعي التوليدي من Google، يمكنك بث إدخال صوتي مستمر وتلقّي نصوص متزايدة ومباشرة في الوقت الفعلي أثناء حدوث الكلام.
+Die Gemini Live API unterstützt die Echtzeit-Sprach-zu-Text-Transkription mit geringer Latenz mithilfe des Modells [`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=de). Wenn Sie über WebSockets eine Verbindung zur Live API herstellen oder das Google Gen AI SDK verwenden, können Sie kontinuierliche Audioeingaben streamen und inkrementelle Texttranskriptionen in Echtzeit erhalten, während gesprochen wird.
 
-[تجربة ميزة "النسخ المباشر" في Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-transcribe-live&hl=ar)
-[فتح كتاب وصفات Colabcode](https://github.com/google-gemini/cookbook)
-[استخدام مهارات وكيل الترميزterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ar#gemini-live-api-dev)
+[Live-Transkription in Google AI Studio ausprobierenmic](https://aistudio.google.com/live?model=gemini-3.5-transcribe-live&hl=de)
+[Colab-Cookbook öffnencode](https://github.com/google-gemini/cookbook)
+[Coding-Agent-Skills verwendenterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=de#gemini-live-api-dev)
 
-من خلال الاستفادة من واجهة برمجة التطبيقات Gemini Live، تتيح منصات المطوّرين، مثل
-[Agora](https://docs.agora.io/en/ai/models/asr/gemini) و[Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration) و[LiveKit](https://docs.livekit.io/agents/models/stt/gemini/) و[Pipecat](https://docs.pipecat.ai/api-reference/server/services/stt/google) و[Vercel](https://vercel.com/docs/ai-gateway/modalities/speech-to-text) و[Vision Agents](https://visionagents.ai/integrations/stt/gemini)، للمطوّرين إنشاء واجهات عالية الأداء تعمل بالصوت ونشرها بسهولة. وتدير هذه المنصات بنية أساسية معقّدة لبث الوسائط في الوقت الفعلي وراء الكواليس، ما يتيح للمطوّرين التركيز بشكل كامل على تصميم تجربة المستخدم.
+Durch die Nutzung der Gemini Live API können Entwicklerplattformen wie [Agora](https://docs.agora.io/en/ai/models/asr/gemini), [Fishjam](https://docs.fishjam.io/tutorials/gemini-live-integration), [LiveKit](https://docs.livekit.io/agents/models/stt/gemini/), [Pipecat](https://docs.pipecat.ai/api-reference/server/services/stt/google), [Vercel](https://vercel.com/docs/ai-gateway/modalities/speech-to-text) und [Vision Agents](https://visionagents.ai/integrations/stt/gemini) ganz einfach leistungsstarke sprachgesteuerte Benutzeroberflächen erstellen und bereitstellen. Diese Plattformen verwalten im Hintergrund eine komplexe Infrastruktur für das Media-Streaming in Echtzeit, sodass sich Entwickler ganz auf die Gestaltung der Nutzererfahrung konzentrieren können.
 
-## مقارنة بين ميزة "الرد المباشر على المكالمات الهاتفية" وميزة "تحويل الصوت إلى نص مباشرةً"
+## Kundenservicemitarbeiter im Vergleich zur Live-Transkription
 
-مع أنّ كلتا الميزتين تستخدمان اتصال البث الثنائي الاتجاه Live API، تعمل ميزة "الكتابة المباشرة" كمسار مخصّص للتعرّف على الكلام بزمن استجابة منخفض بدلاً من أن تكون وكيل محادثة.
+Beide nutzen die bidirektionale Streamingverbindung der Live API, aber die automatische Transkription ist eine spezielle Spracherkennungspipeline mit niedriger Latenz und kein Konversations-Agent.
 
-| الميزة | موظّف دعم يقدّم خدمة مباشرة | تحويل الصوت إلى نص مباشرةً |
+| Funktion | Frag den Kundenservice | Live-Transkription |
 | --- | --- | --- |
-| **الدور الأساسي** | مساعد محادثة يستمع ويحلّل ويجيب. | مسار تحويل الكلام إلى نص في الوقت الفعلي الذي يحوّل الصوت الوارد إلى نص |
-| **طريقة الرد** | المحتوى الصوتي والنصي المنطوق (`response_modalities=["AUDIO"]`) | نصوص البث المباشر (`response_modalities=["TEXT"]`) |
-| **نمط التفاعل** | حوار قائم على التناوب مع رصد فترات التوقف والمقاطعات | معالجة البث المتواصل أثناء تحدث المتحدث |
-| **الميزات المتاحة** | استدعاء الدالة و&quot;بحث Google&quot; وتعليمات النظام | تحديد اللغة المفضّلة للكلام (`custom_vocabulary`)، ورصد اللغة، ورصد النشاط الصوتي اليدوي والمختلط، والنسخ الذكي |
-| **مصدر الإدخال** | متعدد الوسائط: الصوت والفيديو والصور والنصوص | إدخال الصوت (تنسيق PCM الأولي 16 بت) |
+| **Primäre Rolle** | Ein konversationeller Assistent, der zuhört, nachdenkt und antwortet. | Echtzeit-Spracherkennungspipeline, die eingehende Audioinhalte transkribiert. |
+| **Antwortmodalität** | Gesprochene Audioinhalte und Text (`response_modalities=["AUDIO"]`). | Transkriptionen von Streamingtext (`response_modalities=["TEXT"]`) |
+| **Interaktionsstil** | Turn-basierter Dialog mit Pausenerkennung und Unterbrechungen. | Kontinuierliche Streamverarbeitung während des Sprechens. |
+| **Unterstützte Funktionen** | Funktionsaufrufe, Google Suche, Systemanweisungen. | Sprachbias (`custom_vocabulary`), Spracherkennung, manuelle und hybride VAD, Smart Transcription. |
+| **Eingabestream** | Multimodal: Audio, Video, Bilder, Text. | Audioeingabe (rohes 16‑Bit-PCM). |
 
-## البدء
+## Jetzt starten
 
-توضّح الأمثلة التالية كيفية فتح جلسة بث ثنائي الاتجاه باستخدام `gemini-3.5-transcribe-live` وتلقّي نصوص في الوقت الفعلي.
+Die folgenden Beispiele zeigen, wie Sie mit `gemini-3.5-transcribe-live` eine bidirektionale Streaming-Sitzung öffnen und Echtzeit-Transkriptionen empfangen.
 
 ### Python
 
@@ -145,14 +144,14 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## النصوص المؤقتة والنهائية المحوَّلة من الصوت
+## Vorläufige und endgültige Transkriptionen
 
-عندما يتم بث الصوت إلى Live API، يرسل الخادم حقلَي كتابة متكاملَين ضمن `server_content`:
+Wenn Audio in die Live API gestreamt wird, gibt der Server zwei sich ergänzende Transkriptionsfelder in `server_content` aus:
 
-- **`interim_input_transcription`**: فرضيات جزئية تخمينية يتم تعديلها أثناء تحدث المتحدث بنشاط، مع تأخير منخفض. تحدث هذه التحديثات الجزئية بسرعة وبأقل تأخير ممكن. استخدِم `interim_input_transcription` لعرض ترجمة وشرح متجاوبَين لواجهة المستخدم المباشرة أو لمعاينة الترجمة والشرح.
-- ‫**`input_transcription`**: النص النهائي الذي يتم إرساله عندما يتوقف المتحدث مؤقتًا أو تنتهي الجملة أو يتم الانتهاء من الكلام. وبعد إصداره، يمثّل هذا النص النسخة الموثوقة التي قدّمها النموذج لهذا الجزء من الكلام. في وضع "التحويل الذكي للصوت إلى نص"، سيشمل ذلك الردّ المنقّح والمنسّق.
+- **`interim_input_transcription`**: Spekulative Teilhypothesen mit geringer Latenz, die aktualisiert werden, während der Sprecher aktiv spricht. Diese Teilaktualisierungen erfolgen schnell und mit minimaler Verzögerung. Verwenden Sie `interim_input_transcription`, um responsive Live-Untertitel für die Benutzeroberfläche oder Vorschauuntertitel zu rendern.
+- **`input_transcription`**: Das endgültige Transkript, das ausgegeben wird, wenn der Sprecher pausiert, der Turn abgeschlossen ist oder die Sprache fertiggestellt ist. Sobald dieser Text ausgegeben wird, stellt er die maßgebliche Transkription des Modells für dieses Sprachsegment dar. Im Modus „Intelligente Transkription“ ist die bereinigte, formatierte Antwort enthalten.
 
-يوضّح المثال التالي كيفية عرض النتائج الجزئية المؤقتة للبث المباشر وإرسال النصوص النهائية:
+Im folgenden Beispiel wird gezeigt, wie Sie Streaming-Zwischenergebnisse anzeigen und endgültige Transkripte übertragen:
 
 ### Python
 
@@ -208,13 +207,13 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## إرسال الصوت
+## Audio senden
 
-بث أجزاء الصوت عبر الاتصال النشط بتنسيق PCM الخام 16 بت
+Audio-Chunks als rohes 16‑Bit-PCM-Audio über die aktive Verbindung streamen.
 
-- **تنسيق الصوت:** Raw 16-bit PCM بمعدل 16 كيلوهرتز (أحادي، little-endian).
-- **حجم الأجزاء:** أرسِل الصوت في أجزاء تبلغ مدة كل منها 100 ملي ثانية (من 1,024 إلى 2,048 إطارًا).
-- **نوع MIME:** `audio/pcm;rate=16000` (أو معدّل البيانات في الملف الصوتي المطابق)
+- **Audioformat**:Rohes 16‑Bit-PCM mit 16 kHz (Mono, Little Endian).
+- **Blockgröße**:Senden Sie Audio in Blöcken von 100 ms (1.024 bis 2.048 Frames).
+- **MIME-Typ**:`audio/pcm;rate=16000` (oder die entsprechende Samplingrate).
 
 ### Python
 
@@ -269,11 +268,11 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-## ميزات تحويل الصوت إلى نص
+## Transkriptionsfunktionen
 
-### التعرّف التلقائي على اللغة
+### Automatische Spracherkennung
 
-يؤدي حذف `language_codes` أو ضبط `language_codes=[]` إلى تفعيل ميزة "التعرّف التلقائي على اللغة". يرصد النموذج بشكل ديناميكي اللغة المحكية في جميع الجُمل، بما في ذلك المحادثات المتعددة اللغات والتبديل بين اللغات.
+Wenn Sie `language_codes` weglassen oder `language_codes=[]` festlegen, wird die Sprache standardmäßig automatisch erkannt. Das Modell erkennt die gesprochene Sprache in Äußerungen dynamisch, auch bei mehrsprachigen Unterhaltungen und Sprachwechseln.
 
 ### Python
 
@@ -314,9 +313,9 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### تلميح اللغة المحدّدة
+### Spezifischer Sprachhinweis
 
-قدِّم رموز لغة BCP-47 صريحة (على سبيل المثال، `["es-ES"]` للإسبانية أو `["fr-FR"]` للفرنسية) لتفضيل التعرّف على لغات معيّنة (راجِع [اللغات المتوافقة](#supported-languages)).
+Geben Sie explizite BCP-47-Sprachcodes an (z. B. `["es-ES"]` für Spanisch oder `["fr-FR"]` für Französisch), um die Spracherkennung auf bestimmte Sprachen auszurichten (siehe [Unterstützte Sprachen](#supported-languages)).
 
 ### Python
 
@@ -357,9 +356,9 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### تفضيل المفردات المخصّصة
+### Benutzerdefiniertes Vokabular
 
-قدِّم قائمة تضم ما يصل إلى 1,000 عبارة أو اسم علم أو اسم علامة تجارية أو مصطلح فني في `custom_vocabulary` لتوجيه التعرّف على الكلام نحو مصطلحات معيّنة (عادةً ما يتم تحقيق أفضل النتائج باستخدام ما يصل إلى 100 مصطلح).
+Geben Sie in `custom_vocabulary` eine Liste mit bis zu 1.000 Begriffen, Eigennamen, Markennamen oder Fachbegriffen an, um die Spracherkennung auf bestimmte Begriffe auszurichten. Die besten Ergebnisse werden in der Regel mit bis zu 100 Begriffen erzielt.
 
 ### Python
 
@@ -403,17 +402,17 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-### التحويل الذكي للصوت إلى نص
+### Intelligente Transkription
 
-اضبط تنسيق إخراج النص باستخدام المَعلمة `mode` في `input_audio_transcription`:
+Konfigurieren Sie die Formatierung der Transkriptionsausgabe mit dem Parameter `mode` in `input_audio_transcription`:
 
-- **`VERBATIM` (الإعداد التلقائي)**: ينتج عنه نسخة طبق الأصل من كل ما يُقال، مع الحفاظ على الكلمات الحشو الخام ("أمم" و"آه" و"مثل") والتكرار والبدايات الخاطئة.
-- **`SMART` (التحويل الذكي للصوت إلى نص)**: تنظيف النص وتنظيمه لتسهيل قراءته:
+- **`VERBATIM` (Standard)**: Erstellt ein exaktes wörtliches Transkript von allem Gesprochenen, wobei Füllwörter („ähm“, „äh“, „wie“), Wiederholungen und Falschstarts beibehalten werden.
+- **`SMART` (Smart Transcribe)**: Das Transkript wird bereinigt und strukturiert, um die Lesbarkeit zu verbessern:
 
-  - **إزالة أخطاء الكلام**: يزيل هذا الخيار كلمات الحشو والتلعثم وبدايات الجمل الخاطئة.
-  - **التصحيحات الذاتية المضمّنة**: تحلّ المشاكل في التصحيحات المنطوقة بشكل طبيعي.
-  - **التنسيق المنظَّم**: ينسّق تلقائيًا القوائم والنقاط والأرقام والتواريخ وفواصل الفقرات.
-  - **القواعد النحوية واستخدام الأحرف الكبيرة والصغيرة**: يتم تطبيق قواعد الترقيم واستخدام الأحرف الكبيرة والصغيرة بشكل طبيعي.
+  - **Entfernung von Unflüssigkeiten**: Füllwörter, Stottern und Fehlstarts werden entfernt.
+  - **Inline-Selbstkorrekturen**: Gesprochene Korrekturen werden auf natürliche Weise berücksichtigt.
+  - **Strukturierte Formatierung**: Listen, Aufzählungszeichen, Zahlen, Datumsangaben und Absatzumbrüche werden automatisch formatiert.
+  - **Grammatik und Groß-/Kleinschreibung**: Wendet natürliche Groß-/Kleinschreibung und Interpunktion an.
 
 ### Python
 
@@ -454,20 +453,20 @@ const setupMessage = {
 websocket.send(JSON.stringify(setupMessage));
 ```
 
-## استراتيجيات رصد النشاط الصوتي (VAD)
+## Strategien zur Erkennung von Sprachaktivitäten (Voice Activity Detection, VAD)
 
-### ميزة "التعرّف التلقائي على النشاط الصوتي" (الإعداد التلقائي)
+### Automatische VAD (Standard)
 
-بشكلٍ تلقائي، ترصد ميزة "التعرّف التلقائي على النشاط الصوتي" من جهة الخادم متى يبدأ المتحدث ومتى يتوقف عن الكلام.
+Standardmäßig wird serverseitig automatisch erkannt, wann ein Sprecher zu sprechen beginnt und aufhört.
 
-### التعرّف المختلط على الصوت
+### Hybrid-VAD
 
-تجمع [ميزة "التعرّف على النشاط الصوتي" المختلطة](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ar#hybrid-vad) بين ميزة "التعرّف التلقائي على بداية الكلام" من جهة الخادم وميزة "التعرّف على نهاية الكلام" من جهة العميل لإكمال الدور بدون أي تأخير:
+[Hybrid-VAD](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=de#hybrid-vad) kombiniert die serverseitige automatische Erkennung des Sprechbeginns mit der clientseitigen Erkennung des Sprechendes für die latenzfreie Finalisierung von Zügen:
 
-1. **تظل ميزة "التعرّف التلقائي على نشاط الصوت" من جهة الخادم مفعَّلة** لرصد بدايات الكلام بدقة باستخدام مساحة بادئة للصوت، ما يمنع اقتطاع الكلمات الأولى.
-2. **رصد الصمت من جهة العميل باستخدام ميزة "الرصد الصوتي"**: عندما ترصد ميزة "الرصد الصوتي" المحلية على الجهاز أنّ المتحدث توقّف عن الكلام، يرسل العميل إشارة `audio_stream_end` على الفور.
-3. **الإنهاء السريع**: يتعامل الخادم مع `audio_stream_end` كطلب فوري لإنهاء المحادثة، ويتجاوز وقت الانتظار التلقائي للصمت من جهة الخادم ويعرض النص النهائي بأقل وقت استجابة.
-4. **الخيار الاحتياطي**: إذا تعذّر تشغيل VAD من جهة العميل، يعمل VAD من جهة الخادم كخيار احتياطي تلقائي.
+1. **Die serverseitige automatische VAD bleibt aktiviert**, um den Beginn der Sprache mit Prefix-Audio-Padding genau zu erkennen und so das Abschneiden von Wörtern am Anfang zu verhindern.
+2. **Clientseitige VAD erkennt Stille**: Wenn eine lokale VAD auf dem Gerät erkennt, dass der Sprecher aufgehört hat zu sprechen, sendet der Client sofort ein `audio_stream_end`-Signal.
+3. **Schnelle Finalisierung**: Der Server behandelt `audio_stream_end` als Aufforderung zur sofortigen Finalisierung des Turns. Die standardmäßige serverseitige Wartezeit für die Stille wird umgangen und das finalisierte Transkript wird mit minimaler Latenz zurückgegeben.
+4. **Fallback**: Wenn die clientseitige VAD nicht ausgelöst wird, dient die serverseitige VAD als automatischer Fallback.
 
 ### Python
 
@@ -535,9 +534,9 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-### التعرّف اليدوي على النشاط الصوتي (الضغط للتحدّث)
+### Manuelle VAD (Push-to-Talk)
 
-بالنسبة إلى واجهات جهاز الاتصال اللاسلكي أو أزرار الضغط والتحدث، عليك إيقاف ميزة "التعرّف التلقائي على النشاط الصوتي" بالكامل والتحكّم في حدود التبديل بشكلٍ صريح باستخدام `activity_start` و`activity_end`:
+Bei Walkie-Talkie-Schnittstellen oder Push-to-Talk-Schaltflächen sollten Sie die automatische VAD vollständig deaktivieren und die Sprechpausen explizit mit `activity_start` und `activity_end` steuern:
 
 ### Python
 
@@ -626,11 +625,11 @@ websocket.send(JSON.stringify({
 }));
 ```
 
-## الرموز المميزة المؤقتة في تطبيقات العميل
+## Sitzungsspezifische Tokens in Clientanwendungen
 
-بالنسبة إلى التطبيقات التي تتواصل بين العميل والخادم (مثل تطبيقات الأجهزة الجوّالة أو تطبيقات الويب التي تبث المحتوى مباشرةً من ميكروفون)، استخدِم [الرموز المميزة المؤقتة](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar) لتجنُّب عرض مفتاح واجهة برمجة التطبيقات في رمز العميل.
+Verwenden Sie für Client-Server-Anwendungen (z. B. mobile Apps oder Web-Apps, die direkt von einem Mikrofon streamen) [ephemere Tokens](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=de), um zu vermeiden, dass Ihr API-Schlüssel im Clientcode offengelegt wird.
 
-أنشئ رمزًا مميزًا مؤقتًا محدود الاستخدام على خادمك قبل بدء اتصال العميل:
+Erstellen Sie auf Ihrem Server ein eingeschränktes temporäres Token, bevor Sie die Clientverbindung initiieren:
 
 ### Python
 
@@ -704,95 +703,95 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## اللغات المتاحة
+## Unterstützte Sprachen
 
-تتوفّر اللغات ورموز اللغة BCP-47 التالية في ميزة "النسخ المباشر" من Gemini 3.5:
+Die folgenden Sprachen und BCP-47-Sprachcodes werden für Gemini 3.5 Transcribe Live unterstützt:
 
-| اللغة | رمز BCP-47 | اللغة | رمز BCP-47 |
+| Sprache | BCP-47-Code | Sprache | BCP-47-Code |
 | --- | --- | --- | --- |
-| الأفريقانية | `af-ZA` | اليابانية | `ja-JP` |
-| الأمهرية | `am-ET` | الجافانية | `jv-ID` |
-| العربية (مصر) | `ar-EG` | كابوفيرديانو | `kea-CV` |
-| الأرمينية | `hy-AM` | الكانادا | `kn-IN` |
-| الأسامية | `as-IN` | الكازاخستانية | `kk-KZ` |
-| أذربيجان | `az-AZ` | الكورية | `ko-KR` |
-| البيلاروسية | `be-BY` | القيرغيزية | `ky-KG` |
-| البنغالية (بنغلاديش) | `bn-BD` | اللاتفية | `lv-LV` |
-| البنغالية (الهند) | `bn-IN` | اللينجالا | `ln-CD` |
-| البوسنية | `bs-BA` | الليتوانية | `lt-LT` |
-| البلغارية | `bg-BG` | المقدونية | `mk-MK` |
-| البلغارية (الأرومانية) | `rup-BG` | الماليزية | `ms-MY` |
-| البورمية | `my-MM` | المالايالامية | `ml-IN` |
-| الكانتونية (التقليدية) | `yue-Hant-HK` | المالطية | `mt-MT` |
-| الكتالانية | `ca-ES` | الصينية الماندرين (المبسطة) | `cmn-Hans-CN` |
-| السيبيوانية | `ceb` | المراثية | `mr-IN` |
-| الخميرية القياسية | `km-KH` | المنغولية | `mn-MN` |
-| الكرواتية | `hr-HR` | النيبالية | `ne-NP` |
-| التشيكية | `cs-CZ` | النرويجية | `nb-NO` |
-| الدانماركية | `da-DK` | الأوريا | `or-IN` |
-| الهولندية | `nl-NL` | البولندية | `pl-PL` |
-| الإنجليزية (بريطانيا العظمى) | `en-GB` | البرتغالية (البرازيل) | `pt-BR` |
-| الإنجليزية (الهند) | `en-IN` | البرتغالية (البرتغال) | `pt-PT` |
-| الإنجليزية (الولايات المتحدة) | `en-US` | البنجابية | `pa-IN` |
-| الإستونية | `et-EE` | البنجابية (نص غورموخي) | `pa-Guru-IN` |
-| الفارسية | `fa-IR` | الرومانية | `ro-RO` |
-| الفلبينية | `fil-PH` | الروسية | `ru-RU` |
-| الفنلندية | `fi-FI` | الصربية | `sr-RS` |
-| الفرنسية | `fr-FR` | السندية (الخط العربي) | `sd-Arab-IN` |
-| الغليشيانية | `gl-ES` | السلوفاكية | `sk-SK` |
-| الجورجية | `ka-GE` | السلوفينية | `sl-SI` |
-| الألمانية | `de-DE` | الإسبانية (أمريكا اللاتينية) | `es-419` |
-| اليونانية | `el-GR` | الإسبانية (الولايات المتحدة) | `es-US` |
-| الغوجاراتية | `gu-IN` | السواحيلية (كينيا) | `sw-KE` |
-| الهوسا | `ha-NG` | السويدية | `sv-SE` |
-| العبرية | `he-IL` | الطاجيكية | `tg-TJ` |
-| الهندية | `hi-IN` | التيلوغوية | `te-IN` |
-| الهنغارية | `hu-HU` | التايلاندية | `th-TH` |
-| الأيسلندية | `is-IS` | التركية | `tr-TR` |
-| الإنجليزية الهندية | `en-IN` | الأوكرانية | `uk-UA` |
-| الإندونيسية | `id-ID` | الأوزبكية | `uz-UZ` |
-| الإيطالية | `it-IT` | الفيتنامية | `vi-VN` |
+| Afrikaans | `af-ZA` | Japanisch | `ja-JP` |
+| Amharisch | `am-ET` | Javanisch | `jv-ID` |
+| Arabisch (Ägypten) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Armenisch | `hy-AM` | Kannada | `kn-IN` |
+| Assamesisch | `as-IN` | Kasachisch | `kk-KZ` |
+| Aserbaidschanisch | `az-AZ` | Koreanisch | `ko-KR` |
+| Belarussisch | `be-BY` | Kirgisisch | `ky-KG` |
+| Bengalisch (Bangladesch) | `bn-BD` | Lettisch | `lv-LV` |
+| Bengalisch (Indien) | `bn-IN` | Lingala | `ln-CD` |
+| Bosnisch | `bs-BA` | Litauisch | `lt-LT` |
+| Bulgarisch | `bg-BG` | Mazedonisch | `mk-MK` |
+| Bulgarisch (Aromanisch) | `rup-BG` | Malaiisch | `ms-MY` |
+| Burmesisch | `my-MM` | Malayalam | `ml-IN` |
+| Kantonesisch (traditionell) | `yue-Hant-HK` | Maltesisch | `mt-MT` |
+| Katalanisch | `ca-ES` | Chinesisch (Mandarin, vereinfacht) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Standard-Khmer | `km-KH` | Mongolisch | `mn-MN` |
+| Kroatisch | `hr-HR` | Nepalesisch | `ne-NP` |
+| Tschechien | `cs-CZ` | Norwegisch | `nb-NO` |
+| Dänisch | `da-DK` | Oriya | `or-IN` |
+| Niederländisch | `nl-NL` | Polnisch | `pl-PL` |
+| Englisch (Vereinigtes Königreich) | `en-GB` | Portugiesisch (Brasilien) | `pt-BR` |
+| Englisch (Indien) | `en-IN` | Portugiesisch (Portugal) | `pt-PT` |
+| Englisch (USA) | `en-US` | Punjabi | `pa-IN` |
+| Estnisch | `et-EE` | Panjabi (Gurmukhi-Schrift) | `pa-Guru-IN` |
+| Farsi | `fa-IR` | Rumänisch | `ro-RO` |
+| Filipino | `fil-PH` | Russisch | `ru-RU` |
+| Finnisch | `fi-FI` | Serbisch | `sr-RS` |
+| Französisch | `fr-FR` | Sindhi (arabische Schrift) | `sd-Arab-IN` |
+| Galizisch | `gl-ES` | Slowakisch | `sk-SK` |
+| Georgisch | `ka-GE` | Slowenisch | `sl-SI` |
+| Deutsch | `de-DE` | Spanisch (Lateinamerika) | `es-419` |
+| Griechisch | `el-GR` | Spanisch (USA) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenia) | `sw-KE` |
+| Hausa | `ha-NG` | Schwedisch | `sv-SE` |
+| Hebräisch | `he-IL` | Tadschikisch | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Ungarisch | `hu-HU` | Thailändisch | `th-TH` |
+| Isländisch | `is-IS` | Türkisch | `tr-TR` |
+| Indisches Englisch | `en-IN` | Ukrainisch | `uk-UA` |
+| Indonesisch | `id-ID` | Usbekisch | `uz-UZ` |
+| Italienisch | `it-IT` | Vietnamesisch | `vi-VN` |
 
-## مرجع المَعلمة
+## Parameterverweis
 
-ضبط ميزة "تحويل الصوت إلى نص مباشرةً" باستخدام الحقول في `input_audio_transcription` و`realtime_input_config`:
+Konfigurieren Sie die Live-Transkription mithilfe von Feldern in `input_audio_transcription` und `realtime_input_config`:
 
-| المَعلمة | النوع | الوصف |
+| Parameter | Typ | Beschreibung |
 | --- | --- | --- |
-| `language_codes` | مصفوفة سلاسل | رموز اللغة المستخدَمة في المعيار BCP-47 (مثل `["en-US"]`). في حال حذفها أو تركها فارغة (`[]`)، يرصد النموذج اللغة تلقائيًا ويتعامل مع الكلام المتعدد اللغات. |
-| `custom_vocabulary` | مصفوفة سلاسل | ما يصل إلى 1,000 عبارة مخصّصة أو اختصار أو اسم علامة تجارية أو اسم علم لتوجيه ميزة "التعرّف على الكلام" |
-| `mode` | سلسلة | وضع "تحويل الصوت إلى نص": `"VERBATIM"` (تلقائي) أو `"SMART"` (تحويل الصوت إلى نص بذكاء). عند ضبطها على `"SMART"`، يزيل النموذج كلمات الحشو وينسّق القوائم ويصحّح الأخطاء في الكلام. |
-| `automatic_activity_detection.disabled` | منطقي | اضبط القيمة على `true` لإيقاف ميزة "رصد النشاط الصوتي" التلقائي وإرسال إشارتَي `activityStart` و`activityEnd` يدويًا. |
+| `language_codes` | String-Array | BCP-47-Sprachcodes (z.B. `["en-US"]`). Wenn dieser Parameter weggelassen oder leer ist (`[]`), erkennt das Modell die Sprache automatisch und verarbeitet mehrsprachige Sprache. |
+| `custom_vocabulary` | String-Array | Bis zu 1.000 benutzerdefinierte Begriffe, Akronyme, Markennamen oder Eigennamen, um die Spracherkennung zu optimieren. |
+| `mode` | String | Transkriptionsmodus: `"VERBATIM"` (Standard) oder `"SMART"` (Smart-Transkription). Wenn diese Option auf `"SMART"` gesetzt ist, entfernt das Modell Füllwörter, formatiert Listen und korrigiert Unflüssigkeiten. |
+| `automatic_activity_detection.disabled` | Boolesch | Wenn Sie `true` festlegen, wird die automatische Erkennung von Sprachaktivitäten deaktiviert und Sie müssen die Signale `activityStart` und `activityEnd` manuell senden. |
 
-### حقول استجابة الخادم
+### Felder für Serverantworten
 
-| الحقل | الوصف |
+| Feld | Beschreibung |
 | --- | --- |
-| `server_content.interim_input_transcription` | فرضية النسخ الجزئي المؤقت ذات وقت الاستجابة المنخفض التي يتم إصدارها باستمرار أثناء تحدث المستخدم بشكل نشط |
-| `server_content.input_transcription` | يتم إصدار نص نهائي وموثوق به عند انتهاء نوبة الكلام. |
+| `server_content.interim_input_transcription` | Hypothese für die vorläufige Teiltranskription mit geringer Latenz, die kontinuierlich ausgegeben wird, während der Nutzer aktiv spricht. |
+| `server_content.input_transcription` | Finalisiertes, autoritatives Eingabetranskript, das ausgegeben wird, wenn ein Sprachabschnitt beendet ist. |
 
-## القيود
+## Beschränkungen
 
-- **مدة الجلسة:** تتيح جلسات "الكتابة المباشرة" البث المتواصل لمدة تصل إلى 10 دقائق.
-- **تحديد هوية المتحدث:** لا تتوفّر ميزة تحديد هوية المتحدث في جلسات البث المباشر. بالنسبة إلى ميزة "تحديد هوية المتحدث"، استخدِم نقطة النهاية غير المتدفقة [تحويل الصوت إلى نص](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar#speaker-diarization).
-- **الطوابع الزمنية على مستوى الكلمات:** لا تتوافق الطوابع الزمنية على مستوى الكلمات مع Live API. تبعث Live API طوابع زمنية على مستوى الجملة (`interim_input_transcription` و`input_transcription`).
-- **المفردات المخصّصة:** يمكنك تقديم ما يصل إلى 1,000 عبارة في `custom_vocabulary`، ولكن عادةً ما يتم تحقيق أفضل النتائج باستخدام ما يصل إلى 100 عبارة.
-- **التوافق مع الأوضاع:** تزيل ميزة "النسخ الذكي" (`"mode": "SMART"`) الكلمات الحشو وتنسّق النص الذي يراعي النية، ولكن لا يمكن دمجها مع التعليقات التوضيحية للكلمات.
+- **Sitzungsdauer**:Livetranskriptionssitzungen unterstützen kontinuierliches Streaming für bis zu 10 Minuten.
+- **Sprecherbestimmung**:Die Sprecherbestimmung wird in Livestreaming-Sitzungen nicht unterstützt. Verwenden Sie für die Sprecherzuordnung den Nicht-Streaming-Endpunkt [Audio-Transkription](https://ai.google.dev/gemini-api/docs/transcribe?hl=de#speaker-diarization).
+- **Zeitstempel auf Wortebene**:Zeitstempel auf Wortebene werden über die Live API nicht unterstützt. Die Live API gibt Zeitstempel auf Äußerungsebene aus (`interim_input_transcription` und `input_transcription`).
+- **Benutzerdefiniertes Vokabular**:Sie können bis zu 1.000 Begriffe in `custom_vocabulary` angeben. Die besten Ergebnisse werden jedoch in der Regel mit bis zu 100 Begriffen erzielt.
+- **Kompatibilität mit Modi**:Bei der intelligenten Transkription (`"mode": "SMART"`) werden Füllwörter entfernt und der Text wird entsprechend der Intention formatiert. Sie kann jedoch nicht mit Wortanmerkungen kombiniert werden.
 
-## الخطوات التالية
+## Nächste Schritte
 
-- يمكنك الاطّلاع على [مستندات "تحويل الصوت إلى نص في Gemini"](https://ai.google.dev/gemini-api/docs/transcribe?hl=ar) للملفات الصوتية غير المتدفقة.
-- اطّلِع على [نظرة عامة على Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar) لبرامج الوكلاء الحوارية الصوتية.
-- يمكنك الاطّلاع على [دليل "الترجمة المباشرة"](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=ar) للحصول على ترجمة فورية للمحادثات الصوتية.
-- راجِع [صفحة الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#gemini-3.5-transcribe-live) لمعرفة أسعار البث المباشر باستخدام Live API.
-- اطّلِع على [دليل إمكانات Live API](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ar).
+- [Dokumentation zu Gemini Transcribe](https://ai.google.dev/gemini-api/docs/transcribe?hl=de) für nicht gestreamte Audiodateien
+- Lesen Sie die [Übersicht über die Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=de) für Konversations-Sprach-Agents.
+- Weitere Informationen zur Echtzeit-Übersetzung von Sprache zu Sprache finden Sie im [Leitfaden zur Live-Übersetzung](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=de).
+- Die Preise für das Streaming über die Live API [findest du auf der Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de#gemini-3.5-transcribe-live).
+- [Leitfaden zu den Funktionen der Live API](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-09-10 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-09-10 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-10 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-10 (UTC)."],[],[]]

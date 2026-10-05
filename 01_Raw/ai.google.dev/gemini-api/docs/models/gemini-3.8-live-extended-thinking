@@ -1,73 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=ar
-fetched_at: 2026-09-28T06:23:45.169783+00:00
-title: "\u202bGemini 3.8 Live Extended Thinking \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=zh-TW
+fetched_at: 2026-10-05T06:44:03.279976+00:00
+title: "Gemini 3.8 Live Extended Thinking \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-إرسال ملاحظات
+提供意見
 
-# ‫Gemini 3.8 Live Extended Thinking
+# Gemini 3.8 Live Extended Thinking
 
-‫Gemini 3.8 Live Extended Thinking هو نموذج صوتي إلى صوتي عالي الاستدلال
-ننصح باستخدامه عندما يكون من الضروري إجراء استدلال أكثر تعمّقًا في الخلفية لحلّ المشاكل المعقّدة والمتعددة الخطوات
-أثناء التفاعلات الصوتية الفورية. تعالج هذه الميزة عمليات الاستدلال في الخلفية واستدعاءات الأدوات غير المتزامنة أثناء بث الردود الصوتية المتواصلة.
+Gemini 3.8 Live Extended Thinking 是高推論能力的語音轉語音模型，建議在即時語音互動期間，需要較高的背景推論能力來解決複雜的多步驟問題時使用。這項功能會在串流處理連續音訊回應時，處理背景推論和非同步工具呼叫。
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=ar)
+[在 Google AI Studio 中試用](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=zh-tw)
 
-## الوثائق
+## 說明文件
 
-يمكنك الانتقال إلى دليل [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar) للاطّلاع على التغطية الكاملة للميزات والإمكانات.
+如要全面瞭解功能，請參閱 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw) 指南。
 
 ## gemini-3.8-live-extended-thinking
 
-| الموقع | الوصف |
+| 屬性 | 說明 |
 | --- | --- |
-| رمز النموذج id\_card | `gemini-3.8-live-extended-thinking` |
-| saveأنواع البيانات المتوافقة | **المدخلات**  النصوص والصور والملفات الصوتية والفيديوهات  **الناتج**  النص والصوت |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  131,072  **الحدّ الأقصى لرموز الناتج المميزة**  65,536 |
-| handymanالإمكانات | **[إنشاء الصوت](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar)**  متاح  **[التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**  غير متاح  **[تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)**  غير متاح  **[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)**  غير متاح  **[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)**  متاح (غير متزامن فقط)  **[استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)**  غير متاح  **[إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)**  غير متاح  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar)**  متاح  **[تحديد المصادر في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)**  متاح  **[المُخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)**  غير متاح  **[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar)**  متاح  **[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)**  غير متاح |
-| speedخيارات الاستهلاك | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**  غير متاح |
-| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - إصدار ثابت: `gemini-3.8-live-extended-thinking` |
-| calendar\_monthآخر تعديل | سبتمبر 2026 |
-| id\_cardبطاقة النموذج | [بطاقة النموذج](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=ar) |
+| id\_card 模型代碼 | `gemini-3.8-live-extended-thinking` |
+| save支援的資料類型 | **輸入裝置**  文字、圖片、音訊、影片  **輸出內容**  文字和音訊 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  131,072  **輸出詞元限制**  65,536 |
+| handyman功能 | **[生成音訊](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)**  支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  不支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  不支援  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  不支援  **[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  支援 (僅限非同步)  **[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)**  不支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  不支援  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw)**  支援  **[以搜尋為基準](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)**  支援  **[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)**  不支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  支援  **[網址內容](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)**  不支援 |
+| speed計費方案 | **[批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  不支援 |
+| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 穩定：`gemini-3.8-live-extended-thinking` |
+| calendar\_month最新更新 | 2026 年 9 月 |
+| id\_card模型資訊卡 | [模型資訊卡](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=zh-tw) |
 
-## الترقية إلى Gemini 3.8 Live Extended Thinking
+## 升級至 Gemini 3.8 Live Extended Thinking
 
-تتيح ميزة "التفكير الموسّع" في Gemini 3.8 Live إجراء عمليات استنتاج في الخلفية أثناء جلسات الصوت المباشرة. عند دمج هذا النموذج، عدِّل إدارة حالة العميل
-للتعامل مع إشارات الاستدلال غير المتزامن:
+Gemini 3.8 Live Extended Thinking 推出即時語音工作階段的背景推論功能。整合這個模型時，請更新用戶端狀態管理，以處理非同步推論信號：
 
-- **بروتوكول الاستدلال غير المتزامن**: عند التفاعل مع نماذج تستخدم الاستدلال غير المتزامن، لن يشير `turnComplete: true` إلى أنّ النموذج غير نشط. قد يواصل الخادم معالجة الاستدلال في الخلفية أو استدعاء الأدوات. يجب أن يواصل العميل الاستماع إلى رسائل الخادم اللاحقة (مثل طلبات الأدوات أو إطارات الصوت) بعد وصول `turnComplete: true`.
-- **المراقبة `interaction_status`**: استخدِم الحقل `interaction_status` في رسائل الخادم الواردة لتحديد حالة الخادم الحالية:
-  - ‫`IN_PROGRESS`: يعالج الخادم حاليًا بيانات أدخلها المستخدم أو ينفّذ عمليات استدلال في الخلفية أو ينتظر ردودًا على طلبات غير متزامنة من الأدوات.
-    قد يتبع ذلك مخرجات إضافية من النموذج أو طلبات إضافية من الأدوات.
-  - ‫`IDLE`: أكمل الخادم جميع عمليات المعالجة والاستدلال واستخدام الأدوات.
-    الجلسة غير نشطة وتنتظر بيانات يدخلها المستخدم.
-- **استدعاء الدوال غير المتزامن**: لا تتوفّر سوى عملية التنفيذ غير المتزامن وغير الحظر (`behavior: NON_BLOCKING`). لا يتوفّر وضع الحظر المتزامن، وسيؤدي استخدامه إلى ظهور خطأ. لا تتوفّر إعدادات جدولة الدوال.
-- **إعدادات التفكير**: اضبط التفكير في الخلفية باستخدام
-  `thinking_config` في إعداداتك (`thinking_level`: `low` أو `medium` أو `high`). يُرجى العِلم أنّ `MINIMAL` غير متاح.
-- **تعديلات على محتوى العميل**: تتوفّر ميزة `send_client_content` طوال دورة حياة الجلسة مع أدوار صريحة (`user` أو `model`). يؤدي ضبط `turn_complete=true` إلى مقاطعة عملية الإنشاء النشطة على الفور.
-- **التحكّم الاستباقي بالصوت**: مفعّل بشكل دائم. يؤدي ضبط `proactive_audio: false`
-  إلى حدوث خطأ.
+- **非同步推論通訊協定**：與使用非同步推論的模型互動時，`turnComplete: true` 不再表示模型處於閒置狀態。伺服器可能會繼續處理背景推論或工具呼叫。在 `turnComplete: true` 抵達後，用戶端必須繼續監聽後續的伺服器訊息 (例如工具呼叫或音訊影格)。
+- **監控 `interaction_status`**：使用傳入伺服器訊息中的 `interaction_status` 欄位，判斷目前的伺服器狀態：
+  - `IN_PROGRESS`：伺服器正在積極處理使用者輸入內容、執行背景推論，或等待非同步工具呼叫的回覆。後續可能會產生其他模型輸出內容或工具呼叫。
+  - `IDLE`：伺服器已完成所有處理、推論和工具呼叫。工作階段處於閒置狀態，等待使用者輸入內容。
+- **非同步函式呼叫**：僅支援非同步非封鎖執行 (`behavior: NON_BLOCKING`)。系統不支援同步封鎖模式，且會傳回嚴重錯誤。不支援函式排程設定。
+- **思考設定**：在設定配置中使用 `thinking_config` 設定背景推理 (`thinking_level`：`low`、`medium` 或 `high`)。請注意，系統不支援 `MINIMAL`。
+- **用戶端內容更新**：在整個工作階段生命週期中，系統都支援 `send_client_content`，並提供明確的角色 (`user` 或 `model`)。
+  設定 `turn_complete=true` 會立即中斷正在進行的生成作業。
+- **主動式音訊**：永久啟用。設定 `proactive_audio: false` 會傳回錯誤。
 
-للاطّلاع على مقارنة بين الميزات في جميع نماذج Live API، راجِع جدول
-[مقارنة النماذج](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ar#model-comparison).
+如要比較所有 Live API 模型的各項功能，請參閱「[模式比較](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-tw#model-comparison)」表格。
 
-إرسال ملاحظات
+提供意見
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-تاريخ التعديل الأخير: 2026-09-17 (حسب التوقيت العالمي المتفَّق عليه)
+上次更新時間：2026-09-17 (世界標準時間)。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+想進一步說明嗎？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-17 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-17 (世界標準時間)。"],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=ko
-fetched_at: 2026-09-28T06:35:28.816373+00:00
+fetched_at: 2026-10-05T06:48:41.755052+00:00
 title: "Gemini API \ud0a4 \uc0ac\uc6a9 \u00a0|\u00a0 Google AI for Developers"
 ---
 

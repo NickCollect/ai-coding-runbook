@@ -1,36 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=he
-fetched_at: 2026-09-28T06:21:40.476118+00:00
-title: "\u05e7\u05e8\u05d9\u05d0\u05d4 \u05dc\u05e4\u05d5\u05e0\u05e7\u05e6\u05d9\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=id
+fetched_at: 2026-10-05T06:34:30.692472+00:00
+title: "Panggilan fungsi dengan Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-שליחת משוב
+Kirim masukan
 
-# קריאה לפונקציות באמצעות Gemini API
+# Panggilan fungsi dengan Gemini API
 
-התכונה 'קריאה לפונקציה' מאפשרת לכם לחבר מודלים לכלים ולממשקי API חיצוניים.
-במקום ליצור תשובות טקסטואליות, המודל קובע מתי לקרוא לפונקציות ספציפיות ומספק את הפרמטרים הנדרשים לביצוע פעולות בעולם האמיתי.
-כך המודל יכול לשמש גשר בין שפה טבעית לבין פעולות ונתונים בעולם האמיתי. יש 3 תרחישי שימוש עיקריים לבקשה להפעלת פונקציה:
+Panggilan fungsi memungkinkan Anda menghubungkan model ke alat dan API eksternal.
+Daripada membuat respons teks, model menentukan kapan harus memanggil fungsi tertentu dan memberikan parameter yang diperlukan untuk menjalankan tindakan di dunia nyata.
+Hal ini memungkinkan model bertindak sebagai jembatan antara bahasa alami dan tindakan serta data dunia nyata. Pemanggilan fungsi memiliki 3 kasus penggunaan utama:
 
-- [**ביצוע פעולות:**](#meeting) אינטראקציה עם מערכות חיצוניות באמצעות ממשקי API, כמו קביעת פגישות, יצירת חשבוניות, שליחת אימיילים או שליטה במכשירים חכמים לבית.
-- [**העשרת הידע:**](#weather) גישה למידע ממקורות חיצוניים כמו מסדי נתונים, ממשקי API ומאגרי מידע.
-- [**הרחבת היכולות:**](#chart) אפשר להשתמש בכלים חיצוניים כדי לבצע חישובים ולהרחיב את המגבלות של המודל, למשל באמצעות מחשבון או יצירת תרשימים.
+- [**Mengambil Tindakan:**](#meeting) Berinteraksi dengan sistem eksternal menggunakan API, seperti
+  menjadwalkan janji temu, membuat invoice, mengirim email, atau mengontrol
+  perangkat smart home.
+- [**Augment Knowledge (Meningkatkan Pengetahuan):**](#weather) Mengakses informasi dari sumber eksternal seperti database, API, dan pusat informasi.
+- [**Memperluas Kemampuan:**](#chart) Menggunakan alat eksternal untuk melakukan komputasi dan memperluas batasan model, seperti menggunakan kalkulator atau membuat diagram.
 
-בהמשך מופיעות דוגמאות לתרחישי שימוש כאלה:
+Anda dapat menjelajahi contoh kasus penggunaan ini di bawah:
 
-### קביעת פגישה
+### Jadwalkan Rapat
 
-בדוגמה הזו מוסבר איך להגדיר פונקציה שמתזמנת פגישה עם משתתפים בשעה ספציפית, כדי שהמודל יוכל לנתח בקשות של משתמשים ולהחזיר ארגומנטים מובנים להפעלת פעולות במערכות חיצוניות.
+Contoh ini menunjukkan cara menentukan fungsi yang menjadwalkan rapat dengan peserta pada waktu tertentu, sehingga model dapat mengurai permintaan pengguna dan menampilkan argumen terstruktur untuk memicu tindakan dalam sistem eksternal.
 
 ### Python
 
@@ -279,9 +281,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### קבלת מידע על מזג האוויר
+### Dapatkan Cuaca
 
-בדוגמה הזו מוסבר איך להגדיר פונקציה שמקבלת נתוני טמפרטורה של מיקום מסוים, וכך לאפשר למודל לקרוא לממשקי API חיצוניים כדי לענות על שאילתות שדורשות מידע בזמן אמת או מידע חיצוני.
+Contoh ini menunjukkan cara menentukan fungsi yang mengambil data suhu untuk suatu lokasi, sehingga model dapat memanggil API eksternal untuk menjawab kueri yang memerlukan informasi eksternal atau real-time.
 
 ### Python
 
@@ -497,9 +499,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### יצירת תרשים
+### Buat Diagram
 
-בדוגמה הזו מוגדרת פונקציה שמייצרת תרשים עמודות מנתונים מובְנים. הדוגמה הזו ממחישה איך המודל יכול להשתמש בכלים חיצוניים כדי לבצע חישובים או ליצור נכסים חזותיים:
+Contoh ini menunjukkan cara menentukan fungsi yang menghasilkan diagram batang dari data terstruktur, yang menunjukkan cara model dapat menggunakan alat eksternal untuk melakukan komputasi atau membuat aset visual:
 
 ### Python
 
@@ -734,20 +736,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## איך פועל שימוש בפונקציות
+## Cara kerja pemanggilan fungsi
 
-![סקירה כללית על קריאה להפעלת פונקציות](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=he)
+![ringkasan pemanggilan fungsi](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=id)
 
-השימוש בפונקציות כולל אינטראקציה מובנית בין האפליקציה, המודל ופונקציות חיצוניות:
+Panggilan fungsi melibatkan interaksi terstruktur antara aplikasi, model, dan fungsi eksternal:
 
-1. **הגדרת הצהרת פונקציה:** מגדירים למודל את השם, הפרמטרים והמטרה של הפונקציה.
-2. **קוראים למודל LLM עם הצהרות על פונקציות:** שולחים את הנחיית המשתמש יחד עם ההצהרות על הפונקציות למודל.
-3. **הפעלת קוד הפונקציה (באחריותכם):** המודל *לא* מפעיל את הפונקציה בעצמו. מחלקים את השם ואת הארגומנטים ומבצעים את הפעולה באפליקציה.
-4. **יצירת תשובה ידידותית למשתמש:** שליחת התוצאה בחזרה למודל כדי לקבל תשובה סופית וידידותית למשתמש.
+1. **Tentukan Deklarasi Fungsi:** Tentukan nama, parameter, dan
+   tujuan fungsi ke model.
+2. **Panggil LLM dengan deklarasi fungsi:** Kirim perintah pengguna beserta
+   deklarasi fungsi ke model.
+3. **Jalankan Kode Fungsi (Tanggung Jawab Anda):** Model *tidak*
+   menjalankan fungsi itu sendiri. Ekstrak nama dan argumen, lalu jalankan di
+   aplikasi Anda.
+4. **Buat respons yang mudah dipahami pengguna:** Kirim kembali hasil ke model untuk mendapatkan respons akhir yang mudah dipahami pengguna.
 
-אפשר לחזור על התהליך הזה כמה פעמים. המודל תומך בהפעלת כמה פונקציות בתור אחד ([קריאה להפעלת פונקציות במקביל](#parallel_function_calling)) וברצף ([קריאה להפעלת פונקציות בהרכבה](#compositional_function_calling)).
+Proses ini dapat diulang di beberapa giliran. Model ini mendukung pemanggilan
+beberapa fungsi dalam satu giliran ([pemanggilan fungsi paralel](#parallel_function_calling)) dan secara berurutan ([pemanggilan fungsi komposit](#compositional_function_calling)).
 
-### שלב 1: מגדירים הצהרה על פונקציה
+### Langkah 1: Tentukan deklarasi fungsi
 
 ### Python
 
@@ -884,7 +891,7 @@ func main() {
 }
 ```
 
-### שלב 2: קוראים למודל עם הצהרות על פונקציות
+### Langkah 2: Panggil model dengan deklarasi fungsi
 
 ### Python
 
@@ -1051,7 +1058,7 @@ func main() {
 }
 ```
 
-המודל מחזיר שלב `function_call` עם `type`, `name` ו-`arguments`:
+Model menampilkan langkah `function_call` dengan `type`, `name`, dan `arguments`:
 
 ```
 type='function_call'
@@ -1059,7 +1066,7 @@ name='set_light_values'
 arguments={'color_temp': 'warm', 'brightness': 25}
 ```
 
-### שלב 3: מריצים את הפונקציה
+### Langkah 3: Jalankan fungsi
 
 ### Python
 
@@ -1244,7 +1251,7 @@ func main() {
 }
 ```
 
-### שלב 4: שליחת התוצאה בחזרה למודל
+### Langkah 4: Kirim hasil kembali ke model
 
 ### Python
 
@@ -1476,14 +1483,14 @@ func main() {
 }
 ```
 
-### קריאה להפעלת פונקציות ללא שמירת מצב
+### Pemanggilan fungsi tanpa status
 
-אפשר גם להשתמש בהפעלת פונקציות במצב חסר מצב (stateless) על ידי ניהול היסטוריית השיחות בצד הלקוח והגדרת `store=false`.
+Anda juga dapat menggunakan panggilan fungsi dalam mode tanpa status dengan mengelola histori percakapan di sisi klien dan menyetel `store=false`.
 
-במצב ללא שמירת סטטוס, צריך להעביר את ההיסטוריה המלאה של השיחה בשדה `input` של כל בקשה עוקבת. ההיסטוריה הזו צריכה לכלול:
-‫1. השלב הראשוני `user_input`.
-2. כל השלבים שנוצרו על ידי המודל והוחזרו בתור 1 (כולל השלבים `thought` ו-`function_call`) בדיוק כפי שהתקבלו.
-3. השלב `function_result` שמכיל את הפלט של הפונקציה שהופעלה.
+Dalam mode tanpa status, Anda harus meneruskan histori lengkap percakapan di kolom `input` dari setiap permintaan berikutnya. Histori ini harus mencakup:
+1. Langkah `user_input` awal.
+2. Semua langkah yang dihasilkan model ditampilkan di Turn 1 (termasuk langkah `thought` dan `function_call`) persis seperti yang diterima.
+3. Langkah `function_result` yang berisi output fungsi yang dijalankan.
 
 ### Python
 
@@ -1874,25 +1881,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## הצהרות על פונקציות
+## Deklarasi fungsi
 
-הצהרה על פונקציה מועברת ככלי וכוללת:
+Deklarasi fungsi diteruskan sebagai alat dan mencakup:
 
-- ‫`type` (מחרוזת): צריך להיות `"function"` עבור פונקציות בהתאמה אישית.
-- ‫`name` (מחרוזת): שם ייחודי של הפונקציה (אפשר להשתמש בקו תחתון או ב-camelCase).
-- ‫`description` (string): הסבר ברור על מטרת הפונקציה.
-- ‫`parameters` (object): פרמטרי הקלט שהפונקציה מצפה לקבל.
-  - ‫`type` (string): סוג הנתונים הכולל, כמו `object`.
-  - ‫`properties` (object): פרמטרים נפרדים עם סוג ותיאור.
-  - ‫`required` (מערך): שמות פרמטרים שהם חובה.
+- `type` (string): Harus berupa `"function"` untuk fungsi kustom.
+- `name` (string): Nama fungsi unik (gunakan garis bawah atau camelCase).
+- `description` (string): Penjelasan yang jelas tentang tujuan fungsi.
+- `parameters` (objek): Parameter input yang diharapkan fungsi.
+  - `type` (string): Jenis data keseluruhan, seperti `object`.
+  - `properties` (objek): Parameter individual dengan jenis dan deskripsi.
+  - `required` (array): Nama parameter wajib.
 
-## בקשה להפעלת פונקציה עם מודלים של חשיבה
+## Panggilan fungsi dengan model penalaran
 
-מודלים מסדרת Gemini 3 משתמשים בתהליך פנימי של ["חשיבה"](https://ai.google.dev/gemini-api/docs/thinking?hl=he) שמשפר את השימוש בפונקציות. ערכות ה-SDK מטפלות אוטומטית ב[חתימות מחשבה](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=he) בשבילכם.
+Model seri Gemini 3 menggunakan proses ["pemikiran"](https://ai.google.dev/gemini-api/docs/thinking?hl=id) internal yang meningkatkan kualitas panggilan fungsi. SDK akan otomatis menangani [tanda tangan pikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk Anda.
 
-## קריאה להפעלת פונקציות במקביל
+## Pemanggilan fungsi paralel
 
-הפעלת כמה פונקציות בבת אחת כשהן בלתי תלויות:
+Panggil beberapa fungsi sekaligus jika fungsi tersebut independen:
 
 ### Python
 
@@ -2164,9 +2171,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## קריאה להפעלת פונקציות בהרכבה
+## Panggilan fungsi komposit
 
-אפשר לשרשר כמה קריאות לפונקציות כדי לבצע בקשות מורכבות (למשל, קודם לקבל את המיקום ואז לקבל את נתוני מזג האוויר במיקום הזה).
+Rangkai beberapa panggilan fungsi untuk permintaan yang kompleks (misalnya, dapatkan lokasi terlebih dahulu, lalu dapatkan cuaca untuk lokasi tersebut).
 
 ### Python
 
@@ -2490,14 +2497,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## מצבים של בקשה להפעלת פונקציה
+## Mode panggilan fungsi
 
-הגדרת האופן שבו המודל משתמש בכלים באמצעות `tool_choice` ב-`generation_config`:
+Mengontrol cara model menggunakan alat menggunakan `tool_choice` di `generation_config`:
 
-- ‫`auto` (ברירת מחדל): המודל מחליט אם להפעיל פונקציה או להגיב ישירות.
-- ‫`any`: המודל מוגבל כך שתמיד יחזה קריאה לפונקציה.
-- ‫`none`: המודל לא יכול לבצע קריאות לפונקציות.
-- ‫`validated`: המודל מוודא שהפונקציה תואמת לסכימה.
+- `auto` (Default): Model memutuskan apakah akan memanggil fungsi atau merespons secara langsung.
+- `any`: Model dibatasi untuk selalu memprediksi panggilan fungsi.
+- `none`: Model dilarang melakukan panggilan fungsi.
+- `validated`: Model memastikan kepatuhan skema fungsi.
 
 ### Python
 
@@ -2604,10 +2611,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## שימוש במולטיטול
+## Penggunaan alat serbaguna
 
-אפשר להפעיל כמה כלים ולשלב בין כלים מובנים לבין קריאות לפונקציות באותה בקשה. מודלים של Gemini 3 יכולים לשלב כלים מובנים עם קריאה לפונקציות (function calling) מחוץ לקופסה באינטראקציות. העברת `previous_interaction_id`
-מפיצה באופן אוטומטי את ההקשר של הכלי המובנה.
+Anda dapat mengaktifkan beberapa alat, menggabungkan alat bawaan dengan panggilan fungsi dalam
+permintaan yang sama. Model Gemini 3 dapat menggabungkan alat bawaan dengan panggilan fungsi secara langsung di Interaksi. Meneruskan `previous_interaction_id`
+secara otomatis menyebarkan konteks alat bawaan.
 
 ### Python
 
@@ -2968,13 +2976,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## תשובות של פונקציות מולטי-מודאליות
+## Respons fungsi multimodal
 
-במודלים מסדרת Gemini 3, אפשר לכלול תוכן מולטימודאלי בחלקים של תגובת הפונקציה ששולחים למודל. המודל יכול לעבד את התוכן הרב-מודאלי הזה בתור הבא כדי לספק תשובה מושכלת יותר.
+Untuk model seri Gemini 3, Anda dapat menyertakan konten multimodal di
+bagian respons fungsi yang Anda kirim ke model. Model dapat memproses konten multimodal ini pada giliran berikutnya untuk menghasilkan respons yang lebih informatif.
 
-כדי לכלול נתונים מרובי-אופנים בתשובה של פונקציה, צריך לכלול אותם כאחד או יותר בלוקים של תוכן בשדה `result` של שלב `function_result`. בכל בלוק תוכן צריך לציין את `type` (למשל, `"text"`, ‏ `"image"`).
+Untuk menyertakan data multimodal dalam respons fungsi, sertakan sebagai satu atau beberapa blok konten di kolom `result` pada langkah `function_result`. Setiap blok konten harus menentukan `type` (misalnya, `"text"`, `"image"`).
 
-בדוגמה הבאה אפשר לראות איך לשלוח בחזרה למודל בתגובה לפונקציה נתונים של תמונה באינטראקציה:
+Contoh berikut menunjukkan cara mengirim respons fungsi yang berisi data gambar kembali ke model dalam interaksi:
 
 ### Python
 
@@ -3249,28 +3258,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## בקשה להפעלת פונקציה עם פלט מובנה
+## Pemanggilan fungsi dengan Output terstruktur
 
-במודלים מסדרת Gemini 3, אפשר לשלב קריאה לפונקציה עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כדי לקבל תשובות בפורמט עקבי.
+Untuk model seri Gemini 3, gabungkan panggilan fungsi dengan
+[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) untuk
+respons yang diformat secara konsisten.
 
-## ‫MCP (Model Context Protocol) מרוחק
+## MCP (Model Context Protocol) Jarak Jauh
 
-‫Interactions API תומך בחיבור לשרתי MCP מרוחקים כדי לתת למודל גישה לכלים ולשירותים חיצוניים. אתם מציינים את השרת `name` ואת `url` בהגדרות של הכלי.
+Interactions API mendukung koneksi ke server MCP jarak jauh untuk memberikan akses model ke alat dan layanan eksternal. Anda memberikan server `name` dan `url` dalam konfigurasi alat.
 
-כשמשתמשים ב-Remote MCP, חשוב לשים לב למגבלות הבאות:
+Saat menggunakan MCP Jarak Jauh, perhatikan batasan berikut:
 
-- **סוגי שרתים**: שרת MCP מרוחק פועל רק עם שרתי HTTP שניתן להזרים מהם. אין תמיכה בשרתי SSE (אירועים שנשלחים מהשרת).
-- **שמות**: שמות של שרתי MCP לא יכולים לכלול את התו `-`. במקום זאת, צריך להשתמש בשמות השרתים `snake_case`.
+- **Jenis server**: MCP jarak jauh hanya berfungsi dengan server HTTP yang dapat di-streaming. Server SSE (Server-Sent Events) tidak didukung.
+- **Penamaan**: Nama server MCP tidak boleh menyertakan karakter `-`. Sebagai gantinya, gunakan nama server `snake_case`.
 
-| שדה | סוג | נדרש | תיאור |
+| Kolom | Jenis | Wajib diisi | Deskripsi |
 | --- | --- | --- | --- |
-| `type` | `string` | כן | חייב להיות `"mcp_server"`. |
-| `name` | `string` | לא | השם המוצג של שרת ה-MCP. |
-| `url` | `string` | לא | כתובת ה-URL המלאה של נקודת הקצה של שרת ה-MCP. |
-| `headers` | `object` | לא | צמדי מפתח/ערך שנשלחים ככותרות HTTP עם כל בקשה לשרת (לדוגמה, אסימוני אימות). |
-| `allowed_tools` | `array` | לא | הגבלת הכלים בשרת שהסוכן יכול להשתמש בהם. |
+| `type` | `string` | Ya | Harus berupa `"mcp_server"`. |
+| `name` | `string` | Tidak | Nama tampilan untuk server MCP. |
+| `url` | `string` | Tidak | URL lengkap untuk endpoint server MCP. |
+| `headers` | `object` | Tidak | Pasangan nilai kunci yang dikirim sebagai header HTTP dengan setiap permintaan ke server (misalnya, token autentikasi). |
+| `allowed_tools` | `array` | Tidak | Membatasi alat dari server yang dapat dipanggil oleh agen. |
 
-### דוגמה
+### Contoh
 
 ### Python
 
@@ -3403,9 +3414,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## העברת קריאות לכלי בסטרימינג
+## Panggilan alat streaming
 
-כשמשתמשים בכלים עם סטרימינג, המודל יוצר קריאות לפונקציות כרצף של אירועי `step.delta` בסטרים. אפשר להזרים ארגומנטים של כלים כארגומנטים חלקיים באמצעות `arguments`. כדי להפעיל את קריאות הכלים, צריך לצבור את ערכי הדלתא האלה כדי לשחזר את קריאות הכלים המלאות.
+Saat menggunakan alat dengan streaming, model menghasilkan panggilan fungsi sebagai
+urutan peristiwa `step.delta` di stream. Argumen alat dapat di-streaming
+sebagai argumen parsial menggunakan `arguments`. Anda harus menggabungkan delta ini untuk merekonstruksi panggilan alat lengkap sebelum mengeksekusinya.
 
 ### Python
 
@@ -3782,42 +3795,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## שיטות מומלצות
+## Praktik terbaik
 
-- **תיאורים של פונקציות ופרמטרים:** התיאורים צריכים להיות ברורים וספציפיים.
-- **שמות:** צריך להשתמש בשמות תיאוריים ללא רווחים או תווים מיוחדים.
-- **הקלדה חזקה:** שימוש בסוגים ספציפיים (מספר שלם, מחרוזת, enum).
-- **בחירת כלים:** כדאי להגדיר את האפשרות 'פעיל' ל-10 עד 20 כלים לכל היותר.
-- **הנדסת הנחיות:** מספקים הקשר והוראות.
-- **אימות:** אימות של קריאות לפונקציות לפני ההפעלה.
-- **טיפול בשגיאות:** צריך להטמיע טיפול בשגיאות בצורה חזקה.
-- **אבטחה:** השתמשו באימות מתאים לממשקי API חיצוניים.
+- **Deskripsi Fungsi dan Parameter:** Harus jelas dan spesifik.
+- **Penamaan:** Gunakan nama deskriptif tanpa spasi atau karakter khusus.
+- **Pengetikan Kuat:** Gunakan jenis tertentu (integer, string, enum).
+- **Pemilihan Alat:** Tetapkan alat aktif maksimal 10-20.
+- **Rekayasa Perintah:** Berikan konteks dan petunjuk.
+- **Validasi:** Validasi panggilan fungsi sebelum dieksekusi.
+- **Penanganan Error:** Terapkan penanganan error yang andal.
+- **Keamanan:** Gunakan autentikasi yang sesuai untuk API eksternal.
 
-## פתרונות עקיפים לדרישות הטקסט של הכלי
+## Solusi untuk persyaratan teks sebelum alat
 
-**בעיה:** אם ההנחיה שלכם מחייבת את המודל להפיק טקסט מובנה (XML,‏ YAML,‏ JSON וכו') (לדוגמה, `<UPDATE>...</UPDATE>`) מיד לפני ביצוע קריאה לכלי, יכול להיות שהקריאה לכלי תיכשל מדי פעם עם `Malformed_Function_Call`.
+**Masalah:** Jika perintah Anda mengharuskan model menghasilkan teks terstruktur (XML, YAML, JSON, dll.) (misalnya, `<UPDATE>...</UPDATE>`) tepat sebelum melakukan panggilan alat, panggilan alat terkadang dapat gagal dengan `Malformed_Function_Call`.
 
-**פתרונות:** הפתרונות הבאים יעזרו לכם לפתור את הבעיה:
+**Solusi:** Solusi berikut dapat mengatasi masalah ini:
 
-- **מומלץ:** מנחים את המודל להוסיף את ההערות שלו לפני השימוש בכלי בתוך קריאה ייעודית לפונקציה `update()` במקום בטקסט גולמי (פרטים בהמשך).
-- מנחים את המודל לכתוב הערות ככותרות Markdown ‏ (`# UPDATE`, `## PLAN`) במקום כטקסט מובנה.
-- אל תדרשו מהמודל להפיק טקסט לפני קריאות לכלים.
+- **DISARANKAN:** Beri petunjuk kepada model untuk menempatkan catatan pra-alatnya di dalam panggilan fungsi `update()` khusus, bukan teks mentah (detail di bawah).
+- Instruksikan model untuk menulis catatan sebagai header Markdown (`# UPDATE`, `## PLAN`) dan bukan teks terstruktur.
+- Jangan mewajibkan model untuk menampilkan teks sebelum panggilan alat.
 
-### פתרון עדיף: עוטפים את ההערות לעבודה בקריאה ייעודית לפונקציה
+### Solusi yang lebih disukai: Gabungkan catatan kerja dalam panggilan fungsi khusus
 
-במקום ההוראה המקורית:
+Daripada petunjuk asli:
 
 ```
 Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
 ```
 
-משתמשים בהוראה המעודכנת הזו:
+Gunakan petunjuk yang diperbarui ini:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-צריך לעדכן את כל ההפניות לפורמט ה-XML הישן של `<UPDATE>` בבקשת הלקוח. אחר כך מוסיפים את הצהרת הפונקציה המתאימה לפונקציית העדכון:
+Perbarui semua referensi ke format XML `<UPDATE>` lama dalam permintaan pelanggan. Kemudian, tambahkan deklarasi fungsi yang sesuai untuk fungsi update:
 
 ```
 {
@@ -3853,20 +3866,20 @@ Before calling any other tool, in every response you MUST first call `update` wi
 }
 ```
 
-לאחר מכן, המודל יבצע שתי קריאות באותו השלב: קריאת `update()` שמחליפה את ה-XML המובנה, וקריאת הפונקציה בפועל שהוא רוצה לבצע.
+Kemudian, model akan melakukan dua panggilan dalam langkah yang sama: panggilan `update()` yang menggantikan XML terstruktur, dan panggilan fungsi sebenarnya yang ingin dilakukan.
 
-## הערות ומגבלות
+## Catatan dan batasan
 
-- יש תמיכה רק ב[קבוצת משנה של סכימת OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=he#FunctionDeclaration).
-- במצב `any`, יכול להיות שה-API ידחה סכימות גדולות מאוד או סכימות עם קינון עמוק.
-- יש מגבלה על סוגי הפרמטרים הנתמכים ב-Python.
+- Hanya [subset skema OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=id#FunctionDeclaration) yang didukung.
+- Untuk mode `any`, API dapat menolak skema yang sangat besar atau bertingkat dalam.
+- Jenis parameter yang didukung di Python terbatas.
 
-שליחת משוב
+Kirim masukan
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-עדכון אחרון: 2026-09-24 (שעון UTC).
+Terakhir diperbarui pada 2026-09-24 UTC.
 
-רוצה לתת לנו משוב?
+Ada masukan untuk kami?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]

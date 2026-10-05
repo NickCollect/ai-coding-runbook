@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=he
-fetched_at: 2026-09-28T06:15:57.694502+00:00
-title: "\u05d7\u05d9\u05e4\u05d5\u05e9 \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-search?hl=zh-CN
+fetched_at: 2026-10-05T06:36:12.863080+00:00
+title: "\u6587\u4ef6\u641c\u7d22 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-שליחת משוב
+发送反馈
 
-# חיפוש קבצים
+# 文件搜索
 
-‫Gemini API מאפשר יצירה משולבת-אחזור (RAG) באמצעות הכלי File Search. התכונה 'חיפוש קבצים' מייבאת את הנתונים, מחלקת אותם לחלקים ויוצרת אינדקס כדי לאפשר שליפה מהירה של מידע רלוונטי על סמך הנחיה שסופקה. המידע הזה משמש כהקשר למודל, וכך הוא יכול לספק תשובות מדויקות ורלוונטיות יותר. חיפוש קבצים יכול גם לספק יכולות מולטי-מודאליות עם הטמעות טקסט שנתמכות על ידי `gemini-embedding-001`, והטמעות תמונות/מולטי-מודאליות שנתמכות על ידי `gemini-embedding-2`.
+Gemini API 通过文件搜索工具实现检索增强生成 ("RAG")。文件搜索会导入、分块和索引您的数据，以便根据提供的提示快速检索相关信息。然后，将检索到的信息用作模型的上下文，以便模型提供更准确且更相关的回答。文件搜索还能够提供多模态功能，其中文本嵌入由 `gemini-embedding-001` 提供支持，图片/多模态嵌入由 `gemini-embedding-2` 提供支持。
 
-אחסון קבצים ויצירת הטמעה בזמן השאילתה הם בחינם, ותשלמו רק על יצירת הטמעות כשמבצעים אינדוקס לקבצים בפעם הראשונה, ועל העלות הרגילה של טוקנים של קלט / פלט במודל Gemini. הפרדיגמה החדשה הזו של חיוב מאפשרת לבנות את הכלי לחיפוש קבצים ולהרחיב אותו בקלות וביעילות מבחינת עלויות. פרטים נוספים מופיעים בקטע [תמחור](#pricing).
+在查询时进行文件存储和生成嵌入内容是免费的，您只需在首次为文件编制索引时支付创建嵌入内容的费用，以及支付正常的 Gemini 模型输入 / 输出 token 费用。这种新的结算模式使得文件搜索工具的构建和扩展更加简单且更具成本效益。如需了解详情，请参阅[价格](#pricing)部分。
 
-## העלאה ישירה למאגר של חיפוש קבצים
+## 直接上传到文件搜索商店
 
-בדוגמה הזו אפשר לראות איך מעלים קובץ ישירות אל [מאגר הקבצים לחיפוש](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore):
+此示例展示了如何直接将文件上传到[文件搜索存储区](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-media.uploadtofilesearchstore)：
 
 ### Python
 
@@ -365,11 +365,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-מידע נוסף זמין במאמרי העזרה של ה-API בנושא [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-media.uploadtofilesearchstore).
+如需了解详情，请参阅 [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-media.uploadtofilesearchstore) 的 API 参考文档。
 
-## ייבוא קבצים
+## 导入文件
 
-לחלופין, אפשר להעלות קובץ קיים ו[לייבא אותו למאגר של חיפוש הקבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile):
+或者，您也可以上传现有文件，然后[将其导入文件搜索存储区](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-filesearchstores.importfile)：
 
 ### Python
 
@@ -675,11 +675,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-מידע נוסף זמין במאמרי העזרה של ה-API בנושא [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#method:-filesearchstores.importfile).
+如需了解详情，请参阅 [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#method:-filesearchstores.importfile) 的 API 参考文档。
 
-## הגדרות חלוקה לחלקים
+## 分块配置
 
-כשמייבאים קובץ למאגר חיפוש קבצים, הוא מפורק אוטומטית לחלקים, מוטמע, עובר אינדוקס ועולה למאגר חיפוש הקבצים. אם אתם רוצים שליטה רבה יותר באסטרטגיית חלוקת הטקסט לחלקים, אתם יכולים לציין הגדרה של [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=he#request-body_5) כדי להגדיר מספר מקסימלי של טוקנים לכל חלק ומספר מקסימלי של טוקנים חופפים.
+将文件导入到文件搜索存储区后，系统会自动将其分解为多个块，然后进行嵌入、编入索引并上传到您的文件搜索存储区。如果您需要更精细地控制分块策略，可以指定 [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn#request-body_5) 设置，以设置每个块的令牌数量上限和重叠令牌数量上限。
 
 ### Python
 
@@ -857,37 +857,36 @@ curl "${upload_url}" \
 cat upload_response.json
 ```
 
-כדי להשתמש בחנות שלכם לחיפוש קבצים, מעבירים אותה ככלי לשיטה `interactions.create`, כמו בדוגמאות של [העלאה](#upload) ו[ייבוא](#importing-files).
+如需使用文件搜索存储区，请将其作为工具传递给 `interactions.create` 方法，如[上传](#upload)和[导入](#importing-files)示例所示。
 
-## איך זה עובד
+## 运作方式
 
-חיפוש הקבצים משתמש בטכניקה שנקראת חיפוש סמנטי כדי למצוא מידע שרלוונטי להנחיה של המשתמש. בניגוד לחיפוש רגיל שמבוסס על מילות מפתח, חיפוש סמנטי מבין את המשמעות וההקשר של השאילתה.
+文件搜索功能使用一种称为语义搜索的技术来查找与用户提示相关的信息。与基于标准关键字的搜索不同，语义搜索能够理解查询的含义和上下文。
 
-כשמייבאים קובץ, הוא מומר לייצוגים מספריים שנקראים [הטמעות](https://ai.google.dev/gemini-api/docs/embeddings?hl=he), שמשקפים את המשמעות הסמנטית של התוכן שהועלה. ההטמעות האלה מאוחסנות במסד נתונים ייעודי של חיפוש קבצים.
-כשמבצעים שאילתה, היא מומרת גם להטמעה. לאחר מכן, המערכת מבצעת חיפוש בקובץ כדי למצוא את חלקי המסמך הדומים והרלוונטיים ביותר ממאגר החיפוש בקובץ.
+导入文件时，系统会将其转换为称为[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)的数值表示形式，用于捕捉上传内容的语义。这些嵌入会存储在专门的文件搜索数据库中。
+当您提出查询时，系统也会将其转换为嵌入。然后，系统会执行文件搜索，以从文件搜索存储区中找到最相似且最相关的文档块。
 
-אין אורך חיים (TTL) להטמעות. הן נשמרות עד למחיקה ידנית או עד שהמודל יוצא משימוש. אבל הקבצים נמחקים אחרי 48 שעות.
+嵌入向量没有存留时间 (TTL)；它们会一直留存，直到被手动删除或模型被弃用为止。不过，文件会在 48 小时后删除。
 
-פירוט התהליך לשימוש ב-File Search
-`uploadToFileSearchStore` API:
+下面详细介绍了使用文件搜索 `uploadToFileSearchStore` API 的流程：
 
-1. **יצירת מאגר חיפוש קבצים**: מאגר חיפוש קבצים מכיל את הנתונים המעובדים מהקבצים שלכם. זהו מאגר קבוע של ההטמעות שעליהן יפעל החיפוש הסמנטי.
-2. **העלאת קובץ וייבוא שלו למאגר של חיפוש קבצים**: אפשר להעלות קובץ ולייבא את התוצאות למאגר של חיפוש קבצים בו-זמנית. הפעולה הזו יוצרת אובייקט `File` זמני, שהוא הפניה למסמך הגולמי. הנתונים האלה מחולקים לחלקים, מומרים להטמעות של חיפוש קבצים ומתווספים לאינדקס. האובייקט `File`
-   יימחק אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש הקבצים יישמרו ללא הגבלת זמן עד שתבחרו למחוק אותם.
-3. **שאילתה באמצעות חיפוש קבצים**: לבסוף, משתמשים בכלי `FileSearch` בשיחה עם `generateContent`. בהגדרת הכלי, מציינים `FileSearchRetrievalResource`, שמפנה אל `FileSearchStore` שרוצים לחפש. ההוראה הזו אומרת למודל לבצע חיפוש סמנטי במאגר הספציפי הזה של חיפושי קבצים כדי למצוא מידע רלוונטי שיוכל לשמש בסיס לתשובה.
+1. **创建文件搜索存储区**：文件搜索存储区包含来自文件的处理后数据。它是语义搜索将使用的嵌入的持久性容器。
+2. **上传文件并导入到文件搜索存储区**：同时上传文件并将结果导入到文件搜索存储区。这会创建一个临时 `File` 对象，该对象是对原始文档的引用。然后，该数据会被分块、转换为 File Search 嵌入并编入索引。`File`对象会在 48 小时后被删除，而导入到文件搜索存储区的数据会无限期存储，直到您选择删除为止。
+3. **使用文件搜索进行查询**：最后，您可以在 `generateContent` 调用中使用 `FileSearch` 工具。在工具配置中，您需要指定一个
+   `FileSearchRetrievalResource`，该 `FileSearchStore` 指向您要
+   搜索的。这会指示模型对该特定文件搜索存储区执行语义搜索，以查找相关信息来为回答提供依据。
 
-![תהליך ההוספה לאינדקס והשאילתה בחיפוש הקבצים](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=he)
+![文件搜索的索引编制和查询流程](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=zh-cn)
 
-תהליך ההוספה לאינדקס והשאילתות בחיפוש הקבצים
+文件搜索的索引和查询过程
 
-בתרשים הזה, הקו המקווקו מ*מסמכים* אל *מודל הטמעה* (באמצעות [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)) מייצג את `uploadToFileSearchStore` API (עוקף את *אחסון הקבצים*).
-אחרת, שימוש ב-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=he) כדי ליצור בנפרד ואז לייבא קבצים מעביר את תהליך יצירת האינדקס מ-*Documents* ל-*File storage* ואז ל-*Embedding model*.
+在此图表中，从*文档*到*嵌入模型*（使用 [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)）的虚线表示 `uploadToFileSearchStore` API（绕过*文件存储*）。否则，使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn) 分别创建文件并导入文件会将索引编制流程从*文档*移至*文件存储空间*，然后再移至*嵌入模型*。
 
-## מאגרי חיפוש קבצים
+## 文件搜索存储区
 
-מאגר חיפוש קבצים הוא מאגר להטמעות של המסמכים שלכם. קובצי RAW שהועלו דרך File API נמחקים אחרי 48 שעות, אבל הנתונים שיובאו למאגר של חיפוש קבצים נשמרים ללא הגבלת זמן עד שמחקים אותם באופן ידני. אתם יכולים ליצור כמה מאגרי חיפוש קבצים כדי לארגן את המסמכים שלכם. ‫`FileSearchStore` API מאפשר לכם ליצור, להציג, לקבל ולמחוק כדי לנהל את חנויות החיפוש של הקבצים. שמות המאגרים של חיפוש הקבצים הם בהיקף גלובלי.
+文件搜索存储区是文档嵌入的容器。虽然通过 File API 上传的原始文件会在 48 小时后被删除，但导入到文件搜索存储区的数据会无限期存储，直到您手动将其删除。您可以创建多个文件搜索存储区来整理文档。借助 `FileSearchStore` API，您可以创建、列出、获取和删除文件搜索存储区，从而管理这些存储区。文件搜索存储区名称的范围是全局的。
 
-הנה כמה דוגמאות לניהול מאגרי חיפוש קבצים:
+以下是一些有关如何管理文件搜索商店的示例：
 
 ### Python
 
@@ -1024,9 +1023,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123?key=${GEMINI_API_KEY}"
 ```
 
-## מסמכים בחיפוש קבצים
+## 文件搜索文档
 
-אתם יכולים לנהל מסמכים בודדים במאגרי הקבצים באמצעות [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=he) API כדי `list` כל מסמך במאגר קבצים לחיפוש, `get` מידע על מסמך ו`delete` מסמך לפי שם.
+您可以使用 [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=zh-cn) API 管理文件存储区中的各个文档，以`list` 文件搜索存储区中的每个文档、`get` 有关文档的信息，以及按名称`delete` 文档。
 
 ### Python
 
@@ -1136,9 +1135,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilese
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/myfilesearchstore123/documents/sampletxt123?key=${GEMINI_API_KEY}&force=true"
 ```
 
-## מטא-נתונים של קבצים
+## 文件元数据
 
-אתם יכולים להוסיף מטא-נתונים מותאמים אישית לקבצים כדי לסנן אותם או לספק הקשר נוסף. מטא-נתונים הם קבוצה של צמדי מפתח/ערך.
+您可以为文件添加自定义元数据，以便过滤文件或提供更多背景信息。元数据是一组键值对。
 
 ### Python
 
@@ -1230,7 +1229,7 @@ func main() {
 }
 ```
 
-האפשרות הזו שימושית אם יש לכם כמה מסמכים במאגר של חיפוש קבצים ואתם רוצים לחפש רק בחלק מהם.
+如果您在文件搜索存储区中有多个文档，并且只想搜索其中的一部分，此参数会非常有用。
 
 ### Python
 
@@ -1398,16 +1397,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 ```
 
-הנחיות להטמעה של תחביר מסנן רשימה עבור `metadata_filter` זמינות בכתובת [google.aip.dev/160](https://google.aip.dev/160)
+有关为 `metadata_filter` 实现列表过滤条件语法的指南，请访问 [google.aip.dev/160](https://google.aip.dev/160)
 
-## חיפוש קבצים מרובה מצבים
+## 多模态文件搜索
 
-התכונה 'חיפוש קבצים מולטימודאלי' מאפשרת להטמיע תמונות ולחפש בתוכן שלהן באופן מקורי,
-וכך ליצור אפליקציות RAG מולטימודאליות ועשירות.
+借助多模态文件搜索，您可以原生嵌入和搜索图片，从而实现丰富的多模态 RAG 应用。
 
-### הגדרת מודל ההטמעה
+### 配置嵌入模型
 
-כשיוצרים `FileSearchStore`, צריך להחליף את מודל ברירת המחדל להטמעה של טקסט בלבד במודל multi-modal. משתמשים ב-`models/gemini-embedding-2` כדי לעבד טקסט ותמונות.
+创建 `FileSearchStore` 时，您必须替换默认的纯文本嵌入模型，才能使用多模态模型。使用 `models/gemini-embedding-2` 处理文本和图片。
 
 ### Python
 
@@ -1489,20 +1487,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### העלאת תמונות
+### 上传图片
 
-אחרי שיוצרים את המאגר באמצעות מודל הטמעה מולטימודאלי, אפשר להעלות קבצי תמונות ישירות באמצעות אותם ממשקי API להעלאה שמתוארים במאמרים [העלאה ישירה למאגר של חיפוש קבצים](#upload) או [ייבוא קבצים](#importing-files).
+使用多模态嵌入模型创建存储区后，您可以使用[直接上传到文件搜索存储区](#upload)或[导入文件](#importing-files)中所述的相同上传 API 直接上传图片文件。
 
-**הדרישות לגבי קובץ תמונה:**
+**图片文件要求**：
 
-- קבצי התמונות צריכים להיות ברזולוציה של 4K x 4K פיקסלים לכל היותר.
-- הפורמטים הנתמכים הם PNG ו-JPEG.
+- 图片文件的分辨率不得超过 4K x 4K 像素。
+- 支持的格式包括 PNG、JPEG。
 
-## ציטוטים ביבליוגרפיים
+## 引用
 
-כשמשתמשים בחיפוש קבצים, התשובה של המודל עשויה לכלול ציטוטים שמציינים אילו חלקים מהמסמכים שהועלו שימשו ליצירת התשובה. המידע הזה עוזר בבדיקת עובדות ובאימות.
+使用文件搜索功能时，模型的回答可能包含引用，指明上传的文档中的哪些部分用于生成回答。这有助于进行事实核查和验证。
 
-אפשר לגשת לפרטי הציטוט דרך מאפיין `annotations` בתוך בלוקים של תגובה `content` בשלב `model_output`.
+您可以通过响应的 `model_output` 步骤的 `content` 块中的 `annotations` 属性访问引用信息。
 
 ### Python
 
@@ -1655,12 +1653,11 @@ func main() {
 }
 ```
 
-מידע מפורט על מבנה הציטוטים זמין במאמר [מאמרי העזרה של ה-API לאינטראקציות](https://ai.google.dev/api/interactions-api?hl=he#Resource:FileCitation).
+如需详细了解引用的结构，请参阅 [Interactions API 参考文档](https://ai.google.dev/api/interactions-api?hl=zh-cn#Resource:FileCitation)。
 
-### מספרי דפים
+### 页码
 
-כשמשתמשים בחיפוש קבצים עם מסמכים שיש להם דפים (כמו קובצי PDF), התשובה של המודל עשויה לכלול את מספר הדף שבו נמצא המידע.
-אפשר לגשת למידע הזה דרך מאפיין `page_number` של הערה מסוג `file_citation`.
+如果您使用文件搜索功能搜索包含页面的文档（例如 PDF），模型给出的回答可能会包含找到相关信息的页码。您可以通过 `file_citation` 注解的 `page_number` 属性访问此信息。
 
 ### Python
 
@@ -1833,11 +1830,11 @@ func main() {
 }
 ```
 
-### ציטוטים של מדיה
+### 媒体引用
 
-כשהמודל מתייחס לחלק של תמונה במהלך היצירה, ה-API מחזיר הערה מהסוג `file_citation` בהערות שכוללת `media_id`. אפשר להשתמש במזהה הזה כדי להוריד את נתח התמונה המדויק שהמודל התייחס אליו. הערך הזה `media_id` נשמר בכמה קריאות חיפוש, כך שאפשר לאחזר את אותה תמונה באופן מהימן או לשמור אותה במטמון באמצעות המזהה.
+当模型在生成过程中引用图片块时，API 会在注解中返回类型为 `file_citation` 的注解，其中包含 `media_id`。您可以使用此 ID 下载模型引用的确切图片块。此 `media_id` 在多次搜索调用中保持不变，因此您可以可靠地检索同一图片或使用该 ID 缓存图片。
 
-קטע הקוד הבא הוא דוגמה לשלב של תגובת REST:
+以下代码段是一个 REST 响应步骤示例：
 
 ```
 {
@@ -1858,7 +1855,7 @@ func main() {
 }
 ```
 
-בדוגמאות הקוד הבאות אפשר לראות איך מאחזרים את `media_id` ומורידים את המדיה:
+以下代码段展示了如何检索 `media_id` 和下载媒体：
 
 ### Python
 
@@ -2023,9 +2020,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## מטא-נתונים בהתאמה אישית
+## 自定义元数据
 
-אם הוספתם מטא-נתונים מותאמים אישית לקבצים, תוכלו לגשת אליהם בהערות של תשובת המודל. האפשרות הזו שימושית להעברת הקשר נוסף (כמו כתובות URL, מספרי דפים או מחברים) ממסמכי המקור ללוגיקה של האפליקציה. כל הערת ציטוט מסוג `file_citation` מכילה את המטא-נתונים המותאמים אישית האלה.
+如果您已向文件添加自定义元数据，则可以在模型回答的注释中访问该元数据。这有助于将其他上下文（例如网址、页码或作者）从源文档传递到应用逻辑。每条 `file_citation` 类型的引用注释都包含此自定义元数据。
 
 ### Python
 
@@ -2213,9 +2210,9 @@ func main() {
 }
 ```
 
-## פלט מובנה
+## 结构化输出
 
-החל ממודלים של Gemini 3, אפשר לשלב את הכלי לחיפוש קבצים עם [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
+从 Gemini 3 模型开始，您可以将文件搜索工具与[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)相结合。
 
 ### Python
 
@@ -2439,26 +2436,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## מודלים נתמכים
+## 支持的模型
 
-המודלים הבאים תומכים בחיפוש קבצים:
+以下模型支持文件搜索：
 
-| מודל | חיפוש קבצים |
+| 模型 | 文件搜索 |
 | --- | --- |
-| ‫[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=he) | ✔️ |
-| ‫[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | ✔️ |
-| ‫[Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
-| [תצוגה מקדימה של Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
 
-## סוגי קבצים נתמכים
+## 支持的文件类型
 
-החיפוש בקבצים תומך במגוון רחב של פורמטים של קבצים, שמפורטים בקטעים הבאים.
+文件搜索支持多种文件格式，详见以下各部分。
 
-### סוגי קבצים של אפליקציות
+### 应用文件类型
 
 - `application/dart`
 - `application/ecmascript`
@@ -2491,7 +2488,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `application/xml`
 - `application/zip`
 
-### סוגים של קובצי טקסט
+### 文本文件类型
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -2650,40 +2647,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## מגבלות
+## 限制
 
-- ‫**Live API:** חיפוש קבצים לא נתמך ב-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
-- **אי-תאימות בין כלים:** אי אפשר לשלב בין כלי העיגון המובנים. לדוגמה, אי אפשר להשתמש בחיפוש קבצים בו-זמנית עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) או עם [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he) באותה בקשה.
+- **Live API**：[Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 不支持文件搜索。
+- **工具不兼容**：内置接地工具无法相互结合使用；例如，在同一请求中，文件搜索无法同时与[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)或 [网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)搭配使用。
 
-### מגבלות קצב
+### 速率限制
 
-כדי לשמור על יציבות השירות, יש מגבלות על File Search API:
+为了确保服务稳定性，文件搜索 API 具有以下限制：
 
-- **גודל קובץ מקסימלי / מגבלה לכל מסמך**: 100MB
-- **הגודל הכולל של מאגרי חיפוש הקבצים בפרויקט** (על סמך רמת המשתמש):
-  - **בחינם**: 1GB
-  - **רמה 1**: 10GB
-  - **רמה 2**: 100GB
-  - **רמה 3**: 1TB
-- **המלצה**: כדי להבטיח חביון אופטימלי של אחזור נתונים, כדאי להגביל את הגודל של כל מאגר של חיפוש קבצים ל-20GB.
+- **文件大小上限 / 每个文档的限制**：100 MB
+- **项目文件搜索存储空间的总大小**（取决于用户层级）：
+  - **免费**：1 GB
+  - **第 1 级**：10 GB
+  - **第 2 级**：100 GB
+  - **第 3 级**：1 TB
+- **建议**：将每个文件搜索存储区的大小限制在 20 GB 以下，以确保最佳检索延迟时间。
 
-## תמחור
+## 价格
 
-- החיוב על הטמעות מתבצע בזמן יצירת האינדקס, על סמך [תמחור ההטמעות](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-embedding-2) הקיים.
-- האחסון הוא בחינם.
-- הטמעות של שאילתות בזמן אמת הן בחינם.
-- האסימונים של המסמכים שאוחזרו מחויבים בתור [אסימוני הקשר](https://ai.google.dev/gemini-api/docs/tokens?hl=he) רגילים.
+- 系统会在建立索引时根据现有的[嵌入价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#gemini-embedding-2)向您收取嵌入费用。
+- 存储空间免费。
+- 查询时嵌入是免费的。
+- 检索到的文档 token 将按常规[上下文 token](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) 计费。
 
-## המאמרים הבאים
+## 后续步骤
 
-- אפשר לעיין במאמרי העזרה של ה-API בנושא [מאגרי חיפוש קבצים](https://ai.google.dev/api/file-search/file-search-stores?hl=he) ו[מסמכים](https://ai.google.dev/api/file-search/documents?hl=he) של חיפוש קבצים.
+- 访问 [File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=zh-cn) 和 File Search [Documents](https://ai.google.dev/api/file-search/documents?hl=zh-cn) 的 API 参考文档。
 
-שליחת משוב
+发送反馈
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-עדכון אחרון: 2026-09-24 (שעון UTC).
+最后更新时间 (UTC)：2026-09-24。
 
-רוצה לתת לנו משוב?
+需要向我们提供更多信息？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

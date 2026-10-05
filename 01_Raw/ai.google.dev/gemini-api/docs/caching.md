@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/caching?hl=pl
-fetched_at: 2026-09-28T06:29:59.414504+00:00
+fetched_at: 2026-10-05T06:39:37.159098+00:00
 title: "Buforowanie kontekstu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

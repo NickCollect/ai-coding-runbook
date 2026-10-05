@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/voice-design?hl=zh-TW
-fetched_at: 2026-09-28T06:26:20.012996+00:00
-title: "\u8a9e\u97f3\u8a2d\u8a08 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/voice-design?hl=ja
+fetched_at: 2026-10-05T06:32:12.344322+00:00
+title: "\u97f3\u58f0\u30c7\u30b6\u30a4\u30f3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-提供意見
+フィードバックを送信
 
-# 語音設計
+# 音声デザイン
 
-語音設計功能可讓您使用 Gemini API Voices 端點 (`POST /v1beta/voices`)，根據自然語言描述建立全新的永久語音角色。您不必受限於預先建構的語音或錄製參考音訊，而是可以描述角色的年齡、音色、口音和基本發音方式，並取得可重複使用的 `voice_...` ID，儲存至專案中。
+音声設計では、Gemini API Voices エンドポイント（`POST /v1beta/voices`）を使用して、自然言語の説明から新しい永続的な音声ペルソナを作成できます。事前構築済みの音声や録音された参照音声に限定されるのではなく、キャラクターの年齢、音色、アクセント、ベースラインの配信を説明して、プロジェクトに保存された再利用可能な `voice_...` ID を受け取ることができます。
 
-如要快速設計、試聽及反覆調整自訂語音，請使用 [Google AI Studio](https://aistudio.google.com/generate-speech?hl=zh-tw) 中的互動式**語音設計**工作室。您可以透過文字提示詞生成自訂角色、使用範例指令碼測試角色，並直接將產生的 `voice_...` ID 複製到應用程式程式碼中。
+カスタム音声の設計、オーディション、反復処理を最速で行うには、[Google AI Studio](https://aistudio.google.com/generate-speech?hl=ja) のインタラクティブな**音声設計**スタジオを使用します。テキスト プロンプトからカスタム ペルソナを生成し、サンプル スクリプトでテストして、結果の `voice_...` ID をアプリケーション コードに直接コピーできます。
 
-[在 Google AI Studio 中試用](https://aistudio.google.com/generate-speech?hl=zh-tw)
+[Google AI Studio で試す](https://aistudio.google.com/generate-speech?hl=ja)
 
-[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=zh-tw) (`gemini-3.8-flash-tts`) 和 [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=zh-tw) (`gemini-3.8-flash-lite-tts`) 皆支援語音設計。
+[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ja)（`gemini-3.8-flash-tts`）と [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ja)（`gemini-3.8-flash-lite-tts`）の両方で音声設計がサポートされています。
 
-## 建立設計的聲音
+## デザインされた音声を作成する
 
-使用 Google GenAI SDK (`google-genai` 2.25.0 以上版本 / `@google/genai` 2.24.0 以上版本) 或 REST API，根據文字說明建立自訂語音。對於 `"prompted"` 語音，`voices.create` (`CreateVoice`) 和 `voices.get` (`GetVoice`) 都會傳回僅供輸出的 `sample_audio` 欄位 (`mime_type: "audio/wav"`，採用 Base64 編碼的 `data`)，因此您可以立即試聽生成的語音：
+Google GenAI SDK（`google-genai` 2.25.0 以降 / `@google/genai` 2.24.0 以降）または REST API を使用して、テキストの説明からカスタム音声を作成します。`"prompted"` 音声の場合、`voices.create`（`CreateVoice`）と `voices.get`（`GetVoice`）の両方で出力専用の `sample_audio` フィールド（`mime_type: "audio/wav"`、base64 エンコードされた `data`）が返されるため、生成された音声をすぐに試聴できます。
 
 ### Python
 
@@ -121,16 +121,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }' | tee created_voice.json | jq -r '.sample_audio.data' | base64 --decode > voice_preview.wav
 ```
 
-## 語音設計的運作方式
+## 音声設計の仕組み
 
-1. **建立提示語音：**呼叫 `voices.create` (`POST /v1beta/voices`)
-   搭配 `type="prompted"` 和 `store=True`。
-2. **接收永久 `voice_id` 和 `sample_audio` 預覽：**API 會生成聲音身分，並將其儲存在專案中，然後傳回永久 ID (例如 `voice_abc123...`) 和 `sample_audio` (`mime_type: "audio/wav"`，以 Base64 編碼的 `data`)，其中包含生成的聲音預覽音訊。
-3. **合成語音：**在合成要求中，將 `voice_id` 傳遞至接受語音名稱的任何位置。
+1. **プロンプト付き音声を作成する:** `type="prompted"` と `store=True` を使用して `voices.create`（`POST /v1beta/voices`）を呼び出します。
+2. **永続的な `voice_id` と `sample_audio` のプレビューを受け取る:** API は音声 ID を生成してプロジェクトに保存し、生成された音声のプレビュー音声を含む `sample_audio`（`mime_type: "audio/wav"`、base64 エンコードされた `data`）とともに永続 ID（`voice_abc123...` など）を返します。
+3. **音声を合成する:** 合成リクエストで音声名が受け入れられる場所であれば、どこにでも `voice_id` を渡します。
 
-## 以設計的聲音合成語音
+## 設計した音声で音声を合成する
 
-建立語音後，請將其 `id` (`voice_...`) 傳遞至 Interactions API，以生成語音：
+音声を作成したら、その `id`（`voice_...`）を Interactions API に渡して、音声を生成します。
 
 ### Python
 
@@ -229,13 +228,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-## 管理語音
+## 声を管理する
 
-您隨時可以使用 Voices API 列出、篩選、檢查及刪除儲存的聲音 (如需所有篩選器參數，請參閱「[擴充語音庫和篩選](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw#voice-library)」)。
+Voices API を使用すると、保存した音声をいつでも一覧表示、フィルタ、検査、削除できます（すべてのフィルタ パラメータについては、[拡張音声ライブラリとフィルタリング](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja#voice-library)をご覧ください）。
 
-- **儲存空間限制和存留時間：**有狀態語音 (`store=True`，在提示和複製語音之間共用) 的限制為**每個專案 200 個語音**，且**存留時間為 1 年**。
-- **`sample_audio` 支援情形：** `voices.create()` (`CreateVoice`) 和 `voices.get()` (`GetVoice`) 會為 `"prompted"` 語音填入 `sample_audio` (`mime_type:
-  "audio/wav"`，採用 Base64 編碼的 `data`)。為保持產品資訊輕量化，`voices.list()` (`ListVoices`) 會省略 `sample_audio` (且 `sample_audio` 會針對 `"replicated"` 和 `"prebuilt"` 語音取消設定)。
+- **ストレージの上限と TTL:** ステートフル音声（`store=True`、プロンプト音声と複製音声で共有）には、**プロジェクトあたり 200 音声**の上限と **1 年の TTL**（有効期間）があります。
+- **`sample_audio` の可用性:** `voices.create()`（`CreateVoice`）と `voices.get()`（`GetVoice`）は、`"prompted"` 音声の `sample_audio`（`mime_type:
+  "audio/wav"`、base64 エンコードされた `data`）を設定します。リストを軽量に保つため、`voices.list()`（`ListVoices`）では `sample_audio` が省略されます（`"replicated"` と `"prebuilt"` の音声では `sample_audio` が設定されていません）。
 
 ### Python
 
@@ -301,23 +300,23 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 語音設計的提示最佳做法
+## 音声設計のプロンプト作成のベスト プラクティス
 
-- **將永久性聲音特徵放在 Voice 設計中，而非 `style`：**在 `voices.create` 中建立語音時，定義不可變更的特徵，例如年齡、性別、音色、音質和地域口音。
-- **保留 `speech_metadata.style`，用於表達情緒：**建立自訂聲音後，使用簡短的 `style` 提示 (例如 `"whispered urgently"` 或 `"cheerful and energetic"`) 逐步引導演出，同時保留說話者的核心特徵。
-- **具體簡潔：**清楚的 1 至 2 句描述 (例如「30 多歲的體育播報員，聲音清脆有活力，帶有中西部口音」) 比矛盾或過長的段落，更能產生清晰一致的結果。
+- **永続的な音声特性は `style` ではなく Voice Design に配置する:** `voices.create` で音声を作成するときに、年齢、性別、音色、声の質感、地域アクセントなどの不変の特性を定義します。
+- **状況に応じた感情表現のために `speech_metadata.style` を予約する:** カスタム音声を作成したら、短い `style` プロンプト（`"whispered urgently"` や `"cheerful and energetic"` など）を使用して、話者の核となるアイデンティティを変えることなく、ターンバイターンの演技を指示します。
+- **具体的かつ簡潔に:** 1 ～ 2 文の明確な説明（「30 代のキレのある元気なスポーツ アナウンサーで、中西部のアクセントが少しある」など）は、矛盾した段落や長すぎる段落よりも、より明確で一貫性のある結果を生み出します。
 
-## 後續步驟
+## 次のステップ
 
-- 瞭解如何使用[語音複製](https://ai.google.dev/gemini-api/docs/voice-replication?hl=zh-tw)功能，複製現有音箱的聲音。
-- 如要瞭解回合層級樣式、內嵌標記和多說話者對話，請參閱[文字轉語音指南](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)。
+- 既存のスピーカーの音声を複製する方法については、[ボイス レプリケーション](https://ai.google.dev/gemini-api/docs/voice-replication?hl=ja)をご覧ください。
+- [テキスト読み上げガイド](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)で、ターンレベルのスタイル設定、インライン タグ、複数話者の会話について確認してください。
 
-提供意見
+フィードバックを送信
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-上次更新時間：2026-09-24 (世界標準時間)。
+最終更新日 2026-09-24 UTC。
 
-想進一步說明嗎？
+ご意見をお聞かせください
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

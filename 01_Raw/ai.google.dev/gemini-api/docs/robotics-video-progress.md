@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=pt-BR
-fetched_at: 2026-09-28T06:17:09.189454+00:00
-title: "Compreens\u00e3o do v\u00eddeo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=vi
+fetched_at: 2026-10-05T06:33:49.414064+00:00
+title: "Hi\u1ec3u video \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Envie comentários
+Gửi ý kiến phản hồi
 
-# Compreensão do vídeo
+# Hiểu video
 
-O Gemini Robotics ER 2 pode acompanhar o progresso da tarefa em feeds de vídeo contínuos usando dois recursos:
+Gemini Robotics ER 2 có thể theo dõi tiến trình thực hiện nhiệm vụ từ nguồn cấp dữ liệu video liên tục bằng 2 tính năng:
 
-- Localização de momentos: identifica o carimbo de data/hora exato em que um evento principal ocorre.
-- Classificação de progresso: atribui cada vídeo a um dos cinco intervalos de conclusão (0 a 20%, 20 a 40%, 40 a 60%, 60 a 80%, 80 a 100%).
+- Tìm khoảnh khắc: xác định dấu thời gian chính xác khi một sự kiện quan trọng xảy ra.
+- Phân loại tiến trình: chỉ định mỗi video vào một trong năm nhóm hoàn thành (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
 
-## Localização de momentos
+## Tìm khoảnh khắc
 
-A localização de momentos identifica o frame de vídeo exato em que um evento crítico ocorre, por exemplo, quando um copo está cheio ou um nó é amarrado. Os robôs usam isso para verificar o sucesso, sequenciar etapas e acionar correções.
+Tính năng tìm khoảnh khắc xác định chính xác khung hình video nơi một sự kiện quan trọng xảy ra, chẳng hạn như khi cốc đầy hoặc khi nút thắt được thắt. Robot sử dụng thông tin này để xác minh thành công, các bước theo trình tự và kích hoạt các bước điều chỉnh.
 
-O exemplo de comando a seguir pede ao modelo para identificar o momento de conclusão de uma determinada tarefa em um vídeo:
+Câu lệnh ví dụ sau đây yêu cầu mô hình xác định thời điểm hoàn thành một nhiệm vụ nhất định trong video:
 
 ```
 from google import genai
@@ -57,15 +57,15 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-A seguir, mostramos exemplos de frames de um vídeo de localização de momentos, com o modelo identificando o carimbo de data/hora de conclusão da tarefa:
+Sau đây là các khung hình mẫu trong một video tìm khoảnh khắc, trong đó mô hình xác định dấu thời gian hoàn thành nhiệm vụ:
 
-![Exemplo de frames de vídeo mostrando o resultado da descoberta de momentos com uma sobreposição de carimbo de data/hora](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=pt-br)
+![Ví dụ về các khung hình video cho thấy kết quả tìm kiếm khoảnh khắc kèm theo lớp phủ dấu thời gian](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=vi)
 
-## Classificação de progresso
+## Phân loại tiến độ
 
-A classificação de progresso atribui um vídeo a um dos cinco intervalos de conclusão: 0 a 20%, 20 a 40%, 40 a 60%, 60 a 80% ou 80 a 100%. Isso oferece aos robôs reconhecimento situacional em tempo real para que eles possam ajustar ações ou repetir etapas com falha sem reiniciar todo um fluxo de trabalho.
+Phân loại tiến trình sẽ chỉ định một video vào một trong năm khoảng hoàn thành: 0–20%, 20–40%, 40–60%, 60–80% hoặc 80–100%. Điều này giúp robot nhận biết tình huống theo thời gian thực để chúng có thể điều chỉnh hành động hoặc thử lại các bước không thành công mà không cần khởi động lại toàn bộ quy trình làm việc.
 
-O exemplo de comando a seguir pede ao modelo para classificar o nível de progresso atual de um vídeo:
+Câu lệnh ví dụ sau đây yêu cầu mô hình phân loại cấp độ tiến trình hiện tại trong một video:
 
 ```
 from google import genai
@@ -95,27 +95,26 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-A seguir, mostramos exemplos de frames de um vídeo de classificação de progresso, com o modelo atribuindo um intervalo de progresso:
+Sau đây là các khung hình mẫu trong một video phân loại tiến trình, trong đó mô hình chỉ định một khoảng tiến trình:
 
-![Exemplo de frames de vídeo mostrando a saída da classificação de progresso com um rótulo de intervalo de progresso](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=pt-br)
+![Ví dụ về các khung hình video cho thấy kết quả phân loại tiến trình có nhãn dấu ngoặc tiến trình](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=vi)
 
-## Exemplos
+## Ví dụ
 
-Para exemplos executáveis completos, incluindo o acompanhamento de tarefas de várias etapas, consulte o
-[cookbook de robótica](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Để xem các ví dụ đầy đủ có thể chạy, bao gồm cả tính năng theo dõi tác vụ nhiều bước, hãy xem [Sổ tay về robot học](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## A seguir
+## Bước tiếp theo
 
-- [API Live para robótica](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pt-br): streaming bidirecional em tempo real.
-- [Orquestração de tarefas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pt-br): tarefas de longo prazo com raciocínio espacial.
-- [Visão geral do Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pt-br): comparação e recursos do modelo.
+- [Live API cho robot](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=vi) – truyền trực tuyến hai chiều theo thời gian thực.
+- [Điều phối công việc](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=vi) – công việc dài hạn có khả năng suy luận không gian.
+- [Tổng quan về Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi) – so sánh mô hình và các chức năng.
 
-Envie comentários
+Gửi ý kiến phản hồi
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última atualização 2026-09-08 UTC.
+Cập nhật lần gần đây nhất: 2026-09-08 UTC.
 
-Quer enviar seu feedback?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-08 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-08 UTC."],[],[]]

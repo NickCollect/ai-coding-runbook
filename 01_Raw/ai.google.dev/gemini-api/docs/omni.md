@@ -1,33 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=es-419
-fetched_at: 2026-09-28T06:23:28.184038+00:00
-title: "Genera y edita videos con Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=ar
+fetched_at: 2026-10-05T06:37:25.918668+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u0641\u064a\u062f\u064a\u0648\u0647\u0627\u062a \u0648\u062a\u0639\u062f\u064a\u0644\u0647\u0627 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Enviar comentarios
+إرسال ملاحظات
 
-# Genera y edita videos con Gemini Omni Flash
+# إنشاء الفيديوهات وتعديلها باستخدام Gemini Omni Flash
 
-Gemini Omni Flash (`gemini-omni-1.1-flash`) es un modelo multimodal de alto rendimiento diseñado para la generación y edición de videos de alta velocidad, y el control cinematográfico.
-Gemini Omni se basa en las siguientes capacidades principales que lo distinguen de los modelos de video anteriores:
+‫Gemini Omni Flash (`gemini-omni-1.1-flash`) هو نموذج متعدد الوسائط عالي الأداء مصمّم لإنشاء الفيديوهات وتعديلها والتحكّم بها سينمائيًا بسرعة عالية.
+يستند Gemini Omni إلى الإمكانات الأساسية التالية التي تميّزه عن نماذج الفيديوهات السابقة:
 
-- **Multimodalidad nativa:** Procesa texto, imágenes, audio y video de forma simultánea, lo que te brinda resultados más cohesivos, coherentes y controlables.
-- **Edición conversacional:** Esta función, habilitada por la [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419), te permite mejorar y editar tus videos de forma iterativa a través de conversaciones en lenguaje natural. Describe lo que quieres cambiar y el modelo aplicará la edición y conservará las partes del video que quieras mantener.
-- **Conocimiento del mundo:** Gemini Omni combina la comprensión de la física con el conocimiento de Gemini sobre la historia, la ciencia y el contexto cultural, lo que une la brecha entre el fotorrealismo y la narración significativa.
+- **تعدُّد الوسائط:** يعالج النصوص والصور والمقاطع الصوتية والفيديوهات في الوقت نفسه، ما يمنحك نتائج أكثر تماسكًا واتساقًا وقابلية للتحكّم.
+- **التعديل الحواري:** يتيح لك هذا الخيار، الذي توفّره [واجهة برمجة التطبيقات Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar)، تحسين فيديوهاتك وتعديلها بشكل متكرّر من خلال محادثة باللغة الطبيعية. صِف التغييرات التي تريد إجراءها، وسيُطبّق النموذج التعديل مع الحفاظ على أجزاء الفيديو التي تريد الاحتفاظ بها.
+- **المعرفة بالعالم:** يجمع Gemini Omni بين فهم الفيزياء ومعرفة Gemini بالتاريخ والعلوم والسياق الثقافي، ما يتيح الانتقال من الواقعية الفوتوغرافية إلى السرد القصصي الهادف.
 
-## Generación de texto a video
+## إنشاء فيديو من نص
 
-Generar un video a partir de una instrucción de texto El modelo genera un video con audio basado en tu descripción de texto. Escribe instrucciones con detalles como la descripción de la escena, el movimiento de la cámara, la iluminación y el ambiente para obtener los mejores resultados.
+إنشاء فيديو من طلب نصي ينشئ النموذج فيديو مع محتوى صوتي
+استنادًا إلى الوصف النصي الذي تقدّمه. اكتب طلبات تتضمّن تفاصيل مثل وصف المشهد وحركة الكاميرا والإضاءة والمزاج للحصول على أفضل النتائج.
 
 ### Python
 
@@ -62,7 +63,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -152,12 +153,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Esquema de respuesta de REST
+### مخطط استجابة REST
 
-El campo de conveniencia `interaction.output_video` es **solo para el SDK**.
-Obtén el resultado de video del array `steps` cuando uses la API de REST directamente.
+حقل الراحة `interaction.output_video` هو **حقل خاص بحزمة تطوير البرامج (SDK) فقط**.
+احصل على ناتج الفيديو من مصفوفة `steps` عند استخدام REST API مباشرةً.
 
-**Estructura JSON de REST sin procesar:**
+**بنية JSON REST غير المُعالَجة:**
 
 ```
 {
@@ -182,9 +183,9 @@ Obtén el resultado de video del array `steps` cuando uses la API de REST direct
 }
 ```
 
-### Control de la relación de aspecto
+### التحكّم في نسبة العرض إلى الارتفاع
 
-Configura `aspect_ratio` en `"9:16"` para crear videos verticales. El formato horizontal (16:9) es el predeterminado.
+اضبطوا `aspect_ratio` على `"9:16"` لإنشاء فيديوهات باتجاه عمودي. يكون الوضع الأفقي (16:9) هو الوضع التلقائي.
 
 ### Python
 
@@ -227,7 +228,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -338,16 +339,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Resolución de salida
+### دقة عرض الفيديو
 
-Controla la resolución de salida del video generado con el parámetro `resolution` en `response_format`. La resolución predeterminada es 720p.
+يمكنك التحكّم في درجة دقة الفيديو الذي تم إنشاؤه باستخدام المَعلمة `resolution`
+في `response_format`. درجة الدقة التلقائية هي 720p.
 
-| Valor | Descripción |
+| القيمة | الوصف |
 | --- | --- |
-| `360p` | Resolución de salida de 360p |
-| `720p` | Resolución de salida de 720p (predeterminada) |
-| `1080p` | Salida de 1080p (reescalado) |
-| `4k` | Salida en 4K (reescalada) |
+| `360p` | درجة دقة العرض 360p |
+| `720p` | دقة عرض الفيديو 720p (الإعداد التلقائي) |
+| `1080p` | إخراج بدقة 1080p (محسَّنة) |
+| `4k` | إخراج بدقة 4K (محسّنة) |
 
 ### Python
 
@@ -390,7 +392,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -499,24 +501,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-Tu navegador no admite la etiqueta de video.
+لا يدعم متصفّحك علامة الفيديو.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_misty_mountains_1080p.mp4)
 
-## Generación de video a partir de imágenes
+## إنشاء فيديو من صورة
 
-Puedes proporcionar una imagen de referencia con tu instrucción de texto. Según tu instrucción, el modelo decidirá cómo usar la imagen. Esto es útil para dar vida a las ilustraciones, las fotografías o las tomas de productos.
+يمكنك تقديم صورة مرجعية مع طلبك النصي. استنادًا إلى طلبك، سيقرّر النموذج كيفية استخدام الصورة. هذه الميزة مفيدة لتحويل لقطات المنتجات أو الرسوم التوضيحية أو الصور الفوتوغرافية إلى فيديوهات.
 
-En el siguiente ejemplo, se muestra cómo usar la imagen de referencia de un dibujo de un pez que salta fuera del agua:
+يوضّح المثال التالي كيفية استخدام الصورة المرجعية لرسم سمكة تقفز من الماء:
 
-![Dibujo de un pez saltando del agua](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=es-419)
+![رسم لسمكة تقفز خارج الماء](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=ar)
 
-Con la siguiente instrucción:
+باستخدام الطلب التالي:
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-Generar un video realista del dibujo
+لإنشاء فيديو واقعي للرسمة
 
 ### Python
 
@@ -557,7 +559,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -685,11 +687,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Interpolación del primer y el último fotograma
+### تضمين إطارات بين الإطارين الأول والأخير
 
-Gemini Omni Flash admite la interpolación de video, lo que te permite generar un video que realice una transición fluida entre una imagen inicial (primer fotograma) y una imagen final (último fotograma).
+يتيح Gemini Omni Flash إنشاء فيديوهات تتضمّن استيفاءً للفواصل الزمنية بين اللقطات، ما يسمح لك بإنشاء فيديو ينتقل بسلاسة بين صورة البداية (الإطار الأول) وصورة النهاية (الإطار الأخير).
 
-Proporciona dos imágenes en la lista `input` y describe la transición deseada en tu instrucción. El modelo animará la escena desde el primer fotograma hasta el fotograma final.
+قدِّم صورتَين في قائمة `input` واشرح الانتقال المطلوب في طلبك. سيحرّك النموذج المشهد من الإطار الأول إلى الإطار الأخير.
 
 ### Python
 
@@ -732,7 +734,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -881,13 +883,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-Tu navegador no admite la etiqueta de video.
+لا يدعم متصفّحك علامة الفيديو.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_keyframe_interpolation.mp4)
 
-### Referencia del sujeto
+### معرّف الموضوع
 
-Puedes generar un video que incorpore temas específicos proporcionados como imágenes de referencia.
-Por ejemplo, el siguiente código muestra cómo proporcionar 2 imágenes de un gato y un ovillo de lana para generar un video del gato jugando con la lana.
+يمكنك إنشاء فيديو يتضمّن مواضيع محدّدة مقدَّمة كصور مرجعية.
+على سبيل المثال، يوضّح الرمز التالي كيفية تقديم صورتَين لقطة وخيط
+لإنشاء فيديو للقطة وهي تلعب بالخيط.
 
 ### Python
 
@@ -930,7 +933,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1074,11 +1077,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Parámetro de tareas
+### مَعلمة المهام
 
-Usa el parámetro `task` en `video_config` para especificar de forma explícita el comportamiento deseado. Por ejemplo, si quieres que el modelo genere un video a partir de una imagen, puedes establecer el parámetro en `image_to_video`. Si no se configura, el modelo inferirá lo que quieres a partir de la instrucción.
+استخدِم المَعلمة `task` في `video_config` لتحديد السلوك المطلوب بشكل صريح، مثلاً إذا أردت أن ينشئ النموذج فيديو من صورة، يمكنك ضبط المَعلمة على `image_to_video`. إذا لم يتم ضبط هذه السمة، سيستنتج النموذج ما تريده من الطلب.
 
-Los siguientes son los valores permitidos:
+في ما يلي القيم المسموح بها:
 
 - `text_to_video`
 - `image_to_video`
@@ -1086,7 +1089,8 @@ Los siguientes son los valores permitidos:
 - `edit`
 - `extend`
 
-En el siguiente ejemplo, se muestra cómo configurar esto para el ejemplo de imagen a video que se mostró anteriormente.
+يوضّح المثال التالي كيفية ضبط ذلك على المثال السابق الذي يعرض صورة
+إلى فيديو.
 
 ### Python
 
@@ -1137,7 +1141,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1294,11 +1298,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Edición de video con estado
+## تعديل الفيديوهات مع الحفاظ على السياق
 
-Generar un video y editarlo de forma iterativa con instrucciones adicionales Cada turno se basa en el resultado anterior. El modelo recuerda el contexto del video y aplica los cambios a la vez que conserva los elementos que no mencionaste. Usa `previous_interaction_id` para hacer un seguimiento del historial de conversaciones y el estado del video generado sin volver a subir el video anterior.
+إنشاء فيديو وتعديله بشكل متكرّر باستخدام طلبات متابعة يستند كل رد إلى النتيجة السابقة. يتذكّر النموذج سياق الفيديو، ويطبّق التغييرات التي أجريتها مع الحفاظ على العناصر التي لم تذكرها. استخدِم
+`previous_interaction_id` لتتبُّع سجلّ المحادثات وحالة الفيديو الذي تم إنشاؤه بدون إعادة تحميل الفيديو السابق.
 
-En el siguiente ejemplo, se muestra cómo generar un primer video y, luego, editarlo:
+يوضّح المثال التالي كيفية إنشاء فيديو أولاً ثم تعديله:
 
 ### Python
 
@@ -1346,7 +1351,7 @@ if (res2.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1458,17 +1463,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-Ejemplo de un video inicial:
+مثال على فيديو أولي:
 
-Ejemplo de un video editado:
+مثال على فيديو معدَّل:
 
-Cada turno de la conversación produce un video nuevo. El modelo comprende el contexto de los turnos anteriores, lo que te permite realizar cambios incrementales, como ajustar la iluminación y cambiar los fondos, sin tener que volver a describir toda la escena.
+يؤدي كل رد في المحادثة إلى إنشاء فيديو جديد. يفهم النموذج السياق من المحادثات السابقة، ما يتيح لك إجراء تغييرات تدريجية، مثل تعديل الإضاءة وتبديل الخلفيات، بدون إعادة وصف المشهد بأكمله.
 
-### Edita tus propios videos
+### تعديل فيديوهاتك
 
-Sube tus videos con la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419) para editarlos con Gemini Omni Flash.
+حمِّل فيديوهاتك باستخدام [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar) لتعديلها
+باستخدام Gemini Omni Flash.
 
-En el siguiente ejemplo, se muestra cómo editar el siguiente video original:
+يوضّح المثال التالي كيفية تعديل الفيديو الأصلي التالي:
 
 ### Python
 
@@ -1540,7 +1546,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1717,12 +1723,13 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-Ejemplo de un video editado:
+مثال على فيديو معدَّل:
 
-## Cómo recuperar videos con un URI
+## استرداد الفيديوهات باستخدام معرّف موارد منتظم (URI)
 
-Usa el parámetro `delivery="uri"` en `response_format` para recuperar los videos generados que superen los 4 MB.
-Devuelve un URI alojado en Google que puedes sondear hasta que el video sea `ACTIVE` antes de descargarlo.
+استخدِم المَعلمة `delivery="uri"` في
+`response_format` لاسترداد الفيديوهات التي تم إنشاؤها والتي يزيد حجمها عن 4 ميغابايت.
+تعرض هذه الطريقة معرّف موارد منتظم (URI) مستضافًا على Google يمكنك استخدامه للاستقصاء إلى أن يصبح الفيديو `ACTIVE` قبل تنزيله.
 
 ### Python
 
@@ -1790,7 +1797,7 @@ await ai.files.download({
 console.log("💾 Saved video to output.mp4");
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -1967,7 +1974,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**Estructura JSON de REST sin procesar (URI):**
+**بنية JSON غير مُعالَجة لخدمة REST (معرّف الموارد المنتظم):**
 
 ```
 {
@@ -1992,15 +1999,16 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## Extensión de video
+## إضافة الفيديو
 
-Extiende un video existente generando una continuación fluida al final del clip. En la instrucción, describe cómo quieres que continúe el video, por ejemplo, `"Extend this video"` o `"Continue the scene: the camera pans across the mountains"`.
-El modelo analiza el video de entrada para generar una continuación de entre 3 y 10 segundos.
+توسيع فيديو حالي من خلال إنشاء تكملة سلسة في نهاية المقطع اكتب في طلبك وصفًا لكيفية استكمال أحداث الفيديو، مثلاً
+`"Extend this video"` أو `"Continue the scene: the camera pans across the mountains"`.
+يحلّل النموذج الفيديو المُدخَل لإنشاء فيديو مدّته من 3 إلى 10 ثوانٍ يكمّل أحداث الفيديو الأصلي.
 
-Puedes extender lo siguiente:
+يمكنك تمديد:
 
-- **Videos generados por el modelo (varios turnos)**: Extiende un video generado anteriormente haciendo referencia a su `previous_interaction_id`.
-- **Videos subidos**: Proporciona un archivo de video subido (a través de la API de Files) junto con la instrucción de la extensión.
+- **الفيديوهات التي ينشئها النموذج (محادثة مترابطة)**: يمكنك توسيع فيديو تم إنشاؤه سابقًا من خلال الإشارة إلى `previous_interaction_id`.
+- **الفيديوهات التي تم تحميلها**: قدِّم ملف فيديو تم تحميله (عبر Files API) مع طلب الإضافة.
 
 ### Python
 
@@ -2056,7 +2064,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2181,17 +2189,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-Tu navegador no admite la etiqueta de video.
+لا يدعم متصفّحك علامة الفيديو.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_scene_extension_base.mp4)
 
 [
 
-Tu navegador no admite la etiqueta de video.
+لا يدعم متصفّحك علامة الفيديو.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_scene_extension_extended.mp4)
 
-### Extensión con contenido multimedia de referencia
+### التوسّع باستخدام الوسائط المرجعية
 
-Puedes proporcionar imágenes de referencia en el array `input` junto con tu instrucción para introducir nuevos personajes o elementos en el video extendido:
+يمكنك تقديم صور مرجعية في مصفوفة `input` مع الطلب الخاص بك لتقديم شخصيات أو عناصر جديدة في الفيديو الموسّع:
 
 ### Python
 
@@ -2250,7 +2258,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### Java
+### جافا
 
 ```
 import com.google.genai.Client;
@@ -2394,123 +2402,124 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 
 [
 
-Tu navegador no admite la etiqueta de video.
+لا يدعم متصفّحك علامة الفيديو.
 ](https://storage.googleapis.com/generativeai-downloads/videos/omni_traveler_extension.mp4)
 
-### Lineamientos y restricciones de extensiones
+### القيود والإرشادات المتعلّقة بالإضافات
 
-Ten en cuenta las siguientes reglas y restricciones cuando extiendas videos:
+يُرجى مراعاة القواعد والقيود التالية عند تمديد الفيديوهات:
 
-- **Diálogo hablado en videos subidos**: Actualmente, no puedes extender un video subido en el que alguien está hablando para agregar diálogo adicional (se admite si el personaje permanece en silencio o si la instrucción no agrega diálogo).
-- **Extensión de voz de varios turnos**: Se admite la generación de diálogo o voz hablada cuando se extienden videos generados previamente a través de varios turnos (`previous_interaction_id`).
-- **Solo al final del clip**: La extensión se limita a agregarse al final del video.
-  No puedes agregar contenido al principio ni extender la parte media de un clip.
-- **Límite de duración**: Los videos de entrada para la extensión deben tener una duración de 10 segundos o menos cuando se suben (a menos que se use la función de varios turnos).
-- **Disponibilidad regional**: Por el momento, la extensión de videos subidos no está disponible para los usuarios del Espacio Económico Europeo (EEE), Suiza ni el Reino Unido (la extensión de videos generados por el modelo se admite en todas las regiones disponibles).
+- **المحادثات المنطوقة في الفيديوهات المحمّلة**: لا يمكنك حاليًا إضافة محادثات إضافية إلى فيديو محمّل يتضمّن محادثة منطوقة (يمكنك إجراء ذلك إذا لم يتضمّن الفيديو أي محادثة منطوقة أو إذا لم يضف الطلب محادثة منطوقة).
+- **إضافة صوتية للمحادثة المترابطة**: يمكن إنشاء حوار أو كلام منطوق عند إضافة محتوى إلى فيديوهات تم إنشاؤها سابقًا من خلال محادثة مترابطة (`previous_interaction_id`).
+- **نهاية المقطع فقط**: تقتصر الإضافة على إلحاقها بنهاية الفيديو.
+  لا يمكنك إضافة محتوى في بداية المقطع أو توسيع وسطه.
+- **حدّ المدة**: يجب أن تكون مدة الفيديوهات التي يتم إدخالها لإنشاء الإضافة 10 ثوانٍ أو أقل عند التحميل (إلا إذا كنت تستخدم المحادثة المترابطة).
+- **التوفّر حسب المنطقة**: لا تتوفّر حاليًا ميزة تمديد الفيديوهات التي تم تحميلها للمستخدمين في المنطقة الاقتصادية الأوروبية وسويسرا والمملكة المتحدة (تتوفّر ميزة تمديد الفيديوهات التي أنشأها النموذج في جميع المناطق التي تتوفّر فيها).
 
-## Prácticas recomendadas
+## أفضل الممارسات
 
-- **Usa la entrega de URI para videos grandes:** Para los videos de más de 4 MB (más de 720 p cuando estén disponibles), usa `delivery="uri"` en `response_format` para evitar los límites de tamaño de la carga útil.
-- **Rendimiento optimizado:** Establece `background=false`, `store=false` y `stream=false` para una generación unaria más rápida y síncrona. Ten en cuenta que el parámetro de configuración `store=false` significa que el video generado no se podrá editar en turnos posteriores con `previous_interaction_id`.
-- **Precisión de la instrucción:** Consulta la sección de [orientación sobre instrucciones](#prompt-guide) para obtener más detalles.
+- **استخدام عرض المحتوى عبر معرّف الموارد الموحّد (URI) للفيديوهات الكبيرة:** بالنسبة إلى الفيديوهات التي يزيد حجمها عن 4 ميغابايت (أكبر من 720p عند توفّرها)، استخدِم `delivery="uri"` في `response_format` لتجنُّب حدود حجم الحمولة.
+- **الأداء المحسّن:** اضبط `background=false` و`store=false` و`stream=false` لإنشاء رموز أحادية أسرع ومتزامنة. يُرجى العِلم أنّ ضبط
+  `store=false` يعني أنّه لن يكون بالإمكان تعديل الفيديو الذي تم إنشاؤه في المحادثات اللاحقة باستخدام `previous_interaction_id`.
+- **دقة الطلب:** يُرجى الاطّلاع على قسم [إرشادات الطلب](#prompt-guide) للحصول على التفاصيل.
 
-## Limitaciones
+## القيود
 
-- No se admite la carga ni la edición de imágenes que contengan a menores en el Espacio Económico Europeo, Suiza ni el Reino Unido.
-- No se admite la carga ni la edición de imágenes que contengan personas reconocibles.
-- Por el momento, la edición o extensión de videos subidos no está disponible para los usuarios del Espacio Económico Europeo (EEE), Suiza ni el Reino Unido (se admite la edición o extensión de videos generados por el modelo).
-- Los videos de entrada para la edición y la extensión deben durar 10 segundos o menos cuando se suben (a menos que se extiendan los videos generados por el modelo en varios turnos).
-- La extensión de video se limita a agregar contenido al final de un video. No se admite agregar contenido al principio ni extender la parte media de un clip.
-- No puedes extender un video subido en el que alguien está hablando para agregar diálogo adicional (los personajes pueden permanecer en silencio o se puede usar una extensión de varios turnos con `previous_interaction_id`).
-- No se admite la edición de voz.
-- La carga de referencias de audio no se admite en la versión actual de la API.
-- Las referencias de video funcionan mejor con imágenes de personas. Se ignora el audio de las referencias de video. Las referencias de video admiten un máximo de 3 clips de hasta 3 segundos cada uno.
-- No se admite hacer referencia a varios videos ni razonar sobre ellos. Si intentas usar instrucciones con varios videos, es posible que se degrade el rendimiento del modelo o que se generen resultados inesperados.
-- No se admite el procesamiento aprovisionado.
-- No se admiten instrucciones del sistema, temperatura, `top_p`, secuencias de detención ni instrucciones negativas (puedes incluir tus instrucciones negativas en la instrucción normal, p.ej., "No hagas X").
-- No se admite el uso de videos de YouTube como fuente de medios.
+- لا تتوفّر إمكانية تحميل وتعديل الصور التي تتضمّن قاصرين في المنطقة الاقتصادية الأوروبية وسويسرا والمملكة المتحدة.
+- لا يمكن تحميل وتعديل الصور التي تحتوي على أشخاص معيّنين يمكن التعرّف عليهم.
+- لا تتوفّر حاليًا إمكانية تعديل الفيديوهات التي تم تحميلها أو تمديدها للمستخدمين في المنطقة الاقتصادية الأوروبية وسويسرا والمملكة المتحدة (تتوفّر إمكانية تعديل الفيديوهات التي أنشأها النموذج أو تمديدها).
+- يجب أن تكون مدة الفيديوهات التي يتم إدخالها لتعديلها وتوسيعها 10 ثوانٍ أو أقل عند تحميلها (ما لم يتم توسيع الفيديوهات التي أنشأها النموذج في محادثة مترابطة).
+- يقتصر امتداد الفيديو على الإضافة إلى نهاية الفيديو، ولا يمكن إضافة مقطع في بداية الفيديو أو في منتصفه.
+- لا يمكنك تمديد فيديو تم تحميله يتضمّن شخصًا يتحدث لإضافة حوار إضافي (يمكن أن تبقى الشخصيات صامتة، أو يمكن استخدام ميزة التمديد المتعدد مع `previous_interaction_id`).
+- لا يمكن إجراء تعديل صوتي.
+- لا يتيح الإصدار الحالي من واجهة برمجة التطبيقات تحميل المراجع الصوتية.
+- تعمل المراجع المرئية بشكل أفضل مع الصور المشابهة، ويتم تجاهل أي محتوى صوتي في المرجع المرئي. يمكن أن تتضمّن مراجع الفيديو 3 مقاطع كحدّ أقصى، تصل مدة كل منها إلى 3 ثوانٍ.
+- لا يمكن الإشارة إلى محتوى في فيديوهات متعددة أو تقديم أسباب استنادًا إلى محتوى في فيديوهات متعددة. قد تؤدي محاولة استخدام طلبات متعددة الفيديوهات إلى تدهور أداء النموذج أو ظهور نتائج غير متوقعة.
+- لا تتوفّر ميزة "معدل النقل المحدّد".
+- لا تتوفّر تعليمات النظام ودرجة الحرارة و`top_p` وتسلسلات الإيقاف والطلبات السلبية (يمكنك وضع الطلبات السلبية في الطلب العادي، مثلاً "لا تفعل X").
+- لا يمكن استخدام فيديوهات YouTube كمصدر للوسائط.
 
-## Detalles técnicos
+## التفاصيل الفنية
 
-- Todos los videos generados incluyen marcas de agua de SynthID, que son invisibles para los usuarios, pero se pueden detectar de forma programática para verificar la procedencia.
-- Los tiempos de generación de video varían según la duración, la resolución y la carga actual de la API. Los videos más largos y con mayor resolución tardan más en generarse.
-- Omni aplica filtros de seguridad del contenido tanto a las instrucciones de entrada como a los videos generados (que varían según la región). Se bloquean las instrucciones que incumplen las políticas de uso.
-- El inglés (EN) es totalmente compatible, pero no se evaluaron otros idiomas, por lo que es posible que funcionen, pero los resultados pueden variar.
+- تتضمّن جميع الفيديوهات التي يتم إنشاؤها علامات مائية من SynthID، وهي غير مرئية للمشاهدين ولكن يمكن رصدها آليًا للتحقّق من مصدرها.
+- تختلف أوقات إنشاء الفيديوهات استنادًا إلى المدة ودرجة الدقة وحِمل واجهة برمجة التطبيقات الحالي. يستغرق إنشاء الفيديوهات الأطول والأعلى دقة وقتًا أطول.
+- تطبّق Omni فلاتر أمان المحتوى على طلبات الإدخال والفيديوهات التي يتم إنشاؤها (تختلف حسب المنطقة). يتم حظر الطلبات التي تنتهك سياسات الاستخدام.
+- اللغة الإنجليزية (EN) متوافقة تمامًا، ولكن لم يتم تقييم اللغات الأخرى، لذا قد تعمل ولكن قد تختلف النتائج.
 
-## Guía de instrucciones de Gemini Omni Flash
+## دليل كتابة الطلبات المُوجَّهة إلى Gemini Omni Flash
 
-En esta sección, se incluyen sugerencias y ejemplos sobre cómo escribir instrucciones eficaces para Gemini Omni Flash.
+يتضمّن هذا القسم نصائح وأمثلة حول كيفية توجيه الطلبات إلى Gemini Omni Flash بفعالية.
 
-### Escena única
+### مشهد واحد
 
-De forma predeterminada, Omni Flash intentará crear un video con varias tomas diferentes.
-Intentará crear una narrativa interesante basada en la instrucción.
+سيحاول Omni Flash تلقائيًا إنشاء فيديو يتضمّن بعض اللقطات المختلفة.
+سيحاول إنشاء سرد مثير للاهتمام استنادًا إلى الطلب.
 
-Si necesitas que el video de salida contenga una sola escena, debes indicarlo en la instrucción:
+إذا كنت تريد أن يحتوي الفيديو الناتج على مشهد واحد، عليك تقديم طلب بذلك:
 
-- En una sola escena continua
-- En una sola toma continua
-- Sin cortes de escena
+- في مشهد واحد متواصل
+- في لقطة واحدة متواصلة
+- لا تتوفّر إمكانية قطع المشهد
 
-Por ejemplo:
+على سبيل المثال:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### Cómo quitar elementos no deseados
+### إزالة العناصر غير المرغوب فيها
 
-Si el video generado contiene elementos que no quieres, incluye instrucciones negativas simples para evitarlos:
+إذا كان الفيديو الذي تم إنشاؤه يتضمّن عناصر لا تريدها، أضِف طلبات سلبية بسيطة لتجنُّبها:
 
-- Sin diálogo
-- Sin adornos
-- Sin efectos de sonido adicionales
+- ما مِن حوار
+- بدون تحسينات
+- ما مِن تأثيرات صوتية إضافية
 
-### Instrucciones para la edición
+### طلبات التعديل
 
-Las instrucciones simples funcionan mejor para la edición de video. Las instrucciones demasiado descriptivas pueden generar cambios no deseados.
+تعمل الطلبات البسيطة بشكل أفضل عند تعديل الفيديوهات. يمكن أن تؤدي الطلبات الوصفية المفرطة إلى تغييرات غير مقصودة.
 
-A continuación, se incluyen más ejemplos de instrucciones de edición simples:
+في ما يلي المزيد من الأمثلة على طلبات التعديل البسيطة:
 
-- Convierte este video en anime
-- Ponle un sombrero moderno a esta persona
-- Cambia la iluminación para que sea más dramática
-- Cambia el texto del cartel para que diga "Omni Flash".
+- حوِّل هذا الفيديو إلى أنمي
+- ضَع قبعة عصرية على هذا الشخص
+- غيِّر الإضاءة لتكون أكثر درامية
+- تغيير النص على اللافتة إلى "Omni Flash"
 
-Cuando edites un aspecto específico del video, incluye `"Keep everything else the same"` para mantener la coherencia visual.
+عند تعديل جانب معيّن من الفيديو، أدرِج `"Keep everything else the same"` للحفاظ على التناسق المرئي.
 
-A continuación, se incluyen algunos ejemplos para mostrar cómo aplicar esta técnica:
+في ما يلي بعض الأمثلة لتوضيح كيفية تطبيق هذه التقنية:
 
-- **Evita:** `In the video of the man sitting on the sofa, please add a small
+- **تجنَّب ما يلي:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **Simplificar:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **التبسيط:** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **Evita:** `Please remove the cell phone that the person is holding in
+- **تجنَّب ما يلي:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **Simplificar:** `Make the phone invisible. Keep everything else the
+  - **التبسيط:** `Make the phone invisible. Keep everything else the
     same.`
 
-### Indicaciones de audio
+### طلب المحتوى الصوتي
 
-De forma predeterminada, el modelo intentará generar una pista de audio adecuada para un video. Es posible que esto no siempre sea lo que quieras. Puedes usar la instrucción para describir el tipo de audio que deseas. Esto es especialmente importante si quieres incluir música en tu video:
+سيحاول النموذج تلقائيًا إنشاء مقطع صوتي مناسب لفيديو. قد لا يكون هذا هو ما تريده دائمًا. يمكنك استخدام الطلب لوصف نوع المحتوى الصوتي الذي تريده. هذا مهم بشكل خاص إذا أردت تضمين موسيقى في الفيديو:
 
-- Incluye música de fondo relajante
-- El video tiene una base tecno enérgica
-- El audio es una transmisión de radio de baja calidad que se reproduce en segundo plano y en la que se escucha una canción.
+- تضمين موسيقى هادئة في الخلفية
+- يتضمّن الفيديو موسيقى تكنو صاخبة
+- المقطع الصوتي هو بث إذاعي منخفض الجودة في الخلفية، ويتم فيه تشغيل أغنية
 
-### Tiempos de eventos
+### أحداث التوقيت
 
-Puedes solicitar que sucedan cosas en momentos específicos del video, no se necesita una sintaxis precisa y puedes usar lenguaje natural. Esto es especialmente útil para crear tus propios cortes de escena, ritmos o secuencias de disparos rápidos.
-Consulta los siguientes ejemplos:
+يمكنك طلب تنفيذ إجراءات في أوقات معيّنة من الفيديو، ولا حاجة إلى استخدام بنية دقيقة، بل يمكنك استخدام اللغة الطبيعية. ويفيد ذلك بشكل خاص في إنشاء مقاطع المشاهد الخاصة بك أو الإيقاع أو التسلسلات السريعة.
+اطّلِع على ما يلي للاطّلاع على أمثلة:
 
-- Después de 3 segundos, entra una mujer en escena.
-- A los 5 s, el coro comienza en el audio de fondo.
-- Cada 2 s, se corta a un nuevo fotograma.
-- En una secuencia de disparos rápidos, cada medio segundo (12 fotogramas a 24 FPS), cambia la escena a una nueva ubicación.
+- بعد 3 ثوانٍ، تدخل امرأة إلى المشهد.
+- في الثانية 5، تبدأ اللازمة الموسيقية في الصوت في الخلفية.
+- يتم الانتقال إلى إطار جديد كل ثانيتَين.
+- في تسلسل سريع، غيِّر المشهد إلى موقع جديد كل نصف ثانية (12 لقطة بمعدل 24 لقطة في الثانية).
 
-También puedes usar una sintaxis de código de tiempo:
+يمكنك أيضًا استخدام بنية رمز الوقت:
 
 ```
 [0-3s] A person is walking
@@ -2518,52 +2527,54 @@ También puedes usar una sintaxis de código de tiempo:
 [6-10s] They start running
 ```
 
-### Metainstrucciones
+### Meta prompting
 
-Puedes pedirle a Gemini Omni Flash que preste atención a las cualidades o los principios generales de la generación de videos:
+يمكنك أن تطلب من Gemini Omni Flash الانتباه إلى الصفات العامة أو المبادئ العامة لإنشاء الفيديوهات:
 
-- Ten en cuenta los microdetalles, la expresión y la sincronización para crear una escena muy detallada y enriquecida, pero completamente natural.
-- Sé muy detallado en tus descripciones de personajes y entornos.
-  Aplicar los principios del diseño de vestuario a los personajes Sé muy específico sobre las personas, los elementos y los objetos que aparecen en la escena.
-- Incluye muchos detalles adecuados en los elementos del fondo para que la escena se vea realista y natural.
-- Haz un video de preguntas rápidas que muestre un `[thing]` diferente cada 1 s, con música alegre y texto para etiquetar cada cosa.
+- يجب مراعاة التفاصيل الدقيقة والتعبير والتوقيت لإنشاء مشهد غني بالتفاصيل
+  وطبيعي تمامًا.
+- يجب أن تكون تفاصيل الأوصاف الخاصة بالشخصيات والبيئات دقيقة للغاية.
+  تطبيق مبادئ تصميم الأزياء على الشخصيات يجب أن تكون دقيقًا جدًا بشأن الأشخاص والأشياء والعناصر في المشهد.
+- أضِف الكثير من التفاصيل المناسبة في عناصر الخلفية لجعل المشهد يبدو واقعيًا وطبيعيًا.
+- أنشئ فيديو سريعًا يعرض `[thing]` مختلفًا نادرًا كل ثانية واحدة، مع موسيقى حماسية، وأدرِج نصًا لتسمية الشيء.
 
-### Texto en videos
+### النص في الفيديوهات
 
-Puedes solicitar que se incluya texto en tu video, y Gemini Omni lo renderizará de una manera correcta y legible. Si habrá texto que aparecerá de forma natural en tu video, incluso en los elementos de fondo, puede ser útil definir lo que debería decir.
+يمكنك تقديم طلب يتضمّن نصًا في الفيديو، وسيعرضه Gemini Omni بطريقة صحيحة وقابلة للقراءة. إذا كان الفيديو سيتضمّن نصًا يظهر بشكل طبيعي، حتى في عناصر الخلفية، من المفيد تحديد ما يجب أن يقوله.
 
-- Una palabra a la vez en la pantalla: "¿Sabías que Omni puede generar texto increíble?". Cada palabra aparece durante 1 s con un estilo animado diferente. Sin diálogo.
-- Hay una señal de tránsito que dice: "Esta es una generación de IA de Omni", hay una tienda que dice: "Todo lo que necesitas de la IA" y hay un automóvil con la matrícula "OMNI1.1".
+- كلمة واحدة على الشاشة في كل مرة: "هل، تعلم، أنّ، Omni، يمكنه، إنشاء، نصوص، رائعة؟" تظهر كل كلمة لمدة ثانية واحدة بأسلوب متحرك مختلف. لا يوجد حوار.
+- هناك لوحة إرشادية في الشارع مكتوب عليها: "هذا المحتوى من إنشاء الذكاء الاصطناعي في Omni"، وهناك واجهة متجر مكتوب عليها: "الذكاء الاصطناعي هو كل ما تحتاجه"، وهناك سيارة تحمل لوحة أرقام مكتوب عليها: "OMNI1.1"
 
-### Instrucciones para extender un video
+### طلبات لإطالة مدة فيديو
 
-Con Gemini Omni 1.1 Flash, puedes extender videos con instrucciones como `"Extend this video"` o `"The scene continues"`. Puedes extender los videos en 10 s, hasta una duración total de 40 s.
+باستخدام Gemini Omni 1.1 Flash، يمكنك توسيع الفيديوهات باستخدام طلبات مثل `"Extend this video"` أو `"The scene continues"`. يمكنك تمديد الفيديوهات بمقدار 10 ثوانٍ، وبإجمالي مدة يصل إلى 40 ثانية.
 
-Omni crea una extensión que mantiene la coherencia del video, el movimiento, los personajes y el audio usando los últimos 10 s del video original como contexto. Se editarán algunos de los fotogramas finales del video de entrada para que la transición sea fluida.
+ينشئ Omni إضافة تحافظ على اتّساق الفيديو والحركة والشخصيات والصوت من خلال استخدام آخر 10 ثوانٍ من الفيديو الأصلي كسياق. سيتم تعديل بعض اللقطات الأخيرة في الفيديو المصدر لجعل الانتقال سلسًا.
 
-Cuando extiendas la instrucción, se seguirán aplicando todas las sugerencias de instrucción de Omni de esta guía:
+عند التوسيع، تظل جميع نصائح Omni التالية سارية:
 
-- Describe el audio de tu escena extendida, en especial si necesitas que cambie: `"The music continues into the chorus"`
-- Describe si la escena continúa o si hay un corte a una escena nueva (quizás con los mismos personajes): `"Show the same characters in the next scene"`
-- Incluye imágenes y videos como referencias cuando realices extensiones para mantener la precisión de tus resultados o presentar personajes nuevos: `"The person shown in the reference image enters the scene"`, `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
-- Si usas marcas de tiempo o una sintaxis de código de tiempo, 0 s hace referencia al comienzo de la parte extendida del video. Si extiendes un video de 10 s, el corte de escena en esta instrucción se producirá después de 12 s: `"After 2s cut to a new scene with the same characters"`
+- قدِّم وصفًا للمحتوى الصوتي في المشهد الموسّع، خاصةً إذا كنت بحاجة إلى تغييره: `"The music continues into the chorus"`
+- يجب توضيح ما إذا كان المشهد مستمرًا، أو ما إذا تم الانتقال إلى مشهد جديد (ربما مع الشخصيات نفسها): `"Show the same characters in the next scene"`
+- يمكنك تضمين صور وفيديوهات كمراجع عند توسيع المحادثة للمساعدة في الحفاظ على دقة النتائج أو لتقديم شخصيات جديدة: `"The person shown in the reference image enters the scene"`، `"The dog in the reference video <VIDEO_REF_0> jumps onto the sofa"`
+- في حال استخدام الطوابع الزمنية أو بنية رمز الوقت، يشير 0s إلى بداية الجزء الموسّع من الفيديو. في حال تمديد فيديو مدته 10 ثوانٍ، سيتم قطع المشهد في هذا الطلب بعد 12 ثانية: `"After 2s cut to a new scene with the same characters"`
 
-### Cómo usar etiquetas en instrucciones para establecer roles de imágenes y videos
+### استخدام العلامات في الطلبات لضبط أدوار الصور والفيديوهات
 
-Puedes usar etiquetas para vincular el contenido multimedia subido a roles de generación específicos. Esto te permite especificar si cada imagen o video es un fotograma inicial, un fotograma final o una referencia.
+يمكنك استخدام العلامات لربط الوسائط التي تم تحميلها بأدوار إنشاء محتوى معيّنة. يتيح لك ذلك تحديد ما إذا كانت كل صورة أو فيديو عبارة عن إطار بداية أو إطار نهاية أو مرجع.
 
-#### 1. Etiquetas simples (recomendadas)
+#### 1. علامات بسيطة (يُوصى بها)
 
-En casos simples en los que los roles de los medios son claros a partir de la instrucción, puedes vincular imágenes y videos a roles directamente:
+في الحالات البسيطة التي تكون فيها أدوار الوسائط واضحة من الطلب، يمكنك ربط الصور والفيديوهات بالأدوار مباشرةً:
 
-- **`<FIRST_FRAME>`**: Usa la imagen como el fotograma inicial del video, por ejemplo: `<FIRST_FRAME> a woman is walking`
-- **`<LAST_FRAME>`**: Usa la imagen como el fotograma final del video al que se realizará la transición. Se debe usar con `<FIRST_FRAME>`, por ejemplo: `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: Usa la imagen como referencia, por ejemplo, `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (combina la referencia de estilo de la primera imagen y la referencia de sujeto de la segunda imagen).
-  Las referencias de imágenes comienzan en 0.
-- **`<VIDEO_REF_N>`**: Usa el video como referencia de un personaje o un objeto, por ejemplo, `the person in <VIDEO_REF_0> is playing the violin`. Las referencias de video también comienzan desde 0.
+- استخدِم **`<FIRST_FRAME>`**: لاستخدام الصورة كإطار بدء للفيديو، مثلاً: `<FIRST_FRAME> a woman is walking`
+- ‫**`<LAST_FRAME>`**: استخدام الصورة كإطار نهائي للفيديو للانتقال إليه يجب استخدامها مع `<FIRST_FRAME>`، مثلاً: `<FIRST_FRAME> <LAST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: استخدام الصورة كمرجع، على سبيل المثال: `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (يجمع بين مرجع النمط من الصورة الأولى ومرجع العنصر من الصورة الثانية).
+  تبدأ مراجع الصور من 0.
+- **`<VIDEO_REF_N>`**: استخدام الفيديو كمرجع لشخصية أو كائن، مثلاً:
+  `the person in <VIDEO_REF_0> is playing the violin` تبدأ مراجع الفيديو أيضًا من 0.
 
-El siguiente es un ejemplo con 6 imágenes de referencia:
+في ما يلي مثال على 6 صور مرجعية:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -2571,54 +2582,54 @@ El siguiente es un ejemplo con 6 imágenes de referencia:
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. Cómo declarar fuentes y referencias
+#### 2. تحديد المصادر والمراجع
 
-Para casos más complejos con varias entradas de medios y varios roles, puedes usar etiquetas de prefijo explícitas junto con instrucciones en lenguaje natural. Debes declarar estas fuentes y referencias al comienzo de tu instrucción.
+في الحالات الأكثر تعقيدًا التي تتضمّن وسائط متعددة وأدوارًا متعددة، يمكنك استخدام علامات بادئة صريحة مع تعليمات باللغة الطبيعية. يجب الإفصاح عن هذه المصادر والمراجع في بداية الطلب.
 
-- `[# Sources <FIRST_FRAME>@Image1]` usará la primera imagen como fotograma inicial.
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]` usará la primera imagen como fotograma inicial y la segunda como fotograma final.
-- `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]` usará la primera imagen como el primer y el último fotograma, lo que creará un video en bucle.
-- `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` usará la primera imagen como fotograma inicial y la segunda como referencia.
-- `[# Sources <VIDEO_0>@Video1]` usará el video como fuente principal para editarlo o modificarlo.
-- `[# Sources <PREVIOUS_VIDEO>@Video1]` usará el video del turno anterior para extenderlo.
-- `[# References <IMAGE_REF_0>@Image1]` usará la primera imagen como referencia.
-- `[# References <IMAGE_REF_1>@Image2]` usará la segunda imagen como referencia.
-- `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` usará ambas imágenes como referencias.
-- `[# References <VIDEO_REF_0>@Video1]` usará el primer video como referencia.
-- `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]` usará una imagen y un video como referencia.
+- `[# Sources <FIRST_FRAME>@Image1]` سيتم استخدام الصورة الأولى كإطار البداية.
+- ستستخدم `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image2]` الصورة الأولى كإطار بدء والصورة الثانية كإطار نهائي.
+- ستستخدم أداة `[# Sources <FIRST_FRAME>@Image1 <LAST_FRAME>@Image1]` الصورة الأولى كإطار أول وإطار أخير، ما يؤدي إلى إنشاء فيديو يتكرّر.
+- ستستخدم `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` الصورة الأولى كإطار البداية والصورة الثانية كمرجع.
+- سيتم استخدام الفيديو `[# Sources <VIDEO_0>@Video1]` كمصدر أساسي لتعديله أو تغييره.
+- سيستخدم `[# Sources <PREVIOUS_VIDEO>@Video1]` الفيديو من الجولة السابقة لتمديدها.
+- `[# References <IMAGE_REF_0>@Image1]` سيتم استخدام الصورة الأولى كمرجع.
+- سيستخدم `[# References <IMAGE_REF_1>@Image2]` الصورة الثانية كمرجع.
+- سيستخدم `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` كلتا الصورتين كمرجع.
+- `[# References <VIDEO_REF_0>@Video1]` سيتم استخدام الفيديو الأول كمرجع.
+- ستستخدم `[# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1]` صورة وفيديو كمرجع.
 
-Agrega instrucciones de guía al final de la instrucción:
+أضِف تعليمات توجيهية في نهاية طلبك:
 
-- Para un fotograma de inicio: `"Use this image as the starting frame."`
-- Para un video en bucle a través de fotogramas de inicio y finalización: `"Use this image as the first frame and the last frame."`
-- Para las imágenes de referencia: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
-- En el caso de los videos de referencia, haz lo siguiente: `"Use the given video(s) as references. Do not use them as a source for video editing."`
+- بالنسبة إلى إطار البدء: `"Use this image as the starting frame."`
+- لإنشاء فيديو متكرّر باستخدام إطارات البدء والانتهاء: `"Use this image as the first frame and the last frame."`
+- بالنسبة إلى الصور المرجعية: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- بالنسبة إلى الفيديوهات المرجعية: `"Use the given video(s) as references. Do not use them as a source for video editing."`
 
-Estos son algunos ejemplos de instrucciones con declaraciones de fuente y referencia:
+في ما يلي بعض الأمثلة على الطلبات التي تتضمّن إقرارات بالمصدر والمرجع:
 
-**Fotograma inicial combinado con una imagen de referencia:**
+**الإطار الأوّل مع صورة مرجعية:**
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-**Video de referencia del personaje combinado con una imagen de referencia del objeto:**
+**فيديو مرجعي للشخصية مع صورة مرجعية للكائن:**
 
 ```
 [# References <IMAGE_REF_0>@Image1 <VIDEO_REF_0>@Video1] The woman in <VIDEO_REF_0> is playing the violin shown in <IMAGE_REF_0>. Use Video1 as a character reference and Image1 as an object reference.
 ```
 
-## ¿Qué sigue?
+## الخطوات التالية
 
-- Comienza a usar Gemini Omni Flash experimentando en el [Colab de inicio rápido de Omni](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=es-419).
-- Obtén más información para escribir instrucciones aún mejores con nuestra [Introducción al diseño de instrucciones](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=es-419).
+- ابدأ رحلتك مع Gemini Omni Flash من خلال تجربة [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=ar).
+- تعرَّف على كيفية كتابة طلبات أفضل من خلال [مقدمة حول تصميم الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar).
 
-Enviar comentarios
+إرسال ملاحظات
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última actualización: 2026-09-24 (UTC)
+تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)
 
-¿Quieres brindar más información?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-24 (UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

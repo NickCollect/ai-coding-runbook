@@ -1,56 +1,57 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=pl
-fetched_at: 2026-09-28T06:25:58.492129+00:00
-title: "Biblioteki Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=ar
+fetched_at: 2026-10-05T06:38:52.606032+00:00
+title: "\u0645\u0643\u062a\u0628\u0627\u062a Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
-# Biblioteki Gemini API
+# مكتبات Gemini API
 
-Podczas tworzenia aplikacji za pomocą interfejsu Gemini API zalecamy korzystanie z **pakietu Google GenAI SDK**.
-Są to oficjalne biblioteki gotowe do użycia w środowisku produkcyjnym, które rozwijamy i utrzymujemy w przypadku najpopularniejszych języków. Są one w fazie [ogólnej dostępności](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#new-libraries) i używane w całej naszej oficjalnej
-dokumentacji oraz we wszystkich przykładach.
+عند إنشاء تطبيقات باستخدام Gemini API، ننصحك باستخدام **حزمة تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي**.
+هذه هي المكتبات الرسمية الجاهزة للاستخدام التي نطوّرها ونتولّى صيانتها
+لأكثر اللغات شيوعًا. وهي متاحة [لجميع المستخدمين](https://ai.google.dev/gemini-api/docs/libraries?hl=ar#new-libraries) ويتم استخدامها في جميع مستنداتنا وأمثلتنا الرسمية.
 
-Jeśli dopiero zaczynasz korzystać z interfejsu Gemini API, zapoznaj się z naszym [przewodnikiem dla początkujących](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
+إذا كنت تستخدم Gemini API للمرة الأولى، اتّبِع [دليل البدء](https://ai.google.dev/gemini-api/docs/get-started?hl=ar).
 
-## Obsługa języków i instalacja
+## اللغات المتوافقة والتثبيت
 
-Pakiet Google GenAI SDK jest dostępny w językach Python, JavaScript/TypeScript, Go i Java. Bibliotekę każdego języka możesz zainstalować za pomocą menedżerów pakietów lub odwiedzić repozytoria GitHub, aby uzyskać więcej informacji:
+تتوفّر حزمة تطوير البرامج من Google للذكاء الاصطناعي التوليدي للغات Python وJavaScript/TypeScript وGo وJava. يمكنك تثبيت مكتبة كل لغة باستخدام أدوات إدارة الحِزم،
+أو الانتقال إلى مستودعات GitHub الخاصة بها لمزيد من التفاعل:
 
 ### Python
 
-- Biblioteka: [`google-genai`](https://pypi.org/project/google-genai)
-- Repozytorium GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- Instalacja: `pip install google-genai`
+- المكتبة: [`google-genai`](https://pypi.org/project/google-genai)
+- مستودع GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- التثبيت: `pip install google-genai`
 
 ### JavaScript
 
-- Biblioteka: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- Repozytorium GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- Instalacja: `npm install @google/genai`
+- المكتبة: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- مستودع GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- التثبيت: `npm install @google/genai`
 
 ### Go
 
-- Biblioteka: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- Repozytorium GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- Instalacja: `go get google.golang.org/genai`
+- المكتبة: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- مستودع GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- التثبيت: `go get google.golang.org/genai`
 
-### Java
+### جافا
 
-- Biblioteka: `google-genai`
-- Repozytorium GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- Instalacja: jeśli używasz Maven, dodaj do zależności ten kod:
+- المكتبة: `google-genai`
+- مستودع GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- التثبيت: إذا كنت تستخدم Maven، أضِف ما يلي إلى العناصر التابعة:
 
 ```
 <dependencies>
@@ -62,49 +63,45 @@ Pakiet Google GenAI SDK jest dostępny w językach Python, JavaScript/TypeScript
 </dependencies>
 ```
 
-### C#
+### #C
 
-- Biblioteka: `Google.GenAI`
-- Repozytorium GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- Instalacja: `dotnet add package Google.GenAI`
+- المكتبة: `Google.GenAI`
+- مستودع GitHub‏: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- التثبيت: `dotnet add package Google.GenAI`
 
-## Ogólna dostępność
+## متوفر للجمهور العام
 
-Od maja 2025 r. pakiet Google GenAI SDK jest ogólnie dostępny na wszystkich obsługiwanych platformach i jest zalecaną biblioteką do uzyskiwania dostępu do interfejsu Gemini API.
-Jest stabilny, w pełni obsługiwany w środowisku produkcyjnym i aktywnie utrzymywany.
-Zapewnia dostęp do najnowszych funkcji i najlepszą wydajność podczas pracy z Gemini.
+اعتبارًا من مايو 2025، أصبحت حزمة تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي متاحة للجمهور العام على جميع المنصات المتوافقة، وهي المكتبات المقترَحة للوصول إلى Gemini API.
+وهي مستقرة ومتوافقة تمامًا مع الاستخدام في مرحلة الإنتاج، ويتم صيانتها بشكل نشط.
+تتيح هذه الأجهزة الوصول إلى أحدث الميزات، وتوفّر أفضل أداء عند استخدامها مع Gemini.
 
-Jeśli używasz jednej z naszych starszych bibliotek, zdecydowanie zalecamy przejście na nową wersję, aby uzyskać dostęp do najnowszych funkcji i najlepszą wydajność podczas pracy z Gemini. Więcej informacji znajdziesz w sekcji [Starsze biblioteki](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#previous-sdks).
+إذا كنت تستخدم إحدى مكتباتنا القديمة، ننصحك بشدة بنقل بياناتك حتى تتمكّن من الاستفادة من أحدث الميزات وتحقيق أفضل أداء عند استخدام Gemini. راجِع قسم [المكتبات القديمة](https://ai.google.dev/gemini-api/docs/libraries?hl=ar#previous-sdks) لمزيد من المعلومات.
 
-## Starsze biblioteki i migracja
+## المكتبات القديمة ونقل البيانات
 
-[Jeśli używasz jednej z naszych starszych bibliotek, zalecamy przejście na nowe biblioteki.](https://ai.google.dev/gemini-api/docs/migrate?hl=pl)
+إذا كنت تستخدم إحدى مكتباتنا القديمة، ننصحك [بالانتقال إلى المكتبات الجديدة](https://ai.google.dev/gemini-api/docs/migrate?hl=ar).
 
-Starsze biblioteki nie zapewniają dostępu do najnowszych funkcji (takich jak
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=pl) i [Veo](https://ai.google.dev/gemini-api/docs/video?hl=pl)) i są
-wycofywane z dniem 30 listopada 2025 r.
+لا تتيح المكتبات القديمة الوصول إلى الميزات الحديثة (مثل [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) و[Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar))، وسيتم إيقافها نهائيًا اعتبارًا من 30 تشرين الثاني (نوفمبر) 2025.
 
-Stan obsługi każdej starszej biblioteki jest inny. Szczegółowe informacje znajdziesz w tabeli poniżej:
+تختلف حالة توفّر كل مكتبة قديمة، كما هو موضّح بالتفصيل في الجدول التالي:
 
-| Język | Starsza biblioteka | Stan obsługi | Zalecana biblioteka |
+| اللغة | المكتبة القديمة | حالة الدعم | المكتبة المقترَحة |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | Nie jest aktywnie utrzymywana | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | Nie jest aktywnie utrzymywana | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | Nie jest aktywnie utrzymywana | `google.golang.org/genai` |
-| **Dart i Flutter** | `google_generative_ai` | Nie jest aktywnie utrzymywana | Użyj [Genkit Dart](https://genkit.dev/docs/dart/get-started/) lub [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | Nie jest aktywnie utrzymywana | Użyj [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pl) |
-| **Android** | `generative-ai-android` | Nie jest aktywnie utrzymywana | Użyj [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pl) |
+| **Python** | `google-generativeai` | لم يعُد يتم صيانتها | `google-genai` |
+| **JavaScript/TypeScript** | `@google/generativeai` | لم يعُد يتم صيانتها | `@google/genai` |
+| **Go** | `google.golang.org/generative-ai` | لم يعُد يتم صيانتها | `google.golang.org/genai` |
+| **Dart وFlutter** | `google_generative_ai` | لم يعُد يتم صيانتها | استخدام [Genkit Dart](https://genkit.dev/docs/dart/get-started/) أو [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
+| **Swift** | `generative-ai-swift` | لم يعُد يتم صيانتها | استخدام [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=ar) |
+| **Android** | `generative-ai-android` | لم يعُد يتم صيانتها | استخدام [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=ar) |
 
-**Uwaga dla programistów w Javie:** nie było starszego pakietu SDK Java dostarczonego przez Google dla interfejsu Gemini API, więc nie jest wymagana migracja z poprzedniej biblioteki Google. Możesz
-od razu zacząć korzystać z nowej biblioteki opisanej w
-[sekcji Obsługa języków i instalacja](#install).
+**ملاحظة لمطوّري Java:** لم تتوفّر حزمة SDK قديمة للغة Java من Google لواجهة Gemini API، لذا لا يلزم نقل البيانات من مكتبة Google السابقة. يمكنك البدء مباشرةً باستخدام المكتبة الجديدة في قسم [اللغات المتوافقة والتثبيت](#install).
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-06-22 UTC.
+تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

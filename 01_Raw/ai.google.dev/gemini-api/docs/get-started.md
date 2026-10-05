@@ -1,66 +1,65 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=hi
-fetched_at: 2026-09-28T06:24:43.743020+00:00
-title: "\u0936\u0941\u0930\u0942 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=ja
+fetched_at: 2026-10-05T06:33:05.647408+00:00
+title: "\u30b9\u30bf\u30fc\u30c8 \u30ac\u30a4\u30c9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-सुझाव भेजें
+フィードバックを送信
 
-# शुरू करना
+# スタート ガイド
 
-इस गाइड में, [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) का इस्तेमाल करके, Gemini API को शुरू करने के बारे में बताया गया है. इसमें एक मिनट से भी कम समय में, पहला एपीआई कॉल किया जा सकेगा. साथ ही, टेक्स्ट जनरेट करने, मल्टीमॉडल को समझने, इमेज जनरेट करने, स्ट्रक्चर्ड आउटपुट, टूल, फ़ंक्शन कॉल करने, एजेंट, और बैकग्राउंड में प्रोसेस करने की सुविधा के बारे में जाना जा सकेगा.
+このガイドでは、[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) を使用して Gemini API を使い始める方法について説明します。1 分以内に最初の API 呼び出しを行い、テキスト生成、マルチモーダル理解、画像生成、構造化出力、ツール、関数呼び出し、エージェント、バックグラウンド実行について学習します。
 
-Interactions API, [Python](https://github.com/googleapis/python-genai) और [JavaScript](https://github.com/googleapis/js-genai) SDK के साथ-साथ REST के ज़रिए उपलब्ध है.
+Interactions API は、[Python](https://github.com/googleapis/python-genai) と [JavaScript](https://github.com/googleapis/js-genai) の SDK と REST を介して利用できます。
 
-## 1. एपीआई पासकोड पाना
+## 1. API キーを取得する
 
-Gemini API का इस्तेमाल करने के लिए, आपके पास एक एपीआई पासकोड होना चाहिए. इससे आपके अनुरोधों की पुष्टि की जा सकेगी, सुरक्षा से जुड़ी सीमाओं को लागू किया जा सकेगा, और आपके खाते के इस्तेमाल को ट्रैक किया जा सकेगा.
+Gemini API を使用するには、リクエストの認証、セキュリティの上限の適用、アカウントの使用状況の追跡を行うための API キーが必要です。
 
-- Google AI Studio, नए उपयोगकर्ताओं के लिए प्रोजेक्ट और एपीआई पासकोड अपने-आप बना देता है.
-  इसे [एपीआई पासकोड वाले पेज](https://aistudio.google.com/api-keys?hl=hi) से कॉपी किया जा सकता है.
-- अगर आपको नई कुंजी चाहिए, तो AI Studio में **एपीआई पासकोड बनाएं** पर क्लिक करें. इसके बाद, नई कुंजी-प्रोजेक्ट का जोड़ा जोड़ने के लिए, डायलॉग बॉक्स में दिए गए निर्देशों का पालन करें.
+- Google AI Studio では、新規ユーザー向けにプロジェクトと API キーが自動的に作成されます。[API キーのページ](https://aistudio.google.com/api-keys?hl=ja)からコピーできます。
+- 新しいキーが必要な場合は、AI Studio で [**API キーを作成**] をクリックし、ダイアログに沿って新しいキーとプロジェクトのペアを追加します。
 
-[Gemini API पासकोड बनाना](https://aistudio.google.com/apikey?hl=hi)
+[Gemini API キーを作成する](https://aistudio.google.com/apikey?hl=ja)
 
-अपनी कुंजी को एनवायरमेंट वैरिएबल के तौर पर सेट करें:
+キーを環境変数として設定します。
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### पैसे चुकाकर इस्तेमाल किए जाने वाले टियर पर अपग्रेड करना
+### 有料ティアにアップグレードする
 
-पैसे चुकाकर इस्तेमाल किए जाने वाले टियर पर अपग्रेड करने से, अनुरोध करने की सीमा बढ़ जाती है. इसके लिए, क्लाउड बिलिंग को सेट अप करना ज़रूरी है.
+有料階層にアップグレードすると、レート制限が増加し、Cloud Billing の設定が必要になります。
 
-- AI Studio के [एपीआई पासकोड](https://aistudio.google.com/api-keys?hl=hi) या [प्रोजेक्ट](https://aistudio.google.com/projects?hl=hi) पेजों पर जाकर, **बिलिंग सेट अप करें** पर क्लिक करें.
-- बिलिंग खाता बनाने या लिंक करने के लिए, Cloud Billing डायलॉग बॉक्स में दिए गए निर्देशों का पालन करें. साथ ही, पेमेंट का तरीका जोड़ें और कम से कम 5 डॉलर (या मुद्रा के हिसाब से इसके बराबर) के पेड क्रेडिट का ऐडवांस पेमेंट करें.
-- [Google AI Studio](https://aistudio.google.com/usage?hl=hi) में, **डैशबोर्ड** > **इस्तेमाल** में जाकर, एपीआई के इस्तेमाल की जानकारी देखें.
+- AI Studio の [[API キー](https://aistudio.google.com/api-keys?hl=ja)] ページまたは [[プロジェクト](https://aistudio.google.com/projects?hl=ja)] ページで、[**お支払い情報を設定**] をクリックします。
+- Cloud Billing ダイアログに沿って、請求先アカウントを作成またはリンクし、お支払い方法を追加して、有料クレジットで最低 $5（または同等の通貨）を前払いします。
+- API の使用状況は、[Google AI Studio](https://aistudio.google.com/usage?hl=ja) の [**ダッシュボード**] > [**使用状況**] で確認できます。
 
-ज़्यादा जानकारी के लिए, [बिलिंग पेज](https://ai.google.dev/gemini-api/docs/billing?hl=hi) देखें.
+詳細については、[お支払いページ](https://ai.google.dev/gemini-api/docs/billing?hl=ja)をご覧ください。
 
-## 2. एसडीके इंस्टॉल करना और पहला कॉल करना
+## 2. SDK をインストールして最初の呼び出しを行う
 
-एसडीके इंस्टॉल करें और एक एपीआई कॉल से टेक्स्ट जनरेट करें.
+SDK をインストールし、1 回の API 呼び出しでテキストを生成します。
 
 ### Python
 
-एसडीके इंस्टॉल करें:
+SDK をインストールします。
 
 ```
 pip install -U google-genai
 ```
 
-क्लाइंट को शुरू करें और अनुरोध करें:
+クライアントを初期化してリクエストを行います。
 
 ```
 from google import genai
@@ -76,13 +75,13 @@ print(interaction.output_text)
 
 ### JavaScript
 
-एसडीके इंस्टॉल करें:
+SDK をインストールします。
 
 ```
 npm install @google/genai
 ```
 
-क्लाइंट को शुरू करें और अनुरोध करें:
+クライアントを初期化してリクエストを行います。
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -120,7 +119,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -170,7 +169,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**जवाब:**
+**回答:**
 
 ```
 {
@@ -202,13 +201,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-REST का इस्तेमाल करने पर, एपीआई पूरा `Interaction` रिसॉर्स दिखाता है. इसमें मेटाडेटा, इस्तेमाल के आंकड़े, और बातचीत के हर चरण का इतिहास शामिल होता है.
+REST を使用すると、API はメタデータ、使用状況の統計情報、ターンのステップバイステップの履歴を含む完全な `Interaction` リソースを返します。
 
-एसडीके, पूरा जवाब दिखाते हैं. साथ ही, ये सीधे तौर पर फ़ाइनल आउटपुट को ऐक्सेस करने के लिए, `interaction.output_text` और `interaction.output_image` जैसी सुविधाएं भी देते हैं. [इंटरैक्शन की खास जानकारी](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) में, रिस्पॉन्स के स्ट्रक्चर के बारे में ज़्यादा जानें. इसके अलावा, सिस्टम के निर्देशों और जनरेशन कॉन्फ़िगरेशन के बारे में जानकारी पाने के लिए, [टेक्स्ट जनरेट करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi) पढ़ें.
+SDK は完全なレスポンスを公開しますが、最終的な出力に直接アクセスするための `interaction.output_text` や `interaction.output_image` などの便利なプロパティも提供します。レスポンス構造について詳しくは、[インタラクションの概要](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)をご覧ください。システム メッセージと生成構成の詳細については、[テキスト生成ガイド](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja)をご覧ください。
 
-## 3. जवाब को स्ट्रीम करना
+## 3. レスポンスをストリーミングする
 
-बेहतर इंटरैक्शन के लिए, जवाब जनरेट होते ही उसे स्ट्रीम करें. हर `step.delta` इवेंट, टेक्स्ट का एक हिस्सा डिलीवर करता है. इसे तुरंत दिखाया जा सकता है.
+よりスムーズなやり取りを実現するには、レスポンスの生成中にストリーミングします。各 `step.delta` イベントは、すぐに表示できるテキストのチャンクを配信します。
 
 ### Python
 
@@ -275,7 +274,7 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -327,9 +326,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-स्ट्रीमिंग के दौरान, सर्वर, Server-Sent Events (एसएसई) की स्ट्रीम के साथ जवाब देता है. हर इवेंट में एक टाइप और JSON डेटा शामिल होता है.
+ストリーミングの場合、サーバーはサーバー送信イベント（SSE）のストリームで応答します。各イベントには、タイプと JSON データが含まれます。
 
-**जवाब:**
+**回答:**
 
 ```
 event: interaction.created
@@ -360,18 +359,18 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-स्ट्रीमिंग इवेंट और डेल्टा टाइप को मैनेज करने के बारे में ज़्यादा जानने के लिए, [स्ट्रीमिंग इंटरैक्शन गाइड](https://ai.google.dev/gemini-api/docs/streaming?hl=hi) देखें.
+ストリーミング イベントとデルタタイプの処理の詳細については、[ストリーミング操作ガイド](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)をご覧ください。
 
-## 4. सिलसिलेवार बातचीत
+## 4. マルチターンの会話
 
-Interactions API, दो तरीकों से सिलसिलेवार बातचीत को सपोर्ट करता है:
+Interactions API は、次の 2 つのアプローチでマルチターンの会話をサポートしています。
 
-- **स्टेटफ़ुल (सुझाया गया)**: `previous_interaction_id` का इस्तेमाल करके, सर्वर पर बातचीत जारी रखें. यह ज़्यादातर चैट और एजेंटिक वर्कफ़्लो के लिए सबसे सही है. इनमें आपको सर्वर से इतिहास को मैनेज करने और कैश मेमोरी को ऑप्टिमाइज़ करने की ज़रूरत होती है.
-- **स्टेटलेस**: क्लाइंट पर बातचीत के इतिहास को मैनेज करने के लिए, हर अनुरोध में पिछले सभी टर्न (इसमें इंटरमीडिएट मॉडल थॉट और टूल के चरण शामिल हैं) पास करें.
+- **ステートフル（推奨）**: `previous_interaction_id` を使用してサーバーで会話を続行します。サーバーで履歴を管理し、キャッシュ保存を最適化するほとんどのチャット ワークフローとエージェント ワークフローに最適です。
+- **ステートレス**: 各リクエストで以前のすべてのターン（モデルの中間思考とツールステップを含む）を渡すことで、クライアントで会話履歴を管理します。
 
-### स्टेटफ़ुल (सुझाया गया)
+### ステートフル（推奨）
 
-`previous_interaction_id` पास करके, इंटरैक्शन को एक-दूसरे से जोड़ें. सर्वर, आपकी पूरी बातचीत के इतिहास को मैनेज करता है.
+`previous_interaction_id` を渡してインタラクションをチェーンします。サーバーが会話の履歴全体を管理します。
 
 ### Python
 
@@ -452,7 +451,7 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -525,9 +524,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### स्टेटलेस
+### ステートレス
 
-क्लाइंट-साइड पर `store=false` सेट करें और बातचीत के इतिहास को मैनेज करें. आपको मॉडल से जनरेट किए गए सभी चरणों (`thought` और `function_call` चरणों सहित) को उसी तरह से सेव करना होगा और फिर से भेजना होगा जैसा कि आपको मिला था.
+`store=false` を設定し、クライアント側で会話履歴を管理します。モデルで生成されたすべてのステップ（`thought` ステップと `function_call` ステップを含む）は、受け取ったとおりに保持して再送信する必要があります。
 
 ### Python
 
@@ -656,7 +655,7 @@ Interaction interaction2 =
 System.out.println("Response 2: " + interaction2.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -746,7 +745,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**जवाब:**
+**回答:**
 
 ```
 {
@@ -773,11 +772,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-दूसरे इंटरैक्शन में, जवाब के तौर पर पूरा ऑब्जेक्ट मिलता है. इसमें सिर्फ़ नए चरण शामिल होते हैं. हालांकि, यह पिछले टर्न के कॉन्टेक्स्ट पर आधारित होता है. [सिलसिलेवार बातचीत से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#multi-turn-conversations) में, स्टेट बनाए रखने के बारे में ज़्यादा जानें. इसके अलावा, क्लाइंट-साइड पर इतिहास मैनेज करने के लिए, [स्टेटलेस मोड](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#stateless-conversations) के बारे में जानें.
+2 回目のインタラクションでは、新しいステップのみを含む完全なレスポンス オブジェクトが返されますが、これは前のターンのコンテキストに基づいています。状態の維持については、[マルチターン会話ガイド](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#multi-turn-conversations)をご覧ください。クライアントサイドの履歴管理については、[ステートレス モード](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#stateless-conversations)をご覧ください。
 
-## 5. टेक्स्ट, इमेज वग़ैरह को प्रोसेस करने वाला मॉडल
+## 5. マルチモーダルな理解
 
-Gemini मॉडल, इमेज, ऑडियो, वीडियो, और दस्तावेज़ों को आसानी से समझ सकते हैं. एक ही अनुरोध में टेक्स्ट के साथ-साथ मीडिया भी पास करें.
+Gemini モデルは、画像、音声、動画、ドキュメントをネイティブに理解します。1 つのリクエストでテキストとともにメディアを渡します。
 
 ### Python
 
@@ -891,7 +890,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -972,7 +971,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
   }'
 ```
 
-**जवाब:**
+**回答:**
 
 ```
 {
@@ -997,27 +996,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 }
 ```
 
-[इमेज समझने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi) में जाकर, इमेज, वीडियो, और ऑडियो फ़ाइलें पास करने का तरीका जानें.
+[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)で、画像、動画、音声ファイルを渡す方法を確認する。
 
 [hearing
 
-ऑडियो को समझने की सुविधा
+音声の理解
 
-ऑडियो फ़ाइलों को लेख में बदलना, उनकी खास जानकारी पाना या उनसे जुड़े सवालों के जवाब पाना.](https://ai.google.dev/gemini-api/docs/audio?hl=hi)
+音声ファイルの文字起こし、要約、質問への回答を行います。](https://ai.google.dev/gemini-api/docs/audio?hl=ja)
 [videocam
 
-वीडियो को समझने की क्षमता
+動画理解
 
-वीडियो कॉन्टेंट का विश्लेषण करना, इवेंट ढूंढना, और कार्रवाइयों के बारे में बताना.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=hi)
+動画コンテンツを分析し、イベントを特定して、アクションを説明します。](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)
 [description
 
-दस्तावेज़ प्रोसेस करना
+ドキュメント処理
 
-PDF और अन्य दस्तावेज़ फ़ॉर्मैट से जानकारी एक्सट्रैक्ट करें.](https://ai.google.dev/gemini-api/docs/document-processing?hl=hi)
+PDF などのドキュメント形式から情報を抽出します。](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)
 
-## 6. मल्टीमॉडल जनरेशन
+## 6. マルチモーダル生成
 
-Gemini, [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) इमेज मॉडल का इस्तेमाल करके, इमेज जनरेट कर सकता है.
+Gemini は、[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja) 画像モデルを使用して画像をネイティブに生成できます。
 
 ### Python
 
@@ -1090,7 +1089,7 @@ if (interaction.outputImage().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1185,7 +1184,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }'
 ```
 
-**जवाब:**
+**回答:**
 
 ```
 {
@@ -1208,22 +1207,22 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-जब मॉडल कोई इमेज जनरेट करता है, तो वह `steps` ऐरे में मौजूद किसी चरण में, base64-encoded इमेज डेटा दिखाता है. साथ ही, `output_image` प्रॉपर्टी के ज़रिए भी यह डेटा दिखाता है. आसपेक्ट रेशियो, इमेज में बदलाव करने, और रेफ़रंस के बारे में जानने के लिए, [इमेज जनरेट करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) देखें.
+モデルが画像を生成すると、`steps` 配列内のステップと `output_image` 便宜的プロパティを介して、Base64 エンコードされた画像データが返されます。アスペクト比、画像編集、参照については、[画像生成ガイド](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)をご覧ください。
 
 [record\_voice\_over
 
-बोलकर जवाब देने की सुविधा
+音声生成
 
-Gemini 3.1 Flash TTS की मदद से, अलग-अलग आवाज़ों में बोलकर जानकारी जनरेट करें.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)
+Gemini 3.1 Flash TTS を使用して、表現力豊かな複数話者の音声生成を行います。](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)
 [music\_note
 
-संगीत जनरेट करने की सुविधा
+音楽生成
 
-Lyria 3.5 की मदद से क्लिप और पूरे गाने बनाएँ.](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi)
+Lyria 3.5 でクリップやフルレングスの曲を作成します。](https://ai.google.dev/gemini-api/docs/music-generation?hl=ja)
 
-## 7. स्ट्रक्चर्ड आउटपुट का इस्तेमाल करना
+## 7. 構造化出力を使用する
 
-मॉडल को इस तरह कॉन्फ़िगर करें कि वह आपके तय किए गए स्कीमा से मेल खाने वाला JSON जवाब दे. स्ट्रक्चर्ड आउटपुट, [Pydantic](https://docs.pydantic.dev/latest/) (Python) और [Zod](https://zod.dev/) (JavaScript) के साथ काम करता है.
+定義したスキーマに一致する JSON を返すようにモデルを構成します。構造化された出力は、[Pydantic](https://docs.pydantic.dev/latest/)（Python）と [Zod](https://zod.dev/)（JavaScript）で動作します。
 
 ### Python
 
@@ -1359,7 +1358,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1456,7 +1455,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**जवाब:**
+**回答:**
 
 ```
 {
@@ -1478,11 +1477,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-आउटपुट टेक्स्ट ब्लॉक में, मान्य JSON स्ट्रिंग मौजूद है. यह स्ट्रिंग, अनुरोध किए गए स्कीमा के मुताबिक है. ज़्यादा जटिल स्ट्रक्चर और रिकर्सिव स्कीमा तय करने का तरीका जानने के लिए, [स्ट्रक्चर्ड आउटपुट गाइड](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) देखें.
+出力テキスト ブロックには、リクエストされたスキーマに正確に準拠した有効な JSON 文字列が含まれます。より複雑な構造と再帰的スキーマを定義する方法については、[構造化出力ガイド](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)をご覧ください。
 
-## 8. टूल इस्तेमाल करना
+## 8. ツールを使用する
 
-Google Search की मदद से, मॉडल के जवाब में रीयल-टाइम की जानकारी शामिल करना. यह एपीआई, अपने-आप खोज करता है, नतीजों को प्रोसेस करता है, और उद्धरण दिखाता है.
+Google 検索を使用して、モデルのレスポンスをリアルタイムの情報でグラウンディングします。API は自動的に検索を行い、結果を処理して引用を返します。
 
 ### Python
 
@@ -1592,7 +1591,7 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1654,7 +1653,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**जवाब:**
+**回答:**
 
 ```
 {
@@ -1704,41 +1703,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-खोज के चरणों के बारे में, इंटरैक्शन के इतिहास में पूरी जानकारी दी गई है. साथ ही, फ़ाइनल आउटपुट में वेब सोर्स की ओर इशारा करने वाले इनलाइन उद्धरण शामिल हैं.
+検索手順はサポート履歴に詳しく記載されており、最終的な出力にはウェブソースを指すインライン引用が含まれています。
 
-[Google Search के जवाब में शामिल जानकारी के सोर्स के बारे में बताने वाली गाइड](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) में, खोज के नतीजों में शामिल उद्धरणों को निकालने का तरीका जानें. इसके अलावा, [एक से ज़्यादा टूल को एक साथ इस्तेमाल करने के बारे में बताने वाली गाइड](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) में, एक से ज़्यादा टूल को एक साथ इस्तेमाल करने का तरीका जानें.
+検索の引用を抽出する方法については、[Google 検索のグラウンディング ガイド](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)をご覧ください。複数のツールを組み合わせる方法については、[ツール組み合わせガイド](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)をご覧ください。
 
 [code
 
-कोड एक्ज़ीक्यूट करना
+コード実行
 
-Python कोड को सुरक्षित सैंडबॉक्स वाले Borg एनवायरमेंट में चलाएं.](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)
+安全なサンドボックス化された Borg 環境で Python コードを実行します。](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)
 [link
 
-यूआरएल कॉन्टेक्स्ट
+URL コンテキスト
 
-वेबपेज के कॉन्टेंट में मौजूद जानकारी के आधार पर जवाब पाने के लिए, सार्वजनिक वेब यूआरएल सीधे तौर पर पास करें.](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)
+公開ウェブ URL を直接渡して、ウェブページ コンテンツのレスポンスをグラウンディングします。](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)
 [search
 
-फ़ाइल खोजने की सुविधा
+ファイル検索
 
-अपलोड किए गए दस्तावेज़ों और मीडिया फ़ाइलों को इंडेक्स करना और उनमें खोजना.](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)
+アップロードされたドキュメントとメディア ファイル全体にわたってインデックスを作成し、検索します。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
 [map
 
-Google Maps
+Google マップ
 
-जवाबों को असल दुनिया के जियोस्पेशल और जगह की जानकारी के डेटा पर आधारित करें.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)
+実際の地理空間データと位置情報データでレスポンスをグラウンディングします。](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)
 [computer
 
-कंप्यूटर का इस्तेमाल
+パソコンの使用
 
-ब्राउज़र ऑटोमेशन और स्क्रीन इंटरैक्शन.](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)
+ブラウザの自動化と画面操作。](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)
 
-## 9. अपने फ़ंक्शन कॉल करना
+## 9. 独自の関数を呼び出す
 
-फ़ंक्शन कॉलिंग की सुविधा की मदद से, मॉडल को अपने कोड से कनेक्ट किया जा सकता है. इसमें फ़ंक्शन का नाम और पैरामीटर तय किए जाते हैं. मॉडल यह तय करता है कि इसे कब कॉल करना है और स्ट्रक्चर्ड आर्ग्युमेंट दिखाता है. इसके बाद, इसे स्थानीय तौर पर लागू किया जाता है और नतीजे वापस भेजे जाते हैं.
+関数呼び出しを使用すると、モデルをコードに接続できます。関数の名前とパラメータを宣言し、モデルが呼び出すタイミングを決定して構造化された引数を返し、ローカルで実行して結果を返送します。
 
-### स्टेटफ़ुल (सुझाया गया)
+### ステートフル（推奨）
 
 ### Python
 
@@ -1955,7 +1954,7 @@ while (true) {
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2075,13 +2074,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### स्टेटलेस
+### ステートレス
 
-स्टेटलेस मोड में फ़ंक्शन कॉलिंग का इस्तेमाल भी किया जा सकता है. इसके लिए, क्लाइंट साइड पर बातचीत के इतिहास को मैनेज करें और `store=false` सेट करें. स्टेटलेस मोड में, आपको बातचीत का पूरा इतिहास, हर अनुरोध के `input` फ़ील्ड में पास करना होगा. इस इतिहास में यह जानकारी शामिल होनी चाहिए:
+クライアント側で会話履歴を管理し、`store=false` を設定することで、ステートレス モードで関数呼び出しを使用することもできます。ステートレス モードでは、後続の各リクエストの `input` フィールドで会話の履歴全体を渡す必要があります。この履歴には、以下の情報を含める必要があります。
 
-1. शुरुआती `user_input` चरण.
-2. पहले राउंड में, मॉडल से जनरेट किए गए सभी चरणों (`thought` और `function_call` चरणों सहित) को ठीक वैसे ही दिखाया गया है जैसे वे मिले थे.
-3. `function_result` चरण में, आपके फ़ंक्शन का आउटपुट शामिल होता है.
+1. 最初の `user_input` ステップ。
+2. ターン 1 で返されたモデル生成のすべてのステップ（`thought` ステップと `function_call` ステップを含む）を、受け取ったとおりに返します。
+3. 実行された関数の出力を含む `function_result` ステップ。
 
 ### Python
 
@@ -2311,7 +2310,7 @@ while (true) {
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2439,9 +2438,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**जवाब:**
+**回答:**
 
-पहले टर्न के दौरान, मॉडल `requires_action` स्टेटस और `function_call` चरण के साथ जवाब देता है:
+ターン 1 で、モデルはステータス `requires_action` と `function_call` ステップを含むレスポンスを返します。
 
 ```
 {
@@ -2462,7 +2461,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-फ़ंक्शन को स्थानीय तौर पर चलाने और नतीजा सबमिट करने (टर्न 2) के बाद, पूरी हो चुकी बातचीत का नतीजा इस तरह दिखता है:
+関数をローカルで実行して結果を送信すると（ターン 2）、最終的な完了したインタラクションが返されます。
 
 ```
 {
@@ -2492,11 +2491,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-पैरलल फ़ंक्शन कॉलिंग या फ़ंक्शन चुनने के मोड जैसी ऐडवांस सुविधाओं के बारे में जानने के लिए, [फ़ंक्शन कॉलिंग गाइड](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) देखें.
+並列関数呼び出しや関数選択モードなどの高度な機能については、[関数呼び出しガイド](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)をご覧ください。
 
-## 10. मैनेज किए जा रहे एजेंट को चलाना
+## 10. マネージド エージェントを実行する
 
-मैनेज किए गए एजेंट, रिमोट सैंडबॉक्स में काम करते हैं. इनके पास कोड एक्ज़ीक्यूशन और फ़ाइल मैनेजमेंट जैसे टूल का ऐक्सेस होता है. `model` के बजाय `agent` पास करें और `environment="remote"` सेट करें.
+マネージド エージェントは、コード実行やファイル管理などのツールにアクセスできるリモート サンドボックスで実行されます。`model` ではなく `agent` を渡し、`environment="remote"` を設定します。
 
 ### Python
 
@@ -2557,7 +2556,7 @@ System.out.println("Environment: " + interaction.environmentId().orElse(""));
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2623,27 +2622,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-आपके पास अपने निर्देशों, कौशल, और डेटा सोर्स के साथ [कस्टम एजेंट](https://ai.google.dev/gemini-api/docs/custom-agents?hl=hi) को तय करने और सेव करने का विकल्प भी है.
+独自の指示、スキル、データソースを使用して[カスタム エージェント](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja)を定義して保存することもできます。
 
 [rocket\_launch
 
-क्विकस्टार्ट
+クイックスタート
 
-अपना पहला एजेंट कॉल करें, जवाब स्ट्रीम करें, और कस्टम एजेंट बनाएं.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=hi)
+最初のエージェント呼び出しを行い、レスポンスをストリーミングして、カスタム エージェントを構築します。](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)
 [smart\_toy
 
-Antigravity एजेंट
+Antigravity エージェント
 
-डिफ़ॉल्ट एजेंट के लिए केपबिलिटी, टूल, मल्टीमॉडल इनपुट, और कीमत.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi)
+デフォルト エージェントの機能、ツール、マルチモーダル入力、料金。](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)
 [experiment
 
-AI Studio में एजेंट
+AI Studio のエージェント
 
-बिना कोड लिखे एजेंट के प्रोटोटाइप बनाने के लिए विज़ुअल प्लेग्राउंड.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=hi)
+コードを記述せずにエージェントのプロトタイピングを行うためのビジュアル プレイグラウンド。](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ja)
 
-## 11. बैकग्राउंड में टास्क चलाने की अनुमति
+## 11. バックグラウンドでタスクを実行する
 
-लंबे समय तक चलने वाले टास्क को एसिंक्रोनस तरीके से चलाने के लिए, `background=True` को सेट करें. `interactions.get()` के साथ नतीजों के लिए पोल. ज़्यादा जानकारी के लिए, [बैकग्राउंड में प्रोसेस चलाने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/background-execution?hl=hi) देखें.
+`background=True` を設定して、長時間実行タスクを非同期で実行します。`interactions.get()` を使用して結果をポーリングします。詳細については、[バックグラウンド実行ガイド](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)をご覧ください。
 
 ### Python
 
@@ -2750,7 +2749,7 @@ while (true) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2845,9 +2844,9 @@ while true; do
 done
 ```
 
-**जवाब:**
+**回答:**
 
-शुरुआती रिस्पॉन्स, `in_progress` स्टेटस के साथ तुरंत दिखता है:
+最初のレスポンスは、ステータス `in_progress` で直ちに返されます。
 
 ```
 {
@@ -2858,7 +2857,7 @@ done
 }
 ```
 
-बैकग्राउंड टास्क पूरी तरह से लागू होने के बाद, इंटरैक्शन की स्थिति की जांच करने पर यह दिखता है:
+バックグラウンド タスクが完全に実行されると、インタラクションの状態を確認すると次の値が返されます。
 
 ```
 {
@@ -2880,27 +2879,27 @@ done
 }
 ```
 
-[बैकग्राउंड में प्रोसेस करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/background-execution?hl=hi) में, मॉडल और एजेंट को एसिंक्रोनस तरीके से चलाने के बारे में पढ़ें.
+モデルとエージェントを非同期で実行する方法については、[バックグラウンド実行ガイド](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)をご覧ください。
 
-## आगे क्या करना है
+## 次のステップ
 
-- [बैकग्राउंड में कोड एक्ज़ीक्यूट होने की सुविधा](https://ai.google.dev/gemini-api/docs/background-execution?hl=hi): लंबे समय तक चलने वाले टास्क को एसिंक्रोनस तरीके से चलाएं और स्थिति को मैनेज करें.
-- [टेक्स्ट जनरेट करना](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi): सिस्टम के निर्देश, जनरेशन कॉन्फ़िगरेशन, और ऐडवांस टेक्स्ट पैटर्न.
-- [इमेज जनरेट करना](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi): आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात), इमेज में बदलाव करना, और स्टाइल के रेफ़रंस.
-- [इमेज की बारीक़ी से पहचान](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi): इमेज को कैटगरी में बांटना, ऑब्जेक्ट का पता लगाने की सुविधा, और विज़ुअल के बारे में सवाल-जवाब का सेशन.
-- [सोचना](https://ai.google.dev/gemini-api/docs/thinking?hl=hi): मुश्किल कामों के लिए, सोच-समझकर एक-एक करके जवाब देना.
-- [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi): पैरलल, कंपोज़िशनल, और कंस्ट्रेंट फ़ंक्शन मोड.
-- [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi): जवाब में भरोसेमंद स्रोतों से जानकारी शामिल करना, जवाब में उद्धरण देना, और खोज से जुड़े सुझाव देना.
-- [मैनेज किए गए एजेंट](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=hi): ये पहले से बनाए गए एजेंट होते हैं. इनमें कोड एक्ज़ीक्यूट करने और फ़ाइल मैनेज करने की सुविधा होती है.
-- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi): यह सुविधा, कई चरणों में अपने-आप रिसर्च करती है. साथ ही, रिसर्च के लिए प्लान बनाती है और जानकारी को व्यवस्थित करती है.
-- [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi): JSON स्कीमा, enum, और रिकर्सिव टाइप की परिभाषाएं.
+- [バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja): 長時間実行されるタスクを非同期で実行し、状態を管理します。
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja): システム指示、生成構成、高度なテキスト パターン。
+- [画像の生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja): アスペクト比、画像編集、スタイル参照。
+- [画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja): 分類、オブジェクト検出、ビジュアル Q&A。
+- [思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja): 複雑なタスクに Chain-of-Thought 推論を使用します。
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja): 並列、コンポジション、制約付きの関数モード。
+- [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja): グラウンディング、引用、検索候補。
+- [マネージド エージェント](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja): コード実行とファイル管理を備えた事前構築済みのエージェント。
+- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja): 計画と統合を伴う自律的な複数ステップの調査。
+- [構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja): JSON スキーマ、列挙型、再帰型定義。
 
-सुझाव भेजें
+フィードバックを送信
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
+最終更新日 2026-09-24 UTC。
 
-क्या आपको हमें और कुछ बताना है?
+ご意見をお聞かせください
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]

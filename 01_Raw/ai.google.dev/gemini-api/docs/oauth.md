@@ -1,86 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=ar
-fetched_at: 2026-09-28T06:33:29.136364+00:00
-title: "\u0627\u0644\u0645\u0635\u0627\u062f\u0642\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062a\u0634\u063a\u064a\u0644 \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0628\u0631\u0648\u062a\u0648\u0643\u0648\u0644 OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=es-419
+fetched_at: 2026-10-05T06:48:09.047977+00:00
+title: "Gu\u00eda de inicio r\u00e1pido de Authentication con OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# المصادقة باستخدام التشغيل السريع لبروتوكول OAuth
+# Guía de inicio rápido de Authentication con OAuth
 
-أسهل طريقة للمصادقة على Gemini API هي إعداد مفتاح API، كما هو موضّح في [دليل بدء استخدام Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=ar). إذا كنت بحاجة إلى عناصر تحكّم أكثر صرامة في الوصول، يمكنك استخدام OAuth بدلاً من ذلك. سيساعدك هذا الدليل في إعداد المصادقة باستخدام OAuth.
+La forma más sencilla de autenticarse en la API de Gemini es configurar una clave de API, como se describe en la [guía de introducción a la API de Gemini](https://ai.google.dev/gemini-api/docs/get-started?hl=es-419). Si necesitas controles de acceso más estrictos, puedes usar OAuth en su lugar. Esta guía te ayudará a configurar la autenticación con OAuth.
 
-يستخدم هذا الدليل أسلوبًا مبسطًا للمصادقة مناسبًا لبيئة الاختبار. بالنسبة إلى بيئة التشغيل الفعلي، تعرَّف على [المصادقة والتفويض](https://developers.google.com/workspace/guides/auth-overview?hl=ar) قبل [اختيار بيانات الاعتماد الخاصة بالوصول](https://developers.google.com/workspace/guides/create-credentials?hl=ar#choose_the_access_credential_that_is_right_for_you) المناسبة لتطبيقك.
+En esta guía, se usa un enfoque de autenticación simplificado que es adecuado para un entorno de pruebas. Para un entorno de producción, obtén información
+sobre
+[la autenticación y la autorización](https://developers.google.com/workspace/guides/auth-overview?hl=es-419)
+antes de
+[elegir las credenciales de acceso](https://developers.google.com/workspace/guides/create-credentials?hl=es-419#choose_the_access_credential_that_is_right_for_you)
+adecuadas para tu app.
 
-## الأهداف
+## Objetivos
 
-- إعداد مشروعك على السحابة الإلكترونية لاستخدام OAuth
-- إعداد بيانات الاعتماد التلقائية للتطبيق
-- إدارة بيانات الاعتماد في برنامجك بدلاً من استخدام "`gcloud auth`"
+- Configurar tu proyecto de la nube para OAuth
+- Configurar credenciales predeterminadas de la aplicación
+- Administrar credenciales en tu programa en lugar de usar `gcloud auth`
 
-## المتطلبات الأساسية
+## Requisitos previos
 
-لتشغيل هذا الدليل السريع، يجب توفُّر ما يلي:
+Para ejecutar esta guía de inicio rápido, necesitas lo siguiente:
 
-- [مشروع على السحابة الإلكترونية من Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=ar)
-- [تثبيت gcloud CLI على الجهاز](https://cloud.google.com/sdk/docs/install?hl=ar)
+- [Un proyecto de Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=es-419)
+- [Una instalación local de gcloud CLI](https://cloud.google.com/sdk/docs/install?hl=es-419)
 
-## إعداد مشروعك على السحابة الإلكترونية
+## Configura tu proyecto de la nube
 
-لإكمال هذا الدليل السريع، عليك أولاً إعداد مشروعك على السحابة الإلكترونية.
+Para completar esta guía de inicio rápido, primero debes configurar tu proyecto de Cloud.
 
-### 1. تفعيل واجهة برمجة التطبيقات
+### 1. Habilita la API
 
-قبل استخدام واجهات Google APIs، عليك تفعيلها في مشروع على Google Cloud.
+Antes de usar las APIs de Google, debes activarlas en un proyecto de Google Cloud.
 
-- في Google Cloud Console، فعِّل Google Generative Language API.
+- En la consola de Google Cloud, habilita la API de Google Generative Language.
 
-  [تفعيل واجهة برمجة التطبيقات](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=ar)
+  [Habilitar la API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=es-419)
 
-### 2. إعداد شاشة طلب الموافقة المتعلّقة ببروتوكول OAuth
+### 2. Cómo configurar la pantalla de consentimiento de OAuth
 
-بعد ذلك، اضبط شاشة طلب الموافقة المتعلّقة ببروتوكول OAuth في المشروع وأضِف نفسك كمستخدم اختباري. إذا سبق لك إكمال هذه الخطوة لمشروعك على السحابة الإلكترونية، انتقِل إلى القسم التالي.
+Luego, configura la pantalla de consentimiento de OAuth del proyecto y agrégate como usuario de prueba. Si ya completaste este paso para tu proyecto de Cloud, ve a la siguiente sección.
 
-1. في وحدة تحكّم Google Cloud، انتقِل إلى **القائمة** > **منصة Google Auth** > **نظرة عامة**.
+1. En la consola de Google Cloud, ve a **Menú** > **Plataforma de autenticación de Google** > **Descripción general**.
 
-   [الانتقال إلى منصة Google Auth](https://console.developers.google.com/auth/overview?hl=ar)
-2. أكمِل نموذج إعدادات المشروع واضبط نوع المستخدم على **خارجي**
-   في قسم **الجمهور**.
-3. أكمِل بقية النموذج، واقبَل بنود "سياسة بيانات المستخدِم"، ثم انقر على **إنشاء**.
-4. في الوقت الحالي، يمكنك تخطّي إضافة النطاقات والنقر على **حفظ ومتابعة**. في المستقبل، عند إنشاء تطبيق لاستخدامه خارج مؤسستك على Google Workspace، عليك إضافة نطاقات التفويض التي يتطلبها تطبيقك وإثبات ملكيتها.
-5. إضافة مستخدمين اختباريين:
+   [Ir a la plataforma de autenticación de Google](https://console.developers.google.com/auth/overview?hl=es-419)
+2. Completa el formulario de configuración del proyecto y establece el tipo de usuario en **Externo** en la sección **Público**.
+3. Completa el resto del formulario, acepta las condiciones de la Política de Datos del Usuario y, luego, haz clic en **Crear**.
+4. Por ahora, puedes omitir la adición de permisos y hacer clic en **Guardar y continuar**. En el futuro, cuando crees una app para usar fuera de tu organización de Google Workspace, debes agregar y verificar los permisos de autorización que requiere tu app.
+5. Agrega usuarios de prueba:
 
-   1. انتقِل إلى [صفحة "الجمهور"](https://console.developers.google.com/auth/audience?hl=ar) في منصة Google Auth.
-   2. ضمن **المستخدمون التجريبيون**، انقر على **إضافة مستخدمين**.
-   3. أدخِل عنوان بريدك الإلكتروني وأي مستخدمين آخرين معتمَدين للاختبار، ثم انقر على **حفظ**.
+   1. Navega a la
+      [página Público](https://console.developers.google.com/auth/audience?hl=es-419) de la
+      plataforma de autenticación de Google.
+   2. En **Usuarios de prueba**, haz clic en **Agregar usuarios**.
+   3. Ingresa tu dirección de correo electrónico y los demás usuarios de prueba autorizados, y haz clic en **Guardar**.
 
-### 3- تفويض بيانات اعتماد لتطبيق على الكمبيوتر
+### 3. Autoriza credenciales para una aplicación de escritorio
 
-لإجراء المصادقة كمستخدم نهائي والوصول إلى بيانات المستخدمين في تطبيقك، عليك إنشاء معرّف عميل واحد أو أكثر من معرّفات عملاء OAuth 2.0. يُستخدم معرّف العميل لتعريف تطبيق واحد على خوادم OAuth من Google. إذا كان تطبيقك يعمل على منصات متعددة، عليك إنشاء معرّف عميل منفصل لكل منصة.
+Para autenticarte como usuario final y acceder a los datos del usuario en tu app, debes crear uno o más IDs de cliente de OAuth 2.0. Un ID de cliente se usa con el fin de identificar una sola app para los servidores de OAuth de Google. Si la app se ejecuta en varias plataformas, debes crear un ID de cliente independiente para cada plataforma.
 
-1. في "وحدة تحكّم Google Cloud"، انتقِل إلى **القائمة** > **منصة Google Auth** > **العملاء**.
+1. En la consola de Google Cloud, ve a **Menú** > **Plataforma de autenticación de Google** > **Clientes**.
 
-   [الانتقال إلى "بيانات الاعتماد"](https://console.developers.google.com/auth/clients?hl=ar)
-2. انقر على **إنشاء عميل**.
-3. انقر على **نوع التطبيق** > **تطبيق على الكمبيوتر**.
-4. في حقل **الاسم**، اكتب اسمًا لبيانات الاعتماد. ولا يظهر هذا الاسم إلا في Google Cloud Console.
-5. انقر على **إنشاء**. تظهر شاشة إنشاء عميل OAuth، تعرض معرّف العميل الجديد وسر العميل.
-6. انقر على **موافق**. تظهر بيانات الاعتماد التي تم إنشاؤها حديثًا ضمن **معرّفات عملاء OAuth 2.0**.
-7. انقر على زر التنزيل لحفظ ملف JSON. سيتم حفظه باسم `client_secret_<identifier>.json`، ثم عليك إعادة تسميته إلى `client_secret.json` ونقله إلى دليل العمل.
+   [Ir a Credenciales](https://console.developers.google.com/auth/clients?hl=es-419)
+2. Haz clic en **Crear cliente**.
+3. Haz clic en **Tipo de aplicación** > **Aplicación de escritorio**.
+4. En el campo **Nombre**, escribe un nombre para la credencial. Este nombre solo se muestra en la consola de Google Cloud.
+5. Haz clic en **Crear**. Aparecerá la pantalla Se creó el cliente de OAuth, que muestra tu nuevo ID de cliente y el secreto del cliente.
+6. Haz clic en **OK**. La credencial recién creada aparece en **IDs de cliente de OAuth 2.0.**
+7. Haz clic en el botón de descarga para guardar el archivo JSON. Se guardará como
+   `client_secret_<identifier>.json`. Cambia su nombre a `client_secret.json`
+   y muévelo a tu directorio de trabajo.
 
-## إعداد "بيانات الاعتماد التلقائية للتطبيق"
+## Configura credenciales predeterminadas de la aplicación
 
-لتحويل ملف `client_secret.json` إلى بيانات اعتماد قابلة للاستخدام، مرِّر موقعه الجغرافي إلى وسيطة `--client-id-file` الخاصة بالأمر `gcloud auth application-default login`.
+Para convertir el archivo `client_secret.json` en credenciales utilizables, pasa su ubicación al argumento `--client-id-file` del comando `gcloud auth application-default login`.
 
 ```
 gcloud auth application-default login \
@@ -88,9 +96,10 @@ gcloud auth application-default login \
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ```
 
-يؤدي إعداد المشروع المبسَّط في هذا البرنامج التعليمي إلى ظهور مربّع الحوار **"لم تتحقّق Google من هذا التطبيق".** هذا أمر طبيعي، لذا اختَر **"متابعة"**.
+La configuración simplificada del proyecto en este instructivo activa un diálogo **"Google no
+verificó esta app"**. Esto es normal. Elige **"continuar"**.
 
-يؤدي ذلك إلى وضع الرمز المميز الناتج في مكان معروف جيدًا حتى يتمكن `gcloud` أو مكتبات البرامج من الوصول إليه.
+Esto coloca el token resultante en una ubicación conocida para que `gcloud` o las bibliotecas cliente puedan acceder a él.
 
 ```` ```
 gcloud auth application-default login   
@@ -101,11 +110,11 @@ gcloud auth application-default login
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ``` ````
 
-بعد ضبط بيانات الاعتماد التلقائية للتطبيق (ADC)، لن تحتاج مكتبات البرامج في معظم اللغات إلى مساعدة كبيرة أو أي مساعدة للعثور عليها.
+Una vez que configures las credenciales predeterminadas de la aplicación (ADC), las bibliotecas cliente en la mayoría de los lenguajes necesitarán poca o ninguna ayuda para encontrarlas.
 
 ### Curl
 
-أسرع طريقة لاختبار عمل ذلك هي استخدامها للوصول إلى واجهة برمجة تطبيقات REST باستخدام curl:
+La forma más rápida de probar que esto funciona es usarlo para acceder a la API de REST con curl:
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -118,13 +127,13 @@ curl -X GET https://generativelanguage.googleapis.com/v1/models \
 
 ### Python
 
-في Python، من المفترض أن تعثر مكتبات البرامج على هذه الملفات تلقائيًا:
+En Python, las bibliotecas cliente deberían encontrarlas automáticamente:
 
 ```
 pip install google-genai
 ```
 
-في ما يلي نص برمجي بسيط لاختبارها:
+Una secuencia de comandos mínima para probarla podría ser la siguiente:
 
 ```
 from google import genai
@@ -133,24 +142,26 @@ client = genai.Client()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-## إدارة بيانات الاعتماد بنفسك [Python]
+## Administra las credenciales por tu cuenta [Python]
 
-في كثير من الحالات، لن يتوفّر لك الأمر `gcloud` لإنشاء رمز الدخول من معرّف العميل (`client_secret.json`). توفّر Google مكتبات بلغات عديدة تتيح لك إدارة هذه العملية داخل تطبيقك. يوضّح هذا القسم العملية بلغة Python. تتوفّر أمثلة مكافئة لهذا النوع من الإجراءات بلغات أخرى في [مستندات Drive API](https://developers.google.com/drive/api/quickstart/python?hl=ar).
+En muchos casos, no tendrás disponible el comando `gcloud` para crear el token de acceso desde el ID de cliente (`client_secret.json`). Google proporciona bibliotecas en muchos lenguajes para permitirte administrar ese proceso dentro de tu app. En esta sección, se muestra el proceso en Python. Hay ejemplos equivalentes de este tipo
+de procedimiento, para otros lenguajes, disponibles en la
+[documentación de la API de Drive](https://developers.google.com/drive/api/quickstart/python?hl=es-419).
 
-### 1. تثبيت المكتبات اللازمة
+### 1. Instala las bibliotecas necesarias
 
-ثبِّت مكتبة برامج Google للغة Python ومكتبة برامج Gemini.
+Instala la biblioteca cliente de Google para Python y la biblioteca cliente de Gemini.
 
 ```
 pip install --upgrade -q google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip install google-genai
 ```
 
-### 2. كتابة مدير بيانات الاعتماد
+### 2. Escribe el administrador de credenciales
 
-للحدّ من عدد المرات التي عليك فيها النقر على شاشات التفويض، أنشئ ملفًا باسم `load_creds.py` في دليل العمل لتخزين ملف `token.json` مؤقتًا يمكن إعادة استخدامه لاحقًا، أو إعادة تحميله إذا انتهت صلاحيته.
+Para minimizar la cantidad de veces que debes hacer clic en las pantallas de autorización, crea un archivo llamado `load_creds.py` en tu directorio de trabajo para almacenar en caché un archivo `token.json` que pueda volver a usar más tarde o actualizar si vence.
 
-ابدأ باستخدام الرمز التالي لتحويل ملف `client_secret.json` إلى رمز مميّز يمكن استخدامه مع `genai.configure`:
+Comienza con el siguiente código para convertir el archivo `client_secret.json` en un token que se pueda usar con `genai.configure`:
 
 ```
 import os.path
@@ -187,9 +198,9 @@ def load_creds():
     return creds
 ```
 
-### 3- كتابة برنامجك
+### 3. Escribe tu programa
 
-الآن، أنشئ `script.py` الخاص بك:
+Ahora crea tu `script.py`:
 
 ```
 import pprint
@@ -204,28 +215,27 @@ print()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-### 4. تشغيل برنامجك
+### 4. Ejecuta el programa
 
-في دليل العمل، شغِّل النموذج:
+En tu directorio de trabajo, ejecuta la muestra:
 
 ```
 python script.py
 ```
 
-في المرة الأولى التي تُشغّل فيها النص البرمجي، سيفتح نافذة متصفّح ويطلب منك
-السماح بالوصول.
+La primera vez que ejecutas la secuencia de comandos, se abre una ventana del navegador y se te solicita que autorices el acceso.
 
-1. إذا لم تكن مسجِّلاً الدخول إلى حساب Google، سيُطلب منك تسجيل الدخول. إذا كنت مسجّلاً الدخول إلى حسابات متعددة، **احرص على اختيار الحساب الذي ضبطته كـ "حساب تجريبي" عند إعداد مشروعك.**
-2. يتم تخزين معلومات التفويض في نظام الملفات، لذا لن يُطلب منك تقديم تفويض في المرة التالية التي تشغّل فيها الرمز النموذجي.
+1. Si aún no accediste a tu Cuenta de Google, se te solicitará que lo hagas. Si accediste a varias cuentas, **asegúrate de seleccionar la cuenta que configuraste como "Cuenta de prueba" cuando configures tu proyecto.**
+2. La información de autorización se almacena en el sistema de archivos, por lo que la próxima vez que ejecutes el código de muestra, no se te solicitará autorización.
 
-لقد أعددت المصادقة بنجاح.
+Configuraste la autenticación correctamente.
 
-إرسال ملاحظات
+Enviar comentarios
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-تاريخ التعديل الأخير: 2026-09-10 (حسب التوقيت العالمي المتفَّق عليه)
+Última actualización: 2026-09-10 (UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+¿Quieres brindar más información?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-10 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-10 (UTC)"],[],[]]

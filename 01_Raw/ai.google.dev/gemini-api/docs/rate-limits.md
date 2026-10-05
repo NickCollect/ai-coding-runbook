@@ -1,211 +1,211 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=de
-fetched_at: 2026-09-28T06:32:16.308544+00:00
-title: "Ratenlimits \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr
+fetched_at: 2026-10-05T06:46:30.469829+00:00
+title: "H\u0131z s\u0131n\u0131rlar\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Feedback geben
+Geri bildirim gönderin
 
-# Ratenlimits
+# Hız sınırları
 
-Ratenlimits regeln die Anzahl der Anfragen, die Sie innerhalb eines bestimmten Zeitraums an die Gemini API senden können. Diese Limits tragen dazu bei, dass die Nutzung fair bleibt, schützen vor Missbrauch und sorgen dafür, dass die Systemleistung für alle Nutzer erhalten bleibt.
+Sıklık sınırları, belirli bir zaman aralığında Gemini API'ye gönderebileceğiniz istek sayısını düzenler. Bu sınırlar, adil kullanımı sürdürmeye, kötüye kullanıma karşı korumaya ve tüm kullanıcılar için sistem performansını korumaya yardımcı olur.
 
-[Aktive Ratenbeschränkungen in AI Studio ansehen](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=de)
+[AI Studio'da etkin hız sınırlarınızı görüntüleme](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=tr)
 
-## So funktionieren Ratenbegrenzungen
+## Hız sınırlarının işleyiş şekli
 
-Ratenbegrenzungen werden in der Regel anhand von drei Dimensionen gemessen:
+Hız sınırları genellikle üç boyutta ölçülür:
 
-- Anfragen pro Minute (**RPM**)
-- Tokens pro Minute (Eingabe) (**TPM**)
-- Anfragen pro Tag (**RPD**)
+- Dakikada istek sayısı (**RPM**)
+- Dakikada jeton sayısı (giriş) (**TPM**)
+- Günlük istek sayısı (**RPD**)
 
-Ihre Nutzung wird anhand der einzelnen Limits bewertet. Wenn Sie eines der Limits überschreiten, wird ein Ratenbegrenzungsfehler ausgelöst. Wenn Ihr RPM-Limit beispielsweise 20 beträgt, führt das Senden von 21 Anfragen innerhalb einer Minute zu einem Fehler, auch wenn Sie Ihr TPM- oder andere Limits nicht überschritten haben.
+Kullanımınız her sınıra göre değerlendirilir ve herhangi bir sınırı aşmanız durumunda sıklık sınırı hatası tetiklenir. Örneğin, RPM sınırınız 20 ise TPM veya diğer sınırlarınızı aşmamış olsanız bile bir dakika içinde 21 istekte bulunmanız hataya neden olur.
 
-Ratenbegrenzungen gelten pro Projekt, nicht pro API-Schlüssel. Kontingente für **RPD** werden um Mitternacht (Pacific Time) zurückgesetzt.
+Hız sınırları API anahtarı başına değil, proje başına uygulanır. Günlük istek sayısı (**RPD**) kotaları, Pasifik saatine göre gece yarısında sıfırlanır.
 
-Die Limits variieren je nach verwendetem Modell. Einige Limits gelten nur für bestimmte Modelle. „Bilder pro Minute“ (Images per minute, IPM) wird beispielsweise nur für Modelle berechnet, die Bilder generieren können (Nano Banana), ist aber konzeptionell ähnlich wie TPM. Bei anderen Modellen gilt möglicherweise ein Tokenlimit pro Tag.
+Sınırlar, kullanılan modele göre değişir ve bazı sınırlar yalnızca belirli modeller için geçerlidir. Örneğin, dakikadaki görüntü sayısı (IPM) yalnızca görüntü oluşturabilen modeller (Nano Banana) için hesaplanır ancak kavramsal olarak TPM'ye benzer. Diğer modellerde günlük jeton sınırı (TPD) olabilir.
 
-Die Ratenbegrenzungen für experimentelle Modelle und Vorschauversionen sind strenger.
+Hız sınırları, deneysel ve önizleme modellerinde daha kısıtlıdır.
 
-### Ausgabenbasierte Ratenlimits
+### Harcamaya dayalı sıklık sınırları
 
-Zusätzlich zu den Limits für Anfragen pro Minute (RPM) und Tokens pro Minute (TPM) erzwingt die Gemini API ausgabenbasierte Ratenbegrenzungen, um vor unerwarteten Gebühren zu schützen. Ob diese Limits für Ihr Konto gelten, hängt von Ihrem Abrechnungsverlauf und Ihrer [Nutzungsstufe](#usage-tiers) ab.
+Gemini API, dakika başına istek (RPM) ve dakika başına jeton (TPM) sınırlarına ek olarak, beklenmedik ücretlere karşı koruma sağlamak için harcamaya dayalı hız sınırlarını zorunlu kılar. Bu sınırların hesabınız için geçerli olup olmadığı, faturalandırma geçmişinize ve [kullanım katmanınıza](#usage-tiers) bağlıdır.
 
-In der folgenden Tabelle sind die ausgabenbasierten Ratenlimits für die einzelnen [Nutzungsstufen](#usage-tiers) aufgeführt. Diese Limits werden in einem gleitenden 10‑Minuten-Zeitraum ausgewertet. Ob diese Limits für Ihr Konto gelten, hängt von Ihrem Abrechnungsverlauf und dem Status Ihres Kontos ab.
+Aşağıdaki tabloda, her [kullanım katmanı](#usage-tiers) için harcamaya dayalı sıklık sınırları gösterilmektedir. Bu sınırlar, 10 dakikalık bir süre içinde değerlendirilir. Bu sınırların hesabınız için geçerli olup olmadığı, faturalandırma geçmişinize ve hesap durumunuza bağlıdır.
 
-| Nutzungsstufe | Ausgabenratenlimit (pro 10 Minuten) |
+| Kullanım katmanı | Harcama hızı sınırı (10 dakikada bir) |
 | --- | --- |
-| **Kostenlos** | – |
-| **Stufe 1** | 10 $ |
-| **Tier 2** | 200 $ |
-| **Stufe 3** | 200 $ |
+| **Ücretsiz** | Yok |
+| **1. Katman** | 10 Hong Kong doları |
+| **2. Katman** | 200 ABD doları |
+| **3. Katman** | 200 ABD doları |
 
-Wenn Sie eine ausgabenbasierte Ratenbegrenzung erreichen, gibt die API einen `429 RESOURCE_EXHAUSTED`-Fehler zurück. So beheben Sie dies:
+Harcamaya dayalı bir hız sınırına ulaşırsanız API, `429 RESOURCE_EXHAUSTED` hatası döndürür. Bu sorunu çözmek için:
 
-- **Warten Sie kurz und versuchen Sie es dann noch einmal.**
-- **Reduzieren Sie die Rate teurer Anfragen**, indem Sie beispielsweise kleinere Kontextfenster oder kürzere Ausgaben verwenden.
-- Wenn Sie dieses Limit bei normaler Nutzung regelmäßig erreichen, [beantragen Sie eine Erhöhung des Ratenlimits](#request-rate-limit-increase).
+- Kısa bir süre sonra **bekleyip tekrar deneyin**.
+- **Pahalı isteklerin oranını azaltın**. Örneğin, daha küçük bağlam pencereleri veya daha kısa çıkışlar kullanın.
+- Normal kullanım sırasında bu sınıra sürekli olarak ulaşıyorsanız [hız sınırı artışı isteğinde bulunun](#request-rate-limit-increase).
 
-## Nutzungsstufen
+## Kullanım katmanları
 
-Ratenbegrenzungen sind an die Nutzungsebene des Projekts gebunden. Wenn Ihre API-Nutzung und Ihre Ausgaben steigen, werden Sie automatisch auf eine höhere Stufe mit höheren Ratenbegrenzungen hochgestuft.
+Hız sınırları, projenin kullanım katmanına bağlıdır. API kullanımınız ve harcamanız arttıkça, daha yüksek hız sınırlarına sahip bir katmana otomatik olarak yükseltilirsiniz.
 
-Die Voraussetzungen für die Stufen 2 und 3 basieren auf den kumulativen Gesamtausgaben für Google Cloud-Dienste (einschließlich, aber nicht beschränkt auf die Gemini API) für das mit Ihrem Projekt verknüpfte Abrechnungskonto.
+2. ve 3. katmanların şartları, projenize bağlı faturalandırma hesabı için Google Cloud hizmetlerine (Gemini API dahil ancak bununla sınırlı olmamak üzere) yapılan toplam kümülatif harcamaya dayanır.
 
-| Nutzungsstufe | Qualifikation | [Obergrenze für Abrechnungsstufe](https://ai.google.dev/gemini-api/docs/billing?hl=de#tier-spend-caps) |
+| Kullanım katmanı | Eleme | [Faturalandırma katmanı sınırı](https://ai.google.dev/gemini-api/docs/billing?hl=tr#tier-spend-caps) |
 | --- | --- | --- |
-| **Kostenlos** | [Aktives Projekt](https://ai.google.dev/gemini-api/docs/api-key?hl=de#google-cloud-projects) oder kostenloser Testzeitraum | – |
-| **Stufe 1** | [Aktives Rechnungskonto einrichten und verknüpfen](https://ai.google.dev/gemini-api/docs/billing?hl=de#setup-billing) | 250 $ |
-| **Tier 2** | 100 $ + 3 Tage seit erster eingegangener Zahlung | 2.000 $ |
-| **Stufe 3** | 1.000 $ bezahlt + 30 Tage seit erster erfolgreicher Zahlung | 20.000 $ bis 100.000 $ und mehr |
+| **Ücretsiz** | [Etkin proje](https://ai.google.dev/gemini-api/docs/api-key?hl=tr#google-cloud-projects) veya ücretsiz deneme | Yok |
+| **1. Katman** | [Etkin bir faturalandırma hesabı oluşturma ve bağlama](https://ai.google.dev/gemini-api/docs/billing?hl=tr#setup-billing) | 250 ABD Doları |
+| **2. Katman** | 100 ABD doları + ilk başarılı ödemeden itibaren 3 gün | 2.000 ABD doları |
+| **3. Katman** | 1.000 ABD doları + ilk başarılı ödemeden itibaren 30 gün | 20.000 ABD doları - 100.000 ABD doları ve üzeri |
 
-Die Erfüllung der angegebenen Qualifikationskriterien reicht in der Regel für die Genehmigung aus. In seltenen Fällen kann ein Antrag auf Upgrade jedoch aufgrund anderer Faktoren abgelehnt werden, die während der Überprüfung festgestellt wurden.
+Belirtilen uygunluk ölçütlerini karşılamak genellikle onay için yeterli olsa da nadir durumlarda inceleme süreci sırasında belirlenen diğer faktörlere bağlı olarak yükseltme isteği reddedilebilir.
 
-Dieses System trägt dazu bei, die Sicherheit und Integrität der Gemini API-Plattform für alle Nutzer aufrechtzuerhalten.
+Bu sistem, Gemini API platformunun tüm kullanıcılar için güvenliğini ve bütünlüğünü korumaya yardımcı olur.
 
-## Ratenbegrenzungen für die Gemini API
+## Gemini API hız sınırları
 
-Ratenbeschränkungen hängen von verschiedenen Faktoren ab, z. B. von Ihrer Nutzungsstufe, und können in Google AI Studio eingesehen werden. Ihre Ratenbeschränkungen werden automatisch aktualisiert, wenn sich Ihr Tier und Ihr Kontostatus im Laufe der Zeit ändern.
+Hız sınırları, kullanım katmanınız gibi çeşitli faktörlere bağlıdır ve Google AI Studio'da görüntülenebilir. Zaman içinde katmanınız ve hesap durumunuz değiştikçe hız sınırlarınız otomatik olarak güncellenir.
 
-[Aktive Ratenbeschränkungen in AI Studio ansehen](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=de)
+[AI Studio'da etkin sıklık sınırlarınızı görüntüleme](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=tr)
 
-Die angegebenen Ratenlimits sind nicht garantiert und die tatsächliche Kapazität kann variieren.
+Belirtilen hız sınırları garanti edilmez ve gerçek kapasite farklılık gösterebilir.
 
-## Ratenlimits für Prioritätsinferenz
+## Öncelik çıkarımı sıklık sınırları
 
-Für die Nutzung von [Priorität](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de) gelten eigene Ratenbeschränkungen, auch wenn die Nutzung auf die Ratenbeschränkungen für den gesamten interaktiven Traffic angerechnet wird. **Die Standardratenbegrenzungen sind: 0,3-mal die [Standardratenbegrenzung](https://aistudio.google.com/rate-limit?hl=de) für jedes Modell und jede Stufe**
+[Öncelikli](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr) tüketim, tüketim genel etkileşimli trafik hızı sınırlarına dahil edilse de kendi hız sınırlarına sahiptir. **Varsayılan sıklık sınırları: Her model ve katman için [standart sıklık sınırının](https://aistudio.google.com/rate-limit?hl=tr) 0,3 katı**
 
-## Ratenlimits für die Batch API
+## Batch API hız sınırları
 
-Für [Batch-API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)-Anfragen gelten eigene Ratenbegrenzungen, die sich von denen für Nicht-Batch-API-Aufrufe unterscheiden.
+[Toplu API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr) istekleri, toplu olmayan API çağrılarından ayrı olarak kendi hız sınırlamalarına tabidir.
 
-- **Gleichzeitige Batchanfragen**:100
-- **Maximale Größe der Eingabedatei**:2 GB
-- **Dateispeicherlimit**:20 GB
-- **In die Warteschlange gestellte Tokens pro Modell**:In der Tabelle **In die Warteschlange gestellte Batch-Tokens** wird die maximale Anzahl von Tokens aufgeführt, die für die Batchverarbeitung für alle Ihre aktiven Batchjobs für ein bestimmtes Modell in die Warteschlange gestellt werden können.
+- **Eşzamanlı toplu istek sayısı:** 100
+- **Giriş dosyasının boyut sınırı:** 2 GB
+- **Dosya depolama alanı sınırı:** 20 GB
+- **Model başına sıraya alınan jetonlar:** **Toplu iş için sıraya alınan jetonlar** tablosunda, belirli bir model için tüm etkin toplu işlerinizde toplu işleme için sıraya alınabilecek maksimum jeton sayısı listelenir.
 
-### Preisstufe 1
+### Katman 1
 
-| Modell | In die Warteschlange gestellte Batch-Tokens |
+| Model | Toplu olarak sıraya alınan jetonlar |
 | --- | --- |
-| Textausgabemodelle | | | | |
+| Metin çıkışı modelleri | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (Vorabversion) | 5.000.000 |
-| Gemini 3.5 Flash-Lite | 10.000.000 |
-| Gemini 3.1 Flash Lite | 10.000.000 |
-| Gemini 3.1 Flash Lite (Vorabversion) | 10.000.000 |
-| Gemini 3.6 Flash | 3.000.000 |
-| Gemini 3.5 Flash | 3.000.000 |
-| Gemini 2.5 Pro | 5.000.000 |
-| Gemini 2.5 Pro TTS | 25.000 |
-| Gemini 2.5 Flash | 3.000.000 |
-| Gemini 2.5 Flash (Vorabversion) | 3.000.000 |
-| Gemini 2.5 Flash Image (Vorabversion) | 3.000.000 |
-| Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash Lite | 10.000.000 |
-| Gemini 2.5 Flash Lite (Vorabversion) | 10.000.000 |
-| Gemini 2.0 Flash | 10.000.000 |
-| Gemini 2.0 Flash Image | 3.000.000 |
-| Gemini 2.0 Flash Lite | 10.000.000 |
-| Multimodale generative Modelle | | | | |
-| Gemini 3.1 Flash Image (Vorabversion) 🍌 | 1.000.000 |
-| Gemini 3.1 Flash Lite-Image 🍌 | 2.000.000 |
-| Gemini 3 Pro Image (Vorabversion) 🍌 | 2.000.000 |
-| Einbettungsmodelle | | | | |
-| Gemini Embedding | 500.000 |
+| Gemini 3.1 Pro Önizlemesi | 5.000.000 |
+| Gemini 3.5 Flash-Lite | 10.000.000 |
+| Gemini 3.1 Flash Lite | 10.000.000 |
+| Gemini 3.1 Flash Lite Önizlemesi | 10.000.000 |
+| Gemini 3.6 Flash | 3.000.000 |
+| Gemini 3.5 Flash | 3.000.000 |
+| Gemini 2.5 Pro | 5.000.000 |
+| Gemini 2.5 Pro TTS | 25.000 |
+| Gemini 2.5 Flash | 3.000.000 |
+| Gemini 2.5 Flash Önizlemesi | 3.000.000 |
+| Gemini 2.5 Flash Image Önizlemesi | 3.000.000 |
+| Gemini 2.5 Flash TTS | 100.000 |
+| Gemini 2.5 Flash Lite | 10.000.000 |
+| Gemini 2.5 Flash Lite Önizlemesi | 10.000.000 |
+| Gemini 2.0 Flash | 10.000.000 |
+| Gemini 2.0 Flash Görüntüsü | 3.000.000 |
+| Gemini 2.0 Flash Lite | 10.000.000 |
+| Çok formatlı üretken modeller | | | | |
+| Gemini 3.1 Flash Image Preview 🍌 | 1.000.000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 2.000.000 |
+| Gemini 3 Pro ile görüntü önizlemesi 🍌 | 2.000.000 |
+| Yerleştirme modelleri | | | | |
+| Gemini Yerleştirme | 500.000 |
 
-### Preisstufe 2
+### Katman 2
 
-| Modell | In die Warteschlange gestellte Batch-Tokens |
+| Model | Toplu olarak sıraya alınan jetonlar |
 | --- | --- |
-| Textausgabemodelle | | | | |
+| Metin çıkışı modelleri | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (Vorabversion) | 500.000.000 |
-| Gemini 3.5 Flash-Lite | 500.000.000 |
-| Gemini 3.1 Flash Lite | 500.000.000 |
-| Gemini 3.1 Flash Lite (Vorabversion) | 500.000.000 |
-| Gemini 3.6 Flash | 400.000.000 |
-| Gemini 3.5 Flash | 400.000.000 |
-| Gemini 2.5 Pro | 500.000.000 |
-| Gemini 2.5 Pro TTS | 100.000 |
-| Gemini 2.5 Flash | 400.000.000 |
-| Gemini 2.5 Flash (Vorabversion) | 400.000.000 |
-| Gemini 2.5 Flash Image (Vorabversion) | 400.000.000 |
-| Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash Lite | 500.000.000 |
-| Gemini 2.5 Flash Lite (Vorabversion) | 500.000.000 |
-| Gemini 2.0 Flash | 1.000.000.000 |
-| Gemini 2.0 Flash Image | 400.000.000 |
-| Gemini 2.0 Flash Lite | 1.000.000.000 |
-| Multimodale generative Modelle | | | | |
-| Gemini 3.1 Flash Image (Vorabversion) 🍌 | 250.000.000 |
-| Gemini 3.1 Flash Lite-Image 🍌 | 270.000.000 |
-| Gemini 3 Pro Image (Vorabversion) 🍌 | 270.000.000 |
-| Einbettungsmodelle | | | | |
-| Gemini Embedding | 5.000.000 |
+| Gemini 3.1 Pro Önizlemesi | 500.000.000 |
+| Gemini 3.5 Flash-Lite | 500.000.000 |
+| Gemini 3.1 Flash Lite | 500.000.000 |
+| Gemini 3.1 Flash Lite Önizlemesi | 500.000.000 |
+| Gemini 3.6 Flash | 400.000.000 |
+| Gemini 3.5 Flash | 400.000.000 |
+| Gemini 2.5 Pro | 500.000.000 |
+| Gemini 2.5 Pro TTS | 100.000 |
+| Gemini 2.5 Flash | 400.000.000 |
+| Gemini 2.5 Flash Önizlemesi | 400.000.000 |
+| Gemini 2.5 Flash Image Önizlemesi | 400.000.000 |
+| Gemini 2.5 Flash TTS | 100.000 |
+| Gemini 2.5 Flash Lite | 500.000.000 |
+| Gemini 2.5 Flash Lite Önizlemesi | 500.000.000 |
+| Gemini 2.0 Flash | 1.000.000.000 |
+| Gemini 2.0 Flash Görüntüsü | 400.000.000 |
+| Gemini 2.0 Flash Lite | 1.000.000.000 |
+| Çok formatlı üretken modeller | | | | |
+| Gemini 3.1 Flash Image Preview 🍌 | 250.000.000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 270.000.000 |
+| Gemini 3 Pro ile görüntü önizlemesi 🍌 | 270.000.000 |
+| Yerleştirme modelleri | | | | |
+| Gemini Yerleştirme | 5.000.000 |
 
-### Ebene 3
+### 3. Katman
 
-| Modell | In die Warteschlange gestellte Batch-Tokens |
+| Model | Toplu olarak sıraya alınan jetonlar |
 | --- | --- |
-| Textausgabemodelle | | | | |
+| Metin çıkışı modelleri | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (Vorabversion) | 1.000.000.000 |
-| Gemini 3.5 Flash-Lite | 1.000.000.000 |
-| Gemini 3.1 Flash Lite | 1.000.000.000 |
-| Gemini 3.1 Flash Lite (Vorabversion) | 1.000.000.000 |
-| Gemini 3.6 Flash | 1.000.000.000 |
-| Gemini 3.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Pro | 1.000.000.000 |
-| Gemini 2.5 Pro TTS | 1.000.000 |
-| Gemini 2.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Flash (Vorabversion) | 1.000.000.000 |
-| Gemini 2.5 Flash Image (Vorabversion) | 1.000.000.000 |
-| Gemini 2.5 Flash TTS | 4.000.000 |
-| Gemini 2.5 Flash Lite | 1.000.000.000 |
-| Gemini 2.5 Flash Lite (Vorabversion) | 1.000.000.000 |
-| Gemini 2.0 Flash | 5.000.000.000 |
-| Gemini 2.0 Flash Image | 1.000.000.000 |
-| Gemini 2.0 Flash Lite | 5.000.000.000 |
-| Multimodale generative Modelle | | | | |
-| Gemini 3.1 Flash Image (Vorabversion) 🍌 | 750.000.000 |
-| Gemini 3.1 Flash Lite-Image 🍌 | 1.000.000.000 |
-| Gemini 3 Pro Image (Vorabversion) 🍌 | 1.000.000.000 |
-| Einbettungsmodelle | | | | |
-| Gemini Embedding | 10.000.000 |
+| Gemini 3.1 Pro Önizlemesi | 1.000.000.000 |
+| Gemini 3.5 Flash-Lite | 1.000.000.000 |
+| Gemini 3.1 Flash Lite | 1.000.000.000 |
+| Gemini 3.1 Flash Lite Önizlemesi | 1.000.000.000 |
+| Gemini 3.6 Flash | 1.000.000.000 |
+| Gemini 3.5 Flash | 1.000.000.000 |
+| Gemini 2.5 Pro | 1.000.000.000 |
+| Gemini 2.5 Pro TTS | 1.000.000 |
+| Gemini 2.5 Flash | 1.000.000.000 |
+| Gemini 2.5 Flash Önizlemesi | 1.000.000.000 |
+| Gemini 2.5 Flash Image Önizlemesi | 1.000.000.000 |
+| Gemini 2.5 Flash TTS | 4.000.000 |
+| Gemini 2.5 Flash Lite | 1.000.000.000 |
+| Gemini 2.5 Flash Lite Önizlemesi | 1.000.000.000 |
+| Gemini 2.0 Flash | 5.000.000.000 |
+| Gemini 2.0 Flash Görüntüsü | 1.000.000.000 |
+| Gemini 2.0 Flash Lite | 5.000.000.000 |
+| Çok formatlı üretken modeller | | | | |
+| Gemini 3.1 Flash Image Preview 🍌 | 750.000.000 |
+| Gemini 3.1 Flash Lite Image 🍌 | 1.000.000.000 |
+| Gemini 3 Pro ile görüntü önizlemesi 🍌 | 1.000.000.000 |
+| Yerleştirme modelleri | | | | |
+| Gemini Yerleştirme | 10.000.000 |
 
-## So führst du ein Upgrade auf die nächste Stufe durch
+## Bir sonraki katmana yükseltme
 
-Wenn Sie von der kostenlosen Stufe zu einer kostenpflichtigen Stufe wechseln möchten, müssen Sie zuerst [die Abrechnung in AI Studio einrichten](https://ai.google.dev/gemini-api/docs/billing?hl=de).
+Ücretsiz katmandan ücretli bir katmana geçmek için önce [AI Studio'da faturalandırmayı ayarlamanız](https://ai.google.dev/gemini-api/docs/billing?hl=tr) gerekir.
 
-Sobald Ihr Projekt die [angegebenen Kriterien](#usage-tiers) erfüllt, wird es automatisch auf die nächste Stufe hochgestuft. Tier-Upgrades von der kostenlosen Stufe auf Tier 1 werden in der Regel sofort wirksam. Nachfolgende Tier-Upgrades werden innerhalb von 10 Minuten wirksam. Rufen Sie in AI Studio die [Seite „Projekte“](https://aistudio.google.com/projects?hl=de) auf, um Ihre Stufen zu prüfen.
+Projeniz [belirtilen ölçütleri](#usage-tiers) karşıladığında otomatik olarak bir sonraki katmana yükseltilir. Ücretsiz katmandan 1. katmana yükseltme genellikle anında, sonraki katman yükseltmeleri ise 10 dakika içinde geçerlilik kazanır. Katmanlarınızı kontrol etmek için AI Studio'da [Projeler sayfasına](https://aistudio.google.com/projects?hl=tr) gidin.
 
-## Erhöhung des Ratenlimits beantragen
+## Oran sınırı artışı isteme
 
-Für jede Modellvariante gilt ein zugehöriges Ratenlimit (Anfragen pro Minute, RPM).
-Weitere Informationen zu diesen Ratenlimits finden Sie auf der Seite [AI Studio-Ratenlimit](https://aistudio.google.com/rate-limit?hl=de).
+Her model varyasyonunun ilişkili bir sıklık sınırı (dakikadaki istek sayısı, RPM) vardır.
+Bu hız sınırlarıyla ilgili ayrıntılar için [AI Studio Hız Sınırı](https://aistudio.google.com/rate-limit?hl=tr) sayfasına bakın.
 
-[Erhöhung der Anfragenbeschränkung für kostenpflichtige Stufe beantragen](https://forms.gle/ETzX94k8jf7iSotH9)
+[Ücretli katman için istek oranı sınırı artışı isteğinde bulunma](https://forms.gle/ETzX94k8jf7iSotH9)
 
-Wir können nicht garantieren, dass Ihr Ratenlimit erhöht wird, werden aber unser Bestes tun, um Ihre Anfrage zu prüfen.
+Hız sınırınızı artıracağımız konusunda garanti vermiyoruz ancak isteğinizi incelemek için elimizden geleni yapacağız.
 
-Feedback geben
+Geri bildirim gönderin
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+Son güncelleme tarihi: 2026-09-12 UTC.
 
-Haben Sie Feedback für uns?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]

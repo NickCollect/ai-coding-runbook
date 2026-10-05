@@ -1,35 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=it
-fetched_at: 2026-09-28T06:22:49.849126+00:00
-title: "Agentic Vision \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=he
+fetched_at: 2026-10-05T06:48:20.395530+00:00
+title: "\u05e8\u05d0\u05d9\u05d9\u05d4 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05e1\u05d5\u05db\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
-# Agentic Vision
+# ראייה באמצעות סוכנים
 
-I modelli ER di Gemini Robotics possono scrivere ed eseguire codice Python per manipolare le immagini e applicare la logica prima di rispondere. Questa pagina illustra esempi di esecuzione del codice: rilevamento di oggetti con zoom e ritaglio, lettura di strumenti, misurazione di fluidi, lettura di schede di circuiti e annotazione di immagini.
+מודלים של Gemini Robotics ER יכולים לכתוב ולהריץ קוד Python כדי לערוך תמונות ולהחיל לוגיקה לפני שהם עונים. בדף הזה יש דוגמאות להרצת קוד: זיהוי אובייקטים עם זום וחיתוך, קריאת מכשירים, מדידת נוזלים, קריאת לוחות מעגלים והערות לתמונות.
 
-Per adattare questi esempi al tuo caso d'uso, sostituisci il testo del prompt e il file immagine caricato con i tuoi. Puoi anche modificare lo schema JSON richiesto nel prompt in modo che corrisponda alla struttura di output di cui ha bisogno la tua applicazione oppure aggiungere un `system_instruction` per applicare il formato e la precisione dell'output.
+כדי להתאים את הדוגמאות האלה לתרחיש השימוש שלכם, צריך להחליף את טקסט ההנחיה ואת קובץ התמונה שהועלה בטקסט ובתמונה שלכם. אפשר גם לשנות את סכימת ה-JSON המבוקשת בהנחיה כך שתתאים למבנה הפלט שהאפליקציה צריכה, או להוסיף `system_instruction` כדי לאכוף את פורמט הפלט ואת הדיוק שלו.
 
-Per il codice eseguibile completo, consulta il
-[ricettario di Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+קוד מלא שניתן להרצה זמין ב-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Livello di pensiero
+## רמת ההעמקה
 
-Puoi controllare il livello di ragionamento del modello per scambiare la latenza con l'accuratezza. Le attività spaziali come il rilevamento di oggetti funzionano bene con un livello di pensiero basso. Le attività complesse come il conteggio o la stima del peso traggono vantaggio da un livello di pensiero più elevato.
+אתם יכולים לשנות את רמת החשיבה של המודל כדי לשפר את הדיוק על חשבון זמן האחזור. משימות מרחביות כמו זיהוי אובייקטים מתבצעות היטב ברמת חשיבה נמוכה. משימות מורכבות כמו ספירה או הערכת משקל מפיקות תועלת מרמת חשיבה גבוהה יותר.
 
-L'esempio seguente imposta il livello di pensiero su `high` per un'attività di conteggio complessa:
+בדוגמה הבאה, רמת החשיבה נקבעת כ-`high` למשימת ספירה מורכבת:
 
 ### Python
 
@@ -58,11 +57,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-Per i dettagli, consulta la sezione [Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
+פרטים נוספים מופיעים במאמר בנושא [חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
 
-## Rilevamento di oggetti (zoom e ritaglio)
+## זיהוי אובייקטים (שינוי גודל וחיתוך)
 
-L'esempio seguente utilizza l'esecuzione del codice per ingrandire e ritagliare un'immagine per una visualizzazione più chiara durante il rilevamento degli oggetti e la restituzione dei riquadri di delimitazione.
+בדוגמה הבאה נעשה שימוש בביצוע קוד כדי להגדיל ולחתוך תמונה לתצוגה ברורה יותר כשמזהים אובייקטים ומחזירים תיבות תוחמות.
 
 ### Python
 
@@ -96,7 +95,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-L'output del modello sarà simile alla seguente risposta JSON:
+פלט המודל ייראה בערך כך:
 
 ```
 [
@@ -108,13 +107,13 @@ L'output del modello sarà simile alla seguente risposta JSON:
 ]
 ```
 
-L'immagine seguente mostra le caselle restituite dal modello.
+בתמונה הבאה מוצגות התיבות שהוחזרו מהמודל.
 
-![Un esempio che mostra i riquadri di delimitazione per gli oggetti trovati](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=it)
+![דוגמה להצגת תיבות תוחמות לאובייקטים שנמצאו](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=he)
 
-## Leggere un indicatore analogico e applicare la logica
+## לקרוא מד אנלוגי ולהפעיל לוגיקה
 
-L'esempio seguente mostra come utilizzare il modello per leggere un indicatore analogico ed eseguire calcoli temporali. Utilizza un'istruzione di sistema per applicare un output JSON.
+בדוגמה הבאה אפשר לראות איך משתמשים במודל כדי לקרוא מד אנלוגי ולבצע חישובי זמן. היא משתמשת בהוראת מערכת כדי לאכוף פלט JSON.
 
 ### Python
 
@@ -145,9 +144,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## Misurare il fluido in un contenitore
+## מדידת נוזל במיכל
 
-L'esempio seguente mostra come utilizzare l'esecuzione del codice per misurare il livello del fluido in un contenitore.
+בדוגמה הבאה מוצג שימוש בהרצת קוד כדי למדוד את רמת הנוזל במיכל.
 
 ### Python
 
@@ -177,9 +176,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## Leggere i segni su una scheda di circuiti
+## קריאת סימונים בלוח מעגלים
 
-L'esempio seguente mostra come utilizzare l'esecuzione del codice per leggere i segni su una scheda di circuiti.
+בדוגמה הבאה מוצג איך להשתמש בהרצת קוד כדי לקרוא את הסימונים בלוח מעגלים.
 
 ### Python
 
@@ -209,11 +208,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-![Esempio che mostra i segni su una scheda di circuito](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=it)
+![דוגמה שמציגה סימונים בלוח מעגלים](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=he)
 
-## Annotazione immagine
+## הערה לתמונה
 
-L'esempio seguente mostra come utilizzare l'esecuzione del codice per annotare un'immagine (ad es. disegnare frecce per le istruzioni di smaltimento) e restituire l'immagine modificata.
+בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי להוסיף הערות לתמונה (למשל, ציור של חצים להוראות סילוק) ולהחזיר את התמונה ששונתה.
 
 ### Python
 
@@ -247,11 +246,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-Di seguito è riportata un'immagine di input di esempio.
+זוהי דוגמה לקלט של תמונה.
 
-![Un esempio che mostra un orologio da leggere](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=it)
+![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=he)
 
-L'output del modello sarà simile al seguente:
+הפלט של המודל ייראה כך:
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -260,18 +259,18 @@ L'output del modello sarà simile al seguente:
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## Passaggi successivi
+## המאמרים הבאים
 
-- [Orchestrazione delle attività](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=it): attività a lungo termine con API robot personalizzate.
-- [Robotica con streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=it): streaming bidirezionale in tempo reale (solo Gemini Robotics ER 2).
-- [Comprensione video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=it): ricerca di momenti e classificazione dei progressi (solo Gemini Robotics ER 2).
+- [תיזמור משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם ממשקי API מותאמים אישית של רובוטים.
+- [רובוטיקה עם סטרימינג](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת (Gemini Robotics ER 2 בלבד).
+- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות (Gemini Robotics ER 2 בלבד).
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-09-08 UTC.
+עדכון אחרון: 2026-09-08 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-08 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-08 (שעון UTC)."],[],[]]

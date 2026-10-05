@@ -1,47 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=th
-fetched_at: 2026-09-28T06:26:02.407447+00:00
-title: "\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e41\u0e25\u0e30\u0e0a\u0e38\u0e14\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-CN
+fetched_at: 2026-10-05T06:51:10.181635+00:00
+title: "\u65e5\u5fd7\u548c\u6570\u636e\u96c6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-ส่งความคิดเห็น
+发送反馈
 
-# บันทึกและชุดข้อมูล
+# 日志和数据集
 
-ในคู่มือนี้ คุณจะได้เรียนรู้วิธี
-ดูบันทึกจากการใช้งาน Gemini API ในแดชบอร์ด Google AI Studio
-เพื่อให้เข้าใจพฤติกรรมของโมเดลได้ดียิ่งขึ้น และวิธีที่ผู้ใช้อาจโต้ตอบกับแอปพลิเคชันของคุณ ใช้การบันทึกเพื่อสังเกต แก้ไขข้อบกพร่อง และ*แชร์ความคิดเห็นเกี่ยวกับการใช้งานกับ Google (ไม่บังคับ) เพื่อช่วยปรับปรุง Gemini ในกรณีการใช้งานของนักพัฒนาซอฟต์แวร์*[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=th)
+在本指南中，您将了解如何在 Google AI Studio 信息中心内查看 Gemini API 使用情况的日志，以便更好地了解模型行为以及用户与您的应用互动的方式。使用日志记录来观察、调试，并*选择性地与 Google 分享使用情况反馈，以帮助改进 Gemini 在开发者使用情形下的表现*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-cn)
 
-ระบบรองรับการเรียก API ทั้งหมดของ `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent` และการเรียก API ของ [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th) ยกเว้น Agent ที่ได้รับการจัดการ ซึ่งรวมถึงการโทรผ่านปลายทาง[ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th)
+支持所有 `GenerateContent`、`BatchGenerateContent`、`StreamGenerateContent` API 调用，以及除托管式智能体之外的 [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn) API 调用。这包括通过 [OpenAI 兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)端点进行的调用。
 
-## กำหนดค่าการบันทึกโปรเจ็กต์
+## 配置项目日志记录
 
-โดยค่าเริ่มต้น API จะจัดเก็บออบเจ็กต์การโต้ตอบทั้งหมด (`store=true`) เพื่อ
-ลดความซับซ้อนในการใช้ฟีเจอร์การจัดการสถานะฝั่งเซิร์ฟเวอร์ ในทางตรงกันข้าม Generate Content API จะไม่จัดเก็บคำขอโดยค่าเริ่มต้น และต้องเปิดใช้พื้นที่เก็บข้อมูลต่อคำขอหรือที่ระดับโปรเจ็กต์จาก AI Studio
+默认情况下，该 API 会存储所有互动对象 (`store=true`)，以简化服务器端状态管理功能的使用。相比之下，Generate Content API 默认不存储请求，需要从 AI Studio 中按请求或在项目级启用存储。
 
-ใน [AI Studio](https://aistudio.google.com/logs?hl=th) ของ Google คุณสามารถเปิดหรือปิดใช้การบันทึกสำหรับทุกโปรเจ็กต์หรือโปรเจ็กต์ที่เฉพาะเจาะจง และเปลี่ยนค่ากำหนดเหล่านี้ได้ทุกเมื่อผ่านแผง**การตั้งค่า**ในหน้า[บันทึกและชุดข้อมูล](https://aistudio.google.com/logs?hl=th) คุณสามารถเปิดหรือปิดการบันทึก
-แยกกันสำหรับ `generateContent` API และ
-[Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th) API
-เพื่อเปลี่ยนลักษณะการทำงานของการจัดเก็บเริ่มต้นสำหรับโปรเจ็กต์
+在 Google [AI Studio](https://aistudio.google.com/logs?hl=zh-cn) 中，您可以为所有项目或特定项目启用或停用日志记录，并随时通过[日志和数据集](https://aistudio.google.com/logs?hl=zh-cn)页面中的**设置**面板更改这些偏好设置。您可以单独为 `generateContent` API 和[互动](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn) API 开启或关闭日志记录，以更改项目的默认存储行为。
 
-### การบันทึกระดับคำขอ
+### 请求级日志记录
 
-ลักษณะการทำงานของพื้นที่เก็บข้อมูลและการบันทึกจะแตกต่างกันไปตาม API ดังนี้
+存储和日志记录行为因 API 而异：
 
-- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th):** จัดเก็บคำขอโดยค่าเริ่มต้น (`store=true`) เพื่อลดความซับซ้อนในการจัดการสถานะฝั่งเซิร์ฟเวอร์
-- **สร้าง Content API (`generateContent`):** ไม่จัดเก็บคำขอโดยค่าเริ่มต้น (`store=false`)
+- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-cn)**：默认存储请求 (`store=true`)，以简化服务器端状态管理。
+- **Generate Content API (`generateContent`)**：默认情况下不存储请求 (`store=false`)。
 
-วิธีตั้งค่าพร็อพเพอร์ตี้ `store` มีดังนี้
+以下是设置 `store` 属性的方法：
 
 **GenerateContent API**
 
@@ -229,66 +223,59 @@ func main() {
 }
 ```
 
-## ดูบันทึกของโปรเจ็กต์ใน AI Studio
+## 在 AI Studio 中查看项目日志
 
-1. ไปที่หน้าบันทึกใน [AI Studio](https://aistudio.google.com/logs?hl=th)
-2. เลือกโปรเจ็กต์จากเมนูแบบเลื่อนลง
-3. บันทึกจะปรากฏในตารางตามลำดับเวลาแบบย้อนหลังสำหรับ Interactions API หากมี
-4. หากต้องการดูบันทึกของโปรเจ็กต์สำหรับ Generate Content API ให้เปิดใช้ใน[แผงการตั้งค่า](#configure-logging)ก่อน
+1. 前往 [AI Studio](https://aistudio.google.com/logs?hl=zh-cn) 中的“日志”页面。
+2. 从下拉菜单中选择一个项目。
+3. 如果存在日志，则日志将以反向时间顺序显示在 Interactions API 的表格中。
+4. 如需查看 Generate Content API 的项目日志，请先在[设置面板](#configure-logging)中启用此功能。
 
-คลิกรายการเพื่อดูตัวอย่างเพย์โหลด คุณสามารถ
-ตรวจสอบพรอมต์และคำตอบทั้งหมดจาก Gemini รวมถึงบริบทจาก
-การสนทนาก่อนหน้าได้ สำหรับคำขอ **Interactions API** บันทึกจะรวมลิงก์โดยตรงไปยัง `previous_interaction_id` ด้วย
+点击条目即可预览相应载荷。您可以检查 Gemini 的完整提示和回答，以及之前对话轮次中的上下文。对于 **Interactions API** 请求，日志还包含指向 `previous_interaction_id` 的直接链接。
 
-## กำหนดค่าการเก็บรักษาพื้นที่เก็บข้อมูลของโปรเจ็กต์
+## 配置项目存储空间保留设置
 
-บันทึกจะหมดอายุและมีการทำเครื่องหมายว่าต้องลบหลังจากระยะเวลาเก็บรักษาเริ่มต้นที่ 55 วัน (เว้นแต่จะ[บันทึกลงในชุดข้อมูล](#create) ซึ่งจะไม่มีวันหมดอายุ)
-คุณกำหนดค่ากรอบเวลาการเก็บรักษาบันทึกของโปรเจ็กต์ได้สูงสุด 7, 14, 28 หรือ 55 วัน
+日志将在默认保留期限（55 天）过后过期并被标记为待删除（除非[保存到数据集](#create)，否则不会过期）。您可以将项目的日志保留期限配置为最长 7 天、14 天、28 天或 55 天。
 
-## สร้างและแชร์ชุดข้อมูล
+## 创建和共享数据集
 
-คุณสามารถบันทึกบันทึกลงในชุดข้อมูลเพื่อจัดระเบียบและส่งออกได้อย่างมีประสิทธิภาพมากขึ้น
+您可以将日志保存到数据集中，以便更有效地整理和导出日志。
 
-- จาก[หน้าบันทึก](https://aistudio.google.com/logs?hl=th) ให้ค้นหาแถบตัวกรอง
-  ที่ด้านบนเพื่อเลือกพร็อพเพอร์ตี้ที่จะใช้กรอง
-- จากมุมมองที่กรองแล้ว ให้ใช้ช่องทําเครื่องหมายเพื่อเลือกบันทึกทั้งหมดหรือบันทึกแต่ละรายการ
-- คลิกปุ่ม**สร้างชุดข้อมูล**ที่ปรากฏที่ด้านบนของรายการ
-- ตั้งชื่อและใส่คำอธิบาย (ไม่บังคับ) ให้กับชุดข้อมูลใหม่
-- คุณจะเห็นชุดข้อมูลที่เพิ่งสร้างขึ้นพร้อมชุดบันทึกที่ดูแลจัดการแล้ว
-- ส่งออกชุดข้อมูลเพื่อวิเคราะห์เพิ่มเติมเป็นไฟล์ CSV, JSONL หรือไปยัง Google ชีต
+- 在[日志页面](https://aistudio.google.com/logs?hl=zh-cn)中，找到顶部的过滤条件栏，选择要作为过滤条件的属性。
+- 在过滤后的视图中，使用复选框选择所有日志或个别日志。
+- 点击列表顶部显示的**创建数据集**按钮。
+- 为新数据集命名并添加说明（可选）。
+- 您将看到刚刚创建的包含精选日志的数据集。
+- 将数据集导出为 CSV、JSONL 文件或导出到 Google 表格，以便进一步分析。
 
-ชุดข้อมูลอาจเป็นประโยชน์สำหรับ Use Case ที่แตกต่างกันจำนวนหนึ่ง
+数据集可用于多种不同的应用场景。
 
-- **ดูแลชุดความท้าทาย:** ขับเคลื่อนการปรับปรุงในอนาคตซึ่งมุ่งเน้นไปยังส่วนที่คุณต้องการให้ AI ปรับปรุง
-- **ดูแลชุดตัวอย่าง:** เช่น ตัวอย่างจากการใช้งานจริงเพื่อสร้างคำตอบจากโมเดลอื่น หรือรวบรวมกรณีที่พบได้ยากเพื่อตรวจสอบตามปกติก่อนการติดตั้งใช้งาน
-- **ชุดการประเมิน:** ชุดที่แสดงถึงการใช้งานจริงในความสามารถที่สำคัญ เพื่อใช้เปรียบเทียบกับโมเดลอื่นๆ หรือการทำซ้ำคำสั่งของระบบ
+- **精心挑选挑战集**：推动未来的改进，重点关注您希望 AI 改进的方面。
+- **精心挑选样本集**：例如，从实际使用情况中抽样，以生成来自其他模型的回答；或者收集一系列极端情况，以便在部署前进行常规检查。
+- **评估集**：可代表重要功能实际使用情况的集合，用于在其他模型或系统指令迭代之间进行比较。
 
-คุณสามารถมีส่วนร่วมในการวิจัยและพัฒนา Gemini ได้โดยเลือกแชร์
-ชุดข้อมูลกับ Google เป็นตัวอย่างการสาธิต
+您可以选择与 Google 共享数据集作为演示示例，从而为 Gemini 的研究和开发做出贡献。
 
-## ข้อจำกัด
+## 限制
 
-ปัจจุบันระบบยังไม่รองรับการบันทึกสำหรับรายการต่อไปนี้
+目前不支持以下内容的日志记录：
 
-- โมเดล Imagen และ Veo
-- โมเดลการฝังของ Gemini
-- โมเดล Gemini Robotics
-- อินพุตที่มีวิดีโอ, GIF หรือ PDF
-- Agent เวอร์ชันตัวอย่างแบบสาธารณะใน Gemini API
+- Imagen 和 Veo 模型
+- Gemini 嵌入模型
+- Gemini Robotics 模型
+- 包含视频、GIF 或 PDF 的输入内容
+- Gemini API 中的公开预览版智能体
 
-## ขั้นตอนถัดไป
+## 后续步骤
 
-- **สร้างต้นแบบด้วยประวัติเซสชัน:** ใช้ [AI Studio Build](https://aistudio.google.com/apps?hl=th) เพื่อสร้างแอปโค้ดและเพิ่มคีย์ API เพื่อเปิดใช้ประวัติบันทึก Gemini API สำหรับฟีเจอร์ AI
-- **เรียกใช้บันทึกอีกครั้งด้วย Gemini Batch API:** ใช้ชุดข้อมูลสำหรับการสุ่มตัวอย่างคำตอบ
-  และการประเมินโมเดลหรือตรรกะของแอปพลิเคชันโดยการเรียกใช้บันทึกอีกครั้งด้วย
-  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb)
+- **使用会话历史记录进行原型设计**：使用 [AI Studio Build](https://aistudio.google.com/apps?hl=zh-cn) 进行氛围编程，并添加 API 密钥以启用 AI 功能的 Gemini API 日志历史记录。
+- **使用 Gemini Batch API 重新运行日志**：通过使用 [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) 重新运行日志，使用数据集对模型或应用逻辑的响应进行抽样和评估。
 
-ส่งความคิดเห็น
+发送反馈
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-อัปเดตล่าสุด 2026-09-24 UTC
+最后更新时间 (UTC)：2026-09-24。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+需要向我们提供更多信息？
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

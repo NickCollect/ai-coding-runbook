@@ -1,101 +1,112 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=zh-TW
-fetched_at: 2026-09-28T06:16:58.237443+00:00
-title: "\u5f9e Google AI Studio \u90e8\u7f72 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko
+fetched_at: 2026-10-05T06:30:20.780268+00:00
+title: "Google AI Studio\uc5d0\uc11c \ubc30\ud3ec \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-提供意見
+의견 보내기
 
-# 從 Google AI Studio 部署
+# Google AI Studio에서 배포
 
-您可以使用 Google AI Studio，直接從建構模式部署全端應用程式。這可讓您快速從原型轉移至可擴充的受管理正式環境。
+Google AI Studio를 사용하면 빌드 모드에서 바로 풀 스택 애플리케이션을 배포할 수 있습니다. 이를 통해 프로토타입에서 관리되고 확장 가능한 프로덕션 환경으로 빠르게 이동할 수 있습니다.
 
-## 部署方案
+## 배포 옵션
 
-如要從 AI Studio 建構模式部署應用程式，相關規定會因您使用的層級而異：
+AI Studio 빌드 모드에서 애플리케이션을 배포하기 위한 요구사항은 사용하는 등급에 따라 다릅니다.
 
-- [**Google Cloud 基礎方案**](https://docs.cloud.google.com/docs/starter-tier?hl=zh-tw)：
-  可讓您發布最多 2 個全端應用程式，不必設定 Google Cloud 專案或帳單帳戶。
-- **標準部署**：需要連結至 AI Studio 帳戶的 Google Cloud 專案，且該專案已啟用計費功能。
+- [**Google Cloud 스타터 등급**](https://docs.cloud.google.com/docs/starter-tier?hl=ko):
+  자격 요건을 충족하는 계정은 Google Cloud 프로젝트나 결제 계정을 설정하지 않고도 최대 2개의 전체 스택 애플리케이션을 게시할 수 있습니다.
+- **표준 배포**: AI Studio 계정에 연결된 Google Cloud 프로젝트가 필요하며 해당 프로젝트에서 결제가 사용 설정되어 있어야 합니다.
 
-## 關於入門級別
+## Starter 등급 정보
 
-Google Cloud Starter Tier 提供簡化的途徑，讓您直接從 Google AI Studio 將應用程式部署至 Google Cloud，不必設定完整的 Google Cloud 環境或帳單帳戶。
+Google Cloud 스타터 등급을 사용하면 자격 요건을 충족하는 계정에서 Google AI Studio에서 바로 Google Cloud에 애플리케이션을 배포할 수 있습니다. 일반 Google Cloud 환경이나 결제 계정을 설정할 필요가 없습니다.
 
-每次部署 Google AI Studio 都會在 Cloud Run 中建立對應的服務。如果服務是透過 Google AI Studio 的入門方案部署，則適用下列限制：
+Google AI Studio를 배포할 때마다 Cloud Run에 해당 서비스가 생성됩니다. Google AI Studio에서 Starter 등급으로 배포된 서비스에는 다음 제한사항이 적용됩니다.
 
-- 最多可部署兩項服務。
-- 您的服務部署在[單一 Cloud Run 區域](https://docs.cloud.google.com/run/docs/locations?hl=zh-tw)。
+- 최대 2개의 서비스를 배포할 수 있습니다.
+- 서비스가 [단일 Cloud Run 리전](https://docs.cloud.google.com/run/docs/locations?hl=ko)에 배포됩니다.
 
-## 「起步」級別的部署步驟
+### 스타터 등급 자격 요건
 
-在「建構」模式中設計應用程式後，請使用 Starter 層級部署應用程式：
+일부 계정은 Google Cloud 스타터 등급을 사용할 수 없습니다. 다음 중 하나라도 해당하는 경우 계정이 부적격일 수 있습니다.
 
-1. 按一下右上角的「發布」按鈕。
-2. 點選「開始使用」。
-3. 按一下「發布應用程式」。
+- Google Workspace 계정 (유료 또는 무료 Google Workspace, Google Workspace for Education, Google 비영리단체 프로그램 구독 포함)으로 로그인되어 있습니다.
+- 활성 상태이거나 이전에 유료 Google Cloud Billing 계정을 사용한 적이 있습니다.
+- 현재 계정 활동에서 Starter 등급 액세스를 부여하기에 충분한 증거가 없습니다.
 
-部署完成後，AI Studio 會提供 Cloud Run 網址，您可透過該網址存取上線的應用程式。
+Google AI Studio 지원팀은 Starter 등급 자격 요건을 재정의할 수 없습니다. 계정이 자격 요건을 충족하지 않으면 결제 계정을 연결하고 [표준 배포](#standard-deployment)를 사용하여 앱을 게시하세요.
 
-## AI Studio 的自訂網址
+## Starter 등급으로 배포
 
-從 Google AI Studio 發布應用程式時，您可以在 `ai.studio` 下設定自訂的子網域 (例如 `https://your-app-name.ai.studio`)，方便記憶。
+빌드 모드에서 앱을 설계한 후 스타터 등급으로 배포합니다.
 
-Google AI Studio 要求所有專案的子網域不得重複，並以先到先得的方式指派子網域。如果其他專案已使用該名稱，AI Studio 會提示您選擇其他名稱。如果取消發布或刪除應用程式，自訂網址就會釋出，供其他使用者申請。
+1. 오른쪽 상단에서 **게시** 버튼을 클릭합니다.
+2. **시작하기**를 클릭합니다.
+3. **앱 게시**를 클릭합니다.
 
-### 設定自訂網址
+배포가 완료되면 AI Studio에서 라이브 애플리케이션에 액세스할 수 있는 Cloud Run URL을 제공합니다.
 
-如要設定或更新應用程式的自訂網址，請按照下列步驟操作：
+## AI Studio의 맞춤 URL
 
-1. 在 Google AI Studio 中以「建構」模式開啟應用程式。
-2. 按一下右上角的「發布」。
-3. 在部署設定中，於「自訂網址」欄位輸入偏好的子網域，或接受系統建議的網址。
-4. 按一下「發布應用程式」。
+Google AI Studio에서 애플리케이션을 게시할 때 `ai.studio` 아래에 기억하기 쉬운 맞춤 하위 도메인을 설정할 수 있습니다 (예: `https://your-app-name.ai.studio`).
 
-如要將現有的自訂網址轉移至其他應用程式，請先取消發布或刪除已指派該自訂網址的應用程式，然後使用所選子網域發布新應用程式。
+Google AI Studio에서는 모든 프로젝트에서 하위 도메인이 전역적으로 고유해야 하며 선착순으로 할당됩니다. 다른 프로젝트에서 이미 이름을 사용하고 있는 경우 AI Studio에서 다른 이름을 선택하라는 메시지를 표시합니다. 애플리케이션을 게시 취소하거나 삭제하면 맞춤 URL이 해제되어 다른 사용자가 사용할 수 있게 됩니다.
 
-### 檢舉商標或著作權問題
+### 맞춤 URL 설정
 
-自訂子網域必須遵守《[Google 服務條款](https://policies.google.com/terms?hl=zh-tw)》。如果發現自訂網址侵害商標或未經授權使用受著作權保護的名稱，請使用 [Google 法律疑難排解工具](https://support.google.com/legal/troubleshooter/1114905?hl=zh-tw)檢舉。
+애플리케이션의 맞춤 URL을 설정하거나 업데이트하려면 다음 단계를 따르세요.
 
-## 標準部署項目
+1. Google AI Studio에서 **빌드** 모드로 애플리케이션을 엽니다.
+2. 오른쪽 상단에서 **게시**를 클릭합니다.
+3. 배포 구성의 **맞춤 URL** 필드에 원하는 하위 도메인을 입력하거나 추천 URL을 수락합니다.
+4. **앱 게시**를 클릭합니다.
 
-隨著應用程式不斷演進，您可能需要入門級方案以外的功能，例如更高的配額、更多運算資源，或是入門級方案未提供的其他 Google Cloud 產品。如要解鎖這些功能，您可以將完全代管的入門級專案轉換為標準 Google Cloud 專案。
+기존 맞춤 URL을 다른 애플리케이션으로 이전하려면 먼저 맞춤 URL이 할당된 애플리케이션을 게시 취소하거나 삭제한 다음 선택한 하위 도메인을 사용하여 새 애플리케이션을 게시해야 합니다.
 
-這樣一來，您就能順暢擴大規模，不會失去進度。請按照步驟[建立 Cloud Billing 帳戶](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=zh-tw#create-new-billing-account)、正式接受標準的 Google Cloud 服務條款，並[升級為標準的 Google Cloud 專案](https://docs.cloud.google.com/docs/starter-tier?hl=zh-tw#upgradee)。詳情請參閱「[付費帳戶設定](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=zh-tw#paid-setup)」。
+### 상표권 또는 저작권 문제 신고
 
-如要進一步瞭解計費級別，請參閱「[計費](https://ai.google.dev/gemini-api/docs/billing?hl=zh-tw)」。
+맞춤 하위 도메인은 [Google 서비스 약관](https://policies.google.com/terms?hl=ko)을 준수해야 합니다. 상표를 침해하거나 허가 없이 저작권이 있는 이름을 사용하는 맞춤 URL을 발견한 경우 [Google 법적 문제 해결 도구](https://support.google.com/legal/troubleshooter/1114905?hl=ko)를 사용하여 신고할 수 있습니다.
 
-## 刪除應用程式
+## 표준 배포
 
-如果不再需要應用程式，可以按照下列指示在 Google AI Studio 中刪除：
+애플리케이션이 발전함에 따라 더 높은 할당량, 증가된 컴퓨팅 리소스, Starter 등급에서 사용할 수 없는 기타 Google Cloud 제품과 같은 Starter 등급 이상의 기능이 필요할 수 있습니다. 이러한 기능을 사용하려면 완전 관리형 Starter 등급 프로젝트를 표준 Google Cloud 프로젝트로 변환하면 됩니다.
 
-1. 在 Google AI Studio 中，前往「應用程式」頁面。
-2. 選取左選單中的「應用程式」。
-3. 將指標懸停在要刪除的應用程式上。
-4. 點選資料列右側的垃圾桶圖示，即可刪除應用程式。
+이렇게 하면 진행 상황을 잃지 않고 원활하게 확장할 수 있습니다. 단계에 따라 [Cloud Billing 계정을 만들고](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=ko#create-new-billing-account), 표준 Google Cloud 서비스 약관에 공식적으로 동의하고, [표준 Google Cloud 프로젝트로 업그레이드](https://docs.cloud.google.com/docs/starter-tier?hl=ko#upgradee)합니다.
+자세한 내용은 [유료 계정 설정](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ko#paid-setup)을 참고하세요.
 
-## 後續步驟
+결제 등급에 대해 자세히 알아보려면 [결제](https://ai.google.dev/gemini-api/docs/billing?hl=ko)를 참고하세요.
 
-- 進一步瞭解 [Google Cloud Starter Tier](https://docs.cloud.google.com/docs/starter-tier?hl=zh-tw)。
-- 請參閱 [Gemini API 的計費方式](https://ai.google.dev/gemini-api/docs/billing?hl=zh-tw)。
+## 신청 삭제
 
-提供意見
+앱이 더 이상 필요하지 않은 경우 다음 안내에 따라 Google AI Studio에서 앱을 삭제할 수 있습니다.
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+1. Google AI Studio에서 [앱 페이지](https://aistudio.google.com/app/apps?hl=ko)로 이동합니다.
+2. 왼쪽 메뉴에서 **앱**을 선택합니다.
+3. 삭제하려는 앱 위로 포인터를 가져갑니다.
+4. 행의 오른쪽에 있는 휴지통 아이콘을 클릭하여 앱을 삭제합니다.
 
-上次更新時間：2026-07-10 (世界標準時間)。
+## 다음 단계
 
-想進一步說明嗎？
+- [Google Cloud 스타터 등급](https://docs.cloud.google.com/docs/starter-tier?hl=ko)에 대해 자세히 알아보세요.
+- Gemini API의 [결제](https://ai.google.dev/gemini-api/docs/billing?hl=ko)에 대해 알아보세요.
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-10 (世界標準時間)。"],[],[]]
+의견 보내기
+
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+
+최종 업데이트: 2026-09-28(UTC)
+
+의견을 전달하고 싶나요?
+
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-28(UTC)"],[],[]]

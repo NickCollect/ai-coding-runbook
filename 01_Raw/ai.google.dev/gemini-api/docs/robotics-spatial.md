@@ -1,31 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=es-419
-fetched_at: 2026-09-28T06:32:22.374992+00:00
-title: "Razonamiento espacial \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-TW
+fetched_at: 2026-10-05T06:51:13.680462+00:00
+title: "\u7a7a\u9593\u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Enviar comentarios
+提供意見
 
-# Razonamiento espacial
+# 空間推論
 
-Los modelos ER de Gemini Robotics pueden apuntar a objetos, hacerles un seguimiento en video, detectarlos con cuadros delimitadores y generar trayectorias de movimiento.
+Gemini Robotics ER 模型可以指向物件、在影片中追蹤物件、以定界框偵測物件，以及生成移動軌跡。
 
-Para obtener el código ejecutable completo, consulta el
-[libro de recetas de Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+如需完整的可執行程式碼，請參閱「[機器人食譜](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)」。
 
-## Apunta a los objetos
+## 對準物件
 
-En el siguiente ejemplo, se buscan objetos específicos en una imagen y se muestran sus coordenadas `[y, x]` normalizadas:
+以下範例會在圖片中尋找特定物件，並傳回標準化的 `[y, x]` 座標：
 
 ### Python
 
@@ -93,7 +92,7 @@ curl -X POST \
   }'
 ```
 
-El resultado será un array JSON que contiene objetos, cada uno con un `point` (coordenadas `[y, x]` normalizadas) y una `label` que identifica el objeto.
+輸出內容會是包含物件的 JSON 陣列，每個物件都有 `point` (標準化 `[y, x]` 座標) 和用於識別物件的 `label`。
 
 ### JSON
 
@@ -112,14 +111,13 @@ El resultado será un array JSON que contiene objetos, cada uno con un `point` (
 ]
 ```
 
-La siguiente imagen es un ejemplo de cómo se pueden mostrar estos puntos:
+下圖顯示這些點的範例：
 
-![Un ejemplo que muestra los puntos de los objetos en una imagen](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=es-419)
+![顯示圖片中物體點的範例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=zh-tw)
 
-## Seguimiento de objetos en un video
+## 追蹤影片中的物件
 
-Gemini Robotics ER 2 también puede analizar fotogramas de video para hacer un seguimiento de los objetos a lo largo del tiempo. Consulta [Entradas de video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419#supported-formats)
-para obtener una lista de los formatos de video compatibles.
+Gemini Robotics ER 2 也能分析影片影格，追蹤一段時間內的物體。如需支援的影片格式清單，請參閱「[影片輸入](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#supported-formats)」。
 
 ### Python
 
@@ -153,9 +151,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## Detección de objetos y cuadros delimitadores
+## 物件偵測和定界框
 
-Además de los puntos, puedes solicitarle al modelo que muestre cuadros delimitadores 2D, que proporcionan más detalles espaciales para los objetos detectados.
+除了點之外，您也可以提示模型傳回 2D 定界框，為偵測到的物件提供更多空間細節。
 
 ### Python
 
@@ -189,11 +187,11 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## Trayectorias
+## 軌跡
 
-Gemini Robotics ER 2 puede generar secuencias de puntos que definen una trayectoria, lo que es útil para guiar el movimiento del robot.
+Gemini Robotics ER 2 可生成定義軌跡的點序列，有助於引導機器人移動。
 
-En este ejemplo, se solicita una trayectoria para mover un bolígrafo rojo a un organizador, incluida una estimación de los puntos de ruta intermedios. El código se redujo para mostrar solo la instrucción.
+這個範例要求將紅筆移動到收納盒的軌跡，包括中間路徑點的估計值。程式碼已縮減，只顯示提示。
 
 ### Python
 
@@ -206,9 +204,9 @@ prompt = """
         """
 ```
 
-## Crear espacio para una laptop
+## 為筆電騰出空間
 
-En este ejemplo, se muestra cómo Gemini Robotics ER puede razonar sobre un espacio. La instrucción le pide al modelo que identifique qué objeto se debe mover para crear espacio para otro elemento.
+這個範例顯示 Gemini Robotics ER 如何推論空間。提示會要求模型找出需要移動的物件，以便為其他項目騰出空間。
 
 ### Python
 
@@ -240,7 +238,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-La respuesta contiene una coordenada 2D del objeto que responde la pregunta del usuario, en este caso, el objeto que debe moverse para crear espacio para una laptop.
+回覆內容包含可回答使用者問題的物體 2D 座標，在本例中，該物體應移動，為筆電騰出空間。
 
 ```
 [
@@ -248,11 +246,11 @@ La respuesta contiene una coordenada 2D del objeto que responde la pregunta del 
 ]
 ```
 
-![Un ejemplo que muestra qué objeto se debe mover para otro objeto](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=es-419)
+![範例：顯示另一個物件需要移動的物件](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=zh-tw)
 
-## Preparar un almuerzo
+## 準備午餐
 
-El modelo también puede proporcionar instrucciones para tareas de varios pasos y apuntar a los objetos relevantes para cada paso. En este ejemplo, se muestra cómo el modelo planifica una serie de pasos para preparar una bolsa de almuerzo.
+模型也能提供多步驟工作的操作說明，並指出每個步驟的相關物件。這個範例說明模型如何規劃一系列步驟來打包午餐袋。
 
 ### Python
 
@@ -285,13 +283,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-La respuesta de esta instrucción es un conjunto de instrucciones paso a paso sobre cómo preparar una bolsa de almuerzo a partir de la entrada de imagen.
+這個提示詞的回覆內容是一組逐步說明，教導如何包裝圖片輸入內容中的午餐袋。
 
-**Imagen de entrada**
+**輸入圖片**
 
-![Imagen de una lonchera y elementos para poner en ella](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=es-419)
+![午餐盒和要放入其中的物品圖片](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=zh-tw)
 
-**Resultado del modelo**
+**模型輸出內容**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -314,19 +312,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## ¿Qué sigue?
+## 後續步驟
 
-- [Capacidades de agente](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=es-419): ejecución de código, lectura de instrumentos y anotación de imágenes
-- [Organización de tareas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=es-419): tareas de largo plazo con APIs de robot personalizadas
-- [Robótica con transmisión](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=es-419): transmisión bidireccional en tiempo real (solo Gemini Robotics ER 2).
-- [Comprensión de video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=es-419): búsqueda de momentos y clasificación de progreso (solo Gemini Robotics ER 2)
+- [代理能力](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=zh-tw)：執行程式碼、讀取儀器、標註圖片。
+- [工作流程協調](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-tw)：使用自訂機器人 API 執行長期任務。
+- [串流機器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)：即時雙向串流 (僅限 Gemini Robotics ER 2)。
+- [影片理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-tw)：尋找特定時刻和進度分類 (僅限 Gemini Robotics ER 2)。
 
-Enviar comentarios
+提供意見
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última actualización: 2026-09-08 (UTC)
+上次更新時間：2026-09-08 (世界標準時間)。
 
-¿Quieres brindar más información?
+想進一步說明嗎？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-08 (UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-08 (世界標準時間)。"],[],[]]

@@ -1,42 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=it
-fetched_at: 2026-09-28T06:12:48.897457+00:00
-title: "Output strutturati \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=he
+fetched_at: 2026-10-05T06:43:46.133380+00:00
+title: "\u05e4\u05dc\u05d8\u05d9\u05dd \u05de\u05d5\u05d1\u05b0\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
 
-Invia feedback
+שליחת משוב
 
-# Output strutturati
+# פלטים מובְנים
 
-Puoi configurare i modelli Gemini per generare risposte che rispettino uno schema JSON fornito. In questo modo, i risultati sono prevedibili e type-safe e l'estrazione di dati strutturati da testo non strutturato è più semplice.
+אתם יכולים להגדיר את מודלי Gemini כך שיפיקו תשובות בהתאם לסכימת JSON שסיפקתם. כך אפשר להבטיח תוצאות צפויות ובטוחות מבחינת סוג הנתונים, ולפשט את תהליך החילוץ של נתונים מובְנים מטקסט לא מובְנה.
 
-L'utilizzo di output strutturati è ideale per:
+שימוש בפלט מובנה הוא אידיאלי במקרים הבאים:
 
-- **Estrazione dei dati:** estrai informazioni specifiche come nomi e date dal testo.
-- **Classificazione strutturata:** classifica il testo in categorie predefinite.
-- **Flussi di lavoro agentici:** genera input strutturati per strumenti o API.
+- **חילוץ נתונים:** חילוץ מידע ספציפי כמו שמות ותאריכים מטקסט.
+- **סיווג מובנה:** סיווג טקסט לקטגוריות מוגדרות מראש.
+- **תהליכי עבודה מבוססי-סוכן:** יצירת קלט מובנה לכלים או לממשקי API.
 
-Oltre a supportare lo schema JSON nell'API REST, gli SDK Google GenAI
-semplificano la definizione degli schemi utilizzando
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) e
-[Zod](https://zod.dev/) (JavaScript).
+בנוסף לתמיכה בסכימת JSON ב-API בארכיטקטורת REST, ערכות ה-SDK של Google GenAI מאפשרות להגדיר סכימות בקלות באמצעות [Pydantic](https://docs.pydantic.dev/latest/) (Python) ו-[Zod](https://zod.dev/) (JavaScript).
 
-## Esempi di output strutturati
+## דוגמאות לפלט מובנה
 
-### Estrattore di ricette
+### כלי לחילוץ מתכונים
 
-Questo esempio mostra come estrarre dati strutturati dal testo utilizzando i tipi di schema JSON di base come `object`, `array`, `string` e `integer`.
+בדוגמה הזו מוסבר איך לחלץ נתונים מובְנים מטקסט באמצעות סוגים בסיסיים של סכימת JSON, כמו `object`, `array`, `string` ו-`integer`.
 
 ### Python
 
@@ -130,7 +127,7 @@ const recipe = recipeSchema.parse(JSON.parse(response.text));
 console.log(recipe);
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -267,7 +264,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }'
 ```
 
-**Esempio di risposta:**
+**דוגמה לתשובה:**
 
 ```
 {
@@ -322,9 +319,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-### Moderazione dei contenuti
+### ניהול תוכן
 
-Questo esempio mostra `anyOf` per gli schemi condizionali e `enum` per la classificazione, consentendo alla struttura dell'output di variare in base ai contenuti.
+בדוגמה הזו מוצגים `anyOf` לסכימות מותנות ו-`enum` לסיווג, כך שמבנה הפלט יכול להשתנות בהתאם לתוכן.
 
 ### Python
 
@@ -403,7 +400,7 @@ const result = moderationResultSchema.parse(JSON.parse(response.text));
 console.log(result);
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -551,9 +548,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-### Strutture ricorsive
+### מבנים רקורסיביים
 
-Questo esempio illustra come definire uno schema ricorsivo, ad esempio un organigramma.
+בדוגמה הזו מוסבר איך מגדירים סכימה רקורסיבית, כמו תרשים ארגוני.
 
 ### Python
 
@@ -622,7 +619,7 @@ const employee = employeeSchema.parse(JSON.parse(response.text));
 console.log(employee);
 ```
 
-### Vai
+### Go
 
 ```
 package main
@@ -716,7 +713,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }'
 ```
 
-**Esempio di risposta:**
+**דוגמה לתשובה:**
 
 ```
 {
@@ -743,11 +740,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-## Streaming
+## סטרימינג
 
-Puoi eseguire lo streaming degli output strutturati, il che ti consente di iniziare a elaborare la risposta durante la generazione, senza dover attendere il completamento dell'intero output. In questo modo, le prestazioni percepite della tua applicazione possono migliorare.
+אתם יכולים להזרים פלט מובנה, וכך להתחיל לעבד את התגובה בזמן שהיא נוצרת, בלי לחכות עד שהפלט כולו יושלם. כך אפשר לשפר את הביצועים של האפליקציה.
 
-I blocchi in streaming saranno stringhe JSON parziali valide, che possono essere concatenate per formare l'oggetto JSON finale e completo.
+החלקים שמוזרמים יהיו מחרוזות JSON חלקיות ותקינות, שאפשר לשרשר כדי ליצור את אובייקט ה-JSON הסופי והמלא.
 
 ### Python
 
@@ -803,14 +800,9 @@ for await (const chunk of stream) {
 }
 ```
 
-## Output strutturati con gli strumenti
+## פלט מובנה בעזרת כלים
 
-Gemini 3 ti consente di combinare gli output strutturati con gli strumenti integrati, tra cui
-[Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it),
-[contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it),
-[esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it),
-[ricerca di file](https://ai.google.dev/gemini-api/docs/file-search?hl=it#structured-output) e
-[chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
+‫Gemini 3 מאפשר לכם לשלב פלט מובנה עם כלים מובנים, כולל [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he),‏ [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he),‏ [הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he),‏ [File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=he#structured-output) ו-[קריאה להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
 
 ### Python
 
@@ -915,101 +907,101 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## Supporto dello schema JSON
+## תמיכה בסכימת JSON
 
-Per generare un oggetto JSON, imposta `response_format` nella configurazione di generazione. Lo schema deve essere uno schema [JSON valido](https://json-schema.org/) che descriva il formato di output desiderato.
+כדי ליצור אובייקט JSON, מגדירים את `response_format` בהגדרות היצירה. הסכימה חייבת להיות [סכימת JSON](https://json-schema.org/) תקינה שמתארת את פורמט הפלט הרצוי.
 
-Il modello genererà quindi una risposta che è una stringa JSON sintatticamente valida che corrisponde allo schema fornito. Quando utilizzi gli output strutturati, il modello produce gli output nello stesso ordine delle chiavi nello schema.
+המודל ייצור תשובה שהיא מחרוזת JSON תקינה מבחינת תחביר, שתואמת לסכימה שצוינה. כשמשתמשים בפלט מובנה, המודל יפיק פלט באותו סדר של המפתחות בסכימה.
 
-La modalità di output strutturato di Gemini supporta un sottoinsieme della specifica dello schema [JSON](https://json-schema.org).
+מצב הפלט המובנה של Gemini תומך בחלק ממפרט [JSON Schema](https://json-schema.org).
 
-Sono supportati i seguenti valori di `type`:
+יש תמיכה בערכים הבאים של `type`:
 
-- **`string`**: per il testo.
-- **`number`**: per i numeri in virgola mobile.
-- **`integer`**: per i numeri interi.
-- **`boolean`**: per i valori true/false.
-- **`object`**: per i dati strutturati con coppie chiave-valore.
-- **`array`**: per gli elenchi di elementi.
-- **`null`**: per consentire a una proprietà di essere null, includi `"null"` nell'array di tipi (ad es. `{"type": ["string", "null"]}`).
+- ‫**`string`**: לטקסט.
+- ‫**`number`**: למספרים בשיטת נקודה צפה.
+- ‫**`integer`**: למספרים שלמים.
+- ‫**`boolean`**: לערכים מסוג True/False.
+- ‫**`object`**: לנתונים מובְנים עם צמדי מפתח/ערך.
+- ‫**`array`**: לרשימות של פריטים.
+- ‫**`null`**: כדי לאפשר שמאפיין יהיה null, צריך לכלול את `"null"` במערך הסוגים (לדוגמה, `{"type": ["string", "null"]}`).
 
-Queste proprietà descrittive aiutano a guidare il modello:
+המאפיינים התיאוריים האלה עוזרים להנחות את המודל:
 
-- **`title`**: una breve descrizione di una proprietà.
-- **`description`**: una descrizione più lunga e dettagliata di una proprietà.
+- ‫**`title`**: תיאור קצר של מאפיין.
+- **`description`**: תיאור ארוך ומפורט יותר של נכס.
 
-### Proprietà specifiche del tipo
+### מאפיינים ספציפיים לסוג
 
-**Per i valori `object`:**
+**לערכים של `object`:**
 
-- **`properties`**: un oggetto in cui ogni chiave è un nome di proprietà e ogni valore è uno schema per quella proprietà.
-- **`required`**: un array di stringhe che elenca le proprietà obbligatorie.
-- **`additionalProperties`**: controlla se le proprietà non elencate in `properties` sono consentite. Può essere un valore booleano o uno schema.
+- ‫**`properties`**: אובייקט שבו כל מפתח הוא שם מאפיין וכל ערך הוא סכימה של המאפיין הזה.
+- ‫**`required`**: מערך של מחרוזות שמפרט את המאפיינים שחובה להגדיר.
+- ‫**`additionalProperties`**: קובעת אם מותר להשתמש בנכסים שלא מופיעים ב-`properties`. יכול להיות ערך בוליאני או סכמה.
 
-**Per i valori `string`:**
+**לערכים של `string`:**
 
-- **`enum`**: elenca un insieme specifico di stringhe possibili per le attività di classificazione.
-- **`format`**: specifica una sintassi per la stringa, ad esempio `date-time`, `date`, `time`.
+- ‫**`enum`**: רשימה של קבוצה ספציפית של מחרוזות אפשריות למשימות סיווג.
+- ‫**`format`**: מציין תחביר למחרוזת, כמו `date-time`, ‏`date`, ‏`time`.
 
-**Per i valori `number` e `integer`:**
+**לערכים `number` ו-`integer`:**
 
-- **`enum`**: elenca un insieme specifico di valori numerici possibili.
-- **`minimum`**: il valore inclusivo minimo.
-- **`maximum`**: il valore inclusivo massimo.
+- ‫**`enum`**: רשימה של קבוצה ספציפית של ערכים נומריים אפשריים.
+- ‫**`minimum`**: ערך המינימום כולל.
+- ‫**`maximum`**: הערך המקסימלי כולל.
 
-**Per i valori `array`:**
+**לערכים של `array`:**
 
-- **`items`**: definisce lo schema per tutti gli elementi dell'array.
-- **`prefixItems`**: definisce un elenco di schemi per i primi N elementi, consentendo strutture simili a tuple.
-- **`minItems`**: il numero minimo di elementi nell'array.
-- **`maxItems`**: il numero massimo di elementi nell'array.
+- ‫**`items`**: הגדרת הסכימה של כל הפריטים במערך.
+- ‫**`prefixItems`**: מגדיר רשימה של סכימות עבור הפריטים הראשונים, ומאפשר מבנים דמויי-tuple.
+- ‫**`minItems`**: המספר המינימלי של פריטים במערך.
+- ‫**`maxItems`**: המספר המקסימלי של פריטים במערך.
 
-## Supporto del modello
+## תמיכה במודלים
 
-I seguenti modelli supportano l'output strutturato:
+המודלים הבאים תומכים בפלט מובנה:
 
-| Modello | Output strutturati |
+| מודל | פלט מובנה |
 | --- | --- |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Pro (anteprima) | ✔️ |
+| ‫Gemini 3.1 Pro Preview | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
-| Gemini 3.1 Flash-Lite (anteprima) | ✔️ |
-| Gemini 2.5 Pro | ✔️ |
-| Gemini 2.5 Flash | ✔️ |
+| ‫Gemini 3.1 Flash-Lite Preview | ✔️ |
+| Gemini ‎2.5 Pro | ✔️ |
+| Gemini ‎2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* Tieni presente che Gemini 2.0 richiede un elenco esplicito `propertyOrdering` all'interno dell'input JSON per definire la struttura preferita. Puoi trovare un esempio in questo [cookbook](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb).*
+*\* שימו לב: ב-Gemini 2.0 צריך להגדיר רשימה מפורשת של `propertyOrdering` בקלט ה-JSON כדי להגדיר את המבנה המועדף. אפשר למצוא דוגמה ב[אוסף פתרונות](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) הזה.*
 
-## Output strutturati rispetto alle chiamate di funzione
+## פלט מובנה לעומת קריאה להפעלת פונקציות
 
-Sia gli output strutturati sia le chiamate di funzione utilizzano schemi JSON, ma hanno scopi diversi:
+גם פלט מובנה וגם קריאה לפונקציה משתמשים בסכימות JSON, אבל הם משמשים למטרות שונות:
 
-| Funzionalità | Caso d'uso primario |
+| תכונה | תרחיש שימוש ראשי |
 | --- | --- |
-| **Output strutturati** | **Formattazione della risposta finale per l'utente.** Utilizza questa opzione quando vuoi che la *risposta* del modello sia in un formato specifico (ad es. estrazione di dati da un documento da salvare in un database). |
-| **Chiamate di funzione** | **Esecuzione di azioni durante la conversazione.** Utilizza questa opzione quando il modello deve *chiederti* di eseguire un'attività (ad es. "ottieni le condizioni meteorologiche attuali") prima di poter fornire una risposta finale. |
+| **פלט מובנה** | **עיצוב התשובה הסופית למשתמש.** משתמשים בזה כשרוצים ש*התשובה* של המודל תהיה בפורמט ספציפי (למשל, שליפת נתונים ממסמך כדי לשמור אותם במסד נתונים). |
+| **בקשה להפעלת פונקציה** | **ביצוע פעולות במהלך השיחה** משתמשים בזה כשהמודל צריך *לשאול אתכם* לבצע משימה (למשל, "קבלת נתוני מזג האוויר הנוכחיים") לפני שהוא יכול לספק תשובה סופית. |
 
-## Best practice
+## שיטות מומלצות
 
-- **Descrizioni chiare:** utilizza il campo `description` nello schema per fornire istruzioni chiare al modello su cosa rappresenta ogni proprietà. Questo è fondamentale per guidare l'output del modello.
-- **Digitazione forte:** utilizza tipi specifici (`integer`, `string`, `enum`) quando possibile. Se un parametro ha un insieme limitato di valori validi, utilizza un `enum`.
-- **Prompt engineering:** indica chiaramente nel prompt cosa vuoi che il modello faccia. Ad esempio, "Estrai le seguenti informazioni dal testo..." o "Classifica questo feedback in base allo schema fornito...".
-- **Convalida:** sebbene l'output strutturato garantisca un JSON sintatticamente corretto, non garantisce che i valori siano semanticamente corretti. Convalida sempre l'output finale nel codice dell'applicazione prima di utilizzarlo.
-- **Gestione degli errori:** implementa una gestione degli errori efficace nella tua applicazione per gestire correttamente i casi in cui l'output del modello, sebbene conforme allo schema, potrebbe non soddisfare i requisiti della logica di business.
+- **תיאורים ברורים:** משתמשים בשדה `description` בסכימה כדי לספק למודל הוראות ברורות לגבי מה מייצג כל מאפיין. ההנחיה הזו חיונית כדי להנחות את הפלט של המודל.
+- **הקלדה חזקה:** מומלץ להשתמש בסוגים ספציפיים (`integer`, ‏ `string`, ‏ `enum`) בכל הזדמנות. אם לפרמטר יש קבוצה מוגבלת של ערכים תקינים, משתמשים ב-`enum`.
+- **הנדסת הנחיות:** בהנחיה צריך לציין בצורה ברורה מה רוצים שהמודל יעשה. לדוגמה: 'תחלץ את המידע הבא מהטקסט...' או 'תסווג את המשוב הזה לפי הסכימה שצוינה...'.
+- **אימות:** הפלט המובנה מבטיח שקובץ ה-JSON יהיה תקין מבחינת התחביר, אבל לא מבטיח שהערכים יהיו תקינים מבחינה סמנטית. תמיד צריך לאמת את הפלט הסופי בקוד האפליקציה לפני שמשתמשים בו.
+- **טיפול בשגיאות:** כדאי להטמיע טיפול חזק בשגיאות באפליקציה כדי לנהל בצורה תקינה מקרים שבהם הפלט של המודל עומד בדרישות הסכימה, אבל לא בדרישות הלוגיקה העסקית.
 
-## Limitazioni
+## מגבלות
 
-- **Sottoinsieme dello schema:** non tutte le funzionalità della specifica dello schema JSON sono supportate. Il modello ignora le proprietà non supportate.
-- **Complessità dello schema:** l'API potrebbe rifiutare schemi molto grandi o profondamente nidificati. Se riscontri errori, prova a semplificare lo schema abbreviando i nomi delle proprietà, riducendo la nidificazione o limitando il numero di vincoli.
+- **קבוצת משנה של סכימה:** לא כל התכונות של מפרט סכימת ה-JSON נתמכות. המודל מתעלם ממאפיינים שלא נתמכים.
+- **מורכבות הסכימה:** יכול להיות שממשק ה-API ידחה סכימות גדולות מאוד או סכימות עם קינון עמוק. אם נתקלים בשגיאות, כדאי לפשט את הסכימה על ידי קיצור שמות המאפיינים, צמצום הקינון או הגבלת מספר האילוצים.
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-09-12 UTC.
+עדכון אחרון: 2026-09-12 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-12 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-12 (שעון UTC)."],[],[]]

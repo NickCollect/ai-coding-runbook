@@ -1,86 +1,86 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=tr
-fetched_at: 2026-09-28T06:13:37.858703+00:00
-title: "API hatalar\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=pt-BR
+fetched_at: 2026-10-05T06:39:34.072004+00:00
+title: "Erros da API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Geri bildirim gönderin
+Envie comentários
 
-# API hataları
+# Erros da API
 
-Bu sayfada, tüm Interactions API hata kodları için referans sağlanmakta, hata yanıtı biçimi açıklanmakta ve API'nin farklı istek türleri için hataları nasıl ilettiği anlatılmaktadır.
+Esta página fornece uma referência para todos os códigos de erro da API Interactions, descreve o formato da resposta de erro e explica como a API entrega erros para diferentes tipos de solicitação.
 
-## Standart API hata kodları
+## Códigos de erro da API padrão
 
-Bu genel istek düzeyindeki hata kodları, standart HTTP durum kodlarına karşılık gelir.
-Hataları programatik olarak işlemek için uygulama mantığınızdaki `code` alanını kullanın.
+Esses códigos de erro gerais no nível da solicitação correspondem aos códigos de status HTTP padrão.
+Use o campo `code` na lógica do aplicativo para processar erros de maneira programática.
 
-| Kod | HTTP Durumu | Açıklama | Önerilen işlem |
+| Código | Status do HTTP | Descrição | Ação recomendada |
 | --- | --- | --- | --- |
-| `invalid_request` | 400 Hatalı İstek | İstek yükü yanlış biçimlendirilmiş veya geçersiz parametreler içeriyor. | İstek söz diziminizi ve parametrelerinizi [API referansıyla](https://ai.google.dev/api/interactions-api?hl=tr) karşılaştırarak kontrol edin. |
-| `failed_precondition` | 400 Hatalı İstek | Bir ön koşul karşılanmadığı için (ör. faturalandırma devre dışı bırakılmış) istek işlenemiyor. | Proje faturalandırma durumunu veya hesap ön koşullarını doğrulayın. |
-| `out_of_range` | 416 İstenen Aralık Karşılanamıyor | İstek parametresi geçerli aralığın dışında. | Parametre değerlerini ve sınırlarını kontrol edin. |
-| `parameter_unknown` | 400 Hatalı İstek | İstek bilinmeyen bir parametre içeriyor. | Tanınmayan parametreyi kaldırıp tekrar deneyin. |
-| `authentication` | 401 Yetkilendirilmedi | API anahtarı eksik, geçersiz veya süresi dolmuş. | [API anahtarınızı](https://ai.google.dev/gemini-api/docs/api-key?hl=tr) doğrulayın. |
-| `payment_required` | 402 Ödeme Gerekli | Ön ödeme kredisi bakiyeniz tükendi. | Faturalandırma hesabınıza [kredi ekleyin](https://ai.google.dev/gemini-api/docs/billing?hl=tr#buy-credits) veya [otomatik para yükleme](https://ai.google.dev/gemini-api/docs/billing?hl=tr#auto-reload) özelliğini etkinleştirin. Yeniden denemeyin: Kredi eklenene kadar istek başarılı olmaz. |
-| `permission_denied` | 403 Yasak | API anahtarınızın bu kaynak için izni yok. | API anahtarı izinlerinizi ve proje erişiminizi kontrol edin. |
-| `not_found` | 404 Bulunamadı | İstenen kaynak bulunamadı. | Kaynak yolunu ve parametreleri doğrulayın. |
-| `model_not_found` | 404 Bulunamadı | Belirtilen model bulunamadı. | Model adını doğrulayın veya farklı bir modele geri dönün. |
-| `already_exists` | 409 Çakışma | Oluşturmayı denediğiniz varlık zaten mevcut. | Yeniden oluşturmadan önce kaynağın mevcut olup olmadığını kontrol edin. |
-| `aborted` | 409 Çakışma | İşlem, çakışma veya eşzamanlılık kontrolü hatası nedeniyle iptal edildi. | İsteği daha yüksek bir uygulama düzeyinde yeniden deneyin. |
-| `rate_limit_exceeded` | 429 Çok Fazla İstek Var | Dakika veya saniye başına istek ya da jeton sınırını aştınız. | Bekleyin ve eksponansiyel geri yüklemeyle yeniden deneyin. |
-| `quota_exceeded` | 429 Çok Fazla İstek Var | Günlük kotanızı aştınız. | Kota sıfırlanana kadar bekleyin veya kota artışı isteyin. |
-| `too_many_requests` | 429 Çok Fazla İstek Var | Kısa süre içinde çok fazla istek gönderdiniz. | Bekleyin ve eksponansiyel geri yüklemeyle yeniden deneyin. |
-| `cancelled` | 499 İstemci İsteği Kapattı | İstemci, istek tamamlanmadan önce iptal etti. | Herhangi bir işlem yapmanız gerekmez. Bu durum genellikle istemcinin bağlantısının kesildiği anlamına gelir. |
-| `api_error` | 500 Dahili Sunucu Hatası | Sunucuda beklenmeyen bir hata oluştu. | İsteği yeniden deneyin. Sorun devam ederse destek ekibiyle iletişime geçin. |
-| `unimplemented` | 501 Uygulanmadı | İşlem veya özellik uygulanmamış ya da desteklenmiyor. | API özelliklerini kontrol edin veya desteklenen bir özelliğe geçin. |
-| `service_unavailable` | 503 Hizmet Kullanılamıyor | Hizmet geçici olarak aşırı yüklü veya kapalı. | Bekleyin ve eksponansiyel geri yüklemeyle yeniden deneyin. |
-| `deadline_exceeded` | 504 Ağ Geçidi Zaman Aşımı | İstek, son tarihe kadar tamamlanmadı. | Sunucu varsayılanını kullanmak için istemci son tarihi ayarını kaldırın veya artırın. |
+| `invalid_request` | 400 Solicitação inválida | O payload da solicitação está incorreto ou contém parâmetros inválidos. | Verifique a sintaxe e os parâmetros da solicitação na [referência da API](https://ai.google.dev/api/interactions-api?hl=pt-br). |
+| `failed_precondition` | 400 Solicitação inválida | Não é possível processar a solicitação porque um pré-requisito não foi atendido (por exemplo, faturamento desativado). | Verifique o status de faturamento do projeto ou os pré-requisitos da conta. |
+| `out_of_range` | 416 Intervalo solicitado não satisfatório | O parâmetro da solicitação está fora do intervalo válido. | Verifique os valores e limites de parâmetros. |
+| `parameter_unknown` | 400 Solicitação inválida | A solicitação contém um parâmetro desconhecido. | Remova o parâmetro não reconhecido e tente de novo. |
+| `authentication` | 401 Não autorizado | A chave de API está ausente, é inválida ou expirou. | Verifique sua [chave de API](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br). |
+| `payment_required` | 402 Pagamento necessário | Seu saldo de crédito pré-pago acabou. | [Adicione créditos](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br#buy-credits) à sua conta de faturamento ou ative a [recarga automática](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br#auto-reload). Não tente de novo: a solicitação não será concluída até que os créditos sejam adicionados. |
+| `permission_denied` | 403 Proibido | Sua chave de API não tem permissão para esse recurso. | Verifique as permissões da chave de API e o acesso ao projeto. |
+| `not_found` | 404 Não encontrado | O recurso solicitado não foi encontrado. | Verifique o caminho e os parâmetros do recurso. |
+| `model_not_found` | 404 Não encontrado | O modelo especificado não foi encontrado. | Verifique o nome do modelo ou use outro. |
+| `already_exists` | 409 Conflito | A entidade que você tentou criar já existe. | Verifique se o recurso já existe antes de recriar. |
+| `aborted` | 409 Conflito | A operação foi cancelada devido a um conflito ou falha na verificação de simultaneidade. | Tente fazer a solicitação novamente em um nível de aplicativo mais alto. |
+| `rate_limit_exceeded` | 429 número excessivo de solicitações | Você excedeu o limite de solicitações ou tokens por minuto ou por segundo. | Aguarde e tente de novo com uma espera exponencial. |
+| `quota_exceeded` | 429 número excessivo de solicitações | Você excedeu sua cota diária. | Aguarde até que a cota seja redefinida ou peça um aumento. |
+| `too_many_requests` | 429 número excessivo de solicitações | Você fez muitas solicitações em pouco tempo. | Aguarde e tente de novo com uma espera exponencial. |
+| `cancelled` | 499 Solicitação fechada pelo cliente | O cliente cancelou a solicitação antes da conclusão. | Nenhuma ação é necessária. Isso geralmente significa que o cliente se desconectou. |
+| `api_error` | 500 Internal Server Error | Ocorreu um erro inesperado no servidor. | Tente fazer a solicitação novamente. Se o problema persistir, entre em contato com o suporte. |
+| `unimplemented` | 501 Não implementado | A operação ou o recurso não foi implementado ou não é compatível. | Verifique os recursos da API ou mude para um recurso compatível. |
+| `service_unavailable` | 503 Serviço indisponível | O serviço está temporariamente sobrecarregado ou fora do ar. | Aguarde e tente de novo com uma espera exponencial. |
+| `deadline_exceeded` | 504 Gateway Timeout | A solicitação não foi concluída dentro do prazo. | Remova ou aumente a configuração de prazo do cliente para usar o padrão do servidor. |
 
-## Oluşturma engellenen kodlar
+## Códigos de geração bloqueados
 
-Bu hata kodları, politika, güvenlik veya içerik kısıtlamaları nedeniyle modelin çıkışının engellendiğini gösterir. Bu kodlardan birini aldığınızda girişinizi değiştirip tekrar deneyin.
+Esses códigos de erro indicam que restrições de política, segurança ou conteúdo bloquearam a saída do modelo. Quando você receber um desses códigos, modifique a entrada e tente de novo.
 
-| Kod | Açıklama |
+| Código | Descrição |
 | --- | --- |
-| `safety` | Güvenlik ihlalleri (zararlı içerik) nedeniyle istek engellendi. |
-| `recitation` | Telif hakkı veya alıntı kısıtlamaları nedeniyle istek engellendi. |
-| `language` | Desteklenmeyen bir dil, isteği engelledi. |
-| `prohibited_content` | Yasaklanmış içerik kuralları nedeniyle istek engellendi. |
-| `spii` | Hassas kimlik bilgileri kısıtlamaları nedeniyle istek engellendi. |
-| `blocklist` | Engellenenler listesindeki yasaklanmış terimler isteği engelledi. |
-| `image_safety` | Güvenlik ihlalleri nedeniyle görüntü oluşturma engellendi. |
-| `image_prohibited_content` | Yasaklanmış içerik kuralları, görüntü oluşturmayı engelledi. |
-| `image_recitation` | Telif hakkı veya alıntı kısıtlamaları, görüntü oluşturmayı engelledi. |
-| `image_other` | Belirtilmeyen nedenlerle görüntü üretme işlemi engellendi. |
-| `content_blocked` | Belirtilmeyen bir politika nedeniyle istek engellendi. |
+| `safety` | Violações de segurança (conteúdo prejudicial) bloquearam a solicitação. |
+| `recitation` | Restrições de direitos autorais ou recitação bloquearam a solicitação. |
+| `language` | Um idioma sem suporte bloqueou a solicitação. |
+| `prohibited_content` | As diretrizes de conteúdo proibido bloquearam a solicitação. |
+| `spii` | As restrições de informações sensíveis de identificação pessoal bloquearam a solicitação. |
+| `blocklist` | Termos proibidos em uma lista de bloqueio impediram a solicitação. |
+| `image_safety` | Violações de segurança bloquearam a geração de imagens. |
+| `image_prohibited_content` | As diretrizes de conteúdo proibido bloquearam a geração de imagens. |
+| `image_recitation` | As restrições de direitos autorais ou recitação bloquearam a geração de imagens. |
+| `image_other` | Motivos não especificados bloquearam a geração de imagens. |
+| `content_blocked` | Um motivo não especificado da política bloqueou a solicitação. |
 
-## Üretim hata kodları
+## Códigos de erro de geração
 
-Bu hata kodları, modelin oluşturduğu çıkışla ilgili yapısal bir sorun olduğunu (ör. hatalı biçimlendirilmiş bir işlev çağrısı veya bildirilmemiş bir araç çağrısı) gösterir.
+Esses códigos de erro indicam um problema estrutural com a saída gerada do modelo, como uma chamada de função malformada ou uma chamada de ferramenta não declarada.
 
-| Kod | Açıklama |
+| Código | Descrição |
 | --- | --- |
-| `malformed_function_call` | Model, ayrıştırılamayan bir işlev çağrısı oluşturdu. |
-| `malformed_tool_call` | Model, ayrıştırılamayan bir araç çağrısı oluşturdu. |
-| `unexpected_tool_call` | Model, istekte belirtilmeyen bir aracı çağırdı. |
-| `no_image` | Model, resim üretemedi. |
-| `too_many_tool_calls` | Model, izin verilenden daha fazla araç çağrısı oluşturdu. |
-| `missing_thought_signature` | Yanıtta gerekli düşünce imzası eksik. |
+| `malformed_function_call` | O modelo gerou uma chamada de função que não pôde ser analisada. |
+| `malformed_tool_call` | O modelo gerou uma chamada de ferramenta que não pôde ser analisada. |
+| `unexpected_tool_call` | O modelo chamou uma ferramenta que não foi declarada na solicitação. |
+| `no_image` | O modelo não conseguiu gerar uma imagem. |
+| `too_many_tool_calls` | O modelo gerou mais chamadas de função do que o permitido. |
+| `missing_thought_signature` | A resposta não tem uma assinatura de pensamento obrigatória. |
 
-## Hata yanıtı biçimi
+## Formato da resposta de erro
 
-Etkileşimler API'sinden gelen tüm hatalar, `error` ve `message` içeren bir `code` nesnesi döndürür. Örneğin, desteklenmeyen bir araç türü iletildiğinde şu yanıt döndürülür:
+Todos os erros da API Interactions retornam um objeto `error` que contém um `code` e um `message`. Por exemplo, transmitir um tipo de ferramenta incompatível retorna:
 
 ```
 {
@@ -91,18 +91,18 @@ Etkileşimler API'sinden gelen tüm hatalar, `error` ve `message` içeren bir `c
 }
 ```
 
-| Alan | Tür | Açıklama |
+| Campo | Tipo | Descrição |
 | --- | --- | --- |
-| `code` | dize | `snake_case` içinde makine tarafından okunabilir bir hata kodu. |
-| `message` | dize | Neyin yanlış gittiğine dair, kullanıcılar tarafından okunabilir bir açıklama. |
+| `code` | string | Um código de erro legível por máquina em `snake_case`. |
+| `message` | string | Uma descrição legível por humanos do que deu errado. |
 
-## Hatalar nasıl iletilir?
+## Como os erros são entregues
 
-API, standart bir HTTP isteği mi yoksa akış (SSE) isteği mi gönderdiğinize bağlı olarak hataları farklı şekilde iletir.
+A API entrega erros de maneira diferente, dependendo se você faz uma solicitação HTTP padrão ou uma solicitação de streaming (SSE).
 
-### Standart HTTP istekleri
+### Solicitações HTTP padrão
 
-Standart (akış olmayan) istekler için API, HTTP yanıt durum kodunu (ör. `400 Bad Request`, `401 Unauthorized` veya `429 Too Many Requests`) ayarlar ve JSON yanıt gövdesinde bir `error` nesnesi döndürür:
+Para solicitações padrão (não de streaming), a API define o código de status da resposta HTTP (como `400 Bad Request`, `401 Unauthorized` ou `429 Too Many Requests`) e retorna um objeto `error` no corpo da resposta JSON:
 
 ```
 {
@@ -113,9 +113,9 @@ Standart (akış olmayan) istekler için API, HTTP yanıt durum kodunu (ör. `40
 }
 ```
 
-### Akış (SSE) istekleri
+### Solicitações de streaming (SSE)
 
-Akış istekleri (`stream: true`) için API, `event_type` değeri `"error"` olarak ayarlanmış Server-Sent Events (SSE) akışı üzerinden hata etkinlikleri gönderir. `error` alanı aynı `code` ve `message` yapısını içerir:
+Para solicitações de streaming (`stream: true`), a API envia eventos de erro pelo fluxo de eventos enviados pelo servidor (SSE) com `event_type` definido como `"error"`. O campo `error` contém a mesma estrutura `code` e `message`:
 
 ```
 {
@@ -127,19 +127,19 @@ Akış istekleri (`stream: true`) için API, `event_type` değeri `"error"` olar
 }
 ```
 
-Tam SSE etkinlik şeması için [Interactions API Referansı](https://ai.google.dev/api/interactions-api?hl=tr)'na bakın.
+Para conferir o esquema completo de eventos SSE, consulte a [Referência da API Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br).
 
-## Sırada ne var?
+## A seguir
 
-- [API sorunlarını giderme](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr): Sık karşılaşılan sorunları ve hata senaryolarını çözün.
-- [Hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr): İstek sınırları ve kota işleme hakkında bilgi edinin.
+- [Solução de problemas da API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=pt-br): resolva problemas comuns e cenários de erro.
+- [Limites de taxa](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pt-br): saiba mais sobre limites de solicitação e processamento de cotas.
 
-Geri bildirim gönderin
+Envie comentários
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Son güncelleme tarihi: 2026-09-20 UTC.
+Última atualização 2026-09-20 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Quer enviar seu feedback?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-20 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-20 UTC."],[],[]]

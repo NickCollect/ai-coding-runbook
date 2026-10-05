@@ -1,40 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ar
-fetched_at: 2026-09-28T06:29:03.195067+00:00
-title: "\u0641\u0647\u0645 \u0627\u0644\u0645\u0633\u062a\u0646\u062f\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=es-419
+fetched_at: 2026-10-05T06:40:56.385671+00:00
+title: "Comprensi\u00f3n de documentos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# فهم المستندات
+# Comprensión de documentos
 
-يمكن لنماذج Gemini معالجة المستندات بتنسيق PDF، وذلك باستخدام ميزة &quot;الرؤية الأصلية&quot; لفهم سياقات المستندات بأكملها. يتجاوز ذلك مجرد استخراج النص، ويتيح لـ Gemini ما يلي:
+Los modelos de Gemini pueden procesar documentos en formato PDF y usar la visión nativa para comprender el contexto de documentos completos. Esto va más allá de la extracción de texto, ya que le permite a Gemini hacer lo siguiente:
 
-- تحليل المحتوى وتفسيره، بما في ذلك النصوص والصور والمخططات والرسوم البيانية والجداول، حتى في المستندات الطويلة التي تصل إلى 1,000 صفحة
-- استخراج المعلومات إلى تنسيقات [ناتج منظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)
-- تلخيص المستندات والإجابة عن الأسئلة استنادًا إلى العناصر المرئية والنصية فيها
-- تحويل محتوى المستند إلى نص (مثلاً إلى HTML)، مع الحفاظ على التنسيقات والتصاميم، لاستخدامه في التطبيقات اللاحقة
+- Analiza e interpreta contenido, como texto, imágenes, diagramas, gráficos y tablas, incluso en documentos largos de hasta 1, 000 páginas.
+- Extrae información en formatos de [salida estructurada](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419).
+- Resumir y responder preguntas basadas en los elementos visuales y textuales de un documento
+- Transcribir el contenido de documentos (p. ej., a HTML), conservando los diseños y el formato, para su uso en aplicaciones posteriores
 
-يمكنك أيضًا تمرير مستندات غير PDF بالطريقة نفسها، ولكن سيتعامل معها Gemini كنص عادي، ما سيؤدي إلى إزالة السياق، مثل الرسوم البيانية أو التنسيق.
+También puedes pasar documentos que no sean PDF de la misma manera, pero Gemini los verá como texto normal, lo que eliminará el contexto, como gráficos o formato.
 
-## تمرير بيانات ملف PDF مضمّنة
+## Cómo pasar datos de PDF intercalados
 
-يمكنك تمرير بيانات PDF مضمّنة في الطلب. هذه الطريقة هي الأنسب للمستندات الصغيرة أو المعالجة المؤقتة التي لا تحتاج فيها إلى الرجوع إلى الملف في الطلبات اللاحقة. ننصحك باستخدام
-[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar#large-pdfs)
-للمستندات الأكبر حجمًا التي تحتاج إلى الرجوع إليها في المحادثات المترابطة
-لتحسين وقت استجابة الطلب وتقليل استخدام معدل نقل البيانات.
+Puedes pasar los datos del PDF de forma intercalada en la solicitud. Este método es más adecuado para documentos más pequeños o para el procesamiento temporal en el que no necesitas hacer referencia al archivo en solicitudes posteriores. Te recomendamos que uses la [API de Files](https://ai.google.dev/gemini-api/docs/document-processing?hl=es-419#large-pdfs) para los documentos más grandes a los que debas hacer referencia en interacciones de varios turnos para mejorar la latencia de las solicitudes y reducir el uso de ancho de banda.
 
-يوضّح المثال التالي كيفية تمرير بيانات PDF مضمّنة:
+En el siguiente ejemplo, se muestra cómo pasar datos de PDF de forma intercalada:
 
 ### Python
 
@@ -92,7 +89,7 @@ async function main() {
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -216,7 +213,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-يمكنك أيضًا تحميل ملف PDF محلي لمعالجته:
+También puedes subir un archivo PDF local para su procesamiento:
 
 ### Python
 
@@ -267,7 +264,7 @@ async function main() {
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -415,13 +412,13 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-## تحميل ملفات PDF باستخدام Files API
+## Cómo subir archivos PDF con la API de Files
 
-ننصحك باستخدام Files API للملفات الأكبر حجمًا أو عندما تريد إعادة استخدام مستند في طلبات متعددة. يؤدي ذلك إلى تحسين وقت استجابة الطلبات وتقليل معدل نقل البيانات من خلال فصل عملية تحميل الملف عن طلبات النموذج.
+Te recomendamos que uses la API de Files para archivos más grandes o cuando quieras reutilizar un documento en varias solicitudes. Esto mejora la latencia de las solicitudes y reduce el uso de ancho de banda, ya que desacopla la carga de archivos de las solicitudes del modelo.
 
-### ملفات PDF كبيرة من عناوين URL
+### Archivos PDF grandes desde URLs
 
-استخدِم File API لتبسيط عملية تحميل ملفات PDF كبيرة ومعالجتها من عناوين URL:
+Usa la API de File para simplificar la carga y el procesamiento de archivos PDF grandes desde URLs:
 
 ### Python
 
@@ -504,7 +501,7 @@ async function main() {
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -697,7 +694,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### ملفات PDF كبيرة مخزَّنة على الجهاز
+### PDFs grandes almacenados de forma local
 
 ### Python
 
@@ -766,7 +763,7 @@ async function main() {
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -914,7 +911,7 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ar). `name` فقط (وبالتالي `uri`) هي المعرّفات الفريدة.
+Puedes verificar que la API haya almacenado correctamente el archivo subido y obtener sus metadatos llamando a [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=es-419). Solo el `name` (y, por extensión, el `uri`) son únicos.
 
 ### Python
 
@@ -956,7 +953,7 @@ async function main() {
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1033,9 +1030,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## تمرير ملفات PDF متعددة
+## Cómo pasar varios PDFs
 
-يمكن لواجهة Gemini API معالجة مستندات PDF متعددة (تصل إلى 1, 000 صفحة) في طلب واحد، طالما أنّ الحجم المجمّع للمستندات وطلب النص يقع ضمن قدرة استيعاب النموذج.
+La API de Gemini puede procesar varios documentos PDF (hasta 1,000 páginas) en una sola solicitud, siempre que el tamaño combinado de los documentos y la instrucción de texto permanezcan dentro de la ventana de contexto del modelo.
 
 ### Python
 
@@ -1131,7 +1128,7 @@ async function main() {
 main();
 ```
 
-### جافا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1388,53 +1385,51 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## التفاصيل الفنية
+## Detalles técnicos
 
-يمكن استخدام ملفات PDF يصل حجمها إلى 50 ميغابايت أو 1,000 صفحة في Gemini. وينطبق هذا الحدّ على كلّ من البيانات المضمّنة وعمليات التحميل من خلال Files API. تعادل كل صفحة مستند 258 رمزًا مميزًا.
+Gemini admite archivos PDF de hasta 50 MB o 1,000 páginas. Este límite se aplica tanto a los datos intercalados como a las cargas de la API de Files. Cada página del documento equivale a 258 tokens.
 
-مع أنّه لا توجد حدود معيّنة لعدد وحدات البكسل في المستندات باستثناء [قدرة استيعاب](https://ai.google.dev/gemini-api/docs/long-context?hl=ar) النموذج، يتم تصغير حجم الصفحات الأكبر إلى دقة قصوى تبلغ 3072 × 3072 مع الحفاظ على نسبة العرض إلى الارتفاع الأصلية، بينما يتم تكبير حجم الصفحات الأصغر إلى 768 × 768 بكسل. لا يمكن خفض تكلفة الصفحات ذات الأحجام الأصغر، باستثناء تكلفة النطاق الترددي، ولا يمكن تحسين أداء الصفحات ذات الدقة الأعلى.
+Si bien no hay límites específicos para la cantidad de píxeles en un documento, además de la [ventana de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=es-419) del modelo, las páginas más grandes se reducen a una resolución máxima de 3,072 x 3,072, a la vez que conservan su relación de aspecto original, mientras que las páginas más pequeñas se amplían a 768 x 768 píxeles. No hay reducción de costos para las páginas de tamaños más pequeños, aparte del ancho de banda, ni mejora del rendimiento para las páginas de mayor resolución.
 
-### نماذج Gemini 3
+### Modelos de Gemini 3
 
-يقدّم Gemini 3 تحكّمًا دقيقًا في معالجة الصور المتعدّدة الوسائط باستخدام المَعلمة
-`media_resolution`. يمكنك الآن ضبط درجة الدقة على منخفضة أو متوسطة أو عالية لكل جزء من الوسائط على حدة. بعد إضافة هذه الميزة، تم تعديل طريقة معالجة مستندات PDF على النحو التالي:
+Gemini 3 introduce un control detallado sobre el procesamiento de la visión multimodal con el parámetro `media_resolution`. Ahora puedes establecer la resolución en baja, media o alta para cada parte de contenido multimedia individual. Con esta incorporación, se actualizó el procesamiento de documentos PDF de la siguiente manera:
 
-1. **تضمين النص الأصلي:** يتم استخراج النص المضمّن بشكل أصلي في ملف PDF وتقديمه إلى النموذج.
-2. **الفوترة وإعداد تقارير الرموز المميزة:**
-   - **لا يتم تحصيل رسوم** منك مقابل الرموز المميزة التي مصدرها **النص الأصلي** المستخرَج من ملفات PDF.
-   - في قسم `usage_metadata` من استجابة واجهة برمجة التطبيقات، يتم الآن احتساب الرموز المميزة التي تم إنشاؤها من معالجة صفحات PDF (كصور) ضمن نوع البيانات `IMAGE`، وليس ضمن نوع بيانات `DOCUMENT` منفصل كما كان في بعض الإصدارات السابقة.
+1. **Inclusión de texto nativo:** Se extrae el texto incorporado de forma nativa en el PDF y se proporciona al modelo.
+2. **Informes de facturación y tokens:**
+   - **No se te cobra** por los tokens que se originan en el **texto nativo** extraído de los PDFs.
+   - En la sección `usage_metadata` de la respuesta de la API, los tokens generados a partir del procesamiento de páginas en formato PDF (como imágenes) ahora se contabilizan en la modalidad `IMAGE`, no en una modalidad `DOCUMENT` separada como en algunas versiones anteriores.
 
-لمزيد من التفاصيل حول مَعلمة دقة الوسائط، يُرجى الاطّلاع على دليل
-[دقة الوسائط](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=ar).
+Para obtener más detalles sobre el parámetro de resolución de medios, consulta la guía de [resolución de medios](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=es-419).
 
-### أنواع المستندات
+### Tipos de documentos
 
-من الناحية الفنية، يمكنك ضبط أنواع MIME أخرى لفهم المستندات، مثل TXT وMarkdown وHTML وXML وما إلى ذلك، ولكن ***لا يفهم Document Vision سوى ملفات PDF***. سيتم استخراج الأنواع الأخرى كنص عادي، ولن يتمكّن النموذج من تفسير ما نراه في عرض هذه الملفات. سيتم فقدان أي تفاصيل خاصة بنوع الملف، مثل الرسوم البيانية والمخططات وعلامات HTML وتنسيق Markdown وما إلى ذلك.
+Técnicamente, puedes pasar otros tipos de MIME para la comprensión de documentos, como TXT, Markdown, HTML, XML, etcétera. Sin embargo, la visión de documentos ***solo comprende los PDFs de manera significativa***. Otros tipos se extraerán como texto puro, y el modelo no podrá interpretar lo que vemos en la renderización de esos archivos. Se perderán las especificaciones de tipo de archivo, como gráficos, diagramas, etiquetas HTML, formato Markdown, etcétera.
 
-لمزيد من المعلومات حول طرق إدخال الملفات الأخرى، يُرجى الاطّلاع على دليل [طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
+Para obtener información sobre otros métodos de entrada de archivos, consulta la guía [Métodos de entrada de archivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=es-419).
 
-### أفضل الممارسات
+### Prácticas recomendadas
 
-للحصول على أفضل النتائج:
+Para lograr resultados óptimos, haz lo siguiente:
 
-- يجب تدوير الصفحات إلى الاتجاه الصحيح قبل تحميلها.
-- تجنَّب الصفحات غير الواضحة.
-- في حال استخدام صفحة واحدة، ضَع طلب النص بعد الصفحة.
+- Rota las páginas a la orientación correcta antes de subirlas.
+- Evita las páginas borrosas.
+- Si usas una sola página, coloca la instrucción de texto después de la página.
 
-## الخطوات التالية
+## ¿Qué sigue?
 
-لمزيد من المعلومات، يُرجى الاطّلاع على المراجع التالية:
+Para obtener más información, consulta los siguientes recursos:
 
-- [استراتيجيات إنشاء الطلبات باستخدام الملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح واجهة Gemini API إنشاء الطلبات باستخدام بيانات نصية وصور وملفات صوتية وفيديوهات، ويُعرف ذلك أيضًا باسم إنشاء الطلبات المتعددة الوسائط.
-- [تعليمات النظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions):
-  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى احتياجاتك وحالات الاستخدام المحدّدة.
+- [Estrategias de instrucciones con archivos](https://ai.google.dev/gemini-api/docs/files?hl=es-419#prompt-guide): La API de Gemini admite instrucciones con datos de texto, imagen, audio y video, lo que también se conoce como instrucciones multimodales.
+- [Instrucciones del sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419#system-instructions):
+  Las instrucciones del sistema te permiten dirigir el comportamiento del modelo según tus necesidades y casos de uso específicos.
 
-إرسال ملاحظات
+Enviar comentarios
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)
+Última actualización: 2026-09-24 (UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+¿Quieres brindar más información?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-24 (UTC)"],[],[]]

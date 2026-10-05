@@ -1,44 +1,127 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=id
-fetched_at: 2026-09-28T06:35:21.614503+00:00
-title: "Gemini Developer API vs. Platform Agen Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=it
+fetched_at: 2026-10-05T06:51:25.304532+00:00
+title: "API Gemini Developer e piattaforma agentica Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Kirim masukan
+Invia feedback
 
-# Gemini Developer API vs. Platform Agen Gemini Enterprise
+# API Gemini Developer e piattaforma agentica Gemini Enterprise
 
-Saat mengembangkan solusi AI generatif dengan Gemini, Google menawarkan dua produk API:
-yang [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=id) dan [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=id).
+Quando sviluppa soluzioni di AI generativa con Gemini, Google offre due prodotti API: l'[API Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=it) e l'[API Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=it).
 
-Gemini Developer API menyediakan jalur tercepat untuk membangun, memproduksi, dan menskalakan aplikasi yang didukung Gemini. Sebagian besar developer harus menggunakan Gemini Developer API kecuali jika ada kebutuhan untuk kontrol perusahaan tertentu.
+L'API Gemini Developer offre il percorso più rapido per creare, mettere in produzione e
+scalare le applicazioni basate su Gemini. La maggior parte degli sviluppatori dovrebbe utilizzare l'API Gemini Developer, a meno che non siano necessari controlli aziendali specifici.
 
-Gemini Enterprise Agent Platform menawarkan ekosistem komprehensif berisi fitur dan layanan siap pakai untuk perusahaan guna membangun dan men-deploy aplikasi AI generatif yang didukung oleh Google Cloud Platform.
+Gemini Enterprise Agent Platform offre un ecosistema completo di funzionalità e servizi pronti per l'uso aziendale
+per la creazione e il deployment di applicazioni di AI generativa supportate da Google Cloud.
 
-Baru-baru ini kami menyederhanakan migrasi antar-layanan ini. Gemini
-Developer API dan Gemini Enterprise Agent Platform API kini dapat diakses melalui
-[Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=id) terpadu.
+Di recente abbiamo semplificato la migrazione tra questi servizi. L'API Gemini
+Developer e l'API Gemini Enterprise Agent Platform sono ora accessibili
+tramite l'[SDK Google GenAI](https://ai.google.dev/gemini-api/docs/libraries?hl=it) unificato e l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it).
 
-## Perbandingan kode
+## Confronto del codice: API Interactions (consigliate)
 
-Halaman ini berisi perbandingan kode berdampingan antara Gemini Developer API dan Gemini Enterprise Agent Platform quickstart untuk pembuatan teks.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è il modo consigliato per creare con i modelli e gli agenti Gemini. Gli esempi seguenti
+confrontano la generazione di testo tra l'API Gemini Developer e Gemini Enterprise
+Agent Platform.
 
 ### Python
 
-Anda dapat mengakses layanan Gemini Developer API dan Gemini Enterprise Agent Platform melalui library `google-genai`. Lihat halaman [library](https://ai.google.dev/gemini-api/docs/libraries?hl=id)
-untuk mengetahui petunjuk cara menginstal `google-genai`.
+Puoi accedere sia all'API Gemini Developer sia ai servizi Gemini Enterprise Agent Platform tramite la libreria `google-genai` (`>= 2.3.0`). Consulta la pagina [Librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it) per istruzioni su come installare `google-genai`.
 
-### Gemini Developer API
+### API Gemini Developer
+
+```
+from google import genai
+
+client = genai.Client()
+
+interaction = client.interactions.create(
+    model="gemini-3.8-flash",
+    input="Explain how AI works in a few words",
+)
+print(interaction.output_text)
+```
+
+### API Gemini Enterprise Agent Platform
+
+```
+from google import genai
+
+client = genai.Client(
+    enterprise=True, project="your-project-id", location="global"
+)
+
+interaction = client.interactions.create(
+    model="gemini-3.8-flash",
+    input="Explain how AI works in a few words",
+)
+print(interaction.output_text)
+```
+
+### JavaScript e TypeScript
+
+Puoi accedere sia all'API Gemini Developer sia ai servizi Gemini Enterprise Agent Platform
+tramite la libreria `@google/genai` (`>= 2.3.0`). Consulta la pagina
+[librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it) per istruzioni su come installare
+`@google/genai`.
+
+### API Gemini Developer
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+const interaction = await ai.interactions.create({
+  model: "gemini-3.8-flash",
+  input: "Explain how AI works in a few words",
+});
+console.log(interaction.output_text);
+```
+
+### API Gemini Enterprise Agent Platform
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({
+  enterprise: true,
+  project: "your_project",
+  location: "global",
+});
+
+const interaction = await ai.interactions.create({
+  model: "gemini-3.8-flash",
+  input: "Explain how AI works in a few words",
+});
+console.log(interaction.output_text);
+```
+
+## Confronto del codice: API generateContent
+
+Sebbene l'API Interactions sia consigliata per i nuovi progetti, l'API
+`generateContent` rimane supportata.
+
+### Python
+
+Puoi accedere sia all'API Gemini Developer sia ai servizi Gemini Enterprise Agent
+Platform tramite la libreria `google-genai`. Consulta la pagina
+[Librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it) per istruzioni su come installare
+`google-genai`.
+
+### API Gemini Developer
 
 ```
 from google import genai
@@ -46,12 +129,12 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash", contents="Explain how AI works in a few words"
+    model="gemini-3.8-flash", contents="Explain how AI works in a few words"
 )
 print(response.text)
 ```
 
-### Gemini Enterprise Agent Platform API
+### API Gemini Enterprise Agent Platform
 
 ```
 from google import genai
@@ -61,17 +144,19 @@ client = genai.Client(
 )
 
 response = client.models.generate_content(
-    model="gemini-3.6-flash", contents="Explain how AI works in a few words"
+    model="gemini-3.8-flash", contents="Explain how AI works in a few words"
 )
 print(response.text)
 ```
 
-### JavaScript dan TypeScript
+### JavaScript e TypeScript
 
-Anda dapat mengakses layanan Gemini Developer API dan Gemini Enterprise Agent Platform melalui library `@google/genai`. Lihat halaman [library](https://ai.google.dev/gemini-api/docs/libraries?hl=id) untuk mengetahui petunjuk cara
-menginstal `@google/genai`.
+Puoi accedere sia all'API Gemini Developer sia ai servizi Gemini Enterprise Agent Platform
+tramite la libreria `@google/genai`. Consulta la pagina
+[Librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it) per istruzioni su come installare
+`@google/genai`.
 
-### Gemini Developer API
+### API Gemini Developer
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -80,7 +165,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     contents: "Explain how AI works in a few words",
   });
   console.log(response.text);
@@ -89,7 +174,7 @@ async function main() {
 main();
 ```
 
-### Gemini Enterprise Agent Platform API
+### API Gemini Enterprise Agent Platform
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -101,7 +186,7 @@ const ai = new GoogleGenAI({
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     contents: "Explain how AI works in a few words",
   });
   console.log(response.text);
@@ -112,10 +197,12 @@ main();
 
 ### Go
 
-Anda dapat mengakses layanan Gemini Developer API dan Gemini Enterprise Agent Platform melalui library `google.golang.org/genai`. Lihat halaman [library](https://ai.google.dev/gemini-api/docs/libraries?hl=id) untuk mengetahui petunjuk cara
-menginstal `google.golang.org/genai`.
+Puoi accedere sia all'API Gemini Developer sia ai servizi Gemini Enterprise Agent Platform
+tramite la libreria `google.golang.org/genai`. Consulta la pagina
+[Librerie](https://ai.google.dev/gemini-api/docs/libraries?hl=it) per istruzioni su come installare
+`google.golang.org/genai`.
 
-### Gemini Developer API
+### API Gemini Developer
 
 ```
 import (
@@ -137,12 +224,12 @@ func main() {
   }
 
   // Call the GenerateContent method.
-  result, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", genai.Text("Tell me about New York?"), nil)
+  result, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", genai.Text("Tell me about New York?"), nil)
 
 }
 ```
 
-### Gemini Enterprise Agent Platform API
+### API Gemini Enterprise Agent Platform
 
 ```
 import (
@@ -153,10 +240,10 @@ import (
   "google.golang.org/genai"
 )
 
-// Your GCP project
+// Your Google Cloud project
 const project = "your-project"
 
-// A GCP location like "us-central1"
+// A Google Cloud location like "us-central1"
 const location = "some-gcp-location"
 
 func main() {
@@ -169,55 +256,54 @@ func main() {
   })
 
   // Call the GenerateContent method.
-  result, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", genai.Text("Tell me about New York?"), nil)
+  result, err := client.Models.GenerateContent(ctx, "gemini-3.8-flash", genai.Text("Tell me about New York?"), nil)
 
 }
 ```
 
-### Platform dan kasus penggunaan lainnya
+### Altri casi d'uso e piattaforme
 
-Lihat panduan khusus kasus penggunaan di [Dokumentasi Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=id)
-dan [dokumentasi Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=id)
-untuk platform dan kasus penggunaan lainnya.
+Consulta le guide specifiche per i casi d'uso nella [documentazione dell'API Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=it)
+e nella [documentazione di Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=it)
+per altre piattaforme e altri casi d'uso.
 
-## Pertimbangan migrasi
+## Considerazioni sulla migrazione
 
-Saat Anda bermigrasi:
+Quando esegui la migrazione:
 
-- Anda harus menggunakan akun layanan Google Cloud untuk melakukan autentikasi. Lihat [dokumentasi Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=id)
-  untuk mengetahui informasi selengkapnya.
-- Anda dapat menggunakan project Google Cloud yang ada
-  (project yang sama yang Anda gunakan untuk membuat kunci API) atau Anda dapat
-  [membuat project Google Cloud baru](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=id).
-- Region yang didukung mungkin berbeda antara Gemini Developer API dan Gemini Enterprise Agent Platform API. Lihat daftar
-  [region yang didukung untuk AI generatif di Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=id).
-- Model apa pun yang Anda buat di Google AI Studio harus dilatih ulang di Gemini Enterprise Agent Platform.
+- Per l'autenticazione, devi utilizzare i service account Google Cloud. Per saperne di più, consulta la [documentazione di Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=it).
+- Puoi utilizzare il progetto Google Cloud esistente (lo stesso che hai utilizzato per generare la chiave API) o puoi [crearne uno nuovo](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=it).
+- Le regioni supportate possono variare tra l'API Gemini Developer e l'API Gemini Enterprise Agent Platform. Durante l'anteprima, l'[API Interactions su Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/interactions/?hl=it) supporta solo l'endpoint `global` (`location="global"`). Consulta l'elenco delle [regioni supportate per l'AI generativa su Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=it).
+- Tutti i modelli che hai creato in Google AI Studio devono essere riaddestrati in Gemini Enterprise Agent Platform.
 
-Jika Anda tidak perlu lagi menggunakan kunci Gemini API untuk Gemini Developer API, ikuti praktik terbaik keamanan dan hapus kunci tersebut.
+Se non hai più bisogno di utilizzare la chiave API Gemini per l'API Gemini Developer,
+segui le best practice per la sicurezza ed eliminala.
 
-Cara menghapus kunci API:
+Per eliminare una chiave API:
 
-1. Buka halaman
-   [Kredensial API Google Cloud](https://console.cloud.google.com/apis/credentials?hl=id).
-2. Temukan kunci API yang ingin Anda hapus, lalu klik ikon **Tindakan**.
-3. Pilih **Hapus kunci API**.
-4. Di modal **Hapus kredensial**, pilih **Hapus**.
+1. Apri la pagina
+   [Credenziali API Google Cloud](https://console.cloud.google.com/apis/credentials?hl=it).
+2. Individua la chiave API che vuoi eliminare e fai clic sull'icona **Azioni**.
+3. Seleziona **Elimina chiave API**.
+4. Nella finestra modale **Elimina credenziale**, seleziona **Elimina**.
 
-   Penghapusan kunci API memerlukan waktu beberapa menit untuk diterapkan. Setelah
-   propagasi selesai, traffic yang menggunakan kunci API yang dihapus akan ditolak.
+   L'eliminazione di una chiave API richiede alcuni minuti per la propagazione. Al termine
+   della propagazione, tutto il traffico che utilizza la chiave API eliminata viene rifiutato.
 
-## Langkah berikutnya
+## Passaggi successivi
 
-- Lihat
-  [ringkasan AI Generatif di Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=id)
-  untuk mempelajari lebih lanjut solusi AI generatif di Gemini Enterprise Agent Platform.
+- Esplora la
+  [guida per sviluppatori dell'API Interactions su Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/interactions/?hl=it).
+- Consulta la
+  [panoramica dell'AI generativa su Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=it)
+  per scoprire di più sulle soluzioni di AI generativa su Gemini Enterprise Agent Platform.
 
-Kirim masukan
+Invia feedback
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Terakhir diperbarui pada 2026-09-12 UTC.
+Ultimo aggiornamento 2026-09-30 UTC.
 
-Ada masukan untuk kami?
+Vuoi dirci altro?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-12 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-30 UTC."],[],[]]

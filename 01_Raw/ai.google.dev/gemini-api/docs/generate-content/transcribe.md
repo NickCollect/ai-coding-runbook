@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=th
-fetched_at: 2026-09-28T06:19:38.905279+00:00
-title: "\u0e01\u0e32\u0e23\u0e16\u0e2d\u0e14\u0e40\u0e2a\u0e35\u0e22\u0e07\u0e40\u0e1b\u0e47\u0e19\u0e04\u0e33 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=fr
+fetched_at: 2026-10-05T06:32:37.977253+00:00
+title: "Transcription audio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-# การถอดเสียงเป็นคำ
+# Transcription audio
 
-Gemini API จะแปลงเสียงพูดในไฟล์เสียงเป็นข้อความโดยใช้โมเดล Gemini 3.5 Transcribe (`gemini-3.5-transcribe`) โดยอิงตามความสามารถในการทำความเข้าใจเสียงของ Gemini ซึ่งจะให้การถอดเสียงที่แม่นยำพร้อมการระบุภาษาอัตโนมัติ การระบุผู้พูด การประทับเวลาที่ระดับคำ และคำแนะนำคำศัพท์ที่กำหนดเอง นอกจากนี้ ยังมีโหมด[การถอดเสียงอัจฉริยะ](#transcription-modes)ที่มาพร้อมการนำคำพูดที่ไม่ต่อเนื่องออกและการจัดรูปแบบอัจฉริยะ
+L'API Gemini convertit la parole contenue dans les fichiers audio en texte à l'aide du modèle Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). Grâce aux capacités de compréhension audio de Gemini, elle fournit une transcription précise avec identification automatique de la langue, attribution des locuteurs, codes temporels au niveau des mots et suggestions de vocabulaire personnalisé. Il propose également un mode de [transcription intelligente](#transcription-modes) qui supprime les hésitations et met en forme le texte de manière intelligente.
 
-หากต้องการถอดเสียงไฟล์เสียง ให้อัปโหลดเสียงและส่งไปยัง `gemini-3.5-transcribe`
+Pour transcrire un fichier audio, importez-le et transmettez-le à `gemini-3.5-transcribe` :
 
 ### Python
 
@@ -83,26 +83,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## ภาพรวม
+## Présentation
 
-Gemini 3.5 Transcribe ได้รับการเพิ่มประสิทธิภาพสำหรับงานแปลงเสียงพูดเป็นข้อความ โดยจะจัดการกับสำเนียงที่หลากหลาย เสียงรบกวนรอบข้าง และการสนทนาหลายภาษา
+Gemini 3.5 Transcribe est optimisé pour les tâches de reconnaissance vocale. Il gère les différents accents, les bruits de fond et les conversations multilingues.
 
-ความสามารถหลักๆ มีดังนี้
+Voici les principales fonctionnalités de cette solution :
 
-- **การรู้จำคำพูดอัตโนมัติ (ASR):** ตรวจหาภาษาโดยอัตโนมัติใน[กว่า 85 ภาษา](#supported-languages) จัดการการสลับภาษาภายในประโยคและระหว่างประโยคโดยไม่ต้องกำหนดค่าด้วยตนเอง
-- **คำศัพท์ที่กำหนดเอง:** ช่วยให้ระบบจดจำคำศัพท์ ตัวย่อ และชื่อเฉพาะในโดเมนได้โดยส่งวลีได้สูงสุด 1,000 รายการ
-- **การระบุผู้พูด:** แยกแยะผู้พูดหลายคนและเชื่อมโยงส่วนที่พูดกับป้ายกำกับที่แตกต่างกัน
-- **การประทับเวลาที่ระดับคำ:** สร้างออฟเซ็ตเวลาเริ่มต้นและเวลาสิ้นสุดที่แน่นอนสำหรับแต่ละคำที่ระบบจดจำ
-- **การถอดเสียงอัจฉริยะ:** ล้างคำพูดที่ไม่มีความหมาย การพูดซ้ำ และใช้การจัดรูปแบบที่มีโครงสร้าง
-- **การจัดรูปแบบและการทำให้เป็นมาตรฐาน:** ใช้การใช้อักษรตัวพิมพ์ใหญ่ เครื่องหมายวรรคตอน และการทำให้ข้อความเป็นมาตรฐานแบบผกผัน เช่น การแปลง "ยี่สิบหกล้านดอลลาร์" เป็น "$26M"
+- **Reconnaissance vocale automatique** : détecte automatiquement les langues dans [plus de 85 paramètres régionaux](#supported-languages). Gère le code-switching intra-phrase et inter-phrase sans configuration manuelle.
+- **Vocabulaire personnalisé** : oriente la reconnaissance vers les termes, acronymes et noms propres spécifiques à un domaine en transmettant jusqu'à 1 000 expressions.
+- **Diarisation des locuteurs** : permet de distinguer plusieurs locuteurs et d'attribuer des segments parlés à des libellés distincts.
+- **Codes temporels au niveau du mot** : génèrent des décalages temporels de début et de fin précis pour chaque mot reconnu.
+- **Transcription intelligente** : supprime les hésitations, les mots de remplissage et les répétitions, et applique une mise en forme structurée.
+- **Mise en forme et normalisation** : applique la mise en majuscules, la ponctuation et la normalisation inverse du texte (par exemple, en convertissant "vingt-six millions de dollars" en "26 M$").
 
-หากต้องการใช้การให้เหตุผลหรือตอบคำถามเกี่ยวกับเนื้อหาเสียงทั่วไป ให้ใช้[การทำความเข้าใจเสียง](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=th) สำหรับการสังเคราะห์เสียงของการอ่านออกเสียงข้อความ ให้ใช้ [Text-to-speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=th)
+Pour le raisonnement audio général ou les systèmes de questions-réponses sur le contenu audio, utilisez [Compréhension audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=fr). Pour la synthèse audio de texte en voix, utilisez [Text-to-Speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr).
 
-## การตรวจหาภาษาและคำแนะนำ
+## Détection de la langue et suggestions
 
-โดยค่าเริ่มต้น โมเดลจะตรวจจับภาษาที่พูดโดยอัตโนมัติ โดยจะสลับภาษาแบบไดนามิกเมื่อผู้พูดเปลี่ยนภาษา
+Par défaut, le modèle détecte automatiquement la langue parlée. Il passe d'une langue à l'autre de manière dynamique lorsque les locuteurs alternent les langues.
 
-หากต้องการใช้การตรวจหาอัตโนมัติ ให้ละเว้น `language_codes` หรือระบุรายการว่าง
+Pour utiliser la détection automatique, omettez `language_codes` ou fournissez une liste vide :
 
 ### Python
 
@@ -164,7 +164,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-หากทราบภาษาล่วงหน้า ให้ระบุรหัสภาษา BCP-47 ใน `language_codes` เพื่อปรับปรุงความแม่นยำของการถอดเสียง (ดู[ภาษาที่รองรับ](#supported-languages))
+Si vous connaissez la langue à l'avance, spécifiez les codes de langue BCP-47 dans `language_codes` pour améliorer la précision de la transcription (voir [Langues acceptées](#supported-languages)) :
 
 ### Python
 
@@ -198,9 +198,9 @@ const config = {
 }
 ```
 
-## คำศัพท์ที่กำหนดเอง
+## Vocabulaire personnalisé
 
-คุณสามารถนำโมเดลการพูดไปยังคำที่ไม่ค่อยมีคนใช้ คำศัพท์เฉพาะทาง ชื่อแบรนด์ หรือคำนามเฉพาะได้ ระบุคำศัพท์ได้สูงสุด 1,000 คำใน`custom_vocabulary`อาร์เรย์ (โดยปกติแล้วจะให้ผลลัพธ์ที่ดีที่สุดเมื่อใช้คำศัพท์ไม่เกิน 100 คำ)
+Vous pouvez orienter le modèle vocal vers des mots inhabituels, du jargon technique, des noms de marques ou des noms propres. Fournissez jusqu'à 1 000 termes dans le tableau `custom_vocabulary` (les meilleurs résultats sont généralement obtenus avec un maximum de 100 termes) :
 
 ### Python
 
@@ -262,11 +262,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## การแยกแยะเสียงผู้พูด
+## Identification du locuteur
 
-การระบุผู้พูดจะระบุเสียงที่แตกต่างกันในการบันทึกและติดแท็กแต่ละส่วนด้วยตัวระบุผู้พูด เช่น `spk_1` หรือ `spk_2` รองรับลำโพงสูงสุด 8 ตัว (การระบุแหล่งที่มาสำหรับลำโพงตั้งแต่ 3 ตัวขึ้นไปเป็นเวอร์ชันทดลอง)
+L'identification des locuteurs permet d'identifier les différentes voix dans l'enregistrement et d'attribuer un identifiant à chaque segment, comme `spk_1` ou `spk_2`. Jusqu'à huit locuteurs sont pris en charge (l'attribution pour trois locuteurs ou plus est expérimentale).
 
-เปิดใช้การแยกแยะเสียงผู้พูดโดยตั้งค่า `diarization` เป็น `True` ดังนี้
+Activez l'identification des locuteurs en définissant `diarization` sur `True` :
 
 ### Python
 
@@ -328,11 +328,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## การประทับเวลาระดับคำ
+## Codes temporels au niveau du mot
 
-การประทับเวลาระดับคำจะระบุออฟเซ็ตเริ่มต้นและสิ้นสุดที่แน่นอนสำหรับทุกคำที่ระบบจดจำได้ในสตรีมเสียง
+Les codes temporels au niveau du mot fournissent des décalages de début et de fin exacts pour chaque mot reconnu dans le flux audio.
 
-เปิดใช้การประทับเวลาโดยตั้งค่า `word_timestamp` เป็น `True` ดังนี้
+Activez les codes temporels en définissant `word_timestamp` sur `True` :
 
 ### Python
 
@@ -394,7 +394,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-คุณสามารถรวม `diarization` และ `word_timestamp` ไว้ในคำขอเดียวเพื่อรับทั้งป้ายกำกับผู้พูดและการประทับเวลาของคำได้โดยทำดังนี้
+Vous pouvez combiner `diarization` et `word_timestamp` dans une même requête pour recevoir à la fois les identifiants des intervenants et les codes temporels des mots :
 
 ### Python
 
@@ -431,21 +431,21 @@ const config = {
 }
 ```
 
-## โหมดการถอดเสียงเป็นคำ
+## Modes de transcription
 
-Gemini 3.5 Transcribe รองรับโหมดการถอดเสียงเป็นคำ 2 โหมดผ่านพารามิเตอร์ `mode` ดังนี้
+Gemini 3.5 Transcribe est compatible avec deux modes de transcription via le paramètre `mode` :
 
-- **`VERBATIM` (ค่าเริ่มต้น)**: แสดงข้อความถอดเสียงแบบคำต่อคำที่ตรงกันทุกประการของทุกสิ่งที่พูด โดยจะเก็บคำฟุ่มเฟือยดิบ ("เอ่อ", "อืม", "แบบว่า", "ก็") การพูดซ้ำ การหยุดชั่วคราว และการพูดติดขัด ต้องระบุเมื่อใช้การประทับเวลาหรือการระบุผู้พูด
-- **`SMART` (การถอดเสียงอัจฉริยะ)**: เพิ่มประสิทธิภาพข้อความถอดเสียงสำหรับการอ่านโดยใช้การประมวลผลหลังการประมวลผลอัจฉริยะ
-  - **การนำคำพูดติดขัดออก**: นำคำพูดติดขัด คำพูดซ้ำ และการเริ่มต้นที่ไม่ถูกต้องออก
-  - **การแก้ไขตัวเองในบรรทัด**: แก้ไขคำที่พูดผิดโดยตรง (เช่น *"มาเจอกันวันอังคาร ไม่สิ วันพุธตอน 14:00 น."* จะกลายเป็น *"มาเจอกันวันพุธตอน 14:00 น."*)
-  - **การจัดรูปแบบที่มีโครงสร้างอัตโนมัติ**: จัดโครงสร้างความคิดที่พูดเป็นย่อหน้า รายการที่มีหมายเลข หัวข้อย่อย วันที่ สกุลเงิน และตัวเลขที่จัดรูปแบบโดยอัตโนมัติ
-  - **การแก้ไขไวยากรณ์**: ใช้เครื่องหมายวรรคตอน การจัดรูปแบบประโยค และลำดับการนำเสนอที่เป็นธรรมชาติ
+- **`VERBATIM` (par défaut)** : renvoie une transcription exacte de tout ce qui a été dit, en conservant les mots de remplissage bruts ("euh", "enfin", "genre", "tu vois"), les répétitions, les pauses et les faux départs. Obligatoire lorsque vous utilisez des codes temporels ou la segmentation des locuteurs.
+- **`SMART` (Transcription intelligente)** : optimise la transcription pour la lecture en appliquant un post-traitement intelligent :
+  - **Suppression des hésitations** : élimine les mots de remplissage, les bégaiements et les faux départs.
+  - **Corrections spontanées** : les corrections orales sont résolues directement (par exemple, *"Rendez-vous mardi, non, mercredi à 14h"* devient *"Rendez-vous mercredi à 14h"*).
+  - **Mise en forme structurée automatique** : structure automatiquement les pensées exprimées en paragraphes, listes numérotées, listes à puces, dates, devises et nombres mis en forme.
+  - **Nettoyage grammatical** : applique une ponctuation, une mise en forme des phrases et un flux naturels.
 
-| เสียงพูด | `VERBATIM` เอาต์พุต | `SMART` เอาต์พุต (การถอดเสียงอัจฉริยะ) |
+| Audio parlé | Résultat de la fonction `VERBATIM` | Résultat de la fonction `SMART` (transcription intelligente) |
 | --- | --- | --- |
-| "เอ่อ สำหรับการประชุม ฉันคิดว่าเราควรเชิญ เอ่อ ขวัญใจและ เอ่อ ไม่ใช่ บัญชาและแคโรล" | "เอ่อ สำหรับการประชุม ฉันคิดว่าเราควรเชิญอลิซ เอ่อ ไม่ใช่ บ็อบกับแครอล" | "สำหรับการประชุม ฉันคิดว่าเราควรเชิญบ็อบและแครอล" |
-| "งบประมาณสำหรับการตรวจสอบรายการแรก ไทม์ไลน์การสรุปรายการที่สอง ส่งสรุป" | "งบประมาณการตรวจสอบรายการแรก ไทม์ไลน์การสรุปรายการที่สอง ส่งสรุปรายการที่สาม" | "1. ตรวจสอบงบประมาณ 2. สรุปไทม์ไลน์ 3. ส่งสรุป" |
+| "Euh, pour la réunion, je pense qu'on devrait inviter Alice et, non, Bob et Carol." | "Euh, pour la réunion, je pense qu'on devrait inviter Alice, non, Bob et Carol." | "Pour la réunion, je pense que nous devrions inviter Bob et Carol." |
+| "First item review budget second item finalize timeline third item send recap" (Premier élément : examiner le budget. Deuxième élément : finaliser le calendrier. Troisième élément : envoyer le récapitulatif.) | "examine le premier élément, vérifie le budget du deuxième élément, finalise le calendrier du troisième élément, envoie le récapitulatif" | "1. Vérifiez le budget. 2. Finalisez la timeline 3. Envoyer le récapitulatif" |
 
 ### Python
 
@@ -509,13 +509,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## การแยกวิเคราะห์เอาต์พุตการถอดเสียงเป็นคำ
+## Analyser la transcription
 
-ระบบจะแสดงข้อความถอดเสียงทั้งหมดใน `response.text`
+Le texte complet de la transcription est renvoyé dans `response.text`.
 
-เมื่อเปิดใช้ `word_timestamp` หรือ `diarization` แล้ว API จะแสดงคำอธิบายประกอบระดับคำโดยละเอียดและป้ายกำกับผู้พูดที่แนบมากับส่วนที่ต้องการด้วย
+Lorsque `word_timestamp` ou `diarization` sont activés, l'API renvoie également des annotations détaillées au niveau des mots et des identifiants des intervenants associés aux parties candidates.
 
-วิธีแยกและวนซ้ำการประทับเวลาของคำและการเปลี่ยนลำโพงมีดังนี้
+Voici comment extraire et parcourir les codes temporels des mots et les tours de parole :
 
 ### Python
 
@@ -615,116 +615,116 @@ for (const w of words) {
 }
 ```
 
-## ภาษาที่รองรับ
+## Langues disponibles
 
-Gemini 3.5 Transcribe รองรับภาษาและรหัสภาษา BCP-47 ต่อไปนี้
+Les langues et les codes de langue BCP-47 suivants sont compatibles avec Gemini 3.5 Transcribe :
 
-| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
+| Langue | Code BCP-47 | Langue | Code BCP-47 |
 | --- | --- | --- | --- |
-| อาฟรีกานส์ | `af-ZA` | ญี่ปุ่น | `ja-JP` |
-| อัมฮาริก | `am-ET` | ชวา | `jv-ID` |
-| อาหรับ (อียิปต์) | `ar-EG` | คาบูเวอร์เดียนู | `kea-CV` |
-| อาร์เมเนีย | `hy-AM` | กันนาดา | `kn-IN` |
-| อัสสัม | `as-IN` | คาซัค | `kk-KZ` |
-| อาร์เซอร์ไบจัน | `az-AZ` | เกาหลี | `ko-KR` |
-| เบลารุส | `be-BY` | คีร์กิซ | `ky-KG` |
-| เบงกาลี (บังกลาเทศ) | `bn-BD` | ลัตเวีย | `lv-LV` |
-| เบงกาลี (อินเดีย) | `bn-IN` | ลิงกาลา | `ln-CD` |
-| บอสเนีย | `bs-BA` | ลิทัวเนีย | `lt-LT` |
-| บัลแกเรีย | `bg-BG` | มาซีโดเนีย | `mk-MK` |
-| บัลแกเรีย (อโรมาเนีย) | `rup-BG` | มาเลย์ | `ms-MY` |
-| พม่า | `my-MM` | มาลายาลัม | `ml-IN` |
-| จีนกวางตุ้ง (ตัวเต็ม) | `yue-Hant-HK` | มอลตา | `mt-MT` |
-| คาตาลัน | `ca-ES` | จีนกลาง (ตัวย่อ) | `cmn-Hans-CN` |
-| ซีบัวโน | `ceb` | มราฐี | `mr-IN` |
-| เขมรตอนกลาง | `km-KH` | มองโกเลีย | `mn-MN` |
-| โครเอเชีย | `hr-HR` | เนปาล | `ne-NP` |
-| เช็ก | `cs-CZ` | นอร์เวย์ | `nb-NO` |
-| เดนมาร์ก | `da-DK` | โอริยา | `or-IN` |
-| ดัตช์ | `nl-NL` | โปแลนด์ | `pl-PL` |
-| อังกฤษ (บริเตนใหญ่) | `en-GB` | โปรตุเกส (บราซิล) | `pt-BR` |
-| อังกฤษ (อินเดีย) | `en-IN` | โปรตุเกส (โปรตุเกส) | `pt-PT` |
-| อังกฤษ (สหรัฐอเมริกา) | `en-US` | ปัญจาบ | `pa-IN` |
-| เอสโตเนีย | `et-EE` | ปัญจาบ (สคริปต์คุรมุขี) | `pa-Guru-IN` |
-| ฟาร์ซี | `fa-IR` | โรมาเนีย | `ro-RO` |
-| ฟิลิปปินส์ | `fil-PH` | รัสเซีย | `ru-RU` |
-| ฟินแลนด์ | `fi-FI` | เซอร์เบีย | `sr-RS` |
-| ฝรั่งเศส | `fr-FR` | ภาษาสินธี (อักษรอาหรับ) | `sd-Arab-IN` |
-| กาลิเชียน | `gl-ES` | สโลวัก | `sk-SK` |
-| จอร์เจีย | `ka-GE` | สโลวีเนีย | `sl-SI` |
-| เยอรมัน | `de-DE` | สเปน (ลาตินอเมริกา) | `es-419` |
-| กรีก | `el-GR` | สเปน (สหรัฐอเมริกา) | `es-US` |
-| คุชราต | `gu-IN` | สวาฮีลี (เคนยา) | `sw-KE` |
-| เฮาซา | `ha-NG` | สวีเดน | `sv-SE` |
-| ฮีบรู | `he-IL` | ทาจิก | `tg-TJ` |
-| ฮินดี | `hi-IN` | เตลูกู | `te-IN` |
-| ฮังการี | `hu-HU` | ไทย | `th-TH` |
-| ไอซ์แลนด์ | `is-IS` | ตุรกี | `tr-TR` |
-| อังกฤษ (อินเดีย) | `en-IN` | ยูเครน | `uk-UA` |
-| อินโดนีเซีย | `id-ID` | อุซเบก | `uz-UZ` |
-| อิตาลี | `it-IT` | เวียดนาม | `vi-VN` |
+| Afrikaans | `af-ZA` | Japonais | `ja-JP` |
+| Amharique | `am-ET` | Javanais | `jv-ID` |
+| Arabe (Égypte) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Arménien | `hy-AM` | Kannada | `kn-IN` |
+| Assamais | `as-IN` | Kazakh | `kk-KZ` |
+| Azéri | `az-AZ` | Coréen | `ko-KR` |
+| Biélorusse | `be-BY` | Kirghiz | `ky-KG` |
+| Bengali (Bangladesh) | `bn-BD` | Letton | `lv-LV` |
+| Bengali (Inde) | `bn-IN` | Lingala | `ln-CD` |
+| Bosniaque | `bs-BA` | Lituanien | `lt-LT` |
+| Bulgare | `bg-BG` | Macédonien | `mk-MK` |
+| Bulgare (aroumain) | `rup-BG` | Malaisien | `ms-MY` |
+| Birman | `my-MM` | Malayalam | `ml-IN` |
+| Cantonais (traditionnel) | `yue-Hant-HK` | Maltais | `mt-MT` |
+| Catalan | `ca-ES` | Chinois mandarin (simplifié) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Khmer central | `km-KH` | Mongol | `mn-MN` |
+| Croate | `hr-HR` | Népalais | `ne-NP` |
+| Tchèque | `cs-CZ` | Norvégien | `nb-NO` |
+| Danois | `da-DK` | Oriya | `or-IN` |
+| Néerlandais | `nl-NL` | Polonais | `pl-PL` |
+| Anglais (Grande-Bretagne) | `en-GB` | Portugais (Brésil) | `pt-BR` |
+| Anglais (Inde) | `en-IN` | Portugais (Portugal) | `pt-PT` |
+| Anglais (États-Unis) | `en-US` | Panjabi | `pa-IN` |
+| Estonien | `et-EE` | Panjabi (écriture gurmukhī) | `pa-Guru-IN` |
+| Farsi | `fa-IR` | Roumain | `ro-RO` |
+| Tagalog | `fil-PH` | Russe | `ru-RU` |
+| Finnois | `fi-FI` | Serbe | `sr-RS` |
+| Français | `fr-FR` | Sindhi (écriture arabe) | `sd-Arab-IN` |
+| Galicien | `gl-ES` | Slovaque | `sk-SK` |
+| Géorgien | `ka-GE` | Slovène | `sl-SI` |
+| Allemand | `de-DE` | Espagnol (Amérique latine) | `es-419` |
+| Grec | `el-GR` | Espagnol (États-Unis) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
+| Haoussa | `ha-NG` | Suédois | `sv-SE` |
+| Hébreu | `he-IL` | Tadjik | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Hongrois | `hu-HU` | Thaï | `th-TH` |
+| Islandais | `is-IS` | Turc | `tr-TR` |
+| Anglais (Inde) | `en-IN` | Ukrainien | `uk-UA` |
+| Indonésien | `id-ID` | Ouzbek | `uz-UZ` |
+| Italien | `it-IT` | Vietnamien | `vi-VN` |
 
-## รูปแบบเสียงที่รองรับ
+## Formats audio acceptés
 
-Gemini 3.5 Transcribe รองรับประเภท MIME ของรูปแบบเสียงต่อไปนี้
+Gemini 3.5 Transcribe est compatible avec les types MIME de format audio suivants :
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
-- AIFF - `audio/aiff`
+- AIFF – `audio/aiff`
 - AAC - `audio/aac`
 - OGG - `audio/ogg`
 - FLAC - `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
-- L16 - `audio/l16`
-- Opus - `audio/opus`
+- L16 – `audio/l16`
+- Opus – `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-ดูรายการประเภท MIME และสคีมาพารามิเตอร์ที่รองรับทั้งหมดได้ใน[เอกสารอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th#Resource:Content)
+Pour obtenir la liste complète des types MIME et des schémas de paramètres acceptés, consultez la [documentation de référence de l'API Interactions](https://ai.google.dev/api/interactions-api?hl=fr#Resource:Content).
 
-## ข้อมูลอ้างอิงพารามิเตอร์
+## Référence de paramètre
 
-กำหนดค่าการถอดเสียงเป็นคำโดยการตั้งค่าฟิลด์ภายในออบเจ็กต์ `audio_transcription_config` ใน `GenerateContentConfig` ดังนี้
+Configurez la transcription en définissant les champs de l'objet `audio_transcription_config` dans `GenerateContentConfig` :
 
-| ช่อง | ประเภท | คำอธิบาย |
+| Champ | Type | Description |
 | --- | --- | --- |
-| `language_codes` | อาร์เรย์ของสตริง | รหัสภาษา BCP-47 (เช่น `["en-US"]`) หากเว้นว่างหรือไม่มีค่า (`[]`) โมเดลจะตรวจหาภาษาโดยอัตโนมัติและจัดการการสลับภาษา |
-| `custom_vocabulary` | อาร์เรย์ของสตริง | คำที่กำหนดเอง ตัวย่อ หรือชื่อเฉพาะสูงสุด 1,000 รายการเพื่อปรับการจดจำคำพูด ใช้ร่วมกับการระบุผู้พูดและแสตมป์เวลาระดับคำไม่ได้ |
-| `word_timestamp` | บูลีน | ตั้งค่าเป็น `True` เพื่อรวมออฟเซ็ตเริ่มต้นและสิ้นสุดของคำ หากละเว้นหรือ `False` ระบบจะไม่แสดงการประทับเวลาของคำ ใช้ร่วมกับคำศัพท์ที่กำหนดเองไม่ได้ |
-| `diarization` | บูลีน | ตั้งค่าเป็น `True` เพื่อระบุและติดป้ายกำกับผู้พูดแต่ละคน ใช้ร่วมกับคำศัพท์ที่กำหนดเองไม่ได้ |
-| `mode` | สตริง | โหมดการถอดเสียงเป็นคำ ค่าที่รองรับ: `"VERBATIM"` (ค่าเริ่มต้น) และ `"SMART"` ใช้ร่วมกับการประทับเวลาและการแยกแยะเสียงพูดไม่ได้ |
+| `language_codes` | Tableau de chaînes | Codes de langue BCP-47 (par exemple, `["en-US"]`). S'ils sont omis ou vides (`[]`), le modèle détecte automatiquement la langue et gère le changement de code. |
+| `custom_vocabulary` | Tableau de chaînes | Jusqu'à 1 000 termes, acronymes ou noms propres personnalisés pour orienter la reconnaissance vocale. Incompatible avec l'identification du locuteur et les codes temporels au niveau du mot. |
+| `word_timestamp` | Booléen | Définissez sur `True` pour inclure les décalages de début et de fin des mots. Si cette option est omise ou définie sur `False`, aucun code temporel de mot n'est renvoyé. Incompatible avec le vocabulaire personnalisé. |
+| `diarization` | Booléen | Définissez la valeur sur `True` pour identifier les différents intervenants et leur attribuer un identifiant. Incompatible avec le vocabulaire personnalisé. |
+| `mode` | Chaîne | Mode Transcription. Valeurs acceptées : `"VERBATIM"` (par défaut) et `"SMART"`. Incompatible avec les codes temporels et l'identification des locuteurs. |
 
-## แนวทางปฏิบัติแนะนำ
+## Bonnes pratiques
 
-- **ให้เสียงที่ชัดเจน:** ตรวจสอบว่าไฟล์บันทึกเสียงมีการแยกเสียงพูดที่ชัดเจนและหลีกเลี่ยงการตัดเสียงที่รุนแรง
-- **ระบุคำแนะนำเกี่ยวกับภาษาเมื่อทราบ:** หากทราบภาษาของเสียงล่วงหน้า ให้ระบุ `language_codes` เพื่อเพิ่มความแม่นยำให้สูงสุด
-- **คำศัพท์ที่กำหนดเองเป้าหมาย:** ใส่เฉพาะคำในโดเมน ชื่อแบรนด์ หรือคำนามเฉพาะที่แตกต่างกันใน `custom_vocabulary` แทนที่จะใช้คำทั่วไปในชีวิตประจำวัน
-- **ใช้ Files API สำหรับการบันทึกขนาดใหญ่:** สำหรับไฟล์ที่ยาวกว่า 2-3 วินาที ให้อัปโหลดไฟล์โดยใช้ `client.files.upload` และส่งไฟล์ที่ส่งคืนไปยังเนื้อหาของโมเดล
+- **Fournissez un son clair** : assurez-vous que les enregistrements audio ont une séparation vocale claire et évitez les découpages importants.
+- **Fournissez des indications de langue si vous les connaissez** : si vous connaissez la langue de l'audio à l'avance, spécifiez `language_codes` pour maximiser la précision.
+- **Cibler un vocabulaire personnalisé** : n'incluez que des termes de domaine distincts, des noms de marques ou des noms propres dans `custom_vocabulary`, plutôt que des mots courants.
+- **Utilisez l'API Files pour les enregistrements volumineux** : pour les fichiers de plus de quelques secondes, importez le fichier à l'aide de `client.files.upload` et transmettez le fichier renvoyé au contenu du modèle.
 
-## ข้อจำกัด
+## Limites
 
-- **ระยะเวลาเสียง:** คำขอแบบเอกภาคมาตรฐานรองรับไฟล์เสียงได้นานสูงสุด 1 ชั่วโมง การประมวลผลเสียงจะจำกัดไว้ที่ 30 นาทีเมื่อเปิดใช้ฟีเจอร์ต่างๆ เช่น การระบุผู้พูดหรือการประทับเวลาที่ระดับคำ
-- **การประทับเวลาที่ระดับคำ:** การเปิดใช้การประทับเวลาที่ระดับคำอาจลดความแม่นยำในการถอดเสียงเป็นคำโดยรวม
-- **การแยกแยะเสียงผู้พูด:** การแยกแยะเสียงผู้พูดรองรับผู้พูดได้สูงสุด 8 คน การระบุแหล่งที่มาของลำโพงสำหรับลำโพง 3 ตัวขึ้นไปอยู่ในขั้นทดลอง
-- **คำศัพท์ที่กำหนดเอง:** คุณระบุคำได้สูงสุด 1,000 คำใน `custom_vocabulary` แต่โดยปกติแล้วการระบุคำสูงสุด 100 คำจะให้ผลลัพธ์ที่ดีที่สุด คุณใช้ `custom_vocabulary` ร่วมกับการระบุผู้พูดหรือการประทับเวลาที่ระดับคำไม่ได้ โดย API จะปฏิเสธคำขอที่ระบุ `custom_vocabulary` พร้อมกับฟีเจอร์ใดฟีเจอร์หนึ่ง
-- **ความเข้ากันได้ของโหมด:** การถอดเสียงอัจฉริยะ (`mode: "SMART"`) ใช้ร่วมกับ `word_timestamp` หรือ `diarization` ไม่ได้
+- **Durée de l'audio** : les requêtes unitaires standards sont compatibles avec les fichiers audio d'une durée maximale d'une heure. Le traitement audio est limité à 30 minutes lorsque des fonctionnalités telles que la segmentation des locuteurs ou les codes temporels au niveau des mots sont activées.
+- **Codes temporels au niveau du mot** : l'activation des codes temporels au niveau du mot peut dégrader la précision globale de la transcription.
+- **Identification des locuteurs** : l'identification des locuteurs est compatible avec un maximum de huit locuteurs. L'attribution des locuteurs pour trois locuteurs ou plus est une fonctionnalité expérimentale.
+- **Vocabulaire personnalisé** : vous pouvez fournir jusqu'à 1 000 termes dans `custom_vocabulary`, mais les meilleurs résultats sont généralement obtenus avec un maximum de 100 termes. Vous ne pouvez pas combiner `custom_vocabulary` avec la segmentation des locuteurs ou les codes temporels au niveau des mots. L'API rejette les requêtes qui spécifient `custom_vocabulary` avec l'une ou l'autre de ces fonctionnalités.
+- **Compatibilité des modes** : la transcription intelligente (`mode: "SMART"`) ne peut pas être combinée avec `word_timestamp` ni `diarization`.
 
-## ขั้นตอนถัดไป
+## Étape suivante
 
-- สตรีมเสียงแบบเรียลไทม์ด้วย[คู่มือการถอดเสียงเป็นคำแบบสด](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=th)โดยใช้ Live API
-- สำรวจ[การทำความเข้าใจเสียง](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=th)เพื่อวิเคราะห์ สรุป หรือค้นหาเนื้อหาเสียง
-- ดูวิธีสังเคราะห์เสียงจากข้อความโดยใช้[การอ่านออกเสียงข้อความ](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=th)
-- ดูราคาของโมเดลและขีดจำกัดโทเค็นได้ใน[หน้าการกำหนดราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3.5-transcribe)
-- โปรดดูรายละเอียดเกี่ยวกับการอัปโหลดและจัดการไฟล์สื่อในคู่มือ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th)
+- Diffusez de l'audio en temps réel avec le [guide de transcription en direct](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=fr) à l'aide de l'API Live.
+- Explorez la [compréhension audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=fr) pour analyser, résumer ou interroger des contenus audio.
+- Découvrez comment synthétiser des contenus audio à partir de texte à l'aide de [Text-to-Speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr).
+- Consultez la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.5-transcribe) pour connaître les tarifs des modèles et les limites de jetons.
+- Consultez le guide de l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr) pour savoir comment importer et gérer des fichiers multimédias.
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-อัปเดตล่าสุด 2026-09-08 UTC
+Dernière mise à jour le 2026/09/08 (UTC).
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Voulez-vous nous donner plus d'informations ?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-08 UTC"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/08 (UTC)."],[],[]]

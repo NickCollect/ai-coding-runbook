@@ -1,206 +1,214 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ko
-fetched_at: 2026-09-28T06:17:16.858006+00:00
-title: "Google AI Studio\uc5d0\uc11c \uc571 \ube4c\ub4dc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=it
+fetched_at: 2026-10-05T06:40:25.703093+00:00
+title: "Crea app in Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-의견 보내기
+Invia feedback
 
-# Google AI Studio에서 앱 빌드
+# Crea app in Google AI Studio
 
-이 페이지에서는 Google AI Studio를 사용하여
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko), [Live
-API](https://ai.google.dev/gemini-api/docs/live?hl=ko) 같은 Gemini의 최신 기능을 테스트하는 앱을 빠르게 빌드 또는 '바이브
-코딩'하고 배포하는 방법을 설명합니다. Google AI Studio는 풀 스택 런타임으로 **웹 앱** 을 빌드하고 Kotlin 및 Jetpack Compose로 **네이티브 Android 앱** 을 빌드하는 것을 모두 자연어 프롬프트를 통해 지원합니다.
+Questa pagina descrive come utilizzare Google AI Studio per creare rapidamente (o "vibe
+code") ed eseguire il deployment di app che testano le funzionalità più recenti di Gemini, come
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) e l'API [Live](https://ai.google.dev/gemini-api/docs/live?hl=it). Google AI Studio supporta la creazione di **app web** con runtime full stack e **app Android native** con Kotlin e Jetpack Compose, il tutto tramite prompt in linguaggio naturale.
 
-## 시작하기
+## Inizia
 
-Google AI Studio의 [빌드 모드](https://aistudio.google.com/apps?hl=ko)에서 바이브 코딩을 시작하세요. 다음과 같은 몇 가지 방법으로 빌드를 시작할 수 있습니다.
+Inizia a utilizzare il vibe coding nella [modalità di creazione](https://aistudio.google.com/apps?hl=it) di Google AI Studio. Puoi iniziare a creare in diversi modi:
 
-- **프롬프트로 시작**: 빌드 모드에서 입력 상자를 사용하여 빌드하려는 항목에 관한 설명을 입력합니다. AI 칩을 선택하여 이미지 생성 또는 Google 지도 데이터와 같은 특정 기능을 프롬프트에 추가합니다. 음성 텍스트 변환 버튼을 사용하여 원하는 내용을 말할 수도 있습니다.
-- **"운이 좋으신가요?" 버튼**: 창의적인 아이디어가 필요하면 "운이 좋으신가요?" 버튼을 사용하세요. Gemini가 시작하는 데 도움이 되는 프로젝트 아이디어가 포함된 프롬프트를 생성합니다.
-- **갤러리에서 프로젝트 리믹스**: [앱
-  갤러리](https://aistudio.google.com/apps?source=showcase&hl=ko)에서 프로젝트를 열고 **앱 복사**를 선택합니다.
-- **GitHub에서 프로젝트 가져오기**: 빌드 모드에서 프롬프트
-  입력 상자의 **파일 추가** (+ 아이콘) 메뉴에서
-  **GitHub에서 가져오기**를 선택하여 기존 코드를 가져옵니다.
+- **Inizia con un prompt**: in modalità di creazione, utilizza la casella di immissione per inserire una descrizione di ciò che vuoi creare. Seleziona AI Chips per aggiungere funzionalità specifiche come la generazione di immagini o i dati di Google Maps al prompt. Puoi anche dire quello che vuoi utilizzando il pulsante di sintesi vocale.
+- **Pulsante "Mi sento fortunato"**: se hai bisogno di un'idea creativa, utilizza il pulsante "Mi
+  sento fortunato" e Gemini genererà un prompt con un'idea di progetto
+  per aiutarti a iniziare.
+- **Remixa un progetto dalla galleria**: apri un progetto dalla [Galleria
+  app](https://aistudio.google.com/apps?source=showcase&hl=it) e seleziona **Copia app**.
+- **Importa un progetto da GitHub**: in modalità di creazione, seleziona
+  **Importa da GitHub** dal menu **Aggiungi file** (icona +) nella casella di immissione del prompt
+  per importare il codice esistente.
 
-프롬프트를 실행하면 필요한 코드와 파일이 생성되고 앱의 실시간 미리보기가 오른쪽에 표시됩니다.
+Una volta eseguito il prompt, vedrai generare il codice e i file necessari, con un'anteprima live della tua app che apparirà sul lato destro.
 
-## 생성되는 항목
+## Che cosa viene creato?
 
-프롬프트를 실행하면 AI Studio가 완전한 애플리케이션을 만듭니다. 플랫폼 선택 도구를 사용하여 **웹 앱** 또는 **네이티브 Android 앱** 을 빌드하도록 선택할 수 있습니다.
+Quando esegui il prompt, AI Studio crea un'applicazione completa. Puoi scegliere di creare un'**app web** o un'**app per Android nativa** utilizzando il selettore della piattaforma.
 
-**웹 앱** (기본값)의 경우 AI Studio는 다음을 포함하는 풀 스택 환경을 만듭니다.
+Per le **app web** (impostazione predefinita), AI Studio crea un ambiente full stack che include:
 
-- **클라이언트 측**: 웹 프런트엔드 (React가 기본값)입니다.
-- **서버 측**: 보안 API 호출,
-  데이터베이스 연결, npm 패키지 사용을 허용하는 Node.js 런타임입니다.
+- **Lato client**: un frontend web (React è l'impostazione predefinita).
+- **Lato server**: un runtime Node.js che consente chiamate API sicure,
+  connessioni al database e utilizzo di pacchetti npm.
 
-**Android 앱**의 경우 AI Studio는 브라우저 기반 에뮬레이터에서 미리 보고, 실제 기기에 설치하고,
-테스트를 위해 Play 스토어에 게시할 수 있는 Kotlin 및 Jetpack Compose 프로젝트를 생성합니다. [Android 앱 빌드에 관해 자세히 알아보세요](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ko).
+Per le **app Android**, AI Studio genera un progetto Kotlin e Jetpack Compose
+di cui puoi visualizzare l'anteprima in un emulatore basato su browser, installare su un dispositivo fisico,
+e pubblicare sul Play Store per i test. [Scopri di più sulla creazione di app Android
+apps](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it).
 
-오른쪽 미리보기 창에서 **코드** 탭을 선택하여 생성되는 코드를 볼 수 있습니다. **Antigravity 에이전트** 는 스택 전반에서 여러 파일을 지능적으로 관리하여 변경사항이 올바르게 전파되도록 합니다.
+Puoi visualizzare il codice generato selezionando la scheda **Codice** nel riquadro di anteprima a destra. L'**agente Antigravity** gestisce in modo intelligente più file nello stack, assicurandosi che le modifiche vengano propagate correttamente.
 
-### Antigravity 에이전트
+### L'agente Antigravity
 
-**Antigravity 에이전트**는 [Google
-Antigravity](https://antigravity.google?hl=ko) 내의 기본 AI 기능이며 이제
-에이전트 하네스의 핵심 구성요소가 Google AI Studio의 빌드 모드 환경을 지원합니다. 전체 프로젝트의 컨텍스트를 유지하고, 여러 파일을 관리하고, 복잡한 안내를 이해하여 강력한 풀 스택 애플리케이션을 빌드함으로써 단순한 코드 생성을 넘어섭니다.
+L'**agente Antigravity** è la funzionalità di AI principale di [Google
+Antigravity](https://antigravity.google?hl=it) e ora i componenti principali dell'
+infrastruttura agentica sono alla base dell'esperienza della modalità di creazione in Google AI Studio. Va oltre la semplice generazione di codice mantenendo il contesto dell'intero progetto, gestendo più file e comprendendo istruzioni complesse per creare applicazioni full stack robuste.
 
-주요 기능은 다음과 같습니다.
+Le sue funzionalità principali includono:
 
-- **컨텍스트 인식**: 이전 프롬프트 및 파일 상태의 컨텍스트를 유지합니다.
-- **다중 파일 관리**: 여러 파일의 종속 항목을 처리합니다.
-- **확인된 실행**: 코드 업데이트를 확인하여 환각을 줄입니다.
+- **Consapevolezza del contesto**: mantiene il contesto dei prompt precedenti e degli stati dei file.
+- **Gestione di più file**: gestisce le dipendenze tra più file.
+- **Esecuzione verificata**: verifica gli aggiornamenti del codice per ridurre le allucinazioni.
 
-## 풀 스택 기능
+## Funzionalità full stack
 
-Google AI Studio는 최신 웹 생태계의 강력한 기능을 활용하여 클라이언트 측 프로토타입 이상의 항목을 빌드할 수 있도록 지원합니다.
+Google AI Studio sfrutta la potenza dell'ecosistema web moderno, consentendoti di creare prototipi non solo lato client.
 
-- **서버 측 런타임 및 npm**: 광범위한 npm 패키지 라이브러리를 사용합니다. 에이전트는 앱에 필요한 패키지 (예: 데이터 시각화 또는 API 클라이언트를 위한 특정 라이브러리)를 자동으로 식별하고 설치합니다. 원하는 경우 특정 패키지를 요청할 수도 있습니다.
-- **보안 비밀 관리**: **설정** 메뉴에 API 키와 보안 비밀을 안전하게 저장합니다. 이러한 항목은 서버 측 코드에서 액세스할 수 있으므로 클라이언트 측 노출로부터 안전하게 보호됩니다.
-- **멀티플레이어**: AI Studio 내에서 직접 실시간 공동작업 환경을 빌드합니다. 서버 측 런타임은 사용자가 함께 상호작용하는 데 필요한 상태와 연결을 관리합니다.
-- **Firebase Firestore 및 인증**: Firestore 데이터베이스 (영구 데이터 저장소) 및
-  Firebase 인증 (로그인 흐름, 특히 'Google로
-  로그인')을 비롯한 Firebase를 자동으로 프로비저닝하고
-  설정합니다. 에이전트는 전체 설정 프로세스를 처리하고 앱에서 이러한 서비스의 코드를 작성하기도 합니다.
-- **Google Workspace 통합**: Gmail, Sheets, Docs, Drive, Calendar 등과 같은 Google Workspace
-  API에 앱을 연결합니다. AI Studio는 모든 OAuth 구성을 자동으로 처리합니다.
+- **Runtime lato server e npm**: utilizza la vasta libreria di pacchetti npm. L'agente identificherà e installerà automaticamente i pacchetti necessari per la tua app (ad es. librerie specifiche per la visualizzazione dei dati o client API). Se vuoi, puoi anche richiedere pacchetti specifici.
+- **Gestione dei secret**: archivia in modo sicuro chiavi API e secret nel
+  **menu Impostazioni**. Questi sono accessibili nel codice lato server, mantenendoli al sicuro dall'esposizione lato client.
+- **Multiplayer**: crea esperienze di collaborazione in tempo reale direttamente in
+  AI Studio. Il runtime lato server gestisce lo stato e le connessioni necessarie per consentire agli utenti di interagire tra loro.
+- **Firebase Firestore e autenticazione**: esegui automaticamente il provisioning e la configurazione di Firebase, inclusi il database Firestore (archiviazione permanente dei dati) e l'autenticazione Firebase (flussi di accesso, in particolare "Accedi con Google"). L'agente gestisce l'intera procedura di configurazione e scrive persino il codice nella tua app per questi servizi.
+- **Integrazioni di Google Workspace**: collega la tua app alle API di Google Workspace
+  come Gmail, Fogli, Documenti, Drive, Calendar e altro ancora. AI Studio gestisce automaticamente tutta la configurazione OAuth.
 
-[풀 스택 앱 개발에 관해 자세히 알아보기](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ko)
+[Scopri di più sullo sviluppo di app full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it)
 
-### Android 앱
+### App Android
 
-Kotlin 및 Jetpack Compose를 사용하여 네이티브 Android 앱을 빌드할 수도 있습니다.
-브라우저 기반 Android 에뮬레이터에서 앱을 미리 보고, 브라우저에서 ADB를 사용하여 실제 기기에 설치하고, 내부 테스트를 위해 Play 스토어에 게시합니다.
+Puoi anche creare app Android native utilizzando Kotlin e Jetpack Compose.
+Visualizza l'anteprima dell'app in un emulatore Android basato su browser, installala su un dispositivo fisico utilizzando ADB nel browser e pubblicala sul Play Store per i test interni.
 
-[Android 앱 빌드에 관해 자세히 알아보기](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ko)
+[Scopri di più sulla creazione di app Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it)
 
-## 계속 빌드하세요
+## Continua a creare
 
-Google AI Studio에서 애플리케이션의 초기 코드를 생성하면 계속해서 코드를 개선할 수 있습니다.
+Una volta che Google AI Studio genera il codice iniziale per la tua applicazione, puoi continuare a perfezionarlo:
 
-### Google AI Studio에서 빌드
+### Crea in Google AI Studio
 
-- **Gemini로 반복**: **빌드 모드** 의 채팅 패널을 사용하여 Gemini에게
-  수정, 새 기능 추가 또는 스타일 변경을 요청합니다.
-- **코드 직접 수정**: 미리보기 패널에서 **코드 탭**을 열어
-  실시간으로 수정합니다.
+- **Esegui iterazioni con Gemini**: utilizza il riquadro della chat in **modalità di creazione** per chiedere a Gemini
+  di apportare modifiche, aggiungere nuove funzionalità o modificare lo stile.
+- **Modifica il codice direttamente**: apri la **scheda Codice** nel riquadro di anteprima per
+  apportare modifiche live.
 
-### 외부에서 개발
+### Sviluppa esternamente
 
-더욱 고급 워크플로의 경우 코드를 동기화하거나 내보내서 원하는 환경에서 작업할 수 있습니다.
+Per workflow più avanzati, puoi sincronizzare o esportare il codice per lavorare nell'ambiente che preferisci:
 
-- **GitHub와 동기화**: 앱을 GitHub 저장소에 연결하여
-  양방향 동기화를 사용 설정합니다. AI Studio에서 프롬프트된 변경사항을 AI 생성 커밋 메시지와 함께 저장소에 직접 푸시하거나 IDE 또는 팀원들이 로컬에서 변경한 사항을 AI Studio로 다시 가져올 수 있습니다. 설정의 **GitHub** 탭에서 언제든지 동기화 상태를 관리합니다.
-- **다운로드 및 로컬 개발**: 생성된 코드를 **ZIP
-  파일**로 내보내고 코드 편집기로 가져옵니다.
+- **Sincronizza con GitHub**: collega la tua app a un repository GitHub per abilitare la sincronizzazione
+  bidirezionale. Puoi inviare tramite push le modifiche richieste in AI Studio direttamente al repository con messaggi di commit generati dall'AI oppure recuperare le modifiche apportate localmente nell'IDE o dai colleghi in AI Studio. Gestisci lo stato di sincronizzazione in qualsiasi momento nella scheda **GitHub** in Impostazioni.
+- **Scarica e sviluppa localmente**: esporta il codice generato come **file
+  ZIP** e importalo nell'editor di codice.
 
-## 주요 특징
+## Funzionalità principali
 
-Google AI Studio에는 빌드 프로세스를 직관적이고 시각적으로 만들어 주는 여러 기능이 포함되어 있습니다.
+Google AI Studio include diverse funzionalità per rendere il processo di creazione intuitivo e visivo:
 
-- **풀 스택 앱 만들기 및 반복**: 프롬프트만으로 풀 스택 앱을 만들고 채팅 또는 **주석 모드**를 통해 반복합니다. 주석 모드를 사용하면 앱의 UI 부분을 강조표시하고 원하는 변경사항을 설명할 수 있습니다.
-- **앱 공유 및 배포**: 다른 사용자와 창작물을 공유하여
-  공동작업하거나 작업을 선보일 수 있습니다. 공유할 때 API 호출은 사용량 한도에 포함됩니다. 유료 모델을 사용하는 경우 비용이 발생할 수 있습니다. 그런 다음 앱이 준비되면 Cloud Run에 배포합니다.
-- **앱 갤러리**: 앱 갤러리는 프로젝트 아이디어의 시각적 라이브러리를 제공합니다.
-  Gemini로 가능한 작업을 탐색하고, 애플리케이션을 즉시 미리 보고, 리믹스하여 나만의 애플리케이션을 만들 수 있습니다.
+- **Crea ed esegui iterazioni di app full stack**: crea app full stack con solo
+  un prompt ed esegui iterazioni tramite la chat o la **modalità di annotazione**. La modalità di annotazione ti consente di evidenziare qualsiasi parte della UI dell'app e descrivere la modifica che vuoi apportare.
+- **Condividi ed esegui il deployment dell'app**: puoi condividere le tue creazioni con altri utenti per
+  collaborare o mostrare il tuo lavoro. Quando condividi, le chiamate API vengono conteggiate ai fini dei limiti di utilizzo. Se utilizzi modelli a pagamento, potrebbero essere applicati costi. Quando l'app è pronta, esegui il deployment in Cloud Run.
+- **Galleria di app**: la Galleria di app fornisce una libreria visiva di idee di progetto.
+  Puoi sfogliare le possibilità offerte da Gemini, visualizzare immediatamente l'anteprima delle applicazioni e remixarle per personalizzarle.
 
-## 앱 배포 또는 보관처리
+## Esegui il deployment o archivia l'app
 
-애플리케이션이 준비되면 배포할 수 있습니다.
+Quando l'applicazione è pronta, puoi eseguirne il deployment:
 
-- **Cloud Run**: 애플리케이션을 확장 가능한 서비스로 배포합니다.
-  [Google Cloud Run](https://cloud.google.com/run?hl=ko)의 가격은 사용량에 따라 적용될 수 있습니다. 배포에 관해 자세히 알아보려면
-  [Google AI Studio에서 배포](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko)를 참고하세요.
-- **GitHub**: 프로젝트를 신규 또는 기존 GitHub 저장소와 동기화하여
-  소스 코드를 관리하거나 팀원과 공동작업합니다.
+- **Cloud Run**: esegui il deployment dell'applicazione come servizio scalabile.
+  Potrebbero essere applicati prezzi per [Google Cloud Run](https://cloud.google.com/run?hl=it) in base
+  all'utilizzo. Per scoprire di più sul deployment, vedi
+  [Eseguire il deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it).
+- **GitHub**: sincronizza il progetto con un repository GitHub nuovo o esistente
+  per gestire il codice sorgente o collaborare con i colleghi.
 
-## 제한사항
+## Limitazioni
 
-이 섹션에는 Google AI Studio의 빌드 모드에 적용되는 현재 제한사항이 나와 있습니다.
+Questa sezione elenca le limitazioni attuali della modalità di creazione in Google AI Studio.
 
-### API 키 관리
+### Gestione delle chiavi API
 
-Gemini API를 사용하는 새 앱을 만들면 AI Studio가 Gemini API 키를 앱의 서버 측 환경에서 보안 비밀로 자동으로 구성합니다.
-**보안 비밀** 패널에서 이 키를 보고 관리할 수 있습니다.
+Quando crei una nuova app che utilizza l'API Gemini, AI Studio configura automaticamente la chiave API Gemini come secret nell'ambiente lato server dell'app.
+Puoi visualizzare e gestire questa chiave nel riquadro **Secret**.
 
-- **자동 설정**: `GEMINI_API_KEY`가 자동으로 설정되므로 빌드를 시작하기 위해 수동으로
-  구성할 필요가 없습니다.
-- **서버 측 전용**: API 키는 서버 측 런타임에 삽입되며
-  클라이언트 측 코드에는 포함되지 않습니다.
-- **기존 앱**: 2026년 5월 14일 이전에 빌드된 앱의 경우 다음에 앱의 Gemini 기능을 수정할 때 에이전트가
-  Gemini API 통합을 권장되는
-  서버 측 접근 방식으로 자동으로 업그레이드합니다.
+- **Configurazione automatica**: la variabile `GEMINI_API_KEY` viene configurata automaticamente. Non è necessaria alcuna configurazione manuale
+  per iniziare a creare.
+- **Solo lato server**: le chiavi API vengono inserite nel runtime lato server e
+  non sono mai incluse nel codice lato client.
+- **App esistenti**: per le app create prima del 14 maggio 2026, l'agente aggiornerà
+  automaticamente l'integrazione dell'API Gemini all'approccio lato server
+  consigliato la prossima volta che modifichi le funzionalità Gemini dell'app.
 
-### Google AI Studio 외부 배포
+### Deployment al di fuori di Google AI Studio
 
-- **Cloud Run**: AI Studio에서 Cloud Run에 배포하면 API 키가
-  서버 측 환경에 안전하게 포함됩니다. 배포된 앱은 모든 사용자의 Gemini API 호출에 API 키를 사용합니다.
-- **ZIP 다운로드**: 앱을 ZIP 파일로 다운로드하여 다른 곳에서 운영하려면 호스팅 환경에서 `GEMINI_API_KEY` 환경 변수를 설정해야 합니다. 앱의 Gemini API 호출은 서버 측 코드에서 이루어지므로 키가 최종 사용자에게 노출되지 않습니다.
+- **Cloud Run**: quando esegui il deployment in Cloud Run da AI Studio, la chiave API viene
+  inclusa in modo sicuro nell'ambiente lato server. L'app di cui è stato eseguito il deployment utilizzerà la chiave API per tutte le chiamate API Gemini degli utenti.
+- **Download ZIP**: se scarichi l'app come file ZIP per eseguirla
+  altrove, dovrai configurare la variabile di ambiente `GEMINI_API_KEY`
+  nell'ambiente di hosting. Poiché le chiamate API Gemini dell'app vengono effettuate dal codice lato server, la chiave non viene esposta agli utenti finali.
 
-### 앱 공유 시 오류
+### Errore durante la condivisione delle app
 
-앱을 공유하고 최종 사용자가 공유 URL을 사용할 때 **403 액세스 제한됨** 오류가 발생하면 다음 중 한 가지 이유 때문일 수 있습니다.
+Se condividi la tua app e l'utente finale riscontra un errore **403 Accesso limitato** quando utilizza l'URL condiviso, potrebbe essere dovuto a uno dei seguenti motivi:
 
-- **브라우저 확장 프로그램**: Privacy Badger와 같은 개인 정보 보호 확장 프로그램이 앱을 차단할 수 있습니다. 오류를 방지하려면 확장 프로그램을 사용 중지하세요.
-- **빌드 문제**: 현재 코드에 문제가 있을 수 있습니다. 에이전트에게 '현재 코드의 빌드 문제를 해결'하도록 프롬프트한 다음 URL을 다시 공유합니다.
+- **Estensioni del browser**: le estensioni per la privacy come Privacy Badger potrebbero bloccare l'app. Disattiva l'estensione per evitare l'errore.
+- **Problemi di creazione**: potrebbero esserci problemi con il codice attuale. Chiedi all'agente di "correggere eventuali problemi di creazione con il codice attuale" e poi condividi di nuovo l'URL.
 
-## FAQ
+## Domande frequenti
 
-### AI Studio의 빌드란 무엇인가요?
+### Che cos'è la modalità di creazione in AI Studio?
 
-AI Studio 빌드는 Gemini를 사용하여 간단한 프롬프트에서 프로덕션 준비가 완료된 AI 기반 애플리케이션으로 전환할 수 있도록 설계된 플랫폼입니다. 프롬프트로 빌드하려는 항목을 설명하면 Gemini가 앱을 생성합니다. 갤러리를 탐색하여 Gemini API로 가능한 작업을 확인하고 앱을 리믹스하여 나만의 앱을 만들 수도 있습니다.
+La modalità di creazione di AI Studio è una piattaforma progettata per trasformare un semplice prompt in un'applicazione basata sull'AI pronta per la produzione utilizzando Gemini. Descrivi ciò che vuoi creare con un prompt e Gemini genererà un'app per te. Puoi anche esplorare la nostra galleria per scoprire le possibilità offerte dall'API Gemini e remixare le app per personalizzarle.
 
-### 빌드에서 Gemini API 키를 어떻게 처리하나요?
+### In che modo la modalità di creazione gestisce la mia chiave API Gemini?
 
-Gemini API를 사용하는 앱을 만들면 AI Studio가 Gemini API 키를 서버 측 보안 비밀로 자동으로 설정합니다. 앱의 Gemini API 호출은 이 키를 사용하여 서버 측 코드에서 이루어지므로 브라우저에 노출되지 않습니다. 설정의 **보안 비밀** 패널에서 API 키를 볼 수 있습니다.
+Quando crei un'app che utilizza l'API Gemini, AI Studio configura automaticamente la chiave API Gemini come secret lato server. Le chiamate API Gemini dell'app vengono effettuate dal codice lato server utilizzando questa chiave, quindi non viene mai esposta nel browser. Puoi visualizzare la chiave API nel riquadro **Secret** in Impostazioni.
 
-### 앱을 공유할 때 API 키가 노출되나요?
+### La mia chiave API viene esposta quando condivido le app?
 
-아니요. API 키는 서버 측 보안 비밀로 저장되며 클라이언트 측 코드에는 포함되지 않습니다. 앱을 공유하면 다른 사용자가 앱을 사용할 수 있지만 API 키는 볼 수 없습니다.
+No. La chiave API viene archiviata come secret lato server e non è mai inclusa nel codice lato client. Quando condividi l'app, gli altri utenti possono utilizzarla, ma non possono vedere la tua chiave API.
 
-다른 사용자와 앱을 공유할 때 API 호출은 사용량 한도에 포함됩니다.
-유료 모델을 사용하는 경우 비용이 발생할 수 있습니다. AI Studio는 설정 중에 앱에 비용이 발생할 수 있는 경우 공유하기 전에 알려줍니다.
+Quando condividi le tue app con altri utenti, le chiamate API vengono conteggiate ai fini dei limiti di utilizzo.
+Se utilizzi modelli a pagamento, potrebbero essere applicati costi. AI Studio ti avviserà durante la configurazione e prima della condivisione se la tua app potrebbe comportare costi.
 
-### 내 앱을 볼 수 있는 사용자는 누구인가요?
+### Chi può vedere le mie app?
 
-기본적으로 앱은 비공개입니다. 다른 사용자와 앱을 공유하여 앱을 사용할 수 있도록 허용할 수 있습니다. 앱을 공유하는 사용자는 앱의 코드를 보고 자신의 용도로 포크할 수 있습니다. 수정 권한으로 앱을 공유하면 다른 사용자가 앱의 코드를 수정할 수 있습니다.
+Per impostazione predefinita, la tua app è privata. Puoi condividere la tua app con altri utenti per consentire loro di utilizzarla. Gli utenti con cui condividi la tua app possono vedere il suo codice e creare un fork per i propri scopi. Se condividi la tua app con l'autorizzazione di modifica, gli altri utenti possono modificare il codice dell'app.
 
-### AI Studio 외부에서 앱을 실행할 수 있나요?
+### Posso eseguire app al di fuori di AI Studio?
 
-예. AI Studio에서
-[Cloud Run](https://cloud.google.com/run?hl=ko)에 앱을 배포할 수 있습니다. 그러면 앱에
-서버 측 환경에서 API 키가 안전하게 구성된 공개 URL이 제공됩니다. 앱을 ZIP 파일로 다운로드하여 다른 곳에서 호스팅할 수도 있습니다. 호스팅 환경에서 `GEMINI_API_KEY` 환경 변수를 설정해야 합니다. Gemini API 호출은 서버 측 코드에서 이루어지므로 키가 안전하게 유지됩니다.
+Sì. Puoi eseguire il deployment dell'app in
+[Cloud Run](https://cloud.google.com/run?hl=it) da AI Studio, che
+assegna alla tua app un URL pubblico con la chiave API configurata in modo sicuro nell'
+ambiente lato server. Puoi anche scaricare l'app come file ZIP e ospitarla altrove. Dovrai impostare la variabile di ambiente `GEMINI_API_KEY` nell'ambiente di hosting. Poiché le chiamate API Gemini vengono effettuate dal codice lato server, la chiave rimane sicura.
 
-배포 옵션에 관해 자세히 알아보려면 [Google AI Studio에서 배포](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko)를 참고하세요.
+Per scoprire di più sulle opzioni di deployment, vedi [Eseguire il deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it).
 
-### 자체 도구로 로컬에서 앱을 개발한 다음 여기에서 공유할 수 있나요?
+### Posso sviluppare app localmente con i miei strumenti e poi condividerle qui?
 
-예. AI Studio 앱을 GitHub 저장소에 연결하여 원하는 코드 편집기 또는 CLI 도구를 사용하여 로컬에서 개발하고, 변경사항을 GitHub에 푸시한 다음, 설정의 **GitHub** 탭을 사용하여 이러한 업데이트를 AI Studio로 직접 다시 가져올 수 있습니다.
+Sì. Puoi collegare la tua app AI Studio a un repository GitHub per sviluppare localmente utilizzando l'editor di codice o gli strumenti CLI che preferisci, inviare tramite push le modifiche a GitHub e poi recuperare questi aggiornamenti direttamente in AI Studio utilizzando la scheda **GitHub** in Impostazioni.
 
-### 앱에서 데이터베이스 또는 기타 저장소를 어떻게 사용하나요?
+### Come posso utilizzare un database o un altro spazio di archiviazione con le mie app?
 
-AI Studio 앱은 Cloud Run 컨테이너에서 실행되는 표준 앱입니다. 동적 IP 범위에서 액세스를 방지하는 방화벽이 없는 한 네트워크를 통해 연결할 수 있는 모든 저장소 솔루션을 사용할 수 있습니다.
+Le app AI Studio sono app standard in esecuzione in un container Cloud Run. Puoi utilizzare qualsiasi soluzione di archiviazione a cui puoi connetterti tramite una rete, a condizione che non esista un firewall che impedisca l'accesso da un intervallo di indirizzi IP dinamici.
 
-Google은 향후 AI Studio 내에서 직접 구성할 수 있는 저장소에 대한 직접 지원을 추가하기 위해 노력하고 있습니다.
+Stiamo lavorando per aggiungere il supporto diretto per l'archiviazione in futuro, che potrai configurare direttamente in AI Studio.
 
-### 마이크, 웹캠, 기타 Navigator API에 어떻게 액세스하나요?
+### Come posso accedere al microfono, alla webcam e ad altre API Navigator?
 
-시청자가 앱의 웹캠 또는 기타
-기기 사용을 인식하도록 하려면 앱이 이러한 [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)에 액세스하기 전에 추가 확인이 필요합니다.
-앱 제작자는 이러한 권한 요청을 앱의 `metadata.json` 파일에 추가할 수 있습니다. 예를 들면 다음과 같습니다.
+Per garantire che gli spettatori siano a conoscenza dell'utilizzo della webcam o di altri
+dispositivi da parte di un'app, richiediamo un'ulteriore conferma prima che l'app possa accedere
+a queste [API Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
+I creatori di app possono aggiungere queste richieste di autorizzazione al file `metadata.json` dell'app. Ad esempio:
 
 ```
 {
@@ -218,73 +226,80 @@ Google은 향후 AI Studio 내에서 직접 구성할 수 있는 저장소에 �
 }
 ```
 
-`requestFramePermissions`의 지원되는 값은
-표준 [정책 제어 기능](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md)의 하위 집합입니다.
+I valori supportati per `requestFramePermissions` sono un sottoinsieme delle
+funzionalità standard [controllate dalle norme](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### 앱에서 GitHub를 어떻게 사용하나요?
+### Come posso utilizzare GitHub con le mie app?
 
-AI Studio는 GitHub와의 양방향 동기화를 지원합니다.
+AI Studio supporta la sincronizzazione bidirezionale con GitHub:
 
-- **저장소 가져오기**: 빌드 모드에서 프롬프트 입력 상자의 **파일 추가** (+ 아이콘) 메뉴에서 **GitHub에서 가져오기**를 선택하여 기존 코드를 가져옵니다.
-- **저장소 연결**: 설정에서 **GitHub** 탭을 열어 앱에서
-  새 GitHub 저장소를 만들거나 기존 저장소에 연결합니다.
-- **양방향 동기화**: AI Studio에서 프롬프트된 변경사항을 AI 생성 커밋 메시지와 함께
-  저장소에 직접 푸시하거나 외부에서 변경한 사항 (예: 로컬 IDE 수정 또는 팀원 pull 요청)을 AI
-  Studio로 다시 가져옵니다.
-- **병합 충돌 해결**: GitHub와 동기화할 때 변경사항이 충돌하면 AI Studio는 나란히 비교 뷰어가 있는 **충돌 해결** 대화상자를 제공하므로 차이점을 검토하고 충돌하는 각 파일에 대해 AI Studio 버전 또는 GitHub 버전을 유지할지 선택할 수 있습니다.
+- **Importa un repository**: in modalità di creazione, seleziona **Importa da GitHub**
+  dal menu **Aggiungi file** (icona +) nella casella di immissione del prompt per importare
+  il codice esistente.
+- **Collega un repository**: in Impostazioni, apri la scheda **GitHub** per creare un
+  nuovo repository GitHub dalla tua app o collegarti a uno esistente.
+- **Sincronizzazione bidirezionale**: invia tramite push le modifiche richieste in AI Studio direttamente al
+  repository con messaggi di commit generati dall'AI oppure recupera le modifiche apportate
+  esternamente (ad es. modifiche IDE locali o richieste di pull dei colleghi) in AI
+  Studio.
+- **Risolvi i conflitti di unione**: se le modifiche sono in conflitto durante la sincronizzazione con
+  GitHub, AI Studio fornisce una finestra di dialogo **Risolvi conflitti** con un
+  visualizzatore di differenze affiancato, che ti consente di esaminare le differenze e scegliere
+  se mantenere la versione di AI Studio o GitHub per ogni file in conflitto.
 
-### 다른 사용자에게 내 앱에 대한 수정 액세스 권한을 부여할 수 있나요?
+### Posso concedere ad altri utenti l'accesso in modifica alla mia app?
 
-AI Studio는 직접 실시간 공동작업 수정을 지원하지 않습니다.
-하지만 앱을 공유 GitHub 저장소에 연결하여 팀원과 공동작업할 수 있습니다. 팀원은 GitHub에서 변경사항을 푸시하거나 pull 요청을 열 수 있으며 이러한 업데이트를 AI Studio로 가져올 수 있습니다.
+AI Studio non supporta la modifica collaborativa diretta in tempo reale.
+Tuttavia, puoi collaborare con i colleghi collegando la tua app a un repository GitHub condiviso. I colleghi possono inviare tramite push le modifiche o aprire richieste di pull su GitHub e tu puoi recuperare questi aggiornamenti in AI Studio.
 
-### 내 앱이 정책 위반으로 신고된 이유는 무엇인가요?
+### Perché la mia app è stata segnalata per violazione delle norme?
 
-Google에는 앱이 Google 정책을 준수하는지 자동으로 검토하는 시스템이 있습니다. 앱이 Google 정책을 위반하는 것으로 확인되면 AI Studio에서 앱이 삭제됩니다. 정책 위반에는 다음이 포함되나 이에 국한되지 않습니다.
+Disponiamo di sistemi che esaminano automaticamente le app per assicurarsi che rispettino le nostre norme. Se rileviamo che un'app viola le nostre norme, verrà rimossa da AI Studio. Le violazioni delle norme possono includere, a titolo esemplificativo:
 
-- 멀웨어, 피싱 또는 명의 도용이 포함된 앱
-- 아동 성적 학대 이미지 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 괴롭힘 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 증오심 표현에 대한 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 인신매매 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 음란물 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 폭력 및 유혈 콘텐츠 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 유해하거나 위험한 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
+- App che contengono malware, phishing o furto d'identità
+- App che mostrano o distribuiscono contenuti che violano le norme relative alle immagini pedopornografiche
+- App che mostrano o distribuiscono contenuti che violano le norme relative alle molestie
+- App che mostrano o distribuiscono contenuti che violano le norme relative all'incitamento all'odio
+- App che mostrano o distribuiscono contenuti che violano le norme relative alla tratta di esseri umani
+- App che mostrano o distribuiscono contenuti che violano le norme relative ai contenuti sessualmente espliciti
+- App che mostrano o distribuiscono contenuti che violano le norme relative a contenuti violenti e cruenti
+- App che mostrano o distribuiscono contenuti che violano le norme relative a contenuti dannosi o pericolosi
 
-앱이 정책 위반으로 신고되었으며 오류라고 생각되면 이의신청을 제출할 수 있습니다. Google 정책을 반복적으로 위반하면 AI Studio에 대한 액세스가 해지될 수 있습니다.
+Se la tua app è stata segnalata per una violazione delle norme e ritieni che si tratti di un errore, puoi presentare un ricorso. Ripetute violazioni delle nostre norme potrebbero comportare la cessazione del tuo accesso ad AI Studio.
 
-### 앱 개발자로서의 책임은 무엇인가요?
+### Quali sono le mie responsabilità in qualità di sviluppatore di app?
 
-다시 한번 말씀드리지만 애플리케이션의 소유자로서 애플리케이션의 동작과 처리하는 모든 데이터에 대한 책임은 본인에게 있습니다. 여기에는 다음이 포함됩니다.
+Ti ricordiamo che, in qualità di proprietario dell'applicazione, sei responsabile del suo comportamento e di tutti i dati che gestisce. È incluso quanto segue:
 
-- **법률 준수 및 서드 파티 권리:** 앱이 모든 관련 법률 및 규정을 준수하고 지식 재산권 및 개인 정보 보호 권리를 비롯한 타인의 권리를 침해하지 않도록 합니다.
-- **콘텐츠 모니터링:** 앱에서 사용하는
-  다른 서비스에 추가 약관 준수가 적용될 수 있습니다. 예를 들어
-  [Google Cloud 서비스 약관](https://cloud.google.com/terms?hl=ko)은
-  Firestore에 적용되며 서드 파티 콘텐츠를 호스팅하는 고객이 금지된 콘텐츠 (예: 불법
-  콘텐츠)를 정의하는 정책을 게시하고 해당 불법 콘텐츠의 존재 여부를 모니터링하도록 요구합니다.
-- **안전한 구현:** 애플리케이션이 오용되지 않도록 필요한 보호 조치 및 조정 도구를 구현합니다.
+- **Conformità legale e diritti di terze parti:** assicurati che la tua app sia conforme a tutte le leggi e le normative vigenti e non violi i diritti di terzi, inclusi i diritti di proprietà intellettuale e di privacy.
+- **Monitoraggio dei contenuti:** potrebbero essere applicati termini aggiuntivi ad altri servizi utilizzati dalla tua app. Ad esempio,
+  [i Termini di servizio di Google Cloud](https://cloud.google.com/terms?hl=it),
+  applicabili a Firestore, richiedono ai clienti che ospitano contenuti di terze parti di
+  pubblicare norme che definiscono i contenuti vietati (ad es. contenuti
+  illegali) e di monitorare la presenza di questi contenuti illegali.
+- **Implementazione sicura:** implementa le misure di sicurezza e gli strumenti di moderazione necessari per impedire l'uso improprio dell'applicazione.
 
-서비스 약관의 [사용 제한사항](https://ai.google.dev/gemini-api/terms?hl=ko#use-restrictions)
-을 숙지하세요.
+Tieni presente le [limitazioni d'uso](https://ai.google.dev/gemini-api/terms?hl=it#use-restrictions)
+indicate nei Termini di servizio.
 
-### AI Studio의 앱 갤러리에 있는 앱에 적용되는 약관은 무엇인가요?
+### Quali termini si applicano alle app nella galleria di app di AI Studio?
 
-달리 명시되지 않는 한 [Gemini API 추가 서비스 약관](https://ai.google.dev/gemini-api/terms?hl=ko)
-은 AI Studio의 앱 갤러리에 추천된 앱의 사용에 적용됩니다.
+I [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it)
+si applicano all'utilizzo delle app presenti nella galleria di app di AI Studio, salvo
+diversa indicazione.
 
-## 다음 단계
+## Passaggi successivi
 
-- [풀 스택 앱 개발](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ko) (웹)
-- [Android 앱 빌드](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ko)
-- [앱 갤러리](https://aistudio.google.com/apps?source=showcase&hl=ko)에서 예시를 확인하세요.
+- [Sviluppare app full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it) (web)
+- [Creare app Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it)
+- Vedi esempi nella [Galleria app](https://aistudio.google.com/apps?source=showcase&hl=it).
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-09-11(UTC)
+Ultimo aggiornamento 2026-09-11 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-11(UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-11 UTC."],[],[]]

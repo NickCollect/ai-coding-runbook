@@ -1,42 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi
-fetched_at: 2026-09-28T06:20:51.608328+00:00
-title: "T\u1ea1o l\u1eddi n\u00f3i t\u1eeb v\u0103n b\u1ea3n (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=de
+fetched_at: 2026-10-05T06:38:16.053495+00:00
+title: "Sprachausgabe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Tạo lời nói từ văn bản (TTS)
+# Sprachausgabe
 
-Gemini API có thể chuyển đổi văn bản đầu vào thành âm thanh một người nói hoặc nhiều người nói bằng cách sử dụng các chức năng tạo lời nói từ văn bản (TTS) của Gemini.
-Tính năng tạo văn bản thành lời nói có thể *[kiểm soát](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#controllable)*, tức là bạn có thể kết hợp siêu dữ liệu lượt có cấu trúc (`speech_metadata`) và thẻ thoại nội dòng để hướng dẫn *phong cách*, *giọng*, *tốc độ* và *giọng điệu* của âm thanh.
+Mit der Gemini API kann Texteingabe mithilfe der Gemini-Text-zu-Sprache-Funktionen (TTS) in Audioinhalte mit einem oder mehreren Sprechern umgewandelt werden.
+Die Sprachsynthese ist *[steuerbar](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#controllable)*. Das bedeutet, dass Sie strukturierte Metadaten für die einzelnen Äußerungen (`speech_metadata`) und Inline-Sprachtags kombinieren können, um *Stil*, *Akzent*, *Tempo* und *Ton* des Audios zu steuern.
 
-Khả năng TTS khác với khả năng tạo lời nói được cung cấp thông qua [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi). API này được thiết kế cho âm thanh tương tác, không có cấu trúc, cũng như đầu vào và đầu ra đa phương thức. Mặc dù Live API vượt trội trong các ngữ cảnh trò chuyện linh hoạt, nhưng TTS thông qua Gemini API được điều chỉnh cho phù hợp với những trường hợp yêu cầu đọc văn bản chính xác với khả năng kiểm soát chi tiết về phong cách và âm thanh, chẳng hạn như tạo podcast hoặc sách nói.
+Die TTS-Funktion unterscheidet sich von der Sprachgenerierung über die [Live API](https://ai.google.dev/gemini-api/docs/live?hl=de), die für interaktive, unstrukturierte Audio- sowie multimodale Ein- und Ausgaben konzipiert ist. Während die Live API sich hervorragend für dynamische Konversationskontexte eignet, ist TTS über die Gemini API auf Szenarien zugeschnitten, in denen eine genaue Textrezitation mit detaillierter Steuerung von Stil und Klang erforderlich ist, z. B. bei der Generierung von Podcasts oder Hörbüchern.
 
-Hướng dẫn này cho bạn biết cách tạo âm thanh một người nói và nhiều người nói từ văn bản bằng [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`).
+In dieser Anleitung erfahren Sie, wie Sie mit [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=de) (`gemini-3.8-flash-tts`) und [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=de) (`gemini-3.8-flash-lite-tts`) Audio für einen einzelnen Sprecher und für mehrere Sprecher aus Text generieren.
 
-## Trước khi bắt đầu
+## Hinweis
 
-Đảm bảo bạn sử dụng một mô hình TTS của Gemini có trong phần [Các mô hình được hỗ trợ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#supported-models).
-Để có kết quả tối ưu, hãy xem phần [Thời điểm sử dụng mô hình nào](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#when-to-use-which-model) để chọn mô hình phù hợp nhất cho khối lượng công việc của bạn.
+Achten Sie darauf, dass Sie ein Gemini-TTS-Modell verwenden, das im Abschnitt [Unterstützte Modelle](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#supported-models) aufgeführt ist, und aktualisieren Sie auf das neueste Google GenAI SDK (`google-genai >= 2.25.0` für Python oder `@google/genai >= 2.24.0` für JavaScript/TypeScript) oder verwenden Sie die REST API.
+Die besten Ergebnisse erzielen Sie, wenn Sie [Wann welches Modell verwendet werden sollte](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#when-to-use-which-model) lesen, um das beste Modell für Ihre Arbeitslast auszuwählen.
 
-Bạn có thể thấy việc [kiểm thử các mô hình TTS của Gemini trong AI Studio](https://aistudio.google.com/generate-speech?hl=vi) là hữu ích trước khi bắt đầu xây dựng.
+Es kann hilfreich sein, die [Gemini TTS-Modelle in AI Studio zu testen](https://aistudio.google.com/generate-speech?hl=de), bevor Sie mit der Entwicklung beginnen.
 
-## TTS một người nói
+## TTS für einen einzelnen Sprecher
 
-Để chuyển văn bản thành âm thanh của một người nói bằng các mô hình TTS Gemini 3.8, hãy truyền bản chép lời nguyên văn trong `input`, đính kèm kiểu theo lượt bằng chú thích `speech_metadata` và định cấu hình giọng nói của bạn trong `generation_config.speech_config`. Bạn có thể chọn một giọng nói trong [Các lựa chọn về giọng nói](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#voices) được tạo sẵn, Thư viện giọng nói mở rộng (`GET /v1beta/voices`), [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) tuỳ chỉnh (`voice_...`) hoặc [Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi) (`voice_...` hoặc `voicekey_...` không trạng thái không bắt buộc).
+Wenn Sie mit Gemini 3.8 TTS-Modellen Text in Audioinhalte mit einem einzelnen Sprecher umwandeln möchten, übergeben Sie das wörtliche Transkript in `input`, fügen Sie mit der Annotation `speech_metadata` Formatierungen auf Turn-Ebene hinzu und konfigurieren Sie die Stimme in `generation_config.speech_config`. Sie können eine Stimme aus den vordefinierten
+[Sprachoptionen](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#voices), der Extended Voice
+Library (`GET /v1beta/voices`), einer benutzerdefinierten
+[Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=de)-ID (`voice_...`) oder einer
+[Voice Replication](https://ai.google.dev/gemini-api/docs/voice-replication?hl=de)-ID (`voice_...` oder
+optional zustandslos `voicekey_...`) auswählen.
 
-Ví dụ này lưu âm thanh đầu ra WAV mặc định (`audio/wav`) từ mô hình trực tiếp vào một tệp:
+In diesem Beispiel wird die standardmäßige WAV-Audioausgabe (`audio/wav`) des Modells direkt in einer Datei gespeichert:
 
 ### Python
 
@@ -107,7 +112,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -169,7 +174,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Model: interactions.Model("gemini-3.8-flash-tts"),
             Input: interactions.NewInteractionsInput("Say cheerfully: Have a wonderful day!"),
             ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
                 interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
@@ -223,11 +228,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-Trong SDK Python và JavaScript, bạn có thể truy xuất dữ liệu âm thanh đã tạo bằng cách sử dụng thuộc tính tiện lợi `interaction.output_audio`. Thuộc tính này trả về khối âm thanh được tạo gần đây nhất (trong các phản hồi JSON REST thô, âm thanh được mã hoá base64 sẽ được lưu trữ trong `steps[].content[].data`). Để biết thông tin chi tiết về các thuộc tính tiện lợi, hãy xem phần [Tổng quan về các hoạt động tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi#convenience-properties).
+In den Python- und JavaScript-SDKs können Sie generierte Audiodaten mit der Convenience-Property `interaction.output_audio` abrufen. Diese gibt den zuletzt generierten Audioblock zurück. In REST-JSON-Rohantworten wird das base64-codierte Audio in `steps[].content[].data` gespeichert. Weitere Informationen zu Convenience-Properties finden Sie in der [Übersicht zu Interaktionen](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de#convenience-properties).
 
-## TTS nhiều người nói
+## TTS mit mehreren Sprechern
 
-Đối với đoạn hội thoại có nhiều người nói, hãy định cấu hình 2 người nói trong `speech_config.speakers` và truyền từng lượt nói dưới dạng một mục văn bản riêng biệt có chú thích `speech_metadata` chỉ định `speaker` và `style` ở cấp lượt nói (không bắt buộc). Sử dụng `"mode": "conversational"` để có nhịp độ trò chuyện tự nhiên:
+Bei Dialogen mit mehreren Sprechern konfigurieren Sie zwei Sprecher in `speech_config.speakers` und übergeben jeden Sprecherbeitrag als separates Textelement mit einer `speech_metadata`-Anmerkung, in der `speaker` und optional `style` auf Beitragsebene angegeben werden. Beachten Sie, dass `speech_config` ein Array (`[{"voice": "..."}]`) für die Generierung mit einem einzelnen Sprecher und ein Objekt (`{"speakers": [...]}`) für die Generierung mit mehreren Sprechern akzeptiert:
 
 ### Python
 
@@ -265,7 +270,6 @@ interaction = client.interactions.create(
     response_format={"type": "audio"},
     generation_config={
         "speech_config": {
-            "mode": "conversational",
             "speakers": [
                 {"speaker": "Joe", "voice": "Puck"},
                 {"speaker": "Jane", "voice": "Kore"},
@@ -315,7 +319,6 @@ async function main() {
       response_format: { type: 'audio' },
       generation_config: {
          speech_config: {
-            mode: 'conversational',
             speakers: [
                { speaker: 'Joe', voice: 'Puck' },
                { speaker: 'Jane', voice: 'Kore' },
@@ -331,7 +334,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -398,7 +401,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Model: interactions.Model("gemini-3.8-flash-tts"),
             Input: interactions.NewInteractionsInput(prompt),
             ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
                 interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
@@ -468,16 +471,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Kiểm soát kiểu giọng nói bằng siêu dữ liệu và thẻ
+## Sprachstil mit Metadaten und Tags steuern
 
-Công nghệ chuyển văn bản sang lời nói (TTS) Gemini 3.8 coi trường `text` hoàn toàn là bản chép lời nguyên văn. Để kiểm soát việc truyền tải mà không cần đọc to chỉ dẫn sân khấu, hãy chia chỉ dẫn theo phạm vi:
+Bei Gemini 3.8 TTS wird das Feld `text` ausschließlich als wörtliches Transkript behandelt. Wenn Sie die Ausführung steuern möchten, ohne dass Regieanweisungen vorgelesen werden, teilen Sie Ihre Anweisungen nach Umfang auf:
 
-- **Phân phối liên tục theo lượt (`speech_metadata.style`):** Đặt cảm xúc, kiểu phân phối, ngữ điệu, nhịp độ và âm lượng áp dụng cho toàn bộ lượt trong trường `style` (ví dụ: `"style": "whispered urgently"`, `"style": "out of breath"` hoặc `"style": "warm and enthusiastic"`).
-- **Sự kiện tại một thời điểm (thẻ nội tuyến):** Đặt các đoạn giọng nói không phải lời nói hoặc khoảng dừng ngắn ngay trong bản chép lời bằng dấu ngoặc nhọn (ví dụ: `"Wait... <short pause> did you hear that? <sigh>"` hoặc `"Excuse me <cough> as I was saying..."`).
+- **Kontinuierliche Bereitstellung auf Turn-Ebene (`speech_metadata.style`)**: Geben Sie Emotionen, Vortragsstil, Prosodie, Tempo und Lautstärke, die für einen gesamten Turn gelten, im Feld `style` an (z. B. `"style": "whispered urgently"`, `"style": "out of breath"` oder `"style": "warm and enthusiastic"`).
+- **Zeitpunktbezogene Ereignisse (Inline-Tags)**: Platzieren Sie kurze nicht sprachliche Vokalbursts oder Pausen direkt im Transkript mithilfe von spitzen Klammern (z. B. `"Wait... <short pause> did you hear that? <sigh>"` oder `"Excuse me <cough> as I was saying..."`).
 
-Hãy xem [Hướng dẫn tạo câu lệnh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#prompting-guide) để biết các phương pháp hay nhất toàn diện.
+Umfassende Best Practices finden Sie im [Leitfaden für Prompts](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#prompting-guide).
 
-### Go
+### Ok
 
 ```
 package main
@@ -526,7 +529,7 @@ func main() {
 
     ttsRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Model: interactions.Model("gemini-3.8-flash-tts"),
             Input: interactions.NewInteractionsInput(transcript),
             ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
                 interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
@@ -541,9 +544,9 @@ func main() {
 }
 ```
 
-## Tạo lời nói phát trực tuyến
+## Streaming-Sprachgenerierung
 
-Bạn có thể phát trực tuyến âm thanh được tạo khi âm thanh đó đang được tổng hợp bằng cách đặt `stream: true`. Không giống như các yêu cầu đơn phương (trả về một tệp WAV hoàn chỉnh có tiêu đề RIFF), **các yêu cầu truyền trực tuyến sẽ trả về các đoạn PCM tuyến tính 16 bit không có tiêu đề (`audio/l16`, 24 kHz, đơn âm) theo mặc định** để các đoạn âm thanh có thể được phát hoặc nối liên tục mà không cần tiêu đề vùng chứa.
+Sie können die generierte Audioausgabe streamen, während sie synthetisiert wird, indem Sie `stream: true` festlegen. Im Gegensatz zu unären Anfragen, bei denen eine vollständige WAV-Datei mit einem RIFF-Header zurückgegeben wird, **werden bei Streaminganfragen standardmäßig Header-lose Roh-Chunks im linearen PCM-Format (`audio/l16`, 24 kHz, Mono) mit 16 Bit und Little-Endian-Vorzeichen zurückgegeben**. Audiotracks können also ohne Containerheader kontinuierlich abgespielt oder verkettet werden.
 
 ### Python
 
@@ -656,23 +659,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Định dạng đầu ra âm thanh
+## Audioausgabeformate
 
-Các mô hình TTS Gemini 3.8 sử dụng các định dạng âm thanh mặc định khác nhau, tuỳ thuộc vào việc yêu cầu là đơn phương hay truyền trực tuyến:
+Gemini 3.8-TTS-Modelle verwenden je nach Art der Anfrage (unär oder Streaming) unterschiedliche Standardaudioformate:
 
-- **Yêu cầu một ngôi sao (`stream=False`):** Trả về âm thanh **WAV (`audio/wav`)** hoàn chỉnh có tiêu đề RIFF tiêu chuẩn (24 kHz, đơn âm, PCM có dấu 16 bit little-endian). Bạn có thể lưu trực tiếp các byte âm thanh đã giải mã vào tệp `.wav` mà không cần thêm tiêu đề WAV theo cách thủ công.
-- **Yêu cầu phát trực tuyến (`stream=True`):** Trả về các đoạn **PCM tuyến tính thô không có tiêu đề (`audio/l16`)** (24 kHz, đơn âm, PCM little-endian có dấu 16 bit) theo mặc định để các đoạn có thể được phát trực tuyến hoặc nối liên tục mà không có tiêu đề vùng chứa trên mỗi đoạn.
+- **Unäre Anfragen (`stream=False`)**: Gib vollständiges **WAV-Audio (`audio/wav`)** mit einem Standard-RIFF-Header (24 kHz, Mono, 16-Bit-PCM mit Vorzeichen und Little-Endian) zurück. Sie können die decodierten Audio-Bytes direkt in einer `.wav`-Datei speichern, ohne manuell einen WAV-Header voranzustellen.
+- **Streaminganfragen (`stream=True`)**: Standardmäßig werden **headerlose Rohdaten-Chunks im linearen PCM-Format (`audio/l16`)** (24 kHz, Mono, 16-Bit-PCM mit Vorzeichen und Little-Endian-Byte-Reihenfolge) zurückgegeben, damit die Chunks kontinuierlich gestreamt oder verkettet werden können, ohne dass jeder Chunk Container-Header enthält.
 
-Để yêu cầu tốc độ lấy mẫu hoặc phương thức mã hoá âm thanh khác, hãy định cấu hình `mime_type` và `sample_rate` (không bắt buộc) trong `response_format`:
+Wenn Sie eine andere Audio-Codierung oder Abtastrate anfordern möchten, konfigurieren Sie `mime_type` und optional `sample_rate` in `response_format`:
 
-| Định dạng | Giá trị `mime_type` | Mô tả |
+| Format | `mime_type` Wert | Beschreibung |
 | --- | --- | --- |
-| **WAV** *(mặc định đơn nguyên)* | `"audio/wav"` | Tệp WAV chưa nén có tiêu đề RIFF (PCM 16 bit có dấu little-endian, đơn âm, mặc định là 24 kHz). Mặc định cho các yêu cầu đơn phương. |
-| **PCM thô (L16)** *(mặc định khi phát trực tuyến)* | `"audio/l16"` | Âm thanh PCM tuyến tính 16 bit đã ký, không nén, không có tiêu đề, little-endian (24 kHz, đơn âm). Mặc định cho các yêu cầu phát trực tuyến. |
-| **Mu-law** | `"audio/mulaw"` | Âm thanh được mã hoá theo chuẩn mu-law G.711 8 bit (thường được dùng trong hệ thống điện thoại/IVR ở Bắc Mỹ và Nhật Bản). |
-| **A-law** | `"audio/alaw"` | Âm thanh được mã hoá theo luật A G.711 8 bit (thường dùng trong các hệ thống điện thoại quốc tế và của Châu Âu). |
+| **WAV** *(unärer Standard)* | `"audio/wav"` | Unkomprimierte WAV-Datei mit einem RIFF-Header (16-Bit-PCM mit Vorzeichen, Little Endian, Mono, 24 kHz als Standard). Standardeinstellung für unäre Anfragen. |
+| **Raw PCM (L16)** *(Streaming-Standard)* | `"audio/l16"` | Unkomprimiertes, headerloses lineares 16-Bit-PCM-Audio mit Vorzeichen und Little Endian (24 kHz, Mono). Standard für Streaminganfragen. |
+| **Mu-law** | `"audio/mulaw"` | 8-Bit-Audio mit G.711-Mu-Law-Codierung (wird häufig in nordamerikanischen und japanischen Telefonie-/IVR-Systemen verwendet). |
+| **A-law** | `"audio/alaw"` | 8-Bit-Audio mit G.711-A-Law-Codierung (wird häufig in europäischen und internationalen Telefoniesystemen verwendet). |
 
-Bạn cũng có thể chỉ định `sample_rate` theo đơn vị Hertz (ví dụ: `24000`, `16000` hoặc `8000`).
+Sie können auch `sample_rate` in Hertz angeben, z. B. `24000`, `16000` oder `8000`.
 
 ### Python
 
@@ -751,7 +754,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -781,7 +784,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-tts-preview"),
+            Model: interactions.Model("gemini-3.8-flash-tts"),
             Input: interactions.NewInteractionsInput("Say cheerfully: Have a wonderful day!"),
             ResponseFormat: genai.Ptr(interactions.NewCreateModelInteractionResponseFormat(
                 interactions.NewResponseFormat(interactions.AudioResponseFormat{}),
@@ -848,56 +851,58 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Lựa chọn giọng nói
+## Stimmoptionen
 
-Công nghệ TTS Gemini 3.8 hỗ trợ 4 cách chọn hoặc tạo giọng nói:
+Gemini 3.8 TTS unterstützt vier Möglichkeiten zum Auswählen oder Erstellen von Stimmen:
 
-1. **Giọng nói được tạo sẵn trong Studio:** 30 giọng nói được tuyển chọn có trong bảng sau.
-2. **Thư viện giọng nói mở rộng:** Hàng trăm giọng nói bổ sung thuộc nhiều ngôn ngữ, giọng điệu và nguyên mẫu nhân vật có thể truy cập bằng `client.voices.list()` (`GET /v1beta/voices`).
-3. **[Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi):** Tạo một nhân vật giọng nói tuỳ chỉnh từ nội dung mô tả bằng ngôn ngữ tự nhiên trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi) hoặc sử dụng `POST /v1beta/voices` (`type="prompted"`, trả về một mã nhận dạng `voice_...` liên tục và bản xem trước `sample_audio` WAV trong `CreateVoice` và `GetVoice`).
-4. **[Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi):** Nhân bản giọng nói của người nói từ âm thanh tham chiếu và âm thanh có sự đồng ý trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi) hoặc bằng cách sử dụng `POST /v1beta/voices` (`type="replicated"`, `store=True` liên tục theo mặc định hoặc `store=False` không trạng thái tuỳ chọn).
+1. **Vorgefertigte Studio-Stimmen**:30 ausgewählte Stimmen, die in der folgenden Tabelle aufgeführt sind.
+2. **Erweiterte Stimmenbibliothek**:Hunderte zusätzlicher Stimmen in verschiedenen Sprachen, Akzenten und Charakterarchetypen, die über `client.voices.list()` (`GET /v1beta/voices`) verfügbar sind.
+3. **[Stimmdesign](https://ai.google.dev/gemini-api/docs/voice-design?hl=de)**:Generieren Sie eine benutzerdefinierte stimmliche Persona aus einer natürlichsprachlichen Beschreibung in [Google AI Studio](https://aistudio.google.com/generate-speech?hl=de) oder mit `POST /v1beta/voices` (`type="prompted"`, die eine dauerhafte `voice_...`-ID und eine `sample_audio`-WAV-Vorschau in `CreateVoice` und `GetVoice` zurückgibt).
+4. **[Stimmreplikation](https://ai.google.dev/gemini-api/docs/voice-replication?hl=de)**:Die Stimme eines Sprechers kann anhand von Referenz- und Einwilligungs-Audioinhalten in [Google AI Studio](https://aistudio.google.com/generate-speech?hl=de) oder mit `POST /v1beta/voices` (`type="replicated"`, standardmäßig persistent `store=True` oder optional zustandslos `store=False`) repliziert werden.
 
-### Hạn mức và TTL cho giọng nói tuỳ chỉnh
+### Benutzerdefinierte Sprachlimits und TTL
 
-| Loại giọng nói | Chế độ lưu trữ | Hạn mức / giới hạn | Thời gian lưu giữ (TTL) |
+| Stimmtyp | Speichermodus | Kontingent / Limit | Aufbewahrung (TTL) |
 | --- | --- | --- | --- |
-| **Giọng nói có trạng thái** (`voice_...`, được nhắc hoặc sao chép) | `store=True` | **200 giọng nói cho mỗi dự án** (được chia sẻ giữa giọng nói được nhắc và giọng nói được sao chép) | **1 năm** |
-| **Khoá thoại không trạng thái** (`voicekey_...`, được sao chép) | `store=False` | Do ứng dụng quản lý | **7 ngày** |
+| **Zustandsorientierte Stimmen** (`voice_...`, per Prompt oder repliziert) | `store=True` | **200 Stimmen pro Projekt** (aufgefordert und repliziert) | **1 Jahr nach der letzten Nutzung\*** |
+| **Zustandslose Sprachschlüssel** (`voicekey_...`, repliziert) | `store=False` | Kundenverwaltet | **7 Tage** |
 
-### Giọng nói tạo sẵn
+\* **Verlängerung der TTL**:Der Aufbewahrungszeitraum von einem Jahr wird jedes Mal zurückgesetzt, wenn die Stimme aktiv verwendet wird (entweder durch Synthetisieren von Sprache mit der Stimme oder durch Verwendung als Basisstimme für das Remixen). Stimmen, die seit einem Jahr nicht mehr verwendet wurden, werden automatisch gelöscht.
+
+### Vordefinierte Stimmen
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** – *Tươi sáng* | **Puck** – *Rộn ràng* | **Charon** – *Cung cấp nhiều thông tin* |
-| **Kore** – *Firm* | **Fenrir** – *Dễ kích động* | **Leda** – *Trẻ trung* |
-| **Orus** – *Firm* | **Aoede** – *Breezy* | **Callirrhoe** – *Dễ chịu* |
-| **Autonoe** – *Sáng* | **Enceladus** – *Breathy* | **Iapetus** – *Clear* (Rõ ràng) |
-| **Umbriel** – *Dễ tính* | **Algieba** – *Làm mịn* | **Despina** – *Smooth* |
-| **Erinome** – *Clear* | **Algenib** – *Gravelly* | **Rasalgethi** – *Cung cấp nhiều thông tin* |
-| **Laomedeia** – *Rộn ràng* | **Achernar** – *Dịu êm* | **Alnilam** – *Firm* |
-| **Schedar** – *Even* | **Gacrux** – *Trưởng thành* | **Pulcherrima** – *Chuyển tiếp* |
-| **Achird** – *Thân thiện* | **Zubenelgenubi** – *Thông thường* | **Vindemiatrix** – *Êm dịu* |
-| **Sadachbia** – *Lively* | **Sadaltager** – *Hiểu biết* | **Sulafat** – *Ấm* |
+| **Zephyr** – *Hell* | **Puck** – *Upbeat* | **Charon** – *Informative* |
+| **Kore** – *Fest* | **Fenrir** – *Leicht erregbar* | **Leda** – *Jugendlich* |
+| **Orus** – *Firm* | **Aoede** – *Breezy* | **Callirrhoe** – *Gelassen* |
+| **Autonoe** – *Hell* | **Enceladus** – *Breathy* | **Iapetus** – *Löschen* |
+| **Umbriel** – *Entspannt* | **Algieba** – *Smooth* | **Despina** – *Smooth* |
+| **Erinome** – *Löschen* | **Algenib** – *Kiesig* | **Rasalgethi** – *Informativ* |
+| **Laomedeia** – *Upbeat* | **Achernar** – *Weich* | **Alnilam** – *Firm* |
+| **Schedar** – *Gerade* | **Gacrux** – *Nicht jugendfrei* | **Pulcherrima** – *Vorwärts* |
+| **Achird** – *Freundlich* | **Zubenelgenubi** – *Informell* | **Vindemiatrix** – *Sanft* |
+| **Sadachbia** – *Lively* | **Sadaltager** – *Sachkundig* | **Sulafat** – *Warm* |
 
-### Thư viện giọng nói mở rộng và tính năng lọc
+### Erweiterte Voice Library und Filterung
 
-Ngoài 30 giọng nói nổi bật của phòng thu trong bảng trước đó, **Thư viện giọng nói mở rộng** còn cung cấp hàng trăm giọng nói khác theo ngôn ngữ, giọng địa phương, tính cách nhân vật và lĩnh vực. Bạn có thể duyệt xem, lọc và nghe thử toàn bộ Thư viện giọng nói một cách tương tác trong [Google AI Studio](https://aistudio.google.com/generate-speech?hl=vi) hoặc truy vấn theo phương thức lập trình bằng `client.voices.list()` (`GET /v1beta/voices`, sử dụng `google-genai` 2.25.0 trở lên / `@google/genai` 2.24.0 trở lên).
+Neben den 30 Studio-Stimmen in der Tabelle oben bietet die **erweiterte Stimmenbibliothek** Hunderte von zusätzlichen Stimmen in verschiedenen Sprachen, regionalen Akzenten, Charakteren und Bereichen. Sie können die gesamte Voice Library interaktiv in [Google AI Studio](https://aistudio.google.com/generate-speech?hl=de) durchsuchen, filtern und testen oder sie programmatisch mit `client.voices.list()` abfragen (`GET /v1beta/voices`, mit `google-genai` 2.25.0+ / `@google/genai` 2.24.0+).
 
-`ListVoices` sẽ trả về các giọng nói tuỳ chỉnh đã lưu (sắp xếp theo thứ tự mới nhất trước) rồi đến các giọng nói có sẵn trong danh mục khớp với tiêu chí lọc của bạn. Khi nhiều giá trị được truyền cho một bộ lọc danh sách, những giọng nói khớp với **bất kỳ** giá trị nào trong bộ lọc đó sẽ được trả về (`OR`), trong khi các tham số bộ lọc riêng biệt kết hợp với `AND`:
+`ListVoices` gibt Ihre benutzerdefinierten gespeicherten Stimmen (neueste zuerst) und dann die vorgefertigten Katalogstimmen zurück, die Ihren Filterkriterien entsprechen. Wenn mehrere Werte für einen Listenfilter übergeben werden, werden Stimmen zurückgegeben, die **einem beliebigen** Wert in diesem Filter entsprechen (`OR`). Unterschiedliche Filterparameter werden mit `AND` kombiniert:
 
-| Tham số | Loại | Mô tả |
+| Parameter | Typ | Beschreibung |
 | --- | --- | --- |
-| `language_code` | `list[str]` | (Các) thẻ ngôn ngữ BCP-47 (ví dụ: `["en-US", "en-GB"]`). So khớp chính xác không phân biệt chữ hoa chữ thường. |
-| `region_code` | `list[str]` | (Các) mã khu vực theo tiêu chuẩn ISO 3166-1 alpha-2 hoặc UN M.49 (ví dụ: `["US", "GB"]`). |
-| `accent` | `list[str]` | (Các) phần mô tả giọng địa phương (ví dụ: `["American", "British"]`). |
-| `gender` | `list[str]` | Giới tính thể hiện được cảm nhận (`"female"`, `"male"` hoặc `"neutral"`). |
-| `pitch` | `list[str]` | Phân loại cao độ giọng nói (`"low"`, `"medium"` hoặc `"high"`). |
-| `persona` | `list[str]` | Nhân vật hoặc nguyên mẫu giọng nói (ví dụ: `["Warm, Friendly"]`, `["Narrator"]`). |
-| `contexts` (`context` trong REST) | `list[str]` | Miền sử dụng tối ưu (ví dụ: `["Audiobook", "Conversational", "News"]`). |
-| `type` (`type_` trong Python) | `list[str]` | Lọc theo nguồn giọng nói: `"prebuilt"`, `"prompted"` ([Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi)) hoặc `"replicated"` ([Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi)). |
-| `search` | `str` | Cụm từ tìm kiếm con bằng văn bản tự do được so khớp không phân biệt chữ hoa chữ thường với cả `display_name` và `description`. |
-| `page_size` | `int` | Số lượng giọng nói tối đa được trả về trên mỗi trang (mặc định là `50`, tối đa là `1000`). |
-| `page_token` | `str` | Mã thông báo từ `response.next_page_token` để tìm nạp trang kết quả tiếp theo. |
+| `language_code` | `list[str]` | BCP-47-Sprachtag(s) (z. B. `["en-US", "en-GB"]`). Es wird nicht zwischen Groß- und Kleinschreibung unterschieden. |
+| `region_code` | `list[str]` | ISO 3166-1 Alpha-2- oder UN M.49-Regionscode(s) (z. B. `["US", "GB"]`). |
+| `accent` | `list[str]` | Deskriptoren für regionale Akzente (z. B. `["American", "British"]`). |
+| `gender` | `list[str]` | Wahrgenommene Geschlechtsdarstellung (`"female"`, `"male"` oder `"neutral"`) |
+| `pitch` | `list[str]` | Klassifizierung der Tonhöhe (`"low"`, `"medium"` oder `"high"`) |
+| `persona` | `list[str]` | Gesangspersönlichkeit oder Charakterarchetyp (z. B. `["Warm, Friendly"]`, `["Narrator"]`). |
+| `contexts` (`context` in REST) | `list[str]` | Optimale Nutzungsdomain (z. B. `["Audiobook", "Conversational", "News"]`). |
+| `type` (`type_` in Python) | `list[str]` | Nach Sprachquelle filtern: `"prebuilt"`, `"prompted"` ([Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=de)) oder `"replicated"` ([Voice Replication](https://ai.google.dev/gemini-api/docs/voice-replication?hl=de)). |
+| `search` | `str` | Bei der Freitext-Teilstringsuche wurde die Groß-/Kleinschreibung sowohl bei `display_name` als auch bei `description` nicht berücksichtigt. |
+| `page_size` | `int` | Maximale Anzahl der Stimmen, die pro Seite zurückgegeben werden (Standardwert: `50`, Maximum: `1000`). |
+| `page_token` | `str` | Token aus `response.next_page_token` zum Abrufen der nächsten Ergebnisseite. |
 
 ### Python
 
@@ -965,219 +970,217 @@ curl -G "https://generativelanguage.googleapis.com/v1beta/voices" \
   --data-urlencode "page_size=50"
 ```
 
-## Ngôn ngữ được hỗ trợ
+## Unterstützte Sprachen
 
-Các mô hình TTS tự động phát hiện ngôn ngữ đầu vào.
-[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) hỗ trợ **hơn 130 ngôn ngữ** và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`) hỗ trợ **hơn 100 ngôn ngữ**:
+Die TTS-Modelle erkennen die Eingabesprache automatisch.
+[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=de) (`gemini-3.8-flash-tts`) unterstützt **über 130 Sprachen** und [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=de) (`gemini-3.8-flash-lite-tts`) unterstützt **über 100 Sprachen**:
 
-| Ngôn ngữ | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
+| Sprache | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
 | --- | --- | --- |
-| Tiếng Aceh (Chữ Ả Rập) | ✔️ | ✔️ |
-| Tiếng Hà Lan ở Nam Phi | ✔️ | ✔️ |
-| Tiếng Akan | ✔️ | ✔️ |
-| Tiếng Amhara | ✔️ | ✔️ |
-| Tiếng Armenia | ✔️ | ✔️ |
-| Tiếng Assam | ✔️ | ✔️ |
-| Tiếng Awadhi | ✔️ | ✔️ |
-| Chữ Bali | ✔️ | ✔️ |
-| Tiếng Bangla | ✔️ | ✔️ |
-| Banjar (chữ Ả Rập) | ✔️ | — |
-| Banjar (chữ Latinh) | ✔️ | ✔️ |
-| Tiếng Bashkir | ✔️ | — |
-| Tiếng Basque | ✔️ | ✔️ |
-| Tiếng Belarus | ✔️ | ✔️ |
-| Tiếng Bemba | ✔️ | — |
-| Tiếng Bhojpuri | ✔️ | ✔️ |
-| Tiếng Bosnia | ✔️ | ✔️ |
-| Chữ Bugin | ✔️ | ✔️ |
-| Tiếng Bungary | ✔️ | ✔️ |
-| Tiếng Miến Điện | ✔️ | — |
-| Tiếng Quảng Đông | ✔️ | ✔️ |
-| Tiếng Catalan | ✔️ | ✔️ |
-| Tiếng Cebuano | ✔️ | ✔️ |
-| Tiếng Trung Kurd | ✔️ | ✔️ |
-| Tiếng Chhattisgarhi | ✔️ | ✔️ |
-| Tiếng Trung (chữ Hán) | ✔️ | ✔️ |
-| Tiếng Trung (chữ Hán phồn thể) | ✔️ | ✔️ |
-| Tiếng Tatar Krym | ✔️ | — |
-| Tiếng Croatia | ✔️ | ✔️ |
-| Tiếng Séc | ✔️ | ✔️ |
-| Tiếng Đan Mạch | ✔️ | ✔️ |
-| Tiếng Hà Lan | ✔️ | ✔️ |
-| Dyula | ✔️ | — |
-| Tiếng Dzongkha | ✔️ | — |
-| Tiếng Ả Rập | ✔️ | ✔️ |
-| Tiếng Anh | ✔️ | ✔️ |
-| Tiếng Estonia | ✔️ | ✔️ |
-| Tiếng Philippines | ✔️ | ✔️ |
-| Tiếng Phần Lan | ✔️ | — |
-| Tiếng Pháp | ✔️ | ✔️ |
-| Tiếng Galicia | ✔️ | ✔️ |
-| Tiếng Ganda | ✔️ | ✔️ |
-| Tiếng Gruzia | ✔️ | ✔️ |
-| Tiếng Đức | ✔️ | ✔️ |
-| Tiếng Hy Lạp | ✔️ | ✔️ |
-| Tiếng Guarani | ✔️ | — |
-| Tiếng Gujarat | ✔️ | ✔️ |
-| Tiếng Creole ở Haiti | ✔️ | ✔️ |
-| Tiếng Mông Cổ Khalkha | ✔️ | ✔️ |
-| Tiếng Hausa | ✔️ | ✔️ |
-| Tiếng Do Thái | ✔️ | ✔️ |
-| Tiếng Hindi | ✔️ | ✔️ |
-| Tiếng Hungary | ✔️ | ✔️ |
-| Tiếng Iceland | ✔️ | ✔️ |
-| Tiếng Igbo | ✔️ | — |
-| Tiếng Iloko | ✔️ | ✔️ |
-| Tiếng Indonesia | ✔️ | ✔️ |
-| Tiếng Ba Tư của người Iran | ✔️ | ✔️ |
-| Tiếng Ý | ✔️ | ✔️ |
-| Tiếng Nhật | ✔️ | ✔️ |
-| Tiếng Java | ✔️ | ✔️ |
-| Tiếng Kabyle | ✔️ | — |
-| Tiếng Kamba | ✔️ | ✔️ |
-| Tiếng Kannada | ✔️ | ✔️ |
-| Tiếng Kashmiri (Chữ Ả Rập) | ✔️ | ✔️ |
-| Kashmiri (chữ Deva) | ✔️ | ✔️ |
-| Tiếng Kazakh | ✔️ | ✔️ |
-| Tiếng Khmer | ✔️ | ✔️ |
-| Tiếng Kikuyu | ✔️ | ✔️ |
-| Tiếng Kinyarwanda | ✔️ | ✔️ |
-| Tiếng Kongo | ✔️ | ✔️ |
-| Tiếng Hàn | ✔️ | ✔️ |
-| Tiếng Kyrgyz | ✔️ | ✔️ |
-| Tiếng Lào | ✔️ | ✔️ |
-| Tiếng Latgale | ✔️ | — |
-| Tiếng Lingala | ✔️ | ✔️ |
-| Tiếng Lithuania | ✔️ | — |
-| Tiếng Luxembourg | ✔️ | — |
-| Tiếng Macedonia | ✔️ | ✔️ |
-| Tiếng Magahi | ✔️ | ✔️ |
-| Tiếng Maithili | ✔️ | ✔️ |
-| Tiếng Malayalam | ✔️ | ✔️ |
-| Tiếng Malta | ✔️ | ✔️ |
-| Tiếng Manipur | ✔️ | ✔️ |
-| Tiếng Marathi | ✔️ | ✔️ |
-| Tiếng Minangkabau (chữ Ả Rập) | ✔️ | ✔️ |
-| Tiếng Minangkabau (chữ Latinh) | ✔️ | — |
-| Tiếng Mizo | ✔️ | ✔️ |
-| Tiếng Nepal (ngôn ngữ riêng lẻ) | ✔️ | ✔️ |
-| Tiếng Fulfulde ở Nigeria | ✔️ | ✔️ |
-| Tiếng Azerbaijan miền Bắc | ✔️ | ✔️ |
-| Tiếng Bắc Sotho | ✔️ | ✔️ |
-| Tiếng Uzbek ở miền Bắc | ✔️ | ✔️ |
-| Tiếng Bokmål ở Na Uy | ✔️ | ✔️ |
-| Tiếng Na Uy Nynorsk | ✔️ | ✔️ |
-| Tiếng Nyanja | ✔️ | ✔️ |
-| Tiếng Occitan | ✔️ | — |
-| Tiếng Odia (ngôn ngữ riêng lẻ) | ✔️ | ✔️ |
-| Tiếng Pangasinan | ✔️ | — |
-| Tiếng Ba Tư (Afghanistan) | ✔️ | ✔️ |
-| Tiếng Ba Lan | ✔️ | ✔️ |
-| Tiếng Bồ Đào Nha | ✔️ | ✔️ |
-| Tiếng Punjab | ✔️ | ✔️ |
-| Tiếng Rumani | ✔️ | ✔️ |
-| Tiếng Nga | ✔️ | ✔️ |
-| Tiếng Santali | ✔️ | ✔️ |
-| Tiếng Serbia | ✔️ | ✔️ |
-| Tiếng Sindh | ✔️ | — |
-| Tiếng Sinhala | ✔️ | ✔️ |
-| Tiếng Slovak | ✔️ | ✔️ |
-| Tiếng Slovenia | ✔️ | — |
-| Tiếng Somali | ✔️ | — |
-| Tiếng Azerbaijan miền Nam | ✔️ | ✔️ |
-| Tiếng Pashto miền Nam | ✔️ | ✔️ |
-| Tiếng Nam Sotho | ✔️ | — |
-| Tiếng Tây Ban Nha | ✔️ | ✔️ |
-| Tiếng Ả Rập chuẩn (chữ Ả Rập) | ✔️ | ✔️ |
-| Tiếng Ả Rập chuẩn (chữ Latinh) | ✔️ | ✔️ |
-| Tiếng Latvia tiêu chuẩn | ✔️ | ✔️ |
-| Tiếng Mã Lai chuẩn | ✔️ | ✔️ |
-| Tiếng Swahili (ngôn ngữ riêng lẻ) | ✔️ | — |
-| Tiếng Swati | ✔️ | — |
-| Tiếng Thuỵ Điển | ✔️ | — |
-| Tiếng Tajik | ✔️ | — |
-| Tiếng Tamil | ✔️ | ✔️ |
-| Tiếng Telugu | ✔️ | ✔️ |
-| Tiếng Thái | ✔️ | — |
-| Tiếng Tigrinya | ✔️ | — |
-| Tiếng Albania ở vùng Tosk | ✔️ | — |
-| Tiếng Thổ Nhĩ Kỳ | ✔️ | ✔️ |
-| Tiếng Duy Ngô Nhĩ | ✔️ | — |
-| Tiếng Việt | ✔️ | ✔️ |
+| Achinesisch (arabische Schrift) | ✔️ | ✔️ |
+| Afrikaans | ✔️ | ✔️ |
+| Akan | ✔️ | ✔️ |
+| Amharisch | ✔️ | ✔️ |
+| Armenisch | ✔️ | ✔️ |
+| Assamesisch | ✔️ | ✔️ |
+| Awadhi | ✔️ | ✔️ |
+| Balinesisch | ✔️ | ✔️ |
+| Bengalisch | ✔️ | ✔️ |
+| Banjaresisch (arabische Schrift) | ✔️ | – |
+| Banjaresisch (lateinische Schrift) | ✔️ | ✔️ |
+| Baschkirisch | ✔️ | – |
+| Baskisch | ✔️ | ✔️ |
+| Belarusian | ✔️ | ✔️ |
+| Bemba | ✔️ | – |
+| Bhojpuri | ✔️ | ✔️ |
+| Bosnisch | ✔️ | ✔️ |
+| Buginesisch | ✔️ | ✔️ |
+| Bulgarisch | ✔️ | ✔️ |
+| Burmesisch | ✔️ | – |
+| Kantonesisch | ✔️ | ✔️ |
+| Katalanisch | ✔️ | ✔️ |
+| Cebuano | ✔️ | ✔️ |
+| Sorani | ✔️ | ✔️ |
+| Chhattisgarhi | ✔️ | ✔️ |
+| Chinesisch (Hans-Schrift) | ✔️ | ✔️ |
+| Chinesisch (Hant-Schrift) | ✔️ | ✔️ |
+| Krimtatarisch | ✔️ | – |
+| Kroatisch | ✔️ | ✔️ |
+| Tschechien | ✔️ | ✔️ |
+| Dänisch | ✔️ | ✔️ |
+| Niederländisch | ✔️ | ✔️ |
+| Dioula | ✔️ | – |
+| Dzongkha | ✔️ | – |
+| Arabisch (Ägypten) | ✔️ | ✔️ |
+| Englisch | ✔️ | ✔️ |
+| Estnisch | ✔️ | ✔️ |
+| Filipino | ✔️ | ✔️ |
+| Finnisch | ✔️ | – |
+| Französisch | ✔️ | ✔️ |
+| Galizisch | ✔️ | ✔️ |
+| Ganda | ✔️ | ✔️ |
+| Georgisch | ✔️ | ✔️ |
+| Deutsch | ✔️ | ✔️ |
+| Griechisch | ✔️ | ✔️ |
+| Guarani | ✔️ | – |
+| Gujarati | ✔️ | ✔️ |
+| Haitianisch | ✔️ | ✔️ |
+| Halch-Mongolisch | ✔️ | ✔️ |
+| Hausa | ✔️ | ✔️ |
+| Hebräisch | ✔️ | ✔️ |
+| Hindi | ✔️ | ✔️ |
+| Ungarisch | ✔️ | ✔️ |
+| Isländisch | ✔️ | ✔️ |
+| Igbo | ✔️ | – |
+| Ilokano | ✔️ | ✔️ |
+| Indonesisch | ✔️ | ✔️ |
+| Iranisches Persisch | ✔️ | ✔️ |
+| Italienisch | ✔️ | ✔️ |
+| Japanisch | ✔️ | ✔️ |
+| Javanisch | ✔️ | ✔️ |
+| Kabylisch | ✔️ | – |
+| Kikamba | ✔️ | ✔️ |
+| Kannada | ✔️ | ✔️ |
+| Kashmiri (arabische Schrift) | ✔️ | ✔️ |
+| Kashmiri (Deva-Schrift) | ✔️ | ✔️ |
+| Kasachisch | ✔️ | ✔️ |
+| Khmer | ✔️ | ✔️ |
+| Kikuyu | ✔️ | ✔️ |
+| Kinyarwanda | ✔️ | ✔️ |
+| Kongo | ✔️ | ✔️ |
+| Koreanisch | ✔️ | ✔️ |
+| Kirgisisch | ✔️ | ✔️ |
+| Lao | ✔️ | ✔️ |
+| Lettgallisch | ✔️ | – |
+| Lingala | ✔️ | ✔️ |
+| Litauisch | ✔️ | – |
+| Luxemburgisch | ✔️ | – |
+| Mazedonisch | ✔️ | ✔️ |
+| Magahi | ✔️ | ✔️ |
+| Maithili | ✔️ | ✔️ |
+| Malayalam | ✔️ | ✔️ |
+| Maltesisch | ✔️ | ✔️ |
+| Meitei | ✔️ | ✔️ |
+| Marathi | ✔️ | ✔️ |
+| Minangkabauisch (arabische Schrift) | ✔️ | ✔️ |
+| Minangkabauisch (lateinische Schrift) | ✔️ | – |
+| Mizo | ✔️ | ✔️ |
+| Nepalesisch (einzelne Sprache) | ✔️ | ✔️ |
+| Nigerianisches Fulfulde | ✔️ | ✔️ |
+| Nordaserbaidschanisch | ✔️ | ✔️ |
+| Nord-Sotho | ✔️ | ✔️ |
+| Nordusbekisch | ✔️ | ✔️ |
+| Norwegisch Bokmål | ✔️ | ✔️ |
+| Norwegisch (Nynorsk) | ✔️ | ✔️ |
+| Chichewa | ✔️ | ✔️ |
+| Okzitanisch | ✔️ | – |
+| Odia (einzelne Sprache) | ✔️ | ✔️ |
+| Pangasinensisch | ✔️ | – |
+| Persisch (Afghanistan) | ✔️ | ✔️ |
+| Polish | ✔️ | ✔️ |
+| Portugiesisch | ✔️ | ✔️ |
+| Punjabi | ✔️ | ✔️ |
+| Rumänisch | ✔️ | ✔️ |
+| Russisch | ✔️ | ✔️ |
+| Santali | ✔️ | ✔️ |
+| Serbisch | ✔️ | ✔️ |
+| Sindhi | ✔️ | – |
+| Singhalesisch | ✔️ | ✔️ |
+| Slowakisch | ✔️ | ✔️ |
+| Slowenisch | ✔️ | – |
+| Somali | ✔️ | – |
+| Südaserbaidschanisch | ✔️ | ✔️ |
+| Südliches Paschtu | ✔️ | ✔️ |
+| Sesotho | ✔️ | – |
+| Spanisch | ✔️ | ✔️ |
+| Standardarabisch (arabische Schrift) | ✔️ | ✔️ |
+| Standardarabisch (lateinische Schrift) | ✔️ | ✔️ |
+| Standard-Lettisch | ✔️ | ✔️ |
+| Standard-Malaiisch | ✔️ | ✔️ |
+| Swahili (einzelne Sprache) | ✔️ | – |
+| Siswati | ✔️ | – |
+| Schwedisch | ✔️ | – |
+| Tadschikisch | ✔️ | – |
+| Tamil | ✔️ | ✔️ |
+| Telugu | ✔️ | ✔️ |
+| Thailändisch | ✔️ | – |
+| Tigrinya | ✔️ | – |
+| Toskisch | ✔️ | – |
+| Turkish | ✔️ | ✔️ |
+| Uigurisch | ✔️ | – |
+| Vietnamesisch | ✔️ | ✔️ |
 
-## Mô hình được hỗ trợ
+## Unterstützte Modelle
 
-| Mô hình | Loa đơn | Nhiều loa | Thiết kế giọng nói | Nhân bản giọng nói |
+| Modell | Einzelner Sprecher | Mehrere Sprecher | Sprachdesign | Stimmen-Replikation |
 | --- | --- | --- | --- | --- |
-| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) (`gemini-3.8-flash-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi) (`gemini-3.8-flash-lite-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
-| [Bản xem trước tính năng chuyển văn bản sang lời nói của Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=vi) | ✔️ | ✔️ | — | — |
-| [TTS xem trước Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=vi) | ✔️ | ✔️ | — | — |
+| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=de) (`gemini-3.8-flash-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=de) (`gemini-3.8-flash-lite-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash TTS (Vorabversion)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=de) | ✔️ | ✔️ | – | – |
+| [Gemini 2.5 Pro Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=de) | ✔️ | ✔️ | – | – |
 
-### Trường hợp sử dụng mô hình nào
+### Wann welches Modell verwendet werden sollte
 
-Cả hai mô hình TTS Gemini 3.8 đều có cùng một lược đồ API và định dạng câu lệnh, cho phép bạn chuyển đổi giữa chúng chỉ bằng một thay đổi về thông số:
+Beide Gemini 3.8-TTS-Modelle haben dasselbe API-Schema und Prompting-Format. Sie können also mit einer einzigen Parameteränderung zwischen ihnen wechseln:
 
-- **Sử dụng [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi)
-  (`gemini-3.8-flash-tts`)** khi độ trung thực âm thanh tối đa, diễn xuất tinh tế và khả năng kiểm soát biểu cảm là ưu tiên hàng đầu. Đây là lựa chọn lý tưởng cho công việc sáng tạo ở cấp độ chuyên nghiệp, đoạn hội thoại phức tạp của nhiều người nói, các thẻ có nhiều đoạn lời thoại, cách phát âm khó, phương ngữ của khu vực hoặc nhóm thiểu số và những đoạn tường thuật dài đòi hỏi giọng nói và âm thanh môi trường ổn định.
-- **Sử dụng [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi)
-  (`gemini-3.8-flash-lite-tts`)** làm công cụ thay thế nhanh chóng, tiết kiệm chi phí cho `gemini-3.1-flash-tts-preview`. Nền tảng này được tối ưu hoá cho hoạt động sản xuất hàng loạt với số lượng lớn, các tầng tác nhân giọng nói đàm thoại, các tính năng đọc to, khả năng nhân bản giọng nói đáng tin cậy và lời nói hằng ngày của một người nói bằng các ngôn ngữ chính.
+- **Verwenden Sie [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=de) (`gemini-3.8-flash-tts`)**, wenn maximale akustische Wiedergabetreue, nuancierte Darstellung und ausdrucksstarke Steuerung oberste Priorität haben. Sie eignet sich ideal für kreative Arbeiten in Studioqualität, komplexe Dialoge mit mehreren Sprechern, Tags für starke Gesangspassagen, schwierige Aussprachen, regionale oder Minderheitendialekte und lange Erzählungen, die eine stabile Stimme und einen stabilen Raumton erfordern.
+- **[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=de) (`gemini-3.8-flash-lite-tts`)** als schnelles, kostengünstiges Arbeitstier anstelle von `gemini-3.1-flash-tts-preview` verwenden. Sie ist für die Massenproduktion in großem Umfang, Konversations-Voice-Agent-Kaskaden, Vorlesefunktionen, zuverlässige Sprachreplikation und alltägliche Einzelsprecher-Sprache in wichtigen Sprachen optimiert.
 
-### Hướng dẫn di chuyển
+### Migrationsanleitung
 
-Nếu bạn đang di chuyển từ `gemini-3.1-flash-tts-preview` hoặc các mô hình TTS Gemini cũ hơn sang TTS Gemini 3.8:
+Wenn Sie von Gemini TTS-Modellen der Version `gemini-3.1-flash-tts-preview` oder früher zu Gemini 3.8 TTS migrieren:
 
-1. **Di chuyển chỉ dẫn theo từng lượt vào `speech_metadata`:** TTS Gemini 3.8 coi văn bản đầu vào hoàn toàn là bản chép lời nguyên văn. Di chuyển hướng dẫn phân phối liên tục (`style`, chẳng hạn như `"whispering"`, `"out of breath"` hoặc `"speaking slowly"`) và nhãn người nói (`speaker`) vào chú thích có cấu trúc `speech_metadata` thay vì nhúng chỉ dẫn sân khấu vào văn bản bản chép lời.
-2. **Chỉ sử dụng thẻ nội tuyến dấu ngoặc nhọn cho các sự kiện âm thanh tại một thời điểm:** Giữ các đoạn âm thanh không phải lời nói và khoảng dừng ngắn trong bản chép lời bằng dấu ngoặc nhọn (chẳng hạn như `<laugh>`, `<sigh>`, `<cough>`, `<breath>` hoặc `<short pause>`). Tránh thẻ hiệu ứng âm thanh (chẳng hạn như tiếng vỗ tay hoặc tiếng động mạnh) và đặt kiểu truyền tải trong `speech_metadata.style`.
-3. **Chỉ định `speaker` ở mỗi lượt trong yêu cầu có nhiều người nói:** Mỗi lượt trong yêu cầu có nhiều người nói phải bao gồm rõ ràng `speaker` bên trong `speech_metadata` khớp với một trong những người nói đã định cấu hình.
-4. **Thiết kế các nhân vật giả định trước bằng tính năng Thiết kế giọng nói:** Thay thế các khối `"Audio Profile"` hoặc `"Director's Notes"` có nhiều đoạn bằng giọng nói tuỳ chỉnh được tạo trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi), sau đó truyền mã nhận dạng `voice_...` đó qua các yêu cầu TTS của bạn với chuỗi `style` tối thiểu hoặc trống.
-5. **Tài khoản cho đầu ra WAV mặc định (`audio/wav`) trên các yêu cầu đơn phương:** Không giống như `gemini-3.1-flash-tts-preview` và các mô hình TTS trước đó (trả về PCM thô không có tiêu đề `audio/l16` theo mặc định), Gemini 3.8 TTS trả về âm thanh WAV (`audio/wav`) có tiêu đề RIFF tiêu chuẩn theo mặc định cho các yêu cầu đơn phương.
-   - Nếu trước đây mã của bạn đã bao bọc các byte PCM thô trong một tiêu đề WAV (ví dụ: sử dụng mô-đun `wave` của Python hoặc `ffmpeg`), hãy xoá trình bao bọc tiêu đề theo cách thủ công và ghi trực tiếp các byte được trả về vào tệp `.wav`.
-   - Nếu quy trình của bạn yêu cầu âm thanh PCM thô không có tiêu đề, mu-law hoặc A-law, hãy đặt `response_format` một cách rõ ràng thành `"audio/l16"`, `"audio/mulaw"` hoặc `"audio/alaw"`. Xem [Định dạng đầu ra âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#audio-output-formats).
+1. **Anweisungen auf Turn-Ebene in `speech_metadata` verschieben**:Bei Gemini 3.8 TTS wird der eingegebene Text streng als wörtliches Transkript behandelt. Verschieben Sie Anweisungen zur kontinuierlichen Bereitstellung (`style`, z. B. `"whispering"`, `"out of breath"` oder `"speaking slowly"`) und Sprecherlabels (`speaker`) in strukturierte `speech_metadata`-Anmerkungen, anstatt Regieanweisungen in den Transkripttext einzubetten.
+2. **Winkelklammer-Inlinetags nur für stimmliche Ereignisse zu einem bestimmten Zeitpunkt verwenden**:Momentane stimmliche Äußerungen und Pausen, die keine Sprache sind, mit Winkelklammern (z. B. `<laugh>`, `<sigh>`, `<cough>`, `<breath>` oder `<short pause>`) in das Transkript einfügen. Soundeffekt-Tags (z. B. für Applaus oder dumpfe Geräusche) vermeiden und Vortragsstile in `speech_metadata.style` setzen.
+3. **`speaker` in jeder Äußerung in Anfragen mit mehreren Sprechern angeben**:Jede Äußerung in einer Anfrage mit mehreren Sprechern muss `speaker` innerhalb von `speech_metadata` enthalten, das mit einem der konfigurierten Sprecher übereinstimmt.
+4. **Design-Personas im Voraus mit Voice Design erstellen**:Ersetzen Sie `"Audio Profile"`- oder `"Director's Notes"`-Blöcke mit mehreren Absätzen durch eine benutzerdefinierte Stimme, die in [Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=de) erstellt wurde. Übertragen Sie dann die `voice_...`-ID in Ihre TTS-Anfragen mit minimalen oder leeren `style`-Strings.
+5. **Standard-WAV-Ausgabe (`audio/wav`) bei unären Anfragen berücksichtigen**:Im Gegensatz zu `gemini-3.1-flash-tts-preview` und früheren TTS-Modellen (die standardmäßig headerloses rohes PCM `audio/l16` zurückgegeben haben) gibt Gemini 3.8 TTS standardmäßig WAV-Audio (`audio/wav`) mit einem Standard-RIFF-Header für unäre Anfragen zurück.
+   - Wenn Ihr Code zuvor Roh-PCM-Bytes in einen WAV-Header eingeschlossen hat (z. B. mit dem `wave`-Modul oder `ffmpeg` von Python), entfernen Sie den manuellen Header-Wrapper und schreiben Sie die zurückgegebenen Bytes direkt in eine `.wav`-Datei.
+   - Wenn für Ihre Pipeline unkomprimiertes PCM-Audio ohne Header, Mu-Law- oder A-Law-Audio erforderlich ist, legen Sie `response_format.mime_type` explizit auf `"audio/l16"`, `"audio/mulaw"` oder `"audio/alaw"` fest (z. B. `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` in der Interactions API oder `AUDIO_L16` in `generateContent`). Weitere Informationen finden Sie unter [Audioausgabeformate](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#audio-output-formats).
 
-## Hướng dẫn đặt câu lệnh
+## Leitfaden für Prompts
 
-Các mô hình TTS Gemini 3.8 coi văn bản đầu vào hoàn toàn là **bản chép lời nguyên văn**.
-Không giống như các mô hình xem trước trước đây, trong đó chỉ dẫn sân khấu được nhúng trong văn bản thuần tuý, TTS Gemini 3.8 tách biệt chỉ dẫn duy trì ở cấp lượt (`speech_metadata`) với thẻ thoại nội dòng tại một thời điểm.
+Gemini 3.8 TTS-Modelle behandeln Eingabetext ausschließlich als **wortwörtliches Transkript**.
+Im Gegensatz zu früheren Vorschauversionen, in denen Regieanweisungen in Nur-Text eingebettet waren, trennt Gemini 3.8 TTS anhaltende Anweisungen auf Turn-Ebene (`speech_metadata`) von Inline-Vocal-Tags für bestimmte Zeitpunkte.
 
-### Trường kiểu so với thẻ nội tuyến
+### Stilfeld im Vergleich zu Inline-Tags
 
-Chia chỉ dẫn về hiệu suất theo phạm vi:
+Teilen Sie Ihre Leistungsanweisungen nach Umfang auf:
 
-- **Mức độ chuyển lời (`speech_metadata.style`):** Đặt các thuộc tính chuyển lời bền vững (chẳng hạn như cảm xúc, ngữ điệu, tốc độ tổng thể hoặc phong cách chuyển lời (như `"whispering"`, `"out of breath"`, `"muttering"` hoặc `"sarcastic"`)) vào trường `style` của `speech_metadata`. Để tạo một nhân vật và hiệu suất ổn định qua các lượt, hãy thiết kế nhân vật trước trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) và chỉ sử dụng `style` cho các tinh chỉnh không bắt buộc ở cấp lượt.
-- **Sự kiện tại một thời điểm (thẻ nội tuyến):** Đặt các đoạn âm thanh không phải lời nói, tiếng thở hoặc khoảng dừng ngắn vào nội tuyến bên trong bản chép lời bằng dấu ngoặc nhọn (`<cough>`, `<breath>`, `<sigh>`, `<short pause>`). Sử dụng dấu ngoặc nhọn (`<...>`) để có chất lượng âm thanh cao nhất và chỉ sử dụng giọng nói của con người thay vì hiệu ứng âm thanh không phải giọng nói.
+- **Lieferung auf Turn-Ebene (`speech_metadata.style`)**: Attribute für die kontinuierliche Bereitstellung, z. B. Emotion, Prosodie, allgemeines Tempo oder Bereitstellungsstil (z. B. `"whispering"`, `"out of breath"`, `"muttering"` oder `"sarcastic"`), werden in das Feld `style` von `speech_metadata` eingefügt. Damit die Figur und die Leistung über die verschiedenen Züge hinweg stabil bleiben, sollten Sie die Persona im Voraus im [Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=de) entwerfen und `style` nur für optionale Anpassungen auf Zugebene verwenden.
+- **Zeitpunktbezogene Ereignisse (Inline-Tags)**: Setzen Sie kurze nicht sprachliche Vokalbursts, Atemzüge oder Pausen mit spitzen Klammern (`<cough>`, `<breath>`, `<sigh>`, `<short pause>`) in den Transkripttext ein. Verwenden Sie spitze Klammern (`<...>`) für die höchste Audioqualität und beschränken Sie sich auf menschliche Vokalisationen anstelle von nicht vokalen Soundeffekten.
 
-| Phạm vi | Vị trí đặt | Ví dụ |
+| Bereich | Platzierung | Beispiele |
 | --- | --- | --- |
-| **Cấp lượt** (duy trì trong suốt lượt) | `speech_metadata.style` | `"angry tone"`, `"speaking rapidly"`, `"out of breath"`, `"whispers"`, `"sarcastic"` |
-| **Tại một thời điểm cụ thể** (xảy ra tại một từ cụ thể) | Nội tuyến trong `text` (`<...>`) | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
+| **Auf Ebene des Zuges** (während des gesamten Zuges) | `speech_metadata.style` | `"angry tone"`, `"speaking rapidly"`, `"out of breath"`, `"whispers"`, `"sarcastic"` |
+| **Zu einem bestimmten Zeitpunkt** (tritt bei einem bestimmten Wort auf) | Inline in `text` (`<...>`) | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
 
-### Nhịp độ và khoảng dừng
+### Tempo und Pausen
 
-Bạn có thể kiểm soát nhịp điệu và khoảng lặng ở 3 mức độ chi tiết:
+Sie können Rhythmus und Stille auf drei Detaillierungsebenen steuern:
 
-- **Dấu chấm câu và dấu ba chấm:** Sử dụng dấu phẩy, dấu gạch ngang (`--`) và dấu ba chấm (`...`) để tạo cảm giác do dự tự nhiên trong cuộc trò chuyện.
-- **Thẻ tạm dừng cùng dòng:** Chèn `<short pause>` hoặc `<long pause>` vào đúng vị trí trong kịch bản mà người nói cần tạm dừng:
+- **Satzzeichen und Auslassungspunkte**:Verwenden Sie Kommas, Gedankenstriche (`--`) und Auslassungspunkte (`...`), um natürliche Gesprächspausen zu erzeugen.
+- **Inline-Pausen-Tags**:Fügen Sie `<short pause>` oder `<long pause>` an den genauen Stellen im Skript ein, an denen ein Sprecher pausieren soll:
   `text
   Hold on, let me think... <short pause> Alright, I've got it.`
-- **Tốc độ theo lượt:** Đặt `"style": "speaking rapidly"` hoặc `"style": "speaking slowly"` trong `speech_metadata` để kiểm soát tốc độ nói trong toàn bộ lượt.
+- **Geschwindigkeit auf Zugebene**:Legen Sie in `speech_metadata` `"style": "speaking rapidly"` oder `"style": "speaking slowly"` fest, um die Sprechgeschwindigkeit für den gesamten Zug zu steuern.
 
-### Ngữ điệu và cao độ
+### Prosodie und Tonhöhe
 
-Sử dụng **`speech_metadata.style`** để kiểm soát ngữ điệu, cao độ và biến tố trong một lượt lời (ví dụ: `"style": "high pitch, cheerful and excited inflection"` hoặc `"style": "monotone and flat"`). Nếu cảm xúc hoặc ngữ điệu thay đổi giữa cuộc trò chuyện, hãy chia kịch bản thành các lượt lời riêng biệt với các giá trị `style` riêng biệt cho mỗi lượt lời.
+Verwenden Sie **`speech_metadata.style`**, um Prosodie, Tonhöhe und Betonung in einem Zug zu steuern (z. B. `"style": "high pitch, cheerful and excited inflection"` oder `"style": "monotone and flat"`). Wenn sich die Emotion oder Prosodie während des Dialogs ändert, teilen Sie das Skript in separate Züge mit unterschiedlichen `style`-Werten für jeden Zug auf.
 
-### Điểm nhấn
+### Schwerpunkt
 
-Viết hoa một số từ trong bản chép lời, kết hợp với dấu câu và thẻ thanh nhạc nội dòng để nhấn giọng tự nhiên vào các từ khoá:
+Sie können bestimmte Wörter im Transkript großschreiben und Satzzeichen und Inline-Vocal-Tags verwenden, um wichtige Wörter natürlich zu betonen:
 
 ```
 This is a VERY important point!
 It was a VERY long day <sigh> ... nobody listens anymore.
 ```
 
-### Tiếng bật âm và âm thanh không phải lời nói
+### Vocal-Bursts und Geräusche
 
-Đặt các âm thanh không phải lời nói của con người vào dòng bằng dấu ngoặc nhọn (`<...>`) tại đúng thời điểm mà âm thanh đó xuất hiện. Các thẻ giọng nói nên dùng bao gồm:
+Nicht sprachliche menschliche Äußerungen werden inline mit spitzen Klammern (`<...>`) an der genauen Stelle platziert, an der das Geräusch auftreten soll. Empfohlene Gesangstags:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -1191,70 +1194,70 @@ It was a VERY long day <sigh> ... nobody listens anymore.
 | `<throat-clearing>` | `<tsk>` | `<whimper>` | `<whispers>`/`<whispering>` |
 | `<yawn>` | `<short pause>` | `<long pause>` |  |
 
-### Kênh phụ và lời nói chồng chéo
+### Backchannels und sich überschneidende Sprache
 
-Trong đoạn hội thoại có nhiều người nói, hãy đặt các phản ứng của người nghe trong dấu gạch dọc (`|reaction|`) trong lượt lời của người nói để tạo kênh liên lạc bí mật tự nhiên hoặc lời nói chồng chéo mà không bị ngắt thành một lượt lời riêng cho mỗi phản ứng.
+Bei Dialogen mit mehreren Sprechern können Sie Reaktionen des Zuhörers in Pipe-Zeichen (`|reaction|`) innerhalb des Sprecherbeitrags einschließen, um natürliche Backchannels oder überlappende Sprache zu erzeugen, ohne dass für jede Reaktion ein separater Beitrag erforderlich ist.
 
-- **Trao đổi qua kênh phụ trong thời gian ngắn:** Lồng ghép phản ứng ngắn của người nghe (`|oh hmm|`, `|oh really?|`, `|absolutely|`) trong lượt nói của người đang nói:
-  - **Lượt 1 (Người nói A):** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
-  - **Lượt 2 (Người nói B):** `"Ready enough |oh really?| The last blocker cleared this morning."`
-  - **Lượt 3 (Người nói A):** `"Then let's ship it |absolutely| and watch the dashboards."`
-- **Lời nói chồng chéo và xen kẽ:** Sử dụng nhiều đoạn dấu gạch đứng để mô phỏng lời nói đồng thời hoặc xen kẽ giữa hai người nói (phù hợp nhất với `gemini-3.8-flash-tts`):
-  - **Đếm ngược/hát đồng thanh cùng lúc:** `"Let's surprise him on three |ok| ready?"` rồi đến `"one. two. three. |happy| happy |birthday| birthday!"`
-  - **Full speaker overlap** (Chồng chéo hoàn toàn giữa các diễn giả): `"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
+- **Kurze Backchannel-Reaktionen**:Füge kurze Reaktionen des Zuhörers (`|oh hmm|`, `|oh really?|`, `|absolutely|`) in den Beitrag des aktiven Sprechers ein:
+  - **Runde 1 (Sprecher A):** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
+  - **Runde 2 (Sprecher B):** `"Ready enough |oh really?| The last blocker cleared this morning."`
+  - **Turn 3 (Speaker A):** `"Then let's ship it |absolutely| and watch the dashboards."`
+- **Überlappende und verschachtelte Sprache**:Verwenden Sie mehrere Pipe-Segmente, um gleichzeitige oder verschachtelte Sprache zwischen zwei Sprechern zu simulieren. Das funktioniert am besten mit `gemini-3.8-flash-tts`:
+  - **Gleichzeitiger Countdown/Refrain**:`"Let's surprise him on three |ok| ready?"` gefolgt von `"one. two. three. |happy| happy |birthday| birthday!"`
+  - **Vollständige Sprecherüberschneidung**:`"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
 
-### Tính nhất quán giữa các thế hệ và những điều cần tránh
+### Konsistenz über Generationen hinweg und was Sie vermeiden sollten
 
-Hãy làm theo các nguyên tắc sau để duy trì giọng nói ổn định trong suốt cuộc trò chuyện:
+Beachten Sie die folgenden Richtlinien, um die Stabilität der stimmlichen Identität über mehrere Turns hinweg zu gewährleisten:
 
-- **Thiết kế nhân vật đại diện ngay từ đầu trong Thiết kế giọng nói thay vì các khối kiểu dài:**
-  Các đoạn văn `"Audio Profile"` dạng dài và nhiều dấu đầu dòng `"Director's Notes"` được chuyển từ các mô hình trước đó là nguyên nhân phổ biến nhất gây ra sự thay đổi về giọng nói.
-  Hãy sử dụng trực giác sáng tạo đó ngay từ đầu trong [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) để tạo ra một `voice_...` nhân vật tuỳ chỉnh lâu dài, sau đó truyền mã nhận dạng giọng nói đó qua các lệnh gọi TTS.
-- **Dựa vào giọng nói tham chiếu để đảm bảo tính ổn định (bỏ qua các chỉ dẫn meta):**
-  Các mô hình TTS 3.8 của Gemini được huấn luyện để ưu tiên giọng nói tham chiếu.
-  Không được đưa ra hướng dẫn yêu cầu mô hình giữ giọng nói ổn định (chẳng hạn như `"do not switch speaker identity"` hoặc `"maintain identical timbre"`) – văn bản câu lệnh bổ sung sẽ làm tăng độ lệch. Loại bỏ những hướng dẫn không cần thiết về phong cách và để mô hình thay đổi một cách tự nhiên xung quanh điểm ổn định do giọng nói tham khảo cung cấp.
-- **Đừng cố gắng thay đổi các đặc điểm không thay đổi của người nói trong `style`:** Tránh đưa tuổi, giới tính, tên hoặc các thay đổi về giọng điệu vĩnh viễn vào `speech_metadata.style`.
-  Thay vào đó, hãy chọn một giọng nói theo khu vực trong Thư viện giọng nói mở rộng hoặc tạo một giọng nói bằng tính năng [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi).
+- **Design-Personas im Voice-Design vorab anstelle von langen Stilblöcken:**
+  Lange `"Audio Profile"`-Absätze und `"Director's Notes"`-Listen mit mehreren Aufzählungszeichen, die aus früheren Modellen übernommen wurden, sind die häufigste Ursache für Voice-Drift.
+  Nutzen Sie diese kreative Intuition von Anfang an beim [Stimmendesign](https://ai.google.dev/gemini-api/docs/voice-design?hl=de), um eine dauerhafte benutzerdefinierte `voice_...`-Identität zu generieren, und verwenden Sie diese Stimm-ID dann in Ihren TTS-Aufrufen.
+- **Für Stabilität auf die Sprachreferenz verlassen (Meta-Anweisungen weglassen)**:
+  Gemini 3.8-TTS-Modelle sind so trainiert, dass sie sich zuerst an der Audio-Referenz orientieren.
+  Fügen Sie keine Anweisungen hinzu, die das Modell anweisen, die Stimme konstant zu halten, z. B. `"do not switch speaker identity"` oder `"maintain identical timbre"`. Zusätzlicher Prompt-Text erhöht die Abweichung. Lassen Sie unnötige Stilanweisungen weg und lassen Sie das Modell natürlich um den stabilen Punkt variieren, der durch die Sprachreferenz vorgegeben wird.
+- **Unveränderliche Sprechermerkmale in `style` nicht ändern:** Geben Sie in `speech_metadata.style` keine Änderungen des Alters, Geschlechts, Namens oder des Akzents an.
+  Wählen Sie stattdessen eine regionale Stimme aus der erweiterten Stimmenbibliothek aus oder erstellen Sie eine mit [Stimmendesign](https://ai.google.dev/gemini-api/docs/voice-design?hl=de).
 
-### Quy trình làm việc được đề xuất
+### Empfohlener Workflow
 
-1. **Tạo nhân vật một lần:** Tạo nhân vật trong phần [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi) hoặc chọn một giọng nói theo khu vực trong Thư viện giọng nói mở rộng phù hợp với ngôn ngữ đích và tính cách của bạn.
-2. **Viết bản chép lời tự nhiên như lời nói, có cả những đoạn ngắt lời:** Để đạt được mức độ tự nhiên cao nhất, hãy viết `text` dưới dạng bản chép lời thực tế như lời nói, bao gồm cả những đoạn ngắt lời và do dự tự nhiên trong cuộc trò chuyện (ví dụ: `"Oh uh yeah I think... hm, so that's interesting"`).
-3. **Trước tiên, hãy kiểm thử TTS thông thường:** Trước tiên, hãy tổng hợp bản chép lời của bạn bằng một trường `style` trống – hầu hết các yêu cầu đều không cần hướng dẫn `style`.
-4. **Chỉ thêm câu lệnh ngắn `style` để tinh chỉnh:** Chỉ thêm một chuỗi `style` ngắn gọn (chẳng hạn như `"casual, friendly"` hoặc `"muttering, then reassuring"`) cho những lượt cần điều chỉnh cụ thể về cách phân phối và sử dụng lại chính xác chuỗi ngắn đó trong các lượt khi bạn muốn có một đường cơ sở nhất quán.
+1. **Charakter einmal erstellen**:Erstellen Sie Ihren Charakter unter [Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=de) oder wählen Sie eine regionale Stimme aus der erweiterten Stimmenbibliothek aus, die Ihrer Zielsprache und Persona entspricht.
+2. **Natürliche gesprochene Transkripte mit Unflüssigkeiten schreiben**:Für maximale Natürlichkeit schreiben Sie das `text` als echtes gesprochenes Transkript – einschließlich natürlicher Unflüssigkeiten und Zögern (z. B. `"Oh uh yeah I think... hm, so that's interesting"`).
+3. **Einfache TTS zuerst testen**:Synthetisieren Sie Ihr Transkript zuerst mit einem leeren `style`-Feld. Für die meisten Anfragen ist überhaupt keine `style`-Anweisung erforderlich.
+4. **Fügen Sie kurze `style`-Prompts nur für Anpassungen hinzu**:Fügen Sie einen kurzen `style`-String (z. B. `"casual, friendly"` oder `"muttering, then reassuring"`) nur für Turns hinzu, die eine bestimmte Anpassung erfordern. Verwenden Sie diesen kurzen String für alle Turns, wenn Sie eine einheitliche Baseline wünschen.
 
-### Hội thoại nhiều lượt và tác nhân thoại
+### Mehrfachdialog und Sprachagenten
 
-Khi xây dựng các tác nhân giọng nói đàm thoại theo thời gian thực hoặc các ứng dụng nhiều lượt tương tác:
+Wenn Sie Echtzeit-Sprachagenten oder Mehrfachdialog-Anwendungen entwickeln:
 
-- Thực hiện **một lệnh gọi TTS cho mỗi lượt** khi các đoạn văn bản LLM đến.
-- Cho phép `voice` đã định cấu hình (được tạo sẵn, được thiết kế `voice_...` hoặc được sao chép `voice_...` / `voicekey_...`) mang danh tính của người nói qua các lượt trò chuyện – không bao giờ gửi lại một nhân vật dài ở mỗi lượt.
-- Để trống trường `style` cho mỗi lượt hoặc gửi một chuỗi hằng số ngắn (chẳng hạn như `"casual, friendly"`) cho toàn bộ cuộc trò chuyện.
-- Chia câu trả lời dài của trợ lý thành các lượt ngắn hơn thay vì sử dụng các câu lệnh có phong cách mạnh mẽ hơn.
+- Führen Sie **einen TTS-Aufruf pro Runde** aus, wenn LLM-Textblöcke eingehen.
+- Lassen Sie die konfigurierte `voice` (vorgefertigt, entworfen `voice_...` oder repliziert `voice_...` / `voicekey_...`) die Identität des Sprechers über mehrere Turns hinweg beibehalten. Senden Sie niemals bei jedem Turn eine lange Charakter-Persona neu.
+- Lassen Sie das Feld `style` pro Zug leer oder senden Sie für die gesamte Unterhaltung einen kurzen konstanten String (z. B. `"casual, friendly"`).
+- Teilen Sie lange Antworten des Kundenservicemitarbeiters in kürzere Abschnitte auf, anstatt stärkere Stil-Prompts zu verwenden.
 
-## Các điểm hạn chế
+## Beschränkungen
 
-- Các mô hình TTS chấp nhận đầu vào chỉ có văn bản và tạo ra đầu ra chỉ có âm thanh.
-- Tính năng tạo nhiều người nói bằng một yêu cầu (`speech_config.speakers`) hỗ trợ tối đa 2 người nói bằng giọng nói được tạo sẵn. Để kết hợp giọng nói được thiết kế riêng (`voice_...`) hoặc giọng nói được sao chép (`voice_...` / `voicekey_...`) trong đoạn hội thoại có nhiều nhân vật, hãy tổng hợp từng lượt lời của người nói một cách riêng lẻ.
-  Vì các yêu cầu đơn phương trả về `audio/wav` với tiêu đề RIFF 44 byte theo mặc định, hãy yêu cầu PCM thô (`{"type": "audio", "mime_type": "audio/l16"}`) hoặc loại bỏ tiêu đề WAV khỏi mỗi lượt trước khi nối các khung âm thanh PCM 24 kHz.
-- **Hạn mức bộ nhớ và TTL cho giọng nói tuỳ chỉnh:**
-  - **Giọng nói có trạng thái (`store=True`, được nhắc hoặc sao chép):** Tối đa **200 giọng nói cho mỗi dự án** với **TTL (thời gian tồn tại) là 1 năm**.
-  - **Khoá thoại không trạng thái (`store=False`, `voicekey_...`):** **TTL 7 ngày** (thời gian tồn tại).
-- Xem phần [Ngôn ngữ được hỗ trợ](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi#languages) để biết phạm vi hỗ trợ ngôn ngữ.
+- TTS-Modelle akzeptieren nur Texteingaben und generieren nur Audioausgaben.
+- Die Generierung mit mehreren Sprechern in einer einzelnen Anfrage (`speech_config.speakers`) unterstützt bis zu zwei Sprecher mit vordefinierten Stimmen. Wenn Sie benutzerdefinierte (`voice_...`) oder replizierte (`voice_...` / `voicekey_...`) Stimmen in einem Dialog mit mehreren Figuren kombinieren möchten, müssen Sie die Äußerung jedes Sprechers einzeln synthetisieren.
+  Da bei unären Anfragen standardmäßig `audio/wav` mit einem 44 Byte großen RIFF-Header zurückgegeben wird, müssen Sie rohes PCM (`{"type": "audio", "mime_type": "audio/l16"}`) anfordern oder den WAV-Header aus jedem Turn entfernen, bevor Sie die 24 kHz-PCM-Audio-Frames verketten.
+- **Speicherlimits und TTL für benutzerdefinierte Stimmen:**
+  - **Statusbehaftete Stimmen (`store=True`, per Prompt erstellt oder repliziert)**: Maximal **200 Stimmen pro Projekt** mit einer **Gültigkeitsdauer von 1 Jahr** (Time-to-Live).
+  - **Zustandslose Sprachschlüssel (`store=False`, `voicekey_...`)**: **Gültigkeitsdauer (TTL) von 7 Tagen**.
+- Informationen zur Sprachabdeckung finden Sie im Abschnitt [Unterstützte Sprachen](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de#languages).
 
-## Bước tiếp theo
+## Nächste Schritte
 
-- Tạo nhân vật ảo có giọng nói tuỳ chỉnh bằng ngôn ngữ tự nhiên thông qua tính năng [Thiết kế giọng nói](https://ai.google.dev/gemini-api/docs/voice-design?hl=vi).
-- Nhân bản giọng nói của một người nói hiện có trong tính năng [Nhân bản giọng nói](https://ai.google.dev/gemini-api/docs/voice-replication?hl=vi).
-- So sánh thông số kỹ thuật của mô hình trên các trang mô hình [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=vi) và [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=vi).
-- Khám phá âm thanh tương tác hai chiều bằng [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
+- Mit [Voice Design](https://ai.google.dev/gemini-api/docs/voice-design?hl=de) können Sie benutzerdefinierte Gesangspersonas aus natürlicher Sprache erstellen.
+- Die Stimme eines vorhandenen Sprechers in der [Stimmreplikation](https://ai.google.dev/gemini-api/docs/voice-replication?hl=de) replizieren
+- Vergleichen Sie die Modellspezifikationen auf den Modellseiten [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=de) und [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=de).
+- Mit der [Live API](https://ai.google.dev/gemini-api/docs/live?hl=de) können Sie interaktive bidirektionale Audiofunktionen nutzen.
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-09-24 UTC.
+Zuletzt aktualisiert: 2026-10-02 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-24 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-02 (UTC)."],[],[]]

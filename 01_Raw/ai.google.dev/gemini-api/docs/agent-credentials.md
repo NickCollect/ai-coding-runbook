@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-TW
-fetched_at: 2026-09-28T06:15:30.669793+00:00
-title: "\u53d7\u7ba1\u7406\u4ee3\u7406\u7a0b\u5f0f\u4e2d\u7684\u6191\u8b49 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko
+fetched_at: 2026-10-05T06:47:12.313985+00:00
+title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8\uc758 \uc0ac\uc6a9\uc790 \uc778\uc99d \uc815\ubcf4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-提供意見
+의견 보내기
 
-# 受管理代理程式中的憑證
+# 관리 에이전트의 사용자 인증 정보
 
-憑證是由伺服器管理的密鑰，可讓代理存取第三方服務，且密鑰不會進入代理的環境。您只需儲存一次憑證，然後依 ID 參照憑證，出口 Proxy 就會在要求時解析並注入憑證。
+사용자 인증 정보는 서버에서 관리하는 보안 비밀로, 에이전트가 에이전트 환경에 보안 비밀을 입력하지 않고도 서드 파티 서비스에 연결할 수 있습니다. 사용자는 사용자 인증 정보를 한 번 저장하고 ID로 참조하면 이그레스 프록시가 요청 시 이를 확인하고 삽입합니다.
 
-密鑰值只能寫入，儲存後，任何端點都不會傳回這些權杖，因此遭入侵的代理程式無法讀取正在使用的權杖。
+보안 비밀 값은 쓰기 전용입니다. 저장된 후에는 어떤 엔드포인트에서도 반환되지 않으므로 보안이 취약한 에이전트가 사용 중인 토큰을 다시 읽을 수 없습니다.
 
-您主要會在 [`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw) 的網路許可清單中使用憑證。請先儲存密鑰：
+사용자 인증 정보를 사용하는 기본 위치는 [`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko)의 네트워크 허용 목록입니다. 먼저 보안 비밀을 저장합니다.
 
 ### Python
 
@@ -40,7 +40,7 @@ credential = client.credentials.create(
 print(f"Credential ID: {credential.id}, Status: {credential.status}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -105,7 +105,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-然後附加至驗證的網域：
+그런 다음 인증하는 도메인에 연결합니다.
 
 ### Python
 
@@ -125,7 +125,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -208,23 +208,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-現在，代理程式會向 `api.github.com` 發出經過驗證的要求，且權杖絕不會出現在沙箱中。
+이제 에이전트는 `api.github.com`에 인증된 요청을 전송하며 토큰은 샌드박스 내에 존재하지 않습니다.
 
-## 認證類型
+## 사용자 인증 정보 유형
 
-每項憑證都有 `type`，可決定憑證接受哪些欄位，以及 Proxy 如何套用憑證。
+모든 사용자 인증 정보에는 프록시가 어떤 필드를 허용하고 어떻게 적용하는지 결정하는 `type`가 있습니다.
 
-| 類型 | 用途 | 行為 |
+| 유형 | 사용 사례 | 동작 |
 | --- | --- | --- |
-| `bearer_token` | 個人存取權杖、機器人權杖、靜態 API 金鑰 | Proxy 會將權杖插入要求標頭。沒有重新整理邏輯。 |
-| `oauth2` | OAuth 應用程式和使用者委派流程 | Proxy 會將更新權杖換成存取權杖，並在權杖過期時更新。 |
-| `environment_variable` | 從程序環境讀取密鑰的用戶端 SDK | 代理程式的環境會收到預留位置。Proxy 會在傳出要求中替換實際密鑰。 |
+| `bearer_token` | 개인 액세스 토큰, 봇 토큰, 정적 API 키 | 프록시가 토큰을 요청 헤더로 삽입합니다. 새로고침 로직이 없습니다. |
+| `oauth2` | OAuth 앱 및 사용자 위임 흐름 | 프록시는 갱신 토큰을 액세스 토큰으로 교환하고 만료되면 새로고침합니다. |
+| `environment_variable` | 프로세스 환경에서 보안 비밀을 읽는 클라이언트 SDK | 에이전트의 환경에 자리표시자가 표시됩니다. 프록시는 아웃바운드 요청에서 실제 보안 비밀을 대체합니다. |
 
-## 使用網路許可清單中的憑證
+## 네트워크 허용 목록의 사용자 인증 정보 사용
 
-將 `credential` 加入許可清單規則，Proxy 就會驗證傳送至該網域的每個外送要求。建議您採用這種方式，授予代理程式非公開 API、私人存放區或私人儲存空間的存取權。
+허용 목록 규칙에 `credential`를 추가하면 프록시가 해당 도메인으로 전송되는 모든 아웃바운드 요청을 인증합니다. 이는 에이전트에게 비공개 API, 비공개 저장소 또는 비공개 버킷에 대한 액세스 권한을 부여하는 데 권장되는 방법입니다.
 
-您可以在同一個允許清單中混用已驗證和未驗證的規則：
+동일한 허용 목록에서 인증된 규칙과 인증되지 않은 규칙을 혼합할 수 있습니다.
 
 ### Python
 
@@ -252,7 +252,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -359,22 +359,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-由於 Proxy 會為每個要求解析憑證，因此 `oauth2` 憑證會以透明方式重新整理存取權杖。存取權杖過期時，長時間執行的互動不會中斷。
+프록시는 요청별로 사용자 인증 정보를 확인하므로 `oauth2` 사용자 인증 정보는 액세스 토큰을 투명하게 새로고침합니다. 액세스 토큰이 만료되어도 장기 실행 상호작용이 중단되지 않습니다.
 
-### 合併 `credential` 和 `transform`
+### `credential` 및 `transform` 결합
 
-允許清單規則也接受內嵌的 [`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw#private-sources) 物件，可直接在規則中設定標頭。這兩種機制都會由線路上的輸出 Proxy 套用，因此在兩種情況下，標頭值都不會出現在沙箱中。這兩個欄位可以出現在同一條規則中。
+허용 목록 규칙은 규칙에 직접 헤더를 설정하는 인라인 [`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#private-sources) 객체도 허용합니다. 두 메커니즘 모두 와이어의 이그레스 프록시에 의해 적용되므로 두 경우 모두 헤더 값이 샌드박스 내에 존재하지 않습니다. 두 필드는 동일한 규칙에 표시될 수 있습니다.
 
-| 規則設定 | 行為 |
+| 규칙 구성 | 동작 |
 | --- | --- |
-| 僅觀看`credential` | Proxy 會解析憑證，並在每次向網域發出的要求中插入憑證標頭。 |
-| 僅觀看`transform` | 靜態標頭插入。您撰寫的標頭會照常傳送。 |
-| 兩者皆有 | 系統會先套用憑證，然後在頂端合併 `transform`。如果兩者都設定相同的鍵，則以明確的 `transform` 標頭為準。 |
-| 以上皆非 | 網域已獲准，且未插入任何標頭。 |
+| `credential`만 지원 | 프록시는 사용자 인증 정보를 확인하고 도메인에 대한 모든 요청에 헤더를 삽입합니다. |
+| `transform`만 지원 | 정적 헤더 삽입 작성한 헤더는 그대로 전송됩니다. |
+| 둘 다 | 사용자 인증 정보가 먼저 적용된 다음 `transform`가 맨 위에 병합됩니다. 두 헤더가 동일한 키를 설정하는 경우 명시적 `transform` 헤더가 우선합니다. |
+| 둘 다 아님 | 도메인이 허용되고 헤더가 삽입되지 않습니다. |
 
-如果您想儲存一次密碼，並從專案中的每個環境、代理程式和觸發程序參照該密碼，以及想讓系統為您處理存取權杖重新整理和輪替作業，就適合使用憑證。如果值屬於單一呼叫，則適合使用內嵌 `transform`，例如您在建立互動前自行產生的權杖。
+사용자 인증 정보는 비밀번호를 한 번 저장하고 프로젝트의 모든 환경, 에이전트, 트리거에서 참조하려는 경우와 액세스 토큰 새로고침 및 순환을 처리하려는 경우에 사용하는 것이 좋습니다. 인라인 `transform`은 값이 단일 호출에 속하는 경우에 적합합니다. 예를 들어 상호작용을 만들기 직전에 직접 생성하는 토큰이 있습니다.
 
-這兩者通常會合併使用。憑證會攜帶驗證標頭，而 `transform` 會在同一要求中新增上游服務預期的任何其他內容：
+두 가지를 결합하는 것이 일반적입니다. 사용자 인증 정보는 인증 헤더를 전달하고 `transform`는 동일한 요청에서 업스트림 서비스가 예상하는 다른 항목을 추가합니다.
 
 ```
 {
@@ -386,11 +386,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如要將密鑰從內嵌 `transform` 移至憑證，請使用 `POST /credentials` 儲存密鑰，將 `transform` 中的驗證標頭替換為 `"credential": "<id>"`，並保留 `transform` 物件的其餘部分。
+인라인 `transform`에서 사용자 인증 정보로 보안 비밀을 이동하려면 `POST /credentials`로 저장하고 `transform`의 인증 헤더를 `"credential": "<id>"`로 바꾸고 나머지 `transform` 객체는 그대로 둡니다.
 
-## 搭配 MCP 伺服器使用憑證
+## MCP 서버에서 사용자 인증 정보 사용
 
-遠端 MCP 伺服器會採用相同的 `credential` 欄位。在 `mcp_server` 工具上設定，Proxy 會將驗證標頭插入傳送至該伺服器的每個要求：
+원격 MCP 서버는 동일한 `credential` 필드를 사용합니다. `mcp_server` 도구에서 설정하면 프록시가 해당 서버에 대한 모든 요청에 인증 헤더를 삽입합니다.
 
 ### Python
 
@@ -408,7 +408,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -494,8 +494,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential` 和 `headers` 遵循與許可清單相同的優先順序規則。
-系統會先套用憑證，然後合併 `headers`，因此如果兩者都設定相同的金鑰，則會採用明確的標頭：
+`credential`와 `headers`은 허용 목록과 동일한 우선순위 규칙을 따릅니다.
+인증 정보가 먼저 적용되고 `headers`가 맨 위에 병합되므로 둘 다 동일한 키를 설정하면 명시적 헤더가 우선합니다.
 
 ```
 {
@@ -509,14 +509,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-如要將密鑰從內嵌 `headers` 移至憑證，請使用 `POST /credentials` 儲存密鑰，並將 `headers` 中的驗證項目替換為 `credential`。
-其他標題則維持原位。
+인라인 `headers`에서 보안 비밀을 인증 정보로 이동하려면 `POST /credentials`로 저장하고 `headers`의 인증 항목을 `credential`로 바꿉니다.
+다른 헤더는 원래 위치에 유지합니다.
 
-## 將憑證設為環境變數
+## 사용자 인증 정보를 환경 변수로 사용
 
-部分用戶端程式庫會從程序環境讀取密鑰，而不是將密鑰當做要求標頭接受。Socket 模式和長輪詢用戶端是常見情況。
+일부 클라이언트 라이브러리는 요청 헤더로 허용하는 대신 프로세스 환경에서 보안 비밀을 읽습니다. 소켓 모드 및 긴 폴링 클라이언트는 일반적인 사례입니다.
 
-將 `environment_variable` 憑證繫結至 `environment.env` 下的變數名稱：
+`environment_variable` 사용자 인증 정보를 `environment.env` 아래의 변수 이름에 바인딩합니다.
 
 ### Python
 
@@ -534,7 +534,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const interaction = await client.interactions.create({
@@ -611,21 +611,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`env` 會並排接受字串和憑證參照。系統會將字串常值以一般純文字變數的形式，插入容器中。
+`env`는 리터럴 문자열과 사용자 인증 정보 참조를 나란히 허용합니다. 리터럴 문자열이 일반 일반 텍스트 변수로 컨테이너에 삽입됩니다.
 
-憑證參照則否。變數會收到預留位置 `__GEMINI_CRED_<credential-id>__`，且 Proxy 只會針對傳送至憑證 `trusted_domains` 中網域的外送要求，替換為實際密鑰。系統會拒絕傳送至任何其他網域的要求，因此密碼絕不會離開 perimeter，也不會傳送預留位置。
+사용자 인증 정보 참조는 아닙니다. 변수는 자리표시자 `__GEMINI_CRED_<credential-id>__`를 수신하고 프록시는 사용자 인증 정보의 `trusted_domains`에 있는 도메인으로 전송되는 아웃바운드 요청에 대해서만 실제 비밀번호를 스왑합니다. 다른 도메인에 대한 요청은 거부되므로 보안 비밀이 경계를 벗어나지 않으며 자리표시자가 대신 전송되지 않습니다.
 
-在每個 `environment_variable` 憑證上設定 `trusted_domains`。這項控制項會指定密鑰的使用範圍。
+모든 `environment_variable` 사용자 인증 정보에 `trusted_domains`를 설정합니다. 보안 비밀을 사용할 수 있는 범위를 지정하는 컨트롤입니다.
 
-## 建立憑證
+## 사용자 인증 정보 만들기
 
-每項建立要求都需要 `type`，以及該類型要求的任何欄位。
+모든 생성 요청에는 `type`와 해당 유형에 필요한 필드가 필요합니다.
 
-直接呼叫 REST 時，所有欄位名稱都會使用 snake\_case。傳送 camelCase 欄位會傳回 `400`。
+REST를 직접 호출할 때는 모든 필드 이름이 snake\_case를 사용합니다. camelCase 필드를 전송하면 `400`가 반환됩니다.
 
-### 不記名權杖
+### Bearer 토큰
 
-持有人權杖憑證只需要：`token`
+Bearer 토큰 사용자 인증 정보에는 `token`만 필요합니다.
 
 ### Python
 
@@ -637,7 +637,7 @@ credential = client.credentials.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -696,7 +696,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-回應只會傳回中繼資料，絕不會傳回權杖：
+응답은 메타데이터만 반환하고 토큰은 반환하지 않습니다.
 
 ```
 {
@@ -708,8 +708,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-根據預設，Proxy 會傳送 `Authorization: Bearer <token>`。覆寫
-`header_name` 和 `prefix`，以指定預期其他內容的服務：
+기본적으로 프록시는 `Authorization: Bearer <token>`를 전송합니다. `header_name` 및 `prefix`를 재정의하여 다른 것을 예상하는 서비스를 타겟팅합니다.
 
 ### Python
 
@@ -723,7 +722,7 @@ credential = client.credentials.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -788,11 +787,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-這項設定會產生 `x-goog-api-key: key_xxxxxxxxxxxx` 標頭。
+이 구성은 헤더 `x-goog-api-key: key_xxxxxxxxxxxx`를 생성합니다.
 
-下表顯示 `header_name` 和 `prefix` 的組合方式：
+다음 표는 `header_name`와 `prefix`가 결합되는 방식을 보여줍니다.
 
-| 設定 | 插入的標頭 |
+| 구성 | 삽입된 헤더 |
 | --- | --- |
 | `{"token": "ghp_xxx"}` | `Authorization: Bearer ghp_xxx` |
 | `{"token": "sk_live_xxx"}` | `Authorization: Bearer sk_live_xxx` |
@@ -801,7 +800,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 
 ### OAuth2
 
-OAuth2 憑證需要 `client_id`、`client_secret`、`refresh_token` 和 `token_url`。`scopes` 欄位為選填：
+OAuth2 사용자 인증 정보에는 `client_id`, `client_secret`, `refresh_token`, `token_url`이 필요합니다. `scopes` 필드는 선택사항입니다.
 
 ### Python
 
@@ -817,7 +816,7 @@ credential = client.credentials.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -888,9 +887,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-建立 OAuth2 憑證時，系統會對 `token_url` 執行即時權杖交換，確認設定是否正常運作。只有在提供者傳回含有 `access_token` 的成功權杖回應時，系統才會儲存憑證。系統接受 JSON 和 form-urlencoded 回應。
+OAuth2 사용자 인증 정보를 만들면 `token_url`에 대해 실시간 토큰 교환이 실행되어 구성이 작동하는지 확인합니다. 자격 증명은 제공자가 `access_token`가 포함된 성공적인 토큰 응답을 반환하는 경우에만 저장됩니다. JSON 응답과 form-urlencoded 응답이 모두 허용됩니다.
 
-也就是說，您必須在建立時提供有效且未過期的更新權杖。如果供應商拒絕兌換，系統會傳回錯誤：
+즉, 생성 시 유효하고 만료되지 않은 갱신 토큰이 필요합니다. 제공업체가 교환을 거부하면 오류가 반환됩니다.
 
 ```
 {
@@ -901,11 +900,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-儲存後，Proxy 會在存取權杖到期時重新整理。如果供應商輪替更新權杖，並在更新期間傳回新權杖，系統會自動以新權杖取代儲存的權杖。
+저장되면 프록시는 액세스 토큰이 만료될 때마다 갱신합니다. 제공업체가 갱신 중에 갱신 토큰을 순환하고 새 토큰을 반환하면 새 토큰이 저장된 토큰을 자동으로 대체합니다.
 
-### 環境變數
+### 환경 변수
 
-`environment_variable` 認證需要 `value` 和 `injection_location`：
+`environment_variable` 사용자 인증 정보에는 `value` 및 `injection_location`가 필요합니다.
 
 ### Python
 
@@ -919,7 +918,7 @@ credential = client.credentials.create(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.create({
@@ -984,19 +983,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-`injection_location` 欄位會告知 Proxy 要在傳出要求中的哪個位置替換密鑰。這個方法接受 `header`、`query` 或 `body`，可做為單一字串，或在服務需要多個時做為陣列：
+`injection_location` 필드는 아웃바운드 요청에서 보안 비밀을 대체할 위치를 프록시에 알려줍니다. `header`, `query` 또는 `body`를 단일 문자열로 또는 서비스에 두 개 이상이 필요한 경우 배열로 허용합니다.
 
 ```
 "injection_location": ["header", "query"]
 ```
 
-系統只會在您列出的位置進行替換。如果要求在其他位置攜帶預留位置，系統會拒絕要求，而不是傳送要求。
+대체는 나열된 위치에서만 발생합니다. 자리표시자를 다른 곳으로 전달하는 요청은 전송되지 않고 거부됩니다.
 
-如要將憑證繫結至變數名稱，請參閱「[將憑證做為環境變數使用](#environment-variables)」。
+사용자 인증 정보를 변수 이름에 바인딩하려면 [사용자 인증 정보를 환경 변수로 사용](#environment-variables)을 참고하세요.
 
-### 產生的 ID
+### 생성된 ID
 
-`id` 欄位為選填。省略此項，服務會產生 UUID：
+`id` 필드는 선택사항입니다. 생략하면 서비스에서 UUID를 생성합니다.
 
 ```
 {
@@ -1008,11 +1007,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-如果您想在互動中使用穩定且可讀取的參照，請提供自己的 ID。由於 ID 會顯示在資源路徑中，建議使用含連字號或底線的小寫英數字元。
+상호작용 전반에서 사용할 안정적이고 읽기 쉬운 참조가 필요한 경우 자체 ID를 제공합니다. ID는 리소스 경로에 표시되므로 하이픈이나 밑줄이 있는 소문자 영숫자를 사용하는 것이 좋습니다.
 
-## 列出憑證
+## 사용자 인증 정보 나열
 
-列出專案所屬的憑證。使用分頁參數控制回應批次大小。
+프로젝트에 속한 사용자 인증 정보를 나열합니다. 페이지로 나누기 매개변수를 사용하여 응답 배치 크기를 제어합니다.
 
 ### Python
 
@@ -1022,7 +1021,7 @@ for credential in response.credentials:
     print(f"Credential ID: {credential.id}, Type: {credential.type}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const response = await client.credentials.list({ page_size: 10 });
@@ -1072,7 +1071,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-回應只包含中繼資料：
+대답에는 메타데이터만 포함됩니다.
 
 ```
 {
@@ -1096,16 +1095,16 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 }
 ```
 
-將 `next_page_token` 做為 `page_token` 傳回，即可擷取下一頁。如果沒有其他結果，則會省略此欄位。
+다음 페이지를 가져오기 위해 `next_page_token`를 `page_token`로 다시 전달합니다. 더 이상 결과가 없으면 이 필드는 생략됩니다.
 
-| 參數 | 類型 | 說明 |
+| 매개변수 | 유형 | 설명 |
 | --- | --- | --- |
-| `page_size` | 整數 | 每頁的憑證數量上限。 |
-| `page_token` | 字串 | 前一則回覆的 `next_page_token` 中的權杖。 |
+| `page_size` | 정수 | 페이지당 최대 사용자 인증 정보 수입니다. |
+| `page_token` | 문자열 | 이전 응답의 `next_page_token`에서 가져온 토큰입니다. |
 
-## 取得憑證
+## 사용자 인증 정보 가져오기
 
-依 ID 擷取特定憑證的中繼資料。
+ID로 특정 사용자 인증 정보의 메타데이터를 가져옵니다.
 
 ### Python
 
@@ -1114,7 +1113,7 @@ credential = client.credentials.get(id="github-production")
 print(f"Credential ID: {credential.id}, Status: {credential.status}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.get("github-production");
@@ -1160,7 +1159,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-回應類似下列內容：
+응답은 다음과 유사합니다.
 
 ```
 {
@@ -1172,7 +1171,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-要求不存在的憑證會傳回 `404`：
+존재하지 않는 사용자 인증 정보를 요청하면 `404`이 반환됩니다.
 
 ```
 {
@@ -1183,13 +1182,13 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-## 輪替憑證
+## 사용자 인증 정보 순환
 
-替換密鑰，但不要變更任何參照該密鑰的許可清單規則、工具定義或環境變數。輪替會在下次 Proxy 解析時生效。
+허용 목록 규칙, 도구 정의 또는 이를 참조하는 환경 변수를 수정하지 않고 보안 비밀을 바꿉니다. 회전은 다음 프록시 확인 시 적용됩니다.
 
-要求必須包含 `type`，以及要變更的欄位。如果省略欄位，系統會保留目前的值。
+요청에는 `type`와 변경하려는 필드가 포함되어야 합니다. 생략한 필드는 현재 값을 유지합니다.
 
-輪替不記名權杖：
+Bearer 토큰을 순환합니다.
 
 ### Python
 
@@ -1201,7 +1200,7 @@ credential = client.credentials.update(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.update("github-production", {
@@ -1258,7 +1257,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/gith
 }'
 ```
 
-輪替 OAuth2 更新權杖：
+OAuth2 갱신 토큰을 순환합니다.
 
 ### Python
 
@@ -1270,7 +1269,7 @@ credential = client.credentials.update(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const credential = await client.credentials.update("jira-oauth", {
@@ -1327,7 +1326,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }'
 ```
 
-回覆內容會反映新的 `update_time`：
+대답에는 새로운 `update_time`가 반영됩니다.
 
 ```
 {
@@ -1339,11 +1338,11 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }
 ```
 
-憑證的 `type` 在建立時即固定，如要變更，請刪除憑證並重新建立。
+사용자 인증 정보의 `type`는 생성 시 고정됩니다. 이를 변경하려면 사용자 인증 정보를 삭제하고 새 사용자 인증 정보를 만드세요.
 
-## 刪除憑證
+## 사용자 인증 정보 삭제
 
-不再需要憑證時，請刪除憑證和儲存的密鑰。
+더 이상 필요하지 않은 경우 사용자 인증 정보와 저장된 비밀번호를 삭제합니다.
 
 ### Python
 
@@ -1351,7 +1350,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 client.credentials.delete(id="github-production")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 await client.credentials.delete("github-production");
@@ -1393,55 +1392,55 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-如果刪除成功，會傳回空白物件：
+삭제에 성공하면 빈 객체가 반환됩니다.
 
 ```
 {}
 ```
 
-如果任何允許清單規則、工具或環境變數仍參照該 ID，將無法解析，因此請先更新這些項目。
+ID를 여전히 참조하는 허용 목록 규칙, 도구 또는 환경 변수는 해결되지 않으므로 먼저 업데이트하세요.
 
-## 欄位參照
+## 필드 참조
 
-所有憑證都有的欄位：
+모든 사용자 인증 정보에 공통적인 필드:
 
-| 欄位 | 類型 | 必要 | 說明 |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `id` | 字串 | 否 | 專屬 ID。如果省略，系統會以 UUID 形式產生。 |
-| `type` | 字串 | 是 | 可能的值為 `bearer_token`、`oauth2` 或 `environment_variable`。 |
-| `status` | 字串 | 唯讀 | 憑證的目前狀態。 |
-| `create_time` | 字串 | 唯讀 | RFC 3339 建立時間戳記。 |
-| `update_time` | 字串 | 唯讀 | 上次更新的 RFC 3339 時間戳記。 |
+| `id` | 문자열 | 아니요 | 고유 식별자입니다. 생략하면 UUID로 생성됩니다. |
+| `type` | 문자열 | 예 | `bearer_token`, `oauth2`, `environment_variable` 중 하나입니다. |
+| `status` | 문자열 | 읽기 전용 | 인증 정보의 현재 상태입니다. |
+| `create_time` | 문자열 | 읽기 전용 | RFC 3339 생성 타임스탬프입니다. |
+| `update_time` | 문자열 | 읽기 전용 | 마지막 업데이트의 RFC 3339 타임스탬프입니다. |
 
-「`bearer_token`」的欄位：
+`bearer_token` 필드:
 
-| 欄位 | 類型 | 必要 | 說明 |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `token` | 字串 | 是 | 唯寫。權杖值。 |
-| `header_name` | 字串 | 否 | 要插入的標頭。預設值為 `Authorization`。 |
-| `prefix` | 字串 | 否 | 值前置字元。預設為 `Bearer`。如要停用，請設為 `""`。 |
+| `token` | 문자열 | 예 | 쓰기 전용입니다. 토큰 값입니다. |
+| `header_name` | 문자열 | 아니요 | 삽입할 헤더입니다. 기본값은 `Authorization`입니다. |
+| `prefix` | 문자열 | 아니요 | 값 접두사입니다. 기본값은 `Bearer`입니다. 없음은 `""`로 설정됩니다. |
 
-「`oauth2`」的欄位：
+`oauth2` 필드:
 
-| 欄位 | 類型 | 必要 | 說明 |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `client_id` | 字串 | 是 | OAuth2 用戶端 ID。 |
-| `client_secret` | 字串 | 是 | 唯寫。OAuth2 用戶端密鑰。 |
-| `refresh_token` | 字串 | 是 | 唯寫。用於取得存取權杖的更新權杖。 |
-| `token_url` | 字串 | 是 | 提供者權杖端點。 |
-| `scopes` | 陣列 | 否 | 要要求的 OAuth 範圍。 |
+| `client_id` | 문자열 | 예 | OAuth2 클라이언트 ID입니다. |
+| `client_secret` | 문자열 | 예 | 쓰기 전용입니다. OAuth2 클라이언트 보안 비밀번호입니다. |
+| `refresh_token` | 문자열 | 예 | 쓰기 전용입니다. 액세스 토큰을 획득하는 데 사용되는 갱신 토큰입니다. |
+| `token_url` | 문자열 | 예 | 제공업체 토큰 엔드포인트입니다. |
+| `scopes` | 배열 | 아니요 | 요청할 OAuth 범위입니다. |
 
-「`environment_variable`」的欄位：
+`environment_variable` 필드:
 
-| 欄位 | 類型 | 必要 | 說明 |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `value` | 字串 | 是 | 唯寫。密鑰值。 |
-| `injection_location` | 字串或陣列 | 是 | 要替換密鑰的位置。`header`、`query`、`body` 其中一或多個。 |
-| `trusted_domains` | 陣列 | 否 | 可替換的授權網域模式。 |
+| `value` | 문자열 | 예 | 쓰기 전용입니다. 보안 비밀 값입니다. |
+| `injection_location` | 문자열 또는 배열 | 예 | 보안 비밀을 대체할 위치입니다. `header`, `query`, `body` 중 하나 이상입니다. |
+| `trusted_domains` | 배열 | 아니요 | 대체에 승인된 도메인 패턴입니다. |
 
-## 錯誤
+## 오류
 
-錯誤會傳回含有 `message` 和 `code` 的 JSON 物件：
+오류는 `message` 및 `code`이 포함된 JSON 객체를 반환합니다.
 
 ```
 {
@@ -1452,13 +1451,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 }
 ```
 
-| HTTP 狀態 | `code` | 原因 |
+| HTTP 상태 | `code` | 원인 |
 | --- | --- | --- |
-| 400 | `invalid_request` | 缺少必填欄位、欄位不明、不支援 `type`，或 OAuth2 驗證失敗。 |
-| 404 | `not_found` | 找不到該 ID 的憑證。 |
-| 409 | `aborted` | 已有 ID 相同的憑證。 |
+| 400 | `invalid_request` | 필수 입력란이 누락되었거나, 알 수 없는 필드가 있거나, 지원되지 않는 `type`가 있거나, OAuth2 유효성 검사에 실패했습니다. |
+| 404 | `not_found` | 해당 ID의 사용자 인증 정보가 없습니다. |
+| 409 | `aborted` | 이미 이 ID를 사용하는 사용자 인증 정보가 있습니다. |
 
-系統會拒絕不明欄位，而非忽略，且錯誤會命名該欄位：
+알 수 없는 필드는 무시되지 않고 거부되며 오류에 필드 이름이 지정됩니다.
 
 ```
 {
@@ -1469,18 +1468,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 }
 ```
 
-## 後續步驟
+## 다음 단계
 
-- [環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-tw)：瞭解代理程式如何執行程式碼及保存檔案。
-- [代理程式總覽](https://ai.google.dev/gemini-api/docs/agents?hl=zh-tw)：瞭解受管理代理程式的核心概念。
-- [建構自訂代理](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-tw)：使用 `AGENTS.md` 和 `SKILL.md` 定義專屬代理。
+- [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko): 에이전트가 코드를 실행하고 파일을 유지하는 방법을 알아봅니다.
+- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리 에이전트의 핵심 개념을 알아봅니다.
+- [맞춤 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
 
-提供意見
+의견 보내기
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-上次更新時間：2026-09-24 (世界標準時間)。
+최종 업데이트: 2026-09-24(UTC)
 
-想進一步說明嗎？
+의견을 전달하고 싶나요?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-24(UTC)"],[],[]]

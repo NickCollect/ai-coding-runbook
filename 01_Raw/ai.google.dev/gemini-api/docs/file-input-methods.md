@@ -1,31 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th
-fetched_at: 2026-09-28T06:23:57.664950+00:00
-title: "\u0e27\u0e34\u0e18\u0e35\u0e01\u0e32\u0e23\u0e1b\u0e49\u0e2d\u0e19\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1f\u0e25\u0e4c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr
+fetched_at: 2026-10-05T06:29:39.541396+00:00
+title: "Dosya giri\u015f y\u00f6ntemleri \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# วิธีการป้อนข้อมูลไฟล์
+# Dosya giriş yöntemleri
 
-คู่มือนี้จะอธิบายวิธีต่างๆ ในการรวมไฟล์สื่อ เช่น รูปภาพ เสียง วิดีโอ และเอกสาร เมื่อส่งคำขอไปยัง Gemini API
-วิธีการใหม่นี้รองรับในปลายทาง Gemini API ทั้งหมด ซึ่งรวมถึง Batch, Interactions และ Live API
-การเลือกวิธีการที่เหมาะสมขึ้นอยู่กับขนาดของไฟล์ ตำแหน่งที่จัดเก็บข้อมูล และความถี่ที่คุณวางแผนจะใช้ไฟล์
+Bu kılavuzda, Gemini API'ye istek gönderirken resim, ses, video ve doküman gibi medya dosyalarını eklemenin farklı yolları açıklanmaktadır.
+Yeni yöntemler, Batch, Interactions ve Live API dahil olmak üzere tüm Gemini API uç noktalarında desteklenir.
+Doğru yöntemi seçmek, dosyanızın boyutuna, verilerinizin nerede depolandığına ve dosyayı ne sıklıkta kullanmayı planladığınıza bağlıdır.
 
-วิธีที่ง่ายที่สุดในการรวมไฟล์เป็นอินพุตคือการอ่านไฟล์ในเครื่องและ
-รวมไว้ในพรอมต์ ตัวอย่างต่อไปนี้แสดงวิธีอ่านไฟล์ PDF ในเครื่อง
-ไฟล์ PDF มีขนาดได้ไม่เกิน 50 MB สำหรับวิธีนี้ ดูรายการประเภทไฟล์อินพุตและขีดจำกัดทั้งหมดได้ใน
-[ตารางเปรียบเทียบวิธีการป้อนข้อมูล](#method-comparison)
+Giriş olarak dosya eklemenin en basit yolu, yerel bir dosyayı okuyup isteme dahil etmektir. Aşağıdaki örnekte, yerel bir PDF dosyasının nasıl okunacağı gösterilmektedir. Bu yöntemde PDF'ler 50 MB ile sınırlıdır. Dosya giriş türlerinin ve sınırlarının tam listesi için [Giriş yöntemi karşılaştırma tablosu](#method-comparison)'na bakın.
 
 ### Python
 
@@ -201,31 +198,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## การเปรียบเทียบวิธีการป้อนข้อมูล
+## Giriş yöntemi karşılaştırması
 
-ตารางต่อไปนี้เปรียบเทียบวิธีการป้อนข้อมูลแต่ละวิธีกับขีดจำกัดของไฟล์และกรณีการใช้งานที่ดีที่สุด
-โปรดทราบว่าการจำกัดขนาดไฟล์อาจแตกต่างกันไปตามประเภทไฟล์และ
-โมเดลหรือโทเค็นไนเซอร์ที่ใช้ประมวลผลไฟล์
+Aşağıdaki tabloda, her giriş yöntemi dosya sınırları ve en iyi kullanım alanlarıyla karşılaştırılmaktadır. Dosya boyutu sınırının, dosya türüne ve dosyayı işlemek için kullanılan modele veya belirteçleyiciye bağlı olarak değişebileceğini unutmayın.
 
-| วิธีการ | เหมาะสำหรับ | ขนาดไฟล์สูงสุด | ความต่อเนื่อง |
+| Yöntem | En uygun olduğu durumlar | Maksimum dosya boyutu | Kalıcılık |
 | --- | --- | --- | --- |
-| **ข้อมูลในบรรทัด** | การทดสอบอย่างรวดเร็ว ไฟล์ขนาดเล็ก และแอปพลิเคชันแบบเรียลไทม์ | 100 MB ต่อคำขอหรือเพย์โหลด   (**50 MB สำหรับ PDF**) | ไม่มี (ส่งพร้อมกับทุกคำขอ) |
-| **การอัปโหลดไฟล์ผ่าน API** | ไฟล์ขนาดใหญ่ ไฟล์ที่ใช้หลายครั้ง | 2 GB ต่อไฟล์   สูงสุด 20 GB ต่อโปรเจ็กต์ | 48 ชั่วโมง |
-| **การลงทะเบียน URI ของ GCS สำหรับ File API** | ไฟล์ขนาดใหญ่ที่อยู่ใน Google Cloud Storage อยู่แล้ว ไฟล์ที่ใช้หลายครั้ง | 2 GB ต่อไฟล์ ไม่มีขีดจำกัดพื้นที่เก็บข้อมูลโดยรวม | ไม่มี (ดึงข้อมูลต่อคำขอ) การลงทะเบียนครั้งเดียวจะให้สิทธิ์เข้าถึงได้นานสูงสุด 30 วัน |
-| **URL ภายนอก** | ข้อมูลสาธารณะหรือข้อมูลในที่เก็บข้อมูลบนระบบคลาวด์ (AWS, Azure, GCS) โดยไม่ต้องอัปโหลดซ้ำ | 100 MB ต่อคำขอ/เพย์โหลด | ไม่มี (ดึงข้อมูลต่อคำขอ) |
+| **Satır içi veriler** | Hızlı test, küçük dosyalar, gerçek zamanlı uygulamalar. | İstek veya yük başına 100 MB   (**PDF'ler için 50 MB**) | Yok (her istekle birlikte gönderilir) |
+| **File API upload** | Büyük dosyalar, birden çok kez kullanılan dosyalar | Dosya başına 2 GB,   proje başına en fazla 20 GB | 48 Hours |
+| **File API GCS URI kaydı** | Google Cloud Storage'da bulunan büyük dosyalar, birden çok kez kullanılan dosyalar. | Dosya başına 2 GB, genel depolama alanı sınırı yoktur. | Yok (istek başına getirilir). Tek seferlik kayıt, 30 güne kadar erişim sağlayabilir. |
+| **Harici URL'ler** | Herkese açık veriler veya bulut paketlerindeki (AWS, Azure, GCS) veriler yeniden yüklenmeden. | İstek/yük başına 100 MB | Yok (istek başına getirilir) |
 
-## ข้อมูลแบบอินไลน์
+## Satır içi veriler
 
-สำหรับไฟล์ขนาดเล็ก (ไม่เกิน 100 MB หรือ 50 MB สำหรับ PDF) คุณสามารถส่งข้อมูล
-ในเพย์โหลดคำขอได้โดยตรง นี่เป็นวิธีที่ง่ายที่สุดสำหรับการทดสอบอย่างรวดเร็วหรือแอปพลิเคชันที่จัดการข้อมูลแบบเรียลไทม์และข้อมูลชั่วคราว คุณระบุข้อมูลเป็นสตริงที่เข้ารหัส Base64 หรือโดยการอ่านไฟล์ในเครื่องโดยตรงก็ได้
+Daha küçük dosyalar (100 MB'tan küçük veya PDF'ler için 50 MB'tan küçük) için verileri doğrudan istek yükünde iletebilirsiniz. Bu, hızlı testler veya gerçek zamanlı, geçici verileri işleyen uygulamalar için en basit yöntemdir. Verileri base64 olarak kodlanmış dizeler şeklinde veya doğrudan yerel dosyaları okuyarak sağlayabilirsiniz.
 
-ดูตัวอย่างการอ่านจากไฟล์ในเครื่องได้ที่ตัวอย่างที่ส่วนต้นของ
-หน้านี้
+Yerel bir dosyadan okuma örneği için bu sayfanın başındaki örneğe bakın.
 
-### ดึงข้อมูลจาก URL
+### URL'den getirme
 
-นอกจากนี้ คุณยังดึงข้อมูลไฟล์จาก URL แปลงเป็นไบต์ และรวมไว้ใน
-อินพุตได้ด้วย
+Ayrıca bir URL'den dosya getirebilir, bunu baytlara dönüştürebilir ve girişe ekleyebilirsiniz.
 
 ### Python
 
@@ -438,13 +430,11 @@ jq ".outputs[] | select(.type == \"text\") | .text" response.json
 
 ## Gemini File API
 
-File API ออกแบบมาสำหรับไฟล์ขนาดใหญ่ (สูงสุด 2 GB) หรือไฟล์ที่คุณต้องการ
-ใช้ในคำขอหลายรายการ
+File API, daha büyük dosyalar (2 GB'a kadar) veya birden fazla istekte kullanmayı planladığınız dosyalar için tasarlanmıştır.
 
-### การอัปโหลดไฟล์แบบมาตรฐาน
+### Standart dosya yükleme
 
-อัปโหลดไฟล์ในเครื่องไปยัง Gemini API ไฟล์ที่อัปโหลดด้วยวิธีนี้จะได้รับการจัดเก็บ
-ชั่วคราว (48 ชั่วโมง) และประมวลผลเพื่อให้โมเดลเรียกข้อมูลได้อย่างมีประสิทธิภาพ
+Gemini API'ye yerel bir dosya yükleyin. Bu şekilde yüklenen dosyalar geçici olarak (48 saat) depolanır ve model tarafından verimli bir şekilde alınmak üzere işlenir.
 
 ### Python
 
@@ -642,51 +632,44 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### ลงทะเบียนไฟล์ Google Cloud Storage
+### Google Cloud Storage dosyalarını kaydetme
 
-หากข้อมูลอยู่ใน Google Cloud Storage อยู่แล้ว คุณไม่จำเป็นต้องดาวน์โหลดและอัปโหลดอีกครั้ง คุณลงทะเบียนได้โดยตรงด้วย File API
+Verileriniz zaten Google Cloud Storage'da bulunuyorsa bunları indirip yeniden yüklemeniz gerekmez. Bunu doğrudan File API ile kaydedebilirsiniz.
 
-1. ให้สิทธิ์เข้าถึงแต่ละถังแก่ **Service Agent**
+1. Her pakete **hizmet aracısı** erişimi verin.
 
-   1. เปิดใช้ Gemini API ในโปรเจ็กต์ที่อยู่ในระบบคลาวด์ของ Google
-   2. สร้าง Service Agent โดยทำดังนี้
+   1. Google Cloud projenizde Gemini API'yi etkinleştirin.
+   2. Hizmet aracısını oluşturun:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **ให้สิทธิ์ Agent บริการ Gemini API** ในการอ่านที่เก็บข้อมูล
-      Bucket
+   3. Depolama paketlerinizi okumak için **Gemini API hizmet aracısına izin verin**.
 
-      ผู้ใช้ต้องมอบหมาย`Storage Object Viewer`
-      [บทบาท IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=th#storage.objectViewer)
-      ให้กับตัวแทนบริการนี้ในที่เก็บข้อมูลที่ต้องการใช้
+      Kullanıcının, kullanmayı planladığı belirli depolama paketlerinde bu hizmet aracısına `Storage Object Viewer`
+      [IAM rolü](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=tr#storage.objectViewer)
+      atması gerekir.
 
-   โดยค่าเริ่มต้นแล้ว สิทธิ์เข้าถึงนี้จะไม่มีวันหมดอายุ แต่คุณสามารถเปลี่ยนแปลงได้ทุกเมื่อ คุณยังใช้คำสั่ง [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=th)
-   เพื่อให้สิทธิ์ได้ด้วย
-2. ตรวจสอบสิทธิ์บริการ
+   Bu erişim varsayılan olarak sona ermez ancak istediğiniz zaman değiştirilebilir. İzin vermek için [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=tr) komutlarını da kullanabilirsiniz.
+2. Hizmetinizin kimliğini doğrulama
 
-   **ข้อกำหนดเบื้องต้น**
+   **Ön koşullar**
 
-   - เปิดใช้ API
-   - สร้างบัญชีบริการหรือตัวแทนที่มีสิทธิ์ที่เหมาะสม
+   - API'yi Etkinleştir
+   - Uygun izinlere sahip bir hizmet hesabı veya aracı oluşturun.
 
-   ก่อนอื่นคุณต้องตรวจสอบสิทธิ์ในฐานะบริการที่มีสิทธิ์เข้าถึง Storage Object Viewer
-   ซึ่งวิธีการนี้จะขึ้นอยู่กับสภาพแวดล้อมที่โค้ดการจัดการไฟล์จะทำงาน
+   Öncelikle, depolama nesnesi görüntüleyici izinlerine sahip hizmet olarak kimliğinizi doğrulamanız gerekir. Bu işlemin nasıl gerçekleşeceği, dosya yönetimi kodunuzun çalışacağı ortama bağlıdır.
 
-   **ภายนอก Google Cloud**
+   **Google Cloud dışında**
 
-   หากโค้ดของคุณทำงานจากภายนอก Google Cloud เช่น เดสก์ท็อป
-   ให้ดาวน์โหลดข้อมูลเข้าสู่ระบบของบัญชีจากคอนโซล Google Cloud โดยทำตาม
-   ขั้นตอนต่อไปนี้
+   Kodunuz Google Cloud'un dışından (ör. masaüstünüzden) çalıştırılıyorsa aşağıdaki adımları uygulayarak hesap kimlik bilgilerini Google Cloud Console'dan indirin:
 
-   1. ไปที่[คอนโซลบัญชีบริการ](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=th)
-   2. เลือกบัญชีบริการที่เกี่ยวข้อง
-   3. เลือกแท็บ**คีย์** แล้วเลือก**เพิ่มคีย์ สร้างคีย์ใหม่**
-   4. เลือกประเภทคีย์ **JSON** และจดบันทึกตำแหน่งที่ดาวน์โหลดไฟล์ในเครื่อง
+   1. [Hizmet hesabı konsoluna](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=tr) gidin.
+   2. İlgili hizmet hesabını seçin.
+   3. **Anahtarlar** sekmesini seçin ve **Anahtar ekle, Yeni anahtar oluştur**'u seçin.
+   4. **JSON** anahtar türünü seçin ve dosyanın makinenizde nereye indirildiğini not edin.
 
-   ดูรายละเอียดเพิ่มเติมได้ในเอกสารประกอบอย่างเป็นทางการของ Google Cloud เกี่ยวกับ
-   [การจัดการคีย์บัญชีบริการ](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=th)
+   Daha fazla bilgi için [hizmet hesabı anahtarı yönetimi](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=tr) ile ilgili resmi Google Cloud belgelerine bakın.
 
-   จากนั้นใช้คำสั่งต่อไปนี้เพื่อตรวจสอบสิทธิ์ คำสั่งเหล่านี้ถือว่าไฟล์บัญชีบริการของคุณอยู่ในไดเรกทอรีปัจจุบันและมีชื่อว่า
-   `service-account.json`
+   Ardından, kimlik doğrulaması yapmak için aşağıdaki komutları kullanın. Bu komutlar, hizmet hesabı dosyanızın geçerli dizinde olduğunu ve `service-account.json` olarak adlandırıldığını varsayar.
 
    ### Python
 
@@ -724,7 +707,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    });
    ```
 
-   ### CLI
+   ### KSA
 
    ```
    gcloud auth application-default login \
@@ -732,15 +715,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **ใน Google Cloud**
+   **Google Cloud'da**
 
-   หากคุณเรียกใช้ใน Google Cloud โดยตรง เช่น ใช้[ฟังก์ชัน Cloud Run](https://cloud.google.com/functions?hl=th) หรือ[อินสแตนซ์ Compute Engine](https://cloud.google.com/products/compute?hl=th) คุณจะมีข้อมูลเข้าสู่ระบบโดยนัย แต่จะต้องตรวจสอบสิทธิ์อีกครั้งเพื่อให้ขอบเขตที่เหมาะสม
+   Doğrudan Google Cloud'da çalışıyorsanız (ör. [Cloud Run işlevlerini](https://cloud.google.com/functions?hl=tr) veya [Compute Engine örneğini](https://cloud.google.com/products/compute?hl=tr) kullanarak) örtülü kimlik bilgileriniz olur ancak uygun kapsamları vermek için yeniden kimlik doğrulamanız gerekir.
 
    ### Python
 
-   โค้ดนี้คาดหวังว่าบริการจะทำงานในสภาพแวดล้อมที่สามารถรับ
-   [ข้อมูลรับรองเริ่มต้นของแอปพลิเคชัน](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=th)
-   ได้โดยอัตโนมัติ เช่น Cloud Run หรือ Compute Engine
+   Bu kod, hizmetin Cloud Run veya Compute Engine gibi [Uygulama Varsayılan Kimlik Bilgileri](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=tr)'nın otomatik olarak alınabileceği bir ortamda çalıştırılmasını bekler.
 
    ```
    import google.auth
@@ -755,9 +736,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
    ### JavaScript
 
-   โค้ดนี้คาดหวังว่าบริการจะทำงานในสภาพแวดล้อมที่สามารถรับ
-   [ข้อมูลรับรองเริ่มต้นของแอปพลิเคชัน](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=th)
-   ได้โดยอัตโนมัติ เช่น Cloud Run หรือ Compute Engine
+   Bu kod, hizmetin Cloud Run veya Compute Engine gibi [Uygulama Varsayılan Kimlik Bilgileri](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=tr)'nın otomatik olarak alınabileceği bir ortamda çalıştırılmasını bekler.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -810,17 +789,18 @@ func main() {
 }
 ```
 
-### CLI
+### KSA
 
-นี่คือคำสั่งแบบอินเทอร์แอกทีฟ สำหรับบริการอย่าง Compute Engine คุณสามารถแนบขอบเขตกับบริการที่กำลังทำงานที่ระดับการกำหนดค่าได้ ดูตัวอย่างได้ที่[เอกสารประกอบเกี่ยวกับบริการที่ผู้ใช้จัดการ](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=th#using)
+Bu, etkileşimli bir komuttur. Compute Engine gibi hizmetler için yapılandırma düzeyinde çalışan hizmete kapsamlar ekleyebilirsiniz. Örnek için [kullanıcı tarafından yönetilen hizmet belgelerine](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=tr#using)
+göz atın.
 
 ```
 gcloud auth application-default login \
 --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
 ```
 
-1. การลงทะเบียนไฟล์ (Files API)
-   ใช้ Files API เพื่อลงทะเบียนไฟล์และสร้างเส้นทาง Files API ที่ใช้ใน Gemini API ได้โดยตรง
+1. Dosya kaydı (Files API)
+   Dosyaları kaydetmek ve Gemini API'de doğrudan kullanılabilecek bir Files API yolu oluşturmak için Files API'yi kullanın.
 
    ### Python
 
@@ -1001,7 +981,7 @@ func main() {
 }
 ```
 
-### CLI
+### KSA
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -1013,10 +993,10 @@ curl -X POST https://generativelanguage.googleapis.com/v1beta/files:register \
     -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
 ```
 
-## HTTP ภายนอก / URL ที่ลงนาม
+## Harici HTTP / İmzalı URL'ler
 
-คุณส่ง URL HTTPS ที่เข้าถึงได้แบบสาธารณะหรือ URL ที่ลงนามล่วงหน้าได้โดยตรงในคำขอ Gemini API จะดึงข้อมูลเนื้อหาอย่างปลอดภัยในระหว่างการประมวลผล
-วิธีนี้เหมาะสำหรับไฟล์ขนาดไม่เกิน 100 MB ที่คุณไม่ต้องการอัปโหลดซ้ำ
+Herkese açık HTTPS URL'lerini veya önceden imzalanmış URL'leri doğrudan isteğinize iletebilirsiniz. Gemini API, işleme sırasında içeriği güvenli bir şekilde getirir.
+Bu özellik, yeniden yüklemek istemediğiniz 100 MB'a kadar olan dosyalar için idealdir.
 
 ### Python
 
@@ -1081,24 +1061,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### การช่วยเหลือพิเศษ
+### Erişilebilirlik
 
-ตรวจสอบว่า URL ที่คุณระบุไม่ได้นำไปยังหน้าที่ต้องมีการเข้าสู่ระบบหรือ
-อยู่หลังเพย์วอลล์ สำหรับฐานข้อมูลส่วนตัว โปรดตรวจสอบว่าคุณสร้าง URL ที่ลงชื่อแล้ว
-พร้อมสิทธิ์การเข้าถึงและวันหมดอายุที่ถูกต้อง
+Sağladığınız URL'lerin, giriş gerektiren veya ödeme duvarının arkasında olan sayfalara yönlendirmediğini doğrulayın. Özel veritabanları için doğru erişim izinleri ve geçerlilik süresiyle imzalı bir URL oluşturduğunuzdan emin olun.
 
-### การตรวจสอบความปลอดภัย
+### Güvenlik kontrolleri
 
-ระบบจะตรวจสอบการกลั่นกรองเนื้อหาใน URL เพื่อยืนยันว่า URL เป็นไปตาม
-มาตรฐานด้านความปลอดภัยและนโยบาย หาก URL ไม่ผ่านการตรวจสอบนี้ คุณจะได้รับ
-`url_retrieval_status`ของ `URL_RETRIEVAL_STATUS_UNSAFE`
+Sistem, URL'lerin güvenlik ve politika standartlarını karşıladığını doğrulamak için içerik denetimi yapar. URL bu kontrolü geçemezse `url_retrieval_status` `URL_RETRIEVAL_STATUS_UNSAFE` alırsınız.
 
-### ประเภทเนื้อหาที่รองรับ
+### Desteklenen içerik türleri
 
-รายการประเภทไฟล์ที่รองรับและข้อจำกัดนี้มีไว้เพื่อเป็นคำแนะนำเบื้องต้นและไม่ได้ครอบคลุมข้อมูลทั้งหมด ชุดประเภทที่รองรับที่มีผลอาจมีการเปลี่ยนแปลงและอาจแตกต่างกันไปตามโมเดลและเวอร์ชันโทเค็นไนเซอร์ที่เฉพาะเจาะจงที่ใช้งานอยู่ ประเภทที่ไม่รองรับจะทำให้เกิดข้อผิดพลาด
-นอกจากนี้ การดึงข้อมูลเนื้อหาสำหรับไฟล์ประเภทเหล่านี้จะรองรับเฉพาะ URL ที่เข้าถึงได้แบบสาธารณะเท่านั้น
+Desteklenen dosya türleri ve sınırlamalarla ilgili bu liste, başlangıçta yol göstermek amacıyla hazırlanmıştır ve kapsamlı değildir. Desteklenen türlerin etkili kümesi değişebilir ve kullanılan modele ve belirteç ayrıştırıcı sürümüne göre farklılık gösterebilir. Desteklenmeyen türler hataya neden olur.
+Ayrıca, bu dosya türleri için içerik alma işlemi yalnızca herkese açık URL'leri destekler.
 
-#### ประเภทไฟล์ข้อความ
+#### Metin dosyası türleri
 
 - `text/html`
 - `text/css`
@@ -1108,19 +1084,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/rtf`
 - `text/javascript`
 
-#### ประเภทไฟล์แอปพลิเคชัน
+#### Uygulama dosyası türleri
 
 - `application/json`
 - `application/pdf`
 
-#### ไฟล์ประเภทรูปภาพ
+#### Resim dosyası türleri
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### ไฟล์ประเภทวิดีโอ
+#### Video dosyası türleri
 
 - `video/mp4`
 - `video/mpeg`
@@ -1132,34 +1108,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `video/wmv`
 - `video/3gpp`
 
-## แนวทางปฏิบัติแนะนำ
+## En iyi uygulamalar
 
-- **เลือกวิธีที่เหมาะสม:** ใช้ข้อมูลแบบอินไลน์สำหรับไฟล์ขนาดเล็กที่ใช้ชั่วคราว
-  ใช้ File API สำหรับไฟล์ที่มีขนาดใหญ่หรือใช้บ่อย ใช้ URL ภายนอก
-  สำหรับข้อมูลที่โฮสต์ออนไลน์อยู่แล้ว
-- **ระบุประเภท MIME:** ระบุประเภท MIME ที่ถูกต้องสำหรับข้อมูลไฟล์เสมอเพื่อให้ประมวลผลได้อย่างเหมาะสม
-- **จัดการข้อผิดพลาด:** ใช้การจัดการข้อผิดพลาดในโค้ดเพื่อจัดการ
-  ปัญหาที่อาจเกิดขึ้น เช่น เครือข่ายล่ม ปัญหาการเข้าถึงไฟล์ หรือข้อผิดพลาดของ API
+- **Doğru yöntemi seçin:** Küçük ve geçici dosyalar için satır içi verileri kullanın.
+  Daha büyük veya sık kullanılan dosyalar için File API'yi kullanın. Hâlihazırda internette barındırılan veriler için harici URL'leri kullanın.
+- **MIME türlerini belirtin:** Doğru işleme için dosya verilerinin her zaman doğru MIME türünü sağlayın.
+- **Hataları Yönetme:** Ağ hataları, dosya erişimi sorunları veya API hataları gibi olası sorunları yönetmek için kodunuzda hata yönetimini uygulayın.
 
-## ข้อจำกัด
+## Sınırlamalar
 
-- ขีดจำกัดขนาดไฟล์จะแตกต่างกันไปตามวิธีการ (ดู[ตารางเปรียบเทียบ](#method-comparison))
-  และประเภทไฟล์
-- ข้อมูลแบบอินไลน์จะเพิ่มขนาดเพย์โหลดของคำขอ
-- การอัปโหลด File API เป็นแบบชั่วคราวและจะหมดอายุหลังจาก 48 ชั่วโมง
-- การดึงข้อมูล URL ภายนอกจำกัดไว้ที่ 100 MB ต่อเพย์โหลด และรองรับเนื้อหาบางประเภท
+- Dosya boyutu sınırları, yönteme ([karşılaştırma tablosuna](#method-comparison) bakın) ve dosya türüne göre değişir.
+- Satır içi veriler, istek yükü boyutunu artırır.
+- File API yüklemeleri geçicidir ve 48 saat sonra sona erer.
+- Harici URL getirme, yük başına 100 MB ile sınırlıdır ve belirli içerik türlerini destekler.
 
-## ขั้นตอนถัดไป
+## Sırada ne var?
 
-- ลองเขียนพรอมต์มัลติโมดัลของคุณเองโดยใช้ [Google AI Studio](http://aistudio.google.com/?hl=th)
-- ดูข้อมูลเกี่ยวกับการรวมไฟล์ไว้ในพรอมต์ได้ในคำแนะนำเกี่ยวกับ[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=th), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ[การประมวลผลเอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)
+- [Google AI Studio](http://aistudio.google.com/?hl=tr)'yu kullanarak kendi çok formatlı istemlerinizi yazmayı deneyin.
+- İstemlerinize dosya ekleme hakkında bilgi edinmek için [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=tr), [Ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [Belge işleme](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) rehberlerine göz atın.
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+Son güncelleme tarihi: 2026-09-24 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]

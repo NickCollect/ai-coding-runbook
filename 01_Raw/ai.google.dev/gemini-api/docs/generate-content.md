@@ -1,23 +1,23 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=tr
-fetched_at: 2026-09-28T06:16:43.233645+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-CN
+fetched_at: 2026-10-05T06:39:40.698742+00:00
 title: "Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
 
 # Gemini API
 
-Gemini API; Gemini, Veo ve Nano Banana gibi araçlarla istemden üretime en hızlı geçişi sağlar. Bu üretken modelleri uygulamalarınıza entegre ederek metin ve resim oluşturabilir, çok formatlı girişleri analiz edebilir ve sohbet aracısı oluşturabilirsiniz.
+借助 Gemini API，您可以快速将提示词转化为生产部署，并使用 Gemini、Veo、Nano Banana 等功能。借助该 SDK，您可以将这些生成式模型集成到应用中，以生成文本和图片、分析多模态输入内容，以及构建对话式代理。
 
 ### Python
 
@@ -145,128 +145,128 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-[Oluşturmaya başlama](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+[开始构建](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
 
 ---
 
-## Modellerle tanışın
+## 认识模型
 
-[Tümünü görüntüleyin](https://ai.google.dev/gemini-api/docs/models?hl=tr)
+[查看全部](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)
 
 [auto\_awesome
 Gemini 3.1 Pro
-Yeni
+新
 
-En akıllı modelimiz, en son teknoloji ürünü akıl yürütme üzerine inşa edilmiş olup çok formatlı anlama konusunda dünyanın en iyisidir.](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr)
+Google 最智能的模型，也是全球领先的多模态理解能力模型，建立在前沿推理技术基础上。](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn)
 [spark
 Gemini 3.6 Flash
-Yeni
+新
 
-Ajan ve çok formatlı görevlerde yüksek performans sunmak için hız ile zekayı dengeleyen en yeni modelimiz.](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=tr)
+Google 推出的最新模型，在速度和智能性之间实现了平衡，可在智能体任务和多模态任务中提供出色的性能。](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn)
 [spark
 Gemini 3.5 Flash
 
-Maliyetinin çok daha düşük olmasına rağmen daha büyük modellerle yarışan Frontier sınıfı performans.](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=tr)
+以远低于大型模型的成本，实现可与 Frontier 级模型相媲美的性能。](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn)
 [graphic\_eq
 Gemini 3.8 Flash TTS
-Yeni
+新
 
-İfade dolu oyunculuk, özel ses tasarımı ve ses kopyalama özelliklerine sahip, stüdyo kalitesinde metin okuma modeli.](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr)
+具有表现力强的表演、自定义语音设计和语音复刻功能的录音室级文字转语音模型。](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=zh-cn)
 [spark
 Gemini 3.5 Flash-Lite
-Yeni
+新
 
-Yüksek hacimli, maliyet açısından hassas ve düşük gecikmeli yüksek gönderim hacmiyle alt aracı görevleri için optimize edilmiş model.](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr)
+经济高效的模型，专为大体量、成本敏感的子智能体任务而设计，并针对低延迟高吞吐量进行了优化。](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn)
 [spark
 Gemini 3.1 Flash-Lite
 
-Gemini 3 serisinin performans ve kalitesine sahip, yüksek hacimli ve maliyete duyarlı model.](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr)
+这款模型具有 Gemini 3 系列的性能和质量，可处理大体量的成本敏感型流量。](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn)
 [spark
 Gemini 3 Flash
 
-Maliyetinin çok daha düşük olmasına rağmen daha büyük modellerle yarışan Frontier sınıfı performans.](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=tr)
+以远低于大型模型的成本，实现可与 Frontier 级模型相媲美的性能。](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn)
 [🍌
-Nano Banana 2 ve Nano Banana Pro
+Nano Banana 2 和 Nano Banana Pro
 
-En gelişmiş görüntü üretme ve düzenleme modelleri](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)
+前沿的图片生成和编辑模型。](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)
 [video\_library
 Veo 3.1
 
-Doğal ses özelliğine sahip, son teknolojiyle geliştirilen video üretme modelimiz.](https://ai.google.dev/gemini-api/docs/video?hl=tr)
+我们前沿的视频生成模型，支持原生音频。](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)
 [spark
 Gemini Robotics
 
-Gemini'ın ajan tabanlı yeteneklerini robotik alana taşıyan ve fiziksel dünyada gelişmiş akıl yürütme imkanı sunan bir görsel-dil modeli (VLM).](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr)
+一种视觉-语言模型 (VLM)，可将 Gemini 的智能体功能引入机器人技术，并支持在物理世界中进行高级推理。](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn)
 
-## Özellikleri keşfedin
+## 探索功能
 
 [imagesmode
 
-Yerel görüntü üretme (Nano Banana)
+原生图片生成 (Nano Banana)
 
-Gemini 2.5 Flash Image ile bağlamı yüksek görselleri doğrudan oluşturup düzenleyin.](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)
+使用 Gemini 2.5 Flash Image 原生生成和编辑高度情境化的图片。](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)
 [article
 
-Uzun Bağlam
+长上下文
 
-Gemini modellerine milyonlarca jeton girin ve yapılandırılmamış resimler, videolar ve dokümanlardan bilgi edinin.](https://ai.google.dev/gemini-api/docs/long-context?hl=tr)
+向 Gemini 模型输入数百万个 token，并从非结构化的图片、视频和文档中获取理解。](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-cn)
 [code
 
-Yapılandırılmış Çıkışlar
+结构化输出
 
-Gemini'ın, otomatik işleme için uygun bir yapılandırılmış veri biçimi olan JSON ile yanıt vermesini sağlayın.](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)
+限制 Gemini 以 JSON（一种适合自动处理的结构化数据格式）进行回答。](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)
 [functions
 
-İşlev Çağrısı
+函数调用
 
-Gemini'ı harici API'lere ve araçlara bağlayarak ajans iş akışları oluşturun.](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)
+通过将 Gemini 连接到外部 API 和工具来构建智能体工作流。](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)
 [videocam
 
-Veo 3.1 ile video üretimi
+使用 Veo 3.1 生成视频
 
-Son teknolojiyle geliştirilen modelimizle metin veya görüntü istemlerinden yüksek kaliteli video içerikleri oluşturun.](https://ai.google.dev/gemini-api/docs/video?hl=tr)
+借助我们前沿的模型，根据文本或图片提示创作高品质视频内容。](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)
 [android\_recorder
 
-Live API ile Sesli Ajanlar
+使用 Live API 的语音代理
 
-Live API ile anında ses uygulamaları ve aracıları oluşturun.](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)
+使用 Live API 构建实时语音应用和代理。](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)
 [build
 
-Araçlar
+工具
 
-Google Arama, URL Bağlamı, Google Haritalar, Kod Yürütme ve Bilgisayar Kullanımı gibi yerleşik araçlar aracılığıyla Gemini'ı dünyaya bağlayın.](https://ai.google.dev/gemini-api/docs/tools?hl=tr)
+通过 Google 搜索、网址上下文、Google 地图、代码执行和计算机使用等内置工具，将 Gemini 与世界相连。](https://ai.google.dev/gemini-api/docs/tools?hl=zh-cn)
 [stacks
 
-Belge Anlama
+文档理解
 
-Tam çok formatlı anlayışla veya diğer metin tabanlı dosya türleriyle 1.000 sayfaya kadar PDF dosyası işleyin.](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr)
+处理最多 1,000 页的 PDF 文件（支持完整的多模态理解能力）或其他基于文本的文件类型。](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)
 [cognition\_2
 
-Düşünen
+思考
 
-Düşünme yeteneklerinin, karmaşık görevler ve ajanlar için akıl yürütmeyi nasıl iyileştirdiğini keşfedin.](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)
+了解思维能力如何改进复杂任务和代理的推理能力。](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)
 
 [Google AI Studio
 
-İstemleri test edin, API anahtarlarınızı yönetin, kullanımı izleyin ve prototipler oluşturun.](https://aistudio.google.com?hl=tr)
+测试提示、管理 API 密钥、监控用量和构建原型。](https://aistudio.google.com?hl=zh-cn)
 [group
 
-Geliştirici Topluluğu
+开发者社区
 
-Diğer geliştiricilere ve Google mühendislerine soru sorarak çözümler bulabilirsiniz.](https://discuss.ai.google.dev/c/gemini-api/4?hl=tr)
+向其他开发者和 Google 工程师提问并寻求解决方案。](https://discuss.ai.google.dev/c/gemini-api/4?hl=zh-cn)
 [menu\_book
 
-API Referansı
+API 参考文档
 
-Gemini API hakkında ayrıntılı bilgiyi resmi referans belgelerinde bulabilirsiniz.](https://ai.google.dev/api?hl=tr)
+如需详细了解 Gemini API，请参阅官方参考文档。](https://ai.google.dev/api?hl=zh-cn)
 [sensors
 
-Durum
+状态
 
-Gemini API, Google AI Studio ve model hizmetlerimizin durumunu kontrol edin.](https://aistudio.google.com/status?hl=tr)
+查看 Gemini API、Google AI Studio 和我们的模型服务的状态。](https://aistudio.google.com/status?hl=zh-cn)
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Son güncelleme tarihi: 2026-09-24 UTC.
+最后更新时间 (UTC)：2026-09-24。
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

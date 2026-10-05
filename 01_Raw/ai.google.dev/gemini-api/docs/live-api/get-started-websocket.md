@@ -1,69 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=de
-fetched_at: 2026-09-28T06:24:55.005234+00:00
-title: "Erste Schritte mit der Gemini Live API \u00fcber WebSockets \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=ko
+fetched_at: 2026-10-05T06:27:41.157827+00:00
+title: "WebSocket\uc744 \uc0ac\uc6a9\ud558\uc5ec Gemini Live API \uc2dc\uc791\ud558\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Feedback geben
+의견 보내기
 
-# Erste Schritte mit der Gemini Live API über WebSockets
+# WebSocket을 사용하여 Gemini Live API 시작하기
 
-Die Gemini Live API ermöglicht die bidirektionale Interaktion mit Gemini-Modellen in Echtzeit und unterstützt Audio-, Video- und Texteingaben sowie native Audioausgaben. In dieser Anleitung wird beschrieben, wie Sie die API direkt mit WebSockets verwenden.
+Gemini Live API를 사용하면 Gemini 모델과 실시간 양방향 상호작용이 가능하며 오디오, 동영상, 텍스트 입력과 기본 오디오 출력을 지원합니다. 이 가이드에서는 원시 WebSocket을 사용하여 API와 직접 통합하는 방법을 설명합니다.
 
-[Live API in Google AI Studio ausprobierenmic](https://aistudio.google.com/live?hl=de)
-[Beispiel-App von GitHub klonencode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-ephemeral-tokens-websocket)
-[Code-Agent-Skills verwendenterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=de)
+[Google AI Studio에서 Live API 사용해 보기mic](https://aistudio.google.com/live?hl=ko)
+[GitHub에서 샘플 앱 클론하기code](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-ephemeral-tokens-websocket)
+[코딩 에이전트 기술 사용하기terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ko)
 
-## Übersicht
+## 개요
 
-Die Gemini Live API verwendet WebSockets für die Echtzeitkommunikation. Im Gegensatz zur Verwendung eines SDK müssen Sie bei diesem Ansatz die WebSocket-Verbindung direkt verwalten und Nachrichten in einem bestimmten JSON-Format senden und empfangen, das von der API definiert wird.
+Gemini Live API는 실시간 통신에 WebSocket을 사용합니다. SDK를 사용하는 것과 달리 이 접근 방식은 WebSocket 연결을 직접 관리하고 API에서 정의한 특정 JSON 형식으로 메시지를 주고받는 것과 관련이 있습니다.
 
-Wichtige Konzepte:
+주요 개념
 
-- **WebSocket-Endpunkt**: Die spezifische URL, mit der eine Verbindung hergestellt werden soll.
-- **Nachrichtenformat**: Die gesamte Kommunikation erfolgt über JSON-Nachrichten, die den Strukturen [`BidiGenerateContentClientMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentclientmessage) und [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservermessage) entsprechen.
-- **Sitzungsverwaltung**: Sie sind für die Aufrechterhaltung der WebSocket-Verbindung verantwortlich.
+- **WebSocket 엔드포인트**: 연결할 특정 URL입니다.
+- **메시지 형식**: 모든 통신은 [`BidiGenerateContentClientMessage`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentclientmessage) 및 [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentservermessage) 구조를 준수하는 JSON 메시지를 통해 이루어집니다.
+- **세션 관리**: WebSocket 연결을 유지하는 것은 사용자의 책임입니다.
 
-## Authentifizierung
+## 인증
 
-Die Authentifizierung erfolgt durch Einbeziehung Ihres API-Schlüssels als Abfrageparameter in die WebSocket-URL.
+인증은 API 키를 WebSocket URL의 쿼리 매개변수로 포함하여 처리됩니다.
 
-Das Endpunktformat ist:
+엔드포인트 형식은 다음과 같습니다.
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=YOUR_API_KEY
 ```
 
-Ersetzen Sie `YOUR_API_KEY` durch Ihren tatsächlichen API-Schlüssel.
+`YOUR_API_KEY`를 실제 API 키로 바꿉니다.
 
-## Authentifizierung mit kurzlebigen Tokens
+## 단기 토큰으로 인증
 
-Wenn Sie [kurzlebige Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=de) verwenden, müssen Sie eine Verbindung zum `v1beta` Endpunkt herstellen.
-Das kurzlebige Token muss als Abfrageparameter `access_token` übergeben werden.
+단기 토큰을 사용하는 경우 [ephemeral tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ko) `v1beta` 엔드포인트에 연결해야 합니다.
+단기 토큰은 `access_token` 쿼리 매개변수로 전달되어야 합니다.
 
-Das Endpunktformat für kurzlebige Schlüssel ist:
+단기 키의 엔드포인트 형식은 다음과 같습니다.
 
 ```
 wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContentConstrained?access_token={short-lived-token}
 ```
 
-Ersetzen Sie `{short-lived-token}` durch das tatsächliche kurzlebige Token.
+`{short-lived-token}`을 실제 단기 토큰으로 바꿉니다.
 
-## Verbindung zur Live API herstellen
+## Live API에 연결
 
-Um eine Live-Sitzung zu starten, stellen Sie eine WebSocket-Verbindung zum authentifizierten Endpunkt her.
-Die erste Nachricht, die über den WebSocket gesendet wird, muss eine [`BidiGenerateContentSetup`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentsetup)-Nachricht mit der `config` sein.
-Die vollständigen Konfigurationsoptionen finden Sie in der API-Referenz zur [Live API – WebSockets](https://ai.google.dev/api/live?hl=de).
+실시간 세션을 시작하려면 인증된 엔드포인트에 WebSocket 연결을 설정합니다.
+WebSocket을 통해 전송되는 첫 번째 메시지는 [`BidiGenerateContentSetup`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentsetup)가 포함된 `config`이어야 합니다.
+전체 구성 옵션은 [Live API - WebSocket API 참조](https://ai.google.dev/api/live?hl=ko)를 확인하세요.
 
 ### Python
 
@@ -144,9 +144,9 @@ websocket.onclose = () => {
 };
 ```
 
-## Nachricht senden
+## 텍스트 전송
 
-Um eine Texteingabe zu senden, erstellen Sie eine [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentrealtimeinput)-Nachricht mit dem Feld `text`.
+텍스트 입력을 전송하려면 [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentrealtimeinput) 메시지를 `text` 필드로 구성합니다.
 
 ### Python
 
@@ -185,9 +185,9 @@ function sendTextMessage(text) {
 sendTextMessage("Hello, how are you?");
 ```
 
-## Audiotrack senden
+## 오디오 전송
 
-Audio muss als unformatierte PCM-Daten gesendet werden (unformatiertes 16-Bit-PCM-Audio, 16 kHz, Little Endian). Erstellen Sie eine [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentrealtimeinput)-Nachricht mit den Audiodaten. Der `mimeType` ist entscheidend.
+오디오는 원시 PCM 데이터 (원시 16비트 PCM 오디오, 16kHz, 리틀 엔디안)로 전송되어야 합니다. 오디오 데이터로 [`BidiGenerateContentRealtimeInput`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentrealtimeinput) 메시지를 구성합니다. `mimeType`이 중요합니다.
 
 ### Python
 
@@ -232,11 +232,12 @@ function sendAudioChunk(chunk) {
 // Example usage: sendAudioChunk(audioBuffer);
 ```
 
-Ein Beispiel dafür, wie Sie Audio vom Clientgerät (z.B. dem Browser) abrufen, finden Sie im End-to-End-Beispiel auf [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L38-L74).
+클라이언트 기기 (예: 브라우저)에서 오디오를 가져오는 방법의 예시는
+[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L38-L74)의 포괄적인 예시를 참조하세요.
 
-## Video senden
+## 동영상 전송
 
-Videoframes werden als einzelne Bilder gesendet (z.B. JPEG oder PNG). Ähnlich wie bei Audio verwenden Sie `realtimeInput` mit einem `Blob` und geben den richtigen `mimeType` an.
+동영상 프레임은 개별 이미지 (예: JPEG 또는 PNG)로 전송됩니다. 오디오와 마찬가지로 올바른 `mimeType`을 지정하여 `Blob`과 함께 `realtimeInput`을 사용합니다.
 
 ### Python
 
@@ -281,11 +282,12 @@ function sendVideoFrame(frame, mimeType = 'image/jpeg') {
 // Example usage: sendVideoFrame(jpegBuffer);
 ```
 
-Ein Beispiel dafür, wie Sie Video vom Clientgerät (z.B. dem Browser) abrufen, finden Sie im End-to-End-Beispiel auf [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L185-L222).
+클라이언트 기기 (예: 브라우저)에서 동영상을 가져오는 방법의 예시는
+[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/mediaUtils.js#L185-L222)의 포괄적인 예시를 참조하세요.
 
-## Antworten erhalten
+## 응답 수신
 
-Der WebSocket sendet [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservermessage)-Nachrichten zurück. Sie müssen diese JSON-Nachrichten parsen und verschiedene Arten von Inhalten verarbeiten.
+WebSocket은 [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentservermessage) 메시지를 다시 전송합니다. 이러한 JSON 메시지를 파싱하고 다양한 유형의 콘텐츠를 처리해야 합니다.
 
 ### Python
 
@@ -356,11 +358,11 @@ websocket.onmessage = (event) => {
 };
 ```
 
-Ein Beispiel für die Verarbeitung der Antwort finden Sie im End-to-End-Beispiel auf [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/geminilive.js#L22-L75).
+응답을 처리하는 방법의 예시는 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-ephemeral-tokens-websocket/frontend/geminilive.js#L22-L75)의 포괄적인 예시를 참조하세요.
 
-## Toolaufrufe verarbeiten
+## 도구 호출 처리
 
-Wenn das Modell einen Toolaufruf anfordert, enthält die [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=de#bidigeneratecontentservermessage) ein `toolCall`-Feld. Sie müssen die Funktion lokal ausführen und das Ergebnis mit einer [`BidiGenerateContentToolResponse`](https://ai.google.dev/api/live?hl=de#bidigeneratecontenttoolresponse)-Nachricht an den WebSocket zurücksenden.
+모델이 도구 호출을 요청하면 [`BidiGenerateContentServerMessage`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontentservermessage)에 `toolCall` 필드가 포함됩니다. 함수를 로컬에서 실행하고 [`BidiGenerateContentToolResponse`](https://ai.google.dev/api/live?hl=ko#bidigeneratecontenttoolresponse) 메시지를 사용하여 결과를 WebSocket으로 다시 전송해야 합니다.
 
 ### Python
 
@@ -447,20 +449,20 @@ function handleToolCall(toolCall) {
 // This function is called within websocket.onmessage when a toolCall is detected.
 ```
 
-## Nächste Schritte
+## 다음 단계
 
-- Im vollständigen Leitfaden zu den Funktionen der Live API [Funktionen](https://ai.google.dev/gemini-api/docs/live-guide?hl=de) finden Sie Informationen zu den wichtigsten Funktionen und Konfigurationen, einschließlich der Erkennung von Sprachaktivitäten und nativen Audiofunktionen.
-- Lesen Sie den [Leitfaden zur Toolnutzung](https://ai.google.dev/gemini-api/docs/live-tools?hl=de), um zu erfahren, wie Sie die Live API in Tools und Funktionsaufrufe einbinden.
-- Im [Leitfaden zur Sitzungsverwaltung](https://ai.google.dev/gemini-api/docs/live-session?hl=de) erfahren Sie, wie Sie lange Unterhaltungen verwalten.
-- Im [Leitfaden zu kurzlebigen Tokens](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=de) finden Sie Informationen zur sicheren Authentifizierung in [Client-Server-Anwendungen](#implementation-approach).
-- Weitere Informationen zur zugrunde liegenden WebSockets API finden Sie in der [WebSockets API-Referenz](https://ai.google.dev/api/live?hl=de).
+- 음성 활동 감지 및 기본 오디오 기능을 비롯한 주요 기능 및 구성은 전체 Live API [기능](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko) 가이드를 읽어보세요.
+- [도구 사용](https://ai.google.dev/gemini-api/docs/live-tools?hl=ko) 가이드를 읽고 Live API를 도구 및 함수 호출과 통합하는 방법을 알아보세요.
+- 장기 실행 대화를 관리하려면 [세션 관리](https://ai.google.dev/gemini-api/docs/live-session?hl=ko) 가이드를 읽어보세요.
+- [클라이언트-서버](#implementation-approach) 애플리케이션에서 보안 인증을 하려면 [단기 토큰](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ko) 가이드를 읽어보세요.
+- 기본 WebSocket API에 관한 자세한 내용은 [WebSocket API 참조](https://ai.google.dev/api/live?hl=ko)를 확인하세요.
 
-Feedback geben
+의견 보내기
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Zuletzt aktualisiert: 2026-09-17 (UTC).
+최종 업데이트: 2026-09-17(UTC)
 
-Haben Sie Feedback für uns?
+의견을 전달하고 싶나요?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-17 (UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-17(UTC)"],[],[]]
