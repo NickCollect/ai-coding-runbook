@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/use-case-guides/ticket-routing
-fetched_at: 2026-09-28T06:10:43.070350+00:00
+fetched_at: 2026-10-05T06:27:26.501030+00:00
 fetch_method: mintlify_md
 ---
 
@@ -311,6 +311,10 @@ def classify_support_request(ticket_contents):
         Remember to always include your classification reasoning before your actual intent output. The reasoning should be enclosed in <reasoning> tags and the intent in <intent> tags. Return only the reasoning and the intent.
         """
 ```
+
+<Note>
+  This prompt is written for Claude Haiku 4.5, which runs here without thinking. On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, ask for the intent and a one-sentence summary of the request instead. See [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks).
+</Note>
 
 Here are the key components of this prompt:
 

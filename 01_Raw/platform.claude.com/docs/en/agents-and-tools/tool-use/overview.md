@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-fetched_at: 2026-09-28T06:10:38.892485+00:00
+fetched_at: 2026-10-05T06:27:21.451401+00:00
 fetch_method: mintlify_md
 ---
 
@@ -735,7 +735,7 @@ Claude called get_weather with {"location": "San Francisco, CA"}
 The current weather in San Francisco is 15 degrees Celsius with partly cloudy skies.
 ```
 
-[Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) covers each step in detail, including result formatting and error signaling; [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use) covers responses that call several tools at once. To skip writing this round trip yourself, use [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner): the SDKs execute your tools and send the results back automatically.
+[Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) covers each step in detail, including result formatting and error signaling; [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use) covers responses that call several tools at once. To skip writing this round trip yourself, use [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner): the SDK executes your tools and sends the results back automatically.
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works).
 
@@ -880,6 +880,7 @@ When you use `tools`, the API also automatically includes a special system promp
 | Claude Opus 4.5                                                                                                                       | 496 tokens                                | 588 tokens                               |
 | Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations))  | 313 tokens                                | 315 tokens                               |
 | Claude Opus 4 ([retired, except on Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations))                | 313 tokens                                | 315 tokens                               |
+| Claude Sonnet 5.5                                                                                                                     | 286 tokens                                |                                          |
 | Claude Sonnet 5                                                                                                                       | 354 tokens                                | 474 tokens                               |
 | Claude Sonnet 4.6                                                                                                                     | 497 tokens                                | 589 tokens                               |
 | Claude Sonnet 4.5                                                                                                                     | 496 tokens                                | 588 tokens                               |

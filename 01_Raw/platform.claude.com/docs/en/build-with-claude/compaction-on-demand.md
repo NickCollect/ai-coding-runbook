@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand
-fetched_at: 2026-09-28T06:10:40.219684+00:00
+fetched_at: 2026-10-05T06:27:22.999939+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,7 @@ featureMetadata:
     - claude-opus-4-8
     - claude-opus-4-7
     - claude-opus-4-6
+    - claude-sonnet-5-5
     - claude-sonnet-5
     - claude-sonnet-4-6
   supportedPlatforms:
@@ -40,7 +41,9 @@ A compaction request is separate from your conversation turns. You send the conv
 
 From then on the block takes the place of the messages it summarizes. It goes first in `messages`, the summarized messages are removed, and your next turn follows it. Claude sees the summary where those messages were.
 
-![On-demand compaction: a request that carries four messages and the compaction parameter returns one compaction block and no reply; on the next request the block comes first in messages in place of those four messages, followed by the next user turn](https://platform.claude.com/docs/images/compaction-on-demand-swap.svg)
+<Frame>
+  ![On-demand compaction: a request that carries four messages and the compaction parameter returns one compaction block and no reply; on the next request the block comes first in messages in place of those four messages, followed by the next user turn](https://platform.claude.com/docs/images/compaction-on-demand-swap.svg)
+</Frame>
 
 ## Request a summary
 

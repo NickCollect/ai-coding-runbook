@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-org-data
-fetched_at: 2026-09-07T05:31:28.975108+00:00
+fetched_at: 2026-10-05T06:27:26.321859+00:00
 fetch_method: mintlify_md
 ---
 
@@ -276,6 +276,19 @@ The top-level `organization_id` is the organization's bare UUID: the same value 
 Rows reflect the enforced state rather than the last-stored configuration: for example, `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled, `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range, and `code_execution_network_egress_enabled` is `false` whenever code execution is off.
 
 The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
+
+## Read plugins and plugin marketplaces
+
+Your organization's plugins and plugin marketplaces are part of the [Admin API](https://platform.claude.com/docs/en/manage-claude/plugins-api) rather than the Compliance API, but a Compliance Access Key with `read:compliance_org_data` can call the Plugins API's read endpoints directly:
+
+* List plugins and retrieve a plugin
+* List a plugin's versions, retrieve a version, and download a version's files
+* List a plugin's installation settings and its shares
+* List plugin marketplaces and retrieve a marketplace
+
+Send the `anthropic-beta: ce-plugins-2026-09-01` header on every request; without it these endpoints return [404 Not Found](https://platform.claude.com/docs/en/manage-claude/plugins-api#error-responses). Each call reads one organization: a key that covers the parent organization reads the linked organization it was created in unless you pass the `organization_id` query parameter (a linked organization's UUID or its `org_`-prefixed ID) to [read a different one](https://platform.claude.com/docs/en/manage-claude/plugins-api#reading-another-organization-under-the-same-parent), and a key restricted to one organization reads only that organization. These calls count against the Admin API's [rate limits](https://platform.claude.com/docs/en/manage-claude/plugins-api#rate-limiting), not the Compliance API's.
+
+Creating or changing plugins, their installation settings, or a marketplace's settings requires an Admin API key with `write:plugins`. Of the read calls, only downloading the files of a plugin in a member's personal marketplace records an [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) event (`claude_plugin_archive_accessed`). See the [Plugins API guide](https://platform.claude.com/docs/en/manage-claude/plugins-api) for each endpoint, request examples, and the [events the API records](https://platform.claude.com/docs/en/manage-claude/plugins-api#activity-feed-events).
 
 ## Next steps
 

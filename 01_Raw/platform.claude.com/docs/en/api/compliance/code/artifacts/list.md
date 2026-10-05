@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/list
-fetched_at: 2026-09-28T06:10:58.106589+00:00
+fetched_at: 2026-10-05T06:27:47.678998+00:00
 fetch_method: mintlify_md
 ---
 
@@ -90,6 +90,22 @@ returned.
 
     Artifact identifier (tagged ID)
 
+  - `artifact_type: "claude_design" or "claude_design_systems" or "claude_docs" or 3 more`
+
+    Which kind of Artifact this is: `code` for a site published from Claude Code, or the built-in Artifact type it was made from — `claude_docs` (Claude Docs), `claude_slides` (Slides), `claude_design` (Design) or `claude_design_systems` (a design system). `other` is an Artifact made from a built-in type this list does not name yet.
+
+    - `"claude_design"`
+
+    - `"claude_design_systems"`
+
+    - `"claude_docs"`
+
+    - `"claude_slides"`
+
+    - `"code"`
+
+    - `"other"`
+
   - `organization_uuid: string`
 
     Organization UUID this Artifact belongs to
@@ -173,6 +189,7 @@ curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
   "data": [
     {
       "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
+      "artifact_type": "claude_docs",
       "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
       "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "published_version_id": "1741803761-9f3a",

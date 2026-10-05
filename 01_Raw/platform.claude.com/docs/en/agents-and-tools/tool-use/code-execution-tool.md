@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-09-28T06:10:39.293449+00:00
+fetched_at: 2026-10-05T06:27:22.028657+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,7 @@ featureMetadata:
     - claude-opus-4-7
     - claude-opus-4-6
     - claude-opus-4-5-20251101
+    - claude-sonnet-5-5
     - claude-sonnet-5
     - claude-sonnet-4-6
     - claude-sonnet-4-5-20250929

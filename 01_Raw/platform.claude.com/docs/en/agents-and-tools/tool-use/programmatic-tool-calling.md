@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
-fetched_at: 2026-09-28T06:10:39.693531+00:00
+fetched_at: 2026-10-05T06:27:22.660303+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,7 @@ featureMetadata:
     - claude-opus-4-7
     - claude-opus-4-6
     - claude-opus-4-5-20251101
+    - claude-sonnet-5-5
     - claude-sonnet-5
     - claude-sonnet-4-6
     - claude-sonnet-4-5-20250929

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rate_limits
-fetched_at: 2026-09-28T06:10:53.931801+00:00
+fetched_at: 2026-10-05T06:27:42.331801+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,8 +18,8 @@ url: https://platform.claude.com/docs/en/api/beta/organization/rate_limits
 List Messages API rate limits for your organization.
 
 Each entry corresponds to one rate-limit group (either a model family
-or an API-surface category such as the Files API or Message Batches)
-and contains the set of limiter values that apply to it.
+or an API-surface category such as the Message Batches API or the web
+search tool) and contains the set of limiter values that apply to it.
 
 When `limit` is omitted, every matching entry is returned in a single
 page; when `limit` truncates the result, follow `next_page` to fetch

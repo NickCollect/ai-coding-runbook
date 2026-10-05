@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry
-fetched_at: 2026-09-28T06:10:41.112117+00:00
+fetched_at: 2026-10-05T06:27:23.888524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-f
 description: Access Claude models through Microsoft Foundry with Azure-native endpoints and authentication.
 ---
 
-This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use Claude models including Claude Fable 5.1, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, and Claude Sonnet 5, and features such as the [1M-token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows), while managing costs through your Azure subscription.
+This guide shows you how to set up and make API calls to Claude in Microsoft Foundry using one of Anthropic's client SDKs or direct HTTP requests. When you access Claude in Microsoft Foundry, you are billed for Claude usage in the Azure Marketplace. You can use Claude models including Claude Fable 5.1, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Sonnet 5.5, and Claude Sonnet 5, and features such as the [1M-token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows), while managing costs through your Azure subscription.
 
 Claude is available in Global Standard and US Data Zone Standard deployment types in Foundry resources, billed in Claude Consumption Units through the Azure Marketplace. Visit [Claude in Microsoft Foundry pricing](https://platform.claude.com/docs/en/about-claude/pricing#claude-in-microsoft-foundry-pricing) for details.
 
@@ -24,6 +24,8 @@ Claude models in Microsoft Foundry are available in two hosting options. You cho
 | Model availability   | The latest models in the Opus, Sonnet, and Haiku families  | All Claude models available on Microsoft Foundry                                                                                                                                                 |
 | Deployment types     | Global Standard, US Data Zone Standard                     | Global Standard                                                                                                                                                                                  |
 | Recommended for      | Most workloads                                             | [Access to features or models not yet hosted on Azure](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure) |
+
+Claude Sonnet 5.5 supports only Global Standard deployments.
 
 <Note>
   Anthropic acts as an independent processor for Microsoft. Customers using Claude through Microsoft Foundry are subject to Anthropic's data use terms. For deployments hosted on Azure, prompts and completions remain within Azure. Only usage metadata and content flagged by Anthropic's safety systems egress to Anthropic. Anthropic continues to provide its safety and data commitments.
@@ -43,7 +45,7 @@ Before you begin, ensure you have:
 Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) support Foundry through a platform-specific package or client class. The examples on this page also show requests with cURL and the ant CLI. To set up the CLI, see [CLI quickstart](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart).
 
 <Note>
-  Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Go and Ruby SDKs.
+  Foundry is supported by the C#, Go, Java, PHP, Python, and TypeScript SDKs. Foundry is not currently available in the Ruby SDK.
 </Note>
 
 <Tabs>
@@ -73,9 +75,10 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
 
   <Tab title="Go">
     ```bash
-    # The Go SDK does not yet support Foundry natively (see the Authentication
-    # examples for using the standard Go SDK as a workaround)
-    go get github.com/anthropics/anthropic-sdk-go
+    go get github.com/anthropics/anthropic-sdk-go/foundry
+
+    # For Entra ID authentication, also install the Azure Identity library
+    go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
     ```
   </Tab>
 
@@ -83,8 +86,8 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:2.65.0")
-        implementation("com.anthropic:anthropic-java-foundry:2.65.0")
+        implementation("com.anthropic:anthropic-java:2.67.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.67.0")
 
         // For Entra ID authentication, also add the Azure Identity library
         implementation("com.azure:azure-identity:1.18.3")
@@ -96,12 +99,12 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>2.65.0</version>
+            <version>2.67.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.65.0</version>
+            <version>2.67.0</version>
         </dependency>
         <!-- For Entra ID authentication, also add the Azure Identity library -->
         <dependency>
@@ -161,7 +164,7 @@ After creating your resource, deploy a Claude model to make it available for API
 5. Configure the deployment:
 
    * **Deployment name:** Defaults to the model ID, but you can customize it (for example, `my-claude-deployment`). The deployment name cannot be changed after creation.
-   * **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting [`inference_geo: "us"`](https://platform.claude.com/docs/en/manage-claude/data-residency#inference-geo) on the Claude API.
+   * **Region scope:** Select Global, or for models hosted on Azure, Data Zone. Selecting Data Zone creates a US Data Zone Standard deployment, which keeps inference within the United States and is equivalent to setting [`inference_geo: "us"`](https://platform.claude.com/docs/en/manage-claude/data-residency#inference-geo) on the Claude API. For Claude Sonnet 5.5, select Global.
    * **Model version:** Expand **Model version settings** and select a version from the **Model version** dropdown menu. Each [hosting option](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options) is listed as a separate model version, labeled with its hosting option (for example, version 1 for Hosted on Anthropic, version 2 for Hosted on Azure).
 
 6. Select **Deploy** and wait for provisioning to complete.
@@ -187,7 +190,7 @@ After provisioning your Foundry Claude resource, you can obtain an API key from 
 3. Copy the **Key** value (and note the **Target URI** for your endpoint).
 4. Use either the `api-key` or `x-api-key` header in your requests, or provide it to the SDK.
 
-The Foundry SDKs require an API key and either a resource name or base URL. The C#, Java, PHP, Python, and TypeScript SDKs automatically read these from the following environment variables if they are defined:
+The SDK's Foundry client requires an API key and either a resource name or base URL, and automatically reads them from the following environment variables if they are defined:
 
 * `ANTHROPIC_FOUNDRY_API_KEY` - Your API key
 * `ANTHROPIC_FOUNDRY_RESOURCE` - Your resource name (for example, `example-resource`)
@@ -263,6 +266,8 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   using Anthropic.Foundry;
   using Anthropic.Models.Messages;
 
+  // The C# client always builds the base URL from the resource name.
+  // It does not read ANTHROPIC_FOUNDRY_BASE_URL.
   var client = new AnthropicFoundryClient(
       new AnthropicFoundryApiKeyCredentials(
           Environment.GetEnvironmentVariable("ANTHROPIC_FOUNDRY_API_KEY")!,
@@ -285,13 +290,6 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   ```
 
   ```go Go
-  // The Go SDK does not yet support Foundry natively. This example uses the
-  // standard Go SDK as a workaround. WithoutEnvironmentDefaults keeps the
-  // client from also reading ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN from
-  // the environment and sending a Claude API credential to your Foundry
-  // endpoint. Features that Foundry does not support fail server-side rather
-  // than client-side. For full Foundry support, use the C#, Java, PHP,
-  // Python, or TypeScript SDKs.
   package main
 
   import (
@@ -300,15 +298,17 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   	"os"
 
   	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/option"
+  	"github.com/anthropics/anthropic-sdk-go/foundry"
   )
 
   func main() {
-  	client := anthropic.NewClient(
-  		option.WithoutEnvironmentDefaults(),
-  		option.WithBaseURL("https://example-resource.services.ai.azure.com/anthropic"),
-  		option.WithAPIKey(os.Getenv("ANTHROPIC_FOUNDRY_API_KEY")),
-  	)
+  	client, err := foundry.NewClient(foundry.ClientConfig{
+  		APIKey:   os.Getenv("ANTHROPIC_FOUNDRY_API_KEY"),
+  		Resource: "example-resource", // your resource name
+  	})
+  	if err != nil {
+  		panic(err)
+  	}
 
   	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
   		Model:     "claude-opus-5-5",
@@ -373,7 +373,7 @@ The Foundry SDKs require an API key and either a resource name or base URL. The 
   # ANTHROPIC_AUTH_TOKEN environment variables and could send a Claude API
   # credential to your Foundry endpoint. Features that Foundry
   # does not support fail server-side rather than client-side. For full
-  # Foundry support, use the C#, Java, PHP, Python, or TypeScript SDKs.
+  # Foundry support, use the C#, Go, Java, PHP, Python, or TypeScript SDKs.
   require "anthropic"
 
   client = Anthropic::Client.new(
@@ -506,34 +506,38 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
   ```
 
   ```go Go
-  // The Go SDK does not yet support Foundry natively. This example uses the
-  // standard Go SDK as a workaround, with a static Entra ID token: automatic
-  // token refresh is not built in, so your application must refresh tokens
-  // itself (they typically expire after 1 hour). WithoutEnvironmentDefaults
-  // keeps the client from also reading ANTHROPIC_API_KEY or
-  // ANTHROPIC_AUTH_TOKEN from the environment and sending a Claude API
-  // credential to your Foundry endpoint. For full Foundry support, use the
-  // C#, Java, PHP, Python, or TypeScript SDKs.
   package main
 
   import (
   	"context"
   	"fmt"
-  	"os"
 
+  	"github.com/Azure/azure-sdk-for-go/sdk/azcore/policy"
+  	"github.com/Azure/azure-sdk-for-go/sdk/azidentity"
   	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/option"
+  	"github.com/anthropics/anthropic-sdk-go/foundry"
   )
 
   func main() {
-  	// Obtain an Entra ID access token, for example using the Azure CLI:
-  	//   az account get-access-token --resource https://ai.azure.com \
-  	//     --query accessToken -o tsv
-  	client := anthropic.NewClient(
-  		option.WithoutEnvironmentDefaults(),
-  		option.WithBaseURL("https://example-resource.services.ai.azure.com/anthropic"),
-  		option.WithAuthToken(os.Getenv("AZURE_ACCESS_TOKEN")),
-  	)
+  	credential, err := azidentity.NewDefaultAzureCredential(nil)
+  	if err != nil {
+  		panic(err)
+  	}
+
+  	tokenProvider := func(ctx context.Context) (string, error) {
+  		token, err := credential.GetToken(ctx, policy.TokenRequestOptions{
+  			Scopes: []string{foundry.EntraIDScope},
+  		})
+  		return token.Token, err
+  	}
+
+  	client, err := foundry.NewClient(foundry.ClientConfig{
+  		Resource:             "example-resource", // your resource name
+  		AzureADTokenProvider: tokenProvider,
+  	})
+  	if err != nil {
+  		panic(err)
+  	}
 
   	message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
   		Model:     "claude-opus-5-5",
@@ -613,7 +617,7 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
   # itself (they typically expire after 1 hour). Pass credentials explicitly:
   # without them, the client falls back to the ANTHROPIC_API_KEY or
   # ANTHROPIC_AUTH_TOKEN environment variables. For full Foundry support, use
-  # the C#, Java, PHP, Python, or TypeScript SDKs.
+  # the C#, Go, Java, PHP, Python, or TypeScript SDKs.
   require "anthropic"
 
   # Obtain an Entra ID access token, for example using the Azure CLI:
@@ -644,7 +648,7 @@ Claude in Microsoft Foundry supports most Claude features. You can find all the 
 
 ### Context window
 
-Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
+Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5.5, Claude Sonnet 5, and Claude Sonnet 4.6 have a [1M-token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows) on Microsoft Foundry. Other Claude models, including Claude Sonnet 4.5, have a 200k-token context window.
 
 ### Claude features not supported for Claude in Microsoft Foundry
 
@@ -681,22 +685,23 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](https:
 
 The following Claude models are available through Foundry:
 
-| Model                                                                       | Default deployment name | Hosted on Azure | Hosted on Anthropic |
-| :-------------------------------------------------------------------------- | :---------------------- | :-------------: | :-----------------: |
-| Claude Fable 5.1                                                            | `claude-fable-5-1`      |                 |          ✓          |
-| Claude Mythos 5.1 ([limited availability](https://anthropic.com/glasswing)) | `claude-mythos-5-1`     |                 |          ✓          |
-| Claude Fable 5                                                              | `claude-fable-5`        |                 |          ✓          |
-| Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))   | `claude-mythos-5`       |                 |          ✓          |
-| Claude Opus 5.5                                                             | `claude-opus-5-5`       |        ✓        |          ✓          |
-| Claude Opus 5                                                               | `claude-opus-5`         |        ✓        |          ✓          |
-| Claude Opus 4.8                                                             | `claude-opus-4-8`       |        ✓        |          ✓          |
-| Claude Opus 4.7                                                             | `claude-opus-4-7`       |                 |          ✓          |
-| Claude Opus 4.6                                                             | `claude-opus-4-6`       |                 |          ✓          |
-| Claude Opus 4.5                                                             | `claude-opus-4-5`       |                 |          ✓          |
-| Claude Sonnet 5                                                             | `claude-sonnet-5`       |        ✓        |          ✓          |
-| Claude Sonnet 4.6                                                           | `claude-sonnet-4-6`     |                 |          ✓          |
-| Claude Sonnet 4.5                                                           | `claude-sonnet-4-5`     |                 |          ✓          |
-| Claude Haiku 4.5                                                            | `claude-haiku-4-5`      |        ✓        |          ✓          |
+| Model                                                                                                 | Default deployment name | Hosted on Azure | Hosted on Anthropic |
+| :---------------------------------------------------------------------------------------------------- | :---------------------- | :-------------: | :-----------------: |
+| Claude Fable 5.1                                                                                      | `claude-fable-5-1`      |                 |          ✓          |
+| Claude Mythos 5.1 ([limited availability](https://anthropic.com/glasswing))                           | `claude-mythos-5-1`     |                 |          ✓          |
+| Claude Fable 5                                                                                        | `claude-fable-5`        |                 |          ✓          |
+| Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))                             | `claude-mythos-5`       |                 |          ✓          |
+| Claude Opus 5.5                                                                                       | `claude-opus-5-5`       |        ✓        |          ✓          |
+| Claude Opus 5                                                                                         | `claude-opus-5`         |        ✓        |          ✓          |
+| Claude Opus 4.8                                                                                       | `claude-opus-4-8`       |        ✓        |          ✓          |
+| Claude Opus 4.7                                                                                       | `claude-opus-4-7`       |                 |          ✓          |
+| Claude Opus 4.6                                                                                       | `claude-opus-4-6`       |                 |          ✓          |
+| Claude Opus 4.5                                                                                       | `claude-opus-4-5`       |                 |          ✓          |
+| Claude Sonnet 5.5                                                                                     | `claude-sonnet-5-5`     |        ✓        |          ✓          |
+| Claude Sonnet 5                                                                                       | `claude-sonnet-5`       |        ✓        |          ✓          |
+| Claude Sonnet 4.6                                                                                     | `claude-sonnet-4-6`     |                 |          ✓          |
+| Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `claude-sonnet-4-5`     |                 |          ✓          |
+| Claude Haiku 4.5                                                                                      | `claude-haiku-4-5`      |        ✓        |          ✓          |
 
 By default, deployment names match the model IDs shown in the preceding table. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.
 

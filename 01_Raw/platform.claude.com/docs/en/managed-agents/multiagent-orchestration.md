@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration
-fetched_at: 2026-09-28T06:10:41.824328+00:00
+fetched_at: 2026-10-05T06:27:24.817968+00:00
 fetch_method: mintlify_md
 ---
 
@@ -422,6 +422,8 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 * To limit an agent's access, declare only the servers it needs in its agent definition.
 
 [Agent configuration overrides](https://platform.claude.com/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session) at session creation can replace the coordinator's MCP servers and those of its `self` copies.
+
+A `limited` [environment](https://platform.claude.com/docs/en/managed-agents/environments#networking) blocks an agent's MCP servers unless its networking sets `allow_mcp_servers: true` or lists each server's host in `allowed_hosts`. With neither set, session creation fails with a 400 error. The check covers every agent the coordinator can delegate to.
 
 Create the researcher, which declares the GitHub MCP server, and the coordinator that delegates to the researcher:
 

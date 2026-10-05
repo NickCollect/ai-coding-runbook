@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
-fetched_at: 2026-09-28T06:10:39.087464+00:00
+fetched_at: 2026-10-05T06:27:21.809922+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,7 +29,7 @@ Define tools using the SDK helpers, then use the tool runner to run them.
 
 Depending on the SDK's tool signature, a tool returns its result as a string or as content blocks (text, image, or document blocks), so a tool can return multimodal results. A returned string becomes a single text content block. To return structured data, such as a JSON object or a number, encode it as a string first.
 
-<Tabs>
+<Tabs exclude="shell">
   <Tab title="Python">
     Use the `@beta_tool` decorator to define tools with type hints and docstrings.
 
@@ -599,7 +599,7 @@ You can end the loop at any iteration with a `break` statement. The runner loops
 
 If you don't need intermediate messages, you can get the final message directly:
 
-<Tabs>
+<Tabs exclude="shell">
   <Tab title="Python">
     Use `runner.until_done()` to get the final message.
 
@@ -829,7 +829,7 @@ You take over by modifying the runner's messages from inside the loop body. The 
 
 When you take over for an iteration, the runner does not append the assistant message or tool results from that turn. You become responsible for keeping the conversation valid: append the assistant message and a tool result yourself (if you want the turn to count), modify state conditionally so the loop can still exit when there are no tool calls, and pass `max_iterations` (csharp, java, php: `maxIterations`; go: `MaxIterations`) to bound the loop. All seven SDKs support `max_iterations` (csharp, java, php: `maxIterations`; go: `MaxIterations`).
 
-<Tabs>
+<Tabs exclude="shell">
   <Tab title="Python">
     Use `generate_tool_call_response()` to inspect or compute the tool result. Calling `append_messages()` inside the loop tells the runner you're managing history yourself, so include the assistant message and tool result in what you append.
 
@@ -1112,7 +1112,7 @@ When you take over for an iteration, the runner does not append the assistant me
 
 ### Automatic context management
 
-For long-running agentic tasks, the TypeScript and Ruby tool runners support automatic [compaction](https://platform.claude.com/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. Both SDKs have deprecated this client-side option in favor of [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/compaction-threshold), which works with every SDK's tool runner through the `context_management` request parameter. The Python SDK (v1.0 and later) and the Go, Java, C#, and PHP tool runners don't include client-side compaction. The Python, TypeScript, C#, Go, Java, PHP, and Ruby tool runners have a `compact_before_next_turn()` (typescript, java, php: `compactBeforeNextTurn()`; csharp, go: `CompactBeforeNextTurn()`) helper for on-demand compaction. See [Compact in a loop](https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand#compact-in-a-loop). Use it or a `context_management` compaction edit on a runner, not both.
+For long-running agentic tasks, the TypeScript and Ruby tool runners support automatic [compaction](https://platform.claude.com/docs/en/build-with-claude/context-editing#client-side-compaction-sdk), which generates summaries when token usage exceeds a threshold so the conversation can continue beyond context window limits. Both SDKs have deprecated this client-side option in favor of [server-side compaction](https://platform.claude.com/docs/en/build-with-claude/compaction-threshold), which works with every SDK's tool runner through the `context_management` request parameter. The Python SDK (v1.0 and later) and the Go, Java, C#, and PHP tool runners don't include client-side compaction. The tool runner has a `compact_before_next_turn()` (typescript, java, php: `compactBeforeNextTurn()`; csharp, go: `CompactBeforeNextTurn()`) helper for on-demand compaction. See [Compact in a loop](https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand#compact-in-a-loop). Use it or a `context_management` compaction edit on a runner, not both.
 
 ### Debugging tool execution
 
@@ -1134,9 +1134,7 @@ The Go, Ruby, C#, and PHP SDKs don't read `ANTHROPIC_LOG`. Outside Python, no SD
 
 By default, tool errors are passed back to Claude, which can then respond appropriately. However, you might want to detect errors and handle them differently, for example, to stop execution early or implement custom error handling.
 
-In the Python and TypeScript SDKs, use the tool response method (`generate_tool_call_response()` in Python, `generateToolResponse()` in TypeScript) to intercept tool results and check for errors before they're sent to Claude. The other SDKs don't expose that hook. Their tabs describe the closest alternative:
-
-<Tabs>
+<Tabs exclude="shell">
   <Tab title="Python">
     ```python
     client = anthropic.Anthropic()
@@ -1165,6 +1163,14 @@ In the Python and TypeScript SDKs, use the tool response method (`generate_tool_
         # Process the message normally
         print(message.content)
     ```
+
+    <Note>
+      Call 
+
+      `runner.generate_tool_call_response()`
+
+       in the loop to get the tool results and check them for errors before the runner sends them to Claude.
+    </Note>
   </Tab>
 
   <Tab title="TypeScript">
@@ -1198,6 +1204,14 @@ In the Python and TypeScript SDKs, use the tool response method (`generate_tool_
       console.log(message.content);
     }
     ```
+
+    <Note>
+      Call 
+
+      `runner.generateToolResponse()`
+
+       in the loop to get the tool results and check them for errors before the runner sends them to Claude.
+    </Note>
   </Tab>
 
   <Tab title="C#">
@@ -1304,6 +1318,18 @@ In the Python and TypeScript SDKs, use the tool response method (`generate_tool_
       break if message.stop_reason != :tool_use
     end
     ```
+
+    <Note>
+      The Ruby tool runner has no hook that returns the tool results. Once 
+
+      `runner.next_message`
+
+       returns, they are the last entry in 
+
+      `runner.params[:messages]`
+
+      , so check them there before the next request sends them to Claude.
+    </Note>
   </Tab>
 </Tabs>
 
@@ -1311,9 +1337,7 @@ In the Python and TypeScript SDKs, use the tool response method (`generate_tool_
 
 You can modify tool results before they're sent back to Claude. This is useful for adding metadata such as `cache_control` to enable [prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) on tool results, or for transforming the tool output.
 
-In the Python and TypeScript SDKs, use the tool response method to get the tool result, then modify it before the runner proceeds. Whether you explicitly append the modified result or mutate it in place depends on the SDK. See the code comments in each tab.
-
-<Tabs>
+<Tabs exclude="shell">
   <Tab title="Python">
     ```python
     client = anthropic.Anthropic()
@@ -1346,6 +1370,18 @@ In the Python and TypeScript SDKs, use the tool response method to get the tool 
 
         print(message.content)
     ```
+
+    <Note>
+      Call 
+
+      `runner.generate_tool_call_response()`
+
+       to get the tool result, modify it, and pass it to 
+
+      `runner.append_messages()`
+
+       so the runner does not append the original.
+    </Note>
   </Tab>
 
   <Tab title="TypeScript">
@@ -1379,6 +1415,14 @@ In the Python and TypeScript SDKs, use the tool response method to get the tool 
       console.log(message.content);
     }
     ```
+
+    <Note>
+      Call 
+
+      `runner.generateToolResponse()`
+
+       to get the tool result, then modify it in place. The runner appends the modified result for you.
+    </Note>
   </Tab>
 
   <Tab title="C#">
@@ -1530,6 +1574,18 @@ In the Python and TypeScript SDKs, use the tool response method to get the tool 
       break if message.stop_reason != :tool_use
     end
     ```
+
+    <Note>
+      The Ruby tool runner has no hook that returns the tool results. Once 
+
+      `runner.next_message`
+
+       returns, they are the last entry in 
+
+      `runner.params[:messages]`
+
+      , so modify them there before the next request sends them to Claude.
+    </Note>
   </Tab>
 </Tabs>
 
@@ -1541,7 +1597,7 @@ In the Python and TypeScript SDKs, use the tool response method to get the tool 
 
 Enable streaming to process each turn's response incrementally. Each iteration yields a stream object that you can iterate for events.
 
-<Tabs>
+<Tabs exclude="shell">
   <Tab title="Python">
     Set `stream=True` and use `get_final_message()` to get the accumulated message.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
-fetched_at: 2026-09-28T06:10:41.266494+00:00
+fetched_at: 2026-10-05T06:27:24.153302+00:00
 fetch_method: mintlify_md
 ---
 
@@ -296,6 +296,8 @@ When an MCP tool output exceeds 100,000 characters (about 25,000 tokens), it is 
 ## Provide authentication at session creation
 
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](https://platform.claude.com/docs/en/managed-agents/vaults) for how to create vaults and manage credentials.
+
+A `limited` [environment](https://platform.claude.com/docs/en/managed-agents/environments#networking) blocks an agent's MCP servers unless its networking sets `allow_mcp_servers: true` or lists each server's host in `allowed_hosts`. With neither set, session creation fails with a 400 error.
 
 <CodeGroup>
   ```bash cURL

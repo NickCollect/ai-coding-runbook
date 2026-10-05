@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-09-28T06:10:41.594357+00:00
+fetched_at: 2026-10-05T06:27:24.574249+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1037,7 +1037,10 @@ Every persisted event includes a `processed_at` timestamp set when the event fin
 
       ```go Go
       events, err := client.Beta.Sessions.Events.List(ctx, session.ID, anthropic.BetaSessionEventListParams{
-      	Types: []string{"agent.tool_use", "agent.tool_result"},
+      	Types: []anthropic.BetaManagedAgentsSessionEventType{
+      		anthropic.BetaManagedAgentsSessionEventTypeAgentToolUse,
+      		anthropic.BetaManagedAgentsSessionEventTypeAgentToolResult,
+      	},
       })
       if err != nil {
       	panic(err)
@@ -1051,8 +1054,8 @@ Every persisted event includes a `processed_at` timestamp set when the event fin
       var events = client.beta().sessions().events().list(
           session.id(),
           EventListParams.builder()
-              .addType("agent.tool_use")
-              .addType("agent.tool_result")
+              .addType(BetaManagedAgentsSessionEventType.AGENT_TOOL_USE)
+              .addType(BetaManagedAgentsSessionEventType.AGENT_TOOL_RESULT)
               .build());
       for (var event : events.data()) {
           event.agentToolUse().ifPresent(toolUse ->
@@ -2643,7 +2646,7 @@ No event resumes a session paused at its cap. Instead, update the session's budg
 ### Sending system messages
 
 <Note>
-  `system.message` is supported by Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8. If the agent's primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error. Subagent models are not checked, because `system.message` lands on the primary thread only.
+  `system.message` is supported by Claude Fable 5.1, Claude Mythos 5.1, Claude Fable 5, Claude Mythos 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, and Claude Sonnet 5.5. If the agent's primary model does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error. Subagent models are not checked, because `system.message` lands on the primary thread only.
 </Note>
 
 Send a `system.message` event to give the agent privileged system-level context that applies to the accompanying turn and all subsequent turns. Unlike the `system` field on the agent definition (which sets the top-level system prompt), `system.message` content is appended to the session's system context as a `role: "system"` turn rather than replacing that prompt. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
@@ -2856,5 +2859,5 @@ With `ant beta:sessions connect`, you can open the same viewer from the `ant` CL
 * **Check session events:** Session errors are conveyed through the `session.error` event
 * **Review tool results:** Tool execution failures often explain unexpected agent behavior
 * **Track token usage:** Monitor token consumption to optimize prompts and reduce costs
-* **Use system prompts:** Add logging instructions to the system prompt to make the agent explain its reasoning
+* **Use system prompts:** Add logging instructions to the system prompt so the agent summarizes what it did and what it found
 * **Troubleshoot previews:** If a stream that opts in to event deltas doesn't behave as you expect, see [Troubleshoot previews](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#troubleshoot-previews)

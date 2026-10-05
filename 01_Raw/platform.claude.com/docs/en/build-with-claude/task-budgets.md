@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-09-28T06:10:38.290980+00:00
+fetched_at: 2026-10-05T06:27:20.939529+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,7 @@ featureMetadata:
     - claude-opus-5
     - claude-opus-4-8
     - claude-opus-4-7
+    - claude-sonnet-5-5
 ---
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
@@ -257,7 +258,7 @@ The `task_budget` object has three fields:
 Claude sees a budget-countdown marker injected server-side throughout the conversation. The marker shows how many tokens remain in the current agentic loop and updates as the model generates thinking, tool calls, and output, and as it processes tool results. Claude uses this signal to pace itself and finish gracefully as the budget is consumed.
 
 <Note>
-  **The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and SDKs have no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](https://platform.claude.com/docs/en/build-with-claude/task-budgets#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](https://platform.claude.com/docs/en/build-with-claude/task-budgets#carrying-a-budget-across-compaction-with-remaining).
+  **The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and the SDK has no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](https://platform.claude.com/docs/en/build-with-claude/task-budgets#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](https://platform.claude.com/docs/en/build-with-claude/task-budgets#carrying-a-budget-across-compaction-with-remaining).
 </Note>
 
 <Warning>
@@ -656,6 +657,7 @@ The minimum accepted `task_budget.total` is **20,000 tokens** on every model tha
 | Claude Opus 5     | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Fable 5    | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Mythos 5   | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Sonnet 5.5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Sonnet 5   | Not supported                               |
 | Claude Opus 4.8   | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.7   | Beta (set `task-budgets-2026-03-13` header) |

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/rate-limits
-fetched_at: 2026-09-28T06:10:45.675345+00:00
+fetched_at: 2026-10-05T06:27:29.913314+00:00
 fetch_method: mintlify_md
 ---
 
@@ -64,7 +64,7 @@ Once you reach your tier's spend cap, API usage pauses until 00:00 UTC on the fi
 }
 ```
 
-* The error type is `rate_limit_error`, the same as for a rate limit, but the response has no `retry-after` header. Retrying, including the SDKs' automatic retries, fails until access resumes.
+* The error type is `rate_limit_error`, the same as for a rate limit, but the response has no `retry-after` header. Retrying, including the SDK's automatic retries, fails until access resumes.
 * On the Messages API, `error.details.error_code` is `enforced_spend_limit_reached`. Use it to tell this response apart from a rate limit.
 * Moving to a higher tier restores access; see [Requesting higher limits](https://platform.claude.com/docs/en/api/rate-limits#requesting-higher-limits).
 
@@ -148,6 +148,7 @@ Rate limits are applied separately for each model; therefore you can use differe
     | Claude Opus 5.5                                                                                                                       | 1,000                             | 2,000,000                              | 400,000                                 |
     | Claude Opus 5                                                                                                                         | 1,000                             | 2,000,000                              | 400,000                                 |
     | Claude Opus 4.x2                                                                                                                      | 1,000                             | 2,000,000                              | 400,000                                 |
+    | Claude Sonnet 5.5                                                                                                                     | 1,000                             | 2,000,000                              | 400,000                                 |
     | Claude Sonnet 5                                                                                                                       | 1,000                             | 2,000,000                              | 400,000                                 |
     | Claude Sonnet 4.x3                                                                                                                    | 1,000                             | 2,000,000                              | 400,000                                 |
     | Claude Haiku 4.5                                                                                                                      | 1,000                             | 2,000,000                              | 400,000                                 |
@@ -161,6 +162,7 @@ Rate limits are applied separately for each model; therefore you can use differe
     | Claude Opus 5.5                                                                                                                       | 5,000                             | 5,000,000                              | 1,000,000                               |
     | Claude Opus 5                                                                                                                         | 5,000                             | 5,000,000                              | 1,000,000                               |
     | Claude Opus 4.x2                                                                                                                      | 5,000                             | 5,000,000                              | 1,000,000                               |
+    | Claude Sonnet 5.5                                                                                                                     | 5,000                             | 5,000,000                              | 1,000,000                               |
     | Claude Sonnet 5                                                                                                                       | 5,000                             | 5,000,000                              | 1,000,000                               |
     | Claude Sonnet 4.x3                                                                                                                    | 5,000                             | 5,000,000                              | 1,000,000                               |
     | Claude Haiku 4.5                                                                                                                      | 5,000                             | 5,000,000                              | 1,000,000                               |
@@ -174,6 +176,7 @@ Rate limits are applied separately for each model; therefore you can use differe
     | Claude Opus 5.5                                                                                                                       | 10,000                            | 10,000,000                             | 2,000,000                               |
     | Claude Opus 5                                                                                                                         | 10,000                            | 10,000,000                             | 2,000,000                               |
     | Claude Opus 4.x2                                                                                                                      | 10,000                            | 10,000,000                             | 2,000,000                               |
+    | Claude Sonnet 5.5                                                                                                                     | 10,000                            | 10,000,000                             | 2,000,000                               |
     | Claude Sonnet 5                                                                                                                       | 10,000                            | 10,000,000                             | 2,000,000                               |
     | Claude Sonnet 4.x3                                                                                                                    | 10,000                            | 10,000,000                             | 2,000,000                               |
     | Claude Haiku 4.5                                                                                                                      | 10,000                            | 10,000,000                             | 2,000,000                               |
@@ -189,7 +192,7 @@ Rate limits are applied separately for each model; therefore you can use differe
 
 *2 Opus rate limit is a total limit that applies to combined traffic across Claude Opus 4.8, Opus 4.7, Opus 4.6, and Opus 4.5. Claude Opus 5.5 and Claude Opus 5 each have a separate rate limit and are not part of this combined bucket.*
 
-*3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5. Claude Sonnet 5 has a separate rate limit and is not part of this combined bucket.*
+*3 Sonnet 4.x rate limit is a total limit that applies to combined traffic across Sonnet 4.6 and Sonnet 4.5. Claude Sonnet 5.5 and Claude Sonnet 5 each have a separate rate limit and are not part of this combined bucket.*
 
 *4 Limit counts `cache_read_input_tokens` toward ITPM usage.*
 

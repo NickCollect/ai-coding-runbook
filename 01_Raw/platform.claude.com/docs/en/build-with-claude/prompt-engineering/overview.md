@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview
-fetched_at: 2026-08-17T02:15:17.649317+00:00
+fetched_at: 2026-10-05T06:27:26.708629+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,7 +52,7 @@ If you're an interactive learner, you can start with the interactive tutorials i
 
 <CardGroup cols={2}>
   <Card title="GitHub prompting tutorial" icon="link" href="https://github.com/anthropics/prompt-eng-interactive-tutorial">
-    An example-filled tutorial that covers the prompt engineering concepts found in the docs.
+    An example-filled tutorial on prompt engineering fundamentals. It was written for Claude 3 models, so follow Prompting best practices where the two differ.
   </Card>
 
   <Card title="Google Sheets prompting tutorial" icon="link" href="https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8">

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/fable-5-1/migration-guide
-fetched_at: 2026-09-28T06:10:43.857845+00:00
+fetched_at: 2026-10-05T06:27:27.393763+00:00
 fetch_method: mintlify_md
 ---
 
@@ -578,7 +578,7 @@ model = "claude-mythos-5-1"  # After
      ```
    </CodeGroup>
 
-   See [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use) and [Forcing tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). If you forced a tool only to get schema-conformant JSON, use [JSON outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#json-outputs) (`output_config.format`) instead.
+   See [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use) and [Forcing tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). If you forced a tool only to get schema-conformant JSON, use [JSON outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#usage) (`output_config.format`) instead.
 
    If your application, rather than the user, requires a specific tool call on the current turn of a multi-turn conversation, append a [mid-conversation system message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages) after the latest `user` turn. Name the tool, say the call is required for this turn, and tell Claude to open its response with it. Because the message is appended rather than written into the top-level `system` prompt, earlier turns stay byte-identical and keep their [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) hits:
 
@@ -1563,7 +1563,7 @@ model = "claude-mythos-5-1"  # After
 
 4. **Text between tool calls is returned in thinking blocks:** On Claude Opus 5, text the model writes between tool calls comes back as `text` blocks. On `claude-fable-5-1`, as on Claude Fable 5, that narration comes back as progress-update `thinking` blocks, one before each tool call. Under the default `thinking.display` of `"omitted"`, they carry no readable text. If your interface renders that narration, set `display: "updates"` (beta) to receive progress updates as text while reasoning stays hidden, or `"summarized"` to receive both. Then render the non-empty `thinking` blocks between `tool_use` blocks. See [Progress updates between tool calls](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates).
 
-5. **Safety classifiers and fallback routing:** Claude Fable 5.1 runs safety classifiers covering the same `stop_details` categories as Claude Fable 5, a broader set than Claude Opus 5's cybersecurity-only classifiers. Expect `stop_details.category` values beyond `"cyber"`, such as `"bio"` and `"reasoning_extraction"`; see the [refusal category table](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the full set. For `fallbacks` configuration and permitted targets, see [Use `fallbacks: "default"` for refusals](https://platform.claude.com/docs/en/models/fable-5-1/migration-guide#fable-5-1-recommended-changes).
+5. **Safety classifiers and fallback routing:** Claude Fable 5.1 runs safety classifiers covering the same `stop_details` categories as Claude Fable 5, a broader set than Claude Opus 5's classifiers. Expect additional `stop_details.category` values, such as `"bio"`; see the [refusal category table](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response) for the full set. For `fallbacks` configuration and permitted targets, see [Use `fallbacks: "default"` for refusals](https://platform.claude.com/docs/en/models/fable-5-1/migration-guide#fable-5-1-recommended-changes).
 
 6. **Pricing:** $10 USD per million input tokens and $50 USD per million output tokens, compared with $5 USD and $25 USD for Claude Opus 5. Prompt cache reads are $0.25 USD per million tokens, half the Claude Opus 5 rate. See [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing).
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-helm
-fetched_at: 2026-09-14T05:36:05.681127+00:00
+fetched_at: 2026-10-05T06:27:23.642232+00:00
 fetch_method: mintlify_md
 ---
 
@@ -117,7 +117,7 @@ The Install steps that follow note where to add the corresponding route.
           The chart's default audience is `api.anthropic.com` with no scheme, but the Console's federation-rule form suggests `https://api.anthropic.com`. The two must match byte-for-byte or authentication fails. Either set the rule's audience to `api.anthropic.com`, or set `api.wif.audience` in `values.yaml` to `https://api.anthropic.com`.
         </Note>
 
-        If the tunnel is in a workspace other than the organization's default, also add the rule's service account as a member of that workspace under **Settings > Workspaces** (the Tunnels API authorizes against the service account's workspace memberships).
+        If the tunnel is in a workspace other than the organization's default, also [add the rule's service account to that workspace](https://platform.claude.com/docs/en/manage-claude/workspaces#role-inheritance) (the Tunnels API authorizes against the service account's workspace memberships).
 
         Note the rule's ID (`fdrl_...`); you'll set it as `api.wif.federationRuleId`.
 

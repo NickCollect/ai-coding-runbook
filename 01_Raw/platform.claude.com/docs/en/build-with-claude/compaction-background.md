@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction-background
-fetched_at: 2026-09-28T06:10:40.189064+00:00
+fetched_at: 2026-10-05T06:27:23.033218+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,7 @@ featureMetadata:
     - claude-opus-4-8
     - claude-opus-4-7
     - claude-opus-4-6
+    - claude-sonnet-5-5
     - claude-sonnet-5
     - claude-sonnet-4-6
   supportedPlatforms:
@@ -45,7 +46,9 @@ The compaction request and the block it returns are the same as in the loop. You
 
 For example, if the compaction request held messages 1 to 5 and the conversation gained messages 6 to 8 while it ran, after the swap your history is the block followed by messages 6 to 8.
 
-![Background compaction timeline: the compaction request is sent with messages 1 to 5 while the conversation continues on its full history and gains messages 6 to 8; when the block arrives, it replaces messages 1 to 5 at the front of the history, and the history becomes the block followed by messages 6 to 8](https://platform.claude.com/docs/images/compaction-background-timeline.svg)
+<Frame>
+  ![Background compaction timeline: the compaction request is sent with messages 1 to 5 while the conversation continues on its full history and gains messages 6 to 8; when the block arrives, it replaces messages 1 to 5 at the front of the history, and the history becomes the block followed by messages 6 to 8](https://platform.claude.com/docs/images/compaction-background-timeline.svg)
+</Frame>
 
 If the response has any other `stop_reason`, no summary was produced, which counts as a failure in step 2. Keep the full history; [Handle a missing summary or an error](https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand#when-no-summary-comes-back) lists the causes and what to do for each.
 
@@ -53,7 +56,7 @@ If the response has any other `stop_reason`, no summary was produced, which coun
 
 The compaction request counts against your rate limits like any other request, and while it runs your application has two requests open at once. The conversation keeps growing on its full history until the swap, so start the compaction request while the context window still has room for the turns that arrive meanwhile.
 
-The following program is the loop from [Compact in a loop](https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand#compact-in-a-loop) with the compaction request taken off the conversation's path. It has no PHP version, because the example depends on running two requests at once. The highlighted lines show where it differs from the loop, and the following list takes them in the order the program runs them.
+The following program is the loop from [Compact in a loop](https://platform.claude.com/docs/en/build-with-claude/compaction-on-demand#compact-in-a-loop) with the compaction request taken off the conversation's path. The highlighted lines show where it differs from the loop, and the following list takes them in the order the program runs them.
 
 <CodeGroup exclude="shell, php">
   ```python Python
@@ -470,6 +473,12 @@ The following program is the loop from [Compact in a loop](https://platform.clau
       client.close();
   }
   ```
+
+  <CodeGroupItem language="PHP">
+    <Note>
+      The PHP SDK sends requests synchronously, so it can't run the compaction request in the background while the conversation goes on.
+    </Note>
+  </CodeGroupItem>
 
   ```ruby Ruby
   client = Anthropic::Client.new

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/models/choosing-a-model
-fetched_at: 2026-09-28T06:10:44.397420+00:00
+fetched_at: 2026-10-05T06:27:28.171241+00:00
 fetch_method: mintlify_md
 ---
 
@@ -73,7 +73,7 @@ Most workloads start with Claude Opus 5.5.
 | ------------------------------------------------------------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | The highest available capability                                          | Claude Fable 5.1          | Agent sessions that run for hours, multistep deep research, analysis carried through to a finished document, spreadsheet, or deck |
 | Complex agentic coding and enterprise work                                | Claude Opus 5.5           | Multihour autonomous coding agents, large-scale refactoring, complex systems engineering, vision-heavy workflows, computer use    |
-| Speed and capability for everyday coding, agent, and enterprise workloads | Claude Sonnet 5           | Code generation, data analysis, content creation, visual understanding, agentic tool use                                          |
+| Speed and capability for everyday coding, agent, and enterprise workloads | Claude Sonnet 5.5         | Code generation, data analysis, content creation, visual understanding, agentic tool use                                          |
 | The lowest latency and price, with extended thinking                      | Claude Haiku 4.5          | Real-time applications, high-volume intelligent processing, cost-sensitive deployments needing strong reasoning, sub-agent tasks  |
 
 ***
@@ -113,8 +113,8 @@ Multi-model strategies pair a lower-cost model with a frontier model so that mos
     The latest Opus model: breaking changes, new features, and behavior differences
   </Card>
 
-  <Card title="What's new in Claude Sonnet 5" icon="sparkle" href="https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5">
-    For everyday workloads that balance speed and capability
+  <Card title="What's new in Claude Sonnet 5.5" icon="sparkle" href="https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5">
+    The latest Sonnet model: breaking changes, new features, and behavior differences
   </Card>
 
   <Card title="Start building" icon="code" href="https://platform.claude.com/docs/en/get-started">

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/models/migration-guide
-fetched_at: 2026-09-28T06:10:44.496121+00:00
+fetched_at: 2026-10-05T06:27:28.245314+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ description: Guides for migrating to the latest Claude models from previous Clau
 * [Migrating to Claude Fable 5.1 and Claude Mythos 5.1](https://platform.claude.com/docs/en/models/fable-5-1/migration-guide)
 * [Migrating to Claude Mythos 5 and Claude Fable 5](https://platform.claude.com/docs/en/models/fable-5/migration-guide)
 * [Migrating to Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide)
-* [Migrating to Claude Sonnet 5](https://platform.claude.com/docs/en/models/sonnet-5/migration-guide)
+* [Migrating to Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide)
 * [Migrating to Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/migration-guide)
 
 ## Get help
