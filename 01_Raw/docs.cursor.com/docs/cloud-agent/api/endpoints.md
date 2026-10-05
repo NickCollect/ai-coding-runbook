@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-09-28T06:10:41.722673+00:00
+fetched_at: 2026-10-05T06:27:19.533053+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,6 +35,8 @@ POST
 `/v1/agents`
 
 Create a Cloud Agent and immediately enqueue its initial run. The response returns both the durable `agent` and the initial `run`.
+
+Repositories can come from any source control provider Cursor supports: GitHub (Cloud and Enterprise Server), GitLab (Cloud and Self-Hosted), Bitbucket Cloud, and Azure DevOps. Pass the repository URL as it appears on your provider, including a self-hosted host such as `gitlab.example.com`. See [Cloud Agents setup](https://cursor.com/docs/cloud-agent/setup.md) for connecting a provider.
 
 #### Request Body
 
@@ -76,15 +78,17 @@ Execution environment type. `cloud` uses Cursor-hosted VMs; `pool` and `machine`
 
 `env.name` string (optional)
 
-Named Cursor-hosted environment, pool, or machine name. For `env.type: "pool"`, this is the pool name (defaults to `default` when omitted). An unknown pool name returns `400` instead of queueing forever.
+Named Cursor-hosted environment, pool, or machine name. For `env.type: "pool"`, this is the pool name (defaults to `default` when omitted). An unknown pool name returns `400` instead of queueing forever. Name an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools) to send more than one entry in `repos`.
 
 `repos` array (optional)
 
 Repository configuration. Mutually exclusive with a named cloud environment. Omit both `repos` and `env` to start a no-repo agent. You can also omit `repos` when `env.type` is `pool` to target an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools). Maximum 20 repositories.
 
+On self-hosted targets, only a named any-repo pool takes more than one repository. `machine`, the `default` pool, and repo-backed pools take one; sending more returns `400 validation_error` with the message "My Machines and repo-bound pools accept one repo in repos. To start an agent with several repos, set env.name to an any-repo pool."
+
 `repos[0].url` string (required)
 
-GitHub repository URL (for example, `https://github.com/your-org/your-repo`). Required on every repo entry, including when `prUrl` is provided.
+Repository URL on any connected source control provider (for example, `https://github.com/your-org/your-repo` or `https://gitlab.example.com/your-group/your-repo`). Required on every repo entry, including when `prUrl` is provided.
 
 `repos[0].startingRef` string (optional)
 
@@ -92,7 +96,7 @@ Branch name or commit SHA to use as the starting point. Ignored when `prUrl` is 
 
 `repos[0].prUrl` string (optional)
 
-GitHub pull request URL. When provided, the agent works on this PR's repository and branches; `startingRef` is ignored. `url` must still be set on the same `repos` entry.
+Pull request URL, called a merge request URL on GitLab. When provided, the agent works on that request's repository and branches; `startingRef` is ignored. `url` must still be set on the same `repos` entry.
 
 `workOnCurrentBranch` boolean (optional, default: false)
 
@@ -109,6 +113,8 @@ Whether to skip requesting the user as a reviewer when Cursor opens a PR. Only a
 `envVars` object (optional)
 
 Session-scoped environment variables for the cloud agent. Values are encrypted at rest, injected into the agent's shell, and deleted with the agent. Maximum 50 entries; names up to 255 bytes (can't start with `CURSOR_`), values up to 4096 bytes. Cannot be combined with a client-supplied `agentId`.
+
+On self-hosted targets, `envVars` reach only pool workers that run with `--sync-dashboard-secrets` while a team admin has **Secret sync** on. `machine` targets and other pool workers run without them. See [Environments on Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines).
 
 **Beta:** `envVars` is rolling out. If it isn't enabled for your account yet, the field is silently ignored on create rather than failing the request — verify the values are present by inspecting the agent shell on a first run before relying on them in production.
 
@@ -188,6 +194,26 @@ curl --request POST \
   }'
 ```
 
+Self-hosted GitLab repository:
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/agents \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "prompt": {
+      "text": "Add a README with setup instructions"
+    },
+    "repos": [
+      {
+        "url": "https://gitlab.example.com/your-group/your-repo",
+        "startingRef": "main"
+      }
+    ]
+  }'
+```
+
 Worker pool (including any-repo):
 
 ```bash
@@ -203,6 +229,34 @@ curl --request POST \
       "type": "pool",
       "name": "sandbox"
     }
+  }'
+```
+
+Any-repo pool with several repos:
+
+```bash
+curl --request POST \
+  --url https://api.cursor.com/v1/agents \
+  -u YOUR_API_KEY: \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "prompt": {
+      "text": "Update the API client and the web app together"
+    },
+    "env": {
+      "type": "pool",
+      "name": "my-pool"
+    },
+    "repos": [
+      {
+        "url": "https://github.com/your-org/your-api",
+        "startingRef": "main"
+      },
+      {
+        "url": "https://github.com/your-org/your-web-app",
+        "startingRef": "main"
+      }
+    ]
   }'
 ```
 
@@ -260,7 +314,7 @@ Pagination cursor from `nextCursor` on the previous response.
 
 `prUrl` string (optional)
 
-Filter agents by GitHub pull request URL.
+Filter agents by pull request URL, called a merge request URL on GitLab.
 
 `includeArchived` boolean (optional, default: true)
 
@@ -1807,6 +1861,8 @@ GET
 `/v1/repositories`
 
 List GitHub repositories accessible to the authenticated user through Cursor's GitHub App installation.
+
+This endpoint returns GitHub repositories only. Repositories on GitLab, Bitbucket Cloud, and Azure DevOps are not listed here, even though you can create agents against them with [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent).
 
 **This endpoint has very strict rate limits.**
 

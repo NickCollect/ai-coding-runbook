@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics
-fetched_at: 2026-09-28T06:10:40.339709+00:00
+fetched_at: 2026-10-05T06:27:18.288754+00:00
 fetch_method: mintlify_md
 ---
 
@@ -178,7 +178,7 @@ Conversation Insights is free during the preview period. Starting January 1st, 2
 
 ## Grok Bot Conversation Insights
 
-Grok Bot Conversation Insights is rolling out to Enterprise teams with [Grok Bot enabled](https://cursor.com/docs/grok-bot/teams.md). When it's on for your team, a **Cursor** / **Grok Bot** source toggle appears at the top of Conversation Insights in the [Analytics dashboard](https://cursor.com/dashboard/analytics). If you don't see the toggle, ask your account team.
+Grok Bot Conversation Insights is available to all Enterprise teams that use [Grok Bot](https://cursor.com/docs/grok-bot/teams.md). A **Cursor** / **Grok Bot** source toggle appears at the top of Conversation Insights in the [Analytics dashboard](https://cursor.com/dashboard/analytics). To see Conversation Insights, **Disable Conversation Insights** must be off in [team settings](https://cursor.com/dashboard/settings). If your team restricts the analytics dashboard to admins, you also need permission to manage analytics. If you've checked both and the toggle is still missing, contact your account team.
 
 Grok Bot Conversation Insights applies the same idea as [Conversation Insights](https://cursor.com/docs/account/teams/analytics.md#conversation-insights) to the Bots your team runs. Cursor classifies each Grok Bot conversation so admins can see what kind of work Bots handle across the team, without reading the conversations themselves.
 

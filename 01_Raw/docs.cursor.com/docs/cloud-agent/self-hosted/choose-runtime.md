@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/choose-runtime
-fetched_at: 2026-09-07T05:31:27.594774+00:00
+fetched_at: 2026-10-05T06:27:19.971225+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,15 +62,17 @@ The tradeoff is operational ownership. Your team runs the fleet, keeps enough wo
 
 ## Security model differences
 
-All three options support Privacy Mode and controlled secrets. The main difference is where tool execution happens and who operates that execution environment.
+All three options support Privacy Mode. The main difference is where tool execution happens and who operates that execution environment. Secrets differ too: My Machines use the machine's own credentials, and Team Pools receive dashboard secrets only through Secret sync.
 
-| Question                                    | Managed Cloud Agents                                                                                                          | My Machines                            | Team Pools                    |
-| :------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- | :---------------------------- |
-| Where does the agent loop run?              | Cursor cloud                                                                                                                  | Cursor cloud                           | Cursor cloud                  |
-| Where do tool calls run?                    | Cursor-managed isolated VM                                                                                                    | Your machine                           | Your worker                   |
-| Who manages host and environment lifecycle? | Cursor, after first-time environment configuration                                                                            | You                                    | Your team                     |
-| How do agents reach private resources?      | Environment networking, allowlists, Tailscale or similar clients, and private connectivity for supported source control paths | Your machine's existing network        | Your worker fleet's network   |
-| Best operational fit                        | Most teams and repos                                                                                                          | Individual users and specific machines | Centralized enterprise fleets |
+| Question                                                                                                                     | Managed Cloud Agents                                                                                                          | My Machines                            | Team Pools                              |
+| :--------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- | :-------------------------------------- |
+| Where does the agent loop run?                                                                                               | Cursor cloud                                                                                                                  | Cursor cloud                           | Cursor cloud                            |
+| Where do tool calls run?                                                                                                     | Cursor-managed isolated VM                                                                                                    | Your machine                           | Your worker                             |
+| Who manages host and environment lifecycle?                                                                                  | Cursor, after first-time environment configuration                                                                            | You                                    | Your team                               |
+| How do agents reach private resources?                                                                                       | Environment networking, allowlists, Tailscale or similar clients, and private connectivity for supported source control paths | Your machine's existing network        | Your worker fleet's network             |
+| Which [environment](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines) settings apply? | All of them                                                                                                                   | Repository list only                   | Repository list only                    |
+| Which dashboard secrets reach the machine?                                                                                   | Team, user, and environment-scoped secrets                                                                                    | None                                   | Team and user secrets, with Secret sync |
+| Best operational fit                                                                                                         | Most teams and repos                                                                                                          | Individual users and specific machines | Centralized enterprise fleets           |
 
 ## Next steps
 

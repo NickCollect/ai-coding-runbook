@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-09-28T06:10:41.851742+00:00
+fetched_at: 2026-10-05T06:27:19.791783+00:00
 fetch_method: mintlify_md
 ---
 
@@ -95,6 +95,7 @@ Depending on your MCP client, tool names may include a server prefix (for exampl
 | `run-info`                          | Get the current run's identity, metadata, and URL. Start here.                                                                                                                                                          |
 | `environment-info`                  | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                                                                          |
 | `get-events`                        | List the current run's dashboard events, oldest first.                                                                                                                                                                  |
+| `rename-chat`                       | Rename the current run's chat. The new title, up to 200 characters, shows in the agents list and the conversation header.                                                                                               |
 | `list-cloud-agents`                 | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.                                                                              |
 | `batch-fetch-details`               | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, environment info, and run events via `include_events` (writes `events.json` per run; up to 50 runs per batch). |
 | `get-automation`                    | Get an automation's details like name and owner from its ID.                                                                                                                                                            |

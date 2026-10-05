@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/integrations
-fetched_at: 2026-09-28T06:10:42.109901+00:00
+fetched_at: 2026-10-05T06:27:20.053741+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ Each partner maintains its own guide for running Self-Hosted Machines workers on
 - **Vercel.** [Cursor with Vercel Sandbox](https://vercel.com/kb/guide/cursor-vercel-sandbox)
 - **Tensorlake.** [Cursor Cloud Agents on Tensorlake Sandboxes](https://docs.tensorlake.ai/sandboxes/cursor-cloud-agents)
 - **Coder.** [Agent Relay for Cursor](https://coder.com/docs/@main/ai-coder/agent-relay)
-- **SuperServe.** [Run Cursor Self-Hosted Machines on Superserve](https://docs.superserve.ai/integrations/managed-agents/cursor-cloud-agents)
+- **Superserve.** [Run Cursor Self-Hosted Machines on Superserve](https://docs.superserve.ai/integrations/managed-agents/cursor-cloud-agents)
 
 ## Reference templates
 
@@ -42,7 +42,7 @@ available for them. Don't start new deployments on it.
 
 The platform changes, but the worker requirements stay the same:
 
-- A **Cursor Enterprise plan**, with Self-Hosted Machines enabled by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted-agents).
+- A **Cursor Enterprise plan**, with Self-Hosted Machines enabled by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted).
 - A [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md) in `CURSOR_API_KEY`. See [Authenticate workers](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#authenticate-workers).
 - Outbound HTTPS to `api2.cursor.sh`, `api2direct.cursor.sh`, and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com`. See [Networking](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#networking).
 - A [pool name](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#pool-names) or [labels](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#labels) so Cursor routes the right requests to workers on that platform.

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/my-machines
-fetched_at: 2026-09-14T05:36:07.485268+00:00
+fetched_at: 2026-10-05T06:27:20.042373+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Keep this process running while you use the machine. By default, a My Machines w
 ### 4. Run an agent
 
 1. Go to [cursor.com/agents](https://cursor.com/agents).
-2. The machine should show up in the environment dropdown.
+2. In the menu that sets where the agent runs, select the machine under **My Machines**.
 3. Send a task.
 
 ![Cursor's Run on menu with my-devbox highlighted under My Machines](/docs-static/images/cloud-agent/my-machines-picker.png)
@@ -93,6 +93,10 @@ agent worker \
 ```
 
 Each path must exist. For each root with a Git remote, the worker registers routing metadata so Cursor can match requests to the correct checkout.
+
+An agent you start on a machine with [`POST /v1/agents`](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent) (`env.type: "machine"`) gets one repo in `repos`. To start an agent with several repos, use an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools).
+
+On your machine, a Cloud Agent environment sets only which repositories a run uses. The machine keeps its own tools, credentials, and network, and gets no dashboard secrets. See [Environments on Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines).
 
 ### Use an API key
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-09-28T06:10:42.237198+00:00
+fetched_at: 2026-10-05T06:27:20.093214+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Cloud Agents to your own machines.
 Use Self-Hosted Machines when Cursor's managed cloud can't meet your constraints:
 
 - You have strict network requirements, and code or services can't be reached from outside your network. For private source control or package registries, start with managed Cloud Agents and [private connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md) ([AWS PrivateLink](https://cursor.com/docs/cloud-agent/private-connectivity.md#aws-privatelink) or [Cloudflare Tunnel](https://cursor.com/docs/cloud-agent/private-connectivity.md#cloudflare-tunnel)).
-- You have custom hardware, such as GPU machines or Macs for iOS development. Use a machine you already run, or a VM from a [partner host](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md) such as AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, or SuperServe.
+- You have custom hardware, such as GPU machines or Macs for iOS development. Use a machine you already run, or a VM from a [partner host](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md) such as AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, or Superserve.
 - You have custom images, such as a different operating system or an existing build pipeline, that are difficult to save as a [Cloud Agent build](https://cursor.com/docs/cloud-agent/builds.md).
 
 If you want to try this out, check out the [My Machines
@@ -74,6 +74,35 @@ Workers come in two configurations:
 
 To run Team Pool workers on a third-party VM or sandbox, see [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
 
+## Environments on Self-Hosted Machines
+
+A [Cloud Agent environment](https://cursor.com/docs/cloud-agent/setup.md#what-is-a-cloud-agent-environment) is the saved setup a Cursor-hosted agent starts from: repositories, dependencies, secrets, startup commands, and network access. A self-hosted run uses only the environment's repositories. Pool workers that opt in to Secret sync also get team and user secrets. Every other environment setting applies only to Cursor-hosted Cloud Agents, so you set those up on the machine.
+
+**Repositories.** What the worker does with the environment's repositories depends on how you run it:
+
+- An [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools) worker started with `--clone-git-repos` checks out every repository at the requested branch or commit.
+- A repo-backed pool worker or a My Machines worker uses the checkouts it already has, without switching branches or cloning. Your [`sessionStart` hook](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hooks) receives every repository in the request as `repo_urls` and `repos`, so it can clone the ones the worker doesn't have.
+
+**Secrets.** A pool worker started with `--sync-dashboard-secrets` gets secrets as environment variables once a team admin turns on **Secret sync** in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted):
+
+- Team and user secrets available to the run's repositories. Any-repo pools get only secrets that aren't limited to a repository.
+- `envVars` passed to [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent).
+
+Environment-scoped secrets and Build Secrets never reach a worker. My Machines workers get no dashboard secrets and use the machine's own credentials.
+
+**Everything else.** Replace each remaining setting with its self-hosted equivalent:
+
+| Environment setting                                                                               | Self-hosted equivalent                                                                                                                                                    |
+| :------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Install script and startup commands                                                               | A `sessionStart` hook in `.cursor/hooks.json`, [`--on-session-start`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hooks) on pool workers, or the worker image |
+| Terminals and ports                                                                               | A hook or your own process manager                                                                                                                                        |
+| Dockerfile, image, snapshot, and user                                                             | The machine or worker image, running as the worker's OS user                                                                                                              |
+| [Builds](https://cursor.com/docs/cloud-agent/builds.md)                                           | A prepared worker image, or warm workers from the [worker controller](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#warm-pool)                                  |
+| [Network access settings](https://cursor.com/docs/cloud-agent/security-network.md#network-access) | The machine's firewall or HTTPS proxy                                                                                                                                     |
+| Environment-scoped secrets                                                                        | Secrets on the machine, or team and user secrets through Secret sync                                                                                                      |
+| MCP server limits in `environment.json`                                                           | Your team's [MCP servers](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#mcp-servers), available to every run with no per-environment limit                      |
+| `.cursor/environment.json` in the repository                                                      | `.cursor/hooks.json` in the worker directory                                                                                                                              |
+
 ## Supported deployment patterns
 
 Run a worker anywhere you can install the Cursor CLI and its dependencies:
@@ -82,7 +111,7 @@ Run a worker anywhere you can install the Cursor CLI and its dependencies:
 - **Persistent hosts or containers.** Run one or more pool workers under `systemd`, `launchd`, Docker, or another process manager.
 - **Dynamic infrastructure.** Use the built-in [worker controller](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#worker-controller) or the Cloud Agents API to start machines when requests arrive.
 - **Kubernetes.** Start from the [anysphere/k8s-workers](https://github.com/anysphere/k8s-workers) template. It runs `agent worker controller --spawn` in your cluster and creates one worker Pod per claimed request, or keeps warm Pods with `--warm-idle`, without a CRD. See [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md#reference-templates).
-- **Partner hosts and templates.** Run pool workers on AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, or SuperServe with partner guides, or clone a Cursor reference template for AWS Lambda MicroVMs, Cloudflare Containers, or Kubernetes. See [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
+- **Partner hosts and templates.** Run pool workers on AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, or Superserve with partner guides, or clone a Cursor reference template for AWS Lambda MicroVMs, Cloudflare Containers, or Kubernetes. See [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md).
 
 Deployment guides, partner guides, and templates are reference architectures. You own the worker image, infrastructure, secrets, scaling policy, and production validation.
 
@@ -116,7 +145,7 @@ curl https://cursor.com/install -fsS | bash
   export CURSOR_API_KEY="<team service-account API key>"
   ```
 
-- Self-hosted settings configured by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted-agents): **Allow Self-Hosted Machines** lets users opt in, and **Require Self-Hosted Machines** routes every Cloud Agent run to your workers.
+- Self-hosted settings configured by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted): **Allow Self-Hosted Machines** lets users opt in, and **Require Self-Hosted Machines** routes every Cloud Agent run to your workers.
 
 **Computer use** (optional)
 
@@ -136,7 +165,7 @@ curl https://cursor.com/install -fsS | bash
 - [Choose where Cloud Agents run](https://cursor.com/docs/cloud-agent/self-hosted/choose-runtime.md): compare managed Cloud Agents, My Machines, and Team Pools.
 - [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md): connect your first worker in a few minutes, then configure personal workers, workspace roots, and local MCP servers.
 - [Team Pools](https://cursor.com/docs/cloud-agent/self-hosted/pool.md): organize workers into team pools, and [scale worker capacity](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#worker-controller) with a controller.
-- [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md): partner guides for AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, and SuperServe, and reference templates for AWS Lambda MicroVMs, Cloudflare Containers, and Kubernetes ([anysphere/k8s-workers](https://github.com/anysphere/k8s-workers)).
+- [Integrations](https://cursor.com/docs/cloud-agent/self-hosted/integrations.md): partner guides for AWS Lambda, Cloudflare, Namespace, Modal, Daytona, E2B, Vercel, Tensorlake, Coder, and Superserve, and reference templates for AWS Lambda MicroVMs, Cloudflare Containers, and Kubernetes ([anysphere/k8s-workers](https://github.com/anysphere/k8s-workers)).
 - [Computer use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md): let agents drive a desktop and browser on your workers.
 - [API reference](https://cursor.com/docs/cloud-agent/api/endpoints.md#workers-and-pools): endpoints for workers, pools, the pending-request queue (list, SSE watch, claim, and release), and worker tokens.
 - [Self-Hosted Machines](https://cursor.com/help/ai-features/self-hosted-machines.md): short answers for setup, Team Pools, integrations, and troubleshooting.

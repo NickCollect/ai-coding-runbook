@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-09-28T06:10:42.666060+00:00
+fetched_at: 2026-10-05T06:27:20.624107+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,14 +22,35 @@ The [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wir
 
 Cursor delivers OTLP through a server-side egress proxy. Traffic originates from these static addresses (all `/32`):
 
-| IP address     | CIDR |
-| -------------- | ---- |
-| 3.218.161.44   | /32  |
-| 3.231.18.206   | /32  |
-| 35.174.159.35  | /32  |
-| 184.73.225.134 | /32  |
-| 3.209.66.12    | /32  |
-| 52.44.113.131  | /32  |
+| IP address      | CIDR |
+| --------------- | ---- |
+| 3.218.161.44    | /32  |
+| 3.231.18.206    | /32  |
+| 35.174.159.35   | /32  |
+| 184.73.225.134  | /32  |
+| 3.209.66.12     | /32  |
+| 52.44.113.131   | /32  |
+| 100.63.97.141   | /32  |
+| 100.63.144.57   | /32  |
+| 18.210.232.136  | /32  |
+| 3.208.51.163    | /32  |
+| 3.224.130.48    | /32  |
+| 3.234.118.132   | /32  |
+| 34.197.19.148   | /32  |
+| 34.198.251.120  | /32  |
+| 34.199.187.247  | /32  |
+| 35.170.160.152  | /32  |
+| 44.215.226.85   | /32  |
+| 52.202.172.69   | /32  |
+| 54.81.109.217   | /32  |
+| 54.204.61.44    | /32  |
+| 54.236.99.119   | /32  |
+| 67.202.63.191   | /32  |
+| 184.193.125.229 | /32  |
+| 184.193.223.40  | /32  |
+| 184.194.140.210 | /32  |
+| 184.194.175.144 | /32  |
+| 184.194.208.56  | /32  |
 
 These IPs don't rotate without advance notice. Use TLS and auth as the primary control. Add IP allowlisting if your network requires it.
 
@@ -154,9 +175,9 @@ Before you enable it, a Bot's Jira call shows up in your collector as one `curso
 
 Scope and limits:
 
-- **Excerpts, not full payloads.** Each side is capped at 8 KiB. A cut body is a prefix of the redacted text, flagged with `cursor.conversation.content_truncated`, and does not parse as JSON. The head of a write call (object key, target, new value) fits; long read results are cut.
+- **Excerpts, not full payloads.** Each side is capped at 8 KiB. A body over the cap is a prefix of the redacted text and does not parse as JSON. `cursor.conversation.content_truncated` flags it, and also flags a body that is still valid JSON but lost the tail of a document the connector had already cut. Check the flag before you parse. The head of a write call (object key, target, new value) fits; long read results are cut.
 - **Result contents.** On success the result record carries the tool's text and structured content. On failure it carries the error, rejection, or denial message. Cursor replaces image bytes with their MIME type.
-- **Secrets redacted, best effort.** Cursor runs the same pattern-based scrubber as shell commands and message text: known credential shapes, PEM blocks, and email addresses become `[REDACTED: ...]` markers, so an `assignee` address exports as `[REDACTED: Email]`. It also redacts the value of any JSON member whose key names a credential (`password`, `token`, `api_key`, and similar; the [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) lists them), whatever the value looks like. Pattern matching can't recognize every secret or every piece of personal data. A credential behind a key outside the list, split across fields, or in a header row with an unusual member name (`{"k":"Authorization","v":"Basic ..."}`) exports as is, and so does an argument that quotes a teammate's message or a result that carries a connector's response body. Your team owns that residual risk, as with prompts and responses.
+- **Secrets redacted, best effort.** Cursor runs the same pattern-based scrubber as shell commands and message text: known credential shapes, PEM blocks, US social security numbers, and email addresses become `[REDACTED: ...]` markers, so an `assignee` address exports as `[REDACTED: Email]` and a `123-45-6789` in a ticket body as `[REDACTED: SSN]`. It also redacts the value of any JSON member whose key names a credential (`password`, `token`, `auth`, `pin`, `api_key`, and similar; the [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) has the rule), whatever the value looks like. An object under such a key keeps its shape, with its metadata members exported and only the secret replaced: `auth: {"type":"oauth2","token":"..."}` exports the `type` and the marker. The same key rules apply to JSON a connector returns as text, the usual MCP reply shape, including JSON nested inside a string at any depth; a document with a redaction in it exports compact. Pattern matching can't recognize every secret or every piece of personal data. A credential behind a key outside the list, split across fields, or in a header row with an unusual member name (`{"k":"Authorization","v":"Basic ..."}`) exports as is, and so does an argument that quotes a teammate's message or a result that carries a connector's response body. Your team owns that residual risk, as with prompts and responses.
 - **Hosted connector calls only.** Grok Bot MCP calls Cursor runs (Jira, Slack, Linear, and other hosted servers; their `mcp_tool_call` rows show `cursor.grok_bot.mcp.transport=http`) produce tool I/O. `stdio` servers on the Bot's computer, builtin tools, and Cloud Agent, IDE, and CLI tool calls report no payloads yet.
 
 ## What Cursor exports
@@ -200,7 +221,7 @@ Everything below is on by default for a new destination, except `conversation_co
 
 The `cursor.grok_bot.*` events, and `cursor.skill.activated` when a Bot reads a skill, carry [Action Recording](https://cursor.com/docs/grok-bot/security.md#logging-and-audit) data. They flow only after a team admin turns on Action Recording on the dashboard Grok Bot page; it is a team setting, off by default, and Privacy Mode (Legacy) forces it off.
 
-Recorded events are metadata about what the Bot did, never the content it worked with. Tool arguments and results, file paths and names, message bodies and recipients, credentials, and card details are never exported on these events; MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) record. Shell command text is exported after secret scrubbing and capped at 8 KiB; browser URLs are stripped of query strings, fragments, and credentials; and where a tool acted on a site, only the bare hostname is reported. The [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) lists every attribute per event.
+Recorded events are metadata about what the Bot did, never the content it worked with. Tool arguments and results, file paths and names, message bodies and recipients, credentials, and card details are never exported on these events; MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) record. Shell command text is exported after secret scrubbing and capped at 8 KiB; browser URLs are stripped of query strings, fragments, and credentials, and a webhook token or share-link token in the path becomes a `[REDACTED: ...]` marker; and where a tool acted on a site, only the bare hostname is reported. The [Wire Reference](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) lists every attribute per event.
 
 The `cursor.conversation.*` events carry message text or tool payloads and flow only after the team opts in and the destination turns on the toggle for that kind. See [Conversation content](https://cursor.com/docs/enterprise/opentelemetry-export.md#conversation-content) and [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io).
 
@@ -254,6 +275,8 @@ Metrics (`cursor.token.usage`, `cursor.tool.calls`, `cursor.cost.usage`) are agg
 **Attribute records to a person**
 
 `cursor.user.account_id` is the member's Admin API id. Join it to `id` in the [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) response to name the person behind a record. `cursor.user.email` names the member directly. Both are optional and appear only alongside `cursor.user.id`, so don't require them on every record. The [resource attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#resource-attributes) table has the presence rules.
+
+Cloud agent records (`cursor.cloud_agent.*`) carry the same user attributes, resolved from the run's owner. A run started with a team API key or a service account has no owner and carries none.
 
 **Group Grok Bot activity**
 

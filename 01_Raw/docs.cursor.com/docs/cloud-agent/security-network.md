@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-08-31T06:29:31.776036+00:00
+fetched_at: 2026-10-05T06:27:19.898098+00:00
 fetch_method: mintlify_md
 ---
 
@@ -96,7 +96,7 @@ Switching back to **Indefinite** stops further conversation deletions but doesn'
 
 ## Network access
 
-Control which network resources your Cloud Agents can reach. These settings are available on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents) for individual users, saved environments, and team admins.
+Control which network resources your Cloud Agents can reach. These settings are available on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents) for individual users, saved environments, and team admins. They apply to Cursor-hosted Cloud Agents. Runs on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines) use the machine's own network, firewall, and proxy.
 
 ### Private network access
 
@@ -168,7 +168,7 @@ Enterprise team admins can lock the network access setting using the **Lock Netw
 - The team-level setting applies to every member, regardless of their individual preference.
 - Users cannot override the locked setting from their own dashboard.
 
-This gives admins full control over Cloud Agent network access across the organization.
+This gives admins full control over network access for Cursor-hosted Cloud Agents across the organization. A locked setting doesn't reach Self-Hosted Machines, including runs routed there by **Require Self-Hosted Machines**.
 
 ### Relationship to sandbox network policy
 
@@ -237,7 +237,30 @@ If you need to add the proxy IPs directly to an allowlist, use these addresses:
 184.73.225.134
 3.209.66.12
 52.44.113.131
+100.63.97.141
+100.63.144.57
+18.210.232.136
+3.208.51.163
+3.224.130.48
+3.234.118.132
+34.197.19.148
+34.198.251.120
+34.199.187.247
+35.170.160.152
+44.215.226.85
+52.202.172.69
+54.81.109.217
+54.204.61.44
+54.236.99.119
+67.202.63.191
+184.193.125.229
+184.193.223.40
+184.194.140.210
+184.194.175.144
+184.194.208.56
 ```
+
+The 21 addresses from `100.63.97.141` through `184.194.208.56` are allocated but not yet serving traffic. They are published ahead of time so you can add them to your allowlist before they go into use. They are not yet returned by the [API endpoint](https://cursor.com/docs/cloud-agent/security-network.md#api-endpoint) above.
 
 ### Origin IPs
 

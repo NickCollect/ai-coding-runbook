@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/enterprise/service-accounts
-fetched_at: 2026-07-13T04:25:36.668471+00:00
+fetched_at: 2026-10-05T06:27:18.335582+00:00
 fetch_method: mintlify_md
 ---
 
@@ -74,6 +74,7 @@ Each service account can have API keys associated with it. You can:
 
 - **View masked keys**: See the last few characters of each key for identification
 - **Rotate keys**: Generate a new key and invalidate the old one
+- **Edit name and description**: Rename an active service account or update its description. Its existing API keys keep working
 - **Archive service accounts**: Archive a service account and revoke all its API keys
 
 ### Rotating an API key

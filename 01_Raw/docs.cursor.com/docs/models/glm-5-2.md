@@ -1,8 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/glm-5-2
-fetched_at: 2026-08-31T06:29:33.600327+00:00
+fetched_at: 2026-10-05T06:27:21.886560+00:00
 fetch_method: mintlify_md
 ---
+
+We recommend using [GLM 5.3](https://cursor.com/docs/models/glm-5-3.md). It is Z.ai's latest model at the same per-token price.
 
 ## Tools
 

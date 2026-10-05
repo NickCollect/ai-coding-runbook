@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security/run-modes
-fetched_at: 2026-08-10T03:07:39.901624+00:00
+fetched_at: 2026-10-05T06:27:18.771933+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,11 +24,15 @@ In the desktop application, go to **Settings > Agents > Approvals & Execution**.
 
 Auto-review applies to shell, MCP, and Fetch tool calls. Cursor checks each call in this order:
 
-![The execution lifecycle of agent actions on Auto-review mode. Allowlisted calls run immediately, other shell commands run in the sandbox when possible, and anything else goes to the classifier, which can allow the call, ask the agent to take a different approach, or ask you to approve.](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/uploads/kreview-auto-review-light.svg)
+![The execution lifecycle of agent actions on Auto-review mode. On your local machine, allowlisted shell, Fetch, and MCP calls run outside the sandbox. Other shell commands run in the sandbox when they can. Shell commands that can't use the sandbox, sandboxed commands that fail, and other calls go to an LLM classifier on the Cursor backend. The classifier can run read-only ReadFile, Grep, Glob, and ListDir calls on your machine. Allowed calls run outside the sandbox. For blocked calls, the agent chooses a different approach or asks you to approve the action.](/docs-static/images/agent/auto-review-lifecycle-light.svg)
 
-A shell command "can run in the sandbox" when it works under the sandbox's file and network limits. Commands that need full system access, like writes outside the workspace or privileged operations, can't be sandboxed, so they go to the classifier instead.
+A shell command "can run in the sandbox" when it works under the sandbox's file and network limits. Commands that need more access, like full network access, writes outside the workspace, or privileged operations, can't use the sandbox, so they go to the classifier instead.
+
+If a sandboxed command fails on a sandbox restriction, such as a permission error, the agent can rerun it outside the sandbox. The classifier reviews that rerun.
 
 Sandboxing is a layer on top of Run Modes for shell commands. It controls where a supported terminal command runs, not whether the mode uses the Auto-review classifier.
+
+The classifier runs on the Cursor backend. To judge a call, it can make read-only `ReadFile`, `Grep`, `Glob`, and `ListDir` calls on your machine, for example to read a script the command runs.
 
 When the classifier blocks a call, Cursor can try another approach. If the agent decides that the action makes sense despite what the classifier said, Cursor will show you an approval prompt.
 
@@ -38,11 +42,11 @@ The classifier can make mistakes. It can allow a call you would have blocked, or
 
 ### Auto-review classifier requirements
 
-Auto-review's classifier runs on a small Cursor-managed model. Today that is [Claude 4.5 Haiku](https://cursor.com/docs/models/claude-4-5-haiku.md) or [GPT-5.4 Mini](https://cursor.com/docs/models/gpt-5-4-mini.md).
+Auto-review's classifier runs on small Cursor-managed models. Today it uses Gemini 3.5 Flash Lite, with [Claude 4.5 Haiku](https://cursor.com/docs/models/claude-4-5-haiku.md) as the fallback.
 
-Enterprise [model access controls](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) apply. Auto-review is available when at least one of those models is allowed for the team. Blocking all of them disables Auto-review in **Settings > Agents > Approvals & Execution**, even when team Run Modes includes it. Members then use Allowlist instead.
+Enterprise [model access controls](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) apply to both. Keep Claude 4.5 Haiku allowed for the team. Allowing it keeps Auto-review available in **Settings > Agents > Approvals & Execution**, and Auto-review uses it for every review when Gemini 3.5 Flash Lite is blocked. Blocking Claude 4.5 Haiku can disable Auto-review there, even when team Run Modes includes it. Members then use Allowlist instead.
 
-If Auto-review is grayed out, enable those models in [Team Settings → Models](https://cursor.com/dashboard/team-settings/models), fully quit and reopen Cursor, then check Approvals & Execution again.
+If Auto-review is grayed out, enable Claude 4.5 Haiku in [Team Settings → Models](https://cursor.com/dashboard/team-settings/models), fully quit and reopen Cursor, then check Approvals & Execution again.
 
 ### Configuring Auto-review
 

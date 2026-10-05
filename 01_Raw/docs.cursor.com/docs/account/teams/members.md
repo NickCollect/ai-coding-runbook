@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-09-07T05:31:25.549591+00:00
+fetched_at: 2026-10-05T06:27:18.386524+00:00
 fetch_method: mintlify_md
 ---
 
@@ -122,6 +122,8 @@ Removing a member removes their access to the team. It does not delete their Cur
 Admins can change roles for other members by clicking the context menu and then use the "Change role" option.
 
 There must be at least one Admin, and one paid member on the team at all times.
+
+On a team that belongs to an [Organization](https://cursor.com/docs/enterprise/organizations.md), an org admin who is also on the team shows their team role, so you can change their role or remove them like any other member. Turn on **Show org admins** to also list org admins who aren't on the team. In that view, every org admin shows as a read-only **Org Admin**. Turn the switch off to edit their team role.
 
 ## Domain settings
 

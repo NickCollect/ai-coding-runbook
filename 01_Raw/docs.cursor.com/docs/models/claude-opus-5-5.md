@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-5-5
-fetched_at: 2026-09-28T06:10:43.626223+00:00
+fetched_at: 2026-10-05T06:27:21.507916+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Claude Opus 5.5 is Anthropic's latest Opus model and replaces [Opus 5](https://c
 
 ## Limitations
 
-- Still an Opus-tier price. It consumes the Other Models pool faster than [Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md) or Composer.
+- Still an Opus-tier price. It consumes the Other Models pool faster than [Sonnet 5.5](https://cursor.com/docs/models/claude-sonnet-5-5.md) or Composer.
 
 ## Tools
 

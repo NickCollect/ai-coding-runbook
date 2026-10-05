@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-09-28T06:10:40.336248+00:00
+fetched_at: 2026-10-05T06:27:18.237507+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,11 +83,11 @@ End time (defaults to now). See [Date Formats](https://cursor.com/docs/account/t
 
 `eventTypes` string
 
-Comma-separated event types to filter by. Possible values: `login`, `logout`, `add_user`, `remove_user`, `update_user_role`, `team_settings`, `mcp_server_config`, `team_api_key`, `user_api_key`, `privacy_mode`, `user_spend_limit`, `team_rule`, `team_repo`, `team_hook`, `team_command`, `create_directory_group`, `delete_directory_group`, `update_directory_group`, `update_directory_group_permissions`, `add_user_to_directory_group`, `remove_user_from_directory_group`, `bugbot_installation`, `bugbot_installation_settings`, `bugbot_repo_settings`, `bugbot_team_rule`, `bugbot_team_settings`, `bugbot_bulk_repo_update`, `grok_bot_created`, `grok_bot_lifecycle`, `sand_onboarding`, `grok_bot_access_changed`, `grok_bot_team_setup_manifest`, `grok_bot_group_settings`, `grok_bot_group_resource`, `grok_bot_resource`, `grok_bot_machine`, `grok_bot_vm`, `grok_bot_vm_bulk`, `grok_bot_routine`, `mcp_authentication`, `slack_account_link`
+Comma-separated `event_type` values, for example `login,add_user`. See the [event type tables](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#event-types) for every value and its `event_data` fields
 
 `search` string
 
-Search term to filter events
+Case-insensitive substring match against `user_email`, `event_type`, and `event_id`. It does not search `event_data`
 
 `page` number
 
@@ -137,7 +137,7 @@ curl -X GET "https://api.cursor.com/teams/audit-logs?users=admin@company.com,dev
 
 **Response:**
 
-Each object in `events` includes `application_type`: `grok_bot` for Grok Bot, `cursor` for other Cursor surfaces, or an empty string when the application cannot be determined (including rows written before this field existed).
+Events are returned oldest first. Each object in `events` includes `application_type`: `grok_bot` for Grok Bot, `cursor` for other Cursor surfaces, or an empty string when the application cannot be determined (including rows written before this field existed). `event_data` fields for each `event_type` are listed in [Compliance and Monitoring](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#event-types). `old_value` and `new_value` are parsed into JSON when the stored value is valid JSON.
 
 Routine rows identify the Bot with `event_data.sand_agent_id`.
 
@@ -145,27 +145,32 @@ Routine rows identify the Bot with `event_data.sand_agent_id`.
 {
   "events": [
     {
-      "event_id": "evt_abc123",
+      "event_id": "3b6d2c1e-5f8a-4a0b-9c7d-1e2f3a4b5c6d",
+      "timestamp": "2024-01-15T10:15:00.000Z",
+      "ip_address": "192.168.1.1",
+      "user_email": "developer@company.com",
+      "event_type": "login",
+      "application_type": "cursor",
+      "event_data": {
+        "success": true,
+        "login_type": "LOGIN_TYPE_WEB"
+      }
+    },
+    {
+      "event_id": "8a1f0f0e-0d1b-4c7e-9b3a-2f6e1c9d4a55",
       "timestamp": "2024-01-15T12:30:00.000Z",
       "ip_address": "203.0.113.42",
       "user_email": "admin@company.com",
       "event_type": "add_user",
       "application_type": "cursor",
       "event_data": {
-        "email": "admin@company.com",
-        "method": "manual"
-      }
-    },
-    {
-      "event_id": "evt_def456",
-      "timestamp": "2024-01-15T10:15:00.000Z",
-      "ip_address": "192.168.1.1",
-      "user_email": "developer@company.com",
-      "event_type": "login",
-      "application_type": "grok_bot",
-      "event_data": {
-        "ip_address": "192.168.1.1",
-        "user_agent": "Cursor/0.42.0"
+        "user_email": "developer@company.com",
+        "role": "member",
+        "source": "invite",
+        "team_id": "12345",
+        "invited_by_email": "admin@company.com",
+        "invited_by_user_id": "4242",
+        "invite_id": "3f9a1c2b"
       }
     }
   ],

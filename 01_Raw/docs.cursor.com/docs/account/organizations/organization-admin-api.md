@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-09-28T06:10:40.255984+00:00
+fetched_at: 2026-10-05T06:27:18.120234+00:00
 fetch_method: mintlify_md
 ---
 
 # Organization API
 
-The Organization API lets you perform actions that apply across teams linked to an organization, such as moving users between those teams, reporting on pooled usage across teams, managing organization groups, and reading or updating model access. It uses an **Organization API key** and the same HTTP patterns as the [team Admin API](https://cursor.com/docs/account/teams/admin-api.md).
+The Organization API lets you perform actions that apply across teams linked to an organization, such as moving users between those teams, reporting on pooled usage across teams, managing organization groups, reading or updating model access, and managing members' Grok Bot computers. It uses an **Organization API key** and the same HTTP patterns as the [team Admin API](https://cursor.com/docs/account/teams/admin-api.md).
 
 - The Organization API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication) with your API key as the username.
 - For details on creating API keys, authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
@@ -23,21 +23,22 @@ Use a **Team API key** when calling endpoints under `/teams/*` (for example, `/t
 
 - **Scope**: Organization API keys can act across teams linked to the same organization. Team API keys can only act within one team.
 - **Endpoint compatibility**: Organization endpoints require Organization API keys. Team endpoints require Team API keys.
-- **Key scopes**: Each route requires a specific scope on the key. Read-only membership routes accept **`members:read`**; membership and group write routes need **`members:*`**; usage routes need **`usage:*`**. Keys with **`admin:*`** work everywhere because admin implies the other scopes.
+- **Key scopes**: Each route requires a specific scope on the key. Read-only membership routes accept **`members:read`**; membership and group write routes need **`members:*`**; usage routes need **`usage:*`**. Keys with **`admin:*`** work everywhere because admin implies the other scopes. Grok Bot computer operations accept only **`admin:*`**.
 - **Authorization failures**: If the key scope does not match the endpoint scope, requests fail with authentication or authorization errors (typically `401` or `403`).
 
 ### Scopes
 
 Every Organization API key carries exactly one scope. A route runs only when the key's scope covers it, and broader scopes include everything narrower scopes allow.
 
-| Scope          | Access                                                                                     | Example routes                                                                                                                                                                    |
-| -------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `members:read` | Read-only access to organization membership.                                               | `GET /organizations/members`                                                                                                                                                      |
-| `members:*`    | Read and write access to membership and groups. Includes everything `members:read` allows. | `GET /organizations/members`, `POST /organizations/team-memberships/sync`, all `/organizations/groups` routes                                                                     |
-| `usage:*`      | Read access to pooled usage and reporting.                                                 | `POST /organizations/pooled-usage`, `POST /organizations/filtered-usage-events`, `POST /organizations/daily-usage-data`, `POST /organizations/spend`                              |
-| `models:read`  | Read-only access to model-access configuration and provider inventories.                   | `GET /organizations/teams/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/providers` |
-| `models:*`     | Read and write access to model access. Includes everything `models:read` allows.           | All model-access routes, including bulk provider/model toggles and bulk configuration                                                                                             |
-| `admin:*`      | Full access to every organization route.                                                   | All of the above                                                                                                                                                                  |
+| Scope            | Access                                                                                                                                                                                           | Example routes                                                                                                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `members:read`   | Read-only access to organization membership.                                                                                                                                                     | `GET /organizations/members`                                                                                                                                                      |
+| `members:*`      | Read and write access to membership and groups. Includes everything `members:read` allows.                                                                                                       | `GET /organizations/members`, `POST /organizations/team-memberships/sync`, all `/organizations/groups` routes                                                                     |
+| `usage:*`        | Read access to pooled usage and reporting.                                                                                                                                                       | `POST /organizations/pooled-usage`, `POST /organizations/filtered-usage-events`, `POST /organizations/daily-usage-data`, `POST /organizations/spend`                              |
+| `models:read`    | Read-only access to model-access configuration and provider inventories.                                                                                                                         | `GET /organizations/teams/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/providers` |
+| `models:*`       | Read and write access to model access. Includes everything `models:read` allows.                                                                                                                 | All model-access routes, including bulk provider/model toggles and bulk configuration                                                                                             |
+| `auditlogs:read` | Read-only access to the organization audit log feed.                                                                                                                                             | `GET /organizations/audit-logs`                                                                                                                                                   |
+| `admin:*`        | Full access to every organization route. The only scope that can run [Grok Bot computer operations](https://cursor.com/docs/account/organizations/organization-admin-api.md#grok-bot-computers). | All of the above, plus every `/organizations/teams/{teamId}/grok-bot/operations` route                                                                                            |
 
 Pick the narrowest scope for the job. Use `members:read` for read-only integrations that list members but never change membership. Use `models:read` or `models:*` for model-access automation without granting full admin. You can select these scopes when you create an Organization API key in the dashboard.
 
@@ -84,13 +85,17 @@ Page number (1-indexed). Defaults to the first page.
 
 Number of members per page. Capped at 200; values above 200 are clamped to 200.
 
+`teamId` number
+
+Return only members of this team. A team that isn't linked to the organization returns an empty page.
+
 #### Response Fields
 
 `members` array
 
 Array of organization member objects, each containing:
 
-- `userId` number - Unique numeric identifier for the member, matching the `id` returned by the team [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) endpoint
+- `id` number - Numeric user ID of the member, matching the `id` returned by the team [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) endpoint
 - `email` string - Email address of the member
 - `name` string - Display name of the member
 - `organizationRole` string - Organization-level role, either `admin` or `member`. This is distinct from each team assignment's `teamRole`: a user can be an org `admin` while holding a `member` role on a specific team, or vice versa.
@@ -113,7 +118,7 @@ curl -X GET "https://api.cursor.com/organizations/members?page=1&pageSize=50" \
 {
   "members": [
     {
-      "userId": 12345,
+      "id": 12345,
       "email": "developer@company.com",
       "name": "Alex",
       "organizationRole": "member",
@@ -123,7 +128,7 @@ curl -X GET "https://api.cursor.com/organizations/members?page=1&pageSize=50" \
       ]
     },
     {
-      "userId": 12346,
+      "id": 12346,
       "email": "admin@company.com",
       "name": "Sam",
       "organizationRole": "admin",
@@ -1840,6 +1845,410 @@ curl -X POST https://api.cursor.com/organizations/groups/g_PDSPmvukpYgZEDXsoNirw
 ```json
 {
   "removedCount": 1
+}
+```
+
+## Audit logs
+
+The organization audit feed returns the same events as the team [`GET /teams/audit-logs`](https://cursor.com/docs/account/teams/admin-api.md#get-audit-logs) endpoint, across every team linked to the organization, plus organization-level events that have no team. Event types and `event_data` fields are listed in [Compliance and Monitoring](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#event-types).
+
+- **Availability**: Enterprise only
+- **Authentication**: Organization API key (Basic auth) with the **`auditlogs:read`** scope. Keys with **`admin:*`** also work.
+- **Rate limit**: 20 requests per minute per organization. See [rate limits](https://cursor.com/docs/api.md#rate-limits).
+
+### Get Audit Logs
+
+GET
+
+`/organizations/audit-logs`
+
+Retrieve audit log events for the organization attached to your API key. Pass `teamId` to narrow the feed to one linked team. Query parameters, defaults, and the response shape mirror the team endpoint, with one addition: each event carries `team_id`.
+
+#### Query parameters
+
+`startTime` string | number
+
+Start time (defaults to 7 days ago). Accepts the same [date formats](https://cursor.com/docs/account/teams/admin-api.md#date-formats) as the team endpoint.
+
+`endTime` string | number
+
+End time (defaults to now).
+
+`eventTypes` string
+
+Comma-separated `event_type` values to filter by.
+
+`search` string
+
+Case-insensitive substring match against `user_email`, `event_type`, and `event_id`. It does not search `event_data`.
+
+`users` string
+
+Comma-separated email addresses, numeric user IDs, or `user_` public IDs. Up to 100 values. Every user must be a member of the organization.
+
+`teamId` number
+
+Restrict the feed to one team. The team must be linked to the organization; otherwise the request returns `403`.
+
+`page` number
+
+Page number (1-indexed). Default: `1`
+
+`pageSize` number
+
+Results per page (1-500). Default: `100`
+
+Date range cannot exceed 30 days. Make multiple requests for longer periods. Events are returned oldest first.
+
+#### Response Fields
+
+`events` array
+
+Audit events, each containing:
+
+- `event_id` string - UUID of the event
+- `timestamp` string - ISO 8601 timestamp
+- `team_id` string - Team the event belongs to. Empty for organization-level events such as `organization_group` and `xai_credit_transfer`
+- `ip_address` string - Client IP of the request
+- `user_email` string - Actor. See the [log format](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#log-format) for `Api Key:`, `Bot:`, and `System` values
+- `event_type` string - Event type
+- `application_type` string - `cursor`, `grok_bot`, or empty when unknown
+- `event_data` object - Event-specific fields. `old_value` and `new_value` are parsed into JSON when the stored value is valid JSON
+
+`pagination` object
+
+Pagination metadata: `page`, `pageSize`, `totalCount`, `totalPages`, `hasNextPage`, and `hasPreviousPage`.
+
+`params` object
+
+Echo of the resolved query: `organizationId`, `teamId`, `startDate`, `endDate`, `eventTypes`, `search`, and `users`.
+
+```bash
+curl -X GET "https://api.cursor.com/organizations/audit-logs?startTime=7d&endTime=now&eventTypes=organization_group,add_user" \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "events": [
+    {
+      "event_id": "c2d4e6f8-1a3b-4c5d-8e9f-0a1b2c3d4e5f",
+      "timestamp": "2026-09-14T09:02:11.000Z",
+      "team_id": "",
+      "ip_address": "203.0.113.42",
+      "user_email": "admin@company.com",
+      "event_type": "organization_group",
+      "application_type": "cursor",
+      "event_data": {
+        "action": "create",
+        "organization_group_id": "grp_7Hq2mKp9vRt4xLw1",
+        "organization_group_name": "Platform Engineering"
+      }
+    },
+    {
+      "event_id": "8a1f0f0e-0d1b-4c7e-9b3a-2f6e1c9d4a55",
+      "timestamp": "2026-09-14T18:30:45.123Z",
+      "team_id": "12345",
+      "ip_address": "203.0.113.42",
+      "user_email": "alice@company.com",
+      "event_type": "add_user",
+      "application_type": "cursor",
+      "event_data": {
+        "user_email": "bob@company.com",
+        "role": "member",
+        "source": "domain_join",
+        "team_id": "12345",
+        "invited_by_email": "",
+        "invited_by_user_id": "0",
+        "invite_id": ""
+      }
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 100,
+    "totalCount": 2,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  },
+  "params": {
+    "organizationId": "org_abc123",
+    "startDate": 1757232131000,
+    "endDate": 1757836931000,
+    "eventTypes": "organization_group,add_user"
+  }
+}
+```
+
+## Grok Bot computers
+
+Recreate, terminate, or delete the hosted computers that run Grok Bot for a team's members, then follow the operation until every member has a result. These routes run the same operations as **Grok Bot Computers** in the dashboard. See [Manage Grok Bot computers](https://cursor.com/docs/grok-bot/computers.md) for what each action does to a member's computer and what the member sees.
+
+- **Availability**: Enterprise only. Access is turned on per team; contact your account team to turn it on. Until then, every route returns `403` for that team.
+- **Authentication**: Organization API key (Basic auth) with the **`admin:*`** scope. Keys with any other scope return `401`. These routes take an Organization API key rather than a Team API key because one computer serves every team a member belongs to.
+- **Team**: `teamId` in the path must be a team linked to your organization. Any other team returns `404`.
+- **One operation per team**: A team runs one operation at a time. Starting another while one runs returns `409` with the running operation's ID.
+- **Rate limits**: Starting an operation allows 20 requests per minute per organization. Each status route allows 120 requests per minute per organization, so you can poll while an operation runs. See [rate limits](https://cursor.com/docs/api.md#rate-limits).
+
+Operation routes share these error responses:
+
+| Status | When                                                                                                                    |
+| ------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `400`  | Malformed body or query, an unknown body field, a `userId` that isn't a current member of the team, or too many members |
+| `401`  | Invalid API key, or the key is missing the `admin:*` scope                                                              |
+| `403`  | Grok Bot computer operations aren't turned on for the team                                                              |
+| `404`  | The team isn't linked to your organization, or the operation doesn't exist or is no longer available                    |
+| `409`  | Another operation is running for the team (start only)                                                                  |
+| `429`  | Rate limit exceeded. The response includes a `Retry-After: 60` header                                                   |
+| `503`  | Operations are temporarily unavailable. Retry the same request                                                          |
+
+### Start Grok Bot Computer Operation
+
+POST
+
+`/organizations/teams/:teamId/grok-bot/operations`
+
+Start a recreate, terminate, or delete across members of one team. The request returns `202 Accepted` once the operation is queued, and Cursor works through the members in batches from there. Poll [Get Grok Bot Computer Operation](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-grok-bot-computer-operation) to follow progress.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+#### Request body
+
+`action` string Required
+
+What to do to each member's computer:
+
+- `recreate_vm` - Build a replacement computer on the latest image and run Team Setup. Bots, files, and logins carry over, and a Bot that is mid-turn pauses and resumes on the new computer.
+- `terminate_vm` - Delete the member's current computer and keep the durable disk. The member's next message starts a fresh computer.
+- `delete_vm_and_data` - Delete the computer and its durable data, so the member starts from empty. This can't be undone.
+
+`userIds` number\[] Required
+
+Numeric user IDs of the members to change. To collect them, call [List Organization Members](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-members) with `teamId`. Send at least 1 and at most 25,000 IDs, or at most 1,000 for `delete_vm_and_data`. Duplicates are ignored. Every ID must belong to a current member of the team who has signed in to Cursor; if one doesn't, the request returns `400` and nothing starts. Members without a computer are skipped for recreate and terminate. `delete_vm_and_data` still deletes durable data.
+
+`operationId` string Required
+
+A UUID you generate for this operation. If a request times out or fails, send it again with the same `operationId`. Cursor returns `202` for the existing operation instead of starting a second one, even while that operation is still running. Cursor doesn't compare the rest of the body on a retry, so generate a new UUID for every new operation.
+
+#### Response Fields
+
+Returns `202 Accepted` with:
+
+- `operationId` string - The operation's ID in lowercase. Use it with [Get Grok Bot Computer Operation](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-grok-bot-computer-operation).
+
+When another operation is running for the team, the route returns `409` with `code: "conflict"`, a `message`, and `runningOperationId`, the ID of the running operation. `runningOperationId` is `null` when Cursor can't identify it; call [Get Latest Grok Bot Computer Operation](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-latest-grok-bot-computer-operation) instead.
+
+```bash
+curl -X POST https://api.cursor.com/organizations/teams/7/grok-bot/operations \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "action": "recreate_vm",
+    "userIds": [12345, 12346, 12347],
+    "operationId": "3f2a9c1e-8b4d-4e6f-a1c2-5d7e9f0b1a2c"
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "operationId": "3f2a9c1e-8b4d-4e6f-a1c2-5d7e9f0b1a2c"
+}
+```
+
+**Error responses:**
+
+**409: another operation is running for the team:**
+
+```json
+{
+  "code": "conflict",
+  "message": "Another Grok Bot computer operation is already running for this team. Wait for it to finish, then try again.",
+  "runningOperationId": "b81c4e27-6a90-4f3d-9e15-2c8d7a4f6b03"
+}
+```
+
+**400: a user isn't a current member of the team:**
+
+```json
+{
+  "code": "error",
+  "message": "Every userId must be a current member of the team."
+}
+```
+
+**403: operations aren't turned on for the team:**
+
+```json
+{
+  "code": "error",
+  "message": "Bot fleet admin API access is not enabled for this team"
+}
+```
+
+### Get Grok Bot Computer Operation
+
+GET
+
+`/organizations/teams/:teamId/grok-bot/operations/:operationId`
+
+Retrieve an operation's progress: counts across all members, plus a page of per-member results. Poll this route until `state` is no longer `running`.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+`operationId` string Required
+
+The UUID sent to [Start Grok Bot Computer Operation](https://cursor.com/docs/account/organizations/organization-admin-api.md#start-grok-bot-computer-operation).
+
+#### Query parameters
+
+`limit` number
+
+Per-member results per page (1-1000). Default: `100`
+
+`cursor` string
+
+The `nextCursor` value from the previous page. Omit it for the first page.
+
+#### Response Fields
+
+`operationId` string
+
+The operation's ID.
+
+`action` string
+
+`recreate_vm`, `terminate_vm`, or `delete_vm_and_data`.
+
+`state` string
+
+`running` until every member has a result. A finished operation is `succeeded` when no member failed, `partially_succeeded` when some members failed and others succeeded or were skipped, and `failed` when every member failed.
+
+`counts` object
+
+Member counts across the whole operation: `total`, `queued`, `running`, `succeeded`, `skipped`, and `failed`. `noVmSkipped` is the part of `skipped` made up of members who had no computer. It's always `0` for `delete_vm_and_data`, which deletes durable data whether or not a computer is running.
+
+`items` array | null
+
+Per-member results for this page, each containing:
+
+- `userId` number - Numeric user ID of the member
+- `state` string - `queued`, `running`, `succeeded`, `skipped`, or `failed`
+- `reason` string | null - Why the member was skipped or failed. `null` otherwise
+
+`items` is `null` for operations of more than 1,000 members. Those report `counts` only.
+
+`itemsTruncated` boolean
+
+`true` when the operation has more than 1,000 members and per-member results aren't kept.
+
+`nextCursor` string | null
+
+Pass as `cursor` to get the next page of `items`. `null` on the last page.
+
+The `reason` values you're most likely to see:
+
+| `reason`                       | `state`   | Meaning                                                                                                          |
+| ------------------------------ | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `no-box`                       | `skipped` | The member had no running or hibernated computer. Recreate and terminate only                                    |
+| `team-member-not-found`        | `skipped` | The member left the team while the operation was queued                                                          |
+| `member-identity-changed`      | `skipped` | The member's account changed while the operation was queued                                                      |
+| `recreate-already-in-progress` | `failed`  | The member's computer was already being recreated. Start a new operation for this member once it finishes        |
+| `authorization-revoked`        | `failed`  | The API key that started the operation was revoked, expired, or lost `admin:*` before Cursor reached this member |
+
+Any other `reason` on a failed member means the action didn't finish. Start a new operation for those members. See [Skipped and failed members](https://cursor.com/docs/grok-bot/computers.md#skipped-and-failed-members) for what to do next.
+
+A `404` with `Operation not found.` means the operation never started or has aged out. A `404` with `This operation finished, and its status is no longer available.` means the operation completed, but Cursor no longer holds its results.
+
+```bash
+curl -X GET "https://api.cursor.com/organizations/teams/7/grok-bot/operations/3f2a9c1e-8b4d-4e6f-a1c2-5d7e9f0b1a2c?limit=100" \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "operationId": "3f2a9c1e-8b4d-4e6f-a1c2-5d7e9f0b1a2c",
+  "action": "recreate_vm",
+  "state": "partially_succeeded",
+  "counts": {
+    "total": 3,
+    "queued": 0,
+    "running": 0,
+    "succeeded": 1,
+    "skipped": 1,
+    "failed": 1,
+    "noVmSkipped": 1
+  },
+  "items": [
+    { "userId": 12345, "state": "succeeded", "reason": null },
+    { "userId": 12346, "state": "skipped", "reason": "no-box" },
+    { "userId": 12347, "state": "failed", "reason": "recreate-already-in-progress" }
+  ],
+  "itemsTruncated": false,
+  "nextCursor": null
+}
+```
+
+### Get Latest Grok Bot Computer Operation
+
+GET
+
+`/organizations/teams/:teamId/grok-bot/operations/latest`
+
+Retrieve the team's running operation, or its most recent one when none is running. Use it to find out what's blocking a `409`, or to pick an operation back up when you no longer have its ID. The team has no latest operation until one has run, and until then the route returns `404`.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+#### Query parameters
+
+Accepts the same `limit` and `cursor` parameters as [Get Grok Bot Computer Operation](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-grok-bot-computer-operation).
+
+#### Response Fields
+
+Same fields as [Get Grok Bot Computer Operation](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-grok-bot-computer-operation).
+
+```bash
+curl -X GET https://api.cursor.com/organizations/teams/7/grok-bot/operations/latest \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "operationId": "b81c4e27-6a90-4f3d-9e15-2c8d7a4f6b03",
+  "action": "terminate_vm",
+  "state": "running",
+  "counts": {
+    "total": 2400,
+    "queued": 2340,
+    "running": 20,
+    "succeeded": 38,
+    "skipped": 2,
+    "failed": 0,
+    "noVmSkipped": 2
+  },
+  "items": null,
+  "itemsTruncated": true,
+  "nextCursor": null
 }
 ```
 

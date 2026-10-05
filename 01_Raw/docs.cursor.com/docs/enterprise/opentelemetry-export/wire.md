@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-09-28T06:10:42.692722+00:00
+fetched_at: 2026-10-05T06:27:20.547673+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,16 +20,16 @@ The surface is additive. Tolerate unknown attributes, events, and enum values. R
 
 One resource per (team, user, surface, entrypoint, surface version) grouping.
 
-| Attribute                | Type   | Presence | Values / notes                                                                                                                                                                                                                                    |
-| ------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `service.name`           | string | Always   | Constant `cursor`                                                                                                                                                                                                                                 |
-| `service.version`        | string | Optional | Client version when source is desktop/CLI; usually absent on `cloud_agent` / `bugbot`                                                                                                                                                             |
-| `cursor.team.id`         | int    | Always   | Your team id                                                                                                                                                                                                                                      |
-| `cursor.surface`         | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot` \| `grok_bot`                                                                                                                                                                    |
-| `cursor.entrypoint`      | string | Always   | `unspecified` \| `desktop` \| `cli` \| `web` \| `mobile` \| `sdk_ts` \| `sdk_py` \| `api` \| `automation` \| `github_pr`On `grok_bot.*` records, `automation` marks a turn a routine started (`cursor.grok_bot.initiated_by=routine`)             |
-| `cursor.user.id`         | int    | Optional | Opaque team-scoped user id when the source has one. Never on `cloud_agent.*` logs today; join those through `cursor.conversation.id` to the run's `api.request` logs, which carry it when a team member started the run. Do not require presence. |
-| `cursor.user.account_id` | string | Optional | The member's `user_...` id, the value `GET /teams/members` on the [Admin API](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) returns as `id`. A record carries both this and `cursor.user.id` or neither.                   |
-| `cursor.user.email`      | string | Optional | The member's email. Present when `cursor.user.id` is present and the member has an email. Not exported for teams on Privacy Mode (Legacy). Do not require presence.                                                                               |
+| Attribute                | Type   | Presence | Values / notes                                                                                                                                                                                                                        |
+| ------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `service.name`           | string | Always   | Constant `cursor`                                                                                                                                                                                                                     |
+| `service.version`        | string | Optional | Client version when source is desktop/CLI; usually absent on `cloud_agent` / `bugbot`                                                                                                                                                 |
+| `cursor.team.id`         | int    | Always   | Your team id                                                                                                                                                                                                                          |
+| `cursor.surface`         | string | Always   | `unspecified` \| `desktop` \| `cli` \| `cloud_agent` \| `bugbot` \| `grok_bot`                                                                                                                                                        |
+| `cursor.entrypoint`      | string | Always   | `unspecified` \| `desktop` \| `cli` \| `web` \| `mobile` \| `sdk_ts` \| `sdk_py` \| `api` \| `automation` \| `github_pr`On `grok_bot.*` records, `automation` marks a turn a routine started (`cursor.grok_bot.initiated_by=routine`) |
+| `cursor.user.id`         | int    | Optional | Opaque team-scoped user id when the source has one. On `cloud_agent.*` logs it is the run's owner. A run started with a team API key or a service account has no owner and carries no user attributes. Do not require presence.       |
+| `cursor.user.account_id` | string | Optional | The member's `user_...` id, the value `GET /teams/members` on the [Admin API](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) returns as `id`. A record carries both this and `cursor.user.id` or neither.       |
+| `cursor.user.email`      | string | Optional | The member's email. Present when `cursor.user.id` is present and the member has an email. Not exported for teams on Privacy Mode (Legacy). Do not require presence.                                                                   |
 
 ## Families
 
@@ -207,7 +207,7 @@ An MCP server you connected rejected the run's credentials. That server's tool c
 
 The bot itself is identified by [`cursor.conversation.id`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#common-log-attributes) on every `grok_bot.*` record, and that value is the Bot's conversation id; `cursor.grok_bot.subagent.id` names a subagent when one acted. The `grok_bot.*` events carry Bot actions from Action Recording. Family `grok_bot_agent_actions`. Every record has `cursor.surface=grok_bot`.
 
-Every event is metadata about an action, never its content. Tool arguments and results, file paths and names, message bodies and recipients, credentials, card details, and the Auto-review classifier's reasoning are never exported on these events; MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) record. The exceptions are named per event: the shell command text (secret-scrubbed and capped at 8 KiB), the normalized browser URL and page title, and bare hostnames. Every free-text field is scrubbed for credential shapes, payment card numbers, and OAuth tokens before it can reach your collector.
+Every event is metadata about an action, never its content. Tool arguments and results, file paths and names, message bodies and recipients, credentials, card details, and the Auto-review classifier's reasoning are never exported on these events; MCP arguments and results ship only as the opt-in [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) record. The exceptions are named per event: the shell command text (secret-scrubbed and capped at 8 KiB), the normalized browser URL and page title, and bare hostnames. Every free-text field is scrubbed for credential shapes, payment card numbers, US social security numbers, and OAuth tokens before it can reach your collector.
 
 Each event also carries these attributes:
 
@@ -226,19 +226,21 @@ Each event also carries these attributes:
 
 INFO (ERROR for `failure` status), body `grok_bot_mcp_tool_call`. Family `grok_bot_agent_actions`. One MCP tool call made by a Bot. This row never carries tool arguments or results. For `http` calls, a team with tool I/O enabled receives them as two [`cursor.conversation.tool_io`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorconversationtool_io) records, joined to this row on `cursor.grok_bot.tool_call.id`.
 
-| Attribute                         | Type   | Presence | Values / notes                                        |
-| --------------------------------- | ------ | -------- | ----------------------------------------------------- |
-| `cursor.tool.name`                | string | Always   | Customer-defined MCP tool name (open)                 |
-| `cursor.tool.status`              | string | Always   | `success` \| `failure`                                |
-| `cursor.grok_bot.mcp.transport`   | string | Always   | `http` (server-observed) \| `stdio` (on the computer) |
-| `cursor.grok_bot.mcp.duration_ms` | int    | Always   |                                                       |
-| `cursor.mcp.server.name`          | string | Optional | Customer-defined server display name (open)           |
+| Attribute                         | Type   | Presence | Values / notes                                                                         |
+| --------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------- |
+| `cursor.tool.name`                | string | Always   | Customer-defined MCP tool name, secret-scrubbed and cut at 256 characters (open)       |
+| `cursor.tool.status`              | string | Always   | `success` \| `failure`                                                                 |
+| `cursor.grok_bot.mcp.transport`   | string | Always   | `http` (server-observed) \| `stdio` (on the computer)                                  |
+| `cursor.grok_bot.mcp.duration_ms` | int    | Always   |                                                                                        |
+| `cursor.mcp.server.name`          | string | Optional | Customer-defined server display name, secret-scrubbed and cut at 256 characters (open) |
 
 `cursor.grok_bot.tool_call.id` is present on every MCP call. Connector calls, including the browser tools on the Bot's computer, are recorded here and never as `tool_result`, so each tool call is recorded once.
 
 ### `cursor.grok_bot.shell_command`
 
 INFO (WARN when blocked), body `grok_bot_shell_command`. Family `grok_bot_agent_actions`. A shell command a Bot ran or was blocked from running. The record is written when the command settles and keeps the issue time as its timestamp, so a long command's record arrives well after its timestamp.
+
+Cursor redacts the password after a common client's password flag (`mysql -pSecret`, `sshpass -p Secret`, `docker login -p Secret`, `redis-cli -a Secret`). A bare `mysql -p` prompts for the password, so a lower-case identifier after it is kept as the database name (`mysql -u root -p inventory`) and anything else is redacted.
 
 | Attribute                                      | Type      | Presence | Values / notes                                                                                                                                                                     |
 | ---------------------------------------------- | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -257,10 +259,10 @@ INFO (WARN when blocked), body `grok_bot_shell_command`. Family `grok_bot_agent_
 
 INFO, body `grok_bot_browser_navigation`. Family `grok_bot_agent_actions`. `conversation.id` is the identifier for the Bot.
 
-| Attribute                            | Type   | Presence | Values / notes                                                                |
-| ------------------------------------ | ------ | -------- | ----------------------------------------------------------------------------- |
-| `cursor.grok_bot.browser.url`        | string | Always   | Normalized `scheme://host/path` (open). Non-hierarchical schemes never export |
-| `cursor.grok_bot.browser.page_title` | string | Optional | Secret-scrubbed (open)                                                        |
+| Attribute                            | Type   | Presence | Values / notes                                                                                                                                                                                                                                                            |
+| ------------------------------------ | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.grok_bot.browser.url`        | string | Always   | Normalized `scheme://host/path` (open). A card number, an OAuth token, a webhook token (Slack, Discord, Teams, Zapier, PagerDuty, Telegram), or a share-link capability token in a path segment becomes a `[REDACTED: ...]` marker. Non-hierarchical schemes never export |
+| `cursor.grok_bot.browser.page_title` | string | Optional | Secret-scrubbed (open)                                                                                                                                                                                                                                                    |
 
 ### `cursor.grok_bot.computer_use_session`
 
@@ -401,7 +403,7 @@ Known limits:
 
 Family `conversation_content`. The `conversation.*` events are the only log records whose body is a payload (message text or one side of an MCP tool call) instead of a constant event name. Route on the log event name, as with every other family. `cursor.conversation.user_message` is a prompt, `cursor.conversation.assistant_message` is a response, and `cursor.conversation.tool_io` is the arguments or the result of an MCP tool call; don't parse the body to tell them apart.
 
-**Body.** Scrubbed text. Messages are capped at 32 KiB and each side of a tool call at 8 KiB. `cursor.conversation.content_truncated` is set whenever the exported body is a prefix of the redacted text, whether the source crossed the cap or redaction pushed it over, and on `tool_io` also when scrubbing left a body within the cap unparseable.
+**Body.** Scrubbed text. Messages are capped at 32 KiB and each side of a tool call at 8 KiB. `cursor.conversation.content_truncated` is set whenever the exported body is a prefix of the redacted text, whether the source crossed the cap or redaction pushed it over, and on `tool_io` also when scrubbing left a body within the cap unparseable or dropped the tail of a JSON document the connector had cut.
 
 **Identity.** Records carry the [common log attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#common-log-attributes). `cursor.conversation.id` joins them to the conversation's `api.request`, `skill.activated`, `hook.execution_complete`, `cloud_agent.*`, and `grok_bot.*` logs. The only user identifiers are the optional `cursor.user.*` [resource attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#resource-attributes); the log attributes carry none. Don't depend on `cursor.request.id`, `cursor.usage_event.id`, or, on message records, `cursor.grok_bot.turn.id`; `tool_io` carries `turn.id` as a shared `grok_bot.*` attribute.
 
@@ -411,12 +413,12 @@ Family `conversation_content`. The `conversation.*` events are the only log reco
 
 All three events are INFO and carry these attributes:
 
-| Attribute                               | Type   | Presence | Values / notes                                                                                                         |
-| --------------------------------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `cursor.conversation.provenance`        | string | Always   | `server` (observed by Cursor). `client` is reserved; tolerate it.                                                      |
-| `cursor.conversation.message.id`        | string | Always   | Message id within the conversation                                                                                     |
-| `cursor.conversation.turn.id`           | string | Optional | Turn id within the conversation. Separate from `cursor.grok_bot.turn.id` on message records; equal to it on `tool_io`. |
-| `cursor.conversation.content_truncated` | bool   | Always   | True when the body is a prefix of the redacted text, or, on `tool_io`, when scrubbing left it unparseable              |
+| Attribute                               | Type   | Presence | Values / notes                                                                                                                                                 |
+| --------------------------------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.conversation.provenance`        | string | Always   | `server` (observed by Cursor). `client` is reserved; tolerate it.                                                                                              |
+| `cursor.conversation.message.id`        | string | Always   | Message id within the conversation                                                                                                                             |
+| `cursor.conversation.turn.id`           | string | Optional | Turn id within the conversation. Separate from `cursor.grok_bot.turn.id` on message records; equal to it on `tool_io`.                                         |
+| `cursor.conversation.content_truncated` | bool   | Always   | True when the body is a prefix of the redacted text, or, on `tool_io`, when scrubbing left it unparseable or dropped the tail of a cut JSON document inside it |
 
 #### `cursor.conversation.user_message`
 
@@ -430,20 +432,24 @@ INFO. Body: the scrubbed final assistant text for the response.
 
 INFO. Body: the scrubbed compact JSON of one side of an MCP tool call, at most 8 KiB. Two records per Grok Bot MCP tool call executed over `http` transport: the `arguments` record carries the JSON object the Bot sent, and the `result` record carries the connector's reply. On success that is the tool's text and structured content; on failure, the error, rejection, or denial message. Image bytes are replaced with their MIME type. `stdio` calls on the Bot's computer report metadata only and produce no `tool_io` record. Needs the destination's **Tool I/O** toggle in addition to the team opt-in.
 
-Both records carry the shared [`grok_bot.*` correlation attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) (`provenance`, `turn.id`, `tool_call.id`, `event.sequence`), so `cursor.grok_bot.tool_call.id` is present and joins them to the call's [`cursor.grok_bot.mcp_tool_call`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorgrok_botmcp_tool_call) and `cursor.grok_bot.tool_decision` rows. `cursor.tool.name`, `cursor.tool.status`, and `cursor.mcp.server.name` repeat the metadata row's values so each record is readable on its own.
+Both records carry the shared [`grok_bot.*` correlation attributes](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#shared-grok_bot-attributes) (`provenance`, `turn.id`, `tool_call.id`, `event.sequence`), and `cursor.grok_bot.tool_call.id` joins them to the call's [`cursor.grok_bot.mcp_tool_call`](https://cursor.com/docs/enterprise/opentelemetry-export/wire.md#cursorgrok_botmcp_tool_call) and `cursor.grok_bot.tool_decision` rows. A call whose tool-call id does not read as an opaque identifier (letters, digits, `_ . : $ / + = -`, at most 128 characters) produces no `tool_io` records. `cursor.tool.name`, `cursor.tool.status`, and `cursor.mcp.server.name` repeat the metadata row's values so each record is readable on its own.
 
-| Attribute                               | Type   | Presence | Values / notes                                                                                                |
-| --------------------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------- |
-| `cursor.conversation.tool_io.direction` | string | Always   | `arguments` \| `result`. `cursor.conversation.message.id` on this record is `mcp:<tool_call_id>:<direction>`. |
-| `cursor.tool.name`                      | string | Always   | Customer-defined MCP tool name (open)                                                                         |
-| `cursor.tool.status`                    | string | Always   | `success` \| `failure`. The same value on both sides of one call.                                             |
-| `cursor.mcp.server.name`                | string | Optional | Customer-defined server display name (open)                                                                   |
-| `cursor.grok_bot.provenance`            | string | Always   | `server`                                                                                                      |
-| `cursor.grok_bot.tool_call.id`          | string | Always   | Join key to the call's `mcp_tool_call` and `tool_decision` rows                                               |
-| `cursor.grok_bot.turn.id`               | string | Optional | Same value as `cursor.conversation.turn.id` on this record                                                    |
-| `cursor.grok_bot.event.sequence`        | int    | Optional | The sequence number of the call within its turn; absent from older Grok Bot versions                          |
+| Attribute                               | Type   | Presence | Values / notes                                                                                                                            |
+| --------------------------------------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.conversation.tool_io.direction` | string | Always   | `arguments` \| `result`. `cursor.conversation.message.id` on this record is `mcp:<tool_call_id>:<direction>`.                             |
+| `cursor.tool.name`                      | string | Always   | Customer-defined MCP tool name, secret-scrubbed and cut at 256 characters (open)                                                          |
+| `cursor.tool.status`                    | string | Always   | `success` \| `failure`. The same value on both sides of one call.                                                                         |
+| `cursor.mcp.server.name`                | string | Optional | Customer-defined server display name, secret-scrubbed and cut at 256 characters (open)                                                    |
+| `cursor.grok_bot.provenance`            | string | Always   | `server`                                                                                                                                  |
+| `cursor.grok_bot.tool_call.id`          | string | Always   | Join key to the call's `mcp_tool_call` and `tool_decision` rows. A call whose id is not an opaque identifier produces no `tool_io` record |
+| `cursor.grok_bot.turn.id`               | string | Optional | Same value as `cursor.conversation.turn.id` on this record                                                                                |
+| `cursor.grok_bot.event.sequence`        | int    | Optional | The sequence number of the call within its turn; absent from older Grok Bot versions                                                      |
 
-When `cursor.conversation.content_truncated` is true the body does not parse as JSON: it is a prefix of the redacted text, or scrubbing left it unparseable and Cursor exported it flagged instead of exporting a less-scrubbed body. Check the flag before parsing. Both sides pass the same scrubber as message text, plus a key-based pass that redacts the value of any JSON member or assignment whose key names a credential (`password`, `passphrase`, `token`, `api_key`, `secret`, `secret_key`, `access_key`, `authorization`, `cookie`, `private_key`, `credentials`, and compounds such as `client_secret` or `x-api-key`), whatever the value looks like. Header pairs count too: in `[{"name":"Authorization","value":"Basic ..."}]`, the `value` sibling of a `name`, `key`, or `header` member on the list is redacted, as is the second item of a two-item array whose first is on the list (`["password","..."]`). Card fields held as numbers (`"cvc": 123`) become `[REDACTED: Card]`, and ASCII `\uXXXX` escapes are decoded before scrubbing. A private-key block split across the items of one array (lines of a file, text blocks of a result) is redacted from its BEGIN line through its END line; one split across unrelated fields is not. The key-based pass reaches one level into JSON nested inside a string value; deeper re-encoded documents are scrubbed by value shape only. See [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) for what the scrubber does not catch.
+When `cursor.conversation.content_truncated` is true, part of the source is missing. Either the body is a prefix of the redacted text (the source crossed the cap, or scrubbing left it unparseable and Cursor exported it flagged instead of exporting a less-scrubbed body) and does not parse as JSON, or the body is valid JSON in which a document the connector had cut was closed at its last whole member and the rest dropped. Check the flag before parsing; a flagged body that parses is still incomplete. Both sides pass the same scrubber as message text, plus a key-based pass that redacts the value of any JSON member or assignment whose key names a credential, whatever the value looks like. A key names a credential when one of its words (split on `_`, `-`, `.`, space, and camel case) is a credential word (`password`, `passcode`, `passphrase`, `secret`, `token`, `auth`, `authorization`, `credential`, `cookie`, `pin`, `otp`, `ssn`, and their compounds such as `client_secret`, `X-Auth`, `secretValue`, or `passwordHash`), when its last word is `pass` or `pwd` (`db_pass`), or when `key` follows a qualifier such as `api`, `access`, `secret`, `private`, or `account` (`api_key`, `x-api-key`, `private_key`, `AccountKey`). A key whose last word is metadata about a credential keeps its value (`token_count`, `token_type`, `api_key_id`, `auth_url`), and a bare `key` redacts only a value shaped like a minted token, so an issue key exports and an API key does not. A boolean or null under a credential key stays.
+
+An object or array under a credential key keeps its shape: every leaf inside becomes the marker except its metadata members (`name`, `type`, `id`, `scopes`, `created_at`, and similar), so `secrets: [{"name":"NPM_TOKEN","value":"..."}]` exports the name and replaces the value. Header rows count too: in `[{"name":"Authorization","value":"Basic ..."}]`, the `value` or `val` sibling of a `name`, `key`, `header`, `id`, `label`, or `field` member on the list is redacted, as is a row that marks its own value as secret (`masked: true`, or `type` of `SecureString`, `CONCEALED`, or `password`) and the second item of a two-item array whose first is on the list (`["password","..."]`). Card fields held as numbers (`"cvc": 123`) become `[REDACTED: Card]`, a US social security number in the `123-45-6789` shape becomes `[REDACTED: SSN]`, and ASCII `\uXXXX` escapes are decoded before scrubbing. In a table given as an array of arrays whose first row names the columns (a Sheets `values` range), every column whose header names a credential or a card field takes the marker in the rows below. A private-key block split across the items of one array (lines of a file, text blocks of a result) is redacted from its BEGIN line through its END line; one split across unrelated fields is not.
+
+JSON a connector returns as text gets the same rules as structured content. A string leaf that holds a JSON object or array (an MCP text block, a webhook `body`, a log `message`) is parsed and walked by key like the document around it, and so is a document encoded again inside one of those, at any depth up to the 256-level cap. The text around a document stays text: a summary line, a markdown fence, or a trailing note is scrubbed as prose, and an NDJSON leaf is walked line by line. Cursor also reads the near-JSON spellings connectors produce: `&quot;` for quotes, a trailing comma before a closer, and a Python `str(dict)` with single quotes and `True` / `False` / `None`. A document the walk did not change exports as the connector wrote it, whitespace and escapes included. A document with a redaction in it exports compact: whitespace removed, `\u00e9`-style escapes and `\/` respelled as the characters they name, only the last of duplicate keys kept, and a Python repr respelled as JSON, while numbers keep their digits (`12345678901234567890`, `1.0`, `-0`). A document the connector cut short (`[output truncated]`, a closed connection) is closed at its last whole member and walked; when that drops anything, the record is flagged with `content_truncated`. See [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io) for what the scrubber does not catch.
 
 ## Identity and joins
 

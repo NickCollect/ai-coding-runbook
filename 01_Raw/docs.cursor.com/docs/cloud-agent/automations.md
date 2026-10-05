@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-09-28T06:10:41.807857+00:00
+fetched_at: 2026-10-05T06:27:19.639357+00:00
 fetch_method: mintlify_md
 ---
 
@@ -228,6 +228,8 @@ Source control triggers infer the repository from the pull request. For other tr
 #### Multi-repo automations
 
 Use a multi-repo environment when an automation needs to work across multiple repositories. Select multiple repos when you configure the environment, or choose an existing one from your [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
+
+On [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines), an automation uses only the environment's repositories. An any-repo pool worker started with `--clone-git-repos` checks out all of them. Other workers use the checkouts they already have.
 
 ## Share
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/migrations
-fetched_at: 2026-09-28T06:10:41.155885+00:00
+fetched_at: 2026-10-05T06:27:19.011995+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ The endpoints use the [Origin API](https://cursor.com/docs/api/origin.md) base U
 
 ## Scopes
 
-`repository:mirror:write`, `repository:mirror:delete`, and `repository:metadata:read` are user policy scopes. [Transition Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#transition-repo-mirror) and [Force Repo Mirror Cutover](https://cursor.com/docs/api/origin/migrations.md#force-repo-mirror-cutover) require Write (`repository:mirror:write`). [Detach Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#detach-repo-mirror) requires Admin (`repository:mirror:delete`). [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job) and [Get Active Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-active-mirror-transition-job) require `repository:metadata:read`. You must also administer the repository on its upstream GitHub source.
+`repository:mirror:write`, `repository:mirror:delete`, and `repository:metadata:read` are user policy scopes. [Transition Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#transition-repo-mirror) requires Write (`repository:mirror:write`). [Detach Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#detach-repo-mirror) requires Admin (`repository:mirror:delete`). [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job) and [Get Active Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-active-mirror-transition-job) require `repository:metadata:read`. You must also administer the repository on its upstream GitHub source.
 
 These scopes are not requestable during an Origin App installation. An Origin App cannot call these endpoints.
 
@@ -48,7 +48,7 @@ Repo name, unique to the owner entity.
 
 `transition` string Required
 
-The mirror-state change to start. Allowed values: `initial_to_inbound`, `inbound_to_outbound`, `outbound_to_inbound`.
+The mirror-state change to start. Allowed values: `initial_to_inbound`, which retries a mirror whose initial sync failed and brings it to `inbound`.
 
 #### Response Fields
 
@@ -66,7 +66,7 @@ curl --request POST \
   --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \
   --header 'Content-Type: application/json' \
   --data '{
-  "transition": "inbound_to_outbound"
+  "transition": "initial_to_inbound"
 }'
 ```
 
@@ -96,91 +96,9 @@ curl --request POST \
   },
   "job": {
     "id": "rmt_01k2ja2000e0080000000000m3",
-    "transition": "inbound_to_outbound",
+    "transition": "initial_to_inbound",
     "status": "running",
-    "phase": "draining-writes",
-    "attemptCount": 1,
-    "drainUntil": "2026-08-02T15:05:00Z",
-    "startedAt": "2026-08-02T15:00:00Z",
-    "createdAt": "2026-08-02T14:59:30Z",
-    "updatedAt": "2026-08-02T15:01:00Z"
-  }
-}
-```
-
-### Force Repo Mirror Cutover
-
-POST
-
-`/v1/origin/repos/{ownerSlug}/{repoName}/mirror:forceCutover`
-
-Requires scope `repository:mirror:write` (user access token).
-
-Forces an `outbound_to_inbound` cutover without pushing this host's divergent state back to the upstream source. The source is adopted as the source of truth as it stands, and refs that exist only on this host are snapshotted and abandoned. Returns the job tracking the forced cutover.
-
-Accepted only for a repository in `outbound` status, or one stuck in an outbound-to-inbound transition whose active job reports `requires_attention`, in which case that job is superseded. Any other state, including a queued or running transition job, returns `FailedPrecondition` (HTTP 400). The caller must administer the repository on the mirror's upstream source; a caller without that access returns `403`.
-
-#### Path Parameters
-
-`ownerSlug` string Required
-
-Owning entity's unique slug.
-
-`repoName` string Required
-
-Repo name, unique to the owner entity.
-
-#### Request Body
-
-The request takes no fields. Send an empty JSON object.
-
-#### Response Fields
-
-`repository` object
-
-The repository, reflecting its transitioning mirror state. Carries the same fields as [Get Repo](https://cursor.com/docs/api/origin/reference/get-repo.md).
-
-`job` object
-
-The job tracking the transition, carrying the same fields as [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job). Poll it until it reaches a terminal status.
-
-```bash
-curl --request POST \
-  --url 'https://api.cursor.com/v1/origin/repos/OWNER_SLUG/REPO_NAME/mirror:forceCutover' \
-  --header 'Authorization: Bearer YOUR_ORIGIN_TOKEN' \
-  --header 'Content-Type: application/json' \
-  --data '{}'
-```
-
-**Response shape:**
-
-```json
-{
-  "repository": {
-    "id": "repo_01k2ja2000e0080000000000q4",
-    "name": "rocket",
-    "fullName": "acme/rocket",
-    "owner": {
-      "slug": "acme",
-      "id": "ns_01k2ja2000e0080000000000p3",
-      "type": "team"
-    },
-    "defaultBranch": "main",
-    "createdAt": "2026-08-01T09:30:00Z",
-    "updatedAt": "2026-08-02T15:00:00Z",
-    "pushedAt": "2026-08-02T14:45:00Z",
-    "cloneUrl": "https://origin.cursor.com/git/acme/rocket.git",
-    "mirror": {
-      "source": "github",
-      "sourceId": "R_kgDOAbc123",
-      "status": "outbound"
-    }
-  },
-  "job": {
-    "id": "rmt_01k2ja2000e0080000000000m4",
-    "transition": "outbound_to_inbound",
-    "status": "running",
-    "phase": "snapshotting-refs",
+    "phase": "initializing-mirror-fetch",
     "attemptCount": 1,
     "startedAt": "2026-08-02T15:00:00Z",
     "createdAt": "2026-08-02T14:59:30Z",
@@ -259,11 +177,11 @@ Unique identifier of the job.
 
 `transition` string
 
-The mirror-direction change this job performs. Allowed values: `initial_to_inbound`, `inbound_to_outbound`, `outbound_to_inbound`.
+The mirror-direction change this job performs. Allowed values: `initial_to_inbound`.
 
 `status` string
 
-Lifecycle state. Allowed values: `queued`, `running`, `succeeded`, `failed_rolled_back`, `requires_attention`, `superseded`. `succeeded`, `failed_rolled_back`, and `superseded` are terminal. `requires_attention` needs operator intervention or a forced cutover.
+Lifecycle state. Allowed values: `queued`, `running`, `succeeded`, `failed_rolled_back`, `requires_attention`, `superseded`. `succeeded`, `failed_rolled_back`, and `superseded` are terminal. `requires_attention` needs operator intervention.
 
 `phase` string
 
@@ -312,7 +230,7 @@ curl --request GET \
 ```json
 {
   "id": "rmt_01k2ja2000e0080000000000m3",
-  "transition": "inbound_to_outbound",
+  "transition": "initial_to_inbound",
   "status": "succeeded",
   "phase": "completed",
   "attemptCount": 1,
@@ -365,19 +283,18 @@ curl --request GET \
 {
   "activeJob": {
     "id": "rmt_01k2ja2000e0080000000000m4",
-    "transition": "outbound_to_inbound",
+    "transition": "initial_to_inbound",
     "status": "running",
-    "phase": "draining-writes",
-    "attemptCount": 1,
-    "drainUntil": "2026-08-02T15:05:00Z",
+    "phase": "initializing-mirror-fetch",
+    "attemptCount": 2,
     "startedAt": "2026-08-02T15:00:00Z",
     "createdAt": "2026-08-02T14:59:30Z",
     "updatedAt": "2026-08-02T15:01:00Z"
   },
   "lastJob": {
     "id": "rmt_01k2ja2000e0080000000000m3",
-    "transition": "inbound_to_outbound",
-    "status": "succeeded",
+    "transition": "initial_to_inbound",
+    "status": "failed-rolled-back",
     "phase": "completed",
     "attemptCount": 1,
     "startedAt": "2026-08-01T10:00:00Z",

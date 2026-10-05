@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-09-28T06:10:42.623164+00:00
+fetched_at: 2026-10-05T06:27:20.569471+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,7 +34,7 @@ Cursor's services are already encrypted end-to-end. We recommend disabling SSL i
 - `*.cursorvm.com`
 - `*.*.cursorvm.com`
 
-Starting September 30, sign-in also uses `accounts.spacex.ai`, `accounts.x.ai`, and related auth hosts. Exclude those from inspection too. `authenticator.cursor.sh` remains the fallback sign-in page through October 30. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the full list.
+Sign-in also uses `accounts.spacex.ai`, `accounts.x.ai`, and related auth hosts. Exclude those from inspection too. `authenticator.cursor.sh` remains the fallback sign-in page during the transition. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the full list.
 
 Both `cursorvm.com` patterns are required for Grok Bot: hosted computers use nested hostnames, and a single-level wildcard misses them. Apply the exclusions to off-network and roaming proxy profiles as well as office locations. For Grok Bot symptoms and Zscaler profile notes, see [Configure TLS-inspecting proxies](https://cursor.com/docs/grok-bot/proxies.md).
 
@@ -112,8 +112,8 @@ We generally recommend allowlisting with the domain patterns above. However, if 
   - `agent.global.api5.cursor.sh`
   - `agentn.global.api5.cursor.sh`
 - `authenticate.cursor.sh`: Authorization endpoint.
-- `authenticator.cursor.sh`: Auth UI and login webview. Fallback sign-in page through October 30.
-- `accounts.spacex.ai`, `accounts.x.ai`: Sign-in page starting September 30. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the related auth hosts.
+- `authenticator.cursor.sh`: Auth UI and login webview. Fallback sign-in page during the transition.
+- `accounts.spacex.ai`, `accounts.x.ai`: New sign-in page. See [Which domains does Cursor sign-in need?](https://cursor.com/help/troubleshooting/sign-in-domains.md) for the related auth hosts.
 - `prod.authentication.cursor.sh`: Production token issuer.
 - `authentication.cursor.sh`: JWT issuer (backend).
 

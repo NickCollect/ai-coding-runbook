@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-09-28T06:10:41.166770+00:00
+fetched_at: 2026-10-05T06:27:19.032075+00:00
 fetch_method: mintlify_md
 ---
 
@@ -89,6 +89,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Update Repo](https://cursor.com/docs/api/origin/reference/update-repo.md)
 - [Create Repo](https://cursor.com/docs/api/origin/reference/create-repo.md)
 - [List Branches](https://cursor.com/docs/api/origin/reference/list-branches.md)
+- [Get Repository Collaborator Permission](https://cursor.com/docs/api/origin/reference/get-repository-collaborator-permission.md)
 - [Get Repo Tarball](https://cursor.com/docs/api/origin/reference/get-repo-tarball.md)
 - [Sync Mirror](https://cursor.com/docs/api/origin/reference/sync-mirror.md)
 
@@ -145,6 +146,17 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 ## Grants concepts
 
 - [Grants concepts](https://cursor.com/docs/api/origin/grants-api.md)
+
+## Inbound IP allowlist
+
+- [Inbound IP allowlist](https://cursor.com/docs/api/origin/reference/inbound-ip-allowlist.md)
+- [Get Inbound IP Allowlist](https://cursor.com/docs/api/origin/reference/get-inbound-ip-allowlist.md)
+- [Update Inbound IP Allowlist](https://cursor.com/docs/api/origin/reference/update-inbound-ip-allowlist.md)
+- [Add Inbound IP Allowlist Entry](https://cursor.com/docs/api/origin/reference/add-inbound-ip-allowlist-entry.md)
+- [Get Inbound IP Allowlist Entry](https://cursor.com/docs/api/origin/reference/get-inbound-ip-allowlist-entry.md)
+- [Delete Inbound IP Allowlist Entry](https://cursor.com/docs/api/origin/reference/delete-inbound-ip-allowlist-entry.md)
+- [Update Inbound IP Allowlist Entry](https://cursor.com/docs/api/origin/reference/update-inbound-ip-allowlist-entry.md)
+- [Replace Inbound IP Allowlist Entries](https://cursor.com/docs/api/origin/reference/replace-inbound-ip-allowlist-entries.md)
 
 ## Labels
 
@@ -229,12 +241,12 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Pull Request Reviewer Events](https://cursor.com/docs/api/origin/reference/pull-request-reviewer-events.md)
 - [Check Run Events](https://cursor.com/docs/api/origin/reference/check-run-events.md)
 - [Check Run Rerequested](https://cursor.com/docs/api/origin/reference/check-run-rerequested.md)
+- [Check Run Annotations](https://cursor.com/docs/api/origin/reference/check-run-annotations.md)
 - [Installation Created](https://cursor.com/docs/api/origin/reference/installation-created.md)
 - [Installation Updated](https://cursor.com/docs/api/origin/reference/installation-updated.md)
 - [Installation Suspended](https://cursor.com/docs/api/origin/reference/installation-suspended.md)
 - [Installation Unsuspended](https://cursor.com/docs/api/origin/reference/installation-unsuspended.md)
 - [Installation Deleted](https://cursor.com/docs/api/origin/reference/installation-deleted.md)
-- [Check Run Annotations](https://cursor.com/docs/api/origin/reference/check-run-annotations.md)
 
 
 ---

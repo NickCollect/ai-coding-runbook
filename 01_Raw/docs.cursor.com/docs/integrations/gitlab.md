@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/gitlab
-fetched_at: 2026-08-10T03:07:41.059434+00:00
+fetched_at: 2026-10-05T06:27:20.903094+00:00
 fetch_method: mintlify_md
 ---
 
@@ -45,6 +45,27 @@ Add these IP addresses to your allowlist:
 184.73.225.134
 3.209.66.12
 52.44.113.131
+100.63.97.141
+100.63.144.57
+18.210.232.136
+3.208.51.163
+3.224.130.48
+3.234.118.132
+34.197.19.148
+34.198.251.120
+34.199.187.247
+35.170.160.152
+44.215.226.85
+52.202.172.69
+54.81.109.217
+54.204.61.44
+54.236.99.119
+67.202.63.191
+184.193.125.229
+184.193.223.40
+184.194.140.210
+184.194.175.144
+184.194.208.56
 ```
 
 For other connection options beyond IP whitelisting, see [Advanced networking](https://cursor.com/docs/integrations/gitlab.md#advanced-networking).
@@ -69,6 +90,10 @@ For other connection options beyond IP whitelisting, see [Advanced networking](h
 6. Click **Connect** to complete the installation
 7. Back on the Integrations tab, click **Manage** next to your GitLab connection and select **Sync Repos**
 8. Return to the dashboard to configure features on your repositories
+
+### Disconnect GitLab Self-Hosted
+
+Go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations) → **Advanced** → **GitLab Self-Hosted**, open the registered instance's menu, and select **Delete Instance**. Cursor removes the instance's OAuth credentials, webhook secret, service account and user tokens, and the webhooks it created. Bugbot repository settings, team Bugbot settings, and learned rules are kept and return if you set up the same hostname again.
 
 ## Advanced networking
 

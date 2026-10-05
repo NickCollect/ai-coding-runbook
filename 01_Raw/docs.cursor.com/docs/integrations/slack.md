@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-09-28T06:10:43.130482+00:00
+fetched_at: 2026-10-05T06:27:21.121838+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,8 +48,8 @@ Run `@Cursor help` for an up-to-date command list.
 | `@Cursor pool`                    | Show the [team default pool](https://cursor.com/docs/integrations/slack.md#team-default-pool) and this channel's [default pool](https://cursor.com/docs/integrations/slack.md#channel-default-pool) for Slack launches                                      |
 | `@Cursor pool set <name>`         | Set the team default pool (team admins)                                                                                                                                                                                                                     |
 | `@Cursor pool unset`              | Clear the team default pool (team admins)                                                                                                                                                                                                                   |
-| `@Cursor pool set <name> channel` | Set this channel's default pool (team admins)                                                                                                                                                                                                               |
-| `@Cursor pool unset channel`      | Clear this channel's default pool (team admins)                                                                                                                                                                                                             |
+| `@Cursor pool set <name> channel` | Set this channel's default pool (any team member)                                                                                                                                                                                                           |
+| `@Cursor pool unset channel`      | Clear this channel's default pool (any team member)                                                                                                                                                                                                         |
 
 #### Options
 
@@ -200,6 +200,8 @@ To configure channel settings:
 2. Set the default repository for that channel
 3. All team members using Cloud Agents in that channel use these defaults
 
+Anyone on your Cursor team can change a channel's default repository or [default pool](https://cursor.com/docs/integrations/slack.md#channel-default-pool). Cursor replies in the thread under the `@Cursor settings` message with who made each change and the new value. When the change replaces an existing default, the reply names both, for example "changed this channel's default Self-Hosted pool from `secure` to `gpu`". If the channel already had that value, you get a private reply saying nothing changed.
+
 Channel settings take precedence over personal defaults but can be overridden
 by mentioning a specific repo in your message.
 
@@ -248,7 +250,7 @@ Team admins can set one [Team Pool](https://cursor.com/docs/cloud-agent/self-hos
 
 Team Pools require an Enterprise plan. The team and channel defaults only
 apply while **Allow Self-Hosted Machines** is on in the [Cloud Agents
-dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted-agents). If
+dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted). If
 an admin turns it off, Slack ignores both defaults and mentions run on
 Cursor's managed infrastructure.
 
@@ -264,7 +266,7 @@ Manage the default from Slack. Setting or clearing it requires the same permissi
 
 #### Channel default pool
 
-Team admins can also give a channel its own pool. `@Cursor` mentions in that channel then run on the channel's pool instead of the team default, and other channels keep the team default. Setting or clearing it takes the same permission as the team default.
+Anyone on your Cursor team can give a channel its own pool, the same way they can set the channel's [default repository](https://cursor.com/docs/integrations/slack.md#channel-settings). `@Cursor` mentions in that channel then run on the channel's pool instead of the team default, and other channels keep the team default. The team default itself stays admin-only.
 
 Run these in the channel you want to change:
 
@@ -275,6 +277,8 @@ Run these in the channel you want to change:
 ```
 
 `@Cursor pool` shows the channel's pool next to the team default. To pick from a list instead, run `@Cursor settings`, click **Set Pool for Channel**, and choose one of your team's pools. Choose **Use the team default (no channel pool)** to clear it. Once cleared, mentions in the channel go back to the team default.
+
+Cursor announces pool changes the same way as other [channel settings](https://cursor.com/docs/integrations/slack.md#channel-settings). The reply names who set, changed, or removed the pool, in a thread under your `@Cursor pool` command or under the `@Cursor settings` message when you pick from the list.
 
 #### How Cursor picks where a mention runs
 
@@ -293,6 +297,7 @@ Options in your message always win. Cursor resolves the target in this order:
 - **Repo-bound pool, no repository resolved.** Slack rejects the mention with an ephemeral reply instead of falling back to managed infrastructure. Add `repo=` or `pool=` to the mention, use `self_hosted=false` to run on managed infrastructure, or check the default with `@Cursor pool` and `@Cursor settings`.
 - **Repository resolved and the pool serves it.** Slack launches with `repo=` and `pool=` set, the same as an explicit `pool=<name>` mention.
 - **Repository resolved but the pool's workers only serve other repositories.** Slack rejects the mention with an ephemeral reply. Pick a repository the pool serves with `repo=`, or a pool that serves this repository with `pool=`.
+- **No workers have connected to the pool yet.** `@Cursor pool set` accepts any name, because [pools are durable](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#manage-pools) and their workers come and go. A mention that resolves a repository waits in the pool until a worker joins. A mention without a repository is rejected with an ephemeral reply.
 
 ### Privacy
 

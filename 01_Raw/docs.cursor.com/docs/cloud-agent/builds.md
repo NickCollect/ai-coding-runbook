@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/builds
-fetched_at: 2026-08-24T02:18:36.511365+00:00
+fetched_at: 2026-10-05T06:27:19.678729+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,8 @@ Each Build follows this lifecycle:
 Cursor keeps pre-warmed copies of active Builds ready. This removes repository cloning and dependency installation from the agent startup path.
 
 If a new Build fails, agents continue to use the last successful Build. A broken dependency update, install command, or Dockerfile doesn't replace the active environment.
+
+Builds are for Cursor-hosted Cloud Agents. Runs on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines) start on your machine as is and never boot a Build.
 
 ## When Builds occur
 

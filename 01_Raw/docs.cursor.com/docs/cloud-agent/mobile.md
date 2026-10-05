@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-09-07T05:31:27.439231+00:00
+fetched_at: 2026-10-05T06:27:19.839436+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,7 +99,7 @@ Remote Control and its settings are only available in the [Agents Window](https:
 ### Before you start
 
 - **Use Cursor 3.9.8 or later.** Remote Control requires Cursor client version 3.9.8 or later on your computer. Older clients won't show the Remote Control setting under **Settings > Agents** or the `/remote-control` command.
-- **Use a supported account.** Remote Control is available on Pro, Pro+, Ultra, Teams, and Enterprise plans for users with Cloud Agents access. See [what's included](https://cursor.com/help/account-and-billing/pricing.md).
+- **Use a supported account.** Remote Control is available on Start, Pro, Pro+, Ultra, Teams, and Enterprise plans for users with Cloud Agents access. See [what's included](https://cursor.com/help/account-and-billing/pricing.md).
 - **Enable Remote Control in Cursor.** In the Agents Window, turn it on under **Settings > Agents** before handing off a session.
 - **Enable it for your team.** On Teams and Enterprise plans, an admin must enable Remote Control from [Cursor Dashboard → Cloud Agents → Self-Hosted](https://cursor.com/dashboard/cloud-agents#self-hosted) before members can use it.
 - **Allow cloud data storage.** Remote Control isn't available when your privacy settings disable cloud data storage.
@@ -144,7 +144,7 @@ Team and Enterprise admins control Remote Control access from [Cursor Dashboard 
 
 ## Availability
 
-You can use the app on any plan that includes cloud agents: Pro, Pro+, Ultra, Teams, and Enterprise. If your organization requires SSO, you'll sign in through it first.
+You can use the app on any plan that includes cloud agents: Start, Pro, Pro+, Ultra, Teams, and Enterprise. If your organization requires SSO, you'll sign in through it first.
 
 For HIPAA BAA details, including Eligible Services and implementation requirements, see [HIPAA Business Associate Agreements](https://cursor.com/docs/enterprise/baa.md).
 
