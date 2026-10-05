@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economics
-fetched_at: 2026-09-28T06:10:45.509692+00:00
+fetched_at: 2026-10-05T06:27:19.840555+00:00
 title: "Economics \\ Anthropic"
 ---
 
@@ -50,6 +50,9 @@ Search
 
 DateCategoryTitle
 
+- [Sep 30, 2026Economics
+
+  What work can robots do?](https://www.anthropic.com/research/what-work-can-robots-do)
 - [Sep 24, 2026Economics
 
   Project Swap: What happens when agents trade for us?](https://www.anthropic.com/research/project-swap)
@@ -77,8 +80,5 @@ DateCategoryTitle
 - [Mar 31, 2026Economics
 
   How Australia uses Claude: Findings from the Anthropic Economic Index](https://www.anthropic.com/research/how-australia-uses-claude)
-- [Mar 24, 2026Economics
-
-  Anthropic Economic Index report: Learning curves](https://www.anthropic.com/research/economic-index-march-2026-report)
 
 [See more](#)

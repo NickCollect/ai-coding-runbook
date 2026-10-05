@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/the-anthropic-economic-index
-fetched_at: 2026-09-28T06:10:45.647926+00:00
+fetched_at: 2026-10-05T06:27:20.038590+00:00
 title: "Introducing the Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ Feb 10, 2025
 
 In the coming years, AI systems will have a major impact on the ways people work. For that reason, we're launching the [Anthropic Economic Index](https://www.anthropic.com/economic-futures), an initiative aimed at understanding AI's effects on labor markets and the economy over time.
 
-The Index’s [initial report](http://arxiv.org/abs/2503.04761) provides first-of-its-kind data and analysis based on millions of anonymized conversations on [Claude.ai](http://claude.ai/redirect/website.v1.e3f142f7-ee6b-404e-a471-0a2cdd7e48c8), revealing the clearest picture yet of how AI is being incorporated into real-world tasks across the modern economy.
+The Index’s [initial report](http://arxiv.org/abs/2503.04761) provides first-of-its-kind data and analysis based on millions of anonymized conversations on [Claude.ai](http://claude.ai/redirect/website.v1.5f4529e4-49e0-4b87-ac3e-925d88c5477f), revealing the clearest picture yet of how AI is being incorporated into real-world tasks across the modern economy.
 
 We're also [open sourcing the dataset](https://huggingface.co/datasets/Anthropic/EconomicIndex/)used for this analysis, so researchers can build on and extend our findings. Developing policy responses to address the coming transformation in the labor market and its effects on employment and productivity will take a range of perspectives. To that end, we are also inviting economists, policy experts, and other researchers to [provide input](https://docs.google.com/forms/d/e/1FAIpQLSfDEdY-mT5lcXPaDSv-0Ci1rSXGlbIJierxkUbNB7_07-kddw/viewform?usp=dialog) on the Index.
 
@@ -44,7 +44,7 @@ Certain tasks lend themselves better to being automated or augmented by a new te
 
 ### **Using Clio to match AI use to tasks**
 
-This research was made possible by Claude insights and observations, or"[Clio](https://www.anthropic.com/research/clio)", an automated analysis tool that allows us to analyze conversations with Claude while preserving user privacy1. We used Clio on a dataset of approximately one million conversations with Claude (specifically, Free and Pro conversations on [Claude.ai](http://claude.ai/redirect/website.v1.e3f142f7-ee6b-404e-a471-0a2cdd7e48c8)), and used it to organize the conversations by occupational task.
+This research was made possible by Claude insights and observations, or"[Clio](https://www.anthropic.com/research/clio)", an automated analysis tool that allows us to analyze conversations with Claude while preserving user privacy1. We used Clio on a dataset of approximately one million conversations with Claude (specifically, Free and Pro conversations on [Claude.ai](http://claude.ai/redirect/website.v1.5f4529e4-49e0-4b87-ac3e-925d88c5477f)), and used it to organize the conversations by occupational task.
 
 We chose tasks according to the classification made by the U.S. Department of Labor, which maintains a database of around 20,000 specific work-related tasks called the Occupational Information Network, or [O\*NET](https://www.onetonline.org/). Clio matched each conversation with the O\*NET task that best represented the role of the AI in the conversation (the process is summarized in the figure below). We then followed the O\*NET scheme for grouping the tasks into the occupations they best represented, and the occupations into a small set of overall categories: *education and library,* *business and financial,* and so on.
 
@@ -90,7 +90,7 @@ Our study provides a unique glimpse into how AI is changing the labor market. Bu
 
 - We can’t know for certain whether someone using Claude for a task was completing a task for work. Someone asking Claude for writing or editing advice *could* be doing so at work, but they could also be doing so for the novel they’re writing as a hobby.
 - Relatedly, we don’t know *how* the users were using the responses from Claude. Were they, for instance, copy-pasting code snippets? Were they fact-checking responses or accepting them uncritically? Some of what appears in our data to be automation could, in fact, be augmentation: for example, a user might ask Claude to write a full memo for them (which would appear as automation), but then edit it themselves afterwards (which would be augmentation).
-- We also only analyze data from [Claude.ai](http://claude.ai/redirect/website.v1.e3f142f7-ee6b-404e-a471-0a2cdd7e48c8) Free and Pro plans, rather than API, Team, or Enterprise users. While Claude.ai data contains some non-work conversations, we used a language model to filter this data to only contain conversations relevant to an occupational task, which helps to mitigate this concern.
+- We also only analyze data from [Claude.ai](http://claude.ai/redirect/website.v1.5f4529e4-49e0-4b87-ac3e-925d88c5477f) Free and Pro plans, rather than API, Team, or Enterprise users. While Claude.ai data contains some non-work conversations, we used a language model to filter this data to only contain conversations relevant to an occupational task, which helps to mitigate this concern.
 - The sheer number of different tasks means it is possible that Clio classified some conversations incorrectly (please see the full paper, in particular Appendix B, for details on how we validated the analysis);
 - Claude can’t generate images (except indirectly via code), and so some creative uses won’t be referenced in the data;
 - Given that Claude is advertised for use as a state-of-the-art coding model, we might expect coding to be overrepresented as a use case. For that reason, we don’t argue that the uses in our dataset are a representative sample of AI use in general.
@@ -127,20 +127,20 @@ If you’re interested in working at Anthropic to research the effects of AI on 
 
 ## Related content
 
-### Yes, Claude can do Nine Loops
+### Claude-shaped science
 
-Guest writer and physicist Matt von Hippel shares what happened when he issued a challenge to AI companies to solve a problem in his former subfield of theoretical physics.
+Guest author Prof. Matthew Schwartz describes what happened when he stopped fighting Claude and allowed Claude to find “Claude-shaped” problems: ones best suited to the capabilities of the current generation of LLM tools. This led him to build BootLoops, a toolkit for exact calculations in quantitative science, which he has been applying across scientific fields alongside experts.
 
-[Read more](https://www.anthropic.com/research/yes-claude-can-do-nine-loops)
+[Read more](https://www.anthropic.com/research/claude-shaped-science)
 
-### Project Swap: What happens when agents trade for us?
+### What work can robots do?
 
-To see what works and what breaks when agents are sent into a market, we made a miniature market of Claudes—a more controlled sequel to Project Deal, our first experiment with agents interacting in a marketplace on people's behalf.
+We built an index of how well today’s robots can perform US job tasks. Robots can already do three-quarters of physical tasks, mostly in limited settings, but are cost-competitive for just 0.3% of them.
 
-[Read more](https://www.anthropic.com/research/project-swap)
+[Read more](https://www.anthropic.com/research/what-work-can-robots-do)
 
-### How Claude is uplifting biomolecular modeling
+### What do you want from AI?
 
-Claude made the open-source models that scientists use to predict and design biomolecules faster and more memory-efficient. Claude optimized more than 30 of these models in just under four weeks, speeding them up roughly 4x on average. It also created a low-memory mode that enables the accurate prediction of biomolecular systems larger than 10,000 tokens (amino acids, nucleotides, and atoms from small molecules and ions) on a single NVIDIA GPU node.
+We’re launching a new study using Anthropic Interviewer to learn from your experiences with AI, and we invite you to participate.
 
-[Read more](https://www.anthropic.com/research/claude-uplifts-biomolecular-modeling)
+[Read more](https://www.anthropic.com/research/your-thoughts-on-ai)

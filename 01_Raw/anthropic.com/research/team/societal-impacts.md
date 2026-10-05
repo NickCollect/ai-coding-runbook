@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-09-21T05:44:14.428954+00:00
+fetched_at: 2026-10-05T06:27:20.004540+00:00
 title: "Societal Impacts Research \\ Anthropic"
 ---
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Sep 29, 2026Societal Impacts
+
+  What do you want from AI?](https://www.anthropic.com/research/your-thoughts-on-ai)
 - [Aug 26, 2026Societal Impacts
 
   Enabling independent research on how people use Claude](https://www.anthropic.com/research/enabling-independent-research)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Apr 28, 2025Societal Impacts
 
   Anthropic Economic Index: AI’s impact on software development](https://www.anthropic.com/research/impact-software-development)
-- [Apr 21, 2025Societal Impacts
-
-  Values in the wild: Discovering and analyzing values in real-world language model interactions](https://www.anthropic.com/research/values-wild)
 
 [See more](#)
 

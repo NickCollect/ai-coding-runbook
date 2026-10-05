@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-09-14T05:36:14.481164+00:00
+fetched_at: 2026-10-05T06:27:19.872052+00:00
 title: "Frontier Red Team Research \\ Anthropic"
 ---
 
@@ -28,6 +28,9 @@ Search
 
 DateCategoryTitle
 
+- [Sep 29, 2026Frontier Red Team
+
+  GLM-5.3 and the spread of advanced cyber capabilities](https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities)
 - [Sep 10, 2026Frontier Red Team
 
   Measuring tactical intelligence targeting and conventional weapons capabilities of AI models](https://www.anthropic.com/research/intelligence-targeting-conventional-weapons-capabilities)
@@ -55,8 +58,5 @@ DateCategoryTitle
 - [Jun 3, 2026Announcements
 
   What we learned mapping a year’s worth of AI-enabled cyber threats](https://www.anthropic.com/news/AI-enabled-cyber-threats-mitre-attack)
-- [May 22, 2026Frontier Red Team
-
-  Measuring LLMs’ ability to develop exploits](https://www.anthropic.com/research/exploit-evals)
 
 [See more](#)

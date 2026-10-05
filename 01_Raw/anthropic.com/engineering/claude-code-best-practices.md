@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-09-28T06:10:38.433677+00:00
+fetched_at: 2026-10-05T06:27:13.194688+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
@@ -130,7 +130,7 @@ You can provide rich data to Claude in several ways:
 - **Reference files with `@`** instead of describing where code lives. Claude reads the file before responding.
 - **Paste images directly**. Copy/paste or drag and drop images into the prompt.
 - **Give URLs** for documentation and API references. Use `/permissions` to allowlist frequently-used domains.
-- **Pipe in data** by running `cat error.log | claude` to send file contents directly.
+- **Pipe in data** by running `cat error.log | claude -p "explain this error"` to send file contents directly.
 - **Let Claude fetch what it needs**. Tell Claude to pull context itself using Bash commands, MCP tools, or by reading files.
 
 ---
@@ -434,7 +434,7 @@ You can do something similar with tests: have one Claude write tests, then anoth
 
 ### [​](#fan-out-across-files) Fan out across files
 
-Loop through tasks calling `claude -p` for each. Use `--allowedTools` to scope permissions for batch operations.
+Loop through tasks calling `claude -p` for each. Use `--allowedTools` to pre-approve tools for batch operations.
 
 For large migrations or analyses, you can distribute work across many parallel Claude invocations. Run [`/batch <instruction>`](https://www.anthropic.com/docs/en/commands#all-commands) to have Claude split the change across 5 to 30 subagents. Each subagent works in its own worktree. To drive the fan-out from your own script instead, loop over `claude -p`:
 
@@ -451,7 +451,8 @@ Write a script to loop through the list
 ```
 for file in $(cat files.txt); do
   claude -p "Migrate $file from Python 2 to Python 3. Return OK or FAIL." \
-    --allowedTools "Edit,Bash(git commit *)"
+    --allowedTools "Edit,Bash(git commit *)" \
+    --permission-mode dontAsk
 done
 ```
 
@@ -459,7 +460,7 @@ done
 
 Test on a few files, then run on all of them
 
-Refine your prompt based on what goes wrong with the first 2-3 files, then run on the full set. The `--allowedTools` flag restricts what Claude can do, which matters when you’re running unattended.
+Refine your prompt based on what goes wrong with the first 2-3 files, then run on the full set. The `--allowedTools` flag pre-approves the tools the migration needs, and [`--permission-mode dontAsk`](https://www.anthropic.com/docs/en/permission-modes#allow-only-pre-approved-tools-with-dontask-mode) denies anything else that would need approval, which matters when you’re running unattended.
 
 You can also integrate Claude into existing data/processing pipelines:
 
