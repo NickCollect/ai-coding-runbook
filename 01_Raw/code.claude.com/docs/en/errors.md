@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-09-28T06:10:40.879325+00:00
+fetched_at: 2026-10-05T06:27:11.674075+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,332 +24,366 @@ Except for [Wrapper and IDE errors](#wrapper-and-ide-errors), which the launchin
 
 Match the message you see to a section below.
 
-| Message                                                                                                                                                                                                                                                              | Section                                                                                                                       |
-| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| `API Error: 500 Internal server error`                                                                                                                                                                                                                               | [Server errors](#api-error-500-internal-server-error)                                                                         |
-| `API Error: Repeated 529 Overloaded errors`                                                                                                                                                                                                                          | [Server errors](#api-error-repeated-529-overloaded-errors)                                                                    |
-| `Opus is experiencing high load` / `Fable is experiencing high load`                                                                                                                                                                                                 | [Server errors](#api-error-repeated-529-overloaded-errors)                                                                    |
-| `Request timed out`                                                                                                                                                                                                                                                  | [Server errors](#request-timed-out), or [Network](#unable-to-connect-to-api) if the message mentions your internet connection |
-| `API Error: No response from API`                                                                                                                                                                                                                                    | [Server errors](#no-response-from-api)                                                                                        |
-| `Server error mid-response. The response above may be incomplete.`                                                                                                                                                                                                   | [Server errors](#the-response-above-may-be-incomplete)                                                                        |
-| `Connection lost mid-response` / `Your computer went to sleep mid-response` / `The response stopped arriving`                                                                                                                                                        | [Server errors](#the-response-above-may-be-incomplete)                                                                        |
-| `Connection closed mid-response` / `Response stalled mid-stream`                                                                                                                                                                                                     | [Server errors](#the-response-above-may-be-incomplete)                                                                        |
-| `Part of the response never arrived` / `The response stream was malformed`                                                                                                                                                                                           | [Server errors](#the-response-above-may-be-incomplete)                                                                        |
-| `API Error: Content block not found` / `API Error: Content block already closed`                                                                                                                                                                                     | [Server errors](#the-response-above-may-be-incomplete)                                                                        |
-| `Connection lost before a response was produced` / `Your computer went to sleep before a response was produced` / `The response stalled before a response was produced`                                                                                              | [Automatic retries](#automatic-retries)                                                                                       |
-| `Connection closed while thinking` / `Response stalled while thinking`                                                                                                                                                                                               | [Automatic retries](#automatic-retries)                                                                                       |
-| `Connection lost while your computer was asleep`                                                                                                                                                                                                                     | [Automatic retries](#automatic-retries)                                                                                       |
-| `<model> is temporarily unavailable, so auto mode cannot determine the safety of...`                                                                                                                                                                                 | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `Auto mode could not evaluate this action and is blocking it for safety`                                                                                                                                                                                             | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `Auto mode classifier transcript exceeded context window`                                                                                                                                                                                                            | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `Agent aborted: auto mode classifier request refused by the safety safeguard`                                                                                                                                                                                        | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action)                                                          |
-| `The server-side auto mode classifier gave no verdict`                                                                                                                                                                                                               | [Server errors](#the-server-returned-no-safety-verdict)                                                                       |
-| `Auto mode is unavailable — the server returned no safety verdict for the last 10 responses`                                                                                                                                                                         | [Server errors](#the-server-returned-no-safety-verdict)                                                                       |
-| `Agent terminated early due to an API error`                                                                                                                                                                                                                         | [Server errors](#agent-terminated-early-due-to-an-api-error)                                                                  |
-| `You've hit your session limit` / `You've hit your weekly limit` / `You've hit your Opus limit` / `You've hit your Sonnet limit`                                                                                                                                     | [Usage limits](#youve-hit-your-session-limit)                                                                                 |
-| `Usage credits required for 1M context`                                                                                                                                                                                                                              | [Usage limits](#usage-credits-required-for-1m-context)                                                                        |
-| `the prompt to confirm went unanswered — nothing was sent`                                                                                                                                                                                                           | [Usage limits](#the-prompt-to-confirm-went-unanswered)                                                                        |
-| `Server is temporarily limiting requests`                                                                                                                                                                                                                            | [Usage limits](#server-is-temporarily-limiting-requests)                                                                      |
-| `Request rejected (429)`                                                                                                                                                                                                                                             | [Usage limits](#request-rejected-429)                                                                                         |
-| `Credit balance is too low`                                                                                                                                                                                                                                          | [Usage limits](#credit-balance-is-too-low)                                                                                    |
-| `You've hit your monthly spend limit` / `You've hit your individual spend limit` / `You've hit your org's monthly spend limit` / `You've hit your channel's monthly spend limit` / `You've hit your team's shared budget` / `You've hit your individual usage limit` | [Usage limits](#youve-hit-your-monthly-spend-limit)                                                                           |
-| `Could not update your spend limit`                                                                                                                                                                                                                                  | [Usage limits](#could-not-update-your-spend-limit)                                                                            |
-| `spend limit reached` / `spend limit unavailable`                                                                                                                                                                                                                    | [Usage limits](#spend-limit-reached)                                                                                          |
-| `Not logged in · Please run /login`                                                                                                                                                                                                                                  | [Authentication](#not-logged-in)                                                                                              |
-| `Couldn't save your login`                                                                                                                                                                                                                                           | [Authentication](#couldnt-save-your-login)                                                                                    |
-| `Authentication required · Sign in again to continue`                                                                                                                                                                                                                | [Authentication](#not-logged-in)                                                                                              |
-| `Could not resolve authentication method`                                                                                                                                                                                                                            | [Authentication](#could-not-resolve-authentication-method)                                                                    |
-| `Invalid API key`                                                                                                                                                                                                                                                    | [Authentication](#invalid-api-key)                                                                                            |
-| `Your apiKeyHelper script is failing`                                                                                                                                                                                                                                | [Authentication](#your-apikeyhelper-script-is-failing)                                                                        |
-| `Invalid auth token · Fix external auth token`                                                                                                                                                                                                                       | [Authentication](#invalid-request-header-value)                                                                               |
-| `Invalid ANTHROPIC_CUSTOM_HEADERS · Fix the environment variable`                                                                                                                                                                                                    | [Authentication](#invalid-request-header-value)                                                                               |
-| `Invalid request header from the environment · Fix the environment variable`                                                                                                                                                                                         | [Authentication](#invalid-request-header-value)                                                                               |
-| `This organization has been disabled`                                                                                                                                                                                                                                | [Authentication](#this-organization-has-been-disabled)                                                                        |
-| `Your organization has disabled API key authentication`                                                                                                                                                                                                              | [Authentication](#your-organization-has-disabled-api-key-authentication)                                                      |
-| `Your organization has disabled Claude subscription access`                                                                                                                                                                                                          | [Authentication](#your-organization-has-disabled-claude-subscription-access)                                                  |
-| `Routines are disabled by your organization's policy`                                                                                                                                                                                                                | [Authentication](#routines-are-disabled-by-your-organizations-policy)                                                         |
-| `Remote Control is only available when using Claude via api.anthropic.com`                                                                                                                                                                                           | [Authentication](#remote-control-requires-the-anthropic-api)                                                                  |
-| `OAuth token refresh failed — run /login to re-authenticate`                                                                                                                                                                                                         | [Authentication](#remote-control-couldnt-refresh-your-login)                                                                  |
-| `JWT refresh failed: no OAuth token — run /login`                                                                                                                                                                                                                    | [Authentication](#remote-control-couldnt-refresh-your-login)                                                                  |
-| `Claude.ai login expired`                                                                                                                                                                                                                                            | [Authentication](#remote-control-couldnt-refresh-your-login)                                                                  |
-| `Claude.ai login was rejected — run /login, then /remote-control`                                                                                                                                                                                                    | [Authentication](#remote-control-couldnt-refresh-your-login)                                                                  |
-| `OAuth token unavailable — run /login to restore Remote Control`                                                                                                                                                                                                     | [Authentication](#remote-control-couldnt-refresh-your-login)                                                                  |
-| `Signed out of Claude — run /login, then /remote-control`                                                                                                                                                                                                            | [Authentication](#remote-control-couldnt-refresh-your-login)                                                                  |
-| `signed-in claude.ai account or organization changed on this machine`                                                                                                                                                                                                | [Authentication](#remote-control-stopped-because-the-signed-in-account-changed)                                               |
-| `Remote Control stopped — the app running this session is now signed in to a different Claude account`                                                                                                                                                               | [Authentication](#remote-control-stopped-because-the-app-running-the-session-signed-out-or-switched-accounts)                 |
-| `Remote Control stopped — the app running this session is signed out of Claude`                                                                                                                                                                                      | [Authentication](#remote-control-stopped-because-the-app-running-the-session-signed-out-or-switched-accounts)                 |
-| `Couldn't verify your organization's policy for remote control`                                                                                                                                                                                                      | [Troubleshoot Remote Control](/docs/en/remote-control#couldnt-verify-your-organizations-policy-for-remote-control)                 |
-| `OAuth token revoked` / `OAuth token has expired`                                                                                                                                                                                                                    | [Authentication](#oauth-token-revoked-or-expired)                                                                             |
-| `API Error: 401 Invalid authentication credentials`                                                                                                                                                                                                                  | [Authentication](#api-error-401-invalid-authentication-credentials)                                                           |
-| `Login expired · Please run /login`                                                                                                                                                                                                                                  | [Authentication](#login-expired)                                                                                              |
-| `Claude login not accepted · Run /login, then try again`                                                                                                                                                                                                             | [Authentication](#claude-login-not-accepted)                                                                                  |
-| `Artifacts need a claude.ai login`                                                                                                                                                                                                                                   | [Authentication](#artifacts-need-a-claude-ai-login)                                                                           |
-| `Not signed in to the Cloud gateway — run /login.`                                                                                                                                                                                                                   | [Authentication](#administrator-policy-requires-a-cloud-gateway-sign-in)                                                      |
-| `Administrator policy requires a Cloud gateway sign-in on this machine`                                                                                                                                                                                              | [Authentication](#administrator-policy-requires-a-cloud-gateway-sign-in)                                                      |
-| `Failed to authenticate: OAuth session expired and could not be refreshed`                                                                                                                                                                                           | [Authentication](#login-expired)                                                                                              |
-| `Could not refresh your login because another Claude Code process is refreshing it`                                                                                                                                                                                  | [Authentication](#could-not-refresh-your-login)                                                                               |
-| `Failed to refresh OAuth token: another Claude Code process is refreshing it or exited mid-refresh`                                                                                                                                                                  | [Authentication](#could-not-refresh-your-login)                                                                               |
-| `Your account is on hold and can't use Claude Code. View details or appeal: https://claude.ai/restricted`                                                                                                                                                            | [Authentication](#your-account-is-on-hold)                                                                                    |
-| `Your account is on hold and can't sign in to Claude Code. View details or appeal: https://claude.ai/restricted`                                                                                                                                                     | [Authentication](#your-account-is-on-hold)                                                                                    |
-| `Anthropic profile login expired · Re-authenticate your Anthropic profile`                                                                                                                                                                                           | [Authentication](#anthropic-profile-login-expired)                                                                            |
-| `Anthropic profile login expired · Run /login to use your claude.ai account instead, or re-authenticate the profile`                                                                                                                                                 | [Authentication](#anthropic-profile-login-expired)                                                                            |
-| `does not meet scope requirement user:profile`                                                                                                                                                                                                                       | [Authentication](#oauth-scope-requirement)                                                                                    |
-| `claude.ai rejected the session token` / `session token rejected`                                                                                                                                                                                                    | [Authentication](#claude-ai-rejected-the-session-token)                                                                       |
-| `MCP server "<name>" needs you to sign in again (run /mcp to re-authenticate)`                                                                                                                                                                                       | [Authentication](#mcp-server-needs-you-to-sign-in-again)                                                                      |
-| `rejected the credential from its headersHelper` / `rejected the Authorization header in its config`                                                                                                                                                                 | [Authentication](#mcp-server-needs-you-to-sign-in-again)                                                                      |
-| `MCP server "<name>" needs additional permissions (scope: "<scope>") — run /mcp to re-authenticate`                                                                                                                                                                  | [Authentication](#mcp-server-needs-you-to-sign-in-again)                                                                      |
-| `MCP server "<name>" requires re-authorization (token expired)`                                                                                                                                                                                                      | [Authentication](#mcp-server-needs-you-to-sign-in-again)                                                                      |
-| `Issuer mismatch in authorization response (RFC 9207)`                                                                                                                                                                                                               | [Authentication](#issuer-mismatch-in-authorization-response)                                                                  |
-| `Cloud gateway session expired — run /login to reconnect.`                                                                                                                                                                                                           | [Authentication](#cloud-gateway-session-expired)                                                                              |
-| `Cloud gateway <url> no longer accepts this session`                                                                                                                                                                                                                 | [Authentication](#cloud-gateway-session-expired)                                                                              |
-| `Sign-in timed out while waiting for you to continue. Try again.`                                                                                                                                                                                                    | [Authentication](#sign-in-timed-out-while-waiting-for-you-to-continue)                                                        |
-| `AWS credentials expired or invalid`                                                                                                                                                                                                                                 | [Authentication](#aws-credentials-expired-or-invalid)                                                                         |
-| `AWS authentication failed`                                                                                                                                                                                                                                          | [Authentication](#aws-authentication-failed)                                                                                  |
-| `Google Cloud credentials expired or invalid`                                                                                                                                                                                                                        | [Authentication](#google-cloud-credentials-expired-or-invalid)                                                                |
-| `Google Cloud authentication failed`                                                                                                                                                                                                                                 | [Authentication](#google-cloud-authentication-failed)                                                                         |
-| `Microsoft Foundry authentication failed`                                                                                                                                                                                                                            | [Authentication](#microsoft-foundry-authentication-failed)                                                                    |
-| `Gateway refused the request`                                                                                                                                                                                                                                        | [Authentication](#gateway-refused-the-request)                                                                                |
-| `Could not load AWS credentials` / `Could not load Google Cloud credentials`                                                                                                                                                                                         | [Authentication](#could-not-load-aws-or-google-cloud-credentials)                                                             |
-| `AWS default-chain credential resolve timed out`                                                                                                                                                                                                                     | [Authentication](#aws-default-chain-credential-resolve-timed-out)                                                             |
-| `Timed out after 60s waiting for AWS`                                                                                                                                                                                                                                | [Authentication](#bedrock-setup-verification-timed-out-waiting-for-aws)                                                       |
-| `A request to AWS timed out. Check your network and proxy settings, then try again.`                                                                                                                                                                                 | [Authentication](#bedrock-setup-verification-timed-out-waiting-for-aws)                                                       |
-| `Could not load the default credentials` on Google Cloud's Agent Platform                                                                                                                                                                                            | [Authentication](#could-not-load-aws-or-google-cloud-credentials)                                                             |
-| `Unable to connect to API`                                                                                                                                                                                                                                           | [Network](#unable-to-connect-to-api)                                                                                          |
-| `Connection refused —` / `Can't reach the API server —` / `No internet route —` / `Couldn't connect through your proxy` / `Connection dropped`, each with an error code in parentheses                                                                               | [Network](#unable-to-connect-to-api)                                                                                          |
-| `Unable to connect to Anthropic services` during setup                                                                                                                                                                                                               | [Network](#unable-to-connect-to-anthropic-services)                                                                           |
-| `Socket is closed`                                                                                                                                                                                                                                                   | [Network](#socket-is-closed)                                                                                                  |
-| `Waiting for API response · will retry in`                                                                                                                                                                                                                           | [Automatic retries](#automatic-retries), or [Network](#unable-to-connect-to-api) if it persists                               |
-| `API returned an empty or malformed response`                                                                                                                                                                                                                        | [Network](#api-returned-an-empty-or-malformed-response)                                                                       |
-| `Streaming response ended before any complete data was received`                                                                                                                                                                                                     | [Network](#streaming-response-ended-before-any-complete-data-was-received)                                                    |
-| `Bedrock streaming response has content-type "..."; expected "application/vnd.amazon.eventstream"`                                                                                                                                                                   | [Network](#bedrock-streaming-response-has-an-unexpected-content-type)                                                         |
-| `SSL certificate verification failed`                                                                                                                                                                                                                                | [Network](#ssl-certificate-errors)                                                                                            |
-| `SSL certificate error (...)` during login or startup                                                                                                                                                                                                                | [Network](#ssl-certificate-errors)                                                                                            |
-| `unable to get local issuer certificate`                                                                                                                                                                                                                             | [Network](#ssl-certificate-errors)                                                                                            |
-| `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session                                                                                                                                                                                           | [Network](#host-not-allowed-in-a-cloud-session)                                                                               |
-| `proxy refused the connection`                                                                                                                                                                                                                                       | [Network](#the-proxy-refused-the-connection)                                                                                  |
-| `403` with `This GraphQL query is not enabled for this session` in a cloud session                                                                                                                                                                                   | [GitHub proxy](/docs/en/cloud-environments#github-proxy)                                                                           |
-| `The cloud environments service returned an empty response` / `The cloud environments service returned a response in an unexpected format`                                                                                                                           | [Network](#the-cloud-environments-service-returned-an-empty-or-unexpected-response)                                           |
-| `Couldn't reconnect to your Remote Control session`                                                                                                                                                                                                                  | [Network](#couldnt-reconnect-to-your-remote-control-session)                                                                  |
-| `N sessions ended while this machine was offline — the environment was cleaned up on the server and can't be resumed.`                                                                                                                                               | [Network](#sessions-ended-while-this-machine-was-offline)                                                                     |
-| `Couldn't share the transcript.`                                                                                                                                                                                                                                     | [Network](#couldnt-share-the-transcript)                                                                                      |
-| `Couldn't send feedback`                                                                                                                                                                                                                                             | [Network](#couldnt-send-feedback)                                                                                             |
-| `Prompt is too long` / `Input is too long for requested model`                                                                                                                                                                                                       | [Request errors](#prompt-is-too-long)                                                                                         |
-| `Prompt is too long · automatic compaction failed:`                                                                                                                                                                                                                  | [Request errors](#prompt-is-too-long)                                                                                         |
-| `Prompt is too long · this conversation is a single exchange` / `A single-exchange conversation cannot be compacted`                                                                                                                                                 | [Request errors](#prompt-is-too-long)                                                                                         |
-| `Context limit reached · /compact or /clear to continue`                                                                                                                                                                                                             | [Request errors](#prompt-is-too-long)                                                                                         |
-| `Context limit reached · /clear to continue`                                                                                                                                                                                                                         | [Request errors](#prompt-is-too-long)                                                                                         |
-| `capability_rejected: prompt_too_long` on a Claude apps gateway session                                                                                                                                                                                              | [Request errors](#prompt-is-too-long)                                                                                         |
-| `upstream rejected the request` / `request too large for this upstream` on a Claude apps gateway session                                                                                                                                                             | [Upstream error messages](/docs/en/claude-apps-gateway-config#upstream-error-messages)                                             |
-| `upstream rate limit exceeded` on a Claude apps gateway session                                                                                                                                                                                                      | [Upstream error messages](/docs/en/claude-apps-gateway-config#upstream-error-messages)                                             |
-| `all upstreams failed (N attempted)` on a Claude apps gateway session                                                                                                                                                                                                | [Upstream error messages](/docs/en/claude-apps-gateway-config#upstream-error-messages)                                             |
-| `Claude Code may not be enabled for your organization` after a Claude apps gateway sign-in                                                                                                                                                                           | [Claude apps gateway troubleshooting](/docs/en/claude-apps-gateway-deploy#troubleshooting)                                         |
-| `Context exceeds the ...-token limit by ... tokens` in `/context` output                                                                                                                                                                                             | [Request errors](#context-exceeds-the-token-limit)                                                                            |
-| `Error during compaction: Conversation too long`                                                                                                                                                                                                                     | [Request errors](#error-during-compaction-conversation-too-long)                                                              |
-| `Request too large`                                                                                                                                                                                                                                                  | [Request errors](#request-too-large)                                                                                          |
-| `Request too large for the API's 32MB request limit`                                                                                                                                                                                                                 | [Request errors](#request-too-large)                                                                                          |
-| `Image was too large`                                                                                                                                                                                                                                                | [Request errors](#image-was-too-large)                                                                                        |
-| `Unable to resize image`                                                                                                                                                                                                                                             | [Request errors](#unable-to-resize-image)                                                                                     |
-| `PDF too large` / `PDF is password protected`                                                                                                                                                                                                                        | [Request errors](#pdf-errors)                                                                                                 |
-| `Extra inputs are not permitted`                                                                                                                                                                                                                                     | [Request errors](#extra-inputs-are-not-permitted)                                                                             |
-| `API Error: 400 ... tools.N.custom.input_schema: JSON schema is invalid` / `Property keys should match pattern`                                                                                                                                                      | [Request errors](#tool-input-schema-is-invalid)                                                                               |
-| `tool_use.name: String should have at most 200 characters`                                                                                                                                                                                                           | [Request errors](#tool-use-name-over-200-characters)                                                                          |
-| `There's an issue with the selected model`                                                                                                                                                                                                                           | [Request errors](#theres-an-issue-with-the-selected-model)                                                                    |
-| `Model ... is not a recognized model id`                                                                                                                                                                                                                             | [Request errors](#model-is-not-a-recognized-model-id)                                                                         |
-| `Model ... not found`                                                                                                                                                                                                                                                | [Request errors](#model-not-found)                                                                                            |
-| `API error: ... · model not changed`                                                                                                                                                                                                                                 | [Request errors](#api-error-model-not-changed)                                                                                |
-| `Claude Opus is not available with the Claude Pro plan`                                                                                                                                                                                                              | [Request errors](#claude-opus-is-not-available-with-the-claude-pro-plan)                                                      |
-| `Claude Code ... does not support this model; version ... or newer is required`                                                                                                                                                                                      | [Request errors](#claude-code-does-not-support-this-model)                                                                    |
-| `Claude Code ... is older than the minimum version required by your organization's policy`                                                                                                                                                                           | [Request errors](#claude-code-does-not-support-this-model)                                                                    |
-| `Model ... is restricted by your organization's settings`                                                                                                                                                                                                            | [Request errors](#model-is-restricted-by-your-organizations-settings)                                                         |
-| `Model ... is not available. Your organization restricts model selection.`                                                                                                                                                                                           | [Request errors](#model-is-restricted-by-your-organizations-settings)                                                         |
-| `Model switch ... blocked by a PreModelSwitch hook`                                                                                                                                                                                                                  | [Request errors](#model-switch-was-blocked-by-a-premodelswitch-hook)                                                          |
-| `couldn't save it as your default` / `couldn't confirm it was saved as your default`                                                                                                                                                                                 | [Request errors](#couldnt-save-it-as-your-default)                                                                            |
-| `thinking.type.enabled is not supported for this model`                                                                                                                                                                                                              | [Request errors](#thinking-type-enabled-is-not-supported-for-this-model)                                                      |
-| `Effort '<level>' isn't available with thinking turned off on this model`                                                                                                                                                                                            | [Request errors](#effort-isnt-available-with-thinking-turned-off)                                                             |
-| `effort '<level>' is not supported when thinking is disabled`                                                                                                                                                                                                        | [Request errors](#effort-isnt-available-with-thinking-turned-off)                                                             |
-| `max_tokens must be greater than thinking.budget_tokens`                                                                                                                                                                                                             | [Request errors](#thinking-budget-exceeds-output-limit)                                                                       |
-| `API Error: 400 due to tool use concurrency issues`                                                                                                                                                                                                                  | [Request errors](#tool-use-or-thinking-block-mismatch)                                                                        |
-| `API Error: 400 orphaned tool_result in conversation history`                                                                                                                                                                                                        | [Request errors](#tool-use-or-thinking-block-mismatch)                                                                        |
-| `API Error: 400 duplicate tool_use ID in conversation history`                                                                                                                                                                                                       | [Request errors](#tool-use-or-thinking-block-mismatch)                                                                        |
-| `Invalid data in redacted_thinking block`                                                                                                                                                                                                                            | [Request errors](#invalid-data-in-redacted-thinking-block)                                                                    |
-| `[Unsupported tool content removed]`                                                                                                                                                                                                                                 | [Request errors](#unsupported-tool-content-removed)                                                                           |
-| `role 'system' must precede an 'assistant' message`                                                                                                                                                                                                                  | [Request errors](#role-system-must-precede-an-assistant-message)                                                              |
-| `Invalid encrypted_content in search_result block` / `Invalid encrypted_index in text block` / `Failed to decrypt web search result content`                                                                                                                         | [Request errors](#invalid-encrypted-content-in-search-result-block)                                                           |
-| `Invalid encrypted_stdout in encrypted_code_execution_result block`                                                                                                                                                                                                  | [Request errors](#invalid-encrypted-content-in-search-result-block)                                                           |
-| `server_tool_use.name: Input should be` on every turn of a resumed session                                                                                                                                                                                           | [Request errors](#unsupported-tool-content-removed)                                                                           |
-| `<model> can't help with this. Start a new session to continue`                                                                                                                                                                                                      | [Request errors](#usage-policy-refusal)                                                                                       |
-| `Claude Code is unable to respond to this request, which appears to violate our Usage Policy`                                                                                                                                                                        | [Request errors](#usage-policy-refusal)                                                                                       |
-| `<model>'s safeguards flagged this message`                                                                                                                                                                                                                          | [Request errors](#safety-measures-flagged-a-cybersecurity-topic)                                                              |
-| `Opus 5.5's safeguards flagged this session`                                                                                                                                                                                                                         | [Request errors](#safety-measures-flagged-a-cybersecurity-topic)                                                              |
-| `<model> has safety measures that flagged this message for a cybersecurity topic`                                                                                                                                                                                    | [Request errors](#safety-measures-flagged-a-cybersecurity-topic)                                                              |
-| `Installation was killed before it could finish (exit code 137)`                                                                                                                                                                                                     | [Installation errors](#installation-was-killed-before-it-could-finish)                                                        |
-| `The connection dropped while downloading the update`                                                                                                                                                                                                                | [Installation errors](#the-connection-dropped-while-downloading-the-update)                                                   |
-| `Download timed out: exceeded the total deadline`                                                                                                                                                                                                                    | [Installation errors](#the-connection-dropped-while-downloading-the-update)                                                   |
-| `--bg and --print conflict`                                                                                                                                                                                                                                          | [Command-line errors](#command-line-errors)                                                                                   |
-| `Cloud sessions cannot be created from a --restricted session`                                                                                                                                                                                                       | [Command-line errors](#cloud-sessions-cannot-be-created-from-a-restricted-session)                                            |
-| `Cloud sessions are disabled by your organization's policy`                                                                                                                                                                                                          | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy)                                              |
-| `Couldn't verify your organization's policy for cloud sessions`                                                                                                                                                                                                      | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy)                                              |
-| `Error: --json-schema is not a valid JSON Schema`                                                                                                                                                                                                                    | [Command-line errors](#command-line-errors)                                                                                   |
-| `Error: Invalid --agents configuration:`                                                                                                                                                                                                                             | [Command-line errors](#invalid-agents-configuration)                                                                          |
-| `Error: --agents takes a JSON object, or a file path only with --print (-p)`                                                                                                                                                                                         | [Command-line errors](#invalid-agents-configuration)                                                                          |
-| `Error: --agents file not found`                                                                                                                                                                                                                                     | [Command-line errors](#invalid-agents-configuration)                                                                          |
-| `Error: Settings file exceeds the 2MiB limit`                                                                                                                                                                                                                        | [Command-line errors](#settings-file-exceeds-the-2mib-limit)                                                                  |
-| `The current directory no longer exists (it was deleted or moved)` / `Can't read the current directory`                                                                                                                                                              | [Command-line errors](#the-current-directory-no-longer-exists)                                                                |
-| `Temp directory <dir> ... Refusing to use it` / `ENOSPC: no space left on device, mkdir '<dir>'`                                                                                                                                                                     | [Command-line errors](#temp-directory-refused-or-cannot-be-created)                                                           |
-| `couldn't be resolved to a real location, so its skills, commands, and agents weren't loaded`                                                                                                                                                                        | [Command-line errors](#directory-couldnt-be-resolved-to-a-real-location)                                                      |
-| `Error: Workspace not trusted` when starting Remote Control                                                                                                                                                                                                          | [Command-line errors](#workspace-not-trusted-when-starting-remote-control)                                                    |
-| `` `<flag>` before `remote-control` is not carried over to the sessions Remote Control starts ``                                                                                                                                                                     | [Command-line errors](#not-carried-over-to-the-sessions-remote-control-starts)                                                |
-| `` `claude import` is not yet available in this build ``                                                                                                                                                                                                             | [Command-line errors](#claude-import-is-not-yet-available-in-this-build)                                                      |
-| `Could not read Claude Code config`                                                                                                                                                                                                                                  | [Command-line errors](#could-not-read-claude-code-config)                                                                     |
-| `Could not import <server>: <reason>`                                                                                                                                                                                                                                | [Command-line errors](#could-not-import-a-server-from-claude-desktop)                                                         |
-| `Cannot add MCP server to scope: managed`                                                                                                                                                                                                                            | [Command-line errors](#cannot-add-mcp-server-to-the-managed-scope)                                                            |
-| `is Anthropic-hosted and doesn't support local OAuth`                                                                                                                                                                                                                | [Command-line errors](#anthropic-hosted-and-doesnt-support-local-oauth)                                                       |
-| `Can't read .mcp.json: it isn't a regular file or is larger than 2097152 bytes`                                                                                                                                                                                      | [Command-line errors](#cant-read-mcp-json)                                                                                    |
-| `Server rejected the Authorization header minted by the configured headersHelper`                                                                                                                                                                                    | [Command-line errors](#server-rejected-the-authorization-header-minted-by-the-configured-headershelper)                       |
-| `Error: MCP tool <name> (passed via --permission-prompt-tool) not found`                                                                                                                                                                                             | [Command-line errors](#mcp-permission-prompt-tool-not-found)                                                                  |
-| `OAuth callback port <port> is already in use — another process may be holding it`                                                                                                                                                                                   | [Command-line errors](#oauth-callback-port-is-already-in-use)                                                                 |
-| `No available ports for OAuth redirect`                                                                                                                                                                                                                              | [Command-line errors](#no-available-ports-for-oauth-redirect)                                                                 |
-| `Shell command failed for pattern "..."`, from `/security-review` or any skill that injects dynamic context                                                                                                                                                          | [Command-line errors](#security-review-fails-without-origin-head)                                                             |
-| `Shell command permission check failed for pattern "..."`, from a skill that injects dynamic context                                                                                                                                                                 | [Command-line errors](#security-review-fails-without-origin-head)                                                             |
-| ``Skill <name> requires bash (`shell: bash` in frontmatter) but Git Bash was not found``                                                                                                                                                                             | [Command-line errors](#security-review-fails-without-origin-head)                                                             |
-| `Input must be provided either through stdin or as a prompt argument when using --print`                                                                                                                                                                             | [Command-line errors](#input-must-be-provided-when-using-print)                                                               |
-| `Error: Input contained only whitespace`                                                                                                                                                                                                                             | [Command-line errors](#input-contained-only-whitespace)                                                                       |
-| `Blank prompt — the message was only whitespace, so nothing was sent to the model.`                                                                                                                                                                                  | [Command-line errors](#input-contained-only-whitespace)                                                                       |
-| `Error: stream-json input carried over 256M characters with no newline`                                                                                                                                                                                              | [Command-line errors](#stream-json-input-carried-over-256m-characters-with-no-newline)                                        |
-| `Unknown command: /<name>`, with or without a `Did you mean` suggestion                                                                                                                                                                                              | [Command-line errors](#unknown-command)                                                                                       |
-| `Diff is too large for ultrareview` / `PR #<N> is too large for ultrareview`                                                                                                                                                                                         | [Command-line errors](#diff-is-too-large-for-ultrareview)                                                                     |
-| `Could not find merge-base with <branch>`                                                                                                                                                                                                                            | [Command-line errors](#could-not-find-merge-base-with-the-base-branch)                                                        |
-| `Your checkout has no branches (detached HEAD only)`                                                                                                                                                                                                                 | [Command-line errors](#your-checkout-has-no-branches)                                                                         |
-| `Ultrareview clones <owner>/<repo> in the cloud with the GitHub account connected to your Claude account, and none is connected`                                                                                                                                     | [Command-line errors](#no-github-account-is-connected-to-your-claude-account)                                                 |
-| `Your connected GitHub account can't see <owner>/<repo>`                                                                                                                                                                                                             | [Command-line errors](#your-connected-github-account-cant-see-the-repository)                                                 |
-| `The GitHub App preflight failed transiently (network or service hiccup) — retry in a moment to start from GitHub instead`                                                                                                                                           | [Command-line errors](#the-github-app-preflight-failed-transiently)                                                           |
-| `GitHub isn't connected to your Claude account, so this repository can't be cloned in the cloud`                                                                                                                                                                     | [Command-line errors](#github-isnt-connected-to-your-claude-account)                                                          |
-| `Single sign-on authorization needed`                                                                                                                                                                                                                                | [Command-line errors](#single-sign-on-authorization-needed)                                                                   |
-| `Failed to resume the conversation`                                                                                                                                                                                                                                  | [Command-line errors](#failed-to-resume-the-conversation)                                                                     |
-| `No conversation found with session ID: <session-id>`                                                                                                                                                                                                                | [Command-line errors](#no-conversation-found-with-the-session-id)                                                             |
-| `Windows reported an error (EBADF) when Claude Code read this session's transcript file`                                                                                                                                                                             | [Command-line errors](#windows-reported-an-error-ebadf)                                                                       |
-| `Cannot switch renderers in this session`                                                                                                                                                                                                                            | [Command-line errors](#cannot-switch-renderers-in-this-session)                                                               |
-| `Cannot switch renderers while work is running in the background`                                                                                                                                                                                                    | [Command-line errors](#cannot-switch-renderers-in-this-session)                                                               |
-| `Couldn't open Claude Desktop`                                                                                                                                                                                                                                       | [Command-line errors](#couldnt-open-claude-desktop)                                                                           |
-| `Failed to open Claude Desktop. Please try opening it manually.`                                                                                                                                                                                                     | [Command-line errors](#couldnt-open-claude-desktop)                                                                           |
-| `Couldn't read your Zed keymap` / `Couldn't back up your Zed keymap` / `Couldn't update your Zed keymap`                                                                                                                                                             | [Command-line errors](#terminal-setup-left-your-zed-keymap-unchanged)                                                         |
-| `Your Zed keymap isn't a readable list of keybindings`                                                                                                                                                                                                               | [Command-line errors](#terminal-setup-left-your-zed-keymap-unchanged)                                                         |
-| `Skill usage reports are not available on this connection.`                                                                                                                                                                                                          | [Command-line errors](#skill-usage-reports-are-not-available-on-this-connection)                                              |
-| `Custom output styles can't be selected over Remote Control or from a relayed message`                                                                                                                                                                               | [Command-line errors](#custom-output-styles-cant-be-selected-over-remote-control)                                             |
-| `Output styles are saved to local settings (.claude/settings.local.json), which this session doesn't load`                                                                                                                                                           | [Command-line errors](#output-styles-are-saved-to-local-settings-which-this-session-doesnt-load)                              |
-| `` `plugin eval` is currently in early access `` / `` `plugin eval` is currently unavailable ``                                                                                                                                                                      | [Plugin errors](#plugin-eval-is-currently-in-early-access)                                                                    |
-| `Marketplace "<name>" is registered from an untrusted source`                                                                                                                                                                                                        | [Plugin errors](#marketplace-is-registered-from-an-untrusted-source)                                                          |
-| `Claude Code refuses the marketplace name "<name>"`                                                                                                                                                                                                                  | [Plugin errors](#claude-code-refuses-the-marketplace-name)                                                                    |
-| `Marketplace name impersonates an official Anthropic/Claude marketplace`                                                                                                                                                                                             | [Plugin errors](#claude-code-refuses-the-marketplace-name)                                                                    |
-| `Marketplace "<name>" is already added from a different source`                                                                                                                                                                                                      | [Plugin errors](#marketplace-is-already-added-from-a-different-source)                                                        |
-| `"<name>" is another spelling of "<reserved>", a reserved marketplace name`                                                                                                                                                                                          | [Plugin errors](#marketplace-name-is-another-spelling-of-a-reserved-name)                                                     |
-| `references ${user_config.*} in a shell-form command`                                                                                                                                                                                                                | [Plugin errors](#plugin-command-references-user-config)                                                                       |
-| `Monitor "<name>" from plugin <plugin> references ${user_config.*} in its command`                                                                                                                                                                                   | [Plugin errors](#plugin-command-references-user-config)                                                                       |
-| `headersHelper for MCP server '<name>' references ${user_config.*}`                                                                                                                                                                                                  | [Plugin errors](#plugin-command-references-user-config)                                                                       |
-| `Plugin archive integrity check failed`                                                                                                                                                                                                                              | [Plugin errors](#plugin-archive-integrity-check-failed)                                                                       |
-| `path escapes plugin directory`                                                                                                                                                                                                                                      | [Plugin errors](#path-escapes-plugin-directory)                                                                               |
-| `path could not be checked`                                                                                                                                                                                                                                          | [Plugin errors](#path-could-not-be-checked)                                                                                   |
-| `its marketplace entry path does not stay inside the marketplace directory`                                                                                                                                                                                          | [Plugin errors](#marketplace-entry-path-does-not-stay-inside-the-marketplace-directory)                                       |
-| `Plugin source path refused`                                                                                                                                                                                                                                         | [Plugin errors](#marketplace-entry-path-does-not-stay-inside-the-marketplace-directory)                                       |
-| `Failed to load marketplace configuration`                                                                                                                                                                                                                           | [Plugin errors](#failed-to-load-marketplace-configuration)                                                                    |
-| `Marketplace configuration file is corrupted`                                                                                                                                                                                                                        | [Plugin errors](#failed-to-load-marketplace-configuration)                                                                    |
-| `Plugin "<name>@synced" is required by your organization and can't be disabled here`                                                                                                                                                                                 | [Plugin errors](#plugin-is-required-by-your-organization)                                                                     |
-| `"<plugin>" was not uninstalled: it is still switched on in <file>`                                                                                                                                                                                                  | [Plugin errors](#plugin-was-not-uninstalled)                                                                                  |
-| `"<plugin>" was not uninstalled: <file> is there and could not be read`                                                                                                                                                                                              | [Plugin errors](#plugin-was-not-uninstalled)                                                                                  |
-| `would be spawned with zero tools — refusing`                                                                                                                                                                                                                        | [Tool errors](#agent-would-be-spawned-with-zero-tools)                                                                        |
-| `File is covered by a Read deny rule in your permission settings`                                                                                                                                                                                                    | [Tool errors](#file-is-covered-by-a-read-deny-rule)                                                                           |
-| `cannot contain null bytes (\0)`                                                                                                                                                                                                                                     | [Tool errors](#path-cannot-contain-null-bytes)                                                                                |
-| `Path contains null bytes`                                                                                                                                                                                                                                           | [Tool errors](#path-cannot-contain-null-bytes)                                                                                |
-| `subagent_type is required: the general-purpose agent is not available in this session`                                                                                                                                                                              | [Tool errors](#subagent-type-is-required)                                                                                     |
-| `Error: this write left the memory index at MEMORY.md at ..., over its ... read limit`                                                                                                                                                                               | [Tool errors](#memory-index-is-over-its-read-limit)                                                                           |
-| `pkill: refusing to run`                                                                                                                                                                                                                                             | [Tool errors](#pkill-pattern-matches-the-claude-code-process)                                                                 |
-| `Failed to write to <name>'s inbox — nothing was sent`                                                                                                                                                                                                               | [Tool errors](#failed-to-write-to-a-teammate-inbox)                                                                           |
-| `Failed to write the plan approval request to the lead's inbox — plan not submitted`                                                                                                                                                                                 | [Tool errors](#failed-to-write-to-a-teammate-inbox)                                                                           |
-| `Its agent definition was not restored: the folder its definition file came from is not trusted`                                                                                                                                                                     | [Tool errors](#teammate-agent-definition-not-restored)                                                                        |
-| `Message too large for cross-session delivery`                                                                                                                                                                                                                       | [Tool errors](#message-too-large-for-cross-session-delivery)                                                                  |
-| `Too many messages to this session just now`                                                                                                                                                                                                                         | [Tool errors](#too-many-messages-to-this-session-just-now)                                                                    |
-| `Refusing to send: reply target is a symlink` / `Refusing to send: cannot vet reply target`                                                                                                                                                                          | [Tool errors](#refusing-to-send-a-cross-session-message)                                                                      |
-| `Refusing to send: connected endpoint is not the expected process` / `Refusing to send: connected endpoint identity could not be read`                                                                                                                               | [Tool errors](#refusing-to-send-a-cross-session-message)                                                                      |
-| `Refusing to send: connected endpoint is not owned by this user` / `Refusing to send: connected endpoint owner could not be read`                                                                                                                                    | [Tool errors](#refusing-to-send-a-cross-session-message)                                                                      |
-| `Refusing to send: connected endpoint is a different process with the expected pid`                                                                                                                                                                                  | [Tool errors](#refusing-to-send-a-cross-session-message)                                                                      |
-| `Refusing to read <path>: its symlink resolution changed after permission was checked (<reason>)` / `Refusing to search <path>: its symlink resolution changed after permission was checked`                                                                         | [Tool errors](#refusing-after-a-symlink-changed)                                                                              |
-| `Refusing to write <path>: its parent-directory symlink resolution changed after permission was checked` / `Refusing to write <path>: it is a symbolic link. Write to the link's target path instead`                                                                | [Tool errors](#refusing-after-a-symlink-changed)                                                                              |
-| `Refusing to write through symlink: <path>` / `Refusing to write into symlinked directory: <path>`                                                                                                                                                                   | [Tool errors](#refusing-after-a-symlink-changed)                                                                              |
-| `Refusing to write <path>: where it leads on disk could not be determined` / `Refusing to read <path>: where it leads on disk could not be determined`                                                                                                               | [Tool errors](#refusing-after-a-symlink-changed)                                                                              |
-| `Refusing to search <path>: a path one of its Read deny rules is written through changed while the search was being prepared` / `Refusing to search <path>: it could not be opened`                                                                                  | [Tool errors](#refusing-after-a-symlink-changed)                                                                              |
-| `its permission check expired before it ran (too many concurrent file operations)` / `ripgrep was found only by name on PATH`                                                                                                                                        | [Tool errors](#refusing-after-a-symlink-changed)                                                                              |
-| `task output swap refused (tasks dir moved or linked)`                                                                                                                                                                                                               | [Tool errors](#task-output-swap-refused)                                                                                      |
-| `Command killed: its output file was replaced or could no longer be verified`                                                                                                                                                                                        | [Tool errors](#task-output-swap-refused)                                                                                      |
-| `Your disk quota is full on the filesystem with Claude Code's temp directory <dir> (EDQUOT)`                                                                                                                                                                         | [Tool errors](#disk-quota-or-temp-filesystem-is-full)                                                                         |
-| `The filesystem with Claude Code's temp directory <dir>, or your disk quota on it, is full (ENOSPC)`                                                                                                                                                                 | [Tool errors](#disk-quota-or-temp-filesystem-is-full)                                                                         |
-| `Command output was lost: the temp filesystem at <dir> is full` / `is out of inodes`                                                                                                                                                                                 | [Tool errors](#disk-quota-or-temp-filesystem-is-full)                                                                         |
-| `the source file is not valid UTF-8 text` / `the source file is not valid UTF-16 text`                                                                                                                                                                               | [Tool errors](#the-source-file-is-not-valid-utf-8-text)                                                                       |
-| `the source file has the replacement character U+FFFD`                                                                                                                                                                                                               | [Tool errors](#the-source-file-is-not-valid-utf-8-text)                                                                       |
-| `Reading a local file from outside this session's connected folders, or through a link, needs the approval card`                                                                                                                                                     | [Tool errors](#reading-a-local-file-from-outside-the-connected-folders)                                                       |
-| `cannot read file_path (...) — the file could not be examined, and no one can answer the approval card`                                                                                                                                                              | [Tool errors](#reading-a-local-file-from-outside-the-connected-folders)                                                       |
-| `WebFetch cannot fetch localhost or other hostnames without a dot`                                                                                                                                                                                                   | [Tool errors](#webfetch-cannot-fetch-localhost)                                                                               |
-| `Can't open MCP settings while no terminal is attached to this background session`                                                                                                                                                                                   | [Background session errors](#commands-refused-in-a-background-session)                                                        |
-| `Can't open MCP settings in a background session`                                                                                                                                                                                                                    | [Background session errors](#commands-refused-in-a-background-session)                                                        |
-| `blocked because the path is spelled in a form that cannot be safely resolved`                                                                                                                                                                                       | [Background session errors](#write-or-command-blocked-because-the-path-cannot-be-safely-resolved)                             |
-| `blocked because the path is network-shaped`                                                                                                                                                                                                                         | [Background session errors](#write-or-command-blocked-because-the-path-names-a-network-location)                              |
-| `is isolated in the worktree <path>, but this command <reason>. Refusing to run it`                                                                                                                                                                                  | [Background session errors](#command-blocked-by-the-worktree-isolation-checks)                                                |
-| `too complex to verify that it stays inside the worktree`                                                                                                                                                                                                            | [Background session errors](#command-blocked-by-the-worktree-isolation-checks)                                                |
-| `This session has no saved transcript`                                                                                                                                                                                                                               | [Background session errors](#this-session-has-no-saved-transcript)                                                            |
-| `Can't open — this session is running in another terminal`                                                                                                                                                                                                           | [Background session errors](#this-session-is-running-in-another-terminal)                                                     |
-| `This conversation is already open in another running Claude session`                                                                                                                                                                                                | [Background session errors](#this-session-is-running-in-another-terminal)                                                     |
-| `This session's saved conversation is no longer on disk`                                                                                                                                                                                                             | [Background session errors](#this-sessions-saved-conversation-is-no-longer-on-disk)                                           |
-| `kept <id> — its worktree is still at <path>`                                                                                                                                                                                                                        | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere)                                               |
-| `kept <id> — <n> unpushed commits on <branch>`                                                                                                                                                                                                                       | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere)                                               |
-| `kept <id> — worktree has commits that are not pushed anywhere`                                                                                                                                                                                                      | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere)                                               |
-| `terminal host process died — press Enter to restart` / `This session's terminal host process died`                                                                                                                                                                  | [Background session errors](#terminal-host-process-died)                                                                      |
-| `Session isn't responding` / `Press enter again to restart this session — it isn't responding`                                                                                                                                                                       | [Background session errors](#session-isnt-responding)                                                                         |
-| `Session <id> was stopped while the respawn was in flight`                                                                                                                                                                                                           | [Background session errors](#session-was-stopped-while-the-respawn-was-in-flight)                                             |
-| `This session was running agent '<name>', which is no longer available`                                                                                                                                                                                              | [Background session errors](#session-agent-no-longer-available)                                                               |
-| `CLAUDE_CODE_PROCESS_WRAPPER: launcher ...`                                                                                                                                                                                                                          | [Background session errors](#claude_code_process_wrapper-launcher-errors)                                                     |
-| `EUNKNOWN: unknown error, uv_spawn`                                                                                                                                                                                                                                  | [Background session errors](#eunknown-when-starting-a-background-session)                                                     |
-| `EACCES: permission denied, posix_spawn`                                                                                                                                                                                                                             | [Background session errors](#eacces-when-starting-a-background-session)                                                       |
-| `exited before it became reachable`                                                                                                                                                                                                                                  | [Background session errors](#background-service-exited-before-it-became-reachable)                                            |
-| `Couldn't start a background session (working directory no longer exists or is not accessible: ...)`                                                                                                                                                                 | [Background session errors](#working-directory-no-longer-exists-when-starting-a-background-session)                           |
-| `Workspace not trusted.` when starting or restarting a background session                                                                                                                                                                                            | [Background session errors](#workspace-not-trusted-when-dispatching-a-background-session)                                     |
-| `Claude Code is being updated by npm on this machine (still not runnable after 2 min, ...)`                                                                                                                                                                          | [Background session errors](#eacces-when-starting-a-background-session)                                                       |
-| `Claude Code process exited with code N`                                                                                                                                                                                                                             | [Wrapper and IDE errors](#claude-code-process-exited-with-code-n)                                                             |
-| `The connection to Claude Code ended before this message completed`                                                                                                                                                                                                  | [Wrapper and IDE errors](#the-connection-to-claude-code-ended-before-this-message-completed)                                  |
-| `Could not locate the Claude CLI on PATH`                                                                                                                                                                                                                            | [Wrapper and IDE errors](#could-not-locate-the-claude-cli-on-path)                                                            |
-| `Restored the code, but skipped N files`                                                                                                                                                                                                                             | [Rewind warnings and errors](#restored-the-code-but-skipped-files)                                                            |
-| `No files were restored: N files failed (backup missing, or the file could not be updated)`                                                                                                                                                                          | [Rewind warnings and errors](#no-files-were-restored)                                                                         |
-| `Transcript writes are failing (...)`                                                                                                                                                                                                                                | [Session saving warnings](#transcript-writes-are-failing)                                                                     |
-| `Transcript saving is off — CLAUDE_CODE_SKIP_PROMPT_HISTORY is set`                                                                                                                                                                                                  | [Session saving warnings](#transcript-saving-is-off-skip-prompt-history)                                                      |
-| `Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker`                                                                                                                                                                                              | [Session saving warnings](#transcript-saving-is-off-child-session-marker)                                                     |
-| `Claude Code's fullscreen renderer didn't finish starting last time on this machine` / `Claude Code's fullscreen renderer has repeatedly failed to start on this machine`                                                                                            | [Configuration warnings](#fullscreen-failed-start-notice)                                                                     |
-| `Claude Code exited after an unrecoverable interface error (...)`                                                                                                                                                                                                    | [Configuration warnings](#exited-after-an-unrecoverable-interface-error)                                                      |
-| `Agent descriptions are over the 15.0k-token limit`                                                                                                                                                                                                                  | [Configuration warnings](#agent-descriptions-are-over-the-15000-token-limit)                                                  |
-| `Not loaded: rename <path>, then restart — its name uses "<name>", a name reserved for the skills synced from your claude.ai account`                                                                                                                                | [Configuration warnings](#a-skill-command-or-workflow-wasnt-loaded-because-its-name-is-reserved)                              |
-| `Ignoring N permissions.allow entries from ... this workspace has not been trusted`                                                                                                                                                                                  | [Configuration warnings](#workspace-has-not-been-trusted)                                                                     |
-| `is a network path, which cannot be added as a working directory`                                                                                                                                                                                                    | [Configuration warnings](#working-directory-is-a-network-path)                                                                |
-| `Remote managed settings failed to load (<cause>)`                                                                                                                                                                                                                   | [Configuration warnings](#remote-managed-settings-failed-to-load)                                                             |
-| `Managed settings were not approved; exiting without applying them.`                                                                                                                                                                                                 | [Configuration warnings](#managed-settings-were-not-approved)                                                                 |
-| `Claude Code can't start: your organization's managed settings block the default model` / `Claude Code can't start: your organization allows only the models listed in "availableModels"`                                                                            | [Configuration warnings](#managed-settings-block-the-default-model)                                                           |
-| `MCP server <name> is blocked by enterprise managed policy`                                                                                                                                                                                                          | [Configuration warnings](#mcp-server-is-blocked-by-enterprise-managed-policy)                                                 |
-| `Managed settings document could not be parsed as a JSON object; none of its settings are in effect. Fix or remove it.`                                                                                                                                              | [Configuration warnings](#managed-settings-document-could-not-be-parsed)                                                      |
-| `Managed settings drop-in directory could not be read`                                                                                                                                                                                                               | [Configuration warnings](#managed-settings-document-could-not-be-parsed)                                                      |
-| `otelHeadersHelper failed; telemetry is not being exported. See /status: ...`                                                                                                                                                                                        | [Configuration warnings](#otelheadershelper-failed)                                                                           |
-| `"crossSessionInbound" must be one of "accept", "hold", "refuse"`                                                                                                                                                                                                    | [Configuration warnings](#crosssessioninbound-must-be-one-of-accept-hold-refuse)                                              |
-| `headersHelper not run — this workspace has no persisted trust`                                                                                                                                                                                                      | [Configuration warnings](#headershelper-not-run)                                                                              |
-| `Invalid permission rule "..." was skipped: Malformed Tool(content) rule`                                                                                                                                                                                            | [Configuration warnings](#malformed-tool-content-rule)                                                                        |
-| `... is not matched by file permission checks`                                                                                                                                                                                                                       | [Configuration warnings](#is-not-matched-by-file-permission-checks)                                                           |
-| `... has a wildcard before the rest of the command`                                                                                                                                                                                                                  | [Configuration warnings](#has-a-wildcard-before-the-rest-of-the-command)                                                      |
-| `CLAUDE_CODE_DISABLE_1M_CONTEXT is set, but the 200K limit isn't enforced`                                                                                                                                                                                           | [Configuration warnings](#the-200k-limit-isnt-enforced)                                                                       |
-| `[claude-code:unrecognized_model]`                                                                                                                                                                                                                                   | [Configuration warnings](#unrecognized-model-id-on-a-request)                                                                 |
-| `Stale sandbox mask files left by a killed session`                                                                                                                                                                                                                  | [Configuration warnings](#stale-sandbox-mask-files-left-by-a-killed-session)                                                  |
-| Responses seem lower quality than usual                                                                                                                                                                                                                              | [Response quality](#responses-seem-lower-quality-than-usual)                                                                  |
+| Message | Section |
+| :- | :- |
+| `API Error: 500 Internal server error` | [Server errors](#api-error-500-internal-server-error) |
+| `API Error: Repeated 529 Overloaded errors` | [Server errors](#api-error-repeated-529-overloaded-errors) |
+| `Opus is experiencing high load` / `Fable is experiencing high load` | [Server errors](#api-error-repeated-529-overloaded-errors) |
+| `Request timed out` | [Server errors](#request-timed-out), or [Network](#unable-to-connect-to-api) if the message mentions your internet connection |
+| `API Error: No response from API` | [Server errors](#no-response-from-api) |
+| `Server error mid-response. The response above may be incomplete.` | [Server errors](#the-response-above-may-be-incomplete) |
+| `Connection lost mid-response` / `Your computer went to sleep mid-response` / `The response stopped arriving` | [Server errors](#the-response-above-may-be-incomplete) |
+| `Connection closed mid-response` / `Response stalled mid-stream` | [Server errors](#the-response-above-may-be-incomplete) |
+| `Part of the response never arrived` / `The response stream was malformed` | [Server errors](#the-response-above-may-be-incomplete) |
+| `API Error: Content block not found` / `API Error: Content block already closed` / `API Error: Stream event unreadable` | [Server errors](#the-response-above-may-be-incomplete) |
+| `Connection lost before a response was produced` / `Your computer went to sleep before a response was produced` / `The response stalled before a response was produced` | [Automatic retries](#automatic-retries) |
+| `Connection closed while thinking` / `Response stalled while thinking` | [Automatic retries](#automatic-retries) |
+| `Connection lost while your computer was asleep` | [Automatic retries](#automatic-retries) |
+| `<model> is temporarily unavailable, so auto mode cannot determine the safety of...` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
+| `Auto mode could not evaluate this action and is blocking it for safety` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
+| `Auto mode classifier transcript exceeded context window` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
+| `Agent aborted: auto mode classifier request refused by the safety safeguard` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
+| `The server-side auto mode classifier gave no verdict` | [Server errors](#the-server-returned-no-safety-verdict) |
+| `Auto mode is unavailable — the server returned no safety verdict for the last 10 responses` | [Server errors](#the-server-returned-no-safety-verdict) |
+| `Agent terminated early due to an API error` | [Server errors](#agent-terminated-early-due-to-an-api-error) |
+| `You've hit your session limit` / `You've hit your weekly limit` / `You've hit your Opus limit` / `You've hit your Sonnet limit` | [Usage limits](#youve-hit-your-session-limit) |
+| `Usage credits required for 1M context` | [Usage limits](#usage-credits-required-for-1m-context) |
+| `the prompt to confirm went unanswered — nothing was sent` | [Usage limits](#the-prompt-to-confirm-went-unanswered) |
+| `Server is temporarily limiting requests` | [Usage limits](#server-is-temporarily-limiting-requests) |
+| `Request rejected (429)` | [Usage limits](#request-rejected-429) |
+| `Credit balance is too low` | [Usage limits](#credit-balance-is-too-low) |
+| `You've hit your monthly spend limit` / `You've hit your individual spend limit` / `You've hit your org's monthly spend limit` / `You've hit your channel's monthly spend limit` / `You've hit your team's shared budget` / `You've hit your individual usage limit` | [Usage limits](#youve-hit-your-monthly-spend-limit) |
+| `Could not update your spend limit` | [Usage limits](#could-not-update-your-spend-limit) |
+| `spend limit reached` / `spend limit unavailable` | [Usage limits](#spend-limit-reached) |
+| `Not logged in · Please run /login` | [Authentication](#not-logged-in) |
+| `Couldn't save your login` | [Authentication](#couldnt-save-your-login) |
+| `Authentication required · Sign in again to continue` | [Authentication](#not-logged-in) |
+| `Could not resolve authentication method` | [Authentication](#could-not-resolve-authentication-method) |
+| `Invalid API key` | [Authentication](#invalid-api-key) |
+| `Your apiKeyHelper script is failing` | [Authentication](#your-apikeyhelper-script-is-failing) |
+| `Invalid auth token · Fix external auth token` | [Authentication](#invalid-request-header-value) |
+| `Invalid ANTHROPIC_CUSTOM_HEADERS · Fix the environment variable` | [Authentication](#invalid-request-header-value) |
+| `Invalid request header from the environment · Fix the environment variable` | [Authentication](#invalid-request-header-value) |
+| `This organization has been disabled` | [Authentication](#this-organization-has-been-disabled) |
+| `Your organization has disabled API key authentication` | [Authentication](#your-organization-has-disabled-api-key-authentication) |
+| `Your organization has disabled Claude subscription access` | [Authentication](#your-organization-has-disabled-claude-subscription-access) |
+| `Routines are disabled by your organization's policy` | [Authentication](#routines-are-disabled-by-your-organizations-policy) |
+| `Remote Control is only available when using Claude via api.anthropic.com` | [Authentication](#remote-control-requires-the-anthropic-api) |
+| `OAuth token refresh failed — run /login to re-authenticate` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `JWT refresh failed: no OAuth token — run /login` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `Claude.ai login expired` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `Claude.ai login was rejected — run /login, then /remote-control` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `OAuth token unavailable — run /login to restore Remote Control` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `Signed out of Claude — run /login, then /remote-control` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `signed-in claude.ai account or organization changed on this machine` | [Authentication](#remote-control-stopped-because-the-signed-in-account-changed) |
+| `Remote Control stopped — the app running this session is now signed in to a different Claude account` | [Authentication](#remote-control-stopped-because-the-app-running-the-session-signed-out-or-switched-accounts) |
+| `Remote Control stopped — the app running this session is signed out of Claude` | [Authentication](#remote-control-stopped-because-the-app-running-the-session-signed-out-or-switched-accounts) |
+| `Couldn't verify your organization's policy for remote control` | [Troubleshoot Remote Control](/docs/en/remote-control#couldnt-verify-your-organizations-policy-for-remote-control) |
+| `Remote Control is disabled by your organization's policy` | [Troubleshoot Remote Control](/docs/en/remote-control#remote-control-is-disabled-by-your-organizations-policy) |
+| `Remote Control was turned off by your organization's policy` | [Troubleshoot Remote Control](/docs/en/remote-control#remote-control-was-turned-off-by-your-organizations-policy) |
+| `OAuth token revoked` / `OAuth token has expired` | [Authentication](#oauth-token-revoked-or-expired) |
+| `Failed to authenticate: OAuth token revoked` | [Authentication](#oauth-token-revoked-or-expired) |
+| `Your account does not have access to Claude. Please login again or contact your administrator.` | [Authentication](#oauth-token-revoked-or-expired) |
+| `API Error: 401 Invalid authentication credentials` | [Authentication](#api-error-401-invalid-authentication-credentials) |
+| `Login expired · Please run /login` | [Authentication](#login-expired) |
+| `Failed to start OAuth callback server` | [Authentication](#failed-to-start-oauth-callback-server) |
+| `Claude login not accepted · Run /login, then try again` | [Authentication](#claude-login-not-accepted) |
+| `Artifacts need a claude.ai login` | [Authentication](#artifacts-need-a-claude-ai-login) |
+| `Not signed in to the Cloud gateway — run /login.` | [Authentication](#administrator-policy-requires-a-cloud-gateway-sign-in) |
+| `Administrator policy requires a Cloud gateway sign-in on this machine` | [Authentication](#administrator-policy-requires-a-cloud-gateway-sign-in) |
+| `Failed to authenticate: OAuth session expired and could not be refreshed` | [Authentication](#login-expired) |
+| `Could not refresh your login because another Claude Code process is refreshing it` | [Authentication](#could-not-refresh-your-login) |
+| `Failed to refresh OAuth token: another Claude Code process is refreshing it or exited mid-refresh` | [Authentication](#could-not-refresh-your-login) |
+| `Your account is on hold and can't use Claude Code. View details or appeal: https://claude.ai/restricted` | [Authentication](#your-account-is-on-hold) |
+| `Your account is on hold and can't sign in to Claude Code. View details or appeal: https://claude.ai/restricted` | [Authentication](#your-account-is-on-hold) |
+| `Anthropic profile login expired · Re-authenticate your Anthropic profile` | [Authentication](#anthropic-profile-login-expired) |
+| `Anthropic profile login expired · Run /login to use your claude.ai account instead, or re-authenticate the profile` | [Authentication](#anthropic-profile-login-expired) |
+| `does not meet scope requirement user:profile` | [Authentication](#oauth-scope-requirement) |
+| `claude.ai rejected the session token` / `session token rejected` | [Authentication](#claude-ai-rejected-the-session-token) |
+| `MCP server "<name>" needs you to sign in again (run /mcp to re-authenticate)` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
+| `rejected the credential from its headersHelper` / `rejected the Authorization header in its config` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
+| `MCP server "<name>" needs additional permissions (scope: "<scope>") — run /mcp to re-authenticate` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
+| `MCP server "<name>" requires re-authorization (token expired)` | [Authentication](#mcp-server-needs-you-to-sign-in-again) |
+| `This server's URL is missing or not a valid URL, so sign-in can't start` | [Authentication](#mcp-server-url-is-missing-or-not-a-valid-url) |
+| `Issuer mismatch in authorization response (RFC 9207)` | [Authentication](#issuer-mismatch-in-authorization-response) |
+| `Refusing to send credentials to non-https token endpoint` / `<short-name> from the MCP SDK for <server-url>` | [Authentication](#refusing-to-send-credentials-to-non-https-token-endpoint) |
+| `Cloud gateway session expired — run /login to reconnect.` | [Authentication](#cloud-gateway-session-expired) |
+| `Cloud gateway <url> no longer accepts this session` | [Authentication](#cloud-gateway-session-expired) |
+| `Sign-in timed out while waiting for you to continue. Try again.` | [Authentication](#sign-in-timed-out-while-waiting-for-you-to-continue) |
+| `AWS credentials expired or invalid` | [Authentication](#aws-credentials-expired-or-invalid) |
+| `AWS authentication failed` | [Authentication](#aws-authentication-failed) |
+| `Google Cloud credentials expired or invalid` | [Authentication](#google-cloud-credentials-expired-or-invalid) |
+| `Google Cloud authentication failed` | [Authentication](#google-cloud-authentication-failed) |
+| `Microsoft Foundry authentication failed` | [Authentication](#microsoft-foundry-authentication-failed) |
+| `Gateway refused the request` | [Authentication](#gateway-refused-the-request) |
+| `Could not load AWS credentials` / `Could not load Google Cloud credentials` | [Authentication](#could-not-load-aws-or-google-cloud-credentials) |
+| `AWS default-chain credential resolve timed out` | [Authentication](#aws-default-chain-credential-resolve-timed-out) |
+| `Timed out after 60s waiting for AWS` | [Authentication](#bedrock-setup-verification-timed-out-waiting-for-aws) |
+| `A request to AWS timed out. Check your network and proxy settings, then try again.` | [Authentication](#bedrock-setup-verification-timed-out-waiting-for-aws) |
+| `Could not load the default credentials` on Google Cloud's Agent Platform | [Authentication](#could-not-load-aws-or-google-cloud-credentials) |
+| `Unable to connect to API` | [Network](#unable-to-connect-to-api) |
+| `Connection refused —` / `Can't reach the API server —` / `No internet route —` / `Couldn't connect through your proxy` / `Connection dropped`, each with an error code in parentheses | [Network](#unable-to-connect-to-api) |
+| `Unable to connect to Anthropic services` during setup | [Network](#unable-to-connect-to-anthropic-services) |
+| `Socket is closed` | [Network](#socket-is-closed) |
+| `Waiting for API response · will retry in` | [Automatic retries](#automatic-retries), or [Network](#unable-to-connect-to-api) if it persists |
+| `API returned an empty or malformed response` | [Network](#api-returned-an-empty-or-malformed-response) |
+| `Streaming response ended before any complete data was received` | [Network](#streaming-response-ended-before-any-complete-data-was-received) |
+| `Bedrock streaming response has content-type "..."; expected "application/vnd.amazon.eventstream"` | [Network](#bedrock-streaming-response-has-an-unexpected-content-type) |
+| `SSL certificate verification failed` | [Network](#ssl-certificate-errors) |
+| `SSL certificate error (...)` during login or startup | [Network](#ssl-certificate-errors) |
+| `unable to get local issuer certificate` | [Network](#ssl-certificate-errors) |
+| `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session | [Network](#host-not-allowed-in-a-cloud-session) |
+| `proxy refused the connection` | [Network](#the-proxy-refused-the-connection) |
+| `403` with `This GraphQL query is not enabled for this session` in a cloud session | [GitHub proxy](/docs/en/cloud-environments#github-proxy) |
+| `The cloud environments service returned an empty response` / `The cloud environments service returned a response in an unexpected format` | [Network](#the-cloud-environments-service-returned-an-empty-or-unexpected-response) |
+| `Couldn't reconnect to your Remote Control session` | [Network](#couldnt-reconnect-to-your-remote-control-session) |
+| `N sessions ended while this machine was offline — the environment was cleaned up on the server and can't be resumed.` | [Network](#sessions-ended-while-this-machine-was-offline) |
+| `Couldn't share the transcript.` | [Network](#couldnt-share-the-transcript) |
+| `Couldn't send feedback` | [Network](#couldnt-send-feedback) |
+| `Prompt is too long` / `Input is too long for requested model` | [Request errors](#prompt-is-too-long) |
+| `Prompt is too long · automatic compaction failed:` | [Request errors](#prompt-is-too-long) |
+| `Prompt is too long · this conversation is a single exchange` / `A single-exchange conversation cannot be compacted` | [Request errors](#prompt-is-too-long) |
+| `Context limit reached · /compact or /clear to continue` | [Request errors](#prompt-is-too-long) |
+| `Context limit reached · /clear to continue` | [Request errors](#prompt-is-too-long) |
+| `capability_rejected: prompt_too_long` on a Claude apps gateway session | [Request errors](#prompt-is-too-long) |
+| `upstream rejected the request` / `request too large for this upstream` on a Claude apps gateway session | [Upstream error messages](/docs/en/claude-apps-gateway-config#upstream-error-messages) |
+| `upstream rate limit exceeded` on a Claude apps gateway session | [Upstream error messages](/docs/en/claude-apps-gateway-config#upstream-error-messages) |
+| `all upstreams failed (N attempted)` on a Claude apps gateway session | [Upstream error messages](/docs/en/claude-apps-gateway-config#upstream-error-messages) |
+| `Claude Code may not be enabled for your organization` after a Claude apps gateway sign-in | [Claude apps gateway troubleshooting](/docs/en/claude-apps-gateway-deploy#troubleshooting) |
+| `Context exceeds the ...-token limit by ... tokens` in `/context` output | [Request errors](#context-exceeds-the-token-limit) |
+| `Request too large` | [Request errors](#request-too-large) |
+| `Request too large for the API's 32MB request limit` | [Request errors](#request-too-large) |
+| `Image was too large` | [Request errors](#image-was-too-large) |
+| `Unable to resize image` | [Request errors](#unable-to-resize-image) |
+| `PDF too large` / `PDF is password protected` / `pdftoppm is not installed` | [Request errors](#pdf-errors) |
+| `Extra inputs are not permitted` | [Request errors](#extra-inputs-are-not-permitted) |
+| `API Error: 400 ... tools.N.custom.input_schema: JSON schema is invalid` / `Property keys should match pattern` | [Request errors](#tool-input-schema-is-invalid) |
+| `tool_use.name: String should have at most 200 characters` | [Request errors](#tool-use-name-over-200-characters) |
+| `There's an issue with the selected model` | [Request errors](#theres-an-issue-with-the-selected-model) |
+| `Model ... is not a recognized model id` | [Request errors](#model-is-not-a-recognized-model-id) |
+| `Model ... not found` | [Request errors](#model-not-found) |
+| `Couldn't confirm model ... with the API` | [Request errors](#couldnt-confirm-model-with-the-api) |
+| `API error: ... · model not changed` | [Request errors](#api-error-model-not-changed) |
+| `Claude Opus is not available with the Claude Pro plan` | [Request errors](#claude-opus-is-not-available-with-the-claude-pro-plan) |
+| `Claude Code ... does not support this model; version ... or newer is required` | [Request errors](#claude-code-does-not-support-this-model) |
+| `Claude Code ... is older than the minimum version required by your organization's policy` | [Request errors](#claude-code-does-not-support-this-model) |
+| `Model ... is restricted by your organization's settings` | [Request errors](#model-is-restricted-by-your-organizations-settings) |
+| `Model ... is not available. Your organization restricts model selection.` | [Request errors](#model-is-restricted-by-your-organizations-settings) |
+| `Can't switch to the default model` | [Request errors](#cant-switch-to-the-default-model) |
+| `Model switch ... blocked by a PreModelSwitch hook` | [Request errors](#model-switch-was-blocked-by-a-premodelswitch-hook) |
+| `couldn't save it as your default` / `couldn't confirm it was saved as your default` | [Request errors](#couldnt-save-it-as-your-default) |
+| `is less capable than the current main model` / `Advisor will not activate on the main model` / `cannot advise` | [Request errors](#advisor-is-less-capable-than-the-current-main-model) |
+| `thinking.type.enabled is not supported for this model` | [Request errors](#thinking-type-enabled-is-not-supported-for-this-model) |
+| `Effort '<level>' isn't available with thinking turned off on this model` | [Request errors](#effort-isnt-available-with-thinking-turned-off) |
+| `effort '<level>' is not supported when thinking is disabled` | [Request errors](#effort-isnt-available-with-thinking-turned-off) |
+| `max_tokens must be greater than thinking.budget_tokens` | [Request errors](#thinking-budget-exceeds-output-limit) |
+| `API Error: 400 due to tool use concurrency issues` | [Request errors](#tool-use-or-thinking-block-mismatch) |
+| `API Error: 400 orphaned tool_result in conversation history` | [Request errors](#tool-use-or-thinking-block-mismatch) |
+| `API Error: 400 duplicate tool_use ID in conversation history` | [Request errors](#tool-use-or-thinking-block-mismatch) |
+| `Invalid data in redacted_thinking block` | [Request errors](#invalid-data-in-redacted-thinking-block) |
+| `[Unsupported tool content removed]` | [Request errors](#unsupported-tool-content-removed) |
+| `role 'system' must precede an 'assistant' message` | [Request errors](#role-system-must-precede-an-assistant-message) |
+| `Invalid encrypted_content in search_result block` / `Invalid encrypted_index in text block` / `Failed to decrypt web search result content` | [Request errors](#invalid-encrypted-content-in-search-result-block) |
+| `Invalid encrypted_stdout in encrypted_code_execution_result block` | [Request errors](#invalid-encrypted-content-in-search-result-block) |
+| `server_tool_use.name: Input should be` on every turn of a resumed session | [Request errors](#unsupported-tool-content-removed) |
+| `<model> can't help with this. Start a new session to continue` | [Request errors](#usage-policy-refusal) |
+| `Claude Code is unable to respond to this request, which appears to violate our Usage Policy` | [Request errors](#usage-policy-refusal) |
+| `<model>'s safeguards flagged this message` | [Request errors](#safety-measures-flagged-a-cybersecurity-topic) |
+| `<model>'s safeguards flagged this session` | [Request errors](#safety-measures-flagged-a-cybersecurity-topic) |
+| `<model> has safety measures that flagged this message for a cybersecurity topic` | [Request errors](#safety-measures-flagged-a-cybersecurity-topic) |
+| `API Error: Output blocked by content filtering policy` | [Request errors](#output-blocked-by-content-filtering-policy) |
+| `Installation was killed before it could finish (exit code 137)` | [Installation errors](#installation-was-killed-before-it-could-finish) |
+| `The connection dropped while downloading the update` | [Installation errors](#the-connection-dropped-while-downloading-the-update) |
+| `Download timed out: exceeded the total deadline` | [Installation errors](#the-connection-dropped-while-downloading-the-update) |
+| `--bg and --print conflict` | [Command-line errors](#conflict-between-bg-and-print) |
+| `Error: Cannot use both --append-subagent-system-prompt and --append-subagent-system-prompt-file. Please use only one.` | [Command-line errors](#conflict-between-a-system-prompt-flag-and-its-file-form) |
+| `Cloud sessions cannot be created from a --restricted session` | [Command-line errors](#cloud-sessions-cannot-be-created-from-a-restricted-session) |
+| `Cloud sessions are disabled by your organization's policy` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
+| `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
+| `Error: --json-schema is not a valid JSON Schema` | [Command-line errors](#the-json-schema-value-is-not-a-valid-json-schema) |
+| `Error: Invalid --agents configuration:` | [Command-line errors](#invalid-agents-configuration) |
+| `Error: --agents takes a JSON object, or a file path only with --print (-p)` | [Command-line errors](#invalid-agents-configuration) |
+| `Error: --agents file not found` | [Command-line errors](#invalid-agents-configuration) |
+| `Error: Settings file exceeds the 2MiB limit` | [Command-line errors](#settings-file-exceeds-the-2mib-limit) |
+| `The current directory no longer exists (it was deleted or moved)` / `Can't read the current directory` | [Command-line errors](#the-current-directory-no-longer-exists) |
+| `Temp directory <dir> ... Refusing to use it` / `ENOSPC: no space left on device, mkdir '<dir>'` | [Command-line errors](#temp-directory-refused-or-cannot-be-created) |
+| `couldn't be resolved to a real location, so its skills, commands, and agents weren't loaded` | [Command-line errors](#directory-couldnt-be-resolved-to-a-real-location) |
+| `Error: Workspace not trusted` when starting Remote Control | [Command-line errors](#workspace-not-trusted-when-starting-remote-control) |
+| `` `<flag>` before `remote-control` is not carried over to the sessions Remote Control starts `` | [Command-line errors](#not-carried-over-to-the-sessions-remote-control-starts) |
+| `` `claude import` is not yet available in this build `` | [Command-line errors](#claude-import-is-not-yet-available-in-this-build) |
+| `Could not read Claude Code config` | [Command-line errors](#could-not-read-claude-code-config) |
+| `Could not import <server>: <reason>` | [Command-line errors](#could-not-import-a-server-from-claude-desktop) |
+| `Cannot add MCP server to scope: managed` | [Command-line errors](#cannot-add-mcp-server-to-the-managed-scope) |
+| `Cannot add MCP server: your organization's managed settings allow only MCP servers that plugins provide` | [Command-line errors](#cannot-add-mcp-server-when-managed-settings-allow-only-plugin-servers) |
+| `is Anthropic-hosted and doesn't support local OAuth` | [Command-line errors](#anthropic-hosted-and-doesnt-support-local-oauth) |
+| `Can't read .mcp.json: it isn't a regular file or is larger than 2097152 bytes` | [Command-line errors](#cant-read-mcp-json) |
+| `MCP server "<name>" was not saved to` / `was not removed from` | [Command-line errors](#mcp-server-was-not-saved-or-removed) |
+| `MCP server "<name>" may not have been saved` / `may not have been removed` | [Command-line errors](#mcp-server-may-not-have-been-saved-or-removed) |
+| `Server rejected the Authorization header minted by the configured headersHelper` | [Command-line errors](#server-rejected-the-authorization-header-minted-by-the-configured-headershelper) |
+| `Error: MCP tool <name> (passed via --permission-prompt-tool) not found` | [Command-line errors](#mcp-permission-prompt-tool-not-found) |
+| `OAuth callback port <port> is already in use — another process may be holding it` | [Command-line errors](#oauth-callback-port-is-already-in-use) |
+| `No available ports for OAuth redirect` | [Command-line errors](#no-available-ports-for-oauth-redirect) |
+| `Shell command failed for pattern "..."`, from `/security-review` or any skill that injects dynamic context | [Command-line errors](#security-review-fails-without-origin-head) |
+| `Shell command permission check failed for pattern "..."`, from a skill that injects dynamic context | [Command-line errors](#security-review-fails-without-origin-head) |
+| ``Skill <name> requires bash (`shell: bash` in frontmatter) but Git Bash was not found`` | [Command-line errors](#security-review-fails-without-origin-head) |
+| `Input must be provided either through stdin or as a prompt argument when using --print` | [Command-line errors](#input-must-be-provided-when-using-print) |
+| `Claude Code can't read the keyboard here: stdin is not a terminal` | [Command-line errors](#claude-code-cant-read-the-keyboard-here) |
+| `Error: Input contained only whitespace` | [Command-line errors](#input-contained-only-whitespace) |
+| `Blank prompt — the message was only whitespace, so nothing was sent to the model.` | [Command-line errors](#input-contained-only-whitespace) |
+| `Error: stream-json input carried over 256M characters with no newline` | [Command-line errors](#stream-json-input-carried-over-256m-characters-with-no-newline) |
+| `Unknown command: /<name>`, with or without a `Did you mean` suggestion | [Command-line errors](#unknown-command) |
+| `Diff is too large for ultrareview` / `PR #<N> is too large for ultrareview` | [Command-line errors](#diff-is-too-large-for-ultrareview) |
+| `Could not find merge-base with <branch>` | [Command-line errors](#could-not-find-merge-base-with-the-base-branch) |
+| `Your checkout has no branches (detached HEAD only)` | [Command-line errors](#your-checkout-has-no-branches) |
+| `Ultrareview clones <owner>/<repo> in the cloud with the GitHub account connected to your Claude account, and none is connected` | [Command-line errors](#no-github-account-is-connected-to-your-claude-account) |
+| `Your connected GitHub account can't see <owner>/<repo>` | [Command-line errors](#your-connected-github-account-cant-see-the-repository) |
+| `The GitHub App preflight failed transiently (network or service hiccup) — retry in a moment to start from GitHub instead` | [Command-line errors](#the-github-app-preflight-failed-transiently) |
+| `Not uploading this working tree` with `the upload cannot follow that setting` | [Command-line errors](#the-repository-upload-cant-follow-a-git-setting) |
+| `GitHub isn't connected to your Claude account, so this repository can't be cloned in the cloud` | [Command-line errors](#github-isnt-connected-to-your-claude-account) |
+| `Your GitHub organization has an IP allowlist that is blocking Claude` | [Command-line errors](#a-github-organization-policy-is-blocking-claude) |
+| `Your GitHub organization requires single sign-on` | [Command-line errors](#a-github-organization-policy-is-blocking-claude) |
+| `Your GitHub organization's identity provider (Microsoft Entra ID) has a Conditional Access policy that is blocking Claude` | [Command-line errors](#a-github-organization-policy-is-blocking-claude) |
+| `Single sign-on authorization needed` | [Command-line errors](#single-sign-on-authorization-needed) |
+| `Failed to resume the conversation` | [Command-line errors](#failed-to-resume-the-conversation) |
+| `No conversation found with session ID: <session-id>` | [Command-line errors](#no-conversation-found-with-the-session-id) |
+| `Windows reported an error (EBADF) when Claude Code read this session's transcript file` | [Command-line errors](#windows-reported-an-error-ebadf) |
+| `Cannot switch renderers in this session` | [Command-line errors](#cannot-switch-renderers-in-this-session) |
+| `Cannot switch renderers while work is running in the background` | [Command-line errors](#cannot-switch-renderers-in-this-session) |
+| `Couldn't open Claude Desktop` | [Command-line errors](#couldnt-open-claude-desktop) |
+| `Failed to open Claude Desktop. Please try opening it manually.` | [Command-line errors](#couldnt-open-claude-desktop) |
+| `Couldn't read your Zed keymap` / `Couldn't back up your Zed keymap` / `Couldn't update your Zed keymap` | [Command-line errors](#terminal-setup-left-your-zed-keymap-unchanged) |
+| `Your Zed keymap isn't a readable list of keybindings` | [Command-line errors](#terminal-setup-left-your-zed-keymap-unchanged) |
+| `Skill usage reports are not available on this connection.` | [Command-line errors](#skill-usage-reports-are-not-available-on-this-connection) |
+| `Custom output styles can't be selected over Remote Control or from a relayed message` | [Command-line errors](#custom-output-styles-cant-be-selected-over-remote-control) |
+| `Output styles are saved to local settings (.claude/settings.local.json), which this session doesn't load` | [Command-line errors](#output-styles-are-saved-to-local-settings-which-this-session-doesnt-load) |
+| `/recap only runs when you ask for it yourself in this session` | [Command-line errors](#recap-only-runs-when-you-ask-for-it-yourself) |
+| `` `plugin eval` is currently in early access `` / `` `plugin eval` is currently unavailable `` | [Plugin errors](#plugin-eval-is-currently-in-early-access) |
+| `Marketplace "<name>" is registered from an untrusted source` | [Plugin errors](#marketplace-is-registered-from-an-untrusted-source) |
+| `Claude Code refuses the marketplace name "<name>"` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
+| `Marketplace name impersonates an official Anthropic/Claude marketplace` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
+| `Marketplace "<name>" is already added from a different source` | [Plugin errors](#marketplace-is-already-added-from-a-different-source) |
+| `"<name>" is another spelling of "<reserved>", a reserved marketplace name` | [Plugin errors](#marketplace-name-is-another-spelling-of-a-reserved-name) |
+| `Marketplace "<name>" is added but ignored` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#marketplace-is-added-but-ignored) |
+| `Marketplace "<name>" is registered but was refused (see the debug log)` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#marketplace-is-added-but-ignored) |
+| `references ${user_config.*} in a shell-form command` | [Plugin errors](#plugin-command-references-user-config) |
+| `Monitor "<name>" from plugin <plugin> references ${user_config.*} in its command` | [Plugin errors](#plugin-command-references-user-config) |
+| `headersHelper for MCP server '<name>' references ${user_config.*}` | [Plugin errors](#plugin-command-references-user-config) |
+| `Plugin archive integrity check failed` | [Plugin errors](#plugin-archive-integrity-check-failed) |
+| `An npm plugin source must name a registry package` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#an-npm-plugin-source-must-name-a-registry-package) |
+| `The packages it lists are not installed` / `The packages it lists were not installed, because` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#the-packages-it-lists-are-not-installed) |
+| `path escapes plugin directory` | [Plugin errors](#path-escapes-plugin-directory) |
+| `path could not be checked` | [Plugin errors](#path-could-not-be-checked) |
+| `its marketplace entry path does not stay inside the marketplace directory` | [Plugin errors](#marketplace-entry-path-does-not-stay-inside-the-marketplace-directory) |
+| `Plugin source path refused` | [Plugin errors](#marketplace-entry-path-does-not-stay-inside-the-marketplace-directory) |
+| `Failed to load marketplace configuration` | [Plugin errors](#failed-to-load-marketplace-configuration) |
+| `Marketplace configuration file is corrupted` | [Plugin errors](#failed-to-load-marketplace-configuration) |
+| `Plugin "<name>@synced" is required by your organization and can't be disabled here` | [Plugin errors](#plugin-is-required-by-your-organization) |
+| `"<plugin>" was not uninstalled: it is still switched on in <file>` | [Plugin errors](#plugin-was-not-uninstalled) |
+| `"<plugin>" was not uninstalled: <file> is there and could not be read` | [Plugin errors](#plugin-was-not-uninstalled) |
+| `Plugin "<plugin>" was not uninstalled: installed_plugins.json` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#installed-plugins-json-holds-a-record-this-version-cannot-read) |
+| `Error: No such tool available: <tool name>` | [Tool errors](#no-such-tool-available) |
+| `would be spawned with zero tools — refusing` | [Tool errors](#agent-would-be-spawned-with-zero-tools) |
+| `File is covered by a Read deny rule in your permission settings` | [Tool errors](#file-is-covered-by-a-read-deny-rule) |
+| `cannot contain null bytes (\0)` | [Tool errors](#path-cannot-contain-null-bytes) |
+| `Path contains null bytes` | [Tool errors](#path-cannot-contain-null-bytes) |
+| `subagent_type is required: the general-purpose agent is not available in this session` | [Tool errors](#subagent-type-is-required) |
+| `Error: this write left the memory index at MEMORY.md at ..., over its ... read limit` | [Tool errors](#memory-index-is-over-its-read-limit) |
+| `pkill: refusing to run` | [Tool errors](#pkill-pattern-matches-the-claude-code-process) |
+| `Failed to write to <name>'s inbox — nothing was sent` | [Tool errors](#failed-to-write-to-a-teammate-inbox) |
+| `Failed to write the plan approval request to the lead's inbox — plan not submitted` | [Tool errors](#failed-to-write-to-a-teammate-inbox) |
+| `Its agent definition was not restored: the folder its definition file came from is not trusted` | [Tool errors](#teammate-agent-definition-not-restored) |
+| `Message too large for cross-session delivery` | [Tool errors](#message-too-large-for-cross-session-delivery) |
+| `Too many messages to this session just now` | [Tool errors](#too-many-messages-to-this-session-just-now) |
+| `Cross-session message was dropped at the recipient session's inbox` | [Tool errors](#cross-session-message-dropped-at-the-inbox) |
+| `Refusing to send: reply target is a symlink` / `Refusing to send: cannot vet reply target` | [Tool errors](#refusing-to-send-a-cross-session-message) |
+| `Refusing to read <path>: its symlink resolution changed after permission was checked (<reason>)` / `Refusing to search <path>: its symlink resolution changed after permission was checked` | [Tool errors](#refusing-after-a-symlink-changed) |
+| `Refusing to write <path>: its parent-directory symlink resolution changed after permission was checked` / `Refusing to write <path>: it is a symbolic link. Write to the link's target path instead` | [Tool errors](#refusing-after-a-symlink-changed) |
+| `Refusing to write through symlink: <path>` / `Refusing to write into symlinked directory: <path>` | [Tool errors](#refusing-after-a-symlink-changed) |
+| `Refusing to write <path>: where it leads on disk could not be determined` / `Refusing to read <path>: where it leads on disk could not be determined` | [Tool errors](#refusing-after-a-symlink-changed) |
+| `Refusing to search <path>: a path one of its Read deny rules is written through changed while the search was being prepared` / `Refusing to search <path>: it could not be opened` | [Tool errors](#refusing-after-a-symlink-changed) |
+| `its permission check expired before it ran (too many concurrent file operations)` / `ripgrep was found only by name on PATH` | [Tool errors](#refusing-after-a-symlink-changed) |
+| `task output swap refused (tasks dir moved or linked)` | [Tool errors](#task-output-swap-refused) |
+| `Command killed: its output file was replaced or could no longer be verified` | [Tool errors](#task-output-swap-refused) |
+| `Your disk quota is full on the filesystem with Claude Code's temp directory <dir> (EDQUOT)` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
+| `The filesystem with Claude Code's temp directory <dir>, or your disk quota on it, is full (ENOSPC)` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
+| `Command output was lost: the temp filesystem at <dir> is full` / `is out of inodes` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
+| `the source file is not valid UTF-8 text` / `the source file is not valid UTF-16 text` | [Tool errors](#the-source-file-is-not-valid-utf-8-text) |
+| `the source file has the replacement character U+FFFD` | [Tool errors](#the-source-file-is-not-valid-utf-8-text) |
+| `Not published: that file is on a network share` | [Tool errors](#not-published-that-file-is-on-a-network-share) |
+| `Reading a local file from outside this session's connected folders, or through a link, needs the approval card` | [Tool errors](#reading-a-local-file-from-outside-the-connected-folders) |
+| `cannot read file_path (...) — the file could not be examined, and no one can answer the approval card` | [Tool errors](#reading-a-local-file-from-outside-the-connected-folders) |
+| `WebFetch cannot fetch localhost or other hostnames without a dot` | [Tool errors](#webfetch-cannot-fetch-localhost) |
+| `The safety check for domain ... is rate-limited` | [Tool errors](#webfetch-domain-safety-check-failed) |
+| `The safety check for domain ... is temporarily rate-limited` | [Tool errors](#webfetch-domain-safety-check-failed) |
+| `Unable to verify if domain ... is safe to fetch` | [Tool errors](#webfetch-domain-safety-check-failed) |
+| `Can't open MCP settings while no terminal is attached to this background session` | [Background session errors](#commands-refused-in-a-background-session) |
+| `Can't open MCP settings in a background session` | [Background session errors](#commands-refused-in-a-background-session) |
+| `blocked because the path is spelled in a form that cannot be safely resolved` | [Background session errors](#write-or-command-blocked-because-the-path-cannot-be-safely-resolved) |
+| `blocked because the path is network-shaped` | [Background session errors](#write-or-command-blocked-because-the-path-names-a-network-location) |
+| `is isolated in the worktree <path>, but this command <reason>. Refusing to run it` | [Background session errors](#command-blocked-by-the-worktree-isolation-checks) |
+| `too complex to verify that it stays inside the worktree` | [Background session errors](#command-blocked-by-the-worktree-isolation-checks) |
+| `This session has no saved transcript` | [Background session errors](#this-session-has-no-saved-transcript) |
+| `Can't open — this session is running in another terminal` | [Background session errors](#this-session-is-running-in-another-terminal) |
+| `This conversation is already open in another running Claude session` | [Background session errors](#this-session-is-running-in-another-terminal) |
+| `This session's saved conversation is no longer on disk` | [Background session errors](#this-sessions-saved-conversation-is-no-longer-on-disk) |
+| `kept <id> — its worktree is still at <path>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
+| `kept <id> — <n> unpushed commits on <branch>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
+| `kept <id> — worktree has commits that are not pushed anywhere` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
+| `terminal host process died — press Enter to restart` / `This session's terminal host process died` | [Background session errors](#terminal-host-process-died) |
+| `Session isn't responding` / `Press enter again to restart this session — it isn't responding` | [Background session errors](#session-isnt-responding) |
+| `Session <id> was stopped while the respawn was in flight` | [Background session errors](#session-was-stopped-while-the-respawn-was-in-flight) |
+| `This session was running agent '<name>', which is no longer available` | [Background session errors](#session-agent-no-longer-available) |
+| `CLAUDE_CODE_PROCESS_WRAPPER: launcher ...` | [Background session errors](#claude_code_process_wrapper-launcher-errors) |
+| `EUNKNOWN: unknown error, uv_spawn` | [Background session errors](#eunknown-when-starting-a-background-session) |
+| `EACCES: permission denied, posix_spawn` | [Background session errors](#eacces-when-starting-a-background-session) |
+| `exited before it became reachable` | [Background session errors](#background-service-exited-before-it-became-reachable) |
+| `Couldn't start a background session (working directory no longer exists or is not accessible: ...)` | [Background session errors](#working-directory-no-longer-exists-when-starting-a-background-session) |
+| `Workspace not trusted.` when starting or restarting a background session | [Background session errors](#workspace-not-trusted-when-dispatching-a-background-session) |
+| `Claude Code is being updated by npm on this machine (still not runnable after 2 min, ...)` | [Background session errors](#eacces-when-starting-a-background-session) |
+| `Claude Code process exited with code N` | [Wrapper and IDE errors](#claude-code-process-exited-with-code-n) |
+| `The connection to Claude Code ended before this message completed` | [Wrapper and IDE errors](#the-connection-to-claude-code-ended-before-this-message-completed) |
+| `Could not locate the Claude CLI on PATH` | [Wrapper and IDE errors](#could-not-locate-the-claude-cli-on-path) |
+| `Restored the code, but skipped N files` | [Rewind warnings and errors](#restored-the-code-but-skipped-files) |
+| `No files were restored: N files failed (backup missing, or the file could not be updated)` | [Rewind warnings and errors](#no-files-were-restored) |
+| `Transcript writes are failing (...)` | [Session saving warnings](#transcript-writes-are-failing) |
+| `Transcript saving is off — CLAUDE_CODE_SKIP_PROMPT_HISTORY is set` | [Session saving warnings](#transcript-saving-is-off-skip-prompt-history) |
+| `Transcript saving is off — inherited CLAUDE_CODE_CHILD_SESSION marker` | [Session saving warnings](#transcript-saving-is-off-child-session-marker) |
+| `Claude Code's fullscreen renderer didn't finish starting last time on this machine` / `Claude Code's fullscreen renderer has repeatedly failed to start on this machine` | [Fullscreen rendering](/docs/en/fullscreen#fullscreen-renderer-didnt-finish-starting) |
+| `Claude Code exited after an unrecoverable interface error (...)` | [Configuration warnings](#exited-after-an-unrecoverable-interface-error) |
+| `Agent descriptions are over the 15.0k-token limit` | [Configuration warnings](#agent-descriptions-are-over-the-15000-token-limit) |
+| `Not loaded: rename <path>, then restart — its name uses "<name>", a name reserved for the skills synced from your claude.ai account` | [Configuration warnings](#a-skill-command-or-workflow-wasnt-loaded-because-its-name-is-reserved) |
+| `Ignoring N permissions.allow entries from ... this workspace has not been trusted` | [Configuration warnings](#workspace-has-not-been-trusted) |
+| `is a network path, which cannot be added as a working directory` | [Configuration warnings](#working-directory-is-a-network-path) |
+| `Remote managed settings failed to load (<cause>)` | [Configuration warnings](#remote-managed-settings-failed-to-load) |
+| `Managed settings were not approved; exiting without applying them.` | [Configuration warnings](#managed-settings-were-not-approved) |
+| `Claude Code can't start: your organization's managed settings block the default model` / `Claude Code can't start: your organization allows only the models listed in "availableModels"` | [Configuration warnings](#managed-settings-block-the-default-model) |
+| `Your organization's managed settings allow Claude Code to use: <providers>` | [Configuration warnings](#managed-settings-dont-allow-this-api-provider) |
+| `Your organization's managed settings allow Claude Code to use no API provider at all` | [Configuration warnings](#managed-settings-dont-allow-this-api-provider) |
+| `MCP server <name> is blocked by enterprise managed policy` | [Configuration warnings](#mcp-server-is-blocked-by-enterprise-managed-policy) |
+| `Managed settings document could not be parsed as a JSON object; none of its settings are in effect. Fix or remove it.` | [Configuration warnings](#managed-settings-document-could-not-be-parsed) |
+| `Managed settings drop-in directory could not be read` | [Configuration warnings](#managed-settings-document-could-not-be-parsed) |
+| `Unable to read managed policy settings` | [Configuration warnings](#unable-to-read-managed-policy-settings) |
+| `otelHeadersHelper failed; telemetry is not being exported. See /status: ...` | [Configuration warnings](#otelheadershelper-failed) |
+| `"crossSessionInbound" must be one of "accept", "hold", "refuse"` | [Configuration warnings](#crosssessioninbound-must-be-one-of-accept-hold-refuse) |
+| `API Error: ANTHROPIC_FOUNDRY_RESOURCE must be a Foundry resource name` | [Configuration warnings](#anthropic-foundry-resource-must-be-a-foundry-resource-name) |
+| `headersHelper not run — this workspace has no persisted trust` | [Configuration warnings](#headershelper-not-run) |
+| `Invalid permission rule "..." was skipped: Malformed Tool(content) rule` | [Configuration warnings](#malformed-tool-content-rule) |
+| `... is not matched by file permission checks` | [Configuration warnings](#is-not-matched-by-file-permission-checks) |
+| `... has a wildcard before the rest of the command` | [Configuration warnings](#has-a-wildcard-before-the-rest-of-the-command) |
+| `Denying Bash also turns off the PowerShell tool, so Claude has neither` | [Configuration warnings](#denying-bash-also-turns-off-the-powershell-tool) |
+| `CLAUDE_CODE_DISABLE_1M_CONTEXT is set, but the 200K limit isn't enforced` | [Configuration warnings](#the-200k-limit-isnt-enforced) |
+| `[claude-code:unrecognized_model]` | [Configuration warnings](#unrecognized-model-id-on-a-request) |
+| `Stale sandbox mask files left by a killed session` | [Configuration warnings](#stale-sandbox-mask-files-left-by-a-killed-session) |
+| Responses seem lower quality than usual | [Response quality](#responses-seem-lower-quality-than-usual) |
 
 ## Automatic retries
 
-Claude Code retries transient failures up to 10 times with exponential backoff before showing you an error. It doesn't always retry a failure that arrives partway through Claude's response. When you see one of the errors on this page, Claude Code has already made whatever retries apply to that failure; the lists below say which failures get the full budget, which get a smaller one, and which get none.
+Claude Code retries transient failures up to 10 times with exponential backoff before showing you an error. It doesn't always retry a failure that arrives partway through Claude's response. When you see one of the errors on this page, Claude Code has already made whatever retries apply to that failure.
 
 Claude Code retries these failures:
 
 * Server errors, overloaded responses, and request timeouts that arrive before any of Claude's response has streamed.
+* A server error or overloaded response that arrives after Claude has finished thinking but before it has started any text or tool call. Claude Code retries a server error at that point up to two times. Before v2.1.284, Claude Code ended the turn with the error at that point.
 * Dropped connections. When a connection drops partway through a request before Claude has completed any part of its response, including its thinking, Claude Code re-issues the request with the same backoff and the turn continues, even if some text had already started streaming. When it drops after Claude has finished thinking but before it has started any text or tool call, Claude Code instead re-issues the request up to two times in quick succession, and ends the turn with `Connection lost before a response was produced` if the connection keeps dropping at that point.
 * A connection that Claude Code detects was broken by your computer going to sleep partway through a request. Claude Code counts it as a dropped connection under the rules above; once the retry label names the specific reason, it reads `Connection lost while your computer was asleep`, and if the turn ends after Claude has finished thinking but before any text or tool call, the message reads `Your computer went to sleep before a response was produced`.
 * A stalled response stream, when the response headers have arrived but none of Claude's response has arrived, or when Claude has finished thinking but hasn't started any text or tool call: Claude Code aborts the stalled connection and re-issues the request at most once, outside the 10-attempt budget above. If the response stalls a second time after Claude has finished thinking but before any text or tool call, Claude Code ends the turn with `The response stalled before a response was produced`.
@@ -372,6 +406,7 @@ Claude Code doesn't retry these failures:
 * An [Amazon Bedrock streaming response with an unexpected content-type](#bedrock-streaming-response-has-an-unexpected-content-type), because the gateway or proxy rewriting the response would rewrite the retry the same way. Requires Claude Code v2.1.208 or later.
 * A non-streaming retry of a failed streaming request that gets a success status but [no Claude API message in the body](#api-returned-an-empty-or-malformed-response). Claude Code ends the turn with that error.
 * A request that your organization's policy check denied, which surfaces as an `API Error:` line carrying the denial message. Your organization's administrators set up the check with [Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks), a Claude Enterprise feature, and the message ends with the instructions they configured, or by default tells you to contact them. Claude Code doesn't re-send the denied request to the same model or to a [fallback model](/docs/en/model-config#fallback-model-chains), because the denial is about the request's content rather than the model. Before v2.1.239, Claude Code could re-send a denied request, without streaming or on a configured fallback model, before showing you the denial.
+* A response the API's output content filter blocked. Claude Code shows [Output blocked by content filtering policy](#output-blocked-by-content-filtering-policy) at once and doesn't retry or re-send that request.
 
 ### What you see while Claude Code retries or waits
 
@@ -393,12 +428,13 @@ While Claude is consulting the [advisor](/docs/en/advisor), the banner appears a
 
 You can tune retry behavior with these environment variables:
 
-| Variable                                              | Default | Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| :---------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [`CLAUDE_CODE_MAX_RETRIES`](/docs/en/env-vars)             | 10      | Number of retry attempts. Capped at 15 as of v2.1.186; as of v2.1.199 `CLAUDE_CODE_RETRY_WATCHDOG` raises the default and removes the cap. Lower it to surface failures faster in scripts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| [`CLAUDE_CODE_RETRY_WATCHDOG`](/docs/en/env-vars)          | unset   | Set to `1` in unattended sessions such as CI jobs to retry `429` and `529` capacity errors indefinitely instead of failing after `CLAUDE_CODE_MAX_RETRIES` attempts. Claude Code fails at once when a standard-speed request gets a `429` that reports a spend limit or exhausted usage credits, even one from a [gateway spend cap](#spend-limit-reached) that resets on a schedule. Before v2.1.239, the watchdog retried these indefinitely. For fast mode requests, see [Handle rate limits](/docs/en/fast-mode#handle-rate-limits). On v2.1.199 or later it also raises the default retry count for other transient errors, such as server errors, timeouts, and dropped connections, to 300, roughly three hours of backoff, and removes the cap of 15 on `CLAUDE_CODE_MAX_RETRIES` if you set that variable explicitly. |
-| [`API_TIMEOUT_MS`](/docs/en/env-vars)                      | 600000  | Per-request timeout in milliseconds. Raise it for slow networks or proxies. It also caps how long Claude Code waits for response headers, described in [No response from API](#no-response-from-api).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| [`CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS`](/docs/en/env-vars) | unset   | Deadline in milliseconds for the first response byte of a streaming request. Requires Claude Code v2.1.242 or later. For how Claude Code picks the deadline when this is unset, see [No response from API](#no-response-from-api).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Variable | Default | Effect |
+| :- | :- | :- |
+| [`CLAUDE_CODE_MAX_RETRIES`](/docs/en/env-vars) | 10 | Number of retry attempts. Capped at 15 as of v2.1.186; as of v2.1.199 `CLAUDE_CODE_RETRY_WATCHDOG` raises the default and removes the cap. Lower it to surface failures faster in scripts. |
+| [`CLAUDE_CODE_RETRY_WATCHDOG`](/docs/en/env-vars) | unset | Set to `1` in unattended sessions such as CI jobs to retry `429` and `529` capacity errors indefinitely instead of failing after `CLAUDE_CODE_MAX_RETRIES` attempts. Claude Code fails at once when a standard-speed request gets a `429` that reports a spend limit or exhausted usage credits, even one from a [gateway spend cap](#spend-limit-reached) that resets on a schedule. Before v2.1.239, the watchdog retried these indefinitely. For fast mode requests, see [Handle rate limits](/docs/en/fast-mode#handle-rate-limits). On v2.1.199 or later it also raises the default retry count for other transient errors, such as server errors, timeouts, and dropped connections, to 300, roughly three hours of backoff, and removes the cap of 15 on `CLAUDE_CODE_MAX_RETRIES` if you set that variable explicitly. |
+| [`API_TIMEOUT_MS`](/docs/en/env-vars) | 600000 | Per-request timeout in milliseconds. Raise it for slow networks or proxies. It also caps how long Claude Code waits for response headers, described in [No response from API](#no-response-from-api). |
+| [`CLAUDE_CODE_NONSTREAMING_TIMEOUT_RETRIES`](/docs/en/env-vars) | unset | Limit on re-sends of a [non-streaming request](#streaming-response-ended-before-any-complete-data-was-received) that times out. At the limit, the request fails. A response from Claude that takes longer than the timeout to generate times out again on every re-send, so set a low number such as `0` to fail sooner. Each non-streaming attempt times out after 300 seconds in a local session, or after `API_TIMEOUT_MS` when you set a positive value. Requires Claude Code v2.1.285 or later. |
+| [`CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS`](/docs/en/env-vars) | unset | Deadline in milliseconds for the first response byte of a streaming request. Requires Claude Code v2.1.242 or later. For how Claude Code picks the deadline when this is unset, see [No response from API](#no-response-from-api). |
 
 ## Server errors
 
@@ -457,7 +493,6 @@ This can happen during periods of high load or when the model is generating a ve
 **What to do:**
 
 * Retry the request
-* For long-running tasks, break the work into smaller prompts
 * If a slow network or proxy is the cause, raise `API_TIMEOUT_MS` as described in [Automatic retries](#automatic-retries)
 * If timeouts are frequent and your network is otherwise healthy, see [Network and connection errors](#network-and-connection-errors) below
 
@@ -479,7 +514,7 @@ Neither wait exceeds one second less than a positive `API_TIMEOUT_MS`, and a pos
 **What to do:**
 
 * Send your message again. Your original message is still in the conversation, so for a long prompt you can type `try again` instead of pasting the whole thing.
-* If it repeats, treat it as a [network or proxy problem](#unable-to-connect-to-api). A proxy that accepts the connection and never forwards the request produces this error on every attempt.
+* If it repeats, treat it as a [network or proxy problem](#unable-to-connect-to-api).
 * If a proxy or gateway on your network holds responses until they complete, raise `API_TIMEOUT_MS` so the retry waits longer. On Amazon Bedrock, raise `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` as well.
 * If the first attempt keeps timing out and the retry then succeeds, raise `CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS` so the first attempt waits long enough too.
 
@@ -502,15 +537,15 @@ API Error: The response stream was malformed. The response above may be incomple
 * `Connection lost mid-response`: the connection dropped. You also see this variant when a proxy or gateway ends the response body cleanly before the response has finished.
 * `Your computer went to sleep mid-response`: Claude Code detected that your computer went to sleep while the response was streaming. Once your computer wakes, Claude Code treats the connection as broken and stops reading from it.
 * `Part of the response never arrived`: a stream event was dropped between the API and Claude Code, so a later event referenced content that never arrived. Before v2.1.281, this case ended the turn with `API Error: Content block not found`.
-* `The response stream was malformed`: an event arrived for a content block that had already finished.
+* `The response stream was malformed`: an event arrived for a content block that had already finished, or an event arrived damaged. A damaged event is one whose data isn't valid JSON, whose content is missing, or whose content doesn't match the event's type. Before v2.1.284, the parser's raw error, such as one beginning `API Error: JSON Parse error`, appeared instead when an event with invalid JSON arrived after Claude had completed its thinking, a block of text, or a tool call.
 * `The response stopped arriving`: the connection stayed open but stopped delivering data, so the streaming idle watchdog aborted it. Before v2.1.222, Claude Code could also report this failure on [gateway](/docs/en/gateways) connections reached through `ANTHROPIC_BASE_URL` or `ANTHROPIC_AWS_BASE_URL` while the server's keep-alive pings were still arriving, because it counted only parsed response events there; upgrading stops those spurious timeouts on those routes. Gateways reached through a provider base URL such as `ANTHROPIC_BEDROCK_BASE_URL` aren't wrapped by the byte watchdog; see [Streaming idle watchdogs](/docs/en/network-config#streaming-idle-watchdogs).
 
 Before v2.1.227, `Connection lost mid-response` read `Connection closed mid-response` and `The response stopped arriving` read `Response stalled mid-stream`.
 
-When a dropped or duplicated stream event arrives before Claude has started any text or tool call, you don't see this notice:
+When a dropped, duplicated, or damaged stream event arrives before Claude has started any text or tool call, you don't see this notice:
 
 * If Claude had completed only its thinking, Claude Code re-issues the request. When the re-issued streams break the same way, the turn ends with `Part of the response never arrived and no response was produced. Try again.` or `The response stream was malformed and no response was produced. Try again.`
-* If nothing had completed, Claude Code re-sends the request without streaming instead. If you turned that fallback off with [`CLAUDE_CODE_DISABLE_NONSTREAMING_FALLBACK`](/docs/en/env-vars), the turn ends with `API Error: Content block not found` for a dropped event or `API Error: Content block already closed` for a duplicated one.
+* If nothing had completed, Claude Code re-sends the request without streaming instead. If you turned that fallback off with [`CLAUDE_CODE_DISABLE_NONSTREAMING_FALLBACK`](/docs/en/env-vars), the turn ends with `API Error: Content block not found` for a dropped event or `API Error: Content block already closed` for a duplicated one. For a damaged event with the fallback off, the turn ends with `API Error: Stream event unreadable` or the parser's raw error.
 
 In four cases, Claude Code handles the failure without showing this notice right away:
 
@@ -539,7 +574,7 @@ When the classifier model is unavailable:
 <model> is temporarily unavailable, so auto mode cannot determine the safety of <tool> right now. Wait a moment and then try this action again.
 ```
 
-When Claude Code can determine the failure category, it names the category in parentheses after `temporarily unavailable`, for example `<model> is temporarily unavailable (rate-limited), so auto mode cannot determine the safety of <tool> right now`. The categories are `(rate-limited)`, `(overloaded)`, `(server error)`, `(timed out)`, and `(connection failed)`. Rate-limited, overloaded, and server errors are transient, and retrying works. If `(timed out)` or `(connection failed)` repeats, check your connection; see [Unable to connect to API](#unable-to-connect-to-api). Before v2.1.229, the message never named a category and read `Wait briefly and then try this action again`.
+When Claude Code can determine the failure category, it names the category in parentheses after `temporarily unavailable`, for example `<model> is temporarily unavailable (rate-limited), so auto mode cannot determine the safety of <tool> right now`. The categories are `(rate-limited)`, `(overloaded)`, `(server error)`, `(timed out)`, and `(connection failed)`. If `(timed out)` or `(connection failed)` repeats, check your connection; see [Unable to connect to API](#unable-to-connect-to-api). Before v2.1.229, the message never named a category and read `Wait briefly and then try this action again`.
 
 When no category fits, the message appears with no category in parentheses; more than one failure produces that form. On [Amazon Bedrock](/docs/en/amazon-bedrock), including the [Mantle endpoint](/docs/en/amazon-bedrock#use-the-mantle-endpoint), it also appears when your AWS account can't invoke the model named in the message, and that failure repeats on every retry until your account is granted access to the model.
 
@@ -560,7 +595,7 @@ Auto mode could not evaluate this action and is blocking it for safety — run w
 **What to do:**
 
 * Retry the action; this usually succeeds on the next attempt
-* Run `claude --debug` and repeat the action to see the underlying classifier response in the debug log
+* Run `claude --debug` and repeat the action for details in the debug log
 
 When a separate API safety check blocked the classifier request because of earlier conversation content:
 
@@ -664,7 +699,7 @@ You've hit your Sonnet limit · resets 3:45pm
 
 Claude Code blocks further requests until the reset time shown in the message. The session and weekly limits are shared across all models, so switching models doesn't restore access. The Opus and Sonnet limits each apply only to requests to that model family, so switching to a model outside the family with `/model` keeps you working.
 
-In an interactive session signed in with a claude.ai subscription, Claude Code can also wait in the open session and continue the interrupted task shortly after the reset. While it waits, a line at the bottom of the session reads `Usage limit reached · continuing automatically at 3:45pm · esc to cancel`. Press `Esc` at an empty prompt to cancel the wait. See [Wait for a usage limit to reset](/docs/en/interactive-mode#wait-for-a-usage-limit-to-reset) for what you see, how to start or cancel a wait, and how to turn automatic continue off. Before v2.1.234, Claude Code didn't offer this wait.
+In an interactive session signed in with a claude.ai subscription, Claude Code can also wait in the open session and continue the interrupted task shortly after the reset. See [Wait for a usage limit to reset](/docs/en/interactive-mode#wait-for-a-usage-limit-to-reset) for what you see, how to start or cancel a wait, and how to turn automatic continue off. Before v2.1.234, Claude Code didn't offer this wait.
 
 Usage counts against the session and weekly allowances at the same time. A single burst of heavy activity, such as a large workflow fanout, can exhaust the weekly allowance before the session window resets.
 
@@ -689,7 +724,7 @@ API Error: Usage credits required for 1M context · run /usage-credits to turn t
 
 In a session the Claude Desktop app runs, the hint names no commands: it points at the claude.ai usage settings page, or on Team and Enterprise plans says to turn on usage credits at claude.ai/admin-settings/usage or to ask your admin.
 
-This is an entitlement check, not a quota exhaustion. It fires even when your session and weekly allowances have capacity remaining. See [Extended context](/docs/en/model-config#extended-context) for which plans include 1M context directly and which require usage credits. Claude Code runs this check when you pick the model with `/model`, and only on a direct connection to the Anthropic API; if you point `ANTHROPIC_BASE_URL` at an [LLM gateway](/docs/en/llm-gateway), `/model` allows the `[1m]` selection and the gateway decides whether the request succeeds.
+This is an entitlement check, not a quota exhaustion. It fires even when your session and weekly allowances have capacity remaining. See [Extended context](/docs/en/model-config#extended-context) for which plans include 1M context directly and which require usage credits.
 
 When this error appears mid-conversation because the context grew past 200K tokens, Claude Code automatically compacts the conversation back under the standard context limit and keeps the session at that limit afterward, so no action is needed. On versions before v2.1.172, the error repeated on every subsequent request including `/compact`; run `/clear` on those versions to recover. The steps below apply when you explicitly selected a `[1m]` model.
 
@@ -704,7 +739,7 @@ Before v2.1.268, the message ended with `run /usage-credits to turn them on, or 
 
 ### The prompt to confirm went unanswered
 
-If your account requires the [Fable usage-credits consent](/docs/en/model-config#fable-and-usage-credits), Claude Code asks you to confirm before a Fable request bills usage credits. When nobody answers that consent prompt in a session that may have no one at its terminal, Claude Code closes the prompt and ends the turn with one of these messages:
+If your account requires the [Fable usage-credits consent](/docs/en/model-config#fable-and-usage-credits), Claude Code asks you to confirm before a Fable request bills usage credits. When the consent prompt closes with nobody answering it, Claude Code ends the turn with one of these messages:
 
 ```text theme={null}
 Fable limit reached · continuing on Fable 5.1 uses usage credits, and the prompt to confirm went unanswered — nothing was sent · answer it where this session is running, or /model to change
@@ -713,13 +748,13 @@ Fable 5.1 now uses usage credits · the prompt to confirm went unanswered — no
 
 The messages name the session's Fable model, so on Fable 5 they read `continuing on Fable 5` and `Fable 5 now uses usage credits`. Before v2.1.257, the first message began `Fable 5 limit reached`.
 
-This happens in [Remote Control](/docs/en/remote-control) sessions, [background sessions](/docs/en/agent-view), and [agent team](/docs/en/agent-teams) teammate sessions. Claude Code shows the consent prompt only in the session's own interactive view: the terminal where it runs, or, for a background session, the [agents view](/docs/en/agent-view) once you attach. A Remote Control client can't display it. Claude Code closes the prompt at the [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) deadline, five minutes by default, or as soon as a new prompt arrives while nobody has typed at that terminal, such as a prompt sent from a Remote Control client. Typing at the terminal where the session runs cancels the deadline, and Claude Code waits for your answer. In a background session's attached view, typing doesn't cancel the deadline, and a new prompt still closes the consent prompt, so answer before either happens. Claude Code sends nothing and keeps your model, so when you send your next prompt, Claude Code shows the consent prompt again.
+This happens in [Remote Control](/docs/en/remote-control) sessions, [background sessions](/docs/en/agent-view), [agent team](/docs/en/agent-teams) teammate sessions, and sessions that another application hosts through the Agent SDK. For when Claude Code closes the prompt, see [Fable and usage credits](/docs/en/model-config#fable-and-usage-credits).
 
 **What to do:**
 
-* At the terminal where the session runs, send another prompt and answer the consent prompt when it reappears. For a background session, attach to it from the [agents view](/docs/en/agent-view) first. Resending from a Remote Control client shows this message again, because the client can't display the prompt.
+* Where the session runs, at the terminal or in the application hosting it, send another prompt and answer the consent prompt when it reappears. For a background session, attach to it from the [agents view](/docs/en/agent-view) first. Resending from a Remote Control client shows this message again, because the client can't display the prompt.
 * Run `/model` to switch to a model that doesn't bill usage credits
-* To give yourself more time to reach that terminal, set [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) to a longer value or `"never"`
+* To give yourself more time, set [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) to a longer value or `"never"`
 
 Before v2.1.236, this message didn't appear: while a Remote Control client was connected, Claude Code waited 60 seconds for an answer and then continued the turn on your default model.
 
@@ -782,7 +817,7 @@ If you connect through a Claude apps gateway and see lowercase `spend limit reac
 **What to do:**
 
 * On Pro and Max, increase your monthly spend limit in [**Settings > Usage**](https://claude.ai/settings/usage) on claude.ai, or run `/usage-credits`
-* On Team and Enterprise, increase the limit in [**Admin settings > Usage**](https://claude.ai/admin-settings/usage) if you manage billing, or ask an admin to. `/usage-credits` sends that request to your admin for you
+* On Team and Enterprise, increase the limit in [**Organization settings > Usage**](https://claude.ai/admin-settings/usage) if you manage billing, or ask an admin to. `/usage-credits` sends that request to your admin for you
 * For a channel's limit, ask an org owner or the channel's manager to raise it on claude.ai. See [Per-channel limits](https://claude.com/docs/claude-tag/admins/set-spend-limit#per-channel-limits) in the Claude Tag documentation
 * If the message names a reset time for your plan's window, you can wait for it instead
 * Run `/usage` to see your plan's windows and when each resets
@@ -849,6 +884,10 @@ Not logged in · Please run /login
 ```
 
 In a session the Claude Desktop app runs, such as the Code tab or Cowork, the message reads `Authentication required · Sign in again to continue`, and you sign in again from the app.
+
+If you sign in with your claude.ai account in another Claude Code window that uses the same [configuration directory](/docs/en/claude-directory), an interactive session showing this message starts using that login on its own. You don't need to restart it.
+
+Before v2.1.286 on macOS, the session could keep showing the message after you signed in from another window. On those versions, restart the session that shows the message.
 
 **What to do:**
 
@@ -973,7 +1012,7 @@ Environment variables take precedence over `/login`, so a key exported in your s
 * Unset `ANTHROPIC_API_KEY` in the current shell and remove it from your shell profile, then relaunch `claude`
 * If the message says `Update or unset`, you have no saved login to fall back to. Unset the key and run `/login`, or replace the key with one from an active Console organization.
 * Run `/status` afterward to confirm the active credential is your subscription
-* If no environment variable is set and the error persists, the disabled organization is the one tied to your `/login`. Contact support or sign in with a different account.
+* If no environment variable is set and the error persists, contact support or sign in with a different account.
 
 ### Your organization has disabled API key authentication
 
@@ -1036,7 +1075,7 @@ This is a server-side setting, so it can't be overridden from local settings, en
 
 ### Remote Control requires the Anthropic API
 
-The session isn't talking to the Anthropic API directly, so there is no claude.ai backend for [Remote Control](/docs/en/remote-control) to pair with.
+The session isn't talking to the Anthropic API directly, which [Remote Control](/docs/en/remote-control) requires.
 
 ```text theme={null}
 Remote Control is only available when using Claude via api.anthropic.com. CLAUDE_CODE_USE_BEDROCK is set, so this session is using Amazon Bedrock — unset it (or run in a shell without it) to use Remote Control.
@@ -1144,10 +1183,19 @@ OAuth token revoked · Please run /login
 Please run /login · API Error: 401 OAuth token has expired ...
 ```
 
+In [non-interactive mode](/docs/en/headless) (`-p`) and the [Agent SDK](/docs/en/agent-sdk/overview), the messages read as follows, and the structured error code is `authentication_failed`:
+
+```text theme={null}
+Failed to authenticate: OAuth token revoked. Please log in again or contact your administrator.
+Failed to authenticate. API Error: 401 OAuth token has expired ...
+```
+
+Before v2.1.287, in non-interactive mode and the Agent SDK, the revoked message read `Your account does not have access to Claude. Please login again or contact your administrator.`
+
 **What to do:**
 
-* Run `/login` to sign in again
-* If the error returns within the same session after re-authenticating, run `/logout` first to fully clear the stored token, then `/login`
+* Run `/login` at the Claude Code prompt to sign in again
+* If your `-p` command or Agent SDK program uses a saved login, run `claude` in the same environment, complete `/login`, then run the command or program again. For automation that can't sign in interactively, authenticate with [`ANTHROPIC_API_KEY`](/docs/en/env-vars) or [generate a long-lived token with `claude setup-token`](/docs/en/authentication#generate-a-long-lived-token).
 * If you authenticate with the `CLAUDE_CODE_OAUTH_TOKEN` environment variable, Claude Code keeps sending the value you set after a request fails with a 401, rather than switching to a stored login's token. [`/status`](/docs/en/commands) shows this credential as an `Auth token` row reading `CLAUDE_CODE_OAUTH_TOKEN`. Generate a fresh token with [`claude setup-token`](/docs/en/authentication#generate-a-long-lived-token) and restart with it, or unset the variable and run `/login`. Before v2.1.225, Claude Code could replace the variable's value mid-session with the short-lived access token from a stored login, and the session failed with 401 errors again once that token expired.
 * For repeated prompts to log in across launches, see the system clock checks and macOS credential-storage recovery steps in [Troubleshooting](/docs/en/troubleshoot-install#not-logged-in-or-token-expired)
 * For other failures including `403 Forbidden` and OAuth browser issues, see [Login and authentication](/docs/en/troubleshoot-install#login-and-authentication)
@@ -1169,7 +1217,7 @@ Please run /login · API Error: 401 Invalid authentication credentials
 
 ### Login expired
 
-Claude Code tried to renew your saved claude.ai or Claude Console login and the OAuth service rejected the stored refresh token, so Claude Code cleared the saved credentials. After that, each model request stops locally with this message before it reaches the API, because only `/login` can create new credentials.
+Claude Code tried to renew your saved claude.ai login and the OAuth service rejected the stored refresh token, so Claude Code cleared the saved credentials. After that, each model request stops locally with this message before it reaches the API, because only `/login` can create new credentials.
 
 Before v2.1.206, Claude Code sent the model request anyway with whatever credential remained in the environment, and every model then failed with [There's an issue with the selected model](#theres-an-issue-with-the-selected-model) or a 401 instead of a prompt to sign in.
 
@@ -1192,6 +1240,7 @@ You can check for this state before a request fails: [`/status`](/docs/en/comman
 **What to do:**
 
 * Run `/login` to sign in again. Retrying without signing in shows the same message on every request.
+* If you sign in with your claude.ai account in another Claude Code window, see [Not logged in](#not-logged-in) for when this session starts using that login on its own.
 * In non-interactive mode, run `claude` in the same environment, complete `/login`, then rerun your command. For automation that can't sign in interactively, authenticate with `ANTHROPIC_API_KEY` or [generate a long-lived token with `claude setup-token`](/docs/en/authentication#generate-a-long-lived-token).
 * If signing in keeps failing, see [Login and authentication](/docs/en/troubleshoot-install#login-and-authentication)
 
@@ -1237,6 +1286,21 @@ The first form appears on macOS and the second everywhere else. A transient cred
 * On macOS, unlock the login keychain, then run `/login` again
 * On other platforms, run `/login` again
 * If the login still doesn't save, see [Not logged in or token expired](/docs/en/troubleshoot-install#not-logged-in-or-token-expired) for the keychain unlock command and other credential-storage recovery steps
+
+### Failed to start OAuth callback server
+
+When `/login`, `claude auth login`, or `claude setup-token` signs you in through the browser, Claude Code opens a listening port on `127.0.0.1` so your browser can return the sign-in result to it. This message means Claude Code couldn't open that port, and the sign-in stops before a browser window or login URL appears:
+
+```text theme={null}
+Failed to start OAuth callback server: Failed to start server. Is port 0 in use?
+```
+
+If your message ends with `Is port 0 in use?`, the attempt to listen on the IPv4 loopback address `127.0.0.1` failed outright. Because the failure happens before a login URL exists, the `Paste code here if prompted` flow isn't available as a workaround.
+
+**What to do:**
+
+* To sign in right away without the local listener: if you use a claude.ai subscription, run [`claude setup-token`](/docs/en/authentication#generate-a-long-lived-token) on a machine where sign-in works and set the token it prints as `CLAUDE_CODE_OAUTH_TOKEN` on this machine. Otherwise set `ANTHROPIC_API_KEY` to a key from the [Claude Console](https://platform.claude.com/settings/keys). [Authentication precedence](/docs/en/authentication#authentication-precedence) explains how Claude Code chooses between credentials.
+* To use browser sign-in on this machine instead, Claude Code must be able to listen on `127.0.0.1`. If it runs inside a sandbox, check that the sandbox's policy allows listening on local ports, then run `/login` again. If it should be able to and still fails, run `/feedback` so the report includes your environment details.
 
 ### Claude login not accepted
 
@@ -1284,23 +1348,27 @@ Not signed in to the Cloud gateway — run /login.
 
 Model requests fail with this message when the session has no gateway sign-in, for example because you haven't run `/login` since the policy reached the machine.
 
-If the machine also holds an Anthropic-issued credential and the managed settings set `forceLoginMethod` or `forceLoginOrgUUID`, Claude Code exits at startup instead. That credential can be an `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` variable, an `apiKeyHelper` setting, or an API key saved by an earlier Claude Console login. The message begins:
+If the machine also holds an Anthropic-issued credential and the managed settings set `forceLoginMethod` or `forceLoginOrgUUID`, Claude Code exits at startup instead. That credential can be an `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` variable, an `apiKeyHelper` setting, or an API key saved by an earlier Claude Console login.
+
+The startup message names the credential the session is configured with, where it's set, and the step that removes it. For example, with an `ANTHROPIC_API_KEY` variable set in your shell, it reads:
 
 ```text theme={null}
-Administrator policy requires a Cloud gateway sign-in on this machine; the
-Anthropic-issued credential configured here (ANTHROPIC_API_KEY,
-ANTHROPIC_AUTH_TOKEN, or apiKeyHelper) is not used.
+Administrator policy requires a Cloud gateway sign-in on this machine, but this session is configured with an API key from ANTHROPIC_API_KEY, which a gateway machine does not accept.
+
+To continue: unset ANTHROPIC_API_KEY (or run in a shell without it), then run claude and sign in with /login.
 ```
 
 **What to do:**
 
-* Run `/login` and complete the sign-in on the **Cloud gateway** screen
-* For the startup message, remove the `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` setting you configured. To remove a saved Console API key, run `claude auth logout`, which also removes a saved claude.ai login. If you select a cloud provider with `CLAUDE_CODE_USE_*`, the session then starts with no sign-in. Otherwise start `claude` and run `/login`
+* For `Not signed in to the Cloud gateway`, run `/login` and complete the sign-in on the **Cloud gateway** screen
+* For the startup message, remove the credential by following the steps at the end of the message
 * If you believe the machine shouldn't require the gateway, ask the administrator who manages it to remove `forceLoginMethod` and `forceLoginGatewayUrl` from its managed settings
+
+Before v2.1.284, the startup message listed the possible credentials instead of naming the configured one. It began `Administrator policy requires a Cloud gateway sign-in on this machine; the Anthropic-issued credential configured here (ANTHROPIC_API_KEY, ANTHROPIC_AUTH_TOKEN, or apiKeyHelper) is not used.` If you see that wording and can't tell which credential to remove, update to v2.1.284 or later and start `claude` again.
 
 On v2.1.265, a regression also showed the first message in some LLM-gateway and proxy configurations that authenticate with an API key, `apiKeyHelper`, or custom headers, even with no administrator requirement on the machine. Update to v2.1.266 or later. You don't need to change your configuration.
 
-Before v2.1.261, on machines that set `forceLoginMethod` to `"gateway"`, Claude Code used a leftover saved login instead of failing model requests, and reported a configured environment credential with `This machine's managed settings require a first-party login` instead of the startup message. Before v2.1.265, a machine whose managed settings set only `forceLoginGatewayUrl` didn't require the gateway sign-in, and Claude Code used a leftover credential there.
+Before v2.1.261, on machines that set `forceLoginMethod` to `"gateway"`, Claude Code used a leftover saved login instead of failing model requests, and reported a configured environment credential with `This machine's managed settings require a first-party login` instead of the startup message.
 
 ### Your account is on hold
 
@@ -1327,7 +1395,7 @@ Anthropic profile login expired · Re-authenticate your Anthropic profile
 Anthropic profile login expired · Run /login to use your claude.ai account instead, or re-authenticate the profile
 ```
 
-This appears only when the active credential comes from an Anthropic credential profile, one you select with the `ANTHROPIC_PROFILE` environment variable, that Claude Code discovers as the active profile in your Anthropic configuration directory, or that Claude Code wrote when you [signed in without an API key](/docs/en/authentication#sign-in-without-an-api-key). Sessions that authenticate with `/login`'s claude.ai option, an API key, a bearer token such as `ANTHROPIC_AUTH_TOKEN`, or a third-party provider never see this message.
+This appears only when the active credential comes from an Anthropic credential profile, one you select with the `ANTHROPIC_PROFILE` environment variable, that Claude Code discovers as the active profile in your Anthropic configuration directory, or that Claude Code wrote when you [signed in without an API key](/docs/en/authentication#sign-in-without-an-api-key). Sessions that authenticate with an API key, a bearer token such as `ANTHROPIC_AUTH_TOKEN`, or a third-party provider never see this message.
 
 On a machine that [offers the keyless sign-in](/docs/en/authentication#sign-in-without-an-api-key), run `/login`, choose the Anthropic Console account, and sign in again to renew a profile that the keyless Console sign-in or the Claude Platform CLI's `ant auth login` wrote. Claude Code replaces the expired credential in that profile. For a federation profile or one another tool created, `/login` doesn't renew the credential. Which form you see depends on whether you selected the profile or Claude Code discovered it:
 
@@ -1343,7 +1411,7 @@ On a machine that [offers the keyless sign-in](/docs/en/authentication#sign-in-w
 
 ### OAuth scope requirement
 
-The stored token predates a permission scope that a newer feature needs. You see this most often from `/usage` and the status line usage indicator:
+The stored token predates a permission scope that a newer feature needs:
 
 ```text theme={null}
 OAuth token does not meet scope requirement: user:profile
@@ -1355,7 +1423,7 @@ OAuth token does not meet scope requirement: user:profile
 
 ### claude.ai rejected the session token
 
-A [claude.ai connector](/docs/en/mcp#use-mcp-servers-from-claude-ai) request failed because claude.ai rejected the token from your Claude Code login, usually a login that expired and couldn't be refreshed. The rejected token is your login, not the connector's own authorization in claude.ai, so authorizing the connector again doesn't resolve it. In `/mcp`, the connector shows as `connected · session token rejected` and its detail view reads:
+A [claude.ai connector](/docs/en/mcp#use-mcp-servers-from-claude-ai) request failed because claude.ai rejected the token from your Claude Code login. The rejected token is your login, not the connector's own authorization in claude.ai, so authorizing the connector again doesn't resolve it. In `/mcp`, the connector shows as `session token rejected` and its detail view reads:
 
 ```text theme={null}
 claude.ai rejected the session token. Run /login, then reconnect.
@@ -1410,6 +1478,18 @@ When the server's configuration sets neither [`oauth.scopes`](/docs/en/mcp#restr
 
 Before v2.1.274, this case showed the `needs you to sign in again` message, and before v2.1.273 it showed `requires re-authorization (token expired)` like the other cases.
 
+### MCP server URL is missing or not a valid URL
+
+Claude Code refused to start an OAuth sign-in for a remote MCP server because the server's configured `url` doesn't parse as a URL. Unless Claude Code has a more specific configuration problem to report for the server, running [`claude mcp login <name>`](/docs/en/mcp#authenticate-from-the-command-line) in your shell prints the refusal as:
+
+```text theme={null}
+Couldn't complete authentication for "<name>": This server's URL is missing or not a valid URL, so sign-in can't start. Fix the URL in its MCP config (or set the environment variable it uses) and try again.
+```
+
+**What to do:**
+
+* Set the entry's `url` to the server's real endpoint where the server is configured, or set the environment variable that its [`${VAR}` reference](/docs/en/mcp#environment-variable-expansion-in-mcp-json) names, then run the sign-in again.
+
 ### Issuer mismatch in authorization response
 
 During an [MCP OAuth sign-in](/docs/en/mcp#authenticate-with-remote-mcp-servers), the authorization server redirected back to Claude Code with an `iss` parameter that doesn't name the issuer that Claude Code expected from the server's OAuth metadata. A wrong issuer at this step is how an authorization server mix-up attack looks, so Claude Code fails the sign-in instead of exchanging the authorization code. Claude Code shows the error in the `/mcp` server menu after the browser sign-in:
@@ -1427,6 +1507,23 @@ Issuer mismatch in authorization response (RFC 9207): expected "https://auth.exa
 * To connect while the server is being fixed, start Claude Code with [`MCP_SDK_GENERATION=v1`](/docs/en/env-vars), whose [runtime](/docs/en/mcp#mcp-client-runtimes) doesn't run this check. This removes a protection against mix-up attacks, so prefer the server-side fix
 
 Before v2.1.232, Claude Code used the v2 runtime only in a gradual rollout or when you set `MCP_SDK_GENERATION=v2`.
+
+### Refusing to send credentials to non-https token endpoint
+
+On the [v2 runtime](/docs/en/mcp#mcp-client-runtimes), Claude Code sends an [MCP OAuth](/docs/en/mcp#authenticate-with-remote-mcp-servers) token request only to a token endpoint served over HTTPS or at `localhost`, `127.0.0.1`, or `::1`. This message means the server's token endpoint is neither, so Claude Code stopped before sending the request. That happens after the browser sign-in, so the browser step succeeds first, and again whenever Claude Code refreshes the server's token.
+
+In its full form, the message comes from the MCP SDK and quotes the token endpoint it refused. In the debug log, it follows `Error during auth completion:` for a sign-in or `Token refresh failed:` for a refresh. In your shell, `claude mcp login <name>` prints it after `Couldn't complete authentication for "<name>":`, and in a session, `/mcp` shows it under the server's menu:
+
+```text theme={null}
+Refusing to send credentials to non-https token endpoint 'http://192.168.1.50:8123/oauth/token'. OAuth token requests MUST use TLS (localhost / 127.0.0.1 / ::1 are exempt).
+```
+
+Claude Code treats a server URL that has a query string or a long random-looking path segment as possibly secret. For such a server, it redacts the sign-in errors the MCP SDK raises before it shows or logs them. This error then reads as a short name that can change between releases, such as `io`, followed by `from the MCP SDK for` and the redacted server URL. Other errors from the MCP SDK take the same shape there. The redacted message can be this error only when the server's token endpoint is plain `http://` at an address other than `localhost`, `127.0.0.1`, or `::1`.
+
+**What to do:**
+
+* Serve that token endpoint over HTTPS, for example by putting the server behind a reverse proxy or tunnel that terminates TLS and configuring the server to advertise the `https://` address
+* To connect without changing the server, start Claude Code with [`MCP_SDK_GENERATION=v1`](/docs/en/env-vars), whose [runtime](/docs/en/mcp#mcp-client-runtimes) doesn't apply this rule and sends the token request over plain HTTP. That choice lasts until you exit and applies to every server. The v1 runtime also skips the [issuer check](#issuer-mismatch-in-authorization-response), so prefer serving the endpoint over HTTPS
 
 ### AWS credentials expired or invalid
 
@@ -1472,7 +1569,7 @@ Before v2.1.273, this message appeared only when `awsAuthRefresh` was configured
 * If the hint says credentials are managed by this environment, the app that launched Claude Code owns the credential and the other steps here don't apply: retry, or contact your administrator
 * Refresh your AWS credentials in case an expired credential is the cause: run the [`awsAuthRefresh`](/docs/en/amazon-bedrock#advanced-credential-configuration) command named in the message when one is set, or refresh your SSO sign-in, access keys, API key, or proxy token yourself
 * If your credentials are current, confirm the IAM permissions in [IAM configuration](/docs/en/amazon-bedrock#iam-configuration) are attached to the identity you're using and that the selected model is enabled for your account and region
-* Run `aws sts get-caller-identity` to confirm which identity your requests use; a stale `AWS_PROFILE` or default profile is a common cause of a permission mismatch
+* Run `aws sts get-caller-identity` to confirm which identity your requests use
 
 ### Google Cloud credentials expired or invalid
 
@@ -1560,7 +1657,7 @@ Before v2.1.207, a stalled chain left the request waiting indefinitely instead o
 **What to do:**
 
 * Run `aws sts get-caller-identity` in the same shell with the same `AWS_PROFILE`. If it also hangs, fix the profile; a `credential_process` command that prompts interactively is a common cause.
-* Complete the sign-in step before starting Claude Code, for example `aws sso login --profile myprofile`, so the chain resolves from the local SSO cache instead of waiting on a browser flow
+* Complete the sign-in step before starting Claude Code, for example `aws sso login --profile myprofile`
 * If your chain runs an interactive sign-in that legitimately needs more than 60 seconds, such as SSO with MFA through a wrapper like `aws-vault`, raise the limit in milliseconds with [`CLAUDE_CODE_AWS_CHAIN_RESOLVE_TIMEOUT_MS`](/docs/en/env-vars)
 
 ### Bedrock setup verification timed out waiting for AWS
@@ -1652,7 +1749,6 @@ Can't reach the API server — check your internet or DNS (ENOTFOUND)
 No internet route — check your connection or VPN (EHOSTUNREACH)
 Couldn't connect through your proxy (ERR_PROXY_TUNNEL) — the proxy refused the tunnel: check its credentials and that it allows this host
 Connection dropped (ECONNRESET)
-fetch failed
 Request timed out. Check your internet connection and proxy settings
 ```
 
@@ -1696,7 +1792,6 @@ Claude Code skips this check when a [managed settings file, MDM policy, or polic
 
 * If the message names a proxy variable, check that its value points at the right proxy and ask your network team to allow HTTPS connections through it to the host in the message. See [Network configuration](/docs/en/network-config).
 * Work through the checks in [Unable to connect to API](#unable-to-connect-to-api). The `curl` test and firewall guidance there apply to this check too.
-* If your organization signs in through a [cloud gateway](/docs/en/claude-apps-gateway) and this error appears on first run, update to Claude Code v2.1.247 or later.
 * If your network is open and the failure persists, Claude Code may not be [available in your country](https://www.anthropic.com/supported-countries)
 
 ### Socket is closed
@@ -1734,7 +1829,7 @@ Before v2.1.271, a reply that carried a valid API message under a non-JSON conte
 * Read the `Response:` clause to see which system answered. An HTML body, no Anthropic request id, or a named server such as `nginx` or `cloudflare` means that something between Claude Code and the API replied in its place
 * If you route through an [LLM gateway](/docs/en/llm-gateway-connect#troubleshoot-gateway-errors), test the route with a direct request and fix the hop that returns the non-API response
 * On a network with a sign-in page, such as guest Wi-Fi, complete the sign-in in a browser, then retry
-* If only the non-streaming route through your gateway is broken, set [`CLAUDE_CODE_DISABLE_NONSTREAMING_FALLBACK=1`](/docs/en/env-vars#variables) so a request that fails mid-stream goes to the normal retry path instead of this fallback, except when the streaming endpoint itself returns `404`, where Claude Code still falls back
+* If only the non-streaming route through your gateway is broken, set [`CLAUDE_CODE_DISABLE_NONSTREAMING_FALLBACK=1`](/docs/en/env-vars#variables) to turn off this fallback, except when the streaming endpoint itself returns `404`, where Claude Code still falls back
 
 ### Streaming response ended before any complete data was received
 
@@ -1810,9 +1905,9 @@ This is not a client-side network problem. Cloud sessions and [routines](/docs/e
 
 These steps change one of your own environments. An [organization-shared environment](/docs/en/cloud-environments#organization-shared-environments) opens read-only in the selector, so ask an Owner to change its network access from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings).
 
-* Open the routine for editing, or start a cloud session. Select the cloud icon showing your environment's name, such as **Default**, to open the selector. Hover over your environment and click the settings icon.
-* In the **Update cloud environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
-* Click **Save changes**. The next run uses the updated allowlist.
+* Open your environment for editing, either from the [routine's form](/docs/en/routines#environments-and-network-access) or from the [environment selector](/docs/en/cloud-environments#configure-your-environment) where you start cloud sessions.
+* In the **Edit environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
+* Click **Save changes**. The next run uses the updated allowlist. For a cloud session that's already open, see [when a network access change reaches existing sessions](/docs/en/cloud-environments#network-access).
 
 See [Network access](/docs/en/cloud-environments#network-access) for access levels and the default allowlist. Local CLI sessions are not affected by this policy.
 
@@ -1906,7 +2001,7 @@ After you agree to share your session transcript from a survey prompt, such as t
 Couldn't share the transcript.
 ```
 
-The upload must fit an 8 MiB limit. On a long session, Claude Code progressively drops parts of the share, the last request's model settings first, then the structured conversation and subagent transcripts, and shows this message only when no reduced version can be sent or a network or server error stops the upload. When Claude Code saves a local archive instead, the message means it couldn't write the archive.
+The upload must fit an 8 MiB limit. On a long session, Claude Code progressively drops parts of the share, the last request's model settings first, then the structured conversation and subagent transcripts, and shows this message when no reduced version can be sent or a network or server error stops the upload. When Claude Code saves a local archive instead, the message means it couldn't write the archive.
 
 **What to do:**
 
@@ -2011,7 +2106,6 @@ Before v2.1.162, Claude Code attempted the compaction anyway and surfaced the ba
 * Run `/context` to see a breakdown of what is consuming the window: system prompt, tools, memory files, and messages
 * Disable MCP servers you are not using with `/mcp disable <name>` to remove their tool definitions from context
 * Trim large `CLAUDE.md` memory files, or move instructions into [path-scoped rules](/docs/en/memory#path-specific-rules) that load only when relevant
-* Subagents inherit every MCP tool definition from the parent session, which can fill their context window before the first turn. Disable MCP servers you are not using before spawning subagents.
 * Auto-compact is on by default and normally prevents this error. If you turned it off in `/config` or with [`DISABLE_AUTO_COMPACT`](/docs/en/env-vars), turn it back on. If you keep it off, run `/compact` yourself before the window fills.
 
 See [Explore the context window](/docs/en/context-window) for an interactive view of how context fills up.
@@ -2038,23 +2132,6 @@ Both forms name `/clear` instead of `/compact` when you have set [`DISABLE_COMPA
 * For more ways to reduce usage, see [Prompt is too long](#prompt-is-too-long)
 
 Before v2.1.216, `/context` showed usage above 100% with no warning line explaining what that meant or how to recover.
-
-### Error during compaction: Conversation too long
-
-`/compact` itself failed because there is not enough free context to hold the summary it produces.
-
-```text theme={null}
-Error during compaction: Conversation too long. Press esc twice to go up a few messages and try again.
-```
-
-This can happen when the window is already full at the moment auto-compact triggers, or when you run `/compact` after seeing [`Prompt is too long`](#prompt-is-too-long). In an interactive session, that error is the `Context limit reached` line.
-
-**What to do:**
-
-* Press Esc twice to open the message list and step back several turns. This drops the most recent messages from context. Then run `/compact` again.
-* If stepping back doesn't free enough space, run `/clear` to start a fresh session. Your previous conversation is preserved and can be reopened with `/resume`.
-
-This message and other `/compact` failures display in error styling. Before v2.1.216, they rendered in the same dim style as successful command output, so you could read a failed compaction as a success.
 
 ### Request too large
 
@@ -2131,16 +2208,23 @@ The PDF file was not valid. Try converting it to text first (e.g., pdftotext).
 * For oversized PDFs, ask Claude to read a page range with the Read tool instead of attaching the whole file, or extract text with a tool like `pdftotext` and reference the output file by path
 * For protected or invalid PDFs, remove the password or re-export the file from its source application, then try again
 
+When Claude reads a page range from a PDF with the Read tool, the read can fail with a different message:
+
+```text theme={null}
+pdftoppm is not installed. Install poppler-utils (e.g. `brew install poppler` or `apt-get install poppler-utils`) to enable PDF page rendering.
+```
+
+Page-range reads render pages with `pdftoppm`. Install poppler-utils with the command the message gives, or on other platforms a poppler build that puts `pdftoppm` on your `PATH`. See [Read tool behavior](/docs/en/tools-reference#read-tool-behavior) for which PDFs are read by page range.
+
 ### Extra inputs are not permitted
 
 A proxy or LLM gateway between Claude Code and the API stripped the `anthropic-beta` request header, so the API rejected fields that depend on it.
 
 ```text theme={null}
 API Error: 400 ... Extra inputs are not permitted ... context_management
-API Error: 400 ... Unexpected value(s) for the `anthropic-beta` header
 ```
 
-Claude Code sends beta-only fields such as `context_management` and `effort` alongside an `anthropic-beta` header that enables them. When a gateway forwards the body but drops the header, the API sees fields it doesn't recognize.
+Claude Code sends beta-only fields such as `context_management` alongside an `anthropic-beta` header that enables them. When a gateway forwards the body but drops the header, the API sees fields it doesn't recognize.
 
 **What to do:**
 
@@ -2182,7 +2266,7 @@ A tool call in the conversation history carries a name longer than the 200 chara
 API Error: 400 ... tool_use.name: String should have at most 200 characters
 ```
 
-Claude Code cuts such a name to 200 characters when the response arrives and when it loads a saved conversation, so the call fails with an ordinary `No such tool available` tool error and the conversation continues without this API error.
+Claude Code cuts such a name to 200 characters when the response arrives and when it loads a saved conversation, so the call fails with a [`No such tool available`](#no-such-tool-available) tool error and the conversation continues without this API error.
 
 **What to do:**
 
@@ -2207,32 +2291,33 @@ There's an issue with the selected model (claude-...). It may not exist or you m
 * **Agent SDK**: the error text omits the hint because the model is set programmatically. Set [`model` on `Options`](/docs/en/agent-sdk/typescript#options) in TypeScript or [`ClaudeAgentOptions(model=...)`](/docs/en/agent-sdk/python#claudeagentoptions) in Python, and handle the structured `model_not_found` error to surface your own retry or model picker.
 * Use an alias such as `sonnet` or `opus` instead of a full versioned ID. Aliases resolve to a maintained default so they don't go stale. See [Model configuration](/docs/en/model-config).
 * If the wrong model keeps coming back in the CLI, a stale ID is set somewhere. Check the places you can set a model in [priority order](/docs/en/model-config#setting-your-model) and remove the stale value.
-* A newly launched model can be available on the Anthropic API before Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry offers it. If you pinned a new model ID on one of those providers and see this error, check your provider's model catalog for availability in your region, and keep the previous version pinned until the new one appears there.
 * Claude Code reports an expired claude.ai login as [Login expired](#login-expired), not as this error. Before v2.1.206, an expired login that could no longer be refreshed failed every model with this error; run `/login` if you see that on an older version.
 * For Google Cloud's Agent Platform deployments, see [Google Cloud's Agent Platform troubleshooting](/docs/en/google-vertex-ai#troubleshooting).
 
 ### Model is not a recognized model id
 
-The model string you passed to a model switch isn't a model alias, a model ID this Claude Code version knows, or an ID that starts with `claude-`. The usual causes are a typo in the ID, a display name such as `Sonnet 5` where the ID `claude-sonnet-5` is expected, or an alias that only newer Claude Code versions recognize. Claude Code rejects the switch immediately. Before v2.1.200, Claude Code saved the string and failed on the next request with [There's an issue with the selected model](#theres-an-issue-with-the-selected-model).
+The string you passed to a model switch isn't one Claude Code can use as a model, so it refused the switch without sending a request and the session keeps its current model. You can get this error when a model is set through the [Agent SDK](/docs/en/agent-sdk/typescript) `setModel()` method, by an app that runs the Claude Code CLI for you, such as the [Desktop app](/docs/en/desktop), or when you pick a model from a device connected through [Remote Control](/docs/en/remote-control). Before v2.1.200, Claude Code saved the string and failed on the next request with [There's an issue with the selected model](#theres-an-issue-with-the-selected-model).
 
 ```text theme={null}
-Model "claud-sonnet-5" is not a recognized model id. Did you mean 'claude-sonnet-5'?
+Model "Sonnet5" is not a recognized model id. Did you mean 'claude-sonnet-5'?
 ```
 
-The trailing hint names the closest matching alias or model ID. When nothing is close enough, it reads `Run /model to see available models.` instead. In a session that the [Desktop app](/docs/en/desktop) starts for you, the no-match hint reads `Switch to a different model.`
+In this example an app sent the display name `Sonnet 5`, which the message repeats without its space. The trailing hint names the closest matching alias or model ID. When nothing is close enough, it reads `Run /model to see available models.` instead. In a session that the [Desktop app](/docs/en/desktop) starts for you, the no-match hint reads `Switch to a different model.`
 
-Claude Code produces this error locally at the moment the switch is requested, before any API request is made. It applies when a model is set through the [Agent SDK](/docs/en/agent-sdk/typescript) `setModel()` method, by an app such as the [Desktop app](/docs/en/desktop) that runs the Claude Code CLI for you, or when you pick a model from a device connected through [Remote Control](/docs/en/remote-control). Before v2.1.260, the check didn't cover Remote Control picks, so Claude Code applied the pick and the next request failed with [There's an issue with the selected model](#theres-an-issue-with-the-selected-model).
+When you switch through the Agent SDK or an app on the Anthropic API, only a string that can't be a model ID gets this error, such as a display name or an empty string.
+
+When you pick a model from a Remote Control device, Claude Code checks the string locally. Any string that isn't a model alias, a model Claude Code lists or you configured, or an ID that starts with `claude-` gets this error, a mistyped ID such as `claud-sonnet-5` included. Before v2.1.260, this check didn't cover Remote Control picks, so an unrecognized string was applied and failed on the next request.
 
 **What to do:**
 
 * Run `/model` with no argument to open the picker and choose from the models available to your account, then pass the alias or ID shown there
-* If you used an alias that a newer Claude Code version supports, run `claude update`. A full ID that starts with `claude-` passes this local check even when the model is newer than your Claude Code version. The server can still require a minimum version for that model; see [Claude Code does not support this model](#claude-code-does-not-support-this-model).
+* If you used an alias that only a newer Claude Code version supports, run `claude update`, or pass the model's full ID instead. The server can still require a minimum Claude Code version for that model; see [Claude Code does not support this model](#claude-code-does-not-support-this-model).
 * A model saved before v2.1.200 isn't repaired by this check. If a stale value keeps coming back, remove it from the locations listed under [Setting your model](/docs/en/model-config#setting-your-model).
-* The check runs only on the Anthropic API. On any other provider or gateway, including a custom `ANTHROPIC_BASE_URL`, the provider defines the model names, so Claude Code accepts any string and passes it through. Claude Code can still write the [unrecognized-model diagnostic line](#unrecognized-model-id-on-a-request) at request time, on every provider.
+* On any provider other than the Anthropic API, or behind a gateway or custom `ANTHROPIC_BASE_URL`, only an empty string gets this error. Claude Code can still write the [unrecognized-model diagnostic line](#unrecognized-model-id-on-a-request) at request time, on every provider.
 
 ### Model not found
 
-You picked a model with `/model <name>` and Claude Code couldn't confirm that a model with that name exists. When the name isn't a [model alias](/docs/en/model-config#model-aliases) or another spelling Claude Code accepts locally, `/model` verifies it with a minimal API request, and this error is usually your API endpoint's answer. A name that can't be a model ID at all, such as one containing spaces, gets the same message.
+You switched to a model by name and Claude Code couldn't confirm that a model with that name exists. When the name isn't a [model alias](/docs/en/model-config#model-aliases) or another spelling Claude Code accepts locally, Claude Code verifies it with a minimal API request, and this error is usually your API endpoint's answer. With `/model <name>`, a name that can't be a model ID at all, such as one containing spaces, gets the same message.
 
 ```text theme={null}
 Model 'claude-opus-9' not found
@@ -2244,7 +2329,25 @@ On providers with provider-specific model IDs, the message may add a `Try '...' 
 
 * Run `/model` with no argument and pick from the models available to your account, or use a [model alias](/docs/en/model-config#model-aliases) such as `sonnet`, which resolves to a maintained default
 * If you typed a full ID, check it against your provider's model catalog. A newly launched model can be available on the Anthropic API before your provider or region offers it.
+* In the Agent SDK, `setModel()` fails with this message and the session keeps running on its previous model. In the TypeScript SDK, call [`supportedModels()`](/docs/en/agent-sdk/typescript#query-object) to list the models you can switch to.
 * Before v2.1.265, `/model` also rejected the `opusplan[1m]` alias spelling with this error. On those versions, update Claude Code, or set the model in [settings](/docs/en/model-config#setting-your-model) or with `--model` instead.
+
+<h3 id="couldnt-confirm-model-with-the-api">
+  Couldn't confirm model with the API
+</h3>
+
+You switched models through the [Agent SDK](/docs/en/agent-sdk/typescript) `setModel()` method or an app that runs the Claude Code CLI for you, such as the [Desktop app](/docs/en/desktop), and the request that confirms the model ID with your API endpoint got no answer within five seconds. The session keeps its current model.
+
+```text theme={null}
+Couldn't confirm model "claude-sonnet-5" with the API. Try again, or run /model to see available models.
+```
+
+In a session that the [Desktop app](/docs/en/desktop) starts for you, the message ends at `Try again.`
+
+**What to do:**
+
+* Switch to the model again
+* If the switch keeps failing, check that Claude Code can reach your API endpoint; see [Network and connection errors](#network-and-connection-errors)
 
 <h3 id="api-error-model-not-changed">
   API error when checking the picked model
@@ -2293,10 +2396,21 @@ The organization-policy wording reads:
 API Error: 400 Claude Code 2.1.240 is older than the minimum version required by your organization's policy. Run 'claude update', or update the Claude desktop app, to continue.
 ```
 
+The version the API checks is the one reported by the Claude Code binary that made the request.
+
 **What to do:**
 
-* Run `claude update`, or update the Claude desktop app, then start a new session
-* For the per-model wording, you can keep working in the current session by switching to another model with `/model`
+Update that binary, then start a new session. Where the binary came from decides how, except in a [self-hosted environment](/docs/en/self-hosted-environments-deploy#pin-the-version):
+
+| The binary that made the request | How to update it |
+| :- | :- |
+| A Claude Code you installed | Run `claude update` |
+| The Claude desktop app | Update the app |
+| The binary the [VS Code extension](/docs/en/vs-code) bundles | Update the extension |
+| The binary an Agent SDK package bundles | [Upgrade the SDK package](/docs/en/agent-sdk/hosting#runtime-dependencies), then restart your application. In a [compiled single-file executable](/docs/en/agent-sdk/typescript#compile-to-a-single-executable), rebuild it |
+
+* If you run `claude update` on the [stable release channel](/docs/en/setup#configure-release-channel), it doesn't move you past the newest stable release, which can still be below the required minimum. Move to the latest channel, then update again. If your organization pins your channel or version through [managed settings](/docs/en/managed-settings), ask your admin to change it
+* For the per-model wording, you can keep working in the current session by switching to another model: run `/model` in the CLI, call [`setModel()`](/docs/en/agent-sdk/typescript#query-object) on the TypeScript SDK's `Query` object in streaming input mode, or call [`set_model()`](/docs/en/agent-sdk/python#claudesdkclient) on the Python SDK's `ClaudeSDKClient`
 * For the organization-policy wording, update before you continue
 
 <h3 id="model-is-restricted-by-your-organizations-settings">
@@ -2320,6 +2434,30 @@ Claude Code treats a model family alias, one of `opus`, `sonnet`, `haiku`, or `f
 * Run `/model` to pick from the models your organization allows. Restricted models are hidden from the picker.
 * If the restricted model was set in `--model`, `ANTHROPIC_MODEL`, the `model` field of a settings file, or the `model` frontmatter of a [subagent](/docs/en/sub-agents#choose-a-model), skill, or command, remove or update that value so the notice doesn't recur
 * If you need access to the restricted model, ask your organization admin to enable it. See [Organization model restrictions](/docs/en/model-config#organization-model-restrictions).
+
+<h3 id="cant-switch-to-the-default-model">
+  Can't switch to the default model
+</h3>
+
+You picked the Default model, for example by selecting the Default row in the `/model` picker or typing `/model default`. Claude Code refused the switch, so the session keeps its current model.
+
+```text theme={null}
+Can't switch to the default model: your organization's managed settings block it (claude-opus-4-6) in "deniedModels", and none of the models they allow can be used as the default instead. Ask your administrator to update "deniedModels" or "availableModels".
+```
+
+The wording after the colon names what blocked the switch:
+
+* **`your organization's managed settings block it ... in "deniedModels"`**: a managed deny list blocks the model the Default option resolves to
+* **`your organization allows only the models listed in "availableModels"`**: a managed [`availableModels`](/docs/en/model-config#restrict-model-selection) allowlist with [`availableModelsMatch`](/docs/en/settings-reference#availablemodelsmatch) set to `"exact"` leaves out the model the Default option resolves to
+* **`Claude Code couldn't read your organization's managed settings to check which models they allow`**: the [managed settings](/docs/en/managed-settings) couldn't be read, and Claude Code refuses the switch rather than apply it unchecked
+
+**What to do:**
+
+* For the [`deniedModels`](/docs/en/settings-reference#deniedmodels) and `availableModels` wordings, run `/model` and pick a model your organization allows by name
+* Ask your administrator to update the managed setting the message names
+* For the `couldn't read` wording, restart Claude Code; if it keeps happening, ask your administrator to check the managed settings
+
+If a session instead fails to start with a `Claude Code can't start` message under these managed settings, see [Managed settings block the default model](#managed-settings-block-the-default-model).
 
 ### Model switch was blocked by a PreModelSwitch hook
 
@@ -2358,6 +2496,27 @@ A notice ending `couldn't confirm it was saved as your default (~/.claude/settin
 
 Before v2.1.265, the notice said the model was `saved as your default for new sessions` even when the write failed.
 
+### Advisor is less capable than the current main model
+
+Your [advisor model](/docs/en/advisor) ranks below your session's main model, so Claude Code keeps the selection but doesn't attach the advisor to the main model's requests.
+
+```text theme={null}
+Advisor set to Opus 4.8
+Note: Opus 4.8 is less capable than the current main model (Sonnet 5.5), so the advisor will not activate. Choose a more capable advisor, or switch to a smaller main model.
+```
+
+Other messages report the same condition:
+
+* In an interactive session, a notification reads `Advisor will not activate on the main model (advisor is less capable); subagents may still use it and may use more tokens · /advisor`.
+* At launch with the `--advisor` flag, a warning reads `"<advisor>" cannot advise "<main model>" (the advisor must be at least as capable as the main model). The advisor will not be used for the main model.` and the session starts anyway.
+
+**What to do:**
+
+* Choose a higher-ranked advisor or a lower-ranked main model. [Choose an advisor model](/docs/en/advisor#choose-an-advisor-model) shows the ranking and lists the accepted advisors for each main model.
+* Leave the advisor set if you want [subagents](/docs/en/sub-agents) whose model it can advise to keep using it
+
+Before v2.1.287, Claude Code ranked several pairings differently. It showed this note for a Sonnet 5.5 advisor with an Opus 4.7 or Opus 4.8 main model, a pairing it now accepts. It also attached some advisors that now produce this note, such as an Opus 4.8 advisor with a Sonnet 5.5 main model.
+
 ### thinking.type.enabled is not supported for this model
 
 Your Claude Code version is older than the minimum for the selected model. The CLI sent a thinking configuration the model no longer accepts.
@@ -2368,9 +2527,10 @@ API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use 
 
 **What to do:**
 
-* Run `claude update` and restart Claude Code. Opus 4.7 needs v2.1.111 or later. Opus 4.8 needs v2.1.154 or later. Sonnet 5 needs v2.1.197 or later. Opus 5 needs v2.1.219 or later. Opus 5.5 needs v2.1.280 or later
+* Run `claude update` and restart Claude Code. Opus 4.7 needs v2.1.111 or later. Opus 4.8 needs v2.1.154 or later. Sonnet 5 needs v2.1.197 or later. Opus 5 needs v2.1.219 or later. Opus 5.5 needs v2.1.280 or later. Sonnet 5.5 needs v2.1.284 or later
+* On the [stable release channel](/docs/en/setup#configure-release-channel), updating doesn't move you past the newest stable release, which can still be older than these versions. Move to the latest channel, then update
 * If you can't upgrade, run `/model` and select Opus 4.6 or Sonnet 4.6 instead
-* If you hit this in the [Agent SDK](/docs/en/agent-sdk/overview), upgrade the SDK package instead. Opus 4.8 needs TypeScript SDK v0.3.154 or later and Python SDK v0.2.88 or later. Sonnet 5 needs TypeScript SDK v0.3.197 or later. Opus 5 needs TypeScript SDK v0.3.219 or later. Opus 5.5 needs TypeScript SDK v0.3.280 or later
+* If you hit this in the [Agent SDK](/docs/en/agent-sdk/overview), upgrade the SDK package instead. Opus 4.8 needs TypeScript SDK v0.3.154 or later and Python SDK v0.2.88 or later. Sonnet 5 needs TypeScript SDK v0.3.197 or later. Opus 5 needs TypeScript SDK v0.3.219 or later. Opus 5.5 needs TypeScript SDK v0.3.280 or later. Sonnet 5.5 needs TypeScript SDK v0.3.284 or later
 
 <h3 id="effort-isnt-available-with-thinking-turned-off">
   Effort isn't available with thinking turned off
@@ -2389,7 +2549,7 @@ The hint after the `·` varies by session: in a non-interactive session it reads
 * [Lower the effort level](/docs/en/model-config#set-the-effort-level) to `high` or below.
 * Turn thinking back on, for example by unsetting [`MAX_THINKING_TOKENS`](/docs/en/env-vars) or removing [`"alwaysThinkingEnabled": false`](/docs/en/settings-reference#alwaysthinkingenabled) from your settings.
 
-Before v2.1.242, Claude Code showed the API's own message: `API Error: 400 output_config.effort 'xhigh' is not supported when thinking is disabled on this model. Use effort 'high' or below, or enable thinking.` Before v2.1.251, Claude Code sent the request at the effort level you set, so Opus 5 rejected every request above `high` with thinking turned off. Claude Code now sends effort `high` instead to models it knows reject the combination, such as Opus 5, so on v2.1.251 or later this error reaches you only from a model Claude Code doesn't know rejects it.
+Before v2.1.242, Claude Code showed the API's own message: `API Error: 400 output_config.effort 'xhigh' is not supported when thinking is disabled on this model. Use effort 'high' or below, or enable thinking.` Before v2.1.251, Claude Code sent the request at the effort level you set, so Opus 5 rejected every request above `high` with thinking turned off. Claude Code now sends effort `high` instead to models it knows reject the combination, such as Opus 5.
 
 ### Thinking budget exceeds output limit
 
@@ -2399,16 +2559,14 @@ The configured extended thinking budget exceeds the maximum response length, so 
 API Error: 400 ... max_tokens must be greater than thinking.budget_tokens
 ```
 
-Claude Code adjusts these values automatically on the Anthropic API. You typically see this error on Amazon Bedrock or Google Cloud's Agent Platform when [`MAX_THINKING_TOKENS`](/docs/en/env-vars) is set higher than the provider's output limit, or when plan mode raises the thinking budget.
-
 **What to do:**
 
-* Lower `MAX_THINKING_TOKENS`, or raise [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](/docs/en/env-vars) above the thinking budget
+* Raise [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](/docs/en/env-vars) above the thinking budget
 * See [Extended thinking](/docs/en/model-config#extended-thinking) for how the budget interacts with output length
 
 ### Tool use or thinking block mismatch
 
-The conversation history reached the API in an inconsistent state, usually after a tool call was interrupted or a turn was edited mid-stream.
+The conversation history reached the API in an inconsistent state.
 
 ```text theme={null}
 API Error: 400 due to tool use concurrency issues. Run /rewind to recover the conversation.
@@ -2469,12 +2627,12 @@ API Error: 400 messages.6: role 'system' must precede an 'assistant' message or 
 
 Claude Code sends some of its reminder and attachment text as system messages inside the conversation. When the API refuses one's position, Claude Code retries the request once with that text sent as ordinary user messages instead. The API's sibling placement wordings, such as `use the top-level 'system' parameter for the initial system prompt`, get the same recovery.
 
-When the error does appear, the refused system message isn't one Claude Code can remove. That usually means a proxy or [LLM gateway](/docs/en/llm-gateway) between Claude Code and the API added a system message of its own or reordered the conversation.
+When the error does appear, the refused system message isn't one Claude Code can remove. That usually means a proxy or [LLM gateway](/docs/en/llm-gateway) between Claude Code and the API added a system message of its own.
 
 **What to do:**
 
-* Run `/clear` to start a fresh conversation. If the error returns there too, the cause is on the request path, not in the saved conversation.
 * If the error repeats on every turn behind a proxy or gateway configured through [`ANTHROPIC_BASE_URL`](/docs/en/env-vars), connect without the proxy to confirm the source, and report the error to whoever operates it
+* Run `/clear` to start a fresh conversation. If the error returns there too, the cause is on the request path, not in the saved conversation.
 
 Before v2.1.280, Claude Code didn't recognize this wording, so the error also appeared when the refused system message was one Claude Code itself sent, and every later turn of the conversation failed the same way.
 
@@ -2535,7 +2693,7 @@ The model's safety measures flagged content in the conversation as a cybersecuri
 API Error: Opus 4.8's safeguards flagged this message. Our intentionally broad safeguards allow us to deliver more capabilities faster, but can sometimes flag legitimate cybersecurity work. Apply to the Cyber Verification Program to reduce these interruptions. Send feedback with /feedback or learn more: https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude
 ```
 
-The message links to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude), which grants access for legitimate cybersecurity work. On Opus 5.5, which requires v2.1.280 or later, the message opens with `Opus 5.5's safeguards flagged this session` instead. When the flagged category has a fallback model available, Claude Code [switches models](/docs/en/model-config#automatic-model-fallback) rather than showing this error.
+The message links to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude), which grants access for legitimate cybersecurity work. On Opus 5.5 and Sonnet 5.5, the message opens with `<model>'s safeguards flagged this session` instead. When the flagged category has a fallback model available, Claude Code [switches models](/docs/en/model-config#automatic-model-fallback) rather than showing this error.
 
 On [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's Agent Platform](/docs/en/google-vertex-ai), and [Microsoft Foundry](/docs/en/microsoft-foundry), a cybersecurity flag produces the [Usage Policy refusal](#usage-policy-refusal) message instead.
 
@@ -2548,6 +2706,21 @@ Before v2.1.203, it read `<model>'s safeguards flagged this message for a cybers
 * If your work requires this content, apply for access through the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude)
 * If your request wasn't about a cybersecurity topic, run `/feedback` to report the false positive
 * To keep working in the same session, press Esc twice or run `/rewind` to step back to a checkpoint before the turn that triggered the flag, then take a different approach. See [Checkpointing](/docs/en/checkpointing).
+
+### Output blocked by content filtering policy
+
+The API's output content filter stopped the response Claude was generating. The message text comes from the API:
+
+```text theme={null}
+API Error: Output blocked by content filtering policy
+```
+
+Claude Code shows the error as soon as the block arrives and ends the request there. It doesn't retry the request, re-send it without streaming, or switch to a [fallback model](/docs/en/model-config#fallback-model-chains). Before v2.1.285, Claude Code could re-send and retry a blocked request, sometimes for minutes, before showing you the error.
+
+**What to do:**
+
+* Rephrase your last message or take a different approach
+* To step back to a checkpoint before the turn that triggered the block, press Esc twice or run `/rewind`. See [Checkpointing](/docs/en/checkpointing)
 
 ## Installation errors
 
@@ -2571,7 +2744,7 @@ For any other fatal signal, and for exit code 137 on macOS, the script prints `I
 
 ### The connection dropped while downloading the update
 
-The connection to the download server closed while `claude install`, `claude update`, or the [automatic updater](/docs/en/setup#auto-updates) was fetching the Claude Code binary, and the retries didn't recover. Claude Code retries the download when the connection drops, the transfer stalls, or the downloaded file fails its checksum, up to three attempts in total. A completed HTTP error, such as a 404, isn't retried because the server already answered. Before v2.1.202, a single dropped connection failed the download immediately with the bare error `aborted` instead of retrying.
+The connection to the download server closed while `claude install` or `claude update` was fetching the Claude Code binary, and the retries didn't recover. Claude Code retries the download when the connection drops, the transfer stalls, or the downloaded file fails its checksum, up to three attempts in total. A completed HTTP error, such as a 404, isn't retried because the server already answered. Before v2.1.202, a single dropped connection failed the download immediately with the bare error `aborted` instead of retrying.
 
 ```text theme={null}
 The connection dropped while downloading the update (attempt 3/3: aborted). Check your network — proxies sometimes cut off large downloads.
@@ -2581,7 +2754,7 @@ The text in parentheses names which attempt failed and the underlying network er
 
 A download that stays connected but doesn't finish within 10 minutes fails with `Download timed out: exceeded the total deadline` instead. Claude Code doesn't retry a timed-out download, because a connection too slow to finish inside the deadline won't finish on an immediate retry either. The steps below apply to both messages.
 
-The usual cause is a proxy or gateway that closes a long transfer before it finishes. The Claude Code binary is a large download, so a proxy connection limit that never affects normal API traffic can still interrupt it.
+A proxy or gateway can close a long transfer before it finishes, and the Claude Code binary is a large download.
 
 **What to do:**
 
@@ -2594,7 +2767,9 @@ The usual cause is a proxy or gateway that closes a long transfer before it fini
 
 These errors come from the `claude` command line and its subcommands, from a command name you submit at the prompt, and from commands such as `/security-review` that gather context by running shell commands before their prompt runs. They also come from `/tui`, which relaunches the CLI.
 
-### Conflict between --bg and --print
+<h3 id="conflict-between-bg-and-print">
+  Conflict between `--bg` and `--print`
+</h3>
 
 This message requires Claude Code v2.1.198 or later. You combined `--bg` with `-p` or `--print` in the same `claude` invocation. `--bg` starts a [background session](/docs/en/agent-view#from-your-shell) that you later attach to with `claude agents`, while `--print` runs [non-interactively](/docs/en/headless) and never starts the interactive session that `claude agents` attaches to. Before v2.1.198 this combination silently created a background job that could never be attached to.
 
@@ -2607,11 +2782,27 @@ This message requires Claude Code v2.1.198 or later. You combined `--bg` with `-
 * Drop `-p` or `--print`. `--bg` takes the prompt as its positional argument, so `claude --bg "<task>"` is the complete command. See [Dispatch new agents from your shell](/docs/en/agent-view#from-your-shell).
 * To run the prompt non-interactively and print the result instead of creating a background session, drop `--bg` and run `claude -p "<task>"`
 
-<h3 id="invalid-agents-configuration">
-  Invalid --agents configuration
+<h3 id="conflict-between-a-system-prompt-flag-and-its-file-form">
+  Conflict between a system prompt flag and its file form
 </h3>
 
-The value you passed to `--agents` is invalid, so `claude` exits with code 1 instead of starting the session. When you pass `--safe-mode` or set [`CLAUDE_CODE_SAFE_MODE`](/docs/en/env-vars#variables), Claude Code ignores `--agents` entirely. With `--resume` or `--continue`, an inline JSON value isn't checked and the session starts; a value read from a file is checked on every launch. Before v2.1.242, Claude Code started the session anyway and left out the definitions it couldn't load.
+You passed [`--append-subagent-system-prompt`](/docs/en/cli-reference#cli-flags) together with `--append-subagent-system-prompt-file` in one `claude` invocation, so `claude` exits with code 1 instead of starting the session:
+
+```text theme={null}
+Error: Cannot use both --append-subagent-system-prompt and --append-subagent-system-prompt-file. Please use only one.
+```
+
+Before v2.1.283, `claude` exited the same way when you passed `--system-prompt` with `--system-prompt-file`, or `--append-system-prompt` with `--append-system-prompt-file`, because those pairs conflicted instead of [combining](/docs/en/cli-reference#system-prompt-flags). On those versions the message names the pair you combined.
+
+**What to do:**
+
+* Keep one form of the flag and drop the other. To combine a fixed prompt file with per-run text, merge the text into the file before launching instead of passing both flags
+
+<h3 id="invalid-agents-configuration">
+  Invalid `--agents` configuration
+</h3>
+
+The value you passed to `--agents` is invalid, so `claude` exits with code 1 instead of starting the session. When you pass `--safe-mode` or set [`CLAUDE_CODE_SAFE_MODE`](/docs/en/env-vars#variables), Claude Code ignores `--agents` entirely. With `--resume` or `--continue`, an inline JSON value isn't checked and the session starts; a value read from a file is checked on every launch. Before v2.1.242, Claude Code started the session anyway.
 
 ```text theme={null}
 Error: Invalid --agents configuration:
@@ -2636,7 +2827,7 @@ With `--print`, `--agents` also accepts [the path to a JSON file](/docs/en/sub-a
 * Fix each problem the message lists, then run the command again. See [the fields a CLI-defined subagent takes](/docs/en/sub-agents#choose-the-subagent-scope).
 
 <h3 id="cloud-sessions-cannot-be-created-from-a-restricted-session">
-  Cloud sessions cannot be created from a --restricted session
+  Cloud sessions cannot be created from a `--restricted` session
 </h3>
 
 When you start a session with [`--restricted`](/docs/en/cli-reference#cli-flags), Claude Code refuses to create [cloud sessions](/docs/en/claude-code-on-the-web#from-terminal-to-cloud) from it, because the new session would run outside the restricted process and wouldn't enforce restricted mode. Claude Code refuses on the client, before contacting the server, so no cloud session is created:
@@ -2673,7 +2864,9 @@ If Claude Code hasn't loaded your organization's policy yet or can't fetch it, t
 * Ask an [Owner](/docs/en/server-managed-settings#access-control) in your organization to enable cloud sessions in the Claude Code admin settings at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code)
 * If the message says it couldn't verify the policy, check your network connection, then restart Claude Code and try again
 
-### The --json-schema value is not a valid JSON Schema
+<h3 id="the-json-schema-value-is-not-a-valid-json-schema">
+  The `--json-schema` value is not a valid JSON Schema
+</h3>
 
 The schema you passed to [`--json-schema`](/docs/en/cli-reference#cli-flags) in [non-interactive mode](/docs/en/headless#get-structured-output) failed JSON Schema compilation, so `claude` exits with code 1 instead of running the prompt. Before v2.1.205, an invalid schema produced unstructured output with no error, and any schema that used the `format` keyword was treated as invalid.
 
@@ -2688,12 +2881,11 @@ Claude Code runs two checks before schema compilation: it rejects a value that i
 **What to do:**
 
 * Fix the part of the schema the diagnostic names, then rerun the command
-* If the diagnostic is `schema too large`, reduce the schema's nesting and `$ref` reuse
 * See [Get structured output](/docs/en/headless#get-structured-output) for a working schema and command
 
 ### Settings file exceeds the 2MiB limit
 
-The file you passed to [`--settings`](/docs/en/cli-reference#cli-flags) is larger than 2 MiB, so `claude` exits with code 1 at startup instead of loading it. A settings file is a small JSON document, so a file this large usually means the path points at the wrong file. Before v2.1.214, Claude Code read the file with no size check, and a multi-gigabyte file or a device file such as `/dev/zero` grew memory without bound.
+The file you passed to [`--settings`](/docs/en/cli-reference#cli-flags) is larger than 2 MiB, so `claude` exits with code 1 at startup instead of loading it. Before v2.1.214, Claude Code read the file with no size check, and a multi-gigabyte file or a device file such as `/dev/zero` grew memory without bound.
 
 ```text theme={null}
 Error: Settings file exceeds the 2MiB limit: /path/to/settings.json
@@ -2770,11 +2962,13 @@ Before v2.1.261, this message also appeared for every `/add-dir <subdirectory>` 
 
 ### Workspace not trusted when starting Remote Control
 
-You started [Remote Control](/docs/en/remote-control) server mode with `claude remote-control` or its `claude rc` alias in a directory you haven't trusted. The command doesn't show the workspace trust dialog itself, so it exits with code 1 and names the fix:
+You started [Remote Control](/docs/en/remote-control) server mode with `claude remote-control` or its `claude rc` alias in a directory you haven't trusted, and the command couldn't ask you whether to trust it. For example, the command's standard input or standard output isn't a terminal because one of them is redirected or piped. The command exits with code 1:
 
 ```text theme={null}
 Error: Workspace not trusted. Please run `claude` in /Users/you/project first to review and accept the workspace trust dialog.
 ```
+
+Two variants that also begin with `Error: Workspace not trusted.` appear in a terminal too small to show what trusting the directory turns on, or one that didn't report its size. Enlarge the window or switch to a normal terminal window, then run `claude rc` again.
 
 In your home directory the message is different, because the workspace trust dialog never saves trust for the home directory, so accepting it there can't satisfy this check. Before v2.1.214, the home directory showed the message above, whose advice can't succeed there.
 
@@ -2782,10 +2976,14 @@ In your home directory the message is different, because the workspace trust dia
 Error: Workspace not trusted. /Users/you is your home directory, and for security home-directory trust is never saved, so running `claude` here first won't help. Run `claude rc` from a project directory instead (run `claude` there once to accept the trust dialog).
 ```
 
+If you answer `n` or press Enter at the [`Trust <directory>?` question](/docs/en/remote-control#requirements), the command prints a `Remote Control did not start` message that names the directory and exits with code 1. Run `claude rc` again to answer `y`.
+
 **What to do:**
 
-* Run `claude` in the directory, accept the [workspace trust dialog](/docs/en/permissions#project-allow-rules-and-workspace-trust), then run `claude remote-control` again
+* Trust the directory from a terminal first: run `claude rc` there and answer `y`, or run `claude` there and accept the [workspace trust dialog](/docs/en/permissions#project-allow-rules-and-workspace-trust), then run your original command again
 * In your home directory, change to a project directory and start Remote Control there
+
+Before v2.1.284, the command never asked, even in a terminal.
 
 <h3 id="not-carried-over-to-the-sessions-remote-control-starts">
   Not carried over to the sessions Remote Control starts
@@ -2842,7 +3040,7 @@ Could not read Claude Code config — run `claude` with no arguments to recover 
 
 ### Could not import a server from Claude Desktop
 
-Claude Code couldn't add one of the servers you selected in `claude mcp add-from-claude-desktop`. The command still imports the other selected servers and prints one line per server it couldn't add. Before v2.1.205, the first server that failed stopped the import and none of the selected servers were added.
+Claude Code couldn't add one of the servers you selected in `claude mcp add-from-claude-desktop`. The command still imports the other selected servers and prints one line per server it couldn't add. Before v2.1.205, the first server that failed stopped the import.
 
 ```text theme={null}
 Could not import my server: Invalid name my server. Names can only contain letters, numbers, hyphens, and underscores.
@@ -2868,6 +3066,25 @@ Cannot add MCP server to scope: managed
 * Add the server to a scope you can write: `local`, `user`, or `project`. Without `--scope`, the command uses `local`. See [MCP installation scopes](/docs/en/mcp#mcp-installation-scopes)
 * To provide the server to every user in your organization, add it to [`managedMcpServers`](/docs/en/settings-reference#managedmcpservers) in the managed settings you deploy
 
+<h3 id="cannot-add-mcp-server-when-managed-settings-allow-only-plugin-servers">
+  Cannot add MCP server when managed settings allow only plugin servers
+</h3>
+
+You ran `claude mcp add` or `claude mcp add-json` while your organization's managed settings set [`strictPluginOnlyCustomization`](/docs/en/settings-reference#strictpluginonlycustomization) to `true` or to a list that includes `mcp`. With that setting, Claude Code doesn't load MCP servers from `~/.claude.json` or `.mcp.json`, so the command exits with code 1 instead of saving a server that would never load:
+
+```text theme={null}
+Cannot add MCP server: your organization's managed settings allow only MCP servers that plugins provide. Install a plugin that provides this server, or ask your administrator to make it available.
+```
+
+`claude mcp add-from-claude-desktop` reports each server you select as not imported, with this message as the reason. [`/import`](/docs/en/commands#all-commands) reports this message for each MCP server it tries to add and still imports the other items it found.
+
+Before v2.1.284, these commands saved the server and reported success, and the server never loaded.
+
+**What to do:**
+
+* Install a [plugin](/docs/en/plugins/install) that provides the server
+* Ask your administrator to distribute the server in a [plugin](/docs/en/plugins/org), or to provide it through [`managedMcpServers`](/docs/en/settings-reference#managedmcpservers) if it's a remote HTTP or SSE server
+
 <h3 id="cant-read-mcp-json">
   Can't read .mcp.json
 </h3>
@@ -2884,6 +3101,43 @@ Before v2.1.257, a FIFO at `.mcp.json` left the command waiting forever with no 
 
 * Check what sits at `.mcp.json` in your current directory. Replace it with an ordinary JSON file in the [project-scope format](/docs/en/mcp#project-scope), or delete it, then run the command again.
 
+<h3 id="mcp-server-was-not-saved-or-removed">
+  MCP server was not saved or removed
+</h3>
+
+You ran `claude mcp add`, `claude mcp add-json`, or `claude mcp remove` for a server in the `user` or `local` [scope](/docs/en/mcp#mcp-installation-scopes). Both scopes are stored in `~/.claude.json`, and the change isn't in that file when Claude Code reads it back after writing. The command exits with this error instead of its success line.
+
+```text theme={null}
+MCP server "example" was not saved to /home/user/.claude.json. If that file is read-only or protected by a sandbox, make it writable or run the command outside the sandbox, then add the server again.
+```
+
+After a remove, the message reads `was not removed from` and ends with `then remove the server again`. For a `local`-scope server, the path is followed by the project directory the entry belongs to, as `(local scope for /path/to/project)`.
+
+Before v2.1.283, `claude mcp add`, `claude mcp add-json`, and `claude mcp remove` reported success even when the change didn't reach the file.
+
+**What to do:**
+
+* Make the file the message names writable, or run the command outside the sandbox, then run the same add or remove command again.
+
+<h3 id="mcp-server-may-not-have-been-saved-or-removed">
+  MCP server may not have been saved or removed
+</h3>
+
+You ran `claude mcp add`, `claude mcp add-json`, or `claude mcp remove` for a server in the `user` or `local` [scope](/docs/en/mcp#mcp-installation-scopes), and Claude Code couldn't read `~/.claude.json` back to confirm the change. The change may or may not be on disk. The text in parentheses is the error from that read.
+
+```text theme={null}
+MCP server "example" may not have been saved: /home/user/.claude.json could not be read to confirm the change (EACCES: permission denied, open '/home/user/.claude.json'). Run `claude mcp get example` to check, then add the server again if it is missing.
+```
+
+After a remove, the message reads `may not have been removed` and ends with `then remove the server again if it is still listed`.
+
+Before v2.1.283, the commands reported success even when the change couldn't be confirmed.
+
+**What to do:**
+
+* Run `claude mcp get <name>` to check whether the change is on disk. For a `local`-scope server, run it from the project directory the server belongs to, since local scope is per project.
+* If the server is missing after an add, or still listed after a remove, run the same add or remove command again.
+
 <h3 id="anthropic-hosted-and-doesnt-support-local-oauth">
   Server is Anthropic-hosted and doesn't support local OAuth
 </h3>
@@ -2893,8 +3147,6 @@ You started a sign-in for an MCP server whose URL points at an Anthropic-hosted 
 ```text theme={null}
 "gmail" is Anthropic-hosted and doesn't support local OAuth. Connect it via Settings → Connectors on claude.ai (requires `claude login`), then it'll be available here automatically.
 ```
-
-Claude Code matches these hosts by URL, so the message appears when a server you added with `claude mcp add` or in `.mcp.json` points at one of them.
 
 **What to do:**
 
@@ -2922,13 +3174,13 @@ Before v2.1.248, Claude Code ran OAuth discovery for a server whose helper suppl
 
 ### MCP permission prompt tool not found
 
-The tool you passed to [`--permission-prompt-tool`](/docs/en/cli-reference#cli-flags) wasn't among the connected MCP tools when the run first needed a permission decision, either because its server never connected or because no connected server exposes a tool by that name. Claude Code still sends your prompt: the [non-interactive](/docs/en/headless) run exits with this error, and exit code 1, on the first tool call that needs approval, so it produces no answer even though the request was made. Before the first prompt, Claude Code waits up to the per-server connection timeout of 30 seconds set by [`MCP_TIMEOUT`](/docs/en/env-vars) for that server to connect. Before v2.1.206, startup didn't wait for the server to finish connecting, so a slow-starting but healthy server produced this error too.
+The tool you passed to [`--permission-prompt-tool`](/docs/en/cli-reference#cli-flags) wasn't among the connected MCP tools when the run first needed a permission decision, either because its server never connected or because no connected server exposes a tool by that name. Claude Code still sends your prompt: the [non-interactive](/docs/en/headless) run exits with this error, and exit code 1, on the first tool call, so it produces no answer even though the request was made. Before the first prompt, Claude Code waits up to the per-server connection timeout of 30 seconds set by [`MCP_TIMEOUT`](/docs/en/env-vars) for that server to connect. Before v2.1.206, startup didn't wait for the server to finish connecting, so a slow-starting but healthy server produced this error too.
 
 ```text theme={null}
 Error: MCP tool mcp__permissions__approve (passed via --permission-prompt-tool) not found. Available MCP tools: none
 ```
 
-The list after `Available MCP tools:` names the MCP tools that were connected when the wait ended.
+The list after `Available MCP tools:` names the MCP tools that were connected.
 
 **What to do:**
 
@@ -2998,7 +3250,7 @@ Claude Code shows the same error for any skill that [injects dynamic context](/d
 * If the repository has no remote, add one with `git remote add origin <url>` and fetch before creating the ref. If the remote is empty, push your branch first with `git push -u origin HEAD` and name that branch in the set-head command; `origin/HEAD` then points at the branch you just pushed, so `/security-review` sees an empty diff until the branch diverges from it.
 
 <h3 id="input-must-be-provided-when-using-print">
-  Input must be provided when using --print
+  Input must be provided when using `--print`
 </h3>
 
 Bare `claude` needs stdout to be a terminal to start the interactive UI. When stdout is redirected, or the console isn't a real terminal, such as PowerShell ISE and some IDE output panes, `claude` runs [non-interactively](/docs/en/headless) instead. That is the same mode as `claude -p`, which requires a prompt, so the message names `--print` even when you didn't pass the flag. Passing `-p`/`--print` with no prompt and nothing piped on stdin produces the same error anywhere.
@@ -3011,6 +3263,34 @@ Error: Input must be provided either through stdin or as a prompt argument when 
 
 * For interactive use, run `claude` in a real terminal: Windows Terminal or the PowerShell console rather than ISE, and your IDE's integrated terminal rather than an output pane
 * For one-shot use, pass the prompt: `claude -p "your question"`, or pipe it with `echo "your question" | claude -p`
+
+<h3 id="claude-code-cant-read-the-keyboard-here">
+  Claude Code can't read the keyboard here
+</h3>
+
+You ran `claude` without [`-p`](/docs/en/headless), which starts an [interactive session](/docs/en/interactive-mode), but its standard input isn't a terminal. Something piped or redirected it, or the program that launched `claude` supplied its own input stream.
+
+An interactive session needs a terminal to read your keystrokes from, and what Claude Code does without one depends on your platform:
+
+* **Windows**: Claude Code prints the message to stderr and exits with code 1 instead of starting the interface
+* **macOS and Linux**: Claude Code reads your keystrokes from `/dev/tty` and starts the session, with any piped text as your first prompt. You see the message when `/dev/tty` can't be opened, and its first line names `/dev/tty` in place of the Windows wording.
+
+On Windows the message reads:
+
+```text theme={null}
+Claude Code can't read the keyboard here: stdin is not a terminal (it is piped, redirected, or supplied by the program that launched claude), and on Windows it can't fall back to the console for input yet.
+Run claude directly in Windows Terminal, PowerShell, or Command Prompt, without piping or redirecting its input.
+To send text as a prompt and print the reply instead, add -p; it also works with --continue and --resume <session-id> (for example: type notes.md | claude -p --continue).
+```
+
+**What to do:**
+
+* To work interactively, run `claude` directly in a terminal, without piping or redirecting its input
+* To get a reply without the interactive interface, for example from a script, add `-p` and give the prompt as an argument or on stdin, as in `claude -p "your question"` or `echo "your question" | claude -p`. The same works with `--continue` and `--resume <session-id>`.
+
+Before v2.1.287, Claude Code started the interface instead of printing this message, then either showed nothing on screen or failed with an error containing `Raw mode is not supported`.
+
+If you see `Raw mode is not supported` during `claude install` instead, see [`Raw mode is not supported` during install](/docs/en/troubleshoot-install#raw-mode-is-not-supported-during-install).
 
 ### Input contained only whitespace
 
@@ -3178,6 +3458,24 @@ Could not upload repo bundle (<error>). The GitHub App preflight failed transien
 
 Before v2.1.251, Claude Code ended the message with `Please set up GitHub on https://claude.ai/code` even when the GitHub check failed only transiently, and setup advice can't clear a transient failure.
 
+<h3 id="the-repository-upload-cant-follow-a-git-setting">
+  The repository upload can't follow a git setting
+</h3>
+
+You started a [cloud session that uploads your local repository](/docs/en/claude-code-on-the-web#send-local-repositories-without-github), or an [ultrareview](/docs/en/ultrareview) of a branch, and the upload can't follow one of the git settings that decide which attribute rules apply to your files. If the upload went ahead and missed a rule, a file that git transforms before storing it, such as one a clean filter encrypts, could reach the cloud as it is on disk. Claude Code refuses the upload instead, and nothing is uploaded:
+
+```text theme={null}
+Not uploading this working tree: core.ignoreCase (which decides whether .gitattributes patterns match file names regardless of letter case) is set in <file>, and the upload cannot follow that setting, so a file git would change before storing it (to encrypt it, for example) could be uploaded as it is on disk. Move the core.ignoreCase line into this repository’s .git/config or directly into your ~/.gitconfig, then retry.
+```
+
+The message names the setting and where it's set, and ends with the fix for the case you hit. The same refusal appears for `core.attributesFile` and `attr.tree`, each with its own fix.
+
+The message can name a config file that your git configuration pulls in through an `include` or `includeIf` directive, even when that directive's condition doesn't apply to this repository.
+
+**What to do:**
+
+* Apply the fix in the message's final sentence
+
 <h3 id="github-isnt-connected-to-your-claude-account">
   GitHub isn't connected to your Claude account
 </h3>
@@ -3196,6 +3494,37 @@ When you create a routine with [`/schedule`](/docs/en/routines), the same messag
 * Rerun the command a minute after connecting
 
 Before v2.1.268, Claude Code reported this as a temporary failure of the Claude GitHub App check and suggested retrying or installing the app; neither connects a GitHub account.
+
+<h3 id="a-github-organization-policy-is-blocking-claude">
+  A GitHub organization policy is blocking Claude
+</h3>
+
+You ran a command at the Claude Code prompt that starts a cloud session, such as [`/autofix-pr`](/docs/en/claude-code-on-the-web#auto-fix-pull-requests). Before it creates the session, Claude Code checks Claude's access to the repository on GitHub, and GitHub refused because your GitHub organization has a policy that blocks Claude. Claude Code stops there and shows a message naming the policy.
+
+When an IP allow list is what blocks the access, the message reads:
+
+```text theme={null}
+Your GitHub organization has an IP allowlist that is blocking Claude. Add Claude's IP ranges to your GitHub allowlist.
+```
+
+When single sign-on is what blocks it, the message reads:
+
+```text theme={null}
+Your GitHub organization requires single sign-on. Disconnect and reconnect GitHub on the Connectors page in Claude on the web, click Authorize next to your organization when GitHub asks, then try again.
+```
+
+When a Microsoft Entra ID Conditional Access policy is what blocks it, the message reads:
+
+```text theme={null}
+Your GitHub organization's identity provider (Microsoft Entra ID) has a Conditional Access policy that is blocking Claude. Ask your GitHub Enterprise or Entra ID admin to allow Claude in that policy.
+```
+
+**What to do:**
+
+* **IP allow list**: ask an owner of your GitHub organization or enterprise to allow Anthropic's outbound IP addresses. See [GitHub allow lists and firewalls](/docs/en/network-config#github-allow-lists-and-firewalls) for the addresses and the GitHub settings to change.
+* **Single sign-on**: disconnect GitHub at [claude.ai/customize/connectors](https://claude.ai/customize/connectors), then connect it again. When GitHub asks, click **Authorize** next to your organization so the new connection is authorized for its single sign-on.
+* **Conditional Access policy**: ask your GitHub Enterprise or Microsoft Entra ID administrator to allow Claude in that policy
+* After the change, run the command again
 
 <h3 id="single-sign-on-authorization-needed">
   Single sign-on authorization needed
@@ -3230,7 +3559,7 @@ Claude Code exits with code 1 after showing the message. The `/resume` picker in
 **What to do:**
 
 * Run `claude --resume <session-id>` with the session ID from the message to retry
-* If every retry fails the same way, run `claude update` and resume again. Versions before v2.1.275 fail the resume when the saved transcript contains an entry they can't read.
+* On a version before v2.1.285, if the retry fails the same way, run `claude update` and resume again. Those versions fail the resume when the saved transcript contains an entry they can't read.
 * If the retry fails again, run `claude` to start a new session
 
 ### No conversation found with the session ID
@@ -3303,18 +3632,20 @@ Each reason the message can show in parentheses:
   Couldn't open Claude Desktop
 </h3>
 
-You ran [`/desktop`](/docs/en/desktop#coming-from-the-cli), or its alias `/app`, and the system command Claude Code uses to open Claude Desktop failed. The session stays in the terminal.
+You ran [`/desktop`](/docs/en/desktop#coming-from-the-cli) or its alias `/app` in a session, or [`claude --desktop`](/docs/en/cli-reference#cli-flags) in your shell, and the system command Claude Code uses to open Claude Desktop failed. After `/desktop`, the session stays in the terminal; `claude --desktop` prints the message without the `Error:` prefix and exits with status 1.
+
+The text in parentheses names the command that failed, with its exit status and the first line of its error output when it produced them. On macOS that command is `open`, as in this example; on Windows it is `rundll32`:
 
 ```text theme={null}
-Error: Couldn't open Claude Desktop (`open` exited 1: LSOpenURLsWithRole() failed for the URL claude://resume?session=<session-id> with error -10814). Open Claude Desktop and run /desktop again.
+Error: Couldn't open Claude Desktop (`open` exited 1: LSOpenURLsWithRole() failed for the URL claude://resume?session=<session-id> with error -10814). Open Claude Desktop and try again.
 ```
 
 **What to do:**
 
-* Open Claude Desktop yourself, then run `/desktop` again
-* To read that command's full error output, turn on debug logging with `/debug`, run `/desktop` again, and check the debug log
+* Open Claude Desktop yourself, then run `/desktop` or `claude --desktop` again
+* To read the failed command's full error output, turn on debug logging with `/debug` and run `/desktop` again, or run `claude --desktop --debug-file <path>`, then check the debug log
 
-Before v2.1.275, the message was `Failed to open Claude Desktop. Please try opening it manually.` and didn't say what failed.
+Before v2.1.285, the message ended `Open Claude Desktop and run /desktop again.` Before v2.1.275, it was `Failed to open Claude Desktop. Please try opening it manually.` and didn't say what failed.
 
 <h3 id="terminal-setup-left-your-zed-keymap-unchanged">
   /terminal-setup left your Zed keymap unchanged
@@ -3386,6 +3717,25 @@ Output styles are saved to local settings (.claude/settings.local.json), which t
 * Add `local` to the session's setting sources and switch again
 * Set the [`outputStyle`](/docs/en/settings-reference#outputstyle) key in a settings file the session does load, such as `.claude/settings.json` in the project or `~/.claude/settings.json`. In the TypeScript SDK, set `outputStyle` inside the inline `settings` object instead; see [Activate an output style](/docs/en/agent-sdk/modifying-system-prompts#activate-an-output-style)
 
+<h3 id="recap-only-runs-when-you-ask-for-it-yourself">
+  /recap only runs when you ask for it yourself
+</h3>
+
+The [`/recap`](/docs/en/interactive-mode#session-recap) request didn't come from your own input. It arrived in a message relayed into the session from a Slack, Teams, or [project](/docs/en/claude-projects) thread, or in a prompt that a [routine](/docs/en/routines) or another program sent.
+
+A relayed message gets the notice even when you wrote it yourself. Claude Code can't tell that a relayed or automated message came from the person whose account runs the session, so it answers with this notice instead of a summary:
+
+```text theme={null}
+/recap only runs when you ask for it yourself in this session: from the terminal, the Claude app or claude.ai/code, or over Remote Control. A message relayed from Slack, Teams or a project thread, or sent by a routine or another program, can't request it.
+```
+
+A `/recap` you pass to `claude -p`, or that your own [Agent SDK](/docs/en/agent-sdk/overview) application sends to a session it launched, counts as your own input.
+
+**What to do:**
+
+* Open the session yourself and run `/recap` there: in its terminal, in the [Desktop app](/docs/en/desktop) or the [mobile app](/docs/en/mobile), at [claude.ai/code](https://claude.ai/code), or over [Remote Control](/docs/en/remote-control)
+* If a routine or another program sent it, remove `/recap` from that prompt
+
 ## Plugin errors
 
 These errors come from [plugin](/docs/en/plugins/overview) and [marketplace](/docs/en/plugins/overview) configuration. For plugin problems that don't produce one of the messages on this page, such as a marketplace URL that doesn't load or a plugin that installs but doesn't appear, see [Plugin troubleshooting](/docs/en/plugins/troubleshooting).
@@ -3413,7 +3763,7 @@ The first message means your build is older than v2.1.269, the first version whe
 
 ### Marketplace is registered from an untrusted source
 
-The marketplace is registered under a name that is [reserved for official Anthropic marketplaces](/docs/en/plugins/marketplace-reference#marketplace-file), but its registered source isn't an `anthropics` GitHub repository. Claude Code re-checks reserved names every time it loads or refreshes a marketplace, so the marketplace and the plugins installed from it stop loading. Before v2.1.205, the name was checked only when the marketplace was added, so an entry registered before its name became reserved kept loading.
+The marketplace is registered under a name that is [reserved for official Anthropic marketplaces](/docs/en/plugins/marketplace-reference#marketplace-file), but its registered source isn't an `anthropics` GitHub repository. Claude Code re-checks reserved names every time it loads or refreshes a marketplace, so the marketplace and the plugins installed from it stop loading. Before v2.1.205, an entry registered before its name became reserved kept loading.
 
 ```text theme={null}
 Marketplace "claude-community" is registered from an untrusted source: The name 'claude-community' is reserved for official Anthropic marketplaces. Only repositories from 'github.com/anthropics/' can use this name. To fix it, remove the marketplace and re-add it from the official source.
@@ -3555,7 +3905,7 @@ On macOS and Linux, Claude Code also rejects a component path that contains a ba
 commands path escapes plugin directory: ./commands\deploy.md — its path contains a backslash, which is not resolved reliably on this platform
 ```
 
-Before v2.1.251, Claude Code loaded a `commands` path declared in a marketplace entry even when it pointed outside the plugin directory. Claude Code already rejected paths declared in `plugin.json` and the other component paths in a marketplace entry.
+Before v2.1.251, Claude Code loaded a `commands` path declared in a marketplace entry even when it pointed outside the plugin directory.
 
 Before v2.1.257, the check looked only at the path's spelling, not at where a symlink leads.
 
@@ -3626,10 +3976,8 @@ Plugin source path refused: ./my-plugin does not stay inside its marketplace dir
 
 Claude Code keeps the plugin marketplaces you've added in a registry file at `~/.claude/plugins/known_marketplaces.json`. A plugin command that needs the registry, such as `claude plugin install`, fails with one of two messages when Claude Code can't use the file:
 
-* `Failed to load marketplace configuration`: the file isn't valid JSON, or can't be read. An empty file fails this way too.
+* `Failed to load marketplace configuration`: the file exists but isn't valid JSON or can't be read. An empty file fails this way too.
 * `Marketplace configuration file is corrupted`: the file is valid JSON but its contents don't match the registry schema.
-
-A missing file isn't a failure: Claude Code treats it as a registry with no marketplaces.
 
 With an empty file, `claude plugin install` reports:
 
@@ -3666,7 +4014,7 @@ When you try to disable a plugin that a required plugin depends on, Claude Code 
   Plugin was not uninstalled
 </h3>
 
-You ran [`claude plugin uninstall`](/docs/en/plugins/cli-reference#plugin-uninstall), or chose **Uninstall** in the `/plugin` **Installed** tab, and the uninstall stopped with a message starting `"<plugin>" was not uninstalled:`.
+You ran [`claude plugin uninstall`](/docs/en/plugins/cli-reference#plugin-uninstall), or chose **Uninstall** in the `/plugin` **Installed** tab, and the uninstall stopped with a message starting `"<plugin>" was not uninstalled:`. If the text after that colon starts with `installed_plugins.json` instead of naming a settings file, the cause is content in `installed_plugins.json` that this version of Claude Code can't read. For that form, see [`installed_plugins.json` holds a record this version can't read](/docs/en/plugins/troubleshooting#installed-plugins-json-holds-a-record-this-version-cannot-read).
 
 When Claude Code removed the plugin's entry from `enabledPlugins` and read that scope's settings files back, either the plugin was still switched on there, or a file that could switch it on couldn't be read or checked. Deleting the plugin's saved options, secrets, and data while a settings entry could switch it back on would lose them, so the uninstall stops instead: the plugin stays installed and nothing it saved is deleted.
 
@@ -3689,7 +4037,27 @@ The middle of the message names the file and the cause:
 
 ## Tool errors
 
-These errors come from Claude's built-in tools. Claude corrects most tool errors on its own. When one needs a change from you, that error's **What to do** list says what to change.
+These errors come from Claude's tool calls. Claude corrects most tool errors on its own. When one needs a change from you, that error's **What to do** list says what to change.
+
+<h3 id="no-such-tool-available">
+  No such tool available
+</h3>
+
+Claude called a tool by a name that isn't in the session's tool list. Claude Code returns the error to Claude as the tool call's result, and the turn continues. When Claude Code can tell why the tool is missing, it adds a sentence after the tool name that gives the reason or names the tool to call instead, as in the second line:
+
+```text theme={null}
+Error: No such tool available: <tool name>
+Error: No such tool available: read. Tool names are case-sensitive: call Read instead.
+```
+
+Right after you resume a session, an MCP server can still be on its first connection attempt when Claude calls one of its tools. Claude Code then [waits for the server](/docs/en/mcp#tool-availability) and returns this error if the tool still isn't available when the wait ends. Before v2.1.284, such a call failed at once instead of waiting.
+
+A call whose tool name Claude Code [cut to 200 characters](#tool-use-name-over-200-characters) also fails with this error.
+
+**What to do:**
+
+* If it happens once, you don't need to do anything. Claude reads the error and the turn continues.
+* If calls to an MCP server's tools keep failing with this error, run `/mcp` in the session or `claude mcp list` in your shell to check the server's [status](/docs/en/mcp#server-status), and reconnect a failed server from `/mcp`. In the Agent SDK, see [Error handling](/docs/en/agent-sdk/mcp#error-handling).
 
 ### Agent would be spawned with zero tools
 
@@ -3831,7 +4199,7 @@ When you message a teammate yourself, typing `@name` followed by the message in 
   Teammate's agent definition was not restored
 </h3>
 
-Claude messaged a stopped [agent team](/docs/en/agent-teams) teammate, and Claude Code brought it back without re-applying the [subagent definition](/docs/en/agent-teams#use-subagent-definitions-for-teammates) it was spawned from, because its definition file came from a folder with no saved trust. The notice follows the resume report in the sending agent's tool result:
+Claude messaged a stopped [agent team](/docs/en/agent-teams) teammate, and Claude Code brought it back without re-applying the [subagent definition](/docs/en/agent-teams#use-subagent-definitions-for-teammates) it was spawned from. The notice follows the resume report in the sending agent's tool result and names the reason. When the definition file came from a folder with no saved trust, it reads:
 
 ```text wrap theme={null}
 Its agent definition was not restored: the folder its definition file came from is not trusted (source: projectSettings), so the teammate is running with the team-essential tools and no custom instructions. To restore it, the user needs to run Claude Code in that folder once and accept the trust dialog (the --debug log names the folder); do not change trust settings on the user's behalf.
@@ -3876,6 +4244,33 @@ Failed to send to api-worker: Too many messages to this session just now: 30 wer
 
 Before v2.1.236, Claude Code reported these sends as sent. The receiving session dropped them unread.
 
+<h3 id="cross-session-message-dropped-at-the-inbox">
+  Cross-session message was dropped at the recipient session's inbox
+</h3>
+
+Claude sent a [cross-session message](/docs/en/cross-session-messaging) to another of your sessions on this machine, and that session's inbox discarded it before Claude in that session read it. The line names the recipient and, when the recipient gave a reason, adds the reason after a dash:
+
+```text wrap theme={null}
+Cross-session message was dropped at the recipient session's inbox (recipient: uds:/tmp/cc-socks/13605.sock) and not delivered — its queue of undelivered peer messages was full. Claude was told not to resend right away.
+```
+
+One line can cover several dropped messages. It then starts in the plural, for example `Cross-session messages (12) were dropped`. To find which session an address belongs to, compare it with the [`Peer address` row](/docs/en/cross-session-messaging#the-sessions-inbox-socket) that `/status` shows in each session.
+
+After the dash, the line gives one or more of these reasons:
+
+* `its queue of undelivered peer messages was full`: the recipient already held as many undelivered messages from other sessions as its queue allows
+* `you sent faster than that session accepts`: the sending session's messages arrived faster than the recipient accepts from one sender
+* `it repeated your previous message`: the message was identical to one the sending session sent this recipient shortly before
+* `a relay loop between sessions was cut`: the message continued a chain of sessions messaging each other, and the chain had passed through the recipient too many times or grown too long
+
+**What to do:**
+
+* Assume the recipient never saw the dropped messages. Claude Code tells Claude the same, and tells it to include anything that still matters in one later message instead of resending right away
+* If your sessions send each other frequent updates, ask Claude to send fewer, larger messages, such as one report when a session finishes its work
+* For `a relay loop between sessions was cut`, type the next instruction into one of the sessions yourself. A message Claude sends in response to your own prompt begins a new chain
+
+Before v2.1.238, the sending session got no report when the recipient's inbox discarded a message.
+
 ### Refusing to send a cross-session message
 
 Before Claude Code writes a [cross-session message](/docs/en/cross-session-messaging) to another of your sessions on this machine, it checks that the target session's inbox socket is the endpoint the message was addressed to. When a check fails, Claude Code refuses the send in the sending session, and the target session receives nothing. For a message Claude sends, the refusal appears in the sending session's tool result:
@@ -3888,21 +4283,11 @@ The text after `Refusing to send:` names the check that failed:
 
 * `reply target is a symlink`: a symbolic link sits at the target session's socket path. Claude Code doesn't deliver through it, because a link there could redirect the message to an endpoint the target session didn't create.
 * `cannot vet reply target`: Claude Code couldn't inspect the target path at all, for example because reading it failed with a permission error.
-* `connected endpoint is not the expected process`: the process holding the socket isn't the session the message was addressed to, so the address is stale or another process replaced the socket.
-* `connected endpoint identity could not be read`: Claude Code connected but couldn't read which process holds the other end, so it couldn't confirm the target. This can be transient.
-* `connected endpoint is not owned by this user`: the process holding the socket runs as a different user account, so it isn't one of your sessions.
-* `connected endpoint owner could not be read`: Claude Code connected but couldn't read which user account owns the other end, so it couldn't confirm the endpoint is yours.
-* `connected endpoint is a different process with the expected pid`: the process id matches the one the message was addressed to, but Claude Code couldn't confirm it's the same process. Usually that session exited and the operating system reused its process id, so the address is stale.
 
 **What to do:**
 
 * Usually nothing: the checks keep a message from reaching an endpoint other than the session it was addressed to, and nothing was sent
-* Ask Claude to list your sessions again and resend; a refusal caused by a stale address clears once Claude sends to the current one
 * If `reply target is a symlink` repeats for one session, check what created a link at that session's socket path, shown in its `/status` under `Peer address`
-* For `connected endpoint identity could not be read`, resend; the condition can be transient
-* If `connected endpoint is not owned by this user` appears on a shared machine, the session at that address runs under another user's account, so Claude can't message it from yours
-
-Before v2.1.248, Claude Code didn't check the endpoint's owning user or process start time, so the refusals that name those checks don't appear on earlier versions.
 
 <h3 id="refusing-after-a-symlink-changed">
   Refusing to read, write, or search a path
@@ -4008,6 +4393,28 @@ Claude Code decodes the file as UTF-8, or as UTF-16 when it starts with a little
 
 Before v2.1.267, Claude Code uploaded such a file without checking it, and the server refused the publish instead.
 
+<h3 id="not-published-that-file-is-on-a-network-share">
+  Not published: that file is on a network share
+</h3>
+
+Claude tried to publish an [artifact](/docs/en/artifacts) from a file at a path that names a network host:
+
+* On Windows, a `\\server\share` path that isn't under a mapped network drive you passed at launch with [`--add-dir`](/docs/en/cli-reference#cli-flags)
+* On macOS or Linux, an automount path such as `/net/<host>/page.html`
+
+Looking up such a path contacts the host it names, and on Windows that contact can send the host your credentials. Claude Code refuses to publish the file and doesn't read it. The refusal appears in the Artifact tool result:
+
+```text theme={null}
+Not published: that file is on a network share. Publish a file from this session's folders instead.
+```
+
+**What to do:**
+
+* Nothing, if you don't need that exact file: the message tells Claude to publish a file from the session's own folders instead
+* To publish that exact file, copy it into a folder on a local disk and ask again
+* On Windows, to let Claude publish directly from the share, map it to a drive letter and pass the drive when you start Claude Code. In PowerShell, for example, run `net use Z: \\server\share` and then `claude --add-dir Z:\`. Claude can then publish files from that drive. Adding the drive mid-session with `/add-dir` isn't enough.
+* On macOS or Linux, mount the share at a directory such as one under `/mnt` or `/Volumes`, and publish from that path instead of the automount path
+
 <h3 id="reading-a-local-file-from-outside-the-connected-folders">
   Reading a local file from outside the connected folders in a Cowork session
 </h3>
@@ -4043,15 +4450,33 @@ WebFetch cannot fetch localhost or other hostnames without a dot. To reach a loc
 
 Before v2.1.268, WebFetch reported these URLs with a generic `Invalid URL` error.
 
+<h3 id="webfetch-domain-safety-check-failed">
+  WebFetch domain safety check failed
+</h3>
+
+Before fetching a URL, WebFetch sends the URL's hostname to `api.anthropic.com` to check it against Anthropic's [domain safety blocklist](/docs/en/data-usage#webfetch-domain-safety-check). If the check can't complete, WebFetch can't confirm that the domain is safe, so it doesn't fetch the page and the tool result carries one of these messages instead:
+
+```text wrap theme={null}
+The safety check for domain example.com is rate-limited (too many domain checks from this network; the limit is shared and can stay exhausted for minutes). Do not retry WebFetch in a loop or sleep to wait it out; continue without this page and report that its safety check was rate-limited. A single later attempt is fine; if that is rate-limited too, stop.
+
+Unable to verify if domain example.com is safe to fetch. This may be due to network restrictions or enterprise security policies blocking claude.ai.
+```
+
+* `rate-limited`: the check endpoint answered with HTTP `429`. The message tells Claude to continue without the page and to try again at most once later. Claude Code doesn't cache a failed check, so a later fetch of that domain runs the check again. If sessions on your network hit this often, you can skip the check with [`skipWebFetchPreflight: true`](/docs/en/settings-reference#skipwebfetchpreflight) in settings.
+* `Unable to verify`: the check request failed, timed out, or got another error status. If your network blocks `api.anthropic.com`, allowlist that domain, or skip the check with [`skipWebFetchPreflight: true`](/docs/en/settings-reference#skipwebfetchpreflight) in settings.
+
+Before v2.1.286, the rate-limited message read `The safety check for domain example.com is temporarily rate-limited (too many domain checks from this network). Retry after about a minute; retrying sooner will fail the same way.`.
+Before v2.1.285, a rate-limited check was reported with the `Unable to verify` message instead.
+
 ## Background session errors
 
 [Background sessions](/docs/en/agent-view) run without an interactive terminal of their own, so commands that need one behave differently there. These messages appear in the transcript of a background session, in the terminal that attaches to one, in the session or shell you dispatch from, or, for the [worktree-guard entries](#write-or-command-blocked-because-the-path-cannot-be-safely-resolved) below, in any session isolated in a worktree or running a worktree-isolated subagent; where a message is specific to one surface, its entry says so.
 
 ### Commands refused in a background session
 
-Commands that open an interactive dialog can't do so while no terminal is attached to a background session. `/install-github-app`, the `/mcp` settings list, and the authentication actions in the MCP server menu respond with a message, and the session appears under **Needs input** in [agent view](/docs/en/agent-view) so you can find it, attach, and run the command again. While a terminal is attached, these commands work normally.
+Commands that open an interactive dialog can't do so while no terminal is attached to a background session. `/install-github-app`, the `/mcp` settings list, and the authentication actions in the MCP server menu respond with a message. For `/install-github-app` and the `/mcp` settings list, the session also appears under **Needs input** in [agent view](/docs/en/agent-view) so you can find it, attach, and run the command again. While a terminal is attached, these commands work normally.
 
-Before v2.1.216, the session didn't appear under **Needs input** after one of these refusals. In v2.1.213 through v2.1.215, the commands still worked while a terminal was attached, and the refusal message told you to attach and run the command again. From v2.1.208 through v2.1.212, Claude Code refused them even while a terminal was attached, with a message such as `Can't open MCP settings in a background session`; on those versions, run the command from a regular `claude` session instead, or upgrade. Before v2.1.208, they opened their dialog inside the background session. In v2.1.208 only, Claude Code also refused the `/model` picker in a background session, and `/upgrade` printed the upgrade URL instead of opening a browser.
+Before v2.1.216, the session didn't appear under **Needs input** after `/install-github-app` or the `/mcp` settings list was refused. In v2.1.213 through v2.1.215, the commands still worked while a terminal was attached, and the refusal message told you to attach and run the command again. From v2.1.208 through v2.1.212, Claude Code refused them even while a terminal was attached, with a message such as `Can't open MCP settings in a background session`; on those versions, run the command from a regular `claude` session instead, or upgrade. Before v2.1.208, they opened their dialog inside the background session. In v2.1.208 only, Claude Code also refused the `/model` picker in a background session, and `/upgrade` printed the upgrade URL instead of opening a browser.
 
 The wording names the command. The `/mcp` settings list reports:
 
@@ -4061,7 +4486,7 @@ Can't open MCP settings while no terminal is attached to this background session
 
 **What to do:**
 
-* Attach to the session from agent view, where it's listed under **Needs input**, and run the command again
+* Attach to the session from agent view and run the command again
 * Or use the form the message names, such as `/mcp reconnect <server>`, `/mcp enable`, or `/mcp disable`, which work without attaching
 
 ### Write or command blocked because the path cannot be safely resolved
@@ -4092,7 +4517,6 @@ A blocked command reports the same cause for its working directory and ends with
 **What to do:**
 
 * Usually nothing: Claude retries with the local spelling the message asks for
-* If the file is on a network share rather than a local file spelled with a network path, it's outside the session's local workspace; edit it from a regular interactive session instead
 
 ### Command blocked by the worktree isolation checks
 
@@ -4208,8 +4632,6 @@ On Linux and WSL, the background service checks each host process every few seco
 terminal host process died — press Enter to restart
 ```
 
-If you open the row before the check runs, the footer shows `This session's terminal host process died (the conversation is saved) — press Enter to restart it` and the row turns failed.
-
 From the shell, `claude attach <id>` restarts a session already marked failed for a dead host, and otherwise prints the cause and exits:
 
 ```text theme={null}
@@ -4317,7 +4739,7 @@ On some accounts the message says `daemon` in place of `background service`.
 
 On an npm installation, an `EUNKNOWN` that appears while `npm install -g @anthropic-ai/claude-code` is replacing the binary has the same cause as [`EACCES` during a reinstall](#eacces-when-starting-a-background-session) and clears when you retry after the install finishes.
 
-Claude Code starts the background service through PowerShell so the service survives closing the terminal, using PowerShell 7 when it's installed and Windows PowerShell 5.1 otherwise. When neither PowerShell can run, Claude Code starts the service directly instead, so a policy that blocks only PowerShell doesn't cause this error. If you see it while no npm install is running, the policy is blocking the Claude Code executable itself.
+Claude Code starts the background service through PowerShell so the service survives closing the terminal, using PowerShell 7 when it's installed and Windows PowerShell 5.1 otherwise. When neither PowerShell can run, Claude Code starts the service directly instead, so a policy that blocks only PowerShell doesn't cause this error.
 
 Before v2.1.212, Claude Code used only Windows PowerShell 5.1 to start the service, so any machine where Group Policy blocked PowerShell 5.1 failed with `Couldn't start the session — EUNKNOWN: unknown error, uv_spawn`, even with PowerShell 7 installed.
 
@@ -4325,7 +4747,7 @@ Before v2.1.212, Claude Code used only Windows PowerShell 5.1 to start the servi
 
 * If the message reads `Couldn't start the session`, upgrade to v2.1.212 or later. On earlier versions you can also run `claude daemon run` in a separate terminal first, then start the background session again. That command runs the background service in the terminal's foreground, so the service lasts only as long as that terminal stays open.
 * If an npm install was replacing the binary, wait for it to finish, then start the background session again
-* If the error appears on v2.1.212 or later while no npm install is running, ask your Windows administrator to allow the Claude Code executable in the restriction policy
+* If the error appears on v2.1.212 or later while no npm install is running, check with your Windows administrator whether a restriction policy blocks the Claude Code executable
 * If the background service stops when you close the terminal, Claude Code started it without PowerShell. Install PowerShell 7, or ask your administrator to unblock PowerShell, so the service can outlive the terminal.
 
 ### EACCES when starting a background session
@@ -4375,13 +4797,15 @@ Two quoted reasons have known causes:
 
 ### Working directory no longer exists when starting a background session
 
-You tried to start a [background session](/docs/en/agent-view) in a directory that doesn't exist anymore. Claude Code doesn't start the session, and the message names the missing directory:
+The directory you started a [background session](/docs/en/agent-view) in was removed while the session was starting. Claude Code doesn't start the session, and the message names the missing directory:
 
 ```text theme={null}
 Couldn't start a background session (working directory no longer exists or is not accessible: /tmp/demo)
 ```
 
 Before v2.1.257, the session appeared to start and then showed in agent view as a failed row with the same reason.
+
+Before v2.1.281, this message also appeared when the directory was already gone before you started the session. That case reports [`could not be resolved on disk`](#workspace-not-trusted-when-dispatching-a-background-session).
 
 **What to do:**
 
@@ -4401,6 +4825,8 @@ Two variants name a different cause:
 
 * **`The home directory is trusted one session at a time`**: the session's directory is your home directory. Claude Code never saves trust for the home directory, so accepting the dialog there in an earlier session doesn't count.
 * **`<path> could not be resolved on disk`**: Claude Code couldn't find the session's directory on disk.
+
+Before v2.1.286, on Windows, this message could also appear in a directory you had already trusted, if its trust record was saved with the path in a different letter case. Update to v2.1.286 or later.
 
 **What to do:**
 
@@ -4486,7 +4912,7 @@ Restored the code, but skipped 2 files: the tracked path is (or became) a link o
 
 * Identify which files were skipped so you can handle each one with the steps below. The message gives only a count; the debug log at `~/.claude/debug/<session-id>.txt` names each skipped path as the restore runs, so turn on debug logging with `/debug` before your next restore. On macOS or Linux, you can instead find the links directly: `find . -type l` for symlinks and `find . -type f -links +1` for hard-linked files.
 * If a skipped file is a link you created on purpose, such as a config file managed by a dotfile manager or a file hard-linked by tools like pnpm, the rewind left its contents alone. To undo the session's changes to it, ask Claude to reverse the edit or edit the file yourself
-* If you didn't create the link, inspect the path before trusting its contents: something replaced the file after the checkpoint
+* If you didn't create the link, inspect the path before trusting its contents
 
 <h3 id="no-files-were-restored">
   No files were restored
@@ -4576,25 +5002,6 @@ Inside tmux, Claude Code detects a marker that arrived through the tmux server's
 ## Configuration warnings
 
 Claude Code writes most of these messages to stderr, not into the conversation, and writes most of them at startup. An entry says so when its message appears somewhere else, such as in the debug log or as a startup notice in the conversation view, or at another time, such as the [unrecognized-model diagnostic line](#unrecognized-model-id-on-a-request) at request time.
-
-<h3 id="fullscreen-failed-start-notice">
-  Fullscreen renderer didn't finish starting
-</h3>
-
-A previous [fullscreen](/docs/en/fullscreen) session on this machine exited before it finished starting, so Claude Code starts this session on the classic renderer and prints one of these notices:
-
-```text theme={null}
-Claude Code's fullscreen renderer didn't finish starting last time on this machine, so this launch is using the classic renderer. It will try fullscreen again next launch; /tui default keeps the classic renderer.
-
-Claude Code's fullscreen renderer has repeatedly failed to start on this machine, so it has been turned off here. Run /tui fullscreen to try it again (this also resets after an update).
-```
-
-**What to do:**
-
-* Follow [Fullscreen rendering](/docs/en/fullscreen#fullscreen-renderer-didnt-finish-starting). It says which notice you get, what Claude Code does in later sessions, and how to try fullscreen again or keep the classic renderer.
-* If the session that died printed an exit message, see [Claude Code exited after an unrecoverable interface error](#exited-after-an-unrecoverable-interface-error) for what it names.
-
-Before v2.1.236, Claude Code printed no notice and kept starting sessions in fullscreen rendering after a failed start.
 
 <h3 id="exited-after-an-unrecoverable-interface-error">
   Claude Code exited after an unrecoverable interface error
@@ -4743,6 +5150,29 @@ Claude Code can't start: your organization allows only the models listed in "ava
 * If you administer the settings, add a model your users can run to `availableModels`, or narrow the `deniedModels` entries that block every fallback. [Block specific models or versions](/docs/en/model-config#block-specific-models-or-versions) describes how the Default option steps down
 * If you don't administer them, send the message to your administrator. Your own settings files can't widen a managed `availableModels` or `deniedModels` list
 
+<h3 id="managed-settings-dont-allow-this-api-provider">
+  Managed settings don't allow this API provider
+</h3>
+
+Your organization's [managed settings](/docs/en/managed-settings) set an [`allowedProviders`](/docs/en/settings-reference#allowedproviders) list, and the session's API provider isn't on it or the session uses an endpoint that isn't pinned the way that entry requires. Claude Code refuses at startup, before a login, or when the session next contacts the API. The message begins with the permitted providers:
+
+```text theme={null}
+Your organization's managed settings allow Claude Code to use: Anthropic API, Amazon Bedrock.
+```
+
+When the list is empty, the message reads instead:
+
+```text theme={null}
+Your organization's managed settings allow Claude Code to use no API provider at all (allowedProviders is an empty list), so it cannot start on this machine.
+```
+
+When every entry is unrecognized, the parenthetical reads `(allowedProviders lists only unrecognized entries)` instead.
+
+**What to do:**
+
+* Follow the message's `To continue:` steps
+* If you administer the settings, the message's lines starting `Admins:` name the entry to add or the value to pin, and the [`allowedProviders`](/docs/en/settings-reference#allowedproviders) entry says which source's `env` block can pin it
+
 <h3 id="mcp-server-is-blocked-by-enterprise-managed-policy">
   MCP server is blocked by enterprise managed policy
 </h3>
@@ -4795,6 +5225,31 @@ When a `managed-settings.d/` directory exists but can't be listed, Claude Code r
 
 * If you administer the machine, fix the named document so it parses as a JSON object, or remove the file, profile, or registry value. An empty `managed-settings.json` counts as `{}` and doesn't block launch.
 * If you don't, ask your administrator to fix the deployed document. Nothing in your own settings files causes or clears this error.
+
+<h3 id="unable-to-read-managed-policy-settings">
+  Unable to read managed policy settings
+</h3>
+
+Your organization deploys [managed settings](/docs/en/managed-settings), and one of the deployed sources exists but couldn't be read, for a reason such as an I/O error rather than the operating system denying the read. With no other admin source supplying a policy, Claude Code exits at startup rather than run without the policy the source may carry:
+
+```text theme={null}
+Unable to read managed policy settings.
+This machine may require organization login enforcement, but the policy file failed to load.
+Contact your administrator.
+
+Detail: <source>: <reason>
+```
+
+In the same state, sign-in flows, API requests from a session that is already running, and the [`claude gateway`](/docs/en/claude-apps-gateway) server are refused with a variant of the first line that names [`allowedProviders`](/docs/en/settings-reference#allowedproviders).
+
+A read that the operating system denied, such as on a root-only file, doesn't produce this exit: [the session starts without that source's policies](/docs/en/managed-settings#find-entries-claude-code-dropped). For a source that can't be parsed, Claude Code exits with [a different message naming the source](#managed-settings-document-could-not-be-parsed).
+
+**What to do:**
+
+* If you administer the machine, fix the problem the `Detail:` line names so the deployed source can be read, or remove the source
+* If you don't, send the message to your administrator. Nothing in your own settings files causes or clears this error
+
+Before v2.1.285, only sessions signed in with claude.ai or Claude Console credentials exited with this message, and a read that the operating system denied produced it too.
 
 <h3 id="otelheadershelper-failed">
   otelHeadersHelper failed
@@ -4888,9 +5343,22 @@ Permission allow rule (.claude/settings.json): Bash(git -C * status *) has a wil
 * Fix the rule at the source the warning names in parentheses: a settings file path, or the `--allowed-tools` flag itself. A `claude-settings-<hash>.json` path that doesn't exist on disk stands for an inline `--settings` value. Fix the JSON you pass to that flag.
 * If the source reads `managed policy settings`, forward the warning to whoever maintains your managed settings, since you can't clear it yourself.
 
-Claude Code doesn't warn about deny and ask rules with the same shape: it refuses or prompts for the extra commands they match rather than approving them. It also doesn't warn about rules whose subcommand comes before the first `*`, such as `Bash(git commit *)`, or rules in which no word other than an option follows the `*`, such as `Bash(git *)`, or about `:*` prefix rules such as `Bash(git:*)`.
-
 In a [background session](/docs/en/agent-view) or with `--output-format json` or `stream-json`, Claude Code writes the warning to the debug log instead of stderr, so machine-read output stays clean. Run with `--debug` to capture it at `~/.claude/debug/<session-id>.txt`. Before v2.1.246, Claude Code accepted these rules without a warning.
+
+### Denying Bash also turns off the PowerShell tool
+
+You removed the whole Bash tool, for example with `--disallowedTools Bash` or with a bare `Bash` or `Bash(*)` [deny rule](/docs/en/permissions#match-all-uses-of-a-tool) in one of your settings files. On Windows with Git Bash installed, [denying Bash also turns the PowerShell tool off](/docs/en/tools-reference#bash-deny-rules-also-turn-off-the-powershell-tool), so the session starts with no shell tool. Claude Code prints this warning at startup:
+
+```text theme={null}
+Denying Bash also turns off the PowerShell tool, so Claude has neither. To use PowerShell, set CLAUDE_CODE_USE_POWERSHELL_TOOL=1.
+```
+
+**What to do:**
+
+* To have Claude use PowerShell, set [`CLAUDE_CODE_USE_POWERSHELL_TOOL`](/docs/en/env-vars) to `1` in your environment or in the `env` block of a settings file, as [Enable the PowerShell tool](/docs/en/tools-reference#enable-the-powershell-tool) shows. The PowerShell tool then stays on alongside your Bash deny rule.
+* To block particular commands instead of the whole tool, replace the bare `Bash` entry with scoped rules such as `Bash(git push *)` in the same settings file or flag. Claude keeps the Bash tool, and the PowerShell tool stays off until you also set the variable or add a scoped [`PowerShell` permission rule](/docs/en/permissions#powershell).
+
+In a [background session](/docs/en/agent-view) or with `--output-format json` or `stream-json`, Claude Code writes the warning to the debug log instead of stderr. Run with `--debug` to capture it at `~/.claude/debug/<session-id>.txt`. Before v2.1.287, Claude Code turned the PowerShell tool off the same way without printing a warning.
 
 <h3 id="crosssessioninbound-must-be-one-of-accept-hold-refuse">
   crossSessionInbound must be one of accept, hold, refuse
@@ -4910,6 +5378,21 @@ In [managed settings](/docs/en/managed-settings), Claude Code treats the unrecog
 * When the warning names managed settings, ask the administrator to fix the value
 
 Before v2.1.248, Claude Code ignored an unrecognized value without warning.
+
+<h3 id="anthropic-foundry-resource-must-be-a-foundry-resource-name">
+  ANTHROPIC\_FOUNDRY\_RESOURCE must be a Foundry resource name
+</h3>
+
+You set [`ANTHROPIC_FOUNDRY_RESOURCE`](/docs/en/env-vars) to something other than a bare [Microsoft Foundry](/docs/en/microsoft-foundry) resource name, such as the endpoint URL or its host name. Claude Code refused the value before sending a request. The message appears in place of Claude's reply, not as a startup warning:
+
+```text theme={null}
+API Error: ANTHROPIC_FOUNDRY_RESOURCE must be a Foundry resource name (2-64 letters, digits and hyphens, not starting or ending with a hyphen, such as my-resource), not a URL or host name. To use a full URL, set ANTHROPIC_FOUNDRY_BASE_URL instead.
+```
+
+**What to do:**
+
+* Set `ANTHROPIC_FOUNDRY_RESOURCE` to the resource name alone and restart Claude Code. For the endpoint `https://my-resource.services.ai.azure.com/anthropic`, the name is `my-resource`.
+* To give the full endpoint URL instead, set [`ANTHROPIC_FOUNDRY_BASE_URL`](/docs/en/env-vars) to the URL and remove `ANTHROPIC_FOUNDRY_RESOURCE`, then restart Claude Code. Claude Code accepts only one of the two variables.
 
 <h3 id="the-200k-limit-isnt-enforced">
   The 200K limit isn't enforced
@@ -4998,11 +5481,11 @@ Before v2.1.257, `claude doctor` didn't flag these files; earlier versions leave
 
 ## Responses seem lower quality than usual
 
-If Claude's answers seem less capable than you expect but no error is shown, the cause is usually conversation state rather than the model itself. Claude Code doesn't silently change model versions. It can switch to a fallback model in three specific cases:
+If Claude's answers seem less capable than you expect but no error is shown, the cause is usually conversation state rather than the model itself. Claude Code doesn't silently change model versions. It can switch to a fallback model in these cases:
 
 * A configured [`--fallback-model`](/docs/en/cli-reference#cli-flags) takes over after an availability error, for that turn only, with a notice in the transcript
-* An Amazon Bedrock or Google Cloud's Agent Platform startup check finds your default model unavailable
-* [Automatic model fallback](/docs/en/model-config#automatic-model-fallback) on Fable 5.1, Fable 5, Opus 5.5, and Opus 5 moves the session to the flagged category's fallback model, when that category has one, and shows a notice in the transcript
+* An Amazon Bedrock or Google Cloud's Agent Platform startup check finds your default model unavailable, or your account [loses access to it mid-session](/docs/en/amazon-bedrock#when-a-model-is-disabled-mid-session)
+* [Automatic model fallback](/docs/en/model-config#automatic-model-fallback) on Fable 5.1, Fable 5, Opus 5.5, Sonnet 5.5, and Opus 5 moves the session to the flagged category's fallback model, when that category has one, and shows a notice in the transcript
 
 The Model selection check below catches the second and third cases; the first appears as a transcript notice rather than a `/model` change. [Model configuration](/docs/en/model-config) explains when each fallback applies.
 

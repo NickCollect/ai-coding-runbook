@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/migration-guide
-fetched_at: 2026-09-07T05:31:22.195366+00:00
+fetched_at: 2026-10-05T06:27:10.696447+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,11 +20,11 @@ Migrating from the OpenAI Agents SDK instead? The [OpenAI Agents SDK migration r
 
 ## What's Changed
 
-| Aspect                     | Old                         | New                                                                      |
-| :------------------------- | :-------------------------- | :----------------------------------------------------------------------- |
-| **Package Name (TS/JS)**   | `@anthropic-ai/claude-code` | `@anthropic-ai/claude-agent-sdk`                                         |
-| **Python Package**         | `claude-code-sdk`           | `claude-agent-sdk`                                                       |
-| **Documentation Location** | Claude Code docs            | Claude Code docs → dedicated [Agent SDK](/docs/en/agent-sdk/overview) section |
+| Aspect | Old | New |
+| :- | :- | :- |
+| **Package Name (TS/JS)** | `@anthropic-ai/claude-code` | `@anthropic-ai/claude-agent-sdk` |
+| **Python Package** | `claude-code-sdk` | `claude-agent-sdk` |
+| **Documentation Location** | Claude Code docs | Claude Code docs → dedicated [Agent SDK](/docs/en/agent-sdk/overview) section |
 
 ## Migration Steps
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments-quickstart
-fetched_at: 2026-08-31T06:29:45.212397+00:00
+fetched_at: 2026-10-05T06:27:12.745330+00:00
 fetch_method: mintlify_md
 ---
 
@@ -101,7 +101,7 @@ To set up manually instead:
   </Step>
 </Steps>
 
-The runner exits by design once its active sessions finish; see [Runner lifecycle](/docs/en/self-hosted-environments#runner-lifecycle). For production, deploy it under an orchestrator that restarts it on exit. See [Deploy to production](/docs/en/self-hosted-environments-deploy).
+The runner exits by design once its active sessions finish; see [Runner lifecycle](/docs/en/self-hosted-environments#runner-lifecycle). For production, deploy it under an orchestrator that restarts it on exit and waits longer between restarts when the runner keeps exiting right after it starts. See [Deploy to production](/docs/en/self-hosted-environments-deploy) and [When the runner exits](/docs/en/self-hosted-environments-deploy#when-the-runner-exits).
 
 ## Send a follow-up message to a running session
 
@@ -111,7 +111,7 @@ Once a session is running on your environment, send it a follow-up from the `cla
 claude -p "your message" --cloud <session-id>
 ```
 
-For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session's claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, the account and policy requirements, and the error reference are on [Send follow-ups from the CLI](/docs/en/claude-code-on-the-web#send-follow-ups-from-the-cli), since the command works the same against Anthropic-hosted sessions.
+For `<session-id>`, pass the bare `session_...` or `cse_...` ID or the session's claude.ai/code URL. A successful send prints `Sent to cloud session.` with the session ID and a view link. Accepted ID forms, JSON output, and the account and policy requirements are on [Send follow-ups from the CLI](/docs/en/claude-code-on-the-web#send-follow-ups-from-the-cli), since the command works the same against Anthropic-hosted sessions.
 
 ## What's next
 

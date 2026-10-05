@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mobile
-fetched_at: 2026-09-28T06:10:41.520345+00:00
+fetched_at: 2026-10-05T06:27:12.051137+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,12 +42,12 @@ The Claude app for [iOS](https://apps.apple.com/us/app/claude-by-anthropic/id647
 
 From the app you can start cloud sessions, open a project, drive a Claude Code session running on your computer, or message Dispatch a task. The app is the same for each; they differ in where the work happens.
 
-| Feature                                        | What you connect to                                                               | When to use                                                                                                                                            |
-| :--------------------------------------------- | :-------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Cloud sessions](/docs/en/claude-code-on-the-web)   | A session on cloud infrastructure, Anthropic-managed by default                   | Your repository is on GitHub and the task should keep running after you put your phone away. See the [cloud quickstart](/docs/en/web-quickstart) to set up. |
-| [Projects](/docs/en/claude-projects)                | A conversation where Claude coordinates parallel threads of work and reports back | You have a stream of related work rather than one task and want to see which threads finished or need you.                                             |
-| [Remote Control](/docs/en/remote-control)           | A Claude Code session running on your computer                                    | The work needs your local filesystem, tools, or MCP servers.                                                                                           |
-| [Dispatch](/docs/en/desktop#sessions-from-dispatch) | The Desktop app on your computer                                                  | You want to message a task and let Dispatch decide how to run it. Requires a Pro or Max plan.                                                          |
+| Feature | What you connect to | When to use |
+| :- | :- | :- |
+| [Cloud sessions](/docs/en/claude-code-on-the-web) | A session on cloud infrastructure, Anthropic-managed by default | Your repository is on GitHub and the task should keep running after you put your phone away. See the [cloud quickstart](/docs/en/web-quickstart) to set up. |
+| [Projects](/docs/en/claude-projects) | A conversation where Claude coordinates parallel threads of work and reports back | You have a stream of related work rather than one task and want to see which threads finished or need you. |
+| [Remote Control](/docs/en/remote-control) | A Claude Code session running on your computer | The work needs your local filesystem, tools, or MCP servers. |
+| [Dispatch](/docs/en/desktop#sessions-from-dispatch) | The Desktop app on your computer | You want to message a task and let Dispatch decide how to run it. Requires a Pro or Max plan. |
 
 If your computer will be off, use cloud sessions or a project, which run in the cloud and continue with your laptop closed. Remote Control and Dispatch drive your own machine, so it needs to stay on with Claude Code or the Desktop app running. If your machine sleeps during a Remote Control session, Claude Code reconnects when the machine comes back online.
 

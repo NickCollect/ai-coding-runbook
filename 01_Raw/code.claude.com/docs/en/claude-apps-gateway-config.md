@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-config
-fetched_at: 2026-09-28T06:10:40.041423+00:00
+fetched_at: 2026-10-05T06:27:11.228049+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,10 +47,10 @@ Five sections are [required](#required-sections). Every other section is [option
 
 Don't write secrets such as `client_secret`, `jwt_secret`, or `postgres_url` directly in `gateway.yaml`. Reference them with one of the forms below, and the gateway resolves the value at boot from an environment variable or a file:
 
-| Form            | Resolves to                                                                                                                                                                                                                                                 | Use for                                                                |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `${VAR}`        | The environment variable `VAR`. Boot fails if undefined.                                                                                                                                                                                                    | Container environment variables, AWS Secrets Manager via env injection |
-| `${file:/path}` | Contents of the file at that absolute path, trimmed. The reference must be the field's entire value: unlike `${VAR}`, it isn't expanded inside a longer string, so for a database password set `store.password` rather than embedding it in `postgres_url`. | Kubernetes Secret volume mounts, Vault Agent, SOPS                     |
+| Form | Resolves to | Use for |
+| - | - | - |
+| `${VAR}` | The environment variable `VAR`. Boot fails if undefined. | Container environment variables, AWS Secrets Manager via env injection |
+| `${file:/path}` | Contents of the file at that absolute path, trimmed. The reference must be the field's entire value: unlike `${VAR}`, it isn't expanded inside a longer string, so for a database password set `store.password` rather than embedding it in `postgres_url`. | Kubernetes Secret volume mounts, Vault Agent, SOPS |
 
 ## Required sections
 
@@ -58,13 +58,13 @@ Don't write secrets such as `client_secret`, `jwt_secret`, or `postgres_url` dir
 
 The `listen` block controls where the gateway serves: the bind address and port, the externally visible origin, and optional TLS termination.
 
-| Field                  | Required                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ---------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`                 | No                        | Bind address. Default `0.0.0.0`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `port`                 | No                        | Bind port. Default `8080`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `public_url`           | Unless `host` is loopback | The externally visible `https://` origin, used to build the IdP `redirect_uri` and discovery metadata. Required whenever `host` isn't a loopback address, whether TLS terminates at a proxy such as an ALB, Ingress, or Cloud Run or at the gateway itself through `tls`, because the gateway never derives its own origin from `X-Forwarded-*` headers; they are client-spoofable. Boot fails without it. `trusted_proxies` below governs client-IP resolution only. Also required to enable [telemetry](#telemetry), because the gateway builds the OTLP endpoint it pushes to clients from this URL. |
-| `tls.cert` / `tls.key` | No                        | PEM paths if the gateway terminates TLS itself                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `trusted_proxies`      | No                        | CIDRs or IPs of load balancers in front of the gateway. When set, the gateway trusts `X-Forwarded-For` only from these peers and records the real client IP for per-IP rate limiting and audit. Equivalent to nginx `set_real_ip_from`. `X-Forwarded-For` entries written as `ipv4:port` or `[ipv6]:port`, as some load balancers do, are read with the port dropped. An IPv6 address with a port appended and no brackets may be read as a different address or not read at all, so turn off the port option on any proxy that writes that form.                                                       |
+| Field | Required | Description |
+| - | - | - |
+| `host` | No | Bind address. Default `0.0.0.0`. |
+| `port` | No | Bind port. Default `8080`. |
+| `public_url` | Unless `host` is loopback | The externally visible `https://` origin, used to build the IdP `redirect_uri` and discovery metadata. Required whenever `host` isn't a loopback address, whether TLS terminates at a proxy such as an ALB, Ingress, or Cloud Run or at the gateway itself through `tls`, because the gateway never derives its own origin from `X-Forwarded-*` headers; they are client-spoofable. Boot fails without it. `trusted_proxies` below governs client-IP resolution only. Also required to enable [telemetry](#telemetry), because the gateway builds the OTLP endpoint it pushes to clients from this URL. |
+| `tls.cert` / `tls.key` | No | PEM paths if the gateway terminates TLS itself |
+| `trusted_proxies` | No | CIDRs or IPs of load balancers in front of the gateway. When set, the gateway trusts `X-Forwarded-For` only from these peers and records the real client IP for per-IP rate limiting and audit. Equivalent to nginx `set_real_ip_from`. `X-Forwarded-For` entries written as `ipv4:port` or `[ipv6]:port`, as some load balancers do, are read with the port dropped. An IPv6 address with a port appended and no brackets may be read as a different address or not read at all, so turn off the port option on any proxy that writes that form. |
 
 ### `oidc`
 
@@ -72,28 +72,86 @@ The `oidc` block connects the gateway to your identity provider and decides who 
 
 OpenID Connect (OIDC) is the SSO protocol the gateway uses with your identity provider; see [Identity provider setup](/docs/en/claude-apps-gateway-deploy#identity-provider-setup) for what to register on the IdP side.
 
-| Field                           | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `issuer`                        | Yes      | OIDC discovery base. Must serve discovery at `/.well-known/openid-configuration`. Use HTTPS in production; the gateway accepts an `http://` issuer. A loopback issuer such as `http://localhost:8081` is rejected by the [SSRF guard](/docs/en/claude-apps-gateway-deploy#threat-model-summary) unless `CLAUDE_GATEWAY_ALLOW_LOOPBACK=1` is set in the gateway's environment.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `client_id` / `client_secret`   | Yes      | From your OAuth client registration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `allowed_email_domains`         | No       | Reject id\_tokens whose `email` claim isn't in one of these domains, case-insensitive. Defense-in-depth against multi-tenant IdP misconfiguration. Independent of this setting, an id\_token whose `email_verified` claim is explicitly `false` is always rejected.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| `allowed_groups`                | No       | Restrict sign-in to members of these IdP groups, matched against `groups_claim`. A user in an allowed email domain but in none of these groups is rejected. Requires the IdP to emit the groups claim. Matching is an exact, case-sensitive string comparison against the values in that claim, and the gateway doesn't expand nested groups: to admit members of a sub-group, list the sub-group here or configure the IdP to emit flattened membership.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `groups_claim`                  | No       | Which id\_token claim carries group membership. Default `groups`. Microsoft Entra emits app roles under `roles`. Accepts a flat key or an RFC 6901 JSON Pointer such as `/resource_access/gateway/roles` for nested claims.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `google_groups`                 | No       | Look up the signed-in user's groups through the Google Workspace Admin SDK Directory API, because Google's id\_token carries no groups claim. Set `service_account_json_path` to a service-account key file with domain-wide delegation on the `https://www.googleapis.com/auth/admin.directory.group.readonly` scope, and `admin_email` to a Workspace administrator the service account impersonates; the Directory API requires a real admin subject. Each user's group email addresses become their groups claim, so `allowed_groups` and `managed.policies.match.groups` match on group emails.                                                                                                                                                                                                                                                                                                                                                                                                            |
-| `email_claim`                   | No       | Which id\_token claim carries the user's email. Default `email`. Some IdPs, such as ADFS and Entra B2C, emit `upn` or `preferred_username` instead. Accepts a flat key, a JSON Pointer, or a list of fallback keys where the first present key is used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `scopes`                        | No       | Full override of the OIDC scopes the gateway requests. Default `[openid, profile, email, offline_access]`. Set when your IdP rejects scopes it doesn't recognize, or requires a custom scope to emit groups or email. Must include `openid`. Dropping `offline_access` disables refresh tokens, so developers re-run the browser login every `session.ttl_hours`. See [Identity provider setup](/docs/en/claude-apps-gateway-deploy#identity-provider-setup) for per-IdP scope recipes such as Google's refresh-token flow.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| `scope_on_refresh`              | No       | Also send `scope`, with the same list as the sign-in request, when the gateway exchanges a refresh token. Default `false`: the refresh request omits `scope`. Most IdPs return an id\_token on every refresh and don't need this. Set `true` when your IdP returns an id\_token on refresh only if asked for `openid` again, which Okta documents for its refresh grant. Without an id\_token, every refresh depends on the IdP's userinfo endpoint accepting the refreshed access token. If you gate sign-in or match policies on groups and your IdP's refresh-time id\_token omits them, also set `userinfo_fallback: true` so the gateway fills them from the userinfo endpoint. An IdP that granted fewer scopes than requested can reject the refresh with `invalid_scope`, including for existing sessions if you add entries to `scopes` while this is on. Unset the key if refreshes start failing at `token_endpoint` after you set it. Requires Claude Code v2.1.260 or later on the gateway server. |
-| `extra_auth_params`             | No       | Extra query parameters appended to the IdP authorization request, verbatim. This is the override mechanism for IdP-specific behavior, such as `access_type: offline` for Google refresh tokens, `domain_hint` for some Entra tenants, or `acr_values` for step-up flows. Cannot override the gateway-managed protocol params: `state`, `nonce`, `redirect_uri`, PKCE, `scope`, `response_type`, `response_mode`, and `client_id`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `userinfo_fallback`             | No       | When the id\_token omits email or groups, fetch them from `/userinfo`. Needed for Keycloak lightweight access tokens, the Okta org server, and ADFS minimal tokens. The id\_token stays authoritative; userinfo only fills gaps. Default `false`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `use_pkce`                      | No       | Send a PKCE (S256) challenge on the authorization request. Default `true`. Set `false` only if your IdP rejects PKCE for this confidential client.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `clock_skew_seconds`            | No       | Tolerate clock drift when validating id\_token time claims. Default `0`, which is strict. Raise if you see "token expired / not yet valid" errors right after sign-in due to host/IdP clock skew.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| `token_endpoint_auth_method`    | No       | Override the token-endpoint auth method. Accepts `client_secret_basic` or `client_secret_post`. Auto-negotiated by default.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `id_token_signed_response_alg`  | No       | Expected id\_token signing algorithm. Default `RS256`. Set for IdPs that sign with ES256, PS256, or EdDSA.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `additional_authorized_parties` | No       | Extra `azp` values to accept beyond `client_id`, for Keycloak broker and token-exchange flows                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `discovery_url`                 | No       | Fetch the discovery document from this URL instead of deriving it from `issuer`, for IdPs behind a proxy that rewrites the issuer host. The path must contain `/.well-known/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `use_proxy`                     | No       | Send the gateway's own IdP requests through the forward proxy in `HTTPS_PROXY` or `HTTP_PROXY`, honoring `NO_PROXY`. `false` keeps those requests direct. Requires v2.1.227 or later; see [IdP requests through a forward proxy](#idp-requests-through-a-forward-proxy) below.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `form_action_origins`           | No       | Additional origins for the `/device` page's `Content-Security-Policy: form-action` directive. The gateway already allows `'self'` and the discovered `authorization_endpoint` origin, but Chrome enforces `form-action` against the entire redirect chain. If your IdP redirects through a second host, such as Azure AD federated to ADFS, hub-spoke Okta, or a corporate SSO interceptor, list every origin the authorization request may redirect through.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `ca_cert_pem`                   | No       | The PEM-encoded CA certificate itself, not a path to a file. It replaces the system trust store for IdP requests only. To load a mounted file, write `${file:/etc/gateway/idp-ca.pem}`. Use for Keycloak or Dex behind corporate PKI.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| Field | Required | Description |
+| - | - | - |
+| `issuer` | Yes | OIDC discovery base. Must serve discovery at `/.well-known/openid-configuration`. Use HTTPS in production; the gateway accepts an `http://` issuer. A loopback issuer such as `http://localhost:8081` is rejected by the [SSRF guard](/docs/en/claude-apps-gateway-deploy#threat-model-summary) unless `CLAUDE_GATEWAY_ALLOW_LOOPBACK=1` is set in the gateway's environment. |
+| `client_id` | Yes | From your OAuth client registration |
+| `client_secret` | Unless `token_endpoint_auth_method` is `private_key_jwt` | From your OAuth client registration. Leave it out when you use [certificate client authentication](#certificate-client-authentication). |
+| `allowed_email_domains` | No | Reject id\_tokens whose `email` claim isn't in one of these domains, case-insensitive. Defense-in-depth against multi-tenant IdP misconfiguration. Independent of this setting, an id\_token whose `email_verified` claim is explicitly `false` is always rejected. |
+| `allowed_groups` | No | Restrict sign-in to members of these IdP groups, matched against `groups_claim`. A user in an allowed email domain but in none of these groups is rejected. Requires the IdP to emit the groups claim. Matching is an exact, case-sensitive string comparison against the values in that claim, and the gateway doesn't expand nested groups: to admit members of a sub-group, list the sub-group here or configure the IdP to emit flattened membership. |
+| `groups_claim` | No | Which id\_token claim carries group membership. Default `groups`. Microsoft Entra emits app roles under `roles`. Accepts a flat key or an RFC 6901 JSON Pointer such as `/resource_access/gateway/roles` for nested claims. |
+| `google_groups` | No | Look up the signed-in user's groups through the Google Workspace Admin SDK Directory API, because Google's id\_token carries no groups claim. Set `service_account_json_path` to a service-account key file with domain-wide delegation on the `https://www.googleapis.com/auth/admin.directory.group.readonly` scope, and `admin_email` to a Workspace administrator the service account impersonates; the Directory API requires a real admin subject. Each user's group email addresses become their groups claim, so `allowed_groups` and `managed.policies.match.groups` match on group emails. |
+| `email_claim` | No | Which id\_token claim carries the user's email. Default `email`. Some IdPs, such as ADFS and Entra B2C, emit `upn` or `preferred_username` instead. Accepts a flat key, a JSON Pointer, or a list of fallback keys where the first present key is used. |
+| `scopes` | No | Full override of the OIDC scopes the gateway requests. Default `[openid, profile, email, offline_access]`. Set when your IdP rejects scopes it doesn't recognize, or requires a custom scope to emit groups or email. Must include `openid`. Dropping `offline_access` disables refresh tokens, so developers re-run the browser login every `session.ttl_hours`. See [Identity provider setup](/docs/en/claude-apps-gateway-deploy#identity-provider-setup) for per-IdP scope recipes such as Google's refresh-token flow. |
+| `scope_on_refresh` | No | Also send `scope`, with the same list as the sign-in request, when the gateway exchanges a refresh token. Default `false`: the refresh request omits `scope`. Most IdPs return an id\_token on every refresh and don't need this. Set `true` when your IdP returns an id\_token on refresh only if asked for `openid` again, which Okta documents for its refresh grant. Without an id\_token, every refresh depends on the IdP's userinfo endpoint accepting the refreshed access token. If you gate sign-in or match policies on groups and your IdP's refresh-time id\_token omits them, also set `userinfo_fallback: true` so the gateway fills them from the userinfo endpoint. An IdP that granted fewer scopes than requested can reject the refresh with `invalid_scope`, including for existing sessions if you add entries to `scopes` while this is on. Unset the key if refreshes start failing at `token_endpoint` after you set it. Requires Claude Code v2.1.260 or later on the gateway server. |
+| `extra_auth_params` | No | Extra query parameters appended to the IdP authorization request, verbatim. This is the override mechanism for IdP-specific behavior, such as `access_type: offline` for Google refresh tokens, `domain_hint` for some Entra tenants, or `acr_values` for step-up flows. Cannot override the gateway-managed protocol params: `state`, `nonce`, `redirect_uri`, PKCE, `scope`, `response_type`, `response_mode`, and `client_id`. |
+| `userinfo_fallback` | No | When the id\_token omits email or groups, fetch them from `/userinfo`. Needed for Keycloak lightweight access tokens, the Okta org server, and ADFS minimal tokens. The id\_token stays authoritative; userinfo only fills gaps. Default `false`. |
+| `use_pkce` | No | Send a PKCE (S256) challenge on the authorization request. Default `true`. Set `false` only if your IdP rejects PKCE for this confidential client. |
+| `clock_skew_seconds` | No | Tolerate clock drift when validating id\_token time claims. Default `0`, which is strict. Raise if you see "token expired / not yet valid" errors right after sign-in due to host/IdP clock skew. |
+| `token_endpoint_auth_method` | No | How the gateway authenticates to the IdP's token endpoint: `client_secret_basic`, `client_secret_post`, or `private_key_jwt` for [certificate client authentication](#certificate-client-authentication). By default the gateway picks one of the two `client_secret` methods from what the IdP advertises. |
+| `client_assertion` | With `private_key_jwt` | A block with `private_key_pem` and `certificate_pem`: the private key and certificate for [certificate client authentication](#certificate-client-authentication). Requires v2.1.284 or later. |
+| `id_token_signed_response_alg` | No | Expected id\_token signing algorithm. Default `RS256`. Set for IdPs that sign with ES256, PS256, or EdDSA. |
+| `additional_authorized_parties` | No | Extra `azp` values to accept beyond `client_id`, for Keycloak broker and token-exchange flows |
+| `discovery_url` | No | Fetch the discovery document from this URL instead of deriving it from `issuer`, for IdPs behind a proxy that rewrites the issuer host. The path must contain `/.well-known/`. |
+| `use_proxy` | No | Send the gateway's own IdP requests through the forward proxy in `HTTPS_PROXY` or `HTTP_PROXY`, honoring `NO_PROXY`. `false` keeps those requests direct. Requires v2.1.227 or later; see [IdP requests through a forward proxy](#idp-requests-through-a-forward-proxy) below. |
+| `form_action_origins` | No | Additional origins for the `/device` page's `Content-Security-Policy: form-action` directive. The gateway already allows `'self'` and the discovered `authorization_endpoint` origin, but Chrome enforces `form-action` against the entire redirect chain. If your IdP redirects through a second host, such as Azure AD federated to ADFS, hub-spoke Okta, or a corporate SSO interceptor, list every origin the authorization request may redirect through. |
+| `ca_cert_pem` | No | The PEM-encoded CA certificate itself, not a path to a file. It replaces the system trust store for IdP requests only. To load a mounted file, write `${file:/etc/gateway/idp-ca.pem}`. Use for Keycloak or Dex behind corporate PKI. |
+
+#### Certificate client authentication
+
+If your identity provider authenticates OAuth clients with a certificate instead of a client secret, as Microsoft Entra does with certificate credentials, set `token_endpoint_auth_method: private_key_jwt`. Requires Claude Code v2.1.284 or later on the gateway server.
+
+With this configuration the gateway sends no secret. It authenticates to the IdP's token endpoint with a short-lived JWT signed with the certificate's private key when a developer signs in and each time the gateway refreshes their session. The JWT is signed with RS256 and identifies the certificate by `x5t` and `x5t#S256` thumbprint headers rather than a `kid`. Your IdP must be able to find the registered certificate by thumbprint.
+
+<Steps>
+  <Step title="Create the key and certificate">
+    Create an unencrypted RSA private key of at least 2048 bits, in PKCS#8 or PKCS#1 PEM form, and a certificate for it. The gateway refuses to start with any key that doesn't meet these conditions. This `openssl` command creates such a key with a self-signed certificate that is valid for one year:
+
+    ```bash theme={null}
+    openssl req -x509 -newkey rsa:2048 -nodes -keyout idp-client.key -out idp-client.crt -days 365 -subj "/CN=claude-gateway"
+    ```
+
+    It writes `idp-client.key` and `idp-client.crt` to the current directory. Copy or mount both files where the gateway can read them. The example in step 3 uses `/etc/gateway/`.
+  </Step>
+
+  <Step title="Upload the certificate to the IdP">
+    Upload the certificate, not the private key, to the gateway's app registration at the IdP.
+  </Step>
+
+  <Step title="Add the key and certificate to gateway.yaml">
+    Give the gateway the private key and the certificate in a `client_assertion` block. Leave `client_secret` out, because the gateway refuses to start when one is set together with `private_key_jwt`. This `oidc` block authenticates the gateway to a Microsoft Entra tenant with a certificate:
+
+    ```yaml theme={null}
+    oidc:
+      issuer: https://login.microsoftonline.com/<tenant-id>/v2.0
+      client_id: <application-id>
+      token_endpoint_auth_method: private_key_jwt
+      client_assertion:
+        private_key_pem: ${file:/etc/gateway/idp-client.key}
+        certificate_pem: ${file:/etc/gateway/idp-client.crt}
+    ```
+
+    Both values are the PEM contents, not file paths, so load mounted files with `${file:/path}` as the example does. The gateway refuses to start unless `certificate_pem` is a single PEM certificate, without the rest of its chain, whose public key matches `private_key_pem`.
+  </Step>
+
+  <Step title="Restart the gateway and check the boot log">
+    Restart the gateway and find this line in the boot log:
+
+    ```text theme={null}
+    [gateway] 2026-10-01T23:07:40.512Z info oidc: client authentication private_key_jwt; certificate CN=claude-gateway, SHA-1 thumbprint DE92821854EE8BAA1D98C758FAA04AABE80B9F57, expires Oct  1 23:07:31 2027 GMT
+    ```
+
+    Compare the SHA-1 thumbprint with the one the IdP shows for the certificate you uploaded. If the certificate has expired or isn't valid yet, the gateway still starts but logs a warning that sign-ins and refreshes will fail until you replace it. To confirm that the IdP accepts the certificate, have one developer sign in through the gateway.
+  </Step>
+</Steps>
+
+#### Rotate the client certificate
+
+The gateway reads the key and certificate once at boot, so a changed file takes effect only after a restart. Rotate in this order so that no token request presents a certificate the IdP doesn't have:
+
+1. Upload the new certificate to the IdP alongside the old one.
+2. Replace the key and certificate files that `gateway.yaml` loads, then restart the gateway.
+3. Remove the old certificate from the IdP.
 
 #### IdP requests through a forward proxy
 
@@ -118,11 +176,11 @@ The gateway logs one `network:` line at boot while proxy-only egress is active.
 
 Each row below is one class of outbound request on a gateway with `HTTPS_PROXY` set, by default and while proxy-only egress is active.
 
-| Outbound request                                                                                                             | Default                                                                                                                                                          | Proxy-only egress active                                                                  |
-| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `provider: anthropic` upstreams, Workload Identity Federation token exchange, `telemetry.forward_to` exports                 | Resolved and checked locally, then `CONNECT` to the checked IP address through the proxy. A telemetry collector listed in `NO_PROXY` is reached directly instead | Hostname handed to the proxy                                                              |
-| IdP discovery, JWKS, token, and userinfo                                                                                     | Direct unless [`oidc.use_proxy: true`](#idp-requests-through-a-forward-proxy), then `CONNECT` to the checked IP address                                          | Hostname handed to the proxy, unless `oidc.use_proxy: false` keeps an internal IdP direct |
-| Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry upstreams; Google group lookups | Hostname handed to the proxy                                                                                                                                     | Unchanged                                                                                 |
+| Outbound request | Default | Proxy-only egress active |
+| - | - | - |
+| `provider: anthropic` upstreams, Workload Identity Federation token exchange, `telemetry.forward_to` exports | Resolved and checked locally, then `CONNECT` to the checked IP address through the proxy. A telemetry collector listed in `NO_PROXY` is reached directly instead | Hostname handed to the proxy |
+| IdP discovery, JWKS, token, and userinfo | Direct unless [`oidc.use_proxy: true`](#idp-requests-through-a-forward-proxy), then `CONNECT` to the checked IP address | Hostname handed to the proxy, unless `oidc.use_proxy: false` keeps an internal IdP direct |
+| Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry upstreams; Google group lookups | Hostname handed to the proxy | Unchanged |
 
 Proxy-only egress stays off unless the gateway's environment meets all three of these conditions:
 
@@ -142,23 +200,23 @@ Once proxy-only egress is active, allow every destination in the proxy, includin
 
 The `session` block shapes the bearer tokens the gateway mints after sign-in: the secret that signs them and how long they live.
 
-| Field        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                           |
-| ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `jwt_secret` | Yes      | At least 32 bytes of entropy, for example from `openssl rand -base64 32`. Signs the gateway's HS256 bearer tokens. Accepts a single string or an array for rotation: index 0 signs and all entries verify. To rotate, prepend a new secret, wait `ttl_hours`, then drop the old one.                                                                                                                                  |
-| `ttl_hours`  | No       | Gateway bearer token lifetime. Default `1`. The CLI silently refreshes before expiry when the IdP issues refresh tokens. A shorter lifetime deprovisions faster; a longer one makes fewer IdP round-trips. If your IdP can't issue refresh tokens because `offline_access` is unavailable, there is no silent refresh, so raise this to `8` or `12` to avoid sending developers back to the browser login every hour. |
+| Field | Required | Description |
+| - | - | - |
+| `jwt_secret` | Yes | At least 32 bytes of entropy, for example from `openssl rand -base64 32`. Signs the gateway's HS256 bearer tokens. Accepts a single string or an array for rotation: index 0 signs and all entries verify. To rotate, prepend a new secret, wait `ttl_hours`, then drop the old one. |
+| `ttl_hours` | No | Gateway bearer token lifetime. Default `1`. The CLI silently refreshes before expiry when the IdP issues refresh tokens. A shorter lifetime deprovisions faster; a longer one makes fewer IdP round-trips. If your IdP can't issue refresh tokens because `offline_access` is unavailable, there is no silent refresh, so raise this to `8` or `12` to avoid sending developers back to the browser login every hour. |
 
 ### `store`
 
 The `store` block points the gateway at its PostgreSQL database, which holds device grants and rate-limit counters.
 
-| Field                     | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `postgres_url`            | Yes      | `postgres://` or `postgresql://` URL. Required: the device-grant rendezvous, where the browser callback writes and the polling CLI reads, needs cross-replica state. The gateway runs its own schema migrations at boot and on upgrade, so the role needs rights to create and alter tables on the target schema. See [Upgrades](/docs/en/claude-apps-gateway-deploy#upgrades) and [Postgres](/docs/en/claude-apps-gateway-deploy#postgres). |
-| `username`                | No       | Overrides the user in `postgres_url`                                                                                                                                                                                                                                                                                                                                                                                               |
-| `password`                | No       | Database credential. Set it here rather than in `postgres_url` so the credential stays out of the URL. Accepts any characters and takes precedence over URL credentials.                                                                                                                                                                                                                                                           |
-| `max_connections`         | No       | Postgres connection-pool size per replica. Default `5`, which is conservative and friendly to shared databases. With [spend limits](#admin) enabled, the hot path does a few operations per inference request, so raise it for a dedicated database under load, and keep replicas × this below the database's `max_connections`.                                                                                                   |
-| `connect_timeout_seconds` | No       | Seconds the gateway waits when it opens a Postgres connection. A whole number from `1` to `60`, default `5`. Raise it if connection attempts time out when a new gateway instance starts. Requires Claude Code v2.1.274 or later on the gateway server. Earlier versions refuse to start when the key is set.                                                                                                                      |
-| `readiness_grace_seconds` | No       | How many seconds `/readyz` keeps reporting ready after Postgres stops answering. A whole number from `0` to `3600`, default `0`. See [Outage behavior](/docs/en/claude-apps-gateway-deploy#outage-behavior) for how to pick a value. Requires Claude Code v2.1.282 or later on the gateway server. Earlier versions refuse to start when the key is set.                                                                                |
+| Field | Required | Description |
+| - | - | - |
+| `postgres_url` | Yes | `postgres://` or `postgresql://` URL. Required: the device-grant rendezvous, where the browser callback writes and the polling CLI reads, needs cross-replica state. The gateway runs its own schema migrations at boot and on upgrade, so the role needs rights to create and alter tables on the target schema. See [Upgrades](/docs/en/claude-apps-gateway-deploy#upgrades) and [Postgres](/docs/en/claude-apps-gateway-deploy#postgres). |
+| `username` | No | Overrides the user in `postgres_url` |
+| `password` | No | Database credential. Set it here rather than in `postgres_url` so the credential stays out of the URL. Accepts any characters and takes precedence over URL credentials. |
+| `max_connections` | No | Postgres connection-pool size per replica. Default `5`, which is conservative and friendly to shared databases. With [spend limits](#admin) enabled, the hot path does a few operations per inference request, so raise it for a dedicated database under load, and keep replicas × this below the database's `max_connections`. |
+| `connect_timeout_seconds` | No | Seconds the gateway waits when it opens a Postgres connection. A whole number from `1` to `60`, default `5`. Raise it if connection attempts time out when a new gateway instance starts. Requires Claude Code v2.1.274 or later on the gateway server. Earlier versions refuse to start when the key is set. |
+| `readiness_grace_seconds` | No | How many seconds `/readyz` keeps reporting ready after Postgres stops answering. A whole number from `0` to `3600`, default `0`. See [Outage behavior](/docs/en/claude-apps-gateway-deploy#outage-behavior) for how to pick a value. Requires Claude Code v2.1.282 or later on the gateway server. Earlier versions refuse to start when the key is set. |
 
 For local development, point `postgres_url` at a throwaway Postgres container, for example `docker run --rm -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust postgres`.
 
@@ -166,7 +224,7 @@ For local development, point `postgres_url` at a throwaway Postgres container, f
 
 `upstreams` is an ordered list. The gateway forwards inference to the first upstream that resolves the requested model.
 
-On `5xx`, `429`, `401`, `403`, `404`, or timeout the gateway fails over to the next upstream; other `4xx` doesn't, because those errors are attributable to the request rather than the upstream. A `401` or `403` means the gateway's own credential failed against that upstream. A `404` means that upstream doesn't serve the requested model, so a later upstream in the list still can.
+On `5xx`, `429`, `401`, `403`, `404`, or timeout the gateway fails over to the next upstream; other `4xx` doesn't, because those errors are attributable to the request rather than the upstream. A `401` or `403` means the upstream rejected the credential the gateway used, or denied it access, for example to the requested model. A `404` means that upstream doesn't serve the requested model, so a later upstream in the list still can.
 
 If you set `forward_user_identity: true` on an upstream, a `429` it returns to a request that carried the developer's email doesn't fail over. See [how a per-user limit denial reaches the developer](#per-user-identity-headers-for-a-proxy-you-run).
 
@@ -246,11 +304,11 @@ upstreams:
 
 The gateway adds these headers to every request it forwards to that upstream.
 
-| Header                        | Value                                                      |
-| ----------------------------- | ---------------------------------------------------------- |
-| `x-litellm-end-user-id`       | The developer's email, when the IdP supplied one.          |
-| `x-claude-gateway-user-id`    | The developer's IdP subject, from the token's `sub` claim. |
-| `x-claude-gateway-user-email` | The developer's email, when the IdP supplied one.          |
+| Header | Value |
+| - | - |
+| `x-litellm-end-user-id` | The developer's email, when the IdP supplied one. |
+| `x-claude-gateway-user-id` | The developer's IdP subject, from the token's `sub` claim. |
+| `x-claude-gateway-user-email` | The developer's email, when the IdP supplied one. |
 
 When the IdP token carries no email, the gateway sends only `x-claude-gateway-user-id` and omits the two email headers. If your IdP puts the email in a different claim, set [`oidc.email_claim`](#oidc) to that claim.
 
@@ -283,14 +341,159 @@ An empty `auth` block uses the AWS SDK's default credential chain: env vars, `~/
 
 Explicit credentials must be complete: the gateway fails at boot when `aws_access_key_id` and `aws_secret_access_key` aren't set together, or when `aws_session_token` is set without them. Before v2.1.207, a partial `auth:` block passed validation.
 
-| Setup           | How                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Setup | How |
+| - | - |
 | IAM permissions | Grant the gateway's principal `bedrock:InvokeModel` and `bedrock:InvokeModelWithResponseStream` on both the inference-profile ARNs and the underlying foundation-model ARNs. For the built-in catalog in US regions: `arn:aws:bedrock:<region>:<account>:inference-profile/us.anthropic.*` and `arn:aws:bedrock:*::foundation-model/anthropic.*`. Also grant `bedrock:CountTokens` on the foundation-model ARNs. The gateway uses it, at no charge, to count the input tokens of a request the client abandoned, so [spend limits](#admin) stay accurate. Without it the gateway falls back to a one-token Bedrock request for that count. |
-| Model access    | Amazon Bedrock enables model access by default in commercial regions. The remaining account-level gate is Anthropic's one-time use case form: if no one in your AWS account has submitted it, open the Amazon Bedrock console, select an Anthropic model from the Model catalog, and complete the form. See [Submit use case details](/docs/en/amazon-bedrock#1-submit-use-case-details) for the AWS Organizations form and the permissions the submitter needs.                                                                                                                                                                                |
-| EKS (IRSA)      | Create an IAM role with the policy above and a trust policy for your cluster's OIDC provider scoped to the gateway's service account. Annotate the service account with `eks.amazonaws.com/role-arn: arn:aws:iam::<acct>:role/claude-gateway`. `auth: {}` picks it up.                                                                                                                                                                                                                                                                                                                                                                     |
-| ECS / EC2       | Attach the IAM role to the task definition or instance profile. `auth: {}` picks it up.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Anywhere else   | Pass credentials via the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` env vars, or set them explicitly in `auth:` with `${VAR}` expansion                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| Region          | `region:` is the API endpoint region. Cross-region inference profiles route across the geo (US, EU, APAC) regardless of which one you pick. For non-US regions or provisioned-throughput ARNs, add a [`models:`](#models) block with the right per-upstream IDs.                                                                                                                                                                                                                                                                                                                                                                           |
+| Model access | Amazon Bedrock enables model access by default in commercial regions. The remaining account-level gate is Anthropic's one-time use case form: if no one in your AWS account has submitted it, open the Amazon Bedrock console, select an Anthropic model from the Model catalog, and complete the form. See [Submit use case details](/docs/en/amazon-bedrock#1-submit-use-case-details) for the AWS Organizations form and the permissions the submitter needs. |
+| EKS (IRSA) | Create an IAM role with the policy above and a trust policy for your cluster's OIDC provider scoped to the gateway's service account. Annotate the service account with `eks.amazonaws.com/role-arn: arn:aws:iam::<acct>:role/claude-gateway`. `auth: {}` picks it up. |
+| ECS / EC2 | Attach the IAM role to the task definition or instance profile. `auth: {}` picks it up. |
+| Anywhere else | Pass credentials via the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_SESSION_TOKEN` env vars, or set them explicitly in `auth:` with `${VAR}` expansion |
+| Region | `region:` is the API endpoint region. Cross-region inference profiles route across the geo (US, EU, APAC) regardless of which one you pick. For non-US regions or provisioned-throughput ARNs, add a [`models:`](#models) block with the right per-upstream IDs. |
+
+##### Apply an Amazon Bedrock guardrail
+
+To apply an Amazon Bedrock guardrail to every inference request the gateway sends through a Bedrock upstream, add a `guardrail` block to that upstream. Requires Claude Code v2.1.281 or later on the gateway server.
+
+```yaml theme={null}
+upstreams:
+  - provider: bedrock
+    region: us-east-1
+    auth: {}
+    guardrail:
+      id: gr-abc123                    # guardrail ID or full ARN
+      version: "1"                     # a published version number, or DRAFT
+                                       # keep the quotes: a bare 1 fails at boot
+```
+
+<Warning>
+  The gateway doesn't support guardrail input tags. It adds no guard content tags to prompts, so a guardrail filter that Amazon Bedrock applies only to tagged input doesn't run on traffic through the gateway. For which filters depend on input tags, see [input tags](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-tagging.html) in the Amazon Bedrock documentation.
+</Warning>
+
+Also grant `bedrock:ApplyGuardrail` on the guardrail to the principal that signs this upstream's requests: the gateway's AWS principal, or with [`assume_role`](#bedrock-in-another-aws-account) the role named in `role_arn`.
+
+Set `guardrail` on every `bedrock` upstream or on none. The gateway refuses to start on a mix, because [failover](#multiple-upstreams) could otherwise send a request to a Bedrock upstream that has no guardrail.
+
+The guardrail covers Bedrock upstreams only. If you list another provider in `upstreams`, the gateway sends requests to that provider without the guardrail, or refuses to start if that provider is [`mantle`](#amazon-bedrock-mantle-endpoint).
+
+When a `/v1/messages` request whose body carries an `amazon-bedrock-*` field, such as `amazon-bedrock-guardrailConfig`, reaches a Bedrock upstream that has `guardrail` set, the gateway answers 400 instead of forwarding it.
+
+<a id="bedrock-in-another-aws-account" />
+
+##### Bedrock in another AWS account
+
+Set `assume_role` on a Bedrock upstream and the gateway uses its own AWS identity only to call `sts:AssumeRole` on a role you name, which can be in a different AWS account from the gateway. Every Bedrock request from that upstream is signed with the one-hour credentials STS returns, so no long-lived access key crosses accounts.
+
+Requires a gateway running Claude Code v2.1.281 or later. An earlier gateway refuses to start when it finds the key.
+
+```yaml theme={null}
+upstreams:
+  - name: bedrock-isolated
+    provider: bedrock
+    region: us-east-1
+    auth: {}                           # the gateway's own role: it only calls STS
+    assume_role:
+      role_arn: arn:aws:iam::222222222222:role/claude-gateway-bedrock
+      # external_id: ${BEDROCK_ROLE_EXTERNAL_ID}   # when the role's trust policy requires one
+```
+
+The `assume_role` block takes three keys:
+
+| Key | Meaning |
+| - | - |
+| `role_arn` | The IAM role the gateway assumes, as an `arn:aws:iam::` or `arn:aws-us-gov:iam::` ARN. Give it the [Bedrock permissions](#amazon-bedrock) this upstream needs, `bedrock:CountTokens` included, plus `bedrock:ApplyGuardrail` when the upstream sets `guardrail`. |
+| `external_id` | Optional. Sent as the external ID on every `sts:AssumeRole` call. Set it when the role's trust policy requires one, and quote it if it's all digits. |
+| `session_name` | Optional. `email` or `sub` gives each developer their own session: see [Per-developer AWS cost attribution](#per-developer-aws-cost-attribution). Unset, every request uses one session named `claude-apps-gateway`. |
+
+The role's trust policy names the gateway's own principal, such as its IRSA or ECS task role. That principal needs `sts:AssumeRole` on the role and no Bedrock permission of its own. Drop the `Condition` if you set no `external_id`.
+
+```json theme={null}
+{
+  "Version": "2012-10-17",
+  "Statement": [{
+    "Effect": "Allow",
+    "Principal": { "AWS": "arn:aws:iam::111111111111:role/claude-gateway" },
+    "Action": "sts:AssumeRole",
+    "Condition": { "StringEquals": { "sts:ExternalId": "your-external-id" } }
+  }]
+}
+```
+
+* If STS refuses or is unreachable, the gateway doesn't send the request with the upstream's own credentials. It logs the STS error with what to check, then tries the next upstream you listed. [Upstream error messages](#upstream-error-messages) covers what the client receives when no upstream succeeds. A later upstream without `assume_role` would serve the request with its own credentials, so list one only if that is what you want.
+* The gateway calls the regional STS endpoint `sts.<region>.amazonaws.com`, which its network must reach. For the FIPS endpoint, set `AWS_USE_FIPS_ENDPOINT=true` in the gateway's environment rather than `use_fips_endpoint` in an AWS config file.
+* `assume_role` applies to `provider: bedrock` only and needs SigV4 source credentials: the gateway refuses to start when it's set beside `aws_bearer_token`.
+* Every developer the gateway admits can use this upstream; [`managed`](#managed) governs which developers may use which models. To keep a model served through the role from also being served from another account, give it a custom id whose `upstream_model` map has only this upstream's name. For such an id the gateway skips every other upstream, so neither the request nor the token count for an aborted request can fail over to another account. A request for a built-in model name can still [reach this upstream](#multiple-upstreams), and the gateway signs it with the same role. List this upstream last unless its account should also serve those models.
+
+This example gives one model a custom id that only the isolated upstream serves:
+
+```yaml theme={null}
+models:
+  - id: claude-opus-restricted          # a custom id, not a built-in model name
+    upstream_model:
+      bedrock-isolated: us.anthropic.claude-opus-4-8   # the only upstream that serves it
+```
+
+<a id="per-developer-aws-cost-attribution" />
+
+##### Per-developer AWS cost attribution
+
+By default the gateway signs every Bedrock request with one credential, so AWS sees all developers' requests under a single IAM principal. Add `session_name: email` to [`assume_role`](#bedrock-in-another-aws-account) and the gateway calls `sts:AssumeRole` once per developer per hour, with the session name set to that developer's email, and signs their requests with the returned credentials, so each developer's requests reach AWS under their own assumed-role session. The role can be in the gateway's own account.
+
+Requires a gateway running Claude Code v2.1.281 or later. [Cost attribution on AWS](/docs/en/claude-apps-gateway-on-aws#cost-attribution) covers the IAM role and where AWS billing shows the sessions.
+
+```yaml theme={null}
+upstreams:
+  - provider: bedrock
+    region: us-east-1
+    auth: {}                           # the gateway's own role: it only calls STS
+    assume_role:
+      role_arn: arn:aws:iam::123456789012:role/claude-gateway-bedrock-user
+      session_name: email              # or sub
+```
+
+`session_name` selects which verified claim becomes the AWS `RoleSessionName`: `email` or `sub`. The gateway writes any character other than ASCII letters, digits, and `_+,.@-` as `=XX` hex per UTF-8 byte, and shortens a result longer than 64 characters to a prefix plus a hash, so each developer's session name stays valid and unique. A request from a developer whose token lacks the claim isn't sent through this upstream, and the operator log says to switch to `sub` or set [`oidc.email_claim`](#oidc).
+
+An active developer costs one STS call per hour per gateway replica, and concurrent first requests share one call.
+
+The gateway also makes one call of its own on this role: the token count for a request the client abandoned, so that [spend limits](/docs/en/claude-apps-gateway-spend-limits) stay accurate. That count and its [one-token fallback request](#amazon-bedrock) are signed by the shared `claude-apps-gateway` session, so AWS attributes the fallback to `claude-apps-gateway` rather than to the developer.
+
+For strict per-developer attribution, set `assume_role` with `session_name` on every Bedrock upstream you list. An upstream without it signs the requests it serves with its own credentials.
+
+#### Amazon Bedrock Mantle endpoint
+
+The `mantle` provider sends inference to Amazon Bedrock's [Mantle endpoint](/docs/en/amazon-bedrock#use-the-mantle-endpoint). It requires Claude Code v2.1.283 or later on the gateway server. Earlier gateway releases reject it at boot, so upgrade every replica before adding it.
+
+The example below puts Mantle first, with an Amazon Bedrock upstream behind it to serve every model the `models` field leaves out:
+
+```yaml theme={null}
+upstreams:
+  - provider: mantle
+    region: us-east-1
+    models: [claude-opus-4-7, claude-haiku-4-5]   # required
+    auth: {}                           # AWS default credential chain
+  - provider: bedrock
+    region: us-east-1
+    auth: {}
+```
+
+The table below lists the fields specific to a `mantle` upstream.
+
+| Field | Required | Description |
+| - | - | - |
+| `region` | Yes | AWS region. The gateway derives the endpoint from it as `https://bedrock-mantle.<region>.api.aws/anthropic`. |
+| `models` | Yes | The models your AWS account has been granted on Mantle, named as clients send them, such as `claude-haiku-4-5`. Only these go to this upstream, and every other model skips to the next one. |
+| `auth` | No | Takes the same keys as the [Amazon Bedrock](#amazon-bedrock) upstream's `auth` block, under the same rules. |
+| `base_url` | No | Override the derived endpoint. Keep the `/anthropic` path at the end. |
+
+Grant the upstream's AWS identity Mantle's own IAM actions for inference and token counting, which [Use the Mantle endpoint](/docs/en/amazon-bedrock#use-the-mantle-endpoint) lists.
+
+For a Mantle model ID that the gateway doesn't know, add an entry to the top-level [`models:`](#models) block whose `upstream_model` maps this upstream's name to that ID. Then put that entry's `id` in this upstream's `models` field too.
+
+A `bedrock` upstream's `guardrail` and `assume_role` settings don't extend to the requests Mantle serves:
+
+* **`guardrail`**: the gateway applies no [Bedrock guardrail](#apply-an-amazon-bedrock-guardrail) to requests it sends to Mantle, so it refuses to start when a `mantle` upstream is listed while any `bedrock` upstream sets `guardrail`.
+* **`assume_role`**: a `mantle` upstream takes no [`assume_role`](#bedrock-in-another-aws-account). Requests that Mantle serves are sent with the `mantle` upstream's own `auth` credentials, and aren't [attributed per developer](#per-developer-aws-cost-attribution).
+
+For what Mantle's own error responses mean, see [Mantle endpoint errors](/docs/en/amazon-bedrock#mantle-endpoint-errors).
 
 #### Claude Platform on AWS
 
@@ -317,13 +520,13 @@ upstreams:
 
 The platform runs in a separate AWS account from Amazon Bedrock and signs SigV4 requests for its own service name, `aws-external-anthropic`, so a Bedrock-scoped IAM role doesn't authorize it. An API key in `auth.api_key` takes precedence when SigV4 credentials are also set. An empty `auth` block uses the AWS SDK's default credential chain, the same chain the [Amazon Bedrock](#amazon-bedrock) upstream uses.
 
-| Field                                                   | Required | Description                                                                                                                                        |
-| ------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `region`                                                | Yes      | AWS region, lowercase letters, digits, and hyphens. The gateway derives the endpoint from it as `https://aws-external-anthropic.<region>.api.aws`. |
-| `workspace_id`                                          | Yes      | Sent as a header on every request; the platform requires it                                                                                        |
-| `auth.api_key`                                          | No       | API key for the platform, sent as `x-api-key`. Not a bearer token: the two auth modes are an API key or SigV4.                                     |
-| `auth.aws_access_key_id` / `auth.aws_secret_access_key` | No       | Explicit SigV4 credentials. Setting one without the other fails at boot. `auth.aws_session_token` is accepted alongside them.                      |
-| `base_url`                                              | No       | Override the derived endpoint                                                                                                                      |
+| Field | Required | Description |
+| - | - | - |
+| `region` | Yes | AWS region, lowercase letters, digits, and hyphens. The gateway derives the endpoint from it as `https://aws-external-anthropic.<region>.api.aws`. |
+| `workspace_id` | Yes | Sent as a header on every request; the platform requires it |
+| `auth.api_key` | No | API key for the platform, sent as `x-api-key`. Not a bearer token: the two auth modes are an API key or SigV4. |
+| `auth.aws_access_key_id` / `auth.aws_secret_access_key` | No | Explicit SigV4 credentials. Setting one without the other fails at boot. `auth.aws_session_token` is accepted alongside them. |
+| `base_url` | No | Override the derived endpoint |
 
 Because the platform resolves first-party model IDs, the built-in catalog routes to it with no [`models:`](#models) block. When you curate a `models:` list, key the entry `anthropicAws:` with the first-party ID.
 
@@ -347,13 +550,13 @@ An empty `auth` block uses Application Default Credentials: `GOOGLE_APPLICATION_
 
 Set `region: global` to use the [global endpoint for Google Cloud's Agent Platform](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations) instead of a regional one. Google then routes each request to an available region, so you don't track per-region model availability. Setting a specific region pins every request to it.
 
-| Setup                   | How                                                                                                                                                                                                       |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IAM permissions         | Grant the gateway's service account `roles/aiplatform.user` on the project, or a custom role with `aiplatform.endpoints.predict`. Enable Google Cloud's Agent Platform API (`aiplatform.googleapis.com`). |
-| Model access            | In Model Garden, enable the Claude models for your project. They publish to specific regions; check the model card for supported regions.                                                                 |
+| Setup | How |
+| - | - |
+| IAM permissions | Grant the gateway's service account `roles/aiplatform.user` on the project, or a custom role with `aiplatform.endpoints.predict`. Enable Google Cloud's Agent Platform API (`aiplatform.googleapis.com`). |
+| Model access | In Model Garden, enable the Claude models for your project. They publish to specific regions; check the model card for supported regions. |
 | GKE (Workload Identity) | Bind a GCP service account to the gateway's Kubernetes service account and annotate the KSA with `iam.gke.io/gcp-service-account: claude-gateway@<proj>.iam.gserviceaccount.com`. `auth: {}` picks it up. |
-| Cloud Run / GCE         | Set the service's service account to one with `roles/aiplatform.user`. `auth: {}` picks it up.                                                                                                            |
-| Anywhere else           | `auth: { service_account_json: /secrets/sa.json }`, the path to a JSON key file mounted as a secret. The field takes a file path, not the key contents, so no `${file:…}` expansion is involved.          |
+| Cloud Run / GCE | Set the service's service account to one with `roles/aiplatform.user`. `auth: {}` picks it up. |
+| Anywhere else | `auth: { service_account_json: /secrets/sa.json }`, the path to a JSON key file mounted as a secret. The field takes a file path, not the key contents, so no `${file:…}` expansion is involved. |
 
 #### Microsoft Foundry
 
@@ -371,13 +574,13 @@ upstreams:
 
 `use_azure_ad: true` resolves through `DefaultAzureCredential`: Managed Identity on AKS, ACI, or App Service; the Azure CLI; or environment credentials. API keys work but are project-wide and don't rotate automatically. Microsoft Foundry's endpoint is derived from `resource:`; set the optional `base_url` to override it for sovereign clouds such as Azure Government.
 
-| Setup                   | How                                                                                                                                                                                       |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RBAC                    | Grant the gateway's identity `Azure AI User` or `Cognitive Services User` on the Microsoft Foundry resource                                                                               |
-| Deployments             | Microsoft Foundry uses admin-chosen deployment names, not canonical model IDs. Add a [`models:`](#models) block mapping each canonical ID to your deployment name.                        |
+| Setup | How |
+| - | - |
+| RBAC | Grant the gateway's identity `Azure AI User` or `Cognitive Services User` on the Microsoft Foundry resource |
+| Deployments | Microsoft Foundry uses admin-chosen deployment names, not canonical model IDs. Add a [`models:`](#models) block mapping each canonical ID to your deployment name. |
 | AKS (workload identity) | Federate a User-Assigned Managed Identity with the cluster's OIDC issuer and bind it to the gateway's service account. `use_azure_ad: true` picks it up via `WorkloadIdentityCredential`. |
-| ACI / App Service       | Enable system-assigned or user-assigned managed identity on the resource. `use_azure_ad: true` picks it up.                                                                               |
-| Anywhere else           | `auth: { api_key: "${FOUNDRY_API_KEY}" }`. Quote `${…}` inside `{ }`.                                                                                                                     |
+| ACI / App Service | Enable system-assigned or user-assigned managed identity on the resource. `use_azure_ad: true` picks it up. |
+| Anywhere else | `auth: { api_key: "${FOUNDRY_API_KEY}" }`. Quote `${…}` inside `{ }`. |
 
 #### Static headers on upstream requests
 
@@ -409,12 +612,12 @@ To keep a secret out of the config file, use [secret expansion](#secret-expansio
 
 Not every request that the gateway sends to an upstream carries them:
 
-| Request the gateway sends to this upstream                             | Carries `headers:`                   |
-| ---------------------------------------------------------------------- | ------------------------------------ |
-| `/v1/messages`, streaming or not, and `/v1/messages/count_tokens`      | Yes                                  |
-| A request that failed over from another upstream                       | Yes, this upstream's `headers:` only |
-| Amazon Bedrock's `CountTokens` call for a request the client abandoned | No                                   |
-| The Workload Identity Federation token exchange                        | No                                   |
+| Request the gateway sends to this upstream | Carries `headers:` |
+| - | - |
+| `/v1/messages`, streaming or not, and `/v1/messages/count_tokens` | Yes |
+| A request that failed over from another upstream | Yes, this upstream's `headers:` only |
+| Amazon Bedrock's `CountTokens` call for a request the client abandoned | No |
+| The Workload Identity Federation token exchange | No |
 
 On an Amazon Bedrock or Claude Platform on AWS upstream that signs requests with AWS SigV4, these headers are part of the signature, so your proxy must pass them through unchanged.
 
@@ -454,7 +657,7 @@ upstreams:
     provider: bedrock
     region: us-west-2
     auth: {}
-  # Different account: a separate Bedrock allotment via assumed-role creds.
+  # Different account: a separate Bedrock allotment via static keys.
   - name: bedrock-acct2
     provider: bedrock
     region: us-east-1
@@ -478,13 +681,13 @@ models:
       anthropic-fallback: claude-opus-4-8
 ```
 
-| Lever                  | How                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Different regions      | One Amazon Bedrock upstream per region, each with its own `region:`. With [`auto_include_builtin_models: true`](#models) the cross-region inference profiles route automatically; for region-pinned deployments use a `models:` block.                                                                                                                                                                                                                                    |
-| Different accounts     | One Amazon Bedrock upstream per account, each with its own credentials in `auth:`. The default chain (`auth: {}`) uses the pod's identity; for a second account, set explicit credentials or a bearer token.                                                                                                                                                                                                                                                              |
-| Provisioned throughput | Map the model to the provisioned-throughput ARN in `models:` for that upstream's name. Other upstreams keep the on-demand ID, so PT capacity is exhausted before failing over.                                                                                                                                                                                                                                                                                            |
-| VPC / FIPS endpoints   | Set `base_url:` on the upstream to your VPC endpoint or FIPS endpoint URL                                                                                                                                                                                                                                                                                                                                                                                                 |
-| Model-scoped routing   | Only a custom model `id`, one that isn't a built-in Claude model, skips the upstreams absent from its `upstream_model:` map. The gateway tries built-in models on every upstream in order and uses the provider's default ID where the map has no entry, so for built-in models the map changes which ID an upstream receives rather than whether it is tried; an upstream that rejects the ID follows the same [failover rules](#upstreams) as any other upstream error. |
+| Lever | How |
+| - | - |
+| Different regions | One Amazon Bedrock upstream per region, each with its own `region:`. With [`auto_include_builtin_models: true`](#models) the cross-region inference profiles route automatically; for region-pinned deployments use a `models:` block. |
+| Different accounts | One Amazon Bedrock upstream per account. The default chain (`auth: {}`) uses the pod's identity; for a second account, add [`assume_role`](#bedrock-in-another-aws-account) to reach it with short-lived credentials, or set explicit credentials or a bearer token in `auth:`. |
+| Provisioned throughput | Map the model to the provisioned-throughput ARN in `models:` for that upstream's name. Other upstreams keep the on-demand ID, so PT capacity is exhausted before failing over. |
+| VPC / FIPS endpoints | Set `base_url:` on the upstream to your VPC endpoint or FIPS endpoint URL |
+| Model-scoped routing | Only a custom model `id`, one that isn't a built-in Claude model, skips the upstreams absent from its `upstream_model:` map. A `mantle` upstream is tried only for the models listed in its [`models` field](#amazon-bedrock-mantle-endpoint). On every other upstream the gateway tries built-in models in order and uses the provider's default ID where the map has no entry, so for built-in models the map changes which ID an upstream receives rather than whether it is tried; an upstream that rejects the ID follows the same [failover rules](#upstreams) as any other upstream error. |
 
 Failing over between cloud providers, or to the direct Anthropic API, changes which agreement, geography, and other terms govern the request.
 
@@ -512,24 +715,24 @@ admin:
   blocked_message: request an increase at https://go.example.com/claude-limits
 ```
 
-| Field                     | Required | Description                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `write_keys`              | No       | Array of `{id, key}`. An `x-api-key` matching one of these can list, set, and delete spend limits. Key values must be at least 32 characters; `id`s must be unique across `read_keys` and `write_keys`.                                                                                                                                                      |
-| `read_keys`               | No       | Array of `{id, key}`. Read-only: every `GET` endpoint, including listing caps, fetching one by ID, and reading [`/effective`](/docs/en/claude-apps-gateway-spend-limits#%2Feffective) and [`/audit`](/docs/en/claude-apps-gateway-spend-limits#%2Faudit).                                                                                                              |
-| `admin_groups`            | No       | IdP group names. A gateway JWT whose `groups` claim includes one of these has full admin access, read and write, and audits as `oidc:<sub>`. Use this for human admins; use API keys for machines. An empty entry in this list stops the gateway at boot. See [Matcher values that stop the gateway at boot](#matcher-values-that-stop-the-gateway-at-boot). |
-| `blocked_message`         | No       | Appended verbatim to the `429 billing_error` a blocked developer sees. Write the whole instruction, such as a URL or a Slack channel. When unset, the gateway sends only the default message. See [How enforcement works](/docs/en/claude-apps-gateway-spend-limits#how-enforcement-works).                                                                       |
-| `audit_retention_days`    | No       | Default `365`. Older `admin_audit` rows are swept.                                                                                                                                                                                                                                                                                                           |
-| `spend_retention_months`  | No       | Default `13`. `spend` counter rows older than this are swept. The default keeps a full year plus the current partial month for year-over-year reporting.                                                                                                                                                                                                     |
-| `identity_retention_days` | No       | Default `90`. Last-seen TTL for `principal_emails` rows, which hold each developer's email, display name, and groups (PII). Deliberately shorter than spend retention so a deprovisioned identity ages out while its anonymous spend counters remain.                                                                                                        |
-| `group_limit_mode`        | No       | `min` (default) or `max`. When a developer is in several groups with caps, `min` enforces the most restrictive and `max` the least. Used by both enforcement and `/effective`.                                                                                                                                                                               |
+| Field | Required | Description |
+| - | - | - |
+| `write_keys` | No | Array of `{id, key}`. An `x-api-key` matching one of these can list, set, and delete spend limits. Key values must be at least 32 characters; `id`s must be unique across `read_keys` and `write_keys`. |
+| `read_keys` | No | Array of `{id, key}`. Read-only: every `GET` endpoint, including listing caps, fetching one by ID, and reading [`/effective`](/docs/en/claude-apps-gateway-spend-limits#%2Feffective) and [`/audit`](/docs/en/claude-apps-gateway-spend-limits#%2Faudit). |
+| `admin_groups` | No | IdP group names. A gateway JWT whose `groups` claim includes one of these has full admin access, read and write, and audits as `oidc:<sub>`. Use this for human admins; use API keys for machines. An empty entry in this list stops the gateway at boot. See [Matcher values that stop the gateway at boot](#matcher-values-that-stop-the-gateway-at-boot). |
+| `blocked_message` | No | Appended verbatim to the `429 billing_error` a blocked developer sees. Write the whole instruction, such as a URL or a Slack channel. When unset, the gateway sends only the default message. See [How enforcement works](/docs/en/claude-apps-gateway-spend-limits#how-enforcement-works). |
+| `audit_retention_days` | No | Default `365`. Older `admin_audit` rows are swept. |
+| `spend_retention_months` | No | Default `13`. `spend` counter rows older than this are swept. The default keeps a full year plus the current partial month for year-over-year reporting. |
+| `identity_retention_days` | No | Default `90`. Last-seen TTL for `principal_emails` rows, which hold each developer's email, display name, and groups (PII). Deliberately shorter than spend retention so a deprovisioned identity ages out while its anonymous spend counters remain. |
+| `group_limit_mode` | No | `min` (default) or `max`. When a developer is in several groups with caps, `min` enforces the most restrictive and `max` the least. Used by both enforcement and `/effective`. |
 
 ### `enforcement`
 
 The `enforcement` block controls how spend-limit checks behave when the store is unavailable.
 
-| Field                  | Required | Description                                                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `fail_closed_on_error` | No       | Default `false`. Spend enforcement fails open on a Postgres outage, so inference stays up. Set `true` to fail closed: over-cap developers are blocked, but so is everyone else if the store is unreachable. Requires an [`admin:`](#admin) block: spend enforcement only runs when `admin` is configured, and the gateway refuses to start if you set this `true` without one. |
+| Field | Required | Description |
+| - | - | - |
+| `fail_closed_on_error` | No | Default `false`. Spend enforcement fails open on a Postgres outage, so inference stays up. Set `true` to fail closed: over-cap developers are blocked, but so is everyone else if the store is unreachable. Requires an [`admin:`](#admin) block: spend enforcement only runs when `admin` is configured, and the gateway refuses to start if you set this `true` without one. |
 
 ### `pricing`
 
@@ -550,10 +753,10 @@ pricing:
       cache_write: 4.125
 ```
 
-| Field        | Required | Description                                                                                                                                                                                                                     |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `multiplier` | No       | Default `1`. The meter multiplies every metered amount by this, whether list-priced or overridden, so `0.85` bills 85% of the price. Must be greater than 0 and at most 10, and a value above 1 is a [markup](#mark-prices-up). |
-| `overrides`  | No       | Rows of `{upstream, model, input, output, cache_read, cache_write}` in USD per million tokens. All four rates are required. Each must be greater than 0 and at most 10000.                                                      |
+| Field | Required | Description |
+| - | - | - |
+| `multiplier` | No | Default `1`. The meter multiplies every metered amount by this, whether list-priced or overridden, so `0.85` bills 85% of the price. Must be greater than 0 and at most 10, and a value above 1 is a [markup](#mark-prices-up). |
+| `overrides` | No | Rows of `{upstream, model, input, output, cache_read, cache_write}` in USD per million tokens. All four rates are required. Each must be greater than 0 and at most 10000. |
 
 How the meter matches an override row:
 
@@ -624,6 +827,9 @@ managed:
     - match: {}
       cli:
         availableModels: [claude-opus-4-8, claude-sonnet-4-6, claude-haiku-4-5]
+        # Make the Default option in /model resolve inside each policy's
+        # list. The eng-contractors policy inherits enforceAvailableModels.
+        enforceAvailableModels: true
 ```
 
 A `match: {}` catch-all, conventionally listed last, is treated as a base layer. Every other policy inherits any key it doesn't set from the catch-all, so per-role entries only need to list what differs from the org default. The merge rules depend on the key type:
@@ -632,19 +838,19 @@ A `match: {}` catch-all, conventionally listed last, is treated as a base layer.
 * **Deny-lists and hook arrays**: `permissions.deny`, `permissions.ask`, `disabledMcpjsonServers`, `deniedMcpServers`, `blockedMarketplaces`, and every `hooks` event-type array. These take the union of base and policy, so an org-wide deny or audit hook can't be accidentally dropped by a per-role override.
 * **Record-typed keys**: `env`, `modelOverrides`, and `skillOverrides`. These shallow-merge, so a per-role `env` block overrides keys it sets and inherits the rest from the base.
 
-`availableModels` is also enforced server-side at `/v1/messages`, so a denied model returns `400` regardless of what the client sends.
+`availableModels` is also enforced server-side at `/v1/messages`, so a denied model returns `400` regardless of what the client sends. An empty list denies every model. The check also covers the model a session starts on before the developer picks one, so [start sessions on a model the policy allows](#start-sessions-on-a-model-the-policy-allows).
 
 The gateway validates the `model` value itself before it relays a request, so a malformed value never reaches an upstream. It rejects the request with a `400` in two cases:
 
 * When the value is missing or empty, the gateway rejects the request with the message `model is required`. That check requires a gateway running Claude Code v2.1.228 or later.
 * When the value is present but isn't a string, the gateway rejects the request with the message `model must be a string`. Requires a gateway running Claude Code v2.1.221 or later.
 
-| Matcher                                             | Behavior                                                                                                                         |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `match: {}`                                         | Matches every authenticated user. Start with one of these and add group-scoped policies above it later.                          |
-| `match: { groups: [a, b] }`                         | Matches if the JWT's `groups` claim contains any of the listed groups. Case-sensitive: groups must match the IdP's exact casing. |
-| `match: { email_domain: example.com }`              | Matches the part after the last `@` in the JWT's `email` claim, case-insensitive. Accepts one domain per policy.                 |
-| `match: { groups: [a], email_domain: example.com }` | Both conditions must match                                                                                                       |
+| Matcher | Behavior |
+| - | - |
+| `match: {}` | Matches every authenticated user. Start with one of these and add group-scoped policies above it later. |
+| `match: { groups: [a, b] }` | Matches if the JWT's `groups` claim contains any of the listed groups. Case-sensitive: groups must match the IdP's exact casing. |
+| `match: { email_domain: example.com }` | Matches the part after the last `@` in the JWT's `email` claim, case-insensitive. Accepts one domain per policy. |
+| `match: { groups: [a], email_domain: example.com }` | Both conditions must match |
 
 An authenticated user who matches no policy gets the gateway's defaults, which means every model in the catalog and no managed settings. Add a `match: {}` catch-all last if you want a guaranteed default policy.
 
@@ -658,6 +864,27 @@ An authenticated user who matches no policy gets the gateway's defaults, which m
   * **Policy contents**: editing a policy and redeploying reaches connected clients on their next managed-settings poll, within an hour, apart from the [changes that apply only at the next launch](/docs/en/server-managed-settings#fetch-and-caching-behavior)
   * **Group membership**: changing a user's group membership changes which policy matches them. This takes effect on the next session re-mint, meaning the next silent refresh, bounded by `session.ttl_hours`.
 </Note>
+
+#### Start sessions on a model the policy allows
+
+If `availableModels` leaves out Claude Code's default model, sessions get `400` responses until the developer picks a listed model, for example with `/model`. In gateway sessions the default is the Opus model the `opus` alias resolves to, and `availableModels` on its own doesn't change it.
+
+To fix this, set [`enforceAvailableModels: true`](/docs/en/model-config#enforce-the-allowlist-for-the-default-model) in the same `cli` block, then check which kind of entry the list has:
+
+* **An alias such as `sonnet`, or a built-in ID such as `claude-sonnet-4-6`**: sessions start on one of those models, and the Default option in `/model` resolves to it
+* **No alias or built-in ID in the list**: sessions can keep starting on the built-in default, so also set [`model`](/docs/en/model-config#control-the-model-users-run-on) to one of the listed IDs in that policy's `cli` block
+
+This policy lists one custom ID that [`models`](#models) defines, and starts sessions on that ID:
+
+```yaml theme={null}
+managed:
+  policies:
+    - match: { groups: [restricted-projects] }
+      cli:
+        availableModels: [claude-opus-restricted]
+        enforceAvailableModels: true
+        model: claude-opus-restricted
+```
 
 #### Matcher values that stop the gateway at boot
 
@@ -692,6 +919,7 @@ managed:
       cli:
         # Model access (also enforced server-side at /v1/messages)
         availableModels: [claude-opus-4-8, claude-sonnet-4-6, claude-haiku-4-5]
+        enforceAvailableModels: true              # Default resolves inside the list
 
         # Permission policy
         permissions:
@@ -717,15 +945,15 @@ managed:
                 - { type: command, command: /usr/local/bin/audit-edit.sh }
 ```
 
-| Key                                        | Enforced by   | Effect                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------------------------ | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `availableModels`                          | Gateway + CLI | Model allowlist. Also checked at `/v1/messages`, so a patched client can't bypass it.                                                                                                                                                                                                                                                                       |
-| `permissions.allow` / `.deny`              | CLI           | Tool and command rules. See [Permissions](/docs/en/permissions).                                                                                                                                                                                                                                                                                                 |
-| `permissions.disableBypassPermissionsMode` | CLI           | Set to `disable` to block [`bypassPermissions`](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode), the mode that skips permission prompts, and the `--dangerously-skip-permissions` flag                                                                                                                                                    |
-| `allowManagedPermissionRulesOnly`          | CLI           | When `true`, managed settings become the only settings source of permission rules. The [`allowManagedPermissionRulesOnly`](/docs/en/settings-reference#allowmanagedpermissionrulesonly) entry lists every source Claude Code then ignores.                                                                                                                       |
-| `env`                                      | CLI           | Environment variables merged into the CLI process. Use for telemetry, auto-update, and model-name overrides.                                                                                                                                                                                                                                                |
-| `hooks`                                    | CLI           | Org-wide [hooks](/docs/en/hooks)                                                                                                                                                                                                                                                                                                                                 |
-| `managedMcpServers`                        | CLI           | Remote MCP servers [provided to every matching developer](/docs/en/managed-mcp#provide-servers-through-managed-settings) alongside the servers they add themselves, `http` and `sse` only. See [MCP servers in a policy](#mcp-servers-in-a-policy). Requires Claude Code v2.1.259 or later on the gateway server and on clients. Earlier clients ignore the key. |
+| Key | Enforced by | Effect |
+| - | - | - |
+| `availableModels` | Gateway + CLI | Model allowlist. Also checked at `/v1/messages`, so a patched client can't bypass it. |
+| `permissions.allow` / `.deny` | CLI | Tool and command rules. See [Permissions](/docs/en/permissions). |
+| `permissions.disableBypassPermissionsMode` | CLI | Set to `disable` to block [`bypassPermissions`](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode), the mode that skips permission prompts, and the `--dangerously-skip-permissions` flag |
+| `allowManagedPermissionRulesOnly` | CLI | When `true`, managed settings become the only settings source of permission rules. The [`allowManagedPermissionRulesOnly`](/docs/en/settings-reference#allowmanagedpermissionrulesonly) entry lists every source Claude Code then ignores. |
+| `env` | CLI | Environment variables merged into the CLI process. Use for telemetry, auto-update, and model-name overrides. |
+| `hooks` | CLI | Org-wide [hooks](/docs/en/hooks) |
+| `managedMcpServers` | CLI | Remote MCP servers [provided to every matching developer](/docs/en/managed-mcp#provide-servers-through-managed-settings) alongside the servers they add themselves, `http` and `sse` only. See [MCP servers in a policy](#mcp-servers-in-a-policy). Requires Claude Code v2.1.259 or later on the gateway server and on clients. Earlier clients ignore the key. |
 
 Because these settings arrive over the network, the CLI shows each developer a security approval dialog before applying the settings listed below:
 
@@ -743,11 +971,30 @@ Claude Code applies some delivered `env` variables without showing the developer
 
 The gateway's [telemetry](#telemetry) configuration pushes `OTEL_EXPORTER_OTLP_ENDPOINT`, so setting `telemetry.forward_to` triggers the dialog on each interactive client. The dialog protects the developer's machine from a compromised or hostile gateway, not the organization from the developer.
 
-A non-interactive run with the `-p` flag can't show the dialog. It applies the pushed settings for that run only and doesn't record them as approved, so the developer's next interactive session still shows the dialog. Before v2.1.207, a non-interactive run saved the settings as approved and no later interactive session showed the dialog for them.
+A [non-interactive run](/docs/en/server-managed-settings#security-approval-dialogs), such as `claude -p` or an Agent SDK session, can't show the dialog. It applies the pushed settings for that run only and doesn't record them as approved, so the developer's next interactive session still shows the dialog. Before v2.1.207, a non-interactive run saved the settings as approved and no later interactive session showed the dialog for them.
 
-If a developer declines, Claude Code exits that session rather than applying the policy. When you push a new hook, or any env var that triggers the dialog, to a broad policy, Claude Code therefore shows the dialog to every matching developer. It shows the dialog in a running session on the next hourly poll, and otherwise at the developer's next startup.
+If a developer declines, Claude Code exits that session rather than applying the policy. When you push a new hook, or any env var that triggers the dialog, to a broad policy, every matching developer therefore sees the dialog in their interactive sessions. A running interactive session shows it on the next hourly poll, and otherwise it appears at the developer's next interactive startup.
 
 The `cli` key was named `settings` in earlier releases. That spelling is still accepted as an alias, but new deployments should use `cli`.
+
+#### Context window in terminal sessions
+
+Terminal sessions signed in through `/login` use the 1M context window for Opus 4.7 and later, Sonnet 5 and later, and the Fable models. The model ID needs no `[1m]` suffix, and sessions compact at about 967K tokens. Before Claude Code v2.1.287 on the developer's machine, Claude Code treated the Opus and Fable models as having a 200K window unless the model ID ended in `[1m]`.
+
+To have terminal sessions compact at the 200K boundary instead, set the [auto-compact window](/docs/en/model-config#set-the-auto-compact-window) in the policy's `env`:
+
+```yaml theme={null}
+managed:
+  policies:
+    - match: {}
+      cli:
+        env:
+          CLAUDE_CODE_AUTO_COMPACT_WINDOW: "200000"
+```
+
+Claude Code applies this variable without showing the developer the approval dialog. The variable applies to every model, including model IDs that end in `[1m]`.
+
+To turn off 1M context instead, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT: "1"`](/docs/en/model-config#extended-context) in the same `env` block. Claude Code then treats every model as having a 200K window. In interactive sessions, each developer approves this variable in the [approval dialog](#what-goes-in-cli) before it takes effect.
 
 #### MCP servers in a policy
 
@@ -769,7 +1016,7 @@ If your organization also deploys [Claude Desktop](/docs/en/desktop), the same g
 
 The gateway derives much of the response from the matched policy's `cli` block and from top-level gateway config:
 
-* The model list, from `availableModels`
+* The model list, from `availableModels`. [Extended context in Claude Desktop](#extended-context-in-claude-desktop) covers each model's 1M context option
 * Disabled tools, from bare tool-name `permissions.deny` entries. If you set `disabledBuiltinTools` in the policy's `desktop` block, the gateway serves the union of your value and the derived list, so you can disable more tools this way but can't re-enable one you disabled through `permissions.deny`
 * The egress allowlist, from `sandbox.network.allowedDomains`. If you set `coworkEgressAllowedHosts` in the policy's `desktop` block, the gateway uses that value instead of the derived list
 * An OTLP endpoint that points at the gateway itself, and the signed-in user's identity attributes. The gateway relays the exports it receives at that endpoint to your `forward_to` destinations. It includes the endpoint and the attributes when you set both [`telemetry.forward_to`](#telemetry) and `listen.public_url`.
@@ -788,6 +1035,7 @@ managed:
     - match: { groups: [eng-contractors] }
       cli:
         availableModels: [claude-sonnet-4-6]
+        enforceAvailableModels: true
       desktop:
         isLocalDevMcpEnabled: false
         disableAutoUpdates: true
@@ -805,6 +1053,8 @@ If you use a deprecated value or entry shape, such as a `managedMcpServers` entr
 
 The gateway validates a `desktop` block against the schema bundled with its installed version, as it does the `cli` block. To deliver a setting introduced by a newer Claude Desktop release, upgrade the gateway first. For example, `userPluginMarketplacesEnabled` and `userPluginUploadsEnabled` need Claude Code v2.1.260 or later on the gateway server and Claude Desktop 1.37937.0 or later on members' machines.
 
+`blockReadsOutsideWorkingDirectories`, `disableBypassPermissionsMode`, `configRecheckIntervalMinutes`, and `sshClientPath` need Claude Code v2.1.281 or later on the gateway server. So do the `required` value of `microsoftAuthBroker` and the `continuousAccessEvaluation` field of a Microsoft 365 `managedMcpServers` entry. Claude Desktop releases that predate the `required` value read it as `disabled`, so set `required` only after every member's Claude Desktop supports it. Claude Desktop's [managed configuration reference](https://claude.com/docs/third-party/claude-desktop/configuration) lists the release that first reads each key.
+
 If you set `orgPluginSettings` in a policy's `desktop` block, the gateway serves it in the array form that Claude Desktop 1.15200.0 and later reads. Older desktops ignore the array and enforce no plugin tool policy, so update members to 1.15200.0 or later before you rely on it.
 
 The gateway fills in keys a policy's `desktop` block doesn't set from the `match: {}` catch-all's `desktop` block, the same way it fills in a policy's `cli` block from the base. If you set `disabledBuiltinTools` or `builtinToolPolicy` in both the base and a role policy, the gateway keeps the base's restriction:
@@ -815,6 +1065,44 @@ The gateway fills in keys a policy's `desktop` block doesn't set from the `match
 For every other key, if you set it in the role policy, the gateway uses the role policy's value. The gateway replaces an array or a nested object such as `banner` whole, so if you set `banner.text` in a role policy, the gateway drops the base's `banner.backgroundColor`.
 
 If you don't deploy Claude Desktop, leave `desktop` out of your policies entirely; the gateway then returns 404 from `/user/bootstrap` for every user.
+
+#### Extended context in Claude Desktop
+
+If you serve [Claude Desktop](#claude-desktop-overlay) from the gateway, its model picker offers a 1M context option for each listed model that can run with a 1M context window. These include Claude Opus 4.6 and later, Claude Sonnet 4.6 and later, and the Fable models. The option is the model's `[1m]` variant, which [Extended context](/docs/en/model-config#extended-context) describes. You need Claude Code v2.1.284 or later on the gateway server.
+
+A [`models`](#models) entry gets no 1M option when:
+
+* An upstream that can serve the entry maps it to a model without 1M support, including an upstream the gateway reaches only on failover
+* Neither its `id` nor any of its `upstream_model` values names a Claude model, such as a custom alias routed to an application inference profile ARN
+
+To change what the picker offers, use one of these:
+
+* **Start users on the 1M option**: set `modelPrefer1mContext: true` in the policy's `desktop` block. Users who haven't yet chosen a model start on the 1M option when the first listed model has one. Users who already chose a model keep their choice.
+* **Offer the option by hand**: do this if your gateway server runs a version older than v2.1.284, or an entry names no Claude model. List the model twice in `models`, once with its plain ID and once with `[1m]` appended, both with the same `upstream_model` map. Claude Desktop shows the pair as one model with a 1M option. The gateway serves a `[1m]` entry without checking it, so add one only for a model your upstreams serve at 1M.
+
+This example offers the option by hand for a custom alias routed to an application inference profile, and starts new users on it:
+
+```yaml theme={null}
+models:
+  - id: corp-sonnet
+    upstream_model:
+      bedrock: arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-5-prod
+  - id: corp-sonnet[1m]
+    upstream_model:
+      bedrock: arn:aws:bedrock:us-east-2:123456789012:application-inference-profile/sonnet-5-prod
+
+managed:
+  policies:
+    - match: {}
+      desktop:
+        modelPrefer1mContext: true
+```
+
+##### Remove the 1M option
+
+To remove the option from the picker, set `CLAUDE_CODE_DISABLE_1M_CONTEXT: "1"` in the `env` block under the policy's `cli` key. If you also listed an entry whose `id` ends in `[1m]`, the gateway still serves it, so delete that entry too.
+
+The variable also reaches the terminal sessions of developers the policy matches. For what it changes there, see [Extended context](/docs/en/model-config#extended-context).
 
 #### Precedence with other managed sources
 
@@ -828,7 +1116,7 @@ Gateway policies apply to every Claude Code invocation on the machine, including
 
 The CLI sends metrics, logs, and, when enabled, traces to the gateway, which relays them verbatim to each configured destination. The exports use OpenTelemetry Protocol (OTLP) over HTTP. To skip the relay and have sessions export straight to your collector, [name the collector in a policy](#export-directly-to-your-collector). See [Monitoring usage](/docs/en/monitoring-usage) for the metrics and events the CLI emits.
 
-The CLI stamps each export with the authenticated user's identity, read from the gateway-issued JWT: the `user.id`, `user.email`, and `user.groups` attributes. Per-developer cost and usage attribution therefore works with no developer-side configuration.
+In sessions signed in through `/login`, the CLI stamps each export with the authenticated user's identity, read from the gateway-issued JWT: the `user.id`, `user.email`, and `user.groups` attributes. Per-developer cost and usage attribution therefore works with no developer-side configuration.
 
 [Claude Desktop](#claude-desktop-overlay) and Cowork sessions signed in through the gateway stamp their telemetry with `user.email` and `user.groups` alongside `enduser.id`, so you can cover terminal, Desktop, and Cowork usage with one query on `user.email` or `user.groups`. `user.groups` is the comma-separated IdP group list.
 
@@ -973,15 +1261,15 @@ A refused payload neither advances nor resets the failure count: the gateway kee
 
 Four optional top-level blocks, `access_control`, `limits`, `timeouts`, and `rate_limits`, tune the HTTP surface. The defaults suit most deployments.
 
-| Block            | Key                                            | Default  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------- | ---------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `access_control` | `allow_cidrs` / `deny_cidrs`                   | empty    | Inbound IP allow/deny by client address, after `trusted_proxies` resolution. `deny_cidrs` is checked first; a client it matches is rejected even if `allow_cidrs` also matches. If `allow_cidrs` is non-empty the gateway is default-deny. `/healthz` and `/readyz` are exempt from `allow_cidrs`. When a trusted proxy sends an `X-Forwarded-For` entry that isn't an IP address, the real client is unknown and the gateway logs a warning once naming what to check. Where either list applies to the request, it refuses it with `403` and audit reason `xff_unparseable`. Where neither does, it serves the request and uses the proxy's own address as the client IP for per-IP rate limits and audit. |
-| `limits`         | `max_request_bytes`                            | 32 MiB   | Max inbound request body; oversize requests get `413` before the body is buffered. Raise for large file or image requests.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `limits`         | `max_request_header_bytes`                     | unset    | When set, oversize headers return `431`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `limits`         | `max_url_length`                               | unset    | When set, an over-long URL returns `414`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `timeouts`       | `upstream_ttfb_ms`                             | 120000   | Max wait for the upstream's response headers (time to first byte). The response body then streams with no wall-clock cap. Applies to the direct Anthropic upstream path; on every other provider the gateway waits up to one hour for the response to start.                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `rate_limits`    | `device_authorization.max` / `.window_seconds` | 30 / 600 | Per-IP rate limit on the unauthenticated device-authorization endpoint. Raise for a large org behind a shared egress IP or NAT. [Large rollouts](/docs/en/claude-apps-gateway-deploy#large-rollouts) shows how to size it. These limits apply only to the device-grant sign-in flow, not to `/v1/messages` inference. See [User-code brute-force resistance](/docs/en/claude-apps-gateway-deploy#user-code-brute-force-resistance).                                                                                                                                                                                                                                                                                    |
-| `rate_limits`    | `device_verify.max` / `.window_seconds`        | 10 / 600 | Per-IP rate limit on `user_code` submissions at `/device`. It is what stops someone from guessing another developer's code. [Large rollouts](/docs/en/claude-apps-gateway-deploy#large-rollouts) shows how far to raise it.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Block | Key | Default | Description |
+| - | - | - | - |
+| `access_control` | `allow_cidrs` / `deny_cidrs` | empty | Inbound IP allow/deny by client address, after `trusted_proxies` resolution. `deny_cidrs` is checked first; a client it matches is rejected even if `allow_cidrs` also matches. If `allow_cidrs` is non-empty the gateway is default-deny. `/healthz` and `/readyz` are exempt from `allow_cidrs`. When a trusted proxy sends an `X-Forwarded-For` entry that isn't an IP address, the real client is unknown and the gateway logs a warning once naming what to check. Where either list applies to the request, it refuses it with `403` and audit reason `xff_unparseable`. Where neither does, it serves the request and uses the proxy's own address as the client IP for per-IP rate limits and audit. |
+| `limits` | `max_request_bytes` | 32 MiB | Max inbound request body; oversize requests get `413` before the body is buffered. Raise for large file or image requests. |
+| `limits` | `max_request_header_bytes` | unset | Lowers the gateway's 256 KiB limit on a request's total headers. A request over the limit returns `431`, and a value above 256 KiB has no effect. If developers get `431` after signing in, see [Request headers too large after sign-in](/docs/en/claude-apps-gateway-deploy#request-headers-too-large-after-sign-in). |
+| `limits` | `max_url_length` | unset | When set, an over-long URL returns `414` |
+| `timeouts` | `upstream_ttfb_ms` | 120000 | Max wait for the upstream's response headers (time to first byte). The response body then streams with no wall-clock cap. Applies to the direct Anthropic upstream path; on every other provider the gateway waits up to one hour for the response to start. |
+| `rate_limits` | `device_authorization.max` / `.window_seconds` | 30 / 600 | Per-IP rate limit on the unauthenticated device-authorization endpoint. Raise for a large org behind a shared egress IP or NAT. [Large rollouts](/docs/en/claude-apps-gateway-deploy#large-rollouts) shows how to size it. These limits apply only to the device-grant sign-in flow, not to `/v1/messages` inference. See [User-code brute-force resistance](/docs/en/claude-apps-gateway-deploy#user-code-brute-force-resistance). |
+| `rate_limits` | `device_verify.max` / `.window_seconds` | 10 / 600 | Per-IP rate limit on `user_code` submissions at `/device`. It is what stops someone from guessing another developer's code. [Large rollouts](/docs/en/claude-apps-gateway-deploy#large-rollouts) shows how far to raise it. |
 
 If you leave both `access_control` lists empty, which is the default, the gateway serves any client address, so only your network restricts who can reach it. That matters because a gateway can push [managed settings](#managed) that run commands on developer machines.
 
@@ -1009,11 +1297,11 @@ load_test_mode:
   reply_seconds: 9.5    # how long a streamed reply takes
 ```
 
-| Field           | Required | Description                                                                                                                                                     |
-| --------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enabled`       | Yes      | `true` turns the mode on. `false` keeps your numbers in the file with the mode off. The gateway refuses to start if the block is present without it.            |
-| `reply_tokens`  | No       | Default `750`. Roughly how many tokens of text each canned reply carries, a whole number from 1 to 100000.                                                      |
-| `reply_seconds` | No       | Default `9.5`. How long a streamed reply takes, from 0 to 600. `0` sends the whole reply at once. A reply to a non-streaming request always comes back at once. |
+| Field | Required | Description |
+| - | - | - |
+| `enabled` | Yes | `true` turns the mode on. `false` keeps your numbers in the file with the mode off. The gateway refuses to start if the block is present without it. |
+| `reply_tokens` | No | Default `750`. Roughly how many tokens of text each canned reply carries, a whole number from 1 to 100000. |
+| `reply_seconds` | No | Default `9.5`. How long a streamed reply takes, from 0 to 600. `0` sends the whole reply at once. A reply to a non-streaming request always comes back at once. |
 
 A load test in this mode covers the gateway, your Postgres, and everything in front of the gateway. It doesn't cover the provider's limits, speed, or network path.
 
@@ -1121,6 +1409,11 @@ upstreams:
   #   region: us-east-1
   #   auth: {}
 
+  # - provider: mantle
+  #   region: us-east-1
+  #   models: [claude-opus-4-8, claude-opus-4-7, claude-haiku-4-5]
+  #   auth: {}
+
   # - provider: anthropicAws
   #   region: us-east-1
   #   workspace_id: wrkspc_...
@@ -1143,6 +1436,7 @@ models:
     upstream_model:
       anthropic: claude-opus-4-8
       # bedrock: us.anthropic.claude-opus-4-8
+      # mantle: anthropic.claude-opus-4-8
       # anthropicAws: claude-opus-4-8
       # vertex: claude-opus-4-8
       # foundry: <your-opus-deployment-name>
@@ -1160,15 +1454,16 @@ managed:
     - match: { groups: [contractors] }
       cli:
         availableModels: [claude-haiku-4-5]
-        # Constrain the Default picker option to availableModels instead of
-        # the tier default, so contractors don't get a 400 on the default.
-        enforceAvailableModels: true
         # allow auto-approves these tools; it does not block the rest.
         # Add deny rules to restrict tools.
         permissions: { allow: [Read, Grep] }
     - match: {}
       cli:
         availableModels: [claude-opus-4-8, claude-sonnet-4-6, claude-haiku-4-5]
+        # Constrain the Default picker option to each policy's availableModels
+        # instead of the built-in default, so no role gets a 400 on Default.
+        # The contractors policy inherits this key.
+        enforceAvailableModels: true
         permissions:
           allow: [Read, Grep, Bash, Edit]
           deny: ["WebFetch"]
@@ -1196,6 +1491,8 @@ For the CLI, set these keys in the per-OS `managed-settings.json`. The two login
 ```
 
 `parentSettingsBehavior: "merge"` keeps Claude Desktop's delivery of the egress allowlist to its embedded Claude Code sessions working; [Deliver policy to Claude Desktop sessions](/docs/en/claude-apps-gateway#deliver-policy-to-claude-desktop-sessions) explains the mechanism and where the opt-in must sit.
+
+To stop developers from bypassing the gateway with a cloud provider variable or an `ANTHROPIC_BASE_URL` of their own, add `"allowedProviders": ["gateway"]` to the same file. Claude Code then refuses every session on the machine that isn't set up for a Cloud gateway, and admits a gateway only when it is the one `forceLoginGatewayUrl` names or one whose URL the file's `env` block sets as `ANTHROPIC_BASE_URL`. `claude gateway` refuses to run on a machine that sets the list, so keep the key off the gateway host. See the [`allowedProviders`](/docs/en/settings-reference#allowedproviders) entry in the settings reference. Requires Claude Code v2.1.285 or later.
 
 Deploy the `managed-settings.json` file to each device, typically via your MDM platform. The file path differs by platform. See [where each mechanism stores the policy](/docs/en/managed-settings#where-each-mechanism-stores-the-policy).
 

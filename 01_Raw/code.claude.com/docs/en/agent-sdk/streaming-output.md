@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/streaming-output
-fetched_at: 2026-09-28T06:10:39.356166+00:00
+fetched_at: 2026-10-05T06:27:10.854526+00:00
 fetch_method: mintlify_md
 ---
 
@@ -92,14 +92,14 @@ Claude Code sets `user_message_uuid` on the turn's first non-ping stream event, 
 
 The `event` field contains the raw streaming event from the [Claude API](https://platform.claude.com/docs/en/build-with-claude/streaming#event-types). Common event types include:
 
-| Event Type            | Description                                     |
-| :-------------------- | :---------------------------------------------- |
-| `message_start`       | Start of a new message                          |
+| Event Type | Description |
+| :- | :- |
+| `message_start` | Start of a new message |
 | `content_block_start` | Start of a new content block (text or tool use) |
-| `content_block_delta` | Incremental update to content                   |
-| `content_block_stop`  | End of a content block                          |
-| `message_delta`       | Message-level updates (stop reason, usage)      |
-| `message_stop`        | End of the message                              |
+| `content_block_delta` | Incremental update to content |
+| `content_block_stop` | End of a content block |
+| `message_delta` | Message-level updates (stop reason, usage) |
+| `message_stop` | End of the message |
 
 ## Message flow
 

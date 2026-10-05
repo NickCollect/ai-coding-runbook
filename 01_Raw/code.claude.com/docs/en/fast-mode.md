@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/fast-mode
-fetched_at: 2026-09-28T06:10:40.810761+00:00
+fetched_at: 2026-10-05T06:27:11.653730+00:00
 fetch_method: mintlify_md
 ---
 
@@ -72,15 +72,17 @@ Fast mode works in [cloud sessions](/docs/en/claude-code-on-the-web) when it's a
 
 Type `/fast on` in the session to turn fast mode on. It stays on for that session only and isn't saved as your default. The [requirements](#requirements) apply in cloud sessions too.
 
+In the browser at [claude.ai/code](https://claude.ai/code), you can also turn fast mode on and off from the model menu on the message box. The menu shows the switch when your plan includes fast mode and the selected model supports it.
+
 ## Understand the cost tradeoff
 
 Fast mode has higher per-token pricing than standard Opus:
 
-| Model    | Input (MTok) | Output (MTok) |
-| -------- | ------------ | ------------- |
-| Opus 5.5 | \$8          | \$40          |
-| Opus 5   | \$10         | \$50          |
-| Opus 4.8 | \$10         | \$50          |
+| Model | Input (MTok) | Output (MTok) |
+| - | - | - |
+| Opus 5.5 | \$8 | \$40 |
+| Opus 5 | \$10 | \$50 |
+| Opus 4.8 | \$10 | \$50 |
 
 Fast mode pricing is flat across the full 1M token context window. For the standard Opus rate to compare against, see the [Claude pricing reference](https://platform.claude.com/docs/en/about-claude/pricing).
 
@@ -112,9 +114,9 @@ Standard mode is better for:
 
 Fast mode and effort level both affect response speed, but differently:
 
-| Setting                | Effect                                                                           |
-| ---------------------- | -------------------------------------------------------------------------------- |
-| **Fast mode**          | Same model quality, lower latency, higher cost                                   |
+| Setting | Effect |
+| - | - |
+| **Fast mode** | Same model quality, lower latency, higher cost |
 | **Lower effort level** | Less thinking time, faster responses, potentially lower quality on complex tasks |
 
 You can combine both: use fast mode with a lower [effort level](/docs/en/model-config#adjust-effort-level) for maximum speed on straightforward tasks.
@@ -126,7 +128,7 @@ Fast mode requires all of the following:
 * **Anthropic API or subscription only**: fast mode is available through the Anthropic Console API and for Claude subscription plans using usage credits. It is not available on Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or Claude Platform on AWS. Console organizations must also have [fast mode access provisioned](#enable-fast-mode-for-your-organization).
 * **Usage credits turned on for subscription plans**: on a Pro, Max, Team, or Enterprise plan, your account must have [usage credits](/docs/en/costs#add-usage-credits-to-your-subscription) turned on, which allows billing beyond your plan's included usage. Until they're on, `/fast` reports "Fast mode requires usage credits". How you turn them on depends on your plan:
   * On Pro and Max, turn them on in the **Usage credits** section of [**Settings > Usage**](https://claude.ai/settings/usage) on claude.ai, or run `/usage-credits` to open that page.
-  * On Team and Enterprise, a member with billing access turns them on for the organization at [**Admin settings > Usage**](https://claude.ai/admin-settings/usage), and a member without it runs `/usage-credits` to send the organization's admins a request.
+  * On Team and Enterprise, a member with billing access turns them on for the organization at [**Organization settings > Usage**](https://claude.ai/admin-settings/usage), and a member without it runs `/usage-credits` to send the organization's admins a request.
 
 <Note>
   Fast mode usage draws directly from usage credits, even if you have remaining usage on your plan.
@@ -151,7 +153,7 @@ Where you enable fast mode depends on which product your organization uses:
 * **Console** (API customers): an admin enables it in [Claude Code preferences](https://platform.claude.com/claude-code/preferences). Fast mode is in [research preview](#research-preview), so your organization must also have fast mode access provisioned before fast mode requests succeed. To get access, contact your account manager or join the waitlist, as described in [fast mode on the Claude API](https://platform.claude.com/docs/en/build-with-claude/fast-mode).
 
   Without provisioned access, the API rejects each fast mode request with a 429, and Claude Code treats each rejection as a [fast mode rate limit](#handle-rate-limits). Unlike a rate limit's cooldown, the rejections continue until access is provisioned.
-* **Claude AI** (Team and Enterprise): an Owner enables it at [Admin Settings > Claude Code](https://claude.ai/admin-settings/claude-code)
+* **Claude AI** (Team and Enterprise): an Owner enables it at [**Organization settings > Claude Code**](https://claude.ai/admin-settings/claude-code)
 
 Another option to disable fast mode entirely is to set `CLAUDE_CODE_DISABLE_FAST_MODE=1`. See [Environment variables](/docs/en/env-vars).
 

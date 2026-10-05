@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/analytics
-fetched_at: 2026-09-14T05:36:02.324125+00:00
+fetched_at: 2026-10-05T06:27:11.064300+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,10 +14,10 @@ fetch_method: mintlify_md
 
 Claude Code provides analytics dashboards to help organizations understand developer usage patterns, track contribution metrics, and measure how Claude Code impacts engineering velocity. Access the dashboard for your plan:
 
-| Plan                          | Dashboard URL                                                              | Includes                                                                              | Read more                                            |
-| ----------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Plan | Dashboard URL | Includes | Read more |
+| - | - | - | - |
 | Claude for Teams / Enterprise | [claude.ai/analytics/claude-code](https://claude.ai/analytics/claude-code) | Usage metrics, contribution metrics with GitHub integration, leaderboard, data export | [Details](#access-analytics-for-team-and-enterprise) |
-| API (Claude Console)          | [platform.claude.com/claude-code](https://platform.claude.com/claude-code) | Usage metrics, spend tracking, team insights                                          | [Details](#access-analytics-for-api-customers)       |
+| API (Claude Console) | [platform.claude.com/claude-code](https://platform.claude.com/claude-code) | Usage metrics, spend tracking, team insights | [Details](#access-analytics-for-api-customers) |
 
 ## Access analytics for Team and Enterprise
 

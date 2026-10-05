@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/mcp
-fetched_at: 2026-09-28T06:10:39.084647+00:00
+fetched_at: 2026-10-05T06:27:10.683094+00:00
 fetch_method: mintlify_md
 ---
 
@@ -154,11 +154,11 @@ Create a `.mcp.json` file at your project root. The file is picked up when the `
 
 Claude Code registers the servers you pass in `options.mcpServers` at startup and emits the [init message](#error-handling) once the first-turn wait, if any, resolves. Whether each `options.mcpServers` server delays the first turn, and when it connects, depends on its type:
 
-| Server type                                                                            | Delays the first turn?                                 | First-turn wait timeout                                                                                          |
-| :------------------------------------------------------------------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| stdio server, or HTTP/SSE server without a cached tool list                            | Yes, until it connects                                 | [`MCP_TIMEOUT`](/docs/en/env-vars), 30 seconds by default; the connection fails at that deadline                      |
-| Remote server with a cached tool list, saved by Claude Code from a previous connection | No; the cached tools are available from the first turn | None; connects on its first tool call, and that deferred connect has its own timeout                             |
-| In-process [SDK server](#sdk-mcp-servers)                                              | Yes, until it connects and lists its tools             | [`MCP_TIMEOUT`](/docs/en/env-vars), 30 seconds by default, per connect attempt; the connection fails at that deadline |
+| Server type | Delays the first turn? | First-turn wait timeout |
+| :- | :- | :- |
+| stdio server, or HTTP/SSE server without a cached tool list | Yes, until it connects | [`MCP_TIMEOUT`](/docs/en/env-vars), 30 seconds by default; the connection fails at that deadline |
+| Remote server with a cached tool list, saved by Claude Code from a previous connection | No; the cached tools are available from the first turn | None; connects on its first tool call, and that deferred connect has its own timeout |
+| In-process [SDK server](#sdk-mcp-servers) | Yes, until it connects and lists its tools | [`MCP_TIMEOUT`](/docs/en/env-vars), 30 seconds by default, per connect attempt; the connection fails at that deadline |
 
 Servers loaded from [settings files](#from-a-config-file) such as `.mcp.json` or from plugins commonly show `pending` in the init message. When `options.mcpServers` holds a stdio, HTTP, or SSE server, the first turn waits for these pending servers too, up to `MCP_TIMEOUT`. When `options.mcpServers` is empty or holds only SDK servers, the first turn waits up to 2 seconds instead:
 
@@ -875,6 +875,18 @@ If Claude sees tools but doesn't use them, check that you've granted permission 
   ```
 </CodeGroup>
 
+### A tool is missing from an SDK MCP server
+
+In the TypeScript SDK, when a tool's input schema can't be converted to JSON Schema, the server you created with [`createSdkMcpServer()`](/docs/en/agent-sdk/typescript#createsdkmcpserver) leaves that tool out when it lists its tools. The SDK emits a warning at that point. Under Node.js the warning is a process warning with code `CLAUDE_SDK_MCP_TOOL_SCHEMA_UNCONVERTIBLE`, and it starts with this text:
+
+```text theme={null}
+Tool "<name>" on SDK MCP server "<server>" was left out of the server's tool list, because its input schema cannot be converted to JSON Schema
+```
+
+The rest of the warning gives the conversion error's message when it has one, then says what to check and change.
+
+Before TypeScript Agent SDK v0.3.286, one unconvertible schema made the server's whole tool listing fail without this warning, so none of that server's tools reached Claude.
+
 ### Connection timeouts
 
 MCP server connections time out after 30 seconds by default. To change how long a running tool call may take, set [`MCP_TOOL_TIMEOUT`](/docs/en/env-vars). If your server takes longer to start, the connection fails. Raise the connection limit with the [`MCP_TIMEOUT`](/docs/en/env-vars) environment variable, in milliseconds. For servers that need more startup time, also consider:
@@ -887,9 +899,9 @@ In TypeScript, you can set the tool-call limit for a single [SDK MCP server](#sd
 
 ### Tool output exceeds maximum allowed tokens
 
-The SDK applies the same MCP output limit as Claude Code. When a tool result with no image content is larger than 25,000 tokens, Claude Code saves the output to a file and replaces the tool result with an error message that names the file path, so the agent can read the output back in portions.
+The SDK applies the same MCP output limits as Claude Code. When a successful tool result with no image content is larger than 25,000 tokens, Claude Code saves the output to a file and replaces the tool result with an error message that names the file path, so the agent can read the output back in portions.
 
-Raise the limit with the [`MAX_MCP_OUTPUT_TOKENS`](/docs/en/env-vars) environment variable. See [MCP output limits and warnings](/docs/en/mcp#mcp-output-limits-and-warnings) for the full behavior, including how a server can declare a higher per-tool limit with the `anthropic/maxResultSizeChars` annotation.
+To change the token limit, set the [`MAX_MCP_OUTPUT_TOKENS`](/docs/en/env-vars) environment variable. Unless the tool declares `anthropic/maxResultSizeChars`, a successful text result longer than 50,000 characters is saved to a file regardless of the token limit. See [MCP output limits and warnings](/docs/en/mcp#mcp-output-limits-and-warnings) for the full behavior, including how a server declares that annotation.
 
 ## Related resources
 

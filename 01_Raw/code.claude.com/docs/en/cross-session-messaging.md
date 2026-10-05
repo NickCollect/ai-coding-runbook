@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/cross-session-messaging
-fetched_at: 2026-09-28T06:10:40.486786+00:00
+fetched_at: 2026-10-05T06:27:11.463573+00:00
 fetch_method: mintlify_md
 ---
 
@@ -70,7 +70,8 @@ Claude Code refuses a message in the following cases:
 
 * The message is [over the size cap](#limitations). Claude Code refuses it in the sending session, before it leaves.
 * A rapid burst to a session on this machine has reached [what that session's inbox accepts](#limitations). Claude Code refuses further messages to that session.
-* The reply target on this machine fails a safety check, such as a symlinked target or an endpoint that isn't the expected process. [Refusing to send a cross-session message](/docs/en/errors#refusing-to-send-a-cross-session-message) lists these checks.
+* A session beyond this machine is [listed as unable to receive cross-session messages](#message-sessions-on-other-machines). Claude Code refuses the message in the sending session, before it leaves this machine.
+* The reply target on this machine fails a safety check, such as a symlinked target. [Refusing to send a cross-session message](/docs/en/errors#refusing-to-send-a-cross-session-message) lists these checks.
 
 The receiving session checks each arriving message against its own [inbound controls](#control-inbound-messages), and the check ends in one of three outcomes:
 
@@ -140,15 +141,18 @@ When you rename a session, or start or resume an interactive one, with a name an
 
 How a message travels, and whether it passes through Anthropic servers, depends on where the target session runs:
 
-| Where the other session runs               | How the message travels                                                                                                      |
-| :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| On this machine                            | Over a per-session socket on macOS and Linux, or a per-session named pipe on native Windows, never through Anthropic servers |
-| On another of your machines                | Through Anthropic servers, arriving over that machine's [Remote Control](/docs/en/remote-control) connection                      |
-| In the [cloud](/docs/en/claude-code-on-the-web) | Through Anthropic servers, straight to the cloud session                                                                     |
+| Where the other session runs | How the message travels |
+| :- | :- |
+| On this machine | Over a per-session socket on macOS and Linux, or a per-session named pipe on native Windows, never through Anthropic servers |
+| On another of your machines | Through Anthropic servers, arriving over that machine's [Remote Control](/docs/en/remote-control) connection |
+| In the [cloud](/docs/en/claude-code-on-the-web) | Through Anthropic servers, straight to the cloud session |
 
 Starting a conversation with a session on another of your machines requires Claude Code v2.1.225 or later and a target that [appears in the listing](#see-which-sessions-claude-can-reach).
 
-You can message a session shown as `offline` in [the listing](#see-which-sessions-claude-can-reach), one whose Remote Control connection has dropped. The send goes through, but the message arrives only after that session's machine reconnects.
+A session's row in [the listing](#see-which-sessions-claude-can-reach) can show a condition that changes what happens when Claude messages that session:
+
+* **`offline`**: that session's Remote Control connection has dropped. The message goes through, but arrives only after that session's machine reconnects.
+* **`can't receive cross-session messages (off in that session)`**: messaging [isn't available](#availability) in that session, or its [`crossSessionInbound`](/docs/en/settings-reference#crosssessioninbound) value is `refuse`. Claude Code refuses a message to that session before the message leaves this machine. The result under Claude's `SendMessage` call begins `Not sent` and names the reason. Once the cause is fixed in that session, a later listing no longer shows this condition, and Claude can message that session.
 
 A session inside a container and a session on the host can't reach each other. Two sessions inside the same container can still message each other, including on a [self-hosted runner](/docs/en/self-hosted-environments). A session inside WSL 2 and a native Windows session on the same computer can't reach each other either.
 
@@ -171,9 +175,10 @@ When session A messages session B, Claude Code tells B's Claude that the message
 
 When a message arrives, Claude Code shows it in the conversation as a dim one-line preview, and the preview line stays in the conversation afterward. The preview carries the sender's name and the first line of the message, cut with `…` when it's long, such as `› Message from @api-worker: Schema migration finished (ctrl+o to expand)`.
 
-Either of these shows you the full text:
+Any of these shows you the full text:
 
 * Press `Ctrl+O` to open the [transcript viewer](/docs/en/interactive-mode#transcript-viewer) and read the full text under the sender's session name.
+* In [fullscreen rendering](/docs/en/fullscreen#use-the-mouse), click a preview line that leaves part of the message out to expand it in place.
 * In a session started with [`--verbose`](/docs/en/cli-reference#cli-flags), Claude Code shows the full text instead of the preview.
 
 The preview shortens only what you see. Whether or not you expand it, Claude reads the full message.
@@ -191,11 +196,11 @@ The new column is tenant_id, and rebasing on main is safe now.
 
 Set [`crossSessionInbound`](/docs/en/settings-reference#crosssessioninbound) to choose what a session does with messages arriving from your other sessions:
 
-| Value    | Behavior                                                                                                                                                                                                         |
-| :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `accept` | Claude Code delivers each message to Claude                                                                                                                                                                      |
-| `hold`   | Claude Code shows a notice for each message and doesn't deliver it. If an `accept` later applies, per the [precedence rules](/docs/en/settings-reference#crosssessioninbound), Claude Code releases the held messages |
-| `refuse` | Claude Code drops each message without delivering it                                                                                                                                                             |
+| Value | Behavior |
+| :- | :- |
+| `accept` | Claude Code delivers each message to Claude |
+| `hold` | Claude Code shows a notice for each message and doesn't deliver it. If an `accept` later applies, per the [precedence rules](/docs/en/settings-reference#crosssessioninbound), Claude Code releases the held messages |
+| `refuse` | Claude Code drops each message without delivering it |
 
 Beyond editing a settings file, you can select the value in the `/config` row **Messages from your other sessions**. Claude Code writes the value you select to your user settings. The row requires Claude Code v2.1.232 or later and doesn't appear while managed settings or the `--settings` flag sets the key, since a user-settings value wouldn't apply then. Claude Code rejects the `/config crossSessionInbound=value` shorthand for this key.
 
@@ -206,13 +211,15 @@ When no value applies, Claude Code decides per message from the two sessions' pe
 * **The receiving session prompts for permissions**: Claude Code delivers each message. It holds one for your approval only when the sending session identifies itself as bypassing permission prompts.
 * **The receiving session bypasses permission prompts**: Claude Code holds each message for your approval. It delivers one only when the sending session identifies itself as also bypassing.
 
-When the default holds a message, Claude Code opens an approval dialog in the receiving session. The dialog shows the sender and a preview:
+When the default holds a message in an interactive terminal session, Claude Code opens an approval dialog there. The dialog shows the sender and a preview:
 
 * **Approve** delivers that one message to Claude.
 * **Deny**, or dismissing the dialog, drops it.
 * When the dialog stays unanswered past the [`dialogExpiry`](/docs/en/settings-reference#dialogexpiry) deadline, Claude Code closes it and drops the message. The deadline defaults to five minutes.
 * While no terminal is attached to a [background session](/docs/en/agent-view), Claude Code leaves the dialog open past the deadline. After you attach, if the dialog stays unanswered for a full deadline period, Claude Code closes it and drops the message.
 * If this session's permission-mode class changes while messages are held, Claude Code re-applies the inbound rules, delivers the messages they now accept, and shows a notice.
+
+A session in the VS Code extension or the Desktop app can't show the dialog. Claude Code keeps a held message there until the same deadline, as [Non-interactive sessions](#non-interactive-sessions) describes.
 
 Claude Code holds at most 100 messages, and past that drops the oldest.
 
@@ -319,6 +326,7 @@ To check a session, type `/list-agents`, also available as `/peers`. The result 
   * **Cloud session missing**: a cloud session appears only while this session is connected to [Remote Control](/docs/en/remote-control).
   * **Other-machine session missing**: a session on another of your machines appears only when it runs with [Remote Control](/docs/en/remote-control) and this session is connected as well.
   * **Other-machine session `offline`**: a message to a session listed as `offline` goes through, but [arrives only after that session's machine reconnects](#message-sessions-on-other-machines).
+  * **Cloud or other-machine session `can't receive cross-session messages`**: a message to a session listed with this condition [doesn't leave this machine](#message-sessions-on-other-machines), and the result under `SendMessage` begins `Not sent`.
   * **Older cloud or other-machine session missing**: Claude Code reads those session lists newest first and stops after a bounded number of pages, so Claude can't message a session that fell past them by name.
 
 In a session with messaging, `/status` also shows a `Peer address` row with the session's own inbox address, or `unavailable` and the reason when Claude Code [couldn't set up an inbox](#the-sessions-inbox-socket).

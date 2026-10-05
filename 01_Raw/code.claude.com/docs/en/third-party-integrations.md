@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/third-party-integrations
-fetched_at: 2026-09-28T06:10:42.874260+00:00
+fetched_at: 2026-10-05T06:27:12.917755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -126,7 +126,7 @@ If your organization has specific infrastructure requirements, compare the optio
 
     <tr>
       <td>Billing</td>
-      <td><strong>Teams:</strong> \$150/seat (Premium) with PAYG available<br /><strong>Enterprise:</strong> <a href="https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=third_party_enterprise">Contact Sales</a></td>
+      <td><strong>Teams:</strong> per-seat subscription with PAYG available, see <a href="https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=third_party_pricing#team-&-enterprise">pricing</a><br /><strong>Enterprise:</strong> <a href="https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=third_party_enterprise">Contact Sales</a></td>
       <td>PAYG</td>
       <td>PAYG through AWS</td>
       <td>PAYG through AWS Marketplace</td>
@@ -242,6 +242,8 @@ If you deploy through [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's
 ### Configure security policies
 
 Security teams can configure managed permissions for what Claude Code is and is not allowed to do, which cannot be overwritten by local configuration. [Learn more](/docs/en/security).
+
+To limit which of these deployment options a managed machine may use, set [`allowedProviders`](/docs/en/settings-reference#allowedproviders) in managed settings. For example, `["bedrock"]` allows Amazon Bedrock and nothing else; a Bedrock fleet that also enables the Mantle endpoint lists `"mantle"` too. The entry says which endpoint variables also need a managed `env` pin. Requires Claude Code v2.1.285 or later.
 
 <h3 id="leverage-mcp-for-integrations">
   Use MCP for integrations

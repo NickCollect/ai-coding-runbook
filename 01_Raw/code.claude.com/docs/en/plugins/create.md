@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/create
-fetched_at: 2026-09-28T06:10:41.875523+00:00
+fetched_at: 2026-10-05T06:27:12.273551+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ Open a terminal in the directory where you want to keep the plugin, such as `~/p
     Greet the user warmly and ask how you can help them today.
     ```
 
-    The `disable-model-invocation: true` line means Claude doesn't run the skill on its own, so only you trigger it. Remove that line from a skill you want Claude to run on its own. The skill's command combines the plugin name and the skill's name, so you run this one as `/my-first-plugin:hello`. For the other frontmatter fields, see the [skill frontmatter reference](/docs/en/skills#frontmatter-reference).
+    The `disable-model-invocation: true` line means Claude doesn't run the skill on its own. Remove that line from a skill you want Claude to run on its own. The skill's command combines the plugin name and the skill's name, so you run this one as `/my-first-plugin:hello`. For the other frontmatter fields, see the [skill frontmatter reference](/docs/en/skills#frontmatter-reference).
   </Step>
 
   <Step title="Validate the plugin">
@@ -152,14 +152,14 @@ Each kind of [component](/docs/en/plugins/components), such as skills, agents, h
 
 The table lists the directories most plugins start with, and the [full layout](/docs/en/plugins/manifest-reference#standard-layout) lists the rest.
 
-| Location                     | Contents                                                                                                                          |
-| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
+| Location | Contents |
+| :- | :- |
 | `.claude-plugin/plugin.json` | The manifest. When you load a plugin with `--plugin-dir` and it has no manifest, Claude Code names the plugin after its directory |
-| `skills/`                    | One `<name>/SKILL.md` directory per skill                                                                                         |
-| `commands/`                  | Flat Markdown files, the older form of skills. Use `skills/` for new plugins                                                      |
-| `agents/`                    | One Markdown file per subagent                                                                                                    |
-| `hooks/hooks.json`           | Hook configuration: a top-level `"hooks"` key whose value has the same shape as `hooks` in a settings file                        |
-| `.mcp.json`                  | MCP server definitions                                                                                                            |
+| `skills/` | One `<name>/SKILL.md` directory per skill |
+| `commands/` | Flat Markdown files, the older form of skills. Use `skills/` for new plugins |
+| `agents/` | One Markdown file per subagent |
+| `hooks/hooks.json` | Hook configuration: a top-level `"hooks"` key whose value has the same shape as `hooks` in a settings file |
+| `.mcp.json` | MCP server definitions |
 
 <Warning>
   Only `plugin.json` goes inside `.claude-plugin/`. Components saved there don't load.
@@ -238,7 +238,7 @@ Your personal skills directory is `~/.claude/skills/`. Claude Code loads any fol
 
 #### Scaffold the plugin with `claude plugin init`
 
-`claude plugin init` writes a starter plugin under `~/.claude/skills/`. Requires Claude Code v2.1.157 or later. Scaffold one from your shell:
+`claude plugin init` writes a starter plugin under `~/.claude/skills/`. Scaffold one from your shell:
 
 ```bash theme={null}
 claude plugin init my-tool

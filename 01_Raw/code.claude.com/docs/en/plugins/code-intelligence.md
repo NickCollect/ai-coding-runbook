@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/code-intelligence
-fetched_at: 2026-09-28T06:10:41.863142+00:00
+fetched_at: 2026-10-05T06:27:12.242029+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,21 +32,21 @@ A code intelligence plugin tells Claude Code which command starts the language s
   <Step title="Install the language server binary">
     Find your language in the table below and install the binary in its row. If your language isn't listed, see [Add a language without an official plugin](#add-a-language-without-an-official-plugin).
 
-    | Language                  | Plugin                                                                                                           | Binary                          |
-    | :------------------------ | :--------------------------------------------------------------------------------------------------------------- | :------------------------------ |
-    | C/C++                     | [`clangd-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/clangd-lsp)               | `clangd`                        |
-    | C#                        | [`csharp-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/csharp-lsp)               | `csharp-ls`                     |
-    | Go                        | [`gopls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/gopls-lsp)                 | `gopls`                         |
-    | Java                      | [`jdtls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/jdtls-lsp)                 | `jdtls`                         |
-    | Kotlin                    | [`kotlin-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/kotlin-lsp)               | `kotlin-lsp`                    |
-    | Liquid                    | [`liquid-lsp`](https://github.com/Shopify/liquid-skills/tree/main/plugins/liquid-lsp)                            | `shopify`, from the Shopify CLI |
-    | Lua                       | [`lua-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/lua-lsp)                     | `lua-language-server`           |
-    | PHP                       | [`php-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/php-lsp)                     | `intelephense`                  |
-    | Python                    | [`pyright-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp)             | `pyright-langserver`            |
-    | Ruby                      | [`ruby-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ruby-lsp)                   | `ruby-lsp`                      |
-    | Rust                      | [`rust-analyzer-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/rust-analyzer-lsp) | `rust-analyzer`                 |
-    | Swift                     | [`swift-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/swift-lsp)                 | `sourcekit-lsp`                 |
-    | TypeScript and JavaScript | [`typescript-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/typescript-lsp)       | `typescript-language-server`    |
+    | Language | Plugin | Binary |
+    | :- | :- | :- |
+    | C/C++ | [`clangd-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/clangd-lsp) | `clangd` |
+    | C# | [`csharp-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/csharp-lsp) | `csharp-ls` |
+    | Go | [`gopls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/gopls-lsp) | `gopls` |
+    | Java | [`jdtls-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/jdtls-lsp) | `jdtls` |
+    | Kotlin | [`kotlin-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/kotlin-lsp) | `kotlin-lsp` |
+    | Liquid | [`liquid-lsp`](https://github.com/Shopify/liquid-skills/tree/main/plugins/liquid-lsp) | `shopify`, from the Shopify CLI |
+    | Lua | [`lua-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/lua-lsp) | `lua-language-server` |
+    | PHP | [`php-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/php-lsp) | `intelephense` |
+    | Python | [`pyright-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/pyright-lsp) | `pyright-langserver` |
+    | Ruby | [`ruby-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ruby-lsp) | `ruby-lsp` |
+    | Rust | [`rust-analyzer-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/rust-analyzer-lsp) | `rust-analyzer` |
+    | Swift | [`swift-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/swift-lsp) | `sourcekit-lsp` |
+    | TypeScript and JavaScript | [`typescript-lsp`](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/typescript-lsp) | `typescript-language-server` |
 
     Anthropic maintains every plugin in the table except `liquid-lsp`, which Shopify maintains and the official marketplace lists.
 
@@ -56,7 +56,7 @@ A code intelligence plugin tells Claude Code which command starts the language s
   </Step>
 
   <Step title="Install the plugin">
-    To install the plugin listed for your language in the step 1 table, run `/plugin install` in a Claude Code session, replacing `typescript-lsp` with that plugin's name:
+    In the VS Code extension or the desktop app, follow [Install a plugin](/docs/en/plugins/install#install-a-plugin) instead of this step. In a terminal, start Claude Code by running `claude`, then enter this at its prompt, replacing `typescript-lsp` with the plugin the step 1 table lists for your language:
 
     ```
     /plugin install typescript-lsp@claude-plugins-official

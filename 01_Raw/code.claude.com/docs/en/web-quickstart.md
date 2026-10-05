@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/web-quickstart
-fetched_at: 2026-09-28T06:10:43.039406+00:00
+fetched_at: 2026-10-05T06:27:13.033172+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,16 +44,16 @@ The session doesn't close when the branch is pushed. PR creation and further edi
 
 Claude Code behaves the same everywhere. What changes is where the session runs and whether your local configuration is available:
 
-|                                              | Cloud session                                                                                                  | Local session                                                                                                                      | Local session with [Remote Control](/docs/en/remote-control)         |
-| :------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
-| **Code runs on**                             | Cloud VM, Anthropic-managed by default                                                                         | Your machine                                                                                                                       | Your machine                                                    |
-| **You start it from**                        | claude.ai/code, the Claude mobile app, the Desktop app with **Cloud** selected, or `claude --cloud`            | Your terminal, your IDE, or the Desktop app with **Local** selected                                                                | Your terminal, the VS Code extension, or the Desktop app        |
-| **You chat from**                            | claude.ai, the mobile app, or the Desktop app                                                                  | Where you started it                                                                                                               | claude.ai or the mobile app, as well as where you started it    |
-| **Uses your local config**                   | No, repo only                                                                                                  | Yes                                                                                                                                | Yes                                                             |
-| **Requires GitHub**                          | Yes, or [bundle a local repo](/docs/en/claude-code-on-the-web#send-local-repositories-without-github) via `--cloud` | No                                                                                                                                 | No                                                              |
-| **Keeps running if you disconnect**          | Yes                                                                                                            | No                                                                                                                                 | While the session stays open on your machine                    |
-| **[Permission modes](/docs/en/permission-modes)** | Accept edits, Plan, Auto                                                                                       | All modes in the terminal; see [Switch permission modes](/docs/en/permission-modes#switch-permission-modes) for the IDE and Desktop app | Manual, Accept edits, or Plan from claude.ai and the mobile app |
-| **Network access**                           | Configurable per environment                                                                                   | Your machine's network                                                                                                             | Your machine's network                                          |
+| | Cloud session | Local session | Local session with [Remote Control](/docs/en/remote-control) |
+| :- | :- | :- | :- |
+| **Code runs on** | Cloud VM, Anthropic-managed by default | Your machine | Your machine |
+| **You start it from** | claude.ai/code, the Claude mobile app, the Desktop app with **Cloud** selected, or `claude --cloud` | Your terminal, your IDE, or the Desktop app with **Local** selected | Your terminal, the VS Code extension, or the Desktop app |
+| **You chat from** | claude.ai, the mobile app, or the Desktop app | Where you started it | claude.ai or the mobile app, as well as where you started it |
+| **Uses your local config** | No, repo only | Yes | Yes |
+| **Requires GitHub** | Yes, or [bundle a local repo](/docs/en/claude-code-on-the-web#send-local-repositories-without-github) via `--cloud` | No | No |
+| **Keeps running if you disconnect** | Yes | No | While the session stays open on your machine |
+| **[Permission modes](/docs/en/permission-modes)** | Accept edits, Plan, Auto | All modes in the terminal; see [Switch permission modes](/docs/en/permission-modes#switch-permission-modes) for the IDE and Desktop app | Manual, Accept edits, or Plan from claude.ai and the mobile app |
+| **Network access** | Configurable per environment | Your machine's network | Your machine's network |
 
 See the [terminal quickstart](/docs/en/quickstart), [Desktop app](/docs/en/desktop), or [Remote Control](/docs/en/remote-control) docs to set up local sessions.
 
@@ -62,7 +62,7 @@ See the [terminal quickstart](/docs/en/quickstart), [Desktop app](/docs/en/deskt
 Connecting GitHub is a one-time step. If you already use the GitHub CLI, you can [do this from your terminal](#connect-from-your-terminal) instead of the browser.
 
 <Note>
-  On Team and Enterprise plans, the **Sign in with GitHub** step works only after an [Owner](/docs/en/server-managed-settings#access-control) of your Claude organization turns on the GitHub connector at [**Admin settings > Connectors**](https://claude.ai/admin-settings/connectors). Until then, that step shows "GitHub access is required for Claude Code on the web" instead of a sign-in button. After the connector is on, reload [claude.ai/code](https://claude.ai/code) and start again from the first step. A second toggle, [Quick web setup](/docs/en/claude-code-on-the-web#github-authentication-options) at [**Admin settings > Claude Code**](https://claude.ai/admin-settings/claude-code), is optional: with it on, `/web-setup` works and onboarding creates the environment for members.
+  On Team and Enterprise plans, the **Sign in with GitHub** step works only after an [Owner](/docs/en/server-managed-settings#access-control) of your Claude organization turns on the GitHub connector at [**Organization settings > Connectors**](https://claude.ai/admin-settings/connectors). Until then, that step shows "GitHub access is required for Claude Code cloud sessions" instead of a sign-in button. After the connector is on, reload [claude.ai/code](https://claude.ai/code) and start again from the first step. A second toggle, [Quick setup](/docs/en/claude-code-on-the-web#quick-setup-for-team-and-enterprise) at [**Organization settings > Claude Code**](https://claude.ai/admin-settings/claude-code), is optional: with it on, `/web-setup` works and onboarding creates the environment for members.
 </Note>
 
 <Steps>
@@ -75,6 +75,8 @@ Connecting GitHub is a one-time step. If you already use the GitHub CLI, you can
 
     With this connection, a session can clone any public repository, but can work in a private repository only when the Claude GitHub App is installed on it. [Install the Claude GitHub App](https://github.com/apps/claude/installations/new) on each GitHub account or organization whose private repositories you want to use. On a GitHub organization, an organization owner may need to approve the installation. Installing it also enables [Auto-fix](/docs/en/claude-code-on-the-web#auto-fix-pull-requests), which lets Claude respond to CI failures and review comments on pull requests in those repositories.
 
+    When you connect, Claude also links the GitHub accounts you own to your Claude organization, if they have the Claude GitHub App installed. On Team and Enterprise plans, admins see those accounts in the [connected GitHub accounts list](/docs/en/admin-setup#connected-github-accounts).
+
     If onboarding prompts you to install the Claude GitHub App at this point and you'd rather do it later, click **Skip**.
   </Step>
 
@@ -82,7 +84,7 @@ Connecting GitHub is a one-time step. If you already use the GitHub CLI, you can
     A [cloud environment](/docs/en/cloud-environments) is the saved configuration that controls what network access Claude has during sessions and what runs when a session starts. What happens after you connect GitHub depends on your plan:
 
     * **Pro and Max**: onboarding creates an environment named **Default** for you.
-    * **Team and Enterprise**: onboarding shows a **Create your first cloud environment** form. Leave the prefilled name and network access unchanged and click **Create & finish** to create the **Default** environment. If an Owner has turned on [Quick web setup](/docs/en/claude-code-on-the-web#github-authentication-options), onboarding creates **Default** for you instead.
+    * **Team and Enterprise**: onboarding shows a **Create your first cloud environment** form. Leave the prefilled name and network access unchanged and click **Create & finish** to create the **Default** environment. If an Owner has turned on [Quick setup](/docs/en/claude-code-on-the-web#quick-setup-for-team-and-enterprise), onboarding creates **Default** for you instead.
 
     **Default** uses [`Trusted` network access](/docs/en/cloud-environments#access-levels): sessions reach [common package registries](/docs/en/cloud-environments#default-allowed-domains) and other allowlisted domains, and nothing else through the session's network. See [Installed tools](/docs/en/cloud-environments#installed-tools) for what's available without any configuration.
 
@@ -92,7 +94,7 @@ Connecting GitHub is a one-time step. If you already use the GitHub CLI, you can
 
 ### Connect from your terminal
 
-If you already use the GitHub CLI (`gh`), you can connect GitHub for cloud sessions from your terminal. This requires the [Claude Code CLI](/docs/en/quickstart). On Team and Enterprise plans, `/web-setup` is available only after an Owner turns on [Quick web setup](/docs/en/claude-code-on-the-web#github-authentication-options).
+If you already use the GitHub CLI (`gh`), you can connect GitHub for cloud sessions from your terminal. This requires the [Claude Code CLI](/docs/en/quickstart). On Team and Enterprise plans, `/web-setup` is available only after an Owner turns on [Quick setup](/docs/en/claude-code-on-the-web#quick-setup-for-team-and-enterprise).
 
 When you run `/web-setup`, Claude Code reads the token that `gh auth token` prints, asks you to confirm, and sends the token to Anthropic. Anthropic stores it encrypted with your claude.ai account, and your cloud sessions use it for GitHub access until you [remove it](#remove-the-web-setup-token). A cloud session you start yourself can then access any repository that token can access, with no Claude GitHub App installation. Threads in a [project](/docs/en/claude-projects#set-up-github-access) still need the Claude GitHub App.
 
@@ -168,12 +170,12 @@ With GitHub connected and an environment created, you're ready to submit tasks.
 
 You can prefill the prompt, repositories, and environment for a new session by adding query parameters to the [claude.ai/code](https://claude.ai/code) URL. Use this to build integrations such as a button in your issue tracker that opens Claude Code with the issue description as the prompt.
 
-| Parameter      | Description                                                                                                                                                      |
-| :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `prompt`       | Prompt text to prefill in the input box. The alias `q` is also accepted.                                                                                         |
-| `prompt_url`   | URL to fetch the prompt text from, for prompts too long to embed in a query string. The URL must allow cross-origin requests. Ignored when `prompt` is also set. |
-| `repositories` | Comma-separated list of `owner/repo` slugs to preselect. The alias `repo` is also accepted.                                                                      |
-| `environment`  | Name or ID of the [environment](#connect-github) to preselect.                                                                                                   |
+| Parameter | Description |
+| :- | :- |
+| `prompt` | Prompt text to prefill in the input box. The alias `q` is also accepted. |
+| `prompt_url` | URL to fetch the prompt text from, for prompts too long to embed in a query string. The URL must allow cross-origin requests. Ignored when `prompt` is also set. |
+| `repositories` | Comma-separated list of `owner/repo` slugs to preselect. The alias `repo` is also accepted. |
+| `environment` | Name or ID of the [environment](#connect-github) to preselect. |
 
 URL-encode each value. The example below opens the form with a prompt and a repository already selected:
 
@@ -217,9 +219,9 @@ If you connected with `/web-setup`, sessions reach every repository your `gh` to
 
 Cloud sessions require a connected GitHub account. Connect via the browser flow above, or run `/web-setup` from your terminal if you use the GitHub CLI. If you'd rather not connect GitHub at all, see [Remote Control](/docs/en/remote-control) to run Claude Code on your own machine and monitor it from your browser or phone.
 
-### "Not available for the selected organization"
+### "Claude Code isn't available on your account"
 
-Enterprise organizations may need an Owner to enable cloud sessions. Contact your Anthropic account team.
+Your seat in the selected organization doesn't include Claude Code. If you belong to another organization, click **Switch organization** on that page. Otherwise, ask an Owner of the organization to assign you a [seat that includes Claude Code](https://support.claude.com/en/articles/11845131-use-claude-code-with-your-team-or-enterprise-plan).
 
 ### `/web-setup` says "Not signed in to Claude"
 
@@ -237,7 +239,7 @@ If `/web-setup` says your GitHub CLI token doesn't have the `workflow` scope, yo
 
 If you typed it inside Claude Code and the command menu shows `No commands match "/web-setup"`, or submitting it returns `Unknown command: /web-setup`, the command is hidden because a requirement isn't met. The cause is usually that you're authenticated with an API key or third-party provider instead of a claude.ai subscription. Run `/login` to sign in with your claude.ai account.
 
-On Team and Enterprise plans, the command is hidden by default: the [Quick web setup toggle](/docs/en/claude-code-on-the-web#github-authentication-options) is off until an Owner turns it on. While it's off, [connect GitHub from the browser](#connect-github) instead.
+On Team and Enterprise plans, the command is hidden by default: the [Quick setup toggle](/docs/en/claude-code-on-the-web#quick-setup-for-team-and-enterprise) is off until an Owner turns it on. While it's off, [connect GitHub from the browser](#connect-github) instead.
 
 The command is also hidden in two other cases:
 

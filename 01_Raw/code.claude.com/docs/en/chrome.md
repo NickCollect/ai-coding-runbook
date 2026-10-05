@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/chrome
-fetched_at: 2026-09-28T06:10:39.943733+00:00
+fetched_at: 2026-10-05T06:27:11.181664+00:00
 fetch_method: mintlify_md
 ---
 
@@ -96,27 +96,37 @@ The prompt offers three choices:
 * **Not now**: continues the task without browser tools. Claude Code can ask again in a later session.
 * **Don't ask again**: stops the prompt in future sessions. You can still set up the integration anytime with `/chrome`.
 
-If your organization blocks the `claude-in-chrome` MCP server with the [`deniedMcpServers` managed setting](/docs/en/managed-mcp#policy-based-control-with-allowlists-and-denylists), Claude Code doesn't show the install prompt.
+Two managed MCP policies turn the prompt off:
+
+* If your organization blocks the `claude-in-chrome` MCP server with the [`deniedMcpServers` managed setting](/docs/en/managed-mcp#policy-based-control-with-allowlists-and-denylists), Claude Code doesn't show the install prompt.
+* If your organization deploys a [`managed-mcp.json`](/docs/en/managed-mcp#exclusive-control-with-managed-mcp-json) file without [allowing Claude in Chrome alongside the managed set](/docs/en/managed-mcp#allow-claude-in-chrome-alongside-the-managed-set), Claude Code doesn't show the install prompt.
 
 ### Enable Chrome by default
 
-To avoid passing `--chrome` each session, run `/chrome` and select "Enabled by default".
+To connect Chrome without passing `--chrome` each time, run `/chrome` in a CLI session and select **Enabled by default**. In the [VS Code extension](/docs/en/vs-code#automate-browser-tasks-with-chrome), type `/chrome` in the prompt box and turn on the **Enabled by default** switch. The two share one setting, so turning it on in either place turns it on for both the CLI and VS Code.
+
+With the setting on and Claude Code v2.1.287 or later, each VS Code session connects to your browser as it starts, so Claude can use it before you type `@browser`. On earlier versions, or with the setting off, a VS Code session connects when you type `@browser`.
 
 Claude Code starts normally when Chrome isn't running. Before v2.1.211, startup could hang when Chrome integration was enabled but Chrome wasn't running.
 
-In the [VS Code extension](/docs/en/vs-code#automate-browser-tasks-with-chrome), Chrome is available whenever the Chrome extension is installed. No additional flag is needed.
-
 <Note>
-  Enabling Chrome by default in the CLI increases context usage since browser tools are always loaded. If you notice increased context consumption, disable this setting and use `--chrome` only when needed.
+  Enabling Chrome by default increases context usage since the browser tools and their instructions are always loaded. If you notice increased context consumption, turn the setting off and connect only when needed, with `--chrome` in the CLI or by typing [`@browser`](/docs/en/vs-code#automate-browser-tasks-with-chrome) in the VS Code prompt box.
 </Note>
 
 ### Manage site permissions
 
-Site-level permissions are inherited from the Chrome extension. Manage permissions in the Chrome extension settings to control which sites Claude can browse, click, and type on.
+Site-level permissions are inherited from the Chrome extension. Manage permissions in the Chrome extension settings to control which sites Claude can browse, click, and type on. In [auto mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode), when the auto mode classifier itself approves a browser call to a site, the extension skips its own per-site check for that call, unless your permission rules deny any site to Claude in Chrome.
+
+### Permission prompts in VS Code sessions
+
+In a VS Code session, whether Claude Code asks you before a browser action depends on how the session connected to your browser:
+
+* **You typed `@browser`**: the extension approves each browser action that Claude Code would otherwise ask you about.
+* **The [Enabled by default](#enable-chrome-by-default) setting connected it at start**: Claude Code asks you before browser actions on a site you haven't allowed, in Manual, Edit automatically, Auto, and Bypass permissions modes, until you type `@browser` in that session.
 
 ### Browser tools in plan mode
 
-In [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode), a permission prompt appears before Claude records a GIF, opens a new tab, or runs a shortcut. If [bypass permissions mode is available](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) in your session and [feature-flag fetching](/docs/en/env-vars#features-that-need-feature-flag-fetching) is off, these calls run without a prompt.
+In [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode), a permission prompt appears before Claude records a GIF, opens a new tab, or runs a shortcut, except in a VS Code session where you typed [`@browser`](#permission-prompts-in-vs-code-sessions). In an interactive CLI session, if [bypass permissions mode is available](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) and [feature-flag fetching](/docs/en/env-vars#features-that-need-feature-flag-fetching) is off, these calls run without a prompt.
 
 A `tabs_context_mcp` call also prompts when it sets `createIfEmpty`, and so does a `browser_batch` call that includes any of these actions.
 
@@ -287,12 +297,12 @@ On Windows, you may encounter:
 
 These are the most frequently encountered errors and how to resolve them:
 
-| Error                                       | Cause                                                                                                                                          | Fix                                                                                                                                                                                                                                                  |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| "Browser extension is not connected"        | Native messaging host cannot reach the extension, or your organization's IP allowlist rejects the connection to `bridge.claudeusercontent.com` | Restart Chrome and Claude Code, then run `/chrome` to reconnect. If your organization uses IP allowlisting and the error persists, see [Organization IP allowlists and proxy egress](/docs/en/network-config#organization-ip-allowlists-and-proxy-egress) |
-| Extension shows "Not detected" in `/chrome` | Chrome extension is not installed or is disabled                                                                                               | Install or enable the extension in `chrome://extensions`                                                                                                                                                                                             |
-| "No tab available"                          | Claude tried to act before a tab was ready                                                                                                     | Ask Claude to create a new tab and retry                                                                                                                                                                                                             |
-| "Receiving end does not exist"              | Extension service worker went idle                                                                                                             | Run `/chrome` and select "Reconnect extension"                                                                                                                                                                                                       |
+| Error | Cause | Fix |
+| - | - | - |
+| "Browser extension is not connected" | Native messaging host cannot reach the extension, or your organization's IP allowlist rejects the connection to `bridge.claudeusercontent.com` | Restart Chrome and Claude Code, then run `/chrome` to reconnect. If your organization uses IP allowlisting and the error persists, see [Organization IP allowlists and proxy egress](/docs/en/network-config#organization-ip-allowlists-and-proxy-egress) |
+| Extension shows "Not detected" in `/chrome` | Chrome extension is not installed or is disabled | Install or enable the extension in `chrome://extensions` |
+| "No tab available" | Claude tried to act before a tab was ready | Ask Claude to create a new tab and retry |
+| "Receiving end does not exist" | Extension service worker went idle | Run `/chrome` and select "Reconnect extension" |
 
 ## See also
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/voice-dictation
-fetched_at: 2026-09-28T06:10:43.020651+00:00
+fetched_at: 2026-10-05T06:27:12.997832+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,12 +41,12 @@ Voice mode enabled (hold). Hold space to record. Dictation language: en (/config
 
 `/voice` accepts an optional mode argument:
 
-| Command       | Effect                                        |
-| :------------ | :-------------------------------------------- |
-| `/voice`      | Toggle on or off, keep the current mode       |
-| `/voice hold` | Enable in [hold mode](#hold-to-record)        |
-| `/voice tap`  | Enable in [tap mode](#tap-to-record-and-send) |
-| `/voice off`  | Disable                                       |
+| Command | Effect |
+| :- | :- |
+| `/voice` | Toggle on or off, keep the current mode |
+| `/voice hold` | Enable in [hold mode](#hold-to-record) |
+| `/voice tap` | Enable in [tap mode](#tap-to-record-and-send) |
+| `/voice off` | Disable |
 
 Voice dictation persists across sessions. Set it directly in your [user settings file](/docs/en/settings) instead of running `/voice`:
 
@@ -112,28 +112,28 @@ Neither key does anything else in the press that cancels: `Esc` doesn't interrup
 Voice dictation uses the same [`language` setting](/docs/en/settings-reference#language) that controls Claude's response language. If that setting is empty, dictation defaults to English. In the VS Code extension, if `language` is empty, dictation uses VS Code's `accessibility.voice.speechLanguage` setting before defaulting to English.
 
 <Accordion title="Supported dictation languages">
-  | Language   | Code |
-  | :--------- | :--- |
-  | Czech      | `cs` |
-  | Danish     | `da` |
-  | Dutch      | `nl` |
-  | English    | `en` |
-  | French     | `fr` |
-  | German     | `de` |
-  | Greek      | `el` |
-  | Hindi      | `hi` |
+  | Language | Code |
+  | :- | :- |
+  | Czech | `cs` |
+  | Danish | `da` |
+  | Dutch | `nl` |
+  | English | `en` |
+  | French | `fr` |
+  | German | `de` |
+  | Greek | `el` |
+  | Hindi | `hi` |
   | Indonesian | `id` |
-  | Italian    | `it` |
-  | Japanese   | `ja` |
-  | Korean     | `ko` |
-  | Norwegian  | `no` |
-  | Polish     | `pl` |
+  | Italian | `it` |
+  | Japanese | `ja` |
+  | Korean | `ko` |
+  | Norwegian | `no` |
+  | Polish | `pl` |
   | Portuguese | `pt` |
-  | Russian    | `ru` |
-  | Spanish    | `es` |
-  | Swedish    | `sv` |
-  | Turkish    | `tr` |
-  | Ukrainian  | `uk` |
+  | Russian | `ru` |
+  | Spanish | `es` |
+  | Swedish | `sv` |
+  | Turkish | `tr` |
+  | Ukrainian | `uk` |
 </Accordion>
 
 Set the language in `/config` or directly in settings. You can use either the [BCP 47 language code](https://en.wikipedia.org/wiki/IETF_language_tag) or the language name:
@@ -174,7 +174,8 @@ Some keys are not delivered to terminal applications and can't be bound at all. 
 
 Common issues when voice dictation does not activate or record:
 
-* **`Voice mode requires a Claude.ai account`**: you are authenticated with an API key or a third-party provider. Run `/login` to sign in with a claude.ai account.
+* **`Unknown command: /voice`**: `/voice` is available only while a claude.ai account is your active sign-in. If you aren't signed in with one, run `/login`. If `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, an `apiKeyHelper` setting, or a [third-party provider](#requirements) is in use, it takes precedence over a claude.ai sign-in, so remove it and restart Claude Code.
+* **`Voice mode requires a Claude.ai account`**: Claude Code couldn't find a usable claude.ai sign-in when you ran `/voice` or started recording. Run `/login` to sign in again.
 * **`Voice mode is disabled by your organization's policy`**: an administrator policy for your organization turns off voice dictation. Contact your organization administrator to confirm whether voice dictation is available for your organization.
 * **`Microphone access is denied`**: grant microphone permission to your terminal in system settings. On macOS, go to System Settings → Privacy & Security → Microphone and enable your terminal app, then run `/voice` again. On Windows, go to Settings → Privacy & security → Microphone and turn on microphone access for desktop apps, then run `/voice` again. If your terminal isn't listed in the macOS settings, see [Terminal not listed in macOS Microphone settings](#terminal-not-listed-in-macos-microphone-settings).
 * **`Voice mode requires SoX for audio recording` on Linux**: the native audio module could not load and no fallback is installed. Install SoX with the command shown in the error message, for example `sudo apt-get install sox`.

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/cli-hints
-fetched_at: 2026-09-28T06:10:41.822639+00:00
+fetched_at: 2026-10-05T06:27:12.182135+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,11 +78,11 @@ The tag must occupy its own line; Claude Code ignores a tag embedded mid-line.
 
 The tag takes three attributes, all required:
 
-| Attribute | Description                                       |
-| :-------- | :------------------------------------------------ |
-| `v`       | Protocol version. `1` is the only supported value |
-| `type`    | Hint kind. `plugin` is the only supported value   |
-| `value`   | Plugin identifier in `name@marketplace` form      |
+| Attribute | Description |
+| :- | :- |
+| `v` | Protocol version. `1` is the only supported value |
+| `type` | Hint kind. `plugin` is the only supported value |
+| `value` | Plugin identifier in `name@marketplace` form |
 
 Values may be double-quoted or unquoted; an unquoted value can't contain whitespace.
 
