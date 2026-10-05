@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.5.2 (2026-09-30)
+
+Full Changelog: [foundry-sdk-v0.5.1...foundry-sdk-v0.5.2](https://github.com/anthropics/anthropic-sdk-typescript/compare/foundry-sdk-v0.5.1...foundry-sdk-v0.5.2)
+
+## 0.5.1 (2026-09-30)
+
+Full Changelog: [foundry-sdk-v0.5.0...foundry-sdk-v0.5.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/foundry-sdk-v0.5.0...foundry-sdk-v0.5.1)
+
+## 0.5.0 (2026-09-28)
+
+Full Changelog: [foundry-sdk-v0.4.9...foundry-sdk-v0.5.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/foundry-sdk-v0.4.9...foundry-sdk-v0.5.0)
+
+### Features
+
+* **api:** add claude-sonnet-5-5 ([4e77366](https://github.com/anthropics/anthropic-sdk-typescript/commit/4e7736625fd23a5607800e8de4aa3c37daa74a07))
+
 ## 0.4.9 (2026-09-22)
 
 Full Changelog: [foundry-sdk-v0.4.8...foundry-sdk-v0.4.9](https://github.com/anthropics/anthropic-sdk-typescript/compare/foundry-sdk-v0.4.8...foundry-sdk-v0.4.9)

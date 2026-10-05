@@ -1,16 +1,6 @@
 import {
-  BetaMemoryTool20250818,
-  BetaTool,
-  BetaToolBash20241022,
-  BetaToolBash20250124,
-  BetaToolComputerUse20241022,
-  BetaToolComputerUse20250124,
-  BetaToolComputerUse20251124,
+  BetaClientToolUnion,
   BetaToolResultContentBlockParam,
-  BetaToolTextEditor20241022,
-  BetaToolTextEditor20250124,
-  BetaToolTextEditor20250429,
-  BetaToolTextEditor20250728,
   BetaToolUnion,
   BetaToolUseBlock,
 } from '../../resources/beta';
@@ -23,18 +13,7 @@ import { ToolError } from './ToolError';
 export type Promisable<T> = T | Promise<T>;
 
 /** Tools that run on the client. Server-side tools (code execution, web search, MCP toolsets) are not included. */
-export type BetaClientRunnableToolType =
-  | BetaTool
-  | BetaMemoryTool20250818
-  | BetaToolBash20241022
-  | BetaToolBash20250124
-  | BetaToolComputerUse20241022
-  | BetaToolComputerUse20250124
-  | BetaToolComputerUse20251124
-  | BetaToolTextEditor20241022
-  | BetaToolTextEditor20250124
-  | BetaToolTextEditor20250429
-  | BetaToolTextEditor20250728;
+export type BetaClientRunnableToolType = Extract<BetaClientToolUnion, { name: string }>;
 
 /**
  * The tool call being served: a Messages `tool_use` block, or a session
@@ -63,7 +42,8 @@ export type BetaRunnableTool<Input = any> = BetaClientRunnableToolType & {
   /**
    * Runs on the event loop: a body that blocks synchronously stalls the runner
    * and, in an `EnvironmentWorker`, the lease heartbeat. Await async work or
-   * move it to a worker thread.
+   * move it to a worker thread. A streaming `client.beta.messages.toolRunner`
+   * can call it while the reply is still streaming.
    */
   run: (
     args: Input,

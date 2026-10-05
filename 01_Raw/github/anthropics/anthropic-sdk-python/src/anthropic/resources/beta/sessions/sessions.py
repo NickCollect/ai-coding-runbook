@@ -117,8 +117,10 @@ class Sessions(SyncAPIResource):
 
           environment_id: ID of the `environment` defining the container configuration for this session.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Enforced spend ceiling for the session. Omit to create an uncapped session.
+              Every model the session can run — the agent's model and each callable agent's
+              model — must have a public list price, or the request is rejected with reason
+              `model_not_budgetable`.
 
           initial_events: Initial events to send to the `session` at creation, processed in order.
               Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
@@ -174,7 +176,10 @@ class Sessions(SyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -230,7 +235,10 @@ class Sessions(SyncAPIResource):
         return self._get(
             path_template("/v1/sessions/{session_id}?beta=true", session_id=session_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -256,14 +264,20 @@ class Sessions(SyncAPIResource):
         """Update Session
 
         Args:
-          agent: Mid-session agent configuration update.
+          agent: Agent configuration update.
 
-        Only `tools` and `mcp_servers` are
-              updatable. Full replacement: the provided array becomes the new value. To
-              preserve existing entries, GET the session, modify the array, and POST it back.
+        Only `tools` and `mcp_servers` are updatable
+              mid-session. Only valid for sessions created from an agent or deployment
+              reference. The session must not be running.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Enforced spend ceiling for the session. Set an object to replace the budget of a
+              session that was created with one, or `null` to remove it; omit to preserve. A
+              budget cannot be added to a session created without one (rejected with reason
+              `budget_create_only`), and a removed budget cannot be re-added. Allowed in any
+              non-terminated status. Lowering `max_list_cost` to at or below the session's
+              consumed list cost is rejected with reason `budget_not_raised`, and every model
+              the session can run must have a public list price or the request is rejected
+              with reason `model_not_budgetable`.
 
           metadata: Metadata patch. Set a key to a string to upsert it, or to null to delete it.
               Omit the field to preserve.
@@ -314,7 +328,10 @@ class Sessions(SyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -484,7 +501,10 @@ class Sessions(SyncAPIResource):
         return self._delete(
             path_template("/v1/sessions/{session_id}?beta=true", session_id=session_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeletedSession,
         )
@@ -540,7 +560,10 @@ class Sessions(SyncAPIResource):
         return self._post(
             path_template("/v1/sessions/{session_id}/archive?beta=true", session_id=session_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -608,8 +631,10 @@ class AsyncSessions(AsyncAPIResource):
 
           environment_id: ID of the `environment` defining the container configuration for this session.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Enforced spend ceiling for the session. Omit to create an uncapped session.
+              Every model the session can run — the agent's model and each callable agent's
+              model — must have a public list price, or the request is rejected with reason
+              `model_not_budgetable`.
 
           initial_events: Initial events to send to the `session` at creation, processed in order.
               Supports `user.message` and `user.define_outcome` events. Maximum 50 events.
@@ -665,7 +690,10 @@ class AsyncSessions(AsyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -721,7 +749,10 @@ class AsyncSessions(AsyncAPIResource):
         return await self._get(
             path_template("/v1/sessions/{session_id}?beta=true", session_id=session_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -747,14 +778,20 @@ class AsyncSessions(AsyncAPIResource):
         """Update Session
 
         Args:
-          agent: Mid-session agent configuration update.
+          agent: Agent configuration update.
 
-        Only `tools` and `mcp_servers` are
-              updatable. Full replacement: the provided array becomes the new value. To
-              preserve existing entries, GET the session, modify the array, and POST it back.
+        Only `tools` and `mcp_servers` are updatable
+              mid-session. Only valid for sessions created from an agent or deployment
+              reference. The session must not be running.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Enforced spend ceiling for the session. Set an object to replace the budget of a
+              session that was created with one, or `null` to remove it; omit to preserve. A
+              budget cannot be added to a session created without one (rejected with reason
+              `budget_create_only`), and a removed budget cannot be re-added. Allowed in any
+              non-terminated status. Lowering `max_list_cost` to at or below the session's
+              consumed list cost is rejected with reason `budget_not_raised`, and every model
+              the session can run must have a public list price or the request is rejected
+              with reason `model_not_budgetable`.
 
           metadata: Metadata patch. Set a key to a string to upsert it, or to null to delete it.
               Omit the field to preserve.
@@ -805,7 +842,10 @@ class AsyncSessions(AsyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -975,7 +1015,10 @@ class AsyncSessions(AsyncAPIResource):
         return await self._delete(
             path_template("/v1/sessions/{session_id}?beta=true", session_id=session_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeletedSession,
         )
@@ -1031,7 +1074,10 @@ class AsyncSessions(AsyncAPIResource):
         return await self._post(
             path_template("/v1/sessions/{session_id}/archive?beta=true", session_id=session_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsSession,
         )

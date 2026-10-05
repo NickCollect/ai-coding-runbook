@@ -3081,7 +3081,7 @@ _REPLY_PARAMS_CASES = pytest.mark.parametrize(
             omit,
             {"effort": "low", "format": _FORECAST_FORMAT},
             [
-                {"model": "claude-sonnet-4-5", "output_config": {"effort": "medium", "format": _FORECAST_FORMAT}},
+                {"model": "claude-sonnet-5-5", "output_config": {"effort": "medium", "format": _FORECAST_FORMAT}},
                 {"model": "claude-opus-4-5", "max_tokens": 512},
             ],
             {"type": "auto"},
@@ -3112,7 +3112,7 @@ def _assert_reply_params_are_left_off_the_compaction_request_only(
         assert "fallbacks" not in compaction
     else:
         assert compaction["fallbacks"] == [
-            {"model": "claude-sonnet-4-5", "output_config": {"effort": "medium"}},
+            {"model": "claude-sonnet-5-5", "output_config": {"effort": "medium"}},
             {"model": "claude-opus-4-5", "max_tokens": 512},
         ]
         assert after["fallbacks"] == fallbacks
@@ -3202,6 +3202,33 @@ async def test_compaction_request_leaves_off_reply_params_async(
     _assert_reply_params_are_left_off_the_compaction_request_only(
         respx_mock, tool_choice, fallbacks, tool_choice_on_compaction
     )
+
+
+@pytest.mark.skipif(PYDANTIC_V1, reason="tool runner not supported with pydantic v1")
+@_sync_and_async
+@pytest.mark.respx(base_url=base_url)
+async def test_runner_sends_no_beta_header_when_given_no_betas(
+    sync: bool, client: Anthropic, async_client: AsyncAnthropic, respx_mock: MockRouter
+) -> None:
+    respx_mock.post("/v1/messages").mock(
+        side_effect=[_tool_use_response("get_weather", "toolu_weather"), _end_turn_response()]
+    )
+
+    tools: List[Any] = [_sync_weather_tool() if sync else _async_weather_tool()]
+    runner: Any = (client if sync else async_client).beta.messages.tool_runner(
+        max_tokens=1024,
+        model="claude-haiku-4-5",
+        tools=tools,
+        messages=[{"role": "user", "content": "What is the weather in SF?"}],
+        output_config={"format": _FORECAST_FORMAT},
+    )
+    if sync:
+        runner.until_done()
+    else:
+        await runner.until_done()
+
+    assert [body["output_config"]["format"] for body in _sent_request_bodies(respx_mock)] == [_FORECAST_FORMAT] * 2
+    assert [call.request.headers.get("anthropic-beta") for call in cast("List[Any]", respx_mock.calls)] == [None] * 2
 
 
 def _sse_message(content_block: Dict[str, Any], stop_reason: str, *deltas: Dict[str, Any]) -> httpx2.Response:

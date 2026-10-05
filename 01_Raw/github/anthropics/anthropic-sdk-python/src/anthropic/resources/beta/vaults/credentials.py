@@ -68,7 +68,7 @@ class Credentials(SyncAPIResource):
         Args:
           vault_id: Identifier of the vault to create the credential in.
 
-          auth: Authentication details for creating a credential.
+          auth: Authentication configuration for the credential.
 
           display_name: Human-readable name for the credential. Up to 255 characters.
 
@@ -114,7 +114,10 @@ class Credentials(SyncAPIResource):
                 "metadata": metadata,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -181,7 +184,10 @@ class Credentials(SyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -211,7 +217,8 @@ class Credentials(SyncAPIResource):
 
           credential_id: Unique identifier of the credential to update.
 
-          auth: Updated authentication details for a credential.
+          auth: Updated authentication configuration. The `type` is immutable; the variant sent
+              must match the stored credential's type.
 
           display_name: Updated human-readable name for the credential. 1-255 characters.
 
@@ -263,7 +270,10 @@ class Credentials(SyncAPIResource):
                 "metadata": metadata,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -406,7 +416,10 @@ class Credentials(SyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeletedCredential,
         )
@@ -473,7 +486,10 @@ class Credentials(SyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -540,7 +556,10 @@ class Credentials(SyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredentialValidation,
         )
@@ -588,7 +607,7 @@ class AsyncCredentials(AsyncAPIResource):
         Args:
           vault_id: Identifier of the vault to create the credential in.
 
-          auth: Authentication details for creating a credential.
+          auth: Authentication configuration for the credential.
 
           display_name: Human-readable name for the credential. Up to 255 characters.
 
@@ -634,7 +653,10 @@ class AsyncCredentials(AsyncAPIResource):
                 "metadata": metadata,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -701,7 +723,10 @@ class AsyncCredentials(AsyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -731,7 +756,8 @@ class AsyncCredentials(AsyncAPIResource):
 
           credential_id: Unique identifier of the credential to update.
 
-          auth: Updated authentication details for a credential.
+          auth: Updated authentication configuration. The `type` is immutable; the variant sent
+              must match the stored credential's type.
 
           display_name: Updated human-readable name for the credential. 1-255 characters.
 
@@ -783,7 +809,10 @@ class AsyncCredentials(AsyncAPIResource):
                 "metadata": metadata,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -926,7 +955,10 @@ class AsyncCredentials(AsyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeletedCredential,
         )
@@ -993,7 +1025,10 @@ class AsyncCredentials(AsyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -1060,7 +1095,10 @@ class AsyncCredentials(AsyncAPIResource):
                 credential_id=credential_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsCredentialValidation,
         )

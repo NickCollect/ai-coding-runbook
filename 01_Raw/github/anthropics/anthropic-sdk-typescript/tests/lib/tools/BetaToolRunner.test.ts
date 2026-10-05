@@ -1,4 +1,5 @@
 import Anthropic, { BetaFallbackState, type ClientOptions, type Middleware } from '@anthropic-ai/sdk';
+import { BetaMessageStream } from '@anthropic-ai/sdk/lib/BetaMessageStream';
 import { mockFetch } from '../../lib/mock-fetch';
 import {
   BetaMessage,
@@ -459,7 +460,7 @@ describe('ToolRunner', () => {
       // First iteration: assistant requests tool (using helper that generates proper stream events)
       handleAssistantMessageStream(getWeatherToolUse('SF'));
       await expectEvent(iterator, async (stream) => {
-        expect(stream.constructor.name).toBe('BetaMessageStream');
+        expect(stream).toBeInstanceOf(BetaMessageStream);
         const events = [];
         for await (const event of stream) {
           events.push(event);
@@ -1543,35 +1544,6 @@ describe('ToolRunner', () => {
       expect(sent(bodies[2]).at(-1)).toEqual({ role: 'user', content: [notFound('getWeather', 'tool_1')] });
     });
 
-    it('keeps a tool removed by a system message in the history removed after compactionControl compacts', async () => {
-      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-      const run = vi.fn(weatherTool.run);
-      const { runner, handleRequest } = setupTest({
-        tools: [{ ...weatherTool, run }],
-        messages: [
-          firstMessage,
-          {
-            role: 'system',
-            content: [{ type: 'tool_removal', tool: { type: 'tool_reference', name: 'getWeather' } }],
-          },
-        ],
-        compactionControl: { enabled: true, contextTokenThreshold: 100 },
-      });
-      const bodies: Array<Record<string, unknown>> = [];
-      const long = assistantMessage('end_turn', getTextContent());
-      long.usage.input_tokens = 1000;
-
-      reply(handleRequest, bodies, long, false);
-      reply(handleRequest, bodies, assistantMessage('end_turn', getTextContent('Summary so far.')), false);
-      reply(handleRequest, bodies, assistantMessage('tool_use', getWeatherToolUse('SF')), false);
-      reply(handleRequest, bodies, assistantMessage('end_turn', getTextContent()), false);
-      await runner.runUntilDone();
-
-      expect(run).not.toHaveBeenCalled();
-      expect(sent(bodies[3]).at(-1)).toEqual({ role: 'user', content: [notFound('getWeather', 'tool_1')] });
-      warn.mockRestore();
-    });
-
     it('runs a removed tool that is added back while the compaction response is being handled', async () => {
       const { runner, handleRequest } = setupTest();
       const bodies: Array<Record<string, unknown>> = [];
@@ -1743,6 +1715,111 @@ describe('ToolRunner', () => {
         content: [getWeatherToolResult('London', 'tool_2')],
       });
       await expectDone(iterator);
+    });
+  });
+
+  describe('tool params', () => {
+    class ReadFileTool {
+      type = 'custom' as const;
+      name = 'readFile';
+      description = 'Read a file';
+      input_schema = { type: 'object' as const, properties: { path: { type: 'string' } } };
+      cache_control = null;
+
+      constructor(private allowedPaths: string[]) {}
+
+      parse(input: unknown) {
+        return input as { path: string };
+      }
+
+      run({ path }: { path: string }) {
+        return this.allowedPaths.includes(path) ? `Contents of ${path}` : `Denied: ${path}`;
+      }
+    }
+
+    const readFileDefinition = {
+      type: 'custom',
+      name: 'readFile',
+      description: 'Read a file',
+      input_schema: { type: 'object', properties: { path: { type: 'string' } } },
+      cache_control: null,
+    };
+
+    it.each([
+      { stream: false, runToolsEagerly: false },
+      { stream: true, runToolsEagerly: false },
+      { stream: true, runToolsEagerly: true },
+    ])(
+      'sends only API fields for runnable tools (stream=$stream, runToolsEagerly=$runToolsEagerly)',
+      async ({ stream, runToolsEagerly }) => {
+        const webSearch = { type: 'web_search_20250305' as const, name: 'web_search' as const, max_uses: 1 };
+        const tools = [new ReadFileTool(['/tmp/a']), webSearch];
+        const { runner, handleRequest } =
+          stream ? setupTest({ stream: true, runToolsEagerly, tools }) : setupTest({ tools });
+        const bodies: Array<Record<string, unknown>> = [];
+
+        reply(
+          handleRequest,
+          bodies,
+          assistantMessage('tool_use', {
+            type: 'tool_use',
+            id: 'tool_1',
+            name: 'readFile',
+            input: { path: '/tmp/a' },
+          }),
+          stream,
+        );
+        reply(handleRequest, bodies, assistantMessage('end_turn', getTextContent()), stream);
+        await runner.runUntilDone();
+
+        expect(bodies[0]!['tools']).toEqual([readFileDefinition, webSearch]);
+        expect(bodies[1]!['messages']).toContainEqual({
+          role: 'user',
+          content: [{ type: 'tool_result', tool_use_id: 'tool_1', content: 'Contents of /tmp/a' }],
+        });
+      },
+    );
+
+    it.each(['addTools()', 'pushMessages()', 'messages'])(
+      'sends only API fields for a tool added through %s',
+      async (via) => {
+        const tool = new ReadFileTool(['/tmp/a']);
+        const toolAddition: BetaMessageParam = {
+          role: 'system',
+          content: [{ type: 'tool_addition', tool: { type: 'tool_definition', definition: tool } }],
+        };
+        const user: BetaMessageParam = { role: 'user', content: 'Read /tmp/a' };
+        const { runner, handleRequest } = setupTest({
+          messages: via === 'messages' ? [user, toolAddition] : [user],
+        });
+        const bodies: Array<Record<string, unknown>> = [];
+
+        reply(handleRequest, bodies, assistantMessage('end_turn', getTextContent()), false);
+        if (via === 'addTools()') {
+          runner.addTools(tool);
+        } else if (via === 'pushMessages()') {
+          runner.pushMessages(toolAddition);
+        }
+        await runner.runUntilDone();
+
+        expect(bodies[0]!['messages']).toContainEqual({
+          role: 'system',
+          content: [
+            { type: 'tool_addition', tool: { type: 'tool_definition', definition: readFileDefinition } },
+          ],
+        });
+      },
+    );
+
+    it('sends the request when an untyped caller leaves out `tools`', async () => {
+      // @ts-expect-error `tools` is required in the runner's params type
+      const { runner, handleRequest } = setupTest({ tools: undefined });
+      const bodies: Array<Record<string, unknown>> = [];
+
+      reply(handleRequest, bodies, assistantMessage('end_turn', getTextContent()), false);
+      await runner.runUntilDone();
+
+      expect(bodies[0]).not.toHaveProperty('tools');
     });
   });
 
@@ -2420,6 +2497,13 @@ describe('ToolRunner', () => {
         refusal,
       );
       expect(runner.params).not.toHaveProperty('compaction');
+    });
+
+    it('refuses the removed `compactionControl` option', () => {
+      // @ts-expect-error `compactionControl` is no longer in the runner's params type
+      expect(() => setupTest({ compactionControl: { enabled: true } })).toThrow(
+        '`compactionControl` has been removed from the tool runner',
+      );
     });
 
     it('is refused while context_management has a compaction edit', async () => {

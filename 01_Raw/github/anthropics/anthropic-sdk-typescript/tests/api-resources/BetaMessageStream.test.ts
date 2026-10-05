@@ -132,7 +132,12 @@ const EXPECTED_INCOMPLETE_MESSAGE = {
       name: 'make_file',
       input: {
         filename: 'taxes.txt',
-        lines_of_text: ['# COMPREHENSIVE TAX GUIDE FOR INDIVIDUALS WITH MULTIPLE W-2s'],
+        lines_of_text: [
+          '# COMPREHENSIVE TAX GUIDE FOR INDIVIDUALS WITH MULTIPLE W-2s',
+          '',
+          '## INTRODUCTION',
+          '',
+        ],
       },
     },
   ],
@@ -285,7 +290,7 @@ describe('BetaMessageStream class', () => {
 
     const stream = anthropic.beta.messages.stream({
       max_tokens: 1024,
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-5-5',
       messages: [{ role: 'user', content: 'Create a tax guide' }],
     });
 
@@ -454,7 +459,7 @@ describe('BetaMessageStream class', () => {
     const stream = anthropic.beta.messages.stream(
       {
         max_tokens: 1024,
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-5-5',
         messages: [{ role: 'user', content: 'Say hello there!' }],
       },
       { maxRetries: 0 },
@@ -485,7 +490,7 @@ describe('BetaMessageStream class', () => {
     const stream = anthropic.beta.messages.stream(
       {
         max_tokens: 1024,
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-5-5',
         messages: [{ role: 'user', content: 'Say hello there!' }],
       },
       { maxRetries: 0 },
@@ -596,7 +601,7 @@ describe('BetaMessageStream class', () => {
 
     const stream = anthropic.beta.messages.stream({
       max_tokens: 1024,
-      model: 'claude-sonnet-4-5',
+      model: 'claude-sonnet-5-5',
       messages: [{ role: 'user', content: 'Say hello again!' }],
     });
 

@@ -160,7 +160,10 @@ class Rules(SyncAPIResource):
                 "workspace_id": workspace_id,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -210,7 +213,10 @@ class Rules(SyncAPIResource):
                 federation_rule_id=federation_rule_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -274,11 +280,7 @@ class Rules(SyncAPIResource):
           description: Replaces the description. Omit to leave unchanged; send `null` to clear (the
               field is stored as an empty string).
 
-          match: Does the incoming JWT qualify?
-
-              All populated fields must pass; omitted fields are skipped. At least one of
-              `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or
-              `condition` is required; `audience` alone is not sufficient.
+          match: Replaces the entire match object. All populated matcher fields must pass.
 
           name: Replaces the slug identifier (lowercase, digits, hyphens). Unique within the
               organization; a duplicate name returns 409.
@@ -287,7 +289,7 @@ class Rules(SyncAPIResource):
               callers may only set `workspace:developer` or `workspace:inference`; other
               scopes (such as `org:admin`) require a Console session.
 
-          target: Bind to a fixed service account by ID.
+          target: Replaces the entire target object. Currently always a `service_account` target.
 
           token_lifetime_seconds: Replaces the lifetime in seconds for access tokens minted via this rule
               (60-86400). Minted tokens are capped at
@@ -330,7 +332,10 @@ class Rules(SyncAPIResource):
                 "workspace_id": workspace_id,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -454,7 +459,10 @@ class Rules(SyncAPIResource):
                 federation_rule_id=federation_rule_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -588,7 +596,10 @@ class AsyncRules(AsyncAPIResource):
                 "workspace_id": workspace_id,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -638,7 +649,10 @@ class AsyncRules(AsyncAPIResource):
                 federation_rule_id=federation_rule_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -702,11 +716,7 @@ class AsyncRules(AsyncAPIResource):
           description: Replaces the description. Omit to leave unchanged; send `null` to clear (the
               field is stored as an empty string).
 
-          match: Does the incoming JWT qualify?
-
-              All populated fields must pass; omitted fields are skipped. At least one of
-              `subject_prefix` (other than a wildcard-only value like `*`), `claims`, or
-              `condition` is required; `audience` alone is not sufficient.
+          match: Replaces the entire match object. All populated matcher fields must pass.
 
           name: Replaces the slug identifier (lowercase, digits, hyphens). Unique within the
               organization; a duplicate name returns 409.
@@ -715,7 +725,7 @@ class AsyncRules(AsyncAPIResource):
               callers may only set `workspace:developer` or `workspace:inference`; other
               scopes (such as `org:admin`) require a Console session.
 
-          target: Bind to a fixed service account by ID.
+          target: Replaces the entire target object. Currently always a `service_account` target.
 
           token_lifetime_seconds: Replaces the lifetime in seconds for access tokens minted via this rule
               (60-86400). Minted tokens are capped at
@@ -758,7 +768,10 @@ class AsyncRules(AsyncAPIResource):
                 "workspace_id": workspace_id,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )
@@ -882,7 +895,10 @@ class AsyncRules(AsyncAPIResource):
                 federation_rule_id=federation_rule_id,
             ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaFederationRule,
         )

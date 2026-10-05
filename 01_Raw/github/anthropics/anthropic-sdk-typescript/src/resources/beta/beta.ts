@@ -370,6 +370,7 @@ import {
   BetaCacheMissMessagesChanged,
   BetaCacheMissModelChanged,
   BetaCacheMissPreviousMessageNotFound,
+  BetaCacheMissReason,
   BetaCacheMissSystemChanged,
   BetaCacheMissToolsChanged,
   BetaCacheMissUnavailable,
@@ -390,6 +391,7 @@ import {
   BetaClearThinking20251015EditResponse,
   BetaClearToolUses20250919Edit,
   BetaClearToolUses20250919EditResponse,
+  BetaClientToolUnion,
   BetaCodeExecutionOutputBlock,
   BetaCodeExecutionOutputBlockParam,
   BetaCodeExecutionResultBlock,
@@ -469,6 +471,7 @@ import {
   BetaInputTokensClearAtLeast,
   BetaInputTokensTrigger,
   BetaInputTransformation,
+  BetaIterationsUsage,
   BetaMCPTool,
   BetaMCPToolListingBlock,
   BetaMCPToolListingBlockParam,
@@ -549,6 +552,7 @@ import {
   BetaThinkingBlockBinding,
   BetaThinkingBlockParam,
   BetaThinkingConfigAdaptive,
+  BetaThinkingConfigBetweenTools,
   BetaThinkingConfigDisabled,
   BetaThinkingConfigEnabled,
   BetaThinkingConfigParam,
@@ -781,7 +785,9 @@ export type AnthropicBeta =
   | 'mid-conversation-system-clear-at-2026-08-21'
   | 'compact-2026-09-04'
   | 'inline-tools-2026-09-15'
-  | 'mcp-client-2026-09-15';
+  | 'mcp-client-2026-09-15'
+  | 'ce-plugins-2026-09-01'
+  | 'spend-limit-reads-2026-09-26';
 
 export interface BetaAPIError {
   message: string;
@@ -995,6 +1001,7 @@ export declare namespace Beta {
     type BetaCacheMissMessagesChanged as BetaCacheMissMessagesChanged,
     type BetaCacheMissModelChanged as BetaCacheMissModelChanged,
     type BetaCacheMissPreviousMessageNotFound as BetaCacheMissPreviousMessageNotFound,
+    type BetaCacheMissReason as BetaCacheMissReason,
     type BetaCacheMissSystemChanged as BetaCacheMissSystemChanged,
     type BetaCacheMissToolsChanged as BetaCacheMissToolsChanged,
     type BetaCacheMissUnavailable as BetaCacheMissUnavailable,
@@ -1015,6 +1022,7 @@ export declare namespace Beta {
     type BetaClearThinking20251015EditResponse as BetaClearThinking20251015EditResponse,
     type BetaClearToolUses20250919Edit as BetaClearToolUses20250919Edit,
     type BetaClearToolUses20250919EditResponse as BetaClearToolUses20250919EditResponse,
+    type BetaClientToolUnion as BetaClientToolUnion,
     type BetaCodeExecutionOutputBlock as BetaCodeExecutionOutputBlock,
     type BetaCodeExecutionOutputBlockParam as BetaCodeExecutionOutputBlockParam,
     type BetaCodeExecutionResultBlock as BetaCodeExecutionResultBlock,
@@ -1094,6 +1102,7 @@ export declare namespace Beta {
     type BetaInputTokensClearAtLeast as BetaInputTokensClearAtLeast,
     type BetaInputTokensTrigger as BetaInputTokensTrigger,
     type BetaInputTransformation as BetaInputTransformation,
+    type BetaIterationsUsage as BetaIterationsUsage,
     type BetaMCPTool as BetaMCPTool,
     type BetaMCPToolConfig as BetaMCPToolConfig,
     type BetaMCPToolDefaultConfig as BetaMCPToolDefaultConfig,
@@ -1176,6 +1185,7 @@ export declare namespace Beta {
     type BetaThinkingBlockBinding as BetaThinkingBlockBinding,
     type BetaThinkingBlockParam as BetaThinkingBlockParam,
     type BetaThinkingConfigAdaptive as BetaThinkingConfigAdaptive,
+    type BetaThinkingConfigBetweenTools as BetaThinkingConfigBetweenTools,
     type BetaThinkingConfigDisabled as BetaThinkingConfigDisabled,
     type BetaThinkingConfigEnabled as BetaThinkingConfigEnabled,
     type BetaThinkingConfigParam as BetaThinkingConfigParam,

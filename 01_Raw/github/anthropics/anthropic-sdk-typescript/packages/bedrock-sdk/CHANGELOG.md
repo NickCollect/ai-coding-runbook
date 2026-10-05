@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.34.2 (2026-09-30)
+
+Full Changelog: [bedrock-sdk-v0.34.1...bedrock-sdk-v0.34.2](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.34.1...bedrock-sdk-v0.34.2)
+
+### Chores
+
+* **client:** deprecate sonnet 4.5 ([d72cfaf](https://github.com/anthropics/anthropic-sdk-typescript/commit/d72cfaf6a551c75d54fad0538fb5fd65fb2346d1))
+
+## 0.34.1 (2026-09-30)
+
+Full Changelog: [bedrock-sdk-v0.34.0...bedrock-sdk-v0.34.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.34.0...bedrock-sdk-v0.34.1)
+
+## 0.34.0 (2026-09-28)
+
+Full Changelog: [bedrock-sdk-v0.33.8...bedrock-sdk-v0.34.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.33.8...bedrock-sdk-v0.34.0)
+
+### Features
+
+* **api:** add claude-sonnet-5-5 ([4e77366](https://github.com/anthropics/anthropic-sdk-typescript/commit/4e7736625fd23a5607800e8de4aa3c37daa74a07))
+
 ## 0.33.8 (2026-09-22)
 
 Full Changelog: [bedrock-sdk-v0.33.7...bedrock-sdk-v0.33.8](https://github.com/anthropics/anthropic-sdk-typescript/compare/bedrock-sdk-v0.33.7...bedrock-sdk-v0.33.8)

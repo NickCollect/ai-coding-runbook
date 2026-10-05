@@ -37,6 +37,7 @@ describe('resource messages', () => {
           },
         ],
       },
+      diagnostics: { previous_message_id: 'previous_message_id' },
       inference_geo: 'inference_geo',
       metadata: { user_id: '13803d75-b4b5-4c3e-b2a2-6f21399b021b' },
       output_config: {
@@ -204,7 +205,7 @@ describe('create: non-streaming timeout', () => {
 
   // max_tokens large enough that the estimated non-streaming duration exceeds the 10 minute default
   const longParams = {
-    model: 'claude-sonnet-4-5',
+    model: 'claude-sonnet-5-5',
     max_tokens: 128_000,
     messages: [{ role: 'user' as const, content: 'hi' }],
   };

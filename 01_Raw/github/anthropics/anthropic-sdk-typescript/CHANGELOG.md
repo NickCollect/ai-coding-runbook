@@ -1,5 +1,97 @@
 # Changelog
 
+## 0.131.0 (2026-09-30)
+
+Full Changelog: [sdk-v0.130.0...sdk-v0.131.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.130.0...sdk-v0.131.0)
+
+### Features
+
+* **api:** add list spend limits endpoint ([cfb78c8](https://github.com/anthropics/anthropic-sdk-typescript/commit/cfb78c8dde70b5f9ea07bf2aebd3651282f2c9a8))
+
+
+### Chores
+
+* **client:** deprecate sonnet 4.5 ([d72cfaf](https://github.com/anthropics/anthropic-sdk-typescript/commit/d72cfaf6a551c75d54fad0538fb5fd65fb2346d1))
+
+## 0.130.0 (2026-09-30)
+
+Full Changelog: [sdk-v0.129.0...sdk-v0.130.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.129.0...sdk-v0.130.0)
+
+### Features
+
+* **api:** add a refusal stop reason and stop_details to Managed Agents session idle events ([5cd6910](https://github.com/anthropics/anthropic-sdk-typescript/commit/5cd6910a0e74923f1bef35f5368f9c2cee410058))
+* **api:** add Claude Enterprise analytics, spend limits, and RBAC groups and roles to the Admin API ([109c766](https://github.com/anthropics/anthropic-sdk-typescript/commit/109c76647ab5c997820e3d316f4df192926e4156))
+* **api:** add per-user usage and cost reports to the Admin API analytics ([0a74a28](https://github.com/anthropics/anthropic-sdk-typescript/commit/0a74a2833469e2972d08b866bbfcecb096138f73))
+* **api:** add Plugins and Plugin Marketplaces to the Admin API ([40c2160](https://github.com/anthropics/anthropic-sdk-typescript/commit/40c2160271c63605f161c0d0dd8a8aff0fcf81de))
+* **api:** add repository error types to Managed Agents session errors ([6735615](https://github.com/anthropics/anthropic-sdk-typescript/commit/673561514091a1339b3350f1beb2ae2ec2528528))
+* **api:** allow removing a plugin's org-wide installation setting ([c7d120f](https://github.com/anthropics/anthropic-sdk-typescript/commit/c7d120f29a15b79d3560322836be7b91c5c0b2be))
+* **api:** MCP tunnels beta: add read-only `transport` object to Tunnel and return the one-time relay `token` in the create response ([b0e57ce](https://github.com/anthropics/anthropic-sdk-typescript/commit/b0e57ce51410dccafee49103bd1e0d3b307e3504))
+* **api:** Organization API endpoints are now GA ([1a1fd8f](https://github.com/anthropics/anthropic-sdk-typescript/commit/1a1fd8f8d7e5b55f4f759150b5c4064da1df45ac))
+
+
+### Bug Fixes
+
+* **api:** make memory store description, metadata, archived_at required ([ed68900](https://github.com/anthropics/anthropic-sdk-typescript/commit/ed68900ed31097a089afbdf0b681446020b642ce))
+* **api:** type admin plugin preference and marketplace fields as enums ([942ae01](https://github.com/anthropics/anthropic-sdk-typescript/commit/942ae01dc1b9fa0c6cad49ed564c4824e36d3e81))
+* **pagination:** auto-paging continues past an empty page while next_page is set ([2d75266](https://github.com/anthropics/anthropic-sdk-typescript/commit/2d75266273fcb7908b3ab24a53d3cdcda2b66002))
+* **tool-runner:** only send API fields for runnable tools ([#404](https://github.com/anthropics/anthropic-sdk-typescript/issues/404)) ([a62c2a2](https://github.com/anthropics/anthropic-sdk-typescript/commit/a62c2a2d12234be38f620b60526f179b39e5c738))
+* **tools:** stop the session tool runner after any idle that ends the turn ([#878](https://github.com/anthropics/anthropic-sdk-typescript/issues/878)) ([cab32f8](https://github.com/anthropics/anthropic-sdk-typescript/commit/cab32f8b2bea8514572f39a557d08b44ee86568c))
+
+
+### Chores
+
+* **api:** update MCP Tunnels types and descriptions ([394d60c](https://github.com/anthropics/anthropic-sdk-typescript/commit/394d60cf15873544c3b34a609f8a194d0f566182))
+* **docs:** remove placeholder enum descriptions ([04f0812](https://github.com/anthropics/anthropic-sdk-typescript/commit/04f0812ca0c7e761fa58bffdfd95b9cf1f24887c))
+* **tests:** fixture update ([#381](https://github.com/anthropics/anthropic-sdk-typescript/issues/381)) ([9cfe4d4](https://github.com/anthropics/anthropic-sdk-typescript/commit/9cfe4d42d097ead9c102dee310fbf674642067d3))
+
+## 0.129.0 (2026-09-28)
+
+Full Changelog: [sdk-v0.128.0...sdk-v0.129.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.128.0...sdk-v0.129.0)
+
+### Features
+
+* **api:** add between_tools thinking type ([ab51075](https://github.com/anthropics/anthropic-sdk-typescript/commit/ab51075609a2d583dffdca24856f4214779d9e7f))
+* **api:** add claude-sonnet-5-5 ([4e77366](https://github.com/anthropics/anthropic-sdk-typescript/commit/4e7736625fd23a5607800e8de4aa3c37daa74a07))
+* **api:** add ClientToolUnion type for client-executed tools ([2c1d2d7](https://github.com/anthropics/anthropic-sdk-typescript/commit/2c1d2d712071a5f10d2e70ea02dc33425b087799))
+* **api:** add include_inherited and source to workspace rate limits ([66e925e](https://github.com/anthropics/anthropic-sdk-typescript/commit/66e925e54ff3435a56f51f687641728b94aff306))
+* **api:** add typed event type values to the Managed Agents events list filter ([8ac4a26](https://github.com/anthropics/anthropic-sdk-typescript/commit/8ac4a26809418453b64fee79f8ec790d32d1f92c))
+* **api:** cache diagnostics GA — diagnostics on Message / MessageCreateParams ([5ba5f29](https://github.com/anthropics/anthropic-sdk-typescript/commit/5ba5f29696d520f68a794936eff7337dce83ac05))
+* **tools:** optionally start tool calls while the reply streams ([083969b](https://github.com/anthropics/anthropic-sdk-typescript/commit/083969beadb360b9c4b329ee2541f67bd78d9caf))
+
+
+### Bug Fixes
+
+* **client:** also send X-Stainless-Timeout for client-level timeouts ([b84783b](https://github.com/anthropics/anthropic-sdk-typescript/commit/b84783b6ee03eed519d622ea1e477cf8eb3863bf))
+* **client:** send upload filenames as given, with no placeholder ([f9d3e98](https://github.com/anthropics/anthropic-sdk-typescript/commit/f9d3e980b1b498c1c452300a205811f6a56de69b))
+* **helpers:** degrade between_tools thinking to disabled on fallback hops ([#841](https://github.com/anthropics/anthropic-sdk-typescript/issues/841)) ([edbbf05](https://github.com/anthropics/anthropic-sdk-typescript/commit/edbbf05a62ffe2c95c13810f6d7a0a2796786e5f))
+* **internal:** let bundlers drop unused classes with more than ten private-member assignments ([67c7adb](https://github.com/anthropics/anthropic-sdk-typescript/commit/67c7adbe5ebae805631e104b341d932a1554bda8))
+* **streaming:** show every complete array item and hold back unfinished numbers in partial tool input ([#781](https://github.com/anthropics/anthropic-sdk-typescript/issues/781)) ([5806588](https://github.com/anthropics/anthropic-sdk-typescript/commit/58065889d6b112db6da5127484e0a24025e3fa37))
+
+
+### Performance Improvements
+
+* **streaming:** drop the redundant iterSSEChunks layer ([0357f81](https://github.com/anthropics/anthropic-sdk-typescript/commit/0357f812dab273c0780c558606663a03e93e34df))
+* **streaming:** take each string token as one slice in the partial JSON tokenizer ([#255](https://github.com/anthropics/anthropic-sdk-typescript/issues/255)) ([cdfb1e5](https://github.com/anthropics/anthropic-sdk-typescript/commit/cdfb1e55afebe1c3be50401ca56bebf0ff009a4e))
+
+
+### Chores
+
+* **api:** deprecate the betas param on GA models and completions methods ([5c74e45](https://github.com/anthropics/anthropic-sdk-typescript/commit/5c74e4532bb69f22afa3e08013645ac059440aef))
+* **api:** list the known model ids first in the Model types ([9452822](https://github.com/anthropics/anthropic-sdk-typescript/commit/94528226386311c3ade468cbdea0326c06a1e53d))
+* **ci:** choose the CI runner by repository ([33db1ec](https://github.com/anthropics/anthropic-sdk-typescript/commit/33db1ec2e99a415ff98619cf88ddddbf2b7ca7b1))
+* **docs:** clarify that stream: true returns the raw event stream ([4286c22](https://github.com/anthropics/anthropic-sdk-typescript/commit/4286c227c3a605bf04d4f59ffb496f44c102a6ec))
+* **docs:** make Managed Agents actor descriptions resource-neutral ([15733f9](https://github.com/anthropics/anthropic-sdk-typescript/commit/15733f98deaae4aee2fba26c1bfe4ee1514c7080))
+* **docs:** restore the research-preview notice on the Dream type ([b32f8ba](https://github.com/anthropics/anthropic-sdk-typescript/commit/b32f8baa27c40ad5901531024bae86e0ca046bb5))
+* **internal:** move old constants around ([0cd8edf](https://github.com/anthropics/anthropic-sdk-typescript/commit/0cd8edfdc6dd91af4ffee4ed3cc7fc8cc22d65e3))
+* **tests:** add diagnostics to the parser test's Message fixtures ([eb5ca58](https://github.com/anthropics/anthropic-sdk-typescript/commit/eb5ca58d51ed3309b1f317b20f7d248b036ba76a))
+* **tools:** remove client-side compaction control ([#802](https://github.com/anthropics/anthropic-sdk-typescript/issues/802)) ([9c3e8a5](https://github.com/anthropics/anthropic-sdk-typescript/commit/9c3e8a5ffa38c35dec32f0258becd360babd5fb1))
+
+
+### Documentation
+
+* **api:** prefer each field's own description over its shared type's ([5193478](https://github.com/anthropics/anthropic-sdk-typescript/commit/51934782720725acca570edeb0a3a7501ca7dbd8))
+* expand CLAUDE.md into a full contributor guide ([98d2ddb](https://github.com/anthropics/anthropic-sdk-typescript/commit/98d2ddbce7c1eabbabe5a130d18d307c237fb75c))
+
 ## 0.128.0 (2026-09-22)
 
 Full Changelog: [sdk-v0.127.0...sdk-v0.128.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.127.0...sdk-v0.128.0)

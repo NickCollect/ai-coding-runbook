@@ -92,6 +92,11 @@ Projects built on [Claude Managed Agents](https://platform.claude.com/docs/en/ma
   containers with a per-session token. `archil/` swaps the containers
   for Archil persistent sandboxes that all mount one SEC EDGAR disk, so
   parallel analyst sessions work on 70 GB of filings in place.
+  `openshell/` swaps the containers for NVIDIA OpenShell sandboxes, each
+  confined by a `policy.yaml` to a filesystem allowlist and six routes
+  on `api.anthropic.com`. It is all CLI, like `docker/`, and pipes the
+  per-session token to `ant beta:worker run` over stdin so the
+  environment key stays on the host.
   Five more variants start the sandbox from the
   `session.status_run_started` webhook instead of a poller, on
   Cloudflare Containers, a Cloudflare Worker with no container,
@@ -100,11 +105,13 @@ Projects built on [Claude Managed Agents](https://platform.claude.com/docs/en/ma
 
 - **[sentry/](sentry/)** runs a Sentry triage agent on a schedule
   with no host process. A deployment starts a session on a cron
-  expression, the agent pulls the last 24 hours of issues with
-  `sentry-cli`, and writes a severity-ranked report. The Sentry token
-  lives in a vault: the sandbox holds only a placeholder, and the
-  egress proxy swaps in the real token on requests to Sentry's API
-  hosts and nowhere else.
+  expression, the agent pulls the last 24 hours of issues through
+  Sentry's hosted MCP server, asks Seer for root-cause analysis where
+  it is available, and writes a user-impact-ranked report. Setup runs
+  inside Claude Code with Sentry's Agent Plugin to pick the org and
+  project, and a browser OAuth grant lands in a vault as a refreshable
+  `mcp_oauth` credential that Anthropic injects on the MCP connection
+  and refreshes; the sandbox never holds a token.
 
 - **[slack/](slack/)** answers `@mentions` in Slack with a threaded
   reply, over a stateless Bun webhook bridge. The Slack event creates

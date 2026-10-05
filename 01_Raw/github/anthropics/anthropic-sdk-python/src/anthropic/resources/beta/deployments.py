@@ -96,8 +96,11 @@ class Deployments(SyncAPIResource):
 
           name: Human-readable name for the deployment.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Enforced spend ceiling stamped onto each session created from this deployment,
+              copied at session-creation time. Omit to leave sessions uncapped. The deployment
+              agent's model must have a public list price, or the request is rejected; a
+              multiagent roster is re-validated in full when each fire copies the cap, which
+              fails closed the same way.
 
           description: Description of what the deployment does.
 
@@ -107,8 +110,8 @@ class Deployments(SyncAPIResource):
           resources: Resources (e.g. repositories, files) to mount into each session's container.
               Maximum 500.
 
-          schedule: 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-              timezone.
+          schedule: Optional recurring cron schedule. When present, the deployment fires
+              automatically. Both expression and timezone are required when schedule is set.
 
           vault_ids: Vault IDs for stored credentials the agent can use during sessions created from
               this deployment. Maximum 50.
@@ -157,7 +160,10 @@ class Deployments(SyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -215,7 +221,10 @@ class Deployments(SyncAPIResource):
         return self._get(
             path_template("/v1/deployments/{deployment_id}?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -253,8 +262,11 @@ class Deployments(SyncAPIResource):
               version, or an `agent` object with both id and version specified. Omit to
               preserve. Cannot be cleared.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Spend ceiling for future sessions. Full replacement. Omit to preserve; send null
+              to clear (sessions created afterwards are uncapped). The deployment agent's
+              model must have a public list price, or the request is rejected; a multiagent
+              roster is re-validated in full when each fire copies the cap, which fails closed
+              the same way.
 
           description: Description. Omit to preserve; send empty string or null to clear.
 
@@ -272,8 +284,8 @@ class Deployments(SyncAPIResource):
           resources: Session resources. Full replacement. Omit to preserve; send empty array or null
               to clear. Maximum 500.
 
-          schedule: 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-              timezone.
+          schedule: Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to
+              manual-only).
 
           vault_ids: Vault IDs. Full replacement. Omit to preserve; send empty array or null to
               clear. Maximum 50.
@@ -324,7 +336,10 @@ class Deployments(SyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -470,7 +485,10 @@ class Deployments(SyncAPIResource):
         return self._post(
             path_template("/v1/deployments/{deployment_id}/archive?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -528,7 +546,10 @@ class Deployments(SyncAPIResource):
         return self._post(
             path_template("/v1/deployments/{deployment_id}/pause?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -586,7 +607,10 @@ class Deployments(SyncAPIResource):
         return self._post(
             path_template("/v1/deployments/{deployment_id}/run?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeploymentRun,
         )
@@ -644,7 +668,10 @@ class Deployments(SyncAPIResource):
         return self._post(
             path_template("/v1/deployments/{deployment_id}/unpause?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -709,8 +736,11 @@ class AsyncDeployments(AsyncAPIResource):
 
           name: Human-readable name for the deployment.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Enforced spend ceiling stamped onto each session created from this deployment,
+              copied at session-creation time. Omit to leave sessions uncapped. The deployment
+              agent's model must have a public list price, or the request is rejected; a
+              multiagent roster is re-validated in full when each fire copies the cap, which
+              fails closed the same way.
 
           description: Description of what the deployment does.
 
@@ -720,8 +750,8 @@ class AsyncDeployments(AsyncAPIResource):
           resources: Resources (e.g. repositories, files) to mount into each session's container.
               Maximum 500.
 
-          schedule: 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-              timezone.
+          schedule: Optional recurring cron schedule. When present, the deployment fires
+              automatically. Both expression and timezone are required when schedule is set.
 
           vault_ids: Vault IDs for stored credentials the agent can use during sessions created from
               this deployment. Maximum 50.
@@ -770,7 +800,10 @@ class AsyncDeployments(AsyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -828,7 +861,10 @@ class AsyncDeployments(AsyncAPIResource):
         return await self._get(
             path_template("/v1/deployments/{deployment_id}?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -866,8 +902,11 @@ class AsyncDeployments(AsyncAPIResource):
               version, or an `agent` object with both id and version specified. Omit to
               preserve. Cannot be cleared.
 
-          budget: A hard spend ceiling. The session stops issuing new model requests once the
-              tracked list cost reaches `max_list_cost`.
+          budget: Spend ceiling for future sessions. Full replacement. Omit to preserve; send null
+              to clear (sessions created afterwards are uncapped). The deployment agent's
+              model must have a public list price, or the request is rejected; a multiagent
+              roster is re-validated in full when each fire copies the cap, which fails closed
+              the same way.
 
           description: Description. Omit to preserve; send empty string or null to clear.
 
@@ -885,8 +924,8 @@ class AsyncDeployments(AsyncAPIResource):
           resources: Session resources. Full replacement. Omit to preserve; send empty array or null
               to clear. Maximum 500.
 
-          schedule: 5-field POSIX cron schedule. Literal wall-clock matching in the configured
-              timezone.
+          schedule: Cron schedule. Full replacement. Omit to preserve; send null to clear (revert to
+              manual-only).
 
           vault_ids: Vault IDs. Full replacement. Omit to preserve; send empty array or null to
               clear. Maximum 50.
@@ -937,7 +976,10 @@ class AsyncDeployments(AsyncAPIResource):
                 "vault_ids": vault_ids,
             },
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -1083,7 +1125,10 @@ class AsyncDeployments(AsyncAPIResource):
         return await self._post(
             path_template("/v1/deployments/{deployment_id}/archive?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -1141,7 +1186,10 @@ class AsyncDeployments(AsyncAPIResource):
         return await self._post(
             path_template("/v1/deployments/{deployment_id}/pause?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -1199,7 +1247,10 @@ class AsyncDeployments(AsyncAPIResource):
         return await self._post(
             path_template("/v1/deployments/{deployment_id}/run?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeploymentRun,
         )
@@ -1257,7 +1308,10 @@ class AsyncDeployments(AsyncAPIResource):
         return await self._post(
             path_template("/v1/deployments/{deployment_id}/unpause?beta=true", deployment_id=deployment_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
             ),
             cast_to=BetaManagedAgentsDeployment,
         )

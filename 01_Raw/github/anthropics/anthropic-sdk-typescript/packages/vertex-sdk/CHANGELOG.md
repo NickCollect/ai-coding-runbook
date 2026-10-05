@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.20.2 (2026-09-30)
+
+Full Changelog: [vertex-sdk-v0.20.1...vertex-sdk-v0.20.2](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.20.1...vertex-sdk-v0.20.2)
+
+### Chores
+
+* **client:** deprecate sonnet 4.5 ([d72cfaf](https://github.com/anthropics/anthropic-sdk-typescript/commit/d72cfaf6a551c75d54fad0538fb5fd65fb2346d1))
+
+## 0.20.1 (2026-09-30)
+
+Full Changelog: [vertex-sdk-v0.20.0...vertex-sdk-v0.20.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.20.0...vertex-sdk-v0.20.1)
+
+## 0.20.0 (2026-09-28)
+
+Full Changelog: [vertex-sdk-v0.19.11...vertex-sdk-v0.20.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.19.11...vertex-sdk-v0.20.0)
+
+### Features
+
+* **api:** add claude-sonnet-5-5 ([4e77366](https://github.com/anthropics/anthropic-sdk-typescript/commit/4e7736625fd23a5607800e8de4aa3c37daa74a07))
+
 ## 0.19.11 (2026-09-22)
 
 Full Changelog: [vertex-sdk-v0.19.10...vertex-sdk-v0.19.11](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.19.10...vertex-sdk-v0.19.11)
