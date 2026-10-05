@@ -1421,6 +1421,7 @@ export interface BetaResponse {
    */
   model:
     | 'gpt-6-astra'
+    | 'gpt-6.1-sol'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'
@@ -9470,7 +9471,7 @@ export namespace BetaResponseOutputText {
     filename: string;
 
     /**
-     * The index of the file in the list of files.
+     * The index in the output text at which to insert the file citation.
      */
     index: number;
 
@@ -9658,7 +9659,7 @@ export namespace BetaResponseOutputTextAnnotationAddedEvent {
     filename: string;
 
     /**
-     * The index of the file in the list of files.
+     * The index in the output text at which to insert the file citation.
      */
     index: number;
 
@@ -12015,6 +12016,7 @@ export namespace BetaResponsesClientEvent {
      */
     model?:
       | 'gpt-6-astra'
+      | 'gpt-6.1-sol'
       | 'gpt-6-sol'
       | 'gpt-6-luna'
       | 'gpt-5.6-sol'
@@ -13840,9 +13842,7 @@ export namespace BetaTool {
      * the maximum supported resolution is `3840x2160`. The requested size must also
      * satisfy the model's current pixel and edge limits. The standard sizes
      * `1024x1024`, `1536x1024`, and `1024x1536` are supported by the GPT image models;
-     * `auto` is supported for models that allow automatic sizing. For `dall-e-2`, use
-     * one of `256x256`, `512x512`, or `1024x1024`. For `dall-e-3`, use one of
-     * `1024x1024`, `1792x1024`, or `1024x1792`.
+     * `auto` is supported for models that allow automatic sizing.
      */
     size?: (string & {}) | '1024x1024' | '1024x1536' | '1536x1024' | 'auto';
   }
@@ -14304,6 +14304,7 @@ export interface ResponseCreateParamsBase {
    */
   model?:
     | 'gpt-6-astra'
+    | 'gpt-6.1-sol'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'
@@ -14996,6 +14997,7 @@ export interface ResponseCompactParams {
    */
   model:
     | 'gpt-6-astra'
+    | 'gpt-6.1-sol'
     | 'gpt-6-sol'
     | 'gpt-6-luna'
     | 'gpt-5.6-sol'

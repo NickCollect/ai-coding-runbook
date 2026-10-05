@@ -176,6 +176,8 @@ mod permission_profile_selection;
 mod permissions;
 mod requirements;
 mod resolved_permission_profile;
+mod runtime_refresh;
+pub(crate) use runtime_refresh::RuntimeConfigRefresh;
 #[cfg(test)]
 mod schema;
 mod token_budget_startup;
@@ -216,7 +218,7 @@ pub use permissions::resolve_permission_profile;
 pub(crate) use resolved_permission_profile::PermissionProfileState;
 pub use token_budget_startup::TokenBudgetStartupConfig;
 pub use windows_sandbox_config::PreparedWindowsSandboxConfig;
-use windows_sandbox_config::network_config_allows_mxc;
+use windows_sandbox_config::config_allows_mxc;
 pub use windows_sandbox_config::prepare_windows_sandbox_config;
 use windows_sandbox_config::resolve_windows_sandbox_type;
 
@@ -621,6 +623,9 @@ pub struct Config {
     /// Optional override of model selection.
     pub model: Option<String>,
 
+    /// Default Daybreak preference for new threads and non-interactive turns.
+    pub daybreak_enabled: bool,
+
     /// Effective service tier request id preference for new turns.
     /// `default` means the user explicitly selected standard routing.
     pub service_tier: Option<String>,
@@ -703,6 +708,14 @@ pub struct Config {
     /// The resolved policy config replaces its `{{ tenant_policy_config }}`
     /// placeholder when a review session is built.
     pub guardian_policy_template: Option<String>,
+
+    /// Optional replacement for the gated history-retrieval instructions.
+    /// Blank config values are treated as unset, like other Guardian policy overrides.
+    pub guardian_conversation_history_prompt: Option<String>,
+
+    /// Optional per-response history-tool budget. Guardian defaults to 4,000 tokens and
+    /// preserves stricter parent tool limits.
+    pub guardian_conversation_history_max_output_tokens: Option<NonZeroUsize>,
 
     /// Include a structured error when Guardian's circuit breaker interrupts a turn.
     pub guardian_circuit_break_action: CircuitBreakAction,
@@ -790,6 +803,9 @@ pub struct Config {
     /// Own the fullscreen transcript when the alternate screen is enabled.
     pub tui_fullscreen_transcript: bool,
 
+    /// Mouse wheel speed multiplier for transcript scrolling; defaults to one row per event.
+    pub tui_mouse_scroll_speed: Option<f64>,
+
     /// Override the terminal-specific default for copying transcript mouse selections.
     pub tui_copy_on_select: codex_config::types::CopyOnSelect,
 
@@ -831,6 +847,9 @@ pub struct Config {
 
     /// Preferred layout for resume/fork session picker results.
     pub tui_session_picker_view: SessionPickerViewMode,
+
+    /// Last selected grouping in Agent Command Center.
+    pub tui_agents_overview_grouping: codex_config::types::AgentsOverviewGrouping,
 
     /// Working directory to use when resuming or forking a session.
     /// When unset, prompt if the current and session directories differ.
@@ -1108,6 +1127,9 @@ pub struct Config {
     /// Local rollout preference after checking network restrictions and native availability.
     pub prefer_mxc: bool,
 
+    /// Host feature defaults retained beneath explicit configuration overrides.
+    pub runtime_feature_defaults: BTreeMap<Feature, bool>,
+
     /// When `true`, suppress warnings about unstable (under development) features.
     pub suppress_unstable_features_warning: bool,
 
@@ -1336,6 +1358,7 @@ pub struct MultiAgentV2Config {
     pub wait_agent_enabled: bool,
     pub disable_direct_message: bool,
     pub message_board_in_memory: bool,
+    pub message_board_remote: Option<codex_features::RemoteMessageBoardConfigToml>,
     pub non_code_mode_only: bool,
 }
 
@@ -1357,6 +1380,7 @@ impl MultiAgentV2Config {
             wait_agent_enabled: true,
             disable_direct_message: false,
             message_board_in_memory: false,
+            message_board_remote: None,
             non_code_mode_only: true,
         }
     }
@@ -1520,30 +1544,7 @@ impl ConfigBuilder {
                 .unwrap_or(&codex_config::NoopThreadConfigLoader),
         )
         .await?;
-        let merged_toml = config_layer_stack.effective_config();
-
-        // Note that each layer in ConfigLayerStack should have resolved
-        // relative paths to absolute paths based on the parent folder of the
-        // respective config file, so we should be safe to deserialize without
-        // AbsolutePathBufGuard here.
-        let config_toml: ConfigToml = match merged_toml.try_into() {
-            Ok(config_toml) => config_toml,
-            Err(err) => {
-                if let Some(config_error) = codex_config::first_layer_config_error::<ConfigToml>(
-                    &config_layer_stack,
-                    codex_config::CONFIG_TOML_FILE,
-                )
-                .await
-                {
-                    return Err(codex_config::io_error_from_config_error(
-                        std::io::ErrorKind::InvalidData,
-                        config_error,
-                        Some(err),
-                    ));
-                }
-                return Err(std::io::Error::new(std::io::ErrorKind::InvalidData, err));
-            }
-        };
+        let config_toml = config_toml_from_layers(&config_layer_stack).await?;
         Config::load_config_with_layer_stack(
             LOCAL_FS.as_ref(),
             config_toml,
@@ -1557,6 +1558,28 @@ impl ConfigBuilder {
     #[cfg(test)]
     pub(crate) fn without_managed_config_for_tests() -> Self {
         Self::default().loader_overrides(LoaderOverrides::without_managed_config_for_tests())
+    }
+}
+
+async fn config_toml_from_layers(layers: &ConfigLayerStack) -> std::io::Result<ConfigToml> {
+    // The loader resolves paths relative to each layer's file before deserialization.
+    match layers.effective_config().try_into() {
+        Ok(config_toml) => Ok(config_toml),
+        Err(err) => {
+            if let Some(config_error) = codex_config::first_layer_config_error::<ConfigToml>(
+                layers,
+                codex_config::CONFIG_TOML_FILE,
+            )
+            .await
+            {
+                return Err(codex_config::io_error_from_config_error(
+                    std::io::ErrorKind::InvalidData,
+                    config_error,
+                    Some(err),
+                ));
+            }
+            Err(std::io::Error::new(std::io::ErrorKind::InvalidData, err))
+        }
     }
 }
 
@@ -1834,6 +1857,7 @@ impl Config {
             config_layer_stack: self.config_layer_stack.clone(),
             approvals_reviewer: self.approvals_reviewer,
             environment_cwds: HashMap::new(),
+            environment_use_mxc: HashMap::new(),
             server_permission_profiles: HashMap::new(),
             codex_linux_sandbox_exe: self.codex_linux_sandbox_exe.clone(),
             use_legacy_landlock: self.features.use_legacy_landlock(),
@@ -1902,10 +1926,7 @@ impl Config {
     ) -> std::io::Result<Self> {
         let config_layer_stack =
             Self::layer_stack_preserving_session(session_layers, refreshed_layers)?;
-        let cfg: ConfigToml = config_layer_stack
-            .effective_config()
-            .try_into()
-            .map_err(|err| std::io::Error::new(std::io::ErrorKind::InvalidData, err))?;
+        let cfg = config_toml_from_layers(&config_layer_stack).await?;
         Self::load_config_with_layer_stack(
             LOCAL_FS.as_ref(),
             cfg,
@@ -1942,6 +1963,7 @@ impl Config {
             refreshed_layers.requirements().clone(),
             refreshed_layers.requirements_toml().clone(),
         )?
+        .with_cloud_config_binding(refreshed_layers.cloud_config_binding().cloned())
         .with_user_and_project_exec_policy_rules_ignored(
             refreshed_layers.ignore_user_and_project_exec_policy_rules(),
         ))
@@ -2828,6 +2850,7 @@ fn resolve_multi_agent_v2_config(config_toml: &ConfigToml) -> MultiAgentV2Config
         wait_agent_enabled,
         disable_direct_message,
         message_board_in_memory,
+        message_board_remote: base.and_then(|config| config.message_board_remote.clone()),
         non_code_mode_only,
     }
 }
@@ -3505,7 +3528,8 @@ impl Config {
             permission_config_syntax,
         );
         let prefer_mxc = features.enabled(Feature::PreferMxc)
-            && network_config_allows_mxc(
+            && config_allows_mxc(
+                &constrained_windows_sandbox_mode,
                 &effective_permission_selection,
                 profiles_are_active,
                 permission_profile.as_ref(),
@@ -4037,6 +4061,15 @@ impl Config {
                     auto_review.experimental_policy_template.as_deref(),
                 )
             });
+        let guardian_conversation_history_prompt = cfg.auto_review.as_ref().and_then(|auto_review| {
+            normalize_guardian_policy_config(
+                auto_review.experimental_conversation_history_prompt.as_deref(),
+            )
+        });
+        let guardian_conversation_history_max_output_tokens = cfg
+            .auto_review
+            .as_ref()
+            .and_then(|auto_review| auto_review.conversation_history_max_output_tokens);
         let personality = personality.or(cfg.personality);
 
         let experimental_compact_prompt_path = cfg.experimental_compact_prompt_file.as_ref();
@@ -4258,6 +4291,7 @@ impl Config {
         let config = Self {
             prefer_mxc,
             model,
+            daybreak_enabled: cfg.daybreak.unwrap_or(false),
             service_tier,
             review_model,
             model_context_window: cfg.model_context_window,
@@ -4388,6 +4422,8 @@ impl Config {
             guardian_policy_config,
             guardian_extra_policy,
             guardian_policy_template,
+            guardian_conversation_history_prompt,
+            guardian_conversation_history_max_output_tokens,
             guardian_circuit_break_action: cfg
                 .auto_review
                 .as_ref()
@@ -4408,6 +4444,7 @@ impl Config {
                 .audio
                 .map_or_else(RealtimeAudioConfig::default, |audio| RealtimeAudioConfig {
                     microphone: audio.microphone,
+                    microphone_channel: audio.microphone_channel,
                     speaker: audio.speaker,
                 }),
             experimental_realtime_ws_base_url: cfg.experimental_realtime_ws_base_url,
@@ -4447,6 +4484,7 @@ impl Config {
             current_time_reminder,
             sleep_tool_mode,
             features,
+            runtime_feature_defaults: BTreeMap::new(),
             suppress_unstable_features_warning: cfg
                 .suppress_unstable_features_warning
                 .unwrap_or(false),
@@ -4501,6 +4539,7 @@ impl Config {
                 .tui
                 .as_ref()
                 .is_none_or(|tui| tui.fullscreen_transcript),
+            tui_mouse_scroll_speed: cfg.tui.as_ref().and_then(|tui| tui.mouse_scroll_speed),
             tui_copy_on_select: cfg
                 .tui
                 .as_ref()
@@ -4535,6 +4574,7 @@ impl Config {
                 .as_ref()
                 .and_then(|t| t.session_picker_view)
                 .unwrap_or_default(),
+            tui_agents_overview_grouping: cfg.tui.as_ref().map(|t| t.agents_overview_grouping).unwrap_or_default(),
             tui_resume_cwd: cfg.tui.as_ref().and_then(|t| t.resume_cwd),
             terminal_resize_reflow,
             tui_keymap: cfg

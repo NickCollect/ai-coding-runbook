@@ -486,6 +486,9 @@ export type { ThreadAttachmentAddResponse } from "./ThreadAttachmentAddResponse"
 export type { ThreadAttachmentListParams } from "./ThreadAttachmentListParams";
 export type { ThreadAttachmentListResponse } from "./ThreadAttachmentListResponse";
 export type { ThreadAttachmentOperation } from "./ThreadAttachmentOperation";
+export type { ThreadAttachmentOwner } from "./ThreadAttachmentOwner";
+export type { ThreadAttachmentOwnerListParams } from "./ThreadAttachmentOwnerListParams";
+export type { ThreadAttachmentOwnerListResponse } from "./ThreadAttachmentOwnerListResponse";
 export type { ThreadAttachmentRemoveParams } from "./ThreadAttachmentRemoveParams";
 export type { ThreadAttachmentRemoveResponse } from "./ThreadAttachmentRemoveResponse";
 export type { ThreadAttachmentUpdatedNotification } from "./ThreadAttachmentUpdatedNotification";
@@ -505,6 +508,7 @@ export type { ThreadGoalClearResponse } from "./ThreadGoalClearResponse";
 export type { ThreadGoalClearedNotification } from "./ThreadGoalClearedNotification";
 export type { ThreadGoalGetParams } from "./ThreadGoalGetParams";
 export type { ThreadGoalGetResponse } from "./ThreadGoalGetResponse";
+export type { ThreadGoalMutationOrigin } from "./ThreadGoalMutationOrigin";
 export type { ThreadGoalSetParams } from "./ThreadGoalSetParams";
 export type { ThreadGoalSetResponse } from "./ThreadGoalSetResponse";
 export type { ThreadGoalStatus } from "./ThreadGoalStatus";
@@ -526,6 +530,8 @@ export type { ThreadMetadataGitInfoUpdateParams } from "./ThreadMetadataGitInfoU
 export type { ThreadMetadataUpdateParams } from "./ThreadMetadataUpdateParams";
 export type { ThreadMetadataUpdateResponse } from "./ThreadMetadataUpdateResponse";
 export type { ThreadNameUpdatedNotification } from "./ThreadNameUpdatedNotification";
+export type { ThreadPredictionResult } from "./ThreadPredictionResult";
+export type { ThreadPredictionUpdatedNotification } from "./ThreadPredictionUpdatedNotification";
 export type { ThreadProjectUpdatedNotification } from "./ThreadProjectUpdatedNotification";
 export type { ThreadQueueChangedNotification } from "./ThreadQueueChangedNotification";
 export type { ThreadReadParams } from "./ThreadReadParams";

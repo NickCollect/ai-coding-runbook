@@ -1,5 +1,111 @@
 # Changelog
 
+## [3.24.0](https://github.com/openai/openai-python/compare/v3.23.0...v3.24.0) (2026-10-02)
+
+
+### Features
+
+* **api:** add custom voice creation and agent session events ([#4013](https://github.com/openai/openai-python/issues/4013)) ([e5de2e5](https://github.com/openai/openai-python/commit/e5de2e5656fb3d4fa70f050195382e6a4d59f806))
+
+
+### Bug Fixes
+
+* **api:** prioritize Python request routing fields ([#4014](https://github.com/openai/openai-python/issues/4014)) ([ffcc4c4](https://github.com/openai/openai-python/commit/ffcc4c47279debd9daff6103da57dcde2efd38bd))
+* **api:** prioritize routing fields in parse helpers ([#4016](https://github.com/openai/openai-python/issues/4016)) ([ba53a10](https://github.com/openai/openai-python/commit/ba53a1021b203750653bbbff938b8cd373f990f2))
+
+## [3.23.0](https://github.com/openai/openai-python/compare/v3.22.1...v3.23.0) (2026-10-01)
+
+
+### Features
+
+* **agents:** [1/n] return typed answers from session streams ([#4007](https://github.com/openai/openai-python/issues/4007)) ([10f8816](https://github.com/openai/openai-python/commit/10f88169b0f3929b4e2528aad7a825df31163156))
+* **agents:** stage files and download turn artifacts ([#4009](https://github.com/openai/openai-python/issues/4009)) ([4fc2438](https://github.com/openai/openai-python/commit/4fc2438ea73f8c1a4802b0cd5ab7607fc3cc1d16))
+* **api:** Add session traces and Realtime translations ([#4001](https://github.com/openai/openai-python/issues/4001)) ([138e3d1](https://github.com/openai/openai-python/commit/138e3d14c4bff1322e5c96de711e272bebb77cc2))
+* **beta:** expose typed application actions as agent tools ([#4006](https://github.com/openai/openai-python/issues/4006)) ([f219c55](https://github.com/openai/openai-python/commit/f219c5581661408688195659ab0137927ba9a033))
+* collect final output from beta Agents streams ([157ac4c](https://github.com/openai/openai-python/commit/157ac4c49a34891d5b66d2950b5082d1b3268315))
+
+
+### Bug Fixes
+
+* **api:** allow original image detail in Chat Completions ([#4005](https://github.com/openai/openai-python/issues/4005)) ([8a136c2](https://github.com/openai/openai-python/commit/8a136c203062b999349da745226ba5299709c7be))
+* **api:** correct the eval run cancellation endpoint ([#4003](https://github.com/openai/openai-python/issues/4003)) ([28c5c9a](https://github.com/openai/openai-python/commit/28c5c9aa55532bc6524611101a6137f6d3028514))
+* **api:** retain WebSocket endpoint paths and query parameters ([#3999](https://github.com/openai/openai-python/issues/3999)) ([7f203fd](https://github.com/openai/openai-python/commit/7f203fd5cfd96354524cd07498497b2e27184f95))
+* keep Castiron budget results valid when main advances ([#4012](https://github.com/openai/openai-python/issues/4012)) ([73f189b](https://github.com/openai/openai-python/commit/73f189b2918197478cc93e31905a402c0a8389e3))
+* **responses:** avoid replaying uncertain typed sends on reconnect ([#4011](https://github.com/openai/openai-python/issues/4011)) ([1dbbf61](https://github.com/openai/openai-python/commit/1dbbf61eb6198976bb8a54585b7b0dd7d30c456e))
+* **responses:** respect send queue limits during reconnect ([#4000](https://github.com/openai/openai-python/issues/4000)) ([50f95ac](https://github.com/openai/openai-python/commit/50f95ac0f3563a32c9c2e0415e4701e283f17096))
+* use monotonic clock for file processing timeout ([#3748](https://github.com/openai/openai-python/issues/3748)) ([58aca1d](https://github.com/openai/openai-python/commit/58aca1dcfd8d04a3c6352fa2c34b3035ea850f57))
+
+
+### Chores
+
+* **api:** retain WebRTC Live session transport types ([#4002](https://github.com/openai/openai-python/issues/4002)) ([5c9ace9](https://github.com/openai/openai-python/commit/5c9ace9a8173c67300b05c3aeb6de01526ed8214))
+* **deps-dev:** bump pyright from 1.1.413 to 1.1.414 ([#3902](https://github.com/openai/openai-python/issues/3902)) ([a91d779](https://github.com/openai/openai-python/commit/a91d779cb5e725b47909333c6a3d9fe795e93439))
+* **deps:** bump astral-sh/setup-uv from 10.0.1 to 10.1.0 ([#3976](https://github.com/openai/openai-python/issues/3976)) ([f15f43c](https://github.com/openai/openai-python/commit/f15f43cdcc5959aeb17108a614a1b73e512971b5))
+* **deps:** bump CodeQL actions to 4.38.1 ([#3974](https://github.com/openai/openai-python/issues/3974)) ([fb70d66](https://github.com/openai/openai-python/commit/fb70d661621fe42706120f90673cbae358468244))
+
+## [3.22.1](https://github.com/openai/openai-python/compare/v3.22.0...v3.22.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* **api:** correct the missing authentication error message ([#3993](https://github.com/openai/openai-python/issues/3993)) ([51692ed](https://github.com/openai/openai-python/commit/51692ed3f9d2b87084801295f824c2202dac3785)), closes [#3962](https://github.com/openai/openai-python/issues/3962)
+* transform NotRequired typed dictionary fields ([#3995](https://github.com/openai/openai-python/issues/3995)) ([5544c18](https://github.com/openai/openai-python/commit/5544c18c19f125718ed9c4f7c42866c27060158e))
+
+
+### Chores
+
+* **tests:** mark sample_file.txt as text with LF line endings ([#3879](https://github.com/openai/openai-python/issues/3879)) ([fd78a48](https://github.com/openai/openai-python/commit/fd78a48d2be489fde978696e1ad32032c20f0fab))
+
+
+### Documentation
+
+* **examples:** fix two stale example comments ([#3877](https://github.com/openai/openai-python/issues/3877)) ([1c4830b](https://github.com/openai/openai-python/commit/1c4830b6e735d2ca3c4bd95f66467fa007f8b451))
+* **examples:** print event.delta in the streaming helpers doc ([#3876](https://github.com/openai/openai-python/issues/3876)) ([063375b](https://github.com/openai/openai-python/commit/063375b7a12f3f3a0de10aec829c0416651be8cc))
+
+## [3.22.0](https://github.com/openai/openai-python/compare/v3.21.0...v3.22.0) (2026-09-29)
+
+
+### Features
+
+* **api:** add computer use to beta agents ([#3989](https://github.com/openai/openai-python/issues/3989)) ([f5dddb5](https://github.com/openai/openai-python/commit/f5dddb5a199f899d9439ac3187c9c0f2d3e4082e))
+
+## [3.21.0](https://github.com/openai/openai-python/compare/v3.20.0...v3.21.0) (2026-09-29)
+
+
+### Features
+
+* **api:** add GPT-6.1 Sol model identifier ([#3986](https://github.com/openai/openai-python/issues/3986)) ([160b2c0](https://github.com/openai/openai-python/commit/160b2c0230b9afac15862dcdf8a764e5bae18eb3))
+
+## [3.20.0](https://github.com/openai/openai-python/compare/v3.19.2...v3.20.0) (2026-09-28)
+
+
+### Features
+
+* **api:** add Agents credential and session options ([#3967](https://github.com/openai/openai-python/issues/3967)) ([bb68198](https://github.com/openai/openai-python/commit/bb68198a4bb4a161cbb32a28c3888a51540eaf0f))
+* **api:** add Cyber access programs to Responses ([#3956](https://github.com/openai/openai-python/issues/3956)) ([09c5b6f](https://github.com/openai/openai-python/commit/09c5b6f13f716ad4e417fd7ba9209a8a057e0383))
+* **responses:** opt in to incremental WebSocket text and tool snapshots ([#3973](https://github.com/openai/openai-python/issues/3973)) ([d0207b4](https://github.com/openai/openai-python/commit/d0207b48c043741ff483d7a8c945f8003d1ee714))
+* **responses:** preserve detailed WebSocket accumulator snapshots ([#3981](https://github.com/openai/openai-python/issues/3981)) ([a380cf2](https://github.com/openai/openai-python/commit/a380cf256abc2aa51cbf5d49437ae039b9aa9b12))
+
+
+### Bug Fixes
+
+* **client:** retry unmapped TLS transport errors ([#3982](https://github.com/openai/openai-python/issues/3982)) ([0d35a26](https://github.com/openai/openai-python/commit/0d35a2640458b64ed2ff4a7c9b1f1a1e5705336e))
+* **live:** avoid hangs at fractional transcript grouping deadlines ([#3970](https://github.com/openai/openai-python/issues/3970)) ([4ef4129](https://github.com/openai/openai-python/commit/4ef4129e85e81a285905755e57b392aa9e77f9bd))
+* **live:** keep query parameters out of WebSocket endpoint paths ([#3972](https://github.com/openai/openai-python/issues/3972)) ([f9c458b](https://github.com/openai/openai-python/commit/f9c458b759e3756979fceebf50bffa78d9cf0b97))
+* **live:** preserve caller queues and prevent uncertain WebSocket replay ([#3980](https://github.com/openai/openai-python/issues/3980)) ([80e9686](https://github.com/openai/openai-python/commit/80e96860b5ccbfcf4a1c9dd9947fc31cd021037a))
+* **realtime:** preserve base URL queries in WebSocket upgrades ([#3971](https://github.com/openai/openai-python/issues/3971)) ([f7bd4a7](https://github.com/openai/openai-python/commit/f7bd4a703cad904e4f5d91ec9d7abac70d8c0bd6))
+* **realtime:** retain configured queues without replaying attempted sends ([#3978](https://github.com/openai/openai-python/issues/3978)) ([a52805c](https://github.com/openai/openai-python/commit/a52805c2537422ad602eba2bf66072880ea3fd22))
+
+
+### Chores
+
+* **api:** clarify documented API error responses ([#3965](https://github.com/openai/openai-python/issues/3965)) ([384fee3](https://github.com/openai/openai-python/commit/384fee3252e2336a85450ff38f9bae41f9199616))
+* **api:** document batch error responses ([#3961](https://github.com/openai/openai-python/issues/3961)) ([6e4a79c](https://github.com/openai/openai-python/commit/6e4a79cc8c7e640e7ac4be710db32fe20b1020f2))
+* **api:** document files and uploads error responses ([#3960](https://github.com/openai/openai-python/issues/3960)) ([a9d727f](https://github.com/openai/openai-python/commit/a9d727ff9c4a38fc5dca8d31bd3dd76f473cfc27))
+* **api:** document fine-tuning and model errors ([#3964](https://github.com/openai/openai-python/issues/3964)) ([5d4003c](https://github.com/openai/openai-python/commit/5d4003c12d5df5a5faed35971cac3bcb711fdf7d))
+* **api:** document Responses not-found errors ([#3959](https://github.com/openai/openai-python/issues/3959)) ([63099e7](https://github.com/openai/openai-python/commit/63099e739d25cb18f90cae93648471bf037bc46f))
+* **api:** document stored chat completion errors ([#3963](https://github.com/openai/openai-python/issues/3963)) ([a73fe0c](https://github.com/openai/openai-python/commit/a73fe0c3d404335a342d1251bd32709b8e3d76f2))
+
 ## [3.19.2](https://github.com/openai/openai-python/compare/v3.19.1...v3.19.2) (2026-09-23)
 
 

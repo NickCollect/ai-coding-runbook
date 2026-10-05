@@ -157,7 +157,7 @@ impl App {
                     ..Default::default()
                 },
             ],
-            ..SelectionViewParams::picker()
+            ..SelectionViewParams::confirmation()
         });
     }
 
@@ -227,6 +227,11 @@ impl App {
                 refresh.abort();
             }
             self.agents_overview.request_id = None;
+            self.agents_overview
+                .view_state
+                .lock()
+                .unwrap_or_else(std::sync::PoisonError::into_inner)
+                .loading = false;
             self.agents_overview.refresh_pending = false;
             self.agents_overview.refresh_notifications.clear();
         }
@@ -263,8 +268,9 @@ impl App {
             {
                 removed.insert(primary);
             }
+            self.prepare_agents_overview_removal(&removed);
             for removed_id in removed {
-                self.agents_overview.threads.remove(&removed_id);
+                self.remove_agents_overview_thread(removed_id);
                 self.agents_overview.activity.remove(&removed_id);
                 self.agents_overview.last_messages.remove(&removed_id);
                 self.agents_overview.usage.remove(&removed_id);

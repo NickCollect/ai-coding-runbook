@@ -2832,9 +2832,9 @@ async fn shell_startup_credentials_are_brokered(
         };
         let zsh_path = zsh.derive_exec_args("", /*use_login_shell*/ false)[0].clone();
         let path = startup_dir.join("zsh");
-        fs::write(
+        codex_utils_cargo_bin::write_executable(
             &path,
-            format!(
+            &format!(
                 "#!/bin/sh\nexport GH_ENTERPRISE_TOKEN='{REAL_GITHUB_TOKEN}'\nexport CUSTOM_API_KEY='{REAL_CUSTOM_TOKEN}'\nexport AUTH_HEADER=\"Bearer $GH_ENTERPRISE_TOKEN\"\nexec {} \"$@\"\n",
                 shlex::try_quote(&zsh_path)?
             ),
@@ -3476,15 +3476,12 @@ async fn env_zsh_script_spawned_by_python_can_request_escalation_under_zsh_fork(
     .await?;
 
     let script_path = test.cwd.path().join("runs-under-env-zsh");
-    fs::write(
+    codex_utils_cargo_bin::write_executable(
         &script_path,
-        format!(
+        &format!(
             "#!/usr/bin/env zsh\ntouch {outside_path_arg}\nprint -r -- nested-env-zsh-complete\n"
         ),
     )?;
-    let mut script_permissions = fs::metadata(&script_path)?.permissions();
-    script_permissions.set_mode(0o755);
-    fs::set_permissions(&script_path, script_permissions)?;
 
     let script_literal = serde_json::to_string(script_path.to_string_lossy().as_ref())?;
     let python_script = format!(
@@ -3802,6 +3799,102 @@ touch {outside_path:?}
     Ok(())
 }
 
+#[cfg(unix)]
+#[test_case(Some(ReviewDecision::Approved); "approved")]
+#[test_case(Some(ReviewDecision::denied("rejected by user")); "denied")]
+#[test_case(None; "allow_rule_skips_approval_without_widening")]
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn explicit_escalation_with_denied_reads(decision: Option<ReviewDecision>) -> Result<()> {
+    skip_if_no_network!(Ok(()));
+    let server = start_mock_server().await;
+    let home = Arc::new(TempDir::new()?);
+    if decision.is_none() {
+        let rules = home.path().join("rules");
+        fs::create_dir(&rules)?;
+        fs::write(
+            rules.join("default.rules"),
+            r#"prefix_rule(pattern=["/bin/sh", "escalation.sh"], decision="allow")"#,
+        )?;
+    }
+    let outside_marker = home.path().join("escalated-marker");
+    let quoted_marker = shlex::try_join([outside_marker.to_string_lossy().as_ref()])?;
+    let approval_policy = AskForApproval::OnRequest;
+    let mut builder = test_codex()
+        .with_home(home)
+        .with_config(move |config| {
+            config.permissions.approval_policy = Constrained::allow_any(approval_policy);
+            config.features.enable(Feature::UnifiedExec).unwrap();
+            config.features.disable(Feature::ShellZshFork).unwrap();
+            let mut file_system =
+                restrictive_workspace_write_profile().file_system_sandbox_policy();
+            file_system.entries.push(FileSystemSandboxEntry::new(
+                config.cwd.join("secret.txt").into(),
+                FileSystemAccessMode::Deny,
+            ));
+            config
+                .permissions
+                .set_permission_profile(PermissionProfile::from_runtime_permissions(
+                    &file_system,
+                    NetworkSandboxPolicy::Restricted,
+                ))
+                .unwrap();
+        })
+        .with_workspace_setup(move |cwd, _fs| async move {
+            fs::write(cwd.join("secret.txt"), "secret")?;
+            fs::write(
+                cwd.join("escalation.sh"),
+                format!(
+                    "printf ran > ran || exit 10; (printf outside > {quoted_marker}) 2> errors; \
+                 if cat secret.txt > errors 2>&1; then exit 11; fi; \
+                 grep -q secret.txt errors || exit 12; printf 'protected\\n'"
+                ),
+            )?;
+            Ok(())
+        });
+    let test = builder.build(&server).await?;
+    let workspace_marker = test.cwd.path().join("ran");
+    let command = "/bin/sh escalation.sh";
+    let call_id = "explicit-deny-read-escalation";
+    let event = exec_command_event(
+        call_id,
+        command,
+        Some(10_000),
+        SandboxPermissions::RequireEscalated,
+        /*justification*/ None,
+    )?;
+    mount_sse_once(&server, sse(vec![event, ev_completed("run")])).await;
+    let response = mount_sse_once(&server, sse(vec![ev_completed("done")])).await;
+    submit_turn_preserving_active_permission_profile(&test, "run the command", approval_policy)
+        .await?;
+    let approved = decision == Some(ReviewDecision::Approved);
+    let rejected = decision.is_some() && !approved;
+    if let Some(decision) = decision {
+        let request = expect_exec_approval(&test, command).await;
+        assert!(!outside_marker.exists() && !workspace_marker.exists());
+        test.codex
+            .submit(Op::ExecApproval {
+                id: request.effective_approval_id(),
+                turn_id: None,
+                decision,
+            })
+            .await?;
+    }
+    wait_for_completion_without_approval(&test).await;
+    let result = parse_result(&response.single_request().function_call_output(call_id));
+    if rejected {
+        assert!(result.stdout.contains("rejected by user"), "{result:?}");
+        assert!(!workspace_marker.exists());
+    } else {
+        assert_eq!(
+            (result.exit_code, result.stdout.as_str()),
+            (Some(0), "protected\n")
+        );
+        assert_eq!(fs::read_to_string(workspace_marker)?, "ran");
+    }
+    assert_eq!(outside_marker.exists(), approved);
+    Ok(())
+}
+
 /// Verifies that zsh-fork applies an inner script's allow rule even when the
 /// model invokes an outer wrapper, and that the escalated script retains the
 /// named profile needed to reconstruct the original sandbox remotely without
@@ -3824,9 +3917,9 @@ async fn zsh_fork_inner_allowed_script_inherits_active_permission_profile() -> R
     let remote_bash_path = script_dir.path().join("remote_bash.py");
     let outside_path = script_dir.path().join("remote-bash-unsandboxed-marker");
     let outside_path_literal = serde_json::to_string(&outside_path.to_string_lossy())?;
-    fs::write(
+    codex_utils_cargo_bin::write_executable(
         &remote_bash_path,
-        format!(
+        &format!(
             r#"#!/usr/bin/env python3
 import argparse
 import os
@@ -3891,19 +3984,14 @@ if __name__ == "__main__":
         ),
     )?;
     let remote_bash_exec = shlex::try_join([remote_bash_path.to_string_lossy().as_ref()])?;
-    fs::write(
+    codex_utils_cargo_bin::write_executable(
         &wrapper_path,
-        format!(
+        &format!(
             r#"#!/usr/bin/env zsh
 exec {remote_bash_exec} "$@"
 "#
         ),
     )?;
-    for path in [&wrapper_path, &remote_bash_path] {
-        let mut permissions = fs::metadata(path)?.permissions();
-        permissions.set_mode(0o755);
-        fs::set_permissions(path, permissions)?;
-    }
 
     let remote_bash_pattern = serde_json::to_string(&remote_bash_path.to_string_lossy())?;
     let rules = format!(r#"prefix_rule(pattern=[{remote_bash_pattern}], decision="allow")"#);

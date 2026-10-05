@@ -206,6 +206,16 @@ Methods:
 
 - <code title="post /audio/speech">client.audio.speech.<a href="./src/resources/audio/speech.ts">create</a>({ ...params }) -> Response</code>
 
+## Voices
+
+Types:
+
+- <code><a href="./src/resources/audio/voices.ts">Voice</a></code>
+
+Methods:
+
+- <code title="post /audio/voices">client.audio.voices.<a href="./src/resources/audio/voices.ts">create</a>({ ...params }) -> Voice</code>
+
 # Moderations
 
 Types:
@@ -427,6 +437,9 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/beta/agents/agents.ts">Agent</a></code>
+- <code><a href="./src/resources/beta/agents/agents.ts">AgentBrowserAuthenticationCancelParam</a></code>
+- <code><a href="./src/resources/beta/agents/agents.ts">AgentBrowserAuthenticationSubmitParam</a></code>
+- <code><a href="./src/resources/beta/agents/agents.ts">AgentBrowserOriginAccessParam</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentCloseSubagentCallItem</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentCommandExecutionItem</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentContent</a></code>
@@ -669,6 +682,16 @@ Methods:
 
 - <code title="post /agents/sessions/{session_id}/events">client.beta.agents.sessions.events.<a href="./src/resources/beta/agents/sessions/events.ts">create</a>(sessionID, { ...params }) -> void</code>
 - <code title="get /agents/sessions/{session_id}/events">client.beta.agents.sessions.events.<a href="./src/resources/beta/agents/sessions/events.ts">stream</a>(sessionID) -> AgentSessionEvent</code>
+
+#### Traces
+
+Types:
+
+- <code><a href="./src/resources/beta/agents/sessions/traces.ts">SessionTrace</a></code>
+
+Methods:
+
+- <code title="get /agents/sessions/{session_id}/traces">client.beta.agents.sessions.traces.<a href="./src/resources/beta/agents/sessions/traces.ts">list</a>(sessionID, { ...params }) -> SessionTracesPage</code>
 
 #### Turns
 
@@ -1611,7 +1634,7 @@ Methods:
 - <code title="get /evals/{eval_id}/runs/{run_id}">client.evals.runs.<a href="./src/resources/evals/runs/runs.ts">retrieve</a>(runID, { ...params }) -> RunRetrieveResponse</code>
 - <code title="get /evals/{eval_id}/runs">client.evals.runs.<a href="./src/resources/evals/runs/runs.ts">list</a>(evalID, { ...params }) -> RunListResponsesPage</code>
 - <code title="delete /evals/{eval_id}/runs/{run_id}">client.evals.runs.<a href="./src/resources/evals/runs/runs.ts">delete</a>(runID, { ...params }) -> RunDeleteResponse</code>
-- <code title="post /evals/{eval_id}/runs/{run_id}">client.evals.runs.<a href="./src/resources/evals/runs/runs.ts">cancel</a>(runID, { ...params }) -> RunCancelResponse</code>
+- <code title="post /evals/{eval_id}/runs/{run_id}/cancel">client.evals.runs.<a href="./src/resources/evals/runs/runs.ts">cancel</a>(runID, { ...params }) -> RunCancelResponse</code>
 
 ### OutputItems
 

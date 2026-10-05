@@ -1,17 +1,20 @@
+import type { AgentOutputFormat, AgentResult } from '../beta/agents/output-format-types';
 import { TurnState } from './turn-state';
+import { agentFormatParser, parseAgentResultPromise } from '../beta/agents/parse-result';
+import { ResultCollection } from '../beta/agents/result-collection';
 import { APIUserAbortError, BadRequestError, OpenAIError } from '../../core/error';
 import type { Stream } from '../../core/streaming';
 import { buildHeaders } from '../../internal/headers';
 import type { RequestOptions } from '../../internal/request-options';
 import { uuid4 } from '../../internal/utils/uuid';
-import { hasOwn, isObj } from '../../internal/utils/values';
+import { isObj } from '../../internal/utils/values';
+import { isInputContent } from '../beta/agents/tool-output';
 import type {
   AgentFunctionCallItem,
   AgentFunctionCallOutputParam,
   AgentSessionEvent,
   AgentSessionInputMessageParam,
   AgentSessionInputParam,
-  InputContentParam,
 } from '../../resources/beta/agents/agents';
 import type { Sessions } from '../../resources/beta/agents/sessions/sessions';
 
@@ -23,32 +26,18 @@ export type AgentToolHandler = (
 ) => AgentToolOutput | PromiseLike<AgentToolOutput>;
 
 /** Input and optional sequential tool handlers for one turn on an idle session. */
-export interface AgentSessionStreamParams {
+export type AgentSessionStreamParams<T = never> = {
+  /** Beta: parse this turn locally; does not change the existing session schema. */
+  outputFormat?: AgentOutputFormat<T>;
   /** User messages, or text normalized to a single user message. Must not be empty. */
   input: string | AgentSessionInputMessageParam[];
   /** Registered functions run after their call event is yielded; unknown functions remain manual. */
   toolHandlers?: Record<string, AgentToolHandler>;
   /** Key for the input submission only; request headers take precedence, case-insensitively. */
   idempotencyKey?: string;
-}
+} & ([T] extends [never] ? unknown : { outputFormat: AgentOutputFormat<T> });
 
 type ToolResult = AgentSessionInputParam.SessionInputParamAgentSessionInputToolResult;
-
-function isInputContent(value: unknown): value is InputContentParam {
-  if (!isObj(value)) {
-    return false;
-  }
-  const content = value;
-  let field: string;
-  if (content['type'] === 'input_text') {
-    field = 'text';
-  } else if (content['type'] === 'input_image') {
-    field = 'image_url';
-  } else {
-    return false;
-  }
-  return hasOwn(content, 'type') && hasOwn(content, field) && typeof content[field] === 'string';
-}
 
 function normalizedOutput(value: unknown): AgentFunctionCallOutputParam | null {
   if (value === null) {
@@ -98,10 +87,13 @@ async function cancelBody(response: Response | undefined): Promise<void> {
  * idempotency key. Breaking iteration or calling abort closes local requests;
  * neither cancels the backend turn. No work starts until iteration begins.
  */
-export class AgentSessionStream implements AsyncIterable<AgentSessionEvent> {
+export class AgentSessionStream<T = never> implements AsyncIterable<AgentSessionEvent> {
   /** Aborts local requests and iteration without cancelling the backend turn. */
   readonly controller = new AbortController();
   #consumed = false;
+  #format: AgentOutputFormat<T> | undefined;
+  #parsedResult: Promise<AgentResult<T>> | undefined;
+  #collection: ResultCollection;
   #stream: Stream<AgentSessionEvent> | undefined;
   #response: Response | undefined;
   #reading = false;
@@ -116,7 +108,7 @@ export class AgentSessionStream implements AsyncIterable<AgentSessionEvent> {
   constructor(
     sessions: Sessions,
     sessionID: string,
-    params: AgentSessionStreamParams,
+    params: AgentSessionStreamParams<T>,
     options?: RequestOptions,
   ) {
     const input: AgentSessionInputMessageParam[] =
@@ -125,6 +117,10 @@ export class AgentSessionStream implements AsyncIterable<AgentSessionEvent> {
         : params.input;
     if (params.input.length === 0) {
       throw new OpenAIError('input must not be empty');
+    }
+    this.#format = agentFormatParser<T>(params.outputFormat);
+    if (params.outputFormat && !this.#format) {
+      throw new OpenAIError('outputFormat must have its own parser function');
     }
     this.#sessions = sessions;
     this.#sessionID = sessionID;
@@ -141,6 +137,11 @@ export class AgentSessionStream implements AsyncIterable<AgentSessionEvent> {
     headers.nulls.delete('idempotency-key');
     const { idempotencyKey: _key, ...rest } = options ?? {};
     this.#options = { ...rest, headers };
+    this.#collection = new ResultCollection(
+      () => this.#iterate(),
+      (name) => this.#handlers.has(name),
+      sessionID,
+    );
   }
 
   /** Closes local requests without cancelling the turn; an optional reason becomes the abort error's cause. */
@@ -158,7 +159,18 @@ export class AgentSessionStream implements AsyncIterable<AgentSessionEvent> {
       throw new OpenAIError('An AgentSessionStream can only be consumed once');
     }
     this.#consumed = true;
-    return this.#iterate();
+    return this.#collection.iterate();
+  }
+
+  /** Beta: opt into retaining completed final messages before iterating progress events. */
+  withResultCollection(): this {
+    this.#collection.enable();
+    return this;
+  }
+
+  /** Beta: drain this turn, dispatch registered tools, and collect its final assistant messages. */
+  finalResult(): Promise<AgentResult<T>> {
+    return (this.#parsedResult ??= parseAgentResultPromise(this.#collection.finalResult(), this.#format));
   }
 
   async *#iterate(): AsyncGenerator<AgentSessionEvent> {
@@ -268,7 +280,7 @@ export class AgentSessionStream implements AsyncIterable<AgentSessionEvent> {
     return error;
   }
 
-  async #wait<T>(action: () => T | PromiseLike<T>): Promise<T> {
+  async #wait<Value>(action: () => Value | PromiseLike<Value>): Promise<Value> {
     let onAbort: (() => void) | undefined;
     // oxlint-disable-next-line promise/avoid-new -- Bridge the caller's AbortSignal while a handler or registration delay is pending.
     const aborted = new Promise<never>((_resolve, reject) => {

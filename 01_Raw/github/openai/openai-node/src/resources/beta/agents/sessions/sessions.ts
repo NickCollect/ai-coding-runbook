@@ -4,6 +4,12 @@ import {
   AgentSessionStream,
   type AgentSessionStreamParams,
 } from '../../../../lib/agents/agent-session-stream';
+import {
+  type AgentSessionCreateStream,
+  withAgentTurnResult,
+} from '../../../../lib/beta/agents/agent-session-create-stream';
+import type { AgentOutputFormat } from '../../../../lib/beta/agents/output-format-types';
+import { captureAgentOutput } from '../../../../lib/beta/agents/parse-result';
 import { APIResource } from '../../../../core/resource';
 import * as SessionsAPI from './sessions';
 import * as AgentsAPI from '../agents';
@@ -23,13 +29,15 @@ import * as EventsAPI from './events';
 import { EventCreateParams, Events } from './events';
 import * as ItemsAPI from './items';
 import { ItemListParams, Items } from './items';
+import * as TracesAPI from './traces';
+import { SessionTrace, SessionTracesPage, TraceListParams, Traces } from './traces';
 import * as TurnsAPI from './turns';
 import { Turn, TurnListParams, TurnRetrieveParams, Turns, TurnsPage } from './turns';
 import * as SubagentsAPI from './subagents/subagents';
 import { SubagentListParams, SubagentRetrieveParams, Subagents } from './subagents/subagents';
 import { APIPromise } from '../../../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../../../core/pagination';
-import { Stream } from '../../../../core/streaming';
+import type { Stream } from '../../../../core/streaming';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
 import { path } from '../../../../internal/utils/path';
@@ -150,7 +158,11 @@ function normalizeRequestOptionsForQuery(
 
 export class Sessions extends APIResource {
   /** Stream one turn on an idle session with a single input writer. See AgentSessionStream for lifecycle and tool handling. */
-  stream(sessionID: string, params: AgentSessionStreamParams, options?: RequestOptions): AgentSessionStream {
+  stream<T = never>(
+    sessionID: string,
+    params: AgentSessionStreamParams<T>,
+    options?: RequestOptions,
+  ): AgentSessionStream<T> {
     return new AgentSessionStream(this, sessionID, params, options);
   }
 
@@ -158,6 +170,7 @@ export class Sessions extends APIResource {
   artifacts: ArtifactsAPI.Artifacts = new ArtifactsAPI.Artifacts(this._client);
   items: ItemsAPI.Items = new ItemsAPI.Items(this._client);
   events: EventsAPI.Events = new EventsAPI.Events(this._client);
+  traces: TracesAPI.Traces = new TracesAPI.Traces(this._client);
   turns: TurnsAPI.Turns = new TurnsAPI.Turns(this._client);
 
   /**
@@ -173,29 +186,38 @@ export class Sessions extends APIResource {
    *   });
    * ```
    */
-  create(body: SessionCreateParamsNonStreaming, options?: RequestOptions): APIPromise<AgentsAPI.AgentSession>;
-  create(
-    body: SessionCreateParamsStreaming,
+  create<T>(
+    body: SessionCreateParamsStreaming & { agent: { text: { format: AgentOutputFormat<T> } } },
     options?: RequestOptions,
-  ): APIPromise<Stream<AgentsAPI.AgentSessionEvent>>;
+  ): APIPromise<AgentSessionCreateStream<T>>;
+  create(body: SessionCreateParamsNonStreaming, options?: RequestOptions): APIPromise<AgentsAPI.AgentSession>;
+  create(body: SessionCreateParamsStreaming, options?: RequestOptions): APIPromise<AgentSessionCreateStream>;
   create(
     body: SessionCreateParamsBase,
     options?: RequestOptions,
-  ): APIPromise<Stream<AgentsAPI.AgentSessionEvent> | AgentsAPI.AgentSession>;
+  ): APIPromise<AgentSessionCreateStream | AgentsAPI.AgentSession>;
   create(
     body: SessionCreateParams,
     options?: RequestOptions,
-  ): APIPromise<AgentsAPI.AgentSession> | APIPromise<Stream<AgentsAPI.AgentSessionEvent>> {
-    return this._client.post(
-      '/agents/sessions',
-      resolveResourceRequestOptions(options, (options) => ({
-        body,
-        ...options,
-        headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
-        stream: body.stream ?? false,
-        __security: { bearerAuth: true },
-      })),
-    ) as APIPromise<AgentsAPI.AgentSession> | APIPromise<Stream<AgentsAPI.AgentSessionEvent>>;
+  ): APIPromise<AgentsAPI.AgentSession> | APIPromise<AgentSessionCreateStream> {
+    const output = captureAgentOutput(body, options);
+    return this._client
+      .post<AgentsAPI.AgentSession | Stream<AgentsAPI.AgentSessionEvent>>(
+        '/agents/sessions',
+        resolveResourceRequestOptions(output.options, (options) => ({
+          body: output.body,
+          ...options,
+          headers: buildHeaders([{ 'OpenAI-Beta': 'agents=v1' }, options?.headers]),
+          stream: output.body.stream ?? false,
+          __security: { bearerAuth: true },
+        })),
+      )
+      ._thenUnwrap((data, { options }) =>
+        // SAFETY: defaultParseResponse uses this same resolved flag to return the configured stream instance.
+        options.stream
+          ? withAgentTurnResult(data as Stream<AgentsAPI.AgentSessionEvent>, output.format)
+          : data,
+      ) as APIPromise<AgentsAPI.AgentSession> | APIPromise<AgentSessionCreateStream>;
   }
 
   /**
@@ -473,9 +495,8 @@ export namespace SessionCreateParams {
      * - `flex` - Uses the flex service tier.
      * - `priority` - Uses the priority service tier.
      * - `fast` - Uses the fast service tier.
-     * - `ultrafast` - Uses the ultrafast service tier.
      */
-    service_tier?: 'auto' | 'default' | 'flex' | 'priority' | 'fast' | 'ultrafast' | null;
+    service_tier?: 'auto' | 'default' | 'flex' | 'priority' | 'fast' | null;
 
     /**
      * Configuration for text generated by the agent.
@@ -543,9 +564,8 @@ export namespace SessionUpdateParams {
      * - `flex` - Uses the flex service tier.
      * - `priority` - Uses the priority service tier.
      * - `fast` - Uses the fast service tier.
-     * - `ultrafast` - Uses the ultrafast service tier.
      */
-    service_tier?: 'auto' | 'default' | 'flex' | 'priority' | 'fast' | 'ultrafast' | null;
+    service_tier?: 'auto' | 'default' | 'flex' | 'priority' | 'fast' | null;
   }
 
   export namespace Agent {
@@ -587,6 +607,7 @@ Sessions.Subagents = Subagents;
 Sessions.Artifacts = Artifacts;
 Sessions.Items = Items;
 Sessions.Events = Events;
+Sessions.Traces = Traces;
 Sessions.Turns = Turns;
 
 export declare namespace Sessions {
@@ -618,6 +639,13 @@ export declare namespace Sessions {
   export { Items as Items, type ItemListParams as ItemListParams };
 
   export { Events as Events, type EventCreateParams as EventCreateParams };
+
+  export {
+    Traces as Traces,
+    type SessionTrace as SessionTrace,
+    type SessionTracesPage as SessionTracesPage,
+    type TraceListParams as TraceListParams,
+  };
 
   export {
     Turns as Turns,

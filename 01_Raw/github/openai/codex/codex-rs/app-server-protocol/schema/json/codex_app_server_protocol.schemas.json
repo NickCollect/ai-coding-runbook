@@ -547,6 +547,30 @@
             },
             "method": {
               "enum": [
+                "thread/attachmentOwner/list"
+              ],
+              "title": "Thread/attachmentOwner/listRequestMethod",
+              "type": "string"
+            },
+            "params": {
+              "$ref": "#/definitions/v2/ThreadAttachmentOwnerListParams"
+            }
+          },
+          "required": [
+            "id",
+            "method",
+            "params"
+          ],
+          "title": "Thread/attachmentOwner/listRequest",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "id": {
+              "$ref": "#/definitions/v2/RequestId"
+            },
+            "method": {
+              "enum": [
                 "thread/attachment/remove"
               ],
               "title": "Thread/attachment/removeRequestMethod",
@@ -4843,6 +4867,26 @@
           "properties": {
             "method": {
               "enum": [
+                "thread/prediction/updated"
+              ],
+              "title": "Thread/prediction/updatedNotificationMethod",
+              "type": "string"
+            },
+            "params": {
+              "$ref": "#/definitions/v2/ThreadPredictionUpdatedNotification"
+            }
+          },
+          "required": [
+            "method",
+            "params"
+          ],
+          "title": "Thread/prediction/updatedNotification",
+          "type": "object"
+        },
+        {
+          "properties": {
+            "method": {
+              "enum": [
                 "thread/goal/cleared"
               ],
               "title": "Thread/goal/clearedNotificationMethod",
@@ -8405,8 +8449,7 @@
         "type": "string"
       },
       "CodexErrorInfo": {
-        "description": "This translation layer make sure that we expose codex error code in camel case.\n\nWhen an upstream HTTP status is available (for example, from the Responses API or a provider), it is forwarded in `httpStatusCode` on the relevant `codexErrorInfo` variant.",
-        "oneOf": [
+        "anyOf": [
           {
             "enum": [
               "contextWindowExceeded",
@@ -8543,8 +8586,15 @@
             ],
             "title": "ActiveTurnNotSteerableCodexErrorInfo",
             "type": "object"
+          },
+          {
+            "type": [
+              "string",
+              "object"
+            ]
           }
-        ]
+        ],
+        "description": "This translation layer make sure that we expose codex error code in camel case.\n\nWhen an upstream HTTP status is available (for example, from the Responses API or a provider), it is forwarded in `httpStatusCode` on the relevant `codexErrorInfo` variant."
       },
       "CodexResponseHandoffMode": {
         "enum": [
@@ -10712,7 +10762,7 @@
         "type": "object"
       },
       "CyberAccessProgram": {
-        "description": "Requested cyber treatment for a ChatGPT-authenticated Codex turn. Authorization and model-tier restrictions remain server-owned.",
+        "description": "Requested cyber treatment for an OpenAI model turn. Authorization and model-tier restrictions remain server-owned.",
         "enum": [
           "standard",
           "daybreakBlue",
@@ -14838,6 +14888,13 @@
               "null"
             ]
           },
+          "loginId": {
+            "description": "Identifies the explicit login attempt. Older servers omit this field.",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
           "name": {
             "type": "string"
           },
@@ -14909,6 +14966,14 @@
         "properties": {
           "authorizationUrl": {
             "type": "string"
+          },
+          "loginId": {
+            "default": null,
+            "description": "Identifies this login attempt across the response and completion notification. Older servers omit this field; current servers always return it.",
+            "type": [
+              "string",
+              "null"
+            ]
           }
         },
         "required": [
@@ -15611,16 +15676,12 @@
           "imageGeneration": {
             "type": "boolean"
           },
-          "namespaceTools": {
-            "type": "boolean"
-          },
           "webSearch": {
             "type": "boolean"
           }
         },
         "required": [
           "imageGeneration",
-          "namespaceTools",
           "webSearch"
         ],
         "title": "ModelProviderCapabilitiesReadResponse",
@@ -18628,6 +18689,37 @@
         "oneOf": [
           {
             "properties": {
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "role": {
+                "type": "string"
+              },
+              "tools": {
+                "items": true,
+                "type": "array"
+              },
+              "type": {
+                "enum": [
+                  "additional_tools"
+                ],
+                "title": "AdditionalToolsResponseItemType",
+                "type": "string"
+              }
+            },
+            "required": [
+              "role",
+              "tools",
+              "type"
+            ],
+            "title": "AdditionalToolsResponseItem",
+            "type": "object"
+          },
+          {
+            "properties": {
               "content": {
                 "items": {
                   "$ref": "#/definitions/v2/ContentItem"
@@ -21136,6 +21228,85 @@
         ],
         "type": "string"
       },
+      "ThreadAttachmentOwner": {
+        "description": "A thread that currently owns an attachment with the requested identity.",
+        "properties": {
+          "archived": {
+            "description": "Whether the owning thread is archived, not whether it is currently executing a turn.",
+            "type": "boolean"
+          },
+          "threadId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "archived",
+          "threadId"
+        ],
+        "type": "object"
+      },
+      "ThreadAttachmentOwnerListParams": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "description": "Parameters for reverse lookup by attachment identity within this server's store.",
+        "properties": {
+          "archived": {
+            "description": "Omitted or null returns all matches; false returns non-archived threads only.",
+            "type": [
+              "boolean",
+              "null"
+            ]
+          },
+          "attachmentType": {
+            "type": "string"
+          },
+          "cursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "identityKey": {
+            "type": "string"
+          },
+          "limit": {
+            "format": "uint32",
+            "minimum": 0.0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "attachmentType",
+          "identityKey"
+        ],
+        "title": "ThreadAttachmentOwnerListParams",
+        "type": "object"
+      },
+      "ThreadAttachmentOwnerListResponse": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "description": "One page of matching owners, including threads without their own user messages.",
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/definitions/v2/ThreadAttachmentOwner"
+            },
+            "type": "array"
+          },
+          "nextCursor": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ],
+        "title": "ThreadAttachmentOwnerListResponse",
+        "type": "object"
+      },
       "ThreadAttachmentRemoveParams": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "description": "Parameters for deleting an attachment by its stable thread-local identity.",
@@ -21525,6 +21696,17 @@
       "ThreadGoalClearParams": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "properties": {
+          "origin": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/v2/ThreadGoalMutationOrigin"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Missing provenance does not supply user authorization."
+          },
           "threadId": {
             "type": "string"
           }
@@ -21591,6 +21773,14 @@
         "title": "ThreadGoalGetResponse",
         "type": "object"
       },
+      "ThreadGoalMutationOrigin": {
+        "description": "Distinguishes explicit user actions from automatic goal lifecycle mutations.",
+        "enum": [
+          "user",
+          "automatic"
+        ],
+        "type": "string"
+      },
       "ThreadGoalSetParams": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "properties": {
@@ -21599,6 +21789,17 @@
               "string",
               "null"
             ]
+          },
+          "origin": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/v2/ThreadGoalMutationOrigin"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Missing provenance does not supply user authorization."
           },
           "status": {
             "anyOf": [
@@ -23002,6 +23203,69 @@
           "threadId"
         ],
         "title": "ThreadNameUpdatedNotification",
+        "type": "object"
+      },
+      "ThreadPredictionResult": {
+        "oneOf": [
+          {
+            "properties": {
+              "text": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "type": {
+                "enum": [
+                  "completed"
+                ],
+                "title": "CompletedThreadPredictionResultType",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "title": "CompletedThreadPredictionResult",
+            "type": "object"
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "failed"
+                ],
+                "title": "FailedThreadPredictionResultType",
+                "type": "string"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "title": "FailedThreadPredictionResult",
+            "type": "object"
+          }
+        ]
+      },
+      "ThreadPredictionUpdatedNotification": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "properties": {
+          "result": {
+            "$ref": "#/definitions/v2/ThreadPredictionResult"
+          },
+          "sourceTurnId": {
+            "type": "string"
+          },
+          "threadId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "result",
+          "sourceTurnId",
+          "threadId"
+        ],
+        "title": "ThreadPredictionUpdatedNotification",
         "type": "object"
       },
       "ThreadProjectUpdatedNotification": {

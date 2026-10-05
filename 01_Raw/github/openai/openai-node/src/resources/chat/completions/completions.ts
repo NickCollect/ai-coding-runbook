@@ -991,7 +991,8 @@ export interface ChatCompletionAudioParam {
    * The voice the model uses to respond. Supported built-in voices are `alloy`,
    * `ash`, `ballad`, `coral`, `echo`, `fable`, `nova`, `onyx`, `sage`, `shimmer`,
    * `marin`, and `cedar`. You may also provide a custom voice object with an `id`,
-   * for example `{ "id": "voice_1234" }`.
+   * for example `{ "id": "voice_1234" }`. Custom voices must be created from audio
+   * samples. Voices created from text prompts are supported only in Live.
    */
   voice:
     | string
@@ -1524,7 +1525,7 @@ export namespace ChatCompletionContentPartImage {
      * Specifies the detail level of the image. Learn more in the
      * [Vision guide](https://developers.openai.com/api/docs/guides/images-vision#choose-an-image-detail-level).
      */
-    detail?: 'auto' | 'low' | 'high';
+    detail?: 'auto' | 'low' | 'high' | 'original';
   }
 
   /**

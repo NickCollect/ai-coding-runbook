@@ -87,6 +87,7 @@ use codex_rollout::state_db;
 use codex_tools::ToolName;
 use codex_utils_absolute_path::AbsolutePathBuf;
 use codex_utils_output_truncation::TruncationPolicy;
+use codex_utils_output_truncation::truncate_mcp_tool_result;
 use codex_utils_output_truncation::truncate_text;
 use codex_utils_path_uri::PathUri;
 use codex_utils_pty::DEFAULT_OUTPUT_BYTES_CAP;
@@ -104,6 +105,7 @@ use tracing::field::Empty;
 use url::Url;
 
 mod account;
+pub(crate) mod conversation_history;
 mod telemetry;
 
 use account::McpToolAccountError;
@@ -212,15 +214,7 @@ pub(crate) async fn handle_mcp_tool_call(
     let item_metadata = McpToolCallItemMetadata::from_tool_metadata(&server, Some(&metadata));
     let runtime_config = prepared_call.config();
     let app_tool_policy = if server == CODEX_APPS_MCP_SERVER_NAME {
-        let annotations = metadata.annotations.as_ref();
-        AppToolPolicyEvaluator::new(&runtime_config.config_layer_stack).policy(AppToolPolicyInput {
-            connector_id: metadata.connector_id.as_deref(),
-            link_id: metadata.link_id.as_deref(),
-            tool_name: &tool_name,
-            tool_title: metadata.tool_title.as_deref(),
-            destructive_hint: annotations.and_then(|annotations| annotations.destructive_hint),
-            open_world_hint: annotations.and_then(|annotations| annotations.open_world_hint),
-        })
+        app_tool_policy(runtime_config, &metadata, &tool_name)
     } else {
         AppToolPolicy::default()
     };
@@ -881,6 +875,12 @@ async fn augment_mcp_tool_request_meta_with_sandbox_state(
         codex_linux_sandbox_exe: prepared_call.config().codex_linux_sandbox_exe.clone(),
         sandbox_cwd,
         use_legacy_landlock: prepared_call.config().use_legacy_landlock,
+        use_mxc: prepared_call
+            .config()
+            .environment_use_mxc
+            .get(server_environment_id)
+            .copied()
+            .unwrap_or(false),
     })?;
 
     match meta.as_mut() {
@@ -983,39 +983,11 @@ fn truncate_mcp_tool_result_for_event(
     result: &Result<CallToolResult, String>,
 ) -> Result<CallToolResult, String> {
     match result {
-        Ok(call_tool_result) => {
-            // The app-server rebuilds `ThreadItem::McpToolCall` from this item,
-            // so avoid persisting multi-megabyte results in rollout storage.
-            let Ok(serialized) = serde_json::to_string(call_tool_result) else {
-                return Ok(call_tool_result.clone());
-            };
-            if serialized.len() <= MCP_TOOL_CALL_EVENT_RESULT_MAX_BYTES {
-                return Ok(call_tool_result.clone());
-            }
-
-            // A huge MCP result can put bytes in `content`, `structuredContent`,
-            // or `_meta`. Collapse the event copy to a text preview of the whole
-            // serialized result so the UI still has useful context without
-            // preserving a multi-megabyte structured payload.
-            //
-            // This budget applies to the preview text, not the final event JSON.
-            // The preview is itself serialized into a JSON string, so quotes and
-            // backslashes can be escaped again and the stored event may end up
-            // somewhat larger than this byte budget.
-            let truncated = truncate_text(
-                &serialized,
-                TruncationPolicy::Bytes(MCP_TOOL_CALL_EVENT_RESULT_MAX_BYTES),
-            );
-            Ok(CallToolResult {
-                content: vec![serde_json::json!({
-                    "type": "text",
-                    "text": truncated,
-                })],
-                structured_content: None,
-                is_error: call_tool_result.is_error,
-                meta: None,
-            })
-        }
+        Ok(call_tool_result) => Ok(truncate_mcp_tool_result(
+            call_tool_result,
+            MCP_TOOL_CALL_EVENT_RESULT_MAX_BYTES,
+        )
+        .into_owned()),
         Err(message) => Err(truncate_text(
             message,
             TruncationPolicy::Bytes(MCP_TOOL_CALL_EVENT_RESULT_MAX_BYTES),
@@ -1498,16 +1470,7 @@ async fn maybe_request_mcp_tool_approval(
     policy: McpToolApprovalPolicy,
 ) -> Option<ReviewDecision> {
     let turn_context = &step_context.turn;
-    let turn_state = sess
-        .active_turn
-        .lock()
-        .await
-        .as_ref()
-        .map(|active| Arc::clone(&active.turn_state));
-    let strict_auto_review = match turn_state {
-        Some(turn_state) => turn_state.lock().await.strict_auto_review_enabled(),
-        None => false,
-    };
+    let strict_auto_review = turn_context.strict_auto_review_enabled();
     let approvals_reviewer = connectors::mcp_approvals_reviewer_from_layers(
         &config.config_layer_stack,
         step_context
@@ -1796,6 +1759,22 @@ pub(crate) fn build_guardian_mcp_tool_review_request(
                 read_only_hint: annotations.read_only_hint,
             }),
     }
+}
+
+fn app_tool_policy(
+    config: &codex_mcp::McpConfig,
+    metadata: &McpToolApprovalMetadata,
+    tool_name: &str,
+) -> AppToolPolicy {
+    let annotations = metadata.annotations.as_ref();
+    AppToolPolicyEvaluator::new(&config.config_layer_stack).policy(AppToolPolicyInput {
+        connector_id: metadata.connector_id.as_deref(),
+        link_id: metadata.link_id.as_deref(),
+        tool_name,
+        tool_title: metadata.tool_title.as_deref(),
+        destructive_hint: annotations.and_then(|annotations| annotations.destructive_hint),
+        open_world_hint: annotations.and_then(|annotations| annotations.open_world_hint),
+    })
 }
 
 fn mcp_tool_metadata(
