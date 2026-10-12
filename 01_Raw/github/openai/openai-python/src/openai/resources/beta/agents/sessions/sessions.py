@@ -16,14 +16,6 @@ from .items import (
     ItemsWithStreamingResponse,
     AsyncItemsWithStreamingResponse,
 )
-from .turns import (
-    Turns,
-    AsyncTurns,
-    TurnsWithRawResponse,
-    AsyncTurnsWithRawResponse,
-    TurnsWithStreamingResponse,
-    AsyncTurnsWithStreamingResponse,
-)
 from .events import (
     Events,
     AsyncEvents,
@@ -51,6 +43,14 @@ from .artifacts import (
 from ....._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ....._utils import path_template, required_args, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
+from .turns.turns import (
+    Turns,
+    AsyncTurns,
+    TurnsWithRawResponse,
+    AsyncTurnsWithRawResponse,
+    TurnsWithStreamingResponse,
+    AsyncTurnsWithStreamingResponse,
+)
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import to_streamed_response_wrapper, async_to_streamed_response_wrapper
 from .....pagination import SyncCursorPage, AsyncCursorPage
@@ -69,7 +69,9 @@ from .....lib.streaming.agents import ToolHandler, AsyncToolHandler, AgentSessio
 from .....lib.beta.agents._output import bind_output_type, with_output_schema
 from .....lib.beta.agents._result import OutputT
 from .....types.beta.agent_session import AgentSession
+from .....lib.beta.agents._tool_error import ToolErrorHandler, AsyncToolErrorHandler
 from .....types.beta.environment_param import EnvironmentParam
+from .....lib.streaming.agents._dispatch import ToolDispatcher, AsyncToolDispatcher
 from .....types.beta.agent_session_deleted import AgentSessionDeleted
 from .....types.beta.agent_session_input_message_param import AgentSessionInputMessageParam
 
@@ -84,6 +86,7 @@ class Sessions(SyncAPIResource):
         input: str | Iterable[AgentSessionInputMessageParam],
         output_type: type[OutputT] | None = None,
         tool_handlers: Mapping[str, ToolHandler] | None = None,
+        on_tool_error: ToolErrorHandler | None = None,
         idempotency_key: str | Omit = omit,
         extra_headers: Headers | None = None,
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
@@ -92,13 +95,17 @@ class Sessions(SyncAPIResource):
 
         Use as a context manager. Only one caller may submit input to the session
         while this helper runs. Optional tool handlers receive an arguments dict;
-        their results are submitted automatically. See AgentSessionStream for details.
+        their results are submitted automatically. Use on_tool_error alongside
+        tool_handlers to log or monitor local argument, handler, and output failures.
+        The callback does not receive API or stream errors. Ordinary observer
+        exceptions are ignored. See AgentSessionStream for details.
         """
         return AgentSessionStream(
             self,
             session_id,
             input=input,
             tool_handlers=tool_handlers,
+            on_tool_error=on_tool_error,
             output_type=output_type,
             idempotency_key=idempotency_key,
             extra_headers=extra_headers,
@@ -154,10 +161,12 @@ class Sessions(SyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, ToolHandler] | None = None,
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -189,6 +198,9 @@ class Sessions(SyncAPIResource):
           metadata: Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters. Omission or null defaults to an empty map.
 
+          spend_control: Optional spending limit in USD cents. Omission or null creates an unlimited
+              session.
+
           stream: Whether to stream session events as server-sent events. Defaults to `false`.
 
           vault_ids: The IDs of vaults made available to the session.
@@ -209,11 +221,13 @@ class Sessions(SyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, ToolHandler] | None = None,
         stream: Literal[True],
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -246,6 +260,9 @@ class Sessions(SyncAPIResource):
           metadata: Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters. Omission or null defaults to an empty map.
 
+          spend_control: Optional spending limit in USD cents. Omission or null creates an unlimited
+              session.
+
           vault_ids: The IDs of vaults made available to the session.
 
           extra_headers: Send extra headers
@@ -264,11 +281,13 @@ class Sessions(SyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, ToolHandler] | None = None,
         stream: bool,
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -301,6 +320,9 @@ class Sessions(SyncAPIResource):
           metadata: Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters. Omission or null defaults to an empty map.
 
+          spend_control: Optional spending limit in USD cents. Omission or null creates an unlimited
+              session.
+
           vault_ids: The IDs of vaults made available to the session.
 
           extra_headers: Send extra headers
@@ -319,10 +341,12 @@ class Sessions(SyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, ToolHandler] | None = None,
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Literal[True] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -334,6 +358,11 @@ class Sessions(SyncAPIResource):
     ) -> AgentSession | AgentSessionEventStream[OutputT]:
         extra_headers = {"OpenAI-Beta": "agents=v1", **(extra_headers or {})}
         agent = with_output_schema(agent, output_type)
+        if tool_handlers is not None and stream is not True:
+            raise ValueError("tool_handlers requires stream=True")
+        dispatcher = (
+            ToolDispatcher(self, tool_handlers, extra_headers=extra_headers, timeout=timeout) if tool_handlers else None
+        )
         return self._post(
             "/agents/sessions",
             body=maybe_transform(
@@ -344,6 +373,7 @@ class Sessions(SyncAPIResource):
                     "agent_id": agent_id,
                     "input": input,
                     "metadata": metadata,
+                    "spend_control": spend_control,
                     "vault_ids": vault_ids,
                 },
                 session_create_params.SessionCreateParamsStreaming
@@ -351,7 +381,7 @@ class Sessions(SyncAPIResource):
                 else session_create_params.SessionCreateParamsNonStreaming,
             ),
             options=make_request_options(
-                post_parser=lambda response: bind_output_type(response, output_type),
+                post_parser=lambda response: bind_output_type(response, output_type, dispatcher),
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
@@ -409,6 +439,7 @@ class Sessions(SyncAPIResource):
         *,
         agent: session_update_params.Agent | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_update_params.SpendControl] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -429,6 +460,9 @@ class Sessions(SyncAPIResource):
               Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters.
 
+          spend_control: Omit to retain the limit; null or a null limit removes it without resetting
+              spend.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -446,6 +480,7 @@ class Sessions(SyncAPIResource):
                 {
                     "agent": agent,
                     "metadata": metadata,
+                    "spend_control": spend_control,
                 },
                 session_update_params.SessionUpdateParams,
             ),
@@ -464,7 +499,7 @@ class Sessions(SyncAPIResource):
         *,
         after: str | Omit = omit,
         agent_id: str | Omit = omit,
-        limit: Optional[int] | Omit = omit,
+        limit: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -484,10 +519,9 @@ class Sessions(SyncAPIResource):
           agent_id: Only return sessions whose root agent has this ID. Omit to return sessions for
               all agents.
 
-          limit: The maximum number of resources to return.
+          limit: The maximum number of resources to return, between 1 and 100. Defaults to 20.
 
-          order: Sort order by the `created_at` timestamp. Use `asc` for ascending order or
-              `desc` for descending order. Defaults to `desc`.
+          order: The order in which resources are returned. Defaults to `desc`.
 
               - `asc` - Returns resources in ascending order.
               - `desc` - Returns resources in descending order.
@@ -574,6 +608,7 @@ class AsyncSessions(AsyncAPIResource):
         input: str | Iterable[AgentSessionInputMessageParam],
         output_type: type[OutputT] | None = None,
         tool_handlers: Mapping[str, AsyncToolHandler] | None = None,
+        on_tool_error: AsyncToolErrorHandler | None = None,
         idempotency_key: str | Omit = omit,
         extra_headers: Headers | None = None,
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
@@ -582,13 +617,17 @@ class AsyncSessions(AsyncAPIResource):
 
         Use as an async context manager. Only one caller may submit input to the session
         while this helper runs. Optional tool handlers receive an arguments dict;
-        their results are submitted automatically. See AsyncAgentSessionStream for details.
+        their results are submitted automatically. Use on_tool_error alongside
+        tool_handlers to log or monitor local argument, handler, and output failures.
+        The callback may be async; it does not receive API or stream errors.
+        Ordinary observer exceptions are ignored. See AsyncAgentSessionStream for details.
         """
         return AsyncAgentSessionStream(
             self,
             session_id,
             input=input,
             tool_handlers=tool_handlers,
+            on_tool_error=on_tool_error,
             output_type=output_type,
             idempotency_key=idempotency_key,
             extra_headers=extra_headers,
@@ -644,10 +683,12 @@ class AsyncSessions(AsyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, AsyncToolHandler] | None = None,
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -679,6 +720,9 @@ class AsyncSessions(AsyncAPIResource):
           metadata: Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters. Omission or null defaults to an empty map.
 
+          spend_control: Optional spending limit in USD cents. Omission or null creates an unlimited
+              session.
+
           stream: Whether to stream session events as server-sent events. Defaults to `false`.
 
           vault_ids: The IDs of vaults made available to the session.
@@ -699,11 +743,13 @@ class AsyncSessions(AsyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, AsyncToolHandler] | None = None,
         stream: Literal[True],
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -736,6 +782,9 @@ class AsyncSessions(AsyncAPIResource):
           metadata: Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters. Omission or null defaults to an empty map.
 
+          spend_control: Optional spending limit in USD cents. Omission or null creates an unlimited
+              session.
+
           vault_ids: The IDs of vaults made available to the session.
 
           extra_headers: Send extra headers
@@ -754,11 +803,13 @@ class AsyncSessions(AsyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, AsyncToolHandler] | None = None,
         stream: bool,
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -791,6 +842,9 @@ class AsyncSessions(AsyncAPIResource):
           metadata: Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters. Omission or null defaults to an empty map.
 
+          spend_control: Optional spending limit in USD cents. Omission or null creates an unlimited
+              session.
+
           vault_ids: The IDs of vaults made available to the session.
 
           extra_headers: Send extra headers
@@ -809,10 +863,12 @@ class AsyncSessions(AsyncAPIResource):
         *,
         environment: EnvironmentParam,
         output_type: type[OutputT] | None = None,
+        tool_handlers: Mapping[str, AsyncToolHandler] | None = None,
         agent: session_create_params.Agent | Omit = omit,
         agent_id: str | Omit = omit,
         input: Union[str, Iterable[AgentSessionInputMessageParam], None] | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_create_params.SpendControl] | Omit = omit,
         stream: Literal[False] | Literal[True] | Omit = omit,
         vault_ids: Optional[SequenceNotStr[str]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -824,6 +880,13 @@ class AsyncSessions(AsyncAPIResource):
     ) -> AgentSession | AsyncAgentSessionEventStream[OutputT]:
         extra_headers = {"OpenAI-Beta": "agents=v1", **(extra_headers or {})}
         agent = with_output_schema(agent, output_type)
+        if tool_handlers is not None and stream is not True:
+            raise ValueError("tool_handlers requires stream=True")
+        dispatcher = (
+            AsyncToolDispatcher(self, tool_handlers, extra_headers=extra_headers, timeout=timeout)
+            if tool_handlers
+            else None
+        )
         return await self._post(
             "/agents/sessions",
             body=await async_maybe_transform(
@@ -834,6 +897,7 @@ class AsyncSessions(AsyncAPIResource):
                     "agent_id": agent_id,
                     "input": input,
                     "metadata": metadata,
+                    "spend_control": spend_control,
                     "vault_ids": vault_ids,
                 },
                 session_create_params.SessionCreateParamsStreaming
@@ -841,7 +905,7 @@ class AsyncSessions(AsyncAPIResource):
                 else session_create_params.SessionCreateParamsNonStreaming,
             ),
             options=make_request_options(
-                post_parser=lambda response: bind_output_type(response, output_type),
+                post_parser=lambda response: bind_output_type(response, output_type, dispatcher),
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
@@ -899,6 +963,7 @@ class AsyncSessions(AsyncAPIResource):
         *,
         agent: session_update_params.Agent | Omit = omit,
         metadata: Optional[Dict[str, str]] | Omit = omit,
+        spend_control: Optional[session_update_params.SpendControl] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -919,6 +984,9 @@ class AsyncSessions(AsyncAPIResource):
               Up to 16 string key-value pairs, with keys up to 64 and values up to 512
               characters.
 
+          spend_control: Omit to retain the limit; null or a null limit removes it without resetting
+              spend.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -936,6 +1004,7 @@ class AsyncSessions(AsyncAPIResource):
                 {
                     "agent": agent,
                     "metadata": metadata,
+                    "spend_control": spend_control,
                 },
                 session_update_params.SessionUpdateParams,
             ),
@@ -954,7 +1023,7 @@ class AsyncSessions(AsyncAPIResource):
         *,
         after: str | Omit = omit,
         agent_id: str | Omit = omit,
-        limit: Optional[int] | Omit = omit,
+        limit: int | Omit = omit,
         order: Literal["asc", "desc"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -974,10 +1043,9 @@ class AsyncSessions(AsyncAPIResource):
           agent_id: Only return sessions whose root agent has this ID. Omit to return sessions for
               all agents.
 
-          limit: The maximum number of resources to return.
+          limit: The maximum number of resources to return, between 1 and 100. Defaults to 20.
 
-          order: Sort order by the `created_at` timestamp. Use `asc` for ascending order or
-              `desc` for descending order. Defaults to `desc`.
+          order: The order in which resources are returned. Defaults to `desc`.
 
               - `asc` - Returns resources in ascending order.
               - `desc` - Returns resources in descending order.

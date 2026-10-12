@@ -148,6 +148,8 @@ async fn independent_review_preserves_oversized_instruction_order() -> Result<()
         .inject_response_items(vec![
             responses::user_message_item(&followup),
             ResponseItem::Message {
+                status: None,
+                encrypted_content: None,
                 id: None,
                 role: "developer".to_owned(),
                 content: vec![ContentItem::InputText {
@@ -463,13 +465,16 @@ async fn review_respects_complete_context_budget(
             assert_eq!(compact_requests.len(), 1);
             let compact = &compact_requests[0];
             if matches!(reviewer_response, ReviewerResponse::FileImageContinuation) {
-                assert_eq!(
-                    image_store
-                        .uploads
-                        .lock()
-                        .expect("image upload tracker lock is not poisoned")
-                        .len(),
-                    1
+                let uploads = image_store
+                    .uploads
+                    .lock()
+                    .expect("image upload tracker lock is not poisoned");
+                let [upload] = uploads.as_slice() else {
+                    panic!("persistent Guardian should upload one image");
+                };
+                assert!(
+                    !upload.ephemeral,
+                    "persistent Guardian should request durable attachment storage"
                 );
                 // The file reservation also protects the compaction request itself: an output
                 // larger than its window is replaced before the summary request is sent.

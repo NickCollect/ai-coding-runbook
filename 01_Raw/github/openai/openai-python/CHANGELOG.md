@@ -1,5 +1,70 @@
 # Changelog
 
+## [3.29.0](https://github.com/openai/openai-python/compare/v3.28.0...v3.29.0) (2026-10-11)
+
+
+### Features
+
+* **api:** add billing_not_active session error code ([#4052](https://github.com/openai/openai-python/issues/4052)) ([c88b320](https://github.com/openai/openai-python/commit/c88b32012ef0c3ebac39c79512994985a553a24c))
+* **api:** add shida to named Live voices ([#4053](https://github.com/openai/openai-python/issues/4053)) ([7352cf5](https://github.com/openai/openai-python/commit/7352cf5c80cf46b0b7c23634fb7df47c28b0604b))
+* **api:** add vault updates and metadata filters ([#4047](https://github.com/openai/openai-python/issues/4047)) ([e72f493](https://github.com/openai/openai-python/commit/e72f4931f16ae74602968348461bd3cf50b2cec5))
+* **api:** align beta pagination limits and non-null parameters ([#4057](https://github.com/openai/openai-python/issues/4057)) ([800899e](https://github.com/openai/openai-python/commit/800899eeaf9e2696703452e73a5e95f1a31e12ce))
+
+
+### Chores
+
+* **api:** clarify decision creation documentation ([#4054](https://github.com/openai/openai-python/issues/4054)) ([16d3d3b](https://github.com/openai/openai-python/commit/16d3d3b3c33b1b4f01114a16e4c3eba2293799ba))
+* **api:** clarify Decisions question and answer descriptions ([#4051](https://github.com/openai/openai-python/issues/4051)) ([895d617](https://github.com/openai/openai-python/commit/895d617f948fef82075bc83a7a2141bd845fc057))
+* **api:** document 128-character safety identifiers ([#4050](https://github.com/openai/openai-python/issues/4050)) ([2c1ae52](https://github.com/openai/openai-python/commit/2c1ae5266a67303d82ea46c57be854deaa6e5676))
+* **api:** document decision choice constraints ([#4055](https://github.com/openai/openai-python/issues/4055)) ([b7a1990](https://github.com/openai/openai-python/commit/b7a1990353baec896ee5e04b40b9f2dc2925a4f5))
+* **api:** document Files API rate-limit responses ([#4049](https://github.com/openai/openai-python/issues/4049)) ([f6a3459](https://github.com/openai/openai-python/commit/f6a34593aa12eb8e6e89803590423b8cd2aa5933))
+
+## [3.28.0](https://github.com/openai/openai-python/compare/v3.27.0...v3.28.0) (2026-10-09)
+
+
+### Features
+
+* **api:** add agent environment suspension and expiration ([#4046](https://github.com/openai/openai-python/issues/4046)) ([6aa25a9](https://github.com/openai/openai-python/commit/6aa25a9959f451ef67de948b792779e3d130a9c2))
+
+
+### Chores
+
+* **deps:** bump astral-sh/setup-uv from 10.1.0 to 10.2.0 ([#4026](https://github.com/openai/openai-python/issues/4026)) ([8bfffd4](https://github.com/openai/openai-python/commit/8bfffd40158460d0f5e651590b95cfef5292d93e))
+* **deps:** bump CodeQL init and analyze to 4.38.2 ([#4025](https://github.com/openai/openai-python/issues/4025)) ([4f5e618](https://github.com/openai/openai-python/commit/4f5e6180bc089d50df1deda7726507cd89d86d67))
+* **deps:** update PyJWT security constraint to 2.14.0 ([#3991](https://github.com/openai/openai-python/issues/3991)) ([aaed2a7](https://github.com/openai/openai-python/commit/aaed2a767319b3bc0637e0522bf09a4c7f8f36fc))
+
+## [3.27.0](https://github.com/openai/openai-python/compare/v3.26.1...v3.27.0) (2026-10-09)
+
+
+### Features
+
+* **api:** add prewarmed hosted environments ([#4043](https://github.com/openai/openai-python/issues/4043)) ([c511a77](https://github.com/openai/openai-python/commit/c511a77159bc870f31c34388311b7cc62ef15f08))
+
+## [3.26.1](https://github.com/openai/openai-python/compare/v3.26.0...v3.26.1) (2026-10-08)
+
+
+### Bug Fixes
+
+* **api:** correct custom voice creation parameters ([#4038](https://github.com/openai/openai-python/issues/4038)) ([b9bc5c1](https://github.com/openai/openai-python/commit/b9bc5c141d395165939eccfcfe42d1ed8219ec6a))
+
+## [3.26.0](https://github.com/openai/openai-python/compare/v3.25.0...v3.26.0) (2026-10-06)
+
+
+### Features
+
+* **api:** add standalone Decisions support ([#4033](https://github.com/openai/openai-python/issues/4033)) ([b99e3e4](https://github.com/openai/openai-python/commit/b99e3e4eee03e99eebc2c762eee9d73fdd4b0eff))
+
+## [3.25.0](https://github.com/openai/openai-python/compare/v3.24.0...v3.25.0) (2026-10-06)
+
+
+### Features
+
+* **agents:** observe local tool failures ([#4028](https://github.com/openai/openai-python/issues/4028)) ([95d9645](https://github.com/openai/openai-python/commit/95d9645128cb370b9b04413492b864179602c008))
+* **agents:** run local tools during streamed session creation ([#4027](https://github.com/openai/openai-python/issues/4027)) ([919b623](https://github.com/openai/openai-python/commit/919b6236382f3f9f76d8453efb9f9ad03cff1126))
+* **api:** add agent turn items and usage source grouping ([#4030](https://github.com/openai/openai-python/issues/4030)) ([bd74c4e](https://github.com/openai/openai-python/commit/bd74c4ec0a48eaa648b9199df7f6686e1eb5af2b))
+* **lib:** export type_to_response_format_param publicly ([#2993](https://github.com/openai/openai-python/issues/2993)) ([becc1d2](https://github.com/openai/openai-python/commit/becc1d20eed83c1b8d85e15dc131a372d9dc7813))
+* **tools:** support tool search (defer_loading=true) in typed function helpers ([#4029](https://github.com/openai/openai-python/issues/4029)) ([eec627f](https://github.com/openai/openai-python/commit/eec627f27b88729a095404bc2df7e32fa657dc88))
+
 ## [3.24.0](https://github.com/openai/openai-python/compare/v3.23.0...v3.24.0) (2026-10-02)
 
 

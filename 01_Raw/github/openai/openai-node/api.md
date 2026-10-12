@@ -21,6 +21,20 @@ Types:
 - <code><a href="./src/resources/shared.ts">ResponseFormatTextPython</a></code>
 - <code><a href="./src/resources/shared.ts">ResponsesModel</a></code>
 
+# Decisions
+
+Types:
+
+- <code><a href="./src/resources/decisions.ts">Decision</a></code>
+- <code><a href="./src/resources/decisions.ts">DecisionInputImage</a></code>
+- <code><a href="./src/resources/decisions.ts">DecisionInputMessage</a></code>
+- <code><a href="./src/resources/decisions.ts">DecisionInputPart</a></code>
+- <code><a href="./src/resources/decisions.ts">DecisionInputText</a></code>
+
+Methods:
+
+- <code title="post /decisions">client.decisions.<a href="./src/resources/decisions.ts">create</a>({ ...params }) -> Decision</code>
+
 # Completions
 
 Types:
@@ -465,11 +479,13 @@ Types:
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionDeleted</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentConnectedEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentDisconnectedEvent</a></code>
+- <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentExpiredEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentFailedEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentPendingEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentReadyEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentResetEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentState</a></code>
+- <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEnvironmentSuspendedEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionErrorEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionEvent</a></code>
 - <code><a href="./src/resources/beta/agents/agents.ts">AgentSessionFailedEvent</a></code>
@@ -553,7 +569,9 @@ Types:
 
 Methods:
 
+- <code title="post /agents/environments">client.beta.agents.environments.<a href="./src/resources/beta/agents/environments/environments.ts">create</a>({ ...params }) -> EnvironmentInfo</code>
 - <code title="get /agents/environments/{environment_id}">client.beta.agents.environments.<a href="./src/resources/beta/agents/environments/environments.ts">retrieve</a>(environmentID) -> EnvironmentInfo</code>
+- <code title="get /agents/environments">client.beta.agents.environments.<a href="./src/resources/beta/agents/environments/environments.ts">list</a>({ ...params }) -> EnvironmentInfosPage</code>
 
 #### Files
 
@@ -594,6 +612,7 @@ Methods:
 
 - <code title="post /vaults">client.beta.agents.vaults.<a href="./src/resources/beta/agents/vaults/vaults.ts">create</a>({ ...params }) -> Vault</code>
 - <code title="get /vaults/{vault_id}">client.beta.agents.vaults.<a href="./src/resources/beta/agents/vaults/vaults.ts">retrieve</a>(vaultID) -> Vault</code>
+- <code title="post /vaults/{vault_id}">client.beta.agents.vaults.<a href="./src/resources/beta/agents/vaults/vaults.ts">update</a>(vaultID, { ...params }) -> Vault</code>
 - <code title="get /vaults">client.beta.agents.vaults.<a href="./src/resources/beta/agents/vaults/vaults.ts">list</a>({ ...params }) -> VaultsPage</code>
 - <code title="delete /vaults/{vault_id}">client.beta.agents.vaults.<a href="./src/resources/beta/agents/vaults/vaults.ts">delete</a>(vaultID) -> VaultDeleted</code>
 
@@ -697,12 +716,18 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/beta/agents/sessions/turns.ts">Turn</a></code>
+- <code><a href="./src/resources/beta/agents/sessions/turns/turns.ts">Turn</a></code>
 
 Methods:
 
-- <code title="get /agents/sessions/{session_id}/turns/{turn_id}">client.beta.agents.sessions.turns.<a href="./src/resources/beta/agents/sessions/turns.ts">retrieve</a>(turnID, { ...params }) -> Turn</code>
-- <code title="get /agents/sessions/{session_id}/turns">client.beta.agents.sessions.turns.<a href="./src/resources/beta/agents/sessions/turns.ts">list</a>(sessionID, { ...params }) -> TurnsPage</code>
+- <code title="get /agents/sessions/{session_id}/turns/{turn_id}">client.beta.agents.sessions.turns.<a href="./src/resources/beta/agents/sessions/turns/turns.ts">retrieve</a>(turnID, { ...params }) -> Turn</code>
+- <code title="get /agents/sessions/{session_id}/turns">client.beta.agents.sessions.turns.<a href="./src/resources/beta/agents/sessions/turns/turns.ts">list</a>(sessionID, { ...params }) -> TurnsPage</code>
+
+##### Items
+
+Methods:
+
+- <code title="get /agents/sessions/{session_id}/turns/{turn_id}/items">client.beta.agents.sessions.turns.items.<a href="./src/resources/beta/agents/sessions/turns/items.ts">list</a>(turnID, { ...params }) -> AgentSessionItemsConversationCursorPage</code>
 
 ## Responses
 
@@ -875,6 +900,7 @@ Types:
 - <code><a href="./src/resources/beta/responses/responses.ts">BetaToolChoiceOptions</a></code>
 - <code><a href="./src/resources/beta/responses/responses.ts">BetaToolChoiceShell</a></code>
 - <code><a href="./src/resources/beta/responses/responses.ts">BetaToolChoiceTypes</a></code>
+- <code><a href="./src/resources/beta/responses/responses.ts">BetaToolSearchOutputNamespaceTool</a></code>
 - <code><a href="./src/resources/beta/responses/responses.ts">BetaToolSearchTool</a></code>
 - <code><a href="./src/resources/beta/responses/responses.ts">BetaWebSearchPreviewTool</a></code>
 - <code><a href="./src/resources/beta/responses/responses.ts">BetaWebSearchTool</a></code>
@@ -1165,6 +1191,7 @@ Types:
 - <code><a href="./src/resources/admin/organization/usage.ts">UsageCodeInterpreterSessionsResponse</a></code>
 - <code><a href="./src/resources/admin/organization/usage.ts">UsageCompletionsResponse</a></code>
 - <code><a href="./src/resources/admin/organization/usage.ts">UsageCostsResponse</a></code>
+- <code><a href="./src/resources/admin/organization/usage.ts">UsageDecisionsResponse</a></code>
 - <code><a href="./src/resources/admin/organization/usage.ts">UsageEmbeddingsResponse</a></code>
 - <code><a href="./src/resources/admin/organization/usage.ts">UsageFileSearchCallsResponse</a></code>
 - <code><a href="./src/resources/admin/organization/usage.ts">UsageImagesResponse</a></code>
@@ -1179,6 +1206,7 @@ Methods:
 - <code title="get /organization/usage/code_interpreter_sessions">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">codeInterpreterSessions</a>({ ...params }) -> UsageCodeInterpreterSessionsResponse</code>
 - <code title="get /organization/usage/completions">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">completions</a>({ ...params }) -> UsageCompletionsResponse</code>
 - <code title="get /organization/costs">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">costs</a>({ ...params }) -> UsageCostsResponse</code>
+- <code title="get /organization/usage/decisions">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">decisions</a>({ ...params }) -> UsageDecisionsResponse</code>
 - <code title="get /organization/usage/embeddings">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">embeddings</a>({ ...params }) -> UsageEmbeddingsResponse</code>
 - <code title="get /organization/usage/file_search_calls">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">fileSearchCalls</a>({ ...params }) -> UsageFileSearchCallsResponse</code>
 - <code title="get /organization/usage/images">client.admin.organization.usage.<a href="./src/resources/admin/organization/usage.ts">images</a>({ ...params }) -> UsageImagesResponse</code>
@@ -1313,6 +1341,7 @@ Types:
 - <code><a href="./src/resources/admin/organization/external-storage.ts">ExternalStorageConfiguration</a></code>
 - <code><a href="./src/resources/admin/organization/external-storage.ts">ExternalStorageDeleted</a></code>
 - <code><a href="./src/resources/admin/organization/external-storage.ts">GcpExternalStorageProvider</a></code>
+- <code><a href="./src/resources/admin/organization/external-storage.ts">OciExternalStorageProvider</a></code>
 
 Methods:
 

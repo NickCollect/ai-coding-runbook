@@ -44,6 +44,7 @@ use codex_protocol::openai_models::ModelPreset;
 use codex_protocol::openai_models::ReasoningEffort;
 use codex_utils_absolute_path::AbsolutePathBuf;
 use codex_utils_approval_presets::ApprovalPreset;
+use codex_utils_path_uri::PathUri;
 use strum_macros::IntoStaticStr;
 use uuid::Uuid;
 
@@ -53,6 +54,7 @@ use crate::bottom_pane::ApprovalRequest;
 use crate::bottom_pane::StatusLineItem;
 use crate::bottom_pane::TerminalTitleItem;
 use crate::chatwidget::AstraModelPickerAction;
+use crate::chatwidget::ConfiguredPetLoadGeneration;
 use crate::chatwidget::ConnectorScopeGeneration;
 use crate::chatwidget::ThreadUsageOutcome;
 use crate::chatwidget::UserMessage;
@@ -67,6 +69,12 @@ use codex_protocol::models::ActivePermissionProfile;
 use codex_realtime_webrtc::StartedRealtimeWebrtcSession;
 
 use crate::history_cell::HistoryCell;
+
+#[derive(Debug)]
+pub(crate) struct RealtimeWebrtcStartupFailure {
+    pub message: String,
+    pub cause: codex_realtime_webrtc::ConnectionError,
+}
 
 /// Global voice controls always apply to the one call's owner.
 #[derive(Clone, Copy, Debug)]
@@ -239,11 +247,12 @@ pub(crate) enum KeymapEditIntent {
     ReplaceOne { old_key: String },
 }
 
-/// Number of key strokes recorded by one `/keymap` capture.
+/// Kind of shortcut recorded by one `/keymap` capture.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub(crate) enum KeymapCaptureMode {
     SingleKey,
     Chord,
+    LeaderChord,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -274,6 +283,7 @@ pub(crate) struct AgentsOverviewThreadRefresh {
     pub(crate) last_messages: std::collections::HashMap<ThreadId, String>,
     pub(crate) recent_seed_complete: bool,
     pub(crate) discovery: Option<crate::app::agents_overview_discovery::AgentsOverviewDiscovery>,
+    pub(crate) pinned_thread_ids: Option<Option<Vec<ThreadId>>>,
 }
 
 #[derive(Debug, Default)]
@@ -295,6 +305,8 @@ pub(crate) enum AppEvent {
         notice: crate::security_setup::Notice,
     },
     OpenDaemonMenu,
+    ConfirmDaemonRestart,
+    RunDaemonRestart,
     ConfirmDaemonUpdate(crate::update_action::DaemonUpdateSource),
     RunDaemonUpdate(crate::update_action::DaemonUpdateSource),
     ReviewMisalignment(Arc<crate::chatwidget::MisalignmentReview>),
@@ -333,6 +345,18 @@ pub(crate) enum AppEvent {
     RenameAgentsOverviewThread {
         thread_id: ThreadId,
         name: String,
+    },
+    /// Move a task into or out of the shared pinned section.
+    ToggleAgentsOverviewPin {
+        thread_id: ThreadId,
+        pinned: bool,
+    },
+    /// Finish moving a task into or out of the shared pinned section.
+    AgentsOverviewPinToggled {
+        request_id: Uuid,
+        thread_id: ThreadId,
+        pinned: bool,
+        result: Result<(), String>,
     },
     /// Generate an editable title suggestion for the active rename prompt.
     SuggestThreadName {
@@ -426,7 +450,10 @@ pub(crate) enum AppEvent {
         server_name: String,
         request_id: AppServerRequestId,
         attempt_id: Uuid,
-        result: Result<codex_app_server_protocol::UserVerificationProof, String>,
+        result: Result<
+            codex_app_server_protocol::UserVerificationProof,
+            crate::app_command::UserVerificationFailure,
+        >,
     },
 
     /// Interrupt, fork, and retry a safety-buffered turn with the server-selected model.
@@ -882,6 +909,7 @@ pub(crate) enum AppEvent {
 
     /// Result of restoring the configured ambient pet during startup.
     ConfiguredPetLoaded {
+        generation: ConfiguredPetLoadGeneration,
         pet_id: String,
         result: Result<Option<crate::pets::AmbientPet>, String>,
     },
@@ -1215,7 +1243,7 @@ pub(crate) enum AppEvent {
     RealtimeWebrtcOfferCreated {
         thread_id: ThreadId,
         attempt_id: u64,
-        result: Result<StartedRealtimeWebrtcSession, String>,
+        result: Result<StartedRealtimeWebrtcSession, RealtimeWebrtcStartupFailure>,
     },
 
     /// Result of establishing the WebRTC connection for an active voice attempt.
@@ -1463,7 +1491,7 @@ pub(crate) enum AppEvent {
 
     /// Enable or disable a skill by path.
     SetSkillEnabled {
-        path: AbsolutePathBuf,
+        path: PathUri,
         enabled: bool,
     },
 
@@ -1597,6 +1625,20 @@ pub(crate) enum AppEvent {
 
     /// Remember the Command Center grouping across launches.
     PersistAgentsOverviewGrouping(codex_config::types::AgentsOverviewGrouping),
+
+    /// Open an existing editor above the configuration panel.
+    OpenConfigEditor(crate::config_panel::ConfigEditorHandoff),
+
+    /// Schedule a notification preview with time to switch away from the terminal.
+    TestConfigNotification,
+
+    /// Send the matching scheduled preview regardless of the configured focus condition.
+    SendConfigTestNotification {
+        generation: u64,
+    },
+
+    /// Requests saving a local `/config` preference and refreshing its effective value.
+    SaveConfigPreference(crate::config_panel::ConfigPreference),
 
     /// Save the transcript renderer preference for the next launch only.
     FullscreenTranscriptSelected {

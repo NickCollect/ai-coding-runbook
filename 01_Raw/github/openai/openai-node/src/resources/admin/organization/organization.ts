@@ -44,6 +44,7 @@ import {
   ExternalStorageDeleted,
   ExternalStorageListParams,
   GcpExternalStorageProvider,
+  OciExternalStorageProvider,
 } from './external-storage';
 import * as InvitesAPI from './invites';
 import {
@@ -95,6 +96,8 @@ import {
   UsageCompletionsResponse,
   UsageCostsParams,
   UsageCostsResponse,
+  UsageDecisionsParams,
+  UsageDecisionsResponse,
   UsageEmbeddingsParams,
   UsageEmbeddingsResponse,
   UsageFileSearchCallsParams,
@@ -195,6 +198,7 @@ export declare namespace Organization {
     type UsageCodeInterpreterSessionsResponse as UsageCodeInterpreterSessionsResponse,
     type UsageCompletionsResponse as UsageCompletionsResponse,
     type UsageCostsResponse as UsageCostsResponse,
+    type UsageDecisionsResponse as UsageDecisionsResponse,
     type UsageEmbeddingsResponse as UsageEmbeddingsResponse,
     type UsageFileSearchCallsResponse as UsageFileSearchCallsResponse,
     type UsageImagesResponse as UsageImagesResponse,
@@ -206,6 +210,7 @@ export declare namespace Organization {
     type UsageCodeInterpreterSessionsParams as UsageCodeInterpreterSessionsParams,
     type UsageCompletionsParams as UsageCompletionsParams,
     type UsageCostsParams as UsageCostsParams,
+    type UsageDecisionsParams as UsageDecisionsParams,
     type UsageEmbeddingsParams as UsageEmbeddingsParams,
     type UsageFileSearchCallsParams as UsageFileSearchCallsParams,
     type UsageImagesParams as UsageImagesParams,
@@ -266,6 +271,7 @@ export declare namespace Organization {
     type ExternalStorageConfiguration as ExternalStorageConfiguration,
     type ExternalStorageDeleted as ExternalStorageDeleted,
     type GcpExternalStorageProvider as GcpExternalStorageProvider,
+    type OciExternalStorageProvider as OciExternalStorageProvider,
     type ExternalStorageConfigurationsPage as ExternalStorageConfigurationsPage,
     type ExternalStorageCreateParams as ExternalStorageCreateParams,
     type ExternalStorageListParams as ExternalStorageListParams,

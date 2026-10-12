@@ -211,6 +211,7 @@ macro_rules! define_runtime_action_bindings {
             action: &str,
         ) -> Option<&'a [KeyBinding]> {
             match (context, action) {
+                ("global", "leader") => Some(runtime_keymap.chords.leader.as_slice()),
                 $(
                     $(
                         ($context, stringify!($action)) => {
@@ -428,6 +429,7 @@ define_runtime_action_bindings! {
         archive,
         delete,
         hide,
+        toggle_pin,
         toggle_grouping,
     ],
     "approval" => Approval, approval, approval [

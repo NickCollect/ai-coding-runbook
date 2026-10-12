@@ -114,6 +114,7 @@ use crate::app_backtrack::BacktrackState;
 use crate::app_backtrack::nth_user_position;
 use crate::app_backtrack::user_count;
 use crate::app_event::HistoryBatchEntryResponse;
+use crate::test_support::boxed_future;
 
 async fn drain_managed_worktree_start(app: &mut App, server: &mut AppServerSession) {
     if let Some((mode, name)) = app.pending_start_managed_worktree.take() {
@@ -857,6 +858,13 @@ async fn reset_thread_event_state_aborts_listener_tasks() {
 
     let mut app = make_test_app().await;
     let thread_id = ThreadId::new();
+    let side_thread_id = ThreadId::new();
+    let side_request = exec_approval_request(
+        side_thread_id,
+        "turn-1",
+        "call-1",
+        /*approval_id*/ None,
+    );
     let (started_tx, started_rx) = tokio::sync::oneshot::channel();
     let (dropped_tx, dropped_rx) = tokio::sync::oneshot::channel();
     let handle = tokio::spawn(async move {
@@ -865,6 +873,21 @@ async fn reset_thread_event_state_aborts_listener_tasks() {
         std::future::pending::<()>().await;
     });
     app.thread_event_listener_tasks.insert(thread_id, handle);
+    app.thread_event_listener_tasks
+        .insert(side_thread_id, tokio::spawn(std::future::pending()));
+    app.thread_event_channels.insert(
+        side_thread_id,
+        ThreadEventChannel::new(THREAD_EVENT_CHANNEL_CAPACITY),
+    );
+    app.thread_event_channels[&side_thread_id]
+        .store
+        .lock()
+        .await
+        .push_request(side_request.clone());
+    app.side_threads
+        .insert(side_thread_id, SideThreadState::new(thread_id));
+    app.pending_app_server_requests
+        .note_server_request(&side_request);
     app.pending_server_profiles.insert(
         thread_id,
         PermissionProfileSelection {
@@ -880,7 +903,19 @@ async fn reset_thread_event_state_aborts_listener_tasks() {
 
     app.reset_thread_event_state().await;
 
-    assert_eq!(app.thread_event_listener_tasks.is_empty(), true);
+    assert_eq!(
+        app.thread_event_listener_tasks
+            .keys()
+            .copied()
+            .collect::<Vec<_>>(),
+        vec![side_thread_id]
+    );
+    assert!(app.thread_event_channels.contains_key(&side_thread_id));
+    assert!(app.side_threads.contains_key(&side_thread_id));
+    assert!(
+        app.pending_app_server_requests
+            .contains_server_request(&side_request)
+    );
     assert!(app.pending_server_profiles.is_empty());
     time::timeout(Duration::from_millis(50), dropped_rx)
         .await
@@ -1346,7 +1381,8 @@ async fn replay_thread_snapshot_restores_the_matching_safety_buffer_prompt() {
         store.snapshot()
     };
 
-    let (mut chat_widget, _app_event_tx, _rx, _op_rx) = make_chatwidget_manual_with_sender().await;
+    let (mut chat_widget, _app_event_tx, _rx, _op_rx) =
+        boxed_future!(make_chatwidget_manual_with_sender()).await;
     chat_widget.handle_thread_session(test_thread_session(
         ThreadId::new(),
         test_path_buf("/tmp/other-project"),
@@ -1605,7 +1641,8 @@ async fn replay_thread_snapshot_in_progress_turn_restores_running_state_without_
     let (mut app, _app_event_rx, _op_rx) = make_test_app_with_channels().await;
     let thread_id = ThreadId::new();
     let session = test_thread_session(thread_id, test_path_buf("/tmp/project"));
-    let (chat_widget, _app_event_tx, _rx, _new_op_rx) = make_chatwidget_manual_with_sender().await;
+    let (chat_widget, _app_event_tx, _rx, _new_op_rx) =
+        boxed_future!(make_chatwidget_manual_with_sender()).await;
     app.chat_widget = chat_widget;
     app.chat_widget.handle_thread_session(session);
 
@@ -1892,7 +1929,8 @@ async fn replay_thread_snapshot_restores_collaboration_mode_without_input() {
         .capture_thread_input_state()
         .expect("expected collaboration-only input state");
 
-    let (chat_widget, _app_event_tx, _rx, _new_op_rx) = make_chatwidget_manual_with_sender().await;
+    let (chat_widget, _app_event_tx, _rx, _new_op_rx) =
+        boxed_future!(make_chatwidget_manual_with_sender()).await;
     app.chat_widget = chat_widget;
     app.chat_widget
         .set_plan_mode_reasoning_effort(Some(ReasoningEffortConfig::Low));
@@ -2001,6 +2039,11 @@ async fn token_usage_update_refreshes_status_line_with_runtime_context_window() 
         /*use_theme_colors*/ true,
     );
 
+    assert_eq!(
+        app.chat_widget.config_panel_tui.status_line,
+        app.chat_widget.local_settings.tui.status_line
+    );
+    assert!(app.chat_widget.config_panel_tui.status_line_use_colors);
     assert_eq!(app.chat_widget.status_line_text(), None);
 
     app.handle_thread_event_now(ThreadBufferedEvent::Notification(Box::new(
@@ -2890,6 +2933,17 @@ async fn handle_start_side_seeds_navigation_before_thread_started() -> Result<()
         )
         .expect("create source rollout"),
     )?;
+    let other_thread_id = ThreadId::from_string(
+        &app_test_support::create_fake_rollout(
+            config.codex_home.as_path(),
+            "2025-01-06T12-00-00",
+            "2025-01-06T12:00:00Z",
+            "Other task",
+            Some(config.model_provider_id.as_str()),
+            /*git_info*/ None,
+        )
+        .expect("create other rollout"),
+    )?;
     let mut app_server = Box::pin(crate::start_embedded_app_server_for_picker(&config)).await?;
     let started = app_server
         .resume_thread(
@@ -2969,6 +3023,19 @@ async fn handle_start_side_seeds_navigation_before_thread_started() -> Result<()
             app.chat_widget.config_ref()
         ))
     );
+    app.select_agents_overview_thread(&mut tui, &mut app_server, other_thread_id)
+        .await?;
+    app.select_agents_overview_thread(&mut tui, &mut app_server, parent_thread_id)
+        .await?;
+    Box::pin(app.handle_start_side(
+        &mut tui,
+        &mut app_server,
+        parent_thread_id,
+        /*user_message*/ None,
+    ))
+    .await?;
+    assert_eq!(app.active_thread_id, Some(side_thread_id));
+    assert_eq!(app.side_threads.len(), 1);
     app.select_agent_thread(&mut tui, &mut app_server, parent_thread_id)
         .await?;
     app.select_permission_profile(
@@ -5651,7 +5718,7 @@ async fn side_restore_user_message_puts_inline_question_back_in_composer() {
 }
 
 #[tokio::test]
-async fn side_discard_selection_keeps_current_side_thread() {
+async fn side_discard_selection_only_closes_the_active_side() {
     let mut app = make_test_app().await;
     let parent_thread_id = ThreadId::new();
     let side_thread_id = ThreadId::new();
@@ -5671,7 +5738,7 @@ async fn side_discard_selection_keeps_current_side_thread() {
     app.active_thread_id = Some(parent_thread_id);
     assert_eq!(
         app.side_thread_to_discard_after_switch(ThreadId::new()),
-        Some(side_thread_id)
+        None
     );
     assert_eq!(
         app.side_thread_to_discard_after_switch(side_thread_id),
@@ -6121,7 +6188,8 @@ async fn ctrl_l_clears_owned_history_and_preserves_the_draft() -> Result<()> {
 }
 
 async fn make_test_app() -> Box<App> {
-    let (mut chat_widget, app_event_tx, _rx, _op_rx) = make_chatwidget_manual_with_sender().await;
+    let (mut chat_widget, app_event_tx, _rx, _op_rx) =
+        boxed_future!(make_chatwidget_manual_with_sender()).await;
     let test_codex_home = chat_widget.test_codex_home.take();
     let config = chat_widget.config_ref().clone();
     let file_search = FileSearchManager::new(config.cwd.to_path_buf(), app_event_tx.clone());
@@ -6130,6 +6198,8 @@ async fn make_test_app() -> Box<App> {
 
     Box::new(App {
         feature_write_lock: Arc::default(),
+        config_notification_test_generation: 0,
+        config_notification_test_pending: None,
         model_catalog: chat_widget.model_catalog(),
         session_telemetry,
         app_event_tx,
@@ -6166,6 +6236,7 @@ async fn make_test_app() -> Box<App> {
         enhanced_keys_supported: false,
         keymap: crate::keymap::RuntimeKeymap::defaults(),
         key_chord_matcher: crate::keymap::KeyChordMatcher::default(),
+        routed_key_activation: None,
         commit_animation: None,
         status_line_invalid_items_warned: Arc::new(AtomicBool::new(false)),
         terminal_title_invalid_items_warned: Arc::new(AtomicBool::new(false)),
@@ -6187,6 +6258,7 @@ async fn make_test_app() -> Box<App> {
         },
         daemon_cli_executable: None,
         pending_update_action: None,
+        daemon_restart: None,
         pending_shutdown_exit_thread_id: None,
         windows_sandbox: WindowsSandboxState::default(),
         thread_event_channels: HashMap::new(),
@@ -6240,7 +6312,8 @@ pub(super) async fn make_test_app_with_channels() -> (
     tokio::sync::mpsc::UnboundedReceiver<AppEvent>,
     tokio::sync::mpsc::UnboundedReceiver<Op>,
 ) {
-    let (mut chat_widget, app_event_tx, rx, op_rx) = make_chatwidget_manual_with_sender().await;
+    let (mut chat_widget, app_event_tx, rx, op_rx) =
+        boxed_future!(make_chatwidget_manual_with_sender()).await;
     let test_codex_home = chat_widget.test_codex_home.take();
     let config = chat_widget.config_ref().clone();
     let file_search = FileSearchManager::new(config.cwd.to_path_buf(), app_event_tx.clone());
@@ -6250,6 +6323,8 @@ pub(super) async fn make_test_app_with_channels() -> (
     (
         Box::new(App {
             feature_write_lock: Arc::default(),
+            config_notification_test_generation: 0,
+            config_notification_test_pending: None,
             model_catalog: chat_widget.model_catalog(),
             session_telemetry,
             app_event_tx,
@@ -6286,6 +6361,7 @@ pub(super) async fn make_test_app_with_channels() -> (
             enhanced_keys_supported: false,
             keymap: crate::keymap::RuntimeKeymap::defaults(),
             key_chord_matcher: crate::keymap::KeyChordMatcher::default(),
+            routed_key_activation: None,
             commit_animation: None,
             status_line_invalid_items_warned: Arc::new(AtomicBool::new(false)),
             terminal_title_invalid_items_warned: Arc::new(AtomicBool::new(false)),
@@ -6307,6 +6383,7 @@ pub(super) async fn make_test_app_with_channels() -> (
             },
             daemon_cli_executable: None,
             pending_update_action: None,
+            daemon_restart: None,
             pending_shutdown_exit_thread_id: None,
             windows_sandbox: WindowsSandboxState::default(),
             thread_event_channels: HashMap::new(),
@@ -7224,6 +7301,7 @@ async fn resizing_empty_transcript_schedules_settled_size_recheck() {
 fn test_turn(turn_id: &str, status: TurnStatus, items: Vec<ThreadItem>) -> Turn {
     Turn {
         id: turn_id.to_string(),
+        root_turn_id: None,
         items_view: codex_app_server_protocol::TurnItemsView::Full,
         items,
         status,
@@ -8345,6 +8423,11 @@ async fn remembered_current_cwd_stays_at_launch_across_in_app_resumes() -> Resul
 
 #[tokio::test]
 async fn prompt_edit_reverts_earlier_and_first_visible_prompts_in_place() -> Result<()> {
+    // Allocate the whole scenario before Tokio polls it on the test thread.
+    boxed_future!(prompt_edit_reverts_earlier_and_first_visible_prompts_in_place_scenario()).await
+}
+
+async fn prompt_edit_reverts_earlier_and_first_visible_prompts_in_place_scenario() -> Result<()> {
     use codex_protocol::items::TurnItem;
     use codex_protocol::items::UserMessageItem;
     use codex_protocol::models::ImageReference;
@@ -8406,6 +8489,7 @@ async fn prompt_edit_reverts_earlier_and_first_visible_prompts_in_place() -> Res
         );
         for item in [
             RolloutItem::EventMsg(EventMsg::TurnStarted(TurnStartedEvent {
+                turn_attribution: None,
                 turn_id: turn_id.to_string(),
                 root_turn_id: None,
                 trace_id: None,
@@ -8425,6 +8509,7 @@ async fn prompt_edit_reverts_earlier_and_first_visible_prompts_in_place() -> Res
                 completed_at_ms: 0,
             })),
             RolloutItem::EventMsg(EventMsg::TurnComplete(TurnCompleteEvent {
+                root_turn_id: None,
                 turn_id: turn_id.to_string(),
                 last_agent_message: None,
                 error: None,
@@ -8811,6 +8896,7 @@ async fn replay_thread_snapshot_replays_turn_history_in_order() {
             turns: vec![
                 Turn {
                     id: "turn-1".to_string(),
+                    root_turn_id: None,
                     items_view: codex_app_server_protocol::TurnItemsView::Full,
                     items: vec![ThreadItem::UserMessage {
                         id: "user-1".to_string(),
@@ -8828,6 +8914,7 @@ async fn replay_thread_snapshot_replays_turn_history_in_order() {
                 },
                 Turn {
                     id: "turn-2".to_string(),
+                    root_turn_id: None,
                     items_view: codex_app_server_protocol::TurnItemsView::Full,
                     items: vec![
                         ThreadItem::UserMessage {

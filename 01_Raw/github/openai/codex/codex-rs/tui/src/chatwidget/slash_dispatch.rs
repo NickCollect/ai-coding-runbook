@@ -189,6 +189,9 @@ impl ChatWidget {
 
         match cmd {
             SlashCommand::Daybreak => {
+                if !self.config.features.enabled(Feature::CliDaybreak) {
+                    return;
+                }
                 if !self.daybreak_enabled {
                     if !self.daybreak_account_eligible() {
                         self.add_error_message("Daybreak requires the OpenAI provider with either ChatGPT sign-in or an API key with Daybreak support enabled.".into());
@@ -581,6 +584,9 @@ impl ChatWidget {
             }
             SlashCommand::Statusline => {
                 self.open_status_line_setup();
+            }
+            SlashCommand::Config => {
+                self.open_config_panel();
             }
             SlashCommand::Theme => {
                 self.open_theme_picker();
@@ -1238,7 +1244,7 @@ impl ChatWidget {
             plugins_command_enabled: self.config.features.enabled(Feature::Plugins),
             token_activity_command_enabled: self.has_codex_backend_auth,
             goal_command_enabled: self.config.features.enabled(Feature::Goals),
-            service_tier_commands_enabled: self.fast_mode_enabled(),
+            service_tier_commands_enabled: !self.current_model_service_tier_commands().is_empty(),
             daybreak_command_description: self.daybreak_command_description(),
             voice_command_enabled: self.realtime_conversation_available_for_thread,
             worktrees_enabled: self.config.features.enabled(Feature::Worktrees)
@@ -1330,6 +1336,7 @@ impl ChatWidget {
             | SlashCommand::Hooks
             | SlashCommand::Title
             | SlashCommand::Statusline
+            | SlashCommand::Config
             | SlashCommand::Theme
             | SlashCommand::Tui
             | SlashCommand::Pets => QueueDrain::Stop,

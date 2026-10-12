@@ -9,11 +9,17 @@ impl App {
         thread_id: ThreadId,
         enabled: bool,
     ) {
-        if self.active_thread_id != Some(thread_id) {
+        if !self
+            .chat_widget
+            .config_ref()
+            .features
+            .enabled(Feature::CliDaybreak)
+            || self.active_thread_id != Some(thread_id)
+        {
             return;
         }
         if enabled
-            && (!self.chat_widget.daybreak_turn_eligible(enabled)
+            && (!self.chat_widget.daybreak_account_eligible()
                 || !crate::daybreak::available(&self.chat_widget.model_catalog().models))
         {
             self.chat_widget.add_error_message(

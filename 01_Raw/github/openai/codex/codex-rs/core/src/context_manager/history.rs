@@ -12,6 +12,7 @@
 #[path = "history_user_authorization.rs"]
 mod user_authorization;
 
+use crate::context::BaseInstructionsFragment;
 use crate::context::ContextualUserFragment;
 use crate::context::ModelSwitchInstructions;
 use crate::context::is_guardian_context_message;
@@ -212,6 +213,7 @@ impl SharedConversationHistory {
         self.items
             .iter()
             .filter(|envelope| !is_guardian_context_message(&envelope.item))
+            .filter(|envelope| !codex_guardian_context::is_inherited_manual_approval(envelope))
             .map(|envelope| {
                 (
                     &envelope.item,
@@ -354,7 +356,9 @@ impl ContextManager {
                                     .iter()
                                     .filter_map(|content| match content {
                                         ContentItem::InputText { text }
-                                        | ContentItem::OutputText { text } => Some(text.as_str()),
+                                        | ContentItem::OutputText { text, .. } => {
+                                            Some(text.as_str())
+                                        }
                                         _ => None,
                                     })
                                     .collect::<Vec<_>>()
@@ -619,6 +623,11 @@ impl ContextManager {
         self.items.iter().map(|envelope| &envelope.item)
     }
 
+    pub(crate) fn has_tool_declarations(&self) -> bool {
+        self.raw_items()
+            .any(|item| matches!(item, ResponseItem::AdditionalTools { .. }))
+    }
+
     /// Returns annotated history items without cloning their response payloads.
     pub(crate) fn annotated_items(&self) -> &[ResponseItemEnvelope] {
         &self.items
@@ -653,8 +662,14 @@ impl ContextManager {
         &self,
         base_instructions: &BaseInstructions,
     ) -> Option<i64> {
-        let base_tokens =
-            i64::try_from(approx_token_count(&base_instructions.text)).unwrap_or(i64::MAX);
+        // Incremental windows already account for their recorded base instructions below.
+        let has_recorded_instructions =
+            self.raw_items().any(BaseInstructionsFragment::matches_item);
+        let base_tokens = if has_recorded_instructions {
+            0
+        } else {
+            i64::try_from(approx_token_count(&base_instructions.text)).unwrap_or(i64::MAX)
+        };
 
         let items_tokens = self
             .items
@@ -1087,7 +1102,7 @@ fn estimate_response_item_model_visible_bytes(item: &ResponseItem) -> i64 {
         ResponseItem::Message { content, .. } => content
             .iter()
             .map(|part| match part {
-                ContentItem::InputText { text } | ContentItem::OutputText { text } => {
+                ContentItem::InputText { text } | ContentItem::OutputText { text, .. } => {
                     text_bytes(text)
                 }
                 ContentItem::InputImage { image, detail } => {

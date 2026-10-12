@@ -31,11 +31,13 @@ export {
   type AgentSessionDeleted,
   type AgentSessionEnvironmentConnectedEvent,
   type AgentSessionEnvironmentDisconnectedEvent,
+  type AgentSessionEnvironmentExpiredEvent,
   type AgentSessionEnvironmentFailedEvent,
   type AgentSessionEnvironmentPendingEvent,
   type AgentSessionEnvironmentReadyEvent,
   type AgentSessionEnvironmentResetEvent,
   type AgentSessionEnvironmentState,
+  type AgentSessionEnvironmentSuspendedEvent,
   type AgentSessionErrorEvent,
   type AgentSessionEvent,
   type AgentSessionFailedEvent,
@@ -110,7 +112,13 @@ export {
   type AgentSessionItemsPage,
   type AgentsPage,
 } from './agents';
-export { Environments, type EnvironmentInfo } from './environments/index';
+export {
+  Environments,
+  type EnvironmentInfo,
+  type EnvironmentCreateParams,
+  type EnvironmentListParams,
+  type EnvironmentInfosPage,
+} from './environments/index';
 export {
   Sessions,
   type SessionCreateParams,
@@ -126,6 +134,7 @@ export {
   type VaultStatus,
   type VaultStatusFilter,
   type VaultCreateParams,
+  type VaultUpdateParams,
   type VaultListParams,
   type VaultsPage,
 } from './vaults/index';

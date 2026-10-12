@@ -1,5 +1,6 @@
 use super::AuthRequestTelemetryContext;
 use super::ModelClient;
+use super::NonIncrementalReason;
 use super::PendingUnauthorizedRetry;
 use super::Prompt;
 use super::UnauthorizedRecoveryExecution;
@@ -21,6 +22,7 @@ use codex_api::AgentIdentityTelemetry;
 use codex_api::ApiError;
 use codex_api::ResponseEvent;
 use codex_api::TransportError;
+use codex_history::HistoryInitialization;
 use codex_http_client::HttpClientFactory;
 use codex_http_client::OutboundProxyPolicy;
 use codex_login::AuthManager;
@@ -128,6 +130,7 @@ fn test_model_client_with_thread_id(
         /*include_timing_metrics*/ false,
         /*beta_features_header*/ None,
         /*concurrent_reasoning_summaries_enabled*/ false,
+        /*output_token_replay_enabled*/ false,
         /*attestation_provider*/ None,
         HttpClientFactory::new(OutboundProxyPolicy::ReqwestDefault),
         codex_model_provider::WorkspaceRoutingContext::new(
@@ -767,6 +770,10 @@ fn responses_request_preserves_result_metadata_above_previous_aggregate_budget()
         crate::tools::ExecutedToolCalls::new(&features, &codex_history::InitialHistory::New);
     let mut prompt = Prompt {
         input: history.clone(),
+        base_instructions: BaseInstructions {
+            text: String::new(),
+            ..Default::default()
+        },
         ..Default::default()
     };
     // Follow the sampling path: budget the request copy before client serialization.
@@ -939,11 +946,75 @@ fn websocket_incremental_reuse_tracks_raw_result_metadata() -> anyhow::Result<()
                 continuation.items,
                 continuation.from_untraced_warmup,
             )),
-            expect_incremental.then_some(("previous-response".to_string(), vec![follow_up], false)),
+            if expect_incremental {
+                Ok(("previous-response".to_string(), vec![follow_up], false))
+            } else {
+                Err(NonIncrementalReason::InputMismatch {
+                    previous: "custom_tool_call_output",
+                    current: "custom_tool_call_output",
+                })
+            },
             "{scenario}",
         );
     }
     Ok(())
+}
+
+#[test]
+fn websocket_continuation_reports_unavailable_response_state() {
+    let client = test_model_client(SessionSource::Cli);
+    let request = client
+        .build_responses_request(
+            &Prompt::default(),
+            &test_model_info(),
+            /*effort*/ None,
+            codex_protocol::config_types::ReasoningSummary::None,
+            /*service_tier*/ None,
+            &test_responses_metadata_for_client(
+                &client,
+                /*turn_id*/ None,
+                format!("{}:0", client.state.thread_id),
+                /*parent_thread_id*/ None,
+                TestCodexResponsesRequestKind::Turn,
+            ),
+            /*include_internal*/ true,
+        )
+        .expect("build continuation request");
+    let mut session = client.new_session();
+    session.websocket_session.last_request = Some(request.clone());
+    assert_eq!(
+        session.prepare_websocket_request(&request).err(),
+        Some(NonIncrementalReason::NoPreviousResponse),
+    );
+
+    let (sender, receiver) = tokio::sync::oneshot::channel();
+    session.websocket_session.last_response_rx = Some(receiver);
+    assert_eq!(
+        session.prepare_websocket_request(&request).err(),
+        Some(NonIncrementalReason::NoPreviousResponse),
+    );
+    drop(sender);
+
+    let (sender, receiver) = tokio::sync::oneshot::channel();
+    drop(sender);
+    session.websocket_session.last_response_rx = Some(receiver);
+    assert_eq!(
+        session.prepare_websocket_request(&request).err(),
+        Some(NonIncrementalReason::NoPreviousResponse),
+    );
+
+    let (sender, receiver) = tokio::sync::oneshot::channel();
+    sender
+        .send(super::LastResponse {
+            response_id: String::new(),
+            items_added: Vec::new(),
+        })
+        .unwrap();
+    session.websocket_session.last_response_rx = Some(receiver);
+    assert_eq!(
+        session.prepare_websocket_request(&request).err(),
+        Some(NonIncrementalReason::NoPreviousResponseId),
+    );
 }
 
 #[tokio::test]
@@ -976,6 +1047,10 @@ async fn responses_http_preserves_raw_tool_metadata_for_openai_custom_endpoint()
     })));
     let prompt = Prompt {
         input: vec![output.clone()],
+        base_instructions: BaseInstructions {
+            text: String::new(),
+            ..Default::default()
+        },
         ..Default::default()
     };
     let responses_metadata = test_responses_metadata_for_client(
@@ -1014,12 +1089,14 @@ async fn responses_http_preserves_raw_tool_metadata_for_openai_custom_endpoint()
     Ok(())
 }
 
-#[test]
-fn responses_lite_prefix_ids_track_thread_and_payload() -> anyhow::Result<()> {
+#[test_case::test_case(false; "standard")]
+#[test_case::test_case(true; "responses_lite")]
+fn prefix_ids_track_thread_and_payload(responses_lite: bool) -> anyhow::Result<()> {
     let thread_id = ThreadId::new();
     let client = test_model_client_with_thread_id(thread_id, SessionSource::Cli);
     let mut model = test_model_info();
-    model.use_responses_lite = true;
+    model.use_responses_lite = responses_lite;
+    let instructions_index = usize::from(responses_lite);
     let mut tool = codex_tools::FreeformTool {
         name: "exec".to_string(),
         description: "Execute JavaScript.".to_string(),
@@ -1061,25 +1138,38 @@ fn responses_lite_prefix_ids_track_thread_and_payload() -> anyhow::Result<()> {
 
     prompt.base_instructions.text.push_str(" with an update");
     let changed_instructions = build(&client, &prompt)?;
-    assert_eq!(changed_instructions.input[0], original.input[0]);
-    assert_ne!(changed_instructions.input[1].id(), original.input[1].id());
+    assert_ne!(
+        changed_instructions.input[instructions_index].id(),
+        original.input[instructions_index].id()
+    );
 
     tool.description
         .push_str(" Updated execution instructions.");
     prompt.tools = vec![codex_tools::ToolSpec::Freeform(tool)].into();
     let changed_tools = build(&client, &prompt)?;
-    assert_ne!(
-        changed_tools.input[0].id(),
-        changed_instructions.input[0].id()
+    assert_eq!(
+        changed_tools.input[instructions_index],
+        changed_instructions.input[instructions_index]
     );
-    assert_eq!(changed_tools.input[1], changed_instructions.input[1]);
+    if responses_lite {
+        assert_eq!(changed_instructions.input[0], original.input[0]);
+        assert_ne!(
+            changed_tools.input[0].id(),
+            changed_instructions.input[0].id()
+        );
+    }
 
     let independent = build(
         &test_model_client_with_thread_id(ThreadId::new(), SessionSource::Cli),
         &prompt,
     )?;
-    assert_ne!(independent.input[0].id(), changed_tools.input[0].id());
-    assert_ne!(independent.input[1].id(), changed_tools.input[1].id());
+    assert_ne!(
+        independent.input[instructions_index].id(),
+        changed_tools.input[instructions_index].id()
+    );
+    if responses_lite {
+        assert_ne!(independent.input[0].id(), changed_tools.input[0].id());
+    }
     Ok(())
 }
 
@@ -1345,9 +1435,13 @@ fn started_inference_attempt(temp: &TempDir) -> anyhow::Result<InferenceTraceAtt
 
 fn output_message(id: &str, text: &str) -> ResponseItem {
     ResponseItem::Message {
+        status: None,
+        encrypted_content: None,
         id: Some(codex_protocol::ResponseItemId::with_suffix("msg", id)),
         role: "assistant".to_string(),
         content: vec![ContentItem::OutputText {
+            annotations: None,
+            logprobs: None,
             text: text.to_string(),
         }],
         phase: None,
@@ -1453,13 +1547,14 @@ fn build_ws_client_metadata_includes_window_lineage_and_turn_metadata() {
 
     let thread_id = client.state.thread_id.to_string();
     let expected_window_id = format!("{thread_id}:1");
-    let responses_metadata = test_responses_metadata_for_client(
+    let mut responses_metadata = test_responses_metadata_for_client(
         &client,
         Some("turn-123"),
         expected_window_id.clone(),
         Some(parent_thread_id),
         TestCodexResponsesRequestKind::Turn,
     );
+    responses_metadata.history_initialization = Some(HistoryInitialization::WarmFork);
     let client_metadata = client.build_ws_client_metadata(
         &responses_metadata,
         /*include_internal*/ true,
@@ -1472,6 +1567,7 @@ fn build_ws_client_metadata_includes_window_lineage_and_turn_metadata() {
             .expect("turn metadata"),
     )
     .expect("valid turn metadata");
+    assert_eq!(turn_metadata["history_initialization"], "warm_fork");
     for (client_key, metadata_key, expected) in [
         (
             X_CODEX_INSTALLATION_ID_HEADER,
@@ -1929,6 +2025,7 @@ fn model_client_with_counting_attestation(
         /*include_timing_metrics*/ false,
         /*beta_features_header*/ None,
         /*concurrent_reasoning_summaries_enabled*/ false,
+        /*output_token_replay_enabled*/ false,
         Some(Arc::new(CountingAttestationProvider {
             calls: attestation_calls.clone(),
         })),

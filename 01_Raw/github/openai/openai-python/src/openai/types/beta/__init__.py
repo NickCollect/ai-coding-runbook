@@ -313,8 +313,14 @@ from .beta_response_input_text_content_param import (
 from .beta_response_mcp_call_completed_event import (
     BetaResponseMcpCallCompletedEvent as BetaResponseMcpCallCompletedEvent,
 )
+from .beta_tool_search_output_namespace_tool import (
+    BetaToolSearchOutputNamespaceTool as BetaToolSearchOutputNamespaceTool,
+)
 from .agent_browser_origin_access_param_param import (
     AgentBrowserOriginAccessParamParam as AgentBrowserOriginAccessParamParam,
+)
+from .agent_session_environment_expired_event import (
+    AgentSessionEnvironmentExpiredEvent as AgentSessionEnvironmentExpiredEvent,
 )
 from .agent_session_environment_pending_event import (
     AgentSessionEnvironmentPendingEvent as AgentSessionEnvironmentPendingEvent,
@@ -360,6 +366,9 @@ from .agent_browser_authentication_submit_param import (
 )
 from .agent_session_environment_connected_event import (
     AgentSessionEnvironmentConnectedEvent as AgentSessionEnvironmentConnectedEvent,
+)
+from .agent_session_environment_suspended_event import (
+    AgentSessionEnvironmentSuspendedEvent as AgentSessionEnvironmentSuspendedEvent,
 )
 from .agent_session_turn_output_text_done_event import (
     AgentSessionTurnOutputTextDoneEvent as AgentSessionTurnOutputTextDoneEvent,
@@ -444,6 +453,9 @@ from .beta_response_shell_call_command_added_event import (
 )
 from .beta_response_shell_call_command_delta_event import (
     BetaResponseShellCallCommandDeltaEvent as BetaResponseShellCallCommandDeltaEvent,
+)
+from .beta_tool_search_output_namespace_tool_param import (
+    BetaToolSearchOutputNamespaceToolParam as BetaToolSearchOutputNamespaceToolParam,
 )
 from .beta_container_network_policy_allowlist_param import (
     BetaContainerNetworkPolicyAllowlistParam as BetaContainerNetworkPolicyAllowlistParam,

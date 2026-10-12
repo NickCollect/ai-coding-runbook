@@ -2,6 +2,8 @@ use anyhow::Context as _;
 use anyhow::ensure;
 use base64::Engine;
 use base64::engine::general_purpose::STANDARD as BASE64_STANDARD;
+use codex_protocol::protocol::TurnEnvironmentRequest;
+use codex_protocol::protocol::TurnEnvironmentRequests;
 use std::collections::BTreeMap;
 use std::collections::HashMap;
 use std::ffi::OsStr;
@@ -84,14 +86,13 @@ use codex_protocol::protocol::McpStartupStatus;
 use codex_protocol::protocol::McpToolCallBeginEvent;
 use codex_protocol::protocol::Op;
 use codex_protocol::protocol::ThreadSettingsOverrides;
-use codex_protocol::protocol::TurnEnvironmentSelection;
-use codex_protocol::protocol::TurnEnvironmentSelections;
 use codex_protocol::protocol::TurnSettingsUpdate;
 use codex_protocol::protocol::TurnSettingsUpdateOutcome;
 use codex_protocol::request_user_input::RequestUserInputAnswer;
 use codex_protocol::request_user_input::RequestUserInputResponse;
 use codex_protocol::turn_input::TurnInput;
 use codex_protocol::user_input::UserInput;
+use codex_utils_absolute_path::AbsolutePathBuf;
 use codex_utils_cargo_bin::cargo_bin;
 use codex_utils_path_uri::PathUri;
 use core_test_support::apps_test_server::AppsTestServer;
@@ -815,11 +816,11 @@ async fn environment_mcp_policy_filters_runtime_config_and_model_tools(
     submit_thread_settings(
         &fixture.codex,
         ThreadSettingsOverrides {
-            environments: Some(TurnEnvironmentSelections::new(
+            environments: Some(TurnEnvironmentRequests::new(
                 fixture.config.cwd.clone(),
-                vec![TurnEnvironmentSelection {
+                vec![TurnEnvironmentRequest {
                     config: EnvironmentConfigState::Pending,
-                    ..selection.clone()
+                    ..selection.clone().into_request()
                 }],
             )),
             ..Default::default()
@@ -1006,11 +1007,11 @@ async fn future_environment_mcp_policy_applies_on_the_next_turn() -> anyhow::Res
         selected_capability_roots: Vec::new(),
     };
     let settings = |config| ThreadSettingsOverrides {
-        environments: Some(TurnEnvironmentSelections::new(
+        environments: Some(TurnEnvironmentRequests::new(
             fixture.config.cwd.clone(),
-            vec![TurnEnvironmentSelection {
+            vec![TurnEnvironmentRequest {
                 config: EnvironmentConfigState::Ready(config),
-                ..selection.clone()
+                ..selection.clone().into_request()
             }],
         )),
         ..Default::default()
@@ -2228,6 +2229,14 @@ async fn stdio_mcp_tool_call_includes_sandbox_state_meta(
         .with_model("gpt-5.5")
         .with_config(move |config| {
             config.prefer_mxc = prefer_mxc;
+            // The real CLI is explicitly provided; the test harness is not a CLI.
+            config.codex_self_exe = Some(
+                AbsolutePathBuf::from_absolute_path_checked(
+                    cargo_bin("codex").expect("codex binary"),
+                )
+                .expect("absolute codex binary path")
+                .into_path_buf(),
+            );
             insert_mcp_server(
                 config,
                 server_name,
@@ -2285,11 +2294,11 @@ async fn stdio_mcp_tool_call_includes_sandbox_state_meta(
         submit_thread_settings(
             &fixture.codex,
             ThreadSettingsOverrides {
-                environments: Some(TurnEnvironmentSelections::new(
+                environments: Some(TurnEnvironmentRequests::new(
                     fixture.config.cwd.clone(),
-                    vec![TurnEnvironmentSelection {
+                    vec![TurnEnvironmentRequest {
                         config: EnvironmentConfigState::Pending,
-                        ..selection.clone()
+                        ..selection.clone().into_request()
                     }],
                 )),
                 ..Default::default()
@@ -2432,6 +2441,10 @@ async fn stdio_mcp_tool_call_includes_sandbox_state_meta(
     assert_eq!(
         sandbox_state,
         SandboxState {
+            codex_executable: (remote_aware_environment_id()
+                == codex_config::DEFAULT_MCP_SERVER_ENVIRONMENT_ID)
+                .then(|| fixture.config.codex_self_exe.clone())
+                .flatten(),
             permission_profile: owner_permission_profile
                 .materialize_project_roots_with_path_uris(&owner_workspace_roots),
             codex_linux_sandbox_exe: fixture.config.codex_linux_sandbox_exe.clone(),

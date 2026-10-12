@@ -117,7 +117,7 @@ class Completions(SyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -278,7 +278,7 @@ class Completions(SyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
@@ -475,7 +475,7 @@ class Completions(SyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -618,7 +618,7 @@ class Completions(SyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -823,7 +823,7 @@ class Completions(SyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -957,7 +957,7 @@ class Completions(SyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -1162,7 +1162,7 @@ class Completions(SyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -1295,7 +1295,7 @@ class Completions(SyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Literal[True] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
@@ -1594,7 +1594,7 @@ class Completions(SyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -1751,7 +1751,7 @@ class AsyncCompletions(AsyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -1912,7 +1912,7 @@ class AsyncCompletions(AsyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
@@ -2109,7 +2109,7 @@ class AsyncCompletions(AsyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -2252,7 +2252,7 @@ class AsyncCompletions(AsyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -2457,7 +2457,7 @@ class AsyncCompletions(AsyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -2591,7 +2591,7 @@ class AsyncCompletions(AsyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,
@@ -2796,7 +2796,7 @@ class AsyncCompletions(AsyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -2929,7 +2929,7 @@ class AsyncCompletions(AsyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream: Optional[Literal[False]] | Literal[True] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
@@ -3228,7 +3228,7 @@ class AsyncCompletions(AsyncAPIResource):
         safety_identifier: Optional[str] | Omit = omit,
         seed: Optional[int] | Omit = omit,
         service_tier: Optional[Literal["auto", "default", "flex", "scale", "priority", "fast"]] | Omit = omit,
-        stop: Union[Optional[str], SequenceNotStr[str], None] | Omit = omit,
+        stop: Union[str, SequenceNotStr[str], None] | Omit = omit,
         store: Optional[bool] | Omit = omit,
         stream_options: Optional[ChatCompletionStreamOptionsParam] | Omit = omit,
         temperature: Optional[float] | Omit = omit,

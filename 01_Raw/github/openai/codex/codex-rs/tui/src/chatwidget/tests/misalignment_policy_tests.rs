@@ -166,6 +166,7 @@ async fn misalignment_policy_failure_stops_the_thread_and_renders_once() {
         address: "wss://remote.example.com".to_string(),
         version: "v1.0.0".to_string(),
         is_local_daemon: false,
+        is_managed_daemon: false,
     });
     chat.show_misalignment_policy_precaution();
     assert_chatwidget_snapshot!(
@@ -237,6 +238,7 @@ async fn misalignment_turn_end_discards_history_search_and_question_drafts() {
 fn review_details() -> codex_app_server_protocol::MisalignmentErrorDetails {
     codex_app_server_protocol::MisalignmentErrorDetails {
         error_type: Some("new_category".to_string()),
+        review_target: None,
         detailed_explanation: Some(
             "The agent proposed a change outside your instructions.".to_string(),
         ),

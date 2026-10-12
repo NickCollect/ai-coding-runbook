@@ -3,10 +3,12 @@
 import {
   AgentSessionStream,
   type AgentSessionStreamParams,
+  type AgentToolHandler,
 } from '../../../../lib/agents/agent-session-stream';
 import {
   type AgentSessionCreateStream,
   withAgentTurnResult,
+  captureCreationTools,
 } from '../../../../lib/beta/agents/agent-session-create-stream';
 import type { AgentOutputFormat } from '../../../../lib/beta/agents/output-format-types';
 import { captureAgentOutput } from '../../../../lib/beta/agents/parse-result';
@@ -31,10 +33,10 @@ import * as ItemsAPI from './items';
 import { ItemListParams, Items } from './items';
 import * as TracesAPI from './traces';
 import { SessionTrace, SessionTracesPage, TraceListParams, Traces } from './traces';
-import * as TurnsAPI from './turns';
-import { Turn, TurnListParams, TurnRetrieveParams, Turns, TurnsPage } from './turns';
 import * as SubagentsAPI from './subagents/subagents';
 import { SubagentListParams, SubagentRetrieveParams, Subagents } from './subagents/subagents';
+import * as TurnsAPI from './turns/turns';
+import { Turn, TurnListParams, TurnRetrieveParams, Turns, TurnsPage } from './turns/turns';
 import { APIPromise } from '../../../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../../../core/pagination';
 import type { Stream } from '../../../../core/streaming';
@@ -200,7 +202,8 @@ export class Sessions extends APIResource {
     body: SessionCreateParams,
     options?: RequestOptions,
   ): APIPromise<AgentsAPI.AgentSession> | APIPromise<AgentSessionCreateStream> {
-    const output = captureAgentOutput(body, options);
+    const creation = captureCreationTools(body, options);
+    const output = captureAgentOutput(creation.body, creation.options);
     return this._client
       .post<AgentsAPI.AgentSession | Stream<AgentsAPI.AgentSessionEvent>>(
         '/agents/sessions',
@@ -215,7 +218,13 @@ export class Sessions extends APIResource {
       ._thenUnwrap((data, { options }) =>
         // SAFETY: defaultParseResponse uses this same resolved flag to return the configured stream instance.
         options.stream
-          ? withAgentTurnResult(data as Stream<AgentsAPI.AgentSessionEvent>, output.format)
+          ? withAgentTurnResult(
+              data as Stream<AgentsAPI.AgentSessionEvent>,
+              output.format,
+              creation.handlers
+                ? { sessions: this, handlers: creation.handlers, options: output.options }
+                : undefined,
+            )
           : data,
       ) as APIPromise<AgentsAPI.AgentSession> | APIPromise<AgentSessionCreateStream>;
   }
@@ -449,6 +458,12 @@ export interface SessionCreateParamsBase {
   metadata?: { [key: string]: string } | null;
 
   /**
+   * Optional spending limit in USD cents. Omission or null creates an unlimited
+   * session.
+   */
+  spend_control?: SessionCreateParams.SpendControl | null;
+
+  /**
    * Whether to stream session events as server-sent events. Defaults to `false`.
    */
   stream?: boolean;
@@ -509,11 +524,23 @@ export namespace SessionCreateParams {
     tools?: Array<AgentsAPI.AgentToolParam> | null;
   }
 
+  /**
+   * Optional spending limit in USD cents. Omission or null creates an unlimited
+   * session.
+   */
+  export interface SpendControl {
+    /**
+     * Positive USD cents, or null to remove the limit.
+     */
+    limit: number | null;
+  }
+
   export type SessionCreateParamsNonStreaming = SessionsAPI.SessionCreateParamsNonStreaming;
   export type SessionCreateParamsStreaming = SessionsAPI.SessionCreateParamsStreaming;
 }
 
 export interface SessionCreateParamsNonStreaming extends SessionCreateParamsBase {
+  toolHandlers?: never;
   /**
    * Whether to stream session events as server-sent events. Defaults to `false`.
    */
@@ -521,6 +548,8 @@ export interface SessionCreateParamsNonStreaming extends SessionCreateParamsBase
 }
 
 export interface SessionCreateParamsStreaming extends SessionCreateParamsBase {
+  /** Beta: local function handlers run during iteration and are never sent to the API. */
+  toolHandlers?: Record<string, AgentToolHandler>;
   /**
    * Whether to stream session events as server-sent events. Defaults to `false`.
    */
@@ -539,6 +568,12 @@ export interface SessionUpdateParams {
    * characters.
    */
   metadata?: { [key: string]: string } | null;
+
+  /**
+   * Omit to retain the limit; null or a null limit removes it without resetting
+   * spend.
+   */
+  spend_control?: SessionUpdateParams.SpendControl | null;
 }
 
 export namespace SessionUpdateParams {
@@ -579,9 +614,20 @@ export namespace SessionUpdateParams {
       effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max' | null;
     }
   }
+
+  /**
+   * Omit to retain the limit; null or a null limit removes it without resetting
+   * spend.
+   */
+  export interface SpendControl {
+    /**
+     * Positive USD cents, or null to remove the limit.
+     */
+    limit: number | null;
+  }
 }
 
-export interface SessionListParams extends Omit<CursorPageParams, 'limit'> {
+export interface SessionListParams extends CursorPageParams {
   /**
    * Only return sessions whose root agent has this ID. Omit to return sessions for
    * all agents.
@@ -589,13 +635,7 @@ export interface SessionListParams extends Omit<CursorPageParams, 'limit'> {
   agent_id?: string;
 
   /**
-   * The maximum number of resources to return.
-   */
-  limit?: number | null;
-
-  /**
-   * Sort order by the `created_at` timestamp. Use `asc` for ascending order or
-   * `desc` for descending order. Defaults to `desc`.
+   * The order in which resources are returned. Defaults to `desc`.
    *
    * - `asc` - Returns resources in ascending order.
    * - `desc` - Returns resources in descending order.

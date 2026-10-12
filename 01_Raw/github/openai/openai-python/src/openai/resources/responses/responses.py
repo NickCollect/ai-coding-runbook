@@ -310,7 +310,7 @@ class Responses(SyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -609,7 +609,7 @@ class Responses(SyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -901,7 +901,7 @@ class Responses(SyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -2219,7 +2219,7 @@ class AsyncResponses(AsyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -2518,7 +2518,7 @@ class AsyncResponses(AsyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -2810,7 +2810,7 @@ class AsyncResponses(AsyncAPIResource):
 
           safety_identifier: A stable identifier used to help detect users of your application that may be
               violating OpenAI's usage policies. The IDs should be a string that uniquely
-              identifies each user, with a maximum length of 64 characters. We recommend
+              identifies each user, with a maximum length of 128 characters. We recommend
               hashing their username or email address, in order to avoid sending us any
               identifying information.
               [Learn more](https://developers.openai.com/api/docs/guides/safety-best-practices#implement-safety-identifiers).
@@ -4082,6 +4082,8 @@ def _make_tools(tools: Iterable[ParseableToolParam] | Omit) -> List[ToolParam] |
             function.model,
         )
 
+        # Retain applicable options added to the compatibility definition.
+        new_tool.update({key: value for key, value in function.items() if key not in new_tool})
         converted_tools.append(new_tool.cast())
 
     return converted_tools
@@ -4186,7 +4188,7 @@ class AsyncResponsesConnection:
 
     async def send(self, event: ResponsesClientEvent | ResponsesClientEventParam) -> None:
         data = (
-            event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
+            event.to_json(use_api_names=True, exclude_unset=True)
             if isinstance(event, BaseModel)
             else json.dumps(await async_maybe_transform(event, ResponsesClientEventParam))
         )
@@ -4438,7 +4440,7 @@ class AsyncResponsesConnectionManager:
         are automatically sent once the WebSocket connection opens.
         """
         data = (
-            event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
+            event.to_json(use_api_names=True, exclude_unset=True)
             if isinstance(event, BaseModel)
             else json.dumps(maybe_transform(event, ResponsesClientEventParam))
         )
@@ -4683,7 +4685,7 @@ class ResponsesConnection:
 
     def send(self, event: ResponsesClientEvent | ResponsesClientEventParam) -> None:
         data = (
-            event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
+            event.to_json(use_api_names=True, exclude_unset=True)
             if isinstance(event, BaseModel)
             else json.dumps(maybe_transform(event, ResponsesClientEventParam))
         )
@@ -4933,7 +4935,7 @@ class ResponsesConnectionManager:
         are automatically sent once the WebSocket connection opens.
         """
         data = (
-            event.to_json(use_api_names=True, exclude_defaults=True, exclude_unset=True)
+            event.to_json(use_api_names=True, exclude_unset=True)
             if isinstance(event, BaseModel)
             else json.dumps(maybe_transform(event, ResponsesClientEventParam))
         )

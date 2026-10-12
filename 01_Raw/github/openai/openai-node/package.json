@@ -1,6 +1,6 @@
 {
   "name": "openai",
-  "version": "7.28.0",
+  "version": "7.32.0",
   "description": "The official TypeScript library for the OpenAI API",
   "author": "OpenAI <support@openai.com>",
   "types": "dist/index.d.ts",
@@ -51,7 +51,7 @@
     "fast-glob": "^3.3.2",
     "iconv-lite": "^0.7.3",
     "jest": "^30.4.2",
-    "oxfmt": "0.67.0",
+    "oxfmt": "0.70.0",
     "oxlint": "1.82.0",
     "p-all": "^3.0.0",
     "publint": "^0.3.22",

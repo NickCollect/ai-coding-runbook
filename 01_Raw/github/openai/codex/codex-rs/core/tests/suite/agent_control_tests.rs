@@ -259,7 +259,7 @@ async fn host_threads_preserve_lineage_settings_and_resume_routing() -> anyhow::
         .thread_manager
         .start_thread(StartThreadOptions {
             reserved_thread_id: Some(ThreadId::new()),
-            environments: Some(vec![test.executor_environment().selection().clone()]),
+            environments: Some(vec![test.executor_environment().request()]),
             session_source: Some(SessionSource::SubAgent(SubAgentSource::ThreadSpawn {
                 parent_thread_id: root_id,
                 depth: 1,
@@ -278,6 +278,28 @@ async fn host_threads_preserve_lineage_settings_and_resume_routing() -> anyhow::
         (controller.identity(), Some(root_id))
     );
     assert_eq!(controller.service_tier(), Some("priority".to_string()));
+    let unread_mail = vec![codex_protocol::protocol::InterAgentCommunication::new(
+        AgentPath::root(),
+        AgentPath::root().join("worker").expect("valid child path"),
+        Vec::new(),
+        "Retain this in the host mailbox".into(),
+        /*trigger_turn*/ false,
+    )];
+    *controller.mail.lock().expect("mail lock") = unread_mail.clone();
+    let error = test
+        .thread_manager
+        .try_evict_v2_thread(Arc::clone(&child.thread))
+        .await
+        .expect_err("local eviction must reject a host-controlled child");
+    assert!(matches!(
+        error.details(),
+        CodexErrorDetails::InvalidRequest(_)
+    ));
+    assert!(Arc::ptr_eq(
+        &test.thread_manager.get_thread(child.thread_id).await?,
+        &child.thread,
+    ));
+    assert_eq!(controller.take_mailbox(child.thread_id), unread_mail);
     child.thread.ensure_rollout_materialized().await;
     child.thread.flush_rollout().await?;
     let saved = test
@@ -343,7 +365,7 @@ async fn host_threads_preserve_lineage_settings_and_resume_routing() -> anyhow::
             .thread_manager
             .start_thread(StartThreadOptions {
                 reserved_thread_id: Some(reserved_thread_id),
-                environments: Some(vec![test.executor_environment().selection().clone()]),
+                environments: Some(vec![test.executor_environment().request()]),
                 ..StartThreadOptions::new(child_config.clone())
             })
             .await;
@@ -402,7 +424,7 @@ async fn host_factory_follows_thread_lifecycle() -> anyhow::Result<()> {
     let root_id = test.session_configured.thread_id;
     let manager = &test.thread_manager;
     let options = || StartThreadOptions {
-        environments: Some(vec![test.executor_environment().selection().clone()]),
+        environments: Some(vec![test.executor_environment().request()]),
         ..StartThreadOptions::new(test.config.clone())
     };
     let internal = manager

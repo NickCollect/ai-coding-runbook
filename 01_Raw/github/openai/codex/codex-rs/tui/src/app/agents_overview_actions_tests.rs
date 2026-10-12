@@ -1,4 +1,5 @@
 use super::*;
+use crate::app::agents_overview_discovery::list_pinned_threads;
 use crate::app_event::AgentsOverviewAction;
 use codex_app_server_protocol::ClientRequest;
 use codex_app_server_protocol::RequestId;
@@ -10,6 +11,51 @@ use core_test_support::responses;
 use core_test_support::streaming_sse::StreamingSseChunk;
 use core_test_support::streaming_sse::start_streaming_sse_server;
 use pretty_assertions::assert_eq;
+
+#[tokio::test]
+async fn pin_action_updates_shared_section_state() -> Result<()> {
+    let mut app = make_test_app().await;
+    let (tx, mut rx) = tokio::sync::mpsc::unbounded_channel();
+    app.app_event_tx = AppEventSender::new(tx);
+    let mut app_server = crate::start_embedded_app_server_for_picker(&app.config).await?;
+    let started = app_server.start_thread(&app.config).await?;
+    let thread_id = started.session.thread_id;
+    let mut tui = crate::tui::test_support::make_test_tui()?;
+
+    for pinned in [true, false] {
+        Box::pin(app.handle_event(
+            &mut tui,
+            &mut app_server,
+            AppEvent::ToggleAgentsOverviewPin { thread_id, pinned },
+        ))
+        .await?;
+        assert!(app.agents_overview.pending_pin_change.is_some());
+        let completed = rx.recv().await.expect("pin request completes");
+        assert!(matches!(
+            &completed,
+            AppEvent::AgentsOverviewPinToggled { .. }
+        ));
+        app.agents_overview
+            .refresh_notifications
+            .insert(thread_id, Vec::new());
+        Box::pin(app.handle_event(&mut tui, &mut app_server, completed)).await?;
+        assert_eq!(app.agents_overview.pending_pin_change, None);
+        assert!(app.agents_overview.refresh_notifications.is_empty());
+        let threads = list_pinned_threads(&app_server.request_handle())
+            .await
+            .map_err(color_eyre::eyre::Report::msg)?
+            .expect("embedded app server supports shared thread sections");
+        assert_eq!(
+            threads
+                .iter()
+                .any(|thread| thread.id == started.session.thread_id.to_string()),
+            pinned
+        );
+    }
+
+    app_server.shutdown().await?;
+    Ok(())
+}
 
 #[tokio::test]
 async fn archive_confirmation_number_keys_act_immediately() {
@@ -421,7 +467,8 @@ async fn hiding_tasks_keeps_selection_adjacent_in_display_order() -> Result<()> 
             app.agents_overview.visible_thread_ids = view.thread_ids();
             app.chat_widget.show_bottom_pane_view(Box::new(view));
             let expected = match (grouping, filtered) {
-                (AgentsOverviewGrouping::Status, false) => vec![3, 2, 1, 4],
+                // The preceding filtered case retains Other 2; rediscovered tasks append.
+                (AgentsOverviewGrouping::Status, false) => vec![3, 1, 4, 2],
                 (AgentsOverviewGrouping::Status, true) => vec![3, 1, 4],
                 (AgentsOverviewGrouping::Project | AgentsOverviewGrouping::Model, false) => {
                     vec![3, 4, 2, 1]
@@ -586,6 +633,7 @@ async fn hidden_task_stays_hidden_through_activity_and_seed_until_explicit_resum
             last_messages: HashMap::new(),
             recent_seed_complete: true,
             discovery: None,
+            pinned_thread_ids: None,
         }),
     );
     assert_eq!(
@@ -865,6 +913,7 @@ async fn lifecycle_removes_background_and_current_tasks_without_losing_the_dashb
                 last_messages: HashMap::new(),
                 recent_seed_complete: true,
                 discovery: None,
+                pinned_thread_ids: None,
             }),
         );
         assert_eq!(
@@ -957,6 +1006,19 @@ async fn lifecycle_removes_background_and_current_tasks_without_losing_the_dashb
         // Canceling pagination must allow automatic refill to finish after removing the last task.
         app.agents_overview.initialized = true;
         app.agents_overview.view_state.lock().unwrap().loading = true;
+        // An invalidated refresh can already be queued when the lifecycle action
+        // aborts its task. It must not satisfy the wait for the replacement refresh.
+        app.app_event_tx
+            .send(AppEvent::AgentsOverviewThreadsLoaded {
+                request_id,
+                result: Ok(AgentsOverviewThreadRefresh {
+                    threads: HashMap::new(),
+                    last_messages: HashMap::new(),
+                    recent_seed_complete: true,
+                    discovery: None,
+                    pinned_thread_ids: None,
+                }),
+            });
         Box::pin(app.handle_event(&mut tui, &mut app_server, confirmed)).await?;
         if app.agents_overview.request_id.is_some() {
             finish_overview_refresh(&mut app, &app_server, &mut rx).await;

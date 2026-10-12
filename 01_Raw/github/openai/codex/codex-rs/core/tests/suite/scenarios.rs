@@ -89,8 +89,16 @@ use tokio::sync::oneshot;
 
 const ONE_PIXEL_PNG_BASE64: &str = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/iZk9HQAAAABJRU5ErkJggg==";
 
+#[path = "scenarios_retained_tool_outputs.rs"]
+mod retained_tool_outputs;
+
 #[path = "scenarios_incremental_tools.rs"]
 mod incremental_tools;
+#[path = "scenarios_incremental_tools_resume.rs"]
+mod incremental_tools_resume;
+
+#[path = "scenarios_code_mode_settled_helpers_tests.rs"]
+mod code_mode_settled_helpers;
 
 #[path = "scenarios_strict_3p_cache.rs"]
 mod strict_3p_cache;
@@ -101,8 +109,20 @@ mod agent_message_board;
 #[path = "scenarios_mailbox_preemption_tests.rs"]
 mod mailbox_preemption;
 
+#[path = "scenarios_agent_eviction_tests.rs"]
+mod agent_eviction;
+
+#[path = "scenarios_partial_answers.rs"]
+mod partial_answers;
+
+#[path = "scenarios_guardian_sender_context.rs"]
+mod guardian_sender_context;
+
 #[path = "scenarios_guardian_extra_policy.rs"]
 mod guardian_extra_policy;
+
+#[path = "scenarios_guardian_orchestrator_connector.rs"]
+mod guardian_orchestrator_connector;
 
 #[path = "scenarios_guardian_conversation_history_tests.rs"]
 mod guardian_conversation_history;
@@ -260,6 +280,20 @@ fn configure_scenario_catalog(config: &mut Config) {
     .expect("fixture config layers");
     config.model_catalog = Some(bundled_models_response().expect("bundled model catalog"));
     config.cloud_skill_enabled = false;
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn realtime_attachment_replacement_preserves_handoff_context() -> Result<()> {
+    let requests = super::realtime_attachment::attachment_replacement_scenario().await?;
+    insta::assert_snapshot!(
+        "realtime_attachment_replacement",
+        context_snapshot::format_request_history_snapshot(
+            "A replacement fences an older pending connection and stale stops; only the selected call starts a Codex handoff.",
+            &requests,
+            &ContextSnapshotOptions::default().rewrite_known_segments(),
+        )
+    );
+    Ok(())
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
@@ -530,7 +564,7 @@ async fn astra_switches_environments_for_the_rest_of_the_active_turn() -> Result
         .submit(Op::TurnSettings {
             turn_id: request.turn_id.clone(),
             update: TurnSettingsUpdate {
-                environments: Some(vec![other.clone()]),
+                environments: Some(vec![other.clone().into_request()]),
                 ..Default::default()
             },
             reply,
@@ -688,7 +722,101 @@ async fn astra_kickoff_with_skills_plugins_and_remote_compaction() -> Result<()>
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() -> Result<()> {
+async fn astra_plugin_policy_limits_visible_skills() -> Result<()> {
+    skip_if_no_network!(Ok(()));
+
+    let server = start_mock_server().await;
+    let home = Arc::new(TempDir::new()?);
+    write_scenario_capabilities(&home)?;
+    fs::rename(
+        home.path().join("plugins/cache/test"),
+        home.path().join("plugins/cache/openai-curated-remote"),
+    )?;
+    fs::write(
+        home.path().join("config.toml"),
+        r#"[features]
+plugins = true
+remote_plugin = true
+[skills.bundled]
+enabled = false
+[plugins._default]
+enabled = false
+[plugins."calendar@openai-curated-remote"]
+enabled = true
+"#,
+    )?;
+    let installed_plugins = ["calendar", "notes"].map(|name| json!({
+        "id": format!("plugins~Plugin_{name}"),
+        "name": name,
+        "scope": "GLOBAL",
+        "status": "ENABLED",
+        "installation_policy": "AVAILABLE",
+        "authentication_policy": "ON_USE",
+        "release": { "version": "local", "display_name": name, "description": name, "interface": {} },
+        "enabled": true,
+    }));
+    wiremock::Mock::given(wiremock::matchers::method("GET"))
+        .and(wiremock::matchers::path("/ps/plugins/installed"))
+        .respond_with(wiremock::ResponseTemplate::new(200).set_body_json(json!({
+            "plugins": installed_plugins,
+            "pagination": { "next_page_token": null },
+        })))
+        .mount(&server)
+        .await;
+    let mock = mount_sse_sequence(
+        &server,
+        vec![sse(vec![
+            ev_response_created("skills-response"),
+            ev_assistant_message("skills", "The calendar agenda skill is available."),
+            ev_completed("skills-response"),
+        ])],
+    )
+    .await;
+    let chatgpt_base_url = server.uri();
+    let test = test_codex()
+        .with_model("gpt-6-astra")
+        .with_home(home)
+        .with_auth(CodexAuth::create_dummy_chatgpt_auth_for_testing())
+        .with_extensions(skills_extensions())
+        .with_config(move |config| {
+            configure_scenario_catalog(config);
+            config.chatgpt_base_url = chatgpt_base_url;
+            config.workspace_roots = vec![config.cwd.clone()];
+        })
+        .build_with_auto_env(&server)
+        .await?;
+    let auth = test.thread_manager.auth_manager().auth().await;
+    test.thread_manager
+        .plugins_manager()
+        .reconcile_remote_installed_plugins(&test.config.plugins_config_input(), auth.as_ref())
+        .await?;
+    test.submit_turn("Plan a team kickoff. Which planning skills are available?")
+        .await?;
+
+    let requests = mock.requests();
+    insta::assert_snapshot!(
+        "astra_plugin_policy_limits_visible_skills",
+        context_snapshot::format_request_history_snapshot(
+            "Astra sees the permitted calendar plugin and standalone skills, but not the unlisted notes plugin.",
+            &requests,
+            &ContextSnapshotOptions::default().include_request_settings(),
+        )
+    );
+    Ok(())
+}
+
+#[derive(Clone, Copy)]
+enum ExecutorPluginDisablement {
+    ThreadSelection,
+    ConfigRefresh,
+}
+
+#[test_case::test_case(ExecutorPluginDisablement::ThreadSelection; "thread_selection")]
+#[test_case::test_case(ExecutorPluginDisablement::ConfigRefresh; "config_refresh")]
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context(
+    disablement: ExecutorPluginDisablement,
+) -> Result<()> {
     use codex_extension_api::ContextContributor;
     use codex_extension_api::ExtensionFuture;
     use codex_extension_api::SelectedPluginSnapshot;
@@ -708,9 +836,11 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
             input: WorldStateContributionInput<'a>,
         ) -> ExtensionFuture<'a, Vec<WorldStateSectionContribution>> {
             Box::pin(async move {
-                let first = self.first.lock().unwrap().take();
+                let first = self.first.lock().expect("world state pause lock").take();
                 if let Some(first) = first {
-                    first.send(input.turn_id.to_string()).unwrap();
+                    first
+                        .send(input.turn_id.to_string())
+                        .expect("world state pause receiver");
                     self.resume.notified().await;
                 }
                 Vec::new()
@@ -823,7 +953,10 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
     let mut thread_extension_init = ExtensionDataInit::new();
     thread_extension_init.insert(vec![selected_root(
         "plugin-skills",
-        PathUri::from_host_native_path(plugin_root)?,
+        PathUri::from_host_native_path(match disablement {
+            ExecutorPluginDisablement::ThreadSelection => plugin_root,
+            ExecutorPluginDisablement::ConfigRefresh => plugin_root.join("skills"),
+        })?,
     )]);
     let mut first_environment = test.executor_environment().selection().clone();
     let mut environment_config = environment_config_for_selection(&test.config, &first_environment);
@@ -837,9 +970,14 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
     let thread = test
         .thread_manager
         .start_thread(StartThreadOptions {
-            environments: Some(vec![first_environment]),
+            environments: Some(vec![first_environment.into_request()]),
             thread_extension_init,
-            disabled_plugin_ids: Some(vec!["plugin-skills".to_string()]),
+            disabled_plugin_ids: match disablement {
+                ExecutorPluginDisablement::ThreadSelection => {
+                    Some(vec!["plugin-skills".to_string()])
+                }
+                ExecutorPluginDisablement::ConfigRefresh => None,
+            },
             ..StartThreadOptions::new(test.config.clone())
         })
         .await?
@@ -855,13 +993,27 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
         .submit(Op::TurnSettings {
             turn_id,
             update: TurnSettingsUpdate {
-                environments: Some(vec![next_environment]),
+                environments: Some(vec![next_environment.into_request()]),
                 ..Default::default()
             },
             reply,
         })
         .await?;
     assert_eq!(outcome.await?, TurnSettingsUpdateOutcome::Applied);
+    if matches!(disablement, ExecutorPluginDisablement::ConfigRefresh) {
+        let current_config = thread.config().await;
+        let mut next_config = (*current_config).clone();
+        next_config.config_layer_stack = next_config.config_layer_stack.with_user_config(
+            &next_config.codex_home.join("config.toml"),
+            toml::from_str("[plugins._default]\nenabled = false")?,
+        )?;
+        assert_eq!(
+            thread
+                .refresh_runtime_config(current_config, next_config)
+                .await,
+            codex_core::ConfigRefreshOutcome::Published
+        );
+    }
     // Refresh shared MCP for the new roots (there is no Apps server in this test), then
     // replace its plugin list before the next step captures it or needs another refresh.
     let _ = thread.refresh_codex_apps_tools().await;
@@ -883,6 +1035,15 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
         .expect("first step's skills.list output");
     assert!(first_step_tool.contains("active-helper"));
     assert!(!first_step_tool.contains("next-helper"));
+    let plugin_was_enabled = matches!(disablement, ExecutorPluginDisablement::ConfigRefresh);
+    assert_eq!(
+        first_step_tool.contains("disabled-plugin-helper"),
+        plugin_was_enabled
+    );
+    assert_eq!(
+        requests[0].body_contains_text("disabled-plugin-helper"),
+        plugin_was_enabled
+    );
     let developer_texts = requests[1].message_input_texts("developer");
     let latest_skills = developer_texts
         .iter()
@@ -891,6 +1052,7 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
         .expect("second step's skills section");
     assert!(latest_skills.contains("next-helper"));
     assert!(!latest_skills.contains("active-helper"));
+    assert!(!latest_skills.contains("disabled-plugin-helper"));
     let mut bodies = requests
         .iter()
         .map(core_test_support::responses::ResponsesRequest::body_json)
@@ -898,7 +1060,9 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
     for body in &mut bodies {
         let input = body["input"].to_string();
         assert!(!input.contains("retired-helper"));
-        assert!(!input.contains("disabled-plugin-helper"));
+        if !plugin_was_enabled {
+            assert!(!input.contains("disabled-plugin-helper"));
+        }
         // Normalize opaque skill locators before snapshot truncation and hashing.
         body["input"] = serde_json::from_str(&input.replace(&skill_files, "<SKILLS_ROOT>/"))?;
         // Cargo and Bazel can serialize the JSON inside the tool output in different key orders.
@@ -912,10 +1076,20 @@ async fn astra_omits_disabled_executor_and_plugin_skills_from_model_context() ->
         }
     }
     let entries = bodies.iter().map(SnapshotEntry::body).collect::<Vec<_>>();
-    insta::assert_snapshot!(
-        "astra_disabled_executor_skills",
-        context_snapshot::format_context_snapshot(
+    let (snapshot_name, description) = match disablement {
+        ExecutorPluginDisablement::ThreadSelection => (
+            "astra_disabled_executor_skills",
             "Astra keeps disabled skills hidden and uses each step's selected skills after the environment changes during preparation.",
+        ),
+        ExecutorPluginDisablement::ConfigRefresh => (
+            "astra_executor_plugin_policy_refresh",
+            "Astra applies refreshed plugin policy to the next step while preserving earlier authorized skill context and tool output.",
+        ),
+    };
+    insta::assert_snapshot!(
+        snapshot_name,
+        context_snapshot::format_context_snapshot(
+            description,
             &entries,
             &ContextSnapshotOptions::default().include_request_settings(),
         )
@@ -1412,8 +1586,10 @@ async fn astra_continues_after_input_yields_a_code_mode_cell() -> Result<()> {
     Ok(())
 }
 
+#[test_case::test_case(false; "catalog")]
+#[test_case::test_case(true; "ranked_search")]
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
-async fn code_mode_catalog_messages() -> Result<()> {
+async fn code_mode_catalog_messages(ranked_search: bool) -> Result<()> {
     skip_if_no_network!(Ok(()));
     let server = start_mock_server().await;
     let apps =
@@ -1425,6 +1601,8 @@ async fn code_mode_catalog_messages() -> Result<()> {
             configure_scenario_catalog(config);
             config.chatgpt_base_url = apps.chatgpt_base_url;
             config.features.enable(Feature::Apps).expect("enable apps");
+            config.features.set_enabled(Feature::CodeModeToolSearch, ranked_search)
+                .expect("set ranked tool search");
             config.workspace_roots = vec![config.cwd.clone()];
             config.code_mode.disable_in_process_fallback = true;
             config.code_mode.default_exec_yield_time_ms = 1234;
@@ -1461,44 +1639,86 @@ async fn code_mode_catalog_messages() -> Result<()> {
         })
         .build_with_auto_env(&server)
         .await?;
-    let mock = mount_sse_sequence(
-        &server,
-        vec![
+    let exec_code = if ranked_search {
+        r#"const name = load("calendarToolName");
+text((await tools[name]({ timezone: "UTC" })).content[0].text);
+text('started'); yield_control(); text('finished');"#
+    } else {
+        "text('started'); yield_control(); text('finished');"
+    };
+    let mut events = vec![
+        sse(vec![
+            ev_response_created("exec-response"),
+            ev_custom_tool_call("exec-call", "exec", exec_code),
+            ev_completed("exec-response"),
+        ]),
+        sse(vec![
+            ev_response_created("wait-response"),
+            ev_function_call_with_namespace(
+                "wait-call",
+                "functions",
+                "wait",
+                if ranked_search {
+                    r#"{"cell_id":"2"}"#
+                } else {
+                    r#"{"cell_id":"1"}"#
+                },
+            ),
+            ev_completed("wait-response"),
+        ]),
+        sse(vec![
+            ev_assistant_message("final", "The cell started, yielded, and finished."),
+            ev_completed("final-response"),
+        ]),
+    ];
+    if ranked_search {
+        events.insert(
+            0,
             sse(vec![
-                ev_response_created("exec-response"),
+                ev_response_created("search-response"),
                 ev_custom_tool_call(
-                    "exec-call",
+                    "search-call",
                     "exec",
-                    "text('started'); yield_control(); text('finished');",
+                    r#"const result = await tools.tool_search({query: "calendar_timezone_option_99", limit: 1});
+store("calendarToolName", result.tools[0].name);
+text(result.tools[0].name);
+text(result.tools[0].description);"#,
                 ),
-                ev_completed("exec-response"),
+                ev_completed("search-response"),
             ]),
-            sse(vec![
-                ev_response_created("wait-response"),
-                ev_function_call_with_namespace(
-                    "wait-call",
-                    "functions",
-                    "wait",
-                    r#"{"cell_id":"1"}"#,
-                ),
-                ev_completed("wait-response"),
-            ]),
-            sse(vec![
-                ev_assistant_message("final", "The cell started, yielded, and finished."),
-                ev_completed("final-response"),
-            ]),
-        ],
-    )
-    .await;
-    test.submit_turn("Start a code cell, yield its initial output, then wait for its completion.")
-        .await?;
+        );
+    }
+    let mock = mount_sse_sequence(&server, events).await;
+    let prompt = if ranked_search {
+        "Find calendar timezone option 99, call it with UTC, then yield and wait for completion."
+    } else {
+        "Start a code cell, yield its initial output, then wait for its completion."
+    };
+    test.submit_turn(prompt).await?;
     let requests = mock.requests();
+    assert_eq!(requests.len(), if ranked_search { 4 } else { 3 });
+    if ranked_search {
+        assert!(requests[0].body_contains_text("await tools.tool_search("));
+        assert!(requests[1].body_contains_text("calendar_timezone_option_99(args:"));
+        assert!(requests[2].body_contains_text("called calendar_timezone_option_99"));
+    }
     assert!(requests[0].body_contains_text("Catalog discovery: find nested tools"));
     assert!(requests[0].body_contains_text("type CallToolResult<T = unknown>"));
-    insta::assert_snapshot!(
-        "code_mode_catalog_messages",
-        context_snapshot::format_request_history_snapshot(
+    let (snapshot_name, scenario) = if ranked_search {
+        (
+            "code_mode_catalog_messages_ranked_search",
+            "Ranked search prints a deferred tool declaration before a later code cell invokes it, yields, and completes through wait.",
+        )
+    } else {
+        (
+            "code_mode_catalog_messages",
             "Catalog Code Mode instructions and wait parameter descriptions accompany a yielded cell through completion.",
+        )
+    };
+    insta::assert_snapshot!(
+        snapshot_name,
+        context_snapshot::format_request_history_snapshot(
+            scenario,
             &requests,
             &ContextSnapshotOptions::default().include_request_settings(),
         )
@@ -1768,6 +1988,18 @@ async fn subagent_waits_for_its_inherited_environment_configuration() -> Result<
             "subagent_inherits_pending_environment"
         };
     insta::assert_snapshot!(snapshot_name, snapshot);
+    Ok(())
+}
+
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn prediction_fork_inherits_parent_context() -> Result<()> {
+    skip_if_no_network!(Ok(()));
+    let requests = super::reasoning_effort_override::prediction_fork_requests().await?;
+    insta::assert_snapshot!(context_snapshot::format_request_history_snapshot(
+        "A parent pins high request effort, then selects low. Its ephemeral prediction fork inherits the context and baseline, then selects medium on its first turn. Continuing the parent at medium produces the same request.",
+        &requests,
+        &ContextSnapshotOptions::default().include_request_settings(),
+    ));
     Ok(())
 }
 

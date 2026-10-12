@@ -2,9 +2,15 @@
 
 import { APIResource } from '../../../core/resource';
 import * as AgentsAPI from './agents';
-import * as TurnsAPI from './sessions/turns';
+import * as TurnsAPI from './sessions/turns/turns';
 import * as EnvironmentsAPI from './environments/environments';
-import { EnvironmentInfo, Environments } from './environments/environments';
+import {
+  EnvironmentCreateParams,
+  EnvironmentInfo,
+  EnvironmentInfosPage,
+  EnvironmentListParams,
+  Environments,
+} from './environments/environments';
 import * as SessionsAPI from './sessions/sessions';
 import {
   SessionCreateParams,
@@ -22,6 +28,7 @@ import {
   VaultListParams,
   VaultStatus,
   VaultStatusFilter,
+  VaultUpdateParams,
   Vaults,
   VaultsPage,
 } from './vaults/vaults';
@@ -1259,6 +1266,12 @@ export interface AgentSession {
    * The IDs of vaults made available to the session.
    */
   vault_ids: Array<string>;
+
+  /**
+   * Configured spending limit and best-effort consumption, in USD cents. Unlimited
+   * sessions omit this object.
+   */
+  spend_control?: AgentSession.SpendControl;
 }
 
 export namespace AgentSession {
@@ -1483,6 +1496,22 @@ export namespace AgentSession {
      */
     type: 'environment_connection';
   }
+
+  /**
+   * Configured spending limit and best-effort consumption, in USD cents. Unlimited
+   * sessions omit this object.
+   */
+  export interface SpendControl {
+    /**
+     * Best-effort recorded spend floored to whole USD cents, or null when unavailable.
+     */
+    consumed: number | null;
+
+    /**
+     * The configured positive limit in USD cents.
+     */
+    limit: number;
+  }
 }
 
 /**
@@ -1628,6 +1657,36 @@ export interface AgentSessionEnvironmentDisconnectedEvent {
    * The type of the object. Always `agent.session.environment.disconnected`.
    */
   type: 'agent.session.environment.disconnected';
+}
+
+/**
+ * Emitted after a suspended hosted session environment and its checkpoint expire.
+ */
+export interface AgentSessionEnvironmentExpiredEvent {
+  /**
+   * The current environment state.
+   */
+  environment: AgentSessionEnvironmentState;
+
+  /**
+   * The unique ID of the event.
+   */
+  event_id: string;
+
+  /**
+   * The ID of the session associated with the event.
+   */
+  session_id: string;
+
+  /**
+   * The ID of the turn associated with the event, when applicable.
+   */
+  turn_id: string | null;
+
+  /**
+   * The type of the object. Always `agent.session.environment.expired`.
+   */
+  type: 'agent.session.environment.expired';
 }
 
 /**
@@ -1777,9 +1836,12 @@ export interface AgentSessionEnvironmentState {
    * - `ready` - The environment is ready to connect.
    * - `connected` - The environment is connected.
    * - `disconnected` - The environment is disconnected.
+   * - `suspended` - The environment is stopped and can be resumed from its private
+   *   checkpoint.
+   * - `expired` - The environment and its private checkpoint have expired.
    * - `failed` - The environment failed to connect.
    */
-  status: 'pending' | 'ready' | 'connected' | 'disconnected' | 'failed';
+  status: 'pending' | 'ready' | 'connected' | 'disconnected' | 'suspended' | 'expired' | 'failed';
 
   /**
    * The environment type.
@@ -1807,6 +1869,36 @@ export namespace AgentSessionEnvironmentState {
      */
     type: string;
   }
+}
+
+/**
+ * Emitted after an idle hosted session environment is checkpointed and stopped.
+ */
+export interface AgentSessionEnvironmentSuspendedEvent {
+  /**
+   * The current environment state.
+   */
+  environment: AgentSessionEnvironmentState;
+
+  /**
+   * The unique ID of the event.
+   */
+  event_id: string;
+
+  /**
+   * The ID of the session associated with the event.
+   */
+  session_id: string;
+
+  /**
+   * The ID of the turn associated with the event, when applicable.
+   */
+  turn_id: string | null;
+
+  /**
+   * The type of the object. Always `agent.session.environment.suspended`.
+   */
+  type: 'agent.session.environment.suspended';
 }
 
 /**
@@ -1840,6 +1932,8 @@ export interface AgentSessionErrorEvent {
 export type AgentSessionEvent =
   | AgentSessionErrorEvent
   | AgentSessionEnvironmentReadyEvent
+  | AgentSessionEnvironmentSuspendedEvent
+  | AgentSessionEnvironmentExpiredEvent
   | AgentSessionEnvironmentResetEvent
   | AgentOutputCommandExecutionOutputDeltaEvent
   | AgentSessionCreatedEvent
@@ -3768,6 +3862,7 @@ export namespace Environment {
 export type EnvironmentParam =
   | EnvironmentParam.EnvironmentParamNone
   | EnvironmentParam.EnvironmentParamOpenAIHosted
+  | EnvironmentParam.EnvironmentParamPrewarmed
   | EnvironmentParam.EnvironmentParamSelfHosted;
 
 export namespace EnvironmentParam {
@@ -3782,8 +3877,8 @@ export namespace EnvironmentParam {
   }
 
   /**
-   * An existing OpenAI-hosted environment or new inline/template-based hosted
-   * configuration.
+   * New inline/template-based hosted configuration. Use EnvironmentParamPrewarmed
+   * to attach an existing environment.
    */
   export interface EnvironmentParamOpenAIHosted {
     /**
@@ -3813,6 +3908,9 @@ export namespace EnvironmentParam {
      */
     env?: { [key: string]: string } | null;
 
+    /** Use EnvironmentParamPrewarmed to attach an existing environment instead. */
+    environment_id?: never;
+
     /**
      * A reusable hosted template applied before inline session configuration. Omitted
      * fields inherit the template; network overrides cannot broaden its policy.
@@ -3825,8 +3923,8 @@ export namespace EnvironmentParam {
     files?: Array<AgentsAPI.HostedEnvironmentFileParam> | null;
 
     /**
-     * Network access policy for the environment. Defaults to disabled for GA requests
-     * and enabled for beta requests.
+     * Network access policy for the environment. If omitted, the API version
+     * determines whether network access is enabled or disabled.
      */
     network?: EnvironmentParamOpenAIHosted.Network | null;
 
@@ -3852,6 +3950,11 @@ export namespace EnvironmentParam {
     skills?: Array<AgentsAPI.HostedSkillParam> | null;
   }
 
+  /** An existing hosted environment, with no inline or template configuration. */
+  export type EnvironmentParamPrewarmed = { type: 'openai_hosted'; environment_id: string } & {
+    [Field in Exclude<keyof EnvironmentParamOpenAIHosted, 'type' | 'environment_id'>]?: never;
+  };
+
   export namespace EnvironmentParamOpenAIHosted {
     /**
      * Desktop provisioning. Omission or null inherits the template setting, or
@@ -3865,8 +3968,8 @@ export namespace EnvironmentParam {
     }
 
     /**
-     * Network access policy for the environment. Defaults to disabled for GA requests
-     * and enabled for beta requests.
+     * Network access policy for the environment. If omitted, the API version
+     * determines whether network access is enabled or disabled.
      */
     export interface Network {
       /**
@@ -5003,6 +5106,13 @@ export interface SessionTurnError {
    * - `session_budget_exceeded` - The session has reached its usage budget.
    * - `usage_limit_exceeded` - The organization has reached a usage, plan, or
    *   billing limit.
+   * - `project_spend_limit_exceeded` - The project has reached its enforced spend
+   *   limit.
+   * - `organization_spend_limit_exceeded` - The organization has reached its
+   *   enforced spend limit.
+   * - `organization_usage_limit_exceeded` - The organization has reached its
+   *   OpenAI-assigned usage limit.
+   * - `billing_not_active` - Billing is not active for the account.
    * - `credit_balance_exhausted` - The organization has no API credits remaining.
    * - `rate_limit_exceeded` - The request exceeds the available rate limit.
    * - `flex_unavailable` - Flex processing is temporarily unavailable.
@@ -5029,6 +5139,10 @@ export interface SessionTurnError {
     | 'context_length_exceeded'
     | 'session_budget_exceeded'
     | 'usage_limit_exceeded'
+    | 'project_spend_limit_exceeded'
+    | 'organization_spend_limit_exceeded'
+    | 'organization_usage_limit_exceeded'
+    | 'billing_not_active'
     | 'credit_balance_exhausted'
     | 'rate_limit_exceeded'
     | 'flex_unavailable'
@@ -5444,12 +5558,7 @@ export interface AgentUpdateParams {
   tools?: Array<PersistedAgentToolParam> | null;
 }
 
-export interface AgentListParams extends Omit<CursorPageParams, 'limit'> {
-  /**
-   * The maximum number of resources to return.
-   */
-  limit?: number | null;
-
+export interface AgentListParams extends CursorPageParams {
   /**
    * The order in which resources are returned. Defaults to `desc`.
    *
@@ -5494,11 +5603,13 @@ export declare namespace Agents {
     type AgentSessionDeleted as AgentSessionDeleted,
     type AgentSessionEnvironmentConnectedEvent as AgentSessionEnvironmentConnectedEvent,
     type AgentSessionEnvironmentDisconnectedEvent as AgentSessionEnvironmentDisconnectedEvent,
+    type AgentSessionEnvironmentExpiredEvent as AgentSessionEnvironmentExpiredEvent,
     type AgentSessionEnvironmentFailedEvent as AgentSessionEnvironmentFailedEvent,
     type AgentSessionEnvironmentPendingEvent as AgentSessionEnvironmentPendingEvent,
     type AgentSessionEnvironmentReadyEvent as AgentSessionEnvironmentReadyEvent,
     type AgentSessionEnvironmentResetEvent as AgentSessionEnvironmentResetEvent,
     type AgentSessionEnvironmentState as AgentSessionEnvironmentState,
+    type AgentSessionEnvironmentSuspendedEvent as AgentSessionEnvironmentSuspendedEvent,
     type AgentSessionErrorEvent as AgentSessionErrorEvent,
     type AgentSessionEvent as AgentSessionEvent,
     type AgentSessionFailedEvent as AgentSessionFailedEvent,
@@ -5571,7 +5682,13 @@ export declare namespace Agents {
     type AgentListParams as AgentListParams,
   };
 
-  export { Environments as Environments, type EnvironmentInfo as EnvironmentInfo };
+  export {
+    Environments as Environments,
+    type EnvironmentInfo as EnvironmentInfo,
+    type EnvironmentInfosPage as EnvironmentInfosPage,
+    type EnvironmentCreateParams as EnvironmentCreateParams,
+    type EnvironmentListParams as EnvironmentListParams,
+  };
 
   export {
     Vaults as Vaults,
@@ -5581,6 +5698,7 @@ export declare namespace Agents {
     type VaultStatusFilter as VaultStatusFilter,
     type VaultsPage as VaultsPage,
     type VaultCreateParams as VaultCreateParams,
+    type VaultUpdateParams as VaultUpdateParams,
     type VaultListParams as VaultListParams,
   };
 

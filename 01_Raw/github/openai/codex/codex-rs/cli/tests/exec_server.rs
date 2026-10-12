@@ -97,6 +97,75 @@ fn local_exec_server_ignores_invalid_config_without_strict_config() -> Result<()
     Ok(())
 }
 
+/// Real global CLI flags must reach executor config reads; unrelated startup flags stay private.
+#[tokio::test]
+async fn local_exec_server_projects_global_mxc_preference() -> Result<()> {
+    let home = TempDir::new()?;
+    let cwd = url::Url::from_directory_path(home.path())
+        .map_err(|()| anyhow::anyhow!("could not convert home to file URL"))?;
+    let mut child = tokio::process::Command::new(codex_utils_cargo_bin::cargo_bin("codex")?)
+        .env("CODEX_HOME", home.path())
+        .args([
+            "-c",
+            "features.prefer_mxc=true",
+            "-c",
+            "model='private-startup-model'",
+            "exec-server",
+            "--listen",
+            "stdio",
+        ])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .kill_on_drop(true)
+        .spawn()?;
+    let mut stdin = child.stdin.take().context("exec-server stdin")?;
+    let mut stdout = BufReader::new(child.stdout.take().context("exec-server stdout")?);
+    let result = tokio::time::timeout(Duration::from_secs(30), async {
+        send_json_line(
+            &mut stdin,
+            &serde_json::json!({"id": 1, "method": "initialize",
+                "params": {"clientName": "mxc-test", "resumeSessionId": null}}),
+        )
+        .await?;
+        wait_for_response(&mut stdout, /*expected_id*/ 1).await?;
+        send_json_line(
+            &mut stdin,
+            &serde_json::json!({"method": "initialized", "params": {}}),
+        )
+        .await?;
+        send_json_line(
+            &mut stdin,
+            &serde_json::json!({"id": 2, "method": "environmentConfig/read", "params": {
+                "cwd": cwd, "configPaths": [["features", "prefer_mxc"], ["model"]],
+                "requirementsPaths": []
+            }}),
+        )
+        .await?;
+        wait_for_response(&mut stdout, /*expected_id*/ 2).await
+    })
+    .await
+    .context("executor CLI config read timed out")??;
+    let layers = result["result"]["config"]["layers"]
+        .as_array()
+        .context("config layers")?;
+    let session = layers
+        .iter()
+        .find(|l| l["source"] == "session-flags")
+        .context("session flags")?;
+    let value: toml::Value = toml::from_str(session["toml"].as_str().context("session TOML")?)?;
+    assert_eq!(
+        value,
+        toml::Value::Table(toml::toml! { [features] prefer_mxc = true })
+    );
+    drop(stdin);
+    assert!(
+        tokio::time::timeout(Duration::from_secs(30), child.wait())
+            .await??
+            .success()
+    );
+    Ok(())
+}
+
 /// The standalone exec-server accepts an explicit per-connection concurrency limit.
 #[test]
 fn local_exec_server_accepts_concurrent_requests_flag() -> Result<()> {
@@ -212,7 +281,7 @@ metrics_exporter = {{ otlp-http = {{ endpoint = "{collector_url}/v1/metrics", pr
             "2",
         ])
         .stdin(Stdio::piped())
-        .stderr(Stdio::piped())
+        .stderr(Stdio::inherit())
         .kill_on_drop(true);
 
     let mut child = command.spawn()?;
@@ -221,7 +290,9 @@ metrics_exporter = {{ otlp-http = {{ endpoint = "{collector_url}/v1/metrics", pr
         .take()
         .ok_or_else(|| anyhow::anyhow!("remote exec-server stdin was not piped"))?;
 
-    let environment_websocket = accept_parent_lifetime_websocket(&listener, TEST_TIMEOUT).await?;
+    let environment_websocket = accept_parent_lifetime_websocket(&listener, TEST_TIMEOUT)
+        .await
+        .context("remote executor failed to attach")?;
     // Remote startup must capture the version before registration, not on the first initialize.
     std::fs::write(&manifest, r#"{"version":"9.9.9"}"#)?;
     let executor_public_key = registered_parent_lifetime_executor_public_key(&registry).await?;
@@ -242,7 +313,9 @@ metrics_exporter = {{ otlp-http = {{ endpoint = "{collector_url}/v1/metrics", pr
     };
     let client_task =
         tokio::spawn(async move { ExecServerClient::connect_noise_rendezvous(harness_args).await });
-    let harness_websocket = accept_parent_lifetime_websocket(&listener, TEST_TIMEOUT).await?;
+    let harness_websocket = accept_parent_lifetime_websocket(&listener, TEST_TIMEOUT)
+        .await
+        .context("harness failed to attach")?;
     let relay_task = tokio::spawn(proxy_parent_lifetime_relay(
         environment_websocket,
         harness_websocket,
@@ -273,9 +346,12 @@ metrics_exporter = {{ otlp-http = {{ endpoint = "{collector_url}/v1/metrics", pr
 
     #[cfg(windows)]
     let argv = vec![
-        "cmd.exe",
-        "/C",
-        "if defined CODEX_EXEC_SERVER_EXIT_ON_STDIN_CLOSE (exit /b 1) else ping -n 61 127.0.0.1",
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-Command",
+        "if (Test-Path Env:CODEX_EXEC_SERVER_EXIT_ON_STDIN_CLOSE) { exit 1 }; Start-Sleep -Seconds 60",
     ];
     #[cfg(not(windows))]
     let argv = vec![
@@ -316,15 +392,10 @@ metrics_exporter = {{ otlp-http = {{ endpoint = "{collector_url}/v1/metrics", pr
 
     drop(stdin);
 
-    let output = tokio::time::timeout(TEST_TIMEOUT, child.wait_with_output())
+    let status = tokio::time::timeout(TEST_TIMEOUT, child.wait())
         .await
         .map_err(|_| anyhow::anyhow!("remote exec-server did not exit after stdin closed"))??;
-    anyhow::ensure!(
-        output.status.success(),
-        "remote exec-server exited with {}; stderr: {}",
-        output.status,
-        String::from_utf8_lossy(&output.stderr)
-    );
+    anyhow::ensure!(status.success(), "remote exec-server exited with {status}");
 
     relay_task.abort();
     let _ = relay_task.await;
@@ -617,7 +688,7 @@ fn local_exec_server_exits_successfully_on_sigterm() -> Result<()> {
 async fn wait_for_response(
     stdout: &mut (impl tokio::io::AsyncBufRead + Unpin),
     expected_id: i64,
-) -> Result<()> {
+) -> Result<serde_json::Value> {
     loop {
         let mut line = String::new();
         if stdout.read_line(&mut line).await? == 0 {
@@ -629,7 +700,7 @@ async fn wait_for_response(
                 message.get("error").is_none(),
                 "exec-server request {expected_id} failed: {message}"
             );
-            return Ok(());
+            return Ok(message);
         }
     }
 }
