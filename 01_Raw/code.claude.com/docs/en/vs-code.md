@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/vs-code
-fetched_at: 2026-10-05T06:27:13.025300+00:00
+fetched_at: 2026-10-12T06:49:46.415835+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,6 +41,8 @@ Or in VS Code, press `Cmd+Shift+X` (Mac) or `Ctrl+Shift+X` (Windows/Linux) to op
 The extension's version number is the Claude Code version it bundles. For example, a feature that requires Claude Code v2.1.286 or later needs version 2.1.286 or later of the extension, which the Extensions view shows.
 
 The extension also installs in other VS Code forks like Devin Desktop or Kiro. Search for "Claude Code" in the editor's Extensions view, or install from the [Open VSX registry](https://open-vsx.org/extension/Anthropic/claude-code). If your editor can't install the extension, [install the CLI](/docs/en/quickstart) and run `claude` in its integrated terminal instead. The CLI works in any terminal.
+
+To run Claude Code inside a dev container, see [Development containers](/docs/en/devcontainer).
 
 <Note>If the extension doesn't appear after installation, restart VS Code or run "Developer: Reload Window" from the Command Palette.</Note>
 
@@ -162,6 +164,7 @@ The prompt box supports several features:
 * **Bookmarks**: hover over a response and click **Bookmark response** to save it, or click **Remove bookmark** on a saved response to remove it.
 
   To review saved responses, open the Bookmarks panel: click the bookmark icon at the top of the Claude Code panel, select **Bookmarks** in the Context section of the command menu, or type `/bookmarks`. Requires Claude Code v2.1.286 or later.
+* **Files Claude sends you**: when the session is connected to [Remote Control](/docs/en/remote-control#start-a-remote-control-session) and Claude sends you files with the [`SendUserFile` tool](/docs/en/tools-reference), the conversation shows a row such as **Sent report.md, chart.png**. Click a file's name to open it in the editor.
 * **Context indicator**: the prompt box shows how much of Claude's context window you're using. Claude automatically compacts when needed, or you can run `/compact` manually.
 * **Prompt cache clock**: a clock icon next to the context indicator estimates how much time the conversation's [prompt cache](/docs/en/prompt-caching) has left before it expires. It counts down from the cache's five-minute or one-hour [lifetime](/docs/en/prompt-caching#cache-lifetime), and each response that uses the cache restarts the countdown. Apart from compaction, the [actions that invalidate the cache](/docs/en/prompt-caching#actions-that-invalidate-the-cache) don't reset the clock, so it can still show minutes left after you switch models.
   * Until the countdown runs out, the icon shows the minutes left, such as **12m**.
@@ -226,10 +229,11 @@ By default, a session with no activity for 14 days moves to **Archived sessions*
 
 To restore an archived session, expand **Archived sessions** and click **Unarchive session**. To restore every archived session at once, hover over the **Archived sessions** header in the sessions list in the Activity Bar and click its unarchive icon, which requires Claude Code v2.1.277 or later. Before v2.1.257, the action was **Delete session**, which hid a session with no way to restore it. Sessions you deleted then appear under **Archived sessions** after you upgrade.
 
-When the conversation you resume ended in plan mode, Claude Code restores plan mode. Requires Claude Code v2.1.246 or later. Claude Code doesn't restore it in two cases:
+When the conversation you resume ended in plan mode, Claude Code restores plan mode. Requires Claude Code v2.1.246 or later. Claude Code doesn't restore it in these cases:
 
 * The extension [chooses the starting permission mode](/docs/en/permission-modes#switch-permission-modes) from `claudeCode.initialPermissionMode` or a pick that carries over from an earlier conversation
 * You have `claudeCode.claudeProcessWrapper` configured
+* A [deny rule](/docs/en/permissions#manage-permissions) removes the [`ExitPlanMode`](/docs/en/tools-reference) tool
 
 ### Resume cloud sessions from Claude.ai
 
@@ -438,7 +442,7 @@ You can also open the attachment menu to select specific browser tools like open
 
 Claude opens new tabs for browser tasks and shares your browser's login state, so it can access any site you're already signed into.
 
-To have each session connect to your browser as it starts, without typing `@browser`, see [Enable Chrome by default](/docs/en/chrome#enable-chrome-by-default). For when Claude Code asks you before a browser action in a session connected that way, see [Permission prompts in VS Code sessions](/docs/en/chrome#permission-prompts-in-vs-code-sessions).
+To have each session connect to your browser as it starts, without typing `@browser`, see [Enable Chrome by default](/docs/en/chrome#enable-chrome-by-default). For when Claude Code asks you before a browser action, see [Permission prompts in VS Code sessions](/docs/en/chrome#permission-prompts-in-vs-code-sessions).
 
 For setup instructions, the full list of capabilities, and troubleshooting, see [Use Claude Code with Chrome](/docs/en/chrome).
 
@@ -548,7 +552,8 @@ VS Code reads `initialPermissionMode` from your user settings and ignores worksp
 | `attachOpenFile` | `true` | Add the file that is open in the editor to your messages and show it in the prompt box. When off, only your selected text is added. Requires Claude Code v2.1.271 or later |
 | `useCtrlEnterToSend` | `false` | Use Ctrl/Cmd+Enter instead of Enter to send prompts |
 | `scrollToBottomOnSend` | `true` | Scroll the conversation to the bottom when you send a message. When off, the conversation stays where you left it. Requires Claude Code v2.1.275 or later |
-| `showMessageTimestamps` | `false` | Show when each message was sent. A date line marks where the day changes. Requires Claude Code v2.1.284 or later |
+| `showMessageTimestamps` | `true` | Show when each message was sent. A date line marks where the day changes. Requires Claude Code v2.1.284 or later. Before v2.1.290, the default was `false` |
+| `spinnerVerbs` | `{"mode": "append", "verbs": []}` | Set the verbs the conversation spinner rotates through while a turn runs, with the same `mode` and `verbs` fields as the CLI's [`spinnerVerbs`](/docs/en/settings-reference#spinnerverbs). |
 | `enableNewConversationShortcut` | `false` | Enable Cmd/Ctrl+N to start a new conversation |
 | `enableReopenClosedSessionShortcut` | `true` | Use Cmd/Ctrl+Shift+T to reopen the most recently closed Claude session tab. When the last closed tab wasn't a Claude session, the shortcut runs VS Code's normal reopen-closed-editor command instead. |
 | `archiveInactiveSessions` | `14` | [Archive a session automatically](#resume-past-conversations) after this many days without activity: `1`, `2`, `7`, or `14`. Set `0` to turn it off. Requires Claude Code v2.1.265 or later |
@@ -560,7 +565,7 @@ VS Code reads `initialPermissionMode` from your user settings and ignores worksp
 | `environmentVariables` | `[]` | Set environment variables for the Claude process. Use Claude Code settings instead for shared config. A [`CLAUDE_CONFIG_DIR`](/docs/en/env-vars) entry applies only when its value is an absolute path; the extension doesn't expand `~` and ignores a relative value. |
 | `disableLoginPrompt` | `false` | Skip authentication prompts (for third-party provider setups) |
 | `allowDangerouslySkipPermissions` | `false` | Adds Bypass permissions to the mode selector. Use it only in sandboxes with no internet access. |
-| `claudeProcessWrapper` | - | Executable used to launch the Claude process. The bundled binary path is passed as an argument when present. Set this to a separately installed `claude` binary if the extension build doesn't include one for your platform. In a wrapped setup, conversations start in Manual mode unless you set `initialPermissionMode` or picked Manual, Edit automatically, or Auto in an earlier conversation, because the extension skips the settings and built-in-default steps there; see [Switch permission modes](/docs/en/permission-modes#switch-permission-modes). An "Unsupported platform" error at activation means no binary is bundled for your platform; see [which platforms have prebuilt binaries](/docs/en/troubleshoot-install#native-binary-not-found-after-npm-install). |
+| `claudeProcessWrapper` | - | Executable used to launch the Claude process. The bundled binary path is passed as an argument when present. Set this to a separately installed `claude` binary if the extension build doesn't include one for your platform. |
 
 ## Use a screen reader
 
@@ -573,6 +578,7 @@ During a conversation, the extension announces:
 * **Claude's replies**: the extension announces each reply once, when it's complete, and stays silent while text streams in. Your screen reader reads code blocks as a line-count summary, reads links by their label, and reads tables cell by cell; the full reply stays readable in the transcript.
 * **Permission requests and questions**: the extension announces a request when its permission prompt appears, naming the tool Claude wants to use. It announces in the same way when Claude asks you a question and when Claude finishes a plan and waits for your review.
 * **Status changes**: the extension announces when Claude starts working, when Claude is ready for your input, and when Claude Code starts compacting the conversation.
+* **Queued messages**: when you send a message while Claude is working, the extension announces "Message queued." for that message.
 * **Errors and model prompts**: the extension announces errors in the conversation, and announces when the [usage-credits consent prompt](/docs/en/model-config#fable-and-usage-credits) or the [flagged-request prompt](/docs/en/model-config#ask-before-switching) appears.
 
 While Claude works, your screen reader reads a text label in place of the progress spinner's animation.
@@ -766,6 +772,19 @@ A `Read` deny rule covers neither tool, so block them by name with a [deny rule]
 <a id="troubleshooting" />
 
 ## Fix common issues
+
+Sign-in, network, and launch errors have their own entries on the install troubleshooting and error reference pages. Find what you see in the table, then follow the link.
+
+| What you see | Where to go |
+| - | - |
+| `API Error: 403 Request not allowed` after you sign in | [403 Forbidden after login](/docs/en/troubleshoot-install#403-forbidden-after-login) |
+| You're asked to sign in again after you already signed in | [Not logged in or token expired](/docs/en/troubleshoot-install#not-logged-in-or-token-expired) |
+| Cloud provider credentials work in your terminal but not in the extension | [Bedrock, Agent Platform, or Foundry credentials not loading](/docs/en/troubleshoot-install#bedrock-agent-platform-or-foundry-credentials-not-loading) |
+| `SSL certificate verification failed` or `Self-signed certificate detected` | [SSL certificate errors](/docs/en/errors#ssl-certificate-errors) |
+| `Claude Code process exited with code 1`, or another code | [Claude Code process exited with code N](/docs/en/errors#claude-code-process-exited-with-code-n) |
+| `Could not locate the Claude CLI on PATH` | [Could not locate the Claude CLI on PATH](/docs/en/errors#could-not-locate-the-claude-cli-on-path) |
+| `The connection to Claude Code ended before this message completed` | [The connection to Claude Code ended before this message completed](/docs/en/errors#the-connection-to-claude-code-ended-before-this-message-completed) |
+| `claude` isn't found in VS Code's integrated terminal | [Run CLI in VS Code](#run-cli-in-vs-code) |
 
 ### Extension won't install
 

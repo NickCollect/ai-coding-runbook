@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-directory
-fetched_at: 2026-10-05T06:27:11.306821+00:00
+fetched_at: 2026-10-12T06:49:42.103938+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,7 +40,7 @@ export const ClaudeExplorer = () => {
         oneLiner: 'Project instructions Claude reads every session',
         when: 'Loaded into context at the start of every session',
         description: 'Project-specific instructions that shape how Claude works in this repository. Put your conventions, common commands, and architectural context here so Claude operates with the same assumptions your team does.',
-        tips: ['Target under 200 lines. Longer files still load in full but may reduce adherence', <>CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a <A href="/docs/en/skills">skill</A> or a path-scoped <A href="/docs/en/memory#organize-rules-with-claude/rules/">rule</A> so it loads only when needed</>, 'List the commands you run most, like build, test, and format, so Claude knows them without you spelling them out each time', <>Run <C>/memory</C> to open and edit CLAUDE.md from within a session</>, <>Also works at <C>.claude/CLAUDE.md</C> if you prefer to keep the project root clean</>, <>If your repo already has an <C>AGENTS.md</C> for other coding agents, Claude Code <A href="/docs/en/memory#agents-md">can read that</A> on its own or alongside CLAUDE.md</>],
+        tips: ['Target under 200 lines. Longer files still load in full but may reduce adherence', <>CLAUDE.md loads into every session. If something only matters for specific tasks, move it to a <A href="/docs/en/skills">skill</A> or a path-scoped <A href="/docs/en/memory#organize-rules-with-claude/rules/">rule</A> so it loads only when needed</>, 'List the commands you run most, like build, test, and format, so Claude knows them without you spelling them out each time', <>Run <C>/memory</C> to open and edit CLAUDE.md from within a session</>, <>Also works at <C>.claude/CLAUDE.md</C> if you prefer to keep the project root clean</>, <>If your repo already has an <C>AGENTS.md</C> for other coding agents, Claude Code <A href="/docs/en/memory#agents-md">can read that</A> in place of a <C>CLAUDE.md</C></>],
         exampleIntro: 'This example is for a TypeScript and React project. It lists the build and test commands, the framework conventions Claude should follow, and project-specific rules like export style and file layout.',
         example: `# Project conventions
 
@@ -170,7 +170,7 @@ config/secrets.json`,
           icon: 'folder',
           color: '#9B7BC4',
           oneLiner: 'Topic-scoped instructions, optionally gated by file paths',
-          when: <>Rules without <C>paths:</C> load at session start. Rules with <C>paths:</C> load when a matching file enters context</>,
+          when: <>Rules without <C>paths:</C> load at session start. Rules with <C>paths:</C> load when Claude reads, writes, or edits a matching file</>,
           description: [<>Project instructions split into topic files that can load conditionally based on file paths. A rule without <C>paths:</C> frontmatter loads at session start like CLAUDE.md; a rule with <C>paths:</C> loads only when Claude reads, writes, or edits a matching file.</>, <>Like CLAUDE.md, rules are guidance Claude reads, not configuration Claude Code enforces. For guaranteed behavior use <A href="/docs/en/hooks">hooks</A> or <A href="/docs/en/permissions">permissions</A>.</>],
           tips: [<>Use <C>paths:</C> frontmatter with globs to scope rules to directories or file types</>, <>Subdirectories work: <C>.claude/rules/frontend/react.md</C> is discovered automatically</>, 'When CLAUDE.md approaches 200 lines, start splitting into rules'],
           docsLink: '/en/memory#organize-rules-with-claude/rules/',
@@ -182,7 +182,7 @@ config/secrets.json`,
             color: '#9B7BC4',
             badge: 'committed',
             oneLiner: 'Test conventions scoped to test files',
-            when: <>Loaded when Claude reads a file matching the <C>paths:</C> globs below</>,
+            when: <>Loaded when Claude reads, writes, or edits a file matching the <C>paths:</C> globs below</>,
             description: <>An example rule that only loads when Claude is working on test files. The <C>paths:</C> globs in the frontmatter define which files trigger it; here, anything ending in .test.ts or .test.tsx. For other files, this rule is not loaded into context.</>,
             example: `---
 paths:
@@ -203,8 +203,8 @@ paths:
             color: '#9B7BC4',
             badge: 'committed',
             oneLiner: 'API conventions scoped to backend code',
-            when: <>Loaded when Claude reads a file matching the <C>paths:</C> glob below</>,
-            description: <>A second example showing a rule scoped to backend code. The <C>paths:</C> glob matches files under src/api/, so these conventions load only when Claude is editing API routes.</>,
+            when: <>Loaded when Claude reads, writes, or edits a file matching the <C>paths:</C> glob below</>,
+            description: <>A second example showing a rule scoped to backend code. The <C>paths:</C> glob matches files under src/api/, so these conventions load only when Claude is working on API routes.</>,
             example: `---
 paths:
   - "src/api/**/*.ts"
@@ -611,7 +611,7 @@ type: reference
           icon: 'folder',
           color: '#9B7BC4',
           oneLiner: 'User-level rules that apply to every project',
-          when: <>Rules without <C>paths:</C> load at session start. Rules with <C>paths:</C> load when a matching file enters context</>,
+          when: <>Rules without <C>paths:</C> load at session start. Rules with <C>paths:</C> load when Claude reads, writes, or edits a matching file</>,
           description: 'Same as project .claude/rules/ but applies everywhere. Use this for conventions you want across all your work, like personal code style or commit message format.',
           docsLink: '/en/memory#organize-rules-with-claude/rules/',
           children: []
@@ -1440,7 +1440,7 @@ Claude Code reads instructions, settings, skills, subagents, and memory from you
 
 On Windows, `~/.claude` resolves to `%USERPROFILE%\.claude`. If you set [`CLAUDE_CONFIG_DIR`](/docs/en/env-vars), every `~/.claude` path on this page lives under that directory instead.
 
-Most users only edit `CLAUDE.md` and `settings.json`. If your repository already has an `AGENTS.md` for other coding agents, Claude Code [can read that](/docs/en/memory#agents-md) on its own or alongside `CLAUDE.md`. The rest of the directory is optional: add skills, rules, or subagents as you need them.
+Most users only edit `CLAUDE.md` and `settings.json`. If your repository already has an `AGENTS.md` for other coding agents, Claude Code [can read that](/docs/en/memory#agents-md) in place of a `CLAUDE.md`. The rest of the directory is optional: add skills, rules, or subagents as you need them.
 
 ## Explore the directory
 
@@ -1454,9 +1454,9 @@ The explorer covers files you author and edit. A few related files live elsewher
 
 | File | Location | Purpose |
 | - | - | - |
-| `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that you can't override, apart from [narrow exceptions](/docs/en/settings#security-keys-where-the-stricter-value-applies). See [where to save the file](/docs/en/managed-settings#deploy-a-managed-settings-file) and [which managed source Claude Code uses](/docs/en/managed-settings#precedence-within-the-managed-tier). |
+| `managed-settings.json` | System-level, varies by OS | Enterprise-enforced settings that your own settings files and `--settings` values can't override, apart from [narrow exceptions](/docs/en/settings#exceptions-to-managed-settings-precedence). See [where to save the file](/docs/en/managed-settings#deploy-a-managed-settings-file) and [which managed source Claude Code uses](/docs/en/managed-settings#precedence-within-the-managed-tier). |
 | `CLAUDE.local.md` | Project root | Your private preferences for this project, loaded alongside CLAUDE.md. Create it manually and add it to `.gitignore`. |
-| `AGENTS.md` | Project root, `.claude/`, or any directory | Project instructions you write for AI coding agents. Claude Code can [load it](/docs/en/memory#agents-md) on its own or alongside `CLAUDE.md`. |
+| `AGENTS.md` | Project root, `.claude/`, or any directory | Project instructions you write for AI coding agents. Claude Code can [load it](/docs/en/memory#agents-md) in place of a `CLAUDE.md`. |
 | Installed plugins | `~/.claude/plugins` | Cloned marketplaces, installed plugin versions, the `installed_plugins.json` install record, and per-plugin data, managed by `claude plugin` commands. Plugins [synced from your claude.ai account](/docs/en/plugins/loading#synced-plugins) download into `~/.claude/plugins/synced/`. For a plugin installed from a marketplace [`command` source](/docs/en/plugins/marketplace-reference#command-plugin-source) in link mode, Claude Code stores links here instead of a copy, and the plugin's files stay in the directory the command prints. A `command` source requires Claude Code v2.1.229 or later. A plugin listed by relative path in a marketplace you added from a local path also [loads in place](/docs/en/plugins/loading#find-plugins-on-disk) from its source directory rather than from a cache copy. See [plugin caching](/docs/en/plugins/loading#find-plugins-on-disk) for how orphaned versions are cleaned up. |
 
 `~/.claude` also holds data Claude Code writes as you work: transcripts, prompt history, file snapshots, caches, and logs. See [application data](#application-data) below.
@@ -1485,7 +1485,7 @@ This table lists every file the explorer covers. Project-scope files live in you
 <Note>
   Several things can override what you put in these files:
 
-  * [Managed settings](/docs/en/server-managed-settings) deployed by your organization take precedence over everything, apart from the [exceptions under Settings precedence](/docs/en/settings#exceptions-to-managed-settings-precedence)
+  * [Managed settings](/docs/en/server-managed-settings) deployed by your organization take precedence over every settings file and `--settings` value, apart from the [exceptions under Settings precedence](/docs/en/settings#exceptions-to-managed-settings-precedence)
   * CLI flags like `--permission-mode` or `--settings` override `settings.json` for that session
   * Some environment variables take precedence over their equivalent setting, but this varies: check the [environment variables reference](/docs/en/env-vars) for each one
 
@@ -1567,12 +1567,19 @@ Session files in `sessions/`, auto memory, and Claude Desktop and Cowork transcr
 
 * **`sessions/`**: holds one small file per running session, used to detect concurrent sessions and crashes. It isn't part of the age-based sweep: Claude Code removes each file when its session exits and clears crash leftovers on the next launch.
 * **Auto memory**: the sweep doesn't delete the memory files in a project's [auto memory](/docs/en/memory#auto-memory) directory, `projects/<project>/memory/`. Claude Code removes that directory only if it has been empty for the whole retention period. Before v2.1.228, the sweep treated folders inside the memory directory as session data and could delete old files beneath it.
-* **Claude Desktop and Cowork transcripts**: Claude Code keeps the transcript of a session you started or most recently continued in Claude Desktop or Cowork at any age. To give these transcripts an age limit, set [`desktopSessionCleanupPeriodDays`](/docs/en/settings-reference#desktopsessioncleanupperioddays). When [managed settings](/docs/en/managed-settings) set `cleanupPeriodDays`, Claude Code deletes these transcripts after that period instead. Requires Claude Code v2.1.248 or later; earlier versions delete them after `cleanupPeriodDays`.
+* **Claude Desktop and Cowork transcripts**: Claude Code keeps the transcript of a session you started or most recently continued in Claude Desktop or Cowork at any age. To give these transcripts an age limit, set [`desktopSessionCleanupPeriodDays`](/docs/en/settings-reference#desktopsessioncleanupperioddays). Requires Claude Code v2.1.248 or later; earlier versions delete them after `cleanupPeriodDays`.
+
+  Claude Code deletes these transcripts after `cleanupPeriodDays` instead in either of these cases:
+
+  * [Managed settings](/docs/en/managed-settings) set `cleanupPeriodDays`
+  * The [HIPAA configuration applies to your sessions](/docs/en/hipaa-setup#check-how-developers-sign-in-and-connect)
 
 Claude Code skips the age-based sweep in these cases:
 
 * **Bare mode**: when you run `claude -p` with [`--bare`](/docs/en/headless#start-faster-with-bare-mode), Claude Code doesn't run the sweep in that session.
 * **Paused sweep**: if Claude Code can't safely determine the retention period, it pauses the retention cleanup sweep; the [`retention_sweep` event](/docs/en/monitoring-usage#retention-sweep-event) lists each configuration that pauses it. When the cause is a settings file that can't be read or parsed, or settings errors with `cleanupPeriodDays` or `desktopSessionCleanupPeriodDays` explicitly set, Claude Code also shows a warning in `/status` until you fix the settings errors. When [managed settings](/docs/en/server-managed-settings) provide `cleanupPeriodDays`, Claude Code runs the sweep at the managed value in either case.
+
+To check that the machines in your organization run the sweep with the retention period you set, see [Check the retention sweep](/docs/en/monitoring-usage#check-the-retention-sweep).
 
 ### Session scratchpad directory
 
@@ -1596,11 +1603,11 @@ A session has a scratchpad only when all of these hold:
 
 ### Kept until you delete them
 
-The retention cleanup sweep doesn't remove the paths below. Claude Code keeps them until you delete them, apart from the two caches it deletes when you log out.
+Apart from the rows that say otherwise, the retention cleanup sweep doesn't remove the paths below, and Claude Code keeps them until you delete them.
 
 | Path under `~/.claude/` | Contents |
 | - | - |
-| `history.jsonl` | Every prompt you've typed, with timestamp and project path. Used for up-arrow recall, `Ctrl+R` history search, and `!` shell-command completion. |
+| `history.jsonl` | Every prompt you've typed, with timestamp and project path. Used for up-arrow recall, `Ctrl+R` history search, and `!` shell-command completion. Each sweep removes the entries older than `cleanupPeriodDays` when the [HIPAA configuration applies to your sessions](/docs/en/hipaa-setup#check-how-developers-sign-in-and-connect). |
 | `stats-cache.json` | Aggregated token and cost counts shown by `/usage` |
 | `remote-settings.json` | Cached copy of [server-managed settings](/docs/en/server-managed-settings) for your organization, or `{}` when your organization has configured none. Only present when the session [fetches them](/docs/en/server-managed-settings#platform-availability). Claude Code checks for updates at startup and hourly during a session. Claude Code deletes it when you log out. |
 | `cache/changelog.md` | Cached copy of the Claude Code changelog, shown by `/release-notes`. Refreshed in the background. |
@@ -1683,7 +1690,7 @@ claude purge ~/work/my-repo --yes
 
 Pass `--all` instead of a path to purge state for every project at once, which deletes `history.jsonl` outright rather than filtering it. Pass `-i` to step through the deletion plan one item at a time.
 
-The command leaves `shell-snapshots/` and `backups/` alone because those are not project-scoped, and warns about them in the plan output.
+The command leaves `shell-snapshots/` and `backups/` alone because those are not project-scoped, and warns about them in the plan output. If anyone ran [`/heapdump`](/docs/en/troubleshooting#high-cpu-or-memory-usage) on the machine, delete the `.heapsnapshot` files it wrote too. A heap snapshot contains the full conversation and any credentials the process held, and neither the retention sweep nor the purge touches it.
 
 You can also delete any of the application-data paths above by hand, apart from the [state files to keep](#state-files-to-keep). New sessions are unaffected. The table below shows what you lose for past sessions.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/components
-fetched_at: 2026-10-05T06:27:12.243213+00:00
+fetched_at: 2026-10-12T06:49:44.433669+00:00
 fetch_method: mintlify_md
 ---
 
@@ -727,7 +727,7 @@ model: sonnet
 You are a security reviewer. Read the changed files and report injection, authentication, and secrets-handling risks.
 ```
 
-This agent is named `my-plugin:security-reviewer`, and the user can [invoke it explicitly](/docs/en/sub-agents#invoke-subagents-explicitly) with `@agent-my-plugin:security-reviewer`. The name form is `<plugin>:<name>`, where `<name>` comes from the frontmatter, or from the file name when there is none.
+This agent is named `my-plugin:security-reviewer`, and the user can [invoke it explicitly](/docs/en/sub-agents#invoke-subagents-explicitly) with `@agent-my-plugin:security-reviewer`. The name form is `<plugin>:<name>`, where `<name>` comes from the frontmatter `name` field, or from the file name when that field is missing.
 
 The `agents` manifest key replaces the `agents/` scan.
 
@@ -777,6 +777,8 @@ Save the script at `scripts/format.sh` and make it executable.
 Load the plugin and ask Claude to edit a file. A `PostToolUse` hook that exits 0 shows nothing in the transcript, so confirm it ran with [debug logging](/docs/en/hooks#debug-hooks) or by what the script itself changes.
 
 Hooks in `hooks/hooks.json` and in the `hooks` manifest key both load. For every event and its payload, see [Hook events](/docs/en/hooks#hook-events).
+
+When another enabled plugin has the same name, one of the two registers its `hooks/hooks.json` hooks and the other's are left out. See [Hooks when two enabled plugins share a name](/docs/en/plugins/loading#hooks-when-two-enabled-plugins-share-a-name) for which one, and for the note in `/plugin` that tells you.
 
 To write hooks as JavaScript functions that run inside Claude Code and can draw in its interface, list a module file under a `modules` key in the same `hooks/hooks.json`. A plugin with one is a mod. See [Create a mod](/docs/en/plugins/mods/create).
 
@@ -998,7 +1000,7 @@ A monitor is a shell command that runs in the background for the whole session. 
 ]
 ```
 
-The command runs in a shell, in the working directory the session started in.
+The command runs in a shell, in the session's current working directory. It runs with your full user permissions and outside the [sandbox](/docs/en/sandboxing).
 
 A monitor's command is limited in where it starts and what it can reference:
 

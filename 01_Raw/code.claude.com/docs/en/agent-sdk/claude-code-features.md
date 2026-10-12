@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/claude-code-features
-fetched_at: 2026-10-05T06:27:10.595451+00:00
+fetched_at: 2026-10-12T06:49:40.076635+00:00
 fetch_method: mintlify_md
 ---
 
@@ -116,7 +116,7 @@ The `cwd` option determines where the SDK looks for project-level inputs. Projec
 | Project (root) | `<cwd>/CLAUDE.md` or `<cwd>/.claude/CLAUDE.md` | `settingSources` includes `"project"` |
 | Project rules | `<cwd>/.claude/rules/*.md` and `.claude/rules/*.md` in every parent directory | `settingSources` includes `"project"` |
 | Project (parent dirs) | `CLAUDE.md` files in directories above `cwd` | `settingSources` includes `"project"`, loaded at session start |
-| Project (child dirs) | `CLAUDE.md` files in subdirectories of `cwd` | `settingSources` includes `"project"`, loaded on demand when the agent reads a file in that subtree |
+| Project (child dirs) | `CLAUDE.md` files in subdirectories of `cwd` | `settingSources` includes `"project"`, loaded [on demand](/docs/en/memory#how-claude-md-files-load) |
 | Local | `<cwd>/CLAUDE.local.md` and `CLAUDE.local.md` in every parent directory | `settingSources` includes `"local"` |
 | User | `~/.claude/CLAUDE.md` | `settingSources` includes `"user"` |
 | User rules | `~/.claude/rules/*.md` | `settingSources` includes `"user"` |

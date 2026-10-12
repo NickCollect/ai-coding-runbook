@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/session-storage
-fetched_at: 2026-10-05T06:27:10.820007+00:00
+fetched_at: 2026-10-12T06:49:40.736204+00:00
 fetch_method: mintlify_md
 ---
 
@@ -338,7 +338,7 @@ The following TypeScript SDK functions accept a `sessionStore` option and operat
 * [`renameSession()`](/docs/en/agent-sdk/typescript#renamesession)
 * [`tagSession()`](/docs/en/agent-sdk/typescript#tagsession)
 * [`deleteSession()`](/docs/en/agent-sdk/typescript)
-* [`forkSession()`](/docs/en/agent-sdk/typescript)
+* [`forkSession()`](/docs/en/agent-sdk/typescript#forksession)
 * [`listSubagents()`](/docs/en/agent-sdk/typescript)
 * [`getSubagentMessages()`](/docs/en/agent-sdk/typescript)
 

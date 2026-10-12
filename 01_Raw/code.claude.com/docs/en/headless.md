@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/headless
-fetched_at: 2026-10-05T06:27:11.819474+00:00
+fetched_at: 2026-10-12T06:49:43.389412+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,13 +78,22 @@ Before v2.1.286, these limits held only partly: an interactive `--bare` session 
 
 ### Background tasks at exit
 
-If Claude starts a [background Bash task](/docs/en/tools-reference#bash-tool-behavior) during a `claude -p` run, for example a dev server or a watch build, that shell is terminated about five seconds after Claude has returned its final result and stdin has closed. The grace period lets a task that finishes right after the result still deliver its output.
+After Claude finishes its turn and stdin has closed, a `claude -p` run can stay open to wait for background work that Claude started.
 
-If Claude starts a background [subagent](/docs/en/sub-agents) or workflow, `claude -p` instead stays open until that work completes, because its result is part of the final output.
+Unless a background command that the main conversation started is still running, Claude Code stops whatever is still running after 10 minutes of continuous idle waiting by default and drops its partial result. To change the 10-minute cap, set [`CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS`](/docs/en/env-vars), or set it to `0` to wait without one.
 
-By default the wait ends after 10 minutes of continuous idle waiting, so a stuck subagent or workflow can't hold the process open indefinitely. At that point Claude Code stops whatever is still running and drops its partial result. To change the limit, set [`CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS`](/docs/en/env-vars), or set it to `0` to wait without one.
+The run waits for background work such as background commands, subagents and workflows, Monitor watches, and pending `/loop` wakeups:
 
-If Claude starts a [Monitor](/docs/en/tools-reference#monitor-tool) watch during a `claude -p` run, Claude Code waits for the watch until it times out or the ten-minute cap ends the wait, whichever comes first. While it waits, Claude keeps responding to what the watch reports. By default, a watch times out five minutes after Claude starts it.
+* **[Background commands](/docs/en/tools-reference#background-commands)**: for a command that the main conversation started, for example a dev server or a watch build, the run waits until the command exits or reaches its [time limit](/docs/en/tools-reference#time-limit-for-background-commands). Claude then takes one more turn with the outcome. While the command runs, the 10-minute cap doesn't end the wait.
+* **Background [subagents](/docs/en/sub-agents) and workflows**: the run stays open until that work completes, because its result is part of the final output.
+* **[Monitor](/docs/en/tools-reference#monitor-tool) watches**: the run waits until the watch times out or the 10-minute cap ends the wait, whichever comes first. While it waits, Claude keeps responding to what the watch reports. By default, a watch times out five minutes after Claude starts it.
+* **Pending wakeups**: in a run whose prompt you passed as text rather than with `--input-format stream-json`, when Claude has scheduled a [self-paced `/loop` wakeup](/docs/en/scheduled-tasks#let-claude-choose-the-interval), the run waits for each wakeup to fire and runs its iteration until the [loop ends](/docs/en/scheduled-tasks#stop-a-loop), even past the 10-minute cap.
+
+When stderr is a terminal and the run has waited five seconds, Claude Code prints a line to stderr that starts with `Waiting for background work to finish` and names the work. With [`json` or `stream-json` output](#get-structured-output), the line prints only when stdout isn't a terminal, so the JSON your script reads never carries it.
+
+If the run reaches its [`--max-budget-usd`](/docs/en/cli-reference#cli-flags) cap, Claude Code stops the remaining background work instead of waiting.
+
+When background work starts another turn, the run prints each turn's result with the default `text` output and the last turn's result with `json` output. Before v2.1.295, the run printed only the last turn's result with `text` output too.
 
 ### Stop a run with SIGTERM
 
@@ -192,7 +201,7 @@ The last line of the stream is a `result` message with the final response text, 
 
 If your consumer reads the stream slowly, Claude Code waits for the queued output to drain before exiting, scaling the wait with how much is still queued, capped at 30 seconds. Before v2.1.214 the exit wait was capped at about two seconds, which could cut off the end of a large response.
 
-The following example uses [jq](https://jqlang.org/) to filter for text deltas and display just the streaming text. The `-r` flag outputs raw strings (no quotes) and `-j` joins without newlines so tokens stream continuously:
+The following example uses [jq](https://jqlang.org/) to filter for text deltas and display only the streaming text. The `-r` flag outputs raw strings (no quotes) and `-j` joins without newlines so tokens stream continuously:
 
 ```bash theme={null}
 claude -p "Write a poem" --output-format stream-json --verbose --include-partial-messages | \
@@ -203,16 +212,32 @@ For programmatic streaming with callbacks and message objects, see [Stream respo
 
 #### Follow subagent messages
 
-Messages from [subagents](/docs/en/sub-agents) appear in the stream as `assistant` and `user` messages whose `parent_tool_use_id` field is the ID of the tool call that spawned the subagent. Messages from the main conversation carry `null` in that field.
+Messages from [subagents](/docs/en/sub-agents) and from skills that [run in a subagent](/docs/en/skills#run-skills-in-a-subagent) appear in the stream as `assistant` and `user` messages. Their `parent_tool_use_id` field says which run each one belongs to. Messages from the main conversation carry `null` in that field.
 
-The first message from a subagent running in the [foreground](/docs/en/sub-agents#run-subagents-in-foreground-or-background) is a `user` message carrying the prompt that drives it. After that first message, Claude Code emits:
+The first message from a forked skill, or from a subagent running in the [foreground](/docs/en/sub-agents#run-subagents-in-foreground-or-background), is a `user` message carrying the prompt or skill content that drives it. After that first message, Claude Code emits:
 
-* **By default**: the subagent's `tool_use` and `tool_result` blocks.
-* **With [`--forward-subagent-text`](/docs/en/cli-reference#cli-flags) or [`CLAUDE_CODE_FORWARD_SUBAGENT_TEXT`](/docs/en/env-vars)**: the subagent's text and thinking blocks too, so you can reconstruct each subagent's transcript. This requires Claude Code v2.1.211 or later.
+* **By default**: the run's `tool_use` and `tool_result` blocks.
+* **With [`--forward-subagent-text`](/docs/en/cli-reference#cli-flags) or [`CLAUDE_CODE_FORWARD_SUBAGENT_TEXT`](/docs/en/env-vars)**: the run's text and thinking blocks too, so you can reconstruct each run's transcript.
 
-When you enable either option, Claude Code forwards messages from [subagents at every nesting depth](/docs/en/sub-agents#let-subagents-spawn-their-own-subagents), whether each one was spawned with the Agent tool or started as a [forked skill](/docs/en/skills#run-skills-in-a-subagent). Messages of subagents that a forked skill spawns, and of forked skills started inside a subagent or another forked skill, require Claude Code v2.1.275 or later. In `parent_tool_use_id`, the nested subagent's messages carry the ID of the Agent or Skill tool call that started it, so you can rebuild the full nesting tree by following those IDs. Before v2.1.219, messages from nested subagents didn't appear in the stream.
+When you enable either option, Claude Code forwards messages from [subagents at every nesting depth](/docs/en/sub-agents#let-subagents-spawn-their-own-subagents), whether each one was spawned with the Agent tool or started as a forked skill. In `parent_tool_use_id`, the nested subagent's messages carry the ID of the Agent or Skill tool call that started it, so you can rebuild the full nesting tree by following those IDs.
 
-Skills that [run in a subagent](/docs/en/skills#run-skills-in-a-subagent) appear in the stream the same way: the forked skill's first message is a `user` message carrying the skill content that drives the run. If you enable either option, the stream also carries the forked skill's text and thinking blocks. Before v2.1.265, only a forked skill's `tool_use` and `tool_result` blocks appeared in the stream.
+A run that Claude starts with a tool call carries that tool call's ID. A forked skill that you start by passing `/<skill-name>` as the prompt has no tool call, so its messages carry a `forked-command-` value instead and arrive after it finishes. Find how the run started in the first column:
+
+| How the run starts | `parent_tool_use_id` | When its messages arrive |
+| :- | :- | :- |
+| Claude calls the Agent tool from the main conversation | The ID of that Agent `tool_use` block | While the subagent works |
+| Claude calls the Skill tool for a forked skill from the main conversation | The ID of that Skill `tool_use` block | While the forked skill works |
+| You pass `/<skill-name>` as the prompt | A value that starts with `forked-command-` | Together and in order after the forked skill finishes |
+
+For a forked skill started from the prompt, match `parent_tool_use_id` on the `forked-command-` prefix, because the name after it can differ from the one you typed.
+
+If some of these messages are missing from your stream, check your Claude Code version against these minimums:
+
+* **`--forward-subagent-text` and `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT`**: v2.1.211 or later
+* **Forwarding at every nesting depth**: v2.1.219 or later
+* **A forked skill that Claude starts with the Skill tool from the main conversation**: v2.1.86 or later for its `tool_use` and `tool_result` blocks, and v2.1.265 or later for its first `user` message and its text and thinking blocks
+* **Messages of subagents that a forked skill spawns, and of forked skills started inside a subagent or another forked skill**: v2.1.275 or later
+* **Messages of a forked skill you start by passing `/<skill-name>` as the prompt**: v2.1.287 or later
 
 #### Handle API retries
 
@@ -223,10 +248,10 @@ When an API request fails with a retryable error, Claude Code emits a `system/ap
 | `type` | `"system"` | message type |
 | `subtype` | `"api_retry"` | identifies this as a retry event |
 | `attempt` | integer | current attempt number, starting at 1 |
-| `max_retries` | integer | total retries permitted for this failure's cause, which can be fewer than the session-wide budget |
+| `max_retries` | integer | total retries permitted for this failure's cause |
 | `retry_delay_ms` | integer | milliseconds until the next attempt |
 | `error_status` | integer or null | HTTP status code of the failed attempt, or `null` when the attempt got no HTTP response from the API |
-| `no_response` | object, optional | present only when the failed attempt got [no response headers in time](/docs/en/errors#no-response-from-api). `waited_ms` is how long that attempt waited and `retry_wait_ms` is how long the retry will wait. In these events, `max_retries` reflects the one retry this cause normally gets, not the session-wide budget. Requires Claude Code v2.1.261 or later |
+| `no_response` | object, optional | present only when the failed attempt got [no response headers in time](/docs/en/errors#no-response-from-api). `waited_ms` is how long that attempt waited and `retry_wait_ms` is how long the retry will wait. Requires Claude Code v2.1.261 or later |
 | `error` | string | error category: `authentication_failed`, `oauth_org_not_allowed`, `account_on_hold`, `billing_error`, `rate_limit`, `overloaded`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, `cloud_credential_error`, or `unknown` |
 | `uuid` | string | unique event identifier |
 | `session_id` | string | session the event belongs to |
@@ -251,7 +276,7 @@ Use the plugin fields in the `system/init` event to catch a plugin that didn't l
 
 When a `--plugin-dir` directory or archive itself fails to load, its `plugin_errors` entry includes the resolved absolute path as `path`. Use it to tell which of several `--plugin-dir` values failed. The `path` field requires Claude Code v2.1.283 or later.
 
-Use the MCP server fields the same way. When you pass [`--mcp-config`](/docs/en/cli-reference#cli-flags) with `-p`, Claude Code waits for still-pending servers before running the first turn, up to the [`MCP_TIMEOUT`](/docs/en/env-vars) startup timeout, 30 seconds by default. A remote server with a [cached tool list](/docs/en/agent-sdk/mcp#connection-timing) skips the wait, shows `pending` in `system/init`, and connects on its first tool call. The wait requires Claude Code v2.1.221 or later.
+Use the MCP server fields the same way. When you pass [`--mcp-config`](/docs/en/cli-reference#cli-flags) with `-p`, Claude Code waits for still-pending servers before running the first turn, up to the [`MCP_TIMEOUT`](/docs/en/env-vars) startup timeout, 30 seconds by default. A remote server with a [cached tool list](/docs/en/agent-sdk/mcp#connection-timing) skips the wait, shows `pending` in `system/init`, and connects on its first tool call. In a [self-hosted environment](/docs/en/self-hosted-environments-configuration#connection-timing), a shorter wait applies instead. The wait requires Claude Code v2.1.221 or later.
 
 Claude Code validates each `--mcp-config` entry at startup and skips entries that fail validation, for example a `url` entry with no `type`. The run continues and exits cleanly, so check these fields to catch a server that never loaded:
 
@@ -278,7 +303,7 @@ When [`CLAUDE_CODE_SYNC_PLUGIN_INSTALL`](/docs/en/env-vars) is set, Claude Code 
 
 ### Auto-approve tools
 
-Use `--allowedTools` to let Claude use certain tools without prompting. Listing `Read` and `Edit` lets Claude read and edit files without asking for permission. Listing `Bash` does the same for shell commands, except in a run that starts in [auto mode](/docs/en/permission-modes#how-auto-mode-evaluates-actions), where Claude Code drops a bare `Bash` entry as a broad allow rule and auto mode evaluates each command instead. This example runs a test suite and fixes failures with those three tools listed:
+Use `--allowedTools` to let Claude use certain tools without prompting. Listing `Read` and `Edit` lets Claude read and edit files without asking for permission, apart from reads from [network paths](/docs/en/permissions#network-paths). Listing `Bash` does the same for shell commands, except in a run that starts in [auto mode](/docs/en/permission-modes#how-auto-mode-evaluates-actions), where Claude Code drops a bare `Bash` entry as a broad allow rule and auto mode evaluates each command instead. This example runs a test suite and fixes failures with those three tools listed:
 
 ```bash theme={null}
 claude -p "Run the test suite and fix any failures" \
@@ -288,7 +313,7 @@ claude -p "Run the test suite and fix any failures" \
 To set a baseline for the whole session instead of listing individual tools, pass a [permission mode](/docs/en/permission-modes). A run where nothing sets a permission mode takes the [built-in starting permission mode](/docs/en/permission-modes#which-mode-a-session-starts-in), which can be `auto`, so pass the one you want:
 
 * **`auto`**: pass `--permission-mode auto` to have a classifier review most actions instead of you
-* **`dontAsk`**: Claude Code denies every call that would otherwise prompt, which is useful for locked-down CI runs. Actions that need no approval in Manual mode still run, such as file reads in your working directories and the [read-only command set](/docs/en/permissions#read-only-commands), and so do actions your `--allowedTools` entries or `permissions.allow` rules cover. `AskUserQuestion`, connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools), and MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool) are denied even when an allow rule matches
+* **`dontAsk`**: Claude Code denies every call that would otherwise prompt, which is useful for locked-down CI runs. Actions that need no approval in Manual mode still run, such as file reads in your working directories and the [read-only command set](/docs/en/permissions#read-only-commands), and so do actions your `--allowedTools` entries or `permissions.allow` rules cover. `AskUserQuestion`, connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools), MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool), and [reads from network paths](/docs/en/permissions#network-paths) are denied even when an allow rule matches
 * **`acceptEdits`**: Claude writes files without prompting, and Claude Code auto-approves common filesystem commands such as `mkdir`, `touch`, `mv`, and `cp`. The [actions no mode auto-approves](/docs/en/permission-modes#actions-no-mode-auto-approves) still apply. Apart from the read-only command set, other shell commands and network requests still need an `--allowedTools` entry or a `permissions.allow` rule. See [what `acceptEdits` auto-approves](/docs/en/permission-modes#auto-approve-file-edits-with-acceptedits-mode) for the full list
 
 This example applies lint fixes with `acceptEdits` as the baseline:
@@ -354,7 +379,7 @@ See [system prompt flags](/docs/en/cli-reference#system-prompt-flags) for more o
 
 ### Continue conversations
 
-Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. On Claude Code v2.1.257 or later, when you pass `--continue`, Claude Code opens a [background session](/docs/en/sessions#resume-a-session) that has finished, but not one that is still running. This example runs a review, then sends follow-up prompts:
+Use `--continue` to continue the most recent conversation, or `--resume` with a session ID to continue a specific conversation. On Claude Code v2.1.257 or later, when you pass `--continue`, Claude Code opens a [background session](/docs/en/sessions#where-the-session-picker-looks) that has finished, but not one that is still running. This example runs a review, then sends follow-up prompts:
 
 ```bash theme={null}
 # First request
@@ -372,7 +397,7 @@ session_id=$(claude -p "Start a review" --output-format json | jq -r '.session_i
 claude -p "Continue that review" --resume "$session_id"
 ```
 
-You can run the two commands from different directories: Claude Code [finds the session by its ID](/docs/en/sessions#resume-a-session) in any project on this machine. Before v2.1.223, Claude Code looked for the ID only in the current project directory and its git worktrees, so you had to run both commands from the same directory.
+You can run the two commands from different directories: Claude Code [finds the session by its ID](/docs/en/sessions#where-the-session-picker-looks) in any project on this machine.
 
 In place of the session ID, you can pass `--resume` the absolute path to a session's `.jsonl` [transcript file](/docs/en/sessions#where-transcripts-are-stored), and Claude Code continues the conversation stored in that file.
 

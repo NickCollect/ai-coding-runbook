@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/publish
-fetched_at: 2026-10-05T06:27:12.520555+00:00
+fetched_at: 2026-10-12T06:49:45.117005+00:00
 fetch_method: mintlify_md
 ---
 
@@ -104,7 +104,7 @@ To publish from the plugin's own repository, save the marketplace file beside `p
 }
 ```
 
-In your shell, run `claude plugin validate .` in the repository to check the file before you push.
+In your shell, run `claude plugin validate .` in the repository before you push. For what the run checks, see [Validate a directory](/docs/en/plugins/cli-reference#validate-a-directory).
 
 [Create a marketplace](/docs/en/plugins/create-marketplace) covers the layout with several plugins in one repository.
 
@@ -119,6 +119,7 @@ Tell your users to add the marketplace and then install the plugin from their sh
 * Add the marketplace once: `claude plugin marketplace add your-org/your-marketplace`, where the argument is a GitHub `owner/repo` shorthand, a URL, or a path
 * Install the plugin: `claude plugin install deploy-helper@your-marketplace`
 * Or do both from inside a session: `/plugin install deploy-helper --marketplace your-org/your-marketplace`. Requires Claude Code v2.1.275 or later. See [Add a marketplace and install in one command](/docs/en/plugins/install#add-a-marketplace-and-install-in-one-command)
+* Or do both from the shell in one command: `claude plugin install deploy-helper --marketplace your-org/your-marketplace`. Requires Claude Code v2.1.292 or later
 
 ### Ship updates to users
 

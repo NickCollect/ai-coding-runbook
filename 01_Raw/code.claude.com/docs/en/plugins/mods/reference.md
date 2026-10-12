@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/reference
-fetched_at: 2026-10-05T06:27:12.477776+00:00
+fetched_at: 2026-10-12T06:49:44.995940+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Complete reference for Claude Code mods: hooks module layout, events, mods API methods, render sites, elements by surface, limits, and settings.
 
-Look up any event a [mod](/docs/en/plugins/mods/overview) can handle, mods API method it can call, or render site it can draw in, for the Claude Code CLI and the Desktop app as of v2.1.289. Each entry gives the name and a one-line description, and links to the guide section that explains it where there is one.
+Look up any event a [mod](/docs/en/plugins/mods/overview) can handle, mods API method it can call, or render site it can draw in, for the Claude Code CLI and the Desktop app as of v2.1.290. Each entry gives the name and a one-line description, and links to the guide section that explains it where there is one.
 
 <Note>
   The complete reference is Claude Code's [TypeScript declarations for mods](https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts), which describe every event, method, and element, with examples. The copy on GitHub can be older than the Claude Code version you have installed. When the two disagree, trust [the copy Claude Code writes for your version](/docs/en/plugins/mods/create#get-the-types-for-your-build).
@@ -45,7 +45,8 @@ A mod registers each of its hooks, which are event handlers, by calling `on` ins
 | `next.origin` | `{ plugin, tier }` of whoever fired the event. Claude Code itself is `{ plugin: 'engine', tier: 'core' }`. A mod's `tier` is its priority group in the [order mods run in](/docs/en/plugins/mods/events#the-order-mods-run-in): `prepend`, `user`, `append`, or `builtin`. |
 | `next.budget` | The hook's time limit in milliseconds: `next.budget.ms` is the whole limit, and `next.budget.remainingMs` is what's left now |
 | `next.to(e, tier)` | Skips to a later tier, which is `append`, `builtin`, or `core`. `next.to(e, 'append')` skips the mods a user installed. Only a mod in `prependPlugins` or `appendPlugins` can call it. |
-| `next.error`, `next.called` | In a `.catch` handler only. `next.error.kind` is `throw` or `timeout`, `next.error.message` is the error's text, and `next.called` is `true` when the failed hook had called `next`. |
+| `next.error` | In a `.catch` handler only. `kind` is `throw` or `timeout` when the hook failed, and `message` is the error's text. `kind` is `re-entry` when the hook was skipped because the event came from inside one of its own mods API calls, and `cause` is `lent` if a method another mod adds to the mods API fired that event. `re-entry` and `cause` require Claude Code v2.1.292 or later. |
+| `next.called` | In a `.catch` handler only. `true` when the hook had called `next`. |
 
 ## Events
 
@@ -61,7 +62,16 @@ Tool events fire around each tool call Claude makes, from the description Claude
 | :- | :- | :- |
 | [`tool.call`](/docs/en/plugins/mods/events#guard-or-change-a-tool-call) | A tool is about to run | `next(e)`, `{ deny: reason }`, or `{ result }` |
 | [`tool.check`](/docs/en/plugins/mods/events#where-settings-hooks-run-in-the-order) | Claude Code decides whether a tool call may run, after the `tool.call` and `PreToolUse` hooks. `next(e)` resolves to the decision the rules, the permission mode, and those hooks reached. | `{ decision }`, which is `allow`, `ask`, or `deny` |
-| `tool.describe` | Once for each tool, when its description is first sent to Claude | `{ description }`, optionally with `isDeferred` set to `true` to put the tool behind [tool search](/docs/en/mcp#scale-with-mcp-tool-search) or `false` to load it upfront |
+| `tool.describe` | Once for each tool, when its description is first sent to Claude. A second time for an MCP tool when Claude loads it through [tool search](/docs/en/mcp#scale-with-mcp-tool-search), with `e.description` set to the text Claude reads for the loaded tool. | `{ description }`, optionally with `isDeferred` set to `true` to put the tool behind tool search or `false` to load it upfront |
+
+#### Agent and organization fields on `tool.check`
+
+In a `tool.check` hook, read these fields to tell a subagent's call from the main conversation's, and to see whether your organization requires approval for a connector tool:
+
+* **`e.agentId`**: set when a [subagent](/docs/en/sub-agents) or an [in-process teammate](/docs/en/agent-teams#choose-a-display-mode) makes the call, and absent when the main conversation does
+* **`e.ceiling`**: `ask` for a connector tool your organization set to `ask`, in [sessions where that setting reaches Claude Code](/docs/en/mcp#organization-controls-on-connector-tools)
+
+On `tool.check`, `e.agentId` and `e.ceiling` require Claude Code v2.1.290 or later.
 
 ### Prompts and what Claude reads
 
@@ -72,10 +82,12 @@ Prompt events cover the text the user types and the text Claude Code sends to Cl
 | [`prompt.submit`](/docs/en/plugins/mods/events#rewrite-or-add-to-a-prompt) | A prompt is submitted | `next({ ...e, text })`, `next({ ...e, context })`, or `{ drop: reason }` |
 | `prompt.fill`, `prompt.suggest` | Text is about to go into the prompt box as a draft, or as a dim suggestion | `next(e)` with changed text |
 | `prompt.edit` | The user edits the prompt box | `next(e)` |
+| `prompt.autocomplete` | The user types in the prompt box and a word ends at the cursor. `e.token` is that word. Claude Code doesn't wait for the hook: its own autocomplete rows show first. | `{ suggestions }`, a list of `{ text, label, description }` rows shown below Claude Code's own. Choosing a row writes its `text` over the word. |
 | `prompt.compose` | Claude Code renders a system prompt | `{ sections }`, a list of `{ id, text, scope }` in the order they're sent |
 | [`prompt.section`](/docs/en/plugins/mods/events#rewrite-or-add-to-a-prompt) | Once for each named section of the system prompt. `e.name` is the section's `id` in `prompt.compose`. | `{ text }`, or `{ text: null }` to omit the section |
 | [`prompt.context`](/docs/en/plugins/mods/events#rewrite-or-add-to-a-prompt) | Once for each conversation, for the context sent with the first message | `{ blocks }` |
 | `prompt.attachment` | Claude Code adds a message of its own for Claude, such as a reminder. `e.type` names the kind, and for the kinds the types declare, `e.detail` holds the facts the text was written from. | `{ text }`, or `{ text: null }` to omit it |
+| `prompt.mention` | Claude Code is about to read a file that a prompt @-mentions. Requires Claude Code v2.1.290 or later. | `next({ ...e, path })` to read a different file, or `{ deny: reason }` |
 | [`skill.prompt`](/docs/en/plugins/mods/events#rewrite-or-add-to-a-prompt) | A skill's text is expanded for Claude | `{ text }` |
 | `attribution.text` | Claude Code composes commit or pull request attribution text | `{ text }` |
 
@@ -112,7 +124,7 @@ Session events mark the session starting, ending, compacting, and exchanging mes
 | `session.end` | The session ends, or `/clear`, `/resume`, or `/branch` runs. `e.reason` is `clear`, `resume`, `logout`, `prompt_input_exit`, or `other`. `/branch` reports `resume`. | `next(e)` |
 | `session.compact` | The conversation is about to be compacted | `{ skip: reason }` |
 | [`session.receive`](/docs/en/plugins/mods/api#send-and-receive-messages-between-sessions), [`session.send`](/docs/en/plugins/mods/api#send-and-receive-messages-between-sessions) | A message arrives from, or is about to go to, another agent or session. See [Send and receive messages between sessions](/docs/en/plugins/mods/api#send-and-receive-messages-between-sessions). | `{ consumed: reason }` for `receive`, `{ isDelivered: false, reason }` for `send` |
-| `session.append` | Once for each row the conversation keeps, such as a prompt, a response block, a tool result, or a notice, before it's stored | `next({ ...e, message })` to rewrite the row's `content` |
+| `session.append` | Once for each row the conversation keeps, such as a prompt, a response block, a tool result, or a notice, before it's stored | `next({ ...e, message })` with a changed `message.content`, to rewrite the row's text blocks or the `content` of a `tool_result` block in it |
 | `session.attach`, `session.detach` | Another app connects to or disconnects from the session | `next(e)` |
 | `session.measure` | After each turn, and when a plan limit's percent used changes | `next(e)` |
 
@@ -124,6 +136,8 @@ Subagent events fire when a subagent type is offered to Claude and when a subage
 | :- | :- | :- |
 | `agent.offer` | A subagent type is offered to Claude | `{ isOffered: false }` to withhold it |
 | `agent.spawn` | A subagent or an [agent team](/docs/en/agent-teams) teammate is about to start. For a teammate, `e.isTeammate` is `true`. | `next({ ...e, model })` to choose its model, or `{ deny: reason }` |
+
+When Claude resumes a subagent with the [`SendMessage`](/docs/en/sub-agents#resume-subagents) tool, your `agent.spawn` hook doesn't run again. To refuse the `SendMessage` calls that resume a subagent, match that tool in a [`tool.call`](/docs/en/plugins/mods/events#guard-or-change-a-tool-call) hook.
 
 ### Interface
 
@@ -146,7 +160,9 @@ These events let a mod act on other mods as they load, to refuse one or change t
 | Event | Fires when | A hook can return |
 | :- | :- | :- |
 | [`plugin.register`](/docs/en/plugins/mods/admin#enforce-a-policy-with-a-mod-of-your-own) | A hooks module is about to load. `e.uses` lists its events, mods API calls, environment variables, and state, as `claude plugin validate` prints them. Each call is written without the `$.` prefix, such as `fs.read`. | `{ refuse: reason }` |
-| `engine.create` | The mods API is being built for this mod | A changed mods API, to add a namespace or withhold one |
+| `engine.create` | The mods API is being built for this mod | A changed mods API, to add a namespace. A mod outside the `user` [tier](#the-hook-function) can also withhold one. |
+
+When another mod's hook calls a method on a namespace you added in `engine.create`, your method's `$` calls run in that hook's context until every hook on that event returns. For example, a relative path resolves against that hook's working directory, and `$.prompt.submit` rejects while the turn is waiting on that hook. Calls your method makes after that run in your mod's own context.
 
 ### Telemetry
 
@@ -174,7 +190,7 @@ The mods API is the `$` argument every hook receives. Its methods are grouped in
 | [`$.ui`](/docs/en/plugins/mods/interface#pick-where-to-draw) | `resolve`, `invalidate`, `open`, `close`, `panes`, `focus`, `scroll`, `toast`, `status`, `log`, `notice`, `ask`, `copy`, `selection`, `blit` |
 | [`$.command`](/docs/en/plugins/mods/api#add-a-command) | `register`, `run`, `list` |
 | [`$.tool`](/docs/en/plugins/mods/api#add-a-tool) | `register`, `call`, `check`, `list` |
-| `$.agent` | `register`, `spawn`, `list` |
+| `$.agent` | `register`, `spawn`, `list`. `list()` returns this session's subagents and teammates, each with a `status` of `pending`, `running`, `waiting`, `idle`, `completed`, `failed`, or `killed`, where `idle` and `waiting` require Claude Code v2.1.289 or later. |
 | [`$.model`](/docs/en/plugins/mods/api#call-a-model) | `complete`, `fork`, `classify` |
 | [`$.prompt`](/docs/en/plugins/mods/api#start-a-turn-from-a-background-job) | `submit`, `read`, `fill`, `suggest`, `compose`. Claude reads text from `submit({ text })` after a sentence that names your mod as the sender. `submit({ text, asUser: true })` sends the text as the user's own words, without that sentence. |
 | `$.turn` | `abort` |
@@ -217,8 +233,8 @@ A render site is an extension point in Claude Code's interface. Each row is a va
 To fit a tree to its site, read these props in the hook:
 
 * **Width of a `Pane` or the band**: draw to `e.props.bodyColumns`
-* **Height of a `Pane` beside the transcript**: where `e.props.placement` is `'dock'`, `e.props.scroll.bodyRows` is the number of rows the pane has
-* **Height of a `Pane` above the prompt**: where `e.props.placement` is `'inline'`, the pane grows with your tree up to a limit, and `bodyRows` counts only the rows showing now. The [`rows` field of `$.ui.open`](/docs/en/plugins/mods/interface#open-a-pane-at-the-right-time) asks for a different limit.
+* **Height of a `Pane` beside the transcript**: where `e.props.placement` is `'dock'`, `e.props.scroll.bodyRows` is the number of rows the pane has for your tree
+* **Height of a `Pane` above the prompt**: where `e.props.placement` is `'inline'`, the pane grows with your tree up to a limit, and `bodyRows` is that limit. The [`rows` field of `$.ui.open`](/docs/en/plugins/mods/interface#open-a-pane-at-the-right-time) asks for a different one.
 
 A tree taller than the pane scrolls as a whole.
 
@@ -228,24 +244,45 @@ Elements are the building blocks of a tree a `ui.render` hook returns, and you g
 
 | Element | Main props | Terminal | Desktop |
 | :- | :- | :-: | :-: |
-| [`Box`](/docs/en/plugins/mods/interface#build-a-tree-from-elements) | `key`, flex layout, `gap`, `padding`, `margin`, `width`, `height`, `borderStyle`, `backgroundColor`, `position`, `hover` | ✓ | ✓ |
+| [`Box`](/docs/en/plugins/mods/interface#build-a-tree-from-elements) | `key`, flex layout, `gap`, `padding`, `margin`, `width`, `height`, [`borderStyle`](#box-border-styles), `backgroundColor`, `position`, `hover` | ✓ | ✓ |
 | [`Text`](/docs/en/plugins/mods/interface#build-a-tree-from-elements) | `color`, `backgroundColor`, `bold`, `italic`, `underline`, `dimColor`, `inverse`, `wrap` | ✓ | ✓ |
 | [`Button`](/docs/en/plugins/mods/interface#respond-to-presses-and-typing) | `key`, `label`, `onPress`, `hotkey`, `plain`, `dimColor`, `autoFocus`, `action` | ✓ | ✓ |
-| `Link` | `href`, `label` | ✓ | ✓ |
-| `Code` | The code, up to 10,000 characters | ✓ | ✓ |
-| `Markdown` | `text`, up to 10,000 characters, `key`, `dimColor`, `onLinkPress`, `pressableLinks` | ✓ | ✓ |
+| [`Link`](/docs/en/plugins/mods/interface#link-in-the-desktop-app) | `href`, `label`. See [Limits](#limits). | ✓ | ✓ |
+| [`Code`](/docs/en/plugins/mods/gallery#show-code-and-changes) | `source`, `language`, `path`, `startLine`, `format`, `wrap` | ✓ | ✓ |
+| `Markdown` | `text`, `key`, `dimColor`, `onLinkPress`, `pressableLinks` | ✓ | ✓ |
 | [`Input`](/docs/en/plugins/mods/interface#take-typed-input-and-draw-a-row-for-each-item) | `key`, `label`, `placeholder`, `value`, `submitLabel`, `onSubmit`, `onInput`, `autoFocus` | ✓ | ✓ |
 | `Select` | `key`, `label`, `options`, `value`, `onSelect`, `autoFocus` | ✓ | ✓ |
 | `Svg` | An SVG document, up to 131,072 characters | | ✓ |
 | [`Client`](/docs/en/plugins/mods/interface#build-a-tree-from-elements) | `module`, `key` | ✓ | ✓ |
 | [`Raster`](/docs/en/plugins/mods/interface#draw-a-grid-of-colored-cells) | `key`, `columns` up to 512, `rows` up to 256, `cells`. See [Draw a grid of colored cells](/docs/en/plugins/mods/interface#draw-a-grid-of-colored-cells). | ✓ | |
-| `Image` | PNG or RGBA bytes up to 2 MiB, or a file path | ✓ | |
+| `Image` | PNG or RGBA bytes up to 2 MiB, or a file path, `columns` and `rows` up to 255, and `alt` text. | ✓ | |
 
 More `Button` rules: `action` names one of Claude Code's own [keybinding actions](/docs/en/keybindings), and the user's binding for it presses the button when that binding is a chord or a modified key. A digit `hotkey` on a button in the band also fires when the user types that digit alone into an empty prompt and pauses. When two buttons in one drawing name the same `hotkey`, the later one gets it. `autoFocus` accepts only `true` on any control, so omit the prop to leave it off.
 
+<h3 id="box-border-styles">
+  `Box` border styles
+</h3>
+
+To draw a border around a `Box`, set its `borderStyle` to one of these names, as in `borderStyle: 'round'`. Each row says what the terminal draws for that name and shows the top edge of the border.
+
+| `borderStyle` | What the terminal draws | Top edge |
+| :- | :- | :- |
+| `'single'` | Thin lines with square corners | `┌──┐` |
+| `'double'` | Double lines | `╔══╗` |
+| `'round'` | Thin lines with rounded corners | `╭──╮` |
+| `'bold'` | Thick lines | `┏━━┓` |
+| `'singleDouble'` | Thin lines on the top and bottom, double lines on the sides | `╓──╖` |
+| `'doubleSingle'` | Double lines on the top and bottom, thin lines on the sides | `╒══╕` |
+| `'classic'` | The ASCII characters `+`, `-`, and `\|` | `+--+` |
+| `'arrow'` | Arrows that point into the `Box` | `↘↓↓↙` |
+| `'dashed'` | Dashed lines with blank corners | `╌╌` |
+| `'quote'` | A bar, `▎`, down the left side and blank cells on the other three sides | Blank |
+
+A `Box` whose `borderStyle` names anything else, such as `'rounded'`, draws with no border.
+
 ## Limits
 
-Hooks and mods API calls run under time and size limits. Claude Code skips a hook that exceeds a time limit and rejects a call that exceeds a size limit.
+Hooks and mods API calls run under time and size limits. Claude Code skips a hook that exceeds a time limit.
 
 | Limit | Value |
 | :- | :- |
@@ -255,12 +292,20 @@ Hooks and mods API calls run under time and size limits. Claude Code skips a hoo
 | `$.process.run` timeout | 30 seconds by default, 10 minutes at most |
 | `$.model.complete` `maxTokens` | 1024 by default, up to 64,000 or the model's output limit |
 | `$.fs.read` and `$.fs.write` | 4 MiB for one file |
-| One string child of a `Text` | 10,000 characters |
+| A `$.http.fetch` request body | 4 MiB, counted in characters. A call with a larger body rejects. |
+| A `$.http.fetch` response body | 4 MiB. `text` holds the first 4 MiB and the rest isn't read. When the `Content-Length` header declares more, the call rejects instead, with a reason that ends `is over the 4194304-byte limit`, except when the last request after any redirects uses the `HEAD` method. The `HEAD` exemption requires Claude Code v2.1.296 or later. |
+| One `$.http.fetch` call, redirects and body included | 30 seconds |
+| Redirects one `$.http.fetch` call follows | 5 |
+| A hook's `drop` reason or `config.set` `deny` reason | 4,096 characters. The end of a longer reason is cut, and the drop or deny still applies. The cut requires Claude Code v2.1.292 or later, and on earlier versions the hook [fails](/docs/en/plugins/mods/events#handle-a-hook-that-fails) instead. |
+| Text in one tree | The first 100,000 characters are drawn |
+| A `Code`'s `language` or `path`, a `Select` option's `value`, or a `Client`'s `module` | 10,000 characters. If one is longer, Claude Code [draws its own version of the site](/docs/en/plugins/mods/interface#build-a-tree-from-elements). |
+| A `Link`'s `href` | 2,048 characters. A longer `href` keeps the whole tree from drawing. |
 | `$.store` | 4 MiB of JSON in total |
 | `$.session.messages()` | The newest 4,096 entries |
 | `$.ui.invalidate('ui.render')` redraws | Throttled to 10 a second, or 30 in the terminal for the visible pane, the expanded band, and the hint line under the prompt. Calls that come sooner are coalesced. |
 | `$.ui.toast` | Shown for 4 seconds unless you pass `{ timeoutMs }` |
 | A pane opened without the user asking | Placed from 144 terminal columns, 110 after they've opened it once |
+| Scopes, such as functions, blocks, and loops, nested inside one another in one file of a hooks module | 2,000 |
 | Command, tool, subagent type, and pane names | Letters, digits, `_`, and `-`, up to 64 characters |
 | One `claude plugin test` test | 5 seconds unless the test sets `timeoutMs` |
 
@@ -273,7 +318,7 @@ These are the settings and environment variables that affect mods. The Where col
 | `CLAUDE_CODE_PLUGIN_DIRS` | Environment, or `env` in `~/.claude/settings.json` | Plugin directories to load as `--plugin-dir` does, for apps you can't pass a flag to. Absolute paths separated by `:`, or `;` on Windows. |
 | `CLAUDE_CODE_PLUGIN_DIR_WATCH` | Environment | `1` makes a long-running non-interactive session reload `--plugin-dir` mods on save |
 | `prependPlugins`, `appendPlugins` | Managed settings. User settings only on a machine with no managed settings, for a user who isn't signed in with a Team or Enterprise plan. | Lists of plugin ids, such as `acme-guard@acme-tools`. Mods in `prependPlugins` run before every mod a user installs, and mods in `appendPlugins` run after, in the listed order. See [The order mods run in](/docs/en/plugins/mods/events#the-order-mods-run-in). |
-| `allowManagedModsOnly` | Managed settings, as an [option on the built-in guard](/docs/en/plugins/mods/admin#set-options-on-the-built-in-guard) | Only mods that [count as your organization's](/docs/en/plugins/mods/admin#install-your-organizations-mods), and mods built into Claude Code, load. Users' settings hooks keep running. |
+| `allowManagedModsOnly` | Managed settings, as an [option on the built-in guard](/docs/en/plugins/mods/admin#set-options-on-the-built-in-guard) | Only mods that [count as your organization's](/docs/en/plugins/mods/admin#install-your-organizations-mods), and mods built into Claude Code, run their hooks. Users' settings hooks keep running. |
 | `allowModsToOverrideDenyRules` | Managed settings, as an [option on the built-in guard](/docs/en/plugins/mods/admin#set-options-on-the-built-in-guard) | Lets a mod a user installed approve a tool call that a `deny` rule refuses |
 | `allowManagedHooksOnly` | Managed settings | Blocks hooks and installed mods that aren't your organization's. See [what keeps running](/docs/en/settings-reference#what-runs-under-allowmanagedhooksonly). |
 | `disableAllHooks` | Any settings file | In managed settings, no mod or hook from an installed plugin runs. In your own settings, what your organization manages keeps running. See [`disableAllHooks`](/docs/en/settings-reference#disableallhooks). |

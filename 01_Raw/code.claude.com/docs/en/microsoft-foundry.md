@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/microsoft-foundry
-fetched_at: 2026-10-05T06:27:12.041525+00:00
+fetched_at: 2026-10-12T06:49:44.016773+00:00
 fetch_method: mintlify_md
 ---
 
@@ -114,12 +114,22 @@ First, create a Claude resource in Azure:
 
 ### 2. Configure Azure credentials
 
-Claude Code supports three authentication methods for Microsoft Foundry. Choose the method that best fits your security requirements.
+Claude Code supports three authentication methods for Microsoft Foundry. Choose the method that best fits your security requirements:
 
-**Option A: API key authentication**
+* [API key](#use-an-api-key): you copy a key from the Microsoft Foundry portal and set it as `ANTHROPIC_FOUNDRY_API_KEY`
+* [Microsoft Entra ID](#use-microsoft-entra-id): Claude Code gets tokens through the Azure SDK default credential chain, for example from an `az login` session, so there's no API key to store
+* [Bearer token](#use-a-bearer-token): another process obtains a Microsoft Entra ID access token and you pass it in `ANTHROPIC_FOUNDRY_AUTH_TOKEN`
 
-1. Navigate to your resource in the Microsoft Foundry portal
-2. Go to the **Endpoints and keys** section
+<Note>
+  When using Microsoft Foundry, the `/logout` command is unavailable since authentication is handled through Azure credentials.
+</Note>
+
+#### Use an API key
+
+Copy a key from the Microsoft Foundry portal, then set it as an environment variable:
+
+1. Go to your resource in the Microsoft Foundry portal
+2. Open the **Endpoints and keys** section
 3. Copy **API Key**
 4. Set the environment variable, replacing `your-azure-api-key` with the key you copied:
 
@@ -127,18 +137,20 @@ Claude Code supports three authentication methods for Microsoft Foundry. Choose 
 export ANTHROPIC_FOUNDRY_API_KEY=your-azure-api-key
 ```
 
-**Option B: Microsoft Entra ID authentication**
+#### Use Microsoft Entra ID
 
-When neither `ANTHROPIC_FOUNDRY_API_KEY` nor `ANTHROPIC_FOUNDRY_AUTH_TOKEN` is set, Claude Code automatically uses the Azure SDK [default credential chain](https://learn.microsoft.com/en-us/azure/developer/javascript/sdk/authentication/credential-chains#defaultazurecredential-overview).
+Leave `ANTHROPIC_FOUNDRY_API_KEY` and `ANTHROPIC_FOUNDRY_AUTH_TOKEN` unset. Claude Code then uses the Azure SDK [default credential chain](https://learn.microsoft.com/en-us/azure/developer/javascript/sdk/authentication/credential-chains#defaultazurecredential-overview).
 This supports a variety of methods for authenticating local and remote workloads.
 
-On local environments, you commonly may use the Azure CLI:
+On a local machine, sign in with the Azure CLI:
 
 ```bash theme={null}
 az login
 ```
 
-**Option C: Bearer token authentication**
+For the roles your identity needs, see [Azure RBAC configuration](#azure-rbac-configuration).
+
+#### Use a bearer token
 
 Claude Code sends the value of `ANTHROPIC_FOUNDRY_AUTH_TOKEN` on every request as the `Authorization: Bearer` header. Use this option when another process, such as a host application or a sign-in script, has already obtained an access token for you. Requires Claude Code v2.1.203 or later.
 
@@ -149,10 +161,6 @@ export ANTHROPIC_FOUNDRY_AUTH_TOKEN=your-entra-access-token
 ```
 
 `ANTHROPIC_FOUNDRY_AUTH_TOKEN` takes precedence over `ANTHROPIC_FOUNDRY_API_KEY` and over the default credential chain.
-
-<Note>
-  When using Microsoft Foundry, the `/logout` command is unavailable since authentication is handled through Azure credentials.
-</Note>
 
 ### 3. Configure Claude Code
 
@@ -229,6 +237,24 @@ For more restrictive permissions, create a custom role with the following:
 ```
 
 For details, see [Microsoft Foundry RBAC documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry).
+
+## 1M token context window
+
+On Microsoft Foundry, when Claude Code can tell which model your deployment serves, Fable models, Sonnet 5 and later, and Opus 4.7 and later run with the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) by default, with no `[1m]` suffix needed. Claude Code reads the model from the deployment name in your model variables. Name each deployment with its model ID, such as `claude-opus-4-8`, or map the model to your deployment name with [`modelOverrides`](/docs/en/model-config#override-model-ids-per-version). For a deployment name it can't match to a model, Claude Code assumes a 200K window unless you [declare a different one](/docs/en/model-config#correct-the-window-for-a-gateway-or-custom-model-id).
+
+This `settings.json` entry tells Claude Code that a deployment named `team-opus-prod` serves Opus 4.8:
+
+```json theme={null}
+{
+  "modelOverrides": {
+    "claude-opus-4-8": "team-opus-prod"
+  }
+}
+```
+
+To keep a 200K window instead, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT=1`](/docs/en/model-config#turn-off-1m-context).
+
+Opus 4.6 and Sonnet 4.6 reach the 1M window when you append `[1m]` to the deployment name in `ANTHROPIC_DEFAULT_OPUS_MODEL` or `ANTHROPIC_DEFAULT_SONNET_MODEL`, as [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) describes. Before v2.1.287, the Fable models and Opus 4.7 and later also needed that suffix on Microsoft Foundry and ran with a 200K window by default without it.
 
 ## Troubleshooting
 

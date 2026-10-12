@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-10-05T06:27:11.674075+00:00
+fetched_at: 2026-10-12T06:49:42.955699+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,6 +41,7 @@ Match the message you see to a section below.
 | `Connection lost while your computer was asleep` | [Automatic retries](#automatic-retries) |
 | `<model> is temporarily unavailable, so auto mode cannot determine the safety of...` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
 | `Auto mode could not evaluate this action and is blocking it for safety` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
+| `Not run · auto mode's check had no usable answer` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
 | `Auto mode classifier transcript exceeded context window` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
 | `Agent aborted: auto mode classifier request refused by the safety safeguard` | [Server errors](#auto-mode-cannot-determine-the-safety-of-an-action) |
 | `The server-side auto mode classifier gave no verdict` | [Server errors](#the-server-returned-no-safety-verdict) |
@@ -97,6 +98,7 @@ Match the message you see to a section below.
 | `Your account is on hold and can't use Claude Code. View details or appeal: https://claude.ai/restricted` | [Authentication](#your-account-is-on-hold) |
 | `Your account is on hold and can't sign in to Claude Code. View details or appeal: https://claude.ai/restricted` | [Authentication](#your-account-is-on-hold) |
 | `Anthropic profile login expired · Re-authenticate your Anthropic profile` | [Authentication](#anthropic-profile-login-expired) |
+| `Login expired · Run /login to sign in again, or re-authenticate your Anthropic profile` | [Authentication](#anthropic-profile-login-expired) |
 | `Anthropic profile login expired · Run /login to use your claude.ai account instead, or re-authenticate the profile` | [Authentication](#anthropic-profile-login-expired) |
 | `does not meet scope requirement user:profile` | [Authentication](#oauth-scope-requirement) |
 | `claude.ai rejected the session token` / `session token rejected` | [Authentication](#claude-ai-rejected-the-session-token) |
@@ -134,7 +136,7 @@ Match the message you see to a section below.
 | `unable to get local issuer certificate` | [Network](#ssl-certificate-errors) |
 | `403` with `x-deny-reason: host_not_allowed` in a cloud or routine session | [Network](#host-not-allowed-in-a-cloud-session) |
 | `proxy refused the connection` | [Network](#the-proxy-refused-the-connection) |
-| `403` with `This GraphQL query is not enabled for this session` in a cloud session | [GitHub proxy](/docs/en/cloud-environments#github-proxy) |
+| `403` with `GitHub GraphQL is not available from Claude Code sessions` in a cloud session | [GitHub proxy](/docs/en/cloud-environments#github-proxy) |
 | `The cloud environments service returned an empty response` / `The cloud environments service returned a response in an unexpected format` | [Network](#the-cloud-environments-service-returned-an-empty-or-unexpected-response) |
 | `Couldn't reconnect to your Remote Control session` | [Network](#couldnt-reconnect-to-your-remote-control-session) |
 | `N sessions ended while this machine was offline — the environment was cleaned up on the server and can't be resumed.` | [Network](#sessions-ended-while-this-machine-was-offline) |
@@ -191,15 +193,17 @@ Match the message you see to a section below.
 | `<model>'s safeguards flagged this message` | [Request errors](#safety-measures-flagged-a-cybersecurity-topic) |
 | `<model>'s safeguards flagged this session` | [Request errors](#safety-measures-flagged-a-cybersecurity-topic) |
 | `<model> has safety measures that flagged this message for a cybersecurity topic` | [Request errors](#safety-measures-flagged-a-cybersecurity-topic) |
+| `` Details: `[reasoning_extraction]` `` | [Request errors](#safeguards-flagged-a-request-for-claudes-reasoning) |
 | `API Error: Output blocked by content filtering policy` | [Request errors](#output-blocked-by-content-filtering-policy) |
-| `Installation was killed before it could finish (exit code 137)` | [Installation errors](#installation-was-killed-before-it-could-finish) |
-| `The connection dropped while downloading the update` | [Installation errors](#the-connection-dropped-while-downloading-the-update) |
-| `Download timed out: exceeded the total deadline` | [Installation errors](#the-connection-dropped-while-downloading-the-update) |
+| `Installation was killed before it could finish (exit code 137)` | [Troubleshoot installation and login](/docs/en/troubleshoot-install#installation-was-killed-before-it-could-finish) |
+| `The connection dropped while downloading the update` | [Troubleshoot installation and login](/docs/en/troubleshoot-install#the-connection-dropped-while-downloading-the-update) |
+| `Download timed out: exceeded the total deadline` | [Troubleshoot installation and login](/docs/en/troubleshoot-install#the-connection-dropped-while-downloading-the-update) |
 | `--bg and --print conflict` | [Command-line errors](#conflict-between-bg-and-print) |
 | `Error: Cannot use both --append-subagent-system-prompt and --append-subagent-system-prompt-file. Please use only one.` | [Command-line errors](#conflict-between-a-system-prompt-flag-and-its-file-form) |
 | `Cloud sessions cannot be created from a --restricted session` | [Command-line errors](#cloud-sessions-cannot-be-created-from-a-restricted-session) |
 | `Cloud sessions are disabled by your organization's policy` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
 | `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
+| `Cloud sessions need a claude.ai sign-in` | [Unable to get organization UUID](/docs/en/claude-code-on-the-web#unable-to-get-organization-uuid) |
 | `Error: --json-schema is not a valid JSON Schema` | [Command-line errors](#the-json-schema-value-is-not-a-valid-json-schema) |
 | `Error: Invalid --agents configuration:` | [Command-line errors](#invalid-agents-configuration) |
 | `Error: --agents takes a JSON object, or a file path only with --print (-p)` | [Command-line errors](#invalid-agents-configuration) |
@@ -249,6 +253,7 @@ Match the message you see to a section below.
 | `Windows reported an error (EBADF) when Claude Code read this session's transcript file` | [Command-line errors](#windows-reported-an-error-ebadf) |
 | `Cannot switch renderers in this session` | [Command-line errors](#cannot-switch-renderers-in-this-session) |
 | `Cannot switch renderers while work is running in the background` | [Command-line errors](#cannot-switch-renderers-in-this-session) |
+| `Claude Code couldn't restart` | [Command-line errors](#claude-code-couldnt-restart) |
 | `Couldn't open Claude Desktop` | [Command-line errors](#couldnt-open-claude-desktop) |
 | `Failed to open Claude Desktop. Please try opening it manually.` | [Command-line errors](#couldnt-open-claude-desktop) |
 | `Couldn't read your Zed keymap` / `Couldn't back up your Zed keymap` / `Couldn't update your Zed keymap` | [Command-line errors](#terminal-setup-left-your-zed-keymap-unchanged) |
@@ -263,6 +268,8 @@ Match the message you see to a section below.
 | `Marketplace name impersonates an official Anthropic/Claude marketplace` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
 | `Marketplace "<name>" is already added from a different source` | [Plugin errors](#marketplace-is-already-added-from-a-different-source) |
 | `"<name>" is another spelling of "<reserved>", a reserved marketplace name` | [Plugin errors](#marketplace-name-is-another-spelling-of-a-reserved-name) |
+| `Cannot add marketplace "<name>": Claude Code cannot install plugins from a marketplace with this name` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#cannot-install-plugins-from-a-marketplace-with-this-name) |
+| `Cannot add marketplace "<name>": Claude Code reserves this name and cannot register a marketplace under it` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#claude-code-reserves-this-name) |
 | `Marketplace "<name>" is added but ignored` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#marketplace-is-added-but-ignored) |
 | `Marketplace "<name>" is registered but was refused (see the debug log)` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#marketplace-is-added-but-ignored) |
 | `references ${user_config.*} in a shell-form command` | [Plugin errors](#plugin-command-references-user-config) |
@@ -271,6 +278,7 @@ Match the message you see to a section below.
 | `Plugin archive integrity check failed` | [Plugin errors](#plugin-archive-integrity-check-failed) |
 | `An npm plugin source must name a registry package` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#an-npm-plugin-source-must-name-a-registry-package) |
 | `The packages it lists are not installed` / `The packages it lists were not installed, because` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#the-packages-it-lists-are-not-installed) |
+| `does not load (...), so Claude Code ignores the whole file` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#does-not-load-so-claude-code-ignores-the-whole-file) |
 | `path escapes plugin directory` | [Plugin errors](#path-escapes-plugin-directory) |
 | `path could not be checked` | [Plugin errors](#path-could-not-be-checked) |
 | `its marketplace entry path does not stay inside the marketplace directory` | [Plugin errors](#marketplace-entry-path-does-not-stay-inside-the-marketplace-directory) |
@@ -281,6 +289,7 @@ Match the message you see to a section below.
 | `"<plugin>" was not uninstalled: it is still switched on in <file>` | [Plugin errors](#plugin-was-not-uninstalled) |
 | `"<plugin>" was not uninstalled: <file> is there and could not be read` | [Plugin errors](#plugin-was-not-uninstalled) |
 | `Plugin "<plugin>" was not uninstalled: installed_plugins.json` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#installed-plugins-json-holds-a-record-this-version-cannot-read) |
+| `Plugin directory does not exist: <path>` | [Plugin troubleshooting](/docs/en/plugins/troubleshooting#plugin-directory-does-not-exist) |
 | `Error: No such tool available: <tool name>` | [Tool errors](#no-such-tool-available) |
 | `would be spawned with zero tools — refusing` | [Tool errors](#agent-would-be-spawned-with-zero-tools) |
 | `File is covered by a Read deny rule in your permission settings` | [Tool errors](#file-is-covered-by-a-read-deny-rule) |
@@ -307,6 +316,7 @@ Match the message you see to a section below.
 | `Your disk quota is full on the filesystem with Claude Code's temp directory <dir> (EDQUOT)` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
 | `The filesystem with Claude Code's temp directory <dir>, or your disk quota on it, is full (ENOSPC)` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
 | `Command output was lost: the temp filesystem at <dir> is full` / `is out of inodes` | [Tool errors](#disk-quota-or-temp-filesystem-is-full) |
+| `File is not valid UTF-8. It may use a legacy encoding such as Windows-1252, Shift-JIS or GBK, or be binary` | [Tool errors](#file-is-not-valid-utf-8) |
 | `the source file is not valid UTF-8 text` / `the source file is not valid UTF-16 text` | [Tool errors](#the-source-file-is-not-valid-utf-8-text) |
 | `the source file has the replacement character U+FFFD` | [Tool errors](#the-source-file-is-not-valid-utf-8-text) |
 | `Not published: that file is on a network share` | [Tool errors](#not-published-that-file-is-on-a-network-share) |
@@ -333,6 +343,7 @@ Match the message you see to a section below.
 | `Session isn't responding` / `Press enter again to restart this session — it isn't responding` | [Background session errors](#session-isnt-responding) |
 | `Session <id> was stopped while the respawn was in flight` | [Background session errors](#session-was-stopped-while-the-respawn-was-in-flight) |
 | `This session was running agent '<name>', which is no longer available` | [Background session errors](#session-agent-no-longer-available) |
+| `This session restarted <time> after its next /loop wakeup was due, so that wakeup will not fire` | [Background session errors](#restarted-after-its-next-loop-wakeup-was-due) |
 | `CLAUDE_CODE_PROCESS_WRAPPER: launcher ...` | [Background session errors](#claude_code_process_wrapper-launcher-errors) |
 | `EUNKNOWN: unknown error, uv_spawn` | [Background session errors](#eunknown-when-starting-a-background-session) |
 | `EACCES: permission denied, posix_spawn` | [Background session errors](#eacces-when-starting-a-background-session) |
@@ -386,8 +397,9 @@ Claude Code retries these failures:
 * A server error or overloaded response that arrives after Claude has finished thinking but before it has started any text or tool call. Claude Code retries a server error at that point up to two times. Before v2.1.284, Claude Code ended the turn with the error at that point.
 * Dropped connections. When a connection drops partway through a request before Claude has completed any part of its response, including its thinking, Claude Code re-issues the request with the same backoff and the turn continues, even if some text had already started streaming. When it drops after Claude has finished thinking but before it has started any text or tool call, Claude Code instead re-issues the request up to two times in quick succession, and ends the turn with `Connection lost before a response was produced` if the connection keeps dropping at that point.
 * A connection that Claude Code detects was broken by your computer going to sleep partway through a request. Claude Code counts it as a dropped connection under the rules above; once the retry label names the specific reason, it reads `Connection lost while your computer was asleep`, and if the turn ends after Claude has finished thinking but before any text or tool call, the message reads `Your computer went to sleep before a response was produced`.
-* A stalled response stream, when the response headers have arrived but none of Claude's response has arrived, or when Claude has finished thinking but hasn't started any text or tool call: Claude Code aborts the stalled connection and re-issues the request at most once, outside the 10-attempt budget above. If the response stalls a second time after Claude has finished thinking but before any text or tool call, Claude Code ends the turn with `The response stalled before a response was produced`.
+* A stalled response stream, when the response headers have arrived but none of Claude's response has arrived, or when Claude has finished thinking but hasn't started any text or tool call: Claude Code aborts the stalled connection and streams the request again at most once. If the response stalls a second time after Claude has finished thinking but before any text or tool call, Claude Code ends the turn with `The response stalled before a response was produced`.
 * A streaming request the API never answers with response headers, on a connection where the [first-byte deadline runs](/docs/en/network-config#streaming-idle-watchdogs): Claude Code aborts it at the deadline and re-sends it at most once per model request, within the retry budget, then ends the turn with [No response from API](#no-response-from-api) if that attempt goes unanswered too. On other connections, the request waits out `API_TIMEOUT_MS`. When you set `CLAUDE_CODE_RETRY_WATCHDOG`, the one-retry cap doesn't apply.
+* A streaming response that the API's output content filter stops before Claude has either finished thinking or started any text or tool call. Claude Code re-sends the request once, within the retry budget, and shows [Output blocked by content filtering policy](#output-blocked-by-content-filtering-policy) if the filter stops the second response too.
 * Temporary 429 throttles, but not a gateway's spend-limit `429`, which isn't a throttle; see [Spend limit reached](#spend-limit-reached).
   * When you're signed in with a claude.ai subscription, this includes 429 throttles that don't carry your plan's quota headers. Before v2.1.199, Claude Code retried those throttles only for API key and Enterprise sign-ins.
 * A request rejected because the input plus `max_tokens` exceeds the context limit. Re-sending it unchanged would fail the same way, so Claude Code retries with a reduced `max_tokens`, and stops retrying and compacts instead in two cases:
@@ -406,7 +418,6 @@ Claude Code doesn't retry these failures:
 * An [Amazon Bedrock streaming response with an unexpected content-type](#bedrock-streaming-response-has-an-unexpected-content-type), because the gateway or proxy rewriting the response would rewrite the retry the same way. Requires Claude Code v2.1.208 or later.
 * A non-streaming retry of a failed streaming request that gets a success status but [no Claude API message in the body](#api-returned-an-empty-or-malformed-response). Claude Code ends the turn with that error.
 * A request that your organization's policy check denied, which surfaces as an `API Error:` line carrying the denial message. Your organization's administrators set up the check with [Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks), a Claude Enterprise feature, and the message ends with the instructions they configured, or by default tells you to contact them. Claude Code doesn't re-send the denied request to the same model or to a [fallback model](/docs/en/model-config#fallback-model-chains), because the denial is about the request's content rather than the model. Before v2.1.239, Claude Code could re-send a denied request, without streaming or on a configured fallback model, before showing you the denial.
-* A response the API's output content filter blocked. Claude Code shows [Output blocked by content filtering policy](#output-blocked-by-content-filtering-policy) at once and doesn't retry or re-send that request.
 
 ### What you see while Claude Code retries or waits
 
@@ -432,6 +443,8 @@ You can tune retry behavior with these environment variables:
 | :- | :- | :- |
 | [`CLAUDE_CODE_MAX_RETRIES`](/docs/en/env-vars) | 10 | Number of retry attempts. Capped at 15 as of v2.1.186; as of v2.1.199 `CLAUDE_CODE_RETRY_WATCHDOG` raises the default and removes the cap. Lower it to surface failures faster in scripts. |
 | [`CLAUDE_CODE_RETRY_WATCHDOG`](/docs/en/env-vars) | unset | Set to `1` in unattended sessions such as CI jobs to retry `429` and `529` capacity errors indefinitely instead of failing after `CLAUDE_CODE_MAX_RETRIES` attempts. Claude Code fails at once when a standard-speed request gets a `429` that reports a spend limit or exhausted usage credits, even one from a [gateway spend cap](#spend-limit-reached) that resets on a schedule. Before v2.1.239, the watchdog retried these indefinitely. For fast mode requests, see [Handle rate limits](/docs/en/fast-mode#handle-rate-limits). On v2.1.199 or later it also raises the default retry count for other transient errors, such as server errors, timeouts, and dropped connections, to 300, roughly three hours of backoff, and removes the cap of 15 on `CLAUDE_CODE_MAX_RETRIES` if you set that variable explicitly. |
+| [`CLAUDE_CODE_RETRY_WATCHDOG_MAX_WAIT_MS`](/docs/en/env-vars) | unset | Maximum time in milliseconds that each API request spends waiting out `429` and `529` errors when `CLAUDE_CODE_RETRY_WATCHDOG` is set. When unset, the wait has no limit. Requires Claude Code v2.1.295 or later. |
+| [`CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS`](/docs/en/env-vars) | 500 | Starting delay in milliseconds of the backoff between retries of a request that the API rejects with a `529` overloaded error. Raise it, up to 32000, to spread the retries over a longer window when the API is at capacity. Has no effect when `CLAUDE_CODE_RETRY_WATCHDOG` is set to `1`, or when the rejected request was sent in [fast mode](/docs/en/fast-mode#handle-rate-limits). Requires Claude Code v2.1.292 or later. |
 | [`API_TIMEOUT_MS`](/docs/en/env-vars) | 600000 | Per-request timeout in milliseconds. Raise it for slow networks or proxies. It also caps how long Claude Code waits for response headers, described in [No response from API](#no-response-from-api). |
 | [`CLAUDE_CODE_NONSTREAMING_TIMEOUT_RETRIES`](/docs/en/env-vars) | unset | Limit on re-sends of a [non-streaming request](#streaming-response-ended-before-any-complete-data-was-received) that times out. At the limit, the request fails. A response from Claude that takes longer than the timeout to generate times out again on every re-send, so set a low number such as `0` to fail sooner. Each non-streaming attempt times out after 300 seconds in a local session, or after `API_TIMEOUT_MS` when you set a positive value. Requires Claude Code v2.1.285 or later. |
 | [`CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS`](/docs/en/env-vars) | unset | Deadline in milliseconds for the first response byte of a streaming request. Requires Claude Code v2.1.242 or later. For how Claude Code picks the deadline when this is unset, see [No response from API](#no-response-from-api). |
@@ -573,6 +586,8 @@ When the classifier model is unavailable:
 ```text theme={null}
 <model> is temporarily unavailable, so auto mode cannot determine the safety of <tool> right now. Wait a moment and then try this action again.
 ```
+
+In an interactive session, a dim `Not run · auto mode's check had no usable answer` row appears under the tool call instead of this message. Press `Ctrl+O` to read the message in the [transcript viewer](/docs/en/interactive-mode#transcript-viewer). The denials under [The server returned no safety verdict](#the-server-returned-no-safety-verdict) show the same row. Before v2.1.296, the message appeared under the call as a red error.
 
 When Claude Code can determine the failure category, it names the category in parentheses after `temporarily unavailable`, for example `<model> is temporarily unavailable (rate-limited), so auto mode cannot determine the safety of <tool> right now`. The categories are `(rate-limited)`, `(overloaded)`, `(server error)`, `(timed out)`, and `(connection failed)`. If `(timed out)` or `(connection failed)` repeats, check your connection; see [Unable to connect to API](#unable-to-connect-to-api). Before v2.1.229, the message never named a category and read `Wait briefly and then try this action again`.
 
@@ -799,18 +814,16 @@ When a proxy, load balancer, or gateway between Claude Code and the API answers 
 Your plan's included usage can't cover this request, and the [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans) that would otherwise pay for it have reached a spend limit. That happens when one of your plan's usage windows has run out, or when the request is one that only usage credits pay for, such as a request to a model that [bills to usage credits](/docs/en/model-config#fable-and-usage-credits). The message names whose limit blocked you. The text after the `·` says how to get that limit increased, and varies with your plan and whether you manage billing:
 
 ```text theme={null}
-You've hit your monthly spend limit · raise it at claude.ai/settings/usage
+You've hit your monthly spend limit · raise it at https://claude.ai/settings/usage?from=cc_cli_limit_message
 You've hit your individual spend limit · ask your admin for a higher limit
-You've hit your org's monthly spend limit · visit claude.ai/admin-settings/usage to raise it
-You've hit your team's shared budget · ask your admin to raise it at claude.ai/admin-settings/usage
+You've hit your org's monthly spend limit · visit https://claude.ai/admin-settings/usage to raise it
+You've hit your team's shared budget · ask your admin to raise it at https://claude.ai/admin-settings/usage
 You've hit your channel's monthly spend limit · an org owner or channel manager can raise it in the channel's Claude settings
 ```
 
 `team's shared budget` is a pooled budget an admin assigned to a group you belong to; the message doesn't name the group. `channel's monthly spend limit` is the budget of the one Slack channel the session runs in, so your organization may still have budget outside it.
 
 When one of your plan's windows is what ran out, the message also says when that window resets, for example `· your session limit resets 3:45pm`, and access returns then without anyone raising the limit. On organizations with usage-based billing, the message says `usage limit` in place of `spend limit`, as in `You've hit your individual usage limit`.
-
-Before v2.1.239, the message didn't name the plan window's reset time. Before v2.1.268, a group's pooled budget produced the `individual spend limit` message instead of `team's shared budget`.
 
 If you connect through a Claude apps gateway and see lowercase `spend limit reached`, that is your gateway operator's cap instead; see [Spend limit reached](#spend-limit-reached).
 
@@ -1231,6 +1244,8 @@ In [non-interactive mode](/docs/en/headless) (`-p`) and the [Agent SDK](/docs/en
 Failed to authenticate: OAuth session expired and could not be refreshed
 ```
 
+For a `Login expired` message that ends with `or re-authenticate your Anthropic profile`, see [Anthropic profile login expired](#anthropic-profile-login-expired).
+
 This is not the same state as [OAuth token revoked or expired](#oauth-token-revoked-or-expired). Those messages report a rejection the API returned. Claude Code itself produces `Login expired` for a login it already failed to renew, so it sends no request. When the renewal fails because the account itself is suspended rather than the login being stale, Claude Code shows [Your account is on hold](#your-account-is-on-hold) instead.
 
 Sessions authenticated with an API key, [`CLAUDE_CODE_OAUTH_TOKEN`](/docs/en/env-vars), or a third-party provider don't use the saved login and never see this message.
@@ -1388,26 +1403,28 @@ Signing in again with the same account doesn't clear the message, because the ho
 
 ### Anthropic profile login expired
 
-Claude Code is authenticating through an Anthropic credential profile whose saved login credential has expired, and the profile holds no refresh credential Claude Code can use to renew it. Claude Code stops each request locally without retrying, because a retry would read the same expired credential.
+Claude Code is authenticating through an Anthropic credential profile whose saved login credential has expired, and the profile holds no refresh credential Claude Code can use to renew it. Claude Code stops each request locally without retrying.
 
 ```text theme={null}
 Anthropic profile login expired · Re-authenticate your Anthropic profile
-Anthropic profile login expired · Run /login to use your claude.ai account instead, or re-authenticate the profile
+Login expired · Run /login to sign in again, or re-authenticate your Anthropic profile
 ```
-
-This appears only when the active credential comes from an Anthropic credential profile, one you select with the `ANTHROPIC_PROFILE` environment variable, that Claude Code discovers as the active profile in your Anthropic configuration directory, or that Claude Code wrote when you [signed in without an API key](/docs/en/authentication#sign-in-without-an-api-key). Sessions that authenticate with an API key, a bearer token such as `ANTHROPIC_AUTH_TOKEN`, or a third-party provider never see this message.
-
-On a machine that [offers the keyless sign-in](/docs/en/authentication#sign-in-without-an-api-key), run `/login`, choose the Anthropic Console account, and sign in again to renew a profile that the keyless Console sign-in or the Claude Platform CLI's `ant auth login` wrote. Claude Code replaces the expired credential in that profile. For a federation profile or one another tool created, `/login` doesn't renew the credential. Which form you see depends on whether you selected the profile or Claude Code discovered it:
-
-* When you set `ANTHROPIC_PROFILE` explicitly, the message ends with `Re-authenticate your Anthropic profile`.
-* When Claude Code discovered the profile from your configuration directory, the message offers `/login`, because Claude Code gives a working `/login` precedence over the discovered profile and then authenticates with your claude.ai or Console account instead. Before v2.1.234, Claude Code showed the `Re-authenticate your Anthropic profile` form in this case too.
 
 **What to do:**
 
-* Sign in to the profile again, then retry: on a machine that [offers the keyless sign-in](/docs/en/authentication#sign-in-without-an-api-key), run `/login` and choose the Anthropic Console account for a profile the keyless Console sign-in or the Claude Platform CLI's `ant auth login` wrote; for other profiles, use the tool that created them
+* If the message leads with `Login expired`, run `/login` to sign in again
+* To renew a profile that the keyless Console sign-in or the Claude Platform CLI's `ant auth login` wrote, run `/login` on a machine that [offers the keyless sign-in](/docs/en/authentication#sign-in-without-an-api-key). Choose the Anthropic Console account, then **Sign in with your Console account**. Claude Code replaces the expired credential in that profile
+* To renew a profile that another tool created, sign in again with that tool. If you choose **Sign in with your Console account** at `/login` instead, Claude Code leaves the profile as it is and creates an API key
 * If an administrator provisioned the profile's credential, ask them to issue a new one
 * Run `/status` to confirm the active credential source and profile name
 * To stop using the profile, unset `ANTHROPIC_PROFILE` if you set it, then authenticate another way, such as `/login` or `ANTHROPIC_API_KEY`
+
+How the message starts tells you how Claude Code found the profile:
+
+* When Claude Code discovered the profile from your configuration directory and its auth mode is `user_oauth`, the message leads with `Login expired` and offers `/login` first. Claude Code gives a working `/login` precedence over the discovered profile and then authenticates with your claude.ai account instead. From v2.1.234 until v2.1.277, this form read `Anthropic profile login expired · Run /login to use your claude.ai account instead, or re-authenticate the profile`. Before v2.1.234, Claude Code showed the `Re-authenticate your Anthropic profile` form in this case too.
+* When you selected the profile with `ANTHROPIC_PROFILE`, the message leads with `Anthropic profile login expired`.
+
+This appears only when the active credential comes from an Anthropic credential profile, one you select with the `ANTHROPIC_PROFILE` environment variable, that Claude Code discovers as the active profile in your Anthropic configuration directory, or that Claude Code wrote when you [signed in without an API key](/docs/en/authentication#sign-in-without-an-api-key). Sessions that authenticate with an API key, a bearer token such as `ANTHROPIC_AUTH_TOKEN`, or a third-party provider never see this message.
 
 ### OAuth scope requirement
 
@@ -1627,7 +1644,7 @@ Before v2.1.273, a 401 or 403 from Microsoft Foundry showed the generic `Please 
 
 ### Could not load AWS or Google Cloud credentials
 
-Claude Code couldn't obtain usable credentials from the AWS credential provider chain or from your Google application default credentials on the machine it runs on, so no request reached your cloud provider. Claude Code clears its cached credentials and retries twice before showing this message. The detail after the `·` names the specific cause, such as an expired SSO session, missing application default credentials reported as `Could not load the default credentials`, or a revoked sign-in reported as `invalid_grant`:
+Claude Code couldn't obtain usable credentials from the AWS credential provider chain or from your Google application default credentials on the machine it runs on, so no request reached your cloud provider. The detail after the `·` names the specific cause, such as an expired SSO session, missing application default credentials reported as `Could not load the default credentials`, or a revoked sign-in reported as `invalid_grant`:
 
 ```text theme={null}
 API Error: Could not load AWS credentials · Could not load credentials from any providers. Check or refresh your AWS credentials and try again.
@@ -1787,6 +1804,8 @@ A proxy is configured via HTTPS_PROXY. Check that it allows connections to the h
 Claude Code sends the check through the same [proxy configuration](/docs/en/network-config) as API requests and gives each probe 10 seconds. When the failed probe went through a proxy, the message names the environment variable that configured it, such as `HTTPS_PROXY`. Before v2.1.222, the check used a different proxy transport with no timeout: behind a proxy URL with the `https://` scheme, it could stall on `Checking connectivity...` indefinitely and then fail even though API requests through the same proxy succeed.
 
 Claude Code skips this check when a [managed settings file, MDM policy, or policy helper](/docs/en/managed-settings) sets [`forceLoginMethod`](/docs/en/settings-reference#forceloginmethod) to `"gateway"`, or sets [`forceLoginGatewayUrl`](/docs/en/settings-reference#forcelogingatewayurl) without `forceLoginMethod`. With either configuration, Claude Code opens the sign-in step on the **Cloud gateway** screen rather than an Anthropic sign-in method. Claude Code also skips the check when a managed settings source on the machine exists but can't be read, since that source may hold the gateway configuration. Before v2.1.247, Claude Code ran the check under this configuration too, and exited with this error when Anthropic's endpoints were unreachable.
+
+Claude Code also skips the check on a machine with no managed settings when your own `~/.claude/settings.json` [names a gateway](/docs/en/claude-apps-gateway#set-the-gateway-url-in-user-settings) with `forceLoginMethod` and `forceLoginGatewayUrl`. Before v2.1.295, Claude Code ran the check in that case.
 
 **What to do:**
 
@@ -2168,7 +2187,7 @@ Claude Code replaces the unprocessable image with a text placeholder and retries
 
 **What to do:**
 
-* Resize the image before pasting. The API accepts images up to 8000 pixels on the longest edge for a single image, or 2000 pixels when many images are in context.
+* Resize the image before pasting. The API accepts images up to 8000 pixels on the longest edge for a single image, or 3000 pixels when more than 20 images are in context.
 * Take a tighter screenshot of the relevant region instead of the full screen
 
 ### Unable to resize image
@@ -2665,6 +2684,8 @@ For the three web search wordings, Claude Code leaves the search calls, results,
 
 The API declined to respond because content in the conversation triggered a [Usage Policy](https://www.anthropic.com/legal/aup) check.
 
+If the message includes the line `` Details: `[reasoning_extraction]` ``, see [Safeguards flagged a request for Claude's reasoning](#safeguards-flagged-a-request-for-claudes-reasoning).
+
 The message includes a Request ID and a Message ID you can quote to support if you believe the refusal is incorrect.
 
 ```text theme={null}
@@ -2693,7 +2714,9 @@ The model's safety measures flagged content in the conversation as a cybersecuri
 API Error: Opus 4.8's safeguards flagged this message. Our intentionally broad safeguards allow us to deliver more capabilities faster, but can sometimes flag legitimate cybersecurity work. Apply to the Cyber Verification Program to reduce these interruptions. Send feedback with /feedback or learn more: https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude
 ```
 
-The message links to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude), which grants access for legitimate cybersecurity work. On Opus 5.5 and Sonnet 5.5, the message opens with `<model>'s safeguards flagged this session` instead. When the flagged category has a fallback model available, Claude Code [switches models](/docs/en/model-config#automatic-model-fallback) rather than showing this error.
+If the message includes the line `` Details: `[reasoning_extraction]` ``, see [Safeguards flagged a request for Claude's reasoning](#safeguards-flagged-a-request-for-claudes-reasoning).
+
+This message links to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude), which grants access for legitimate cybersecurity work. Models with [automatic model fallback](/docs/en/model-config#automatic-model-fallback) print a different message, without this link; on Opus 5.5 and Sonnet 5.5 it opens with `<model>'s safeguards flagged this session`. That section also covers when Claude Code switches models instead.
 
 On [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's Agent Platform](/docs/en/google-vertex-ai), and [Microsoft Foundry](/docs/en/microsoft-foundry), a cybersecurity flag produces the [Usage Policy refusal](#usage-policy-refusal) message instead.
 
@@ -2707,6 +2730,27 @@ Before v2.1.203, it read `<model>'s safeguards flagged this message for a cybers
 * If your request wasn't about a cybersecurity topic, run `/feedback` to report the false positive
 * To keep working in the same session, press Esc twice or run `/rewind` to step back to a checkpoint before the turn that triggered the flag, then take a different approach. See [Checkpointing](/docs/en/checkpointing).
 
+<h3 id="safeguards-flagged-a-request-for-claudes-reasoning">
+  Safeguards flagged a request for Claude's reasoning
+</h3>
+
+The API declined the request because safeguards flagged it as asking the model to reproduce its internal reasoning in the response. The API names this [refusal category](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response) `reasoning_extraction`, and the refusal message includes this line:
+
+```text theme={null}
+Details: `[reasoning_extraction]`
+```
+
+Before v2.1.234, refusal messages didn't include the `Details` line.
+
+**What to do:**
+
+* Remove or reword any instruction that asks Claude to write out its thinking or reasoning verbatim or in a fixed format, such as a `<thinking>` section, a scratchpad section, or a `reasoning` field in JSON output. The instruction can be in your prompt or in a customization that Claude Code loads with it, such as CLAUDE.md, a skill, a subagent prompt, an output style, or an MCP tool description.
+* To check whether a customization is the trigger, run [`claude --safe-mode`](/docs/en/cli-reference#cli-flags) in your terminal to start a session with customizations disabled, then send the same prompt
+* After you change a customization, start a new session
+* To reword a prompt you already sent, see [Rewind and summarize](/docs/en/checkpointing#rewind-and-summarize)
+* You can still ask Claude to explain its answer. Ask for a short explanation, the evidence behind a result, or a summary of the actions it took. To read summaries of Claude's thinking, see [`showThinkingSummaries`](/docs/en/settings-reference#showthinkingsummaries).
+* For more examples, and what to do if a reworded request is still declined, see [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks)
+
 ### Output blocked by content filtering policy
 
 The API's output content filter stopped the response Claude was generating. The message text comes from the API:
@@ -2715,53 +2759,10 @@ The API's output content filter stopped the response Claude was generating. The 
 API Error: Output blocked by content filtering policy
 ```
 
-Claude Code shows the error as soon as the block arrives and ends the request there. It doesn't retry the request, re-send it without streaming, or switch to a [fallback model](/docs/en/model-config#fallback-model-chains). Before v2.1.285, Claude Code could re-send and retry a blocked request, sometimes for minutes, before showing you the error.
-
 **What to do:**
 
 * Rephrase your last message or take a different approach
 * To step back to a checkpoint before the turn that triggered the block, press Esc twice or run `/rewind`. See [Checkpointing](/docs/en/checkpointing)
-
-## Installation errors
-
-These errors appear while installing or updating Claude Code, from the [install script](/docs/en/setup#install-claude-code), `claude install`, or `claude update`. For `command not found`, PATH, permission, and TLS problems during setup, see [Troubleshoot installation and login](/docs/en/troubleshoot-install).
-
-### Installation was killed before it could finish
-
-The install script reports when the `claude install` step is terminated by a signal. On Linux, exit code 137 means the process received SIGKILL, and on a low-memory host that's usually the kernel out-of-memory (OOM) killer. The script prints this explanation and exits with code 137:
-
-```text theme={null}
-Installation was killed before it could finish (exit code 137). This usually means the system ran out of memory.
-Claude Code needs roughly 512MB of free memory to install. Free up memory, then run this script again.
-```
-
-For any other fatal signal, and for exit code 137 on macOS, the script prints `Installation was killed before it could finish (exit code <N>)` with the actual exit code and omits the out-of-memory explanation. The message comes from the install script macOS and Linux use, which also covers installs inside WSL; the native Windows install scripts never print it. Before v2.1.200, the script exited with only the shell's bare `Killed` line.
-
-**What to do:**
-
-* Stop other processes to free memory, then rerun the installer
-* Add swap space or move to a larger instance. See [Install killed on low-memory Linux servers](/docs/en/troubleshoot-install#install-killed-on-low-memory-linux-servers) for the swap-file commands.
-
-### The connection dropped while downloading the update
-
-The connection to the download server closed while `claude install` or `claude update` was fetching the Claude Code binary, and the retries didn't recover. Claude Code retries the download when the connection drops, the transfer stalls, or the downloaded file fails its checksum, up to three attempts in total. A completed HTTP error, such as a 404, isn't retried because the server already answered. Before v2.1.202, a single dropped connection failed the download immediately with the bare error `aborted` instead of retrying.
-
-```text theme={null}
-The connection dropped while downloading the update (attempt 3/3: aborted). Check your network — proxies sometimes cut off large downloads.
-```
-
-The text in parentheses names which attempt failed and the underlying network error. `claude update` precedes the message with `Error: Failed to install native update` on stderr.
-
-A download that stays connected but doesn't finish within 10 minutes fails with `Download timed out: exceeded the total deadline` instead. Claude Code doesn't retry a timed-out download, because a connection too slow to finish inside the deadline won't finish on an immediate retry either. The steps below apply to both messages.
-
-A proxy or gateway can close a long transfer before it finishes, and the Claude Code binary is a large download.
-
-**What to do:**
-
-* Run `claude update` again. On an otherwise healthy network, the download usually succeeds on the next run. For the timed-out message, run it again from a faster or less throttled network.
-* If your network requires a proxy, set `HTTPS_PROXY` before running the installer or `claude update`. See [Check network connectivity](/docs/en/troubleshoot-install#check-network-connectivity).
-* If a corporate proxy keeps closing the transfer, ask your network team to allow the full download from `downloads.claude.ai`. See [Network access requirements](/docs/en/network-config#network-access-requirements).
-* Run `claude doctor` from your shell for installation diagnostics
 
 ## Command-line errors
 
@@ -3570,7 +3571,7 @@ You passed a session ID to `claude --resume <session-id>` and no saved transcrip
 No conversation found with session ID: <session-id>
 ```
 
-Claude Code exits with code 1 after showing the message. Claude Code [searches the current project first, then every other project on this machine](/docs/en/sessions#resume-a-session) for the ID. Before v2.1.223, the lookup stopped at the current project directory and its git worktrees, so resume from the directory the session last worked in.
+Claude Code exits with code 1 after showing the message. Claude Code [searches the current project first, then every other project on this machine](/docs/en/sessions#where-the-session-picker-looks) for the ID. Before v2.1.223, the lookup stopped at the current project directory and its git worktrees, so resume from the directory the session last worked in.
 
 Common causes:
 
@@ -3627,6 +3628,23 @@ Each reason the message can show in parentheses:
 **What to do:**
 
 * In a session started without those restrictions, run `/tui fullscreen`, or `/tui default` to switch back. Claude Code saves the [`tui` setting](/docs/en/settings-reference#tui) there
+
+<h3 id="claude-code-couldnt-restart">
+  Claude Code couldn't restart
+</h3>
+
+Claude Code was restarting, for example to switch to or from fullscreen rendering after you ran [`/tui`](/docs/en/fullscreen#enable-fullscreen-rendering). It closed the session but couldn't start the new process, so it printed this message and exited with status 1:
+
+```text theme={null}
+Claude Code couldn't restart. Your conversation is saved. Start Claude Code again and run /resume to pick it up.
+```
+
+When the restart had no conversation to reopen, for example because `/tui` was your first input in a new session, the message reads `Claude Code couldn't restart. Start Claude Code again.`
+
+**What to do:**
+
+* Run `claude` again in your shell from the same directory. If the message said your conversation is saved, run [`/resume`](/docs/en/sessions#resume-a-session) in the new session and select it
+* If restarts keep failing, start Claude Code from your shell with [`claude --debug-file claude-debug.log`](/docs/en/cli-reference#cli-flags). If a restart from that session fails, `claude-debug.log` in the directory you started from records a `Failed to relaunch:` line with the operating system's error. Include that line when you [report the problem](#report-an-error)
 
 <h3 id="couldnt-open-claude-desktop">
   Couldn't open Claude Desktop
@@ -3818,13 +3836,17 @@ Before v2.1.282, `claude plugin list` and `/plugin` reported the plugins of an i
 
 **What to do:**
 
-* Run `claude plugin marketplace remove <name>`. This also uninstalls the plugins installed from the marketplace and deletes their saved data
-* To keep the marketplace instead, wait until its maintainer renames it, then run `claude plugin marketplace update <name>`
+* To keep a marketplace that a settings file declares inline with `"source": "settings"`, rename it before you remove the old name, because removing the marketplace also deletes its entry from your settings files. Claude Code v2.1.292 or later lists these steps in the message:
+  1. In each settings file that lists the marketplace under `extraKnownMarketplaces`, give the entry's key and its `source.name` one new plain-ASCII name that doesn't look like an official one. If an administrator adds the marketplace through your organization's managed settings, the administrator does this step
+  2. Run `claude plugin marketplace remove <old-name>`, or remove the old name in the **Marketplaces** tab in `/plugin`. This also uninstalls its plugins and deletes their data, options, and secrets
+  3. Start Claude Code again, in the project's folder if the file is a project's settings file. Then install the plugins from the renamed marketplace
+* To keep any other marketplace, wait until its maintainer renames it, then run `claude plugin marketplace update <name>`
+* To remove the marketplace, run `claude plugin marketplace remove <name>`. This also uninstalls the plugins installed from the marketplace and deletes their data, options, and secrets
 * If you publish the marketplace, rename it in your `marketplace.json`; users then update the marketplace instead of removing it
 
 ### Marketplace is already added from a different source
 
-You confirmed adding a marketplace through [`/plugin install <plugin> --marketplace <source>`](/docs/en/plugins/install#add-a-marketplace-and-install-in-one-command), and the catalog Claude Code fetched from that source names itself the same as a marketplace you already added from a different source. Claude Code keeps the existing marketplace instead of replacing it, and the plugin isn't installed.
+You named a new marketplace source with [`--marketplace <source>` on the install command](/docs/en/plugins/install#add-a-marketplace-and-install-in-one-command), in a session or from your shell. The catalog Claude Code fetched from that source has the same name as a marketplace you already added from a different source. Claude Code keeps the existing marketplace instead of replacing it, and the plugin isn't installed.
 
 ```text theme={null}
 Marketplace "acme-tools" is already added from a different source (github:acme/plugins). To use this source instead, remove that marketplace first with /plugin marketplace remove acme-tools.
@@ -4371,6 +4393,25 @@ The message names what ran out:
 * Or restart Claude Code with [`CLAUDE_CODE_TMPDIR`](/docs/en/env-vars) set to a directory on a filesystem with room
 * Then have Claude run the command again. The output it printed was lost, not truncated
 
+<h3 id="file-is-not-valid-utf-8">
+  File is not valid UTF-8
+</h3>
+
+Claude used the Edit or NotebookEdit tool on a file whose bytes don't decode as UTF-8, and Claude Code refused the change. Nothing was written, so the file is as it was. Those tools save the whole file back as UTF-8, which would have turned every byte they couldn't decode into the replacement character `U+FFFD`. The message appears in the tool result:
+
+```text wrap theme={null}
+File is not valid UTF-8. It may use a legacy encoding such as Windows-1252, Shift-JIS or GBK, or be binary. This tool saves the whole file as UTF-8, which would replace every byte it cannot decode with U+FFFD. Nothing was written. Make the change with a shell command that reads and writes the file in its own encoding, or ask the user whether to convert the file to UTF-8 first.
+```
+
+A file that is meant to be UTF-8 gets this message too when it contains even one invalid byte sequence, because the check covers the file's bytes as a whole.
+
+**What to do:**
+
+* To keep the file in its current encoding, let Claude make the change with a shell command that reads and writes the file in that encoding, as the message tells it to
+* To keep editing the file with the Edit tool, convert it to UTF-8, or fix the invalid bytes in a file that is meant to be UTF-8, then ask Claude to make the edit again
+
+Before v2.1.296, Edit and NotebookEdit applied such an edit and saved every byte they couldn't decode as `U+FFFD`. On those versions, update Claude Code.
+
 <h3 id="the-source-file-is-not-valid-utf-8-text">
   The source file is not valid UTF-8 text
 </h3>
@@ -4520,12 +4561,13 @@ A blocked command reports the same cause for its working directory and ends with
 
 ### Command blocked by the worktree isolation checks
 
-Claude ran a Bash or Monitor command in a [session isolated in a worktree](/docs/en/worktrees#how-claude-code-enforces-isolation), and Claude Code refused it for one of two reasons:
+Claude ran a Bash, [PowerShell](/docs/en/tools-reference#powershell-tool), or [Monitor](/docs/en/tools-reference#monitor-tool) command in a [session isolated in a worktree](/docs/en/worktrees#how-claude-code-enforces-isolation), and Claude Code refused it for one of these reasons:
 
-* The command points git at the main checkout.
-* Claude Code can't verify from the command text that any git the command runs stays inside the worktree. A command that never names git can still be refused for this reason, because expanding a variable indirection such as `${!name}` or running a Bash function substitution such as `${ command; }` produces a value at runtime that can itself be a command.
+* The command would run in the main checkout or in another worktree. The message says its working directory `resolved to the shared checkout` or `is in a different worktree`.
+* A Bash or Monitor command points git at the main checkout.
+* Claude Code can't verify from a Bash or Monitor command's text that any git the command runs stays inside the worktree. A command that never names git can still be refused for this reason, because expanding a variable indirection such as `${!name}` or running a Bash function substitution such as `${ command; }` produces a value at runtime that can itself be a command.
 
-The middle of the message names what couldn't be verified:
+The message says `is isolated in the worktree <path>, but this command`, followed by the reason, such as a command whose text Claude Code couldn't verify:
 
 ```text wrap theme={null}
 This session is isolated in the worktree /path/to/worktree, but this command evaluates ${!x@P} arithmetically inside a construct too complex to verify, which can run a command hidden in a variable's value. Refusing to run it — a worktree-isolated session's git operations must target its own worktree. Split it into plain, separate commands and run them from /path/to/worktree.
@@ -4533,24 +4575,22 @@ This session is isolated in the worktree /path/to/worktree, but this command eva
 
 **What to do:**
 
-* Usually nothing: Claude reads the message and rewrites the command the way its final sentence asks
-* If a command you asked for keeps being refused, spell the flagged value literally: replace the indirection or substitution with its value, and run git as its own plain command from inside the worktree
+* **Git pointed at the main checkout, or command text that can't be verified**: nothing. Claude reads the message and rewrites the command the way its final sentence asks. If a command you asked for keeps being refused over an expansion in its text, spell the flagged value literally and run git as its own plain command from inside the worktree
 * To act on the main checkout on purpose, run the command yourself in a terminal outside the session
 
 ### This session has no saved transcript
 
-You attached to a stopped [background session](/docs/en/agent-view) that was backgrounded from another conversation with `←` or `/background` and stopped before its first response finished. Until that first response finishes, the conversation still lives only in the session it was backgrounded from, so `claude attach` refuses to start the stopped session rather than begin a blank conversation under the same session ID. The message ends with the `claude respawn` command for this session:
+You attached to a session that you [moved to the background](/docs/en/agent-view#from-inside-a-session) with `←` or `/background` and that stopped before it ran a turn of its own. Claude Code couldn't find the conversation you moved it from, so the session has nothing to resume. The message ends with the `claude respawn` command for this session:
 
 ```text theme={null}
 This session has no saved transcript — it was stopped before its first response finished. If it was backgrounded from another conversation, that one is still intact; `claude respawn <id>` starts this one fresh.
 ```
 
-Opening the same session's row in [agent view](/docs/en/agent-view) shows `Press enter again to restart this session fresh` below the list instead, and a second `Enter` on the row restarts the session with an empty conversation. Before v2.1.212, opening the row showed the refusal message with no way to restart from agent view. Before v2.1.211, opening the stopped session silently started that blank conversation and could re-run the session's original prompt.
+Opening the same session's row in [agent view](/docs/en/agent-view) shows `Press enter again to restart this session fresh` below the list instead, and a second `Enter` on the row restarts the session with an empty conversation.
 
 **What to do:**
 
-* The conversation you backgrounded from is intact: resume it with [`claude --resume`](/docs/en/sessions) or keep working in it
-* To start the stopped session fresh anyway, run `claude respawn <id>` with the ID from the message, or press `Enter` twice on its row in agent view
+* To start the stopped session fresh, run `claude respawn <id>` with the ID from the message, or press `Enter` twice on its row in agent view
 * If the session did finish a response and you still see this refusal on a version before v2.1.214, an unreadable folder in `~/.claude/projects` could make the transcript scan miss the saved conversation; update to v2.1.214 or later, which tolerates unreadable folders during the scan
 
 <h3 id="this-session-is-running-in-another-terminal">
@@ -4566,8 +4606,6 @@ This conversation is already open in another running Claude session — use that
 
 * **`running in another terminal`**: a terminal holds the conversation, for example one where you resumed it with `claude --resume` or `/resume`. The row also shows `Open in a terminal`.
 * **`already open in another running Claude session`**: another non-interactive Claude Code process holds it, for example a [background session](/docs/en/agent-view#the-supervisor-process) process for the same conversation that hasn't exited yet.
-
-Claude Code saves a reply you typed when opening the row and sends it as the session's next prompt when the session next starts.
 
 **What to do:**
 
@@ -4710,6 +4748,23 @@ Claude Code doesn't save the fallback to the session, so the warning repeats on 
 * Re-create the agent file at `.claude/agents/<name>.md` in the session's project, or at `~/.claude/agents/<name>.md` for a personal agent, then resume again
 * Or resume with `--agent <name>` naming an agent that does exist, to run the session as that agent instead
 * If the agent is project-scoped and you haven't trusted the session's original directory, run Claude Code there once, accept the trust dialog, then resume again
+
+<h3 id="restarted-after-its-next-loop-wakeup-was-due">
+  This session restarted after its next /loop wakeup was due
+</h3>
+
+A [self-paced `/loop`](/docs/en/scheduled-tasks#let-claude-choose-the-interval) in a [background session](/docs/en/agent-view) has stopped. The session's process ended while the loop was waiting for its next wakeup, and that wakeup came due before the session's [next process](/docs/en/agent-view#the-supervisor-process) started. The missed wakeup doesn't fire late. The notice says how overdue the wakeup was when the session restarted:
+
+```text theme={null}
+This session restarted 12m after its next /loop wakeup was due, so that wakeup will not fire. The loop stays stopped until Claude schedules it again: reply to continue it.
+```
+
+Before v2.1.295, the loop stopped in this situation without a notice.
+
+**What to do:**
+
+* To continue the loop, [reply to the session](/docs/en/agent-view#peek-and-reply) and say so, such as `keep the loop running`. Claude reads the notice with your reply and can schedule the next wakeup
+* If you're done with the loop, do nothing. It has already stopped
 
 ### CLAUDE\_CODE\_PROCESS\_WRAPPER launcher errors
 
@@ -5080,7 +5135,7 @@ Claude Code doesn't add network paths as working directories. Looking up a netwo
 Paths that Claude Code refuses this way include:
 
 * UNC shares such as `\\server\share`
-* Automount paths such as `/net/<host>`, unless you launched Claude Code from a directory under that host's automount
+* Automount paths such as `/net/<host>`, unless you launched Claude Code from a directory under that host's automount. Reads under that automount still go through the [network path check](/docs/en/permissions#network-paths).
 * Local paths that reach a network location through a symbolic link or junction
 
 Mapped drive letters and `\\wsl$` paths don't count as network paths.

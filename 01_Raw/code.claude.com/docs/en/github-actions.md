@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-actions
-fetched_at: 2026-10-05T06:27:11.728517+00:00
+fetched_at: 2026-10-12T06:49:43.117148+00:00
 fetch_method: mintlify_md
 ---
 
@@ -134,11 +134,13 @@ When you install the app, you grant the following permissions:
 | Permission | Access |
 | - | - |
 | Actions | Read and write |
+| Administration | Read |
 | Checks | Read and write |
 | Contents | Read and write |
 | Discussions | Read and write |
 | Issues | Read and write |
 | Members | Read |
+| Merge queues | Read |
 | Metadata | Read |
 | Pull requests | Read and write |
 | Repository hooks | Read and write |
@@ -302,7 +304,7 @@ Create a `CLAUDE.md` file in your repository root to define code style guideline
 
 Grant the workflow only the permissions it needs, and review Claude's changes before merging.
 
-For comprehensive security guidance including permissions and authentication, see the [Claude Code Action security documentation](https://github.com/anthropics/claude-code-action/blob/main/docs/security.md).
+For security guidance including permissions and authentication, see the [Claude Code Action security documentation](https://github.com/anthropics/claude-code-action/blob/main/docs/security.md).
 
 ### Manage costs
 

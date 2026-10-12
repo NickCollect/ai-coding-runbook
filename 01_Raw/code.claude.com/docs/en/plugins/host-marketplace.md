@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/host-marketplace
-fetched_at: 2026-10-05T06:27:12.302624+00:00
+fetched_at: 2026-10-12T06:49:44.603079+00:00
 fetch_method: mintlify_md
 ---
 
@@ -130,7 +130,9 @@ Users without a git-host account can add a marketplace you serve as a `marketpla
 These entry sources need no git account:
 
 * **`archive`**: a zip downloaded over HTTPS. Users need neither `git` nor an account, only network access to the URL. Requires Claude Code v2.1.224 or later. Pin each archive with `sha256` so Claude Code refuses a changed download. To send credentials with the download, see [Authenticate archive downloads](#authenticate-archive-downloads).
-* **A public git repository**: Claude Code clones a public `url` or `git-subdir` source over HTTPS without credentials when the entry gives an `https://` URL. For a `github` source, or a `git-subdir` source written as `owner/repo`, users without a GitHub SSH key set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`.
+* **A public git repository**: Claude Code clones a public `url` or `git-subdir` source over HTTPS without credentials when the entry gives an `https://` URL. For a `github` source, or a `git-subdir` source written as `owner/repo`, tell users without a GitHub SSH key to set `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1`.
+
+Keep `CLAUDE_CODE_PLUGIN_PREFER_HTTPS=1` in your instructions even if `claude plugin install` succeeds without it from the shell on a machine with no SSH key. For a `github` source, that command can fall back to HTTPS on its own, printing `SSH not configured, cloning via HTTPS`. Installs from `/plugin` inside a session and plugin updates don't fall back, so without the variable they fail for users who have no GitHub SSH key.
 
 For a team on one network, a `directory` marketplace on a shared filesystem also works without git accounts. Users need only read access to the path.
 
@@ -367,11 +369,17 @@ A `headersHelper` command doesn't run, or headers from `headers` or from the com
 
 ### How users accept a headersHelper command
 
-A user accepts a plugin entry's command each time they install or update that one plugin by itself. They do that from the plugin's own view in `/plugin`, or with `claude plugin install` or `claude plugin update`. Claude Code shows the command and the archive URL, and runs the command only after the user accepts.
+A user accepts a plugin entry's command each time they install or update that one plugin by itself. Claude Code shows the command and the archive URL, and runs the command only after the user accepts.
+
+Users can install or update the plugin inside a Claude Code session in a terminal, in their shell with no session running, or in the VS Code extension:
+
+* **Terminal session**: from the plugin's own view in `/plugin`.
+* **Shell**: with `claude plugin install` or `claude plugin update`.
+* **VS Code extension**: from the [**Manage plugins** dialog](/docs/en/vs-code#manage-plugins), with version 2.1.290 or later of the extension.
 
 In a non-interactive shell, pass [`--yes`](/docs/en/plugins/cli-reference#plugin-install) to accept the command. To accept only the command that a previous `--json` run displayed, pass [`--accept-command`](/docs/en/plugins/cli-reference#plugin-install) with the `sha256` the run reported.
 
-Claude Code runs only the command it showed, for the archive URL it showed. If the entry's command or archive URL changed in between, Claude Code refuses the install or update. A change in the query string alone doesn't count.
+Claude Code runs only the command it showed, for the archive URL it showed. If the entry's command or archive URL changed in between, Claude Code refuses the install or update. A change in the query string alone doesn't count, except in the VS Code extension or with `--accept-command`.
 
 <h3 id="installs-and-updates-that-refuse-the-command-instead-of-asking">
   Installs and updates that refuse a command instead of asking

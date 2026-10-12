@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review
-fetched_at: 2026-10-05T06:27:11.394305+00:00
+fetched_at: 2026-10-12T06:49:42.344273+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ fetch_method: mintlify_md
 > Set up automated PR reviews that catch logic errors, security vulnerabilities, and regressions using multi-agent analysis of your full codebase
 
 <Note>
-  Code Review is in research preview, available for [Team and Enterprise](https://claude.ai/admin-settings/claude-code) subscriptions. It is not available for organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled. On other plans, you can still [review a diff locally](#review-a-diff-locally) with the `/code-review` command.
+  Code Review is in research preview, available for [Team and Enterprise](https://claude.ai/admin-settings/claude-code) subscriptions. It is not available for organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled or with the [HIPAA configuration](/docs/en/hipaa-setup) applied, and is not covered under Anthropic's BAA. On other plans, you can still [review a diff locally](#review-a-diff-locally) with the `/code-review` command.
 </Note>
 
 Code Review analyzes your GitHub pull requests and posts findings as inline comments on the lines of code where it found issues. A fleet of specialized agents examine the code changes in the context of your full codebase, looking for logic errors, security vulnerabilities, broken edge cases, and subtle regressions.
@@ -247,11 +247,11 @@ Go to [claude.ai/analytics/code-review](https://claude.ai/analytics/code-review)
 | Section | What it shows |
 | :- | :- |
 | PRs reviewed | Daily count of pull requests reviewed over the selected time range |
-| Cost weekly | Weekly spend on Code Review |
+| Code Review cost | Code Review spend so far this month |
 | Feedback | Count of review comments that were auto-resolved because a developer addressed the issue |
-| Repository breakdown | Per-repo counts of PRs reviewed and comments resolved |
+| Repository breakdown | Per-repo counts of PRs reviewed, comments resolved, and review runs, with estimated cost and a per-PR view |
 
-Dashboard cost figures are estimates for monitoring activity. For invoice-accurate spend, refer to your Anthropic bill.
+The Code Review cost card shows an amount only when the current month is selected. Cost figures in analytics can differ from your invoice. Repository breakdown costs are estimated at list price, before any discounts or credits, and cover only reviews that Claude posted on a pull request. For invoice-accurate spend, refer to your Anthropic bill.
 
 ## Pricing
 
@@ -267,7 +267,7 @@ In Once after PR creation or Manual mode, commenting `@claude review always` [op
 
 Costs appear on your Anthropic bill regardless of whether your organization uses Amazon Bedrock or Google Cloud's Agent Platform for other Claude Code features. To set a monthly spend cap for Code Review, go to [claude.ai/admin-settings/usage](https://claude.ai/admin-settings/usage) and configure the limit for the Claude Code Review service.
 
-Monitor spend via the weekly cost chart in [analytics](#view-usage) or the per-repo average cost column in admin settings.
+To monitor spend, use the [analytics dashboard](#view-usage).
 
 ## Troubleshooting
 
@@ -336,7 +336,7 @@ Claude reports the findings as text in the reply in both of these runs, even whe
 * In a terminal session, where `/code-review` runs the review as a [forked subagent](/docs/en/skills#run-skills-in-a-subagent)
 * In a `-p` run with text or JSON output
 
-In a host application that requests the findings list, such as the [desktop app](/docs/en/desktop), Claude reports the review's findings through the [`ReportFindings` tool](/docs/en/tools-reference) instead. Claude Code renders the report as a findings list, and each entry shows the file location, a one-sentence summary, and a category tag such as `correctness` when the finding carries one. A host request applies at every effort level and requires Claude Code v2.1.218 or later.
+In a host application that requests the findings list, such as the [desktop app](/docs/en/desktop#review-your-code), Claude reports the review's findings through the [`ReportFindings` tool](/docs/en/tools-reference) instead. Claude Code renders the report as a findings list, and each entry shows the file location, a one-sentence summary, and a category tag such as `correctness` when the finding carries one. A host request applies at every effort level and requires Claude Code v2.1.218 or later.
 
 When Claude fixes reported findings later in the session, it reports them again, and Claude Code marks each finding in the updated findings list as fixed, skipped, or no change needed.
 
@@ -346,7 +346,7 @@ The review follows your `CLAUDE.md` like any Claude Code session, but it doesn't
 
 ### Tune effort and arguments
 
-Pass an [effort level](/docs/en/model-config#adjust-effort-level) to trade coverage for confidence. At `low` and `medium`, the review reports only the findings it's most confident in, so you see fewer false positives; `high` through `max` broaden coverage and may include findings the review is less sure about.
+Pass an [effort level](/docs/en/model-config#adjust-effort-level) to trade coverage for confidence. At `low`, the review reports the findings it's most confident in, so you see fewer false positives. From `medium` through `max`, the review broadens coverage.
 
 When you don't type a level, the review reuses the last level from `low` through `max` you typed, even in an earlier session, and Claude Code shows a notice such as `Reusing high effort, the level you typed last time`. Type a level, like `/code-review high`, to change what later runs reuse; a level you pass in a non-interactive `-p` run doesn't update it. `ultra` neither updates nor uses the remembered level. If you've never typed a level, the review uses the session's current effort. Before v2.1.223, a `/code-review` without a level always used the session's current effort.
 
@@ -390,7 +390,7 @@ Ultrareview uses its own scope: your current branch against the repository's def
 When the target is a `github.com` pull request, you can have Claude [post the finished findings to the PR](/docs/en/ultrareview#post-findings-to-the-pull-request) as a comment from your GitHub account. Requires Claude Code v2.1.227 or later.
 
 <Note>
-  Ultrareview requires authentication with a claude.ai account and is not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
+  Ultrareview requires authentication with a claude.ai account and is not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled or with the [HIPAA configuration](/docs/en/hipaa-setup) applied. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
 </Note>
 
 To run a cloud review from a script or CI job, use the [`claude ultrareview` subcommand](/docs/en/ultrareview#run-ultrareview-non-interactively), which waits for the findings and prints them to stdout.

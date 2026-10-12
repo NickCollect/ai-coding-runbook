@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/setup
-fetched_at: 2026-10-05T06:27:12.838407+00:00
+fetched_at: 2026-10-12T06:49:45.935063+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,6 +49,8 @@ To install Claude Code, open a terminal and run the command for your system. If 
     curl -fsSL https://claude.ai/install.sh | bash
     ```
 
+    On Windows, your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
+
     **Windows PowerShell:**
 
     ```powershell theme={null}
@@ -61,11 +63,11 @@ To install Claude Code, open a terminal and run the command for your system. If 
     curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
     ```
 
-    When the installer finishes, open a new terminal window and run `claude --version`. A working installation prints a version number. If your shell says `claude` isn't found or isn't recognized, the install directory isn't on your PATH yet: see [Fix your PATH](/docs/en/troubleshoot-install#command-not-found-claude-after-installation).
+    The install command shows no progress while it downloads Claude Code. When the installer finishes, open a new terminal window and run `claude --version`. A working installation prints a version number. If your shell says `claude` isn't found or isn't recognized, the install directory isn't on your PATH yet: see [Fix your PATH](/docs/en/troubleshoot-install#command-not-found-claude-after-installation).
 
-    If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell. Your prompt shows `PS C:\` when you're in PowerShell and `C:\` without the `PS` when you're in CMD.
+    If you see `The token '&&' is not a valid statement separator`, you're in PowerShell, not CMD. If you see `'irm' is not recognized as an internal or external command`, you're in CMD, not PowerShell.
 
-    If the install command fails with `syntax error near unexpected token '<'`, a `403`, or another curl error, see [Troubleshoot installation](/docs/en/troubleshoot-install#find-your-error) to match the error to a fix and for alternative install methods.
+    If the install command fails with `syntax error near unexpected token '<'`, a `403`, or any other error, see [Troubleshoot installation](/docs/en/troubleshoot-install#find-your-error) to match the error to a fix and for alternative install methods.
 
     [Git for Windows](https://git-scm.com/downloads/win) is recommended on native Windows so Claude Code can use the Bash tool. If Git for Windows is not installed, Claude Code uses PowerShell as the shell tool instead. WSL setups do not need Git for Windows.
 
@@ -115,13 +117,13 @@ You can run Claude Code natively on Windows or inside WSL. Pick based on where y
 
 | Option | Requires | [Sandboxing](/docs/en/sandboxing) | When to use |
 | - | - | - | - |
-| Native Windows | None; [Git for Windows](https://git-scm.com/downloads/win) is optional | Not supported | Windows-native projects and tools |
-| WSL 2 | WSL 2 enabled | Supported | Linux toolchains or sandboxed command execution |
-| WSL 1 | WSL 1 enabled | Not supported | If WSL 2 is unavailable |
+| [Native Windows](#install-on-native-windows) | None; [Git for Windows](https://git-scm.com/downloads/win) is optional | Not supported | Windows-native projects and tools |
+| [WSL 2](#install-in-wsl) | WSL 2 enabled | Supported | Linux toolchains or sandboxed command execution |
+| [WSL 1](#install-in-wsl) | WSL 1 enabled | Not supported | If WSL 2 is unavailable |
 
-**Option 1: Native Windows**
+#### Install on native Windows
 
-Run the install command from PowerShell or CMD. You do not need to run as Administrator. Installing [Git for Windows](https://git-scm.com/downloads/win) is optional. It provides Git Bash, which the [Bash tool](/docs/en/tools-reference#bash-tool-behavior) and the [Monitor tool](/docs/en/tools-reference#monitor-tool) need.
+Run the [install command](#install-claude-code) from PowerShell or CMD. You do not need to run as Administrator. Installing [Git for Windows](https://git-scm.com/downloads/win) is optional. It provides Git Bash, which the [Bash tool](/docs/en/tools-reference#bash-tool-behavior) and the [Monitor tool](/docs/en/tools-reference#monitor-tool) need.
 
 Whether you install from PowerShell or CMD only affects which install command you run. Your prompt shows `PS C:\Users\YourName>` in PowerShell and `C:\Users\YourName>` without the `PS` in CMD. If you're new to the terminal, the [terminal guide](/docs/en/terminal-guide#windows) walks through each step.
 
@@ -140,9 +142,9 @@ After installation, launch `claude` from any terminal.
 
 When Git for Windows is installed, the PowerShell tool is available alongside Bash: on by default for claude.ai and Console accounts, and enabled with `CLAUDE_CODE_USE_POWERSHELL_TOOL=1` in Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry sessions. Set it to `0` to turn the tool off. See [PowerShell tool](/docs/en/tools-reference#powershell-tool) for setup and limitations.
 
-**Option 2: WSL**
+#### Install in WSL
 
-Open your WSL distribution and run the Linux installer from the [install instructions](#install-claude-code) above. You install and launch `claude` inside the WSL terminal, not from PowerShell or CMD.
+Open your WSL distribution and run the Linux installer from the [install instructions](#install-claude-code). You install and launch `claude` inside the WSL terminal, not from PowerShell or CMD.
 
 ### Alpine Linux and musl-based distributions
 
@@ -196,7 +198,7 @@ claude doctor
 
 Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's Agent Platform](/docs/en/google-vertex-ai), or [Microsoft Foundry](/docs/en/microsoft-foundry).
 
-After installing, log in by running `claude` and following the browser prompts. If the `ANTHROPIC_API_KEY` environment variable is set, Claude Code prompts you once to approve the key instead of opening a browser. See [Authentication](/docs/en/authentication) for all account types and team setup options.
+After installing, log in by running `claude` and following the browser prompts. If you've set the `ANTHROPIC_API_KEY` environment variable and you approve the key when Claude Code asks whether to use it, Claude Code skips the login prompt. See [Authentication](/docs/en/authentication) for all account types and team setup options.
 
 ## Update Claude Code
 
@@ -594,7 +596,9 @@ In addition to the signed manifest, individual binaries carry platform-native co
 
 To remove Claude Code, follow the instructions for your installation method. If `claude` still runs afterward, you likely have a second installation or a leftover shell alias from an older installer. See [Check for conflicting installations](/docs/en/troubleshoot-install#check-for-conflicting-installations) to find and remove it.
 
-### Native installation
+<span id="native-installation" />
+
+### Uninstall a native installation
 
 Remove the Claude Code binary and version files:
 
@@ -614,7 +618,9 @@ Remove the Claude Code binary and version files:
   </Tab>
 </Tabs>
 
-### Homebrew installation
+<span id="homebrew-installation" />
+
+### Uninstall with Homebrew
 
 Remove the Homebrew cask you installed. If you installed the stable cask:
 
@@ -628,7 +634,9 @@ If you installed the latest cask:
 brew uninstall --cask claude-code@latest
 ```
 
-### WinGet installation
+<span id="winget-installation" />
+
+### Uninstall with WinGet
 
 Remove the WinGet package:
 
@@ -636,7 +644,9 @@ Remove the WinGet package:
 winget uninstall Anthropic.ClaudeCode
 ```
 
-### apt / dnf / apk
+<span id="apt-/-dnf-/-apk" />
+
+### Uninstall with apt, dnf, or apk
 
 Remove the package and the repository configuration:
 
@@ -664,7 +674,9 @@ Remove the package and the repository configuration:
   </Tab>
 </Tabs>
 
-### npm
+<span id="npm" />
+
+### Uninstall with npm
 
 Remove the global npm package:
 

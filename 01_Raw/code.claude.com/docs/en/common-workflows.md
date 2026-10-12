@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/common-workflows
-fetched_at: 2026-10-05T06:27:11.404655+00:00
+fetched_at: 2026-10-12T06:49:42.338699+00:00
 fetch_method: mintlify_md
 ---
 
@@ -221,7 +221,7 @@ Suppose you need to add tests for uncovered code.
 
 Claude can generate tests that follow your project's existing patterns and conventions. When asking for tests, be specific about what behavior you want to verify. Claude examines your existing test files to match the style, frameworks, and assertion patterns already in use.
 
-For comprehensive coverage, ask Claude to identify edge cases you might have missed. Claude can analyze your code paths and suggest tests for error conditions, boundary values, and unexpected inputs that are easy to overlook.
+To improve coverage, ask Claude to identify edge cases you might have missed. Claude can analyze your code paths and suggest tests for error conditions, boundary values, and unexpected inputs that are often overlooked.
 
 ***
 
@@ -373,7 +373,7 @@ Use @ to quickly include files or directories without waiting for Claude to read
     Explain the logic in @src/utils/auth.js
     ```
 
-    This includes the full content of the file in the conversation.
+    This includes the content of the file in the conversation when it fits the [Read tool](/docs/en/tools-reference#read-tool-behavior)'s token limit, 25,000 tokens by default. A text file larger than 256KB isn't included.
   </Step>
 
   <Step title="Reference a directory">
@@ -424,7 +424,7 @@ Pick a scheduling option based on where you want the task to run:
 
 ### Ask Claude about its capabilities
 
-Claude has built-in access to its documentation and can answer questions about its own features and limitations.
+Claude can answer questions about its own features and limitations. It looks up the answers in the current Claude Code documentation, so they aren't limited to the version you're running.
 
 #### Example questions
 
@@ -459,7 +459,6 @@ what are the limitations of Claude Code?
 <Tip>
   Tips:
 
-  * Claude always has access to the latest Claude Code documentation, regardless of the version you're using
   * Ask specific questions to get detailed answers
   * Claude can explain complex features like MCP integration, enterprise configurations, and advanced workflows
 </Tip>

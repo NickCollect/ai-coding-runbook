@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/authentication
-fetched_at: 2026-10-05T06:27:11.116776+00:00
+fetched_at: 2026-10-12T06:49:41.420565+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Claude Code supports multiple authentication methods depending on your setup. In
 
 ## Log in to Claude Code
 
-After [installing Claude Code](/docs/en/setup#install-claude-code), run `claude` in your terminal. On first launch, Claude Code opens a browser window for you to log in. If you've set the `ANTHROPIC_API_KEY` environment variable, Claude Code skips the login prompt and asks you to approve the key instead.
+After [installing Claude Code](/docs/en/setup#install-claude-code), run `claude` in your terminal. On first launch, Claude Code opens a browser window for you to log in. If you've set the `ANTHROPIC_API_KEY` environment variable and you approve the key when Claude Code asks whether to use it, Claude Code skips the login prompt.
 
 If the browser doesn't open automatically, press `c` to copy the login URL to your clipboard, then paste it into your browser.
 
@@ -92,7 +92,7 @@ For organizations that prefer API-based billing, you can set up access through t
   <Step title="Add users">
     You can add users through either method:
 
-    * Bulk invite users from within the Console: Settings -> Members -> Invite
+    * Bulk invite users from the Console's Members page at [platform.claude.com/settings/members](https://platform.claude.com/settings/members): click **Invite**
     * [Set up SSO](https://support.claude.com/en/articles/13132885-setting-up-single-sign-on-sso)
   </Step>
 
@@ -120,7 +120,7 @@ You can sign in to your Console account without creating an API key, even when y
 * **Sign in with your Console account**, labeled `(recommended)`: Claude Code keeps the OAuth token from that sign-in and stores it as an [Anthropic profile](#anthropic-profiles-and-federation-credentials). It creates no API key
 * **Create an API key**, labeled `(legacy)`: Claude Code creates a Console API key for you and stores it with your other credentials
 
-In practice, the profile stores an OAuth login while an API key is a static credential: Claude Code refreshes the profile's login automatically, and when refresh fails, requests fail with [Anthropic profile login expired](/docs/en/errors#anthropic-profile-login-expired) until you sign in again.
+In practice, the profile stores an OAuth login while an API key is a static credential. Claude Code refreshes the profile's login automatically, and when refresh fails, requests fail with an [expired profile login error](/docs/en/errors#anthropic-profile-login-expired) until you sign in again.
 
 You don't get the choice on every machine. Claude Code creates an API key without asking in these cases:
 
@@ -135,8 +135,6 @@ After you sign in without a key, you have a profile instead of a stored API key:
 * **Which profile it writes**: Claude Code writes the profile named by `ANTHROPIC_PROFILE`, or your active profile, or `default`. If that profile is a federation profile, Claude Code refuses the sign-in instead of overwriting it
 * **What it signs you out of**: Claude Code signs you out of any claude.ai login stored on the machine
 * **How to undo it**: run `/logout`, which removes and revokes the credential this sign-in wrote
-
-If your organization uses [server-managed settings](/docs/en/server-managed-settings), they apply to this sign-in on Claude Code v2.1.257 or later.
 
 Everything else about profiles applies to this sign-in, including where it ranks against your other credentials, the `Profile` row you get in `/status`, and the features that need a claude.ai login. See [Anthropic profiles and federation credentials](#anthropic-profiles-and-federation-credentials).
 
@@ -274,7 +272,7 @@ For the federation variables, Claude Code also reads the other variables in the 
 
 To confirm which source Claude Code chose, run `/status`. A `Profile` row names the source in place of the `Login method` row. When the profile is the credential in use, `Organization` and `Email` rows show its account.
 
-When a `user_oauth` profile's login has expired and Claude Code can't renew it, requests fail with [Anthropic profile login expired](/docs/en/errors#anthropic-profile-login-expired).
+When a `user_oauth` profile's login has expired and Claude Code can't renew it, requests fail with an [expired profile login error](/docs/en/errors#anthropic-profile-login-expired).
 
 Features that need your claude.ai login, such as [claude.ai connectors](/docs/en/mcp#use-mcp-servers-from-claude-ai) and [`/schedule`](/docs/en/routines), aren't available while one of these sources is selected. To stop Claude Code from selecting a source:
 

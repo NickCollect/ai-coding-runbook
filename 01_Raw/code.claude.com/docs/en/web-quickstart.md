@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/web-quickstart
-fetched_at: 2026-10-05T06:27:13.033172+00:00
+fetched_at: 2026-10-12T06:49:46.353292+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ fetch_method: mintlify_md
 
 A cloud session runs Claude Code on cloud infrastructure instead of your machine, Anthropic-managed by default. This quickstart starts one from [claude.ai/code](https://claude.ai/code) in your browser. You can also start one from the Claude mobile app, the Desktop app, or your terminal with `claude --cloud`.
 
-You'll need a GitHub repository to [get started](#connect-github). Claude clones it into an isolated virtual machine, makes changes, and pushes a branch for you to review. Sessions persist across devices, so a task you start on your laptop is ready to review from your phone later.
+You'll need a GitHub repository to [get started](#connect-github). Claude clones it into an isolated virtual machine, makes changes, and pushes a branch for you to review. Sessions persist across devices, so a task you start on your laptop is ready to review from your phone later. Each session counts toward your plan's usage limits alongside the rest of your Claude and Claude Code usage, and there's no separate charge for the cloud VM.
 
 Cloud sessions work well for:
 
@@ -52,7 +52,7 @@ Claude Code behaves the same everywhere. What changes is where the session runs 
 | **Uses your local config** | No, repo only | Yes | Yes |
 | **Requires GitHub** | Yes, or [bundle a local repo](/docs/en/claude-code-on-the-web#send-local-repositories-without-github) via `--cloud` | No | No |
 | **Keeps running if you disconnect** | Yes | No | While the session stays open on your machine |
-| **[Permission modes](/docs/en/permission-modes)** | Accept edits, Plan, Auto | All modes in the terminal; see [Switch permission modes](/docs/en/permission-modes#switch-permission-modes) for the IDE and Desktop app | Manual, Accept edits, or Plan from claude.ai and the mobile app |
+| **[Permission modes](/docs/en/permission-modes)** | Accept edits, Plan, Auto | All modes in the terminal; see [Switch permission modes](/docs/en/permission-modes#switch-permission-modes) for the IDE and Desktop app | Manual, Accept edits, Plan, or Auto from claude.ai and the mobile app |
 | **Network access** | Configurable per environment | Your machine's network | Your machine's network |
 
 See the [terminal quickstart](/docs/en/quickstart), [Desktop app](/docs/en/desktop), or [Remote Control](/docs/en/remote-control) docs to set up local sessions.
@@ -101,7 +101,7 @@ When you run `/web-setup`, Claude Code reads the token that `gh auth token` prin
 If you already connected GitHub in the browser, `/web-setup` warns you that continuing replaces that connection for your cloud sessions.
 
 <Note>
-  Organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled cannot use `/web-setup` or other cloud session features. If the GitHub CLI isn't installed or isn't authenticated, Claude Code opens the browser onboarding flow instead.
+  Organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled, or with the [HIPAA configuration](/docs/en/hipaa-setup) applied, cannot use `/web-setup` or other cloud session features. If the GitHub CLI isn't installed or isn't authenticated, Claude Code opens the browser onboarding flow instead.
 </Note>
 
 <Steps>
@@ -146,7 +146,7 @@ With GitHub connected and an environment created, you're ready to submit tasks.
   </Step>
 
   <Step title="Choose a permission mode">
-    The mode dropdown next to the input shows the mode the session will run in:
+    The [permission mode control](/docs/en/permission-modes#switch-permission-modes) shows the permission mode the session will run in:
 
     * **Auto**: a classifier reviews Claude's actions instead of asking you. Appears when your organization allows auto mode and the selected model supports it
     * **Accept edits**: Claude makes changes and pushes a branch without stopping for approval
@@ -244,7 +244,7 @@ On Team and Enterprise plans, the command is hidden by default: the [Quick setup
 The command is also hidden in two other cases:
 
 * An administrator has disabled cloud sessions for your organization. In this case, submitting `/web-setup` returns [`Cloud sessions are disabled by your organization's policy`](/docs/en/errors#cloud-sessions-are-disabled-by-your-organizations-policy). Before v2.1.268, this case also returned `Unknown command: /web-setup`.
-* Your Enterprise organization has [Zero Data Retention](/docs/en/zero-data-retention) enabled, which makes cloud sessions unavailable.
+* Your Enterprise organization has [Zero Data Retention](/docs/en/zero-data-retention) enabled, or has the [HIPAA configuration](/docs/en/hipaa-setup) applied. Either one makes cloud sessions unavailable.
 
 ### "Could not create a cloud environment" or "No cloud environment available" when using `--cloud`
 

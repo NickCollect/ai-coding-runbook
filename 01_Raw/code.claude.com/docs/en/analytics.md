@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/analytics
-fetched_at: 2026-10-05T06:27:11.064300+00:00
+fetched_at: 2026-10-12T06:49:41.322960+00:00
 fetch_method: mintlify_md
 ---
 
@@ -69,7 +69,7 @@ Data typically appears within 24 hours after enabling, with daily updates. If no
 * **"GitHub app required"**: install the GitHub app to view contribution metrics
 * **"Data processing in progress"**: check back in a few days and confirm the GitHub app is installed if data doesn't appear
 
-Contribution metrics support GitHub Cloud and GitHub Enterprise Server.
+Contribution metrics cover repositories hosted on github.com. For repositories on [GitHub Enterprise Server](/docs/en/github-enterprise-server), the analytics dashboard shows usage metrics only.
 
 ### Review summary metrics
 

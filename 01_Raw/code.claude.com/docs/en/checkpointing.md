@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/checkpointing
-fetched_at: 2026-09-28T06:10:39.941284+00:00
+fetched_at: 2026-10-12T06:49:41.750269+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ Run `/rewind`, or press `Esc` twice when the prompt input is empty, to open the 
   If the prompt input contains text, double `Esc` clears it instead of opening the menu. The cleared text is saved to your input history, so press `Up` to recall it after you finish in the rewind menu.
 </Note>
 
-The rewind menu lists each prompt you sent during the session, except [messages that joined a running turn](#messages-sent-mid-turn-not-checkpointed). Select the point you want to act on, then choose an action:
+The rewind menu lists the prompts you sent during the session. Select the point you want to act on, then choose an action:
 
 * **Restore code and conversation**: revert both code and conversation to that point
 * **Restore conversation**: rewind to that message while keeping current code
@@ -98,9 +98,9 @@ Checkpointing only tracks files that have been edited within the current session
 
 ### Messages sent mid-turn not checkpointed
 
-When a message you [queue while Claude works](/docs/en/interactive-mode#queue-messages-while-claude-works) reaches Claude within the running turn, it joins that turn instead of starting a new one. The message appears in the conversation, but Claude Code doesn't create a checkpoint for it, and the rewind menu doesn't list it. A queued message that Claude Code sends as part of a new turn gets a checkpoint as usual, including when several queued messages [share that turn](/docs/en/interactive-mode#when-claude-code-sends-what-you-queued).
+In the rewind menu, a message you [typed while Claude was still working](/docs/en/interactive-mode#queue-messages-while-claude-works) can be marked **No code restore**. Claude read that message before its turn ended. [Checkpoints are taken for prompts that start a turn](#how-checkpoints-work), so this message has none of its own. The edits Claude made after reading it count toward the prompt that started the turn.
 
-To remove such a message, or undo the edits Claude made after it, rewind to the prompt that started the turn. That rewinds the whole turn, including the work Claude did before your message arrived.
+You don't need to do anything about the message itself. To undo the file changes from that part of the session, select the prompt that started the turn and choose **Restore code** or **Restore code and conversation**. That reverts Claude's file edits from the whole turn, including the ones from before your message arrived. Selecting the marked message still offers **Restore conversation**, which rewinds the conversation to it and leaves your files as they are.
 
 ### Symlinked and hard-linked paths not restored
 

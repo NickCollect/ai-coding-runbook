@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/worktrees
-fetched_at: 2026-10-05T06:27:13.386670+00:00
+fetched_at: 2026-10-12T06:49:47.246309+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Isolate parallel Claude Code sessions in separate git worktrees so changes don't collide. Covers the `--worktree` flag, subagent isolation, `.worktreeinclude`, cleanup, and non-git VCS hooks.
 
-A [git worktree](https://git-scm.com/docs/git-worktree) is a separate working directory with its own files and branch, sharing the same repository history and remote as your main checkout. Running each Claude Code session in its own worktree means edits in one session never touch files in another, so one session can build a feature while a second fixes a bug.
+A [git worktree](https://git-scm.com/docs/git-worktree) is a separate working directory with its own files and branch, sharing the same repository history and remote as your main checkout. Running each Claude Code session in its own worktree gives it a separate copy of the files to edit, so one session can build a feature while a second fixes a bug.
 
 <Note>
   Worktrees require a git repository; for other version control systems, [configure hooks to replace the git logic](#non-git-version-control). In the [desktop app](/docs/en/desktop#work-in-parallel-with-sessions), select the **worktree** option when you start a session to give it its own worktree.
@@ -98,6 +98,8 @@ Claude Code applies four checks:
 * **Git redirects**: Claude Code blocks a Bash or Monitor command that redirects git into the main checkout. The redirect can come through `git -C`, `--git-dir`, a `GIT_DIR` or `GIT_WORK_TREE` variable, or a `cd` into the main checkout before running git.
 * **Command shape**: Claude Code blocks a Bash or Monitor command when it can't verify from the command text that any git the command runs stays inside the worktree. That happens, for example, when the command name is computed at runtime, when the syntax can't be parsed, or when an expansion such as `${!name}` or `${ command; }` could run a command the text doesn't spell out. Claude Code tells Claude how to rewrite the refused command, such as splitting it into plain, separate commands. You can't turn this check off.
 
+These checks read the path an edit targets, the directory a command runs in, and the text of the command. None of them tracks which files a shell command writes, so a command that writes into the main checkout without running git there, such as `cp` or a shell redirect, isn't refused by them. Claude Code treats that command like any other shell command under your [permissions](/docs/en/permissions) and [sandboxing](/docs/en/sandboxing) settings.
+
 The checks apply to the repository you launched Claude Code from. They also cover the main checkout a linked worktree is linked from. For PowerShell commands, Claude Code applies only the working-directory check.
 
 Claude sees each refusal as a tool error that names the worktree and says how to proceed. For a refused command, see [what the refusal message means and how to clear it](/docs/en/errors#command-blocked-by-the-worktree-isolation-checks).
@@ -119,7 +121,7 @@ Apply the requested refactor across every affected file, then run the tests
 and report the results.
 ```
 
-Each subagent gets a temporary worktree that Claude Code removes automatically when the subagent finishes without changes; a worktree with changes stays on disk until the [periodic sweep below](#clean-up-subagent-and-background-session-worktrees) can remove it without losing work.
+Each subagent gets a temporary worktree that Claude Code removes automatically when the subagent finishes without changes; a worktree with changes stays on disk until the [periodic sweep below](#clean-up-subagent-and-background-session-worktrees) can remove it without losing work. For a worktree your [WorktreeCreate hook](/docs/en/hooks#worktreecreate) created, see [WorktreeRemove](/docs/en/hooks#worktreeremove) instead.
 
 Subagent worktrees use the same [base branch](#choose-the-base-branch) as `--worktree`, so they branch from your repository's default branch unless `worktree.baseRef` is set to `"head"`.
 
@@ -242,7 +244,9 @@ A worktree gets its own files and branch, but it shares the following with the m
 
   The same read-through covers `.claude/agents` and `.claude/commands`. For skills, the read-through requires Claude Code v2.1.277 or later.
 
-All of these apply whether you create the worktree with `--worktree`, with `git worktree add`, or through the [desktop app](/docs/en/desktop#work-in-parallel-with-sessions).
+All of these apply whether you create the worktree with `--worktree` or with `git worktree add`.
+
+In a worktree session that you start from the [desktop app](/docs/en/desktop#work-in-parallel-with-sessions), Claude Code reads project configuration such as settings, hooks, skills, agents, commands, and [`.mcp.json`](/docs/en/mcp#project-scope) servers from the main checkout's root rather than from the worktree. Hook commands run in that root, and `${CLAUDE_PROJECT_DIR}` points at it. To reach the files Claude is working on, read the worktree's path from the hook's [`cwd` input field](/docs/en/hooks#common-input-fields). `CLAUDE.md` files and `.claude/rules/` still load from the worktree.
 
 ## Manage worktrees manually
 

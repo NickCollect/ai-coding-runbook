@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/skills
-fetched_at: 2026-10-05T06:27:10.883141+00:00
+fetched_at: 2026-10-12T06:49:40.733243+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ fetch_method: mintlify_md
 
 Agent Skills extend Claude with specialized capabilities that Claude invokes when relevant. Skills are packaged as `SKILL.md` files containing instructions, descriptions, and optional supporting resources. This page also covers [commands in Agent SDK sessions](#commands-in-agent-sdk-sessions).
 
-For comprehensive information about skills, including benefits, architecture, and authoring guidelines, see the [Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
+For more information about skills, including benefits, architecture, and authoring guidelines, see the [Agent Skills overview](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview).
 
 ## How skills work with the Agent SDK
 

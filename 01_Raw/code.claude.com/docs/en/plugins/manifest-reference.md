@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/manifest-reference
-fetched_at: 2026-10-05T06:27:12.341645+00:00
+fetched_at: 2026-10-12T06:49:44.687090+00:00
 fetch_method: mintlify_md
 ---
 
@@ -181,7 +181,7 @@ Claude Code namespaces every component under it, so an agent `reviewer` in plugi
 | Puts `official` beside `claude` or `anthropic`, such as `official-claude-tools` | Error |
 | Has `claude`, `anthropic`, or `anthropics` as a whole word anywhere else, such as `mcp-for-claude` | Warning |
 
-The error reads `Plugin name "<name>" is reserved: it passes as one of Anthropic's own`, and the warning reads `Plugin name "<name>" reads as one of Anthropic's own`. `claude plugin init` and `claude plugin tag` refuse a name that draws the error. Only these commands check the name. Claude Code still installs and loads a plugin whose name they refuse.
+The error reads `Plugin name "<name>" is reserved: it passes as one of Anthropic's own`, and the warning reads `Plugin name "<name>" reads as one of Anthropic's own`. `claude plugin init` and `claude plugin tag` refuse a name that draws the error. Claude Code still installs and loads a plugin whose name they refuse.
 
 ### `displayName`
 

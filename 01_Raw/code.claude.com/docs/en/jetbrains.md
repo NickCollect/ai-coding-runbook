@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/jetbrains
-fetched_at: 2026-10-05T06:27:11.874890+00:00
+fetched_at: 2026-10-12T06:49:43.629837+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,11 +53,15 @@ Claude Code works with any paid Claude subscription (Pro, Max, Team, or Enterpri
 
 ## Usage
 
-### From your IDE
+<span id="from-your-ide" />
+
+### Run Claude Code from your IDE
 
 Run `claude` from your IDE's integrated terminal, and all integration features will be active.
 
-### From external terminals
+<span id="from-external-terminals" />
+
+### Connect from an external terminal
 
 Use the `/ide` command in any external terminal to connect Claude Code to your JetBrains IDE and activate all features:
 

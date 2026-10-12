@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/google-vertex-ai
-fetched_at: 2026-10-05T06:27:11.793670+00:00
+fetched_at: 2026-10-12T06:49:43.319604+00:00
 fetch_method: mintlify_md
 ---
 
@@ -198,7 +198,7 @@ export VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5
 export VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1
 ```
 
-Most model versions have a corresponding `VERTEX_REGION_CLAUDE_*` variable. See the [Environment variables reference](/docs/en/env-vars) for the full list. Check [Google Cloud's Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) to determine which models support global endpoints versus regional only.
+Most model versions have a corresponding `VERTEX_REGION_CLAUDE_*` variable. See the [Environment variables reference](/docs/en/env-vars#variables) for the full list. Check [Google Cloud's Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) to determine which models support global endpoints versus regional only.
 
 If a region value isn't shaped like a region or location name, Claude Code treats it as unset. For example, Claude Code treats a value containing a slash, dot, or space as unset. Claude Code falls back to a different source for each variable:
 
@@ -316,9 +316,11 @@ For details, see [Google Cloud's Agent Platform IAM documentation](https://cloud
 
 ## 1M token context window
 
-Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) on Google Cloud's Agent Platform. Sonnet 5 always runs with the 1M window, with no `[1m]` variant to select. For the other models, Claude Code automatically enables the extended context window when you select a 1M model variant.
+Fable models, Sonnet 5 and later, and Opus 4.7 and later run with the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) by default on Google Cloud's Agent Platform, with no `[1m]` suffix needed. To keep a 200K window instead, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT=1`](/docs/en/model-config#turn-off-1m-context).
 
-The [setup wizard](#sign-in-with-agent-platform) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) for details, including how to use the 1M window without changing the pin.
+Opus 4.6 and Sonnet 4.6 reach the 1M window when you select their `[1m]` variant. The [setup wizard](#sign-in-with-agent-platform) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) for details, including how to use the 1M window without changing the pin.
+
+Before v2.1.287, the Fable models and Opus 4.7 and later ran with a 200K window by default on Google Cloud's Agent Platform and reached the 1M window through a `[1m]` suffix.
 
 ## Troubleshooting
 
@@ -338,7 +340,7 @@ If you encounter "model not found" 404 errors:
 * Verify the model is available in the location you specified. Some models are offered only on `global` or multi-region locations such as `eu` and `us`, not in specific regions
 * If using `CLOUD_ML_REGION=global`, check that your models support global endpoints in [Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) under "Supported features". For models that don't support global endpoints, either:
   * Specify a supported model via `ANTHROPIC_MODEL` or `ANTHROPIC_DEFAULT_HAIKU_MODEL`, or
-  * Set a region or multi-region location using `VERTEX_REGION_<MODEL_NAME>` environment variables
+  * Set a region or multi-region location using the model's `VERTEX_REGION_CLAUDE_*` variable, listed in the [environment variables reference](/docs/en/env-vars#variables)
 
 If you encounter 429 errors:
 

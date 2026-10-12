@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/routines
-fetched_at: 2026-10-05T06:27:12.631571+00:00
+fetched_at: 2026-10-12T06:49:45.436380+00:00
 fetch_method: mintlify_md
 ---
 
@@ -86,14 +86,14 @@ Routines belong to your individual claude.ai account. They are not shared with t
   </Step>
 
   <Step title="Select repositories">
-    Add one or more GitHub repositories for Claude to work in. Each repository is cloned at the start of a run, starting from the default branch. Claude creates `claude/`-prefixed branches for its changes.
+    Add one or more GitHub repositories for Claude to work in. Each repository is cloned at the start of a run. Claude creates `claude/`-prefixed branches for its changes.
   </Step>
 
   <Step title="Select an environment">
     Pick a [cloud environment](/docs/en/cloud-environments) for the routine. Environments control what the cloud session has access to:
 
     * **Network access**: set the level of internet access available during each run
-    * **Environment variables**: provide values Claude can use during each run. They're [visible to anyone who uses the environment](/docs/en/cloud-environments#what-carries-over-from-your-setup), so on Pro and Max plans, store keys for the APIs Claude calls during a run as [API credentials](/docs/en/cloud-environments#add-api-credentials) instead. That section also lists the requests that never get a credential
+    * **Environment variables**: provide values Claude can use during each run. They're [visible to anyone who uses the environment](/docs/en/cloud-environments#what-carries-over-from-your-setup), so on Pro and Max plans, store keys for the APIs Claude calls during a run as [network secrets](/docs/en/cloud-environments#add-network-secrets) instead. That section also lists the requests that never get a secret
     * **Setup script**: install dependencies and tools the routine needs. The result is [cached](/docs/en/cloud-environments#environment-caching), so the script doesn't re-run on every session
 
     A **Default** environment is provided with **Trusted** network access, which allows only the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) of package registries, cloud provider APIs, container registries, and common development domains through the session's network. Connectors you add to the routine reach their services through Anthropic's servers, so they don't need allowlist changes. If your routine needs to reach your own services directly, or a domain outside that list, edit the environment's [network access](/docs/en/cloud-environments#network-access) before running. To use a separate environment, [create one](/docs/en/cloud-environments#configure-your-environment) first.
@@ -329,11 +329,11 @@ You can also ask about a routine's run history, for example `/schedule why did m
 
 ### Repositories and branch permissions
 
-Routines need GitHub access to clone repositories. When you create a routine from the CLI with `/schedule`, Claude checks whether your account has GitHub access for the repository you ran it from and, if it doesn't, adds a setup note naming how to grant it. See [GitHub authentication options](/docs/en/claude-code-on-the-web#github-authentication-options) for the two ways to grant access.
+Routines need GitHub access to clone repositories. When you create a routine from the CLI with `/schedule`, Claude checks whether your account has GitHub access for the repository you ran it from and, if it doesn't, adds a setup note naming how to grant it. See [GitHub authentication options](/docs/en/claude-code-on-the-web#github-authentication-options) for the two ways to grant access. On Team and Enterprise plans, an [Owner](/docs/en/server-managed-settings#access-control) of your Claude organization has to turn on each method before you can use it; see [Connect GitHub](/docs/en/web-quickstart#connect-github).
 
 If your GitHub connection is missing or expired when a run is due, the routine skips runs until you reconnect, for up to 72 hours. Reconnect GitHub within that window and the routine resumes on its own. After 72 hours without a connection, the routine turns off, and you turn it back on after reconnecting GitHub.
 
-Each repository you add is cloned on every run. Claude starts from the repository's default branch unless your prompt specifies otherwise.
+Each repository you add is cloned on every run. Claude starts from the repository's default branch unless your prompt specifies otherwise. If a [GitHub pull request event](#add-a-github-trigger) triggers the run and the pull request's repository is the first repository in the routine, that repository starts from the pull request's head commit instead.
 
 Claude pushes its work to a branch prefixed with `claude/` unless your prompt directs it to push to another branch. To control which branches a run can push to, use branch protection rules or rulesets on GitHub. For runs on Anthropic-managed infrastructure, and for self-hosted runs that push through [Anthropic's git proxy](/docs/en/self-hosted-environments-deploy#use-the-anthropic-git-proxy), GitHub applies them to the GitHub access you connected, so a rule that access can bypass doesn't block a run's push. A self-hosted run that pushes with the git credentials your deployment provides is checked against those instead. See [Configure git](/docs/en/self-hosted-environments-deploy#configure-git).
 

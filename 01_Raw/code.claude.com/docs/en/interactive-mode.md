@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/interactive-mode
-fetched_at: 2026-10-05T06:27:11.851349+00:00
+fetched_at: 2026-10-12T06:49:43.519173+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ fetch_method: mintlify_md
 
 | Shortcut | Description | Context |
 | :- | :- | :- |
-| `Ctrl+C` | Interrupt, or clear input | Interrupts a running operation. If nothing is running, the first press clears the prompt input and a second press exits Claude Code |
+| `Ctrl+C` | Interrupt, or clear input | Interrupts a running operation. If nothing is running, the first press clears the prompt input and a second press exits Claude Code. Press `Up` while the prompt is still empty to bring the cleared draft back, which requires Claude Code v2.1.288 or later |
 | `Ctrl+X Ctrl+K` | Stop all running [background subagents](/docs/en/sub-agents#run-subagents-in-foreground-or-background) in this session, and turn off [artifact auto-replies](/docs/en/artifacts#let-claude-reply-to-comments-on-its-own) for the rest of it. Press twice within 3 seconds to confirm. You can press it while a background subagent's permission prompt is open | Subagent control |
 | `Ctrl+D` | Exit Claude Code session | The first press shows a confirmation hint and a second press within 800ms exits. When the prompt has text, `Ctrl+D` deletes the character after the cursor instead |
 | `Ctrl+G` or `Ctrl+X Ctrl+E` | Open in default text editor | Edit your prompt or custom response in your default text editor. `Ctrl+X Ctrl+E` is the readline-native binding. Turn on **Show last response in external editor** in `/config` to prepend Claude's previous reply as `#`-commented context above your prompt; Claude Code strips the comment block when you save |
@@ -44,7 +44,7 @@ fetch_method: mintlify_md
 | `Ctrl+Enter` or `Ctrl+X Ctrl+S` | Send queued messages now | Sends your [queued messages](#queue-messages-while-claude-works), and your draft with them, right away. [When Claude Code sends what you queued](#when-claude-code-sends-what-you-queued) covers what happens to the turn Claude is working on. In [shell mode](#shell-mode-with-prefix), the key only queues your command. In terminals that don't report extended keys, `Ctrl+Enter` arrives as plain `Enter`; `Ctrl+X Ctrl+S` works in any terminal. Requires Claude Code v2.1.275 or later |
 | `Shift+Tab`, or `Alt+M` on Windows when the Node or Bun runtime doesn't enable VT input mode | Cycle permission modes | Cycle through `default` (labeled Manual in the mode indicator), `acceptEdits`, `plan`, and, when available, `bypassPermissions` and then `auto`. From `auto`, the first press switches to `default`. See [permission modes](/docs/en/permission-modes). On a file permission prompt, the same key closes an open [comment field](/docs/en/permissions#add-a-comment-when-you-answer-a-permission-prompt). With no field open, it selects the option that allows the action for the rest of the session, when the prompt offers that option |
 | `Option+P` (macOS) or `Alt+P` (Windows/Linux) | Switch model | Switch models without clearing your prompt |
-| `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle extended thinking | Enable or disable extended thinking mode. Has no effect on Opus 5.5, Sonnet 5.5, or the Fable models, which always use extended thinking. Works on macOS without configuring Option as Meta |
+| `Option+T` (macOS) or `Alt+T` (Windows/Linux) | Toggle extended thinking | Enable or disable extended thinking mode. Has no effect on Opus 5.5, Sonnet 5.5, Haiku 5.5, or the Fable models, which always use extended thinking. Works on macOS without configuring Option as Meta |
 | `Option+O` (macOS) or `Alt+O` (Windows/Linux) | Toggle fast mode | Enable or disable [fast mode](/docs/en/fast-mode) |
 
 ### Text editing
@@ -193,11 +193,11 @@ Claude Code reads this setting from your user settings file, the `--settings` fl
 | `$` | End of line |
 | `^` | First non-blank character |
 | `gg` | Beginning of input |
-| `G` | End of input |
-| `f{char}` | Jump to next occurrence of character |
-| `F{char}` | Jump to previous occurrence of character |
-| `t{char}` | Jump to just before next occurrence of character |
-| `T{char}` | Jump to just after previous occurrence of character |
+| `G` | Beginning of last line |
+| `f{char}` | Jump to next occurrence of character on the current line |
+| `F{char}` | Jump to previous occurrence of character on the current line |
+| `t{char}` | Jump to just before next occurrence of character on the current line |
+| `T{char}` | Jump to just after previous occurrence of character on the current line |
 | `;` | Repeat last f/F/t/T motion |
 | `,` | Repeat last f/F/t/T motion in reverse |
 | `/` | Open reverse history search, same as `Ctrl+R`. The empty search prompt shows a hint: press `Esc` then `i` then `/` to open the command menu instead |
@@ -215,7 +215,7 @@ Claude Code reads this setting from your user settings file, the `--settings` fl
 | `dd` | Delete line |
 | `D` | Delete to end of line |
 | `dw`/`de`/`db` | Delete word/to end/back |
-| `df{char}`/`dt{char}` | Delete to and including, or up to, the next occurrence of a character |
+| `df{char}`/`dt{char}` | Delete to and including, or up to, the next occurrence of a character on the current line |
 | `dj`/`dk` | Delete the current line and the line below or above |
 | `dgg`/`dG` | Delete from the current line to the first or last line |
 | `d0`/`c0`/`y0` | Delete, change, or yank from the cursor back to the beginning of the line. Requires Claude Code v2.1.281 or later |
@@ -319,7 +319,7 @@ When a command reaches its timeout before it finishes, Claude Code automatically
 * Background tasks are automatically cleaned up when Claude Code exits. On macOS and Linux, when you stop a background task from [`/tasks`](/docs/en/commands) or Claude Code stops it at exit, processes that detached from the task's shell, such as ones started under `setsid` or `timeout`, stop too
 * If you background the session instead of exiting it, your background tasks keep running in the background session. See [background a running session](/docs/en/agent-view#from-inside-a-session)
 * Background tasks are automatically terminated if output exceeds 5GB, with a note in stderr explaining why
-* On macOS and Linux, Claude Code stops your running background tasks when the operating system reports critical memory pressure, provided the session has been idle for at least 30 minutes and no turn or subagent is running. Requires Claude Code v2.1.193 or later
+* On macOS and Linux, Claude Code stops your running background tasks when the operating system reports critical memory pressure, provided the session has been idle for at least 30 minutes and no turn or subagent is running
   * The [debug log](/docs/en/debug-your-config) says why tasks were stopped, or why a pressure event left them running
   * Set [`CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP`](/docs/en/env-vars) to `1` to turn off memory-pressure stops
 * Background commands in a local session you work in from a terminal, the desktop app, or the VS Code extension have no time limit. In a session that runs unattended, such as a `-p` run or a cloud session, Claude Code stops a background command at its [time limit](/docs/en/tools-reference#time-limit-for-background-commands)
@@ -352,13 +352,13 @@ Shell mode:
 * Supports the same `Ctrl+B` backgrounding for long-running commands
 * Doesn't require Claude to interpret or approve the command
 * Supports history-based autocomplete: type a partial command and press `Tab` to complete from previous `!` commands in the current project
-* Supports live file path autocomplete as of v2.1.193 on all platforms: type a token containing a forward slash, such as `./src/` or `~/`, to see a dropdown of matching files and directories, then press `Tab` to accept. Use forward slashes on Windows too; the dropdown is triggered by `/`, not `\`
+* Supports live file path autocomplete: type a token containing a forward slash, such as `./src/` or `~/`, to see a dropdown of matching files and directories, then press `Tab` to accept. Use forward slashes on Windows too; the dropdown is triggered by `/`, not `\`
 * Exit with `Escape`, `Backspace`, or `Ctrl+U` on an empty prompt
 * Pasting text that starts with `!` into an empty prompt enters shell mode automatically, matching typed `!` behavior
 
 Unless your session is one of those listed under [strict sandbox mode](/docs/en/sandboxing#turn-off-the-retry-with-strict-sandbox-mode), commands you type in shell mode run outside the [sandbox](/docs/en/sandboxing) even when you've enabled sandboxing, because the sandbox applies to the commands Claude runs.
 
-Claude responds to the command output automatically once it lands in the transcript, so you can run `! npm test` and get an explanation of the failures without a second prompt. The response costs the same as sending a normal prompt. To restore the earlier behavior where the output is added to context without a response, set [`respondToBashCommands`](/docs/en/settings-reference#respondtobashcommands) to `false` in `settings.json`. Before v2.1.186, shell mode always added output to context without a response.
+Claude responds to the command output automatically once it lands in the transcript, so you can run `! npm test` and get an explanation of the failures without a second prompt. The response costs the same as sending a normal prompt. To add the output to context without a response instead, set [`respondToBashCommands`](/docs/en/settings-reference#respondtobashcommands) to `false` in `settings.json`.
 
 ## Queue messages while Claude works
 
@@ -397,6 +397,8 @@ Claude Code runs some commands as soon as you send them instead of queueing them
 Press `Up` from the first line of the input box to take back the queued messages and commands. Claude Code removes them from the queue and puts them in the input box, one per line, ahead of any text you had typed. Edit the text and press `Enter` to queue it again as one entry, or clear the input box to drop it.
 
 Claude Code takes back queued shell commands only when the input box is empty and you have nothing else queued, and it switches the input box to shell mode when it does. Otherwise it leaves them in the queue, listed with their `!` prefix, and runs them after the turn ends.
+
+If you take back queued text while `←` [waits to background the session](/docs/en/agent-view#switch-sessions-without-leaving-the-terminal), the text stays in the input box and Claude Code cancels the switch. If you take it back at the moment the session moves, the text disappears with the foreground screen: it wasn't sent. Each message you took back is saved as its own entry in [command history](#command-history). To recover one, reopen the session and press `Up` on an empty prompt with nothing queued.
 
 ## Prompt suggestions
 
@@ -769,6 +771,7 @@ You get a link only for the two-part `owner/repo#123` form. These stay plain tex
 * A bare `#123`
 * A nested GitLab path such as `group/subgroup/project#123`
 * Any reference inside a code span or code block
+* Any reference in a reply longer than about 1,000 lines or 100,000 characters
 
 Claude Code builds the link for the host of the repository it identifies from your git remote, not for the repository the reference names:
 

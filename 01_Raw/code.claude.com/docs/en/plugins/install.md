@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/install
-fetched_at: 2026-10-05T06:27:12.296744+00:00
+fetched_at: 2026-10-12T06:49:44.627470+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,7 +77,7 @@ Pick the tab for where you run Claude Code.
 
         * **Active now**: `Plugin is now active.` No reload is needed.
         * **Active, but a server needs setup**: `Plugin is now active.` is followed by `Its bundled MCP server needs configuration before it can start`. The plugin's [bundled MCP server](/docs/en/plugins/components#include-a-packaged-mcpb-server) can't start until you set its options. Select the plugin on the **Installed** tab in `/plugin` and choose **Configure** to set the server's options.
-        * **Reload needed**: `Run /reload-plugins to activate.` The panel closes and Claude Code runs that reload for you. If the reload would [invalidate the prompt cache](/docs/en/prompt-caching#enabling-or-disabling-a-plugin), it warns and leaves the plugin pending instead. Run `/reload-plugins --force` to activate it anyway, which costs one uncached request.
+        * **Reload needed**: `Run /reload-plugins to apply.` The panel closes and Claude Code runs that reload for you. If the reload would [invalidate the prompt cache](/docs/en/prompt-caching#enabling-or-disabling-a-plugin), it warns and leaves the plugin pending instead. Run `/reload-plugins --force` to activate it anyway, which costs one uncached request.
         * **Load failed**: `The plugin couldn't be loaded`. Open the **Errors** tab in `/plugin` for the reason, then see [After install: plugin not working](/docs/en/plugins/troubleshooting#plugin-installed-but-not-working).
       </Step>
 
@@ -189,7 +189,7 @@ Run `claude plugin install` in your shell to install a plugin without starting a
 
 * **Scope**: user scope by default. Pass `--scope project` or `--scope local` to change it.
 * **When the plugins load**: plugins it installs load the next time you start Claude Code, or when you run `/reload-plugins` in a session that's already open.
-* **The marketplace must be added first**: on a machine where no one has opened an interactive Claude Code session yet, the official marketplace isn't registered, so a script that installs from it runs `claude plugin marketplace add anthropics/claude-plugins-official` before the install.
+* **The marketplace on a new machine**: on a machine where no one has opened an interactive Claude Code session yet, the official marketplace isn't registered, so a script that installs from it runs `claude plugin marketplace add anthropics/claude-plugins-official` before the install. See [Add and install from your shell](#add-and-install-from-your-shell).
 
 ```bash theme={null}
 claude plugin install formatter@your-org --scope project
@@ -199,7 +199,7 @@ The command prints `Successfully installed plugin: formatter@your-org (scope: pr
 
 Some plugins install by running a command that their marketplace names, called a [`command` source](/docs/en/plugins/marketplace-reference#command-plugin-source). Claude Code shows you that command and asks you to accept it before it runs. A script has no one to answer that prompt, so pass `--yes` there to accept it.
 
-For every `claude plugin install` flag, see [plugin install](/docs/en/plugins/cli-reference#plugin-install).
+For the other `claude plugin install` flags, see [plugin install](/docs/en/plugins/cli-reference#plugin-install).
 
 ## Add a marketplace
 
@@ -228,15 +228,29 @@ When the command succeeds, it prints `Successfully added marketplace: <name>`, a
 
 ### Add a marketplace and install in one command
 
-To install a plugin from a marketplace you haven't added yet, run `/plugin install` in a Claude Code session and name the marketplace source with `--marketplace`. Requires Claude Code v2.1.275 or later.
+To install a plugin from a marketplace you haven't added yet, name the marketplace source with `--marketplace` on the install command, in a session or from your shell. The source takes [the same forms as `/plugin marketplace add`](#add-a-marketplace), such as GitHub `owner/repo`, a git URL, or a local path. Give the plugin name by itself, without an `@marketplace` suffix.
+
+#### Add and install in a session
+
+Run `/plugin install` in a Claude Code session with the plugin and the source. Requires Claude Code v2.1.275 or later. In a session, the source can't contain spaces.
 
 ```text theme={null}
 /plugin install deploy-helper --marketplace your-org/plugins
 ```
 
-The source takes [the same forms as `/plugin marketplace add`](#add-a-marketplace), such as GitHub `owner/repo`, a git URL, or a local path, except that it can't contain spaces. Give the plugin name by itself, without an `@marketplace` suffix.
-
 If you haven't added that marketplace yet, Claude Code shows the source it resolved and asks you to confirm before adding it. Once the marketplace is added, the plugin's details open and you choose an [installation scope](#install-a-plugin). If the source matches a marketplace you've already added, Claude Code skips the confirmation and opens the plugin's details in that marketplace.
+
+#### Add and install from your shell
+
+In your shell, without starting a session, run `claude plugin install` with the plugin and the source. Requires Claude Code v2.1.292 or later.
+
+```bash theme={null}
+claude plugin install deploy-helper --marketplace your-org/plugins
+```
+
+The shell command adds the marketplace without a confirmation step. A marketplace you've already added from that source is reused. A new one is added under the same [organization policy checks](/docs/en/plugins/org#restrict-what-users-can-install) as `claude plugin marketplace add`, and is declared in your user settings even when you pass `--scope project`.
+
+If you haven't added that marketplace yet, the command prints `Successfully added marketplace: <name> (declared in user settings)` and then [installs the plugin](#install-from-your-shell).
 
 ### Add a private marketplace
 

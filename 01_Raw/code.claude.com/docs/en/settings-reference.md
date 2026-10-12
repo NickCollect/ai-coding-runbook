@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/settings-reference
-fetched_at: 2026-10-05T06:27:12.864982+00:00
+fetched_at: 2026-10-12T06:49:45.949189+00:00
 fetch_method: mintlify_md
 ---
 
@@ -586,7 +586,7 @@ Every key below links to its entry. Scope lists the [files](/docs/en/settings#se
 <ReferenceFilter
   noun="settings"
   placeholder="Filter settings by key or purpose"
-  facetOrder={{ scope: ["Any file", "User, local, or managed", "User or managed", "Managed", "Global config"] }}
+  facetOrder={{ scope: ["Any file", "User, local, or managed", "User or managed", "User", "Managed", "Global config"] }}
   columnHelp={{
 topic: "The section of this page that holds the entry. Use Sort by to group the table by topic.",
 scope: "Which settings files can set the key: user (~/.claude/settings.json), project (.claude/settings.json), local (.claude/settings.local.json), or managed (deployed by your organization). Global config keys are in ~/.claude.json instead.",
@@ -642,7 +642,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`claudeMdExcludes`](#claudemdexcludes) | Skip specific [CLAUDE.md](/docs/en/memory#exclude-specific-claude-md-files) files when memory loads | Memory and context | Any file |
 | [`cleanupPeriodDays`](#cleanupperioddays) | Choose how many days Claude Code keeps [transcripts](/docs/en/data-usage#data-retention) before deleting them | Privacy and telemetry | Any file |
 | [`companyAnnouncements`](#companyannouncements) | Show your organization's announcements at startup | Interface and terminal | Any file |
-| [`copyFullResponse`](#copyfullresponse) | Make [`/copy`](/docs/en/commands) copy the full response without showing the code block picker | Global config settings | Global config |
+| [`copyFullResponse`](#copyfullresponse) | Make [`/copy`](/docs/en/commands) copy the full response without showing the picker | Global config settings | Global config |
 | [`copyOnSelect`](#copyonselect) | Turn off automatic copying of text you select with the mouse in [fullscreen rendering](/docs/en/fullscreen#use-the-mouse) and agent view | Global config settings | Global config |
 | [`crossSessionInbound`](#crosssessioninbound) | Choose whether Claude Code delivers [messages from your other sessions](/docs/en/cross-session-messaging#control-inbound-messages), shows a notice without delivering them, or refuses them | Agents, sessions, and worktrees | Any file |
 | [`defaultShell`](#defaultshell) | Choose whether Bash or PowerShell runs the shell commands you type with the [`!` prefix](/docs/en/interactive-mode#shell-mode-with-prefix) | Interface and terminal | Any file |
@@ -688,7 +688,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`fileCheckpointingEnabled`](#filecheckpointingenabled) | Turn off or on the file snapshots that [`/rewind`](/docs/en/checkpointing) restores | Memory and context | Any file |
 | [`fileSuggestion`](#filesuggestion) | Supply [`@` file autocomplete](/docs/en/interactive-mode#quick-commands) from your own command | Interface and terminal | Any file |
 | [`footerLinksRegexes`](#footerlinksregexes) | Make issue or review IDs in output into [clickable links](/docs/en/statusline#clickable-links) below the input box | Interface and terminal | User or managed |
-| [`forceLoginGatewayUrl`](#forcelogingatewayurl) | Set the [gateway URL](/docs/en/claude-apps-gateway#set-the-gateway-url) the login screen connects to | Authentication and providers | Managed |
+| [`forceLoginGatewayUrl`](#forcelogingatewayurl) | Set the [gateway URL](/docs/en/claude-apps-gateway#set-the-gateway-url) the login screen connects to | Authentication and providers | User or managed |
 | [`forceLoginMethod`](#forceloginmethod) | [Restrict login](/docs/en/authentication#restrict-login-to-your-organization) to claude.ai, Claude Console, or a [cloud gateway](/docs/en/claude-apps-gateway) | Authentication and providers | Any file |
 | [`forceLoginOrgUUID`](#forceloginorguuid) | [Pin claude.ai logins to your organization](/docs/en/authentication#restrict-login-to-your-organization); only a managed source enforces it | Authentication and providers | Any file |
 | [`forceRemoteSettingsRefresh`](#forceremotesettingsrefresh) | Block startup until [server-managed settings](/docs/en/server-managed-settings) are freshly fetched | Enterprise and managed settings | Managed |
@@ -835,6 +835,7 @@ scope: "Which settings files can set the key: user (~/.claude/settings.json), pr
 | [`worktree`](#worktree) | Configure how Claude Code creates git [worktrees](/docs/en/worktrees) | Agents, sessions, and worktrees | Any file |
 | [`worktree.baseRef`](#worktree-baseref) | Branch new [worktrees](/docs/en/worktrees) from the remote default branch or your local HEAD | Agents, sessions, and worktrees | Any file |
 | [`worktree.bgIsolation`](#worktree-bgisolation) | Let background sessions edit the working copy without a [worktree](/docs/en/worktrees) | Agents, sessions, and worktrees | Any file |
+| [`worktree.location`](#worktree-location) | Choose where [Desktop SSH sessions](/docs/en/desktop#ssh-sessions) create their worktrees on a remote machine | Agents, sessions, and worktrees | User |
 | [`worktree.sparsePaths`](#worktree-sparsepaths) | Check out only the directories you need in each [worktree](/docs/en/worktrees) | Agents, sessions, and worktrees | Any file |
 | [`worktree.symlinkDirectories`](#worktree-symlinkdirectories) | Symlink large directories into each [worktree](/docs/en/worktrees) instead of duplicating them | Agents, sessions, and worktrees | Any file |
 | [`wslInheritsWindowsSettings`](#wslinheritswindowssettings) | Have WSL read [managed settings](/docs/en/managed-settings) from the Windows policy chain | Enterprise and managed settings | Managed |
@@ -868,7 +869,7 @@ The key has no effect on providers where the advisor [isn't available](/docs/en/
 
 Turn [extended thinking](/docs/en/model-config#extended-thinking) off for every session by setting this to `false`. Thinking is on by default, so `true` changes nothing. Most people set this through `/config` rather than by editing the file.
 
-On models that always think, such as Opus 5.5, Sonnet 5.5, and the Fable models, `false` has no effect. On [third-party providers](/docs/en/third-party-integrations) Claude Code omits the `thinking` parameter instead of turning thinking off, so adaptive-reasoning models may still think. With thinking turned off on the Anthropic API, Claude Code sends effort `high` instead of a higher level to models it knows [don't accept that combination](/docs/en/errors#effort-isnt-available-with-thinking-turned-off), such as Opus 5.
+On models that always think, such as Opus 5.5, Sonnet 5.5, Haiku 5.5, and the Fable models, `false` has no effect. On [third-party providers](/docs/en/third-party-integrations) Claude Code omits the `thinking` parameter instead of turning thinking off, so adaptive-reasoning models may still think. With thinking turned off on the Anthropic API, Claude Code sends effort `high` instead of a higher level to models it knows [don't accept that combination](/docs/en/errors#effort-isnt-available-with-thinking-turned-off), such as Opus 5.
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: Boolean
@@ -1351,11 +1352,11 @@ This key covers the requests [`promptCacheTtl`](#promptcachettl) doesn't, so set
 
 Choose what happens when a [safety classifier flags a request](/docs/en/model-config#automatic-model-fallback): switch to the fallback model and continue, or pause so you can choose between switching and editing the prompt.
 
-* **Scope**: [`Any file`](#scopes). Appears in `/config` as **Switch models when a message is flagged**.
+* **Scope**: [`Any file`](#scopes). Appears in `/config` as **Switch models when a message is flagged**, with the options **Switch automatically** and **Ask each time**.
 * **Type**: Boolean
   * `true`: Claude Code switches to the fallback model and continues
   * `false`: in an interactive session Claude Code pauses so you can choose between switching and editing the prompt; where no dialog can show, such as a `-p` run, the flagged request ends as an error
-* **Default**: `true`, switch automatically
+* **Default**: unset. Claude Code switches automatically, though it may [ask first](/docs/en/model-config#ask-before-switching) in an interactive session
 
 ```json settings.json theme={null}
 {
@@ -1683,9 +1684,9 @@ Set the [permission mode](/docs/en/permission-modes) new sessions start in. When
   * `"acceptEdits"`: Claude Code also runs file edits and common filesystem commands such as `mkdir` and `mv` without asking
   * `"plan"`: Claude Code reads and plans but blocks edits until you approve a plan
   * `"auto"`: Claude Code runs without routine prompts; before actions such as shell commands and network requests run, a background classifier checks that they align with your request
-  * `"dontAsk"`: Claude Code auto-denies every call that would otherwise prompt; reads, other actions that need no approval, and pre-approved tools still run
+  * `"dontAsk"`: Claude Code auto-denies every call that would otherwise prompt; file reads inside your working directories, other actions that need no approval, and pre-approved tools still run, apart from reads from [network paths](/docs/en/permissions#network-paths)
   * `"bypassPermissions"`: Claude Code runs everything without asking
-  * `"manual"`: an alias for `"default"`, in Claude Code v2.1.200 or later
+  * `"manual"`: an alias for `"default"`
 * **Default**: unset
 * **Per-session overrides**: `--permission-mode`, and its equivalent `--dangerously-skip-permissions` for `bypassPermissions`, take precedence over this key for one session
 
@@ -1697,7 +1698,7 @@ Set the [permission mode](/docs/en/permission-modes) new sessions start in. When
 }
 ```
 
-Permission rules layer on top of every mode: `deny` rules block in every mode, including `bypassPermissions`. See [Permission modes](/docs/en/permission-modes). `manual` names the permission mode labeled Manual in the CLI and the VS Code extension; the alias requires Claude Code v2.1.200 or later. In cloud sessions, Claude Code honors only `acceptEdits`, `plan`, `default`, and `auto` from this key. For conversations the VS Code extension starts, see [which setting the extension reads for the starting permission mode](/docs/en/permission-modes#switch-permission-modes).
+Permission rules layer on top of every mode: `deny` rules block in every mode, including `bypassPermissions`. See [Permission modes](/docs/en/permission-modes). In cloud sessions, Claude Code honors only `acceptEdits`, `plan`, `default`, and `auto` from this key. For conversations the VS Code extension starts, see [which setting the extension reads for the starting permission mode](/docs/en/permission-modes#switch-permission-modes).
 
 ### `permissions.disableBypassPermissionsMode`
 
@@ -1834,7 +1835,7 @@ Let Claude Code run sandboxed Bash commands without a permission prompt. Command
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: Boolean
-  * `true`: Claude Code runs sandboxed Bash commands without a permission prompt, subject to `deny` rules and content-scoped `ask` rules; `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` turns auto-allow off
+  * `true`: Claude Code runs sandboxed Bash commands without a permission prompt, except in the cases that [Auto-allow mode](/docs/en/sandboxing#auto-allow-mode) describes; `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` turns auto-allow off
   * `false`: sandboxed commands go through the regular permission flow, so your allow rules and permission mode decide. The `/sandbox` **Mode** tab calls this regular permissions mode
 * **Default**: `true`
 
@@ -1849,7 +1850,7 @@ This keeps the sandbox on and sends sandboxed commands through the regular permi
 }
 ```
 
-See [Sandbox modes](/docs/en/sandboxing#sandbox-modes) for what auto-allow mode still prompts on and how it behaves in plan mode.
+See [Auto-allow mode](/docs/en/sandboxing#auto-allow-mode) for what auto-allow mode still prompts on and how it behaves in plan mode.
 
 ### `sandbox.excludedCommands`
 
@@ -2264,7 +2265,7 @@ When a managed `sandbox.credentials` entry fails validation, Claude Code keeps p
 
 * An entry in `files` or `envVars` that still has a valid `path` or `name` and a `mode` of `mask` or `deny`, such as one whose `extract` pattern has no capturing group, is degraded to `mode: "deny"` with a warning, so the credential stays blocked, not masked, until you fix the entry. A degraded `files` entry pins [`filesystem.disabled`](/docs/en/sandboxing#disable-filesystem-isolation) like an explicit `deny` entry, and the warning notes that its read block isn't enforced if managed settings turn filesystem isolation off.
 * An entry with an unknown `mode` or an invalid `path` or `name` is stripped.
-* Each case warns; whether an entry is degraded or stripped, the remaining valid entries are still enforced, and a wholly invalid `credentials` value is dropped while the rest of `sandbox` still applies.
+* Each case warns; whether an entry is degraded or stripped, the remaining valid entries are still enforced.
 
 Applies in v2.1.191 and later; before v2.1.221, every invalid entry was stripped. For the other managed keys with per-field handling, see [Invalid entries in managed settings](/docs/en/managed-settings#invalid-entries-in-managed-settings).
 
@@ -2934,8 +2935,10 @@ This example turns off automatic compaction and routes API requests through a pr
 
     Ignoring this group in project and local settings requires Claude Code v2.1.282 or later.
   * Variables that change how Claude Code starts or syncs, such as `CLAUDE_CODE_PROCESS_WRAPPER`, `CLAUDE_CODE_SYNC_SKILLS`, `CLAUDE_CODE_SYNC_PLUGINS`, `CLAUDE_CODE_PLUGIN_CACHE_DIR`, and `CLAUDE_CODE_PLUGIN_SEED_DIR`.
+  * Variables that set the timers on an unanswered dialog: [`CLAUDE_CODE_USER_DIALOG_TIMEOUT_MS`, `CLAUDE_AFK_TIMEOUT_MS`, and `CLAUDE_AFK_COUNTDOWN_MS`](/docs/en/env-vars#variables).
+  * [`CLAUDE_CODE_DISABLE_ATTACHMENTS`](/docs/en/env-vars#variables), which turns off attachment processing.
 
-  Before v2.1.251, project and local settings could also set the variables in this list that choose where Claude Code writes its files or that export session content, except `HOME` and `XDG_CONFIG_HOME`.
+  Before v2.1.251, project and local settings could also set the variables in this list that choose where Claude Code writes its files or that export session content, except `HOME` and `XDG_CONFIG_HOME`. Before v2.1.290, they could also set the dialog timer variables and `CLAUDE_CODE_DISABLE_ATTACHMENTS`.
 * Identity variables that Claude Code's hosting environments own, such as `CLAUDE_CODE_REMOTE` and `CLAUDE_CODE_ACCOUNT_UUID`, are ignored from every file.
 * [`CLAUDE_CODE_MESSAGING_SOCKET` and `CLAUDE_CODE_MESSAGING_TOKEN`](/docs/en/env-vars#variables), which Claude Code exports itself, are ignored from every file. Ignoring the socket variable requires Claude Code v2.1.224 or later, and ignoring the token requires v2.1.228 or later.
 * [`CLAUDE_CODE_PROJECT_DIR_NAME`](/docs/en/sessions#name-the-project-directory-yourself), which Claude Code reads from the launch environment only, is ignored from every file; requires v2.1.234 or later.
@@ -2964,7 +2967,7 @@ In a `-p` run or an Agent SDK session, Claude Code ignores this key. The SDK tur
 
 ### `plansDirectory`
 
-Choose where Claude Code stores the plan files it writes in [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode). Claude Code resolves the path relative to the project root and keeps the default when the path resolves outside it.
+Choose where Claude Code stores the plan files it writes in [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode). Claude Code resolves the path relative to the project root.
 
 * **Scope**: [`Any file`](#scopes)
 * **Type**: string, a path relative to the project root
@@ -2975,6 +2978,11 @@ Choose where Claude Code stores the plan files it writes in [plan mode](/docs/en
   "plansDirectory": "./plans"
 }
 ```
+
+Claude Code stores plans in `~/.claude/plans` instead of the directory you set in cases such as these:
+
+* **Outside the project root**: the path resolves outside the project root, as `"../plans"` does.
+* **Backslash on macOS, Linux, and WSL**: the resolved path contains a backslash, as the Windows-style `"docs\\plans"` does. Write `"docs/plans"`, which works on Windows too.
 
 ### `skillListingBudgetFraction`
 
@@ -3022,7 +3030,7 @@ Change how Claude Code looks and behaves in your terminal: theme, editor mode, s
 
 ### `askUserQuestionTimeout`
 
-Let an unanswered [`AskUserQuestion`](/docs/en/tools-reference) dialog auto-continue after a period of idle time, submitting whatever options you had already selected. Set it when you step away and want Claude to continue without you. With the default, questions wait until you answer them. For when the timer pauses or never starts, see [Question auto-continue timeout](/docs/en/tools-reference#question-auto-continue-timeout). Requires Claude Code v2.1.200 or later.
+Let an unanswered [`AskUserQuestion`](/docs/en/tools-reference) dialog auto-continue after a period of idle time, submitting whatever options you had already selected. Set it when you step away and want Claude to continue without you. With the default, questions wait until you answer them. For when the timer pauses or never starts, see [Question auto-continue timeout](/docs/en/tools-reference#question-auto-continue-timeout).
 
 * **Scope**: [`User or managed`](#scopes)
 * **Type**: string, one of `"60s"`, `"5m"`, `"10m"`, or `"never"`
@@ -3035,7 +3043,7 @@ Let an unanswered [`AskUserQuestion`](/docs/en/tools-reference) dialog auto-cont
 }
 ```
 
-Appears in `/config` as **Question auto-continue timeout**, which writes this key to user settings; Claude Code hides the row while managed settings or the `--settings` flag set the key. Requires Claude Code v2.1.200 or later.
+Appears in `/config` as **Question auto-continue timeout**, which writes this key to user settings; Claude Code hides the row while managed settings or the `--settings` flag set the key.
 
 ### `autoContinueAtUsageLimit`
 
@@ -4779,7 +4787,7 @@ This example stores the `api_endpoint` option for the `deployer` plugin from `ac
 }
 ```
 
-Built-in plugins store their options under the same key with an `@builtin` suffix. For example, the [**Project instructions**](/docs/en/memory#choose-which-instruction-files-load) setting that controls whether Claude Code reads `AGENTS.md` files is `pluginConfigs["agents-md@builtin"].options.instructionFiles`.
+Built-in plugins store their options under the same key with an `@builtin` suffix. For example, the [**Project instructions**](/docs/en/memory#choose-which-instruction-files-load) setting that controls whether Claude Code reads `AGENTS.md` files is `pluginConfigs["cc-plugin-agents-md@builtin"].options.instructionFiles`. Before v2.1.285, the plugin's ID was `agents-md@builtin`. Later versions read an entry under either ID.
 
 Claude Code ignores project and local entries because it substitutes these values into plugin hook, MCP, and LSP configurations, and a cloned repository must not be able to supply them. Before v2.1.207, project and local settings were also read.
 
@@ -5238,6 +5246,26 @@ Choose how [background sessions](/docs/en/agent-view#how-file-edits-are-isolated
 
 Outside a git repository, a [`WorktreeCreate` hook](/docs/en/worktrees#non-git-version-control) that fails releases the block so the session can edit the working directory in place; that release requires Claude Code v2.1.203 or later.
 
+### `worktree.location`
+
+Choose the folder on a remote machine where [Desktop SSH sessions](/docs/en/desktop#choose-where-ssh-session-worktrees-go) create their worktrees, instead of `<project-root>/.claude/worktrees/`. Only the desktop app reads this key: `--worktree`, the `EnterWorktree` tool, isolated subagents, and background sessions ignore it. Requires Claude Desktop v1.44121.0 or later.
+
+* **Scope**: [`User`](#scopes), in `~/.claude/settings.json` on the remote machine
+* **Type**: string, an absolute path or one that starts with `~/`
+* **Default**: unset, so worktrees go inside the project
+
+This example sets the folder to `~/worktrees`:
+
+```json settings.json theme={null}
+{
+  "worktree": {
+    "location": "~/worktrees"
+  }
+}
+```
+
+A **Worktree folder** set on the SSH connection in Desktop takes precedence. If your organization restricts which folders sessions may use, Desktop keeps worktrees inside the project.
+
 ## Remote, desktop, and notifications
 
 Configure Remote Control, cloud environments, the desktop app, and the notifications Claude Code sends when it needs you. See [Remote Control](/docs/en/remote-control).
@@ -5320,7 +5348,7 @@ Stop Claude Code from registering the `claude-cli://` protocol handler with the 
 
 Turn off Code sessions that run on the device in the [desktop app](/docs/en/desktop#local-sessions-on-managed-devices), for deployments where developers should work on remote machines over SSH. In the Code tab, the **Local** environment stays in the environment dropdown but is grayed out and can't be selected, with a tooltip saying your organization turned it off; on Windows the WSL entry is grayed out the same way, though whether WSL sessions run on a managed device at all is [governed separately](/docs/en/admin-setup#wsl-sessions-in-claude-code-desktop). New sessions default to the first [SSH connection](/docs/en/desktop#ssh-sessions) if one is configured, and the app refuses to start or resume a session on the device, including an SSH connection back to the same machine. SSH sessions to other hosts and cloud sessions are unaffected. The desktop app reads this key; the terminal CLI ignores it. Requires Claude Desktop v1.37937.0 or later.
 
-* **Scope**: [`Managed`](#scopes)
+* **Scope**: [`Managed`](#scopes). By default, the desktop app reads the key from [one managed source](/docs/en/managed-settings#how-claude-code-combines-managed-sources).
 * **Type**: Boolean; only the JSON Boolean `true` takes effect
   * `true`: the desktop app offers no on-device Code sessions; existing local sessions stay listed but can't continue
   * `false`: local sessions stay available
@@ -5354,7 +5382,7 @@ Turn off [Remote Control](/docs/en/remote-control): Claude Code then refuses `cl
 
 ### `enableArtifact`
 
-Turn off the [Artifact](/docs/en/artifacts) tool, which publishes session output as a private web page on claude.ai. When you turn the **Artifacts** row off in `/config`, Claude Code writes this key to your user settings, so you don't usually edit it by hand. Requires Claude Code v2.1.196 or later.
+Turn off the [Artifact](/docs/en/artifacts) tool, which publishes session output as a private web page on claude.ai. When you turn the **Artifacts** row off in `/config`, Claude Code writes this key to your user settings, so you don't usually edit it by hand.
 
 * **Scope**: [`Any file`](#scopes). Every file can turn the tool off, and none can turn it back on.
 * **Type**: Boolean
@@ -5451,9 +5479,9 @@ Claude Code ignores a `true` from project or local settings, so a repository can
 
 ### `sshConfigs`
 
-Add SSH connections to the [Desktop](/docs/en/desktop#pre-configure-ssh-connections-for-your-team) environment dropdown. Administrators use it to distribute shared connections to a team. Connections you define in managed settings show as managed, so users can select them but can't edit or delete them in the app.
+Add SSH connections to the [Desktop](/docs/en/desktop#pre-configure-ssh-connections-for-your-team) environment dropdown. Administrators use it to distribute shared connections to a team. Connections you define in managed settings show as managed. Users can select them and [set their own **Worktree folder**](/docs/en/desktop#choose-where-ssh-session-worktrees-go) for them, but can't edit anything else or delete them in the app.
 
-* **Scope**: [`User or managed`](#scopes). The desktop app reads this key.
+* **Scope**: [`User or managed`](#scopes). The desktop app reads this key. By default, it reads managed connections from [one managed source](/docs/en/managed-settings#how-claude-code-combines-managed-sources).
 * **Type**: array of objects, each with required `id`, `name`, and `sshHost` and optional `sshPort` and `sshIdentityFile`
 * **Default**: unset
 
@@ -5475,7 +5503,7 @@ This example adds one connection named `Dev VM` that connects to `user@dev.examp
 
 Limit the hosts a [Desktop SSH session](/docs/en/desktop#restrict-which-ssh-hosts-users-can-connect-to) can connect to. Only the Desktop app reads this key; the CLI doesn't. Patterns are case-insensitive: `*` matches any host, `*.example.com` matches `example.com` and every subdomain, and anything else is an exact match against the hostname after `~/.ssh/config` resolution. An empty array turns SSH sessions off.
 
-* **Scope**: [`Managed`](#scopes)
+* **Scope**: [`Managed`](#scopes). By default, Desktop reads the key from [one managed source](/docs/en/managed-settings#how-claude-code-combines-managed-sources).
 * **Type**: array of hostname patterns
 * **Default**: unset, so any host is allowed
 
@@ -5486,6 +5514,10 @@ This example allows `devboxes.example.com` and its subdomains, plus the exact ho
   "sshHostAllowlist": ["*.devboxes.example.com", "bastion.example.com"]
 }
 ```
+
+A value that Desktop can't read as a list of hosts, such as `true` or an object, counts as an empty array until you correct it, except `null`, which counts as unset. Requires Claude Desktop v2.26454.0 or later.
+
+If you set [`managedSourcesBehavior`](#managedsourcesbehavior) to `"merge"` in your highest-ranked source, Desktop combines the lists from every [admin source](/docs/en/managed-settings#how-claude-code-combines-managed-sources) and allows a host that matches any of them. If you set an empty array in one source, SSH sessions stay on for the hosts another source lists.
 
 <span id="authentication-and-login" />
 
@@ -5596,7 +5628,7 @@ Unlike [`awsAuthRefresh`](#awsauthrefresh), Claude Code always runs this command
 
 Restrict which kind of account people can log in with. Set `"claudeai"` to allow only claude.ai accounts, `"console"` to allow only Claude Console accounts, or `"gateway"` to send people to a [cloud gateway](/docs/en/claude-apps-gateway) instead of a first-party login. Administrators set it in managed settings and pair it with [`forceLoginOrgUUID`](#forceloginorguuid) to keep developers' claude.ai logins inside one organization. If you set it to `"claudeai"` or `"console"` in any settings file, Claude Code also stops offering the [keyless Console sign-in](/docs/en/authentication#sign-in-without-an-api-key) in the sessions that file applies to.
 
-* **Scope**: [`Any file`](#scopes). Claude Code honors `"gateway"` only from a managed source on the machine: `managed-settings.json`, the macOS plist or Windows HKLM registry, or a policy helper. It treats `"gateway"` as unset in user, project, local, HKCU, and server-managed settings, the same rule as [`forceLoginGatewayUrl`](#forcelogingatewayurl).
+* **Scope**: [`Any file`](#scopes). Claude Code honors `"gateway"` from the same sources as [`forceLoginGatewayUrl`](#forcelogingatewayurl) and treats it as unset everywhere else.
 * **Type**: string, one of:
   * `"claudeai"`: only claude.ai accounts can log in
   * `"console"`: only Claude Console accounts can log in
@@ -5617,9 +5649,9 @@ When a managed source on the machine sets `"gateway"`, Claude Code doesn't use a
 
 Set the gateway URL the `/login` Cloud gateway screen connects to, so people reach your [cloud gateway](/docs/en/claude-apps-gateway) without typing its address. The screen has no URL field: with this key set, it shows your gateway URL and connects when the person presses Enter; without it, it tells them to contact their IT administrator.
 
-Either this key or `forceLoginMethod: "gateway"` makes the machine gateway-only, except for sessions that select a cloud provider with `CLAUDE_CODE_USE_*`. `/login` then opens on the Cloud gateway screen with no login-method picker. See [Administrator policy requires a Cloud gateway sign-in](/docs/en/errors#administrator-policy-requires-a-cloud-gateway-sign-in) for what happens to a leftover first-party login or API key. Set both keys so the screen connects instead of showing an error.
+In managed settings, either this key or `forceLoginMethod: "gateway"` makes the machine gateway-only, except for sessions that select a cloud provider with `CLAUDE_CODE_USE_*`. `/login` then opens on the Cloud gateway screen with no login-method picker. See [Administrator policy requires a Cloud gateway sign-in](/docs/en/errors#administrator-policy-requires-a-cloud-gateway-sign-in) for what happens to a leftover first-party login or API key. Set both keys so the screen connects instead of showing an error.
 
-* **Scope**: [`Managed`](#scopes). Read only from a source on the machine: `managed-settings.json`, the macOS plist or Windows HKLM registry, or a policy helper. Claude Code ignores it in HKCU and server-managed settings.
+* **Scope**: [`User or managed`](#scopes). Read from a managed source on the machine: `managed-settings.json`, the macOS plist or Windows HKLM registry, or a policy helper. On a machine with none of those, Claude Code v2.1.295 or later also reads it from [user settings](/docs/en/claude-apps-gateway#set-the-gateway-url-in-user-settings). Claude Code ignores it in HKCU and server-managed settings.
 * **Type**: string, a full URL including the scheme
 * **Default**: unset, so the Cloud gateway screen shows an error telling people to contact their IT administrator
 
@@ -5647,7 +5679,7 @@ This example accepts logins from either of two organizations without pre-selecti
 }
 ```
 
-If a managed source sets an empty array, or a value Claude Code can't parse, Claude Code blocks every login with a misconfiguration message.
+If a managed source sets an empty array, or a value that isn't a string or an array of strings, users who sign in with an Anthropic account can't start Claude Code or complete a login. They see a message that names `forceLoginOrgUUID` and tells them to contact their administrator. A [`policyHelper`](#policyhelper) that emits a value of the wrong type [fails its run](#helper-failures) instead.
 
 See [Restrict login to your organization](/docs/en/authentication#restrict-login-to-your-organization) for how Claude Code treats Claude Console logins, the other login paths, and environment credentials.
 
@@ -5858,7 +5890,7 @@ Setting `0` fails validation, so pick a large value such as `3650` for long rete
 
 ### `desktopSessionCleanupPeriodDays`
 
-Set an age limit in days for the transcripts of sessions you started or most recently continued in Claude Desktop or Cowork. Without this key, Claude Code [keeps those transcripts at any age](/docs/en/claude-directory#cleaned-up-automatically). Claude Code deletes each one once it's older than both this limit and [`cleanupPeriodDays`](#cleanupperioddays), so with `cleanupPeriodDays` at its default of 30, a value of `7` still keeps them 30 days. When managed settings set `cleanupPeriodDays`, that period applies instead and this key is ignored. Requires Claude Code v2.1.248 or later.
+Set an age limit in days for the transcripts of sessions you started or most recently continued in Claude Desktop or Cowork. Without this key, Claude Code [keeps those transcripts at any age](/docs/en/claude-directory#cleaned-up-automatically). Claude Code deletes each one once it's older than both this limit and [`cleanupPeriodDays`](#cleanupperioddays), so with `cleanupPeriodDays` at its default of 30, a value of `7` still keeps them 30 days. [Cleaned up automatically](/docs/en/claude-directory#cleaned-up-automatically) lists the cases where `cleanupPeriodDays` applies instead and Claude Code ignores this key. Requires Claude Code v2.1.248 or later.
 
 * **Scope**: [`User or managed`](#scopes). Claude Code also reads the key from a file you pass with `--settings`, and ignores it in project and local settings.
 * **Type**: number of days, a whole number, minimum `0`
@@ -6243,12 +6275,12 @@ Claude Code ignores this key in `settings.json`.
 
 ### `copyFullResponse`
 
-Make [`/copy`](/docs/en/commands) copy the full response every time, without the picker it otherwise shows when the response contains code blocks. Selecting **Always copy full response** in that picker sets this key to `true`. Appears in `/config` as **Skip the /copy picker**.
+Make [`/copy`](/docs/en/commands) copy the full response every time, without showing the picker. Selecting **Always copy full response** in that picker sets this key to `true`. Appears in `/config` as **Skip the /copy picker**.
 
 * **Scope**: [`Global config`](#scopes)
 * **Type**: Boolean
   * `true`: `/copy` copies the full response without showing the picker
-  * `false`: when the response contains code blocks, `/copy` shows a picker where you choose one code block or the full response
+  * `false`: when the response contains code blocks or blockquotes, `/copy` shows a picker where you choose one block or the full response
 * **Default**: `false`
 
 ```json ~/.claude.json theme={null}

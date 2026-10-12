@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/security
-fetched_at: 2026-10-05T06:27:12.690001+00:00
+fetched_at: 2026-10-12T06:49:45.530234+00:00
 fetch_method: mintlify_md
 ---
 
@@ -122,7 +122,7 @@ For more details on cloud execution, see [Use Claude Code in the cloud](/docs/en
 
 * Review all suggested changes before approval
 * Use project-specific permission settings for sensitive repositories
-* Consider using [dev containers](/docs/en/devcontainer) for additional isolation
+* For additional isolation, run the whole Claude Code (local mode) process inside the [sandbox runtime](/docs/en/sandbox-environments#sandbox-runtime) or a [dev container](/docs/en/devcontainer)
 * Regularly audit your permission settings with `/permissions`
 
 ### Team security

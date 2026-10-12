@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/subagents
-fetched_at: 2026-10-05T06:27:10.912122+00:00
+fetched_at: 2026-10-12T06:49:40.879065+00:00
 fetch_method: mintlify_md
 ---
 
@@ -305,7 +305,9 @@ You can create agent definitions dynamically based on runtime conditions. This e
 
 ## Detect subagent invocation
 
-Claude invokes subagents through the Agent tool. To detect when a subagent is invoked, check for `tool_use` blocks where `name` is `"Agent"`. Messages from within a subagent's context include a `parent_tool_use_id` field.
+Claude invokes subagents through the Agent tool. To detect when a subagent is invoked, check for `tool_use` blocks where `name` is `"Agent"`.
+
+Messages from within a subagent's context include a `parent_tool_use_id` field. In TypeScript, each assistant and user message a subagent produces also carries [`agent_id`](/docs/en/agent-sdk/typescript#sdkassistantmessage): the `task_id` of that subagent's [task events](/docs/en/agent-sdk/typescript#sdktaskstartedmessage). `agent_id` requires TypeScript Agent SDK v0.3.292 or later.
 
 <Note>
   The tool appears as `"Agent"` in `tool_use` blocks but as `"Task"` in the `system:init` tools list. Before Claude Code v2.1.63, `tool_use` blocks also named it `"Task"`. To keep detection working across SDK versions, match both values in `block.name`.
@@ -313,7 +315,7 @@ Claude invokes subagents through the Agent tool. To detect when a subagent is in
 
 The message structure differs between SDKs. In Python, you access content blocks directly via `message.content`. In TypeScript, `SDKAssistantMessage` wraps the Claude API message, so you access content via `message.message.content`.
 
-This example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent's execution context.
+This example iterates through streamed messages, logging when a subagent is invoked and when subsequent messages originate from within that subagent's execution context. The TypeScript version also logs the `agent_id` of each subagent message that carries one.
 
 <CodeGroup>
   ```python Python theme={null}
@@ -385,6 +387,11 @@ This example iterates through streamed messages, logging when a subagent is invo
     // Check if this message is from within a subagent's context
     if (msg.parent_tool_use_id) {
       console.log("  (running inside subagent)");
+      // On assistant and user messages, agent_id matches the task_id
+      // on that subagent's task_started and other task events
+      if (msg.agent_id) {
+        console.log(`  agent_id: ${msg.agent_id}`);
+      }
     }
 
     if ("result" in message) {
@@ -730,6 +737,6 @@ For the file format, see [how to write subagent files](/docs/en/sub-agents#write
 
 ## Related documentation
 
-* [Claude Code subagents](/docs/en/sub-agents): comprehensive subagent documentation including filesystem-based definitions
+* [Claude Code subagents](/docs/en/sub-agents): subagent documentation including filesystem-based definitions
 * [Dynamic workflows](/docs/en/workflows): orchestrate many subagents from a script for jobs too large for one conversation
 * [SDK overview](/docs/en/agent-sdk/overview): getting started with the Claude Agent SDK

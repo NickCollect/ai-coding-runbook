@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-deploy
-fetched_at: 2026-10-05T06:27:11.236599+00:00
+fetched_at: 2026-10-12T06:49:41.953084+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,6 +12,14 @@ fetch_method: mintlify_md
 
 > Register the gateway with your IdP, build the container, deploy on Kubernetes or Cloud Run, and operate it: health checks, secret rotation, upgrades, and security.
 
+<Info>
+  **Plan your gateway's network first.** At sign-in, Claude Code refuses a Claude apps gateway whose hostname resolves to a public IP address, even one the internet can't reach.
+
+  A Claude apps gateway can push settings to users' machines, including hooks that run shell commands. The check helps keep users from accidentally signing in to a malicious gateway on the public internet. Keep your own gateway off the internet too.
+
+  Choose the gateway's address before you choose where it runs. Usually that's a private address that users reach on your internal network or over a VPN. If your internal network uses public IPv4 ranges, you can list one range that holds both the gateway and your users' machines. Claude Code takes that match as a sign that the gateway is on your internal network. See [Choose an address for the gateway](#choose-an-address-for-the-gateway). If neither fits your network, contact your Anthropic account team.
+</Info>
+
 This page covers the operational side of running [Claude apps gateway](/docs/en/claude-apps-gateway): registering an OAuth client in your identity provider (IdP), deploying the gateway as a container, and running it day-to-day. For every option in the `gateway.yaml` file the gateway reads at boot, see the [Configuration reference](/docs/en/claude-apps-gateway-config).
 
 A production deployment follows four steps in order, and the sections below match them. The first two are where you make choices; the second two are reference material to consult once it's running.
@@ -22,10 +30,6 @@ A production deployment follows four steps in order, and the sections below matc
 4. [Review the security posture](#security): what data flows where, the threat model, and compliance answers. Reference for a security review
 
 If a sign-in or boot fails along the way, go straight to [Troubleshooting](#troubleshooting), which is keyed on the error you see.
-
-<Note>
-  **Deploy on your private network.** Claude Code only connects to a gateway whose address is private. This is a security guard, because a trusted gateway can push settings that run commands on developer machines. Put the gateway you deploy behind an internal load balancer or VPN and give it a hostname that resolves to private IPs only. If your internal network is numbered from public IPv4 space your organization owns, see [Allow a gateway on public address space you own](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own).
-</Note>
 
 ## Identity provider setup
 
@@ -53,7 +57,7 @@ A few providers handle email and group claims differently:
 
 ## Deployment
 
-The gateway is a single stateless Linux binary that coordinates through Postgres, so deploy it the way you deploy any other stateless service in your environment. Keep it inside your network, where your developers and IdP can reach it over HTTPS, and treat it like any service holding a production credential.
+The gateway is a single stateless Linux binary that coordinates through Postgres, so deploy it the way you deploy any other stateless service in your environment. Keep it inside your network, where your developers can reach it over HTTPS and it can reach your IdP, and treat it like any service holding a production credential.
 
 A few decisions shape the deployment beyond where it runs:
 
@@ -72,6 +76,15 @@ Give the proxy any idle timeout longer than the gateway's keepalive interval, wh
 * On `provider: anthropic`, the gateway passes the response through unchanged, including the Anthropic API's own pings.
 
 A default such as the ALB's 60 seconds is enough to keep a quiet stream open. The [AWS worked example](/docs/en/claude-apps-gateway-on-aws#troubleshooting) raises it to an hour anyway, and its troubleshooting row covers gateways older than v2.1.229, which sent nothing during quiet periods on the upstreams that now get pings.
+
+### Choose an address for the gateway
+
+Claude Code accepts a gateway's address in one of two ways:
+
+* **Private address**: put the gateway behind an internal load balancer or VPN, with a hostname that resolves only to private addresses, such as RFC 1918 or CGNAT `100.64.0.0/10`. Users' machines can be on any address. The [private-network prerequisite](/docs/en/claude-apps-gateway#prerequisites) lists the accepted ranges.
+* **Declared block**: if your internal network uses public IPv4 space your organization owns, list the block in the `gatewayInternalNetworks` managed setting. The gateway and the user's machine must both be in that block. See [Allow a gateway on public address space you own](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own).
+
+If no single block contains both, give the gateway a private address instead.
 
 ### Container image
 
@@ -114,7 +127,7 @@ For a complete worked example on Google Cloud, covering Cloud Run or GKE, Cloud 
 
 ### Push the gateway URL to developer machines
 
-Once the gateway is serving, push `forceLoginMethod`, `forceLoginGatewayUrl`, and `parentSettingsBehavior: "merge"` to each developer's machine through managed settings, via MDM or by writing the per-OS `managed-settings.json` directly. Without this, `/login` shows the standard account picker with no gateway option.
+Once the gateway is serving, push `forceLoginMethod`, `forceLoginGatewayUrl`, and `parentSettingsBehavior: "merge"` to each developer's machine through managed settings, via MDM or by writing the per-OS `managed-settings.json` directly.
 
 Once you deploy the keys, Claude Code stops using a leftover API key or claude.ai login on the machine, so plan the push together with your sign-in instructions. [Administrator policy requires a Cloud gateway sign-in](/docs/en/errors#administrator-policy-requires-a-cloud-gateway-sign-in) describes the messages developers see.
 
@@ -225,6 +238,11 @@ Rotation is also the only way to force sessions out before they expire: bearer t
 
 ### Postgres
 
+The gateway stores its state in a PostgreSQL database:
+
+* **Database**: PostgreSQL itself, self-hosted or managed, at the [minimum version](/docs/en/claude-apps-gateway#prerequisites) or later. Databases that only implement the Postgres protocol, such as distributed SQL databases, aren't supported.
+* **Address**: `store.postgres_url` takes one host. If the database has several nodes, use the address in front of them, such as your managed service's endpoint, a load balancer, or a virtual IP. Set a [readiness grace period](#readiness-grace-period) longer than a failover takes.
+
 The gateway holds five data tables plus a `_migrations` table, all created by its boot-time migrations:
 
 | Table | Contents | Retention |
@@ -326,11 +344,11 @@ The first time a developer starts an interactive terminal session, Claude Code r
 * **A marketplace list**: a [`strictKnownMarketplaces`](/docs/en/plugins/org#allowlist-with-strictknownmarketplaces) allowlist that leaves the marketplace out, or a [`blockedMarketplaces`](/docs/en/plugins/org#blocklist-with-blockedmarketplaces) entry that names it
 * **An environment variable**: `CLAUDE_CODE_DISABLE_OFFICIAL_MARKETPLACE_AUTOINSTALL` set to `"1"` in the managed [`env` block](/docs/en/plugins/org#turn-updates-off-for-the-whole-fleet)
 
-The first registration can run before the developer signs in to the gateway, when no gateway policy has arrived. To cover that first start, deliver your choice in [client-side managed settings](/docs/en/claude-apps-gateway-config#client-side-managed-settings) as well as in the gateway policy's [`cli` block](/docs/en/claude-apps-gateway-config#what-goes-in-cli).
+The first registration can run before the developer signs in to the gateway, when no gateway policy has arrived. To cover that first start, deliver your choice in [client-side managed settings](/docs/en/claude-apps-gateway-config#client-side-managed-settings) as well as in the gateway policy's [`cli` or `code` block](/docs/en/claude-apps-gateway-config#what-goes-in-cli).
 
 ## Troubleshooting
 
-For questions and feedback, use [Claude Code support](https://support.claude.com/en/collections/14445694-claude-code), or open an issue on the [Claude Code GitHub repository](https://github.com/anthropics/claude-code/issues). When reporting a problem, include:
+For questions and feedback, use [Claude Code support](https://support.claude.com/en/collections/14445694-claude-code), or open an issue on the [Claude Code GitHub repository](https://github.com/anthropics/claude-code/issues). You can also contact your Anthropic account team. When reporting a problem, include:
 
 * **Gateway issue**: the gateway's stderr for the relevant window, your `gateway.yaml` with secrets redacted, the gateway version, shown on the landing page at `/` and in the `x-cc-gateway-version` response header on `/managed/settings`, and what changed recently
 * **Login issue**: the developer runs `claude --debug-file ./claude-debug.txt`, reproduces, and sends that file plus the gateway's audit log for the same window
@@ -349,17 +367,18 @@ The gateway's stderr includes the audit event stream, the audit log records deve
 | CLI `/login`: `The gateway is limiting sign-in attempts right now`, or `Request failed with status code 429` on older versions. The `/device` page may show `Too many attempts` to developers who haven't tried before | The per-IP sign-in rate limit was reached. Either `listen.trusted_proxies` doesn't cover the load balancer, so every developer shares its address, or many developers share a NAT or VPN egress address. Audit events with `result: rate_limited` show the same one or few `client_ip` values. | Set `listen.trusted_proxies` to the load balancer's source ranges first, then raise `rate_limits` if developers still share addresses. See [Large rollouts](#large-rollouts). |
 | CLI `/login`: `Gateway hosts must be on your organization's private network; <host> resolves to the public (or unrecognized) address <ip>` | The gateway hostname resolves to at least one public IP address. Claude Code checks each resolved address and requires every one to be private. A common cause is a dual-stack name where one family resolves to a public address, including AWS internal dual-stack load balancers, which return public-range AAAA addresses. | Have the gateway name resolve only to private addresses on developer machines. For a dual-stack name, drop the public-range record or serve a separate internal-only DNS name. See the [private-network prerequisite](/docs/en/claude-apps-gateway#prerequisites). If the address is public space your organization owns and uses internally, [declare that block](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own) instead. |
 | CLI `/login`: `Gateway login would go through proxy <proxy>, which is not on a private network` | An `HTTPS_PROXY` or `HTTP_PROXY` applies to the gateway host and the proxy's hostname resolves to a public address. A proxy whose host resolves only to private addresses is allowed and doesn't trigger this error | Add the gateway host to `NO_PROXY` on the developer's machine so the connection is direct, or use a proxy whose hostname resolves to private addresses. The message names the exact `NO_PROXY` entry to add |
-| CLI `/login`: `Claude Code only signs in to <host> from inside its declared network <block> (managed settings), and this machine is connecting from <ip>, outside it` | The gateway is on a block declared in [`gatewayInternalNetworks`](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own), and the developer's machine reached it from an address outside that block: a VPN address pool, a container or WSL2 NAT segment, or a network that isn't yours | Have the developer run `/login` from the host OS on your network. If the address shown is also your organization's own public space, replace the gateway's entry with a block that covers both, up to `/8`; a second, overlapping entry is refused |
+| CLI `/login`: `Claude Code only signs in to <host> from inside its declared network <block> (managed settings), and this machine is connecting from <ip>, outside it` | The gateway is on a block declared in [`gatewayInternalNetworks`](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own), and the developer's machine reached it from an address outside that block: a VPN address pool, a container or WSL2 NAT segment, or a network that isn't yours | Have the developer run `/login` from the host OS on your network. If the address shown is also your organization's own public space, replace the gateway's entry with a block that covers both, up to `/8`; a second, overlapping entry is refused. If no block covers both, see [Choose an address for the gateway](#choose-an-address-for-the-gateway) |
 | CLI `/login`: `Every address for gateway host <host> must be inside its declared network <block>, and it also resolves to <ip>` | The gateway's name resolves to an address outside the block declared in [`gatewayInternalNetworks`](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own): a second site, or an IPv6 record on a dual-stack name. Under a declared block every record must be inside that one IPv4 block, private and IPv6 addresses included | Publish only records inside the block for the gateway name on developer machines, or serve a separate internal-only name |
 | CLI `/login`: `<host> is on the declared network <block>, which Claude Code checks over a direct connection, not through an HTTP proxy` | An `HTTPS_PROXY` or `HTTP_PROXY` applies to a gateway on a declared block | On the developer's machine, add the `NO_PROXY` entry the message names |
 | CLI `/login`: a message starting `gatewayInternalNetworks in managed settings` | The value breaks one of the [validation rules](/docs/en/claude-apps-gateway#allow-a-gateway-on-public-address-space-you-own), and the message names which. Until you fix it, Claude Code refuses every new gateway `/login` on the machine, gateways on private addresses included; existing sign-ins keep working | In the managed settings source you deploy, correct the entry the message names, then rerun `/login` |
 | CLI `/login`: `Could not resolve the configured HTTP proxy` | The hostname in `HTTPS_PROXY` or `HTTP_PROXY` doesn't resolve from the developer's machine, typically because it isn't connected to the corporate network | Have the developer connect to your network or VPN and retry, or fix the proxy URL |
 | CLI `/login`: `Could not resolve gateway host <host>` | The machine can't resolve the gateway's internal DNS name, typically because it isn't on the corporate network | Have the developer connect to your network or VPN, then retry `/login` |
 | Boot exits with a config validation error naming `store.postgres_url` | No Postgres configured; the gateway requires Postgres | Set `store.postgres_url`. For local development, use a throwaway container: `docker run --rm -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust postgres`. |
+| Boot exits: `store.postgres_url in <path> is not a URL the gateway can read`, or before v2.1.290 a bare `Invalid URL` or `URI error` | The URL can't be parsed, for example because it lists more than one host or its password has an unencoded `/`, `?`, `#`, or `%` | Name [one host](#postgres), and move the password into [`store.password`](/docs/en/claude-apps-gateway-config#store) |
 | Boot exits: `requires the native binary` | Running under Node instead of the native binary | Install Claude Code with one of the [standalone install methods](/docs/en/setup) |
 | Boot exits with an OIDC discovery error after `config.load` | `oidc.issuer` unreachable, or TLS chain not trusted | Check the issuer is reachable from the pod and serves `/.well-known/openid-configuration`. Set `ca_cert_pem` for private PKI. If the pod reaches the IdP only through a forward proxy, set [`oidc.use_proxy: true`](/docs/en/claude-apps-gateway-config#idp-requests-through-a-forward-proxy); on versions before v2.1.227, give the pod a direct route to each of the IdP's endpoints instead. If the pod also can't resolve the IdP's hostname, or the proxy refuses `CONNECT` to an IP address, see [Proxy-only egress](/docs/en/claude-apps-gateway-config#proxy-only-egress), which requires v2.1.277 or later. |
 | Boot exits with a Postgres permission error | The database role lacks DDL rights on its schema | Grant the role `CREATE` on the gateway's schema so it can create and alter its tables at boot |
-| Log: `could not connect to Postgres at boot, attempt 1 of 3` | The database wasn't reachable yet when the gateway started, for example on a cold instance whose network is still coming up | If the gateway then finishes booting, no action is needed. When the database isn't reachable, the gateway tries the connection three times, two seconds apart, before it exits. If it exits with `could not connect to Postgres`, check `store.postgres_url` and the network path to the database. If the attempts time out rather than being refused, raise [`store.connect_timeout_seconds`](/docs/en/claude-apps-gateway-config#store) to give each one longer. |
+| Log: `could not connect to Postgres at boot, attempt 1 of 3` | The database wasn't reachable yet when the gateway started, for example on a cold instance whose network is still coming up | If the gateway then finishes booting, no action is needed. When the database isn't reachable, the gateway tries the connection three times, two seconds apart, before it exits. If it exits with `could not connect to Postgres`, check `store.postgres_url`, including that it names one host, and the network path to the database. If the attempts time out rather than being refused, raise [`store.connect_timeout_seconds`](/docs/en/claude-apps-gateway-config#store) to give each one longer. |
 | `/oauth/callback` shows "Sign-in could not be completed" | Email domain rejected, id\_token validation failed, or `email_verified` is explicitly `false`, which the gateway always rejects with no override | Check `allowed_email_domains` and that the IdP returns a verified `email` claim. For `email_verified: false`, fix the IdP-side verification. If your IdP emits email under a different claim name, set `oidc.email_claim`. |
 | Log: `token exchange failed request_id=<id>: id_token missing email claim` | The IdP isn't including `email` in the id\_token by default. This rejection fires only when `allowed_email_domains` is set; without it, a missing email mints a session with no email | Configure the IdP to emit `email` in the id\_token. Okta: add `email` to a custom authorization server's ID-token claims. Entra: add `email` as an optional claim on the app registration. PingFederate: enable an OpenID Connect Policy that emits `email`. If the IdP serves `email` from the userinfo endpoint but won't include it in the id\_token, such as the Okta org authorization server, set `oidc.userinfo_fallback: true`. |
 | Log: `refresh failed request_id=<id>: invalid_token (…) (at userinfo_no_id_token, …)`, and developers see `Cloud gateway session expired` every `session.ttl_hours` | The IdP accepted the refresh token but returned no id\_token with it, so the gateway asked the IdP's userinfo endpoint for the user's claims. The IdP rejected the refreshed access token there. The gateway answers `temporarily_unavailable`, so Claude Code keeps the refresh token but can't renew the session. Gateway versions before v2.1.260 log the same line without the `(at …)` detail. | Set [`oidc.scope_on_refresh: true`](/docs/en/claude-apps-gateway-config#oidc), available in gateway v2.1.260 or later, so the refresh request asks for `openid` again. Some IdPs, such as Okta, return an id\_token on refresh only when asked. On PingFederate, enable **Return ID Token On Refresh Grant** under **Applications > OAuth > OpenID Connect Policy Management** instead. The key doesn't change PingFederate's behavior. For other IdPs that still omit it, check whether the userinfo endpoint accepts access tokens issued by a refresh. As a stopgap, raise [`session.ttl_hours`](/docs/en/claude-apps-gateway-config#session). See [Identity provider setup](#identity-provider-setup) for the deprovisioning tradeoff. |

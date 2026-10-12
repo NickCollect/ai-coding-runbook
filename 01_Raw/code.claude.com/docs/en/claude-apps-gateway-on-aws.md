@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-on-aws
-fetched_at: 2026-10-05T06:27:11.249876+00:00
+fetched_at: 2026-10-12T06:49:41.903755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -167,7 +167,7 @@ The steps below provision the full deployment with `aws` commands.
   </Step>
 
   <Step title="Provision Amazon RDS for PostgreSQL">
-    The instance runs in the private subnets with no public address and storage encryption on. The engine version is pinned to Postgres 16, which satisfies the gateway's supported floor of PostgreSQL 14 and guarantees the parameter-group family below matches the instance.
+    The instance runs Postgres 16 in the private subnets, with no public address and storage encryption on.
 
     First, create the subnet group that places the database in the private subnets, and a parameter group with `rds.force_ssl=1` so the server rejects plaintext connections. The engine version is pinned once because the parameter group's family must match the engine major version the instance runs:
 
@@ -476,7 +476,7 @@ The steps below provision the full deployment with `aws` commands.
   </Step>
 
   <Step title="Push the gateway URL to developer machines">
-    The gateway is now running, but developers can't reach it from `/login` until the gateway URL is on their machines. Set `forceLoginMethod` and `forceLoginGatewayUrl` in the [managed settings file](/docs/en/claude-apps-gateway#set-the-gateway-url) you deploy to each device via MDM. There is no gateway option in the login picker for a developer to select manually.
+    The gateway is now running, but developers can't reach it from `/login` until the gateway URL is on their machines. Deploy the full [managed settings snippet](/docs/en/claude-apps-gateway#set-the-gateway-url), with `forceLoginMethod`, `forceLoginGatewayUrl`, and the `parentSettingsBehavior: "merge"` opt-in, to each device via MDM. There is no gateway option in the login picker for a developer to select manually.
   </Step>
 </Steps>
 
@@ -508,7 +508,7 @@ For gateway boot and login errors, see the platform-agnostic [troubleshooting ta
 
 ## Telemetry
 
-The gateway gives you per-developer usage metrics without any per-machine OTEL configuration. Claude Code emits OpenTelemetry (OTLP) metrics, logs, and opt-in traces; [Monitoring usage](/docs/en/monitoring-usage) covers everything the CLI reports. In sessions signed in through `/login`, the CLI stamps each export with the authenticated IdP identity attributes `user.id`, `user.email`, and `user.groups`, so usage rolls up per developer.
+The gateway gives you per-developer usage metrics without any per-machine OTEL configuration. Claude Code emits OpenTelemetry (OTLP) metrics, logs, and opt-in traces; [Monitoring usage](/docs/en/monitoring-usage) covers everything the CLI reports. In sessions signed in through `/login`, the CLI [stamps each export](/docs/en/monitoring-usage#standard-attributes) with the authenticated IdP identity attributes `user.id`, `user.email`, and `user.groups`, so usage rolls up per developer.
 
 The gateway itself is an authenticated OTLP relay. Set [`telemetry.forward_to`](/docs/en/claude-apps-gateway-config#telemetry) together with `listen.public_url`, and it pushes the OTEL exporter settings to every connected client and forwards their OTLP traffic verbatim to each destination you list. Each destination opts into metrics, logs, and traces independently, and the default is metrics only; see the [`telemetry` reference](/docs/en/claude-apps-gateway-config#telemetry) for the per-signal fields and their sensitivity tradeoffs. The gateway doesn't buffer, aggregate, or store telemetry, so where the data lands is entirely the collector's exporter configuration.
 

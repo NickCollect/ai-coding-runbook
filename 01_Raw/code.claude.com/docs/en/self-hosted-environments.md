@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments
-fetched_at: 2026-10-05T06:27:12.691837+00:00
+fetched_at: 2026-10-12T06:49:45.609197+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,7 +47,7 @@ You can start runners yourself and keep them running, or run the [autoscaling or
 Check these before planning a rollout:
 
 * **Plans**: public beta for Team and Enterprise organizations. Self-hosted environments are off by default; an [Owner](/docs/en/cloud-environments#organization-shared-environments) turns on **Allow self-hosted environments** on the [**Cloud environments** admin page](https://claude.ai/admin-settings/cloud-environments), which requires [cloud sessions](/docs/en/claude-code-on-the-web) to be enabled for the organization.
-* **Zero Data Retention**: unavailable for organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled.
+* **Zero Data Retention and HIPAA**: unavailable for organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled or with the [HIPAA configuration](/docs/en/hipaa-setup) applied.
 * **Model inference**: sessions use the Anthropic API unless you configure a runner to [send model requests to Amazon Bedrock or Google Cloud's Agent Platform](/docs/en/self-hosted-environments-configuration#send-model-requests-to-bedrock-or-agent-platform). Session content goes to Anthropic in both cases. On a runner configured this way, [server-managed settings](/docs/en/server-managed-settings) and organization policies from claude.ai don't reach sessions.
 * **Surfaces**: sessions started from [claude.ai/code](https://claude.ai/code), the mobile and desktop apps, [scheduled routines](/docs/en/routines), and the terminal, with [`claude --cloud`](/docs/en/claude-code-on-the-web#from-terminal-to-cloud) or an [`--environment` dispatch](/docs/en/self-hosted-environments-testing#run-the-test-loop), can run in self-hosted environments. [Claude Tag](https://claude.com/docs/claude-tag/overview) sessions can run in them too, but Claude can't use [Access bundles](https://claude.com/docs/claude-tag/concepts/glossary#access-bundle) in those sessions yet. [Claude Security](/docs/en/claude-security) and [Code Review](/docs/en/code-review) sessions don't route to them yet. Support for those two surfaces follows separately.
 * **Repositories**: sessions check out repositories from GitHub; see [GitHub authentication options](/docs/en/claude-code-on-the-web#github-authentication-options). For a GitHub Enterprise Server host, see its [network requirements](/docs/en/github-enterprise-server#network-requirements).
@@ -122,9 +122,11 @@ A turn that outlives the kill is still lost; [Shutdown timing](/docs/en/self-hos
 The runner and its sessions make several kinds of outbound connection, and no inbound connectivity from Anthropic is required:
 
 * **Control plane**: the runner polls `api.anthropic.com` for work and posts setup-progress and failure events, all outbound HTTPS. Polling doubles as the runner's heartbeat.
-* **SCM connector**: the optional orchestrator [SCM connector](/docs/en/self-hosted-environments-reference#scm-connector-flags) tunnel is the only WebSocket connection.
-* **Git**: the runner clones from and pushes to your git host over HTTPS or SSH, authenticated with credentials your deployment provides; [Configure git](/docs/en/self-hosted-environments-deploy#configure-git) covers the options, including per-session minted credentials and the [Anthropic git proxy](/docs/en/self-hosted-environments-deploy#use-the-anthropic-git-proxy), which routes git through `api.anthropic.com` instead.
-* **Session child**: the child Claude Code process holds the session's event stream to `api.anthropic.com`, and makes its own outbound calls for model inference and for git commands run during the session. See [Network requirements](/docs/en/self-hosted-environments-deploy#network-requirements) for the full egress list. The [diagram above](#how-self-hosted-environments-work) shows these paths, apart from the optional SCM connector.
+* **Git**: the runner clones from and pushes to your git host over HTTPS or SSH, authenticated with credentials your deployment provides. See [Configure git](/docs/en/self-hosted-environments-deploy#configure-git) for the options, including per-session minted credentials. With the [Anthropic git proxy](/docs/en/self-hosted-environments-deploy#use-the-anthropic-git-proxy), git traffic for repositories on github.com goes through `api.anthropic.com` instead.
+* **Session child**: the child Claude Code process holds the session's event stream to `api.anthropic.com`, and makes its own outbound calls for model inference and for git commands run during the session. In a session that uses [Anthropic-managed git](/docs/en/self-hosted-environments-deploy#use-the-anthropic-git-proxy), the child sends its `git` and `gh` traffic for github.com over a WebSocket connection it opens to `api.anthropic.com`.
+* **SCM connector**: the optional orchestrator [SCM connector](/docs/en/self-hosted-environments-reference#scm-connector-flags) isn't available, so its tunnel doesn't open. The tunnel is a WebSocket connection to `api.anthropic.com`.
+
+See [Network requirements](/docs/en/self-hosted-environments-deploy#network-requirements) for the full egress list. The [diagram above](#how-self-hosted-environments-work) shows these paths, apart from the optional SCM connector and the Anthropic-managed git connection.
 
 By default, model inference uses the Anthropic API. The control plane delivers the API endpoint to each session, and the session authenticates with an Anthropic-issued, session-scoped OAuth token. To send model requests to your own cloud account instead, see [Send model requests to Bedrock or Agent Platform](/docs/en/self-hosted-environments-configuration#send-model-requests-to-bedrock-or-agent-platform).
 

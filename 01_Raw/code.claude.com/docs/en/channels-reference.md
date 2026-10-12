@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/channels-reference
-fetched_at: 2026-10-05T06:27:11.169330+00:00
+fetched_at: 2026-10-12T06:49:41.639108+00:00
 fetch_method: mintlify_md
 ---
 
@@ -190,6 +190,8 @@ claude --dangerously-load-development-channels plugin:yourplugin@yourmarketplace
 # Testing a bare .mcp.json server (no plugin wrapper yet)
 claude --dangerously-load-development-channels server:webhook
 ```
+
+Run the development flag in an interactive session, where Claude Code can show the confirmation prompt. If you pass it in non-interactive mode with `-p` or through the Agent SDK, Claude Code ignores the flag and the channel doesn't register.
 
 The bypass is per-entry. Combining this flag with `--channels` doesn't extend the bypass to the `--channels` entries. During the research preview, your channel isn't on the approved allowlist, so it stays on the development flag while you build and test.
 

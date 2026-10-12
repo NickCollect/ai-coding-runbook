@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/amazon-bedrock
-fetched_at: 2026-10-05T06:27:11.057230+00:00
+fetched_at: 2026-10-12T06:49:41.182882+00:00
 fetch_method: mintlify_md
 ---
 
@@ -132,15 +132,29 @@ If you use AWS Organizations, you can submit the form once from the management a
 
 ### 2. Configure AWS credentials
 
-Claude Code uses the default AWS SDK credential chain. Set up your credentials using one of these methods:
+Claude Code uses the default AWS SDK credential chain. If the machine already supplies credentials to that chain, such as an Amazon EC2 instance profile or Amazon ECS task credentials, skip to [step 3](#3-configure-claude-code).
 
-**Option A: AWS CLI configuration**
+AWS [warns against using an IAM user's access keys](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html) when you develop purpose-built software or work with real data. Set up your credentials with one of these methods:
+
+* [`aws configure`](#use-aws-configure): save an IAM user's access key to a profile in your `~/.aws` directory
+* [Access key environment variables](#export-an-access-key): set an access key, or temporary credentials with a session token, in the current shell only
+* [SSO profile](#use-an-sso-profile): sign in through IAM Identity Center in your browser and get temporary credentials. Use this method if you access your AWS account through IAM Identity Center.
+* [AWS Management Console credentials](#use-aws-management-console-credentials): sign in through your browser with your AWS Management Console credentials and get temporary credentials. AWS [recommends this method](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html) if you access your AWS account as the root user, as an IAM user, or through federation with IAM.
+* [Amazon Bedrock API key](#use-an-amazon-bedrock-api-key): authenticate with a bearer token that works only for Amazon Bedrock, instead of AWS credentials
+
+#### Use `aws configure`
+
+Run `aws configure` and enter your access key ID, secret access key, and default region when prompted:
 
 ```bash theme={null}
 aws configure
 ```
 
-**Option B: Environment variables (access key)**
+The AWS CLI saves the key to the `default` profile in `~/.aws/credentials`, where the credential chain reads it.
+
+#### Export an access key
+
+Export your access key as environment variables. `AWS_SESSION_TOKEN` is required only with temporary credentials, so leave that line out if your access key belongs to an IAM user:
 
 ```bash theme={null}
 export AWS_ACCESS_KEY_ID=your-access-key-id
@@ -148,9 +162,9 @@ export AWS_SECRET_ACCESS_KEY=your-secret-access-key
 export AWS_SESSION_TOKEN=your-session-token
 ```
 
-**Option C: Environment variables (SSO profile)**
+#### Use an SSO profile
 
-Replace `your-profile-name` with the name of your AWS profile before running these commands.
+Create a profile with `aws configure sso` if you don't have one. Then sign in to IAM Identity Center and set `AWS_PROFILE` so the credential chain uses that profile. Replace `your-profile-name` with the name of your AWS profile before running these commands.
 
 ```bash theme={null}
 aws sso login --profile=your-profile-name
@@ -160,29 +174,40 @@ export AWS_PROFILE=your-profile-name
 
 Claude Code requests role credentials from the IAM Identity Center region named by the profile's `sso_region`, which doesn't need to match the region you run Amazon Bedrock in. In v2.1.207, the Amazon Bedrock region overrode `sso_region`, so a profile whose IAM Identity Center instance is in a different region failed to authenticate with a `Session token not found or invalid` error.
 
-**Option D: AWS Management Console credentials**
+#### Use AWS Management Console credentials
+
+The `aws login` command requires AWS CLI 2.32.0 or later. For the IAM policy your identity needs, see the [AWS instructions for `aws login`](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html).
+
+Run the command to sign in through your browser with your AWS Management Console credentials:
 
 ```bash theme={null}
 aws login
 ```
 
-[Learn more](https://docs.aws.amazon.com/signin/latest/userguide/command-line-sign-in.html) about `aws login`.
+The session is valid for up to 12 hours, after which you run `aws login` again.
 
-**Option E: Amazon Bedrock API keys**
+#### Use an Amazon Bedrock API key
+
+An Amazon Bedrock API key is a bearer token that authenticates your requests in place of AWS credentials. AWS issues [two types of key](https://docs.aws.amazon.com/bedrock/latest/userguide/api-keys.html):
+
+* **Short-term keys**: last up to 12 hours. AWS prefers them over long-term keys for production environments.
+* **Long-term keys**: last until an expiration date you set. AWS recommends them only for exploration.
+
+Export the key as `AWS_BEARER_TOKEN_BEDROCK`:
 
 ```bash theme={null}
 export AWS_BEARER_TOKEN_BEDROCK=your-bedrock-api-key
 ```
 
-Amazon Bedrock API keys provide a simpler authentication method without needing full AWS credentials. [Learn more about Amazon Bedrock API keys](https://aws.amazon.com/blogs/machine-learning/accelerate-ai-development-with-amazon-bedrock-api-keys/).
+When `AWS_BEARER_TOKEN_BEDROCK` is set, Claude Code authenticates with the key and doesn't resolve the credential chain, even if other AWS credentials are present. [Learn more about Amazon Bedrock API keys](https://aws.amazon.com/blogs/machine-learning/accelerate-ai-development-with-amazon-bedrock-api-keys/).
 
 #### Credential caching and resolution timeout
 
 Claude Code resolves the AWS default credential provider chain once and keeps the resolved credentials in memory. It reuses them until five minutes before they expire, or for one hour when they carry no expiration, so an SSO-backed profile requests credentials from IAM Identity Center about once per credential lifetime. A credential error from the API clears the cache, and the retry resolves fresh credentials. Requires Claude Code v2.1.207 or later.
 
-The cache covers every credential option above except an Amazon Bedrock API key, which doesn't use the provider chain. To resolve the chain on every request instead, set [`CLAUDE_CODE_SKIP_AWS_CRED_CACHE=1`](/docs/en/env-vars).
+The cache covers every credential method listed at the start of this step except an Amazon Bedrock API key, which doesn't use the provider chain. To resolve the chain on every request instead, set [`CLAUDE_CODE_SKIP_AWS_CRED_CACHE=1`](/docs/en/env-vars).
 
-Each resolve of the chain times out after 60 seconds. If a step in the chain stalls, for example a `credential_process` helper that waits for input it can't receive, the request fails with [`AWS default-chain credential resolve timed out`](/docs/en/errors#aws-default-chain-credential-resolve-timed-out). If your chain runs an interactive sign-in that legitimately needs longer, such as browser-based SSO with MFA through a wrapper like `aws-vault`, raise the limit in milliseconds with [`CLAUDE_CODE_AWS_CHAIN_RESOLVE_TIMEOUT_MS`](/docs/en/env-vars). Before v2.1.207, a stalled credential resolution left the request waiting indefinitely.
+The resolve that fills the cache times out after 60 seconds. If a step in the chain stalls, for example a `credential_process` helper that waits for input it can't receive, the request fails with [`AWS default-chain credential resolve timed out`](/docs/en/errors#aws-default-chain-credential-resolve-timed-out). If your chain runs an interactive sign-in that legitimately needs longer, such as browser-based SSO with MFA through a wrapper like `aws-vault`, raise the limit in milliseconds with [`CLAUDE_CODE_AWS_CHAIN_RESOLVE_TIMEOUT_MS`](/docs/en/env-vars). With `CLAUDE_CODE_SKIP_AWS_CRED_CACHE=1` set, each API request resolves the chain without this limit.
 
 Except when you authenticate with an Amazon Bedrock API key, the [setup wizard](#sign-in-with-bedrock) applies the same limit to each AWS call it makes while verifying your credentials, and to the credential lookup before each model check. During credential verification, a check that exceeds it fails with [`Timed out after 60s waiting for AWS`](/docs/en/errors#bedrock-setup-verification-timed-out-waiting-for-aws).
 
@@ -479,9 +504,11 @@ For details, see [Amazon Bedrock IAM documentation](https://docs.aws.amazon.com/
 
 ## 1M token context window
 
-Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) on Amazon Bedrock. Sonnet 5 always runs with the 1M window on both the Invoke API and the [Mantle endpoint](#use-the-mantle-endpoint), with no `[1m]` variant to select. For the other models on the Invoke API, Claude Code automatically enables the extended context window when you select a 1M model variant.
+Fable models, Sonnet 5 and later, and Opus 4.7 and later run with the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) by default on Amazon Bedrock, on both the Invoke API and the [Mantle endpoint](#use-the-mantle-endpoint), with no `[1m]` suffix needed. An application inference profile ARN gets the 1M window when a [`modelOverrides`](#map-each-model-version-to-an-inference-profile) entry maps its model to it. To keep a 200K window instead, set [`CLAUDE_CODE_DISABLE_1M_CONTEXT=1`](/docs/en/model-config#turn-off-1m-context).
 
-The [setup wizard](#sign-in-with-bedrock) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) for details, including how to use the 1M window without changing the pin.
+Opus 4.6 and Sonnet 4.6 on the Invoke API reach the 1M window when you select their `[1m]` variant. The [setup wizard](#sign-in-with-bedrock) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) for details, including how to use the 1M window without changing the pin.
+
+Before v2.1.287, the Fable models and Opus 4.7 and later ran with a 200K window by default on the Invoke API and reached the 1M window there through a `[1m]` suffix.
 
 ## Service tiers
 
@@ -586,7 +613,9 @@ These variables are specific to the Mantle endpoint. See [Environment variables]
 
 ### Authentication loop with SSO and corporate proxies
 
-If browser tabs spawn repeatedly when using AWS SSO, remove the `awsAuthRefresh` setting from your [settings file](/docs/en/settings). This can occur when corporate VPNs or TLS inspection proxies interrupt the SSO browser flow. Claude Code treats the interrupted connection as an authentication failure, re-runs `awsAuthRefresh`, and loops indefinitely.
+If browser sign-in tabs keep opening when you use AWS SSO, remove the `awsAuthRefresh` setting from your [settings file](/docs/en/settings).
+
+The loop can occur when corporate VPNs or TLS inspection proxies interrupt the SSO browser flow. Claude Code treats the interrupted connection as an authentication failure. When a later request finds the credentials still expired, Claude Code re-runs `awsAuthRefresh`, which opens another tab.
 
 If your network environment interferes with automatic browser-based SSO flows, use `aws sso login` manually before starting Claude Code instead of relying on `awsAuthRefresh`.
 
@@ -623,7 +652,7 @@ Claude Code uses the Amazon Bedrock [Invoke API](https://docs.aws.amazon.com/bed
 
 Amazon Bedrock streams `InvokeModelWithResponseStream` responses in a binary event-stream format with the header `Content-Type: application/vnd.amazon.eventstream`. A gateway or proxy between Claude Code and Amazon Bedrock must forward the response body and its headers, including `Content-Type`, as Amazon Bedrock sent them.
 
-If the gateway rewrites `Content-Type` to another value, Claude Code rejects the response with an error that begins `Bedrock streaming response has content-type`, naming the value it received. The common rewrite is `text/event-stream`, from an integration that re-emits the stream as server-sent events.
+If the gateway rewrites `Content-Type` to another value, Claude Code rejects the response with an error that begins `Bedrock streaming response has content-type`, naming the value it received. The common rewrite is `text/event-stream`, from an integration that re-emits the stream as server-sent events. For the `CLAUDE_CODE_DISABLE_BEDROCK_CONTENT_TYPE_GUARD` variable that the error message names, see [Bedrock streaming response has an unexpected content-type](/docs/en/errors#bedrock-streaming-response-has-an-unexpected-content-type).
 
 If the gateway drops or blanks the header instead, Claude Code assumes the body is Amazon Bedrock's event stream and decodes it, so a body the gateway passed through unmodified keeps streaming.
 

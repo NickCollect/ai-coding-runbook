@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sandboxing
-fetched_at: 2026-10-05T06:27:12.644552+00:00
+fetched_at: 2026-10-12T06:49:45.468465+00:00
 fetch_method: mintlify_md
 ---
 
@@ -194,7 +194,18 @@ Even in auto-allow mode, the following still apply:
 * Explicit [deny rules](/docs/en/permissions) are always respected
 * `rm` or `rmdir` commands that target a [critical path](/docs/en/permission-modes#critical-paths) still go through the regular permission flow
 * Content-scoped [ask rules](/docs/en/permissions) like `Bash(git push *)` still force a prompt even for sandboxed commands
-* A bare `Bash` ask rule, or the equivalent `Bash(*)` form, is skipped for commands that run sandboxed; it still applies to commands that fall back to the regular permission flow. In [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode), the rule isn't skipped: it prompts for sandboxed commands too, including read-only ones
+* A bare `Bash` ask rule, or the equivalent `Bash(*)` form, is skipped for commands that run sandboxed; it still applies to commands that run outside the sandbox. In [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode), the rule isn't skipped: it prompts for sandboxed commands too, including read-only ones
+* [Monitor tool](/docs/en/tools-reference#monitor-tool) commands aren't approved automatically, though they still run in the sandbox. To skip the prompt, add an [allow rule](/docs/en/permissions#bash) that matches the command, such as `Bash(npm run *)`
+
+Some sandboxed commands also go through the regular [permission flow](/docs/en/permissions) instead of being approved automatically. This happens with commands such as `FOO=bar npm test`, where a variable set in front of a command can change which program runs, and with `make CC=clang` or `eval "ls"`. Your allow rules and permission mode then decide whether you see a prompt, and the command still runs inside the sandbox.
+
+For these three commands, an [allow rule](/docs/en/permissions#bash) that matches the command stops a recurring prompt. These rules show the pattern:
+
+* `Bash(make *)` approves `make CC=clang`
+* `Bash(FOO=bar npm *)` approves `FOO=bar npm test`. When the command starts with a variable assignment, include the assignment in the rule
+* `Bash(eval "ls")` approves `eval "ls"`. A wildcard rule such as `Bash(eval *)` doesn't stop this prompt, so write a rule that matches the whole command
+
+An allow rule that matches a command also approves an [unsandboxed retry](#the-unsandboxed-retry-escape-hatch) of it, so the command can run outside the sandbox with no prompt.
 
 <Info>
   Auto-allow mode works independently of your permission mode setting, with three exceptions: [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode), an auto mode command that carries [per-command allowed domains](#per-command-allowed-domains-in-auto-mode), and [server-side classifier review](/docs/en/permission-modes#how-the-classifier-evaluates-actions) of sandboxed commands in auto mode. Even if you're not in "accept edits" mode, sandboxed Bash commands run automatically when auto-allow is enabled. This means Bash commands that modify files within the sandbox boundaries execute without prompting, even in Manual mode, where the file edit tools would prompt.
@@ -640,7 +651,7 @@ Sandboxing, [permission rules](/docs/en/permissions), and [permission modes](/do
 Permission rules and sandboxing control different things:
 
 * **Permission rules** control which tools Claude Code can use and are evaluated before any tool runs. They apply to every tool: Bash, Read, Edit, WebFetch, MCP, and others, except that a deny or ask rule can't block [`EndConversation`](/docs/en/tools-reference#endconversation-tool-behavior) while any other tool remains.
-* **Sandboxing** provides OS-level enforcement that restricts what shell commands can access at the filesystem and network level. It applies only to Bash, PowerShell, and [Monitor](/docs/en/tools-reference#monitor-tool) commands and their child processes.
+* **Sandboxing** provides OS-level enforcement that restricts what shell commands can access at the filesystem and network level. It applies to Bash, PowerShell, and [Monitor](/docs/en/tools-reference#monitor-tool) tool commands and their child processes.
 
 The two layers also differ in how they are enforced. Claude Code evaluates permission decisions before a command runs, based on the command string and, in auto mode, a separate classifier's judgment about whether the command is safe. The operating system enforces the sandbox boundary on the running process, so it holds regardless of what the model chose to run and even if an allowed command does more than its name suggests.
 
@@ -990,6 +1001,8 @@ The sandbox isolates shell commands and their child processes. [What runs outsid
 
 * **Computer use**: when Claude opens apps and controls your screen, it runs on your actual desktop rather than in an isolated environment. Per-app permission prompts gate each application. See [computer use in the CLI](/docs/en/computer-use) or [computer use in Desktop](/docs/en/desktop#let-claude-use-your-computer).
 * **Subagents**: [subagents](/docs/en/sub-agents) run in the same process as the parent session and use the same sandbox configuration. Bash commands inside a subagent are sandboxed when sandboxing is enabled in the parent session.
+* **Background sessions**: a [background session](/docs/en/agent-view) runs in its own process, and its Bash commands are sandboxed when [its settings](/docs/en/agent-view#settings-and-provider) enable sandboxing.
+* **A boundary around the whole process**: to put the processes in [What runs outside the sandbox](#what-runs-outside-the-sandbox) behind a boundary too, run Claude Code (local mode) inside the [sandbox runtime](/docs/en/sandbox-environments#sandbox-runtime) with a network allowlist limited to the hosts you approve, or in the [dev container](/docs/en/devcontainer) with its firewall script. For the background service and the sessions it hosts, see [Run Claude Code behind a corporate launcher](/docs/en/corporate-launcher).
 * **Mods**: a [mod](/docs/en/plugins/mods/overview) is a plugin that runs its own code inside Claude Code, and a process that a mod starts runs outside the sandbox. See [What a mod can reach](/docs/en/plugins/mods/overview#what-a-mod-can-reach).
 
 <Warning>
@@ -999,7 +1012,7 @@ The sandbox isolates shell commands and their child processes. [What runs outsid
 ## See also
 
 * [Sandbox environments](/docs/en/sandbox-environments): compare the built-in sandbox with dev containers, containers, and VMs
-* [Security](/docs/en/security): comprehensive security features and best practices
+* [Security](/docs/en/security): security features and best practices
 * [Permissions](/docs/en/permissions): permission configuration and access control
 * [All settings](/docs/en/settings-reference): every settings key
 * [CLI reference](/docs/en/cli-reference): command-line options

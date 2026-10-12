@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/security
-fetched_at: 2026-10-05T06:27:12.538647+00:00
+fetched_at: 2026-10-12T06:49:45.254281+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,6 +33,7 @@ Start with [what a plugin can do](#understand-what-a-plugin-can-do) and [which m
 A plugin can carry content that runs code on your machine with your user privileges and content that enters Claude's context as instructions, so [review a plugin before you install it](#review-a-plugin-before-you-install). Here's what an installed plugin can do:
 
 * **Hooks**: a plugin's [hooks](/docs/en/hooks) run as shell commands at points in Claude Code's lifecycle, such as before or after a tool call.
+* **Monitors**: a plugin's [monitors](/docs/en/plugins/components#monitors) run as background shell commands that Claude Code starts on its own when the session starts, when you reload plugins, or the first time a named skill runs.
 * **Mods**: a plugin's [mod](/docs/en/plugins/mods/overview) runs JavaScript inside Claude Code with your permissions. To list what a mod does before you install it, see [Decide whether to trust a mod](/docs/en/plugins/mods/overview#decide-whether-to-trust-a-mod).
 * **MCP and LSP servers**: Claude Code connects to the [MCP servers](/docs/en/mcp) an enabled plugin declares and gives Claude their tools. A stdio MCP server runs as a process that Claude Code starts on your machine. Claude Code also starts the language servers the plugin declares.
 * **`bin/` directory**: Claude Code adds each enabled plugin's `bin/` directory to the `PATH` of the Bash tool's shell, so Claude's Bash commands can run any executable there.
@@ -41,7 +42,7 @@ A plugin can carry content that runs code on your machine with your user privile
 
 Claude Code's [permission rules](/docs/en/permissions) and [sandbox](/docs/en/sandboxing) cover the tool calls Claude makes, not the code a plugin runs by itself:
 
-* **Hooks and server processes**: command hooks execute shell commands with your full user permissions. Claude Code runs hooks, MCP servers, and the processes a [mod](/docs/en/plugins/mods/overview#what-a-mod-can-reach) starts outside the sandbox.
+* **Hooks, monitors, and server processes**: command hooks and monitors are shell commands that run with your full user permissions. Claude Code runs hooks, monitors, MCP servers, LSP servers, and the processes a [mod](/docs/en/plugins/mods/overview#what-a-mod-can-reach) starts outside the sandbox.
 * **Claude's tool calls**: a call to one of the plugin's MCP tools, and a Bash command that runs an executable from the plugin's `bin/`, are tool calls, so your permission rules apply to them. For what a mod can do to a tool call, see [Decide whether to trust a mod](/docs/en/plugins/mods/overview#decide-whether-to-trust-a-mod).
 
 Installing a plugin also enables it, unless its manifest or marketplace entry sets [`defaultEnabled: false`](/docs/en/plugins/install#choose-an-install-scope) and you haven't enabled it yourself.

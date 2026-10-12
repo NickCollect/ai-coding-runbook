@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop-ios-simulator
-fetched_at: 2026-10-05T06:27:11.527849+00:00
+fetched_at: 2026-10-12T06:49:42.652988+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,7 +77,7 @@ The simulator pane shows whichever device the app actually launched in. To test 
 
 A device Claude boots also appears in Apple's Simulator app, or in Device Hub on Xcode 27. Claude can install the app on a device you already have booted.
 
-You can also open the simulator pane yourself. Once the session has a simulator attached or has edited Swift files, the **Views** menu in the session toolbar shows an **iOS Simulator** entry. If the pane isn't showing a device yet, click **Attach simulator**, or pick a specific device from the device menu next to it; picking a shut-down device boots it. If Xcode or its simulators are missing, the pane shows the setup steps instead and checks them off as you complete them.
+You can also open the simulator pane yourself. Once the session has a simulator attached or Claude Code detects iOS app work, an **iOS Simulator** button appears in the session's title bar. If the pane isn't showing a device yet, click **Attach simulator**, or pick a specific device from the device menu next to it; picking a shut-down device boots it. If Xcode or its simulators are missing, the pane shows the setup steps instead and checks them off as you complete them.
 
 ## Control the simulator yourself
 
@@ -90,7 +90,7 @@ The simulator pane is interactive, not only a viewer. While Claude works, or bet
 * Save a screenshot with **Cmd+S** or a screen recording with **Cmd+R**, using the pane's capture buttons or the shortcuts; the files are saved to your Desktop
 * Stop streaming a device without shutting it down by clicking **Detach simulator**, which returns the pane to its **Attach simulator** state
 
-To tune the video stream from the simulator, open the pane's **Display** menu. Lower **Frame rate** or **Resolution** if the pane strains your Mac. Both settings change how the pane displays the device, not how the app runs.
+If the pane shows a **Display** menu, use it to tune the video stream from the simulator. Lower **Frame rate** or **Resolution** if the pane strains your Mac. Both settings change how the pane displays the device, not how the app runs.
 
 You and Claude drive the same device, so your taps change the app state Claude sees. To have Claude check a specific screen, tap through to it, then ask. While Claude is driving the device, the pane shows a **Claude is using this device** badge above the screen; hold off tapping until the badge clears, so the result reflects the app rather than your input.
 

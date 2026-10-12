@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/workflows
-fetched_at: 2026-10-05T06:27:13.374906+00:00
+fetched_at: 2026-10-12T06:49:47.290767+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,13 +55,13 @@ The quickest way to see a workflow in action is to run `/deep-research`, the [bu
   </Step>
 
   <Step title="Watch progress">
-    The run starts in the background. Run `/workflows`, use the arrow keys to select the run, and press Enter to open its progress view:
+    The run starts in the background. Run `/workflows` to open its progress view:
 
     ```text wrap theme={null}
     /workflows
     ```
 
-    The view shows each phase with its agent count, token total, and elapsed time. Drill into any phase to see its agents and what each one found. See [Watch the run](#watch-the-run) for the full set of controls.
+    If `/workflows` shows a list of runs instead, select the run you just started and press Enter. The view shows each phase with its agent count. Drill into any phase to see its agents and what each one found. See [Watch the run](#watch-the-run) for the full set of controls.
 
     You can also watch from the task panel below the input box: a one-line progress summary appears there while the run is going. Press the down arrow to focus it, then Enter to expand.
   </Step>
@@ -89,9 +89,9 @@ Claude Code includes `/deep-research` as a built-in workflow:
 
 ### Watch the run
 
-Workflows run in the background, so the session stays responsive while agents work. Run `/workflows` at any time to list running and completed workflows, then select one to open its progress view. To stop a running workflow without opening it, select it in the list and press `x`.
+Workflows run in the background, so the session stays responsive while agents work. Run `/workflows` at any time to list running and completed workflows, then select one to open its progress view. When the session has only one run, `/workflows` skips the list and opens that run. To stop a running workflow from the list without opening it, select it and press `x`.
 
-The progress view shows each phase with its agent counts, token totals, and elapsed time. The footer lists the key for each action:
+The progress view shows each phase with its agent counts. The footer lists the key for each action:
 
 | Key | Action |
 | :- | :- |
@@ -178,7 +178,7 @@ In the CLI, the per-run prompt shows the planned phases and these options:
 * **View raw script**: read the script before deciding
 * **No**: cancel
 
-`Ctrl+G` opens the script in your editor. `Tab` lets you adjust the prompt before the run starts.
+`Ctrl+G` opens the script in your editor. With **Yes, run it** or **No** selected, press `Tab` to [add a comment](/docs/en/permissions#add-a-comment-when-you-answer-a-permission-prompt) to your answer.
 
 Whether you see this prompt depends on your [permission mode](/docs/en/permission-modes):
 
@@ -318,7 +318,7 @@ return audits.filter(Boolean)
 
 The body is plain JavaScript with top-level `await`. `agent()` spawns one subagent, `pipeline()` runs one per item in a list, and `parallel()` runs a set of agent tasks at the same time and waits for all of them.
 
-An `agent()` call resolves to `null` if you stop it mid-run or it hits an unrecoverable API error. `pipeline()` keeps each `null` in the results array, which is why the example ends with `.filter(Boolean)` to drop those entries.
+An `agent()` call resolves to `null` if you stop it mid-run or it hits an unrecoverable API error. `pipeline()` keeps each `null` in the results array, which is why the example ends with `.filter(Boolean)` to drop those entries, including the slot of [an agent that stalled on every attempt](#when-an-agent-stalls-and-restarts).
 
 In [auto mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode), the prompt your script passes to `agent()` doesn't count as a request from you when the classifier reviews that subagent's actions, because Claude Code marks it as text the script computed.
 
@@ -383,6 +383,8 @@ When you stop a run, it stays in the task panel while any of its agents' process
 
 Resume a paused run from `/workflows` by selecting it and pressing `p`. For a run you stopped, ask Claude to relaunch the workflow with the same script. If agents from the stopped run haven't exited yet, Claude Code refuses the relaunch until they have, so a second copy of those agents can't run alongside them.
 
+#### Which agents run again
+
 Claude Code replays the run in the order agents started, and each agent either returns its saved result or runs again:
 
 * **Completed**: returns its saved result. The first agent whose prompt differs from the previous run, because you edited the script or an earlier agent returned something different, runs again, and so does every agent after it, even ones that completed.
@@ -390,6 +392,10 @@ Claude Code replays the run in the order agents started, and each agent either r
 * **Failed**: runs again, and so does every agent that started after it, even ones that completed. Stopping one agent alone, by selecting it in [`/workflows`](#watch-the-run) and pressing `x`, counts as failing.
 
 That last case means a failure in the middle of a fan-out reruns work that already finished. If a script starts A, B, C, and D in that order and B fails, relaunching returns A from cache and runs B, C, and D again.
+
+If you edit a script that started A, B, C, and D so that it starts A, C, B, and D, the second agent to start is now C, where the previous run started B. Relaunching returns A from cache and runs C, B, and D again.
+
+#### Resume after you leave the session
 
 You can resume a run within the same Claude Code session. What happens to a running workflow when you leave the session depends on how you leave:
 
@@ -413,6 +419,30 @@ The run pauses only when all of these hold; when one doesn't, the affected agent
 * The limit resets within 24 hours. A weekly limit can reset further out.
 * The run hasn't already waited twice. When it hits the limit a third time, the agent fails.
 
+### When an agent stalls and restarts
+
+An agent whose output stops arriving for long enough starts over from the same prompt. In [`/workflows`](#watch-the-run), its name gains a `(retry 1)` suffix and its detail shows `attempt 2 (stalled)`. The restart is automatic, so you don't need to do anything.
+
+The new attempt starts without the stalled attempt's transcript. Files the stalled attempt already changed stay changed, and the tokens it spent stay in the run's total. The stall window is how long Claude Code waits for output from an agent before it ends the attempt. Time the agent spends waiting on its own tool calls or on a [usage-limit reset](#when-a-run-hits-your-usage-limit) doesn't count toward the stall window.
+
+An agent restarts at most five times, counting any restart you ask for with `r`. If the sixth attempt stalls as well, the `agent()` call fails, and the start of the error says why:
+
+* `agent stalled on all 6 attempts`: every attempt went the whole window without output. If the agent's work keeps it silent that long, lengthen the window
+* `agent lost its reply on all 6 attempts`: every attempt's response stream went silent and Claude Code gave up waiting on it. Lengthening the stall window doesn't help, since a [streaming idle watchdog](/docs/en/network-config#streaming-idle-watchdogs) ended the response first and `CLAUDE_STREAM_IDLE_TIMEOUT_MS` sets that watchdog's timeout
+* `agent abandoned after 6 attempts`: the attempts ended in different ways, which the error lists in order
+
+To give an agent more time to produce output before the window ends:
+
+* **One agent**: pass `stallMs` in milliseconds on its `agent()` call, such as `agent(prompt, { stallMs: 1800000 })` for 30 minutes
+* **Every agent**: set [`CLAUDE_ASYNC_AGENT_STALL_TIMEOUT_MS`](/docs/en/env-vars#variables), which also applies to subagents outside workflows
+
+Whether the run continues after the failure depends on how your script called the agent:
+
+* **Inside [`parallel()` or `pipeline()`](#what-the-saved-script-looks-like)**: the run carries on with `null` in place of the agent's result
+* **Awaited directly**: the run ends with the error
+
+To try again, ask Claude to relaunch the workflow. [Resume after a pause](#resume-after-a-pause) covers what runs again.
+
 ### Cost
 
 A workflow spawns many agents, so a single run can use meaningfully more tokens than working through the same task in conversation. Runs count toward your plan's usage and rate limits.
@@ -433,7 +463,7 @@ To control the model cost:
 * Check `/model` before a large run if you usually switch to a smaller model for routine work
 * Ask Claude to use a smaller model for stages that don't need the strongest one when you describe the task
 
-When your organization's [`availableModels` allowlist](/docs/en/model-config#restrict-model-selection) blocks a model the script requests for an agent, that agent runs on a substituted model instead, following the same [substitution rules as subagents](/docs/en/sub-agents#choose-a-model). The run's progress view in [`/workflows`](#watch-the-run) shows a warning naming both the requested and substituted models.
+When your organization's [`availableModels` allowlist](/docs/en/model-config#restrict-model-selection) blocks a model the script requests for an agent, that agent runs on a substituted model instead, following the same [substitution rules as subagents](/docs/en/sub-agents#choose-a-model).
 
 ### Set a size guideline
 
@@ -466,7 +496,12 @@ To turn workflows off for yourself:
 
 To turn workflows off for your whole organization, set `"disableWorkflows": true` in [managed settings](/docs/en/server-managed-settings), or use the toggle on the [Claude Code admin settings](https://claude.ai/admin-settings/claude-code) page.
 
-When workflows are disabled, the bundled workflow commands and the `/workflow-authoring` skill are unavailable, the `ultracode` keyword no longer triggers a run, and the **Ultracode** toggle is removed from `/effort`. A run that was already in progress keeps going.
+When workflows are disabled:
+
+* `/workflows`, the workflow commands, and the `/workflow-authoring` skill are unavailable
+* The `ultracode` keyword no longer triggers a run, and the **Ultracode** toggle is removed from `/effort`
+
+A run that was already in progress keeps going.
 
 Turning workflows off also makes [ultracode](#let-claude-decide-with-ultracode) unavailable. No managed setting rules out ultracode alone: wherever it's [available](/docs/en/model-config#when-ultracode-is-available), users can turn it on with `/effort ultracode`. An [effort cap](/docs/en/model-config#organization-effort-limits) lowers the effort level a session with ultracode on runs at, but doesn't turn ultracode off.
 

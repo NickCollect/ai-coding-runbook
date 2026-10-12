@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/managed-settings
-fetched_at: 2026-10-05T06:27:11.972958+00:00
+fetched_at: 2026-10-12T06:49:43.850608+00:00
 fetch_method: mintlify_md
 ---
 
@@ -81,6 +81,8 @@ Pick a mechanism by how you already manage devices, using the table below.
 
 Starter templates for Jamf, Iru, Intune, and Group Policy are in the [MDM examples repository](https://github.com/anthropics/claude-code/tree/main/examples/mdm).
 
+If your organization has the [HIPAA configuration](/docs/en/hipaa-setup#deploy-managed-settings) applied, see `settings-hipaa.json` and `README-hipaa.md` in the [settings examples repository](https://github.com/anthropics/claude-code/tree/main/examples/settings) for a fuller `managed-settings.json` with sandboxing, a network allowlist, credential protections, and local data retention.
+
 For managed MCP servers, which you deploy alongside any of these through `managed-mcp.json` or provide through the [`managedMcpServers`](/docs/en/settings-reference#managedmcpservers) key, see [Managed MCP configuration](/docs/en/managed-mcp).
 
 ### Where and when a policy applies
@@ -148,7 +150,7 @@ Both settings rank the sources the same way. These terms recur in this section:
 
 Claude Code checks the sources in this order, highest priority first:
 
-1. Remote settings, delivered from claude.ai as [server-managed settings](/docs/en/server-managed-settings) or by a [Claude apps gateway](/docs/en/claude-apps-gateway). Claude Code fetches this source only when the session authenticates to Anthropic's API directly with an [eligible login or key](/docs/en/server-managed-settings#platform-availability), or signs in to a gateway with `/login`. On other providers, or when `ANTHROPIC_BASE_URL` points somewhere other than Anthropic's API, it starts at the next source
+1. Remote settings, delivered from claude.ai as [server-managed settings](/docs/en/server-managed-settings) or by a [Claude apps gateway](/docs/en/claude-apps-gateway). Claude Code fetches this source only when the session authenticates to Anthropic's API directly with an [eligible credential](/docs/en/server-managed-settings#platform-availability), signs in to a gateway with `/login`, or runs in Claude Desktop's Code tab behind a gateway that [serves that session settings](/docs/en/claude-apps-gateway-config#apply-code-settings-in-the-code-tab). On other providers, or when `ANTHROPIC_BASE_URL` points somewhere other than Anthropic's API, it starts at the next source
 2. MDM or OS-level policies: the macOS plist or the HKLM registry key
 3. Managed settings files, `managed-settings.d/*.json` and `managed-settings.json` merged together
 4. The HKCU registry, on Windows, and on WSL once the HKLM registry or the Windows managed settings file turns [`wslInheritsWindowsSettings`](/docs/en/settings-reference#wslinheritswindowssettings) on and the HKCU value also sets it. Claude Code reads it only when [no admin document is present above it](#present-admin-documents) and no [host-supplied parent settings](#let-an-embedding-host-add-policy) supply a restrictive key
@@ -358,8 +360,8 @@ When a managed source sets a top-level key that has a single restrictive value, 
 These cases don't fail closed:
 
 * A `null` removes the key.
-* An invalid `disableAllHooks`, even a quoted boolean, is dropped with a warning, because enforcing `true` would also unload the hooks your own managed settings deploy.
-* For every other boolean key the rule covers, the string `"true"` or `"false"` reads as that boolean, with a notice in `/status` asking you to drop the quotes.
+* An invalid `disableAllHooks`, even a quoted Boolean, is dropped with a warning, because enforcing `true` would also unload the hooks your own managed settings deploy.
+* For every other Boolean key the rule covers, the string `"true"` or `"false"` reads as that Boolean, with a notice in `/status` asking you to drop the quotes.
 
 Claude Code repairs the `permissions`, `autoMode`, `worktree`, and `attribution` blocks per field instead of dropping them whole:
 

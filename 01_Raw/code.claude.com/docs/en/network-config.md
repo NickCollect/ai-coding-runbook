@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/network-config
-fetched_at: 2026-10-05T06:27:12.111902+00:00
+fetched_at: 2026-10-12T06:49:44.076522+00:00
 fetch_method: mintlify_md
 ---
 
@@ -67,7 +67,7 @@ export HTTPS_PROXY=http://username:password@proxy.example.com:8080
 
 ## CA certificate store
 
-By default, Claude Code trusts both its bundled Mozilla CA certificates and your operating system's certificate store. Reading the OS store requires a runtime with `tls.getCACertificates`: the native installer always has it, and npm installs need Node 22.15 or later. On older Node versions, only the bundled set and `NODE_EXTRA_CA_CERTS` apply. Enterprise TLS-inspection proxies work without additional configuration when their root certificate is installed in the OS trust store and the runtime can read it.
+By default, Claude Code trusts both its bundled Mozilla CA certificates and your operating system's certificate store. Reading the OS store requires a runtime with `tls.getCACertificates`: the native installer always has it, and npm installs need Node 22.15 or later. On older Node versions, only the bundled set and `NODE_EXTRA_CA_CERTS` apply. Enterprise TLS-inspection proxies work without additional configuration when their root certificate is installed in the OS trust store and the runtime can read it. If such a proxy mishandles gzip-compressed request bodies, set [`CLAUDE_CODE_GZIP_REQUEST_BODIES=0`](/docs/en/env-vars) to turn off compression for Claude API, telemetry, and artifact publish requests.
 
 `CLAUDE_CODE_CERT_STORE` accepts a comma-separated list of sources. Recognized values are `bundled` for the Mozilla CA set shipped with Claude Code and `system` for the operating system trust store. The default is `bundled,system`.
 
@@ -171,7 +171,7 @@ You can also run `/status` in an interactive session and check these rows:
 
 ### Set network variables in settings, not the shell
 
-The supervisor is one process shared by every terminal. It inherits the environment of whichever shell starts it first, and an OS-installed supervisor receives no shell environment at all. If you export a proxy, CA path, or mTLS variable only in your shell, it reaches background agents when that shell happened to cold-start the supervisor, and silently doesn't when a different shell did.
+The supervisor is one process shared by every terminal. It inherits the environment of whichever shell starts it first. If you export a proxy, CA path, or mTLS variable only in your shell, it reaches background agents when that shell happened to cold-start the supervisor, and silently doesn't when a different shell did.
 
 Put the same variables in the `env` block of `~/.claude/settings.json` or [managed settings](/docs/en/settings) instead. Every variable on this page can be set there, and settings are the only configuration that reaches every background session on every machine.
 
@@ -182,7 +182,7 @@ Some organizations require every Claude Code process to start through a corporat
 Set the [`processWrapper`](/docs/en/settings-reference#processwrapper) setting to prefix the supervisor, its workers, and the other background processes listed under [What the launcher covers](/docs/en/corporate-launcher#what-the-launcher-covers) with your launcher. The equivalent [`CLAUDE_CODE_PROCESS_WRAPPER`](/docs/en/env-vars) environment variable takes precedence when both are set, and it is subject to the same rule: deliver it through managed settings or `~/.claude/settings.json`, not a shell export. [Run Claude Code behind a corporate launcher](/docs/en/corporate-launcher) covers the contract the launcher must satisfy, what it does and doesn't reach, and how to roll it out.
 
 <Note>
-  An already-running supervisor keeps the launch configuration it started with. After deploying the launcher setting, run [`claude daemon stop --any`](/docs/en/agent-view#the-supervisor-process) so the next `claude agents` or `--bg` starts a supervisor that honors it. An installed service takes `claude daemon stop` without `--any`.
+  An already-running supervisor keeps the launch configuration it started with. After deploying the launcher setting, run [`claude daemon stop --any`](/docs/en/agent-view#the-supervisor-process) so the next `claude agents` or `--bg` starts a supervisor that honors it.
 </Note>
 
 ## Streaming idle watchdogs
@@ -193,7 +193,7 @@ Claude Code runs four independent timers that abort a streaming model response w
 | :- | :- | :- | :- |
 | First-byte deadline | No response headers arrive after Claude Code sends the request | Direct Anthropic API and [Claude Platform on AWS](/docs/en/claude-platform-on-aws), including through an HTTPS proxy, but not when `ANTHROPIC_BASE_URL` or `ANTHROPIC_AWS_BASE_URL` routes them through a [gateway](/docs/en/gateways). Opt-in on Amazon Bedrock with `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1`; doesn't run on Google Cloud's Agent Platform or Microsoft Foundry | 180 seconds on the direct Anthropic API, 300 seconds elsewhere, plus one second per 32KB of request body |
 | Event-level watchdog | No response events parse. Where the byte-level watchdog runs on a connection other than Amazon Bedrock, arriving bytes, including keep-alive pings, also reset this watchdog, for up to about five minutes without a parsed event | Every provider | 300 seconds |
-| Byte-level watchdog | No bytes arrive on the wire, including SSE keep-alive pings | Direct Anthropic API, [Claude Platform on AWS](/docs/en/claude-platform-on-aws), and [gateway](/docs/en/gateways) connections, including a custom `ANTHROPIC_BASE_URL`. Opt-in on Amazon Bedrock `vnd.amazon.eventstream` responses with `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1`; doesn't run on Google Cloud's Agent Platform or Microsoft Foundry | 180 seconds on the direct Anthropic API, 300 seconds elsewhere |
+| Byte-level watchdog | No bytes arrive on the wire, including SSE keep-alive pings | Direct Anthropic API, [Claude Platform on AWS](/docs/en/claude-platform-on-aws), and [gateway](/docs/en/gateways) connections, including a custom `ANTHROPIC_BASE_URL`. Opt-in on Amazon Bedrock `vnd.amazon.eventstream` responses with `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1`; doesn't run on Google Cloud's Agent Platform or Microsoft Foundry | 180 seconds on the direct Anthropic API. Through a custom `ANTHROPIC_BASE_URL`, 180 seconds when Claude Code has [fetched feature flags](/docs/en/env-vars#features-that-need-feature-flag-fetching) and 300 seconds when it hasn't. 300 seconds elsewhere |
 | Body idle timeout | No bytes arrive for 5 minutes | Providers other than the direct Anthropic API, Claude Platform on AWS, and Amazon Bedrock with `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1` set, unless [`API_FORCE_IDLE_TIMEOUT`](/docs/en/env-vars) changes that | 5 minutes |
 
 If you set `CLAUDE_ENABLE_BYTE_WATCHDOG_BEDROCK=1`, the byte-level watchdog replaces the body idle timeout on Bedrock rather than running alongside it. `CLAUDE_STREAM_IDLE_TIMEOUT_MS` then also governs how long a Bedrock stream may stay silent before Claude Code treats the connection as dead, within the limits listed below. Arriving bytes still don't reset the event-level watchdog on Bedrock. With debug logging on, each Bedrock stream then logs a debug message that starts with `wire-heartbeat: _chunkTimes absent`.

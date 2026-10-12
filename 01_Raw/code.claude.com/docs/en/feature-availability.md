@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/feature-availability
-fetched_at: 2026-10-05T06:27:11.646174+00:00
+fetched_at: 2026-10-12T06:49:42.977614+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,8 @@ These have provider-specific differences:
 
 These require signing in with a claude.ai account and are not reachable with an Anthropic Console API key or from a third-party provider:
 
-* [Cloud sessions](/docs/en/claude-code-on-the-web), Claude Code on mobile, and [Claude Code in Slack](/docs/en/slack)
+* [Cloud sessions](/docs/en/claude-code-on-the-web) and Claude Code on mobile
+* [Claude Code in Slack](/docs/en/slack): Pro and Max plans
 * [Claude Code Desktop](/docs/en/desktop)
 * [Routines](/docs/en/routines) (`/schedule`)
 * [Ultrareview](/docs/en/ultrareview)
@@ -89,7 +90,7 @@ These features work in the local CLI but depend on a server-side capability that
       <td>✗</td>
       <td>✓</td>
       <td>See note <sup><a href="#fn1">1</a></sup></td>
-      <td>✓ ([deployments hosted on Anthropic](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options))</td>
+      <td>✓</td>
     </tr>
 
     <tr>
@@ -195,7 +196,7 @@ Organization-level controls and usage visibility.
     <tr>
       <td>[Server-managed settings](/docs/en/server-managed-settings)</td>
       <td>✓ (Team and Enterprise)</td>
-      <td>✓ (Team and Enterprise)</td>
+      <td>See [Platform availability](/docs/en/server-managed-settings#platform-availability)</td>
       <td>✗</td>
       <td>✗</td>
       <td>✗</td>
@@ -215,7 +216,7 @@ Organization-level controls and usage visibility.
 </table>
 
 <span id="fn1" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>1</sup> On Google Cloud's Agent Platform, web search is available for Claude 4 models and later.<br />
-<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5 or later, Opus 4.7 or later, and the Fable models. See [Auto mode configuration](/docs/en/auto-mode-config). For the permission mode a session on these providers starts in, see [Which mode a session starts in](/docs/en/permission-modes#which-mode-a-session-starts-in). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
+<span id="fn2" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>2</sup> On these providers, auto mode supports only Claude Sonnet 5 or later, Opus 4.7 or later, Haiku 5.5, and the Fable models. See [Auto mode configuration](/docs/en/auto-mode-config). For the permission mode a session on these providers starts in, see [Which mode a session starts in](/docs/en/permission-modes#which-mode-a-session-starts-in). In v2.1.158 through v2.1.206, auto mode on these providers also required setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`; v2.1.207 removed the requirement.<br />
 <span id="fn3" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>3</sup> Subject to your agreement with the cloud provider.<br />
 <span id="fn4" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>4</sup> Dashboard and API only. [Contribution metrics](/docs/en/analytics#enable-contribution-metrics) requires a claude.ai Team or Enterprise organization.<br />
 <span id="fn5" style={{display: 'block', position: 'relative', top: '-120px'}} /><sup>5</sup> Requires Claude Code v2.1.224 or later on macOS and Linux, including Linux inside WSL 2. On native Windows, requires Claude Code v2.1.234 or later. With API key authentication, messaging is same-machine only. On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, messaging is same-machine only and requires Claude Code v2.1.248 or later. Claude can find your [cloud sessions](/docs/en/claude-code-on-the-web) and your sessions on other machines only from a session that is connected to [Remote Control](/docs/en/remote-control). To connect, you need a claude.ai sign-in and the other [Remote Control requirements](/docs/en/remote-control#requirements). See [Message sessions on other machines](/docs/en/cross-session-messaging#message-sessions-on-other-machines).
@@ -237,7 +238,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](/docs/en/desktop): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-    * [Auto mode](/docs/en/auto-mode-config): Sonnet 5 or later, Opus 4.7 or later, and Fable models only
+    * [Auto mode](/docs/en/auto-mode-config): Sonnet 5 or later, Opus 4.7 or later, Haiku 5.5, and Fable models only
     * [Cross-session messaging](/docs/en/cross-session-messaging): between your sessions on this machine only <sup><a href="#fn5">5</a></sup>
     * [Zero Data Retention](/docs/en/zero-data-retention): subject to your AWS agreement
 
@@ -263,7 +264,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
 
     * [Desktop](/docs/en/desktop): via [managed settings](https://claude.com/docs/third-party/claude-desktop/configuration) or [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
     * [Web search](/docs/en/tools-reference#websearch-tool-behavior): Claude 4 models and later
-    * [Auto mode](/docs/en/auto-mode-config): Sonnet 5 or later, Opus 4.7 or later, and Fable models only
+    * [Auto mode](/docs/en/auto-mode-config): Sonnet 5 or later, Opus 4.7 or later, Haiku 5.5, and Fable models only
     * [Cross-session messaging](/docs/en/cross-session-messaging): between your sessions on this machine only <sup><a href="#fn5">5</a></sup>
     * [Zero Data Retention](/docs/en/zero-data-retention): subject to your Google Cloud agreement
 
@@ -276,8 +277,7 @@ Each tab lists what is unavailable or partially supported on that provider, with
     **Partial support:**
 
     * [Desktop](/docs/en/desktop): only via [Claude Desktop on 3P](https://claude.com/docs/third-party/claude-desktop/overview)
-    * [Web search](/docs/en/tools-reference#websearch-tool-behavior): [deployments hosted on Anthropic](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry#hosting-options) only
-    * [Auto mode](/docs/en/auto-mode-config): Sonnet 5 or later, Opus 4.7 or later, and Fable models only
+    * [Auto mode](/docs/en/auto-mode-config): Sonnet 5 or later, Opus 4.7 or later, Haiku 5.5, and Fable models only
     * [Cross-session messaging](/docs/en/cross-session-messaging): between your sessions on this machine only <sup><a href="#fn5">5</a></sup>
     * [Zero Data Retention](/docs/en/zero-data-retention): subject to your Azure agreement
 
@@ -287,13 +287,15 @@ Each tab lists what is unavailable or partially supported on that provider, with
   <Tab title="Anthropic Console">
     **Not available:** all [features that require a Claude subscription](#features-that-require-a-claude-subscription).
 
-    Everything in [CLI capabilities that vary by provider](#cli-capabilities-that-vary-by-provider) is available, except that [fast mode](/docs/en/fast-mode) requires [provisioned access](/docs/en/fast-mode#enable-fast-mode-for-your-organization). [Server-managed settings](/docs/en/server-managed-settings) are also available when your API key belongs to a Team or Enterprise organization.
+    Everything in [CLI capabilities that vary by provider](#cli-capabilities-that-vary-by-provider) is available, except that [fast mode](/docs/en/fast-mode) requires [provisioned access](/docs/en/fast-mode#enable-fast-mode-for-your-organization). [Server-managed settings](/docs/en/server-managed-settings) that you configure in a claude.ai Team or Enterprise organization don't reach a session that authenticates with a Console API key. See [Platform availability](/docs/en/server-managed-settings#platform-availability) for how to cover those sessions.
   </Tab>
 </Tabs>
 
 ## Availability by subscription plan
 
 If you authenticate through Amazon Bedrock, Google Cloud's Agent Platform, Microsoft Foundry, or an Anthropic Console API key, this section does not apply to you. When you sign in with a claude.ai account, your plan determines which of the features below are available.
+
+In Enterprise organizations with the [HIPAA configuration](/docs/en/hipaa-setup) applied, some features in this table are turned off.
 
 | Feature | Pro | Max | Team | Enterprise |
 | :- | :- | :- | :- | :- |

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/costs
-fetched_at: 2026-10-05T06:27:11.457426+00:00
+fetched_at: 2026-10-12T06:49:42.517594+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Claude Code charges by API token consumption. For subscription plan pricing (Pro
 
 Across enterprise deployments, the average cost is around \$13 per developer per active day and \$150-250 per developer per month, with costs remaining below \$30 per active day for 90% of users. To estimate spend for your own team, start with a small pilot group and use the tracking tools below to establish a baseline before wider rollout.
 
-This page covers how to [track your costs](#track-your-costs), [manage costs for your organization](#manage-costs-for-your-organization), and [reduce token usage](#reduce-token-usage).
+This page covers Claude Code usage only: how to [track your costs](#track-your-costs), [manage costs for your organization](#manage-costs-for-your-organization), and [reduce token usage](#reduce-token-usage). For usage limits in other Claude products, see the [Claude Help Center](https://support.claude.com).
 
 ## Track your costs
 
@@ -39,7 +39,7 @@ Usage by model:
 
 These totals reset when `/clear` starts a new session, so the next session's total cost starts at \$0. Before v2.1.211, they kept accumulating across `/clear` for the lifetime of the Claude Code process.
 
-For a response from the Claude API billed at the 1.1× [data residency rate](https://platform.claude.com/docs/en/about-claude/pricing#data-residency-pricing), Claude Code multiplies the list price of that response's tokens by 1.1 in the session cost figure. The same total appears in the [status line's cost field](/docs/en/statusline#cost-and-duration-tracking), and the multiplied figure also counts toward [`--max-budget-usd`](/docs/en/cli-reference#cli-flags). Before v2.1.239, Claude Code didn't apply the 1.1× to those responses, so the session cost figure was lower than the bill.
+For a response from the Claude API billed at the 1.1× [data residency rate](https://platform.claude.com/docs/en/about-claude/pricing#data-residency-pricing), Claude Code multiplies the list price of that response's tokens by 1.1 in the session cost figure. The same total appears in the [status line's cost field](/docs/en/statusline#cost-and-duration-tracking), and the multiplied figure also counts toward [`--max-budget-usd`](/docs/en/cli-reference#cli-flags).
 
 #### Prompt cache statistics
 
@@ -83,6 +83,17 @@ When you have a spend limit, the row appears as soon as usage credits are on and
 #### When the usage request fails
 
 When the request for your plan limits fails, most often because the usage endpoint is rate limited, `/usage` shows the last usage bars it loaded on this machine within the past 60 minutes, along with a `Showing last-known usage` note stating how long ago that data was fetched. Press `r` to retry; a successful retry replaces the last-known bars with fresh data. Without a snapshot from the past 60 minutes, `/usage` reports that the usage endpoint is rate limited and offers the same retry shortcut. Before v2.1.208, a rate-limited request in a session that hadn't loaded usage yet always showed the error with no bars.
+
+### Read the token count beside the spinner
+
+While Claude works in the main conversation, the line beside the spinner can end with an elapsed time and a token count, as in `Deciphering… (10m 27s · ↓ 5.5k tokens)`. It is a live, approximate count of the output the current turn has produced so far. The arrow beside the count points down while output arrives or tools run.
+
+* **What it covers**: output the turn generates, such as the text and tool calls Claude streams back, its thinking, and the output of subagents that run in the [foreground](/docs/en/sub-agents#run-subagents-in-foreground-or-background)
+* **What it leaves out**: what Claude Code sends to the model, so your prompt, the conversation history, and the rest of your context don't move it
+* **When it resets**: at the start of each turn, and when Claude Code [compacts the conversation](/docs/en/prompt-caching#compacting-the-conversation)
+* **When it stays hidden**: until output starts arriving, when the row is too narrow to fit it, and in [screen reader mode](/docs/en/accessibility)
+
+It won't match the `Usage by model` output figures in the `/usage` Session block, which add up the whole session rather than one turn. It also differs from the token count [verbose mode adds](/docs/en/statusline#notifications-share-the-status-line-row), because that count measures the size of your context rather than one turn's output.
 
 ### Analyze your usage patterns
 
@@ -232,7 +243,7 @@ The following strategies help you keep context small and reduce per-message cost
 
 Use `/usage` to check your current token usage, or [configure your status line](/docs/en/statusline#context-window-usage) to display it continuously.
 
-* **Clear between tasks**: Use `/clear` to start fresh when switching to unrelated work. Stale context wastes tokens on every subsequent message. Use `/rename` before clearing so you can easily find the session later, then `/resume` to return to it.
+* **Clear between tasks**: Use `/clear` to start fresh when switching to unrelated work. Stale context wastes tokens on every subsequent message. Use `/rename` before clearing so you can find the session later, then `/resume` to return to it.
 * **Add custom compaction instructions**: `/compact Focus on code samples and API usage` tells Claude what to preserve during summarization.
 
 You can also customize compaction behavior in your CLAUDE.md file at the root of your project:
@@ -319,7 +330,7 @@ Your [CLAUDE.md](/docs/en/memory) file is loaded into context at session start. 
 
 Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model.
 
-For simpler tasks where deep reasoning isn't needed, you can reduce costs by lowering the [effort level](/docs/en/model-config#adjust-effort-level) with `/effort` or in `/model`, or by disabling thinking in `/config`. You can't turn off thinking on Opus 5.5, Sonnet 5.5, or the Fable models, which always use extended thinking.
+For simpler tasks where deep reasoning isn't needed, you can reduce costs by lowering the [effort level](/docs/en/model-config#adjust-effort-level) with `/effort` or in `/model`, or by disabling thinking in `/config`. You can't turn off thinking on Opus 5.5, Sonnet 5.5, Haiku 5.5, or the Fable models, which always use extended thinking.
 
 On models with a [fixed thinking budget](/docs/en/model-config#adaptive-reasoning-and-fixed-thinking-budgets), you can also lower the budget by setting the `MAX_THINKING_TOKENS` [environment variable](/docs/en/env-vars), for example `MAX_THINKING_TOKENS=8000`. Adaptive-reasoning models ignore nonzero budgets, so use effort levels there instead.
 
@@ -344,7 +355,7 @@ For longer or more complex work, these habits help avoid wasted tokens from goin
 * **Use plan mode for complex tasks**: Press Shift+Tab to cycle to [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode) before implementation. Claude explores the codebase and proposes an approach for your approval, preventing expensive re-work when the initial direction is wrong.
 * **Course-correct early**: If Claude starts heading the wrong direction, press Escape to stop immediately. Use `/rewind` or double-tap Escape to restore conversation and code to a previous checkpoint.
 * **Give verification targets**: Include test cases, paste screenshots, or define expected output in your prompt. When Claude can verify its own work, it catches issues before you need to request fixes.
-* **Test incrementally**: Write one file, test it, then continue. This catches issues early when they're cheap to fix.
+* **Test incrementally**: Write one file, test it, then continue. This catches issues early.
 
 ## Background token usage
 

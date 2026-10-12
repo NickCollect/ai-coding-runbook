@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/glossary
-fetched_at: 2026-10-05T06:27:11.790806+00:00
+fetched_at: 2026-10-12T06:49:43.272978+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ Learn more: [The `.claude` directory](/docs/en/claude-directory)
 
 A markdown file of persistent instructions you write for Claude, loaded at the start of every session as a user message after the system prompt. Put project conventions, architecture notes, and "always do X" rules here. Project-root CLAUDE.md survives [compaction](#compaction) and is re-read fresh from disk afterward.
 
-You can place CLAUDE.md at project scope in `./CLAUDE.md` or `./.claude/CLAUDE.md`, at user scope in `~/.claude/CLAUDE.md`, or as [managed policy](#managed-settings) for your organization. All discovered files are concatenated into context rather than overriding each other, ordered from broadest scope to most specific. Claude Code can also load a project's [AGENTS.md](#agents-md) files, on their own or alongside CLAUDE.md.
+You can place CLAUDE.md at project scope in `./CLAUDE.md` or `./.claude/CLAUDE.md`, at user scope in `~/.claude/CLAUDE.md`, or as [managed policy](#managed-settings) for your organization. All discovered files are concatenated into context rather than overriding each other, ordered from broadest scope to most specific. Claude Code can also load a project's [AGENTS.md](#agents-md) files in place of CLAUDE.md.
 
 Learn more: [CLAUDE.md files](/docs/en/memory#claude-md-files)
 
@@ -150,7 +150,7 @@ Learn more: [Sessions from Dispatch](/docs/en/desktop#sessions-from-dispatch)
 
 ### Effort level
 
-A setting that controls adaptive reasoning, which lets the model decide whether and how much to think on each step. Higher effort means more thinking tokens and deeper reasoning; lower effort is faster and cheaper. Effort is supported on Fable models, on Opus 4.6 and later, and on Sonnet 4.6 and later.
+A setting that controls adaptive reasoning, which lets the model decide whether and how much to think on each step. Higher effort means more thinking tokens and deeper reasoning; lower effort is faster and cheaper. Effort is supported on Fable models, on Opus 4.6 and later, on Sonnet 4.6 and later, and on Haiku 5.5.
 
 Learn more: [Adjust effort level](/docs/en/model-config#adjust-effort-level)
 
@@ -220,7 +220,7 @@ Learn more: [Run Claude Code programmatically](/docs/en/headless)
 
 ### Output style
 
-A configuration that changes the instructions Claude Code gives Claude, to set response behavior, tone, or format. Unlike [CLAUDE.md](#claude-md), which adds project context alongside Claude Code's default instructions, a custom output style can replace the default software engineering instructions.
+A configuration that changes the instructions Claude Code gives Claude, to set response behavior, tone, or format. Unlike [CLAUDE.md](#claude-md), which adds project context alongside Claude Code's default instructions, a custom output style adds its own instructions and can leave out the default software engineering instructions.
 
 Learn more: [Output styles](/docs/en/output-styles)
 
@@ -294,7 +294,7 @@ Learn more: [Work with sessions](/docs/en/how-claude-code-works#work-with-sessio
 
 ### Settings layers
 
-The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), command-line arguments, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones. See [Settings precedence](/docs/en/settings#settings-precedence).
+The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), settings you pass with the `--settings` flag, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones. See [Settings precedence](/docs/en/settings#settings-precedence).
 
 Learn more: [Settings files](/docs/en/settings#where-settings-live)
 
@@ -349,7 +349,7 @@ Learn more: [Context Claude Code adds outside the system prompt](/docs/en/agent-
 
 A command, `/teleport`, that pulls a cloud Claude Code session into your local terminal. Claude fetches the branch, loads the conversation history, and resumes from the cloud session's last state. The reverse direction is `--cloud`, which sends a local task to run in the cloud.
 
-Learn more: [From cloud to terminal](/docs/en/claude-code-on-the-web#from-cloud-to-terminal)
+Learn more: [Continue a cloud session in your terminal](/docs/en/claude-code-on-the-web#from-cloud-to-terminal)
 
 ### Tool
 
@@ -373,7 +373,7 @@ Learn more: [How Claude Code works](/docs/en/how-claude-code-works#the-agentic-l
 
 ### Verification loop
 
-How a session knows the work is actually done rather than just plausible. You give Claude a check it can run, such as a test suite, a build, or a screenshot comparison, and Claude iterates until the check passes instead of stopping after one attempt. A verification loop is the prerequisite for [`/goal`](/docs/en/goal), unattended runs, and [dynamic workflows](/docs/en/workflows): without one, the only thing deciding the agent is finished is the agent itself.
+How a session knows the work is actually done instead of accepting a result that looks plausible. You give Claude a check it can run, such as a test suite, a build, or a screenshot comparison, and Claude iterates until the check passes instead of stopping after one attempt. A verification loop is the prerequisite for [`/goal`](/docs/en/goal), unattended runs, and [dynamic workflows](/docs/en/workflows): without one, the only thing deciding the agent is finished is the agent itself.
 
 Learn more: [Give Claude a way to verify its work](/docs/en/best-practices#give-claude-a-way-to-verify-its-work)
 
@@ -381,7 +381,7 @@ Learn more: [Give Claude a way to verify its work](/docs/en/best-practices#give-
 
 ### Worktree isolation
 
-An isolation mode that runs Claude in a separate git worktree under `.claude/worktrees/`, enabled with the `-w` flag or `isolation: worktree` in subagent config. Changes stay on a separate branch in a separate directory, so parallel agents don't overwrite each other's files.
+An isolation mode that runs Claude in a separate git worktree under `.claude/worktrees/`, enabled with the `-w` flag or `isolation: worktree` in subagent config. Changes stay on a separate branch in a separate directory, so parallel agents each edit their own copy of the files.
 
 Learn more: [Run parallel sessions with git worktrees](/docs/en/worktrees)
 

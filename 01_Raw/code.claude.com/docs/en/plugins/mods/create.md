@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/create
-fetched_at: 2026-10-05T06:27:12.392958+00:00
+fetched_at: 2026-10-12T06:49:44.856259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ A mod is a Claude Code [plugin](/docs/en/plugins/overview) with an entry file, c
 If you haven't decided whether a mod is the right tool, read the [comparison on the overview](/docs/en/plugins/mods/overview#compare-mods-settings-hooks-skills-and-mcp-servers) first.
 
 <Note>
-  Mods require Claude Code v2.1.287 or later. In your shell, run `claude --version` to check. To see whether mods can load for you, see [Check whether mods can load](/docs/en/plugins/mods/troubleshoot#check-whether-mods-can-load).
+  Use Claude Code v2.1.287 or later. In your shell, run `claude --version` to check. To see whether mods can load for you, see [Check whether mods can load](/docs/en/plugins/mods/troubleshoot#check-whether-mods-can-load).
 </Note>
 
 ## Ask Claude for a mod
@@ -275,7 +275,7 @@ Files Claude saves during its turn reload when the turn ends, so you can try `/t
   Get type definitions for your version
 </h3>
 
-Each time Claude Code loads or reloads a mod from a directory you pass to `--plugin-dir`, or a mod [Claude wrote for you](#ask-claude-for-a-mod), it writes TypeScript declaration files, ending in `.d.ts`, into `.claude-plugin/types/` inside the mod's directory. They describe the exact events, mods API methods, and elements in the Claude Code version you're running, so your editor can autocomplete and type-check your hooks. To browse the declarations online, read [`mods/types/claude-code.d.ts`](https://github.com/anthropics/claude-code/blob/main/mods/types/claude-code.d.ts) in the Claude Code repository, whose first line names the version that wrote it. The directory holds these files:
+When Claude Code loads a mod from `--plugin-dir` in an interactive session, or a mod [Claude wrote for you](#ask-claude-for-a-mod), it writes TypeScript declaration files into the mod's `.claude-plugin/types/` directory. They describe the exact events, mods API methods, and elements in the Claude Code version you're running, so your editor can autocomplete and type-check your hooks. The directory holds these files:
 
 | Path | What it declares |
 | :- | :- |
@@ -308,7 +308,7 @@ For `first-mod`, the output includes these lines.
 ✔ Validation passed
 ```
 
-The `hooks:` line lists the events your module hooks, each with its filter in braces. The `calls:` line lists every mods API method it calls. A module that reads or sets environment variables also gets `env reads:` and `env writes:` lines, and one that uses [`$.state`](/docs/en/plugins/mods/interface#keep-state) gets `state reads:` and `state writes:`.
+Check the `hooks:` line for the events your module hooks, each with its filter in braces, and `calls:` for every mods API method it calls. If your module reads or sets environment variables, look for `env reads:` and `env writes:` lines too, and `state reads:` and `state writes:` if it uses [`$.state`](/docs/en/plugins/mods/interface#keep-state). You also see one line for each hook that can refuse an action, such as `gating hook without .catch: tool.call`, which says whether that hook has a [`.catch` handler](/docs/en/plugins/mods/events#handle-a-hook-that-fails).
 
 If an event you meant to handle is missing from the first line, Claude Code won't call that hook either. The usual cause is a misspelled event name, which the command reports as an error such as `"tool.calls" is not an event`.
 
