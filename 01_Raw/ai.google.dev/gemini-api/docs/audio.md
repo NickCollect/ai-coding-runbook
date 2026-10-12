@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=zh-TW
-fetched_at: 2026-10-05T06:39:24.472668+00:00
-title: "\u97f3\u8a0a\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=id
+fetched_at: 2026-10-12T06:55:27.140081+00:00
+title: "Pemahaman audio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-提供意見
+Kirim masukan
 
-# 音訊理解
+# Pemahaman audio
 
-Gemini 可以分析音訊輸入內容，並生成文字回覆。
+Gemini dapat menganalisis input audio dan menghasilkan respons teks.
 
 ### Python
 
@@ -190,23 +190,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 總覽
+## Ringkasan
 
-Gemini 可以分析及理解音訊輸入內容，並生成文字回覆，
-適用於以下情境：
+Gemini dapat menganalisis dan memahami input audio serta menghasilkan respons teks, sehingga memungkinkan kasus penggunaan seperti:
 
-- 描述、摘要或回答音訊內容相關問題
-- 轉錄和翻譯 (語音轉文字)
-- 說話者分段標記 (辨識不同說話者)
-- 偵測語音和音樂中的情緒
-- 分析特定時間戳記的片段
+- Mendeskripsikan, meringkas, atau menjawab pertanyaan tentang konten audio
+- Transkripsi dan terjemahan (speech to text)
+- Diarisasi pembicara (mengidentifikasi pembicara yang berbeda)
+- Deteksi emosi dalam ucapan dan musik
+- Menganalisis segmen tertentu dengan stempel waktu
 
-如要進行即時語音和視訊互動，請參閱 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw)。
-如要使用支援即時轉錄的專用語音轉文字模型，請使用 [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=zh-tw)。
+Untuk interaksi suara dan video real-time, lihat
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=id).
+Untuk model speech-to-text khusus dengan dukungan untuk transkripsi real-time,
+gunakan [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=id).
 
-## 將語音轉錄為文字
+## Mentranskripsikan ucapan menjadi teks
 
-這個範例說明如何使用[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)，轉錄、翻譯語音內容並產生摘要，同時提供時間戳記、說話者區分和情緒偵測結果。
+Contoh ini menunjukkan cara mentranskripsikan, menerjemahkan, dan meringkas ucapan dengan
+stempel waktu, diarisasi pembicara, dan deteksi emosi menggunakan
+[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id).
 
 ### Python
 
@@ -540,18 +543,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![支援多種語言的語音轉錄 Gemini 應用程式](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=zh-tw)
+![Aplikasi Gemini transkripsi audio multibahasa](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=id)
 
-## 輸入音訊
+## Input audio
 
-你可以透過下列方式提供音訊資料：
+Anda dapat memberikan data audio dengan cara berikut:
 
-- 請先[上傳音訊檔案](#upload-audio)，再提出要求。
-- 在要求中[傳遞內嵌音訊資料](#inline-audio)。
+- [Upload file audio](#upload-audio) sebelum membuat permintaan.
+- [Teruskan data audio inline](#inline-audio) dengan permintaan.
 
-### 上傳音訊檔案
+### Mengupload file audio
 
-如要上傳超過 20 MB 的檔案，請使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
+Gunakan [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id) untuk file yang berukuran lebih besar dari 20 MB.
 
 ### Python
 
@@ -724,9 +727,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 內嵌傳遞音訊資料
+### Meneruskan data audio inline
 
-如要上傳總大小小於 20 MB 的小型音訊檔案：
+Untuk file audio kecil dengan ukuran total permintaan di bawah 20 MB:
 
 ### Python
 
@@ -907,13 +910,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-內嵌音訊資料注意事項：
-\* 要求大小上限為 20 MB (包括提示和所有檔案)
-\* 如要重複使用，請[上傳檔案](#upload-audio)
+Catatan tentang data audio inline:
+\* Ukuran permintaan maksimum adalah total 20 MB (termasuk perintah dan semua file)
+\* Untuk penggunaan ulang, [upload file](#upload-audio) saja
 
-## 取得轉錄稿
+## Mendapatkan transkrip
 
-如要取得轉錄稿，請在提示中要求：
+Untuk mendapatkan transkrip, minta di perintah:
 
 ### Python
 
@@ -1049,9 +1052,9 @@ func main() {
 }
 ```
 
-## 參閱時間戳記
+## Merujuk ke stempel waktu
 
-使用 `MM:SS` 格式參照特定章節：
+Gunakan format `MM:SS` untuk merujuk bagian tertentu:
 
 ### Python
 
@@ -1182,9 +1185,9 @@ func main() {
 }
 ```
 
-## 計算詞元數
+## Menghitung token
 
-計算音訊檔案中的權杖數：
+Menghitung token dalam file audio:
 
 ### Python
 
@@ -1279,9 +1282,9 @@ func main() {
 }
 ```
 
-## 支援的音訊格式
+## Format audio yang didukung
 
-Gemini 支援下列音訊格式 MIME 類型：
+Gemini mendukung jenis MIME format audio berikut:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
@@ -1297,30 +1300,30 @@ Gemini 支援下列音訊格式 MIME 類型：
 - MULAW - `audio/mulaw`
 - WebM - `audio/webm`
 
-如需支援的 MIME 類型和參數結構定義完整清單，請參閱 [Interactions API 參考資料](https://ai.google.dev/api/interactions-api?hl=zh-tw#Resource:Content)。
+Untuk mengetahui daftar lengkap jenis MIME dan skema parameter yang didukung, lihat [Referensi Interactions API](https://ai.google.dev/api/interactions-api?hl=id#Resource:Content).
 
-## 音訊技術詳細資料
+## Detail teknis tentang audio
 
-- **詞元**：每秒音訊 32 個詞元 (1 分鐘 = 1,920 個詞元)
-- **非語音**：Gemini 可辨識非語音的聲音 (鳥鳴、警笛聲等)
-- **長度上限**：每個提示的音訊長度為 9.5 小時
-- **解析度**：降採樣至 16 Kbps
-- **聲道**：將多個聲道合併為單一聲道
+- **Token**: 32 token per detik audio (1 menit = 1.920 token)
+- **Non-ucapan**: Gemini memahami suara non-ucapan (kicauan burung, sirene, dll.)
+- **Panjang maksimum**: 9,5 jam audio per perintah
+- **Resolusi**: Di-downsample menjadi 16 Kbps
+- **Saluran**: Audio multi-saluran digabungkan ke satu saluran
 
-## 後續步驟
+## Langkah berikutnya
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：上傳及管理音訊檔案
-- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
-  自訂模型行為
-- [結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)：
-  以 JSON 格式取得轉錄結果
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id): Mengupload dan mengelola file audio
+- [Petunjuk sistem](https://ai.google.dev/gemini-api/docs/text-generation?hl=id#system-instructions):
+  Menyesuaikan perilaku model
+- [Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id):
+  Mendapatkan hasil transkripsi dalam format JSON
 
-提供意見
+Kirim masukan
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-上次更新時間：2026-09-24 (世界標準時間)。
+Terakhir diperbarui pada 2026-09-24 UTC.
 
-想進一步說明嗎？
+Ada masukan untuk kami?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]

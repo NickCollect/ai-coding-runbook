@@ -1,46 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=th
-fetched_at: 2026-10-05T06:40:16.783444+00:00
-title: "\u0e01\u0e32\u0e23\u0e27\u0e34\u0e40\u0e04\u0e23\u0e32\u0e30\u0e2b\u0e4c\u0e01\u0e32\u0e23\u0e2a\u0e19\u0e31\u0e1a\u0e2a\u0e19\u0e38\u0e19\u0e25\u0e39\u0e01\u0e04\u0e49\u0e32\u0e14\u0e49\u0e27\u0e22 Gemini \u0e41\u0e25\u0e30 CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=ar
+fetched_at: 2026-10-12T07:10:14.424743+00:00
+title: "\u062a\u062d\u0644\u064a\u0644 \u062f\u0639\u0645 \u0627\u0644\u0639\u0645\u0644\u0627\u0621 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini \u0648CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-ส่งความคิดเห็น
+إرسال ملاحظات
 
-# การวิเคราะห์การสนับสนุนลูกค้าด้วย Gemini และ CrewAI
+# تحليل دعم العملاء باستخدام Gemini وCrewAI
 
-[CrewAI](https://docs.crewai.com/introduction) เป็นเฟรมเวิร์กสำหรับการจัดระเบียบ
-AI Agent แบบอัตโนมัติที่ทำงานร่วมกันเพื่อให้บรรลุเป้าหมายที่ซับซ้อน โดยจะช่วยให้คุณ
-กำหนด Agent ได้ด้วยการระบุบทบาท เป้าหมาย และเรื่องราวเบื้องหลัง จากนั้นจึงกำหนดงาน
-สำหรับ Agent เหล่านั้น
+‫[CrewAI](https://docs.crewai.com/introduction) هو إطار عمل لتنظيم
+وكلاء الذكاء الاصطناعي المستقلين الذين يتعاونون لتحقيق أهداف معقّدة. يتيح لك
+تحديد الوكلاء من خلال تحديد الأدوار والأهداف والقصص الخلفية، ثم تحديد المهام
+لهم.
 
-ตัวอย่างนี้แสดงวิธีสร้างระบบหลายเอเจนต์เพื่อวิเคราะห์ข้อมูลการสนับสนุนลูกค้าเพื่อระบุปัญหาและเสนอการปรับปรุงกระบวนการโดยใช้ Gemini 3 Flash ซึ่งจะสร้างรายงานที่ออกแบบมาให้ประธานเจ้าหน้าที่ฝ่ายปฏิบัติการ (COO) อ่าน
+يوضّح هذا المثال كيفية إنشاء نظام متعدّد الوكلاء لتحليل بيانات دعم العملاء بهدف تحديد المشاكل واقتراح تحسينات على العمليات باستخدام Gemini 3 Flash، ما يؤدي إلى إنشاء تقرير مخصّص ليقرأه رئيس العمليات (COO).
 
-คู่มือนี้จะแสดงวิธีสร้าง "ทีม" ของ AI Agent ที่สามารถทำงานต่อไปนี้ได้
+سيوضّح لك الدليل كيفية إنشاء "طاقم عمل" من وكلاء الذكاء الاصطناعي الذين يمكنهم تنفيذ المهام التالية:
 
-1. ดึงและวิเคราะห์ข้อมูลการสนับสนุนลูกค้า (จำลองในตัวอย่างนี้)
-2. ระบุปัญหาที่เกิดซ้ำและคอขวดของกระบวนการ
-3. แนะนำการปรับปรุงที่นำไปใช้ได้จริง
-4. รวบรวมผลการวิจัยเป็นรายงานที่กระชับซึ่งเหมาะสำหรับ COO
+1. جلب بيانات دعم العملاء وتحليلها (محاكاة في هذا المثال)
+2. تحديد المشاكل المتكرّرة والاختناقات في العمليات
+3. اقتراح تحسينات قابلة للتنفيذ
+4. تجميع النتائج في تقرير موجز مناسب لرئيس العمليات
 
-คุณต้องมีคีย์ Gemini API หากยังไม่มี คุณสามารถ[รับได้ใน
-Google AI Studio](https://aistudio.google.com/apikey?hl=th)
+تحتاج إلى مفتاح Gemini API. إذا لم يكن لديك مفتاح، يمكنك [الحصول عليه في
+Google AI Studio](https://aistudio.google.com/apikey?hl=ar).
 
 ```
 pip install "crewai[tools]"
 ```
 
-ตั้งค่าคีย์ Gemini API เป็นตัวแปรสภาพแวดล้อมชื่อ `GEMINI_API_KEY` จากนั้น
-กำหนดค่า CrewAI ให้ใช้โมเดล Gemini
+عليك ضبط مفتاح Gemini API كمتغيّر بيئة باسم `GEMINI_API_KEY`، ثم ضبط CrewAI لاستخدام نموذج Gemini.
 
 ```
 import os
@@ -55,15 +54,14 @@ gemini_llm = LLM(
 )
 ```
 
-## กำหนดคอมโพเนนต์
+## تحديد المكوّنات
 
-สร้างแอปพลิเคชัน CrewAI โดยใช้**เครื่องมือ** **เอเจนต์** **งาน** และ**ทีม**เอง ส่วนต่อไปนี้จะอธิบายแต่ละองค์ประกอบเหล่านี้
+يمكنك إنشاء تطبيقات CrewAI باستخدام **الأدوات** و**الوكلاء** و**المهام** و
+**طاقم العمل** نفسه. توضّح الأقسام التالية كل مكوّن من هذه المكوّنات.
 
-### เครื่องมือ
+### الأدوات
 
-เครื่องมือคือความสามารถที่เอเจนต์ใช้โต้ตอบกับโลกภายนอกหรือ
-ดำเนินการบางอย่างได้ ในที่นี้ คุณจะกำหนดเครื่องมือตัวยึดตำแหน่งเพื่อจำลอง
-การดึงข้อมูลการสนับสนุนลูกค้า ในแอปพลิเคชันจริง คุณจะต้องเชื่อมต่อกับฐานข้อมูล, API หรือระบบไฟล์ ดูข้อมูลเพิ่มเติมเกี่ยวกับเครื่องมือได้ที่[คู่มือเครื่องมือ CrewAI](https://docs.crewai.com/concepts/tools)
+الأدوات هي إمكانات يمكن للوكلاء استخدامها للتفاعل مع العالم الخارجي أو تنفيذ إجراءات معيّنة. هنا، يمكنك تحديد أداة عنصر نائب لمحاكاة جلب بيانات دعم العملاء. في تطبيق حقيقي، يمكنك الاتصال بقاعدة بيانات أو واجهة برمجة تطبيقات أو نظام ملفات. لمزيد من المعلومات عن الأدوات، يُرجى الاطّلاع على دليل أدوات [CrewAI](https://docs.crewai.com/concepts/tools).
 
 ```
 from crewai.tools import BaseTool
@@ -93,9 +91,11 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### ตัวแทน
+### الوكلاء
 
-เอเจนต์คือผู้ปฏิบัติงาน AI แต่ละคนในทีมของคุณ Agent แต่ละรายจะมี `role`, `goal`, `backstory`, `llm` ที่กำหนด และ `tools` ที่ไม่บังคับ ดูข้อมูลเพิ่มเติมเกี่ยวกับตัวแทนได้ที่[คู่มือตัวแทน CrewAI](https://docs.crewai.com/concepts/agents)
+الوكلاء هم العاملون الفرديون في مجال الذكاء الاصطناعي في طاقم عملك. لكل وكيل
+معيّن`role` و`goal` و`backstory` و`llm` معيّن و`tools` اختيارية. لمزيد من
+المعلومات عن الوكلاء، يُرجى الاطّلاع على دليل[وكلاء CrewAI](https://docs.crewai.com/concepts/agents).
 
 ```
 from crewai import Agent
@@ -142,9 +142,12 @@ report_writer = Agent(
 )
 ```
 
-### งาน
+### مهام Google
 
-งานจะกำหนดการมอบหมายที่เฉพาะเจาะจงสำหรับตัวแทน แต่ละงานจะมี`description` `expected_output` และมอบหมายให้`agent` โดยค่าเริ่มต้น ระบบจะเรียกใช้งานตามลำดับและรวมบริบทของงานก่อนหน้า ดูข้อมูลเพิ่มเติมเกี่ยวกับงานได้ที่[คู่มือเกี่ยวกับงานของ CrewAI](https://docs.crewai.com/concepts/tasks)
+تحدّد المهام التعيينات المحدّدة للوكلاء. لكل مهمة
+`description` و`expected_output` ويتم تعيينها إلى `agent`. يتم تنفيذ المهام بالتسلسل تلقائيًا وتتضمّن سياق المهمة السابقة. لمزيد من
+المعلومات عن المهام، يُرجى الاطّلاع على دليل مهام [CrewAI
+guide](https://docs.crewai.com/concepts/tasks).
 
 ```
 from crewai import Task
@@ -203,10 +206,10 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### ทีมงาน
+### طاقم العمل
 
-`Crew`จะเชื่อมต่อ Agent และงานเข้าด้วยกันเพื่อกำหนดกระบวนการเวิร์กโฟลว์
-(เช่น "ตามลำดับ")
+يجمع `Crew` بين الوكلاء والمهام، ويحدّد سير عمل العملية
+(مثل "متسلسل").
 
 ```
 from crewai import Crew, Process
@@ -219,9 +222,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## Run the crew
+## تشغيل طاقم العمل
 
-สุดท้าย ให้เริ่มการทำงานของทีมด้วยข้อมูลที่จำเป็น
+أخيرًا، يمكنك بدء تنفيذ طاقم العمل باستخدام أي مدخلات ضرورية.
 
 ```
 # Start the crew's work
@@ -235,19 +238,18 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-ตอนนี้สคริปต์จะทำงาน `Data Analyst` จะใช้เครื่องมือนี้ `Process
-Optimizer` จะวิเคราะห์ผลลัพธ์ และ `Report Writer` จะรวบรวม
-รายงานสุดท้าย ซึ่งจะพิมพ์ลงในคอนโซล `verbose=True` การตั้งค่า
-จะแสดงกระบวนการคิดและการดำเนินการโดยละเอียดของเอเจนต์แต่ละราย
+سيتم الآن تنفيذ النص البرمجي. سيستخدم `Data Analyst` الأداة، وسيحلّل `Process
+Optimizer` النتائج، وسيجمع `Report Writer`
+التقرير النهائي، الذي تتم طباعته بعد ذلك في وحدة التحكّم. سيؤدي الإعداد `verbose=True` إلى عرض عملية التفكير والإجراءات التفصيلية لكل وكيل.
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับ CrewAI ได้ที่[ข้อมูลเบื้องต้นเกี่ยวกับ CrewAI](https://docs.crewai.com/introduction)
+لمزيد من المعلومات عن CrewAI، يُرجى الاطّلاع على [مقدّمة عن CrewAI](https://docs.crewai.com/introduction).
 
-ส่งความคิดเห็น
+إرسال ملاحظات
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-อัปเดตล่าสุด 2026-09-12 UTC
+تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,40 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=vi
-fetched_at: 2026-10-05T06:28:09.084648+00:00
-title: "T\u1ea1o h\u00ecnh \u1ea3nh b\u1eb1ng Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=th
+fetched_at: 2026-10-12T07:06:29.721663+00:00
+title: "\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e23\u0e39\u0e1b\u0e20\u0e32\u0e1e\u0e42\u0e14\u0e22\u0e43\u0e0a\u0e49 Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-# Tạo hình ảnh bằng Imagen
+# สร้างรูปภาพโดยใช้ Imagen
 
-Imagen là mô hình tạo hình ảnh cũ của Google. Công cụ này hiện đã ngừng hoạt động và không còn trong Gemini API nữa.
+Imagen เป็นโมเดลการสร้างรูปภาพรุ่นเดิมของ Google ตอนนี้เราได้ปิดตัวลงแล้ว
+และจะไม่พร้อมใช้งานใน Gemini API อีกต่อไป
 
-## Di chuyển sang Nano Banana
+## ย้ายไปใช้ Nano Banana
 
-Chuyển sang dùng Nano Banana để tạo hình ảnh:
+ย้ายข้อมูลไปยัง Nano Banana เพื่อสร้างรูปภาพ
 
-- **Tên mô hình**: Sử dụng `gemini-2.5-flash-image` (hoặc các mô hình Nano Banana 2 như `gemini-3.1-flash-image`) thay vì tên mô hình Imagen.
-- **Phương thức**: Sử dụng `client.models.generate_content` thay vì `client.models.generate_images`.
-- **Xử lý phản hồi**: Nano Banana trả về các phần nội dung chứa dữ liệu hình ảnh thay vì một đối tượng phản hồi hình ảnh cụ thể.
+- **ชื่อโมเดล**: ใช้ `gemini-2.5-flash-image` (หรือโมเดล Nano Banana 2 เช่น `gemini-3.1-flash-image`) แทนชื่อโมเดล Imagen
+- **วิธีการ**: ใช้ `client.models.generate_content` แทน
+  `client.models.generate_images`
+- **การจัดการการตอบกลับ**: Nano Banana จะแสดงผลชิ้นส่วนเนื้อหาที่มีข้อมูลรูปภาพ
+  แทนออบเจ็กต์การตอบกลับรูปภาพที่เฉพาะเจาะจง
 
-Hãy xem [Hướng dẫn tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để biết thông tin chi tiết và ví dụ.
+ดูรายละเอียดและตัวอย่างได้ที่[คำแนะนำการสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Cập nhật lần gần đây nhất: 2026-09-18 UTC.
+อัปเดตล่าสุด 2026-09-18 UTC
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-18 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-18 UTC"],[],[]]

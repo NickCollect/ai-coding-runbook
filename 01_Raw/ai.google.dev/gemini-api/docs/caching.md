@@ -1,55 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=pl
-fetched_at: 2026-10-05T06:39:37.159098+00:00
-title: "Buforowanie kontekstu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=he
+fetched_at: 2026-10-12T07:05:53.807123+00:00
+title: "\u05e9\u05de\u05d9\u05e8\u05d4 \u05d1\u05de\u05d8\u05de\u05d5\u05df \u05e9\u05dc \u05d4\u05e7\u05e9\u05e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Prześlij opinię
+שליחת משוב
 
-# Buforowanie kontekstu
+# שמירה במטמון של הקשר
 
-W typowym procesie AI możesz wielokrotnie przekazywać te same tokeny wejściowe do modelu. Interfejs Gemini API oferuje niejawne buforowanie, które optymalizuje wydajność i koszty.
+בתהליך עבודה טיפוסי של AI, יכול להיות שתעבירו את אותם אסימוני קלט שוב ושוב למודל. ‫Gemini API מציע שמירה מובלעת במטמון כדי לשפר את הביצועים ולצמצם עלויות.
 
-## Niejawne buforowanie
+## שמירה מרומזת במטמון
 
-Niejawne buforowanie jest domyślnie włączone w przypadku wszystkich modeli Gemini 2.5 i nowszych. Jest ono
-obsługiwane zarówno w trybie rozmowy ze stanem [(przy użyciu parametru `previous_interaction_id`)](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#multi-turn-conversations)
-i [bezstanowym](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#stateless-conversations).
-Jeśli Twoje żądanie trafi do pamięci podręcznej, automatycznie przekażemy Ci oszczędności. Aby to włączyć, nie musisz nic robić. Minimalna liczba tokenów wejściowych do buforowania kontekstu jest podana w tabeli poniżej dla każdego modelu:
+האפשרות 'שמירת נתונים במטמון באופן מרומז' מופעלת כברירת מחדל בכל המודלים של Gemini 2.5 ומעלה. היא תומכת במצבי שיחה [עם שמירת מצב](https://ai.google.dev/gemini-api/docs/text-generation?hl=he#multi-turn-conversations) (באמצעות `previous_interaction_id`) ובמצבי שיחה [ללא שמירת מצב](https://ai.google.dev/gemini-api/docs/text-generation?hl=he#stateless-conversations).
+אם הבקשה שלכם מגיעה למטמון, אנחנו מעבירים לכם באופן אוטומטי את החיסכון בעלויות. לא צריך לעשות שום דבר כדי להפעיל את התכונה הזו. בטבלה הבאה מפורט מספר הטוקנים המינימלי של הקלט לכל מודל שמאפשר שמירת מטמון של ההקשר:
 
-| Model | Minimalny limit tokenów |
+| מודל | מגבלת טוקנים מינימלית |
 | --- | --- |
-| Gemini 3.8 Flash | 4096 |
-| Gemini 3.7 Flash | 4096 |
-| Gemini 3.6 Flash | 4096 |
-| Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro (wersja testowa) | 4096 |
-| Gemini 2.5 Flash | 2048 |
-| Gemini 2.5 Pro | 2048 |
+| Gemini 3.8 Flash | 4,096 |
+| Gemini 3.6 Flash | 4,096 |
+| ‫Gemini 3.1 Pro Preview | 4,096 |
+| Gemini ‎2.5 Flash | 2,048 |
+| Gemini ‎2.5 Pro | 2,048 |
 
-Aby zwiększyć szansę na trafienie do niejawnej pamięci podręcznej:
+כדי להגדיל את הסיכוי לפגיעה במטמון באופן מרומז:
 
-- Spróbuj umieścić duże i popularne treści na początku prompta.
-- Spróbuj wysyłać żądania z podobnym prefiksem w krótkim czasie.
+- כדאי לנסות להוסיף בתחילת הפרומפט תוכן גדול ונפוץ
+- ניסיון לשלוח בקשות עם קידומת דומה בפרק זמן קצר
 
-Liczbę tokenów, które zostały trafione do pamięci podręcznej, możesz sprawdzić w polu `usage.total_cached_tokens` (Python i JavaScript) obiektu odpowiedzi.
+אפשר לראות את מספר הטוקנים שהיו מציאות במטמון בשדה `usage.total_cached_tokens` (Python ו-JavaScript) של אובייקט התגובה.
 
-Prześlij opinię
+שליחת משוב
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ostatnia aktualizacja: 2026-09-10 UTC.
+עדכון אחרון: 2026-10-09 (שעון UTC).
 
-Chcesz przekazać coś jeszcze?
+רוצה לתת לנו משוב?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-10 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-09 (שעון UTC)."],[],[]]

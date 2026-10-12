@@ -1,63 +1,54 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/voice-replication?hl=pt-BR
-fetched_at: 2026-10-05T06:27:45.827674+00:00
-title: "Replica\u00e7\u00e3o de voz \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/voice-replication?hl=pl
+fetched_at: 2026-10-12T06:58:10.467182+00:00
+title: "Replikacja g\u0142osu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envie comentários
+Prześlij opinię
 
-# Replicação de voz
+# Replikacja głosu
 
-Com a replicação de voz, é possível replicar as características vocais de um falante usando uma pequena amostra de áudio com o endpoint Voices da API Gemini (`POST /v1beta/voices`). A [conversão de texto em voz do Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=pt-br) (`gemini-3.8-flash-tts`) e a [conversão de texto em voz do Gemini 3.8 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=pt-br) (`gemini-3.8-flash-lite-tts`) são compatíveis com a replicação de voz.
+Replikacja głosu umożliwia odtworzenie charakterystyki głosu mówcy na podstawie krótkiej próbki audio za pomocą punktu końcowego Gemini API Voices (`POST /v1beta/voices`). Replikacja głosu jest obsługiwana zarówno przez [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=pl) (`gemini-3.8-flash-tts`), jak i [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=pl) (`gemini-3.8-flash-lite-tts`).
 
-A maneira mais rápida de replicar, verificar o consentimento e testar uma voz replicada é
-com a experiência interativa de **Replicação de voz** no
-[Google AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br). Você pode gravar
-ou fazer upload de clipes de referência e consentimento diretamente no navegador, visualizar a
-voz e copiar o ID `voice_...` resultante diretamente no código do aplicativo.
+Najszybszym sposobem na skopiowanie, sprawdzenie zgody i przesłuchanie skopiowanego głosu jest interaktywna funkcja **Klonowanie głosu** w [Google AI Studio](https://aistudio.google.com/generate-speech?hl=pl). Możesz nagrywać lub przesyłać klipy referencyjne i klipy z prośbą o zgodę bezpośrednio w przeglądarce, wyświetlać podgląd głosu i kopiować uzyskany `voice_...`identyfikator bezpośrednio do kodu aplikacji.
 
-[Testar no Google AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com/generate-speech?hl=pl)
 
-![Fluxo de trabalho de replicação de voz](https://ai.google.dev/static/gemini-api/docs/images/voice-replication-overview.svg?hl=pt-br)
+![Proces replikacji głosu](https://ai.google.dev/static/gemini-api/docs/images/voice-replication-overview.svg?hl=pl)
 
-## Modos de armazenamento com e sem estado
+## Tryby pamięci stanowej i bezstanowej
 
-A replicação de voz oferece suporte a dois modos de armazenamento ao chamar `voices.create`
-(`POST /v1beta/voices`), com o armazenamento com estado ativado por padrão:
+Replikacja głosu obsługuje 2 tryby przechowywania podczas połączeń `voices.create`(`POST /v1beta/voices`), przy czym domyślnie włączone jest przechowywanie stanowe:
 
-- **Armazenamento com estado (`store=True`, padrão recomendado)**: o Google armazena seu perfil de voz verificado no projeto e retorna um `voice_id` (`replicated_voice.id`, como `voice_abc123...`) simples e persistente. Você pode transmitir esse `voice_id` entre solicitações e gerenciá-lo com `voices.list()`, `voices.get()` e `voices.delete()`.
-- **Chaves sem estado gerenciadas pelo cliente (`store=False`, opcional)**: para cargas de trabalho que exigem persistência zero do lado do servidor de perfis biométricos de voz, defina `store=False`. A API retorna um `voice_key` criptografado e independente
-  (`replicated_voice.key`, começando com `voicekey_...`) que seu aplicativo
-  armazena localmente e transmite diretamente em solicitações de síntese.
+- **Pamięć stanowa (`store=True`, zalecana wartość domyślna):** Google przechowuje zweryfikowany profil głosowy w Twoim projekcie i zwraca lekki, trwały identyfikator `voice_id` (`replicated_voice.id`, np. `voice_abc123...`). Możesz przekazywać ten identyfikator `voice_id` w ramach żądań i zarządzać nim za pomocą `voices.list()`, `voices.get()` i `voices.delete()`.
+- **Klucze zarządzane przez klienta bezstanowego (`store=False`, opcjonalnie):** w przypadku obciążeń wymagających zerowej trwałości po stronie serwera w odniesieniu do biometrycznych profili głosowych ustaw wartość `store=False`. Interfejs API zwraca zaszyfrowany, samodzielny `voice_key` (`replicated_voice.key`, zaczynający się od `voicekey_...`), który Twoja aplikacja przechowuje lokalnie i przekazuje bezpośrednio w żądaniach syntezy.
 
-| Modo de armazenamento | Identificador | Limite de projetos | Retenção (TTL) |
+| Tryb przechowywania | Identyfikator | Limit projektów | Przechowywanie (TTL) |
 | --- | --- | --- | --- |
-| **Vozes com estado** (`store=True`) | `voice_...` | **200 vozes por projeto** (compartilhadas entre vozes solicitadas e replicadas) | **1 ano** |
-| **Chaves de voz sem estado** (`store=False`) | `voicekey_...` | Gerenciada pelo cliente | **7 dias** |
+| **Głosy stanowe** (`store=True`) | `voice_...` | **200 głosów na projekt** (wspólnych dla głosów wygenerowanych na podstawie promptów i replikowanych) | **1 rok** |
+| **Klawisze głosowe bezstanowe** (`store=False`) | `voicekey_...` | Zarządzane przez klienta | **7 dni** |
 
-## Requisitos de áudio e consentimento
+## Wymagania dotyczące dźwięku i zgody użytkownika
 
-Cada solicitação de replicação de `CreateVoice` exige duas gravações de áudio de humanos reais do **mesmo falante adulto** (WAV mono de 16 bits e 24 kHz recomendado):
+Każde `CreateVoice`żądanie replikacji wymaga 2 nagranych przez prawdziwych ludzi nagrań dźwiękowych **tego samego dorosłego mówcy** (zalecany format to 24 kHz mono 16-bit WAV):
 
-1. **Áudio de referência (`source_audio`)**: um clipe de 10 a 30 segundos de fala limpa e natural do falante cuja voz você quer replicar.
-2. **Áudio de consentimento (`consent_audio`)**: uma gravação do mesmo locutor recitando claramente a declaração de consentimento obrigatória em um dos [idiomas disponíveis](https://ai.google.dev/gemini-api/docs/voice-replication?hl=pt-br#consent-phrases-by-language) (por exemplo, em inglês):
-   > *"I am the owner of this voice and I consent to Google using this voice to
-   > create a synthetic voice model."*
+1. **Dźwięk referencyjny (`source_audio`):** 10–30-sekundowy klip z czystą, naturalną mową osoby, której głos chcesz sklonować.
+2. **Nagranie dźwiękowe z oświadczeniem o zgodzie (`consent_audio`):** nagranie, na którym ta sama osoba wyraźnie odczytuje obowiązkowe oświadczenie o zgodzie w jednym z [obsługiwanych języków](https://ai.google.dev/gemini-api/docs/voice-replication?hl=pl#consent-phrases-by-language) (np. w języku angielskim):
+   > *„Jestem właścicielem tego głosu i zgadzam się na użycie przez Google tego głosu do utworzenia modelu głosu syntetycznego”.*
 
-## Criar uma voz replicada (padrão com estado)
+## Tworzenie replikowanego głosu (domyślny stanowy)
 
-Use o SDK GenAI do Google (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) ou a API REST
-com `store=True` para criar e salvar um perfil de voz replicado no seu projeto:
+Użyj pakietu Google GenAI SDK (`google-genai` 2.25.0 lub nowszego / `@google/genai` 2.24.0 lub nowszego) lub interfejsu REST API z `store=True`, aby utworzyć i zapisać w projekcie zreplikowany profil głosu:
 
 ### Python
 
@@ -160,9 +151,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }"
 ```
 
-## Sintetizar a fala com sua voz replicada
+## Syntezowanie mowy za pomocą sklonowanego głosu
 
-Transmita o `id` (`voice_...`) retornado na sua solicitação de síntese:
+Przekaż zwrócony znak `id` (`voice_...`) w żądaniu syntezy:
 
 ### Python
 
@@ -261,9 +252,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-## Gerenciar vozes replicadas armazenadas
+## Zarządzanie przechowywanymi replikami głosu
 
-Quando criadas com `store=True`, as vozes replicadas podem ser listadas, filtradas, inspecionadas e excluídas pela API Voices. Consulte [Biblioteca de vozes estendida e filtragem](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br#voice-library) para conferir todos os parâmetros de filtro:
+Gdy utworzysz replikowane głosy za pomocą parametru `store=True`, możesz je wyświetlać, filtrować, sprawdzać i usuwać za pomocą interfejsu Voices API (wszystkie parametry filtrowania znajdziesz w sekcji [Rozszerzona biblioteka głosów i filtrowanie](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl#voice-library)):
 
 ### Python
 
@@ -321,10 +312,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Opção: chaves de voz gerenciadas pelo cliente sem estado (`store=False`)
+## Opcja: bezstanowe klucze głosowe zarządzane przez klienta (`store=False`)
 
-Se o aplicativo não exigir persistência do lado do servidor dos perfis de voz, defina
-`store=False` ao criar a voz replicada. A API retorna um `voice_key` criptografado (`replicated_voice.key`, começando com `voicekey_...`) que você armazena do lado do cliente e transmite diretamente em qualquer lugar em que um ID `voice` seja aceito:
+Jeśli Twoja aplikacja nie wymaga żadnego utrwalania profili głosowych po stronie serwera, podczas tworzenia replikowanego głosu ustaw wartość `store=False`. Interfejs API zwraca zaszyfrowany identyfikator`voice_key` (`replicated_voice.key`, zaczynający się od `voicekey_...`), który możesz przechowywać po stronie klienta i przekazywać bezpośrednio w każdym miejscu, w którym akceptowany jest identyfikator `voice`:
 
 ### Python
 
@@ -446,60 +436,60 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }"
 ```
 
-## Frases de consentimento disponíveis por idioma
+## Obsługiwane zwroty dotyczące zgody użytkownika w poszczególnych językach
 
-O áudio de consentimento precisa recitar claramente a declaração exata em um dos 30 locais de idioma aceitos:
+Ścieżka dźwiękowa z prośbą o zgodę na przetwarzanie danych osobowych musi zawierać dokładne oświadczenie w jednym z 30 obsługiwanych języków:
 
-| Idioma | Localidade (`lang_id`) | Declaração de consentimento literal |
+| Język | Język (`lang_id`) | Treść oświadczenia o uzyskaniu zgody |
 | --- | --- | --- |
-| **Árabe** | `ar-XA` | أنا مالك هذا الصوت وأوافق على أن تستخدم Google هذا الصوت لإنشاء نموذج صوتي اصطناعي. |
-| **Bengalês** | `bn-IN` | আমি এই ভয়েসের মালিক এবং আমি একটি সিন্থেটিক ভয়েস মডেল তৈরি করতে এই ভয়েস ব্যবহার করে Google-এর সাথে সম্মতি দিচ্ছি। |
-| **Chinês (simplificado)** | `zh-CN` | 我是此声音的拥有者并授权谷歌使用此声音创建语音合成模型 |
-| **Holandês** | `nl-NL` | Ik ben de eigenaar van deze stem en ik geef Google toestemming om deze stem te gebruiken om een synthetisch stemmodel te maken. |
-| **Inglês (EUA)** | `en-US` | I am the owner of this voice and I consent to Google using this voice to create a synthetic voice model. |
-| **Inglês (Reino Unido)** | `en-GB` | I am the owner of this voice and I consent to Google using this voice to create a synthetic voice model. |
-| **Inglês (Índia)** | `en-IN` | I am the owner of this voice and I consent to Google using this voice to create a synthetic voice model. |
-| **Inglês (Austrália)** | `en-AU` | Eu sou o proprietário desta voz e concordo que o Google a use para criar um modelo de voz sintética. |
-| **French (France)** | `fr-FR` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
-| **Francês (Canadá)** | `fr-CA` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
-| **Alemão** | `de-DE` | Ich bin der Eigentümer dieser Stimme und bin damit einverstanden, dass Google diese Stimme zur Erstellung eines synthetischen Stimmmodells verwendet. |
-| **Guzerate** | `gu-IN` | હું આ વોઈસનો માલિક છું અને સિન્થેટિક વોઈસ મોડલ બનાવવા માટે આ વોઈસનો ઉપયોગ કરીને google ને હું સંમતિ આપું છું |
-| **Hindi** | `hi-IN` | मैं इस आवाज का मालिक हूं और मैं सिंथेटिक आवाज मॉडल बनाने के लिए Google को इस आवाज का उपयोग करने की सहमति देता हूं |
-| **Indonésio** | `id-ID` | Saya pemilik suara ini dan saya menyetujui Google menggunakan suara ini untuk membuat model suara sintetis. |
-| **Italiano** | `it-IT` | Sono il proprietario di questa voce e acconsento che Google la utilizzi per creare un modello di voce sintetica. |
-| **Japonês** | `ja-JP` | 私はこの音声の所有者であり、Googleがこの音声を使用して音声合成モデルを作成することを承認します。 |
-| **Canarês** | `kn-IN` | ನಾನು ಈ ಧ್ವನಿಯ ಮಾಲಿಕ ಮತ್ತು ಸಂಶ್ಲೇಷಿತ ಧ್ವನಿ ಮಾದರಿಯನ್ನು ರಚಿಸಲು ಈ ಧ್ವನಿಯನ್ನು ಬಳಸಿಕೊಂಡುಗೂಗಲ್ ಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ. |
-| **Coreano** | `ko-KR` | 나는 이 음성의 소유자이며 구글이 이 음성을 사용하여 음성 합성 모델을 생성할 것을 허용합니다. |
-| **Malaiala** | `ml-IN` | ഈ ശബ്ദത്തിന്റെ ഉടമ ഞാനാണ്, ഒരു സിന്തറ്റിക് വോയ്സ് മോഡൽ സൃഷ്ടിക്കാൻ ഈ ശബ്ദം ഉപയോഗിക്കുന്നതിന് ഞാൻ Google-ന് സമ്മതം നൽകുന്നു. |
-| **Marati** | `mr-IN` | मी या आवाजाचा मालक आहे आणि सिंथेटिक व्हॉइस मॉडेल तयार करण्यासाठी हा आवाज वापरण्यासाठी मी Google ला संमती देतो |
-| **Polonês** | `pl-PL` | Jestem właścicielem tego głosu i wyrażam zgodę na wykorzystanie go przez Google w celu utworzenia syntetycznego modelu głosu. |
-| **Português (Brasil)** | `pt-BR` | Eu sou o proprietário desta voz e autorizo o Google a usá-la para criar um modelo de voz sintética. |
-| **Russo** | `ru-RU` | Я являюсь владельцем этого голоса и даю согласие Google на использование этого голоса для создания модели синтетического голоса. |
-| **Spanish (Spain)** | `es-ES` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
-| **Espanhol (EUA)** | `es-US` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
-| **Tâmil** | `ta-IN` | நான் இந்த குரலின் உரிமையாளர் மற்றும் செயற்கை குரல் மாதிரியை உருவாக்க இந்த குரலை பயன்படுத்த குகல்க்கு நான் ஒப்புக்கொள்கிறேன். |
-| **Telugu** | `te-IN` | నేను ఈ వాయిస్ యజమానిని మరియు సింతటిక్ వాయిస్ మోడల్ ని రూపొందించడానికి ఈ వాయిస్ ని ఉపయోగించడానికి googleకి నేను సమ్మతిస్తున్నాను. |
-| **Tailandês** | `th-TH` | ฉันเป็นเจ้าของเสียงนี้ และฉันยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างแบบจำลองเสียงสังเคราะห์ |
-| **Turco** | `tr-TR` | Bu sesin sahibi benim ve Google'ın bu sesi kullanarak sentetik bir ses modeli oluşturmasına izin veriyorum. |
-| **Vietnamita** | `vi-VN` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mô hình giọng nói tổng hợp. |
+| **arabski** | `ar-XA` | أنا مالك هذا الصوت وأوافق على أن تستخدم Google هذا الصوت لإنشاء نموذج صوتي اصطناعي. |
+| **bengalski** | `bn-IN` | আমি এই ভয়েসের মালিক এবং আমি একটি সিন্থেটিক ভয়েস মডেল তৈরি করতে এই ভয়েস ব্যবহার করে Google-এর সাথে সম্মতি দিচ্ছি। |
+| **chiński (uproszczony)** | `zh-CN` | 我是此声音的拥有者并授权谷歌使用此声音创建语音合成模型 |
+| **niderlandzki** | `nl-NL` | Ik ben de eigenaar van deze stem en ik geef Google toestemming om deze stem te gebruiken om een synthetisch stemmodel te maken. |
+| **angielski (USA)** | `en-US` | Jestem właścicielem tego głosu i zgadzam się na użycie przez Google tego głosu do utworzenia modelu głosu syntetycznego. |
+| **English (UK)** | `en-GB` | Jestem właścicielem tego głosu i zgadzam się na użycie przez Google tego głosu do utworzenia modelu głosu syntetycznego. |
+| **angielski (Indie)** | `en-IN` | Jestem właścicielem tego głosu i zgadzam się na użycie przez Google tego głosu do utworzenia modelu głosu syntetycznego. |
+| **angielski (Australia)** | `en-AU` | Jestem właścicielem tego głosu i zgadzam się na użycie przez Google tego głosu do utworzenia modelu głosu syntetycznego. |
+| **francuski (Francja)** | `fr-FR` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
+| **francuski (Kanada)** | `fr-CA` | Je suis le propriétaire de cette voix et j'autorise Google à utiliser cette voix pour créer un modèle de voix synthétique. |
+| **niemiecki** | `de-DE` | Ich bin der Eigentümer dieser Stimme und bin damit einverstanden, dass Google diese Stimme zur Erstellung eines synthetischen Stimmmodells verwendet. |
+| **gudżarati**, | `gu-IN` | હું આ વોઈસનો માલિક છું અને સિન્થેટિક વોઈસ મોડલ બનાવવા માટે આ વોઈસનો ઉપયોગ કરીને google ને હું સંમતિ આપું છું |
+| **hindi** | `hi-IN` | मैं इस आवाज का मालिक हूं और मैं सिंथेटिक आवाज मॉडल बनाने के लिए Google को इस आवाज का उपयोग करने की सहमति देता हूं |
+| **indonezyjski** | `id-ID` | Saya pemilik suara ini dan saya menyetujui Google menggunakan suara ini untuk membuat model suara sintetis. |
+| **włoski** | `it-IT` | Sono il proprietario di questa voce e acconsento che Google la utilizzi per creare un modello di voce sintetica. |
+| **japoński** | `ja-JP` | 私はこの音声の所有者であり、Googleがこの音声を使用して音声合成モデルを作成することを承認します。 |
+| **Kannada** | `kn-IN` | ನಾನು ಈ ಧ್ವನಿಯ ಮಾಲಿಕ ಮತ್ತು ಸಂಶ್ಲೇಷಿತ ಧ್ವನಿ ಮಾದರಿಯನ್ನು ರಚಿಸಲು ಈ ಧ್ವನಿಯನ್ನು ಬಳಸಿಕೊಂಡುಗೂಗಲ್ ಗೆ ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ. |
+| **koreański** | `ko-KR` | 나는 이 음성의 소유자이며 구글이 이 음성을 사용하여 음성 합성 모델을 생성할 것을 허용합니다. |
+| **malajalam**, | `ml-IN` | ഈ ശബ്ദത്തിന്റെ ഉടമ ഞാനാണ്, ഒരു സിന്തറ്റിക് വോയ്സ് മോഡൽ സൃഷ്ടിക്കാൻ ഈ ശബ്ദം ഉപയോഗിക്കുന്നതിന് ഞാൻ Google-ന് സമ്മതം നൽകുന്നു. |
+| **marathi** | `mr-IN` | मी या आवाजाचा मालक आहे आणि सिंथेटिक व्हॉइस मॉडेल तयार करण्यासाठी हा आवाज वापरण्यासाठी मी Google ला संमती देतो |
+| **polski** | `pl-PL` | Jestem właścicielem tego głosu i wyrażam zgodę na wykorzystanie go przez Google w celu utworzenia syntetycznego modelu głosu. |
+| **portugalski (Brazylia)** | `pt-BR` | Sou o proprietário desta voz e autorizo o Google a usá-la para criar um modelo de voz sintética. |
+| **rosyjski** | `ru-RU` | Я являюсь владельцем этого голоса и даю согласие Google на использование этого голоса для создания модели синтетического голоса. |
+| **Hiszpański (Hiszpania)** | `es-ES` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
+| **hiszpański (USA)** | `es-US` | Soy el propietario de esta voz y doy mi consentimiento para que Google la utilice para crear un modelo de voz sintética. |
+| **tamilski** | `ta-IN` | நான் இந்த குரலின் உரிமையாளர் மற்றும் செயற்கை குரல் மாதிரியை உருவாக்க இந்த குரலை பயன்படுத்த குகல்க்கு நான் ஒப்புக்கொள்கிறேன். |
+| **telugu** | `te-IN` | నేను ఈ వాయిస్ యజమానిని మరియు సింతటిక్ వాయిస్ మోడల్ ని రూపొందించడానికి ఈ వాయిస్ ని ఉపయోగించడానికి googleకి నేను సమ్మతిస్తున్నాను. |
+| **tajski** | `th-TH` | ฉันเป็นเจ้าของเสียงนี้ และฉันยินยอมให้ Google ใช้เสียงนี้เพื่อสร้างแบบจำลองเสียงสังเคราะห์ |
+| **turecki** | `tr-TR` | Bu sesin sahibi benim ve Google'ın bu sesi kullanarak sentetik bir ses modeli oluşturmasına izin veriyorum. |
+| **wietnamski** | `vi-VN` | Tôi là chủ sở hữu giọng nói này và tôi đồng ý cho Google sử dụng giọng nói này để tạo mô hình giọng nói tổng hợp. |
 
-## Práticas recomendadas para gravar áudio de referência
+## Sprawdzone metody nagrywania dźwięku referencyjnego
 
-- **Grave em um ambiente silencioso**:minimize o eco do ambiente, o ruído de fundo, a música e as vozes sobrepostas.
-- **Corresponda as condições de gravação**:grave `source_audio` e `consent_audio` no mesmo microfone e ambiente acústico para que a verificação de voz seja bem-sucedida.
-- **Converter para WAV mono de 24 kHz**:para ter os melhores resultados, faça uma nova amostragem do áudio de entrada para WAV mono PCM de 16 bits e 24 kHz antes da codificação.
+- **Nagrywaj w cichym otoczeniu:** zminimalizuj pogłos w pomieszczeniu, szum w tle, muzykę i nakładające się głosy.
+- **Zgodność warunków nagrywania:** nagraj oba fragmenty `source_audio` i `consent_audio` za pomocą tego samego mikrofonu w tych samych warunkach akustycznych, aby weryfikacja mówcy przebiegała prawidłowo.
+- **Konwertuj na 24 kHz mono WAV:** aby uzyskać najlepsze wyniki, przed kodowaniem ponownie próbkuj dźwięk wejściowy do formatu 24 kHz mono 16-bit PCM WAV.
 
-## A seguir
+## Co dalej?
 
-- Saiba como criar personas personalizadas com base em descrições de texto no [Design de voz](https://ai.google.dev/gemini-api/docs/voice-design?hl=pt-br).
-- Confira o estilo no nível da vez, tags inline e diálogo com vários locutores no [guia da conversão de texto em voz](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br).
+- Dowiedz się, jak tworzyć niestandardowe persony na podstawie opisów tekstowych w sekcji [Projektowanie głosu](https://ai.google.dev/gemini-api/docs/voice-design?hl=pl).
+- Więcej informacji o stylizacji na poziomie wypowiedzi, tagach wstawianych i dialogach z udziałem wielu rozmówców znajdziesz w [przewodniku po zamianie tekstu na mowę](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl).
 
-Envie comentários
+Prześlij opinię
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Última atualização 2026-09-24 UTC.
+Ostatnia aktualizacja: 2026-09-24 UTC.
 
-Quer enviar seu feedback?
+Chcesz przekazać coś jeszcze?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-24 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-24 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-CN
-fetched_at: 2026-10-05T06:43:14.502397+00:00
+fetched_at: 2026-10-12T07:10:30.437790+00:00
 title: "\u4f7f\u7528 Lyria 3.5 \u751f\u6210\u97f3\u4e50 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

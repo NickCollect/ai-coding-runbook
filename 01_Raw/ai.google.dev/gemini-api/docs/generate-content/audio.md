@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=zh-CN
-fetched_at: 2026-10-05T06:30:35.908630+00:00
+fetched_at: 2026-10-12T07:07:29.456426+00:00
 title: "\u97f3\u9891\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

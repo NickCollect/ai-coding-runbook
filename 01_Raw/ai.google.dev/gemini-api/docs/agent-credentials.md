@@ -1,28 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ko
-fetched_at: 2026-10-05T06:47:12.313985+00:00
-title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8\uc758 \uc0ac\uc6a9\uc790 \uc778\uc99d \uc815\ubcf4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-credentials?hl=th
+fetched_at: 2026-10-12T06:55:20.138660+00:00
+title: "\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e43\u0e19\u0e40\u0e2d\u0e40\u0e08\u0e19\u0e15\u0e4c\u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-의견 보내기
+ส่งความคิดเห็น
 
-# 관리 에이전트의 사용자 인증 정보
+# ข้อมูลเข้าสู่ระบบในเอเจนต์ที่มีการจัดการ
 
-사용자 인증 정보는 서버에서 관리하는 보안 비밀로, 에이전트가 에이전트 환경에 보안 비밀을 입력하지 않고도 서드 파티 서비스에 연결할 수 있습니다. 사용자는 사용자 인증 정보를 한 번 저장하고 ID로 참조하면 이그레스 프록시가 요청 시 이를 확인하고 삽입합니다.
+ข้อมูลเข้าสู่ระบบคือข้อมูลลับที่เซิร์ฟเวอร์จัดการซึ่งช่วยให้ Agent เข้าถึงบริการของบุคคลที่สามได้โดยไม่ต้องป้อนข้อมูลลับลงในสภาพแวดล้อมของ Agent คุณจัดเก็บ
+ข้อมูลเข้าสู่ระบบเพียงครั้งเดียว อ้างอิงตามรหัส และพร็อกซีขาออกจะแก้ไขและแทรก
+ข้อมูลดังกล่าวเมื่อมีการส่งคำขอ
 
-보안 비밀 값은 쓰기 전용입니다. 저장된 후에는 어떤 엔드포인트에서도 반환되지 않으므로 보안이 취약한 에이전트가 사용 중인 토큰을 다시 읽을 수 없습니다.
+ค่าของข้อมูลลับเป็นแบบเขียนอย่างเดียว เมื่อจัดเก็บแล้ว ระบบจะไม่แสดงโทเค็นดังกล่าวใน
+ปลายทางใดๆ ดังนั้นเอเจนต์ที่ถูกบุกรุกจึงไม่สามารถอ่านโทเค็นที่กำลังใช้อยู่ได้
 
-사용자 인증 정보를 사용하는 기본 위치는 [`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko)의 네트워크 허용 목록입니다. 먼저 보안 비밀을 저장합니다.
+ที่ที่คุณใช้ข้อมูลเข้าสู่ระบบเป็นหลักคือรายการที่อนุญาตของเครือข่ายใน
+[`environment.network`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th) จัดเก็บข้อมูลลับ
+ก่อน
 
 ### Python
 
@@ -40,7 +45,7 @@ credential = client.credentials.create(
 print(f"Credential ID: {credential.id}, Status: {credential.status}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -105,7 +110,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-그런 다음 인증하는 도메인에 연결합니다.
+จากนั้นแนบไปกับโดเมนที่ตรวจสอบสิทธิ์
 
 ### Python
 
@@ -125,7 +130,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -170,12 +175,12 @@ func main() {
             Agent: interactions.AgentOption("antigravity-preview-09-2026"),
             Input: interactions.NewInteractionsInput("Triage the open issues in my-org/my-repo."),
             Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(interactions.Environment{
-                Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-                    Allowlist: []interactions.AllowlistEntry{
+                Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+                    Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                         {Domain: "api.github.com", Credential: genai.Ptr("github-production")},
                         {Domain: "*"},
-                    },
-                }))),
+                    })),
+                })),
             })),
         }),
     })
@@ -208,23 +213,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-이제 에이전트는 `api.github.com`에 인증된 요청을 전송하며 토큰은 샌드박스 내에 존재하지 않습니다.
+ตอนนี้ Agent จะส่งคำขอที่ผ่านการตรวจสอบสิทธิ์ไปยัง `api.github.com` และโทเค็น
+จะไม่เคยอยู่ในแซนด์บ็อกซ์
 
-## 사용자 인증 정보 유형
+## ประเภทข้อมูลเข้าสู่ระบบ
 
-모든 사용자 인증 정보에는 프록시가 어떤 필드를 허용하고 어떻게 적용하는지 결정하는 `type`가 있습니다.
+ข้อมูลเข้าสู่ระบบทุกรายการมี `type` ที่กำหนดว่าข้อมูลเข้าสู่ระบบนั้นยอมรับฟิลด์ใดและพร็อกซีจะใช้ข้อมูลเข้าสู่ระบบนั้นอย่างไร
 
-| 유형 | 사용 사례 | 동작 |
+| ประเภท | กรณีการใช้งาน | พฤติกรรม |
 | --- | --- | --- |
-| `bearer_token` | 개인 액세스 토큰, 봇 토큰, 정적 API 키 | 프록시가 토큰을 요청 헤더로 삽입합니다. 새로고침 로직이 없습니다. |
-| `oauth2` | OAuth 앱 및 사용자 위임 흐름 | 프록시는 갱신 토큰을 액세스 토큰으로 교환하고 만료되면 새로고침합니다. |
-| `environment_variable` | 프로세스 환경에서 보안 비밀을 읽는 클라이언트 SDK | 에이전트의 환경에 자리표시자가 표시됩니다. 프록시는 아웃바운드 요청에서 실제 보안 비밀을 대체합니다. |
+| `bearer_token` | โทเค็นเพื่อการเข้าถึงส่วนบุคคล โทเค็นบอท คีย์ API แบบคงที่ | พร็อกซีจะแทรกโทเค็นเป็นส่วนหัวของคำขอ ไม่มีตรรกะการรีเฟรช |
+| `oauth2` | แอป OAuth และโฟลว์ที่ผู้ใช้มอบสิทธิ์ | พร็อกซีจะแลกเปลี่ยนโทเค็นการรีเฟรชเป็นโทเค็นเพื่อการเข้าถึงและรีเฟรชโทเค็นเหล่านั้นเมื่อหมดอายุ |
+| `environment_variable` | SDK ไคลเอ็นต์ที่อ่านข้อมูลลับจากสภาพแวดล้อมของกระบวนการ | สภาพแวดล้อมของเอเจนต์จะได้รับตัวยึดตำแหน่ง พร็อกซีจะแทนที่ข้อมูลลับจริงในคำขอขาออก |
 
-## 네트워크 허용 목록의 사용자 인증 정보 사용
+## ใช้ข้อมูลเข้าสู่ระบบในรายการที่อนุญาตของเครือข่าย
 
-허용 목록 규칙에 `credential`를 추가하면 프록시가 해당 도메인으로 전송되는 모든 아웃바운드 요청을 인증합니다. 이는 에이전트에게 비공개 API, 비공개 저장소 또는 비공개 버킷에 대한 액세스 권한을 부여하는 데 권장되는 방법입니다.
+เพิ่ม `credential` ลงในกฎรายการที่อนุญาตและพร็อกซีจะตรวจสอบสิทธิ์ทุกคำขอขาออกไปยังโดเมนนั้น นี่คือวิธีที่แนะนำในการให้สิทธิ์เข้าถึง API ส่วนตัว ที่เก็บข้อมูลส่วนตัว หรือที่เก็บข้อมูลส่วนตัวแก่ Agent
 
-동일한 허용 목록에서 인증된 규칙과 인증되지 않은 규칙을 혼합할 수 있습니다.
+คุณสามารถรวมกฎที่ตรวจสอบสิทธิ์แล้วและยังไม่ได้ตรวจสอบสิทธิ์ไว้ในรายการที่อนุญาตเดียวกันได้โดยทำดังนี้
 
 ### Python
 
@@ -252,7 +258,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -312,13 +318,13 @@ func main() {
                         Target: genai.Ptr("/backend-app"),
                     },
                 },
-                Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-                    Allowlist: []interactions.AllowlistEntry{
+                Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+                    Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                         {Domain: "github.com", Credential: genai.Ptr("github-production")},
                         {Domain: "api.atlassian.com", Credential: genai.Ptr("jira-oauth")},
                         {Domain: "*.googleapis.com"},
-                    },
-                }))),
+                    })),
+                })),
             })),
         }),
     })
@@ -359,22 +365,32 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-프록시는 요청별로 사용자 인증 정보를 확인하므로 `oauth2` 사용자 인증 정보는 액세스 토큰을 투명하게 새로고침합니다. 액세스 토큰이 만료되어도 장기 실행 상호작용이 중단되지 않습니다.
+เนื่องจากพร็อกซีจะแก้ไขข้อมูลเข้าสู่ระบบต่อคำขอ `oauth2` ข้อมูลเข้าสู่ระบบ
+จึงรีเฟรชโทเค็นการเข้าถึงอย่างโปร่งใส การโต้ตอบที่ใช้เวลานานจะไม่หยุดทำงานเมื่อโทเค็นเพื่อการเข้าถึงหมดอายุ
 
-### `credential` 및 `transform` 결합
+### การรวม `credential` และ `transform`
 
-허용 목록 규칙은 규칙에 직접 헤더를 설정하는 인라인 [`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#private-sources) 객체도 허용합니다. 두 메커니즘 모두 와이어의 이그레스 프록시에 의해 적용되므로 두 경우 모두 헤더 값이 샌드박스 내에 존재하지 않습니다. 두 필드는 동일한 규칙에 표시될 수 있습니다.
+กฎรายการที่อนุญาตยังยอมรับออบเจ็กต์
+[`transform`](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#private-sources)แบบอินไลน์ที่
+ตั้งค่าส่วนหัวในกฎโดยตรงด้วย ทั้ง 2 กลไกนี้ใช้โดยพร็อกซีขาออก
+บนสาย ดังนั้นในทั้ง 2 กรณี ค่าส่วนหัวจึงไม่เคยมีอยู่ภายใน
+แซนด์บ็อกซ์ ทั้ง 2 ช่องจะปรากฏในกฎเดียวกันได้
 
-| 규칙 구성 | 동작 |
+| การกำหนดค่ากฎ | พฤติกรรม |
 | --- | --- |
-| `credential`만 지원 | 프록시는 사용자 인증 정보를 확인하고 도메인에 대한 모든 요청에 헤더를 삽입합니다. |
-| `transform`만 지원 | 정적 헤더 삽입 작성한 헤더는 그대로 전송됩니다. |
-| 둘 다 | 사용자 인증 정보가 먼저 적용된 다음 `transform`가 맨 위에 병합됩니다. 두 헤더가 동일한 키를 설정하는 경우 명시적 `transform` 헤더가 우선합니다. |
-| 둘 다 아님 | 도메인이 허용되고 헤더가 삽입되지 않습니다. |
+| `credential` เท่านั้น | พร็อกซีจะแก้ไขข้อมูลเข้าสู่ระบบและแทรกส่วนหัวในทุกคำขอไปยังโดเมน |
+| `transform` เท่านั้น | การแทรกส่วนหัวแบบคงที่ ระบบจะส่งส่วนหัวที่คุณเขียนตามที่เขียน |
+| ทั้งคู่ | ระบบจะใช้ข้อมูลเข้าสู่ระบบก่อน แล้วจึง`transform`ผสานด้านบน ส่วนหัว `transform` ที่ชัดเจนจะชนะหากทั้ง 2 รายการตั้งค่าคีย์เดียวกัน |
+| เฉยๆ | ระบบอนุญาตโดเมนและไม่ได้แทรกส่วนหัว |
 
-사용자 인증 정보는 비밀번호를 한 번 저장하고 프로젝트의 모든 환경, 에이전트, 트리거에서 참조하려는 경우와 액세스 토큰 새로고침 및 순환을 처리하려는 경우에 사용하는 것이 좋습니다. 인라인 `transform`은 값이 단일 호출에 속하는 경우에 적합합니다. 예를 들어 상호작용을 만들기 직전에 직접 생성하는 토큰이 있습니다.
+คุณควรใช้ข้อมูลเข้าสู่ระบบเมื่อต้องการจัดเก็บข้อมูลลับเพียงครั้งเดียวและอ้างอิง
+จากทุกสภาพแวดล้อม เอเจนต์ และทริกเกอร์ในโปรเจ็กต์ รวมถึงเมื่อต้องการให้ระบบจัดการการรีเฟรชและการหมุนเวียนโทเค็นเพื่อการเข้าถึงให้คุณ
+`transform` ในบรรทัดจะพอดี
+เมื่อค่าเป็นของการเรียกครั้งเดียว เช่น โทเค็นที่คุณสร้าง
+ด้วยตนเองก่อนสร้างการโต้ตอบ
 
-두 가지를 결합하는 것이 일반적입니다. 사용자 인증 정보는 인증 헤더를 전달하고 `transform`는 동일한 요청에서 업스트림 서비스가 예상하는 다른 항목을 추가합니다.
+การใช้ทั้ง 2 อย่างร่วมกันเป็นเรื่องปกติ ข้อมูลเข้าสู่ระบบมีส่วนหัวการตรวจสอบสิทธิ์
+และ `transform` จะเพิ่มข้อมูลอื่นๆ ที่บริการต้นทางคาดหวังในคำขอเดียวกัน
 
 ```
 {
@@ -386,11 +402,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-인라인 `transform`에서 사용자 인증 정보로 보안 비밀을 이동하려면 `POST /credentials`로 저장하고 `transform`의 인증 헤더를 `"credential": "<id>"`로 바꾸고 나머지 `transform` 객체는 그대로 둡니다.
+หากต้องการย้ายข้อมูลลับออกจาก `transform` แบบอินไลน์และไปยังข้อมูลเข้าสู่ระบบ ให้จัดเก็บข้อมูลลับด้วย `POST /credentials` แทนที่ส่วนหัวการตรวจสอบสิทธิ์ใน `transform` ด้วย `"credential": "<id>"` และปล่อยให้ส่วนที่เหลือของออบเจ็กต์ `transform` เหมือนเดิม
 
-## MCP 서버에서 사용자 인증 정보 사용
+## ใช้ข้อมูลเข้าสู่ระบบกับเซิร์ฟเวอร์ MCP
 
-원격 MCP 서버는 동일한 `credential` 필드를 사용합니다. `mcp_server` 도구에서 설정하면 프록시가 해당 서버에 대한 모든 요청에 인증 헤더를 삽입합니다.
+เซิร์ฟเวอร์ MCP ระยะไกลใช้ฟิลด์ `credential` เดียวกัน ตั้งค่าใน`mcp_server`
+เครื่องมือและพร็อกซีจะแทรกส่วนหัวการตรวจสอบสิทธิ์ลงในคำขอทุกรายการที่ส่งไปยังเซิร์ฟเวอร์นั้น
 
 ### Python
 
@@ -408,7 +425,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -451,11 +468,11 @@ func main() {
             Agent: interactions.AgentOption("antigravity-preview-09-2026"),
             Input: interactions.NewInteractionsInput("Create a new issue in my-org/my-repo"),
             Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment(interactions.Environment{
-                Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-                    Allowlist: []interactions.AllowlistEntry{
+                Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+                    Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                         {Domain: "api.githubcopilot.com", Credential: genai.Ptr("github-production")},
-                    },
-                }))),
+                    })),
+                })),
             })),
             Tools: []interactions.Tool{
                 interactions.NewTool(interactions.MCPServer{
@@ -494,8 +511,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential`와 `headers`은 허용 목록과 동일한 우선순위 규칙을 따릅니다.
-인증 정보가 먼저 적용되고 `headers`가 맨 위에 병합되므로 둘 다 동일한 키를 설정하면 명시적 헤더가 우선합니다.
+`credential` และ `headers` จะใช้กฎลำดับความสำคัญเดียวกันกับรายการที่อนุญาต
+ระบบจะใช้ข้อมูลเข้าสู่ระบบก่อนและ `headers` จะผสานรวมอยู่ด้านบน ดังนั้นส่วนหัวที่ชัดเจน
+จะชนะหากทั้ง 2 รายการตั้งค่าคีย์เดียวกัน
 
 ```
 {
@@ -509,14 +527,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-인라인 `headers`에서 보안 비밀을 인증 정보로 이동하려면 `POST /credentials`로 저장하고 `headers`의 인증 항목을 `credential`로 바꿉니다.
-다른 헤더는 원래 위치에 유지합니다.
+หากต้องการย้ายข้อมูลลับออกจาก `headers` แบบอินไลน์และไปยังข้อมูลเข้าสู่ระบบ ให้จัดเก็บข้อมูลลับด้วย
+`POST /credentials` แล้วแทนที่รายการการตรวจสอบสิทธิ์ใน `headers` ด้วย `credential`
+คงส่วนหัวอื่นๆ ไว้ที่เดิม
 
-## 사용자 인증 정보를 환경 변수로 사용
+## ใช้ข้อมูลเข้าสู่ระบบเป็นตัวแปรสภาพแวดล้อม
 
-일부 클라이언트 라이브러리는 요청 헤더로 허용하는 대신 프로세스 환경에서 보안 비밀을 읽습니다. 소켓 모드 및 긴 폴링 클라이언트는 일반적인 사례입니다.
+ไลบรารีของไคลเอ็นต์บางรายการจะอ่านข้อมูลลับจากสภาพแวดล้อมของกระบวนการแทนที่จะ
+ยอมรับเป็นส่วนหัวของคำขอ ไคลเอ็นต์ในโหมด Socket และ Long Polling เป็นกรณีที่พบบ่อย
 
-`environment_variable` 사용자 인증 정보를 `environment.env` 아래의 변수 이름에 바인딩합니다.
+เชื่อมโยง`environment_variable`ข้อมูลเข้าสู่ระบบกับชื่อตัวแปรภายใต้
+`environment.env`:
 
 ### Python
 
@@ -534,7 +555,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const interaction = await client.interactions.create({
@@ -611,21 +632,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`env`는 리터럴 문자열과 사용자 인증 정보 참조를 나란히 허용합니다. 리터럴 문자열이 일반 일반 텍스트 변수로 컨테이너에 삽입됩니다.
+`env`ยอมรับสตริงลิเทอรัลและการอ้างอิงข้อมูลเข้าสู่ระบบควบคู่กัน ระบบจะแทรกสตริงตามตัวอักษร
+ลงในคอนเทนเนอร์เป็นตัวแปรข้อความธรรมดาปกติ
 
-사용자 인증 정보 참조는 아닙니다. 변수는 자리표시자 `__GEMINI_CRED_<credential-id>__`를 수신하고 프록시는 사용자 인증 정보의 `trusted_domains`에 있는 도메인으로 전송되는 아웃바운드 요청에 대해서만 실제 비밀번호를 스왑합니다. 다른 도메인에 대한 요청은 거부되므로 보안 비밀이 경계를 벗어나지 않으며 자리표시자가 대신 전송되지 않습니다.
+แต่การอ้างอิงข้อมูลเข้าสู่ระบบไม่ใช่ ตัวแปรจะได้รับตัวยึดตำแหน่ง
+`__GEMINI_CRED_<credential-id>__` และพร็อกซีจะสลับข้อมูลลับจริงเฉพาะ
+สำหรับคำขอขาออกที่ไปยังโดเมนใน `trusted_domains` ของข้อมูลเข้าสู่ระบบ
+คำขอไปยังโดเมนอื่นๆ จะถูกปฏิเสธ ดังนั้นระบบจะไม่ส่งข้อมูลลับออกนอก
+ขอบเขต และจะไม่ส่งตัวยึดตำแหน่งแทน
 
-모든 `environment_variable` 사용자 인증 정보에 `trusted_domains`를 설정합니다. 보안 비밀을 사용할 수 있는 범위를 지정하는 컨트롤입니다.
+ตั้งค่า `trusted_domains` ในข้อมูลเข้าสู่ระบบ `environment_variable` ทุกรายการ ซึ่งเป็น
+การควบคุมที่กำหนดขอบเขตที่ใช้ข้อมูลลับได้
 
-## 사용자 인증 정보 만들기
+## สร้างข้อมูลเข้าสู่ระบบ
 
-모든 생성 요청에는 `type`와 해당 유형에 필요한 필드가 필요합니다.
+คำขอสร้างทุกรายการต้องมี `type` รวมถึงฟิลด์อื่นๆ ที่ประเภทนั้นๆ กำหนด
 
-REST를 직접 호출할 때는 모든 필드 이름이 snake\_case를 사용합니다. camelCase 필드를 전송하면 `400`가 반환됩니다.
+เมื่อเรียกใช้ REST โดยตรง ชื่อฟิลด์ทั้งหมดจะใช้รูปแบบ snake\_case การส่งฟิลด์ camelCase
+จะแสดงผล `400`
 
-### Bearer 토큰
+### โทเค็นสำหรับผู้ถือ
 
-Bearer 토큰 사용자 인증 정보에는 `token`만 필요합니다.
+ข้อมูลเข้าสู่ระบบโทเค็นผู้ถือใช้สิทธิ์ต้องมีเพียง`token`
 
 ### Python
 
@@ -637,7 +665,7 @@ credential = client.credentials.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.create({
@@ -696,7 +724,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-응답은 메타데이터만 반환하고 토큰은 반환하지 않습니다.
+การตอบกลับจะแสดงเฉพาะข้อมูลเมตา ไม่ใช่โทเค็น
 
 ```
 {
@@ -708,7 +736,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-기본적으로 프록시는 `Authorization: Bearer <token>`를 전송합니다. `header_name` 및 `prefix`를 재정의하여 다른 것을 예상하는 서비스를 타겟팅합니다.
+โดยค่าเริ่มต้นพร็อกซีจะส่ง `Authorization: Bearer <token>` แทนที่
+`header_name` และ `prefix` เพื่อกำหนดเป้าหมายบริการที่คาดหวังสิ่งอื่น
 
 ### Python
 
@@ -722,7 +751,7 @@ credential = client.credentials.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.create({
@@ -787,11 +816,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-이 구성은 헤더 `x-goog-api-key: key_xxxxxxxxxxxx`를 생성합니다.
+การกำหนดค่านี้จะสร้างส่วนหัว `x-goog-api-key: key_xxxxxxxxxxxx`
 
-다음 표는 `header_name`와 `prefix`가 결합되는 방식을 보여줍니다.
+ตารางต่อไปนี้แสดงวิธีรวม `header_name` และ `prefix`
 
-| 구성 | 삽입된 헤더 |
+| การกำหนดค่า | ส่วนหัวที่แทรก |
 | --- | --- |
 | `{"token": "ghp_xxx"}` | `Authorization: Bearer ghp_xxx` |
 | `{"token": "sk_live_xxx"}` | `Authorization: Bearer sk_live_xxx` |
@@ -800,7 +829,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 
 ### OAuth2
 
-OAuth2 사용자 인증 정보에는 `client_id`, `client_secret`, `refresh_token`, `token_url`이 필요합니다. `scopes` 필드는 선택사항입니다.
+ข้อมูลเข้าสู่ระบบ OAuth2 ต้องมี `client_id`, `client_secret`, `refresh_token`
+และ `token_url` ฟิลด์ `scopes` เป็นฟิลด์ที่ไม่บังคับ
 
 ### Python
 
@@ -816,7 +846,7 @@ credential = client.credentials.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.create({
@@ -887,9 +917,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-OAuth2 사용자 인증 정보를 만들면 `token_url`에 대해 실시간 토큰 교환이 실행되어 구성이 작동하는지 확인합니다. 자격 증명은 제공자가 `access_token`가 포함된 성공적인 토큰 응답을 반환하는 경우에만 저장됩니다. JSON 응답과 form-urlencoded 응답이 모두 허용됩니다.
+การสร้างข้อมูลเข้าสู่ระบบ OAuth2 จะดำเนินการแลกเปลี่ยนโทเค็นแบบเรียลไทม์กับ
+`token_url` เพื่อยืนยันว่าการกำหนดค่าใช้งานได้ ระบบจะจัดเก็บข้อมูลเข้าสู่ระบบก็ต่อเมื่อผู้ให้บริการส่งคืนการตอบกลับโทเค็นที่สำเร็จซึ่งมี `access_token` ระบบยอมรับทั้งการตอบกลับแบบ JSON และ form-urlencoded
 
-즉, 생성 시 유효하고 만료되지 않은 갱신 토큰이 필요합니다. 제공업체가 교환을 거부하면 오류가 반환됩니다.
+ซึ่งหมายความว่าคุณต้องมีโทเค็นการรีเฟรชที่ยังไม่หมดอายุและใช้งานได้ในขณะสร้าง หาก
+ผู้ให้บริการปฏิเสธการแลกเปลี่ยน ระบบจะแสดงข้อผิดพลาดต่อไปนี้ให้คุณ
 
 ```
 {
@@ -900,11 +932,13 @@ OAuth2 사용자 인증 정보를 만들면 `token_url`에 대해 실시간 토�
 }
 ```
 
-저장되면 프록시는 액세스 토큰이 만료될 때마다 갱신합니다. 제공업체가 갱신 중에 갱신 토큰을 순환하고 새 토큰을 반환하면 새 토큰이 저장된 토큰을 자동으로 대체합니다.
+เมื่อจัดเก็บแล้ว พร็อกซีจะรีเฟรชโทเค็นเพื่อการเข้าถึงเมื่อโทเค็นหมดอายุ หากผู้ให้บริการ
+หมุนเวียนโทเค็นการรีเฟรชและส่งคืนโทเค็นใหม่ระหว่างการรีเฟรช โทเค็นใหม่
+จะแทนที่โทเค็นที่จัดเก็บไว้โดยอัตโนมัติ
 
-### 환경 변수
+### ตัวแปรสภาพแวดล้อม
 
-`environment_variable` 사용자 인증 정보에는 `value` 및 `injection_location`가 필요합니다.
+`environment_variable` การรับรองต้องมี`value`และ`injection_location`
 
 ### Python
 
@@ -918,7 +952,7 @@ credential = client.credentials.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.create({
@@ -983,19 +1017,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }'
 ```
 
-`injection_location` 필드는 아웃바운드 요청에서 보안 비밀을 대체할 위치를 프록시에 알려줍니다. `header`, `query` 또는 `body`를 단일 문자열로 또는 서비스에 두 개 이상이 필요한 경우 배열로 허용합니다.
+ฟิลด์ `injection_location` จะบอกพร็อกซีว่าควรแทนที่ข้อมูลลับในคำขอขาออกที่ใด
+โดยจะยอมรับ `header`, `query` หรือ `body` ไม่ว่าจะเป็นสตริงเดียวหรืออาร์เรย์เมื่อบริการต้องการมากกว่า 1 รายการ
 
 ```
 "injection_location": ["header", "query"]
 ```
 
-대체는 나열된 위치에서만 발생합니다. 자리표시자를 다른 곳으로 전달하는 요청은 전송되지 않고 거부됩니다.
+การแทนที่จะเกิดขึ้นเฉพาะในสถานที่ตั้งที่คุณระบุ คำขอที่มีตัวยึดตำแหน่งในที่อื่นจะถูกปฏิเสธแทนที่จะส่งต่อ
 
-사용자 인증 정보를 변수 이름에 바인딩하려면 [사용자 인증 정보를 환경 변수로 사용](#environment-variables)을 참고하세요.
+หากต้องการเชื่อมโยงข้อมูลเข้าสู่ระบบกับชื่อตัวแปร โปรดดูหัวข้อ
+[ใช้ข้อมูลเข้าสู่ระบบเป็นตัวแปรสภาพแวดล้อม](#environment-variables)
 
-### 생성된 ID
+### รหัสที่สร้างขึ้น
 
-`id` 필드는 선택사항입니다. 생략하면 서비스에서 UUID를 생성합니다.
+ช่อง `id` เป็นข้อมูลที่ไม่บังคับ ละเว้นไว้ แล้วบริการจะสร้าง UUID ให้
 
 ```
 {
@@ -1007,11 +1043,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/credentials" \
 }
 ```
 
-상호작용 전반에서 사용할 안정적이고 읽기 쉬운 참조가 필요한 경우 자체 ID를 제공합니다. ID는 리소스 경로에 표시되므로 하이픈이나 밑줄이 있는 소문자 영숫자를 사용하는 것이 좋습니다.
+ระบุรหัสของคุณเองเมื่อต้องการการอ้างอิงที่คงที่และอ่านได้เพื่อใช้ในการโต้ตอบ
+เนื่องจากรหัสจะปรากฏในเส้นทางทรัพยากร จึงควรใช้ตัวอักษรและตัวเลขคละกันที่เป็นตัวพิมพ์เล็กโดยมีขีดกลางหรือขีดล่าง
 
-## 사용자 인증 정보 나열
+## แสดงรายการข้อมูลเข้าสู่ระบบ
 
-프로젝트에 속한 사용자 인증 정보를 나열합니다. 페이지로 나누기 매개변수를 사용하여 응답 배치 크기를 제어합니다.
+แสดงรายการข้อมูลเข้าสู่ระบบที่เป็นของโปรเจ็กต์ ใช้พารามิเตอร์การแบ่งหน้าเพื่อ
+ควบคุมขนาดกลุ่มการตอบกลับ
 
 ### Python
 
@@ -1021,7 +1059,7 @@ for credential in response.credentials:
     print(f"Credential ID: {credential.id}, Type: {credential.type}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const response = await client.credentials.list({ page_size: 10 });
@@ -1071,7 +1109,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-대답에는 메타데이터만 포함됩니다.
+การตอบกลับมีเฉพาะข้อมูลเมตา
 
 ```
 {
@@ -1095,16 +1133,17 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials?page_s
 }
 ```
 
-다음 페이지를 가져오기 위해 `next_page_token`를 `page_token`로 다시 전달합니다. 더 이상 결과가 없으면 이 필드는 생략됩니다.
+ส่ง `next_page_token` กลับเป็น `page_token` เพื่อดึงข้อมูลหน้าถัดไป ระบบจะละเว้นฟิลด์
+เมื่อไม่มีผลลัพธ์เพิ่มเติม
 
-| 매개변수 | 유형 | 설명 |
+| พารามิเตอร์ | ประเภท | คำอธิบาย |
 | --- | --- | --- |
-| `page_size` | 정수 | 페이지당 최대 사용자 인증 정보 수입니다. |
-| `page_token` | 문자열 | 이전 응답의 `next_page_token`에서 가져온 토큰입니다. |
+| `page_size` | จำนวนเต็ม | จำนวนข้อมูลเข้าสู่ระบบสูงสุดต่อหน้าเว็บ |
+| `page_token` | สตริง | โทเค็นจาก `next_page_token` ของคำตอบก่อนหน้า |
 
-## 사용자 인증 정보 가져오기
+## รับการรับรอง
 
-ID로 특정 사용자 인증 정보의 메타데이터를 가져옵니다.
+ดึงข้อมูลเมตาสำหรับข้อมูลเข้าสู่ระบบที่เฉพาะเจาะจงตามรหัส
 
 ### Python
 
@@ -1113,7 +1152,7 @@ credential = client.credentials.get(id="github-production")
 print(f"Credential ID: {credential.id}, Status: {credential.status}")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.get("github-production");
@@ -1159,7 +1198,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-응답은 다음과 유사합니다.
+การตอบกลับจะมีลักษณะคล้ายกับตัวอย่างต่อไปนี้
 
 ```
 {
@@ -1171,7 +1210,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-존재하지 않는 사용자 인증 정보를 요청하면 `404`이 반환됩니다.
+การขอข้อมูลเข้าสู่ระบบที่ไม่มีอยู่จะแสดงผล `404`
 
 ```
 {
@@ -1182,13 +1221,16 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/credentials/github
 }
 ```
 
-## 사용자 인증 정보 순환
+## หมุนเวียนข้อมูลเข้าสู่ระบบ
 
-허용 목록 규칙, 도구 정의 또는 이를 참조하는 환경 변수를 수정하지 않고 보안 비밀을 바꿉니다. 회전은 다음 프록시 확인 시 적용됩니다.
+แทนที่ข้อมูลลับโดยไม่ต้องแตะต้องกฎรายการที่อนุญาต คำจำกัดความของเครื่องมือ หรือตัวแปรสภาพแวดล้อมที่อ้างอิงถึงข้อมูลลับนั้น
+การหมุนเวียนจะมีผลในการ
+แก้ไขพร็อกซีครั้งถัดไป
 
-요청에는 `type`와 변경하려는 필드가 포함되어야 합니다. 생략한 필드는 현재 값을 유지합니다.
+คำขอต้องมี `type` รวมถึงฟิลด์ที่คุณต้องการเปลี่ยนแปลง ฟิลด์ที่คุณ
+ละไว้จะยังคงมีค่าปัจจุบัน
 
-Bearer 토큰을 순환합니다.
+หมุนเวียนโทเค็นสำหรับผู้ถือ
 
 ### Python
 
@@ -1200,7 +1242,7 @@ credential = client.credentials.update(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.update("github-production", {
@@ -1257,7 +1299,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/gith
 }'
 ```
 
-OAuth2 갱신 토큰을 순환합니다.
+หมุนเวียนโทเค็นการรีเฟรช OAuth2 โดยทำดังนี้
 
 ### Python
 
@@ -1269,7 +1311,7 @@ credential = client.credentials.update(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const credential = await client.credentials.update("jira-oauth", {
@@ -1326,7 +1368,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }'
 ```
 
-대답에는 새로운 `update_time`가 반영됩니다.
+คำตอบจะแสดง `update_time` ใหม่ดังนี้
 
 ```
 {
@@ -1338,11 +1380,12 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 }
 ```
 
-사용자 인증 정보의 `type`는 생성 시 고정됩니다. 이를 변경하려면 사용자 인증 정보를 삭제하고 새 사용자 인증 정보를 만드세요.
+`type` ของข้อมูลเข้าสู่ระบบจะคงที่เมื่อสร้าง หากต้องการเปลี่ยน ให้ลบข้อมูลเข้าสู่ระบบ
+แล้วสร้างใหม่
 
-## 사용자 인증 정보 삭제
+## ลบข้อมูลเข้าสู่ระบบ
 
-더 이상 필요하지 않은 경우 사용자 인증 정보와 저장된 비밀번호를 삭제합니다.
+ลบข้อมูลเข้าสู่ระบบและข้อมูลลับที่จัดเก็บไว้เมื่อไม่จำเป็นต้องใช้แล้ว
 
 ### Python
 
@@ -1350,7 +1393,7 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/credentials/jira
 client.credentials.delete(id="github-production")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 await client.credentials.delete("github-production");
@@ -1392,55 +1435,56 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/credentials/git
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-삭제에 성공하면 빈 객체가 반환됩니다.
+การลบที่สำเร็จจะแสดงออบเจ็กต์ว่าง
 
 ```
 {}
 ```
 
-ID를 여전히 참조하는 허용 목록 규칙, 도구 또는 환경 변수는 해결되지 않으므로 먼저 업데이트하세요.
+กฎรายการที่อนุญาต เครื่องมือ หรือตัวแปรสภาพแวดล้อมที่ยังอ้างอิงรหัสจะ
+ไม่สามารถแก้ไขได้ ดังนั้นให้อัปเดตสิ่งเหล่านั้นก่อน
 
-## 필드 참조
+## ข้อมูลอ้างอิงฟิลด์
 
-모든 사용자 인증 정보에 공통적인 필드:
+ฟิลด์ที่ใช้ร่วมกันในข้อมูลเข้าสู่ระบบทุกรายการ
 
-| 필드 | 유형 | 필수 | 설명 |
+| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
 | --- | --- | --- | --- |
-| `id` | 문자열 | 아니요 | 고유 식별자입니다. 생략하면 UUID로 생성됩니다. |
-| `type` | 문자열 | 예 | `bearer_token`, `oauth2`, `environment_variable` 중 하나입니다. |
-| `status` | 문자열 | 읽기 전용 | 인증 정보의 현재 상태입니다. |
-| `create_time` | 문자열 | 읽기 전용 | RFC 3339 생성 타임스탬프입니다. |
-| `update_time` | 문자열 | 읽기 전용 | 마지막 업데이트의 RFC 3339 타임스탬프입니다. |
+| `id` | สตริง | ไม่ | ตัวระบุที่ไม่ซ้ำกัน สร้างเป็น UUID เมื่อละเว้น |
+| `type` | สตริง | ใช่ | `bearer_token`, `oauth2`, `environment_variable` |
+| `status` | สตริง | อ่านอย่างเดียว | สถานะปัจจุบันของข้อมูลเข้าสู่ระบบ |
+| `create_time` | สตริง | อ่านอย่างเดียว | การประทับเวลาการสร้าง RFC 3339 |
+| `update_time` | สตริง | อ่านอย่างเดียว | การประทับเวลา RFC 3339 ของการอัปเดตล่าสุด |
 
-`bearer_token` 필드:
+ฟิลด์สำหรับ `bearer_token`
 
-| 필드 | 유형 | 필수 | 설명 |
+| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
 | --- | --- | --- | --- |
-| `token` | 문자열 | 예 | 쓰기 전용입니다. 토큰 값입니다. |
-| `header_name` | 문자열 | 아니요 | 삽입할 헤더입니다. 기본값은 `Authorization`입니다. |
-| `prefix` | 문자열 | 아니요 | 값 접두사입니다. 기본값은 `Bearer`입니다. 없음은 `""`로 설정됩니다. |
+| `token` | สตริง | ใช่ | เขียนอย่างเดียว ค่าโทเค็น |
+| `header_name` | สตริง | ไม่ | ส่วนหัวที่จะแทรก ค่าเริ่มต้นคือ `Authorization` |
+| `prefix` | สตริง | ไม่ | คำนำหน้าค่า ค่าเริ่มต้นคือ `Bearer` หากไม่ต้องการ ให้ตั้งค่าเป็น `""` |
 
-`oauth2` 필드:
+ฟิลด์สำหรับ `oauth2`
 
-| 필드 | 유형 | 필수 | 설명 |
+| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
 | --- | --- | --- | --- |
-| `client_id` | 문자열 | 예 | OAuth2 클라이언트 ID입니다. |
-| `client_secret` | 문자열 | 예 | 쓰기 전용입니다. OAuth2 클라이언트 보안 비밀번호입니다. |
-| `refresh_token` | 문자열 | 예 | 쓰기 전용입니다. 액세스 토큰을 획득하는 데 사용되는 갱신 토큰입니다. |
-| `token_url` | 문자열 | 예 | 제공업체 토큰 엔드포인트입니다. |
-| `scopes` | 배열 | 아니요 | 요청할 OAuth 범위입니다. |
+| `client_id` | สตริง | ใช่ | รหัสไคลเอ็นต์ OAuth2 |
+| `client_secret` | สตริง | ใช่ | เขียนอย่างเดียว รหัสลับไคลเอ็นต์ OAuth2 |
+| `refresh_token` | สตริง | ใช่ | เขียนอย่างเดียว โทเค็นการรีเฟรชที่ใช้เพื่อรับโทเค็นเพื่อการเข้าถึง |
+| `token_url` | สตริง | ใช่ | ปลายทางของโทเค็นผู้ให้บริการ |
+| `scopes` | อาร์เรย์ | ไม่ | ขอบเขต OAuth ที่จะขอ |
 
-`environment_variable` 필드:
+ฟิลด์สำหรับ `environment_variable`
 
-| 필드 | 유형 | 필수 | 설명 |
+| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
 | --- | --- | --- | --- |
-| `value` | 문자열 | 예 | 쓰기 전용입니다. 보안 비밀 값입니다. |
-| `injection_location` | 문자열 또는 배열 | 예 | 보안 비밀을 대체할 위치입니다. `header`, `query`, `body` 중 하나 이상입니다. |
-| `trusted_domains` | 배열 | 아니요 | 대체에 승인된 도메인 패턴입니다. |
+| `value` | สตริง | ใช่ | เขียนอย่างเดียว ค่าข้อมูลลับ |
+| `injection_location` | สตริงหรืออาร์เรย์ | ใช่ | ตำแหน่งที่จะแทนที่ข้อมูลลับ `header`, `query`, `body` อย่างน้อย 1 รายการ |
+| `trusted_domains` | อาร์เรย์ | ไม่ | รูปแบบโดเมนที่ได้รับอนุญาตให้ใช้แทน |
 
-## 오류
+## ข้อผิดพลาด
 
-오류는 `message` 및 `code`이 포함된 JSON 객체를 반환합니다.
+ข้อผิดพลาดจะแสดงออบเจ็กต์ JSON ที่มี `message` และ `code` ดังนี้
 
 ```
 {
@@ -1451,13 +1495,13 @@ ID를 여전히 참조하는 허용 목록 규칙, 도구 또는 환경 변수�
 }
 ```
 
-| HTTP 상태 | `code` | 원인 |
+| สถานะ HTTP | `code` | สาเหตุ |
 | --- | --- | --- |
-| 400 | `invalid_request` | 필수 입력란이 누락되었거나, 알 수 없는 필드가 있거나, 지원되지 않는 `type`가 있거나, OAuth2 유효성 검사에 실패했습니다. |
-| 404 | `not_found` | 해당 ID의 사용자 인증 정보가 없습니다. |
-| 409 | `aborted` | 이미 이 ID를 사용하는 사용자 인증 정보가 있습니다. |
+| 400 | `invalid_request` | ไม่มีช่องที่ต้องกรอก ไม่รู้จักช่อง ไม่รองรับ `type` หรือการตรวจสอบ OAuth2 ไม่สําเร็จ |
+| 404 | `not_found` | ไม่มีข้อมูลเข้าสู่ระบบที่มีรหัสดังกล่าว |
+| 409 | `aborted` | มีข้อมูลเข้าสู่ระบบที่มีรหัสดังกล่าวอยู่แล้ว |
 
-알 수 없는 필드는 무시되지 않고 거부되며 오류에 필드 이름이 지정됩니다.
+ระบบจะปฏิเสธฟิลด์ที่ไม่รู้จักแทนที่จะเพิกเฉย และชื่อข้อผิดพลาดจะระบุชื่อฟิลด์
 
 ```
 {
@@ -1468,18 +1512,18 @@ ID를 여전히 참조하는 허용 목록 규칙, 도구 또는 환경 변수�
 }
 ```
 
-## 다음 단계
+## ขั้นตอนถัดไป
 
-- [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko): 에이전트가 코드를 실행하고 파일을 유지하는 방법을 알아봅니다.
-- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리 에이전트의 핵심 개념을 알아봅니다.
-- [맞춤 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
+- [สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): ดูวิธีที่เอเจนต์เรียกใช้โค้ดและคงไฟล์ไว้
+- [ภาพรวมของ Agent](https://ai.google.dev/gemini-api/docs/agents?hl=th): ดูข้อมูลเกี่ยวกับแนวคิดหลักของ Agent ที่มีการจัดการ
+- [การสร้าง Agent ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/custom-agents?hl=th): กำหนด Agent ของคุณเองโดยใช้ `AGENTS.md` และ `SKILL.md`
 
-의견 보내기
+ส่งความคิดเห็น
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-최종 업데이트: 2026-09-24(UTC)
+อัปเดตล่าสุด 2026-10-07 UTC
 
-의견을 전달하고 싶나요?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-24(UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-07 UTC"],[],[]]

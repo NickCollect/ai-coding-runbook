@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=fr
-fetched_at: 2026-10-05T06:32:37.977253+00:00
-title: "Transcription audio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/transcribe?hl=he
+fetched_at: 2026-10-12T06:52:14.353361+00:00
+title: "\u05ea\u05de\u05dc\u05d5\u05dc \u05d0\u05d5\u05d3\u05d9\u05d5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
 
-Envoyer des commentaires
+שליחת משוב
 
-# Transcription audio
+# תמלול אודיו
 
-L'API Gemini convertit la parole contenue dans les fichiers audio en texte à l'aide du modèle Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). Grâce aux capacités de compréhension audio de Gemini, elle fournit une transcription précise avec identification automatique de la langue, attribution des locuteurs, codes temporels au niveau des mots et suggestions de vocabulaire personnalisé. Il propose également un mode de [transcription intelligente](#transcription-modes) qui supprime les hésitations et met en forme le texte de manière intelligente.
+‫Gemini API ממיר דיבור בקובצי אודיו לטקסט באמצעות מודל Gemini 3.5 Transcribe (`gemini-3.5-transcribe`). על סמך יכולות ההבנה של אודיו ב-Gemini, הוא מספק תמלול מדויק עם זיהוי שפה אוטומטי, תיוג דוברים, חותמות זמן ברמת המילה ורמזים לגבי אוצר מילים מותאם אישית. יש גם מצב [תמלול חכם](#transcription-modes) שכולל הסרת גמגום ופורמט חכם.
 
-Pour transcrire un fichier audio, importez-le et transmettez-le à `gemini-3.5-transcribe` :
+כדי לתמלל קובץ אודיו, מעלים את האודיו ומעבירים אותו אל `gemini-3.5-transcribe`:
 
 ### Python
 
@@ -83,26 +83,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Présentation
+## סקירה כללית
 
-Gemini 3.5 Transcribe est optimisé pour les tâches de reconnaissance vocale. Il gère les différents accents, les bruits de fond et les conversations multilingues.
+‫Gemini 3.5 Transcribe עבר אופטימיזציה למשימות של המרת דיבור לטקסט. הוא מתמודד עם מבטאים שונים, רעשי רקע ושיחות בכמה שפות.
 
-Voici les principales fonctionnalités de cette solution :
+היכולות העיקריות:
 
-- **Reconnaissance vocale automatique** : détecte automatiquement les langues dans [plus de 85 paramètres régionaux](#supported-languages). Gère le code-switching intra-phrase et inter-phrase sans configuration manuelle.
-- **Vocabulaire personnalisé** : oriente la reconnaissance vers les termes, acronymes et noms propres spécifiques à un domaine en transmettant jusqu'à 1 000 expressions.
-- **Diarisation des locuteurs** : permet de distinguer plusieurs locuteurs et d'attribuer des segments parlés à des libellés distincts.
-- **Codes temporels au niveau du mot** : génèrent des décalages temporels de début et de fin précis pour chaque mot reconnu.
-- **Transcription intelligente** : supprime les hésitations, les mots de remplissage et les répétitions, et applique une mise en forme structurée.
-- **Mise en forme et normalisation** : applique la mise en majuscules, la ponctuation et la normalisation inverse du texte (par exemple, en convertissant "vingt-six millions de dollars" en "26 M$").
+- **זיהוי אוטומטי של דיבור (ASR):** זיהוי אוטומטי של שפות ב[למעלה מ-85 לוקאלים](#supported-languages). הוא מטפל בערבוב שפות בתוך משפט ובין משפטים בלי הגדרה ידנית.
+- **אוצר מילים מותאם אישית:** כדי להטות את הזיהוי למונחים, לראשי תיבות ולשמות פרטיים ספציפיים לדומיין, אפשר להעביר עד 1,000 ביטויים.
+- **הפרדה בין דוברים:** מבחינה בין כמה דוברים ומשייכת את הקטעים המדוברים לתוויות שונות.
+- **חותמות זמן ברמת המילה:** המערכת יוצרת היסטים מדויקים של שעת ההתחלה ושעת הסיום לכל מילה מזוהה.
+- **תמלול חכם:** מוחק מילים מיותרות, חזרות ואי-רציפויות, ומחיל עיצוב מובנה.
+- **עיצוב ונורמליזציה:** הפונקציה מוסיפה אותיות רישיות וסימני פיסוק, ומבצעת נורמליזציה הפוכה של טקסט, למשל המרה של "twenty six million dollars" ל-"$26M".
 
-Pour le raisonnement audio général ou les systèmes de questions-réponses sur le contenu audio, utilisez [Compréhension audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=fr). Pour la synthèse audio de texte en voix, utilisez [Text-to-Speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr).
+כדי לקבל תשובות לשאלות או נימוקים כלליים לגבי תוכן אודיו, אפשר להשתמש ב[הבנת אודיו](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=he). כדי לבצע סינתזה של אודיו מהמרת טקסט לדיבור, משתמשים ב[המרת טקסט לדיבור](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=he).
 
-## Détection de la langue et suggestions
+## זיהוי שפה ורמזים
 
-Par défaut, le modèle détecte automatiquement la langue parlée. Il passe d'une langue à l'autre de manière dynamique lorsque les locuteurs alternent les langues.
+כברירת מחדל, המודל מזהה את השפה המדוברת באופן אוטומטי. הוא עובר בין שפות באופן דינמי כשהדוברים מבצעים החלפת קודים.
 
-Pour utiliser la détection automatique, omettez `language_codes` ou fournissez une liste vide :
+כדי להשתמש בזיהוי אוטומטי, משמיטים את `language_codes` או מספקים רשימה ריקה:
 
 ### Python
 
@@ -164,7 +164,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-Si vous connaissez la langue à l'avance, spécifiez les codes de langue BCP-47 dans `language_codes` pour améliorer la précision de la transcription (voir [Langues acceptées](#supported-languages)) :
+אם אתם יודעים מראש את השפה, כדאי לציין קודי שפה בתקן BCP-47 ב-`language_codes` כדי לשפר את דיוק התמלול (ראו [שפות נתמכות](#supported-languages)):
 
 ### Python
 
@@ -198,9 +198,9 @@ const config = {
 }
 ```
 
-## Vocabulaire personnalisé
+## אוצר מילים בהתאמה אישית
 
-Vous pouvez orienter le modèle vocal vers des mots inhabituels, du jargon technique, des noms de marques ou des noms propres. Fournissez jusqu'à 1 000 termes dans le tableau `custom_vocabulary` (les meilleurs résultats sont généralement obtenus avec un maximum de 100 termes) :
+אתם יכולים להכווין את מודל הדיבור למילים לא נפוצות, למונחים מקצועיים, לשמות מותגים או לשמות עצם פרטיים. מספקים עד 1,000 מונחים במערך `custom_vocabulary` (בדרך כלל מקבלים את התוצאות הטובות ביותר עם עד 100 מונחים):
 
 ### Python
 
@@ -262,11 +262,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Identification du locuteur
+## חלוקת קובץ האודיו לפי דוברים
 
-L'identification des locuteurs permet d'identifier les différentes voix dans l'enregistrement et d'attribuer un identifiant à chaque segment, comme `spk_1` ou `spk_2`. Jusqu'à huit locuteurs sont pris en charge (l'attribution pour trois locuteurs ou plus est expérimentale).
+התכונה 'זיהוי דוברים' מזהה קולות שונים בהקלטה ומתייגת כל קטע במזהה דובר כמו `spk_1` או `spk_2`. יש תמיכה בעד 8 דוברים (השיוך ל-3 דוברים או יותר הוא ניסיוני).
 
-Activez l'identification des locuteurs en définissant `diarization` sur `True` :
+כדי להפעיל את החלוקה לפי דוברים, מגדירים את `diarization` ל-`True`:
 
 ### Python
 
@@ -328,11 +328,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Codes temporels au niveau du mot
+## חותמות זמן ברמת המילה
 
-Les codes temporels au niveau du mot fournissent des décalages de début et de fin exacts pour chaque mot reconnu dans le flux audio.
+חותמות זמן ברמת המילה מספקות היסטים מדויקים של התחלה וסיום לכל מילה מזוהה בשידור האודיו.
 
-Activez les codes temporels en définissant `word_timestamp` sur `True` :
+כדי להפעיל חותמות זמן, מגדירים את `word_timestamp` ל-`True`:
 
 ### Python
 
@@ -394,7 +394,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-Vous pouvez combiner `diarization` et `word_timestamp` dans une même requête pour recevoir à la fois les identifiants des intervenants et les codes temporels des mots :
+אפשר לשלב בין `diarization` לבין `word_timestamp` בבקשה אחת כדי לקבל גם תוויות לזיהוי דוברים וגם חותמות זמן של המילים:
 
 ### Python
 
@@ -431,21 +431,21 @@ const config = {
 }
 ```
 
-## Modes de transcription
+## מצבי תמלול
 
-Gemini 3.5 Transcribe est compatible avec deux modes de transcription via le paramètre `mode` :
+‫Gemini 3.5 Transcribe תומך בשני מצבי תמלול באמצעות הפרמטר `mode`:
 
-- **`VERBATIM` (par défaut)** : renvoie une transcription exacte de tout ce qui a été dit, en conservant les mots de remplissage bruts ("euh", "enfin", "genre", "tu vois"), les répétitions, les pauses et les faux départs. Obligatoire lorsque vous utilisez des codes temporels ou la segmentation des locuteurs.
-- **`SMART` (Transcription intelligente)** : optimise la transcription pour la lecture en appliquant un post-traitement intelligent :
-  - **Suppression des hésitations** : élimine les mots de remplissage, les bégaiements et les faux départs.
-  - **Corrections spontanées** : les corrections orales sont résolues directement (par exemple, *"Rendez-vous mardi, non, mercredi à 14h"* devient *"Rendez-vous mercredi à 14h"*).
-  - **Mise en forme structurée automatique** : structure automatiquement les pensées exprimées en paragraphes, listes numérotées, listes à puces, dates, devises et nombres mis en forme.
-  - **Nettoyage grammatical** : applique une ponctuation, une mise en forme des phrases et un flux naturels.
+- ‫**`VERBATIM` (ברירת מחדל)**: מחזיר תמליל מדויק מילה במילה של כל מה שנאמר, כולל מילות מילוי לא ערוכות (כמו 'אה', 'אממ', 'כאילו', 'אתה יודע'), חזרות, הפסקות והתחלות שגויות. חובה כשמשתמשים בחותמות זמן או בהפרדה בין הדוברים.
+- ‫**`SMART` (תמלול חכם)**: התמלול עובר אופטימיזציה לקריאה באמצעות עיבוד מתקדם:
+  - **הסרת מילים מיותרות**: מסירה מילים מיותרות, גמגום והתחלות שגויות.
+  - **תיקונים עצמיים בתוך המשפט**: תיקונים שמתבצעים במהלך הדיבור נפתרים באופן ישיר (לדוגמה, *"בוא ניפגש ביום שלישי, בעצם לא, ביום רביעי בשעה שתיים"* הופך ל-*"בוא ניפגש ביום רביעי בשעה 14:00"*).
+  - **עיצוב מובנה אוטומטי**: המערכת מעצבת באופן אוטומטי את המחשבות המדוברות לפסקאות, לרשימות ממוספרות, לתבליטים, לתאריכים, למטבעות ולמספרים מעוצבים.
+  - **ניקוי דקדוקי**: הוספת פיסוק טבעי, שימוש באותיות רישיות בתחילת משפטים ושיפור הרצף.
 
-| Audio parlé | Résultat de la fonction `VERBATIM` | Résultat de la fonction `SMART` (transcription intelligente) |
+| אודיו של דיבור | פלט `VERBATIM` | פלט של `SMART` (תמלול חכם) |
 | --- | --- | --- |
-| "Euh, pour la réunion, je pense qu'on devrait inviter Alice et, non, Bob et Carol." | "Euh, pour la réunion, je pense qu'on devrait inviter Alice, non, Bob et Carol." | "Pour la réunion, je pense que nous devrions inviter Bob et Carol." |
-| "First item review budget second item finalize timeline third item send recap" (Premier élément : examiner le budget. Deuxième élément : finaliser le calendrier. Troisième élément : envoyer le récapitulatif.) | "examine le premier élément, vérifie le budget du deuxième élément, finalise le calendrier du troisième élément, envoie le récapitulatif" | "1. Vérifiez le budget. 2. Finalisez la timeline 3. Envoyer le récapitulatif" |
+| "אה, אז לפגישה, אני חושב שכדאי לנו, אה, להזמין את אליס ו, רגע, לא, את בוב ואת קרול." | "אממ אז לפגישה אני חושב שכדאי לנו להזמין את אליס, רגע לא, את בוב ואת קרול". | "לפגישה, אני חושב שכדאי להזמין את בוב ואת קרול". |
+| ‫"First item review budget second item finalize timeline third item send recap" | ‫"first item review budget second item finalize timeline third item send recap" | "1. בודקים את התקציב 2. סיום העריכה של ציר הזמן 3. שליחת סיכום" |
 
 ### Python
 
@@ -509,13 +509,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Analyser la transcription
+## ניתוח פלט התמלול
 
-Le texte complet de la transcription est renvoyé dans `response.text`.
+הטקסט המלא של התמליל מוחזר ב-`response.text`.
 
-Lorsque `word_timestamp` ou `diarization` sont activés, l'API renvoie également des annotations détaillées au niveau des mots et des identifiants des intervenants associés aux parties candidates.
+כשמפעילים את `word_timestamp` או את `diarization`, ה-API מחזיר גם הערות מפורטות ברמת המילה ותוויות לזיהוי דוברים שמצורפות לחלקים הרלוונטיים.
 
-Voici comment extraire et parcourir les codes temporels des mots et les tours de parole :
+כך מחלצים את חותמות הזמן של המילים ואת תור הדיבור של הדוברים וחוזרים עליהם שוב ושוב:
 
 ### Python
 
@@ -615,116 +615,116 @@ for (const w of words) {
 }
 ```
 
-## Langues disponibles
+## שפות נתמכות
 
-Les langues et les codes de langue BCP-47 suivants sont compatibles avec Gemini 3.5 Transcribe :
+השפות הבאות וקודי השפה שלהן בתקן BCP-47 נתמכות ב-Gemini 3.5 Transcribe:
 
-| Langue | Code BCP-47 | Langue | Code BCP-47 |
+| שפה | קוד BCP-47 | שפה | קוד BCP-47 |
 | --- | --- | --- | --- |
-| Afrikaans | `af-ZA` | Japonais | `ja-JP` |
-| Amharique | `am-ET` | Javanais | `jv-ID` |
-| Arabe (Égypte) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| Arménien | `hy-AM` | Kannada | `kn-IN` |
-| Assamais | `as-IN` | Kazakh | `kk-KZ` |
-| Azéri | `az-AZ` | Coréen | `ko-KR` |
-| Biélorusse | `be-BY` | Kirghiz | `ky-KG` |
-| Bengali (Bangladesh) | `bn-BD` | Letton | `lv-LV` |
-| Bengali (Inde) | `bn-IN` | Lingala | `ln-CD` |
-| Bosniaque | `bs-BA` | Lituanien | `lt-LT` |
-| Bulgare | `bg-BG` | Macédonien | `mk-MK` |
-| Bulgare (aroumain) | `rup-BG` | Malaisien | `ms-MY` |
-| Birman | `my-MM` | Malayalam | `ml-IN` |
-| Cantonais (traditionnel) | `yue-Hant-HK` | Maltais | `mt-MT` |
-| Catalan | `ca-ES` | Chinois mandarin (simplifié) | `cmn-Hans-CN` |
-| Cebuano | `ceb` | Marathi | `mr-IN` |
-| Khmer central | `km-KH` | Mongol | `mn-MN` |
-| Croate | `hr-HR` | Népalais | `ne-NP` |
-| Tchèque | `cs-CZ` | Norvégien | `nb-NO` |
-| Danois | `da-DK` | Oriya | `or-IN` |
-| Néerlandais | `nl-NL` | Polonais | `pl-PL` |
-| Anglais (Grande-Bretagne) | `en-GB` | Portugais (Brésil) | `pt-BR` |
-| Anglais (Inde) | `en-IN` | Portugais (Portugal) | `pt-PT` |
-| Anglais (États-Unis) | `en-US` | Panjabi | `pa-IN` |
-| Estonien | `et-EE` | Panjabi (écriture gurmukhī) | `pa-Guru-IN` |
-| Farsi | `fa-IR` | Roumain | `ro-RO` |
-| Tagalog | `fil-PH` | Russe | `ru-RU` |
-| Finnois | `fi-FI` | Serbe | `sr-RS` |
-| Français | `fr-FR` | Sindhi (écriture arabe) | `sd-Arab-IN` |
-| Galicien | `gl-ES` | Slovaque | `sk-SK` |
-| Géorgien | `ka-GE` | Slovène | `sl-SI` |
-| Allemand | `de-DE` | Espagnol (Amérique latine) | `es-419` |
-| Grec | `el-GR` | Espagnol (États-Unis) | `es-US` |
-| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
-| Haoussa | `ha-NG` | Suédois | `sv-SE` |
-| Hébreu | `he-IL` | Tadjik | `tg-TJ` |
-| Hindi | `hi-IN` | Telugu | `te-IN` |
-| Hongrois | `hu-HU` | Thaï | `th-TH` |
-| Islandais | `is-IS` | Turc | `tr-TR` |
-| Anglais (Inde) | `en-IN` | Ukrainien | `uk-UA` |
-| Indonésien | `id-ID` | Ouzbek | `uz-UZ` |
-| Italien | `it-IT` | Vietnamien | `vi-VN` |
+| אפריקאנס | `af-ZA` | יפנית | `ja-JP` |
+| אמהרית | `am-ET` | ג'אווה | `jv-ID` |
+| ערבית (מצרים) | `ar-EG` | קאבוורדיאנו | `kea-CV` |
+| ארמנית | `hy-AM` | קנאדה | `kn-IN` |
+| אסאמית | `as-IN` | קזחית | `kk-KZ` |
+| אזרית | `az-AZ` | קוריאנית | `ko-KR` |
+| בלארוסית | `be-BY` | קירגיזית | `ky-KG` |
+| בנגלית (בנגלדש) | `bn-BD` | לטבית | `lv-LV` |
+| בנגלית (הודו) | `bn-IN` | לינגלה | `ln-CD` |
+| בוסנית | `bs-BA` | ליטאית | `lt-LT` |
+| בולגרית | `bg-BG` | מקדונית | `mk-MK` |
+| בולגרית (ארומנית) | `rup-BG` | מלאית | `ms-MY` |
+| בורמזית | `my-MM` | מליאלאם | `ml-IN` |
+| קנטונזית (מסורתית) | `yue-Hant-HK` | מלטית | `mt-MT` |
+| קטלאנית | `ca-ES` | סינית מנדרינית (פשוטה) | `cmn-Hans-CN` |
+| סבואנו | `ceb` | מראטהית | `mr-IN` |
+| חמר מרכזית | `km-KH` | מונגולית | `mn-MN` |
+| קרואטית | `hr-HR` | נפאלית | `ne-NP` |
+| צ'כית | `cs-CZ` | נורווגית | `nb-NO` |
+| דנית | `da-DK` | אורייה | `or-IN` |
+| הולנדית | `nl-NL` | פולנית | `pl-PL` |
+| אנגלית (בריטניה) | `en-GB` | פורטוגזית (ברזיל) | `pt-BR` |
+| אנגלית (הודו) | `en-IN` | פורטוגזית (פורטוגל) | `pt-PT` |
+| אנגלית (ארצות הברית) | `en-US` | פנג'אבי | `pa-IN` |
+| אסטונית | `et-EE` | פנג'אבי (כתב גורמוקי) | `pa-Guru-IN` |
+| פרסית | `fa-IR` | רומנית | `ro-RO` |
+| פיליפינית | `fil-PH` | רוסית | `ru-RU` |
+| פינית | `fi-FI` | סרבית | `sr-RS` |
+| צרפתית | `fr-FR` | סינדהי (כתב ערבי) | `sd-Arab-IN` |
+| גליציאנית | `gl-ES` | סלובקית | `sk-SK` |
+| גאורגית | `ka-GE` | סלובנית | `sl-SI` |
+| גרמנית | `de-DE` | ספרדית (אמריקה הלטינית) | `es-419` |
+| יוונית | `el-GR` | ספרדית (ארצות הברית) | `es-US` |
+| גוג'ראטי | `gu-IN` | סוואהילית (קניה) | `sw-KE` |
+| האוסה | `ha-NG` | שוודית | `sv-SE` |
+| עברית | `he-IL` | טג'יקית | `tg-TJ` |
+| הינדי | `hi-IN` | טלוגו | `te-IN` |
+| הונגרית | `hu-HU` | תאית | `th-TH` |
+| איסלנדית | `is-IS` | טורקית | `tr-TR` |
+| אנגלית הודית | `en-IN` | אוקראינית | `uk-UA` |
+| אינדונזית | `id-ID` | אוזבקית | `uz-UZ` |
+| איטלקית | `it-IT` | וייטנאמית | `vi-VN` |
 
-## Formats audio acceptés
+## פורמטים נתמכים של אודיו
 
-Gemini 3.5 Transcribe est compatible avec les types MIME de format audio suivants :
+‫Gemini 3.5 Transcribe תומך בסוגי ה-MIME הבאים של פורמט אודיו:
 
-- WAV - `audio/wav`
+- ‫WAV – `audio/wav`
 - MP3 - `audio/mp3`
-- AIFF – `audio/aiff`
-- AAC - `audio/aac`
-- OGG - `audio/ogg`
-- FLAC - `audio/flac`
+- AIFF - `audio/aiff`
+- ‫AAC – `audio/aac`
+- ‫OGG – `audio/ogg`
+- ‫FLAC – `audio/flac`
 - MPEG - `audio/mpeg`
 - M4A - `audio/m4a`
-- L16 – `audio/l16`
-- Opus – `audio/opus`
+- L16 - `audio/l16`
+- Opus – `audio/opus`
 - ALAW - `audio/alaw`
 - MULAW - `audio/mulaw`
-- WebM - `audio/webm`
+- ‫WebM – `audio/webm`
 
-Pour obtenir la liste complète des types MIME et des schémas de paramètres acceptés, consultez la [documentation de référence de l'API Interactions](https://ai.google.dev/api/interactions-api?hl=fr#Resource:Content).
+רשימה מלאה של סוגי ה-MIME הנתמכים וסכימות הפרמטרים מופיעה [במאמר בנושא Interactions API](https://ai.google.dev/api/interactions-api?hl=he#Resource:Content).
 
-## Référence de paramètre
+## הפניה לפרמטר
 
-Configurez la transcription en définissant les champs de l'objet `audio_transcription_config` dans `GenerateContentConfig` :
+כדי להגדיר תמלול, צריך להגדיר שדות באובייקט `audio_transcription_config` ב-`GenerateContentConfig`:
 
-| Champ | Type | Description |
+| שדה | סוג | תיאור |
 | --- | --- | --- |
-| `language_codes` | Tableau de chaînes | Codes de langue BCP-47 (par exemple, `["en-US"]`). S'ils sont omis ou vides (`[]`), le modèle détecte automatiquement la langue et gère le changement de code. |
-| `custom_vocabulary` | Tableau de chaînes | Jusqu'à 1 000 termes, acronymes ou noms propres personnalisés pour orienter la reconnaissance vocale. Incompatible avec l'identification du locuteur et les codes temporels au niveau du mot. |
-| `word_timestamp` | Booléen | Définissez sur `True` pour inclure les décalages de début et de fin des mots. Si cette option est omise ou définie sur `False`, aucun code temporel de mot n'est renvoyé. Incompatible avec le vocabulaire personnalisé. |
-| `diarization` | Booléen | Définissez la valeur sur `True` pour identifier les différents intervenants et leur attribuer un identifiant. Incompatible avec le vocabulaire personnalisé. |
-| `mode` | Chaîne | Mode Transcription. Valeurs acceptées : `"VERBATIM"` (par défaut) et `"SMART"`. Incompatible avec les codes temporels et l'identification des locuteurs. |
+| `language_codes` | מערך של מחרוזות | קודי שפה בתקן BCP-47 (למשל, `["en-US"]`). אם לא מציינים קוד או אם הקוד ריק (`[]`), המודל מזהה את השפה באופן אוטומטי ומטפל בהחלפת קודים. |
+| `custom_vocabulary` | מערך של מחרוזות | עד 1,000 מונחים מותאמים אישית, ראשי תיבות או שמות עצם כדי להטות את זיהוי הדיבור. האפשרות לא תואמת לסימון דוברים ולחותמות זמן ברמת המילה. |
+| `word_timestamp` | בוליאני | מגדירים את הערך `True` כדי לכלול את ההיסטים של תחילת המילה וסוף המילה. אם משמיטים את הפרמטר או מציינים את הערך `False`, לא מוחזרות חותמות זמן של מילים. לא תואם לאוצר מילים מותאם אישית. |
+| `diarization` | בוליאני | מגדירים את האפשרות `True` כדי לזהות דוברים שונים ולהוסיף להם תוויות. לא תואם לאוצר מילים מותאם אישית. |
+| `mode` | מחרוזת | מצב תמלול. ערכים נתמכים: `"VERBATIM"` (ברירת מחדל) ו-`"SMART"`. לא תואם לחותמות זמן ולזיהוי דוברים. |
 
-## Bonnes pratiques
+## שיטות מומלצות
 
-- **Fournissez un son clair** : assurez-vous que les enregistrements audio ont une séparation vocale claire et évitez les découpages importants.
-- **Fournissez des indications de langue si vous les connaissez** : si vous connaissez la langue de l'audio à l'avance, spécifiez `language_codes` pour maximiser la précision.
-- **Cibler un vocabulaire personnalisé** : n'incluez que des termes de domaine distincts, des noms de marques ou des noms propres dans `custom_vocabulary`, plutôt que des mots courants.
-- **Utilisez l'API Files pour les enregistrements volumineux** : pour les fichiers de plus de quelques secondes, importez le fichier à l'aide de `client.files.upload` et transmettez le fichier renvoyé au contenu du modèle.
+- **הקלטת אודיו ברור:** חשוב לוודא שההקלטות של האודיו כוללות הפרדה ברורה של הקולות, ולהימנע מקטיעת אודיו חמורה.
+- **הוספת רמזים לגבי השפה כשמכירים אותה:** אם אתם יודעים מראש מה השפה של האודיו, כדאי לציין את `language_codes` כדי לשפר את הדיוק.
+- **אוצר מילים מותאם אישית ליעד:** כדאי לכלול ב-`custom_vocabulary` רק מונחים ייחודיים שקשורים לדומיין, שמות של מותגים או שמות עצם, ולא מילים נפוצות שמשמשות בחיי היום-יום.
+- **שימוש ב-Files API להקלטות ארוכות:** לקבצים שאורכם כמה שניות או יותר, מעלים את הקובץ באמצעות `client.files.upload` ומעבירים את הקובץ שמוחזר לתוכן המודל.
 
-## Limites
+## מגבלות
 
-- **Durée de l'audio** : les requêtes unitaires standards sont compatibles avec les fichiers audio d'une durée maximale d'une heure. Le traitement audio est limité à 30 minutes lorsque des fonctionnalités telles que la segmentation des locuteurs ou les codes temporels au niveau des mots sont activées.
-- **Codes temporels au niveau du mot** : l'activation des codes temporels au niveau du mot peut dégrader la précision globale de la transcription.
-- **Identification des locuteurs** : l'identification des locuteurs est compatible avec un maximum de huit locuteurs. L'attribution des locuteurs pour trois locuteurs ou plus est une fonctionnalité expérimentale.
-- **Vocabulaire personnalisé** : vous pouvez fournir jusqu'à 1 000 termes dans `custom_vocabulary`, mais les meilleurs résultats sont généralement obtenus avec un maximum de 100 termes. Vous ne pouvez pas combiner `custom_vocabulary` avec la segmentation des locuteurs ou les codes temporels au niveau des mots. L'API rejette les requêtes qui spécifient `custom_vocabulary` avec l'une ou l'autre de ces fonctionnalités.
-- **Compatibilité des modes** : la transcription intelligente (`mode: "SMART"`) ne peut pas être combinée avec `word_timestamp` ni `diarization`.
+- **משך האודיו:** בקשות סטנדרטיות של unary תומכות בקובצי אודיו באורך של עד שעה. כשמפעילים תכונות כמו זיהוי דוברים או חותמות זמן ברמת המילה, עיבוד האודיו מוגבל ל-30 דקות.
+- **חותמות זמן ברמת המילה:** הפעלת חותמות זמן ברמת המילה עלולה לפגוע בדיוק הכולל של התמלול.
+- **חלוקת קובץ האודיו לפי דוברים:** חלוקת קובץ האודיו לפי דוברים תומכת בעד 8 דוברים. השיוך של דוברים בשיחות עם 3 דוברים או יותר הוא ניסיוני.
+- **אוצר מילים מותאם אישית:** אפשר לספק עד 1,000 מונחים ב-`custom_vocabulary`, אבל בדרך כלל התוצאות הכי טובות מתקבלות עם עד 100 מונחים. אי אפשר לשלב את `custom_vocabulary` עם תיוג דוברים או עם חותמות זמן ברמת המילה. ה-API דוחה בקשות שמציינות את `custom_vocabulary` לצד אחת מהתכונות האלה.
+- **תאימות למצבים:** אי אפשר לשלב תמלול חכם (`mode: "SMART"`) עם `word_timestamp` או `diarization`.
 
-## Étape suivante
+## המאמרים הבאים
 
-- Diffusez de l'audio en temps réel avec le [guide de transcription en direct](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=fr) à l'aide de l'API Live.
-- Explorez la [compréhension audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=fr) pour analyser, résumer ou interroger des contenus audio.
-- Découvrez comment synthétiser des contenus audio à partir de texte à l'aide de [Text-to-Speech](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr).
-- Consultez la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.5-transcribe) pour connaître les tarifs des modèles et les limites de jetons.
-- Consultez le guide de l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr) pour savoir comment importer et gérer des fichiers multimédias.
+- אתם יכולים להזרים אודיו בזמן אמת באמצעות [המדריך לתמלול בזמן אמת](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=he) באמצעות Live API.
+- אפשר להשתמש ב[הבנת אודיו](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=he) כדי לנתח, לסכם או לשאול שאלות לגבי תוכן אודיו.
+- [איך מסנתזים אודיו מטקסט באמצעות המרת טקסט לדיבור](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=he)
+- [בדף התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#gemini-3.5-transcribe) מפורטים המחירים של המודלים ומגבלות הטוקנים.
+- במדריך [Files API](https://ai.google.dev/gemini-api/docs/files?hl=he) מוסבר איך להעלות ולנהל קובצי מדיה.
 
-Envoyer des commentaires
+שליחת משוב
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Dernière mise à jour le 2026/09/08 (UTC).
+עדכון אחרון: 2026-09-08 (שעון UTC).
 
-Voulez-vous nous donner plus d'informations ?
+רוצה לתת לנו משוב?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/08 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-08 (שעון UTC)."],[],[]]

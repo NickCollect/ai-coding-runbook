@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=fr
-fetched_at: 2026-10-05T06:48:02.097262+00:00
-title: "Utilisation de l'outil avec l'API\u00a0Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ja
+fetched_at: 2026-10-12T06:51:14.647056+00:00
+title: "Live API \u3067\u306e\u30c4\u30fc\u30eb\u306e\u4f7f\u7528 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# Utilisation de l'outil avec l'API Live
+# Live API でのツールの使用
 
-L'utilisation d'outils permet à l'API Live d'aller au-delà de la simple conversation en lui permettant d'effectuer des actions dans le monde réel et d'extraire un contexte externe tout en maintenant une connexion en temps réel.
-Vous pouvez définir des outils tels que [l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)
-et [la recherche Google](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) avec l'API Live.
+ツールを使用すると、Live API は会話だけでなく、リアルタイム接続を維持しながら現実世界でアクションを実行したり、外部コンテキストを取得したりできます。
+Live API を使用して、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
+や [Google 検索](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)などのツールを定義できます。
 
-## Présentation des outils compatibles
+## サポートされているツールの概要
 
-Voici un bref aperçu des outils disponibles pour les modèles d'API Live :
+Live API モデルで使用できるツールについて簡単に説明します。
 
-| Outil | Preview Gemini 3.1 Flash-Live | Preview Gemini 2.5 Flash-Live |
+| ツール | Gemini 3.1 Flash Live プレビュー | Gemini 2.5 Flash Live プレビュー |
 | --- | --- | --- |
-| **Rechercher** | Compatible | Compatible |
-| **Appel de fonction** | Compatible (synchrone uniquement) | Compatible (synchrone et [asynchrone](#async-function-calling)) |
-| **Google Maps** | Non compatible | Non compatible |
-| **Exécution de code** | Non compatible | Non compatible |
-| **Contexte d'URL** | Non compatible | Non compatible |
+| **検索** | サポート対象 | サポート対象 |
+| **関数呼び出し** | サポート対象（同期のみ） | サポート対象（同期と[非同期](#async-function-calling)） |
+| **Google マップ** | サポート対象外 | サポート対象外 |
+| **コード実行** | サポート対象外 | サポート対象外 |
+| **URL コンテキスト** | サポート対象外 | サポート対象外 |
 
-## Appel de fonction
+## 関数呼び出し
 
-L'API Live est compatible avec l'appel de fonction, tout comme les requêtes de génération de contenu classiques. L'appel de fonction permet à l'API Live d'interagir avec des données et des programmes externes, ce qui augmente considérablement les possibilités de vos applications.
+Live API は、通常のコンテンツ生成リクエストと同様に、関数呼び出しをサポートしています。関数呼び出しを使用すると、Live API は外部データやプログラムとやり取りできるため、アプリケーションでできることが大幅に増えます。
 
-Vous pouvez définir des déclarations de fonction dans la configuration de la session.
-Après avoir reçu des appels d'outil, le client doit répondre avec une liste d'objets `FunctionResponse` à l'aide de la méthode `session.send_tool_response`.
+関数宣言は、セッション構成の一部として定義できます。
+ツール呼び出しを受信したら、クライアントは `session.send_tool_response` メソッドを使用して、`FunctionResponse` オブジェクトのリストをレスポンスで返す必要があります。
 
-Pour en savoir
-plus, consultez le [tutoriel sur l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
+詳しくは、[関数呼び出しのチュートリアル](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)をご覧ください
+。
 
 ### Python
 
@@ -219,13 +219,14 @@ async function main() {
 main();
 ```
 
-À partir d'un seul prompt, le modèle peut générer plusieurs appels de fonction et le code nécessaire pour chaîner leurs sorties. Ce code s'exécute dans un environnement de bac à sable, générant par la suite des messages [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=fr#bidigeneratecontenttoolcall).
+モデルは、単一のプロンプトから複数の関数呼び出しと、出力の連結に必要なコードを生成できます。このコードはサンドボックス
+環境で実行され、後続の [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ja#bidigeneratecontenttoolcall) メッセージを生成します。
 
-## Appel de fonction asynchrone
+## 非同期関数呼び出し
 
-Par défaut, l'appel de fonction s'exécute de manière séquentielle, ce qui signifie que l'exécution est interrompue jusqu'à ce que les résultats de chaque appel de fonction soient disponibles. Cela garantit un traitement séquentiel, ce qui signifie que vous ne pourrez pas continuer à interagir avec le modèle pendant l'exécution des fonctions.
+関数呼び出しはデフォルトで順番に実行されます。つまり、各関数呼び出しの結果が表示されるまで実行は停止します。これにより、順番どおりに処理が行われます。つまり、関数が実行されている間はモデルとのやり取りを続行できません。
 
-Si vous ne souhaitez pas bloquer la conversation, vous pouvez demander au modèle d'exécuter les fonctions de manière asynchrone. Pour ce faire, vous devez d'abord ajouter un `behavior` aux définitions de fonction :
+会話をブロックしたくない場合は、関数を非同期で実行するようにモデルに指示できます。そのためには、まず関数定義に `behavior` を追加する必要があります。
 
 ### Python
 
@@ -249,16 +250,16 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING` garantit que la fonction s'exécute de manière asynchrone pendant que vous pouvez continuer à interagir avec le modèle.
+`NON-BLOCKING` を指定すると、関数は非同期で実行され、モデルとのやり取りを続行できます。
 
-Vous devez ensuite indiquer au modèle comment se comporter lorsqu'il reçoit le `FunctionResponse` à l'aide du paramètre `scheduling`. Il peut :
+次に、`scheduling` パラメータを使用して、`FunctionResponse` を受信したときのモデルの動作をモデルに伝える必要があります。次のいずれかになります。
 
-- interrompre ce qu'il est en train de faire et vous informer immédiatement de la réponse qu'il a reçue
-  (`scheduling="INTERRUPT"`),
-- attendre qu'il ait terminé ce qu'il est en train de faire
-  (`scheduling="WHEN_IDLE"`),
-- ou ne rien faire et utiliser ces connaissances plus tard dans la discussion
-  (`scheduling="SILENT"`)
+- 実行中の処理を中断して、取得したレスポンスをすぐに通知する
+  (`scheduling="INTERRUPT"`)
+- 現在実行中の処理が完了するまで待つ
+  (`scheduling="WHEN_IDLE"`)
+- 何もせず、その知識を後でディスカッションで使用する
+  （`scheduling="SILENT"`）
 
 ### Python
 
@@ -290,10 +291,10 @@ const functionResponse = {
 }
 ```
 
-## Ancrage avec la recherche Google
+## Google 検索によるグラウンディング
 
-Vous pouvez activer l'ancrage avec la recherche Google dans la configuration de la session. Cela augmente la précision de l'API Live et évite les hallucinations. Pour en savoir plus, consultez le [tutoriel sur l'ancrage](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) pour
-en savoir plus.
+セッション構成の一部として、Google 検索によるグラウンディングを有効にできます。これにより、Live API の精度が向上し、ハルシネーションを防ぐことができます。詳しくは、[グラウンディングのチュートリアル](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)を
+ご覧ください。
 
 ### Python
 
@@ -452,9 +453,9 @@ async function main() {
 main();
 ```
 
-## Combiner plusieurs outils
+## 複数のツールを組み合わせる
 
-Vous pouvez combiner plusieurs outils dans l'API Live, ce qui augmente encore les capacités de votre application :
+Live API 内で複数のツールを組み合わせることで、アプリケーションの機能をさらに強化できます。
 
 ### Python
 
@@ -502,19 +503,19 @@ const config = {
 // ... remaining model call
 ```
 
-## Étape suivante
+## 次のステップ
 
-- Consultez d'autres exemples d'utilisation d'outils avec l'API Live dans le
-  [guide pratique sur l'utilisation d'outils](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=fr).
-- Pour en savoir plus sur les fonctionnalités et les configurations, consultez le
-  [guide sur les fonctionnalités de l'API Live](https://ai.google.dev/gemini-api/docs/live-guide?hl=fr).
+- Live API でツールを使用するその他の例については、
+  [ツールの使用方法のクックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ja)をご覧ください。
+- 機能と構成の詳細については、
+  [Live API の機能ガイド](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja)をご覧ください。
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/09/17 (UTC).
+最終更新日 2026-09-17 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/17 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-17 UTC。"],[],[]]

@@ -1,43 +1,57 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja
-fetched_at: 2026-10-05T06:30:49.349802+00:00
-title: "\u30c6\u30ad\u30b9\u30c8\u8aad\u307f\u4e0a\u3052\u751f\u6210\uff08TTS\uff09 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it
+fetched_at: 2026-10-12T07:07:15.943100+00:00
+title: "Generazione di sintesi vocale (TTS) \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash が利用可能になりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ja)。
+Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
 
-フィードバックを送信
+Invia feedback
 
-# テキスト読み上げ生成（TTS）
+# Generazione di sintesi vocale (TTS)
 
-Gemini API は、Gemini のテキスト読み上げ（TTS）生成機能を使用して、テキスト入力を単一話者または複数話者の音声に変換できます。テキスト読み上げの生成は*[制御可能](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja#controllable)*です。つまり、構造化されたターン メタデータ（`speech_metadata`）とインライン音声タグを組み合わせて、音声の*スタイル*、*アクセント*、*ペース*、*トーン*を制御できます。
+L'API Gemini può trasformare l'input di testo in audio con una o più voci utilizzando le funzionalità di sintesi vocale (TTS) di Gemini.
+La generazione di sintesi vocale è
+*[controllabile](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#controllable)*,
+il che significa che puoi combinare i metadati strutturati del turno (`speech_metadata`) e i tag vocali incorporati per guidare lo *stile*, l'*accento*, il *ritmo* e il *tono* dell'audio.
 
-[Google AI Studio で試す](https://aistudio.google.com/generate-speech?hl=ja)
+[Prova in Google AI Studio](https://aistudio.google.com/generate-speech?hl=it)
 
-TTS 機能は、インタラクティブな非構造化音声とマルチモーダルな入力と出力用に設計された [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) を介して提供される音声生成とは異なります。Live API は動的な会話コンテキストに優れていますが、Gemini API を介した TTS は、ポッドキャストやオーディオブックの生成など、スタイルやサウンドを細かく制御して正確なテキスト朗読が必要なシナリオ向けに調整されています。
+La funzionalità TTS è diversa dalla generazione vocale fornita tramite l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it), progettata per input e output multimodali e audio interattivi e non strutturati. Mentre l'API Live eccelle
+in contesti conversazionali dinamici, la sintesi vocale tramite l'API Gemini
+è pensata per scenari che richiedono una recitazione esatta del testo con un controllo
+preciso su stile e suono, come la generazione di podcast o audiolibri.
 
-このガイドでは、[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ja)（`gemini-3.8-flash-tts`）と [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ja)（`gemini-3.8-flash-lite-tts`）を使用して、テキストから単一話者と複数話者の音声を生成する方法について説明します。
+Questa guida mostra come generare audio con una o più voci a partire da un testo utilizzando [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it) (`gemini-3.8-flash-tts`) e [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it) (`gemini-3.8-flash-lite-tts`).
 
-## 始める前に
+## Prima di iniziare
 
-[サポートされているモデル](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja#supported-models) セクションに記載されている Gemini TTS モデルを使用していることを確認します。最適な結果を得るには、[どのモデルをいつ使用するか](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja#when-to-use-which-model)を確認して、ワークロードに最適なモデルを選択してください。
+Assicurati di utilizzare un modello Gemini TTS elencato nella sezione
+[Modelli supportati](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#supported-models). Per risultati ottimali, consulta la sezione
+[Quando utilizzare un modello](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#when-to-use-which-model)
+per selezionare il modello migliore per il tuo carico di lavoro.
 
-構築を開始する前に、[AI Studio で Gemini TTS モデルをテスト](https://aistudio.google.com/generate-speech?hl=ja)することをおすすめします。
+Prima di iniziare a creare, ti consigliamo di
+[testare i modelli Gemini TTS in AI Studio](https://aistudio.google.com/generate-speech?hl=it).
 
-## 単一話者 TTS
+## TTS con un solo speaker
 
-Gemini 3.8 TTS モデルを使用してテキストを単一話者の音声に変換するには、`parts[].text` で文字起こしをそのまま渡し、`parts[].speech_metadata` でターンレベルのスタイル設定を適用し、`speechConfig.voiceConfig` で音声を構成します。事前構築済みの音声名、拡張音声ライブラリ ID、カスタムの[音声デザイン](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja) ID（`voice_...`）、[ボイス レプリケーション](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=ja) ID（`voice_...`、またはオプションのステートレス `voicekey_...`）を渡すことができます。
+Per convertire il testo in audio con una sola voce utilizzando i modelli Gemini 3.8 TTS, passa la trascrizione letterale in `parts[].text`, allega lo stile a livello di turno in `parts[].speech_metadata` e configura la voce in `speechConfig.voiceConfig`. Puoi trasmettere un nome di voce predefinito, un ID Extended
+Voice Library, un ID [progettazione
+vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) personalizzato (`voice_...`)
+o un ID [replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it)
+(`voice_...` o `voicekey_...` senza stato facoltativo).
 
-この例では、モデルからの出力音声を WAV ファイルに保存します。
+Questo esempio salva l'audio di output del modello in un file WAV:
 
 ### Python
 
@@ -131,9 +145,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
           base64 --decode > out.wav
 ```
 
-## マルチスピーカー TTS
+## TTS multilocutore
 
-複数の話者の会話の場合、`prebuiltVoiceConfig` を使用して `multiSpeakerVoiceConfig.speakerVoiceConfigs` で 2 人の話者を構成し、各会話のターンを個別の `part` として渡します。`speech_metadata` では、`speaker` とオプションのターンレベルの `style` の両方を指定します。
+Per i dialoghi con più interlocutori, configura due interlocutori in
+`multiSpeakerVoiceConfig.speakerVoiceConfigs` utilizzando `prebuiltVoiceConfig` e
+passa ogni turno di dialogo come un `part` separato con `speech_metadata` che specifica
+sia `speaker` sia `style` facoltativo a livello di turno:
 
 ### Python
 
@@ -305,68 +322,93 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
       base64 --decode > out.wav
 ```
 
-## メタデータとタグを使用して音声スタイルを制御する
+## Controllare lo stile del parlato con metadati e tag
 
-Gemini 3.8 TTS は、`text` フィールドを厳密に文字起こしとして扱います。ト書きを読み上げずに配信を制御するには、スコープごとに指示を分割します。
+Gemini 3.8 TTS considera il campo `text` esclusivamente come una trascrizione letterale. Per
+controllare la recitazione senza che le indicazioni di regia vengano lette ad alta voce, dividi le
+istruzioni per ambito:
 
-- **ターンレベルの持続的な配信（`speech_metadata.style`）:** ターン全体に適用される感情、配信スタイル、韻律、ペース、音量を `speech_metadata.style`（`"style": "whispered urgently"`、`"style": "out of breath"`、`"style": "warm and enthusiastic"` など）で指定します。
-- **特定の時点のイベント（インライン タグ）:** 一時的な発話以外の音声のバーストやポーズを、山かっこ（`"Wait... <short pause> did you hear that? <sigh>"` や `"Excuse me <cough> as I was saying..."` など）を使用して文字起こしの中に直接配置します。
+- **Pronuncia sostenuta a livello di turno (`speech_metadata.style`)**: inserisci emozioni,
+  stile di pronuncia, prosodia, ritmo e volume che si applicano a un intero turno
+  in `speech_metadata.style` (ad esempio, `"style": "whispered urgently"`,
+  `"style": "out of breath"` o `"style": "warm and enthusiastic"`).
+- **Eventi puntuali (tag in linea)**: inserisci brevi interruzioni o pause vocali non verbali direttamente all'interno della trascrizione utilizzando le parentesi angolari (ad esempio, `"Wait... <short pause> did you hear that? <sigh>"` o `"Excuse me <cough> as I was saying..."`).
 
-包括的なベスト プラクティスについては、[プロンプト ガイド](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja#prompting-guide)をご覧ください。
+Consulta la
+[Guida ai prompt](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#prompting-guide)
+per best practice complete.
 
-## 音声オプション
+## Opzioni vocali
 
-Gemini 3.8 TTS は、音声を選択または作成する 4 つの方法をサポートしています。
+Gemini 3.8 TTS supporta quattro modi per selezionare o creare voci:
 
-1. **プリビルドのスタジオ音声:** 次の表に記載されている 30 種類の厳選された音声。
-2. **拡張音声ライブラリ:** `client.voices.list()`（`GET /v1beta/voices`）を使用してアクセスできる、言語、アクセント、キャラクターのアーキタイプにわたる数百もの追加の音声。
-3. **[音声設計](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja):** [Google AI Studio](https://aistudio.google.com/generate-speech?hl=ja) の自然言語の説明から、または `POST /v1beta/voices`（`type="prompted"`、永続的な `voice_...` ID と `CreateVoice` および `GetVoice` の `sample_audio` WAV プレビューを返します）を使用して、カスタム音声ペルソナを生成します。
-4. **[ボイス レプリケーション](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=ja):**
-   [Google AI Studio](https://aistudio.google.com/generate-speech?hl=ja) の参照音声と同意音声から、または `POST /v1beta/voices`（デフォルトでは `type="replicated"`、永続的な `store=True`、またはオプションのステートレス `store=False`）を使用して、話者の音声を複製します。
+1. **Voci di studio predefinite**:30 voci selezionate elencate nella tabella seguente.
+2. **Libreria di voci estesa**:centinaia di voci aggiuntive in diverse lingue,
+   accenti e archetipi di personaggi accessibili tramite `client.voices.list()`
+   (`GET /v1beta/voices`).
+3. **[Progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it):** genera
+   una voce personalizzata da una descrizione in linguaggio naturale in
+   [Google AI Studio](https://aistudio.google.com/generate-speech?hl=it) o utilizzando
+   `POST /v1beta/voices` (`type="prompted"`, che restituisce un ID
+   `voice_...` persistente e un'anteprima `sample_audio` WAV in `CreateVoice` e
+   `GetVoice`).
+4. **[Replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it):**
+   replica la voce di un oratore dall'audio di riferimento e di consenso in
+   [Google AI Studio](https://aistudio.google.com/generate-speech?hl=it) o utilizzando
+   `POST /v1beta/voices` (`type="replicated"`, `store=True` persistente per
+   impostazione predefinita o `store=False` stateless facoltativo).
 
-### カスタム音声の上限と TTL
+### Limiti e TTL della voce personalizzata
 
-| 音声タイプ | ストレージ モード | 割り当て / 上限 | 保持（TTL） |
+| Tipo di voce | Modalità di archiviazione | Quota / limite | Conservazione (TTL) |
 | --- | --- | --- | --- |
-| **ステートフル音声**（`voice_...`、プロンプトまたは複製） | `store=True` | **プロジェクトあたり 200 個の音声**（プロンプト音声と複製音声で共有） | **最終使用日から 1 年間\*** |
-| **ステートレス音声キー**（`voicekey_...`、複製） | `store=False` | クライアント管理 | **7 日** |
+| **Voci stateful** (`voice_...`, richieste o replicate) | `store=True` | **200 voci per progetto** (condivise tra le voci richieste e replicate) | **1 anno dall'ultimo utilizzo\*** |
+| **Chiavi vocali stateless** (`voicekey_...`, replicate) | `store=False` | Gestito dal cliente | **7 giorni** |
 
-\* **TTL の延長:** 音声がアクティブに使用されるたびに（音声で音声を合成するか、リミックスのベース音声として使用する）、1 年間の保持期間がリセットされます。1 年間アクティビティがない音声は自動的に削除されます。
+\* **Estensione TTL**:il periodo di conservazione di un anno viene reimpostato ogni volta che la voce viene utilizzata attivamente (per la sintesi vocale o come voce di base per il remix). Le voci senza attività per 1 anno vengono eliminate automaticamente.
 
-### 事前構築済みの音声
+### Voci predefinite
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** -- *Bright* | **Puck** -- *Upbeat* | **Charon** - *Informative* |
-| **Kore** -- *Firm* | **Fenrir** -- *興奮しやすい* | **Leda** - *Youthful* |
-| **Orus** -- *Firm* | **Aoede** -- *Breezy* | **Callirrhoe** - *おおらか* |
-| **Autonoe** -- *Bright* | **Enceladus** -- *Breathy* | **Iapetus** -- *Clear* |
-| **Umbriel** -- *Easy-going* | **Algieba** -- *Smooth* | **Despina** - *Smooth* |
-| **Erinome** -- *クリア* | **Algenib** - *Gravelly* | **Rasalgethi** - *情報が豊富* |
-| **Laomedeia** -- *アップビート* | **Achernar** -- *Soft* | **Alnilam** -- *Firm* |
-| **Schedar** -- *Even* | **Gacrux** -- *成人向け* | **Pulcherrima** - *Forward* |
-| **Achird** -- *Friendly* | **Zubenelgenubi** -- *Casual* | **Vindemiatrix** - *Gentle* |
-| **Sadachbia** -- *Lively* | **Sadaltager** -- *Knowledgeable* | **Sulafat** -- *Warm* |
+| **Zephyr** - *Luminoso* | **Puck** - *Upbeat* | **Caronte** -- *Istruttiva* |
+| **Kore** -- *Firm* | **Fenrir**: *eccitabile* | **Leda** -- *Giovane* |
+| **Orus** -- *Azienda* | **Aoede** - *Breezy* | **Callirrhoe**: *informale* |
+| **Autonoe** -- *Luminoso* | **Enceladus** - *Breathy* | **Iapetus** -- *Cancella* |
+| **Umbriel**: *tranquillo* | **Algieba** -- *Fluido* | **Despina** -- *Smooth* |
+| **Erinome** -- *Cancella* | **Algenib** - *Gravelly* | **Rasalgethi** - *Informativa* |
+| **Laomedeia** - *Upbeat* | **Achernar** - *Soft* | **Alnilam** -- *Firm* |
+| **Schedar** - *Even* | **Gacrux** -- *Per adulti* | **Pulcherrima** -- *Forward* |
+| **Achird**: *amichevole* | **Zubenelgenubi** - *Informale* | **Vindemiatrix** - *Gentle* |
+| **Sadachbia** - *Vivace* | **Sadaltager** -- *Knowledgeable* | **Sulafat** -- *Calda* |
 
-### 拡張音声ライブラリとフィルタリング
+### Libreria di voci estesa e filtri
 
-上記の表に記載されている 30 種類のスタジオ音声に加えて、**拡張音声ライブラリ**では、言語、地域アクセント、キャラクター ペルソナ、ドメインにわたる数百種類の音声が提供されています。[Google AI Studio](https://aistudio.google.com/generate-speech?hl=ja) で音声ライブラリ全体をインタラクティブに閲覧、フィルタ、試聴したり、`client.voices.list()`（`google-genai` 2.25.0+ / `@google/genai` 2.24.0+ を使用する `GET /v1beta/voices`）を使用してプログラムでクエリしたりできます。
+Oltre alle 30 voci di studio in primo piano nella tabella precedente, la **Extended
+Voice Library** offre centinaia di voci aggiuntive in varie lingue,
+accenti regionali, personaggi e domini. Puoi sfogliare, filtrare e
+provare l'intera libreria di voci in modo interattivo in
+[Google AI Studio](https://aistudio.google.com/generate-speech?hl=it) oppure interrogarla
+in modo programmatico utilizzando `client.voices.list()` (`GET /v1beta/voices`, utilizzando
+`google-genai` 2.25.0+ / `@google/genai` 2.24.0+).
 
-`ListVoices` は、フィルタ条件に一致する事前構築済みカタログ音声の後に、カスタム保存済み音声（新しい順）を返します。リスト フィルタに複数の値が渡された場合、そのフィルタ内の**いずれか**の値に一致する音声が返されます（`OR`）。一方、個別のフィルタ パラメータは `AND` と組み合わされます。
+`ListVoices` restituisce le voci personalizzate memorizzate (ordinate dalla più recente) seguite
+dalle voci del catalogo predefinite che corrispondono ai criteri di filtro. Quando vengono passati più valori
+per un filtro elenco, vengono restituite le voci corrispondenti a **qualsiasi** valore del filtro (`OR`), mentre i parametri di filtro distinti si combinano con `AND`:
 
-| パラメータ | 型 | 説明 |
+| Parametro | Tipo | Descrizione |
 | --- | --- | --- |
-| `language_code` | `list[str]` | BCP-47 言語タグ（例: `["en-US", "en-GB"]`）。大文字と小文字を区別しない完全一致。 |
-| `region_code` | `list[str]` | ISO 3166-1 alpha-2 または国連 M.49 地域コード（`["US", "GB"]` など）。 |
-| `accent` | `list[str]` | 地域アクセント記述子（`["American", "British"]` など）。 |
-| `gender` | `list[str]` | 認識された性別の表現（`"female"`、`"male"`、`"neutral"`）。 |
-| `pitch` | `list[str]` | 音声のピッチ分類（`"low"`、`"medium"`、`"high"`）。 |
-| `persona` | `list[str]` | 音声のペルソナまたはキャラクターのアーキタイプ（`["Warm, Friendly"]`、`["Narrator"]` など）。 |
-| `contexts`（REST の `context`） | `list[str]` | 最適な使用量ドメイン（例: `["Audiobook", "Conversational", "News"]`）。 |
-| `type`（Python の場合は `type_`） | `list[str]` | 音声ソース（`"prebuilt"`、`"prompted"`（[音声デザイン](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)）、`"replicated"`（[ボイス レプリケーション](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=ja)））でフィルタします。 |
-| `search` | `str` | フリーテキストの部分文字列検索では、`display_name` と `description` の両方に対して大文字と小文字を区別せずに照合が行われました。 |
-| `page_size` | `int` | ページごとに返される音声の最大数（デフォルトは `50`、最大は `1000`）。 |
-| `page_token` | `str` | `response.next_page_token` からのトークン。結果の次のページを取得します。 |
+| `language_code` | `list[str]` | Tag lingua BCP-47 (ad esempio, `["en-US", "en-GB"]`). Corrispondenza esatta senza distinzione tra maiuscole e minuscole. |
+| `region_code` | `list[str]` | Codice o codici regione ISO 3166-1 alpha-2 o UN M.49 (ad esempio, `["US", "GB"]`). |
+| `accent` | `list[str]` | Descrittore o descrittori dell'accento regionale (ad esempio, `["American", "British"]`). |
+| `gender` | `list[str]` | Presentazione del genere percepito (`"female"`, `"male"` o `"neutral"`). |
+| `pitch` | `list[str]` | Classificazione del tono vocale (`"low"`, `"medium"` o `"high"`). |
+| `persona` | `list[str]` | Personaggio vocale o archetipo del personaggio (ad esempio, `["Warm, Friendly"]`, `["Narrator"]`). |
+| `contexts` (`context` in REST) | `list[str]` | Dominio di utilizzo ottimale (ad esempio, `["Audiobook", "Conversational", "News"]`). |
+| `type` (`type_` in Python) | `list[str]` | Filtra per fonte della voce: `"prebuilt"`, `"prompted"` ([Progettazione vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it)) o `"replicated"` ([Replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it)). |
+| `search` | `str` | La ricerca di sottostringhe di testo libero è stata eseguita senza distinzione tra maiuscole e minuscole sia per `display_name` che per `description`. |
+| `page_size` | `int` | Numero massimo di voci restituite per pagina (valore predefinito `50`, massimo `1000`). |
+| `page_token` | `str` | Token di `response.next_page_token` per recuperare la pagina successiva dei risultati. |
 
 ### Python
 
@@ -434,269 +476,338 @@ curl -G "https://generativelanguage.googleapis.com/v1beta/voices" \
   --data-urlencode "page_size=50"
 ```
 
-## サポートされている言語
+## Lingue supportate
 
-TTS モデルは入力言語を自動的に検出します。[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ja)（`gemini-3.8-flash-tts`）は **130 以上の言語**に対応し、[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ja)（`gemini-3.8-flash-lite-tts`）は **100 以上の言語**に対応しています。
+I modelli di sintesi vocale rilevano automaticamente la lingua di input.
+[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it)
+(`gemini-3.8-flash-tts`) supporta **oltre 130 lingue** e
+[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it)
+(`gemini-3.8-flash-lite-tts`) supporta **oltre 100 lingue**:
 
-| 言語 | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
+| Lingua | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
 | --- | --- | --- |
-| アチェ語（アラビア文字） | ✔️ | ✔️ |
-| アフリカーンス語 | ✔️ | ✔️ |
-| アカン語 | ✔️ | ✔️ |
-| アムハラ語 | ✔️ | ✔️ |
-| アルメニア語 | ✔️ | ✔️ |
-| アッサム語 | ✔️ | ✔️ |
-| アワディー語 | ✔️ | ✔️ |
-| バリ文字 | ✔️ | ✔️ |
-| ベンガル語 | ✔️ | ✔️ |
-| バンジャール語（アラビア文字） | ✔️ | — |
-| バンジャール語（ラテン文字） | ✔️ | ✔️ |
-| バシキール語 | ✔️ | — |
-| バスク語 | ✔️ | ✔️ |
-| ベラルーシ語 | ✔️ | ✔️ |
-| ベンバ語 | ✔️ | — |
-| ボージュプリー語 | ✔️ | ✔️ |
-| ボスニア語 | ✔️ | ✔️ |
-| ブギス文字 | ✔️ | ✔️ |
-| ブルガリア語 | ✔️ | ✔️ |
-| ビルマ語 | ✔️ | — |
-| 広東語 | ✔️ | ✔️ |
-| カタルーニャ語 | ✔️ | ✔️ |
-| セブアノ語 | ✔️ | ✔️ |
-| 中央クルド語 | ✔️ | ✔️ |
-| チャッティースガリー語 | ✔️ | ✔️ |
-| 中国語（漢字） | ✔️ | ✔️ |
-| 中国語（繁体字） | ✔️ | ✔️ |
-| クリミア タタール語 | ✔️ | — |
-| クロアチア語 | ✔️ | ✔️ |
-| チェコ語 | ✔️ | ✔️ |
-| デンマーク語 | ✔️ | ✔️ |
-| オランダ語 | ✔️ | ✔️ |
-| ジュラ語 | ✔️ | — |
-| ゾンカ語 | ✔️ | — |
-| エジプト アラビア語 | ✔️ | ✔️ |
-| 英語 | ✔️ | ✔️ |
-| エストニア語 | ✔️ | ✔️ |
-| フィリピン語 | ✔️ | ✔️ |
-| フィンランド語 | ✔️ | — |
-| フランス語 | ✔️ | ✔️ |
-| ガリシア語 | ✔️ | ✔️ |
-| ガンダ語 | ✔️ | ✔️ |
-| ジョージア語 | ✔️ | ✔️ |
-| ドイツ語 | ✔️ | ✔️ |
-| ギリシャ語 | ✔️ | ✔️ |
-| グアラニ語 | ✔️ | — |
-| グジャラート語 | ✔️ | ✔️ |
-| ハイチ語 | ✔️ | ✔️ |
-| ハルハ モンゴル語 | ✔️ | ✔️ |
-| ハウサ語 | ✔️ | ✔️ |
-| ヘブライ語 | ✔️ | ✔️ |
-| ヒンディー語 | ✔️ | ✔️ |
-| ハンガリー語 | ✔️ | ✔️ |
-| アイスランド語 | ✔️ | ✔️ |
-| イボ語 | ✔️ | — |
-| イロカノ語 | ✔️ | ✔️ |
-| インドネシア語 | ✔️ | ✔️ |
-| イランのペルシャ語 | ✔️ | ✔️ |
-| イタリア語 | ✔️ | ✔️ |
-| 日本語 | ✔️ | ✔️ |
-| ジャワ語 | ✔️ | ✔️ |
-| カビル語 | ✔️ | — |
-| カンバ語 | ✔️ | ✔️ |
-| カンナダ語 | ✔️ | ✔️ |
-| カシミール語（アラビア文字） | ✔️ | ✔️ |
-| カシミール語（デーヴァナーガリー文字） | ✔️ | ✔️ |
-| カザフ語 | ✔️ | ✔️ |
-| クメール語 | ✔️ | ✔️ |
-| キクユ語 | ✔️ | ✔️ |
-| キニヤルワンダ語 | ✔️ | ✔️ |
-| コンゴ語 | ✔️ | ✔️ |
-| 韓国語 | ✔️ | ✔️ |
-| キルギス語 | ✔️ | ✔️ |
-| ラオ語 | ✔️ | ✔️ |
-| ラトガリア語 | ✔️ | — |
-| リンガラ語 | ✔️ | ✔️ |
-| リトアニア語 | ✔️ | — |
-| ルクセンブルク語 | ✔️ | — |
-| マケドニア語 | ✔️ | ✔️ |
-| マガヒー語 | ✔️ | ✔️ |
-| マイティリー語 | ✔️ | ✔️ |
-| マラヤーラム語 | ✔️ | ✔️ |
-| マルタ語 | ✔️ | ✔️ |
-| マニプリ語 | ✔️ | ✔️ |
-| マラーティー語 | ✔️ | ✔️ |
-| ミナンカバウ語（アラビア文字） | ✔️ | ✔️ |
-| ミナンカバウ語（ラテン文字） | ✔️ | — |
-| ミゾ語 | ✔️ | ✔️ |
-| ネパール語（個別の言語） | ✔️ | ✔️ |
-| ナイジェリアン フルフルディ語 | ✔️ | ✔️ |
-| 北アゼルバイジャン語 | ✔️ | ✔️ |
-| 北ソト語 | ✔️ | ✔️ |
-| ウズベク語北部方言 | ✔️ | ✔️ |
-| ノルウェー語（ブークモール） | ✔️ | ✔️ |
-| ノルウェー語（ニーノシク） | ✔️ | ✔️ |
-| ニャンジャ語 | ✔️ | ✔️ |
-| オック語 | ✔️ | — |
-| オディア語（個別の言語） | ✔️ | ✔️ |
-| パンガシナン語 | ✔️ | — |
-| ペルシャ語（アフガニスタン） | ✔️ | ✔️ |
-| ポーランド語 | ✔️ | ✔️ |
-| ポルトガル語 | ✔️ | ✔️ |
-| パンジャブ語 | ✔️ | ✔️ |
-| ルーマニア語 | ✔️ | ✔️ |
-| ロシア語 | ✔️ | ✔️ |
-| サンタル語 | ✔️ | ✔️ |
-| セルビア語 | ✔️ | ✔️ |
-| シンド語 | ✔️ | — |
-| シンハラ語 | ✔️ | ✔️ |
-| スロバキア語 | ✔️ | ✔️ |
-| スロベニア語 | ✔️ | — |
-| ソマリ語 | ✔️ | — |
-| 南アゼルバイジャン語 | ✔️ | ✔️ |
-| 南部パシュトー語 | ✔️ | ✔️ |
-| 南ソト語 | ✔️ | — |
-| スペイン語 | ✔️ | ✔️ |
-| 標準アラビア語（アラビア文字） | ✔️ | ✔️ |
-| 標準アラビア語（ラテン文字） | ✔️ | ✔️ |
-| 標準ラトビア語 | ✔️ | ✔️ |
-| 標準マレー語 | ✔️ | ✔️ |
-| スワヒリ語（個別の言語） | ✔️ | — |
-| スワート語 | ✔️ | — |
-| スウェーデン語 | ✔️ | — |
-| タジク語 | ✔️ | — |
-| タミル語 | ✔️ | ✔️ |
-| テルグ語 | ✔️ | ✔️ |
-| タイ語 | ✔️ | — |
-| ティグリニャ語 | ✔️ | — |
-| トスク アルバニア語 | ✔️ | — |
-| トルコ語 | ✔️ | ✔️ |
-| ウイグル語 | ✔️ | — |
-| ベトナム語 | ✔️ | ✔️ |
+| Accinese (alfabeto arabo) | ✔️ | ✔️ |
+| Afrikaans | ✔️ | ✔️ |
+| Akan | ✔️ | ✔️ |
+| Amarico | ✔️ | ✔️ |
+| Armeno | ✔️ | ✔️ |
+| Assamese | ✔️ | ✔️ |
+| Awadhi | ✔️ | ✔️ |
+| Balinese | ✔️ | ✔️ |
+| Bengalese | ✔️ | ✔️ |
+| Banjar (caratteri arabi) | ✔️ | — |
+| Banjar (alfabeto latino) | ✔️ | ✔️ |
+| Bashkir | ✔️ | — |
+| Basco | ✔️ | ✔️ |
+| Bielorusso | ✔️ | ✔️ |
+| Bemba | ✔️ | — |
+| Bhojpuri | ✔️ | ✔️ |
+| Bosniaco | ✔️ | ✔️ |
+| Buginese | ✔️ | ✔️ |
+| Bulgaro | ✔️ | ✔️ |
+| Birmano | ✔️ | — |
+| Cantonese | ✔️ | ✔️ |
+| Catalano | ✔️ | ✔️ |
+| Cebuano | ✔️ | ✔️ |
+| Curdo centrale | ✔️ | ✔️ |
+| Chhattisgarhi | ✔️ | ✔️ |
+| Cinese (caratteri Hans) | ✔️ | ✔️ |
+| Cinese (caratteri Hant) | ✔️ | ✔️ |
+| Tataro di Crimea | ✔️ | — |
+| Croato | ✔️ | ✔️ |
+| Ceco | ✔️ | ✔️ |
+| Danese | ✔️ | ✔️ |
+| Olandese | ✔️ | ✔️ |
+| Diula | ✔️ | — |
+| Dzongkha | ✔️ | — |
+| Arabo (Egitto) | ✔️ | ✔️ |
+| Inglese | ✔️ | ✔️ |
+| Estone | ✔️ | ✔️ |
+| Filippino | ✔️ | ✔️ |
+| Finlandese | ✔️ | — |
+| Francese | ✔️ | ✔️ |
+| Galiziano | ✔️ | ✔️ |
+| ganda | ✔️ | ✔️ |
+| Georgiano | ✔️ | ✔️ |
+| Tedesco | ✔️ | ✔️ |
+| Greek | ✔️ | ✔️ |
+| Guarani | ✔️ | — |
+| Gujarati | ✔️ | ✔️ |
+| Creolo haitiano | ✔️ | ✔️ |
+| Halh mongolo | ✔️ | ✔️ |
+| Hausa | ✔️ | ✔️ |
+| Ebraico | ✔️ | ✔️ |
+| Hindi | ✔️ | ✔️ |
+| Ungherese | ✔️ | ✔️ |
+| Islandese | ✔️ | ✔️ |
+| Igbo | ✔️ | — |
+| Ilocano | ✔️ | ✔️ |
+| Indonesiano | ✔️ | ✔️ |
+| Persiano iraniano | ✔️ | ✔️ |
+| Italiano | ✔️ | ✔️ |
+| Giapponese | ✔️ | ✔️ |
+| Giavanese | ✔️ | ✔️ |
+| Kabyle | ✔️ | — |
+| Kamba | ✔️ | ✔️ |
+| Kannada | ✔️ | ✔️ |
+| Kashmiri (scrittura araba) | ✔️ | ✔️ |
+| Kashmiri (Deva script) | ✔️ | ✔️ |
+| Kazako | ✔️ | ✔️ |
+| Khmer | ✔️ | ✔️ |
+| Kikuyu | ✔️ | ✔️ |
+| Kinyarwanda | ✔️ | ✔️ |
+| Kongo | ✔️ | ✔️ |
+| Coreano | ✔️ | ✔️ |
+| Kirgizo | ✔️ | ✔️ |
+| Lao | ✔️ | ✔️ |
+| Letgallo | ✔️ | — |
+| Lingala | ✔️ | ✔️ |
+| Lituano | ✔️ | — |
+| Lussemburghese | ✔️ | — |
+| Macedone | ✔️ | ✔️ |
+| Magahi | ✔️ | ✔️ |
+| Maithili | ✔️ | ✔️ |
+| Malayalam | ✔️ | ✔️ |
+| Maltese | ✔️ | ✔️ |
+| Manipuri | ✔️ | ✔️ |
+| Marathi | ✔️ | ✔️ |
+| Minangkabau (scrittura araba) | ✔️ | ✔️ |
+| Minangkabau (latino) | ✔️ | — |
+| Mizo | ✔️ | ✔️ |
+| Nepalese (lingua individuale) | ✔️ | ✔️ |
+| Fulfulde nigeriano | ✔️ | ✔️ |
+| Azerbaigian settentrionale | ✔️ | ✔️ |
+| Sotho del nord | ✔️ | ✔️ |
+| Uzbeko settentrionale | ✔️ | ✔️ |
+| Norvegese bokmål | ✔️ | ✔️ |
+| Norvegese (Nynorsk) | ✔️ | ✔️ |
+| Nyanja | ✔️ | ✔️ |
+| Occitano | ✔️ | — |
+| Odia (lingua individuale) | ✔️ | ✔️ |
+| Pangasinan | ✔️ | — |
+| Persiano (Afghanistan) | ✔️ | ✔️ |
+| Polacco | ✔️ | ✔️ |
+| Portoghese | ✔️ | ✔️ |
+| Punjabi | ✔️ | ✔️ |
+| Rumeno | ✔️ | ✔️ |
+| Russo | ✔️ | ✔️ |
+| Santali | ✔️ | ✔️ |
+| Serbo | ✔️ | ✔️ |
+| Sindhi | ✔️ | — |
+| Singalese | ✔️ | ✔️ |
+| Slovacco | ✔️ | ✔️ |
+| Sloveno | ✔️ | — |
+| Somalo | ✔️ | — |
+| Azerbaigiano meridionale | ✔️ | ✔️ |
+| Pashto meridionale | ✔️ | ✔️ |
+| Sotho del sud | ✔️ | — |
+| Spagnolo | ✔️ | ✔️ |
+| Arabo standard (caratteri arabi) | ✔️ | ✔️ |
+| Arabo standard (alfabeto latino) | ✔️ | ✔️ |
+| Lettone standard | ✔️ | ✔️ |
+| Malese standard | ✔️ | ✔️ |
+| Swahili (singola lingua) | ✔️ | — |
+| Swati | ✔️ | — |
+| Svedese | ✔️ | — |
+| Tagico | ✔️ | — |
+| Tamil | ✔️ | ✔️ |
+| Telugu | ✔️ | ✔️ |
+| Thailandese | ✔️ | — |
+| Tigrinya | ✔️ | — |
+| Albanese tosk | ✔️ | — |
+| Turco | ✔️ | ✔️ |
+| Uiguro | ✔️ | — |
+| Vietnamita | ✔️ | ✔️ |
 
-## サポートされているモデル
+## Modelli supportati
 
-| モデル | 単一話者 | マルチスピーカー | 音声デザイン | ボイス レプリケーション |
+| Modello | Unico relatore | Più relatori | Progettazione vocale | Replica vocale |
 | --- | --- | --- | --- | --- |
-| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ja)（`gemini-3.8-flash-tts`） | ✔️ | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ja)（`gemini-3.8-flash-lite-tts`） | ✔️ | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.1 Flash TTS プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=ja) | ✔️ | ✔️ | — | — |
-| [Gemini 2.5 Pro プレビュー TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=ja) | ✔️ | ✔️ | — | — |
+| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it) (`gemini-3.8-flash-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it) (`gemini-3.8-flash-lite-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Anteprima di Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=it) | ✔️ | ✔️ | — | — |
+| [Gemini 2.5 Pro Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=it) | ✔️ | ✔️ | — | — |
 
-### どのモデルをいつ使用するか
+### Quando utilizzare un modello o l'altro
 
-Gemini 3.8 TTS モデルはどちらも同じ API スキーマとプロンプト形式を共有しているため、1 つのパラメータを変更するだけで切り替えることができます。
+Entrambi i modelli Gemini 3.8 TTS condividono lo stesso schema dell'API e formato di prompt,
+consentendoti di passare da uno all'altro con una sola modifica del parametro:
 
-- **音響忠実度、ニュアンスのある演技、表現力豊かな制御を最優先する場合は、[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ja)（`gemini-3.8-flash-tts`）**を使用します。スタジオ品質のクリエイティブな作業、複数の話者による複雑な会話、大量のボーカル バーストタグ、難しい発音、地域や少数派の言語、音声とルームトーンの安定性が求められる長文のナレーションに最適です。
-- **[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ja)（`gemini-3.8-flash-lite-tts`）**を、`gemini-3.1-flash-tts-preview` の高速で費用対効果の高いワークホースの代替として使用します。大量の一括生成、会話型音声エージェントのカスケード、読み上げ機能、信頼性の高いボイス レプリケーション、主要言語での日常的な単一話者の音声に最適化されています。
+- **Utilizza [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it)
+  (`gemini-3.8-flash-tts`)** quando la massima fedeltà acustica, l'interpretazione ricca di sfumature
+  e il controllo espressivo sono la priorità assoluta. È ideale per lavori creativi di qualità professionale, dialoghi complessi tra più persone, tag di burst vocali pesanti, pronunce difficili, dialetti regionali o di minoranze e narrazioni di lunga durata che richiedono una stabilità assoluta della voce e del tono della stanza.
+- **Utilizza [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it)
+  (`gemini-3.8-flash-lite-tts`)** come sostituto rapido ed economico
+  di `gemini-3.1-flash-tts-preview`. È ottimizzato per
+  la produzione di grandi volumi, le cascate di agenti vocali conversazionali, le funzionalità di lettura
+  ad alta voce, la replica vocale affidabile e la sintesi vocale quotidiana con un solo oratore
+  nelle principali lingue.
 
-### 移行ガイド
+### Guida alla migrazione
 
-以前のプレビュー モデル（`gemini-3.1-flash-tts-preview` または `gemini-2.5-pro-preview-tts`）から Gemini 3.8 TTS（`gemini-3.8-flash-tts` または `gemini-3.8-flash-lite-tts`）にアップグレードする場合は、次の 5 つの重要な変更点を確認してください。
+Quando esegui l'upgrade dai modelli di anteprima precedenti (`gemini-3.1-flash-tts-preview` o
+`gemini-2.5-pro-preview-tts`) a Gemini 3.8 TTS (`gemini-3.8-flash-tts` o
+`gemini-3.8-flash-lite-tts`), esamina queste cinque modifiche chiave:
 
-1. **スタイルを文字起こしから分離する:** 演技、トーン、韻律、ペースの指示（`"whispering"`、`"out of breath"`、`"speaking slowly"` など）をプレーン テキストから `speech_metadata.style` に移動します。`text` は、文字起こしとインラインの音声タグのみにしてください。
-2. **音声設計で事前にペルソナを設計する:** `"Audio Profile"` または `"Director's Notes"` の複数段落のブロックを、[音声設計](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)で作成したカスタム音声に置き換え、その `voice_...` ID を TTS リクエストで `style` 文字列を最小限にするか空にして渡します。
-3. **構造化された会話ターンを使用する:** 複数話者の会話の場合、1 つのテキスト ブロック内に `Speaker: ...` 接頭辞を埋め込むのではなく、話者ターンごとに 1 つの `part` を `speech_metadata.speaker` で渡します。
-4. **インライン音声タグには山かっこを使用する:** 人間の発声や一時停止の特定の時点には、山かっこ（`<laugh>`、`<sigh>`、`<cough>`、`<breath>`、`<short pause>`）を使用します。音声以外の効果音タグ（拍手やドスンという音など）は避けてください。
-5. **単項リクエストのデフォルトの WAV（`AUDIO_WAV`）出力を考慮する:** `gemini-3.1-flash-tts-preview`（デフォルトでヘッダーなしの RAW PCM `AUDIO_L16` を返した）とは異なり、Gemini 3.8 TTS モデルは、単項リクエストで RIFF ヘッダー（24 kHz、モノラル、16 ビット PCM）を含む完全な **WAV（`AUDIO_WAV`）**音声を返します。
-   - 以前にコードで未加工の PCM バイトを WAV ヘッダーでラップしていた場合（たとえば、Python の `wave` モジュールや Node の `wav` パッケージを使用していた場合）、手動ヘッダー ラッパーを削除し、デコードされた音声バイトを `.wav` ファイルに直接書き込みます。
-   - 既存のパイプラインでヘッダーレスの生の PCM、mu-law、A-law 音声が必要な場合は、`response_format.audio.mime_type` を `"AUDIO_L16"`、`"AUDIO_MULAW"`、`"AUDIO_ALAW"` に明示的に設定します（例: `generateContent` の `{"response_format": {"audio": {"mime_type": "AUDIO_L16"}}}`、Interactions API の `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}`）。[オーディオ出力形式](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja#audio-output-formats)をご覧ください。
+1. **Separa lo stile dalla trascrizione**:sposta le istruzioni relative a recitazione, tono, prosodia e ritmo (ad esempio `"whispering"`, `"out of breath"` o `"speaking slowly"`) dal testo normale a `speech_metadata.style`.
+   Mantieni `text` esattamente come la trascrizione letterale più i tag vocali incorporati.
+2. **Progetta le buyer persona in anticipo con la progettazione vocale**:sostituisci i blocchi di più paragrafi
+   `"Audio Profile"` o `"Director's Notes"` con una voce personalizzata creata
+   in [Progettazione vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it), quindi
+   trasporta l'ID `voice_...` nelle richieste TTS con stringhe `style` minime o vuote.
+3. **Utilizza turni di dialogo strutturati**:per i dialoghi con più interlocutori, passa un
+   `part` per turno di interlocutore con `speech_metadata.speaker` anziché incorporare
+   i prefissi `Speaker: ...` all'interno di un singolo blocco di testo.
+4. **Utilizza le parentesi angolari per i tag vocali incorporati:** utilizza le parentesi angolari (`<laugh>`,
+   `<sigh>`, `<cough>`, `<breath>`, `<short pause>`) per le vocalizzazioni e le pause umane
+   in un determinato momento. Evita tag di effetti sonori non vocali (come
+   applausi o tonfi).
+5. **Tieni conto dell'output WAV (`AUDIO_WAV`) predefinito nelle richieste unarie:** a differenza di
+   `gemini-3.1-flash-tts-preview` (che restituiva PCM non elaborato senza intestazione
+   `AUDIO_L16` per impostazione predefinita), i modelli Gemini 3.8 TTS restituiscono audio **WAV
+   (`AUDIO_WAV`)** completo con un'intestazione RIFF (24 kHz, mono, PCM a 16 bit) nelle
+   richieste unarie:
+   - Se in precedenza il tuo codice racchiudeva i byte PCM non elaborati in un'intestazione WAV (ad esempio utilizzando il modulo `wave` di Python o il pacchetto `wav` di Node), rimuovi il wrapper dell'intestazione manuale e scrivi i byte audio decodificati direttamente in un file `.wav`.
+   - Se la pipeline esistente richiede audio PCM non elaborato, mu-law o A-law senza intestazione, imposta esplicitamente `response_format.audio.mime_type` su `"AUDIO_L16"`, `"AUDIO_MULAW"` o `"AUDIO_ALAW"` (ad esempio, `{"response_format": {"audio": {"mime_type": "AUDIO_L16"}}}` in `generateContent` o `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` nell'API Interactions). Consulta
+     [Formati di uscita audio](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#audio-output-formats).
 
-## プロンプト ガイド
+## Guida ai prompt
 
-Gemini 3.8 TTS モデルは、入力テキストを厳密に**逐語録**として扱います。以前のプレビュー モデルでは、ト書きがプレーン テキストに埋め込まれていましたが、Gemini 3.8 TTS では、継続的なターンレベルの指示（`speech_metadata`）がポイントインタイムのインライン音声タグから分離されています。
+I modelli Gemini 3.8 TTS trattano il testo di input rigorosamente come una **trascrizione letterale**.
+A differenza dei modelli di anteprima precedenti in cui le indicazioni sceniche erano incorporate nel testo normale,
+la sintesi vocale di Gemini 3.8 separa le indicazioni di turno sostenute (`speech_metadata`)
+dai tag vocali incorporati puntuali.
 
-### スタイル フィールドとインライン タグ
+### Campo Stile e tag in linea
 
-パフォーマンスに関する指示をスコープごとに分割します。
+Dividi le istruzioni sul rendimento per ambito:
 
-- **ターンレベルの配信（`speech_metadata.style`）:** 感情、韻律、全体的なペース、配信スタイル（`"whispering"`、`"out of breath"`、`"muttering"`、`"sarcastic"` など）などの持続的な配信属性を `speech_metadata` の `style` フィールドに入れます。ターン全体で安定したキャラクターとパフォーマンスを作成するには、[音声デザイン](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)でペルソナを事前に設計し、`style` はオプションのターンレベルの調整にのみ使用します。
-- **ポイントインタイム イベント（インライン タグ）:** 一瞬の音声以外の発声、呼吸、一時停止を、山かっこ（`<cough>`、`<breath>`、`<sigh>`、`<short pause>`）を使用して文字起こしの中にインラインで挿入します。最高の音質を実現するには、山かっこ（`<...>`）を使用し、音声以外の効果音ではなく、人間の発声に限定します。
+- **Turn-level delivery (`speech_metadata.style`)**: inserisci gli attributi di delivery sostenuta, come emozione, prosodia, ritmo generale o stile di delivery (ad esempio `"whispering"`, `"out of breath"`, `"muttering"` o `"sarcastic"`), nel campo `style` di `speech_metadata`. Per creare un personaggio e
+  una performance stabili nel tempo, progetta la persona in anticipo in
+  [Progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) e utilizza
+  `style` solo per modifiche facoltative a livello di turno.
+- **Eventi puntuali (tag in linea):** inserisci brevi interruzioni vocali non verbali,
+  respiri o pause in linea all'interno della trascrizione utilizzando le parentesi angolari
+  (`<cough>`, `<breath>`, `<sigh>`, `<short pause>`). Utilizza le parentesi angolari
+  (`<...>`) per ottenere la massima qualità audio e concentrati sulle vocalizzazioni umane
+  anziché sugli effetti sonori non vocali.
 
-| スコープ | 設置場所 | 例 |
+| Ambito | Dove posizionare | Esempi |
 | --- | --- | --- |
-| **ターンレベル**（ターン全体で維持される） | `speech_metadata.style` | `"angry tone"`、`"speaking rapidly"`、`"out of breath"`、`"whispers"`、`"sarcastic"` |
-| **ポイントインタイム**（特定の単語で発生） | `text`（`<...>`）でインライン | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
+| **Svolta per svolta** (mantenuta durante la svolta) | `speech_metadata.style` | `"angry tone"`, `"speaking rapidly"`, `"out of breath"`, `"whispers"`, `"sarcastic"` |
+| **Point-in-time** (si verifica in una parola specifica) | Inline in `text` (`<...>`) | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
 
-### ペースと一時停止
+### Pacing e pause
 
-リズムと無音は、次の 3 つの粒度レベルで制御できます。
+Puoi controllare il ritmo e il silenzio a tre livelli di granularità:
 
-- **句読点と省略記号:** カンマ、ダッシュ（`--`）、省略記号（`...`）を使用して、自然な会話の躊躇を表現します。
-- **インライン一時停止タグ:** 話者が一時停止するスクリプトの正確な位置に `<short pause>` または `<long pause>` を挿入します。
+- **Punteggiatura e puntini di sospensione**:utilizza virgole, trattini (`--`) e puntini di sospensione (`...`)
+  per simulare le esitazioni naturali di una conversazione.
+- **Tag di pausa in linea**:inserisci `<short pause>` o `<long pause>` nei punti esatti
+  del copione in cui un oratore deve fare una pausa:
   `text
   Hold on, let me think... <short pause> Alright, I've got it.`
-- **ターンレベルのペース:** `speech_metadata` で `"style": "speaking rapidly"` または `"style": "speaking slowly"` を設定して、ターン全体の発話速度を制御します。
+- **Ritmo a livello di turno**:imposta `"style": "speaking rapidly"` o
+  `"style": "speaking slowly"` in `speech_metadata` per controllare la velocità
+  di pronuncia durante l'intero turno.
 
-### プロソディとピッチ
+### Prosodia e intonazione
 
-**`speech_metadata.style`** を使用して、ターン全体で韻律、ピッチ、イントネーションを制御します（`"style": "high pitch, cheerful and excited inflection"` や `"style": "monotone and flat"` など）。感情や韻律が会話の途中で変化する場合は、スクリプトを別々のターンに分割し、各ターンに異なる `style` 値を設定します。
+Utilizza **`speech_metadata.style`** per controllare la prosodia, il tono e l'inflessione in un turno (ad esempio, `"style": "high pitch, cheerful and excited inflection"` o `"style": "monotone and flat"`). Se l'emozione o la prosodia cambia a metà del dialogo, dividi il copione in turni separati con valori `style` distinti per ogni turno.
 
-### 強調
+### Enfasi
 
-文字起こしで特定の単語を大文字にし、句読点とインライン音声タグを組み合わせて、キーワードに自然な音声の強調を付けます。
+Metti in maiuscolo parole specifiche nella trascrizione, combinate con punteggiatura e tag vocali
+in linea, per enfatizzare naturalmente le parole chiave:
 
 ```
 This is a VERY important point!
 It was a VERY long day <sigh> ... nobody listens anymore.
 ```
 
-### 発声と会話以外の音声
+### Esplosioni vocali e suoni non vocali
 
-音声以外の人の発声は、音が鳴る正確な位置に山かっこ（`<...>`）を使用してインラインで配置します。推奨される音声タグは次のとおりです。
+Inserisci le vocalizzazioni umane non verbali in linea utilizzando le parentesi angolari (`<...>`) nel punto esatto in cui deve verificarsi il suono. I tag vocali consigliati includono:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
 | `<argh>` | `<breath>` | `<heavy breath>` | `<exhales>` |
-| `<cackle>` | `<cheer>` | `<chuckle>` / `<chuckles>` | `<cough>` |
+| `<cackle>` | `<cheer>` | `<chuckle>`/`<chuckles>` | `<cough>` |
 | `<cry>` | `<gasp>` | `<giggle>` | `<groan>` |
 | `<growl>` | `<grunt>` | `<grr>` | `<hiss>` |
-| `<laugh>` / `<laughter>` | `<moan>` | `<pant>` | `<pff>` / `<phew>` |
-| `<scream>` | `<shout>` | `<shriek>` | `<sigh>` / `<sighs>` |
+| `<laugh>`/`<laughter>` | `<moan>` | `<pant>` | `<pff>`/`<phew>` |
+| `<scream>` | `<shout>` | `<shriek>` | `<sigh>`/`<sighs>` |
 | `<sneeze>` | `<snicker>` | `<snort>` | `<sob>` |
-| `<throat-clearing>` | `<tsk>` | `<whimper>` | `<whispers>` / `<whispering>` |
+| `<throat-clearing>` | `<tsk>` | `<whimper>` | `<whispers>`/`<whispering>` |
 | `<yawn>` | `<short pause>` | `<long pause>` |  |
 
-### バックチャネルと音声の重複
+### Canali secondari e voci sovrapposte
 
-複数話者の対話では、話者のターン内でリスナーの反応をパイプ文字（`|reaction|`）で囲み、反応ごとに別のターンに分割することなく、自然なバックチャネルや重複する発話を作成します。
+Nel dialogo tra più oratori, racchiudi le reazioni degli ascoltatori tra caratteri pipe
+(`|reaction|`) all'interno del turno di un oratore per creare backchannel naturali o
+sovrapposizioni di parlato senza interrompere un turno separato per reazione.
 
-- **短いバックチャネルのやり取り:** 発言者のターン内の短いリスナーの反応（`|oh hmm|`、`|oh really?|`、`|absolutely|`）:
-  - **ターン 1（スピーカー A）:** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
-  - **ターン 2（スピーカー B）:** `"Ready enough |oh really?| The last blocker cleared this morning."`
-  - **ターン 3（話者 A）:** `"Then let's ship it |absolutely| and watch the dashboards."`
-- **重複する発話とインターリーブされた発話:** 複数のパイプ セグメントを使用して、2 人の話者の同時発話またはインターリーブされた発話をシミュレートします（`gemini-3.8-flash-tts` で最適に動作します）。
-  - **同時カウントダウン/コーラス:** `"Let's surprise him on three |ok| ready?"` の後に `"one. two. three. |happy| happy |birthday| birthday!"`
-  - **スピーカーの完全な重複:** `"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
+- **Scambi brevi nel backchannel**:inserisci brevi reazioni degli ascoltatori (`|oh hmm|`,
+  `|oh really?|`, `|absolutely|`) all'interno del turno dell'oratore attivo:
+  - **Turno 1 (Speaker A):** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
+  - **Turno 2 (Speaker B):** `"Ready enough |oh really?| The last blocker cleared this morning."`
+  - **Turno 3 (Speaker A):** `"Then let's ship it |absolutely| and watch the dashboards."`
+- **Discorso sovrapposto e alternato:** utilizza più segmenti di pipe per
+  simulare un discorso simultaneo o alternato tra due oratori (funziona meglio
+  con `gemini-3.8-flash-tts`):
+  - **Simultaneous countdown/chorus:** `"Let's surprise him on three |ok| ready?"` followed by `"one. two. three. |happy| happy |birthday| birthday!"`
+  - **Sovrapposizione completa degli speaker:** `"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
 
-### 世代間の整合性と避けるべきこと
+### Coerenza tra le generazioni e cosa evitare
 
-発話者 ID をターン間で安定させるには、次のガイドラインに沿って操作します。
+Segui queste linee guida per mantenere stabile l'identità vocale durante i turni:
 
-- **長いスタイル ブロックではなく、音声設計でペルソナを事前に設計する:**
-  以前のモデルから引き継がれた長い `"Audio Profile"` 段落と複数の箇条書き `"Director's Notes"` は、音声のずれの最も一般的な原因です。[音声設計](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)で同じクリエイティブな直感を使用して、永続的なカスタム `voice_...` ペルソナを生成し、その音声 ID を TTS 呼び出しに渡します。
-- **安定性のために音声リファレンスに依存する（メタ指示を省略）:**
-  Gemini 3.8 TTS モデルは、最初に音声リファレンスにアンカーするようにトレーニングされています。音声の安定をモデルに指示する（`"do not switch speaker identity"` や `"maintain identical timbre"` など）指示を含めないでください。プロンプト テキストを追加すると、ドリフトが増加します。不要なスタイル指示を削除し、音声参照によって提供される安定点の周りでモデルが自然に変化するようにします。
-- **`style` で不変の発話者特性を変更しようとしない:** 年齢、性別、名前、永続的なアクセントの変更を `speech_metadata.style` に入れないでください。代わりに、拡張音声ライブラリから地域音声を選択するか、[音声デザイン](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)で作成します。
+- **Progetta le buyer persona in anticipo nella progettazione vocale anziché in lunghi blocchi di stile:**
+  i paragrafi `"Audio Profile"` in formato lungo e gli elenchi puntati multipli `"Director's Notes"`
+  riportati dai modelli precedenti sono la causa più comune di deriva della voce.
+  Utilizza la stessa intuizione creativa in anticipo nella
+  [progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) per generare una
+  persona `voice_...` personalizzata persistente, quindi riporta l'ID voce nelle tue
+  chiamate TTS.
+- **Affidati al riferimento vocale per la stabilità (ometti le metainstruzioni):**
+  I modelli TTS Gemini 3.8 sono addestrati ad ancorarsi prima al riferimento audio.
+  Non includere istruzioni che indicano al modello di mantenere la voce costante (ad esempio `"do not switch speaker identity"` o `"maintain identical timbre"`). Il testo del prompt aggiuntivo aumenta la deriva. Elimina le istruzioni di stile non necessarie e lascia che il modello vari naturalmente intorno al punto stabile fornito dal riferimento vocale.
+- **Non tentare di modificare le caratteristiche immutabili del relatore in `style`:** evita di inserire
+  cambiamenti di età, genere, nomi o accento permanenti in `speech_metadata.style`.
+  Scegli invece una voce regionale dalla raccolta di voci estese o creane una
+  con [Progettazione vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it).
 
-### おすすめのワークフロー
+### Workflow consigliato
 
-1. **キャラクターを一度作成する:** [音声デザイン](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)でキャラクターを作成するか、ターゲット言語とペルソナに一致する地域音声を選択します。
-2. **自然な話し言葉の文字起こしを不流暢さを含めて記述する:** 自然さを最大限に高めるには、`text` を実際の話し言葉の文字起こしとして記述します。会話の不流暢さやためらい（`"Oh uh yeah I think... hm, so that's interesting"` など）も記述します。
-3. **まずプレーン TTS をテストする:** まず、空の `style` フィールドを使用して文字起こしを合成します。ほとんどのリクエストでは `style` 指示は必要ありません。
-4. **調整のみに短い `style` プロンプトを追加する:** 特定の配信調整が必要なターンにのみ、簡潔な `style` 文字列（`"casual, friendly"` や `"muttering, then reassuring"` など）を追加します。一貫したベースラインが必要な場合は、ターン間で同じ短い文字列を再利用します。
+1. **Crea il personaggio una sola volta:** crea il tuo personaggio in
+   [Progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) o seleziona una
+   voce regionale dalla raccolta di voci estese che corrisponda alla lingua e alla personalità di destinazione.
+2. **Scrivi trascrizioni naturali con disfluenze**:per ottenere la massima naturalezza, scrivi il `text` come una vera trascrizione del parlato, includendo disfluenze e esitazioni naturali (ad esempio, `"Oh uh yeah I think... hm, so that's interesting"`).
+3. **Per prima cosa, prova la sintesi vocale standard:** sintetizza la trascrizione con un campo `style` vuoto. La maggior parte delle richieste non richiede alcuna istruzione `style`.
+4. **Aggiungi prompt brevi `style` solo per modifiche:** aggiungi una stringa `style` concisa
+   (ad esempio `"casual, friendly"` o `"muttering, then reassuring"`) solo per
+   i turni che richiedono una modifica specifica della pubblicazione e riutilizza la stessa stringa
+   breve nei vari turni quando vuoi una base di riferimento coerente.
 
-### マルチターンの対話と音声エージェント
+### Agenti vocali e di dialogo multi-turno
 
-リアルタイムの会話型音声エージェントまたはマルチターン アプリケーションを構築する場合:
+Quando crei agenti vocali conversazionali in tempo reale o applicazioni multi-turno:
 
-- LLM テキスト チャンクが到着したら、**ターンごとに 1 回の TTS 呼び出し**を行います。
-- 構成された `voice`（事前構築、設計された `voice_...`、複製された `voice_...` / `voicekey_...`）に、発言者の ID をターン間で保持させます。各ターンで長い文字のペルソナを再送信しないでください。
-- ターンごとの `style` フィールドを空のままにするか、会話全体に対して 1 つの短い定数文字列（`"casual, friendly"` など）を送信します。
-- 強いスタイルのプロンプトを使用するのではなく、長いエージェントのレスポンスを短いターンに分割します。
+- Effettua **una chiamata TTS per turno** all'arrivo dei blocchi di testo LLM.
+- Consenti al `voice` configurato (predefinito, progettato `voice_...` o replicato
+  `voice_...` / `voicekey_...`) di mantenere l'identità dell'oratore durante i turni, senza
+  inviare di nuovo una persona con un lungo carattere a ogni turno.
+- Lascia vuoto il campo `style` per turno o invia una breve stringa costante
+  (ad esempio `"casual, friendly"`) per l'intera conversazione.
+- Dividi le risposte lunghe dell'agente in turni più brevi anziché ricorrere a prompt di stile più efficaci.
 
-## ストリーミング音声生成
+## Generazione di sintesi vocale in streaming
 
-モデルで合成された生成音声は、合成中にストリーミングできます。単項リクエスト（RIFF ヘッダーを含む完全な WAV ファイルを返す）とは異なり、**ストリーミング リクエストは、デフォルトでヘッダーなしの RAW 16 ビット符号付きリトル エンディアン線形 PCM（`AUDIO_L16` / `audio/L16;codec=pcm;rate=24000`、24 kHz、モノラル）チャンクを返します**。これにより、コンテナ ヘッダーなしで音声チャンクを連続して再生または連結できます。
+Puoi riprodurre in streaming l'audio generato mentre viene sintetizzato dal modello. A differenza
+delle richieste unarie (che restituiscono un file WAV completo con un'intestazione RIFF),
+**le richieste di streaming restituiscono blocchi PCM lineari little-endian con segno a 16 bit non elaborati senza intestazione (`AUDIO_L16` / `audio/L16;codec=pcm;rate=24000`, 24 kHz, mono) per impostazione
+predefinita**, in modo che i blocchi audio possano essere riprodotti o concatenati continuamente senza
+intestazioni del contenitore:
 
 ### Python
 
@@ -794,26 +905,33 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
     }'
 ```
 
-## オーディオ出力形式
+## Formati di uscita audio
 
-Gemini 3.8 TTS モデルは、リクエストが単項かストリーミングかによって、異なるデフォルトの音声形式を使用します。
+I modelli Gemini 3.8 TTS utilizzano formati audio predefiniti diversi a seconda che
+la richiesta sia unaria o di streaming:
 
-- **単項リクエスト（`models.generate_content`）:** RIFF ヘッダー（24 kHz、モノラル、16 ビット符号付きリトル エンディアン PCM）を含む完全な **WAV（`AUDIO_WAV`）**音声を返します。WAV コンテナを手動で追加しなくても、デコードされた音声バイトを `.wav` ファイルに直接書き込むことができます。
-- **ストリーミング リクエスト（`models.generate_content_stream` / `streamGenerateContent`）:**
-  デフォルトで**ヘッダーなしの RAW リニア PCM（`AUDIO_L16`）**チャンク（24 kHz、モノラル、16 ビット符号付きリトル エンディアン PCM）を返します。これにより、各チャンクにコンテナ ヘッダーがなくても、チャンクをストリーミングまたは連続して連結できます。
+- **Richieste unarie (`models.generate_content`)**: restituiscono audio **WAV
+  (`AUDIO_WAV`)** completo con un'intestazione RIFF (24 kHz, mono, PCM little-endian firmato a 16 bit). Puoi scrivere i byte audio decodificati direttamente in un file `.wav` senza aggiungere manualmente un contenitore WAV.
+- **Richieste di streaming (`models.generate_content_stream` / `streamGenerateContent`):**
+  restituisci blocchi **PCM lineare non elaborato senza intestazione (`AUDIO_L16`)** (24 kHz, mono,
+  PCM little-endian con segno a 16 bit) per impostazione predefinita, in modo che i blocchi possano essere trasmessi in streaming o
+  concatenati continuamente senza intestazioni del contenitore su ogni blocco.
 
-`generationConfig.responseFormat.audio` を使用して、出力音声のエンコードとサンプルレートをオーバーライドできます。
+Puoi sostituire la codifica audio di output e la frequenza di campionamento utilizzando
+`generationConfig.responseFormat.audio`:
 
-| `mimeType` 値 | 形式 | 説明 |
+| Valore `mimeType` | Formato | Descrizione |
 | --- | --- | --- |
-| `"AUDIO_WAV"` *（単項デフォルト）* | WAV（`audio/wav`） | RIFF ヘッダー付きの完全な WAV ファイル（24 kHz、モノラル、16 ビット PCM）。 |
-| `"AUDIO_L16"` *（ストリーミングのデフォルト）* | リニア PCM（`audio/l16`） | ヘッダーなしの RAW 16 ビット符号付きリトル エンディアン リニア PCM。ストリーミング、カスタム音声パイプライン、マルチターンのクリップの連結に最適です。 |
-| `"AUDIO_MULAW"` | μ-law（`audio/basic` / `audio/mulaw`） | G.711 μ-law 圧縮音声。北米と日本の電話で一般的に使用されています（8 kHz）。 |
-| `"AUDIO_ALAW"` | A-law（`audio/alaw`） | G.711 A-law 圧縮音声。ヨーロッパや国際電話で一般的に使用されています（8 kHz）。 |
+| `"AUDIO_WAV"` *(predefinito unario)* | WAV (`audio/wav`) | File WAV completo con un'intestazione RIFF (24 kHz, mono, PCM a 16 bit). |
+| `"AUDIO_L16"` *(predefinito per lo streaming)* | PCM lineare (`audio/l16`) | PCM lineare little-endian signed a 16 bit non elaborato senza intestazione. Ideale per lo streaming, le pipeline audio personalizzate o la concatenazione di clip multi-turn. |
+| `"AUDIO_MULAW"` | μ-law (`audio/basic` / `audio/mulaw`) | Audio compresso G.711 μ-law. Comunemente utilizzato nella telefonia nordamericana e giapponese (8 kHz). |
+| `"AUDIO_ALAW"` | A-law (`audio/alaw`) | Audio compresso G.711 A-law. Comunemente utilizzato nella telefonia europea e internazionale (8 kHz). |
 
-必要に応じて `sampleRate`（`24000`、`16000`、`8000` Hz など。デフォルトは `24000` Hz）を指定することもできます。
+Puoi anche specificare facoltativamente `sampleRate` (ad esempio, `24000`, `16000` o
+`8000` Hz; il valore predefinito è `24000` Hz).
 
-次の例では、24 kHz でヘッダーなしの RAW 16 ビット PCM（`AUDIO_L16`）をリクエストしています。
+L'esempio seguente richiede PCM a 16 bit non elaborato senza intestazione (`AUDIO_L16`) a
+24 kHz:
 
 ### Python
 
@@ -925,28 +1043,37 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
           base64 --decode > out.pcm
 ```
 
-## 制限事項
+## Limitazioni
 
-- TTS モデルはテキストのみの入力を受け取り、音声のみの出力を生成します。
-- 単一リクエストの複数話者生成（`multiSpeakerVoiceConfig`）では、事前構築済みの音声を使用して最大 2 人の話者をサポートします。カスタム設計（`voice_...`）または複製（`voice_...` / `voicekey_...`）された音声を複数のキャラクターの会話で組み合わせるには、各話者のターンを個別に合成します。単項リクエストはデフォルトで 44 バイトの RIFF ヘッダーを含む `audio/wav` を返すため、未加工の PCM（`AUDIO_L16`）をリクエストするか、24 kHz の PCM 音声フレームを連結する前に各ターンの WAV ヘッダーを削除します。
-- **カスタム音声の保存容量の上限と TTL:**
-  - **ステートフル音声（`store=True`、プロンプトまたは複製）:** **プロジェクトあたり最大 200 個の音声**、**1 年間の TTL**（有効期間）。
-  - **ステートレス音声キー（`store=False`、`voicekey_...`）:** **7 日間の TTL**（有効期間）。
-- 言語の対応範囲については、[サポートされている言語](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja#languages)のセクションをご覧ください。
+- I modelli TTS accettano input solo di testo e generano output solo audio.
+- La generazione multirelatore con una sola richiesta (`multiSpeakerVoiceConfig`) supporta
+  fino a 2 relatori che utilizzano voci predefinite. Per combinare voci progettate su misura
+  (`voice_...`) o replicate (`voice_...` / `voicekey_...`) in
+  un dialogo con più personaggi, sintetizza il turno di ogni oratore singolarmente.
+  Poiché le richieste unarie restituiscono `audio/wav` con un'intestazione RIFF di 44 byte per impostazione predefinita, richiedi PCM non elaborato (`AUDIO_L16`) o rimuovi l'intestazione WAV da ogni turno prima di concatenare i frame audio PCM a 24 kHz.
+- **Limiti di archiviazione e TTL della voce personalizzata:**
+  - **Voci con stato (`store=True`, richieste o replicate)**: massimo **200 voci per progetto** con un **TTL di 1 anno** (durata).
+  - **Chiavi vocali stateless (`store=False`, `voicekey_...`):** **TTL di 7 giorni**
+    (durata).
+- Consulta la sezione
+  [Lingue supportate](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#languages)
+  per informazioni sulla copertura linguistica.
 
-## 次のステップ
+## Passaggi successivi
 
-- [音声デザイン](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=ja)を使用して、自然言語からカスタムの音声ペルソナを作成します。
-- [ボイス レプリケーション](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=ja)で既存のスピーカーの音声を複製します。
-- [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ja) モデルページと [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ja) モデルページで、モデルの仕様を比較します。
-- [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ja) を使用して、インタラクティブな双方向音声を確認します。
+- Crea personaggi vocali personalizzati a partire dal linguaggio naturale con
+  [Voice Design](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it).
+- Replica la voce di un oratore esistente in
+  [Replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it).
+- Confronta le specifiche dei modelli nelle pagine dei modelli [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it) e [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it).
+- Esplora l'audio bidirezionale interattivo con l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it).
 
-フィードバックを送信
+Invia feedback
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最終更新日 2026-10-02 UTC。
+Ultimo aggiornamento 2026-10-02 UTC.
 
-ご意見をお聞かせください
+Vuoi dirci altro?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-02 UTC。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-02 UTC."],[],[]]

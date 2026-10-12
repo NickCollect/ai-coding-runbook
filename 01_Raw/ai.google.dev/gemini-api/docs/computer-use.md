@@ -1,42 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=th
-fetched_at: 2026-10-05T06:29:09.456000+00:00
-title: "\u0e01\u0e32\u0e23\u0e43\u0e0a\u0e49\u0e04\u0e2d\u0e21\u0e1e\u0e34\u0e27\u0e40\u0e15\u0e2d\u0e23\u0e4c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=sq
+fetched_at: 2026-10-12T07:00:02.428957+00:00
+title: "P\u00ebrdorimi i kompjuterit \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash është tani në dispozicion. [Provojeni](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=sq) .
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-ส่งความคิดเห็น
+Dërgo komente
 
-# การใช้คอมพิวเตอร์
+# Përdorimi i kompjuterit
 
-เครื่องมือการใช้คอมพิวเตอร์ช่วยให้คุณสร้างเอเจนต์ควบคุมเบราว์เซอร์ อุปกรณ์เคลื่อนที่ และเดสก์ท็อป
-ที่โต้ตอบและทำงานโดยอัตโนมัติได้ การใช้ภาพหน้าจอช่วยให้โมเดล "เห็น" หน้าจอคอมพิวเตอร์ และ "ดำเนินการ" โดยสร้างการกระทำใน UI ที่เฉพาะเจาะจง เช่น การคลิกเมาส์
-และการป้อนข้อมูลด้วยแป้นพิมพ์ เช่นเดียวกับการเรียกใช้ฟังก์ชัน คุณจะต้องใช้สภาพแวดล้อมการดำเนินการฝั่งไคลเอ็นต์เพื่อรับและดำเนินการกับการดำเนินการเกี่ยวกับการใช้คอมพิวเตอร์
+Vegla e përdorimit të kompjuterit të lejon të krijosh agjentë kontrolli për shfletuesin, celularin dhe desktopin që ndërveprojnë dhe automatizojnë detyrat. Duke përdorur pamjet e ekranit, modeli mund të "shikojë" një ekran kompjuteri dhe të "veprojë" duke gjeneruar veprime specifike të ndërfaqes së përdoruesit, si p.sh. klikimet e miut dhe hyrjet e tastierës. Në mënyrë të ngjashme me thirrjen e funksionit, do të duhet të zbatosh mjedisin e ekzekutimit në anën e klientit për të marrë dhe ekzekutuar veprimet e "Përdorimit të kompjuterit".
 
-ดูรายการโมเดลที่รองรับได้ที่[เวอร์ชันโมเดล](#model-versions) โมเดล Gemini 3.x รองรับความสามารถขั้นสูงหลายอย่าง ได้แก่
+Për listën e modeleve të mbështetura, shiko [Versionet e modelit](#model-versions). Modelet Gemini 3.x mbështesin disa aftësi të përparuara:
 
-- **รองรับหลายสภาพแวดล้อม:** สร้างเอเจนต์สำหรับสภาพแวดล้อม[เบราว์เซอร์ อุปกรณ์เคลื่อนที่ และเดสก์ท็อป](#supported-environments)
-- **การดำเนินการที่ปรับปรุงแล้วด้วยเจตนา:** การดำเนินการมีฟิลด์ `intent` ที่อธิบายเหตุผลของโมเดลในแต่ละขั้นตอน
-- **นโยบายด้านความปลอดภัยที่กำหนดค่าได้:** ปรับ[พฤติกรรมด้านความปลอดภัย](#safety-policies)ให้เหมาะสมด้วยหมวดหมู่นโยบายและการลบล้างที่มีอยู่
-- **การตรวจจับการแทรกพรอมต์:** เลือกใช้[การสแกนภาพหน้าจอ](#prompt-injection)เพื่อตรวจหาคำสั่งที่เป็นอันตรายที่ซ่อนอยู่
+- **Mbështetja për shumë mjedise:** krijo agjentë për mjediset e [shfletuesit, celularit dhe desktopit](#supported-environments).
+- **Veprimet e optimizuara me synimet:** veprimet përfshijnë një fushë `intent` që shpjegon arsyetimin e modelit pas çdo hapi.
+- **Politikat e konfiguruara të sigurisë:** rregullo me saktësi [sjelljen e sigurisë](#safety-policies) me kategoritë e integruara të politikave dhe anulimet.
+- **Zbulimi i injektimit të kërkesës:** zgjidh [skanimin e pamjeve të ekranit](#prompt-injection) për të zbuluar udhëzime të fshehura armiqësore.
 
-การใช้คอมพิวเตอร์ช่วยให้คุณสร้างเอเจนต์ที่ทำสิ่งต่อไปนี้ได้
+Me "Përdorimin e kompjuterit", mund të krijosh agjentë që:
 
-- ป้อนข้อมูลซ้ำๆ หรือกรอกแบบฟอร์มในเว็บไซต์โดยอัตโนมัติ
-- ทำการทดสอบเว็บแอปพลิเคชันและโฟลว์ของผู้ใช้โดยอัตโนมัติ
-- ทําการวิจัยในเว็บไซต์ต่างๆ (เช่น รวบรวมข้อมูลผลิตภัณฑ์
-  ราคา และรีวิวจากเว็บไซต์อีคอมเมิร์ซเพื่อประกอบการตัดสินใจซื้อ)
+- Automatizo hyrjen e të dhënave të përsëritura ose plotësimin e formularëve në uebsajte.
+- Kryej testimin e automatizuar të aplikacioneve të uebit dhe flukseve të përdoruesve
+- Kryej kërkime nëpër uebsajte të ndryshme (p.sh. mbledhja e informacioneve për produktet, çmimet dhe komentet nga sajtet e tregtisë në internet për të informuar për një blerje)
 
-ต่อไปนี้คือตัวอย่างการเริ่มต้นไคลเอ็นต์และการส่งพรอมต์ไปยังโมเดลโดยเปิดใช้เครื่องมือ `computer_use` สำหรับสภาพแวดล้อมของเบราว์เซอร์
+Këtu është një shembull minimal i inicializimit të klientit dhe dërgimit të një kërkese te modeli me veglën `computer_use` të aktivizuar për një mjedis shfletuesi:
 
 ### Python
 
@@ -140,57 +137,50 @@ func main() {
 }
 ```
 
-## วิธีการทำงานของการใช้คอมพิวเตอร์
+## Si funksionon "Përdorimi i kompjuterit"
 
-หากต้องการสร้างเอเจนต์ด้วยโมเดลการใช้คอมพิวเตอร์ คุณต้องตั้งค่า
-ลูปต่อเนื่องระหว่างแอปพลิเคชันกับ API โค้ดของคุณจะทำสิ่งต่อไปนี้ในแต่ละขั้นตอน
+Për të ndërtuar një agjent me modelin e përdorimit të kompjuterit, duhet të konfigurosh një lak të vazhdueshëm midis aplikacionit tënd dhe API-së. Ja se çfarë do të bëjë kodi yt në çdo hap:
 
-1. [**ส่งคำขอไปยังโมเดล**](#send-request)
-   - แอปพลิเคชันของคุณจะส่งคำขอ API ที่มีเครื่องมือการใช้งานคอมพิวเตอร์
-     การตั้งค่าการกำหนดค่า (เช่น สภาพแวดล้อมเป้าหมาย) พรอมต์ของผู้ใช้
-     และภาพหน้าจอของหน้าจอปัจจุบัน
-2. [**รับคำตอบของโมเดล**](#model-response)
-   - โมเดลจะวิเคราะห์หน้าจอและพรอมต์ แล้วส่งคำตอบ
-     ซึ่งมี`function_call`ที่แนะนำซึ่งแสดงถึงการดำเนินการใน UI (เช่น
-     การคลิก การเลื่อน หรือการกดแป้น)
-   - สำหรับ**โมเดล Gemini 3.x** คำตอบจะมีเหตุผล `intent`
-     อธิบายว่าทำไมโมเดลจึงเลือกการดำเนินการนั้น
-   - การตอบกลับอาจรวมถึง`safety_decision`จากระบบความปลอดภัยภายใน
-     ที่จัดประเภทการดำเนินการเป็นปกติ/อนุญาต
-     `require_confirmation` (ต้องได้รับการอนุมัติจากผู้ใช้) หรือถูกบล็อก
-3. [**ดำเนินการตามการกระทำที่ได้รับ**](#execute-actions)
-   - หากได้รับอนุญาตให้ดำเนินการ (หรือผู้ใช้ยืนยัน) โค้ดฝั่งไคลเอ็นต์ จะแยกวิเคราะห์ `function_call` ปรับขนาดพิกัดที่ปรับให้เป็นมาตรฐานให้ตรงกับ วิวพอร์ต และดำเนินการในสภาพแวดล้อมเป้าหมายโดยใช้ เครื่องมือการทำงานอัตโนมัติ (เช่น Playwright) หากการดำเนินการถูกบล็อก ไคลเอ็นต์ของคุณควรหยุดการดำเนินการหรือจัดการการหยุดชะงัก
-4. [**บันทึกสถานะสภาพแวดล้อมใหม่**](#capture-state)
-   - หลังจากดำเนินการเสร็จแล้ว แอปพลิเคชันจะจับภาพหน้าจอใหม่
-     และส่งกลับไปยังโมเดลใน `function_result` เพื่อ
-     ขอขั้นตอนถัดไป
+1. [**Dërgo një kërkesë te modeli**](#send-request)
+   - Aplikacioni yt dërgon një kërkesë për API-në që përmban veglën e "Përdorimit të kompjuterit", cilësimet e tua të konfigurimit (si p.sh. mjedisin e synuar), kërkesën e përdoruesit dhe një pamje ekrani të ekranit aktual.
+2. [**Merr përgjigjen e modelit**](#model-response)
+   - Modeli analizon ekranin dhe kërkesën, duke kthyer një përgjigje
+     që përfshin një `function_call` të sugjeruar që përfaqëson një veprim të ndërfaqes së përdoruesit (si p.sh. një klikim, lëvizje ose goditje taste).
+   - Për **modelet Gemini 3.x**, përgjigjja përfshin gjithashtu një arsyetim `intent`
+     që shpjegon se pse modeli e zgjodhi atë veprim.
+   - Përgjigjja mund të përfshijë gjithashtu një `safety_decision` nga një sistem i brendshëm sigurie që e klasifikon veprimin si të rregullt/të lejuar, `require_confirmation` (që kërkon miratimin e përdoruesit) ose të bllokuar.
+3. [**Ekzekuto veprimin e marrë**](#execute-actions)
+   - Nëse veprimi lejohet (ose nëse përdoruesi e konfirmon atë), kodi yt në anën e klientit analizon `function_call`, shkallëzon koordinatat e normalizuara që të përputhen me portën tënde të pamjes dhe ekzekuton veprimin në mjedisin tënd të synuar duke përdorur veglat e automatizimit (si p.sh. Playwright). Nëse veprimi është i bllokuar, klienti yt duhet të ndalojë ekzekutimin ose të menaxhojë ndërprerjen.
+4. [**Regjistro gjendjen e re të mjedisit**](#capture-state)
+   - Pasi të përfundojë ekzekutimi i veprimit, aplikacioni yt kap një pamje të re ekrani dhe e dërgon përsëri te modeli në një `function_result` për të kërkuar hapin tjetër.
 
-จากนั้นกระบวนการนี้จะทำซ้ำจากขั้นตอนที่ 2 โดยจะขอการดำเนินการถัดไปจากโมเดลอย่างต่อเนื่องจนกว่าจะทำงานเสร็จหรือสิ้นสุด
+Ky proces më pas përsëritet nga hapi 2, duke kërkuar vazhdimisht veprimin e radhës nga modeli derisa detyra të përfundohet ose të ndërpritet.
 
-![ภาพรวมการใช้คอมพิวเตอร์](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=th)
+![Përmbledhja e përdorimit të kompjuterit](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=sq)
 
-## วิธีติดตั้งใช้งานการใช้คอมพิวเตอร์
+## Si të zbatosh "Përdorimin e kompjuterit"
 
-ก่อนที่จะสร้างด้วยเครื่องมือการใช้งานคอมพิวเตอร์ คุณจะต้องตั้งค่าสิ่งต่อไปนี้
+Para se të krijosh me veglën "Përdorimi i kompjuterit", do të duhet të konfigurosh:
 
-- **สภาพแวดล้อมการดำเนินการที่ปลอดภัย:** เรียกใช้เอเจนต์ใน VM หรือ
-  คอนเทนเนอร์แซนด์บ็อกซ์เพื่อแยกเอเจนต์ออกจากระบบโฮสต์และจำกัดผลกระทบที่อาจเกิดขึ้น
-  [การติดตั้งใช้งานอ้างอิง](https://github.com/google/computer-use-preview/)
-  มีแซนด์บ็อกซ์ที่ใช้ Docker พร้อมใช้งานซึ่งคุณใช้เป็นจุดเริ่มต้นได้
-- **ตัวแฮนเดิลการดำเนินการฝั่งไคลเอ็นต์:** ใช้ตรรกะฝั่งไคลเอ็นต์เพื่อดำเนินการกับพิกัด พิมพ์ข้อความ และถ่ายภาพหน้าจอ
+- **Mjedisi i ekzekutimit të sigurt:** Ekzekuto agjentin tënd në një makinë virtuale ose
+  kontejner të kufizuar për ta izoluar atë nga sistemi yt pritës dhe për të kufizuar ndikimin e tij të mundshëm.
+  [Zbatimi i referencës](https://github.com/google/computer-use-preview/)
+  përfshin një zonë testimi të bazuar në Docker që është gati për t'u përdorur dhe që mund ta përdorësh si pikënisje.
+- **Menaxheri i veprimit në anën e klientit:** Zbato logjikën në anën e klientit për të ekzekutuar koordinatat, për të shkruar tekst dhe për të bërë pamje ekrani.
 
-ตัวอย่างด้านล่างใช้เว็บเบราว์เซอร์เป็นสภาพแวดล้อมการดำเนินการและ [Playwright](https://playwright.dev/) เป็นตัวแฮนเดิลฝั่งไคลเอ็นต์
+Shembujt e mëposhtëm përdorin një shfletues uebi si mjedis ekzekutimi dhe
+[Playwright](https://playwright.dev/) si trajtuar në anën e klientit.
 
-### 0. ตั้งค่า Playwright
+### 0. Konfiguro Playwright
 
-ก่อนอื่น ให้ติดตั้งแพ็กเกจที่จำเป็นโดยใช้คำสั่งต่อไปนี้
+Në fillim, instalo paketat e kërkuara:
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-จากนั้นเริ่มต้นอินสแตนซ์เบราว์เซอร์ Playwright เพื่อใช้ในการดำเนินการ
+Më pas, inicializo një shembull të shfletuesit Playwright për ta përdorur për ekzekutimin:
 
 ```
 from playwright.sync_api import sync_playwright
@@ -218,13 +208,13 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. ส่งคำขอไปยังโมเดล
+### 1. Dërgo një kërkesë te modeli
 
-เริ่มต้นไลบรารีของไคลเอ็นต์และกำหนดค่าเครื่องมือการใช้งานคอมพิวเตอร์ โปรดทราบว่าไม่จำเป็นต้องระบุขนาดการแสดงผลเมื่อส่งคำขอ เนื่องจากโมเดลจะคาดการณ์พิกัดพิกเซลที่ปรับขนาดตามความสูงและความกว้างของหน้าจอ
+Inicializo bibliotekën e klientit dhe konfiguro veglën "Përdorimi i kompjuterit". Ki parasysh se nuk ka nevojë të specifikosh madhësinë e ekranit kur lëshon një kërkesë; modeli parashikon koordinatat e pikselëve të shkallëzuara sipas lartësisë dhe gjerësisë së ekranit.
 
 ### Python
 
-ใช้ `google-genai` Python SDK (เวอร์ชัน `2.7.0` ขึ้นไป) เพื่อกำหนดค่าคำขอที่กำหนดเป้าหมายไปยังสภาพแวดล้อมของเบราว์เซอร์
+Përdor `google-genai` Python SDK (versioni `2.7.0` ose më i lartë) për të konfiguruar një kërkesë që synon mjedisin e shfletuesit:
 
 ```
 from google import genai
@@ -248,7 +238,7 @@ print(interaction)
 
 ### JavaScript
 
-ใช้ `@google/genai` Node.js SDK เพื่อกำหนดค่าคำขอที่กำหนดเป้าหมายไปยังสภาพแวดล้อมของเบราว์เซอร์
+Përdor `@google/genai` Node.js SDK për të konfiguruar një kërkesë që synon mjedisin e shfletuesit:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -346,9 +336,9 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
-ใช้ curl เพื่อส่งคำขอ
+Përdor curl për të dërguar një kërkesë:
 
 ```
 curl -X POST \
@@ -368,10 +358,9 @@ curl -X POST \
   }'
 ```
 
-### 2. รับคำตอบของโมเดล
+### 2. Merr përgjigjen e modelit
 
-คำตอบของโมเดลแนะนำการเรียกใช้ฟังก์ชันที่มีพิกัดและ
-ความตั้งใจในการให้เหตุผลที่ปรับแต่งแล้วซึ่งอธิบายการดำเนินการ
+Përgjigjja e modelit sugjeron një thirrje funksioni që përfshin koordinatat dhe një qëllim të personalizuar arsyetimi që shpjegon veprimin:
 
 ```
 {
@@ -389,9 +378,9 @@ curl -X POST \
 }
 ```
 
-### 3. ดำเนินการตามการกระทำที่ได้รับ
+### 3. Ekzekuto veprimet e marra
 
-แอปพลิเคชันของคุณต้องแยกวิเคราะห์พิกัดการตอบกลับ ปรับขนาดจากพิกัด 1000x1000 ที่เป็นค่าปกติ และดำเนินการต่อไปนี้
+Aplikacioni yt duhet të analizojë koordinatat e përgjigjes, t'i shkallëzojë ato nga koordinatat e normalizuara 1000x1000 dhe të ekzekutojë veprimin:
 
 ### Python
 
@@ -687,10 +676,9 @@ func main() {
 }
 ```
 
-### 4. บันทึกสถานะสภาพแวดล้อมใหม่
+### 4. Regjistro gjendjen e re të mjedisit
 
-หลังจากดำเนินการแล้ว ให้ส่งผลลัพธ์ของการเรียกใช้ฟังก์ชันกลับไปยัง
-โมเดลเพื่อให้โมเดลใช้ข้อมูลนี้เพื่อสร้างการดำเนินการถัดไปได้ หากมีการดำเนินการหลายอย่าง (การเรียกแบบขนาน) คุณต้องส่ง `function_result` สำหรับแต่ละรายการในเทิร์นของผู้ใช้ถัดไป
+Pas ekzekutimit të veprimeve, dërgo përsëri te modeli rezultatin e ekzekutimit të funksionit që ai të mund t'i përdorë këto informacione për të gjeneruar veprimin e radhës. Nëse janë ekzekutuar disa veprime (thirrje paralele), duhet të dërgosh një `function_result` për secilin prej tyre në radhën vijuese të përdoruesit.
 
 ### Python
 
@@ -844,18 +832,15 @@ func main() {
 }
 ```
 
-เมื่อกำหนดวิธีบันทึกและจัดรูปแบบสถานะสภาพแวดล้อมแล้ว คุณจะ
-รวมขั้นตอนทั้งหมดนี้ไว้ในลูปการดำเนินการต่อเนื่องได้
+Pasi të kesh përcaktuar se si të kapësh dhe formatosh gjendjen e mjedisit, mund t'i kombinosh të gjithë këta hapa në një cikël ekzekutimi të vazhdueshëm.
 
-## สร้างลูปของเอเจนต์
+## Krijo një përsëritje të agjentit
 
-หากต้องการเปิดใช้การโต้ตอบแบบหลายขั้นตอน ให้รวม 4 ขั้นตอนจากส่วน[วิธี
-ใช้งานคอมพิวเตอร์](#implement-computer-use)เป็นลูปเดียว
-ลูปนี้จะขอการดำเนินการและป้อนผลลัพธ์กลับไปยังโมเดลต่อไป
-จนกว่างานจะเสร็จสมบูรณ์
+Për të aktivizuar ndërveprimet me shumë hapa, kombino katër hapat nga seksioni [Si të zbatosh "Përdorimin e kompjuterit"](#implement-computer-use) në një lak të vetëm.
+Ky cikël vazhdon të kërkojë veprime dhe t'i dërgojë rezultatet përsëri te modeli
+derisa detyra të përfundojë.
 
-อย่าลืมจัดการประวัติการสนทนาอย่างถูกต้องโดยการต่อท้ายทั้ง
-คำตอบของโมเดลและคำตอบของฟังก์ชันลงในประวัติในแต่ละขั้นตอน
+Mos harro që të menaxhosh saktë historikun e bisedës duke shtuar përgjigjet e modelit dhe përgjigjet e funksionit te historiku në çdo hap.
 
 ### Python
 
@@ -1250,86 +1235,86 @@ func main() {
 }
 ```
 
-## สภาพแวดล้อมที่รองรับ
+## Mjediset e mbështetura
 
-โมเดล Gemini 3.x รองรับสภาพแวดล้อม 3 แบบที่ระบุไว้ในการ`computer_use`
-กำหนดค่า ดังนี้
+Modelet e Gemini 3.x mbështesin tri mjedise të specifikuara në `computer_use`
+konfigurimet:
 
-### สภาพแวดล้อมของเบราว์เซอร์ (`ENVIRONMENT_BROWSER`)
+### Mjedisi i shfletuesit (`ENVIRONMENT_BROWSER`)
 
-การดำเนินการที่ใช้ได้ในเครื่องมือเบราว์เซอร์
+Veprimet e disponueshme nën veglën e shfletuesit:
 
-| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) |
+| Emri i komandës | Përshkrimi | Argumentet (në thirrjen e funksionit) |
 | --- | --- | --- |
-| **คลิก** | คลิกซ้ายที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | ดับเบิลคลิกที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | คลิก 3 ครั้งที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | คลิกตรงกลางที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | คลิกขวาที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | กดปุ่มเมาส์ค้างไว้ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | ปล่อยปุ่มเมาส์ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **ย้าย** | ย้ายเคอร์เซอร์ไปยังตำแหน่งที่ระบุ | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **ประเภท** | พิมพ์ข้อความ | `text`: str `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้นคือ `false`) `intent`: str |
-| **drag\_and\_drop** | ลากรายการจากพิกัดเริ่มต้นไปยังพิกัดสิ้นสุด | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **รอ** | หยุดการดำเนินการชั่วคราวตามจำนวนวินาทีที่ระบุ | `seconds`: int (ไม่บังคับ ค่าเริ่มต้นคือ `1`) `intent`: str |
-| **press\_key** | กดปุ่มที่ระบุแล้วปล่อย | `key`: str `intent`: str |
-| **key\_down** | กดแป้นที่ระบุค้างไว้ | `key`: str `intent`: str |
-| **key\_up** | ปล่อยคีย์ที่ระบุ | `key`: str `intent`: str |
-| **ฮอตคีย์** | กดชุดแป้นที่ระบุ | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | แสดงผลภาพหน้าจอของหน้าจอปัจจุบัน | `intent`: str |
-| **เลื่อน** | เลื่อนขึ้น ลง ซ้าย หรือขวาที่พิกัดตามระยะห่างของพิกเซล | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, ไม่บังคับ, ค่าเริ่มต้น `300`) `intent`: str |
-| **go\_back** | ย้อนกลับไปยังหน้าเว็บก่อนหน้าในประวัติเบราว์เซอร์ | `intent`: str |
-| **navigate** | ไปยัง URL ที่ระบุโดยตรง | `url`: str `intent`: str |
-| **go\_forward** | ไปยังหน้าเว็บถัดไปในประวัติการเข้าชมของเบราว์เซอร์ | `intent`: str |
+| **kliko** | Klikimet majtas në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | Klikime të dyfishta në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | Klikime të trefishta te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | Klikimet në mes në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | Klikimet me butonin djathtas te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | Shtyp dhe mban shtypur butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | Lëshon butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **zhvendos** | Zhvendos kursorin në pozicionin e specifikuar. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **lloji** | Shkruan tekst. | `text`: str `press_enter`: bool (opsionale, parazgjedhja `false`) `intent`: str |
+| **drag\_and\_drop** | Zvarrit një artikull nga koordinata e fillimit te koordinata e fundit. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **prit** | Vendos në pauzë ekzekutimin për një numër të specifikuar sekondash. | `seconds`: int (opsionale, parazgjedhja `1`) `intent`: str |
+| **press\_key** | Shtyp tastin e specifikuar dhe e lëshon atë. | `key`: str `intent`: str |
+| **key\_down** | Shtyp dhe mban shtypur tastin e specifikuar. | `key`: str `intent`: str |
+| **key\_up** | Lëshon tastin e specifikuar. | `key`: str `intent`: str |
+| **tast i shkurtoreve** | Shtyp kombinimin e specifikuar të tasteve. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | Kthen një pamje ekrani të ekranit aktual. | `intent`: str |
+| **lëviz** | Lëviz lart, poshtë, majtas ose djathtas në një koordinatë me një distancë pikseli. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opsionale, parazgjedhja `300`) `intent`: str |
+| **go\_back** | Navigon prapa te faqja e mëparshme e uebit në historikun e shfletuesit. | `intent`: str |
+| **navigo** | Navigon drejtpërdrejt në një URL të specifikuar. | `url`: str `intent`: str |
+| **go\_forward** | Navigon përpara te faqja tjetër e uebit në historikun e shfletuesit. | `intent`: str |
 
-### สภาพแวดล้อมบนอุปกรณ์เคลื่อนที่ (`ENVIRONMENT_MOBILE`)
+### Mjedisi për celular (`ENVIRONMENT_MOBILE`)
 
-การดำเนินการในสภาพแวดล้อมที่เพิ่มประสิทธิภาพสำหรับ Android
+Veprimet e mjedisit të optimizuara për Android:
 
-| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) |
+| Emri i komandës | Përshkrimi | Argumentet (në thirrjen e funksionit) |
 | --- | --- | --- |
-| **open\_app** | เปิดแอปพลิเคชันตามชื่อ | `app_name`: str `intent`: str |
-| **คลิก** | คลิกซ้ายที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **list\_apps** | แสดงรายการแอปพลิเคชันที่พร้อมใช้งานในอุปกรณ์ โดยจะแสดงชื่อและชื่อแพ็กเกจของแอปพลิเคชัน | `intent`: str |
-| **รอ** | หยุดการดำเนินการชั่วคราวตามจำนวนวินาทีที่ระบุ | `seconds`: int (ไม่บังคับ ค่าเริ่มต้นคือ `1`) `intent`: str |
-| **go\_back** | กลับไปยังหน้าจอก่อนหน้าหรือหน้าเว็บ | `intent`: str |
-| **ประเภท** | พิมพ์ข้อความ | `text`: str `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้นคือ `false`) `intent`: str |
-| **drag\_and\_drop** | ลากรายการจากพิกัดเริ่มต้นไปยังพิกัดสิ้นสุด | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **long\_press** | กดค้างที่พิกัดบนหน้าจอ | `y`: int (0-999) `x`: int (0-999) `seconds`: int (ไม่บังคับ ค่าเริ่มต้น `2`) `intent`: str |
-| **press\_key** | กดปุ่มที่ระบุแล้วปล่อย | `key`: str `intent`: str |
-| **take\_screenshot** | แสดงผลภาพหน้าจอของหน้าจอปัจจุบัน | `intent`: str |
+| **open\_app** | Hap një aplikacion me emrin e tij. | `app_name`: str `intent`: str |
+| **kliko** | Klikimet majtas në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **list\_apps** | Liston aplikacionet e disponueshme në pajisje, duke kthyer emrat dhe emrat e paketave të tyre. | `intent`: str |
+| **prit** | Vendos në pauzë ekzekutimin për një numër të specifikuar sekondash. | `seconds`: int (opsionale, parazgjedhja `1`) `intent`: str |
+| **go\_back** | Navigon prapa tek ekrani ose faqja e mëparshme e uebit. | `intent`: str |
+| **lloji** | Shkruan tekst. | `text`: str `press_enter`: bool (opsionale, parazgjedhja `false`) `intent`: str |
+| **drag\_and\_drop** | Zvarrit një artikull nga koordinata e fillimit te koordinata e fundit. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **long\_press** | Kryen një shtypje të gjatë në një koordinatë në ekran. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (Opsionale, parazgjedhja `2`) `intent`: str |
+| **press\_key** | Shtyp tastin e specifikuar dhe e lëshon atë. | `key`: str `intent`: str |
+| **take\_screenshot** | Kthen një pamje ekrani të ekranit aktual. | `intent`: str |
 
-### สภาพแวดล้อมของเดสก์ท็อป (`ENVIRONMENT_DESKTOP`)
+### Mjedisi i desktopit (`ENVIRONMENT_DESKTOP`)
 
-คำสั่งเคอร์เซอร์ระดับระบบปฏิบัติการของสภาพแวดล้อมเดสก์ท็อป
+Komandat e kursorit në nivelin e sistemit operativ të mjediseve të desktopit:
 
-| ชื่อคำสั่ง | คำอธิบาย | อาร์กิวเมนต์ (ในการเรียกใช้ฟังก์ชัน) |
+| Emri i komandës | Përshkrimi | Argumentet (në thirrjen e funksionit) |
 | --- | --- | --- |
-| **คลิก** | คลิกซ้ายที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | ดับเบิลคลิกที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | คลิก 3 ครั้งที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | คลิกตรงกลางที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | คลิกขวาที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | กดปุ่มเมาส์ค้างไว้ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | ปล่อยปุ่มเมาส์ที่พิกัด | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **ย้าย** | ย้ายเคอร์เซอร์ไปยังตำแหน่งที่ระบุ | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **ประเภท** | พิมพ์ข้อความ | `text`: str `press_enter`: bool (ไม่บังคับ ค่าเริ่มต้นคือ `false`) `intent`: str |
-| **drag\_and\_drop** | ลากรายการจากพิกัดเริ่มต้นไปยังพิกัดสิ้นสุด | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **รอ** | หยุดการดำเนินการชั่วคราวตามจำนวนวินาทีที่ระบุ | `seconds`: int (ไม่บังคับ ค่าเริ่มต้นคือ `1`) `intent`: str |
-| **press\_key** | กดปุ่มที่ระบุแล้วปล่อย | `key`: str `intent`: str |
-| **key\_down** | กดแป้นที่ระบุค้างไว้ | `key`: str `intent`: str |
-| **key\_up** | ปล่อยคีย์ที่ระบุ | `key`: str `intent`: str |
-| **ฮอตคีย์** | กดชุดแป้นที่ระบุ | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | แสดงผลภาพหน้าจอของหน้าจอปัจจุบัน | `intent`: str |
-| **เลื่อน** | เลื่อนขึ้น ลง ซ้าย หรือขวาที่พิกัดตามระยะห่างของพิกเซล | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, ไม่บังคับ, ค่าเริ่มต้น `300`) `intent`: str |
+| **kliko** | Klikimet majtas në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | Klikime të dyfishta në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | Klikime të trefishta te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | Klikimet në mes në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | Klikimet me butonin djathtas te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | Shtyp dhe mban shtypur butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | Lëshon butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **zhvendos** | Zhvendos kursorin në pozicionin e specifikuar. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **lloji** | Shkruan tekst. | `text`: str `press_enter`: bool (opsionale, parazgjedhja `false`) `intent`: str |
+| **drag\_and\_drop** | Zvarrit një artikull nga koordinata e fillimit te koordinata e fundit. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **prit** | Vendos në pauzë ekzekutimin për një numër të specifikuar sekondash. | `seconds`: int (opsionale, parazgjedhja `1`) `intent`: str |
+| **press\_key** | Shtyp tastin e specifikuar dhe e lëshon atë. | `key`: str `intent`: str |
+| **key\_down** | Shtyp dhe mban shtypur tastin e specifikuar. | `key`: str `intent`: str |
+| **key\_up** | Lëshon tastin e specifikuar. | `key`: str `intent`: str |
+| **tast i shkurtoreve** | Shtyp kombinimin e specifikuar të tasteve. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | Kthen një pamje ekrani të ekranit aktual. | `intent`: str |
+| **lëviz** | Lëviz lart, poshtë, majtas ose djathtas në një koordinatë me një distancë pikseli. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opsionale, parazgjedhja `300`) `intent`: str |
 
-## ฟังก์ชันที่กำหนดโดยผู้ใช้แบบกำหนดเอง
+## Funksionet e personalizuara të përcaktuara nga përdoruesi
 
-คุณขยายฟังก์ชันการทำงานของโมเดลได้โดยรวมฟังก์ชันที่กำหนดเองโดยผู้ใช้ เช่น ในสถานการณ์ที่มีการใช้คนในกระบวนการ (HITL) คุณสามารถยกเว้นการดำเนินการเริ่มต้นที่กำหนดไว้ล่วงหน้าและลงทะเบียนการดำเนินการที่กำหนดเองได้
+Mund ta zgjerosh funksionalitetin e modelit duke përfshirë funksione të personalizuara të përcaktuara nga përdoruesi. Për shembull, në skenarët e njeriut në cikël (HITL), mund të përjashtosh veprimet e paravendosura të paracaktuar dhe të regjistrosh veprime të personalizuara.
 
 ### Python
 
-ยกเว้นการดำเนินการในเบราว์เซอร์มาตรฐานที่กำหนดไว้ล่วงหน้า (เช่น `click`) และลงทะเบียนเครื่องมือ `yield_to_user` ที่กำหนดเอง
+Përjashto veprimet standarde të paravendosura të shfletuesit (si p.sh. `click`) dhe regjistro një vegël të personalizuar `yield_to_user`:
 
 ```
 from google import genai
@@ -1368,7 +1353,7 @@ interaction = client.interactions.create(
 
 ### JavaScript
 
-ยกเว้นการดำเนินการในเบราว์เซอร์มาตรฐานที่กำหนดไว้ล่วงหน้า (เช่น `click`) และลงทะเบียนเครื่องมือ `yield_to_user` ที่กำหนดเอง
+Përjashto veprimet standarde të paravendosura të shfletuesit (si p.sh. `click`) dhe regjistro një vegël të personalizuar `yield_to_user`:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1517,30 +1502,29 @@ func main() {
 }
 ```
 
-## การจัดการระดับการคิด
+## Menaxhimi i niveleve të arsyetimit
 
-สำหรับเอเจนต์ที่ใช้คอมพิวเตอร์ คุณสามารถกำหนดค่าระดับการคิดต่างๆ เพื่อสร้างสมดุลระหว่างคุณภาพการดำเนินการและความเร็วในการดำเนินการ โดยทั่วไปแล้ว ระดับการคิดที่ต่ำกว่าจะช่วยให้งานอัตโนมัติมาตรฐานมีความสมดุลที่ดี
+Për agjentët e përdorimit të kompjuterit, mund të konfigurosh nivele të ndryshme të të menduarit për të balancuar cilësinë e veprimit dhe shpejtësinë e ekzekutimit. Nivelet më të ulëta të të menduarit arrijnë përgjithësisht një ekuilibër të mirë për detyrat standarde të automatizimit.
 
-## ความปลอดภัยและการรักษาความปลอดภัย
+## Siguria dhe mbrojtja
 
-### การกำหนดค่านโยบายด้านความปลอดภัย
+### Politikat e sigurisë po konfigurohen
 
-โมเดล Gemini 3.x มีหมวดหมู่บริการด้านความปลอดภัยในตัวที่จะช่วย
-พิจารณาว่าต้องมีการยืนยันจากผู้ใช้หรือไม่
+Modelet e Gemini 3.x përfshijnë kategori të integruara të shërbimit të sigurisë që ndihmojnë për të përcaktuar nëse kërkohet konfirmimi i përdoruesit.
 
-| หมวดหมู่นโยบายด้านความปลอดภัย | คำอธิบาย |
+| Kategoria e politikës së sigurisë | Përshkrimi |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | บล็อกหรือทริกเกอร์การยืนยันสำหรับการดำเนินการที่เกี่ยวข้องกับการชำระเงิน การชำระเงินที่ร้านค้าปลีก หรือสินค้าควบคุม |
-| `SENSITIVE_DATA_MODIFICATION` | ปกป้องบันทึกด้านสุขภาพ การเงิน หรือของรัฐบาลจากการแก้ไขที่ไม่ได้รับอนุญาต |
-| `COMMUNICATION_TOOL` | จำกัดไม่ให้ Agent ส่งอีเมล ข้อความแชท หรือฉบับร่างโดยอัตโนมัติ |
-| `ACCOUNT_CREATION` | จำกัดไม่ให้เอเจนต์ลงทะเบียนบัญชีใหม่บนเว็บไซต์โดยอัตโนมัติ |
-| `DATA_MODIFICATION` | ควบคุมการแก้ไขระบบไฟล์โดยรวม การแชร์ข้อมูล และการลบพื้นที่เก็บข้อมูล |
-| `USER_CONSENT_MANAGEMENT` | ต้องมีการควบคุมของผู้ใช้สำหรับแบนเนอร์แสดงความยินยอมในการใช้คุกกี้และข้อความแจ้งเกี่ยวกับความเป็นส่วนตัว |
-| `LEGAL_TERMS_AND_AGREEMENTS` | ป้องกันไม่ให้โมเดลยอมรับข้อกำหนดในการให้บริการหรือสัญญาที่มีผลผูกพันตามกฎหมายโดยอัตโนมัติ |
+| `FINANCIAL_TRANSACTIONS` | Bllokon ose aktivizon konfirmimin për veprimet që përfshijnë pagesa, përfundimin e blerjes në shitje me pakicë ose mallra të rregulluara me ligj. |
+| `SENSITIVE_DATA_MODIFICATION` | Mbron regjistrimet shëndetësore, financiare ose qeveritare nga modifikimi i paautorizuar. |
+| `COMMUNICATION_TOOL` | Kufizon agjentin që të mos dërgojë në mënyrë autonome email-e, mesazhe bisede ose drafte. |
+| `ACCOUNT_CREATION` | Kufizon agjentin që të mos regjistrojë në mënyrë autonome llogari të reja në uebsajte. |
+| `DATA_MODIFICATION` | Rregullon modifikimet e përgjithshme të sistemit të skedarëve, ndarjen e të dhënave dhe fshirjen e hapësirës ruajtëse. |
+| `USER_CONSENT_MANAGEMENT` | Kërkon marrjen e kontrollit nga përdoruesi për banderolat e pëlqimit për kukit dhe kërkesat për privatësinë. |
+| `LEGAL_TERMS_AND_AGREEMENTS` | Parandalon që modeli të pranojë në mënyrë autonome "Kushtet e shërbimit" ose kontrata ligjërisht të detyrueshme. |
 
-#### การลบล้างความปลอดภัย
+#### Zëvendësimet e sigurisë
 
-คุณลบล้างนโยบายบางอย่างได้โดยส่งการลบล้างดังนี้
+Mund të anulosh politikat e zgjedhura duke kaluar anulimet:
 
 ### Python
 
@@ -1659,15 +1643,13 @@ func main() {
 }
 ```
 
-### การตรวจจับการแทรกพรอมต์
+### Zbulimi i injektimit të kërkesës
 
-การใช้คอมพิวเตอร์สำหรับ Gemini 3.5 Flash ขึ้นไปรองรับกลไกความปลอดภัยขั้นสูง
-เพื่อตรวจหาการโจมตีด้วยการแทรกพรอมต์ เมื่อเปิดใช้ ฟีเจอร์นี้จะตรวจสอบว่าภาพหน้าจอที่รวมมีคำสั่งที่เป็นการโจมตีแบบ Adversarial ที่ซ่อนอยู่หรือไม่ (เช่น "ไม่สนใจคำสั่งก่อนหน้า") และจะบล็อกการดำเนินการเมื่อตรวจพบ
+Përdorimi në kompjuter për Gemini 3.5 Flash-Lite ose më vonë mbështet një mekanizëm të përparuar sigurie për të zbuluar sulmet e injektimit të kërkesave. Kur aktivizohet, kjo veçori kontrollon nëse një pamje ekrani e përfshirë përmban udhëzime të fshehura armiqësore (p.sh. "Shpërfill komandat e mëparshme") dhe bllokon ekzekutimin kur zbulohen.
 
-การตรวจจับการแทรกพรอมต์เป็นฟีเจอร์แบบที่ผู้ใช้ต้องเลือกเปิดใช้เอง โดยมีค่าเริ่มต้นเป็น `false`
+Zbulimi i injektimit të kërkesës është një veçori me zgjedhje. Parazgjedhja është `false`.
 
-ตัวอย่างต่อไปนี้แสดงวิธีเปิดใช้การตรวจจับการแทรกพรอมต์
-ในการกำหนดค่าเครื่องมือการใช้คอมพิวเตอร์
+Shembujt e mëposhtëm demonstrojnë se si të aktivizosh zbulimin e injektimit të kërkesave në konfigurimin e veglës së "Përdorimit të kompjuterit":
 
 ### Python
 
@@ -1677,7 +1659,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.8-flash",
     input="Search for flight deals and summarize top results.",
     tools=[
         {
@@ -1697,7 +1679,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.8-flash",
     input: "Search for flight deals and summarize top results.",
     tools: [
         {
@@ -1725,7 +1707,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model("gemini-3.5-flash")
+        .model("gemini-3.8-flash")
         .input(InteractionsInput.of("Search for flight deals and summarize top results."))
         .tools(
             Arrays.asList(
@@ -1762,7 +1744,7 @@ func main() {
 
     _, err = client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.5-flash"),
+            Model: interactions.Model("gemini-3.8-flash"),
             Input: interactions.NewInteractionsInput("Search for flight deals and summarize top results."),
             Tools: []interactions.Tool{
                 interactions.NewTool(interactions.ComputerUse{
@@ -1784,7 +1766,7 @@ func main() {
 curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI_API_KEY}" \
 -H 'Content-Type: application/json' \
 -d '{
-  "model": "gemini-3.5-flash",
+  "model": "gemini-3.8-flash",
   "input": "Search for flight deals and summarize top results.",
   "tools": [
     {
@@ -1796,9 +1778,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI
 }'
 ```
 
-### รับทราบการตัดสินใจด้านความปลอดภัย
+### Prano vendimin për sigurinë
 
-การตอบกลับอาจมีพารามิเตอร์ `safety_decision` ในอาร์กิวเมนต์การเรียกใช้ฟังก์ชัน
+Përgjigjja mund të përfshijë një parametër `safety_decision` në argumentet e thirrjes së funksionit:
 
 ```
 {
@@ -1819,7 +1801,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI
 }
 ```
 
-หาก `safety_decision` เป็น `require_confirmation` ให้แจ้งผู้ใช้ปลายทาง หากผู้ใช้ยืนยัน ให้ตั้งค่า `safety_acknowledgement` ใน `function_result`
+Nëse `safety_decision` është `require_confirmation`, kërkoji përdoruesit fundor. Nëse përdoruesi e konfirmon, cakto `safety_acknowledgement` në `function_result`.
 
 ### Python
 
@@ -1838,14 +1820,14 @@ if 'safety_decision' in function_call.arguments:
     action_result["safety_acknowledgement"] = True
 ```
 
-### แนวทางปฏิบัติแนะนำด้านความปลอดภัย
+### Praktikat më të mira të sigurisë
 
-การใช้คอมพิวเตอร์มีความเสี่ยงด้านความปลอดภัยและการปฏิบัติงานที่ไม่เหมือนใคร เนื่องจากโมเดลที่ดำเนินการในนามของผู้ใช้อาจพบเนื้อหาที่ไม่น่าเชื่อถือบนหน้าจอหรือทำผิดพลาดในการดำเนินการ ใช้แนวทางปฏิบัติแนะนำต่อไปนี้เพื่อปกป้องข้อมูลและระบบของผู้ใช้
+Përdorimi i kompjuterit paraqet rreziqe unike për sigurinë dhe funksionimin, pasi një model që vepron në emër të një përdoruesi mund të hasë përmbajtje të pabesueshme në ekrane ose mund të bëjë gabime në ekzekutimin e veprimeve. Zbato praktikat më të mira të mëposhtme për të mbrojtur të dhënat dhe sistemet e përdoruesve:
 
-1. **การมีส่วนร่วมของมนุษย์ (HITL):**
-   - **บังคับให้ผู้ใช้ยืนยัน:** เมื่อการตอบกลับด้านความปลอดภัยระบุว่า
-     `require_confirmation` ให้แจ้งให้ผู้ใช้ขออนุมัติ
-   - **ระบุวิธีการด้านความปลอดภัยที่กำหนดเอง:** ใช้คำสั่งของระบบที่กำหนดเองเพื่อกำหนดและบังคับใช้ขอบเขตด้านความปลอดภัยของคุณเอง เช่น
+1. **Me ndërveprim njerëzor (HITL):**
+   - **Zbato konfirmimin e përdoruesit:** Kur përgjigjja e sigurisë tregon
+     `require_confirmation`, kërkoji përdoruesit miratimin.
+   - **Jep udhëzime të personalizuara për sigurinë:** Zbato një udhëzim të personalizuar të sistemit për të përcaktuar dhe zbatuar kufijtë e tu të sigurisë. Për shembull:
 
      ### Python
 
@@ -2143,49 +2125,40 @@ func main() {
 }
 ```
 
-1. **สภาพแวดล้อมการดำเนินการที่ปลอดภัย:** เรียกใช้เอเจนต์ในสภาพแวดล้อมแซนด์บ็อกซ์ที่ปลอดภัย
-   เพื่อจำกัดผลกระทบที่อาจเกิดขึ้น ซึ่งอาจเป็นเครื่องเสมือน (VM) ที่อยู่ในแซนด์บ็อกซ์ คอนเทนเนอร์ (เช่น Docker) หรือโปรไฟล์เบราว์เซอร์เฉพาะที่มีสิทธิ์แบบจำกัด
-   ดูคำแนะนำในการตั้งค่าแซนด์บ็อกซ์โดยใช้ Docker ได้ที่[การติดตั้งใช้งานอ้างอิงของ GitHub](https://github.com/google/computer-use-preview/)
-2. **การล้างข้อมูลอินพุต:** ล้างข้อความทั้งหมดที่ผู้ใช้สร้างขึ้นในพรอมต์เพื่อลดความเสี่ยงของวิธีการที่ไม่พึงประสงค์หรือการแทรกพรอมต์ ซึ่งเป็น
-   การรักษาความปลอดภัยที่มีประโยชน์ แต่ไม่ใช่สิ่งทดแทนสภาพแวดล้อมการดำเนินการที่ปลอดภัย
-3. **แนวทางป้องกันเนื้อหา:** ใช้แนวทางป้องกันและ API ความปลอดภัยของเนื้อหาเพื่อประเมิน
-   อินพุตของผู้ใช้ อินพุตและเอาต์พุตของเครื่องมือ รวมถึงการตอบกลับของเอเจนต์ว่าเหมาะสมหรือไม่
-   การแทรกพรอมต์ และการตรวจหาการเจลเบรก
-4. **รายการที่อนุญาตและรายการที่บล็อก:** ใช้กลไกการกรองเพื่อควบคุม
-   ตำแหน่งที่โมเดลสามารถไปยังได้และสิ่งที่โมเดลทำได้ จุดเริ่มต้นที่ดีคือรายการที่บล็อกเว็บไซต์ที่ห้าม
-   ขณะที่รายการที่อนุญาตที่จำกัดมากขึ้นจะปลอดภัยยิ่งกว่า
-5. **ความสามารถในการสังเกตและการบันทึก:** จัดเก็บบันทึกโดยละเอียดสำหรับการแก้ไขข้อบกพร่อง การตรวจสอบ และการตอบสนองต่อเหตุการณ์ ลูกค้าควรบันทึกพรอมต์
-   ภาพหน้าจอ การดำเนินการที่โมเดลแนะนำ (`function_call`) คำตอบด้านความปลอดภัย และ
-   การดำเนินการทั้งหมดที่ไคลเอ็นต์ดำเนินการในท้ายที่สุด
-6. **การจัดการสภาพแวดล้อม:** ตรวจสอบว่าสภาพแวดล้อม GUI สอดคล้องกัน
-   ป๊อปอัป การแจ้งเตือน หรือการเปลี่ยนแปลงเลย์เอาต์ที่ไม่คาดคิดอาจทำให้โมเดลสับสน
-   หากเป็นไปได้ ให้เริ่มจากสถานะที่ทราบและสะอาดสำหรับงานใหม่แต่ละงาน
+1. **Mjedisi i ekzekutimit të sigurt:** Ekzekuto agjentin tënd në një mjedis të sigurt dhe të kufizuar
+   për të kufizuar ndikimin e tij të mundshëm. Kjo mund të jetë një makinë virtuale e izoluar (VM), një kontejner (p.sh. Docker) ose një profil i dedikuar shfletuesi me leje të kufizuara. Shiko
+   [zbatimin referues të GitHub](https://github.com/google/computer-use-preview/)
+   për udhëzimet e konfigurimit të mjedisit të provës duke përdorur Docker.
+2. **Pastrimi i hyrjes:** Pastro të gjithë tekstin e gjeneruar nga përdoruesi në kërkesa për të
+   zbutur rrezikun e udhëzimeve të paqëllimshme ose injektimit të kërkesave. Kjo është një shtresë e dobishme sigurie, por nuk është një zëvendësim për një mjedis të sigurt ekzekutimi.
+3. **Mbrojtjet për përmbajtjet:** Përdor mbrojtjet dhe API-të e sigurisë së përmbajtjeve për të vlerësuar hyrjet e përdoruesve, hyrjet dhe daljet e veglave, si dhe përgjigjet e agjentit për përshtatshmërinë, injektimin e kërkesave dhe zbulimin e shmangies së kufizimeve.
+4. **Listat e lejimeve dhe listat e bllokimeve:** Zbato mekanizmat e filtrimit për të kontrolluar se ku mund të navigojë modeli dhe çfarë mund të bëjë ai. Një listë bllokimesh e uebsajteve të ndaluara është një pikë e mirë fillimi, ndërsa një listë lejimesh më kufizuese është edhe më e sigurt.
+5. **Vëzhgueshmëria dhe regjistrimi:** Mbaj regjistra të detajuar për korrigjimin, auditimin dhe reagimin ndaj incidenteve. Klienti yt duhet të regjistrojë kërkesat, pamjet e ekranit, veprimet e sugjeruara nga modeli (`function_call`), përgjigjet e sigurisë dhe të gjitha veprimet e ekzekutuara në fund nga klienti.
+6. **Menaxhimi i mjedisit:** Siguro që mjedisi i ndërfaqes grafike të përdoruesit është i qëndrueshëm.
+   Dritaret kërcyese, njoftimet ose ndryshimet e papritura në strukturë mund ta ngatërrojnë modelin. Nis nga një gjendje e njohur dhe e pastër për çdo detyrë të re nëse është e mundur.
 
-## เวอร์ชันของโมเดล
+## Versionet e modelit
 
-คุณใช้การใช้งานคอมพิวเตอร์กับรุ่นต่อไปนี้ได้
+Mund ta përdorësh "Përdorimin e kompjuterit" me modelet e mëposhtme:
 
-- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=th) (`gemini-3.8-flash`): โมเดลที่แนะนำสำหรับการใช้งานในคอมพิวเตอร์ ซึ่งมีปฏิสัมพันธ์ UI ที่มีความแม่นยำสูงและการเรียกใช้เครื่องมือที่เชื่อถือได้
-- [**Gemini 3.7 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=th) (`gemini-3.7-flash`): โมเดลเวอร์ชันเสถียรก่อนหน้าสำหรับการใช้งานบนคอมพิวเตอร์ ซึ่งมีฟีเจอร์การดำเนินการที่ปรับปรุงแล้วพร้อมเจตนา รองรับสภาพแวดล้อมของเบราว์เซอร์ อุปกรณ์เคลื่อนที่ และเดสก์ท็อป นโยบายความปลอดภัยที่กำหนดค่าได้ และการตรวจหาการแทรกพรอมต์
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=th) (`gemini-3.5-flash-lite`): โมเดลที่มีเวลาในการตอบสนองต่ำและคุ้มค่าซึ่งรองรับการใช้งานคอมพิวเตอร์
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th) (`gemini-3.5-flash`): โมเดลเวอร์ชันเสถียรก่อนหน้าซึ่งรองรับการใช้งานในคอมพิวเตอร์
-- [**รุ่นตัวอย่าง Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) (`gemini-3-flash-preview`): โมเดลตัวอย่าง
-  ที่รองรับการใช้งานคอมพิวเตอร์
+- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq) (`gemini-3.8-flash`): Modeli i rekomanduar për përdorimin në kompjuter, i cili përmban ndërveprim me ndërfaqen e përdoruesit me saktësi të lartë dhe thirrje të besueshme të veglave.
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq) (`gemini-3.5-flash-lite`): Një model me kosto efektive dhe me vonesë të ulët që mbështet përdorimin në kompjuter.
+- [**Pamja paraprake e Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq) (`gemini-3-flash-preview`): Pamja paraprake e modelit që mbështet përdorimin në kompjuter.
 
-## ขั้นตอนถัดไป
+## Çfarë ka më pas
 
-- ทดลองใช้คอมพิวเตอร์ใน[สภาพแวดล้อมการสาธิตของ Browserbase](http://gemini.browserbase.com)
-- ดูโค้ดตัวอย่างได้ที่[การติดตั้งใช้งานอ้างอิง](https://github.com/google/computer-use-preview)
-- ดูข้อมูลเกี่ยวกับเครื่องมืออื่นๆ ของ Gemini API
-  - [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
-  - [การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
+- Eksperimento me "Përdorimin e kompjuterit" në [mjedisin e demonstrimit të Browserbase](http://gemini.browserbase.com).
+- Shiko [Zbatimin e referencës](https://github.com/google/computer-use-preview) për shembullin e kodit.
+- Mëso rreth veglave të tjera të Gemini API:
+  - [Thirrja e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq)
+  - [Argumentimi me "Kërko në Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq)
 
-ส่งความคิดเห็น
+Dërgo komente
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-อัปเดตล่าสุด 2026-10-01 UTC
+Përditësimi i fundit: 2026-10-09 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Duhet të na tregosh më shumë?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-01 UTC"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-09 UTC."],[],[]]

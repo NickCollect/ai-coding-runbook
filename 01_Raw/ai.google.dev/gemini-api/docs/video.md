@@ -1,52 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=th
-fetched_at: 2026-10-05T06:33:24.865827+00:00
-title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e27\u0e34\u0e14\u0e35\u0e42\u0e2d\u0e43\u0e19 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=pl
+fetched_at: 2026-10-12T06:59:32.919999+00:00
+title: "Generowanie film\u00f3w w interfejsie Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-# การสร้างวิดีโอใน Gemini API
+# Generowanie filmów w interfejsie Gemini API
 
-Gemini API มีโมเดล 2 แบบสำหรับสร้างวิดีโอ ได้แก่
-[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=th) และ [Veo](https://ai.google.dev/gemini-api/docs/veo?hl=th)
-ซึ่งแต่ละแบบได้รับการออกแบบมาสำหรับเวิร์กโฟลว์ที่แตกต่างกัน
+Interfejs Gemini API oferuje 2 modele do generowania filmów,
+[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=pl) i [Veo](https://ai.google.dev/gemini-api/docs/veo?hl=pl).
+Każdy z nich jest przeznaczony do innych procesów.
 
-ใช้ Gemini Omni Flash เป็นโมเดลเริ่มต้นสำหรับการสร้างวิดีโอ เนื่องจากมีความสอดคล้องของวิดีโอที่เหนือกว่า การให้เหตุผลแบบหลายอินพุต (รองรับอินพุตข้อความ รูปภาพ เสียง และวิดีโอพร้อมกัน) ความสอดคล้องของตัวละคร ความถูกต้องของข้อเท็จจริง และการตัดต่อแบบสนทนาหลายรอบ (เช่น การแทนที่องค์ประกอบหรือการเปลี่ยนมุมมอง) ใช้ Veo 3.1 สำหรับความสามารถเฉพาะ เช่น การขยายฉาก การควบคุมเฟรมสุดท้าย หรือการผสานรวมกับไปป์ไลน์เดิม
+Używaj Gemini Omni Flash jako domyślnego modelu do generowania filmów. Zapewnia on lepszą spójność filmów, rozumowanie wieloźródłowe (obsługuje jednocześnie tekst, obrazy, dźwięk i wideo), spójność postaci, dokładność faktów oraz wieloetapowe edytowanie w trybie konwersacyjnym (np. zastępowanie elementów lub zmiany perspektywy). Używaj Veo 3.1, jeśli potrzebujesz konkretnych funkcji, takich jak rozszerzanie scen, sterowanie ostatnią klatką lub integracja z starszymi potokami.
 
 ## Gemini Omni Flash
 
-Gemini Omni Flash เป็นโมเดลมัลติโมดัลที่รวดเร็วสำหรับการสร้างวิดีโอและการตัดต่อวิดีโอแบบสนทนา มีความโดดเด่นในการเปลี่ยนพรอมต์ข้อความและรูปภาพให้เป็นวิดีโอสั้นๆ ได้อย่างรวดเร็ว และช่วยให้คุณปรับแต่งผลลัพธ์ได้หลายรอบโดยใช้ Interactions API
+Gemini Omni Flash to szybki, multimodalny model do generowania filmów i konwersacyjnej edycji filmów. Doskonale radzi sobie z szybkim przekształcaniem podpowiedzi tekstowych i obrazów w krótkie filmy oraz umożliwia dopracowywanie wyników w wielu etapach za pomocą interfejsu Interactions API.
 
-[เริ่มต้นใช้งาน Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=th)
+[Pierwsze kroki z Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=pl)
 
 ## Veo 3.1
 
-Veo 3.1 เป็นโมเดลสำหรับการสร้างวิดีโอพร้อมเสียงดั้งเดิม รองรับฟีเจอร์ต่างๆ เช่น การขยายวิดีโอ การสร้างเฉพาะเฟรม และการกำหนดทิศทางตามรูปภาพผ่าน `generateContent` API
+Veo 3.1 to model do generowania filmów z natywnym dźwiękiem. Obsługuje funkcje takie jak rozszerzanie filmów, generowanie klatek i kierowanie na podstawie obrazów za pomocą interfejsu `generateContent` API.
 
-[เริ่มต้นใช้งาน Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=th)
+[Pierwsze kroki z Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=pl)
 
-## การทำความเข้าใจวิดีโอ
+## Rozpoznawanie filmów
 
-หากต้องการนำเข้าและวิเคราะห์เนื้อหาวิดีโอที่มีอยู่แทนที่จะสร้าง
-วิดีโอใหม่ โปรดดู[คู่มือการทำความเข้าใจวิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th)
+Jeśli musisz wczytać i przeanalizować istniejące treści wideo, a nie generować
+nowych filmów, zapoznaj się z przewodnikiem [Rozpoznawanie filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl).
 
-ส่งความคิดเห็น
+Prześlij opinię
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-อัปเดตล่าสุด 2026-06-30 UTC
+Ostatnia aktualizacja: 2026-06-30 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Chcesz przekazać coś jeszcze?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-30 UTC"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-30 UTC."],[],[]]

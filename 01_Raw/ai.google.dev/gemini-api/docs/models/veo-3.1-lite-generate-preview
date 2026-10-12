@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=zh-CN
-fetched_at: 2026-10-05T06:50:10.780248+00:00
-title: "Veo 3.1 Lite \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=tr
+fetched_at: 2026-10-12T06:58:35.939081+00:00
+title: "Veo 3.1 Lite \u00f6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-发送反馈
+Geri bildirim gönderin
 
-# Veo 3.1 Lite 预览版
+# Veo 3.1 Lite önizlemesi
 
-Veo 3.1 Lite 预览版是一款高效的开发者优先视频模型，可提供高保真视频生成、编辑和影院级控制功能。它利用先进的 Veo 3.1 模型，为创作者和企业提供可扩展的程序化接口，从而普及专业级视频 AI。
+Veo 3.1 Lite Önizleme, yüksek verimliliğe sahip, geliştiricileri önceliklendiren bir video modelidir. Bu model, yüksek kaliteli video üretme, düzenleme ve sinematik kontrol özellikleri sunar. İçerik üreticiler ve işletmeler için ölçeklenebilir, programlanabilir bir arayüz sunarak profesyonel kalitede Video AI'yı herkesin erişimine açmak amacıyla en yeni Veo 3.1 modelinden yararlanır.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=zh-cn)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=tr)
 
-## 文档
+## Belgeler
 
-Veo 3.1 Lite 可为开发者和企业提供最优惠的价格，帮助他们大规模构建高容量视频应用和工作流。如需了解详情以及与其他 Veo 3.1 型号的比较，请访问[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#veo-3.1)页面。
+Veo 3.1 Lite, yüksek hacimli video uygulamaları ve iş akışları oluşturan geliştiriciler ve işletmeler için en iyi fiyatları sunar. Ayrıntılı bilgi ve diğer Veo 3.1 modelleriyle karşılaştırma için [Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#veo-3.1) sayfasını ziyaret edin.
 
-如需全面了解功能和功能，请访问[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)页面。请注意，Veo 3.1 Lite 预览版不支持 [4K 输出](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn#resolution)或[扩展](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn#extending-veo-videos)。
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Video üretimi](https://ai.google.dev/gemini-api/docs/video?hl=tr) sayfasını ziyaret edin. Veo 3.1 Lite Önizleme'nin [4K çıkışları](https://ai.google.dev/gemini-api/docs/veo?hl=tr#resolution) veya [Genişletme](https://ai.google.dev/gemini-api/docs/veo?hl=tr#extending-veo-videos)'yi desteklemediğini unutmayın.
 
 ## veo-3.1-lite-generate-preview
 
-| 属性 | 说明 |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_card 模型代码 | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| 保存支持的数据类型 | **输入**  文字、图片  **输出**  带音频的视频 |
-| token\_auto 限制 | **文本输入**  1,024 个词元  **输出视频**  1 |
-| calendar\_month最新更新 | 2026 年 3 月 |
+| id\_cardModel kodu | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveDesteklenen veri türleri | **Giriş**  Metin, Resim  **Çıkış**  Sesli video |
+| token\_auto sınırları | **Metin girişi**  1.024 jeton  **Çıkış videosu**  1 |
+| calendar\_monthSon güncelleme | Mart 2026 |
 
-发送反馈
+Geri bildirim gönderin
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最后更新时间 (UTC)：2026-09-11。
+Son güncelleme tarihi: 2026-10-08 UTC.
 
-需要向我们提供更多信息？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-11。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-08 UTC."],[],[]]

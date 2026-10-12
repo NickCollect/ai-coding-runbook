@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=th
-fetched_at: 2026-10-05T06:36:46.580035+00:00
-title: "Deep Research Max \u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=vi
+fetched_at: 2026-10-12T07:08:32.219553+00:00
+title: "B\u1ea3n xem tr\u01b0\u1edbc Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-# Deep Research Max เวอร์ชันตัวอย่าง
+# Bản xem trước Deep Research Max
 
-ความครอบคลุมสูงสุดสำหรับการรวบรวมและสังเคราะห์บริบทโดยอัตโนมัติ Deep Research Max ได้รับการปรับให้เหมาะสมกับการสืบสวนที่ใช้เวลานานและมีความสำคัญต่อความถูกต้อง ซึ่งจะสังเคราะห์ข้อมูลที่ซับซ้อนจากแหล่งที่มาบนเว็บสาธารณะหลายร้อยแห่งและข้อมูลพื้นที่ทำงานส่วนตัวให้เป็นรายงานที่ครอบคลุมพร้อมการอ้างอิง โดยรองรับการวางแผนร่วมกัน การแสดงภาพ เซิร์ฟเวอร์ MCP และการค้นหาไฟล์
+Mức độ toàn diện tối đa cho quá trình thu thập và tổng hợp ngữ cảnh tự động. Deep Research Max được tối ưu hoá cho các cuộc điều tra dài hạn và quan trọng về độ chính xác, tổng hợp thông tin phức tạp từ hàng trăm nguồn công khai trên web và dữ liệu không gian làm việc riêng tư thành các báo cáo toàn diện có trích dẫn. Công cụ này hỗ trợ hoạt động lập kế hoạch cộng tác, hình ảnh trực quan, máy chủ MCP và Tìm tệp.
 
-## เอกสารประกอบ
+## Tài liệu
 
-ไปที่หน้า [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) เพื่อดูฟีเจอร์และความสามารถทั้งหมด
+Truy cập trang [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) để xem toàn bộ các tính năng và chức năng.
 
 ## deep-research-max-preview-04-2026
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardรหัส Agent | **Interactions API**  `deep-research-max-preview-04-2026` |
-| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ PDF เสียง วิดีโอ  **เอาต์พุต**  ข้อความ (รายงานที่มีการอ้างอิง) รูปภาพ |
-| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **หน้าต่างบริบทอินพุต**  1,048,576  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมเกี่ยวกับ[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `deep-research-max-preview-04-2026` |
-| calendar\_monthการอัปเดตล่าสุด | เมษายน 2026 |
+| id\_cardMã đại lý | **API Tương tác**  `deep-research-max-preview-04-2026` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh, PDF, Âm thanh, Video  **Đầu ra**  Văn bản (Báo cáo có trích dẫn), Hình ảnh |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Cửa sổ ngữ cảnh đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
+| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Xem trước: `deep-research-max-preview-04-2026` |
+| calendar\_monthNội dung cập nhật mới nhất | Tháng 4 năm 2026 |
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

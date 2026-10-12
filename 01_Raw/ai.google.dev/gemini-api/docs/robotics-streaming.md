@@ -1,64 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fr
-fetched_at: 2026-10-05T06:43:27.327929+00:00
-title: "Robotique avec streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de
+fetched_at: 2026-10-12T07:06:59.012026+00:00
+title: "Robotik mit Streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Envoyer des commentaires
+Feedback geben
 
-# Robotique avec streaming
+# Robotik mit Streaming
 
-Le point de terminaison du modèle `gemini-robotics-er-2-streaming-preview` expose un point de terminaison de streaming dédié qui s'intègre à l'[API Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=fr), ce qui permet une interaction bidirectionnelle en temps réel entre votre application et le robot. Elle convient donc aux agents qui ont besoin de boucles de rétroaction rapides et de réponses réactives à l'environnement.
+Der Modellendpunkt `gemini-robotics-er-2-streaming-preview` stellt einen dedizierten Streaming-Endpunkt bereit, der in die [Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=de) eingebunden ist und eine bidirektionale Echtzeitinteraktion zwischen Ihrer Anwendung und dem Roboter ermöglicht. Daher eignet es sich für Agents, die schnelle Feedbackschleifen und reaktive Antworten auf die Umgebung benötigen.
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=fr)
-[Cloner des exemples d'applications depuis GitHub](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+[In Google AI Studio ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=de)
+[Beispiel-Apps von GitHub klonen](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
 
-## Cas d'utilisation
+## Anwendungsfälle
 
-- **Coordination de plusieurs robots** : plusieurs robots communiquent l'état des tâches et délèguent des sous-tâches par le biais d'une session partagée.
-- **Surveillance continue** : robots qui observent une scène et déclenchent des actions lorsque des événements spécifiques se produisent, par exemple lorsqu'un conteneur atteint un certain niveau de remplissage.
-- **Entrepôt et logistique** : agents de préparation et d'emballage qui vérifient visuellement les articles, suivent la progression de l'emballage et corrigent les erreurs.
+- **Koordination mehrerer Roboter**: Mehrere Roboter, die den Aufgabenstatus über eine gemeinsame Sitzung kommunizieren und Unteraufgaben delegieren.
+- **Kontinuierliches Monitoring**: Roboter, die eine Szene beobachten und Aktionen auslösen, wenn bestimmte Ereignisse eintreten, z. B. wenn ein Container einen bestimmten Füllstand erreicht.
+- **Lager und Logistik**: Kommissionierungs- und Verpackungs-Agents, die Artikel visuell prüfen, den Verpackungsfortschritt verfolgen und Fehler beheben.
 
-## Spécifications techniques
+## Technische Spezifikationen
 
-Le tableau suivant présente les spécifications techniques de l'API Live :
+In der folgenden Tabelle sind die technischen Spezifikationen für die Live API aufgeführt:
 
-| Catégorie | Détails |
+| Kategorie | Details |
 | --- | --- |
-| Modes d'entrée | Audio (audio PCM 16 bits brut, 16 kHz, little-endian), images (JPEG <= 1 FPS), texte |
-| Modes de sortie | Texte |
-| Protocole | Connexion WebSocket avec état (WSS) |
+| Eingabemodalitäten | Audio (rohes 16-Bit-PCM-Audio, 16 kHz, Little Endian), Bilder (JPEG <= 1 FPS), Text |
+| Ausgabemodalitäten | Text |
+| Protokoll | Statusbehaftete WebSocket-Verbindung (WSS) |
 
-## Créer une configuration agentique
+## Agentische Einrichtung erstellen
 
-Chaque agent robotique basé sur l'API Live suit trois étapes :
+Jeder auf der Live API basierende Roboter-Agent durchläuft drei Schritte:
 
-1. **Déclarez les capacités du robot en tant qu'outils.** Chaque action que le robot peut effectuer (naviguer, saisir, parler, etc.) devient une déclaration de fonction avec un nom, une description et un schéma de paramètres. Les actions physiques doivent utiliser `"behavior": "BLOCKING"` pour que le modèle attende que le robot ait terminé avant de choisir l'étape suivante.
-2. **Transmettre des entrées multimodales dans une session persistante** Ouvrez une session `live.connect` et laissez-la ouverte pendant toute la durée de la tâche. Envoyez des images vidéo, de l'audio ou du texte à mesure qu'ils arrivent des capteurs de votre robot.
-3. **Gérer les appels d'outils dans une boucle de réception** Chaque fois que le modèle sélectionne une action, il envoie un message `tool_call`. Votre boucle de réception exécute la fonction par rapport à votre SDK de robot et renvoie un `tool_response`. La session reste ouverte et le modèle choisit la prochaine action en fonction du résultat.
+1. **Roboterfunktionen als Tools deklarieren**: Jede Aktion, die der Roboter ausführen kann (z. B. navigieren, greifen, sprechen), wird zu einer Funktionsdeklaration mit einem Namen, einer Beschreibung und einem Parameterschema. Bei physischen Aktionen muss `"behavior": "BLOCKING"` verwendet werden, damit das Modell wartet, bis der Roboter fertig ist, bevor es den nächsten Schritt auswählt.
+2. **Multimodale Eingabe in eine persistente Sitzung streamen** Öffnen Sie eine `live.connect`-Sitzung und lassen Sie sie für die gesamte Dauer der Aufgabe geöffnet. Senden von Videobildern, Audio oder Text, sobald sie von den Sensoren des Roboters empfangen werden.
+3. **Toolaufrufe in einer Empfangsschleife verarbeiten**: Jedes Mal, wenn das Modell eine Aktion auswählt, wird eine `tool_call`-Nachricht gesendet. In der Empfangsschleife wird die Funktion für Ihr Roboter-SDK ausgeführt und eine `tool_response` zurückgesendet. Die Sitzung bleibt geöffnet und das Modell wählt die nächste Aktion basierend auf dem Ergebnis aus.
 
-Les sections suivantes montrent comment appliquer ces étapes à trois modèles courants : une boucle d'agent de référence, la surveillance proactive de scènes avec un signal de présence et le routage de la parole via TTS en tant qu'outil.
+In den folgenden Abschnitten wird gezeigt, wie Sie diese Schritte auf drei gängige Muster anwenden: einen Baseline-Agent-Loop, die proaktive Szenenüberwachung mit einem Heartbeat und das Weiterleiten von Sprache über TTS als Tool.
 
-## Orchestrer un robot à l'aide de l'appel de fonction
+## Roboter über Funktionsaufrufe steuern
 
-L'exemple suivant montre les trois étapes connectées dans un seul script Python.
+Im folgenden Beispiel sind alle drei Schritte in einem einzigen Python-Skript miteinander verbunden.
 
-L'étape 1 (définitions d'outils) déclare les capacités du robot sous forme de déclarations de fonctions. La fonction `navigate` utilise `"behavior": "BLOCKING"`. Le modèle attend donc que le robot atteigne le point de cheminement avant d'appeler un autre outil.
-Ajoutez d'autres déclarations de fonction dans la même liste pour exposer des capacités de robot supplémentaires.
+Schritt 1 – Tooldefinitionen – deklariert Roboterfunktionen als Funktionsdeklarationen. Die Funktion `navigate` verwendet `"behavior": "BLOCKING"`, sodass das Modell wartet, bis der Roboter den Wegpunkt erreicht hat, bevor ein anderes Tool aufgerufen wird.
+Fügen Sie der Liste weitere Funktionsdeklarationen hinzu, um zusätzliche Roboterfunktionen verfügbar zu machen.
 
-L'étape 2 (assistants d'entrée) présente trois fonctions qui transmettent en flux continu différentes entrées de modalités dans la session : `send_text` pour les commandes, `send_image` pour les images de caméra avec un prompt textuel facultatif et `send_audio` pour l'audio PCM brut provenant d'un micro.
+Schritt 2 – Eingabehilfen – zeigt drei Funktionen, mit denen verschiedene Modalitätseingaben in die Sitzung gestreamt werden: `send_text` für Befehle, `send_image` für Kamerabilder mit einem optionalen Text-Prompt und `send_audio` für rohes PCM-Audio von einem Mikrofon.
 
-L'étape 3 (boucle de réception) s'exécute simultanément et gère deux types de messages : les messages `server_content` (sortie de texte du modèle) et les messages `tool_call` (le modèle demandant une action du robot). Lorsqu'un appel d'outil arrive, la boucle appelle `execute_tool` (un stub que vous remplacez par votre véritable SDK de robot), puis renvoie un `tool_response` afin que le modèle puisse sélectionner la prochaine action.
+Schritt 3 – die Empfangsschleife – wird gleichzeitig ausgeführt und verarbeitet zwei Arten von Nachrichten: `server_content`-Nachrichten (die Textausgabe des Modells) und `tool_call`-Nachrichten (das Modell fordert eine Roboteraktion an). Wenn ein Tool-Aufruf eingeht, ruft die Schleife `execute_tool` auf – einen Stub, den Sie durch Ihr echtes Roboter-SDK ersetzen – und sendet dann `tool_response` zurück, damit das Modell die nächste Aktion auswählen kann.
 
 ```
 import asyncio
@@ -163,18 +163,18 @@ async def main():
 asyncio.run(main())
 ```
 
-La boucle de réception reste active après chaque réponse de l'outil. Le modèle construit et révise un plan à long terme sans que vous ayez à encoder toute la séquence d'actions à l'avance.
+Der Empfangsvorgang bleibt nach jeder Tool-Antwort aktiv. Das Modell erstellt und überarbeitet einen Plan mit langem Horizont, ohne dass Sie die gesamte Aktionssequenz im Voraus codieren müssen.
 
-## Raisonnement spatio-temporel proactif
+## Proaktives räumlich-zeitliches Denken
 
-L'API Live diffuse des vidéos, mais les images vidéo seules ne déclenchent pas de nouveau tour de raisonnement. Les images vidéo doivent être accompagnées d'une requête textuelle ou audio pour déclencher une réponse du modèle. Pour en savoir plus, consultez [Fonctionnalités de l'API Live](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=fr).
+Die Live API streamt Videoinhalte, aber Videoframes allein lösen keinen neuen Reasoning-Turn aus. Videoframes müssen von einem Text- oder Audio-Prompt begleitet werden, um eine Modellantwort auszulösen. Weitere Informationen finden Sie unter [Live API-Funktionen](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=de).
 
-Pour activer le raisonnement proactif, implémentez un **signal de présence** : envoyez régulièrement la dernière image de la caméra, suivie d'un court prompt textuel qui force le modèle à inspecter la scène et à prendre une décision explicite. L'entrée vidéo est limitée à une image par seconde.
+Um proaktives Reasoning zu aktivieren, implementieren Sie einen **Heartbeat**: Senden Sie regelmäßig den letzten Kamerabild gefolgt von einem kurzen Text-Prompt, der das Modell dazu zwingt, die Szene zu untersuchen und eine explizite Entscheidung zu treffen. Die Videoeingabe ist auf ein Bild pro Sekunde begrenzt.
 
-### Implémenter le signal de pulsation
+### Heartbeat implementieren
 
-La coroutine heartbeat s'exécute en tant que tâche `asyncio` distincte dans la même session.
-Il cible de manière opportuniste une cadence de 1 Hz (correspondant à la limite de fréquence d'entrée vidéo) en attendant la fin de chaque tour (`er_turn_done`) pour éviter d'interrompre le raisonnement en cours :
+Die Heartbeat-Coroutine wird als separate `asyncio`-Aufgabe in derselben Sitzung ausgeführt.
+Es wird opportunistisch auf eine Häufigkeit von 1 Hz ausgerichtet (entsprechend dem Ratenlimit für die Videoeingabe), während auf den Abschluss jeder Runde (`er_turn_done`) gewartet wird, um laufende Schlussfolgerungen nicht zu unterbrechen:
 
 ```
 async def heartbeat(session, camera, er_turn_done: asyncio.Event):
@@ -208,9 +208,9 @@ async def heartbeat(session, camera, er_turn_done: asyncio.Event):
             await asyncio.sleep(remaining)
 ```
 
-### Mettre à jour la boucle de réception
+### Empfangsschleife aktualisieren
 
-Pour indiquer que le modèle a terminé son tour, mettez à jour votre `receive_loop` pour définir `er_turn_done` :
+Um zu signalisieren, wann das Modell seinen Zug beendet hat, aktualisieren Sie `receive_loop`, um `er_turn_done` festzulegen:
 
 ```
 # In receive_loop: signal when the model finishes its turn
@@ -218,12 +218,12 @@ if sc.turn_complete:
     er_turn_done.set()
 ```
 
-## Sortie audio via un système TTS externe
+## Audioausgabe über externe TTS
 
-Gemini Robotics ER 2 renvoie du texte. Votre application achemine les réponses complètes vers un fournisseur de synthèse vocale distinct (tel que [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)) via un rappel injecté.
-Cela vous permet de contrôler la latence vocale, la sélection de la voix et le comportement d'interruption, et d'échanger les backends de synthèse vocale sans modifier la logique de l'agent.
+Gemini Robotics ER 2 gibt Text zurück. Ihre Anwendung leitet vollständige Antworten über einen eingefügten Callback an einen separaten TTS-Anbieter (z. B. [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)) weiter.
+So behalten Sie die Kontrolle über die Sprachlatenz, die Auswahl der Stimme und das Unterbrechungsverhalten und können TTS-Back-Ends austauschen, ohne die Agentenlogik zu ändern.
 
-Vous pouvez également déclarer la synthèse vocale comme un outil afin que le modèle traite "dis quelque chose" de la même manière que "bouge le bras". Ajoutez la déclaration de fonction suivante à votre liste `tools` de la première section :
+Sie können die Sprachausgabe auch als Tool deklarieren, damit das Modell „Sag etwas“ genauso behandelt wie „Bewege den Arm“. Fügen Sie der Liste `tools` aus dem ersten Abschnitt die folgende Funktionsdeklaration hinzu:
 
 ```
 TOOLS = [
@@ -253,24 +253,24 @@ TOOLS = [
 ]
 ```
 
-En encapsulant la synthèse vocale dans une déclaration de fonction, le modèle gère la parole via le même chemin d'appel d'outil que toute autre action du robot. Votre application traite l'appel avec un rappel injecté.
+Durch das Einbetten von TTS in eine Funktionsdeklaration verarbeitet das Modell Sprache über denselben Tool-Aufruf-Pfad wie jede andere Roboteraktion. Ihre Anwendung führt den Aufruf mit einem eingefügten Callback aus.
 
-## Exemples sur GitHub
+## Beispiele auf GitHub
 
-Pour obtenir des exemples fonctionnels complets, y compris la démonstration de récupération de snacks par le robot Spot et le bonjour du Tinybot avec panoramique et inclinaison, consultez les [exemples d'API Robotics Live](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
+Vollständig funktionierende Beispiele, darunter die Spot-Roboter-Demo zum Holen von Snacks und die Tinybot-Schwenk-/Neige-Demo „Hello World“, finden Sie unter [Robotics Live API-Beispiele](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
 
-## Étape suivante
+## Nächste Schritte
 
-- [Compréhension des vidéos](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=fr) : recherche de moments et classification de la progression.
-- [Orchestration des tâches](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=fr) : tâches à long terme sans streaming.
-- [Présentation de l'API Live](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=fr) : documentation complète de l'API Live.
+- [Videoanalyse](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de): Momente finden und Fortschritt klassifizieren.
+- [Aufgabenorchestrierung](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de): Aufgaben mit langem Horizont ohne Streaming.
+- [Live API – Übersicht](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=de): Vollständige API-Dokumentation zur Live API.
 
-Envoyer des commentaires
+Feedback geben
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Dernière mise à jour le 2026/09/16 (UTC).
+Zuletzt aktualisiert: 2026-09-16 (UTC).
 
-Voulez-vous nous donner plus d'informations ?
+Haben Sie Feedback für uns?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/16 (UTC)."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-16 (UTC)."],[],[]]

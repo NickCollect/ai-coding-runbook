@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ja
-fetched_at: 2026-10-05T06:42:20.424449+00:00
-title: "\u69cb\u9020\u5316\u51fa\u529b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-TW
+fetched_at: 2026-10-12T06:57:14.379298+00:00
+title: "\u7d50\u69cb\u5316\u8f38\u51fa\u5167\u5bb9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-フィードバックを送信
+提供意見
 
-# 構造化出力
+# 結構化輸出內容
 
-指定された JSON スキーマに準拠したレスポンスを生成するように Gemini モデルを構成できます。これにより、予測可能で型安全な結果が保証され、非構造化テキストから構造化データを抽出するプロセスが簡素化されます。
+您可以設定 Gemini 模型，生成符合所提供 JSON 結構定義的回覆。這可確保結果可預測且類型安全，並簡化從非結構化文字中擷取結構化資料的程序。
 
-構造化出力の使用は、次のような場合に最適です。
+使用結構化輸出內容的理想情境包括：
 
-- **データ抽出:** テキストから名前や日付などの特定の情報を抽出します。
-- **構造化分類:** テキストを事前定義されたカテゴリに分類します。
-- **Agentic ワークフロー:** ツールまたは API の構造化された入力を生成します。
+- **資料擷取：**從文字中擷取特定資訊，例如姓名和日期。
+- **結構化分類：**將文字分類至預先定義的類別。
+- **代理工作流程：**為工具或 API 產生結構化輸入內容。
 
-REST API での JSON スキーマのサポートに加えて、Google GenAI SDK では、[Pydantic](https://docs.pydantic.dev/latest/)（Python）と [Zod](https://zod.dev/)（JavaScript）を使用してスキーマを定義できます。
+除了在 REST API 中支援 JSON 結構定義，Google GenAI SDK 也允許使用 [Pydantic](https://docs.pydantic.dev/latest/) (Python) 和 [Zod](https://zod.dev/) (JavaScript) 定義結構定義。
 
-## 構造化された出力の例
+## 結構化輸出內容範例
 
-### レシピ エクストラクタ
+### 食譜擷取器
 
-この例では、`object`、`array`、`string`、`integer` などの基本的な JSON スキーマ型を使用して、テキストから構造化データを抽出する方法を示します。
+這個範例說明如何使用基本 JSON 結構定義型別 (例如 `object`、`array`、`string` 和 `integer`)，從文字中擷取結構化資料。
 
 ### Python
 
@@ -390,7 +390,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**回答の例:**
+**回覆範例：**
 
 ```
 {
@@ -418,9 +418,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### コンテンツの管理
+### 內容審核
 
-この例では、条件付きスキーマに `anyOf`、分類に `enum` を使用して、コンテンツに基づいて出力構造を変化させています。
+這個範例展示條件式結構定義的 `anyOf`，以及分類的 `enum`，可根據內容調整輸出結構。
 
 ### Python
 
@@ -751,7 +751,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**レスポンスの例:**
+**回覆範例：**
 
 ```
 {
@@ -762,9 +762,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 再帰的構造
+### 遞迴結構
 
-この例は、組織図などの再帰的スキーマを定義する方法を示しています。
+這個範例說明如何定義遞迴結構定義，例如組織結構圖。
 
 ### Python
 
@@ -1016,7 +1016,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**レスポンスの例:**
+**回覆範例：**
 
 ```
 {
@@ -1043,9 +1043,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## ストリーミング結果
+## 串流結果
 
-構造化された出力をストリーミングできるため、レスポンスの生成中に処理を開始できます。ストリーミングされたチャンクは、最終的な JSON オブジェクトを形成するために連結できる有効な部分 JSON 文字列です。
+您可以串流輸出結構化資料，在生成回覆的同時開始處理回覆內容。串流區塊是有效的局部 JSON 字串，可串連形成最終的 JSON 物件。
 
 ### Python
 
@@ -1288,9 +1288,9 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## ツールを使用した構造化出力
+## 使用工具輸出結構化內容
 
-Gemini 3 では、構造化出力を [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)、[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)、[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)、[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja#structured-output)、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)などの組み込みツールと組み合わせることができます。
+Gemini 3 可讓您將結構化輸出內容與內建工具結合使用，包括[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)、[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw#structured-output)和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
 
 ### Python
 
@@ -1522,79 +1522,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## JSON スキーマのサポート
+## 支援 JSON 結構定義
 
-JSON オブジェクトを生成するには、`response_format` を `text` 型のオブジェクト（またはオブジェクトを含む配列）で構成し、その `mime_type` を `application/json` に設定します。スキーマは `schema` フィールドで指定する必要があります。
+如要產生 JSON 物件，請使用 `text` 類型的物件 (或包含物件的陣列) 設定 `response_format`，並將其 `mime_type` 設為 `application/json`。結構定義應在 `schema` 欄位中提供。
 
-Gemini の構造化出力モードは、[JSON スキーマ](https://json-schema.org/)仕様のサブセットをサポートしています。
+Gemini 的結構化輸出模式支援部分 [JSON 結構定義](https://json-schema.org/)規格。
 
-次の `type` 値がサポートされます。
+支援的 `type` 值如下：
 
-- **`string`**: テキストの場合。
-- **`number`**: 浮動小数点数。
-- **`integer`**: 整数の場合。
-- **`boolean`**: true または false の値。
-- **`object`**: Key-Value ペアを含む構造化データの場合。
-- **`array`**: 項目のリストの場合。
-- **`null`**: プロパティを null にするには、型配列に `"null"` を含めます（例: `{"type": ["string", "null"]}`）。
+- **`string`**：文字。
+- **`number`**：適用於浮點數。
+- **`integer`**：適用於整數。
+- **`boolean`**：適用於 true 或 false 值。
+- **`object`**：適用於含有鍵/值組合的結構化資料。
+- **`array`**：適用於項目清單。
+- **`null`**：如要允許屬性為空值，請在型別陣列中加入 `"null"` (例如 `{"type": ["string", "null"]}`)。
 
-これらの説明プロパティは、モデルのガイドに役立ちます。
+這些描述性屬性有助於引導模型：
 
-- **`title`**: プロパティの簡単な説明。
-- **`description`**: プロパティのより詳細な説明。
+- **`title`**：屬性的簡短說明。
+- **`description`**：房源的詳細說明。
 
-### タイプ固有のプロパティ
+### 特定類型屬性
 
-**`object` 値の場合:**
+**適用於 `object` 值：**
 
-- **`properties`**: 各キーがプロパティ名で、各値がそのプロパティのスキーマであるオブジェクト。
-- **`required`**: 必須のプロパティを列挙した文字列の配列。
-- **`additionalProperties`**: `properties` にリストされていないプロパティを許可するかどうかを制御します。ブール値またはスキーマを指定できます。
+- **`properties`**：物件，其中每個鍵都是屬性名稱，每個值都是該屬性的結構定義。
+- **`required`**：字串陣列，列出哪些屬性為必要屬性。
+- **`additionalProperties`**：控制是否允許不在 `properties` 中列出的屬性。可以是布林值或結構定義。
 
-**`string` 値の場合:**
+**`string` 值：**
 
-- **`enum`**: 分類タスクで使用できる文字列の特定のセットを一覧表示します。
-- **`format`**: 文字列の構文（`date-time`、`date`、`time` など）を指定します。
+- **`enum`**：列出分類工作的一組特定可能字串。
+- **`format`**：指定字串的語法，例如 `date-time`、`date`、`time`。
 
-**`number` と `integer` の値の場合:**
+**`number` 和 `integer` 值：**
 
-- **`enum`**: 可能性のある数値の特定のセットを一覧表示します。
-- **`minimum`**: 最小値（包括的）。
-- **`maximum`**: 最大値（包括的）。
+- **`enum`**：列出特定的一組可能數值。
+- **`minimum`**：最小值 (含)。
+- **`maximum`**：最大值 (含)。
 
-**`array` 値の場合:**
+**適用於 `array` 值：**
 
-- **`items`**: 配列内のすべての項目のスキーマを定義します。
-- **`prefixItems`**: 最初の N 個のアイテムのスキーマのリストを定義し、タプルのような構造を許可します。
-- **`minItems`**: 配列内のアイテムの最小数。
-- **`maxItems`**: 配列内のアイテムの最大数。
+- **`items`**：定義陣列中所有項目的結構定義。
+- **`prefixItems`**：定義前 N 個項目的結構定義清單，允許使用類似元組的結構。
+- **`minItems`**：陣列中的項目數量下限。
+- **`maxItems`**：陣列中的項目數量上限。
 
-## 構造化出力と関数呼び出し
+## 結構化輸出與函式呼叫
 
-| 機能 | 主なユースケース |
+| 功能 | 主要用途 |
 | --- | --- |
-| **構造化出力** | **最終的な回答のフォーマット設定。**モデルの*回答*を特定の形式で取得する場合に使用します。 |
-| **関数呼び出し** | **会話中にアクションを実行する。**最終的な回答を提供する前に、モデルがタスクの実行を*ユーザーに求める*必要がある場合に使用します。 |
+| **結構化輸出內容** | **設定最終回覆的格式。**當您希望模型以特定格式*回答*時，請使用這項功能。 |
+| **函式呼叫** | **在對話期間採取行動。**如果模型需要*請您*執行工作，才能提供最終答案，請使用這項功能。 |
 
-## ベスト プラクティス
+## 最佳做法
 
-- **明確な説明:** `description` フィールドを使用してモデルをガイドします。
-- **強い型付け:** 特定の型（`integer`、`string`、`enum`）を使用します。
-- **プロンプト エンジニアリング:** モデルに実行してほしいことを明確に記述します。
-- **検証:** 出力は構文的に正しい JSON ですが、アプリケーションで常に値を検証してください。
-- **エラー処理:** スキーマに準拠しているが意味的に正しくない出力に対して、堅牢なエラー処理を実装します。
+- **清楚的說明：**使用 `description` 欄位指引模型。
+- **嚴格型別：**使用特定型別 (`integer`、`string`、`enum`)。
+- **提示工程：**清楚說明您希望模型執行的動作。
+- **驗證：**雖然輸出內容是語法正確的 JSON，但請務必在應用程式中驗證值。
+- **錯誤處理：**針對符合結構定義但語意有誤的輸出內容，導入完善的錯誤處理機制。
 
-## 制限事項
+## 限制
 
-- **スキーマのサブセット:** JSON スキーマのすべての機能がサポートされているわけではありません。
-- **スキーマの複雑さ:** 非常に大きいスキーマや深くネストされたスキーマは拒否されることがあります。
+- **結構定義子集：**系統不支援所有 JSON 結構定義功能。
+- **結構定義複雜度：**如果結構定義過於龐大或巢狀結構過深，可能會遭到拒絕。
 
-フィードバックを送信
+提供意見
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最終更新日 2026-09-24 UTC。
+上次更新時間：2026-09-24 (世界標準時間)。
 
-ご意見をお聞かせください
+想進一步說明嗎？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]

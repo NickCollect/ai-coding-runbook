@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=tr
-fetched_at: 2026-10-05T06:44:54.780695+00:00
-title: "Toplu API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=hi
+fetched_at: 2026-10-12T06:59:45.400191+00:00
+title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Toplu API
+# Batch API
 
-Gemini Batch API, büyük hacimli istekleri [standart maliyetin% 50'si](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) karşılığında eşzamansız olarak işlemek üzere tasarlanmıştır.
-Hedeflenen yanıt süresi 24 saattir ancak çoğu durumda bu süre çok daha kısadır.
+Gemini Batch API को, बड़ी संख्या में अनुरोधों को एसिंक्रोनस तरीके से प्रोसेस करने के लिए डिज़ाइन किया गया है. इसके लिए, [सामान्य शुल्क का 50%](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) लिया जाता है.
+हमारा लक्ष्य है कि हम 24 घंटे के अंदर जवाब दें. हालांकि, ज़्यादातर मामलों में हम इससे पहले ही जवाब दे देते हैं.
 
-Veri ön işleme veya acil yanıt gerektirmeyen değerlendirmeleri çalıştırma gibi büyük ölçekli ve acil olmayan görevler için Batch API'yi kullanın.
+बड़े पैमाने पर किए जाने वाले और ज़रूरी न होने वाले टास्क के लिए, Batch API का इस्तेमाल करें. जैसे, डेटा को पहले से प्रोसेस करना या ऐसे आकलन करना जिनमें तुरंत जवाब की ज़रूरत नहीं होती.
 
-## Toplu iş oluşturma
+## बैच जॉब बनाना
 
-Toplu API'de isteklerinizi göndermenin iki yolu vardır:
+Batch API में अनुरोध सबमिट करने के दो तरीके हैं:
 
-- **[Satır içi istekler](#inline-requests):** Toplu oluşturma isteğinize doğrudan dahil edilen [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnelerinin listesi. Bu yöntem, toplam istek boyutunu 20 MB'ın altında tutan daha küçük toplu işlemler için uygundur. Modelden döndürülen **çıktı**, `inlineResponse` nesnelerinin listesidir.
-- **[Giriş dosyası](#input-file):** Her satırın eksiksiz bir [JSON Lines (JSONL)](https://jsonlines.org/)
-  dosyası içerdiği [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnesi.
-  Bu yöntem, daha büyük istekler için önerilir. Modelden döndürülen **çıkış**, her satırın `GenerateContentResponse` veya durum nesnesi olduğu bir JSONL dosyasıdır.
+- **[इनलाइन अनुरोध](#inline-requests):** [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=hi#GenerateContentRequest) ऑब्जेक्ट की एक सूची, जिसे बैच बनाने के अनुरोध में सीधे तौर पर शामिल किया जाता है. यह छोटे बैच के लिए सही है. इससे अनुरोध का कुल साइज़ 20 एमबी से कम रहता है. मॉडल से मिला **आउटपुट**, `inlineResponse` ऑब्जेक्ट की सूची होती है.
+- **[इनपुट फ़ाइल](#input-file):** यह [JSON लाइन्स (JSONL)](https://jsonlines.org/)
+  फ़ाइल होती है. इसमें हर लाइन में पूरा [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=hi#GenerateContentRequest) ऑब्जेक्ट होता है.
+  हमारा सुझाव है कि बड़े अनुरोधों के लिए, इस तरीके का इस्तेमाल करें. मॉडल से मिला **आउटपुट** एक JSONL फ़ाइल होती है. इसमें हर लाइन या तो `GenerateContentResponse` होती है या स्टेटस ऑब्जेक्ट.
 
-### Satır içi istekler
+### इनलाइन अनुरोध
 
-Küçük bir istek grubu için [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnelerini doğrudan [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#request-body) içine yerleştirebilirsiniz. Aşağıdaki örnekte, satır içi isteklerle [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=tr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) yöntemi çağrılıyor:
+कुछ अनुरोधों के लिए, [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=hi#request-body) में सीधे तौर पर [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=hi#GenerateContentRequest) ऑब्जेक्ट एम्बेड किए जा सकते हैं. यहां दिए गए उदाहरण में, इनलाइन अनुरोधों के साथ [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=hi#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) तरीके का इस्तेमाल किया गया है:
 
 ### Python
 
@@ -180,22 +180,22 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:ba
 }'
 ```
 
-### Giriş dosyası
+### इनपुट फ़ाइल
 
-Daha büyük istek grupları için JSON Lines (JSONL) dosyası hazırlayın. Bu dosyadaki her satır, kullanıcı tanımlı bir anahtar ve istek nesnesi içeren bir JSON nesnesi olmalıdır. İstek, geçerli bir [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=tr#GenerateContentRequest) nesnesi olmalıdır. Kullanıcı tanımlı anahtar, hangi çıktının hangi isteğin sonucu olduğunu belirtmek için yanıtta kullanılır. Örneğin, anahtarı `request-1` olarak tanımlanan isteğin yanıtı aynı anahtar adıyla açıklama eklenmiş olarak döndürülür.
+ज़्यादा अनुरोधों के लिए, JSON लाइंस (JSONL) फ़ाइल तैयार करें. इस फ़ाइल की हर लाइन में एक JSON ऑब्जेक्ट होना चाहिए. इसमें उपयोगकर्ता की तय की गई कुंजी और एक अनुरोध ऑब्जेक्ट होना चाहिए. अनुरोध एक मान्य [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=hi#GenerateContentRequest) ऑब्जेक्ट होना चाहिए. उपयोगकर्ता की तय की गई कुंजी का इस्तेमाल जवाब में यह बताने के लिए किया जाता है कि कौनसा आउटपुट किस अनुरोध का नतीजा है. उदाहरण के लिए, `request-1` के तौर पर तय की गई कुंजी वाली किसी भी अनुरोध के जवाब में, कुंजी का वही नाम एनोटेट किया जाएगा.
 
-Bu dosya, [File API](https://ai.google.dev/gemini-api/docs/files?hl=tr) kullanılarak yüklenir. Giriş dosyası için izin verilen maksimum dosya boyutu 2 GB'tır.
+इस फ़ाइल को [File API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करके अपलोड किया गया है. इनपुट फ़ाइल का ज़्यादा से ज़्यादा साइज़ 2 जीबी होना चाहिए.
 
-Aşağıda bir JSONL dosyası örneği verilmiştir. Dosyayı `my-batch-requests.json` adlı bir dosyaya kaydedebilirsiniz:
+यहां JSONL फ़ाइल का एक उदाहरण दिया गया है. इसे `my-batch-requests.json` नाम की फ़ाइल में सेव किया जा सकता है:
 
 ```
 {"key": "request-1", "request": {"contents": [{"parts": [{"text": "Describe the process of photosynthesis."}]}], "generation_config": {"temperature": 0.7}}}
 {"key": "request-2", "request": {"contents": [{"parts": [{"text": "What are the main ingredients in a Margherita pizza?"}]}]}}
 ```
 
-Satır içi isteklerde olduğu gibi, her istek JSON'ında sistem talimatları, araçlar veya diğer yapılandırmalar gibi başka parametreler de belirtebilirsiniz.
+इनलाइन अनुरोधों की तरह ही, हर अनुरोध JSON में सिस्टम के निर्देश, टूल या अन्य कॉन्फ़िगरेशन जैसे अन्य पैरामीटर तय किए जा सकते हैं.
 
-Bu dosyayı, aşağıdaki örnekte gösterildiği gibi [File API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükleyebilirsiniz. Çok formatlı girişle çalışıyorsanız JSONL dosyanızda yüklenen diğer dosyalara referans verebilirsiniz.
+इस फ़ाइल को [File API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करके अपलोड किया जा सकता है. इसका उदाहरण यहां दिया गया है. अगर आपको मल्टीमॉडल इनपुट का इस्तेमाल करना है, तो JSONL फ़ाइल में अपलोड की गई अन्य फ़ाइलों का रेफ़रंस दिया जा सकता है.
 
 ### Python
 
@@ -347,7 +347,7 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 ```
 
-Aşağıdaki örnekte, File API kullanılarak yüklenen giriş dosyasıyla [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=tr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) yöntemi çağrılıyor:
+यहां दिए गए उदाहरण में, File API का इस्तेमाल करके अपलोड की गई इनपुट फ़ाइल के साथ [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=hi#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) तरीके को कॉल किया गया है:
 
 ### Python
 
@@ -423,18 +423,18 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:ba
 }"
 ```
 
-Bir toplu iş oluşturduğunuzda iş adı döndürülür. Bu adı, iş durumunu [izlemenin](#batch-job-status) yanı sıra iş tamamlandıktan sonra [sonuçları almak](#retrieve-batch-results) için kullanın.
+बैच जॉब बनाने पर, आपको जॉब का नाम वापस मिलेगा. इस नाम का इस्तेमाल, जॉब के स्टेटस की [मॉनिटरिंग](#batch-job-status) करने के लिए करें. साथ ही, जॉब पूरा होने के बाद [नतीजे पाने](#retrieve-batch-results) के लिए भी इसका इस्तेमाल करें.
 
-Aşağıda, iş adı içeren bir örnek çıkış verilmiştir:
+यहां नौकरी के नाम वाला एक उदाहरण दिया गया है:
 
 ```
 Created batch job from file: batches/123456789
 ```
 
-### Toplu yerleştirme desteği
+### एक साथ कई वीडियो एम्बेड करने की सुविधा
 
-Daha yüksek işleme hızı için Batch API'yi kullanarak [Embeddings modeli](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) ile etkileşim kurabilirsiniz.
-[Satır içi istekler](#inline-requests) veya [giriş dosyaları](#input-file) ile yerleştirme toplu işi oluşturmak için `batches.create_embeddings` API'yi kullanın ve yerleştirme modelini belirtin.
+ज़्यादा थ्रूपुट के लिए, [Embeddings मॉडल](https://ai.google.dev/gemini-api/docs/embeddings?hl=hi) के साथ इंटरैक्ट करने के लिए, Batch API का इस्तेमाल किया जा सकता है.
+[इनलाइन अनुरोधों](#inline-requests) या [इनपुट फ़ाइलों](#input-file) का इस्तेमाल करके, एम्बेडिंग का बैच जॉब बनाने के लिए, `batches.create_embeddings` एपीआई का इस्तेमाल करें. साथ ही, एम्बेडिंग मॉडल के बारे में बताएं.
 
 ### Python
 
@@ -520,11 +520,11 @@ BatchJob batchJob =
 System.out.println("Created batch job: " + batchJob.name().orElse(""));
 ```
 
-Daha fazla örnek için [Toplu API yemek kitabındaki](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) Yerleştirme bölümünü inceleyin.
+ज़्यादा उदाहरणों के लिए, [Batch API कुकबुक](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) में एम्बेडिंग सेक्शन पढ़ें.
 
-### Yapılandırma isteği
+### कॉन्फ़िगरेशन का अनुरोध करना
 
-Standart toplu olmayan bir istekte kullanacağınız tüm istek yapılandırmalarını ekleyebilirsiniz. Örneğin, sıcaklığı, sistem talimatlarını belirtebilir veya başka yöntemler de kullanabilirsiniz. Aşağıdaki örnekte, isteklerden biri için sistem talimatı içeren bir satır içi istek örneği gösterilmektedir:
+इसमें, अनुरोध से जुड़े उन सभी कॉन्फ़िगरेशन को शामिल किया जा सकता है जिनका इस्तेमाल स्टैंडर्ड नॉन-बैच अनुरोध में किया जाता है. उदाहरण के लिए, आप टेंपरेचर, सिस्टम के निर्देश या अन्य मोडैलिटी भी पास कर सकते हैं. यहां एक इनलाइन अनुरोध का उदाहरण दिया गया है. इसमें किसी एक अनुरोध के लिए सिस्टम निर्देश शामिल है:
 
 ### Python
 
@@ -577,7 +577,7 @@ List<InlinedRequest> inlineRequestsList =
             .build());
 ```
 
-Benzer şekilde, bir istek için kullanılacak araçları belirtebilirsiniz. Aşağıdaki örnekte, [Google Arama Aracı](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)'nı etkinleştiren bir istek gösterilmektedir:
+इसी तरह, किसी अनुरोध के लिए इस्तेमाल किए जाने वाले टूल के बारे में बताया जा सकता है. यहां दिए गए उदाहरण में, [Google Search टूल](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) को चालू करने का अनुरोध दिखाया गया है:
 
 ### Python
 
@@ -624,8 +624,8 @@ List<InlinedRequest> inlinedRequests =
             .build());
 ```
 
-[Yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) da belirtebilirsiniz.
-Aşağıdaki örnekte, toplu istekleriniz için nasıl belirteceğiniz gösterilmektedir.
+[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) भी तय किया जा सकता है.
+यहां दिए गए उदाहरण में, बैच अनुरोधों के लिए जानकारी देने का तरीका बताया गया है.
 
 ### Python
 
@@ -893,7 +893,7 @@ for (int i = 0; i < responses.size(); i++) {
 }
 ```
 
-Aşağıda bu işin örnek çıkışı gösterilmektedir:
+इस नौकरी के उदाहरण के तौर पर यहां आउटपुट दिखाया गया है:
 
 ```
 --- Response 1 ---
@@ -989,20 +989,20 @@ Aşağıda bu işin örnek çıkışı gösterilmektedir:
 ]
 ```
 
-## İş durumunu izleme
+## मॉनिटरिंग जॉब की स्थिति
 
-Durumunu yoklamak için toplu iş oluşturulurken elde edilen işlem adını kullanın.
-Toplu işin durum alanı, mevcut durumu gösterir. Bir toplu iş aşağıdaki durumlardan birinde olabilir:
+बैच जॉब की स्थिति के बारे में जानने के लिए, बैच जॉब बनाते समय मिले ऑपरेशन के नाम का इस्तेमाल करें.
+बैच जॉब के स्टेट फ़ील्ड से, उसकी मौजूदा स्थिति का पता चलेगा. बैच जॉब की स्थिति इनमें से कोई एक हो सकती है:
 
-- `JOB_STATE_PENDING`: İş oluşturuldu ve hizmet tarafından işlenmeyi bekliyor.
-- `JOB_STATE_RUNNING`: İş devam ediyor.
-- `JOB_STATE_SUCCEEDED`: İş başarıyla tamamlandı. Artık sonuçları alabilirsiniz.
-- `JOB_STATE_FAILED`: İş başarısız oldu. Daha fazla bilgi için hata ayrıntılarını kontrol edin.
-- `JOB_STATE_CANCELLED`: İş, kullanıcı tarafından iptal edildi.
-- `JOB_STATE_EXPIRED`: İş, 48 saatten uzun süredir çalıştığı veya beklemede olduğu için süresi doldu. İşin alınacak sonucu olmayacak.
-  İşi tekrar göndermeyi deneyebilir veya istekleri daha küçük gruplara ayırabilirsiniz.
+- `JOB_STATE_PENDING`: जॉब बना दी गई है और सेवा के ज़रिए प्रोसेस होने का इंतज़ार कर रही है.
+- `JOB_STATE_RUNNING`: यह जॉब चल रही है.
+- `JOB_STATE_SUCCEEDED`: जॉब पूरा हो गया है. अब नतीजे वापस लाए जा सकते हैं.
+- `JOB_STATE_FAILED`: यह काम पूरा नहीं हो सका. ज़्यादा जानकारी के लिए, गड़बड़ी की जानकारी देखें.
+- `JOB_STATE_CANCELLED`: उपयोगकर्ता ने जॉब रद्द कर दी है.
+- `JOB_STATE_EXPIRED`: यह जॉब इसलिए खत्म हो गई है, क्योंकि यह 48 घंटे से ज़्यादा समय से चल रही थी या इसकी पुष्टि होना बाकी था. इस जॉब के लिए कोई नतीजा नहीं मिलेगा.
+  आपके पास नौकरी को फिर से सबमिट करने का विकल्प है. इसके अलावा, अनुरोधों को छोटे-छोटे बैच में बांटा जा सकता है.
 
-Tamamlanıp tamamlanmadığını kontrol etmek için iş durumunu düzenli olarak yoklayabilirsiniz.
+काम पूरा हुआ है या नहीं, यह देखने के लिए समय-समय पर जॉब स्टेटस को पोल किया जा सकता है.
 
 ### Python
 
@@ -1104,10 +1104,10 @@ if (batchJob.state().get().knownEnum() == JobState.Known.JOB_STATE_FAILED) {
 }
 ```
 
-### Anket ve webhook'lar
+### पोलिंग और वेबहुक
 
-**Anket yapmaktan sıkıldınız mı?** Gemini artık tamamlamaları eşzamansız olarak işlemek için [Web kancalarını](https://ai.google.dev/gemini-api/docs/webhooks?hl=tr) destekliyor.
-Sürekli olarak `GET / operations` numaralı telefonu aramak yerine, `batch.succeeded` numaralı telefona doğrudan abone olun. Böylece, eşzamansız veya uzun süren işlemler tamamlandığında Gemini API'nin sunucunuza anlık bildirimler göndermesine izin verebilirsiniz.
+**क्या आपको पोलिंग से थकान महसूस होने लगी है?** Gemini अब एसिंक्रोनस तरीके से जवाब प्रोसेस करने के लिए, [वेबहुक](https://ai.google.dev/gemini-api/docs/webhooks?hl=hi) का इस्तेमाल करता है.
+`GET / operations` को लगातार कॉल करने के बजाय, सीधे `batch.succeeded` की सदस्यता लें. इससे Gemini API को एसिंक्रोनस या लंबे समय तक चलने वाली कार्रवाइयाँ पूरी होने पर, आपके सर्वर पर रीयल-टाइम सूचनाएँ भेजने की अनुमति मिलती है.
 
 ### Python
 
@@ -1185,10 +1185,10 @@ curl -X POST \
   }'
 ```
 
-## Sonuçlar alınıyor
+## नतीजे वापस लाए जा रहे हैं
 
-İş durumu, toplu işinizin başarılı olduğunu gösterdiğinde sonuçlar `response` alanında kullanılabilir.
-Varsayılan olarak, toplu iş sonuçları kalıcı olarak silinmeden önce 6 hafta boyunca depolanır ve indirilebilir.
+जब जॉब का स्टेटस यह दिखाता है कि आपका बैच जॉब पूरा हो गया है, तब नतीजे `response` फ़ील्ड में उपलब्ध होते हैं.
+डिफ़ॉल्ट रूप से, बैच जॉब के नतीजे सेव किए जाते हैं. ये नतीजे, छह हफ़्तों तक डाउनलोड किए जा सकते हैं. इसके बाद, इन्हें हमेशा के लिए मिटा दिया जाता है.
 
 ### Python
 
@@ -1409,9 +1409,9 @@ elif [[ $batch_state == "JOB_STATE_EXPIRED" ]]; then
 fi
 ```
 
-## Toplu işleri listeleme
+## बैच जॉब की सूची बनाना
 
-Son toplu işlerinizi listeleyebilirsiniz.
+हाल ही के बैच जॉब की सूची बनाई जा सकती है.
 
 ### Python
 
@@ -1465,9 +1465,9 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Toplu işi iptal etme
+## बैच जॉब रद्द करना
 
-Devam eden bir toplu işi adını kullanarak iptal edebilirsiniz. Bir iş iptal edildiğinde yeni istekleri işlemeyi durdurur.
+नाम का इस्तेमाल करके, चालू बैच जॉब को रद्द किया जा सकता है. जब किसी नौकरी को रद्द किया जाता है, तो वह नए अनुरोधों को प्रोसेस करना बंद कर देती है.
 
 ### Python
 
@@ -1507,9 +1507,9 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 -H "Content-Type:application/json" 2> /dev/null | jq -r '.metadata.state'
 ```
 
-## Toplu işi silme
+## बैच जॉब मिटाना
 
-Mevcut bir toplu işi adını kullanarak silebilirsiniz. Bir iş silindiğinde yeni isteklerin işlenmesi durdurulur ve iş, toplu işler listesinden kaldırılır.
+नाम का इस्तेमाल करके, किसी मौजूदा बैच जॉब को मिटाया जा सकता है. किसी जॉब को मिटाने पर, वह नए अनुरोधों को प्रोसेस करना बंद कर देती है. साथ ही, उसे बैच जॉब की सूची से हटा दिया जाता है.
 
 ### Python
 
@@ -1544,13 +1544,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME" \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Toplu olarak resim oluşturma
+## बैच में इमेज जनरेट करना
 
-[Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)'yı kullanıyorsanız ve çok sayıda görüntü oluşturmanız gerekiyorsa 24 saate kadar bekleme süresi karşılığında daha yüksek [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) elde etmek için Batch API'yi kullanabilirsiniz.
+अगर [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) का इस्तेमाल किया जा रहा है और आपको कई इमेज जनरेट करनी हैं, तो बैच एपीआई का इस्तेमाल किया जा सकता है. इससे आपको [ज़्यादा दर सीमाएं](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi) मिलेंगी. हालांकि, इसके लिए आपको 24 घंटे तक इंतज़ार करना पड़ सकता है.
 
-Küçük istek grupları (20 MB'tan küçük) için [satır içi istekler](#inline-requests-images), büyük gruplar için ise [JSONL giriş dosyası](#input-file-images) (resim oluşturma için önerilir) kullanabilirsiniz:
+अनुरोधों के छोटे बैच (20 एमबी से कम) के लिए, [इनलाइन अनुरोध](#inline-requests-images) का इस्तेमाल किया जा सकता है. इसके अलावा, बड़े बैच के लिए [JSONL इनपुट फ़ाइल](#input-file-images) का इस्तेमाल किया जा सकता है. इमेज जनरेट करने के लिए, हम इसका सुझाव देते हैं:
 
-### Resimler için satır içi istekler
+### इमेज के लिए इनलाइन अनुरोध
 
 ### Python
 
@@ -1862,7 +1862,7 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-### Resimler için giriş dosyası
+### इमेज के लिए इनपुट फ़ाइल
 
 ### Python
 
@@ -2174,35 +2174,36 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-## Teknik ayrıntılar
+## तकनीकी जानकारी
 
-- **Desteklenen modeller:** Batch API, çeşitli Gemini modellerini destekler.
-  Her modelin Toplu API desteği için [Modeller sayfası](https://ai.google.dev/gemini-api/docs/models?hl=tr)'na bakın. Toplu API için desteklenen yöntemler, etkileşimli (veya toplu olmayan) API'de desteklenenlerle aynıdır.
-- **Fiyatlandırma:** Batch API kullanımı, eşdeğer model için standart etkileşimli API maliyetinin% 50'si olarak fiyatlandırılır. Ayrıntılar için [fiyatlandırma sayfasına](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) göz atın. Bu özelliğin sıklık sınırlarıyla ilgili ayrıntılar için [sıklık sınırları sayfasına](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr#batch-mode) bakın.
-- **Hizmet düzeyi hedefi (SLO):** Toplu işler, 24 saatlik bir işlem süresi içinde tamamlanacak şekilde tasarlanmıştır. Birçok iş, boyutuna ve mevcut sistem yüküne bağlı olarak çok daha hızlı tamamlanabilir.
-- **Önbelleğe alma:** Toplu istekler için [bağlam önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) desteklenir. Toplu işinizdeki tek tek isteklerin yapılandırmasında `cached_content` kaynak adını belirterek önbelleğe alınmış içeriği yeniden kullanın.
-  Toplu isteğinizdeki bir istek önbellek isabetiyle sonuçlanırsa [standart bağlam önbelleğe alma ücretlerini](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) ödersiniz.
+- **इन मॉडल के साथ काम करता है:** Batch API, Gemini के कई मॉडल के साथ काम करता है.
+  हर मॉडल के लिए, बैच एपीआई की सुविधा के बारे में जानने के लिए, [मॉडल पेज](https://ai.google.dev/gemini-api/docs/models?hl=hi) पर जाएं. Batch API के लिए इस्तेमाल की जा सकने वाली सुविधाएं वही हैं जो इंटरैक्टिव (या नॉन-बैच) एपीआई के लिए इस्तेमाल की जा सकती हैं.
+- **कीमत:** बैच एपीआई के इस्तेमाल की कीमत, उसी मॉडल के लिए इंटरैक्टिव एपीआई की स्टैंडर्ड कीमत का 50% होती है. ज़्यादा जानकारी के लिए, [कीमत तय करने से जुड़ा पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें. इस सुविधा के लिए, अनुरोध करने की दर की सीमाओं के बारे में जानने के लिए, [अनुरोध करने की दर की सीमाओं वाला पेज](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi#batch-mode) देखें.
+- **सेवा स्तर का लक्ष्य (एसएलओ):** बैच जॉब को 24 घंटे के अंदर पूरा करने के लिए डिज़ाइन किया गया है. कई टास्क, उनके साइज़ और सिस्टम पर मौजूदा लोड के हिसाब से बहुत तेज़ी से पूरे हो सकते हैं.
+- **कैशिंग:** बैच अनुरोधों के लिए, [कॉन्टेक्स्ट के लिए कैश की सुविधा](https://ai.google.dev/gemini-api/docs/caching?hl=hi) काम करती है. कैश किए गए कॉन्टेंट का फिर से इस्तेमाल करें. इसके लिए, अपने बैच में मौजूद अलग-अलग अनुरोधों के कॉन्फ़िगरेशन में `cached_content`
+  संसाधन का नाम डालें.
+  अगर आपके बैच में मौजूद किसी अनुरोध के लिए कैश मेमोरी का इस्तेमाल किया जाता है, तो आपको [कॉन्टेक्स्ट को कैश मेमोरी में सेव करने की स्टैंडर्ड दरों](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) के हिसाब से शुल्क चुकाना होगा.
 
-## En iyi uygulamalar
+## सबसे सही तरीके
 
-- **Büyük istekler için giriş dosyalarını kullanın:** Çok sayıda istek için, yönetimi kolaylaştırmak ve [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=tr#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) çağrısının kendisiyle ilgili istek boyutu sınırlarına ulaşmamak amacıyla her zaman dosya girişi yöntemini kullanın. Giriş dosyası başına 2 GB dosya boyutu sınırı olduğunu unutmayın.
-- **Hata işleme:** Bir iş tamamlandıktan sonra `batchStats` için `failedRequestCount` öğesini kontrol edin. Dosya çıkışı kullanıyorsanız her satırı ayrıştırarak `GenerateContentResponse` olup olmadığını veya söz konusu istekte hata olduğunu belirten bir durum nesnesi olup olmadığını kontrol edin. Hata kodlarının tam listesi için [sorun giderme kılavuzuna](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr#error-codes) bakın.
-- **İşleri bir kez gönderme:** Toplu iş oluşturma işlemi, idempotent değildir.
-  Aynı oluşturma isteğini iki kez gönderirseniz iki ayrı toplu iş oluşturulur.
-- **Çok büyük toplu işlemleri bölme:** Hedef işlem süresi 24 saat olsa da gerçek işlem süresi sistem yüküne ve iş boyutuna bağlı olarak değişebilir.
-  Büyük işlerde, ara sonuçlara daha erken ihtiyaç duyuluyorsa işleri daha küçük gruplara ayırabilirsiniz.
+- **ज़्यादा अनुरोधों के लिए, इनपुट फ़ाइलों का इस्तेमाल करें:** अगर आपको कई अनुरोध करने हैं, तो हमेशा फ़ाइल इनपुट करने के तरीके का इस्तेमाल करें. इससे अनुरोधों को बेहतर तरीके से मैनेज किया जा सकेगा. साथ ही, [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=hi#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) कॉल के लिए अनुरोध के साइज़ की सीमाएं पूरी नहीं होंगी. ध्यान दें कि हर इनपुट फ़ाइल का साइज़ ज़्यादा से ज़्यादा 2 जीबी हो सकता है.
+- **गड़बड़ी ठीक करना:** कोई टास्क पूरा होने के बाद, `failedRequestCount` के लिए `batchStats` देखें. अगर फ़ाइल आउटपुट का इस्तेमाल किया जा रहा है, तो हर लाइन को पार्स करें. इससे यह पता चलेगा कि वह `GenerateContentResponse` है या स्टेटस ऑब्जेक्ट है, जो उस खास अनुरोध के लिए गड़बड़ी दिखाता है. गड़बड़ी कोड की पूरी सूची देखने के लिए, [समस्या हल करने से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=hi#error-codes) देखें.
+- **जॉब एक बार सबमिट करें:** बैच जॉब बनाने की प्रोसेस, एक जैसी नहीं होती.
+  अगर आपने एक ही अनुरोध को दो बार भेजा है, तो दो अलग-अलग बैच जॉब बनाए जाएंगे.
+- **बहुत बड़े बैच को छोटे-छोटे बैच में बांटें:** टारगेट टर्नअराउंड समय 24 घंटे है. हालांकि, सिस्टम लोड और जॉब के साइज़ के आधार पर, प्रोसेसिंग में लगने वाला समय अलग-अलग हो सकता है.
+  अगर बड़े जॉब के बीच के नतीजे जल्द चाहिए, तो उन्हें छोटे-छोटे बैच में बांट लें.
 
-## Sırada ne var?
+## आगे क्या करना है
 
-- Daha fazla örnek için [Toplu API not defterine](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=tr) göz atın.
-- OpenAI uyumluluk katmanı, Batch API'yi destekler. [OpenAI Uyumluluğu](https://ai.google.dev/gemini-api/docs/openai?hl=tr#batch) sayfasındaki örnekleri inceleyin.
+- ज़्यादा उदाहरणों के लिए, [Batch API नोटबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=hi) देखें.
+- OpenAI के साथ काम करने वाली कंपैटिबिलिटी लेयर, बैच एपीआई के साथ काम करती है. [OpenAI के साथ काम करने वाला](https://ai.google.dev/gemini-api/docs/openai?hl=hi#batch) पेज पर दिए गए उदाहरण पढ़ें.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-09-18 UTC.
+आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-18 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया."],[],[]]

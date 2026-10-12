@@ -1,96 +1,101 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=hi
-fetched_at: 2026-10-05T06:35:34.752540+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=fr
+fetched_at: 2026-10-12T06:52:02.653178+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-सुझाव भेजें
+Envoyer des commentaires
 
-# Nano Banana की मदद से इमेज जनरेट करने की सुविधा
+# Génération d'images Nano Banana
 
-पूरी तरह से काम करने वाले और यूज़र इंटरफ़ेस (यूआई) वाले ऐप्लिकेशन का प्रोटोटाइप बनाने के लिए प्रॉम्प्ट दें. साथ ही, Nano Banana 2 को असल दुनिया के टूल, डेटा, और Gemini के ईकोसिस्टम के साथ इंटिग्रेट करके देखें. कोड की एक भी लाइन लिखे बिना.
+Créez des applications entièrement fonctionnelles avec une interface utilisateur complète à l'aide de requêtes, et découvrez
+Nano Banana 2 intégré à des outils, des données et l'écosystème Gemini réels. le tout sans écrire une seule ligne de code.
 
-- इसके अलावा, प्रॉम्प्ट का इस्तेमाल करके भी सर्वे बनाया जा सकता है:
+- Ou créez la vôtre à partir de requêtes :
 
-- ![पत्रिका](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![लंदन](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![पहले जैसा करें](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![केला](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![कैफ़े](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![लेख](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![कुत्ता](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![आइसोमेट्रिक](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![पत्रिका](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![magazine](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![restaurer](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![article](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![chien](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![isométrique](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![magazine](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Nano Banana 2 की मदद से जनरेट किया गया
+  Généré par Nano Banana 2
 
-  **प्रॉम्प्ट:** "एक चमकदार मैगज़ीन के कवर की फ़ोटो. नीले रंग के इस कवर पर बड़े और मोटे अक्षरों में Nano Banana लिखा है. टेक्स्ट, सेरिफ़ फ़ॉन्ट में है और पूरे व्यू में दिखता है. कोई और टेक्स्ट नहीं. टेक्स्ट के सामने, एक व्यक्ति का पोर्ट्रेट है. इसमें व्यक्ति ने स्लीक और कम डिज़ाइन वाली ड्रेस पहनी है. वह मज़ाकिया अंदाज़ में नंबर 2 को पकड़े हुए है, जो फ़ोकल पॉइंट है.
+  **Requête** : "Photo d'une couverture de magazine brillant, la couverture bleue minimaliste comporte les mots Nano Banana en gros et en gras. Le texte est dans une police avec empattement et remplit la vue. Aucun autre texte. Devant le texte se trouve le portrait d'une personne portant une robe élégante et minimaliste. Elle tient le chiffre 2, qui est le point focal, de manière ludique.
     
-  बारकोड के साथ-साथ, कोने में "फ़रवरी 2026" की तारीख और समस्या नंबर डालें. पत्रिका, डिज़ाइनर स्टोर में प्लास्टर की गई नारंगी रंग की दीवार के पास मौजूद शेल्फ़ पर रखी है."
-- ![लंदन](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+   Mets le numéro du problème et la date "février 2026" dans l'angle, avec un code-barres. Le magazine est posé sur une étagère contre un mur orange enduit, dans un magasin de créateurs."
+- ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Nano Banana Pro की मदद से जनरेट की गई इमेज
+  Généré par Nano Banana Pro
 
-  **प्रॉम्प्ट:** "लंदन का साफ़-सुथरा, 45° टॉप-डाउन आइसोमेट्रिक मिनिएचर 3D कार्टून सीन दिखाओ. इसमें लंदन के सबसे मशहूर लैंडमार्क और आर्किटेक्चरल एलिमेंट शामिल हों. सॉफ़्ट और रिफ़ाइंड टेक्सचर का इस्तेमाल करें. साथ ही, रियलिस्टिक पीबीआर मटीरियल और हल्की, असली जैसी लाइटिंग और शैडो का इस्तेमाल करें. शहर के माहौल को और ज़्यादा इमर्सिव बनाने के लिए, मौजूदा मौसम की जानकारी को सीधे तौर पर शहर के माहौल में शामिल करो. साफ़-सुथरे और मिनिमलिस्ट कंपोज़िशन का इस्तेमाल करें. साथ ही, हल्के और एक रंग वाले बैकग्राउंड का इस्तेमाल करें. सबसे ऊपर बीच में, बड़े और बोल्ड टेक्स्ट में "लंदन" टाइटल रखें. इसके नीचे, मौसम का आइकॉन दिखाएं. इसके बाद, तारीख (छोटे टेक्स्ट में) और तापमान (मीडियम टेक्स्ट में) दिखाएं. सभी टेक्स्ट को बीच में अलाइन किया जाना चाहिए. साथ ही, उनके बीच एक जैसा स्पेस होना चाहिए. इसके अलावा, टेक्स्ट, इमारतों के ऊपरी हिस्सों पर थोड़ा-बहुत ओवरलैप हो सकता है."
-- ![क्वेत्ज़ल](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  **Requête** : "Présente une scène de dessin animé 3D miniature, isométrique et claire, vue de dessus à 45°, de Londres, avec ses monuments et éléments architecturaux les plus emblématiques. Utilisez des textures douces et raffinées avec des matériaux PBR réalistes, ainsi que des éclairages et des ombres doux et réalistes. Intégrez les conditions météorologiques actuelles directement dans l'environnement urbain pour créer une ambiance immersive. Utilise une composition épurée et minimaliste avec un arrière-plan uni et doux. En haut au centre, placez le titre "Londres" en gros caractères gras, une icône météo bien visible en dessous, puis la date (en petits caractères) et la température (en caractères moyens). Tout le texte doit être centré avec un espacement cohérent et peut chevaucher légèrement le haut des bâtiments."
+- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Nano Banana 2 की मदद से जनरेट किया गया
+  Généré par Nano Banana 2
 
-  **प्रॉम्प्ट:** "इमेज सर्च की सुविधा का इस्तेमाल करके, शानदार क्वेट्ज़ल पक्षी की सटीक इमेज ढूंढो. इस पक्षी का 3:2 रेशियो वाला एक सुंदर वॉलपेपर बनाओ. इसमें ऊपर से नीचे तक नैचुरल ग्रेडिएंट हो और कंपोज़िशन कम से कम हो."
-- ![केला](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  **Requête** : "Utilise la recherche d'images pour trouver des images précises d'un quetzal resplendissant. Crée un magnifique fond d'écran au format 3:2 de cet oiseau, avec un dégradé naturel de haut en bas et une composition minimaliste."
+- ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Nano Banana Pro की मदद से जनरेट की गई इमेज
+  Généré par Nano Banana Pro
 
-  **प्रॉम्प्ट:** "इस लोगो को केले की खुशबू वाले परफ़्यूम के बेहतरीन विज्ञापन पर लगाओ. लोगो को बोतल में अच्छी तरह से इंटिग्रेट किया गया है."
-- ![कैफ़े](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  **Requête** : "Place ce logo sur une publicité haut de gamme pour un parfum à la banane. Le logo est parfaitement intégré à la bouteille."
+- ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Nano Banana Pro की मदद से जनरेट की गई इमेज
+  Généré par Nano Banana Pro
 
-  **प्रॉम्प्ट:** "नाश्ता परोसने वाले एक व्यस्त कैफ़े की रोज़मर्रा की गतिविधि की फ़ोटो. फ़ोरग्राउंड में नीले बालों वाला एक ऐनिमे व्यक्ति है. इनमें से एक व्यक्ति पेंसिल स्केच है, दूसरा क्लेमेशन व्यक्ति है"
-- ![लेख](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  **Requête** : "Photo d'une scène quotidienne dans un café animé servant le petit-déjeuner. Au premier plan, un homme d'anime aux cheveux bleus, l'une des personnes est un croquis au crayon, l'autre est une personne en pâte à modeler"
+- ![article](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Nano Banana Pro की मदद से जनरेट की गई इमेज
+  Généré par Nano Banana Pro
 
-  **प्रॉम्प्ट:** "Gemini 3 Flash को लॉन्च करने के बाद, लोगों की क्या प्रतिक्रिया रही, यह जानने के लिए खोज का इस्तेमाल करो. इस जानकारी का इस्तेमाल करके, इसके बारे में एक छोटा लेख लिखो. इसमें हेडिंग भी शामिल करो. इस लेख की ऐसी फ़ोटो दिखाओ जो डिज़ाइन पर फ़ोकस करने वाली ग्लॉसी मैगज़ीन में दिखाई गई हो. यह एक फ़ोटो है. इसमें एक पेज को मोड़ा गया है. इसमें Gemini 3 Flash के बारे में लेख दिखाया गया है. एक हीरो फ़ोटो. सेरिफ़ फ़ॉन्ट में हेडलाइन."
-- ![कुत्ता](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  **Prompt** : "Utilise la recherche pour savoir comment le lancement de Gemini 3 Flash a été accueilli. Utilise ces informations pour rédiger un court article à ce sujet (avec des titres). Retourne une photo de l'article tel qu'il est apparu dans un magazine brillant axé sur le design. Il s'agit d'une photo d'une seule page pliée, montrant l'article sur Gemini 3 Flash. Une photo de héros Titre en serif."
+- ![chien](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Nano Banana Pro की मदद से जनरेट की गई इमेज
+  Généré par Nano Banana Pro
 
-  **प्रॉम्प्ट:** "एक प्यारे कुत्ते को दिखाने वाला आइकॉन. बैकग्राउंड का रंग सफ़ेद है. आइकॉन को रंगीन और टेक्टाइल 3D स्टाइल में बनाओ. कोई टेक्स्ट नहीं है."
-- ![आइसोमेट्रिक](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  **Requête** : "Une icône représentant un chien mignon. L'arrière-plan est blanc. Crée des icônes dans un style 3D coloré et tactile. Pas de texte."
+- ![isométrique](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Nano Banana 2 की मदद से जनरेट किया गया
+  Généré par Nano Banana 2
 
-  **प्रॉम्प्ट:** "ऐसी फ़ोटो बनाओ जो पूरी तरह से आइसोमेट्रिक हो. यह कोई छोटी इमेज नहीं है, बल्कि कैप्चर की गई फ़ोटो है. यह फ़ोटो, आइसोमेट्रिक व्यू में ली गई है. यह एक खूबसूरत मॉडर्न गार्डन की फ़ोटो है. इसमें दो के आकार का एक बड़ा पूल है. साथ ही, इसमें Nano Banana 2 लिखा है."
+  **Requête** : "Crée une photo parfaitement isométrique. Il ne s'agit pas d'une miniature, mais d'une photo qui s'est avérée parfaitement isométrique. Il s'agit d'une photo d'un beau jardin moderne. Il y a une grande piscine en forme de 2 et les mots "Nano Banana 2"."
 
-**Nano Banana**, Gemini में इमेज जनरेट करने की सुविधा का नाम है.
-Gemini, बातचीत के दौरान टेक्स्ट, इमेज, वीडियो या इनके कॉम्बिनेशन का इस्तेमाल करके इमेज जनरेट और प्रोसेस कर सकता है. इससे आपको विज़ुअल बनाने, उनमें बदलाव करने, और उन्हें बेहतर बनाने के लिए पहले से ज़्यादा कंट्रोल मिलता है.
+**Nano Banana** est le nom des fonctionnalités de génération d'images natives de Gemini.
+Gemini peut générer et traiter des images de manière conversationnelle avec du texte, des images, des vidéos ou une combinaison de ces éléments. Vous pouvez ainsi créer, modifier et itérer des éléments visuels avec un contrôle sans précédent.
 
-Nano Banana, Gemini API में उपलब्ध चार अलग-अलग मॉडल को कहते हैं:
+## Sélection du modèle
 
-- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=hi))
-  (`gemini-3.1-flash-lite-image`):** यह Gemini का सबसे तेज़ और सस्ता इमेज मॉडल है. इसे तेज़ी से काम करने और बड़े पैमाने पर इमेज जनरेट करने के लिए डिज़ाइन किया गया है. इसमें तेज़ी से काम करने और कम लागत में इमेज जनरेट करने को प्राथमिकता दी जाती है. इसे एक से ज़्यादा रेफ़रंस इनपुट या क्रम से एक से ज़्यादा बार बदलाव करने के लिए ऑप्टिमाइज़ नहीं किया गया है.
-- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=hi))
-  (`gemini-3.1-flash-image`):** यह सबसे ज़्यादा काम आने वाला मॉडल है. यह सभी टास्क के लिए, सामान्य तौर पर इस्तेमाल किया जाने वाला वर्कहॉर्स मॉडल है. यह मॉडल, इमेज की बेहतर क्वालिटी, दुनिया भर के तथ्यों और बारीकियों की बेहतर समझ, और टेक्स्ट को सटीक तरीक़े से रेंडर करने के साथ-साथ तेज़ी से काम करता है. यह मॉडल, एक साथ कई रेफ़रंस इमेज को प्रोसेस करने और उनमें एकरूपता बनाए रखने में बेहतर है.
-- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=hi))
-  (`gemini-3-pro-image`):** यह सबसे मुश्किल विज़ुअल टास्क के लिए प्रीमियम विकल्प है. इसमें दुनिया भर की सबसे ज़्यादा जानकारी, ऐडवांस लोकलाइज़ेशन, सटीक ब्रैंड कंसिस्टेंसी, और क्रिएटिव कंट्रोल की सुविधा मिलती है.
-- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi))
-  (`gemini-2.5-flash-image`):** यह Nano Banana सीरीज़ का सबसे पुराना मॉडल है.
-  यह मॉडल काफ़ी भरोसेमंद है. हालांकि, हम ग्राहकों को सुझाव देते हैं कि वे Nano Banana 2 Lite पर स्विच करें. इससे उन्हें बेहतर क्वालिटी, इमेज जनरेट करने की तेज़ स्पीड, और एपीआई की कम कीमत का फ़ायदा मिलेगा.
+Nano Banana fait référence aux modèles suivants disponibles dans l'API Gemini :
 
-जनरेट की गई सभी इमेज में, [SynthID वॉटरमार्क](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=hi) होता है.
+- **Nano Banana 2.1 ([Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=fr))
+  (`gemini-nano-banana-2.1`)** : mise à jour de Nano Banana 2, qui sert de modèle principal très efficace pour la génération d'images et la retouche conversationnelle. Il conserve la rapidité et la rentabilité de Flash tout en offrant une meilleure qualité visuelle, un meilleur rendu du texte, une cohérence multitour et un ancrage dans la recherche Google pour les résolutions 1K, 2K et 4K.
+- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=fr))
+  (`gemini-3.1-flash-lite-image`)** : modèle Gemini pour les images le plus rapide et le moins cher, conçu pour la vitesse et l'évolutivité lorsque la vitesse et le coût sont les principales contraintes opérationnelles. Il n'est pas optimisé pour les entrées de référence multiples ni pour les modifications séquentielles multitours.
+- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=fr))
+  (`gemini-3.1-flash-image`)** : modèle de génération d'images haute efficacité de la génération précédente, qui équilibre la vitesse avec la génération en 4K, les connaissances sur le monde et la cohérence des images multiréférences. Il est recommandé d'utiliser Nano Banana 2.1 pour tous les nouveaux projets.
+- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fr))
+  (`gemini-3-pro-image`)** : le choix Premium pour les tâches visuelles les plus complexes. Il offre le plus haut niveau de connaissances sur le monde, une localisation avancée, une cohérence de marque précise et un contrôle créatif de haute précision.
+- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fr))
+  (`gemini-2.5-flash-image`)** : le pionnier de la série Nano Banana.
+  Bien qu'il ait été un outil fiable, nous vous recommandons de passer à Nano Banana 2 Lite pour bénéficier d'une qualité améliorée, de vitesses de génération plus rapides et de tarifs d'API plus bas.
 
-## इमेज जनरेट करना (टेक्स्ट प्रॉम्प्ट से इमेज जनरेट करने की प्रोसेस)
+Toutes les images générées incluent un [filigrane SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr).
+
+## Génération d'images (texte vers image)
 
 ### Python
 
@@ -102,7 +107,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
 )
 
@@ -124,7 +129,7 @@ async function main() {
     "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme";
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: prompt,
   });
   const generatedImage = interaction.output_image;
@@ -155,7 +160,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme"))
@@ -172,7 +177,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -197,7 +202,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme"),
         }),
     })
@@ -225,25 +230,24 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": [
       {"type": "text", "text": "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme"}
     ]
   }'
 ```
 
-जनरेट की गई इमेज का डेटा वापस पाने के लिए, `interaction.output_image`
-प्रॉपर्टी का इस्तेमाल किया जा सकता है. यह प्रॉपर्टी, जनरेट की गई इमेज का आखिरी ब्लॉक दिखाती है. सुविधा देने वाली प्रॉपर्टी के बारे में ज़्यादा जानने के लिए, [इंटरैक्शन की खास जानकारी](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi#convenience-properties) देखें.
+Vous pouvez récupérer les données d'image générées à l'aide de la propriété `interaction.output_image`, qui renvoie le dernier bloc d'image généré. Pour en savoir plus sur les propriétés pratiques, consultez [Présentation des interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr#convenience-properties).
 
-## इमेज में बदलाव करना (टेक्स्ट और इमेज से इमेज जनरेट करना)
+## Retouche d'images (texte et image vers image)
 
-**याद रखें**: पक्का करें कि आपके पास, अपलोड की जाने वाली किसी भी इमेज से जुड़े सभी ज़रूरी अधिकार हों.
-ऐसा कॉन्टेंट जनरेट न करें जिससे किसी के अधिकारों का उल्लंघन होता हो. इसमें ऐसे वीडियो या इमेज शामिल हैं जो धोखा देने, उत्पीड़न करने या नुक़सान पहुँचाने के मक़सद बनाए गए हों. जनरेटिव एआई की इस सेवा के इस्तेमाल पर, हमारी [जनरेटिव एआई के इस्तेमाल से जुड़ी पाबंदी की नीति](https://policies.google.com/terms/generative-ai/use-policy?hl=hi) लागू होती है.
+**Rappel** : Assurez-vous de disposer des droits nécessaires sur toutes les images que vous importez.
+Ne générez aucun contenu qui porte atteinte aux droits d'autrui, y compris des vidéos ou images trompeuses, ou qui harcèlent ou nuisent à autrui. L'utilisation de ce service d'IA générative est soumise à notre [Règlement sur les utilisations interdites](https://policies.google.com/terms/generative-ai/use-policy?hl=fr).
 
-कोई इमेज दें और टेक्स्ट प्रॉम्प्ट का इस्तेमाल करके, एलिमेंट जोड़ें, हटाएं या उनमें बदलाव करें. इसके अलावा, स्टाइल बदलें या कलर ग्रेडिंग अडजस्ट करें.
+Fournissez une image et utilisez des requêtes textuelles pour ajouter, supprimer ou modifier des éléments, changer le style ou ajuster la correction colorimétrique.
 
-यहां दिए गए उदाहरण में, `base64` कोड में बदली गई इमेज अपलोड करने का तरीका बताया गया है.
-एक से ज़्यादा इमेज, बड़े पेलोड, और काम करने वाले MIME टाइप के लिए, [इमेज को समझना](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi) पेज देखें.
+L'exemple suivant montre comment importer des images encodées `base64`.
+Pour en savoir plus sur les images multiples, les charges utiles plus importantes et les types MIME acceptés, consultez la page [Compréhension des images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr).
 
 ### Python
 
@@ -258,7 +262,7 @@ with open("/path/to/cat_image.png", "rb") as f:
     image_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {
           "type": "text",
@@ -301,7 +305,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: prompt,
   });
   const generatedImage = interaction.output_image;
@@ -353,7 +357,7 @@ List<Content> contents = Arrays.asList(textContent, imageContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -368,7 +372,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -399,7 +403,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput([]interactions.Content{
                 interactions.NewContent(interactions.TextContent{
                     Text: "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
@@ -435,7 +439,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
         {\"type\": \"text\", \"text\": \"Create a picture of my cat eating a nano-banana in a fancy restaurant under the Gemini constellation\"},
         {
@@ -447,9 +451,9 @@ curl -s -X POST \
     }"
 ```
 
-### सिलसिलेवार बातचीत में इमेज में बदलाव करने की सुविधा
+### Modification d'images multitour
 
-बातचीत के दौरान, इमेज जनरेट करने और उनमें बदलाव करने की सुविधा का इस्तेमाल जारी रखें. इमेज को बेहतर बनाने के लिए, सिलसिलेवार बातचीत करने का सुझाव दिया जाता है. यहां दिए गए उदाहरण में, फ़ोटोसिंथिसिस के बारे में इन्फ़ोग्राफ़िक जनरेट करने के लिए प्रॉम्प्ट दिखाया गया है.
+Continuez à générer et à modifier des images de manière conversationnelle. La conversation multitour est la méthode recommandée pour itérer sur les images. L'exemple suivant montre une requête permettant de générer une infographie sur la photosynthèse.
 
 ### Python
 
@@ -460,7 +464,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader.",
     tools=[{"type": "google_search"}],
 )
@@ -479,7 +483,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader.",
     tools: [{"type": "google_search"}],
   });
@@ -514,7 +518,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader."))
@@ -532,7 +536,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -557,7 +561,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(`Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food. Show the "ingredients" (sunlight, water, CO2) and the "finished dish" (sugar/energy). The style should be like a page from a colorful kids' cookbook, suitable for a 4th grader.`),
             Tools: []interactions.Tool{
                 interactions.NewTool(interactions.GoogleSearch{}),
@@ -588,7 +592,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": [
       {"type": "text", "text": "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plants favorite food. Show the \"ingredients\" (sunlight, water, CO2) and the \"finished dish\" (sugar/energy). The style should be like a page from a colorful kids cookbook, suitable for a 4th grader."}
     ],
@@ -596,17 +600,17 @@ curl -s -X POST \
   }'
 ```
 
-![फ़ोटोसिंथेसिस के बारे में एआई से जनरेट किया गया इन्फ़ोग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=hi)
+![Infographie générée par IA sur la photosynthèse](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=fr)
 
-प्रकाश संश्लेषण के बारे में एआई से जनरेट किया गया इन्फ़ोग्राफ़िक
+Infographie générée par IA sur la photosynthèse
 
-इसके बाद, `previous_interaction_id` का इस्तेमाल करके, ग्राफ़िक की भाषा को स्पैनिश में बदला जा सकता है.
+Vous pouvez ensuite utiliser `previous_interaction_id` pour modifier la langue du graphique et la passer à l'espagnol.
 
 ### Python
 
 ```
 interaction_2 = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="Update this infographic to be in Spanish. Do not change any other elements of the image.",
     previous_interaction_id=interaction.id,
     response_format={
@@ -627,7 +631,7 @@ if generated_image:
 
 ```
 const interaction2 = await ai.interactions.create({
-  model: "gemini-3.1-flash-image",
+  model: "gemini-nano-banana-2.1",
   input: "Update this infographic to be in Spanish. Do not change any other elements of the image.",
   previous_interaction_id: interaction.id,
   response_format: {
@@ -670,7 +674,7 @@ Client client = new Client();
 
 CreateModelInteraction turn1Params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food."))
@@ -691,7 +695,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction turn2Params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Update this infographic to be in Spanish. Do not change any other elements of the image."))
@@ -710,7 +714,7 @@ if (interaction2.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -735,7 +739,7 @@ func main() {
 
     res1, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("Create a vibrant infographic that explains photosynthesis as if it were a recipe for a plant's favorite food."),
             Tools: []interactions.Tool{
                 interactions.NewTool(interactions.GoogleSearch{}),
@@ -756,7 +760,7 @@ func main() {
 
     res2, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:                 interactions.Model("gemini-3.1-flash-image"),
+            Model:                 interactions.Model("gemini-nano-banana-2.1"),
             Input:                 interactions.NewInteractionsInput("Update this infographic to be in Spanish. Do not change any other elements of the image."),
             PreviousInteractionID: res1.Interaction.ID,
             ResponseFormat:        genai.Ptr(format),
@@ -786,7 +790,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "Update this infographic to be in Spanish. Do not change any other elements of the image.",
     "previous_interaction_id": "<PREVIOUS_INTERACTION_ID>",
     "response_format": {
@@ -798,38 +802,35 @@ curl -s -X POST \
   }'
 ```
 
-![स्पैनिश में, फ़ोटोसिंथिसिस के बारे में एआई से जनरेट किया गया इन्फ़ोग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=hi)
+![Infographie sur la photosynthèse générée par l'IA en espagnol](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=fr)
 
-स्पैनिश में फ़ोटोसिंथिसिस का एआई से बनाया गया इन्फ़ोग्राफ़िक
+Infographie sur la photosynthèse générée par IA en espagnol
 
-## Gemini 3 के इमेज मॉडल की नई सुविधाएं
+## Fonctionnalités de Nano Banana
 
-Gemini 3 में, इमेज जनरेट करने और उनमें बदलाव करने के लिए बेहतरीन मॉडल उपलब्ध हैं. Gemini 3.1
-Flash Image को तेज़ी से काम करने और ज़्यादा से ज़्यादा इस्तेमाल के लिए ऑप्टिमाइज़ किया गया है. वहीं, Gemini 3
-Pro Image को प्रोफ़ेशनल ऐसेट बनाने के लिए ऑप्टिमाइज़ किया गया है.
-इन्हें ऐडवांस रीज़निंग की मदद से, सबसे मुश्किल वर्कफ़्लो को पूरा करने के लिए डिज़ाइन किया गया है. ये मुश्किल और सिलसिलेवार बातचीत वाले कॉन्टेंट को बनाने और उसमें बदलाव करने से जुड़े टास्क को आसानी से पूरा कर सकते हैं.
+Les modèles Nano Banana offrent une génération et une retouche d'images de pointe. Gemini Nano Banana 2.1 et Gemini 3.1 Flash Image sont optimisés pour la vitesse et les cas d'utilisation à volume élevé, tandis que Gemini 3 Pro Image est optimisé pour la production d'assets professionnels.
+Conçus pour gérer les workflows les plus complexes grâce à un raisonnement avancé, ils excellent dans les tâches complexes de création et de modification multitours.
 
-- **हाई रिज़ॉल्यूशन वाला आउटपुट**: 1K, 2K, और 4K विज़ुअल जनरेट करने की सुविधाएं पहले से मौजूद हैं.
-  - **Gemini 3.1 Flash Image** में, 512 पिक्सल (0.5K) का छोटा रिज़ॉल्यूशन जोड़ा गया है.
-  - **Gemini 3.1 Flash Lite की इमेज** सिर्फ़ 1K रिज़ॉल्यूशन के साथ काम करती है.
-- **ऐडवांस टेक्स्ट रेंडरिंग**: यह इन्फ़ोग्राफ़िक, मेन्यू, डायग्राम, और मार्केटिंग ऐसेट के लिए, पढ़ने में आसान और स्टाइल वाला टेक्स्ट जनरेट कर सकता है.
-- **Google Search से जानकारी पाना**: मॉडल, Google Search का इस्तेमाल एक टूल के तौर पर कर सकता है.इससे तथ्यों की पुष्टि की जा सकती है और रीयल-टाइम डेटा के आधार पर इमेज जनरेट की जा सकती हैं. जैसे, मौसम के मौजूदा मैप, स्टॉक चार्ट, हाल ही के इवेंट.
-  - **Gemini 3.1 Flash Lite Image मॉडल के साथ काम नहीं करता.**
-  - **Gemini 3.1 Flash Image** में, Web Search के साथ-साथ Google Image Search को भी इंटिग्रेट किया गया है.
-- **सोचने वाला मोड**: इस मोड में मॉडल, "सोचने" की प्रोसेस का इस्तेमाल करके मुश्किल प्रॉम्प्ट के जवाब देता है. यह अच्छी क्वालिटी का फ़ाइनल आउटपुट जनरेट करने से पहले, कंपोज़िशन को बेहतर बनाने के लिए "सोच वाली इमेज" (ये इमेज बैकएंड में दिखती हैं, लेकिन इनके लिए शुल्क नहीं लिया जाता) जनरेट करता है.
-- **ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज**: अब फ़ाइनल इमेज बनाने के लिए, ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज को एक साथ इस्तेमाल किया जा सकता है.
-- **नए आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात)**: Gemini 3.1 Flash Lite Image में `1:1`, `3:2`,
-  `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` [आसपेक्ट रेशियो](#aspect_ratios_and_image_size) जोड़े गए हैं.
+- **Sortie haute résolution** : fonctionnalités de génération intégrées pour les visuels 1K, 2K et 4K.
+  - **Gemini 3.1 Flash Image** ajoute la résolution inférieure de 512 px (0,5 K), qui n'est pas compatible avec Gemini Nano Banana 2.1.
+  - L'**image Gemini 3.1 Flash-Lite** n'est compatible qu'avec la résolution 1K.
+- **Rendu de texte avancé** : permet de générer du texte lisible et stylisé pour les infographies, les menus, les diagrammes et les supports marketing.
+- **Ancrage avec la recherche Google** : le modèle peut utiliser la recherche Google comme outil pour vérifier les faits et générer des images basées sur des données en temps réel (par exemple, les cartes météo actuelles, les graphiques boursiers et les événements récents).
+  - **Non compatible avec le modèle Gemini 3.1 Flash Lite Image.**
+  - **Gemini Nano Banana 2.1 et Gemini 3.1 Flash Image** ajoutent l'intégration de l'ancrage dans la recherche d'images Google en plus de la recherche sur le Web.
+- **Mode Raisonnement** : le modèle utilise un processus de "réflexion" pour raisonner sur les requêtes complexes. Il génère des "images de réflexion" intermédiaires (visibles dans le backend, mais sans frais) pour affiner la composition avant de produire le résultat final de haute qualité.
+- **Jusqu'à 14 images de référence** : combinez jusqu'à 14 images de référence pour générer l'image finale.
+- **Nouveaux formats** : Gemini 3.1 Flash Lite Image ajoute les [formats](#aspect-ratios-and-image-size) `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9` et `21:9`.
 
-### ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज इस्तेमाल करें
+### Utiliser jusqu'à 14 images de référence
 
-Gemini 3 के इमेज मॉडल की मदद से, ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज को मिक्स किया जा सकता है. इन 14 इमेज में ये शामिल हो सकती हैं:
+Les modèles Nano Banana vous permettent de combiner jusqu'à 14 images de référence. Ces 14 images peuvent inclure les éléments suivants :
 
-| Gemini 3.1 Flash Lite Image | Gemini 3.1 Flash की इमेज | Gemini 3 Pro की इमेज |
+| Image Gemini 3.1 Flash-Lite | Gemini Nano Banana 2.1 et Gemini 3.1 Flash Image | Gemini 3 Pro Image |
 | --- | --- | --- |
-| फ़ाइनल इमेज में शामिल करने के लिए, हाई फ़िडेलिटी वाले ऑब्जेक्ट की ज़्यादा से ज़्यादा 14 इमेज | फ़ाइनल इमेज में शामिल करने के लिए, हाई फ़िडेलिटी वाले ऑब्जेक्ट की ज़्यादा से ज़्यादा 10 इमेज | फ़ाइनल इमेज में शामिल करने के लिए, हाई फ़िडेलिटी वाले ऑब्जेक्ट की ज़्यादा से ज़्यादा छह इमेज |
-| लागू नहीं | कैरेक्टर की कंसिस्टेंसी बनाए रखने के लिए, ज़्यादा से ज़्यादा चार इमेज | कैरेक्टर का लुक बरकरार रखने के लिए, ज़्यादा से ज़्यादा पांच इमेज |
-| लागू नहीं | लागू नहीं | स्टाइल के रेफ़रंस के तौर पर इस्तेमाल करने के लिए, ज़्यादा से ज़्यादा तीन इमेज |
+| Jusqu'à 14 images d'objets haute fidélité à inclure dans l'image finale | Jusqu'à 10 images d'objets haute fidélité à inclure dans l'image finale | Jusqu'à six images d'objets haute fidélité à inclure dans l'image finale |
+| N/A | Jusqu'à quatre images de personnages pour maintenir la cohérence du personnage | Jusqu'à cinq images de personnages pour assurer leur cohérence |
+| N/A | N/A | Jusqu'à trois images à utiliser comme références de style |
 
 ### Python
 
@@ -844,7 +845,7 @@ prompt = "An office group photo of these people, they are making funny faces."
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {
             "type": "text",
@@ -909,7 +910,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
     response_format: {
       type: "image",
@@ -983,7 +984,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .responseFormat(format)
         .build();
@@ -999,7 +1000,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1056,7 +1057,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput(contents),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -1085,7 +1086,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
         {\"type\": \"text\", \"text\": \"An office group photo of these people, they are making funny faces.\"},
         {\"type\": \"image\", \"mime_type\": \"image/png\", \"data\": \"<BASE64_DATA_IMG_1>\"},
@@ -1102,15 +1103,15 @@ curl -s -X POST \
     }"
 ```
 
-![एआई से जनरेट की गई ऑफ़िस ग्रुप फ़ोटो](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=hi)
+![Photo de groupe au bureau générée par l'IA](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=fr)
 
-एआई से जनरेट की गई ऑफ़िस ग्रुप फ़ोटो
+Photo de groupe au bureau générée par IA
 
-### Google Search से सटीक जानकारी पाने की सुविधा
+### Ancrage avec la recherche Google
 
-[Google Search टूल](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) का इस्तेमाल करके, रीयल-टाइम में उपलब्ध जानकारी के आधार पर इमेज जनरेट करें. जैसे, मौसम का पूर्वानुमान, स्टॉक चार्ट या हाल ही में हुई घटनाएँ.
+Utilise l'[outil de recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) pour générer des images basées sur des informations en temps réel, comme les prévisions météo, les graphiques boursiers ou les événements récents.
 
-ध्यान दें कि इमेज जनरेट करने के लिए, Google Search की मदद से भरोसेमंद स्रोतों से जानकारी लेने की सुविधा का इस्तेमाल करते समय, इमेज पर आधारित खोज के नतीजों को जनरेशन मॉडल को नहीं भेजा जाता है. साथ ही, उन्हें जवाब में शामिल नहीं किया जाता है. इसके बारे में ज़्यादा जानने के लिए, [Google Image Search की मदद से भरोसेमंद स्रोतों से जानकारी लेना](#image-search) लेख पढ़ें
+Notez que lorsque vous utilisez l'ancrage avec la recherche Google pour générer des images, les résultats de recherche basés sur des images ne sont pas transmis au modèle de génération et sont exclus de la réponse (voir [Ancrer avec la recherche Google Images](#image-search)).
 
 ### Python
 
@@ -1123,7 +1124,7 @@ prompt = "Visualize the current weather forecast for the next 5 days in San Fran
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=prompt,
     tools=[{"type": "google_search"}],
     response_format={
@@ -1147,7 +1148,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day",
     tools: [{"type": "google_search"}],
     response_format: {
@@ -1201,7 +1202,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.of(prompt))
         .tools(Arrays.asList(new GoogleSearch()))
         .responseFormat(format)
@@ -1218,7 +1219,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1252,7 +1253,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(prompt),
             Tools: []interactions.Tool{
                 interactions.NewTool(interactions.GoogleSearch{}),
@@ -1284,7 +1285,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": [
       {"type": "text", "text": "Visualize the current weather forecast for the next 5 days in San Francisco as a clean, modern weather chart. Add a visual on what I should wear each day"}
     ],
@@ -1297,20 +1298,20 @@ curl -s -X POST \
   }'
 ```
 
-![सैन फ़्रांसिस्को के लिए, एआई से बनाया गया पाँच दिनों का मौसम चार्ट](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=hi)
+![Graphique météo sur cinq jours généré par IA pour San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=fr)
 
-सैन फ़्रांसिस्को के मौसम की जानकारी देने वाला पांच दिनों का चार्ट, जिसे एआई ने जनरेट किया है
+Graphique météo sur cinq jours généré par IA pour San Francisco
 
-जवाब में `google_search_call` और `google_search_result` चरण शामिल हैं. साथ ही, टेक्स्ट वाले चरण पर इनलाइन `url_citation` एनोटेशन भी शामिल हैं:
+La réponse inclut les étapes `google_search_call` et `google_search_result`, ainsi que des annotations `url_citation` intégrées à l'étape de texte :
 
-- **`google_search_result`**: इसमें `search_suggestions` होता है. यह आपके यूज़र इंटरफ़ेस (यूआई) में खोज के सुझावों को रेंडर करने के लिए, एचटीएमएल स्निपेट होता है.
-- **`url_citation` एनोटेशन**: टेक्स्ट स्टेप में इनलाइन उद्धरण, जवाब के कुछ हिस्सों को उनके वेब सोर्स से लिंक करते हैं.
+- **`google_search_result`** : contient `search_suggestions`, un extrait HTML permettant d'afficher les suggestions de recherche dans votre UI.
+- **Annotations `url_citation`** : citations intégrées à l'étape de texte, associant des parties de la réponse à leurs sources Web.
 
-### इमेज के लिए, Google Search से सटीक जानकारी पाने की सुविधा (3.1 Flash)
+### Ancrage avec la recherche Google pour les images (Nano Banana 2.1 et 3.1 Flash)
 
-Google Image Search के साथ ग्राउंडिंग की सुविधा की मदद से मॉडल, Google Image Search से हासिल की गई वेब इमेज का इस्तेमाल, इमेज जनरेट करने के लिए विज़ुअल कॉन्टेक्स्ट के तौर पर कर सकते हैं. इमेज सर्च, Google Search की मदद से जानकारी पाने वाले मौजूदा टूल में खोज का एक नया टाइप है. यह स्टैंडर्ड [वेब सर्च](#use-with-grounding) के साथ काम करता है.
+L'ancrage avec la recherche d'images Google permet aux modèles d'utiliser les images Web récupérées via la recherche d'images Google comme contexte visuel pour la génération d'images. La recherche d'images est un nouveau type de recherche au sein de l'outil existant d'ancrage avec la recherche Google. Elle fonctionne en parallèle de la [recherche sur le Web](#use-with-grounding) standard.
 
-इमेज सर्च की सुविधा चालू करने के लिए, अपने एपीआई अनुरोध में `google_search` टूल को कॉन्फ़िगर करें. साथ ही, `search_types` ऐरे में `image_search` को शामिल करें. इमेज सर्च का इस्तेमाल, वेब सर्च के साथ या अलग से किया जा सकता है.
+Pour activer la recherche d'images, configurez l'outil `google_search` dans votre requête API et spécifiez `image_search` dans le tableau `search_types`. La recherche d'images peut être utilisée indépendamment ou en même temps que la recherche sur le Web.
 
 ### Python
 
@@ -1320,7 +1321,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="A detailed painting of a Timareta butterfly resting on a flower",
     tools=[{
       "type": "google_search",
@@ -1338,7 +1339,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "A detailed painting of a Timareta butterfly resting on a flower",
     tools: [{
       "type": "google_search",
@@ -1374,7 +1375,7 @@ GoogleSearch searchTool =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A detailed painting of a Timareta butterfly resting on a flower"))
@@ -1385,7 +1386,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1415,7 +1416,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("A detailed painting of a Timareta butterfly resting on a flower"),
             Tools: []interactions.Tool{
                 interactions.NewTool(searchTool),
@@ -1437,30 +1438,30 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "A detailed painting of a Timareta butterfly resting on a flower",
     "tools": [{"type": "google_search", "search_types": ["web_search", "image_search"]}]
   }'
 ```
 
-**विज्ञापन दिखाने के लिए ज़रूरी शर्तें**
+**Conditions requises pour l'affichage**
 
-'Google Search की मदद से जानकारी पाना' सुविधा के साथ इमेज सर्च का इस्तेमाल करते समय, आपको `google_search_result` चरण से `search_suggestions` दिखाना होगा. इस्तेमाल से जुड़ी सभी ज़रूरी शर्तों के बारे में ज़्यादा जानकारी, [सेवा की शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi#grounding-with-google-search) में दी गई है.
+Lorsque vous utilisez la recherche d'images dans l'ancrage avec la recherche Google, vous devez afficher le `search_suggestions` de l'étape `google_search_result`. Les exigences d'utilisation complètes sont détaillées dans les [Conditions d'utilisation](https://ai.google.dev/gemini-api/terms?hl=fr#grounding-with-google-search).
 
-**जवाब**
+**Réponse**
 
-इमेज सर्च का इस्तेमाल करके भरोसेमंद सोर्स से जानकारी लेकर जवाब देने के लिए, एपीआई जवाब के चरणों के तहत इनलाइन उद्धरण और एट्रिब्यूशन मेटाडेटा दिखाता है:
+Pour les réponses ancrées utilisant la recherche d'images, l'API renvoie des citations intégrées et des métadonnées d'attribution dans les étapes de la réponse :
 
-- **`url_citation` एनोटेशन**: टेक्स्ट कॉन्टेंट ब्लॉक में इनलाइन उद्धरण `model_output` में मौजूद होते हैं. ये जनरेट किए गए कॉन्टेंट को उसके सोर्स से लिंक करते हैं.
-- **`google_search_result`**: इसमें `search_suggestions` शामिल है. यह आपके यूज़र इंटरफ़ेस (यूआई) में खोज के सुझाव दिखाने के लिए, एचटीएमएल स्निपेट है.
+- **Annotations `url_citation`** : citations intégrées dans le bloc de contenu textuel de `model_output`, qui relient le contenu généré à sa source.
+- **`google_search_result`** : contient `search_suggestions`, un extrait HTML permettant d'afficher les suggestions de recherche dans votre UI.
 
-### वीडियो से इमेज जनरेट करने की सुविधा (3.1 Flash और 3.1 Flash Lite)
+### Génération d'images à partir de vidéos (Nano Banana 2.1, 3.1 Flash et 3.1 Flash Lite)
 
-वीडियो से इमेज जनरेट करने की सुविधा की मदद से, वीडियो के कॉन्टेक्स्ट का इस्तेमाल करके नई इमेज जनरेट की जा सकती हैं. इसके लिए, मल्टीमॉडल रेफ़रंस का इस्तेमाल किया जाता है. यह अच्छी क्वालिटी वाले वीडियो थंबनेल, सिनेमैटिक पोस्टर, खास जानकारी देने वाले इन्फ़ोग्राफ़िक या वीडियो सीन से प्रेरित नए आर्टवर्क बनाने के लिए उपयोगी है.
+La génération d'images à partir de vidéos vous permet de créer des images en utilisant le contexte d'une vidéo comme référence multimodale. Cela est utile pour créer des miniatures vidéo de haute qualité, des affiches de cinéma, des infographies récapitulatives ou de nouvelles illustrations inspirées d'une scène vidéo.
 
-जनरेट करने के दौरान, मॉडल वीडियो फ़्रेम का विश्लेषण करता है, ताकि विज़ुअल थीम और मुख्य इवेंट निकाले जा सकें. इसके बाद, वह इन थीम और इवेंट का इस्तेमाल आपके टेक्स्ट प्रॉम्प्ट के साथ करता है, ताकि आउटपुट इमेज को सिंथेसाइज़ किया जा सके.
+Lors de la génération, le modèle analyse les images vidéo dans leur contexte pour extraire les thèmes visuels et les événements clés, puis les utilise avec votre requête textuelle pour synthétiser l'image de sortie.
 
-एपीआई अनुरोध में सीधे तौर पर सार्वजनिक [YouTube यूआरएल](https://ai.google.dev/gemini-api/docs/video-understanding?hl=hi#youtube) पास किए जा सकते हैं. इसके अलावा, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करके, स्थानीय वीडियो फ़ाइलें अपलोड की जा सकती हैं.
+Vous pouvez transmettre des [URL YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#youtube) publiques directement dans votre requête API ou importer des fichiers vidéo locaux à l'aide de l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
 
 ### Python
 
@@ -1472,7 +1473,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {
             "type": "video",
@@ -1506,7 +1507,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: [
       {
         type: "video",
@@ -1588,7 +1589,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .responseFormat(format)
         .build();
@@ -1619,7 +1620,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1661,7 +1662,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput(contents),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -1699,7 +1700,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": [
       {
         "type": "video",
@@ -1718,15 +1719,15 @@ curl -s -X POST \
   }'
 ```
 
-![YouTube वीडियो से एआई की मदद से जनरेट किया गया इन्फ़ोग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=hi)
+![Infographie générée par IA à partir d'une vidéo YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=fr)
 
-YouTube वीडियो से जनरेट किया गया एआई इन्फ़ोग्राफ़िक
+Infographie générée par IA à partir d'une vidéo YouTube
 
-### 4K रिज़ॉल्यूशन तक की इमेज जनरेट करना
+### Générer des images jusqu'à la résolution 4K
 
-Gemini 3 इमेज मॉडल, डिफ़ॉल्ट रूप से 1K इमेज जनरेट करते हैं. हालांकि, ये 2K, 4K, और 512 पिक्सल (05.K) (सिर्फ़ Gemini 3.1 Flash इमेज) वाली इमेज भी जनरेट कर सकते हैं. ज़्यादा रिज़ॉल्यूशन वाली ऐसेट जनरेट करने के लिए, `response_format` में `image_size` की वैल्यू डालें.
+Les modèles d'images Gemini 3 génèrent des images de 1K par défaut, mais peuvent également produire des images de 2K, 4K et 512 px (05.K) (Gemini 3.1 Flash Image uniquement). Pour générer des composants de résolution supérieure, spécifiez `image_size` dans `response_format`.
 
-आपको कैपिटल लेटर में 'K' का इस्तेमाल करना होगा. उदाहरण के लिए, 512 पिक्सल (05.K), 1K, 2K, 4K. छोटे अक्षरों वाले पैरामीटर (जैसे, 1k) स्वीकार नहीं किए जाएंगे.
+Vous devez utiliser un "K" en majuscule (par exemple, 512 px (05.K), 1K, 2K, 4K). Les paramètres en minuscules (par exemple, 1k) seront refusés.
 
 ### Python
 
@@ -1740,7 +1741,7 @@ prompt = "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Det
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=prompt,
     response_format={
         "type": "image",
@@ -1766,7 +1767,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English.",
     response_format: {
       type: "image",
@@ -1821,7 +1822,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.of(prompt))
         .responseFormat(format)
         .build();
@@ -1839,7 +1840,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -1875,7 +1876,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput(prompt),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -1908,7 +1909,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "Da Vinci style anatomical sketch of a dissected Monarch butterfly. Detailed drawings of the head, wings, and legs on textured parchment with notes in English.",
     "response_format": {
       "type": "image",
@@ -1919,19 +1920,19 @@ curl -s -X POST \
   }'
 ```
 
-इस प्रॉम्प्ट से जनरेट की गई इमेज का उदाहरण यहां दिया गया है:
+Voici un exemple d'image générée à partir de cette requête :
 
-![एआई से जनरेट किया गया, दा विंची की स्टाइल में मोनार्क तितली के शरीर के अंगों का ऐनाटॉमिकल स्केच.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=hi)
+![Croquis anatomique de style Da Vinci, généré par IA, d'un papillon monarque disséqué.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=fr)
 
-एआई से जनरेट किया गया, लियोनार्डो दा विंची के स्टाइल में मोनार्क तितली के शरीर के अंगों का स्केच.
+Croquis anatomique d'un monarque disséqué, généré par l'IA dans le style de Léonard de Vinci.
 
-### सोचने की प्रोसेस
+### Processus de raisonnement
 
-Gemini 3 के इमेज मॉडल, सूझ-बूझ वाले मॉडल होते हैं. ये मुश्किल प्रॉम्प्ट के लिए, गहराई से विश्लेषण प्रोसेस ("गहराई से विचार") का इस्तेमाल करते हैं. यह सुविधा डिफ़ॉल्ट रूप से चालू रहती है और इसे एपीआई में बंद नहीं किया जा सकता. सोचने की प्रोसेस के बारे में ज़्यादा जानने के लिए, [Gemini के सोचने की प्रोसेस](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) गाइड देखें.
+Les modèles d'image Gemini 3 sont des modèles de réflexion qui utilisent un processus de raisonnement ("Réflexion") pour les requêtes complexes. Cette fonctionnalité est activée par défaut et ne peut pas être désactivée dans l'API. Pour en savoir plus sur le processus de réflexion, consultez le guide [Réflexion de Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=fr).
 
-यह मॉडल, कंपोज़िशन और लॉजिक की जांच करने के लिए, दो इंटरिम इमेज जनरेट करता है. 'सोच रहा है' सेक्शन में मौजूद आखिरी इमेज, रेंडर की गई फ़ाइनल इमेज भी होती है.
+Le modèle génère jusqu'à deux images intermédiaires pour tester la composition et la logique. La dernière image de la section "Réflexion" est également l'image finale rendue.
 
-आपके पास यह देखने का विकल्प होता है कि किन विचारों के आधार पर फ़ाइनल इमेज जनरेट की गई है.
+Vous pouvez consulter les réflexions qui ont conduit à la production de l'image finale.
 
 ### Python
 
@@ -1985,7 +1986,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A futuristic city built inside a giant glass bottle floating in space"))
@@ -2016,7 +2017,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2042,7 +2043,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("A futuristic city built inside a giant glass bottle floating in space"),
         }),
     })
@@ -2070,11 +2071,11 @@ func main() {
 }
 ```
 
-#### टेक्स्ट और इमेज के बेहतरीन सीक्वेंस वाला आउटपुट
+#### Texte et images entrelacés
 
-इमेज जनरेट करने वाले स्टैंडर्ड मॉडल सिर्फ़ इमेज जनरेट करते हैं. हालांकि, Gemini 3 के कुछ ऐडवांस मॉडल (जैसे, `gemini-3-pro-image`) इंटरलीव्ड कॉन्टेंट जनरेट कर सकते हैं. जैसे, ऐसी कहानियाँ या निर्देश वाली गाइड जिनमें एक ही जवाब में टेक्स्ट ब्लॉक और इलस्ट्रेशन, दोनों शामिल हों.
+Alors que les modèles de génération d'images standards ne génèrent que des images, certains modèles Gemini 3 avancés (comme `gemini-3-pro-image`) peuvent générer du contenu entrelacé, comme des histoires ou des guides d'instructions contenant à la fois des blocs de texte et des illustrations dans la même réponse.
 
-आउटपुट जटिल और इंटरलीव्ड होने की वजह से, `.output_image` या `.output_text` जैसी सुविधा वाली प्रॉपर्टी पूरे क्रम को कैप्चर नहीं करेंगी. इंटरलीव किए गए कॉन्टेंट को ऐक्सेस करने और सेव करने के लिए, आपको `steps` पर मैन्युअल तरीके से दोहराना होगा:
+Étant donné que la sortie est complexe et entrelacée, les propriétés pratiques telles que `.output_image` ou `.output_text` ne captureront pas la séquence complète. Pour accéder au contenu entrelacé et l'enregistrer, vous devez itérer manuellement sur `steps` :
 
 ### Python
 
@@ -2181,7 +2182,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2239,9 +2240,15 @@ func main() {
 }
 ```
 
-#### सोचने के लेवल को कंट्रोल करना
+#### Contrôler les niveaux de réflexion
 
-Gemini 3.1 Flash Image और Gemini 3.1 Flash Lite Image की मदद से, यह कंट्रोल किया जा सकता है कि मॉडल, क्वालिटी और लेटेन्सी को बैलेंस करने के लिए कितना सोच-विचार करे. डिफ़ॉल्ट `thinking_level` `minimal` है. साथ ही, `minimal` और `high` लेवल इस्तेमाल किए जा सकते हैं.
+Avec Gemini Nano Banana 2.1, Gemini 3.1 Flash Image et Gemini 3.1 Flash Lite Image, vous pouvez contrôler la quantité de réflexion utilisée par le modèle pour équilibrer la qualité et la latence :
+
+| Modèle | Niveaux de réflexion acceptés | Par défaut |
+| --- | --- | --- |
+| **Gemini Nano Banana 2.1** | `minimal`, `medium`, `high` | `medium` |
+| **Image Flash Gemini 3.1** | `minimal`, `high` | `minimal` |
+| **Image Gemini 3.1 Flash-Lite** | `minimal`, `high` | `minimal` |
 
 ### Python
 
@@ -2254,7 +2261,7 @@ import io
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="A futuristic city built inside a giant glass bottle floating in space",
     generation_config={"thinking_level": "high"},
 )
@@ -2276,7 +2283,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "A futuristic city built inside a giant glass bottle floating in space",
     generation_config: { thinking_level: "high" },
   });
@@ -2309,7 +2316,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A futuristic city built inside a giant glass bottle floating in space"))
@@ -2329,7 +2336,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2355,7 +2362,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("A futuristic city built inside a giant glass bottle floating in space"),
             GenerationConfig: &interactions.GenerationConfig{
                 ThinkingLevel: interactions.ThinkingLevelHigh.ToPointer(),
@@ -2390,7 +2397,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "A futuristic city built inside a giant glass bottle floating in space",
     "generation_config": {
       "thinking_level": "high"
@@ -2398,32 +2405,32 @@ curl -s -X POST \
   }'
 ```
 
-ध्यान दें कि थिंकिंग मॉडल के लिए, थिंकिंग टोकन का बिल डिफ़ॉल्ट रूप से भेजा जाता है. ऐसा इसलिए, क्योंकि [थिंकिंग प्रोसेस](#thinking-process) हमेशा डिफ़ॉल्ट रूप से होती है. भले ही, आपने प्रोसेस देखी हो या नहीं.
+Notez que les jetons de réflexion sont facturés par défaut pour les modèles de réflexion, car le [processus de réflexion](#thinking-process) se produit toujours par défaut, que vous le consultiez ou non.
 
-## इमेज जनरेट करने के अन्य मोड
+## Autres modes de génération d'images
 
-इमेज जनरेट करने के लिए, Nano Banana मॉडल का इस्तेमाल करने का सुझाव दिया जाता है. हालांकि, इमेज जनरेट करने के लिए खास तौर पर बनाए गए मॉडल भी इस्तेमाल किए जा सकते हैं:
+Bien que les modèles de génération d'images Nano Banana soient recommandés pour la plupart des cas d'utilisation, vous pouvez également explorer des modèles de génération d'images dédiés :
 
-- **Imagen**: Google के लेगसी टेक्स्ट-टू-इमेज मॉडल (बंद कर दिए गए हैं).
-- **[Veo](https://ai.google.dev/gemini-api/docs/video?hl=hi)**: Google का वीडियो जनरेट करने वाला मॉडल.
+- **Imagen** : anciens modèles Google de conversion de texte en image (arrêtés).
+- **[Veo](https://ai.google.dev/gemini-api/docs/video?hl=fr)** : modèle de génération de vidéos de Google.
 
-## एक साथ कई इमेज जनरेट करना
+## Générer des images par lot
 
-इस पेज पर बताई गई इमेज जनरेट करने की सभी सुविधाओं को, [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi#image-generation) का इस्तेमाल करके बैच जॉब के तौर पर भी चलाया जा सकता है. अगर आपको कई इमेज जनरेट करनी हैं, तो यह सबसे सही विकल्प है. आपको 24 घंटे के अंदर जवाब मिल जाएगा. इसके बदले, आपको ज़्यादा दर सीमाएं मिलेंगी.
+Toutes les fonctionnalités de génération d'images décrites sur cette page peuvent également être exécutées en tant que jobs par lot à l'aide de l'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr#image-generation), ce qui est idéal si vous devez générer de nombreuses images.Vous bénéficiez de limites de fréquence plus élevées en échange d'un délai de traitement pouvant aller jusqu'à 24 heures.
 
-## प्रॉम्प्ट से जुड़ी गाइड और रणनीतियां
+## Guide et stratégies de requête
 
-इस सेक्शन में, इमेज जनरेट करने और उनमें बदलाव करने के सामान्य वर्कफ़्लो के लिए, प्रॉम्प्ट के उदाहरण और टेंप्लेट दिए गए हैं. हर उदाहरण में, दोबारा इस्तेमाल किया जा सकने वाला टेंप्लेट और Interactions API के लिए एक सैंपल प्रॉम्प्ट शामिल होता है.
+Cette section fournit des exemples et des modèles de requêtes pour les workflows courants de génération et de modification d'images. Chaque exemple inclut un modèle réutilisable et un exemple d'invite pour l'API Interactions.
 
-### इमेज जनरेट करने के लिए प्रॉम्प्ट
+### Requêtes pour générer des images
 
-यहां दिए गए उदाहरणों में बताया गया है कि अलग-अलग तरह की इमेज जनरेट करने के लिए, टेक्स्ट प्रॉम्प्ट का इस्तेमाल कैसे किया जाता है.
+Les exemples suivants montrent comment utiliser des requêtes textuelles pour générer différents types d'images.
 
-#### 1. असल में खींची गई फ़ोटो जैसे दिखने वाले सीन
+#### 1. Scènes photoréalistes
 
-किसी सीन के बारे में पूरी जानकारी देना. प्रॉम्प्ट में जितनी ज़्यादा जानकारी दी जाएगी, नतीजों पर आपका उतना ही ज़्यादा कंट्रोल होगा.
+Décrivez une scène de manière très détaillée. Plus vous serez précis, plus vous aurez de contrôle sur les résultats.
 
-### टेंप्लेट
+### Modèle
 
 ```
 A photorealistic [type of shot] of a [subject description] in a [setting
@@ -2431,7 +2438,7 @@ description]. [Description of the light]. Shot from a [camera angle]
 with a [lens type].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.
@@ -2447,7 +2454,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
     response_format=[
         {
@@ -2475,7 +2482,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
     response_format: [
       {
@@ -2527,7 +2534,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9."))
@@ -2547,7 +2554,7 @@ if (interaction.outputImage().isPresent()
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2580,7 +2587,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput("A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9."),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -2613,7 +2620,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "A photorealistic wide-angle shot of a vibrant coral reef teeming with tropical fish. Crystal-clear turquoise water with sunbeams filtering down from the surface, illuminating a sea turtle gliding gracefully over the coral. Shot from a low perspective with a wide-angle lens. Aspect ratio 16:9.",
     "response_format": {
       "type": "image",
@@ -2623,11 +2630,11 @@ curl -s -X POST \
   }'
 ```
 
-#### 2. स्टाइलिश इलस्ट्रेशन और स्टिकर
+#### 2. Illustrations et autocollants stylisés
 
-आर्टिस्टिक स्टाइल, विषय, और मीडियम के बारे में बताएं. एक जैसे नतीजे पाने के लिए, विज़ुअल की जानकारी (बोल्ड लाइन, रंग वगैरह) के बारे में साफ़ तौर पर बताएँ.
+Décrivez le style artistique, le sujet et le support. Soyez précis sur les détails visuels (lignes en gras, couleurs, etc.) pour obtenir des résultats cohérents.
 
-### टेंप्लेट
+### Modèle
 
 ```
 A [style] of a [subject, with details about accessories or actions]
@@ -2635,7 +2642,7 @@ doing [activity]. The design features [visual qualities, e.g., bold outlines,
 cel-shading, etc.] and [color/background preference].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.
@@ -2650,7 +2657,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.",
 )
 
@@ -2674,7 +2681,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white.",
   });
   for (const step of interaction.steps) {
@@ -2716,7 +2723,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white."))
@@ -2747,7 +2754,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2773,7 +2780,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It's munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white."),
         }),
     })
@@ -2809,20 +2816,20 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "A kawaii-style sticker of a happy red panda wearing a tiny bamboo hat. It is munching on a green bamboo leaf. The design features bold, clean outlines, simple cel-shading, and a vibrant color palette. The background must be white."
   }'
 ```
 
-![खुश दिख रहे लाल रंग के...](https://ai.google.dev/static/gemini-api/docs/images/red_panda_sticker.png?hl=hi)
+![Autocollant de style kawaii représentant un...](https://ai.google.dev/static/gemini-api/docs/images/red_panda_sticker.png?hl=fr)
 
-खुश रेड पांडा का कावाई स्टाइल वाला स्टिकर...
+Un autocollant de style kawaii représentant un panda roux joyeux…
 
-#### 3. इमेज में मौजूद टेक्स्ट सटीक होना चाहिए
+#### 3. Texte précis dans les images
 
-Gemini, टेक्स्ट को बेहतरीन तरीके से रेंडर करता है. टेक्स्ट, फ़ॉन्ट स्टाइल (जानकारी के साथ), और पूरे डिज़ाइन के बारे में साफ़ तौर पर बताएं. प्रोफ़ेशनल ऐसेट बनाने के लिए, Gemini 3 Pro Image का इस्तेमाल करें.
+Gemini excelle dans le rendu de texte. Décrivez clairement le texte, le style de police et la conception globale. Utilisez Gemini 3 Pro Image pour produire des assets professionnels.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Create a [image type] for [brand/concept] with the text "[text to render]"
@@ -2830,7 +2837,7 @@ in a [font style]. The design should be [style description], with a
 [color scheme].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.
@@ -2845,7 +2852,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
     response_format={"type": "image", "aspect_ratio": "1:1"},
 )
@@ -2870,7 +2877,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
     response_format: { type: "image", aspect_ratio: "1:1" },
   });
@@ -2924,7 +2931,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way."))
@@ -2956,7 +2963,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -2988,7 +2995,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput("Create a modern, minimalist logo for a coffee shop called 'The Daily Grind'. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way."),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -3025,7 +3032,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "Create a modern, minimalist logo for a coffee shop called The Daily Grind. The text should be in a clean, bold, sans-serif font. The color scheme is black and white. Put the logo in a circle. Use a coffee bean in a clever way.",
     "response_format": {
       "type": "image",
@@ -3034,15 +3041,15 @@ curl -s -X POST \
   }'
 ```
 
-!['द डेली ग्राइंड' नाम की कॉफ़ी शॉप के लिए, मॉडर्न और कम से कम डिज़ाइन वाला लोगो बनाओ...](https://ai.google.dev/static/gemini-api/docs/images/logo_example.jpg?hl=hi)
+![Crée un logo moderne et minimaliste pour un café appelé &quot;The Daily Grind&quot;…](https://ai.google.dev/static/gemini-api/docs/images/logo_example.jpg?hl=fr)
 
-'The Daily Grind' नाम की कॉफ़ी शॉप के लिए, मॉडर्न और कम से कम डिज़ाइन वाला लोगो बनाओ...
+Crée un logo moderne et minimaliste pour un café appelé "The Daily Grind"…
 
-#### 4. प्रॉडक्ट के मॉकअप और कमर्शियल फ़ोटोग्राफ़ी
+#### 4. Maquettes de produits et photographie commerciale
 
-यह ई-कॉमर्स, विज्ञापन या ब्रैंडिंग के लिए, साफ़-सुथरे और प्रोफ़ेशनल लुक वाले प्रॉडक्ट शॉट बनाने के लिए बेहतरीन है.
+Idéal pour créer des photos de produits claires et professionnelles pour l'e-commerce, la publicité ou le branding.
 
-### टेंप्लेट
+### Modèle
 
 ```
 A high-resolution, studio-lit product photograph of a [product description]
@@ -3052,7 +3059,7 @@ a [angle type] to showcase [specific feature]. Ultra-realistic, with sharp
 focus on [key detail]. [Aspect ratio].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 A high-resolution, studio-lit product photograph of a minimalist ceramic
@@ -3072,7 +3079,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image.",
 )
 
@@ -3096,7 +3103,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image.",
   });
   for (const step of interaction.steps) {
@@ -3138,7 +3145,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image."))
@@ -3169,7 +3176,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -3195,7 +3202,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image."),
         }),
     })
@@ -3231,20 +3238,20 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "A high-resolution, studio-lit product photograph of a minimalist ceramic coffee mug in matte black, presented on a polished concrete surface. The lighting is a three-point softbox setup designed to create soft, diffused highlights and eliminate harsh shadows. The camera angle is a slightly elevated 45-degree shot to showcase its clean lines. Ultra-realistic, with sharp focus on the steam rising from the coffee. Square image."
   }'
 ```
 
-![स्टूडियो में ली गई, हाई रिज़ॉल्यूशन वाली प्रॉडक्ट की फ़ोटो दिखाई गई है. इसमें एक मिनिमलिस्टिक सिरेमिक कॉफ़ी मग...](https://ai.google.dev/static/gemini-api/docs/images/product_mockup.png?hl=hi)
+![Photo de produit en haute résolution et éclairée en studio d'une tasse à café minimaliste en céramique…](https://ai.google.dev/static/gemini-api/docs/images/product_mockup.png?hl=fr)
 
-स्टूडियो में ली गई, हाई रिज़ॉल्यूशन वाली, सिरेमिक के एक छोटे कॉफ़ी मग की फ़ोटो...
+Photo de produit en haute résolution et éclairée en studio d'un mug à café minimaliste en céramique…
 
-#### 5. मिनिमलिस्ट और नेगेटिव स्पेस वाला डिज़ाइन
+#### 5. Design minimaliste et espace négatif
 
-यह वेबसाइटों, प्रज़ेंटेशन या मार्केटिंग के ऐसे मटीरियल के लिए बैकग्राउंड बनाने के लिए बेहतरीन है जहां टेक्स्ट को ओवरले किया जाएगा.
+Idéal pour créer des arrière-plans pour des sites Web, des présentations ou des supports marketing sur lesquels du texte sera superposé.
 
-### टेंप्लेट
+### Modèle
 
 ```
 A minimalist composition featuring a single [subject] positioned in the
@@ -3253,7 +3260,7 @@ A minimalist composition featuring a single [subject] positioned in the
 [Aspect ratio].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 A minimalist composition featuring a single, delicate red maple leaf
@@ -3271,7 +3278,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image.",
 )
 
@@ -3295,7 +3302,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image.",
   });
   for (const step of interaction.steps) {
@@ -3337,7 +3344,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image."))
@@ -3368,7 +3375,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -3394,7 +3401,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image."),
         }),
     })
@@ -3430,26 +3437,26 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "A minimalist composition featuring a single, delicate red maple leaf positioned in the bottom-right of the frame. The background is a vast, empty off-white canvas, creating significant negative space for text. Soft, diffused lighting from the top left. Square image."
   }'
 ```
 
-![एक मिनिमलिस्ट कंपोज़िशन, जिसमें मेपल का एक लाल पत्ता दिखाया गया है...](https://ai.google.dev/static/gemini-api/docs/images/minimalist_design.png?hl=hi)
+![Composition minimaliste représentant une seule et délicate feuille d'érable rouge…](https://ai.google.dev/static/gemini-api/docs/images/minimalist_design.png?hl=fr)
 
-कम से कम कॉम्पोज़िशन वाली इमेज में, मेपल की एक लाल पत्ती को दिखाया गया है...
+Composition minimaliste mettant en scène une seule et délicate feuille d'érable rouge…
 
-#### 6. सीक्वेंशियल आर्ट (कॉमिक पैनल / स्टोरीबोर्ड)
+#### 6. Art séquentiel (panneau de bande dessinée / storyboard)
 
-यह किरदार की कंसिस्टेंसी और सीन के ब्यौरे के आधार पर, विज़ुअल स्टोरीटेलिंग के लिए पैनल बनाता है. टेक्स्ट और कहानी कहने की क्षमता के साथ सटीक जवाब पाने के लिए, ये प्रॉम्प्ट Gemini 3 Pro और Gemini 3.1 Flash Image के साथ सबसे अच्छे तरीके से काम करते हैं.
+S'appuie sur la cohérence des personnages et la description des scènes pour créer des panneaux de narration visuelle. Pour obtenir des résultats précis avec du texte et des capacités de narration, ces requêtes fonctionnent mieux avec Gemini 3 Pro et Gemini 3.1 Flash Image.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Make a 3 panel comic in a [style]. Put the character in a [type of scene].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene.
@@ -3469,7 +3476,7 @@ with open('/path/to/your/man_in_white_glasses.jpg', 'rb') as f:
 text_input = "Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene."
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {"type": "text", "text": text_input},
         {
@@ -3513,7 +3520,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -3572,7 +3579,7 @@ List<Content> contents = Arrays.asList(textContent, imageContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -3601,7 +3608,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -3644,7 +3651,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -3680,7 +3687,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": [
       {"type": "text", "text": "Make a 3 panel comic in a gritty, noir art style with high-contrast black and white inks. Put the character in a humurous scene."},
       {"type": "image", "data": "<BASE64_IMAGE_DATA>", "mime_type": "image/jpeg"}
@@ -3690,15 +3697,15 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| इनपुट | आउटपुट |
-| सफ़ेद चश्मा पहने हुए व्यक्ति की इमेज   इनपुट इमेज | ग्रिटी, नोइर आर्ट स्टाइल में तीन पैनल वाली कॉमिक बनाओ...   गहरे रंग वाली, नॉयर आर्ट स्टाइल में तीन पैनल वाली कॉमिक बनाओ... |
+| Entrée | Sortie |
+| Homme portant des lunettes blanches   Image d'entrée | Crée une bande dessinée en trois cases dans un style noir et réaliste…   Crée une bande dessinée en trois cases dans un style artistique noir et réaliste… |
 
-#### 7. Google Search से सटीक जानकारी पाने की सुविधा
+#### 7. Ancrage avec la recherche Google
 
-Google Search का इस्तेमाल करके, हाल ही की या रीयल-टाइम जानकारी के आधार पर इमेज जनरेट करें.
-यह सुविधा, खबरों, मौसम की जानकारी, और समय के हिसाब से ज़रूरी अन्य विषयों के लिए फ़ायदेमंद है.
+Utilisez la recherche Google pour générer des images basées sur des informations récentes ou en temps réel.
+Cette fonctionnalité est utile pour les actualités, la météo et d'autres sujets urgents.
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 Make a simple but stylish graphic of last night's Arsenal game in the Champion's League
@@ -3714,7 +3721,7 @@ import base64
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="Make a simple but stylish graphic of last night's Arsenal game in the Champion's League",
     tools=[{"type": "google_search"}],
     response_format={"type": "image", "aspect_ratio": "16:9"},
@@ -3740,7 +3747,7 @@ async function main() {
   const ai = new GoogleGenAI({});
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: "Make a simple but stylish graphic of last night's Arsenal game in the Champion's League",
     tools: [{ type: "google_search" }],
     response_format: { type: "image", aspect_ratio: "16:9", image_size: "2K" },
@@ -3798,7 +3805,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Make a simple but stylish graphic of last night's Arsenal game in the Champion's League"))
@@ -3831,7 +3838,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -3863,7 +3870,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput("Make a simple but stylish graphic of last night's Arsenal game in the Champion's League"),
             Tools: []interactions.Tool{
                 interactions.NewTool(interactions.GoogleSearch{}),
@@ -3903,7 +3910,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "Make a simple but stylish graphic of last nights Arsenal game in the Champions League",
     "tools": [{"type": "google_search"}],
     "response_format": {
@@ -3913,19 +3920,19 @@ curl -s -X POST \
   }'
 ```
 
-![आर्सेनल फ़ुटबॉल टीम के स्कोर का एआई से जनरेट किया गया ग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/football-score.jpg?hl=hi)
+![Image générée par IA d'un score de match de football d'Arsenal](https://ai.google.dev/static/gemini-api/docs/images/football-score.jpg?hl=fr)
 
-आर्सनल फ़ुटबॉल टीम के स्कोर का एआई से जनरेट किया गया ग्राफ़िक
+Graphique généré par IA d'un score de match de football d'Arsenal
 
-### इमेज में बदलाव करने के लिए प्रॉम्प्ट
+### Requêtes pour modifier des images
 
-इन उदाहरणों में, इमेज में बदलाव करने, कंपोज़िशन बनाने, और स्टाइल ट्रांसफ़र करने के लिए, टेक्स्ट प्रॉम्प्ट के साथ इमेज देने का तरीका बताया गया है.
+Ces exemples montrent comment fournir des images en plus de vos requêtes textuelles pour l'édition, la composition et le transfert de style.
 
-#### 1. एलिमेंट जोड़ना और हटाना
+#### 1. Ajouter et supprimer des éléments
 
-कोई इमेज दें और उसमें किए जाने वाले बदलाव के बारे में बताएँ. मॉडल, ओरिजनल इमेज के स्टाइल, रोशनी, और पर्सपेक्टिव से मेल खाएगा.
+Fournissez une image et décrivez la modification. Le modèle correspondra au style, à la luminosité et à la perspective de l'image d'origine.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Using the provided image of [subject], please [add/remove/modify] [element]
@@ -3933,7 +3940,7 @@ to/from the scene. Ensure the change is [description of how the change should
 integrate].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 "Using the provided image of my cat, please add a small, knitted wizard hat
@@ -3955,7 +3962,7 @@ with open('/path/to/your/cat_photo.png', 'rb') as f:
 text_input = """Using the provided image of my cat, please add a small, knitted wizard hat on its head. Make it look like it's sitting comfortably and not falling off."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {"type": "text", "text": text_input},
         {
@@ -3999,7 +4006,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -4058,7 +4065,7 @@ List<Content> contents = Arrays.asList(textContent, imageContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -4087,7 +4094,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -4130,7 +4137,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -4166,7 +4173,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
             {\"type\": \"text\", \"text\": \"Using the provided image of my cat, please add a small, knitted wizard hat on its head. Make it look like it's sitting comfortably and not falling off.\"},
             {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"}
@@ -4176,14 +4183,14 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| इनपुट | आउटपुट |
-| फ़्लफ़ी अदरक रंग की बिल्ली की बिलकुल असली दिखने वाली फ़ोटो..   अदरक के रंग की मुलायम बिल्ली की असल सी लगने वाली तस्वीर... | मेरी बिल्ली की दी गई इमेज का इस्तेमाल करके, कृपया एक छोटी, बुनी हुई जादूगर की टोपी जोड़ें...   मेरी बिल्ली की दी गई इमेज का इस्तेमाल करके, कृपया एक छोटी, बुनी हुई जादूगर की टोपी जोड़ें... |
+| Entrée | Sortie |
+| Image photoréaliste d'un chat roux duveteux.   Une image photoréaliste d'un chat roux au poil soyeux… | À partir de l'image fournie de mon chat, ajoute un petit chapeau de magicien tricoté…   À partir de l'image fournie de mon chat, ajoute un petit chapeau de magicien tricoté… |
 
-#### 2. इनपेंटिंग (सिमेंटिक मास्किंग)
+#### 2. Remplissage (masquage sémantique)
 
-इमेज के किसी खास हिस्से में बदलाव करने के लिए, बातचीत के दौरान "मास्क" तय करें. इससे इमेज के बाकी हिस्सों में कोई बदलाव नहीं होगा.
+Définissez de manière conversationnelle un "masque" pour modifier une partie spécifique d'une image tout en laissant le reste intact.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Using the provided image, change only the [specific element] to [new
@@ -4191,7 +4198,7 @@ element/description]. Keep everything else in the image exactly the same,
 preserving the original style, lighting, and composition.
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 "Using the provided image of a living room, change only the blue sofa to be
@@ -4213,7 +4220,7 @@ with open('/path/to/your/living_room.png', 'rb') as f:
 text_input = """Using the provided image of a living room, change only the blue sofa to be a vintage, brown leather chesterfield sofa. Keep the rest of the room, including the pillows on the sofa and the lighting, unchanged."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {
             "type": "image",
@@ -4257,7 +4264,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -4316,7 +4323,7 @@ List<Content> contents = Arrays.asList(imageContent, textContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -4345,7 +4352,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -4388,7 +4395,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -4424,7 +4431,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"},
         {\"type\": \"text\", \"text\": \"Using the provided image of a living room, change only the blue sofa to be a vintage, brown leather chesterfield sofa. Keep the rest of the room, including the pillows on the sofa and the lighting, unchanged.\"}
@@ -4434,20 +4441,20 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| इनपुट | आउटपुट |
-| मॉडर्न और अच्छी रोशनी वाले लिविंग रूम का वाइड शॉट...   मॉडर्न और अच्छी रोशनी वाले लिविंग रूम का वाइड शॉट... | लिविंग रूम की दी गई इमेज का इस्तेमाल करके, सिर्फ़ नीले सोफ़े को विंटेज, ब्राउन लेदर चेस्टरफ़ील्ड सोफ़े में बदलो...   लिविंग रूम की दी गई इमेज का इस्तेमाल करके, सिर्फ़ नीले रंग के सोफ़े को विंटेज, ब्राउन लेदर चेस्टरफ़ील्ड सोफ़े में बदल दो... |
+| Entrée | Sortie |
+| Plan large d'un salon moderne et bien éclairé…   Plan large d'un salon moderne et bien éclairé… | À partir de l'image fournie d'un salon, remplace uniquement le canapé bleu par un canapé Chesterfield vintage en cuir marron…   À partir de l'image fournie d'un salon, remplace uniquement le canapé bleu par un canapé Chesterfield vintage en cuir marron… |
 
-#### 3. स्टाइल ट्रांसफ़र
+#### 3. Transfert de style
 
-कोई इमेज दें और मॉडल से कहें कि वह उसके कॉन्टेंट को किसी दूसरी कलात्मक स्टाइल में फिर से बनाए.
+Fournissez une image et demandez au modèle de recréer son contenu dans un style artistique différent.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Transform the provided photograph of [subject] into the artistic style of [artist/art style]. Preserve the original composition but render it with [description of stylistic elements].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 "Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows."
@@ -4467,7 +4474,7 @@ with open('/path/to/your/city.png', 'rb') as f:
 text_input = """Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {
             "type": "image",
@@ -4500,7 +4507,7 @@ async function main() {
   const base64Image = imageData.toString("base64");
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: [
       {
         type: "image",
@@ -4566,7 +4573,7 @@ List<Content> contents = Arrays.asList(imageContent, textContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -4595,7 +4602,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -4638,7 +4645,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -4674,7 +4681,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"},
         {\"type\": \"text\", \"text\": \"Transform the provided photograph of a modern city street at night into the artistic style of Vincent van Gogh's 'Starry Night'. Preserve the original composition of buildings and cars, but render all elements with swirling, impasto brushstrokes and a dramatic palette of deep blues and bright yellows.\"}
@@ -4684,14 +4691,14 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| इनपुट | आउटपुट |
-| शहर की व्यस्त सड़क की, असल जैसी दिखने वाली हाई-रिज़ॉल्यूशन फ़ोटो...   शहर की व्यस्त सड़क की असल जैसी दिखने वाली, हाई-रिज़ॉल्यूशन वाली फ़ोटोग्राफ़... | रात में शहर की सड़क की दी गई फ़ोटोग्राफ़ को...   रात के समय की किसी आधुनिक शहर की सड़क की दी गई फ़ोटो को... |
+| Entrée | Sortie |
+| Photo haute résolution et photoréaliste d'une rue animée...   Photo haute résolution et photoréaliste d'une rue animée... | Transforme la photographie fournie d'une rue moderne la nuit…   Transforme la photo fournie d'une rue de ville moderne la nuit… |
 
-#### 4. एडवांस कंपोज़िशन: एक साथ कई इमेज जोड़ना
+#### 4. Composition avancée : combiner plusieurs images
 
-एक नई कंपोज़िट इमेज बनाने के लिए, कॉन्टेक्स्ट के तौर पर कई इमेज उपलब्ध कराएं. यह प्रॉडक्ट के मॉकअप या क्रिएटिव कोलाज के लिए सबसे सही है.
+Fournissez plusieurs images comme contexte pour créer une nouvelle scène composite. C'est l'outil idéal pour les maquettes de produits ou les collages créatifs.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Create a new image by combining the elements from the provided images. Take
@@ -4699,7 +4706,7 @@ the [element from image 1] and place it with/on the [element from image 2].
 The final image should be a [description of the final scene].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 "Create a professional e-commerce fashion photo. Take the blue floral dress
@@ -4724,7 +4731,7 @@ with open('/path/to/your/model.png', 'rb') as f:
 text_input = """Create a professional e-commerce fashion photo. Take the blue floral dress from the first image and let the woman from the second image wear it. Generate a realistic, full-body shot of the woman wearing the dress, with the lighting and shadows adjusted to match the outdoor environment."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
         {
             "type": "image",
@@ -4781,7 +4788,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -4845,7 +4852,7 @@ List<Content> contents = Arrays.asList(dressContent, modelContent, textContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -4874,7 +4881,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -4924,7 +4931,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -4960,7 +4967,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
             {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_1>\"},
             {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_2>\"},
@@ -4971,14 +4978,14 @@ curl -s -X POST \
 
 |  |  |  |
 | --- | --- | --- |
-| पहली इनपुट वैल्यू | दूसरी इनपुट वैल्यू | आउटपुट |
-| न्यूट्रल बैकग्राउंड पर, नीले रंग की फूलों के प्रिंट वाली समर ड्रेस   न्यूट्रल बैकग्राउंड पर नीले रंग की, फूलों के प्रिंट वाली समर ड्रेस | पूरी फ़ोटो में एक महिला को दिखाया गया है. उसने अपने बालों का बन बनाया है...   बालों का जूड़ा बनाए हुए महिला की पूरे शरीर वाली फ़ोटो... | खुली जगह में, नीले रंग के फूलों वाली समर ड्रेस पहने हुए एक महिला   आउटडोर सेटिंग में, नीले रंग की फूलों के प्रिंट वाली समर ड्रेस पहने हुए एक महिला |
+| Entrée 1 | Saisie 2 | Sortie |
+| Robe d'été bleue à fleurs sur fond neutre   Robe d'été bleue à fleurs sur un fond neutre | Photo d'une femme de la tête aux pieds, les cheveux attachés en chignon…   Plan en pied d'une femme avec les cheveux en chignon… | Une femme portant une robe d'été bleue à fleurs dans un cadre extérieur   Une femme portant une robe d'été bleue à fleurs dans un environnement extérieur |
 
-#### 5. बारीकियों को हाई फ़िडेलिटी में सुरक्षित रखना
+#### 5. Préservation des détails haute fidélité
 
-बदलाव करते समय, यह पक्का करें कि ज़रूरी जानकारी (जैसे, चेहरा या लोगो) सुरक्षित रहे. इसके लिए, बदलाव के अनुरोध के साथ-साथ, इनके बारे में ज़्यादा जानकारी दें.
+Pour vous assurer que les détails importants (comme un visage ou un logo) sont conservés lors d'une modification, décrivez-les en détail dans votre demande de modification.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Using the provided images, place [element from image 2] onto [element from
@@ -4987,7 +4994,7 @@ completely unchanged. The added element should [description of how the
 element should integrate].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 "Take the first image of the woman with brown hair, blue eyes, and a neutral
@@ -5013,7 +5020,7 @@ with open('/path/to/your/logo.png', 'rb') as f:
 text_input = """Take the first image of the woman with brown hair, blue eyes, and a neutral expression. Add the logo from the second image onto her black t-shirt. Ensure the woman's face and features remain completely unchanged. The logo should look like it's naturally printed on the fabric, following the folds of the shirt."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(woman_bytes).decode('utf-8')},
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(logo_bytes).decode('utf-8')},
@@ -5054,7 +5061,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -5118,7 +5125,7 @@ List<Content> contents = Arrays.asList(womanContent, logoContent, textContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -5147,7 +5154,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -5197,7 +5204,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -5233,7 +5240,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_1>\"},
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA_2>\"},
@@ -5244,21 +5251,21 @@ curl -s -X POST \
 
 |  |  |  |
 | --- | --- | --- |
-| पहली इनपुट वैल्यू | दूसरी इनपुट वैल्यू | आउटपुट |
-| भूरे बालों और नीली आंखों वाली महिला का प्रोफ़ेशनल हेडशॉट...   भूरे बालों और नीली आँखों वाली एक महिला का प्रोफ़ेशनल हेडशॉट... | अक्षर G और A वाला मॉडर्न ब्रैंड आइडेंटिफ़ायर   G और A अक्षरों वाला मॉडर्न ब्रैंड आइडेंटिफ़ायर | भूरे बालों, नीली आंखों, और सामान्य चेहरे के भाव वाली महिला की पहली इमेज बनाओ...   भूरे बालों, नीली आंखों, और सामान्य चेहरे के भाव वाली महिला की पहली इमेज बनाओ... |
+| Entrée 1 | Saisie 2 | Sortie |
+| Un portrait professionnel d'une femme aux cheveux bruns et aux yeux bleus…   Un portrait professionnel d'une femme aux cheveux bruns et aux yeux bleus… | Identifiant de marque moderne avec les lettres G et A   Identifiant de marque moderne avec les lettres G et A | Prends la première image de la femme aux cheveux bruns, aux yeux bleus et à l'expression neutre…   Prends la première image de la femme aux cheveux bruns, aux yeux bleus et à l'expression neutre… |
 
-#### 6. किसी चीज़ को हकीकत में बदलना
+#### 6. Donner vie à quelque chose
 
-कोई रफ़ स्केच या ड्राइंग अपलोड करें और मॉडल से उसे बेहतर इमेज में बदलने के लिए कहें.
+Importez une esquisse ou un dessin, et demandez au modèle de le transformer en image finalisée.
 
-### टेंप्लेट
+### Modèle
 
 ```
 Turn this rough [medium] sketch of a [subject] into a [style description]
 photo. Keep the [specific features] from the sketch but add [new details/materials].
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 "Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting."
@@ -5278,7 +5285,7 @@ with open('/path/to/your/car_sketch.png', 'rb') as f:
 text_input = """Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting."""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=[
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(sketch_bytes).decode('utf-8')},
       {"type": "text", "text": text_input}
@@ -5314,7 +5321,7 @@ async function main() {
   ];
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: input,
   });
   for (const step of interaction.steps) {
@@ -5372,7 +5379,7 @@ List<Content> contents = Arrays.asList(sketchContent, textContent);
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.ofContent(contents))
         .build();
 
@@ -5401,7 +5408,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -5443,7 +5450,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.1-flash-image"),
+            Model: interactions.Model("gemini-nano-banana-2.1"),
             Input: interactions.NewInteractionsInput(contents),
         }),
     })
@@ -5479,7 +5486,7 @@ curl -s -X POST \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d "{
-      \"model\": \"gemini-3.1-flash-image\",
+      \"model\": \"gemini-nano-banana-2.1\",
       \"input\": [
         {\"type\": \"image\", \"mime_type\":\"image/png\", \"data\": \"<BASE64_IMAGE_DATA>\"},
         {\"type\": \"text\", \"text\": \"Turn this rough pencil sketch of a futuristic car into a polished photo of the finished concept car in a showroom. Keep the sleek lines and low profile from the sketch but add metallic blue paint and neon rim lighting.\"}
@@ -5489,20 +5496,20 @@ curl -s -X POST \
 
 |  |  |
 | --- | --- |
-| इनपुट | आउटपुट |
-| कार का स्केच   कार का रफ़ स्केच | फ़ाइनल कॉन्सेप्ट कार दिखाने वाली इमेज   कार की पॉलिश की गई फ़ोटो |
+| Entrée | Sortie |
+| Croquis d'une voiture   Croquis d'une voiture | Sortie montrant le concept car final   Photo retouchée d'une voiture |
 
-#### 7. कैरेक्टर की स्टाइल एक जैसी रखना: 360 व्यू
+#### 7. Cohérence des personnages : vue à 360°
 
-अलग-अलग ऐंगल से प्रॉम्प्ट देकर, किसी किरदार के 360 डिग्री व्यू जनरेट किए जा सकते हैं. बेहतर नतीजे पाने के लिए, बाद के प्रॉम्प्ट में पहले जनरेट की गई इमेज शामिल करें, ताकि एक जैसी इमेज जनरेट हों. जटिल पोज़ के लिए, चुने गए पोज़ की रेफ़रंस इमेज शामिल करें.
+Vous pouvez générer des vues à 360 degrés d'un personnage en demandant de manière itérative différents angles. Pour obtenir les meilleurs résultats, incluez les images générées précédemment dans les requêtes suivantes afin de maintenir la cohérence. Pour les poses complexes, incluez une image de référence de la pose sélectionnée.
 
-### टेंप्लेट
+### Modèle
 
 ```
 A studio portrait of [person] against [background], [looking forward/in profile looking right/etc.]
 ```
 
-### प्रॉम्प्ट
+### Prompt
 
 ```
 A studio portrait of this man against white, in profile looking right
@@ -5522,7 +5529,7 @@ with open('/path/to/your/man_in_white_glasses.jpg', 'rb') as f:
 text_input = """A studio portrait of this man against white, in profile looking right"""
 
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input={
       {"type": "text", "text": text_input},
       {"type": "image", "mime_type":"image/png", "data": base64.b64encode(image_bytes).decode('utf-8')}
@@ -5541,48 +5548,48 @@ for step in interaction.steps:
 
 |  |  |  |
 | --- | --- | --- |
-| इनपुट | आउटपुट 1 | दूसरा आउटपुट |
-| सफ़ेद चश्मा पहने हुए व्यक्ति की ओरिजनल इमेज   ओरिजनल इमेज | सफ़ेद चश्मा पहने हुए व्यक्ति की दाईं ओर देखते हुए इमेज का आउटपुट   सफ़ेद चश्मा पहने हुए व्यक्ति की दाईं ओर देखते हुए इमेज | सफ़ेद चश्मा पहने हुए व्यक्ति की इमेज, जिसमें वह आगे की ओर देख रहा है   सफ़ेद चश्मा पहने हुए व्यक्ति की आगे की ओर देखते हुए इमेज |
+| Entrée | Sortie 1 | Résultat 2 |
+| Entrée d'origine d'un homme portant des lunettes blanches   Image d'origine | Sortie d'un homme portant des lunettes blanches et regardant vers la droite   Homme portant des lunettes blanches et regardant vers la droite | Sortie d'un homme portant des lunettes blanches et regardant droit devant lui   Homme portant des lunettes blanches et regardant vers l'avant |
 
-### सबसे सही तरीके
+### Bonnes pratiques
 
-अपने नतीजों को बेहतर बनाने के लिए, इन पेशेवर रणनीतियों को अपने वर्कफ़्लो में शामिल करें.
+Pour passer de bons résultats à d'excellents résultats, intégrez ces stratégies professionnelles à votre workflow.
 
-- **ज़्यादा सटीक जानकारी दें:** जितनी ज़्यादा जानकारी दी जाएगी, आपको उतना ज़्यादा कंट्रोल मिलेगा. "फ़ैंटसी आर्मर" के बजाय, इसके बारे में ज़्यादा जानकारी दें: "सजावटी एल्विन प्लेट आर्मर, जिस पर चाँदी के पत्तों के पैटर्न बने हैं. इसमें ऊँची कॉलर और बाज के पंखों के आकार के पॉल्ड्रॉन हैं."
-- **कॉन्टेक्स्ट और मकसद बताएं:** इमेज का *मकसद* बताएं. मॉडल को कॉन्टेक्स्ट की कितनी जानकारी है, इससे फ़ाइनल आउटपुट पर असर पड़ेगा. उदाहरण के लिए, "एक हाई-एंड, कम से कम डिज़ाइन वाले स्किनकेयर ब्रैंड के लिए लोगो बनाओ" से, "एक लोगो बनाओ" की तुलना में बेहतर नतीजे मिलेंगे.
-- **बदलाव करना और बेहतर बनाना:** पहली बार में ही बेहतरीन इमेज मिलने की उम्मीद न रखें. मॉडल की बातचीत वाली सुविधा का इस्तेमाल करके, छोटे-मोटे बदलाव करें. इसके बाद, "यह बहुत अच्छा है, लेकिन क्या रोशनी को थोड़ा और बेहतर किया जा सकता है?" या "सब कुछ वैसा ही रखो, लेकिन किरदार के चेहरे के भाव को थोड़ा और गंभीर बनाओ" जैसे प्रॉम्प्ट का इस्तेमाल करें.
-- **सिलसिलेवार निर्देशों का इस्तेमाल करें:** कई एलिमेंट वाले जटिल सीन के लिए, अपने प्रॉम्प्ट को चरणों में बांटें. "सबसे पहले, सुबह के समय शांत और धुंधले जंगल का बैकग्राउंड बनाओ. इसके बाद, फ़ोरग्राउंड में काई से ढका हुआ, पुराने ज़माने का पत्थर का वेदी जोड़ो.
-  आखिर में, वेदी के ऊपर एक चमकती हुई तलवार रख दो."
-- **"सिमैंटिक नेगेटिव प्रॉम्प्ट" का इस्तेमाल करें:** "कोई कार नहीं" कहने के बजाय, सीन के बारे में पॉज़िटिव तरीके से बताएं: "एक खाली, सुनसान सड़क, जिस पर ट्रैफ़िक का कोई निशान नहीं है."
-- **कैमरे को कंट्रोल करना:** फ़ोटोग्राफ़ी और सिनमैटिक भाषा का इस्तेमाल करके, कंपोज़िशन को कंट्रोल करें. `wide-angle shot`, `macro shot`, `low-angle
-  perspective` जैसे शब्द.
+- **Soyez très précis** : plus vous fournissez de détails, plus vous avez de contrôle. Au lieu de "armure fantastique", décrivez-la : "armure de plates elfique ornée, gravée de motifs en feuille d'argent, avec un col montant et des épaulières en forme d'ailes de faucon".
+- **Fournissez le contexte et l'intention** : expliquez l'*objectif* de l'image. La compréhension du contexte par le modèle influencera le résultat final. Par exemple, "Crée un logo pour une marque de soins de la peau haut de gamme et minimaliste" donnera de meilleurs résultats que "Crée un logo".
+- **Répétez et affinez** : ne vous attendez pas à obtenir une image parfaite du premier coup. Utilisez la nature conversationnelle du modèle pour apporter de petites modifications. Faites un suivi avec des requêtes comme "C'est super, mais peux-tu rendre la lumière un peu plus chaude ?" ou "Garde tout pareil, mais rends l'expression du personnage plus sérieuse."
+- **Utilisez des instructions détaillées** : pour les scènes complexes comportant de nombreux éléments, divisez votre requête en étapes. "Commence par créer un arrière-plan représentant une forêt sereine et brumeuse à l'aube. Ensuite, au premier plan, ajoute un ancien autel de pierre recouvert de mousse.
+  Enfin, placez une seule épée lumineuse sur l'autel."
+- **Utilisez des "prompts négatifs sémantiques"** : au lieu de dire "pas de voitures", décrivez la scène souhaitée de manière positive : "une rue vide et désertée sans aucun signe de circulation".
+- **Contrôlez la caméra** : utilisez un langage photographique et cinématographique pour contrôler la composition. Termes tels que `wide-angle shot`, `macro shot` et `low-angle
+  perspective`.
 
-## सीमाएं
+## Limites
 
-- बेहतरीन परफ़ॉर्मेंस के लिए, इन भाषाओं का इस्तेमाल करें: EN, ar-EG, de-DE, es-MX,
+- Pour des performances optimales, utilisez les langues suivantes : EN, ar-EG, de-DE, es-MX,
   fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
-- इमेज जनरेट करने की सुविधा, ऑडियो इनपुट के साथ काम नहीं करती. वीडियो इनपुट की सुविधा सिर्फ़ Gemini 3.1 Flash Image और Gemini 3.1 Flash Lite Image के लिए उपलब्ध है.
-- मॉडल, हमेशा उतनी ही इमेज जनरेट नहीं करेगा जितनी उपयोगकर्ता ने मांगी हैं.
-- `gemini-2.5-flash-image` में इनपुट के तौर पर ज़्यादा से ज़्यादा तीन इमेज इस्तेमाल की जा सकती हैं. वहीं, `gemini-3-pro-image` में अच्छी क्वालिटी वाली पांच इमेज और कुल 14 इमेज इस्तेमाल की जा सकती हैं. `gemini-3.1-flash-image` एक वर्कफ़्लो में, ज़्यादा से ज़्यादा चार वर्णों के मिलते-जुलते होने और ज़्यादा से ज़्यादा 10 ऑब्जेक्ट के सटीक होने की सुविधा देता है.
-- किसी इमेज के लिए टेक्स्ट जनरेट करते समय, Gemini सबसे अच्छा काम तब करता है, जब पहले टेक्स्ट जनरेट किया जाए और फिर टेक्स्ट के साथ इमेज जनरेट करने के लिए कहा जाए.
-- `gemini-3.1-flash-image` फ़िलहाल, Google Search की मदद से भरोसेमंद स्रोतों से जानकारी लेने की सुविधा, वेब खोज से लोगों की असल दुनिया की इमेज इस्तेमाल करने की सुविधा के साथ काम नहीं करती.
-- जनरेट की गई सभी इमेज में, [SynthID वॉटरमार्क](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=hi) होता है.
+- La génération d'images n'accepte pas les entrées audio. Les entrées vidéo ne sont compatibles qu'avec Gemini Nano Banana 2.1, Gemini 3.1 Flash Image et Gemini 3.1 Flash Lite Image.
+- Le modèle ne respecte pas toujours le nombre exact d'images de sortie que l'utilisateur demande explicitement.
+- `gemini-2.5-flash-image` fonctionne mieux avec un maximum de trois images en entrée, tandis que `gemini-3-pro-image` prend en charge cinq images haute fidélité et jusqu'à 14 images au total. `gemini-nano-banana-2.1` et `gemini-3.1-flash-image` acceptent une ressemblance de caractères allant jusqu'à quatre caractères et une fidélité allant jusqu'à 10 objets dans un même workflow.
+- Lorsque vous générez du texte pour une image, Gemini fonctionne mieux si vous générez d'abord le texte, puis demandez une image avec le texte.
+- L'ancrage `gemini-nano-banana-2.1` et `gemini-3.1-flash-image` avec la recherche Google ne permet pas d'utiliser des images de personnes réelles issues de la recherche sur le Web pour le moment.
+- Toutes les images générées incluent un [filigrane SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr).
 
-## वैकल्पिक कॉन्फ़िगरेशन
+## Configurations facultatives
 
-`response_format` पैरामीटर का इस्तेमाल करके, आउटपुट फ़ॉर्मैट, आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात), और इमेज का साइज़ कॉन्फ़िगर किया जा सकता है.
+Vous pouvez éventuellement configurer le format de sortie, les proportions et la taille de l'image à l'aide du paramètre `response_format`.
 
-### आउटपुट फ़ॉर्मैट
+### Format de sortie
 
-मॉडल डिफ़ॉल्ट रूप से, टेक्स्ट और इमेज, दोनों के जवाब देता है. `response_format` पैरामीटर में इमेज का फ़ॉर्मैट तय करके, जवाब को सिर्फ़ जनरेट की गई इमेज दिखाने के लिए कॉन्फ़िगर किया जा सकता है. इससे बातचीत वाला टेक्स्ट नहीं दिखेगा.
+Par défaut, le modèle renvoie des réponses textuelles et des réponses d'image. Vous pouvez configurer la réponse pour qu'elle ne renvoie que les images générées (en omettant le texte conversationnel) en spécifiant un format d'image dans le paramètre `response_format`.
 
-अगर आपको एक से ज़्यादा मोडैलिटी (उदाहरण के लिए, टेक्स्ट और जनरेट की गई इमेज, दोनों) का अनुरोध करना है, तो `response_format` को फ़ॉर्मैट एंट्री की एक ऐरे पास करें.
+Pour demander plusieurs modalités (par exemple, à la fois le texte et l'image générée), transmettez plutôt un tableau d'entrées de format à `response_format`.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input="Write a short poem about a starry night and generate an image of it.",
     response_format=[
         {"type": "text"},
@@ -5595,7 +5602,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await ai.interactions.create({
-  model: "gemini-3.1-flash-image",
+  model: "gemini-nano-banana-2.1",
   input: "Write a short poem about a starry night and generate an image of it.",
   response_format: [
     { type: "text" },
@@ -5629,7 +5636,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(
             InteractionsInput.of(
                 "Write a short poem about a starry night and generate an image of it."))
@@ -5640,7 +5647,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -5668,7 +5675,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput("Write a short poem about a starry night and generate an image of it."),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -5688,7 +5695,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "Write a short poem about a starry night and generate an image of it.",
     "response_format": [
       { "type": "text" },
@@ -5697,15 +5704,15 @@ curl -s -X POST \
   }'
 ```
 
-### आस्पेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) और इमेज का साइज़
+### Formats et taille d'image
 
-डिफ़ॉल्ट रूप से, मॉडल आउटपुट इमेज के साइज़ को आपकी इनपुट इमेज के साइज़ से मैच करता है. अगर ऐसा नहीं होता है, तो 1:1 स्क्वेयर जनरेट करता है. `type` को `"image"` पर सेट करने पर, `response_format` में मौजूद `aspect_ratio` और `image_size` फ़ील्ड का इस्तेमाल करके, आउटपुट इमेज के आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) और साइज़ को कंट्रोल किया जा सकता है.
+Par défaut, le modèle fait correspondre la taille de l'image de sortie à celle de votre image d'entrée ou génère des carrés au format 1:1. Vous pouvez contrôler le format et la taille de l'image de sortie à l'aide des champs `aspect_ratio` et `image_size` sous `response_format` lorsque `type` est défini sur `"image"`.
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.1-flash-image",
+    model="gemini-nano-banana-2.1",
     input=prompt,
     response_format={
         "type": "image",
@@ -5719,7 +5726,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await ai.interactions.create({
-    model: "gemini-3.1-flash-image",
+    model: "gemini-nano-banana-2.1",
     input: prompt,
     response_format: {
       type: "image",
@@ -5757,7 +5764,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-flash-image"))
+        .model(Model.of("gemini-nano-banana-2.1"))
         .input(InteractionsInput.of(prompt))
         .responseFormat(format)
         .build();
@@ -5766,7 +5773,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -5798,7 +5805,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:          interactions.Model("gemini-3.1-flash-image"),
+            Model:          interactions.Model("gemini-nano-banana-2.1"),
             Input:          interactions.NewInteractionsInput(prompt),
             ResponseFormat: genai.Ptr(format),
         }),
@@ -5818,7 +5825,7 @@ curl -s -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.1-flash-image",
+    "model": "gemini-nano-banana-2.1",
     "input": "Create a picture of a nano banana dish in a fancy restaurant with a Gemini theme",
     "response_format": {
       "type": "image",
@@ -5828,84 +5835,92 @@ curl -s -X POST \
   }'
 ```
 
-उपलब्ध अलग-अलग रेशियो और जनरेट की गई इमेज के साइज़ की जानकारी, यहां दी गई टेबल में दी गई है:
+Les différents ratios disponibles et la taille de l'image générée sont listés dans les tableaux suivants :
 
-### 3.1 Flash Image
+### Nano Banana 2.1
 
-| आसपेक्ट रेशियो | 512 पिक्सल का रिज़ॉल्यूशन | 500 टोकन | 1K रिज़ॉल्यूशन | 1,000 टोकन | 2K रिज़ॉल्यूशन | 2,000 टोकन | 4K रिज़ॉल्यूशन | 4 हज़ार टोकन |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
-| **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
-| **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
-| **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 600x448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
-| **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
-
-### 3.1 Pro Image
-
-| आसपेक्ट रेशियो | 1K रिज़ॉल्यूशन | 1,000 टोकन | 2K रिज़ॉल्यूशन | 2,000 टोकन | 4K रिज़ॉल्यूशन | 4 हज़ार टोकन |
+| Format | Résolution 1K | 1 000 jetons | Résolution 2K | 2 000 jetons | Résolution 4K | 4 000 jetons |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
-| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
-| **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
-| **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
-| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
-| **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
-| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
-| **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
-| **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
+| **1:1** | 1024x1024 | 1120 | 2048 x 2048 | 1680 | 4 096 x 4 096 | 2520 |
+| **1:4** | 512 x 2 048 | 1120 | 1024x4096 | 1680 | 2048 x 8192 | 2520 |
+| **1:8** | 384 x 3 072 | 1120 | 768 x 6 144 | 1680 | 1536 x 12288 | 2520 |
+| **2:3** | 848 x 1 264 | 1120 | 1 696 x 2 528 | 1680 | 3392 x 5056 | 2520 |
+| **3:2** | 1264x848 | 1120 | 2 528 x 1 696 | 1680 | 5056 x 3392 | 2520 |
+| **3:4** | 896 x 1200 | 1120 | 1792x2400 | 1680 | 3 584 x 4 800 | 2520 |
+| **4:1** | 2048 x 512 | 1120 | 4 096 x 1 024 | 1680 | 8 192 x 2 048 | 2520 |
+| **4:3** | 1200x896 | 1120 | 2400x1792 | 1680 | 4 800 x 3 584 | 2520 |
+| **4:5** | 928 x 1 152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | 1152x928 | 1120 | 2304x1856 | 1680 | 4608 x 3712 | 2520 |
+| **8:1** | 3072 x 384 | 1120 | 6 144 x 768 | 1680 | 12 288 x 1 536 | 2520 |
+| **9:16** | 768 x 1 376 | 1120 | 1536 x 2752 | 1680 | 3072 x 5504 | 2520 |
+| **16:9** | 1376x768 | 1120 | 2752 x 1536 | 1680 | 5504 x 3072 | 2520 |
+| **21:9** | 1584x672 | 1120 | 3168x1344 | 1680 | 6336 x 2688 | 2520 |
 
-### Gemini 2.5 Flash की इमेज
+### 3.1 Image Flash
 
-| आसपेक्ट रेशियो | रिज़ॉल्यूशन | टोकन |
+| Format | Résolution de 512 px | 500 jetons | Résolution 1K | 1 000 jetons | Résolution 2K | 2 000 jetons | Résolution 4K | 4 000 jetons |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **1:1** | 512 x 512 | 747 | 1024x1024 | 1120 | 2048 x 2048 | 1680 | 4 096 x 4 096 | 2520 |
+| **1:4** | 256 x 1 024 | 747 | 512 x 2 048 | 1120 | 1024x4096 | 1680 | 2048 x 8192 | 2520 |
+| **1:8** | 192x1536 | 747 | 384 x 3 072 | 1120 | 768 x 6 144 | 1680 | 1536 x 12288 | 2520 |
+| **2:3** | 424 x 632 | 747 | 848 x 1 264 | 1120 | 1 696 x 2 528 | 1680 | 3392 x 5056 | 2520 |
+| **3:2** | 632 x 424 | 747 | 1264x848 | 1120 | 2 528 x 1 696 | 1680 | 5056 x 3392 | 2520 |
+| **3:4** | 448 x 600 | 747 | 896 x 1200 | 1120 | 1792x2400 | 1680 | 3 584 x 4 800 | 2520 |
+| **4:1** | 1024x256 | 747 | 2048 x 512 | 1120 | 4 096 x 1 024 | 1680 | 8 192 x 2 048 | 2520 |
+| **4:3** | 600 x 448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4 800 x 3 584 | 2520 |
+| **4:5** | 464 x 576 | 747 | 928 x 1 152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | 576 x 464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608 x 3712 | 2520 |
+| **8:1** | 1536x192 | 747 | 3072 x 384 | 1120 | 6 144 x 768 | 1680 | 12 288 x 1 536 | 2520 |
+| **9:16** | 384 x 688 | 747 | 768 x 1 376 | 1120 | 1536 x 2752 | 1680 | 3072 x 5504 | 2520 |
+| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752 x 1536 | 1680 | 5504 x 3072 | 2520 |
+| **21:9** | 792 x 168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336 x 2688 | 2520 |
+
+### 3.1 Pro Image
+
+| Format | Résolution 1K | 1 000 jetons | Résolution 2K | 2 000 jetons | Résolution 4K | 4 000 jetons |
+| --- | --- | --- | --- | --- | --- | --- |
+| **1:1** | 1024x1024 | 1120 | 2048 x 2048 | 1120 | 4 096 x 4 096 | 2000 |
+| **2:3** | 848 x 1 264 | 1120 | 1 696 x 2 528 | 1120 | 3392 x 5056 | 2000 |
+| **3:2** | 1264x848 | 1120 | 2 528 x 1 696 | 1120 | 5056 x 3392 | 2000 |
+| **3:4** | 896 x 1200 | 1120 | 1792x2400 | 1120 | 3 584 x 4 800 | 2000 |
+| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4 800 x 3 584 | 2000 |
+| **4:5** | 928 x 1 152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
+| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608 x 3712 | 2000 |
+| **9:16** | 768 x 1 376 | 1120 | 1536 x 2752 | 1120 | 3072 x 5504 | 2000 |
+| **16:9** | 1376x768 | 1120 | 2752 x 1536 | 1120 | 5504 x 3072 | 2000 |
+| **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336 x 2688 | 2000 |
+
+### Gemini 2.5 Flash Image
+
+| Format | Solution | Jetons |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
-| 2:3 | 832x1248 | 1290 |
-| 3:2 | 1248x832 | 1290 |
-| 3:4 | 864x1184 | 1290 |
-| 4:3 | 1184x864 | 1290 |
-| 4:5 | 896x1152 | 1290 |
+| 2:3 | 832 x 1 248 | 1290 |
+| 3:2 | 1 248 x 832 | 1290 |
+| 3:4 | 864 x 1 184 | 1290 |
+| 4:3 | 1 184 x 864 | 1290 |
+| 4:5 | 896 x 1 152 | 1290 |
 | 5:4 | 1152x896 | 1290 |
-| 9:16 | 768x1344 | 1290 |
+| 9:16 | 768 x 1 344 | 1290 |
 | 16:9 | 1344x768 | 1290 |
-| 21:9 | 1536x672 | 1290 |
+| 21:9 | 1 536 x 672 | 1290 |
 
-## मॉडल चुनने की सेटिंग
+## Quand utiliser Imagen ?
 
-इस्तेमाल के अपने उदाहरण के लिए, सबसे सही मॉडल चुनें.
+Imagen a été arrêté et n'est plus disponible via l'API Gemini.
+Utilisez Nano Banana pour générer et retoucher des images.
 
-- **Gemini 3.1 Flash Image (Nano Banana 2)** को इमेज जनरेट करने के लिए इस्तेमाल करें. यह सबसे अच्छा मॉडल है. यह कीमत और इंतज़ार के समय के हिसाब से सबसे अच्छा परफ़ॉर्म करता है और सबसे ज़्यादा इंटेलिजेंट है. ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-3.1-flash-image) और [क्षमताएं](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=hi) वाला पेज देखें.
-- **Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite)**, इमेज जनरेट करने वाले मॉडल में सबसे कारगर मॉडल है. यह इंतज़ार का समय बहुत कम रखने से जुड़ी सेटिंग देता है. साथ ही, इमेज जनरेट करने और उनमें बदलाव करने के लिए कम शुल्क लेता है.
-  ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-3.1-flash-lite-image) और [सुविधाओं](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=hi) वाला पेज देखें.
-- **Gemini 3 Pro Image (Nano Banana Pro)** को प्रोफ़ेशनल ऐसेट प्रोडक्शन और मुश्किल निर्देशों के लिए डिज़ाइन किया गया है. इस मॉडल में ये सुविधाएं हैं:
-  Google Search का इस्तेमाल करके, असल दुनिया से जुड़ी जानकारी देना. इसमें "सोचना" प्रोसेस डिफ़ॉल्ट रूप से शामिल होती है. यह प्रोसेस, जवाब जनरेट करने से पहले कंपोज़िशन को बेहतर बनाती है. साथ ही, यह 4K रिज़ॉल्यूशन तक की इमेज जनरेट कर सकता है. ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-3-pro-image) और [क्षमताएं](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=hi) वाला पेज देखें.
-- **Gemini 2.5 Flash Image (Nano Banana)** को तेज़ी से और असरदार तरीके से काम करने के लिए डिज़ाइन किया गया है. इस मॉडल को, कम समय में ज़्यादा काम करने के लिए ऑप्टिमाइज़ किया गया है. यह 1024 पिक्सल के रिज़ॉल्यूशन पर इमेज जनरेट करता है. ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-2.5-flash-image) और [क्षमताएं](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi) पेज देखें.
+## Étape suivante
 
-### Imagen का इस्तेमाल कब करें
+- Consultez le [guide Veo](https://ai.google.dev/gemini-api/docs/video?hl=fr) pour découvrir comment générer des vidéos avec l'API Gemini.
+- Pour en savoir plus sur les modèles Gemini, consultez [Modèles Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr).
 
-Imagen को बंद कर दिया गया है. अब यह Gemini API के ज़रिए उपलब्ध नहीं है.
-इमेज जनरेट करने और उनमें बदलाव करने के लिए, Nano Banana का इस्तेमाल करें.
+Envoyer des commentaires
 
-## आगे क्या करना है
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-- Gemini API की मदद से वीडियो जनरेट करने का तरीका जानने के लिए, [Veo गाइड](https://ai.google.dev/gemini-api/docs/video?hl=hi) देखें.
-- Gemini के मॉडल के बारे में ज़्यादा जानने के लिए, [Gemini के मॉडल](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi) लेख पढ़ें.
+Dernière mise à jour le 2026/10/09 (UTC).
 
-सुझाव भेजें
+Voulez-vous nous donner plus d'informations ?
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
-
-आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
-
-क्या आपको हमें और कुछ बताना है?
-
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/09 (UTC)."],[],[]]

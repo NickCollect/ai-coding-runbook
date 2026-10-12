@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=fr
-fetched_at: 2026-10-05T06:28:38.925341+00:00
-title: "R\u00e9solution multim\u00e9dia \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=tr
+fetched_at: 2026-10-12T06:50:42.852407+00:00
+title: "Medya \u00e7\u00f6z\u00fcn\u00fcrl\u00fc\u011f\u00fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-# Résolution multimédia
+# Medya çözünürlüğü
 
-Le paramètre `media_resolution` contrôle la façon dont l'API Gemini traite les entrées multimédias telles que les images, les vidéos, l'audio et les documents PDF en déterminant le **nombre maximal de jetons** alloués aux entrées multimédias. Cela vous permet d'équilibrer la qualité de la réponse par rapport à la latence et au coût. Alors que les entrées visuelles et de documents adaptent l'allocation de jetons en fonction du paramètre de résolution, les entrées audio sont tokenisées à un taux fixe par seconde, quel que soit le niveau de résolution. Pour connaître les différents paramètres, les valeurs par défaut et leur correspondance avec les jetons, consultez la section [Nombre de jetons](#token-counts).
+`media_resolution` parametresi, medya girişleri için ayrılan **maksimum jeton sayısını** belirleyerek Gemini API'nin resim, video, ses ve PDF belgeleri gibi medya girişlerini nasıl işleyeceğini kontrol eder. Bu sayede, yanıt kalitesini gecikme ve maliyetle dengelemenize olanak tanır. Görsel ve belge girişleri, çözünürlük ayarına göre jeton dağıtımını ölçeklendirirken ses girişleri, tüm çözünürlük seviyelerinde saniyede sabit bir hızda jetonlaştırılır. Farklı ayarlar, varsayılan değerler ve bunların jetonlarla nasıl eşleştiği hakkında bilgi edinmek için [Jeton sayıları](#token-counts) bölümüne bakın.
 
-Vous pouvez configurer la résolution des éléments multimédias individuels (éléments de contenu) dans votre requête (Gemini 3 uniquement).
+İsteğinizdeki (yalnızca Gemini 3) medya çözünürlüğünü tek tek medya nesneleri (içerik öğeleri) için yapılandırabilirsiniz.
 
-## Résolution des contenus multimédias par élément (Gemini 3 uniquement)
+## İçerik öğesi başına medya çözünürlüğü (yalnızca Gemini 3)
 
-Gemini 3 vous permet de définir la résolution des éléments multimédias individuels dans votre requête, ce qui vous permet d'optimiser précisément l'utilisation des jetons. Vous pouvez combiner différents niveaux de résolution dans une même requête. Par exemple, utilisez une haute résolution pour un diagramme complexe et une basse résolution pour une image contextuelle simple.
+Gemini 3, isteğinizdeki her bir medya nesnesi için medya çözünürlüğünü ayarlamanıza olanak tanır ve jeton kullanımında ayrıntılı optimizasyon sunar. Tek bir istekte çözünürlük düzeylerini karıştırabilirsiniz. Örneğin, karmaşık bir şema için yüksek çözünürlük, basit bir bağlamsal resim için düşük çözünürlük kullanabilirsiniz.
 
 ### Python
 
@@ -192,81 +192,81 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Valeurs de résolution disponibles
+## Kullanılabilir çözünürlük değerleri
 
-L'API Gemini définit les niveaux suivants pour la résolution des contenus multimédias :
+Gemini API, medya çözünürlüğü için aşağıdaki düzeyleri tanımlar:
 
-- `unspecified` : paramètre par défaut. Le nombre de jetons pour ce niveau varie considérablement entre Gemini 3 et les modèles Gemini antérieurs.
-- `low` : nombre de jetons inférieur, ce qui permet un traitement plus rapide et un coût plus faible, mais avec moins de détails.
-- `medium` : un équilibre entre le niveau de détail, le coût et la latence.
-- `high` : nombre de jetons plus élevé, ce qui permet au modèle de disposer de plus de détails, mais augmente la latence et le coût.
-- `ultra_high` (par élément de contenu uniquement) : nombre de jetons le plus élevé, requis pour des cas d'utilisation spécifiques tels que l'[utilisation d'un ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr).
+- `unspecified`: Varsayılan ayardır. Bu seviyenin jeton sayısı, Gemini 3 ile önceki Gemini modelleri arasında önemli ölçüde farklılık gösterir.
+- `low`: Daha düşük jeton sayısı, daha hızlı işlem ve daha düşük maliyetle sonuçlanır ancak daha az ayrıntı içerir.
+- `medium`: Ayrıntı, maliyet ve gecikme arasında denge.
+- `high`: Daha yüksek jeton sayısı, gecikme ve maliyet artışı karşılığında modelin çalışması için daha fazla ayrıntı sağlar.
+- `ultra_high` (Yalnızca içerik öğesi başına): En yüksek jeton sayısıdır. [Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) gibi belirli kullanım alanları için gereklidir.
 
-Notez que `high` offre des performances optimales pour la plupart des cas d'utilisation.
+`high` seçeneğinin çoğu kullanım alanında optimum performans sağladığını unutmayın.
 
-Le nombre exact de jetons générés pour chacun de ces niveaux dépend à la fois du **type de contenu multimédia** (image, vidéo, audio, PDF) et de la **version du modèle**.
+Bu seviyelerin her biri için oluşturulan jetonların tam sayısı hem **medya türüne** (resim, video, ses, PDF) hem de **model sürümüne** bağlıdır.
 
-## Nombre de jetons
+## Jeton sayıları
 
-Les tableaux ci-dessous récapitulent le nombre approximatif de jetons pour chaque valeur `media_resolution` et type de support par famille de modèles.
+Aşağıdaki tablolarda, her model ailesi için her `media_resolution` değeri ve medya türüne ait yaklaşık jeton sayıları özetlenmektedir.
 
-**Modèles Gemini 3**
+**Gemini 3 modelleri**
 
-| MediaResolution | Image | Vidéo | Audio | PDF |
+| MediaResolution | Resim | Video | Ses | PDF |
 | --- | --- | --- | --- | --- |
-| `unspecified` (par défaut) | 1120 | 70 | 25 (par seconde) | 560 |
-| `low` | 280 | 70 | 25 (par seconde) | 280 + texte natif |
-| `medium` | 560 | 70 | 25 (par seconde) | 560 + texte natif |
-| `high` | 1120 | 280 | 25 (par seconde) | 1120 + texte natif |
-| `ultra_high` | 2240 | N/A | N/A | N/A |
+| `unspecified` (Varsayılan) | 1120 | 70 | 25 (saniyede) | 560 |
+| `low` | 280 | 70 | 25 (saniyede) | 280 + Yerel Metin |
+| `medium` | 560 | 70 | 25 (saniyede) | 560 + Yerel Metin |
+| `high` | 1120 | 280 | 25 (saniyede) | 1.120 + Yerel Metin |
+| `ultra_high` | 2240 | Yok | Yok | Yok |
 
-## Choisir la bonne résolution
+## Doğru çözünürlüğü seçme
 
-- **Par défaut (`unspecified`)** : commencez par la valeur par défaut. Il est optimisé pour offrir un bon équilibre entre qualité, latence et coût pour la plupart des cas d'utilisation courants.
-- **`low`** : à utiliser dans les scénarios où le coût et la latence sont primordiaux, et où les détails précis sont moins importants.
-- **`medium` / `high`** : augmentez la résolution lorsque la tâche nécessite de comprendre des détails complexes dans le contenu multimédia. Cela est souvent nécessaire pour l'analyse visuelle complexe, la lecture de graphiques ou la compréhension de documents denses.
-- **`ultra_high`** : disponible uniquement pour le paramètre "Par élément de contenu". Recommandé pour des cas d'utilisation spécifiques tels que l'utilisation d'un ordinateur ou lorsque les tests montrent une nette amélioration par rapport à `high`.
-- **Contrôle par élément de contenu (Gemini 3)** : optimise l'utilisation des jetons. Par exemple, dans une requête comportant plusieurs images, utilisez `high` pour un diagramme complexe et `low` ou `medium` pour des images contextuelles plus simples.
+- **Varsayılan (`unspecified`):** Varsayılanla başlayın. En yaygın kullanım alanlarında kalite, gecikme ve maliyet arasında iyi bir denge sağlamak için ayarlanmıştır.
+- **`low`:** Maliyet ve gecikmenin çok önemli olduğu, ayrıntılı bilgilerin ise daha az kritik olduğu senaryolarda kullanılır.
+- **`medium` / `high`:** Görev, medyada karmaşık ayrıntıların anlaşılmasını gerektirdiğinde çözünürlüğü artırın. Bu özellik genellikle karmaşık görsel analiz, grafik okuma veya yoğun belge anlama için gereklidir.
+- **`ultra_high`**: Yalnızca içerik öğesi başına ayar için kullanılabilir. Bilgisayar kullanımı gibi belirli kullanım alanları veya testlerin `high` üzerinde net bir iyileşme gösterdiği durumlarda önerilir.
+- **İçerik öğesi başına kontrol (Gemini 3):** Jeton kullanımını optimize eder. Örneğin, birden fazla resim içeren bir istemde karmaşık bir diyagram için `high`, daha basit bağlamsal resimler için `low` veya `medium` kullanın.
 
-**Paramètres recommandés**
+**Önerilen ayarlar**
 
-Vous trouverez ci-dessous les paramètres de résolution média recommandés pour chaque type de média compatible.
+Aşağıda, desteklenen her medya türü için önerilen medya çözünürlüğü ayarları listelenmiştir.
 
-| Type de support | Réglage recommandé | Nombre maximal de jetons | Conseils d'utilisation |
+| Medya Türü | Önerilen Ayar | Maksimum jeton sayısı | Kullanım Yönergeleri |
 | --- | --- | --- | --- |
-| **Images** | `high` | 1120 | Recommandé pour la plupart des tâches d'analyse d'images afin de garantir une qualité maximale. |
-| **PDF** | `medium` | 560 | Optimal pour la compréhension des documents. La qualité atteint généralement son maximum à `medium`. Augmenter la valeur à `high` améliore rarement les résultats de l'OCR pour les documents standards. |
-| **Vidéo** (général) | `low` (ou `medium`) | 70 (par frame) | **Remarque** : Pour les vidéos, les paramètres `low` et `medium` sont traités de manière identique (70 jetons) afin d'optimiser l'utilisation du contexte. Cela suffit pour la plupart des tâches de reconnaissance et de description d'actions. |
-| **Vidéo** (avec beaucoup de texte) | `high` | 280 (par frame) | Obligatoire uniquement lorsque le cas d'utilisation implique la lecture de texte dense (OCR) ou de petits détails dans les images vidéo. |
-| **Audio** | `unspecified` (par défaut) | 25 (par seconde) | L'audio est tokenisé à un taux fixe de 25 jetons par seconde pour tous les paramètres de résolution compatibles (`unspecified`, `low`, `medium` et `high`). |
+| **Resimler** | `high` | 1120 | Maksimum kaliteyi sağlamak için çoğu görüntü analizi görevinde önerilir. |
+| **PDF'ler** | `medium` | 560 | Belge anlamak için idealdir. Kalite genellikle `medium`'da doygunluğa ulaşır. `high`'ya yükseltmek, standart belgeler için OCR sonuçlarını nadiren iyileştirir. |
+| **Video** (Genel) | `low` (veya `medium`) | 70 (kare başına) | **Not:** Video için `low` ve `medium` ayarları, bağlam kullanımını optimize etmek amacıyla aynı şekilde (70 jeton) değerlendirilir. Bu, çoğu eylem tanıma ve açıklama görevi için yeterlidir. |
+| **Video** (Metin ağırlıklı) | `high` | 280 (kare başına) | Yalnızca kullanım alanında yoğun metinlerin (OCR) veya video karelerindeki küçük ayrıntıların okunması gerektiğinde zorunludur. |
+| **Ses** | `unspecified` (Varsayılan) | 25 (saniyede) | Ses, desteklenen tüm çözünürlük ayarlarında (`unspecified`, `low`, `medium` ve `high`) saniyede 25 jeton sabit hızında jetonlaştırılır. |
 
-Testez et évaluez toujours l'impact des différents paramètres de résolution sur votre application afin de trouver le meilleur compromis entre qualité, latence et coût.
+Kalite, gecikme ve maliyet arasında en iyi dengeyi bulmak için farklı çözünürlük ayarlarının uygulamanız üzerindeki etkisini her zaman test edin ve değerlendirin.
 
-## Relation avec les modes de traitement vidéo
+## Video işleme modlarıyla ilişki
 
-Les paramètres `media_resolution` et de traitement contrôlent différents aspects de l'entrée vidéo :
+`media_resolution` ve işleme parametreleri, video girişinin farklı yönlerini kontrol eder:
 
-- `media_resolution` contrôle la **résolution** de chaque frame (nombre de jetons par frame).
-- Les commandes `processing` / `media_processing` déterminent **le contenu de la vidéo** qui est chargé dans le contexte.
+- `media_resolution`, her karenin **çözünürlüğünü** (kare başına jeton sayısı) kontrol eder.
+- `processing` / `media_processing` kontrolleri, **videodaki hangi içeriğin** bağlama yükleneceğini belirler.
 
-Vous pouvez définir les deux sur la même entrée vidéo. Par exemple, vous pouvez utiliser le traitement agentique avec une résolution média faible pour minimiser l'utilisation totale de jetons pour une longue vidéo.
+İkisini de aynı video girişinde ayarlayabilirsiniz. Örneğin, uzun bir videoda toplam jeton kullanımını en aza indirmek için düşük medya çözünürlüğüyle agentic işlemeyi kullanabilirsiniz.
 
-Pour en savoir plus sur les modes de traitement vidéo, consultez le guide [Comprendre les vidéos avec l'approche agentique](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#agentic-video-understanding).
+Video işleme modları hakkında ayrıntılı bilgi için [Agentic video understanding](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#agentic-video-understanding) (Agentic video anlama) kılavuzuna bakın.
 
-## Résumé de la compatibilité des versions
+## Sürüm uyumluluğu özeti
 
-- La définition de `resolution` sur des éléments de contenu individuels est **exclusive aux modèles Gemini 3**.
+- `resolution` ayarını tek tek içerik öğelerinde belirleme **yalnızca Gemini 3 modellerinde** kullanılabilir.
 
-## Étapes suivantes
+## Sonraki adımlar
 
-- Pour en savoir plus sur les capacités multimodales de l'API Gemini, consultez les guides [Comprendre les images](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr), [Comprendre les vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr), [Comprendre l'audio](https://ai.google.dev/gemini-api/docs/audio?hl=fr) et [Comprendre les documents](https://ai.google.dev/gemini-api/docs/document-processing?hl=fr).
+- Gemini API'nin çok formatlı özellikleri hakkında daha fazla bilgiyi [görüntü anlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr), [video anlama](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr), [ses anlama](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [doküman anlama](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) kılavuzlarında bulabilirsiniz.
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Dernière mise à jour le 2026/09/24 (UTC).
+Son güncelleme tarihi: 2026-09-24 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]

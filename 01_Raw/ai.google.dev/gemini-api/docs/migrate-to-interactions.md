@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=fr
-fetched_at: 2026-10-05T06:31:28.579424+00:00
-title: "Migrer vers l'API Interactions \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=es-419
+fetched_at: 2026-10-12T06:54:16.288385+00:00
+title: "Migra a la API de Interactions \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Envoyer des commentaires
+Enviar comentarios
 
-# Migrer vers l'API Interactions
+# Migra a la API de Interactions
 
-Ce guide vous aide à migrer de l'API `generateContent` vers l'API Interactions.
+Esta guía te ayuda a migrar de la API de `generateContent` a la API de Interactions.
 
-L'API Interactions est le moyen le plus simple et le plus efficace de créer des applications avec les modèles et les agents Gemini. Bien que `generateContent` reste entièrement compatible, nous recommandons l'API Interactions pour tout nouveau développement.
+La API de Interactions es la forma más sencilla y eficaz de crear con modelos y agentes de Gemini. Si bien `generateContent` sigue siendo totalmente compatible, recomendamos la API de Interactions para todo desarrollo nuevo.
 
-### Pourquoi migrer ?
+### ¿Por qué migrar?
 
-L'API Interactions est le moyen le plus simple et le plus efficace de créer des applications avec les modèles et les agents Gemini :
+La API de Interactions es la forma más sencilla y eficaz de crear con modelos y agentes de Gemini:
 
-- **Gestion de l'historique côté serveur** : simplifiez les flux multitours grâce à `previous_interaction_id`. Le serveur active l'état par défaut (`store=true`), mais vous pouvez choisir un comportement sans état en définissant `store=false`.
-- **Étapes d'exécution observables** : les étapes typées facilitent le débogage des flux complexes et le rendu de l'UI pour les événements intermédiaires (comme les réflexions ou les widgets de recherche).
-- **Utilisation d'outils et workflows agentiques** : prise en charge native de l'utilisation d'outils en plusieurs étapes, de l'orchestration et des flux de raisonnement complexes grâce à des étapes d'exécution typées.
-- **Tâches longues et en arrière-plan** : permet de décharger les opérations gourmandes en temps, comme Deep Think et Deep Research, vers des processus en arrière-plan à l'aide de `background=true`.
+- **Administración del historial del servidor**: Se simplificaron los flujos de varios turnos a través de `previous_interaction_id`. El servidor habilita el estado de forma predeterminada (`store=true`), pero puedes habilitar el comportamiento sin estado configurando `store=false`.
+- **Pasos de ejecución observables**: Los pasos escritos facilitan la depuración de flujos complejos y la renderización de la IU para eventos intermedios (como pensamientos o widgets de búsqueda).
+- **Uso de herramientas y flujos de trabajo basados en agentes**: Compatibilidad nativa con el uso de herramientas de varios pasos, la organización y los flujos de razonamiento complejos a través de pasos de ejecución escritos.
+- **Tareas en segundo plano y de larga duración**: Admite la descarga de operaciones que requieren mucho tiempo, como Deep Think y Deep Research, a procesos en segundo plano con `background=true`.
 
-## Entrée/Sortie de base
+## Entrada y salida básicas
 
-Cette section explique comment migrer une simple requête de génération de texte.
+En esta sección, se muestra cómo migrar una solicitud simple de generación de texto.
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-L'API `generateContent` est sans état et renvoie directement la réponse. La structure de réponse encapsule la sortie dans une liste de `candidates`, chacune contenant `content` avec une liste de `parts` à analyser.
+La API de `generateContent` no tiene estado y devuelve la respuesta directamente. La estructura de respuesta ajusta el resultado en una lista de `candidates`, cada uno de los cuales contiene `content` con una lista de `parts` para analizar.
 
 ### Python
 
@@ -151,9 +151,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-L'API Interactions renvoie une ressource d'interaction stockée avec un calendrier `steps`. Bien que vous puissiez inspecter manuellement le tableau `steps` pour trouver les événements intermédiaires, les SDK Google GenAI fournissent des propriétés pratiques directement sur l'objet `Interaction` renvoyé pour accéder au résultat final.
+La API de Interactions devuelve un recurso de interacción almacenado con una cronología de `steps`. Si bien puedes inspeccionar el array `steps` de forma manual para encontrar eventos intermedios, los SDKs de IA generativa de Google proporcionan propiedades convenientes directamente en el objeto `Interaction` devuelto para acceder al resultado final.
 
-La propriété de commodité la plus courante est **`.output_text`** (String), qui extrait et joint automatiquement les blocs `TextContent` consécutifs à la fin de la réponse du modèle. Bien que cela fonctionne parfaitement pour les réponses simples, cela n'inclut pas les blocs de texte précédents séparés par du contenu non textuel (comme des réflexions, des images, de l'audio ou des appels d'outils). Pour les réponses multimodales complexes ou entrelacées, vous devez itérer manuellement sur `steps`.
+La propiedad de conveniencia más común es **`.output_text`** (cadena), que extrae y une automáticamente los bloques `TextContent` consecutivos al final de la respuesta del modelo. Si bien esto funciona perfectamente para respuestas simples, no incluye los bloques de texto anteriores separados por contenido que no es de texto (como pensamientos, imágenes, audio o llamadas a herramientas). Para respuestas multimodales complejas o intercaladas, debes iterar manualmente sobre `steps`.
 
 ### Python
 
@@ -286,17 +286,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Conversations multitours
+## Conversaciones de varios turnos
 
-L'API Interactions stocke les interactions par défaut, ce qui permet la gestion de l'état côté serveur pour les conversations multitours.
+La API de Interactions almacena interacciones de forma predeterminada, lo que permite la administración del estado del servidor para conversaciones de varios turnos.
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-Dans `generateContent`, vous devez gérer manuellement l'historique des conversations à l'aide du tableau `contents` ou d'un assistant de chat côté client.
+En `generateContent`, debes administrar manualmente el historial de conversaciones con el array `contents` o un asistente de chat del cliente.
 
 ### Python
 
-**Utiliser l'assistant de chat (recommandé)**
+**Cómo usar el asistente de chat (recomendado)**
 
 ```
 from google import genai
@@ -311,7 +311,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**Gérer manuellement l'historique**
+**Cómo administrar el historial de forma manual**
 
 ```
 from google import genai
@@ -339,7 +339,7 @@ print(response.text)
 
 ### JavaScript
 
-**Utiliser l'assistant de chat (recommandé)**
+**Cómo usar el asistente de chat (recomendado)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -354,7 +354,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**Gérer manuellement l'historique**
+**Cómo administrar el historial de forma manual**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -498,9 +498,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-L'API Interactions gère l'état sur le serveur. Vous poursuivez une conversation en faisant référence à `previous_interaction_id`.
+La API de Interactions administra el estado en el servidor. Para continuar una conversación, haz referencia al `previous_interaction_id`.
 
 ### Python
 
@@ -678,13 +678,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Entrées multimodales
+## Entradas multimodales
 
-Les deux API acceptent les entrées multimodales (texte, images, vidéos, etc.).
+Ambas APIs admiten entradas multimodales (texto, imágenes, video, etc.).
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-Dans `generateContent`, vous transmettez une liste de `parts` dans le tableau `contents`. La réponse renvoie le résultat dans le `parts` du premier candidat.
+En `generateContent`, pasas una lista de `parts` dentro del array `contents`. La respuesta devuelve el resultado en el `parts` del primer candidato.
 
 ### Python
 
@@ -836,9 +836,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-Dans l'API Interactions, vous transmettez un tableau au champ `input`. Pour récupérer le contenu de sortie, recherchez l'étape `model_output` dans la timeline.
+En la API de Interactions, pasas un array al campo `input`. Para recuperar el contenido de salida, busca el paso `model_output` en la línea de tiempo.
 
 ### Python
 
@@ -1041,13 +1041,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Sortie structurée
+## Resultados estructurados
 
-Pour que le modèle renvoie un fichier JSON correspondant à un schéma spécifique, configurez le format de la réponse.
+Para que el modelo devuelva un objeto JSON que coincida con un esquema específico, configura el formato de respuesta.
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-Dans `generateContent`, vous configurez le format de sortie à l'aide des champs `response_mime_type` et `response_schema` imbriqués dans l'objet `config` (ou `generationConfig`).
+En `generateContent`, configuras el formato de salida con los campos `response_mime_type` y `response_schema` anidados dentro del objeto `config` (o `generationConfig`).
 
 ### Python
 
@@ -1233,9 +1233,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-Dans l'API Interactions, les contrôles du format de sortie sont déplacés vers un tableau `response_format` de premier niveau.
+En la API de Interactions, los controles de formato de salida se mueven a un array `response_format` de nivel superior.
 
 ### Python
 
@@ -1449,13 +1449,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Génération multimodale
+## Generación multimodal
 
-Lorsque vous générez du contenu dans des modalités autres que le texte (comme des images ou de l'audio), la principale différence réside dans la façon dont la réponse structure le contenu multimédia généré.
+Cuando se genera contenido en modalidades más allá del texto (como imágenes o audio), la principal diferencia radica en cómo la respuesta estructura el contenido multimedia generado.
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-Dans `generateContent`, la réponse renvoie le contenu multimédia généré directement dans le `parts` du candidat, généralement sous forme de données base64 dans `inlineData`.
+En `generateContent`, la respuesta devuelve los medios generados directamente en el `parts` del candidato, por lo general, como datos en base64 en `inlineData`.
 
 ```
 # Response structure concept
@@ -1480,9 +1480,9 @@ Dans `generateContent`, la réponse renvoie le contenu multimédia généré dir
 }
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-Dans l'API Interactions, les contenus multimédias générés apparaissent sous forme d'éléments distincts dans le tableau `content` d'une étape `model_output` de la timeline, ce qui permet de maintenir le flux chronologique de l'interaction.
+En la API de Interactions, los medios generados aparecen como elementos distintos dentro del array `content` de un paso `model_output` en la línea de tiempo, lo que mantiene el flujo cronológico de la interacción.
 
 ```
 # Response structure concept
@@ -1508,15 +1508,15 @@ Dans l'API Interactions, les contenus multimédias générés apparaissent sous 
 }
 ```
 
-Cela permet de conserver une analyse des réponses cohérente avec la façon dont les entrées et les sorties de texte sont traitées : tout est une étape de la chronologie.
+Esto mantiene el análisis de la respuesta coherente con la forma en que se manejan las entradas y las salidas de texto: todo es un paso en la línea de tiempo.
 
-## Outils côté serveur
+## Herramientas del servidor
 
-Gemini est compatible avec les outils intégrés côté serveur, comme l'ancrage de la recherche Google. La principale différence réside dans la façon dont la réponse représente l'exécution de l'outil.
+Gemini admite herramientas integradas del servidor, como la fundamentación de la Búsqueda de Google. La principal diferencia es la forma en que la respuesta representa la ejecución de la herramienta.
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-Dans `generateContent`, les outils côté serveur sont en grande partie opaques. Vous activez l'outil et obtenez une réponse finale avec un objet `groundingMetadata` distinct. Il est important de noter que les citations ne sont pas intégrées. `groundingSupports` utilise des index de caractères pour mapper les segments de texte aux sources Web dans `groundingChunks`.
+En `generateContent`, las herramientas del servidor son en gran medida opacas. Habilitas la herramienta y obtienes una respuesta final con un objeto `groundingMetadata` independiente. Es fundamental destacar que las citas no son intercaladas; `groundingSupports` usa índices de caracteres para correlacionar segmentos de texto con fuentes web en `groundingChunks`.
 
 ### Python
 
@@ -1714,11 +1714,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-Dans l'API Interactions, les outils côté serveur offrent une transparence totale de la chronologie. L'API enregistre l'appel et le résultat en tant qu'exécutions `steps` distinctes (`google_search_call` et `google_search_result`), ce qui permet de voir exactement les données récupérées par le modèle.
+En la API de Interactions, las herramientas del servidor proporcionan transparencia total en la línea de tiempo. La API registra la llamada y el resultado como una ejecución `steps` distinta (`google_search_call` y `google_search_result`), lo que expone exactamente qué datos recuperó el modelo.
 
-De plus, l'API renvoie des citations **intégrées**. Au lieu de mapper les index à partir d'un objet de métadonnées distinct, l'élément de texte de l'étape `model_output` contient son propre tableau `annotations` qui renvoie directement à la source.
+Además, la API devuelve citas **en línea**. En lugar de asignar índices desde un objeto de metadatos independiente, el elemento de texto dentro del paso `model_output` contiene su propio array `annotations` que se vincula directamente a la fuente.
 
 ### Python
 
@@ -1945,13 +1945,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Appel de fonction
+## Llamada a función
 
-La structure des appels de fonction et des résultats a également été modifiée pour s'adapter au schéma des étapes.
+La estructura de las llamadas y los resultados de las funciones también cambió para adaptarse al esquema de Steps.
 
-### Avant (`generateContent`)
+### Antes (`generateContent`)
 
-Dans `generateContent`, la réponse renvoie les appels de fonction dans les candidats\*. {Python}
+En `generateContent`, la respuesta devuelve llamadas a funciones dentro de los candidatos.\* {Python}
 
 ```
 ```python
@@ -2219,9 +2219,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-Les appels d'outils et les résultats sont désormais des étapes distinctes dans la chronologie.
+Las llamadas a herramientas y los resultados ahora son pasos distintos en la línea de tiempo.
 
 ### Python
 
@@ -2563,15 +2563,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Streaming
+## Transmisión
 
-Une différence majeure entre le streaming et l'API Interactions est que cette dernière utilise le même point de terminaison avec `"stream": true` dans le corps de la requête, alors que l'API `generateContent` nécessitait d'appeler un point de terminaison dédié (`:streamGenerateContent`).
+Una diferencia clave en la transmisión es que la API de Interactions usa el mismo extremo con `"stream": true` en el cuerpo de la solicitud, mientras que la API de `generateContent` requería llamar a un extremo dedicado (`:streamGenerateContent`).
 
-De plus, les événements de streaming utilisent désormais des types spécialisés pour surveiller le cycle de vie des interactions et suivre les étapes d'exécution tout au long de la chronologie.
+Además, los eventos de transmisión ahora usan tipos especializados para supervisar el ciclo de vida de la interacción y hacer un seguimiento de los pasos de ejecución a lo largo de la línea de tiempo.
 
-### Avant (`generateContentStream`)
+### Antes (`generateContentStream`)
 
-Avec `generateContent`, vous consommez un flux de blocs de réponse.
+Con `generateContent`, consumes un flujo de fragmentos de respuesta.
 
 ### Python
 
@@ -2680,9 +2680,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### Après (API Interactions)
+### Después (API de Interactions)
 
-Dans l'API Interactions, le streaming utilise les événements envoyés par le serveur (SSE) et des types delta spécialisés pour représenter les étapes d'exécution au fur et à mesure qu'elles se produisent.
+En la API de Interactions, la transmisión usa eventos enviados por el servidor (SSE) y tipos de delta especializados para representar los pasos de ejecución a medida que ocurren.
 
 ### Python
 
@@ -2825,7 +2825,7 @@ func main() {
 
 ### REST
 
-# Exemple de sortie de flux SSE
+# Ejemplo de salida de transmisión de SSE
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -2846,13 +2846,13 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### Outils de streaming et appels de fonction
+### Herramientas de transmisión y llamadas a funciones
 
-Le comportement des outils dans le flux a considérablement changé depuis `generateContent` pour offrir un contrôle et une visibilité plus précis.
+El comportamiento de las herramientas en la transmisión cambió significativamente de `generateContent` para proporcionar más control y visibilidad detallados.
 
-#### Avant (`generateContent`)
+#### Antes (`generateContent`)
 
-Avec `generateContent`, les appels de fonction en streaming arrivaient complets en un seul bloc. Vous ne pouviez pas voir les arguments générés en temps réel. Le gestionnaire vérifiait donc simplement la présence d'un objet `functionCall` complet.
+Con `generateContent`, las llamadas a funciones de transmisión llegaban completas en un solo fragmento. No podías ver los argumentos que se generaban en tiempo real, por lo que el controlador simplemente verificaba si había un objeto `functionCall` completo.
 
 ### Python
 
@@ -3018,9 +3018,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### Après (API Interactions)
+#### Después (API de Interactions)
 
-L'API Interactions diffuse les arguments d'appel de fonction caractère par caractère sous forme d'événements `arguments`. L'ensemble du cycle de vie de l'outil (réflexion, appel, résultat et sortie) se déroule en une série d'étapes distinctes.
+La API de Interactions transmite los argumentos de la llamada a la función carácter por carácter como eventos `arguments`. Todo el ciclo de vida de la herramienta (pensamiento, llamada, resultado y salida) se desarrolla como una serie de pasos distintos.
 
 ### Python
 
@@ -3312,12 +3312,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-Envoyer des commentaires
+Enviar comentarios
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Dernière mise à jour le 2026/09/24 (UTC).
+Última actualización: 2026-09-24 (UTC)
 
-Voulez-vous nous donner plus d'informations ?
+¿Quieres brindar más información?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-24 (UTC)"],[],[]]

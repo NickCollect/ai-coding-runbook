@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ko
-fetched_at: 2026-10-05T06:29:58.244027+00:00
-title: "\ud14d\uc2a4\ud2b8 \uc0dd\uc131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ja
+fetched_at: 2026-10-12T07:03:58.994174+00:00
+title: "\u30c6\u30ad\u30b9\u30c8\u751f\u6210 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-의견 보내기
+フィードバックを送信
 
-# 텍스트 생성
+# テキスト生成
 
-Gemini API는 텍스트, 이미지, 동영상, 오디오 입력에서 텍스트 출력을 생성할 수 있습니다.
+Gemini API は、テキスト、画像、動画、音声の入力からテキスト出力を生成できます。
 
-다음은 기본 예입니다.
+基本的な例を以下に示します。
 
 ### Python
 
@@ -36,7 +36,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -54,7 +54,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -128,16 +128,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Google 생성형 AI SDK는 모델의 대답에 액세스하기 위해 반환된 `Interaction` 객체에 직접 편의 속성을 제공합니다.
+Google GenAI SDK は、返された `Interaction` オブジェクトにモデルのレスポンスにアクセスするための便利なプロパティを直接提供します。
 
-가장 일반적인 도우미는 **`interaction.output_text`** (문자열)로, 모델의 대답에서 마지막 텍스트 블록을 반환합니다. 대답이 연속된 여러 `TextContent` 블록으로 분할된 경우 자동으로 결합됩니다.
-`.output_text`에는 텍스트가 아닌 콘텐츠 (예: 생각, 이미지, 오디오, 도구 호출)로 구분된 이전 텍스트 블록이 포함되지 않습니다. 복잡하거나 인터리브된 멀티모달 대답의 경우 대신 `steps`를 수동으로 반복해야 합니다. 기타 미디어 편의성 속성에 대해 자세히 알아보려면 [상호작용 개요](https://ai.google.dev/gemini-api/docs/interactions?hl=ko#convenience-properties)를 참고하세요.
+最も一般的なヘルパーは **`interaction.output_text`**（文字列）で、モデルのレスポンスの最後のテキスト ブロックを返します。レスポンスが複数の連続する `TextContent` ブロックに分割されている場合、それらは自動的に結合されます。`.output_text` には、テキスト以外のコンテンツ（思考、画像、音声、ツール呼び出しなど）で区切られた以前のテキスト ブロックは含まれません。複雑なマルチモーダル レスポンスやインターリーブされたマルチモーダル レスポンスの場合は、代わりに `steps` を手動で反復処理する必要があります。他のメディアの利便性プロパティについて詳しくは、[インタラクションの概要](https://ai.google.dev/gemini-api/docs/interactions?hl=ja#convenience-properties)をご覧ください。
 
-## Gemini로 생각하기
+## Gemini で考える
 
-Gemini 모델은 기본적으로 ['사고'](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)가 사용 설정되어 있는 경우가 많으며, 이를 통해 모델은 요청에 대답하기 전에 추론할 수 있습니다.
+Gemini モデルでは、多くの場合、[「思考」](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)がデフォルトで有効になっています。これにより、モデルはリクエストに応答する前に推論できます。
 
-각 모델은 다양한 사고 구성을 지원하므로 비용, 지연 시간, 인텔리전스를 제어할 수 있습니다. 자세한 내용은 [생각 가이드](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#set-budget)를 참고하세요.
+各モデルは、さまざまな思考構成をサポートしています。これにより、費用、レイテンシ、インテリジェンスを制御できます。詳しくは、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#thinking-levels)をご覧ください。
 
 ### Python
 
@@ -156,7 +155,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -177,7 +176,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -231,7 +230,7 @@ func main() {
             Model: interactions.Model("gemini-3.8-flash"),
             Input: interactions.NewInteractionsInput("How does AI work?"),
             GenerationConfig: &interactions.GenerationConfig{
-                ThinkingLevel: interactions.ThinkingLevelMinimal.ToPointer(),
+                ThinkingLevel: interactions.ThinkingLevelLow.ToPointer(),
             },
         }),
     })
@@ -260,9 +259,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 시스템 요청 사항 및 기타 구성
+## システム指示とその他の設定
 
-시스템 요청 사항을 사용하여 Gemini 모델의 동작을 안내할 수 있습니다. `system_instruction` 매개변수를 전달하여 모델의 동작을 구성합니다.
+システム指示を使用して Gemini モデルの動作を制御できます。`system_instruction` パラメータを渡して、モデルの動作を構成します。
 
 ### Python
 
@@ -280,7 +279,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -299,7 +298,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -376,7 +375,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-`generation_config` 매개변수를 사용하여 온도와 같은 기본 생성 매개변수를 재정의할 수도 있습니다.
+`generation_config` パラメータを使用して、Temperature などのデフォルトの生成パラメータをオーバーライドすることもできます。
 
 ### Python
 
@@ -395,7 +394,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -416,7 +415,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -498,11 +497,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-구성 가능한 매개변수와 설명의 전체 목록은 [Interactions API 참조](https://ai.google.dev/api/interactions-api?hl=ko)를 참고하세요.
+構成可能なパラメータとその説明の完全なリストについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
 
-## 멀티모달 입력
+## マルチモーダル入力
 
-Gemini API는 멀티모달 입력을 지원하므로 텍스트와 미디어 파일을 결합할 수 있습니다. 다음 예에서는 이미지를 제공하는 방법을 보여줍니다.
+Gemini API はマルチモーダル入力をサポートしているため、テキストとメディア ファイルを組み合わせることができます。次の例は、画像を提供する方法を示しています。
 
 ### Python
 
@@ -527,7 +526,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -557,7 +556,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -674,14 +673,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-이미지를 제공하는 다른 방법과 고급 이미지 처리에 관한 내용은 [이미지 이해 가이드](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko)를 참고하세요.
-API는 [문서](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko), [동영상](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko), [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko) 입력 및 이해도 지원합니다.
+画像を渡す別の方法や、より高度な画像処理については、[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)をご覧ください。この API は、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)の入力と理解もサポートしています。
 
-## 스트리밍 응답
+## ストリーミング レスポンス
 
-기본적으로 모델은 전체 생성 프로세스가 완료된 후에만 대답을 반환합니다.
+デフォルトでは、モデルは生成プロセス全体が完了した後にのみレスポンスを返します。
 
-더 원활한 상호작용을 위해 스트리밍을 사용하여 응답 청크가 생성될 때 이를 처리하세요. 이벤트 유형, 도구를 사용한 스트리밍, 사고, 에이전트, 이미지 생성을 다루는 포괄적인 가이드는 전용 [스트리밍 상호작용](https://ai.google.dev/gemini-api/docs/streaming?hl=ko) 가이드를 참고하세요.
+よりスムーズなインタラクションを実現するには、ストリーミングを使用して、生成されたレスポンス チャンクを処理します。イベントタイプ、ツールを使用したストリーミング、思考、エージェント、画像生成を網羅した包括的なガイドについては、専用の[ストリーミング インタラクション](https://ai.google.dev/gemini-api/docs/streaming?hl=ja) ガイドをご覧ください。
 
 ### Python
 
@@ -701,7 +699,7 @@ for event in stream:
             print(event.delta.text, end="")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -727,7 +725,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -831,9 +829,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 멀티턴 대화
+## マルチターンの会話
 
-Interactions API는 `previous_interaction_id`를 사용하여 상호작용을 연결하여 멀티턴 대화를 지원합니다. 각 턴은 별도의 상호작용이며 API는 자동으로 대화 기록을 관리합니다.
+Interactions API は、`previous_interaction_id` を使用してインタラクションを連結することで、マルチターンの会話をサポートします。各ターンは個別のインタラクションであり、API は会話履歴を自動的に管理します。
 
 ### Python
 
@@ -856,7 +854,7 @@ interaction2 = client.interactions.create(
 print(interaction2.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -881,7 +879,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -991,7 +989,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-스트리밍은 `previous_interaction_id`을 스트리밍 메서드와 결합하여 멀티턴 대화에도 사용할 수 있습니다.
+ストリーミング メソッドと `previous_interaction_id` を組み合わせることで、マルチターンの会話にストリーミングを使用することもできます。
 
 ### Python
 
@@ -1018,7 +1016,7 @@ for event in stream:
             print(event.delta.text, end="")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1050,7 +1048,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1187,14 +1185,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 스테이트리스 대화
+## ステートレス会話
 
-기본적으로 `previous_interaction_id`를 사용하면 Interactions API가 대화 상태를 서버 측에서 관리합니다. 하지만 클라이언트 측에서 직접 대화 기록을 관리하여 상태 비저장 모드로 작동할 수도 있습니다.
+デフォルトでは、`previous_interaction_id` を使用すると、Interactions API は会話の状態をサーバーサイドで管理します。ただし、クライアント側で会話履歴を自分で管理することで、ステートレス モードで動作することもできます。
 
-스테이트리스 모드를 사용하려면 다음 단계를 따르세요.
-1. 서버 측 스토리지를 선택 해제하려면 요청에서 `store=false`를 설정하세요.
-2. 클라이언트 측에서 대화 기록을 **단계** 배열로 유지합니다.
-3. 후속 요청에서는 누적된 단계를 `input` 필드에 전달하고 새 턴을 `user_input` 단계로 추가합니다.
+ステートレス モードを使用するには:
+1. リクエストで `store=false` を設定して、サーバーサイド ストレージをオプトアウトします。2. 会話履歴をクライアント側の**ステップ**の配列として保持します。3. 以降のリクエストでは、蓄積されたステップを `input` フィールドに渡し、新しいターンを `user_input` ステップとして追加します。
 
 ### Python
 
@@ -1233,7 +1229,7 @@ interaction2 = client.interactions.create(
 print("Response 2:", interaction2.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1273,7 +1269,7 @@ async function main() {
 await main();
 ```
 
-### 자바
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1429,23 +1425,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## 프롬프트 작성 팁
+## プロンプトに関するヒント
 
-Gemini를 최대한 활용하는 방법에 관한 제안은 [프롬프트 엔지니어링 가이드](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ko)를 참고하세요.
+Gemini を最大限に活用するための提案については、[プロンプト エンジニアリング ガイド](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ja)をご覧ください。
 
-## 다음 단계
+## 次のステップ
 
-- [Google AI Studio에서 Gemini](https://aistudio.google.com?hl=ko)를 사용해 보세요.
-- JSON과 유사한 대답을 위해 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)을 실험해 보세요.
-- Gemini의 [이미지](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko), [동영상](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko), [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko), [문서](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko) 이해 기능을 살펴보세요.
-- 멀티모달 [파일 프롬프팅 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide)에 대해 알아봅니다.
+- [Google AI Studio で Gemini](https://aistudio.google.com?hl=ja) を試す。
+- JSON のようなレスポンスの[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を試す。
+- Gemini の[画像](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)の理解機能を試す。
+- マルチモーダル [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)について学習する。
 
-의견 보내기
+フィードバックを送信
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-최종 업데이트: 2026-09-24(UTC)
+最終更新日 2026-10-09 UTC。
 
-의견을 전달하고 싶나요?
+ご意見をお聞かせください
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-24(UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-09 UTC。"],[],[]]

@@ -1,112 +1,134 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko
-fetched_at: 2026-10-05T06:30:20.780268+00:00
-title: "Google AI Studio\uc5d0\uc11c \ubc30\ud3ec \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=th
+fetched_at: 2026-10-12T06:56:28.178793+00:00
+title: "\u0e01\u0e32\u0e23\u0e17\u0e33\u0e43\u0e2b\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e44\u0e14\u0e49\u0e08\u0e32\u0e01 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-의견 보내기
+ส่งความคิดเห็น
 
-# Google AI Studio에서 배포
+# การทำให้ใช้งานได้จาก Google AI Studio
 
-Google AI Studio를 사용하면 빌드 모드에서 바로 풀 스택 애플리케이션을 배포할 수 있습니다. 이를 통해 프로토타입에서 관리되고 확장 가능한 프로덕션 환경으로 빠르게 이동할 수 있습니다.
+Google AI Studio ช่วยให้คุณสามารถติดตั้งใช้งานแอปพลิเคชัน Full Stack ได้โดยตรง
+จากโหมดสร้าง ซึ่งช่วยให้คุณเปลี่ยนจากต้นแบบไปสู่สภาพแวดล้อมฮาร์ดแวร์และซอฟต์แวร์ที่ได้รับการจัดการและรองรับการปรับขนาดได้อย่างรวดเร็ว
 
-## 배포 옵션
+## ตัวเลือกการติดตั้งใช้งาน
 
-AI Studio 빌드 모드에서 애플리케이션을 배포하기 위한 요구사항은 사용하는 등급에 따라 다릅니다.
+หากต้องการติดตั้งใช้งานแอปพลิเคชันจากโหมด AI Studio Build ข้อกำหนดจะขึ้นอยู่กับระดับที่คุณใช้ ดังนี้
 
-- [**Google Cloud 스타터 등급**](https://docs.cloud.google.com/docs/starter-tier?hl=ko):
-  자격 요건을 충족하는 계정은 Google Cloud 프로젝트나 결제 계정을 설정하지 않고도 최대 2개의 전체 스택 애플리케이션을 게시할 수 있습니다.
-- **표준 배포**: AI Studio 계정에 연결된 Google Cloud 프로젝트가 필요하며 해당 프로젝트에서 결제가 사용 설정되어 있어야 합니다.
+- [**ระดับเริ่มต้นของ Google Cloud**](https://docs.cloud.google.com/docs/starter-tier?hl=th):
+  ช่วยให้บัญชีที่มีสิทธิ์เผยแพร่แอปพลิเคชันแบบฟูลสแต็กได้สูงสุด 2 รายการโดยไม่ต้อง
+  ตั้งค่าโปรเจ็กต์ Google Cloud หรือบัญชีสำหรับการเรียกเก็บเงิน
+- **การติดตั้งใช้งานมาตรฐาน**: ต้องมีโปรเจ็กต์ที่อยู่ในระบบคลาวด์ของ Google ที่ลิงก์กับบัญชี AI Studio และเปิดใช้การเรียกเก็บเงินในโปรเจ็กต์นั้น
 
-## Starter 등급 정보
+## เกี่ยวกับ Starter Tier
 
-Google Cloud 스타터 등급을 사용하면 자격 요건을 충족하는 계정에서 Google AI Studio에서 바로 Google Cloud에 애플리케이션을 배포할 수 있습니다. 일반 Google Cloud 환경이나 결제 계정을 설정할 필요가 없습니다.
+Google Cloud Starter Tier มอบเส้นทางที่คล่องตัวสำหรับบัญชีที่มีสิทธิ์
+ในการทำให้แอปพลิเคชันใช้งานได้ใน Google Cloud โดยตรงจาก Google AI Studio คุณไม่จำเป็นต้องตั้งค่าสภาพแวดล้อม Google Cloud หรือบัญชีสำหรับการเรียกเก็บเงินทั้งหมด
 
-Google AI Studio를 배포할 때마다 Cloud Run에 해당 서비스가 생성됩니다. Google AI Studio에서 Starter 등급으로 배포된 서비스에는 다음 제한사항이 적용됩니다.
+การติดตั้งใช้งาน Google AI Studio แต่ละครั้งจะสร้างบริการที่เกี่ยวข้องใน
+Cloud Run สำหรับบริการที่ติดตั้งใช้งานใน Google AI Studio ด้วย Starter
+Tier จะมีข้อจำกัดต่อไปนี้
 
-- 최대 2개의 서비스를 배포할 수 있습니다.
-- 서비스가 [단일 Cloud Run 리전](https://docs.cloud.google.com/run/docs/locations?hl=ko)에 배포됩니다.
+- คุณสามารถติดตั้งใช้งานบริการได้สูงสุด 2 รายการ
+- บริการของคุณได้รับการติดตั้งใช้งานใน[ภูมิภาค Cloud Run เดียว](https://docs.cloud.google.com/run/docs/locations?hl=th)
 
-### 스타터 등급 자격 요건
+### การมีสิทธิ์ใช้ Starter Tier
 
-일부 계정은 Google Cloud 스타터 등급을 사용할 수 없습니다. 다음 중 하나라도 해당하는 경우 계정이 부적격일 수 있습니다.
+บางบัญชีอาจไม่มีสิทธิ์ใช้ Google Cloud Starter Tier บัญชีของคุณอาจไม่มีสิทธิ์หากตรงกับข้อใดต่อไปนี้
 
-- Google Workspace 계정 (유료 또는 무료 Google Workspace, Google Workspace for Education, Google 비영리단체 프로그램 구독 포함)으로 로그인되어 있습니다.
-- 활성 상태이거나 이전에 유료 Google Cloud Billing 계정을 사용한 적이 있습니다.
-- 현재 계정 활동에서 Starter 등급 액세스를 부여하기에 충분한 증거가 없습니다.
+- คุณลงชื่อเข้าใช้ด้วยบัญชี Google Workspace (รวมถึงการสมัครใช้บริการ Google Workspace, Google Workspace for Education หรือ Google เพื่อการกุศล แบบชำระเงินหรือฟรี)
+- คุณมีบัญชีสำหรับการเรียกเก็บเงินของ Google Cloud แบบชำระเงินที่ใช้งานอยู่หรือที่เคยใช้งาน
+- เรามีหลักฐานจากกิจกรรมในบัญชีของคุณไม่เพียงพอที่จะให้สิทธิ์เข้าถึงระดับเริ่มต้นในขณะนี้
 
-Google AI Studio 지원팀은 Starter 등급 자격 요건을 재정의할 수 없습니다. 계정이 자격 요건을 충족하지 않으면 결제 계정을 연결하고 [표준 배포](#standard-deployment)를 사용하여 앱을 게시하세요.
+ทีมสนับสนุนของ Google AI Studio ไม่สามารถลบล้างการมีสิทธิ์ใช้ระดับเริ่มต้นได้ หากบัญชีไม่มีสิทธิ์ ให้แนบบัญชีสำหรับการเรียกเก็บเงินและใช้[การติดตั้งใช้งานมาตรฐาน](#standard-deployment)เพื่อเผยแพร่แอป
 
-## Starter 등급으로 배포
+## ติดตั้งใช้งานด้วยระดับเริ่มต้น
 
-빌드 모드에서 앱을 설계한 후 스타터 등급으로 배포합니다.
+หลังจากออกแบบแอปในโหมดสร้างแล้ว ให้ทำให้แอปใช้งานได้ด้วย Starter Tier โดยทำดังนี้
 
-1. 오른쪽 상단에서 **게시** 버튼을 클릭합니다.
-2. **시작하기**를 클릭합니다.
-3. **앱 게시**를 클릭합니다.
+1. คลิกปุ่ม**เผยแพร่**ที่มุมขวาบน
+2. คลิก**เริ่มต้น**
+3. คลิก**เผยแพร่แอป**
 
-배포가 완료되면 AI Studio에서 라이브 애플리케이션에 액세스할 수 있는 Cloud Run URL을 제공합니다.
+เมื่อการติดตั้งใช้งานเสร็จสมบูรณ์แล้ว AI Studio จะระบุ URL ของ Cloud Run ซึ่งคุณสามารถ
+เข้าถึงแอปพลิเคชันที่ใช้งานจริงได้
 
-## AI Studio의 맞춤 URL
+## URL ที่กำหนดเองสำหรับ AI Studio
 
-Google AI Studio에서 애플리케이션을 게시할 때 `ai.studio` 아래에 기억하기 쉬운 맞춤 하위 도메인을 설정할 수 있습니다 (예: `https://your-app-name.ai.studio`).
+เมื่อเผยแพร่แอปพลิเคชันจาก Google AI Studio คุณจะตั้งค่าโดเมนย่อยที่กำหนดเองและจดจำง่ายได้ในส่วน `ai.studio` (เช่น `https://your-app-name.ai.studio`)
 
-Google AI Studio에서는 모든 프로젝트에서 하위 도메인이 전역적으로 고유해야 하며 선착순으로 할당됩니다. 다른 프로젝트에서 이미 이름을 사용하고 있는 경우 AI Studio에서 다른 이름을 선택하라는 메시지를 표시합니다. 애플리케이션을 게시 취소하거나 삭제하면 맞춤 URL이 해제되어 다른 사용자가 사용할 수 있게 됩니다.
+Google AI Studio กำหนดให้โดเมนย่อยต้องไม่ซ้ำกันทั่วโลกในทุกโปรเจ็กต์
+และจะกำหนดโดเมนย่อยตามลำดับการลงทะเบียน หากโปรเจ็กต์อื่น
+ใช้ชื่ออยู่แล้ว AI Studio จะแจ้งให้คุณเลือกชื่ออื่น หากคุณ
+เลิกเผยแพร่หรือลบแอปพลิเคชัน ระบบจะปล่อย URL ที่กำหนดเองของแอปพลิเคชันนั้นและ
+ผู้ใช้รายอื่นจะอ้างสิทธิ์ URL นั้นได้
 
-### 맞춤 URL 설정
+### ตั้งค่า URL ที่กำหนดเอง
 
-애플리케이션의 맞춤 URL을 설정하거나 업데이트하려면 다음 단계를 따르세요.
+วิธีตั้งค่าหรืออัปเดต URL ที่กำหนดเองสำหรับแอปพลิเคชัน
 
-1. Google AI Studio에서 **빌드** 모드로 애플리케이션을 엽니다.
-2. 오른쪽 상단에서 **게시**를 클릭합니다.
-3. 배포 구성의 **맞춤 URL** 필드에 원하는 하위 도메인을 입력하거나 추천 URL을 수락합니다.
-4. **앱 게시**를 클릭합니다.
+1. เปิดแอปพลิเคชันใน Google AI Studio ในโหมด**สร้าง**
+2. คลิก**เผยแพร่**ที่มุมขวาบน
+3. ในการกำหนดค่าการติดตั้งใช้งาน ให้ป้อนโดเมนย่อยที่ต้องการในช่อง **URL ที่กำหนดเอง** หรือยอมรับ URL ที่แนะนำ
+4. คลิก**เผยแพร่แอป**
 
-기존 맞춤 URL을 다른 애플리케이션으로 이전하려면 먼저 맞춤 URL이 할당된 애플리케이션을 게시 취소하거나 삭제한 다음 선택한 하위 도메인을 사용하여 새 애플리케이션을 게시해야 합니다.
+หากต้องการโอน URL ที่กำหนดเองที่มีอยู่ไปยังแอปพลิเคชันอื่น คุณต้อง
+ยกเลิกการเผยแพร่หรือลบแอปพลิเคชันที่กำหนด URL ที่กำหนดเองนั้นก่อน แล้วจึง
+เผยแพร่แอปพลิเคชันใหม่โดยใช้โดเมนย่อยที่เลือก
 
-### 상표권 또는 저작권 문제 신고
+### รายงานปัญหาเกี่ยวกับเครื่องหมายการค้าหรือลิขสิทธิ์
 
-맞춤 하위 도메인은 [Google 서비스 약관](https://policies.google.com/terms?hl=ko)을 준수해야 합니다. 상표를 침해하거나 허가 없이 저작권이 있는 이름을 사용하는 맞춤 URL을 발견한 경우 [Google 법적 문제 해결 도구](https://support.google.com/legal/troubleshooter/1114905?hl=ko)를 사용하여 신고할 수 있습니다.
+โดเมนย่อยที่กำหนดเองต้องเป็นไปตาม[ข้อกำหนดในการให้บริการของ Google](https://policies.google.com/terms?hl=th) หากพบ
+URL ที่กำหนดเองซึ่งละเมิดเครื่องหมายการค้าหรือใช้ชื่อที่มีลิขสิทธิ์โดยไม่ได้รับอนุญาต
+คุณสามารถรายงานโดยใช้[เครื่องมือแก้ปัญหาทางกฎหมายของ Google](https://support.google.com/legal/troubleshooter/1114905?hl=th)
 
-## 표준 배포
+## การติดตั้งใช้งานมาตรฐาน
 
-애플리케이션이 발전함에 따라 더 높은 할당량, 증가된 컴퓨팅 리소스, Starter 등급에서 사용할 수 없는 기타 Google Cloud 제품과 같은 Starter 등급 이상의 기능이 필요할 수 있습니다. 이러한 기능을 사용하려면 완전 관리형 Starter 등급 프로젝트를 표준 Google Cloud 프로젝트로 변환하면 됩니다.
+เมื่อแอปพลิเคชันของคุณพัฒนาขึ้น คุณอาจต้องใช้ความสามารถที่นอกเหนือจากระดับเริ่มต้น
+เช่น โควต้าที่สูงขึ้นหรือทรัพยากรการประมวลผลที่เพิ่มขึ้น หรือผลิตภัณฑ์อื่นๆ ของ
+Google Cloud ที่ไม่มีให้บริการในระดับเริ่มต้น หากต้องการปลดล็อกความสามารถเหล่านี้ คุณสามารถแปลงโปรเจ็กต์ระดับเริ่มต้นที่มีการจัดการเต็มรูปแบบเป็นโปรเจ็กต์ Google Cloud มาตรฐานได้
 
-이렇게 하면 진행 상황을 잃지 않고 원활하게 확장할 수 있습니다. 단계에 따라 [Cloud Billing 계정을 만들고](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=ko#create-new-billing-account), 표준 Google Cloud 서비스 약관에 공식적으로 동의하고, [표준 Google Cloud 프로젝트로 업그레이드](https://docs.cloud.google.com/docs/starter-tier?hl=ko#upgradee)합니다.
-자세한 내용은 [유료 계정 설정](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ko#paid-setup)을 참고하세요.
+ซึ่งจะช่วยให้คุณปรับขนาดได้อย่างราบรื่นโดยไม่สูญเสีย
+ความคืบหน้า ทำตามขั้นตอนเพื่อ
+[สร้างบัญชีสำหรับการเรียกเก็บเงินใน Cloud](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=th#create-new-billing-account)
+ยอมรับข้อกำหนดในการให้บริการมาตรฐานของ Google Cloud อย่างเป็นทางการ และ
+[อัปเกรดเป็นโปรเจ็กต์ที่อยู่ในระบบคลาวด์มาตรฐานของ Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=th#upgradee)
+ดูข้อมูลเพิ่มเติมได้ที่
+[การตั้งค่าสำหรับบัญชีแบบชำระเงิน](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=th#paid-setup)
 
-결제 등급에 대해 자세히 알아보려면 [결제](https://ai.google.dev/gemini-api/docs/billing?hl=ko)를 참고하세요.
+ดูข้อมูลเพิ่มเติมเกี่ยวกับระดับการเรียกเก็บเงินได้ที่[การเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th)
 
-## 신청 삭제
+## ลบแอปพลิเคชัน
 
-앱이 더 이상 필요하지 않은 경우 다음 안내에 따라 Google AI Studio에서 앱을 삭제할 수 있습니다.
+หากไม่ต้องการใช้แอปอีกต่อไป คุณสามารถลบแอปใน Google AI Studio ได้
+โดยทำตามวิธีการต่อไปนี้
 
-1. Google AI Studio에서 [앱 페이지](https://aistudio.google.com/app/apps?hl=ko)로 이동합니다.
-2. 왼쪽 메뉴에서 **앱**을 선택합니다.
-3. 삭제하려는 앱 위로 포인터를 가져갑니다.
-4. 행의 오른쪽에 있는 휴지통 아이콘을 클릭하여 앱을 삭제합니다.
+1. ไปที่[หน้าแอป](https://aistudio.google.com/app/apps?hl=th)ใน Google AI Studio
+2. เลือก**แอป**ในเมนูด้านซ้าย
+3. วางเคอร์เซอร์เหนือแอปที่ต้องการลบ
+4. คลิกไอคอนถังขยะทางด้านขวาของแถวเพื่อลบแอป
 
-## 다음 단계
+## ขั้นตอนถัดไป
 
-- [Google Cloud 스타터 등급](https://docs.cloud.google.com/docs/starter-tier?hl=ko)에 대해 자세히 알아보세요.
-- Gemini API의 [결제](https://ai.google.dev/gemini-api/docs/billing?hl=ko)에 대해 알아보세요.
+- ดูข้อมูลเพิ่มเติมเกี่ยวกับ[ระดับเริ่มต้นของ Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=th)
+- อ่านเกี่ยวกับ[การเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th)ใน Gemini API
 
-의견 보내기
+ส่งความคิดเห็น
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-최종 업데이트: 2026-09-28(UTC)
+อัปเดตล่าสุด 2026-09-28 UTC
 
-의견을 전달하고 싶나요?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-28(UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-28 UTC"],[],[]]

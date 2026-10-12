@@ -1,70 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=id
-fetched_at: 2026-10-05T06:40:22.468297+00:00
-title: "Context caching \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=sq
+fetched_at: 2026-10-12T06:58:41.677614+00:00
+title: "Ruajtja e kontekstit n\u00eb memorien specifike \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
+Gemini 3.8 Flash është tani në dispozicion. [Provojeni](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=sq) .
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs/generate-content?hl=sq)
 
-Kirim masukan
+Dërgo komente
 
-# Context caching
+# Ruajtja e kontekstit në memorien specifike
 
-Dalam alur kerja AI yang umum, Anda mungkin meneruskan token input yang sama berulang kali ke model. Gemini API menawarkan dua mekanisme penyiapan cache yang berbeda:
+Në një fluks tipik pune të IA-së, mund t'i kalosh të njëjtët kode hyrëse vazhdimisht te një model. Gemini API ofron dy mekanizma të ndryshëm të ruajtjes në memorien specifike:
 
-- Caching implisit (diaktifkan secara otomatis di model Gemini 2.5 dan yang lebih baru, tidak ada jaminan penghematan biaya)
-- Caching eksplisit (dapat diaktifkan secara manual di sebagian besar model, jaminan penghematan biaya)
+- Ruajtja e fshehtë e të dhënave në mënyrë të nënkuptuar (aktivizuar automatikisht në Gemini 2.5 dhe modelet më të reja, pa garanci për kursimin e kostos)
+- Ruajtja e qartë në memorien specifike (mund të aktivizohet manualisht në shumicën e modeleve, garanci për kursim kostosh)
 
-Penyimpanan dalam cache eksplisit berguna jika Anda ingin menjamin penghematan biaya, tetapi dengan beberapa pekerjaan developer tambahan.
+Ruajtja e qartë në memorien specifike është e dobishme në rastet kur dëshiron të garantosh kursime kostosh,
+por me pak punë shtesë nga zhvilluesi.
 
-## Caching implisit
+## Ruajtja e nënkuptuar në memorien specifike
 
-Penyimpanan cache implisit diaktifkan secara default untuk semua model Gemini 2.5 dan yang lebih baru. Kami secara otomatis
-meneruskan penghematan biaya jika permintaan Anda mencapai cache. Anda tidak perlu melakukan tindakan apa pun untuk mengaktifkannya. Jumlah token input
-minimum untuk penyiapan cache konteks tercantum dalam tabel berikut untuk setiap model:
+Ruajtja e fshehtë e të dhënave është e aktivizuar si parazgjedhje për të gjitha modelet Gemini 2.5 dhe më të reja. Ne i kalojmë automatikisht
+kursimet e kostos nëse kërkesa jote arrin te memoriet specifike. Nuk ka asgjë që duhet të bësh për ta aktivizuar këtë. Numri minimal i kodeve hyrëse
+për ruajtjen në memorien specifike të kontekstit është listuar në tabelën e mëposhtme për secilin model:
 
-| Model | Batas token minimum |
+| Modeli | Kufiri minimal i tokenëve |
 | --- | --- |
-| Gemini 3.8 Flash | 4.096 |
-| Gemini 3.7 Flash | 4.096 |
-| Gemini 3.6 Flash | 4.096 |
-| Gemini 3.5 Flash | 4.096 |
-| Pratinjau Gemini 3.1 Pro | 4.096 |
-| Gemini 2.5 Flash | 2.048 |
-| Gemini 2.5 Pro | 2.048 |
+| Gemini 3.8 Flash | 4,096 |
+| Gemini 3.6 Flash | 4,096 |
+| Gemini 3.1 Pro Preview | 4,096 |
+| Gemini 2.5 Flash | 2,048 |
+| Gemini 2.5 Pro | 2,048 |
 
-Untuk meningkatkan peluang terjadinya cache hit implisit:
+Për të rritur mundësinë e një përputhjeje të nënkuptuar të memories specifike:
 
-- Coba letakkan konten besar dan umum di awal perintah Anda
-- Mencoba mengirim permintaan dengan awalan yang serupa dalam waktu singkat
+- Provo të vendosësh përmbajtje të mëdha dhe të zakonshme në fillim të kërkesës sate
+- Provo të dërgosh kërkesa me prefiks të ngjashëm në një kohë të shkurtër
 
-Anda dapat melihat jumlah token yang merupakan hit cache di kolom
-`usage_metadata` objek respons.
+Mund të shohësh numrin e kodeve që ishin goditje të memories specifike në fushën `usage_metadata` të objektit të përgjigjes.
 
-## Caching eksplisit
+## Ruajtja specifike
 
-Dengan fitur caching eksplisit Gemini API, Anda dapat meneruskan beberapa konten ke model sekali, meng-cache token input, lalu merujuk token yang di-cache untuk permintaan berikutnya. Pada volume tertentu, penggunaan token yang di-cache lebih murah daripada meneruskan korpus token yang sama berulang kali.
+Duke përdorur veçorinë e ruajtjes specifike në memorien specifike të Gemini API, mund t'i kalosh disa përmbajtje te modeli një herë, të ruash në memorien specifike kodet hyrëse dhe më pas t'i referohesh kodeve të ruajtura në memorien specifike për kërkesat vijuese. Në vëllime të caktuara, përdorimi i kodeve të ruajtura në memorien specifike është me kosto më të ulët se kalimi i të njëjtit korpus kodësh në mënyrë të përsëritur.
 
-Saat menyimpan cache sekumpulan token, Anda dapat memilih durasi yang diinginkan untuk cache sebelum token dihapus secara otomatis. Durasi caching ini disebut *time to live* (TTL). Jika tidak disetel, TTL defaultnya adalah 1 jam. Biaya untuk melakukan caching bergantung pada ukuran token input dan durasi token yang Anda inginkan.
+Kur ruan në memorien specifike një grup token-ësh, mund të zgjedhësh se për sa kohë dëshiron që të ekzistojë memoria specifike para se token-at të fshihen automatikisht. Kjo kohëzgjatje e ruajtjes në memorien specifike quhet *kohëzgjatja e jetës* (TTL). Nëse nuk caktohet, TTL-ja është si parazgjedhje 1 orë. Kostoja për ruajtjen në memorien specifike varet nga madhësia e kodit hyrës dhe për sa kohë dëshiron që të ruhen kodet.
 
-Bagian ini mengasumsikan bahwa Anda telah menginstal Gemini SDK (atau telah menginstal curl) dan telah mengonfigurasi kunci API, seperti yang ditunjukkan dalam [Panduan memulai](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id).
+Ky seksion supozon se ke instaluar një Gemini SDK (ose ke të instaluar curl) dhe se ke konfiguruar një çelës API, siç tregohet në
+[Udhëzuesin e fillimit](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=sq).
 
-### Membuat konten menggunakan cache
+### Gjenero përmbajtje duke përdorur një memorie specifike
 
 ### Python
 
-Contoh berikut menunjukkan cara membuat konten menggunakan petunjuk sistem yang di-cache dan file video.
+Shembulli i mëposhtëm tregon se si të gjenerosh përmbajtje duke përdorur një udhëzim të sistemit në memorien specifike dhe një skedar video.
 
-### Video
+### Videot
 
 ```
 import os
@@ -123,7 +122,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### PDF
+### Skedarë PDF
 
 ```
 from google import genai
@@ -171,7 +170,8 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Contoh berikut menunjukkan cara membuat konten menggunakan petunjuk sistem yang di-cache dan file teks.
+Shembulli i mëposhtëm tregon se si të gjenerosh përmbajtje duke përdorur një udhëzim të sistemit të ruajtur në memorien specifike
+dhe një skedar teksti.
 
 ```
 import {
@@ -212,7 +212,7 @@ await main();
 
 ### Go
 
-Contoh berikut menunjukkan cara membuat konten menggunakan cache.
+Shembulli i mëposhtëm tregon se si të gjenerosh përmbajtje duke përdorur një memorie specifike.
 
 ```
 package main
@@ -280,12 +280,11 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
-Contoh berikut menunjukkan cara membuat cache, lalu menggunakannya untuk
-membuat konten.
+Shembulli i mëposhtëm tregon se si të krijosh një memorie specifike dhe më pas ta përdorësh atë për të gjeneruar përmbajtje.
 
-### Video
+### Videot
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -336,7 +335,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
     }'
 ```
 
-### PDF
+### Skedarë PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -434,21 +433,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Mencantumkan cache
+### Listo memoriet specifike
 
-Anda tidak dapat mengambil atau melihat konten dalam cache, tetapi Anda dapat mengambil metadata cache (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time`, dan `expire_time`).
+Nuk është e mundur të marrësh ose të shikosh përmbajtjet e ruajtura në memorien specifike, por mund të marrësh metadata të memories specifike (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` dhe `expire_time`).
 
 ### Python
 
-Untuk mencantumkan metadata semua cache yang diupload, gunakan `CachedContent.list()`:
+Për të listuar metadatat për të gjitha memoriet e ngarkuara të përkohshme, përdor `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Untuk mengambil metadata satu objek cache, jika Anda mengetahui namanya, gunakan `get`:
+Për të marrë metadatat për një objekt të memories specifike, nëse e di emrin e tij, përdor `get`:
 
 ```
 client.caches.get(name=name)
@@ -456,7 +454,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Untuk mencantumkan metadata semua cache yang diupload, gunakan `GoogleGenAI.caches.list()`:
+Për të listuar metadatat për të gjitha memoriet e ngarkuara të përkohshme, përdor `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -473,7 +471,7 @@ while (true) {
 
 ### Go
 
-Contoh berikut mencantumkan semua cache.
+Shembulli i mëposhtëm liston të gjitha memoriet specifike.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -486,7 +484,7 @@ for _, item := range caches {
 }
 ```
 
-Contoh berikut mencantumkan cache menggunakan ukuran halaman 2.
+Shembulli i mëposhtëm liston memoriet specifike duke përdorur një madhësi faqeje prej 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -513,21 +511,20 @@ for {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Memperbarui cache
+### Përditëso një memorie specifike
 
-Anda dapat menyetel `ttl` atau `expire_time` baru untuk cache. Mengubah hal lain
-tentang cache tidak didukung.
+Mund të caktosh një `ttl` ose `expire_time` të ri për një memorie specifike. Ndryshimi i çdo gjëje tjetër
+në lidhje me memorien specifike nuk mbështetet.
 
 ### Python
 
-Contoh berikut menunjukkan cara mengupdate `ttl` cache menggunakan
-`client.caches.update()`.
+Shembulli i mëposhtëm tregon se si të përditësosh `ttl` të një memorie specifike duke përdorur `client.caches.update()`.
 
 ```
 from google import genai
@@ -541,7 +538,7 @@ client.caches.update(
 )
 ```
 
-Untuk menetapkan waktu habis masa berlaku, API ini akan menerima objek `datetime` atau string tanggal dan waktu berformat ISO (`dt.isoformat()`, seperti `2025-01-27T16:02:36.473528+00:00`). Waktu Anda harus menyertakan zona waktu (`datetime.utcnow()` tidak melampirkan zona waktu, `datetime.now(datetime.timezone.utc)` melampirkan zona waktu).
+Për të caktuar kohën e skadimit, ajo pranon ose një objekt `datetime` ose një varg datë-ore të formatuar në ISO (`dt.isoformat()`, si p.sh. `2025-01-27T16:02:36.473528+00:00`). Ora jote duhet të përfshijë një brez orar (`datetime.utcnow()` nuk bashkëngjit një brez orar, `datetime.now(datetime.timezone.utc)` bashkëngjit një brez orar).
 
 ```
 from google import genai
@@ -561,8 +558,7 @@ client.caches.update(
 
 ### JavaScript
 
-Contoh berikut menunjukkan cara mengupdate `ttl` cache menggunakan
-`GoogleGenAI.caches.update()`.
+Shembulli i mëposhtëm tregon se si të përditësosh `ttl` të një memorie specifike duke përdorur `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -575,7 +571,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-Contoh berikut menunjukkan cara memperbarui `TTL` cache.
+Shembulli i mëposhtëm tregon se si të përditësosh `TTL` të një memorie specifike.
 
 ```
 // Update the TTL (2 hours).
@@ -589,9 +585,9 @@ fmt.Println("After update:")
 fmt.Println(cache)
 ```
 
-### REST
+### QETËSI
 
-Contoh berikut menunjukkan cara memperbarui `ttl` cache.
+Shembulli i mëposhtëm tregon se si të përditësosh `ttl` të një memorie specifike.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -599,9 +595,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Menghapus cache
+### Fshi një memorie specifike
 
-Layanan caching menyediakan operasi penghapusan untuk menghapus konten secara manual dari cache. Contoh berikut menunjukkan cara menghapus cache:
+Shërbimi i ruajtjes në memorien specifike ofron një operacion fshirjeje për heqjen manuale të përmbajtjeve nga memoria specifike. Shembulli i mëposhtëm tregon se si të fshish një memorie specifike:
 
 ### Python
 
@@ -625,58 +621,58 @@ if err != nil {
 fmt.Println("Cache deleted:", cache.Name)
 ```
 
-### REST
+### QETËSI
 
 ```
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Penyimpanan cache eksplisit menggunakan library OpenAI
+### Ruajtja e qartë në memorien specifike duke përdorur bibliotekën e OpenAI
 
-Jika Anda menggunakan [library OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id), Anda dapat mengaktifkan
-penyimpanan cache eksplisit menggunakan properti `cached_content` di
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=id#extra-body).
+Nëse po përdor një [bibliotekë të OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=sq), mund të aktivizosh
+ruajtjen në memorien specifike duke përdorur karakteristikën `cached_content` në
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=sq#extra-body).
 
-## Kapan harus menggunakan caching eksplisit
+## Kur të përdorësh ruajtjen e qartë në memorien specifike
 
-Context caching sangat cocok untuk skenario saat konteks awal yang besar dirujuk berulang kali oleh permintaan yang lebih pendek. Pertimbangkan untuk menggunakan
-penyimpanan cache konteks untuk kasus penggunaan seperti:
+Ruajtja në memorien specifike e kontekstit është veçanërisht e përshtatshme për skenarët ku një kontekst fillestar i konsiderueshëm referohet në mënyrë të përsëritur nga kërkesa më të shkurtra. Ki parasysh të përdorësh
+ruajtjen në memorien specifike për raste përdorimi si:
 
-- Chatbot dengan [petunjuk sistem](https://ai.google.dev/gemini-api/docs/system-instructions?hl=id) yang ekstensif
-- Analisis berulang pada file video panjang
-- Kueri berulang terhadap set dokumen besar
-- Analisis repositori kode atau perbaikan bug yang sering
+- Robotët e bisedës me [udhëzime të gjera të sistemit](https://ai.google.dev/gemini-api/docs/system-instructions?hl=sq)
+- Analiza e përsëritur e skedarëve të gjatë të videove
+- Kërkesa të përsëritura ndaj grupeve të mëdha të dokumenteve
+- Analiza e shpeshtë e depos së kodeve ose rregullimi i defekteve
 
-### Cara caching eksplisit mengurangi biaya
+### Si e zvogëlon kostot ruajtja e përmbajtjeve të qarta në memorien specifike
 
-Caching konteks adalah fitur berbayar yang dirancang untuk mengurangi biaya. Penagihan didasarkan pada
-faktor-faktor berikut:
+Ruajtja në memorien specifike e kontekstit është një veçori me pagesë e projektuar për të zvogëluar koston. Faturimi bazohet në faktorët e mëposhtëm:
 
-1. **Jumlah token cache:** Jumlah token input yang di-cache, ditagih dengan tarif yang lebih rendah jika disertakan dalam perintah berikutnya.
-2. **Durasi penyimpanan:** Jumlah waktu token yang di-cache disimpan (TTL),
-   ditagih berdasarkan durasi TTL jumlah token yang di-cache. Tidak ada batas minimum
-   atau maksimum pada TTL.
-3. **Faktor lain:** Biaya lain berlaku, seperti untuk token input dan output yang tidak di-cache.
+1. **Numri i tokenëve të memories specifike:** Numri i tokenëve të hyrjes të ruajtur në memorien specifike, të faturuar me një tarifë të
+   reduktuar kur përfshihen në kërkesat e mëvonshme.
+2. **Kohëzgjatja e ruajtjes:** Koha për të cilën ruhen kodet e ruajtura në memorien specifike (TTL),
+   fakturohet bazuar në kohëzgjatjen TTL të numrit të kodeve të ruajtura në memorien specifike. Nuk ka kufij minimalë
+   ose maksimalë për TTL-në.
+3. **Faktorë të tjerë:** Zbatohen tarifa të tjera, si p.sh. për tokenat e hyrjes dhe daljes që nuk janë në memorien specifike.
 
-Untuk mengetahui detail harga terbaru, lihat [halaman harga](https://ai.google.dev/pricing?hl=id) Gemini API. Untuk mempelajari cara menghitung token, lihat [panduan
-Token](https://ai.google.dev/gemini-api/docs/tokens?hl=id).
+Për detaje të përditësuara të çmimeve, referoju [faqes së çmimeve
+të Gemini API](https://ai.google.dev/pricing?hl=sq). Për të mësuar se si të numërosh kodet, shiko [Udhëzuesin e kodeve](https://ai.google.dev/gemini-api/docs/tokens?hl=sq).
 
-### Pertimbangan tambahan
+### Të tjera për t'u marrë parasysh
 
-Perhatikan hal-hal berikut saat menggunakan caching konteks:
+Ki parasysh konsideratat e mëposhtme kur përdor ruajtjen në memorien specifike të kontekstit:
 
-- Jumlah token input *minimum* untuk penyiapan cache konteks bervariasi menurut model. *Maksimum*
-  sama dengan maksimum untuk model tertentu. (Untuk mengetahui informasi selengkapnya tentang menghitung token, lihat [Panduan token](https://ai.google.dev/gemini-api/docs/tokens?hl=id)).
-- Model tidak membedakan antara token yang di-cache dan token input reguler. Konten yang di-cache adalah awalan untuk perintah.
-- Tidak ada batas penggunaan atau tarif khusus untuk caching konteks; batas tarif standar untuk `GenerateContent` berlaku, dan batas token mencakup token yang di-cache.
-- Jumlah token yang di-cache ditampilkan di `usage_metadata` dari operasi buat, dapatkan, dan cantumkan layanan cache, serta di `GenerateContent` saat menggunakan cache.
+- Numri *minimal* i kodeve hyrëse për ruajtjen e kontekstit në memorien specifike ndryshon sipas modelit. *Maksimumi*
+  është i njëjtë me maksimumin për modelin e dhënë. (Për më shumë rreth numërimit të kodeve, shiko [Udhëzuesin e kodeve](https://ai.google.dev/gemini-api/docs/tokens?hl=sq)).
+- Modeli nuk bën asnjë dallim midis kodeve të ruajtura në memorien specifike dhe kodeve të rregullta të hyrjes. Përmbajtja e ruajtur në memorien specifike është një prefiks për kërkesën.
+- Nuk ka kufij të veçantë të normës ose përdorimit për ruajtjen në memorien specifike të kontekstit; zbatohen kufijtë standardë të normës për `GenerateContent` dhe kufijtë e kodeve përfshijnë kodet e ruajtura në memorien specifike.
+- Numri i kodeve të ruajtura në memorien specifike kthehet në `usage_metadata` nga veprimet e krijimit, marrjes dhe listimit të shërbimit të memories specifike, si dhe në `GenerateContent` kur përdoret memoria specifike.
 
-Kirim masukan
+Dërgo komente
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Terakhir diperbarui pada 2026-09-16 UTC.
+Përditësimi i fundit: 2026-10-09 UTC.
 
-Ada masukan untuk kami?
+Duhet të na tregosh më shumë?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-16 UTC."],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-09 UTC."],[],[]]

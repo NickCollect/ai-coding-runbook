@@ -1,35 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=th
-fetched_at: 2026-10-05T06:36:25.365284+00:00
-title: "\u0e01\u0e32\u0e23\u0e40\u0e23\u0e35\u0e22\u0e01\u0e43\u0e0a\u0e49\u0e42\u0e04\u0e49\u0e14 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=id
+fetched_at: 2026-10-12T06:56:54.049840+00:00
+title: "Eksekusi kode \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# การเรียกใช้โค้ด
+# Eksekusi kode
 
-Gemini API มีเครื่องมือการเรียกใช้โค้ดที่ช่วยให้โมเดลสามารถ
-สร้างและรันโค้ด Python ได้ จากนั้นโมเดลจะเรียนรู้ซ้ำๆ จาก
-ผลการเรียกใช้โค้ดจนกว่าจะได้เอาต์พุตสุดท้าย คุณสามารถใช้การดำเนินการโค้ด
-เพื่อสร้างแอปพลิเคชันที่ได้รับประโยชน์จากการให้เหตุผลตามโค้ด เช่น คุณสามารถใช้การเรียกใช้โค้ดเพื่อแก้สมการหรือประมวลผลข้อความ นอกจากนี้ คุณยังใช้[ไลบรารี](#supported-libraries)ที่รวมอยู่ในการเรียกใช้โค้ด
-เพื่อทำงานที่เฉพาะเจาะจงมากขึ้นได้ด้วย
+Gemini API menyediakan alat eksekusi kode yang memungkinkan model untuk membuat dan menjalankan kode Python. Kemudian, model dapat belajar secara iteratif dari hasil eksekusi kode hingga mencapai output akhir. Anda dapat menggunakan eksekusi
+kode untuk membangun aplikasi yang memanfaatkan penalaran berbasis kode. Misalnya, Anda dapat menggunakan eksekusi kode untuk menyelesaikan persamaan atau memproses teks. Anda juga dapat menggunakan [library](#supported-libraries) yang disertakan dalam lingkungan eksekusi kode untuk melakukan tugas yang lebih khusus.
 
-Gemini รันโค้ดได้ใน Python เท่านั้น คุณยังคงขอให้ Gemini สร้างโค้ดในภาษาอื่นได้ แต่โมเดลจะใช้เครื่องมือการดำเนินการโค้ดเพื่อรันโค้ดนั้นไม่ได้
+Gemini hanya dapat mengeksekusi kode di Python. Anda tetap dapat meminta Gemini untuk membuat kode dalam bahasa lain, tetapi model tidak dapat menggunakan alat eksekusi kode untuk menjalankannya.
 
-## เปิดใช้การเรียกใช้โค้ด
+## Mengaktifkan eksekusi kode
 
-หากต้องการเปิดใช้การเรียกใช้โค้ด ให้กำหนดค่าเครื่องมือเรียกใช้โค้ดในโมเดล ซึ่งจะ
-ช่วยให้โมเดลสร้างและเรียกใช้โค้ดได้
+Untuk mengaktifkan eksekusi kode, konfigurasi alat eksekusi kode pada model. Hal ini memungkinkan model membuat dan menjalankan kode.
 
 ### Python
 
@@ -205,7 +201,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-เอาต์พุตอาจมีลักษณะดังต่อไปนี้ ซึ่งได้รับการจัดรูปแบบเพื่อให้อ่านง่าย
+Outputnya mungkin akan terlihat seperti berikut, yang telah diformat agar mudah dibaca:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -254,29 +250,28 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-เอาต์พุตนี้รวมส่วนเนื้อหาหลายส่วนที่โมเดลแสดงเมื่อใช้
-การเรียกใช้โค้ด
+Output ini menggabungkan beberapa bagian konten yang ditampilkan model saat menggunakan
+eksekusi kode:
 
-- `text`: ข้อความในบรรทัดที่โมเดลสร้างขึ้น
-- `code_execution_call`: โค้ดที่โมเดลสร้างขึ้นซึ่งมีไว้เพื่อดำเนินการ
-- `code_execution_result`: ผลลัพธ์ของโค้ดที่เรียกใช้งานได้
+- `text`: Teks inline yang dihasilkan oleh model
+- `code_execution_call`: Kode yang dibuat oleh model yang dimaksudkan untuk dieksekusi
+- `code_execution_result`: Hasil kode yang dapat dieksekusi
 
-## การดำเนินการโค้ดด้วยรูปภาพ (Gemini 3)
+## Eksekusi Kode dengan gambar (Gemini 3)
 
-ตอนนี้โมเดล Gemini 3 Flash สามารถเขียนและรันโค้ด Python เพื่อ
-จัดการและตรวจสอบรูปภาพได้อย่างมีประสิทธิภาพ
+Model Gemini 3 Flash kini dapat menulis dan mengeksekusi kode Python untuk memanipulasi dan memeriksa gambar secara aktif.
 
-**กรณีการใช้งาน**
+**Kasus penggunaan**
 
-- **ซูมและตรวจสอบ**: โมเดลจะตรวจหาโดยนัยเมื่อรายละเอียดมีขนาดเล็กเกินไป (เช่น การอ่านมาตรวัดที่อยู่ไกล) และเขียนโค้ดเพื่อครอบตัดและตรวจสอบพื้นที่อีกครั้งที่ความละเอียดสูงขึ้น
-- **คณิตศาสตร์ภาพ**: โมเดลสามารถทำการคำนวณหลายขั้นตอนโดยใช้โค้ด (เช่น
-  การบวกรายการในใบเสร็จ)
-- **การอธิบายประกอบรูปภาพ**: โมเดลสามารถอธิบายประกอบรูปภาพเพื่อตอบคำถามได้ เช่น การวาดลูกศรเพื่อแสดงความสัมพันธ์
+- **Memperbesar dan memeriksa**: Model secara implisit mendeteksi saat detail terlalu kecil
+  (misalnya, membaca pengukur dari jarak jauh) dan menulis kode untuk memangkas dan memeriksa ulang area tersebut
+  pada resolusi yang lebih tinggi.
+- **Matematika visual**: Model dapat menjalankan penghitungan multi-langkah menggunakan kode (misalnya, menjumlahkan item baris pada tanda terima).
+- **Anotasi gambar**: Model dapat menganotasi gambar untuk menjawab pertanyaan, seperti menggambar panah untuk menunjukkan hubungan.
 
-## เปิดใช้การเรียกใช้โค้ดด้วยรูปภาพ
+## Mengaktifkan Eksekusi Kode dengan gambar
 
-Gemini 3 Flash รองรับการดำเนินการโค้ดที่มีรูปภาพอย่างเป็นทางการ คุณ
-เปิดใช้งานลักษณะการทำงานนี้ได้โดยเปิดใช้ทั้งเครื่องมือเรียกใช้โค้ดและการคิด
+Eksekusi Kode dengan gambar secara resmi didukung di Gemini 3 Flash. Anda dapat mengaktifkan perilaku ini dengan mengaktifkan Eksekusi Kode sebagai alat dan Penalaran.
 
 ### Python
 
@@ -558,10 +553,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## ใช้การเรียกใช้โค้ดในการสนทนาไปมาหลายรอบ
+## Menggunakan eksekusi kode dalam interaksi multi-turn
 
-นอกจากนี้ คุณยังใช้การเรียกใช้โค้ดเป็นส่วนหนึ่งของการสนทนาไปมาได้ด้วยการใช้
-`previous_interaction_id`
+Anda juga dapat menggunakan eksekusi kode sebagai bagian dari percakapan multi-turn menggunakan
+`previous_interaction_id`.
 
 ### Python
 
@@ -796,80 +791,82 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## อินพุต/เอาต์พุต (I/O)
+## Input/output (I/O)
 
-ในโมเดล Gemini ปัจจุบัน เช่น [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#gemini-3.5-flash) การ
-เรียกใช้โค้ดรองรับการป้อนไฟล์และเอาต์พุตกราฟ ความสามารถในการป้อนข้อมูลและเอาต์พุตเหล่านี้ช่วยให้คุณอัปโหลดไฟล์ CSV และไฟล์ข้อความ ถามคำถามเกี่ยวกับไฟล์ และให้ระบบสร้างกราฟ [Matplotlib](https://matplotlib.org/) เป็นส่วนหนึ่งของคำตอบได้ ระบบจะแสดงไฟล์เอาต์พุตเป็นรูปภาพในบรรทัดในคำตอบ
+Pada model Gemini saat ini seperti
+[Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=id), eksekusi
+kode mendukung input file dan output grafik. Dengan kemampuan input dan output ini, Anda dapat mengupload file CSV dan teks, mengajukan pertanyaan tentang file, dan membuat grafik [Matplotlib](https://matplotlib.org/) sebagai bagian dari respons. File output ditampilkan sebagai gambar inline dalam respons.
 
-### ราคา I/O
+### Harga I/O
 
-เมื่อใช้ I/O การเรียกใช้โค้ด ระบบจะเรียกเก็บเงินจากโทเค็นอินพุตและโทเค็นเอาต์พุต
+Saat menggunakan I/O eksekusi kode, Anda akan ditagih untuk token input dan token output:
 
-**โทเค็นอินพุต:**
+**Token input:**
 
-- พรอมต์ของผู้ใช้
+- Perintah pengguna
 
-**โทเค็นเอาต์พุต:**
+**Token output:**
 
-- โค้ดที่โมเดลสร้างขึ้น
-- เอาต์พุตการเรียกใช้โค้ดในสภาพแวดล้อมของโค้ด
-- โทเค็นการคิด
-- ข้อมูลสรุปที่โมเดลสร้างขึ้น
+- Kode yang dihasilkan oleh model
+- Output eksekusi kode di lingkungan kode
+- Token penalaran
+- Ringkasan yang dibuat oleh model
 
-### รายละเอียด I/O
+### Detail I/O
 
-เมื่อทำงานกับ I/O การดำเนินการโค้ด โปรดทราบรายละเอียดทางเทคนิคต่อไปนี้
+Saat Anda menangani I/O eksekusi kode, perhatikan detail teknis berikut:
 
-- ระยะเวลาการทำงานสูงสุดของสภาพแวดล้อมโค้ดคือ 30 วินาที
-- หากสภาพแวดล้อมของโค้ดสร้างข้อผิดพลาด โมเดลอาจตัดสินใจสร้างเอาต์พุตโค้ดใหม่ ซึ่งอาจเกิดขึ้นได้สูงสุด 5 ครั้ง
-- ขนาดไฟล์อินพุตสูงสุดจะจำกัดตามหน้าต่างโทเค็นของโมเดล หากคุณอัปโหลดไฟล์ที่มีขนาดเกินหน้าต่างบริบทสูงสุดของโมเดล API จะแสดงข้อผิดพลาด
-- การเรียกใช้โค้ดจะทำงานได้ดีที่สุดกับไฟล์ข้อความและ CSV
-- คุณส่งไฟล์อินพุตเป็นข้อมูลแบบอินไลน์หรืออัปโหลดโดยใช้
-  [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th)
-  และระบบจะส่งคืนไฟล์เอาต์พุตเป็นข้อมูลแบบอินไลน์เสมอ
+- Waktu proses maksimum lingkungan kode adalah 30 detik.
+- Jika lingkungan kode menghasilkan error, model dapat memutuskan untuk
+  membuat ulang output kode. Hal ini dapat terjadi hingga 5 kali.
+- Ukuran input file maksimum dibatasi oleh jendela token model. Jika Anda mengupload file yang melebihi jendela konteks maksimum model, API akan menampilkan error.
+- Eksekusi kode berfungsi paling baik dengan file teks dan CSV.
+- File input dapat diteruskan sebagai data inline atau diupload menggunakan
+  [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id),
+  dan file output selalu ditampilkan sebagai data inline.
 
-## การเรียกเก็บเงิน
+## Penagihan
 
-การเปิดใช้การเรียกใช้โค้ดจาก Gemini API จะไม่มีค่าใช้จ่ายเพิ่มเติม
-ระบบจะเรียกเก็บเงินจากคุณตามอัตราปัจจุบันของโทเค็นอินพุตและเอาต์พุตโดยอิงตาม
-โมเดล Gemini ที่คุณใช้
+Tidak ada biaya tambahan untuk mengaktifkan eksekusi kode dari Gemini API.
+Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan model Gemini yang Anda gunakan.
 
-สิ่งอื่นๆ ที่ควรทราบเกี่ยวกับการเรียกเก็บเงินสำหรับการเรียกใช้โค้ดมีดังนี้
+Berikut beberapa hal lain yang perlu diketahui tentang penagihan untuk eksekusi kode:
 
-- ระบบจะเรียกเก็บเงินจากคุณเพียงครั้งเดียวสำหรับโทเค็นอินพุตที่คุณส่งไปยังโมเดล และจะเรียกเก็บเงินสำหรับโทเค็นเอาต์พุตสุดท้ายที่โมเดลส่งกลับมาให้คุณ
-- ระบบจะนับโทเค็นที่แสดงโค้ดที่สร้างขึ้นเป็นโทเค็นเอาต์พุต โค้ดที่สร้างขึ้น
-  อาจมีข้อความและเอาต์พุตแบบหลายรูปแบบ เช่น รูปภาพ
-- ผลการเรียกใช้โค้ดจะนับเป็นโทเค็นเอาต์พุตด้วย
+- Anda hanya ditagih satu kali untuk token input yang Anda teruskan ke model, dan Anda ditagih untuk token output akhir yang dikembalikan kepada Anda oleh model.
+- Token yang merepresentasikan kode yang dihasilkan dihitung sebagai token output. Kode yang dihasilkan dapat mencakup teks dan output multimodal seperti gambar.
+- Hasil eksekusi kode juga dihitung sebagai token output.
 
-รูปแบบการเรียกเก็บเงินแสดงอยู่ในแผนภาพต่อไปนี้
+Model penagihan ditampilkan dalam diagram berikut:
 
-![รูปแบบการเรียกเก็บเงินสำหรับการเรียกใช้โค้ด](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=th)
+![model penagihan eksekusi kode](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=id)
 
-- ระบบจะเรียกเก็บเงินจากคุณตามอัตราปัจจุบันของโทเค็นอินพุตและเอาต์พุตโดยอิงตามโมเดล Gemini ที่คุณใช้
-- หาก Gemini ใช้การเรียกใช้โค้ดเมื่อสร้างคำตอบ ระบบจะติดป้ายกำกับพรอมต์ต้นฉบับ โค้ดที่สร้างขึ้น และผลลัพธ์ของโค้ดที่เรียกใช้เป็น*โทเค็นกลาง* และจะเรียกเก็บเงินเป็น*โทเค็นอินพุต*
-- จากนั้น Gemini จะสร้างข้อมูลสรุปและส่งคืนโค้ดที่สร้างขึ้น ผลลัพธ์ของ
-  โค้ดที่เรียกใช้ และข้อมูลสรุปสุดท้าย ระบบจะเรียกเก็บเงินสำหรับโทเค็นเหล่านี้เป็น*โทเค็นเอาต์พุต*
-- Gemini API จะรวมจำนวนโทเค็นระหว่างการประมวลผลไว้ในการตอบกลับจาก API เพื่อให้คุณทราบสาเหตุที่ได้รับโทเค็นอินพุตเพิ่มเติมจากพรอมต์เริ่มต้น
+- Anda akan ditagih dengan tarif token input dan output saat ini berdasarkan
+  model Gemini yang Anda gunakan.
+- Jika Gemini menggunakan eksekusi kode saat membuat respons Anda, perintah asli, kode yang dihasilkan, dan hasil kode yang dieksekusi akan diberi label *token perantara* dan ditagih sebagai *token input*.
+- Kemudian, Gemini membuat ringkasan dan menampilkan kode yang dihasilkan, hasil dari
+  kode yang dieksekusi, dan ringkasan akhir. Token ini ditagih sebagai *token output*.
+- Gemini API menyertakan jumlah token perantara dalam respons API, sehingga Anda tahu alasan Anda mendapatkan token input tambahan di luar perintah awal Anda.
 
-## ข้อจำกัด
+## Batasan
 
-- โมเดลจะสร้างและเรียกใช้โค้ดได้เท่านั้น แต่จะแสดงอาร์ติแฟกต์อื่นๆ เช่น ไฟล์สื่อ ไม่ได้
-- ในบางกรณี การเรียกใช้โค้ดอาจทำให้เกิดการถดถอยในด้านอื่นๆ ของเอาต์พุตโมเดล (เช่น การเขียนเรื่องราว)
-- ความสามารถของโมเดลต่างๆ ในการใช้การดำเนินการโค้ดให้สำเร็จนั้นแตกต่างกันไป
+- Model hanya dapat membuat dan menjalankan kode. API ini tidak dapat menampilkan artefak lain seperti file media.
+- Dalam beberapa kasus, mengaktifkan eksekusi kode dapat menyebabkan regresi di area output model lainnya (misalnya, menulis cerita).
+- Ada beberapa variasi dalam kemampuan berbagai model untuk menggunakan eksekusi kode dengan berhasil.
 
-## ชุดเครื่องมือที่รองรับ
+## Kombinasi alat yang didukung
 
-คุณสามารถใช้เครื่องมือการเรียกใช้โค้ดร่วมกับ[การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) เพื่อรองรับกรณีการใช้งานที่ซับซ้อนมากขึ้น
+Alat eksekusi kode dapat digabungkan dengan
+[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) untuk
+mendukung kasus penggunaan yang lebih kompleks.
 
-โมเดล Gemini 3 รองรับการรวมเครื่องมือในตัว (เช่น การดำเนินการโค้ด) กับ
-เครื่องมือที่กำหนดเอง (การเรียกใช้ฟังก์ชัน)
+Model Gemini 3 mendukung penggabungan alat bawaan (seperti Eksekusi Kode) dengan alat kustom (panggilan fungsi).
 
-## ไลบรารีที่รองรับ
+## Library yang didukung
 
-สภาพแวดล้อมการเรียกใช้โค้ดมีไลบรารีต่อไปนี้
+Lingkungan eksekusi kode mencakup library berikut:
 
 - attrs
-- หมากรุก
+- catur
 - contourpy
 - fpdf
 - geopandas
@@ -884,9 +881,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - numpy
 - opencv-python
 - openpyxl
-- การสร้างแพ็กเกจ
-- แพนด้า
-- หมอน
+- paket
+- pandas
+- bantal
 - protobuf
 - pylatex
 - pyparsing
@@ -897,30 +894,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - reportlab
 - scikit-learn
 - scipy
-- Seaborn
-- หก
+- seaborn
+- enam
 - striprtf
 - sympy
-- จัดตาราง
+- tabulasi
 - tensorflow
 - toolz
 - xlrd
 
-คุณจะติดตั้งไลบรารีของคุณเองไม่ได้
+Anda tidak dapat menginstal library Anda sendiri.
 
-## ขั้นตอนถัดไป
+## Langkah berikutnya
 
-- ลองใช้ [Quickstart ของ Interactions API](https://ai.google.dev/gemini-api/docs/quickstart?hl=th)
-- ดูข้อมูลเกี่ยวกับเครื่องมืออื่นๆ ของ Gemini API
-  - [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
-  - [การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
+- Coba [Panduan Memulai Interactions API](https://ai.google.dev/gemini-api/docs/quickstart?hl=id).
+- Pelajari alat Gemini API lainnya:
+  - [Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
+  - [Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-09-24 UTC
+Terakhir diperbarui pada 2026-10-09 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-09 UTC."],[],[]]

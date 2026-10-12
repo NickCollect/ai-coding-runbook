@@ -1,34 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=de
-fetched_at: 2026-10-05T06:36:17.398096+00:00
-title: "Priorit\u00e4tsinferenz \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=fa
+fetched_at: 2026-10-12T06:50:05.853865+00:00
+title: "\u0627\u0633\u062a\u0646\u0628\u0627\u0637 \u0627\u0648\u0644\u0648\u06cc\u062a \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 3.8 Flash اکنون در دسترس است. [آن را امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fa) .
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs/generate-content?hl=fa)
 
-Feedback geben
+ارسال بازخورد
 
-# Prioritätsinferenz
+# استنباط اولویت
 
-Beschreibung: Latenz mit der Priority-Inferenzstufe optimieren
+شرح: با لایه استنباط «اولویت‌دار»، نحوه بهینه‌سازی تأخیر را بیاموزید
 
-Die Gemini Priority API ist eine Premium-Inferenzstufe, die für geschäftskritische Arbeitslasten entwickelt wurde, die eine geringere Latenz und höchste Zuverlässigkeit zu einem Premiumpreis erfordern. Der Traffic der Priority-Stufe hat Vorrang vor dem Traffic der Standard-API und der Flex-Stufe.
+‫Gemini Priority API سطح استنباط ممتاز است که برای حجم‌های کاری حیاتی کسب‌وکار طراحی شده است و در ازای قیمت ممتاز، تأخیر پایین‌تر و بالاترین قابلیت اطمینان را ارائه می‌دهد. ترافیک سطح اولویت بالاتر از ترافیک سطح Flex و
+میانای برنامه‌سازی کاربردی استاندارد اولویت‌بندی می‌شود.
 
-Die Priority-Inferenz ist für [Nutzer der Stufen 2 und 3](https://ai.google.dev/gemini-api/docs/billing?hl=de#about-billing) an den Endpunkten der GenerateContent API
-und der Interactions API verfügbar.
+استنباط اولویت برای کاربران [سطح ۲ و سطح ۳](https://ai.google.dev/gemini-api/docs/billing?hl=fa#about-billing) در سراسر نقاط پایانی «میانای برنامه‌سازی کاربردی GenerateContent»
+و «میانای برنامه‌سازی کاربردی Interactions» دردسترس است.
 
-## Priority verwenden
+## نحوه استفاده از «اولویت»
 
-Wenn Sie die Priority-Stufe verwenden möchten, legen Sie das Feld `service_tier` im Anfragetext auf `priority` fest. Wenn das Feld ausgelassen wird, ist die Standardstufe die Standardeinstellung.
+برای استفاده از سطح «اولویت‌دار»، فیلد `service_tier` را در بدنه درخواست روی
+`priority` تنظیم کنید. اگر این فیلد حذف شود، سطح پیش‌فرض استاندارد است.
 
 ### Python
 
@@ -39,7 +41,7 @@ client = genai.Client()
 
 try:
     response = client.models.generate_content(
-        model="gemini-3.6-flash",
+        model="gemini-3.8-flash",
         contents="Triage this critical customer support ticket immediately.",
         config={"service_tier": "priority"},
     )
@@ -65,7 +67,7 @@ const ai = new GoogleGenAI({});
 async function main() {
   try {
       const result = await ai.models.generateContent({
-          model: "gemini-3.6-flash",
+          model: "gemini-3.8-flash",
           contents: "Triage this critical customer support ticket immediately.",
           config: {serviceTier: "priority"},
       });
@@ -85,7 +87,7 @@ async function main() {
 await main();
 ```
 
-### Ok
+### رفتن
 
 ```
 package main
@@ -107,7 +109,7 @@ func main() {
 
     resp, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3.6-flash",
+        "gemini-3.8-flash",
         genai.Text("Triage this critical customer support ticket immediately."),
         &genai.GenerateContentConfig{
             ServiceTier: "priority",
@@ -129,7 +131,7 @@ func main() {
 ### REST
 
 ```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
   "contents": [{
@@ -139,92 +141,88 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## Funktionsweise der Priority-Inferenz
+## نحوه عملکرد استنباط «اولویت»
 
-Bei der Priority-Inferenz werden Anfragen an Rechenwarteschlangen mit hoher Priorität weitergeleitet, was eine vorhersehbare, schnelle Leistung für nutzerorientierte Anwendungen ermöglicht. Der Hauptmechanismus ist ein reibungsloser serverseitiger Wechsel zur Standardverarbeitung für Traffic, der dynamische Limits überschreitet. So wird die Anwendungsstabilität gewährleistet, anstatt dass die Anfrage fehlschlägt.
+استنتاج اولویت درخواست‌ها را به صف‌های محاسباتی با اهمیت بالا هدایت می‌کند و
+عملکرد سریع و قابل‌پیش‌بینی برای برنامه‌های سَمت کاربر ارائه می‌دهد. سازوکار اصلی آن
+تنزل سطح سمت سرور به‌صورت تدریجی به پردازش استاندارد برای ترافیکی است که
+از حدود پویا فراتر می‌رود، و به‌جای رد کردن درخواست، پایداری برنامه را تضمین می‌کند.
 
-| Funktion | Priorität | Standard | Flex | Batch |
+| ویژگی | اولویت | استاندارد | به‌رخ کشیدن | دسته |
 | --- | --- | --- | --- | --- |
-| **Preise** | 75–100% mehr als Standard | Standardpreis | 50% Rabatt | 50% Rabatt |
-| **Latenz** | Sekunden | Sekunden bis Minuten | Minuten (Ziel: 1–15 Minuten) | Bis zu 24 Stunden |
-| **Zuverlässigkeit** | Hoch (nicht abwerfbar) | Hoch / mittel bis hoch | Best-Effort-Ansatz (abwerfbar) | Hoch (für Durchsatz) |
-| **Schnittstelle** | Synchron | Synchron | Synchron | Asynchron |
+| **قیمت‌گذاری** | ‫۷۵ تا ۱۰۰٪ بیشتر از «استاندارد» | قیمت کامل | ‫٪۵۰ تخفیف | ‫٪۵۰ تخفیف |
+| **تأخیر** | ثانیه | ثانیه به دقیقه | دقیقه (هدف ۱ تا ۱۵ دقیقه) | حداکثر ۲۴ ساعت |
+| **قابلیت اطمینان** | زیاد (غیرقابل ریزش) | زیاد / متوسط روبه‌بالا | نهایت تلاش (قابل‌حذف) | بالا (برای توان گذرداد) |
+| **میانای** | هم‌زمان | هم‌زمان | هم‌زمان | غیرهمگام |
 
-### Hauptvorteile
+### مزایای کلیدی
 
-- **Geringe Latenz**: Entwickelt für Reaktionszeiten im Sekundenbereich für interaktive,
-  nutzerorientierte KI-Tools.
-- **Hohe Zuverlässigkeit**: Traffic wird mit höchster Priorität behandelt und ist
-  nicht abwerfbar.
-- **Graceful Degradation**: Trafficspitzen, die dynamische Limits überschreiten, werden
-  automatisch auf die Standardstufe für die Verarbeitung herabgestuft, anstatt dass sie fehlschlagen.
-  So werden Dienstausfälle verhindert.
-- **Geringe Reibung**: Verwendet dieselbe synchrone `generateContent` Methode wie die
-  Standard- und Flex-Stufen.
+- **تأخیر کم**: برای زمان‌های پاسخ ثانیه‌ای برای ابزارهای هوش مصنوعی تعاملی و کاربرپسند طراحی شده است.
+- **قابلیت اطمینان بالا**: ترافیک با بالاترین سطح اهمیت حیاتی درنظر گرفته می‌شود و
+  به‌هیچ‌وجه نباید حذف شود.
+- **تنزل تدریجی**: افزایش ناگهانی ترافیک که از حدود پویا فراتر می‌رود به‌طور خودکار به سطح «استاندارد» برای پردازش تنزل داده می‌شود و از خرابی جلوگیری می‌کند و مانع از قطعی سرویس می‌شود.
+- **اصطکاک کم**: از همان روش هم‌زمان `generateContent` به‌عنوان سطوح استاندارد و Flex استفاده می‌کند.
 
-### Anwendungsfälle
+### موارد استفاده
 
-Die Priority-Verarbeitung ist ideal für geschäftskritische Arbeitsabläufe, bei denen Leistung und Zuverlässigkeit von größter Bedeutung sind.
+پردازش اولویت‌دار برای گردش کارهای حیاتی کسب‌وکار که در آن‌ها عملکرد و قابلیت اطمینان اهمیت زیادی دارد ایده‌آل است.
 
-- **Interaktive KI-Anwendungen**: Kundenservice-Chatbots und -Copiloten, bei denen
-  Nutzer einen Aufpreis zahlen und schnelle, konsistente Antworten erwarten.
-- **Echtzeit-Entscheidungsmaschinen**: Systeme, die hochzuverlässige Ergebnisse mit geringer Latenz
-  erfordern, z. B. Live-Ticket-Triage oder Betrugserkennung.
-- **Premium-Kundenfunktionen**: Entwickler, die höhere Service
-  Level Objectives (SLOs) für zahlende Kunden garantieren müssen.
+- **برنامه‌های هوش مصنوعی تعاملی**: روبات‌های گپ خدمات مشتری و دستیارهای هوش مصنوعی که در آن‌ها کاربران هزینه ممتاز پرداخت می‌کنند و انتظار دارند پاسخ‌های سریع و یکنواخت دریافت کنند.
+- **موتورهای تصمیم‌گیری هم‌زمان**: سیستم‌هایی که به نتایج بسیار قابل‌اعتماد و با تأخیر کم نیاز دارند، مانند اولویت‌بندی زنده درخواست‌های پشتیبانی یا تشخیص کلاهبرداری.
+- **ویژگی‌های مشتری ممتاز**: توسعه‌دهندگانی که باید اهداف سطح خدمات (SLO) بالاتری را برای مشتریان پولی تضمین کنند.
 
-### Ratenlimits
+### محدودیت‌های نرخ
 
-Für die Priority-Nutzung gelten eigene Ratenlimits, auch wenn die Nutzung auf die [allgemeinen Ratenlimits für interaktiven Traffic angerechnet wird](https://aistudio.google.com/rate-limit?hl=de). Die Standardratenlimits für die Priority-Inferenz sind **0,3-mal das Standardratenlimit für Modell / Stufe**.
+مصرف اولویت‌دار نرخ محدودیت‌های خود را دارد، حتی اگر مصرف در [محدودیت‌های نرخ ترافیک تعاملی کلی](https://aistudio.google.com/rate-limit?hl=fa) محاسبه شود. حدود نرخ پیش‌فرض
+برای استنباط «اولویت‌دار» **۰٫۳ برابر حد نرخ استاندارد برای «مدل / سطح»** است
 
-### Logik für Graceful Degradation
+### منطق تنزل ایمن
 
-Wenn die Priority-Limits aufgrund von Überlastung überschritten werden, werden Anfragen, die das Limit überschreiten, **automatisch und reibungslos** auf die Standardverarbeitung herabgestuft, anstatt dass sie mit einem 503- oder 429-Fehler fehlschlagen. Herabgestufte Anfragen werden zum Standardpreis und nicht zum Premiumpreis für Priority abgerechnet.
+اگر به‌دلیل ازدحام، از حدود «اولویت» فراتر بروید، درخواست‌های سرریز به‌جای اینکه با خطای ۵۰۳ یا ۴۲۹ ناموفق شوند، **به‌طور خودکار و به‌نحوی مناسب** به پردازش «استاندارد» تنزل داده می‌شوند. هزینه درخواست‌های تنزل‌یافته براساس نرخ استاندارد محاسبه می‌شود، نه نرخ ممتاز «اولویت‌دار».
 
-### Verantwortung des Clients
+### مسئولیت کارخواه
 
-- **Monitoring der Antwort**: Entwickler sollten den `x-gemini-service-tier`
-  Header in der API-Antwort beobachten, um festzustellen, ob Anfragen häufig auf
-  `standard` herabgestuft werden.
-- **Wiederholungen**: Clients müssen eine Wiederholungslogik/einen exponentiellen Backoff für
-  Standardfehler wie `DEADLINE_EXCEEDED` implementieren.
+- **پایش پاسخ**: توسعه‌دهندگان باید `x-gemini-service-tier`
+  سرایند در پاسخ API را پایش کنند تا تشخیص دهند آیا درخواست‌ها به‌طور مکرر به
+  `standard` تنزل داده می‌شوند یا نه.
+- **تلاش‌های مجدد**: کارخواه‌ها باید منطق تلاش مجدد/پس‌گیری نمایی را برای خطاهای استاندارد، مثل `DEADLINE_EXCEEDED`، پیاده‌سازی کنند.
 
-## Preise
+## قیمت‌گذاری
 
-Die Priority-Inferenz kostet 75–100% mehr als die [Standard-API](https://ai.google.dev/gemini-api/docs/pricing?hl=de) und wird pro Token abgerechnet.
+قیمت استنباط اولویت ۷۵ تا ۱۰۰٪ بیشتر از [میانای برنامه‌سازی کاربردی استاندارد](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) است و براساس تعداد نشان صورت‌حساب می‌شود.
 
-## Unterstützte Modelle
+## مدل‌های پشتیبانی‌شده
 
-Die folgenden Modelle unterstützen die Priority-Inferenz:
+مدل‌های زیر از «استنباط اولویت‌دار» پشتیبانی می‌کنند:
 
-| Modell | Priority-Inferenz |
+| مدل | استنباط اولویت |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=de) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=de) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=de) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=de) | ✔️ |
-| [Gemini 3.1 Pro (Vorschau)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=de) | ✔️ |
-| [Gemini 3 Flash (Vorschau)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=de) | ✔️ |
-| [Gemini 3 Pro Image (Vorschau)](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=de) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=de) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=de) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=de) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=de) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fa) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fa) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fa) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fa) | ✔️ |
+| [پیش‌نمایش Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fa) | ✔️ |
+| [پیش‌نمایش Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fa) | ✔️ |
+| [پیش‌نمایش تصویر Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fa) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fa) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fa) | ✔️ |
+| [تصویر Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fa) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fa) | ✔️ |
 
-## Nächste Schritte
+## قدم بعدی چیست
 
-Weitere Informationen zu den anderen [Inferenz- und Optimierungs](https://ai.google.dev/gemini-api/docs/optimization?hl=de)optionen von Gemini:
+درباره سایر گزینه‌های [استنباط و بهینه‌سازی](https://ai.google.dev/gemini-api/docs/optimization?hl=fa) Gemini بخوانید:
 
-- [Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de) für eine Kostenreduzierung von 50 %
-- [Batch-API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de) für die asynchrone Verarbeitung innerhalb von 24 Stunden
-- [Kontext-Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de) für geringere Kosten für Eingabetokens
+- برای کاهش ۵۰٪ هزینه، از [استنتاج انعطاف‌پذیر](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fa) استفاده کنید.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=fa) برای پردازش ناهمزمان در عرض ۲۴ ساعت.
+- [ذخیره کردن بافت در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa) برای کاهش هزینه‌های کد ورودی.
 
-Feedback geben
+ارسال بازخورد
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی.
 
-Haben Sie Feedback für uns?
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی."],[],[]]

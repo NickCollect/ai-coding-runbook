@@ -1,47 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026?hl=ja
-fetched_at: 2026-10-05T06:29:41.855315+00:00
-title: "Antigravity \u306e\u30d7\u30ec\u30d3\u30e5\u30fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-09-2026?hl=th
+fetched_at: 2026-10-12T07:08:13.214802+00:00
+title: "\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07 Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-# Antigravity のプレビュー
+# ตัวอย่าง Antigravity
 
-自律型の複数ステップのワークフロー向けに設計された、強力な汎用マネージド エージェント。このモデルは、Google がホストする安全な分離された Linux サンドボックス内で、計画、推論、コードの実行、ファイルの管理、ウェブ検索を行います。
+เอเจนต์ที่มีการจัดการแบบอเนกประสงค์ที่ทรงพลังซึ่งออกแบบมาสำหรับเวิร์กโฟลว์แบบหลายขั้นตอนที่ทำงานได้ด้วยตนเอง
+โมเดลนี้วางแผน ให้เหตุผล รันโค้ด จัดการไฟล์ และค้นหา
+เว็บภายในแซนด์บ็อกซ์ Linux ที่ปลอดภัยและแยกต่างหากซึ่ง Google เป็นผู้โฮสต์
 
-2026 年 9 月のリリース（`antigravity-preview-09-2026`）では、プロンプト キャッシュの改善、ネイティブ コード検索ツール、効率的な行範囲ファイル編集により、ランタイム ハーネスがアップグレードされます。
+การเปิดตัวในเดือนกันยายน 2026 (`antigravity-preview-09-2026`) จะอัปเกรดฮาร์เนสของรันไทม์ ด้วยการแคชพรอมต์ที่ได้รับการปรับปรุง เครื่องมือค้นหาโค้ดแบบเนทีฟ และการแก้ไขไฟล์ช่วงบรรทัดที่มีประสิทธิภาพ
 
-## ドキュメント
+## เอกสารประกอบ
 
-機能、機能、コードサンプルの詳細については、[Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja) ページをご覧ください。
+ไปที่หน้า [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th) เพื่อดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์ ความสามารถ และตัวอย่างโค้ด
 
 ## antigravity-preview-09-2026
 
-| プロパティ | 説明 |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_cardエージェント コード | **Interactions API**  `antigravity-preview-09-2026` |
-| save でサポートされているデータ型 | **入力**  テキスト、画像  **出力**  テキスト |
-| token\_autoトークンの上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力コンテキスト ウィンドウ**  1,048,576（約 135,000 で圧縮）  **出力トークンの上限**  65,536 |
-| 123 バージョン | 詳しくは、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `antigravity-preview-09-2026` |
-| calendar\_month最新の更新 | 2026 年 9 月 |
+| รหัสตัวแทน id\_card | **Interactions API**  `antigravity-preview-09-2026` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ  **เอาต์พุต**  ข้อความ |
+| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **หน้าต่างบริบทของอินพุต**  1,048,576 (บีบอัดที่ประมาณ 135,000)  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `antigravity-preview-09-2026` |
+| calendar\_monthการอัปเดตล่าสุด | กันยายน 2569 |
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最終更新日 2026-09-24 UTC。
+อัปเดตล่าสุด 2026-09-24 UTC
 
-ご意見をお聞かせください
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-24 UTC。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

@@ -1,203 +1,202 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=hi
-fetched_at: 2026-10-05T06:39:11.074892+00:00
-title: "\u092a\u094d\u0930\u0949\u092e\u094d\u092a\u094d\u091f \u0921\u093f\u091c\u093c\u093e\u0907\u0928 \u0938\u0947 \u091c\u0941\u0921\u093c\u0940 \u0930\u0923\u0928\u0940\u0924\u093f\u092f\u093e\u0902 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ko
+fetched_at: 2026-10-12T06:59:16.764831+00:00
+title: "\ud504\ub86c\ud504\ud2b8 \uc124\uacc4 \uc804\ub7b5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-सुझाव भेजें
+의견 보내기
 
-# प्रॉम्प्ट डिज़ाइन से जुड़ी रणनीतियां
+# 프롬프트 설계 전략
 
-*प्रॉम्प्ट डिज़ाइन*, प्रॉम्प्ट या नैचुरल लैंग्वेज में की गई ऐसी अनुरोधों को बनाने की प्रोसेस है जिनसे किसी लैंग्वेज मॉडल से सटीक और अच्छी क्वालिटी के जवाब मिलते हैं.
+*프롬프트 설계*는 언어 모델에서 정확하고 고품질의 응답을 유도하는 프롬프트 또는 자연어 요청을 만드는 프로세스입니다.
 
-इस पेज पर, Gemini के एआई मॉडल का ज़्यादा से ज़्यादा फ़ायदा पाने के लिए, प्रॉम्प्ट डिज़ाइन करने से जुड़े बुनियादी कॉन्सेप्ट, रणनीतियां, और सबसे सही तरीके बताए गए हैं.
+이 페이지에서는 Gemini AI 모델을 최대한 활용하기 위한 프롬프트 설계를 시작하기 위한 기본 개념, 전략, 권장사항을 소개합니다.
 
-## विषय के हिसाब से प्रॉम्प्ट गाइड
+## 주제별 프롬프트 가이드
 
-क्या आपको प्रॉम्प्ट बनाने की ज़्यादा खास रणनीतियां चाहिए? इन विषयों पर प्रॉम्प्ट लिखने से जुड़ी हमारी अन्य गाइड देखें:
+더 구체적인 프롬프트 전략을 찾고 계신가요? 다음 주제에 관한 다른 프롬프트 작성 가이드를 확인하세요.
 
-- [मीडिया फ़ाइलों का इस्तेमाल करके प्रॉम्प्ट देना](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide)
-- [इमेज जनरेट करने के लिए प्रॉम्प्ट लिखना](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi#prompt-guide)
-- [वीडियो जनरेट करने के लिए प्रॉम्प्ट देना](https://ai.google.dev/gemini-api/docs/video?hl=hi#prompt-guide)
+- [미디어 파일로 프롬프트하기](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide)
+- [이미지 생성 프롬프트](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko#prompt-guide)
+- [동영상 생성을 위한 프롬프트](https://ai.google.dev/gemini-api/docs/video?hl=ko#prompt-guide)
 
-आपको [प्रॉम्प्ट गैलरी](https://ai.google.dev/gemini-api/prompts?hl=hi) में अन्य सैंपल प्रॉम्प्ट मिल सकते हैं. इनका मकसद, इस गाइड में शेयर किए गए कई कॉन्सेप्ट को इंटरैक्टिव तरीके से दिखाना है.
+이 가이드에서 공유된 여러 개념을 대화형으로 보여주기 위한 [프롬프트 갤러리](https://ai.google.dev/gemini-api/prompts?hl=ko)에서 다른 샘플 프롬프트를 확인할 수 있습니다.
 
-## साफ़ और सटीक निर्देश
+## 명확하고 구체적인 요청 사항
 
-मॉडल के व्यवहार को अपनी ज़रूरत के हिसाब से बनाने का सबसे अच्छा तरीका यह है कि उसे साफ़ तौर पर और खास निर्देश दिए जाएं. निर्देश, किसी सवाल के तौर पर हो सकते हैं. इसके अलावा, सिलसिलेवार तरीके से टास्क पूरे करने के लिए भी निर्देश दिए जा सकते हैं. साथ ही, उपयोगकर्ता के अनुभव और सोच को मैप करने जैसे मुश्किल निर्देश भी दिए जा सकते हैं.
+모델 동작을 효과적이고 효율적으로 맞춤설정하는 방법은 명확하고 구체적인 요청 사항을 제공하는 것입니다. 요청 사항은 질문, 단계별 작업 또는 사용자 경험과 사고방식을 매핑하는 것만큼 복잡한 형태로 제공될 수 있습니다.
 
-### इनपुट
+### 입력
 
-इनपुट, प्रॉम्प्ट में मौजूद वह ज़रूरी टेक्स्ट होता है जिसके बारे में आपको मॉडल से जवाब चाहिए. इनपुट, मॉडल से पूछा गया कोई सवाल (सवाल वाला इनपुट), मॉडल को दिया गया कोई टास्क (टास्क वाला इनपुट), मॉडल को दी गई कोई इकाई (इकाई वाला इनपुट) या मॉडल को दिया गया कोई अधूरा इनपुट (पूरा करने वाला इनपुट) हो सकता है.
+입력은 모델에서 응답을 제공하려는 프롬프트의 필수 텍스트입니다. 입력은 모델에서 답하는 질문(질문 입력), 모델에서 수행하는 태스크(태스크 입력), 모델에서 작업하는 항목(항목 입력) 또는 모델에서 완료하거나 계속하는 부분 입력(완료 입력)일 수 있습니다.
 
-| **इनपुट का टाइप** | **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
+| **입력 유형** | **프롬프트** | **생성된 출력** |
 | --- | --- | --- |
-| सवाल | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| टास्क | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| इकाई | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| 질문 | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| 작업 | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| 항목 | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### इनपुट को कुछ हद तक पूरा करना
+#### 부분 입력 완료
 
-जनरेटिव लैंग्वेज मॉडल, अपने-आप पूरे होने की सुविधा देने वाले बेहतर टूल की तरह काम करते हैं. अधूरा कॉन्टेंट देने पर, मॉडल बाकी कॉन्टेंट या उस कॉन्टेंट के हिसाब से जवाब दे सकता है. ऐसा करते समय, अगर आपने कोई उदाहरण या कॉन्टेक्स्ट शामिल किया है, तो मॉडल उन उदाहरणों या कॉन्टेक्स्ट को ध्यान में रख सकता है.
+생성형 언어 모델은 고급 자동 완성 도구처럼 작동합니다. 부분 콘텐츠를 제공하면 모델은 나머지 콘텐츠나 해당 콘텐츠의 연속이라고 생각하는 것을 응답으로 제공할 수 있습니다. 이 경우 예시 또는 컨텍스트를 포함하면 모델이 이러한 예시 또는 컨텍스트를 고려할 수 있습니다.
 
-यहां दिए गए उदाहरण में, निर्देश और इकाई के इनपुट के साथ प्रॉम्प्ट दिया गया है:
-
-|  |
-| --- |
-| **प्रॉम्प्ट:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **जवाब:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
-
-मॉडल ने प्रॉम्प्ट के मुताबिक काम किया. हालांकि, सामान्य भाषा में निर्देश लिखना कभी-कभी मुश्किल हो सकता है. साथ ही, इससे मॉडल को निर्देशों को समझने में काफ़ी समय लग सकता है.
-उदाहरण के लिए, किसी रेस्टोरेंट के मेन्यू में कई आइटम हो सकते हैं. JSON रिस्पॉन्स का साइज़ कम करने के लिए, आपको शायद उन आइटम को हटाना पड़े जिनका ऑर्डर नहीं दिया गया था. इस मामले में, उदाहरण और जवाब का प्रीफ़िक्स दिया जा सकता है. इसके बाद, मॉडल को इसे पूरा करने दिया जा सकता है:
+다음 예시에서는 안내 및 항목 입력과 함께 프롬프트를 제공합니다.
 
 |  |
 | --- |
-| **प्रॉम्प्ट:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **जवाब:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **프롬프트:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **응답:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
 
-ध्यान दें कि "चीज़बर्गर" को आउटपुट से हटा दिया गया है, क्योंकि यह ऑर्डर का हिस्सा नहीं था.
-
-प्रॉम्प्ट का इस्तेमाल करके, JSON रिस्पॉन्स ऑब्जेक्ट के फ़ॉर्मैट के बारे में बताया जा सकता है. हालांकि, हमारा सुझाव है कि रिस्पॉन्स के लिए ज़्यादा जटिल JSON स्कीमा के बारे में बताते समय, Gemini API की [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) सुविधा का इस्तेमाल करें.
-
-### कंस्ट्रेंट
-
-प्रॉम्प्ट को पढ़ने या जवाब जनरेट करने से जुड़ी किसी भी पाबंदी के बारे में बताएं. मॉडल को यह बताया जा सकता है कि उसे क्या करना है और क्या नहीं. उदाहरण के लिए, प्रॉम्प्ट में यह बताया जा सकता है कि आपको जवाब कितना लंबा चाहिए:
+모델이 예측한 대로 작동하지만 자연어로 안내를 작성하는 것이 어려울 수 있으며 모델의 해석에 많은 영향을 미칩니다.
+예를 들어 레스토랑 메뉴에는 많은 항목이 포함되어 있을 수 있습니다. JSON 응답의 크기를 줄이기 위해 정렬되지 않은 항목을 생략하고 싶을 수 있습니다. 이 경우 예시 및 응답 프리픽스를 제공하여 모델이 이를 완료하게 할 수 있습니다.
 
 |  |
 | --- |
-| **प्रॉम्प्ट:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **जवाब:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **프롬프트:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **응답:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
 
-### जवाब का फ़ॉर्मैट
+'치즈버거'가 주문의 일부가 아니었기 때문에 출력에서 어떻게 제외되었는지 확인하세요.
 
-जवाब के फ़ॉर्मैट के बारे में निर्देश दिए जा सकते हैं. उदाहरण के लिए, जवाब को टेबल, बुलेट वाली सूची, एलिवेटर पिच, कीवर्ड, वाक्य या पैराग्राफ़ के तौर पर फ़ॉर्मैट करने के लिए कहा जा सकता है. सिस्टम के इस निर्देश से, मॉडल को बातचीत के अंदाज़ में जवाब देने के लिए कहा गया है:
+프롬프트를 사용하여 간단한 JSON 응답 객체의 형식을 지정할 수 있지만, 응답에 더 복잡한 JSON 스키마를 지정할 때는 Gemini API의 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko) 기능을 사용하는 것이 좋습니다.
 
-|  |
-| --- |
-| **सिस्टम के निर्देश**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **प्रॉम्प्ट**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **जवाब:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+### 제약조건
 
-#### जवाबों को पूरा करने की रणनीति के साथ फ़ॉर्मैट करना
-
-[जवाब पूरा करने की रणनीति](#completion) से भी जवाब को फ़ॉर्मैट करने में मदद मिल सकती है.
-यहां दिए गए उदाहरण में, मॉडल को निबंध की आउटलाइन बनाने के लिए कहा गया है:
+프롬프트 읽기 또는 응답 생성에 대한 제약조건을 지정합니다. 모델에게 해야 할 일과 하지 말아야 할 일을 지시할 수 있습니다. 예를 들어 프롬프트에서 요약의 길이에 대한 제약 조건을 지정할 수 있습니다.
 
 |  |
 | --- |
-| **प्रॉम्प्ट:**    ``` Create an outline for an essay about hummingbirds. ```  **जवाब:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
+| **프롬프트:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **응답:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
 
-प्रॉम्प्ट में, आउटलाइन का फ़ॉर्मैट नहीं बताया गया था. इसलिए, मॉडल ने आपके लिए कोई फ़ॉर्मैट चुना है. मॉडल से किसी खास फ़ॉर्मैट में आउटलाइन पाने के लिए, आउटलाइन की शुरुआत में टेक्स्ट जोड़ा जा सकता है. इसके बाद, मॉडल को उस पैटर्न के आधार पर आउटलाइन को पूरा करने दें जिसे आपने शुरू किया था.
+### 대답 형식
 
-|  |
-| --- |
-| **प्रॉम्प्ट:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **जवाब:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
-
-## ज़ीरो-शॉट प्रॉम्प्ट बनाम फ़्यू-शॉट प्रॉम्प्ट
-
-प्रॉम्प्ट में ऐसे उदाहरण शामिल किए जा सकते हैं जिनसे मॉडल को यह पता चल सके कि सही जवाब कैसा होता है. मॉडल, उदाहरणों से पैटर्न और संबंधों की पहचान करने की कोशिश करता है. साथ ही, जवाब जनरेट करते समय उन्हें लागू करता है. जिन प्रॉम्प्ट में कुछ उदाहरण शामिल होते हैं उन्हें *उदाहरण के साथ डाले गए प्रॉम्प्ट* कहा जाता है. वहीं, जिन प्रॉम्प्ट में कोई उदाहरण शामिल नहीं होता उन्हें *बिना उदाहरण वाले प्रॉम्प्ट* कहा जाता है. फ़्यू-शॉट प्रॉम्प्ट का इस्तेमाल अक्सर, मॉडल के जवाबों के फ़ॉर्मैट, शब्दों, स्कोप या सामान्य पैटर्न को कंट्रोल करने के लिए किया जाता है. मॉडल को ज़्यादा सटीक नतीजे जनरेट करने में मदद करने के लिए, अलग-अलग तरह के उदाहरणों का इस्तेमाल करें.
-
-हमारा सुझाव है कि आप अपने प्रॉम्प्ट में हमेशा कुछ उदाहरण शामिल करें. कुछ उदाहरणों के बिना दिए गए प्रॉम्प्ट ज़्यादा असरदार नहीं होते. अगर आपके उदाहरणों में टास्क को साफ़ तौर पर दिखाया गया है, तो प्रॉम्प्ट से निर्देशों को हटाया जा सकता है.
-
-नीचे दिए गए ज़ीरो-शॉट प्रॉम्प्ट में, मॉडल से सबसे सही जवाब चुनने के लिए कहा गया है.
+응답 형식을 지정하는 요청 사항을 제공할 수 있습니다. 예를 들어 대답 형식을 표, 글머리기호 목록, 엘리베이터 피치, 키워드, 문장 또는 단락 형식으로 요청할 수 있습니다. 다음 시스템 요청 사항은 모델에 대답 시 더 대화형으로 작성하도록 지시합니다.
 
 |  |
 | --- |
-| **प्रॉम्प्ट:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **जवाब:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **시스템 요청 사항**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **프롬프트**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **응답:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
 
-अगर आपको मॉडल से छोटे जवाब चाहिए, तो प्रॉम्प्ट में ऐसे उदाहरण शामिल करें जिनमें छोटे जवाबों को प्राथमिकता दी गई हो.
+#### 완료 전략으로 대답 형식 지정
 
-नीचे दिए गए प्रॉम्प्ट में दो उदाहरण दिए गए हैं. इनमें छोटे जवाबों को प्राथमिकता दी गई है. जवाब में, यह देखा जा सकता है कि उदाहरणों की मदद से मॉडल को, लंबे जवाब (`Explanation1`) के बजाय छोटे जवाब (`Explanation2`) को चुनने के लिए गाइड किया गया है. ऐसा पहले नहीं होता था.
-
-|  |
-| --- |
-| **प्रॉम्प्ट:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **जवाब:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
-
-### उदाहरणों की सही संख्या
-
-Gemini जैसे मॉडल, कुछ उदाहरणों का इस्तेमाल करके पैटर्न का पता लगा सकते हैं. हालांकि, बेहतर नतीजों के लिए, आपको प्रॉम्प्ट में दिए जाने वाले उदाहरणों की संख्या के साथ एक्सपेरिमेंट करना पड़ सकता है. हालांकि, बहुत ज़्यादा उदाहरण शामिल करने पर, मॉडल उदाहरणों के हिसाब से जवाब देने के लिए [ओवरफ़िट](https://developers.google.com/machine-learning/glossary?hl=hi#overfitting) हो सकता है.
-
-### एक ही तरह का फ़ॉर्मैट इस्तेमाल करना
-
-पक्का करें कि कुछ इनपुट-आउटपुट उदाहरणों के साथ दिए गए प्रॉम्प्ट का स्ट्रक्चर और फ़ॉर्मैटिंग एक जैसी हो, ताकि आपको ऐसे जवाब न मिलें जो आपके काम के न हों. प्रॉम्प्ट में कुछ इनपुट-आउटपुट उदाहरणों के साथ दिया गया प्रॉम्प्ट जोड़ने का मुख्य मकसद, मॉडल को जवाब का फ़ॉर्मैट दिखाना है. इसलिए, यह ज़रूरी है कि सभी उदाहरणों में एक जैसा फ़ॉर्मैट हो. खास तौर पर, एक्सएमएल टैग, व्हाइट स्पेस, नई लाइनें, और उदाहरणों को अलग करने वाले वर्णों पर ध्यान देना ज़रूरी है.
-
-## कॉन्टेक्स्ट जोड़ें
-
-प्रॉम्प्ट में निर्देश और जानकारी शामिल की जा सकती है, ताकि मॉडल को किसी समस्या को हल करने में मदद मिले. यह न मान लें कि मॉडल के पास सभी ज़रूरी जानकारी है. इस कॉन्टेक्स्ट वाली जानकारी से, मॉडल को उन सीमाओं और जानकारी को समझने में मदद मिलती है जिनके आधार पर आपको उससे काम करवाना है.
-
-यहां दिए गए उदाहरण में, मॉडल से राउटर से जुड़ी समस्या हल करने के बारे में निर्देश देने के लिए कहा गया है:
+[완료 전략](#completion)은 대답의 형식을 지정하는 데도 도움이 될 수 있습니다.
+다음 예시에서는 모델에 에세이 개요를 만들라는 프롬프트를 표시합니다.
 
 |  |
 | --- |
-| **प्रॉम्प्ट:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **जवाब:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **프롬프트:**    ``` Create an outline for an essay about hummingbirds. ```  **응답:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
 
-जवाब में समस्या हल करने के बारे में सामान्य जानकारी दी गई है. इसमें न तो राउटर के बारे में खास जानकारी दी गई है और न ही एलईडी इंडिकेटर लाइट की स्थिति के बारे में बताया गया है.
-
-किसी खास राउटर के लिए जवाब को पसंद के मुताबिक बनाने के लिए, प्रॉम्प्ट में राउटर की समस्या हल करने से जुड़ी गाइड को कॉन्टेक्स्ट के तौर पर जोड़ा जा सकता है. इससे, जवाब देते समय राउटर को इस गाइड से मदद मिलेगी.
+프롬프트에 개요의 형식이 지정되지 않았고 모델이 자동으로 형식을 선택했습니다. 모델이 특정 형식으로 개요를 반환하기 위해서는 개요의 시작을 나타내는 텍스트를 추가하고, 시작한 패턴에 따라 모델이 이를 완료하도록 할 수 있습니다.
 
 |  |
 | --- |
-| **प्रॉम्प्ट:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **जवाब:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **프롬프트:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **응답:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
 
-## प्रॉम्प्ट को कॉम्पोनेंट में बांटना
+## 제로샷 또는 퓨샷 프롬프트
 
-जिन मामलों में मुश्किल प्रॉम्प्ट की ज़रूरत होती है उनमें मॉडल को इस जटिलता को मैनेज करने में मदद की जा सकती है. इसके लिए, चीज़ों को आसान कॉम्पोनेंट में तोड़ें.
+프롬프트에 올바른 예시 모델을 보여주는 예시를 포함할 수 있습니다. 모델은 예시의 패턴과 관계를 식별한 후 응답을 생성할 때 이를 적용합니다. 몇 가지 예시가 포함된 프롬프트를 *퓨샷* 프롬프트라고 하며, 예시를 제공하지 않는 프롬프트를 *제로샷* 프롬프트라고 합니다. 퓨샷 프롬프트는 모델 응답의 형식 지정, 문구, 범위 지정 또는 일반적인 패턴을 규제하는 데 자주 사용됩니다. 모델이 초점을 좁히고 더 정확한 결과를 생성할 수 있도록 구체적이고 다양한 예시를 사용합니다.
 
-1. **निर्देशों को अलग-अलग हिस्सों में बांटें:** एक ही प्रॉम्प्ट में कई निर्देश देने के बजाय, हर निर्देश के लिए अलग-अलग प्रॉम्प्ट बनाएं. आपके पास यह चुनने का विकल्प होता है कि उपयोगकर्ता के इनपुट के आधार पर, किस प्रॉम्प्ट को प्रोसेस करना है.
-2. **चेन प्रॉम्प्ट:** ऐसे मुश्किल टास्क जिनमें कई क्रम में चलने वाले चरण शामिल होते हैं उनके लिए, हर चरण को एक प्रॉम्प्ट बनाएं और प्रॉम्प्ट को एक क्रम में जोड़ें. प्रॉम्प्ट की इस सीक्वेंशियल चेन में, क्रम में मौजूद एक प्रॉम्प्ट का आउटपुट, अगले प्रॉम्प्ट का इनपुट बन जाता है. सीक्वेंस में मौजूद आखिरी प्रॉम्प्ट का आउटपुट, फ़ाइनल आउटपुट होता है.
-3. **जवाबों को एग्रीगेट करना:** एग्रीगेशन तब किया जाता है, जब आपको डेटा के अलग-अलग हिस्सों पर अलग-अलग टास्क एक साथ करने हों. साथ ही, फ़ाइनल आउटपुट पाने के लिए, नतीजों को एग्रीगेट करना हो. उदाहरण के लिए, मॉडल को यह निर्देश दिया जा सकता है कि वह डेटा के पहले हिस्से पर एक ऑपरेशन करे, डेटा के बाकी हिस्से पर दूसरा ऑपरेशन करे, और फिर नतीजों को इकट्ठा करे.
+프롬프트에는 항상 퓨샷 예시를 포함하는 것이 좋습니다. 퓨샷 예시가 없는 프롬프트는 효과적이지 않을 수 있습니다. 실제로 태스크를 보여주는 예시가 충분히 명확하다면 프롬프트에서 요청 사항을 삭제해도 됩니다.
 
-## मॉडल के पैरामीटर के साथ एक्सपेरिमेंट करना
+다음 제로샷 프롬프트는 모델에 가장 적합한 설명을 선택하라고 요청합니다.
 
-मॉडल को भेजे जाने वाले हर कॉल में, पैरामीटर की वैल्यू शामिल होती हैं. इनसे यह कंट्रोल किया जाता है कि मॉडल जवाब कैसे जनरेट करे. मॉडल, पैरामीटर की अलग-अलग वैल्यू के लिए अलग-अलग नतीजे जनरेट कर सकता है. टास्क के लिए सबसे सही वैल्यू पाने के लिए, पैरामीटर की अलग-अलग वैल्यू आज़माएं. अलग-अलग मॉडल के लिए उपलब्ध पैरामीटर अलग-अलग हो सकते हैं. सबसे ज़्यादा इस्तेमाल किए जाने वाले पैरामीटर ये हैं:
+|  |
+| --- |
+| **프롬프트:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **응답:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
 
-1. **ज़्यादा से ज़्यादा आउटपुट टोकन:** इससे यह तय किया जाता है कि जवाब में ज़्यादा से ज़्यादा कितने टोकन जनरेट किए जा सकते हैं. एक टोकन में करीब चार वर्ण होते हैं. 100
-   टोकन का मतलब करीब 60 से 80 शब्द होता है.
-2. **तापमान:** तापमान से यह तय होता है कि टोकन को कितनी बार चुना जाएगा. जवाब जनरेट करने की प्रोसेस के दौरान, सैंपलिंग के लिए टेंपरेचर का इस्तेमाल किया जाता है. ऐसा तब होता है, जब `topP` और `topK` लागू किए जाते हैं. कम तापमान, उन प्रॉम्प्ट के लिए अच्छा होता है जिनके लिए ज़्यादा सटीक या कम ओपन-एंडेड जवाब की ज़रूरत होती है. वहीं, ज़्यादा तापमान से अलग-अलग तरह के या क्रिएटिव नतीजे मिल सकते हैं. टेम्परेचर 0 होने का मतलब है कि जवाब तय होता है. इसका मतलब है कि सबसे ज़्यादा संभावना वाले जवाब को हमेशा चुना जाता है.
-3. **`topK`:** `topK` पैरामीटर से, मॉडल के आउटपुट के लिए टोकन चुनने के तरीके में बदलाव होता है. `topK` की वैल्यू 1 होने का मतलब है कि चुना गया टोकन, मॉडल की शब्दावली में मौजूद सभी टोकन में से सबसे ज़्यादा संभावित है. इसे ग्रीडी डिकोडिंग भी कहा जाता है. वहीं, `topK` की वैल्यू 3 होने का मतलब है कि अगला टोकन, तापमान का इस्तेमाल करके तीन सबसे संभावित टोकन में से चुना गया है. हर टोकन चुनने के चरण में, सबसे ज़्यादा संभावना वाले `topK` टोकन का सैंपल लिया जाता है. इसके बाद, टोकन को `topP` के आधार पर फ़िल्टर किया जाता है. साथ ही, तापमान के हिसाब से सैंपलिंग का इस्तेमाल करके फ़ाइनल टोकन चुना जाता है.
-4. **`topP`:** `topP` पैरामीटर से, मॉडल के आउटपुट के लिए टोकन चुनने के तरीके में बदलाव होता है. टोकन को सबसे ज़्यादा से लेकर सबसे कम संभावना के हिसाब से चुना जाता है. ऐसा तब तक किया जाता है, जब तक उनकी संभावनाओं का योग `topP` वैल्यू के बराबर न हो जाए. उदाहरण के लिए, अगर टोकन A, B, और C की संभावना 0.3, 0.2, और 0.1 है और `topP` की वैल्यू 0.5 है, तो मॉडल, तापमान का इस्तेमाल करके अगले टोकन के तौर पर A या B को चुनेगा और C को उम्मीदवार के तौर पर शामिल नहीं करेगा. डिफ़ॉल्ट `topP` वैल्यू 0.95 है.
-5. **`stop_sequences`:** मॉडल को कॉन्टेंट जनरेट करने से रोकने के लिए, स्टॉप सीक्वेंस सेट करें. स्टॉप सीक्वेंस, वर्णों का कोई भी क्रम हो सकता है. वर्णों के ऐसे क्रम का इस्तेमाल करने से बचें जो जनरेट किए गए कॉन्टेंट में दिख सकते हैं.
+모델이 간결한 대답을 생성해야 하는 사용 사례의 경우 간결한 대답을 선호할 수 있도록 프롬프트에 예시를 포함할 수 있습니다.
 
-## प्रॉम्प्ट को बेहतर बनाने की रणनीतियां
+다음 프롬프트는 간략한 설명을 선호하는 두 가지 예시를 제공합니다. 응답에서 모델은 이전과 마찬가지로 더 긴 설명 (`Explanation1`)이 아닌 더 짧은 설명 (`Explanation2`)을 선택하도록 모델에 예시를 통해 안내가 제공된 것을 볼 수 있습니다.
 
-कभी-कभी, आपको मनमुताबिक जवाब पाने के लिए, प्रॉम्प्ट को कई बार डिज़ाइन करना पड़ सकता है. इस सेक्शन में, प्रॉम्प्ट को बेहतर बनाने के लिए कुछ सुझाव दिए गए हैं:
+|  |
+| --- |
+| **프롬프트:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **응답:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
 
-1. **अलग-अलग शब्दों का इस्तेमाल करें:** अपने प्रॉम्प्ट में अलग-अलग शब्दों या वाक्यांशों का इस्तेमाल करने से, मॉडल से अक्सर अलग-अलग जवाब मिलते हैं. भले ही, उन सभी का मतलब एक ही हो. अगर आपको अपने प्रॉम्प्ट से उम्मीद के मुताबिक नतीजे नहीं मिल रहे हैं, तो उसे फिर से लिखें.
+### 최적의 예시 수
+
+Gemini와 같은 모델은 종종 몇 가지 예시를 사용하여 패턴을 선택하지만, 최상의 결과를 얻기 위해 프롬프트에 제공할 예시 수에 대해 실험해야 할 수 있습니다. 하지만 너무 많은 예시를 포함하면 모델이 예시에 대한 응답에 [과적합](https://developers.google.com/machine-learning/glossary?hl=ko#overfitting)하게 될 수 있습니다.
+
+### 일관된 형식
+
+원치 않는 형식의 응답을 방지하기 위해 퓨샷 예시의 구조와 형식이 동일해야 합니다. 프롬프트에 퓨샷 예시를 추가하는 기본 목표 중 하나는 모델에 응답 형식을 보여주는 것입니다. 따라서 모든 예시에서 일관된 형식을 보장하는 것이 중요합니다. 특히 XML 태그, 공백, 줄바꿈, 예시 분할기에 주의해야 합니다.
+
+## 컨텍스트 추가
+
+모델에 필요한 모든 정보가 있다고 가정하는 대신 모델이 문제를 해결하는 데 필요한 프롬프트 안내와 정보를 포함할 수 있습니다. 이 컨텍스트 정보는 모델이 요청된 작업의 제약조건과 세부정보를 이해하는 데 도움이 됩니다.
+
+다음 예시에서는 모델에 라우터에 대한 문제 해결 안내를 제공하도록 요청합니다.
+
+|  |
+| --- |
+| **프롬프트:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **응답:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+
+이 응답은 라우터 또는 LED 표시기 표시등의 상태와 관련이 없는 일반적인 문제 해결 정보처럼 보입니다.
+
+특정 라우터의 응답을 맞춤설정하려면 응답을 제공할 때 참조할 컨텍스트로 라우터의 문제 해결 가이드를 프롬프트에 추가할 수 있습니다.
+
+|  |
+| --- |
+| **프롬프트:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **응답:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+
+## 프롬프트를 구성요소로 세분화
+
+복잡한 프롬프트가 필요한 사용 사례의 경우 항목을 더 간단한 구성요소로 나누면 모델이 이러한 복잡성을 관리하도록 도울 수 있습니다.
+
+1. **요청 사항 나누기:** 하나의 프롬프트에 여러 요청 사항을 포함하는 대신 요청 사항당 하나의 프롬프트를 만듭니다. 사용자의 입력에 따라 처리할 프롬프트를 선택할 수 있습니다.
+2. **프롬프트 연결:** 여러 순차적 단계가 포함된 복잡한 태스크의 경우 각 단계를 프롬프트로 만들고 프롬프트를 순서대로 연결합니다. 이 순차적인 프롬프트 체인에서 시퀀스의 한 프롬프트 출력이 다음 프롬프트의 입력이 됩니다. 시퀀스에서 마지막 프롬프트의 출력이 최종 출력입니다.
+3. **응답 집계:** 집계는 데이터의 서로 다른 부분에서 서로 다른 병렬 태스크를 수행하고 결과를 집계하여 최종 출력을 생성하는 경우에 사용됩니다. 예를 들어 데이터의 첫 번째 부분에 대해 하나의 작업을 수행하고 나머지 데이터에서 다른 작업을 수행한 후 결과를 집계하도록 모델에 지시할 수 있습니다.
+
+## 모델 파라미터 실험
+
+모델에 보낸 각 셀에는 모델의 응답 생성 방식을 제어하는 매개변수 값이 포함되어 있습니다. 모델은 서로 다른 매개변수 값에 대해 서로 다른 결과를 생성할 수 있습니다. 이 작업에서는 최상의 값을 얻을 수 있도록 다양한 매개변수 값으로 실험해 봅니다. 모델별로 사용 가능한 파라미터가 다를 수 있습니다. 가장 일반적인 파라미터는 다음과 같습니다.
+
+1. **최대 출력 토큰:** 대답에서 생성될 수 있는 최대 토큰 수를 지정합니다. 토큰 1개는 약 4자(영문 기준)입니다. 100개의 토큰은 대략 60~80개의 단어에 해당합니다.
+2. **온도:** 온도는 토큰 선택의 무작위성 수준을 제어합니다. 온도는 응답 생성 중 샘플링에 사용되며 `topP` 및 `topK`가 적용될 때 발생합니다. 강도가 낮을수록 자유롭거나 창의적인 답변과 거리가 먼 확정적인 응답이 필요한 프롬프트에 적합하고, 강도가 높을수록 보다 다양하거나 창의적인 결과로 이어질 수 있습니다. 온도가 0이면 결정론적입니다. 즉, 확률이 가장 높은 응답이 항상 선택됩니다.
+3. **`topK`:** `topK` 매개변수는 모델이 출력용 토큰을 선택하는 방식을 변경합니다. `topK`가 1이면 선택된 토큰이 모델의 어휘에 포함된 모든 토큰 중에서 가장 확률이 높다는 의미입니다 (그리디 디코딩이라고도 함). 반면에 `topK`가 3이면 온도를 사용하여 가장 확률이 높은 토큰 3개 중에서 다음 토큰이 선택된다는 의미입니다. 각 토큰 선택 단계에서 확률이 가장 높은 `topK` 토큰이 샘플링됩니다. 그런 다음 `topP`을 기준으로 토큰을 추가로 필터링하고 강도 샘플링을 사용하여 최종 토큰을 선택합니다.
+4. **`topP`:** `topP` 매개변수는 모델이 출력용 토큰을 선택하는 방식을 변경합니다. 토큰은 확률의 합이 `topP` 값과 같아질 때까지 확률이 가장 높은 것부터 가장 낮은 것까지 선택됩니다. 예를 들어 토큰 A, B, C의 확률이 0.3, 0.2, 0.1이고 `topP` 값이 0.5이면 모델이 온도를 사용해서 다음 토큰으로 A 또는 B를 선택하고 C는 후보에서 제외합니다. 기본 `topP` 값은 0.95입니다.
+5. **`stop_sequences`:** 모델에 콘텐츠 생성을 중지하도록 지시하는 중지 시퀀스를 설정합니다. 중지 시퀀스는 모든 문자 시퀀스일 수 있습니다. 생성된 콘텐츠에 표시될 수 있는 문자 시퀀스를 사용하지 마세요.
+
+## 프롬프트 반복 전략
+
+프롬프트 설계 시 원하는 응답을 일관성 있게 얻으려면 몇 번의 반복 작업이 필요한 경우가 있습니다. 이 섹션에서는 프롬프트에서 반복할 때 시도할 수 있는 몇 가지 사항에 대한 안내를 제공합니다.
+
+1. **다른 표현 사용:** 프롬프트에서 다른 단어나 문구를 사용하면 의미가 동일하더라도 모델마다 다른 응답이 출력되는 경우가 많습니다. 프롬프트에서 예상한 결과를 얻지 못했다면 다른 문구를 사용해 보세요.
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **मिलते-जुलते टास्क पर स्विच करें:** अगर मॉडल, किसी टास्क के लिए दिए गए आपके निर्देशों का पालन नहीं कर रहा है, तो उसे मिलते-जुलते किसी ऐसे टास्क के लिए निर्देश दें जिससे आपको वही नतीजा मिले.
+2. **유사한 작업으로 전환:** 모델이 작업 안내를 따르게 할 수 없으면 동일한 결과를 얻는 유사한 작업에 대한 안내를 제공해 보세요.
 
-   इस प्रॉम्प्ट से मॉडल को, पहले से तय की गई कैटगरी का इस्तेमाल करके किसी किताब को कैटगरी में बांटने के लिए कहा गया है:
-
-   |  |
-   | --- |
-   | **प्रॉम्प्ट:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **जवाब:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
-
-   जवाब सही है, लेकिन मॉडल ने विकल्पों की सीमा का पालन नहीं किया. आपको मॉडल को यह भी बताना है कि उसे पूरे वाक्य में जवाब देने के बजाय, सिर्फ़ एक विकल्प चुनकर जवाब देना है. इस मामले में, निर्देशों को कई विकल्पों वाले सवाल के तौर पर फिर से लिखा जा सकता है. इसके बाद, मॉडल से कोई विकल्प चुनने के लिए कहा जा सकता है.
+   이 프롬프트는 사전 정의된 카테고리를 사용하여 도서를 분류하도록 모델에 지시합니다.
 
    |  |
    | --- |
-   | **प्रॉम्प्ट:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **프롬프트:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **응답:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
+
+   응답은 올바르지만 모델이 옵션의 경계 내에 있지 않았습니다. 또한 전체 문장 대신 옵션 중 하나에만 응답하도록 모델을 만들 수 있습니다. 이 경우 안내를 객관식 질문으로 변경하고 모델이 옵션을 선택하도록 요청할 수 있습니다.
+
+   |  |
+   | --- |
+   | **프롬프트:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **जवाब:**
+     **응답:**
 
      ```
      The correct answer is mythology.
      ```
 
      (gemini-2.5-flash)
-   - **प्रॉम्प्ट के कॉन्टेंट का क्रम बदलना:** कभी-कभी, प्रॉम्प्ट में कॉन्टेंट के क्रम से जवाब पर असर पड़ सकता है. कॉन्टेंट का क्रम बदलकर देखें और देखें कि इससे जवाब पर क्या असर पड़ता है.
+   - **프롬프트 콘텐츠 순서 변경:** 프롬프트에서 콘텐츠 순서는 응답에 영향을 줄 수 있습니다. 콘텐츠 순서를 변경하여 응답에 미치는 영향을 확인하세요.
 
      ```
      Version 1:
@@ -216,53 +215,51 @@ Gemini जैसे मॉडल, कुछ उदाहरणों का इ�
      [context]
      ```
 
-## फ़ॉलबैक जवाब
+## 대체 응답
 
-फ़ॉलबैक जवाब, मॉडल से मिलने वाला ऐसा जवाब होता है जब प्रॉम्प्ट या जवाब, सुरक्षा फ़िल्टर को ट्रिगर करता है. फ़ॉलबैक जवाब का एक उदाहरण यह है:
-"मैं इसमें आपकी मदद नहीं कर सकता, क्योंकि मैं सिर्फ़ एक लैंग्वेज मॉडल हूँ."
+대체 응답은 프롬프트 또는 응답이 안전 필터를 트리거할 때 모델에서 반환하는 응답입니다. 대체 응답의 예로는 '저는 언어 모델일 뿐이기 때문에 지원할 수 없습니다.'가 있습니다.
 
-अगर मॉडल फ़ॉलबैक जवाब देता है, तो तापमान बढ़ाएं.
+모델이 대체 응답을 제공할 경우에는 강도를 높여보세요.
 
-## भरोसेमंद स्रोतों से जानकारी लेने की सुविधा और कोड एक्ज़ीक्यूशन
+## 그라운딩 및 코드 실행
 
-Gemini, ऐसे मामलों में टूल का इस्तेमाल कर सकता है जहां वह गलत जवाब दे सकता है. इससे उसे भ्रमित करने वाली जानकारी से बचने में मदद मिलती है.
+Gemini는 그렇지 않으면 잘못된 대답을 생성할 수 있는 시나리오에서 할루시네이션을 방지하기 위해 도구를 사용할 수 있습니다.
 
-[Google Search से सटीक जानकारी पाने की सुविधा](https://ai.google.dev/gemini-api/docs/google-search?hl=hi), Gemini मॉडल को रीयल-टाइम में वेब कॉन्टेंट से कनेक्ट करती है. इसे तब चालू किया जाना चाहिए, जब मॉडल को किसी विषय के बारे में कम जानकारी हो या उसे हाल ही के तथ्यों के बारे में जानने की ज़रूरत हो.
+[Google 검색으로 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)은 Gemini 모델을 실시간 웹 콘텐츠에 연결하며, 모델이 잘 알려지지 않은 사실이나 최근 사실을 알아야 할 수 있는 경우 사용 설정해야 합니다.
 
-Gemini के [कोड एक्ज़ीक्यूशन टूल](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) की मदद से, मॉडल Python कोड जनरेट और रन कर सकता है. इस टूल को तब चालू किया जाना चाहिए, जब मॉडल को किसी भी तरह की अंकगणित, गिनती या हिसाब-किताब करना हो.
+Gemini의 [코드 실행 도구](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)를 사용하면 모델이 Python 코드를 생성하고 실행할 수 있으며, 모델이 산술, 계산, 계산과 같은 작업을 수행해야 할 때마다 사용 설정해야 합니다.
 
 ## Gemini 3
 
-[Gemini 3 मॉडल](https://ai.google.dev/gemini-api/docs/models?hl=hi#gemini-3) को ऐडवांस रीज़निंग और निर्देशों का पालन करने के लिए डिज़ाइन किया गया है.
-ये मॉडल, सीधे तौर पर पूछे गए सवालों के जवाब सबसे अच्छे तरीके से देते हैं. साथ ही, ये ऐसे सवालों के जवाब भी अच्छे से देते हैं जिनमें टास्क और किसी भी तरह की पाबंदियों के बारे में साफ़ तौर पर बताया गया हो. Gemini 3 से बेहतर नतीजे पाने के लिए, इन तरीकों का इस्तेमाल करें:
+[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은 고급 추론 및 요청 사항 준수를 위해 설계되었습니다.
+직접적이고 구조화되어 있으며 작업과 제약 조건을 명확하게 정의하는 프롬프트에 가장 잘 응답합니다. Gemini 3로 최적의 결과를 얻으려면 다음 권장사항을 따르세요.
 
-### प्रॉम्प्ट बनाने से जुड़े मुख्य सिद्धांत
+### 핵심 프롬프팅 원칙
 
-- **सटीक और सीधे शब्दों में प्रॉम्प्ट लिखें:** अपने लक्ष्य को साफ़ तौर पर और कम शब्दों में बताएं. ज़रूरत से ज़्यादा या बहुत ज़्यादा
-  दबाव बनाने वाली भाषा का इस्तेमाल न करें.
-- **एक जैसा स्ट्रक्चर इस्तेमाल करें:** अपने प्रॉम्प्ट के अलग-अलग हिस्सों को अलग करने के लिए, साफ़ तौर पर सीमाएं तय करने वाले शब्दों का इस्तेमाल करें. एक्सएमएल स्टाइल वाले टैग (जैसे, `<context>`, `<task>`) या मार्कडाउन हेडिंग का इस्तेमाल करना फ़ायदेमंद होता है. कोई एक फ़ॉर्मैट चुनें और एक ही प्रॉम्प्ट में उसका लगातार इस्तेमाल करें.
-- **पैरामीटर तय करना:** अस्पष्ट शब्दों या पैरामीटर के बारे में साफ़ तौर पर बताएं.
-- **जवाब में शब्दों की संख्या को कंट्रोल करना:** Gemini 3 मॉडल, डिफ़ॉल्ट रूप से सीधे और सटीक जवाब देते हैं. अगर आपको बातचीत के लहजे में या ज़्यादा जानकारी वाला जवाब चाहिए, तो आपको निर्देशों में साफ़ तौर पर इसका अनुरोध करना होगा.
-- **टेक्स्ट, इमेज, ऑडियो या वीडियो जैसे मल्टीमॉडल इनपुट को एक साथ प्रोसेस करना:** टेक्स्ट, इमेज, ऑडियो या वीडियो का इस्तेमाल करते समय, उन्हें एक जैसे इनपुट के तौर पर प्रोसेस करना. पक्का करें कि आपके निर्देशों में, ज़रूरत के हिसाब से हर मोडेलिटी का साफ़ तौर पर रेफ़रंस दिया गया हो.
-- **ज़रूरी निर्देशों को प्राथमिकता दें:** व्यवहार से जुड़ी ज़रूरी पाबंदियों, भूमिका की परिभाषाओं (पर्सोना), और आउटपुट फ़ॉर्मैट की ज़रूरी शर्तों को सिस्टम के निर्देश में या उपयोगकर्ता के प्रॉम्प्ट की शुरुआत में रखें.
-- **ज़्यादा जानकारी देने के लिए स्ट्रक्चर:** ज़्यादा जानकारी (जैसे, दस्तावेज़, कोड) देते समय, सबसे पहले पूरी जानकारी दें. अपने खास निर्देशों या सवालों को प्रॉम्प्ट के *आखिर* में रखें.
-- **एंकर कॉन्टेक्स्ट:** डेटा के बड़े ब्लॉक के बाद, कॉन्टेक्स्ट और अपनी क्वेरी के बीच संबंध बनाने के लिए, ट्रांज़िशन फ़्रेज़ का इस्तेमाल करें. जैसे, "ऊपर दी गई जानकारी के आधार पर..."
+- **정확하고 직접적으로 말하기:** 목표를 명확하고 간결하게 말합니다. 불필요하거나 지나치게 설득적인 표현은 피하세요.
+- **일관된 구조 사용:** 명확한 구분자를 사용하여 프롬프트의 여러 부분을 구분합니다. XML 스타일 태그 (예: `<context>`, `<task>`) 또는 마크다운 헤더가 유효합니다. 하나의 프롬프트 내에서 하나의 형식을 선택하고 일관되게 사용하세요.
+- **매개변수 정의:** 모호한 용어나 매개변수를 명시적으로 설명합니다.
+- **출력 장황도 제어:** 기본적으로 Gemini 3 모델은 직접적이고 효율적인 답변을 제공합니다. 더 자연스러운 대화형 또는 자세한 대답이 필요한 경우 요청 사항에 명시적으로 요청해야 합니다.
+- **멀티모달 입력을 일관되게 처리:** 텍스트, 이미지, 오디오 또는 동영상을 사용할 때 동일한 클래스 입력으로 취급합니다. 필요에 따라 각 모달리티를 명확하게 참조하도록 안내합니다.
+- **중요한 지침에 우선순위 지정:** 필수 행동 제약 조건, 역할 정의 (페르소나), 출력 형식 요구사항을 시스템 지침에 배치하거나 사용자 프롬프트의 맨 처음에 배치합니다.
+- **긴 컨텍스트의 구조:** 많은 양의 컨텍스트(예: 문서, 코드)를 제공할 때는 먼저 모든 컨텍스트를 제공하세요. 구체적인 요청 사항이나 질문은 프롬프트의 *맨 끝*에 입력하세요.
+- **앵커 컨텍스트:** 데이터 블록이 큰 경우 명확한 전환 문구를 사용하여 컨텍스트와 질문을 연결합니다(예: '위의 정보를 바탕으로…').
 
-### Gemini 3 Flash की रणनीतियां
+### Gemini 3 Flash 전략
 
-- **आज की तारीख के हिसाब से सही जवाब देने की क्षमता:** सिस्टम को निर्देश देते समय, यह क्लॉज़ जोड़ें. इससे मॉडल को यह ध्यान रखने में मदद मिलेगी कि आज की तारीख 2026 की है:
+- **현재 날짜 정확성:** 모델이 2026년의 현재 날짜에 주의하도록 시스템 안내에 다음 절을 추가합니다.
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **नॉलेज कटऑफ़ की सटीक जानकारी:** सिस्टम को निर्देश देते समय, यह क्लॉज़ जोड़ें, ताकि मॉडल को अपने नॉलेज कटऑफ़ के बारे में पता चल सके:
+- **지식 단절 정확성:** 모델이 지식 단절을 인식하도록 시스템 안내에 다음 절을 추가합니다.
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **जवाब में भरोसेमंद स्रोतों से मिली जानकारी शामिल करना:** सिस्टम के निर्देशों में यह क्लॉज़ जोड़ें. इसमें ज़रूरत के हिसाब से बदलाव भी किए जा सकते हैं. इससे मॉडल को दिए गए कॉन्टेक्स्ट के आधार पर जवाब देने में मदद मिलेगी:
+- **그라운딩 성능:** 제공된 컨텍스트에서 모델이 대답을 그라운딩하는 능력을 개선하려면 시스템 안내에 다음 조항을 추가하세요 (적절한 경우 수정).
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -278,17 +275,17 @@ Gemini के [कोड एक्ज़ीक्यूशन टूल](https:/
   the context, you must state that the information is not available.
   ```
 
-### तर्क करने और प्लान बनाने की क्षमता को बेहतर बनाना
+### 추론 및 계획 개선
 
-Gemini 2.5 और 3 सीरीज़ के मॉडल, तर्क करने की परफ़ॉर्मेंस को बेहतर बनाने के लिए, अपने-आप इंटरनल "थिंकिंग" टेक्स्ट जनरेट करते हैं. इसलिए, आम तौर पर यह ज़रूरी नहीं है कि जवाब में मॉडल की आउटलाइन, प्लान या गहराई से विश्लेषण के चरणों की जानकारी दी गई हो. जिन समस्याओं के लिए ज़्यादा गहराई से विश्लेषण की ज़रूरत होती है उनके लिए, "जवाब देने से पहले बहुत सोच-विचार करो" जैसे सामान्य अनुरोधों से परफ़ॉर्मेंस को बेहतर बनाया जा सकता है. हालांकि, इसके लिए ज़्यादा थिंकिंग टोकन खर्च करने पड़ते हैं.
+Gemini 2.5 및 3 시리즈 모델은 추론 성능을 개선하기 위해 내부 '사고' 텍스트를 자동으로 생성합니다. 따라서 모델이 반환된 대답 자체에서 추론 단계를 개략적으로 설명하거나 계획하거나 자세히 설명할 필요는 없습니다. 추론이 많이 필요한 문제의 경우 '대답하기 전에 신중하게 생각하세요'와 같은 간단한 요청으로 성능을 개선할 수 있지만, 추가 사고 토큰이 필요합니다.
 
-ज़्यादा जानकारी के लिए, [Gemini के सोचने के तरीके](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) से जुड़ा दस्तावेज़ देखें.
+자세한 내용은 [Gemini 사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 문서를 참고하세요.
 
-### स्ट्रक्चर्ड प्रॉम्प्ट के उदाहरण
+### 구조화된 프롬프트 예시
 
-टैग या Markdown का इस्तेमाल करने से, मॉडल को निर्देशों, कॉन्टेक्स्ट, और टास्क के बीच अंतर करने में मदद मिलती है.
+태그나 마크다운을 사용하면 모델이 안내, 컨텍스트, 작업을 구분하는 데 도움이 됩니다.
 
-**एक्सएमएल का उदाहरण:**
+**XML 예:**
 
 ```
 <role>
@@ -309,7 +306,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**मार्कडाउन का उदाहरण:**
+**마크다운 예:**
 
 ```
 # Identity
@@ -323,11 +320,11 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### सबसे सही तरीकों को मिलाकर बनाए गए टेंप्लेट का उदाहरण
+### 권장사항을 결합한 템플릿 예시
 
-इस टेंप्लेट में, Gemini 3 के साथ प्रॉम्प्ट करने के मुख्य सिद्धांतों के बारे में बताया गया है. हमेशा अपनी ज़रूरत के हिसाब से प्रॉम्प्ट में बदलाव करें.
+이 템플릿은 Gemini 3로 프롬프트를 작성하기 위한 핵심 원칙을 포착합니다. 항상 특정 사용 사례에 맞게 반복하고 수정해야 합니다.
 
-**सिस्टम के लिए निर्देश:**
+**시스템 요청 사항:**
 
 ```
 <role>
@@ -354,7 +351,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**उपयोगकर्ता का प्रॉम्प्ट:**
+**사용자 프롬프트:**
 
 ```
 <context>
@@ -370,41 +367,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## एजेंटिक वर्कफ़्लो
+## 에이전트형 워크플로
 
-एजेंट के तौर पर काम करने वाले डीप वर्कफ़्लो के लिए, अक्सर खास निर्देशों की ज़रूरत होती है. इनसे यह कंट्रोल किया जा सकता है कि मॉडल कैसे तर्क देता है, प्लान बनाता है, और टास्क पूरे करता है. Gemini, सामान्य तौर पर अच्छा परफ़ॉर्म करता है. हालांकि, जटिल एजेंट के लिए, आपको कंप्यूटेशनल लागत (लेटेंसी और टोकन) और टास्क की सटीकता के बीच ट्रेड-ऑफ़ कॉन्फ़िगर करना पड़ सकता है.
+심층적인 에이전트 워크플로의 경우 모델이 추론하고, 계획하고, 작업을 실행하는 방식을 제어하기 위해 구체적인 안내가 필요한 경우가 많습니다. Gemini는 강력한 일반 성능을 제공하지만 복잡한 에이전트의 경우 컴퓨팅 비용 (지연 시간 및 토큰)과 작업 정확도 간의 균형을 구성해야 하는 경우가 많습니다.
 
-एजेंट के लिए प्रॉम्प्ट डिज़ाइन करते समय, व्यवहार के इन डाइमेंशन को ध्यान में रखें. इनसे एजेंट को सही दिशा में ले जाने में मदद मिलती है:
+에이전트의 프롬프트를 설계할 때는 에이전트에서 조종할 수 있는 다음과 같은 행동의 측면을 고려하세요.
 
-### रीज़निंग और रणनीति
+### 추론 및 전략
 
-यह कॉन्फ़िगरेशन, मॉडल को कार्रवाई करने से पहले सोचने और प्लान बनाने के तरीके के बारे में बताता है.
+모델이 행동을 취하기 전에 생각하고 계획하는 방식에 관한 구성입니다.
 
-- **लॉजिकल डीकंपोज़िशन:** इससे यह तय होता है कि मॉडल को, शर्तों, ज़रूरी शर्तों, और कार्रवाइयों के क्रम का कितना बारीकी से विश्लेषण करना चाहिए.
-- **समस्या का पता लगाना**: इससे यह कंट्रोल किया जाता है कि समस्या की वजहों का पता लगाते समय, विश्लेषण कितना ज़्यादा किया जाए. साथ ही, इससे यह भी कंट्रोल किया जाता है कि मॉडल, अनुमान लगाने की क्षमता का इस्तेमाल किस तरह करे. इससे यह तय होता है कि मॉडल को सबसे सही जवाब स्वीकार करना चाहिए या मुश्किल और कम संभावित जवाबों को एक्सप्लोर करना चाहिए.
-- **पूरी जानकारी होना:** उपलब्ध हर नीति और दस्तावेज़ का विश्लेषण करने के बीच, दक्षता और तेज़ी को प्राथमिकता देने का फ़ायदा और नुकसान.
+- **논리적 분해:** 모델이 제약 조건, 사전 요구사항, 작업 순서를 얼마나 철저하게 분석해야 하는지 정의합니다.
+- **문제 진단**: 원인을 식별할 때 분석의 깊이와 모델의 귀추법적 추론 사용을 제어합니다. 모델이 가장 명백한 대답을 수락해야 하는지 아니면 복잡하고 가능성이 낮은 설명을 탐색해야 하는지 결정합니다.
+- **정보 완전성:** 사용 가능한 모든 정책과 문서를 분석하는 것과 효율성과 속도를 우선시하는 것 사이의 균형입니다.
 
-### प्रोग्राम चलाना और भरोसेमंद होना
+### 실행 및 안정성
 
-इस कॉन्फ़िगरेशन से यह तय होता है कि एजेंट, अपने-आप कैसे काम करेगा और समस्याओं को कैसे हल करेगा.
+에이전트가 자율적으로 작동하고 장애물을 처리하는 방식에 관한 구성입니다.
 
-- **अनुकूलन क्षमता:** मॉडल नए डेटा पर कैसे काम करता है. इससे यह तय होता है कि इसे अपने शुरुआती प्लान पर ही बने रहना चाहिए या जब अनुमानों से अलग नतीजे मिलते हैं, तो तुरंत बदलाव करना चाहिए.
-- **गड़बड़ियों को ठीक करने की क्षमता:** मॉडल, गड़बड़ियों को खुद ठीक करने की कितनी कोशिश करता है. ज़्यादा समय तक जानकारी सेव रखने की सुविधा से, सफलता की दरें बढ़ जाती हैं. हालांकि, इससे टोकन की लागत बढ़ सकती है या लूप बन सकते हैं.
-- **जोखिम का आकलन:** नतीजों का आकलन करने का लॉजिक. यह कम जोखिम वाले एक्सप्लोरेटरी ऐक्शन (पढ़ना) और ज़्यादा जोखिम वाले स्टेट चेंज (लिखना) के बीच अंतर करता है.
+- **적응성:** 모델이 새 데이터에 반응하는 방식입니다. 관찰 결과가 가정과 모순될 때 초기 계획을 엄격하게 준수해야 하는지 아니면 즉시 전환해야 하는지 결정합니다.
+- **지속성 및 복구:** 모델이 오류를 자체 수정하려고 시도하는 정도입니다. 지속성이 높을수록 성공률이 높아지지만 토큰 비용이 높아지거나 루프가 발생할 위험이 있습니다.
+- **위험 평가:** 결과를 평가하는 논리입니다. 위험도가 낮은 탐색 작업 (읽기)과 위험도가 높은 상태 변경 (쓰기)을 명시적으로 구분합니다.
 
-### इंटरैक्शन और आउटपुट
+### 상호작용 및 출력
 
-इस कॉन्फ़िगरेशन से यह तय होता है कि एजेंट, उपयोगकर्ता से कैसे कम्यूनिकेट करेगा और नतीजों को कैसे फ़ॉर्मैट करेगा.
+에이전트가 사용자와 소통하고 결과를 포맷하는 방식에 관한 구성입니다.
 
-- **अस्पष्टता और अनुमति मैनेज करना:** इससे यह तय होता है कि मॉडल को कब अनुमान लगाने की अनुमति है और कब उसे उपयोगकर्ता से अनुमति लेने या जानकारी मांगने के लिए, कार्रवाई को रोकना होगा.
-- **ज़्यादा जानकारी देना:** इससे टूल कॉल के साथ जनरेट किए गए टेक्स्ट की आवाज़ को कंट्रोल किया जाता है. इससे यह तय होता है कि मॉडल, उपयोगकर्ता को अपनी कार्रवाइयों के बारे में बताएगा या उन्हें लागू करते समय चुप रहेगा.
-- **सटीकता और पूरी जानकारी:** आउटपुट में ज़रूरी जानकारी का सटीक होना. इससे यह तय होता है कि मॉडल को हर मुश्किल समस्या को हल करना है और सटीक आंकड़े देने हैं या अनुमानित आंकड़े भी स्वीकार किए जा सकते हैं.
+- **모호성 및 권한 처리:** 모델이 가정을 해도 되는 경우와 사용자에게 명확한 설명이나 권한을 요청하기 위해 실행을 일시중지해야 하는 경우를 정의합니다.
+- **장황성:** 도구 호출과 함께 생성되는 텍스트의 양을 제어합니다. 이는 모델이 실행 중에 사용자에게 작업을 설명하는지 아니면 무음으로 유지되는지를 결정합니다.
+- **정확성 및 완전성:** 출력에 필요한 충실도입니다. 모델이 모든 특이 사례를 해결하고 정확한 수치를 제공해야 하는지 아니면 대략적인 추정치가 허용되는지 지정합니다.
 
-### सिस्टम के निर्देशों का टेंप्लेट
+### 시스템 요청 사항 템플릿
 
-यहां दिए गए सिस्टम के निर्देश का उदाहरण, शोधकर्ताओं ने एजेंटिक बेंचमार्क पर परफ़ॉर्मेंस को बेहतर बनाने के लिए तैयार किया है. इसमें मॉडल को नियमों की जटिल गाइडलाइन का पालन करना होता है और उपयोगकर्ता के साथ इंटरैक्ट करना होता है. इससे एजेंट को एक बेहतर तर्क देने वाले और प्लानर के तौर पर काम करने के लिए बढ़ावा मिलता है. साथ ही, ऊपर दी गई सभी डाइमेंशन के लिए खास व्यवहार लागू होता है. इसके अलावा, मॉडल को कोई भी कार्रवाई करने से पहले, प्लान बनाने की ज़रूरत होती है.
+다음 시스템 명령어는 모델이 복잡한 규칙을 준수하고 사용자와 상호작용해야 하는 에이전트 벤치마크에서 성능을 개선하기 위해 연구자가 평가한 예입니다. 에이전트가 강력한 추론자이자 계획자로서 행동하도록 장려하고, 위에 나열된 여러 차원에서 특정 행동을 강제하며, 모델이 행동을 취하기 전에 사전에 계획을 세우도록 요구합니다.
 
-इस टेंप्लेट को, अपने इस्तेमाल के उदाहरण की शर्तों के हिसाब से बदला जा सकता है.
+이 템플릿을 특정 사용 사례 제약 조건에 맞게 조정할 수 있습니다.
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -452,19 +449,19 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## अगले चरण
+## 다음 단계
 
-- अब आपको प्रॉम्प्ट डिज़ाइन के बारे में ज़्यादा जानकारी मिल गई है. इसलिए, [Google AI Studio](http://aistudio.google.com?hl=hi) का इस्तेमाल करके, अपने प्रॉम्प्ट लिखें.
-- टेक्स्ट, इमेज वग़ैरह का एक साथ इस्तेमाल करके प्रॉम्प्ट डालने के बारे में जानने के लिए, [मीडिया फ़ाइलों के साथ प्रॉम्प्ट करना](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide) लेख पढ़ें.
-- इमेज प्रॉम्प्ट के बारे में जानने के लिए, [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi#prompt-guide) की प्रॉम्प्ट के लिए गाइड देखें.
-- वीडियो प्रॉम्प्टिंग के बारे में जानने के लिए, [Veo की प्रॉम्प्ट के लिए गाइड](https://ai.google.dev/gemini-api/docs/video?hl=hi#prompt-guide) देखें.
+- 프롬프트 설계에 대해 자세히 알아봤으니 [Google AI Studio](http://aistudio.google.com?hl=ko)를 사용하여 직접 프롬프트를 작성해 보세요.
+- 멀티모달 프롬프트 사용에 대한 자세한 내용은 [미디어 파일로 프롬프트 입력](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide)을 참고하세요.
+- 이미지 프롬프트에 대해 알아보려면 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko#prompt-guide) 프롬프트 가이드를 참고하세요.
+- 동영상 프롬프트에 대해 알아보려면 [Veo 프롬프트 가이드](https://ai.google.dev/gemini-api/docs/video?hl=ko#prompt-guide)를 참고하세요.
 
-सुझाव भेजें
+의견 보내기
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया.
+최종 업데이트: 2026-09-18(UTC)
 
-क्या आपको हमें और कुछ बताना है?
+의견을 전달하고 싶나요?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-18(UTC)"],[],[]]

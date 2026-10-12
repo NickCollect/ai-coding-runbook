@@ -1,39 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=id
-fetched_at: 2026-10-05T06:28:35.395566+00:00
-title: "Membuat musik dengan Lyria 3.5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=zh-TW
+fetched_at: 2026-10-12T07:03:40.743490+00:00
+title: "\u4f7f\u7528 Lyria 3.5 \u751f\u6210\u97f3\u6a02 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-Kirim masukan
+提供意見
 
-# Membuat musik dengan Lyria 3.5
+# 使用 Lyria 3.5 生成音樂
 
-Lyria 3.5 adalah serangkaian model pembuatan musik Google, yang tersedia melalui Gemini API. Dengan Lyria 3.5, Anda dapat menghasilkan audio stereo 44, 1 kHz berkualitas tinggi dari perintah teks atau dari gambar. Model ini memberikan koherensi struktural, termasuk vokal, lirik yang disesuaikan waktunya, dan aransemen instrumental lengkap.
+Lyria 3.5 是 Google 的音樂生成模型系列，可透過 Gemini API 使用。使用 Lyria 3.5，你可以根據文字提示或圖片生成高品質的 44.1 kHz 立體聲音訊。這類模型可提供結構一致的音樂，包括人聲、歌詞時間碼和完整樂器編曲。
 
-Keluarga Lyria mencakup model:
+Lyria 系列包含以下模型：
 
-| Model | ID Model | Paling cocok untuk | Durasi | Output |
+| 模型 | 模型 ID | 適用情境 | 時間長度 | 輸出內容 |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | Klip pendek, loop, pratinjau | 30 detik | MP3 |
-| **Lyria 3.5** | `lyria-3.5` | Lagu berdurasi penuh dengan bait, refrain, jembatan | Beberapa menit (dapat dikontrol melalui perintah) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | 短片、循環播放、預覽 | 30 秒 | MP3 |
+| **Lyria 3.5** | `lyria-3.5` | 含主歌、副歌和橋段的完整歌曲 | 幾分鐘 (可透過提示詞控制) | MP3 |
 
-Kedua model dapat digunakan menggunakan metode `generateContent` standar dan [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) baru, yang mendukung input multimodal (teks dan gambar), serta menghasilkan audio **stereo fidelitas tinggi 44,1 kHz**.
+這兩款模型都可透過標準 `generateContent` 方法和新的 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 使用，支援多模態輸入 (文字和圖片)，並生成 **44.1 kHz 高精準度立體聲**音訊。
 
-## Membuat klip musik
+## 生成音樂短片
 
-Model Klip Lyria 3 selalu menghasilkan klip **30 detik**. Untuk membuat klip, panggil metode `generateContent` dengan perintah teks. Respons selalu
-mencakup lirik dan struktur lagu yang dibuat bersama dengan audio.
+Lyria 3 Clip 模型一律會生成 **30 秒**的片段。如要生成短片，請使用文字提示詞呼叫 `generateContent` 方法。回覆一律會包含生成的歌詞和歌曲結構，以及音訊。
 
 ### Python
 
@@ -214,11 +213,9 @@ public class GenerateMusicClip {
 }
 ```
 
-## Membuat lagu berdurasi penuh
+## 生成完整歌曲
 
-Gunakan model `lyria-3.5` untuk membuat lagu berdurasi penuh yang berdurasi beberapa menit. Model Pro memahami struktur musik dan dapat membuat komposisi dengan bait, refrain, dan jembatan yang berbeda. Anda dapat memengaruhi
-durasi dengan menentukannya dalam perintah (misalnya, "buat lagu berdurasi 2 menit") atau dengan
-menggunakan [stempel waktu](#timing) untuk menentukan struktur.
+使用 `lyria-3.5` 模型生成完整歌曲，長度約為幾分鐘。Pro 版模型可理解音樂結構，並創作具有不同主歌、副歌和橋段的樂曲。如要影響時長，可以在提示中指定 (例如「創作 2 分鐘的歌曲」)，或使用[時間戳記](#timing)定義結構。
 
 ### Python
 
@@ -293,11 +290,9 @@ var response = await client.Models.GenerateContentAsync(
 );
 ```
 
-## Pilih format output
+## 選取輸出格式
 
-Secara default, model Lyria 3.5 menghasilkan audio dalam format **MP3**. Untuk
-Lyria 3.5, Anda juga dapat meminta output dalam format **WAV** dengan menyetel
-`response_format` di `generationConfig`.
+根據預設，Lyria 3.5 模型會生成 **MP3** 格式的音訊。對於 Lyria 3.5，您也可以在 `generationConfig` 中設定 `response_format`，要求以 **WAV** 格式輸出。
 
 ### Python
 
@@ -392,10 +387,9 @@ curl -s -X POST \
   }'
 ```
 
-## Mengurai respons
+## 剖析回應
 
-Respons dari Lyria 3.5 berisi beberapa bagian. Bagian teks berisi lirik yang dibuat atau deskripsi JSON dari struktur lagu. Bagian dengan
-`inline_data` berisi byte audio.
+Lyria 3.5 的回覆包含多個部分。文字部分包含生成的歌詞，或歌曲結構的 JSON 說明。含有音訊位元組的部分為 `inline_data`。
 
 ### Python
 
@@ -521,9 +515,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## Membuat musik dari gambar
+## 根據圖片生成音樂
 
-Lyria 3.5 mendukung input multimodal — Anda dapat memberikan hingga **10 gambar** bersama dengan perintah teks Anda dan model akan membuat musik yang terinspirasi oleh konten visual tersebut.
+Lyria 3.5 支援多模態輸入，您最多可以提供 **10 張圖片**和文字提示詞，模型會根據視覺內容創作音樂。
 
 ### Python
 
@@ -644,11 +638,9 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## Menyediakan lirik kustom
+## 提供自訂歌詞
 
-Anda dapat menulis lirik Anda sendiri dan menyertakannya dalam perintah. Gunakan tag bagian
-seperti `[Verse]`, `[Chorus]`, dan `[Bridge]` untuk membantu model memahami
-struktur lagu:
+你可以自行撰寫歌詞，並加入提示。使用 `[Verse]`、`[Chorus]` 和 `[Bridge]` 等區段標記，協助模型瞭解歌曲結構：
 
 ### Python
 
@@ -827,10 +819,9 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## Mengontrol waktu dan struktur
+## 控制時間和結構
 
-Anda dapat menentukan secara tepat apa yang terjadi pada momen tertentu dalam lagu menggunakan stempel waktu. Hal ini berguna untuk mengontrol kapan instrumen masuk, kapan lirik
-disampaikan, dan bagaimana progres lagu:
+你可以使用時間戳記，在歌曲的特定時間點指定要執行的動作。這項功能可控制樂器進入的時間、歌詞的傳送時間，以及歌曲的進展方式：
 
 ### Python
 
@@ -945,9 +936,9 @@ curl -s -X POST \
   }'
 ```
 
-## Membuat trek instrumental
+## 生成配樂
 
-Untuk musik latar, soundtrack game, atau kasus penggunaan apa pun yang tidak memerlukan vokal, Anda dapat meminta model untuk menghasilkan trek khusus instrumental:
+如要製作背景音樂、遊戲配樂，或任何不需要人聲的用途，可以提示模型製作純音樂曲目：
 
 ### Python
 
@@ -1017,10 +1008,9 @@ curl -s -X POST \
   }'
 ```
 
-## Membuat musik dalam berbagai bahasa
+## 生成不同語言的音樂
 
-Lyria 3.5 membuat lirik dalam bahasa perintah Anda. Untuk membuat lagu dengan lirik dalam bahasa Prancis, tulis perintah Anda dalam bahasa Prancis. Model ini menyesuaikan gaya
-vokal dan pengucapannya agar sesuai dengan bahasa.
+Lyria 3.5 會以提示詞的語言生成歌詞。如要生成法文歌詞的歌曲，請用法文撰寫提示。模型會根據語言調整語音風格和發音。
 
 ### Python
 
@@ -1095,15 +1085,13 @@ curl -s -X POST \
   }'
 ```
 
-## Kecerdasan model
+## 模型智慧
 
-Lyria 3.5 menganalisis proses perintah Anda saat model melakukan penalaran melalui struktur musik (intro, bait, chorus, jembatan, dll.) berdasarkan perintah Anda.
-Hal ini terjadi sebelum audio dibuat dan memastikan koherensi struktural dan musikalitas.
+Lyria 3.5 會分析提示程序，模型會根據提示，推論音樂結構 (前奏、主歌、副歌、橋段等)。這項程序會在生成音訊前執行，確保結構一致性和音樂性。
 
 ## Interactions API
 
-Anda dapat menggunakan model Lyria 3.5 dengan [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id);
-antarmuka terpadu untuk berinteraksi dengan model dan agen Gemini. Alat ini menyederhanakan pengelolaan status dan tugas yang berjalan lama untuk kasus penggunaan multimodal yang kompleks.
+您可以使用 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 搭配 Lyria 3.5 模型，這個 API 是與 Gemini 模型和代理程式互動的統一介面。可簡化複雜多模態用途的狀態管理和長時間執行的工作。
 
 ### Python
 
@@ -1170,51 +1158,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Panduan penulisan perintah
+## 提示指南
 
-Untuk mempelajari cara membuat perintah yang efektif untuk genre musik, instrumen,
-struktur lagu, lirik kustom, dan gaya penyampaian vokal, lihat
-[panduan perintah Lyria](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=id).
+如要瞭解如何為音樂類型、樂器、歌曲結構、自訂歌詞和演唱風格撰寫有效的提示詞，請參閱 [Lyria 提示詞指南](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=zh-tw)。
 
-## Praktik terbaik
+## 最佳做法
 
-- **Lakukan iterasi dengan Klip terlebih dahulu.** Gunakan model `lyria-3-clip-preview` yang lebih cepat untuk bereksperimen dengan perintah sebelum melakukan pembuatan video panjang dengan `lyria-3.5`.
-- **Jadilah spesifik.** Perintah yang tidak jelas akan menghasilkan hasil yang umum. Sebutkan instrumen,
-  BPM, nada dasar, mood, dan struktur untuk output terbaik.
-- **Cocokkan bahasa Anda.** Berikan perintah dalam bahasa yang Anda inginkan untuk liriknya.
-- **Gunakan tag bagian.** Tag `[Verse]`, `[Chorus]`, `[Bridge]` memberikan struktur yang jelas untuk diikuti model.
-- **Pisahkan lirik dari petunjuk.** Saat memberikan lirik kustom, pisahkan dengan jelas dari petunjuk arahan musik Anda.
+- **先使用 Clip 進行疊代。**使用速度較快的 `lyria-3-clip-preview` 模型實驗提示詞，再使用 `lyria-3.5` 生成完整長度的內容。
+- 提供**清楚明確**的說明，籠統的提示詞只會產出一般結果。提及樂器、BPM、調性、情境和結構，以獲得最佳輸出內容。
+- **語言要相符。**以所需語言輸入提示。
+- **使用章節標記。**`[Verse]`、`[Chorus]`、`[Bridge]` 標記可為模型提供明確的結構。
+- **將歌詞與操作說明分開。**提供自訂歌詞時，請清楚區分歌詞和音樂方向指令。
 
-## Batasan
+## 限制
 
-- **Keamanan**: Semua perintah diperiksa oleh filter keamanan. Perintah yang memicu
-  filter akan diblokir. Hal ini mencakup perintah yang meminta suara artis tertentu atau pembuatan lirik yang dilindungi hak cipta.
-- **Pemberian watermark**: Semua audio yang dihasilkan menyertakan
-  [watermark audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=id) untuk
-  identifikasi. Watermark ini tidak dapat didengar oleh telinga manusia dan tidak memengaruhi pengalaman mendengarkan.
-- **Pengeditan berkelanjutan**: Pembuatan musik adalah proses satu putaran.
-  Pengeditan atau penyempurnaan klip yang dihasilkan secara berulang melalui beberapa perintah tidak didukung dalam Lyria 3.5 versi saat ini.
-- **Durasi**: Model Klip selalu menghasilkan klip berdurasi 30 detik. Model Pro membuat lagu berdurasi beberapa menit; durasi yang tepat dapat dipengaruhi melalui perintah Anda.
-- **Determinisme**: Hasil dapat bervariasi antar-panggilan, bahkan dengan perintah yang sama.
+- **安全性**：所有提示都會經過安全篩選器檢查。系統會封鎖觸發篩選器的提示。包括要求特定藝人聲音的提示，或是生成受著作權保護的歌詞。
+- **浮水印**：所有生成的音訊都會加上 [SynthID 音訊浮水印](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=zh-tw)，方便識別。這種浮水印人耳無法辨識，不會影響聆聽體驗。
+- **多輪遞進編輯**：音樂生成是單輪程序。目前版本的 Lyria 3.5 不支援透過多個提示，反覆編輯或修正生成的片段。
+- **長度**：Clip 模型一律會生成 30 秒的短片。Pro 模型會生成幾分鐘的歌曲，確切時長取決於提示。
+- **決定性**：即使使用相同提示，每次通話的結果也可能不同。
 
-## Langkah berikutnya
+## 後續步驟
 
-- Lihat [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk model Lyria 3.5.
-- Coba [pembuatan musik streaming real-time](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=id) dengan Lyria RealTime.
-- Buat percakapan multi-pembicara dengan
-  [model TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
-- Temukan cara membuat [gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) atau
-  [video](https://ai.google.dev/gemini-api/docs/video?hl=id).
-- Cari tahu cara Gemini dapat [memahami file audio](https://ai.google.dev/gemini-api/docs/audio?hl=id).
-- Lakukan percakapan real-time dengan Gemini menggunakan
-  [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id).
+- 查看 Lyria 3.5 模型的[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。
+- 使用 Lyria RealTime [即時生成串流音樂](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=zh-tw)。
+- 使用 [TTS 模型](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)生成多人對話。
+- 瞭解如何生成[圖片](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)或[影片](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)。
+- 瞭解 Gemini 如何[解讀音訊檔案](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)。
+- 使用 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw) 與 Gemini 即時對話。
 
-Kirim masukan
+提供意見
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Terakhir diperbarui pada 2026-10-01 UTC.
+上次更新時間：2026-10-09 (世界標準時間)。
 
-Ada masukan untuk kami?
+想進一步說明嗎？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-01 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-09 (世界標準時間)。"],[],[]]

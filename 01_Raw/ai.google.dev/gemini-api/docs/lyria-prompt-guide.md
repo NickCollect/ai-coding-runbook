@@ -1,122 +1,122 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=hi
-fetched_at: 2026-10-05T06:38:19.183565+00:00
-title: "Lyria \u092a\u094d\u0930\u0949\u092e\u094d\u092a\u094d\u091f \u0915\u0947 \u0932\u093f\u090f \u0917\u093e\u0907\u0921 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=pt-BR
+fetched_at: 2026-10-12T06:51:17.576818+00:00
+title: "Guia de comandos do Lyria \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# Lyria प्रॉम्प्ट के लिए गाइड
+# Guia de comandos do Lyria
 
-Gemini API की मदद से, Lyria में संगीत जनरेट करने के दो तरीके हैं:
+A API Gemini oferece duas maneiras de gerar músicas com o Lyria:
 
-- **Lyria 3.5 और Lyria 3 Clip**: स्ट्रीमिंग के बिना, 30 सेकंड की क्लिप या पूरे गाने जनरेट किए जा सकते हैं. इनमें बोल और संगीत भी शामिल होता है. [Lyria 3.5 की मदद से संगीत जनरेट करना](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi) लेख पढ़ें.
-- **Lyria RealTime**: यह WebSockets पर रीयल-टाइम में इंटरैक्टिव म्यूज़िक स्ट्रीमिंग और लाइव स्टीयरिंग की सुविधा देता है. [Lyria RealTime की मदद से रीयल-टाइम में संगीत जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=hi) लेख पढ़ें.
+- **Lyria 3.5 e Lyria 3 Clip**: geração sem streaming de clipes de 30 segundos ou músicas completas com letras e vocais. Consulte [Gerar músicas com o Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=pt-br).
+- **Lyria RealTime**: streaming de música interativo em tempo real e controle ao vivo por WebSockets. Confira [Geração de músicas em tempo real com o Lyria RealTime](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br).
 
-दोनों मॉडल, टेक्स्ट के ब्यौरे वाले प्रॉम्प्ट, संगीत की शब्दावली, और स्ट्रक्चर से जुड़े निर्देशों का जवाब देते हैं. इस गाइड में, बैच जनरेशन और रीयल-टाइम स्टीयरिंग, दोनों के लिए असरदार प्रॉम्प्ट लिखने का तरीका बताया गया है.
+Os dois modelos respondem a comandos de texto descritivos, terminologia musical e instruções estruturais. Este guia mostra como escrever comandos eficazes para geração em lote e direcionamento em tempo real.
 
-## प्रॉम्प्ट से जुड़ी बुनियादी बातें
+## Conceitos básicos de comandos
 
-आपके प्रॉम्प्ट में कोई छोटा वाक्यांश शामिल हो सकता है:
+Seu comando pode ser uma frase curta:
 
 ```
 A folk song about cute cats avoiding puddles, female vocals, acoustic guitar, sound of rain
 ```
 
-या स्ट्रक्चर्ड और पूरी जानकारी वाला ब्यौरा:
+Ou uma descrição estruturada e detalhada:
 
 ```
 A 1980s-style synth-pop track with a driving beat, shimmering synthesizers, and a catchy, anthemic chorus. The song should have a retro-futuristic feel with modern production polish. Upbeat tempo around 120 BPM, clear verse-chorus structure, and a memorable instrumental hook. The lyrics describe getting ready for a party.
 ```
 
-छोटे और ज़्यादा जानकारी वाले, दोनों तरह के प्रॉम्प्ट से अच्छे नतीजे मिलते हैं. मॉडल को अपनी पसंद के हिसाब से आवाज़ देने के लिए, यहां दी गई रणनीतियों का इस्तेमाल करें.
+Comandos curtos e detalhados geram bons resultados. Use as estratégias a seguir para guiar o modelo em direção ao som exato que você quer.
 
-## शैली और स्टाइल
+## Gênero e estilo
 
-अपने प्रॉम्प्ट की शुरुआत मुख्य शैली से करें. यूनिक हाइब्रिड बनाने के लिए, शैलियों को आपस में मिलाया जा सकता है:
+Comece o comando com o gênero principal. Você pode combinar gêneros para criar híbridos exclusivos:
 
-- मेटल और हिप-हॉप का फ़्यूज़न
-- ऑपरा स्टाइल में आवाज़ के साथ डेथ मेटल
-- डार्क इलेक्ट्रॉनिक ड्रोन वाले एलिमेंट के साथ क्लासिकल चैंबर म्यूज़िक
-- यूरोपॉप के साथ मॉडर्न इलेक्ट्रॉनिक डांस म्यूज़िक (ईडीएम)
+- Uma fusão de metal e hip-hop
+- Death metal combinado com vocais de ópera
+- Música de câmara clássica com elementos eletrônicos sombrios
+- Música eletrônica moderna (EDM) misturada com Europop
 
-संगीत का दौर या क्षेत्रीय वैरिएंट भी तय किया जा सकता है:
+Você também pode especificar uma era musical ou variante regional:
 
-- 1990 के दशक की शुरुआत का बूम-बैप हिप-हॉप
-- 1960 के दशक का फ़्रेंच ये-ये पॉप
-- 1980 के दशक का पोस्ट-पंक और न्यू वेव
-- 2000 के दशक का मुख्यधारा वाला आर ऐंड बी
-- बर्लिन का मिनिमल टेक्नो या बे एरिया का हाइफ़ी
+- Boom-bap hip-hop do início dos anos 90
+- Pop yé-yé francês dos anos 60
+- Pós-punk e new wave dos anos 1980
+- R&B mainstream dos anos 2000
+- Tecno minimalista de Berlim ou hyphy da Bay Area
 
-### शैली के हिसाब से कीवर्ड
+### Palavras-chave de gênero
 
-Lyria 3.5 और Lyria RealTime के लिए, अपने प्रॉम्प्ट में शैली के इन शब्दों का इस्तेमाल करें:
+Use estes termos de gênero reconhecidos nos seus comandos para o Lyria 3.5 e o Lyria RealTime:
 
-- **इलेक्ट्रॉनिक और डांस**: `Acid House, Breakbeat, Chillout, Chiptune, Deep House, Drum & Bass, Dubstep, EDM, Electro Swing, Glitch Hop, Hyperpop, Minimal Techno, Moombahton, Psytrance, Synthpop, Techno, Trance, Trip Hop, Vaporwave`
-- **हिप-हॉप और आर ऐंड बी**: `808 Hip Hop, Boom-Bap, Contemporary R&B, G-funk, Grime, Lo-Fi Hip Hop, Neo-Soul, New Jack Swing, Trap Beat`
-- **रॉक और ऑल्टरनेटिव**: `Alternative Country, Blues Rock, Classic Rock, Funk Metal, Garage Rock, Indie Folk, Indie Pop, Post-Punk, 60s Psychedelic Rock, Shoegaze, Surf Rock`
-- **जैज़, सोल, और फ़ंक**: `Acid Jazz, Afrobeat, Bossa Nova, Disco Funk, Funk, Jazz Fusion, Latin Jazz`
-- **लोक और पारंपरिक संगीत**: `Bengal Baul, Bhangra, Bluegrass, Celtic Folk, Cumbia, Indian Classical, Irish Folk, Merengue, Polka, Reggae, Reggaeton, Renaissance Music, Salsa`
-- **क्लासिकल और ऐकोस्टिक**: `Baroque, Orchestral Score, Piano Ballad`
+- **Música eletrônica e dance**: `Acid House, Breakbeat, Chillout, Chiptune, Deep House, Drum & Bass, Dubstep, EDM, Electro Swing, Glitch Hop, Hyperpop, Minimal Techno, Moombahton, Psytrance, Synthpop, Techno, Trance, Trip Hop, Vaporwave`
+- **Hip-hop e R&B**: `808 Hip Hop, Boom-Bap, Contemporary R&B, G-funk, Grime, Lo-Fi Hip Hop, Neo-Soul, New Jack Swing, Trap Beat`
+- **Rock e alternativa**: `Alternative Country, Blues Rock, Classic Rock, Funk Metal, Garage Rock, Indie Folk, Indie Pop, Post-Punk, 60s Psychedelic Rock, Shoegaze, Surf Rock`
+- **Jazz, soul e funk**: `Acid Jazz, Afrobeat, Bossa Nova, Disco Funk, Funk, Jazz Fusion, Latin Jazz`
+- **Música folclórica e tradicional**: `Bengal Baul, Bhangra, Bluegrass, Celtic Folk, Cumbia, Indian Classical, Irish Folk, Merengue, Polka, Reggae, Reggaeton, Renaissance Music, Salsa`
+- **Clássica e acústica**: `Baroque, Orchestral Score, Piano Ballad`
 
-## वाद्य यंत्र और बनावट
+## Instrumentos e texturas
 
-Lyria, अनुरोध किए गए ज़ॉनर के लिए सही इंस्ट्रुमेंटेशन अपने-आप चुन लेता है. अगर आपको कुछ खास इंस्ट्रुमेंट या असामान्य कॉम्बिनेशन चाहिए, तो उनके बारे में साफ़ तौर पर बताएं:
+A Lyria seleciona automaticamente a instrumentação adequada para o gênero solicitado. Se você quiser instrumentos específicos ou combinações incomuns, declare-os explicitamente:
 
 ```
 A dance track with a driving beat, shimmering synthesizers, and a catchy, anthemic chorus. A saxophone solo enters during the bridge.
 ```
 
-बताएं कि मूड और टेक्सचर सेट करने के लिए, इंस्ट्रुमेंट कैसे बजते हैं और आपस में कैसे इंटरैक्ट करते हैं:
+Descreva como os instrumentos soam e interagem para definir o clima e a textura:
 
-- क्रिसप और टाइट हाई-हैट के साथ, 303 बासलाइन को तोड़-मरोड़कर बनाया गया
-- सूखे और सुकून भरे अकूस्टिक गिटार के नीचे, ऐनलॉग सिंथेसाइज़र की सुकून भरी धुन
-- फ़ज़ गिटार की कई लेयर से बनी आवाज़, जिसमें दूर से गूंजती हुई आवाज़ सुनाई दे रही हो
+- Uma linha de baixo 303 distorcida atravessando hi-hats nítidos e firmes
+- Pads de sintetizador analógico quentes crescendo sob um violão acústico seco e intimista
+- Uma parede de som construída com várias camadas de guitarra fuzz, com vocais distantes e cheios de reverb
 
-### इंस्ट्रुमेंट कीवर्ड
+### Palavras-chave de instrumento
 
-- **कीबोर्ड और सिंथेसाइज़र**: `Buchla Synths, Clavichord, Dirty Synths, Harpsichord, Mellotron, Moog Oscillations, Ragtime Piano, Rhodes Piano, Smooth Pianos, Spacey Synths, Synth Pads`
-- **बास और ड्रम**: `303 Acid Bass, 808 Hip Hop Beat, Boomy Bass, Conga Drums, Drumline, Funk Drums, Precision Bass, Tabla, TR-909 Drum Machine`
-- **गिटार और स्ट्रिंग**: `Banjo, Balalaika, Bouzouki, Cello, Charango, Dulcimer, Fiddle, Flamenco Guitar, Guitar, Harp, Koto, Lyre, Mandolin, Pipa, Shamisen, Shredding Guitar, Sitar, Slide Guitar, Viola Ensemble, Warm Acoustic Guitar`
-- **विंड और ब्रास**: `Alto Saxophone, Bagpipes, Bass Clarinet, Didgeridoo, Harmonica, Ocarina, Trumpet, Tuba, Woodwinds`
-- **परकशन**: `Bongos, Djembe, Glockenspiel, Hang Drum, Kalimba, Maracas, Marimba, Mbira, Steel Drum, Vibraphone`
+- **Teclados e sintetizadores**: `Buchla Synths, Clavichord, Dirty Synths, Harpsichord, Mellotron, Moog Oscillations, Ragtime Piano, Rhodes Piano, Smooth Pianos, Spacey Synths, Synth Pads`
+- **Baixo e bateria**: `303 Acid Bass, 808 Hip Hop Beat, Boomy Bass, Conga Drums, Drumline, Funk Drums, Precision Bass, Tabla, TR-909 Drum Machine`
+- **Guitarras e cordas**: `Banjo, Balalaika, Bouzouki, Cello, Charango, Dulcimer, Fiddle, Flamenco Guitar, Guitar, Harp, Koto, Lyre, Mandolin, Pipa, Shamisen, Shredding Guitar, Sitar, Slide Guitar, Viola Ensemble, Warm Acoustic Guitar`
+- **Sopros e metais**: `Alto Saxophone, Bagpipes, Bass Clarinet, Didgeridoo, Harmonica, Ocarina, Trumpet, Tuba, Woodwinds`
+- **Percussão**: `Bongos, Djembe, Glockenspiel, Hang Drum, Kalimba, Maracas, Marimba, Mbira, Steel Drum, Vibraphone`
 
-## गाने का स्ट्रक्चर और टाइमिंग
+## Estrutura e tempo da música
 
-Lyria 3.5 के लिए, टैग या ऐरो का इस्तेमाल करके गाने की प्रोग्रेशन तय करें:
+Para o Lyria 3.5, defina a progressão da música usando tags ou setas:
 
 - `[Intro] -> [Verse 1] -> [Chorus] -> [Verse 2] -> [Chorus] -> [Bridge] -> [Outro]`
-- शांत पियानो की धुन से शुरू करें, फिर एक जोशीली कविता बनाएं, कुछ देर के लिए रुकें, और फिर कोरस में जोश भर दें.
+- Comece com uma introdução de piano suave, crie um verso energético, faça uma pausa para um momento de silêncio e depois exploda no refrão.
 
-आपके पास एनर्जी के डाइनैमिक और ट्रांज़िशन को सीधे तौर पर कंट्रोल करने का विकल्प होता है:
+É possível direcionar a dinâmica e as transições de energia:
 
-- प्री-कोरस के ज़रिए गाने में तनाव बढ़ाएं. इसके बाद, धमाकेदार कोरस से पहले गाने को शांत कर दें
-- पूरे गाने में धीरे-धीरे आवाज़ बढ़ती है. हर सेक्शन में एक इंस्ट्रुमेंट जोड़ा जाता है
-- ब्रिज के बाद अचानक रुक जाना और फिर अ कपेला कोरस
+- Crie tensão no pré-refrão e depois faça uma pausa antes de um refrão explosivo
+- Crescendo gradual ao longo da música, adicionando um instrumento por seção
+- Uma parada repentina após a ponte, seguida de um refrão a cappella
 
-इसके अलावा, किसी खास समय के मार्कर के बारे में भी पूछा जा सकता है:
+Você também pode solicitar marcadores de tempo específicos:
 
-- 12 सेकंड पर बीट ड्रॉप करें
-- गाने के बोल का सैंपल हर चार बार दोहराया जाता है
-- कोरस 22 सेकंड पर शुरू होता है
+- Crie uma batida aos 12 segundos
+- A amostra vocal se repete a cada quatro compassos
+- O refrão começa aos 22 segundos
 
-## गाने के बोल और गाने से जुड़ा कॉपीराइट
+## Letras e vocais
 
-Lyria 3.5, डिफ़ॉल्ट रूप से बोल वाले वोकल ट्रैक जनरेट करता है. आपके पास अपने बोल देने, मॉडल से बोल जनरेट करने के लिए कहने या इंस्ट्रुमेंटल ट्रैक का अनुरोध करने का विकल्प होता है.
+O Lyria 3.5 gera faixas vocais com letras por padrão. Você pode fornecer sua própria letra, pedir que o modelo gere uma ou solicitar uma música instrumental.
 
-### खुद के लिखे गए बोल इस्तेमाल करना
+### Usar suas próprias letras
 
-`Lyrics:` हेडर के नीचे दिए गए प्रॉम्प्ट में, सीधे तौर पर अपने बोल शामिल करें. बोलकर जानकारी देने के लिए, हर सेक्शन को टैग करें:
+Inclua a letra diretamente no comando abaixo de um cabeçalho `Lyrics:`. Marque cada seção para orientar a entrega vocal:
 
 ```
 Lyrics:
@@ -135,56 +135,56 @@ Until the morning light
 Everything will be alright
 ```
 
-बैकग्राउंड में गाए जाने वाले गाने, गूंजने वाली आवाज़ या बिना तैयारी के बोले गए शब्दों के लिए, ब्रैकेट का इस्तेमाल करें. जैसे, `(moving on)`.
+Use parênteses para vocais de apoio, ecos ou improvisos, como `(moving on)`.
 
-### जनरेट किए गए बोल के लिए निर्देश देना
+### Direcionar letras geradas
 
-Lyria 3.5 को गीत के बोल लिखने के लिए कहते समय, कहानी, भावना या मुख्य वाक्यांशों के बारे में बताएँ:
+Ao pedir para o Lyria 3.5 escrever letras, descreva a narrativa, a emoção ou as frases principais:
 
 ```
 The lyrics describe driving down the Pacific Coast Highway at sunset. The mood is nostalgic and reflective. Include an uplifting, anthemic chorus about second chances and starting over.
 ```
 
-इलेक्ट्रॉनिक और डांस शैलियों के लिए, दोहराए जाने वाले छोटे वोकल हुक का अनुरोध करें:
+Para gêneros eletrônicos e de dança, peça refrões vocais curtos e repetidos:
 
 ```
 An upbeat dance-pop track with a repetitive, high-energy vocal hook: "Feel the rhythm all night long."
 ```
 
-### गायक की आवाज़ और उनकी प्रोफ़ाइलें
+### Entrega vocal e perfis de cantores
 
-सटीक नतीजे पाने के लिए, गायक का जेंडर, वोकल रेंज, और टिंबर बताएँ:
+Especifique o gênero, a extensão vocal e o timbre para uma interpretação precisa:
 
-- **सोप्रानो**: साफ़, क्रिस्टलीय टिंबर के साथ तेज़ और ऊंची डिलीवरी. ब्राइट टोन, जो हवादार और सांस लेने जैसी बनावट वाली आवाज़ें निकाल सकती है.
-- **फ़्रीक्वेंसी रेंज में महिला की आवाज़**: यह आवाज़, गहरी, गर्म, और भारी होती है. स्मोकी टिंबर के साथ, दिल को छू लेने वाली और गूंजती हुई चेस्ट वॉइस.
-- **पुरुष टेनर**: तेज़, तीखी, और ऊर्जा से भरपूर आवाज़. ऊंची बेल्टिंग पावर वाली युवा आवाज़, जो घने मिक्स को काटती है.
-- **पुरुष की बैरिटोन आवाज़**: गहरी, मखमली, और सुकून देने वाली आवाज़.
-- **Weathered Rocker**: यह आवाज़, 1990 के दशक के ऑल्टरनेटिव रॉक की याद दिलाती है. ऊंचे सुरों के साथ, भावनाओं को ज़ाहिर करने वाली आवाज़.
+- **Soprano feminino**: timbre claro e cristalino com uma entrega ágil e crescente. Tom brilhante capaz de criar texturas leves e suaves.
+- **Contralto feminino**: alcance mais baixo rico, quente e rouco. Timbre esfumaçado com uma voz de peito ressonante e cheia de alma.
+- **Tenor masculino**: brilhante, penetrante e energético. Timbre jovem com grande potência de canto que se destaca em mixagens densas.
+- **Barítono masculino**: voz grave e aveludada com um tom quente, suave e melodioso.
+- **Rocker desgastado**: timbre áspero e forte que lembra o rock alternativo dos anos 1990. Intensidade emocional bruta com notas agudas tensas.
 
-### बिना लिरिक्स वाले वोकल इफ़ेक्ट
+### Efeitos vocais não líricos
 
-इसके अलावा, बोले गए डायलॉग, वोकल चॉप, और सैंपलिंग इफ़ेक्ट के लिए भी प्रॉम्प्ट दिया जा सकता है:
+Você também pode pedir diálogos falados, cortes vocais e efeitos de amostragem:
 
-- रेडियो पर ब्रॉडकास्ट होने वाली आवाज़ में, बीट शुरू होने से पहले गाने के बारे में बताया जाता है
-- ड्रॉप से ठीक पहले, एक आवाज़ फुसफुसाती है. इसके बाद, हाई-एनर्जी वाले सिंथेसाइज़र बजते हैं
-- काटे गए, पिच-शिफ़्ट किए गए वोकल सैंपल, जो इंस्ट्रुमेंटल रिदम एलिमेंट के तौर पर लूप हो रहे हैं
+- Uma voz de transmissão de rádio vintage apresenta a música antes de a batida começar.
+- Uma voz sussurra logo antes da queda, seguida de sintetizadores de alta energia.
+- Amostras vocais cortadas e com mudança de tom em loop como um elemento de ritmo instrumental.
 
-## म्यूज़िकल पैरामीटर
+## Parâmetros musicais
 
-संगीत की स्टैंडर्ड प्रॉपर्टी का इस्तेमाल करके, अपने प्रॉम्प्ट को बेहतर बनाएं:
+Refine o comando com propriedades musicais padrão:
 
-- **टेंपो (बीपीएम)**: सीधे तौर पर टेंपो सेट करें (जैसे, `120 BPM`, `slow tempo around 72 BPM`, `fast 160 BPM`).
-- **की और स्केल**: रूट की और टोनैलिटी (जैसे, `in G major`, `in D minor`, `in C pentatonic`) के बारे में बताएं.
-- **मूड और माहौल**: भावनाओं को ज़ाहिर करने वाले विशेषणों का इस्तेमाल करें:
+- **Tempo (BPM)**: defina o tempo diretamente (por exemplo, `120 BPM`, `slow tempo around 72 BPM`, `fast 160 BPM`).
+- **Tonalidade e escala**: especifique a tonalidade e a nota fundamental (por exemplo, `in G major`, `in D minor`, `in C pentatonic`).
+- **Humor e atmosfera**: use adjetivos descritivos de emoções:
   `Ambient, Bright, Chill, Dark, Dreamy, Emotional, Ethereal, Euphoric, Funky, Groovy, Melancholic, Nostalgic, Ominous, Psychedelic, Relaxed, Soulful, Triumphant, Upbeat, Whimsical`
 
-## Lyria RealTime को प्रॉम्प्ट करना
+## Comandos do Lyria RealTime
 
-Lyria RealTime, एक ही प्रॉम्प्ट स्ट्रिंग के बजाय **वेटेड प्रॉम्प्ट** का इस्तेमाल करता है. इससे आपको एक साथ कई म्यूज़िकल स्टाइल को डाइनैमिक तरीके से मिक्स करने और WebSocket कनेक्शन पर लगातार म्यूज़िक चलाने की सुविधा मिलती है.
+O Lyria RealTime usa **comandos ponderados** em vez de uma única string de comando monolítica. Isso permite combinar várias influências musicais de forma dinâmica e direcionar a música continuamente por uma conexão WebSocket.
 
-### वज़न के हिसाब से प्रॉम्प्ट स्ट्रक्चर
+### Estrutura de comando ponderada
 
-वज़न के हिसाब से हर प्रॉम्प्ट में, जानकारी देने वाला टेक्स्ट फ़्रेज़ और फ़्लोटिंग-पॉइंट वेट होता है:
+Cada comando ponderado consiste em uma frase de texto descritiva e uma ponderação de ponto flutuante:
 
 ```
 prompts = [
@@ -194,35 +194,35 @@ prompts = [
 ]
 ```
 
-### रीयल-टाइम में स्टीयरिंग की रणनीतियां
+### Estratégias de direção em tempo real
 
-- **अलग-अलग शैलियों को ब्लेंड करना**: अलग-अलग शैलियों को ब्लेंड करने के लिए, उन्हें बराबर वेट असाइन करें:
+- **Combinar gêneros**: combine estilos distintos atribuindo ponderações equilibradas:
   - `ambient synth pads (weight: 0.8)` + `lo-fi hip-hop drums (weight: 0.6)`
   - `flamenco guitar (weight: 0.7)` + `deep house groove (weight: 0.5)`
-- **डाइनैमिक ट्रांज़िशन**: संगीत को आसानी से ट्रांज़िशन करने के लिए, समय के साथ प्रॉम्प्ट के वेट में बदलाव करें:
-  1. `chill jazz piano (weight: 1.0)` से शुरू करें.
-  2. धीरे-धीरे `electronic breakbeat (weight: 0.3)` जोड़ें.
-  3. `chill jazz piano` को `0.3` पर सेट करते हुए, `electronic breakbeat` को `0.8` पर बढ़ाएं.
-- **लेयरिंग एलिमेंट**: इंस्ट्रुमेंट टैग और मूड टैग को अलग-अलग रखें, ताकि आप उनमें अलग-अलग बदलाव कर सकें:
-  - प्रॉम्प्ट 1: `bossa nova guitar (weight: 0.9)`
-  - प्रॉम्प्ट 2: `warm acoustic bass (weight: 0.7)`
-  - प्रॉम्प्ट 3: `subtle vinyl crackle (weight: 0.3)`
+- **Transições dinâmicas**: para fazer uma transição suave da música, ajuste as ponderações de comando ao longo do tempo:
+  1. Comece com `chill jazz piano (weight: 1.0)`.
+  2. Adicione `electronic breakbeat (weight: 0.3)` gradualmente.
+  3. Aumente `electronic breakbeat` para `0.8` e diminua `chill jazz piano` para `0.3`.
+- **Camadas de elementos**: mantenha as tags de instrumento e de clima separadas para poder ajustá-las de forma independente:
+  - Comando 1: `bossa nova guitar (weight: 0.9)`
+  - Comando 2: `warm acoustic bass (weight: 0.7)`
+  - Comando 3: `subtle vinyl crackle (weight: 0.3)`
 
-## प्रॉम्प्ट के उदाहरण
+## Exemplos de comandos
 
-### Lyria 3.5 के उदाहरण
+### Exemplos do Lyria 3.5
 
 - **Lo-Fi Study Beat**:
   `none
   A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes piano chords, a relaxed boom-bap drum groove at 82 BPM, and a warm upright bassline. Instrumental only.`
-- **पॉप ऐंथम**:
+- **Hino pop**:
   `none
   An upbeat, feel-good indie-pop song in G major at 122 BPM. Bright acoustic guitar strumming, driving kick drum, handclaps, and warm female vocal harmonies. The lyrics describe an unforgettable summer road trip with friends.`
-- **सिनमैटिक साइबरपंक**:
+- **Cyberpunk cinematográfico**:
   `none
   Dark, cinematic cyberpunk synthwave at 110 BPM in D minor. Heavy distorted bass, ominous arpeggiated analog synthesizers, distant metallic percussion, and an ethereal female vocalise swelling during the climax.`
 
-### Lyria RealTime स्टीयरिंग सेट है
+### Conjunto de direção do Lyria RealTime
 
 ```
 # Initial high-energy groove
@@ -243,17 +243,17 @@ await session.set_weighted_prompts(
 )
 ```
 
-## आगे क्या करना है
+## A seguir
 
-- [Lyria 3.5 की मदद से संगीत जनरेट करना](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi): Interactions API का इस्तेमाल करके, पूरे गाने और 30 सेकंड की क्लिप जनरेट करें.
-- [Lyria RealTime की मदद से रीयल-टाइम में संगीत जनरेट करना](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=hi): WebSockets पर रीयल-टाइम में इंटरैक्टिव म्यूज़िक स्ट्रीमिंग ऐप्लिकेशन बनाएं.
+- [Gerar música com o Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=pt-br): crie músicas completas e clipes de 30 segundos usando a API Interactions.
+- [Geração de música em tempo real com o Lyria RealTime](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=pt-br): crie aplicativos interativos de streaming de música em tempo real com WebSockets.
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया.
+Última atualização 2026-09-18 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-18 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-18 UTC."],[],[]]

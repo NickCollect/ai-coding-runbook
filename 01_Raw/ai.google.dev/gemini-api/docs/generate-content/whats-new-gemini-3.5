@@ -1,46 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=fr
-fetched_at: 2026-10-05T06:35:40.474289+00:00
-title: "Nouveaut\u00e9s de Gemini\u00a03.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=ru
+fetched_at: 2026-10-12T07:08:27.957157+00:00
+title: "\u0427\u0442\u043e \u043d\u043e\u0432\u043e\u0433\u043e \u0432 Gemini 3.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Флэш-память Gemini 3.8 теперь доступна. [Попробуйте!](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs/generate-content?hl=ru)
 
-Envoyer des commentaires
+Отправить отзыв
 
-# Nouveautés de Gemini 3.5 Flash
+# Что нового в Gemini 3.5 Flash
 
-[3.6 Flash et 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=fr)
-[Cette page](#)
+[Новейшая модель](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=ru)
+[Другие модели](#other-models)
 
-Gemini 3.5 Flash est **disponible pour tous les utilisateurs**, stable et prêt à être utilisé en production à grande échelle. En tant que modèle Flash le plus intelligent, il offre des performances de pointe constantes dans l'exécution agentique, le codage et les tâches à long terme à grande échelle.
+Gemini 3.5 Flash (`gemini-3.5-flash`) – это устаревшая модель Flash предыдущего поколения из серии Gemini 3. Запросы к `gemini-3.5-flash` автоматически перенаправляются в [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=ru). Информацию о нашей новейшей модели Flash можно найти в статье [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=ru).
 
-Ce guide présente un aperçu des améliorations, des modifications apportées à l'API et des conseils de migration pour Gemini 3.5 Flash.
+Это руководство сохранено для исторической справки и содержит информацию об основных изменениях в API Gemini 3.x и рекомендации по параметрам.
 
-## Nouveau modèle
+## Обзор модели
 
-| Modèle | ID du modèle | Description |
+| Модель | Идентификатор модели | Статус |
 | --- | --- | --- |
-| Gemini 3.5 Flash | `gemini-3.5-flash` | Notre modèle le plus intelligent pour des performances de pointe constantes dans les tâches agentiques et de codage. |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | **Устаревший** (автоматически перенаправляется на [`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=ru)). |
 
-Gemini 3.5 Flash est compatible avec la fenêtre de contexte d'un million de jetons, 65 000 jetons de sortie maximum,
-la réflexion et le même ensemble d'outils et de fonctionnalités de plate-forme que Gemini 3 Flash,
-y compris [l'utilisation de l'ordinateur (preview)](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr).
-Pour obtenir les spécifications complètes, consultez la [présentation des modèles](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr).
-Pour consulter les tarifs, accédez à la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.5-flash).
+Gemini 3.5 Flash поддерживала окно контекста на 1 млн токенов, максимальное количество выходных токенов – 65 000, функцию "Думает" и тот же набор инструментов и функций платформы, что и Gemini 3 Flash, включая [использование компьютера (предварительная версия)](https://ai.google.dev/gemini-api/docs/computer-use?hl=ru).
+Полные характеристики приведены в [обзоре моделей](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ru).
 
-## Guide de démarrage rapide
+## Краткое руководство
 
-Tous les exemples de ce guide utilisent l'API GenerateContent. L'API Interactions est également compatible. Les mêmes options de configuration et recommandations s'appliquent.
+Во всех примерах в этом руководстве используется API GenerateContent. Также поддерживается API взаимодействий. Для него действуют те же настройки и рекомендации.
 
 ### Python
 
@@ -88,47 +85,38 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## Nouveautés
+## Что нового
 
-- **Performances de pointe constantes** : notre modèle Flash le plus intelligent, optimisé pour les tâches agentiques et de codage à grande échelle.
-- **Exécution agentique** : déploiement de sous-agents, résolution de problèmes et boucles agentiques rapides à grande échelle.
-- **Codage** : cycles de codage itératifs, exploration rapide et prototypage pour tester d'autres chemins et explorer dynamiquement des solutions.
-- **Long terme** : workflows multi-étapes et utilisation d'outils à grande échelle.
-- **Préservation des pensées** : le modèle conserve automatiquement le raisonnement intermédiaire dans les conversations multitours. Aucune modification de l'API n'est nécessaire.
-- **Nouveau niveau d'effort par défaut** : l'effort de réflexion par défaut est passé de `high` à `medium`. Pour en savoir plus, consultez [Nouveau niveau d'effort par défaut](#default-effort-level).
-- **Amélioration de la réflexion `low`** : `low` est désormais considérablement amélioré pour le code
-  et les tâches agentiques qui nécessitent moins d’étapes, offrant une qualité élevée à une latence et un coût inférieurs.
-- **Disponibilité générale** : modèle stable pour une utilisation en production à grande échelle.
+- **Стабильная производительность.** Оптимизировано для выполнения задач по написанию кода с помощью агентов в большом масштабе.
+- **Агентное выполнение.** Развертывание дочерних агентов, решение проблем и быстрые агентные циклы в масштабе.
+- **Программирование.** Итеративные циклы кодирования, быстрое исследование и создание прототипов для тестирования альтернативных путей и динамического изучения решений.
+- **Долгосрочная перспектива.** Многоэтапные рабочие процессы и использование инструментов в масштабе.
+- **Сохранение промежуточных рассуждений.** Модель автоматически сохраняет промежуточные рассуждения в многоходовых диалогах. Изменения в API не требуются.
+- **Новый уровень усилий по умолчанию:** уровень усилий по умолчанию изменен с `high` на `medium`. Подробнее [о новом уровне усилий по умолчанию](#default-effort-level)…
+- **Улучшенное мышление `low`.** `low` значительно улучшен для задач, связанных с кодом и агентами, которые требуют меньше шагов, обеспечивая высокое качество при меньшей задержке и стоимости.
 
-### Choisir le bon modèle Flash
+### Как выбрать подходящую модель Flash
 
-Gemini 3.5 Flash est notre modèle Flash le plus intelligent et le plus performant. Toutefois, différents cas d'utilisation peuvent avoir des exigences différentes en termes de coûts et de latence.
+Поскольку `gemini-3.5-flash` устарел и автоматически перенаправляется на `gemini-3.6-flash`, мы рекомендуем перейти на одну из следующих активных моделей:
 
-- **Gemini 3.1 Flash-Lite** : pour les tâches à faible coût,
-  à volume élevé qui ne nécessitent pas la profondeur de raisonnement avancée de 3.5
-  Flash, nous vous recommandons d'utiliser [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr).
-  Il s'agit d'un modèle stable à long terme optimisé pour l'efficacité. Pour en savoir plus, consultez le
-  [guide du développeur Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr#developer_guide).
-- **Preview Gemini 3 Flash** : bien que nous vous recommandions de migrer vers 3.5 Flash pour
-  une stabilité en disponibilité générale et un raisonnement amélioré, [Gemini 3 Flash (preview)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fr)
-  reste disponible pour les développeurs qui souhaitent continuer à tester le
-  modèle en preview.
+- **Gemini 3.8 Flash** – новейшая и самая умная модель Flash для сложного программирования и агентных рабочих процессов. Подробнее [о Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=ru)…
+- **Gemini 3.6 Flash** – прямая замена `gemini-3.5-flash` с более низким расходом токенов и более низкой ценой за вывод. Подробнее [о Gemini 3.6 Flash и 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=ru)…
+- **Gemini 3.5 Flash-Lite / Gemini 3.1 Flash-Lite.** Для недорогих задач, выполняемых в большом объеме и не требующих полной глубины рассуждений Flash, используйте [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ru) или [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ru).
 
-## Changements de comportement
+## Изменения в поведении
 
-### Nouveau niveau d'effort par défaut : `medium`
+### Новый уровень усилий по умолчанию: `medium`
 
-L'effort de réflexion par défaut est désormais **`medium`**, au lieu de `high` dans Gemini 3
-Flash Preview. `medium` donne de très bons résultats pour un large éventail de tâches tout en étant plus rapide et plus rentable. Pour les problèmes complexes, `high` encourage le modèle à réfléchir plus en profondeur.
+Теперь по умолчанию используется значение **`medium`** (ранее в предварительной версии Gemini 3 Flash использовалось значение `high`). `medium` обеспечивает очень хорошие результаты при выполнении самых разных задач, а также работает быстрее и экономичнее. Для сложных задач `high` побуждает модель к более глубокому анализу.
 
-| Niveau d'effort | Quand les utiliser ? |
+| Уровень усилий | Когда использовать |
 | --- | --- |
-| `minimal` | Optimisé pour la vitesse de réponse. Cas d'utilisation de type chat, réponses factuelles rapides, appels d'outils plus simples. |
-| `low` | Tâches de codage et agentiques qui nécessitent une latence plus faible et moins d'étapes. Fonctionne également bien pour les tâches d'analyse et d'écriture qui nécessitent une certaine réflexion. |
-| **`medium` (par défaut)** | **Meilleure qualité pour la plupart des tâches. Recommandé pour les cas d'utilisation de codage et agentiques complexes.** |
-| `high` | Maximise la capacité du modèle à réfléchir et à utiliser des outils. Idéal pour le raisonnement complexe, les mathématiques difficiles et les tâches de codage ou agentiques les plus difficiles. Permet des réflexions et des appels de fonction étendus. |
+| `minimal` | Оптимизирован для скорости ответа. Использование в чате, быстрые фактические ответы, более простые вызовы инструментов. |
+| `low` | Код и задачи агента, требующие меньшей задержки и меньшего количества шагов. Также хорошо подходит для задач, связанных с анализом и написанием текстов, требующих размышлений. |
+| **`medium` (по умолчанию)** | **Наилучшее качество для большинства задач. Рекомендуется для сложного кода и агентных вариантов использования.** |
+| `high` | Максимально повышает способность модели мыслить и использовать инструменты. Лучше всего подходит для сложных рассуждений, трудных математических задач и самых сложных задач по программированию или задач агента. Позволяет расширять мысли и вызывать функции. |
 
-Pour remplacer la valeur par défaut, définissez `thinking_level` dans votre configuration :
+Чтобы переопределить значение по умолчанию, задайте `thinking_level` в конфигурации:
 
 ### Python
 
@@ -191,46 +179,39 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-Le tableau suivant indique les niveaux de réflexion compatibles par modèle :
+В таблице ниже показано, какие уровни мышления поддерживаются для каждой модели.
 
-| Niveau de réflexion | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Description |
+| Уровень рассуждений | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Описание |
 | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Compatible | Non compatible | Compatible (par défaut) | Compatible | Correspond au paramètre "pas de réflexion" pour la plupart des requêtes. Remarque : `minimal` ne garantit pas que la réflexion est désactivée. Le modèle peut raisonner de manière très minimale pour les tâches complexes. |
-| **`low`** | Compatible | Compatible | Compatible | Compatible | Réduit la latence et les coûts. |
-| **`medium`** | Compatible (par défaut) | Compatible | Compatible | Compatible | Réflexion équilibrée pour la plupart des tâches. |
-| **`high`** | Compatible (dynamique) | Compatible (par défaut, dynamique) | Compatible (dynamique) | Compatible (par défaut, dynamique) | Maximise la profondeur du raisonnement. |
+| **`minimal`** | Что пользователь может | Чего пользователь не может | Поддерживается (по умолчанию) | Что пользователь может | Соответствует настройке "не думать" для большинства запросов. Обратите внимание, что `minimal` не гарантирует, что рассуждения будут отключены. Модель может рассуждать минимально при выполнении сложных задач. |
+| **`low`** | Что пользователь может | Что пользователь может | Что пользователь может | Что пользователь может | Минимизирует задержку и стоимость. |
+| **`medium`** | Поддерживается (по умолчанию) | Что пользователь может | Что пользователь может | Что пользователь может | Сбалансированное мышление для большинства задач. |
+| **`high`** | Поддерживается (динамический) | Поддерживается (по умолчанию, динамический) | Поддерживается (динамический) | Поддерживается (по умолчанию, динамический) | Максимальная глубина рассуждений. |
 
-### Préservation des pensées
+### Сохранение цепочки рассуждений
 
-Le modèle conserve automatiquement le raisonnement intermédiaire dans les conversations multitours. Lorsqu'il est présent dans l'historique des conversations, le contexte de raisonnement est conservé, ce qui améliore les performances pour les tâches complexes en plusieurs étapes, telles que le débogage itératif et la refactorisation du code. Aucune modification de l'API n'est nécessaire :
+Модель автоматически сохраняет промежуточные рассуждения в пошаговых диалогах. Если в истории чата есть контекст рассуждений, он сохраняется, что повышает эффективность выполнения сложных многоэтапных задач, таких как итеративная отладка и рефакторинг кода. Изменения в API не требуются:
 
-- **API Interactions** : les pensées sont déjà conservées automatiquement. Aucun changement de comportement.
-- **API GenerateContent** : à partir de Gemini 3.5 Flash, le modèle utilise
-  le contexte de raisonnement de tous les tours précédents lorsque des signatures de pensée sont
-  présentes dans l'historique des conversations. Pour activer cette fonctionnalité, transmettez l'historique complet et
-  non modifié des conversations (y compris les
-  [signatures de pensée](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr)) dans `contents`.
-  Les SDK gèrent cela automatiquement.
+- **Interactions API**: мысли сохраняются автоматически. Поведение не изменится.
+- **GenerateContent API.** Начиная с Gemini 3.5 Flash, модель использует контекст рассуждений из всех предыдущих ходов, если в истории чата есть подписи рассуждений. Чтобы включить эту функцию, передайте полную, неизмененную историю чата (включая [подписи размышлений](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ru)) в `contents`.
+  SDK делают это автоматически.
 
-## Mises à jour des paramètres et bonnes pratiques dans Gemini 3.x
+## Изменения параметров и рекомендации в Gemini 3.x
 
-Les éléments suivants s'appliquent à **tous les modèles Gemini 3.x**, y compris Gemini 3.5 Flash.
+Ниже приведены сведения, которые относятся ко **всем моделям Gemini 3.x**, включая Gemini 3.5 Flash.
 
-- **`temperature`, `top_p`, `top_k`** : nous vous recommandons vivement de ne pas modifier les valeurs par défaut. Les capacités de raisonnement de Gemini 3 sont optimisées pour les paramètres par défaut.
-- Utilisez `thinking_level` au lieu de `thinking_budget`.
-- **Correspondance des réponses d'appel de fonction** : `id`, `name` et le nombre de réponses
-  doivent correspondre aux appels précédents.
-- **Réponses de fonction multimodales** : incluez le contenu multimodal dans la
-  réponse de la fonction, et non en dehors.
-- **Instructions intégrées dans les réponses de fonction** : ajoutez-les au texte de la réponse de la fonction, et non en tant que parties distinctes.
-- **Réduisez les appels d'outils inutiles** : utilisez des niveaux de réflexion inférieurs ou expérimentez
-  avec des instructions système pour réduire les appels d'outils dans les workflows agentiques.
+- **`temperature`, `top_p`, `top_k`** – мы настоятельно рекомендуем не менять значения по умолчанию. Возможности Gemini 3 по рассуждению оптимизированы для настроек по умолчанию.
+- Используйте `thinking_level` вместо `thinking_budget`.
+- **Соответствие ответов на вызовы функций.** Параметры `id`, `name` и количество ответов должны совпадать с предыдущими вызовами.
+- **Ответы мультимодальных функций.** Мультимодальный контент должен быть включен в ответ функции, а не находиться за его пределами.
+- **Встроенные инструкции в ответах функций** добавляются к тексту ответа функции, а не как отдельные части.
+- **Уменьшите количество ненужных вызовов инструментов.** Используйте более низкие уровни мышления или экспериментируйте с системными инструкциями, чтобы уменьшить количество вызовов инструментов в рабочих процессах агента.
 
-Consultez les sections ci-dessous pour savoir comment mettre à jour votre code.
+Инструкции по изменению кода приведены в разделах ниже.
 
-### Paramètres d'échantillonnage (non recommandé)
+### Параметры выборки (больше не рекомендуются)
 
-`temperature`, `top_p` et `top_k` ne sont plus recommandés pour tous les modèles Gemini 3.x. Les capacités de raisonnement de Gemini 3 sont optimisées pour les paramètres par défaut. **Supprimez ces paramètres de toutes les requêtes.**
+`temperature`, `top_p` и `top_k` больше не рекомендуются для всех моделей Gemini 3.x. Возможности Gemini 3 по рассуждению оптимизированы для настроек по умолчанию. **Удалить эти параметры из всех запросов.**
 
 ```
 # ⚠️ Remove these parameters (not recommended)
@@ -241,11 +222,11 @@ config = types.GenerateContentConfig(
 )
 ```
 
-Pour garantir le déterminisme, nous vous recommandons de définir une instruction système avec des règles explicites pour votre cas d'utilisation spécifique.
+Чтобы обеспечить детерминированность, рекомендуем задать системную инструкцию с четкими правилами для вашего варианта использования.
 
-### `thinking_budget` (non recommandé)
+### `thinking_budget` (больше не рекомендуется)
 
-Le paramètre numérique brut `thinking_budget` n'est plus recommandé pour tous les modèles Gemini 3.x. Utilisez plutôt l'énumération de chaîne `thinking_level`.
+Параметр `thinking_budget` больше не рекомендуется использовать во всех моделях Gemini 3.x. Вместо него используйте перечисление строк `thinking_level`.
 
 ```
 # ⚠️ Before (not recommended)
@@ -259,17 +240,17 @@ config = types.GenerateContentConfig(
 )
 ```
 
-Valeurs disponibles : `minimal`, `low`, `medium` (par défaut) et `high`.
+Допустимые значения: `minimal`, `low`, `medium` (по умолчанию) и `high`.
 
-### Appel de fonction : correspondance stricte des réponses
+### Вызов функций: строгое соответствие ответов
 
-L'API Interactions génère déjà une erreur en cas de réponses de fonction non concordantes. L'API GenerateContent ne génère pas encore d'erreur, mais les réponses non concordantes entraînent le renvoi de réponses vides par le modèle avec `finish_reason: STOP` dans la plupart des cas. Suivez toujours ces conventions :
+В Interactions API уже есть ошибки, связанные с несоответствием ответов функций. API GenerateContent пока не возвращает ошибку, но несоответствие ответов приводит к тому, что модель в большинстве случаев возвращает пустые ответы с `finish_reason: STOP`. Всегда следуйте этим правилам:
 
-| Exigence | Détails |
+| Требования | Сведения |
 | --- | --- |
-| Inclure `id` | Chaque `FunctionResponse` doit inclure l'`id` du `FunctionCall` correspondant |
-| Faire correspondre `name` | Le `name` de la réponse doit correspondre au `name` de l'appel |
-| Faire correspondre les nombres | Renvoie exactement un `FunctionResponse` pour chaque `FunctionCall` reçu |
+| Добавить местоположение "`id`" | Каждый элемент `FunctionResponse` должен включать `id` из соответствующего элемента `FunctionCall`. |
+| Матч `name` | Значение `name` в ответе должно совпадать со значением `name` в вызове. |
+| Количество совпадений | Возвращайте ровно один объект `FunctionResponse` для каждого полученного объекта `FunctionCall`. |
 
 ### Python
 
@@ -331,9 +312,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Réponses de fonction multimodales
+### Мультимодальные ответы функций
 
-Nous constatons souvent que les clients fournissent des images en dehors de la réponse de la fonction. Cela peut entraîner un comportement inattendu du modèle (par exemple, une fuite de pensée) et des sorties de qualité inférieure. [Suivez plutôt la recommandation de la documentation de l'API Réponses de fonction multimodales et incluez le contenu multimodal dans les parties de la réponse de la fonction que vous envoyez au modèle.](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=fr#multimodal) Le modèle peut traiter ce contenu multimodal lors de son prochain tour pour produire une réponse plus éclairée.
+Часто клиенты предоставляют изображения вне ответа функции. Это может привести к неожиданному поведению модели (например, к утечке мыслей) и снижению качества выходных данных. Вместо этого следуйте рекомендациям из [документации по API мультимодальных ответов функций](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=ru#multimodal) и включайте мультимодальный контент в части ответов функций, которые вы отправляете модели. Модель может обработать этот мультимодальный контент в следующем запросе, чтобы дать более точный ответ.
 
 ### Python
 
@@ -386,9 +367,10 @@ const finalResponse = await ai.models.generateContent({
 });
 ```
 
-### Instructions intégrées dans les réponses de fonction
+### Встроенные инструкции в ответах функций
 
-Nous constatons souvent que les clients fournissent des instructions supplémentaires avec les réponses de fonction en tant que `Parts` ultérieures. Cela peut entraîner un comportement inattendu du modèle (par exemple, une fuite de pensée) et des sorties de qualité inférieure. Ajoutez plutôt toutes les instructions supplémentaires à la fin du texte de la réponse de la fonction, séparées par deux sauts de ligne.
+Часто клиенты предоставляют дополнительные инструкции вместе с ответами функций
+в последующих `Parts`. Это может привести к неожиданному поведению модели (например, к утечке мыслей) и снизить качество результатов. Вместо этого добавьте любые дополнительные инструкции в конец текста ответа функции, разделив их двумя переносами строки.
 
 ### Python
 
@@ -439,117 +421,77 @@ const finalResponse = await ai.models.generateContent({
 });
 ```
 
-### Réduire les appels d'outils inutiles
+### Как сократить количество ненужных вызовов инструментов
 
-Si vous constatez une utilisation excessive des appels d'outils, deux techniques permettent de les réduire :
+Если вы заметили, что модель слишком часто использует вызовы функций, попробуйте следующие методы:
 
-1. **Commencez par réduire le niveau de réflexion** (`medium`, `low` ou `minimal`) : des niveaux de réflexion plus élevés encouragent le modèle à utiliser davantage d'outils pour explorer et vérifier. La réduction du niveau peut donc réduire les appels d'outils.
-2. **Ajoutez une instruction système** : si l'utilisation excessive persiste après avoir ajusté le niveau de réflexion, envisagez un prompt qui limite l'utilisation des outils. Exemple :
+1. **Начните с уменьшения уровня мышления** (`medium`, `low` или `minimal`). Чем выше уровень мышления, тем больше инструментов использует модель для поиска и проверки информации. Уменьшив уровень, вы можете сократить количество вызовов инструментов.
+2. **Добавьте системную инструкцию.** Если после изменения уровня мышления злоупотребление инструментами продолжается, попробуйте добавить запрос, ограничивающий их использование. Пример:
 
    ```
    You have a limited action budget of <n> tool calls. Use them efficiently.
    ```
 
-## Checklist de migration
+## Функции Gemini 3 для семей
 
-### Migrer depuis Gemini 3 Flash Preview
+Gemini 3.5 Flash унаследовала все возможности моделей Gemini 3, в том числе функцию "Использование компьютера".
+Функции, которые были представлены в Gemini 3 и сохранены в Gemini 3.5:
 
-- Mettre à jour le nom du modèle : `gemini-3-flash-preview` → `gemini-3.5-flash`
-- Consultez les tarifs. Gemini 3.5 Flash est plus cher que Gemini 3 Flash Preview. Si votre cas d'utilisation est très sensible aux coûts, envisagez plutôt de migrer vers
-  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr). Consultez la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.5-flash) pour plus d'informations.
-- Supprimez `temperature`, `top_p` et `top_k` de votre configuration (non recommandé).
-- Remplacez `thinking_budget` par `thinking_level`.
-- Ajoutez `id` et le `name` correspondant à toutes les parties `FunctionResponse`.
-- Testez vos requêtes. L'effort par défaut est passé de `high` à `medium`. Vérifiez la qualité, la vitesse et le coût.
-- La préservation des pensées est désormais activée par défaut. Le contexte de raisonnement est conservé sur plusieurs tours, ce qui améliore les performances, mais peut augmenter l'utilisation des jetons.
-- Réduisez les appels d'outils inutiles : commencez par réduire le niveau de réflexion (`medium`, `low` ou `minimal`). Ajoutez une instruction système pour limiter l'utilisation des outils si l'utilisation excessive persiste.
-- [L'utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) est compatible.
+- [**Размышления**](https://ai.google.dev/gemini-api/docs/thinking?hl=ru)**:** зашифровано.
+  Контекст рассуждений сохраняется при вызовах API. Автоматически в Interactions API; неявно в GenerateContent.
+- [**Структурированные выходные данные с помощью инструментов**](https://ai.google.dev/gemini-api/docs/structured-output?hl=ru)**.**
+  Используйте режим JSON со встроенными инструментами (поиск, контекст URL, выполнение кода, вызов функций).
+- [**Ответы мультимодальных функций**](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru#multimodal)**:**
+  возвращает изображения, аудио и другие медиафайлы в результатах вызова функций.
+- [**Выполнение кода с изображениями**](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru#images)**:**
+  выполняйте код, который обрабатывает и создает изображения.
+- [**Использование нескольких инструментов**](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ru)**.** В одном запросе можно использовать встроенные инструменты и вызовы пользовательских функций.
+- [**Разрешение медиаконтента**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ru)**:**
+  детальное управление распределением токенов для изображений, видео и PDF-файлов.
+  Модели Gemini 3 поддерживают настройки разрешения для каждого элемента контента (`low`, `medium`, `high`, `ultra_high`) для запросов со смешанным качеством.
+- [**Подписи рассуждений**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ru) – зашифрованные представления внутренних рассуждений модели. Требуется для многоходовых вызовов функций. Официальные SDK управляют этим параметром автоматически.
 
-### Migrer depuis Gemini 2.5
+## Рекомендации по составлению запросов
 
-Tous les éléments ci-dessus, plus :
+Модели Gemini 3.x – это модели рассуждений, поэтому запросы к ним нужно составлять иначе.
 
-- Simplifiez les requêtes. Si vous avez utilisé le prompt engineering en chaîne de pensée pour forcer le raisonnement, essayez `thinking_level: "medium"` ou `"high"` avec des prompts plus simples à la place.
-- Testez les charges de travail PDF et multimédias. Si vous vous êtes appuyé sur un comportement spécifique pour l'analyse de documents denses, testez le paramètre `media_resolution_high` pour garantir une précision continue. La migration vers les valeurs par défaut de Gemini 3 peut également augmenter l'utilisation des jetons pour les PDF, mais la réduire pour les vidéos. Si les requêtes dépassent la fenêtre de contexte, réduisez explicitement la `media_resolution`. Pour en savoir plus, consultez la documentation sur la
-  [résolution des médias](https://ai.google.dev/gemini-api/docs/media-resolution?hl=fr).
-- Tirez parti de l'utilisation [combinée des outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
-  La recherche Google, le contexte d'URL, l'exécution de code et les fonctions personnalisées peuvent être utilisés dans la même requête.
-- Si vous utilisez des réponses de fonction multimodales, déplacez le contenu multimodal dans les parties de la réponse de la fonction, et non à côté.
-- Si vous utilisez des instructions intégrées avec des réponses de fonction, ajoutez-les au texte de la réponse de la fonction, séparées par deux sauts de ligne, et non en tant que parties distinctes.
-- La segmentation d'images n'est pas compatible avec Gemini 3.x. Pour les charges de travail de segmentation, continuez à utiliser Gemini 2.5 Flash avec la réflexion désactivée.
-- Supprimez `candidate_count` de votre configuration (non compatible avec Gemini 3.x)
+- **Точные инструкции.** Будьте лаконичны. Gemini 3.x лучше всего реагирует на прямые и понятные инструкции. Сложные техники создания запросов, разработанные для более старых моделей, могут привести к тому, что модель будет анализировать слишком много информации.
+- **Многословность.** По умолчанию Gemini 3.x менее многословен и предпочитает давать прямые и лаконичные ответы. Если вам нужен разговорный стиль, явно укажите это в запросе (например, "Объясни это как дружелюбный и разговорчивый помощник").
+- **Управление контекстом.** При работе с большими наборами данных (например, с книгами, базами кода или длинными видео) размещайте инструкции или вопросы в конце запроса, после контекста. Чтобы модель опиралась на определенные данные, начните вопрос с фразы "На основе приведенной выше информации…".
 
-## Fonctionnalités de la famille Gemini 3
+Подробнее [о стратегиях создания запросов](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ru)…
 
-Gemini 3.5 Flash hérite de toutes les fonctionnalités de la famille Gemini 3, y compris l'utilisation de l'ordinateur.
-Fonctionnalités introduites dans Gemini 3 qui sont conservées :
+## Ограничения
 
-- [**Réflexion**](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**:** contexte de raisonnement chiffré conservé dans les appels d'API. Automatique dans l'API Interactions ; implicite dans GenerateContent.
-- [**Sorties structurées avec des outils**](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**:** combinez le mode JSON avec des outils
-  intégrés (recherche, contexte d'URL, exécution de code, appel de fonction).
-- [**Réponses de fonction multimodales**](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#multimodal)**:** renvoyez
-  des images, de l'audio et d'autres médias dans les résultats d'appel de fonction.
-- [**Exécution de code avec des images**](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr#images)**:** Exécutez du code qui
-  traite et génère des images.
-- [**Utilisation combinée des outils**](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr)**:** utilisez des outils intégrés et
-  des appels de fonction personnalisés dans la même requête.
-- [**Résolution des médias**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=fr)**:**
-  contrôle précis de l'allocation de jetons pour les entrées d'image, de vidéo et de PDF.
-  Les modèles Gemini 3 sont compatibles avec les paramètres de résolution par élément de contenu (`low`,
-  `medium`, `high`, `ultra_high`) pour les requêtes de fidélité mixte.
-- [**Signatures de pensée**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=fr)**:**
-  représentations chiffrées du raisonnement interne du modèle. Obligatoire pour l'appel de fonction multitour ; géré automatiquement par les SDK officiels.
+- Сегментация изображений не поддерживается в Gemini 3.x. Для рабочих нагрузок, связанных с сегментацией, продолжайте использовать Gemini 2.5 Flash с отключенным режимом "Размышление" или [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ru).
 
-## Bonnes pratiques concernant les prompts
+## Часто задаваемые вопросы
 
-Les modèles Gemini 3.x sont des modèles de raisonnement, ce qui modifie la façon dont vous devez les inviter.
+1. **Какова дата окончания периода обучения Gemini 3.5 Flash?** Модель Gemini 3.5 Flash имеет ограничение по времени получения знаний – январь 2025 г. Чтобы получить более актуальную информацию, используйте инструмент [Search Grounding](https://ai.google.dev/gemini-api/docs/google-search?hl=ru).
+2. **Каковы ограничения на размер окна контекста?** Gemini 3.5 Flash поддерживает окно контекста на 1 миллион входных токенов и до 65 тысяч выходных токенов.
+3. **Будет ли работать старый код `thinking_budget`?** Да, `thinking_budget` по-прежнему поддерживается для обеспечения обратной совместимости, но мы рекомендуем перейти на `thinking_level`, чтобы повысить предсказуемость результатов. Не используйте оба варианта в одном запросе.
+4. **Поддерживает ли Gemini 3.5 Flash Batch API?** Да. Подробная информация приведена в руководстве по [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ru).
+5. **Поддерживается ли кеширование контекста?** Да, [кеширование контекста](https://ai.google.dev/gemini-api/docs/caching?hl=ru) поддерживается.
+6. **Какие инструменты поддерживаются?** Gemini 3.5 Flash поддерживает [Google Поиск](https://ai.google.dev/gemini-api/docs/google-search?hl=ru), [основы на Google Картах](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru), [поиск файлов](https://ai.google.dev/gemini-api/docs/file-search?hl=ru), [выполнение кода](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru), [контекст URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ru) и стандартную [функцию вызова](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru), в том числе [использование нескольких инструментов](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ru) и [использование компьютера](https://ai.google.dev/gemini-api/docs/computer-use?hl=ru).
 
-- **Instructions précises** : soyez concis. Gemini 3.x répond mieux aux instructions directes et claires. Les techniques de prompt engineering complexes ou détaillées conçues pour les anciens modèles peuvent entraîner une analyse excessive du modèle.
-- **Niveau de détail de la sortie** : par défaut, Gemini 3.x est moins détaillé et préfère les réponses directes et efficaces. Si votre cas d'utilisation nécessite un ton conversationnel, guidez explicitement le modèle dans votre requête (par exemple, "Expliquez cela comme un assistant amical et bavard").
-- **Gestion du contexte** : lorsque vous travaillez avec de grands ensembles de données (tels que des livres entiers, des bases de code ou des vidéos longues), placez vos instructions ou questions spécifiques à la fin de la requête, après le contexte des données. Ancrez le raisonnement du modèle en commençant votre question par une expression telle que "Sur la base des informations précédentes...".
+## Другие модели
 
-Pour en savoir plus sur les stratégies de conception de requêtes, consultez le
-[guide d'ingénierie de requêtes](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=fr).
+- [Gemini 3.8 Flash (последняя версия)](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=ru)
+- [Gemini 3.6 Flash и 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=ru)
+- [Посмотреть все модели](https://ai.google.dev/gemini-api/docs/models?hl=ru)
 
-## Limites
+## Дальнейшие действия
 
-- La segmentation d'images n'est pas compatible avec Gemini 3.x. Pour les charges de travail de segmentation, continuez à utiliser Gemini 2.5 Flash avec la réflexion désactivée, ou
-  [Gemini Robotics ER 2](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=fr).
+- Подробнее [о стратегиях создания запросов](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ru)…
+- Начните работу с [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook).
+- [Оптимизация и вывод Gemini API](https://ai.google.dev/gemini-api/docs/optimization?hl=ru)
 
-## Questions fréquentes
+Отправить отзыв
 
-1. **Quelle est la date limite de connaissances pour Gemini 3.5 Flash ?** La date limite de connaissances de Gemini 3.5 Flash est janvier 2025. Pour obtenir des informations plus récentes, utilisez l'
-   [outil d'ancrage de la recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr).
-2. **Quelles sont les limites de la fenêtre de contexte ?** Gemini 3.5 Flash est compatible avec une fenêtre de contexte d'entrée d'un million de jetons et jusqu'à 65 000 jetons de sortie.
-3. **Mon ancien code `thinking_budget` fonctionnera-t-il toujours ?** Oui, `thinking_budget` est toujours compatible pour la rétrocompatibilité, mais nous vous recommandons de migrer vers `thinking_level` pour des performances plus prévisibles. N'utilisez pas les deux dans la même requête.
-4. **Gemini 3.5 Flash est-il compatible avec l'API Batch ?** Oui. Pour en savoir plus, consultez le guide de l'
-   [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr).
-5. **La mise en cache du contexte est-elle compatible ?** Oui,
-   [la mise en cache du contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr) est compatible.
-6. **Quels outils sont compatibles ?** Gemini 3.5 Flash est compatible avec
-   [la recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr),
-   [l'ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr),
-   [la recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr),
-   [l'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr),
-   [le contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr), et
-   l'appel de fonction standard ,
-   y compris
-   [l'utilisation combinée des outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr), et
-   [l'utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr).
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-## Étapes suivantes
+Последнее обновление: 2026-10-09 UTC.
 
-- Pour en savoir plus sur les stratégies de conception de requêtes, consultez le
-  [guide d'ingénierie de requêtes](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=fr).
-- Premiers pas avec le [livre de recettes Gemini 3](https://github.com/google-gemini/cookbook)
-- En savoir plus sur [l'optimisation et l'inférence de l'API Gemini](https://ai.google.dev/gemini-api/docs/optimization?hl=fr)
+Хотите рассказать подробнее?
 
-Envoyer des commentaires
-
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
-
-Dernière mise à jour le 2026/07/30 (UTC).
-
-Voulez-vous nous donner plus d'informations ?
-
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-09 UTC."],[],[]]

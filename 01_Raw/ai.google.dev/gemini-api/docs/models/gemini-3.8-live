@@ -1,74 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=ar
-fetched_at: 2026-10-05T06:49:22.981353+00:00
-title: "\u202bGemini 3.8 Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=he
+fetched_at: 2026-10-12T07:05:33.574194+00:00
+title: "\u202bGemini 3.8 \u05d1\u05de\u05e6\u05d1 \u05dc\u05d9\u05d9\u05d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-إرسال ملاحظات
+שליחת משוב
 
-# ‫Gemini 3.8 Live
+# ‫Gemini 3.8 במצב לייב
 
-‫Gemini 3.8 Live هو الخيار التلقائي لمعظم تجارب المساعد الصوتي المنخفضة الاستجابة والحوار في الوقت الفعلي بدون تأخيرات ناتجة عن التفكير. يتيح هذا النموذج
-الاستدلال المتداخل، واستدعاء الدوال غير المتزامن، وتعديلات المحتوى الكاملة من جانب العميل خلال الجلسة، وبث الصوت المضمّن.
+‫Gemini 3.8 Live היא האפשרות שמוגדרת כברירת מחדל ברוב המקרים שבהם רוצים להשתמש בסוכן קולי עם השהיה נמוכה, וליהנות מדיאלוג בזמן אמת ללא עיכובים שנובעים מהסקת מסקנות. הוא תומך בהסקה משולבת, בקריאה אסינכרונית לפונקציה, בעדכונים מלאים של תוכן הלקוח של הסשן ובסטרימינג מובנה של אודיו.
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=ar)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=he)
 
-## الوثائق
+## מאמרי עזרה
 
-يمكنك الانتقال إلى دليل [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar) للاطّلاع على التغطية الكاملة للميزات والإمكانات.
+מידע מקיף על התכונות והיכולות זמין במדריך בנושא [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he).
 
 ## gemini-3.8-live
 
-| الموقع | الوصف |
+| נכס | תיאור |
 | --- | --- |
-| رمز النموذج id\_card | `gemini-3.8-live` |
-| saveأنواع البيانات المتوافقة | **المدخلات**  النصوص والصور والملفات الصوتية والفيديوهات  **الناتج**  النص والصوت |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  131,072  **الحدّ الأقصى لرموز الناتج المميزة**  65,536 |
-| handymanالإمكانات | **[إنشاء الصوت](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar)**  متاح  **[التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**  غير متاح  **[تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)**  غير متاح  **[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)**  غير متاح  **[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)**  متاح  **[استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)**  غير متاح  **[إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)**  غير متاح  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar)**  متاح  **[تحديد المصادر في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)**  متاح  **[المُخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)**  غير متاح  **[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar)**  متاح (الاستدلال المتداخل)  **[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)**  غير متاح |
-| speedخيارات الاستهلاك | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**  غير متاح |
-| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - إصدار ثابت: `gemini-3.8-live` |
-| calendar\_monthآخر تعديل | سبتمبر 2026 |
-| id\_cardبطاقة النموذج | [بطاقة النموذج](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=ar) |
+| id\_cardקוד מודל | `gemini-3.8-live` |
+| שמירהסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, אודיו, וידאו  **פלט**  טקסט ואודיו |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **מגבלת טוקנים של פלט**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[תהליך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך (הסברים ורציונל משולבים)  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-3.8-live` |
+| calendar\_monthהעדכון האחרון | ספטמבר 2026 |
+| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=he) |
 
-## نقل البيانات من Gemini 3.1 Flash Live
+## מעבר מ-Gemini 3.1 Flash Live
 
-يوفّر الإصدار 3.8 من Gemini Live تفاعلات صوتية بوقت استجابة فائق السرعة،
-ويوسّع نطاق التوافق مع مهام سير العمل غير المتزامنة. عند نقل البيانات من
-`gemini-3.1-flash-live-preview`، راجِع التعديلات التالية:
+‫Gemini 3.8 Live מספק אינטראקציות קוליות עם זמן טעינה קצר במיוחד, ומרחיב את התמיכה בתהליכי עבודה אסינכרוניים. אם אתם מעבירים נתונים מ-`gemini-3.1-flash-live-preview`, כדאי לעיין בעדכונים הבאים:
 
-- **سلسلة النموذج**: عدِّل سلسلة النموذج من
-  `gemini-3.1-flash-live-preview` إلى `gemini-3.8-live`.
-- **مستوى التفكير**: لا تتوفّر `thinking_level` للغة `gemini-3.8-live`.
-  احذف `thinking_level` (أو `thinking_config`) من إعدادات جلستك.
-- **استدعاء الدوال غير المتزامن**: أصبح التنفيذ غير المتزامن (`behavior: NON_BLOCKING`) هو وضع استدعاء الدوال التلقائي. سيظل بإمكانك استخدام وضع الحظر المتزامن للتوافق مع الأنظمة القديمة من خلال ضبط `behavior: BLOCKING` على
-  بيانات الأدوات. تتوفّر ميزة جدولة الدوال (`SILENT` و`WHEN_IDLE` و`INTERRUPTED`).
-- **تعديلات محتوى العميل**: يتم دعم `send_client_content` طوال دورة حياة الجلسة بأكملها باستخدام أدوار صريحة (`user` أو `model`). يؤدي ضبط `turn_complete=true` بشكل غير مشروط إلى مقاطعة عملية إنشاء النموذج النشط. إذا أرسلت محتوًى بدون `turn_complete`، ينتظر الخادم رسائل لاحقة قبل الرد.
-- **التحكّم الاستباقي بالصوت**: أصبحت ميزة "التحكّم الاستباقي بالصوت" مفعَّلة بشكل دائم. يؤدي ضبط
-  `proactive_audio: false` إلى عرض رسالة خطأ.
-- **الحوار التفاعلي التعاطفي**: تمت إزالة الحوار التفاعلي التعاطفي من واجهة برمجة التطبيقات. أزِل أي إعدادات `enable_affective_dialog` من الرمز.
-- **تغطية المنعطفات**: القيمة التلقائية هي
-  `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. يتم إرسال لقطات الفيديو إلى النموذج تلقائيًا، لذا لا ترسِل اللقطات إلا عند الحاجة إليها لإدارة السياق والتكلفة.
-- **طُرق الاستجابة**: الصوت هو طريقة الاستجابة المتاحة. فعِّل ميزة تحويل الصوت إلى نص إذا كان تطبيقك يتطلّب نصًا مكتوبًا.
+- **מחרוזת המודל**: מעדכנים את מחרוזת המודל מ-`gemini-3.1-flash-live-preview` ל-`gemini-3.8-live`.
+- **רמת חשיבה**: `thinking_level` לא אפשרי עבור `gemini-3.8-live`.
+  לא לכלול את `thinking_level` (או `thinking_config`) בהגדרת הסשן.
+- **הפעלה אסינכרונית של פונקציות**: ביצוע אסינכרוני (`behavior: NON_BLOCKING`) הוא עכשיו מצב ברירת המחדל להפעלת פונקציות. עדיין אפשר להשתמש במצב חסימה סינכרוני לצורך תאימות לאחור. לשם כך, צריך להגדיר `behavior: BLOCKING` on בהצהרות על הכלים. יש תמיכה בתזמון פונקציות (`SILENT`, ‏ `WHEN_IDLE`,‏ `INTERRUPTED`).
+- **עדכוני תוכן של לקוחות**: יש תמיכה ב-`send_client_content` לאורך כל מחזור החיים של הסשן עם תפקידים מפורשים (`user` או `model`). הגדרה של `turn_complete=true` קוטעת ללא תנאי את יצירת המודל הפעיל. אם שולחים תוכן בלי `turn_complete`, השרת מחכה להודעות הבאות לפני שהוא מגיב.
+- **סינון אודיו יזום**: סינון האודיו היזום מופעל עכשיו באופן קבוע. הגדרת `proactive_audio: false` מחזירה שגיאה.
+- **דיאלוג אפקטיבי**: דיאלוג אפקטיבי מוסר מה-API. מסירים מהקוד את כל ההגדרות של `enable_affective_dialog`.
+- **היקף הכיסוי**: ברירת המחדל היא `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`. כברירת מחדל, פריימים של סרטונים נשלחים למודל, לכן כדאי לשלוח פריימים רק כשצריך כדי לנהל את ההקשר והעלות.
+- **אמצעי תגובה**: אודיו הוא אמצעי התגובה הנתמך. הפעלת תמלול אודיו של הפלט אם האפליקציה דורשת תמליל טקסט.
 
-للاطّلاع على مقارنة بين الميزات في جميع نماذج Live API، راجِع جدول
-[مقارنة النماذج](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ar#model-comparison).
+טבלת [השוואה בין מודלים](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=he#model-comparison) מציגה השוואה בין כל המודלים של Live API.
 
-إرسال ملاحظات
+שליחת משוב
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-تاريخ التعديل الأخير: 2026-09-17 (حسب التوقيت العالمي المتفَّق عليه)
+עדכון אחרון: 2026-09-17 (שעון UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+רוצה לתת לנו משוב?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-17 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-17 (שעון UTC)."],[],[]]

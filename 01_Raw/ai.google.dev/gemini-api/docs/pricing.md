@@ -1,1251 +1,1244 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=fr
-fetched_at: 2026-10-05T06:50:42.205667+00:00
-title: "Tarifs de l'API Gemini\u00a0Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=bn
+fetched_at: 2026-10-12T06:50:27.052200+00:00
+title: "Gemini Developer API-\u098f\u09b0 \u09a6\u09be\u09ae \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+জেমিনি ৩.৮ ফ্ল্যাশ এখন পাওয়া যাচ্ছে। [ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=bn) ।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
 
-# Tarifs de l'API Gemini Developer
+# Gemini Developer API-এর দাম
 
-Commencez à créer des applications sans frais avec des limites généreuses, puis passez à une tarification prépayée, puis au paiement à l'usage pour vos applications prêtes pour la production.
+প্রচুর সীমা সহ ফ্রিতে তৈরি করা শুরু করুন, তারপর আপনার প্রোডাকশন রেডি অ্যাপ্লিকেশনের জন্য
+প্রিপেড ও পে-অ্যাজ-ইউ-গো মূল্য নির্ধারণের মাধ্যমে স্কেল-আপ করুন।
 
-### Disponible
+### ফ্রি
 
-Pour les développeurs et les petits projets qui débutent avec l'API Gemini.
+Gemini API-এর ব্যবহার শুরু করেছেন এমন ডেভেলপার ও ছোট ছোট প্রোজেক্টের জন্য
 
-- check\_circle Accès limité à certains modèles
-- check\_circleJetons d'entrée et de sortie sans frais
-- check\_circle Accès à Google AI Studio
-- check\_circleContenu utilisé pour améliorer nos produits[\*](https://ai.google.dev/gemini-api/terms?hl=fr)
+- check\_circleনির্দিষ্ট কিছু মডেলে সীমিত অ্যাক্সেস
+- check\_circleফ্রি ইনপুট ও আউটপুট টোকেন
+- check\_circleGoogle AI Studio অ্যাক্সেস
+- check\_circleআমাদের প্রোডাক্ট উন্নত করতে কন্টেন্ট ব্যবহার করা হয়[\*](https://ai.google.dev/gemini-api/terms?hl=bn)
 
-[Profiter d'un essai sans frais](https://aistudio.google.com?hl=fr)
+[ফ্রি প্ল্যান দিয়ে শুরু করুন](https://aistudio.google.com?hl=bn)
 
-### Payant
+### পেমেন্ট করতে হয়
 
-Pour les applications de production qui nécessitent des volumes plus importants et des fonctionnalités avancées.
+আরও বেশি মাত্রার ভলিউম ও উন্নত ফিচার প্রয়োজন, এমন সব প্রোডাকশন অ্যাপ্লিকেশনের জন্য।
 
-- check\_circleLimites de débit plus élevées pour les déploiements en production
-- check\_circleAccès à la mise en cache du contexte
-- check\_circleAPI batch (réduction des coûts de 50 %)
-- check\_circle Accès aux modèles les plus avancés de Google
-- check\_circleContenu **non** utilisé pour améliorer nos produits[\*](https://ai.google.dev/gemini-api/terms?hl=fr)
+- check\_circleপ্রোডাকশন ডিপ্লয়মেন্টের জন্য আরও বেশি রেট লিমিট
+- check\_circleকন্টেক্সট ক্যাশে করার অ্যাক্সেস
+- check\_circleব্যাচ API (৫০% খরচ কম)
+- check\_circleGoogle-এর সবচেয়ে উন্নত মডেলে অ্যাক্সেস
+- check\_circleআমাদের প্রোডাক্ট উন্নত করতে **না** ব্যবহার করা কন্টেন্ট[\*](https://ai.google.dev/gemini-api/terms?hl=bn)
 
-[Passer à un compte payant](https://aistudio.google.com/api-keys?hl=fr)
+[পেড ভার্সনে আপগ্রেড করুন](https://aistudio.google.com/api-keys?hl=bn)
 
-### Enterprise
+### এন্টারপ্রাইজ
 
-Pour les déploiements d'entreprise, optimisé par [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=fr).
+এন্টারপ্রাইজ ডেপ্লয়মেন্টের জন্য, [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=bn) দ্বারা পরিচালিত।
 
-- check\_circle Toutes les fonctionnalités de la version payante, ainsi qu'un accès facultatif à :
-- check\_circle Canaux d'assistance dédiés
-- check\_circleSécurité et conformité avancées
-- check\_circle Débit provisionné
-- check\_circle Remises basées sur le volume (en fonction de l'utilisation)
-- check\_circleMLOps, Model Garden et plus
+- check\_circleপেড প্ল্যানের সব ফিচার, সাথে এগুলিতে ঐচ্ছিক অ্যাক্সেস:
+- check\_circleনির্দিষ্ট সহায়তা চ্যানেল
+- check\_circleউন্নত নিরাপত্তা ও নিয়ম মেনে চলা
+- check\_circleপ্রভিশন করা থ্রুপুট
+- check\_circleভলিউম-ভিত্তিক ডিসকাউন্ট (ব্যবহারের উপর ভিত্তি করে)
+- check\_circleML Ops, Model Garden ও আরও অনেক কিছু
 
-[Contacter le service commercial](https://cloud.google.com/contact?hl=fr)
+[সেলস টিমের সাথে যোগাযোগ করুন](https://cloud.google.com/contact?hl=bn)
 
-## Gemini 3.8 Flash
+## Gemini 3.8 Flash
 
-*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fr)*
+*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=bn)
 
-Notre modèle Flash le plus intelligent, conçu pour l'ingénierie logicielle à long terme, les agents autonomes et les workflows d'entreprise complexes.
+আমাদের সবচেয়ে বুদ্ধিমান Flash মডেল, যা দীর্ঘমেয়াদী সফ্টওয়্যার ইঞ্জিনিয়ারিং, স্বতন্ত্র এজেন্ট ও জটিল এন্টারপ্রাইজ ওয়ার্কফ্লোর জন্য তৈরি করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 75 $ jusqu'au 31 décembre 2026. 1, 50 $ à partir du 1er janvier 2027. |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3, 75 $ jusqu'au 31 décembre 2026 7, 50 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,075 $ jusqu'au 31 décembre 2026 0,15 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১.৫০। |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$৭.৫০। |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.১৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1, 35 $ jusqu'au 31 décembre 2026 2, 70 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 6, 75 $ jusqu'au 31 décembre 2026 13, 50 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,135 $ jusqu'au 31 décembre 2026 0,27 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৩৫। ১ জানুয়ারি, ২০২৭ থেকে$২.৭০। |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৬.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১৩.৫০। |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.১৩৫। ১ জানুয়ারি, ২০২৭ থেকে$০.২৭। ৩১ ডিসেম্বর,২০২৬ পর্যন্ত$০.৫০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে$১.০০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini 3.7 Flash
+## Gemini 3.6 Flash
 
-*[`gemini-3.7-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=fr)*
+*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.7-flash&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=bn)
 
-Notre modèle Flash rapide et efficace, conçu pour le codage au quotidien, l'utilisation d'outils agentiques et une exécution fiable en plusieurs étapes.
+আমাদের আগের জেনারেশনের Flash মডেল, যা সাধারণ এজেন্টিক ও দৈনন্দিন টাস্ক জুড়ে স্পিড ও মাল্টিমোডাল ক্ষমতার মধ্যে ব্যালেন্স করে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 75 $ jusqu'au 31 décembre 2026. 1, 50 $ à partir du 1er janvier 2027. |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3, 75 $ jusqu'au 31 décembre 2026 7, 50 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,075 $ jusqu'au 31 décembre 2026 0,15 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১.৫০। |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$৭.৫০। |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.১৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1, 35 $ jusqu'au 31 décembre 2026 2, 70 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 6, 75 $ jusqu'au 31 décembre 2026 13, 50 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,135 $ jusqu'au 31 décembre 2026 0,27 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৩৫। ১ জানুয়ারি, ২০২৭ থেকে$২.৭০। |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৬.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১৩.৫০। |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.১৩৫। ১ জানুয়ারি, ২০২৭ থেকে$০.২৭। ৩১ ডিসেম্বর,২০২৬ পর্যন্ত$০.৫০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে$১.০০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini 3.6 Flash
+\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fr)*
+\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=fr)
+## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking এবং Gemini 3.1 Flash Live Preview
 
-Notre modèle Flash de génération précédente, qui offre un bon équilibre entre vitesse et capacités multimodales pour les tâches agentiques générales et quotidiennes.
+*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=bn), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=bn) এবং [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=bn)*
 
-### Standard
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/live?model=gemini-3.8-live&hl=bn)
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 75 $ jusqu'au 31 décembre 2026. 1, 50 $ à partir du 1er janvier 2027. |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3, 75 $ jusqu'au 31 décembre 2026 7, 50 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,075 $ jusqu'au 31 décembre 2026 0,15 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
-
-### Lot
-
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+আমাদের কম লেটেন্সি, অডিও-টু-অডিও মডেল রিয়েল-টাইম ভয়েস এজেন্ট এবং
+লাইভ ডায়ালগের জন্য অপ্টিমাইজ করা হয়েছে, এর মধ্যে এক্সটেন্ডেড থিঙ্কিং সহ ব্যাকগ্রাউন্ড রিজনিং সাপোর্ট অন্তর্ভুক্ত।
 
-### Flex
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 375 $ jusqu'au 31 décembre 2026 0, 75 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1, 875 $ jusqu'au 31 décembre 2026 3, 75 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0375 $ jusqu'au 31 décembre 2026 0,075 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
-
-### Priorité
-
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 1, 35 $ jusqu'au 31 décembre 2026 2, 70 $ à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 6, 75 $ jusqu'au 31 décembre 2026 13, 50 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,135 $ jusqu'au 31 décembre 2026 0,27 $ à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
-
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৭৫ (টেক্সট) $৩.০০ বা $০.০০৫/মিনিট (অডিও) $১.০০ বা $০.০০২/মিনিট (ছবি/ভিডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৪.৫০ (টেক্সট) $১২.০০ বা $০.০১৮/মিনিট (অডিও) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | কাজ করে | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\*\* Peut être testé dans Google AI Studio.
+\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-## Gemini 3.5 Flash
+## Gemini 3.5 Live Translate
 
-*[`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr)*
+*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=bn)
 
-Notre modèle Flash précédent, conçu pour allier rapidité et performances de base sur les charges de travail de routine à haut débit.
+আমাদের কম লেটেন্সি, রিয়েল-টাইম স্পিচ থেকে স্পিচ অনুবাদ মডেল যা ৭০টিরও বেশি ভাষায় কাজ করে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1,50 $ |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 9 $ |
-| Prix de la mise en cache du contexte | Sans frais | 0,15 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $৩.৫০ বা $০.০০৫৩/মিনিট\* (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২১.০০ বা $০.০৩১৫/মিনিট\* (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+\* বিলিং ইনপুট ও আউটপুট অডিও টোকেনের মোট ব্যবহারের উপর ভিত্তি করে করা হয়, যা প্রতি সেকেন্ডের অডিওর জন্য ২৫টি টোকেন হিসেবে হিসেব করা হয়, এর ফলে প্রতি মিনিটের কার্যকর দাম আনুমানিক $০.০৩৬৮ হয়।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,75 € |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 4,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,075 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+## Gemini 3.5 Transcribe Live
 
-### Flex
+*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=bn)*
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,75 € |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 4,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,08 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=bn)
 
-### Priorité
+আমাদের কম লেটেন্সি, রিয়েল-টাইম স্পিচ-টু-টেক্সট মডেল যা WebSockets-এর মাধ্যমে দ্বিমুখী স্ট্রিমিং অডিও ট্রান্সক্রিপশন প্রদান করে।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 2,70 $ |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 16,20 $ |
-| Prix de la mise en cache du contexte | Sans frais | 0,27 $1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+### মানক
 
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+| --- | --- | --- |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $৩.৫০ বা $০.০০৫/মিনিট\* (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২১.০০ বা $০.০০৪/মিনিট\* (টেক্সট) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কাজ করে না |  |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\*\* Peut être testé dans Google AI Studio.
+\* আনুমানিক মূল্য ইনপুটের জন্য প্রতি সেকেন্ডে ২৫টি অডিও টোকেন
+এবং আউটপুটের জন্য প্রতি মিনিটে ১৭৫টি টেক্সট টোকেনের উপর ভিত্তি করে হিসেব করা হয়। এর ফলে Live Transcribe-এর জন্য
+প্রতি মিনিটে ~$০.০০৯-এর একটি কার্যকর মিশ্রিত রেট পাওয়া যায়।
 
-## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking et Gemini 3.1 Flash Live Preview
+## Gemini 3.5 Transcribe
 
-*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=fr), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=fr) et [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=fr)*
+*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=bn)
 
-Nos modèles audio-à-audio à faible latence sont optimisés pour les agents vocaux en temps réel et les dialogues en direct, y compris la prise en charge du raisonnement en arrière-plan avec Extended Thinking.
+আমাদের স্পিচ-টু-টেক্সট মডেল, যাতে অটোমেটিক ভাষা শনাক্তকরণ, স্পিকার ডায়ারাইজেশন, শব্দ-লেভেল টাইমস্ট্যাম্প ও কাস্টম শব্দভাণ্ডার বায়াসিং আছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,75 $ (texte) 3 $ ou 0,005 $/min (audio) 1 $ ou 0,002 $/min (image/vidéo) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ (texte) 12,00 $ ou 0,018 $/min (audio) |
-| Ancrage avec la recherche Google\* | Compatible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $২.০০ বা $০.০০৩/মিনিট\* (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১২.০০ বা $০.০০২/মিনিট\* (টেক্সট) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কাজ করে না |  |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+\* আনুমানিক দাম ইনপুটের জন্য প্রতি সেকেন্ডে ২৫টি অডিও টোকেন
+এবং আউটপুটের জন্য প্রতি মিনিটে ১৭৫টি টেক্সট টোকেনের উপর ভিত্তি করে হিসেব করা হয়। এর ফলে
+ট্রান্সক্রাইব ফিচারের জন্য প্রতি মিনিটের কার্যকর মিশ্রিত রেট হল ~$০.০০৫।
 
-## Gemini 3.5 Live Translate
+## Gemini 3.5 Flash-Lite
 
-*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=fr)*
+*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=bn)
 
-Notre modèle de traduction vocale en temps réel à faible latence, qui prend en charge plus de 70 langues.
+এটি একটি কম খরচে মডেল যা বেশি ভলিউমের এজেন্টিক টাস্ক,
+অনুবাদ এবং সাধারণ ডেটা প্রসেসিংয়ের জন্য অপ্টিমাইজ করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 3,50 $ ou 0,0053 $/min\* (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 21,00 $ ou 0,0315 $/min\* (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
-
-\* La facturation est basée sur la consommation totale de jetons audio d'entrée et de sortie, calculée à un taux de 25 jetons par seconde d'audio, ce qui équivaut à un prix effectif d'environ 0,0368 $ par minute.
-
-## Gemini 3.5 Transcribe Live
-
-*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=fr)*
-
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=fr)
-
-Notre modèle de reconnaissance vocale en temps réel à faible latence pour la transcription audio en streaming bidirectionnel sur WebSockets.
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৩০ (টেক্সট / ছবি / ভিডিও / অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ $১.০০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Standard
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 3,50 $ ou 0,005 $/min\* (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 21 $ ou 0,004 $/min\* (texte) |
-| Ancrage avec la recherche Google | Non compatible |  |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১৫ (টেক্সট / ছবি / ভিডিও / অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১.২৫ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০২ $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* L'estimation des tarifs est basée sur 25 jetons audio par seconde pour l'entrée et 175 jetons de texte par minute pour la sortie, pour un taux mixte effectif d'environ 0,009 $ par minute pour la transcription instantanée.
+### ফ্লেক্স
 
-## Gemini 3.5 Transcribe
-
-*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=fr)*
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+| --- | --- | --- |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১৫ (টেক্সট / ছবি / ভিডিও / অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১.২৫ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০২ $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=fr)
+### অগ্রাধিকার
 
-Notre modèle de reconnaissance vocale avec détection automatique de la langue, identification des locuteurs, codes temporels au niveau du mot et pondération du vocabulaire personnalisé.
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+| --- | --- | --- |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫৪ (টেক্সট / ছবি / ভিডিও / অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৪.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৫ $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Standard
+\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 2 $ ou 0,003 $/min\* (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 12 $ ou 0,002 $/min\* (texte) |
-| Ancrage avec la recherche Google | Non compatible |  |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-\* La tarification estimée est basée sur 25 jetons audio par seconde pour l'entrée et 175 jetons de texte par minute pour la sortie, pour un taux mixte effectif d'environ 0,005 $ par minute pour la transcription.
+\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-## Gemini 3.5 Flash-Lite
+## Gemini 3.1 Flash-Lite
 
-*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fr)*
+*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=bn)
 
-Modèle économique, optimisé pour les tâches agentiques à fort volume, la traduction et le traitement de données simples.
+এটি একটি কম খরচে মডেল যা বেশি ভলিউমের এজেন্টিক টাস্ক,
+অনুবাদ এবং সাধারণ ডেটা প্রসেসিংয়ের জন্য অপ্টিমাইজ করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,30 $ (texte / image / vidéo / audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,03 $ 1,00 $ par million de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.২৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০২৫ (টেক্সট / ছবি / ভিডিও) $০.০৫ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,15 $ (texte / image / vidéo / audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,25 € |
-| Prix de la mise en cache du contexte | Non disponible | 0,02 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১২৫ (টেক্সট / ছবি / ভিডিও) $০.২৫ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৭৫ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১২৫ (টেক্সট / ছবি / ভিডিও) $০.০২৫ (অডিও) $০.৫০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,15 $ (texte / image / vidéo / audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,25 € |
-| Prix de la mise en cache du contexte | Non disponible | 0,02 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১২৫ (টেক্সট / ছবি / ভিডিও) $০.২৫ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৭৫ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১২৫ (টেক্সট / ছবি / ভিডিও) $০.০২৫ (অডিও) $০.৫০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,54 € (texte / image / vidéo / audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,05 $ 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৪৫ (টেক্সট / ছবি / ভিডিও) $০.৯০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.৭০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৪৫ (টেক্সট / ছবি / ভিডিও) $০.০৯ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-\*\* Peut être testé dans Google AI Studio.
+\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-\*\* Peut être testé dans Google AI Studio.
+## Gemini Omni Flash
 
-## Gemini 3.1 Flash-Lite
+*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=bn)*
 
-*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr)*
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=bn)
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=fr)
+আমাদের নেক্সট-জেনারেশন ভিডিও জেনারেশন ও এডিটিং মডেল, এখন Gemini API-এর পেড টিয়ারে থাকা
+ডেভেলপারদের জন্য সাধারণভাবে উপলভ্য।
 
-Modèle économique, optimisé pour les tâches agentiques à fort volume, la traduction et le traitement de données simples.
+### মানক
 
-### Standard
-
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 1,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,025 $ (texte/image/vidéo) 0,05 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.৫০ (টেক্সট / ছবি / ভিডিও / অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৯.০০ (টেক্সট) $১৭.৫০ (ভিডিও)\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+\* বিলিং মোট আউটপুট টোকেন ব্যবহারের উপর ভিত্তি করে করা হয়, যা
+৭২০p ভিডিওর প্রতি সেকেন্ডে ৫,৭৯২ টোকেন রেটে গণনা করা হয়। স্ট্যান্ডার্ড প্রাইসিংয়ের অধীনে, এটি
+প্রতি সেকেন্ডে প্রায় $০.১০-এর সমান কার্যকর মূল্য।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,125 $ (texte / image / vidéo) 0,25 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,75 € |
-| Prix de la mise en cache du contexte | Non disponible | 0,0125 $ (texte/image/vidéo) 0,025 $ (audio) 0,50 $ pour 1 000 000 jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+## Gemini Omni Flash প্রিভিউ
 
-### Flex
+*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=bn)*
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,125 $ (texte / image / vidéo) 0,25 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,75 € |
-| Prix de la mise en cache du contexte | Non disponible | 0,0125 $ (texte/image/vidéo) 0,025 $ (audio) 0,50 $ pour 1 000 000 jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=bn)
 
-### Priorité
+আমাদের পরবর্তী-জেনারেশনের ভিডিও জেনারেশন ও এডিটিং মডেল।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,45 $ (texte / image / vidéo) 0,90 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,70 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,045 $ (texte/image/vidéo) 0,09 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+### মানক
 
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+| --- | --- | --- |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.৫০ (টেক্সট / ছবি / ভিডিও / অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৯.০০ (টেক্সট) $১৭.৫০ (ভিডিও)\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\*\* Peut être testé dans Google AI Studio.
+\* বিলিং মোট আউটপুট টোকেন ব্যবহারের উপর ভিত্তি করে করা হয়, যা ৭২০p ভিডিওর প্রতি সেকেন্ডে ৫,৭৯২টি টোকেনের হারে গণনা করা হয়। স্ট্যান্ডার্ড প্রাইসিংয়ের অধীনে, এটি প্রতি সেকেন্ডে আনুমানিক $০.১০-এর কার্যকর দামের সমান।
 
-## Gemini Omni Flash
+## Gemini 3.1 Pro প্রিভিউ
 
-*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=fr)*
+*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn) এবং [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn#gemini-31-pro-preview-customtools)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=bn)
 
-Notre modèle de génération et d'édition de vidéos nouvelle génération est désormais disponible pour les développeurs ayant souscrit au niveau payant de l'API Gemini.
+আমাদের থার্ড-জেনারেশন Pro মডেল, যা মাল্টিমোডাল বোঝা,
+এজেন্টিক ক্ষমতা এবং ভাইব-কোডিংয়ের জন্য তৈরি করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 1,50 $ (texte / image / vidéo / audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 9,00 $ (texte) 17,50 $ (vidéo)\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
-
-\* La facturation est basée sur la consommation totale de jetons de sortie, calculée à un taux de 5 792 jetons par seconde de vidéo 720p. Avec la tarification Standard, cela équivaut à un prix effectif d'environ 0,10 $ par seconde.
-
-## Preview Gemini Omni Flash
-
-*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=fr)*
+| ইনপুট প্রাইস | উপলভ্য নয় | $২.০০, প্রম্পট <= ২০০ হাজার টোকেন $৪.০০, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১২.০০, প্রম্পট <= ২০০ হাজার টোকেন $১৮.০০, প্রম্পট > ২০০ হাজার টোকেন |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.২০, প্রম্পট <= ২০০,০০০ টোকেন $০.৪০, প্রম্পট > ২০০,০০০ $৪.৫০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=fr)
+### ব্যাচ
 
-Notre modèle de génération et de retouche de vidéos nouvelle génération.
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+| --- | --- | --- |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০, প্রম্পট <= ২০০ হাজার টোকেন $২.০০, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৬.০০, প্রম্পট <= ২০০ হাজার টোকেন $৯.০০, প্রম্পট > ২০০ হাজার টোকেন |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতো একই*  $০.২০, প্রম্পট <= ২০০,০০০ টোকেন $০.৪০, প্রম্পট > ২০০,০০০ টোকেন $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Standard
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 1,50 $ (texte / image / vidéo / audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 9,00 $ (texte) 17,50 $ (vidéo)\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
-
-\* La facturation est basée sur la consommation totale de jetons de sortie, calculée à un taux de 5 792 jetons par seconde de vidéo en 720p. Avec la tarification Standard, cela équivaut à un prix effectif d'environ 0,10 $ par seconde.
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০, প্রম্পট <= ২০০ হাজার টোকেন $২.০০, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৬.০০, প্রম্পট <= ২০০ হাজার টোকেন $৯.০০, প্রম্পট > ২০০ হাজার টোকেন |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতো একই*  $০.২০, প্রম্পট <= ২০০,০০০ টোকেন $০.৪০, প্রম্পট > ২০০,০০০ টোকেন $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Preview Gemini 3.1 Pro
+### অগ্রাধিকার
 
-*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) et [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr#gemini-31-pro-preview-customtools)*
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+| --- | --- | --- |
+| ইনপুট প্রাইস | উপলভ্য নয় | $৩.৬০, প্রম্পট <= ২০০ হাজার টোকেন $৭.২০, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $২১.৬০, প্রম্পট <= ২০০ হাজার টোকেন $৩২.৪০, প্রম্পট > ২০০ হাজার |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.৩৬, প্রম্পট <= ২০০,০০০ টোকেন $০.৭২, প্রম্পট > ২০০,০০০ $৮.১০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=fr)
+\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-Notre modèle Pro de troisième génération, conçu pour la compréhension multimodale, les capacités agentiques et le vibe coding.
+\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-### Standard
+## Gemini Nano Banana 2.1 🍌
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Non disponible | 2,00 $, requêtes <= 200 000 jetons 4,00 $, requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 12 $, requêtes <= 200 000 jetons 18 $, requêtes > 200 000 jetons |
-| Prix de la mise en cache du contexte | Non disponible | 0,20 $ pour les requêtes <= 200 000 jetons 0,40 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+*[`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=bn)*
 
-### Lot
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-nano-banana-2.1&hl=bn)
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
-| --- | --- | --- |
-| Prix d'entrée | Non disponible | 1 $, requêtes ≤ 200 000 jetons 2 $, requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 6 $, requêtes <= 200 000 jetons 9 $, requêtes > 200 000 jetons |
-| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,20 $, requêtes <= 200 000 jetons 0,40 $, requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+Nano Banana 2 (Gemini 3.1 Flash Image)-এর আপডেট, যা উন্নত ভিজ্যুয়াল কোয়ালিটি,
+মাল্টি-টার্ন ক্যারেক্টার কনসিস্টেন্সি, নির্ভুল টেক্সট রেন্ডারিং এবং ১০০০, ২০০০ ও ৪০০০ রেজোলিউশন জুড়ে সার্চ-গ্রাউন্ডেড
+জেনারেশনের সাথে হাই-এফিসিয়েন্সি
+ইমেজ জেনারেশন ও কনভার্সনাল এডিটিংয়ের জন্য তৈরি করা হয়েছে।
 
-### Flex
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 1 $, requêtes ≤ 200 000 jetons 2 $, requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 6 $, requêtes <= 200 000 jetons 9 $, requêtes > 200 000 jetons |
-| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,20 $, requêtes <= 200 000 jetons 0,40 $, requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.৫০ (টেক্সট/ছবি/ভিডিও) |
+| আউটপুটের দাম | উপলভ্য নয় | $৭.৫০ (টেক্সট ও থিঙ্কিং)  $৩০.০০ (ছবি)  ১০০০টি ছবির জন্য $০.০৩৩৬\*,  ২০০০টি ছবির জন্য $০.০৫০৪\*,  এবং ৪০০০টি ছবির জন্য $০.১১৩\* খরচ হয়। |
+| Google ওয়েব ও ছবি সার্চের মাধ্যমে গ্রাউন্ডিং\*\* | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে টেক্সট ও ছবি-ভিত্তিক গ্রাউন্ডিংয়ের জন্য প্রতি ১,০০০টি কোয়েরিতে $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 3,60 $, requêtes <= 200 000 jetons 7,20 $, requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 21,60 $, requêtes <= 200 000 jetons 32,40 $, requêtes > 200 000 jetons |
-| Prix de la mise en cache du contexte | Non disponible | 0,36 $ pour les requêtes <= 200 000 jetons 0,72 $ pour les requêtes > 200 000 jetons 8,10 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৭৫ (টেক্সট, ছবি, ভিডিও) |
+| আউটপুটের দাম | উপলভ্য নয় | $৩.৭৫ (টেক্সট ও থিংকিং)  $১৫.০০ (ছবি)  ১০০০টি ছবির জন্য $০.০১৬৮ মূল্যের সমান\*,  ২০০০টি ছবির জন্য $০.০২৫২ মূল্যের সমান\*,  এবং ৪০০০টি ছবির জন্য $০.০৫৬৭ মূল্যের সমান\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+\* ছবি আউটপুটের মূল্য ১,০০০,০০০ টোকেন পিছু $৩০ (স্ট্যান্ডার্ড) এবং
+১,০০০,০০০ টোকেন পিছু $১৫ (ব্যাচ)। 1K (১০২৪x১০২৪px) রেজোলিউশনে আউটপুট ছবি ১১২০
+টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৩৩৬ খরচ হয়। 2K
+(২০৪৮x২০৪৮px) রেজোলিউশনে আউটপুট ছবি ১৬৮০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৫০৪ খরচ হয়।
+4K (৪০৯৬x৪০৯৬px) রেজোলিউশনে আউটপুট ছবি তৈরি করতে ৩৭৮০টি টোকেন খরচ হয় এবং এটি
+প্রতি ছবি $০.১১৩-এর সমান।
 
-\*\* Peut être testé dans Google AI Studio.
+\*\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে। Grounding with Google-এর মাধ্যমে পাওয়া প্রাসঙ্গিক তথ্য (টেক্সট বা ছবি)
+সার্চকে ইনপুট টোকেন হিসেবে চার্জ করা হয় না।
 
-## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
+## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
-*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=fr)*
+*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=bn)
 
-Conçu pour la vitesse et l'efficacité, le modèle de génération d'images Gemini 3.1 Flash Image est efficace pour les réponses rapides et interactives, et pour le haut débit.
+দ্রুততা ও দক্ষতার জন্য ডিজাইন করা, Gemini 3.1 Flash ইমেজ জেনারেশন মডেল
+দ্রুত, ইন্ট্যার‍্যাক্টিভ উত্তর ও হাই থ্রুপুটের জন্য কার্যকর।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,50 $ (texte/image) |
-| Prix de sortie | Non disponible | 3 $ (texte et réflexion)  60 $ (images)  Équivaut à 0,045 $ par tranche de 500 images\*  0,067 $ par tranche de 1 000 images\*, 0,101 $ par tranche de 2 000 images\*, et 0,151 $ par tranche de 4 000 images\*. |
-| Ancrage avec la recherche Google sur le Web et par images\*\* | Non disponible\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes pour l'ancrage basé sur du texte et des images. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫০ (টেক্সট/ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | $৩ (টেক্সট ও চিন্তাভাবনা)  $৬০.০০ (ছবি)  ০.৫K ছবি পিছু $০.০৪৫-এর সমতুল্য\*  ১K ছবি পিছু $০.০৬৭\*, ২K ছবি পিছু $০.১০১\*, এবং ৪K ছবি পিছু $০.১৫১\*. |
+| Google ওয়েব ও ছবি সার্চের মাধ্যমে গ্রাউন্ডিং\*\* | উপলভ্য নেই\*\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে টেক্সট ও ছবি-ভিত্তিক গ্রাউন্ডিংয়ের জন্য প্রতি ১,০০০টি কোয়েরিতে $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,25 $ (texte, image) |
-| Prix de sortie | Non disponible | 1,50 $ (texte et réflexion)  30,00 $ (images)  Équivalent à 0,022 $ par 0,5 K image\*  0,034 $ par 1 K image\*,  0,050 $ par 2 K image\*,  et 0,076 $ par 4 K image\*. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট, ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | $১.৫০ (টেক্সট ও চিন্তাভাবনা)  $৩০.০০ (ছবি)  ০.৫কে ছবি পিছু $০.০২২-এর সমতুল্য\*  ১কে ছবি পিছু $০.০৩৪\*,  ২কে ছবি পিছু $০.০৫০\*,  এবং ৪কে ছবি পিছু $০.০৭৬\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Les images générées sont facturées 60 $ par million de jetons.
-Les images générées en 0,5 K (512 px) consomment 747 jetons et coûtent 0,045 $ par image. Les images de sortie en 1K (1 024 x 1 024 px) consomment 1 120 jetons et coûtent 0,067 $ par image. Les images de sortie en 2K (2 048 x 2 048 pixels) consomment 1 680 jetons et coûtent 0,101 $ par image. Les images de sortie en 4K (4 096 x 4 096 px) consomment 2 520 jetons et coûtent 0,151 $ par image.
+\* ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $৬০।
+0.5K (৫১২ পিক্সেল) রেজোলিউশনের আউটপুট ছবি ৭৪৭টি টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৪৫
+খরচ হয়। 1K (1024x1024px) রেজোলিউশনের আউটপুট ছবি ১১২০টি টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৬৭ খরচ হয়। 2K (২০৪৮x২০৪৮px) রেজোলিউশনে আউটপুট ছবি ১৬৮০ টোকেন ব্যবহার করে এবং
+প্রতিটি ছবির জন্য $০.১০১ খরচ হয়। 4K (৪০৯৬x৪০৯৬px) রেজোলিউশনে আউটপুট ছবি
+২৫২০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.১৫১ খরচ হয়।
 
-\*\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes sur la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée. Le contexte récupéré (texte ou images) fourni par l'ancrage avec la recherche Google n'est pas facturé en tant que jetons d'entrée.
+\*\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে। Grounding with Google-এর মাধ্যমে পাওয়া প্রাসঙ্গিক তথ্য (টেক্সট বা ছবি)
+সার্চকে ইনপুট টোকেন হিসেবে চার্জ করা হয় না।
 
-\*\*\* Peut être testé dans Google AI Studio.
+\*\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-## Gemini 3.1 Flash-Lite Image (Nano Banana 2 Lite) 🍌
+## Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite) 🍌
 
-*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=fr)*
+*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=bn)
 
-Conçu comme le spécialiste de l'efficacité de la famille de modèles de génération d'images, le modèle Gemini 3.1 Flash Lite Image est conçu pour la génération et la retouche d'images à latence ultra-faible et à faible coût.
+ইমেজ জেনারেশন ফ্যামিলির দক্ষতা বিশেষজ্ঞ হিসেবে ডিজাইন করা, Gemini 3.1
+Flash Lite ইমেজ মডেলটি অতি-নিম্ন লেটেন্সি এবং সাশ্রয়ী ইমেজ
+জেনারেশন ও এডিটিংয়ের জন্য ডিজাইন করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,25 $ (texte/image/vidéo) |
-| Prix de sortie | Non disponible | 1,50 $ (texte et réflexion)  30,00 $ (images)  Équivalent à 0,0336 $ par image de résolution 1K\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট/ছবি/ভিডিও) |
+| আউটপুটের দাম | উপলভ্য নয় | $১.৫০ (টেক্সট ও চিন্তাভাবনা)  $৩০.০০ (ছবি)  ১০০০ রেজোলিউশনের ছবির জন্য $০.০৩৩৬-এর সমতুল্য\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,125 $ (texte/image/vidéo) |
-| Prix de sortie | Non disponible | 0,75 $ (texte et réflexion)  15,00 $ (images)  Équivaut à 0,0168 $ par image de résolution 1K\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.১২৫ (টেক্সট/ছবি/ভিডিও) |
+| আউটপুটের দাম | উপলভ্য নয় | $০.৭৫ (টেক্সট ও চিন্তাভাবনা)  $১৫.০০ (ছবি)  1K রেজোলিউশনের প্রতি ছবির জন্য $০.০১৬৮ মূল্যের সমান\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Le prix des images générées est de 30 $ par million de jetons. Les images de sortie en 1K (1 024 x 1 024 px) consomment 1 120 jetons et coûtent 0,0336 $ par image.
+\* ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $৩০। 1K (১০২৪x১০২৪ পিক্সেল) রেজোলিউশনে আউটপুট ছবি ১১২০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৩৩৬ খরচ হয়।
 
-## Gemini 3.8 Flash TTS
+## Gemini 3.8 Flash TTS
 
-*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=fr)*
+*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=bn)
 
-Notre modèle audio de synthèse vocale 3.8 Flash est conçu pour offrir une fidélité vocale de qualité studio, un jeu d'acteur expressif et une stabilité de longue durée.
+আমাদের 3.8 Flash টেক্সট-টু-স্পিচ অডিও মডেল স্টুডিও-গ্রেড ভয়েস ফিডেলিটি, সাবলীল অভিনয় এবং দীর্ঘ-ফর্মের স্থিতিশীলতার জন্য ডিজাইন করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 50 $ (texte) jusqu'au 31 décembre 2026 1, 00 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Sans frais | 9 $ (audio) jusqu'au 31 décembre 2026 18 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,00225 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,0045 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,125 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,25 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৫০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.০০ (টেক্সট)। |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৯.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$১৮.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০২২৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৪৫\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Non disponible | 4, 50 $ (audio) jusqu'au 31 décembre 2026. 9, 00 $ (audio) à partir du 1er janvier 2027. Équivaut à 0, 001125 $ par 10 secondes d'audio\* jusqu'au 31 décembre 2026. Équivaut à 0, 00225 $ par 10 secondes d'audio\* à partir du 1er janvier 2027. |
-| Prix de la mise en cache du contexte | Non disponible | 0,0625 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,125 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
+| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৪.৫০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৯.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০১১২৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০২২৫\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Non disponible | 4, 50 $ (audio) jusqu'au 31 décembre 2026. 9, 00 $ (audio) à partir du 1er janvier 2027. Équivaut à 0, 001125 $ par 10 secondes d'audio\* jusqu'au 31 décembre 2026. Équivaut à 0, 00225 $ par 10 secondes d'audio\* à partir du 1er janvier 2027. |
-| Prix de la mise en cache du contexte | Non disponible | 0,025 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,05 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
+| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৪.৫০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৯.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০১১২৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০২২৫\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 90 $ (texte) jusqu'au 31 décembre 2026 1, 80 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Sans frais | 16, 20 $ (audio) jusqu'au 31 décembre 2026. 32, 40 $ (audio) à partir du 1er janvier 2027. Équivaut à 0, 00405 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026. Équivaut à 0, 0081 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027. |
-| Prix de la mise en cache du contexte | Sans frais | 0,225 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,45 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৯০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.৮০ (টেক্সট)। |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১৬.২০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৩২.৪০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০৪০৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৮১\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
+\* অডিও টোকেন, অডিওর প্রতি সেকেন্ডে ২৫টি টোকেনের সাথে সম্পর্কিত।
 
-## Gemini 3.8 Flash-Lite TTS
+## Gemini 3.8 Flash-Lite TTS
 
-*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=fr)*
+*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=bn)
 
-Notre modèle audio Text-to-Speech 3.8 Flash-Lite est optimisé pour la parole conversationnelle à haut débit, à faible latence et économique.
+আমাদের 3.8 Flash-Lite টেক্সট-টু-স্পিচ অডিও মডেল হাই-থ্রুপুট, লো-লেটেন্সি ও কম খরচে কথোপকথনমূলক স্পিচের জন্য অপ্টিমাইজ করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 50 $ (texte) jusqu'au 31 décembre 2026 1, 00 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Sans frais | 6 $ (audio) jusqu'au 31 décembre 2026 12 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,0015 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,003 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,125 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,25 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৫০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.০০ (টেক্সট)। |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৬.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$১২.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০১৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৩\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Non disponible | 3 $ (audio) jusqu'au 31 décembre 2026 6 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,00075 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,0015 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,0625 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,125 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
+| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৬.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০৭৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০১৫\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 25 $ (texte) jusqu'au 31 décembre 2026 0, 50 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Non disponible | 3 $ (audio) jusqu'au 31 décembre 2026 6 $ (audio) à partir du 1er janvier 2027 Équivalent à 0,00075 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0,0015 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,025 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,05 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
+| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৬.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০৭৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০১৫\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0, 90 $ (texte) jusqu'au 31 décembre 2026 1, 80 $ (texte) à partir du 1er janvier 2027 |
-| Prix de sortie | Sans frais | 10, 80 $ (audio) jusqu'au 31 décembre 2026 21, 60 $ (audio) à partir du 1er janvier 2027 Équivalent à 0, 0027 $ par tranche de 10 s d'audio\* jusqu'au 31 décembre 2026 Équivalent à 0, 0054 $ par tranche de 10 s d'audio\* à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Sans frais | 0,225 $ (mise en cache des entrées) jusqu'au 31 décembre 2026 0,45 $ (mise en cache des entrées) à partir du 1er janvier 2027 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027 |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৯০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.৮০ (টেক্সট)। |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১০.৮০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$২১.৬০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০২৭\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৫৪\*। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
+\* অডিও টোকেন, অডিওর প্রতি সেকেন্ডে ২৫টি টোকেনের সাথে সম্পর্কিত।
 
-## Preview Gemini 3.1 Flash TTS
+## Gemini 3.1 Flash TTS প্রিভিউ
 
-*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=fr)*
+*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=bn)
 
-Notre modèle audio 3.1 Flash Text-to-Speech est optimisé pour la génération de voix contrôlable, à faible latence et offrant un bon rapport qualité/prix.
+আমাদের 3.1 Flash টেক্সট-টু-স্পিচ অডিও মডেল, যা দামের সাথে পারফর্ম্যান্সের দিক থেকে অপ্টিমাইজ করা,
+কম লেটেন্সি, কন্ট্রোল করা যায় এমন স্পিচ জেনারেশন।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1,00 $ (texte) |
-| Prix de sortie | Sans frais | 20,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $১.০০ (টেক্সট) |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | $২০.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,50 € (texte) |
-| Prix de sortie | Non disponible | 10,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫০ (টেক্সট) |
+| আউটপুটের দাম | উপলভ্য নয় | $১০.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Les jetons audio correspondent à 25 jetons par seconde d'audio.
+\* অডিও টোকেন, অডিওর প্রতি সেকেন্ডে ২৫টি টোকেনের সাথে সম্পর্কিত।
 
-## Preview Gemini 3 Flash
+## Gemini 3 Flash প্রিভিউ
 
-*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fr)*
+*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-3-flash-preview&hl=bn)
 
-Notre ancien modèle Flash, qui offre une vitesse et une intelligence de base.
+আমাদের পুরনো Flash মডেল, যা বেসলাইন স্পিড ও ইন্টেলিজেন্স প্রদান করে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,50 $ (texte / image / vidéo) 1,00 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 3 $ |
-| Prix de la mise en cache du contexte | Sans frais | 0,05 $ (texte/image/vidéo) 0,10 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫০ (টেক্সট / ছবি / ভিডিও) $১.০০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৩.০০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | $০.০৫ (টেক্সট / ছবি / ভিডিও) $০.১০ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,05 $ (texte/image/vidéo)  0,10 $ (audio)  1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতোই*  $০.০৫ (টেক্সট / ছবি / ভিডিও)  $০.১০ (অডিও)  $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,25 $ (texte / image / vidéo) 0,50 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | *Identique à Standard*  0,05 $ (texte/image/vidéo)  0,10 $ (audio)  1 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতোই*  $০.০৫ (টেক্সট / ছবি / ভিডিও)  $০.১০ (অডিও)  $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,90 $ (texte / image / vidéo) 1,80 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 5,40 $ |
-| Prix de la mise en cache du contexte | Sans frais | 0,09 $ (texte/image/vidéo) 0,18 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google\* | Non disponible\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Ancrage avec Google Maps | Non disponible\*\* | 5 000 requêtes par mois (sans frais, partagées avec Gemini 3), puis 14 $ pour 1 000 requêtes de recherche |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৯০ (টেক্সট / ছবি / ভিডিও) $১.৮০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | হংকং ডলার (HKD) |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | $০.০৯ (টেক্সট / ছবি / ভিডিও) $০.১৮ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-\*\* Peut être testé dans Google AI Studio.
+\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-## Gemini 3 Pro Image (Nano Banana Pro) 🍌
+## Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
-*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fr)*
+*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=bn)
 
-Notre modèle natif de génération d'images, optimisé pour la vitesse, la flexibilité et la compréhension contextuelle. Les **entrées et sorties textuelles** sont facturées au même prix que [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
+আমাদের নেটিভ ইমেজ জেনারেশন মডেল, যা স্পিড, ফ্লেক্সিবিলিটি ও
+প্রসঙ্গগত বোঝার জন্য অপ্টিমাইজ করা হয়েছে। **টেক্সট ইনপুট ও আউটপুট**-এর দাম
+[Gemini 3.1 Pro](#gemini-3.1-pro-preview)-এর সমান।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 2,00 $ (texte/image),  soit 0,0011 $ par image\* |
-| Prix de sortie | Non disponible | 12 $ (texte et réflexion)  120 $ (images)  Équivalent à 0,134 $ par image 1K/2K\*\*  et 0,24 $ par image 4K\*\* |
-| Ancrage avec la recherche Google\*\*\* | Non disponible\*\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $২.০০ (টেক্সট/ছবি),  প্রতিটি ছবির জন্য $০.০০১১\* |
+| আউটপুটের দাম | উপলভ্য নয় | $১২.০০ (টেক্সট ও চিন্তাভাবনা)  $১২০.০০ (ছবি)  ১কে/২কে ছবি পিছু $০.১৩৪ মূল্যের সমান\*\*  এবং ৪কে ছবি পিছু $০.২৪ মূল্যের সমান\*\* |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\*\*\* | উপলভ্য নেই\*\*\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 1 $ (texte), 0,0006 $ (image)\* |
-| Prix de sortie | Non disponible | 6,00 $ (texte et réflexion)  0,067 $ par image 1K/2K\*\*  0,12 $ par image 4K\*\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০ (টেক্সট), $০.০০০৬ (ছবি)\* |
+| আউটপুটের দাম | উপলভ্য নয় | $৬.০০ (টেক্সট ও থিংকিং)  ১K/২K ছবি পিছু $০.০৬৭\*\*  ৪K ছবি পিছু $০.১২\*\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 1 $ (texte), 0,0006 $ (image)\* |
-| Prix de sortie | Non disponible | 6,00 $ (texte et réflexion)  0,067 $ par image 1K/2K\*\*  0,12 $ par image 4K\*\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০ (টেক্সট), $০.০০০৬ (ছবি)\* |
+| আউটপুটের দাম | উপলভ্য নয় | $৬.০০ (টেক্সট ও থিংকিং)  ১K/২K ছবি পিছু $০.০৬৭\*\*  ৪K ছবি পিছু $০.১২\*\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 3,60 $ (texte/image) |
-| Prix de sortie | Non disponible | 21,60 $ (texte et réflexion)  216,00 $ (images) |
-| Ancrage avec la recherche Google\*\*\* | Non disponible\*\*\*\* | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $৩.৬০ (টেক্সট/ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | $২১.৬০ (টেক্সট ও চিন্তাভাবনা)  $২১৬.০০ (ছবি) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং\*\*\* | উপলভ্য নেই\*\*\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-\* L'entrée d'image est définie sur 560 jetons ou 0,0011 $ par image.
+\* ছবি ইনপুট ৫৬০ টোকেন বা ছবি পিছু $০.০০১১ হিসেবে সেট করা আছে।
 
-\*\* Le prix des images générées est de 120 $ par million de jetons. Les images de sortie de 1 024 x 1 024 px (1K) à 2 048 x 2 048 px (2K) consomment 1 120 jetons et coûtent 0,134 $ par image. Les images de sortie jusqu'à 4 096 x 4 096 px (4K) consomment 2 000 jetons et coûtent 0,24 $ par image.
+\*\* ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $১২০। ১০২৪x১০২৪px (1K) থেকে ২০৪৮x২০৪৮px (2K) পর্যন্ত আউটপুট
+ইমেজের জন্য ১১২০টি টোকেন খরচ হয় এবং
+প্রতিটি ইমেজের জন্য $০.১৩৪ খরচ হয়। সর্বাধিক ৪০৯৬x৪০৯৬px (4K) আউটপুট ছবি তৈরি করতে ২০০০ টোকেন খরচ হয়
+এবং প্রতিটি ছবির জন্য $০.২৪ খরচ হয়।
 
-\*\*\* Une requête envoyée par un client à Gemini peut générer une ou plusieurs requêtes dans la recherche Google. Des frais vous seront facturés pour chaque requête de recherche individuelle effectuée.
+\*\*\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
+কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
+যা পারফর্ম করা হয়েছে।
 
-\*\*\*\* Peut être testé dans Google AI Studio.
+\*\*\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
 
-## Gemini 2.5 Pro
+## Gemini 2.5 Pro
 
-*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fr)*
+*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-pro&hl=bn)
 
-Modèle Pro idéal pour le codage et les tâches de raisonnement complexes.
+একটি Pro মডেল যা কোডিং ও জটিল রিজনিং টাস্কে পারদর্শী।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1,25 $, requêtes ≤ 200 000 jetons 2,50 $, requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 10 $, requêtes <= 200 000 jetons 15 $, requêtes > 200 000 jetons |
-| Prix de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | 10 000 RPD (sans frais), puis 25 $ / 1 000 requêtes ancrées |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $১.২৫, প্রম্পট <= ২০০ হাজার টোকেন $২.৫০, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১০.০০, প্রম্পট <= ২০০k টোকেন $১৫.০০, প্রম্পট > ২০০k |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.১২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.২৫, প্রম্পট > ২০০,০০০ $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১০,০০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 625 $ pour les requêtes <= 200 000 jetons 1, 25 $ pour les requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $, requêtes <= 200 000 jetons 7,50 $, requêtes > 200 000 |
-| Prix de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৬২৫, প্রম্পট <= ২০০ হাজার টোকেন $১.২৫, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৫.০০, প্রম্পট <= ২০০ হাজার টোকেন $৭.৫০, প্রম্পট > ২০০ হাজার |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.১২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.২৫, প্রম্পট > ২০০,০০০ $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 625 $ pour les requêtes <= 200 000 jetons 1, 25 $ pour les requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 5 $, requêtes <= 200 000 jetons 7,50 $, requêtes > 200 000 |
-| Prix de la mise en cache du contexte | Non disponible | 0,125 $ pour les requêtes <= 200 000 jetons 0,25 $ pour les requêtes > 200 000 jetons 4,50 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৬২৫, প্রম্পট <= ২০০ হাজার টোকেন $১.২৫, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৫.০০, প্রম্পট <= ২০০ হাজার টোকেন $৭.৫০, প্রম্পট > ২০০ হাজার |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.১২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.২৫, প্রম্পট > ২০০,০০০ $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 2,25 $, requêtes <= 200 000 jetons 4,50 $, requêtes > 200 000 jetons |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 18 $, requêtes <= 200 000 jetons 27 $, requêtes > 200 000 jetons |
-| Prix de la mise en cache du contexte | Non disponible | 0,225 $, requêtes <= 200 000 jetons 0,45 $, requêtes > 200 000 jetons 8,10 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais), puis 35 $ pour 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | 10 000 RPD (sans frais), puis 25 $ / 1 000 requêtes ancrées |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $২.২৫, প্রম্পট <= ২০০ হাজার টোকেন $৪.৫০, প্রম্পট > ২০০ হাজার টোকেন |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১৮.০০, প্রম্পট <= ২০০ হাজার টোকেন $২৭.০০, প্রম্পট > ২০০ হাজার |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.২২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.৪৫, প্রম্পট > ২০০,০০০ $৮.১০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১০,০০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini 2.5 Flash
+## Gemini 2.5 Flash
 
-*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fr)*
+*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash&hl=bn)
 
-Notre premier modèle de raisonnement hybride, qui accepte une fenêtre de contexte d'un million de jetons et dispose de budgets de réflexion.
+আমাদের প্রথম হাইব্রিড রিজনিং মডেল যা ১ মিলিয়ন টোকেন কন্টেক্সট উইন্ডো সাপোর্ট করে এবং
+এতে থিঙ্কিং বাজেট আছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,30 $ (texte / image / vidéo) 1,00 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash-Lite) | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৩০ (টেক্সট / ছবি / ভিডিও) $১.০০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ (টেক্সট / ছবি / ভিডিও) $০.১ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash-Lite RPD-র সাথে শেয়ার করা সীমা) | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,15 $ (texte / image / vidéo) 0,50 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,25 € |
-| Prix de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.২৫ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ (টেক্সট / ছবি / ভিডিও) $০.১ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,15 $ (texte / image / vidéo) 0,50 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 1,25 € |
-| Prix de la mise en cache du contexte | Non disponible | 0,03 $ (texte/image/vidéo) 0,1 $ (audio) 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.২৫ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ (টেক্সট / ছবি / ভিডিও) $০.১ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,54 $ (texte / image / vidéo) 1,80 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 4,50 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,054 $ (texte/image/vidéo) 0,18 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash-Lite) | 1 500 RPD (sans frais, limite partagée avec les RPD Flash-Lite), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫৪ (টেক্সট / ছবি / ভিডিও) $১.৮০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৪.৫০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৫৪ (টেক্সট / ছবি / ভিডিও) $০.১৮ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash-Lite RPD-র সাথে শেয়ার করা সীমা) | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini 2.5 Flash-Lite
+## Gemini 2.5 Flash-Lite
 
-*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fr)*
+*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=bn)
 
-Un modèle petit et économique, conçu pour une utilisation à grande échelle.
+কম খরচে বেশি ব্যবহারের জন্য তৈরি একটি ছোট মডেল।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,10 $ (texte / image / vidéo) 0,30 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,40 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | কোনও চার্জ ছাড়াই | $০.১০ (টেক্সট / ছবি / ভিডিও) $০.৩০ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৪০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১ (টেক্সট / ছবি / ভিডিও) $০.০৩ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash RPD-এর সাথে সীমা শেয়ার করা হয়) | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | উপলভ্য নয় | $০.০৫ (টেক্সট / ছবি / ভিডিও) $০.১৫ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $০.২০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১ (টেক্সট / ছবি / ভিডিও) $০.০৩ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix de l'entrée (texte, image, vidéo) | Non disponible | 0,05 $ (texte / image / vidéo) 0,15 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 0,20 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,01 $ (texte/image/vidéo) 0,03 $ (audio) 1,00 $ pour 1 000 000 jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Non disponible | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | উপলভ্য নয় | $০.০৫ (টেক্সট / ছবি / ভিডিও) $০.১৫ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $০.২০ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১ (টেক্সট / ছবি / ভিডিও) $০.০৩ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix de l'entrée (texte, image, vidéo) | Sans frais | 0,18 $ (texte / image / vidéo) 0,54 $ (audio) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 0,72 $ |
-| Prix de la mise en cache du contexte | Non disponible | 0,018 $ (texte/image/vidéo) 0,054 $ (audio) 1,80 $ pour 1 000 000 de jetons par heure (prix du stockage) |
-| Ancrage avec la recherche Google | Sans frais, jusqu'à 500 RPD (limite partagée avec les RPD Flash) | 1 500 RPJ (sans frais, limite partagée avec les RPJ Flash), puis 35 $ / 1 000 requêtes ancrées |
-| Ancrage avec Google Maps | 500 RPD | 1 500 RPD (sans frais), puis 25 $ pour 1 000 requêtes ancrées |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | কোনও চার্জ ছাড়াই | $০.১৮ (টেক্সট / ছবি / ভিডিও) $০.৫৪ (অডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৭২ |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১৮ (টেক্সট / ছবি / ভিডিও) $০.০৫৪ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash RPD-এর সাথে সীমা শেয়ার করা হয়) | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini 2.5 Flash Native Audio (API Live)
+## Gemini 2.5 Flash Native Audio (Live API)
 
-*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=fr)*
+*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/app/live?hl=fr#gemini-2.5-flash-native-audio-preview-12-2025)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/app/live?hl=bn#gemini-2.5-flash-native-audio-preview-12-2025)
 
-Nos modèles audio natifs de l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr) sont optimisés pour des sorties audio de meilleure qualité, avec un rythme, une voix, une verbosité et une humeur plus naturels.
+আমাদের [Live API](https://ai.google.dev/gemini-api/docs/live?hl=bn) নেটিভ অডিও মডেল, আরও ভালো পেসিং, ভয়েসের স্বাভাবিকতা, বাচালতা ও
+মুড সহ আরও ভালো কোয়ালিটির অডিও আউটপুটের জন্য অপ্টিমাইজ করা হয়েছে।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,50 $ (texte) 3,00 $ (audio / vidéo) |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 2,00 $ (texte) 12,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫০ (টেক্সট) $৩.০০ (অডিও / ভিডিও) |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.০০ (টেক্সট) $১২.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini 2.5 Flash Image (Nano Banana) 🍌
+## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
-*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fr)*
+*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=bn)
 
-Modèle de génération d'images natif, optimisé pour la vitesse, la flexibilité et la compréhension du contexte. Les entrées et sorties textuelles sont facturées au même prix que [2.5 Flash](#gemini-2.5-flash).
+একটি নেটিভ ইমেজ জেনারেশন মডেল, যা স্পিড, নমনীয়তা ও
+প্রসঙ্গ বোঝার জন্য অপ্টিমাইজ করা হয়েছে। টেক্সট ইনপুট ও আউটপুটের দাম
+[2.5 Flash](#gemini-2.5-flash)-এর সমান।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,30 $ (texte / image) |
-| Prix de sortie | Non disponible | 0,039 $ par image\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৩০ (টেক্সট / ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | ছবি পিছু $০.০৩৯\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,15 $ (texte / image) |
-| Prix de sortie | Non disponible | 0,0195 $ par image\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | ছবি পিছু $০.০১৯৫\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Flex
+### ফ্লেক্স
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,15 $ (texte / image) |
-| Prix de sortie | Non disponible | 0,0195 $ par image\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | ছবি পিছু $০.০১৯৫\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Priorité
+### অগ্রাধিকার
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,54 $ (texte / image) |
-| Prix de sortie | Non disponible | 0,0702 $ par image\* |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫৪ (টেক্সট / ছবি) |
+| আউটপুটের দাম | উপলভ্য নয় | প্রতিটি ছবির জন্য $০.০৭০২\* |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-[\*] Le prix des images générées est de 30 $ pour 1 000 000 de jetons. Les images de sortie jusqu'à 1 024 x 1 024 px consomment 1 290 jetons et coûtent 0,039 $ par image.
+[\*] ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $৩০। ১০২৪x১০২৪px পর্যন্ত
+আউটপুট ছবি ১২৯০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৩৯ খরচ হয়।
 
-## Gemini 2.5 Flash Preview TTS
+## Gemini 2.5 Flash প্রিভিউ TTS
 
-*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=fr)*
+*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/generate-speech?hl=bn)
 
-Notre modèle audio de synthèse vocale 2.5 Flash est optimisé pour la génération de voix contrôlable, à faible latence et offrant un bon rapport qualité/prix.
+আমাদের 2.5 Flash টেক্সট-টু-স্পিচ অডিও মডেলটি দাম-পারফর্ম্যান্স,
+কম লেটেন্সি, কন্ট্রোল করা যায় এমন স্পিচ জেনারেশনের জন্য অপ্টিমাইজ করা হয়েছে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 0,50 € (texte) |
-| Prix de sortie | Sans frais | 10,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫০ (টেক্সট) |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | $১০.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,25 $ (texte) |
-| Prix de sortie | Non disponible | 5,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট) |
+| আউটপুটের দাম | উপলভ্য নয় | $৫.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Preview Gemini 2.5 Pro TTS
+## Gemini 2.5 Pro প্রিভিউ TTS
 
-*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=fr)*
+*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com/generate-speech?hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/generate-speech?hl=bn)
 
-Notre modèle audio de synthèse vocale 2.5 Pro est optimisé pour générer des voix puissantes et à faible latence, afin d'obtenir des résultats plus naturels et des requêtes plus faciles à orienter.
+আমাদের 2.5 Pro টেক্সট-টু-স্পিচ অডিও মডেলটি শক্তিশালী, কম লেটেন্সি
+স্পিচ জেনারেশনের জন্য অপ্টিমাইজ করা হয়েছে যাতে আরও স্বাভাবিক আউটপুট পাওয়া যায় এবং প্রম্পটগুলি সহজে স্টিয়ার করা যায়।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 1,00 $ (texte) |
-| Prix de sortie | Non disponible | 20,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০ (টেক্সট) |
+| আউটপুটের দাম | উপলভ্য নয় | $২০.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0,50 € (texte) |
-| Prix de sortie | Non disponible | 10,00 $ (audio) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫০ (টেক্সট) |
+| আউটপুটের দাম | উপলভ্য নয় | $১০.০০ (অডিও) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Veo 3.1
+## Veo 3.1
 
-*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=fr), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=fr), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=fr)*
+*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=bn), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=bn), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=bn)*
 
-[Essayer Veo 3.1](https://deepmind.google/models/veo/?hl=fr)
+[Veo 3.1 ব্যবহার করে দেখুন](https://deepmind.google/models/veo/?hl=bn)
 
-Modèle de génération de vidéos rapide.
+দ্রুত ভিডিও জেনারেশন মডেল।
 
-|  | Niveau sans frais | Niveau payant, par seconde en USD |
+|  | ফ্রি টিয়ার | পেইড টিয়ার, মার্কিন ডলারে প্রতি সেকেন্ড |
 | --- | --- | --- |
-| Prix par défaut pour une vidéo Veo 3.1 Standard avec audio | Non disponible | 0,40 $ (720p et 1080p) 0,60 $ (4K) |
-| Prix par défaut pour une vidéo Veo 3.1 Fast avec audio | Non disponible | 0,10 $ (720p) 0,12 $ (1080p) 0,30 $ (4K) |
-| Vidéo Veo 3.1 Lite avec prix audio (par défaut) | Non disponible | 0,05 $ (720p) 0,08 $ (1080p) (sortie 4K non disponible) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| অডিও সহ Veo 3.1 স্ট্যান্ডার্ড ভিডিওর দাম (ডিফল্ট) | উপলভ্য নয় | $০.৪০ (৭২০p ও ১০৮০p) $০.৬০ (4k) |
+| অডিও সহ Veo 3.1 Fast ভিডিওর দাম (ডিফল্ট) | উপলভ্য নয় | $০.১০ (৭২০p) $০.১২ (১০৮০p) $০.৩০ (4k) |
+| অডিও সহ Veo 3.1 Lite ভিডিওর দাম (ডিফল্ট) | উপলভ্য নয় | $০.০৫ (৭২০p) $০.০৮ (১০৮০p) (4k আউটপুট কাজ করে না) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Lyria 3.5
+## Lyria 3.5
 
-*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=fr)*
+*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=bn)*
 
-Modèle de génération de musique de Google.
+Google-এর মিউজিক জেনারেশন মডেল।
 
-|  | Niveau sans frais | Niveau payant, par requête en USD |
+|  | ফ্রি টিয়ার | পেড টিয়ার, মার্কিন ডলারে অনুরোধ পিছু |
 | --- | --- | --- |
-| Lyria 3.5 (chanson complète) | Non disponible | 0,08 $ par titre |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| Lyria 3.5 (সম্পূর্ণ গান) | উপলভ্য নয় | প্রতিটি গানের জন্য $০.০৮ |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Lyria 3
+## Lyria 3
 
-*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=fr) et [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=fr)*
+*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=bn) এবং [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=bn)*
 
-Famille de modèles de génération de musique anciens de Google.
+Google-এর লেগ্যাসি মিউজিক জেনারেশন মডেলের ফ্যামিলি।
 
-|  | Niveau sans frais | Niveau payant, par requête en USD |
+|  | ফ্রি টিয়ার | পেড টিয়ার, মার্কিন ডলারে অনুরোধ পিছু |
 | --- | --- | --- |
-| Aperçu du clip Lyria 3 (30 s) | Non disponible | 0,04 $ par titre |
-| Preview Lyria 3 Pro (chanson complète) | Non disponible | 0,08 $ par titre |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| Lyria 3 ক্লিপ প্রিভিউ (৩০ সেকেন্ড) | উপলভ্য নয় | প্রতিটি গানের জন্য $০.০৪ |
+| Lyria 3 Pro প্রিভিউ (সম্পূর্ণ গান) | উপলভ্য নয় | প্রতিটি গানের জন্য $০.০৮ |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini Embedding 2
+## Gemini Embedding 2
 
-*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=fr)*
+*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=bn)*
 
-[Essayer l'API](https://ai.google.dev/gemini-api/docs/embeddings?hl=fr)
+[API ব্যবহার করে দেখুন](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn)
 
-Notre premier modèle d'embedding multimodal, qui mappe le texte, les images, les vidéos, l'audio et les PDF dans un espace d'embedding unifié.
+আমাদের প্রথম মাল্টিমোডাল এম্বেডিং মডেল, যা টেক্সট, ছবি, ভিডিও, অডিও এবং
+পিডিএফকে একটি ইউনিফায়েড এম্বেডিং স্পেসে ম্যাপ করে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix de la saisie de texte | Sans frais | 0,20 $ |
-| Prix de l'entrée d'image | Sans frais | 0,45 $ (0,00012 $ par image) |
-| Prix de l'entrée audio | Sans frais | 6,50 $ (0,00016 $ par seconde) |
-| Prix de l'entrée vidéo | Sans frais | 12 $ (0,00079 $ par frame) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| টেক্সট ইনপুট মূল্য | কোনও চার্জ ছাড়াই | $০.২০ |
+| ছবি ইনপুট করার দাম | কোনও চার্জ ছাড়াই | $০.৪৫ ($০.০০০০১২ প্রতি ছবি) |
+| অডিও ইনপুট মূল্য | কোনও চার্জ ছাড়াই | $৬.৫০ ($0.00016 প্রতি সেকেন্ডে) |
+| ভিডিও ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $১২.০০ (প্রতি ফ্রেমের জন্য $০.০০০৭৯) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix de la saisie de texte | Non disponible | 0,10 $ |
-| Prix de l'entrée d'image | Non disponible | 0,225 $ (0,00006 $ par image) |
-| Prix de l'entrée audio | Non disponible | 3,25 $ (0,00008 $ par seconde) |
-| Prix de l'entrée vidéo | Non disponible | 6 $ (0,000395 $ par frame) |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| টেক্সট ইনপুট মূল্য | উপলভ্য নয় | $০.১০ |
+| ছবি ইনপুট করার দাম | উপলভ্য নয় | $০.২২৫ ($০.০০০১৬ প্রতি ছবি) |
+| অডিও ইনপুট মূল্য | উপলভ্য নয় | $৩.২৫ ($0.0000৮ প্রতি সেকেন্ড) |
+| ভিডিও ইনপুট প্রাইস | উপলভ্য নয় | $৬.০০ (প্রতি ফ্রেমের জন্য $০.০০০৩৯৫) |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Gemini Robotics ER 2 Preview
+## Gemini Robotics ER 2 প্রিভিউ
 
-*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=fr)*
+*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=bn)
 
-Gemini Robotics ER 2, abréviation de Gemini Robotics Embodied Reasoning 2, est un point de terminaison de modèle vision-langage qui permet aux robots de comprendre précisément leur environnement. Il prend en charge l'orchestration agentive des robots, la compréhension de la progression des vidéos, la collaboration entre plusieurs robots et le raisonnement spatial avancé.
+Gemini Robotics ER 2, যার পুরো নাম হল Gemini Robotics Embodied Reasoning 2, এটি হল
+ভিশন-ল্যাঙ্গুয়েজ মডেল এন্ডপয়েন্ট যা রোবটকে তার পরিবেশ
+সঠিকভাবে বুঝতে সাহায্য করে। এটি রোবটের এজেন্টিক অর্কেস্ট্রেশন, ভিডিও প্রগ্রেস
+বোঝা, একাধিক রোবটের কোলাবরেশন ও উন্নত স্পেশিয়াল রিজনিংয়ের মতো বিষয়গুলি সমর্থন করে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1 $ (texte / image / vidéo / audio) jusqu'au 31 décembre 2026 2 $ (texte / image / vidéo / audio) à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Sans frais | 5 $ jusqu'au 31 décembre 2026. 10 $ à partir du 1er janvier 2027. |
-| Prix de la mise en cache du contexte | Non disponible | 0,10 $ jusqu'au 31 décembre 2026. 0,20 $ à partir du 1er janvier 2027. 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026. 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027. |
-| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$২.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৫.০০। ১ জানুয়ারি, ২০২৭ থেকে$১০.০০। |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.১০। ১ জানুয়ারি, ২০২৭ থেকে$০.২০। ৩১ ডিসেম্বর,২০২৬ পর্যন্ত$০.৫০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে$১.০০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-### Lot
+### ব্যাচ
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Non disponible | 0, 50 $ (texte / image / vidéo / audio) jusqu'au 31 décembre 2026 1, 00 $ (texte / image / vidéo / audio) à partir du 1er janvier 2027 |
-| Prix de sortie (y compris les jetons de réflexion) | Non disponible | 2, 50 $ jusqu'au 31 décembre 2026 5, 00 $ à partir du 1er janvier 2027 |
-| Prix de la mise en cache du contexte | Non disponible | 0,05 $ jusqu'au 31 décembre 2026. 0,10 $ à partir du 1er janvier 2027. 0,50 $ pour 1 000 000 de jetons par heure (prix du stockage) jusqu'au 31 décembre 2026. 1,00 $ pour 1 000 000 de jetons par heure (prix du stockage) à partir du 1er janvier 2027. |
-| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৫০ (টেক্সট / ছবি / ভিডিও / অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$১.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। |
+| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $২.৫০। ১ জানুয়ারি, ২০২৭ থেকে$৫.০০। |
+| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৫. ১ জানুয়ারি, ২০২৭ থেকে$০.১০. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Aperçu du streaming Gemini Robotics ER 2
+## Gemini Robotics ER 2 স্ট্রিমিং প্রিভিউ
 
-*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=fr)*
+*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=bn)*
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=fr)
+[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=bn)
 
-Gemini Robotics ER 2 Streaming est un point de terminaison de modèle vision-langage pour la robotique, optimisé pour le streaming de texte en temps réel à l'aide de l'API Live. Elle accepte du texte, des images, des vidéos et de l'audio en entrée, et prend en charge le streaming bidirectionnel avec l'appel de fonction.
+Gemini Robotics ER 2 Streaming হল রোবোটিক্সের জন্য একটি ভিশন-ল্যাঙ্গুয়েজ মডেল এন্ডপয়েন্ট যা
+Live API ব্যবহার করে রিয়েল-টাইম টেক্সট স্ট্রিমিংয়ের জন্য অপ্টিমাইজ করা হয়েছে। এটি টেক্সট,
+ছবি, ভিডিও ও অডিও ইনপুট নেয় এবং ফাংশন কলিংয়ের সাথে
+দ্বিমুখী স্ট্রিমিং কাজ করে।
 
-### Standard
+### মানক
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | 1 $ (texte / image / vidéo / audio) jusqu'au 31 décembre 2026 2 $ (texte / image / vidéo / audio) à partir du 1er janvier 2027 |
-| Prix de sortie | Sans frais | 5 $ jusqu'au 31 décembre 2026. 10 $ à partir du 1er janvier 2027. |
-| Ancrage avec la recherche Google | Non disponible | 5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini 3.x), puis 14 $ pour 1 000 requêtes. |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$২.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৫.০০। ১ জানুয়ারি, ২০২৭ থেকে$১০.০০। |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=fr)
+## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=bn)
 
-Notre modèle ouvert, léger et de pointe, basé sur la même technologie que celle de nos modèles Gemini.
+আমাদের হালকা ওজনের, অত্যাধুনিক, ওপেন মডেল যা একই প্রযুক্তি
+ব্যবহার করে তৈরি করা হয়েছে যা আমাদের Gemini মডেলকে শক্তিশালী করে।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| Prix d'entrée | Sans frais | Non disponible |
-| Prix de sortie | Sans frais | Non disponible |
-| Prix de la mise en cache du contexte | Sans frais | Non disponible |
-| Mise en cache du contexte (stockage) | Sans frais | Non disponible |
-| Prix de l'optimisation | Non disponible | Non disponible |
-| Ancrage avec la recherche Google | Non disponible | Non disponible |
-| Utilisé pour améliorer nos produits | [Oui](https://ai.google.dev/gemini-api/terms?hl=fr) | [Non](https://ai.google.dev/gemini-api/terms?hl=fr) |
+| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
+| আউটপুটের দাম | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
+| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
+| কনটেক্সট ক্যাশিং (স্টোরেজ) | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
+| টিউনিংয়ের দাম | উপলভ্য নয় | উপলভ্য নয় |
+| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
+| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
 
-## Tarifs des outils
+## টুলের দাম
 
-Les outils sont facturés à leurs propres tarifs, appliqués au modèle qui les utilise.
-Consultez la page [Modèles](https://ai.google.dev/gemini-api/docs/models?hl=fr) pour connaître les outils disponibles pour chaque modèle.
+টুলগুলির নিজস্ব মূল্য নির্ধারণ করা হয় এবং সেগুলি যে মডেলে ব্যবহার করা হয় তার উপর প্রযোজ্য হয়।
+প্রতিটি মডেলের জন্য কোন টুল উপলভ্য তা জানতে [মডেল](https://ai.google.dev/gemini-api/docs/models?hl=bn) পৃষ্ঠা দেখুন
+।
 
-|  | Niveau sans frais | Niveau payant, par million de jetons en USD |
+|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
 | --- | --- | --- |
-| [La recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr#pricing) | 500 RPD sans frais (limite partagée pour Flash et Flash-Lite). Non disponible pour Pro. | Modèles Gemini 2.5 :  1 500 RPD sans frais (limite partagée pour Flash et Flash-Lite). Ensuite, 35 $ / 1 000 requêtes ancrées   Modèles Gemini 3 :  5 000 requêtes de recherche sans frais par mois (partagées entre tous les modèles Gemini), puis 14 $ pour 1 000 requêtes. |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr#pricing_and_rate_limits) | 500 RPD Non disponible pour Pro. | 1 500 RPD sans frais (limite partagée pour Flash et Flash-Lite) 10 000 RPD sans frais pour Pro. Puis 25 $ / 1 000 requêtes ancrées |
-| [Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr#billing) | Sans frais | L'exécution de code est facturée aux tarifs standards des jetons pour le modèle sélectionné. Les coûts sont déterminés uniquement par l'utilisation de l'outil. Aucun frais n'est facturé pour la durée d'exécution de la session. Le code généré et les résultats de l'exécution sont facturés en tant que **jetons de sortie** lors de leur création, et en tant que **jetons d'entrée** lorsque le modèle les utilise dans le cadre de son processus de raisonnement itératif. |
-| [Contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr#limitations) | Sans frais | Facturé en tant que jetons d'entrée selon la tarification par modèle. |
-| [Utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) | Non disponible | Facturés comme des jetons standards selon la tarification du modèle (par exemple, la tarification standard de [Gemini 3.8 Flash](#gemini-3.8-flash)). |
-| [Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr#pricing) | Sans frais | Les [embeddings](#gemini-embedding-2) sont facturés 0,15 $ par million de jetons. Les jetons de documents récupérés sont facturés comme des jetons standards, selon la tarification du modèle. |
-| [Point de terminaison Custom Tools (version preview de Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | Non disponible | Identique aux tarifs de [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
+| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn#pricing) | ৫০০ RPD ফ্রি (Flash ও Flash-Lite-এর জন্য শেয়ার করা সীমা)। Pro-তে উপলভ্য নয়। | Gemini 2.5 মডেল:  ১,৫০০ RPD ফ্রি (Flash ও Flash-Lite-এর জন্য শেয়ার করা সীমা)। তারপরে $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট   Gemini 3 ও এর পরের যেকোনও মডেল:  প্রতি মাসে ৫,০০০ ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে ১,০০০ কোয়েরি পিছু $১৪। |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn#pricing-and-rate-limits) | ৫০০ RPD Pro-এর জন্য উপলভ্য নয়। | Gemini 2.5 মডেল:  ১,৫০০ RPD ফ্রি (Flash ও Flash-Lite-এর জন্য শেয়ার করা সীমা) Pro-এর জন্য ১০,০০০ RPD ফ্রি। তারপরে ১,০০০ গ্রাউন্ডেড প্রম্পটের জন্য $২৫   Gemini 3 ও এর পরের যেকোনও মডেল:  প্রতি মাসে ৫,০০০ অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে ১,০০০ সার্চ কোয়েরির জন্য $১৪। |
+| [কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn#billing) | কোনও চার্জ ছাড়াই | বেছে নেওয়া মডেলের জন্য স্ট্যান্ডার্ড টোকেন রেট অনুযায়ী কোড এক্সিকিউশনের বিল করা হয়। টুল ব্যবহারের উপর ভিত্তি করেই খরচ নির্ধারণ করা হয়, সেশন রানটাইমের জন্য কোনও চার্জ করা হয় না। জেনারেট করা কোড ও এক্সিকিউশনের ফলাফল তৈরি করার সময় **আউটপুট টোকেন** হিসেবে এবং মডেলটি সেগুলিকে ইটারেটিভ রিজনিং প্রসেসের অংশ হিসেবে ব্যবহার করার সময় **ইনপুট টোকেন** হিসেবে বিল করা হয়। |
+| [URL প্রসঙ্গ](https://ai.google.dev/gemini-api/docs/url-context?hl=bn#limitations) | কোনও চার্জ ছাড়াই | মডেলের দাম অনুযায়ী ইনপুট টোকেন হিসেবে চার্জ করা হয়। |
+| [কম্পিউটার ব্যবহার](https://ai.google.dev/gemini-api/docs/computer-use?hl=bn) | উপলভ্য নয় | মডেলের দাম অনুযায়ী সাধারণ টোকেন হিসেবে চার্জ করা হয় (যেমন, স্ট্যান্ডার্ড [Gemini 3.8 Flash](#gemini-3.8-flash)-এর দাম)। |
+| [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn#pricing) | কোনও চার্জ ছাড়াই | [এমবেডিং](#gemini-embedding-2)-এর জন্য $০.১৫ / ১ মিলিয়ন টোকেন হিসেবে চার্জ করা হয়। মডেলের দাম অনুযায়ী, ফিরিয়ে আনা ডকুমেন্ট টোকেনের জন্য সাধারণ টোকেন হিসেবে চার্জ করা হয়। |
+| [কাস্টম টুল এন্ডপয়েন্ট (Gemini 3.1 Pro প্রিভিউ)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn) | উপলভ্য নয় | [Gemini 3.1 Pro প্রিভিউ](#gemini-3.1-pro-preview)-এর দামের সমান |
 
-## Tarifs pour les agents
+## এজেন্টদের জন্য দাম
 
-Les coûts d'utilisation des agents sont calculés en fonction de la consommation de jetons sous-jacente et de l'utilisation des outils.
+এজেন্ট ব্যবহারের খরচ, অন্তর্নিহিত টোকেন
+ব্যবহার এবং টুলের ব্যবহারের উপর ভিত্তি করে গণনা করা হয়।
 
-|  | Modèle | Outils |
+|  | মডেল | টুল |
 | --- | --- | --- |
-| [Agent Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) | L'inférence de tous les modèles est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / raisonnement intermédiaires générés lors des boucles agentiques. | Les frais d'utilisation des outils s'appliquent selon la structure tarifaire existante, en conservant les distinctions standards pour l'ancrage de la recherche (jetons récupérés exclus) par rapport à Url\_context / Recherche de fichiers (jetons récupérés inclus dans tous les autres outils). |
-| [Managed Agents dans l'API Gemini](https://ai.google.dev/gemini-api/docs/agents?hl=fr) | L'inférence de tous les modèles est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / raisonnement intermédiaires générés lors des boucles agentiques. ([Consulter les informations tarifaires](https://ai.google.dev/gemini-api/docs/agents?hl=fr#pricing)) | Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est pas facturé pendant la période de preview. |
-| [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) | L'inférence de tous les modèles est facturée aux tarifs standards de Gemini, y compris les jetons d'entrée, de sortie et d'entrée / raisonnement intermédiaires générés lors des boucles agentiques. ([Consulter les informations tarifaires](https://ai.google.dev/gemini-api/docs/agents?hl=fr#pricing)) | Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est pas facturé pendant la période de preview. |
+| [Gemini Deep Research এজেন্ট](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn) | সমস্ত মডেল ইনফারেন্সের জন্য স্ট্যান্ডার্ড Gemini তালিকা রেট চার্জ করা হয়, এজেন্টিক লুপ চলাকালীন ইনপুট, আউটপুট এবং মধ্যবর্তী ইনপুট / রিজনিং টোকেন সহ । | আগে থেকে থাকা প্রাইসিং স্ট্রাকচার অনুযায়ী টুল ব্যবহারের ফি প্রযোজ্য হয়। এর মধ্যে Search Grounding (রিট্রিভ করা টোকেন বাদ দেওয়া হয়েছে) এবং Url\_context / File Search (রিট্রিভ করা টোকেন অন্যান্য সব টুলে অন্তর্ভুক্ত) সংক্রান্ত স্ট্যান্ডার্ড পার্থক্য বজায় রাখা হয়। |
+| [Gemini API-তে ম্যানেজ করা এজেন্ট](https://ai.google.dev/gemini-api/docs/agents?hl=bn) | সমস্ত মডেল ইনফারেন্সের জন্য স্ট্যান্ডার্ড Gemini তালিকা রেট চার্জ করা হয়, এজেন্টিক লুপ চলাকালীন ইনপুট, আউটপুট এবং মধ্যবর্তী ইনপুট / রিজনিং টোকেন সহ । ([মূল্যের বিবরণ](https://ai.google.dev/gemini-api/docs/agents?hl=bn#pricing) দেখুন)। | প্রিভিউ চলাকালীন এনভায়রনমেন্ট কম্পিউট (CPU, মেমরি, স্যান্ডবক্স এক্সিকিউশন) করার জন্য কোনও চার্জ নেওয়া হয় না। |
+| [Antigravity এজেন্ট](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=bn) | সমস্ত মডেল ইনফারেন্সের জন্য স্ট্যান্ডার্ড Gemini তালিকা রেট চার্জ করা হয়, এজেন্টিক লুপ চলাকালীন ইনপুট, আউটপুট এবং মধ্যবর্তী ইনপুট / রিজনিং টোকেন সহ । ([মূল্যের বিবরণ](https://ai.google.dev/gemini-api/docs/agents?hl=bn#pricing) দেখুন)। | প্রিভিউ চলাকালীন এনভায়রনমেন্ট কম্পিউট (CPU, মেমরি, স্যান্ডবক্স এক্সিকিউশন) করার জন্য কোনও চার্জ নেওয়া হয় না। |
 
-## Remarques
+## নোট
 
-- **Compréhension agentique des vidéos** : lorsque vous utilisez la compréhension agentique des vidéos, l'utilisation de jetons est variable en fonction du contenu chargé par le modèle plutôt que de la durée totale de la vidéo. Cela permet généralement de réduire jusqu'à 88% le nombre de jetons d'entrée pour les vidéos longues, bien que le nombre de jetons dépende de la complexité de la requête et de la profondeur d'échantillonnage dynamique (qui peut dépasser 1 FPS pour les segments visuels détaillés). Consultez [Compréhension agentique des vidéos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fr#agentic-video-understanding).
-- **Facturation des jetons pour les documents** : les jetons pour la modalité `DOCUMENT` (par exemple, les PDF) sont facturés au tarif des jetons d'image. Dans les réponses de l'API, ces jetons apparaissent sous la modalité `DOCUMENT` dans `promptTokensDetails`.
-- L'utilisation de Google AI Studio est sans frais dans toutes les [régions disponibles](https://ai.google.dev/gemini-api/docs/available-regions?hl=fr). Pour en savoir plus, consultez les [questions fréquentes sur la facturation](https://ai.google.dev/gemini-api/docs/billing?hl=fr).
-- Les prix peuvent différer de ceux indiqués ici et de ceux proposés sur Gemini Enterprise Agent Platform. Pour connaître les tarifs de Gemini Enterprise Agent Platform, consultez la [page des tarifs de Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=fr).
-- Si vous utilisez la [récupération dynamique](https://ai.google.dev/gemini-api/docs/grounding?hl=fr) pour optimiser les coûts, l'ancrage avec la recherche Google n'est facturé que pour les requêtes qui contiennent au moins une URL d'ancrage issue du Web dans leur réponse.
-  Les coûts de Gemini s'appliquent toujours. Les limites de débit sont susceptibles d'être modifiées.
+- **এজেন্টিক ভিডিও বোঝা:** এজেন্টিক ভিডিও বোঝার ক্ষেত্রে,
+  সম্পূর্ণ ভিডিওর দৈর্ঘ্যের পরিবর্তে মডেলের লোড করা কন্টেন্টের উপর ভিত্তি করে টোকেন ব্যবহার
+  পরিবর্তনযোগ্য হয়। এর ফলে সাধারণত বড় দৈর্ঘ্যের ভিডিওর জন্য ৮৮% পর্যন্ত কম ইনপুট টোকেন
+  প্রয়োজন হয়, যদিও টোকেনের সংখ্যা কোয়েরির জটিলতা এবং ডায়নামিক
+  স্যাম্পলিং ডেপথের উপর নির্ভর করে (যা বিস্তারিত ভিজ্যুয়াল সেগমেন্টের জন্য ১ FPS-এর বেশি হতে পারে)।
+  [এজেন্টিক ভিডিও বোঝা](https://ai.google.dev/gemini-api/docs/video-understanding?hl=bn#agentic-video-understanding) দেখুন।
+- **ডকুমেন্ট টোকেন বিলিং:** `DOCUMENT` মোডালিটির (যেমন, পিডিএফ) টোকেনকে ইমেজ টোকেন রেটে বিল করা হয়। API উত্তরের মধ্যে, এইসব টোকেন `promptTokensDetails`-এর মধ্যে `DOCUMENT` মডালিটির অধীনে দেখা যায়।
+- [উপলভ্য সব অঞ্চলে](https://ai.google.dev/gemini-api/docs/available-regions?hl=bn) Google AI Studio ব্যবহার করার জন্য কোনও চার্জ লাগে না। আরও বিবরণের জন্য [বিলিং সংক্রান্ত প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী](https://ai.google.dev/gemini-api/docs/billing?hl=bn) দেখুন।
+- এখানে তালিকাভুক্ত দাম এবং
+  Gemini Enterprise Agent Platform-এ অফার করা দামের মধ্যে পার্থক্য থাকতে পারে। Gemini Enterprise Agent Platform-এর দাম জানতে, [Gemini Enterprise Agent Platform-এর দামের পৃষ্ঠা](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=bn) দেখুন।
+- আপনি খরচ অপ্টিমাইজ করার জন্য [ডায়নামিক রিট্রিভাল](https://ai.google.dev/gemini-api/docs/grounding?hl=bn) ব্যবহার করলে, শুধুমাত্র সেইসব অনুরোধের জন্য Google Search-এর মাধ্যমে গ্রাউন্ডিংয়ের চার্জ নেওয়া হয় যেগুলির উত্তরে
+  ওয়েব থেকে অন্তত একটি গ্রাউন্ডিং সাপোর্ট URL থাকে।
+  Gemini-এর জন্য খরচ সবসময় প্রযোজ্য হয়। রেট লিমিট পরিবর্তন হতে পারে।
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-Dernière mise à jour le 2026/10/01 (UTC).
+2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/01 (UTC)."],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

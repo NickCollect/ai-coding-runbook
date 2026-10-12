@@ -1,33 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=id
-fetched_at: 2026-10-05T06:47:24.297135+00:00
-title: "Konteks URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=zh-TW
+fetched_at: 2026-10-12T07:06:34.611372+00:00
+title: "\u7db2\u5740\u80cc\u666f\u8cc7\u8a0a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Kirim masukan
+提供意見
 
-# Konteks URL
+# 網址背景資訊
 
-Alat konteks URL memungkinkan Anda memberikan konteks tambahan ke model dalam bentuk URL. Dengan menyertakan URL dalam permintaan Anda, model akan mengakses konten dari halaman tersebut (selama tidak termasuk jenis URL yang tercantum di [bagian batasan](#limitations)) untuk menginformasikan dan meningkatkan kualitas responsnya.
+網址背景資訊工具可讓你以網址形式，為模型提供額外背景資訊。在要求中加入網址後，模型會存取這些網頁的內容 (只要網址類型未列於[限制一節](#limitations))，藉此提供更完善的回覆。
 
-Alat konteks URL berguna untuk tugas seperti berikut:
+網址脈絡工具適用於下列工作：
 
-- **Mengekstrak Data**: Menarik informasi tertentu seperti harga, nama, atau temuan utama dari beberapa URL.
-- **Membandingkan Dokumen**: Menganalisis beberapa laporan, artikel, atau PDF untuk mengidentifikasi perbedaan dan melacak tren.
-- **Menyintesis & Membuat Konten**: Menggabungkan informasi dari beberapa URL sumber untuk membuat ringkasan, postingan blog, atau laporan yang akurat.
-- **Analisis Kode & Dokumen**: Merujuk repositori GitHub atau dokumentasi teknis untuk menjelaskan kode, membuat petunjuk penyiapan, atau menjawab pertanyaan.
+- **擷取資料**：從多個網址擷取特定資訊，例如價格、名稱或重要發現。
+- **比較文件**：分析多份報表、文章或 PDF，找出差異並追蹤趨勢。
+- **統整及建立內容**：整合多個來源網址的資訊，生成準確的摘要、網誌文章或報告。
+- **分析程式碼和文件**：指向 GitHub 存放區或技術文件，說明程式碼、生成設定說明或回答問題。
 
-Contoh berikut menunjukkan cara membandingkan dua resep dari situs yang berbeda.
+以下範例說明如何比較不同網站的兩個食譜。
 
 ### Python
 
@@ -172,27 +172,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cara kerjanya
+## 運作方式
 
-Alat Konteks URL menggunakan proses pengambilan dua langkah untuk menyeimbangkan kecepatan, biaya, dan akses ke data baru. Saat Anda memberikan URL, alat ini
-pertama-tama akan mencoba mengambil konten dari cache indeks internal. Cache ini berfungsi sebagai cache yang sangat dioptimalkan. Jika URL tidak tersedia di indeks (misalnya, jika
-URL tersebut adalah halaman yang sangat baru), alat otomatis akan melakukan pengambilan langsung.
-Alat ini mengakses URL secara langsung untuk mengambil kontennya secara real time.
+網址內容工具採用兩步驟的擷取程序，兼顧速度、成本和最新資料存取權。提供網址後，這項工具會先嘗試從內部索引快取擷取內容。這項功能可做為經過高度最佳化的快取。如果網址不在索引中 (例如網頁剛發布)，工具會自動改為即時擷取。這會直接存取網址，即時擷取內容。
 
-## Menggabungkan dengan alat lain
+## 與其他工具搭配使用
 
-Anda dapat menggabungkan alat konteks URL dengan alat lain untuk membuat alur kerja yang lebih efektif.
+您可以將網址內容工具與其他工具結合，建立更強大的工作流程。
 
-[Model Gemini 3](#supported-models) mendukung penggabungan alat bawaan (seperti Konteks URL) dengan alat kustom (pemanggilan fungsi). Pelajari lebih lanjut di halaman
-[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
+[Gemini 3 模型](#supported-models)支援結合內建工具 (例如網址背景資訊) 和自訂工具 (函式呼叫)。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
 
-### Melakukan grounding dengan penelusuran
+### 以搜尋結果為基準
 
-Jika Konteks URL dan
-[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=id) diaktifkan,
-model dapat menggunakan kapabilitas penelusurannya untuk menemukan
-informasi yang relevan secara online, lalu menggunakan alat Konteks URL untuk mendapatkan pemahaman yang lebih
-mendalam tentang halaman yang ditemukannya. Pendekatan ini sangat efektif untuk perintah yang memerlukan penelusuran luas dan analisis mendalam terhadap halaman tertentu.
+同時啟用網址背景資訊和 [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)後，模型就能使用搜尋功能在網路上尋找相關資訊，然後使用網址背景資訊工具深入瞭解找到的網頁。這種做法非常適合需要廣泛搜尋，並深入分析特定網頁的提示。
 
 ### Python
 
@@ -313,24 +305,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Memahami respons
+## 瞭解回覆內容
 
-Saat model menggunakan alat konteks URL, respons teksnya akan menyertakan anotasi `url_citation` inline pada blok konten teks. Setiap anotasi menautkan segmen teks respons (melalui `start_index` dan `end_index`) ke URL sumber tempat teks tersebut berasal. Ini adalah cara utama untuk menampilkan kutipan dalam aplikasi Anda. Lihat [contoh utama di atas](#get-started) untuk mengetahui cara mengekstraknya.
+模型使用網址背景資訊工具時，文字回覆會包含文字內容區塊的內嵌`url_citation`註解。每則註解都會將回覆文字的某個片段 (透過 `start_index` 和 `end_index`) 連結至衍生來源網址。這是應用程式中顯示引文的主要方式，請參閱[上方的主要範例](#get-started)，瞭解如何擷取引文。
 
-Respons juga mencakup langkah `url_context_result` dengan metadata tentang setiap
-upaya pengambilan URL (status, URL yang diambil). Hal ini terutama berguna untuk
-proses debug.
+回覆中也會納入 `url_context_result` 步驟，其中含有各網址擷取嘗試的中繼資料 (狀態、擷取的網址)。這項功能主要用於偵錯。
 
-### Pemeriksaan keamanan
+### 安全檢查
 
-Sistem melakukan pemeriksaan moderasi konten pada URL untuk mengonfirmasi bahwa URL tersebut memenuhi standar keamanan. Jika URL gagal dalam pemeriksaan ini, langkah
-`url_context_result` yang sesuai akan menampilkan `status` `"unsafe"`.
+系統會對網址執行內容審查檢查，確認網址符合安全標準。如果網址未通過這項檢查，對應的`url_context_result`步驟會顯示`status`的`"unsafe"`。
 
-### Jumlah token
+### 符記數量
 
-Konten yang diambil dari URL yang Anda tentukan dalam perintah Anda dihitung
-sebagai bagian dari token input. Anda dapat melihat jumlah token dalam
-objek `usage` interaksi. Berikut adalah contohnya:
+系統會將從提示中指定網址擷取的內容，計為輸入權杖。您可以在互動的 `usage` 物件中查看權杖數量。範例如下：
 
 ```
 'usage': {
@@ -344,66 +331,57 @@ objek `usage` interaksi. Berikut adalah contohnya:
 }
 ```
 
-Harga per token bergantung pada model yang digunakan. Lihat halaman
-[harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk mengetahui detailnya.
+每個權杖的價格取決於使用的模型，詳情請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)頁面。
 
-## Model yang didukung
+## 支援的模型
 
-| Model | Konteks URL |
+| 模型 | 網址背景資訊 |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=id) | ✔️ |
-| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.7-flash?hl=id) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id) | ✔️ |
-| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ |
-| [Pratinjau Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=id) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
 
-## Praktik Terbaik
+## 最佳做法
 
-- **Berikan URL spesifik**: Untuk mendapatkan hasil terbaik, berikan URL langsung ke
-  konten yang Anda ingin untuk dianalisis oleh model. Model hanya akan mengambil konten
-  dari URL yang Anda berikan, bukan konten dari link bertingkat.
-- **Periksa aksesibilitas**: Pastikan URL yang Anda berikan tidak mengarah ke halaman yang memerlukan login atau berada di balik penghalang konten berbayar.
-- **Gunakan URL lengkap**: Berikan URL lengkap, termasuk protokolnya
-  (misalnya, https://www.google.com, bukan hanya google.com).
+- **提供具體網址**：為獲得最佳結果，請提供您希望模型分析的內容的直接網址。模型只會從您提供的網址擷取內容，不會從巢狀連結擷取任何內容。
+- **檢查存取方式**：確認提供的網址不會導向需要登入或位於付費牆後的網頁。
+- **使用完整網址**：提供完整網址，包括通訊協定 (例如：https://www.google.com，而非只有 google.com)。
 
-## Batasan
+## 限制
 
-- Batas permintaan: Alat ini dapat memproses hingga 20 URL per permintaan.
-- Ukuran konten URL: Ukuran maksimum untuk konten yang diambil dari satu
-  URL adalah 34 MB.
-- Aksesibilitas publik: URL harus dapat diakses secara publik di web.
-  Alamat localhost (misalnya, localhost, 127.0.0.1), jaringan pribadi, dan layanan tunneling (misalnya, ngrok, pinggy) tidak didukung.
+- 要求限制：這項工具每次最多可處理 20 個網址。
+- 網址內容大小：從單一網址擷取的內容大小上限為 34 MB。
+- 公開存取權：網址必須可在網路上公開存取。
+  系統不支援本機主機位址 (例如 localhost、127.0.0.1)、私人網路和通道服務 (例如 ngrok、pinggy)。
 
-### Jenis konten yang didukung dan tidak didukung
+### 支援及不支援的內容類型
 
-Alat ini dapat mengekstrak konten dari URL dengan jenis konten berikut:
+這項工具可從下列內容類型的網址中擷取內容：
 
-- Teks (text/html, application/json, text/plain, text/xml, text/css,
-  text/javascript , text/csv, text/rtf)
-- Gambar (image/png, image/jpeg, image/bmp, image/webp)
+- 文字 (text/html、application/json、text/plain、text/xml、text/css、
+  text/javascript、text/csv、text/rtf)
+- 圖片 (image/png、image/jpeg、image/bmp、image/webp)
 - PDF (application/pdf)
 
-Jenis konten berikut **tidak** didukung:
+系統**不**支援下列內容類型：
 
-- Konten berbayar berpenghalang
-- Video YouTube (Lihat
-  [pemahaman video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id#youtube) untuk mempelajari
-  cara memproses URL YouTube)
-- File Google Workspace seperti dokumen atau spreadsheet Google
-- File video dan audio
+- 付費牆內容
+- YouTube 影片 (請參閱[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，瞭解如何處理 YouTube 網址)
+- Google Workspace 檔案，例如 Google 文件或試算表
+- 影片和音訊檔案
 
-Kirim masukan
+提供意見
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Terakhir diperbarui pada 2026-09-24 UTC.
+上次更新時間：2026-10-09 (世界標準時間)。
 
-Ada masukan untuk kami?
+想進一步說明嗎？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-09 (世界標準時間)。"],[],[]]

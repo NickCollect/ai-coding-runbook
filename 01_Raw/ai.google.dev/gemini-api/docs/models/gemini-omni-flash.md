@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=pl
-fetched_at: 2026-10-05T06:28:05.901599+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=vi
+fetched_at: 2026-10-12T07:08:05.522039+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
 # Gemini Omni Flash
 
-Gemini Omni Flash to model w wersji testowej, który umożliwia szybkie generowanie i edytowanie filmów w sposób konwersacyjny. Doskonale radzi sobie z przekształcaniem tekstu i obrazów w filmy, a także umożliwia dopracowywanie i edytowanie wygenerowanych filmów za pomocą rozmów w języku naturalnym przy użyciu interfejsu Interactions API.
+Gemini Omni Flash là một mô hình xem trước được thiết kế để tạo và chỉnh sửa video nhanh chóng bằng ngôn ngữ tự nhiên. Công cụ này có khả năng chuyển đổi văn bản và hình ảnh thành video, cho phép bạn tinh chỉnh và chỉnh sửa video được tạo thông qua các cuộc trò chuyện bằng ngôn ngữ tự nhiên bằng Interactions API.
 
-[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=pl)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=vi)
 
-## Dokumentacja
+## Tài liệu
 
-Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=pl).
+Truy cập trang [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=vi) để xem toàn bộ các tính năng và chức năng.
 
 ## gemini-omni-flash-preview
 
-| Właściwość | Opis |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `gemini-omni-flash-preview` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz, film (do 10 s na potrzeby edycji)  **Wyjście**  Film |
-| token\_autoLimity | **Okno kontekstu**  1 048 576 tokenów  **Film wyjściowy**  3–10 s (720p, 24 kl./s) |
-| calendar\_monthNajnowsza aktualizacja | Czerwiec 2026 r. |
+| id\_cardMã kiểu máy | **Gemini API**  `gemini-omni-flash-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh, video (thời lượng tối đa 10 giây để chỉnh sửa)  **Đầu ra**  Video |
+| Giới hạn token\_auto | **Cửa sổ ngữ cảnh**  1.048.576 mã thông báo  **Video đầu ra**  3 giây – 10 giây (720p, 24 khung hình/giây) |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 6/2026 |
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-06-30 UTC.
+Cập nhật lần gần đây nhất: 2026-06-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-30 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-30 UTC."],[],[]]

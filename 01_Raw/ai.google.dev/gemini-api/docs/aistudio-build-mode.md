@@ -1,214 +1,213 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=it
-fetched_at: 2026-10-05T06:40:25.703093+00:00
-title: "Crea app in Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-CN
+fetched_at: 2026-10-12T07:02:15.145318+00:00
+title: "\u5728 Google AI Studio \u4e2d\u6784\u5efa\u5e94\u7528 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Invia feedback
+发送反馈
 
-# Crea app in Google AI Studio
+# 在 Google AI Studio 中构建应用
 
-Questa pagina descrive come utilizzare Google AI Studio per creare rapidamente (o "vibe
-code") ed eseguire il deployment di app che testano le funzionalità più recenti di Gemini, come
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) e l'API [Live](https://ai.google.dev/gemini-api/docs/live?hl=it). Google AI Studio supporta la creazione di **app web** con runtime full stack e **app Android native** con Kotlin e Jetpack Compose, il tutto tramite prompt in linguaggio naturale.
+本页介绍了如何使用 Google AI Studio 快速构建（或“氛围
+编程”）和部署应用，以测试 Gemini 的最新功能，例如
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn) 和 [Live
+API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)。Google AI Studio 支持使用全栈运行时构建 **Web 应用** ，以及使用 Kotlin 和 Jetpack Compose 构建**原生 Android 应用** ，所有这些都可以通过自然语言提示完成。
 
-## Inizia
+## 开始使用
 
-Inizia a utilizzare il vibe coding nella [modalità di creazione](https://aistudio.google.com/apps?hl=it) di Google AI Studio. Puoi iniziare a creare in diversi modi:
+在 Google AI Studio 的[“构建”模式](https://aistudio.google.com/apps?hl=zh-cn)下开始氛围编程。您可以通过以下几种方式开始构建：
 
-- **Inizia con un prompt**: in modalità di creazione, utilizza la casella di immissione per inserire una descrizione di ciò che vuoi creare. Seleziona AI Chips per aggiungere funzionalità specifiche come la generazione di immagini o i dati di Google Maps al prompt. Puoi anche dire quello che vuoi utilizzando il pulsante di sintesi vocale.
-- **Pulsante "Mi sento fortunato"**: se hai bisogno di un'idea creativa, utilizza il pulsante "Mi
-  sento fortunato" e Gemini genererà un prompt con un'idea di progetto
-  per aiutarti a iniziare.
-- **Remixa un progetto dalla galleria**: apri un progetto dalla [Galleria
-  app](https://aistudio.google.com/apps?source=showcase&hl=it) e seleziona **Copia app**.
-- **Importa un progetto da GitHub**: in modalità di creazione, seleziona
-  **Importa da GitHub** dal menu **Aggiungi file** (icona +) nella casella di immissione del prompt
-  per importare il codice esistente.
+- **从提示开始**：在“构建”模式下，使用输入框输入您要构建的内容的
+  说明。选择“AI 芯片”可向提示添加特定功能，例如图片生成或 Google 地图数据。您甚至可以使用语音转文字按钮说出您想要的内容。
+- **“手气不错”按钮**：如果您需要创意灵感，请使用“手气不错”按钮，Gemini 将生成一个包含项目想法的提示，帮助您入门。
+- **混搭媒体库中的项目**：从[应用
+  媒体库](https://aistudio.google.com/apps?source=showcase&hl=zh-cn)中打开一个项目，然后选择**复制应用**。
+- **从 GitHub 导入项目**：在“构建”模式下，从提示
+  输入框中的**添加文件**（+ 图标）菜单中选择
+  **Import from GitHub**（从 GitHub 导入），以导入现有代码。
 
-Una volta eseguito il prompt, vedrai generare il codice e i file necessari, con un'anteprima live della tua app che apparirà sul lato destro.
+运行提示后，您会看到必要的代码和文件生成，右侧会实时显示应用的预览效果。
 
-## Che cosa viene creato?
+## 创建了什么？
 
-Quando esegui il prompt, AI Studio crea un'applicazione completa. Puoi scegliere di creare un'**app web** o un'**app per Android nativa** utilizzando il selettore della piattaforma.
+运行提示时，AI Studio 会创建一个完整的应用。您可以使用平台选择器选择构建 **Web 应用** 或**原生 Android 应用** 。
 
-Per le **app web** (impostazione predefinita), AI Studio crea un ambiente full stack che include:
+对于 **Web 应用** （默认），AI Studio 会创建一个全栈环境，其中包括：
 
-- **Lato client**: un frontend web (React è l'impostazione predefinita).
-- **Lato server**: un runtime Node.js che consente chiamate API sicure,
-  connessioni al database e utilizzo di pacchetti npm.
+- **客户端**：Web 前端（默认使用 React）。
+- **服务器端**：Node.js 运行时，支持安全的 API 调用、
+  数据库连接和 npm 软件包使用。
 
-Per le **app Android**, AI Studio genera un progetto Kotlin e Jetpack Compose
-di cui puoi visualizzare l'anteprima in un emulatore basato su browser, installare su un dispositivo fisico,
-e pubblicare sul Play Store per i test. [Scopri di più sulla creazione di app Android
-apps](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it).
+对于 **Android 应用**，AI Studio 会生成一个 Kotlin 和 Jetpack Compose 项目
+，您可以在基于浏览器的模拟器中预览该项目，将其安装在实体设备上
+，并将其发布到 Play 商店进行测试。[详细了解如何构建 Android
+应用](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=zh-cn)。
 
-Puoi visualizzare il codice generato selezionando la scheda **Codice** nel riquadro di anteprima a destra. L'**agente Antigravity** gestisce in modo intelligente più file nello stack, assicurandosi che le modifiche vengano propagate correttamente.
+您可以通过选择右侧预览窗格中的**代码** 标签页来查看生成的代码。**Antigravity 智能体** 可以智能地管理堆栈中的多个文件，确保更改正确传播。
 
-### L'agente Antigravity
+### Antigravity 智能体
 
-L'**agente Antigravity** è la funzionalità di AI principale di [Google
-Antigravity](https://antigravity.google?hl=it) e ora i componenti principali dell'
-infrastruttura agentica sono alla base dell'esperienza della modalità di creazione in Google AI Studio. Va oltre la semplice generazione di codice mantenendo il contesto dell'intero progetto, gestendo più file e comprendendo istruzioni complesse per creare applicazioni full stack robuste.
+**Antigravity 智能体** 是 [Google
+Antigravity](https://antigravity.google?hl=zh-cn) 中的主要 AI 功能，现在
+智能体 Harness 的核心组件为 Google AI Studio 中的“构建”模式体验提供支持。它不仅能生成简单的代码，还能维护整个项目的上下文、管理多个文件并理解复杂的指令，从而构建稳健的全栈应用。
 
-Le sue funzionalità principali includono:
+主要功能包括：
 
-- **Consapevolezza del contesto**: mantiene il contesto dei prompt precedenti e degli stati dei file.
-- **Gestione di più file**: gestisce le dipendenze tra più file.
-- **Esecuzione verificata**: verifica gli aggiornamenti del codice per ridurre le allucinazioni.
+- **上下文感知**：维护先前提示和文件状态的上下文。
+- **多文件管理**：处理多个文件之间的依赖关系。
+- **验证执行**：验证代码更新以减少幻觉。
 
-## Funzionalità full stack
+## 全栈功能
 
-Google AI Studio sfrutta la potenza dell'ecosistema web moderno, consentendoti di creare prototipi non solo lato client.
+Google AI Studio 释放了现代 Web 生态系统的强大功能，让您不仅可以构建客户端原型。
 
-- **Runtime lato server e npm**: utilizza la vasta libreria di pacchetti npm. L'agente identificherà e installerà automaticamente i pacchetti necessari per la tua app (ad es. librerie specifiche per la visualizzazione dei dati o client API). Se vuoi, puoi anche richiedere pacchetti specifici.
-- **Gestione dei secret**: archivia in modo sicuro chiavi API e secret nel
-  **menu Impostazioni**. Questi sono accessibili nel codice lato server, mantenendoli al sicuro dall'esposizione lato client.
-- **Multiplayer**: crea esperienze di collaborazione in tempo reale direttamente in
-  AI Studio. Il runtime lato server gestisce lo stato e le connessioni necessarie per consentire agli utenti di interagire tra loro.
-- **Firebase Firestore e autenticazione**: esegui automaticamente il provisioning e la configurazione di Firebase, inclusi il database Firestore (archiviazione permanente dei dati) e l'autenticazione Firebase (flussi di accesso, in particolare "Accedi con Google"). L'agente gestisce l'intera procedura di configurazione e scrive persino il codice nella tua app per questi servizi.
-- **Integrazioni di Google Workspace**: collega la tua app alle API di Google Workspace
-  come Gmail, Fogli, Documenti, Drive, Calendar e altro ancora. AI Studio gestisce automaticamente tutta la configurazione OAuth.
+- **服务器端运行时和 npm** ：使用 npm 软件包的庞大库。智能体会自动识别并安装应用所需的软件包（例如，用于数据可视化或 API 客户端的特定库）。您也可以根据需要请求特定软件包。
+- **密钥管理**：在
+  **设置**菜单中安全地存储 API 密钥和密钥。这些密钥可在服务器端代码中访问，从而避免在客户端暴露。
+- **多人游戏**：直接在
+  AI Studio 中构建实时协作体验。服务器端运行时管理用户一起互动所需的状态和连接。
+- **Firebase Firestore 和 Authentication**：自动预配和设置
+  Firebase，包括 Firestore 数据库（持久数据存储）和
+  Firebase Authentication（登录流程，特别是“使用
+  Google 账号登录”）。智能体会处理整个设置过程，甚至在应用中为这些服务编写代码。
+- **Google Workspace 集成**：将应用连接到 Google Workspace
+  API，例如 Gmail、表格、文档、云端硬盘、日历等。AI Studio 会自动处理所有 OAuth 配置。
 
-[Scopri di più sullo sviluppo di app full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it)
+[详细了解如何开发全栈应用](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=zh-cn)
 
-### App Android
+### Android 应用
 
-Puoi anche creare app Android native utilizzando Kotlin e Jetpack Compose.
-Visualizza l'anteprima dell'app in un emulatore Android basato su browser, installala su un dispositivo fisico utilizzando ADB nel browser e pubblicala sul Play Store per i test interni.
+您还可以使用 Kotlin 和 Jetpack Compose 构建原生 Android 应用。
+在基于浏览器的 Android 模拟器中预览应用，使用浏览器中的 ADB 将其安装在实体设备上，并将其发布到 Play 商店进行内部测试。
 
-[Scopri di più sulla creazione di app Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it)
+[详细了解如何构建 Android 应用](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=zh-cn)
 
-## Continua a creare
+## 继续构建
 
-Una volta che Google AI Studio genera il codice iniziale per la tua applicazione, puoi continuare a perfezionarlo:
+Google AI Studio 为您的应用生成初始代码后，您可以继续对其进行优化：
 
-### Crea in Google AI Studio
+### 在 Google AI Studio 中构建
 
-- **Esegui iterazioni con Gemini**: utilizza il riquadro della chat in **modalità di creazione** per chiedere a Gemini
-  di apportare modifiche, aggiungere nuove funzionalità o modificare lo stile.
-- **Modifica il codice direttamente**: apri la **scheda Codice** nel riquadro di anteprima per
-  apportare modifiche live.
+- **使用 Gemini 进行迭代**：使用**构建模式** 中的聊天面板，要求 Gemini
+  进行修改、添加新功能或更改样式。
+- **直接修改代码**：打开预览面板中的**代码标签页**以
+  进行实时修改。
 
-### Sviluppa esternamente
+### 在外部开发
 
-Per workflow più avanzati, puoi sincronizzare o esportare il codice per lavorare nell'ambiente che preferisci:
+对于更高级的工作流，您可以同步或导出代码以在您偏好的环境中工作：
 
-- **Sincronizza con GitHub**: collega la tua app a un repository GitHub per abilitare la sincronizzazione
-  bidirezionale. Puoi inviare tramite push le modifiche richieste in AI Studio direttamente al repository con messaggi di commit generati dall'AI oppure recuperare le modifiche apportate localmente nell'IDE o dai colleghi in AI Studio. Gestisci lo stato di sincronizzazione in qualsiasi momento nella scheda **GitHub** in Impostazioni.
-- **Scarica e sviluppa localmente**: esporta il codice generato come **file
-  ZIP** e importalo nell'editor di codice.
+- **与 GitHub 同步**：将应用连接到 GitHub 代码库以启用
+  双向同步。您可以将 AI Studio 中提示的更改直接推送到代码库，并附上 AI 生成的提交消息，也可以将 IDE 中或队友在本地所做的更改拉回到 AI Studio 中。您可以随时在“设置”中的 **GitHub** 标签页中管理同步状态。
+- **下载并在本地开发**：将生成的代码导出为 **ZIP
+  文件** ，然后将其导入到代码编辑器中。
 
-## Funzionalità principali
+## 主要特性
 
-Google AI Studio include diverse funzionalità per rendere il processo di creazione intuitivo e visivo:
+Google AI Studio 包含多项功能，让构建过程直观且可视化：
 
-- **Crea ed esegui iterazioni di app full stack**: crea app full stack con solo
-  un prompt ed esegui iterazioni tramite la chat o la **modalità di annotazione**. La modalità di annotazione ti consente di evidenziare qualsiasi parte della UI dell'app e descrivere la modifica che vuoi apportare.
-- **Condividi ed esegui il deployment dell'app**: puoi condividere le tue creazioni con altri utenti per
-  collaborare o mostrare il tuo lavoro. Quando condividi, le chiamate API vengono conteggiate ai fini dei limiti di utilizzo. Se utilizzi modelli a pagamento, potrebbero essere applicati costi. Quando l'app è pronta, esegui il deployment in Cloud Run.
-- **Galleria di app**: la Galleria di app fornisce una libreria visiva di idee di progetto.
-  Puoi sfogliare le possibilità offerte da Gemini, visualizzare immediatamente l'anteprima delle applicazioni e remixarle per personalizzarle.
+- **创建和迭代全栈应用**：只需
+  一个提示即可创建全栈应用，并通过聊天或**注释模式**进行迭代。借助注释模式，您可以突出显示应用界面的任何部分，并描述您想要的更改。
+- **分享和部署应用**：您可以与他人分享您的作品以进行
+  协作或展示您的作品。分享时，API 调用会计入您的使用量限制。如果您使用付费模型，可能会产生费用。然后，当您的应用准备就绪后，将其部署到 Cloud Run。
+- **应用库**：应用库提供了一个项目想法的可视化库。您可以浏览 Gemini 的功能，即时预览应用，并混搭应用以打造自己的应用。
 
-## Esegui il deployment o archivia l'app
+## 部署或归档应用
 
-Quando l'applicazione è pronta, puoi eseguirne il deployment:
+应用准备就绪后，您可以部署它：
 
-- **Cloud Run**: esegui il deployment dell'applicazione come servizio scalabile.
-  Potrebbero essere applicati prezzi per [Google Cloud Run](https://cloud.google.com/run?hl=it) in base
-  all'utilizzo. Per scoprire di più sul deployment, vedi
-  [Eseguire il deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it).
-- **GitHub**: sincronizza il progetto con un repository GitHub nuovo o esistente
-  per gestire il codice sorgente o collaborare con i colleghi.
+- **Cloud Run**：将应用部署为可扩缩的服务。
+  [Google Cloud Run](https://cloud.google.com/run?hl=zh-cn) 的价格可能会根据使用情况
+  而定。如需详细了解部署，请参阅
+  [从 Google AI Studio 进行部署](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=zh-cn)。
+- **GitHub**：将项目与新的或现有的 GitHub 代码库同步
+  以管理源代码或与队友协作。
 
-## Limitazioni
+## 限制
 
-Questa sezione elenca le limitazioni attuali della modalità di creazione in Google AI Studio.
+本部分列出了 Google AI Studio 中“构建”模式的当前限制。
 
-### Gestione delle chiavi API
+### API 密钥管理
 
-Quando crei una nuova app che utilizza l'API Gemini, AI Studio configura automaticamente la chiave API Gemini come secret nell'ambiente lato server dell'app.
-Puoi visualizzare e gestire questa chiave nel riquadro **Secret**.
+当您创建使用 Gemini API 的新应用时，AI Studio 会自动将您的 Gemini API 密钥配置为应用服务器端环境中的密钥。
+您可以在**密钥** 面板中查看和管理此密钥。
 
-- **Configurazione automatica**: la variabile `GEMINI_API_KEY` viene configurata automaticamente. Non è necessaria alcuna configurazione manuale
-  per iniziare a creare.
-- **Solo lato server**: le chiavi API vengono inserite nel runtime lato server e
-  non sono mai incluse nel codice lato client.
-- **App esistenti**: per le app create prima del 14 maggio 2026, l'agente aggiornerà
-  automaticamente l'integrazione dell'API Gemini all'approccio lato server
-  consigliato la prossima volta che modifichi le funzionalità Gemini dell'app.
+- **自动设置**：系统会为您设置 `GEMINI_API_KEY`，无需手动
+  配置即可开始构建。
+- **仅限服务器端**：API 密钥会注入到服务器端运行时中，
+  绝不会包含在客户端代码中。
+- **现有应用**：对于在 2026 年 5 月 14 日之前构建的应用，当您下次修改应用的 Gemini 功能时，智能体会
+  自动将您的 Gemini API 集成升级到推荐的
+  服务器端方法。
 
-### Deployment al di fuori di Google AI Studio
+### 在 Google AI Studio 之外进行部署
 
-- **Cloud Run**: quando esegui il deployment in Cloud Run da AI Studio, la chiave API viene
-  inclusa in modo sicuro nell'ambiente lato server. L'app di cui è stato eseguito il deployment utilizzerà la chiave API per tutte le chiamate API Gemini degli utenti.
-- **Download ZIP**: se scarichi l'app come file ZIP per eseguirla
-  altrove, dovrai configurare la variabile di ambiente `GEMINI_API_KEY`
-  nell'ambiente di hosting. Poiché le chiamate API Gemini dell'app vengono effettuate dal codice lato server, la chiave non viene esposta agli utenti finali.
+- **Cloud Run**：当您从 AI Studio 部署到 Cloud Run 时，您的 API 密钥会
+  安全地包含在服务器端环境中。部署的应用将使用您的 API 密钥来处理所有用户的 Gemini API 调用。
+- **ZIP 下载**：如果您将应用下载为 ZIP 文件以在其他位置运行，则需要在托管环境中设置 `GEMINI_API_KEY` 环境变量。由于应用的 Gemini API 调用是从服务器端代码发出的，因此密钥不会向最终用户公开。
 
-### Errore durante la condivisione delle app
+### 分享应用时出错
 
-Se condividi la tua app e l'utente finale riscontra un errore **403 Accesso limitato** quando utilizza l'URL condiviso, potrebbe essere dovuto a uno dei seguenti motivi:
+如果您分享应用，而最终用户在使用共享网址时遇到 **403 Access Restricted** （访问受限）错误，则可能是由于以下原因之一：
 
-- **Estensioni del browser**: le estensioni per la privacy come Privacy Badger potrebbero bloccare l'app. Disattiva l'estensione per evitare l'errore.
-- **Problemi di creazione**: potrebbero esserci problemi con il codice attuale. Chiedi all'agente di "correggere eventuali problemi di creazione con il codice attuale" e poi condividi di nuovo l'URL.
+- **浏览器扩展程序**：Privacy Badger 等隐私扩展程序可能会阻止应用。停用该扩展程序以避免错误。
+- **构建问题**：当前代码可能存在问题。提示智能体“修复当前代码中的任何构建问题”，然后重新分享网址。
 
-## Domande frequenti
+## 常见问题解答
 
-### Che cos'è la modalità di creazione in AI Studio?
+### 什么是 AI Studio 中的“构建”？
 
-La modalità di creazione di AI Studio è una piattaforma progettata per trasformare un semplice prompt in un'applicazione basata sull'AI pronta per la produzione utilizzando Gemini. Descrivi ciò che vuoi creare con un prompt e Gemini genererà un'app per te. Puoi anche esplorare la nostra galleria per scoprire le possibilità offerte dall'API Gemini e remixare le app per personalizzarle.
+AI Studio Build 是一个平台，旨在帮助您使用 Gemini 从简单的提示到可用于生产用途的 AI 赋能的应用。使用提示描述您要构建的内容，Gemini 将为您生成一个应用。您还可以浏览我们的媒体库，了解 Gemini API 的功能，并混搭应用以打造自己的应用。
 
-### In che modo la modalità di creazione gestisce la mia chiave API Gemini?
+### “构建”如何处理我的 Gemini API 密钥？
 
-Quando crei un'app che utilizza l'API Gemini, AI Studio configura automaticamente la chiave API Gemini come secret lato server. Le chiamate API Gemini dell'app vengono effettuate dal codice lato server utilizzando questa chiave, quindi non viene mai esposta nel browser. Puoi visualizzare la chiave API nel riquadro **Secret** in Impostazioni.
+当您创建使用 Gemini API 的应用时，AI Studio 会自动将您的 Gemini API 密钥设置为服务器端密钥。应用的 Gemini API 调用是使用此密钥从服务器端代码发出的，因此绝不会在浏览器中公开。您可以在“设置”中的**密钥** 面板中查看 API 密钥。
 
-### La mia chiave API viene esposta quando condivido le app?
+### 分享应用时，我的 API 密钥是否会公开？
 
-No. La chiave API viene archiviata come secret lato server e non è mai inclusa nel codice lato client. Quando condividi l'app, gli altri utenti possono utilizzarla, ma non possono vedere la tua chiave API.
+不会。您的 API 密钥会存储为服务器端密钥，绝不会包含在客户端代码中。当您分享应用时，其他用户可以使用该应用，但无法看到您的 API 密钥。
 
-Quando condividi le tue app con altri utenti, le chiamate API vengono conteggiate ai fini dei limiti di utilizzo.
-Se utilizzi modelli a pagamento, potrebbero essere applicati costi. AI Studio ti avviserà durante la configurazione e prima della condivisione se la tua app potrebbe comportare costi.
+与他人分享应用时，API 调用会计入您的使用量限制。
+如果您使用付费模型，可能会产生费用。如果您的应用可能会产生费用，AI Studio 会在设置期间和分享之前提醒您。
 
-### Chi può vedere le mie app?
+### 谁可以看到我的应用？
 
-Per impostazione predefinita, la tua app è privata. Puoi condividere la tua app con altri utenti per consentire loro di utilizzarla. Gli utenti con cui condividi la tua app possono vedere il suo codice e creare un fork per i propri scopi. Se condividi la tua app con l'autorizzazione di modifica, gli altri utenti possono modificare il codice dell'app.
+默认情况下，您的应用处于非公开状态。您可以与其他用户分享应用，让他们使用该应用。与您分享应用的用户可以看到应用的代码，并将其派生出来以供自己使用。如果您分享应用时授予了修改权限，其他用户可以修改应用的代码。
 
-### Posso eseguire app al di fuori di AI Studio?
+### 我可以在 AI Studio 之外运行应用吗？
 
-Sì. Puoi eseguire il deployment dell'app in
-[Cloud Run](https://cloud.google.com/run?hl=it) da AI Studio, che
-assegna alla tua app un URL pubblico con la chiave API configurata in modo sicuro nell'
-ambiente lato server. Puoi anche scaricare l'app come file ZIP e ospitarla altrove. Dovrai impostare la variabile di ambiente `GEMINI_API_KEY` nell'ambiente di hosting. Poiché le chiamate API Gemini vengono effettuate dal codice lato server, la chiave rimane sicura.
+可以。您可以从 AI Studio 将应用部署到
+[Cloud Run](https://cloud.google.com/run?hl=zh-cn)，这会为您的应用提供一个公开网址，并在
+服务器端环境中安全地配置您的 API 密钥。您还可以将应用下载为 ZIP 文件并在其他位置托管，您需要在托管环境中设置 `GEMINI_API_KEY` 环境变量。由于 Gemini API 调用是从服务器端代码发出的，因此您的密钥会保持安全。
 
-Per scoprire di più sulle opzioni di deployment, vedi [Eseguire il deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it).
+如需详细了解部署选项，请参阅[从 Google AI Studio 进行部署](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=zh-cn)。
 
-### Posso sviluppare app localmente con i miei strumenti e poi condividerle qui?
+### 我可以在本地使用自己的工具开发应用，然后在此处分享吗？
 
-Sì. Puoi collegare la tua app AI Studio a un repository GitHub per sviluppare localmente utilizzando l'editor di codice o gli strumenti CLI che preferisci, inviare tramite push le modifiche a GitHub e poi recuperare questi aggiornamenti direttamente in AI Studio utilizzando la scheda **GitHub** in Impostazioni.
+可以。您可以将 AI Studio 应用连接到 GitHub 代码库，以便在本地使用您偏好的代码编辑器或 CLI 工具进行开发，将更改推送到 GitHub，然后使用“设置”中的 **GitHub** 标签页将这些更新直接拉回到 AI Studio 中。
 
-### Come posso utilizzare un database o un altro spazio di archiviazione con le mie app?
+### 如何将数据库或其他存储与我的应用搭配使用？
 
-Le app AI Studio sono app standard in esecuzione in un container Cloud Run. Puoi utilizzare qualsiasi soluzione di archiviazione a cui puoi connetterti tramite una rete, a condizione che non esista un firewall che impedisca l'accesso da un intervallo di indirizzi IP dinamici.
+AI Studio 应用是在 Cloud Run 容器中运行的标准应用。只要没有防火墙阻止来自动态 IP 范围的访问，您就可以使用任何可以通过网络连接到的存储解决方案。
 
-Stiamo lavorando per aggiungere il supporto diretto per l'archiviazione in futuro, che potrai configurare direttamente in AI Studio.
+我们正在努力在未来添加对存储的直接支持，您将可以直接在 AI Studio 中进行配置。
 
-### Come posso accedere al microfono, alla webcam e ad altre API Navigator?
+### 如何访问麦克风、网络摄像头和其他 Navigator API？
 
-Per garantire che gli spettatori siano a conoscenza dell'utilizzo della webcam o di altri
-dispositivi da parte di un'app, richiediamo un'ulteriore conferma prima che l'app possa accedere
-a queste [API Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
-I creatori di app possono aggiungere queste richieste di autorizzazione al file `metadata.json` dell'app. Ad esempio:
+为了确保观看者了解应用对其网络摄像头或其他
+设备的使用情况，我们需要在应用访问
+这些 [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) 之前获得额外的确认。
+应用创建者可以将这些权限请求添加到应用的 `metadata.json` 文件中。例如：
 
 ```
 {
@@ -226,80 +225,77 @@ I creatori di app possono aggiungere queste richieste di autorizzazione al file 
 }
 ```
 
-I valori supportati per `requestFramePermissions` sono un sottoinsieme delle
-funzionalità standard [controllate dalle norme](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+`requestFramePermissions` 的支持值是
+标准 [政策控制功能的子集](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md)。
 
-### Come posso utilizzare GitHub con le mie app?
+### 如何将 GitHub 与我的应用搭配使用？
 
-AI Studio supporta la sincronizzazione bidirezionale con GitHub:
+AI Studio 支持与 GitHub 进行双向同步：
 
-- **Importa un repository**: in modalità di creazione, seleziona **Importa da GitHub**
-  dal menu **Aggiungi file** (icona +) nella casella di immissione del prompt per importare
-  il codice esistente.
-- **Collega un repository**: in Impostazioni, apri la scheda **GitHub** per creare un
-  nuovo repository GitHub dalla tua app o collegarti a uno esistente.
-- **Sincronizzazione bidirezionale**: invia tramite push le modifiche richieste in AI Studio direttamente al
-  repository con messaggi di commit generati dall'AI oppure recupera le modifiche apportate
-  esternamente (ad es. modifiche IDE locali o richieste di pull dei colleghi) in AI
-  Studio.
-- **Risolvi i conflitti di unione**: se le modifiche sono in conflitto durante la sincronizzazione con
-  GitHub, AI Studio fornisce una finestra di dialogo **Risolvi conflitti** con un
-  visualizzatore di differenze affiancato, che ti consente di esaminare le differenze e scegliere
-  se mantenere la versione di AI Studio o GitHub per ogni file in conflitto.
+- **导入代码库**：在“构建”模式下，从提示输入框中的**添加文件**（+ 图标）菜单中选择**Import from GitHub**
+  （从 GitHub 导入），以导入
+  现有代码。
+- **关联代码库**：在“设置”中，打开 **GitHub** 标签页，以从应用创建
+  新的 GitHub 代码库或关联到现有代码库。
+- **双向同步**：将 AI Studio 中提示的更改直接推送到
+  代码库，并附上 AI 生成的提交消息，也可以将外部所做的更改（例如本地 IDE 修改或队友拉取请求）拉回到 AI
+  Studio 中。
+- **解决合并冲突**：如果与
+  GitHub 同步时更改发生冲突，AI Studio 会提供一个**解决冲突** 对话框，其中包含
+  并排差异查看器，让您可以查看差异并选择
+  是保留 AI Studio 版本还是 GitHub 版本（针对每个冲突的文件）。
 
-### Posso concedere ad altri utenti l'accesso in modifica alla mia app?
+### 我可以向其他用户授予应用的修改权限吗？
 
-AI Studio non supporta la modifica collaborativa diretta in tempo reale.
-Tuttavia, puoi collaborare con i colleghi collegando la tua app a un repository GitHub condiviso. I colleghi possono inviare tramite push le modifiche o aprire richieste di pull su GitHub e tu puoi recuperare questi aggiornamenti in AI Studio.
+AI Studio 不支持直接实时协作修改。
+不过，您可以将应用关联到共享的 GitHub 代码库，以便与队友协作。队友可以在 GitHub 上推送更改或打开拉取请求，您可以将这些更新拉到 AI Studio 中。
 
-### Perché la mia app è stata segnalata per violazione delle norme?
+### 为什么我的应用被标记为违反政策？
 
-Disponiamo di sistemi che esaminano automaticamente le app per assicurarsi che rispettino le nostre norme. Se rileviamo che un'app viola le nostre norme, verrà rimossa da AI Studio. Le violazioni delle norme possono includere, a titolo esemplificativo:
+我们有自动审核应用的系统，以确保应用符合我们的政策。如果我们发现应用违反了我们的政策，我们会将该应用从 AI Studio 中移除。违规行为可能包括但不限于以下内容：
 
-- App che contengono malware, phishing o furto d'identità
-- App che mostrano o distribuiscono contenuti che violano le norme relative alle immagini pedopornografiche
-- App che mostrano o distribuiscono contenuti che violano le norme relative alle molestie
-- App che mostrano o distribuiscono contenuti che violano le norme relative all'incitamento all'odio
-- App che mostrano o distribuiscono contenuti che violano le norme relative alla tratta di esseri umani
-- App che mostrano o distribuiscono contenuti che violano le norme relative ai contenuti sessualmente espliciti
-- App che mostrano o distribuiscono contenuti che violano le norme relative a contenuti violenti e cruenti
-- App che mostrano o distribuiscono contenuti che violano le norme relative a contenuti dannosi o pericolosi
+- 包含恶意软件、钓鱼式攻击或冒充行为的应用
+- 显示或分发违反儿童性虐待影像政策的内容的应用
+- 显示或分发违反骚扰政策的内容的应用
+- 显示或分发违反仇恨言论政策的内容的应用
+- 显示或分发违反人口贩卖政策的内容的应用
+- 显示或分发违反露骨色情内容政策的内容的应用
+- 显示或分发违反暴力和血腥内容政策的内容的应用
+- 显示或分发违反有害或危险内容政策的内容的应用
 
-Se la tua app è stata segnalata per una violazione delle norme e ritieni che si tratti di un errore, puoi presentare un ricorso. Ripetute violazioni delle nostre norme potrebbero comportare la cessazione del tuo accesso ad AI Studio.
+如果您的应用被标记为违反政策，但您认为这是错误的，可以提交申诉。屡次违反我们的政策可能会导致您无法再访问 AI Studio。
 
-### Quali sono le mie responsabilità in qualità di sviluppatore di app?
+### 作为应用开发者，我的责任是什么？
 
-Ti ricordiamo che, in qualità di proprietario dell'applicazione, sei responsabile del suo comportamento e di tutti i dati che gestisce. È incluso quanto segue:
+请注意，作为应用的所有者，您需要对应用的行为及其处理的所有数据负责。其中包括：
 
-- **Conformità legale e diritti di terze parti:** assicurati che la tua app sia conforme a tutte le leggi e le normative vigenti e non violi i diritti di terzi, inclusi i diritti di proprietà intellettuale e di privacy.
-- **Monitoraggio dei contenuti:** potrebbero essere applicati termini aggiuntivi ad altri servizi utilizzati dalla tua app. Ad esempio,
-  [i Termini di servizio di Google Cloud](https://cloud.google.com/terms?hl=it),
-  applicabili a Firestore, richiedono ai clienti che ospitano contenuti di terze parti di
-  pubblicare norme che definiscono i contenuti vietati (ad es. contenuti
-  illegali) e di monitorare la presenza di questi contenuti illegali.
-- **Implementazione sicura:** implementa le misure di sicurezza e gli strumenti di moderazione necessari per impedire l'uso improprio dell'applicazione.
+- **法律合规性和第三方权利**： 确保您的应用符合所有适用的法律法规，并且不侵犯他人的权利，包括知识产权和隐私权。
+- **内容监控**： 您的应用使用的
+  其他服务可能需要遵守附加条款。例如，
+  [适用于 Firestore 的 Google Cloud 服务条款](https://cloud.google.com/terms?hl=zh-cn)要求托管第三方内容的客户
+  发布政策，以定义禁止的内容（例如非法
+  内容），并监控是否存在非法内容。
+- **安全实现**： 实现必要的安全措施和审核工具，以防止应用被滥用。
 
-Tieni presente le [limitazioni d'uso](https://ai.google.dev/gemini-api/terms?hl=it#use-restrictions)
-indicate nei Termini di servizio.
+请注意[服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn#use-restrictions)
+中的使用限制。
 
-### Quali termini si applicano alle app nella galleria di app di AI Studio?
+### 哪些条款适用于 AI Studio 中应用库中的应用？
 
-I [Termini di servizio aggiuntivi dell'API Gemini](https://ai.google.dev/gemini-api/terms?hl=it)
-si applicano all'utilizzo delle app presenti nella galleria di app di AI Studio, salvo
-diversa indicazione.
+除非另有说明，否则 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn) 适用于使用 AI Studio 中应用库中的精选应用。
 
-## Passaggi successivi
+## 后续步骤
 
-- [Sviluppare app full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it) (web)
-- [Creare app Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=it)
-- Vedi esempi nella [Galleria app](https://aistudio.google.com/apps?source=showcase&hl=it).
+- [开发全栈应用](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=zh-cn) (Web)
+- [构建 Android 应用](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=zh-cn)
+- 在[应用媒体库](https://aistudio.google.com/apps?source=showcase&hl=zh-cn)中查看示例。
 
-Invia feedback
+发送反馈
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ultimo aggiornamento 2026-09-11 UTC.
+最后更新时间 (UTC)：2026-09-11。
 
-Vuoi dirci altro?
+需要向我们提供更多信息？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-11 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-11。"],[],[]]

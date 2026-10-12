@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=pl
-fetched_at: 2026-10-05T06:42:04.808767+00:00
+fetched_at: 2026-10-12T06:59:25.420222+00:00
 title: "Rozpoznawanie film\u00f3w \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

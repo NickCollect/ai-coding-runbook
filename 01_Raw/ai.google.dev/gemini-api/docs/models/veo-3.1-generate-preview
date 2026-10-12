@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=ar
-fetched_at: 2026-10-05T06:33:09.661881+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=id
+fetched_at: 2026-10-12T07:03:49.518952+00:00
 title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
 # Veo 3.1
 
-محرك سينمائي متطوّر مصمّم لسرد القصص الإبداعية المتطورة وإنتاج الفيديوهات التجريبية يُعدّ نموذج Veo 3.1 الأفضل لإنتاج فيديوهات احترافية بدقة 4K، وإنشاء صوت متزامن بشكل تلقائي، وتنفيذ حركات معقّدة للكاميرا تتطلّب أعلى مستوى من الاتساق الزمني والتحكّم الفني.
+Mesin sinematik canggih yang dirancang untuk pembuatan video eksperimental dan penceritaan kreatif kelas atas. Veo 3.1 paling cocok untuk output 4K kelas profesional, pembuatan audio yang disinkronkan secara native, dan gerakan kamera kompleks yang memerlukan tingkat konsistensi temporal dan kontrol artistik tertinggi.
 
-[تجربة النموذج في Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=ar)
+[Coba di Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=id)
 
-## الوثائق
+## Dokumentasi
 
-انتقِل إلى صفحة [إنشاء الفيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar) للاطّلاع على تغطية كاملة لـ
-الميزات والإمكانات.
+Buka halaman [Pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id) untuk mengetahui cakupan lengkap
+fitur dan kemampuannya.
 
 ## veo-3.1-generate-preview
 
-| الموقع | الوصف |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardModel code | ‫**Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveSupported data types | **الإدخال**  نص، صورة  **الناتج**  فيديو مع صوت |
-| token\_autoLimits | **إدخال نص**  ‫1,024 رمزًا مميّزًا  **فيديو الناتج**  1 |
-| calendar\_monthLatest update | يناير 2026 |
+| id\_cardKode model | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar  **Output**  Video dengan audio |
+| token\_autoBatas | **Input teks**  1.024 token  **Video output**  1 |
+| calendar\_monthPembaruan terbaru | Januari 2026 |
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

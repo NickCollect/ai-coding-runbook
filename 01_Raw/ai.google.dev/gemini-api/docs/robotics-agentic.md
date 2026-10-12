@@ -1,34 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=he
-fetched_at: 2026-10-05T06:48:20.395530+00:00
-title: "\u05e8\u05d0\u05d9\u05d9\u05d4 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05e1\u05d5\u05db\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ko
+fetched_at: 2026-10-12T07:01:13.359017+00:00
+title: "\uc5d0\uc774\uc804\ud2b8\ud615 \ube44\uc804 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-שליחת משוב
+의견 보내기
 
-# ראייה באמצעות סוכנים
+# 에이전트형 비전
 
-מודלים של Gemini Robotics ER יכולים לכתוב ולהריץ קוד Python כדי לערוך תמונות ולהחיל לוגיקה לפני שהם עונים. בדף הזה יש דוגמאות להרצת קוד: זיהוי אובייקטים עם זום וחיתוך, קריאת מכשירים, מדידת נוזלים, קריאת לוחות מעגלים והערות לתמונות.
+Gemini Robotics ER 모델은 Python 코드를 작성하고 실행하여 이미지를 조작하고 답변하기 전에 로직을 적용할 수 있습니다. 이 페이지에서는 코드 실행 예시(확대/축소 및 자르기를 사용한 객체 감지, 계측기 읽기, 유체 측정, 회로 기판 읽기, 이미지 주석)를 다룹니다.
 
-כדי להתאים את הדוגמאות האלה לתרחיש השימוש שלכם, צריך להחליף את טקסט ההנחיה ואת קובץ התמונה שהועלה בטקסט ובתמונה שלכם. אפשר גם לשנות את סכימת ה-JSON המבוקשת בהנחיה כך שתתאים למבנה הפלט שהאפליקציה צריכה, או להוסיף `system_instruction` כדי לאכוף את פורמט הפלט ואת הדיוק שלו.
+이러한 예시를 자체 사용 사례에 맞게 조정하려면 프롬프트 텍스트와 업로드된 이미지 파일을 자체 파일로 바꾸세요. 프롬프트에서 요청된 JSON 스키마를 애플리케이션에 필요한 출력 구조와 일치하도록 조정하거나 `system_instruction`을 추가하여 출력 형식과 정밀도를 적용할 수도 있습니다.
 
-קוד מלא שניתן להרצה זמין ב-[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+실행 가능한 전체 코드는
+[로봇공학 Cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
 
-## רמת ההעמקה
+## 사고 수준
 
-אתם יכולים לשנות את רמת החשיבה של המודל כדי לשפר את הדיוק על חשבון זמן האחזור. משימות מרחביות כמו זיהוי אובייקטים מתבצעות היטב ברמת חשיבה נמוכה. משימות מורכבות כמו ספירה או הערכת משקל מפיקות תועלת מרמת חשיבה גבוהה יותר.
+모델의 사고 수준을 제어하여 지연 시간과 정확도를 절충할 수 있습니다. 객체 감지와 같은 공간 작업은 낮은 사고 수준에서 잘 작동합니다. 계산 또는 무게 추정과 같은 복잡한 작업은 더 높은 사고 수준에서 이점을 얻습니다.
 
-בדוגמה הבאה, רמת החשיבה נקבעת כ-`high` למשימת ספירה מורכבת:
+다음 예시에서는 복잡한 계산 작업의 사고 수준을 `high`로 설정합니다.
 
 ### Python
 
@@ -57,11 +58,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-פרטים נוספים מופיעים במאמר בנושא [חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he).
+자세한 내용은 [사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)를 참고하세요.
 
-## זיהוי אובייקטים (שינוי גודל וחיתוך)
+## 객체 감지 (확대/축소 및 자르기)
 
-בדוגמה הבאה נעשה שימוש בביצוע קוד כדי להגדיל ולחתוך תמונה לתצוגה ברורה יותר כשמזהים אובייקטים ומחזירים תיבות תוחמות.
+다음 예시에서는 코드 실행을 사용하여 객체를 감지하고 경계 상자를 반환할 때 더 명확하게 볼 수 있도록 이미지를 확대/축소하고 자릅니다.
 
 ### Python
 
@@ -95,7 +96,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-פלט המודל ייראה בערך כך:
+모델 출력은 다음 JSON 응답과 유사합니다.
 
 ```
 [
@@ -107,13 +108,13 @@ print(interaction.output_text)
 ]
 ```
 
-בתמונה הבאה מוצגות התיבות שהוחזרו מהמודל.
+다음 이미지는 모델에서 반환된 상자를 보여줍니다.
 
-![דוגמה להצגת תיבות תוחמות לאובייקטים שנמצאו](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=he)
+![발견된 객체의 경계 상자를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=ko)
 
-## לקרוא מד אנלוגי ולהפעיל לוגיקה
+## 아날로그 게이지 읽기 및 로직 적용
 
-בדוגמה הבאה אפשר לראות איך משתמשים במודל כדי לקרוא מד אנלוגי ולבצע חישובי זמן. היא משתמשת בהוראת מערכת כדי לאכוף פלט JSON.
+다음 예시에서는 모델을 사용하여 아날로그 게이지를 읽고 시간 계산을 실행하는 방법을 보여줍니다. 시스템 명령어를 사용하여 JSON 출력을 적용합니다.
 
 ### Python
 
@@ -144,9 +145,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## מדידת נוזל במיכל
+## 컨테이너의 유체 측정
 
-בדוגמה הבאה מוצג שימוש בהרצת קוד כדי למדוד את רמת הנוזל במיכל.
+다음 예시에서는 코드 실행을 사용하여 컨테이너의 유체 수준을 측정하는 방법을 보여줍니다.
 
 ### Python
 
@@ -176,9 +177,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## קריאת סימונים בלוח מעגלים
+## 회로 기판의 표시 읽기
 
-בדוגמה הבאה מוצג איך להשתמש בהרצת קוד כדי לקרוא את הסימונים בלוח מעגלים.
+다음 예시에서는 코드 실행을 사용하여 회로 기판의 표시를 읽는 방법을 보여줍니다.
 
 ### Python
 
@@ -208,11 +209,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-![דוגמה שמציגה סימונים בלוח מעגלים](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=he)
+![회로 기판의 표시를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=ko)
 
-## הערה לתמונה
+## 이미지 주석
 
-בדוגמה הבאה אפשר לראות איך משתמשים בהרצת קוד כדי להוסיף הערות לתמונה (למשל, ציור של חצים להוראות סילוק) ולהחזיר את התמונה ששונתה.
+다음 예시에서는 코드 실행을 사용하여 이미지에 주석을 달고 (예: 폐기 안내 화살표 그리기) 수정된 이미지를 반환하는 방법을 보여줍니다.
 
 ### Python
 
@@ -246,11 +247,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-זוהי דוגמה לקלט של תמונה.
+다음은 이미지 입력의 예입니다.
 
-![דוגמה שמציגה שעון לקריאה](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=he)
+![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=ko)
 
-הפלט של המודל ייראה כך:
+모델 출력은 다음과 유사합니다.
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -259,18 +260,18 @@ print(interaction.output_text)
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## המאמרים הבאים
+## 다음 단계
 
-- [תיזמור משימות](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=he) – משימות ארוכות טווח עם ממשקי API מותאמים אישית של רובוטים.
-- [רובוטיקה עם סטרימינג](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=he) – סטרימינג דו-כיווני בזמן אמת (Gemini Robotics ER 2 בלבד).
-- [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=he) – איתור רגעים וסיווג התקדמות (Gemini Robotics ER 2 בלבד).
+- [작업 조정](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko) - 맞춤 로봇 API를 사용한 장기 작업
+- [스트리밍을 사용한 로봇공학](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko) - 실시간 양방향 스트리밍 (Gemini Robotics ER 2만 해당)
+- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko) - 순간 찾기 및 진행률 분류 (Gemini Robotics ER 2만 해당)
 
-שליחת משוב
+의견 보내기
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-עדכון אחרון: 2026-09-08 (שעון UTC).
+최종 업데이트: 2026-09-08(UTC)
 
-רוצה לתת לנו משוב?
+의견을 전달하고 싶나요?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-08 (שעון UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-08(UTC)"],[],[]]

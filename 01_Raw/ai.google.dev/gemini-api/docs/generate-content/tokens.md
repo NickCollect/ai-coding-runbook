@@ -1,71 +1,71 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=vi
-fetched_at: 2026-10-05T06:51:01.331664+00:00
-title: "T\u00ecm hi\u1ec3u v\u00e0 t\u00ednh m\u00e3 th\u00f4ng b\u00e1o \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=pl
+fetched_at: 2026-10-12T07:02:02.547281+00:00
+title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
 
-Gửi ý kiến phản hồi
+Prześlij opinię
 
-# Tìm hiểu và tính mã thông báo
+# Zrozumienie i liczenie tokenów
 
-Gemini và các mô hình AI tạo sinh khác xử lý dữ liệu đầu vào và đầu ra ở mức độ chi tiết được gọi là *mã thông báo*.
+Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe w jednostkach zwanych *tokenami*.
 
-**Đối với các mô hình Gemini, một mã thông báo tương đương với khoảng 4 ký tự.
-100 mã thông báo tương đương với khoảng 60 – 80 từ tiếng Anh.**
+**W przypadku modeli Gemini token odpowiada około 4 znakom.
+100 tokenów to około 60–80 słów w języku angielskim.**
 
-## Giới thiệu về mã thông báo
+## Informacje o tokenach
 
-Mã thông báo có thể là các ký tự đơn như `z` hoặc toàn bộ từ như `cat`. Các từ dài được chia thành nhiều mã thông báo. Tập hợp tất cả mã thông báo mà mô hình sử dụng được gọi là từ vựng và quá trình chia văn bản thành mã thông báo được gọi là *phân tách thành mã thông báo*.
+Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny – *tokenizacją*.
 
-Khi tính năng thanh toán được bật, [chi phí của một lệnh gọi đến Gemini API](https://ai.google.dev/pricing?hl=vi) được
-xác định một phần dựa trên số lượng mã thông báo đầu vào và đầu ra. Vì vậy, việc biết cách
-đếm mã thông báo có thể hữu ích.
+Gdy płatności są włączone, [koszt wywołania interfejsu Gemini API](https://ai.google.dev/pricing?hl=pl) jest
+częściowo określany przez liczbę tokenów wejściowych i wyjściowych, dlatego warto wiedzieć, jak je
+zliczać.
 
-Bạn có thể thử đếm mã thông báo trong Colab của chúng tôi.
+Możesz wypróbować zliczanie tokenów w Colab.
 
 |  |  |  |
 | --- | --- | --- |
-| [Xem trên ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | [Dùng thử sổ tay Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=vi) | [Xem sổ tay trên GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=vi) |
+| [Wyświetl na ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | [Wypróbuj notatnik Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) | [Wyświetl notatnik na GitHubie](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=pl) |
 
-## Đếm mã thông báo
+## Zliczanie tokenów
 
-Tất cả dữ liệu đầu vào và đầu ra từ Gemini API đều được phân tách thành mã thông báo, bao gồm văn bản, tệp hình ảnh và các phương thức không phải văn bản khác.
+Wszystkie dane wejściowe i wyjściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty inne niż tekstowe.
 
-Bạn có thể đếm mã thông báo theo những cách sau:
+Tokeny możesz zliczać na te sposoby:
 
-- **Gọi [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=vi) bằng dữ liệu đầu vào
-  của yêu cầu.**  
-   Hàm này chỉ trả về tổng số mã thông báo trong *dữ liệu đầu vào*. Bạn có thể thực hiện lệnh gọi này trước khi gửi dữ liệu đầu vào đến mô hình để kiểm tra kích thước của yêu cầu.
-- **Sử dụng thuộc tính `usage_metadata` trên đối tượng `response` sau khi
-  gọi `generate_content`.**  
-   Hàm này trả về tổng số
-  mã thông báo trong *cả dữ liệu đầu vào và đầu ra*: `total_token_count`.  
-   Hàm này cũng trả về số lượng mã thông báo của dữ liệu đầu vào và đầu ra riêng biệt: `prompt_token_count` (mã thông báo đầu vào) và `candidates_token_count` (mã thông báo đầu ra).
+- **Wywołaj [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=pl) z danymi wejściowymi
+  żądania.**  
+   Zwraca to łączną liczbę tokenów *tylko w danych wejściowych*. Możesz wykonać to wywołanie przed wysłaniem danych wejściowych do modelu, aby sprawdzić rozmiar żądań.
+- **Użyj atrybutu `usage_metadata` w obiekcie `response` po
+  wywołaniu `generate_content`.**  
+   Zwraca to łączną liczbę
+  tokenów *zarówno w danych wejściowych, jak i wyjściowych*: `total_token_count`.  
+   Zwraca też oddzielnie liczbę tokenów w danych wejściowych i wyjściowych: `prompt_token_count` (tokeny wejściowe) i `candidates_token_count` (tokeny wyjściowe).
 
-  Nếu bạn đang sử dụng mô hình [tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi), thì các mã thông báo được dùng trong quá trình tư duy
-  sẽ được trả về trong `thoughts_token_count`. Và nếu bạn đang sử dụng
-  [tính năng lưu vào bộ nhớ đệm theo Ngữ cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi), thì số lượng mã thông báo được lưu vào bộ nhớ đệm sẽ nằm trong `cached_content_token_count`.
+  Jeśli używasz modelu [myślącego, tokeny użyte podczas procesu myślenia
+  są zwracane w `thoughts_token_count`.](https://ai.google.dev/gemini-api/docs/thinking?hl=pl) A jeśli używasz
+  [buforowania kontekstu](https://ai.google.dev/gemini-api/docs/caching?hl=pl), liczba tokenów w pamięci podręcznej będzie w `cached_content_token_count`.
 
-### Đếm mã thông báo văn bản
+### Zliczanie tokenów tekstowych
 
-Nếu bạn gọi `count_tokens` bằng dữ liệu đầu vào chỉ có văn bản, thì hàm này sẽ trả về số lượng mã thông báo của văn bản trong *dữ liệu đầu vào* (`total_tokens`). Bạn có thể thực hiện lệnh gọi này trước khi gọi `generate_content` để kiểm tra kích thước của yêu cầu.
+Jeśli wywołasz `count_tokens` z danymi wejściowymi zawierającymi tylko tekst, zwróci ona liczbę tokenów tekstu *tylko w danych wejściowych* (`total_tokens`). Możesz wykonać to wywołanie przed wywołaniem `generate_content`, aby sprawdzić rozmiar żądań.
 
-Một lựa chọn khác là gọi `generate_content`, sau đó sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận các giá trị sau:
+Inną opcją jest wywołanie `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Số lượng mã thông báo riêng biệt của dữ liệu đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và dữ liệu đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả dữ liệu đầu vào và đầu ra* (`total_token_count`)
+- Oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`).
+- Liczba tokenów w procesie myślenia (`thoughts_token_count`).
+- Łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
 ### Python
 
@@ -140,17 +140,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### Đếm mã thông báo nhiều lượt (trò chuyện)
+### Zliczanie tokenów czatu wieloetapowego
 
-Nếu bạn gọi `count_tokens` bằng nhật ký trò chuyện, thì hàm này sẽ trả về tổng số mã thông báo của văn bản từ từng vai trò trong cuộc trò chuyện (`total_tokens`).
+Jeśli wywołasz `count_tokens` z historią czatu, zwróci ona łączną liczbę tokenów tekstu z każdej roli w czacie (`total_tokens`).
 
-Một lựa chọn khác là gọi `send_message`, sau đó sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận các giá trị sau:
+Inną opcją jest wywołanie `send_message`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Số lượng mã thông báo riêng biệt của dữ liệu đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và dữ liệu đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả dữ liệu đầu vào và đầu ra* (`total_token_count`)
+- Oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`).
+- Liczba tokenów w procesie myślenia (`thoughts_token_count`).
+- Łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
-Để biết lượt trò chuyện tiếp theo của bạn sẽ có kích thước bao nhiêu, bạn cần thêm lượt trò chuyện đó vào nhật ký khi gọi `count_tokens`.
+Aby dowiedzieć się, jak duża będzie kolejna tura rozmowy, musisz dołączyć ją do historii, gdy wywołujesz `count_tokens`.
 
 ### Python
 
@@ -276,33 +276,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### Đếm mã thông báo đa phương thức
+### Zliczanie tokenów multimodalnych
 
-Tất cả dữ liệu đầu vào cho Gemini API đều được phân tách thành mã thông báo, bao gồm văn bản, tệp hình ảnh và các phương thức không phải văn bản khác. Hãy lưu ý những điểm chính cấp cao sau đây về việc phân tách thành mã thông báo của dữ liệu đầu vào đa phương thức trong quá trình xử lý bằng Gemini API:
+Wszystkie dane wejściowe interfejsu Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty inne niż tekstowe. Podczas przetwarzania przez interfejs Gemini API zwróć uwagę na te najważniejsze informacje o tokenizacji danych wejściowych multimodalnych:
 
-- Dữ liệu đầu vào hình ảnh có cả hai kích thước <= 384 pixel được tính là 258 mã thông báo. Hình ảnh có một hoặc cả hai kích thước lớn hơn sẽ được cắt và điều chỉnh tỷ lệ khi cần thành các ô 768x768 pixel, mỗi ô được tính là 258 mã thông báo.
-- Tệp video và âm thanh được chuyển đổi thành mã thông báo theo các tỷ lệ cố định sau: video ở mức 263 mã thông báo mỗi giây và âm thanh ở mức 32 mã thông báo mỗi giây.
+- Dane wejściowe obrazu o obu wymiarach <= 384 piksele są liczone jako 258 tokenów. Obrazy większe w jednym lub obu wymiarach są w razie potrzeby przycinane i skalowane do kafelków o wymiarach 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
+- Pliki wideo i audio są konwertowane na tokeny według tych stałych stawek: wideo – 263 tokeny na sekundę, a audio – 32 tokeny na sekundę.
 
-#### Độ phân giải của nội dung nghe nhìn
+#### Rozdzielczości multimediów
 
-[Các mô hình Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=vi#gemini-3) giới thiệu khả năng kiểm soát chi tiết đối với
-quá trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi hình ảnh đầu vào hoặc khung video.**
-Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản chi tiết hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ.
+[Modele Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=pl#gemini-3) wprowadzają szczegółową kontrolę nad
+przetwarzaniem obrazu multimodalnego za pomocą parametru `media_resolution`. Parametr `media_resolution` określa **maksymalną liczbę tokenów przydzielonych na obraz wejściowy lub klatkę wideo**.
+Wyższe rozdzielczości poprawiają zdolność modelu do odczytywania drobnego tekstu lub identyfikowania małych szczegółów, ale zwiększają zużycie tokenów i opóźnienie.
 
-Để biết thêm thông tin chi tiết về tham số này và cách tham số này có thể ảnh hưởng đến việc tính toán mã thông báo,
-hãy xem hướng dẫn về [độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=vi).
+Więcej informacji o tym parametrze i jego wpływie na obliczenia tokenów znajdziesz w przewodniku po rozdzielczości multimediów.
+Zobacz przewodnik po [rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pl).
 
-#### Tệp hình ảnh
+#### Pliki graficzne
 
-Nếu bạn gọi `count_tokens` bằng dữ liệu đầu vào văn bản và hình ảnh, thì hàm này sẽ trả về số lượng mã thông báo kết hợp của văn bản và hình ảnh trong *dữ liệu đầu vào* (`total_tokens`). Bạn có thể thực hiện lệnh gọi này trước khi gọi `generate_content` để kiểm tra kích thước của yêu cầu. Bạn cũng có thể tuỳ ý gọi `count_tokens` trên văn bản và tệp riêng biệt.
+Jeśli wywołasz `count_tokens` z danymi wejściowymi zawierającymi tekst i obraz, zwróci ona łączną liczbę tokenów tekstu i obrazu *tylko w danych wejściowych* (`total_tokens`). Możesz wykonać to wywołanie przed wywołaniem `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać `count_tokens` osobno dla tekstu i pliku.
 
-Một lựa chọn khác là gọi `generate_content`, sau đó sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận các giá trị sau:
+Inną opcją jest wywołanie `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Số lượng mã thông báo riêng biệt của dữ liệu đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và dữ liệu đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả dữ liệu đầu vào và đầu ra* (`total_token_count`)
+- Oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`).
+- Liczba tokenów w procesie myślenia (`thoughts_token_count`).
+- Łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
-Ví dụ sử dụng hình ảnh đã tải lên từ File API:
+Przykład, który używa przesłanego obrazu z interfejsu File API:
 
 ### Python
 
@@ -402,7 +402,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-Ví dụ cung cấp hình ảnh dưới dạng dữ liệu nội tuyến:
+Przykład, który udostępnia obraz jako dane wbudowane:
 
 ### Python
 
@@ -499,20 +499,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### Tệp video hoặc âm thanh
+#### Pliki wideo lub audio
 
-Âm thanh và video được chuyển đổi thành mã thông báo theo các tỷ lệ cố định sau:
+Audio i wideo są konwertowane na tokeny według tych stałych stawek:
 
-- Video: 263 mã thông báo mỗi giây
-- Âm thanh: 32 mã thông báo mỗi giây
+- Wideo: 263 tokeny na sekundę
+- Audio: 32 tokeny na sekundę
 
-Nếu bạn gọi `count_tokens` bằng dữ liệu đầu vào văn bản và video/âm thanh, thì hàm này sẽ trả về số lượng mã thông báo kết hợp của văn bản và tệp video/âm thanh trong *dữ liệu đầu vào* (`total_tokens`). Bạn có thể thực hiện lệnh gọi này trước khi gọi `generate_content` để kiểm tra kích thước của yêu cầu. Bạn cũng có thể tuỳ ý gọi `count_tokens` trên văn bản và tệp riêng biệt.
+Jeśli wywołasz `count_tokens` z danymi wejściowymi zawierającymi tekst i wideo/audio, zwróci ona łączną liczbę tokenów tekstu i pliku wideo/audio *tylko w danych wejściowych* (`total_tokens`). Możesz wykonać to wywołanie przed wywołaniem `generate_content`, aby sprawdzić rozmiar żądań. Opcjonalnie możesz też wywołać `count_tokens` osobno dla tekstu i pliku.
 
-Một lựa chọn khác là gọi `generate_content`, sau đó sử dụng thuộc tính `usage_metadata` trên đối tượng `response` để nhận các giá trị sau:
+Inną opcją jest wywołanie `generate_content`, a następnie użycie atrybutu `usage_metadata` w obiekcie `response`, aby uzyskać te informacje:
 
-- Số lượng mã thông báo riêng biệt của dữ liệu đầu vào (`prompt_token_count`), nội dung được lưu vào bộ nhớ đệm (`cached_content_token_count`) và dữ liệu đầu ra (`candidates_token_count`)
-- Số lượng mã thông báo cho quá trình tư duy (`thoughts_token_count`)
-- Tổng số mã thông báo trong *cả dữ liệu đầu vào và đầu ra* (`total_token_count`).
+- Oddzielne liczby tokenów w danych wejściowych (`prompt_token_count`), treści w pamięci podręcznej (`cached_content_token_count`) i danych wyjściowych (`candidates_token_count`).
+- Liczba tokenów w procesie myślenia (`thoughts_token_count`).
+- Łączna liczba tokenów *zarówno w danych wejściowych, jak i wyjściowych* (`total_token_count`).
 
 ### Python
 
@@ -637,9 +637,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-### Đếm mã thông báo tư duy
+### Zliczanie tokenów myśli
 
-Khi bạn bật tính năng tư duy, giá phản hồi là tổng số mã thông báo đầu ra và mã thông báo tư duy. Bạn có thể truy xuất tổng số mã thông báo tư duy đã tạo từ trường `thoughtsTokenCount` (hoặc SDK tương đương).
+Gdy włączysz myślenie, cena odpowiedzi jest sumą tokenów wyjściowych i tokenów myśli. Łączną liczbę wygenerowanych tokenów myśli możesz pobrać z pola `thoughtsTokenCount` (lub odpowiednika w pakiecie SDK).
 
 ### Python
 
@@ -665,15 +665,13 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-Các mô hình tư duy tạo ra toàn bộ ý tưởng để cải thiện chất lượng của phản hồi cuối cùng, sau đó đưa ra [bản tóm tắt](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#summaries) để cung cấp thông tin chi tiết về quá trình tư duy. Vì vậy, API định giá dựa trên toàn bộ mã thông báo tư duy mà mô hình tạo ra để tạo bản tóm tắt, mặc dù API chỉ đưa ra bản tóm tắt.
+[Modele myślące generują pełne myśli, aby poprawić jakość ostatecznej odpowiedzi, a następnie podsumowania, aby zapewnić wgląd w proces myślenia.](https://ai.google.dev/gemini-api/docs/thinking?hl=pl#summaries) Dlatego interfejs API ustala cenę na podstawie pełnych tokenów myśli, które model generuje w celu utworzenia podsumowania, mimo że interfejs API zwraca tylko podsumowanie.
 
-Bạn có thể tìm hiểu thêm về cách định cấu hình tính năng tư duy trong hướng dẫn về tính năng tư duy của [Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=vi).
+Więcej informacji o konfigurowaniu myślenia znajdziesz w przewodniku po myśleniu w [Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=pl).
 
-## Cửa sổ ngữ cảnh
+## Okna kontekstu
 
-Các mô hình có sẵn thông qua Gemini API có cửa sổ ngữ cảnh được đo bằng mã thông báo. Cửa sổ ngữ cảnh xác định lượng dữ liệu đầu vào mà bạn có thể cung cấp và lượng dữ liệu đầu ra mà mô hình có thể tạo. Bạn có thể xác định kích thước của
-cửa sổ ngữ cảnh bằng cách gọi điểm cuối [`models.get`](https://ai.google.dev/api/rest/v1/models/get?hl=vi)
-hoặc bằng cách xem [tài liệu về mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi).
+Modele dostępne za pomocą interfejsu Gemini API mają okna kontekstu, które są mierzone w tokenach. Okno kontekstu określa, ile danych wejściowych możesz podać i ile danych wyjściowych może wygenerować model. Rozmiar okna kontekstu możesz określić, wywołując punkt końcowy [`models.get` lub sprawdzając [dokumentację modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl).](https://ai.google.dev/api/rest/v1/models/get?hl=pl)
 
 ### Python
 
@@ -718,12 +716,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-Gửi ý kiến phản hồi
+Prześlij opinię
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Cập nhật lần gần đây nhất: 2026-09-12 UTC.
+Ostatnia aktualizacja: 2026-09-12 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Chcesz przekazać coś jeszcze?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-12 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-12 UTC."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr
-fetched_at: 2026-10-05T06:47:52.053326+00:00
+fetched_at: 2026-10-12T07:04:40.948148+00:00
 title: "Environnements dans les agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -932,9 +932,9 @@ Environment env = Environment.builder()
             .target("/backend-app")
             .build()
     ))
-    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
-        Allowlist.builder()
-            .allowlist(List.of(
+    .network(Network.of(
+        EnvironmentNetworkEgressAllowlist.builder()
+            .allowlist(Allowlist.of(List.of(
                 AllowlistEntry.builder()
                     .domain("github.com")
                     .transform(Transform.of(Map.of(
@@ -944,9 +944,9 @@ Environment env = Environment.builder()
                 AllowlistEntry.builder()
                     .domain("*")
                     .build()
-            ))
+            )))
             .build()
-    )))
+    ))
     .build();
 
 CreateAgentInteraction params = CreateAgentInteraction.builder()
@@ -989,8 +989,8 @@ func main() {
                 Target: genai.Ptr("/backend-app"),
             },
         },
-        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-            Allowlist: []interactions.AllowlistEntry{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+            Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                 {
                     Domain: "github.com",
                     Transform: genai.Ptr(interactions.NewTransform(map[string]string{
@@ -1000,8 +1000,8 @@ func main() {
                 {
                     Domain: "*",
                 },
-            },
-        }))),
+            })),
+        })),
     }
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
@@ -1156,9 +1156,9 @@ Environment env = Environment.builder()
             .target("/workspace")
             .build()
     ))
-    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
-        Allowlist.builder()
-            .allowlist(List.of(
+    .network(Network.of(
+        EnvironmentNetworkEgressAllowlist.builder()
+            .allowlist(Allowlist.of(List.of(
                 AllowlistEntry.builder()
                     .domain("*.googleapis.com")
                     .transform(Transform.of(Map.of(
@@ -1168,9 +1168,9 @@ Environment env = Environment.builder()
                 AllowlistEntry.builder()
                     .domain("*")
                     .build()
-            ))
+            )))
             .build()
-    )))
+    ))
     .build();
 
 CreateAgentInteraction params = CreateAgentInteraction.builder()
@@ -1213,8 +1213,8 @@ func main() {
                 Target: genai.Ptr("/workspace"),
             },
         },
-        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-            Allowlist: []interactions.AllowlistEntry{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+            Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                 {
                     Domain: "*.googleapis.com",
                     Transform: genai.Ptr(interactions.NewTransform(map[string]string{
@@ -1224,8 +1224,8 @@ func main() {
                 {
                     Domain: "*",
                 },
-            },
-        }))),
+            })),
+        })),
     }
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
@@ -1461,9 +1461,9 @@ import java.util.Map;
 Client client = new Client();
 
 Environment env = Environment.builder()
-    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
-        Allowlist.builder()
-            .allowlist(List.of(
+    .network(Network.of(
+        EnvironmentNetworkEgressAllowlist.builder()
+            .allowlist(Allowlist.of(List.of(
                 AllowlistEntry.builder()
                     .domain("api.github.com")
                     .transform(Transform.of(Map.of(
@@ -1472,9 +1472,9 @@ Environment env = Environment.builder()
                     .build(),
                 AllowlistEntry.builder().domain("pypi.org").build(),
                 AllowlistEntry.builder().domain("*").build()
-            ))
+            )))
             .build()
-    )))
+    ))
     .build();
 
 CreateAgentInteraction params = CreateAgentInteraction.builder()
@@ -1510,8 +1510,8 @@ func main() {
     }
 
     env := interactions.Environment{
-        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-            Allowlist: []interactions.AllowlistEntry{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+            Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                 {
                     Domain: "api.github.com",
                     Transform: genai.Ptr(interactions.NewTransform(map[string]string{
@@ -1524,8 +1524,8 @@ func main() {
                 {
                     Domain: "*",
                 },
-            },
-        }))),
+            })),
+        })),
     }
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
@@ -1770,18 +1770,18 @@ String gcloudToken = new String(process.getInputStream().readAllBytes(), Standar
 Client client = new Client();
 
 Environment env = Environment.builder()
-    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
-        Allowlist.builder()
-            .allowlist(List.of(
+    .network(Network.of(
+        EnvironmentNetworkEgressAllowlist.builder()
+            .allowlist(Allowlist.of(List.of(
                 AllowlistEntry.builder()
                     .domain("storage.googleapis.com")
                     .transform(Transform.of(Map.of(
                         "Authorization", "Bearer " + gcloudToken
                     )))
                     .build()
-            ))
+            )))
             .build()
-    )))
+    ))
     .build();
 
 CreateAgentInteraction params = CreateAgentInteraction.builder()
@@ -1827,16 +1827,16 @@ func main() {
     }
 
     env := interactions.Environment{
-        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-            Allowlist: []interactions.AllowlistEntry{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+            Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                 {
                     Domain: "storage.googleapis.com",
                     Transform: genai.Ptr(interactions.NewTransform(map[string]string{
                         "Authorization": "Bearer " + gcloudToken,
                     })),
                 },
-            },
-        }))),
+            })),
+        })),
     }
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
@@ -2140,18 +2140,18 @@ Client client = new Client();
 
 // First interaction: use an initial token
 Environment initialEnv = Environment.builder()
-    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
-        Allowlist.builder()
-            .allowlist(List.of(
+    .network(Network.of(
+        EnvironmentNetworkEgressAllowlist.builder()
+            .allowlist(Allowlist.of(List.of(
                 AllowlistEntry.builder()
                     .domain("storage.googleapis.com")
                     .transform(Transform.of(Map.of(
                         "Authorization", "Bearer INITIAL_TOKEN"
                     )))
                     .build()
-            ))
+            )))
             .build()
-    )))
+    ))
     .build();
 
 CreateAgentInteraction firstParams = CreateAgentInteraction.builder()
@@ -2165,18 +2165,18 @@ Interaction first = client.interactions.create(CreateInteractionRequestBody.of(f
 // Later: refresh the token on the same environment
 Environment refreshedEnv = Environment.builder()
     .environmentId(first.environmentId().orElse(""))
-    .network(Network.of(EnvironmentNetworkEgressAllowlist.of(
-        Allowlist.builder()
-            .allowlist(List.of(
+    .network(Network.of(
+        EnvironmentNetworkEgressAllowlist.builder()
+            .allowlist(Allowlist.of(List.of(
                 AllowlistEntry.builder()
                     .domain("storage.googleapis.com")
                     .transform(Transform.of(Map.of(
                         "Authorization", "Bearer REFRESHED_TOKEN"
                     )))
                     .build()
-            ))
+            )))
             .build()
-    )))
+    ))
     .build();
 
 CreateAgentInteraction secondParams = CreateAgentInteraction.builder()
@@ -2213,16 +2213,16 @@ func main() {
 
     // First interaction: use an initial token
     initialEnv := interactions.Environment{
-        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-            Allowlist: []interactions.AllowlistEntry{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+            Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                 {
                     Domain: "storage.googleapis.com",
                     Transform: genai.Ptr(interactions.NewTransform(map[string]string{
                         "Authorization": "Bearer INITIAL_TOKEN",
                     })),
                 },
-            },
-        }))),
+            })),
+        })),
     }
 
     firstRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
@@ -2240,16 +2240,16 @@ func main() {
     // Later: refresh the token on the same environment
     refreshedEnv := interactions.Environment{
         EnvironmentID: first.EnvironmentID,
-        Network: genai.Ptr(interactions.NewNetwork(interactions.NewEnvironmentNetworkEgressAllowlist(interactions.Allowlist{
-            Allowlist: []interactions.AllowlistEntry{
+        Network: genai.Ptr(interactions.NewNetwork(interactions.EnvironmentNetworkEgressAllowlist{
+            Allowlist: genai.Ptr(interactions.NewAllowlist([]interactions.AllowlistEntry{
                 {
                     Domain: "storage.googleapis.com",
                     Transform: genai.Ptr(interactions.NewTransform(map[string]string{
                         "Authorization": "Bearer REFRESHED_TOKEN",
                     })),
                 },
-            },
-        }))),
+            })),
+        })),
     }
 
     secondRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
@@ -3221,8 +3221,8 @@ Envoyer des commentaires
 
 Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Dernière mise à jour le 2026/09/24 (UTC).
+Dernière mise à jour le 2026/10/07 (UTC).
 
 Voulez-vous nous donner plus d'informations ?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/07 (UTC)."],[],[]]

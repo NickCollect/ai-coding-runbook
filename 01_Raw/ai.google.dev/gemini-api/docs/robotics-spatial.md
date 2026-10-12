@@ -1,30 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-TW
-fetched_at: 2026-10-05T06:51:13.680462+00:00
-title: "\u7a7a\u9593\u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=id
+fetched_at: 2026-10-12T07:00:18.146235+00:00
+title: "Penalaran spasial \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-提供意見
+Kirim masukan
 
-# 空間推論
+# Penalaran spasial
 
-Gemini Robotics ER 模型可以指向物件、在影片中追蹤物件、以定界框偵測物件，以及生成移動軌跡。
+Model Gemini Robotics ER dapat menunjuk objek, melacaknya dalam video, mendeteksinya dengan kotak pembatas, dan membuat lintasan pergerakan.
 
-如需完整的可執行程式碼，請參閱「[機器人食譜](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)」。
+Untuk kode yang dapat dijalankan sepenuhnya, lihat
+[Cookbook Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## 對準物件
+## Menunjuk objek
 
-以下範例會在圖片中尋找特定物件，並傳回標準化的 `[y, x]` 座標：
+Contoh berikut menemukan objek tertentu dalam gambar dan menampilkan koordinat `[y, x]` yang dinormalisasi:
 
 ### Python
 
@@ -92,7 +93,7 @@ curl -X POST \
   }'
 ```
 
-輸出內容會是包含物件的 JSON 陣列，每個物件都有 `point` (標準化 `[y, x]` 座標) 和用於識別物件的 `label`。
+Outputnya akan berupa array JSON yang berisi objek, masing-masing dengan `point` (koordinat `[y, x]` yang dinormalisasi) dan `label` yang mengidentifikasi objek.
 
 ### JSON
 
@@ -111,13 +112,14 @@ curl -X POST \
 ]
 ```
 
-下圖顯示這些點的範例：
+Gambar berikut adalah contoh cara titik-titik ini dapat ditampilkan:
 
-![顯示圖片中物體點的範例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=zh-tw)
+![Contoh yang menampilkan titik objek dalam gambar](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=id)
 
-## 追蹤影片中的物件
+## Melacak objek dalam video
 
-Gemini Robotics ER 2 也能分析影片影格，追蹤一段時間內的物體。如需支援的影片格式清單，請參閱「[影片輸入](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#supported-formats)」。
+Gemini Robotics ER 2 juga dapat menganalisis frame video untuk melacak objek dari waktu ke waktu. Lihat [Input video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id#supported-formats)
+untuk mengetahui daftar format video yang didukung.
 
 ### Python
 
@@ -151,9 +153,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## 物件偵測和定界框
+## Deteksi objek dan kotak pembatas
 
-除了點之外，您也可以提示模型傳回 2D 定界框，為偵測到的物件提供更多空間細節。
+Selain titik, Anda dapat meminta model untuk menampilkan kotak pembatas 2D, yang memberikan detail spasial yang lebih banyak untuk objek yang terdeteksi.
 
 ### Python
 
@@ -187,11 +189,11 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## 軌跡
+## Lintasan
 
-Gemini Robotics ER 2 可生成定義軌跡的點序列，有助於引導機器人移動。
+Gemini Robotics ER 2 dapat membuat urutan titik yang menentukan lintasan, yang berguna untuk memandu pergerakan robot.
 
-這個範例要求將紅筆移動到收納盒的軌跡，包括中間路徑點的估計值。程式碼已縮減，只顯示提示。
+Contoh ini meminta lintasan untuk memindahkan pena merah ke organizer, termasuk perkiraan titik jalan menengah. Kode telah dikurangi untuk hanya menampilkan perintah.
 
 ### Python
 
@@ -204,9 +206,9 @@ prompt = """
         """
 ```
 
-## 為筆電騰出空間
+## Membuat ruang untuk laptop
 
-這個範例顯示 Gemini Robotics ER 如何推論空間。提示會要求模型找出需要移動的物件，以便為其他項目騰出空間。
+Contoh ini menunjukkan bagaimana Gemini Robotics ER dapat memahami ruang. Perintah meminta model untuk mengidentifikasi objek mana yang perlu dipindahkan untuk membuat ruang bagi item lain.
 
 ### Python
 
@@ -238,7 +240,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-回覆內容包含可回答使用者問題的物體 2D 座標，在本例中，該物體應移動，為筆電騰出空間。
+Respons berisi koordinat 2D objek yang menjawab pertanyaan pengguna, dalam hal ini, objek yang harus dipindahkan untuk memberi ruang bagi laptop.
 
 ```
 [
@@ -246,11 +248,11 @@ print(image_response.output_text)
 ]
 ```
 
-![範例：顯示另一個物件需要移動的物件](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=zh-tw)
+![Contoh yang menunjukkan objek mana yang perlu dipindahkan untuk objek lain](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=id)
 
-## 準備午餐
+## Mengemas makan siang
 
-模型也能提供多步驟工作的操作說明，並指出每個步驟的相關物件。這個範例說明模型如何規劃一系列步驟來打包午餐袋。
+Model ini juga dapat memberikan petunjuk untuk tugas multi-langkah dan menunjuk objek yang relevan untuk setiap langkah. Contoh ini menunjukkan cara model merencanakan serangkaian langkah untuk mengemas tas makan siang.
 
 ### Python
 
@@ -283,13 +285,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-這個提示詞的回覆內容是一組逐步說明，教導如何包裝圖片輸入內容中的午餐袋。
+Respons perintah ini adalah serangkaian petunjuk langkah demi langkah tentang cara mengemas tas makan siang dari input gambar.
 
-**輸入圖片**
+**Gambar input**
 
-![午餐盒和要放入其中的物品圖片](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=zh-tw)
+![Gambar kotak makan siang dan item yang akan dimasukkan ke dalamnya](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=id)
 
-**模型輸出內容**
+**Output model**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -312,19 +314,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## 後續步驟
+## Langkah berikutnya
 
-- [代理能力](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=zh-tw)：執行程式碼、讀取儀器、標註圖片。
-- [工作流程協調](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-tw)：使用自訂機器人 API 執行長期任務。
-- [串流機器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)：即時雙向串流 (僅限 Gemini Robotics ER 2)。
-- [影片理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-tw)：尋找特定時刻和進度分類 (僅限 Gemini Robotics ER 2)。
+- [Kemampuan agen](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=id) — eksekusi kode, pembacaan instrumen, anotasi gambar.
+- [Orkestrasi tugas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=id) — tugas jangka panjang dengan API robot kustom.
+- [Robotika dengan streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=id) — streaming dua arah real-time (khusus Gemini Robotics ER 2).
+- [Pemahaman video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=id) — menemukan momen dan klasifikasi progres (khusus Gemini Robotics ER 2).
 
-提供意見
+Kirim masukan
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-上次更新時間：2026-09-08 (世界標準時間)。
+Terakhir diperbarui pada 2026-09-08 UTC.
 
-想進一步說明嗎？
+Ada masukan untuk kami?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-08 (世界標準時間)。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-08 UTC."],[],[]]

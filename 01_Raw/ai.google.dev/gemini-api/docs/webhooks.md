@@ -1,46 +1,54 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=zh-TW
-fetched_at: 2026-10-05T06:38:42.508905+00:00
-title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=th
+fetched_at: 2026-10-12T07:03:09.191694+00:00
+title: "\u0e40\u0e27\u0e47\u0e1a\u0e2e\u0e38\u0e04 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-提供意見
+ส่งความคิดเห็น
 
-# Webhook
+# เว็บฮุค
 
-當非同步或長時間執行的作業 (LRO) 完成時，Gemini API 可透過 Webhook 將即時通知推送至伺服器。這項功能可取代輪詢 API 以取得狀態更新的必要性，進而減少延遲和額外負荷。
+Webhook ช่วยให้ Gemini API สามารถส่งการแจ้งเตือนแบบเรียลไทม์ไปยังเซิร์ฟเวอร์ของคุณ
+เมื่อการดำเนินการแบบไม่พร้อมกันหรือการดำเนินการที่ใช้เวลานาน (LRO) เสร็จสมบูรณ์ ซึ่งมาแทนที่
+ความจำเป็นในการสำรวจ API เพื่อดูการอัปเดตสถานะ ซึ่งจะช่วยลดเวลาในการตอบสนองและค่าใช้จ่าย
 
-Webhook 適用於「批次」作業、「互動」和「影片生成」等作業。
+Webhook พร้อมใช้งานสำหรับการดำเนินการต่างๆ เช่น งาน[กลุ่ม](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)
+[การโต้ตอบ](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) และ[การสร้างวิดีโอ](https://ai.google.dev/gemini-api/docs/video?hl=th)
 
-## 運作方式
+## วิธีการทำงาน
 
-您不必重複輪詢 `GET /operations` 來檢查工作是否完成，可以設定 Gemini API Webhook，在觸發事件時立即將 HTTP POST 要求傳送至接聽程式網址。
+แทนที่จะทำการสำรวจ`GET /operations`ซ้ำๆ เพื่อตรวจสอบว่างานเสร็จสิ้นแล้วหรือไม่
+คุณสามารถกำหนดค่าเว็บฮุคของ Gemini API ให้ส่งคำขอ HTTP POST ไปยัง
+URL ของ Listener ทันทีเมื่อมีการทริกเกอร์เหตุการณ์
 
-Gemini API 支援兩種設定 Webhook 的方式：
+Gemini API รองรับการกำหนดค่า Webhook 2 วิธี ดังนี้
 
-- [**靜態 Webhook**](#static-webhooks)：使用 Gemini [WebhookService API](https://ai.google.dev/api?hl=zh-tw) 設定的專案層級端點。適合用於全域整合 (例如通知 Slack、同步資料庫等)。
-- [**動態 Webhook**](#dynamic-webhooks)：要求層級的覆寫，在特定工作呼叫的設定酬載中傳遞 Webhook 網址。適合將特定工作路徑導向專用端點。
+- [**Webhook แบบคงที่**](#static-webhooks): ปลายทางระดับโปรเจ็กต์ที่กำหนดค่า
+  ด้วย [WebhookService API](https://ai.google.dev/api?hl=th) ของ Gemini เหมาะสำหรับการผสานรวมทั่วโลก (เช่น การแจ้งเตือน Slack, การซิงค์ฐานข้อมูล ฯลฯ)
+- [**เว็บฮุคแบบไดนามิก**](#dynamic-webhooks): การลบล้างระดับคำขอที่ส่ง URL ของเว็บฮุคในเพย์โหลดการกำหนดค่าของการเรียกงานที่เฉพาะเจาะจง เหมาะสำหรับ
+  การกำหนดเส้นทางงานที่เฉพาะเจาะจงไปยังปลายทางเฉพาะ
 
-## 靜態 Webhook
+## เว็บฮุคแบบคงที่
 
-系統會為整個[專案](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-tw#google-cloud-projects)註冊靜態 Webhook，並針對任何相符的事件觸發。
+ระบบจะลงทะเบียนเว็บบุ๊กแบบคงที่สำหรับ[โปรเจ็กต์](https://ai.google.dev/gemini-api/docs/api-key?hl=th#google-cloud-projects)ทั้งหมดและทริกเกอร์สำหรับเหตุการณ์ที่ตรงกัน
 
-### 建立 Webhook
+### สร้างเว็บฮุค
 
-您可以使用 SDK 或 REST API 建立端點。
+คุณสร้างปลายทางได้โดยใช้ SDK หรือ REST API
 
-**重要事項**：建立 Webhook 時，API **只會傳回一次**
-**簽署密鑰**。您必須安全地儲存這項資訊 (例如儲存在環境變數中)，以便稍後驗證簽章。如果遺失簽署密鑰，就必須[輪換](#rotate-signing-secret)密鑰。
+**สำคัญ**: เมื่อสร้าง Webhook แล้ว API จะแสดง**ข้อมูลลับในการลงนาม**
+**เพียงครั้งเดียว** คุณต้องจัดเก็บข้อมูลนี้อย่างปลอดภัย (เช่น ในตัวแปรสภาพแวดล้อม) เพื่อยืนยันลายเซ็นในภายหลัง
+หากทำคีย์ลับสำหรับการลงนามหาย คุณจะต้อง[หมุนเวียน](#rotate-signing-secret)คีย์ลับ
 
 ### Python
 
@@ -167,11 +175,11 @@ curl -X POST \
   }'
 ```
 
-如要瞭解如何設定伺服器來接收資料，請參閱「[處理 Webhook 要求](#handle-webhook-requests)」一節。
+ดูรายละเอียดเกี่ยวกับการตั้งค่าเซิร์ฟเวอร์เพื่อรับข้อมูลได้ที่ส่วน[จัดการคำขอ Webhook](#handle-webhook-requests)
 
-### 取得 Webhook
+### รับเว็บฮุค
 
-依資源名稱擷取特定 Webhook 的詳細資料。
+ดึงรายละเอียดเกี่ยวกับ Webhook ที่เฉพาะเจาะจงตามชื่อทรัพยากร
 
 ### Python
 
@@ -266,9 +274,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 列出 Webhook
+### แสดงรายการเว็บฮุค
 
-列出目前專案的所有已設定 Webhook，並提供分頁選項。
+แสดงรายการ Webhook ทั้งหมดที่กำหนดค่าไว้สำหรับโปรเจ็กต์ปัจจุบัน โดยมีการแบ่งหน้าเป็นตัวเลือก
 
 ### Python
 
@@ -362,9 +370,10 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 更新 Webhook
+### อัปเดตเว็บฮุค
 
-更新現有 Webhook 的屬性，例如顯示名稱、目標 URI 或訂閱的事件。
+อัปเดตพร็อพเพอร์ตี้ของ Webhook ที่มีอยู่ เช่น ชื่อที่แสดง, URI เป้าหมาย หรือ
+เหตุการณ์ที่สมัครรับข้อมูล
 
 ### Python
 
@@ -490,9 +499,10 @@ curl -X PATCH \
   }'
 ```
 
-### 刪除 Webhook
+### ลบเว็บฮุค
 
-從專案中移除 Webhook 端點。系統日後不會再將事件傳送至該端點。
+นำปลายทางของเว็บฮุคออกจากโปรเจ็กต์ ซึ่งจะเป็นการหยุดการนำส่งเหตุการณ์ในอนาคต
+ไปยังปลายทางนั้น
 
 ### Python
 
@@ -574,11 +584,13 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 輪替簽署密鑰
+### หมุนเวียนข้อมูลลับในการลงนาม
 
-輪替 Webhook 的簽署密鑰。您可以設定要立即撤銷先前有效的密鑰，還是要在 24 小時的寬限期過後撤銷。
+หมุนเวียนข้อมูลลับในการลงนามสำหรับ Webhook คุณสามารถกำหนดค่าว่าจะเพิกถอนข้อมูลลับที่เคย
+ใช้งานอยู่ทันทีหรือหลังจากระยะเวลาผ่อนผัน 24 ชั่วโมง
 
-**重要事項**：系統只會在輪替時間**傳回一次**新的簽署密鑰。請先妥善儲存，再更新驗證邏輯。
+**สำคัญ**: ระบบจะแสดงข้อมูลลับในการลงนามใหม่**เพียงครั้งเดียว**เมื่อถึงเวลาหมุนเวียน
+โปรดจัดเก็บอย่างปลอดภัยก่อนอัปเดตตรรกะการยืนยัน
 
 ### Python
 
@@ -698,13 +710,16 @@ curl -X POST \
   }'
 ```
 
-### 在伺服器上處理 Webhook 要求
+### จัดการคำขอเว็บฮุคในเซิร์ฟเวอร์
 
-當您訂閱的事件發生時，Webhook 網址會收到 HTTP POST 要求。端點必須在幾秒內以 2xx 狀態碼回應，以免系統重試。為確保傳送成功，Gemini API 會使用指數輪詢，自動重試失敗的要求 24 小時。
+เมื่อเกิดเหตุการณ์ที่คุณติดตาม URL ของเว็บฮุคจะได้รับคำขอ HTTP POST ปลายทางต้องตอบกลับด้วยรหัสสถานะ 2xx
+ภายในไม่กี่วินาทีเพื่อหลีกเลี่ยงการลองใหม่ Gemini API จะลองส่งคำขอที่ไม่สำเร็จซ้ำโดยอัตโนมัติเป็นเวลา 24 ชั่วโมงโดยใช้ Exponential Backoff เพื่อให้มั่นใจว่าคำขอจะได้รับการนำส่ง
 
-Gemini 會嚴格遵循[標準 Webhook](https://github.com/standard-webhooks/standard-webhooks) 規格，設定安全標頭。使用已簽署的標頭簽章和儲存的靜態簽署密鑰，在伺服器上驗證酬載。如需酬載資訊，請參閱「[Webhook 信封](#webhook-envelope)」一節。
+Gemini ปฏิบัติตามข้อกำหนดเฉพาะของ [Webhooks มาตรฐาน](https://github.com/standard-webhooks/standard-webhooks)อย่างเคร่งครัดสำหรับ
+ส่วนหัวด้านความปลอดภัย ยืนยันเพย์โหลดในเซิร์ฟเวอร์โดยใช้ส่วนหัวที่ลงชื่อ
+signatures และรหัสลับการลงชื่อแบบคงที่ที่จัดเก็บไว้ ดูข้อมูลเพย์โหลดได้ที่ส่วน[ซองจดหมายของ Webhook](#webhook-envelope)
 
-以下是使用 Flask 的 HTTP 監聽器範例：
+ตัวอย่างการใช้ Flask สำหรับเครื่องมือฟัง HTTP มีดังนี้
 
 ### Python
 
@@ -954,13 +969,14 @@ func main() {
 }
 ```
 
-## 動態 Webhook
+## เว็บฮุกแบบไดนามิก
 
-動態 Webhook 可將 Webhook 端點繫結至**特定要求設定**，非常適合用於代理程式協調佇列。動態 Webhook 會使用非對稱式公開金鑰 JWKS 簽章，而非對稱式密鑰。
+Webhook แบบไดนามิกช่วยให้คุณเชื่อมโยงปลายทางของ Webhook กับ**การกำหนดค่าคำขอที่เฉพาะเจาะจง** ซึ่งเหมาะสำหรับคิวการจัดคิวของตัวแทน Webhook แบบไดนามิกใช้ประโยชน์จากลายเซ็น JWKS คีย์สาธารณะแบบอสมมาตรแทนที่จะใช้ลับแบบสมมาตร
 
-### 提交動態要求
+### ส่งคำขอแบบไดนามิก
 
-觸發非同步工作 (例如建立 Batch) 時，請新增 `webhook_config`。
+เพิ่ม `webhook_config` เมื่อทริกเกอร์งานแบบไม่พร้อมกัน (เช่น การสร้าง
+Batch)
 
 ### Python
 
@@ -1118,9 +1134,10 @@ curl -X POST \
   }'
 ```
 
-### 驗證動態簽章 (JWKS)
+### ยืนยันลายเซ็นแบบไดนามิก (JWKS)
 
-動態 Webhook 要求會發出 JSON Web Token (JWT) 簽章。接聽程式必須擷取簽章，並使用 [Google 的公開憑證端點](https://www.googleapis.com/oauth2/v3/certs)驗證簽章。
+คำขอเว็บฮุกแบบไดนามิกจะปล่อยลายเซ็นโทเค็นเว็บ JSON (JWT) ผู้ฟัง
+ต้องแยกข้อมูลลายเซ็นและยืนยันโดยใช้[ปลายทางใบรับรองสาธารณะของ Google](https://www.googleapis.com/oauth2/v3/certs)
 
 ### Python
 
@@ -1406,11 +1423,13 @@ func main() {
 }
 ```
 
-## Webhook 信封
+## ซองจดหมายของเว็บฮุค
 
-為避免頻寬壅塞，Gemini 網路鉤子會使用**精簡的酬載**模型傳送資料。傳送的內容是包含狀態詳細資料和結果指標的快照，而非原始輸出檔案本身。
+Webhook ของ Gemini ใช้โมเดล**เพย์โหลดแบบบาง**เพื่อส่งข้อมูล
+การนำส่งจะส่งสแนปชอตที่มีรายละเอียดสถานะและตัวชี้ไปยังผลลัพธ์
+แทนที่จะเป็นไฟล์เอาต์พุตดิบ
 
-以下是酬載格式範例：
+ตัวอย่างรูปแบบเพย์โหลดมีดังนี้
 
 ```
 {
@@ -1424,41 +1443,44 @@ func main() {
 }
 ```
 
-## 活動目錄參考資料
+## ข้อมูลอ้างอิงแคตตาล็อกกิจกรรม
 
-支援的工作會觸發下列事件：
+ระบบจะทริกเกอร์เหตุการณ์ต่อไปนี้สำหรับงานที่รองรับ
 
-| 事件類型 | 觸發條件 | 酬載項目 (`data`) |
+| ประเภทของกิจกรรม | ทริกเกอร์ | รายการเพย์โหลด (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | 已順利完成處理。 | `id`、`output_file_uri` |
-| `batch.cancelled` | 使用者取消要求 | `id` |
-| `batch.expired` | 批次作業未在 24 小時內處理 (完成) | `id` |
-| `batch.failed` | 批次工作失敗 (系統或驗證錯誤)。 | `id`、`error_code`、`error_message` |
-| `interaction.requires_action` | 函式呼叫，使用者需要執行某些操作 | `id` |
-| `interaction.completed` | 互動 API 中的 LRO 成功 | `id` |
-| `interaction.failed` | interactions API 中的 LRO 失敗 (系統或驗證錯誤)。 | `id`、`error_code`、`error_message` |
-| `interaction.cancelled` | 互動 API 中的 LRO 已取消 | `id` |
-| `video.generated` | 影片生成 LRO 已完成。 | `id`、`output_file_uri`、`file_name` |
+| `batch.succeeded` | การประมวลผลเสร็จสมบูรณ์แล้ว | `id`, `output_file_uri` |
+| `batch.cancelled` | ผู้ใช้ยกเลิกคำขอ | `id` |
+| `batch.expired` | ระบบยังไม่ได้ประมวลผล (เสร็จสิ้น) แบตช์ภายในกรอบเวลา 24 ชั่วโมง | `id` |
+| `batch.failed` | งานแบบกลุ่มล้มเหลว (ข้อผิดพลาดของระบบหรือการตรวจสอบ) | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | การเรียกใช้ฟังก์ชัน ผู้ใช้ต้องดำเนินการบางอย่าง | `id` |
+| `interaction.completed` | LRO ใน Interactions API สำเร็จแล้ว | `id` |
+| `interaction.failed` | LRO ใน Interactions API ล้มเหลว (ข้อผิดพลาดของระบบหรือการตรวจสอบ) | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | ยกเลิก LRO ใน Interactions API แล้ว | `id` |
+| `video.generated` | LRO การสร้างวิดีโอเสร็จสมบูรณ์แล้ว | `id`, `output_file_uri`, `file_name` |
 
-## 最佳做法
+## แนวทางปฏิบัติแนะนำ
 
-如要確保運作可靠且可擴充，請採取下列措施：
+เพื่อให้การดำเนินงานมีความน่าเชื่อถือและรองรับการปรับขนาด ให้ทำดังนี้
 
-- **嚴格的重送攻擊防護檢查**：所有要求都會攜帶 `webhook-timestamp`
-  標頭。請務必在伺服器設定層驗證這個時間戳記，拒絕超過 **5 分鐘**的酬載 (以防重送攻擊)。
-- **非同步處理**：偵測到有效簽章後，請立即以 `2xx OK` 回應，並在內部將剖析作業排入佇列。如果接聽者長時間保留通話，系統會觸發重試傳送週期。
-- **重複資料處理**：標準 Webhook 會「至少傳送一次」資料。使用一致的 `webhook-id` 標頭，處理高擁塞流量中可能出現的重複項目。
+- **การตรวจสอบการป้องกันการเล่นซ้ำอย่างเข้มงวด**: คำขอทั้งหมดมี`webhook-timestamp`
+  ส่วนหัว ตรวจสอบการประทับเวลาในเลเยอร์การกำหนดค่าเซิร์ฟเวอร์เสมอเพื่อปฏิเสธเพย์โหลดที่เก่ากว่า**5 นาที** (เพื่อลดการโจมตีแบบรีเพลย์)
+- **ประมวลผลแบบไม่พร้อมกัน**: ตอบกลับด้วย `2xx OK` ทันทีที่ตรวจพบ
+  ลายเซ็นที่ถูกต้อง และจัดคิวการแยกวิเคราะห์ภายใน ระยะเวลาการรอสายที่นานเกินไปจะทริกเกอร์รอบการลองนำส่งอีกครั้ง
+- **การจัดการการกรองข้อมูลที่ซ้ำกันออก**: เว็บฮุกมาตรฐานจะส่ง "อย่างน้อย 1 ครั้ง" ใช้ส่วนหัว
+  ที่สอดคล้องกัน`webhook-id`เพื่อจัดการรายการที่อาจซ้ำกันในโฟลว์ที่มีความหนาแน่น
+  สูงกว่า
 
-## 後續步驟
+## ต้องทำอะไรต่อ
 
-- [批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)：使用 Webhook 自動化處理大量端點。
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th): ใช้ Webhook เพื่อทำให้ปลายทางที่มีปริมาณสูงเป็นแบบอัตโนมัติ
 
-提供意見
+ส่งความคิดเห็น
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-上次更新時間：2026-09-24 (世界標準時間)。
+อัปเดตล่าสุด 2026-09-24 UTC
 
-想進一步說明嗎？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

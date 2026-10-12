@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr
-fetched_at: 2026-10-05T06:42:02.091704+00:00
-title: "Lyria RealTime ile an\u0131nda m\u00fczik \u00fcretme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=zh-TW
+fetched_at: 2026-10-12T07:07:19.397024+00:00
+title: "\u4f7f\u7528 Lyria RealTime \u5373\u6642\u751f\u6210\u97f3\u6a02 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Geri bildirim gönderin
+提供意見
 
-# Lyria RealTime ile anında müzik üretme
+# 使用 Lyria RealTime 即時生成音樂
 
-[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=tr)'ı kullanan Gemini API, son teknoloji ürünü, gerçek zamanlı ve akışlı bir müzik üretme modeline erişim sağlar. Bu API, geliştiricilerin kullanıcıların etkileşimli olarak oluşturabileceği, sürekli yönlendirebileceği ve enstrümantal müzik yapabileceği uygulamalar geliştirmesine olanak tanır.
+Gemini API 採用 [Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=zh-tw)，可存取最先進的即時串流音樂生成模型。開發人員可藉此建構應用程式，讓使用者以互動方式創作、持續引導及演奏樂器音樂。
 
-Lyria RealTime müzik üretimi, [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) kullanılarak kalıcı, çift yönlü ve düşük gecikmeli bir akış bağlantısı kullanır.
+Lyria RealTime 音樂生成功能會使用 [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)，建立持續性的雙向低延遲串流連線。
 
-Lyria RealTime ile neler yapılabileceğini deneyimlemek için AI Studio'da [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=tr) veya [MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=tr) uygulamalarını kullanarak deneyin.
+如要體驗 Lyria RealTime 的功能，請在 AI Studio 中使用「提示 DJ」或「MIDI DJ」應用程式。
 
-## Müzik üretme ve müziği kontrol etme
+## 生成及控制音樂
 
-Lyria RealTime, modelle anlık iletişimi sürdürmek için Websocket'leri kullanması açısından [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'ye benzer şekilde çalışır.
+Lyria RealTime 的運作方式與 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw) 類似，都是使用 Websocket 與模型維持即時通訊。
 
-Aşağıdaki kodda nasıl müzik oluşturulacağı gösterilmektedir:
+以下程式碼示範如何生成音樂：
 
 ### Python
 
-Bu örnekte, `client.aio.live.music.connect()` kullanılarak Lyria RealTime oturumu başlatılıyor, ardından `session.set_weighted_prompts()` ile ilk istem ve `session.set_music_generation_config` ile ilk yapılandırma gönderiliyor, `session.play()` kullanılarak müzik üretimi başlatılıyor ve `receive_audio()`, aldığı ses parçalarını işleyecek şekilde ayarlanıyor.
+這個範例會使用 `client.aio.live.music.connect()` 初始化 Lyria RealTime 工作階段，然後使用 `session.set_weighted_prompts()` 傳送初始提示，並使用 `session.set_music_generation_config` 傳送初始設定，使用 `session.play()` 開始生成音樂，並設定 `receive_audio()` 來處理收到的音訊區塊。
 
 ```
   import asyncio
@@ -75,7 +75,7 @@ Bu örnekte, `client.aio.live.music.connect()` kullanılarak Lyria RealTime otur
 
 ### JavaScript
 
-Bu örnekte, `client.live.music.connect()` kullanılarak Lyria RealTime oturumu başlatılıyor, ardından `session.setWeightedPrompts()` ile ilk istem ve `session.setMusicGenerationConfig` kullanılarak ilk yapılandırma gönderiliyor, `session.play()` kullanılarak müzik oluşturma işlemi başlatılıyor ve alınan ses parçalarını işlemek için `onMessage` geri çağırma işlevi ayarlanıyor.
+這個範例會使用 `client.live.music.connect()` 初始化 Lyria RealTime 工作階段，然後透過 `session.setWeightedPrompts()` 傳送初始提示，並使用 `session.setMusicGenerationConfig` 設定初始設定，透過 `session.play()` 開始生成音樂，並設定 `onMessage` 回呼來處理收到的音訊區塊。
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -131,18 +131,17 @@ async function main() {
 main().catch(console.error);
 ```
 
-Ardından oturumu başlatmak, duraklatmak, durdurmak veya sıfırlamak için `session.play()`, `session.pause()`, `session.stop()` ve `session.reset_context()` simgelerini kullanabilirsiniz.
+然後使用 `session.play()`、`session.pause()`、`session.stop()` 和 `session.reset_context()` 啟動、暫停、停止或重設工作階段。
 
-## Müziği anlık olarak yönlendirme
+## 即時引導音樂
 
-İstem göndererek ve üretim parametrelerini anlık olarak güncelleyerek müzik üretimini anlık olarak yönlendirebilirsiniz.
+你可以傳送提示並即時更新生成參數，即時引導音樂生成。
 
-### Prompt Lyria RealTime
+### 提示 Lyria RealTime
 
-Yayın etkin durumdayken, oluşturulan müziği değiştirmek için istediğiniz zaman yeni `WeightedPrompt` mesajları gönderebilirsiniz. Model, yeni girişe göre sorunsuz bir şekilde geçiş yapar.
+在串流期間，你隨時可以傳送新的 `WeightedPrompt` 訊息，改變生成的音樂。模型會根據新輸入內容順暢轉換。
 
-İstemler, `text` (asıl istem) ve `weight` ile doğru biçimde olmalıdır. `weight`, `0` hariç herhangi bir değeri alabilir. `1.0`
-genellikle iyi bir başlangıç noktasıdır.
+提示必須採用正確格式，包含 `text` (實際提示) 和 `weight`。`weight` 可以是 `0` 以外的任何值。`1.0` 通常是不錯的起點。
 
 ### Python
 
@@ -169,13 +168,13 @@ genellikle iyi bir başlangıç noktasıdır.
   });
 ```
 
-İstemler önemli ölçüde değiştirildiğinde model geçişlerinin biraz ani olabileceğini unutmayın. Bu nedenle, modele ara ağırlık değerleri göndererek bir tür çapraz geçiş uygulamanız önerilir.
+請注意，大幅變更提示時，模型轉換可能會有些突然，因此建議傳送中間權重值給模型，實作某種淡入淡出效果。
 
-### Yapılandırmayı güncelleme
+### 更新設定
 
-Müzik üretme parametrelerini anında güncelleyerek müzik üretme sürecini yönlendirebilirsiniz. Yalnızca bir parametreyi güncelleyemezsiniz. Diğer alanların varsayılan değerlerine sıfırlanmaması için yapılandırmanın tamamını ayarlamanız gerekir.
+您可以即時更新音樂生成參數，引導音樂生成。您無法只更新參數，必須設定整個設定，否則其他欄位會重設為預設值。
 
-BPM'yi veya ölçeği güncellemek model için önemli bir değişiklik olduğundan, yeni yapılandırmayı dikkate alması için `reset_context()` kullanarak bağlamını sıfırlamasını da söylemeniz gerekir. Bu işlem yayını durdurmaz ancak geçiş zor olur. Diğer parametreler için bu işlemi yapmanız gerekmez.
+由於更新 BPM 或音階會大幅改變模型，您也需要使用 `reset_context()` 重設模型的情境，才能將新設定納入考量。這不會停止串流，但會是硬性轉換。其他參數則不需要。
 
 ### Python
 
@@ -205,103 +204,101 @@ BPM'yi veya ölçeği güncellemek model için önemli bir değişiklik olduğun
   await session.reset_context();
 ```
 
-## Lyria RealTime'ı isteme
+## 提示詞：Lyria RealTime
 
-Lyria RealTime, müzik türlerini, enstrümanları ve ruh hallerini dinamik olarak harmanlamak için ağırlıklı istemler kullanır. İstem yönlendirme stratejilerini, anahtar kelime etiketi sözlüklerini ve tam istem örneklerini incelemek için [Lyria istem kılavuzuna](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=tr#realtime-prompting) bakın.
+Lyria RealTime 會使用加權提示詞，動態融合音樂類型、樂器和情緒。如要瞭解提示詞引導策略、關鍵字標記詞彙和完整提示詞範例，請參閱 [Lyria 提示詞指南](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=zh-tw#realtime-prompting)。
 
-## En iyi uygulamalar
+## 最佳做法
 
-- İstemci uygulamaları, sorunsuz oynatma sağlamak için güçlü bir ses arabelleği oluşturma özelliği uygulamalıdır. Bu, ağ titremesini ve oluşturma gecikmesindeki küçük farklılıkları hesaba katmaya yardımcı olur.
-- Etkili istemler:
-  - Açıklayıcı olun. Ruh halini, türü ve enstrümanları açıklayan sıfatlar kullanın.
-  - İterasyon yapın ve yavaş yavaş yönlendirin. İstemi tamamen değiştirmek yerine, müziği daha sorunsuz bir şekilde dönüştürmek için öğeler eklemeyi veya değiştirmeyi deneyin.
-  - Yeni bir istemin devam eden üretimi ne kadar etkileyeceğini belirlemek için `WeightedPrompt` ağırlığıyla denemeler yapın.
+- 用戶端應用程式必須實作完善的音訊緩衝區，確保播放過程順暢。這有助於考量網路抖動和生成延遲的微小變化。
+- 有效提示：
+  - 文意要明確。使用形容詞描述情境、曲風和樂器。
+  - 逐步迭代和引導。請嘗試新增或修改元素，讓音樂更流暢地變形，而不是完全變更提示。
+  - 實驗 `WeightedPrompt` 的權重，瞭解新提示對持續生成作業的影響程度。
 
-## Teknik ayrıntılar
+## 技術詳細資料
 
-Bu bölümde, Lyria RealTime müzik üretme özelliğinin nasıl kullanılacağıyla ilgili ayrıntılar açıklanmaktadır.
+本節將詳細說明如何使用 Lyria RealTime 音樂生成功能。
 
-### Teknik Özellikler
+### 規格
 
-- Çıkış biçimi: Ham 16 bit PCM Ses
-- Örnek hızı: 48 kHz
-- Kanallar: 2 (stereo)
+- 輸出格式：原始 16 位元 PCM 音訊
+- 取樣率：48kHz
+- 聲道：2 (立體聲)
 
-### Denetimler
+### 控制項
 
-Müzik üretimi, aşağıdakileri içeren mesajlar gönderilerek anlık olarak etkilenebilir:
+傳送含有下列內容的訊息，即可即時影響音樂生成：
 
-- `WeightedPrompt`: Müzikal bir fikri, türü, enstrümanı, ruh halini veya özelliği açıklayan bir metin dizesi. Etkileri karıştırmak için birden fazla istem sağlanabilir. Lyria RealTime'ı en iyi şekilde isteme hakkında daha fazla bilgi için [yukarıdaki](#steer-music) bölüme bakın.
-- `MusicGenerationConfig`: Müzik üretme sürecinin yapılandırması (çıktı sesinin özelliklerini etkiler). Parametreler
-  şunları içerir:
-  - `guidance`: (kayan nokta) Aralık: `[0.0, 6.0]`. Varsayılan: `4.0`.
-    Modelin istemlere ne kadar sıkı uyacağını kontrol eder. Daha yüksek yönlendirme, isteme uyumu artırır ancak geçişleri daha ani hale getirir.
-  - `bpm`: (int) Aralık: `[60, 200]`.
-    Oluşturulan müzik için istediğiniz dakikadaki vuruş sayısını ayarlar. Yeni BPM'yi dikkate alması için modeli durdurmanız/oynatmanız veya bağlamı sıfırlamanız gerekir.
-  - `density`: (kayan nokta) Aralık: `[0.0, 1.0]`.
-    Müzik notalarının/seslerin yoğunluğunu kontrol eder. Düşük değerler daha seyrek müzikler üretir. Yüksek değerler ise daha "yoğun" müzikler üretir.
-  - `brightness`: (kayan nokta) Aralık: `[0.0, 1.0]`.
-    Ton kalitesini ayarlar. Daha yüksek değerler, genellikle daha yüksek frekansları vurgulayan "daha parlak" sesler üretir.
-  - `scale`: (Enum)
-    Üretim için müzik ölçeğini (anahtar ve mod) ayarlar. SDK tarafından sağlanan [`Scale` enum değerlerini](#scale-enum) kullanın. Modelin yeni ölçeği dikkate alması için bağlamı durdurmanız/oynatmanız veya sıfırlamanız gerekir.
-  - `mute_bass`: (bool) Varsayılan: `False`.
-    Modelin çıkışlardaki bası azaltıp azaltmayacağını kontrol eder.
-  - `mute_drums`: (bool) Varsayılan: `False`.
-    Model çıktısının, çıkışlardaki davul sesini azaltıp azaltmayacağını kontrol eder.
-  - `only_bass_and_drums`: (bool) Varsayılan: `False`.
-    Modeli yalnızca bas ve davul sesleri çıkaracak şekilde yönlendirin.
-  - `music_generation_mode`: (Enum)
-    Modele, müziğin `QUALITY` (varsayılan değer) veya `DIVERSITY` kısmına odaklanıp odaklanmaması gerektiğini belirtir. Ayrıca, modelin başka bir enstrüman olarak seslendirme oluşturmasına (yeni istemler olarak ekleme) izin vermek için `VOCALIZATION` olarak da ayarlanabilir.
-- `PlaybackControl`: Oynatma, duraklatma, durdurma veya bağlamı sıfırlama gibi oynatma özelliklerini kontrol etme komutları.
+- `WeightedPrompt`：描述音樂概念、類型、樂器、情緒或特徵的文字字串。您可以提供多個提示，混合不同風格的影響。如要進一步瞭解如何以最佳方式提示 Lyria RealTime，請參閱[上文](#steer-music)。
+- `MusicGenerationConfig`：音樂生成程序的設定，會影響輸出音訊的特徵。參數
+  include：
+  - `guidance`：(浮點數) 範圍：`[0.0, 6.0]`。預設值：`4.0`。
+    控制模型遵守提示詞的嚴格程度。引導值越高，越能遵守提示，但轉場效果會更突兀。
+  - `bpm`：(int) 範圍：`[60, 200]`。
+    設定要生成的音樂每分鐘節拍數。你必須停止/播放或重設模型的脈絡，模型才會將新的 BPM 納入考量。
+  - `density`：(浮點數) 範圍：`[0.0, 1.0]`。
+    控制音符/聲音的密度。值越低，生成的音樂越稀疏；值越高，生成的音樂越「忙碌」。
+  - `brightness`：(浮點數) 範圍：`[0.0, 1.0]`。
+    調整音質。值越高，音訊聽起來就越「明亮」，通常會強調高頻率。
+  - `scale`：(列舉) 設定生成音樂的音階 (調性和模式)。請使用 SDK 提供的[`Scale` 列舉值](#scale-enum)。您需要停止/播放或重設模型考量的內容，才能納入新的比例。
+  - `mute_bass`：(bool) 預設值：`False`。
+    控制模型是否要降低輸出內容的低音。
+  - `mute_drums`：(bool) 預設值：`False`。
+    控制模型輸出內容是否要減少輸出內容的鼓聲。
+  - `only_bass_and_drums`：(bool) 預設值：`False`。
+    引導模型只輸出貝斯和鼓聲。
+  - `music_generation_mode`：(列舉) 指出模型應著重於`QUALITY` (預設值) 或`DIVERSITY`。也可以設為 `VOCALIZATION`，讓模型將人聲生成為另一種樂器 (新增為提示)。
+- `PlaybackControl`：控制播放作業的指令，例如播放、暫停、停止或重設內容。
 
-`bpm`, `density`, `brightness` ve `scale` için değer sağlanmazsa model, ilk istemlerinize göre en iyi seçeneğe karar verir.
+如果沒有提供 `bpm`、`density`、`brightness` 和 `scale` 的值，模型會根據初始提示決定最佳做法。
 
-`temperature` (0,0-3,0, varsayılan 1,1), `top_k` (1-1000, varsayılan 40) ve `seed` (0-2.147.483.647, varsayılan olarak rastgele seçilir) gibi daha klasik parametreler de `MusicGenerationConfig` içinde özelleştirilebilir.
+您也可以在 `MusicGenerationConfig` 中自訂更多傳統參數，例如 `temperature` (0.0 至 3.0，預設為 1.1)、`top_k` (1 至 1000，預設為 40) 和 `seed` (0 至 2147483647，預設為隨機選取)。
 
-#### Ölçek Enum Değerleri
+#### 擴大規模列舉值
 
-Modelin kabul edebileceği tüm ölçek değerleri şunlardır:
+模型可接受的所有比例值如下：
 
-| Enum Değeri | Ölçek / Anahtar |
+| 列舉值 | 音階 / 調性 |
 | --- | --- |
-| `C_MAJOR_A_MINOR` | Do majör / La minör |
-| `D_FLAT_MAJOR_B_FLAT_MINOR` | Re bemol majör / Si bemol minör |
-| `D_MAJOR_B_MINOR` | D major / B minor |
-| `E_FLAT_MAJOR_C_MINOR` | Mi bemol majör / Do minör |
-| `E_MAJOR_D_FLAT_MINOR` | Mi majör / Do diyez/Re bemol minör |
-| `F_MAJOR_D_MINOR` | F majör / D minör |
-| `G_FLAT_MAJOR_E_FLAT_MINOR` | Sol Bemol majör / Mi Bemol minör |
-| `G_MAJOR_E_MINOR` | Sol majör / Mi minör |
-| `A_FLAT_MAJOR_F_MINOR` | La bemol majör / Fa minör |
-| `A_MAJOR_G_FLAT_MINOR` | La majör / Fa diyez/Sol bemol minör |
-| `B_FLAT_MAJOR_G_MINOR` | Si bemol majör / Sol minör |
-| `B_MAJOR_A_FLAT_MINOR` | Si majör / Sol diyez/La bemol minör |
-| `SCALE_UNSPECIFIED` | Varsayılan / Model karar verir |
+| `C_MAJOR_A_MINOR` | C 大調 / A 小調 |
+| `D_FLAT_MAJOR_B_FLAT_MINOR` | 降 D 大調 / 降 B 小調 |
+| `D_MAJOR_B_MINOR` | D 大調 / B 小調 |
+| `E_FLAT_MAJOR_C_MINOR` | 降 E 大調 / C 小調 |
+| `E_MAJOR_D_FLAT_MINOR` | E 大調 / C♯/D♭ 小調 |
+| `F_MAJOR_D_MINOR` | F 大調 / D 小調 |
+| `G_FLAT_MAJOR_E_FLAT_MINOR` | 降 G 大調 / 降 E 小調 |
+| `G_MAJOR_E_MINOR` | G 大調 / E 小調 |
+| `A_FLAT_MAJOR_F_MINOR` | 降 A 大調 / F 小調 |
+| `A_MAJOR_G_FLAT_MINOR` | A 大調 / F♯/G♭ 小調 |
+| `B_FLAT_MAJOR_G_MINOR` | 降 B 大調 / G 小調 |
+| `B_MAJOR_A_FLAT_MINOR` | B 大調 / G♯/A♭ 小調 |
+| `SCALE_UNSPECIFIED` | 預設 / 由模型判斷 |
 
-Model, çalınan notalara rehberlik edebilir ancak göreceli tuşlar arasında ayrım yapmaz. Bu nedenle her enum hem göreceli majör hem de minöre karşılık gelir. Örneğin, `C_MAJOR_A_MINOR`, piyanodaki tüm beyaz tuşlara, `F_MAJOR_D_MINOR` ise si bemol dışındaki tüm beyaz tuşlara karşılık gelir.
+該模型可以引導播放音符，但無法區分相對調。因此每個列舉都會對應相對應的主要和次要版本。舉例來說，`C_MAJOR_A_MINOR` 對應鋼琴的所有白鍵，`F_MAJOR_D_MINOR` 則對應所有白鍵，但降 B 除外。
 
-### Sınırlamalar
+### 限制
 
-- Yalnızca enstrümantal: Model yalnızca enstrümantal müzik üretir.
-- Güvenlik: İstemler, güvenlik filtreleriyle kontrol edilir. Filtreleri tetikleyen istemler yoksayılır. Bu durumda, çıkışın `filtered_prompt` alanına bir açıklama yazılır.
-- Filigran ekleme: Çıkış sesi, [Sorumlu Yapay Zeka](https://ai.google/responsibility/principles/?hl=tr) ilkelerimize uygun olarak tanımlama için her zaman filigranlıdır.
+- 純音樂：模型只會生成純音樂。
+- 安全：系統會透過安全篩選機制檢查提示，如果提示觸發篩選器，系統會忽略提示，並在輸出內容的 `filtered_prompt` 欄位中提供說明。
+- 浮水印：根據我們的[負責任的 AI 技術](https://ai.google/responsibility/principles/?hl=zh-tw) 原則，輸出音訊一律會加上浮水印，以利識別。
 
-## Sırada ne var?
+## 後續步驟
 
-- [Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) ile eksiksiz şarkılar ve vokal parçaları üretin.
-- Müzik yerine, [TTS modellerini](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) kullanarak birden fazla konuşmacının yer aldığı sohbetler oluşturmayı öğrenin.
-- [Resim](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) veya [video](https://ai.google.dev/gemini-api/docs/video?hl=tr) oluşturmayı öğrenin.
-- Müzik veya ses üretmek yerine Gemini'ın [ses dosyalarını nasıl anlayabileceğini](https://ai.google.dev/gemini-api/docs/audio?hl=tr) öğrenin.
-- [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'yi kullanarak Gemini ile anlık sohbet edin.
+- 使用 [Lyria 3.5](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-tw) 生成完整歌曲和人聲音軌，
+- 瞭解如何使用 [TTS 模型](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)生成多位說話者的對話，而非音樂。
+- 瞭解如何生成[圖片](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)或[影片](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)，
+- Gemini 無法生成音樂或音訊，但可以[瞭解音訊檔案](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)，
+- 使用 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw) 與 Gemini 即時對話。
 
-Daha fazla kod örneği ve eğitim için [Cookbook](https://github.com/google-gemini/cookbook)'u inceleyin.
+如需更多程式碼範例和教學課程，請參閱[教戰手冊](https://github.com/google-gemini/cookbook)。
 
-Geri bildirim gönderin
+提供意見
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Son güncelleme tarihi: 2026-09-18 UTC.
+上次更新時間：2026-09-18 (世界標準時間)。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+想進一步說明嗎？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-18 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-18 (世界標準時間)。"],[],[]]

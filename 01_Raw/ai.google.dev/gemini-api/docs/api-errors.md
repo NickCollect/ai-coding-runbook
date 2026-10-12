@@ -1,86 +1,86 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=pt-BR
-fetched_at: 2026-10-05T06:39:34.072004+00:00
-title: "Erros da API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=th
+fetched_at: 2026-10-12T06:53:12.226203+00:00
+title: "\u0e02\u0e49\u0e2d\u0e1c\u0e34\u0e14\u0e1e\u0e25\u0e32\u0e14\u0e02\u0e2d\u0e07 API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Envie comentários
+ส่งความคิดเห็น
 
-# Erros da API
+# ข้อผิดพลาดของ API
 
-Esta página fornece uma referência para todos os códigos de erro da API Interactions, descreve o formato da resposta de erro e explica como a API entrega erros para diferentes tipos de solicitação.
+หน้านี้มีข้อมูลอ้างอิงสำหรับรหัสข้อผิดพลาดทั้งหมดของ Interactions API อธิบายรูปแบบการตอบกลับข้อผิดพลาด และอธิบายวิธีที่ API แสดงข้อผิดพลาดสำหรับคำขอประเภทต่างๆ
 
-## Códigos de erro da API padrão
+## รหัสข้อผิดพลาดของ API มาตรฐาน
 
-Esses códigos de erro gerais no nível da solicitação correspondem aos códigos de status HTTP padrão.
-Use o campo `code` na lógica do aplicativo para processar erros de maneira programática.
+รหัสข้อผิดพลาดระดับคำขอทั่วไปเหล่านี้สอดคล้องกับรหัสสถานะ HTTP มาตรฐาน
+ใช้ฟิลด์ `code` ในตรรกะของแอปพลิเคชันเพื่อจัดการข้อผิดพลาดแบบเป็นโปรแกรม
 
-| Código | Status do HTTP | Descrição | Ação recomendada |
+| รหัส | สถานะ HTTP | คำอธิบาย | การดำเนินการที่แนะนำ |
 | --- | --- | --- | --- |
-| `invalid_request` | 400 Solicitação inválida | O payload da solicitação está incorreto ou contém parâmetros inválidos. | Verifique a sintaxe e os parâmetros da solicitação na [referência da API](https://ai.google.dev/api/interactions-api?hl=pt-br). |
-| `failed_precondition` | 400 Solicitação inválida | Não é possível processar a solicitação porque um pré-requisito não foi atendido (por exemplo, faturamento desativado). | Verifique o status de faturamento do projeto ou os pré-requisitos da conta. |
-| `out_of_range` | 416 Intervalo solicitado não satisfatório | O parâmetro da solicitação está fora do intervalo válido. | Verifique os valores e limites de parâmetros. |
-| `parameter_unknown` | 400 Solicitação inválida | A solicitação contém um parâmetro desconhecido. | Remova o parâmetro não reconhecido e tente de novo. |
-| `authentication` | 401 Não autorizado | A chave de API está ausente, é inválida ou expirou. | Verifique sua [chave de API](https://ai.google.dev/gemini-api/docs/api-key?hl=pt-br). |
-| `payment_required` | 402 Pagamento necessário | Seu saldo de crédito pré-pago acabou. | [Adicione créditos](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br#buy-credits) à sua conta de faturamento ou ative a [recarga automática](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br#auto-reload). Não tente de novo: a solicitação não será concluída até que os créditos sejam adicionados. |
-| `permission_denied` | 403 Proibido | Sua chave de API não tem permissão para esse recurso. | Verifique as permissões da chave de API e o acesso ao projeto. |
-| `not_found` | 404 Não encontrado | O recurso solicitado não foi encontrado. | Verifique o caminho e os parâmetros do recurso. |
-| `model_not_found` | 404 Não encontrado | O modelo especificado não foi encontrado. | Verifique o nome do modelo ou use outro. |
-| `already_exists` | 409 Conflito | A entidade que você tentou criar já existe. | Verifique se o recurso já existe antes de recriar. |
-| `aborted` | 409 Conflito | A operação foi cancelada devido a um conflito ou falha na verificação de simultaneidade. | Tente fazer a solicitação novamente em um nível de aplicativo mais alto. |
-| `rate_limit_exceeded` | 429 número excessivo de solicitações | Você excedeu o limite de solicitações ou tokens por minuto ou por segundo. | Aguarde e tente de novo com uma espera exponencial. |
-| `quota_exceeded` | 429 número excessivo de solicitações | Você excedeu sua cota diária. | Aguarde até que a cota seja redefinida ou peça um aumento. |
-| `too_many_requests` | 429 número excessivo de solicitações | Você fez muitas solicitações em pouco tempo. | Aguarde e tente de novo com uma espera exponencial. |
-| `cancelled` | 499 Solicitação fechada pelo cliente | O cliente cancelou a solicitação antes da conclusão. | Nenhuma ação é necessária. Isso geralmente significa que o cliente se desconectou. |
-| `api_error` | 500 Internal Server Error | Ocorreu um erro inesperado no servidor. | Tente fazer a solicitação novamente. Se o problema persistir, entre em contato com o suporte. |
-| `unimplemented` | 501 Não implementado | A operação ou o recurso não foi implementado ou não é compatível. | Verifique os recursos da API ou mude para um recurso compatível. |
-| `service_unavailable` | 503 Serviço indisponível | O serviço está temporariamente sobrecarregado ou fora do ar. | Aguarde e tente de novo com uma espera exponencial. |
-| `deadline_exceeded` | 504 Gateway Timeout | A solicitação não foi concluída dentro do prazo. | Remova ou aumente a configuração de prazo do cliente para usar o padrão do servidor. |
+| `invalid_request` | 400 คำขอไม่ถูกต้อง | เพย์โหลดคำขอมีรูปแบบไม่ถูกต้องหรือมีพารามิเตอร์ที่ไม่ถูกต้อง | ตรวจสอบไวยากรณ์และพารามิเตอร์ของคำขอเทียบกับ[เอกสารอ้างอิง API](https://ai.google.dev/api/interactions-api?hl=th) |
+| `failed_precondition` | 400 คำขอไม่ถูกต้อง | ดำเนินการตามคำขอไม่ได้เนื่องจากไม่เป็นไปตามข้อกำหนดเบื้องต้น (เช่น การเรียกเก็บเงินที่ปิดใช้) | ยืนยันสถานะการเรียกเก็บเงินของโปรเจ็กต์หรือข้อกำหนดเบื้องต้นของบัญชี |
+| `out_of_range` | 416 ช่วงที่ขอไม่ถูกต้อง | พารามิเตอร์คำขออยู่นอกช่วงที่ถูกต้อง | ตรวจสอบค่าและขีดจํากัดของพารามิเตอร์ |
+| `parameter_unknown` | 400 คำขอไม่ถูกต้อง | คำขอมีพารามิเตอร์ที่ไม่รู้จัก | โปรดนำพารามิเตอร์ที่ไม่รู้จักออกแล้วลองอีกครั้ง |
+| `authentication` | 401 ไม่ได้รับอนุญาต | คีย์ API ขาดหายไป ไม่ถูกต้อง หรือหมดอายุแล้ว | ยืนยัน[คีย์ API](https://ai.google.dev/gemini-api/docs/api-key?hl=th) |
+| `payment_required` | 402 ต้องชำระเงิน | ยอดเครดิตคงเหลือแบบชำระล่วงหน้าของคุณหมดแล้ว | [เติมเครดิต](https://ai.google.dev/gemini-api/docs/billing?hl=th#buy-credits)ลงในบัญชีสำหรับการเรียกเก็บเงิน หรือเปิด[การเติมเงินอัตโนมัติ](https://ai.google.dev/gemini-api/docs/billing?hl=th#auto-reload) อย่าลองอีกครั้ง: คำขอจะไม่สำเร็จจนกว่าจะมีการเพิ่มเครดิต |
+| `permission_denied` | 403 ต้องห้าม | คีย์ API ของคุณไม่มีสิทธิ์สำหรับทรัพยากรนี้ | ตรวจสอบสิทธิ์ของคีย์ API และสิทธิ์เข้าถึงโปรเจ็กต์ |
+| `not_found` | 404 ไม่พบ | ไม่พบทรัพยากรที่ร้องขอ | ยืนยันเส้นทางทรัพยากรและพารามิเตอร์ |
+| `model_not_found` | 404 ไม่พบ | ไม่พบโมเดลที่ระบุ | ยืนยันชื่อโมเดลหรือเปลี่ยนไปใช้โมเดลอื่น |
+| `already_exists` | 409 เกิดความขัดแย้ง | มีเอนทิตีที่คุณพยายามสร้างอยู่แล้ว | ตรวจสอบว่ามีทรัพยากรอยู่แล้วหรือไม่ก่อนที่จะสร้างใหม่ |
+| `aborted` | 409 เกิดความขัดแย้ง | การดำเนินการถูกยกเลิกเนื่องจากความขัดแย้งหรือการตรวจสอบการทำงานพร้อมกันล้มเหลว | ลองส่งคำขออีกครั้งในระดับแอปพลิเคชันที่สูงขึ้น |
+| `rate_limit_exceeded` | 429 มีคำขอมากเกินไป | คุณส่งคำขอหรือใช้โทเค็นเกินขีดจำกัดต่อนาทีหรือต่อวินาที | รอและลองอีกครั้งโดยใช้ Exponential Backoff |
+| `quota_exceeded` | 429 มีคำขอมากเกินไป | คุณใช้งานเกินโควต้าต่อวันแล้ว | รอจนกว่าโควต้าจะรีเซ็ตหรือขอเพิ่มโควต้า |
+| `too_many_requests` | 429 มีคำขอมากเกินไป | คุณส่งคำขอมากเกินไปในช่วงเวลาสั้นๆ | รอและลองอีกครั้งโดยใช้ Exponential Backoff |
+| `cancelled` | 499 คำขอที่ไคลเอ็นต์ปิดการเชื่อมต่อ | ไคลเอ็นต์ยกเลิกคำขอก่อนที่จะเสร็จสมบูรณ์ | คุณไม่ต้องดำเนินการใดๆ ซึ่งโดยปกติแล้วหมายความว่าไคลเอ็นต์ยกเลิกการเชื่อมต่อ |
+| `api_error` | 500 ข้อผิดพลาดภายในเซิร์ฟเวอร์ | เกิดข้อผิดพลาดที่ไม่คาดคิดในเซิร์ฟเวอร์ | ลองส่งคำขออีกครั้ง หากยังคงพบปัญหาอยู่ โปรดติดต่อทีมสนับสนุน |
+| `unimplemented` | 501 ไม่มีการใช้งาน | การดำเนินการหรือฟีเจอร์นี้ยังไม่ได้ใช้งานหรือรองรับ | ตรวจสอบความสามารถของ API หรือเปลี่ยนไปใช้ฟีเจอร์ที่รองรับ |
+| `service_unavailable` | 503 ไม่พร้อมให้บริการ | บริการมีการใช้งานมากเกินไปหรือหยุดทำงานชั่วคราว | รอและลองอีกครั้งโดยใช้ Exponential Backoff |
+| `deadline_exceeded` | 504 เกตเวย์หมดเวลา | คำขอไม่เสร็จสมบูรณ์ภายในกำหนดเวลา | นำการตั้งค่ากำหนดเวลาของไคลเอ็นต์ออกหรือเพิ่มการตั้งค่าดังกล่าวเพื่อใช้ค่าเริ่มต้นของเซิร์ฟเวอร์ |
 
-## Códigos de geração bloqueados
+## รหัสที่บล็อกการสร้าง
 
-Esses códigos de erro indicam que restrições de política, segurança ou conteúdo bloquearam a saída do modelo. Quando você receber um desses códigos, modifique a entrada e tente de novo.
+รหัสข้อผิดพลาดเหล่านี้บ่งชี้ว่าข้อจำกัดด้านนโยบาย ความปลอดภัย หรือการจำกัดเนื้อหาได้บล็อกเอาต์พุตของโมเดล เมื่อได้รับรหัสเหล่านี้ ให้แก้ไขข้อมูลและลองอีกครั้ง
 
-| Código | Descrição |
+| รหัส | คำอธิบาย |
 | --- | --- |
-| `safety` | Violações de segurança (conteúdo prejudicial) bloquearam a solicitação. |
-| `recitation` | Restrições de direitos autorais ou recitação bloquearam a solicitação. |
-| `language` | Um idioma sem suporte bloqueou a solicitação. |
-| `prohibited_content` | As diretrizes de conteúdo proibido bloquearam a solicitação. |
-| `spii` | As restrições de informações sensíveis de identificação pessoal bloquearam a solicitação. |
-| `blocklist` | Termos proibidos em uma lista de bloqueio impediram a solicitação. |
-| `image_safety` | Violações de segurança bloquearam a geração de imagens. |
-| `image_prohibited_content` | As diretrizes de conteúdo proibido bloquearam a geração de imagens. |
-| `image_recitation` | As restrições de direitos autorais ou recitação bloquearam a geração de imagens. |
-| `image_other` | Motivos não especificados bloquearam a geração de imagens. |
-| `content_blocked` | Um motivo não especificado da política bloqueou a solicitação. |
+| `safety` | การละเมิดด้านความปลอดภัย (เนื้อหาที่เป็นอันตราย) บล็อกคำขอ |
+| `recitation` | ข้อจำกัดด้านลิขสิทธิ์หรือการอ่านทำให้คำขอถูกบล็อก |
+| `language` | ภาษาที่ไม่รองรับบล็อกคำขอ |
+| `prohibited_content` | หลักเกณฑ์เนื้อหาที่ไม่อนุญาตบล็อกคำขอ |
+| `spii` | ข้อจำกัดเกี่ยวกับข้อมูลส่วนบุคคลที่ละเอียดอ่อนและระบุตัวบุคคลนั้นได้บล็อกคำขอ |
+| `blocklist` | คำที่ไม่อนุญาตในรายการที่บล็อกบล็อกคำขอ |
+| `image_safety` | การละเมิดนโยบายความปลอดภัยทำให้การสร้างรูปภาพถูกบล็อก |
+| `image_prohibited_content` | หลักเกณฑ์เกี่ยวกับเนื้อหาที่ไม่อนุญาตได้บล็อกการสร้างรูปภาพ |
+| `image_recitation` | ข้อจำกัดด้านลิขสิทธิ์หรือการอ่านทำให้ระบบบล็อกการสร้างรูปภาพ |
+| `image_other` | เหตุผลที่ไม่ได้ระบุทำให้การสร้างรูปภาพถูกบล็อก |
+| `content_blocked` | เหตุผลเกี่ยวกับนโยบายที่ไม่ได้ระบุบล็อกคำขอ |
 
-## Códigos de erro de geração
+## รหัสข้อผิดพลาดในการสร้าง
 
-Esses códigos de erro indicam um problema estrutural com a saída gerada do modelo, como uma chamada de função malformada ou uma chamada de ferramenta não declarada.
+รหัสข้อผิดพลาดเหล่านี้บ่งชี้ถึงปัญหาเชิงโครงสร้างกับเอาต์พุตที่โมเดลสร้างขึ้น (เช่น การเรียกใช้ฟังก์ชันที่จัดรูปแบบไม่ถูกต้องหรือการเรียกใช้เครื่องมือที่ไม่ได้ประกาศ)
 
-| Código | Descrição |
+| รหัส | คำอธิบาย |
 | --- | --- |
-| `malformed_function_call` | O modelo gerou uma chamada de função que não pôde ser analisada. |
-| `malformed_tool_call` | O modelo gerou uma chamada de ferramenta que não pôde ser analisada. |
-| `unexpected_tool_call` | O modelo chamou uma ferramenta que não foi declarada na solicitação. |
-| `no_image` | O modelo não conseguiu gerar uma imagem. |
-| `too_many_tool_calls` | O modelo gerou mais chamadas de função do que o permitido. |
-| `missing_thought_signature` | A resposta não tem uma assinatura de pensamento obrigatória. |
+| `malformed_function_call` | โมเดลสร้างการเรียกใช้ฟังก์ชันที่แยกวิเคราะห์ไม่ได้ |
+| `malformed_tool_call` | โมเดลสร้างการเรียกใช้เครื่องมือที่แยกวิเคราะห์ไม่ได้ |
+| `unexpected_tool_call` | โมเดลเรียกใช้เครื่องมือที่ไม่ได้ประกาศในคำขอ |
+| `no_image` | โมเดลสร้างรูปภาพไม่ได้ |
+| `too_many_tool_calls` | โมเดลสร้างการเรียกใช้เครื่องมือมากกว่าที่อนุญาต |
+| `missing_thought_signature` | การตอบกลับไม่มีลายเซ็นความคิดที่จำเป็น |
 
-## Formato da resposta de erro
+## รูปแบบการตอบกลับข้อผิดพลาด
 
-Todos os erros da API Interactions retornam um objeto `error` que contém um `code` e um `message`. Por exemplo, transmitir um tipo de ferramenta incompatível retorna:
+ข้อผิดพลาดทั้งหมดจาก Interactions API จะแสดงผล`error`ออบเจ็กต์ที่มี `code` และ `message` เช่น การส่งประเภทเครื่องมือที่ไม่รองรับจะแสดงผลดังนี้
 
 ```
 {
@@ -91,18 +91,18 @@ Todos os erros da API Interactions retornam um objeto `error` que contém um `co
 }
 ```
 
-| Campo | Tipo | Descrição |
+| ช่อง | ประเภท | คำอธิบาย |
 | --- | --- | --- |
-| `code` | string | Um código de erro legível por máquina em `snake_case`. |
-| `message` | string | Uma descrição legível por humanos do que deu errado. |
+| `code` | สตริง | รหัสข้อผิดพลาดที่เครื่องอ่านได้ใน `snake_case` |
+| `message` | สตริง | คำอธิบายที่มนุษย์อ่านได้ของสิ่งที่ผิดพลาด |
 
-## Como os erros são entregues
+## วิธีส่งข้อผิดพลาด
 
-A API entrega erros de maneira diferente, dependendo se você faz uma solicitação HTTP padrão ou uma solicitação de streaming (SSE).
+API จะแสดงข้อผิดพลาดแตกต่างกันไปโดยขึ้นอยู่กับว่าคุณส่งคำขอ HTTP มาตรฐานหรือคำขอสตรีมมิง (SSE)
 
-### Solicitações HTTP padrão
+### คำขอ HTTP มาตรฐาน
 
-Para solicitações padrão (não de streaming), a API define o código de status da resposta HTTP (como `400 Bad Request`, `401 Unauthorized` ou `429 Too Many Requests`) e retorna um objeto `error` no corpo da resposta JSON:
+สำหรับคำขอมาตรฐาน (ไม่ใช่การสตรีม) API จะตั้งรหัสสถานะการตอบกลับ HTTP (เช่น `400 Bad Request`, `401 Unauthorized` หรือ `429 Too Many Requests`) และแสดงผลออบเจ็กต์ `error` ในเนื้อความการตอบกลับ JSON ดังนี้
 
 ```
 {
@@ -113,9 +113,9 @@ Para solicitações padrão (não de streaming), a API define o código de statu
 }
 ```
 
-### Solicitações de streaming (SSE)
+### คำขอสตรีมมิง (SSE)
 
-Para solicitações de streaming (`stream: true`), a API envia eventos de erro pelo fluxo de eventos enviados pelo servidor (SSE) com `event_type` definido como `"error"`. O campo `error` contém a mesma estrutura `code` e `message`:
+สำหรับคำขอสตรีม (`stream: true`) API จะส่งเหตุการณ์ข้อผิดพลาดผ่านสตรีม Server-Sent Events (SSE) โดยตั้งค่า `event_type` เป็น `"error"` ฟิลด์ `error` มีโครงสร้าง `code` และ `message` เหมือนกัน ดังนี้
 
 ```
 {
@@ -127,19 +127,19 @@ Para solicitações de streaming (`stream: true`), a API envia eventos de erro p
 }
 ```
 
-Para conferir o esquema completo de eventos SSE, consulte a [Referência da API Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br).
+ดูสคีมาเหตุการณ์ SSE ทั้งหมดได้ที่[เอกสารอ้างอิง Interactions API](https://ai.google.dev/api/interactions-api?hl=th)
 
-## A seguir
+## ขั้นตอนถัดไป
 
-- [Solução de problemas da API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=pt-br): resolva problemas comuns e cenários de erro.
-- [Limites de taxa](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pt-br): saiba mais sobre limites de solicitação e processamento de cotas.
+- [การแก้ปัญหาเกี่ยวกับ API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=th): แก้ปัญหาที่พบบ่อยและสถานการณ์ข้อผิดพลาด
+- [การจำกัดอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th): ดูข้อมูลเกี่ยวกับขีดจำกัดคำขอและการจัดการโควต้า
 
-Envie comentários
+ส่งความคิดเห็น
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última atualização 2026-09-20 UTC.
+อัปเดตล่าสุด 2026-09-20 UTC
 
-Quer enviar seu feedback?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-20 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-20 UTC"],[],[]]

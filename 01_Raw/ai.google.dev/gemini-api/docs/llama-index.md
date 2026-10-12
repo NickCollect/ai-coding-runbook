@@ -1,37 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=de
-fetched_at: 2026-10-05T06:37:33.835717+00:00
-title: "Recherchergebnisse mit Gemini und LlamaIndex abrufen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=zh-TW
+fetched_at: 2026-10-12T07:05:36.879101+00:00
+title: "\u4f7f\u7528 Gemini \u548c LlamaIndex \u5efa\u7acb\u7814\u7a76\u4ee3\u7406\u7a0b\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Feedback geben
+提供意見
 
-# Recherchergebnisse mit Gemini und LlamaIndex abrufen
+# 使用 Gemini 和 LlamaIndex 建立研究代理程式
 
-LlamaIndex ist ein Framework zum Erstellen von Wissensagenten mit LLMs, die mit Ihren Daten verbunden sind. In diesem Beispiel erfahren Sie, wie Sie einen Multi-Agenten-Workflow für einen Research Agent erstellen. In LlamaIndex sind [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-die Bausteine von Agenten- und Multi-Agenten-Systemen.
+LlamaIndex 是一個框架，可使用連結至您資料的 LLM 建構知識代理。本範例說明如何為研究代理建構多代理工作流程。在 LlamaIndex 中，[`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+是代理和多代理系統的建構區塊。
 
-Sie benötigen einen Gemini API-Schlüssel. Wenn Sie noch keinen haben, können Sie
-[einen in Google AI Studio erstellen](https://aistudio.google.com/apikey?hl=de).
-Installieren Sie zuerst alle erforderlichen LlamaIndex-Bibliotheken. LlamaIndex verwendet im Hintergrund das Paket `google-genai`.
+您需要 Gemini API 金鑰。如果還沒有金鑰，請[在 Google AI Studio 取得](https://aistudio.google.com/apikey?hl=zh-tw)。首先，請安裝所有必要的 LlamaIndex 程式庫。LlamaIndex 在內部使用 `google-genai` 套件。
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## Gemini in LlamaIndex einrichten
+## 在 LlamaIndex 中設定 Gemini
 
-Die Engine eines jeden LlamaIndex-Agenten ist ein LLM, das für die Schlussfolgerung und Textverarbeitung zuständig ist. In diesem Beispiel wird Gemini 3 Flash verwendet. [Achten Sie darauf, dass Sie Ihren API-Schlüssel als Umgebungsvariable festlegen.](https://ai.google.dev/gemini-api/docs/api-key?hl=de)
+任何 LlamaIndex 代理的引擎都是 LLM，負責處理推論和文字。本範例使用 Gemini 3 Flash。請務必[將 API 金鑰設為環境變數](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-tw)。
 
 ```
 import os
@@ -43,11 +41,9 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.6-flash")
 ```
 
-## Build-Tools
+## 建立工具
 
-Agenten verwenden Tools, um mit der Außenwelt zu interagieren, z. B. um im Web zu suchen oder Informationen zu speichern. [Tools in LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
-können reguläre Python-Funktionen sein oder aus vorhandenen `ToolSpecs` importiert werden.
-Gemini enthält ein integriertes Tool für die Verwendung der Google Suche, das hier verwendet wird.
+代理會使用工具與外界互動，例如搜尋網路或儲存資訊。[LlamaIndex 中的工具](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)可以是常見的 Python 函式，也可以從預先存在的 `ToolSpecs` 匯入。Gemini 內建 Google 搜尋工具，因此可直接使用。
 
 ```
 from google.genai import types
@@ -62,21 +58,21 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-Testen Sie nun die LLM-Instanz mit einer Abfrage, für die eine Suche erforderlich ist. In dieser Anleitung wird davon ausgegangen, dass eine Ereignisschleife ausgeführt wird (z. B. `python -m asyncio` oder Google Colab).
+現在，請使用需要搜尋的查詢測試 LLM 執行個體。本指南假設您已執行事件迴圈 (例如 `python -m asyncio` 或 Google Colab)。
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-Der Research Agent verwendet Python-Funktionen als Tools. Es gibt viele Möglichkeiten, ein System zu erstellen, um diese Aufgabe auszuführen. In diesem Beispiel verwenden Sie Folgendes:
+研究代理會使用 Python 函式做為工具。您可以透過多種方式建構系統來執行這項工作。在本範例中，您將使用下列項目：
 
-1. `search_web` verwendet Gemini mit der Google Suche, um im Web nach Informationen zum angegebenen Thema zu suchen.
-2. `record_notes` speichert die im Web gefundenen Informationen im Status, damit sie von den anderen Tools verwendet werden können.
-3. `write_report` schreibt den Bericht mit den Informationen, die vom `ResearchAgent` gefunden wurden.
-4. `review_report` überprüft den Bericht und gibt Feedback.
+1. `search_web` 會使用 Gemini 和 Google 搜尋，在網路上搜尋指定主題的資訊。
+2. `record_notes` 會將在網路上找到的研究內容儲存至狀態，供其他工具使用。
+3. `write_report`使用 `ResearchAgent` 找到的資訊撰寫報表
+4. `review_report` 審查報告並提供意見回饋。
 
-Die Klasse `Context` übergibt den Status zwischen Agenten/Tools und jeder Agent hat Zugriff auf den aktuellen Status des Systems.
+`Context` 類別會在代理程式/工具之間傳遞狀態，且每個代理程式都能存取系統的目前狀態。
 
 ```
 from llama_index.core.workflow import Context
@@ -111,18 +107,17 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## Multi-Agenten-Assistent erstellen
+## 建立多代理助理
 
-Um ein Multi-Agenten-System zu erstellen, definieren Sie die Agenten und ihre Interaktionen.
-Ihr System besteht aus drei Agenten:
+如要建構多代理系統，請定義代理及其互動。系統會有三位代理人：
 
-1. Ein `ResearchAgent` sucht im Web nach Informationen zum angegebenen Thema.
-2. Ein `WriteAgent` schreibt den Bericht mit den Informationen, die vom `ResearchAgent` gefunden wurden.
-3. Ein `ReviewAgent` überprüft den Bericht und gibt Feedback.
+1. `ResearchAgent` 會在網路上搜尋指定主題的相關資訊。
+2. `WriteAgent` 會使用 `ResearchAgent` 找到的資訊撰寫報告。
+3. `ReviewAgent` 會審查報告並提供意見回饋。
 
-In diesem Beispiel wird die Klasse `AgentWorkflow` verwendet, um ein Multi-Agenten-System zu erstellen, das diese Agenten in der richtigen Reihenfolge ausführt. Jeder Agent verwendet einen `system_prompt`, der ihm mitteilt, was er tun soll, und Vorschläge zur Zusammenarbeit mit den anderen Agenten enthält.
+本例使用 `AgentWorkflow` 類別建立多代理系統，依序執行這些代理。每個代理程式都會取得 `system_prompt`，瞭解自己應執行的動作，以及如何與其他代理程式合作。
 
-Optional können Sie Ihr Multi-Agenten-System unterstützen, indem Sie mit `can_handoff_to` angeben, mit welchen anderen Agenten es kommunizieren kann. Andernfalls versucht es, dies selbst herauszufinden.
+您可以選擇使用 `can_handoff_to` 指定多代理系統可與哪些其他代理程式通訊，藉此協助系統 (否則系統會自行判斷)。
 
 ```
 from llama_index.core.agent.workflow import (
@@ -172,7 +167,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-Die Agenten sind definiert. Jetzt können Sie den `AgentWorkflow` erstellen und ausführen.
+定義代理後，您現在可以建立並執行 `AgentWorkflow`。
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -188,7 +183,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-Während der Ausführung des Workflows können Sie Ereignisse, Tool-Aufrufe und Aktualisierungen an die Konsole streamen.
+執行工作流程期間，您可以將事件、工具呼叫和更新串流至控制台。
 
 ```
 from llama_index.core.agent.workflow import (
@@ -236,7 +231,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-Nach Abschluss des Workflows können Sie die endgültige Ausgabe des Berichts sowie den endgültigen Überprüfungsstatus des Überprüfungsagenten ausgeben.
+工作流程完成後，您可以列印報告的最終輸出內容，以及審查代理人的最終審查狀態。
 
 ```
 state = await handler.ctx.store.get("state")
@@ -244,28 +239,24 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## Benutzerdefinierte Workflows
+## 使用自訂工作流程執行更多操作
 
-Der `AgentWorkflow` ist eine gute Möglichkeit, mit Multi-Agenten-Systemen zu beginnen. Was aber, wenn Sie mehr Kontrolle benötigen? Sie können einen Workflow von Grund auf neu erstellen. Hier sind einige Gründe, warum Sie einen eigenen Workflow erstellen sollten:
+`AgentWorkflow` 是開始使用多代理系統的絕佳方式。但如果需要更多控制權呢？您可以從頭開始建立工作流程。以下列舉幾個可能需要自行建構工作流程的原因：
 
-- **Mehr Kontrolle über den Prozess**: Sie können den genauen Pfad festlegen, den Ihre Agenten
-  nehmen. Dazu gehört das Erstellen von Schleifen, das Treffen von Entscheidungen an bestimmten Punkten oder das parallele Arbeiten von Agenten an verschiedenen Aufgaben.
-- **Komplexe Daten verwenden**: Gehen Sie über einfachen Text hinaus. Mit benutzerdefinierten Workflows können Sie für Ihre Eingaben und Ausgaben strukturiertere Daten wie JSON-Objekte oder benutzerdefinierte Klassen verwenden.
-- **Mit verschiedenen Medien arbeiten**: Erstellen Sie Agenten, die
-  nicht nur Text, sondern auch Bilder, Audio und Video verstehen und verarbeiten können.
-- **Intelligenter planen**: Sie können einen Workflow entwerfen, der zuerst einen
-  detaillierten Plan erstellt, bevor die Agenten mit der Arbeit beginnen. Dies ist nützlich für komplexe Aufgaben, die mehrere Schritte erfordern.
-- **Selbstkorrektur aktivieren**: Erstellen Sie Agenten, die ihre eigene Arbeit überprüfen können. Wenn die Ausgabe nicht gut genug ist, kann der Agent es noch einmal versuchen und so eine Schleife zur Verbesserung erstellen, bis das Ergebnis perfekt ist.
+- **更精確地控管程序**：您可以決定代理程式採取的確切路徑。包括建立迴圈、在特定時間點做出決策，或讓代理程式同時處理不同工作。
+- **使用複雜資料**：不只是純文字，自訂工作流程可讓您使用更多結構化資料 (例如 JSON 物件或自訂類別) 做為輸入和輸出內容。
+- **處理不同媒體**：建構可理解及處理文字、圖片、音訊和影片的代理程式。
+- **更聰明的規劃**：您可以設計工作流程，讓代理程式先建立詳細計畫，再開始工作。這項功能適用於需要多個步驟的複雜工作。
+- **啟用自我修正功能**：建立可自行審查工作的代理。如果輸出結果不夠好，代理程式可以再次嘗試，建立改良迴圈，直到結果完美為止。
 
-Weitere Informationen zu LlamaIndex-Workflows finden Sie in der [LlamaIndex-Workflows
-Dokumentation](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
+如要進一步瞭解 LlamaIndex Workflows，請參閱 [LlamaIndex Workflows 說明文件](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)。
 
-Feedback geben
+提供意見
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+上次更新時間：2026-09-12 (世界標準時間)。
 
-Haben Sie Feedback für uns?
+想進一步說明嗎？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-12 (世界標準時間)。"],[],[]]

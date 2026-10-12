@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=es-419
-fetched_at: 2026-10-05T06:43:31.727930+00:00
-title: "Traducci\u00f3n instant\u00e1nea con la API de Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=th
+fetched_at: 2026-10-12T07:01:08.053101+00:00
+title: "\u0e01\u0e32\u0e23\u0e41\u0e1b\u0e25\u0e2a\u0e14\u0e14\u0e49\u0e27\u0e22 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Traducción instantánea con la API de Gemini Live
+# การแปลสดด้วย Gemini Live API
 
-La API de Gemini Live admite la traducción de voz a voz en tiempo real y con baja latencia entre más de 70 idiomas con el modelo [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=es-419). Si configuras la API de Live con parámetros de configuración de traducción, puedes transmitir audio en un idioma y recibir la salida de audio traducida en otro idioma, lo que permite una traducción de voz a voz en tiempo real sin problemas.
+Gemini Live API รองรับการแปลคำพูดเป็นคำพูดแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำระหว่างภาษาต่างๆ กว่า 70 ภาษาโดยใช้โมเดล [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=th) การกำหนดค่า Live API ด้วยการตั้งค่าการแปลจะช่วยให้คุณสตรีมเสียงในภาษาหนึ่งและรับเอาต์พุตเสียงที่แปลแล้วในอีกภาษาหนึ่งได้ ซึ่งจะช่วยให้การแปลเสียงเป็นเสียงแบบเรียลไทม์เป็นไปอย่างราบรื่น
 
-[Probar la Traducción en vivo en Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=es-419)
-[Clonar la app de ejemplo de GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Usar las habilidades del agente de programaciónterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=es-419#gemini-live-api-dev)
+[ลองใช้การแปลสดใน Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=th)
+[โคลนแอปตัวอย่างจาก GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[ใช้ทักษะของเอเจนต์การเขียนโค้ดterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#gemini-live-api-dev)
 
-## Agente en vivo vs. Traducción en vivo
+## เจ้าหน้าที่บริการลูกค้าเทียบกับการแปลสด
 
-Si bien ambos usan la API de Live, el modelo mental de la Traducción instantánea es diferente de las interacciones de agentes conversacionales en tiempo real.
+แม้ว่าทั้ง 2 อย่างจะใช้ Live API แต่โมเดลทางความคิดสำหรับการแปลสดจะแตกต่างจากการโต้ตอบของเอเจนต์แบบเรียลไทม์ผ่านการสนทนา
 
-| Agente en vivo | Traducción instantánea |
+| ตัวแทนแบบเรียลไทม์ | การแปลสด |
 | --- | --- |
-| **El modelo actúa como asistente.** Escucha, razona y toma medidas en tu nombre. | **El modelo actúa como intérprete.** Se comporta como una canalización de traducción en tiempo real. |
-| **Utiliza interacciones basadas en turnos.** Se basa en pausas, detección de intención y controla las interrupciones. | **Utiliza el procesamiento de transmisión continuo.** Traduce mientras el orador habla sin esperar turnos. |
-| **Admite herramientas y agentes.** Compatibilidad nativa con llamadas a funciones, la Búsqueda de Google y las instrucciones. | **Solo admite la traducción.** Traducción pura de latencia baja, sin instrucciones ni herramientas. |
-| **Es completamente multimodal.** Admite entradas de texto, audio, video e imagen. | **Audio restringido.** La entrada se limita al audio para garantizar umbrales estrictos de latencia en tiempo real. |
-| **Configuración detallada.** Utiliza instrucciones de generación, voz, herramientas y sistema. | **Configuración simplificada.** Establece `target_language_code` y activa o desactiva elementos como `echo_target_language`. |
+| **โมเดลจะทำหน้าที่เป็นผู้ช่วย** โดยจะรับฟัง ให้เหตุผล และดำเนินการในนามของคุณ | **โมเดลจะทำหน้าที่เป็นล่าม** โดยจะทำงานเป็นไปป์ไลน์การแปลแบบเรียลไทม์ |
+| **ใช้การโต้ตอบแบบผลัดกัน** ใช้การหยุดชั่วคราว การตรวจหาเจตนา และจัดการการหยุดชะงัก | **ใช้การประมวลผลสตรีมอย่างต่อเนื่อง** แปลขณะที่ผู้พูดพูดโดยไม่ต้องรอให้ถึงคิว |
+| **รองรับเครื่องมือและตัวแทน** รองรับการเรียกใช้ฟังก์ชัน, Google Search และคำสั่งโดยตรง | **รองรับการแปลเท่านั้น** การแปลที่มีเวลาในการตอบสนองต่ำอย่างแท้จริง โดยไม่มีการรองรับเครื่องมือหรือคำสั่ง |
+| **Multimodal อย่างเต็มรูปแบบ** รองรับอินพุตข้อความ เสียง วิดีโอ และรูปภาพ | **เสียงถูกจำกัด** โดยจะจำกัดเฉพาะเสียงเพื่อรักษาระดับเวลาในการตอบสนองแบบเรียลไทม์ที่เข้มงวด |
+| **การกำหนดค่าแบบละเอียด** ใช้คำสั่งการสร้าง คำสั่งเสียง เครื่องมือ และคำสั่งของระบบ | **การกำหนดค่าที่ง่ายขึ้น** ตั้งค่า `target_language_code` และเปิด/ปิด เช่น `echo_target_language` |
 
-## Comenzar
+## เริ่มต้นใช้งาน
 
-En los siguientes ejemplos, se muestra cómo inicializar un cliente y conectarse a la API de Live con una configuración de traducción.
+ตัวอย่างต่อไปนี้แสดงวิธีเริ่มต้นไคลเอ็นต์และเชื่อมต่อกับ Live API ด้วยการกำหนดค่าการแปล
 
 ### Python
 
@@ -185,15 +185,15 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## Cómo enviar audio
+## การส่งเสียง
 
-Para transmitir entradas de voz para la traducción, debes enviar audio PCM sin procesar de 16 bits, little-endian.
+หากต้องการสตรีมอินพุตเสียงเพื่อการแปล ให้ส่งเสียง PCM แบบ 16 บิต, Little-Endian ที่ยังไม่ได้ประมวลผล
 
-- **Formato de audio de entrada**: PCM sin procesar de 16 bits a 16 kHz (mono, little-endian).
-- **Formato de audio de salida**: PCM sin procesar de 16 bits a 24 kHz (mono, little-endian).
-- **Tamaño de fragmento y latencia**: Envía audio en fragmentos de 100 ms.
+- **รูปแบบเสียงอินพุต**: PCM แบบ 16 บิตดิบที่ 16 kHz (โมโน, Little-Endian)
+- **รูปแบบเสียงเอาต์พุต**: PCM แบบ 16 บิตดิบที่ 24 kHz (โมโน, Little-Endian)
+- **ขนาดกลุ่มและเวลาในการตอบสนอง**: ส่งเสียงเป็นกลุ่มขนาด 100 มิลลิวินาที
 
-En los siguientes ejemplos, se muestra cómo enviar fragmentos de audio a la sesión.
+ตัวอย่างต่อไปนี้แสดงวิธีส่งกลุ่มเสียงไปยังเซสชัน
 
 ### Python
 
@@ -238,23 +238,23 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## Configuración
+## การกำหนดค่า
 
-Para habilitar la traducción, debes especificar `translationConfig` dentro de `generationConfig` durante la configuración de la sesión.
+หากต้องการเปิดใช้การแปล คุณต้องระบุ `translationConfig` ภายใน `generationConfig` ระหว่างการตั้งค่าเซสชัน
 
-### Configura los mensajes
+### การกำหนดค่าข้อความเกี่ยวกับการตั้งค่า
 
-El objeto `generationConfig` admite los siguientes campos para habilitar las transcripciones:
+`generationConfig` รองรับฟิลด์ต่อไปนี้เพื่อเปิดใช้ข้อความถอดเสียง
 
-- **`inputAudioTranscription`**: Es un objeto que, cuando está presente, permite que el modelo envíe transcripciones de texto del audio de entrada.
-- **`outputAudioTranscription`**: Es un objeto que, cuando está presente, permite que el modelo envíe transcripciones de texto del audio de salida (traducido).
+- **`inputAudioTranscription`**: ออบเจ็กต์ที่เมื่อมีอยู่จะช่วยให้โมเดลส่งข้อความถอดเสียงของเสียงที่ป้อนได้
+- **`outputAudioTranscription`**: ออบเจ็กต์ที่เมื่อมีอยู่จะช่วยให้โมเดลส่งข้อความถอดเสียงของเอาต์พุต (เสียงที่แปลแล้ว) ได้
 
-El objeto `translationConfig` admite los siguientes campos:
+`translationConfig` รองรับฟิลด์ต่อไปนี้
 
-- **`targetLanguageCode`**: Es el [código de idioma BCP-47](#supported-languages) del idioma al que deseas que se traduzca el modelo (p.ej., `"pl"` para y `"es"` para español). La configuración predeterminada es `"en"`.
-- **`echoTargetLanguage`**: Es un valor booleano que indica cómo se debe controlar el audio de entrada que ya está en el idioma de destino. Si se configura como `true`, el modelo repetirá el audio de entrada que ya está en el idioma de destino. Si se configura como `false`, el modelo permanecerá en silencio cuando el discurso de entrada ya esté en el idioma de destino. El valor predeterminado es `false`.
+- **`targetLanguageCode`**: [รหัสภาษา BCP-47](#supported-languages) ของภาษาที่คุณต้องการให้โมเดลแปล (เช่น `"pl"` สำหรับภาษาโปแลนด์ `"es"` สำหรับภาษาสเปน) ค่าเริ่มต้นคือ `"en"`
+- **`echoTargetLanguage`**: บูลีนที่ระบุวิธีจัดการเสียงอินพุตที่เป็นภาษาเป้าหมายอยู่แล้ว หากตั้งค่าเป็น `true` โมเดลจะพูดตามเสียงที่ป้อนซึ่งเป็นภาษาเป้าหมายอยู่แล้ว หากตั้งค่าเป็น `false` โมเดลจะเงียบเมื่อเสียงพูดอินพุตเป็นภาษาเป้าหมายอยู่แล้ว ค่าเริ่มต้นคือ `false`
 
-A continuación, se muestra un ejemplo de la estructura del mensaje de configuración:
+ตัวอย่างโครงสร้างข้อความการตั้งค่ามีดังนี้
 
 ```
 "setup": {
@@ -273,19 +273,19 @@ A continuación, se muestra un ejemplo de la estructura del mensaje de configura
 }
 ```
 
-## Usa tokens efímeros en aplicaciones del cliente
+## ใช้โทเค็นชั่วคราวในแอปพลิเคชันฝั่งไคลเอ็นต์
 
-En el caso de las aplicaciones cliente-servidor, puedes usar [tokens efímeros](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=es-419) (actualmente en `v1beta`) para evitar exponer tu clave de API.
+สำหรับแอปพลิเคชันไคลเอ็นต์ต่อเซิร์ฟเวอร์ คุณสามารถใช้[โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th) (ปัจจุบันอยู่ใน`v1beta`) เพื่อหลีกเลี่ยงการเปิดเผยคีย์ API
 
-Cuando se usan tokens efímeros con la Traducción instantánea, sucede lo siguiente:
+เมื่อใช้โทเค็นชั่วคราวกับการแปลสด ให้ทำดังนี้
 
-1. Debes usar el extremo `v1beta`.
-2. **Configuración de bloqueo:** De forma predeterminada, debes especificar el `translationConfig` en las restricciones de creación de tokens en tu servidor. Esto garantiza que la configuración de traducción esté bloqueada y que el cliente no pueda manipularla.
-3. **Configuración de desbloqueo:** Si deseas poder establecer el parámetro `translationConfig` en el cliente (por ejemplo, para permitir que un usuario elija su propio idioma objetivo), debes omitirlo en la solicitud de creación de tokens y establecer `"lock_additional_fields": []` en su lugar. Esto desbloqueará `translationConfig` para que se configure en el cliente.
+1. คุณต้องใช้ปลายทาง `v1beta`
+2. **การกำหนดค่าการล็อก:** โดยค่าเริ่มต้น คุณควรกำหนด `translationConfig` ในข้อจำกัดการสร้างโทเค็นบนเซิร์ฟเวอร์ ซึ่งจะช่วยให้มั่นใจได้ว่าการกำหนดค่าการแปลจะล็อกไว้และไคลเอ็นต์จะแก้ไขไม่ได้
+3. **การกำหนดค่าการปลดล็อก:** หากต้องการตั้งค่า `translationConfig` ในฝั่งไคลเอ็นต์ (เช่น เพื่อให้ผู้ใช้เลือกภาษาเป้าหมายของตนเองได้) คุณต้องละเว้นค่านี้จากคำขอสร้างโทเค็นและตั้งค่า `"lock_additional_fields": []` แทน ซึ่งจะปลดล็อก `translationConfig` เพื่อตั้งค่าในฝั่งไคลเอ็นต์
 
-### Crea un token efímero restringido
+### สร้างโทเค็นชั่วคราวที่จำกัด
 
-En los siguientes ejemplos, se muestra cómo crear un token efímero con restricciones de traducción.
+ตัวอย่างต่อไปนี้แสดงวิธีสร้างโทเค็นชั่วคราวที่มีข้อจำกัดด้านการแปล
 
 ### Python
 
@@ -366,74 +366,74 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## Limitaciones
+## ข้อจำกัด
 
-- **Modalidades de entrada**: Solo se admite la entrada de audio para la traducción. No se admite la entrada de texto.
-- **Replicación de voz**: La replicación de voz puede ser incoherente. Las voces pueden cambiar después de pausas largas, asignar el género incorrecto según cómo comienza el discurso o quedarse atascadas en una voz durante conversaciones rápidas con varios oradores.
-- **Detección de idioma**: La detección de idioma tiene dificultades con los acentos marcados, los idiomas similares (p. ej., español y portugués) o los cambios rápidos de idioma. **Nota:** Esto solo debería afectar la transcripción de entrada. Los códigos de idioma y la traducción final deben seguir siendo precisos.
-- **Audio de fondo**: El modelo está diseñado para filtrar el ruido y la música para producir un discurso limpio, pero es posible que no se ignore todo el audio de fondo.
-- **Echo Target Language**: Cuando es `echoTargetLanguage: true`, el ruido de fondo o la música pueden introducir artefactos en el audio traducido cuando el audio de entrada ya está en el idioma de destino.
+- **รูปแบบอินพุต**: รองรับเฉพาะอินพุตเสียงสำหรับการแปล ไม่รองรับการป้อนข้อความ
+- **การจำลองเสียง**: การจำลองเสียงอาจไม่สอดคล้องกัน เสียงอาจเปลี่ยนหลังจากหยุดพูดนานๆ ระบบอาจกำหนดเพศผิดตามวิธีที่เริ่มพูด หรืออาจใช้เสียงเดียวตลอดการสนทนาแบบหลายคนพูดอย่างรวดเร็ว
+- **การตรวจหาภาษา**: การตรวจหาภาษาอาจมีปัญหาเมื่อมีสำเนียงที่หนัก ภาษาที่คล้ายกัน (เช่น สเปนกับโปรตุเกส) หรือการเปลี่ยนภาษาอย่างรวดเร็ว **หมายเหตุ:** การดำเนินการนี้ควรส่งผลต่อเฉพาะข้อความถอดเสียงที่ป้อน รหัสภาษาและคำแปลสุดท้ายควรยังคงถูกต้อง
+- **เสียงเบื้องหลัง**: โมเดลได้รับการออกแบบมาเพื่อกรองเสียงรบกวนและเพลงออกเพื่อให้ได้เสียงพูดที่ชัดเจน แต่อาจไม่สามารถกรองเสียงเบื้องหลังบางอย่างได้
+- **ภาษาเป้าหมายของเสียงก้อง**: เมื่อ`echoTargetLanguage: true` เสียงรบกวนรอบข้างหรือเพลงอาจทำให้เกิดอาร์ติแฟกต์ในเสียงที่แปลเมื่อเสียงอินพุตเป็นภาษาเป้าหมายอยู่แล้ว
 
-## Idiomas admitidos
+## ภาษาที่รองรับ
 
-Los siguientes idiomas son compatibles con la Traducción instantánea.
+ระบบรองรับการแปลสดในภาษาต่อไปนี้
 
-| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
+| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
 | --- | --- | --- | --- |
-| Afrikaans | af | Kazajo | kk |
-| Akan | ak | Jemer | km |
-| Albanés | sq | Kiñarwanda | rw |
-| Amárico | am | Coreano | ko |
-| Árabe | ar | Laosiano | lo |
-| Armenio | hy | Letón | lv |
-| Azerí | az | Lituano | lt |
-| Vasco | eu | Macedonio | mk |
-| Bielorrus | be | Malayo | ms |
-| Bengalí | bn | Malayalam | ml |
-| Búlgaro | bg | Marathi | mr |
-| Birmano (Birmania) | my | Mongol | mn |
-| Catalán | ca | Nepalí | ne |
-| Chino (simplificado) | zh-Hans | Noruego | no, nb |
-| Chino (tradicional) | zh-Hant | Persa | fa |
-| Croata | h | Polaco | pl |
-| Checo | cs | Portugués (Brasil) | pt-BR |
-| Danés | da | Portugués (Portugal) | pt-PT |
-| Neerlandés | nl | Punyabí | pa |
-| Inglés | en | Rumano | ro |
-| Estonio | et | Ruso | ru |
-| Filipino | fil | Serbio | sr |
-| Finlandés | fi | Sindhi | sd |
-| Francés | fr | Cingalés | si |
-| Gallego | gl | Eslovaco | sk |
-| Georgiano | ka | Esloveno | sl |
-| Alemán | de | Español | es |
-| Griego | el | Sundanés | su |
-| Gujarati | gu | Suajili | sw |
-| Hausa | ha | Sueco | sv |
-| Hebreo | él | Tamil | ta |
-| Hindi | hi | Telugu | te |
-| Húngaro | hu | Tailandés | th |
-| Islandés | is | Turco | tr |
-| Indonesio | id | Ucraniano | uk |
-| Italiano | it | Urdu | ur |
-| Japonés | ja | Uzbeko | uz |
-| Javanés | jv | Vietnamita | vi |
-| Canarés | kn | Zulú | zu |
+| แอฟริคานส์ | af | คาซัค | kk |
+| อะคัน | ak | เขมร | กม. |
+| แอลเบเนีย | sq | คินยารวันดา | rw |
+| อัมฮาริก | am | เกาหลี | ko |
+| อาหรับ | ar | ภาษาลาว | lo |
+| อาร์เมเนีย | hy | ลัตเวีย | lv |
+| อาร์เซอร์ไบจัน | az | ลิทัวเนีย | lt |
+| บาสก์ | eu | มาซีโดเนีย | mk |
+| เบลารุส | be | มาเลย์ | มิลลิวินาที |
+| เบงกอล | bn | มาลายาลัม | ml |
+| บัลแกเรีย | bg | มราฐี | mr |
+| พม่า (เมียนมา) | my | มองโกเลีย | mn |
+| คาตาลัน | ca | เนปาล | ne |
+| จีน (ตัวย่อ) | zh-Hans | นอร์เวย์ | no, nb |
+| จีน (ดั้งเดิม) | zh-Hant | เปอร์เซีย | fa |
+| โครเอเชีย | ชม. | โปแลนด์ | pl |
+| เช็ก | cs | โปรตุเกส (บราซิล) | pt-BR |
+| เดนมาร์ก | da | โปรตุเกส (โปรตุเกส) | pt-PT |
+| ดัตช์ | nl | ปัญจาบ | pa |
+| อังกฤษ | en | โรมาเนีย | ro |
+| เอสโตเนีย | et | รัสเซีย | ru |
+| ฟิลิปปินส์ | fil | เซอร์เบีย | sr |
+| ฟินแลนด์ | fi | สินธี | SD |
+| ฝรั่งเศส | fr | สิงหล | si |
+| กาลิเชียน | gl | สโลวัก | sk |
+| จอร์เจีย | ka | สโลวีเนีย | sl |
+| เยอรมัน | de | สเปน | es |
+| กรีก | el | ซุนดา | su |
+| คุชราต | gu | สวาฮิลี | sw |
+| เฮาซา | ha | สวีเดน | sv |
+| ฮีบรู | เขา | ทมิฬ | ta |
+| ฮินดี | hi | เตลูกู | te |
+| ฮังการี | hu | ไทย | th |
+| ไอซ์แลนด์ | is | ตุรกี | tr |
+| อินโดนีเซีย | id | ยูเครน | uk |
+| อิตาลี | it | อูรดู | ur |
+| ญี่ปุ่น | ja | อุซเบก | uz |
+| ชวา | jv | เวียดนาม | vi |
+| กันนาดา | kn | ซูลู | zu |
 
-## ¿Qué sigue?
+## ขั้นตอนถัดไป
 
-- Lee la guía completa de [Funciones](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=es-419) de la API de Live.
-- Lee la guía [Cómo comenzar a usar el SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=es-419).
-- Lee la guía [Comienza a usar WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=es-419).
-- Lee la guía sobre [tokens efímeros](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=es-419) para obtener información sobre la autenticación segura en aplicaciones cliente-servidor.
-- Clona los [ejemplos de la API en vivo](https://github.com/google-gemini/gemini-live-api-examples) desde GitHub.
+- อ่านคู่มือ[ความสามารถ](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=th)ของ Live API ฉบับเต็ม
+- อ่านคู่มือ[เริ่มต้นใช้งาน SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=th)
+- อ่านคู่มือ[เริ่มต้นใช้งาน WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=th)
+- อ่านคู่มือ[โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th)เพื่อดูการตรวจสอบสิทธิ์ที่ปลอดภัยในแอปพลิเคชันไคลเอ็นต์ต่อเซิร์ฟเวอร์
+- โคลน[ตัวอย่าง API ที่ใช้งานจริง](https://github.com/google-gemini/gemini-live-api-examples)จาก GitHub
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última actualización: 2026-07-23 (UTC)
+อัปเดตล่าสุด 2026-07-23 UTC
 
-¿Quieres brindar más información?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-23 (UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-23 UTC"],[],[]]

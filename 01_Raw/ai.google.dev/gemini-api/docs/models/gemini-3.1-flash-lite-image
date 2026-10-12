@@ -1,62 +1,62 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=he
-fetched_at: 2026-10-05T06:28:42.320957+00:00
-title: "\u05ea\u05de\u05d5\u05e0\u05d4 \u05e9\u05dc Gemini 3.1 Flash Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=tr
+fetched_at: 2026-10-12T06:58:31.888239+00:00
+title: "Gemini 3.1 Flash Lite g\u00f6r\u00fcnt\u00fcs\u00fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-# תמונה של Gemini 3.1 Flash Lite
+# Gemini 3.1 Flash Lite görüntüsü
 
-‫**Nano Banana 2 Lite** נועד להיות מומחה ליעילות במשפחת מודלים ליצירת תמונות. הוא מציע יצירה ועריכה של תמונות עם זמן טעינה קצר במיוחד ועלות משתלמת. המודל הזה מאפשר לפתח תרחישי שימוש אינטראקטיביים בהיקף גדול ויישומים לצרכנים בזמן אמת, כי הוא מבוסס על זמן אחזור של פחות משנייה ועל עלויות מחשוב נמוכות משמעותית ב-TPU.
+**Nano Banana 2 Lite**, görüntü üretme ailesinin verimlilik uzmanı olarak tasarlanmıştır. Ultra düşük gecikme süresi ve uygun maliyetli görüntü üretme ve düzenleme özellikleri sunar. Bu model, 2 saniyeden kısa bir gecikme süresini hedefleyerek ve TPU işlem maliyetlerini önemli ölçüde azaltarak yüksek hacimli etkileşimli geliştirici kullanım alanlarını ve gerçek zamanlı tüketici uygulamalarını mümkün kılar.
 
-**יכולות מרכזיות:**
+**Temel özellikler:**
 
-- **זמן אחזור כולל של פחות משתי שניות**
-- **יצירה ועריכה של תמונות וטקסט משולבים** עם תמיכה מובנית בטקסט -> טקסט + תמונה/תמונות ובתמונה + טקסט -> טקסט + תמונה/תמונות.
-- **אופטימיזציה לרזולוציות נמוכות יותר** של 1K‏ (‎1024x1024px).
-- תומך בקבוצה נפרדת של **14 יחסי גובה-רוחב**, כולל פורמטים סטנדרטיים.
-- **עריכות מקומיות מהירות רב-שלביות** (החלפת צבעים, יצירת סטיקרים, שינויים ברקע).
-- שומר על התאמה גבוהה של הדמויות בהשוואה לסטנדרטים המקוריים של Nano Banana.
-- יחסי גובה-רוחב חדשים: `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`.
-- ערכים נתמכים של `image_size`: ‏ `1024px` (1K). *(הערה: רזולוציות 2K ו-4K לא נתמכות).*
-- **‫SynthID לסימני מים (תמיד מופעל) + C2PA**.
+- **2 saniyeden kısa uçtan uca gecikme**
+- Metin -> Metin + Resim ve Resim + Metin -> Metin + Resim için yerel destekle **aralıklı oluşturma ve düzenleme**
+- 1K (1024x1024 piksel) gibi **daha düşük çözünürlükler için optimize edilmiştir**.
+- Standart biçimler de dahil olmak üzere **14 farklı en boy oranı** desteklenir.
+- **Hızlı çok aşamalı etkileşimli yerel düzenlemeler** (renk değiştirme, çıkartma oluşturma, arka plan ayarlamaları).
+- Orijinal Nano Banana standartlarına uygun yüksek karakter hizalaması sağlar.
+- Yeni `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` en-boy oranları.
+- Desteklenen `image_size` değerleri: `1024px` (1.000). *(Not: 2K ve 4K çözünürlük desteklenmez).*
+- **SynthID filigran (Always On) + C2PA**.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=he)
+[Google AI Studio'da deneme](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=tr)
 
-## מאמרי עזרה
+## Belgeler
 
-בדף [יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) מופיע מידע מפורט על התכונות והיכולות.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) sayfasını ziyaret edin.
 
 ## gemini-3.1-flash-lite-image
 
-| נכס | תיאור |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3.1-flash-lite-image` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון ו-PDF  **פלט**  תמונה וטקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  65,536  **Output token limit**  ‫4,096 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  לא נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  לא נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[תהליך החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך (מינימלי וגבוה)  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[היקש ברמת Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  לא נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  לא נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - יציב: `gemini-3.1-flash-lite-image` |
-| calendar\_monthהעדכון האחרון | יוני 2026 |
-| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=he) |
+| id\_cardModel kodu | `gemini-3.1-flash-lite-image` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, video ve PDF  **Çıkış**  Resim ve Metin |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  65.536  **Çıkış jetonu sınırı**  4.096 |
+| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Desteklenmiyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Desteklenmiyor  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Destekleniyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Desteklenmiyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Desteklenmiyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Desteklenir (minimal ve yüksek)  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
+| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Destekleniyor  **[Esnek çıkarım](https://ai.google.dev/gemini-api/docs/flex-inference?hl=tr)**  Desteklenmiyor  **[Öncelik çıkarımı](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)**  Desteklenmiyor |
+| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-3.1-flash-lite-image` |
+| calendar\_monthSon güncelleme | Haziran 2026 |
+| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=tr) |
 
-שליחת משוב
+Geri bildirim gönderin
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-עדכון אחרון: 2026-09-08 (שעון UTC).
+Son güncelleme tarihi: 2026-09-08 UTC.
 
-רוצה לתת לנו משוב?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-08 (שעון UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-08 UTC."],[],[]]

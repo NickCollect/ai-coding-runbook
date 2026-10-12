@@ -1,31 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=th
-fetched_at: 2026-10-05T06:41:22.721856+00:00
-title: "\u0e23\u0e27\u0e21\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e21\u0e37\u0e2d\u0e43\u0e19\u0e15\u0e31\u0e27\u0e41\u0e25\u0e30\u0e01\u0e32\u0e23\u0e40\u0e23\u0e35\u0e22\u0e01\u0e43\u0e0a\u0e49\u0e1f\u0e31\u0e07\u0e01\u0e4c\u0e0a\u0e31\u0e19 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=ru
+fetched_at: 2026-10-12T06:59:06.961949+00:00
+title: "\u041a\u0430\u043a \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u044c \u0432\u0441\u0442\u0440\u043e\u0435\u043d\u043d\u044b\u0435 \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b \u0438 \u0444\u0443\u043d\u043a\u0446\u0438\u044e \u0432\u044b\u0437\u043e\u0432\u0430 \u0444\u0443\u043d\u043a\u0446\u0438\u0439 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Флэш-память Gemini 3.8 теперь доступна. [Попробуйте!](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs/generate-content?hl=ru)
 
-ส่งความคิดเห็น
+Отправить отзыв
 
-# รวมเครื่องมือในตัวและการเรียกใช้ฟังก์ชัน
+# Как использовать встроенные инструменты и функцию вызова функций
 
-Gemini ช่วยให้คุณสามารถรวม[เครื่องมือในตัว](https://ai.google.dev/gemini-api/docs/tools?hl=th) เช่น `google_search` และ[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
-(หรือที่เรียกว่า*เครื่องมือที่กำหนดเอง*) ไว้ในการสร้างครั้งเดียวได้โดยการเก็บรักษาและแสดงประวัติบริบทของการเรียกใช้เครื่องมือ การผสมผสานเครื่องมือในตัวและเครื่องมือที่กำหนดเองช่วยให้
-เวิร์กโฟลว์ที่ซับซ้อนและมีเอเจนต์ทำงานได้ เช่น โมเดลสามารถอ้างอิง
-ข้อมูลเว็บแบบเรียลไทม์ก่อนที่จะเรียกตรรกะทางธุรกิจที่เฉพาะเจาะจงของคุณ
+Gemini позволяет сочетать [встроенные инструменты](https://ai.google.dev/gemini-api/docs/tools?hl=ru), такие как `google_search`, и [вызов функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru) (также известный как *персонализированные инструменты*) в одном ответе, сохраняя и предоставляя историю контекста вызовов инструментов. Встроенные и пользовательские комбинации инструментов позволяют создавать сложные рабочие процессы, в которых, например, модель может получать актуальные данные из интернета, прежде чем вызывать определенную бизнес-логику.
 
-ตัวอย่างที่เปิดใช้ชุดค่าผสมของเครื่องมือในตัวและเครื่องมือที่กำหนดเองด้วย
-`google_search` และฟังก์ชันที่กำหนดเอง `getWeather` มีดังนี้
+Вот пример, в котором сочетаются встроенные и специальные инструменты с использованием разметки `google_search` и специальной функции `getWeather`:
 
 ### Python
 
@@ -52,13 +48,13 @@ getWeather = {
 
 # Turn 1: Initial request with Google Search (built-in) and getWeather (custom) tools enabled
 response = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     contents="What is the northernmost city in the United States? What's the weather like there today?",
     config=types.GenerateContentConfig(
         tools=[
             types.Tool(
                 google_search=types.GoogleSearch(),  # Built-in tool
-                function_declarations=[getWeather]       # Custom tool
+                function_declarations=[getWeather],  # Custom tool
             ),
         ],
         tool_config=types.ToolConfig(
@@ -94,7 +90,7 @@ history = [
 ]
 
 response_2 = client.models.generate_content(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     contents=history,
     config=types.GenerateContentConfig(
         tools=[
@@ -138,10 +134,6 @@ const getWeather = {
 };
 
 async function run() {
-    const model = client.getGenerativeModel({
-        model: "gemini-3.6-flash",
-    });
-
     const tools = [
       { googleSearch: {} },
       { functionDeclarations: [getWeather] }
@@ -150,13 +142,14 @@ async function run() {
     const toolConfig = { includeServerSideToolInvocations: true };
 
     // Turn 1: Initial request with Google Search (built-in) and getWeather (custom) tools enabled
-    const result1 = await model.generateContent({
+    const response1 = await client.models.generateContent({
+        model: "gemini-3.8-flash",
         contents: [{role: "user", parts: [{text: "What is the northernmost city in the United States? What's the weather like there today?"}]}],
-        tools: tools,
-        toolConfig: toolConfig,
+        config: {
+            tools: tools,
+            toolConfig: toolConfig,
+        },
     });
-
-    const response1 = result1.response;
 
     for (const part of response1.candidates[0].content.parts) {
         if (part.functionCall) {
@@ -164,7 +157,7 @@ async function run() {
         }
     }
 
-    const functionCallId = response1.candidates[0].content.parts.find(p => p.functionCall)?.functionCall?.id;
+   const functionCallId = response1.candidates[0].content.parts.find(p => p.functionCall)?.functionCall?.id;
 
     // Turn 2: Manually build history to circulate both tool and function context
     const history = [
@@ -187,13 +180,16 @@ async function run() {
         }
     ];
 
-    const result2 = await model.generateContent({
+    const response2 = await client.models.generateContent({
+        model: "gemini-3.8-flash",
         contents: history,
-        tools: tools,
-        toolConfig: toolConfig,
+        config: {
+            tools: tools,
+            toolConfig: toolConfig,
+        },
     });
 
-    for (const part of result2.response.candidates[0].content.parts) {
+    for (const part of response2.candidates[0].content.parts) {
         if (part.text) {
             console.log(part.text);
         }
@@ -203,7 +199,7 @@ async function run() {
 run();
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 package main
@@ -241,7 +237,7 @@ func main() {
         },
     }
 
-    model := client.GenerativeModel("gemini-3.6-flash")
+    model := client.GenerativeModel("gemini-3.8-flash")
     model.Tools = []*genai.Tool{
         {GoogleSearch: &genai.GoogleSearch{}}, // Built-in tool
         {FunctionDeclarations: []*genai.FunctionDeclaration{getWeather}}, // Custom tool
@@ -310,7 +306,7 @@ func main() {
 
 ```
 # Turn 1: Initial request with Google Search (built-in) and getWeather (custom) tools enabled
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -347,7 +343,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 # The following request assumes you have captured candidates[0].content from Turn 1 response,
 # and extracted function_call.id for getWeather.
 # Replace FUNCTION_CALL_ID and insert candidate content from turn 1.
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -392,77 +388,59 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## วิธีการทำงาน
+## Принцип работы
 
-โมเดล Gemini 3 ใช้*การหมุนเวียนบริบทของเครื่องมือ*เพื่อเปิดใช้ชุดค่าผสมของเครื่องมือในตัวและเครื่องมือที่กำหนดเอง
-การหมุนเวียนบริบทของเครื่องมือช่วยให้สามารถรักษาและ
-แสดงบริบทของเครื่องมือในตัว รวมถึงแชร์กับเครื่องมือที่กำหนดเองในการเรียกใช้เดียวกัน
-ได้ตั้งแต่ต้นจนจบ
+Модели Gemini 3 используют *циркуляцию контекста инструмента*, чтобы обеспечить работу встроенных и пользовательских комбинаций инструментов. Передача контекста инструментов позволяет сохранять и предоставлять контекст встроенных инструментов, а также делиться им со специальными инструментами в рамках одного вызова от хода к ходу.
 
-### เปิดใช้การรวมเครื่องมือ
+### Как включить комбинирование инструментов
 
-- คุณต้องตั้งค่าแฟล็ก `include_server_side_tool_invocations` เป็น `true` เพื่อ
-  เปิดใช้การหมุนเวียนบริบทของเครื่องมือ
-- ใส่ [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#function-declarations) พร้อมกับเครื่องมือในตัวที่คุณต้องการใช้เพื่อเรียกใช้ลักษณะการทำงานร่วมกัน
-  - หากคุณไม่รวม `function_declarations` การหมุนเวียนบริบทของเครื่องมือ
-    จะยังคงทำงานกับเครื่องมือในตัวที่รวมไว้ ตราบใดที่ตั้งค่าสถานะไว้
+- Чтобы включить передачу контекста инструмента, необходимо задать для флага `include_server_side_tool_invocations` значение `true`.
+- Добавьте [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru#function-declarations) и встроенные инструменты, которые хотите использовать, чтобы активировать комбинированное поведение.
+  - Если вы не добавите `function_declarations`, передача контекста инструмента будет работать с включенными встроенными инструментами, если установлен флаг.
 
-### API แสดงผลชิ้นส่วน
+### API возвращает части
 
-ในคำตอบเดียว API จะแสดงผลส่วน `toolCall` และ `toolResponse`
-สำหรับการเรียกเครื่องมือในตัว สำหรับการเรียกฟังก์ชัน (เครื่องมือที่กำหนดเอง) API จะ
-แสดงส่วนการเรียก `functionCall` ซึ่งผู้ใช้จะระบุส่วน `functionResponse` ในรอบถัดไป
+В одном ответе API возвращает части `toolCall` и `toolResponse` для встроенного вызова инструмента. При вызове функции (специального инструмента) API возвращает часть `functionCall`, а пользователь в следующем запросе предоставляет часть `functionResponse`.
 
-- `toolCall` และ `toolResponse`: API จะแสดงส่วนเหล่านี้เพื่อรักษาบริบทของเครื่องมือที่ทำงานฝั่งเซิร์ฟเวอร์และผลลัพธ์ของการดำเนินการสำหรับรอบถัดไป
-- `functionCall` และ `functionResponse`: API จะส่งการเรียกฟังก์ชันให้ผู้ใช้กรอก และผู้ใช้จะส่งผลลัพธ์กลับมาในการตอบกลับฟังก์ชัน (ส่วนเหล่านี้เป็นมาตรฐานสำหรับการ[เรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ทั้งหมดใน Gemini API ไม่ได้มีเฉพาะฟีเจอร์การรวมเครื่องมือ)
-- (เครื่องมือ[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)เท่านั้น)
-  `executableCode` และ `codeExecutionResult`:
-  เมื่อใช้เครื่องมือการเรียกใช้โค้ด แทนที่จะเป็น `functionCall` และ
-  `functionResponse` API จะแสดง `executableCode` (โค้ดที่โมเดลสร้างขึ้น
-  ซึ่งมีไว้เพื่อเรียกใช้) และ `codeExecutionResult` (ผลลัพธ์ของโค้ดที่เรียกใช้ได้)
+- `toolCall` и `toolResponse`. API возвращает эти части, чтобы сохранить контекст того, какие инструменты выполняются на стороне сервера, и результат их выполнения для следующего хода.
+- `functionCall` и `functionResponse`. API отправляет пользователю вызов функции, чтобы он заполнил его, а пользователь отправляет результат обратно в ответе функции. Эти части являются стандартными для всех [вызовов функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru) в Gemini API и не относятся к уникальным функциям сочетания инструментов.
+- (только для [инструмента выполнения кода](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru))
+  `executableCode` и `codeExecutionResult`:
+  При использовании инструмента выполнения кода вместо `functionCall` и `functionResponse` API возвращает `executableCode` (код, сгенерированный моделью и предназначенный для выполнения) и `codeExecutionResult` (результат выполнения кода).
 
-คุณต้องส่งคืนชิ้นส่วนทั้งหมด รวมถึง[ฟิลด์](#critical-fields)ทั้งหมดที่ชิ้นส่วนนั้นมี กลับไปยังโมเดลในแต่ละรอบเพื่อรักษาบริบทและเปิดใช้การรวมเครื่องมือ
+На каждом шаге вы должны возвращать модели все части, включая все [поля](#critical-fields), которые они содержат, чтобы поддерживать контекст и использовать комбинации инструментов.
 
-### ฟิลด์ที่สำคัญในชิ้นส่วนที่ส่งคืน
+### Важные поля в возвращенных частях
 
-[ชิ้นส่วนบางอย่างที่ API แสดงผล](#api-returns-parts)จะมีฟิลด์ `id`,
-`tool_type` และ `thought_signature` ฟิลด์เหล่านี้มีความสําคัญต่อ
-การรักษาบริบทของเครื่องมือ (และด้วยเหตุนี้จึงมีความสําคัญต่อการรวมเครื่องมือ) คุณต้อง
-ส่งคืนทุกส่วน*ตามที่ระบุไว้ในการตอบกลับ*ในคําขอที่ตามมา
+Некоторые [части, возвращаемые API](#api-returns-parts), будут включать поля `id`, `tool_type` и `thought_signature`. Эти поля необходимы для сохранения контекста инструмента (а значит, и для сочетания инструментов), поэтому в последующих запросах вам нужно возвращать все части *в том виде, в котором они были указаны в ответе*.
 
-- `id`: ตัวระบุที่ไม่ซ้ำกันซึ่งแมปการเรียกไปยังการตอบกลับ `id` จะ**ตั้งค่าเป็น
-  การตอบกลับการเรียกใช้ฟังก์ชันทั้งหมด** ไม่ว่าบริบทของเครื่องมือจะหมุนเวียนอย่างไรก็ตาม
-  คุณ*ต้อง*ระบุ `id` เดียวกันในคำตอบของฟังก์ชัน
-  กับที่ API ระบุในการเรียกฟังก์ชัน เครื่องมือในตัวจะแชร์ `id` โดยอัตโนมัติ
-  ระหว่างการเรียกใช้เครื่องมือและการตอบกลับเครื่องมือ
-  - พบในส่วนที่เกี่ยวข้องกับเครื่องมือทั้งหมด: `toolCall`, `toolResponse`,
-    `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: ระบุเครื่องมือที่ใช้ ชื่อเครื่องมือหรือฟังก์ชันในตัว (เช่น `URL_CONTEXT`) หรือชื่อฟังก์ชัน (เช่น `getWeather`)
-  - พบในส่วน `toolCall` และ `toolResponse`
-- `thought_signature`: บริบทที่เข้ารหัสจริงซึ่งฝังอยู่ใน**แต่ละ
-  ส่วนที่ API แสดงผล** ระบบจะสร้างบริบทขึ้นใหม่ไม่ได้หากไม่มีลายเซ็นความคิด หากคุณไม่ส่งคืนลายเซ็นความคิดสำหรับทุกส่วนในทุกรอบ โมเดลจะแสดงข้อผิดพลาด
-  - พบได้ใน*ทุก*ส่วน
+- `id` – уникальный идентификатор, который сопоставляет вызов с ответом. `id` **устанавливается во всех ответах на вызовы функций** независимо от того, передается ли контекст инструмента.
+  Вы *должны* указать в ответе функции тот же параметр `id`, который API предоставляет в вызове функции. Встроенные инструменты автоматически передают `id` между вызовом инструмента и ответом инструмента.
+  - Встречается во всех разделах, связанных с инструментами: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`.
+- `tool_type` – определяет, какой инструмент используется. Это может быть встроенный инструмент (например, `URL_CONTEXT`) или функция (например, `getWeather`).
+  - Найдено в частях `toolCall` и `toolResponse`.
+- `thought_signature` – фактический зашифрованный контекст, встроенный в **каждую часть, возвращаемую API**. Без сигнатур мыслей контекст не может быть восстановлен. Если вы не будете возвращать сигнатуры мыслей для всех частей на каждом шаге, модель будет выдавать ошибки.
+  - Встречается во *всех* частях.
 
-### ข้อมูลเฉพาะเครื่องมือ
+### Данные, относящиеся к определенному инструменту
 
-เครื่องมือในตัวบางอย่างจะแสดงอาร์กิวเมนต์ข้อมูลที่ผู้ใช้มองเห็นได้ซึ่งเจาะจงสำหรับประเภทเครื่องมือ
+Некоторые встроенные инструменты возвращают видимые пользователю аргументы данных, относящиеся к определенному типу инструмента.
 
-| เครื่องมือ | อาร์กิวเมนต์การเรียกใช้เครื่องมือที่ผู้ใช้มองเห็น (หากมี) | การตอบกลับของเครื่องมือที่ผู้ใช้มองเห็น (หากมี) |
+| Инструмент | Аргументы вызова инструмента, видимые пользователю (если есть) | Ответ инструмента, видимый пользователю (если есть) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` URL ที่จะเรียกดู | `urls_metadata` `retrieved_url`: URL ที่เข้าชม `url_retrieval_status`: สถานะการเรียกดู |
-| **FILE\_SEARCH** | ไม่มี | ไม่มี |
+| **URL\_CONTEXT** | `urls` URL для просмотра | `url_metadata` `retrieved_url`: просмотренные URL `url_retrieval_status`: статус просмотра |
+| **FILE\_SEARCH** | Нет | Нет |
 
-## ตัวอย่างโครงสร้างคำขอรวมเครื่องมือ
+## Пример структуры запроса на комбинацию инструментов
 
-โครงสร้างคำขอต่อไปนี้แสดงโครงสร้างคำขอของพรอมต์ "เมืองที่อยู่เหนือสุดในสหรัฐอเมริกาคือเมืองอะไร
-วันนี้อากาศที่นั่นเป็นยังไงบ้าง" โดยจะรวมเครื่องมือ 3 อย่าง ได้แก่ เครื่องมือ Gemini ในตัว `google_search`
-และ `code_execution` รวมถึงฟังก์ชันที่กำหนดเอง `get_weather`
+Ниже приведена структура запроса для следующего запроса: "Какой город в США расположен севернее всех?" Какая там сегодня погода?" Он сочетает три инструмента: встроенные инструменты Gemini `google_search`
+и `code_execution`, а также пользовательскую функцию `get_weather`.
 
 ```
 {
-  "model": "models/gemini-3.6-flash",
+  "model": "models/gemini-3.8-flash",
   "contents": [{
     "parts": [{
       "text": "What is the northernmost city in the United States? What's the weather like there today?"
@@ -527,53 +505,49 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }
 ```
 
-## โทเค็นและการกำหนดราคา
+## Токены и цены
 
-โปรดทราบว่าส่วน `toolCall` และ `toolResponse` ในคำขอจะนับรวมใน `prompt_token_count` เนื่องจากตอนนี้คุณสามารถเห็นขั้นตอนเครื่องมือระดับกลางเหล่านี้และระบบจะส่งคืนให้คุณ ขั้นตอนเหล่านี้จึงเป็นส่วนหนึ่งของประวัติการสนทนา ซึ่งจะเกิดขึ้นกับ*คำขอ*เท่านั้น ไม่ใช่*การตอบกลับ*
+Обратите внимание, что части `toolCall` и `toolResponse` в запросах учитываются в `prompt_token_count`. Поскольку промежуточные шаги теперь видны и возвращаются вам, они являются частью истории чата. Это относится только к *запросам*, но не к *ответам*.
 
-เครื่องมือ Google Search เป็นข้อยกเว้นของกฎนี้ Google Search ใช้โมเดลราคาของตัวเองที่ระดับคำค้นหาอยู่แล้ว จึงไม่มีการเรียกเก็บค่าโทเค็นซ้ำ (ดูหน้า[ราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th))
+Исключение составляет инструмент Google Поиска. В Google Поиске уже применяется собственная модель ценообразования на уровне запроса, поэтому токены не оплачиваются дважды (см. страницу [Цены](https://ai.google.dev/gemini-api/docs/pricing?hl=ru)).
 
-อ่านข้อมูลเพิ่มเติมได้ที่หน้า[โทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
+Подробнее [о токенах](https://ai.google.dev/gemini-api/docs/tokens?hl=ru)…
 
-## ข้อจำกัด
+## Ограничения
 
-- ค่าเริ่มต้นจะเป็นโหมด `VALIDATED` (ไม่รองรับโหมด `AUTO`) เมื่อเปิดใช้ฟีเจอร์`include_server_side_tool_invocations`
-- เครื่องมือในตัว เช่น `google_search` อาศัยข้อมูลตำแหน่งและเวลาปัจจุบัน
-  ดังนั้นหาก `system_instruction` หรือ
-  `function_declaration.description` มีข้อมูลตำแหน่งและเวลา
-  ที่ขัดแย้งกัน ฟีเจอร์การรวมเครื่องมืออาจทำงานได้ไม่ดี
+- Если включен флаг `include_server_side_tool_invocations`, по умолчанию используется режим `VALIDATED` (режим `AUTO` не поддерживается).
+- Встроенные инструменты, такие как `google_search`, используют данные о местоположении и текущем времени. Если в `system_instruction` или `function_declaration.description` указаны несовпадающие сведения о местоположении и времени, функция комбинирования инструментов может работать некорректно.
 
-## เครื่องมือที่รองรับ
+## Поддерживаемые инструменты
 
-การหมุนเวียนบริบทของเครื่องมือมาตรฐานจะใช้กับเครื่องมือฝั่งเซิร์ฟเวอร์ (ในตัว)
-การดำเนินการโค้ดเป็นเครื่องมือฝั่งเซิร์ฟเวอร์เช่นกัน แต่มีโซลูชันในตัวของตัวเองสำหรับการหมุนเวียนบริบท การใช้คอมพิวเตอร์และการเรียกใช้ฟังก์ชันเป็นเครื่องมือฝั่งไคลเอ็นต์
-และยังมีโซลูชันในตัวสำหรับการหมุนเวียนบริบทด้วย
+Стандартная передача контекста инструмента применяется к встроенным инструментам на стороне сервера.
+Выполнение кода – это также инструмент на стороне сервера, но у него есть собственное встроенное решение для передачи контекста. Использование компьютера и вызов функций – это клиентские инструменты, в которых также есть встроенные решения для передачи контекста.
 
-| เครื่องมือ | ฝั่งที่ดำเนินการ | การสนับสนุนการหมุนเวียนบริบท |
+| Инструмент | Сторона исполнения | Поддержка передачи контекста |
 | --- | --- | --- |
-| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ |
-| [การรันโค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) | ฝั่งเซิร์ฟเวอร์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `executableCode` และ `codeExecutionResult`) |
-| [การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) | ฝั่งไคลเอ็นต์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `functionCall` และ `functionResponse`) |
-| [ฟังก์ชันที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/function-calling?hl=th) | ฝั่งไคลเอ็นต์ | รองรับ (ติดตั้งในตัว ใช้ชิ้นส่วน `functionCall` และ `functionResponse`) |
+| [Google Поиск](https://ai.google.dev/gemini-api/docs/google-search?hl=ru) | Сторона сервера | Поддерживается |
+| [Google Карты](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru) | Сторона сервера | Поддерживается |
+| [Контекст URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ru) | Сторона сервера | Поддерживается |
+| [Поиск файлов](https://ai.google.dev/gemini-api/docs/file-search?hl=ru) | Сторона сервера | Поддерживается |
+| [Выполнение кода](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru) | Сторона сервера | Поддерживается (встроенный, использует детали `executableCode` и `codeExecutionResult`) |
+| [Использование компьютера](https://ai.google.dev/gemini-api/docs/computer-use?hl=ru) | Сторона клиента | Поддерживается (встроенный, использует детали `functionCall` и `functionResponse`) |
+| [Пользовательские функции](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru) | Сторона клиента | Поддерживается (встроенный, использует детали `functionCall` и `functionResponse`) |
 
-## ขั้นตอนถัดไป
+## Дальнейшие действия
 
-- ดูข้อมูลเพิ่มเติมเกี่ยวกับ[การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ใน Gemini API
-- สำรวจเครื่องมือที่รองรับ
-  - [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)
-  - [บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)
-  - [ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)
+- Подробнее [о вызове функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru) в Gemini API…
+- Ознакомьтесь с поддерживаемыми инструментами:
+  - [Google Поиск](https://ai.google.dev/gemini-api/docs/google-search?hl=ru)
+  - [Google Карты](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru)
+  - [Контекст URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ru)
+  - [Поиск файлов](https://ai.google.dev/gemini-api/docs/file-search?hl=ru)
 
-ส่งความคิดเห็น
+Отправить отзыв
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-อัปเดตล่าสุด 2026-09-12 UTC
+Последнее обновление: 2026-10-05 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Хотите рассказать подробнее?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-12 UTC"],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-05 UTC."],[],[]]

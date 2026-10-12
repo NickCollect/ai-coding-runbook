@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=fr
-fetched_at: 2026-10-05T06:36:52.832342+00:00
+fetched_at: 2026-10-12T06:57:31.148669+00:00
 title: "R\u00e9tention des donn\u00e9es nulle dans l'API Gemini\u00a0Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

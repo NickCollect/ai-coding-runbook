@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/quickstart?hl=ar
-fetched_at: 2026-09-28T06:16:07.301862+00:00
+fetched_at: 2026-10-12T07:00:25.552010+00:00
 title: "\u0627\u0644\u0628\u062f\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,17 +18,17 @@ title: "\u0627\u0644\u0628\u062f\u0621 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Go
 
 # البدء
 
-يساعدك هذا الدليل في بدء استخدام Gemini API من خلال [واجهة Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar). ستتمكّن من إجراء أول طلب بيانات من واجهة برمجة التطبيقات في أقل من دقيقة، وستستكشف ميزات إنشاء النصوص، وفهم المحتوى المتعدّد الوسائط، وإنشاء الصور، والناتج المنظَّم، والأدوات، واستدعاء الدوال، والوكلاء، والتنفيذ في الخلفية.
+يساعدك هذا الدليل في بدء استخدام Gemini API من خلال [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar). ستتمكّن من إجراء أول طلب بيانات من واجهة برمجة التطبيقات في أقل من دقيقة، وستستكشف ميزات إنشاء النصوص، وفهم المحتوى المتعدّد الوسائط، وإنشاء الصور، والناتج المنظَّم، والأدوات، واستدعاء الدوال، والوكلاء، والتنفيذ في الخلفية.
 
-تتوفّر واجهة Interactions API من خلال حزمتَي تطوير البرامج (SDK) [Python](https://github.com/googleapis/python-genai) و[JavaScript](https://github.com/googleapis/js-genai)، بالإضافة إلى REST.
+تتوفّر Interactions API من خلال حزمتَي تطوير البرامج (SDK) [Python](https://github.com/googleapis/python-genai) و[JavaScript](https://github.com/googleapis/js-genai)، بالإضافة إلى REST.
 
 ## 1. الحصول على مفتاح واجهة برمجة تطبيقات
 
-لاستخدام Gemini API، يجب أن يكون لديك مفتاح واجهة برمجة تطبيقات للمصادقة على طلباتك وفرض حدود الأمان وتتبُّع الاستخدام في حسابك.
+لاستخدام Gemini API، يجب أن يكون لديك مفتاح واجهة برمجة تطبيقات لمصادقة طلباتك وفرض حدود الأمان وتتبُّع الاستخدام في حسابك.
 
 - ينشئ Google AI Studio تلقائيًا مشروعًا ومفتاح واجهة برمجة تطبيقات للمستخدمين الجدد.
   يمكنك نسخها من [صفحة مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar).
-- إذا كنت بحاجة إلى مفتاح جديد، انقر على **إنشاء مفتاح واجهة برمجة تطبيقات** في AI Studio واتّبِع التعليمات الواردة في مربّع الحوار لإضافة زوج جديد من المفتاح والمشروع.
+- إذا كنت بحاجة إلى مفتاح جديد، انقر على **إنشاء مفتاح واجهة برمجة التطبيقات** في AI Studio واتّبِع التعليمات في مربّع الحوار لإضافة زوج جديد من المفتاح والمشروع.
 
 [إنشاء مفتاح Gemini API](https://aistudio.google.com/apikey?hl=ar)
 
@@ -40,14 +40,14 @@ export GEMINI_API_KEY="YOUR_API_KEY"
 
 ### الترقية إلى فئة الاشتراك المدفوع
 
-تؤدي الترقية إلى الفئة المدفوعة إلى زيادة حدود معدّل الاستخدام وتتطلّب إعداد Cloud Billing.
+تؤدي الترقية إلى الفئة المدفوعة إلى زيادة حدود معدّل الطلبات وتتطلّب إعداد Cloud Billing.
 
 - انقر على **إعداد الفوترة** في صفحة [مفاتيح واجهة برمجة التطبيقات](https://aistudio.google.com/api-keys?hl=ar) أو [المشاريع](https://aistudio.google.com/projects?hl=ar) في AI Studio.
-- اتّبِع مربّع الحوار "الفوترة في Cloud" لإنشاء حساب فوترة أو ربطه، وإضافة طريقة دفع، ودفع مبلغ مسبق لا يقل عن 5 دولار أمريكي (أو ما يعادله بالعملة المحلية) في شكل أرصدة مدفوعة.
+- اتّبِع مربّع الحوار "الفوترة في Cloud" لإنشاء حساب فوترة أو ربطه، وإضافة طريقة دفع، ودفع مبلغ لا يقل عن 5 دولار أمريكي (أو ما يعادله بالعملة المحلية) كدفعة مسبقة في شكل أرصدة مدفوعة.
 - يمكنك الاطّلاع على استخدامك لواجهة برمجة التطبيقات في [Google AI Studio](https://aistudio.google.com/usage?hl=ar)
   ضمن **لوحة البيانات** > **الاستخدام**.
 
-يمكنك الاطّلاع على [صفحة "الفوترة"](https://ai.google.dev/gemini-api/docs/billing?hl=ar) لمزيد من المعلومات.
+يمكنك الاطّلاع على [صفحة الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar) لمزيد من المعلومات.
 
 ## 2. تثبيت حزمة SDK وإجراء مكالمتك الأولى
 
@@ -205,7 +205,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 عند استخدام REST، تعرض واجهة برمجة التطبيقات مورد `Interaction` الكامل الذي يحتوي على البيانات الوصفية وإحصاءات الاستخدام وسجلّ الخطوات التفصيلية للعبة.
 
-في حين تعرض حِزم تطوير البرامج الرد الكامل، فإنّها توفّر أيضًا خصائص ملائمة، مثل `interaction.output_text` و`interaction.output_image` للوصول إلى النتائج النهائية مباشرةً. يمكنك الاطّلاع على مزيد من المعلومات حول بنية الرد في [نظرة عامة على التفاعلات](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) أو قراءة [دليل إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar) للحصول على تفاصيل حول تعليمات النظام وإعدادات الإنشاء.
+في حين أنّ حِزم تطوير البرامج (SDK) تعرض الرد الكامل، فإنّها توفّر أيضًا خصائص ملائمة، مثل `interaction.output_text` و`interaction.output_image` للوصول إلى النتائج النهائية مباشرةً. يمكنك الاطّلاع على مزيد من المعلومات حول بنية الرد في [نظرة عامة على التفاعلات](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) أو قراءة [دليل إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar) للحصول على تفاصيل حول تعليمات النظام وإعدادات الإنشاء.
 
 ## 3- عرض الرد تدريجيًا
 
@@ -363,7 +363,7 @@ data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_toke
 
 للحصول على نظرة تفصيلية حول التعامل مع أحداث البث وأنواع التغييرات، يُرجى الاطّلاع على [دليل التفاعلات عبر البث](https://ai.google.dev/gemini-api/docs/streaming?hl=ar).
 
-## 4. محادثات مترابطة
+## 4. المحادثات المترابطة
 
 تتيح Interactions API المحادثات المترابطة من خلال طريقتَين:
 
@@ -528,7 +528,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ### بلا حالة
 
-ضبط `store=false` وإدارة سجلّ المحادثات من جهة العميل يجب الاحتفاظ بجميع الخطوات التي تم إنشاؤها باستخدام النموذج (بما في ذلك الخطوتان `thought` و`function_call`) وإعادة إرسالها تمامًا كما تم استلامها.
+ضبط `store=false` وإدارة سجلّ المحادثات من جهة العميل يجب الحفاظ على جميع الخطوات التي تم إنشاؤها باستخدام النموذج (بما في ذلك الخطوتان `thought` و`function_call`) وإعادة إرسالها تمامًا كما تم استلامها.
 
 ### Python
 
@@ -1016,7 +1016,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 
 استخراج المعلومات من ملفات PDF وتنسيقات المستندات الأخرى](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar)
 
-## 6. إنشاء محتوى متعدد الوسائط
+## 6. إنشاء محتوى متعدّد الوسائط
 
 يمكن لـ Gemini إنشاء الصور بشكلٍ أصلي باستخدام نماذج الصور [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar).
 
@@ -1220,7 +1220,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 
 إنشاء الموسيقى
 
-يمكنك إنشاء مقاطع وأغانٍ كاملة باستخدام Lyria 3.5.](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar)
+أنشِئ مقاطع وأغانٍ كاملة باستخدام Lyria 3.5.](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar)
 
 ## 7. استخدام الناتج المنظَّم
 
@@ -1479,7 +1479,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-يحتوي قسم النص الناتج على سلسلة JSON صالحة تتوافق تمامًا مع المخطط المطلوب. لمعرفة كيفية تحديد بنى أكثر تعقيدًا ومخططات متكرّرة، يُرجى الاطّلاع على [دليل الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
+تحتوي كتلة النص الناتج على سلسلة JSON صالحة تتوافق تمامًا مع المخطط المطلوب. لمعرفة كيفية تحديد بنى أكثر تعقيدًا ومخططات متكرّرة، يُرجى الاطّلاع على [دليل الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar).
 
 ## 8. استخدام الأدوات
 
@@ -1723,7 +1723,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 البحث عن الملفات
 
-فهرسة المستندات والملفات الإعلامية التي تم تحميلها والبحث فيها](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
+فهرسة المستندات وملفات الوسائط التي تم تحميلها والبحث فيها](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
 [map
 
 خرائط Google
@@ -1739,7 +1739,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 تتيح لك ميزة "استدعاء الدوال" ربط النموذج بالرمز البرمجي. يمكنك تحديد اسم الدالة ومَعلماتها، ويقرّر النموذج متى يتم استدعاؤها ويعرض وسيطات منظَّمة، ويمكنك تنفيذها محليًا وإرسال النتيجة مرة أخرى.
 
-### حفظ الحالة (مُقترَحة)
+### حفظ الحالة (يُنصح به)
 
 ### Python
 
@@ -2442,7 +2442,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 **الردّ:**
 
-خلال الجولة الأولى، يعرض النموذج ردًا مع الحالة `requires_action` والخطوة `function_call`:
+خلال الجولة الأولى، يعرض النموذج ردًا بالحالة `requires_action` والخطوة `function_call`:
 
 ```
 {
@@ -2894,14 +2894,14 @@ done
 - [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar): تحديد المصدر والاقتباسات واقتراحات البحث
 - [الوكلاء المُدارون](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar): وكلاء مُعدّون مسبقًا مع إمكانية تنفيذ الرموز البرمجية وإدارة الملفات.
 - [‫Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar): بحث مستقل ومتعدّد الخطوات يتضمّن التخطيط والتجميع.
-- [الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar): مخططات JSON وقيم التعداد وتعريفات الأنواع المتكررة
+- [الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar): مخطّطات JSON، والتعدادات، وتعريفات الأنواع المتكرّرة
 
 إرسال ملاحظات
 
 إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)
+تاريخ التعديل الأخير: 2026-10-05 (حسب التوقيت العالمي المتفَّق عليه)
 
 هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-09-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-10-05 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,113 +1,113 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=zh-TW
-fetched_at: 2026-10-05T06:32:25.481348+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=th
+fetched_at: 2026-10-12T07:00:56.110876+00:00
 title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-提供意見
+ส่งความคิดเห็น
 
 # Gemini 3.5 Transcribe
 
-Gemini 3.5 Transcribe 是以 Gemini 的音訊理解功能為基礎的語音轉文字模型，這項技術可提供低延遲的準確轉錄稿，並支援以語句為準的語言偵測、說話者分段標記、個別字詞時間戳記、智慧轉錄和自訂詞彙語音優先辨識。
+Gemini 3.5 Transcribe เป็นโมเดลการแปลงเสียงเป็นข้อความที่อิงตามความสามารถในการทำความเข้าใจเสียงของ Gemini โดยจะให้การถอดเสียงที่แม่นยำและมีเวลาในการตอบสนองต่ำ พร้อมการตรวจหาภาษาตามคำพูด การระบุผู้พูด การประทับเวลาที่ระดับคำ การถอดเสียงอัจฉริยะ และการปรับคำพูดตามคำศัพท์ที่กำหนดเอง
 
-[在 Google AI Studio 中試用](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=zh-tw)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=th)
 
-## 說明文件
+## เอกสารประกอบ
 
-Gemini 3.5 Transcribe 可將音訊檔案中的語音轉換為文字。這項功能可自動偵測 85 種以上的語言、處理交替使用不同語言的情況、識別個別說話者、輸出字詞層級的時間戳記，以及透過自訂詞彙偏誤調整功能，適應特定領域的用語。
+Gemini 3.5 Transcribe จะแปลงเสียงพูดเป็นข้อความจากไฟล์เสียง โดยจะตรวจจับภาษาได้มากกว่า 85 ภาษาโดยอัตโนมัติ จัดการการสลับภาษาในโค้ด ระบุผู้พูดแต่ละคน แสดงการประทับเวลาที่ระดับคำ และปรับให้เข้ากับคำศัพท์เฉพาะโดเมนผ่านการกำหนดค่าคำศัพท์ที่กำหนดเอง
 
-如要全面瞭解非串流功能，請參閱[語音轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw)指南。如要透過 WebSockets 即時轉錄低延遲串流，請參閱 `gemini-3.5-transcribe-live` 的[即時轉錄](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=zh-tw)指南。如需詳細定價資訊，請參閱[定價頁面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#gemini-3.5-transcribe)。
+ดูคำแนะนำเกี่ยวกับ[การถอดเสียงเป็นคำของเสียง](https://ai.google.dev/gemini-api/docs/transcribe?hl=th)เพื่อดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์ที่ไม่ใช่การสตรีม หากต้องการถอดเสียงสตรีมแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำผ่าน WebSockets โปรดไปที่คู่มือ[การถอดเสียงเป็นคำแบบสด](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=th)โดยใช้ `gemini-3.5-transcribe-live` ดูราคาโดยละเอียดได้ที่[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3.5-transcribe)
 
 ## gemini-3.5-transcribe
 
-| 屬性 | 說明 |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_card 模型代碼 | `gemini-3.5-transcribe` |
-| save支援的資料類型 | **輸入裝置**  音訊 (最多 1 小時)  **輸出內容**  文字、字詞註解 |
-| token\_auto音訊限制 | **單一音訊限制**  每個要求最多 1 小時 (啟用說話者分段標記或個別字詞時間戳記時，最多 30 分鐘) |
-| handyman功能 | **[語音轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw)**  支援  **[說話者分段標記](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#speaker-diarization)**  支援  **[字詞層級時間戳記](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#word-timestamps)**  支援  **[自訂詞彙](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#custom-vocabulary)**  支援  **[智慧轉錄](https://ai.google.dev/gemini-api/docs/transcribe?hl=zh-tw#transcription-modes)**  支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  不支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  不支援  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  不支援  **[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  不支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  不支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  不支援 |
-| speed計費方案 | **[批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  不支援  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)**  不支援  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)**  不支援 |
-| 123 個版本 | 詳閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - `gemini-3.5-transcribe` (一元) - `gemini-3.5-transcribe-live` (Live API) |
-| calendar\_month最新更新 | 2026 年 8 月 |
+| รหัสโมเดล id\_card | `gemini-3.5-transcribe` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  เสียง (สูงสุด 1 ชั่วโมง)  **เอาต์พุต**  ข้อความ คำอธิบายประกอบ Word |
+| token\_autoขีดจำกัดของเสียง | **ขีดจำกัดเสียงแบบเอกภาค**  สูงสุด 1 ชั่วโมงต่อคำขอ (สูงสุด 30 นาทีเมื่อเปิดใช้การแยกแยะเสียงผู้พูดหรือการประทับเวลาที่ระดับคำ) |
+| handymanความสามารถ | **[การถอดเสียงเป็นคำ](https://ai.google.dev/gemini-api/docs/transcribe?hl=th)**  สิ่งที่ทำได้  **[การแยกแยะเสียงผู้พูด](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#speaker-diarization)**  สิ่งที่ทำได้  **[การประทับเวลาระดับคำ](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#word-timestamps)**  สิ่งที่ทำได้  **[คำศัพท์ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#custom-vocabulary)**  สิ่งที่ทำได้  **[การถอดเสียงอัจฉริยะ](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#transcription-modes)**  สิ่งที่ทำได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำไม่ได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำไม่ได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำไม่ได้ |
+| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำไม่ได้  **[Flex Inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - `gemini-3.5-transcribe` (Unary) - `gemini-3.5-transcribe-live` (Live API) |
+| calendar\_monthการอัปเดตล่าสุด | สิงหาคม 2569 |
 
-## 功能支援與限制
+## การรองรับฟีเจอร์และข้อจำกัด
 
-Gemini 3.5 Transcribe 在兩個端點中支援下列功能：
+Gemini 3.5 Transcribe รองรับฟีเจอร์ต่อไปนี้ใน 2 Endpoint
 
-| 功能 | 即時串流 (`gemini-3.5-transcribe-live`) | 音訊檔案處理 (`gemini-3.5-transcribe`) | 注意事項 / 限制 |
+| ฟีเจอร์ | การไลฟ์สด (`gemini-3.5-transcribe-live`) | การประมวลผลไฟล์เสียง (`gemini-3.5-transcribe`) | หมายเหตุ / ข้อจำกัด |
 | --- | --- | --- | --- |
-| **語言自動偵測** | 支援 (超過 85 種語言) | 支援 (超過 85 種語言) | 包括在工作階段中混合使用程式碼。 |
-| **字詞層級時間戳記** | 不支援 | 是否支援 | 降低轉錄準確度。 |
-| **自訂詞彙偏誤** | 支援 (最多 1,000 個字詞) | 支援 (最多 1,000 個字詞) | 通常最多 100 個字詞就能為顧客帶來最佳成效。 |
-| **智慧型語音輸入和格式設定** | 是否支援 | 是否支援 | 包括移除填充詞，以及根據意圖調整英數字元格式。 |
-| **說話者分段標記** | 不支援 | 支援 (最多 8 個音箱) | 3 個以上音箱的歸因功能仍在實驗階段。 |
-| **音訊長度上限** | 每節課程 10 分鐘。 | 最多 1 小時 | 啟用說話者區分或時間戳記等功能時，檔案處理時間上限為 30 分鐘。 |
+| **การตรวจหาภาษาอัตโนมัติ** | รองรับ (มากกว่า 85 ภาษา) | รองรับ (มากกว่า 85 ภาษา) | รวมถึงการผสมภาษาในระหว่างเซสชัน |
+| **การประทับเวลาระดับคำ** | ไม่รองรับ | รองรับ | ลดความแม่นยำของการถอดเสียงเป็นคำ |
+| **การเอนเอียงคำศัพท์ที่กำหนดเอง** | รองรับ (สูงสุด 1,000 คำ) | รองรับ (สูงสุด 1,000 คำ) | โดยปกติแล้ว ลูกค้าจะได้รับผลลัพธ์ที่ดีที่สุดเมื่อใช้คำไม่เกิน 100 คำ |
+| **การเขียนตามคำบอกและการจัดรูปแบบอัจฉริยะ** | รองรับ | รองรับ | รวมถึงการนำคำพูดที่ไม่มีความหมายออกและการจัดรูปแบบตัวอักษรและตัวเลขโดยพิจารณาจากเจตนา |
+| **การระบุผู้พูด** | ไม่รองรับ | รองรับ (สูงสุด 8 ลำโพง) | การระบุแหล่งที่มาสำหรับลำโพง 3 เครื่องขึ้นไปอยู่ในขั้นทดลอง |
+| **ระยะเวลาเสียงสูงสุด** | 10 นาทีต่อเซสชัน | นานสูงสุด 1 ชั่วโมง | การประมวลผลไฟล์จะจำกัดไว้ที่ 30 นาทีเมื่อเปิดใช้ฟีเจอร์ต่างๆ เช่น การระบุผู้พูดหรือการประทับเวลา |
 
-## 支援的語言
+## ภาษาที่รองรับ
 
-Gemini 3.5 Transcribe 支援下列語言和 BCP-47 語言代碼：
+Gemini 3.5 Transcribe รองรับภาษาและรหัสภาษา BCP-47 ต่อไปนี้
 
-| 語言 | BCP-47 代碼 | 語言 | BCP-47 代碼 |
+| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
 | --- | --- | --- | --- |
-| 南非荷蘭文 | `af-ZA` | 日文 | `ja-JP` |
-| 阿姆哈拉文 | `am-ET` | 爪哇語 | `jv-ID` |
-| 阿拉伯文 (埃及) | `ar-EG` | Kabuverdianu | `kea-CV` |
-| 亞美尼亞文 | `hy-AM` | 卡納達文 | `kn-IN` |
-| 阿薩姆文 | `as-IN` | 哈薩克文 | `kk-KZ` |
-| 亞塞拜然文 | `az-AZ` | 韓文 | `ko-KR` |
-| 白俄羅斯語 | `be-BY` | 吉爾吉斯文 | `ky-KG` |
-| 孟加拉文 (孟加拉) | `bn-BD` | 拉脫維亞文 | `lv-LV` |
-| 孟加拉文 (印度) | `bn-IN` | 林格拉文 | `ln-CD` |
-| 波士尼亞文 | `bs-BA` | 立陶宛文 | `lt-LT` |
-| 保加利亞文 | `bg-BG` | 馬其頓文 | `mk-MK` |
-| 保加利亞文 (阿羅馬尼亞文) | `rup-BG` | 馬來文 | `ms-MY` |
-| 緬甸文 | `my-MM` | 馬拉雅拉姆文 | `ml-IN` |
-| 粵語 (繁體) | `yue-Hant-HK` | 馬爾他文 | `mt-MT` |
-| 加泰隆尼亞文 | `ca-ES` | 中文 (簡體) | `cmn-Hans-CN` |
-| 宿霧文 | `ceb` | 馬拉地文 | `mr-IN` |
-| 中部高棉文 | `km-KH` | 蒙古文 | `mn-MN` |
-| 克羅埃西亞文 | `hr-HR` | 尼泊爾文 | `ne-NP` |
-| 捷克文 | `cs-CZ` | 挪威文 | `nb-NO` |
-| 丹麥文 | `da-DK` | 奧里雅文 | `or-IN` |
-| 荷蘭文 | `nl-NL` | 波蘭文 | `pl-PL` |
-| 英文 (英國) | `en-GB` | 葡萄牙文 (巴西) | `pt-BR` |
-| 英文 (印度) | `en-IN` | 葡萄牙文 (葡萄牙) | `pt-PT` |
-| 英文 (美國) | `en-US` | 旁遮普文 | `pa-IN` |
-| 愛沙尼亞文 | `et-EE` | 旁遮普文 (古爾穆基字母) | `pa-Guru-IN` |
-| 波斯文 | `fa-IR` | 羅馬尼亞文 | `ro-RO` |
-| 菲律賓文 | `fil-PH` | 俄文 | `ru-RU` |
-| 芬蘭文 | `fi-FI` | 塞爾維亞文 | `sr-RS` |
-| 法文 | `fr-FR` | 信德文 (阿拉伯字母) | `sd-Arab-IN` |
-| 加里西亞文 | `gl-ES` | 斯洛伐克文 | `sk-SK` |
-| 喬治亞文 | `ka-GE` | 斯洛維尼亞文 | `sl-SI` |
-| 德文 | `de-DE` | 西班牙文 (拉丁美洲) | `es-419` |
-| 希臘文 | `el-GR` | 西班牙文 (美國) | `es-US` |
-| 古吉拉特文 | `gu-IN` | 斯瓦希里文 (肯亞) | `sw-KE` |
-| 豪薩文 | `ha-NG` | 瑞典文 | `sv-SE` |
-| 希伯來文 | `he-IL` | 塔吉克文 | `tg-TJ` |
-| 北印度文 | `hi-IN` | 泰盧固文 | `te-IN` |
-| 匈牙利文 | `hu-HU` | 泰文 | `th-TH` |
-| 冰島文 | `is-IS` | 土耳其文 | `tr-TR` |
-| 印度英語 | `en-IN` | 烏克蘭文 | `uk-UA` |
-| 印尼文 | `id-ID` | 烏茲別克文 | `uz-UZ` |
-| 義大利文 | `it-IT` | 越南文 | `vi-VN` |
+| อาฟรีกานส์ | `af-ZA` | ญี่ปุ่น | `ja-JP` |
+| อัมฮาริก | `am-ET` | ชวา | `jv-ID` |
+| อาหรับ (อียิปต์) | `ar-EG` | คาบูเวอร์เดียนู | `kea-CV` |
+| อาร์เมเนีย | `hy-AM` | กันนาดา | `kn-IN` |
+| อัสสัม | `as-IN` | คาซัค | `kk-KZ` |
+| อาร์เซอร์ไบจัน | `az-AZ` | เกาหลี | `ko-KR` |
+| เบลารุส | `be-BY` | คีร์กิซ | `ky-KG` |
+| เบงกาลี (บังกลาเทศ) | `bn-BD` | ลัตเวีย | `lv-LV` |
+| เบงกาลี (อินเดีย) | `bn-IN` | ลิงกาลา | `ln-CD` |
+| บอสเนีย | `bs-BA` | ลิทัวเนีย | `lt-LT` |
+| บัลแกเรีย | `bg-BG` | มาซีโดเนีย | `mk-MK` |
+| บัลแกเรีย (อโรมาเนีย) | `rup-BG` | มาเลย์ | `ms-MY` |
+| พม่า | `my-MM` | มาลายาลัม | `ml-IN` |
+| จีนกวางตุ้ง (ตัวเต็ม) | `yue-Hant-HK` | มอลตา | `mt-MT` |
+| คาตาลัน | `ca-ES` | จีนกลาง (ตัวย่อ) | `cmn-Hans-CN` |
+| ซีบัวโน | `ceb` | มราฐี | `mr-IN` |
+| เขมรตอนกลาง | `km-KH` | มองโกเลีย | `mn-MN` |
+| โครเอเชีย | `hr-HR` | เนปาล | `ne-NP` |
+| เช็ก | `cs-CZ` | นอร์เวย์ | `nb-NO` |
+| เดนมาร์ก | `da-DK` | โอริยา | `or-IN` |
+| ดัตช์ | `nl-NL` | โปแลนด์ | `pl-PL` |
+| อังกฤษ (บริเตนใหญ่) | `en-GB` | โปรตุเกส (บราซิล) | `pt-BR` |
+| อังกฤษ (อินเดีย) | `en-IN` | โปรตุเกส (โปรตุเกส) | `pt-PT` |
+| อังกฤษ (สหรัฐอเมริกา) | `en-US` | ปัญจาบ | `pa-IN` |
+| เอสโตเนีย | `et-EE` | ปัญจาบ (สคริปต์คุรมุขี) | `pa-Guru-IN` |
+| ฟาร์ซี | `fa-IR` | โรมาเนีย | `ro-RO` |
+| ฟิลิปปินส์ | `fil-PH` | รัสเซีย | `ru-RU` |
+| ฟินแลนด์ | `fi-FI` | เซอร์เบีย | `sr-RS` |
+| ฝรั่งเศส | `fr-FR` | ภาษาสินธี (อักษรอาหรับ) | `sd-Arab-IN` |
+| กาลิเชียน | `gl-ES` | สโลวัก | `sk-SK` |
+| จอร์เจีย | `ka-GE` | สโลวีเนีย | `sl-SI` |
+| เยอรมัน | `de-DE` | สเปน (ลาตินอเมริกา) | `es-419` |
+| กรีก | `el-GR` | สเปน (สหรัฐอเมริกา) | `es-US` |
+| คุชราต | `gu-IN` | สวาฮีลี (เคนยา) | `sw-KE` |
+| เฮาซา | `ha-NG` | สวีเดน | `sv-SE` |
+| ฮีบรู | `he-IL` | ทาจิก | `tg-TJ` |
+| ฮินดี | `hi-IN` | เตลูกู | `te-IN` |
+| ฮังการี | `hu-HU` | ไทย | `th-TH` |
+| ไอซ์แลนด์ | `is-IS` | ตุรกี | `tr-TR` |
+| อังกฤษ (อินเดีย) | `en-IN` | ยูเครน | `uk-UA` |
+| อินโดนีเซีย | `id-ID` | อุซเบก | `uz-UZ` |
+| อิตาลี | `it-IT` | เวียดนาม | `vi-VN` |
 
-提供意見
+ส่งความคิดเห็น
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-上次更新時間：2026-09-10 (世界標準時間)。
+อัปเดตล่าสุด 2026-09-10 UTC
 
-想進一步說明嗎？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-10 (世界標準時間)。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-10 UTC"],[],[]]

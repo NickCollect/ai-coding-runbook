@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=vi
-fetched_at: 2026-10-05T06:49:32.024623+00:00
-title: "T\u01b0 duy c\u1ee7a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=fa
+fetched_at: 2026-10-12T07:04:18.565100+00:00
+title: "\u202bGemini \u062f\u0631\u062d\u0627\u0644 \u0641\u06a9\u0631 \u06a9\u0631\u062f\u0646 \u0627\u0633\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 3.8 Flash اکنون در دسترس است. [آن را امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fa) .
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-Gửi ý kiến phản hồi
+ارسال بازخورد
 
-# Tư duy của Gemini
+# ‫Gemini درحال فکر کردن است
 
-[Các mô hình thuộc dòng Gemini 3 và 2.5](https://ai.google.dev/gemini-api/docs/models?hl=vi) sử dụng "quy trình tư duy" giúp cải thiện đáng kể khả năng suy luận và lập kế hoạch nhiều bước, nhờ đó, các mô hình này có hiệu quả cao đối với các tác vụ phức tạp như lập trình, toán học nâng cao và phân tích dữ liệu.
+[مدل‌های سری Gemini 3 و 2.5](https://ai.google.dev/gemini-api/docs/models?hl=fa) از «فرایند تفکر» استفاده می‌کنند که توانایی‌های استدلال و برنامه‌ریزی چندمرحله‌ای آن‌ها را به‌طور قابل‌توجهی بهبود می‌بخشد و آن‌ها را برای انجام تکالیف پیچیده مانند کدنویسی، ریاضیات پیشرفته، و تجزیه‌وتحلیل داده‌ها بسیار مؤثر می‌کند.
 
-Khi bạn sử dụng mô hình tư duy, Gemini sẽ suy luận nội bộ trước khi trả lời. Interactions API cho thấy lý do này thông qua các bước `thought`, đây là các bước chuyên dụng xuất hiện theo trình tự thời gian cùng với các lệnh gọi hàm, thông tin đầu vào của người dùng hoặc đầu ra của mô hình trong mảng `steps`.
+وقتی از مدل تفکر استفاده می‌کنید، Gemini پیش‌از پاسخ دادن، درونی استدلال می‌کند. «میانای برنامه‌سازی کاربردی تعاملات» این استدلال را ازطریق `thought` مرحله، مراحل اختصاصی که به‌ترتیب زمانی در کنار فراخوانی‌های تابع، ورودی‌های کاربر، یا بروندادهای مدل در آرایه `steps` ظاهر می‌شوند، نمایان می‌کند.
 
-Mỗi bước suy nghĩ đều chứa 2 trường:
+هر مرحله فکر شامل دو فیلد است:
 
-| Trường | Bắt buộc | Mô tả |
+| فیلد | الزامی | شرح |
 | --- | --- | --- |
-| `signature` | ✅ Có | Một bản biểu diễn được mã hoá về trạng thái suy luận nội bộ của mô hình. Luôn xuất hiện, ngay cả khi mô hình thực hiện suy luận tối thiểu. |
-| `summary` | ❌ Không | Một mảng nội dung (văn bản và/hoặc hình ảnh) tóm tắt lý do. Có thể trống tuỳ thuộc vào cấu hình [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=vi), việc mô hình có thực hiện đủ quy trình suy luận hay không hoặc loại nội dung (ví dụ: hình ảnh có thể không có bản tóm tắt bằng văn bản). |
+| `signature` | ✅ بله | نمایشی رمزگذاری‌شده از وضعیت استدلال داخلی مدل. همیشه ارائه می‌شود، حتی وقتی مدل حداقل استدلال را انجام می‌دهد. |
+| `summary` | ❌ نه | مجموعه‌ای از محتوا (نوشتار و/یا تصاویر) که استدلال را خلاصه می‌کند. بسته به پیکربندی [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=fa)، اینکه مدل استدلال کافی انجام داده است یا نه، یا نوع محتوا (برای مثال، تصاویر پنهان ممکن است خلاصه نوشتاری نداشته باشند) ممکن است خالی باشد. |
 
-## Tương tác với mô hình tư duy
+## تعامل با فکر کردن
 
-Việc bắt đầu tương tác với một mô hình tư duy cũng tương tự như mọi yêu cầu tương tác khác. Chỉ định một trong các [mô hình có hỗ trợ tư duy](#thinking-levels) trong trường `model`:
+شروع تعامل با مدل تفکر مشابه با هر درخواست تعامل دیگری است. یکی از [مدل‌های دارای پشتیبانی از تفکر](#thinking-levels) را در فیلد `model` مشخص کنید:
 
 ### Python
 
@@ -61,7 +61,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -87,7 +87,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -137,10 +137,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Tóm tắt suy nghĩ
+## خلاصه‌های فکر
 
-Bản tóm tắt suy nghĩ cung cấp thông tin chi tiết về quy trình suy luận nội bộ của mô hình.
-Theo mặc định, chỉ kết quả đầu ra cuối cùng được trả về. Bạn có thể bật tính năng tóm tắt suy nghĩ bằng `thinking_summaries`:
+خلاصه‌های فکر بینش‌هایی درباره فرایند استدلال داخلی مدل ارائه می‌دهند.
+به‌طور پیش‌فرض، فقط برونداد نهایی برگردانده می‌شود. می‌توانید خلاصه فکر را با `thinking_summaries` فعال کنید:
 
 ### Python
 
@@ -207,7 +207,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -260,7 +260,7 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -316,23 +316,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Khối suy nghĩ có thể **chỉ chứa chữ ký mà không có nội dung tóm tắt** trong những trường hợp sau:
+در این موارد، یک بلوک فکر ممکن است **فقط حاوی امضا بدون خلاصه** باشد:
 
-- Yêu cầu đơn giản, trong đó mô hình không suy luận đủ để tạo bản tóm tắt
-- `thinking_summaries: "none"`, trong đó tính năng tóm tắt bị tắt một cách rõ ràng
-- Một số loại nội dung tư duy, chẳng hạn như hình ảnh, có thể không có bản tóm tắt bằng văn bản
+- درخواست‌های ساده، جایی که مدل برای تولید خلاصه به‌اندازه کافی استدلال نکرده است
+- ‫`thinking_summaries: "none"`، جایی که خلاصه به‌طور صریح غیرفعال شده است
+- برخی‌از انواع محتوای فکری، مثل تصاویر، ممکن است خلاصه نوشتاری نداشته باشند
 
-Mã của bạn phải luôn xử lý các khối suy nghĩ khi `summary` trống hoặc không có.
+کد شما باید همیشه بلوک‌های فکری را در جایی که `summary` خالی یا وجود ندارد مدیریت کند.
 
-## Phát trực tiếp cùng tư duy
+## جاری‌سازی با اندیشیدن
 
-Sử dụng tính năng truyền trực tuyến để nhận bản tóm tắt ý tưởng gia tăng trong quá trình tạo.
-Các khối suy nghĩ được phân phối bằng cách sử dụng Sự kiện được gửi bởi máy chủ (SSE) với 2 loại delta riêng biệt:
+از جاری‌سازی برای دریافت خلاصه‌های تدریجی فکر درطول تولید استفاده کنید.
+بلوک‌های فکر بااستفاده از «رویدادهای ارسالی سرور» (SSE) با دو نوع
+دلتا متمایز ارائه می‌شوند:
 
-| Loại Delta | Chứa | Thời điểm gửi |
+| نوع دلتا | شامل می‌شود | زمان ارسال |
 | --- | --- | --- |
-| `thought_summary` | Nội dung tóm tắt bằng văn bản hoặc hình ảnh | Một hoặc nhiều delta có bản tóm tắt gia tăng |
-| `thought_signature` | Chữ ký mật mã | delta cuối cùng trước `step.stop` |
+| `thought_summary` | خلاصه محتوای نوشتار یا تصویر | یک یا چند دلتا با خلاصه افزایشی |
+| `thought_signature` | امضای رمزنگارانه | آخرین تغییر قبل‌از `step.stop` |
 
 ### Python
 
@@ -417,7 +418,7 @@ for await (const event of stream) {
 }
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -492,7 +493,7 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -561,7 +562,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Phản hồi truyền trực tuyến sử dụng Sự kiện được gửi bởi máy chủ (SSE) và bao gồm các bước và sự kiện, ví dụ:
+پاسخ جاری‌سازی از «رویدادهای ارسالی سرور» (SSE) استفاده می‌کند و از مراحل و رویدادها تشکیل شده است، برای مثال:
 
 ```
 event: interaction.created
@@ -592,25 +593,23 @@ event: done
 data: [DONE]
 ```
 
-## Tư duy kiểm soát
+## کنترل کردن اندیشیدن
 
-Theo mặc định, các mô hình Gemini tham gia vào quá trình tư duy linh hoạt bằng cách tự động điều chỉnh mức độ nỗ lực suy luận dựa trên độ phức tạp của yêu cầu. Bạn có thể kiểm soát hành vi này bằng cách sử dụng tham số `thinking_level`.
+مدل‌های Gemini به‌طور پیش‌فرض درگیر تفکر پویا می‌شوند و به‌طور خودکار میزان تلاش برای استدلال را براساس پیچیدگی درخواست تنظیم می‌کنند. بااستفاده از پارامتر `thinking_level` می‌توانید این رفتار را کنترل کنید.
 
-| Mô hình | Tư duy mặc định | Các cấp độ được hỗ trợ |
+| مدل | اندیشیدن پیش‌فرض | سطوح پشتیبانی‌شده |
 | --- | --- | --- |
-| gemini-3.8-flash | Bật (trung bình) | thấp, trung bình, cao |
-| gemini-3.7-flash | Bật (trung bình) | thấp, trung bình, cao |
-| gemini-3.6-flash | Bật (trung bình) | tối thiểu, thấp, trung bình, cao |
-| gemini-3.5-flash-lite | Bật (tối thiểu) | tối thiểu, thấp, trung bình, cao |
-| gemini-3.1-pro-preview | Bật (cao) | thấp, trung bình, cao |
-| gemini-3.1-flash-lite-image | Bật (tối thiểu) | tối thiểu, cao |
-| gemini-3-flash-preview | Bật (cao) | tối thiểu, thấp, trung bình, cao |
-| gemini-3-pro-preview | Bật (cao) | thấp, cao |
-| gemini-3.5-flash | Bật (trung bình) | tối thiểu, thấp, trung bình, cao |
-| gemini-2.5-pro | Bật | thấp, trung bình, cao |
-| gemini-2.5-flash | Bật | thấp, trung bình, cao |
-| gemini-2.5-flash-lite | Tắt | thấp, trung bình, cao |
-| gemini-robotics-er-2-preview | Bật (cao) | tối thiểu, thấp, trung bình, cao |
+| gemini-3.8-flash | روشن (متوسط) | کم، متوسط، زیاد |
+| gemini-3.6-flash | روشن (متوسط) | حداقل، کم، متوسط، زیاد |
+| gemini-3.5-flash-lite | روشن (کمینه) | حداقل، کم، متوسط، زیاد |
+| gemini-3.1-pro-preview | روشن (زیاد) | کم، متوسط، زیاد |
+| gemini-3.1-flash-lite-image | روشن (کمینه) | کمینه، زیاد |
+| gemini-3-flash-preview | روشن (زیاد) | حداقل، کم، متوسط، زیاد |
+| gemini-3-pro-preview | روشن (زیاد) | کم، زیاد |
+| gemini-2.5-pro | روشن | کم، متوسط، زیاد |
+| gemini-2.5-flash | روشن | کم، متوسط، زیاد |
+| gemini-2.5-flash-lite | خاموش | کم، متوسط، زیاد |
+| gemini-robotics-er-2-preview | روشن (زیاد) | حداقل، کم، متوسط، زیاد |
 
 ### Python
 
@@ -646,7 +645,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -675,7 +674,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -748,35 +747,39 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Giới hạn mã thông báo và `max_output_tokens`
+### محدودیت‌های کد و `max_output_tokens`
 
-Tham số tạo [`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=vi#request-body) đặt số lượng mã thông báo tối đa mà một câu trả lời có thể tạo, bao gồm cả mã thông báo ý tưởng.
+پارامتر تولید [`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=fa#request-body) حداکثر تعداد نشانه‌هایی را که یک پاسخ می‌تواند تولید کند، ازجمله نشانه‌های فکری، تعیین می‌کند.
 
-Khi được đặt, tham số này hoạt động như một ngưỡng cắt cứng do cơ sở hạ tầng thực thi mà không thay đổi cách mô hình phân bổ ngân sách suy nghĩ (`thinking_level`).
+وقتی تنظیم شود، این پارامتر به‌عنوان برش سخت‌گیرانه‌ای عمل می‌کند که زیرساخت آن را اعمال می‌کند
+بدون اینکه نحوه تخصیص بودجه فکری مدل را تغییر دهد
+(`thinking_level`).
 
-Nếu đạt đến giới hạn này trong khi suy luận, mô hình sẽ ngừng tạo với trạng thái `"incomplete"` và trả về đầu ra bị cắt bớt hoặc trống (trong khi vẫn tính phí cho mọi mã thông báo tư duy được tạo). Để giảm chi phí hoặc độ trễ mà không làm giảm phản hồi, hãy giảm `thinking_level` (`low` hoặc `medium`) thay vì đặt `max_output_tokens` nhỏ.
+اگر مدل درحین استدلال به این حد مجاز برسد، تولید را با وضعیت
+`"incomplete"` متوقف می‌کند و برونداد کوتاه یا خالی برمی‌گرداند (درحالی‌که همچنان هزینه
+هر نشانه فکری تولیدشده را محاسبه می‌کند). برای کاهش هزینه یا تأخیر بدون کوتاه کردن پاسخ‌ها، به‌جای تنظیم `max_output_tokens` کوچک، `thinking_level` (`low` یا `medium`) را کاهش دهید.
 
-## Chữ ký của suy nghĩ
+## امضاهای فکری
 
-Chữ ký suy nghĩ là biểu thị được mã hoá về quá trình suy luận nội bộ của mô hình. Chúng phải duy trì tính liên tục của quá trình suy luận trong các lượt tương tác nhiều lượt.
+امضاهای فکری نمایشی رمزگذاری‌شده از استدلال داخلی مدل است. این مدل‌ها باید پیوستگی استدلال را در تعاملات چندنوبتی حفظ کنند.
 
-Interactions API giúp việc xử lý chữ ký tư duy trở nên đơn giản hơn nhiều so với `generateContent` API.
+«میانای برنامه‌سازی کاربردی تعامل‌ها» مدیریت امضاهای فکری را بسیار ساده‌تر از `generateContent` API می‌کند.
 
-### Chế độ có trạng thái (Nên dùng)
+### حالت Stateful (توصیه می‌شود)
 
-Theo mặc định, khi bạn sử dụng Interactions API ở chế độ có trạng thái (bằng cách đặt `store: true` và truyền `previous_interaction_id` trong các lượt tiếp theo), máy chủ sẽ tự động quản lý trạng thái cuộc trò chuyện, bao gồm tất cả các khối suy nghĩ và chữ ký. Ở chế độ này, bạn không cần làm gì liên quan đến chữ ký. Các thao tác này được xử lý hoàn toàn ở phía máy chủ.
+به‌طور پیش‌فرض، وقتی از «میاناهای برنامه‌سازی کاربردی تعاملات» در حالت با وضعیت (با تنظیم `store: true` و ارسال `previous_interaction_id` در نوبت‌های بعدی) استفاده می‌کنید، سرور به‌طور خودکار وضعیت مکالمه را مدیریت می‌کند، ازجمله همه بلوک‌های فکر و امضاها. در این حالت، نیازی نیست کاری درخصوص امضاها انجام دهید. این‌ها کاملاً در سمت سرور مدیریت می‌شوند.
 
-### Chế độ không trạng thái
+### حالت بدون وضعیت
 
-Nếu bạn tự quản lý trạng thái cuộc trò chuyện (chế độ không trạng thái) và truyền toàn bộ nhật ký đầu vào và đầu ra trong mỗi yêu cầu:
+اگر خودتان وضعیت مکالمه را مدیریت می‌کنید (حالت بدون وضعیت) و سابقه کامل ورودی‌ها و خروجی‌ها را در هر درخواست ارسال می‌کنید:
 
-- Bạn **PHẢI** luôn gửi lại tất cả các khối `thought` chính xác như khi nhận được từ mô hình.
-- Bạn **KHÔNG** nên xoá hoặc sửa đổi các khối suy nghĩ trong nhật ký, vì chúng chứa các chữ ký cần thiết để mô hình tiếp tục suy luận.
-- Khi chuyển đổi mô hình trong một phiên, bạn vẫn nên gửi lại các khối suy nghĩ của mô hình trước đó. Phần phụ trợ quản lý khả năng tương thích.
+- شما **باید** همیشه همه بلوک‌های `thought` را دقیقاً همان‌گونه که از مدل دریافت شده‌اند دوباره ارسال کنید.
+- شما باید بلوک‌های فکری را از سابقه **حذف نکنید** یا آن‌ها را تغییر ندهید، زیرا این بلوک‌ها حاوی امضاهای لازم برای ادامه استدلال مدل هستند.
+- هنگام تغییر مدل‌ها در یک جلسه، همچنان باید بلوک‌های فکری مدل قبلی را دوباره ارسال کنید. سازگاری را زیرینه مدیریت می‌کند.
 
-## Giá
+## قیمت‌گذاری
 
-Khi tính năng suy nghĩ được bật, giá phản hồi là tổng của các mã thông báo đầu ra và mã thông báo suy nghĩ. Bạn có thể lấy tổng số mã thông báo tư duy được tạo từ trường `total_thought_tokens`.
+وقتی اندیشیدن روشن باشد، قیمت پاسخ مجموع داده‌واحدهای برونداد و داده‌واحدهای اندیشیدن است. می‌توانید تعداد کل نشانه‌های فکری تولیدشده را از فیلد `total_thought_tokens` دریافت کنید.
 
 ### Python
 
@@ -792,7 +795,7 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -821,7 +824,7 @@ if (interaction.usage().isPresent()) {
 }
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -878,32 +881,33 @@ func main() {
 }
 ```
 
-Các mô hình tư duy tạo ra những suy nghĩ hoàn chỉnh để cải thiện chất lượng của câu trả lời cuối cùng, sau đó đưa ra [bản tóm tắt](#summaries) để cung cấp thông tin chi tiết về quy trình tư duy. Giá được tính dựa trên số lượng mã thông báo đầy đủ mà mô hình cần tạo, mặc dù API chỉ xuất ra bản tóm tắt.
+مدل‌های اندیشگر برای بهبود کیفیت پاسخ نهایی، اندیشه‌های کامل تولید می‌کنند و سپس [خلاصه‌هایی](#summaries) را به‌عنوان برونداد ارائه می‌دهند تا بینشی درباره فرایند اندیشیدن ارائه دهند. قیمت‌گذاری براساس تعداد کامل نشانه‌های فکری است که مدل برای تولید نیاز دارد،
+حتی اگر فقط خلاصه از API برونداد شود.
 
-Bạn có thể tìm hiểu thêm về mã thông báo trong hướng dẫn [Đếm mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi).
+در راهنمای [شمارش نشان](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) می‌توانید درباره نشان‌ها بیشتر بدانید.
 
-## Các phương pháp hay nhất
+## روال‌های مطلوب
 
-Sử dụng hiệu quả các mô hình tư duy bằng cách làm theo các nguyên tắc sau.
+با دنبال کردن این دستورالعمل‌ها، از مدل‌های فکری به‌طور کارآمد استفاده کنید.
 
-- **Xem xét suy luận**: Phân tích bản tóm tắt suy nghĩ để hiểu rõ những điểm thất bại và cải thiện câu lệnh.
-- **Kiểm soát ngân sách tư duy**: Yêu cầu mô hình suy nghĩ ít hơn để có đầu ra dài nhằm tiết kiệm mã thông báo.
-- **Tác vụ đơn giản**: Sử dụng ít hoặc không cần suy nghĩ để truy xuất hoặc phân loại thông tin (ví dụ: "DeepMind được thành lập ở đâu?").
-- **Nhiệm vụ vừa phải**: Sử dụng tư duy mặc định để so sánh các khái niệm hoặc suy luận sáng tạo (ví dụ: So sánh xe điện và xe lai).
-- **Các tác vụ phức tạp**: Sử dụng khả năng tư duy tối đa cho hoạt động lập trình, toán học nâng cao hoặc lập kế hoạch nhiều bước (ví dụ: Giải các bài toán trong kỳ thi AIME).
+- **مرور استدلال**: خلاصه‌های فکر را تجزیه‌وتحلیل کنید تا دلیل شکست‌ها را بفهمید و پیام‌واره‌ها را بهبود دهید.
+- **کنترل بودجه تفکر**: برای صرفه‌جویی در تعداد نشانه‌ها، مدل را ترغیب کنید برای بروندادهای طولانی کمتر فکر کند.
+- **وظایف ساده**: برای بازیابی یا طبقه‌بندی حقایق از حداقل یا سطح پایین تفکر استفاده کنید (برای نمونه، «DeepMind در کجا تأسیس شد؟»).
+- **تکالیف میانه‌روی**: از اندیشیدن پیش‌فرض برای مقایسه مفاهیم یا استدلال خلاقانه استفاده کنید (برای نمونه، مقایسه خودروهای برقی و هیبریدی).
+- **کارهای پیچیده**: از حداکثر توان فکری برای کدنویسی پیشرفته، ریاضیات، یا برنامه‌ریزی چندمرحله‌ای استفاده کنید (برای نمونه، مسائل ریاضی AIME را حل کنید).
 
-## Bước tiếp theo
+## قدم بعدی چیست
 
-- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi): Phản hồi văn bản cơ bản
-- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi): Kết nối với các công cụ
-- [Hướng dẫn về Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi): Các tính năng dành riêng cho mô hình
+- [تولید نوشتار](https://ai.google.dev/gemini-api/docs/text-generation?hl=fa): پاسخ‌های نوشتاری پایه
+- [فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?hl=fa): اتصال به ابزارها
+- [راهنمای Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=fa): ویژگی‌های مختص مدل
 
-Gửi ý kiến phản hồi
+ارسال بازخورد
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-Cập nhật lần gần đây nhất: 2026-09-25 UTC.
+تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-25 UTC."],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی."],[],[]]

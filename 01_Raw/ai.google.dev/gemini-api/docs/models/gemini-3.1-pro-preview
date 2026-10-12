@@ -1,56 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he
-fetched_at: 2026-10-05T06:35:47.337084+00:00
-title: "\u05d2\u05e8\u05e1\u05ea \u05d8\u05e8\u05d5\u05dd-\u05d4\u05e9\u05e7\u05d4 \u05e9\u05dc Gemini 3.1 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ru
+fetched_at: 2026-10-12T07:05:26.457917+00:00
+title: "\u041f\u0440\u0435\u0434\u0432\u0430\u0440\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u0432\u0435\u0440\u0441\u0438\u044f Gemini 3.1 Pro \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Флэш-память Gemini 3.8 теперь доступна. [Попробуйте!](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
 
-שליחת משוב
+Отправить отзыв
 
-# גרסת טרום-השקה של Gemini 3.1 Pro
+# Предварительная версия Gemini 3.1 Pro
 
-גרסת טרום-ההשקה של Gemini 3.1 Pro נועדה לשפר את הביצועים והמהימנות של סדרת Gemini 3 Pro. היא מספקת חשיבה טובה יותר, יעילות משופרת של אסימונים וחוויה מבוססת יותר ועקבית מבחינה עובדתית. הוא מותאם להתנהגות של מהנדסי תוכנה ולשימושיות, וגם לתהליכי עבודה מבוססי-סוכנים שדורשים שימוש מדויק בכלי והפעלה מהימנה של כמה שלבים בתחומים בעולם האמיתי.
+Модель Gemini 3.1 Pro Preview создана на основе Gemini 3 Pro и отличается более высокой производительностью и надежностью, а также улучшенными способностями к рассуждениям, более эффективным использованием токенов и более точными ответами. Он оптимизирован для разработки ПО и удобства использования, а также для рабочих процессов, требующих точного использования инструментов и надежного выполнения многоэтапных задач в реальных условиях.
 
-[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=he)
+[Попробовать в Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ru)
 
-## מאמרי עזרה
+## Документация
 
-בדף [מדריך למפתחים של Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=he) מפורטות כל התכונות והיכולות.
+Подробную информацию о функциях и возможностях можно найти в [руководстве по Gemini 3 для разработчиков](https://ai.google.dev/gemini-api/docs/latest-model?hl=ru).
 
 ## gemini-3.1-pro-preview
 
-| נכס | תיאור |
+| Свойство | Описание |
 | --- | --- |
-| id\_cardקוד מודל | `gemini-3.1-pro-preview` |
-| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון, אודיו ו-PDF  **פלט**  טקסט |
-| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **Output token limit**  65,536 |
-| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך (ב-AI Studio בלבד)  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
-| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות ב-Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  נתמך |
-| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-3.1-pro-preview` - תצוגה מקדימה: `gemini-3.1-pro-preview-customtools` \* |
-| calendar\_monthהעדכון האחרון | פברואר 2026 |
-| id\_cardכרטיס מודל | [כרטיס מודל](https://deepmind.google/models/model-cards/gemini-3-1-pro/?hl=he) |
+| Код модели id\_card | `gemini-3.1-pro-preview` |
+| saveПоддерживаемые типы данных | **Входные данные**  Текст, изображение, видео, аудио и PDF  **Выходные данные**  Текст |
+| token\_autoОграничения на количество токенов[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ru) | **Лимит на количество входных токенов**  1 048 576  **Лимит на количество выходных токенов**  65 536 |
+| handymanВозможности | **[Генератор аудио](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ru)**  Чего пользователь не может  **[Кеширование](https://ai.google.dev/gemini-api/docs/caching?hl=ru)**  Что пользователь может  **[Выполнение кода](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru)**  Что пользователь может  **[Поиск файлов](https://ai.google.dev/gemini-api/docs/file-search?hl=ru)**  Поддерживается (только в AI Studio)  **[Вызов функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru)**  Что пользователь может  **[Обоснование с Google Картами](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru)**  Что пользователь может  **[Генерирование изображений](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)**  Чего пользователь не может  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ru)**  Чего пользователь не может  **[Находите информацию из надежных источников](https://ai.google.dev/gemini-api/docs/google-search?hl=ru)**  Что пользователь может  **[Структурированные выходные данные](https://ai.google.dev/gemini-api/docs/structured-output?hl=ru)**  Что пользователь может  **[Размышления](https://ai.google.dev/gemini-api/docs/thinking?hl=ru)**  Что пользователь может  **[Контекст URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ru)**  Что пользователь может |
+| speedВарианты просмотра | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ru)**  Что пользователь может  **[Гибкий инференс](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ru)**  Что пользователь может  **[Определение приоритета](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ru)**  Что пользователь может |
+| 123Версии | Подробнее [о шаблонах версий моделей](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ru#model-versions)…  - Предварительный просмотр: `gemini-3.1-pro-preview` - Предпросмотр: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_monthПоследнее обновление | Февраль 2026 г. |
+| id\_cardКарточка модели | [Карточка модели](https://deepmind.google/models/model-cards/gemini-3-1-pro/?hl=ru) |
 
 #### gemini-3.1-pro-preview-customtools
 
-‫\* *למי שמשתמש בשילוב של bash וכלים בהתאמה אישית, גרסת טרום ההשקה של Gemini 3.1 Pro כוללת נקודת קצה (endpoint) נפרדת שזמינה דרך ה-API בשם `gemini-3.1-pro-preview-customtools`. נקודת הקצה הזו טובה יותר בתעדוף הכלים המותאמים אישית שלכם (לדוגמה, `view_file` או `search_code`).*
+\* *Для тех, кто использует сочетание bash и специальных инструментов, в предварительной версии Gemini 3.1 Pro есть отдельная конечная точка, доступная через API, которая называется `gemini-3.1-pro-preview-customtools`. Этот конечный пункт лучше подходит для определения приоритета ваших собственных инструментов (например, `view_file` или `search_code`).*
 
-*חשוב לזכור ש-`gemini-3.1-pro-preview-customtools` מותאם לאוטומציה של תהליכי עבודה שמשתמשים בכלים מותאמים אישית וב-Bash, אבל יכול להיות שתהיה תנודתיות באיכות בחלק מתרחישי השימוש שלא מפיקים תועלת מהכלים האלה.*
+*Обратите внимание, что, хотя `gemini-3.1-pro-preview-customtools` оптимизирован для рабочих процессов с агентами, использующих пользовательские инструменты и bash, в некоторых случаях качество может быть нестабильным.*
 
-שליחת משוב
+Отправить отзыв
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-עדכון אחרון: 2026-08-19 (שעון UTC).
+Последнее обновление: 2026-10-09 UTC.
 
-רוצה לתת לנו משוב?
+Хотите рассказать подробнее?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-08-19 (שעון UTC)."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-09 UTC."],[],[]]

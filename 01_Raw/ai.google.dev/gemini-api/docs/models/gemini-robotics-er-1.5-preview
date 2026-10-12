@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview
-fetched_at: 2026-10-05T06:39:52.384135+00:00
-title: "Gemini Robotics ER 1.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=de
+fetched_at: 2026-10-12T06:49:58.477804+00:00
+title: "Gemini Robotics\u00a0ER\u00a01.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash is now available. [Try it out](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash).
+Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
 
-- [Home](https://ai.google.dev/)
-- [Gemini API](https://ai.google.dev/gemini-api)
-- [Docs](https://ai.google.dev/gemini-api/docs)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Send feedback
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-# Gemini Robotics ER 1.5
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gemini Robotics ER 1.5 is a vision-language model (VLM) that brings Gemini's
-agentic capabilities to robotics. It's designed for advanced reasoning in the
-physical world, allowing robots to interpret complex visual data, perform
-spatial reasoning, and plan actions from natural language commands.
+Feedback geben
 
-[Try in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview)
+# Gemini Robotics ER 1.5
 
-## Documentation
+Gemini Robotics ER 1.5 ist ein Vision-Language-Modell (VLM), das die agentischen Funktionen von Gemini in die Robotik bringt. Es wurde für fortschrittliche Schlussfolgerungen in der physischen Welt entwickelt und ermöglicht es Robotern, komplexe visuelle Daten zu interpretieren, räumliche Schlussfolgerungen zu ziehen und Aktionen aus Befehlen in natürlicher Sprache zu planen.
 
-Visit the [Robotics](https://ai.google.dev/gemini-api/docs/robotics-overview) page for full coverage
-of features and capabilities.
+[In Google AI Studio ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=de)
+
+## Dokumentation
+
+Auf der Seite [Robotics](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=de) finden Sie eine vollständige Übersicht über die Funktionen.
 
 ## gemini-robotics-er-1.5-preview
 
-| Property | Description |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardModel code | `gemini-robotics-er-1.5-preview` |
-| saveSupported data types | **Inputs**  Text, images, video, audio  **Output**  Text |
-| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens) | **Input token limit**  1,048,576  **Output token limit**  65,536 |
-| handymanCapabilities | **[Audio generation](https://ai.google.dev/gemini-api/docs/speech-generation)**  Not supported  **[Caching](https://ai.google.dev/gemini-api/docs/caching)**  Not supported  **[Code execution](https://ai.google.dev/gemini-api/docs/code-execution)**  Supported  **[Function calling](https://ai.google.dev/gemini-api/docs/function-calling)**  Supported  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding)**  Not supported  **[Image generation](https://ai.google.dev/gemini-api/docs/image-generation)**  Not supported  **[Live API](https://ai.google.dev/gemini-api/docs/live-api)**  Not supported  **[Search grounding](https://ai.google.dev/gemini-api/docs/google-search)**  Supported  **[Structured outputs](https://ai.google.dev/gemini-api/docs/structured-output)**  Supported  **[Thinking](https://ai.google.dev/gemini-api/docs/thinking)**  Supported  **[URL context](https://ai.google.dev/gemini-api/docs/url-context)**  Supported |
-| speedConsumption options | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api)**  Not supported  **[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference)**  Not supported  **[Priority inference](https://ai.google.dev/gemini-api/docs/priority-inference)**  Not supported |
-| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - Preview: `gemini-robotics-er-1.5-preview` |
-| calendar\_monthLatest update | September 2025 |
-| cognition\_2Knowledge cutoff | January 2025 |
+| Modellcode id\_card | `gemini-robotics-er-1.5-preview` |
+| saveUnterstützte Datentypen | **Eingaben**  Text, Bilder, Video, Audio  **Ausgabe**  Text |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  1.048.576  **Tokenausgabelimit**  65.536 |
+| handymanFunktionen | **[Audiogenerierung](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)**  Nicht unterstützt  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=de)**  Nicht unterstützt  **[Code-Ausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de)**  Unterstützt  **[Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de)**  Unterstützt  **[Fundierung mit Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de)**  Nicht unterstützt  **[Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de)**  Nicht unterstützt  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=de)**  Nicht unterstützt  **[Suchfundierung](https://ai.google.dev/gemini-api/docs/google-search?hl=de)**  Unterstützt  **[Strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)**  Unterstützt  **[Antwort wird generiert](https://ai.google.dev/gemini-api/docs/thinking?hl=de)**  Unterstützt  **[URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de)**  Unterstützt |
+| speedNutzungsoptionen | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de)**  Nicht unterstützt  **[Flex-Inferenz](https://ai.google.dev/gemini-api/docs/flex-inference?hl=de)**  Nicht unterstützt  **[Prioritätsinferenz](https://ai.google.dev/gemini-api/docs/priority-inference?hl=de)**  Nicht unterstützt |
+| 123 Versionen | Weitere Informationen finden Sie unter [Muster für Modellversionen](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Vorschau für: `gemini-robotics-er-1.5-preview` |
+| calendar\_monthLetzte Aktualisierung | September 2025 |
+| cognition\_2Wissensstichtag | Januar 2025 |
 
-Send feedback
+Feedback geben
 
-Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Last updated 2026-07-30 UTC.
+Zuletzt aktualisiert: 2026-10-08 (UTC).
 
-Need to tell us more?
+Haben Sie Feedback für uns?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-07-30 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-08 (UTC)."],[],[]]

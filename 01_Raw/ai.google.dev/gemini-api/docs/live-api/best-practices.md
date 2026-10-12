@@ -1,94 +1,122 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=tr
-fetched_at: 2026-10-05T06:38:56.333133+00:00
-title: "Live API ile ilgili en iyi uygulamalar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=id
+fetched_at: 2026-10-12T07:02:54.245911+00:00
+title: "Praktik terbaik Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-# Live API ile ilgili en iyi uygulamalar
+# Praktik terbaik Live API
 
-Bu kılavuzda, Live API kullanımınızı optimize etmek için uygulayabileceğiniz en iyi uygulamalar ele alınmaktadır.
-Genel bakış ve yaygın kullanım alanlarına ilişkin örnek kod için [Live API'yi kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live?hl=tr) sayfasını inceleyin.
+Panduan ini membahas praktik terbaik yang dapat Anda ikuti untuk
+mengoptimalkan penggunaan Live API.
+Lihat halaman [Mulai menggunakan Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) untuk mengetahui ringkasan dan kode contoh untuk kasus penggunaan umum.
 
-## Net sistem talimatları tasarlama
+## Merancang petunjuk sistem yang jelas
 
-Live API'den en iyi performansı almak için, sırasıyla aracı kişiliğini, sohbet kurallarını ve koruma duvarlarını tanımlayan net bir şekilde tanımlanmış bir dizi sistem talimatı (SI) kullanmanızı öneririz.
+Untuk mendapatkan performa terbaik dari Live API, sebaiknya miliki serangkaian petunjuk sistem (SI) yang ditentukan dengan jelas yang menentukan persona agen, aturan percakapan, dan pembatas, dalam urutan ini.
 
-En iyi sonuçları elde etmek için her bir aracıyı ayrı bir SI olarak ayırın.
+Untuk hasil terbaik, pisahkan setiap agen ke dalam SI yang berbeda.
 
-1. **Ajan kişiliğini belirtin:** Ajanın adı, rolü ve tercih edilen özellikleri hakkında ayrıntılı bilgi verin. Aksanı belirtmek istiyorsanız tercih edilen çıkış dilini de (ör. İngilizce konuşan biri için İngiliz aksanı) belirttiğinizden emin olun.
-2. **Sohbet kurallarını belirtin:** Bu kuralları, modelin uymasını beklediğiniz sıraya göre yerleştirin. Görüşmenin tek seferlik öğeleri ile görüşme döngüleri arasındaki farkı belirtin. Örneğin:
+1. **Tentukan persona agen:** Berikan detail tentang nama, peran, dan
+   karakteristik pilihan agen. Jika Anda ingin menentukan aksen, pastikan untuk
+   menentukan juga bahasa output yang diinginkan (seperti aksen Inggris Raya untuk
+   penutur bahasa Inggris).
+2. **Tentukan aturan percakapan:** Masukkan aturan ini dalam urutan yang Anda harapkan
+   untuk diikuti model. Membatasi elemen percakapan satu kali dan loop percakapan. Contoh:
 
-   - **Tek seferlik öğe:** Müşterinin ayrıntılarını (ör. ad, konum, bağlılık kartı numarası) bir kez toplama.
-   - **Sohbet döngüsü:** Kullanıcı, önerileri, fiyatlandırmayı, iadeleri ve teslimatı tartışabilir ve konudan konuya geçmek isteyebilir. Modele, kullanıcı istediği sürece bu sohbet döngüsüne katılmasının sorun olmadığını bildir.
-3. **Bir akış içindeki araç çağrılarını ayrı cümlelerde belirtin:** Örneğin, bir müşterinin ayrıntılarını toplamak için tek seferlik bir adımda `get_user_info` işlevinin çağrılması gerekiyorsa şunları söyleyebilirsiniz: *İlk adımınız kullanıcı bilgilerini toplamak. Öncelikle kullanıcıdan adını, konumunu ve bağlılık kartı numarasını vermesini isteyin. Ardından, bu ayrıntılarla `get_user_info` işlevini çağırın.*
-4. **Gerekli tüm koruma önlemlerini ekleyin:** Modelin yapmasını istemediğiniz genel sohbet koruma önlemlerini sağlayın. *x* gerçekleşirse modelin *y* yapmasını istediğinize dair belirli örnekler verebilirsiniz. Hâlâ istediğiniz hassasiyet düzeyine ulaşamıyorsanız modele hassas olması için yol göstermek üzere *kesinlikle* kelimesini kullanın.
+   - **Elemen sekali pakai:** Kumpulkan detail pelanggan satu kali (seperti nama, lokasi, nomor kartu loyalitas).
+   - **Loop percakapan:** Pengguna dapat mendiskusikan rekomendasi, harga, pengembalian, dan pengiriman, serta dapat berpindah dari satu topik ke topik lainnya. Beri tahu model bahwa tidak masalah untuk terlibat dalam loop percakapan ini selama yang diinginkan pengguna.
+3. **Tentukan panggilan alat dalam alur dengan kalimat yang berbeda:** Misalnya, jika
+   langkah satu kali untuk mengumpulkan detail pelanggan memerlukan pemanggilan `get_user_info`
+   fungsi, Anda dapat mengatakan: *Langkah pertama Anda adalah mengumpulkan informasi pengguna. Pertama,
+   minta pengguna untuk memberikan nama, lokasi, dan nomor kartu loyalitasnya. Kemudian
+   panggil `get_user_info` dengan detail ini.*
+4. **Tambahkan pembatasan yang diperlukan:** Berikan pembatasan percakapan umum yang tidak boleh dilakukan model. Jangan ragu untuk memberikan contoh spesifik, misalnya, jika *x* terjadi, Anda ingin model melakukan *y*. Jika Anda masih belum mendapatkan tingkat presisi yang diinginkan, gunakan kata *tanpa salah* untuk memandu model agar presisi.
 
-## Araçları hassas bir şekilde tanımlama
+## Menentukan alat secara tepat
 
-Live API ile araçları kullanırken araç tanımlarınızda net olun.
-Gemini'a hangi koşullarda araç çağrısı yapılması gerektiğini söyleyin. Daha fazla bilgi için örnek bölümündeki [Araç tanımları](#tool-definitions-example) konusuna bakın.
+Saat menggunakan alat dengan Live API, berikan definisi alat yang spesifik.
+Pastikan untuk memberi tahu Gemini dalam kondisi apa panggilan alat harus
+dipanggil. Untuk mengetahui detail selengkapnya, lihat [Definisi alat](#tool-definitions-example) di bagian contoh.
 
-## Etkili istemler oluşturma
+## Menyusun perintah yang efektif
 
-- **Net istemler kullanın:** İstemlerde modellerin ne yapması ve ne yapmaması gerektiğine dair örnekler verin. İstemleri, her karakter veya rol için tek bir istemle sınırlamaya çalışın. Uzun ve çok sayfalı istemler yerine istem zincirleme özelliğini kullanabilirsiniz. Model, tek işlev çağrısı içeren görevlerde en iyi performansı gösterir.
-- **Başlangıç komutları ve bilgileri sağlama:** Live API, yanıt vermeden önce kullanıcı girişi bekler. Live API'nin görüşmeyi başlatması için kullanıcıyı selamlamasını veya görüşmeye başlamasını isteyen bir istem ekleyin. Canlı API'nin bu karşılama mesajını kişiselleştirmesi için kullanıcı hakkında bilgi ekleyin.
+- **Gunakan perintah yang jelas:** Berikan contoh tentang apa yang boleh dan tidak boleh dilakukan model dalam perintah, dan coba batasi perintah menjadi satu perintah per persona atau peran dalam satu waktu. Daripada menggunakan perintah multi-halaman yang panjang, sebaiknya gunakan penggabungan perintah. Model ini menghasilkan performa terbaik pada tugas dengan panggilan fungsi tunggal.
+- **Memberikan perintah dan informasi awal:** Live API mengharapkan
+  input pengguna sebelum merespons. Agar Live API memulai percakapan, sertakan perintah yang memintanya untuk menyapa pengguna atau memulai percakapan. Sertakan informasi tentang pengguna agar Live API
+  dapat mempersonalisasi ucapan tersebut.
 
-## Dili belirtme
+## Menentukan bahasa
 
-Live API ses modelleri, kullanıcının konuştuğu dili otomatik olarak algılayıp uyum sağlar ve açık bir dil kodu gerektirmez.
+Model audio Live API otomatis mendeteksi dan beradaptasi dengan bahasa lisan pengguna tanpa memerlukan kode bahasa eksplisit.
 
-Modelin belirli bir dilde yanıt vermesini istiyorsanız sistem talimatlarınıza bir talimat ekleyin:
+Jika Anda ingin model merespons dalam bahasa tertentu, sertakan petunjuk
+sebagai bagian dari petunjuk sistem Anda:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## Canlı Yayın
+## Streaming
 
-Anlık ses özelliğini uygularken aşağıdaki en iyi uygulamaları göz önünde bulundurun:
+Saat menerapkan audio real-time, ikuti praktik terbaik berikut:
 
-- **Parça Boyutu ve Gecikme**: Sesi 20 ms ile 40 ms arasındaki parçalar halinde gönderin.
-- **Kesintileri İşleme**: Kullanıcı, model yanıt verirken konuştuğunda sunucu, `"interrupted": true` ile birlikte `server_content` mesajı gönderir. Aracının kullanıcıyla konuşmaya devam etmesini önlemek için istemci tarafındaki ses arabelleğinizi hemen atmanız gerekir.
+- **Ukuran Chunk dan Latensi**: Kirim audio dalam chunk 20 md hingga 40 md.
+- **Penanganan Interupsi**: Saat pengguna berbicara saat model sedang membalas, server akan mengirim pesan `server_content` dengan `"interrupted": true`. Anda
+  harus segera membuang buffer audio sisi klien untuk mencegah agen
+  terus berbicara dengan pengguna.
 
-## Bağlam yönetimi
+## Pengelolaan konteks
 
-Yerel ses jetonları hızla biriktiği için (yaklaşık 25 jeton/saniye) uzun oturumlarda `ContextWindowCompressionConfig` kullanın.
+Gunakan `ContextWindowCompressionConfig` untuk sesi panjang, karena token audio native terakumulasi dengan cepat (sekitar 25 token per detik audio).
 
-## İstemci arabelleğe alma
+## Buffering klien
 
-Göndermeden önce giriş sesini önemli ölçüde (ör. 1 saniye) arabelleğe almayın. Gecikmeyi en aza indirmek için küçük parçalar (20 ms - 100 ms) gönderin.
+Jangan melakukan buffering audio input secara signifikan (seperti 1 detik) sebelum mengirim. Kirim
+chunk kecil (20 md - 100 md) untuk meminimalkan latensi.
 
-## Yeniden örnekleme
+## Pengambilan ulang sampel
 
-İstemci uygulamanızın, iletimden önce mikrofon girişini (genellikle 44,1 kHz veya 48 kHz) 16 kHz'ye yeniden örneklediğinden emin olun.
+Pastikan aplikasi klien Anda melakukan pengambilan sampel ulang input mikrofon (sering kali 44,1 kHz atau 48 kHz) menjadi 16 kHz sebelum transmisi.
 
-## Oturum yönetimi
+## Pengelolaan sesi
 
-Oturum yaşam döngüsünü yönetmek ve güvenilir bir kullanıcı deneyimi sağlamak için aşağıdaki yönergeleri uygulayın:
+Ikuti panduan ini untuk menangani siklus proses sesi dan memastikan pengalaman pengguna yang andal:
 
-- **Bağlam penceresi sıkıştırmasını etkinleştirme:** Ses jetonları saniyede yaklaşık 25 jeton hızında birikir. Sıkıştırma olmadan yalnızca sesli oturumlar 15 dakika, sesli ve görüntülü oturumlar ise 2 dakika ile sınırlıdır. Oturumları sınırsız süreye uzatmak için [bağlam penceresi sıkıştırmasını](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#context-window-compression) etkinleştirin.
-- **Oturuma devam etme özelliğini uygulayın:** Sunucu, WebSocket bağlantısını düzenli olarak sıfırlayabilir. Bağlamı kaybetmeden sorunsuz bir şekilde yeniden bağlanmak için [oturum devam ettirme](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#session-resumption) özelliğini kullanın. `SessionResumptionUpdate` iletilerinden en son devam ettirme jetonunu saklayın ve yeniden bağlanırken bunu işleyici olarak iletin. Devam ettirme jetonları, son oturumun sona ermesinden sonraki 2 saat boyunca geçerlidir.
-- **GoAway mesajlarını işleme:** Sunucu, bağlantıyı sonlandırmadan önce bir [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#goaway-message) mesajı gönderir. Bu mesajı dinleyin ve bağlantı kapanmadan önce
-  `timeLeft` alanını kullanarak bağlantıyı düzgün bir şekilde sonlandırın veya yeniden bağlanın.
-- **Yanıt oluşturma işleminin tamamlanmasıyla ilgili sinyaller:** Modelin yanıt oluşturmayı ne zaman tamamladığını öğrenmek için [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr#generation-complete-message) mesajını kullanın. Böylece uygulamanız kullanıcı arayüzünü güncelleyebilir veya bir sonraki işleme geçebilir.
+- **Aktifkan kompresi jendela konteks:** Token audio terakumulasi sekitar 25 token per detik. Tanpa kompresi, sesi khusus audio
+  dibatasi hingga 15 menit dan sesi audio-video hingga 2 menit. Aktifkan
+  [kompresi jendela konteks](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#context-window-compression)
+  untuk memperpanjang sesi dengan durasi tidak terbatas.
+- **Menerapkan kelanjutan sesi:** Server dapat mereset koneksi WebSocket secara berkala. Gunakan
+  [pelanjutan sesi](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#session-resumption)
+  untuk terhubung kembali dengan lancar tanpa kehilangan konteks. Pertahankan token kelanjutan terbaru dari `SessionResumptionUpdate` pesan dan teruskan sebagai handle saat terhubung kembali. Token pelanjutan berlaku selama 2 jam setelah sesi terakhir berakhir.
+- **Menangani pesan GoAway:** Server mengirim pesan
+  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#goaway-message)
+  sebelum menghentikan koneksi. Dengarkan pesan ini dan gunakan kolom
+  `timeLeft` untuk mengakhiri atau menghubungkan kembali dengan baik sebelum koneksi
+  ditutup.
+- **Tangani sinyal generationComplete:** Gunakan pesan
+  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#generation-complete-message)
+  untuk mengetahui kapan model telah selesai membuat respons, sehingga aplikasi
+  Anda dapat memperbarui UI-nya atau melanjutkan ke tindakan berikutnya.
 
-Uygulama ayrıntıları için [Oturum yönetimi](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=tr) başlıklı makaleye bakın.
+Untuk mengetahui detail penerapan, lihat artikel
+[Pengelolaan sesi](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id).
 
-## Örnekler
+## Contoh
 
-Bu örnekte, modelin kariyer koçu olarak performansını yönlendirmek için hem en iyi uygulamalar hem de [sistem talimatı tasarımıyla ilgili yönergeler](#system-instruction-guidelines) bir araya getirilmiştir.
+Contoh ini menggabungkan praktik terbaik dan [pedoman untuk desain petunjuk sistem](#system-instruction-guidelines) guna memandu performa model sebagai pelatih karier.
 
 ```
 **Persona:**
@@ -140,10 +168,11 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Araç tanımları
+### Definisi alat
 
-Bu JSON, kariyer koçu örneğinde çağrılan ilgili işlevleri tanımlar.
-İşlevleri tanımlarken en iyi sonuçları elde etmek için işlevlerin adlarını, açıklamalarını, parametrelerini ve çağırma koşullarını ekleyin.
+JSON ini menentukan fungsi relevan yang dipanggil dalam contoh pelatih karier.
+Untuk hasil terbaik saat menentukan fungsi, sertakan nama, deskripsi,
+parameter, dan kondisi pemanggilan.
 
 ```
 [
@@ -233,45 +262,52 @@ Bu JSON, kariyer koçu örneğinde çağrılan ilgili işlevleri tanımlar.
 ]
 ```
 
-## Fiyatlandırma ve faturalandırma
+## Penetapan harga dan penagihan
 
-Gemini Live API, yalnızca jeton kullanımına göre faturalandırılır. Live API, kalıcı bir WebSocket oturumu sürdürdüğünden faturalandırma, etkin bağlam penceresine dayalı olarak bileşik bir modeli izler.
+Gemini Live API ditagih berdasarkan penggunaan token. Karena Live API mempertahankan sesi WebSocket persisten, penagihan mengikuti model gabungan berdasarkan jendela konteks aktif.
 
-### Oturum bağlam penceresi (bileşik maliyetler)
+### Jendela konteks sesi (biaya gabungan)
 
-API, oturum bağlam penceresinde bulunan tüm jetonlar için dönüş başına ücret alır. "Dönüş", bir kullanıcı girişi ve modelin buna karşılık gelen yanıtı olarak tanımlanır.
+API mengenakan biaya per giliran untuk semua token yang ada di jendela konteks sesi. "Giliran" ditentukan sebagai satu input pengguna dan respons model yang sesuai.
 
-- **Birikim:** Bağlam penceresi, mevcut dönüşteki yeni jetonların yanı sıra önceki dönüşlerde birikmiş tüm jetonları içerir.
-- **Yeniden faturalandırma:** Geçmiş jetonlar yeniden işlenir ve yapılandırılmış bağlam penceresi boyutunuza kadar her yeni dönüşte hesaba katılır. Oturum uzadıkça sohbet geçmişi yeniden işlendiği için dönüş başına maliyet artar.
+- **Akumulasi:** Jendela konteks mencakup token baru dari giliran saat ini ditambah semua token yang terakumulasi dari giliran sebelumnya.
+- **Penagihan ulang:** Token sebelumnya diproses ulang dan diperhitungkan di setiap giliran baru, hingga ukuran jendela konteks yang Anda konfigurasi. Seiring durasi sesi yang bertambah, biaya per giliran akan meningkat karena histori percakapan diproses ulang.
 
-### Ses jetonları ve transkriptler
+### Token dan transkripsi audio
 
-Live API, doğal olarak çok formatlıdır. Akustik nüansı ve tonu korumak için sohbet geçmişini ham ses jetonları olarak saklar.
+Live API secara native bersifat multimodal. Fitur ini mempertahankan histori percakapan sebagai token audio mentah untuk mempertahankan nuansa dan nada akustik.
 
-- **Ses faturalandırması:** API, her dönüşte biriken doğal ses jetonları için standart ses girişi oranında fatura keser.
-- **Transkripsiyon ek ücreti:** Ses-metin transkripsiyonu etkinleştirildiğinde (`inputAudioTranscription` veya `outputAudioTranscription`), API, standart ses jetonu maliyetlerine ek olarak transkripsiyon için oluşturulan tüm metin jetonlarını metin jetonu çıkış oranında ücretlendirir.
+- **Penagihan audio:** API menagih Anda untuk token audio native yang terakumulasi dengan tarif input audio standar pada setiap giliran.
+- **Biaya tambahan transkripsi:** Jika transkripsi audio ke teks diaktifkan (`inputAudioTranscription` atau `outputAudioTranscription`), API akan mengenakan biaya untuk semua token teks yang dihasilkan untuk transkripsi dengan tarif output token teks selain biaya token audio standar.
 
-### Bağlam sınırlarıyla maliyetleri yönetme
+### Mengelola biaya dengan batas konteks
 
-Uzun oturumlarda sınırsız maliyet artışını önlemek için bağlam penceresi boyutunuzu `contextWindowCompression` kullanarak yapılandırın.
+Untuk mencegah pertumbuhan biaya yang tidak terbatas dalam sesi panjang, konfigurasikan ukuran
+jendela konteks menggunakan `contextWindowCompression`.
 
-Bir sıkıştırma tetikleyicisi (ör.25.000 jeton) ve kayan pencere (ör.8.000 jeton) ayarlayarak eşik değerine ulaşıldığında API, eski jetonları otomatik olarak çıkarır. API, sonraki dönüşler için yalnızca saklanan geçmiş ve yeni jetonlar üzerinden faturalandırma yapar.
+Dengan menetapkan pemicu kompresi (misalnya, 25.000 token) dan jendela geser (misalnya, 8.000 token), API akan otomatis mengeluarkan token yang lebih lama setelah batas tercapai. Kemudian, API akan menagih giliran berikutnya hanya untuk histori yang dipertahankan ditambah token baru.
 
-### Proaktif ses
+### Audio proaktif
 
-Proaktif ses etkinleştirildiğinde API, Live API dinlerken giriş jetonları için tüm süre boyunca ücret alır ve çıkış jetonları için yalnızca API yanıt verdiğinde ücret alır.
+Jika audio proaktif diaktifkan, API akan mengenakan biaya untuk token input selama
+API Live mendengarkan, dan mengenakan biaya untuk token output hanya saat API
+merespons.
 
-- **Gemini 3.8 ile ilgili not:** Proaktif ses, `gemini-3.8-live` ve `gemini-3.8-live-extended-thinking`'de kalıcı olarak etkinleştirilir.
-- **Gemini 3.1 ile ilgili not:** Proaktif ses özelliği `gemini-3.1-flash-live-preview`'da desteklenmez. Bu modelde API, yalnızca girişi aktif olarak yayınladığınızda ses için faturalandırır.
+- **Catatan untuk Gemini 3.8:** Audio proaktif diaktifkan secara permanen di
+  `gemini-3.8-live` dan `gemini-3.8-live-extended-thinking`.
+- **Catatan untuk Gemini 3.1:** Audio proaktif tidak didukung di
+  `gemini-3.1-flash-live-preview`. Untuk model ini, API hanya menagih
+  audio saat Anda secara aktif melakukan streaming input.
 
-Ayrıntılı fiyatlandırma bilgileri için [Gemini API fiyatlandırma sayfasını](https://ai.google.dev/gemini-api/docs/pricing?hl=tr) inceleyin.
+Untuk mengetahui informasi harga mendetail, lihat
+[halaman harga Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=id).
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-09-17 UTC.
+Terakhir diperbarui pada 2026-09-17 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-17 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-17 UTC."],[],[]]
