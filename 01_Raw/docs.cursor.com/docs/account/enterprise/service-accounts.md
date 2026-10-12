@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/enterprise/service-accounts
-fetched_at: 2026-10-05T06:27:18.335582+00:00
+fetched_at: 2026-10-12T06:49:39.791093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,6 +75,7 @@ Each service account can have API keys associated with it. You can:
 - **View masked keys**: See the last few characters of each key for identification
 - **Rotate keys**: Generate a new key and invalidate the old one
 - **Edit name and description**: Rename an active service account or update its description. Its existing API keys keep working
+- **Suspend service accounts**: Stop all of a service account's API keys from working without revoking them, then resume it later
 - **Archive service accounts**: Archive a service account and revoke all its API keys
 
 ### Rotating an API key
@@ -123,6 +124,18 @@ The same environment variable works in any context, including local development.
 - **Limit scope**: Create separate service accounts for different automation workflows
 - **Monitor usage**: Review service account activity in your team's analytics dashboard
 - **Revoke unused accounts**: Archive service accounts that are no longer in use
+
+## Suspending a service account
+
+Suspending a service account stops its API keys from working until you resume it. The keys are kept, so resuming restores access without rotating them.
+
+To suspend a service account:
+
+1. Navigate to **Dashboard** → **Settings** → **API Keys** → **Service Accounts**
+2. Click the pause icon next to the service account
+3. Confirm the suspend action
+
+Suspended accounts show a **Suspended** badge. To resume one, click the play icon next to it and confirm.
 
 ## Archiving a service account
 

@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-4-5-haiku
-fetched_at: 2026-10-05T06:27:21.169341+00:00
+fetched_at: 2026-10-12T06:49:41.989308+00:00
 fetch_method: mintlify_md
 ---
 
-For stronger results, consider [Claude Sonnet 5.5](https://cursor.com/docs/models/claude-sonnet-5-5.md) or [Gemini 3 Flash](https://cursor.com/docs/models/gemini-3-flash.md) for a fast, affordable alternative.
+We recommend using [Claude Haiku 5.5](https://cursor.com/docs/models/claude-haiku-5-5.md). It's the latest Haiku, with stronger results at a lower per-token price.
 
 ## Pricing
 

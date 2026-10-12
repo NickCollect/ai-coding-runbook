@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics-api
-fetched_at: 2026-09-28T06:10:40.391505+00:00
+fetched_at: 2026-10-12T06:49:39.940711+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1046,6 +1046,8 @@ GET
 `/analytics/team/bugbot`
 
 Get per-PR Bugbot review analytics for your team, including issue counts by severity and how many issues were resolved.
+
+The response lists a pull request when a successful Bugbot review of it started inside the date range, even if Bugbot first reviewed it earlier. `reviews` and `issues` cover only those in-range reviews, and `timestamp` is the earliest of them.
 
 For per-review data including billed cost and individual findings, use [Bugbot review analytics](https://cursor.com/docs/account/teams/analytics-api.md#bugbot-review-analytics).
 

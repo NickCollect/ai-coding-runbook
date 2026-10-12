@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/migrations
-fetched_at: 2026-10-05T06:27:19.011995+00:00
+fetched_at: 2026-10-12T06:49:40.530179+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,9 +16,9 @@ The endpoints use the [Origin API](https://cursor.com/docs/api/origin.md) base U
 
 ## Scopes
 
-`repository:mirror:write`, `repository:mirror:delete`, and `repository:metadata:read` are user policy scopes. [Transition Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#transition-repo-mirror) requires Write (`repository:mirror:write`). [Detach Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#detach-repo-mirror) requires Admin (`repository:mirror:delete`). [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job) and [Get Active Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-active-mirror-transition-job) require `repository:metadata:read`. You must also administer the repository on its upstream GitHub source.
+`repository:mirror:write`, `repository:mirror:delete`, and `repository:mirror:read` are user policy scopes. [Transition Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#transition-repo-mirror) requires Write (`repository:mirror:write`). [Detach Repo Mirror](https://cursor.com/docs/api/origin/migrations.md#detach-repo-mirror) requires Admin (`repository:mirror:delete`). [Get Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-mirror-transition-job) and [Get Active Mirror Transition Job](https://cursor.com/docs/api/origin/migrations.md#get-active-mirror-transition-job) require `repository:mirror:read`. You must also administer the repository on its upstream GitHub source.
 
-These scopes are not requestable during an Origin App installation. An Origin App cannot call these endpoints.
+An Origin App can't request `repository:mirror:write` or `repository:mirror:delete` during installation, and it can't call these endpoints. An app can request `repository:mirror:read`, but only to read `mirror` on [Get Repo](https://cursor.com/docs/api/origin/reference/get-repo.md).
 
 ## Endpoint reference
 
@@ -78,6 +78,7 @@ curl --request POST \
     "id": "repo_01k2ja2000e0080000000000q4",
     "name": "rocket",
     "fullName": "acme/rocket",
+    "webUrl": "https://cursor.com/codebase/acme/rocket",
     "owner": {
       "slug": "acme",
       "id": "ns_01k2ja2000e0080000000000p3",
@@ -115,9 +116,11 @@ DELETE
 
 Requires scope `repository:mirror:delete` (user access token).
 
-Permanently disconnects a mirrored repository from its upstream source. The repository keeps its current contents and becomes a native repository, syncing stops in both directions, and the mirror's deploy credential is deleted. The response body is empty.
+Permanently disconnects a mirrored repository from its upstream source. The repository keeps its current contents and becomes a native repository, and syncing stops in both directions. Origin keeps the mirror's deploy key but doesn't use it while the repository is detached. The response body is empty.
 
-Detaching is not reversible through this API. A repository that never had a mirror returns `FailedPrecondition` (HTTP 400); detaching an already-detached repository succeeds without effect.
+Before it detaches an `inbound` repository, Origin stops the mirror and waits up to 2 minutes for its last fetch from GitHub, so a fetch already underway can't overwrite pushes made after the detach. If that fetch fails, or Origin can't resolve the repository's GitHub remote, the request returns `FailedPrecondition` (HTTP 400). Other failures, such as a timeout, return an error such as `Unavailable` (HTTP 503) or `DeadlineExceeded` (HTTP 408). In each case the repository stays mirrored; fix the cause and retry. When the GitHub App installation is gone or suspended, or the GitHub repository no longer exists, Origin detaches without a last fetch.
+
+Detaching is not reversible through this API. A repository that never had a mirror returns `FailedPrecondition` (HTTP 400); detaching an already-detached repository succeeds without effect. A detach that races another change to the repository's mirror state returns `FailedPrecondition` (HTTP 400).
 
 #### Path Parameters
 
@@ -151,7 +154,7 @@ GET
 
 `/v1/origin/repos/{ownerSlug}/{repoName}/mirror/transition-jobs/{jobId}`
 
-Requires scope `repository:metadata:read` (user access token).
+Requires scope `repository:mirror:read` (user access token).
 
 Returns one mirror transition job by id. An unknown job id returns `404`.
 
@@ -247,7 +250,7 @@ GET
 
 `/v1/origin/repos/{ownerSlug}/{repoName}/mirror/transition-jobs:active`
 
-Requires scope `repository:metadata:read` (user access token).
+Requires scope `repository:mirror:read` (user access token).
 
 Returns the repository's currently active mirror transition job and its most recent terminal one. Both fields are optional, so a repository that has never transitioned returns an empty object. Poll this endpoint to follow a transition: once `activeJob` disappears, `lastJob` tells you how it ended.
 

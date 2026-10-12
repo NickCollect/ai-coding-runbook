@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-10-05T06:27:23.070198+00:00
+fetched_at: 2026-10-12T06:49:43.341888+00:00
 fetch_method: mintlify_md
 ---
 
@@ -425,17 +425,17 @@ interface SDKAgent {
 }
 ```
 
-| Member                  | Description                                                                                                                                                                  |
-| :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agentId`               | Stable agent identifier. `agent-<uuid>` for local, `bc-<uuid>` for cloud.                                                                                                    |
-| `model`                 | Current model selection. Updates after every successful `send({ model })`. `undefined` until something sets it (including resumed agents whose caller did not pass `model`). |
-| `send`                  | Start a new run with the given prompt. Returns a `Run` handle.                                                                                                               |
-| `close`                 | Begin disposal without awaiting. Fire-and-forget.                                                                                                                            |
-| `reload`                | Re-read filesystem config (hooks, project MCP, subagents) without disposing.                                                                                                 |
-| `[Symbol.asyncDispose]` | Async disposal. Pair with `await using` for automatic cleanup.                                                                                                               |
-| `listArtifacts`         | List files produced by the agent (cloud only; local returns empty).                                                                                                          |
-| `downloadArtifact`      | Download a file by path (cloud only; local throws).                                                                                                                          |
-| `getUsage`              | Fetch billed token usage and dollar cost for the agent.                                                                                                                      |
+| Member                  | Description                                                                                                                                                                                    |
+| :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agentId`               | Stable agent identifier. `agent-<uuid>` for local, `bc-<uuid>` for cloud.                                                                                                                      |
+| `model`                 | Current model selection. Updates after every successful `send({ model })`. `undefined` until something sets it (including resumed agents whose caller did not pass `model`).                   |
+| `send`                  | Start a new run with the given prompt. Returns a `Run` handle.                                                                                                                                 |
+| `close`                 | Begin disposal without awaiting. Fire-and-forget.                                                                                                                                              |
+| `reload`                | Re-read filesystem config (hooks, project MCP, subagents) without disposing.                                                                                                                   |
+| `[Symbol.asyncDispose]` | Async disposal. Pair with `await using` for automatic cleanup.                                                                                                                                 |
+| `listArtifacts`         | List files produced by the agent (cloud only; local returns empty).                                                                                                                            |
+| `downloadArtifact`      | Download a file by path (cloud only; local throws).                                                                                                                                            |
+| `getUsage`              | Fetch billed token usage and dollar cost for the agent. Local agents need usage access enabled per account; see [`Agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage). |
 
 ### Agent.prompt()
 
@@ -1227,6 +1227,15 @@ Returns the stored user and assistant messages for a local agent.
 ### Agent.getUsage()
 
 Fetch billed token usage and dollar cost for an agent's runs. Call it on a handle, or statically by ID when you don't have one. Cloud agents return a per-run breakdown; local agents return a per-turn breakdown. Pass `runId` to restrict the result to one entry: for cloud agents a `run-<uuid>` run ID, for local agents an ID from a previous `getUsage().runs[].runId`.
+
+Usage for local agents is rolling out gradually and is enabled per account.
+Until it's enabled for your API key's account, `getUsage()` on a local agent
+returns `403 feature_unavailable`, which the SDK throws as an
+`UnknownAgentError` with `error.code === "feature_unavailable"`. Cloud
+agents aren't gated. In the meantime, read per-run token counts from
+`run.usage` or `result.usage` (see [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage)) and billed
+cost from the [usage dashboard](https://cursor.com/dashboard/usage) under
+the SDK tag.
 
 ```typescript
 agent.getUsage(options?: GetUsageOptions): Promise<AgentUsage>;

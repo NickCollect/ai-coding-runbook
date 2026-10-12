@@ -1,12 +1,14 @@
 ---
 source_url: https://cursor.com/docs/integrations/bitbucket
-fetched_at: 2026-10-05T06:27:21.153046+00:00
+fetched_at: 2026-10-12T06:49:41.711592+00:00
 fetch_method: mintlify_md
 ---
 
 # Bitbucket
 
 Connect Bitbucket Cloud repositories to [Cloud Agents](https://cursor.com/docs/cloud-agent.md) and [Bugbot](https://cursor.com/docs/bugbot.md). Connect Bitbucket Data Center repositories to Bugbot.
+
+[Security Reviewer and Vulnerability Scanner](https://cursor.com/docs/security-agents.md#source-control-support) do not support Bitbucket Cloud or Bitbucket Data Center repositories.
 
 ## Setup
 
@@ -148,6 +150,8 @@ For instances without public inbound access, see [Advanced networking](https://c
 Cursor uses the service account identity for Bugbot review comments, inline findings, webhooks, and build statuses.
 
 Bugbot reviews pull requests automatically when they're opened or updated. Comment commands such as `bugbot run` and `cursor review` don't run on Bitbucket Data Center. Cursor replies to the comment to say so.
+
+[Bugbot Autofix](https://cursor.com/docs/bugbot.md#autofix) isn't supported on Bitbucket Data Center. If Autofix is on, Bugbot skips it and says so in its review.
 
 ### Disconnect Bitbucket Data Center
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-10-05T06:27:19.639357+00:00
+fetched_at: 2026-10-12T06:49:40.908010+00:00
 fetch_method: mintlify_md
 ---
 
@@ -123,7 +123,7 @@ To retrieve the webhook URL, you must save the automation first, which will then
 Linear triggers respond to events from the [Cursor Linear integration](https://cursor.com/docs/integrations/linear.md).
 
 - **Issue created** - When a new issue is created.
-- **Status changed** - When an issue's status changes.
+- **Status changed** - When an issue's status changes. Pick one or more statuses after **to** to run only when an issue moves into one of them, or keep **Any status**.
 - **End of cycle** - When a Linear cycle completes.
 
 ### Sentry triggers

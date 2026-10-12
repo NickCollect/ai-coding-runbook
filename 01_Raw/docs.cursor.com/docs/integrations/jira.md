@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-09-28T06:10:43.006978+00:00
+fetched_at: 2026-10-12T06:49:41.836677+00:00
 fetch_method: mintlify_md
 ---
 
@@ -64,6 +64,8 @@ You can choose how Jira authenticates Cloud Agents on the Cursor Jira integratio
 | :----------------------------- | :----------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Service account authentication | Cloud Agents run under a service account.        | Uses only the team's Cloud Agent settings for routing, models, repositories, and defaults.                                                                 |
 | User-level authentication      | Runs all Cloud Agents under each user's account. | Uses each user's Cloud Agent settings for routing, models, repositories, and defaults. Also allows users to find their running agents under their account. |
+
+If you turn on **Restrict Cloud Agent Usage** in your Enterprise team's Cloud Agents settings, each Jira user must connect a Cursor account before Cursor starts an agent, even with the toggle off. Cursor checks that account against the restriction. With the toggle off, agents still run under the service account.
 
 To connect each user:
 
@@ -224,7 +226,7 @@ A user that is both a Jira admin and Cursor team admin will need to do the initi
 
 ### Do users need to connect their own Cursor accounts?
 
-It depends on the authentication mode you choose. Service account authentication runs all Cloud Agents under a service account and uses team settings. User-level authentication connects each Jira user to Cursor, lets users find their running Cloud Agents from Jira in their Cursor dashboard, and uses each user's settings for routing, models, repositories, and defaults.
+It depends on the authentication mode you choose. Service account authentication runs all Cloud Agents under a service account and uses team settings. User-level authentication connects each Jira user to Cursor, lets users find their running Cloud Agents from Jira in their Cursor dashboard, and uses each user's settings for routing, models, repositories, and defaults. If your Enterprise team turns on **Restrict Cloud Agent Usage**, every user must connect in either mode.
 
 ### What else needs to be set up before Cursor can create PRs?
 

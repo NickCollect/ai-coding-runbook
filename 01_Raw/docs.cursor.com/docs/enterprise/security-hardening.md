@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/security-hardening
-fetched_at: 2026-09-14T05:36:08.600724+00:00
+fetched_at: 2026-10-12T06:49:41.675261+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,7 +71,7 @@ You and your users have several ways to manage your data.
 | **Data subject requests**             | Personal Data access, correction, or deletion requests (DSAR).                                                              | Email [hi@cursor.com](mailto:hi@cursor.com) to exercise privacy rights ([Privacy Policy](https://cursor.com/privacy))                                  |
 | **Shared chats and canvases**         | Published share links.                                                                                                      | Delete from the dashboard ([shared chats](https://cursor.com/dashboard/shared-chats), [shared canvases](https://cursor.com/dashboard/shared-canvases)) |
 | **Cloud Agent deletion**              | An agent's conversation transcript and artifacts, on demand.                                                                | [Delete Agent API](https://cursor.com/docs/cloud-agent/api/endpoints.md#delete-an-agent-permanently)                                                   |
-| **Automatic expiry**                  | Cloud Agent snapshots (90 days inactivity).                                                                                 | Automatic, no action needed ([snapshots](https://cursor.com/docs/cloud-agent/security-network.md#data-retention))                                      |
+| **Automatic expiry**                  | Cloud Agent snapshots (30 days inactivity).                                                                                 | Automatic, no action needed ([snapshots](https://cursor.com/docs/cloud-agent/security-network.md#data-retention))                                      |
 | **Enterprise retention windows**      | Cap Cloud Agent data retention (Indefinite or 90 days; custom windows in early access).                                     | [Cloud Agent retention](https://cursor.com/docs/cloud-agent/security-network.md#cloud-agent-retention-policies); contact sales                         |
 | **Contract termination (Enterprise)** | Return or deletion of personal data for the enterprise engagement.                                                          | Governed by the [DPA](https://cursor.com/terms/dpa); coordinate with your account team                                                                 |
 

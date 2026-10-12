@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/account/update-access
-fetched_at: 2026-05-05T19:55:36.022235+00:00
+fetched_at: 2026-10-12T06:49:40.060298+00:00
 fetch_method: mintlify_md
 ---
 
 # Update Access
 
-Cursor has three update channels.
+Cursor has two update channels.
 
 ### Default
 
@@ -18,16 +18,6 @@ The default update channel with tested releases.
 - Only option for team users
 
 Team and Enterprise accounts use Default mode.
-
-### Early Access
-
-Pre-release versions with new features.
-
-Early Access builds may have bugs or stability issues.
-
-- Access to features in development
-- May contain bugs
-- Not available for team accounts
 
 ### Nightly
 
@@ -44,11 +34,9 @@ Nightly builds are the least stable and may have bugs.
 
 1. **Open settings**: Press Cmd+Shift+J
 2. **Go to Beta**: Select Beta in the sidebar
-3. **Select channel**: Choose Default, Early Access, or Nightly
+3. **Select channel**: Choose Default or Nightly
 
-![Early access settings](/docs-static/images/account/early-access.png)
-
-Report Early Access issues on the [Forum](https://forum.cursor.com).
+![Update Access settings](/docs-static/images/account/early-access.png)
 
 
 ---

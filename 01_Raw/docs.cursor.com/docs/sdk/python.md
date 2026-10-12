@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-09-07T05:31:30.988045+00:00
+fetched_at: 2026-10-12T06:49:43.179645+00:00
 fetch_method: mintlify_md
 ---
 
@@ -413,18 +413,18 @@ class Agent:
     def delete(self, options: Mapping[str, Any] | None = None) -> None: ...
 ```
 
-| Member                             | Description                                                                           |
-| :--------------------------------- | :------------------------------------------------------------------------------------ |
-| `agent_id`                         | Stable agent identifier. `agent-<uuid>` for local, `bc-<uuid>` for cloud.             |
-| `model`                            | Current typed model selection. Updates after a successful send with a model override. |
-| `send`                             | Start a new run with the given prompt. Returns a `Run` handle.                        |
-| `reload`                           | Re-read filesystem config (hooks, project MCP, subagents) without disposing.          |
-| `close`                            | Close the agent and release resources.                                                |
-| `list_messages`                    | List message history for the agent.                                                   |
-| `list_artifacts`                   | List files produced by the agent (cloud only; local returns empty).                   |
-| `download_artifact`                | Download a file by path (cloud only; local raises).                                   |
-| `get_usage`                        | Fetch billed token usage and dollar cost for the agent.                               |
-| `archive` / `unarchive` / `delete` | Manage cloud agent lifecycle.                                                         |
+| Member                             | Description                                                                                                                                                                                  |
+| :--------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agent_id`                         | Stable agent identifier. `agent-<uuid>` for local, `bc-<uuid>` for cloud.                                                                                                                    |
+| `model`                            | Current typed model selection. Updates after a successful send with a model override.                                                                                                        |
+| `send`                             | Start a new run with the given prompt. Returns a `Run` handle.                                                                                                                               |
+| `reload`                           | Re-read filesystem config (hooks, project MCP, subagents) without disposing.                                                                                                                 |
+| `close`                            | Close the agent and release resources.                                                                                                                                                       |
+| `list_messages`                    | List message history for the agent.                                                                                                                                                          |
+| `list_artifacts`                   | List files produced by the agent (cloud only; local returns empty).                                                                                                                          |
+| `download_artifact`                | Download a file by path (cloud only; local raises).                                                                                                                                          |
+| `get_usage`                        | Fetch billed token usage and dollar cost for the agent. Local agents need usage access enabled per account; see [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage). |
+| `archive` / `unarchive` / `delete` | Manage cloud agent lifecycle.                                                                                                                                                                |
 
 Use a context manager for automatic cleanup:
 
@@ -1173,6 +1173,15 @@ Async lifecycle methods use the same names and are awaitable.
 ### agent.get\_usage()
 
 Fetch billed token usage and dollar cost for an agent's runs. Cloud agents return a per-run breakdown; local agents return a per-turn breakdown. Pass `run_id` to restrict the result to one entry: for cloud agents a `run-<uuid>` run ID, for local agents an ID from a previous `get_usage().runs[].run_id`.
+
+Usage for local agents is rolling out gradually and is enabled per account.
+Until it's enabled for your API key's account, `get_usage()` on a local
+agent returns `403 feature_unavailable`, which the Python SDK raises as
+`InternalServerError` with `feature_unavailable` in the message. Cloud
+agents aren't gated. In the meantime, read per-run token counts from
+`run.usage` or `result.usage` (see [Token usage](https://cursor.com/docs/sdk/python.md#token-usage)) and billed
+cost from the [usage dashboard](https://cursor.com/dashboard/usage) under
+the SDK tag.
 
 ```python
 usage = agent.get_usage()

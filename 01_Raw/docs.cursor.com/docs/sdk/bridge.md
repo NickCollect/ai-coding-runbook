@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/bridge
-fetched_at: 2026-09-07T05:31:30.881621+00:00
+fetched_at: 2026-10-12T06:49:43.534584+00:00
 fetch_method: mintlify_md
 ---
 
@@ -153,7 +153,7 @@ SDK runs follow the same pricing, request pools, and Privacy Mode rules as the I
 - [TypeScript SDK](https://cursor.com/docs/sdk/typescript.md)
 - [Python SDK](https://cursor.com/docs/sdk/python.md)
 - [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md)
-- [SDK changelog](https://cursor.com/docs/sdk/changelog.md)
+- [SDK release notes](https://cursor.com/docs/release-notes/sdk.md)
 - [`cursor/sdk-bridge` on GitHub](https://github.com/cursor/sdk-bridge)
 
 

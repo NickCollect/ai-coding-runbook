@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/mcp
-fetched_at: 2026-10-05T06:27:18.971168+00:00
+fetched_at: 2026-10-12T06:49:40.487120+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,25 +25,11 @@ Sending the header `x-mcp-readonly: true` to `/mcp` has the same effect as calli
 
 ## Transport
 
-The server speaks MCP over stateless streamable HTTP:
+The server speaks MCP over stateless streamable HTTP and supports tools only. Send each JSON-RPC message as a `POST` with `Content-Type: application/json`, and expect plain JSON back, with no sessions or server-sent event streams.
 
-- Send each JSON-RPC message as an HTTP `POST` with `Content-Type: application/json`. Other methods get `405`, and other content types get `415`.
-- Responses are plain JSON. The server doesn't open server-sent event streams or keep sessions, so every request is independent.
-- The server supports the tools capability only: no resources, prompts, or sampling.
-- Requests have a size limit and a deadline. An oversized request gets `413`.
+## Permissions
 
-## Authentication
-
-Send a bearer token in the `Authorization` header. The server accepts:
-
-- a Cursor user session, as used by Cursor's desktop app, CLI, and agents;
-- an Origin App [installation access token](https://cursor.com/docs/api/origin/reference/installation-access-token.md) (`oit_…`);
-- an Origin App's signed [app JWT](https://cursor.com/docs/api/origin/reference/app-jwt.md);
-- an [installation user token](https://cursor.com/docs/api/origin/acting-as-users.md).
-
-Tools act as the authenticated caller. Each call goes through the same permission checks and rate limits as the equivalent [Origin API](https://cursor.com/docs/api/origin.md) request, so a tool can only do what the caller could do through the API. The [tool reference](https://cursor.com/docs/api/origin/mcp/tools.md) lists the [scopes](https://cursor.com/docs/api/origin/reference/scopes.md) each tool needs. Scope-limited agent sessions don't see tools their scopes would always refuse.
-
-Authentication failures return `401` (missing or invalid credentials), `403` (not allowed), or `503` (temporarily unable to check the credentials).
+Tool calls are attributed to you; from Grok Bot they show as "\<your name> via Grok Bot". Your access and the client's [scopes](https://cursor.com/docs/api/origin/reference/scopes.md) both limit what a tool can do, under the same permission checks and rate limits as the equivalent [Origin API](https://cursor.com/docs/api/origin.md) request (see [Authentication](https://cursor.com/docs/api/origin/reference/authentication.md) and [Acting on behalf of users](https://cursor.com/docs/api/origin/acting-as-users.md)). Some write actions, such as approving a pull request, are available only in Grok Bot.
 
 ## Confirmation
 
@@ -71,7 +57,7 @@ Unknown tools and invalid parameters return JSON-RPC errors instead of tool resu
 
 ## Pagination
 
-List tools take `pageSize` and `pageToken` and return `nextPageToken`. Pass the returned `nextPageToken` as `pageToken` to read the next page; it's absent on the last page. Tools that filter a list, such as [`list_pull_requests`](https://cursor.com/docs/api/origin/mcp/tools.md#list_pull_requests), need the same filters on every page.
+List tools page like the Origin API: pass the returned `nextPageToken` as `pageToken`, with the same filters, to read the next page. See [Pagination](https://cursor.com/docs/api/origin/reference/pagination.md).
 
 
 ---

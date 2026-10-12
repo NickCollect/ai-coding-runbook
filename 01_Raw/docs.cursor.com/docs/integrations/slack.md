@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-10-05T06:27:21.121838+00:00
+fetched_at: 2026-10-12T06:49:41.961353+00:00
 fetch_method: mintlify_md
 ---
 
@@ -182,6 +182,10 @@ To use a specific repository, include its name in your message. For example: `@C
 #### Base Branch
 
 Starting branch for Cloud Agent. Leave blank to use the repository's default branch (often `main`)
+
+#### Team for Slack Agents
+
+If you're on more than one paid Cursor team, choose which team your Slack agents run under. Agents you start from Slack run, bill, and use settings under that team. Pick it under **Cursor Team** when you link your Slack account, or change it later with **Team for Slack Agents** in [Dashboard → Cloud Agents](https://www.cursor.com/dashboard/cloud-agents). If your Slack workspace is restricted to one Cursor team, Slack agents always run under that team.
 
 ### Channel Settings
 

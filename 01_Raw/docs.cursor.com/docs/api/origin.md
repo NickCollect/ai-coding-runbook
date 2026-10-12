@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-10-05T06:27:19.032075+00:00
+fetched_at: 2026-10-12T06:49:40.543127+00:00
 fetch_method: mintlify_md
 ---
 
@@ -179,6 +179,8 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Delete Pull Request Comment](https://cursor.com/docs/api/origin/reference/delete-pull-request-comment.md)
 - [Create Pull Request Comment](https://cursor.com/docs/api/origin/reference/create-pull-request-comment.md)
 - [Update Pull Request Comment](https://cursor.com/docs/api/origin/reference/update-pull-request-comment.md)
+- [Add Pull Request Comment Reaction](https://cursor.com/docs/api/origin/reference/add-pull-request-comment-reaction.md)
+- [Remove Pull Request Comment Reaction](https://cursor.com/docs/api/origin/reference/remove-pull-request-comment-reaction.md)
 - [Update Pull Request Thread](https://cursor.com/docs/api/origin/reference/update-pull-request-thread.md)
 - [List Pull Request Commits](https://cursor.com/docs/api/origin/reference/list-pull-request-commits.md)
 - [List Pull Request Files](https://cursor.com/docs/api/origin/reference/list-pull-request-files.md)
@@ -188,6 +190,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Remove All Pull Request Labels](https://cursor.com/docs/api/origin/reference/remove-all-pull-request-labels.md)
 - [Remove Pull Request Label](https://cursor.com/docs/api/origin/reference/remove-pull-request-label.md)
 - [Merge Pull Request](https://cursor.com/docs/api/origin/reference/merge-pull-request.md)
+- [Prepare Pull Request Merge Ref](https://cursor.com/docs/api/origin/reference/prepare-pull-request-merge-ref.md)
 - [Get Pull Request Mergeability](https://cursor.com/docs/api/origin/reference/get-pull-request-mergeability.md)
 - [List Pull Request Requested Reviewers](https://cursor.com/docs/api/origin/reference/list-pull-request-requested-reviewers.md)
 - [Request Pull Request Reviewers](https://cursor.com/docs/api/origin/reference/request-pull-request-reviewers.md)
@@ -196,6 +199,7 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Create Pull Request Review](https://cursor.com/docs/api/origin/reference/create-pull-request-review.md)
 - [Update Pull Request Review](https://cursor.com/docs/api/origin/reference/update-pull-request-review.md)
 - [Dismiss Pull Request Review](https://cursor.com/docs/api/origin/reference/dismiss-pull-request-review.md)
+- [Search Pull Requests](https://cursor.com/docs/api/origin/reference/search-pull-requests.md)
 
 ## Rulesets
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organization-groups
-fetched_at: 2026-09-21T05:44:02.259789+00:00
+fetched_at: 2026-10-12T06:49:41.621672+00:00
 fetch_method: mintlify_md
 ---
 
@@ -129,15 +129,16 @@ Groups can carry group-level agent controls, including Auto-run and Smart Auto s
 
 When the team and a group both define the same Auto-run setting, Cursor merges each field independently. Inactive policies don't participate: if the team policy is disabled and the group policy is active, the group policy applies.
 
-| Setting                    | How team and group values combine                                                                                                              |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| Run modes                  | Union. A mode is available if either level enables it: Allowlist, Auto-review, or Run Everything.                                              |
-| Terminal command allowlist | Union with deduplication. Commands allowed by either level are allowed.                                                                        |
-| Delete File Protection     | Enabled if either level enables it.                                                                                                            |
-| Browser Protection         | Enabled if either level enables it.                                                                                                            |
-| Sandboxing Mode            | Loosest setting wins. `disabled` beats `enabled`, so sandboxing applies only when both levels enable it.                                       |
-| Sandbox Networking         | Loosest setting wins. `user_controlled` beats `always_disabled`, so networking is always disabled only when both levels set `always_disabled`. |
-| Sandbox Git Access         | Same as Sandbox Networking: `user_controlled` beats `always_disabled`.                                                                         |
+| Setting                                                                             | How team and group values combine                                                                                                                                                                                             |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Run modes                                                                           | Union. A mode is available if either level enables it: Allowlist, Auto-review, or Run Everything.                                                                                                                             |
+| Terminal command allowlist                                                          | Union with deduplication. Commands allowed by either level are allowed.                                                                                                                                                       |
+| Delete File Protection                                                              | Enabled if either level enables it.                                                                                                                                                                                           |
+| Browser Protection                                                                  | Enabled if either level enables it.                                                                                                                                                                                           |
+| Sandboxing Mode                                                                     | Loosest setting wins. `disabled` beats `enabled`, so sandboxing applies only when both levels enable it.                                                                                                                      |
+| Sandbox Networking                                                                  | Loosest setting wins. `user_controlled` beats `always_disabled`, so networking is always disabled only when both levels set `always_disabled`.                                                                                |
+| Sandbox Git Access                                                                  | Same as Sandbox Networking: `user_controlled` beats `always_disabled`.                                                                                                                                                        |
+| [Read Access](https://cursor.com/docs/agent/security/run-modes.md#team-read-policy) | Loosest setting wins. `System` beats `Workspace`, and a level with Read Controls off doesn't vote. Under `Workspace`, Read Allowlists are unioned, and user extensions stay on unless every `Workspace` level turns them off. |
 
 When several groups apply to the same user, the same field-wise merge runs across those groups. Auto-review instructions are the exception: if a group defines instructions, they replace the team instructions for that user.
 

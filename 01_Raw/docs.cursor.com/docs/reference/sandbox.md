@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/sandbox
-fetched_at: 2026-06-29T05:25:15.333199+00:00
+fetched_at: 2026-10-12T06:49:43.107509+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,13 +23,15 @@ Both files are optional. When both exist, they are merged with per-repo settings
 
 All fields are optional. Missing fields use the defaults shown below.
 
-| Field                      | Type       | Default                 | Description                                                                                                                                                                     |
-| :------------------------- | :--------- | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `type`                     | string     | `"workspace_readwrite"` | Sandbox mode. `"workspace_readwrite"` gives read/write access in the workspace. `"workspace_readonly"` restricts to read-only. `"insecure_none"` disables the sandbox entirely. |
-| `additionalReadwritePaths` | `string[]` | `[]`                    | Extra paths the agent can read and write. Only applies when `type` is `"workspace_readwrite"`.                                                                                  |
-| `additionalReadonlyPaths`  | `string[]` | `[]`                    | Extra paths the agent can read.                                                                                                                                                 |
-| `disableTmpWrite`          | `boolean`  | `false`                 | When `true`, removes default write access to `/tmp` and system temp directories.                                                                                                |
-| `enableSharedBuildCache`   | `boolean`  | `false`                 | Redirects build-tool caches (npm, cargo, pip, etc.) to a shared tmpdir so sandboxed and unsandboxed commands share the same caches.                                             |
+| Field                      | Type                        | Default                 | Description                                                                                                                                                                                                                            |
+| :------------------------- | :-------------------------- | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`                     | string                      | `"workspace_readwrite"` | Sandbox mode. `"workspace_readwrite"` gives read/write access in the workspace. `"workspace_readonly"` restricts to read-only. `"insecure_none"` disables the sandbox entirely.                                                        |
+| `additionalReadwritePaths` | `string[]`                  | `[]`                    | Extra paths the agent can read and write. Only applies when `type` is `"workspace_readwrite"`.                                                                                                                                         |
+| `additionalReadonlyPaths`  | `string[]`                  | `[]`                    | Extra paths the agent can read.                                                                                                                                                                                                        |
+| `readBoundary`             | `"system"` \| `"workspace"` | `"system"`              | [Read access](https://cursor.com/docs/agent/security/run-modes.md#read-access) mode. `"workspace"` asks before the agent reads files outside the workspace and limits what sandboxed commands can read. Requires Cursor 3.23 or later. |
+| `additionalReadPaths`      | `string[]`                  | `[]`                    | Read Allowlist paths and globs the agent can read outside the workspace. Only applies when `readBoundary` is `"workspace"`.                                                                                                            |
+| `disableTmpWrite`          | `boolean`                   | `false`                 | When `true`, removes default write access to `/tmp` and system temp directories.                                                                                                                                                       |
+| `enableSharedBuildCache`   | `boolean`                   | `false`                 | Redirects build-tool caches (npm, cargo, pip, etc.) to a shared tmpdir so sandboxed and unsandboxed commands share the same caches.                                                                                                    |
 
 ## `networkPolicy` object
 
@@ -68,6 +70,8 @@ per-user  <  per-repo  <  team-admin  <  hardcoded
 Merge rules:
 
 - **Paths** (`additionalReadwritePaths`, `additionalReadonlyPaths`): unioned across all sources.
+- **`readBoundary`**: per-repo replaces per-user. A team-admin `"workspace"` policy applies to everyone.
+- **`additionalReadPaths`**: per-repo replaces per-user, then the team-admin Read Allowlist is added. If the admin turns off user extensions, only the admin list applies.
 - **Network allow lists**: unioned, unless a team-admin allowlist is present (which replaces the union).
 - **Network deny lists**: always unioned.
 - **`networkPolicy.default`**: `"deny"` wins over `"allow"`.
@@ -86,7 +90,7 @@ Certain paths are always write-protected, regardless of your `sandbox.json` conf
 
 The following `.cursor` subdirectories **are** writable: `rules/`, `commands/`, `worktrees/`, `skills/`, `agents/`.
 
-SSL certificate paths and `~/.ssh` are always readable.
+SSL certificate paths and `~/.ssh` are always readable when `readBoundary` is `"system"`. With `"workspace"`, sandboxed commands can still read certificate stores, but only `~/.ssh/known_hosts` from `~/.ssh`.
 
 ## Environment variables
 

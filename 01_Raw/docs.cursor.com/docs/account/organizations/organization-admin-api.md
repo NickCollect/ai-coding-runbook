@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-10-05T06:27:18.120234+00:00
+fetched_at: 2026-10-12T06:49:39.833649+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1985,7 +1985,7 @@ curl -X GET "https://api.cursor.com/organizations/audit-logs?startTime=7d&endTim
 
 ## Grok Bot computers
 
-Recreate, terminate, or delete the hosted computers that run Grok Bot for a team's members, then follow the operation until every member has a result. These routes run the same operations as **Grok Bot Computers** in the dashboard. See [Manage Grok Bot computers](https://cursor.com/docs/grok-bot/computers.md) for what each action does to a member's computer and what the member sees.
+Recreate, terminate, or delete the hosted computers that run Grok Bot for a team's members, then follow the operation until every member has a result. These routes run the same operations as **Manage Bot Computers** in the dashboard. See [Manage Grok Bot computers](https://cursor.com/docs/grok-bot/computers.md) for what each action does to a member's computer and what the member sees.
 
 - **Availability**: Enterprise only. Access is turned on per team; contact your account team to turn it on. Until then, every route returns `403` for that team.
 - **Authentication**: Organization API key (Basic auth) with the **`admin:*`** scope. Keys with any other scope return `401`. These routes take an Organization API key rather than a Team API key because one computer serves every team a member belongs to.

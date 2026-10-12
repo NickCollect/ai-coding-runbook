@@ -1,14 +1,101 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-09-07T05:31:26.145735+00:00
+fetched_at: 2026-10-12T06:49:40.578730+00:00
 fetch_method: mintlify_md
 ---
 
-# CLI Changelog
+# Cursor CLI changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
 
-## August 26, 2026 release
+## v2026.10.08
+
+### Auto-review
+
+- **Auto-review is stricter about risky deletes.** Auto-review now asks for approval before recursive, force, wildcard, or mirror deletes whose target could resolve differently than written, such as an unset variable or a stray space in a path. See [Configuring Auto-review](https://cursor.com/docs/agent/security/run-modes.md#configuring-auto-review).
+
+### Models
+
+- **Claude Opus 5.5 and Sonnet 5.5 on Bedrock.** If you set up [AWS Bedrock](https://cursor.com/docs/customizing/aws-bedrock.md) with `agent bedrock`, you can now pick Claude Opus 5.5 and Sonnet 5.5 from the bring-your-own-key model list.
+
+### Skills
+
+- **`/skills` flags skills that break the Agent Skills limits.** Skills that load but exceed the spec's limits now show a yellow warning count in `/skills`, and selecting one lists what to fix under it. Warnings cover a name over 64 characters or not in lowercase-hyphen form, a frontmatter `name` that doesn't match the folder, a description over 1,024 characters, and a body over about 5,000 tokens. See the [SKILL.md format](https://cursor.com/docs/skills.md#skillmd-file-format).
+
+### ACP
+
+- **ACP clients now get wakeups from watched background shells.** In [ACP](https://cursor.com/docs/cli/acp.md) mode, when the agent starts a background shell that watches for output, the prompt now stays open and the agent wakes up and responds whenever the output matches. Previously the agent said it would be notified, but the wakeup never arrived. While the prompt waits, the client shows an in-progress `Watching: <reason>` tool call. Cancelling the prompt or sending a new one ends the wait without stopping the shell.
+
+### Self-hosted workers
+
+- **Any-repo pool agents now work inside the repo they claimed.** On a worker started with [`--clone-git-repos`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools), an agent's tools, shells, rules, skills, and subagents now run in the checkout cloned or reused for its claim, then go back to the worker directory when the claim ends. The worker also clones fresh instead of reusing a checkout that has untracked rules, skills, or `AGENTS.md` files an earlier agent may have left there, and the worker log lists the files that blocked reuse.
+- **Self-hosted workers stop when they register too many repositories.** When Cursor refuses an `agent worker` because it registers more repositories than a worker allows, the worker now exits with a message giving the count, the limit, and how many repository folders to remove before starting it again, instead of reconnecting endlessly.
+
+### Cloud Agents
+
+- **`agent env deploy` accepts comments and trailing commas.** Environment files passed to `agent env deploy` can now include comments and trailing commas, so you can annotate your Cloud Agent setup in place. Invalid files fail with a syntax error that points to where parsing stopped.
+
+### Fixes
+
+- **MCP OAuth no longer sends unfilled client ID placeholders.** When an MCP server's OAuth config still has an unresolved `${VAR}` client ID, the CLI now treats the client ID as unset. It no longer sends the literal placeholder to the authorization server, so login no longer fails with a confusing client error.
+- **Fixes to agent tools.** The agent no longer hangs when the model calls an unknown tool, and sessions no longer end on out-of-range Shell or Grep arguments. Edits to large files fail safely instead of truncating them, loose one-line replacements no longer splice the wrong text, and a Read right after an edit or a file-creating shell command returns the new content. Glob now finds empty and binary files and skips `.git`, and generated images are saved with the right file extension.
+- **Fixes to MCP tools.** MCP sign-in no longer fails when another Cursor app is already using the login callback port. The agent now refreshes a server's tool list when a tool seems to be missing. When a tool doesn't exist, the error now lists the tools the agent can call.
+- **Fixes to self-hosted workers.** Workers no longer drop their connection while uploading large messages on slow links, report themselves ready before the server accepts them, or delete git credentials another worker pushed on the same machine. Existing checkouts are no longer refused because of system or global git config, and stopping a worker now prints the reason. Agent stores you removed stay removed after a restart, and a store that hangs while closing reopens on the next claim.
+- **Fixes to long sessions and summarization.** Sessions that hit the context limit now summarize and continue instead of getting stuck, and your latest request is kept word for word after summarization. Debug mode no longer fails a turn after the conversation is summarized, and images attached to a message queued during an interrupted turn are now sent on the next turn.
+
+## v2026.09.28
+
+### Fixes
+
+- **Grok turns no longer end on a rejected output.** When the provider rejects a Grok model's output before any tool in the step has run, the agent now retries that step once instead of ending the turn with an error.
+- **No extra turn after an empty reply.** After you resume a session or a background task finishes, an empty model reply no longer triggers an unwanted retry or continuation turn.
+- **Self-hosted workers recover from a silent connection.** A worker whose connection to Cursor goes silent for 90 seconds now reconnects on its own instead of appearing connected while receiving no work. If your account uses Privacy Mode (Legacy), the worker now exits at startup with a message explaining how to switch to Privacy Mode instead of reconnecting endlessly.
+- **Self-hosted workers keep an agent's state open between turns.** On shared and pool self-hosted workers, an agent's follow-up step reuses its open state instead of reopening it from scratch, and a claim from a different agent no longer fails on state the previous agent has already released.
+- **Image generation errors say what to do next.** When the image provider declines a request, the agent now shows a message you can act on instead of "Request failed with status code 400." For content-policy blocks, the message suggests describing the subject without naming trademarked characters, brands, or real people. For rate limits and provider outages, it says to try again in a moment.
+- **Timed-out shell commands keep their output.** When a long-running command writes its output to a file and then times out, the agent now gets the file's path, size, and line count instead of an empty result, so it can read the output and keep working.
+- **The CLI runs the exact model you pick.** `--model` and `/model` now run the model you choose even when its ID starts with another model's ID. Previously the CLI could silently run the shorter base model instead.
+- **macOS workers report memory the way Activity Monitor does.** A self-hosted worker on macOS no longer counts file cache as used memory, so an idle Mac no longer looks nearly out of memory.
+
+## v2026.09.22
+
+### Auto-review
+
+- **Auto-review weighs block instructions against what a call does.** Under an instruction like "Send comms that include external people," it now leans toward allowing MCP calls that only draft, preview, plan, or read, and toward blocking calls that send, post, publish, apply, or delete. Add instructions to `permissions.json` as shown in [Configuring Auto-review](https://cursor.com/docs/agent/security/run-modes.md#configuring-auto-review).
+
+### Self-hosted workers
+
+- **Any-repo pool workers reuse checkouts you already cloned.** With [`--clone-git-repos`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools), a worker reuses a clean checkout of the claimed repo in its worker directory. It fetches the requested branch, tag, or commit and keeps the checkout when the claim ends, so a large repo no longer re-clones on every claim. The worker log says why it reused or skipped each checkout. The worker also refuses to start from a directory it can't write to, and prints git's error in the terminal when a clone fails.
+- **Warm pools wake hibernated workers for follow-ups.** When a follow-up arrives for an agent whose worker is hibernated, `agent worker controller --warm-idle` now runs your `--spawn` hook with `CURSOR_WAKE=1` and that worker's ID, matching claim-then-spawn mode. If the hook restores the machine, the follow-up picks up in its original workspace instead of landing on an idle spare with an empty disk. This applies to pools with a [reconnect window](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hibernation).
+
+### Fixes
+
+- **Fixed agents getting stuck repeating the same line of reasoning.** When the agent's reasoning keeps repeating a single line, the step now stops and retries once with a reminder to stop deliberating and move on, instead of looping.
+- **Fixed summarization losing your latest request or your conversation.** After summarizing a long conversation, the agent now keeps your most recent message word for word instead of a reminder, so it stays on task. If summarization fails, or you press Stop while it runs, the agent keeps the earlier conversation instead of replacing it with an empty or interrupted summary.
+- **Fixed authentication errors and the wrong rules on self-hosted workers.** Workers started with an API key no longer fail with an authentication error when they open a desktop session after their first hour. An agent's first turn now loads rules, skills, and plugins from its own workspace instead of a cached set another workspace left on the machine.
+- **Fixed model instructions for Grok 4.7 and Opus 5.5.** Grok 4.7 now identifies itself as Grok 4.7 when asked, instead of claiming to be Composer. Opus 5.5 now gets the same communication instructions as Opus 5, which ask for a one-line note on what it's about to do before its first tool call and a short closing summary that leads with the outcome.
+
+## v2026.09.15
+
+### ACP
+
+- **Agent Client Protocol (ACP) clients can show subagents as their own sessions.** Clients that advertise the `subagents` capability get each subagent as a child session linked to the parent Task tool call, with streamed text, thinking, tool calls, and a final completed, failed, or cancelled state. For those clients, a prompt waits for its background subagents and includes their results in the same turn. Cancelling the prompt stops them, and loading a saved session shows its past subagents again. Clients without the capability keep receiving [`cursor/task`](https://cursor.com/docs/cli/acp.md#cursortask) notifications.
+
+### Sign-in
+
+- **Sign-in trusts your operating system's CA certificates.** The proxy-aware fetch that `agent login` uses for its auth requests, directly or through [`HTTPS_PROXY`](https://cursor.com/docs/cli/reference/configuration.md#proxy-configuration), now adds your system's trusted CA certificates to the bundled set, so sign-in works behind corporate TLS inspection once your company's root certificate is in your system's trust store.
+
+### Fixes
+
+- &#x20;**Team rules with file patterns no longer load into every prompt.** A team rule scoped to a pattern such as `*.py` now applies only when the agent reads a matching file. [Team rules](https://cursor.com/docs/rules.md#format-and-how-team-rules-are-applied) without a pattern still apply to every request.
+- **`agent models` lists your team's Bedrock models.** When your team connects AWS Bedrock through an IAM role, `agent models` and `--list-models` now show the Bedrock models for your region instead of an empty list. The list matches what `--model` accepts.
+- **Shell commands run on macOS computer-use workers.** On a Mac worker started with [`--computer-use`](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos), shell commands no longer fail with "The shell command returned no exit status" before they run.
+- **Fixes to agent tools and turns.** When the agent waits on a running shell command, it now moves on as soon as the command finishes or its output matches the pattern the agent is watching for, instead of idling until the timeout. File edits no longer break when the model wraps its patch in JSON. Stopping the agent keeps working after a turn retries a failed connection.
+- **Fixes to long turns and Auto-review.** Long turns with many tool calls on Claude and GPT models no longer get stuck compacting context on every step without freeing space. Auto-review now works out a decision from the blocked action when its classifier reply leaves the decision out.
+- **Fixes to self-hosted workers.** Workers started with [`--clone-git-repos`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools) now clone repositories stored without a scheme, such as `github.com/owner/repo`, instead of failing because git read them as local paths. When Cursor rate-limits `agent worker controller`, it waits for the server's `Retry-After` time, up to 1 hour. A pool worker that reconnects with a stale claim now drops it instead of rejecting its next agent, and a worker that fails account validation shows the server's reason instead of a bare "Error".
+- **Loop reminders on every model.** When an agent on any model, not just Composer, keeps repeating the same tool calls or messages, it now gets a reminder to try something different instead of looping until it hits the step limit.
+- **Asking the agent to stop a goal closes it.** When you ask the agent to stop working toward a [`/goal`](https://cursor.com/docs/cli/reference/slash-commands.md), it can now mark the goal complete instead of leaving it active.
+
+## v2026.08.26
 
 ### Persistent sessions
 
@@ -18,8 +105,17 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 
 - **Viewers watch the agent's live desktop.** Workers started with `--computer-use --share-desktop` now share the managed desktop the agent uses instead of a separate session. Cursor clears stale worker-owned displays so later sessions start clean.
 - **Wake hibernated workers for follow-ups.** `agent worker controller` can wake a claimed, hibernated worker through the `--spawn` hook, so a follow-up returns to the same workspace during the reconnect window. Its queue watch now uses server-sent events to reduce polling and handle rate limits.
+- **Computer use works on macOS workers.** Start a worker on a Mac with `agent worker --computer-use start`, and Cloud Agents can click, type, and take screenshots on its signed-in desktop. The first start installs the Cursor Computer Use helper app, and `agent worker debug` confirms it's there. Grant the helper Accessibility and Screen Recording as described in [macOS setup](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos).
 
-## August 11, 2026 release
+### Enterprise and team controls
+
+- &#x20;**Team model restrictions apply in the CLI.** When an admin limits your team's models, for example to Auto only, `agent models` and the `/model` picker show only the models you can use. Passing a blocked model to `--model` exits with the restriction message, and a saved model outside the list switches to an allowed one. Admins set this up in [model access control](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control).
+
+### Fixes
+
+- **Fixed warm pools that stopped spawning idle workers.** A [warm pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#warm-pool) controller (`agent worker controller --warm-idle <count>`) failed to read the pool list when Cursor's API returned fields it didn't know. It now ignores those fields and keeps spawning idle workers.
+
+## v2026.08.11
 
 ### Steering and subagents
 
@@ -75,12 +171,12 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 
 ### Enterprise and install
 
-- **Admin command denylist enforced in the CLI.** A team admin's command denylist is enforced in local shell execution and refreshed per request, with a killswitch. Admin-controlled.
-- **MDM sign-in policy.** CLI login sends and enforces MDM sign-in policy, including organization, team, email, and domain allowlists, and reports enforcement denials. Admin-controlled.
+- &#x20;**Admin command denylist enforced in the CLI.** A team admin's command denylist is enforced in local shell execution and refreshed per request, with a killswitch. Admin-controlled.
+- &#x20;**MDM sign-in policy.** CLI login sends and enforces MDM sign-in policy, including organization, team, email, and domain allowlists, and reports enforcement denials. Admin-controlled.
 - **Windows uninstall can remove your data.** The Windows uninstaller can optionally delete Cursor user data, including the `~/.cursor` folder that stores CLI credentials.
 - **Resilient install script.** The install script falls back to wget or python3 when curl is broken.
 
-## July 20, 2026 release
+## v2026.07.20
 
 - **`--trust` works in interactive sessions.** Previously `--trust` required headless mode. Passing it in an interactive session now trusts the workspace up front and skips the trust dialog, recording the same saved trust decision the dialog writes when you accept.
 - **Clear errors instead of hangs at login.** MCP OAuth login fails fast with an actionable message when the callback port is already taken, instead of hanging on "Listening for the OAuth callback". On macOS, keychain failures at startup now explain the cause and the fix, like unlocking a locked keychain or logging out and back in, instead of a raw exit code.
@@ -88,7 +184,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Cleaner rendering.** Completed tool rows no longer disappear for a frame when the agent moves to its next step, markdown tables with emoji or CJK text keep their columns aligned, typing a path like `/tmp` followed by a space no longer leaves the slash palette stuck on "No matches", and subagent rows drop the Ctrl+O expand hint (the shortcut still works).
 - **Fixed CPU spinning from the branch watcher.** When the watcher that keeps the prompt footer's git branch current could not attach, most commonly after exhausting the inotify watch limit on Linux, it retried in a tight loop that pegged a CPU core. Failed attaches now back off exponentially, and branch switches still update the footer immediately.
 
-## July 13, 2026 release
+## v2026.07.13
 
 ### Plugins and MCP
 
@@ -115,7 +211,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Updates no longer break running sessions.** Auto-update cleanup could delete the installed version a long-running session was launched from, crashing it mid-turn. Running processes now mark their install directory as in use so cleanup skips it, and if install files still disappear, such as after a Homebrew upgrade, the CLI asks you to restart instead of failing with a module error.
 - **`/btw` fixes.** Side questions no longer fail with an internal blob error in long or compacted sessions, and the slash palette no longer pops up over your question while you type it.
 
-## July 6, 2026 release
+## v2026.07.06
 
 ### Models and skills
 
@@ -138,7 +234,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 
 - **Log in from another device with a QR code.** During `agent login` or first-run onboarding, press `q` to reveal a QR code for the same login URL, then scan it from a phone to finish authentication over SSH without copying a long link. Narrow terminals and non-interactive sessions continue to show the URL only.
 - **Filter MCP servers and see login start immediately.** Type to filter the `/mcp` server list. Selecting Login shows "Preparing login…" right away, and SSH OAuth instructions no longer use `ssh -N`, which failed through some proxies.
-- **Fixed MCP allowlist and approval bugs.** Team network allowlists now accept HTTP(S) origins with explicit ports, such as local servers on non-default ports. Personal MCP tool approvals work again when team admin tool controls are empty or unset.
+- &#x20;**Fixed MCP allowlist and approval bugs.** Team network allowlists now accept HTTP(S) origins with explicit ports, such as local servers on non-default ports. Personal MCP tool approvals work again when team admin tool controls are empty or unset.
 
 ### Input and terminal
 
@@ -147,7 +243,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Fixed queued sudo prompts.** Each sudo request opens a fresh password prompt instead of sticking on "Authenticating…". Escape and Ctrl+C cancel during submission, and the mask uses `•` instead of `*` to avoid misalignment with terminal font ligatures.
 - **Debug mode cards use debug mode colors.** The reproduction-steps decision card uses the red debug accent instead of plan-mode yellow, so the active mode stays clear.
 
-## June 29, 2026 release
+## v2026.06.29
 
 ### Workspaces and commands
 
@@ -172,7 +268,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Windows updates suppress PowerShell progress output.** Native updates no longer draw PowerShell's progress bar over the CLI or incur its download overhead.
 - **Fixed memory growth in long CLI sessions.** The CLI now saves only new transcript entries at each checkpoint instead of reloading and rewriting the full conversation.
 
-## June 22, 2026
+## v2026.06.22
 
 ### Auto-review
 
@@ -215,10 +311,10 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 
 ### Enterprise and team controls
 
-- **Team gating for Auto-review.** Admins control whether Auto-review is available to their members.
+- &#x20;**Team gating for Auto-review.** Admins control whether Auto-review is available to their members.
 - **Stable self-hosted worker identity.** `worker start` waits for the bridge to connect before reporting ready, and workers keep a stable logical ID scoped per authenticated user, so fleets on shared machines match the right worker to the right person.
 
-## June 9, 2026
+## v2026.06.09
 
 ### Terminal experience
 
@@ -249,10 +345,10 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 
 ### Enterprise and team controls
 
-- **Admins can disable headless mode.** A team setting blocks non-interactive CLI usage org-wide.
-- **"Run Everything" controls.** Auto-run renamed consistently across the product; admin-controlled auto-run treats the command allowlist as the always-available baseline.
-- **MCP user-extension governance.** Admin "Allow User Extension" toggles for MCP servers and tools are enforced at runtime.
-- **Team-managed MCP servers.** Centrally configured servers load reliably, with server group selection; MCP tool policy is decoupled from the terminal auto-run setting.
+- &#x20;**Admins can disable headless mode.** A team setting blocks non-interactive CLI usage org-wide.
+- &#x20;**"Run Everything" controls.** Auto-run renamed consistently across the product; admin-controlled auto-run treats the command allowlist as the always-available baseline.
+- &#x20;**MCP user-extension governance.** Admin "Allow User Extension" toggles for MCP servers and tools are enforced at runtime.
+- &#x20;**Team-managed MCP servers.** Centrally configured servers load reliably, with server group selection; MCP tool policy is decoupled from the terminal auto-run setting.
 - **MCP OAuth over SSH.** The CLI shows port-forwarding instructions when authenticating a remote MCP server from an SSH session.
 
 ## May 20, 2026
@@ -333,7 +429,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **`--image` everywhere.** Attach images in any session, not just print mode.
 - **Editor integrations.** Model and mode selection over the Agent Client Protocol (Zed, JetBrains), host-provided MCP servers respected, richer streaming with thinking and file locations, and skill slash commands.
 - **Locked macOS keychain detected over SSH.** A clear "unlock your keychain" message replaces opaque credential failures.
-- **Admin controls.** Network allow and deny lists are enforced unconditionally (including for MCP traffic), admin-disabled sandboxing is respected by auto-run, and image generation asks before running.
+- &#x20;**Admin controls.** Network allow and deny lists are enforced unconditionally (including for MCP traffic), admin-disabled sandboxing is respected by auto-run, and image generation asks before running.
 - **Claude Sonnet 4.6 on Bedrock.** Added to the bring-your-own-key model list.
 - **Richer hook payloads.** Per-turn token usage and a stable session ID.
 
@@ -352,7 +448,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Faster startup, snappier turns.** Parallelized initialization, deferred update checks, and optimistic message rendering.
 - **Rendering improvements.** Markdown tables wrap to your terminal width, thinking blocks render markdown, shell commands get syntax highlighting, and Mermaid renders more diagram types.
 - **Input fixes across terminals.** Vim `r` (replace char), Alt+Delete word deletion, Ctrl+J newline in iTerm2, Windows Delete key, Wayland clipboard support, and session-local prompt history.
-- **Enterprise attribution control.** Admin-disabled commit/PR attribution is enforced in the CLI regardless of local settings.
+- &#x20;**Enterprise attribution control.** Admin-disabled commit/PR attribution is enforced in the CLI regardless of local settings.
 - **Clear errors for blocked screenshots.** macOS permission failures show a warning and workaround instead of failing silently.
 
 ## January 2026

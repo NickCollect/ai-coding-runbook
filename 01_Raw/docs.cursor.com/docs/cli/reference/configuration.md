@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/configuration
-fetched_at: 2026-07-06T05:04:27.017135+00:00
+fetched_at: 2026-10-12T06:49:40.715821+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,26 +37,27 @@ Override with environment variables:
 
 ### Optional fields
 
-| Field                                 | Type    | Description                                                             |
-| :------------------------------------ | :------ | :---------------------------------------------------------------------- |
-| `channel`                             | string  | Release channel used for CLI updates                                    |
-| `model`                               | object  | Selected model configuration                                            |
-| `maxMode`                             | boolean | Persisted preference for max mode in the model picker                   |
-| `hasChangedDefaultModel`              | boolean | CLI-managed model override flag                                         |
-| `notifications`                       | boolean | Send a terminal notification when the agent finishes or needs input     |
-| `hints`                               | boolean | Show CLI hints while the agent is working                               |
-| `rewind`                              | boolean | Enable `/rewind` to restore an earlier message in the session           |
-| `suggestNextPrompt`                   | boolean | Suggest a follow-up prompt at the end of each turn                      |
-| `display.showLineNumbers`             | boolean | Show line numbers in rendered code blocks                               |
-| `display.showThinkingBlocks`          | boolean | Render model thinking blocks when available                             |
-| `display.showStatusIndicators`        | boolean | Enable terminal title status indicators                                 |
-| `display.showStatusLineRunningTime`   | boolean | Show elapsed running time in the status line                            |
-| `approvalMode`                        | string  | Approval mode: `allowlist`, `auto-review`, or `unrestricted`            |
-| `sandbox.mode`                        | string  | Sandbox mode override                                                   |
-| `sandbox.networkAccess`               | string  | Network access setting for sandbox mode                                 |
-| `network.useHttp1ForAgent`            | boolean | Use HTTP/1.1 instead of HTTP/2 for agent connections (default: `false`) |
-| `attribution.attributeCommitsToAgent` | boolean | Add "Made with Cursor" trailer to Agent commits (default: `true`)       |
-| `attribution.attributePRsToAgent`     | boolean | Add "Made with Cursor" footer to Agent PRs (default: `true`)            |
+| Field                                 | Type    | Description                                                                                                            |
+| :------------------------------------ | :------ | :--------------------------------------------------------------------------------------------------------------------- |
+| `channel`                             | string  | Release channel used for CLI updates                                                                                   |
+| `model`                               | object  | Selected model configuration                                                                                           |
+| `maxMode`                             | boolean | Persisted preference for max mode in the model picker                                                                  |
+| `hasChangedDefaultModel`              | boolean | CLI-managed model override flag                                                                                        |
+| `notifications`                       | boolean | Send a terminal notification when the agent finishes or needs input                                                    |
+| `hints`                               | boolean | Show CLI hints while the agent is working                                                                              |
+| `rewind`                              | boolean | Enable `/rewind` to restore an earlier message in the session                                                          |
+| `suggestNextPrompt`                   | boolean | Suggest a follow-up prompt at the end of each turn                                                                     |
+| `display.showLineNumbers`             | boolean | Show line numbers in rendered code blocks                                                                              |
+| `display.showThinkingBlocks`          | boolean | Render model thinking blocks when available                                                                            |
+| `display.showStatusIndicators`        | boolean | Enable terminal title status indicators                                                                                |
+| `display.showStatusLineRunningTime`   | boolean | Show elapsed running time in the status line                                                                           |
+| `approvalMode`                        | string  | Approval mode: `allowlist`, `auto-review`, or `unrestricted`                                                           |
+| `sandbox.mode`                        | string  | Sandbox mode override                                                                                                  |
+| `sandbox.networkAccess`               | string  | Network access setting for sandbox mode                                                                                |
+| `sandbox.readBoundary`                | string  | [Read access](https://cursor.com/docs/agent/security/run-modes.md#read-access) mode: `system` (default) or `workspace` |
+| `network.useHttp1ForAgent`            | boolean | Use HTTP/1.1 instead of HTTP/2 for agent connections (default: `false`)                                                |
+| `attribution.attributeCommitsToAgent` | boolean | Add "Made with Cursor" trailer to Agent commits (default: `true`)                                                      |
+| `attribution.attributePRsToAgent`     | boolean | Add "Made with Cursor" footer to Agent PRs (default: `true`)                                                           |
 
 ## Examples
 

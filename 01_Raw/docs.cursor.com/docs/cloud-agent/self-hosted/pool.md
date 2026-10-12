@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/pool
-fetched_at: 2026-10-05T06:27:20.154262+00:00
+fetched_at: 2026-10-12T06:49:41.265814+00:00
 fetch_method: mintlify_md
 ---
 
@@ -242,7 +242,7 @@ If clone fails, the request stays in the queue. Operators see a generic clone fa
 
 `--clone-git-repos`, `--mint-github-token`, and `--sync-dashboard-secrets` assume one worker per container or OS user. Co-locating multiple credential-enabled workers under the same user is unsupported.
 
-Any-repo pools omit `repo=` routing labels. Start agents against them with `env.type: "pool"` and `env.name` set to the pool name (see [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent)). Omit `repos`, or pass one or more repositories for the agent to work in. They don't narrow which worker claims the run. A worker started with `--clone-git-repos` checks out each of them. Pick the pool under **Any repo** on [cursor.com/agents](https://cursor.com/agents). In Slack, an any-repo pool set as the [team default pool](https://cursor.com/docs/integrations/slack.md#team-default-pool) or a [channel default pool](https://cursor.com/docs/integrations/slack.md#channel-default-pool) lets `@Cursor` start an agent even when no repository resolves from the message or defaults.
+Any-repo pools omit `repo=` routing labels. Start agents against them with `env.type: "pool"` and `env.name` set to the pool name (see [Create An Agent](https://cursor.com/docs/cloud-agent/api/endpoints.md#create-an-agent)). Omit `repos`, or pass one or more repositories for the agent to work in. They don't narrow which worker claims the run. A worker started with `--clone-git-repos` checks out each of them. The agent can open and update pull requests on those repositories if you have write access to them. This doesn't apply to agents created by a service account. Pick the pool under **Any repo** on [cursor.com/agents](https://cursor.com/agents). In Slack, an any-repo pool set as the [team default pool](https://cursor.com/docs/integrations/slack.md#team-default-pool) or a [channel default pool](https://cursor.com/docs/integrations/slack.md#channel-default-pool) lets `@Cursor` start an agent even when no repository resolves from the message or defaults.
 
 ## Manage pools
 
@@ -552,7 +552,7 @@ Once a worker is matched to a request, Cursor forwards all agent tool calls dire
 agent worker --pool my-pool --idle-release-timeout 600 start
 ```
 
-`--idle-release-timeout` (env var `CURSOR_WORKER_IDLE_RELEASE_TIMEOUT`) is the number of seconds the worker stays connected after a session ends, waiting for follow-up messages. If a follow-up arrives, the timer resets. When the timeout fires, the CLI exits with code 0 so a supervisor can recycle the machine. Pass `0` to disable idle-based release. [Releasing a claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#release-a-claim) is a separate API: it stops preferring that machine for the agent, and does not exit the worker CLI.
+`--idle-release-timeout` (env var `CURSOR_WORKER_IDLE_RELEASE_TIMEOUT`) is the number of seconds the worker stays connected after a session ends, waiting for follow-up messages. If a follow-up arrives, the timer resets. When the timeout fires, the CLI exits with code 0 so a supervisor can recycle the machine. Pass `0` to disable idle-based release. [Releasing a claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#release-a-claim) is a separate API: it frees the worker for another agent right away and tells the worker CLI to exit. Cursor refuses it while a turn is using the worker.
 
 Once a worker times out, Cursor marks it as freed. The machine can reset and re-enter the pool. If a user restarts a chat that has disconnected from its machine, the chat reconnects to a fresh machine from the pool. Workspace state from the original machine does not carry over unless the pool uses [hibernation](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#hibernation).
 
@@ -726,7 +726,7 @@ See [Create A Session Token](https://cursor.com/docs/cloud-agent/api/endpoints.m
 
 ### Release a claim
 
-Drop the claim that binds an agent to a self-hosted worker. Cursor then stops preferring that machine for the agent:
+Free a worker from its agent so it can serve another one. Cursor clears the claim, returns a waiting follow-up to the queue, and tells the worker CLI to exit:
 
 ```bash
 curl --request POST \
@@ -734,7 +734,27 @@ curl --request POST \
   -u "$CURSOR_API_KEY:"
 ```
 
+While a turn is using the worker, release returns HTTP `400` with `Worker in use` and changes nothing. Retry after the turn ends.
+
 A second claim while a live claim exists is rejected; release first, then claim a new `workerId`. See [Release A Claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#release-a-claim).
+
+### Report a worker that can't start
+
+When your controller claims a request but can't start its worker, for example because the pool is out of quota, tell Cursor why. Otherwise the agent waits for a worker that never connects until the wait times out.
+
+```bash
+curl --request POST \
+  --url "https://api.cursor.com/v0/private-workers/claims/bc-00000000-0000-0000-0000-000000000002/fail" \
+  -u "$CURSOR_API_KEY:" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "message": "The gpu pool has reached its limit of 20 machines. Try again in a few minutes."
+  }'
+```
+
+The agent's turn ends with your message as its error. When the agent runs from Slack, the thread gets the message with a **Try Again** button. Cursor then frees the claim, so the agent's next turn returns to the queue. Write the message in plain text for the person who started the agent, in 500 characters or fewer.
+
+Failing a claim works only while a turn is waiting on it. It returns HTTP `400` and changes nothing when the agent isn't `ACTIVE`, where you [release the claim](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#release-a-claim) instead, or when the claimed worker is connected and serving the turn. See [Fail A Claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#fail-a-claim).
 
 ## Monitoring
 

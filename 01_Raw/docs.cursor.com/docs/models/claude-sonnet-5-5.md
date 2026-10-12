@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-sonnet-5-5
-fetched_at: 2026-10-05T06:27:21.559028+00:00
+fetched_at: 2026-10-12T06:49:42.290078+00:00
 fetch_method: mintlify_md
 ---
 
-Claude Sonnet 5.5 is Anthropic's latest medium-tier model and the successor to [Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md). It scores 55.5% on [CursorBench](https://cursor.com/cursorbench) at max effort, second only to [Opus 5.5](https://cursor.com/docs/models/claude-opus-5-5.md), and keeps Sonnet 5's per-token price. Add it to the model picker from **Cursor Settings > Models**.
+Claude Sonnet 5.5 is Anthropic's latest medium-tier model and the successor to [Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md). It scores 55.5% on [CursorBench](https://cursor.com/cursorbench) at max effort, second only to [Opus 5.5](https://cursor.com/docs/models/claude-opus-5-5.md). It keeps Sonnet 5's input and output rates and halves the cache-read rate. Add it to the model picker from **Cursor Settings > Models**.
 
 ## Strengths
 
@@ -27,7 +27,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Sonnet 5.5 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
-Sonnet 5.5 bills at $2 per million input tokens and $10 per million output tokens, the same as Sonnet 5. Prompt-cache reads are $0.20 per million tokens.
+Sonnet 5.5 bills at $2 per million input tokens and $10 per million output tokens, the same as Sonnet 5. Prompt-cache reads are $0.10 per million tokens, half of Sonnet 5's $0.20.
 
 Global endpoints use the rates above. US-only endpoints are priced 10% higher, at $2.20/M input and $11/M output tokens. See [Privacy and Data Governance](https://cursor.com/docs/enterprise/privacy-and-data-governance.md) for data residency details.
 
