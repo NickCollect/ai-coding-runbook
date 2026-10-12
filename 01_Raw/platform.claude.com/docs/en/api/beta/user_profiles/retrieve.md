@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/retrieve
-fetched_at: 2026-10-05T06:27:39.241868+00:00
+fetched_at: 2026-10-12T06:50:02.701320+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,8 @@ Get User Profile
   The ID of the user profile to get (`uprof_...`).
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

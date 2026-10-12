@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
-fetched_at: 2026-10-05T06:27:22.001380+00:00
+fetched_at: 2026-10-12T06:49:44.136686+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,8 @@ This pattern fits long-horizon agentic workloads (coding agents, computer use, m
 
 ```mermaid
 sequenceDiagram
+  accTitle: How the executor model consults the advisor model
+  accDescr: Your application sends a request with the advisor tool to the executor model, which begins the task. The executor emits a server_tool_use block, and Anthropic runs the advisor model server-side. The advisor reads the full transcript and returns strategic guidance in an advisor_tool_result. The executor continues, informed by the advice, and returns the response to your application.
   participant U as Your application
   participant E as Executor model
   participant A as Advisor model
@@ -347,7 +349,7 @@ The `advisor_tool_result.content` field is a discriminated union. For successful
 | `advisor_redacted_result` | `encrypted_content`, `stop_reason` | The advisor model returns encrypted output.                         |
 
 <Note>
-  Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, and Claude Mythos 5 advisors return the encrypted `advisor_redacted_result`. Every other advisor model in the [compatibility table](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) returns the plaintext `advisor_result`. To read the advice text in your own responses, use an advisor that returns plaintext, such as `claude-opus-4-8`, where your executor's row in the [compatibility table](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) lists one. Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, and Claude Mythos 5 executors pair only with advisors that return the encrypted form, so on those executors the advice text isn't readable in the response.
+  Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, Claude Mythos 5, and Claude Haiku 5.5 advisors return the encrypted `advisor_redacted_result`. Every other advisor model in the [compatibility table](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) returns the plaintext `advisor_result`. To read the advice text in your own responses, use an advisor that returns plaintext, such as `claude-opus-4-8`, where your executor's row in the [compatibility table](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) lists one. Claude Sonnet 5.5, Claude Fable 5.1, Claude Mythos 5.1, Claude Opus 5.5, Claude Opus 5, Claude Fable 5, and Claude Mythos 5 executors pair only with advisors that return the encrypted form, so on those executors the advice text isn't readable in the response.
 </Note>
 
 Here is the same request sent twice, identical except for the advisor `model` in the tool definition, showing both variants.
@@ -739,7 +741,7 @@ A response can end with `stop_reason: "pause_turn"` while an advisor call is sti
 
 ### Mid-conversation nudge for under-calling executors
 
-If a Haiku executor has not called the advisor in its first assistant turn, append a short reminder as an additional user message before the second assistant turn. In Anthropic's internal behavioral evaluation this raised task pass rates by roughly 7 percentage points on Haiku executors. On Sonnet executors, the plain-text nudge had no measurable effect in Anthropic's testing. The call-timing considerations that follow are especially relevant for Sonnet. Do not apply the nudge to Opus executors: On Opus it slightly lowered pass rates.
+If a Haiku executor has not called the advisor in its first assistant turn, append a short reminder as an additional user message before the second assistant turn. In Anthropic's internal behavioral evaluation on Claude Haiku 4.5 executors, this raised task pass rates by roughly 7 percentage points. On Sonnet executors, the plain-text nudge had no measurable effect in Anthropic's testing. The call-timing considerations that follow are especially relevant for Sonnet. Do not apply the nudge to Opus executors: On Opus it slightly lowered pass rates.
 
 With the default `NUDGE_TURN` of 2, the reminder typically arrives after the model has oriented on the task but before it has committed to an approach.
 
@@ -779,7 +781,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
   for turn in range(1, MAX_TURNS + 1):
       response = client.beta.messages.create(
-          model="claude-haiku-4-5",
+          model="claude-haiku-5-5",
           max_tokens=4096,
           betas=["advisor-tool-2026-03-01"],
           tools=tools,
@@ -790,10 +792,10 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
           block.type == "server_tool_use" and block.name == "advisor"
           for block in response.content
       )
-      if response.stop_reason == "end_turn":
-          break
       if response.stop_reason == "pause_turn":
           continue  # server tool pending; re-send to let the API complete it
+      if response.stop_reason != "tool_use":
+          break  # end_turn, or a stop such as max_tokens that needs handling (see below)
 
       results = run_your_tools(response.content)  # list of tool_result blocks
       if results:
@@ -836,7 +838,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
   for (let turn = 1; turn <= MAX_TURNS; turn++) {
     const response = await client.beta.messages.create({
-      model: "claude-haiku-4-5",
+      model: "claude-haiku-5-5",
       max_tokens: 4096,
       betas: ["advisor-tool-2026-03-01"],
       tools,
@@ -848,11 +850,11 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
       response.content.some(
         (block) => block.type === "server_tool_use" && block.name === "advisor"
       );
-    if (response.stop_reason === "end_turn") {
-      break;
-    }
     if (response.stop_reason === "pause_turn") {
       continue; // server tool pending; re-send to let the API complete it
+    }
+    if (response.stop_reason !== "tool_use") {
+      break; // end_turn, or a stop such as max_tokens that needs handling (see below)
     }
 
     const results = runYourTools(response.content); // list of tool_result blocks
@@ -910,7 +912,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   {
       var response = await client.Beta.Messages.Create(new MessageCreateParams
       {
-          Model = Messages::Model.ClaudeHaiku4_5,
+          Model = Messages::Model.ClaudeHaiku5_5,
           MaxTokens = 4096,
           Tools = tools,
           Messages = messages,
@@ -927,13 +929,13 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
               block.TryPickServerToolUse(out var serverToolUse)
               && serverToolUse.Name.Value() == Name.Advisor
           );
-      if (response.StopReason == BetaStopReason.EndTurn)
-      {
-          break;
-      }
       if (response.StopReason == BetaStopReason.PauseTurn)
       {
           continue; // server tool pending; re-send to let the API complete it
+      }
+      if (response.StopReason != BetaStopReason.ToolUse)
+      {
+          break; // end_turn, or a stop such as max_tokens that needs handling (see below)
       }
 
       var results = RunYourTools(response.Content); // list of tool_result blocks
@@ -986,7 +988,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
   	for turn := 1; turn <= maxTurns; turn++ {
   		response, err := client.Beta.Messages.New(context.TODO(), anthropic.BetaMessageNewParams{
-  			Model:     anthropic.ModelClaudeHaiku4_5,
+  			Model:     anthropic.ModelClaudeHaiku5_5,
   			MaxTokens: 4096,
   			Tools:     tools,
   			Messages:  messages,
@@ -1005,11 +1007,11 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   				advisorCalled = true
   			}
   		}
-  		if response.StopReason == anthropic.BetaStopReasonEndTurn {
-  			break
-  		}
   		if response.StopReason == anthropic.BetaStopReasonPauseTurn {
   			continue // server tool pending; re-send to let the API complete it
+  		}
+  		if response.StopReason != anthropic.BetaStopReasonToolUse {
+  			break // end_turn, or a stop such as max_tokens that needs handling (see below)
   		}
 
   		results := runYourTools(response.Content) // list of tool_result blocks
@@ -1080,7 +1082,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
       for (int turn = 1; turn <= MAX_TURNS; turn++) {
           BetaMessage response = client.beta().messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_HAIKU_4_5)
+              .model(Model.CLAUDE_HAIKU_5_5)
               .maxTokens(4096L)
               .tools(tools)
               .messages(messages)
@@ -1096,11 +1098,11 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
                   block.isServerToolUse()
                       && block.asServerToolUse().name().equals(BetaServerToolUseBlock.Name.ADVISOR));
           BetaStopReason stopReason = response.stopReason().orElse(null);
-          if (BetaStopReason.END_TURN.equals(stopReason)) {
-              break;
-          }
           if (BetaStopReason.PAUSE_TURN.equals(stopReason)) {
               continue; // server tool pending; re-send to let the API complete it
+          }
+          if (!BetaStopReason.TOOL_USE.equals(stopReason)) {
+              break; // end_turn, or a stop such as max_tokens that needs handling (see below)
           }
 
           List<BetaContentBlockParam> results = runYourTools(response.content()); // list of tool_result blocks
@@ -1158,7 +1160,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
       $response = $client->beta->messages->create(
           maxTokens: 4096,
           messages: $messages,
-          model: 'claude-haiku-4-5',
+          model: 'claude-haiku-5-5',
           tools: $tools,
           betas: ['advisor-tool-2026-03-01'],
       );
@@ -1168,11 +1170,11 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
               $advisorCalled = true;
           }
       }
-      if ($response->stopReason === 'end_turn') {
-          break;
-      }
       if ($response->stopReason === 'pause_turn') {
           continue; // server tool pending; re-send to let the API complete it
+      }
+      if ($response->stopReason !== 'tool_use') {
+          break; // end_turn, or a stop such as max_tokens that needs handling (see below)
       }
 
       $results = runYourTools($response->content); // list of tool_result blocks
@@ -1214,7 +1216,7 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
 
   (1..MAX_TURNS).each do |turn|
     response = client.beta.messages.create(
-      model: "claude-haiku-4-5",
+      model: "claude-haiku-5-5",
       max_tokens: 4096,
       tools: tools,
       messages: messages,
@@ -1224,8 +1226,8 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
     advisor_called ||= response.content.any? do |block|
       block.type == :server_tool_use && block.name == :advisor
     end
-    break if response.stop_reason == :end_turn
     next if response.stop_reason == :pause_turn # server tool pending; re-send to let the API complete it
+    break unless response.stop_reason == :tool_use # end_turn, or a stop such as max_tokens that needs handling (see below)
 
     results = run_your_tools(response.content) # list of tool_result blocks
     messages << { role: "user", content: results } unless results.empty?
@@ -1235,11 +1237,13 @@ With the default `NUDGE_TURN` of 2, the reminder typically arrives after the mod
   ```
 </CodeGroup>
 
-Append the nudge as its own user message after the tool results rather than as a sibling block in the same message. Consecutive user messages are valid. In Anthropic's testing on Haiku and Sonnet executors they behaved equivalently to a sibling block. The separate-message shape also keeps the reminder clearly distinct from tool output.
+The loop ends on any stop reason other than `tool_use` or `pause_turn`. If `max_tokens` cuts a response off, drop the truncated assistant turn from `messages` and [retry with a higher `max_tokens`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#max-tokens). When that turn contains no `tool_use` block, you can instead keep it and [continue the response](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#ensuring-complete-responses) with a new user message. Re-sending the truncated assistant turn as the last message is a [prefill](https://platform.claude.com/docs/en/api/errors#prefill-not-supported), which Claude 4.6 and later models reject.
+
+Append the nudge as its own user message after the tool results rather than as a sibling block in the same message. Consecutive user messages are valid. In Anthropic's testing on Claude Haiku 4.5 and Sonnet executors they behaved equivalently to a sibling block. The separate-message shape also keeps the reminder clearly distinct from tool output.
 
 **Trade-offs:** The nudge raises the call rate, which can push trivially simple tasks into an unnecessary consult. If your workload mixes simple and complex tasks, consider raising `NUDGE_TURN` to 3 so two-turn tasks complete before the nudge fires, or gate the nudge on a task-complexity signal you already compute. If your system prompt already contains restraint language ("reserve the advisor for genuine uncertainty"), skip the nudge entirely, because the two instructions conflict.
 
-The plain-text nudge is highly salient on Haiku and Sonnet executors: 74 percent (Sonnet) to 98 percent (Haiku) of nudged attempts in Anthropic's testing called the advisor immediately at turn 2. If that lands before your executor has read the problem or gathered context, the resulting advisor call is low-context and can displace a better-timed later call. Measure your executor's baseline first-call turn before adding the nudge. If the executor already calls the advisor reliably and its first call typically lands at turn N, set `NUDGE_TURN` greater than N. In Anthropic's testing, a turn-2 nudge on workloads where the baseline first call was turn 7 or later correlated with a 3 to 4 percentage-point task-performance drop. On a browse workload where the baseline call rate was 86 percent, the same nudge raised engagement with no task-performance cost.
+The plain-text nudge is highly salient on Claude Haiku 4.5 and Sonnet executors: 74 percent (Sonnet) to 98 percent (Claude Haiku 4.5) of nudged attempts in Anthropic's testing called the advisor immediately at turn 2. If that lands before your executor has read the problem or gathered context, the resulting advisor call is low-context and can displace a better-timed later call. Measure your executor's baseline first-call turn before adding the nudge. If the executor already calls the advisor reliably and its first call typically lands at turn N, set `NUDGE_TURN` greater than N. In Anthropic's testing, a turn-2 nudge on workloads where the baseline first call was turn 7 or later correlated with a 3 to 4 percentage-point task-performance drop. On a browse workload where the baseline call rate was 86 percent, the same nudge raised engagement with no task-performance cost.
 
 To force a consult on a specific request instead of nudging, set `tool_choice` to `{"type": "tool", "name": "advisor"}`, subject to the constraints in [Forcing tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use). Forcing tool use cannot be combined with manual extended thinking (`thinking: {type: "enabled"}`): the API returns a `400 invalid_request_error` if you enable both. Adaptive thinking supports forced tool use. Claude Opus 5.5, Claude Sonnet 5.5, Claude Fable 5.1, and Claude Mythos 5.1 executors reject `tool_choice` types `tool` and `any`, so use the prompt nudge on those models instead.
 
@@ -1405,7 +1409,7 @@ The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more 
 **Keep it consistent:** Set `caching` once and leave it for the whole conversation. Toggling it off and on mid-conversation causes cache misses.
 
 <Warning>
-  [`clear_thinking`](https://platform.claude.com/docs/en/build-with-claude/context-editing) with a `keep` value other than `"all"` shifts the advisor's quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only. Advice quality is unaffected. When extended thinking is enabled without explicit `clear_thinking` configuration, the API defaults to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior (the default on earlier Opus/Sonnet models and all Haiku models, whereas on Opus 4.5+ and Sonnet 4.6+ the default is to keep all turns). Set `keep: "all"` to preserve advisor cache stability.
+  [`clear_thinking`](https://platform.claude.com/docs/en/build-with-claude/context-editing) with a `keep` value other than `"all"` shifts the advisor's quoted transcript each turn, causing advisor-side cache misses. This is a cost degradation only. Advice quality is unaffected. When thinking is on without explicit `clear_thinking` configuration, the API defaults to `keep: {type: "thinking_turns", value: 1}`, which triggers this behavior (the default on earlier Opus and Sonnet models and on Haiku models through Claude Haiku 4.5; on Claude Opus 4.5 and later Opus models, Claude Sonnet 4.6 and later Sonnet models, and Claude Haiku 5.5, the default is to keep all turns). Set `keep: "all"` to preserve advisor cache stability.
 </Warning>
 
 ## Combining with other tools
@@ -1813,21 +1817,22 @@ For coding tasks, pairing a Sonnet executor at medium [effort](https://platform.
 
 The executor model (the top-level `model` field) and the advisor model (the `model` field inside the tool definition) must form a valid pair. The advisor must be Claude Sonnet 4.6 or a more capable model, and it must be at least as capable as the executor. Models of equal capability (for example, Claude Opus 4.7 and Claude Opus 4.8) can advise each other.
 
-| Executor models                       | Advisor models                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Claude Haiku 4.5 (claude-haiku-4-5)   | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Sonnet 4.6 (claude-sonnet-4-6) |
-| Claude Sonnet 5 (claude-sonnet-5)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5)                                                                         |
-| Claude Sonnet 5.5 (claude-sonnet-5-5) | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                                                                                               |
-| Claude Opus 4.6 (claude-opus-4-6)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5)                                       |
-| Claude Opus 4.7 (claude-opus-4-7)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                           |
-| Claude Opus 4.8 (claude-opus-4-8)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                           |
-| Claude Opus 5 (claude-opus-5)         | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                     |
-| Claude Opus 5.5 (claude-opus-5-5)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                     |
-| Claude Fable 5 (claude-fable-5)       | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                     |
-| Claude Mythos 5 (claude-mythos-5)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                     |
-| Claude Fable 5.1 (claude-fable-5-1)   | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1)                                                                                                                                                                                                                                                                                                                                                       |
-| Claude Mythos 5.1 (claude-mythos-5-1) | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1)                                                                                                                                                                                                                                                                                                                                                       |
+| Executor models                       | Advisor models                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Haiku 4.5 (claude-haiku-4-5)   | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Sonnet 4.6 (claude-sonnet-4-6) Claude Haiku 5.5 (claude-haiku-5-5) |
+| Claude Haiku 5.5 (claude-haiku-5-5)   | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Haiku 5.5 (claude-haiku-5-5)                                                                         |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Sonnet 4.6 (claude-sonnet-4-6) Claude Haiku 5.5 (claude-haiku-5-5) |
+| Claude Sonnet 5 (claude-sonnet-5)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Haiku 5.5 (claude-haiku-5-5)                                                                         |
+| Claude Sonnet 5.5 (claude-sonnet-5-5) | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                                                                                                                                   |
+| Claude Opus 4.6 (claude-opus-4-6)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 5.5 (claude-sonnet-5-5) Claude Sonnet 5 (claude-sonnet-5) Claude Haiku 5.5 (claude-haiku-5-5)                                       |
+| Claude Opus 4.7 (claude-opus-4-7)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                                                               |
+| Claude Opus 4.8 (claude-opus-4-8)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Sonnet 5.5 (claude-sonnet-5-5)                                                                                                                                               |
+| Claude Opus 5 (claude-opus-5)         | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                                                         |
+| Claude Opus 5.5 (claude-opus-5-5)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                                                         |
+| Claude Fable 5 (claude-fable-5)       | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                                                         |
+| Claude Mythos 5 (claude-mythos-5)     | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1) Claude Mythos 5 (claude-mythos-5) Claude Fable 5 (claude-fable-5) Claude Opus 5.5 (claude-opus-5-5) Claude Opus 5 (claude-opus-5)                                                                                                                                                                                                                                                         |
+| Claude Fable 5.1 (claude-fable-5-1)   | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1)                                                                                                                                                                                                                                                                                                                                                                                           |
+| Claude Mythos 5.1 (claude-mythos-5-1) | Claude Mythos 5.1 (claude-mythos-5-1) Claude Fable 5.1 (claude-fable-5-1)                                                                                                                                                                                                                                                                                                                                                                                           |
 
 If you request an invalid pair, the API returns a `400 invalid_request_error` naming the unsupported combination.
 
@@ -1837,7 +1842,7 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
 ## Advisor on Claude Managed Agents
 
-[Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) sessions support an advisor as well, configured as part of the agent rather than as a tool definition: add a `{"type": "advisor", "model": ...}` entry to the agent's multiagent roster, and the session's primary thread can consult that model mid-turn. The roster entry takes no `max_uses`, `max_tokens`, or `caching` options, and advice is delivered as thread events on the session's event stream rather than as `advisor_tool_result` blocks in the response. See [Give the session an advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor).
+[Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) sessions support an advisor as well, configured as part of the agent rather than as a tool definition: set `"advisor": {"type": "enabled", "model": ...}` in the agent's `multiagent` block, and the session's primary thread can consult that model mid-turn. The setting takes no `max_uses`, `max_tokens`, or `caching` options, and advice is delivered as thread events on the session's event stream rather than as `advisor_tool_result` blocks in the response. See [Give the session an advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor).
 
 ## Next steps
 

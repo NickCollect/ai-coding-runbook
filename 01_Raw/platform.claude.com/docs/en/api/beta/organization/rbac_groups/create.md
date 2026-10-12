@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/create
-fetched_at: 2026-09-28T06:10:55.611389+00:00
+fetched_at: 2026-10-12T06:50:08.338038+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,14 @@ url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/creat
 Create an RBAC Group in the Claude Enterprise tenant. Groups created via the API have source type `"direct"`.
 
 The RBAC Groups API is available to Claude Enterprise organizations only.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Body parameters
 

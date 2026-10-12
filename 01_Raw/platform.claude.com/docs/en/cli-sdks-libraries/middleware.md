@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/middleware
-fetched_at: 2026-10-05T06:27:29.323977+00:00
+fetched_at: 2026-10-12T06:49:52.279445+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,8 @@ The Claude SDK provides a middleware (or interceptor) hook that lets you run cod
 
 ```mermaid
 sequenceDiagram
+    accTitle: How a request and its response pass through middleware
+    accDescr: Your code sends the request to Middleware A. Middleware A calls next(request) to pass it to Middleware B, and Middleware B calls next(request) to pass it to the SDK core. The SDK core sends the HTTP request to the Claude API and receives the HTTP response. The response returns through Middleware B, then Middleware A, to your code.
     autonumber
     participant App as Your code
     participant M1 as Middleware A
@@ -181,4 +183,4 @@ The SDK also accepts a custom HTTP client (for proxy configuration, custom TLS, 
 
 ## Built-in middleware
 
-The SDK ships a refusal-fallback middleware that automatically retries requests Claude Fable 5 declines on a fallback model. See [Detect and retry on a fallback model](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) for setup and per-language examples.
+The SDK ships a refusal-fallback middleware that automatically retries a request Claude declines (`stop_reason: "refusal"`) on a fallback model. [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) lists the models whose safety classifiers can decline requests, and [Detect and retry on a fallback model](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) covers setup and per-language examples.

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
-fetched_at: 2026-10-05T06:27:26.839676+00:00
+fetched_at: 2026-10-12T06:49:49.799223+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,7 +49,7 @@ At a given level, Claude Opus 5.5 tends to think more per turn than Claude Opus 
 * Reserve `xhigh` and `max` for work where you've measured a quality gain.
 * To get less thinking, lower the effort level first. Lowering effort reduces thinking, and with it cost and latency, more reliably than prompt instructions do.
 
-Changing the top-level `effort` value between requests invalidates the prompt cache. To run individual turns at a different level, use a [per-message effort change](https://platform.claude.com/docs/en/build-with-claude/effort#change-effort-mid-conversation-beta) (beta) instead, which keeps the cache.
+Changing the top-level `effort` value between requests invalidates the prompt cache. To change the level partway through a conversation, use a [per-message effort change](https://platform.claude.com/docs/en/build-with-claude/effort#change-effort-mid-conversation-beta) (beta) instead, which keeps the cache. A change holds for every later turn until another one replaces it.
 
 ## Prompts written for thinking disabled
 
@@ -85,7 +85,7 @@ A standing instruction from the user, the person you are working for. It is abou
 Claude Opus 5.5 runs safety classifiers, including for biology, cybersecurity, and reasoning extraction.
 
 * **Biology:** The biology safeguards are the same as Claude Fable 5.1's and are new if you're coming from Claude Opus 5. Everyday health and educational questions are unaffected. If the biology classifier gets in the way of your organization's life sciences work, apply to the [Life Sciences Verification Program](https://www.anthropic.com/news/life-sciences-verification-program).
-* **Cybersecurity:** Finding vulnerabilities in source code is allowed. High-risk dual-use cybersecurity activities are not.
+* **Cybersecurity:** Finding vulnerabilities in source code is allowed. High-risk dual-use cybersecurity activities are not. If the cybersecurity classifier gets in the way of your organization's legitimate security work, apply to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842).
 * **Reasoning extraction:** Requests that push the model to reproduce its internal reasoning in the response text may be declined with the `reasoning_extraction` category. If your prompts ask the model to write out its reasoning in the response, remove those instructions, set `display: "summarized"`, and read the summarized reasoning from the thinking blocks instead; see [Prompts written for thinking disabled](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5#prompts-written-for-thinking-disabled). You can still ask for a short explanation of the answer or a summary of the actions taken; see [Keep reasoning in thinking blocks](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#keep-reasoning-in-thinking-blocks).
 
 A classifier decline arrives as a normal response with `stop_reason: "refusal"` and a `stop_details` object naming the category. You can have the request retried automatically on a fallback model, except for `reasoning_extraction` declines, which server-side fallback returns to you instead of retrying; see [Refusals and fallback](https://platform.claude.com/docs/en/models/opus-5-5/whats-new-opus-5-5#refusals-and-fallback).
@@ -128,7 +128,7 @@ In Anthropic's evaluations of small agent teams on research tasks, both signals 
 
 ## Thinking instructions in chat system prompts
 
-In chat applications, if your system prompt contains instructions that tell Claude to think carefully before answering, consider removing them for Claude Opus 5.5. The model decides for itself how much to think, and [effort](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5#calibrate-effort) is the main control. In Anthropic's testing in a chat product, removing such a line made replies start sooner, with no clear decline in the quality of the reply.
+In chat applications, if your system prompt contains instructions that tell Claude to think carefully before answering, consider removing them for Claude Opus 5.5. The model determines how much to think, and [effort](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5#calibrate-effort) is the main control. In Anthropic's testing in a chat product, removing such a line made replies start sooner, with no clear decline in the quality of the reply.
 
 In multi-turn chat, Claude Opus 5.5 sometimes goes back over an earlier answer while it thinks about a new message, even a short follow-up, which adds thinking and latency on later turns. If you would rather the model treat earlier answers as settled, add two sentences at the end of the system prompt:
 

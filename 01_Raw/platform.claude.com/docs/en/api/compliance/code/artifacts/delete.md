@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/delete
-fetched_at: 2026-09-21T05:44:16.147752+00:00
+fetched_at: 2026-10-12T06:50:12.160343+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,12 @@ Artifact.
   The Artifact ID (tagged ID, e.g., cart_abc123)
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"x-api-key": optional string`
 

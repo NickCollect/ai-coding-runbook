@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/retrieve
-fetched_at: 2026-09-28T06:10:46.766052+00:00
+fetched_at: 2026-10-12T06:49:54.308829+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,6 +24,12 @@ Get Skill
   The format and length of IDs may change over time.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 

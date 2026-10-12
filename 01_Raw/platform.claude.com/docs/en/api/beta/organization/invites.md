@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/invites
-fetched_at: 2026-09-28T06:10:52.746646+00:00
+fetched_at: 2026-10-12T06:50:04.598064+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,14 @@ url: https://platform.claude.com/docs/en/api/beta/organization/invites
 Invite a user to join the organization by email.
 
 On plans that draw members from a finite pool of purchased seats, the invite automatically consumes a seat from the lowest tier with availability; there is no seat-tier parameter. When no seat is free the request fails with a 400 error rather than purchasing a seat.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ### Body parameters
 
@@ -202,6 +210,14 @@ List the organization's invites.
 
   - `"pending"`
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
 ### Returns
 
 - `data: array of BetaOrganizationInvite`
@@ -335,6 +351,14 @@ Retrieve an invite by ID.
 
   ID of the Invite.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
 ### Returns
 
 - `BetaOrganizationInvite object`
@@ -448,6 +472,14 @@ Delete a pending invite.
 - `invite_id: string`
 
   ID of the Invite.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ### Returns
 

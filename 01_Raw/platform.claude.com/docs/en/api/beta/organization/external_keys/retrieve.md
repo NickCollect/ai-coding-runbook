@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/retrieve
-fetched_at: 2026-09-14T05:36:17.278898+00:00
+fetched_at: 2026-10-12T06:50:03.839492+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,14 @@ Retrieve a single external key config in the caller's organization by ID.
   ID of the External Key.
 
   maxLength: 2048
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

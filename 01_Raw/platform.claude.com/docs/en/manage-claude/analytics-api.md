@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/analytics-api
-fetched_at: 2026-09-28T06:10:42.405925+00:00
+fetched_at: 2026-10-12T06:49:48.569724+00:00
 fetch_method: mintlify_md
 ---
 
@@ -76,7 +76,7 @@ The Claude Enterprise Analytics API is available to Claude Enterprise organizati
 
 The Claude Enterprise Analytics API provides:
 
-* **User activity:** per-user daily metrics across chat (conversations, messages, projects, files, artifacts), Claude Code (sessions, commits, pull requests, lines of code, tool actions), and other Claude products
+* **User activity:** per-user daily metrics across chat (conversations, messages, projects, files, artifacts), Claude Code (sessions, commits, pull requests, lines of code, tool actions), Chat and Cowork unified (chat activity and Cowork sessions), and other Claude products
 * **Activity summaries:** organization-level daily, weekly, and monthly active users, seat counts, and pending invites
 * **Project, skill, and connector usage:** adoption breakdowns for chat projects, skills, and connectors
 * **Cost and usage reports:** per-user and organization-level token usage and cost over time (usage-based Enterprise plans)
@@ -89,7 +89,7 @@ Claude Enterprise Analytics API data is available for dates on or after January 
 
 **Engagement and adoption endpoints** (user activity, summaries, projects, skills, connectors) return a per-day snapshot for the date you specify. Data for a given day is typically available by about 13:00–13:30 UTC the following day (a 1-day lag); until then, the most recent available day is usually two days before the current UTC date. Data arrives later on days when an upstream data pipeline runs late, and exact freshness varies by query, so rather than assuming a fixed time, check the error response: requesting a date that is not yet available returns a 400 error naming the most recent available day. If data is not available well past the typical lag, it usually indicates a data pipeline failure on Anthropic's side; contact support if the gap persists.
 
-**Cost and usage endpoints** follow a different freshness model. Data is typically available within four hours of the underlying usage but may take up to 24 hours. Values for a given date can be revised for up to 30 days as late events arrive and reconciliation runs. For invoicing-grade totals, query dates at least 30 days in the past.
+**Cost and usage endpoints** follow a different freshness model. Data is typically available within four hours of the underlying usage but may take up to 24 hours. Values can be revised as late events arrive and reconciliation runs, until about 7 days after the end of the calendar month. For example, values for October 1 can change until about November 7. For invoicing-grade totals, query only months that ended at least 7 days ago.
 
 <Note>
   Cost and usage responses include a `data_refreshed_at` timestamp. When `ending_at` is omitted (the default is the current time), the response includes a tail of data after `data_refreshed_at` that is incomplete. For stable results across repeated calls, set `ending_at` to a value at or before a previously returned `data_refreshed_at`.
@@ -99,7 +99,19 @@ Claude Enterprise Analytics API data is available for dates on or after January 
 
 **Active users.** A user counts as active for a day if any of the following is true: they sent at least one chat message in Claude, they had at least one Claude Code session (local or remote) associated with your Claude Enterprise organization that included tool use or git activity, or they had at least one Cowork session with tool use or message activity.
 
-**Per-product metric blocks.** Per-product metric objects (for example, Office Agent or Cowork metrics on a user-activity record) are always present on every record. Organizations without usage of that product see all-zero values rather than `null`.
+**Chat and Cowork unified (beta).** Chat and Cowork unified brings Cowork's features into claude.ai chat. Most activity in Chat and Cowork unified is reported under the `chat_cowork_unified` product value, not `chat` or `cowork`.
+
+In user activity and in skill, connector, and plugin usage, this usage appears in the `chat_cowork_unified_metrics` object. In activity summaries, it is counted in `chat_cowork_unified_daily_active_user_count`, `chat_cowork_unified_weekly_active_user_count`, and `chat_cowork_unified_monthly_active_user_count`.
+
+As more users start using Chat and Cowork unified, usage moves out of your chat and Cowork figures and into these new ones. Usage from days before a user starts using Chat and Cowork unified stays under chat or Cowork. Organization-wide figures, such as total token usage, total cost, and overall active user counts, do not change. Cost and usage reports filtered by product leave Chat and Cowork unified usage out unless `products[]` includes `chat_cowork_unified`.
+
+Some activity from users of Chat and Cowork unified, such as voice mode, can still be reported under chat or Cowork. A user's activity can also be split between products on the day they start using Chat and Cowork unified. The same is true on the day it is turned off for them. How the activity splits is not guaranteed.
+
+A user can appear in both the chat or Cowork counts and the Chat and Cowork unified counts. This can happen on a day when they use Chat and Cowork unified and some of their activity is still reported under chat or Cowork. Weekly and monthly counts can include them in both when the window has activity of both kinds, even on different days. For example, the window might cover days before and after they started using Chat and Cowork unified.
+
+When you filter user activity by project, each day's project activity is counted in one place only. If a user sent a chat message in Chat and Cowork unified that day, all their project activity is counted in `chat_cowork_unified_metrics.chat`. Otherwise, it is counted in `chat_metrics`.
+
+**Per-product metric blocks.** Per-product metric objects (for example, Office Agent or Cowork metrics on a user-activity record) are always present on every record. Organizations without usage of that product see all-zero values rather than `null`. The exception is Chat and Cowork unified: on deployments that do not offer it, its fields are left out of the response.
 
 **Connector names.** Connector names are normalized across sources. For example, `Atlassian MCP server`, `mcp-atlassian`, and `atlassian_MCP` all appear as `atlassian` in the connector usage endpoint.
 

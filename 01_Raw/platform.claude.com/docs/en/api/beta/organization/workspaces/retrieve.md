@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/retrieve
-fetched_at: 2026-10-05T06:27:41.875057+00:00
+fetched_at: 2026-10-12T06:50:05.486093+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,14 @@ Get Workspace
 - `workspace_id: string`
 
   ID of the Workspace.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/download
-fetched_at: 2026-10-05T06:27:38.704925+00:00
+fetched_at: 2026-10-12T06:50:02.006513+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,12 @@ Download File
   ID of the File.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

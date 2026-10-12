@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models
-fetched_at: 2026-09-28T06:10:45.496994+00:00
+fetched_at: 2026-10-12T06:49:52.673993+00:00
 fetch_method: mintlify_md
 ---
 
@@ -93,7 +93,7 @@ ClaudeLanguageModel(name: model, auth: auth)
 
 ### Effort
 
-Pin a Claude [effort level](https://platform.claude.com/docs/en/build-with-claude/effort) for every request with `fixedEffort:`. It takes precedence over the framework's per-request reasoning hints. The framework's named reasoning levels stop at high; to request more effort for a single request instead, pass a custom reasoning level naming the Claude effort (`.custom("xhigh")` or `.custom("max")`), which maps directly. The API defaults to `high` when no effort is sent:
+Pin a Claude [effort level](https://platform.claude.com/docs/en/build-with-claude/effort) for every request with `fixedEffort:`. It takes precedence over the framework's per-request reasoning hints. The framework's named reasoning levels stop at high; to request more effort for a single request instead, pass a custom reasoning level naming the Claude effort (`.custom("xhigh")` or `.custom("max")`), which maps directly. When no effort is sent, the API uses the model's default level, which differs by model (see [Effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels)):
 
 ```swift
 ClaudeLanguageModel(name: .opus5_5, auth: auth, fixedEffort: .xhigh)

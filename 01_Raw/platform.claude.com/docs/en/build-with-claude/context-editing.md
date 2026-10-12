@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/context-editing
-fetched_at: 2026-10-05T06:27:22.697124+00:00
+fetched_at: 2026-10-12T06:49:44.660758+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ description: Automatically manage conversation context as it grows with context 
 Context editing allows you to selectively clear specific content from conversation history as it grows. Beyond optimizing costs and staying within limits, this is about actively curating what Claude sees: context is a finite resource with diminishing returns, and irrelevant content degrades model focus. Context editing gives you fine-grained runtime control over that curation. For the broader principles behind context management, see [Effective context engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents). This page covers:
 
 * **Tool result clearing** - Best for agentic workflows with heavy tool use where old tool results are no longer needed
-* **Thinking block clearing** - For managing thinking blocks when using extended thinking, with options to preserve recent thinking for context continuity
+* **Thinking block clearing** - For managing thinking blocks from earlier turns, with options to preserve recent thinking for context continuity
 * **Client-side SDK compaction** - An SDK-based alternative for summary-based context management (server-side compaction is generally preferred)
 
 | Approach        | Where it runs | Strategies                                                                                            | How it works                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -47,17 +47,17 @@ When activated, the API automatically clears the oldest tool results in chronolo
 
 ### Thinking block clearing
 
-The `clear_thinking_20251015` strategy manages `thinking` blocks in conversations when extended thinking is enabled. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
+The `clear_thinking_20251015` strategy manages `thinking` blocks from earlier assistant turns. This strategy gives you control over thinking preservation: you can choose to keep more thinking blocks to maintain reasoning continuity, or clear them more aggressively to save context space.
 
 <Tip>
   **Default behavior:** The default varies by model class.
 
-  | Model class      | Keep all prior thinking     | Keep only the last turn's thinking  |
-  | ---------------- | --------------------------- | ----------------------------------- |
-  | Opus             | Claude Opus 4.5 and later   | Claude Opus 4.1 and earlier         |
-  | Sonnet           | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 and earlier       |
-  | Haiku            | (none)                      | All models through Claude Haiku 4.5 |
-  | Fable and Mythos | All models                  | (none)                              |
+  | Model class      | Keep all prior thinking     | Keep only the last turn's thinking         |
+  | ---------------- | --------------------------- | ------------------------------------------ |
+  | Opus             | Claude Opus 4.5 and later   | Claude Opus 4.1 and earlier                |
+  | Sonnet           | Claude Sonnet 4.6 and later | Claude Sonnet 4.5 (deprecated) and earlier |
+  | Haiku            | Claude Haiku 5.5 and later  | Claude Haiku 4.5 and earlier               |
+  | Fable and Mythos | All models                  | (none)                                     |
 
   Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 </Tip>
@@ -68,7 +68,7 @@ An assistant conversation turn may include multiple content blocks (for example,
 
 Context editing is applied server-side before the prompt reaches Claude. Your client application maintains the full, unmodified conversation history. You do not need to sync your client state with the edited version. Continue managing your full conversation history locally as you normally would.
 
-On Claude Fable 5.1, Claude Opus 5.5, and Claude Sonnet 5.5, server-side context management never invalidates thinking blocks. Client-side edits to earlier turns can invalidate the thinking blocks in every later assistant turn. For new accounts created on or after August 31, 2026, a request that replays an invalidated block is rejected unless you opt into dropping it. See [Keeping the prefix unchanged](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#prefix-check).
+On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, server-side context management never invalidates thinking blocks. Client-side edits to earlier turns can invalidate the thinking blocks in every later assistant turn. For new accounts created on or after August 31, 2026, a request that replays an invalidated block is rejected unless you opt into dropping it. See [Keeping the prefix unchanged](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#prefix-check).
 
 ### Context editing and prompt caching
 
@@ -702,7 +702,7 @@ You can customize the tool result clearing behavior with additional parameters:
 
 ## Thinking block clearing usage
 
-Enable thinking block clearing to manage context and prompt caching effectively when extended thinking is enabled:
+Use thinking block clearing to manage context and prompt caching in conversations that carry thinking blocks from earlier turns:
 
 <CodeGroup>
   ```bash cURL
@@ -927,9 +927,9 @@ Enable thinking block clearing to manage context and prompt caching effectively 
 
 The `clear_thinking_20251015` strategy supports the following configuration:
 
-| Configuration option | Default        | Description                                                                                                                                                                                                                                                                                                                           |
-| -------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `keep`               | Model-specific | Defines how many recent assistant turns with thinking blocks to preserve. Use `{type: "thinking_turns", value: N}` where N must be > 0 to keep the last N turns, or `"all"` to keep all thinking blocks. Opus 4.5+ and Sonnet 4.6+: all turns. Fable and Mythos models: all turns. Earlier Opus/Sonnet and all Haiku: last turn only. |
+| Configuration option | Default        | Description                                                                                                                                                                                                                                                                                                                                                             |
+| -------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `keep`               | Model-specific | Defines how many recent assistant turns with thinking blocks to preserve. Use `{type: "thinking_turns", value: N}` where N must be > 0 to keep the last N turns, or `"all"` to keep all thinking blocks. Opus 4.5+, Sonnet 4.6+, and Haiku 5.5+: all turns. Fable and Mythos models: all turns. Earlier Opus/Sonnet and Haiku through Claude Haiku 4.5: last turn only. |
 
 **Example configurations:**
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/service_accounts/workspaces/add
-fetched_at: 2026-10-05T06:27:33.387081+00:00
+fetched_at: 2026-10-12T06:49:56.113974+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ url: https://platform.claude.com/docs/en/api/organization/service_accounts/works
 
 **POST** `/v1/organizations/service_accounts/{service_account_id}/workspaces`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api?sdk_languages=http).
 
 Add a service account to a workspace with the given `workspace_role`.
 
@@ -29,6 +29,14 @@ rejected.
 - `service_account_id: string`
 
   ID of the service account.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Body parameters
 

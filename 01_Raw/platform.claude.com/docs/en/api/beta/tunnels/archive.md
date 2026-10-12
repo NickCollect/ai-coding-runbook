@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/archive
-fetched_at: 2026-10-05T06:27:39.785996+00:00
+fetched_at: 2026-10-12T06:50:03.144579+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,6 +24,8 @@ Archives a tunnel. Archival is irreversible: every non-archived certificate on t
   ID of the tunnel (`tnl_...`).
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

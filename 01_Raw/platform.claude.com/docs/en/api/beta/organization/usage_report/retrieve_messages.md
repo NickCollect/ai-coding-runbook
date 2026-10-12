@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/usage_report/retrieve_messages
-fetched_at: 2026-10-05T06:27:42.597346+00:00
+fetched_at: 2026-10-12T06:50:06.302341+00:00
 fetch_method: mintlify_md
 ---
 
@@ -141,6 +141,12 @@ Get Messages Usage Report
   Restrict usage returned to the specified workspace ID(s).
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

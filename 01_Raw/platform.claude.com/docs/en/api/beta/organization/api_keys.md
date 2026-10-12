@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/api_keys
-fetched_at: 2026-09-28T06:10:51.854921+00:00
+fetched_at: 2026-10-12T06:50:03.544722+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,6 +54,14 @@ List API Keys
 - `workspace_id: optional string`
 
   Filter by Workspace ID.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ### Returns
 
@@ -245,6 +253,14 @@ Retrieve information about a single API key in your organization, looked up by i
 
   ID of the API key.
 
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
 ### Returns
 
 - `BetaAPIKey object`
@@ -415,6 +431,14 @@ Update API Key
 - `api_key_id: string`
 
   ID of the API key.
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ### Body parameters
 

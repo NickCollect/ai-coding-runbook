@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/update
-fetched_at: 2026-09-14T05:36:19.374178+00:00
+fetched_at: 2026-10-12T06:50:06.293698+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,6 +27,14 @@ the Compliance API, which serves its activity events, so such
 provisioning (including re-runs) re-enables the Compliance API even
 after a `disabled` request. Automated provisioning never disables
 compliance settings.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Body parameters
 

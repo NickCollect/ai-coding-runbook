@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/compliance_settings/retrieve
-fetched_at: 2026-09-14T05:36:19.830936+00:00
+fetched_at: 2026-10-12T06:50:06.195907+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,6 +19,14 @@ Compliance Settings is a singleton resource: there is exactly one per
 organization, addressed without an identifier. The `state` field reflects
 whether the Compliance API is enabled. An organization with a parent
 organization reads the state inherited from the parent's configuration.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

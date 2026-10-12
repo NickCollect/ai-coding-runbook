@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/update
-fetched_at: 2026-10-05T06:27:39.265907+00:00
+fetched_at: 2026-10-12T06:50:02.737216+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,8 @@ Update User Profile
   The ID of the user profile to update (`uprof_...`).
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/retrieve
-fetched_at: 2026-09-21T05:44:14.805053+00:00
+fetched_at: 2026-10-12T06:50:10.533539+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,12 @@ Get Compliance Group
   The group ID (tagged ID, e.g., rbac_group_abc123)
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"x-api-key": optional string`
 

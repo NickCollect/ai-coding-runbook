@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/federation/issuers/retrieve
-fetched_at: 2026-10-05T06:27:32.268266+00:00
+fetched_at: 2026-10-12T06:49:55.228811+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ url: https://platform.claude.com/docs/en/api/organization/federation/issuers/ret
 
 **GET** `/v1/organizations/federation_issuers/{federation_issuer_id}`
 
-**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
+**Requires an OAuth access token with the `org:admin` scope**, from `ant auth login --scope org:admin` or a workload identity federation rule; Admin API keys are not accepted. See [Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api?sdk_languages=http).
 
 Retrieve a federation issuer by its ID (`fdis_...`).
 
@@ -22,6 +22,14 @@ Retrieve a federation issuer by its ID (`fdis_...`).
 - `federation_issuer_id: string`
 
   ID of the federation issuer.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

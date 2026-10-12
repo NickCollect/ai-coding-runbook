@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions/remote/messages/list
-fetched_at: 2026-09-28T06:10:57.882056+00:00
+fetched_at: 2026-10-12T06:50:11.943987+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,6 +75,12 @@ malformed session identifier returns 400.
   default: 10000, minimum: -1, maximum: 2147483647
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"x-api-key": optional string`
 

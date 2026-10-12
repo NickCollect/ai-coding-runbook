@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/workspaces/create
-fetched_at: 2026-10-05T06:27:33.900909+00:00
+fetched_at: 2026-10-12T06:49:56.486158+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,13 +15,21 @@ url: https://platform.claude.com/docs/en/api/organization/workspaces/create
 
 Create Workspace
 
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
 ## Body parameters
 
 - `name: string`
 
   Name of the Workspace.
 
-  minLength: 1, maxLength: 40
+  minLength: 1, maxLength: 255
 
 - `data_residency: optional DataResidencyCreateConfig or null`
 

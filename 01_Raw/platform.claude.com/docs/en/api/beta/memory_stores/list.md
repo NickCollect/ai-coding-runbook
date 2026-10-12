@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/list
-fetched_at: 2026-10-05T06:27:38.150975+00:00
+fetched_at: 2026-10-12T06:50:01.286164+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,6 +44,8 @@ List memory stores
   Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -218,18 +220,16 @@ curl https://api.anthropic.com/v1/memory_stores \
 {
   "data": [
     {
-      "id": "id",
-      "archived_at": "2019-12-27T18:11:19.117Z",
-      "created_at": "2019-12-27T18:11:19.117Z",
-      "description": "description",
-      "metadata": {
-        "foo": "string"
-      },
-      "name": "name",
+      "id": "memstore_01Wf3kQ8tZxB2mVr7HcJ4aNd",
+      "archived_at": null,
+      "created_at": "2026-03-15T10:00:00Z",
+      "description": "Per-user preferences and project context.",
+      "metadata": {},
+      "name": "User Preferences",
       "type": "memory_store",
-      "updated_at": "2019-12-27T18:11:19.117Z"
+      "updated_at": "2026-03-15T10:00:00Z"
     }
   ],
-  "next_page": "next_page"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```

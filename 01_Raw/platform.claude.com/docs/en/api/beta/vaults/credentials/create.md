@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/create
-fetched_at: 2026-10-05T06:27:37.858942+00:00
+fetched_at: 2026-10-12T06:50:00.917945+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,8 @@ Create Credential
   Identifier of the vault to create the credential in.
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -488,7 +490,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
 
 ```json
 {
-  "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
+  "id": "vcrd_011CZkZEMt8gZan2iYPQfSkw",
   "archived_at": null,
   "auth": {
     "mcp_server_url": "https://example-server.modelcontextprotocol.io/sse",

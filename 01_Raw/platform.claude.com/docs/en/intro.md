@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/intro
-fetched_at: 2026-10-05T06:27:20.623505+00:00
+fetched_at: 2026-10-12T06:49:42.395166+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ If you're unsure which model to use, start with [Claude Opus 5.5](https://platfo
 * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (`claude-fable-5-1`) — New — *For demanding reasoning and long-horizon agentic work* — Most capable · Research · Multi-day tasks
 * [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview) (`claude-opus-5-5`) — New — *For long-running agentic coding and knowledge work* — Complex projects · Agents · Coding
 * [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) (`claude-sonnet-5-5`) — New — *The best combination of speed and intelligence* — Everyday tasks · Writing · Cost-efficient
-* [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview) (`claude-haiku-4-5`) — *The fastest model with near-frontier intelligence* — Fastest · Lowest cost · High volume
+* [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview) (`claude-haiku-5-5`) — New — *For high-volume, latency-sensitive tasks such as classification, extraction, and routing* — Fastest · Lowest cost · High volume
 
 [Compare models](https://platform.claude.com/docs/en/models/overview)
 
@@ -66,7 +66,7 @@ Follow these steps to go from zero to a working Claude integration.
   </Step>
 
   <Step title="Explore features and tools">
-    Discover what Claude can do: extended thinking, web search, file handling, structured outputs, and more.
+    Discover what Claude can do: thinking, web search, file handling, structured outputs, and more.
 
     [Browse the features overview](https://platform.claude.com/docs/en/build-with-claude/overview)
   </Step>

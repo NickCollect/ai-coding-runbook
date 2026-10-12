@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-10-05T06:27:20.939529+00:00
+fetched_at: 2026-10-12T06:49:42.748931+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,6 +21,7 @@ featureMetadata:
     - claude-opus-4-8
     - claude-opus-4-7
     - claude-sonnet-5-5
+    - claude-haiku-5-5
 ---
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
@@ -659,6 +660,7 @@ The minimum accepted `task_budget.total` is **20,000 tokens** on every model tha
 | Claude Mythos 5   | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Sonnet 5.5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Sonnet 5   | Not supported                               |
+| Claude Haiku 5.5  | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.8   | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.7   | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.6   | Not supported                               |
@@ -675,7 +677,7 @@ Task budgets are not supported on [Claude Code](https://code.claude.com/docs/en/
   </Card>
 
   <Card title="Adaptive thinking" icon="brain" href="https://platform.claude.com/docs/en/build-with-claude/thinking">
-    Let Claude decide when and how much to use extended thinking.
+    Let Claude determine when and how much to use extended thinking.
   </Card>
 
   <Card title="Compaction" icon="arrows-clockwise" href="https://platform.claude.com/docs/en/build-with-claude/compaction">

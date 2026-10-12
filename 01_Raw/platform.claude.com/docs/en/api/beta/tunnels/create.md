@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/create
-fetched_at: 2026-10-05T06:27:39.570516+00:00
+fetched_at: 2026-10-12T06:50:03.049402+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,8 @@ The Tunnels API is in research preview. It requires the `anthropic-beta: mcp-tun
 Creates a tunnel. Creation allocates a fresh hostname and provisions the tunnel; it is not idempotent. The new tunnel rejects MCP traffic until at least one CA certificate is added.
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

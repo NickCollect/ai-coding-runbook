@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
-fetched_at: 2026-10-05T06:27:21.006971+00:00
+fetched_at: 2026-10-12T06:49:42.809340+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,7 @@ featureMetadata:
     - claude-sonnet-4-6
     - claude-sonnet-4-5-20250929
     - claude-opus-4-5-20251101
+    - claude-haiku-5-5
     - claude-haiku-4-5-20251001
   supportedPlatforms:
     Claude API: ga

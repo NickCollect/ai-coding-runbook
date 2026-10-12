@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/workspaces/update
-fetched_at: 2026-10-05T06:27:41.869953+00:00
+fetched_at: 2026-10-12T06:50:05.465233+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,14 @@ Update Workspace
 ## Path parameters
 
 - `workspace_id: string`
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Body parameters
 
@@ -69,7 +77,7 @@ Update Workspace
 
   Name of the Workspace.
 
-  minLength: 1, maxLength: 40
+  minLength: 1, maxLength: 255
 
 - `tags: optional map[string] or null`
 

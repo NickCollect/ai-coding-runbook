@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/deployments/run
-fetched_at: 2026-10-05T06:27:37.340373+00:00
+fetched_at: 2026-10-12T06:50:00.455188+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,8 @@ Run Deployment Now
   Unique identifier of the deployment to run.
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

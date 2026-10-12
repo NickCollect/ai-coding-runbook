@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/plugins/create
-fetched_at: 2026-10-05T06:27:44.893501+00:00
+fetched_at: 2026-10-12T06:50:08.943049+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,7 +38,7 @@ in `details`) but are not yet usable in claude.ai: do not retry the create (the
 retry would return `plugin_name_taken`); create a version on the stored Plugin
 instead, which completes it.
 
-For a worked example, see [Create a plugin](/docs/en/manage-claude/plugins-api#create-a-plugin)
+For a worked example, see [Create a plugin](https://platform.claude.com/docs/en/manage-claude/plugins-api?sdk_languages=http#create-a-plugin)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `write:plugins` scope.

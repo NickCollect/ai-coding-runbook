@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/list
-fetched_at: 2026-09-28T06:10:56.827099+00:00
+fetched_at: 2026-10-12T06:50:10.683414+00:00
 fetch_method: mintlify_md
 ---
 
@@ -125,6 +125,12 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
 ## Headers
 
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
+
 - `"x-api-key": optional string`
 
 ## Returns
@@ -159,7 +165,7 @@ no time filter) with the default `order_by`. `user_ids[]` with
 
   - `name: string`
 
-    Chat name/title
+    Chat name. Empty when `deleted_at` is set.
 
   - `organization_uuid: string`
 

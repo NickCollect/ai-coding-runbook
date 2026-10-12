@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/create
-fetched_at: 2026-09-28T06:10:52.006996+00:00
+fetched_at: 2026-10-12T06:50:03.685690+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,6 +14,14 @@ url: https://platform.claude.com/docs/en/api/beta/organization/external_keys/cre
 **POST** `/v1/organizations/external_keys`
 
 Create an external key config owned by the caller's organization.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Body parameters
 

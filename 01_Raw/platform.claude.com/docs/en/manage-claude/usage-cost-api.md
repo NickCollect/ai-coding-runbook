@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
-fetched_at: 2026-09-28T06:10:42.404060+00:00
+fetched_at: 2026-10-12T06:49:48.479827+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,6 +68,10 @@ Leading observability platforms offer ready-to-use integrations for monitoring y
 
   <Card title="Honeycomb" icon="polygon" href="https://docs.honeycomb.io/integrations/anthropic-usage-monitoring/">
     Advanced querying and visualization through OpenTelemetry
+  </Card>
+
+  <Card title="Tempo" icon="chart" href="https://help.tempo.io/workforceintelligence/latest/connect-to-anthropic">
+    Usage and cost attribution to Jira work items
   </Card>
 
   <Card title="Vantage" icon="chart" href="https://docs.vantage.sh/connecting_anthropic">
@@ -155,9 +159,9 @@ bucket_width=1d" \
 ```
 
 <Tip>
-  To retrieve your organization's API key IDs, use the [List API Keys](https://platform.claude.com/docs/en/api/beta/organization/api_keys/list) endpoint.
+  To retrieve your organization's API key IDs, use the [List API Keys](https://platform.claude.com/docs/en/api/organization/api_keys/list) endpoint.
 
-  To retrieve your organization's workspace IDs, use the [List Workspaces](https://platform.claude.com/docs/en/api/beta/organization/workspaces/list) endpoint, or find your organization's workspace IDs in the Claude Console.
+  To retrieve your organization's workspace IDs, use the [List Workspaces](https://platform.claude.com/docs/en/api/organization/workspaces/list) endpoint, or find your organization's workspace IDs in the Claude Console.
 </Tip>
 
 #### Data residency

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/create
-fetched_at: 2026-10-05T06:27:37.701184+00:00
+fetched_at: 2026-10-12T06:50:00.647310+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,8 @@ url: https://platform.claude.com/docs/en/api/beta/vaults/create
 Create Vault
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

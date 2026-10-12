@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/external_keys/validate
-fetched_at: 2026-10-05T06:27:32.104166+00:00
+fetched_at: 2026-10-12T06:49:54.981862+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,6 +27,14 @@ message if it failed or timed out.
   ID of the External Key.
 
   maxLength: 2048
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/list
-fetched_at: 2026-10-05T06:27:38.883214+00:00
+fetched_at: 2026-10-12T06:50:02.202051+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,6 +41,12 @@ List Skills
   * `"anthropic"`: only return Anthropic-created skills
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

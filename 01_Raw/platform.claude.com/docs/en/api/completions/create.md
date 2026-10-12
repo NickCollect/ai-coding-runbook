@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions/create
-fetched_at: 2026-10-05T06:27:30.272082+00:00
+fetched_at: 2026-10-12T06:49:53.240912+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,13 +13,21 @@ url: https://platform.claude.com/docs/en/api/completions/create
 
 **POST** `/v1/complete`
 
+**Deprecated**: Use the [Messages API](https://platform.claude.com/docs/en/api/messages/create) instead.
+
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages?sdk_languages=http) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages?sdk_languages=http) for guidance in migrating from Text Completions to Messages.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -151,6 +159,10 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `"claude-haiku-5-5"`
+
+    Fastest model for high-volume, real-time tasks
+
   - `"claude-sonnet-5-5"`
 
     Efficient model for coding and agents
@@ -201,11 +213,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `"claude-haiku-4-5"`
 
-    Fastest model with near-frontier intelligence
-
   - `"claude-haiku-4-5-20251001"`
-
-    Fastest model with near-frontier intelligence
 
   - `"claude-opus-4-5"`
 
@@ -253,7 +261,7 @@ Future models and features will not be compatible with Text Completions. See our
   Assistant:"
   ```
 
-  See [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) and our guide to [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview) for more details.
+  See [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages?sdk_languages=http) and our guide to [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview?sdk_languages=http) for more details.
 
   minLength: 1
 
@@ -281,7 +289,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
+  See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming?sdk_languages=http) for details.
 
 - `temperature: optional number`
 
@@ -347,6 +355,10 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
+
     - `"claude-sonnet-5-5"`
 
       Efficient model for coding and agents
@@ -397,11 +409,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `"claude-haiku-4-5"`
 
-      Fastest model with near-frontier intelligence
-
     - `"claude-haiku-4-5-20251001"`
-
-      Fastest model with near-frontier intelligence
 
     - `"claude-opus-4-5"`
 

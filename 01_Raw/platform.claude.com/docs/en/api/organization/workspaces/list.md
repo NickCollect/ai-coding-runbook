@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/workspaces/list
-fetched_at: 2026-10-05T06:27:33.793443+00:00
+fetched_at: 2026-10-12T06:49:56.514073+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,6 +31,12 @@ List Workspaces
 
   default: false
 
+- `include_default: optional boolean`
+
+  Whether to include the organization's default Workspace in the response
+
+  default: false
+
 - `limit: optional number`
 
   Number of items to return per page.
@@ -38,6 +44,14 @@ List Workspaces
   Defaults to `20`. Ranges from `1` to `1000`.
 
   default: 20, minimum: 1, maximum: 1000
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

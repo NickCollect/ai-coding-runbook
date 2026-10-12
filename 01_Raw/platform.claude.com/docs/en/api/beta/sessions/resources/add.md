@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/resources/add
-fetched_at: 2026-10-05T06:27:36.730938+00:00
+fetched_at: 2026-10-12T06:49:59.699256+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,8 @@ Add Session Resource
 - `session_id: string`
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

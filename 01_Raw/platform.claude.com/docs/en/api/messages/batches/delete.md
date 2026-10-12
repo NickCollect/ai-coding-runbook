@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/delete
-fetched_at: 2026-09-28T06:10:46.328072+00:00
+fetched_at: 2026-10-12T06:49:53.692157+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 ## Path parameters
 
@@ -26,6 +26,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   ID of the Message Batch.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 

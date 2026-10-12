@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/list
-fetched_at: 2026-10-05T06:27:35.567371+00:00
+fetched_at: 2026-10-12T06:49:58.046355+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ url: https://platform.claude.com/docs/en/api/beta/messages/batches/list
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 ## Query parameters
 
@@ -36,6 +36,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   default: 20, minimum: 1, maximum: 1000
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

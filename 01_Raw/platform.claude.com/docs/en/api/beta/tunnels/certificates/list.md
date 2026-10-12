@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/certificates/list
-fetched_at: 2026-10-05T06:27:39.931985+00:00
+fetched_at: 2026-10-12T06:50:03.364756+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,6 +40,8 @@ Lists the certificates registered on a tunnel. Archived certificates are exclude
   Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

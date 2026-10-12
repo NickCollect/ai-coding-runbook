@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/plugin_marketplaces
-fetched_at: 2026-10-05T06:27:45.412783+00:00
+fetched_at: 2026-10-12T06:50:09.521376+00:00
 fetch_method: mintlify_md
 ---
 
@@ -865,7 +865,7 @@ checked when the marketplace actually synchronizes.
 
 Nothing is recorded on the Compliance API activity feed.
 
-For a worked example, see [Validate marketplace content](/docs/en/manage-claude/plugins-api#validate-marketplace-content)
+For a worked example, see [Validate marketplace content](https://platform.claude.com/docs/en/manage-claude/plugins-api?sdk_languages=http#validate-marketplace-content)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `read:plugins` or `write:plugins` scope; `read:org_audit` and `read:compliance_org_data` do not grant it.
@@ -1131,7 +1131,7 @@ checked when the marketplace actually synchronizes.
 
 Nothing is recorded on the Compliance API activity feed.
 
-For a worked example, see [Validate marketplace content](/docs/en/manage-claude/plugins-api#validate-marketplace-content)
+For a worked example, see [Validate marketplace content](https://platform.claude.com/docs/en/manage-claude/plugins-api?sdk_languages=http#validate-marketplace-content)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `read:plugins` or `write:plugins` scope; `read:org_audit` and `read:compliance_org_data` do not grant it.

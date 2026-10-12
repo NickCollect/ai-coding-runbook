@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/plugins/versions/create
-fetched_at: 2026-10-05T06:27:45.036188+00:00
+fetched_at: 2026-10-12T06:50:09.117594+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ claude.ai) is refused with a 409: `error_code` `skill_name_taken`, with that nam
 `registration_pending` means the version was stored but is not yet usable; a later
 version create on the Plugin completes it.
 
-For a worked example, see [Create a version](/docs/en/manage-claude/plugins-api#create-a-version)
+For a worked example, see [Create a version](https://platform.claude.com/docs/en/manage-claude/plugins-api?sdk_languages=http#create-a-version)
 in the Plugins API guide.
 
 **Accepted credentials:** an Admin API key with the `write:plugins` scope.

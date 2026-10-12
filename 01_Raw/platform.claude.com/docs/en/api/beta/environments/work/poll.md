@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/poll
-fetched_at: 2026-10-05T06:27:36.095136+00:00
+fetched_at: 2026-10-12T06:49:58.932291+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,6 +36,12 @@ Long poll for work items in the queue.
   minimum: 1
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/list
-fetched_at: 2026-10-05T06:27:35.607691+00:00
+fetched_at: 2026-10-12T06:49:58.437173+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,6 +44,8 @@ List Agents
   Opaque pagination cursor from a previous response.
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -201,6 +203,10 @@ List Agents
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
+
       - `"claude-sonnet-5-5"`
 
         Efficient model for coding and agents
@@ -243,11 +249,7 @@ List Agents
 
       - `"claude-haiku-4-5"`
 
-        Fastest model with near-frontier intelligence
-
       - `"claude-haiku-4-5-20251001"`
-
-        Fastest model with near-frontier intelligence
 
       - `"claude-opus-4-5"`
 
@@ -321,33 +323,139 @@ List Agents
 
     Multiagent orchestration configuration. Null when the agent is single-threaded.
 
-    - `type: "coordinator"`
+    - `BetaManagedAgentsMultiagentCoordinator object`
 
-    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
+      Resolved coordinator topology with a concrete agent roster.
 
-      Agents the coordinator may spawn as session threads, each resolved to a specific version.
+      - `type: "coordinator"`
 
-      - `BetaManagedAgentsAgentReference object`
+      - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
-        A resolved agent reference with a concrete version.
+        Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-        - `type: "agent"`
+        - `BetaManagedAgentsAgentReference object`
 
-        - `id: string`
+          A resolved agent reference with a concrete version.
 
-        - `version: number`
+          - `type: "agent"`
 
-          format: int32
+          - `id: string`
 
-      - `BetaManagedAgentsAdvisor object`
+          - `version: number`
 
-        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+            format: int32
 
-        - `type: "advisor"`
+        - `BetaManagedAgentsAdvisor object`
 
-        - `model: string`
+          Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
 
-          The advisor model id.
+          - `type: "advisor"`
+
+          - `model: string`
+
+            The advisor model id.
+
+    - `BetaManagedAgentsMultiagent20261001 object`
+
+      Resolved multiagent configuration with three members, each enabled or disabled on its own.
+
+      - `type: "multiagent_20261001"`
+
+      - `advisor: BetaManagedAgentsMultiagentAdvisor`
+
+        Whether the session's primary thread can consult an advisor model.
+
+        - `BetaManagedAgentsMultiagentAdvisorEnabled object`
+
+          The session's primary thread can consult `model` mid-turn.
+
+          - `type: "enabled"`
+
+          - `model: string`
+
+            The advisor model id.
+
+        - `BetaManagedAgentsMultiagentAdvisorDisabled object`
+
+          The agent has no advisor.
+
+          - `type: "disabled"`
+
+      - `subagents: BetaManagedAgentsMultiagentSubagents`
+
+        Whether the agent can spawn session threads.
+
+        - `BetaManagedAgentsMultiagentSubagentsEnabled object`
+
+          The agent can spawn session threads.
+
+          - `type: "enabled"`
+
+          - `inline_agents: BetaManagedAgentsMultiagentInlineAgents`
+
+            Whether the agent can define inline agents, which are not saved, when it spawns session threads.
+
+            - `BetaManagedAgentsMultiagentInlineAgentsEnabled object`
+
+              The agent can define inline agents.
+
+              - `type: "enabled"`
+
+            - `BetaManagedAgentsMultiagentInlineAgentsDisabled object`
+
+              The agent cannot define inline agents.
+
+              - `type: "disabled"`
+
+          - `predefined_agents: array of BetaManagedAgentsAgentReference`
+
+            Predefined agents, which are saved agents that this agent can spawn as session threads, each resolved to a specific version.
+
+            - `type: "agent"`
+
+            - `id: string`
+
+            - `version: number`
+
+              format: int32
+
+        - `BetaManagedAgentsMultiagentSubagentsDisabled object`
+
+          The agent cannot spawn session threads.
+
+          - `type: "disabled"`
+
+      - `workflows: BetaManagedAgentsMultiagentWorkflows`
+
+        Whether the agent can start workflow runs.
+
+        - `BetaManagedAgentsMultiagentWorkflowsEnabled object`
+
+          The agent can start workflow runs.
+
+          - `type: "enabled"`
+
+          - `inline_agents: BetaManagedAgentsMultiagentInlineAgents`
+
+            Whether a run's plan can define inline agents, which are not saved.
+
+          - `predefined_agents: array of BetaManagedAgentsAgentReference`
+
+            Predefined agents, which are saved agents that a run's plan can use, each resolved to a specific version.
+
+            - `type: "agent"`
+
+            - `id: string`
+
+            - `version: number`
+
+              format: int32
+
+        - `BetaManagedAgentsMultiagentWorkflowsDisabled object`
+
+          The agent cannot start workflow runs.
+
+          - `type: "disabled"`
 
   - `name: string`
 
@@ -571,6 +679,82 @@ List Agents
 
               The server decides each tool call individually: it judges, from the tool, its input, and the session content so far, whether the call is safe to execute or high-risk, and evaluates it to allow when judged safe and to deny when judged high-risk. A call the server cannot reach a judgement on evaluates to ask.
 
+          - `url_sources: BetaManagedAgentsWebFetchURLSources or null`
+
+            Which sources contribute URLs the tool may fetch, always in the object form. Null when not set, which allows every source.
+
+            - `client_tool_results: BetaManagedAgentsWebFetchURLSourceToolFilter or null`
+
+              Which custom tools' results contribute URLs that may be fetched. Null when not set, which allows every custom tool's results.
+
+              - `BetaManagedAgentsWebFetchURLSourceAll object`
+
+                Every URL from this source may be fetched. This is the default.
+
+                - `type: "all"`
+
+              - `BetaManagedAgentsWebFetchURLSourceNone object`
+
+                This source contributes no URLs that may be fetched.
+
+                - `type: "none"`
+
+              - `BetaManagedAgentsWebFetchURLSourceOnly object`
+
+                Only the named tools' results contribute URLs that may be fetched.
+
+                - `type: "only"`
+
+                - `tools: array of BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "none" to allow no tool's results.
+
+                  - `type: "tool_reference"`
+
+                    Must be "tool_reference".
+
+                  - `name: string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+              - `BetaManagedAgentsWebFetchURLSourceExcept object`
+
+                Every tool's results contribute URLs that may be fetched, except the named tools' results.
+
+                - `type: "except"`
+
+                - `tools: array of BetaManagedAgentsWebFetchURLSourceToolReference`
+
+                  The tools whose results do not contribute. Between 1 and 128 entries, each with a different name. An empty list is rejected; use "all" to leave out no tool's results.
+
+                  - `type: "tool_reference"`
+
+                    Must be "tool_reference".
+
+                  - `name: string`
+
+                    Name of the tool. Compared exactly, so upper and lower case letters are different.
+
+                    minLength: 1, maxLength: 128
+
+            - `server_tool_results: BetaManagedAgentsWebFetchURLSourceToolFilter or null`
+
+              Which of the web_search and web_fetch tools' results contribute URLs that may be fetched. Null when not set, which allows both.
+
+            - `user_input: BetaManagedAgentsWebFetchURLSourceUserInput or null`
+
+              Whether URLs in the text of user messages may be fetched. Null when not set, which allows them.
+
+              - `BetaManagedAgentsWebFetchURLSourceAll object`
+
+                Every URL from this source may be fetched. This is the default.
+
+              - `BetaManagedAgentsWebFetchURLSourceNone object`
+
+                This source contributes no URLs that may be fetched.
+
           - `allowed_domains: optional array of string`
 
           - `blocked_domains: optional array of string`
@@ -785,14 +969,36 @@ curl https://api.anthropic.com/v1/agents \
         "speed": "standard"
       },
       "multiagent": {
-        "agents": [
-          {
-            "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
-            "type": "agent",
-            "version": 1
-          }
-        ],
-        "type": "coordinator"
+        "advisor": {
+          "type": "disabled"
+        },
+        "subagents": {
+          "inline_agents": {
+            "type": "enabled"
+          },
+          "predefined_agents": [
+            {
+              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+              "type": "agent",
+              "version": 1
+            }
+          ],
+          "type": "enabled"
+        },
+        "type": "multiagent_20261001",
+        "workflows": {
+          "inline_agents": {
+            "type": "enabled"
+          },
+          "predefined_agents": [
+            {
+              "id": "agent_011CZkYqphY8vELVzwCUpqiQ",
+              "type": "agent",
+              "version": 1
+            }
+          ],
+          "type": "enabled"
+        }
       },
       "name": "My First Agent",
       "skills": [
@@ -802,7 +1008,7 @@ curl https://api.anthropic.com/v1/agents \
           "version": "1"
         },
         {
-          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTlx",
+          "skill_id": "skill_011CZkZFNu9hAbo3jZPRgTmx",
           "type": "custom",
           "version": "2"
         }

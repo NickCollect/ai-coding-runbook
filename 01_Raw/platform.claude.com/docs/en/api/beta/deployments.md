@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/deployments
-fetched_at: 2026-10-05T06:27:37.178909+00:00
+fetched_at: 2026-10-12T06:50:00.185476+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,8 @@ url: https://platform.claude.com/docs/en/api/beta/deployments
 Create Deployment
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1203,6 +1205,8 @@ List Deployments
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -1934,6 +1938,8 @@ Get Deployment
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -2655,6 +2661,8 @@ Update Deployment
   Unique identifier of the deployment to update.
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -3788,6 +3796,8 @@ Archive Deployment
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -4511,6 +4521,8 @@ Run Deployment Now
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -4895,6 +4907,8 @@ Pause Deployment
   Unique identifier of the deployment to pause.
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -5618,6 +5632,8 @@ Unpause Deployment
   Unique identifier of the deployment to unpause.
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

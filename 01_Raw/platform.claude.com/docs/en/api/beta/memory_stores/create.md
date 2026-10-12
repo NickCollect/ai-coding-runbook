@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/create
-fetched_at: 2026-10-05T06:27:38.089816+00:00
+fetched_at: 2026-10-12T06:50:01.209480+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,6 +16,8 @@ url: https://platform.claude.com/docs/en/api/beta/memory_stores/create
 Create a memory store
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

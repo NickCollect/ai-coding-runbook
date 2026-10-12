@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/sessions/remote/list
-fetched_at: 2026-09-28T06:10:57.828465+00:00
+fetched_at: 2026-10-12T06:50:11.927459+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,6 +82,12 @@ retrieve the next page, and stop when `next_page` is null.
   maxItems: 10
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"x-api-key": optional string`
 

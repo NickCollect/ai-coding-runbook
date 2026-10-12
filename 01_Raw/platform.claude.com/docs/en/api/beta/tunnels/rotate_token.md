@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token
-fetched_at: 2026-10-05T06:27:39.740441+00:00
+fetched_at: 2026-10-12T06:50:03.222156+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,6 +24,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
   ID of the tunnel (`tnl_...`).
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

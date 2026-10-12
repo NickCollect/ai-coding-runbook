@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/users/retrieve
-fetched_at: 2026-09-14T05:36:18.517826+00:00
+fetched_at: 2026-10-12T06:50:05.217565+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,14 @@ Retrieve a member of the organization by user ID.
 - `user_id: string`
 
   ID of the User.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Returns
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws
-fetched_at: 2026-10-05T06:27:23.918845+00:00
+fetched_at: 2026-10-12T06:49:46.244646+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,7 +34,7 @@ Both offerings let you use Claude through AWS, but they differ in architecture, 
 | **API surface**              | Claude API (`/v1/{endpoint}`)                                                                                                                                                                           | Messages API at `/anthropic/v1/messages`                                                                   | Bedrock Converse / InvokeModel                                                                                                 |
 | **Feature availability**     | Typically same-day as Claude API (see [feature limitations](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported))                                       | Per Amazon Bedrock release schedule                                                                        | Per Amazon Bedrock release schedule                                                                                            |
 | **Agent Skills**             | Available                                                                                                                                                                                               | Not available (requires code execution)                                                                    | Not available                                                                                                                  |
-| **Beta features**            | Pass through with `anthropic-beta` headers (see [feature limitations](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported))                             | `anthropic-beta` header not supported                                                                      | `anthropic-beta` header not supported                                                                                          |
+| **Beta features**            | Pass through with `anthropic-beta` headers (see [feature limitations](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported))                             | The beta features Amazon Bedrock supports, through the `anthropic-beta` header                             | The beta features Amazon Bedrock supports, through the `anthropic_beta` field of the InvokeModel request body                  |
 | **Authentication**           | AWS IAM / SigV4 or API key                                                                                                                                                                              | AWS IAM / SigV4                                                                                            | AWS IAM / SigV4 or bearer token                                                                                                |
 | **Billing**                  | AWS Marketplace                                                                                                                                                                                         | AWS (native service)                                                                                       | AWS (native service)                                                                                                           |
 | **Base URL**                 | `aws-external-anthropic.{region}.api.aws`                                                                                                                                                               | `bedrock-mantle.{region}.api.aws`                                                                          | `bedrock-runtime.{region}.amazonaws.com`                                                                                       |
@@ -311,20 +311,20 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java:2.67.0")
-    implementation("com.anthropic:anthropic-java-aws:2.67.0")
+    implementation("com.anthropic:anthropic-java:2.71.0")
+    implementation("com.anthropic:anthropic-java-aws:2.71.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java</artifactId>
-      <version>2.67.0</version>
+      <version>2.71.0</version>
     </dependency>
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>2.67.0</version>
+      <version>2.71.0</version>
     </dependency>
     ```
   </Tab>
@@ -364,6 +364,7 @@ The following models are available on Claude Platform on AWS:
 | Claude Sonnet 5                                                                                       | `claude-sonnet-5`   |
 | Claude Sonnet 4.6                                                                                     | `claude-sonnet-4-6` |
 | Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | `claude-sonnet-4-5` |
+| Claude Haiku 5.5                                                                                      | `claude-haiku-5-5`  |
 | Claude Haiku 4.5                                                                                      | `claude-haiku-4-5`  |
 
 Model IDs are identical to the first-party Claude API. There are no Bedrock-style ARNs or `anthropic.` prefixes.
@@ -392,7 +393,7 @@ Before running these examples, complete the steps in [Before making API calls](h
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-workspace-id: $ANTHROPIC_AWS_WORKSPACE_ID" \
     -d '{
-      "model": "claude-sonnet-5",
+      "model": "claude-sonnet-5-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "Hello!"}
@@ -409,7 +410,7 @@ Before running these examples, complete the steps in [Before making API calls](h
   ant messages create \
     --base-url https://aws-external-anthropic.us-west-2.api.aws \
     --workspace-id "$ANTHROPIC_AWS_WORKSPACE_ID" \
-    --model claude-sonnet-5 \
+    --model claude-sonnet-5-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello!"}' \
     --transform content
@@ -421,7 +422,7 @@ Before running these examples, complete the steps in [Before making API calls](h
   client = AnthropicAWS()
 
   message = client.messages.create(
-      model="claude-sonnet-5",
+      model="claude-sonnet-5-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello!"}],
   )
@@ -434,7 +435,7 @@ Before running these examples, complete the steps in [Before making API calls](h
   const client = new AnthropicAws();
 
   const message = await client.messages.create({
-    model: "claude-sonnet-5",
+    model: "claude-sonnet-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   });
@@ -449,7 +450,7 @@ Before running these examples, complete the steps in [Before making API calls](h
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeSonnet5,
+      Model = Model.ClaudeSonnet5_5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello!" }]
   });
@@ -464,7 +465,7 @@ Before running these examples, complete the steps in [Before making API calls](h
   }
 
   message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeSonnet5,
+  	Model:     anthropic.ModelClaudeSonnet5_5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
@@ -492,7 +493,7 @@ Before running these examples, complete the steps in [Before making API calls](h
 
       Message message = client.messages().create(
           MessageCreateParams.builder()
-              .model(Model.CLAUDE_SONNET_5)
+              .model(Model.CLAUDE_SONNET_5_5)
               .maxTokens(1024)
               .addUserMessage("Hello!")
               .build()
@@ -508,7 +509,7 @@ Before running these examples, complete the steps in [Before making API calls](h
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-sonnet-5',
+      model: 'claude-sonnet-5-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello!']],
   );
@@ -522,7 +523,7 @@ Before running these examples, complete the steps in [Before making API calls](h
   client = Anthropic::AWSClient.new
 
   message = client.messages.create(
-    model: "claude-sonnet-5",
+    model: "claude-sonnet-5-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   )
@@ -551,8 +552,8 @@ Claude Platform on AWS uses Claude API endpoints directly, which means you get f
 * **Beta features:** Pass the standard `anthropic-beta` header to access beta features, just as you would with the Claude API.
 * **Agent Skills:** Use pre-built and custom [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) with the same `container.skills` parameter as the Claude API. All pre-built Skills (PowerPoint, Excel, Word, PDF) work out of the box.
 * **Code execution:** Run code in Anthropic's managed sandbox using the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool).
-* **Tool use:** Computer use and all other [tool use capabilities](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) are available.
-* **Extended thinking:** Enable extended thinking with the same parameters as the Claude API.
+* **Tool use:** All [tool use capabilities](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) are available except the computer use and browser use toolsets; see [Features not supported](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported).
+* **Thinking:** [Adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking), the [effort parameter](https://platform.claude.com/docs/en/build-with-claude/effort), and, on the models that support it, [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) work with the same parameters as the Claude API.
 * **Streaming:** Full SSE streaming support for real-time responses.
 * **Batch processing:** Submit batch requests for high-throughput workloads.
 * **Prompt caching:** Cache tools, system prompts, and message history to reduce latency and cost. All prompt caching capabilities (5-minute TTL, 1-hour TTL, and automatic caching) are available.
@@ -576,7 +577,7 @@ Session behavior on Claude Platform on AWS differs from first-party Claude Manag
 The following capabilities are not currently available on Claude Platform on AWS:
 
 * **HIPAA readiness:** Anthropic's HIPAA-ready program is not available. See [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention).
-* **Computer use and browser use toolsets:** `computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Claude Platform on AWS. The beta [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions) tool versions remain available.
+* **Computer use and browser use toolsets:** `computer_toolset_20260801` and `browser_toolset_20260801` are not currently available on Claude Platform on AWS. The beta computer use tool versions remain available for the models listed under [Earlier tool versions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#earlier-tool-versions).
 
 - **Admin API:** Workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`) and external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](https://platform.claude.com/docs/en/manage-claude/cmek); keys are validated when attached to a workspace rather than through a validate endpoint) are available. Other Admin API endpoints (organization members, workspace members, invites, API keys, usage reports, cost reports, and rate limit reports) are not currently available. View usage and cost data in the [Claude Console](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#using-the-claude-console) instead. AWS IAM manages organization membership.
 - **Workspace member management:** Adding or removing users from individual workspaces is not available. AWS IAM policies on workspace ARNs control access.
@@ -600,7 +601,7 @@ Claude Platform on AWS supports the following inference geographies:
 Set the inference geography per request with the `inference_geo` parameter:
 
 <Note>
-  The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, or Claude Haiku 4.5 return a 400 error. See [Data residency](https://platform.claude.com/docs/en/manage-claude/data-residency) for model availability details.
+  The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5 (deprecated), or Claude Haiku 4.5 return a 400 error. See [Data residency](https://platform.claude.com/docs/en/manage-claude/data-residency) for model availability details.
 </Note>
 
 <CodeGroup>
@@ -615,7 +616,7 @@ Set the inference geography per request with the `inference_geo` parameter:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-workspace-id: $ANTHROPIC_AWS_WORKSPACE_ID" \
     -d '{
-      "model": "claude-sonnet-5",
+      "model": "claude-sonnet-5-5",
       "max_tokens": 1024,
       "inference_geo": "us",
       "messages": [
@@ -633,7 +634,7 @@ Set the inference geography per request with the `inference_geo` parameter:
   ant messages create \
     --base-url https://aws-external-anthropic.us-west-2.api.aws \
     --workspace-id "$ANTHROPIC_AWS_WORKSPACE_ID" \
-    --model claude-sonnet-5 \
+    --model claude-sonnet-5-5 \
     --max-tokens 1024 \
     --inference-geo us \
     --message '{role: user, content: "Hello!"}' \
@@ -645,7 +646,7 @@ Set the inference geography per request with the `inference_geo` parameter:
 
   client = AnthropicAWS()
   message = client.messages.create(
-      model="claude-sonnet-5",
+      model="claude-sonnet-5-5",
       max_tokens=1024,
       inference_geo="us",
       messages=[{"role": "user", "content": "Hello!"}],
@@ -657,7 +658,7 @@ Set the inference geography per request with the `inference_geo` parameter:
   import AnthropicAws from "@anthropic-ai/aws-sdk";
   const client = new AnthropicAws();
   const message = await client.messages.create({
-    model: "claude-sonnet-5",
+    model: "claude-sonnet-5-5",
     max_tokens: 1024,
     inference_geo: "us",
     messages: [{ role: "user", content: "Hello!" }]
@@ -673,7 +674,7 @@ Set the inference geography per request with the `inference_geo` parameter:
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeSonnet5,
+      Model = Model.ClaudeSonnet5_5,
       MaxTokens = 1024,
       InferenceGeo = "us",
       Messages = [new() { Role = Role.User, Content = "Hello!" }]
@@ -689,7 +690,7 @@ Set the inference geography per request with the `inference_geo` parameter:
   }
 
   message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
-  	Model:        anthropic.ModelClaudeSonnet5,
+  	Model:        anthropic.ModelClaudeSonnet5_5,
   	MaxTokens:    1024,
   	InferenceGeo: anthropic.String("us"),
   	Messages: []anthropic.MessageParam{
@@ -718,7 +719,7 @@ Set the inference geography per request with the `inference_geo` parameter:
 
       Message message = client.messages().create(
           MessageCreateParams.builder()
-              .model(Model.CLAUDE_SONNET_5)
+              .model(Model.CLAUDE_SONNET_5_5)
               .maxTokens(1024)
               .inferenceGeo("us")
               .addUserMessage("Hello!")
@@ -735,7 +736,7 @@ Set the inference geography per request with the `inference_geo` parameter:
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-sonnet-5',
+      model: 'claude-sonnet-5-5',
       maxTokens: 1024,
       inferenceGeo: 'us',
       messages: [['role' => 'user', 'content' => 'Hello!']],
@@ -750,7 +751,7 @@ Set the inference geography per request with the `inference_geo` parameter:
   client = Anthropic::AWSClient.new
 
   message = client.messages.create(
-    model: "claude-sonnet-5",
+    model: "claude-sonnet-5-5",
     max_tokens: 1024,
     inference_geo: "us",
     messages: [{ role: "user", content: "Hello!" }]
@@ -838,7 +839,7 @@ The Claude Console does not support organization switching for Claude Platform o
 
 Organizations on Claude Platform on AWS are placed on the Start tier. Anthropic manages rate limits directly, not through AWS quota systems.
 
-Organizations on Claude Platform on AWS can move to a higher usage tier automatically as they build a history of paid AWS Marketplace invoices. The self-service **Request rate limit increase** flow in the Claude Console is not available: the Rate limits page directs you to your Anthropic account representative instead.
+Organizations on Claude Platform on AWS can move to a higher usage tier automatically as they build a history of paid AWS Marketplace invoices. The self-service **Request tier increase** flow in the Claude Console is not available: the Rate limits page directs you to your Anthropic account representative instead.
 
 To request higher limits, contact your Anthropic account representative or [Anthropic support](https://support.claude.com). Include the following in your request:
 
@@ -891,7 +892,7 @@ Each response includes two request IDs in the response headers:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-workspace-id: $ANTHROPIC_AWS_WORKSPACE_ID" \
     -d '{
-      "model": "claude-sonnet-5",
+      "model": "claude-sonnet-5-5",
       "max_tokens": 1024,
       "messages": [
         {"role": "user", "content": "Hello!"}
@@ -910,7 +911,7 @@ Each response includes two request IDs in the response headers:
   client = AnthropicAWS()
 
   response = client.messages.with_raw_response.create(
-      model="claude-sonnet-5",
+      model="claude-sonnet-5-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello!"}],
   )
@@ -929,7 +930,7 @@ Each response includes two request IDs in the response headers:
 
   const { data: message, response } = await client.messages
     .create({
-      model: "claude-sonnet-5",
+      model: "claude-sonnet-5-5",
       max_tokens: 1024,
       messages: [{ role: "user", content: "Hello!" }]
     })
@@ -948,7 +949,7 @@ Each response includes two request IDs in the response headers:
 
   var response = await client.WithRawResponse.Messages.Create(new()
   {
-      Model = Model.ClaudeSonnet5,
+      Model = Model.ClaudeSonnet5_5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello!" }]
   });
@@ -968,7 +969,7 @@ Each response includes two request IDs in the response headers:
   message, err := client.Messages.New(
   	context.Background(),
   	anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeSonnet5,
+  		Model:     anthropic.ModelClaudeSonnet5_5,
   		MaxTokens: 1024,
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock("Hello!")),
@@ -1001,7 +1002,7 @@ Each response includes two request IDs in the response headers:
 
       HttpResponseFor<Message> response = client.messages().withRawResponse().create(
           MessageCreateParams.builder()
-              .model(Model.CLAUDE_SONNET_5)
+              .model(Model.CLAUDE_SONNET_5_5)
               .maxTokens(1024)
               .addUserMessage("Hello!")
               .build()
@@ -1019,7 +1020,7 @@ Each response includes two request IDs in the response headers:
   $client = new Client();
 
   $response = $client->messages->raw->create(
-      model: 'claude-sonnet-5',
+      model: 'claude-sonnet-5-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello!']],
   );
@@ -1069,7 +1070,7 @@ If you're on the current Bedrock integration, the request body format is already
 * Typically same-day access to new models and features (see [feature limitations](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported))
 * Agent Skills for document generation (PowerPoint, Excel, Word, PDF)
 * Code execution in Anthropic's managed sandbox
-* Beta features through the `anthropic-beta` header (see [feature limitations](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported))
+* Claude API beta features that Amazon Bedrock doesn't offer, through the `anthropic-beta` header (see [feature limitations](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#features-not-supported))
 * Claude Console for quota visibility and usage analytics
 * Direct Anthropic support
 * API key authentication as an alternative to SigV4 (see [API key authentication](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#api-key-authentication))

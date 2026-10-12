@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/home
-fetched_at: 2026-10-05T06:27:20.630292+00:00
+fetched_at: 2026-10-12T06:49:42.398600+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,6 +28,174 @@ with Claude"
     <HomeQuickChip icon="CodeBrackets" href="https://platform.claude.com/docs/en/api/overview">
       API reference
     </HomeQuickChip>
+
+    ```python Python
+    import anthropic
+
+    client = anthropic.Anthropic()
+
+    message = client.messages.create(
+        model="claude-opus-5-5",
+        max_tokens=1024,
+        messages=[
+            {
+                "role": "user",
+                "content": "Hello, Claude",
+            }
+        ],
+    )
+    for block in message.content:
+        if block.type == "text":
+            print(block.text)
+    ```
+
+    ```typescript TypeScript
+    import Anthropic from "@anthropic-ai/sdk";
+
+    const client = new Anthropic();
+
+    const msg = await client.messages.create({
+      model: "claude-opus-5-5",
+      max_tokens: 1024,
+      messages: [
+        {
+          role: "user",
+          content: "Hello, Claude"
+        }
+      ]
+    });
+    for (const block of msg.content) {
+      if (block.type === "text") {
+        console.log(block.text);
+      }
+    }
+    ```
+
+    ```go Go
+    import "github.com/anthropics/anthropic-sdk-go"
+
+    client := anthropic.NewClient()
+    msg, _ := client.Messages.New(
+      context.TODO(),
+      anthropic.MessageNewParams{
+        Model:     anthropic.ModelClaudeOpus5_5,
+        MaxTokens: 1024,
+        Messages: []anthropic.MessageParam{
+          anthropic.NewUserMessage(
+            anthropic.NewTextBlock("Hello, Claude"),
+          ),
+        },
+      },
+    )
+    for _, block := range msg.Content {
+      if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+        fmt.Println(textBlock.Text)
+      }
+    }
+    ```
+
+    ```java Java
+    import com.anthropic.client.okhttp.AnthropicOkHttpClient;
+
+    var client = AnthropicOkHttpClient
+      .fromEnv();
+
+    var msg = client.messages().create(
+      MessageCreateParams.builder()
+        .model("claude-opus-5-5")
+        .maxTokens(1024)
+        .addUserMessage("Hello, Claude")
+        .build()
+    );
+    for (var block : msg.content()) {
+      block.text().ifPresent(
+        textBlock -> System.out.println(textBlock.text()));
+    }
+    ```
+
+    ```ruby Ruby
+    require "anthropic"
+
+    client = Anthropic::Client.new
+
+    msg = client.messages.create(
+      model: "claude-opus-5-5",
+      max_tokens: 1024,
+      messages: [{
+        role: "user",
+        content: "Hello, Claude"
+      }]
+    )
+    msg.content.each do |block|
+      puts block.text if block.type == :text
+    end
+    ```
+
+    ```php PHP
+    use Anthropic\Client;
+
+    $client = new Client();
+
+    $message = $client->messages->create(
+      model: "claude-opus-5-5",
+      maxTokens: 1024,
+      messages: [['role' => 'user',
+        'content' => 'Hello, Claude']],
+    );
+    foreach ($message->content as $block) {
+      if ($block->type === 'text') {
+        echo $block->text, PHP_EOL;
+      }
+    }
+    ```
+
+    ```csharp C#
+    using Anthropic;
+
+    var client = new AnthropicClient();
+
+    var msg = await client.Messages
+      .Create(new() {
+        Model = "claude-opus-5-5",
+        MaxTokens = 1024,
+        Messages = [new() {
+          Role = Role.User,
+          Content = "Hello, Claude"
+        }]
+      });
+    foreach (var block in msg.Content)
+    {
+      if (block.TryPickText(out var textBlock))
+      {
+        Console.WriteLine(textBlock.Text);
+      }
+    }
+    ```
+
+    ```bash cURL
+    curl https://api.anthropic.com/v1/messages \
+      -H "content-type: application/json" \
+      -H "x-api-key: $ANTHROPIC_API_KEY" \
+      -H "anthropic-version: 2023-06-01" \
+      -d '{
+        "model": "claude-opus-5-5",
+        "max_tokens": 1024,
+        "messages": [{
+          "role": "user",
+          "content": "Hello, Claude"
+        }]
+      }'
+    ```
+
+    ```bash CLI
+    ant messages create \
+      --model claude-opus-5-5 \
+      --max-tokens 1024 \
+      --message '{
+        role: user,
+        content: "Hello, Claude"
+      }'
+    ```
   </HomeHero>
 
   <HomeSection>
@@ -250,7 +418,7 @@ with Claude"
     * [Claude Fable 5.1](https://platform.claude.com/docs/en/models/fable-5-1/overview) (`claude-fable-5-1`) — New — *For demanding reasoning and long-horizon agentic work* — Most capable · Research · Multi-day tasks
     * [Claude Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview) (`claude-opus-5-5`) — New — *For long-running agentic coding and knowledge work* — Complex projects · Agents · Coding
     * [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) (`claude-sonnet-5-5`) — New — *The best combination of speed and intelligence* — Everyday tasks · Writing · Cost-efficient
-    * [Claude Haiku 4.5](https://platform.claude.com/docs/en/models/haiku-4-5/overview) (`claude-haiku-4-5`) — *The fastest model with near-frontier intelligence* — Fastest · Lowest cost · High volume
+    * [Claude Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview) (`claude-haiku-5-5`) — New — *For high-volume, latency-sensitive tasks such as classification, extraction, and routing* — Fastest · Lowest cost · High volume
   </HomeSection>
 
   <HomeSection last>

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/effective
-fetched_at: 2026-10-05T06:27:44.136145+00:00
+fetched_at: 2026-10-12T06:50:08.063305+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,9 @@ List each member's effective spend limit and period-to-date spend.
 
 Returns one row per (member, period) the member resolves a spend limit
 for, with the `source` scope the spend limit was inherited from.
-Paginates by member, so a member's periods never split across pages.
+Paginates by member, so a member's periods never split across pages. Listing
+Claude Console limits is in an early access preview. To request access,
+contact your Anthropic account team.
 
 ### Query parameters
 
@@ -50,6 +52,14 @@ Paginates by member, so a member's periods never split across pages.
   Restrict the report to these members, by tagged user ID (`user_...`). At most 100 entries.
 
   maxItems: 100
+
+### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ### Returns
 

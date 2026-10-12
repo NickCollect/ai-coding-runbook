@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/cost_report/retrieve
-fetched_at: 2026-10-05T06:27:42.698423+00:00
+fetched_at: 2026-10-12T06:50:06.424464+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,6 +55,12 @@ Get Cost Report
   Optionally set to the `next_page` token from the previous response.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference
-fetched_at: 2026-09-28T06:10:39.556917+00:00
+fetched_at: 2026-10-12T06:49:44.393318+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Anthropic provides two kinds of tools: **server tools** that execute on Anthropi
 | [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)     | `computer_toolset_20260801` `computer_20251124` `computer_20250124`                 | Client    | None `computer-use-2025-11-24` `computer-use-2025-01-24`            |
 | [Browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool)       | `browser_toolset_20260801`                                                          | Client    | None                                                                |
 
-For model compatibility, see each tool's page. Supported models vary by tool and by tool version.
+For model compatibility, see each tool's page. Supported models vary by tool and by tool version. To check from your code whether a model accepts web search or code execution, see [Using the Models API](https://platform.claude.com/docs/en/models/overview#using-the-models-api).
 
 <Note>
   The tool search `type` values also accept undated aliases: `tool_search_tool_regex` and `tool_search_tool_bm25`. These resolve to the latest dated version.

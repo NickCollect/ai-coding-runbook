@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/certificates/archive
-fetched_at: 2026-10-05T06:27:39.960619+00:00
+fetched_at: 2026-10-12T06:50:03.428193+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,6 +28,8 @@ Archives a tunnel certificate, removing it from the set Anthropic trusts for the
   ID of the certificate to archive (`tcrt_...`).
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

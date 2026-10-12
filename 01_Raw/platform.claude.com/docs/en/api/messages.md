@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages
-fetched_at: 2026-10-05T06:27:30.458402+00:00
+fetched_at: 2026-10-12T06:49:53.335635+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,9 +19,15 @@ Send a structured list of input messages with text and/or image content, and the
 
 The Messages API can be used for either single queries or stateless multi-turn conversations.
 
-Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/get-started)
+Learn more about the Messages API in our [user guide](https://platform.claude.com/docs/en/get-started?sdk_languages=http)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -41,9 +47,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-  Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+  Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http#pre-warming-the-cache) without generating a response.
 
-  Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
+  Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview?sdk_languages=http) for details.
 
   minimum: 0
 
@@ -55,7 +61,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response. This is called prefill. On models that don't support prefill, creating a message that ends with a partial `assistant` response returns a 400 error. See [Prefill not supported](https://platform.claude.com/docs/en/api/errors?sdk_languages=http#prefill-not-supported).
 
   Example with a single `user` message:
 
@@ -73,7 +79,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   ]
   ```
 
-  Example with a partially-filled response from Claude:
+  Example with a partially-filled response from Claude, for models that support prefill:
 
   ```json
   [
@@ -92,9 +98,9 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
+  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages?sdk_languages=http).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices?sdk_languages=http#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -127,7 +133,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
             - `"5m"`
 
@@ -1081,6 +1087,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `"claude-haiku-5-5"`
+
+    Fastest model for high-volume, real-time tasks
+
   - `"claude-sonnet-5-5"`
 
     Efficient model for coding and agents
@@ -1131,11 +1141,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `"claude-haiku-4-5"`
 
-    Fastest model with near-frontier intelligence
-
   - `"claude-haiku-4-5-20251001"`
-
-    Fastest model with near-frontier intelligence
 
   - `"claude-opus-4-5"`
 
@@ -1257,7 +1263,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   - `format: optional JSONOutputFormat or null`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs?sdk_languages=http)
 
     - `type: "json_schema"`
 
@@ -1269,7 +1275,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-  Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
+  Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers?sdk_languages=http) for details.
 
   - `"auto"`
 
@@ -1287,13 +1293,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-  In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](https://platform.claude.com/docs/en/build-with-claude/streaming#streaming-with-sdks) for an example in each language.
+  In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](https://platform.claude.com/docs/en/build-with-claude/streaming?sdk_languages=http#streaming-with-sdks) for an example in each language.
 
 - `system: optional string or array of TextBlockParam`
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices?sdk_languages=http#give-claude-a-role).
 
   - `string`
 
@@ -1313,11 +1319,11 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
 - `thinking: optional ThinkingConfigParam`
 
-  Configuration for enabling Claude's extended thinking.
+  Configuration for Claude's thinking.
 
-  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+  With `{"type": "adaptive"}`, Claude decides when and how much to think. With `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of at least 1,024. Thinking tokens count toward your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+  Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#configuring-thinking) for each model's behavior.
 
   - `ThinkingConfigEnabled object`
 
@@ -1329,13 +1335,13 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
       minimum: 1024
 
     - `display: optional "summarized" or "omitted" or null`
 
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
       - `"summarized"`
 
@@ -1355,7 +1361,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `display: optional "summarized" or "omitted" or null`
 
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
       - `"summarized"`
 
@@ -1417,7 +1423,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools?sdk_languages=http), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool?sdk_languages=http)).
 
   Each tool definition includes:
 
@@ -1473,7 +1479,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
+  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview?sdk_languages=http) for more details.
 
   - `Tool object`
 
@@ -3328,7 +3334,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
       - `thinking: string`
 
@@ -3346,7 +3352,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
     - `ToolUseBlock object`
 
@@ -3926,6 +3932,10 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
+
     - `"claude-sonnet-5-5"`
 
       Efficient model for coding and agents
@@ -3976,11 +3986,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
     - `"claude-haiku-4-5"`
 
-      Fastest model with near-frontier intelligence
-
     - `"claude-haiku-4-5-20251001"`
-
-      Fastest model with near-frontier intelligence
 
     - `"claude-opus-4-5"`
 
@@ -4048,7 +4054,7 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `"reasoning_extraction"`
 
-        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
       - `"general_harms"`
 
@@ -4522,9 +4528,15 @@ Count the number of tokens in a Message.
 
 The Token Count API can be used to count the number of tokens in a Message, including tools, images, and documents, without creating it.
 
-Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting)
+Learn more about token counting in our [user guide](https://platform.claude.com/docs/en/build-with-claude/token-counting?sdk_languages=http)
 
 ### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -4546,7 +4558,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+  If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response. This is called prefill. On models that don't support prefill, creating a message that ends with a partial `assistant` response returns a 400 error. See [Prefill not supported](https://platform.claude.com/docs/en/api/errors?sdk_languages=http#prefill-not-supported).
 
   Example with a single `user` message:
 
@@ -4564,7 +4576,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   ]
   ```
 
-  Example with a partially-filled response from Claude:
+  Example with a partially-filled response from Claude, for models that support prefill:
 
   ```json
   [
@@ -4583,9 +4595,9 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
   {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
   ```
 
-  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
+  See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages?sdk_languages=http).
 
-  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+  Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices?sdk_languages=http#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
   There is a limit of 100,000 messages in a single request.
 
@@ -4618,7 +4630,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
             - `"5m"`
 
@@ -5572,6 +5584,10 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+  - `"claude-haiku-5-5"`
+
+    Fastest model for high-volume, real-time tasks
+
   - `"claude-sonnet-5-5"`
 
     Efficient model for coding and agents
@@ -5622,11 +5638,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `"claude-haiku-4-5"`
 
-    Fastest model with near-frontier intelligence
-
   - `"claude-haiku-4-5-20251001"`
-
-    Fastest model with near-frontier intelligence
 
   - `"claude-opus-4-5"`
 
@@ -5682,7 +5694,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   - `format: optional JSONOutputFormat or null`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs?sdk_languages=http)
 
     - `type: "json_schema"`
 
@@ -5694,7 +5706,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   System prompt.
 
-  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
+  A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices?sdk_languages=http#give-claude-a-role).
 
   - `string`
 
@@ -5714,11 +5726,11 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
 - `thinking: optional ThinkingConfigParam`
 
-  Configuration for enabling Claude's extended thinking.
+  Configuration for Claude's thinking.
 
-  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+  With `{"type": "adaptive"}`, Claude decides when and how much to think. With `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of at least 1,024. Thinking tokens count toward your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+  Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#configuring-thinking) for each model's behavior.
 
   - `ThinkingConfigEnabled object`
 
@@ -5730,13 +5742,13 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
       minimum: 1024
 
     - `display: optional "summarized" or "omitted" or null`
 
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
       - `"summarized"`
 
@@ -5756,7 +5768,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
     - `display: optional "summarized" or "omitted" or null`
 
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
       - `"summarized"`
 
@@ -5818,7 +5830,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
+  There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools?sdk_languages=http), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool?sdk_languages=http)).
 
   Each tool definition includes:
 
@@ -5874,7 +5886,7 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
 
   Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
+  See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview?sdk_languages=http) for more details.
 
   - `Tool object`
 
@@ -7713,7 +7725,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -7771,6 +7783,43 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"output_file_too_large"`
 
+### Browser Click Target
+
+- `BrowserClickTarget = BrowserCoordinateTarget or BrowserRefTarget`
+
+  Where to act: either a viewport coordinate or an element reference.
+
+  - `BrowserCoordinateTarget object`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `BrowserRefTarget object`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
 ### Browser Close Tab Config
 
 - `BrowserCloseTabConfig object`
@@ -7784,6 +7833,89 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Close Tab Input
+
+- `BrowserCloseTabInput object`
+
+  Close the tab with the given tab_id.
+
+  - `tab_id: string`
+
+    The tab to close.
+
+### Browser Close Tab Tool Use Block
+
+- `BrowserCloseTabToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserCloseTabInput`
+
+    Close the tab with the given tab_id.
+
+    - `tab_id: string`
+
+      The tab to close.
+
+  - `name: "close_tab"`
+
+  - `toolset_name: "browser"`
+
+### Browser Coordinate Target
+
+- `BrowserCoordinateTarget object`
+
+  A point in the browser viewport, in viewport pixels (the same frame as a
+  full-viewport screenshot).
+
+  - `type: "coordinate"`
+
+  - `x: number`
+
+    Pixels from the left edge of the viewport.
+
+    minimum: 0
+
+  - `y: number`
+
+    Pixels from the top edge of the viewport.
+
+    minimum: 0
 
 ### Browser Double Click Config
 
@@ -7799,6 +7931,146 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Double Click Input
+
+- `BrowserDoubleClickInput object`
+
+  Double left-click at a viewport coordinate or on an element by reference.
+
+  - `target: BrowserClickTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `BrowserCoordinateTarget object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `BrowserRefTarget object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string or null`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Double Click Tool Use Block
+
+- `BrowserDoubleClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserDoubleClickInput`
+
+    Double left-click at a viewport coordinate or on an element by reference.
+
+    - `target: BrowserClickTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `BrowserCoordinateTarget object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `BrowserRefTarget object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string or null`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "double_click"`
+
+  - `toolset_name: "browser"`
+
 ### Browser File Upload Config
 
 - `BrowserFileUploadConfig object`
@@ -7812,6 +8084,118 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser File Upload Input
+
+- `BrowserFileUploadInput object`
+
+  Set the value of a file-input element to one or more files. The target must be an
+  element reference; at least one of paths or document_ids is required.
+
+  - `target: BrowserRefTarget`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `document_ids: optional array of string or null`
+
+    References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+    minItems: 1
+
+  - `paths: optional array of string or null`
+
+    File paths on the browser executor's filesystem.
+
+    minItems: 1
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser File Upload Tool Use Block
+
+- `BrowserFileUploadToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserFileUploadInput`
+
+    Set the value of a file-input element to one or more files. The target must be an
+    element reference; at least one of paths or document_ids is required.
+
+    - `target: BrowserRefTarget`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `document_ids: optional array of string or null`
+
+      References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+      minItems: 1
+
+    - `paths: optional array of string or null`
+
+      File paths on the browser executor's filesystem.
+
+      minItems: 1
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "file_upload"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Find Config
 
@@ -7827,6 +8211,78 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Find Input
+
+- `BrowserFindInput object`
+
+  Find elements matching a natural-language description (e.g. "search bar", "add to
+  cart button") and return up to 20 matches with element references.
+
+  - `query: string`
+
+    Natural-language description of the element(s) to find.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Find Tool Use Block
+
+- `BrowserFindToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserFindInput`
+
+    Find elements matching a natural-language description (e.g. "search bar", "add to
+    cart button") and return up to 20 matches with element references.
+
+    - `query: string`
+
+      Natural-language description of the element(s) to find.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "find"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Form Input Config
 
 - `BrowserFormInputConfig object`
@@ -7840,6 +8296,124 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Form Input Input
+
+- `BrowserFormInputInput object`
+
+  Set the value of a form element (input, textarea, select, checkbox). Use a
+  boolean for checkboxes, an option value or text for selects.
+
+  - `target: BrowserRefTarget`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `value: BrowserFormInputValue`
+
+    The value to set.
+
+    - `string`
+
+    - `number`
+
+    - `boolean`
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Form Input Tool Use Block
+
+- `BrowserFormInputToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserFormInputInput`
+
+    Set the value of a form element (input, textarea, select, checkbox). Use a
+    boolean for checkboxes, an option value or text for selects.
+
+    - `target: BrowserRefTarget`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `value: BrowserFormInputValue`
+
+      The value to set.
+
+      - `string`
+
+      - `number`
+
+      - `boolean`
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "form_input"`
+
+  - `toolset_name: "browser"`
+
+### Browser Form Input Value
+
+- `BrowserFormInputValue = string or number or boolean`
+
+  - `string`
+
+  - `number`
+
+  - `boolean`
 
 ### Browser Get Page Text Config
 
@@ -7855,6 +8429,70 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Get Page Text Input
+
+- `BrowserGetPageTextInput object`
+
+  Return the page's visible text content as plain text, prioritizing article
+  content. Suited to articles, documentation, and other text-heavy pages.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Get Page Text Tool Use Block
+
+- `BrowserGetPageTextToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserGetPageTextInput`
+
+    Return the page's visible text content as plain text, prioritizing article
+    content. Suited to articles, documentation, and other text-heavy pages.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "get_page_text"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Hold Key Config
 
 - `BrowserHoldKeyConfig object`
@@ -7868,6 +8506,90 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Hold Key Input
+
+- `BrowserHoldKeyInput object`
+
+  Hold a key or key chord down for a duration, then release it. Uses the same key
+  names and "+" chord syntax as the key action.
+
+  - `duration: number`
+
+    Seconds to hold the key down (maximum 30).
+
+    minimum: 0, maximum: 30
+
+  - `text: string`
+
+    The key or chord to hold.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Hold Key Tool Use Block
+
+- `BrowserHoldKeyToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserHoldKeyInput`
+
+    Hold a key or key chord down for a duration, then release it. Uses the same key
+    names and "+" chord syntax as the key action.
+
+    - `duration: number`
+
+      Seconds to hold the key down (maximum 30).
+
+      minimum: 0, maximum: 30
+
+    - `text: string`
+
+      The key or chord to hold.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "hold_key"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Hover Config
 
@@ -7883,6 +8605,138 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Hover Input
+
+- `BrowserHoverInput object`
+
+  Move the cursor to a coordinate or element without clicking.
+
+  - `target: BrowserClickTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `BrowserCoordinateTarget object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `BrowserRefTarget object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Hover Tool Use Block
+
+- `BrowserHoverToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserHoverInput`
+
+    Move the cursor to a coordinate or element without clicking.
+
+    - `target: BrowserClickTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `BrowserCoordinateTarget object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `BrowserRefTarget object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "hover"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Javascript Exec Config
 
 - `BrowserJavascriptExecConfig object`
@@ -7897,6 +8751,80 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Javascript Exec Input
+
+- `BrowserJavascriptExecInput object`
+
+  Execute JavaScript in the page context and return the value of the last
+  expression. The code runs with access to the DOM, `window`, and page variables.
+  Write the expression you want evaluated — do NOT use `return`.
+
+  - `text: string`
+
+    JavaScript to execute in the page context.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Javascript Exec Tool Use Block
+
+- `BrowserJavascriptExecToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserJavascriptExecInput`
+
+    Execute JavaScript in the page context and return the value of the last
+    expression. The code runs with access to the DOM, `window`, and page variables.
+    Write the expression you want evaluated — do NOT use `return`.
+
+    - `text: string`
+
+      JavaScript to execute in the page context.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "javascript_exec"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Key Config
 
 - `BrowserKeyConfig object`
@@ -7910,6 +8838,92 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Key Input
+
+- `BrowserKeyInput object`
+
+  Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+  "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+  Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+  - `text: string`
+
+    The key, chord, or space-separated sequence to press.
+
+  - `repeat: optional number or null`
+
+    Number of times to repeat. Default 1.
+
+    minimum: 1, maximum: 100
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Key Tool Use Block
+
+- `BrowserKeyToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserKeyInput`
+
+    Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+    "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+    Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+    - `text: string`
+
+      The key, chord, or space-separated sequence to press.
+
+    - `repeat: optional number or null`
+
+      Number of times to repeat. Default 1.
+
+      minimum: 1, maximum: 100
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "key"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Left Click Config
 
@@ -7939,6 +8953,256 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Left Click Drag Input
+
+- `BrowserLeftClickDragInput object`
+
+  Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+  - `from: BrowserCoordinateTarget`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `target: BrowserCoordinateTarget`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Left Click Drag Tool Use Block
+
+- `BrowserLeftClickDragToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserLeftClickDragInput`
+
+    Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+    - `from: BrowserCoordinateTarget`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `target: BrowserCoordinateTarget`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_click_drag"`
+
+  - `toolset_name: "browser"`
+
+### Browser Left Click Input
+
+- `BrowserLeftClickInput object`
+
+  Left-click at a viewport coordinate or on an element by reference.
+
+  - `target: BrowserClickTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `BrowserCoordinateTarget object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `BrowserRefTarget object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string or null`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Left Click Tool Use Block
+
+- `BrowserLeftClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserLeftClickInput`
+
+    Left-click at a viewport coordinate or on an element by reference.
+
+    - `target: BrowserClickTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `BrowserCoordinateTarget object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `BrowserRefTarget object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string or null`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_click"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Left Mouse Down Config
 
 - `BrowserLeftMouseDownConfig object`
@@ -7952,6 +9216,108 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Left Mouse Down Input
+
+- `BrowserLeftMouseDownInput object`
+
+  Press and hold the left mouse button at a viewport coordinate. Pair with
+  left_mouse_up to perform a custom drag.
+
+  - `target: BrowserCoordinateTarget`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Left Mouse Down Tool Use Block
+
+- `BrowserLeftMouseDownToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserLeftMouseDownInput`
+
+    Press and hold the left mouse button at a viewport coordinate. Pair with
+    left_mouse_up to perform a custom drag.
+
+    - `target: BrowserCoordinateTarget`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_mouse_down"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Left Mouse Up Config
 
@@ -7967,6 +9333,106 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Left Mouse Up Input
+
+- `BrowserLeftMouseUpInput object`
+
+  Release the left mouse button at a viewport coordinate.
+
+  - `target: BrowserCoordinateTarget`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Left Mouse Up Tool Use Block
+
+- `BrowserLeftMouseUpToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserLeftMouseUpInput`
+
+    Release the left mouse button at a viewport coordinate.
+
+    - `target: BrowserCoordinateTarget`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "left_mouse_up"`
+
+  - `toolset_name: "browser"`
+
 ### Browser List Tabs Config
 
 - `BrowserListTabsConfig object`
@@ -7980,6 +9446,60 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser List Tabs Input
+
+- `BrowserListTabsInput object`
+
+  List all open tabs with each tab's tab_id, title, and URL.
+
+### Browser List Tabs Tool Use Block
+
+- `BrowserListTabsToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserListTabsInput`
+
+    List all open tabs with each tab's tab_id, title, and URL.
+
+  - `name: "list_tabs"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Middle Click Config
 
@@ -7995,6 +9515,146 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Middle Click Input
+
+- `BrowserMiddleClickInput object`
+
+  Middle-click at a viewport coordinate or on an element by reference.
+
+  - `target: BrowserClickTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `BrowserCoordinateTarget object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `BrowserRefTarget object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string or null`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Middle Click Tool Use Block
+
+- `BrowserMiddleClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserMiddleClickInput`
+
+    Middle-click at a viewport coordinate or on an element by reference.
+
+    - `target: BrowserClickTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `BrowserCoordinateTarget object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `BrowserRefTarget object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string or null`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "middle_click"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Mouse Move Config
 
 - `BrowserMouseMoveConfig object`
@@ -8008,6 +9668,106 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Mouse Move Input
+
+- `BrowserMouseMoveInput object`
+
+  Move the pointer to a viewport coordinate without clicking.
+
+  - `target: BrowserCoordinateTarget`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Mouse Move Tool Use Block
+
+- `BrowserMouseMoveToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserMouseMoveInput`
+
+    Move the pointer to a viewport coordinate without clicking.
+
+    - `target: BrowserCoordinateTarget`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "mouse_move"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Navigate Config
 
@@ -8023,6 +9783,78 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Navigate Input
+
+- `BrowserNavigateInput object`
+
+  Navigate to a URL, or go back/forward/reload in history. The protocol may be
+  omitted (defaults to https://).
+
+  - `url: string`
+
+    The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Navigate Tool Use Block
+
+- `BrowserNavigateToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserNavigateInput`
+
+    Navigate to a URL, or go back/forward/reload in history. The protocol may be
+    omitted (defaults to https://).
+
+    - `url: string`
+
+      The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "navigate"`
+
+  - `toolset_name: "browser"`
+
 ### Browser New Tab Config
 
 - `BrowserNewTabConfig object`
@@ -8036,6 +9868,60 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser New Tab Input
+
+- `BrowserNewTabInput object`
+
+  Open a new empty tab and return its tab_id.
+
+### Browser New Tab Tool Use Block
+
+- `BrowserNewTabToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserNewTabInput`
+
+    Open a new empty tab and return its tab_id.
+
+  - `name: "new_tab"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Read Console Config
 
@@ -8051,6 +9937,72 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Read Console Input
+
+- `BrowserReadConsoleInput object`
+
+  Return console output (log entries, errors, warnings) accumulated since the
+  driver attached to the tab and since the last read, one line per entry. An empty
+  result does not mean no traffic for a tab that predates attach.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Read Console Tool Use Block
+
+- `BrowserReadConsoleToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserReadConsoleInput`
+
+    Return console output (log entries, errors, warnings) accumulated since the
+    driver attached to the tab and since the last read, one line per entry. An empty
+    result does not mean no traffic for a tab that predates attach.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "read_console"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Read Network Config
 
 - `BrowserReadNetworkConfig object`
@@ -8064,6 +10016,72 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Read Network Input
+
+- `BrowserReadNetworkInput object`
+
+  Return the network requests (method, URL, status, MIME type, timing) recorded
+  since the driver attached to the tab and since the last read, one line per entry.
+  An empty result does not mean no traffic for a tab that predates attach.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Read Network Tool Use Block
+
+- `BrowserReadNetworkToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserReadNetworkInput`
+
+    Return the network requests (method, URL, status, MIME type, timing) recorded
+    since the driver attached to the tab and since the last read, one line per entry.
+    An empty result does not mean no traffic for a tab that predates attach.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "read_network"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Read Page Config
 
@@ -8079,6 +10097,132 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Read Page Filter
+
+- `BrowserReadPageFilter = "all" or "interactive"`
+
+  - `"all"`
+
+  - `"interactive"`
+
+### Browser Read Page Input
+
+- `BrowserReadPageInput object`
+
+  Return a structured accessibility tree of the page (or the subtree rooted at
+  `ref`), with element references like [ref_7] that can be used as targets on later
+  actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+  `depth` when exceeded.
+
+  - `depth: optional number or null`
+
+    Maximum tree depth. Default 15.
+
+    minimum: 1
+
+  - `filter: optional BrowserReadPageFilter or null`
+
+    Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+    - `"all"`
+
+    - `"interactive"`
+
+  - `ref: optional string or null`
+
+    Element reference to read a subtree from. Omit to read from the page root.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Read Page Tool Use Block
+
+- `BrowserReadPageToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserReadPageInput`
+
+    Return a structured accessibility tree of the page (or the subtree rooted at
+    `ref`), with element references like [ref_7] that can be used as targets on later
+    actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+    `depth` when exceeded.
+
+    - `depth: optional number or null`
+
+      Maximum tree depth. Default 15.
+
+      minimum: 1
+
+    - `filter: optional BrowserReadPageFilter or null`
+
+      Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+      - `"all"`
+
+      - `"interactive"`
+
+    - `ref: optional string or null`
+
+      Element reference to read a subtree from. Omit to read from the page root.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "read_page"`
+
+  - `toolset_name: "browser"`
+
+### Browser Ref Target
+
+- `BrowserRefTarget object`
+
+  An element on the page, identified by a reference from a prior `read_page` or
+  `find` result. References are scoped to the tab that produced them and become
+  stale after navigation or a major re-render.
+
+  - `type: "ref"`
+
+  - `ref: string`
+
+    An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
 ### Browser Right Click Config
 
 - `BrowserRightClickConfig object`
@@ -8092,6 +10236,146 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Right Click Input
+
+- `BrowserRightClickInput object`
+
+  Right-click at a viewport coordinate or on an element by reference.
+
+  - `target: BrowserClickTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `BrowserCoordinateTarget object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `BrowserRefTarget object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string or null`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Right Click Tool Use Block
+
+- `BrowserRightClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserRightClickInput`
+
+    Right-click at a viewport coordinate or on an element by reference.
+
+    - `target: BrowserClickTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `BrowserCoordinateTarget object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `BrowserRefTarget object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string or null`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "right_click"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Screenshot Config
 
@@ -8107,6 +10391,68 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Screenshot Input
+
+- `BrowserScreenshotInput object`
+
+  Capture the current browser viewport.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Screenshot Tool Use Block
+
+- `BrowserScreenshotToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserScreenshotInput`
+
+    Capture the current browser viewport.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "screenshot"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Scroll Config
 
 - `BrowserScrollConfig object`
@@ -8121,6 +10467,63 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Scroll Direction
+
+- `BrowserScrollDirection = "up" or "down" or "left" or "right"`
+
+  - `"up"`
+
+  - `"down"`
+
+  - `"left"`
+
+  - `"right"`
+
+### Browser Scroll Input
+
+- `BrowserScrollInput object`
+
+  Scroll at a viewport position. `target` must be a coordinate target.
+
+  - `scroll_direction: BrowserScrollDirection`
+
+    - `"up"`
+
+    - `"down"`
+
+    - `"left"`
+
+    - `"right"`
+
+  - `target: BrowserCoordinateTarget`
+
+    A point in the browser viewport, in viewport pixels (the same frame as a
+    full-viewport screenshot).
+
+    - `type: "coordinate"`
+
+    - `x: number`
+
+      Pixels from the left edge of the viewport.
+
+      minimum: 0
+
+    - `y: number`
+
+      Pixels from the top edge of the viewport.
+
+      minimum: 0
+
+  - `scroll_amount: optional number or null`
+
+    Scroll-wheel notches (1–10). Default 3.
+
+    minimum: 1, maximum: 10
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
 ### Browser Scroll To Config
 
 - `BrowserScrollToConfig object`
@@ -8134,6 +10537,179 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Scroll To Input
+
+- `BrowserScrollToInput object`
+
+  Scroll an element into view.
+
+  - `target: BrowserRefTarget`
+
+    An element on the page, identified by a reference from a prior `read_page` or
+    `find` result. References are scoped to the tab that produced them and become
+    stale after navigation or a major re-render.
+
+    - `type: "ref"`
+
+    - `ref: string`
+
+      An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Scroll To Tool Use Block
+
+- `BrowserScrollToToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserScrollToInput`
+
+    Scroll an element into view.
+
+    - `target: BrowserRefTarget`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "scroll_to"`
+
+  - `toolset_name: "browser"`
+
+### Browser Scroll Tool Use Block
+
+- `BrowserScrollToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserScrollInput`
+
+    Scroll at a viewport position. `target` must be a coordinate target.
+
+    - `scroll_direction: BrowserScrollDirection`
+
+      - `"up"`
+
+      - `"down"`
+
+      - `"left"`
+
+      - `"right"`
+
+    - `target: BrowserCoordinateTarget`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `scroll_amount: optional number or null`
+
+      Scroll-wheel notches (1–10). Default 3.
+
+      minimum: 1, maximum: 10
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "scroll"`
+
+  - `toolset_name: "browser"`
 
 ### Browser State Block Param
 
@@ -8192,7 +10768,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -8544,6 +11120,1145 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Switch Tab Input
+
+- `BrowserSwitchTabInput object`
+
+  Make the tab with the given tab_id the active tab — the tab that actions without
+  a tab_id apply to.
+
+  - `tab_id: string`
+
+    The tab to switch to.
+
+### Browser Switch Tab Tool Use Block
+
+- `BrowserSwitchTabToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserSwitchTabInput`
+
+    Make the tab with the given tab_id the active tab — the tab that actions without
+    a tab_id apply to.
+
+    - `tab_id: string`
+
+      The tab to switch to.
+
+  - `name: "switch_tab"`
+
+  - `toolset_name: "browser"`
+
+### Browser Tool Use Block
+
+- `BrowserToolUseBlock = BrowserNavigateToolUseBlock or BrowserListTabsToolUseBlock or BrowserNewTabToolUseBlock or 28 more`
+
+  - `BrowserNavigateToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `DirectCaller object`
+
+        Tool invocation directly from the model.
+
+        - `type: "direct"`
+
+      - `ServerToolCaller object`
+
+        Tool invocation generated by a server-side tool.
+
+        - `type: "code_execution_20250825"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+      - `ServerToolCaller20260120 object`
+
+        - `type: "code_execution_20260120"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `input: BrowserNavigateInput`
+
+      Navigate to a URL, or go back/forward/reload in history. The protocol may be
+      omitted (defaults to https://).
+
+      - `url: string`
+
+        The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "navigate"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserListTabsToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserListTabsInput`
+
+      List all open tabs with each tab's tab_id, title, and URL.
+
+    - `name: "list_tabs"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserNewTabToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserNewTabInput`
+
+      Open a new empty tab and return its tab_id.
+
+    - `name: "new_tab"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserSwitchTabToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserSwitchTabInput`
+
+      Make the tab with the given tab_id the active tab — the tab that actions without
+      a tab_id apply to.
+
+      - `tab_id: string`
+
+        The tab to switch to.
+
+    - `name: "switch_tab"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserCloseTabToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserCloseTabInput`
+
+      Close the tab with the given tab_id.
+
+      - `tab_id: string`
+
+        The tab to close.
+
+    - `name: "close_tab"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserReadPageToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserReadPageInput`
+
+      Return a structured accessibility tree of the page (or the subtree rooted at
+      `ref`), with element references like [ref_7] that can be used as targets on later
+      actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+      `depth` when exceeded.
+
+      - `depth: optional number or null`
+
+        Maximum tree depth. Default 15.
+
+        minimum: 1
+
+      - `filter: optional BrowserReadPageFilter or null`
+
+        Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+        - `"all"`
+
+        - `"interactive"`
+
+      - `ref: optional string or null`
+
+        Element reference to read a subtree from. Omit to read from the page root.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "read_page"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserGetPageTextToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserGetPageTextInput`
+
+      Return the page's visible text content as plain text, prioritizing article
+      content. Suited to articles, documentation, and other text-heavy pages.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "get_page_text"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserReadConsoleToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserReadConsoleInput`
+
+      Return console output (log entries, errors, warnings) accumulated since the
+      driver attached to the tab and since the last read, one line per entry. An empty
+      result does not mean no traffic for a tab that predates attach.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "read_console"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserReadNetworkToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserReadNetworkInput`
+
+      Return the network requests (method, URL, status, MIME type, timing) recorded
+      since the driver attached to the tab and since the last read, one line per entry.
+      An empty result does not mean no traffic for a tab that predates attach.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "read_network"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserFindToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserFindInput`
+
+      Find elements matching a natural-language description (e.g. "search bar", "add to
+      cart button") and return up to 20 matches with element references.
+
+      - `query: string`
+
+        Natural-language description of the element(s) to find.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "find"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserFormInputToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserFormInputInput`
+
+      Set the value of a form element (input, textarea, select, checkbox). Use a
+      boolean for checkboxes, an option value or text for selects.
+
+      - `target: BrowserRefTarget`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+      - `value: BrowserFormInputValue`
+
+        The value to set.
+
+        - `string`
+
+        - `number`
+
+        - `boolean`
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "form_input"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserFileUploadToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserFileUploadInput`
+
+      Set the value of a file-input element to one or more files. The target must be an
+      element reference; at least one of paths or document_ids is required.
+
+      - `target: BrowserRefTarget`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+      - `document_ids: optional array of string or null`
+
+        References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+        minItems: 1
+
+      - `paths: optional array of string or null`
+
+        File paths on the browser executor's filesystem.
+
+        minItems: 1
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "file_upload"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserScrollToToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserScrollToInput`
+
+      Scroll an element into view.
+
+      - `target: BrowserRefTarget`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "scroll_to"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserScreenshotToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserScreenshotInput`
+
+      Capture the current browser viewport.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "screenshot"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserZoomToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserZoomInput`
+
+      Return a cropped screenshot of the given viewport region, scaled up for closer
+      inspection — useful for small icons, buttons, or text. Coordinates are in the
+      same viewport-pixel space as a full screenshot.
+
+      - `region: array of number`
+
+        [x0, y0, x1, y1] in viewport pixels.
+
+        minItems: 4, maxItems: 4
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "zoom"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserLeftClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserLeftClickInput`
+
+      Left-click at a viewport coordinate or on an element by reference.
+
+      - `target: BrowserClickTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+        - `BrowserCoordinateTarget object`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+          - `type: "coordinate"`
+
+          - `x: number`
+
+            Pixels from the left edge of the viewport.
+
+            minimum: 0
+
+          - `y: number`
+
+            Pixels from the top edge of the viewport.
+
+            minimum: 0
+
+        - `BrowserRefTarget object`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+      - `modifiers: optional string or null`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_click"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserRightClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserRightClickInput`
+
+      Right-click at a viewport coordinate or on an element by reference.
+
+      - `target: BrowserClickTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+      - `modifiers: optional string or null`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "right_click"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserMiddleClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserMiddleClickInput`
+
+      Middle-click at a viewport coordinate or on an element by reference.
+
+      - `target: BrowserClickTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+      - `modifiers: optional string or null`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "middle_click"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserDoubleClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserDoubleClickInput`
+
+      Double left-click at a viewport coordinate or on an element by reference.
+
+      - `target: BrowserClickTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+      - `modifiers: optional string or null`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "double_click"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserTripleClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserTripleClickInput`
+
+      Triple left-click at a viewport coordinate or on an element by reference
+      (typically selects a line or paragraph).
+
+      - `target: BrowserClickTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+      - `modifiers: optional string or null`
+
+        Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "triple_click"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserHoverToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserHoverInput`
+
+      Move the cursor to a coordinate or element without clicking.
+
+      - `target: BrowserClickTarget`
+
+        Where to act: either a viewport coordinate or an element reference.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "hover"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserLeftClickDragToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserLeftClickDragInput`
+
+      Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+      - `from: BrowserCoordinateTarget`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+      - `target: BrowserCoordinateTarget`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_click_drag"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserLeftMouseDownToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserLeftMouseDownInput`
+
+      Press and hold the left mouse button at a viewport coordinate. Pair with
+      left_mouse_up to perform a custom drag.
+
+      - `target: BrowserCoordinateTarget`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_mouse_down"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserLeftMouseUpToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserLeftMouseUpInput`
+
+      Release the left mouse button at a viewport coordinate.
+
+      - `target: BrowserCoordinateTarget`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "left_mouse_up"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserMouseMoveToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserMouseMoveInput`
+
+      Move the pointer to a viewport coordinate without clicking.
+
+      - `target: BrowserCoordinateTarget`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "mouse_move"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserScrollToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserScrollInput`
+
+      Scroll at a viewport position. `target` must be a coordinate target.
+
+      - `scroll_direction: BrowserScrollDirection`
+
+        - `"up"`
+
+        - `"down"`
+
+        - `"left"`
+
+        - `"right"`
+
+      - `target: BrowserCoordinateTarget`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+      - `scroll_amount: optional number or null`
+
+        Scroll-wheel notches (1–10). Default 3.
+
+        minimum: 1, maximum: 10
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "scroll"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserTypeToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserTypeInput`
+
+      Type a literal string at the current focus.
+
+      - `text: string`
+
+        The text to type.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "type"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserKeyToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserKeyInput`
+
+      Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+      "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+      Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+      - `text: string`
+
+        The key, chord, or space-separated sequence to press.
+
+      - `repeat: optional number or null`
+
+        Number of times to repeat. Default 1.
+
+        minimum: 1, maximum: 100
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "key"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserHoldKeyToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserHoldKeyInput`
+
+      Hold a key or key chord down for a duration, then release it. Uses the same key
+      names and "+" chord syntax as the key action.
+
+      - `duration: number`
+
+        Seconds to hold the key down (maximum 30).
+
+        minimum: 0, maximum: 30
+
+      - `text: string`
+
+        The key or chord to hold.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "hold_key"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserWaitToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserWaitInput`
+
+      Pause for the given duration.
+
+      - `duration: number`
+
+        Seconds to wait (maximum 30).
+
+        minimum: 0, maximum: 30
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "wait"`
+
+    - `toolset_name: "browser"`
+
+  - `BrowserJavascriptExecToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: BrowserJavascriptExecInput`
+
+      Execute JavaScript in the page context and return the value of the last
+      expression. The code runs with access to the DOM, `window`, and page variables.
+      Write the expression you want evaluated — do NOT use `return`.
+
+      - `text: string`
+
+        JavaScript to execute in the page context.
+
+      - `tab_id: optional string or null`
+
+        Tab to act on. Defaults to the active tab when omitted.
+
+    - `name: "javascript_exec"`
+
+    - `toolset_name: "browser"`
+
 ### Browser Toolset 20260801
 
 - `BrowserToolset20260801 object`
@@ -8570,7 +12285,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -9349,6 +13064,148 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Triple Click Input
+
+- `BrowserTripleClickInput object`
+
+  Triple left-click at a viewport coordinate or on an element by reference
+  (typically selects a line or paragraph).
+
+  - `target: BrowserClickTarget`
+
+    Where to act: either a viewport coordinate or an element reference.
+
+    - `BrowserCoordinateTarget object`
+
+      A point in the browser viewport, in viewport pixels (the same frame as a
+      full-viewport screenshot).
+
+      - `type: "coordinate"`
+
+      - `x: number`
+
+        Pixels from the left edge of the viewport.
+
+        minimum: 0
+
+      - `y: number`
+
+        Pixels from the top edge of the viewport.
+
+        minimum: 0
+
+    - `BrowserRefTarget object`
+
+      An element on the page, identified by a reference from a prior `read_page` or
+      `find` result. References are scoped to the tab that produced them and become
+      stale after navigation or a major re-render.
+
+      - `type: "ref"`
+
+      - `ref: string`
+
+        An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+  - `modifiers: optional string or null`
+
+    Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Triple Click Tool Use Block
+
+- `BrowserTripleClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserTripleClickInput`
+
+    Triple left-click at a viewport coordinate or on an element by reference
+    (typically selects a line or paragraph).
+
+    - `target: BrowserClickTarget`
+
+      Where to act: either a viewport coordinate or an element reference.
+
+      - `BrowserCoordinateTarget object`
+
+        A point in the browser viewport, in viewport pixels (the same frame as a
+        full-viewport screenshot).
+
+        - `type: "coordinate"`
+
+        - `x: number`
+
+          Pixels from the left edge of the viewport.
+
+          minimum: 0
+
+        - `y: number`
+
+          Pixels from the top edge of the viewport.
+
+          minimum: 0
+
+      - `BrowserRefTarget object`
+
+        An element on the page, identified by a reference from a prior `read_page` or
+        `find` result. References are scoped to the tab that produced them and become
+        stale after navigation or a major re-render.
+
+        - `type: "ref"`
+
+        - `ref: string`
+
+          An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+    - `modifiers: optional string or null`
+
+      Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "triple_click"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Type Config
 
 - `BrowserTypeConfig object`
@@ -9362,6 +13219,76 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Type Input
+
+- `BrowserTypeInput object`
+
+  Type a literal string at the current focus.
+
+  - `text: string`
+
+    The text to type.
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Type Tool Use Block
+
+- `BrowserTypeToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserTypeInput`
+
+    Type a literal string at the current focus.
+
+    - `text: string`
+
+      The text to type.
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "type"`
+
+  - `toolset_name: "browser"`
 
 ### Browser Wait Config
 
@@ -9377,6 +13304,80 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Browser Wait Input
+
+- `BrowserWaitInput object`
+
+  Pause for the given duration.
+
+  - `duration: number`
+
+    Seconds to wait (maximum 30).
+
+    minimum: 0, maximum: 30
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Wait Tool Use Block
+
+- `BrowserWaitToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserWaitInput`
+
+    Pause for the given duration.
+
+    - `duration: number`
+
+      Seconds to wait (maximum 30).
+
+      minimum: 0, maximum: 30
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "wait"`
+
+  - `toolset_name: "browser"`
+
 ### Browser Zoom Config
 
 - `BrowserZoomConfig object`
@@ -9390,6 +13391,84 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Browser Zoom Input
+
+- `BrowserZoomInput object`
+
+  Return a cropped screenshot of the given viewport region, scaled up for closer
+  inspection — useful for small icons, buttons, or text. Coordinates are in the
+  same viewport-pixel space as a full screenshot.
+
+  - `region: array of number`
+
+    [x0, y0, x1, y1] in viewport pixels.
+
+    minItems: 4, maxItems: 4
+
+  - `tab_id: optional string or null`
+
+    Tab to act on. Defaults to the active tab when omitted.
+
+### Browser Zoom Tool Use Block
+
+- `BrowserZoomToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: BrowserZoomInput`
+
+    Return a cropped screenshot of the given viewport region, scaled up for closer
+    inspection — useful for small icons, buttons, or text. Coordinates are in the
+    same viewport-pixel space as a full screenshot.
+
+    - `region: array of number`
+
+      [x0, y0, x1, y1] in viewport pixels.
+
+      minItems: 4, maxItems: 4
+
+    - `tab_id: optional string or null`
+
+      Tab to act on. Defaults to the active tab when omitted.
+
+  - `name: "zoom"`
+
+  - `toolset_name: "browser"`
 
 ### Cache Control Ephemeral
 
@@ -9406,7 +13485,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     - `5m`: 5 minutes
     - `1h`: 1 hour
 
-    Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+    Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
     - `"5m"`
 
@@ -10063,7 +14142,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -10114,7 +14193,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -10167,7 +14246,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -10220,7 +14299,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -10443,7 +14522,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -10561,6 +14640,60 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Cursor Position Input
+
+- `ComputerCursorPositionInput object`
+
+  Get the current (x, y) pixel coordinate of the cursor.
+
+### Computer Cursor Position Tool Use Block
+
+- `ComputerCursorPositionToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerCursorPositionInput`
+
+    Get the current (x, y) pixel coordinate of the cursor.
+
+  - `name: "cursor_position"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Double Click Config
 
 - `ComputerDoubleClickConfig object`
@@ -10574,6 +14707,82 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Double Click Input
+
+- `ComputerDoubleClickInput object`
+
+  Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+  the current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number or null`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Double Click Tool Use Block
+
+- `ComputerDoubleClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerDoubleClickInput`
+
+    Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+    the current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number or null`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "double_click"`
+
+  - `toolset_name: "computer"`
 
 ### Computer Hold Key Config
 
@@ -10589,6 +14798,82 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Hold Key Input
+
+- `ComputerHoldKeyInput object`
+
+  Hold down a key or key-combination for a specified duration. Uses the same key
+  syntax as `key`.
+
+  - `duration: number`
+
+    Duration to hold the key, in seconds.
+
+    maximum: 300
+
+  - `text: string`
+
+    The key or key-combination to hold.
+
+### Computer Hold Key Tool Use Block
+
+- `ComputerHoldKeyToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerHoldKeyInput`
+
+    Hold down a key or key-combination for a specified duration. Uses the same key
+    syntax as `key`.
+
+    - `duration: number`
+
+      Duration to hold the key, in seconds.
+
+      maximum: 300
+
+    - `text: string`
+
+      The key or key-combination to hold.
+
+  - `name: "hold_key"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Key Config
 
 - `ComputerKeyConfig object`
@@ -10602,6 +14887,88 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Key Input
+
+- `ComputerKeyInput object`
+
+  Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+  a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+  case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+  "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+  supported.
+
+  - `text: string`
+
+    The key or key-combination to press.
+
+  - `repeat: optional number or null`
+
+    Number of times to repeat the key press. Default is 1.
+
+    minimum: 1, maximum: 100
+
+### Computer Key Tool Use Block
+
+- `ComputerKeyToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerKeyInput`
+
+    Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+    a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+    case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+    "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+    supported.
+
+    - `text: string`
+
+      The key or key-combination to press.
+
+    - `repeat: optional number or null`
+
+      Number of times to repeat the key press. Default is 1.
+
+      minimum: 1, maximum: 100
+
+  - `name: "key"`
+
+  - `toolset_name: "computer"`
 
 ### Computer Left Click Config
 
@@ -10631,6 +14998,168 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Left Click Drag Input
+
+- `ComputerLeftClickDragInput object`
+
+  Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+  - `coordinate: array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `start_coordinate: array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Left Click Drag Tool Use Block
+
+- `ComputerLeftClickDragToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerLeftClickDragInput`
+
+    Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+    - `coordinate: array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `start_coordinate: array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "left_click_drag"`
+
+  - `toolset_name: "computer"`
+
+### Computer Left Click Input
+
+- `ComputerLeftClickInput object`
+
+  Click the left mouse button at the specified (x, y) pixel coordinate, or the
+  current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number or null`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Left Click Tool Use Block
+
+- `ComputerLeftClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerLeftClickInput`
+
+    Click the left mouse button at the specified (x, y) pixel coordinate, or the
+    current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number or null`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "left_click"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Left Mouse Down Config
 
 - `ComputerLeftMouseDownConfig object`
@@ -10644,6 +15173,60 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Left Mouse Down Input
+
+- `ComputerLeftMouseDownInput object`
+
+  Press and hold the left mouse button at the current cursor position.
+
+### Computer Left Mouse Down Tool Use Block
+
+- `ComputerLeftMouseDownToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerLeftMouseDownInput`
+
+    Press and hold the left mouse button at the current cursor position.
+
+  - `name: "left_mouse_down"`
+
+  - `toolset_name: "computer"`
 
 ### Computer Left Mouse Up Config
 
@@ -10659,6 +15242,60 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Left Mouse Up Input
+
+- `ComputerLeftMouseUpInput object`
+
+  Release the left mouse button.
+
+### Computer Left Mouse Up Tool Use Block
+
+- `ComputerLeftMouseUpToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerLeftMouseUpInput`
+
+    Release the left mouse button.
+
+  - `name: "left_mouse_up"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Middle Click Config
 
 - `ComputerMiddleClickConfig object`
@@ -10672,6 +15309,82 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Middle Click Input
+
+- `ComputerMiddleClickInput object`
+
+  Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+  current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number or null`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Middle Click Tool Use Block
+
+- `ComputerMiddleClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerMiddleClickInput`
+
+    Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+    current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number or null`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "middle_click"`
+
+  - `toolset_name: "computer"`
 
 ### Computer Mouse Move Config
 
@@ -10687,6 +15400,74 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Mouse Move Input
+
+- `ComputerMouseMoveInput object`
+
+  Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+  without clicking; otherwise use a click action directly.
+
+  - `coordinate: array of number`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+### Computer Mouse Move Tool Use Block
+
+- `ComputerMouseMoveToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerMouseMoveInput`
+
+    Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+    without clicking; otherwise use a click action directly.
+
+    - `coordinate: array of number`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+  - `name: "mouse_move"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Right Click Config
 
 - `ComputerRightClickConfig object`
@@ -10700,6 +15481,82 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Right Click Input
+
+- `ComputerRightClickInput object`
+
+  Click the right mouse button at the specified (x, y) pixel coordinate, or the
+  current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number or null`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Right Click Tool Use Block
+
+- `ComputerRightClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerRightClickInput`
+
+    Click the right mouse button at the specified (x, y) pixel coordinate, or the
+    current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number or null`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "right_click"`
+
+  - `toolset_name: "computer"`
 
 ### Computer Screenshot Config
 
@@ -10715,6 +15572,60 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Screenshot Input
+
+- `ComputerScreenshotInput object`
+
+  Take a screenshot of the screen.
+
+### Computer Screenshot Tool Use Block
+
+- `ComputerScreenshotToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerScreenshotInput`
+
+    Take a screenshot of the screen.
+
+  - `name: "screenshot"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Scroll Config
 
 - `ComputerScrollConfig object`
@@ -10728,6 +15639,670 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Scroll Direction
+
+- `ComputerScrollDirection = "up" or "down" or "left" or "right"`
+
+  - `"up"`
+
+  - `"down"`
+
+  - `"left"`
+
+  - `"right"`
+
+### Computer Scroll Input
+
+- `ComputerScrollInput object`
+
+  Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+  position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+  - `scroll_amount: number`
+
+    Number of 'clicks' of the scroll wheel.
+
+  - `scroll_direction: ComputerScrollDirection`
+
+    - `"up"`
+
+    - `"down"`
+
+    - `"left"`
+
+    - `"right"`
+
+  - `coordinate: optional array of number or null`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Scroll Tool Use Block
+
+- `ComputerScrollToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerScrollInput`
+
+    Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+    position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+    - `scroll_amount: number`
+
+      Number of 'clicks' of the scroll wheel.
+
+    - `scroll_direction: ComputerScrollDirection`
+
+      - `"up"`
+
+      - `"down"`
+
+      - `"left"`
+
+      - `"right"`
+
+    - `coordinate: optional array of number or null`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "scroll"`
+
+  - `toolset_name: "computer"`
+
+### Computer Tool Use Block
+
+- `ComputerToolUseBlock = ComputerKeyToolUseBlock or ComputerHoldKeyToolUseBlock or ComputerTypeToolUseBlock or 14 more`
+
+  - `ComputerKeyToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `DirectCaller object`
+
+        Tool invocation directly from the model.
+
+        - `type: "direct"`
+
+      - `ServerToolCaller object`
+
+        Tool invocation generated by a server-side tool.
+
+        - `type: "code_execution_20250825"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+      - `ServerToolCaller20260120 object`
+
+        - `type: "code_execution_20260120"`
+
+        - `tool_id: string`
+
+          pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `input: ComputerKeyInput`
+
+      Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+      a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+      case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+      "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+      supported.
+
+      - `text: string`
+
+        The key or key-combination to press.
+
+      - `repeat: optional number or null`
+
+        Number of times to repeat the key press. Default is 1.
+
+        minimum: 1, maximum: 100
+
+    - `name: "key"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerHoldKeyToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerHoldKeyInput`
+
+      Hold down a key or key-combination for a specified duration. Uses the same key
+      syntax as `key`.
+
+      - `duration: number`
+
+        Duration to hold the key, in seconds.
+
+        maximum: 300
+
+      - `text: string`
+
+        The key or key-combination to hold.
+
+    - `name: "hold_key"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerTypeToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerTypeInput`
+
+      Type a string of text on the keyboard.
+
+      - `text: string`
+
+        The text to type.
+
+    - `name: "type"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerCursorPositionToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerCursorPositionInput`
+
+      Get the current (x, y) pixel coordinate of the cursor.
+
+    - `name: "cursor_position"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerMouseMoveToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerMouseMoveInput`
+
+      Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+      without clicking; otherwise use a click action directly.
+
+      - `coordinate: array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+    - `name: "mouse_move"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerLeftMouseDownToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerLeftMouseDownInput`
+
+      Press and hold the left mouse button at the current cursor position.
+
+    - `name: "left_mouse_down"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerLeftMouseUpToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerLeftMouseUpInput`
+
+      Release the left mouse button.
+
+    - `name: "left_mouse_up"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerLeftClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerLeftClickInput`
+
+      Click the left mouse button at the specified (x, y) pixel coordinate, or the
+      current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number or null`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "left_click"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerLeftClickDragToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerLeftClickDragInput`
+
+      Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+      - `coordinate: array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `start_coordinate: array of number`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "left_click_drag"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerRightClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerRightClickInput`
+
+      Click the right mouse button at the specified (x, y) pixel coordinate, or the
+      current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number or null`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "right_click"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerMiddleClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerMiddleClickInput`
+
+      Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+      current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number or null`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "middle_click"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerDoubleClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerDoubleClickInput`
+
+      Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+      the current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number or null`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "double_click"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerTripleClickToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerTripleClickInput`
+
+      Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+      the current cursor position if `coordinate` is omitted.
+
+      - `coordinate: optional array of number or null`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "triple_click"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerScrollToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerScrollInput`
+
+      Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+      position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+      - `scroll_amount: number`
+
+        Number of 'clicks' of the scroll wheel.
+
+      - `scroll_direction: ComputerScrollDirection`
+
+        - `"up"`
+
+        - `"down"`
+
+        - `"left"`
+
+        - `"right"`
+
+      - `coordinate: optional array of number or null`
+
+        (x, y): x pixels from the left edge, y pixels from the top edge.
+
+        minItems: 2, maxItems: 2
+
+      - `text: optional string or null`
+
+        Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+    - `name: "scroll"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerWaitToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerWaitInput`
+
+      Wait for a specified duration.
+
+      - `duration: number`
+
+        Duration to wait, in seconds.
+
+        maximum: 300
+
+    - `name: "wait"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerScreenshotToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerScreenshotInput`
+
+      Take a screenshot of the screen.
+
+    - `name: "screenshot"`
+
+    - `toolset_name: "computer"`
+
+  - `ComputerZoomToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: ToolUseCaller`
+
+      Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `input: ComputerZoomInput`
+
+      Take a screenshot of a rectangular region. Region coordinates are in the
+      full-screenshot space (not physical display pixels). The crop is scaled up to
+      fill the image budget so fine details become legible.
+
+      - `region: array of number`
+
+        (x0, y0, x1, y1): The region to capture.
+
+        minItems: 4, maxItems: 4
+
+    - `name: "zoom"`
+
+    - `toolset_name: "computer"`
 
 ### Computer Toolset 20260801
 
@@ -10759,7 +16334,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -11202,6 +16777,82 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Triple Click Input
+
+- `ComputerTripleClickInput object`
+
+  Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+  the current cursor position if `coordinate` is omitted.
+
+  - `coordinate: optional array of number or null`
+
+    (x, y): x pixels from the left edge, y pixels from the top edge.
+
+    minItems: 2, maxItems: 2
+
+  - `text: optional string or null`
+
+    Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+### Computer Triple Click Tool Use Block
+
+- `ComputerTripleClickToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerTripleClickInput`
+
+    Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+    the current cursor position if `coordinate` is omitted.
+
+    - `coordinate: optional array of number or null`
+
+      (x, y): x pixels from the left edge, y pixels from the top edge.
+
+      minItems: 2, maxItems: 2
+
+    - `text: optional string or null`
+
+      Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+  - `name: "triple_click"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Type Config
 
 - `ComputerTypeConfig object`
@@ -11215,6 +16866,68 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Type Input
+
+- `ComputerTypeInput object`
+
+  Type a string of text on the keyboard.
+
+  - `text: string`
+
+    The text to type.
+
+### Computer Type Tool Use Block
+
+- `ComputerTypeToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerTypeInput`
+
+    Type a string of text on the keyboard.
+
+    - `text: string`
+
+      The text to type.
+
+  - `name: "type"`
+
+  - `toolset_name: "computer"`
 
 ### Computer Wait Config
 
@@ -11230,6 +16943,72 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
 
+### Computer Wait Input
+
+- `ComputerWaitInput object`
+
+  Wait for a specified duration.
+
+  - `duration: number`
+
+    Duration to wait, in seconds.
+
+    maximum: 300
+
+### Computer Wait Tool Use Block
+
+- `ComputerWaitToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerWaitInput`
+
+    Wait for a specified duration.
+
+    - `duration: number`
+
+      Duration to wait, in seconds.
+
+      maximum: 300
+
+  - `name: "wait"`
+
+  - `toolset_name: "computer"`
+
 ### Computer Zoom Config
 
 - `ComputerZoomConfig object`
@@ -11243,6 +17022,76 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
   - `enabled: optional boolean or null`
 
     Whether this member is offered to the model. Default is per member, per the toolset's documentation. A member whose enabled resolves false is withheld from the served schema.
+
+### Computer Zoom Input
+
+- `ComputerZoomInput object`
+
+  Take a screenshot of a rectangular region. Region coordinates are in the
+  full-screenshot space (not physical display pixels). The crop is scaled up to
+  fill the image budget so fine details become legible.
+
+  - `region: array of number`
+
+    (x0, y0, x1, y1): The region to capture.
+
+    minItems: 4, maxItems: 4
+
+### Computer Zoom Tool Use Block
+
+- `ComputerZoomToolUseBlock object`
+
+  - `type: "tool_use"`
+
+    default: tool_use
+
+  - `id: string`
+
+    pattern: ^[a-zA-Z0-9_-]+$
+
+  - `caller: ToolUseCaller`
+
+    Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+    - `DirectCaller object`
+
+      Tool invocation directly from the model.
+
+      - `type: "direct"`
+
+    - `ServerToolCaller object`
+
+      Tool invocation generated by a server-side tool.
+
+      - `type: "code_execution_20250825"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+    - `ServerToolCaller20260120 object`
+
+      - `type: "code_execution_20260120"`
+
+      - `tool_id: string`
+
+        pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `input: ComputerZoomInput`
+
+    Take a screenshot of a rectangular region. Region coordinates are in the
+    full-screenshot space (not physical display pixels). The crop is scaled up to
+    fill the image budget so fine details become legible.
+
+    - `region: array of number`
+
+      (x0, y0, x1, y1): The region to capture.
+
+      minItems: 4, maxItems: 4
+
+  - `name: "zoom"`
+
+  - `toolset_name: "computer"`
 
 ### Container
 
@@ -11384,7 +17233,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -11548,7 +17397,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
     - `thinking: string`
 
@@ -11566,7 +17415,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
   - `ToolUseBlock object`
 
@@ -12107,7 +17956,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
         - `"5m"`
 
@@ -13082,7 +18931,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
             - `"5m"`
 
@@ -13289,7 +19138,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
         - `"5m"`
 
@@ -13652,7 +19501,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
                 - `"5m"`
 
@@ -13973,7 +19822,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -14062,7 +19911,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -14319,7 +20168,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
       - `thinking: string`
 
@@ -14337,7 +20186,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
     - `ToolUseBlock object`
 
@@ -14917,6 +20766,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+    - `"claude-haiku-5-5"`
+
+      Fastest model for high-volume, real-time tasks
+
     - `"claude-sonnet-5-5"`
 
       Efficient model for coding and agents
@@ -14967,11 +20820,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"claude-haiku-4-5"`
 
-      Fastest model with near-frontier intelligence
-
     - `"claude-haiku-4-5-20251001"`
-
-      Fastest model with near-frontier intelligence
 
     - `"claude-opus-4-5"`
 
@@ -15039,7 +20888,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"reasoning_extraction"`
 
-        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+        The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
       - `"general_harms"`
 
@@ -15244,7 +21093,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
         - `"5m"`
 
@@ -16929,7 +22778,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
             - `"5m"`
 
@@ -17899,11 +23748,15 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 ### Model
 
-- `Model = "claude-sonnet-5-5" or "claude-fable-5-1" or "claude-opus-5-5" or 16 more or string`
+- `Model = "claude-haiku-5-5" or "claude-sonnet-5-5" or "claude-fable-5-1" or 17 more or string`
 
   The model that will complete your prompt.
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+  - `"claude-haiku-5-5"`
+
+    Fastest model for high-volume, real-time tasks
 
   - `"claude-sonnet-5-5"`
 
@@ -17955,11 +23808,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `"claude-haiku-4-5"`
 
-    Fastest model with near-frontier intelligence
-
   - `"claude-haiku-4-5-20251001"`
-
-    Fastest model with near-frontier intelligence
 
   - `"claude-opus-4-5"`
 
@@ -18011,7 +23860,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `format: optional JSONOutputFormat or null`
 
-    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+    A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs?sdk_languages=http)
 
     - `type: "json_schema"`
 
@@ -18570,7 +24419,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
       - `thinking: string`
 
@@ -18588,7 +24437,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+        See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
     - `ToolUseBlock object`
 
@@ -19194,7 +25043,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"reasoning_extraction"`
 
-          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
         - `"general_harms"`
 
@@ -19543,7 +25392,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
         - `thinking: string`
 
@@ -19561,7 +25410,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
       - `ToolUseBlock object`
 
@@ -20141,6 +25990,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
+
       - `"claude-sonnet-5-5"`
 
         Efficient model for coding and agents
@@ -20191,11 +26044,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"claude-haiku-4-5"`
 
-        Fastest model with near-frontier intelligence
-
       - `"claude-haiku-4-5-20251001"`
-
-        Fastest model with near-frontier intelligence
 
       - `"claude-opus-4-5"`
 
@@ -20263,7 +26112,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"reasoning_extraction"`
 
-          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+          The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
         - `"general_harms"`
 
@@ -20672,7 +26521,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-            See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+            See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
           - `thinking: string`
 
@@ -20690,7 +26539,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
             Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-            See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+            See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
         - `ToolUseBlock object`
 
@@ -21270,6 +27119,10 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+        - `"claude-haiku-5-5"`
+
+          Fastest model for high-volume, real-time tasks
+
         - `"claude-sonnet-5-5"`
 
           Efficient model for coding and agents
@@ -21320,11 +27173,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"claude-haiku-4-5"`
 
-          Fastest model with near-frontier intelligence
-
         - `"claude-haiku-4-5-20251001"`
-
-          Fastest model with near-frontier intelligence
 
         - `"claude-opus-4-5"`
 
@@ -21392,7 +27241,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
           - `"reasoning_extraction"`
 
-            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+            The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
           - `"general_harms"`
 
@@ -21743,7 +27592,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
 ### Redacted Thinking Block Param
 
@@ -21785,7 +27634,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"reasoning_extraction"`
 
-      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+      The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
     - `"general_harms"`
 
@@ -21826,7 +27675,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
         - `"5m"`
 
@@ -22105,7 +27954,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -22362,7 +28211,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -22973,7 +28822,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -23095,7 +28944,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
   - `thinking: string`
 
@@ -23125,7 +28974,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
   - `display: optional "summarized" or "omitted" or null`
 
-    Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+    Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
     - `"summarized"`
 
@@ -23155,13 +29004,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     Must be ≥1024 and less than `max_tokens`.
 
-    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+    See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
     minimum: 1024
 
   - `display: optional "summarized" or "omitted" or null`
 
-    Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+    Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
     - `"summarized"`
 
@@ -23171,11 +29020,11 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
 - `ThinkingConfigParam = ThinkingConfigEnabled or ThinkingConfigDisabled or ThinkingConfigBetweenTools or ThinkingConfigAdaptive`
 
-  Configuration for enabling Claude's extended thinking.
+  Configuration for Claude's thinking.
 
-  When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+  With `{"type": "adaptive"}`, Claude decides when and how much to think. With `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of at least 1,024. Thinking tokens count toward your `max_tokens` limit.
 
-  See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+  Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#configuring-thinking) for each model's behavior.
 
   - `ThinkingConfigEnabled object`
 
@@ -23187,13 +29036,13 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       Must be ≥1024 and less than `max_tokens`.
 
-      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
       minimum: 1024
 
     - `display: optional "summarized" or "omitted" or null`
 
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
       - `"summarized"`
 
@@ -23213,7 +29062,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `display: optional "summarized" or "omitted" or null`
 
-      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+      Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
       - `"summarized"`
 
@@ -23282,7 +29131,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -23345,7 +29194,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -23506,7 +29355,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -23537,7 +29386,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -24035,7 +29884,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -24090,7 +29939,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -24203,7 +30052,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
             - `5m`: 5 minutes
             - `1h`: 1 hour
 
-            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
             - `"5m"`
 
@@ -24314,7 +30163,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
         - `"5m"`
 
@@ -24357,7 +30206,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -24410,7 +30259,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -24463,7 +30312,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -24538,7 +30387,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
         - `5m`: 5 minutes
         - `1h`: 1 hour
 
-        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+        Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
         - `"5m"`
 
@@ -26167,7 +32016,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -26204,6 +32053,1671 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
     For a toolset member tool_use, the toolset family this member belongs to.
 
     minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
+
+### Tool Use Caller
+
+- `ToolUseCaller = DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+  Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+  - `DirectCaller object`
+
+    Tool invocation directly from the model.
+
+    - `type: "direct"`
+
+  - `ServerToolCaller object`
+
+    Tool invocation generated by a server-side tool.
+
+    - `type: "code_execution_20250825"`
+
+    - `tool_id: string`
+
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+  - `ServerToolCaller20260120 object`
+
+    - `type: "code_execution_20260120"`
+
+    - `tool_id: string`
+
+      pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+### Toolset Tool Use Block
+
+- `ToolsetToolUseBlock = BrowserToolUseBlock or ComputerToolUseBlock or ToolUseBlock`
+
+  - `BrowserToolUseBlock = BrowserNavigateToolUseBlock or BrowserListTabsToolUseBlock or BrowserNewTabToolUseBlock or 28 more`
+
+    - `BrowserNavigateToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+        - `DirectCaller object`
+
+          Tool invocation directly from the model.
+
+          - `type: "direct"`
+
+        - `ServerToolCaller object`
+
+          Tool invocation generated by a server-side tool.
+
+          - `type: "code_execution_20250825"`
+
+          - `tool_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+        - `ServerToolCaller20260120 object`
+
+          - `type: "code_execution_20260120"`
+
+          - `tool_id: string`
+
+            pattern: ^srvtoolu_[a-zA-Z0-9_]+$
+
+      - `input: BrowserNavigateInput`
+
+        Navigate to a URL, or go back/forward/reload in history. The protocol may be
+        omitted (defaults to https://).
+
+        - `url: string`
+
+          The URL to navigate to, or "back" / "forward" / "reload" for history navigation.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "navigate"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserListTabsToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserListTabsInput`
+
+        List all open tabs with each tab's tab_id, title, and URL.
+
+      - `name: "list_tabs"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserNewTabToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserNewTabInput`
+
+        Open a new empty tab and return its tab_id.
+
+      - `name: "new_tab"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserSwitchTabToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserSwitchTabInput`
+
+        Make the tab with the given tab_id the active tab — the tab that actions without
+        a tab_id apply to.
+
+        - `tab_id: string`
+
+          The tab to switch to.
+
+      - `name: "switch_tab"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserCloseTabToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserCloseTabInput`
+
+        Close the tab with the given tab_id.
+
+        - `tab_id: string`
+
+          The tab to close.
+
+      - `name: "close_tab"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserReadPageToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserReadPageInput`
+
+        Return a structured accessibility tree of the page (or the subtree rooted at
+        `ref`), with element references like [ref_7] that can be used as targets on later
+        actions. Output is capped at 50,000 characters — narrow with `ref` or a smaller
+        `depth` when exceeded.
+
+        - `depth: optional number or null`
+
+          Maximum tree depth. Default 15.
+
+          minimum: 1
+
+        - `filter: optional BrowserReadPageFilter or null`
+
+          Which elements to include. Omitted: every visible element. "interactive": interactive elements only. "all": additionally includes off-viewport elements.
+
+          - `"all"`
+
+          - `"interactive"`
+
+        - `ref: optional string or null`
+
+          Element reference to read a subtree from. Omit to read from the page root.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "read_page"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserGetPageTextToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserGetPageTextInput`
+
+        Return the page's visible text content as plain text, prioritizing article
+        content. Suited to articles, documentation, and other text-heavy pages.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "get_page_text"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserReadConsoleToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserReadConsoleInput`
+
+        Return console output (log entries, errors, warnings) accumulated since the
+        driver attached to the tab and since the last read, one line per entry. An empty
+        result does not mean no traffic for a tab that predates attach.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "read_console"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserReadNetworkToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserReadNetworkInput`
+
+        Return the network requests (method, URL, status, MIME type, timing) recorded
+        since the driver attached to the tab and since the last read, one line per entry.
+        An empty result does not mean no traffic for a tab that predates attach.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "read_network"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserFindToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserFindInput`
+
+        Find elements matching a natural-language description (e.g. "search bar", "add to
+        cart button") and return up to 20 matches with element references.
+
+        - `query: string`
+
+          Natural-language description of the element(s) to find.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "find"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserFormInputToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserFormInputInput`
+
+        Set the value of a form element (input, textarea, select, checkbox). Use a
+        boolean for checkboxes, an option value or text for selects.
+
+        - `target: BrowserRefTarget`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+          - `type: "ref"`
+
+          - `ref: string`
+
+            An element reference (e.g. "ref_7") returned by a prior `read_page` or `find` result.
+
+        - `value: BrowserFormInputValue`
+
+          The value to set.
+
+          - `string`
+
+          - `number`
+
+          - `boolean`
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "form_input"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserFileUploadToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserFileUploadInput`
+
+        Set the value of a file-input element to one or more files. The target must be an
+        element reference; at least one of paths or document_ids is required.
+
+        - `target: BrowserRefTarget`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+        - `document_ids: optional array of string or null`
+
+          References to files the harness has staged, for deployments where the browser executor cannot read the caller's filesystem.
+
+          minItems: 1
+
+        - `paths: optional array of string or null`
+
+          File paths on the browser executor's filesystem.
+
+          minItems: 1
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "file_upload"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserScrollToToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserScrollToInput`
+
+        Scroll an element into view.
+
+        - `target: BrowserRefTarget`
+
+          An element on the page, identified by a reference from a prior `read_page` or
+          `find` result. References are scoped to the tab that produced them and become
+          stale after navigation or a major re-render.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "scroll_to"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserScreenshotToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserScreenshotInput`
+
+        Capture the current browser viewport.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "screenshot"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserZoomToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserZoomInput`
+
+        Return a cropped screenshot of the given viewport region, scaled up for closer
+        inspection — useful for small icons, buttons, or text. Coordinates are in the
+        same viewport-pixel space as a full screenshot.
+
+        - `region: array of number`
+
+          [x0, y0, x1, y1] in viewport pixels.
+
+          minItems: 4, maxItems: 4
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "zoom"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserLeftClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserLeftClickInput`
+
+        Left-click at a viewport coordinate or on an element by reference.
+
+        - `target: BrowserClickTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+          - `BrowserCoordinateTarget object`
+
+            A point in the browser viewport, in viewport pixels (the same frame as a
+            full-viewport screenshot).
+
+            - `type: "coordinate"`
+
+            - `x: number`
+
+              Pixels from the left edge of the viewport.
+
+              minimum: 0
+
+            - `y: number`
+
+              Pixels from the top edge of the viewport.
+
+              minimum: 0
+
+          - `BrowserRefTarget object`
+
+            An element on the page, identified by a reference from a prior `read_page` or
+            `find` result. References are scoped to the tab that produced them and become
+            stale after navigation or a major re-render.
+
+        - `modifiers: optional string or null`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_click"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserRightClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserRightClickInput`
+
+        Right-click at a viewport coordinate or on an element by reference.
+
+        - `target: BrowserClickTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+        - `modifiers: optional string or null`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "right_click"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserMiddleClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserMiddleClickInput`
+
+        Middle-click at a viewport coordinate or on an element by reference.
+
+        - `target: BrowserClickTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+        - `modifiers: optional string or null`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "middle_click"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserDoubleClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserDoubleClickInput`
+
+        Double left-click at a viewport coordinate or on an element by reference.
+
+        - `target: BrowserClickTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+        - `modifiers: optional string or null`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "double_click"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserTripleClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserTripleClickInput`
+
+        Triple left-click at a viewport coordinate or on an element by reference
+        (typically selects a line or paragraph).
+
+        - `target: BrowserClickTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+        - `modifiers: optional string or null`
+
+          Optional modifier key chord to hold for the duration of this action (e.g. "shift", "ctrl+shift", "cmd+alt").
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "triple_click"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserHoverToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserHoverInput`
+
+        Move the cursor to a coordinate or element without clicking.
+
+        - `target: BrowserClickTarget`
+
+          Where to act: either a viewport coordinate or an element reference.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "hover"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserLeftClickDragToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserLeftClickDragInput`
+
+        Press at `from`, drag to `target`, release. Both must be coordinate targets.
+
+        - `from: BrowserCoordinateTarget`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `target: BrowserCoordinateTarget`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_click_drag"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserLeftMouseDownToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserLeftMouseDownInput`
+
+        Press and hold the left mouse button at a viewport coordinate. Pair with
+        left_mouse_up to perform a custom drag.
+
+        - `target: BrowserCoordinateTarget`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_mouse_down"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserLeftMouseUpToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserLeftMouseUpInput`
+
+        Release the left mouse button at a viewport coordinate.
+
+        - `target: BrowserCoordinateTarget`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "left_mouse_up"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserMouseMoveToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserMouseMoveInput`
+
+        Move the pointer to a viewport coordinate without clicking.
+
+        - `target: BrowserCoordinateTarget`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "mouse_move"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserScrollToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserScrollInput`
+
+        Scroll at a viewport position. `target` must be a coordinate target.
+
+        - `scroll_direction: BrowserScrollDirection`
+
+          - `"up"`
+
+          - `"down"`
+
+          - `"left"`
+
+          - `"right"`
+
+        - `target: BrowserCoordinateTarget`
+
+          A point in the browser viewport, in viewport pixels (the same frame as a
+          full-viewport screenshot).
+
+        - `scroll_amount: optional number or null`
+
+          Scroll-wheel notches (1–10). Default 3.
+
+          minimum: 1, maximum: 10
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "scroll"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserTypeToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserTypeInput`
+
+        Type a literal string at the current focus.
+
+        - `text: string`
+
+          The text to type.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "type"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserKeyToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserKeyInput`
+
+        Press a key or key chord. Use "+" to combine modifiers with a key (e.g. "ctrl+a",
+        "cmd+shift+p") and space to sequence presses (e.g. "Backspace Backspace Delete").
+        Common names like "Return", "Tab", "Escape", "BackSpace" are supported.
+
+        - `text: string`
+
+          The key, chord, or space-separated sequence to press.
+
+        - `repeat: optional number or null`
+
+          Number of times to repeat. Default 1.
+
+          minimum: 1, maximum: 100
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "key"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserHoldKeyToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserHoldKeyInput`
+
+        Hold a key or key chord down for a duration, then release it. Uses the same key
+        names and "+" chord syntax as the key action.
+
+        - `duration: number`
+
+          Seconds to hold the key down (maximum 30).
+
+          minimum: 0, maximum: 30
+
+        - `text: string`
+
+          The key or chord to hold.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "hold_key"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserWaitToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserWaitInput`
+
+        Pause for the given duration.
+
+        - `duration: number`
+
+          Seconds to wait (maximum 30).
+
+          minimum: 0, maximum: 30
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "wait"`
+
+      - `toolset_name: "browser"`
+
+    - `BrowserJavascriptExecToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: BrowserJavascriptExecInput`
+
+        Execute JavaScript in the page context and return the value of the last
+        expression. The code runs with access to the DOM, `window`, and page variables.
+        Write the expression you want evaluated — do NOT use `return`.
+
+        - `text: string`
+
+          JavaScript to execute in the page context.
+
+        - `tab_id: optional string or null`
+
+          Tab to act on. Defaults to the active tab when omitted.
+
+      - `name: "javascript_exec"`
+
+      - `toolset_name: "browser"`
+
+  - `ComputerToolUseBlock = ComputerKeyToolUseBlock or ComputerHoldKeyToolUseBlock or ComputerTypeToolUseBlock or 14 more`
+
+    - `ComputerKeyToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerKeyInput`
+
+        Press a key or key-combination on the keyboard. Use "+" to combine modifiers with
+        a key (e.g. "ctrl+s", "alt+Tab", "ctrl+shift+Escape"). Key names are
+        case-insensitive; common names like "Return", "Tab", "Escape", "Up", "Down",
+        "Left", "Right", "Home", "End", "Page_Up", "Page_Down", "Delete", "BackSpace" are
+        supported.
+
+        - `text: string`
+
+          The key or key-combination to press.
+
+        - `repeat: optional number or null`
+
+          Number of times to repeat the key press. Default is 1.
+
+          minimum: 1, maximum: 100
+
+      - `name: "key"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerHoldKeyToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerHoldKeyInput`
+
+        Hold down a key or key-combination for a specified duration. Uses the same key
+        syntax as `key`.
+
+        - `duration: number`
+
+          Duration to hold the key, in seconds.
+
+          maximum: 300
+
+        - `text: string`
+
+          The key or key-combination to hold.
+
+      - `name: "hold_key"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerTypeToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerTypeInput`
+
+        Type a string of text on the keyboard.
+
+        - `text: string`
+
+          The text to type.
+
+      - `name: "type"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerCursorPositionToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerCursorPositionInput`
+
+        Get the current (x, y) pixel coordinate of the cursor.
+
+      - `name: "cursor_position"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerMouseMoveToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerMouseMoveInput`
+
+        Move the cursor to a specified (x, y) pixel coordinate. Use this ONLY to hover
+        without clicking; otherwise use a click action directly.
+
+        - `coordinate: array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+      - `name: "mouse_move"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerLeftMouseDownToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerLeftMouseDownInput`
+
+        Press and hold the left mouse button at the current cursor position.
+
+      - `name: "left_mouse_down"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerLeftMouseUpToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerLeftMouseUpInput`
+
+        Release the left mouse button.
+
+      - `name: "left_mouse_up"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerLeftClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerLeftClickInput`
+
+        Click the left mouse button at the specified (x, y) pixel coordinate, or the
+        current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number or null`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "left_click"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerLeftClickDragToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerLeftClickDragInput`
+
+        Click and drag the cursor from `start_coordinate` to `coordinate`.
+
+        - `coordinate: array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `start_coordinate: array of number`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "left_click_drag"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerRightClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerRightClickInput`
+
+        Click the right mouse button at the specified (x, y) pixel coordinate, or the
+        current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number or null`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "right_click"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerMiddleClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerMiddleClickInput`
+
+        Click the middle mouse button at the specified (x, y) pixel coordinate, or the
+        current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number or null`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "middle_click"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerDoubleClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerDoubleClickInput`
+
+        Double-click the left mouse button at the specified (x, y) pixel coordinate, or
+        the current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number or null`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "double_click"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerTripleClickToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerTripleClickInput`
+
+        Triple-click the left mouse button at the specified (x, y) pixel coordinate, or
+        the current cursor position if `coordinate` is omitted.
+
+        - `coordinate: optional array of number or null`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "triple_click"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerScrollToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerScrollInput`
+
+        Scroll the screen at the specified (x, y) pixel coordinate, or the current cursor
+        position if `coordinate` is omitted. Do NOT use PageUp/PageDown to scroll.
+
+        - `scroll_amount: number`
+
+          Number of 'clicks' of the scroll wheel.
+
+        - `scroll_direction: ComputerScrollDirection`
+
+          - `"up"`
+
+          - `"down"`
+
+          - `"left"`
+
+          - `"right"`
+
+        - `coordinate: optional array of number or null`
+
+          (x, y): x pixels from the left edge, y pixels from the top edge.
+
+          minItems: 2, maxItems: 2
+
+        - `text: optional string or null`
+
+          Optional key combination to hold down during this action (e.g. "ctrl", "shift", "ctrl+shift").
+
+      - `name: "scroll"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerWaitToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerWaitInput`
+
+        Wait for a specified duration.
+
+        - `duration: number`
+
+          Duration to wait, in seconds.
+
+          maximum: 300
+
+      - `name: "wait"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerScreenshotToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerScreenshotInput`
+
+        Take a screenshot of the screen.
+
+      - `name: "screenshot"`
+
+      - `toolset_name: "computer"`
+
+    - `ComputerZoomToolUseBlock object`
+
+      - `type: "tool_use"`
+
+        default: tool_use
+
+      - `id: string`
+
+        pattern: ^[a-zA-Z0-9_-]+$
+
+      - `caller: ToolUseCaller`
+
+        Which party invoked the tool call: the model directly, or a server tool on its behalf.
+
+      - `input: ComputerZoomInput`
+
+        Take a screenshot of a rectangular region. Region coordinates are in the
+        full-screenshot space (not physical display pixels). The crop is scaled up to
+        fill the image budget so fine details become legible.
+
+        - `region: array of number`
+
+          (x0, y0, x1, y1): The region to capture.
+
+          minItems: 4, maxItems: 4
+
+      - `name: "zoom"`
+
+      - `toolset_name: "computer"`
+
+  - `ToolUseBlock object`
+
+    - `type: "tool_use"`
+
+      default: tool_use
+
+    - `id: string`
+
+      pattern: ^[a-zA-Z0-9_-]+$
+
+    - `caller: DirectCaller or ServerToolCaller or ServerToolCaller20260120`
+
+      default: {"type":"direct"}
+
+      - `DirectCaller object`
+
+        Tool invocation directly from the model.
+
+      - `ServerToolCaller object`
+
+        Tool invocation generated by a server-side tool.
+
+      - `ServerToolCaller20260120 object`
+
+    - `input: map[unknown]`
+
+    - `name: string`
+
+      minLength: 1
+
+    - `toolset_name: optional string or null`
+
+      For a toolset member tool_use, the toolset family.
+
+      minLength: 1, maxLength: 64, pattern: ^[a-zA-Z0-9_-]+$
 
 ### URL Image Source
 
@@ -26464,7 +33978,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                   - `5m`: 5 minutes
                   - `1h`: 1 hour
 
-                  Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+                  Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
                   - `"5m"`
 
@@ -26725,7 +34239,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -26888,7 +34402,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -27053,7 +34567,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -27220,7 +34734,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -27567,7 +35081,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
                       - `5m`: 5 minutes
                       - `1h`: 1 hour
 
-                      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+                      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
                       - `"5m"`
 
@@ -28126,7 +35640,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -28221,7 +35735,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -28316,7 +35830,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -28565,7 +36079,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
       - `5m`: 5 minutes
       - `1h`: 1 hour
 
-      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+      Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
       - `"5m"`
 
@@ -28679,9 +36193,15 @@ Send a batch of Message creation requests.
 
 The Message Batches API can be used to process multiple Messages API requests at once. Once a Message Batch is created, it begins processing immediately. Batches can take up to 24 hours to complete.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-user-profile-id": optional string`
 
@@ -28713,7 +36233,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     Messages API creation parameters for the individual request.
 
-    See the [Messages API reference](https://platform.claude.com/docs/en/api/messages) for full documentation on available parameters.
+    See the [Messages API reference](https://platform.claude.com/docs/en/api/messages?sdk_languages=http) for full documentation on available parameters.
 
     - `max_tokens: number`
 
@@ -28721,9 +36241,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Note that our models may stop _before_ reaching this maximum. This parameter only specifies the absolute maximum number of tokens to generate.
 
-      Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#pre-warming-the-cache) without generating a response.
+      Set to `0` to populate the [prompt cache](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http#pre-warming-the-cache) without generating a response.
 
-      Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview) for details.
+      Different models have different maximum values for this parameter.  See [models](https://platform.claude.com/docs/en/about-claude/models/overview?sdk_languages=http) for details.
 
       minimum: 0
 
@@ -28735,7 +36255,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Each input message must be an object with a `role` and `content`. You can specify a single `user`-role message, or you can include multiple `user` and `assistant` messages.
 
-      If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response.
+      If the final message uses the `assistant` role, the response content will continue immediately from the content in that message. This can be used to constrain part of the model's response. This is called prefill. On models that don't support prefill, creating a message that ends with a partial `assistant` response returns a 400 error. See [Prefill not supported](https://platform.claude.com/docs/en/api/errors?sdk_languages=http#prefill-not-supported).
 
       Example with a single `user` message:
 
@@ -28753,7 +36273,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       ]
       ```
 
-      Example with a partially-filled response from Claude:
+      Example with a partially-filled response from Claude, for models that support prefill:
 
       ```json
       [
@@ -28772,9 +36292,9 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
       ```
 
-      See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
+      See [input examples](https://platform.claude.com/docs/en/build-with-claude/working-with-messages?sdk_languages=http).
 
-      Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
+      Note that if you want to include a [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices?sdk_languages=http#give-claude-a-role), you can use the top-level `system` parameter — there is no `"system"` role for input messages in the Messages API.
 
       There is a limit of 100,000 messages in a single request.
 
@@ -28807,7 +36327,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 - `5m`: 5 minutes
                 - `1h`: 1 hour
 
-                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+                Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
                 - `"5m"`
 
@@ -29761,6 +37281,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+      - `"claude-haiku-5-5"`
+
+        Fastest model for high-volume, real-time tasks
+
       - `"claude-sonnet-5-5"`
 
         Efficient model for coding and agents
@@ -29811,11 +37335,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `"claude-haiku-4-5"`
 
-        Fastest model with near-frontier intelligence
-
       - `"claude-haiku-4-5-20251001"`
-
-        Fastest model with near-frontier intelligence
 
       - `"claude-opus-4-5"`
 
@@ -29937,7 +37457,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `format: optional JSONOutputFormat or null`
 
-        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+        A schema to specify Claude's output format in responses. See [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs?sdk_languages=http)
 
         - `type: "json_schema"`
 
@@ -29949,7 +37469,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Determines whether to use priority capacity (if available) or standard capacity for this request.
 
-      Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers) for details.
+      Anthropic offers different levels of service for your API requests. See [service-tiers](https://platform.claude.com/docs/en/api/service-tiers?sdk_languages=http) for details.
 
       - `"auto"`
 
@@ -29967,13 +37487,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Whether to incrementally stream the response using server-sent events. When `true`, SDKs return a raw event stream.
 
-      In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](https://platform.claude.com/docs/en/build-with-claude/streaming#streaming-with-sdks) for an example in each language.
+      In the TypeScript, Python and Ruby SDKs, the recommended way to stream is `messages.stream()`. It sets `stream` for you and accumulates the events into the final message. See [Streaming with SDKs](https://platform.claude.com/docs/en/build-with-claude/streaming?sdk_languages=http#streaming-with-sdks) for an example in each language.
 
     - `system: optional string or array of TextBlockParam`
 
       System prompt.
 
-      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role).
+      A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices?sdk_languages=http#give-claude-a-role).
 
       - `string`
 
@@ -29993,11 +37513,11 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
     - `thinking: optional ThinkingConfigParam`
 
-      Configuration for enabling Claude's extended thinking.
+      Configuration for Claude's thinking.
 
-      When enabled, responses include `thinking` content blocks showing Claude's thinking process before the final answer. Requires a minimum budget of 1,024 tokens and counts towards your `max_tokens` limit.
+      With `{"type": "adaptive"}`, Claude decides when and how much to think. With `{"type": "enabled"}` (manual extended thinking), you set a `budget_tokens` of at least 1,024. Thinking tokens count toward your `max_tokens` limit.
 
-      See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+      Which `type` values are accepted, and what happens when you omit `thinking`, depend on the model. See [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#configuring-thinking) for each model's behavior.
 
       - `ThinkingConfigEnabled object`
 
@@ -30009,13 +37529,13 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           Must be ≥1024 and less than `max_tokens`.
 
-          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+          See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
           minimum: 1024
 
         - `display: optional "summarized" or "omitted" or null`
 
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
           - `"summarized"`
 
@@ -30035,7 +37555,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
         - `display: optional "summarized" or "omitted" or null`
 
-          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+          Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. The default depends on the model; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking?sdk_languages=http#controlling-thinking-display).
 
           - `"summarized"`
 
@@ -30097,7 +37617,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       If you include `tools` in your API request, the model may return `tool_use` content blocks that represent the model's use of those tools. You can then run those tools using the tool input generated by the model and then optionally return results back to the model using `tool_result` content blocks.
 
-      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)).
+      There are two types of tools: **client tools** and **server tools**. The behavior described below applies to client tools. For [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools?sdk_languages=http), see their individual documentation as each has its own behavior (e.g., the [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool?sdk_languages=http)).
 
       Each tool definition includes:
 
@@ -30153,7 +37673,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
-      See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) for more details.
+      See our [guide](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview?sdk_languages=http) for more details.
 
       - `Tool object`
 
@@ -31932,7 +39452,7 @@ curl https://api.anthropic.com/v1/messages/batches \
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 #### Path parameters
 
@@ -31941,6 +39461,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -32095,7 +39621,7 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
 
 List all Message Batches within a Workspace. Most recently created batches are returned first.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 #### Query parameters
 
@@ -32116,6 +39642,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   default: 20, minimum: 1, maximum: 1000
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -32291,7 +39823,7 @@ Batches may be canceled any time before processing ends. Once cancellation is in
 
 The number of canceled requests is specified in `request_counts`. To determine which requests were canceled, check the individual results within the batch. Note that cancellation may not result in any canceled requests if they were non-interruptible.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 #### Path parameters
 
@@ -32300,6 +39832,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -32457,7 +39995,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 #### Path parameters
 
@@ -32466,6 +40004,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -32515,7 +40059,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 #### Path parameters
 
@@ -32524,6 +40068,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   ID of the Message Batch.
 
 #### Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 
@@ -32794,7 +40344,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
             - `thinking: string`
 
@@ -32812,7 +40362,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
           - `ToolUseBlock object`
 
@@ -33392,6 +40942,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+          - `"claude-haiku-5-5"`
+
+            Fastest model for high-volume, real-time tasks
+
           - `"claude-sonnet-5-5"`
 
             Efficient model for coding and agents
@@ -33442,11 +40996,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
           - `"claude-haiku-4-5"`
 
-            Fastest model with near-frontier intelligence
-
           - `"claude-haiku-4-5-20251001"`
-
-            Fastest model with near-frontier intelligence
 
           - `"claude-opus-4-5"`
 
@@ -33514,7 +41064,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
             - `"general_harms"`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/list
-fetched_at: 2026-09-28T06:10:46.621733+00:00
+fetched_at: 2026-10-12T06:49:53.940717+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,6 +34,12 @@ List Files
   Opaque page cursor returned in a prior list response's `next_page`. Prefixed `page_`.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-workspace-id": optional string`
 

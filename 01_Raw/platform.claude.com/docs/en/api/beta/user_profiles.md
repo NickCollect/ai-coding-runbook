@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles
-fetched_at: 2026-10-05T06:27:39.207781+00:00
+fetched_at: 2026-10-12T06:50:02.550481+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,6 +18,8 @@ url: https://platform.claude.com/docs/en/api/beta/user_profiles
 Create User Profile
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -444,6 +446,8 @@ List User Profiles
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -742,6 +746,8 @@ Get User Profile
 
 ### Headers
 
+- `"anthropic-version": optional string`
+
 - `"anthropic-beta": optional array of AnthropicBeta`
 
   Optional header to specify the beta version(s) you want to use.
@@ -1032,6 +1038,8 @@ Update User Profile
   The ID of the user profile to update (`uprof_...`).
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -1423,6 +1431,8 @@ Create Enrollment URL
   The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
 ### Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

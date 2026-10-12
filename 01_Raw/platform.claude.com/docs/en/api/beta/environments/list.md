@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/list
-fetched_at: 2026-10-05T06:27:35.872327+00:00
+fetched_at: 2026-10-12T06:49:58.718644+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,6 +34,12 @@ List environments with pagination support.
   Opaque cursor from previous response for pagination. Pass the `next_page` value from the previous response.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 

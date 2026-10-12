@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/api_keys/update
-fetched_at: 2026-10-05T06:27:31.822558+00:00
+fetched_at: 2026-10-12T06:49:54.680472+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,14 @@ Update API Key
 - `api_key_id: string`
 
   ID of the API key.
+
+## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 ## Body parameters
 

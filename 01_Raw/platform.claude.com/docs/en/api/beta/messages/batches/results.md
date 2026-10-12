@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/results
-fetched_at: 2026-10-05T06:27:35.448885+00:00
+fetched_at: 2026-10-12T06:49:58.214404+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing?sdk_languages=http)
 
 ## Path parameters
 
@@ -26,6 +26,12 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   ID of the Message Batch.
 
 ## Headers
+
+- `"anthropic-version": optional string`
+
+  The version of the Claude API you want to use.
+
+  Read more about versioning and our version history [here](https://platform.claude.com/docs/en/api/versioning?sdk_languages=http).
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
@@ -402,7 +408,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               This is an opaque field and should not be interpreted or parsed. When passing thinking blocks back to the API (required when using tools with extended thinking), pass them back exactly as received, with this field intact.
 
-              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) for details.
+              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http) for details.
 
             - `thinking: string`
 
@@ -420,7 +426,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
               Pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation.
 
-              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking#redacted-thinking-blocks) for details.
+              See [extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking?sdk_languages=http#redacted-thinking-blocks) for details.
 
           - `BetaToolUseBlock object`
 
@@ -1226,7 +1232,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                             - `5m`: 5 minutes
                             - `1h`: 1 hour
 
-                            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) for details.
+                            Defaults to `5m`. See [prompt caching pricing](https://platform.claude.com/docs/en/build-with-claude/prompt-caching?sdk_languages=http) for details.
 
                             - `"5m"`
 
@@ -2894,6 +2900,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+                          - `"claude-haiku-5-5"`
+
+                            Fastest model for high-volume, real-time tasks
+
                           - `"claude-sonnet-5-5"`
 
                             Efficient model for coding and agents
@@ -2944,11 +2954,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                           - `"claude-haiku-4-5"`
 
-                            Fastest model with near-frontier intelligence
-
                           - `"claude-haiku-4-5-20251001"`
-
-                            Fastest model with near-frontier intelligence
 
                           - `"claude-opus-4-5"`
 
@@ -3238,7 +3244,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
                 - `"reasoning_extraction"`
 
-                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+                  The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
                 - `"general_harms"`
 
@@ -3419,7 +3425,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `"reasoning_extraction"`
 
-              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking).
+              The request asks the model to reproduce its internal reasoning in the response text. To get reasoning in a structured form instead, use [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking?sdk_languages=http).
 
             - `"general_harms"`
 
@@ -3650,7 +3656,6 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             Each entry represents one sampling iteration, with its own input/output token counts and cache statistics, discriminated by `type`. For `message` entries (model sampling iterations, such as the turns of a server-side tool use loop), this allows you to:
 
-            - Determine which iterations exceeded long context thresholds (>=200k tokens)
             - Calculate the context window size from the last `message` entry
             - Understand token accumulation across server-side tool use loops
 

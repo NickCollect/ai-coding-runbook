@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/resources/delete
-fetched_at: 2026-10-05T06:27:36.866611+00:00
+fetched_at: 2026-10-12T06:49:59.807609+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,8 @@ Delete Session Resource
 - `resource_id: string`
 
 ## Headers
+
+- `"anthropic-version": optional string`
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
