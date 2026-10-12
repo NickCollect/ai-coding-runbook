@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-shaped-science
-fetched_at: 2026-10-05T06:27:15.410231+00:00
+fetched_at: 2026-10-12T06:49:43.682688+00:00
 title: "Claude-shaped science \\ Anthropic"
 ---
 
@@ -140,23 +140,23 @@ During this project, Schwartz has been working as a visiting researcher at Anthr
 
 ## Related content
 
-### What work can robots do?
+### Investigating unintended model actions in our evaluations and internal use
 
-We built an index of how well today’s robots can perform US job tasks. Robots can already do three-quarters of physical tasks, mostly in limited settings, but are cost-competitive for just 0.3% of them.
+This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
 
-[Read more](https://www.anthropic.com/research/what-work-can-robots-do)
+[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
 
-### What do you want from AI?
+### The missing map of the sky
 
-We’re launching a new study using Anthropic Interviewer to learn from your experiences with AI, and we invite you to participate.
+Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
 
-[Read more](https://www.anthropic.com/research/your-thoughts-on-ai)
+[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
 
-### GLM-5.3 and the spread of advanced cyber capabilities
+### Launching an opt-in vulnerability-finding service for open-source software
 
-Like Claude Mythos Preview, GLM-5.3 has strong capabilities for autonomously building end-to-end cyber exploits. But GLM-5.3 is unlike other frontier models in that it has been released without meaningful safeguards to limit misuse.
+We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
 
-[Read more](https://www.anthropic.com/research/glm-5-3-and-the-spread-of-advanced-cyber-capabilities)
+[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
 
 ## Subscribe to Anthropic Science
 

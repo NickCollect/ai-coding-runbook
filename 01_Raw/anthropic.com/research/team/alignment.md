@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-09-14T05:36:14.450373+00:00
+fetched_at: 2026-10-12T06:49:48.625266+00:00
 title: "Alignment Research \\ Anthropic"
 ---
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Oct 9, 2026Alignment
+
+  Investigating unintended model actions in our evaluations and internal use](https://www.anthropic.com/research/investigating-unintended-model-actions)
 - [Sep 9, 2026Alignment
 
   An alignment assessment of recent cybersecurity incidents](https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Jan 29, 2026Alignment
 
   How AI assistance impacts the formation of coding skills](https://www.anthropic.com/research/AI-assistance-coding-skills)
-- [Jan 28, 2026Alignment
-
-  Disempowerment patterns in real-world AI usage](https://www.anthropic.com/research/disempowerment-patterns)
 
 [See more](#)
 

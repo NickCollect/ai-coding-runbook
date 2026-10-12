@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-expertise
-fetched_at: 2026-10-05T06:27:15.335147+00:00
+fetched_at: 2026-10-12T06:49:43.520780+00:00
 title: "How Claude Code is used in practice \\ Anthropic"
 ---
 
@@ -25,7 +25,7 @@ Jun 16, 2026
 
 Agentic coding has taken off. The share of GitHub projects with coding agent activity has more than doubled since late 2025,[1](#footnote-1) and Claude Code users now spend an average of 20 hours per week using the tool.[2](#footnote-2) Can people without formal coding experience successfully direct an agent through complex technical work? And what will rapid adoption and improvement of these tools mean for knowledge work broadly? While we don’t have full answers to these questions yet, we look to Claude Code usage data for early signals.
 
-This report provides evidence on how Claude Code is used in practice, based on a [privacy-preserving analysis](https://www.anthropic.com/research/clio) of ~400,000 interactive sessions from ~235,000 people between October 2025 and April 2026. It builds on prior work focused on [measures of autonomy](https://www.anthropic.com/research/measuring-agent-autonomy) in Claude Code sessions, and [how Claude Code is changing work at Anthropic](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic).[3](#footnote-3) Here, we introduce a framework for describing interactive AI coding-assistant usage: what kind of work is being done, who is doing it, and whether it succeeds. We focus on Claude Code usage through a command-line interface (CLI), [Claude.ai](http://claude.ai/redirect/website.v1.625a0594-e7e9-4ea5-91a4-6abce30f14d6), or the Claude Code desktop app.[4](#footnote-4) By tracking how agentic coding usage changes as models get more capable, we can better understand how these tools affect the labor market for coding professionals and knowledge workers.
+This report provides evidence on how Claude Code is used in practice, based on a [privacy-preserving analysis](https://www.anthropic.com/research/clio) of ~400,000 interactive sessions from ~235,000 people between October 2025 and April 2026. It builds on prior work focused on [measures of autonomy](https://www.anthropic.com/research/measuring-agent-autonomy) in Claude Code sessions, and [how Claude Code is changing work at Anthropic](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic).[3](#footnote-3) Here, we introduce a framework for describing interactive AI coding-assistant usage: what kind of work is being done, who is doing it, and whether it succeeds. We focus on Claude Code usage through a command-line interface (CLI), [Claude.ai](http://claude.ai/redirect/website.v1.2ca1b00d-6aa6-44d9-b730-da79b12b7732), or the Claude Code desktop app.[4](#footnote-4) By tracking how agentic coding usage changes as models get more capable, we can better understand how these tools affect the labor market for coding professionals and knowledge workers.
 
 What happens on Claude Code may be a preview of where knowledge work is headed, as agents become embedded in non-coding work. We find that Claude is handling more complex and more valuable tasks. At the same time, there remains a clear division of labor in agentic coding: People decide what to build, and the agent decides how to build it.
 
@@ -182,20 +182,20 @@ With acknowledgements to: Jake Eaton, Sarah Pollack, Hanah Ho, Szymon Sacher, An
 
 ## Related content
 
-### Claude-shaped science
+### Investigating unintended model actions in our evaluations and internal use
 
-Guest author Prof. Matthew Schwartz describes what happened when he stopped fighting Claude and allowed Claude to find “Claude-shaped” problems: ones best suited to the capabilities of the current generation of LLM tools. This led him to build BootLoops, a toolkit for exact calculations in quantitative science, which he has been applying across scientific fields alongside experts.
+This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
 
-[Read more](https://www.anthropic.com/research/claude-shaped-science)
+[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
 
-### What work can robots do?
+### The missing map of the sky
 
-We built an index of how well today’s robots can perform US job tasks. Robots can already do three-quarters of physical tasks, mostly in limited settings, but are cost-competitive for just 0.3% of them.
+Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
 
-[Read more](https://www.anthropic.com/research/what-work-can-robots-do)
+[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
 
-### What do you want from AI?
+### Launching an opt-in vulnerability-finding service for open-source software
 
-We’re launching a new study using Anthropic Interviewer to learn from your experiences with AI, and we invite you to participate.
+We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
 
-[Read more](https://www.anthropic.com/research/your-thoughts-on-ai)
+[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
