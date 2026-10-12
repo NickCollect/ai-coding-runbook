@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from typing import List, Optional
+from itertools import chain
 from typing_extensions import Literal
 
 import httpx2
@@ -131,7 +132,9 @@ class SpendLimits(SyncAPIResource):
         A Claude Console organization's limits come in an order that is stable across
         pages. A Claude Enterprise organization's are grouped by scope type, in the
         order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-        within a type they come in a fixed order that is not creation order.
+        within a type they come in a fixed order that is not creation order. Listing
+        Claude Console limits is in an early access preview. To request access, contact
+        your Anthropic account team.
 
         Args:
           limit: Maximum number of limits per page. Defaults to `20`.
@@ -155,9 +158,16 @@ class SpendLimits(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         extra_headers = {
-            **strip_not_given({"anthropic-beta": ",".join(str(e) for e in betas) if is_given(betas) else not_given}),
+            **strip_not_given(
+                {
+                    "anthropic-beta": ",".join(chain((str(e) for e in betas), ["spend-limit-reads-2026-09-26"]))
+                    if is_given(betas)
+                    else not_given
+                }
+            ),
             **(extra_headers or {}),
         }
+        extra_headers = {"anthropic-beta": "spend-limit-reads-2026-09-26", **(extra_headers or {})}
         return self._get_api_list(
             "/v1/organizations/spend_limits?beta=true",
             page=SyncPageCursor[BetaSpendLimit],
@@ -225,6 +235,7 @@ class SpendLimits(SyncAPIResource):
         amount: Optional[str],
         scope: spend_limit_set_params.Scope,
         period: BetaSpendLimitPeriod | Omit = omit,
+        betas: List[AnthropicBetaParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -254,6 +265,8 @@ class SpendLimits(SyncAPIResource):
               through the API is in an early access preview. To request access, contact your
               Anthropic account team.
 
+          betas: Optional header to specify the beta version(s) you want to use.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -262,6 +275,10 @@ class SpendLimits(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given({"anthropic-beta": ",".join(str(e) for e in betas) if is_given(betas) else not_given}),
+            **(extra_headers or {}),
+        }
         return self._post(
             "/v1/organizations/spend_limits?beta=true",
             body={
@@ -368,7 +385,9 @@ class AsyncSpendLimits(AsyncAPIResource):
         A Claude Console organization's limits come in an order that is stable across
         pages. A Claude Enterprise organization's are grouped by scope type, in the
         order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-        within a type they come in a fixed order that is not creation order.
+        within a type they come in a fixed order that is not creation order. Listing
+        Claude Console limits is in an early access preview. To request access, contact
+        your Anthropic account team.
 
         Args:
           limit: Maximum number of limits per page. Defaults to `20`.
@@ -392,9 +411,16 @@ class AsyncSpendLimits(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         extra_headers = {
-            **strip_not_given({"anthropic-beta": ",".join(str(e) for e in betas) if is_given(betas) else not_given}),
+            **strip_not_given(
+                {
+                    "anthropic-beta": ",".join(chain((str(e) for e in betas), ["spend-limit-reads-2026-09-26"]))
+                    if is_given(betas)
+                    else not_given
+                }
+            ),
             **(extra_headers or {}),
         }
+        extra_headers = {"anthropic-beta": "spend-limit-reads-2026-09-26", **(extra_headers or {})}
         return self._get_api_list(
             "/v1/organizations/spend_limits?beta=true",
             page=AsyncPageCursor[BetaSpendLimit],
@@ -462,6 +488,7 @@ class AsyncSpendLimits(AsyncAPIResource):
         amount: Optional[str],
         scope: spend_limit_set_params.Scope,
         period: BetaSpendLimitPeriod | Omit = omit,
+        betas: List[AnthropicBetaParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -491,6 +518,8 @@ class AsyncSpendLimits(AsyncAPIResource):
               through the API is in an early access preview. To request access, contact your
               Anthropic account team.
 
+          betas: Optional header to specify the beta version(s) you want to use.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -499,6 +528,10 @@ class AsyncSpendLimits(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {
+            **strip_not_given({"anthropic-beta": ",".join(str(e) for e in betas) if is_given(betas) else not_given}),
+            **(extra_headers or {}),
+        }
         return await self._post(
             "/v1/organizations/spend_limits?beta=true",
             body={

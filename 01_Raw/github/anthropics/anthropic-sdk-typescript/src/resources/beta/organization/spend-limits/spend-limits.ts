@@ -46,7 +46,9 @@ export class SpendLimits extends APIResource {
    * A Claude Console organization's limits come in an order that is stable across
    * pages. A Claude Enterprise organization's are grouped by scope type, in the
    * order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-   * within a type they come in a fixed order that is not creation order.
+   * within a type they come in a fixed order that is not creation order. Listing
+   * Claude Console limits is in an early access preview. To request access, contact
+   * your Anthropic account team.
    *
    * @example
    * ```ts
@@ -65,7 +67,7 @@ export class SpendLimits extends APIResource {
       query,
       ...options,
       headers: buildHeaders([
-        { ...(betas?.toString() != null ? { 'anthropic-beta': betas?.toString() } : undefined) },
+        { 'anthropic-beta': [...(betas ?? []), 'spend-limit-reads-2026-09-26'].toString() },
         options?.headers,
       ]),
     });
@@ -114,8 +116,16 @@ export class SpendLimits extends APIResource {
    *   });
    * ```
    */
-  set(body: SpendLimitSetParams, options?: RequestOptions): APIPromise<BetaSpendLimit> {
-    return this._client.post('/v1/organizations/spend_limits?beta=true', { body, ...options });
+  set(params: SpendLimitSetParams, options?: RequestOptions): APIPromise<BetaSpendLimit> {
+    const { betas, ...body } = params;
+    return this._client.post('/v1/organizations/spend_limits?beta=true', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(betas?.toString() != null ? { 'anthropic-beta': betas?.toString() } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -361,23 +371,31 @@ export interface SpendLimitListParams extends PageCursorParams {
 
 export interface SpendLimitSetParams {
   /**
-   * Limit amount as a non-negative integer decimal string in the minor unit of the
-   * organization's billing currency (cents for USD): "50000" is $500.00. `null` sets
-   * an explicit no-limit override for this scope and `period` only — each period
-   * resolves independently, so caps for other periods still apply.
+   * Body param: Limit amount as a non-negative integer decimal string in the minor
+   * unit of the organization's billing currency (cents for USD): "50000" is $500.00.
+   * `null` sets an explicit no-limit override for this scope and `period` only —
+   * each period resolves independently, so caps for other periods still apply.
    */
   amount: string | null;
 
   /**
-   * What the limit applies to. Claude Enterprise organizations set `user` limits.
-   * Claude Console organizations set `organization` and `workspace` limits. Any
-   * other combination returns 400. Setting `organization` and `workspace` limits
-   * through the API is in an early access preview. To request access, contact your
-   * Anthropic account team.
+   * Body param: What the limit applies to. Claude Enterprise organizations set
+   * `user` limits. Claude Console organizations set `organization` and `workspace`
+   * limits. Any other combination returns 400. Setting `organization` and
+   * `workspace` limits through the API is in an early access preview. To request
+   * access, contact your Anthropic account team.
    */
   scope: BetaSpendLimitUserScope | BetaSpendLimitOrganizationScope | BetaSpendLimitWorkspaceScope;
 
+  /**
+   * Body param
+   */
   period?: BetaSpendLimitPeriod;
+
+  /**
+   * Header param: Optional header to specify the beta version(s) you want to use.
+   */
+  betas?: Array<BetaAPI.AnthropicBeta>;
 }
 
 SpendLimits.Effective = Effective;

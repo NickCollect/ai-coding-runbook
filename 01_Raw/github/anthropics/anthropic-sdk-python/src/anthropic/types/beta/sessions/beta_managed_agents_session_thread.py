@@ -4,6 +4,7 @@ from typing_extensions import Literal, Annotated, TypeAlias
 
 from ...._models import BaseModel, UnionDiscriminator
 from ..beta_managed_agents_advisor import BetaManagedAgentsAdvisor
+from .beta_managed_agents_inline_agent import BetaManagedAgentsInlineAgent
 from .beta_managed_agents_session_thread_stats import BetaManagedAgentsSessionThreadStats
 from .beta_managed_agents_session_thread_usage import BetaManagedAgentsSessionThreadUsage
 from ..beta_managed_agents_session_thread_agent import BetaManagedAgentsSessionThreadAgent
@@ -12,14 +13,15 @@ from .beta_managed_agents_session_thread_status import BetaManagedAgentsSessionT
 __all__ = ["BetaManagedAgentsSessionThread", "Agent"]
 
 Agent: TypeAlias = Annotated[
-    Union[BetaManagedAgentsSessionThreadAgent, BetaManagedAgentsAdvisor], UnionDiscriminator("type")
+    Union[BetaManagedAgentsSessionThreadAgent, BetaManagedAgentsAdvisor, BetaManagedAgentsInlineAgent],
+    UnionDiscriminator("type"),
 ]
 
 
 class BetaManagedAgentsSessionThread(BaseModel):
     """An execution thread within a `session`.
 
-    Each session has one primary thread plus zero or more child threads spawned by the coordinator.
+    Each session has one primary thread plus zero or more child threads.
     """
 
     id: str
@@ -61,4 +63,10 @@ class BetaManagedAgentsSessionThread(BaseModel):
     """Cumulative token usage for this thread.
 
     Null until the thread's first idle transition.
+    """
+
+    workflow_run_id: Optional[str] = None
+    """
+    Identifier of the workflow run that created the thread, or `null` for any other
+    thread.
     """

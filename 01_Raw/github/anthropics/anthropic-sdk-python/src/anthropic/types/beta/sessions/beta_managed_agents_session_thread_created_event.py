@@ -1,3 +1,4 @@
+from typing import Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -7,7 +8,7 @@ __all__ = ["BetaManagedAgentsSessionThreadCreatedEvent"]
 
 
 class BetaManagedAgentsSessionThreadCreatedEvent(BaseModel):
-    """Emitted when a subagent is spawned as a new thread.
+    """Emitted when a child thread is created.
 
     Written to the parent thread's output stream so clients observing the session see child creation.
     """
@@ -25,3 +26,9 @@ class BetaManagedAgentsSessionThreadCreatedEvent(BaseModel):
     """Public `sthr_` ID of the newly created thread."""
 
     type: Literal["session.thread_created"]
+
+    workflow_run_id: Optional[str] = None
+    """
+    Identifier of the workflow run that created the thread, or `null` for any other
+    thread.
+    """
