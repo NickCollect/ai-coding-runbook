@@ -17,9 +17,13 @@ export type ForkClientEvent =
   | LiveAPI.InputAudioAppendEvent
   | LiveAPI.InputAudioMuteEvent
   | LiveAPI.InputAudioUnmuteEvent
+  | LiveAPI.OutputAudioFixturePlayEvent
   | LiveAPI.InstructionsAppendEvent
   | LiveAPI.ThinkingAppendEvent
   | LiveAPI.CommentaryAppendEvent
+  | LiveAPI.DecisionCreateEvent
+  | LiveAPI.DecisionItemCreateEvent
+  | LiveAPI.DecisionItemDeleteEvent
   | LiveAPI.ResponseItemCreateEvent
   | LiveAPI.ResponseCreateEvent
   | LiveAPI.SessionCloseEvent;
@@ -36,6 +40,8 @@ export type ForkServerEvent =
   | LiveAPI.SessionUpdatedEvent
   | LiveAPI.InputAudioMutedEvent
   | LiveAPI.InputAudioUnmutedEvent
+  | LiveAPI.OutputAudioFixturePlayingEvent
+  | LiveAPI.OutputAudioFixturePlayedEvent
   | LiveAPI.InstructionsAppendedEvent
   | LiveAPI.ThinkingAppendedEvent
   | LiveAPI.CommentaryAppendedEvent
@@ -44,6 +50,9 @@ export type ForkServerEvent =
   | LiveAPI.InputTranscriptDeltaEvent
   | LiveAPI.OutputTranscriptDeltaEvent
   | LiveAPI.DelegationCreatedEvent
+  | LiveAPI.DecisionEvent
+  | LiveAPI.DecisionItemCreatedEvent
+  | LiveAPI.DecisionItemDeletedEvent
   | LiveAPI.ResponseEvent
   | LiveAPI.SessionUsageUpdatedEvent
   | LiveAPI.SessionClosedEvent

@@ -222,6 +222,7 @@ const packedPackagePath = require('node:path');
         "    on(event: 'message', listener: (data: ArrayBuffer | Uint8Array | Uint8Array[], isBinary: boolean) => void): this;",
         "    on(event: 'error', listener: (error: Error) => void): this;",
         "    on(event: 'redirect', listener: (url: string, request: { getHeaders(): Record<string, string | string[] | undefined> }) => void): this;",
+        "    on(event: 'unexpected-response', listener: (request: unknown, response: { statusCode?: number; resume(): void }) => void): this;",
         '    on(event: string, listener: (...args: unknown[]) => void): this;',
         '    removeListener(event: string, listener: (...args: unknown[]) => void): this;',
         '  }',
@@ -689,6 +690,12 @@ const packedPackagePath = require('node:path');
       path.join(temporaryDirectory, 'responses-ws-module-formats.cjs'),
     );
     run(process.execPath, ['--test', 'responses-ws-module-formats.cjs']);
+    fs.copyFileSync(
+      path.join(root, 'scripts/fixtures/computer-use-smoke.mjs'),
+      path.join(temporaryDirectory, 'computer-use-smoke.mjs'),
+    );
+    run(process.execPath, ['computer-use-smoke.mjs', 'cjs']);
+    run(process.execPath, ['computer-use-smoke.mjs', 'esm']);
     fs.symlinkSync(path.join(root, 'node_modules/undici'), optionalUndici, 'dir');
     for (const [inputType, consumer] of [
       [

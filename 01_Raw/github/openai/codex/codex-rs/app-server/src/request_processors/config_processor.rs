@@ -4,6 +4,7 @@ use crate::config_manager::ConfigManager;
 use crate::config_manager_service::ConfigManagerError;
 use crate::error_code::internal_error;
 use crate::error_code::invalid_request;
+use crate::model_catalog::ModelCatalog;
 use crate::outgoing_message::ConnectionRequestId;
 use crate::outgoing_message::OutgoingMessageSender;
 use codex_analytics::AnalyticsEventsClient;
@@ -83,6 +84,7 @@ pub(crate) struct ConfigRequestProcessor {
     outgoing: Arc<OutgoingMessageSender>,
     config_manager: ConfigManager,
     thread_manager: Arc<ThreadManager>,
+    model_catalog: Arc<ModelCatalog>,
     analytics_events_client: AnalyticsEventsClient,
 }
 
@@ -91,12 +93,14 @@ impl ConfigRequestProcessor {
         outgoing: Arc<OutgoingMessageSender>,
         config_manager: ConfigManager,
         thread_manager: Arc<ThreadManager>,
+        model_catalog: Arc<ModelCatalog>,
         analytics_events_client: AnalyticsEventsClient,
     ) -> Self {
         Self {
             outgoing,
             config_manager,
             thread_manager,
+            model_catalog,
             analytics_events_client,
         }
     }
@@ -328,6 +332,11 @@ impl ConfigRequestProcessor {
             .set_api_key_model_discovery_enabled(
                 config.features.enabled(Feature::ApiKeyModelDiscovery),
             );
+        self.model_catalog
+            .set_api_key_model_discovery_enabled(
+                config.features.enabled(Feature::ApiKeyModelDiscovery),
+            )
+            .await;
         if should_start_background_rollout_migration && config.features.enabled(feature) {
             self.thread_manager.start_background_rollout_migration();
         }
@@ -550,7 +559,10 @@ fn map_requirements_to_api(
         feature_requirements: requirements
             .feature_requirements
             .map(|requirements| requirements.entries),
-        hooks: requirements.hooks.map(map_hooks_requirements_to_api),
+        hooks: requirements
+            .hooks
+            .map(map_hooks_requirements_to_api)
+            .map(Box::new),
         enforce_residency: requirements
             .enforce_residency
             .map(map_residency_requirement_to_api),
@@ -705,6 +717,8 @@ fn map_hooks_requirements_to_api(hooks: ManagedHooksRequirementsToml) -> Managed
         hooks,
     } = hooks;
     let HookEventsToml {
+        pre_model_request,
+        post_model_request,
         pre_tool_use,
         permission_request,
         post_tool_use,
@@ -717,11 +731,13 @@ fn map_hooks_requirements_to_api(hooks: ManagedHooksRequirementsToml) -> Managed
         subagent_stop,
         stop,
         interrupt,
-    } = hooks;
+    } = *hooks;
 
     ManagedHooksRequirements {
         managed_dir,
         windows_managed_dir,
+        pre_model_request: map_hook_matcher_groups_to_api(pre_model_request),
+        post_model_request: map_hook_matcher_groups_to_api(post_model_request),
         pre_tool_use: map_hook_matcher_groups_to_api(pre_tool_use),
         permission_request: map_hook_matcher_groups_to_api(permission_request),
         post_tool_use: map_hook_matcher_groups_to_api(post_tool_use),

@@ -17,7 +17,9 @@ use crate::context::ContextualUserFragment;
 use crate::context::CurrentTimeReminder;
 use crate::context::CurrentTimeUnavailable;
 use crate::context::DeveloperInstructions;
+use crate::context::GuardianApprovedAction;
 use crate::context::ManagedDeveloperInstructions;
+use crate::context::ModelInstructions;
 use crate::context::MultiAgentModeInstructions;
 use crate::context::MultiAgentRoleInstructions;
 use crate::context::MultiAgentUsageHint;
@@ -133,10 +135,16 @@ fn retain_forked_developer_message(item: &mut ResponseItem, usage_hint_texts: &[
         return false;
     };
     content.retain(|content_item| {
+        // Leave base instructions for the later context-baseline retention check.
+        if content_item.kind().as_str() == BaseInstructionsFragment::KIND {
+            return true;
+        }
         // Persisted role hints can predate the current bundled wording and lack markers.
         if matches!(
             content_item.kind().as_str(),
-            "guardian.approved_action" | "multi_agent.role_instructions" | "multi_agent.usage_hint"
+            GuardianApprovedAction::KIND
+                | MultiAgentRoleInstructions::KIND
+                | MultiAgentUsageHint::KIND
         ) {
             return false;
         }
@@ -954,6 +962,13 @@ impl LocalAgentControl {
             }
         }
         let input_admission = input_admission_started_at.elapsed();
+        // Keep provisional ownership through the final awaits. Commit and return to the
+        // backend caller in one poll; later tool-result publication is outside this boundary.
+        let status = self.get_status(new_thread.thread_id).await;
+        let config = match spawn_config {
+            Some(config) => config,
+            None => new_thread.thread.config_snapshot().await,
+        };
         reservation.commit(agent_metadata.clone());
         if let Some(residency_slot) = residency_slot {
             residency_slot.commit(new_thread.thread_id);
@@ -981,11 +996,7 @@ impl LocalAgentControl {
         let agent = LiveAgent {
             thread_id: new_thread.thread_id,
             metadata: agent_metadata,
-            status: self.get_status(new_thread.thread_id).await,
-        };
-        let config = match spawn_config {
-            Some(config) => config,
-            None => new_thread.thread.config_snapshot().await,
+            status,
         };
         let session_telemetry = new_thread
             .thread
@@ -1095,7 +1106,7 @@ impl LocalAgentControl {
                 [parent_usage_hints.root, parent_usage_hints.subagent]
                     .into_iter()
                     .flatten()
-                    .map(|instructions| instructions.render())
+                    .map(|instructions| instructions.render().into_text().unwrap_or_default())
                     .collect()
             } else {
                 Vec::new()
@@ -1178,6 +1189,7 @@ impl LocalAgentControl {
                         return true;
                     };
                     if ManagedDeveloperInstructions::matches_text(text)
+                        || ModelInstructions::matches_text(text)
                         || PersistentModeState::matches_text(text)
                     {
                         // If the child will rebuild its initial context, drop the inherited

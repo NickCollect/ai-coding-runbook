@@ -54,17 +54,17 @@ impl PasteEnvironment {
             return Ok(false);
         }
         if !transcript_mode.is_owned() {
-            return Err("Unavailable in inline mode. Use your terminal's paste command.");
+            return Err("Unavailable in inline mode; use your terminal's paste command");
         }
         if self.ssh {
-            return Err("Unavailable over SSH. Use your terminal's paste command.");
+            return Err("Unavailable over SSH; use your terminal's paste command");
         }
         if self.vscode == VscodeDetection::VsCode {
-            return Err("VS Code handles pasting. Use its terminal paste command.");
+            return Err("VS Code handles pasting; use its terminal paste command");
         }
         if mode == RightClickPaste::Auto && self.wsl && self.vscode == VscodeDetection::Unknown {
             return Err(
-                "Auto cannot identify this WSL terminal. Use On or your terminal's paste command.",
+                "Auto cannot identify this WSL terminal; use On or your terminal's paste command",
             );
         }
         match mode {

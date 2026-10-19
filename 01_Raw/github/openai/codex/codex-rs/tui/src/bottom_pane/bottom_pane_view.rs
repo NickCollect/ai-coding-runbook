@@ -4,6 +4,7 @@ use crate::bottom_pane::McpServerElicitationFormRequest;
 use crate::key_hint::KeyBinding;
 use crate::keymap::KeymapContextSet;
 use crate::render::renderable::Renderable;
+use crate::terminal_program_status::ProgramStatusKind;
 use codex_app_server_protocol::ToolRequestUserInputParams;
 use crossterm::event::KeyEvent;
 use std::time::Instant;
@@ -106,6 +107,14 @@ pub(crate) trait BottomPaneView: Renderable {
     fn selected_index(&self) -> Option<usize> {
         None
     }
+
+    /// Current toggle values for list items that preserve local choices across refreshes.
+    fn selection_toggle_states(&self) -> Vec<Option<super::SelectionToggleState>> {
+        Vec::new()
+    }
+
+    /// Mark one previously emitted toggle action as complete.
+    fn complete_selection_toggle(&mut self, _index: usize) {}
 
     /// Current query for searchable list views that preserve filtering across refreshes.
     fn search_query(&self) -> Option<&str> {
@@ -219,6 +228,13 @@ pub(crate) trait BottomPaneView: Renderable {
     /// Codex needs user input.
     fn terminal_title_requires_action(&self) -> bool {
         false
+    }
+
+    /// Classify interactive requests that prevent the agent from continuing.
+    ///
+    /// Ordinary settings and navigation views do not block a running agent.
+    fn program_status_blocked_kind(&self) -> Option<ProgramStatusKind> {
+        None
     }
 
     /// Return the next time-based redraw this view needs while it is active.

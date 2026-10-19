@@ -96,7 +96,10 @@ pub(crate) async fn prepare_prompt(
                     max_input_tokens: maximum,
                     existing_context_tokens: estimate_request_tokens(&baseline),
                 },
-                GuardianBudgetOmission.render(),
+                GuardianBudgetOmission
+                    .render()
+                    .into_text()
+                    .unwrap_or_default(),
                 HistoryTruncation::Preserve,
             )
             .map_err(|error| {

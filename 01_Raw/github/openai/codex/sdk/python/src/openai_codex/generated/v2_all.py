@@ -1984,6 +1984,8 @@ class HookErrorInfo(BaseModel):
 
 
 class HookEventName(Enum):
+    pre_model_request = "preModelRequest"
+    post_model_request = "postModelRequest"
     pre_tool_use = "preToolUse"
     permission_request = "permissionRequest"
     post_tool_use = "postToolUse"
@@ -2100,6 +2102,17 @@ class ImageGenerationFailure(RootModel[UsageLimitExceededImageGenerationFailure]
         populate_by_name=True,
     )
     root: UsageLimitExceededImageGenerationFailure
+
+
+class ImageGenerationInputImage(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    path: AbsolutePathBuf
+    sha256: Annotated[
+        str,
+        Field(description="Lowercase SHA-256 of the file bytes read before image normalization."),
+    ]
 
 
 class InAppBrowserRequirements(BaseModel):
@@ -2411,8 +2424,14 @@ class ManagedHooksRequirements(BaseModel):
         list[ConfiguredHookMatcherGroup], Field(alias="PermissionRequest")
     ]
     post_compact: Annotated[list[ConfiguredHookMatcherGroup], Field(alias="PostCompact")]
+    post_model_request: Annotated[
+        list[ConfiguredHookMatcherGroup] | None, Field(alias="PostModelRequest")
+    ] = []
     post_tool_use: Annotated[list[ConfiguredHookMatcherGroup], Field(alias="PostToolUse")]
     pre_compact: Annotated[list[ConfiguredHookMatcherGroup], Field(alias="PreCompact")]
+    pre_model_request: Annotated[
+        list[ConfiguredHookMatcherGroup] | None, Field(alias="PreModelRequest")
+    ] = []
     pre_tool_use: Annotated[list[ConfiguredHookMatcherGroup], Field(alias="PreToolUse")]
     session_end: Annotated[list[ConfiguredHookMatcherGroup] | None, Field(alias="SessionEnd")] = []
     session_start: Annotated[list[ConfiguredHookMatcherGroup], Field(alias="SessionStart")]
@@ -5524,18 +5543,49 @@ class SleepThreadItem(BaseModel):
     type: Annotated[Literal["sleep"], Field(title="SleepThreadItemType")]
 
 
-class ImageGenerationThreadItem(BaseModel):
+class FileIdThreadItem(BaseModel):
     model_config = ConfigDict(
         populate_by_name=True,
     )
     failure: ImageGenerationFailure | None = None
     id: str
-    result: str
+    input_images: Annotated[
+        list[ImageGenerationInputImage] | None,
+        Field(
+            alias="inputImages",
+            description="Observed local inputs for a completed generation, absent on older items.",
+        ),
+    ] = None
     revised_prompt: Annotated[str | None, Field(alias="revisedPrompt")] = None
     saved_path: Annotated[AbsolutePathBuf | None, Field(alias="savedPath")] = None
     status: str
     transparent_background: Annotated[bool | None, Field(alias="transparentBackground")] = None
     type: Annotated[Literal["imageGeneration"], Field(title="ImageGenerationThreadItemType")]
+    file_id: Annotated[str, Field(alias="fileId")]
+
+
+class ResultThreadItem(BaseModel):
+    model_config = ConfigDict(
+        populate_by_name=True,
+    )
+    failure: ImageGenerationFailure | None = None
+    id: str
+    input_images: Annotated[
+        list[ImageGenerationInputImage] | None,
+        Field(
+            alias="inputImages",
+            description="Observed local inputs for a completed generation, absent on older items.",
+        ),
+    ] = None
+    revised_prompt: Annotated[str | None, Field(alias="revisedPrompt")] = None
+    saved_path: Annotated[AbsolutePathBuf | None, Field(alias="savedPath")] = None
+    status: str
+    transparent_background: Annotated[bool | None, Field(alias="transparentBackground")] = None
+    type: Annotated[Literal["imageGeneration"], Field(title="ImageGenerationThreadItemType")]
+    result: str
+
+
+ImageGenerationThreadItem = ResultThreadItem
 
 
 class EnteredReviewModeThreadItem(BaseModel):
@@ -8797,6 +8847,13 @@ class McpServerStatus(BaseModel):
         ),
     ] = None
     server_info: Annotated[McpServerInfo | None, Field(alias="serverInfo")] = None
+    tool_list_meta: Annotated[
+        Any | None,
+        Field(
+            alias="toolListMeta",
+            description="Opaque `_meta` from the first page of the corresponding MCP tool catalog. Null when unavailable.",
+        ),
+    ] = None
     tools: dict[str, Tool]
     tools_error: Annotated[
         str | None,
@@ -11647,7 +11704,8 @@ class ThreadItem(
         | WebSearchThreadItem
         | ImageViewThreadItem
         | SleepThreadItem
-        | ImageGenerationThreadItem
+        | FileIdThreadItem
+        | ResultThreadItem
         | EnteredReviewModeThreadItem
         | ExitedReviewModeThreadItem
         | ContextCompactionThreadItem
@@ -11672,7 +11730,8 @@ class ThreadItem(
         | WebSearchThreadItem
         | ImageViewThreadItem
         | SleepThreadItem
-        | ImageGenerationThreadItem
+        | FileIdThreadItem
+        | ResultThreadItem
         | EnteredReviewModeThreadItem
         | ExitedReviewModeThreadItem
         | ContextCompactionThreadItem

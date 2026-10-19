@@ -46,6 +46,8 @@ class Decisions(SyncAPIResource):
         input: Union[str, Iterable[DecisionInputMessageParam]],
         model: str,
         questions: Iterable[decision_create_params.Question],
+        prompt_cache_key: Optional[str] | Omit = omit,
+        prompt_cache_options: Optional[decision_create_params.PromptCacheOptions] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -55,23 +57,31 @@ class Decisions(SyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> Decision:
         """
-        Use this endpoint to ask classification or scoring questions about the same
-        input. You’ll get the answers back in the order you asked the questions.
-
-        For text, you can pass a string. You can also send user messages containing
-        `input_text` and `input_image` parts, with up to 128 images per request. Images
-        can be base64 data URLs or publicly accessible HTTP(S) URLs. File IDs aren’t
-        accepted. Other message roles, function calls, files, audio, and item references
-        aren’t supported.
-
-        Sometimes a question returns a refusal instead of an answer. The result has type
-        `refusal` and includes the question’s name, or `null` if you didn’t give it one.
+        Use this endpoint to quickly answer classification or scoring questions about
+        some input. You can ask multiple questions in one request.
 
         Args:
           input: The text or images to evaluate for every question. Provide a text string or user
               messages containing text and images. Images can be base64 data URLs or publicly
               accessible HTTP(S) URLs; at most 128 images are allowed across all messages in
               one request. Files, audio, tools, and item references are not supported.
+
+          model: The model to use. Only `gpt-6-luna` is supported.
+
+          questions: Ask 1–200 questions about the input. Each question can be a predicate, choice,
+              or score. Answers come back in the same order.
+
+          prompt_cache_key: Partition prompt cache reuse by caller-provided key.
+
+          prompt_cache_options: Options for prompt caching. Supported for `gpt-5.6` and later models. By
+              default, OpenAI automatically chooses one implicit cache breakpoint. You can add
+              explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each
+              request can write up to four breakpoints. For cache matching, OpenAI considers
+              up to the latest 80 breakpoints in the conversation, without a content-block
+              lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
+              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
+              for current details.
 
           safety_identifier: Opaque caller-provided end-user identifier, scoped by the verified org. Match
               Responses' limit; this is never the authenticated user identity.
@@ -91,6 +101,8 @@ class Decisions(SyncAPIResource):
                     "model": model,
                     "input": input,
                     "questions": questions,
+                    "prompt_cache_key": prompt_cache_key,
+                    "prompt_cache_options": prompt_cache_options,
                     "safety_identifier": safety_identifier,
                 },
                 decision_create_params.DecisionCreateParams,
@@ -132,6 +144,8 @@ class AsyncDecisions(AsyncAPIResource):
         input: Union[str, Iterable[DecisionInputMessageParam]],
         model: str,
         questions: Iterable[decision_create_params.Question],
+        prompt_cache_key: Optional[str] | Omit = omit,
+        prompt_cache_options: Optional[decision_create_params.PromptCacheOptions] | Omit = omit,
         safety_identifier: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -141,23 +155,31 @@ class AsyncDecisions(AsyncAPIResource):
         timeout: float | httpx2.Timeout | None | NotGiven = not_given,
     ) -> Decision:
         """
-        Use this endpoint to ask classification or scoring questions about the same
-        input. You’ll get the answers back in the order you asked the questions.
-
-        For text, you can pass a string. You can also send user messages containing
-        `input_text` and `input_image` parts, with up to 128 images per request. Images
-        can be base64 data URLs or publicly accessible HTTP(S) URLs. File IDs aren’t
-        accepted. Other message roles, function calls, files, audio, and item references
-        aren’t supported.
-
-        Sometimes a question returns a refusal instead of an answer. The result has type
-        `refusal` and includes the question’s name, or `null` if you didn’t give it one.
+        Use this endpoint to quickly answer classification or scoring questions about
+        some input. You can ask multiple questions in one request.
 
         Args:
           input: The text or images to evaluate for every question. Provide a text string or user
               messages containing text and images. Images can be base64 data URLs or publicly
               accessible HTTP(S) URLs; at most 128 images are allowed across all messages in
               one request. Files, audio, tools, and item references are not supported.
+
+          model: The model to use. Only `gpt-6-luna` is supported.
+
+          questions: Ask 1–200 questions about the input. Each question can be a predicate, choice,
+              or score. Answers come back in the same order.
+
+          prompt_cache_key: Partition prompt cache reuse by caller-provided key.
+
+          prompt_cache_options: Options for prompt caching. Supported for `gpt-5.6` and later models. By
+              default, OpenAI automatically chooses one implicit cache breakpoint. You can add
+              explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each
+              request can write up to four breakpoints. For cache matching, OpenAI considers
+              up to the latest 80 breakpoints in the conversation, without a content-block
+              lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
+              `ttl` defaults to `30m`, which is currently the only supported value. See the
+              [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
+              for current details.
 
           safety_identifier: Opaque caller-provided end-user identifier, scoped by the verified org. Match
               Responses' limit; this is never the authenticated user identity.
@@ -177,6 +199,8 @@ class AsyncDecisions(AsyncAPIResource):
                     "model": model,
                     "input": input,
                     "questions": questions,
+                    "prompt_cache_key": prompt_cache_key,
+                    "prompt_cache_options": prompt_cache_options,
                     "safety_identifier": safety_identifier,
                 },
                 decision_create_params.DecisionCreateParams,

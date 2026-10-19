@@ -3,6 +3,7 @@
 //! This module owns the typed JSON-RPC calls needed by the TUI and keeps
 //! request/response plumbing out of `App` and `ChatWidget`.
 
+mod daybreak_api_key_compat;
 mod external_agent_config;
 pub(crate) mod fs;
 mod history;
@@ -321,6 +322,7 @@ pub(crate) struct AppServerBootstrap {
 }
 
 pub(crate) struct AppServerSession {
+    backend_id: crate::backend_id::BackendId,
     client: AppServerClient,
     next_request_id: i64,
     history_pagination: HashMap<ThreadId, history::ThreadHistoryPagination>,
@@ -332,9 +334,10 @@ pub(crate) struct AppServerSession {
     /// Explicit CLI provider selection, distinct from resolved configuration defaults.
     pub(crate) model_provider_override: Option<String>,
     history_support: ThreadHistorySupport,
-    thread_settings_update_supported: bool,
+    pub(crate) thread_settings_update_supported: bool,
     default_model: Option<String>,
     available_models: Vec<ModelPreset>,
+    daybreak_api_key_compat: Arc<tokio::sync::Semaphore>,
     managed_new_thread_defaults: Option<NewThreadModelDefaults>,
     external_agent_config_import_id: Mutex<Option<String>>,
     dynamic_tool_mcp: Option<Arc<DynamicToolMcpServer>>,
@@ -426,8 +429,13 @@ impl AppServerSession {
         self.client.platform_os()
     }
 
-    pub(crate) fn new(client: AppServerClient, thread_params_mode: ThreadParamsMode) -> Self {
+    pub(crate) fn new(
+        backend_id: crate::backend_id::BackendId,
+        client: AppServerClient,
+        thread_params_mode: ThreadParamsMode,
+    ) -> Self {
         Self {
+            backend_id,
             client,
             next_request_id: 1,
             history_pagination: HashMap::new(),
@@ -441,11 +449,16 @@ impl AppServerSession {
             thread_settings_update_supported: true,
             default_model: None,
             available_models: Vec::new(),
+            daybreak_api_key_compat: Arc::new(tokio::sync::Semaphore::new(/*permits*/ 1)),
             managed_new_thread_defaults: None,
             external_agent_config_import_id: Mutex::default(),
             dynamic_tool_mcp: None,
             worktree_source_config_builder: None,
         }
+    }
+
+    pub(crate) fn backend_id(&self) -> crate::backend_id::BackendId {
+        self.backend_id
     }
 
     pub(crate) async fn start_dynamic_tool_mcp(
@@ -454,10 +467,7 @@ impl AppServerSession {
         app_event_tx: AppEventSender,
         status_updates: tokio::sync::broadcast::Sender<ThreadStatusChangedNotification>,
     ) -> std::io::Result<()> {
-        let worktrees = if !self.uses_remote_workspace()
-            && !config.active_project.is_untrusted()
-            && config.features.enabled(codex_features::Feature::Worktrees)
-        {
+        let worktrees = if !self.uses_remote_workspace() && !config.active_project.is_untrusted() {
             // Listing a fresh, nonexistent thread is read-only and returns an empty page
             // on supported stores. Probe before advertising tools or allocating a checkout.
             let support = self
@@ -727,6 +737,16 @@ impl AppServerSession {
             &mut available_models,
             &requirements,
         );
+        if matches!(account.account, Some(Account::ApiKey {})) {
+            available_models = self
+                .constrain_api_key_models(
+                    config,
+                    /*thread_id*/ None,
+                    requirements.requirements.as_ref(),
+                    available_models,
+                )
+                .await;
+        }
         self.managed_new_thread_defaults = requirements
             .requirements
             .and_then(|requirements| requirements.models)
@@ -1445,6 +1465,7 @@ impl AppServerSession {
                     input: items,
                     tool_output: None,
                     responsesapi_client_metadata: None,
+                    responsesapi_client_metadata_patch: None,
                     additional_context: None,
                     environments: None,
                     cwd: Some(cwd),
@@ -1511,6 +1532,7 @@ impl AppServerSession {
                     client_user_message_id: Some(client_user_message_id),
                     input: items,
                     responsesapi_client_metadata: None,
+                    responsesapi_client_metadata_patch: None,
                     additional_context: None,
                     expected_turn_id: turn_id,
                 },
@@ -1776,14 +1798,6 @@ impl AppServerSession {
             .await
             .wrap_err("config/batchWrite failed while reloading user config in TUI")?;
         Ok(())
-    }
-
-    pub(crate) async fn reject_server_request(
-        &self,
-        request_id: RequestId,
-        error: JSONRPCErrorError,
-    ) -> std::io::Result<()> {
-        self.client.reject_server_request(request_id, error).await
     }
 
     pub(crate) async fn resolve_server_request(
@@ -2626,6 +2640,7 @@ mod tests {
     use codex_protocol::models::BUILT_IN_PERMISSION_PROFILE_READ_ONLY;
     use codex_protocol::models::BUILT_IN_PERMISSION_PROFILE_WORKSPACE;
     use codex_protocol::models::ManagedFileSystemPermissions;
+    use codex_protocol::openai_models::ModelAccessPrograms;
     use codex_protocol::openai_models::ModelServiceTier;
     use codex_protocol::openai_models::ReasoningEffort;
     use codex_protocol::permissions::FileSystemAccessMode;
@@ -2633,6 +2648,7 @@ mod tests {
     use codex_protocol::permissions::FileSystemSandboxEntry;
     use codex_protocol::permissions::FileSystemSpecialPath;
     use codex_protocol::permissions::NetworkSandboxPolicy;
+    use codex_protocol::turn_input::CyberAccessProgram;
     use codex_utils_absolute_path::test_support::PathBufExt;
     use codex_utils_absolute_path::test_support::test_path_buf;
     use codex_utils_path_uri::LegacyAppPathString;
@@ -2650,7 +2666,17 @@ mod tests {
     #[tokio::test]
     async fn bootstrap_reuses_prefetched_account_without_another_account_read() -> Result<()> {
         let codex_home = tempfile::tempdir()?;
-        let config = build_config(&codex_home).await;
+        let mut config = build_config(&codex_home).await;
+        let mut catalog = codex_models_manager::bundled_models_response()?;
+        for model in &mut catalog.models {
+            model.available_access_programs = Some(ModelAccessPrograms {
+                cyber: vec![
+                    CyberAccessProgram::Standard,
+                    CyberAccessProgram::DaybreakBlue,
+                ],
+            });
+        }
+        config.model_catalog = Some(catalog);
         let mut app_server = crate::start_embedded_app_server_for_picker(&config).await?;
         let next_request_id = app_server.next_request_id;
         let account = GetAccountResponse {
@@ -2682,6 +2708,63 @@ mod tests {
             )
         );
 
+        // Account-specific catalog filtering at startup and before/after thread creation.
+        let models = bootstrap.available_models;
+        assert!(
+            models
+                .iter()
+                .any(|model| model.available_access_programs.is_some())
+        );
+        let client_home = tempfile::tempdir()?;
+        let key = "features.api_key_cyber_access_programs";
+        for (server_enabled, cli_override, forwarding_enabled) in [
+            (false, None, false),
+            (true, None, true),
+            (false, Some(true), true),
+            (true, Some(false), false),
+        ] {
+            std::fs::write(
+                codex_home.path().join("config.toml"),
+                format!("[features]\napi_key_cyber_access_programs = {server_enabled}\n"),
+            )?;
+            let client_config = ConfigBuilder::default()
+                .codex_home(client_home.path().to_path_buf())
+                .cli_overrides(
+                    cli_override
+                        .into_iter()
+                        .map(|value| (key.into(), value.into()))
+                        .collect(),
+                )
+                .build()
+                .await?;
+            let api_key = app_server
+                .bootstrap_with_account(
+                    &client_config,
+                    GetAccountResponse {
+                        account: Some(Account::ApiKey {}),
+                        requires_openai_auth: true,
+                        workspace_routing: None,
+                    },
+                )
+                .await?;
+            let mut expected = models.clone();
+            if !forwarding_enabled {
+                for model in &mut expected {
+                    model.available_access_programs = None;
+                }
+            }
+            assert_eq!(api_key.available_models, expected);
+            let thread = app_server.start_thread(&client_config).await?;
+            let refreshed = app_server
+                .constrain_api_key_models(
+                    &client_config,
+                    Some(thread.session.thread_id),
+                    /*requirements*/ None,
+                    models.clone(),
+                )
+                .await;
+            assert_eq!(refreshed, expected);
+        }
         app_server.shutdown().await?;
         Ok(())
     }

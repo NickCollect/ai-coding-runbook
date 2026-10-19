@@ -538,6 +538,9 @@ pub struct GuardianReviewAnalyticsResult {
     pub terminal_status: GuardianReviewTerminalStatus,
     pub failure_reason: Option<GuardianReviewFailureReason>,
     pub attempt_count: i64,
+    /// An allow was validated against changed parent/root authorization or review context.
+    /// Retained across attempts; this does not identify the cause of a later cancellation.
+    pub context_changed: bool,
     pub risk_level: Option<GuardianRiskLevel>,
     pub user_authorization: Option<GuardianUserAuthorization>,
     pub outcome: Option<GuardianAssessmentOutcome>,
@@ -564,6 +567,7 @@ impl GuardianReviewAnalyticsResult {
             terminal_status: GuardianReviewTerminalStatus::FailedClosed,
             failure_reason: None,
             attempt_count: 1,
+            context_changed: false,
             risk_level: None,
             user_authorization: None,
             outcome: None,
@@ -1484,6 +1488,8 @@ fn analytics_hook_event_name(event_name: HookEventName) -> &'static str {
         HookEventName::PostToolUse => "PostToolUse",
         HookEventName::PreCompact => "PreCompact",
         HookEventName::PostCompact => "PostCompact",
+        HookEventName::PreModelRequest => "PreModelRequest",
+        HookEventName::PostModelRequest => "PostModelRequest",
         HookEventName::SessionStart => "SessionStart",
         HookEventName::SessionEnd => "SessionEnd",
         HookEventName::UserPromptSubmit => "UserPromptSubmit",

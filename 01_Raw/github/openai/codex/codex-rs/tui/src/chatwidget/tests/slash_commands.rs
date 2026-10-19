@@ -456,7 +456,7 @@ async fn queued_slash_menu_cancel_drains_next_input() {
     )
     .await;
     assert_cancelled_queued_menu_drains_next_input(
-        "/permissions",
+        "/permissions   ",
         "Update Model Permissions",
         KeyEvent::new(KeyCode::Char('c'), KeyModifiers::CONTROL),
     )
@@ -680,7 +680,6 @@ async fn queued_unknown_slash_reports_error_when_dequeued() {
     );
     assert!(chat.input_queue.queued_user_messages.is_empty());
 
-    chat.set_feature_enabled(Feature::Worktrees, /*enabled*/ true);
     chat.set_local_worktree_operations(/*enabled*/ false);
     let drain = chat.submit_queued_slash_prompt(UserMessage::from("/worktree extra").into());
     assert_matches!(drain, QueueDrain::Continue);
@@ -2218,7 +2217,6 @@ async fn slash_copy_picker_remains_available_from_parent_owned_threads() {
 #[tokio::test]
 async fn slash_daybreak_offers_an_application_when_unavailable() {
     let (mut chat, mut rx, _ops) = make_chatwidget_manual(/*model_override*/ None).await;
-    chat.set_feature_enabled(Feature::CliDaybreak, /*enabled*/ true);
     chat.has_chatgpt_account = true;
     chat.config.model_provider_id = "openai".into();
     let mut model = crate::test_support::TEST_MODEL_PRESETS[0].clone();

@@ -1,5 +1,97 @@
 # Changelog
 
+## [3.35.1](https://github.com/openai/openai-python/compare/v3.35.0...v3.35.1) (2026-10-18)
+
+
+### Bug Fixes
+
+* preserve beta Realtime byte reads on websockets 13 ([#4102](https://github.com/openai/openai-python/issues/4102)) ([5766349](https://github.com/openai/openai-python/commit/5766349b2eda3ef63389fe8a30b6a9a1082b33e9))
+
+## [3.35.0](https://github.com/openai/openai-python/compare/v3.34.0...v3.35.0) (2026-10-17)
+
+
+### Features
+
+* **api:** add typed Live sideband events ([#4099](https://github.com/openai/openai-python/issues/4099)) ([8d5cbf0](https://github.com/openai/openai-python/commit/8d5cbf07916b8f2409d940156135ce3c11ac1552))
+* **api:** add ultrafast service tier for Agents ([#4101](https://github.com/openai/openai-python/issues/4101)) ([100bf8f](https://github.com/openai/openai-python/commit/100bf8f7ab8409594258572fbf64bbde140c1c5f))
+
+
+### Bug Fixes
+
+* **realtime:** preserve byte receives with websockets 13 ([#4098](https://github.com/openai/openai-python/issues/4098)) ([309916e](https://github.com/openai/openai-python/commit/309916eb877132359ca2e37b0340a060580e39ee))
+
+## [3.34.0](https://github.com/openai/openai-python/compare/v3.33.0...v3.34.0) (2026-10-17)
+
+
+### Features
+
+* **api:** add degraded external storage status ([#4097](https://github.com/openai/openai-python/issues/4097)) ([b216cb2](https://github.com/openai/openai-python/commit/b216cb2fbdefebba6f3997a180510f9e2b6b41af))
+* **api:** add Realtime Translation WebSocket sessions ([#4095](https://github.com/openai/openai-python/issues/4095)) ([bfada50](https://github.com/openai/openai-python/commit/bfada5040b0171cd0ae61aefae8c78fcf83c804a))
+
+## [3.33.0](https://github.com/openai/openai-python/compare/v3.32.0...v3.33.0) (2026-10-16)
+
+
+### Features
+
+* **api:** add safety identifiers to image requests and responses ([#4093](https://github.com/openai/openai-python/issues/4093)) ([c969e32](https://github.com/openai/openai-python/commit/c969e32ebb325b5910aff4543187fedc5527e172))
+* **api:** share Decisions cache breakpoint parameter type ([#4092](https://github.com/openai/openai-python/issues/4092)) ([f7cefda](https://github.com/openai/openai-python/commit/f7cefdaf059a3e6856d49b4bc2e2e5fbdef8193b))
+
+## [3.32.0](https://github.com/openai/openai-python/compare/v3.31.0...v3.32.0) (2026-10-16)
+
+
+### Features
+
+* **api:** add cache settings and key options [2/2] ([#4087](https://github.com/openai/openai-python/issues/4087)) ([325da45](https://github.com/openai/openai-python/commit/325da45934ddb1c1b6a0bed1681a8cf46c9a8712))
+* **api:** add prompt-based voice creation ([#4091](https://github.com/openai/openai-python/issues/4091)) ([2e39db7](https://github.com/openai/openai-python/commit/2e39db79e2f0ec41ce5d87b379be1e88c8298ea4))
+* **api:** add regional processing residency options ([#4081](https://github.com/openai/openai-python/issues/4081)) ([21ce0c2](https://github.com/openai/openai-python/commit/21ce0c2eae47b389f25d79095d2ac5aec7812806))
+* **api:** add response error diagnostics and model notices ([#4086](https://github.com/openai/openai-python/issues/4086)) ([e71d781](https://github.com/openai/openai-python/commit/e71d781ac5e7b3f365ac130bf338baaf13ae720d))
+* **api:** support audio fixture playback in Live sessions ([#4085](https://github.com/openai/openai-python/issues/4085)) ([9998c1a](https://github.com/openai/openai-python/commit/9998c1a3806afda55cb3923de1f7f49adcff5a7f))
+* **api:** support Decisions in Live sessions ([#4088](https://github.com/openai/openai-python/issues/4088)) ([230a923](https://github.com/openai/openai-python/commit/230a923faba5574ebdc5b45a505a26b6bad79f61))
+
+
+### Bug Fixes
+
+* **api:** declare Realtime response error messages ([#4083](https://github.com/openai/openai-python/issues/4083)) ([95dbee9](https://github.com/openai/openai-python/commit/95dbee9ee406587053a0a21296eb82418073f2aa))
+
+
+### Chores
+
+* **api:** clarify Decisions request and response fields ([#4079](https://github.com/openai/openai-python/issues/4079)) ([d42accb](https://github.com/openai/openai-python/commit/d42accb1a2d1b75b79edf694b8bfee78c4e90e6a))
+
+
+### Refactors
+
+* share WebSocket connection handling ([#4084](https://github.com/openai/openai-python/issues/4084)) ([70d4738](https://github.com/openai/openai-python/commit/70d473892f7c427a02a3b566add9c86072842e25))
+
+## [3.31.0](https://github.com/openai/openai-python/compare/v3.30.0...v3.31.0) (2026-10-14)
+
+
+### Features
+
+* add browser and computer toolsets (1/4) ([#4073](https://github.com/openai/openai-python/issues/4073)) ([47b9e4e](https://github.com/openai/openai-python/commit/47b9e4e95e44b1e825dc4e0753967c65d0733445))
+
+## [3.30.0](https://github.com/openai/openai-python/compare/v3.29.0...v3.30.0) (2026-10-14)
+
+
+### Features
+
+* **api:** add beta session spending limits ([#4058](https://github.com/openai/openai-python/issues/4058)) ([b570279](https://github.com/openai/openai-python/commit/b5702792a0adb1e86a8b51709e935c1e0acde727))
+* **api:** add OCI external-storage provider support ([#4060](https://github.com/openai/openai-python/issues/4060)) ([9eb83fe](https://github.com/openai/openai-python/commit/9eb83fe4649af0104d22da460007773a6c07119e))
+* **api:** add organization Decisions usage reporting ([#4062](https://github.com/openai/openai-python/issues/4062)) ([5e7a23e](https://github.com/openai/openai-python/commit/5e7a23ee29bcad27a5f31e3e8c1f246488aacb97))
+* **api:** expose image tool error and moderation details ([#4072](https://github.com/openai/openai-python/issues/4072)) ([c5452af](https://github.com/openai/openai-python/commit/c5452afb7ebb0378fa351d0ccdefa097625c7998))
+* **api:** support image URLs and detailed safety alert explanations ([#4061](https://github.com/openai/openai-python/issues/4061)) ([3c50399](https://github.com/openai/openai-python/commit/3c5039945fa0e1fc3bf41e970beb5274f6bdba96))
+* **api:** support updating project API key expiry ([#4066](https://github.com/openai/openai-python/issues/4066)) ([1f05e33](https://github.com/openai/openai-python/commit/1f05e33eaca67e4a6913888aec279b66ac1db206))
+
+
+### Bug Fixes
+
+* **streaming:** restore async HTTP/1.1 connection reuse ([#4041](https://github.com/openai/openai-python/issues/4041)) ([1f6cfe1](https://github.com/openai/openai-python/commit/1f6cfe1148e6cb3cc37eead5e552dc0fefb1c7a0))
+
+
+### Chores
+
+* **api:** clarify agent tool limits and environment pagination ([#4065](https://github.com/openai/openai-python/issues/4065)) ([0f73f1d](https://github.com/openai/openai-python/commit/0f73f1d519f8719b226e9084d78c8bdb4a60e48f))
+
 ## [3.29.0](https://github.com/openai/openai-python/compare/v3.28.0...v3.29.0) (2026-10-11)
 
 

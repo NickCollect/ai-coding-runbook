@@ -17,7 +17,7 @@ import {
 } from './client-secrets';
 import * as ResponsesAPI from '../responses/responses';
 import * as TranslationsAPI from './translations/translations';
-import { Translations } from './translations/translations';
+import { ConnectClientEvent, Translations } from './translations/translations';
 
 export class Realtime extends APIResource {
   clientSecrets: ClientSecretsAPI.ClientSecrets = new ClientSecretsAPI.ClientSecrets(this._client);
@@ -1303,7 +1303,8 @@ export interface RealtimeAudioConfigOutput {
    * `cedar`. You may also provide a custom voice object with an `id`, for example
    * `{ "id": "voice_1234" }`. Voice cannot be changed during the session once the
    * model has responded with audio at least once. Custom voices must be created from
-   * audio samples. We recommend `marin` and `cedar` for best quality.
+   * audio samples. Voices created from text prompts are supported only in Live. We
+   * recommend `marin` and `cedar` for best quality.
    */
   voice?:
     | string
@@ -2203,7 +2204,8 @@ export namespace RealtimeResponseCreateAudioOutput {
      * `cedar`. You may also provide a custom voice object with an `id`, for example
      * `{ "id": "voice_1234" }`. Voice cannot be changed during the session once the
      * model has responded with audio at least once. Custom voices must be created from
-     * audio samples. We recommend `marin` and `cedar` for best quality.
+     * audio samples. Voices created from text prompts are supported only in Live. We
+     * recommend `marin` and `cedar` for best quality.
      */
     voice?:
       | string
@@ -2535,6 +2537,11 @@ export namespace RealtimeResponseStatus {
      * Error code, if any.
      */
     code?: string;
+
+    /**
+     * A human-readable error message.
+     */
+    message?: string;
 
     /**
      * The type of error.
@@ -5599,5 +5606,5 @@ export declare namespace Realtime {
     type CallRejectParams as CallRejectParams,
   };
 
-  export { Translations as Translations };
+  export { Translations as Translations, type ConnectClientEvent as ConnectClientEvent };
 }

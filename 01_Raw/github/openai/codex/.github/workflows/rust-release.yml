@@ -268,8 +268,8 @@ jobs:
           export STABLE_GIT_COMMIT
           cargo build --target "$target" --release --timings "${build_args[@]}"
 
-      - name: Prepare Bazel release build
-        if: ${{ matrix.build-system == 'bazel' }}
+      - name: Prepare Bazel for release binaries or Linux voice
+        if: matrix.build-system == 'bazel' || (matrix.bundle == 'primary' && contains(matrix.target, 'linux'))
         uses: ./.github/actions/prepare-bazel-ci
         with:
           target: ${{ matrix.target }}
@@ -322,17 +322,12 @@ jobs:
           path: codex-rs/symbols-dist/${{ matrix.artifact_name }}/*
           if-no-files-found: error
 
-      - name: Set up Bazel for Linux voice
-        if: ${{ matrix.bundle == 'primary' && contains(matrix.target, 'linux') }}
-        uses: bazel-contrib/setup-bazel@c5acdfb288317d0b5c0bbd7a396a3dc868bb0f86 # 0.19.0
-        with:
-          bazelisk-version: 1.28.1
-
       - name: Build Linux voice runtime
         if: ${{ matrix.bundle == 'primary' && contains(matrix.target, 'linux') }}
         shell: bash
         env:
           APP_TARGET: ${{ matrix.target }}
+          BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
         run: |
           set -euo pipefail
           cd "$GITHUB_WORKSPACE"
@@ -342,7 +337,8 @@ jobs:
             x86_64-unknown-linux-gnu) prefix=linux_x86_64 ;;
             *) exit 1 ;;
           esac
-          bazel build --config=release //codex-rs/voice-host:codex-voice-host //third_party/voice:native_runtime
+          python3 .github/scripts/run_bazel_with_buildbuddy.py build --config=release \
+            //codex-rs/voice-host:codex-voice-host //third_party/voice:native_runtime
           source="bazel-bin/third_party/voice/native_runtime_${prefix}"
           output="${RUNNER_TEMP}/signed-voice/${APP_TARGET}"
           mkdir -p "$output"
@@ -575,6 +571,9 @@ jobs:
     needs: tag-check
     name: Build voice runtime - ${{ matrix.target }}
     runs-on: ${{ matrix.runner }}
+    environment:
+      name: bazel
+      deployment: false
     timeout-minutes: 120
     permissions:
       contents: read
@@ -595,20 +594,24 @@ jobs:
       - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.12"
-      - uses: bazel-contrib/setup-bazel@c5acdfb288317d0b5c0bbd7a396a3dc868bb0f86 # 0.19.0
+      - name: Prepare Bazel CI
+        uses: ./.github/actions/prepare-bazel-ci
         with:
-          bazelisk-version: 1.28.1
+          target: ${{ matrix.target }}
+          cache-scope: bazel-release-primary
       - name: Build matching helper and native runtime
         shell: bash
         env:
           TARGET: ${{ matrix.target }}
           PREFIX: ${{ matrix.prefix }}
+          BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
         run: |
           set -euo pipefail
           # Release tags bump Cargo.toml without rewriting the workspace lockfile.
           # Refresh workspace versions before Bazel reads the Cargo dependency graph.
           (cd codex-rs && cargo update --workspace)
-          bazel build --config=release --macos_minimum_os=14.0 //codex-rs/voice-host:codex-voice-host //third_party/voice:native_runtime
+          python3 .github/scripts/run_bazel_with_buildbuddy.py build --config=release \
+            --macos_minimum_os=14.0 //codex-rs/voice-host:codex-voice-host //third_party/voice:native_runtime
           runtime="bazel-bin/third_party/voice/native_runtime_${PREFIX}"
           PYTHONPATH=third_party/voice python3 - "$runtime" "$TARGET" <<'PY'
           from pathlib import Path
@@ -1651,10 +1654,10 @@ jobs:
 
           # Use the commit message for the commit the tag points at (not the
           # annotated tag message).
-          git log -1 --format=%B "${commit}" > "${notes_path}"
-          # Ensure trailing newline so GitHub's markdown renderer doesn't
-          # occasionally run the last line into subsequent content.
-          echo >> "${notes_path}"
+          # Preserve the previous publisher's 124,999-character cap, reserving
+          # the last character for a trailing newline for GitHub's renderer.
+          git log -1 --format=%B "${commit}" |
+            python3 -c 'import sys; print(sys.stdin.read()[:124998])' > "${notes_path}"
 
           echo "path=${notes_path}" >> "${GITHUB_OUTPUT}"
 
@@ -1750,22 +1753,45 @@ jobs:
           mv dist/x86_64-pc-windows-msvc/install.ps1 dist/install.ps1
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
-        with:
-          name: ${{ steps.release_name.outputs.name }}
-          tag_name: ${{ github.ref_name }}
-          body_path: ${{ steps.release_notes.outputs.path }}
-          files: dist/**
-          overwrite_files: true
-          # Release asset uploads follow normal REST API behavior. GitHub recommends
-          # serial API requests to avoid secondary rate limits:
-          # https://docs.github.com/en/rest/releases/assets#upload-a-release-asset
-          # https://docs.github.com/en/rest/using-the-rest-api/best-practices-for-using-the-rest-api#avoid-concurrent-requests
-          preserve_order: true
-          make_latest: ${{ steps.release_name.outputs.make_latest }}
-          # Mark as prerelease only when the version has a suffix after x.y.z
-          # (e.g. -alpha, -beta). Otherwise publish a normal release.
-          prerelease: ${{ steps.release_name.outputs.prerelease }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_NAME: ${{ steps.release_name.outputs.name }}
+          RELEASE_NOTES: ${{ steps.release_notes.outputs.path }}
+          MAKE_LATEST: ${{ steps.release_name.outputs.make_latest }}
+          PRERELEASE: ${{ steps.release_name.outputs.prerelease }}
+        run: |
+          set -euo pipefail
+
+          # Look up this tag, including drafts, without listing release history.
+          # API errors must fail the step rather than look like an absent release.
+          # shellcheck disable=SC2016
+          exists="$(gh api graphql \
+            -f query='query($owner:String!,$repo:String!,$tag:String!){repository(owner:$owner,name:$repo){release(tagName:$tag){databaseId}}}' \
+            -f owner="$GITHUB_REPOSITORY_OWNER" \
+            -f repo="${GITHUB_REPOSITORY#*/}" \
+            -f tag="$GITHUB_REF_NAME" \
+            --jq '.data.repository.release != null')"
+          release_args=(
+            --repo "$GITHUB_REPOSITORY"
+            --title "$RELEASE_NAME"
+            --notes-file "$RELEASE_NOTES"
+            --prerelease="$PRERELEASE"
+          )
+          if [[ "$exists" == false ]]; then
+            # Prereleases must be created directly to keep prereleased events.
+            draft=true
+            if [[ "$PRERELEASE" == true ]]; then
+              draft=false
+            fi
+            gh release create "$GITHUB_REF_NAME" "${release_args[@]}" \
+              --draft="$draft" --verify-tag --latest=false
+          fi
+
+          mapfile -d '' assets < <(find dist -type f -print0 | sort -z)
+          gh release upload "$GITHUB_REF_NAME" "${assets[@]}" \
+            --repo "$GITHUB_REPOSITORY" --clobber
+          gh release edit "$GITHUB_REF_NAME" "${release_args[@]}" \
+            --draft=false --latest="$MAKE_LATEST"
 
   publish-r2-assets:
     name: publish-r2-assets
@@ -1896,6 +1922,9 @@ jobs:
         env:
           VERSION: ${{ needs.release.outputs.version }}
           NPM_TAG: ${{ needs.release.outputs.npm_tag }}
+          NPM_CONFIG_LOGLEVEL: verbose
+          NPM_CONFIG_LOGS_DIR: ${{ runner.temp }}/npm-publish-logs
+          NPM_CONFIG_LOGS_MAX: "100"
         run: |
           set -euo pipefail
           prefix=""
@@ -1987,24 +2016,41 @@ jobs:
               publish_cmd+=(--tag "${tag}")
             fi
 
-            echo "+ ${publish_cmd[*]}"
-            set +e
-            publish_output="$("${publish_cmd[@]}" 2>&1)"
-            publish_status=$?
-            set -e
+            # A fresh npm process obtains new OIDC credentials on each attempt.
+            for attempt in 1 2 3; do
+              echo "+ ${publish_cmd[*]} (attempt ${attempt}/3)"
+              set +e
+              publish_output="$("${publish_cmd[@]}" 2>&1)"
+              publish_status=$?
+              set -e
 
-            echo "${publish_output}"
-            if [[ ${publish_status} -eq 0 ]]; then
-              continue
-            fi
+              echo "${publish_output}"
+              if [[ ${publish_status} -eq 0 ]]; then
+                break
+              fi
 
-            if grep -qiE "previously published|cannot publish over|version already exists" <<< "${publish_output}"; then
-              echo "Skipping already-published package version for ${filename}"
-              continue
-            fi
+              if grep -qiE "previously published|cannot publish over|version already exists" <<< "${publish_output}"; then
+                echo "Skipping already-published package version for ${filename}"
+                break
+              fi
 
-            exit "${publish_status}"
+              if [[ ${attempt} -eq 3 ]]; then
+                exit "${publish_status}"
+              fi
+              delay=$((attempt * 10))
+              echo "Publishing ${filename} failed; retrying in ${delay} seconds."
+              sleep "${delay}"
+            done
           done
+
+      - name: Retain npm debug logs
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: npm-publish-logs-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/npm-publish-logs/
+          if-no-files-found: ignore
+          retention-days: 7
 
   deploy-dev-website:
     name: Trigger developers.openai.com deploy

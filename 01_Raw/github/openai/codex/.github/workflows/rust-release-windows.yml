@@ -179,6 +179,9 @@ jobs:
   build-windows-voice:
     name: Build Windows voice - ${{ matrix.target }}
     runs-on: ${{ matrix.runs_on }}
+    environment:
+      name: bazel
+      deployment: false
     timeout-minutes: 120
     permissions:
       contents: read
@@ -250,7 +253,7 @@ jobs:
         env:
           ARCH: ${{ matrix.arch }}
           VOICE_ARCH: ${{ matrix.arch }}
-          BUILDBUDDY_API_KEY: ""
+          BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
         run: |
           (cd codex-rs && cargo update --workspace)
           python .github/scripts/watch_voice_bazel.py "$(cygpath -w "$BASH")" ./.github/scripts/run-bazel-ci.sh \

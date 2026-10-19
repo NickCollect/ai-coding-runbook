@@ -168,6 +168,11 @@ impl<'a> CatalogContext<'a> {
                 .get::<SkillsSessionState>()
                 .and_then(|state| state.mcp_resources.clone()),
             executor_capability_discovery: self.input.executor_capability_discovery.cloned(),
+            executor_capability_discovery_v2: self
+                .input
+                .executor_capability_discovery_v2
+                .map(Vec::from)
+                .unwrap_or_default(),
         };
 
         let cloud = self.cloud_catalog_contribution(&query);
@@ -244,6 +249,7 @@ impl<'a> CatalogContext<'a> {
                     include_cloud_skills: false,
                     mcp_resources: None,
                     executor_capability_discovery: None,
+                    executor_capability_discovery_v2: Vec::new(),
                 })
                 .await;
             self.input
@@ -450,7 +456,7 @@ impl<'a> CatalogContext<'a> {
             .unwrap_or_default();
         let body = rendered
             .and_then(|rendered| rendered.into_fragment(self.include_usage))
-            .map(|fragment| fragment.body());
+            .map(|fragment| fragment.body().into_text().unwrap_or_default());
         let include_instructions = self.config.include_instructions;
         let metrics = self.input.extension_metrics.clone();
         let warning_emitter = Arc::clone(&self.warning_emitter);

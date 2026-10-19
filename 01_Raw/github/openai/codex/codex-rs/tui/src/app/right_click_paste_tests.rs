@@ -7,12 +7,12 @@ fn policy_preserves_explicit_modes_and_terminal_ownership() {
     use VscodeDetection::Other;
     use VscodeDetection::Unknown;
     use VscodeDetection::VsCode;
-    const SSH_UNAVAILABLE: &str = "Unavailable over SSH. Use your terminal's paste command.";
-    const VSCODE_UNAVAILABLE: &str = "VS Code handles pasting. Use its terminal paste command.";
+    const SSH_UNAVAILABLE: &str = "Unavailable over SSH; use your terminal's paste command";
+    const VSCODE_UNAVAILABLE: &str = "VS Code handles pasting; use its terminal paste command";
     const WSL_AUTO_UNAVAILABLE: &str =
-        "Auto cannot identify this WSL terminal. Use On or your terminal's paste command.";
+        "Auto cannot identify this WSL terminal; use On or your terminal's paste command";
     const INLINE_UNAVAILABLE: &str =
-        "Unavailable in inline mode. Use your terminal's paste command.";
+        "Unavailable in inline mode; use your terminal's paste command";
     let on = if cfg!(target_os = "android") {
         Err("Unavailable on Android")
     } else {

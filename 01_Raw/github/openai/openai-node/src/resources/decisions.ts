@@ -13,17 +13,8 @@ function resolveResourceRequestOptions(
 
 export class Decisions extends APIResource {
   /**
-   * Use this endpoint to ask classification or scoring questions about the same
-   * input. You’ll get the answers back in the order you asked the questions.
-   *
-   * For text, you can pass a string. You can also send user messages containing
-   * `input_text` and `input_image` parts, with up to 128 images per request. Images
-   * can be base64 data URLs or publicly accessible HTTP(S) URLs. File IDs aren’t
-   * accepted. Other message roles, function calls, files, audio, and item references
-   * aren’t supported.
-   *
-   * Sometimes a question returns a refusal instead of an answer. The result has type
-   * `refusal` and includes the question’s name, or `null` if you didn’t give it one.
+   * Use this endpoint to quickly answer classification or scoring questions about
+   * some input. You can ask multiple questions in one request.
    */
   create(body: DecisionCreateParams, options?: RequestOptions): APIPromise<Decision> {
     return this._client.post(
@@ -38,6 +29,11 @@ export class Decisions extends APIResource {
 }
 
 export interface Decision {
+  /**
+   * Answers in question order. Any question can return a refusal instead of an
+   * answer; other questions can still receive answers. A refusal has
+   * `type: "refusal"` and the question's `name`, or `null` if it was unnamed.
+   */
   answers: Array<
     | Decision.AnswerResourcePredicate
     | Decision.AnswerResourceChoice
@@ -45,8 +41,14 @@ export interface Decision {
     | Decision.AnswerResourceRefusal
   >;
 
+  /**
+   * The model used.
+   */
   model: string;
 
+  /**
+   * Token usage for the request.
+   */
   usage: Decision.Usage;
 }
 
@@ -129,6 +131,9 @@ export namespace Decision {
     type: 'refusal';
   }
 
+  /**
+   * Token usage for the request.
+   */
   export interface Usage {
     input_tokens: number;
 
@@ -171,6 +176,13 @@ export interface DecisionInputImage {
    * auto.
    */
   detail?: 'low' | 'high' | 'auto' | 'original' | null;
+
+  /**
+   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
+   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
+   * token block.
+   */
+  prompt_cache_breakpoint?: DecisionPromptCacheBreakpoint | null;
 }
 
 /**
@@ -197,6 +209,25 @@ export interface DecisionInputText {
   text: string;
 
   type: 'input_text';
+
+  /**
+   * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
+   * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
+   * token block.
+   */
+  prompt_cache_breakpoint?: DecisionPromptCacheBreakpoint | null;
+}
+
+/**
+ * Marks the exact end of a reusable prompt prefix. The breakpoint inherits its TTL
+ * from the request's `prompt_cache_options.ttl`; the boundary is not rounded to a
+ * token block.
+ */
+export interface DecisionPromptCacheBreakpoint {
+  /**
+   * The breakpoint mode. Always `explicit`.
+   */
+  mode: 'explicit';
 }
 
 export interface DecisionCreateParams {
@@ -208,13 +239,38 @@ export interface DecisionCreateParams {
    */
   input: string | Array<DecisionInputMessage>;
 
+  /**
+   * The model to use. Only `gpt-6-luna` is supported.
+   */
   model: string;
 
+  /**
+   * Ask 1–200 questions about the input. Each question can be a predicate, choice,
+   * or score. Answers come back in the same order.
+   */
   questions: Array<
     | DecisionCreateParams.QuestionParamPredicate
     | DecisionCreateParams.QuestionParamChoice
     | DecisionCreateParams.QuestionParamScore
   >;
+
+  /**
+   * Partition prompt cache reuse by caller-provided key.
+   */
+  prompt_cache_key?: string | null;
+
+  /**
+   * Options for prompt caching. Supported for `gpt-5.6` and later models. By
+   * default, OpenAI automatically chooses one implicit cache breakpoint. You can add
+   * explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each
+   * request can write up to four breakpoints. For cache matching, OpenAI considers
+   * up to the latest 80 breakpoints in the conversation, without a content-block
+   * lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
+   * `ttl` defaults to `30m`, which is currently the only supported value. See the
+   * [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
+   * for current details.
+   */
+  prompt_cache_options?: DecisionCreateParams.PromptCacheOptions | null;
 
   /**
    * Opaque caller-provided end-user identifier, scoped by the verified org. Match
@@ -291,6 +347,36 @@ export namespace DecisionCreateParams {
       description?: string;
     }
   }
+
+  /**
+   * Options for prompt caching. Supported for `gpt-5.6` and later models. By
+   * default, OpenAI automatically chooses one implicit cache breakpoint. You can add
+   * explicit breakpoints to content blocks with `prompt_cache_breakpoint`. Each
+   * request can write up to four breakpoints. For cache matching, OpenAI considers
+   * up to the latest 80 breakpoints in the conversation, without a content-block
+   * lookback limit. Set `mode` to `explicit` to disable the implicit breakpoint. The
+   * `ttl` defaults to `30m`, which is currently the only supported value. See the
+   * [prompt caching guide](https://developers.openai.com/api/docs/guides/prompt-caching)
+   * for current details.
+   */
+  export interface PromptCacheOptions {
+    /**
+     * Controls whether OpenAI automatically creates an implicit cache breakpoint.
+     * Defaults to `implicit`. With `implicit`, OpenAI creates one implicit breakpoint
+     * and writes up to the latest three explicit breakpoints in the request. With
+     * `explicit`, OpenAI does not create an implicit breakpoint and writes up to the
+     * latest four explicit breakpoints. If there are no explicit breakpoints, the
+     * request does not use prompt caching.
+     */
+    mode?: 'implicit' | 'explicit' | null;
+
+    /**
+     * The minimum lifetime applied to every implicit and explicit cache breakpoint
+     * written by the request. Defaults to `30m`, which is currently the only supported
+     * value. The backend may retain cache entries for longer.
+     */
+    ttl?: '30m';
+  }
 }
 
 export declare namespace Decisions {
@@ -300,6 +386,7 @@ export declare namespace Decisions {
     type DecisionInputMessage as DecisionInputMessage,
     type DecisionInputPart as DecisionInputPart,
     type DecisionInputText as DecisionInputText,
+    type DecisionPromptCacheBreakpoint as DecisionPromptCacheBreakpoint,
     type DecisionCreateParams as DecisionCreateParams,
   };
 }

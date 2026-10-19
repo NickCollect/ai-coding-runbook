@@ -28,6 +28,7 @@ use codex_app_server_protocol::CommandExecutionRequestApprovalResponse;
 use codex_app_server_protocol::DeprecationNoticeNotification;
 use codex_app_server_protocol::FileChangeApprovalDecision;
 use codex_app_server_protocol::FileChangeRequestApprovalResponse;
+use codex_app_server_protocol::GeneratedImageRef;
 use codex_app_server_protocol::ItemStartedNotification;
 use codex_app_server_protocol::JSONRPCError;
 use codex_app_server_protocol::JSONRPCErrorError;
@@ -155,6 +156,10 @@ use super::analytics::thread_initialized_event;
 use super::analytics::wait_for_analytics_payload;
 use super::analytics::wait_for_goal_event;
 use super::analytics::wait_for_matching_analytics_event;
+
+#[cfg(target_os = "linux")]
+#[path = "thread_resume_network_tests.rs"]
+mod network_tests;
 
 #[cfg(windows)]
 const DEFAULT_READ_TIMEOUT: std::time::Duration = std::time::Duration::from_secs(25);
@@ -1817,6 +1822,8 @@ async fn cold_resume_permission_overrides_win_over_persisted_profile() -> Result
 
 // Unelevated Windows sandboxes cannot enforce managed deny-read.
 #[cfg_attr(unix, test_case(
+    SandboxMode::DangerFullAccess,
+    BUILT_IN_PERMISSION_PROFILE_WORKSPACE,
     "[permissions.filesystem]\ndeny_read = [\"./private\"]",
     AppSandboxPolicy::WorkspaceWrite {
         writable_roots: Vec::new(),
@@ -1826,19 +1833,37 @@ async fn cold_resume_permission_overrides_win_over_persisted_profile() -> Result
     };
     "managed deny-read"
 ))]
-#[test_case("", AppSandboxPolicy::DangerFullAccess; "restore saved full access")]
 #[test_case(
+    SandboxMode::DangerFullAccess,
+    BUILT_IN_PERMISSION_PROFILE_WORKSPACE,
+    "", AppSandboxPolicy::DangerFullAccess;
+    "restore saved full access"
+)]
+#[test_case(
+    SandboxMode::DangerFullAccess,
+    BUILT_IN_PERMISSION_PROFILE_WORKSPACE,
     "allowed_sandbox_modes = [\"read-only\"]",
     AppSandboxPolicy::ReadOnly { network_access: false };
     "managed modes"
 )]
 #[test_case(
+    SandboxMode::DangerFullAccess,
+    BUILT_IN_PERMISSION_PROFILE_WORKSPACE,
     "default_permissions = \":read-only\"\n[allowed_permission_profiles]\n\":read-only\" = true",
     AppSandboxPolicy::ReadOnly { network_access: false };
     "managed catalog"
 )]
+#[test_case(
+    SandboxMode::ReadOnly,
+    BUILT_IN_PERMISSION_PROFILE_DANGER_FULL_ACCESS,
+    "allowed_sandbox_modes = [\"read-only\"]",
+    AppSandboxPolicy::ReadOnly { network_access: false };
+    "saved read-only wins before incompatible default validation"
+)]
 #[tokio::test]
 async fn cold_resume_without_active_permission_profile_restores_base_permissions(
+    saved_sandbox: SandboxMode,
+    configured_default: &str,
     requirements: &str,
     expected: AppSandboxPolicy,
 ) -> Result<()> {
@@ -1857,7 +1882,7 @@ async fn cold_resume_without_active_permission_profile_restores_base_permissions
         let mut mcp = builder.build_initialized().await?;
         let params = ThreadStartParams {
             model: Some("mock-model".to_string()),
-            sandbox: Some(SandboxMode::DangerFullAccess),
+            sandbox: Some(saved_sandbox),
             approval_policy: Some(AskForApproval::Never),
             ..Default::default()
         };
@@ -1873,7 +1898,7 @@ async fn cold_resume_without_active_permission_profile_restores_base_permissions
             mcp.start_turn_and_wait_for_completion(TurnStartParams {
                 thread_id: thread.id.clone(),
                 input: vec![UserInput::Text {
-                    text: "persist full access".to_string(),
+                    text: "persist permissions".to_string(),
                     text_elements: Vec::new(),
                 }],
                 ..Default::default()
@@ -1884,9 +1909,8 @@ async fn cold_resume_without_active_permission_profile_restores_base_permissions
     };
 
     MockResponsesConfig::new(&server.uri())
-        .with_root_config(&format!(
-            "default_permissions = \"{BUILT_IN_PERMISSION_PROFILE_WORKSPACE}\""
-        ))
+        .with_approval_policy("on-request")
+        .with_root_config(&format!("default_permissions = \"{configured_default}\""))
         .write(codex_home.path())?;
     std::fs::write(codex_home.path().join("requirements.toml"), requirements)?;
     let mut builder = TestAppServer::builder().with_codex_home(codex_home.path());
@@ -2758,7 +2782,11 @@ async fn thread_resume_redacts_payloads_for_chatgpt_remote_clients() -> Result<(
         normal_turn.items.iter().any(|item| matches!(
             item,
             ThreadItem::ImageGeneration(item)
-                if item.result == "base64-image-result"
+                if matches!(
+                    &item.image,
+                    GeneratedImageRef::Inline { result }
+                        if result == "base64-image-result"
+                )
                     && item.revised_prompt.as_deref() == Some("secret revised prompt")
         )),
         "normal resume should keep image generation items"
@@ -2866,10 +2894,13 @@ fn append_resume_redaction_history(
             call_id: "ig-1".to_string(),
             status: "completed".to_string(),
             revised_prompt: Some("secret revised prompt".to_string()),
-            result: "base64-image-result".to_string(),
+            image: GeneratedImageRef::Inline {
+                result: "base64-image-result".to_string(),
+            },
             transparent_background: None,
             failure: None,
             saved_path: Some(test_absolute_path("/tmp/ig-1.png")),
+            input_images: Vec::new(),
         }),
     ]
     .into_iter()

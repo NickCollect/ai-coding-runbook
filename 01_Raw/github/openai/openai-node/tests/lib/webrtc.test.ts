@@ -493,6 +493,15 @@ it('sends typed client messages and reports local failures synchronously, withou
   live.dispose();
 });
 
+it('excludes WebSocket-only fixture playback from Live WebRTC client events', () => {
+  expectTypeOf<{ type: 'session.output_audio.fixture.play'; audio: string }>().not.toMatchTypeOf<
+    Parameters<OpenAILiveWebRTC['send']>[0]
+  >();
+  expectTypeOf<Parameters<OpenAILiveWebRTC['send']>[0]>().toEqualTypeOf<
+    Parameters<LiveDataChannel['send']>[0]
+  >();
+});
+
 it('infers named payloads from each public helper’s generated server-event union', () => {
   const live = new OpenAILiveWebRTC();
   const realtime = new OpenAIRealtimeWebRTC();
@@ -507,7 +516,7 @@ it('infers named payloads from each public helper’s generated server-event uni
   });
   expectTypeOf(unsubscribe).toEqualTypeOf<() => void>();
   liveChannel.on('session.delegation.created', (event) => {
-    expectTypeOf(event.delegation.target).toEqualTypeOf<'client' | 'responses'>();
+    expectTypeOf(event.delegation.target).toEqualTypeOf<'client' | 'responses' | 'decisions'>();
   });
   realtime.on('session.created', (event) => {
     expectTypeOf(event.type).toEqualTypeOf<'session.created'>();

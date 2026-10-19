@@ -6,6 +6,7 @@ use crate::realtime_conversation::handle_speech as handle_realtime_conversation_
 use crate::realtime_conversation::handle_start as handle_realtime_conversation_start;
 use crate::realtime_conversation::handle_text as handle_realtime_conversation_text;
 use async_channel::Receiver;
+use codex_features::Feature;
 use codex_otel::set_parent_from_w3c_trace_context;
 use tracing::Instrument;
 use tracing::debug_span;
@@ -90,7 +91,10 @@ pub async fn inter_agent_communication(
         .enqueue_mailbox_communication(communication, start_options)
         .await;
     crate::agent_communication::emit_agent_communication_receive(&sub_id);
-    if trigger_turn || sess.has_outstanding_durable_sleep() {
+    if trigger_turn
+        || sess.features.enabled(Feature::WakeOnAgentMessages)
+        || sess.has_outstanding_durable_sleep()
+    {
         sess.maybe_start_turn_for_pending_work_with_sub_id(sub_id)
             .await;
     }
@@ -299,6 +303,7 @@ pub(super) async fn shutdown_session_runtime(sess: &Arc<Session>) {
     }
     let _ = sess.conversation.shutdown().await;
     sess.abort_all_tasks(TurnAbortReason::Interrupted).await;
+    super::async_compaction::shutdown(sess).await;
     let shell_snapshot_prewarm = sess.state.lock().await.shell_snapshot_prewarm.take();
     if let Some(shell_snapshot_prewarm) = shell_snapshot_prewarm {
         shell_snapshot_prewarm.abort();
@@ -467,7 +472,9 @@ pub(super) async fn submission_loop(
                 match update {
                     Ok(true) => {
                         sess.input_queue.notify_mailbox();
-                        if sess.has_outstanding_durable_sleep() {
+                        if sess.features.enabled(Feature::WakeOnAgentMessages)
+                            || sess.has_outstanding_durable_sleep()
+                        {
                             sess.maybe_start_turn_for_pending_work().await;
                         }
                     }
