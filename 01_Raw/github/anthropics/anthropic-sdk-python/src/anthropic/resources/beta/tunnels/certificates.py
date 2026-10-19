@@ -74,7 +74,8 @@ class Certificates(SyncAPIResource):
           ca_certificate_pem: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no
               private-key material. Maximum 8KB.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -113,6 +114,10 @@ class Certificates(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.certificates.create",
+                span_route="/v1/tunnels/{tunnel_id}/certificates",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
+                span_created_id="anthropic.tunnel.certificate.id",
             ),
             cast_to=BetaTunnelCertificate,
         )
@@ -145,7 +150,8 @@ class Certificates(SyncAPIResource):
 
           certificate_id: ID of the certificate (`tcrt_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -189,6 +195,9 @@ class Certificates(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.certificates.retrieve",
+                span_route="/v1/tunnels/{tunnel_id}/certificates/{certificate_id}",
+                span_attributes={"anthropic.tunnel.id": tunnel_id, "anthropic.tunnel.certificate.id": certificate_id},
             ),
             cast_to=BetaTunnelCertificate,
         )
@@ -228,7 +237,8 @@ class Certificates(SyncAPIResource):
 
           page: Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -272,6 +282,9 @@ class Certificates(SyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.tunnels.certificates.list",
+                span_route="/v1/tunnels/{tunnel_id}/certificates",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             model=BetaTunnelCertificate,
         )
@@ -307,7 +320,8 @@ class Certificates(SyncAPIResource):
 
           certificate_id: ID of the certificate to archive (`tcrt_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -351,6 +365,9 @@ class Certificates(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.certificates.archive",
+                span_route="/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive",
+                span_attributes={"anthropic.tunnel.id": tunnel_id, "anthropic.tunnel.certificate.id": certificate_id},
             ),
             cast_to=BetaTunnelCertificate,
         )
@@ -407,7 +424,8 @@ class AsyncCertificates(AsyncAPIResource):
           ca_certificate_pem: PEM-encoded X.509 CA certificate. Must contain exactly one certificate and no
               private-key material. Maximum 8KB.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -446,6 +464,10 @@ class AsyncCertificates(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.certificates.create",
+                span_route="/v1/tunnels/{tunnel_id}/certificates",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
+                span_created_id="anthropic.tunnel.certificate.id",
             ),
             cast_to=BetaTunnelCertificate,
         )
@@ -478,7 +500,8 @@ class AsyncCertificates(AsyncAPIResource):
 
           certificate_id: ID of the certificate (`tcrt_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -522,6 +545,9 @@ class AsyncCertificates(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.certificates.retrieve",
+                span_route="/v1/tunnels/{tunnel_id}/certificates/{certificate_id}",
+                span_attributes={"anthropic.tunnel.id": tunnel_id, "anthropic.tunnel.certificate.id": certificate_id},
             ),
             cast_to=BetaTunnelCertificate,
         )
@@ -561,7 +587,8 @@ class AsyncCertificates(AsyncAPIResource):
 
           page: Opaque pagination cursor from a previous `list_tunnel_certificates` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -605,6 +632,9 @@ class AsyncCertificates(AsyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.tunnels.certificates.list",
+                span_route="/v1/tunnels/{tunnel_id}/certificates",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             model=BetaTunnelCertificate,
         )
@@ -640,7 +670,8 @@ class AsyncCertificates(AsyncAPIResource):
 
           certificate_id: ID of the certificate to archive (`tcrt_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -684,6 +715,9 @@ class AsyncCertificates(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.certificates.archive",
+                span_route="/v1/tunnels/{tunnel_id}/certificates/{certificate_id}/archive",
+                span_attributes={"anthropic.tunnel.id": tunnel_id, "anthropic.tunnel.certificate.id": certificate_id},
             ),
             cast_to=BetaTunnelCertificate,
         )

@@ -4,6 +4,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
+import { startApiCallSpan } from '../../../internal/tracing';
 import { path } from '../../../internal/utils/path';
 
 export class Memories extends APIResource {
@@ -36,6 +37,12 @@ export class Memories extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.memory_stores.memories.create', options, {
+        route: '/v1/memory_stores/{memory_store_id}/memories',
+        queryParams: ['view'],
+        attributes: { 'gen_ai.memory.store.id': memoryStoreID },
+        createdIDAttribute: 'gen_ai.memory.record.id',
+      }),
     });
   }
 
@@ -67,6 +74,11 @@ export class Memories extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.memory_stores.memories.retrieve', options, {
+        route: '/v1/memory_stores/{memory_store_id}/memories/{memory_id}',
+        queryParams: ['view'],
+        attributes: { 'gen_ai.memory.store.id': memory_store_id, 'gen_ai.memory.record.id': memoryID },
+      }),
     });
   }
 
@@ -99,6 +111,11 @@ export class Memories extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.memory_stores.memories.update', options, {
+        route: '/v1/memory_stores/{memory_store_id}/memories/{memory_id}',
+        queryParams: ['view'],
+        attributes: { 'gen_ai.memory.store.id': memory_store_id, 'gen_ai.memory.record.id': memoryID },
+      }),
     });
   }
 
@@ -134,6 +151,12 @@ export class Memories extends APIResource {
           },
           options?.headers,
         ]),
+        __span: startApiCallSpan(this._client, 'anthropic.memory_stores.memories.list', options, {
+          route: '/v1/memory_stores/{memory_store_id}/memories',
+          queryParams: ['depth', 'limit', 'page', 'path_prefix', 'view'],
+          contentQueryParams: ['page'],
+          attributes: { 'gen_ai.memory.store.id': memoryStoreID },
+        }),
       },
     );
   }
@@ -166,6 +189,11 @@ export class Memories extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.memory_stores.memories.delete', options, {
+        route: '/v1/memory_stores/{memory_store_id}/memories/{memory_id}',
+        queryParams: ['expected_content_sha256'],
+        attributes: { 'gen_ai.memory.store.id': memory_store_id, 'gen_ai.memory.record.id': memoryID },
+      }),
     });
   }
 }
@@ -441,7 +469,8 @@ export interface MemoryCreateParams {
   view?: BetaManagedAgentsMemoryView;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -472,7 +501,8 @@ export interface MemoryRetrieveParams {
   view?: BetaManagedAgentsMemoryView;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -527,7 +557,8 @@ export interface MemoryUpdateParams {
   precondition?: BetaManagedAgentsPrecondition;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -566,7 +597,8 @@ export interface MemoryListParams extends PageCursorParams {
   view?: BetaManagedAgentsMemoryView;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -598,7 +630,8 @@ export interface MemoryDeleteParams {
   expected_content_sha256?: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `agent-memory-2026-07-22` or `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 

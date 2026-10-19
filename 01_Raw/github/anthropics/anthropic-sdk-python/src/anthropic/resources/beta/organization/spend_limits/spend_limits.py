@@ -105,6 +105,9 @@ class SpendLimits(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.organization.spend_limits.retrieve",
+                span_route="/v1/organizations/spend_limits/{spend_limit_id}",
+                span_attributes={"anthropic.organization.spend_limit.id": spend_limit_id},
             ),
             cast_to=BetaSpendLimit,
         )
@@ -129,22 +132,17 @@ class SpendLimits(SyncAPIResource):
         """
         List the organization's spend limits.
 
-        A Claude Console organization's limits come in an order that is stable across
-        pages. A Claude Enterprise organization's are grouped by scope type, in the
-        order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-        within a type they come in a fixed order that is not creation order. Listing
-        Claude Console limits is in an early access preview. To request access, contact
-        your Anthropic account team.
+        Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+        `rbac_group`, `organization_service`, `user`; within a type they come in a fixed
+        order that is not creation order. Supported for Claude Enterprise organizations
+        only, not for Claude Console organizations.
 
         Args:
           limit: Maximum number of limits per page. Defaults to `20`.
 
           page: Opaque cursor from a previous response's `next_page` field.
 
-          scope_type: Return only limits with these scope types. A Claude Console organization has
-              `organization` and `workspace` limits; a Claude Enterprise organization has
-              `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user`
-              limits. Omit for all.
+          scope_type: Return only limits with these scope types. Omit for all.
 
           betas: This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in
               this header.
@@ -181,6 +179,8 @@ class SpendLimits(SyncAPIResource):
                     "page": page,
                     "scope_type": scope_type,
                 },
+                span_name="anthropic.organization.spend_limits.list",
+                span_route="/v1/organizations/spend_limits",
             ),
             model=BetaSpendLimit,
         )
@@ -202,8 +202,9 @@ class SpendLimits(SyncAPIResource):
         For a Claude Enterprise organization, this deletes a per-user override, and the
         member falls back to any inherited spend limit at that period. Its seat-tier,
         group, and organization-level rows cannot be deleted via this endpoint. A Claude
-        Console organization deletes its organization and workspace limits. Deleting
-        them through the API is in an early access preview.
+        Console organization deletes its organization and workspace limits, but not its
+        `usage_tier` limit. Deleting organization and workspace limits through the API
+        is in an early access preview.
 
         Args:
           spend_limit_id: ID of the Spend Limit.
@@ -225,6 +226,9 @@ class SpendLimits(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.organization.spend_limits.delete",
+                span_route="/v1/organizations/spend_limits/{spend_limit_id}",
+                span_attributes={"anthropic.organization.spend_limit.id": spend_limit_id},
             ),
             cast_to=SpendLimitDeleteResponse,
         )
@@ -291,6 +295,9 @@ class SpendLimits(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.organization.spend_limits.set",
+                span_route="/v1/organizations/spend_limits",
+                span_created_id="anthropic.organization.spend_limit.id",
             ),
             cast_to=BetaSpendLimit,
         )
@@ -358,6 +365,9 @@ class AsyncSpendLimits(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.organization.spend_limits.retrieve",
+                span_route="/v1/organizations/spend_limits/{spend_limit_id}",
+                span_attributes={"anthropic.organization.spend_limit.id": spend_limit_id},
             ),
             cast_to=BetaSpendLimit,
         )
@@ -382,22 +392,17 @@ class AsyncSpendLimits(AsyncAPIResource):
         """
         List the organization's spend limits.
 
-        A Claude Console organization's limits come in an order that is stable across
-        pages. A Claude Enterprise organization's are grouped by scope type, in the
-        order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-        within a type they come in a fixed order that is not creation order. Listing
-        Claude Console limits is in an early access preview. To request access, contact
-        your Anthropic account team.
+        Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+        `rbac_group`, `organization_service`, `user`; within a type they come in a fixed
+        order that is not creation order. Supported for Claude Enterprise organizations
+        only, not for Claude Console organizations.
 
         Args:
           limit: Maximum number of limits per page. Defaults to `20`.
 
           page: Opaque cursor from a previous response's `next_page` field.
 
-          scope_type: Return only limits with these scope types. A Claude Console organization has
-              `organization` and `workspace` limits; a Claude Enterprise organization has
-              `organization`, `seat_tier`, `rbac_group`, `organization_service` and `user`
-              limits. Omit for all.
+          scope_type: Return only limits with these scope types. Omit for all.
 
           betas: This endpoint is in beta: requests must send `spend-limit-reads-2026-09-26` in
               this header.
@@ -434,6 +439,8 @@ class AsyncSpendLimits(AsyncAPIResource):
                     "page": page,
                     "scope_type": scope_type,
                 },
+                span_name="anthropic.organization.spend_limits.list",
+                span_route="/v1/organizations/spend_limits",
             ),
             model=BetaSpendLimit,
         )
@@ -455,8 +462,9 @@ class AsyncSpendLimits(AsyncAPIResource):
         For a Claude Enterprise organization, this deletes a per-user override, and the
         member falls back to any inherited spend limit at that period. Its seat-tier,
         group, and organization-level rows cannot be deleted via this endpoint. A Claude
-        Console organization deletes its organization and workspace limits. Deleting
-        them through the API is in an early access preview.
+        Console organization deletes its organization and workspace limits, but not its
+        `usage_tier` limit. Deleting organization and workspace limits through the API
+        is in an early access preview.
 
         Args:
           spend_limit_id: ID of the Spend Limit.
@@ -478,6 +486,9 @@ class AsyncSpendLimits(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.organization.spend_limits.delete",
+                span_route="/v1/organizations/spend_limits/{spend_limit_id}",
+                span_attributes={"anthropic.organization.spend_limit.id": spend_limit_id},
             ),
             cast_to=SpendLimitDeleteResponse,
         )
@@ -544,6 +555,9 @@ class AsyncSpendLimits(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.organization.spend_limits.set",
+                span_route="/v1/organizations/spend_limits",
+                span_created_id="anthropic.organization.spend_limit.id",
             ),
             cast_to=BetaSpendLimit,
         )

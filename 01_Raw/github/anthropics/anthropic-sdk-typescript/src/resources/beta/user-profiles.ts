@@ -4,6 +4,7 @@ import { APIPromise } from '../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
+import { startApiCallSpan } from '../../internal/tracing';
 import { path } from '../../internal/utils/path';
 
 export class UserProfiles extends APIResource {
@@ -28,6 +29,10 @@ export class UserProfiles extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.user_profiles.create', options, {
+        route: '/v1/user_profiles',
+        createdIDAttribute: 'anthropic.user_profile.id',
+      }),
     });
   }
 
@@ -57,6 +62,10 @@ export class UserProfiles extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.user_profiles.retrieve', options, {
+        route: '/v1/user_profiles/{user_profile_id}',
+        attributes: { 'anthropic.user_profile.id': userProfileID },
+      }),
     });
   }
 
@@ -87,6 +96,10 @@ export class UserProfiles extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.user_profiles.update', options, {
+        route: '/v1/user_profiles/{user_profile_id}',
+        attributes: { 'anthropic.user_profile.id': userProfileID },
+      }),
     });
   }
 
@@ -116,6 +129,10 @@ export class UserProfiles extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.user_profiles.list', options, {
+        route: '/v1/user_profiles',
+        queryParams: ['limit', 'order', 'order_by', 'page'],
+      }),
     });
   }
 
@@ -145,6 +162,10 @@ export class UserProfiles extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.user_profiles.create_enrollment_url', options, {
+        route: '/v1/user_profiles/{user_profile_id}/enrollment_url',
+        attributes: { 'anthropic.user_profile.id': userProfileID },
+      }),
     });
   }
 }
@@ -440,7 +461,9 @@ export interface UserProfileCreateParams {
   name?: string | null;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or
+   * `user-profiles-2026-09-04` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -457,7 +480,8 @@ export interface UserProfileCreateParams {
 
 export interface UserProfileRetrieveParams {
   /**
-   * Optional header to specify the beta version(s) you want to use.
+   * This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+   * `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -525,7 +549,9 @@ export interface UserProfileUpdateParams {
   name?: string | null;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or
+   * `user-profiles-2026-09-04` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -564,7 +590,9 @@ export interface UserProfileListParams extends PageCursorParams {
   order_by?: 'created_at' | 'name';
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or
+   * `user-profiles-2026-09-04` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -581,7 +609,8 @@ export interface UserProfileListParams extends PageCursorParams {
 
 export interface UserProfileCreateEnrollmentURLParams {
   /**
-   * Optional header to specify the beta version(s) you want to use.
+   * This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+   * `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 

@@ -38,6 +38,7 @@ from ....types.beta import (
     session_create_params,
 )
 from ...._base_client import AsyncPaginator, make_request_options
+from ....lib._tracing import sessions_create_request_attributes
 from .threads.threads import (
     Threads,
     AsyncThreads,
@@ -134,7 +135,8 @@ class Sessions(SyncAPIResource):
 
           vault_ids: Vault IDs for stored credentials the agent can use during the session.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -180,6 +182,10 @@ class Sessions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.create",
+                span_route="/v1/sessions",
+                span_attributes=sessions_create_request_attributes,
+                span_created_id="anthropic.session.id",
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -201,7 +207,8 @@ class Sessions(SyncAPIResource):
         Get Session
 
         Args:
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -239,6 +246,9 @@ class Sessions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.retrieve",
+                span_route="/v1/sessions/{session_id}",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -287,7 +297,8 @@ class Sessions(SyncAPIResource):
           vault_ids: Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests
               setting this field are rejected. Reserved for future use.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -332,6 +343,9 @@ class Sessions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.update",
+                span_route="/v1/sessions/{session_id}",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -394,7 +408,8 @@ class Sessions(SyncAPIResource):
           statuses: Filter by session status. Repeat the parameter to match any of multiple
               statuses.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -446,6 +461,8 @@ class Sessions(SyncAPIResource):
                     "page": page,
                     "statuses": statuses,
                 },
+                span_name="anthropic.sessions.list",
+                span_route="/v1/sessions",
             ),
             model=BetaManagedAgentsSession,
         )
@@ -467,7 +484,8 @@ class Sessions(SyncAPIResource):
         Delete Session
 
         Args:
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -505,6 +523,9 @@ class Sessions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.delete",
+                span_route="/v1/sessions/{session_id}",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsDeletedSession,
         )
@@ -526,7 +547,8 @@ class Sessions(SyncAPIResource):
         Archive Session
 
         Args:
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -564,6 +586,9 @@ class Sessions(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.archive",
+                span_route="/v1/sessions/{session_id}/archive",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -648,7 +673,8 @@ class AsyncSessions(AsyncAPIResource):
 
           vault_ids: Vault IDs for stored credentials the agent can use during the session.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -694,6 +720,10 @@ class AsyncSessions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.create",
+                span_route="/v1/sessions",
+                span_attributes=sessions_create_request_attributes,
+                span_created_id="anthropic.session.id",
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -715,7 +745,8 @@ class AsyncSessions(AsyncAPIResource):
         Get Session
 
         Args:
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -753,6 +784,9 @@ class AsyncSessions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.retrieve",
+                span_route="/v1/sessions/{session_id}",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -801,7 +835,8 @@ class AsyncSessions(AsyncAPIResource):
           vault_ids: Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests
               setting this field are rejected. Reserved for future use.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -846,6 +881,9 @@ class AsyncSessions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.update",
+                span_route="/v1/sessions/{session_id}",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSession,
         )
@@ -908,7 +946,8 @@ class AsyncSessions(AsyncAPIResource):
           statuses: Filter by session status. Repeat the parameter to match any of multiple
               statuses.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -960,6 +999,8 @@ class AsyncSessions(AsyncAPIResource):
                     "page": page,
                     "statuses": statuses,
                 },
+                span_name="anthropic.sessions.list",
+                span_route="/v1/sessions",
             ),
             model=BetaManagedAgentsSession,
         )
@@ -981,7 +1022,8 @@ class AsyncSessions(AsyncAPIResource):
         Delete Session
 
         Args:
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1019,6 +1061,9 @@ class AsyncSessions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.delete",
+                span_route="/v1/sessions/{session_id}",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsDeletedSession,
         )
@@ -1040,7 +1085,8 @@ class AsyncSessions(AsyncAPIResource):
         Archive Session
 
         Args:
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1078,6 +1124,9 @@ class AsyncSessions(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.archive",
+                span_route="/v1/sessions/{session_id}/archive",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSession,
         )

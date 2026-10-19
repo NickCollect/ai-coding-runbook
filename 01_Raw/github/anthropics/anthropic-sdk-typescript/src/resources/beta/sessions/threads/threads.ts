@@ -9,6 +9,7 @@ import { APIPromise } from '../../../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
+import { startApiCallSpan } from '../../../../internal/tracing';
 import { path } from '../../../../internal/utils/path';
 
 export class Threads extends APIResource {
@@ -41,6 +42,10 @@ export class Threads extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.sessions.threads.retrieve', options, {
+        route: '/v1/sessions/{session_id}/threads/{thread_id}',
+        attributes: { 'anthropic.session.id': session_id, 'anthropic.session.thread.id': threadID },
+      }),
     });
   }
 
@@ -76,6 +81,11 @@ export class Threads extends APIResource {
           },
           options?.headers,
         ]),
+        __span: startApiCallSpan(this._client, 'anthropic.sessions.threads.list', options, {
+          route: '/v1/sessions/{session_id}/threads',
+          queryParams: ['limit', 'page', 'statuses'],
+          attributes: { 'anthropic.session.id': sessionID },
+        }),
       },
     );
   }
@@ -107,6 +117,10 @@ export class Threads extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.sessions.threads.archive', options, {
+        route: '/v1/sessions/{session_id}/threads/{thread_id}/archive',
+        attributes: { 'anthropic.session.id': session_id, 'anthropic.session.thread.id': threadID },
+      }),
     });
   }
 }
@@ -120,6 +134,11 @@ export type BetaManagedAgentsSessionThreadsPageCursor = PageCursor<BetaManagedAg
  */
 export interface BetaManagedAgentsInlineAgent {
   description: string | null;
+
+  /**
+   * The session's execution principal.
+   */
+  execution_identity: AgentsAPI.BetaManagedAgentsExecutionIdentity;
 
   mcp_servers: Array<AgentsAPI.BetaManagedAgentsMCPServerURLDefinition>;
 
@@ -345,7 +364,8 @@ export interface ThreadRetrieveParams {
   session_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -370,7 +390,8 @@ export interface ThreadListParams extends PageCursorParams {
   statuses?: Array<BetaManagedAgentsSessionThreadStatus>;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -392,7 +413,8 @@ export interface ThreadArchiveParams {
   session_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 

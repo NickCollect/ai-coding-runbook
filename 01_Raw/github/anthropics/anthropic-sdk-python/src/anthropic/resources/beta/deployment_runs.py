@@ -65,7 +65,8 @@ class DeploymentRuns(SyncAPIResource):
         Args:
           deployment_run_id: Unique identifier of the deployment run.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -103,6 +104,9 @@ class DeploymentRuns(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployment_runs.retrieve",
+                span_route="/v1/deployment_runs/{deployment_run_id}",
+                span_attributes={"anthropic.deployment_run.id": deployment_run_id},
             ),
             cast_to=BetaManagedAgentsDeploymentRun,
         )
@@ -154,7 +158,8 @@ class DeploymentRuns(SyncAPIResource):
 
           trigger_type: Filter runs by what triggered them. Omit to return all runs.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -202,6 +207,8 @@ class DeploymentRuns(SyncAPIResource):
                     "page": page,
                     "trigger_type": trigger_type,
                 },
+                span_name="anthropic.deployment_runs.list",
+                span_route="/v1/deployment_runs",
             ),
             model=BetaManagedAgentsDeploymentRun,
         )
@@ -246,7 +253,8 @@ class AsyncDeploymentRuns(AsyncAPIResource):
         Args:
           deployment_run_id: Unique identifier of the deployment run.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -284,6 +292,9 @@ class AsyncDeploymentRuns(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployment_runs.retrieve",
+                span_route="/v1/deployment_runs/{deployment_run_id}",
+                span_attributes={"anthropic.deployment_run.id": deployment_run_id},
             ),
             cast_to=BetaManagedAgentsDeploymentRun,
         )
@@ -335,7 +346,8 @@ class AsyncDeploymentRuns(AsyncAPIResource):
 
           trigger_type: Filter runs by what triggered them. Omit to return all runs.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -383,6 +395,8 @@ class AsyncDeploymentRuns(AsyncAPIResource):
                     "page": page,
                     "trigger_type": trigger_type,
                 },
+                span_name="anthropic.deployment_runs.list",
+                span_route="/v1/deployment_runs",
             ),
             model=BetaManagedAgentsDeploymentRun,
         )

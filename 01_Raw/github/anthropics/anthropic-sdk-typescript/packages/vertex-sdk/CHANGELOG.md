@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.21.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.20.4...vertex-sdk-v0.21.0) (2026-10-14)
+
+### Features
+
+* **api:** add execution_identity to Managed Agents agents
+* **client:** add native support for OpenTelemetry tracing
+
+  If your app registers a global tracer provider, the SDK will create spans with it after upgrading, and they'll be exported with the rest of your traces. Requests will also get trace context headers from the global propagator. To disable, pass `openTelemetry: false` to the client or set `ANTHROPIC_OPEN_TELEMETRY=false`. Learn more in the [documentation](https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk).
+
+
+### Chores
+
+* include the license files in the published packages
+* **internal:** strip `@internal` declarations from published types
+
 ## [0.20.4](https://github.com/anthropics/anthropic-sdk-typescript/compare/vertex-sdk-v0.20.3...vertex-sdk-v0.20.4) (2026-10-08)
 
 ### Chores

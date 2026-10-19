@@ -4,6 +4,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
+import { startApiCallSpan } from '../../../internal/tracing';
 import { path } from '../../../internal/utils/path';
 
 export class Credentials extends APIResource {
@@ -42,6 +43,11 @@ export class Credentials extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.create', options, {
+        route: '/v1/vaults/{vault_id}/credentials',
+        attributes: { 'anthropic.vault.id': vaultID },
+        createdIDAttribute: 'anthropic.vault.credential.id',
+      }),
     });
   }
 
@@ -72,6 +78,10 @@ export class Credentials extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.retrieve', options, {
+        route: '/v1/vaults/{vault_id}/credentials/{credential_id}',
+        attributes: { 'anthropic.vault.id': vault_id, 'anthropic.vault.credential.id': credentialID },
+      }),
     });
   }
 
@@ -103,6 +113,10 @@ export class Credentials extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.update', options, {
+        route: '/v1/vaults/{vault_id}/credentials/{credential_id}',
+        attributes: { 'anthropic.vault.id': vault_id, 'anthropic.vault.credential.id': credentialID },
+      }),
     });
   }
 
@@ -138,6 +152,11 @@ export class Credentials extends APIResource {
           },
           options?.headers,
         ]),
+        __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.list', options, {
+          route: '/v1/vaults/{vault_id}/credentials',
+          queryParams: ['include_archived', 'limit', 'page'],
+          attributes: { 'anthropic.vault.id': vaultID },
+        }),
       },
     );
   }
@@ -169,6 +188,10 @@ export class Credentials extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.delete', options, {
+        route: '/v1/vaults/{vault_id}/credentials/{credential_id}',
+        attributes: { 'anthropic.vault.id': vault_id, 'anthropic.vault.credential.id': credentialID },
+      }),
     });
   }
 
@@ -199,6 +222,10 @@ export class Credentials extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.archive', options, {
+        route: '/v1/vaults/{vault_id}/credentials/{credential_id}/archive',
+        attributes: { 'anthropic.vault.id': vault_id, 'anthropic.vault.credential.id': credentialID },
+      }),
     });
   }
 
@@ -231,6 +258,10 @@ export class Credentials extends APIResource {
           },
           options?.headers,
         ]),
+        __span: startApiCallSpan(this._client, 'anthropic.vaults.credentials.mcp_oauth_validate', options, {
+          route: '/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate',
+          attributes: { 'anthropic.vault.id': vault_id, 'anthropic.vault.credential.id': credentialID },
+        }),
       },
     );
   }
@@ -884,7 +915,8 @@ export interface CredentialCreateParams {
   metadata?: { [key: string]: string };
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -906,7 +938,8 @@ export interface CredentialRetrieveParams {
   vault_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -948,7 +981,8 @@ export interface CredentialUpdateParams {
   metadata?: { [key: string]: string | null } | null;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -970,7 +1004,8 @@ export interface CredentialListParams extends PageCursorParams {
   include_archived?: boolean;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -992,7 +1027,8 @@ export interface CredentialDeleteParams {
   vault_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -1014,7 +1050,8 @@ export interface CredentialArchiveParams {
   vault_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -1036,7 +1073,8 @@ export interface CredentialMCPOAuthValidateParams {
   vault_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 

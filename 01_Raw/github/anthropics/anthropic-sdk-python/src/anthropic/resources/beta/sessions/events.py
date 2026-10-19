@@ -102,7 +102,8 @@ class Events(SyncAPIResource):
           types: Filter by event type. Values match the `type` field on returned events (for
               example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -151,6 +152,9 @@ class Events(SyncAPIResource):
                     "page": page,
                     "types": types,
                 },
+                span_name="anthropic.sessions.events.list",
+                span_route="/v1/sessions/{session_id}/events",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             model=cast(
                 Any, BetaManagedAgentsSessionEvent
@@ -177,7 +181,8 @@ class Events(SyncAPIResource):
         Args:
           events: Events to send to the `session`.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -216,6 +221,9 @@ class Events(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.events.send",
+                span_route="/v1/sessions/{session_id}/events",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSendSessionEvents,
         )
@@ -249,7 +257,8 @@ class Events(SyncAPIResource):
               the `agent.thinking` event itself. Only previews of the requested event types
               are sent.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -288,6 +297,9 @@ class Events(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query={"event_deltas": event_deltas},
+                span_name="anthropic.sessions.events.stream",
+                span_route="/v1/sessions/{session_id}/events/stream",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=cast(
                 Any, BetaManagedAgentsStreamSessionEvents
@@ -362,7 +374,8 @@ class AsyncEvents(AsyncAPIResource):
           types: Filter by event type. Values match the `type` field on returned events (for
               example, `user.message` or `agent.tool_use`). Omit to return all event types.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -411,6 +424,9 @@ class AsyncEvents(AsyncAPIResource):
                     "page": page,
                     "types": types,
                 },
+                span_name="anthropic.sessions.events.list",
+                span_route="/v1/sessions/{session_id}/events",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             model=cast(
                 Any, BetaManagedAgentsSessionEvent
@@ -437,7 +453,8 @@ class AsyncEvents(AsyncAPIResource):
         Args:
           events: Events to send to the `session`.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -476,6 +493,9 @@ class AsyncEvents(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.sessions.events.send",
+                span_route="/v1/sessions/{session_id}/events",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=BetaManagedAgentsSendSessionEvents,
         )
@@ -509,7 +529,8 @@ class AsyncEvents(AsyncAPIResource):
               the `agent.thinking` event itself. Only previews of the requested event types
               are sent.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -548,6 +569,9 @@ class AsyncEvents(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query={"event_deltas": event_deltas},
+                span_name="anthropic.sessions.events.stream",
+                span_route="/v1/sessions/{session_id}/events/stream",
+                span_attributes={"anthropic.session.id": session_id},
             ),
             cast_to=cast(
                 Any, BetaManagedAgentsStreamSessionEvents

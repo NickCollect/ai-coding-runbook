@@ -108,7 +108,8 @@ class UserProfiles(SyncAPIResource):
               (`access_type` `passthrough`), that company's name where known. Maximum 255
               characters.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -152,6 +153,9 @@ class UserProfiles(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.create",
+                span_route="/v1/user_profiles",
+                span_created_id="anthropic.user_profile.id",
             ),
             cast_to=BetaUserProfile,
         )
@@ -175,7 +179,8 @@ class UserProfiles(SyncAPIResource):
         Args:
           user_profile_id: The ID of the user profile to get (`uprof_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -213,6 +218,9 @@ class UserProfiles(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.retrieve",
+                span_route="/v1/user_profiles/{user_profile_id}",
+                span_attributes={"anthropic.user_profile.id": user_profile_id},
             ),
             cast_to=BetaUserProfile,
         )
@@ -274,7 +282,8 @@ class UserProfiles(SyncAPIResource):
           name: If present, replaces the stored name. Omit to leave unchanged. Maximum 255
               characters.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -320,6 +329,9 @@ class UserProfiles(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.update",
+                span_route="/v1/user_profiles/{user_profile_id}",
+                span_attributes={"anthropic.user_profile.id": user_profile_id},
             ),
             cast_to=BetaUserProfile,
         )
@@ -367,7 +379,8 @@ class UserProfiles(SyncAPIResource):
 
               Leave it out to get the first page.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -410,6 +423,8 @@ class UserProfiles(SyncAPIResource):
                     "order_by": order_by,
                     "page": page,
                 },
+                span_name="anthropic.user_profiles.list",
+                span_route="/v1/user_profiles",
             ),
             model=BetaUserProfile,
         )
@@ -433,7 +448,8 @@ class UserProfiles(SyncAPIResource):
         Args:
           user_profile_id: The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -473,6 +489,9 @@ class UserProfiles(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.create_enrollment_url",
+                span_route="/v1/user_profiles/{user_profile_id}/enrollment_url",
+                span_attributes={"anthropic.user_profile.id": user_profile_id},
             ),
             cast_to=BetaUserProfileEnrollmentURL,
         )
@@ -556,7 +575,8 @@ class AsyncUserProfiles(AsyncAPIResource):
               (`access_type` `passthrough`), that company's name where known. Maximum 255
               characters.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -600,6 +620,9 @@ class AsyncUserProfiles(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.create",
+                span_route="/v1/user_profiles",
+                span_created_id="anthropic.user_profile.id",
             ),
             cast_to=BetaUserProfile,
         )
@@ -623,7 +646,8 @@ class AsyncUserProfiles(AsyncAPIResource):
         Args:
           user_profile_id: The ID of the user profile to get (`uprof_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -661,6 +685,9 @@ class AsyncUserProfiles(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.retrieve",
+                span_route="/v1/user_profiles/{user_profile_id}",
+                span_attributes={"anthropic.user_profile.id": user_profile_id},
             ),
             cast_to=BetaUserProfile,
         )
@@ -722,7 +749,8 @@ class AsyncUserProfiles(AsyncAPIResource):
           name: If present, replaces the stored name. Omit to leave unchanged. Maximum 255
               characters.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -768,6 +796,9 @@ class AsyncUserProfiles(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.update",
+                span_route="/v1/user_profiles/{user_profile_id}",
+                span_attributes={"anthropic.user_profile.id": user_profile_id},
             ),
             cast_to=BetaUserProfile,
         )
@@ -815,7 +846,8 @@ class AsyncUserProfiles(AsyncAPIResource):
 
               Leave it out to get the first page.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -858,6 +890,8 @@ class AsyncUserProfiles(AsyncAPIResource):
                     "order_by": order_by,
                     "page": page,
                 },
+                span_name="anthropic.user_profiles.list",
+                span_route="/v1/user_profiles",
             ),
             model=BetaUserProfile,
         )
@@ -881,7 +915,8 @@ class AsyncUserProfiles(AsyncAPIResource):
         Args:
           user_profile_id: The ID of the user profile to create an enrollment URL for (`uprof_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `user-profiles-2026-03-24`,
+              `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -921,6 +956,9 @@ class AsyncUserProfiles(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.user_profiles.create_enrollment_url",
+                span_route="/v1/user_profiles/{user_profile_id}/enrollment_url",
+                span_attributes={"anthropic.user_profile.id": user_profile_id},
             ),
             cast_to=BetaUserProfileEnrollmentURL,
         )

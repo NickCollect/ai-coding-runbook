@@ -83,7 +83,8 @@ class Tunnels(SyncAPIResource):
         Args:
           display_name: Optional human-readable name for the tunnel (1-255 characters).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -120,6 +121,9 @@ class Tunnels(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.create",
+                span_route="/v1/tunnels",
+                span_created_id="anthropic.tunnel.id",
             ),
             cast_to=BetaTunnel,
         )
@@ -149,7 +153,8 @@ class Tunnels(SyncAPIResource):
         Args:
           tunnel_id: ID of the tunnel (`tnl_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -187,6 +192,9 @@ class Tunnels(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.retrieve",
+                span_route="/v1/tunnels/{tunnel_id}",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnel,
         )
@@ -223,7 +231,8 @@ class Tunnels(SyncAPIResource):
 
           page: Opaque pagination cursor from a previous `list_tunnels` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -265,6 +274,8 @@ class Tunnels(SyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.tunnels.list",
+                span_route="/v1/tunnels",
             ),
             model=BetaTunnel,
         )
@@ -297,7 +308,8 @@ class Tunnels(SyncAPIResource):
         Args:
           tunnel_id: ID of the tunnel (`tnl_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -335,6 +347,9 @@ class Tunnels(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.archive",
+                span_route="/v1/tunnels/{tunnel_id}/archive",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnel,
         )
@@ -367,7 +382,8 @@ class Tunnels(SyncAPIResource):
         Args:
           tunnel_id: ID of the tunnel (`tnl_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -405,6 +421,9 @@ class Tunnels(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.reveal_token",
+                span_route="/v1/tunnels/{tunnel_id}/reveal_token",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnelToken,
         )
@@ -439,7 +458,8 @@ class Tunnels(SyncAPIResource):
 
           reason: Optional free-text reason for the rotation, recorded for audit.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -478,6 +498,9 @@ class Tunnels(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.rotate_token",
+                span_route="/v1/tunnels/{tunnel_id}/rotate_token",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnelToken,
         )
@@ -534,7 +557,8 @@ class AsyncTunnels(AsyncAPIResource):
         Args:
           display_name: Optional human-readable name for the tunnel (1-255 characters).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -571,6 +595,9 @@ class AsyncTunnels(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.create",
+                span_route="/v1/tunnels",
+                span_created_id="anthropic.tunnel.id",
             ),
             cast_to=BetaTunnel,
         )
@@ -600,7 +627,8 @@ class AsyncTunnels(AsyncAPIResource):
         Args:
           tunnel_id: ID of the tunnel (`tnl_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -638,6 +666,9 @@ class AsyncTunnels(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.retrieve",
+                span_route="/v1/tunnels/{tunnel_id}",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnel,
         )
@@ -674,7 +705,8 @@ class AsyncTunnels(AsyncAPIResource):
 
           page: Opaque pagination cursor from a previous `list_tunnels` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -716,6 +748,8 @@ class AsyncTunnels(AsyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.tunnels.list",
+                span_route="/v1/tunnels",
             ),
             model=BetaTunnel,
         )
@@ -748,7 +782,8 @@ class AsyncTunnels(AsyncAPIResource):
         Args:
           tunnel_id: ID of the tunnel (`tnl_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -786,6 +821,9 @@ class AsyncTunnels(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.archive",
+                span_route="/v1/tunnels/{tunnel_id}/archive",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnel,
         )
@@ -818,7 +856,8 @@ class AsyncTunnels(AsyncAPIResource):
         Args:
           tunnel_id: ID of the tunnel (`tnl_...`).
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -856,6 +895,9 @@ class AsyncTunnels(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.reveal_token",
+                span_route="/v1/tunnels/{tunnel_id}/reveal_token",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnelToken,
         )
@@ -890,7 +932,8 @@ class AsyncTunnels(AsyncAPIResource):
 
           reason: Optional free-text reason for the rotation, recorded for audit.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `mcp-tunnels-2026-06-22` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -929,6 +972,9 @@ class AsyncTunnels(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.tunnels.rotate_token",
+                span_route="/v1/tunnels/{tunnel_id}/rotate_token",
+                span_attributes={"anthropic.tunnel.id": tunnel_id},
             ),
             cast_to=BetaTunnelToken,
         )

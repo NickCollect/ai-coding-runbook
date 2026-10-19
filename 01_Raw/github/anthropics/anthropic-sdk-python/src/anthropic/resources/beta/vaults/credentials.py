@@ -75,7 +75,8 @@ class Credentials(SyncAPIResource):
           metadata: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys
               up to 64 chars, values up to 512 chars.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -118,6 +119,10 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.create",
+                span_route="/v1/vaults/{vault_id}/credentials",
+                span_attributes={"anthropic.vault.id": vault_id},
+                span_created_id="anthropic.vault.credential.id",
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -144,7 +149,8 @@ class Credentials(SyncAPIResource):
 
           credential_id: Unique identifier of the credential to retrieve.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -188,6 +194,9 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.retrieve",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -225,7 +234,8 @@ class Credentials(SyncAPIResource):
           metadata: Metadata patch. Set a key to a string to upsert it, or to null to delete it.
               Omitted keys are preserved.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -274,6 +284,9 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.update",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -306,7 +319,8 @@ class Credentials(SyncAPIResource):
 
           page: Opaque pagination token from a previous `list_credentials` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -350,6 +364,9 @@ class Credentials(SyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.vaults.credentials.list",
+                span_route="/v1/vaults/{vault_id}/credentials",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             model=BetaManagedAgentsCredential,
         )
@@ -376,7 +393,8 @@ class Credentials(SyncAPIResource):
 
           credential_id: Unique identifier of the credential to delete.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -420,6 +438,9 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.delete",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsDeletedCredential,
         )
@@ -446,7 +467,8 @@ class Credentials(SyncAPIResource):
 
           credential_id: Unique identifier of the credential to archive.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -490,6 +512,9 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.archive",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -516,7 +541,8 @@ class Credentials(SyncAPIResource):
 
           credential_id: Unique identifier of the credential to validate.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -560,6 +586,9 @@ class Credentials(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.mcp_oauth_validate",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredentialValidation,
         )
@@ -614,7 +643,8 @@ class AsyncCredentials(AsyncAPIResource):
           metadata: Arbitrary key-value metadata to attach to the credential. Maximum 16 pairs, keys
               up to 64 chars, values up to 512 chars.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -657,6 +687,10 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.create",
+                span_route="/v1/vaults/{vault_id}/credentials",
+                span_attributes={"anthropic.vault.id": vault_id},
+                span_created_id="anthropic.vault.credential.id",
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -683,7 +717,8 @@ class AsyncCredentials(AsyncAPIResource):
 
           credential_id: Unique identifier of the credential to retrieve.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -727,6 +762,9 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.retrieve",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -764,7 +802,8 @@ class AsyncCredentials(AsyncAPIResource):
           metadata: Metadata patch. Set a key to a string to upsert it, or to null to delete it.
               Omitted keys are preserved.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -813,6 +852,9 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.update",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -845,7 +887,8 @@ class AsyncCredentials(AsyncAPIResource):
 
           page: Opaque pagination token from a previous `list_credentials` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -889,6 +932,9 @@ class AsyncCredentials(AsyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.vaults.credentials.list",
+                span_route="/v1/vaults/{vault_id}/credentials",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             model=BetaManagedAgentsCredential,
         )
@@ -915,7 +961,8 @@ class AsyncCredentials(AsyncAPIResource):
 
           credential_id: Unique identifier of the credential to delete.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -959,6 +1006,9 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.delete",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsDeletedCredential,
         )
@@ -985,7 +1035,8 @@ class AsyncCredentials(AsyncAPIResource):
 
           credential_id: Unique identifier of the credential to archive.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1029,6 +1080,9 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.archive",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/archive",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredential,
         )
@@ -1055,7 +1109,8 @@ class AsyncCredentials(AsyncAPIResource):
 
           credential_id: Unique identifier of the credential to validate.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1099,6 +1154,9 @@ class AsyncCredentials(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.credentials.mcp_oauth_validate",
+                span_route="/v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate",
+                span_attributes={"anthropic.vault.id": vault_id, "anthropic.vault.credential.id": credential_id},
             ),
             cast_to=BetaManagedAgentsCredentialValidation,
         )

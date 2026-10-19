@@ -80,7 +80,8 @@ class Vaults(SyncAPIResource):
           metadata: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up
               to 64 chars, values up to 512 chars.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -120,6 +121,9 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.create",
+                span_route="/v1/vaults",
+                span_created_id="anthropic.vault.id",
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -143,7 +147,8 @@ class Vaults(SyncAPIResource):
         Args:
           vault_id: Unique identifier of the vault to retrieve.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -181,6 +186,9 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.retrieve",
+                span_route="/v1/vaults/{vault_id}",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -211,7 +219,8 @@ class Vaults(SyncAPIResource):
           metadata: Metadata patch. Set a key to a string to upsert it, or to null to delete it.
               Omitted keys are preserved.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -253,6 +262,9 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.update",
+                span_route="/v1/vaults/{vault_id}",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -282,7 +294,8 @@ class Vaults(SyncAPIResource):
 
           page: Opaque pagination token from a previous `list_vaults` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -324,6 +337,8 @@ class Vaults(SyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.vaults.list",
+                span_route="/v1/vaults",
             ),
             model=BetaManagedAgentsVault,
         )
@@ -347,7 +362,8 @@ class Vaults(SyncAPIResource):
         Args:
           vault_id: Unique identifier of the vault to delete.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -385,6 +401,9 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.delete",
+                span_route="/v1/vaults/{vault_id}",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsDeletedVault,
         )
@@ -408,7 +427,8 @@ class Vaults(SyncAPIResource):
         Args:
           vault_id: Unique identifier of the vault to archive.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -446,6 +466,9 @@ class Vaults(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.archive",
+                span_route="/v1/vaults/{vault_id}/archive",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -499,7 +522,8 @@ class AsyncVaults(AsyncAPIResource):
           metadata: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up
               to 64 chars, values up to 512 chars.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -539,6 +563,9 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.create",
+                span_route="/v1/vaults",
+                span_created_id="anthropic.vault.id",
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -562,7 +589,8 @@ class AsyncVaults(AsyncAPIResource):
         Args:
           vault_id: Unique identifier of the vault to retrieve.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -600,6 +628,9 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.retrieve",
+                span_route="/v1/vaults/{vault_id}",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -630,7 +661,8 @@ class AsyncVaults(AsyncAPIResource):
           metadata: Metadata patch. Set a key to a string to upsert it, or to null to delete it.
               Omitted keys are preserved.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -672,6 +704,9 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.update",
+                span_route="/v1/vaults/{vault_id}",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsVault,
         )
@@ -701,7 +736,8 @@ class AsyncVaults(AsyncAPIResource):
 
           page: Opaque pagination token from a previous `list_vaults` response.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -743,6 +779,8 @@ class AsyncVaults(AsyncAPIResource):
                     "limit": limit,
                     "page": page,
                 },
+                span_name="anthropic.vaults.list",
+                span_route="/v1/vaults",
             ),
             model=BetaManagedAgentsVault,
         )
@@ -766,7 +804,8 @@ class AsyncVaults(AsyncAPIResource):
         Args:
           vault_id: Unique identifier of the vault to delete.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -804,6 +843,9 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.delete",
+                span_route="/v1/vaults/{vault_id}",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsDeletedVault,
         )
@@ -827,7 +869,8 @@ class AsyncVaults(AsyncAPIResource):
         Args:
           vault_id: Unique identifier of the vault to archive.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -865,6 +908,9 @@ class AsyncVaults(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.vaults.archive",
+                span_route="/v1/vaults/{vault_id}/archive",
+                span_attributes={"anthropic.vault.id": vault_id},
             ),
             cast_to=BetaManagedAgentsVault,
         )

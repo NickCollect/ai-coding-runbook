@@ -4,6 +4,7 @@ import { APIPromise } from '../../core/api-promise';
 import { Page, type PageParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
+import { startApiCallSpan } from '../../internal/tracing';
 import { path } from '../../internal/utils/path';
 
 export class Models extends APIResource {
@@ -35,6 +36,10 @@ export class Models extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.models.retrieve', options, {
+        route: '/v1/models/{model_id}',
+        attributes: { 'anthropic.model.id': modelID },
+      }),
     });
   }
 
@@ -67,6 +72,10 @@ export class Models extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.models.list', options, {
+        route: '/v1/models',
+        queryParams: ['after_id', 'before_id', 'lifecycle', 'limit'],
+      }),
     });
   }
 }
@@ -366,9 +375,21 @@ export interface BetaThinkingTypes {
   adaptive: BetaCapabilitySupport;
 
   /**
+   * Whether the model accepts thinking with type 'between_tools' (thinking turned
+   * off, and any short progress updates the model writes between tool calls come
+   * back as thinking blocks). False exactly when a request that sends it gets a 400
+   * from this model. A request that sends 'between_tools' can still be rejected for
+   * another reason, such as an effort level the model does not allow with thinking
+   * off.
+   */
+  between_tools: BetaCapabilitySupport;
+
+  /**
    * Whether the model accepts thinking with type 'disabled' (thinking turned off).
    * False exactly when a request that sends it gets a 400 from this model. True on a
-   * model that does not support thinking.
+   * model that does not support thinking. A request that sends 'disabled' can still
+   * be rejected for another reason, such as an effort level the model does not allow
+   * with thinking off.
    */
   disabled: BetaCapabilitySupport;
 

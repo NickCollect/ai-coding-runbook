@@ -5,6 +5,7 @@ import { APIPromise } from '../../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../../core/pagination';
 import { buildHeaders } from '../../../internal/headers';
 import { RequestOptions } from '../../../internal/request-options';
+import { startApiCallSpan } from '../../../internal/tracing';
 import { path } from '../../../internal/utils/path';
 
 export class Resources extends APIResource {
@@ -35,6 +36,10 @@ export class Resources extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.sessions.resources.retrieve', options, {
+        route: '/v1/sessions/{session_id}/resources/{resource_id}',
+        attributes: { 'anthropic.session.id': session_id, 'anthropic.session.resource.id': resourceID },
+      }),
     });
   }
 
@@ -69,6 +74,10 @@ export class Resources extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.sessions.resources.update', options, {
+        route: '/v1/sessions/{session_id}/resources/{resource_id}',
+        attributes: { 'anthropic.session.id': session_id, 'anthropic.session.resource.id': resourceID },
+      }),
     });
   }
 
@@ -104,6 +113,11 @@ export class Resources extends APIResource {
           },
           options?.headers,
         ]),
+        __span: startApiCallSpan(this._client, 'anthropic.sessions.resources.list', options, {
+          route: '/v1/sessions/{session_id}/resources',
+          queryParams: ['limit', 'page'],
+          attributes: { 'anthropic.session.id': sessionID },
+        }),
       },
     );
   }
@@ -135,6 +149,10 @@ export class Resources extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.sessions.resources.delete', options, {
+        route: '/v1/sessions/{session_id}/resources/{resource_id}',
+        attributes: { 'anthropic.session.id': session_id, 'anthropic.session.resource.id': resourceID },
+      }),
     });
   }
 
@@ -169,6 +187,11 @@ export class Resources extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.sessions.resources.add', options, {
+        route: '/v1/sessions/{session_id}/resources',
+        attributes: { 'anthropic.session.id': sessionID },
+        createdIDAttribute: 'anthropic.session.resource.id',
+      }),
     });
   }
 }
@@ -297,7 +320,8 @@ export interface ResourceRetrieveParams {
   session_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -325,7 +349,8 @@ export interface ResourceUpdateParams {
   authorization_token: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -342,7 +367,8 @@ export interface ResourceUpdateParams {
 
 export interface ResourceListParams extends PageCursorParams {
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -364,7 +390,8 @@ export interface ResourceDeleteParams {
   session_id: string;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -397,7 +424,8 @@ export interface ResourceAddParams {
   mount_path?: string | null;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send
+   * `managed-agents-2026-04-01` in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 

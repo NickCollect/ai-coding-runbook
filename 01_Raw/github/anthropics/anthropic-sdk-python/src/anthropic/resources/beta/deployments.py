@@ -116,7 +116,8 @@ class Deployments(SyncAPIResource):
           vault_ids: Vault IDs for stored credentials the agent can use during sessions created from
               this deployment. Maximum 50.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -164,6 +165,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.create",
+                span_route="/v1/deployments",
+                span_created_id="anthropic.deployment.id",
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -187,7 +191,8 @@ class Deployments(SyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -225,6 +230,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.retrieve",
+                span_route="/v1/deployments/{deployment_id}",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -290,7 +298,8 @@ class Deployments(SyncAPIResource):
           vault_ids: Vault IDs. Full replacement. Omit to preserve; send empty array or null to
               clear. Maximum 50.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -340,6 +349,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.update",
+                span_route="/v1/deployments/{deployment_id}",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -382,7 +394,8 @@ class Deployments(SyncAPIResource):
           status: Filter by status: `active` or `paused`. Omit for both. To include archived
               deployments, use `include_archived` instead; the two cannot be combined.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -428,6 +441,8 @@ class Deployments(SyncAPIResource):
                     "page": page,
                     "status": status,
                 },
+                span_name="anthropic.deployments.list",
+                span_route="/v1/deployments",
             ),
             model=BetaManagedAgentsDeployment,
         )
@@ -451,7 +466,8 @@ class Deployments(SyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to archive.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -489,6 +505,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.archive",
+                span_route="/v1/deployments/{deployment_id}/archive",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -512,7 +531,8 @@ class Deployments(SyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to pause.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -550,6 +570,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.pause",
+                span_route="/v1/deployments/{deployment_id}/pause",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -573,7 +596,8 @@ class Deployments(SyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to run.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -611,6 +635,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.run",
+                span_route="/v1/deployments/{deployment_id}/run",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeploymentRun,
         )
@@ -634,7 +661,8 @@ class Deployments(SyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to unpause.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -672,6 +700,9 @@ class Deployments(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.unpause",
+                span_route="/v1/deployments/{deployment_id}/unpause",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -756,7 +787,8 @@ class AsyncDeployments(AsyncAPIResource):
           vault_ids: Vault IDs for stored credentials the agent can use during sessions created from
               this deployment. Maximum 50.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -804,6 +836,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.create",
+                span_route="/v1/deployments",
+                span_created_id="anthropic.deployment.id",
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -827,7 +862,8 @@ class AsyncDeployments(AsyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -865,6 +901,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.retrieve",
+                span_route="/v1/deployments/{deployment_id}",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -930,7 +969,8 @@ class AsyncDeployments(AsyncAPIResource):
           vault_ids: Vault IDs. Full replacement. Omit to preserve; send empty array or null to
               clear. Maximum 50.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -980,6 +1020,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.update",
+                span_route="/v1/deployments/{deployment_id}",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -1022,7 +1065,8 @@ class AsyncDeployments(AsyncAPIResource):
           status: Filter by status: `active` or `paused`. Omit for both. To include archived
               deployments, use `include_archived` instead; the two cannot be combined.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1068,6 +1112,8 @@ class AsyncDeployments(AsyncAPIResource):
                     "page": page,
                     "status": status,
                 },
+                span_name="anthropic.deployments.list",
+                span_route="/v1/deployments",
             ),
             model=BetaManagedAgentsDeployment,
         )
@@ -1091,7 +1137,8 @@ class AsyncDeployments(AsyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to archive.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1129,6 +1176,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.archive",
+                span_route="/v1/deployments/{deployment_id}/archive",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -1152,7 +1202,8 @@ class AsyncDeployments(AsyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to pause.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1190,6 +1241,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.pause",
+                span_route="/v1/deployments/{deployment_id}/pause",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )
@@ -1213,7 +1267,8 @@ class AsyncDeployments(AsyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to run.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1251,6 +1306,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.run",
+                span_route="/v1/deployments/{deployment_id}/run",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeploymentRun,
         )
@@ -1274,7 +1332,8 @@ class AsyncDeployments(AsyncAPIResource):
         Args:
           deployment_id: Unique identifier of the deployment to unpause.
 
-          betas: Optional header to specify the beta version(s) you want to use.
+          betas: This endpoint is in beta: requests must send `managed-agents-2026-04-01` in this
+              header.
 
           workspace_id: Optional header to select the Workspace for this request. The value is a
               Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -1312,6 +1371,9 @@ class AsyncDeployments(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
+                span_name="anthropic.deployments.unpause",
+                span_route="/v1/deployments/{deployment_id}/unpause",
+                span_attributes={"anthropic.deployment.id": deployment_id},
             ),
             cast_to=BetaManagedAgentsDeployment,
         )

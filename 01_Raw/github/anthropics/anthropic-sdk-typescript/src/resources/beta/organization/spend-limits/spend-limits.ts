@@ -17,6 +17,7 @@ import { APIPromise } from '../../../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../../../core/pagination';
 import { buildHeaders } from '../../../../internal/headers';
 import { RequestOptions } from '../../../../internal/request-options';
+import { startApiCallSpan } from '../../../../internal/tracing';
 import { path } from '../../../../internal/utils/path';
 
 export class SpendLimits extends APIResource {
@@ -37,18 +38,22 @@ export class SpendLimits extends APIResource {
    * ```
    */
   retrieve(spendLimitID: string, options?: RequestOptions): APIPromise<BetaSpendLimit> {
-    return this._client.get(path`/v1/organizations/spend_limits/${spendLimitID}?beta=true`, options);
+    return this._client.get(path`/v1/organizations/spend_limits/${spendLimitID}?beta=true`, {
+      ...options,
+      __span: startApiCallSpan(this._client, 'anthropic.organization.spend_limits.retrieve', options, {
+        route: '/v1/organizations/spend_limits/{spend_limit_id}',
+        attributes: { 'anthropic.organization.spend_limit.id': spendLimitID },
+      }),
+    });
   }
 
   /**
    * List the organization's spend limits.
    *
-   * A Claude Console organization's limits come in an order that is stable across
-   * pages. A Claude Enterprise organization's are grouped by scope type, in the
-   * order `organization`, `seat_tier`, `rbac_group`, `organization_service`, `user`;
-   * within a type they come in a fixed order that is not creation order. Listing
-   * Claude Console limits is in an early access preview. To request access, contact
-   * your Anthropic account team.
+   * Limits are grouped by scope type, in the order `organization`, `seat_tier`,
+   * `rbac_group`, `organization_service`, `user`; within a type they come in a fixed
+   * order that is not creation order. Supported for Claude Enterprise organizations
+   * only, not for Claude Console organizations.
    *
    * @example
    * ```ts
@@ -70,6 +75,10 @@ export class SpendLimits extends APIResource {
         { 'anthropic-beta': [...(betas ?? []), 'spend-limit-reads-2026-09-26'].toString() },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.organization.spend_limits.list', options, {
+        route: '/v1/organizations/spend_limits',
+        queryParams: ['limit', 'page', 'scope_type'],
+      }),
     });
   }
 
@@ -79,8 +88,9 @@ export class SpendLimits extends APIResource {
    * For a Claude Enterprise organization, this deletes a per-user override, and the
    * member falls back to any inherited spend limit at that period. Its seat-tier,
    * group, and organization-level rows cannot be deleted via this endpoint. A Claude
-   * Console organization deletes its organization and workspace limits. Deleting
-   * them through the API is in an early access preview.
+   * Console organization deletes its organization and workspace limits, but not its
+   * `usage_tier` limit. Deleting organization and workspace limits through the API
+   * is in an early access preview.
    *
    * @example
    * ```ts
@@ -91,7 +101,13 @@ export class SpendLimits extends APIResource {
    * ```
    */
   delete(spendLimitID: string, options?: RequestOptions): APIPromise<SpendLimitDeleteResponse> {
-    return this._client.delete(path`/v1/organizations/spend_limits/${spendLimitID}?beta=true`, options);
+    return this._client.delete(path`/v1/organizations/spend_limits/${spendLimitID}?beta=true`, {
+      ...options,
+      __span: startApiCallSpan(this._client, 'anthropic.organization.spend_limits.delete', options, {
+        route: '/v1/organizations/spend_limits/{spend_limit_id}',
+        attributes: { 'anthropic.organization.spend_limit.id': spendLimitID },
+      }),
+    });
   }
 
   /**
@@ -125,6 +141,10 @@ export class SpendLimits extends APIResource {
         { ...(betas?.toString() != null ? { 'anthropic-beta': betas?.toString() } : undefined) },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.organization.spend_limits.set', options, {
+        route: '/v1/organizations/spend_limits',
+        createdIDAttribute: 'anthropic.organization.spend_limit.id',
+      }),
     });
   }
 }
@@ -161,8 +181,8 @@ export interface BetaSpendLimit {
 
   /**
    * Read-only. `false` when extra usage is switched off for this organization
-   * (`organization` limit) or for this member (`user` limit); `amount` is kept and
-   * applies again when it's switched back on. Always `true` for other limits.
+   * (`organization` limit); `amount` is kept and applies again when it's switched
+   * back on. Always `true` for other limits.
    */
   is_enabled: boolean;
 
@@ -182,7 +202,8 @@ export interface BetaSpendLimit {
     | BetaSpendLimitRBACGroupScope
     | BetaSpendLimitOrganizationServiceScope
     | BetaSpendLimitOrganizationScope
-    | BetaSpendLimitWorkspaceScope;
+    | BetaSpendLimitWorkspaceScope
+    | BetaSpendLimitUsageTierScope;
 
   /**
    * Object type. Always `spend_limit`.
@@ -226,6 +247,19 @@ export interface BetaSpendLimitSeatTierScope {
   seat_tier: string;
 
   type: 'seat_tier';
+}
+
+/**
+ * Scope of the monthly spend cap Anthropic sets for a Claude Console organization
+ * from its usage tier, or a higher cap Anthropic granted the organization.
+ * Read-only; its `created_at` and `updated_at` are the organization's creation
+ * time, so `amount` can change while `updated_at` stays the same.
+ */
+export interface BetaSpendLimitUsageTierScope {
+  /**
+   * Scope type. Always `usage_tier` for this scope.
+   */
+  type: 'usage_tier';
 }
 
 /**
@@ -332,7 +366,8 @@ export interface BetaSpendSummary {
     | BetaSpendLimitRBACGroupScope
     | BetaSpendLimitOrganizationServiceScope
     | BetaSpendLimitOrganizationScope
-    | BetaSpendLimitWorkspaceScope;
+    | BetaSpendLimitWorkspaceScope
+    | BetaSpendLimitUsageTierScope;
 
   source:
     | BetaSpendLimitUserScope
@@ -340,7 +375,8 @@ export interface BetaSpendSummary {
     | BetaSpendLimitRBACGroupScope
     | BetaSpendLimitOrganizationServiceScope
     | BetaSpendLimitOrganizationScope
-    | BetaSpendLimitWorkspaceScope;
+    | BetaSpendLimitWorkspaceScope
+    | BetaSpendLimitUsageTierScope;
 
   spend_limit_id: string;
 }
@@ -353,10 +389,7 @@ export interface SpendLimitDeleteResponse {
 
 export interface SpendLimitListParams extends PageCursorParams {
   /**
-   * Query param: Return only limits with these scope types. A Claude Console
-   * organization has `organization` and `workspace` limits; a Claude Enterprise
-   * organization has `organization`, `seat_tier`, `rbac_group`,
-   * `organization_service` and `user` limits. Omit for all.
+   * Query param: Return only limits with these scope types. Omit for all.
    */
   scope_type?: Array<
     'organization' | 'organization_service' | 'rbac_group' | 'seat_tier' | 'user' | 'workspace'
@@ -410,6 +443,7 @@ export declare namespace SpendLimits {
     type BetaSpendLimitRBACGroupScope as BetaSpendLimitRBACGroupScope,
     type BetaSpendLimitScopedAPIKeyActor as BetaSpendLimitScopedAPIKeyActor,
     type BetaSpendLimitSeatTierScope as BetaSpendLimitSeatTierScope,
+    type BetaSpendLimitUsageTierScope as BetaSpendLimitUsageTierScope,
     type BetaSpendLimitUserActor as BetaSpendLimitUserActor,
     type BetaSpendLimitUserScope as BetaSpendLimitUserScope,
     type BetaSpendLimitWorkspaceScope as BetaSpendLimitWorkspaceScope,

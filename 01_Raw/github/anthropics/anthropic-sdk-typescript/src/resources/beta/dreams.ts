@@ -4,6 +4,7 @@ import { APIPromise } from '../../core/api-promise';
 import { PageCursor, type PageCursorParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
+import { startApiCallSpan } from '../../internal/tracing';
 import { path } from '../../internal/utils/path';
 
 export class Dreams extends APIResource {
@@ -40,6 +41,10 @@ export class Dreams extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.dreams.create', options, {
+        route: '/v1/dreams',
+        createdIDAttribute: 'anthropic.dream.id',
+      }),
     });
   }
 
@@ -74,6 +79,10 @@ export class Dreams extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.dreams.retrieve', options, {
+        route: '/v1/dreams/{dream_id}',
+        attributes: { 'anthropic.dream.id': dreamID },
+      }),
     });
   }
 
@@ -109,6 +118,10 @@ export class Dreams extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.dreams.list', options, {
+        route: '/v1/dreams',
+        queryParams: ['created_at[gt]', 'created_at[lt]', 'include_archived', 'limit', 'page', 'statuses'],
+      }),
     });
   }
 
@@ -146,6 +159,10 @@ export class Dreams extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.dreams.archive', options, {
+        route: '/v1/dreams/{dream_id}/archive',
+        attributes: { 'anthropic.dream.id': dreamID },
+      }),
     });
   }
 
@@ -183,6 +200,10 @@ export class Dreams extends APIResource {
         },
         options?.headers,
       ]),
+      __span: startApiCallSpan(this._client, 'anthropic.dreams.cancel', options, {
+        route: '/v1/dreams/{dream_id}/cancel',
+        attributes: { 'anthropic.dream.id': dreamID },
+      }),
     });
   }
 }
@@ -614,7 +635,8 @@ export interface DreamCreateParams {
   output_behavior?: BetaOutputBehavior;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
+   * in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -631,7 +653,8 @@ export interface DreamCreateParams {
 
 export interface DreamRetrieveParams {
   /**
-   * Optional header to specify the beta version(s) you want to use.
+   * This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+   * header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -673,7 +696,8 @@ export interface DreamListParams extends PageCursorParams {
   statuses?: Array<BetaDreamStatus>;
 
   /**
-   * Header param: Optional header to specify the beta version(s) you want to use.
+   * Header param: This endpoint is in beta: requests must send `dreaming-2026-04-21`
+   * in this header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -690,7 +714,8 @@ export interface DreamListParams extends PageCursorParams {
 
 export interface DreamArchiveParams {
   /**
-   * Optional header to specify the beta version(s) you want to use.
+   * This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+   * header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
@@ -707,7 +732,8 @@ export interface DreamArchiveParams {
 
 export interface DreamCancelParams {
   /**
-   * Optional header to specify the beta version(s) you want to use.
+   * This endpoint is in beta: requests must send `dreaming-2026-04-21` in this
+   * header.
    */
   betas?: Array<BetaAPI.AnthropicBeta>;
 
