@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/estimating-productivity-gains
-fetched_at: 2026-10-12T06:49:45.260183+00:00
+fetched_at: 2026-10-19T05:32:51.018285+00:00
 title: "Estimating AI productivity gains \\ Anthropic"
 ---
 
@@ -16,7 +16,7 @@ Nov 25, 2025
 
 ## Overview
 
-*What do real conversations with Claude tell us about the effects of AI on labor productivity? Using our privacy-preserving [analysis method](https://www.anthropic.com/research/clio), we sample one hundred thousand real conversations from [Claude.ai](http://claude.ai/redirect/website.v1.2ca1b00d-6aa6-44d9-b730-da79b12b7732), estimate how long the tasks in these conversations would take with and without AI assistance, and study the productivity implications across the broader economy. Based on Claude’s estimates, these tasks would take on average about 90 minutes to complete without AI assistance, and Claude speeds up individual tasks by about 80%.*
+*What do real conversations with Claude tell us about the effects of AI on labor productivity? Using our privacy-preserving [analysis method](https://www.anthropic.com/research/clio), we sample one hundred thousand real conversations from [Claude.ai](http://claude.ai/redirect/website.v1.c8dbf31b-71fc-42b8-a977-f4b35df37db0), estimate how long the tasks in these conversations would take with and without AI assistance, and study the productivity implications across the broader economy. Based on Claude’s estimates, these tasks would take on average about 90 minutes to complete without AI assistance, and Claude speeds up individual tasks by about 80%.*
 
 *Extrapolating these estimates out suggests **current-generation** AI models could increase US labor productivity growth by 1.8% annually over the next decade*—*roughly twice the run rate in recent years. But this isn’t a prediction of the future, since we don’t take into account the rate of adoption or the larger productivity effects that would come from much more capable AI systems.*
 
@@ -25,7 +25,7 @@ Nov 25, 2025
 *Here’s a more detailed summary of our results:*
 
 - **Across one hundred thousand real world conversations, Claude estimates that AI reduces task completion time by 80%.** We use Claude to evaluate anonymized Claude.ai transcripts to estimate the productivity impact of AI. According to Claude’s estimates, people typically use AI for complex tasks that would, on average, take people 1.4 hours to complete. By matching tasks to O\*NET occupations and BLS wage data, we estimate these tasks would otherwise cost $55 in human labor.
-- **The estimated scope, cost, and time savings of tasks varies widely by occupation.** Based on Claude’s estimates, people use Claude for legal and management tasks that would have taken nearly two hours, but for food preparation tasks that would have taken only 30 minutes. And we find that healthcare assistance tasks can be completed 90% more quickly, whereas hardware issues see time savings of 56%. This doesn’t account for the time that humans might spend on these tasks *beyond* their conversation on [Claude.ai](http://claude.ai/redirect/website.v1.2ca1b00d-6aa6-44d9-b730-da79b12b7732), however, so we think these estimates might overstate current productivity effects to at least some degree.
+- **The estimated scope, cost, and time savings of tasks varies widely by occupation.** Based on Claude’s estimates, people use Claude for legal and management tasks that would have taken nearly two hours, but for food preparation tasks that would have taken only 30 minutes. And we find that healthcare assistance tasks can be completed 90% more quickly, whereas hardware issues see time savings of 56%. This doesn’t account for the time that humans might spend on these tasks *beyond* their conversation on [Claude.ai](http://claude.ai/redirect/website.v1.c8dbf31b-71fc-42b8-a977-f4b35df37db0), however, so we think these estimates might overstate current productivity effects to at least some degree.
 - **Extrapolating these results to the economy, current generation AI models could increase annual US labor productivity growth by 1.8% over the next decade. This would double the annual growth the US has seen since 2019,** **and places our estimate towards the upper end of [recent estimates](https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/11/miracle-or-myth-assessing-the-macroeconomic-productivity-gains-from-artificial-intelligence_fde2a597/b524a072-en.pdf).** Taking as given Claude’s estimates of task-level efficiency gains, we use standard methods to calculate a 1.8% implied annual increase in US labor productivity over the next ten years. However, this estimate does not account for future improvements in AI models (or more sophisticated uses of current technology), which could significantly magnify AI’s economic impact.
 - **As AI accelerates some tasks, others may become bottlenecks**: We see large speedups for some tasks and much smaller ones in others, even within the same occupational groups. Where AI makes less of a difference, these tasks might become bottlenecks, potentially acting as a constraint on growth.
 
@@ -189,7 +189,7 @@ Our approach has several limitations that we think warrant further research on t
 - **Structural assumptions:** In our calculations above, we compare the time it would take a professional to complete a given task without AI to the time it took with AI. But this could either *understate* the productivity gains – since it takes additional resources we’re not accounting for to hire an employee and communicate context, and possibly overstate it, if the quality of the AI’s work is worse than a human’s.
 - **Restructuring of organizations:** Historically, the largest productivity gains for individual firms have followed from [restructuring business operations](https://www.jstor.org/stable/2006600) to adopt new technologies. Our model can help predict the *effects* of such a restructuring, but it cannot predict how companies might decide to restructure, or how quickly this process might happen.
 - **The role of innovation:** Technological innovation is [the engine](https://www.jstor.org/stable/1926047) of economic growth. Our model does not capture how AI systems could accelerate or even automate the scientific process, nor the effects that would have on productivity, growth, and the structure of work.
-- **Limited data**: Our dataset is derived from [Claude.ai](http://claude.ai/redirect/website.v1.2ca1b00d-6aa6-44d9-b730-da79b12b7732) conversations only. This sample is not representative of the full spectrum of AI uses, and there’s likely some selection effect where the instances of tasks people use Claude for are the ones they think Claude will be most useful. Additionally, due to our finite sample size, we likely miss some less common AI tasks.
+- **Limited data**: Our dataset is derived from [Claude.ai](http://claude.ai/redirect/website.v1.c8dbf31b-71fc-42b8-a977-f4b35df37db0) conversations only. This sample is not representative of the full spectrum of AI uses, and there’s likely some selection effect where the instances of tasks people use Claude for are the ones they think Claude will be most useful. Additionally, due to our finite sample size, we likely miss some less common AI tasks.
 
 The measurement infrastructure we develop here enables continuous tracking of the effect of AI on time savings at large scale. As models improve and better methods address these limitations, we can re-estimate these time savings and identify how these capability improvements translate into broader economic impacts. We expect to track these changes in the months and years ahead.
 
@@ -336,20 +336,20 @@ Copy
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

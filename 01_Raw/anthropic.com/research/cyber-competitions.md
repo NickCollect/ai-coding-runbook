@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-competitions
-fetched_at: 2026-10-12T06:49:44.130857+00:00
+fetched_at: 2026-10-19T05:32:50.036362+00:00
 title: "Claude does cyber competitions \\ Anthropic"
 ---
 
@@ -54,9 +54,9 @@ The Airbnb competition, in which Claude solved nearly half of a multi-day compet
 
 ## Claude can make good use of autonomy and tools
 
-The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.78c5b3b3-41dd-4d5d-b28a-334a06a08152); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
+The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.78a73803-fa3b-44bf-ae64-de67708b27ad); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
 
-In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.78c5b3b3-41dd-4d5d-b28a-334a06a08152) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
+In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.78a73803-fa3b-44bf-ae64-de67708b27ad) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1ac1e6bc9064e821eb8e239ef1cf5fc4a6687938-1740x946.png)
 
@@ -154,23 +154,23 @@ We thank Artem Petrov and Dmitrii Volkov from Palisade Research for providing da
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)
 
 ## Subscribe to the Frontier Red Team newsletter
 

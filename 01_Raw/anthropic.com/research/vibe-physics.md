@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/vibe-physics
-fetched_at: 2026-10-12T06:49:49.156409+00:00
+fetched_at: 2026-10-19T05:32:54.221051+00:00
 title: "Vibe physics: The AI grad student \\ Anthropic"
 ---
 
@@ -55,7 +55,7 @@ and out would pop the paper. We are not there yet, of course. I tried giving thi
 
 To go about this scientifically, I encapsulated all the work. The rules were strict:
 
-- Only give text prompts to [Claude Code](https://claude.ai/redirect/website.v1.3a2b12bf-131c-40ae-aae7-78270ab0853e/code). No editing files directly.
+- Only give text prompts to [Claude Code](https://claude.ai/redirect/website.v1.78a73803-fa3b-44bf-ae64-de67708b27ad/code). No editing files directly.
 - Don’t cut and paste my own calculations into the chat.
 - But pasting Gemini or GPT calculations was OK, as long as they were only text-prompted.
 
@@ -65,7 +65,7 @@ My question was: is there a set of prompts, like instructions to a talented G2, 
 
 I knew from experience that LLMs struggle with context and organization over long projects. So I started by asking Claude to come up with a plan of attack: what tasks needed to be done in what order. I also asked GPT 5.2 and Gemini 3.0. Then, I had all three LLMs merge the best ideas from each, using web interfaces and copying one to another. Next, I gave those merges to Claude, asking it to break the outline into detailed subsections. The result is [here](https://www-cdn.anthropic.com/2595299ccf7f8b9a9c74823c24faaa5d9b216804.pdf). There were 102 separate tasks across seven stages.
 
-From there, I turned to [Claude Code](https://claude.ai/redirect/website.v1.3a2b12bf-131c-40ae-aae7-78270ab0853e/code), using the extension in VS Code.
+From there, I turned to [Claude Code](https://claude.ai/redirect/website.v1.78a73803-fa3b-44bf-ae64-de67708b27ad/code), using the extension in VS Code.
 
 ![A screen grab of Claude code](https://www-cdn.anthropic.com/images/4zrzovbb/website/2277f287d82a9a6087bc70c6d16cfd6648634d7e-1600x967.jpg)
 
@@ -254,23 +254,23 @@ In addition to the growth in interest, the tools themselves have been steadily i
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)
 
 ## Subscribe to Anthropic Science
 

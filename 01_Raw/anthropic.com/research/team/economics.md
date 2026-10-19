@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economics
-fetched_at: 2026-10-05T06:27:19.840555+00:00
+fetched_at: 2026-10-19T05:32:53.703226+00:00
 title: "Economics \\ Anthropic"
 ---
 
@@ -50,6 +50,15 @@ Search
 
 DateCategoryTitle
 
+- [Oct 16, 2026Economics
+
+  The AI expectations gap](https://www.anthropic.com/research/ai-expectations-gap)
+- [Oct 16, 2026Economics
+
+  How employment is changing at Anthropic](https://www.anthropic.com/research/employment-at-anthropic)
+- [Oct 16, 2026Economics
+
+  Working at the frontier shapes expectations for the future](https://www.anthropic.com/research/expectations-for-the-future)
 - [Sep 30, 2026Economics
 
   What work can robots do?](https://www.anthropic.com/research/what-work-can-robots-do)
@@ -71,14 +80,5 @@ DateCategoryTitle
 - [May 27, 2026Economics
 
   Coding agents in the social sciences](https://www.anthropic.com/research/coding-agents-social-sciences)
-- [Apr 22, 2026Economics
-
-  Announcing the Anthropic Economic Index Survey](https://www.anthropic.com/research/economic-index-survey-announcement)
-- [Apr 22, 2026Economics
-
-  What 81,000 people told us about the economics of AI](https://www.anthropic.com/research/81k-economics)
-- [Mar 31, 2026Economics
-
-  How Australia uses Claude: Findings from the Anthropic Economic Index](https://www.anthropic.com/research/how-australia-uses-claude)
 
 [See more](#)

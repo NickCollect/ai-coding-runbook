@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-10-12T06:49:46.701526+00:00
+fetched_at: 2026-10-19T05:32:52.129303+00:00
 title: "Mapping the mind of a large language model \\ Anthropic"
 ---
 
@@ -30,7 +30,7 @@ There was both an engineering challenge (the raw sizes of the models involved re
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.a96ed1ce-f4ce-437d-8d03-6212e82c6f91)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.c490e5c3-e5d4-4052-9ba4-45dfef49a405)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
@@ -92,20 +92,20 @@ For full details, please read our paper, "[Scaling Monosemanticity: Extracting I
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

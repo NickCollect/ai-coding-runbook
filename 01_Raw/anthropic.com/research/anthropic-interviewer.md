@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-interviewer
-fetched_at: 2026-10-12T06:49:42.756598+00:00
+fetched_at: 2026-10-19T05:32:48.758611+00:00
 title: "Introducing Anthropic Interviewer \\ Anthropic"
 ---
 
@@ -76,7 +76,7 @@ This initial test explored how workers integrate AI into their professional prac
 
 ### Participants
 
-We used Anthropic Interviewer to conduct interviews with 1,250 professionals. We intend for the tool to interview general [Claude.ai](http://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846) users, but for this initial test, we sought participants working across a range of professions and engaged them through crowdworker platforms (all participants had an occupation other than crowdworking that was their main job).
+We used Anthropic Interviewer to conduct interviews with 1,250 professionals. We intend for the tool to interview general [Claude.ai](http://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0) users, but for this initial test, we sought participants working across a range of professions and engaged them through crowdworker platforms (all participants had an occupation other than crowdworking that was their main job).
 
 1,000 of our participants were recruited from a general sample of occupations (that is, we did not select participants from specific jobs). Of that group, the largest subgroups came from educational instruction (17%), computer and mathematical occupations (16%), and arts, design, entertainment, and media (14%).
 
@@ -292,7 +292,7 @@ Using Anthropic Interviewer, we can conduct targeted research that informs speci
 
 We are continuing to use Anthropic Interviewer to better understand how people envision AI’s role in their lives and work. To that end, we are launching a public pilot interview, exploring what experiences, values and needs drive people’s vision for AI’s future role in their lives.
 
-**Ready to share your perspective?** You can participate in a 10-15 minute interview at [this link](http://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846/interviewer) to take part in this research. We plan to analyze the anonymized insights from this study as part of our societal impacts research and publish a report on insights from this data. For more information on this study, please see the FAQ section below.
+**Ready to share your perspective?** You can participate in a 10-15 minute interview at [this link](http://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0/interviewer) to take part in this research. We plan to analyze the anonymized insights from this study as part of our societal impacts research and publish a report on insights from this data. For more information on this study, please see the FAQ section below.
 
 ## Conclusions and limitations
 
@@ -316,7 +316,7 @@ Our initial use of Anthropic Interviewer has some important limitations that aff
 
 ## Contributions and acknowledgements
 
-Kunal Handa led the project, designed and prototyped Anthropic Interviewer, executed the surveys, interviews, and data analysis, plotted figures, and wrote the blog post. Michael Stern led the implementation of Anthropic Interviewer within [Claude.ai](http://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846), managed the project timeline, and provided feedback throughout. Saffron Huang led the public pilot of Anthropic Interviewer. Jerry Hong led the visual design of Anthropic Interviewer and contributed to technical figures. Esin Durmus contributed to experimental design and provided key feedback. Miles McCain co-led implementation of technical infrastructure underlying prototypes of Anthropic Interviewer. Grace Yun, AJ Alt, and Thomas Millar implemented Anthropic Interviewer within [Claude.ai](http://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846) and provided the technical infrastructure necessary for the public pilot. Alex Tamkin provided key feedback on early iterations of the project. Jane Leibrock contributed to all methodology for Anthropic Interviewer. Stuart Ritchie contributed to the framing and writing of the blog post. Deep Ganguli provided critical research guidance, feedback, and organizational support. All authors provided detailed guidance and feedback throughout.
+Kunal Handa led the project, designed and prototyped Anthropic Interviewer, executed the surveys, interviews, and data analysis, plotted figures, and wrote the blog post. Michael Stern led the implementation of Anthropic Interviewer within [Claude.ai](http://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0), managed the project timeline, and provided feedback throughout. Saffron Huang led the public pilot of Anthropic Interviewer. Jerry Hong led the visual design of Anthropic Interviewer and contributed to technical figures. Esin Durmus contributed to experimental design and provided key feedback. Miles McCain co-led implementation of technical infrastructure underlying prototypes of Anthropic Interviewer. Grace Yun, AJ Alt, and Thomas Millar implemented Anthropic Interviewer within [Claude.ai](http://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0) and provided the technical infrastructure necessary for the public pilot. Alex Tamkin provided key feedback on early iterations of the project. Jane Leibrock contributed to all methodology for Anthropic Interviewer. Stuart Ritchie contributed to the framing and writing of the blog post. Deep Ganguli provided critical research guidance, feedback, and organizational support. All authors provided detailed guidance and feedback throughout.
 
 Additionally, we thank Sally Aldous, Drew Bent, Shan Carter, Jack Clark, Miriam Chaum, Jake Eaton, Matt Galivan, Savina Hawkins, Sarah Heck, Hanah Ho, Mo Julapalli,Matthew Kearney, Mike Krieger, Chelsea Larsson, Joel Lewenstein, Jennifer Martinez, Wes Mitchell, Jared Mueller, Christopher Nulty, Adam Pearce, Sarah Pollack, Ankur Rathi, Drew Roper, David Saunders, Kevin Troy, Molly Villagra, Brett Wittmershaus, and Casey Yamaguma for their helpful ideas, discussion, feedback, and support. We also appreciate the comments, discussion, and feedback from Matthew Conlen, Deb Roy, and Diyi Yang.
 
@@ -348,7 +348,7 @@ We found that participants were remarkably positive about Anthropic Interviewer.
 
 **1. How do we access the study?**
 
-Starting today, if you are a Free, Pro, or Max Claude.ai subscriber who signed up prior to two weeks ago, you might notice a pop-up in Claude.ai asking you to participate. You can access it at: [https://claude.ai/interviewer](https://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846/interviewer). The study will be open for a week.
+Starting today, if you are a Free, Pro, or Max Claude.ai subscriber who signed up prior to two weeks ago, you might notice a pop-up in Claude.ai asking you to participate. You can access it at: [https://claude.ai/interviewer](https://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0/interviewer). The study will be open for a week.
 
 **2. What will this study ask me?**
 
@@ -358,28 +358,28 @@ We will use Anthropic Interviewer to ask you about your vision for AI's role in 
 
 We will analyze the insights from this study as part of our Societal Impacts research, publish our findings, and use this to improve our models and services in a way that reflects what we've learned. The data we collect through this study will be treated as Feedback and will be processed according to our [Privacy Policy](https://www.anthropic.com/legal/privacy). We may also include anonymized responses in published findings. [**Learn more.**](https://privacy.claude.com/en/articles/12996960-how-does-anthropic-interviewer-collect-and-use-my-data)
 
-**4. Why don’t I see the Anthropic Interviewer invitation in [Claude.ai](http://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846)?**
+**4. Why don’t I see the Anthropic Interviewer invitation in [Claude.ai](http://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0)?**
 
-The interview is only available for existing [Claude.ai](http://claude.ai/redirect/website.v1.ca9a96f5-511c-4705-92ae-bc2a314bd846) Free, Pro, and Max users who signed up 2+ weeks ago.
+The interview is only available for existing [Claude.ai](http://claude.ai/redirect/website.v1.57d6d752-89b3-4cf0-94f6-455da32d05c0) Free, Pro, and Max users who signed up 2+ weeks ago.
 
 *If you have questions, reach out via the message icon in the lower right corner of our [Help Center](https://links.email.claude.com/s/c/cGkT1SXSNgcdo1m1Jg5ubLKEl9K6sdfmpEYqg1hKZUyGgcl4dwPfeO18GyKSSqXjh6VJYoL1jUZK6AD2BWJz4p6OxoEug7KO9W2Yl7UuTqBou7dHkuDUR9lSrGIwoWBHBu-wkEktomJDbUAT2u8a6E6foGoE2H3RIurvO9epWQ7AJsKe_0FNVxLk4ygbQL3j7y1jjTEiC2qM5p0y1YCjCVAFED8I6wYqldfi9BKBYq993W-nOs45JbAMQkT6sZUFTHhEwJTV__gENvsItJqLkEOWFL9lrz48UJTC33i6n3SqYgI6stnpAsjLF66P_qtdOX888L-0h2qzKpxlrtGvrvuqEtl5pLNkPQUulHsITd7MyVL3tf-Ubi3dJVc1h9rB7v04z5j16n5-Kbp-iwCpz3RIbNot86fAZNPdfMqyBxFRDZlAUH-iEQ7h8wY1x6k8mnegW7y77GhLsqTJiZxqIi9o511wHl1Ltu-XLpeOVd80/ql5MQfX8py3XUgI4Usb8PWvj6gyGGxly/16).*
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

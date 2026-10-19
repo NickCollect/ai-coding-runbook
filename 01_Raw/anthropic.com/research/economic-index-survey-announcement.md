@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-survey-announcement
-fetched_at: 2026-10-12T06:49:44.814752+00:00
+fetched_at: 2026-10-19T05:32:50.603733+00:00
 title: "Announcing the Anthropic Economic Index Survey \\ Anthropic"
 ---
 
@@ -22,13 +22,13 @@ In the Anthropic Economic Index Survey, we aim to capture a rich new corpus of q
 
 Collecting these data monthly will enable measurement of not just what people experience and expect, but how quickly their views shift as AI capabilities evolve. Combined with Claude usage data in a [privacy-preserving way](https://www.anthropic.com/research/clio), these first-hand accounts can surface change before it shows up in aggregate labor market data.
 
-The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](http://claude.ai/redirect/website.v1.4fd453c5-1d74-4fb4-8d87-5caad2667c5a), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
+The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](http://claude.ai/redirect/website.v1.4f4fcaff-cdf2-4944-a185-2deb5b1a3b3b), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
 
 ## Frequently asked questions
 
 **How do I access the study?**
 
-From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](http://claude.ai/redirect/website.v1.4fd453c5-1d74-4fb4-8d87-5caad2667c5a), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
+From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](http://claude.ai/redirect/website.v1.4f4fcaff-cdf2-4944-a185-2deb5b1a3b3b), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
 
 **What will the study ask me?**
 
@@ -42,20 +42,20 @@ We will analyze the insights from this study as part of our economic research, p
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

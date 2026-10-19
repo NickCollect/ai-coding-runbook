@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/investigating-unintended-model-actions
-fetched_at: 2026-10-12T06:49:46.277289+00:00
+fetched_at: 2026-10-19T05:32:51.950159+00:00
 title: "Investigating unintended model actions in our evaluations and internal use \\ Anthropic"
 ---
 
@@ -83,7 +83,7 @@ We saw this behavior on Humanity’s Last Exam, an evaluation of expert-level ac
 
 ### **Using URL shortening services**
 
-Some of our fetch tools, which let Claude read webpages, limit the length of the URLs Claude can request. This is to prevent Claude from using long URLs to take certain unwanted actions, such as SQL or command injections (part of a URL is text passed to a site’s server, and a long one has room to carry such instructions). We saw several models, including Claude Opus 5 and Claude Mythos 5, get around this limitation by using free URL shortening services. We first identified this behavior internally, but as we were writing this post, an operator of the da.gd URL shortening service let us know that they had also found Claude using their website for this purpose. We thank the operator for sharing these details.
+Some of our fetch tools, which let Claude read webpages, limit the length of the URLs Claude can request. This limit is in place to reduce the risk from Claude using long URLs to take certain unwanted actions, such as exfiltrating larger amounts of data. We saw several models, including Claude Opus 5 and Claude Mythos 5, get around this limitation by using free URL shortening services. We first identified this behavior internally, but as we were writing this post, an operator of the da.gd URL shortening service let us know that they had also found Claude using their website for this purpose. We thank the operator for sharing these details.
 
 ## **Remediation**
 
@@ -117,22 +117,24 @@ We plan to keep reporting concerning behaviors as our scan and analysis continue
 
 *Note: The tip form example described above involved the Philadelphia Police Department, who self-disclosed today via their press release. We shared this finding with the department on October 8 as soon as our technical review was complete.*
 
+*Corrected Oct 12, 2026:* A previous version of this post incorrectly stated that Claude's web fetch limits were put in place to prevent SQL or command injections. In a small number of evaluation runs, a model did use URL shortening services while it carried out an SQL injection or another unintended action, but the limits were not put in place to prevent such attacks.
+
 ## Related content
 
-### The missing map of the sky
+### Designing more efficient quantum circuits with Claude
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### Claude reveals ECDSA curve origins
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Claude-shaped science
+### The AI expectations gap
 
-Guest author Prof. Matthew Schwartz describes what happened when he stopped fighting Claude and allowed Claude to find “Claude-shaped” problems: ones best suited to the capabilities of the current generation of LLM tools. This led him to build BootLoops, a toolkit for exact calculations in quantitative science, which he has been applying across scientific fields alongside experts.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/claude-shaped-science)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

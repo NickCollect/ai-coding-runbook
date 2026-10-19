@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/your-thoughts-on-ai
-fetched_at: 2026-10-12T06:49:49.345046+00:00
+fetched_at: 2026-10-19T05:32:54.338559+00:00
 title: "What do you want from AI? \\ Anthropic"
 ---
 
@@ -14,7 +14,7 @@ Sep 29, 2026
 
 ![What do you want from AI? ](https://www-cdn.anthropic.com/images/4zrzovbb/website/f11a2dcfffbb0f1e5913d794299b6857653413af-2000x1125.jpg)
 
-*We’re launching a new study using [Anthropic Interviewer](https://www.anthropic.com/about-anthropic-interviewer) to learn from your experiences with AI, and we’d like you to participate. After you finish, you can decide to make your interview public, so that anyone, not just Anthropic, can read and learn from it. You can [participate here](https://claude.ai/redirect/website.v1.52054032-2907-4510-82f0-bbaa02013d40/anthropic-interviewer/your-thoughts-on-ai?from=blog).*
+*We’re launching a new study using [Anthropic Interviewer](https://www.anthropic.com/about-anthropic-interviewer) to learn from your experiences with AI, and we’d like you to participate. After you finish, you can decide to make your interview public, so that anyone, not just Anthropic, can read and learn from it. You can [participate here](https://claude.ai/redirect/website.v1.27f14124-55b3-42ac-bf6f-eb3b17b54a27/anthropic-interviewer/your-thoughts-on-ai?from=blog).*
 
 We are at a pivotal moment in the development of AI, as its growing capabilities mean it becomes potentially more useful and more dangerous. Frontier AI is rapidly accelerating discoveries in [science](https://www.anthropic.com/research/Claude-accelerates-protein-design) and [medicine](https://openai.com/index/diagnose-rare-childhood-diseases/), while at the same time the cost of its misuse grows [more consequential](https://darioamodei.com/post/we-must-pace-the-frontier)—[a single security incident](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/#core-takeaways-about-this-incident) can cause far more damage than it did a year ago.
 
@@ -28,7 +28,7 @@ This project builds on a similar study conducted last December, in which [81,000
 
 AI and Anthropic have changed a lot since then. AI has improved, more people use Claude, and people’s feelings toward the technology have shifted. For the previous study, only the high-level results and a small number of quotes were made public. This time, we want your thoughts to be made widely available so that anyone can learn from them.
 
-We’ve written a FAQ so you can make an informed decision about whether to make your interview public and what to share. You can choose to [participate here](https://claude.ai/redirect/website.v1.52054032-2907-4510-82f0-bbaa02013d40/anthropic-interviewer/your-thoughts-on-ai?from=blog).
+We’ve written a FAQ so you can make an informed decision about whether to make your interview public and what to share. You can choose to [participate here](https://claude.ai/redirect/website.v1.27f14124-55b3-42ac-bf6f-eb3b17b54a27/anthropic-interviewer/your-thoughts-on-ai?from=blog).
 
 ## FAQ
 
@@ -110,20 +110,20 @@ Participants in this study will all be people who use Claude, which is not a rep
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

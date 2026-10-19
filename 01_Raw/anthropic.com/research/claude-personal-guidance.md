@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-personal-guidance
-fetched_at: 2026-10-12T06:49:43.593061+00:00
+fetched_at: 2026-10-19T05:32:49.514552+00:00
 title: "How people ask Claude for personal guidance \\ Anthropic"
 ---
 
@@ -26,7 +26,7 @@ There remain many open questions on what good guidance from AI really means or h
 
 ## **What kinds of guidance do people seek from Claude?**
 
-We sampled 1 million [claude.ai](http://claude.ai/redirect/website.v1.ce92dac9-7d2a-47c8-9aac-c4860a374f20) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
+We sampled 1 million [claude.ai](http://claude.ai/redirect/website.v1.448acb3f-bad6-41f4-9d0b-50d71c5a52fd) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
 
 We categorized these roughly 38,000 conversations into nine domains, drawing from previous research on AI and guidance-giving: relationships, career, personal development, financial, legal, health and wellness, parenting, ethics, and spirituality (see [Appendix](https://cdn.sanity.io/files/4zrzovbb/website/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf) for more information). This taxonomy covered 98% of the conversations we saw.
 
@@ -104,20 +104,20 @@ Available [here.](https://cdn.sanity.io/files/4zrzovbb/website/0a540acdf3e167827
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-10-12T06:49:48.646482+00:00
+fetched_at: 2026-10-19T05:32:53.726140+00:00
 title: "Frontier Red Team Research \\ Anthropic"
 ---
 
@@ -14,13 +14,13 @@ Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Ec
 
 Frontier Red Team
 
-## Project Fetch: Phase two
+## Launching an opt-in vulnerability-finding service for open-source software
 
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated (and amusing) robotics tasks.
+We’re launching OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem informed by our experience using Claude to find vulnerabilities during Project Glasswing. Projects that join will receive thorough, periodic security scans by our strongest models at no cost.
 
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/7c87b95dea9287e1900110b24d343d0f401fa7b0.mp4)
+![Launching an opt-in vulnerability-finding service for open-source software](https://www-cdn.anthropic.com/images/4zrzovbb/website/f53f7b5ba7ad3ef592b8e64793dc43e9ba764a2c-1200x630.jpg)
 
 ## Publications
 
@@ -28,6 +28,12 @@ Search
 
 DateCategoryTitle
 
+- [Oct 16, 2026Frontier Red Team
+
+  Claude reveals ECDSA curve origins](https://www.anthropic.com/research/ecdsa-curve-origins)
+- [Oct 12, 2026Frontier Red Team
+
+  AI models may be capable of self-replicating without access to a datacenter](https://www.anthropic.com/research/self-replicating-ai)
 - [Oct 8, 2026Frontier Red Team
 
   Launching an opt-in vulnerability-finding service for open-source software](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
@@ -52,11 +58,5 @@ DateCategoryTitle
 - [Jun 18, 2026Frontier Red Team
 
   Project Fetch: Phase two](https://www.anthropic.com/research/project-fetch-phase-two)
-- [Jun 8, 2026Frontier Red Team
-
-  Measuring LLMs’ impact on N-day exploits](https://www.anthropic.com/research/n-days)
-- [Jun 3, 2026Frontier Red Team
-
-  Mapping AI-enabled cyber threats: Insights from the LLM ATT&CK Navigator](https://www.anthropic.com/research/attack-navigator)
 
 [See more](#)

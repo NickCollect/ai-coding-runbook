@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source
-fetched_at: 2026-10-12T06:49:46.470909+00:00
+fetched_at: 2026-10-19T05:32:52.026392+00:00
 title: "An opt-in vulnerability-finding service for open-source software \\ Anthropic"
 ---
 
@@ -46,23 +46,23 @@ Core maintainers of eligible projects can enroll by submitting a PR to [this Git
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Claude-shaped science
+### The AI expectations gap
 
-Guest author Prof. Matthew Schwartz describes what happened when he stopped fighting Claude and allowed Claude to find “Claude-shaped” problems: ones best suited to the capabilities of the current generation of LLM tools. This led him to build BootLoops, a toolkit for exact calculations in quantitative science, which he has been applying across scientific fields alongside experts.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/claude-shaped-science)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)
 
 ## Subscribe to the Frontier Red Team newsletter
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/clio
-fetched_at: 2026-10-12T06:49:43.839352+00:00
+fetched_at: 2026-10-19T05:32:49.681632+00:00
 title: "Clio: Privacy-preserving insights into real-world AI use \\ Anthropic"
 ---
 
@@ -29,7 +29,7 @@ This isn’t just a matter of curiosity, or even of sociological research. Knowi
 
 There’s also a crucially important factor standing in the way of a clear understanding of AI model use: privacy. At Anthropic, we take the protection of our users’ data very seriously. How, then, can we research and observe how our systems are used while rigorously maintaining user privacy?
 
-**Cl**aude **i**nsights and **o**bservations, or “Clio,” is our attempt to answer this question. Clio is an automated analysis tool that enables privacy-preserving analysis of real-world language model use. It gives us insights into the day-to-day uses of [claude.ai](http://claude.ai/redirect/website.v1.ce92dac9-7d2a-47c8-9aac-c4860a374f20) in a way that’s analogous to tools like Google Trends. It’s also already helping us improve our safety measures. In this post—which accompanies a [full research paper](https://arxiv.org/abs/2412.13678)—we describe Clio and some of its initial results.
+**Cl**aude **i**nsights and **o**bservations, or “Clio,” is our attempt to answer this question. Clio is an automated analysis tool that enables privacy-preserving analysis of real-world language model use. It gives us insights into the day-to-day uses of [claude.ai](http://claude.ai/redirect/website.v1.3a8c5524-6c88-4885-b8ad-622def4c4449) in a way that’s analogous to tools like Google Trends. It’s also already helping us improve our safety measures. In this post—which accompanies a [full research paper](https://arxiv.org/abs/2412.13678)—we describe Clio and some of its initial results.
 
 ## How Clio works: Privacy-preserving analysis at scale
 
@@ -52,11 +52,11 @@ All our privacy protections have been extensively tested, as we describe in the 
 
 ## How people use Claude: Insights from Clio
 
-Using Clio, we've been able to glean high-level insights into how people use [claude.ai](https://claude.ai/redirect/website.v1.ce92dac9-7d2a-47c8-9aac-c4860a374f20) in practice. While public datasets like [WildChat](https://arxiv.org/abs/2405.01470) and [LMSYS-Chat-1M](https://arxiv.org/abs/2309.11998) provide useful information on how people use language models, they only capture specific contexts and use cases. Clio allows us to understand the full spectrum of real-world usage of [claude.ai](https://claude.ai/redirect/website.v1.ce92dac9-7d2a-47c8-9aac-c4860a374f20) (which may look different than usage of other AI systems due to differences in user bases and model types).
+Using Clio, we've been able to glean high-level insights into how people use [claude.ai](https://claude.ai/redirect/website.v1.3a8c5524-6c88-4885-b8ad-622def4c4449) in practice. While public datasets like [WildChat](https://arxiv.org/abs/2405.01470) and [LMSYS-Chat-1M](https://arxiv.org/abs/2309.11998) provide useful information on how people use language models, they only capture specific contexts and use cases. Clio allows us to understand the full spectrum of real-world usage of [claude.ai](https://claude.ai/redirect/website.v1.3a8c5524-6c88-4885-b8ad-622def4c4449) (which may look different than usage of other AI systems due to differences in user bases and model types).
 
 ### Top use cases on Claude.ai
 
-We used Clio to analyze 1 million conversations with Claude on [claude.ai](https://claude.ai/redirect/website.v1.ce92dac9-7d2a-47c8-9aac-c4860a374f20) (both the Free and Pro tiers) to identify the top tasks people use Claude for. This revealed a particular emphasis on coding-related tasks: the "Web and mobile application development" category represented over 10% of all conversations. Software developers use Claude for tasks ranging from debugging code to explaining Git operations and concepts.
+We used Clio to analyze 1 million conversations with Claude on [claude.ai](https://claude.ai/redirect/website.v1.3a8c5524-6c88-4885-b8ad-622def4c4449) (both the Free and Pro tiers) to identify the top tasks people use Claude for. This revealed a particular emphasis on coding-related tasks: the "Web and mobile application development" category represented over 10% of all conversations. Software developers use Claude for tasks ranging from debugging code to explaining Git operations and concepts.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/04049f03394efe43a972f52066ecb801fc544a40-2400x1346.png)
 
@@ -136,20 +136,20 @@ We're continuing to develop and improve Clio, and we hope that others will build
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)

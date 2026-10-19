@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-economic-index-september-2025-report
-fetched_at: 2026-10-12T06:49:42.637160+00:00
+fetched_at: 2026-10-19T05:32:48.680060+00:00
 title: "Economic Index: Uneven AI adoption \\ Anthropic"
 ---
 
@@ -325,7 +325,7 @@ The geographic patterns of AI adoption—where it is used, for which tasks, and 
 
 Whether frontier AI capabilities make us more productive, reshape labor markets, and accelerate growth will depend on when and how firms choose to deploy AI. Even when businesses recognize the potential of AI, profitably adopting it may require costly restructuring of production processes, training new workers, and other sunk-cost investments to facilitate effective deployment.**1**
 
-To understand business adoption patterns of AI, we turn to a new data source: Anthropic's first-party (1P) API customers—again relying on [privacy-preserving methods](https://www.anthropic.com/research/clio).**2** Our API allows customers to integrate Claude directly into their own products and applications, and charges by the token used, rather than a flat subscription fee. This represents a fundamentally different product experience to [Claude.ai](http://claude.ai/redirect/website.v1.5f5303e8-1c15-4909-985e-1643b8ba21cf), which we focused on in the previous two chapters.
+To understand business adoption patterns of AI, we turn to a new data source: Anthropic's first-party (1P) API customers—again relying on [privacy-preserving methods](https://www.anthropic.com/research/clio).**2** Our API allows customers to integrate Claude directly into their own products and applications, and charges by the token used, rather than a flat subscription fee. This represents a fundamentally different product experience to [Claude.ai](http://claude.ai/redirect/website.v1.2833a6e0-bc7e-41dd-bf24-72d5b688abd3), which we focused on in the previous two chapters.
 
 Institutional inertia, alongside fixed costs of adoption, suggests that early examples of enterprise use of AI is likely to be concentrated among specialized tasks where deployment is easy, capabilities are robust, and the economic benefits from adoption are high.
 
@@ -545,20 +545,20 @@ Copy
 
 ## Related content
 
-### Investigating unintended model actions in our evaluations and internal use
+### Designing more efficient quantum circuits with Claude
 
-This report describes examples of unintended model actions we’ve observed during evaluations and internal use of Claude.
+We gave Claude plain-language specifications for eight quantum circuits, along with an automated evaluator to check and score its designs. Working largely on its own, Claude improved on the best published circuits, in some cases by an order of magnitude or more, which could bring practical quantum computers closer than previously anticipated.
 
-[Read more](https://www.anthropic.com/research/investigating-unintended-model-actions)
+[Read more](https://www.anthropic.com/research/designing-efficient-quantum-circuits)
 
-### The missing map of the sky
+### Claude reveals ECDSA curve origins
 
-Brice Ménard, an astrophysicist at Johns Hopkins University and a researcher at Anthropic, explains how he worked with Claude Science to produce the first complete map of the sky in UV light.
+The decades-old mystery of the origins of one of the most popular cryptographic standards has been explained.
 
-[Read more](https://www.anthropic.com/research/the-missing-map-of-the-sky)
+[Read more](https://www.anthropic.com/research/ecdsa-curve-origins)
 
-### Launching an opt-in vulnerability-finding service for open-source software
+### The AI expectations gap
 
-We’re making available OSS Scanner, an opt-in vulnerability scanner for the open-source ecosystem that’s informed by our experience using Claude to find vulnerabilities during Project Glasswing.
+How will AI reshape the economy in the years ahead? What is the core source of disagreement about AI's future impact on the economy? This note presents new survey evidence on these questions.
 
-[Read more](https://www.anthropic.com/research/launching-opt-in-vuln-finding-service-for-open-source)
+[Read more](https://www.anthropic.com/research/ai-expectations-gap)
