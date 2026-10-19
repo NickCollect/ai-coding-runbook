@@ -1,54 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=pl
-fetched_at: 2026-10-12T07:08:01.782735+00:00
-title: "Interfejs API interakcji: przewodnik po migracji w zwi\u0105zku ze zmianami powoduj\u0105cymi niezgodno\u015b\u0107 (maj 2026\u00a0r.) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi
+fetched_at: 2026-10-19T05:41:31.341292+00:00
+title: "Interactions API: H\u01b0\u1edbng d\u1eabn di chuy\u1ec3n c\u00e1c thay \u0111\u1ed5i c\u00f3 th\u1ec3 g\u00e2y ra l\u1ed7i (th\u00e1ng 5 n\u0103m 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-# Interfejs API interakcji: przewodnik po migracji w związku ze zmianami powodującymi niezgodność (maj 2026 r.)
+# Interactions API: Hướng dẫn di chuyển các thay đổi có thể gây ra lỗi (tháng 5 năm 2026)
 
-W interfejsie Interactions API `v1beta` wprowadzamy istotne zmiany, które restrukturyzują kształt interfejsu API, aby obsługiwać przyszłe funkcje, takie jak sterowanie w trakcie działania i asynchroniczne wywołania narzędzi. Na tej stronie wyjaśniamy, co się zmienia, i podajemy przykłady kodu przed i po zmianach, aby ułatwić Ci migrację. Wyróżniamy 2 kategorie zmian:
+`v1beta` Interactions API sẽ có những thay đổi có thể gây lỗi, giúp tái cấu trúc hình dạng API để hỗ trợ các tính năng trong tương lai như điều hướng giữa chừng và lệnh gọi công cụ không đồng bộ. Trang này giải thích những thay đổi và cung cấp các ví dụ về mã trước và sau khi thay đổi để giúp bạn di chuyển. Có hai loại thay đổi:
 
-1. [**Schemat kroków**](#steps-schema): nowa tablica `steps` zastępuje tablicę
-   `outputs`, zapewniając uporządkowaną oś czasu każdej interakcji.
-2. [**Konfiguracja formatu wyjściowego**](#output-format-config): nowy polimorficzny
-   `response_format` łączy wszystkie elementy sterujące formatem wyjściowym i usuwa
-   `response_mime_type`.
+1. [**Lược đồ các bước**](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#steps-schema): Một mảng `steps` mới thay thế mảng `outputs`, cung cấp một dòng thời gian có cấu trúc của từng lượt tương tác.
+2. [**Cấu hình định dạng đầu ra**](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#output-format-config):
+   Một `response_format` đa hình mới hợp nhất tất cả các chế độ kiểm soát định dạng đầu ra
+   và xoá `response_mime_type`.
 
-Aby zaktualizować integrację, wykonaj czynności opisane w artykule [Jak przeprowadzić migrację do nowego schematu](#how-to-migrate) w celu
-aktualizacji integracji.
+Làm theo các bước trong phần [Cách di chuyển sang giản đồ mới](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#how-to-migrate) để cập nhật chế độ tích hợp.
 
-## Główna zmiana: `outputs` na `steps`
+## Thay đổi cốt lõi: `outputs` thành `steps`
 
-Nowy schemat zastępuje tablicę `outputs` tablicą `steps`.
+Giản đồ mới thay thế mảng `outputs` bằng mảng `steps`.
 
-- **Starsza wersja**: odpowiedzi zwracały płaską tablicę `outputs` zawierającą tylko wygenerowaną przez model treść.
-- **Nowy schemat**: odpowiedzi zwracają tablicę `steps` zawierającą uporządkowane kroki z dyskryminatorami typu.
+- **Cũ**: Phản hồi trả về một mảng `outputs` phẳng chỉ chứa nội dung do mô hình tạo.
+- **Lược đồ mới**: Các phản hồi trả về một mảng `steps` chứa các bước có cấu trúc với bộ phân biệt loại.
 
-`POST /interactions` zwraca tylko kroki wyjściowe. `GET /interactions/{id}`
-zwraca pełną oś czasu kroków, w tym początkowy krok `user_input`.
+`POST /interactions` chỉ trả về các bước đầu ra. `GET /interactions/{id}` trả về toàn bộ dòng thời gian của bước, bao gồm cả bước `user_input` ban đầu.
 
-### Podstawowe dane wejściowe/wyjściowe (unarne)
+### Đầu vào/đầu ra cơ bản (một ngôi)
 
-#### Przed (starsza wersja)
+#### Trước (cũ)
 
 ### Python
 
 ```
 # Request
 interaction = client.interactions.create(
-    model="gemini-3.6-flash", input="Tell me a joke."
+    model="gemini-3.8-flash", input="Tell me a joke."
 )
 
 # Response access
@@ -60,7 +57,7 @@ print(interaction.outputs[-1].text)
 ```
 // Request
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Tell me a joke.'
 });
 
@@ -74,7 +71,7 @@ console.log(interaction.outputs[-1].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Tell me a joke."
   }'
 ```
@@ -93,14 +90,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Po (nowy schemat)
+#### Sau (giản đồ mới)
 
 ### Python
 
 ```
 # Request
 interaction = client.interactions.create(
-    model="gemini-3.6-flash", input="Tell me a joke."
+    model="gemini-3.8-flash", input="Tell me a joke."
 )
 
 # Response access (Recommended sugar)
@@ -112,7 +109,7 @@ print(interaction.output_text)
 ```
 // Request
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Tell me a joke.'
 });
 
@@ -130,7 +127,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Tell me a joke."
   }'
 ```
@@ -175,11 +172,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Wywoływanie funkcji
+### Gọi hàm
 
-Struktura żądania pozostaje bez zmian, ale odpowiedź zastępuje płaską zawartość `outputs` uporządkowanymi krokami.
+Cấu trúc yêu cầu không thay đổi, nhưng phản hồi sẽ thay thế nội dung `outputs` phẳng bằng các bước có cấu trúc.
 
-#### Przed (starsza wersja)
+#### Trước (cũ)
 
 ### Python
 
@@ -224,7 +221,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Po (nowy schemat)
+#### Sau (giản đồ mới)
 
 ### Python
 
@@ -272,11 +269,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Narzędzia po stronie serwera
+### Công cụ phía máy chủ
 
-Narzędzia po stronie serwera (takie jak wyszukiwarka Google czy wykonywanie kodu) zwracają teraz określone typy kroków w tablicy `steps`. Starsza wersja schematu zwracała te operacje jako określone typy treści w tablicy `outputs`, a nowy schemat przenosi je do tablicy `steps`. W podanych niżej przykładach użyto wyszukiwarki Google.
+Các công cụ phía máy chủ (như Google Tìm kiếm hoặc Thực thi mã) hiện cung cấp các loại bước cụ thể trong mảng `steps`. Mặc dù giản đồ cũ trả về các thao tác này dưới dạng các loại nội dung cụ thể trong mảng `outputs`, nhưng giản đồ mới sẽ di chuyển các thao tác này vào mảng `steps`. Các ví dụ sau đây sử dụng Google Tìm kiếm.
 
-#### Przed (starsza wersja)
+#### Trước (cũ)
 
 ### Python
 
@@ -308,7 +305,7 @@ for (const output of interaction.outputs) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Who won the last Super Bowl?",
     "tools": [
       { "type": "google_search" }
@@ -350,7 +347,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Po (nowy schemat)
+#### Sau (giản đồ mới)
 
 ### Python
 
@@ -384,7 +381,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Who won the last Super Bowl?",
     "tools": [
       { "type": "google_search" }
@@ -434,11 +431,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Streaming
+### Phát trực tiếp
 
-Streaming udostępnia nowe typy zdarzeń:
+Tính năng truyền trực tuyến cho thấy các loại sự kiện mới:
 
-#### Nowe typy zdarzeń
+#### Các loại sự kiện mới
 
 - `interaction.created`
 - `interaction.completed`
@@ -448,32 +445,30 @@ Streaming udostępnia nowe typy zdarzeń:
 - `step.delta`
 - `step.stop`
 
-#### Wycofane typy zdarzeń
+#### Loại sự kiện không còn được dùng
 
-Te starsze typy zdarzeń zostały zastąpione nowymi typami zdarzeń wymienionymi powyżej:
+Các loại sự kiện cũ sau đây sẽ được thay thế bằng các sự kiện mới nêu trên:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → zastąpiony przez `interaction.in_progress`, `interaction.requires_action` itp.
+- `interaction.status_update` → được thay thế bằng `interaction.in_progress`, `interaction.requires_action`, v.v.
 
-**Wywołania funkcji przesyłane strumieniowo**: gdy używasz przesyłania strumieniowego z wywoływaniem funkcji,
-zdarzenie `step.start` dostarcza nazwę funkcji, a zdarzenia `step.delta`
-przesyłają argumenty jako częściowe ciągi JSON (za pomocą `arguments_delta`). Aby
-uzyskać pełne argumenty, musisz zgromadzić te delty. Różni się to od wywołań unarnych, w których od razu otrzymujesz pełny obiekt wywołania funkcji.
+**Truyền trực tuyến lệnh gọi hàm**: Khi sử dụng tính năng truyền trực tuyến với lệnh gọi hàm, sự kiện `step.start` sẽ phân phối tên hàm và các sự kiện `step.delta` sẽ truyền trực tuyến các đối số dưới dạng chuỗi JSON một phần (bằng cách sử dụng `arguments_delta`). Bạn phải tích luỹ các phần chênh lệch này để nhận được các đối số đầy đủ. Điều này khác với
+các lệnh gọi một ngôi, trong đó bạn nhận được toàn bộ đối tượng lệnh gọi hàm cùng một lúc.
 
-#### Przykłady
+#### Ví dụ
 
-##### Przed (starsza wersja)
+##### Trước (Cũ)
 
 ### Python
 
 ```
 # Legacy streaming used content.delta
 stream = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Explain quantum entanglement in simple terms.",
     stream=True,
 )
@@ -489,7 +484,7 @@ for chunk in stream:
 ```
 // Legacy streaming used content.delta
 const stream = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Explain quantum entanglement in simple terms.',
     stream: true,
 });
@@ -509,7 +504,7 @@ for await (const chunk of stream) {
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Explain quantum entanglement in simple terms.",
     "stream": true
   }'
@@ -533,14 +528,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Po (nowy schemat)
+##### Sau (Lược đồ mới)
 
 ### Python
 
 ```
 # Consuming stream and handling new event types
 for event in client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Tell me a story.",
     stream=True,
 ):
@@ -554,7 +549,7 @@ for event in client.interactions.create(
 ```
 // Consuming stream and handling new event types
 const stream = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Tell me a story.',
     stream: true,
 });
@@ -577,7 +572,7 @@ for await (const event of stream) {
    -H "Accept: text/event-stream" \
    -H "Api-Revision: 2026-05-20" \
    -d '{
-     "model": "gemini-3.6-flash",
+     "model": "gemini-3.8-flash",
      "input": "Tell me a story.",
      "stream": true
    }'
@@ -586,7 +581,7 @@ for await (const event of stream) {
 ```
  // Response (SSE Lines)
  // event: interaction.created
- // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3.6-flash"}, "event_type": "interaction.created"}
+ // data: {"interaction": {"id": "int_xyz", "status": "in_progress", "object": "interaction", "model": "gemini-3.8-flash"}, "event_type": "interaction.created"}
  //
  // event: interaction.in_progress
  // data: {"interaction_id": "int_xyz", "event_type": "interaction.in_progress"}
@@ -610,38 +605,37 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### Historia rozmowy bezstanowej
+### Nhật ký trò chuyện không có trạng thái
 
-Jeśli zarządzasz historią rozmowy ręcznie po stronie klienta (przypadek użycia bezstanowy), musisz zaktualizować sposób łączenia poprzednich tur.
+Nếu quản lý nhật ký trò chuyện theo cách thủ công ở phía máy khách (trường hợp sử dụng không có trạng thái), bạn phải cập nhật cách xâu chuỗi các lượt trước đó.
 
-- **Starsza wersja**: deweloperzy często zbierali tablicę `outputs` z odpowiedzi i wysyłali ją z powrotem w polu `input` w następnej turze.
-- **Nowy schemat**: teraz musisz zbierać tablicę `steps` z odpowiedzi i przekazywać ją w polu `input` następnego żądania, dołączając nową turę użytkownika jako krok `user_input`.
+- **Cũ**: Nhà phát triển thường thu thập mảng `outputs` từ các phản hồi và gửi lại trong trường `input` ở lượt tiếp theo.
+- **Lược đồ mới**: Giờ đây, bạn nên thu thập mảng `steps` từ phản hồi và truyền mảng đó vào trường `input` của yêu cầu tiếp theo, nối lượt của người dùng mới dưới dạng một bước `user_input`.
 
-## Konfiguracja formatu wyjściowego: zmiany w `response_format`
+## Cấu hình định dạng đầu ra: `response_format` thay đổi
 
-Zaktualizowany interfejs API łączy wszystkie elementy sterujące formatem wyjściowym w ujednolicone, polimorficzne pole `response_format`. Centralizuje to konfigurację wyjściową na najwyższym poziomie i sprawia, że `generation_config` skupia się na zachowaniu modelu (np. temperatura, top\_p i myślenie).
+API mới hợp nhất tất cả các chế độ kiểm soát định dạng đầu ra thành một trường `response_format` đa hình, hợp nhất. Điều này giúp tập trung cấu hình đầu ra ở
+cấp cao nhất và giúp `generation_config` tập trung vào hành vi của mô hình (như
+nhiệt độ, top\_p và tư duy).
 
-### Najważniejsze zmiany
+### Thay đổi quan trọng
 
-- **Interfejs API usuwa `response_mime_type`.** Teraz typ MIME określasz w przypadku każdego wpisu formatu w `response_format`.
-- **`response_format` jest teraz obiektem polimorficznym (lub tablicą).** Każdy wpis ma dyskryminator `type` (`text`, `audio`, `image`) i pola specyficzne dla typu. Aby poprosić o wiele modalności wyjściowych, przekaż tablicę wpisów formatu.
-- **`image_config` przenosi się z `generation_config` do `response_format`**.
-  Ustawienia wyjściowe obrazu, takie jak `aspect_ratio` i `image_size`
-  określasz teraz we wpisie `response_format` z parametrem `"type": "image"`.
+- **API này sẽ xoá `response_mime_type`.** Bây giờ, bạn chỉ định loại MIME cho mỗi mục nhập định dạng bên trong `response_format`.
+- **`response_format` hiện là một đối tượng (hoặc mảng) đa hình.** Mỗi mục nhập có một thuộc tính phân biệt `type` (`text`, `audio`, `image`) và các trường theo loại cụ thể. Để yêu cầu nhiều phương thức đầu ra, hãy truyền một mảng các mục định dạng.
+- **`image_config` di chuyển từ `generation_config` đến `response_format`.**
+  Giờ đây, bạn có thể chỉ định các chế độ cài đặt đầu ra hình ảnh như `aspect_ratio` và `image_size` trong mục `response_format` có `"type": "image"`.
 
-### Uporządkowane dane wyjściowe (JSON)
+### Đầu ra có cấu trúc (JSON)
 
-Nowy schemat usuwa pole `response_mime_type`. Zamiast tego określ typ
-MIME i schemat JSON w obiekcie `response_format` z
-`"type": "text"`.
+Giản đồ mới sẽ xoá trường `response_mime_type`. Thay vào đó, hãy chỉ định loại MIME và giản đồ JSON bên trong một đối tượng `response_format` bằng `"type": "text"`.
 
-#### Przed (starsza wersja)
+#### Trước (cũ)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Summarize this article.",
     response_mime_type="application/json",
     response_format={
@@ -659,7 +653,7 @@ print(interaction.outputs[-1].text)
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Summarize this article.',
     response_mime_type: 'application/json',
     response_format: {
@@ -679,7 +673,7 @@ console.log(interaction.outputs[-1].text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Summarize this article.",
     "response_mime_type": "application/json",
     "response_format": {
@@ -691,13 +685,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Po (nowy schemat)
+#### Sau (giản đồ mới)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Summarize this article.",
     # response_mime_type is removed — specify mime_type inside response_format
     response_format={
@@ -720,7 +714,7 @@ print(interaction.output_text)
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Summarize this article.',
     // response_mime_type is removed — specify mime_type inside response_format
     response_format: {
@@ -747,7 +741,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Summarize this article.",
     "response_format": {
       "type": "text",
@@ -762,17 +756,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Konfiguracja obrazu
+### Cấu hình hình ảnh
 
-Nowy schemat usuwa `image_config` z `generation_config`. Ustawienia wyjściowe obrazu określasz teraz we wpisie `response_format` z parametrem `"type": "image"`.
+Giản đồ mới sẽ xoá `image_config` khỏi `generation_config`. Giờ đây, bạn có thể chỉ định chế độ cài đặt đầu ra hình ảnh trong mục `response_format` bằng `"type": "image"`.
 
-#### Przed (starsza wersja)
+#### Trước (cũ)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Generate an image of a sunset over the ocean.",
     generation_config={
         "image_config": {
@@ -787,7 +781,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Generate an image of a sunset over the ocean.',
     generation_config: {
         image_config: {
@@ -804,7 +798,7 @@ const interaction = await client.interactions.create({
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Generate an image of a sunset over the ocean.",
     "generation_config": {
       "image_config": {
@@ -815,13 +809,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Po (nowy schemat)
+#### Sau (giản đồ mới)
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     input="Generate an image of a sunset over the ocean.",
     # image_config is removed from generation_config — use response_format
     response_format={
@@ -837,7 +831,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: 'gemini-3.6-flash',
+    model: 'gemini-3.8-flash',
     input: 'Generate an image of a sunset over the ocean.',
     // image_config is removed from generation_config — use response_format
     response_format: {
@@ -857,7 +851,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   -H "Content-Type: application/json" \
   -H "Api-Revision: 2026-05-20" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "input": "Generate an image of a sunset over the ocean.",
     "response_format": {
       "type": "image",
@@ -868,11 +862,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Konfiguracja dźwięku
+### Cấu hình âm thanh
 
-Nowy schemat zastępuje `response_modalities: ["audio"]` wpisem `response_format` z parametrem `"type": "audio"`.
+Lược đồ mới sẽ thay thế `response_modalities: ["audio"]` bằng một mục `response_format` của `"type": "audio"`.
 
-#### Przed (starsza wersja)
+#### Trước (cũ)
 
 ### Python
 
@@ -921,7 +915,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Po (nowy schemat)
+#### Sau (giản đồ mới)
 
 ### Python
 
@@ -980,53 +974,62 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-Aby poprosić o wiele modalności wyjściowych (np. tekst i dźwięk), przekaż do `response_format` tablicę wpisów formatu zamiast pojedynczego obiektu.
+Để yêu cầu nhiều phương thức đầu ra (ví dụ: cả văn bản và âm thanh), hãy truyền một mảng các mục định dạng đến `response_format` thay vì một đối tượng duy nhất.
 
-## Jak przeprowadzić migrację do nowego schematu
+## Cách di chuyển sang giản đồ mới
 
-### Użytkownicy pakietu SDK
+### Người dùng SDK
 
-Uaktualnij pakiet SDK do najnowszej wersji (Python ≥2.0.0, JavaScript ≥2.0.0). Pakiet SDK automatycznie włącza nowy schemat – nie musisz wprowadzać żadnych zmian w kodzie poza aktualizacją sposobu odczytywania odpowiedzi (patrz przykłady powyżej). Pamiętaj, że w tych wersjach pakietu SDK obsługiwany jest tylko nowy schemat. Starsze wersje pakietu SDK (Python 1.x.x, JavaScript 1.x.x) będą działać do momentu usunięcia starszej wersji schematu **8 czerwca 2026 r.**
+Nâng cấp lên phiên bản SDK mới nhất (Python ≥2.0.0, JavaScript ≥2.0.0). SDK sẽ tự động chọn sử dụng giản đồ mới cho bạn, bạn không cần mã ngoài việc cập nhật cách đọc phản hồi (xem ví dụ ở trên). Xin lưu ý rằng chỉ lược đồ mới được hỗ trợ trong các phiên bản SDK này. Các phiên bản SDK cũ (Python 1.x.x, JavaScript 1.x.x) sẽ tiếp tục hoạt động cho đến khi lược đồ cũ bị xoá vào **ngày 8 tháng 6 năm 2026**.
 
-### Użytkownicy interfejsu REST API
+### Người dùng API REST
 
-Aby teraz włączyć nowy schemat, dodaj do żądań nagłówek `Api-Revision: 2026-05-20`. Po **26 maja** nowy schemat stanie się domyślny dla wszystkich
-żądań. Do **8 czerwca** możesz tymczasowo zrezygnować z nowego schematu, używając nagłówka `Api-Revision: 2026-05-07`
-. Po tej dacie interfejs API trwale usunie starszą wersję schematu.
+Thêm tiêu đề `Api-Revision: 2026-05-20` vào yêu cầu của bạn để chọn sử dụng giản đồ mới ngay bây giờ. Sau **ngày 26 tháng 5**, giản đồ mới sẽ trở thành giản đồ mặc định cho tất cả các yêu cầu. Bạn có thể tạm thời chọn không sử dụng bằng `Api-Revision: 2026-05-07`
+cho đến **ngày 8 tháng 6**, khi API xoá vĩnh viễn giản đồ cũ.
 
-### Oś czasu
+### Dòng thời gian
 
-| Data | Faza | Użytkownicy pakietu SDK | Użytkownicy interfejsu REST API |
+| Ngày | Giai đoạn | Người dùng SDK | Người dùng API REST |
 | --- | --- | --- | --- |
-| **7 maja** | Zaakceptuj | Dostępna jest nowa wersja pakietu SDK (Python ≥2.0.0, JS ≥2.0.0). Uaktualnij pakiet SDK, aby automatycznie uzyskać nowy schemat. | Aby włączyć nowy schemat, dodaj nagłówek `Api-Revision: 2026-05-20`. Domyślnie nadal używana jest starsza wersja. |
-| **26 maja** | Domyślne odwrócenie | Jeśli pakiet SDK został już uaktualniony, nie musisz nic robić. Starsze wersje pakietu SDK (Python 1.x.x, JS 1.x.x) nadal działają, ale zwracają odpowiedzi w starszej wersji. | Nowy schemat jest teraz domyślny. Aby zrezygnować z nowego schematu, wyślij nagłówek `Api-Revision: 2026-05-07`. |
-| **8 czerwca** | Zachód słońca | Wersje pakietu SDK Python 1.x.x i JS 1.x.x przestaną działać w przypadku wywołań interfejsu Interactions API. | Starsza wersja schematu została usunięta z interfejsu Interactions API. Nagłówek `Api-Revision` jest ignorowany. |
+| **Ngày 7 tháng 5** | Chọn sử dụng | Đã có phiên bản SDK mới (Python ≥2.0.0, JS ≥2.0.0). Hãy nâng cấp để tự động nhận giản đồ mới. | Thêm tiêu đề `Api-Revision: 2026-05-20` để chọn sử dụng. Chế độ mặc định vẫn là chế độ cũ. |
+| **Ngày 26 tháng 5** | Lật mặc định | Bạn không cần làm gì nếu đã nâng cấp. Các SDK cũ (Python 1.x.x, JS 1.x.x) vẫn hoạt động nhưng trả về phản hồi cũ. | Giờ đây, giản đồ mới là giản đồ mặc định. Gửi tiêu đề `Api-Revision: 2026-05-07` để chọn không nhận. |
+| **Ngày 8 tháng 6** | Hoàng hôn | Các phiên bản SDK Python 1.x.x và JS 1.x.x sẽ bị lỗi đối với các lệnh gọi Interactions API. | Xoá giản đồ cũ cho Interactions API. Đã bỏ qua tiêu đề `Api-Revision`. |
 
-## Lista kontrolna migracji
+## Danh sách kiểm tra di chuyển
 
-### Schemat kroków (`steps`)
+### Giản đồ các bước (`steps`)
 
-- Zaktualizuj kod, aby odczytywać treść odpowiedzi z tablicy `steps` zamiast z `outputs`. [Zobacz przykłady](#basic-unary).
-- Sprawdź, czy Twój kod obsługuje typy kroków `user_input` i `model_output`. [Zobacz przykłady](#basic-unary).
-- (Wywoływanie funkcji) Zaktualizuj kod, aby znajdować kroki `function_call` w tablicy `steps`. [Zobacz przykłady](#function-calling).
-- (Narzędzia po stronie serwera) Zaktualizuj kod, aby obsługiwać kroki specyficzne dla narzędzia (np. `google_search_call`, `google_search_result`). [Zobacz przykłady](#server-side-tools).
-- (Historia bez stanu) Zaktualizuj zarządzanie historią, aby przekazywać tablicę `steps` w polu `input` następnego żądania. [Zobacz szczegóły](#stateless-history).
-- (Tylko streaming) Zaktualizuj klienta, aby nasłuchiwał nowych typów zdarzeń SSE (`interaction.created`, `step.delta` itp.). [Zobacz przykłady](#streaming).
+- Cập nhật mã để đọc nội dung phản hồi từ mảng `steps` thay vì `outputs`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#basic-unary).
+- Xác minh rằng mã của bạn xử lý cả hai loại bước `user_input` và `model_output`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#basic-unary).
+- (Gọi hàm) Cập nhật mã để tìm các bước `function_call` trong mảng `steps`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#function-calling).
+- (Công cụ phía máy chủ) Cập nhật mã để xử lý các bước dành riêng cho công cụ (ví dụ: `google_search_call`, `google_search_result`).
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#server-side-tools).
+- (Nhật ký không có trạng thái) Cập nhật tính năng quản lý nhật ký để truyền mảng `steps` trong trường `input` của yêu cầu tiếp theo.
+  [Xem chi tiết](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#stateless-history).
+- (Chỉ phát trực tuyến) Cập nhật ứng dụng để theo dõi các loại sự kiện SSE mới (`interaction.created`, `step.delta`, v.v.).
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#streaming).
 
-### Konfiguracja formatu wyjściowego (`response_format`)
+### Cấu hình định dạng đầu ra (`response_format`)
 
-- Zastąp `response_mime_type` polem `mime_type` w `response_format`. [Zobacz przykłady](#structured-output).
-- Owiń istniejący `response_format` schemat JSON w obiekt `{"type": "text", "schema": ...}`. [Zobacz przykłady](#structured-output).
-- (Generowanie obrazów) Przenieś `image_config` z `generation_config` do wpisu `{"type": "image", ...}` w `response_format`. [Zobacz przykłady](#image-config).
-- (Generowanie mowy) Zastąp `response_modalities=["audio"]` wpisem `{"type": "audio"}` w `response_format`. [Zobacz przykłady](#audio-config).
-- (Wielomodowość) Podczas wysyłania żądania wielu modalności wyjściowych zmień `response_format` z pojedynczego obiektu na tablicę.
+- Thay thế `response_mime_type` bằng trường `mime_type` bên trong `response_format`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#structured-output).
+- Bao bọc giản đồ JSON `response_format` hiện có trong một đối tượng `{"type": "text", "schema": ...}`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#structured-output).
+- (Tạo hình ảnh) Di chuyển `image_config` từ `generation_config` sang mục `{"type": "image", ...}` trong `response_format`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#image-config).
+- (Tạo lời nói) Thay thế `response_modalities=["audio"]` bằng một mục `{"type": "audio"}` trong `response_format`.
+  [Xem ví dụ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi#audio-config).
+- (Đa phương thức) Chuyển đổi `response_format` từ một đối tượng duy nhất thành một mảng khi yêu cầu nhiều phương thức đầu ra.
 
-Prześlij opinię
+Gửi ý kiến phản hồi
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Ostatnia aktualizacja: 2026-09-12 UTC.
+Cập nhật lần gần đây nhất: 2026-10-15 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-12 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]

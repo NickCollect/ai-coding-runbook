@@ -1,81 +1,80 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=tr
-fetched_at: 2026-10-12T07:02:43.934314+00:00
-title: "Google AI Studio h\u0131zl\u0131 ba\u015flang\u0131\u00e7 k\u0131lavuzu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ja
+fetched_at: 2026-10-19T05:36:47.480347+00:00
+title: "Google AI Studio \u306e\u30af\u30a4\u30c3\u30af\u30b9\u30bf\u30fc\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Google AI Studio hızlı başlangıç kılavuzu
+# Google AI Studio のクイックスタート
 
-[Google AI Studio](https://aistudio.google.com/?hl=tr), modelleri hızlı bir şekilde denemenize ve farklı istemlerle denemeler yapmanıza olanak tanır. Geliştirmeye hazır olduğunuzda [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=tr)'yi kullanmak için "Kodu al"ı ve tercih ettiğiniz programlama dilini seçebilirsiniz.
+[Google AI Studio](https://aistudio.google.com/?hl=ja) を使用すると、さまざまなプロンプトでモデルを簡単に試すことができます。構築の準備ができたら、[Get code] を選択し、好みのプログラミング言語で [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=ja) の使用を開始できます。
 
-## İstemler ve ayarlar
+## プロンプトと設定
 
-Google AI Studio, farklı kullanım alanları için tasarlanmış çeşitli istem arayüzleri sunar. Bu kılavuzda, sohbet deneyimleri oluşturmak için kullanılan **sohbet istemleri** ele alınmaktadır. Bu istem tekniği, çıktı oluşturmak için birden fazla giriş ve yanıt etkileşimine olanak tanır. [Aşağıdaki sohbet istemi örneğimizden](#chat_example) daha fazla bilgi edinebilirsiniz.
-Diğer seçenekler arasında **Anlık yayın**, **Video oluşturma** ve daha fazlası yer alır.
+Google AI Studio には、さまざまなユースケース向けに設計されたプロンプト用のインターフェースが複数用意されています。このガイドでは、会話機能の構築に使用される**チャット プロンプト**について説明します。このプロンプト技法では、複数の入力とレスポンスのターンを使用して出力を生成できます。詳しくは、[以下のチャット プロンプトの例](#chat_example)をご覧ください。他にも、**リアルタイム ストリーミング**、**動画生成**などのオプションがあります。
 
-AI Studio'da **Çalıştırma ayarları** paneli de bulunur. Bu panelde [model parametrelerinde](https://ai.google.dev/docs/prompting-strategies?hl=tr#model-parameters) ve [güvenlik ayarlarında](https://ai.google.dev/gemini-api/docs/safety-settings?hl=tr) düzenlemeler yapabilir, [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr), [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr), [kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr) ve [temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) gibi araçları etkinleştirebilirsiniz.
+AI Studio には、**実行設定**パネルもあります。このパネルでは、[モデル パラメータ](https://ai.google.dev/docs/prompting-strategies?hl=ja#model-parameters)、[安全設定](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)を調整したり、[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)、[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)、[グラウンディング](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)などのツールを切り替えたりできます。
 
-## Chat istemi örneği: Özel bir sohbet uygulaması oluşturma
+## チャット プロンプトの例: カスタム チャット アプリケーションを作成する
 
-[Gemini](https://gemini.google.com/?hl=tr) gibi genel amaçlı bir chatbot kullandıysanız üretken yapay zeka modellerinin açık uçlu diyaloglar için ne kadar güçlü olabileceğini ilk elden deneyimlemişsinizdir. Bu genel amaçlı chatbot'lar faydalı olsa da genellikle belirli kullanım alanlarına göre uyarlanmaları gerekir.
+[Gemini](https://gemini.google.com/?hl=ja) などの汎用 chatbot を使用したことがある場合は、生成 AI モデルがオープンエンドのダイアログにどれほど強力であるかを直接体験したことがあるでしょう。汎用チャットボットは便利ですが、特定のユースケースに合わせて調整する必要があることがよくあります。
 
-Örneğin, yalnızca bir şirketin ürünüyle ilgili görüşmeleri destekleyen bir müşteri hizmetleri chatbot'u oluşturmak isteyebilirsiniz. Belirli bir üslup veya tarzda konuşan bir chatbot oluşturmak isteyebilirsiniz. Örneğin, çok sayıda şaka yapan, şair gibi kafiyeli konuşan veya yanıtlarında çok sayıda emoji kullanan bir bot.
+たとえば、自社製品に関する会話のみをサポートするカスタマー サービス chatbot を構築するとします。特定のトーンやスタイルで話す chatbot を作成したい場合があります。たとえば、ジョークをたくさん言う bot、詩人のように韻を踏む bot、回答に絵文字をたくさん使う bot などです。
 
-Bu örnekte, Google AI Studio'yu kullanarak Jüpiter'in uydularından biri olan Europa'da yaşayan bir uzaylı gibi iletişim kuran samimi bir chatbot oluşturma işlemi gösterilmektedir.
+この例では、Google AI Studio を使用して、木星の衛星の 1 つであるエウロパに住むエイリアンのように会話するフレンドリーなチャットボットを構築する方法を示します。
 
-### 1. adım: Sohbet istemi oluşturun
+### ステップ 1 - チャット プロンプトを作成する
 
-Chatbot oluşturmak için, modeli istediğiniz yanıtları vermeye yönlendirmek üzere kullanıcı ile chatbot arasındaki etkileşim örneklerini sağlamanız gerekir.
+chatbot を構築するには、ユーザーと chatbot の間のやり取りの例を提供して、モデルが求める回答を提供できるようにする必要があります。
 
-Sohbet istemi oluşturmak için:
+チャット プロンプトを作成するには:
 
-1. [Google AI Studio](https://aistudio.google.com/?hl=tr)'yu açın. **Playground**, yeni bir sohbet istemiyle varsayılan olarak açık olur.
-2. Sağ üst köşedeki **Çalıştırma ayarları**'nı tune tıklayarak paneli genişletin ve [**Sistem Talimatları**](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions) giriş alanını bulun. Aşağıdakileri metin giriş alanına yapıştırın:
+1. [Google AI Studio](https://aistudio.google.com/?hl=ja) を開きます。**Playground** は、新しいチャット プロンプトとともにデフォルトで開きます。
+2. 右上にある [**実行設定**] tune をクリックしてパネルを開き、[[**システム指示**](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions)] 入力フィールドを見つけます。次の内容をテキスト入力フィールドに貼り付けます。
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-Sistem talimatlarını ekledikten sonra modelle sohbet ederek uygulamanızı test etmeye başlayın:
+システム指示を追加したら、モデルとチャットしてアプリケーションのテストを開始します。
 
-1. **Bir şeyler yazın...** etiketli metin giriş kutusuna, kullanıcının sorabileceği bir soru veya yapabileceği bir gözlem yazın. Örneğin:
+1. [**Type something...**] とラベルの付いたテキスト入力ボックスに、ユーザーがする可能性のある質問や観察結果を入力します。次に例を示します。
 
-   **Kullanıcı:**
+   **ユーザー:**
 
    ```
    What's the weather like?
    ```
-2. Chatbot'tan yanıt almak için **Çalıştır** düğmesini tıklayın. Bu yanıt aşağıdakine benzer olabilir:
+2. [**実行**] ボタンをクリックして、chatbot からレスポンスを取得します。レスポンスは次のようになります。
 
-   **Model:**
+   **モデル:**
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
    yes? A curious concept from worlds with thick gas veils...
    ```
 
-   (gemini-2.5-pro)
+   （gemini-2.5-pro）
 
-### 2. adım: Botunuza daha iyi sohbet etmeyi öğretin
+### ステップ 2 - ボットのチャット機能を強化する
 
-Tek bir talimat vererek temel bir Europa uzaylı chatbot'u oluşturabildiniz. Ancak tek bir talimat, modelin yanıtlarında tutarlılık ve kalite sağlamak için yeterli olmayabilir. Daha ayrıntılı talimatlar olmadan modelin hava durumuyla ilgili bir soruya verdiği yanıt çok uzun olma eğilimindedir ve kendi başına hareket edebilir.
+1 つの指示で、基本的なエウロパのエイリアン チャットボットを作成できました。ただし、1 つの指示だけでは、モデルのレスポンスの一貫性と品質を確保するのに十分でない場合があります。具体的な指示がないと、天気に関する質問に対するモデルの回答は非常に長くなる傾向があり、独自の解釈が加わる可能性があります。
 
-Sistem talimatlarına aşağıdakileri ekleyerek chatbot'unuzun üslubunu özelleştirin:
+システム指示に追加して、chatbot のトーンをカスタマイズします。
 
-1. Yeni bir sohbet istemi başlatın veya aynı istemi kullanın. Sistem talimatları, sohbet oturumu başladıktan sonra değiştirilebilir.
-2. **Sistem Talimatları** bölümünde, mevcut talimatları aşağıdaki talimatlarla değiştirin:
+1. 新しいチャット プロンプトを開始するか、同じプロンプトを使用します。システム指示は、チャット セッションの開始後に変更できます。
+2. [**システム指示**] セクションで、既存の指示を次のように変更します。
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -83,9 +82,9 @@ Sistem talimatlarına aşağıdakileri ekleyerek chatbot'unuzun üslubunu özell
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. Sorunuzu yeniden girin (`What's the weather like?`) ve **Çalıştır** düğmesini tıklayın. Yeni bir sohbet başlatmadıysanız yanıtınız şu şekilde olabilir:
+3. 質問（`What's the weather like?`）を再入力し、[**実行**] ボタンをクリックします。新しいチャットを開始していない場合、回答は次のようになります。
 
-   **Model:**
+   **モデル:**
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -94,25 +93,25 @@ Sistem talimatlarına aşağıdakileri ekleyerek chatbot'unuzun üslubunu özell
    (that's your Jupiter!)...
    ```
 
-   (gemini-2.5-pro)
+   （gemini-2.5-pro）
 
-Bu yaklaşımı kullanarak chatbot'a daha fazla derinlik katabilirsiniz. Daha fazla soru sorun, yanıtları düzenleyin ve chatbot'unuzun kalitesini artırın. Talimatları eklemeye veya değiştirmeye devam edin ve chatbot'unuzun davranışını nasıl değiştirdiklerini test edin.
+このアプローチを使用すると、chatbot にさらに深みを追加できます。質問を追加したり、回答を編集したりして、チャットボットの品質を高めます。手順の追加や変更を続け、チャットボットの動作がどのように変化するかをテストします。
 
-### 3. adım: Sonraki adımlar
+### ステップ 3 - 次のステップ
 
-Diğer istem türlerine benzer şekilde, isteminizin prototipini istediğiniz gibi oluşturduktan sonra **Kodu al** düğmesini kullanarak kodlamaya başlayabilir veya isteminizi kaydedip daha sonra üzerinde çalışabilir ve başkalarıyla paylaşabilirsiniz.
+他のプロンプト タイプと同様に、プロンプトのプロトタイプが完成したら、[**コードを取得**] ボタンを使用してコーディングを開始するか、プロンプトを保存して後で作業したり、他のユーザーと共有したりできます。
 
-## Daha fazla bilgi
+## 関連情報
 
-- Koda geçmeye hazırsanız [API'yi kullanmaya başlama kılavuzlarına](https://ai.google.dev/gemini-api/docs/get-started?hl=tr) bakın.
-- Daha iyi istemler oluşturmayı öğrenmek için [İstem tasarımı yönergeleri](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=tr) başlıklı makaleyi inceleyin.
+- コードに進む準備ができたら、[API スタートガイド](https://ai.google.dev/gemini-api/docs/get-started?hl=ja)をご覧ください。
+- より良いプロンプトを作成する方法については、[プロンプト設計のガイドライン](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ja)をご覧ください。
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+最終更新日 2026-07-30 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

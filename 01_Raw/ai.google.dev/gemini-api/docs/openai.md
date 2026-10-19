@@ -1,27 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/openai?hl=de
-fetched_at: 2026-10-12T07:05:22.539199+00:00
-title: "OpenAI-Kompatibilit\u00e4t \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/openai?hl=he
+fetched_at: 2026-10-19T05:58:45.091441+00:00
+title: "\u05ea\u05d0\u05d9\u05de\u05d5\u05ea \u05dc-OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Feedback geben
+שליחת משוב
 
-# OpenAI-Kompatibilität
+# תאימות ל-OpenAI
 
-Gemini-Modelle sind über die OpenAI-Bibliotheken (Python und TypeScript/
-JavaScript) sowie die REST API zugänglich. Dazu müssen Sie nur drei Codezeilen aktualisieren
-und Ihren [Gemini API-Schlüssel](https://aistudio.google.com/apikey?hl=de) verwenden. Wenn Sie die OpenAI-Bibliotheken noch nicht verwenden, empfehlen wir, die
-[Gemini API direkt](https://ai.google.dev/gemini-api/docs/get-started?hl=de) aufzurufen.
+אפשר לגשת למודלים של Gemini באמצעות ספריות OpenAI (‏Python ו-TypeScript או Javascript) יחד עם API בארכיטקטורת REST, על ידי עדכון של שלוש שורות קוד ושימוש ב[מפתח Gemini API](https://aistudio.google.com/apikey?hl=he). אם אתם לא משתמשים כבר בספריות של OpenAI, מומלץ להתקשר ישירות אל [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=he).
 
 ### Python
 
@@ -34,7 +31,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     messages=[
         {   "role": "system",
             "content": "You are a helpful assistant."
@@ -60,7 +57,7 @@ const openai = new OpenAI({
 });
 
 const response = await openai.chat.completions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     messages: [
         {   role: "system",
             content: "You are a helpful assistant." 
@@ -82,7 +79,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $GEMINI_API_KEY" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "messages": [
       {
         "role": "user",
@@ -92,30 +89,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Was hat sich geändert? Nur drei Zeilen!
+מה השתנה? רק שלוש שורות!
 
-- **`api_key="GEMINI_API_KEY"`**: Ersetzen Sie "`GEMINI_API_KEY`" durch Ihren tatsächlichen Gemini
-  API-Schlüssel, den Sie in [Google AI Studio](https://aistudio.google.com?hl=de) abrufen können.
-- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** Dadurch wird die OpenAI-Bibliothek angewiesen, Anfragen an den Gemini API-Endpunkt anstelle der Standard-URL zu senden.
-- **`model="gemini-3.6-flash"`**: Wählen Sie ein kompatibles Gemini-Modell aus.
+- ‫**`api_key="GEMINI_API_KEY"`**: מחליפים את "`GEMINI_API_KEY`" במפתח ה-API של Gemini, שאפשר לקבל ב-[Google AI Studio](https://aistudio.google.com?hl=he).
+- ‫**`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** הפרמטר הזה מציין לספריית OpenAI לשלוח בקשות לנקודת הקצה של Gemini API במקום לכתובת ה-URL שמוגדרת כברירת מחדל.
+- ‫**`model="gemini-3.8-flash"`**: בוחרים מודל Gemini תואם
 
-## Thinking
+## מעמיק
 
-Gemini-Modelle sind darauf trainiert, komplexe Probleme zu durchdenken, was zu einer deutlich verbesserten Argumentation führt. Die Gemini API bietet Parameter für das [„Thinking“](https://ai.google.dev/gemini-api/docs/thinking?hl=de), mit denen Sie genau steuern können, wie viel das Modell nachdenken soll.
+מודלי Gemini מאומנים לחשוב על בעיות מורכבות, מה שמוביל לשיפור משמעותי ביכולות החשיבה הרציונלית. ‫Gemini API כולל [פרמטרים של חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he) שמאפשרים שליטה מדויקת ברמת החשיבה של המודל.
 
-Verschiedene Gemini-Modelle haben unterschiedliche Konfigurationen für das logische Denken. So können Sie sehen, wie sie den Bemühungen von OpenAI in diesem Bereich entsprechen:
+למודלים שונים של Gemini יש הגדרות שונות של חשיבה רציונלית. כך הם ממופים למאמצי החשיבה הרציונלית של OpenAI:
 
-| `reasoning_effort` (OpenAI) | `thinking_level` (Gemini 3.1 Pro) | `thinking_level` (Gemini 3.1 Flash-Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
+| ‫`reasoning_effort` (OpenAI) | `thinking_level` (Gemini 4 Argon) | `thinking_level` (Gemini 3.1 Flash-Lite) | ‫`thinking_level` (Gemini 3 Flash) | ‫`thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
 | `minimal` | `low` | `minimal` | `minimal` | `1,024` |
 | `low` | `low` | `low` | `low` | `1,024` |
 | `medium` | `medium` | `medium` | `medium` | `8,192` |
 | `high` | `high` | `high` | `high` | `24,576` |
 
-Wenn kein `reasoning_effort` angegeben ist, verwendet Gemini die [Standardstufe](https://ai.google.dev/gemini-api/docs/thinking?hl=de#levels) oder das [Standardbudget](https://ai.google.dev/gemini-api/docs/thinking?hl=de#set-budget) des Modells.
+אם לא מציינים `reasoning_effort`, ‏Gemini משתמש [ברמה או בתקציב](https://ai.google.dev/gemini-api/docs/thinking?hl=he#thinking-levels) שמוגדרים כברירת מחדל במודל.
 
-Wenn Sie das „Thinking“ deaktivieren möchten, können Sie `reasoning_effort` für
-2.5-Modelle auf `"none"` setzen. Für Gemini 2.5 Pro- oder 3-Modelle kann das „Thinking“ nicht deaktiviert werden.
+אם רוצים להשבית את החשיבה, אפשר להגדיר את `reasoning_effort` לערך `"none"` עבור מודלים של Gemini 2.5. אי אפשר להשבית את ההסקה במודלים Gemini 2.5 Pro או 3.
 
 ### Python
 
@@ -128,7 +123,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     reasoning_effort="low",
     messages=[
         {   "role": "system",
@@ -155,7 +150,7 @@ const openai = new OpenAI({
 });
 
 const response = await openai.chat.completions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     reasoning_effort: "low",
     messages: [
         {   role: "system",
@@ -178,7 +173,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $GEMINI_API_KEY" \
   -d '{
-    "model": "gemini-3.6-flash",
+    "model": "gemini-3.8-flash",
     "reasoning_effort": "low",
     "messages": [
       {
@@ -189,11 +184,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Gemini-Modelle für das „Thinking“ erstellen auch [Zusammenfassungen der Gedanken](https://ai.google.dev/gemini-api/docs/thinking?hl=de#summaries).
-Mit dem [`extra_body`](#extra-body) Feld können Sie Gemini-Felder
-in Ihre Anfrage einfügen.
+מודלים של Gemini גם יוצרים [סיכומים של המחשבות](https://ai.google.dev/gemini-api/docs/thinking?hl=he#summaries).
+אתם יכולים להשתמש בשדה [`extra_body`](#extra-body) כדי לכלול שדות של Gemini בבקשה.
 
-Beachten Sie, dass sich die Funktionen von `reasoning_effort` und `thinking_level`/`thinking_budget` überschneiden. Sie können daher nicht gleichzeitig verwendet werden.
+שימו לב שהפונקציונליות של `reasoning_effort` ו-`thinking_level`/`thinking_budget` חופפת, ולכן אי אפשר להשתמש בהן בו-זמנית.
 
 ### Python
 
@@ -206,7 +200,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     messages=[{"role": "user", "content": "Explain to me how AI works"}],
     extra_body={
       'extra_body': {
@@ -234,7 +228,7 @@ const openai = new OpenAI({
 });
 
 const response = await openai.chat.completions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     messages: [{role: "user", content: "Explain to me how AI works",}],
     extra_body: {
       "google": {
@@ -256,7 +250,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer GEMINI_API_KEY" \
   -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
         "messages": [{"role": "user", "content": "Explain to me how AI works"}],
         "extra_body": {
           "google": {
@@ -269,11 +263,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
       }'
 ```
 
-Gemini 3 unterstützt die OpenAI-Kompatibilität für Thought Signatures in Chat Completion APIs. Das vollständige Beispiel finden Sie auf der Seite [Thought Signatures](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=de#openai).
+‫Gemini 3 תומך בתאימות ל-OpenAI לחתימות מחשבה בממשקי API להשלמת צ'אט. הדוגמה המלאה מופיעה בדף [חתימות מחשבה](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=he#openai).
 
-## Streaming
+## סטרימינג
 
-Die Gemini API unterstützt [Streaming-Antworten](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=de#generate-a-text-stream).
+‫Gemini API תומך ב[תשובות בסטרימינג](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=he#generate-a-text-stream).
 
 ### Python
 
@@ -286,7 +280,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-  model="gemini-3.6-flash",
+  model="gemini-3.8-flash",
   messages=[
     {
         "role": "system",
@@ -315,7 +309,7 @@ const openai = new OpenAI({
 
 async function main() {
   const completion = await openai.chat.completions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     messages: [
       {
           "role": "system",
@@ -344,7 +338,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer GEMINI_API_KEY" \
   -d '{
-      "model": "gemini-3.6-flash",
+      "model": "gemini-3.8-flash",
       "messages": [
           {"role": "user", "content": "Explain to me how AI works"}
       ],
@@ -352,10 +346,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
     }'
 ```
 
-## Funktionsaufrufe
+## בקשה להפעלת פונקציה
 
-Mit Funktionsaufrufen können Sie einfacher strukturierte Datenausgaben von
-generativen Modellen erhalten. Sie werden in der Gemini API [unterstützt](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=de).
+התכונה "קריאה להפעלת פונקציות" מאפשרת לקבל פלט של נתונים מובְנים ממודלים גנרטיביים, והיא [נתמכת ב-Gemini API](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=he).
 
 ### Python
 
@@ -390,7 +383,7 @@ tools = [
 
 messages = [{"role": "user", "content": "What's the weather like in Chicago today?"}]
 response = client.chat.completions.create(
-  model="gemini-3.6-flash",
+  model="gemini-3.8-flash",
   messages=messages,
   tools=tools,
   tool_choice="auto"
@@ -433,7 +426,7 @@ async function main() {
   ];
 
   const response = await openai.chat.completions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     messages: messages,
     tools: tools,
     tool_choice: "auto",
@@ -452,7 +445,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer GEMINI_API_KEY" \
 -d '{
-  "model": "gemini-3.6-flash",
+  "model": "gemini-3.8-flash",
   "messages": [
     {
       "role": "user",
@@ -486,10 +479,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 }'
 ```
 
-## Bildverständnis
+## הבנת תמונות
 
-Gemini-Modelle sind nativ multimodal und bieten bei
-[vielen gängigen Bildverarbeitungsaufgaben](https://ai.google.dev/gemini-api/docs/vision?hl=de) eine erstklassige Leistung.
+מודלי Gemini הם מולטי-מודאליים מטבעם, ומספקים ביצועים ברמה הגבוהה ביותר ב[משימות ראייה נפוצות רבות](https://ai.google.dev/gemini-api/docs/vision?hl=he).
 
 ### Python
 
@@ -511,7 +503,7 @@ def encode_image(image_path):
 base64_image = encode_image("Path/to/agi/image.jpeg")
 
 response = client.chat.completions.create(
-  model="gemini-3.6-flash",
+  model="gemini-3.8-flash",
   messages=[
     {
       "role": "user",
@@ -579,7 +571,7 @@ async function main() {
 
   try {
     const response = await openai.chat.completions.create({
-      model: "gemini-3.6-flash",
+      model: "gemini-3.8-flash",
       messages: messages,
     });
 
@@ -601,7 +593,7 @@ bash -c '
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer GEMINI_API_KEY" \
     -d "{
-      \"model\": \"gemini-3.6-flash\",
+      \"model\": \"gemini-3.8-flash\",
       \"messages\": [
         {
           \"role\": \"user\",
@@ -618,9 +610,9 @@ bash -c '
 '
 ```
 
-## Bild generieren
+## יצירת תמונה
 
-Generieren Sie ein Bild mit `gemini-2.5-flash-image` oder `gemini-3-pro-image-preview`. Unterstützte Parameter sind `prompt`, `model`, `n`, `size` und `response_format`. Alle anderen Parameter, die hier oder im [`extra_body`](#extra-body) Abschnitt nicht aufgeführt sind, werden von der Kompatibilitätsebene ignoriert.
+יוצרים תמונה באמצעות `gemini-2.5-flash-image` או `gemini-3-pro-image-preview`. הפרמטרים הנתמכים כוללים את `prompt`,‏ `model`,‏ `n`,‏ `size` ו-`response_format`. שכבת התאימות תתעלם מכל פרמטר אחר שלא מופיע כאן או בקטע [`extra_body`](#extra-body).
 
 ### Python
 
@@ -687,11 +679,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
       }'
 ```
 
-## Video generieren
+## יצירת סרטון
 
-Generieren Sie ein Video mit `veo-3.1-generate-preview` über den Sora-kompatiblen Endpunkt `/v1/videos`. Unterstützte Parameter der obersten Ebene sind `prompt` und `model`. Zusätzliche Parameter wie `duration_seconds`, `image` und `aspect_ratio` müssen mit `extra_body` übergeben werden. Alle verfügbaren Parameter finden Sie im [`extra_body`](#extra-body) Abschnitt.
+יצירת סרטון באמצעות `veo-3.1-generate-preview` דרך נקודת הקצה `/v1/videos` שתואמת ל-Sora. הפרמטרים הנתמכים ברמה העליונה הם `prompt` ו-`model`. צריך להעביר פרמטרים נוספים כמו `duration_seconds`,‏ `image` ו-`aspect_ratio` עם `extra_body`. בקטע [`extra_body`](#extra-body) מפורטים כל הפרמטרים הזמינים.
 
-Die Videogenerierung ist ein Vorgang mit langer Ausführungszeit, der eine Vorgangs-ID zurückgibt, mit der Sie den Abschluss abfragen können.
+יצירת סרטונים היא פעולה ממושכת שמחזירה מזהה פעולה שאפשר לדגום כדי לבדוק אם היא הסתיימה.
 
 ### Python
 
@@ -746,9 +738,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
   -F "prompt=A cinematic drone shot of a waterfall"
 ```
 
-### Videostatus prüfen
+### בדיקת סטטוס הסרטון
 
-Die Videogenerierung ist asynchron. Verwenden Sie `GET /v1/videos/{id}`, um den Status abzufragen und die endgültige Video-URL abzurufen, wenn der Vorgang abgeschlossen ist:
+יצירת הסרטונים היא אסינכרונית. משתמשים ב-`GET /v1/videos/{id}` כדי לדגום את הסטטוס ולאחזר את כתובת ה-URL הסופית של הסרטון בסיום:
 
 ### Python
 
@@ -812,9 +804,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
   -H "Authorization: Bearer $GEMINI_API_KEY"
 ```
 
-## Verständnis von Audioinhalten
+## הבנת אודיו
 
-Audioeingabe analysieren:
+ניתוח קלט אודיו:
 
 ### Python
 
@@ -831,7 +823,7 @@ with open("/path/to/your/audio/file.wav", "rb") as audio_file:
   base64_audio = base64.b64encode(audio_file.read()).decode('utf-8')
 
 response = client.chat.completions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     messages=[
     {
       "role": "user",
@@ -871,7 +863,7 @@ const base64Audio = Buffer.from(audioFile).toString("base64");
 
 async function main() {
   const response = await client.chat.completions.create({
-    model: "gemini-3.6-flash",
+    model: "gemini-3.8-flash",
     messages: [
       {
         role: "user",
@@ -907,7 +899,7 @@ bash -c '
     -H "Content-Type: application/json" \
     -H "Authorization: Bearer GEMINI_API_KEY" \
     -d "{
-      \"model\": \"gemini-3.6-flash\",
+      \"model\": \"gemini-3.8-flash\",
       \"messages\": [
         {
           \"role\": \"user\",
@@ -927,9 +919,9 @@ bash -c '
 '
 ```
 
-## Strukturierte Ausgabe
+## פלט מובנה
 
-Gemini-Modelle können JSON-Objekte in jeder von Ihnen definierten [Struktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) ausgeben.
+מודלי Gemini יכולים להפיק אובייקטים מסוג JSON בכל [מבנה שתגדירו](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
 
 ### Python
 
@@ -948,7 +940,7 @@ class CalendarEvent(BaseModel):
     participants: list[str]
 
 completion = client.beta.chat.completions.parse(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     messages=[
         {"role": "system", "content": "Extract the event information."},
         {"role": "user", "content": "John and Susan are going to an AI conference on Friday."},
@@ -978,7 +970,7 @@ const CalendarEvent = z.object({
 });
 
 const completion = await openai.chat.completions.parse({
-  model: "gemini-3.6-flash",
+  model: "gemini-3.8-flash",
   messages: [
     { role: "system", content: "Extract the event information." },
     { role: "user", content: "John and Susan are going to an AI conference on Friday" },
@@ -990,10 +982,9 @@ const event = completion.choices[0].message.parsed;
 console.log(event);
 ```
 
-## Einbettungen
+## הטמעות
 
-Texteinbettungen messen die Verwandtschaft von Textstrings und können generiert werden
-mit der [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=de). Sie können `gemini-embedding-2-preview` für multimodale Einbettungen oder `gemini-embedding-001` für reine Texteinbettungen verwenden.
+הטמעות טקסט מודדות את הקשר בין מחרוזות טקסט, ואפשר ליצור אותן באמצעות [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=he). אפשר להשתמש ב-`gemini-embedding-2-preview` להטמעות מולטימודאליות או ב-`gemini-embedding-001` להטמעות של טקסט בלבד.
 
 ### Python
 
@@ -1049,21 +1040,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
 
 ## Batch API
 
-Mit der OpenAI-Bibliothek können Sie [Batchjobs](https://ai.google.dev/gemini-api/docs/batch-mode?hl=de) erstellen, einreichen und
-ihren Status prüfen.
+אתם יכולים ליצור [משימות באצווה](https://ai.google.dev/gemini-api/docs/batch-api?hl=he), לשלוח אותן ולבדוק את הסטטוס שלהן באמצעות ספריית OpenAI.
 
-Sie müssen die JSONL-Datei im OpenAI-Eingabeformat vorbereiten. Beispiel:
+תצטרכו להכין את קובץ ה-JSONL בפורמט הקלט של OpenAI. לדוגמה:
 
 ```
-{"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
-{"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.6-flash", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
+{"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.8-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
+{"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.8-flash", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
 ```
 
-Die OpenAI-Kompatibilität für Batch unterstützt das Erstellen eines Batchjobs, das Überwachen des Jobstatus und das Anzeigen von Batchergebnissen.
+התאימות ל-OpenAI ב-Batch תומכת ביצירת אצווה, במעקב אחרי סטטוס המשימה ובצפייה בתוצאות של האצווה.
 
-Die Kompatibilität für das Hochladen und Herunterladen wird derzeit nicht unterstützt. Stattdessen wird im
-folgenden Beispiel der `genai`-Client zum Hochladen und Herunterladen
-[von Dateien](https://ai.google.dev/gemini-api/docs/files?hl=de) verwendet, genau wie bei der Verwendung der Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=de#input-file).
+כרגע אין תאימות להעלאה ולהורדה. במקום זאת, בדוגמה הבאה משתמשים בלקוח `genai` כדי להעלות ולהוריד [קבצים](https://ai.google.dev/gemini-api/docs/files?hl=he), כמו כשמשתמשים ב-[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he#input-file) של Gemini.
 
 ### Python
 
@@ -1109,7 +1097,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-Das OpenAI SDK unterstützt auch das [Generieren von Einbettungen mit der Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de#batch-embeddings). Dazu müssen Sie das Feld `endpoint` der Methode `create` durch einen Einbettungsendpunkt sowie die Schlüssel `url` und `model` in der JSONL-Datei ersetzen:
+ב-OpenAI SDK יש גם תמיכה ב[יצירת הטמעות באמצעות Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he#batch-embeddings). כדי לעשות את זה, מחליפים את השדה `endpoint` של השיטה `create` בנקודת קצה של הטמעה, וגם את המפתחות `url` ו-`model` בקובץ JSONL:
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1126,12 +1114,11 @@ batch = openai_client.batches.create(
 )
 ```
 
-Ein vollständiges Beispiel finden Sie im Abschnitt [Batch-Einbettungserstellung](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
-des OpenAI-Kompatibilitäts-Cookbooks.
+דוגמה מלאה מופיעה בקטע [יצירת הטמעות באצווה](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb) במדריך לתאימות ל-OpenAI.
 
-## Flex- und Priority-Inferenz
+## היקש ברמת Flex ו-Priority
 
-Der Parameter `service_tier` der Gemini API entspricht dem von OpenAI in Name und Logik. Er erzwingt Limits und leitet den Traffic für die Flex- und Priority-Inferenzstufen entsprechend weiter.
+‫Gemini API תואם לפרמטר `service_tier` של OpenAI בשם ובלוגיקה, אוכף מגבלות ומפנה תנועה בצורה חלקה גם לרמת ההסקה Flex וגם לרמת ההסקה Priority.
 
 ### Python
 
@@ -1144,7 +1131,7 @@ client = OpenAI(
 )
 
 completion = client.chat.completions.create(
-  model="gemini-3.6-flash",
+  model="gemini-3.8-flash",
   messages=[
     {"role": "user", "content": "Write a short poem about clouds."}
   ],
@@ -1154,38 +1141,38 @@ completion = client.chat.completions.create(
 print(completion)
 ```
 
-Wenn nicht explizit zugewiesen, wird für `service_tier` standardmäßig `standard` verwendet, was `default` für OpenAI entspricht.
-Weitere Informationen zu den Inferenzstufen finden Sie in der [Dokumentation zur Optimierung](https://ai.google.dev/gemini-api/docs/optimization?hl=de).
+אם לא מקצים ערך באופן מפורש, הערך של `service_tier` הוא `standard` כברירת מחדל, ששווה ל-`default` ב-OpenAI.
+מידע נוסף על רמות הסקה זמין במסמכי התיעוד בנושא [אופטימיזציה](https://ai.google.dev/gemini-api/docs/optimization?hl=he).
 
-## Gemini-Funktionen mit `extra_body` aktivieren
+## הפעלת התכונות של Gemini ב-`extra_body`
 
-Es gibt mehrere Funktionen, die von Gemini unterstützt werden, aber in OpenAI-Modellen nicht verfügbar sind. Sie können jedoch mit dem Feld `extra_body` aktiviert werden.
+יש כמה תכונות שנתמכות ב-Gemini ולא זמינות במודלים של OpenAI, אבל אפשר להפעיל אותן באמצעות השדה `extra_body`.
 
-| Parameter | Typ | Endpunkt | Beschreibung |
+| פרמטר | סוג | נקודת קצה | תיאור |
 | --- | --- | --- | --- |
-| **`cached_content`** | Text | Chat | Entspricht dem allgemeinen Content-Cache von Gemini. |
-| **`thinking_config`** | Objekt | Chat | Entspricht der ThinkingConfig von Gemini. |
-| **`aspect_ratio`** | Text | Google Bilder | Seitenverhältnis der Ausgabe (z.B. `"16:9"`, `"1:1"`, `"9:16"`). |
-| **`generation_config`** | Objekt | Google Bilder | Gemini-Konfigurationsobjekt für die Generierung (z.B. `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
-| **`safety_settings`** | Liste | Google Bilder | Benutzerdefinierte Sicherheitsfilter (z.B. `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
-| **`tools`** | Liste | Google Bilder | Aktiviert die Fundierung (z.B. `[{"google_search": {}}]`). Nur für `gemini-3-pro-image-preview`. |
-| **`aspect_ratio`** | Text | Video | Abmessungen des Ausgabevideos (`16:9` für Querformat, `9:16` für Hochformat). Wird von `size` abgeleitet, wenn nicht angegeben. |
-| **`resolution`** | Text | Video | Ausgaberauflösung (`720p`, `1080p`, `4K`). Hinweis: `1080p` und `4K` lösen die Upsampler-Pipeline aus. |
-| **`duration_seconds`** | Ganzzahl | Video | Länge der Generierung (Werte: `4`, `6`, `8`). Muss `8` sein, wenn `reference_images`, Interpolation oder Erweiterung verwendet werden. |
-| **`frame_rate`** | Text | Video | Framerate für die Videoausgabe (z.B. `"24"`). |
-| **`input_reference`** | Text | Video | Referenzeingabe für die Videogenerierung. |
-| **`extend_video_id`** | Text | Video | ID eines vorhandenen Videos, das erweitert werden soll. |
-| **`negative_prompt`** | Text | Video | Auszuschließende Elemente (z.B. `"shaky camera"`). |
-| **`seed`** | Ganzzahl | Video | Ganzzahl für deterministische Generierung. |
-| **`style`** | Text | Video | Visuelles Styling (`cinematic` als Standard, `creative` für soziale Medien optimiert). |
-| **`person_generation`** | Text | Video | Steuert die Generierung von Personen (`allow_adult`, `allow_all`, `dont_allow`). |
-| **`reference_images`** | Liste | Video | Bis zu 3 Bilder als Stil-/Charakterreferenz (Base64-Assets). |
-| **`image`** | Text | Video | Base64-codiertes anfängliches Eingabebild, um die Videogenerierung zu beeinflussen. |
-| **`last_frame`** | Objekt | Video | Letztes Bild für die Interpolation (erfordert `image` als erstes Frame). |
+| **`cached_content`** | טקסט | צ'אט | תואם למטמון התוכן הכללי של Gemini. |
+| **`thinking_config`** | אובייקט | צ'אט | תואם ל-ThinkingConfig של Gemini. |
+| **`aspect_ratio`** | טקסט | תמונות | יחס גובה-רוחב של הפלט (למשל, `"16:9"`, ‏ `"1:1"`, ‏ `"9:16"`). |
+| **`generation_config`** | אובייקט | תמונות | אובייקט הגדרות אישיות ליצירת תוכן ב-Gemini (למשל, `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
+| **`safety_settings`** | רשימה | תמונות | מסננים מותאמים אישית של סף הבטיחות (למשל, `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
+| **`tools`** | רשימה | תמונות | הפעלת ביסוס (למשל, `[{"google_search": {}}]`). רק עבור `gemini-3-pro-image-preview`. |
+| **`aspect_ratio`** | טקסט | וידאו | מידות הסרטון שנוצר (`16:9` לרוחב, `9:16` לאורך). אם לא צוין ערך, המערכת ממפה מ-`size`. |
+| **`resolution`** | טקסט | וידאו | רזולוציית הפלט (`720p`, ‏ `1080p`, ‏ `4K`). הערה: `1080p` ו-`4K` מפעילים את צינור עיבוד הנתונים של upsampler. |
+| **`duration_seconds`** | מספר שלם | וידאו | אורך תהליך הייצור (ערכים: `4`,‏ `6`,‏ `8`). הערך חייב להיות `8` כשמשתמשים ב-`reference_images`, באינטרפולציה או בהרחבה. |
+| **`frame_rate`** | טקסט | וידאו | קצב הפריימים של פלט הסרטון (לדוגמה, `"24"`). |
+| **`input_reference`** | טקסט | וידאו | קלט של קובץ עזר ליצירת סרטונים. |
+| **`extend_video_id`** | טקסט | וידאו | המזהה של סרטון קיים שרוצים להאריך. |
+| **`negative_prompt`** | טקסט | וידאו | פריטים להחרגה (למשל, `"shaky camera"`). |
+| **`seed`** | מספר שלם | וידאו | מספר שלם ליצירה דטרמיניסטית. |
+| **`style`** | טקסט | וידאו | סגנון חזותי (`cinematic` כברירת מחדל, `creative` לאופטימיזציה לרשתות חברתיות). |
+| **`person_generation`** | טקסט | וידאו | ההגדרה קובעת אם ייווצרו תמונות של אנשים (`allow_adult`, `allow_all`, `dont_allow`). |
+| **`reference_images`** | רשימה | וידאו | עד 3 תמונות רפרנס לסגנון או לדמות (נכסי base64). |
+| **`image`** | טקסט | וידאו | תמונת קלט ראשונית בקידוד Base64 כדי להתנות את יצירת הסרטון. |
+| **`last_frame`** | אובייקט | וידאו | התמונה הסופית לאינטרפולציה (נדרש `image` כפריים הראשון). |
 
-### Beispiel mit `extra_body`
+### דוגמה לשימוש ב-`extra_body`
 
-Hier ein Beispiel für die Verwendung von `extra_body` zum Festlegen von `cached_content`:
+דוגמה לשימוש ב-`extra_body` כדי להגדיר את `cached_content`:
 
 ### Python
 
@@ -1198,7 +1185,7 @@ client = OpenAI(
 )
 
 stream = client.chat.completions.create(
-    model="gemini-3.6-flash",
+    model="gemini-3.8-flash",
     n=1,
     messages=[
         {
@@ -1223,9 +1210,9 @@ for chunk in stream:
     print(chunk.usage.to_dict())
 ```
 
-## Modelle auflisten
+## הצגת רשימת המודלים
 
-So rufen Sie eine Liste der verfügbaren Gemini-Modelle ab:
+כדי לקבל רשימה של המודלים הזמינים של Gemini:
 
 ### Python
 
@@ -1269,9 +1256,9 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## Modell abrufen
+## אחזור מודל
 
-So rufen Sie ein Gemini-Modell ab:
+שליפת מודל Gemini:
 
 ### Python
 
@@ -1283,7 +1270,7 @@ client = OpenAI(
   base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 
-model = client.models.retrieve("gemini-3.6-flash")
+model = client.models.retrieve("gemini-3.8-flash")
 print(model.id)
 ```
 
@@ -1298,7 +1285,7 @@ const openai = new OpenAI({
 });
 
 async function main() {
-  const model = await openai.models.retrieve("gemini-3.6-flash");
+  const model = await openai.models.retrieve("gemini-3.8-flash");
   console.log(model.id);
 }
 
@@ -1308,28 +1295,26 @@ main();
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.6-flash \
+curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.8-flash \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## Aktuelle Beschränkungen
+## מגבלות נוכחיות
 
-Die Unterstützung für die OpenAI-Bibliotheken befindet sich noch in der Betaphase, während wir die Funktionsunterstützung erweitern.
+התמיכה בספריות של OpenAI עדיין בגרסת בטא, ואנחנו מרחיבים את התמיכה בתכונות.
 
-Wenn Sie Fragen zu unterstützten Parametern oder kommenden Funktionen haben oder auf
-Probleme beim Einstieg in Gemini stoßen, besuchen Sie unser [Entwicklerforum](https://discuss.ai.google.dev/c/gemini-api/4?hl=de).
+אם יש לכם שאלות לגבי הפרמטרים הנתמכים, תכונות עתידיות או בעיות בתחילת העבודה עם Gemini, אתם יכולים להצטרף ל[פורום המפתחים](https://discuss.ai.google.dev/c/gemini-api/4?hl=he) שלנו.
 
-## Nächste Schritte
+## המאמרים הבאים
 
-In unserem [Colab zur OpenAI-Kompatibilität](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=de) finden Sie weitere detaillierte
-Beispiele.
+כדי לראות דוגמאות מפורטות יותר, נסו את [Colab לתאימות ל-OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=he).
 
-Feedback geben
+שליחת משוב
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Zuletzt aktualisiert: 2026-09-12 (UTC).
+עדכון אחרון: 2026-10-15 (שעון UTC).
 
-Haben Sie Feedback für uns?
+רוצה לתת לנו משוב?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-12 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-15 (שעון UTC)."],[],[]]

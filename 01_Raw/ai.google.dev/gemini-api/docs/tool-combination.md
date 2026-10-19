@@ -1,30 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-BR
-fetched_at: 2026-10-12T07:08:55.522760+00:00
-title: "Combinar ferramentas integradas e chamadas de fun\u00e7\u00e3o \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi
+fetched_at: 2026-10-19T05:38:00.703429+00:00
+title: "\u092a\u0939\u0932\u0947 \u0938\u0947 \u092e\u094c\u091c\u0942\u0926 \u091f\u0942\u0932 \u0914\u0930 \u092b\u093c\u0902\u0915\u094d\u0936\u0928 \u0915\u0949\u0932\u093f\u0902\u0917 \u0915\u094b \u090f\u0915 \u0938\u093e\u0925 \u0907\u0938\u094d\u0924\u0947\u092e\u093e\u0932 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envie comentários
+सुझाव भेजें
 
-# Combinar ferramentas integradas e chamadas de função
+# पहले से मौजूद टूल और फ़ंक्शन कॉलिंग को एक साथ इस्तेमाल करना
 
-O Gemini permite a combinação de [ferramentas integradas](https://ai.google.dev/gemini-api/docs/tools?hl=pt-br), como
-o `google_search`, e a [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)
-(também conhecida como *ferramentas personalizadas*) em uma única interação, preservando e expondo
-o histórico de contexto das chamadas de ferramentas. As combinações de ferramentas integradas e personalizadas permitem fluxos de trabalho complexos e de agentes em que, por exemplo, o modelo pode se basear em dados da Web em tempo real antes de chamar sua lógica de negócios específica.
+Gemini में, [पहले से मौजूद टूल](https://ai.google.dev/gemini-api/docs/tools?hl=hi), जैसे कि `google_search`, और [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) (इसे *कस्टम टूल* भी कहा जाता है) को एक साथ इस्तेमाल किया जा सकता है. इसके लिए, टूल कॉल के कॉन्टेक्स्ट के इतिहास को सेव किया जाता है और उसे दिखाया जाता है. इसमें पहले से मौजूद और कस्टम टूल के कॉम्बिनेशन इस्तेमाल किए जा सकते हैं. इससे, एजेंट के तौर पर काम करने वाले जटिल वर्कफ़्लो बनाए जा सकते हैं. उदाहरण के लिए, मॉडल आपके कारोबार के खास नियमों को लागू करने से पहले, रीयल-टाइम में वेब डेटा का इस्तेमाल कर सकता है.
 
-Confira um exemplo que ativa combinações de ferramentas integradas e personalizadas com
-`google_search` e uma função personalizada `getWeather`:
+यहां एक उदाहरण दिया गया है, जिसमें `google_search` और कस्टम फ़ंक्शन `getWeather` की मदद से, बिल्ट-इन और कस्टम टूल के कॉम्बिनेशन को चालू किया गया है:
 
 ### Python
 
@@ -154,7 +150,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -234,90 +230,87 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Como funciona
+## यह कैसे काम करता है
 
-Os modelos do Gemini 3 usam a *circulação de contexto de ferramentas* para ativar combinações de ferramentas integradas e personalizadas. A circulação do contexto da ferramenta permite preservar e
-expor o contexto das ferramentas integradas e compartilhá-lo com ferramentas personalizadas na mesma
-interação.
+Gemini 3 मॉडल, *टूल के कॉन्टेक्स्ट को शेयर करने की सुविधा* का इस्तेमाल करते हैं. इससे, पहले से मौजूद और कस्टम टूल के कॉम्बिनेशन को चालू किया जा सकता है. टूल के कॉन्टेक्स्ट को शेयर करने की सुविधा की मदद से, पहले से मौजूद टूल के कॉन्टेक्स्ट को सुरक्षित रखा जा सकता है और उसे दिखाया जा सकता है. साथ ही, उसे एक ही इंटरैक्शन में कस्टम टूल के साथ शेयर किया जा सकता है.
 
-### Ativar a combinação de ferramentas
+### टूल कॉम्बिनेशन की सुविधा चालू करना
 
-- Inclua o [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#function-declarations), além das ferramentas integradas que você quer usar, para acionar o comportamento de combinação.
+- [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi#function-declarations) को उन बिल्ट-इन टूल के साथ शामिल करें जिनका इस्तेमाल आपको करना है. इससे कॉम्बिनेशन बिहेवियर ट्रिगर होगा.
 
-### Etapas retornadas pela API
+### एपीआई से मिले जवाब में शामिल चरण
 
-Em uma resposta de interação, a API retorna etapas separadas para chamadas de ferramentas integradas e de funções (ferramentas personalizadas):
+इंटरैक्शन के जवाब में, एपीआई पहले से मौजूद टूल कॉल और फ़ंक्शन (कस्टम टूल) कॉल के लिए अलग-अलग चरण दिखाता है:
 
-- **Etapas da ferramenta integrada**: a API gerencia essas etapas automaticamente, preservando o contexto em todas as interações.
-- **Etapas de chamada de função**: a API retorna `function_call` etapas para suas funções personalizadas. Você executa a função e fornece o resultado de volta.
+- **पहले से मौजूद टूल के चरण**: एपीआई इन्हें अपने-आप मैनेज करता है. इससे, बातचीत के हर चरण में कॉन्टेक्स्ट बना रहता है.
+- **फ़ंक्शन कॉल के चरण**: एपीआई, आपके कस्टम फ़ंक्शन के लिए `function_call` चरण दिखाता है. फ़ंक्शन को लागू करें और नतीजे वापस दें.
 
-### Campos críticos nas etapas retornadas
+### जवाब में मिले चरणों में मौजूद ज़रूरी फ़ील्ड
 
-Alguns campos nas etapas retornadas são essenciais para manter o contexto da ferramenta e permitir combinações de ferramentas:
+जवाब में मिले चरणों में कुछ फ़ील्ड, टूल के संदर्भ को बनाए रखने और टूल के कॉम्बिनेशन को चालू करने के लिए ज़रूरी होते हैं:
 
-- **`id`**: encontrado nas etapas `function_call` e `function_response`. Um identificador exclusivo que mapeia uma chamada para a resposta dela.
-- **`signature`**: encontrado nas etapas `thought`, bem como em todas as etapas de chamada de ferramenta (por exemplo, `function_call`) e resultado (por exemplo, `function_response`) para modelos do Gemini 3 e versões mais recentes. Esse contexto criptografado permite a **circulação do contexto da ferramenta** nas interações.
+- **`id`**: `function_call` और `function_response` चरण में मिला. यह एक यूनीक आइडेंटिफ़ायर होता है, जो कॉल को उसके रिस्पॉन्स से मैप करता है.
+- **`signature`**: यह `thought` चरणों के साथ-साथ, Gemini 3 और इसके बाद के मॉडल के लिए, टूल कॉल (जैसे, `function_call`) और नतीजे (जैसे, `function_response`) वाले सभी चरणों में मिलता है. एन्क्रिप्ट किए गए इस कॉन्टेक्स्ट की मदद से, अलग-अलग इंटरैक्शन के दौरान **टूल के कॉन्टेक्स्ट को सर्कुलेट** किया जा सकता है.
 
-**Gerenciar esses campos**:
+**इन फ़ील्ड को मैनेज करना:**
 
-- **Modo com estado (recomendado)**: quando você usa `previous_interaction_id`, o servidor processa automaticamente os campos `id` e `signature`.
-- **Modo sem estado**: ao gerenciar o histórico de conversas manualmente, transmita os campos `id` e `signature` de volta ao modelo em solicitações subsequentes para validar a autenticidade e manter o contexto. Os SDKs oficiais fazem isso automaticamente se você transmitir o objeto de resposta completo de volta ao histórico.
+- **स्टेटफ़ुल मोड (सुझाया गया)**: `previous_interaction_id` का इस्तेमाल करने पर, सर्वर `id` और `signature`, दोनों फ़ील्ड को अपने-आप मैनेज करता है.
+- **स्टेटलेस मोड**: बातचीत के इतिहास को मैन्युअल तरीके से मैनेज करते समय, आपको यह पक्का करना होगा कि आपने बाद के अनुरोधों में, `id` और `signature`, दोनों फ़ील्ड को मॉडल में वापस पास किया हो. इससे, प्रामाणिकता की पुष्टि की जा सकेगी और कॉन्टेक्स्ट को बनाए रखा जा सकेगा. अगर आपने पूरे जवाब वाले ऑब्जेक्ट को इतिहास में वापस भेज दिया है, तो आधिकारिक एसडीके इसे अपने-आप मैनेज कर लेते हैं.
 
-### Dados específicos da ferramenta
+### टूल के हिसाब से डेटा
 
-Algumas ferramentas integradas retornam argumentos de dados visíveis para o usuário específicos do tipo de ferramenta.
+कुछ बिल्ट-इन टूल, उपयोगकर्ता को दिखने वाले डेटा आर्ग्युमेंट दिखाते हैं. ये आर्ग्युमेंट, टूल टाइप के हिसाब से अलग-अलग होते हैं.
 
-| Ferramenta | Argumentos de chamada de ferramenta visíveis ao usuário (se houver) | Resposta da ferramenta visível para o usuário (se houver) |
+| टूल | उपयोगकर्ता को दिखने वाले टूल कॉल आर्ग्युमेंट (अगर कोई है) | उपयोगकर्ता को दिखने वाला टूल का जवाब (अगर कोई है) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` URLs a serem pesquisados | `status`: status de navegação `retrieved_url`: URLs navegados |
-| **file\_search** | Nenhum | Nenhum |
+| **url\_context** | `urls` ब्राउज़ किए जाने वाले यूआरएल | `status`: ब्राउज़ करने की स्थिति `retrieved_url`: ब्राउज़ किए गए यूआरएल |
+| **file\_search** | कोई नहीं | कोई नहीं |
 
-## Tokens e preços
+## टोकन और कीमत
 
-As partes de chamadas de função integradas em solicitações são contabilizadas em `prompt_token_count`. Como essas etapas intermediárias da ferramenta agora estão visíveis e são retornadas para você, elas fazem parte do histórico da conversa. Isso só acontece com *solicitações*, não com *respostas*.
+ध्यान दें कि अनुरोधों में मौजूद, पहले से मौजूद टूल कॉल के हिस्सों को `prompt_token_count` में गिना जाता है. टूल के इस्तेमाल से जुड़े ये इंटरमीडिएट चरण अब आपको दिखते हैं और इनका डेटा आपको वापस मिल जाता है. इसलिए, ये बातचीत के इतिहास का हिस्सा होते हैं. यह सिर्फ़ *अनुरोधों* के लिए है, *जवाबों* के लिए नहीं.
 
-A ferramenta Pesquisa Google é uma exceção a essa regra. A Pesquisa Google já aplica o próprio modelo de preços no nível da consulta, então os tokens não são cobrados duas vezes. Consulte a página [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br).
+Google Search टूल पर यह नियम लागू नहीं होता. Google Search, क्वेरी लेवल पर पहले से ही अपना प्राइसिंग मॉडल लागू करता है. इसलिए, टोकन के लिए दो बार शुल्क नहीं लिया जाता. ज़्यादा जानकारी के लिए, [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) पेज देखें.
 
-Leia a página [Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) para mais informações.
+ज़्यादा जानकारी के लिए, [टोकन](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) पेज पढ़ें.
 
-## Limitações
+## सीमाएं
 
-- Use o modo `validated` (o modo `auto` não é compatível) quando a circulação de contexto da ferramenta estiver ativada.
-- Ferramentas integradas, como o `google_search`, dependem de informações de localização e hora atual. Portanto, se o `system_instruction` ou o `function_declaration.description` tiver informações conflitantes de localização e hora, o recurso de combinação de ferramentas poderá não funcionar bem.
+- टूल के कॉन्टेक्स्ट को शेयर करने की सुविधा चालू होने पर, डिफ़ॉल्ट रूप से `validated` मोड चालू होता है. `auto` मोड काम नहीं करता.
+- `google_search` जैसे पहले से मौजूद टूल, जगह और मौजूदा समय की जानकारी पर निर्भर करते हैं. इसलिए, अगर आपके `system_instruction` या `function_declaration.description` में जगह और समय की जानकारी अलग-अलग है, तो टूल कॉम्बिनेशन की सुविधा ठीक से काम नहीं करेगी.
 
-## Ferramentas compatíveis
+## इन टूल के साथ काम करता है
 
-A circulação padrão de contexto de ferramentas se aplica a ferramentas do lado do servidor (integradas).
-A execução de código também é uma ferramenta do lado do servidor, mas tem uma solução integrada própria para
-circulação de contexto. O uso do computador e a chamada de função são ferramentas do lado do cliente e também têm soluções integradas para a circulação de contexto.
+सर्वर-साइड (पहले से मौजूद) टूल पर, टूल के कॉन्टेक्स्ट को सर्कुलेट करने की स्टैंडर्ड प्रोसेस लागू होती है.
+कोड एक्ज़ीक्यूशन भी सर्वर-साइड टूल है. हालांकि, इसमें कॉन्टेक्स्ट सर्कुलेशन के लिए, पहले से मौजूद समाधान होता है. कंप्यूटर का इस्तेमाल और फ़ंक्शन कॉलिंग, क्लाइंट-साइड टूल हैं. इनमें कॉन्टेक्स्ट सर्कुलेशन के लिए पहले से मौजूद समाधान भी होते हैं.
 
-| Ferramenta | Lado da execução | Suporte à circulação de contexto |
+| टूल | प्रोग्राम चलाने वाला पक्ष | कॉन्टेक्स्ट सर्कुलेशन सपोर्ट |
 | --- | --- | --- |
-| [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) | Servidor | Compatível |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br) | Servidor | Compatível |
-| [Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br) | Servidor | Compatível |
-| [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br) | Servidor | Compatível |
-| [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) | Servidor | Com suporte (integrado, usa etapas `code_execution` e `code_execution_result`) |
-| [Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) | Lado do cliente | Com suporte (integrado, usa etapas `function_call` e `function_response`) |
-| [Funções personalizadas](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) | Lado do cliente | Com suporte (integrado, usa as etapas `function_call` e `function_response`) |
+| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) | सर्वर-साइड | समर्थित |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi) | सर्वर-साइड | समर्थित |
+| [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi) | सर्वर-साइड | समर्थित |
+| [फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi) | सर्वर-साइड | समर्थित |
+| [कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi) | सर्वर-साइड | सपोर्ट करता है (पहले से मौजूद है, `code_execution` और `code_execution_result` चरणों का इस्तेमाल करता है) |
+| [कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi) | क्लाइंट-साइड | इस्तेमाल किया जा सकता है (पहले से मौजूद है, `function_call` और `function_response` चरणों का इस्तेमाल करता है) |
+| [कस्टम फ़ंक्शन](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) | क्लाइंट-साइड | इस्तेमाल किया जा सकता है (पहले से मौजूद है, `function_call` और `function_response` चरणों का इस्तेमाल करता है) |
 
-## A seguir
+## आगे क्या करना है
 
-- Saiba mais sobre a [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na API Gemini.
-- Conheça as ferramentas compatíveis:
-  - [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)
-  - [Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)
-  - [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)
+- Gemini API में [फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) के बारे में ज़्यादा जानें.
+- इन टूल के साथ काम करने की सुविधा उपलब्ध है:
+  - [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)
+  - [यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)
+  - [फ़ाइल सर्च](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)
 
-Envie comentários
+सुझाव भेजें
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última atualização 2026-09-24 UTC.
+आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया.
 
-Quer enviar seu feedback?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-24 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-13 (UTC) को अपडेट किया गया."],[],[]]

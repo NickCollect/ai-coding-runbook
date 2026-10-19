@@ -1,10 +1,10 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=id
-fetched_at: 2026-10-12T07:02:54.245911+00:00
+fetched_at: 2026-10-19T05:56:14.414282+00:00
 title: "Praktik terbaik Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 

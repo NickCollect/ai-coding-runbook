@@ -1,178 +1,152 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=th
-fetched_at: 2026-10-12T07:01:50.905523+00:00
-title: "\u0e1a\u0e23\u0e34\u0e1a\u0e17\u0e41\u0e1a\u0e1a\u0e22\u0e32\u0e27 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=vi
+fetched_at: 2026-10-19T05:50:09.576551+00:00
+title: "Ng\u1eef c\u1ea3nh d\u00e0i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-# บริบทแบบยาว
+# Ngữ cảnh dài
 
-โมเดล Gemini หลายรุ่นมีหน้าต่างบริบทขนาดใหญ่ถึง 1 ล้านโทเค็นขึ้นไป
-ในอดีต โมเดลภาษาขนาดใหญ่ (LLM) มีข้อจำกัดอย่างมากในเรื่อง
-ปริมาณข้อความ (หรือโทเค็น) ที่ส่งไปยังโมเดลได้ในครั้งเดียว
-หน้าต่างบริบทแบบยาวของ Gemini ปลดล็อกกรณีการใช้งานใหม่ๆ และกระบวนทัศน์ของนักพัฒนาแอป
-มากมาย
+Nhiều mô hình Gemini có cửa sổ ngữ cảnh lớn gồm 1 triệu token trở lên.
+Trước đây, các mô hình ngôn ngữ lớn (LLM) bị giới hạn đáng kể về lượng văn bản (hoặc token) có thể được truyền đến mô hình cùng một lúc.
+Cửa sổ ngữ cảnh dài của Gemini mở ra nhiều trường hợp sử dụng và mô hình nhà phát triển mới.
 
-โค้ดที่คุณใช้ในกรณีต่างๆ เช่น [การสร้างข้อความ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th)หรือ[อินพุตหลายรูปแบบ](https://ai.google.dev/gemini-api/docs/vision?hl=th)จะทำงานได้โดยไม่ต้องเปลี่ยนแปลงใดๆ เมื่อใช้กับบริบทแบบยาว
+Mã mà bạn đã sử dụng cho các trường hợp như [văn bản
+tạo](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi) hoặc [đa phương thức
+đầu vào](https://ai.google.dev/gemini-api/docs/vision?hl=vi) sẽ hoạt động mà không cần thay đổi gì với ngữ cảnh dài.
 
-เอกสารนี้จะให้ภาพรวมของสิ่งที่คุณทำได้โดยใช้โมเดลที่มีหน้าต่างบริบทขนาด 1 ล้านโทเค็นขึ้นไป
-หน้านี้จะให้ภาพรวมโดยย่อของหน้าต่างบริบท และสำรวจวิธีที่นักพัฒนาซอฟต์แวร์ควรพิจารณาบริบทแบบยาว กรณีการใช้งานจริงต่างๆ สำหรับบริบทแบบยาว และวิธีเพิ่มประสิทธิภาพการใช้งานบริบทแบบยาว
+Tài liệu này cung cấp cho bạn thông tin tổng quan về những gì bạn có thể đạt được khi sử dụng các mô hình có cửa sổ ngữ cảnh gồm 1 triệu token trở lên. Trang này cung cấp thông tin tổng quan ngắn gọn về cửa sổ ngữ cảnh, đồng thời khám phá cách nhà phát triển nên suy nghĩ về ngữ cảnh dài, các trường hợp sử dụng ngữ cảnh dài trong thế giới thực và cách tối ưu hoá việc sử dụng ngữ cảnh dài.
 
-ดูขนาดหน้าต่างบริบทของโมเดลที่เฉพาะเจาะจงได้ที่หน้า[โมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)
+Để biết kích thước cửa sổ ngữ cảnh của các mô hình cụ thể, hãy xem trang
+[Mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi).
 
-## หน้าต่างบริบทคืออะไร
+## Cửa sổ ngữ cảnh là gì?
 
-วิธีพื้นฐานในการใช้โมเดล Gemini คือการส่งข้อมูล (บริบท)
-ไปยังโมเดล ซึ่งจะสร้างคำตอบในภายหลัง การเปรียบเทียบหน้าต่างบริบทคือหน่วยความจำระยะสั้น หน่วยความจำระยะสั้นของบุคคลหนึ่งๆ สามารถจัดเก็บข้อมูลได้ในปริมาณที่จำกัด
-และโมเดล Generative ก็เช่นกัน
+Cách cơ bản để bạn sử dụng các mô hình Gemini là truyền thông tin (ngữ cảnh) đến mô hình. Sau đó, mô hình sẽ tạo ra phản hồi. Bạn có thể hình dung cửa sổ ngữ cảnh giống như bộ nhớ ngắn hạn. Bộ nhớ ngắn hạn của một người chỉ có thể lưu trữ một lượng thông tin có hạn và điều này cũng đúng với các mô hình tạo sinh.
 
-อ่านเพิ่มเติมเกี่ยวกับวิธีการทำงานของโมเดลเบื้องหลังได้ใน[คำแนะนำเกี่ยวกับโมเดล Generative](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th#under-the-hood)
+Trong Gemini 4 (`gemini-4-argon`), cửa sổ ngữ cảnh 1 triệu token được **chia sẻ giữa các token đầu vào, token suy nghĩ và token đầu ra**. Mô hình này có thể tạo ra tối đa 1 triệu token đầu ra bằng cách sử dụng tính năng [giải mã dài](https://ai.google.dev/gemini-api/docs/long-decode?hl=vi). Nếu token đầu vào cộng với `max_output_tokens` vượt quá 1.048.576 token, thì API sẽ tự động giới hạn đầu ra ở không gian còn lại trong cửa sổ ngữ cảnh (`1,048,576` trừ đi token đầu vào của bạn). Các mô hình Gemini 3 và 2.5 trước đó sử dụng ngân sách riêng biệt cho 1 triệu token đầu vào và 64.000 token đầu ra.
 
-## เริ่มต้นใช้งานบริบทแบบยาว
+Bạn có thể đọc thêm về cách các mô hình hoạt động ở chế độ nền trong [hướng dẫn
+về mô hình tạo sinh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi#under-the-hood) của chúng tôi.
 
-โมเดล Generative เวอร์ชันก่อนหน้าประมวลผลได้ครั้งละ 8,000 โทเค็นเท่านั้น โมเดลรุ่นใหม่ๆ ได้ขยายขีดจำกัดนี้ออกไปอีกโดยยอมรับโทเค็น 32,000 หรือแม้แต่ 128,000 โทเค็น Gemini เป็นโมเดลแรกที่รับโทเค็นได้ 1 ล้านโทเค็น
+## Bắt đầu sử dụng ngữ cảnh dài
 
-ในทางปฏิบัติ โทเค็น 1 ล้านรายการจะมีลักษณะดังนี้
+Các phiên bản trước của mô hình tạo sinh chỉ có thể xử lý 8.000 token cùng một lúc. Các mô hình mới hơn đã đẩy con số này lên cao hơn bằng cách chấp nhận 32.000 hoặc thậm chí 128.000 token. Gemini là mô hình đầu tiên có khả năng chấp nhận 1 triệu token.
 
-- โค้ด 50,000 บรรทัด (มีอักขระมาตรฐาน 80 ตัวต่อบรรทัด)
-- ข้อความทั้งหมดที่คุณส่งในช่วง 5 ปีที่ผ่านมา
-- นวนิยายภาษาอังกฤษความยาวโดยเฉลี่ย 8 เล่ม
-- ข้อความถอดเสียงของตอนพอดแคสต์ที่มีความยาวโดยเฉลี่ยกว่า 200 ตอน
+Trong thực tế, 1 triệu token sẽ có dạng như sau:
 
-หน้าต่างบริบทที่จำกัดมากขึ้นซึ่งพบได้ทั่วไปในโมเดลอื่นๆ อีกมากมายมักต้องใช้กลยุทธ์ต่างๆ เช่น การทิ้งข้อความเก่าโดยพลการ การสรุปเนื้อหา การใช้ RAG กับฐานข้อมูลเวกเตอร์ หรือการกรองพรอมต์เพื่อประหยัดโทเค็น
+- 50.000 dòng mã (với 80 ký tự tiêu chuẩn mỗi dòng)
+- Tất cả tin nhắn văn bản bạn đã gửi trong 5 năm qua
+- 8 tiểu thuyết tiếng Anh có độ dài trung bình
+- Bản chép lời của hơn 200 tập podcast có độ dài trung bình
 
-แม้ว่าเทคนิคเหล่านี้จะยังคงมีประโยชน์ในบางสถานการณ์ แต่หน้าต่างบริบทที่กว้างขวางของ Gemini
-ก็ช่วยให้เราใช้วิธีการที่ตรงไปตรงมามากขึ้นได้ นั่นคือการให้ข้อมูลที่เกี่ยวข้องทั้งหมด
-ตั้งแต่แรก เนื่องจากโมเดล Gemini สร้างขึ้นโดยมีวัตถุประสงค์เพื่อความสามารถด้านบริบทขนาดใหญ่ จึงแสดงให้เห็นถึงการเรียนรู้ในบริบทที่มีประสิทธิภาพ ตัวอย่างเช่น การใช้เฉพาะสื่อการเรียนการสอนในบริบท (ไวยากรณ์อ้างอิง 500 หน้า พจนานุกรม และประโยคคู่ขนานประมาณ 400 ประโยค) ทำให้ Gemini [เรียนรู้ที่จะแปล](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)จากภาษาอังกฤษเป็นภาษากาลามัง ซึ่งเป็นภาษาปาปัวที่มีผู้พูดน้อยกว่า 200 คน โดยมีคุณภาพคล้ายกับผู้เรียนที่เป็นมนุษย์ซึ่งใช้วัสดุเดียวกัน ซึ่งแสดงให้เห็นถึงการเปลี่ยนแปลงกระบวนทัศน์ที่เกิดขึ้นจากบริบทที่ยาวของ Gemini ซึ่งช่วยเพิ่มความเป็นไปได้ใหม่ๆ ผ่านการเรียนรู้ในบริบทที่แข็งแกร่ง
+Các cửa sổ ngữ cảnh hạn chế hơn thường thấy trong nhiều mô hình khác thường yêu cầu các chiến lược như tự ý loại bỏ tin nhắn cũ, tóm tắt nội dung, sử dụng RAG với cơ sở dữ liệu vectơ hoặc lọc câu lệnh để lưu token.
 
-## กรณีการใช้งานบริบทแบบยาว
+Mặc dù các kỹ thuật này vẫn có giá trị trong các trường hợp cụ thể, nhưng cửa sổ ngữ cảnh mở rộng của Gemini cho phép bạn áp dụng một phương pháp trực tiếp hơn: cung cấp trước tất cả thông tin liên quan. Vì các mô hình Gemini được xây dựng có mục đích với khả năng xử lý ngữ cảnh lớn, nên chúng thể hiện khả năng học tập mạnh mẽ trong ngữ cảnh. Ví dụ: chỉ sử dụng tài liệu hướng dẫn trong ngữ cảnh (một tài liệu tham khảo ngữ pháp gồm 500 trang, một từ điển và ≈400 câu song song), Gemini
+[đã học cách dịch](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)
+từ tiếng Anh sang tiếng Kalamang (một ngôn ngữ Papua có ít hơn 200 người nói) với chất lượng tương tự như một người học là con người sử dụng cùng tài liệu. Điều này minh hoạ sự thay đổi mô hình do ngữ cảnh dài của Gemini mang lại, giúp mở ra những khả năng mới thông qua việc học tập mạnh mẽ trong ngữ cảnh.
 
-แม้ว่ากรณีการใช้งานมาตรฐานสำหรับโมเดล Generative ส่วนใหญ่ยังคงเป็นการป้อนข้อความ แต่ตระกูลโมเดล Gemini ก็เปิดตัวกระบวนทัศน์ใหม่ของกรณีการใช้งานแบบมัลติโมดัล โมเดลเหล่านี้เข้าใจข้อความ วิดีโอ เสียง และรูปภาพได้โดยกำเนิด โดยมาพร้อมกับ [Gemini API ที่รับไฟล์มัลติโมดัล](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=th)เพื่อความสะดวก
+## Trường hợp sử dụng ngữ cảnh dài
 
-### ข้อความแบบยาว
+Mặc dù trường hợp sử dụng tiêu chuẩn cho hầu hết các mô hình tạo sinh vẫn là dữ liệu đầu vào dạng văn bản, nhưng họ mô hình Gemini cho phép bạn áp dụng một mô hình mới về các trường hợp sử dụng đa phương thức. Các mô hình này có thể hiểu được văn bản, video, âm thanh và hình ảnh một cách tự nhiên. Chúng
+đi kèm với [API Gemini, có thể nhận
+các loại](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=vi) tệp đa phương thức để
+thuận tiện.
 
-ข้อความพิสูจน์ให้เห็นแล้วว่าเป็นเลเยอร์ของข้อมูลอัจฉริยะที่รองรับโมเมนตัมส่วนใหญ่เกี่ยวกับ LLM ดังที่ได้กล่าวไปก่อนหน้านี้ ข้อจำกัดในทางปฏิบัติของ LLM ส่วนใหญ่เกิดจากการไม่มีหน้าต่างบริบทที่ใหญ่พอที่จะทำงานบางอย่างได้ ซึ่งนำไปสู่การนำ Retrieval Augmented Generation (RAG)
-และเทคนิคอื่นๆ มาใช้กันอย่างรวดเร็ว ซึ่งจะให้ข้อมูลเชิงบริบทที่เกี่ยวข้องแก่โมเดลแบบไดนามิก
-ปัจจุบันหน้าต่างบริบทมีขนาดใหญ่ขึ้นเรื่อยๆ จึงมีเทคนิคใหม่ๆ ที่พร้อมใช้งานซึ่งจะช่วยให้สามารถใช้กับ Use Case ใหม่ๆ ได้
+### Văn bản dài
 
-กรณีการใช้งานที่กำลังมาแรงและมาตรฐานสำหรับบริบทแบบยาวที่เป็นข้อความมีดังนี้
+Văn bản đã chứng minh là lớp trí tuệ làm nền tảng cho phần lớn động lực xung quanh các LLM. Như đã đề cập trước đó, phần lớn hạn chế thực tế của các LLM là do không có cửa sổ ngữ cảnh đủ lớn để thực hiện một số tác vụ. Điều này dẫn đến việc nhanh chóng áp dụng tính năng tạo sinh tăng cường truy xuất (RAG) và các kỹ thuật khác giúp cung cấp cho mô hình thông tin theo ngữ cảnh có liên quan một cách linh hoạt. Giờ đây, với các cửa sổ ngữ cảnh ngày càng lớn, các kỹ thuật mới đang xuất hiện, giúp mở ra các trường hợp sử dụng mới.
 
-- สรุปคลังข้อความขนาดใหญ่
-  - ตัวเลือกการสรุปก่อนหน้านี้ที่มีโมเดลบริบทขนาดเล็กกว่าจะต้องใช้
-    หน้าต่างแบบเลื่อนหรือเทคนิคอื่นๆ เพื่อรักษาสถานะของส่วนก่อนหน้า
-    เมื่อมีการส่งโทเค็นใหม่ไปยังโมเดล
-- การถามและตอบ
-  - ในอดีต การดำเนินการนี้ทำได้ด้วย RAG เท่านั้น เนื่องจากบริบทมีจำนวนจำกัดและโมเดลเรียกคืนข้อเท็จจริงได้ต่ำ
-- เวิร์กโฟลว์ของเอเจนต์
-  - ข้อความเป็นรากฐานของวิธีที่เอเจนต์รักษาสถานะของสิ่งที่ทำไปแล้ว
-    และสิ่งที่ต้องทำ การมีข้อมูลเกี่ยวกับโลก
-    และเป้าหมายของเอเจนต์ไม่เพียงพอเป็นข้อจำกัดด้านความน่าเชื่อถือของเอเจนต์
+Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh dài dựa trên văn bản:
 
-[การเรียนรู้ในบริบทแบบหลายตัวอย่าง](https://arxiv.org/pdf/2404.11018)เป็นหนึ่งในความสามารถที่โดดเด่นที่สุดที่โมเดลบริบทแบบยาวปลดล็อก งานวิจัยแสดงให้เห็นว่า
-การใช้กระบวนทัศน์ตัวอย่าง "แบบช็อตเดียว" หรือ "แบบหลายช็อต" ทั่วไป ซึ่ง
-โมเดลจะได้รับตัวอย่างงาน 1 หรือ 2 ตัวอย่าง และการขยายขนาดตัวอย่างเหล่านั้นเป็น
-หลายร้อย หลายพัน หรือแม้แต่หลายแสนตัวอย่าง อาจนำไปสู่
-ความสามารถใหม่ๆ ของโมเดลได้ นอกจากนี้ แนวทางแบบหลายนัดยังแสดงให้เห็นว่ามีประสิทธิภาพ
-คล้ายกับโมเดลที่ได้รับการปรับแต่งสำหรับงานที่เฉพาะเจาะจง สำหรับกรณีการใช้งาน
-ที่ประสิทธิภาพของโมเดล Gemini ยังไม่เพียงพอสำหรับการเปิดตัว
-ในเวอร์ชันที่ใช้งานจริง คุณสามารถลองใช้แนวทางแบบหลายช็อตได้ ดังที่คุณอาจได้เห็นในส่วนการเพิ่มประสิทธิภาพบริบทแบบยาวในภายหลัง การแคชบริบททำให้ภาระงานของโทเค็นอินพุตสูงประเภทนี้มีความเป็นไปได้ทางเศรษฐศาสตร์มากขึ้น และยังช่วยลดเวลาในการตอบสนองในบางกรณีอีกด้วย
+- Tóm tắt các tập hợp văn bản lớn
+  - Các lựa chọn tóm tắt trước đây với các mô hình ngữ cảnh nhỏ hơn sẽ yêu cầu một cửa sổ trượt hoặc một kỹ thuật khác để duy trì trạng thái của các phần trước đó khi các token mới được truyền đến mô hình
+- Hỏi và đáp
+  - Trước đây, điều này chỉ có thể thực hiện được với RAG do lượng ngữ cảnh hạn chế và khả năng nhớ lại thông tin thực tế của mô hình thấp
+- Quy trình công việc của tác nhân
+  - Văn bản là nền tảng của cách các tác nhân duy trì trạng thái về những việc họ đã làm và những việc họ cần làm; việc không có đủ thông tin về thế giới và mục tiêu của tác nhân là một hạn chế đối với độ tin cậy của tác nhân
 
-### วิดีโอแบบยาว
+[Học tập trong ngữ cảnh nhiều ví dụ](https://arxiv.org/pdf/2404.11018) là một trong những
+khả năng độc đáo nhất được mở ra bởi các mô hình ngữ cảnh dài. Nghiên cứu đã chỉ ra rằng việc áp dụng mô hình ví dụ "một ví dụ" hoặc "nhiều ví dụ" phổ biến, trong đó mô hình được cung cấp một hoặc một vài ví dụ về một tác vụ và mở rộng quy mô đó lên hàng trăm, hàng nghìn hoặc thậm chí hàng trăm nghìn ví dụ, có thể dẫn đến các khả năng mới của mô hình. Phương pháp nhiều ví dụ này cũng cho thấy hiệu suất tương tự như các mô hình được tinh chỉnh cho một tác vụ cụ thể. Đối với các trường hợp sử dụng mà hiệu suất của mô hình Gemini chưa đủ để triển khai trong thực tế, bạn có thể thử phương pháp nhiều ví dụ. Như bạn có thể khám phá sau này trong phần tối ưu hoá ngữ cảnh dài, tính năng lưu vào bộ nhớ đệm ngữ cảnh giúp loại hình khối lượng công việc token đầu vào cao này trở nên khả thi hơn về mặt kinh tế và thậm chí giảm độ trễ trong một số trường hợp.
 
-ประโยชน์ของเนื้อหาวิดีโอถูกจำกัดมานานเนื่องจากสื่อดังกล่าวขาดการช่วยเหลือพิเศษ
-ในตัว การดูเนื้อหาคร่าวๆ ทำได้ยาก ข้อความถอดเสียงมักจับภาพความแตกต่างของวิดีโอไม่ได้ และเครื่องมือส่วนใหญ่ไม่ประมวลผลรูปภาพ ข้อความ และเสียงพร้อมกัน ความสามารถด้านข้อความที่มีบริบทขนาดยาวของ Gemini จะเปลี่ยนเป็น
-ความสามารถในการให้เหตุผลและตอบคำถามเกี่ยวกับอินพุตแบบมัลติโมดอลพร้อม
-ประสิทธิภาพที่สม่ำเสมอ
+### Video dài
 
-กรณีการใช้งานที่กำลังมาแรงและมาตรฐานสำหรับบริบทแบบยาวของวิดีโอมีดังนี้
+Tiện ích của nội dung video từ lâu đã bị hạn chế do thiếu khả năng tiếp cận của chính phương tiện này. Rất khó để xem lướt nội dung, bản chép lời thường không nắm bắt được sắc thái của video và hầu hết các công cụ không xử lý hình ảnh, văn bản và âm thanh cùng nhau. Với Gemini, các khả năng xử lý văn bản trong ngữ cảnh dài giúp bạn có thể suy luận và trả lời các câu hỏi về dữ liệu đầu vào đa phương thức với hiệu suất ổn định.
 
-- การถามและตอบคำถามในวิดีโอ
-- หน่วยความจำวิดีโอตามที่แสดงใน [Project Astra ของ Google](https://deepmind.google/technologies/gemini/project-astra/?hl=th)
-- การใส่คำบรรยายแทนเสียงในวิดีโอ
-- ระบบวิดีโอแนะนำโดยการเพิ่มข้อมูลเมตาที่มีอยู่ด้วยความเข้าใจแบบมัลติโมดัลใหม่
-- การปรับแต่งวิดีโอโดยดูจากคลังข้อมูลและข้อมูลเมตาวิดีโอที่เกี่ยวข้อง แล้วนำส่วนของวิดีโอที่ไม่เกี่ยวข้องกับผู้ชมออก
-- การกลั่นกรองเนื้อหาวิดีโอ
-- การประมวลผลวิดีโอแบบเรียลไทม์
+Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh dài của video:
 
-เมื่อทำงานกับวิดีโอ สิ่งสำคัญคือต้องพิจารณาว่า[วิดีโอได้รับการ
-ประมวลผลเป็นโทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th#media-token)อย่างไร ซึ่งจะส่งผลต่อ
-การเรียกเก็บเงินและโควต้าการใช้งาน ดูข้อมูลเพิ่มเติมเกี่ยวกับการแจ้งโดยใช้ไฟล์วิดีโอได้ใน[คำแนะนำในการแจ้ง](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=th#prompting-with-videos)
+- Hỏi và đáp về video
+- Bộ nhớ video, như minh hoạ trong [Project Astra của Google](https://deepmind.google/technologies/gemini/project-astra/?hl=vi)
+- Thêm phụ đề cho video
+- Hệ thống đề xuất video, bằng cách làm phong phú siêu dữ liệu hiện có bằng khả năng hiểu đa phương thức mới
+- Tuỳ chỉnh video bằng cách xem xét một tập hợp dữ liệu và siêu dữ liệu video liên quan, sau đó xoá các phần video không liên quan đến người xem
+- Kiểm duyệt nội dung video
+- Xử lý video theo thời gian thực
 
-### เสียงแบบยาว
+Khi làm việc với video, bạn cần cân nhắc cách [video được
+xử lý thành token](https://ai.google.dev/gemini-api/docs/tokens?hl=vi#video), vì điều này ảnh hưởng đến
+giới hạn thanh toán và mức sử dụng. Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp video trong
+[hướng dẫn về cách đưa ra câu lệnh](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
 
-โมเดล Gemini เป็นโมเดลภาษาขนาดใหญ่ตัวแรกที่ทำงานได้กับข้อมูลหลายรูปแบบแบบเนทีฟ
-ซึ่งสามารถเข้าใจเสียงได้ โดยปกติแล้ว เวิร์กโฟลว์ของนักพัฒนาซอฟต์แวร์มักจะ
-เกี่ยวข้องกับการเชื่อมโยงโมเดลเฉพาะโดเมนหลายรายการเข้าด้วยกัน เช่น
-โมเดลเสียงพูดเป็นข้อความและโมเดลข้อความเป็นข้อความ เพื่อประมวลผลเสียง ซึ่งส่งผลให้เกิดเวลาในการตอบสนองเพิ่มเติมที่จำเป็นโดยการส่งคำขอแบบไปกลับหลายครั้ง
-และประสิทธิภาพลดลงซึ่งมักเกิดจากสถาปัตยกรรมที่ไม่ได้เชื่อมต่อของ
-การตั้งค่าโมเดลหลายรายการ
+### Âm thanh dài
 
-กรณีการใช้งานที่กำลังเกิดขึ้นและเป็นมาตรฐานสำหรับบริบทเสียงมีดังนี้
+Các mô hình Gemini là những mô hình ngôn ngữ lớn đa phương thức đầu tiên có thể hiểu được âm thanh. Trước đây, quy trình làm việc điển hình của nhà phát triển sẽ bao gồm việc kết hợp nhiều mô hình dành riêng cho từng miền, chẳng hạn như mô hình chuyển lời nói thành văn bản và mô hình chuyển văn bản thành văn bản, để xử lý âm thanh. Điều này dẫn đến độ trễ bổ sung do thực hiện nhiều yêu cầu khứ hồi và giảm hiệu suất thường là do kiến trúc không kết nối của thiết lập nhiều mô hình.
 
-- การถอดเสียงเป็นคำและการแปลภาษาแบบเรียลไทม์
-- การถามและตอบคำถามเกี่ยวกับพอดแคสต์ / วิดีโอ
-- การถอดเสียงเป็นคำและสรุปการประชุม
-- ผู้ช่วยแบบเสียง
+Sau đây là một số trường hợp sử dụng mới nổi và tiêu chuẩn cho ngữ cảnh âm thanh:
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับการแจ้งด้วยไฟล์เสียงได้ใน[คำแนะนำ
-การแจ้ง](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=th#prompting-with-videos)
+- Chép lời và dịch theo thời gian thực
+- Hỏi và đáp về podcast / video
+- Chép lời và tóm tắt cuộc họp
+- Trợ lý thoại
 
-## การเพิ่มประสิทธิภาพบริบทแบบยาว
+Bạn có thể tìm hiểu thêm về cách đưa ra câu lệnh bằng tệp âm thanh trong hướng dẫn về cách đưa ra câu lệnh [Prompting](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
 
-การเพิ่มประสิทธิภาพหลักเมื่อทำงานกับบริบทที่ยาวและโมเดล Gemini
-คือการใช้[แคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) นอกจาก การประมวลผลโทเค็นจำนวนมากในคำขอเดียวเป็นไปไม่ได้แล้ว ข้อจำกัดหลักอีกอย่าง หนึ่งคือค่าใช้จ่าย หากคุณมีแอป "แชทกับข้อมูลของคุณ" ที่ผู้ใช้
-อัปโหลด PDF 10 รายการ วิดีโอ และเอกสารงานบางส่วน ในอดีตคุณจะต้อง
-ทำงานกับเครื่องมือ/เฟรมเวิร์กการสร้างการดึงข้อมูลที่เพิ่มประสิทธิภาพ (RAG) ที่ซับซ้อนมากขึ้น
-เพื่อประมวลผลคำขอเหล่านี้และจ่ายค่าโทเค็นจำนวนมาก
-ที่ย้ายไปยังหน้าต่างบริบท ตอนนี้คุณสามารถแคชไฟล์ที่ผู้ใช้
-อัปโหลดและชำระเงินเพื่อจัดเก็บไฟล์เหล่านั้นตามรายชั่วโมงได้แล้ว ตัวอย่างเช่น ต้นทุนอินพุต / เอาต์พุตต่อคำขอที่มี Gemini Flash จะน้อยกว่าต้นทุนอินพุต / เอาต์พุตมาตรฐานประมาณ 4 เท่า ดังนั้นหากผู้ใช้แชทกับข้อมูลของตนมากพอ คุณในฐานะนักพัฒนาซอฟต์แวร์จะประหยัดค่าใช้จ่ายได้มาก
+## Tối ưu hoá ngữ cảnh dài
 
-## ข้อจำกัดของบริบทแบบยาว
+Phương pháp tối ưu hoá chính khi làm việc với ngữ cảnh dài và các mô hình Gemini
+là sử dụng [tính năng lưu vào bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi). Ngoài việc không thể xử lý nhiều token trong một yêu cầu, hạn chế chính khác là chi phí. Nếu bạn có một ứng dụng "trò chuyện với dữ liệu của bạn" trong đó người dùng tải lên 10 tệp PDF, một video và một số tài liệu công việc, thì trước đây bạn sẽ phải làm việc với một công cụ/khung tạo sinh tăng cường khả năng truy xuất (RAG) phức tạp hơn để xử lý các yêu cầu này và trả một khoản tiền đáng kể cho các token được chuyển vào cửa sổ ngữ cảnh. Giờ đây, bạn có thể lưu vào bộ nhớ đệm các tệp mà người dùng tải lên và trả tiền để lưu trữ các tệp đó theo giờ. Ví dụ: chi phí đầu vào / đầu ra cho mỗi yêu cầu với Gemini Flash thấp hơn khoảng 4 lần so với chi phí đầu vào / đầu ra tiêu chuẩn. Vì vậy, nếu người dùng trò chuyện đủ với dữ liệu của họ, thì bạn (nhà phát triển) sẽ tiết kiệm được một khoản chi phí lớn.
 
-ในส่วนต่างๆ ของคู่มือนี้ เราได้พูดถึงวิธีที่โมเดล Gemini บรรลุ
-ประสิทธิภาพสูงในการประเมินการดึงข้อมูลแบบเข็มในกองฟางต่างๆ การทดสอบเหล่านี้พิจารณาการตั้งค่าพื้นฐานที่สุด ซึ่งคุณมีเข็มเพียงเล่มเดียวที่กำลังมองหา
-ในกรณีที่คุณอาจมี "เข็ม" หลายเล่มหรือข้อมูลเฉพาะ
-ที่คุณกำลังมองหา โมเดลจะไม่ทำงานด้วยความแม่นยำเท่าเดิม
-ประสิทธิภาพอาจแตกต่างกันอย่างมากตามบริบท คุณควรพิจารณาเรื่องนี้เนื่องจากมีข้อแลกเปลี่ยนโดยธรรมชาติระหว่างการดึงข้อมูลที่ถูกต้องกับการดึงข้อมูลและค่าใช้จ่าย คุณอาจได้รับผลลัพธ์ประมาณ 99% จากการค้นหาครั้งเดียว แต่
-คุณต้องจ่ายค่าโทเค็นอินพุตทุกครั้งที่ส่งคำค้นหานั้น ดังนั้น หากต้องการดึงข้อมูล 100 รายการ และต้องการประสิทธิภาพ 99% คุณก็อาจต้องส่งคำขอ 100 รายการ นี่เป็นตัวอย่างที่ดีที่การแคชบริบท
-สามารถลดต้นทุนที่เกี่ยวข้องกับการใช้โมเดล Gemini ได้อย่างมาก
-ในขณะที่ยังคงรักษาประสิทธิภาพไว้ในระดับสูง
+## Hạn chế của ngữ cảnh dài
 
-## คำถามที่พบบ่อย
+Trong nhiều phần của hướng dẫn này, chúng tôi đã nói về cách các mô hình Gemini đạt được hiệu suất cao trong nhiều bài kiểm tra đánh giá khả năng truy xuất thông tin trong một tập hợp dữ liệu lớn. Các bài kiểm tra này xem xét thiết lập cơ bản nhất, trong đó bạn có một thông tin duy nhất mà bạn đang tìm kiếm. Trong trường hợp bạn có thể có nhiều "thông tin" hoặc thông tin cụ thể mà bạn đang tìm kiếm, mô hình sẽ không hoạt động với độ chính xác tương tự. Hiệu suất có thể thay đổi ở mức độ lớn tuỳ thuộc vào ngữ cảnh. Bạn cần cân nhắc điều này vì có sự đánh đổi vốn có giữa việc truy xuất thông tin chính xác và chi phí. Bạn có thể đạt được khoảng 99% cho một truy vấn, nhưng bạn phải trả chi phí token đầu vào mỗi khi gửi truy vấn đó. Vì vậy, để truy xuất 100 thông tin, nếu bạn cần hiệu suất 99%, thì có thể bạn sẽ cần gửi 100 yêu cầu. Đây là một ví dụ điển hình về trường hợp tính năng lưu vào bộ nhớ đệm ngữ cảnh có thể giảm đáng kể chi phí liên quan đến việc sử dụng các mô hình Gemini trong khi vẫn duy trì hiệu suất cao.
 
-### ฉันควรวางคำค้นหาไว้ที่ใดในหน้าต่างบริบท
+## Câu hỏi thường gặp
 
-ในกรณีส่วนใหญ่ โดยเฉพาะอย่างยิ่งหากบริบททั้งหมดมีความยาว โมเดลจะทำงานได้ดีขึ้นหากคุณวางคำค้นหา / คำถามไว้ที่ส่วนท้ายของพรอมต์ (หลังจากบริบทอื่นๆ ทั้งหมด)
+### Nơi tốt nhất để đặt truy vấn của tôi trong cửa sổ ngữ cảnh là ở đâu?
 
-### ประสิทธิภาพของโมเดลจะลดลงไหมเมื่อฉันเพิ่มโทเค็นลงในคำค้นหา
+Trong hầu hết các trường hợp, đặc biệt là nếu tổng ngữ cảnh dài, thì hiệu suất của mô hình sẽ tốt hơn nếu bạn đặt truy vấn / câu hỏi ở cuối câu lệnh (sau tất cả ngữ cảnh khác).
 
-โดยทั่วไป หากไม่จำเป็นต้องส่งโทเค็นไปยังโมเดล คุณควรหลีกเลี่ยงการส่งโทเค็น อย่างไรก็ตาม หากคุณมีโทเค็นจำนวนมากที่มีข้อมูลบางอย่างและต้องการถามคำถามเกี่ยวกับข้อมูลนั้น โมเดลจะมีความสามารถสูงในการดึงข้อมูลดังกล่าว (ความแม่นยำสูงสุด 99% ในหลายกรณี)
+### Tôi có bị giảm hiệu suất của mô hình khi thêm nhiều token vào một truy vấn không?
 
-### ฉันจะลดต้นทุนด้วยการค้นหาที่มีบริบทแบบยาวได้อย่างไร
+Nói chung, nếu bạn không cần truyền token đến mô hình, thì tốt nhất là bạn nên tránh truyền token. Tuy nhiên, nếu bạn có một khối lượng lớn token chứa một số thông tin và muốn hỏi về thông tin đó, thì mô hình có khả năng cao trong việc trích xuất thông tin đó (độ chính xác lên đến 99% trong nhiều trường hợp).
 
-หากคุณมีชุดโทเค็น / บริบทที่คล้ายกันซึ่งต้องการนำกลับมาใช้หลายครั้ง [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th)จะช่วยลดค่าใช้จ่ายที่เกี่ยวข้องกับการถามคำถามเกี่ยวกับข้อมูลนั้นได้
+### Làm cách nào để giảm chi phí khi sử dụng các truy vấn trong ngữ cảnh dài?
 
-### ความยาวบริบทส่งผลต่อเวลาในการตอบสนองของโมเดลไหม
+Nếu bạn có một tập hợp token / ngữ cảnh tương tự mà bạn muốn sử dụng lại nhiều
+lần, thì [tính năng lưu vào bộ nhớ đệm ngữ cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) có thể giúp giảm chi phí
+liên quan đến việc hỏi về thông tin đó.
 
-คำขอใดก็ตามจะมีเวลาในการตอบสนองที่แน่นอนไม่มากก็น้อย ไม่ว่าจะมีขนาดเท่าใด แต่โดยทั่วไปแล้ว คำขอที่ยาวกว่าจะมีเวลาในการตอบสนองที่สูงกว่า (เวลาในการแสดงโทเค็นแรก)
+### Độ dài ngữ cảnh có ảnh hưởng đến độ trễ của mô hình không?
 
-ส่งความคิดเห็น
+Có một lượng độ trễ cố định trong mọi yêu cầu, bất kể kích thước, nhưng nói chung, các truy vấn dài hơn sẽ có độ trễ cao hơn (thời gian đến token đầu tiên).
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Gửi ý kiến phản hồi
 
-อัปเดตล่าสุด 2026-06-22 UTC
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Cập nhật lần gần đây nhất: 2026-10-15 UTC.
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]
+Bạn muốn chia sẻ thêm với chúng tôi?
+
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]

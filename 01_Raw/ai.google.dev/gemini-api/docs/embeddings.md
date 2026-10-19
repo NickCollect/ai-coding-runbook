@@ -1,33 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=id
-fetched_at: 2026-10-12T07:08:20.144767+00:00
-title: "Embedding \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=bn
+fetched_at: 2026-10-19T05:52:25.553042+00:00
+title: "\u098f\u09ae\u09cd\u09ac\u09c7\u09a1\u09bf\u0982 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
 
-Kirim masukan
+মতামত জানান
 
-# Embedding
+# এম্বেডিং
 
-Gemini API menawarkan model embedding untuk menghasilkan embedding untuk teks, gambar, video, dan konten lainnya. Embedding yang dihasilkan ini kemudian dapat digunakan untuk tugas seperti penelusuran semantik, klasifikasi, dan pengelompokan, sehingga memberikan hasil yang lebih akurat dan sesuai konteks daripada pendekatan berbasis kata kunci.
+Gemini API, টেক্সট, ছবি, ভিডিও ও অন্যান্য কন্টেন্টের জন্য এম্বেডিং জেনারেট করতে এম্বেডিং মডেল অফার করে। এইসব এম্বেডিংয়ের ফলাফলকে সেম্যান্টিক সার্চ, ক্লাসিফিকেশন ও ক্লাস্টারিংয়ের মতো
+টাস্কের জন্য ব্যবহার করা যেতে পারে। এর ফলে কীওয়ার্ড-ভিত্তিক পদ্ধতির তুলনায় আরও নিখুঁত,
+প্রসঙ্গ-সচেতন ফলাফল পাওয়া যায়।
 
-Model terbaru, `gemini-embedding-2`, adalah model penyematan multimodal pertama di Gemini API. Model ini memetakan teks, gambar, video, audio, dan dokumen ke dalam ruang embedding terpadu, sehingga memungkinkan penelusuran, klasifikasi, dan pengelompokan lintas modal dalam lebih dari 100 bahasa. Lihat
-[bagian embedding multimodal](#multimodal) untuk mempelajari lebih lanjut. Untuk kasus penggunaan hanya teks, `gemini-embedding-001` tetap tersedia.
+লেটেস্ট মডেল, `gemini-embedding-2`, হল Gemini API-তে প্রথম মাল্টিমোডাল
+এমবেডিং মডেল। এটি টেক্সট, ছবি,
+ভিডিও, অডিও ও ডকুমেন্টকে একটি ইউনিফায়েড এম্বেডিং স্পেসে ম্যাপ করে, এর ফলে ১০০টিরও বেশি ভাষা জুড়ে ক্রস-মোডাল
+সার্চ, শ্রেণীবিন্যাস ও ক্লাস্টারিং করা যায়। আরও জানতে
+[মাল্টিমোডাল এম্বেডিং বিভাগ](#multimodal) দেখুন। শুধুমাত্র টেক্সট-ভিত্তিক
+ব্যবহারের ক্ষেত্রে, `gemini-embedding-001` উপলভ্য থাকে।
 
-Membangun sistem Retrieval Augmented Generation (RAG) adalah kasus penggunaan umum untuk produk AI. Penyematan memainkan peran penting dalam meningkatkan output model secara signifikan dengan akurasi faktual, koherensi, dan kekayaan kontekstual yang lebih baik. Jika Anda lebih memilih menggunakan solusi RAG terkelola, kami membuat alat [Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id) yang mempermudah pengelolaan RAG dan lebih hemat biaya.
+AI প্রোডাক্টের জন্য রিট্রিভাল অগমেন্টেড জেনারেশন (RAG) সিস্টেম তৈরি করা হল একটি সাধারণ ব্যবহারের উদাহরণ।
+উন্নত ফ্যাকচুয়াল নির্ভুলতা, সুসংবদ্ধতা ও প্রাসঙ্গিক সমৃদ্ধির সাথে
+মডেল আউটপুট উল্লেখযোগ্যভাবে উন্নত করার ক্ষেত্রে এম্বেডিং গুরুত্বপূর্ণ ভূমিকা পালন করে। আপনি যদি ম্যানেজ করা RAG সলিউশন ব্যবহার করতে চান, তাহলে আমরা [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn)
+টুল তৈরি করেছি যা RAG-কে আরও সহজে ম্যানেজ করতে এবং আরও সাশ্রয়ী করে তুলতে সাহায্য করে।
 
-## Membuat embedding
+## এম্বেডিং জেনারেট করা
 
-Gunakan metode `embedContent` untuk membuat embedding teks:
+টেক্সট এম্বেডিং জেনারেট করতে `embedContent` পদ্ধতি ব্যবহার করুন:
 
 ### Python
 
@@ -44,7 +53,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -78,7 +87,7 @@ EmbedContentResponse response =
 System.out.println(response.embeddings().orElse(null));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -135,33 +144,37 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Menentukan jenis tugas untuk meningkatkan performa
+## পারফর্ম্যান্স উন্নত করতে টাস্কের ধরন নির্দিষ্ট করুন
 
-Anda dapat menggunakan embedding untuk berbagai tugas, mulai dari klasifikasi hingga penelusuran dokumen. Menentukan jenis tugas yang tepat akan membantu mengoptimalkan penyematan untuk hubungan yang diinginkan, sehingga memaksimalkan akurasi dan efisiensi.
+আপনি ক্লাসিফিকেশন থেকে ডকুমেন্ট
+সার্চ পর্যন্ত বিভিন্ন ধরনের টাস্কের জন্য এম্বেডিং ব্যবহার করতে পারবেন। সঠিক টাস্কের ধরন নির্দিষ্ট করলে, কাঙ্ক্ষিত সম্পর্কের জন্য এম্বেডিং অপ্টিমাইজ করতে সাহায্য করে,
+যার ফলে নির্ভুলতা ও কার্যকারিতা সর্বাধিক হয়।
 
-### Jenis tugas dengan Embeddings 2
+### Embeddings 2-এর সাথে টাস্কের ধরন
 
-Untuk tugas hanya teks dengan `gemini-embedding-2`, sebaiknya Anda
-menambahkan petunjuk tugas dalam perintah Anda. Hal ini dapat dilakukan dengan memformat kueri dan dokumen dengan awalan tugas yang benar.
+`gemini-embedding-2` সহ শুধুমাত্র টেক্সট-ভিত্তিক টাস্কের জন্য, আমরা আপনাকে
+প্রম্পটে টাস্কের নির্দেশাবলী যোগ করার জন্য বিশেষভাবে সাজেস্ট করি। সঠিক টাস্ক প্রিফিক্স সহ কোয়েরি ও ডকুমেন্ট ফর্ম্যাট
+করার মাধ্যমে এটি করা যেতে পারে।
 
-Saat membuat [satu embedding berdasarkan input multimodal](#embedding-aggregation), umumnya kami tidak merekomendasikan pemberian awalan pada bagian teks input dengan petunjuk tugas. Dalam beberapa kasus, hal ini meningkatkan
-performa, tetapi dalam kasus lain, hal ini mengurangi performa.
+[মাল্টিমোডাল ইনপুটের উপর ভিত্তি করে একটি এম্বেডিং জেনারেট করার
+সময়](#embedding-aggregation), আমরা সাধারণত ইনপুটের টেক্সট
+অংশে টাস্ক নির্দেশাবলী প্রিফিক্স করার সাজেশন দিই না। কিছু ক্ষেত্রে এটি পারফর্ম্যান্স উন্নত করে, কিন্তু অন্যান্য ক্ষেত্রে এটি পারফর্ম্যান্স কমিয়ে দেয়।
 
-Tabel berikut menunjukkan contoh cara memformat kueri dan dokumen untuk
-kasus penggunaan simetris dan asimetris menggunakan model `gemini-embedding-2`.
+`gemini-embedding-2` মডেল ব্যবহার করে সিমেট্রিক ও অ্যাসিমেট্রিক ব্যবহারের ক্ষেত্রে কোয়েরি ও ডকুমেন্ট কীভাবে ফর্ম্যাট করতে হয়, তার উদাহরণ নিচে দেওয়া হল।
 
-**Kasus penggunaan pengambilan (Format asimetris)**
+**রিট্রিভালের ব্যবহারিক উদাহরণ (অপ্রতিসম ফর্ম্যাট)**
 
-Dalam kasus penggunaan asimetris, tambahkan awalan tugas ke kueri dan terapkan struktur dokumen untuk konten yang ingin Anda sematkan dan ambil.
+অসমমিতিক ব্যবহারের ক্ষেত্রে, কোয়েরিতে টাস্ক প্রিফিক্স যোগ করুন এবং আপনি যে কন্টেন্ট এম্বেড ও রিট্রিভ করতে চান তার জন্য
+ডকুমেন্ট স্ট্রাকচার প্রয়োগ করুন।
 
-| Kasus penggunaan | Struktur kueri | Struktur dokumen |
+| ব্যবহারিক ক্ষেত্র | কোয়েরি স্ট্রাকচার | ডকুমেন্টের গঠন |
 | --- | --- | --- |
-| Kueri penelusuran | `task: search result | query: {content}` | `title: {title} | text: {content}` Jika tidak ada judul, gunakan `title: none`. |
-| Question answering | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| Pengecekan fakta | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| Pengambilan kode | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| সার্চ কোয়েরি | `task: search result | query: {content}` | `title: {title} | text: {content}` কোনও শীর্ষক না থাকলে, `title: none` ব্যবহার করুন। |
+| প্রশ্নের উত্তর দেওয়া | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| সত্যতা যাচাই করা | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| কোড ফিরিয়ে আনা | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**Contoh penggunaan**
+**ব্যবহারের উদাহরণ**
 
 ### Python
 
@@ -180,17 +193,18 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Kasus penggunaan input tunggal (Format simetris)**
+**সিঙ্গেল-ইনপুট ব্যবহারের উদাহরণ (সিমেট্রিক ফর্ম্যাট)**
 
-Dalam kasus penggunaan simetris, untuk tugas yang sama, gunakan format yang sama untuk kueri dan dokumen.
+সিমেট্রিক ব্যবহারের ক্ষেত্রে, একই টাস্কের জন্য, কোয়েরি ও ডকুমেন্টের জন্য একই ফর্ম্যাটিং
+ব্যবহার করুন।
 
-| Kasus penggunaan | Struktur input |
+| ব্যবহারিক ক্ষেত্র | ইনপুট স্ট্রাকচার |
 | --- | --- |
-| Klasifikasi | `task: classification | query: {content}` |
-| Pengelompokan | `task: clustering | query: {content}` |
-| Kemiripan semantik | `task: sentence similarity | query: {content}` Jangan gunakan ini untuk penelusuran atau pengambilan. Tujuannya adalah untuk kemiripan tekstual semantik. |
+| শ্রেণীবিভাগ | `task: classification | query: {content}` |
+| ক্লাস্টারিং | `task: clustering | query: {content}` |
+| শব্দের অর্থগত মিল | `task: sentence similarity | query: {content}` সার্চ বা রিট্রিভ করার জন্য এটি ব্যবহার করবেন না। এটি টেক্সটের অর্থগত মিলের জন্য তৈরি করা হয়েছে। |
 
-**Contoh penggunaan**
+**ব্যবহারের উদাহরণ**
 
 ### Python
 
@@ -202,13 +216,18 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-Penting agar tugas digunakan secara konsisten. Misalnya, jika dokumen disematkan dengan `f'task: classification | query: {content}'`, kueri juga harus disematkan mengikuti format tugas ini.
+টাস্কটি যেন ধারাবাহিকভাবে ব্যবহার করা হয়, তা দেখা গুরুত্বপূর্ণ। যেমন, ডকুমেন্ট `f'task: classification | query: {content}'`-এর সাথে
+এম্বেড করা থাকলে, কোয়েরিকেও
+এই টাস্ক ফর্ম্যাট মেনে এম্বেড করতে হবে।
 
-### Jenis tugas dengan Embeddings 1
+### এম্বেডিং ১ সহ টাস্কের ধরন
 
-Untuk `gemini-embedding-001`, Anda dapat menentukan `task_type` dalam metode `embedContent`. Untuk mengetahui daftar lengkap jenis tugas yang didukung, lihat tabel [Jenis tugas yang didukung](#supported-task-types).
+`gemini-embedding-001`-এর জন্য, আপনি `embedContent`
+পদ্ধতিতে `task_type` নির্দিষ্ট করতে পারবেন। কাজ করে এমন টাস্কের ধরনের সম্পূর্ণ তালিকা দেখতে, [কাজ করে এমন টাস্কের ধরন](#supported-task-types)
+টেবিল দেখুন।
 
-Contoh berikut menunjukkan cara menggunakan `SEMANTIC_SIMILARITY` untuk memeriksa seberapa mirip makna string teks.
+নিম্নলিখিত উদাহরণ থেকে আপনি বুঝতে পারবেন যে কীভাবে `SEMANTIC_SIMILARITY` ব্যবহার করে
+দুটি টেক্সট স্ট্রিংয়ের অর্থ কতটা কাছাকাছি তা চেক করা যায়।
 
 ### Python
 
@@ -242,7 +261,7 @@ df = pd.DataFrame(
 print(df)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -324,7 +343,7 @@ for (int i = 0; i < texts.size(); i++) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -415,34 +434,37 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-Cuplikan kode akan menunjukkan seberapa mirip berbagai bagian teks satu sama lain saat dijalankan.
+কোড স্নিপেট থেকে বোঝা যাবে যে রান করার সময় টেক্সটের বিভিন্ন অংশ একে
+অপরের সাথে কতটা মিলছে।
 
-#### Jenis tugas yang didukung
+#### যে ধরনের টাস্ক কাজ করে
 
-Jenis tugas yang didukung untuk `gemini-embedding-001`:
+`gemini-embedding-001`-এর জন্য কাজ করে এমন টাস্কের ধরন:
 
-| Jenis tugas | Deskripsi | Contoh |
+| টাস্কের ধরন | বিবরণ | উদাহরণ |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | Embedding yang dioptimalkan untuk menilai kemiripan teks. | Sistem rekomendasi, deteksi duplikat |
-| **KLASIFIKASI** | Penyematan dioptimalkan untuk mengklasifikasikan teks menurut label preset. | Analisis sentimen, deteksi spam |
-| **PENGELOMPOKAN** | Embedding dioptimalkan untuk mengelompokkan teks berdasarkan kemiripannya. | Pengaturan dokumen, riset pasar, deteksi anomali |
-| **RETRIEVAL\_DOCUMENT** | Embedding yang dioptimalkan untuk penelusuran dokumen. | Mengindeks artikel, buku, atau halaman web untuk penelusuran. |
-| **RETRIEVAL\_QUERY** | Penyematan yang dioptimalkan untuk kueri penelusuran umum. Gunakan `RETRIEVAL_QUERY` untuk kueri; `RETRIEVAL_DOCUMENT` untuk dokumen yang akan diambil. | Penelusuran khusus |
-| **CODE\_RETRIEVAL\_QUERY** | Embedding yang dioptimalkan untuk pengambilan blok kode berdasarkan kueri bahasa alami. Gunakan `CODE_RETRIEVAL_QUERY` untuk kueri; `RETRIEVAL_DOCUMENT` untuk blok kode yang akan diambil. | Saran dan penelusuran kode |
-| **QUESTION\_ANSWERING** | Penyematan untuk pertanyaan dalam sistem tanya jawab, yang dioptimalkan untuk menemukan dokumen yang menjawab pertanyaan. Gunakan `QUESTION_ANSWERING` untuk pertanyaan; `RETRIEVAL_DOCUMENT` untuk dokumen yang akan diambil. | Kotak chat |
-| **FACT\_VERIFICATION** | Penyematan untuk pernyataan yang perlu diverifikasi, dioptimalkan untuk mengambil dokumen yang berisi bukti yang mendukung atau menyangkal pernyataan tersebut. Gunakan `FACT_VERIFICATION` untuk teks target; `RETRIEVAL_DOCUMENT` untuk dokumen yang akan diambil | Sistem pengecekan fakta otomatis |
+| **SEMANTIC\_SIMILARITY** | টেক্সটের মিল মূল্যায়ন করার জন্য অপ্টিমাইজ করা এম্বেডিং। | সাজেশন সিস্টেম, ডুপ্লিকেট কন্টেন্ট শনাক্তকরণ |
+| **শ্রেণীবিভাগ** | পূর্বনির্ধারিত লেবেল অনুযায়ী টেক্সটকে শ্রেণীবদ্ধ করার জন্য অপ্টিমাইজ করা এম্বেডিং। | সেন্টিমেন্ট বিশ্লেষণ, স্প্যাম শনাক্তকরণ |
+| **ক্লাস্টারিং** | টেক্সটের মিলের উপর ভিত্তি করে সেগুলিকে ক্লাস্টার করার জন্য অপ্টিমাইজ করা এম্বেডিং। | ডকুমেন্ট সাজানো, মার্কেট রিসার্চ, অসঙ্গতি শনাক্তকরণ |
+| **RETRIEVAL\_DOCUMENT** | ডকুমেন্ট সার্চের জন্য অপ্টিমাইজ করা এম্বেডিং। | সার্চের জন্য নিবন্ধ, বই বা ওয়েবপেজ ইনডেক্স করা। |
+| **RETRIEVAL\_QUERY** | সাধারণ সার্চ কোয়েরির জন্য অপ্টিমাইজ করা এম্বেডিং। কোয়েরির জন্য `RETRIEVAL_QUERY` ব্যবহার করুন; `RETRIEVAL_DOCUMENT` হল সেইসব ডকুমেন্ট যা খুঁজে বের করতে হবে। | কাস্টম সার্চ |
+| **CODE\_RETRIEVAL\_QUERY** | ন্যাচারাল ল্যাঙ্গুয়েজ কোয়েরির উপর ভিত্তি করে কোড ব্লক রিট্রিভ করার জন্য অপ্টিমাইজ করা এম্বেডিং। কোয়েরির জন্য `CODE_RETRIEVAL_QUERY` ব্যবহার করুন; কোড ব্লক রিট্রিভ করার জন্য `RETRIEVAL_DOCUMENT` ব্যবহার করুন। | কোড সাজেশন ও সার্চ |
+| **QUESTION\_ANSWERING** | প্রশ্ন-উত্তর সিস্টেমে প্রশ্নের জন্য এম্বেডিং, প্রশ্নের উত্তর দেয় এমন ডকুমেন্ট খুঁজে পাওয়ার জন্য অপ্টিমাইজ করা হয়। প্রশ্নের জন্য `QUESTION_ANSWERING` ব্যবহার করুন; `RETRIEVAL_DOCUMENT` হল সেইসব ডকুমেন্ট যা খুঁজে বের করতে হবে। | চ্যাটবক্স |
+| **FACT\_VERIFICATION** | যাচাই করতে হবে এমন বিবৃতির জন্য এম্বেডিং, বিবৃতি সমর্থন বা খণ্ডন করে এমন প্রমাণ থাকা ডকুমেন্ট রিট্রিভ করার জন্য অপ্টিমাইজ করা। টার্গেট টেক্সটের জন্য `FACT_VERIFICATION` ব্যবহার করুন; যে ডকুমেন্ট পুনরুদ্ধার করতে হবে তার জন্য `RETRIEVAL_DOCUMENT` ব্যবহার করুন | অটোমেটেড তথ্য যাচাইকরণ সিস্টেম |
 
-## Mengontrol ukuran penyematan
+## এম্বেডিংয়ের সাইজ কন্ট্রোল করা
 
-`gemini-embedding-001` dan `gemini-embedding-2` dilatih menggunakan
-teknik Matryoshka Representation Learning (MRL) yang mengajarkan model untuk
-mempelajari sematan berdimensi tinggi yang memiliki segmen awal (atau awalan) yang
-juga merupakan versi data yang sama yang berguna dan lebih sederhana.
+`gemini-embedding-001` ও `gemini-embedding-2`, দুটি মডেলকেই
+Matryoshka Representation Learning (MRL) টেকনিক ব্যবহার করে ট্রেনিং দেওয়া হয়। এটি কোনও মডেলকে
+এমন হাই-ডাইমেনশনাল এম্বেডিং শিখতে সাহায্য করে যেগুলির প্রাথমিক সেগমেন্ট (বা প্রিফিক্স) থাকে যা
+একই ডেটার আরও উপযোগী, সহজ ভার্সন।
 
-Gunakan parameter `output_dimensionality` untuk mengontrol ukuran
-vektor sematan output. Memilih dimensi output yang lebih kecil dapat menghemat
-ruang penyimpanan dan meningkatkan efisiensi komputasi untuk aplikasi hilir,
-sekaligus sedikit mengorbankan kualitas. Secara default, kedua model menghasilkan sematan 3072 dimensi, tetapi Anda dapat memangkasnya ke ukuran yang lebih kecil tanpa mengurangi kualitas untuk menghemat ruang penyimpanan. Sebaiknya gunakan dimensi output 768, 1536, atau 3072.
+আউটপুট এম্বেডিং ভেক্টরের
+সাইজ কন্ট্রোল করতে `output_dimensionality` প্যারামিটার ব্যবহার করুন। ছোট আউটপুট ডাইমেনশনালিটি বেছে নিলে স্টোরেজ স্পেস বাঁচানো যায় এবং ডাউনস্ট্রিম অ্যাপ্লিকেশনের জন্য কম্পিউটেশনাল এফিসিয়েন্সি বাড়ানো যায়,
+তবে কোয়ালিটির দিক থেকে সামান্য ক্ষতি হয়। ডিফল্ট হিসেবে, দুটি মডেলই ৩০৭২-ডাইমেনশনাল এম্বেডিং আউটপুট দেয়, কিন্তু স্টোরেজ স্পেস বাঁচাতে আপনি কোয়ালিটি
+নষ্ট না করেই এটিকে ছোট সাইজে ট্রাঙ্কেট করতে পারেন।
+আমরা ৭৬৮, ১৫৩৬ বা ৩০৭২
+আউটপুট ডাইমেনশন ব্যবহার করার সাজেশন দিই।
 
 ### Python
 
@@ -464,7 +486,7 @@ embedding_length = len(embedding_obj.values)
 print(f"Length of embedding: {embedding_length}")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -507,7 +529,7 @@ int embeddingLength = embeddingObj.values().get().size();
 System.out.println("Length of embedding: " + embeddingLength);
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -561,17 +583,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-Contoh output dari cuplikan kode:
+কোড স্নিপেট থেকে পাওয়া আউটপুটের উদাহরণ:
 
 ```
 Length of embedding: 768
 ```
 
-## Memastikan kualitas untuk dimensi yang lebih kecil
+## ছোট আকারের ক্ষেত্রে কোয়ালিটি নিশ্চিত করা
 
-Meskipun embedding 3072 dimensi default selalu dinormalisasi, Gemini Embedding 2 juga menormalisasi dimensi yang dipangkas secara otomatis (misalnya, 768, 1536). Hal ini memastikan kemiripan semantik dihitung melalui arah vektor, bukan besarnya, sehingga memberikan hasil yang lebih akurat secara langsung.
+ডিফল্ট ৩০৭২-ডাইমেনশন এম্বেডিং সবসময়ই স্বাভাবিক করা হয়, তবে Gemini
+Embedding 2-ও ছোট করে দেওয়া ডাইমেনশন (যেমন, ৭৬৮, ১৫৩৬) অটোমেটিক স্বাভাবিক করে দেয়। এটি
+নিশ্চিত করে যে ভেক্টর ডিরেকশনের মাধ্যমে সেম্যান্টিক মিল গণনা করা হয়, ম্যাগনিটিউডের
+মাধ্যমে নয়, যা বক্সের বাইরে আরও সঠিক ফলাফল প্রদান করে।
 
-**Model Lama**: Jika Anda menggunakan `gemini-embedding-001`, Anda harus menormalisasi dimensi non-3072 secara manual sebagai berikut:
+**পুরনো মডেল**: আপনি `gemini-embedding-001` ব্যবহার করলে, আপনাকে অবশ্যই ম্যানুয়ালি
+নিচের মতো করে ৩০৭২ নয় এমন ডাইমেনশনকে স্বাভাবিক করতে হবে:
 
 ### Python
 
@@ -587,48 +613,52 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-Contoh output dari cuplikan kode ini:
+এই কোড স্নিপেট থেকে পাওয়া আউটপুটের উদাহরণ:
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-Tabel berikut menunjukkan skor MTEB, tolok ukur yang umum digunakan untuk
-embedding, untuk dimensi yang berbeda. Khususnya, hasilnya menunjukkan bahwa performa tidak terikat secara ketat dengan ukuran dimensi embedding, dengan dimensi yang lebih rendah mencapai skor yang sebanding dengan dimensi yang lebih tinggi.
+নিচের টেবিলে MTEB স্কোর দেখানো হয়েছে, এটি হল এম্বেডিংয়ের জন্য সাধারণত ব্যবহৃত
+বেঞ্চমার্ক, যা বিভিন্ন ডাইমেনশনের জন্য ব্যবহার করা হয়। বিশেষত, ফলাফল থেকে দেখা যায় যে পারফর্ম্যান্স
+এমবেডিং ডাইমেনশনের সাইজের সাথে কঠোরভাবে যুক্ত নয়, কারণ কম
+ডাইমেনশনগুলি তাদের বেশি ডাইমেনশন সহ সমকক্ষদের সাথে তুলনীয় স্কোর অর্জন করে।
 
-| Dimensi MRL | Skor MTEB (Gemini Embedding 001) |
+| MRL ডাইমেনশন | MTEB স্কোর (Gemini Embedding 001) |
 | --- | --- |
-| 2048 | 68.16 |
-| 1536 | 68,17 |
-| 768 | 67,99 |
-| 512 | 67,55 |
-| 256 | 66,19 |
-| 128 | 63,31 |
+| 2048 | ৬৮.১৬ |
+| 1536 | 68.17 |
+| 768 | ৬৭.৯৯ |
+| 512 | ৬৭.৫৫ |
+| 256 | ৬৬.১৯ |
+| 128 | ৬৩.৩১ |
 
-## Embedding multimodal
+## মাল্টিমোডাল এম্বেডিং
 
-Model `gemini-embedding-2` mendukung input multimodal, sehingga Anda dapat menyematkan konten gambar, video, audio, dan dokumen bersama teks. Semua modalitas dipetakan ke ruang penyematan yang sama, sehingga memungkinkan penelusuran dan perbandingan lintas modalitas.
+`gemini-embedding-2` মডেল মাল্টিমোডাল ইনপুট সাপোর্ট করে, এর ফলে আপনি
+টেক্সটের সাথে ছবি, ভিডিও, অডিও ও ডকুমেন্ট কন্টেন্ট এম্বেড করতে পারবেন। সব মোডালিটি
+একই এম্বেডিং স্পেসে ম্যাপ করা হয়, এর ফলে ক্রস-মোডাল সার্চ ও
+তুলনা করা যায়।
 
-### Modalitas dan batas yang didukung
+### কাজ করে এমন মোডালিটি ও সীমা
 
-Batas token input maksimum secara keseluruhan adalah 8.192 token.
+ইনপুট টোকেনের সামগ্রিক সর্বাধিক সীমা হল ৮১৯২টি টোকেন।
 
-| Metode | Spesifikasi dan batasan |
+| মোডালিটি | স্পেসিফিকেশন ও সীমা |
 | --- | --- |
-| **Teks** | Mendukung hingga 8.192 token. |
-| **Gambar** | Maksimum 6 gambar per permintaan. Format yang didukung: PNG, JPEG. |
-| **Audio** | Durasi maksimum 180 detik. Format yang didukung: MP3, WAV. |
-| **Video** | Durasi maksimum 120 detik. Format yang didukung: MP4, MOV. Codec yang didukung: H264, H265, AV1, VP9.  Sistem memproses maksimum 32 frame per video: video pendek (≤32 detik) diambil sampelnya pada 1 fps, sedangkan video yang lebih panjang diambil sampelnya secara seragam hingga 32 frame. Trek audio tidak diproses dalam file video. |
-| **Dokumen (PDF)** | Maksimum 1 file per permintaan, hingga 6 halaman. |
+| **Text** | ৮,১৯২টি টোকেন পর্যন্ত কাজ করে। |
+| **ছবি** | প্রতিটি অনুরোধে সর্বাধিক ৬টি ছবি। যেসব ফর্ম্যাট কাজ করে: PNG, JPEG. |
+| **অডিও** | সর্বাধিক সময়সীমা ১৮০ সেকেন্ড। কাজ করে এমন ফর্ম্যাট: MP3, WAV. |
+| **ভিডিও** | সর্বাধিক সময়সীমা ১২০ সেকেন্ড। কাজ করে এমন ফর্ম্যাট: MP4, MOV. কাজ করে এমন কোডেক: H264, H265, AV1, VP9.  সিস্টেম প্রতিটি ভিডিওতে সর্বাধিক ৩২টি ফ্রেম প্রসেস করে: ছোট ভিডিও (≤৩২ সেকেন্ড) ১ fps-এ স্যাম্পেল করা হয়, যেখানে বড় ভিডিওগুলি ৩২টি ফ্রেমে সমানভাবে স্যাম্পেল করা হয়। ভিডিও ফাইলে অডিও ট্র্যাক প্রসেস করা হয় না। |
+| **ডকুমেন্ট (PDF)** | প্রতিটি অনুরোধে সর্বাধিক ১টি ফাইল, ৬টি পৃষ্ঠা পর্যন্ত। |
 
-### Menyematkan gambar
+### ছবি এম্বেড করা
 
-Contoh berikut menunjukkan cara menyematkan gambar menggunakan
-`gemini-embedding-2`.
+নিচের উদাহরণে দেখানো হয়েছে কীভাবে
+`gemini-embedding-2` ব্যবহার করে ছবি এম্বেড করতে হয়।
 
-Gambar dapat diberikan sebagai data inline atau sebagai file yang diupload
-melalui [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id).
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=bn)-এর মাধ্যমে ইনলাইন ডেটা হিসেবে অথবা আপলোড করা ফাইল হিসেবে ছবি প্রদান করা যেতে পারে।
 
 ### Python
 
@@ -654,7 +684,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -724,19 +754,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Agregasi penyematan
+### এম্বেডিং এগ্রিগেশন
 
-Saat bekerja dengan konten multimodal, cara Anda menyusun input akan memengaruhi output embedding:
+মাল্টিমোডাল কন্টেন্ট নিয়ে কাজ করার সময়, আপনার ইনপুট স্ট্রাকচার করার পদ্ধতি এম্বেডিং আউটপুটকে
+প্রভাবিত করে:
 
-- **Beberapa bagian (digabungkan):** Menambahkan beberapa input langsung ke parameter
-  `contents` akan menghasilkan satu penyematan gabungan untuk semua input.
-- **Beberapa objek `Content` (terpisah):** Membungkus setiap input dalam objek
-  `Content` dan meneruskannya dalam parameter `contents` akan menampilkan
-  embedding terpisah untuk setiap entri.
-- **Representasi tingkat postingan:** Untuk objek kompleks seperti postingan media sosial dengan beberapa item media, sebaiknya gabungkan embedding terpisah (misalnya, dengan menghitung rata-rata) untuk membuat representasi tingkat postingan yang koheren.
+- **একাধিক পার্ট (অ্যাগ্রিগেট করা):**
+  `contents` প্যারামিটারে সরাসরি একাধিক ইনপুট যোগ করলে, সব ইনপুটের জন্য একটি অ্যাগ্রিগেট করা এম্বেডিং তৈরি হয়।
+- **একাধিক `Content` অবজেক্ট (আলাদা):** প্রতিটি ইনপুটকে একটি
+  `Content` অবজেক্টে র‍্যাপ করে `contents` প্যারামিটারে পাস করলে
+  প্রতিটি এন্ট্রির জন্য আলাদা এম্বেডিং রিটার্ন করে।
+- **পোস্ট-লেভেল উপস্থাপনা:** একাধিক মিডিয়া আইটেম সহ সোশ্যাল মিডিয়া পোস্টের
+  মতো জটিল অবজেক্টের ক্ষেত্রে, আমরা একটি সুসংহত পোস্ট-লেভেল উপস্থাপনা তৈরি করতে আলাদা আলাদা এম্বেডিংকে
+  একত্রিত করার (যেমন, গড় মান বের করার মাধ্যমে) পরামর্শ দিই।
 
-Contoh berikut menunjukkan cara membuat satu embedding gabungan untuk input teks dan
-gambar. Cukup tambahkan beberapa input ke parameter `contents`:
+টেক্সট ও
+ইমেজ ইনপুটের জন্য কীভাবে একটি অ্যাগ্রিগেট করা এম্বেডিং তৈরি করতে হয় তা নিম্নলিখিত উদাহরণে দেখানো হয়েছে। `contents` প্যারামিটারে একাধিক ইনপুট যোগ করুন:
 
 ### Python
 
@@ -765,7 +798,7 @@ for embedding in result.embeddings:
     print(embedding.values)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -852,9 +885,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Di sisi lain, jika Anda menggunakan objek `Content` di dalam parameter `contents`,
-objek tersebut akan menampilkan penyematan terpisah. Contoh ini membuat beberapa embedding dalam satu
-panggilan embedding:
+অন্যদিকে, আপনি যদি `contents` প্যারামিটারের মধ্যে `Content` অবজেক্ট ব্যবহার করেন,
+তাহলে এটি আলাদা আলাদা এম্বেডিং রিটার্ন করে। এই উদাহরণে একটি এম্বেডিং কলে একাধিক এম্বেডিং
+তৈরি করা হয়েছে:
 
 ### Python
 
@@ -887,7 +920,7 @@ for embedding in result.embeddings:
     print(embedding.values)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -978,13 +1011,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Menyematkan audio
+### অডিও এম্বেড করা
 
-Contoh berikut menunjukkan cara menyematkan file audio menggunakan
-`gemini-embedding-2`.
+নিচের উদাহরণে
+`gemini-embedding-2` ব্যবহার করে কীভাবে অডিও ফাইল এম্বেড করতে হয় তা দেখানো হয়েছে।
 
-File audio dapat diberikan sebagai data inline atau sebagai file yang diupload
-melalui [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id).
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=bn)-এর মাধ্যমে অডিও ফাইল ইনলাইন ডেটা হিসেবে অথবা আপলোড করা ফাইল হিসেবে
+প্রদান করা যেতে পারে।
 
 ### Python
 
@@ -1010,7 +1043,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1080,13 +1113,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Menyematkan video
+### ভিডিও এম্বেড করা
 
-Contoh berikut menunjukkan cara menyematkan video menggunakan
-`gemini-embedding-2`.
+নিচের উদাহরণে দেখানো হয়েছে যে কীভাবে
+`gemini-embedding-2` ব্যবহার করে ভিডিও এম্বেড করতে হয়।
 
-Video dapat diberikan sebagai data inline atau sebagai file yang diupload
-melalui [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id).
+ভিডিও ইনলাইন ডেটা হিসেবে বা [Files API](https://ai.google.dev/gemini-api/docs/files?hl=bn)-এর মাধ্যমে আপলোড করা ফাইল হিসেবে
+প্রদান করা যেতে পারে।
 
 ### Python
 
@@ -1112,7 +1145,7 @@ result = client.models.embed_content(
 print(result.embeddings[0].values)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1184,31 +1217,32 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Jika perlu menyematkan video yang berdurasi >120 detik, Anda dapat membagi video menjadi segmen yang tumpang-tindih dan menyematkan setiap segmen secara terpisah.
+১২০ সেকেন্ডের বেশি দৈর্ঘ্যের ভিডিও এম্বেড করতে চাইলে, ভিডিওটিকে
+ওভারল্যাপ করা সেগমেন্টে ভাগ করে প্রতিটি সেগমেন্ট আলাদা আলাদা করে এম্বেড করতে পারেন।
 
-### Menyematkan dokumen
+### ডকুমেন্ট এম্বেড করা
 
-Dokumen dalam format PDF dapat disematkan secara langsung. Model memproses konten visual dan teks
-setiap halaman.
+পিডিএফ ফর্ম্যাটের ডকুমেন্ট সরাসরি এম্বেড করা যায়। মডেলটি প্রতিটি পৃষ্ঠার ভিজ্যুয়াল ও টেক্সট
+কন্টেন্ট প্রসেস করে।
 
-PDF dapat diberikan sebagai data inline atau sebagai file yang diupload
-melalui [Files API](https://ai.google.dev/gemini-api/docs/files?hl=id).
+PDF-কে ইনলাইন ডেটা হিসেবে বা [Files API](https://ai.google.dev/gemini-api/docs/files?hl=bn)-এর মাধ্যমে আপলোড করা ফাইল হিসেবে
+প্রদান করা যেতে পারে।
 
-#### Cara model memproses PDF
+#### মডেল কীভাবে পিডিএফ প্রসেস করে
 
-Saat Anda menyematkan PDF, model akan memproses dokumen menggunakan fitur visual dan teks:
+আপনি কোনও PDF এম্বেড করলে, মডেলটি ভিজ্যুয়াল ও টেক্সট ফিচার, দুটিই ব্যবহার করে ডকুমেন্ট প্রসেস করে:
 
-- **Representasi visual:** Model merender setiap halaman sebagai gambar, yang menggunakan **258 token** per halaman.
-- **Ekstraksi teks:** Model mengekstrak teks dari dokumen. Untuk **PDF native** (yang berisi teks digital), model akan mengekstrak teks secara langsung. Untuk **PDF hasil pindaian** (yang berisi gambar teks), model akan otomatis menjalankan pengenalan karakter optik (OCR) untuk mengekstrak teks.
+- **ভিজ্যুয়াল উপস্থাপনা:** মডেল প্রতিটি পৃষ্ঠা একটি ছবি হিসেবে রেন্ডার করে, যার ফলে প্রতি পৃষ্ঠায় **২৫৮টি টোকেন** খরচ হয়।
+- **টেক্সট এক্সট্র্যাকশন:** মডেলটি ডকুমেন্ট থেকে টেক্সট এক্সট্র্যাক্ট করে। **নেটিভ পিডিএফ** (যেগুলিতে ডিজিটাল টেক্সট থাকে) থেকে মডেল সরাসরি টেক্সট এক্সট্র্যাক্ট করে। **স্ক্যান করা পিডিএফের** (যেগুলিতে টেক্সটের ছবি থাকে) ক্ষেত্রে, টেক্সট এক্সট্র্যাক্ট করার জন্য মডেল অটোমেটিক অপটিক্যাল অক্ষর স্বীকৃতি (OCR) চালায়।
 
-Untuk menghitung jumlah total token untuk PDF, tambahkan token visual (258 per halaman) ke token teks. Input Anda harus sesuai dengan **batas token 8.192** model (dibagikan di semua modalitas). Sistem akan memangkas input yang melebihi batas ini tanpa pemberitahuan.
+কোনও পিডিএফের মোট টোকেন সংখ্যা গণনা করতে, টেক্সট টোকেনের সাথে ভিজ্যুয়াল টোকেন (প্রতি পৃষ্ঠায় ২৫৮) যোগ করুন। আপনার ইনপুটকে মডেলের **৮,১৯২ টোকেন সীমার** (সব মোডালিটি জুড়ে শেয়ার করা) মধ্যে থাকতে হবে। এই সীমা অতিক্রম করলে সিস্টেম কোনও বিজ্ঞপ্তি না দিয়েই ইনপুট কেটে দেয়।
 
-#### Batas PDF
+#### PDF সংক্রান্ত সীমা
 
-- **File per permintaan:** Anda dapat mengirimkan maksimum 1 file PDF.
-- **Batas halaman:** Anda dapat mengirimkan maksimum 6 halaman per file. Untuk kualitas terbaik, sebaiknya gunakan 1 halaman per PDF.
+- **প্রতিটি অনুরোধে ফাইল:** আপনি সর্বাধিক ১টি পিডিএফ ফাইল জমা দিতে পারবেন।
+- **পৃষ্ঠার সীমা:** আপনি প্রতি ফাইলে সর্বাধিক ৬টি পৃষ্ঠা জমা দিতে পারবেন। সবচেয়ে ভাল কোয়ালিটির জন্য, আমরা প্রতিটি PDF-এর জন্য ১টি করে পৃষ্ঠা ব্যবহার করার সাজেশন দিই।
 
-Contoh berikut menunjukkan cara menyematkan PDF menggunakan `gemini-embedding-2`:
+`gemini-embedding-2` ব্যবহার করে কীভাবে পিডিএফ এম্বেড করতে হয় তা নিম্নলিখিত উদাহরণ থেকে দেখুন:
 
 ### Python
 
@@ -1234,7 +1268,7 @@ result = client.models.embed_content(
 print(result.embeddings)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1304,117 +1338,143 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Kasus penggunaan
+## যেসব ক্ষেত্রে ব্যবহার করা যাবে
 
-Embedding teks sangat penting untuk berbagai kasus penggunaan AI umum, seperti:
+টেক্সট এম্বেডিং বিভিন্ন ধরনের সাধারণ AI ব্যবহারের ক্ষেত্রে অত্যন্ত গুরুত্বপূর্ণ, যেমন:
 
-- **Retrieval-Augmented Generation (RAG):** Embedding meningkatkan kualitas teks yang dihasilkan dengan mengambil dan menggabungkan informasi yang relevan ke dalam konteks model.
-- **Pengambilan informasi:** Menelusuri teks atau dokumen yang paling mirip secara semantik dengan teks input tertentu.
+- **রিট্রিভাল-অগমেন্টেড জেনারেশন (RAG):** কোনও মডেলের কনটেক্সটে প্রাসঙ্গিক তথ্য
+  রিট্রিভ ও ইনকর্পোরেট করার মাধ্যমে এম্বেডিং, জেনারেটেড টেক্সটের কোয়ালিটি
+  উন্নত করে।
+- **তথ্য রিট্রিভ করা:** ইনপুট টেক্সটের একটি অংশ দেওয়া হলে, সবচেয়ে বেশি শব্দার্থগতভাবে একই রকম টেক্সট বা
+  ডকুমেন্ট সার্চ করা।
 
-  [Tutorial penelusuran dokumentask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **Pengurutan ulang penelusuran**: Memprioritaskan item yang paling relevan dengan memberi skor semantik pada hasil awal terhadap kueri.
+  [ডকুমেন্ট সার্চ টিউটোরিয়ালtask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **সার্চ আবার র‍্যাঙ্ক করা**: কোয়েরির সাথে প্রাথমিক ফলাফলের শব্দার্থগত
+  স্কোর তুলনা করে সবচেয়ে প্রাসঙ্গিক আইটেমকে অগ্রাধিকার দিন।
 
-  [Tutorial penyesuaian peringkat penelusurantask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **Deteksi anomali:** Membandingkan grup embedding dapat membantu mengidentifikasi tren atau pencilan tersembunyi.
+  [সার্চ রির‍্যাঙ্কিং টিউটোরিয়ালtask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **অসঙ্গতি শনাক্তকরণ:** এম্বেডিংয়ের গ্রুপ তুলনা করলে লুকানো ট্রেন্ড বা আউটলায়ার
+  শনাক্ত করতে সাহায্য পাওয়া যায়।
 
-  [Tutorial deteksi anomalibubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **Klasifikasi:** Mengategorikan teks secara otomatis berdasarkan kontennya, seperti analisis sentimen atau deteksi spam
+  [অসঙ্গতি শনাক্তকরণ টিউটোরিয়ালbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **শ্রেণীবিভাগ:** কন্টেন্টের উপর ভিত্তি করে টেক্সটকে অটোমেটিক ক্যাটেগরাইজ করা, যেমন
+  সেন্টিমেন্ট বিশ্লেষণ বা স্প্যাম শনাক্তকরণ
 
-  [Tutorial klasifikasitoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **Pengelompokan:** Pahami hubungan yang kompleks secara efektif dengan membuat cluster dan visualisasi embedding Anda.
+  [শ্রেণীবিভাগ টিউটোরিয়ালtoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **ক্লাস্টারিং:** আপনার এম্বেডিংয়ের ক্লাস্টার
+  ও ভিজ্যুয়ালাইজেশন তৈরি করে জটিল সম্পর্ককে কার্যকরভাবে বুঝুন।
 
-  [Tutorial visualisasi pengelompokanbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [ক্লাস্টারিং ভিজ্যুয়ালাইজেশন টিউটোরিয়ালbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## Menyimpan embedding
+## এম্বেডিং স্টোর করা
 
-Saat Anda menggunakan embedding dalam produksi, biasanya Anda akan menggunakan **database vektor** untuk menyimpan, mengindeks, dan mengambil embedding berdimensi tinggi secara efisien. Google Cloud menawarkan layanan data terkelola yang dapat digunakan untuk tujuan ini, termasuk [Gemini Enterprise Agent Platform Penelusuran Vektor 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search-2/overview?hl=id), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=id), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=id), dan [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=id).
+প্রোডাকশনে এম্বেডিং ব্যবহার করার সময়, হাই-ডাইমেনশনাল এম্বেডিং
+দক্ষতার সাথে স্টোর, ইন্ডেক্স ও রিট্রিভ করতে **ভেক্টর ডেটাবেস** ব্যবহার করা
+সাধারণ ব্যাপার। Google Cloud ম্যানেজ করা ডেটা পরিষেবা প্রদান করে যা
+এই উদ্দেশ্যে ব্যবহার করা যেতে পারে, এর মধ্যে
+[Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search-2/overview?hl=bn),
+[BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=bn), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=bn) এবং
+[Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=bn) অন্তর্ভুক্ত।
 
-Tutorial berikut menunjukkan cara menggunakan database vektor pihak ketiga lainnya dengan Gemini Embedding.
+Gemini Embedding-এর সাথে কীভাবে অন্যান্য থার্ড-পার্টি ভেক্টর ডেটাবেস
+ব্যবহার করতে হয় তা নিম্নলিখিত টিউটোরিয়াল থেকে জানুন।
 
-- [Tutorial ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [Tutorial QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [Tutorial Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [Tutorial Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [ChromaDB টিউটোরিয়ালbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [QDrant টিউটোরিয়ালbolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Weaviate টিউটোরিয়ালbolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Pinecone টিউটোরিয়ালbolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## Versi model
+## মডেলের ভার্সন
 
 ### Gemini Embedding 2
 
-| Properti | Deskripsi |
+| প্রপার্টি | বিবরণ |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `gemini-embedding-2` |
-| saveJenis data yang didukung | **Input**  Teks, gambar, video, audio, PDF  **Output**  Embedding teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  8.192  **Ukuran dimensi output**  Fleksibel, mendukung: 128 - 3072, Direkomendasikan: 768, 1536, 3072 |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Stabil: `gemini-embedding-2` |
-| calendar\_monthPembaruan terbaru | April 2026 |
+| id\_cardমডেল কোড | **Gemini API**  `gemini-embedding-2` |
+| সেভ করাডেটার ধরন | **ইনপুট**  টেক্সট, ছবি, ভিডিও, অডিও, পিডিএফ  **আউটপুট**  টেক্সট এম্বেডিং |
+| token\_autoটোকেন সীমা[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=bn) | **ইনপুট টোকেনের সীমা**  ৮,১৯২  **আউটপুট ডাইমেনশনের সাইজ**  ফ্লেক্সিবল, এগুলির সাথে কাজ করে: ১২৮ - ৩০৭২, সাজেস্ট করা: ৭৬৮, ১৫৩৬, ৩০৭২ |
+| 123ভার্সন | আরও বিবরণের জন্য [মডেল ভার্সন প্যাটার্ন](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#model-versions) পড়ুন।  - স্থিতিশীল: `gemini-embedding-2` |
+| calendar\_monthলেটেস্ট আপডেট | এপ্রিল ২০২৬ |
 
-### Penyematan Gemini
+### Gemini Embedding
 
-| Properti | Deskripsi |
+| প্রপার্টি | বিবরণ |
 | --- | --- |
-| Kode model id\_card | **Gemini API**  `gemini-embedding-001` |
-| saveJenis data yang didukung | **Input**  Teks  **Output**  Embedding teks |
-| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  2.048  **Ukuran dimensi output**  Fleksibel, mendukung: 128 - 3072, Direkomendasikan: 768, 1536, 3072 |
-| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Stabil: `gemini-embedding-001` |
-| calendar\_monthPembaruan terbaru | Juni 2025 |
+| id\_cardমডেল কোড | **Gemini API**  `gemini-embedding-001` |
+| সেভ করাডেটার ধরন | **ইনপুট**  টেক্সট  **আউটপুট**  টেক্সট এম্বেডিং |
+| token\_autoটোকেন সীমা[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=bn) | **ইনপুট টোকেনের সীমা**  ২,০৪৮  **আউটপুট ডাইমেনশনের সাইজ**  ফ্লেক্সিবল, এগুলির সাথে কাজ করে: ১২৮ - ৩০৭২, সাজেস্ট করা: ৭৬৮, ১৫৩৬, ৩০৭২ |
+| 123ভার্সন | আরও বিবরণের জন্য [মডেল ভার্সন প্যাটার্ন](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#model-versions) পড়ুন।  - স্থিতিশীল: `gemini-embedding-001` |
+| calendar\_monthলেটেস্ট আপডেট | জুন ২০২৫ |
 
-Untuk model Embedding yang tidak digunakan lagi, buka halaman
-[Penghentian penggunaan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id)
+বন্ধ হয়ে যাওয়া এম্বেডিং মডেলের জন্য, এই
+[বন্ধ হয়ে যাওয়া](https://ai.google.dev/gemini-api/docs/deprecations?hl=bn) পৃষ্ঠা দেখুন
 
-## Migrasi dari gemini-embedding-001
+## gemini-embedding-001 থেকে মাইগ্রেশন
 
-Ruang sematan antara `gemini-embedding-001` dan
-`gemini-embedding-2` **tidak kompatibel**. Artinya, Anda tidak dapat
-membandingkan secara langsung embedding yang dihasilkan oleh satu model dengan embedding yang dihasilkan oleh
-model lainnya. Jika mengupgrade ke `gemini-embedding-2`, Anda harus menyematkan ulang semua data yang ada.
+`gemini-embedding-001` ও
+`gemini-embedding-2`-এর মধ্যে এম্বেডিং স্পেস **অসঙ্গত**। এর অর্থ হল, আপনি একটি মডেলের জেনারেট করা এম্বেডিংয়ের সাথে অন্য মডেলের
+জেনারেট করা এম্বেডিং সরাসরি তুলনা করতে পারবেন না।
+আপনি `gemini-embedding-2`-এ আপগ্রেড করলে, আপনাকে অবশ্যই
+আগে থেকে থাকা সব ডেটা আবার এম্বেড করতে হবে।
 
-Selain ketidakcocokan, ada beberapa perbedaan penting lainnya antara kedua model tersebut:
+অসামঞ্জস্যতা ছাড়াও, দুটি মডেলের মধ্যে আরও বেশ কিছু উল্লেখযোগ্য পার্থক্য রয়েছে:
 
-- **Spesifikasi jenis tugas:** Dengan `gemini-embedding-001`, Anda menentukan
-  jenis tugas menggunakan parameter `task_type` (misalnya, `SEMANTIC_SIMILARITY`,
-  `RETRIEVAL_DOCUMENT`). Dengan `gemini-embedding-2`, parameter `task_type`
-  tidak didukung. Sebagai gantinya, Anda harus menyertakan petunjuk tugas
-  langsung dalam perintah untuk tugas khusus teks. Lihat
-  [Jenis tugas dengan Embeddings 2](#task-types-embeddings-2) untuk mengetahui detail tentang cara memformat perintah untuk berbagai kasus penggunaan.
-- **Agregasi embedding:** `gemini-embedding-001` menghasilkan embedding individual
-  untuk setiap string dalam daftar input. Sebaliknya,
-  `gemini-embedding-2` menghasilkan satu embedding gabungan saat beberapa
-  input (seperti teks dan gambar) diberikan langsung dalam satu permintaan. Untuk
-  membuat sematan terpisah untuk setiap input, bungkus setiap input dalam objek
-  `Content`, atau gunakan
-  [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id#batch-embedding). Lihat
-  [Penyematan agregasi](#embedding-aggregation) untuk mengetahui informasi selengkapnya.
-- **Normalisasi:** Jika Anda menggunakan `output_dimensionality` untuk meminta penyematan
-  dengan dimensi kurang dari 3072, `gemini-embedding-2` akan otomatis
-  menormalisasi penyematan yang dipangkas ini. Dengan `gemini-embedding-001`, Anda
-  perlu melakukan normalisasi manual untuk dimensi selain 3072. Lihat bagian
-  [Memastikan kualitas untuk dimensi yang lebih kecil](#quality-for-smaller-dimensions)
-  untuk mengetahui detailnya.
+- **টাস্কের ধরন সংক্রান্ত স্পেসিফিকেশন:** `gemini-embedding-001`-এর মাধ্যমে, আপনি `task_type` প্যারামিটার (যেমন, `SEMANTIC_SIMILARITY`,
+  `RETRIEVAL_DOCUMENT`) ব্যবহার করে টাস্কের
+  ধরন নির্দিষ্ট করেন। `gemini-embedding-2`-এর মাধ্যমে, `task_type`
+  প্যারামিটার কাজ করে না। এর পরিবর্তে, আপনাকে শুধু টেক্সট-ভিত্তিক টাস্কের জন্য
+  সরাসরি প্রম্পটে টাস্কের নির্দেশাবলী যোগ করতে হবে। বিভিন্ন ব্যবহারের ক্ষেত্রে কীভাবে
+  প্রম্পট ফর্ম্যাট করতে হয় সেই বিষয়ে বিস্তারিত জানতে,
+  [এম্বেডিং ২ সহ টাস্কের ধরন](#task-types-embeddings-2) দেখুন।
+- **এম্বেডিং এগ্রিগেশন:** `gemini-embedding-001` ইনপুটের তালিকায় থাকা প্রতিটি স্ট্রিংয়ের জন্য
+  আলাদা এম্বেডিং জেনারেট করে। অন্যদিকে,
+  `gemini-embedding-2` একাধিক ইনপুট (যেমন, টেক্সট ও ছবি) সরাসরি একটি অনুরোধে দেওয়া হলে,
+  একটিই অ্যাগ্রিগেট করা এম্বেডিং তৈরি করে। আলাদা আলাদা ইনপুটের জন্য আলাদা আলাদা এম্বেডিং জেনারেট করতে, প্রতিটি ইনপুটকে
+  `Content` অবজেক্টে র‍্যাপ করুন অথবা
+  [ব্যাচ API](https://ai.google.dev/gemini-api/docs/batch-api?hl=bn#batch-embedding) ব্যবহার করুন। আরও তথ্যের জন্য
+  [এম্বেডিং অ্যাগ্রিগেশন](#embedding-aggregation) দেখুন।
+- **নর্মালাইজেশন:** আপনি যদি `output_dimensionality` ব্যবহার করে ৩০৭২-এর কম ডাইমেনশন সহ এম্বেডিংয়ের
+  অনুরোধ করেন, তাহলে `gemini-embedding-2` অটোমেটিক
+  এইসব সংক্ষিপ্ত এম্বেডিংকে নর্মালাইজ করে। `gemini-embedding-001`-এর সাহায্যে, আপনাকে
+  ৩০৭২ ছাড়া অন্যান্য ডাইমেনশনের জন্য ম্যানুয়াল নরমালাইজেশন করতে হবে। বিবরণের জন্য
+  [ছোট আকারের ক্ষেত্রে কোয়ালিটি নিশ্চিত করা](#quality-for-smaller-dimensions)
+  দেখুন।
 
-## Embedding batch
+## ব্যাচ এম্বেডিং
 
-Jika latensi tidak menjadi masalah, coba gunakan model Sematan Gemini dengan
-[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id#batch-embedding). Hal ini
-memungkinkan throughput yang jauh lebih tinggi dengan 50% harga Embedding default.
-Temukan contoh cara memulai di
-[Batch API cookbook](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
+লেটেন্সি নিয়ে কোনও সমস্যা না থাকলে, Gemini Embeddings মডেলের সাথে
+[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=bn#batch-embedding) ব্যবহার করে দেখুন। এর ফলে
+ডিফল্ট এম্বেডিং দামের ৫০% খরচে অনেক বেশি থ্রুপুট পাওয়া যায়।
+কীভাবে শুরু করতে হয় তার উদাহরণ
+[ব্যাচ API কুকবুকে](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) দেখুন।
 
-## Pemberitahuan penggunaan yang bertanggung jawab
+## দায়িত্ব সহকারে ব্যবহার সংক্রান্ত বিজ্ঞপ্তি
 
-Tidak seperti model AI generatif yang membuat konten baru, model Embedding Gemini hanya ditujukan untuk mengubah format data input Anda menjadi representasi numerik. Meskipun Google bertanggung jawab untuk menyediakan model penyematan yang mengubah format data input Anda ke format numerik yang diminta, pengguna tetap bertanggung jawab sepenuhnya atas data yang mereka masukkan dan penyematan yang dihasilkan. Dengan menggunakan model Embedding Gemini, Anda mengonfirmasi bahwa Anda memiliki hak yang diperlukan atas konten apa pun yang Anda upload. Jangan membuat konten yang melanggar hak atas kekayaan intelektual atau hak privasi orang lain. Penggunaan layanan ini oleh Anda tunduk kepada [Kebijakan Penggunaan Terlarang](https://policies.google.com/terms/generative-ai/use-policy?hl=id) kami dan [Persyaratan Layanan Google](https://ai.google.dev/gemini-api/terms?hl=id).
+নতুন কন্টেন্ট তৈরি করা জেনারেটিভ AI মডেলের বিপরীতে, Gemini Embedding মডেল
+শুধুমাত্র আপনার ইনপুট ডেটার ফর্ম্যাটকে সংখ্যাগত
+প্রতিনিধিত্বে পরিবর্তন করার উদ্দেশ্যে তৈরি করা হয়েছে। Google একটি এম্বেডিং মডেল প্রদান করার জন্য দায়ী
+যা আপনার ইনপুট ডেটার ফর্ম্যাটকে অনুরোধ করা সংখ্যাসূচক-ফর্ম্যাটে রূপান্তরিত করে,
+ব্যবহারকারীরা তাদের ইনপুট করা ডেটা এবং এর ফলে প্রাপ্ত
+এম্বেডিংয়ের জন্য সম্পূর্ণ দায়বদ্ধ থাকে। Gemini Embedding মডেল ব্যবহার করার মাধ্যমে, আপনি কনফার্ম করছেন যে আপলোড করা যেকোনও কন্টেন্টে আপনার
+প্রয়োজনীয় অধিকার রয়েছে। এমন কন্টেন্ট তৈরি করবেন না যা
+অন্যদের মেধা সম্পত্তি বা গোপনীয়তা অধিকার লঙ্ঘন করে। এই
+পরিষেবা ব্যবহারের ক্ষেত্রে আমাদের [নিষিদ্ধ ব্যবহার
+সংক্রান্ত নীতি](https://policies.google.com/terms/generative-ai/use-policy?hl=bn) এবং
+[Google-এর পরিষেবার শর্তাবলী](https://ai.google.dev/gemini-api/terms?hl=bn) প্রযোজ্য।
 
-## Mulai membangun dengan embedding
+## এম্বেডিং ব্যবহার করে তৈরি করা শুরু করুন
 
-Lihat [notebook panduan memulai embedding](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb)
-untuk menjelajahi kemampuan model dan mempelajari cara menyesuaikan serta memvisualisasikan
-embedding Anda.
+মডেলের ক্ষমতা এক্সপ্লোর করতে এবং কীভাবে আপনার
+এম্বেডিং কাস্টমাইজ ও ভিজ্যুয়ালাইজ করতে হয় তা জানতে [এম্বেডিং কুইকস্টার্ট
+নোটবুক](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb)
+দেখুন।
 
-Kirim masukan
+মতামত জানান
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-Terakhir diperbarui pada 2026-10-09 UTC.
+2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-Ada masukan untuk kami?
+আমাদের আরও কিছু জানাতে চান?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-09 UTC."],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

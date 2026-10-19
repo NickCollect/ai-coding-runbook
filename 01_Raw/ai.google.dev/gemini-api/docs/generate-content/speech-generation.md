@@ -1,57 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it
-fetched_at: 2026-10-12T07:07:15.943100+00:00
-title: "Generazione di sintesi vocale (TTS) \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr
+fetched_at: 2026-10-19T05:41:24.825952+00:00
+title: "Metin okuma \u00fcretimi (TTS) \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-Invia feedback
+Geri bildirim gönderin
 
-# Generazione di sintesi vocale (TTS)
+# Metin okuma üretimi (TTS)
 
-L'API Gemini può trasformare l'input di testo in audio con una o più voci utilizzando le funzionalità di sintesi vocale (TTS) di Gemini.
-La generazione di sintesi vocale è
-*[controllabile](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#controllable)*,
-il che significa che puoi combinare i metadati strutturati del turno (`speech_metadata`) e i tag vocali incorporati per guidare lo *stile*, l'*accento*, il *ritmo* e il *tono* dell'audio.
+Gemini API, Gemini'ın metin okuma (TTS) özelliklerini kullanarak metin girişini tek konuşmacılı veya çok konuşmacılı sese dönüştürebilir.
+Metin okuma özelliği *[kontrol edilebilir](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#controllable)*. Yani sesin *stilini*, *aksanını*, *hızını* ve *tonunu* yönlendirmek için yapılandırılmış sıra meta verilerini (`speech_metadata`) ve satır içi ses etiketlerini birleştirebilirsiniz.
 
-[Prova in Google AI Studio](https://aistudio.google.com/generate-speech?hl=it)
+[Google AI Studio'da deneyin](https://aistudio.google.com/generate-speech?hl=tr)
 
-La funzionalità TTS è diversa dalla generazione vocale fornita tramite l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it), progettata per input e output multimodali e audio interattivi e non strutturati. Mentre l'API Live eccelle
-in contesti conversazionali dinamici, la sintesi vocale tramite l'API Gemini
-è pensata per scenari che richiedono una recitazione esatta del testo con un controllo
-preciso su stile e suono, come la generazione di podcast o audiolibri.
+TTS özelliği, etkileşimli, yapılandırılmamış ses ve çok formatlı giriş ve çıkışlar için tasarlanmış [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) aracılığıyla sağlanan konuşma üretiminden farklıdır. Live API, dinamik sohbet bağlamlarında mükemmel performans gösterirken Gemini API üzerinden TTS, podcast veya sesli kitap oluşturma gibi stil ve ses üzerinde ayrıntılı kontrolle tam metin okuma gerektiren senaryolar için özel olarak tasarlanmıştır.
 
-Questa guida mostra come generare audio con una o più voci a partire da un testo utilizzando [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it) (`gemini-3.8-flash-tts`) e [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it) (`gemini-3.8-flash-lite-tts`).
+Bu kılavuzda, [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr) (`gemini-3.8-flash-tts`) ve [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr) (`gemini-3.8-flash-lite-tts`) kullanarak metinden tek konuşmacılı ve çok konuşmacılı ses üretme adımları açıklanmaktadır.
 
-## Prima di iniziare
+## Başlamadan önce
 
-Assicurati di utilizzare un modello Gemini TTS elencato nella sezione
-[Modelli supportati](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#supported-models). Per risultati ottimali, consulta la sezione
-[Quando utilizzare un modello](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#when-to-use-which-model)
-per selezionare il modello migliore per il tuo carico di lavoro.
+[Desteklenen modeller](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#supported-models) bölümünde listelenen bir Gemini TTS modeli kullandığınızdan emin olun. En iyi sonuçları elde etmek için iş yükünüze en uygun modeli seçmek üzere [Hangi model ne zaman kullanılır?](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#when-to-use-which-model) başlıklı makaleyi inceleyin.
 
-Prima di iniziare a creare, ti consigliamo di
-[testare i modelli Gemini TTS in AI Studio](https://aistudio.google.com/generate-speech?hl=it).
+Geliştirmeye başlamadan önce [AI Studio'da Gemini TTS modellerini test etmeniz](https://aistudio.google.com/generate-speech?hl=tr) faydalı olabilir.
 
-## TTS con un solo speaker
+## Tek konuşmacılı TTS
 
-Per convertire il testo in audio con una sola voce utilizzando i modelli Gemini 3.8 TTS, passa la trascrizione letterale in `parts[].text`, allega lo stile a livello di turno in `parts[].speech_metadata` e configura la voce in `speechConfig.voiceConfig`. Puoi trasmettere un nome di voce predefinito, un ID Extended
-Voice Library, un ID [progettazione
-vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) personalizzato (`voice_...`)
-o un ID [replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it)
-(`voice_...` o `voicekey_...` senza stato facoltativo).
+Metni Gemini 3.8 TTS modelleriyle tek konuşmacılı sese dönüştürmek için `parts[].text` içinde bire bir transkripti iletin, `parts[].speech_metadata` içinde dönüş seviyesinde stil oluşturmayı ekleyin ve `speechConfig.voiceConfig` içinde sesinizi yapılandırın. Önceden oluşturulmuş bir ses adı, Extended Voice Library kimliği, özel [Voice Design](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr) kimliği (`voice_...`) veya [ses kopyalama](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=tr) kimliği (`voice_...` ya da isteğe bağlı durum bilgisiz `voicekey_...`) iletebilirsiniz.
 
-Questo esempio salva l'audio di output del modello in un file WAV:
+Bu örnekte, modelden alınan çıkış sesi bir WAV dosyasına kaydedilir:
 
 ### Python
 
@@ -145,12 +132,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
           base64 --decode > out.wav
 ```
 
-## TTS multilocutore
+## Birden fazla konuşmacı içeren TTS
 
-Per i dialoghi con più interlocutori, configura due interlocutori in
-`multiSpeakerVoiceConfig.speakerVoiceConfigs` utilizzando `prebuiltVoiceConfig` e
-passa ogni turno di dialogo come un `part` separato con `speech_metadata` che specifica
-sia `speaker` sia `style` facoltativo a livello di turno:
+Birden fazla konuşmacının yer aldığı diyaloglarda, `multiSpeakerVoiceConfig.speakerVoiceConfigs` içinde `prebuiltVoiceConfig` kullanarak iki konuşmacı yapılandırın ve her diyalog sırasını ayrı bir `part` olarak iletin. `speech_metadata` ile hem `speaker` hem de isteğe bağlı sıra düzeyinde `style` belirtin:
 
 ### Python
 
@@ -322,93 +306,68 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
       base64 --decode > out.wav
 ```
 
-## Controllare lo stile del parlato con metadati e tag
+## Meta veriler ve etiketlerle konuşma stilini kontrol etme
 
-Gemini 3.8 TTS considera il campo `text` esclusivamente come una trascrizione letterale. Per
-controllare la recitazione senza che le indicazioni di regia vengano lette ad alta voce, dividi le
-istruzioni per ambito:
+Gemini 3.8 TTS, `text` alanını tam olarak bir transkript olarak ele alır. Sahne talimatlarının sesli okunmasını kontrol etmek için talimatlarınızı kapsamlarına göre ayırın:
 
-- **Pronuncia sostenuta a livello di turno (`speech_metadata.style`)**: inserisci emozioni,
-  stile di pronuncia, prosodia, ritmo e volume che si applicano a un intero turno
-  in `speech_metadata.style` (ad esempio, `"style": "whispered urgently"`,
-  `"style": "out of breath"` o `"style": "warm and enthusiastic"`).
-- **Eventi puntuali (tag in linea)**: inserisci brevi interruzioni o pause vocali non verbali direttamente all'interno della trascrizione utilizzando le parentesi angolari (ad esempio, `"Wait... <short pause> did you hear that? <sigh>"` o `"Excuse me <cough> as I was saying..."`).
+- **Sıra düzeyinde sürekli sunum (`speech_metadata.style`):** Sıranın tamamı için geçerli olan duyguları, sunum stilini, prozodiyi, hızı ve ses seviyesini `speech_metadata.style` içine ekleyin (ör. `"style": "whispered urgently"`, `"style": "out of breath"` veya `"style": "warm and enthusiastic"`).
+- **Anlık etkinlikler (satır içi etiketler):** Konuşma dışı anlık ses patlamalarını veya duraklamaları, açılı parantezler kullanarak doğrudan transkriptin içine yerleştirin (ör. `"Wait... <short pause> did you hear that? <sigh>"` veya `"Excuse me <cough> as I was saying..."`).
 
-Consulta la
-[Guida ai prompt](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#prompting-guide)
-per best practice complete.
+Kapsamlı en iyi uygulamalar için [İstem kılavuzunu](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#prompting-guide) inceleyin.
 
-## Opzioni vocali
+## Ses seçenekleri
 
-Gemini 3.8 TTS supporta quattro modi per selezionare o creare voci:
+Gemini 3.8 TTS, ses seçmek veya oluşturmak için dört yöntem sunar:
 
-1. **Voci di studio predefinite**:30 voci selezionate elencate nella tabella seguente.
-2. **Libreria di voci estesa**:centinaia di voci aggiuntive in diverse lingue,
-   accenti e archetipi di personaggi accessibili tramite `client.voices.list()`
-   (`GET /v1beta/voices`).
-3. **[Progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it):** genera
-   una voce personalizzata da una descrizione in linguaggio naturale in
-   [Google AI Studio](https://aistudio.google.com/generate-speech?hl=it) o utilizzando
-   `POST /v1beta/voices` (`type="prompted"`, che restituisce un ID
-   `voice_...` persistente e un'anteprima `sample_audio` WAV in `CreateVoice` e
-   `GetVoice`).
-4. **[Replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it):**
-   replica la voce di un oratore dall'audio di riferimento e di consenso in
-   [Google AI Studio](https://aistudio.google.com/generate-speech?hl=it) o utilizzando
-   `POST /v1beta/voices` (`type="replicated"`, `store=True` persistente per
-   impostazione predefinita o `store=False` stateless facoltativo).
+1. **Hazır stüdyo sesleri:** Aşağıdaki tabloda listelenen 30 seçilmiş ses.
+2. **Genişletilmiş Ses Kitaplığı:** `client.voices.list()` (`GET /v1beta/voices`) kullanarak erişebileceğiniz, farklı dillerde, aksanlarda ve karakter arketiplerinde yüzlerce ek ses.
+3. **[Ses tasarımı](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr):** [Google AI Studio](https://aistudio.google.com/generate-speech?hl=tr)'da doğal dildeki bir açıklamadan veya `POST /v1beta/voices` (`type="prompted"`, `CreateVoice` ve `GetVoice`'de kalıcı bir `voice_...` kimliği ve `sample_audio` WAV önizlemesi döndürür) kullanarak özel bir ses karakteri oluşturun.
+4. **[Ses kopyalama](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=tr):**
+   [Google AI Studio](https://aistudio.google.com/generate-speech?hl=tr)'da veya `POST /v1beta/voices` (`type="replicated"`, varsayılan olarak kalıcı `store=True` veya isteğe bağlı durum bilgisiz `store=False`) kullanarak referans ve izin sesinden bir konuşmacının sesini kopyalayın.
 
-### Limiti e TTL della voce personalizzata
+### Özel ses sınırları ve TTL
 
-| Tipo di voce | Modalità di archiviazione | Quota / limite | Conservazione (TTL) |
+| Ses türü | Depolama modu | Kota / sınır | Elde tutma (TTL) |
 | --- | --- | --- | --- |
-| **Voci stateful** (`voice_...`, richieste o replicate) | `store=True` | **200 voci per progetto** (condivise tra le voci richieste e replicate) | **1 anno dall'ultimo utilizzo\*** |
-| **Chiavi vocali stateless** (`voicekey_...`, replicate) | `store=False` | Gestito dal cliente | **7 giorni** |
+| **Durumlu sesler** (`voice_...`, istemli veya kopyalanmış) | `store=True` | **Proje başına 200 ses** (istemle oluşturulan ve kopyalanan sesler arasında paylaşılır) | **Son kullanımdan itibaren 1 yıl\*** |
+| **Durumsuz ses anahtarları** (`voicekey_...`, çoğaltılmış) | `store=False` | İstemci tarafından yönetilen | **7 gün** |
 
-\* **Estensione TTL**:il periodo di conservazione di un anno viene reimpostato ogni volta che la voce viene utilizzata attivamente (per la sintesi vocale o come voce di base per il remix). Le voci senza attività per 1 anno vengono eliminate automaticamente.
+\* **TTL uzantısı:** 1 yıllık saklama penceresi, ses aktif olarak her kullanıldığında (sesle konuşma sentezlenerek veya remiksleme için temel ses olarak kullanılarak) sıfırlanır. 1 yıl boyunca etkinlik olmayan sesler otomatik olarak silinir.
 
-### Voci predefinite
+### Önceden oluşturulmuş sesler
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** - *Luminoso* | **Puck** - *Upbeat* | **Caronte** -- *Istruttiva* |
-| **Kore** -- *Firm* | **Fenrir**: *eccitabile* | **Leda** -- *Giovane* |
-| **Orus** -- *Azienda* | **Aoede** - *Breezy* | **Callirrhoe**: *informale* |
-| **Autonoe** -- *Luminoso* | **Enceladus** - *Breathy* | **Iapetus** -- *Cancella* |
-| **Umbriel**: *tranquillo* | **Algieba** -- *Fluido* | **Despina** -- *Smooth* |
-| **Erinome** -- *Cancella* | **Algenib** - *Gravelly* | **Rasalgethi** - *Informativa* |
-| **Laomedeia** - *Upbeat* | **Achernar** - *Soft* | **Alnilam** -- *Firm* |
-| **Schedar** - *Even* | **Gacrux** -- *Per adulti* | **Pulcherrima** -- *Forward* |
-| **Achird**: *amichevole* | **Zubenelgenubi** - *Informale* | **Vindemiatrix** - *Gentle* |
-| **Sadachbia** - *Vivace* | **Sadaltager** -- *Knowledgeable* | **Sulafat** -- *Calda* |
+| **Zephyr** -- *Bright* | **Puck** -- *Neşeli* | **Charon** -- *Bilgilendirici* |
+| **Kore** -- *Firm* | **Fenrir** -- *Heyecanlı* | **Leda** -- *Genç* |
+| **Orus** -- *Firma* | **Aoede** -- *Breezy* | **Callirrhoe** -- *Sakin* |
+| **Autonoe** -- *Parlak* | **Enceladus** -- *Nefesli* | **Iapetus** -- *Temizle* |
+| **Umbriel** -- *Rahat* | **Algieba** -- *Pürüzsüz* | **Despina** -- *Pürüzsüz* |
+| **Erinome** -- *Temizle* | **Algenib** -- *Gravelly* | **Rasalgethi** -- *Bilgilendirici* |
+| **Laomedeia** -- *Neşeli* | **Achernar** -- *Soft* | **Alnilam** -- *Firm* |
+| **Schedar** -- *Even* | **Gacrux** -- *Yetişkin* | **Pulcherrima** -- *Hevesli* |
+| **Achird** -- *Arkadaşça* (Friendly) | **Zubenelgenubi** -- *Gündelik* | **Vindemiatrix** -- *Nazik* |
+| **Sadachbia** -- *Lively* | **Sadaltager** -- *Bilgili* | **Sulafat** -- *Sıcak* |
 
-### Libreria di voci estesa e filtri
+### Genişletilmiş Ses Kitaplığı ve filtreleme
 
-Oltre alle 30 voci di studio in primo piano nella tabella precedente, la **Extended
-Voice Library** offre centinaia di voci aggiuntive in varie lingue,
-accenti regionali, personaggi e domini. Puoi sfogliare, filtrare e
-provare l'intera libreria di voci in modo interattivo in
-[Google AI Studio](https://aistudio.google.com/generate-speech?hl=it) oppure interrogarla
-in modo programmatico utilizzando `client.voices.list()` (`GET /v1beta/voices`, utilizzando
-`google-genai` 2.25.0+ / `@google/genai` 2.24.0+).
+Yukarıdaki tabloda yer alan 30 Studio sesine ek olarak **Genişletilmiş Ses Kitaplığı**'nda diller, bölgesel aksanlar, karakter kişilikleri ve alanlar genelinde yüzlerce ek ses bulunur. [Google AI Studio](https://aistudio.google.com/generate-speech?hl=tr)'da Ses Kitaplığı'nın tamamına göz atabilir, filtreleyebilir ve etkileşimli olarak dinleyebilirsiniz. Alternatif olarak, `client.voices.list()` (`GET /v1beta/voices`, `google-genai` 2.25.0+ / `@google/genai` 2.24.0+) kullanarak programatik olarak sorgulayabilirsiniz.
 
-`ListVoices` restituisce le voci personalizzate memorizzate (ordinate dalla più recente) seguite
-dalle voci del catalogo predefinite che corrispondono ai criteri di filtro. Quando vengono passati più valori
-per un filtro elenco, vengono restituite le voci corrispondenti a **qualsiasi** valore del filtro (`OR`), mentre i parametri di filtro distinti si combinano con `AND`:
+`ListVoices`, filtre ölçütlerinize uyan hazır katalog seslerinden sonra özel olarak saklanan seslerinizi (en yeni ilk sırada olacak şekilde) döndürür. Bir liste filtresi için birden fazla değer iletildiğinde, bu filtredeki **herhangi** bir değerle eşleşen Voice Match'ler döndürülür (`OR`). Farklı filtre parametreleri ise `AND` ile birleştirilir:
 
-| Parametro | Tipo | Descrizione |
+| Parametre | Tür | Açıklama |
 | --- | --- | --- |
-| `language_code` | `list[str]` | Tag lingua BCP-47 (ad esempio, `["en-US", "en-GB"]`). Corrispondenza esatta senza distinzione tra maiuscole e minuscole. |
-| `region_code` | `list[str]` | Codice o codici regione ISO 3166-1 alpha-2 o UN M.49 (ad esempio, `["US", "GB"]`). |
-| `accent` | `list[str]` | Descrittore o descrittori dell'accento regionale (ad esempio, `["American", "British"]`). |
-| `gender` | `list[str]` | Presentazione del genere percepito (`"female"`, `"male"` o `"neutral"`). |
-| `pitch` | `list[str]` | Classificazione del tono vocale (`"low"`, `"medium"` o `"high"`). |
-| `persona` | `list[str]` | Personaggio vocale o archetipo del personaggio (ad esempio, `["Warm, Friendly"]`, `["Narrator"]`). |
-| `contexts` (`context` in REST) | `list[str]` | Dominio di utilizzo ottimale (ad esempio, `["Audiobook", "Conversational", "News"]`). |
-| `type` (`type_` in Python) | `list[str]` | Filtra per fonte della voce: `"prebuilt"`, `"prompted"` ([Progettazione vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it)) o `"replicated"` ([Replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it)). |
-| `search` | `str` | La ricerca di sottostringhe di testo libero è stata eseguita senza distinzione tra maiuscole e minuscole sia per `display_name` che per `description`. |
-| `page_size` | `int` | Numero massimo di voci restituite per pagina (valore predefinito `50`, massimo `1000`). |
-| `page_token` | `str` | Token di `response.next_page_token` per recuperare la pagina successiva dei risultati. |
+| `language_code` | `list[str]` | BCP-47 dil etiketleri (ör. `["en-US", "en-GB"]`). Büyük/küçük harfe duyarlı olmayan tam eşleme. |
+| `region_code` | `list[str]` | ISO 3166-1 alfa-2 veya UN M.49 bölge kodları (örneğin, `["US", "GB"]`). |
+| `accent` | `list[str]` | Bölgesel aksan tanımlayıcıları (ör. `["American", "British"]`). |
+| `gender` | `list[str]` | Algılanan cinsiyet sunumu (`"female"`, `"male"` veya `"neutral"`). |
+| `pitch` | `list[str]` | Ses perdesi sınıflandırması (`"low"`, `"medium"` veya `"high"`). |
+| `persona` | `list[str]` | Ses karakteri veya karakter arketipi (ör. `["Warm, Friendly"]`, `["Narrator"]`). |
+| `contexts` (`context` REST'te) | `list[str]` | Optimum kullanım alanı (ör. `["Audiobook", "Conversational", "News"]`). |
+| `type` (`type_` Python'da) | `list[str]` | Ses kaynağına göre filtreleyin: `"prebuilt"`, `"prompted"` ([Ses tasarımı](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr)) veya `"replicated"` ([Ses kopyalama](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=tr)). |
+| `search` | `str` | Serbest metin alt dizesi araması, büyük/küçük harfe duyarlı olmadan hem `display_name` hem de `description` ile eşleşti. |
+| `page_size` | `int` | Sayfa başına döndürülen maksimum ses sayısı (varsayılan `50`, maksimum `1000`). |
+| `page_token` | `str` | Sonraki sonuç sayfasını getirmek için `response.next_page_token` kullanılan jeton. |
 
 ### Python
 
@@ -476,258 +435,220 @@ curl -G "https://generativelanguage.googleapis.com/v1beta/voices" \
   --data-urlencode "page_size=50"
 ```
 
-## Lingue supportate
+## Desteklenen diller
 
-I modelli di sintesi vocale rilevano automaticamente la lingua di input.
-[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it)
-(`gemini-3.8-flash-tts`) supporta **oltre 130 lingue** e
-[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it)
-(`gemini-3.8-flash-lite-tts`) supporta **oltre 100 lingue**:
+TTS modelleri, giriş dilini otomatik olarak algılar.
+[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr)
+(`gemini-3.8-flash-tts`) **130'dan fazla dili**, [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr)
+(`gemini-3.8-flash-lite-tts`) ise **100'den fazla dili** destekler:
 
-| Lingua | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
+| Dil | Gemini 3.8 Flash TTS | Gemini 3.8 Flash-Lite TTS |
 | --- | --- | --- |
-| Accinese (alfabeto arabo) | ✔️ | ✔️ |
-| Afrikaans | ✔️ | ✔️ |
+| Açece (Arap alfabesi) | ✔️ | ✔️ |
+| Afrikaanca | ✔️ | ✔️ |
 | Akan | ✔️ | ✔️ |
-| Amarico | ✔️ | ✔️ |
-| Armeno | ✔️ | ✔️ |
-| Assamese | ✔️ | ✔️ |
+| Amharca | ✔️ | ✔️ |
+| Ermenice | ✔️ | ✔️ |
+| Assamca | ✔️ | ✔️ |
 | Awadhi | ✔️ | ✔️ |
-| Balinese | ✔️ | ✔️ |
-| Bengalese | ✔️ | ✔️ |
-| Banjar (caratteri arabi) | ✔️ | — |
-| Banjar (alfabeto latino) | ✔️ | ✔️ |
-| Bashkir | ✔️ | — |
-| Basco | ✔️ | ✔️ |
-| Bielorusso | ✔️ | ✔️ |
+| Bali dili | ✔️ | ✔️ |
+| Bengalce | ✔️ | ✔️ |
+| Banjar (Arap alfabesi) | ✔️ | — |
+| Banjar (Latin alfabesi) | ✔️ | ✔️ |
+| Başkurtça | ✔️ | — |
+| Baskça | ✔️ | ✔️ |
+| Belarusian | ✔️ | ✔️ |
 | Bemba | ✔️ | — |
 | Bhojpuri | ✔️ | ✔️ |
-| Bosniaco | ✔️ | ✔️ |
-| Buginese | ✔️ | ✔️ |
-| Bulgaro | ✔️ | ✔️ |
-| Birmano | ✔️ | — |
-| Cantonese | ✔️ | ✔️ |
-| Catalano | ✔️ | ✔️ |
-| Cebuano | ✔️ | ✔️ |
-| Curdo centrale | ✔️ | ✔️ |
+| Boşnakça | ✔️ | ✔️ |
+| Bugi | ✔️ | ✔️ |
+| Bulgarca | ✔️ | ✔️ |
+| Burmaca | ✔️ | — |
+| Kantonca | ✔️ | ✔️ |
+| Katalanca | ✔️ | ✔️ |
+| Sabuanca | ✔️ | ✔️ |
+| Orta Kürtçe | ✔️ | ✔️ |
 | Chhattisgarhi | ✔️ | ✔️ |
-| Cinese (caratteri Hans) | ✔️ | ✔️ |
-| Cinese (caratteri Hant) | ✔️ | ✔️ |
-| Tataro di Crimea | ✔️ | — |
-| Croato | ✔️ | ✔️ |
-| Ceco | ✔️ | ✔️ |
-| Danese | ✔️ | ✔️ |
-| Olandese | ✔️ | ✔️ |
-| Diula | ✔️ | — |
-| Dzongkha | ✔️ | — |
-| Arabo (Egitto) | ✔️ | ✔️ |
-| Inglese | ✔️ | ✔️ |
-| Estone | ✔️ | ✔️ |
-| Filippino | ✔️ | ✔️ |
-| Finlandese | ✔️ | — |
-| Francese | ✔️ | ✔️ |
-| Galiziano | ✔️ | ✔️ |
-| ganda | ✔️ | ✔️ |
-| Georgiano | ✔️ | ✔️ |
-| Tedesco | ✔️ | ✔️ |
+| Çince (Basitleştirilmiş alfabe) | ✔️ | ✔️ |
+| Çince (Hant alfabesi) | ✔️ | ✔️ |
+| Kırım Tatarcası | ✔️ | — |
+| Hırvatça | ✔️ | ✔️ |
+| Çekya | ✔️ | ✔️ |
+| Danca | ✔️ | ✔️ |
+| Felemenkçe | ✔️ | ✔️ |
+| Dyula dili | ✔️ | — |
+| Dzongka | ✔️ | — |
+| Arapça (Mısır) | ✔️ | ✔️ |
+| İngilizce | ✔️ | ✔️ |
+| Estonca | ✔️ | ✔️ |
+| Filipince | ✔️ | ✔️ |
+| Fince | ✔️ | — |
+| Fransızca | ✔️ | ✔️ |
+| Galiçyaca | ✔️ | ✔️ |
+| Ganda | ✔️ | ✔️ |
+| Gürcüce | ✔️ | ✔️ |
+| Almanca | ✔️ | ✔️ |
 | Greek | ✔️ | ✔️ |
 | Guarani | ✔️ | — |
-| Gujarati | ✔️ | ✔️ |
-| Creolo haitiano | ✔️ | ✔️ |
-| Halh mongolo | ✔️ | ✔️ |
-| Hausa | ✔️ | ✔️ |
-| Ebraico | ✔️ | ✔️ |
-| Hindi | ✔️ | ✔️ |
-| Ungherese | ✔️ | ✔️ |
-| Islandese | ✔️ | ✔️ |
-| Igbo | ✔️ | — |
-| Ilocano | ✔️ | ✔️ |
-| Indonesiano | ✔️ | ✔️ |
-| Persiano iraniano | ✔️ | ✔️ |
-| Italiano | ✔️ | ✔️ |
-| Giapponese | ✔️ | ✔️ |
-| Giavanese | ✔️ | ✔️ |
+| Güceratça | ✔️ | ✔️ |
+| Haiti Creole Dili | ✔️ | ✔️ |
+| Halh Moğolcası | ✔️ | ✔️ |
+| Hausaca | ✔️ | ✔️ |
+| İbranice | ✔️ | ✔️ |
+| Hintçe | ✔️ | ✔️ |
+| Macarca | ✔️ | ✔️ |
+| İzlandaca | ✔️ | ✔️ |
+| İgbo Dili | ✔️ | — |
+| İloko | ✔️ | ✔️ |
+| Endonezce | ✔️ | ✔️ |
+| İran Farsçası | ✔️ | ✔️ |
+| İtalyanca | ✔️ | ✔️ |
+| Japonca | ✔️ | ✔️ |
+| Cava dili | ✔️ | ✔️ |
 | Kabyle | ✔️ | — |
 | Kamba | ✔️ | ✔️ |
 | Kannada | ✔️ | ✔️ |
-| Kashmiri (scrittura araba) | ✔️ | ✔️ |
-| Kashmiri (Deva script) | ✔️ | ✔️ |
-| Kazako | ✔️ | ✔️ |
-| Khmer | ✔️ | ✔️ |
+| Keşmirce (Arap alfabesi) | ✔️ | ✔️ |
+| Keşmirce (Devanagari alfabesi) | ✔️ | ✔️ |
+| Kazakça | ✔️ | ✔️ |
+| Kmerce | ✔️ | ✔️ |
 | Kikuyu | ✔️ | ✔️ |
-| Kinyarwanda | ✔️ | ✔️ |
+| Ruandaca | ✔️ | ✔️ |
 | Kongo | ✔️ | ✔️ |
-| Coreano | ✔️ | ✔️ |
-| Kirgizo | ✔️ | ✔️ |
-| Lao | ✔️ | ✔️ |
-| Letgallo | ✔️ | — |
+| Korece | ✔️ | ✔️ |
+| Kırgızca | ✔️ | ✔️ |
+| Laoca | ✔️ | ✔️ |
+| Latgalian | ✔️ | — |
 | Lingala | ✔️ | ✔️ |
-| Lituano | ✔️ | — |
-| Lussemburghese | ✔️ | — |
-| Macedone | ✔️ | ✔️ |
+| Litvanca | ✔️ | — |
+| Luxembourgish | ✔️ | — |
+| Makedonca | ✔️ | ✔️ |
 | Magahi | ✔️ | ✔️ |
-| Maithili | ✔️ | ✔️ |
-| Malayalam | ✔️ | ✔️ |
-| Maltese | ✔️ | ✔️ |
+| Maithili dili | ✔️ | ✔️ |
+| Malayalamca | ✔️ | ✔️ |
+| Maltaca | ✔️ | ✔️ |
 | Manipuri | ✔️ | ✔️ |
 | Marathi | ✔️ | ✔️ |
-| Minangkabau (scrittura araba) | ✔️ | ✔️ |
-| Minangkabau (latino) | ✔️ | — |
+| Minangkabau (Arap alfabesi) | ✔️ | ✔️ |
+| Minangkabau (Latin alfabesi) | ✔️ | — |
 | Mizo | ✔️ | ✔️ |
-| Nepalese (lingua individuale) | ✔️ | ✔️ |
-| Fulfulde nigeriano | ✔️ | ✔️ |
-| Azerbaigian settentrionale | ✔️ | ✔️ |
-| Sotho del nord | ✔️ | ✔️ |
-| Uzbeko settentrionale | ✔️ | ✔️ |
-| Norvegese bokmål | ✔️ | ✔️ |
-| Norvegese (Nynorsk) | ✔️ | ✔️ |
+| Nepalce (bireysel dil) | ✔️ | ✔️ |
+| Nijerya'da konuşulan Fulfulde dili | ✔️ | ✔️ |
+| Kuzey Azerice | ✔️ | ✔️ |
+| Kuzey Sotho dili | ✔️ | ✔️ |
+| Kuzey Özbekistan | ✔️ | ✔️ |
+| Norveççe Bokmål | ✔️ | ✔️ |
+| Yeni Norveççe | ✔️ | ✔️ |
 | Nyanja | ✔️ | ✔️ |
-| Occitano | ✔️ | — |
-| Odia (lingua individuale) | ✔️ | ✔️ |
+| Occitan dili | ✔️ | — |
+| Odiya (bireysel dil) | ✔️ | ✔️ |
 | Pangasinan | ✔️ | — |
-| Persiano (Afghanistan) | ✔️ | ✔️ |
-| Polacco | ✔️ | ✔️ |
-| Portoghese | ✔️ | ✔️ |
-| Punjabi | ✔️ | ✔️ |
-| Rumeno | ✔️ | ✔️ |
-| Russo | ✔️ | ✔️ |
+| Farsça (Afganistan) | ✔️ | ✔️ |
+| Lehçe | ✔️ | ✔️ |
+| Portekizce | ✔️ | ✔️ |
+| Pencapça | ✔️ | ✔️ |
+| Rumence | ✔️ | ✔️ |
+| Rusça | ✔️ | ✔️ |
 | Santali | ✔️ | ✔️ |
-| Serbo | ✔️ | ✔️ |
-| Sindhi | ✔️ | — |
-| Singalese | ✔️ | ✔️ |
-| Slovacco | ✔️ | ✔️ |
-| Sloveno | ✔️ | — |
-| Somalo | ✔️ | — |
-| Azerbaigiano meridionale | ✔️ | ✔️ |
-| Pashto meridionale | ✔️ | ✔️ |
-| Sotho del sud | ✔️ | — |
-| Spagnolo | ✔️ | ✔️ |
-| Arabo standard (caratteri arabi) | ✔️ | ✔️ |
-| Arabo standard (alfabeto latino) | ✔️ | ✔️ |
-| Lettone standard | ✔️ | ✔️ |
-| Malese standard | ✔️ | ✔️ |
-| Swahili (singola lingua) | ✔️ | — |
-| Swati | ✔️ | — |
-| Svedese | ✔️ | — |
-| Tagico | ✔️ | — |
-| Tamil | ✔️ | ✔️ |
-| Telugu | ✔️ | ✔️ |
-| Thailandese | ✔️ | — |
-| Tigrinya | ✔️ | — |
-| Albanese tosk | ✔️ | — |
-| Turco | ✔️ | ✔️ |
-| Uiguro | ✔️ | — |
-| Vietnamita | ✔️ | ✔️ |
+| Sırpça | ✔️ | ✔️ |
+| Sindice | ✔️ | — |
+| Seylanca | ✔️ | ✔️ |
+| Slovakça | ✔️ | ✔️ |
+| Slovence | ✔️ | — |
+| Somalice | ✔️ | — |
+| Güney Azerice | ✔️ | ✔️ |
+| Güney Peştucası | ✔️ | ✔️ |
+| Güney Sotho dili | ✔️ | — |
+| İspanyolca | ✔️ | ✔️ |
+| Standart Arapça (Arap alfabesi) | ✔️ | ✔️ |
+| Standart Arapça (Latin alfabesi) | ✔️ | ✔️ |
+| Standart Letonca | ✔️ | ✔️ |
+| Standart Malayca | ✔️ | ✔️ |
+| Svahili (bireysel dil) | ✔️ | — |
+| Swazi dili | ✔️ | — |
+| İsveççe | ✔️ | — |
+| Tacikçe | ✔️ | — |
+| Tamilce | ✔️ | ✔️ |
+| Telugu dili | ✔️ | ✔️ |
+| Tayca | ✔️ | — |
+| Tigrinyaca | ✔️ | — |
+| Tosk Arnavutçası | ✔️ | — |
+| Türkçe | ✔️ | ✔️ |
+| Uygurca | ✔️ | — |
+| Vietnamca | ✔️ | ✔️ |
 
-## Modelli supportati
+## Desteklenen modeller
 
-| Modello | Unico relatore | Più relatori | Progettazione vocale | Replica vocale |
+| Model | Tek konuşmacı | Birden fazla konuşmacı | Ses tasarımı | Ses kopyalama |
 | --- | --- | --- | --- | --- |
-| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it) (`gemini-3.8-flash-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it) (`gemini-3.8-flash-lite-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
-| [Anteprima di Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=it) | ✔️ | ✔️ | — | — |
-| [Gemini 2.5 Pro Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=it) | ✔️ | ✔️ | — | — |
+| [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr) (`gemini-3.8-flash-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr) (`gemini-3.8-flash-lite-tts`) | ✔️ | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash TTS Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=tr) | ✔️ | ✔️ | — | — |
+| [Gemini 2.5 Pro Önizleme TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=tr) | ✔️ | ✔️ | — | — |
 
-### Quando utilizzare un modello o l'altro
+### Hangi model ne zaman kullanılır?
 
-Entrambi i modelli Gemini 3.8 TTS condividono lo stesso schema dell'API e formato di prompt,
-consentendoti di passare da uno all'altro con una sola modifica del parametro:
+Her iki Gemini 3.8 TTS modeli de aynı API şemasını ve istem formatını kullanır. Bu sayede, tek bir parametre değişikliğiyle modeller arasında geçiş yapabilirsiniz:
 
-- **Utilizza [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it)
-  (`gemini-3.8-flash-tts`)** quando la massima fedeltà acustica, l'interpretazione ricca di sfumature
-  e il controllo espressivo sono la priorità assoluta. È ideale per lavori creativi di qualità professionale, dialoghi complessi tra più persone, tag di burst vocali pesanti, pronunce difficili, dialetti regionali o di minoranze e narrazioni di lunga durata che richiedono una stabilità assoluta della voce e del tono della stanza.
-- **Utilizza [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it)
-  (`gemini-3.8-flash-lite-tts`)** come sostituto rapido ed economico
-  di `gemini-3.1-flash-tts-preview`. È ottimizzato per
-  la produzione di grandi volumi, le cascate di agenti vocali conversazionali, le funzionalità di lettura
-  ad alta voce, la replica vocale affidabile e la sintesi vocale quotidiana con un solo oratore
-  nelle principali lingue.
+- Maksimum akustik doğruluk, nüanslı oyunculuk ve etkileyici kontrol en önemli öncelikler olduğunda **[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr) (`gemini-3.8-flash-tts`)** kullanın. Stüdyo kalitesinde yaratıcı çalışmalar, birden fazla konuşmacının yer aldığı karmaşık diyaloglar, yoğun ses patlaması etiketleri, zor telaffuzlar, bölgesel veya azınlık lehçeleri ve ses ile oda tonu kararlılığı gerektiren uzun anlatımlar için idealdir.
+- **`gemini-3.1-flash-tts-preview` yerine hızlı ve uygun maliyetli bir alternatif olarak [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr) (`gemini-3.8-flash-lite-tts`)** kullanın. Yüksek hacimli toplu üretim, etkileşimli sesli temsilci basamakları, sesli okuma özellikleri, güvenilir ses kopyalama ve büyük dillerde günlük tek hoparlörlü konuşma için optimize edilmiştir.
 
-### Guida alla migrazione
+### Geçiş rehberi
 
-Quando esegui l'upgrade dai modelli di anteprima precedenti (`gemini-3.1-flash-tts-preview` o
-`gemini-2.5-pro-preview-tts`) a Gemini 3.8 TTS (`gemini-3.8-flash-tts` o
-`gemini-3.8-flash-lite-tts`), esamina queste cinque modifiche chiave:
+Daha önceki önizleme modellerinden (`gemini-3.1-flash-tts-preview` veya `gemini-2.5-pro-preview-tts`) Gemini 3.8 TTS'ye (`gemini-3.8-flash-tts` veya `gemini-3.8-flash-lite-tts`) yükseltme yaparken aşağıdaki beş önemli değişikliği inceleyin:
 
-1. **Separa lo stile dalla trascrizione**:sposta le istruzioni relative a recitazione, tono, prosodia e ritmo (ad esempio `"whispering"`, `"out of breath"` o `"speaking slowly"`) dal testo normale a `speech_metadata.style`.
-   Mantieni `text` esattamente come la trascrizione letterale più i tag vocali incorporati.
-2. **Progetta le buyer persona in anticipo con la progettazione vocale**:sostituisci i blocchi di più paragrafi
-   `"Audio Profile"` o `"Director's Notes"` con una voce personalizzata creata
-   in [Progettazione vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it), quindi
-   trasporta l'ID `voice_...` nelle richieste TTS con stringhe `style` minime o vuote.
-3. **Utilizza turni di dialogo strutturati**:per i dialoghi con più interlocutori, passa un
-   `part` per turno di interlocutore con `speech_metadata.speaker` anziché incorporare
-   i prefissi `Speaker: ...` all'interno di un singolo blocco di testo.
-4. **Utilizza le parentesi angolari per i tag vocali incorporati:** utilizza le parentesi angolari (`<laugh>`,
-   `<sigh>`, `<cough>`, `<breath>`, `<short pause>`) per le vocalizzazioni e le pause umane
-   in un determinato momento. Evita tag di effetti sonori non vocali (come
-   applausi o tonfi).
-5. **Tieni conto dell'output WAV (`AUDIO_WAV`) predefinito nelle richieste unarie:** a differenza di
-   `gemini-3.1-flash-tts-preview` (che restituiva PCM non elaborato senza intestazione
-   `AUDIO_L16` per impostazione predefinita), i modelli Gemini 3.8 TTS restituiscono audio **WAV
-   (`AUDIO_WAV`)** completo con un'intestazione RIFF (24 kHz, mono, PCM a 16 bit) nelle
-   richieste unarie:
-   - Se in precedenza il tuo codice racchiudeva i byte PCM non elaborati in un'intestazione WAV (ad esempio utilizzando il modulo `wave` di Python o il pacchetto `wav` di Node), rimuovi il wrapper dell'intestazione manuale e scrivi i byte audio decodificati direttamente in un file `.wav`.
-   - Se la pipeline esistente richiede audio PCM non elaborato, mu-law o A-law senza intestazione, imposta esplicitamente `response_format.audio.mime_type` su `"AUDIO_L16"`, `"AUDIO_MULAW"` o `"AUDIO_ALAW"` (ad esempio, `{"response_format": {"audio": {"mime_type": "AUDIO_L16"}}}` in `generateContent` o `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` nell'API Interactions). Consulta
-     [Formati di uscita audio](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#audio-output-formats).
+1. **Stili transkriptten ayırma:** Sürekli oyunculuk, ton, prozodi ve tempolama talimatlarını (ör. `"whispering"`, `"out of breath"` veya `"speaking slowly"`) düz metinden çıkarıp `speech_metadata.style` içine taşıyın.
+   `text`, harfi harfine transkript ve satır içi ses etiketleri olarak kalmalıdır.
+2. **Ses tasarımını kullanarak önceden tasarım karakterleri oluşturma:** Çok paragraflı `"Audio Profile"` veya `"Director's Notes"` blokları, [Ses tasarımında](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr) oluşturulan özel bir sesle değiştirin. Ardından, `voice_...` kimliğini TTS isteklerinizde minimum veya boş `style` dizelerle kullanın.
+3. **Yapılandırılmış diyalog sıralarını kullanın:** Birden fazla konuşmacının olduğu diyaloglarda, `Speaker: ...` ön eklerini tek bir metin bloğuna yerleştirmek yerine `speech_metadata.speaker` ile her konuşmacı sırası için bir `part` iletin.
+4. **Satır içi vokal etiketleri için köşeli parantez kullanın:** Anlık insan sesleri ve duraklamalar için köşeli parantez (`<laugh>`, `<sigh>`, `<cough>`, `<breath>`, `<short pause>`) kullanın. Vokal olmayan ses efekti etiketlerinden (ör. alkış veya gümbürtü) kaçının.
+5. **Tekli isteklerde varsayılan WAV (`AUDIO_WAV`) çıkışını hesaba katın:** Varsayılan olarak başlıksız ham PCM `AUDIO_L16` döndüren `gemini-3.1-flash-tts-preview` modelinin aksine, Gemini 3.8 TTS modelleri tekli isteklerde RIFF başlığı (24 kHz, mono, 16 bit PCM) içeren tam **WAV (`AUDIO_WAV`)** ses döndürür:
+   - Kodunuz daha önce ham PCM baytlarını bir WAV başlığına sarmalıyorsa (örneğin, Python'un `wave` modülünü veya Node'un `wav` paketini kullanarak) manuel başlık sarmalayıcıyı kaldırın ve kodu çözülmüş ses baytlarını doğrudan bir `.wav` dosyasına yazın.
+   - Mevcut kanalınızın başlık içermeyen ham PCM, mu-law veya A-law ses gerektirmesi durumunda, REST API'yi kullanarak `generationConfig.responseFormat.audio.mimeType` değerini açıkça `"AUDIO_L16"`, `"AUDIO_MULAW"` veya `"AUDIO_ALAW"` olarak ayarlayın (ör. `generateContent` içinde `{"responseFormat": {"audio": {"mimeType": "AUDIO_L16"}}}`; `generateContent` üzerinde özel `responseFormat` geçersiz kılmaları REST API kullanılarak desteklenir. Python ve JavaScript SDK'nın `GenerateContentConfig` üzerinde `response_format` desteği henüz sağlanmamıştır. Alternatif olarak, Etkileşimler API'sinde `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` kullanın). [Ses çıkış biçimleri](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#audio-output-formats) bölümüne bakın.
 
-## Guida ai prompt
+## İstem yazma kılavuzu
 
-I modelli Gemini 3.8 TTS trattano il testo di input rigorosamente come una **trascrizione letterale**.
-A differenza dei modelli di anteprima precedenti in cui le indicazioni sceniche erano incorporate nel testo normale,
-la sintesi vocale di Gemini 3.8 separa le indicazioni di turno sostenute (`speech_metadata`)
-dai tag vocali incorporati puntuali.
+Gemini 3.8 TTS modelleri, giriş metnini kesinlikle **harfi harfine transkript** olarak ele alır.
+Sahne talimatlarının düz metne yerleştirildiği önceki önizleme modellerinin aksine, Gemini 3.8 TTS, sürekli dönüş seviyesindeki talimatları (`speech_metadata`) anlık satır içi sesli etiketlerden ayırır.
 
-### Campo Stile e tag in linea
+### Stil alanı ve satır içi etiketler karşılaştırması
 
-Dividi le istruzioni sul rendimento per ambito:
+Performans talimatlarınızı kapsama göre ayırın:
 
-- **Turn-level delivery (`speech_metadata.style`)**: inserisci gli attributi di delivery sostenuta, come emozione, prosodia, ritmo generale o stile di delivery (ad esempio `"whispering"`, `"out of breath"`, `"muttering"` o `"sarcastic"`), nel campo `style` di `speech_metadata`. Per creare un personaggio e
-  una performance stabili nel tempo, progetta la persona in anticipo in
-  [Progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) e utilizza
-  `style` solo per modifiche facoltative a livello di turno.
-- **Eventi puntuali (tag in linea):** inserisci brevi interruzioni vocali non verbali,
-  respiri o pause in linea all'interno della trascrizione utilizzando le parentesi angolari
-  (`<cough>`, `<breath>`, `<sigh>`, `<short pause>`). Utilizza le parentesi angolari
-  (`<...>`) per ottenere la massima qualità audio e concentrati sulle vocalizzazioni umane
-  anziché sugli effetti sonori non vocali.
+- **Sıra düzeyinde sunum (`speech_metadata.style`):** Duygu, prozodi, genel tempo veya sunum tarzı (ör. `"whispering"`, `"out of breath"`, `"muttering"` veya `"sarcastic"`) gibi sürekli sunum özelliklerini `speech_metadata` öğesinin `style` alanına ekleyin. Sıralar arasında tutarlı bir karakter ve performans oluşturmak için karakteri önceden [Ses tasarımı](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr) bölümünde tasarlayın ve `style` parametresini yalnızca isteğe bağlı sıra düzeyinde ayarlamalar için kullanın.
+- **Anlık etkinlikler (satır içi etiketler):** Konuşma dışı anlık ses patlamalarını, nefesleri veya duraklamaları köşeli parantez (`<cough>`, `<breath>`, `<sigh>`, `<short pause>`) kullanarak transkriptin içine satır içi olarak yerleştirin. En yüksek ses kalitesi için köşeli parantez (`<...>`) kullanın ve ses dışı ses efektleri yerine insan seslerini tercih edin.
 
-| Ambito | Dove posizionare | Esempi |
+| Kapsam | Nereye yerleştirilir? | Örnekler |
 | --- | --- | --- |
-| **Svolta per svolta** (mantenuta durante la svolta) | `speech_metadata.style` | `"angry tone"`, `"speaking rapidly"`, `"out of breath"`, `"whispers"`, `"sarcastic"` |
-| **Point-in-time** (si verifica in una parola specifica) | Inline in `text` (`<...>`) | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
+| **Tur düzeyi** (tur boyunca devam eder) | `speech_metadata.style` | `"angry tone"`, `"speaking rapidly"`, `"out of breath"`, `"whispers"`, `"sarcastic"` |
+| **Belirli bir noktada** (belirli bir kelimede gerçekleşir) | `text` (`<...>`) içinde satır içi | `"<cough> Thank you all for coming tonight! <throat-clearing> As I was saying..."` |
 
-### Pacing e pause
+### Tempo ve duraklamalar
 
-Puoi controllare il ritmo e il silenzio a tre livelli di granularità:
+Ritim ve sessizliği üç ayrıntı düzeyinde kontrol edebilirsiniz:
 
-- **Punteggiatura e puntini di sospensione**:utilizza virgole, trattini (`--`) e puntini di sospensione (`...`)
-  per simulare le esitazioni naturali di una conversazione.
-- **Tag di pausa in linea**:inserisci `<short pause>` o `<long pause>` nei punti esatti
-  del copione in cui un oratore deve fare una pausa:
+- **Noktalama işaretleri ve üç nokta:** Doğal bir konuşma duraksaması için virgül, tire (`--`) ve üç nokta (`...`) kullanın.
+- **Satır içi duraklatma etiketleri:** Konuşmacının duraklaması gereken noktalara `<short pause>` veya `<long pause>` etiketlerini ekleyin:
   `text
   Hold on, let me think... <short pause> Alright, I've got it.`
-- **Ritmo a livello di turno**:imposta `"style": "speaking rapidly"` o
-  `"style": "speaking slowly"` in `speech_metadata` per controllare la velocità
-  di pronuncia durante l'intero turno.
+- **Sıra düzeyinde hız:** Tüm sıra boyunca konuşma hızını kontrol etmek için `speech_metadata` içinde `"style": "speaking rapidly"` veya `"style": "speaking slowly"` değerini ayarlayın.
 
-### Prosodia e intonazione
+### Prosodi ve perde
 
-Utilizza **`speech_metadata.style`** per controllare la prosodia, il tono e l'inflessione in un turno (ad esempio, `"style": "high pitch, cheerful and excited inflection"` o `"style": "monotone and flat"`). Se l'emozione o la prosodia cambia a metà del dialogo, dividi il copione in turni separati con valori `style` distinti per ogni turno.
+Bir sıra boyunca prozodiyi, perdeyi ve tonlamayı kontrol etmek için **`speech_metadata.style`** kullanın (örneğin, `"style": "high pitch, cheerful and excited inflection"` veya `"style": "monotone and flat"`). Duygu veya prozodi diyalog sırasında değişirse senaryoyu her sıra için farklı `style` değerleri olan ayrı sıralara bölün.
 
-### Enfasi
+### Vurgu
 
-Metti in maiuscolo parole specifiche nella trascrizione, combinate con punteggiatura e tag vocali
-in linea, per enfatizzare naturalmente le parole chiave:
+Çeviri yazıda belirli kelimeleri büyük harfle yazın. Noktalama işaretleri ve satır içi vokal etiketleriyle birlikte kullanarak önemli kelimelere doğal bir vokal vurgu ekleyin:
 
 ```
 This is a VERY important point!
 It was a VERY long day <sigh> ... nobody listens anymore.
 ```
 
-### Esplosioni vocali e suoni non vocali
+### Ses patlamaları ve konuşma dışı sesler
 
-Inserisci le vocalizzazioni umane non verbali in linea utilizzando le parentesi angolari (`<...>`) nel punto esatto in cui deve verificarsi il suono. I tag vocali consigliati includono:
+Konuşma dışı insan seslerini, sesin duyulması gereken tam noktada köşeli parantez (`<...>`) kullanarak satır içine yerleştirin. Önerilen sesli etiketler şunlardır:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -741,73 +662,50 @@ Inserisci le vocalizzazioni umane non verbali in linea utilizzando le parentesi 
 | `<throat-clearing>` | `<tsk>` | `<whimper>` | `<whispers>`/`<whispering>` |
 | `<yawn>` | `<short pause>` | `<long pause>` |  |
 
-### Canali secondari e voci sovrapposte
+### Arka kanallar ve çakışan konuşma
 
-Nel dialogo tra più oratori, racchiudi le reazioni degli ascoltatori tra caratteri pipe
-(`|reaction|`) all'interno del turno di un oratore per creare backchannel naturali o
-sovrapposizioni di parlato senza interrompere un turno separato per reazione.
+Birden fazla konuşmacının olduğu diyaloglarda, dinleyicinin tepkilerini konuşmacının sırasının içinde dikey çizgi karakterleriyle (`|reaction|`) sarmalayarak her tepki için ayrı bir sıra oluşturmadan doğal geri bildirimler veya üst üste binen konuşmalar oluşturun.
 
-- **Scambi brevi nel backchannel**:inserisci brevi reazioni degli ascoltatori (`|oh hmm|`,
-  `|oh really?|`, `|absolutely|`) all'interno del turno dell'oratore attivo:
-  - **Turno 1 (Speaker A):** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
-  - **Turno 2 (Speaker B):** `"Ready enough |oh really?| The last blocker cleared this morning."`
-  - **Turno 3 (Speaker A):** `"Then let's ship it |absolutely| and watch the dashboards."`
-- **Discorso sovrapposto e alternato:** utilizza più segmenti di pipe per
-  simulare un discorso simultaneo o alternato tra due oratori (funziona meglio
-  con `gemini-3.8-flash-tts`):
-  - **Simultaneous countdown/chorus:** `"Let's surprise him on three |ok| ready?"` followed by `"one. two. three. |happy| happy |birthday| birthday!"`
-  - **Sovrapposizione completa degli speaker:** `"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
+- **Kısa geri bildirim alışverişleri:** Aktif konuşmacının sırası sırasında kısa dinleyici tepkilerini (`|oh hmm|`, `|oh really?|`, `|absolutely|`) katmanlayın:
+  - **1. tur (A konuşmacısı):** `"So the launch is Thursday |oh hmm| Are we actually ready?"`
+  - **2. sıra (B konuşmacısı):** `"Ready enough |oh really?| The last blocker cleared this morning."`
+  - **3. sıra (A konuşmacısı):** `"Then let's ship it |absolutely| and watch the dashboards."`
+- **Çakışan ve aralıklı konuşma:** İki konuşmacı arasındaki eşzamanlı veya aralıklı konuşmayı simüle etmek için birden fazla dikey çizgi segmenti kullanın (`gemini-3.8-flash-tts` ile en iyi şekilde çalışır):
+  - **Aynı anda geri sayım/koro:** `"Let's surprise him on three |ok| ready?"` ve `"one. two. three. |happy| happy |birthday| birthday!"`
+  - **Tam konuşmacı çakışması:** `"Hello |oh| there |my| it |goodness| must |gracious| be |would| almost |you| time |look| for |at that| dinner"`
 
-### Coerenza tra le generazioni e cosa evitare
+### Nesiller arasında tutarlılık ve kaçınılması gerekenler
 
-Segui queste linee guida per mantenere stabile l'identità vocale durante i turni:
+Ses kimliğinin sıralar arasında tutarlı kalmasını sağlamak için aşağıdaki yönergeleri uygulayın:
 
-- **Progetta le buyer persona in anticipo nella progettazione vocale anziché in lunghi blocchi di stile:**
-  i paragrafi `"Audio Profile"` in formato lungo e gli elenchi puntati multipli `"Director's Notes"`
-  riportati dai modelli precedenti sono la causa più comune di deriva della voce.
-  Utilizza la stessa intuizione creativa in anticipo nella
-  [progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) per generare una
-  persona `voice_...` personalizzata persistente, quindi riporta l'ID voce nelle tue
-  chiamate TTS.
-- **Affidati al riferimento vocale per la stabilità (ometti le metainstruzioni):**
-  I modelli TTS Gemini 3.8 sono addestrati ad ancorarsi prima al riferimento audio.
-  Non includere istruzioni che indicano al modello di mantenere la voce costante (ad esempio `"do not switch speaker identity"` o `"maintain identical timbre"`). Il testo del prompt aggiuntivo aumenta la deriva. Elimina le istruzioni di stile non necessarie e lascia che il modello vari naturalmente intorno al punto stabile fornito dal riferimento vocale.
-- **Non tentare di modificare le caratteristiche immutabili del relatore in `style`:** evita di inserire
-  cambiamenti di età, genere, nomi o accento permanenti in `speech_metadata.style`.
-  Scegli invece una voce regionale dalla raccolta di voci estese o creane una
-  con [Progettazione vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it).
+- **Uzun stil blokları yerine ses tasarımında karakterleri önceden tasarlayın:**
+  Önceki modellerden taşınan uzun `"Audio Profile"` paragraflar ve çok maddeli `"Director's Notes"`, ses kaymasının en yaygın nedenidir.
+  [Ses tasarımında](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr), aynı yaratıcı sezgiyi baştan kullanarak kalıcı bir özel `voice_...` karakter oluşturun, ardından bu ses kimliğini TTS çağrılarınızda kullanın.
+- **Kararlılık için ses referansını kullanma (meta talimatları atlama):**
+  Gemini 3.8 TTS modelleri, öncelikle ses referansını temel alacak şekilde eğitilmiştir.
+  Modele sesi sabit tutmasını söyleyen talimatlar (ör. `"do not switch speaker identity"` veya `"maintain identical timbre"`) eklemeyin. Ek istem metni, kaymayı artırır. Gereksiz stil talimatlarını bırakın ve modelin, ses referansıyla sağlanan sabit nokta etrafında doğal olarak değişmesine izin verin.
+- **`style` içinde değişmez konuşmacı özelliklerini değiştirmeye çalışmayın:** `speech_metadata.style` içine yaş, cinsiyet, ad veya kalıcı aksan değişiklikleri eklemeyin.
+  Bunun yerine, Genişletilmiş Ses Kitaplığı'ndan bölgesel bir ses seçin veya [Ses Tasarımı](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr) ile bir ses oluşturun.
 
-### Workflow consigliato
+### Önerilen iş akışı
 
-1. **Crea il personaggio una sola volta:** crea il tuo personaggio in
-   [Progettazione della voce](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it) o seleziona una
-   voce regionale dalla raccolta di voci estese che corrisponda alla lingua e alla personalità di destinazione.
-2. **Scrivi trascrizioni naturali con disfluenze**:per ottenere la massima naturalezza, scrivi il `text` come una vera trascrizione del parlato, includendo disfluenze e esitazioni naturali (ad esempio, `"Oh uh yeah I think... hm, so that's interesting"`).
-3. **Per prima cosa, prova la sintesi vocale standard:** sintetizza la trascrizione con un campo `style` vuoto. La maggior parte delle richieste non richiede alcuna istruzione `style`.
-4. **Aggiungi prompt brevi `style` solo per modifiche:** aggiungi una stringa `style` concisa
-   (ad esempio `"casual, friendly"` o `"muttering, then reassuring"`) solo per
-   i turni che richiedono una modifica specifica della pubblicazione e riutilizza la stessa stringa
-   breve nei vari turni quando vuoi una base di riferimento coerente.
+1. **Karakteri bir kez oluşturun:** Karakterinizi [Ses tasarımı](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr)'nda oluşturun veya Genişletilmiş Ses Kitaplığı'ndan hedef dilinize ve karakterinize uygun bölgesel bir ses seçin.
+2. **Konuşma hataları içeren doğal konuşma transkriptleri yazın:** Maksimum doğallık için `text`, doğal konuşma hataları ve tereddütler (örneğin, `"Oh uh yeah I think... hm, so that's interesting"`) içeren gerçek bir konuşma transkripti olarak yazılmalıdır.
+3. **Önce düz TTS'yi test edin:** Transkriptinizi önce boş bir `style` alanı ile sentezleyin. Çoğu istek için `style` talimatı gerekmez.
+4. **Yalnızca değişiklikler için kısa `style` istemleri ekleyin:** Yalnızca belirli bir sunum ayarlaması gerektiren sıralar için kısa bir `style` dizesi (ör. `"casual, friendly"` veya `"muttering, then reassuring"`) ekleyin ve tutarlı bir temel istediğinizde sıralar arasında tam olarak aynı kısa dizeyi yeniden kullanın.
 
-### Agenti vocali e di dialogo multi-turno
+### Çok turlu diyalog ve sesli ajanlar
 
-Quando crei agenti vocali conversazionali in tempo reale o applicazioni multi-turno:
+Anlık etkileşimli sesli temsilciler veya çok aşamalı etkileşim uygulamaları oluştururken:
 
-- Effettua **una chiamata TTS per turno** all'arrivo dei blocchi di testo LLM.
-- Consenti al `voice` configurato (predefinito, progettato `voice_...` o replicato
-  `voice_...` / `voicekey_...`) di mantenere l'identità dell'oratore durante i turni, senza
-  inviare di nuovo una persona con un lungo carattere a ogni turno.
-- Lascia vuoto il campo `style` per turno o invia una breve stringa costante
-  (ad esempio `"casual, friendly"`) per l'intera conversazione.
-- Dividi le risposte lunghe dell'agente in turni più brevi anziché ricorrere a prompt di stile più efficaci.
+- LLM metin parçaları geldikçe **sıra başına bir TTS çağrısı** yapın.
+- Yapılandırılmış `voice` (önceden oluşturulmuş, tasarlanmış `voice_...` veya kopyalanmış `voice_...` / `voicekey_...`), konuşmacının kimliğini her sırayla taşısın. Her sırada uzun bir karakter kişiliğini yeniden göndermeyin.
+- Sıra başına `style` alanını boş bırakın veya tüm görüşme için kısa ve sabit bir dize (ör. `"casual, friendly"`) gönderin.
+- Temsilcinin uzun yanıtlarını daha kısa bölümlere ayırın. Daha güçlü stil istemleri kullanmaya çalışmayın.
 
-## Generazione di sintesi vocale in streaming
+## Akış konuşması oluşturma
 
-Puoi riprodurre in streaming l'audio generato mentre viene sintetizzato dal modello. A differenza
-delle richieste unarie (che restituiscono un file WAV completo con un'intestazione RIFF),
-**le richieste di streaming restituiscono blocchi PCM lineari little-endian con segno a 16 bit non elaborati senza intestazione (`AUDIO_L16` / `audio/L16;codec=pcm;rate=24000`, 24 kHz, mono) per impostazione
-predefinita**, in modo che i blocchi audio possano essere riprodotti o concatenati continuamente senza
-intestazioni del contenitore:
+Oluşturulan ses, model tarafından sentezlenirken ses akışı yapabilirsiniz. Tekli isteklerin aksine (RIFF başlığıyla birlikte eksiksiz bir WAV dosyası döndürür), **akış istekleri varsayılan olarak başlık içermeyen ham 16 bit imzalı little-endian doğrusal PCM (`AUDIO_L16` / `audio/L16;codec=pcm;rate=24000`, 24 kHz, mono) parçaları döndürür**. Bu sayede ses parçaları, kapsayıcı başlıkları olmadan sürekli olarak oynatılabilir veya birleştirilebilir:
 
 ### Python
 
@@ -905,108 +803,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
     }'
 ```
 
-## Formati di uscita audio
+## Ses çıkışı biçimleri
 
-I modelli Gemini 3.8 TTS utilizzano formati audio predefiniti diversi a seconda che
-la richiesta sia unaria o di streaming:
+Gemini 3.8 TTS modelleri, isteğin tekli veya akışlı olmasına bağlı olarak farklı varsayılan ses formatları kullanır:
 
-- **Richieste unarie (`models.generate_content`)**: restituiscono audio **WAV
-  (`AUDIO_WAV`)** completo con un'intestazione RIFF (24 kHz, mono, PCM little-endian firmato a 16 bit). Puoi scrivere i byte audio decodificati direttamente in un file `.wav` senza aggiungere manualmente un contenitore WAV.
-- **Richieste di streaming (`models.generate_content_stream` / `streamGenerateContent`):**
-  restituisci blocchi **PCM lineare non elaborato senza intestazione (`AUDIO_L16`)** (24 kHz, mono,
-  PCM little-endian con segno a 16 bit) per impostazione predefinita, in modo che i blocchi possano essere trasmessi in streaming o
-  concatenati continuamente senza intestazioni del contenitore su ogni blocco.
+- **Tekli istekler (`models.generate_content`):** RIFF başlığına sahip (24 kHz, mono, 16 bit imzalı küçük endian PCM) eksiksiz **WAV (`AUDIO_WAV`)** sesini döndürür. Kodu çözülmüş ses baytlarını, manuel olarak WAV kapsayıcısı eklemeden doğrudan bir `.wav` dosyasına yazabilirsiniz.
+- **Yayın istekleri (`models.generate_content_stream` / `streamGenerateContent`):**
+  Parçaların her birinde kapsayıcı başlıkları olmadan sürekli olarak yayınlanabilmesi veya birleştirilebilmesi için varsayılan olarak **başlıksız ham Linear PCM (`AUDIO_L16`)** parçalarını (24 kHz, mono, 16 bit imzalı little-endian PCM) döndürün.
 
-Puoi sostituire la codifica audio di output e la frequenza di campionamento utilizzando
-`generationConfig.responseFormat.audio`:
+`generationConfig.responseFormat.audio` kullanarak çıkış ses kodlamasını ve örnek hızını geçersiz kılabilirsiniz:
 
-| Valore `mimeType` | Formato | Descrizione |
+| `mimeType` değer | Biçim | Açıklama |
 | --- | --- | --- |
-| `"AUDIO_WAV"` *(predefinito unario)* | WAV (`audio/wav`) | File WAV completo con un'intestazione RIFF (24 kHz, mono, PCM a 16 bit). |
-| `"AUDIO_L16"` *(predefinito per lo streaming)* | PCM lineare (`audio/l16`) | PCM lineare little-endian signed a 16 bit non elaborato senza intestazione. Ideale per lo streaming, le pipeline audio personalizzate o la concatenazione di clip multi-turn. |
-| `"AUDIO_MULAW"` | μ-law (`audio/basic` / `audio/mulaw`) | Audio compresso G.711 μ-law. Comunemente utilizzato nella telefonia nordamericana e giapponese (8 kHz). |
-| `"AUDIO_ALAW"` | A-law (`audio/alaw`) | Audio compresso G.711 A-law. Comunemente utilizzato nella telefonia europea e internazionale (8 kHz). |
+| `"AUDIO_WAV"` *(tekli varsayılan)* | WAV (`audio/wav`) | RIFF başlığı içeren tam WAV dosyası (24 kHz, mono, 16 bit PCM). |
+| `"AUDIO_L16"` *(varsayılan akış)* | Doğrusal PCM (`audio/l16`) | Başlıksız ham 16 bit imzalı little-endian doğrusal PCM. Yayın, özel ses işlem hatları veya çok turlu klipleri birleştirme için en iyisidir. |
+| `"AUDIO_MULAW"` | μ-law (`audio/basic` / `audio/mulaw`) | G.711 μ-law companded audio. Kuzey Amerika ve Japonya telefon sistemlerinde yaygın olarak kullanılır (8 kHz). |
+| `"AUDIO_ALAW"` | A-law (`audio/alaw`) | G.711 A-law sıkıştırılmış ses. Avrupa ve uluslararası telefon sistemlerinde yaygın olarak kullanılır (8 kHz). |
 
-Puoi anche specificare facoltativamente `sampleRate` (ad esempio, `24000`, `16000` o
-`8000` Hz; il valore predefinito è `24000` Hz).
+İsteğe bağlı olarak `sampleRate` da belirtebilirsiniz (ör. `24000`, `16000` veya `8000` Hz; varsayılan değer `24000` Hz'dir).
 
-L'esempio seguente richiede PCM a 16 bit non elaborato senza intestazione (`AUDIO_L16`) a
-24 kHz:
-
-### Python
-
-```
-from google import genai
-
-client = genai.Client()
-
-response = client.models.generate_content(
-    model="gemini-3.8-flash-tts",
-    contents=[{
-        "role": "user",
-        "parts": [{
-            "text": "Have a wonderful day!",
-            "speech_metadata": {"style": "cheerful and friendly"},
-        }],
-    }],
-    config={
-        "response_modalities": ["AUDIO"],
-        "response_format": {
-            "audio": {
-                "mime_type": "AUDIO_L16",
-                "sample_rate": 24000,
-            }
-        },
-        "speech_config": {
-            "voice_config": {"voice": "Kore"}
-        },
-    },
-)
-
-data = response.candidates[0].content.parts[0].inline_data.data
-with open("out.pcm", "wb") as f:
-    f.write(data)
-```
-
-### JavaScript
-
-```
-import {GoogleGenAI} from '@google/genai';
-import * as fs from 'node:fs';
-
-async function main() {
-   const ai = new GoogleGenAI({});
-
-   const response = await ai.models.generateContent({
-      model: 'gemini-3.8-flash-tts',
-      contents: [{
-         role: 'user',
-         parts: [{
-            text: 'Have a wonderful day!',
-            speechMetadata: { style: 'cheerful and friendly' },
-         }],
-      }],
-      config: {
-         responseModalities: ['AUDIO'],
-         responseFormat: {
-            audio: {
-               mimeType: 'AUDIO_L16',
-               sampleRate: 24000,
-            },
-         },
-         speechConfig: {
-            voiceConfig: { voice: 'Kore' },
-         },
-      },
-   });
-
-   const data = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-   const audioBuffer = Buffer.from(data, 'base64');
-
-   fs.writeFileSync('out.pcm', audioBuffer);
-}
-await main();
-```
+Aşağıdaki REST örneği, 24 kHz'de başlıksız ham 16 bit PCM (`AUDIO_L16`) ister:
 
 ### REST
 
@@ -1043,37 +859,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
           base64 --decode > out.pcm
 ```
 
-## Limitazioni
+## Sınırlamalar
 
-- I modelli TTS accettano input solo di testo e generano output solo audio.
-- La generazione multirelatore con una sola richiesta (`multiSpeakerVoiceConfig`) supporta
-  fino a 2 relatori che utilizzano voci predefinite. Per combinare voci progettate su misura
-  (`voice_...`) o replicate (`voice_...` / `voicekey_...`) in
-  un dialogo con più personaggi, sintetizza il turno di ogni oratore singolarmente.
-  Poiché le richieste unarie restituiscono `audio/wav` con un'intestazione RIFF di 44 byte per impostazione predefinita, richiedi PCM non elaborato (`AUDIO_L16`) o rimuovi l'intestazione WAV da ogni turno prima di concatenare i frame audio PCM a 24 kHz.
-- **Limiti di archiviazione e TTL della voce personalizzata:**
-  - **Voci con stato (`store=True`, richieste o replicate)**: massimo **200 voci per progetto** con un **TTL di 1 anno** (durata).
-  - **Chiavi vocali stateless (`store=False`, `voicekey_...`):** **TTL di 7 giorni**
-    (durata).
-- Consulta la sezione
-  [Lingue supportate](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=it#languages)
-  per informazioni sulla copertura linguistica.
+- TTS modelleri yalnızca metin girişlerini kabul eder ve yalnızca ses çıkışları üretir.
+- Tek istekte birden fazla konuşmacı için metin okuma (`multiSpeakerVoiceConfig`) özelliği, önceden oluşturulmuş sesleri kullanarak 2 konuşmacıyı destekler. Özel olarak tasarlanmış (`voice_...`) veya kopyalanmış (`voice_...` / `voicekey_...`) sesleri çok karakterli diyaloglarda birleştirmek için her konuşmacının sırasını ayrı ayrı sentezleyin.
+  Tekli istekler varsayılan olarak 44 baytlık RIFF başlığıyla `audio/wav` döndürdüğünden, 24 kHz PCM ses karelerini birleştirmeden önce ham PCM (`AUDIO_L16`) isteyin veya her sıradan WAV başlığını çıkarın.
+- **Özel ses depolama alanı sınırları ve TTL:**
+  - **Durumlu sesler (`store=True`, istemli veya kopyalanmış):** **1 yıllık TTL** (geçerlilik süresi) ile proje başına en fazla **200 ses**.
+  - **Durum bilgisi içermeyen ses anahtarları (`store=False`, `voicekey_...`):** **7 günlük geçerlilik süresi (TTL)**
+- Dil kapsamı için [Desteklenen diller](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=tr#languages) bölümünü inceleyin.
 
-## Passaggi successivi
+## Sırada ne var?
 
-- Crea personaggi vocali personalizzati a partire dal linguaggio naturale con
-  [Voice Design](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=it).
-- Replica la voce di un oratore esistente in
-  [Replica vocale](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=it).
-- Confronta le specifiche dei modelli nelle pagine dei modelli [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=it) e [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=it).
-- Esplora l'audio bidirezionale interattivo con l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it).
+- [Ses tasarımı](https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=tr) ile doğal dilden özel ses karakterleri oluşturun.
+- [Ses kopyalama](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=tr)'da mevcut bir konuşmacının sesini kopyalayın.
+- [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=tr) ve [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=tr) model sayfalarında model özelliklerini karşılaştırın.
+- [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) ile etkileşimli çift yönlü ses özelliğini keşfedin.
 
-Invia feedback
+Geri bildirim gönderin
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ultimo aggiornamento 2026-10-02 UTC.
+Son güncelleme tarihi: 2026-10-12 UTC.
 
-Vuoi dirci altro?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-02 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-12 UTC."],[],[]]

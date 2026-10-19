@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=th
-fetched_at: 2026-10-12T07:01:08.053101+00:00
-title: "\u0e01\u0e32\u0e23\u0e41\u0e1b\u0e25\u0e2a\u0e14\u0e14\u0e49\u0e27\u0e22 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=zh-CN
+fetched_at: 2026-10-19T05:58:19.450136+00:00
+title: "\u4f7f\u7528 Gemini Live API \u8fdb\u884c\u5b9e\u65f6\u7ffb\u8bd1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-ส่งความคิดเห็น
+发送反馈
 
-# การแปลสดด้วย Gemini Live API
+# 使用 Gemini Live API 进行实时翻译
 
-Gemini Live API รองรับการแปลคำพูดเป็นคำพูดแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำระหว่างภาษาต่างๆ กว่า 70 ภาษาโดยใช้โมเดล [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=th) การกำหนดค่า Live API ด้วยการตั้งค่าการแปลจะช่วยให้คุณสตรีมเสียงในภาษาหนึ่งและรับเอาต์พุตเสียงที่แปลแล้วในอีกภาษาหนึ่งได้ ซึ่งจะช่วยให้การแปลเสียงเป็นเสียงแบบเรียลไทม์เป็นไปอย่างราบรื่น
+Gemini Live API 支持使用 [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=zh-cn) 模型在 70 多种语言之间进行低延迟的实时语音翻译。通过使用翻译设置配置 Live API，您可以以一种语言流式传输音频，并以另一种语言接收翻译后的音频输出，从而实现无缝的实时语音翻译。
 
-[ลองใช้การแปลสดใน Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=th)
-[โคลนแอปตัวอย่างจาก GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[ใช้ทักษะของเอเจนต์การเขียนโค้ดterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=th#gemini-live-api-dev)
+[在 Google AI Studio 中试用实时翻译mic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=zh-cn)
+[从 GitHub 克隆示例应用code](https://github.com/google-gemini/gemini-live-api-examples)
+[使用编码代理技能terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-cn#gemini-live-api-dev)
 
-## เจ้าหน้าที่บริการลูกค้าเทียบกับการแปลสด
+## 人工客服与实时翻译
 
-แม้ว่าทั้ง 2 อย่างจะใช้ Live API แต่โมเดลทางความคิดสำหรับการแปลสดจะแตกต่างจากการโต้ตอบของเอเจนต์แบบเรียลไทม์ผ่านการสนทนา
+虽然两者都使用 Live API，但实时翻译的心理模型与对话式实时代理互动不同。
 
-| ตัวแทนแบบเรียลไทม์ | การแปลสด |
+| 人工客服 | 实时翻译 |
 | --- | --- |
-| **โมเดลจะทำหน้าที่เป็นผู้ช่วย** โดยจะรับฟัง ให้เหตุผล และดำเนินการในนามของคุณ | **โมเดลจะทำหน้าที่เป็นล่าม** โดยจะทำงานเป็นไปป์ไลน์การแปลแบบเรียลไทม์ |
-| **ใช้การโต้ตอบแบบผลัดกัน** ใช้การหยุดชั่วคราว การตรวจหาเจตนา และจัดการการหยุดชะงัก | **ใช้การประมวลผลสตรีมอย่างต่อเนื่อง** แปลขณะที่ผู้พูดพูดโดยไม่ต้องรอให้ถึงคิว |
-| **รองรับเครื่องมือและตัวแทน** รองรับการเรียกใช้ฟังก์ชัน, Google Search และคำสั่งโดยตรง | **รองรับการแปลเท่านั้น** การแปลที่มีเวลาในการตอบสนองต่ำอย่างแท้จริง โดยไม่มีการรองรับเครื่องมือหรือคำสั่ง |
-| **Multimodal อย่างเต็มรูปแบบ** รองรับอินพุตข้อความ เสียง วิดีโอ และรูปภาพ | **เสียงถูกจำกัด** โดยจะจำกัดเฉพาะเสียงเพื่อรักษาระดับเวลาในการตอบสนองแบบเรียลไทม์ที่เข้มงวด |
-| **การกำหนดค่าแบบละเอียด** ใช้คำสั่งการสร้าง คำสั่งเสียง เครื่องมือ และคำสั่งของระบบ | **การกำหนดค่าที่ง่ายขึ้น** ตั้งค่า `target_language_code` และเปิด/ปิด เช่น `echo_target_language` |
+| **模型充当助理。**它会倾听、推理并代表您采取行动。 | **模型充当翻译。**它的行为类似于实时翻译管道。 |
+| **使用基于轮流的互动。**依赖于暂停、意图检测和处理中断。 | **使用连续流处理。**在说话者说话时进行翻译，无需等待轮流。 |
+| **支持工具和代理。**原生支持函数调用、Google 搜索和说明。 | **仅支持翻译。**纯低延迟翻译；不支持工具或说明。 |
+| **完全多模态。**支持文本、音频、视频和图片输入。 | **音频受限。**输入仅限于音频，以确保严格的实时延迟阈值。 |
+| **精细配置。**使用生成、语音、工具和系统说明。 | **简化配置。**设置 `target_language_code` 和 `echo_target_language` 等切换开关。 |
 
-## เริ่มต้นใช้งาน
+## 开始使用
 
-ตัวอย่างต่อไปนี้แสดงวิธีเริ่มต้นไคลเอ็นต์และเชื่อมต่อกับ Live API ด้วยการกำหนดค่าการแปล
+以下示例演示了如何初始化客户端并使用翻译配置连接到 Live API。
 
 ### Python
 
@@ -185,15 +185,15 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## การส่งเสียง
+## 发送音频
 
-หากต้องการสตรีมอินพุตเสียงเพื่อการแปล ให้ส่งเสียง PCM แบบ 16 บิต, Little-Endian ที่ยังไม่ได้ประมวลผล
+如需流式传输语音输入以进行翻译，请发送原始的小端序 16 位 PCM 音频。
 
-- **รูปแบบเสียงอินพุต**: PCM แบบ 16 บิตดิบที่ 16 kHz (โมโน, Little-Endian)
-- **รูปแบบเสียงเอาต์พุต**: PCM แบบ 16 บิตดิบที่ 24 kHz (โมโน, Little-Endian)
-- **ขนาดกลุ่มและเวลาในการตอบสนอง**: ส่งเสียงเป็นกลุ่มขนาด 100 มิลลิวินาที
+- **输入音频格式**：原始 16 位 PCM，采样率 16kHz（单声道，小端序）。
+- **输出音频格式**：原始 16 位 PCM，采样率 24kHz（单声道，小端序）。
+- **块大小和延迟时间**：以 100 毫秒的块发送音频。
 
-ตัวอย่างต่อไปนี้แสดงวิธีส่งกลุ่มเสียงไปยังเซสชัน
+以下示例展示了如何向会话发送音频块。
 
 ### Python
 
@@ -238,23 +238,23 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## การกำหนดค่า
+## 配置
 
-หากต้องการเปิดใช้การแปล คุณต้องระบุ `translationConfig` ภายใน `generationConfig` ระหว่างการตั้งค่าเซสชัน
+如需启用翻译，您必须在会话设置期间在 `generationConfig` 中指定 `translationConfig`。
 
-### การกำหนดค่าข้อความเกี่ยวกับการตั้งค่า
+### 设置消息配置
 
-`generationConfig` รองรับฟิลด์ต่อไปนี้เพื่อเปิดใช้ข้อความถอดเสียง
+`generationConfig` 支持以下字段以启用转录：
 
-- **`inputAudioTranscription`**: ออบเจ็กต์ที่เมื่อมีอยู่จะช่วยให้โมเดลส่งข้อความถอดเสียงของเสียงที่ป้อนได้
-- **`outputAudioTranscription`**: ออบเจ็กต์ที่เมื่อมีอยู่จะช่วยให้โมเดลส่งข้อความถอดเสียงของเอาต์พุต (เสียงที่แปลแล้ว) ได้
+- **`inputAudioTranscription`**：一个对象，如果存在，则允许模型发送输入音频的文本转录。
+- **`outputAudioTranscription`**：一个对象，如果存在，则允许模型发送输出（翻译后的）音频的文本转录。
 
-`translationConfig` รองรับฟิลด์ต่อไปนี้
+`translationConfig` 支持以下字段：
 
-- **`targetLanguageCode`**: [รหัสภาษา BCP-47](#supported-languages) ของภาษาที่คุณต้องการให้โมเดลแปล (เช่น `"pl"` สำหรับภาษาโปแลนด์ `"es"` สำหรับภาษาสเปน) ค่าเริ่มต้นคือ `"en"`
-- **`echoTargetLanguage`**: บูลีนที่ระบุวิธีจัดการเสียงอินพุตที่เป็นภาษาเป้าหมายอยู่แล้ว หากตั้งค่าเป็น `true` โมเดลจะพูดตามเสียงที่ป้อนซึ่งเป็นภาษาเป้าหมายอยู่แล้ว หากตั้งค่าเป็น `false` โมเดลจะเงียบเมื่อเสียงพูดอินพุตเป็นภาษาเป้าหมายอยู่แล้ว ค่าเริ่มต้นคือ `false`
+- **`targetLanguageCode`**：您希望模型翻译成的语言的 [BCP-47 语言代码](#supported-languages)（例如，波兰语为 `"pl"`，西班牙语为 `"es"`）。默认值为 `"en"`。
+- **`echoTargetLanguage`**：一个布尔值，用于指示应如何处理已采用目标语言的输入音频。如果设置为 `true`，模型将回显（鹦鹉学舌）已采用目标语言的输入音频。如果设置为 `false`，当输入语音已采用目标语言时，模型将保持静默。默认值为 `false`。
 
-ตัวอย่างโครงสร้างข้อความการตั้งค่ามีดังนี้
+以下是设置消息结构的示例：
 
 ```
 "setup": {
@@ -273,19 +273,19 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## ใช้โทเค็นชั่วคราวในแอปพลิเคชันฝั่งไคลเอ็นต์
+## 在客户端应用中使用临时令牌
 
-สำหรับแอปพลิเคชันไคลเอ็นต์ต่อเซิร์ฟเวอร์ คุณสามารถใช้[โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th) (ปัจจุบันอยู่ใน`v1beta`) เพื่อหลีกเลี่ยงการเปิดเผยคีย์ API
+对于客户端到服务器的应用，您可以使用 [临时令牌](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=zh-cn)（目前为 `v1beta`）来避免公开您的 API 密钥。
 
-เมื่อใช้โทเค็นชั่วคราวกับการแปลสด ให้ทำดังนี้
+将临时令牌与实时翻译搭配使用时：
 
-1. คุณต้องใช้ปลายทาง `v1beta`
-2. **การกำหนดค่าการล็อก:** โดยค่าเริ่มต้น คุณควรกำหนด `translationConfig` ในข้อจำกัดการสร้างโทเค็นบนเซิร์ฟเวอร์ ซึ่งจะช่วยให้มั่นใจได้ว่าการกำหนดค่าการแปลจะล็อกไว้และไคลเอ็นต์จะแก้ไขไม่ได้
-3. **การกำหนดค่าการปลดล็อก:** หากต้องการตั้งค่า `translationConfig` ในฝั่งไคลเอ็นต์ (เช่น เพื่อให้ผู้ใช้เลือกภาษาเป้าหมายของตนเองได้) คุณต้องละเว้นค่านี้จากคำขอสร้างโทเค็นและตั้งค่า `"lock_additional_fields": []` แทน ซึ่งจะปลดล็อก `translationConfig` เพื่อตั้งค่าในฝั่งไคลเอ็นต์
+1. 您必须使用 `v1beta` 端点。
+2. **锁定配置** ：默认情况下，您应在服务器上的令牌创建限制条件中指定 `translationConfig`。这样可确保翻译配置被锁定，并且客户端无法篡改。
+3. **解锁配置**：如果您希望能够在客户端设置 `translationConfig`（例如，让用户选择自己的目标语言），则必须从令牌创建请求中省略该配置，并改为设置 `"lock_additional_fields": []`。这样会解锁 `translationConfig` 以在客户端设置。
 
-### สร้างโทเค็นชั่วคราวที่จำกัด
+### 创建受限的临时令牌
 
-ตัวอย่างต่อไปนี้แสดงวิธีสร้างโทเค็นชั่วคราวที่มีข้อจำกัดด้านการแปล
+以下示例演示了如何创建具有翻译限制条件的临时令牌。
 
 ### Python
 
@@ -366,74 +366,74 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-## ข้อจำกัด
+## 限制
 
-- **รูปแบบอินพุต**: รองรับเฉพาะอินพุตเสียงสำหรับการแปล ไม่รองรับการป้อนข้อความ
-- **การจำลองเสียง**: การจำลองเสียงอาจไม่สอดคล้องกัน เสียงอาจเปลี่ยนหลังจากหยุดพูดนานๆ ระบบอาจกำหนดเพศผิดตามวิธีที่เริ่มพูด หรืออาจใช้เสียงเดียวตลอดการสนทนาแบบหลายคนพูดอย่างรวดเร็ว
-- **การตรวจหาภาษา**: การตรวจหาภาษาอาจมีปัญหาเมื่อมีสำเนียงที่หนัก ภาษาที่คล้ายกัน (เช่น สเปนกับโปรตุเกส) หรือการเปลี่ยนภาษาอย่างรวดเร็ว **หมายเหตุ:** การดำเนินการนี้ควรส่งผลต่อเฉพาะข้อความถอดเสียงที่ป้อน รหัสภาษาและคำแปลสุดท้ายควรยังคงถูกต้อง
-- **เสียงเบื้องหลัง**: โมเดลได้รับการออกแบบมาเพื่อกรองเสียงรบกวนและเพลงออกเพื่อให้ได้เสียงพูดที่ชัดเจน แต่อาจไม่สามารถกรองเสียงเบื้องหลังบางอย่างได้
-- **ภาษาเป้าหมายของเสียงก้อง**: เมื่อ`echoTargetLanguage: true` เสียงรบกวนรอบข้างหรือเพลงอาจทำให้เกิดอาร์ติแฟกต์ในเสียงที่แปลเมื่อเสียงอินพุตเป็นภาษาเป้าหมายอยู่แล้ว
+- **输入模态**：翻译仅支持音频输入。不支持文本输入。
+- **语音复制**：语音复制可能不一致。语音可能会在长时间暂停后发生变化，根据语音的开头分配错误的性别，或者在快速的多说话者对话期间停留在一种语音上。
+- **语言检测**：语言检测难以处理重口音、相似语言（例如西班牙语与葡萄牙语）或快速语言切换。**注意** ：这只会影响输入转录。语言代码和最终翻译仍应准确无误。
+- **背景音频**：该模型旨在过滤掉噪声和音乐以生成清晰的语音，但并非所有背景音频都可能会被忽略。
+- **回显目标语言**：当 `echoTargetLanguage: true` 时，如果输入音频已采用目标语言，背景噪声或音乐可能会在翻译后的音频中引入伪影。
 
-## ภาษาที่รองรับ
+## 支持的语言
 
-ระบบรองรับการแปลสดในภาษาต่อไปนี้
+实时翻译支持以下语言。
 
-| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
+| 语言 | BCP-47 代码 | 语言 | BCP-47 代码 |
 | --- | --- | --- | --- |
-| แอฟริคานส์ | af | คาซัค | kk |
-| อะคัน | ak | เขมร | กม. |
-| แอลเบเนีย | sq | คินยารวันดา | rw |
-| อัมฮาริก | am | เกาหลี | ko |
-| อาหรับ | ar | ภาษาลาว | lo |
-| อาร์เมเนีย | hy | ลัตเวีย | lv |
-| อาร์เซอร์ไบจัน | az | ลิทัวเนีย | lt |
-| บาสก์ | eu | มาซีโดเนีย | mk |
-| เบลารุส | be | มาเลย์ | มิลลิวินาที |
-| เบงกอล | bn | มาลายาลัม | ml |
-| บัลแกเรีย | bg | มราฐี | mr |
-| พม่า (เมียนมา) | my | มองโกเลีย | mn |
-| คาตาลัน | ca | เนปาล | ne |
-| จีน (ตัวย่อ) | zh-Hans | นอร์เวย์ | no, nb |
-| จีน (ดั้งเดิม) | zh-Hant | เปอร์เซีย | fa |
-| โครเอเชีย | ชม. | โปแลนด์ | pl |
-| เช็ก | cs | โปรตุเกส (บราซิล) | pt-BR |
-| เดนมาร์ก | da | โปรตุเกส (โปรตุเกส) | pt-PT |
-| ดัตช์ | nl | ปัญจาบ | pa |
-| อังกฤษ | en | โรมาเนีย | ro |
-| เอสโตเนีย | et | รัสเซีย | ru |
-| ฟิลิปปินส์ | fil | เซอร์เบีย | sr |
-| ฟินแลนด์ | fi | สินธี | SD |
-| ฝรั่งเศส | fr | สิงหล | si |
-| กาลิเชียน | gl | สโลวัก | sk |
-| จอร์เจีย | ka | สโลวีเนีย | sl |
-| เยอรมัน | de | สเปน | es |
-| กรีก | el | ซุนดา | su |
-| คุชราต | gu | สวาฮิลี | sw |
-| เฮาซา | ha | สวีเดน | sv |
-| ฮีบรู | เขา | ทมิฬ | ta |
-| ฮินดี | hi | เตลูกู | te |
-| ฮังการี | hu | ไทย | th |
-| ไอซ์แลนด์ | is | ตุรกี | tr |
-| อินโดนีเซีย | id | ยูเครน | uk |
-| อิตาลี | it | อูรดู | ur |
-| ญี่ปุ่น | ja | อุซเบก | uz |
-| ชวา | jv | เวียดนาม | vi |
-| กันนาดา | kn | ซูลู | zu |
+| 南非荷兰语 | af | 哈萨克语 | kk |
+| Akan | ak | 高棉语 | km |
+| 阿尔巴尼亚语 | sq | 卢旺达语 | rw |
+| 阿姆哈拉语 | am | 韩语 | ko |
+| 阿拉伯语 | ar | 老挝语 | lo |
+| 亚美尼亚语 | hy | 拉脱维亚语 | lv |
+| 阿塞拜疆语 | az | 立陶宛语 | lt |
+| 巴斯克语 | eu | 马其顿语 | mk |
+| 白俄罗斯语 | be | 马来语 | ms |
+| 孟加拉语 | bn | 马拉雅拉姆语 | ml |
+| 保加利亚语 | bg | 马拉地语 | mr |
+| 缅甸语（缅甸） | my | 蒙古语 | mn |
+| 加泰罗尼亚语 | ca | 尼泊尔语 | ne |
+| 中文（简体） | zh-Hans | 挪威语 | no、nb |
+| 繁体中文 (台湾) | zh-Hant | 波斯语 | fa |
+| 克罗地亚语 | hr | 波兰语 | pl |
+| 捷克语 | cs | 葡萄牙语（巴西） | pt-BR |
+| 丹麦语 | da | 葡萄牙语（葡萄牙） | pt-PT |
+| 荷兰语 | nl | 旁遮普语 | pa |
+| 英语 | en | 罗马尼亚语 | ro |
+| 爱沙尼亚语 | et | 俄语 | ru |
+| 菲律宾语 | fil | 塞尔维亚语 | sr |
+| 芬兰语 | fi | 信德语 | sd |
+| 法语 | fr | 僧伽罗语 | si |
+| 加利西亚语 | gl | 斯洛伐克语 | sk |
+| 格鲁吉亚语 | ka | 斯洛文尼亚语 | sl |
+| 德语 | de | 西班牙语 | es |
+| 希腊语 | el | 巽他语 | su |
+| 古吉拉特语 | gu | 斯瓦希里语 | sw |
+| 豪萨语 | ha | 瑞典语 | sv |
+| 希伯来语 | he | 泰米尔语 | ta |
+| 印地语 | hi | 泰卢固语 | te |
+| 匈牙利语 | hu | 泰语 | th |
+| 冰岛语 | is | 土耳其语 | tr |
+| 印度尼西亚语 | id | 乌克兰语 | uk |
+| 意大利语 | it | 乌尔都语 | ur |
+| 日语 | ja | 乌兹别克语 | uz |
+| 爪哇语 | jv | 越南语 | vi |
+| 卡纳达语 | kn | 祖鲁语 | zu |
 
-## ขั้นตอนถัดไป
+## 后续步骤
 
-- อ่านคู่มือ[ความสามารถ](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=th)ของ Live API ฉบับเต็ม
-- อ่านคู่มือ[เริ่มต้นใช้งาน SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=th)
-- อ่านคู่มือ[เริ่มต้นใช้งาน WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=th)
-- อ่านคู่มือ[โทเค็นชั่วคราว](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=th)เพื่อดูการตรวจสอบสิทธิ์ที่ปลอดภัยในแอปพลิเคชันไคลเอ็นต์ต่อเซิร์ฟเวอร์
-- โคลน[ตัวอย่าง API ที่ใช้งานจริง](https://github.com/google-gemini/gemini-live-api-examples)จาก GitHub
+- 阅读完整的 Live API [功能](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-cn)指南。
+- 阅读 [SDK 使用入门](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-cn) 指南。
+- 阅读 [WebSocket 使用入门](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=zh-cn) 指南。
+- 阅读[临时令牌](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=zh-cn)指南，了解如何在客户端到服务器的应用中进行安全身份验证。
+- 从 GitHub 克隆 [Live API 示例](https://github.com/google-gemini/gemini-live-api-examples)。
 
-ส่งความคิดเห็น
+发送反馈
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-อัปเดตล่าสุด 2026-07-23 UTC
+最后更新时间 (UTC)：2026-07-23。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+需要向我们提供更多信息？
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-23 UTC"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-23。"],[],[]]

@@ -1,47 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=bn
-fetched_at: 2026-10-12T07:06:54.630158+00:00
-title: "\u09a1\u0995\u09c1\u09ae\u09c7\u09a8\u09cd\u099f \u09ac\u09cb\u099d\u09be \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=he
+fetched_at: 2026-10-19T05:35:50.844583+00:00
+title: "\u05d4\u05d1\u05e0\u05ea \u05de\u05e1\u05de\u05db\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-জেমিনি ৩.৮ ফ্ল্যাশ এখন পাওয়া যাচ্ছে। [ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=bn) ।
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-মতামত জানান
+שליחת משוב
 
-# ডকুমেন্ট বোঝা
+# הבנת מסמכים
 
-Gemini মডেল, সম্পূর্ণ ডকুমেন্টের প্রসঙ্গ বোঝার জন্য নেটিভ
-ভিশন ব্যবহার করে, PDF ফর্ম্যাটে ডকুমেন্ট প্রসেস করতে পারে। এটি শুধু টেক্সট এক্সট্র্যাক্ট করার
-চেয়ে অনেক বেশি কিছু করে, এর ফলে Gemini এগুলি করতে পারে:
+מודלים של Gemini יכולים לעבד מסמכים בפורמט PDF, באמצעות ראייה מובנית כדי להבין את ההקשרים של מסמכים שלמים. היכולת הזו חורגת ממיצוי טקסט בלבד, ומאפשרת ל-Gemini:
 
-- ১০০০ পৃষ্ঠা পর্যন্ত দীর্ঘ ডকুমেন্টের টেক্সট, ছবি, ডায়াগ্রাম,
-  চার্ট ও টেবিল সহ কন্টেন্ট বিশ্লেষণ ও ব্যাখ্যা করো।
-- [স্ট্রাকচার্ড আউটপুট](https://ai.google.dev/gemini-api/docs/structured-output?hl=bn) ফর্ম্যাটে তথ্য এক্সট্র্যাক্ট করা।
-- ডকুমেন্টে থাকা ভিজ্যুয়াল ও টেক্সচুয়াল এলিমেন্ট, দু'টির ভিত্তিতেই সারসংক্ষেপ তৈরি করা ও প্রশ্নের উত্তর দেওয়া
-  ।
-- ডকুমেন্টের কন্টেন্ট (যেমন, HTML-এ) ট্রান্সক্রাইব করা, লেআউট ও
-  ফর্ম্যাটিং বজায় রাখা, যাতে ডাউনস্ট্রিম অ্যাপ্লিকেশনে ব্যবহার করা যায়।
+- ניתוח ופירוש של תוכן, כולל טקסט, תמונות, דיאגרמות, תרשימים וטבלאות, גם במסמכים ארוכים של עד 1, 000 עמודים.
+- חילוץ מידע לפורמטים של [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
+- לסכם מסמכים ולענות על שאלות על סמך הרכיבים החזותיים והטקסטואליים שלהם.
+- תמלול תוכן המסמך (למשל ל-HTML), תוך שמירה על הפריסות והעיצוב, לשימוש באפליקציות במורד הזרם.
 
-আপনি একই পদ্ধতিতে PDF নয় এমন ডকুমেন্টও পাস করতে পারবেন, তবে Gemini সেগুলি
-সাধারণ টেক্সট হিসেবে দেখবে, যার ফলে চার্ট বা ফর্ম্যাটিংয়ের মতো প্রসঙ্গ বাদ পড়ে যাবে।
+אפשר גם להעביר מסמכים שאינם PDF באותו אופן, אבל Gemini יראה אותם כטקסט רגיל, ולכן לא יזהה הקשרים כמו תרשימים או עיצוב.
 
-## ইনলাইন PDF ডেটা পাস করা
+## העברת נתוני PDF בתוך השורה
 
-আপনি অনুরোধে ইনলাইন হিসেবে PDF ডেটা পাস করতে পারবেন। ছোট ডকুমেন্ট বা অস্থায়ী প্রসেসিংয়ের জন্য এটি সবচেয়ে
-উপযুক্ত, যেখানে পরবর্তী অনুরোধে আপনাকে ফাইলটি
-রেফার করার প্রয়োজন নেই। আমরা সাজেস্ট করি যে, একাধিক ইন্ট্যার‍্যাকশনের ক্ষেত্রে আপনাকে উল্লেখ করতে হবে এমন বড় ডকুমেন্ট
-[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=bn#large-pdfs)
-ব্যবহার করে আপলোড করুন। এর ফলে অনুরোধের লেটেন্সি কমে যাবে এবং ব্যান্ডউইথের ব্যবহারও কম হবে।
+אפשר להעביר נתוני PDF בשורה בבקשה. האפשרות הזו מתאימה במיוחד למסמכים קטנים או לעיבוד זמני שבו אין צורך להפנות לקובץ בבקשות הבאות. מומלץ להשתמש ב-[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=he#large-pdfs) למסמכים גדולים שצריך להתייחס אליהם באינטראקציות רב-שלביות, כדי לשפר את זמן האחזור של הבקשה ולהקטין את השימוש ברוחב הפס.
 
-কীভাবে ইনলাইন PDF ডেটা পাস করতে হয় তা নিম্নলিখিত উদাহরণ থেকে দেখুন:
+בדוגמה הבאה אפשר לראות איך מעבירים נתוני PDF בשורה:
 
 ### Python
 
@@ -69,7 +59,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -143,7 +133,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -223,7 +213,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-এছাড়াও, প্রসেস করার জন্য আপনি কোনও লোকাল পিডিএফ ফাইল আপলোড করতে পারেন:
+אפשר גם להעלות קובץ PDF מקומי לעיבוד:
 
 ### Python
 
@@ -244,7 +234,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -319,7 +309,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -422,15 +412,13 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-## Files API ব্যবহার করে PDF আপলোড করা
+## העלאת קובצי PDF באמצעות Files API
 
-আমরা সাজেস্ট করি যে আপনি বড় ফাইল বা একাধিক অনুরোধ জুড়ে কোনও
-ডকুমেন্ট আবার ব্যবহার করতে চাইলে Files API ব্যবহার করুন। এটি মডেল অনুরোধ থেকে ফাইল আপলোডকে আলাদা করে অনুরোধ লেটেন্সি উন্নত করে এবং
-ব্যান্ডউইথ ব্যবহার কমায়।
+מומלץ להשתמש ב-Files API לקבצים גדולים יותר או כשרוצים לעשות שימוש חוזר במסמך בכמה בקשות. הפעולה הזו משפרת את זמן האחזור של הבקשות ומצמצמת את השימוש ברוחב הפס, כי היא מפרידה בין העלאת הקובץ לבין בקשות המודל.
 
-### URL থেকে বড় পিডিএফ
+### קובצי PDF גדולים מכתובות URL
 
-URL থেকে বড় PDF ফাইল আপলোড ও প্রসেস করার প্রক্রিয়া সহজ করতে File API ব্যবহার করুন:
+אפשר להשתמש ב-File API כדי לפשט את ההעלאה והעיבוד של קובצי PDF גדולים מכתובות URL:
 
 ### Python
 
@@ -463,7 +451,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -568,7 +556,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -706,7 +694,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### স্থানীয়ভাবে সেভ করা বড় সাইজের পিডিএফ
+### קובצי PDF גדולים שמאוחסנים באופן מקומי
 
 ### Python
 
@@ -731,7 +719,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -820,7 +808,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -923,9 +911,8 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-আপনি যাচাই করতে পারবেন যে API আপলোড করা ফাইলটি সঠিকভাবে সেভ করেছে এবং [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=bn) কল করে এর
-মেটাডেটা পেতে পারবেন। শুধুমাত্র `name`
-(এবং এর সাথে সাথে `uri`) অনন্য।
+כדי לוודא שה-API שמר בהצלחה את הקובץ שהועלה ולקבל את המטא-נתונים שלו, אפשר לקרוא ל-[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=he). רק `name`
+(ובאופן כללי, `uri`) הם ייחודיים.
 
 ### Python
 
@@ -944,7 +931,7 @@ file_info = client.files.get(name=file.name)
 print(file_info.model_dump_json(indent=4))
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -991,7 +978,7 @@ File fileInfo = client.files.get(file.name().orElse(""), null);
 System.out.println(fileInfo.toJson());
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1044,10 +1031,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## একাধিক পিডিএফ পাস করা
+## העברת כמה קובצי PDF
 
-Gemini API একটি অনুরোধে একাধিক PDF ডকুমেন্ট (সর্বাধিক ১০০০ পৃষ্ঠা) প্রসেস করতে পারে, তবে ডকুমেন্ট ও টেক্সট
-প্রম্পটের সম্মিলিত সাইজ মডেলের কন্টেক্সট উইন্ডোর মধ্যে থাকতে হবে।
+‫Gemini API יכול לעבד כמה מסמכי PDF (עד 1,000 עמודים) בבקשה אחת, כל עוד הגודל המשולב של המסמכים וההנחיה הטקסטואלית לא חורג מחלון ההקשר של המודל.
 
 ### Python
 
@@ -1087,7 +1073,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1215,7 +1201,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### খুলুন
+### Go
 
 ```
 package main
@@ -1400,70 +1386,51 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## প্রযুক্তিগত বিবরণ
+## פרטים טכניים
 
-Gemini-তে সর্বাধিক ৫০ এমবি বা ১০০০ পৃষ্ঠা পর্যন্ত পিডিএফ ফাইল কাজ করে। ইনলাইন ডেটা ও Files API আপলোড, দু'টির ক্ষেত্রেই এই সীমা প্রযোজ্য। প্রতিটি ডকুমেন্ট পৃষ্ঠা ২৫৮টি
-টোকেনের সমান।
+‫Gemini תומך בקובצי PDF בגודל של עד 50MB או עד 1,000 עמודים. המגבלה הזו חלה על נתונים מוטבעים וגם על העלאות באמצעות Files API. כל דף במסמך שווה ל-258 טוקנים.
 
-মডেলের [কনটেক্সট উইন্ডো](https://ai.google.dev/gemini-api/docs/long-context?hl=bn) ছাড়া ডকুমেন্টের পিক্সেলের সংখ্যার কোনও নির্দিষ্ট সীমা না থাকলেও, বড় পৃষ্ঠাগুলি তাদের আসল
-অ্যাস্পেক্ট রেশিও বজায় রেখে সর্বাধিক ৩০৭২ x ৩০৭২ রেজোলিউশনে স্কেল ডাউন করা হয়, যেখানে ছোট পৃষ্ঠাগুলি ৭৬৮ x ৭৬৮ পিক্সেল পর্যন্ত স্কেল আপ করা হয়। কম সাইজের পৃষ্ঠার জন্য ব্যান্ডউইথ ছাড়া অন্য কোনও খরচ কমানো হয় না অথবা বেশি রেজোলিউশনের পৃষ্ঠার জন্য পারফর্ম্যান্স
-উন্নত করা হয় না।
+אין מגבלות ספציפיות על מספר הפיקסלים במסמך, מלבד [חלון ההקשר](https://ai.google.dev/gemini-api/docs/long-context?hl=he) של המודל. עם זאת, דפים גדולים יותר מצטמצמים לרזולוציה מקסימלית של ‎3072 x 3072 תוך שמירה על יחס הגובה-רוחב המקורי שלהם, ואילו דפים קטנים יותר מוגדלים לרזולוציה של ‎768 x 768 פיקסלים. אין הפחתה בעלויות של דפים בגדלים קטנים יותר, מלבד רוחב פס, או שיפור בביצועים של דפים ברזולוציה גבוהה יותר.
 
-### Gemini 3 মডেল
+### המודלים של Gemini 3
 
-Gemini 3,
-`media_resolution` প্যারামিটারের মাধ্যমে মাল্টিমোডাল ভিশন প্রসেসিংয়ের উপর গ্র্যানুলার কন্ট্রোল প্রদান করে। আপনি এখন প্রতিটি মিডিয়া পার্টের জন্য রেজোলিউশন কম, মাঝারি বা
-বেশি হিসেবে সেট করতে পারবেন। এটি যোগ করার ফলে, PDF
-ডকুমেন্ট প্রসেস করার পদ্ধতি আপডেট করা হয়েছে:
+‫Gemini 3 מציג שליטה מפורטת בעיבוד של ראייה מולטי-מודאלית באמצעות הפרמטר `media_resolution`. עכשיו אפשר להגדיר את הרזולוציה לנמוכה, בינונית או גבוהה לכל חלק מדיה בנפרד. בעקבות התוספת הזו, העיבוד של מסמכי PDF עודכן:
 
-1. **নেটিভ টেক্সট অন্তর্ভুক্ত করা:** পিডিএফের মধ্যে নেটিভ হিসেবে এম্বেড করা টেক্সট এক্সট্র্যাক্ট করা হয়
-   এবং মডেলকে প্রদান করা হয়।
-2. **বিলিং ও টোকেন সংক্রান্ত রিপোর্ট:**
-   - পিডিএফ থেকে এক্সট্র্যাক্ট করা
-     **নেটিভ টেক্সট** থেকে তৈরি টোকেনের জন্য আপনাকে **চার্জ করা হয় না**।
-   - API উত্তরের `usage_metadata` বিভাগে, PDF পৃষ্ঠা (ছবি হিসেবে) প্রসেস করে জেনারেট করা টোকেন
-     এখন `IMAGE`
-     মডালিটির অধীনে গণনা করা হয়, কিছু আগের ভার্সনের মতো আলাদা `DOCUMENT` মডালিটি হিসেবে
-     নয়।
+1. **הכללת טקסט חי:** טקסט שמוטמע באופן מקורי בקובץ ה-PDF מחולץ ומועבר למודל.
+2. **חיוב ודיווח על טוקנים:**
+   - **לא תחויבו** על טוקנים שמקורם ב**טקסט חי** שחולץ מקובצי PDF.
+   - בקטע `usage_metadata` בתגובה מה-API, טוקנים שנוצרו מעיבוד של דפי PDF (כתמונות) נספרים עכשיו בשיטת `IMAGE`, ולא בשיטה נפרדת `DOCUMENT` כמו בכמה גרסאות קודמות.
 
-মিডিয়া রেজোলিউশন প্যারামিটার সম্পর্কে আরও জানতে, [মিডিয়া রেজোলিউশন](https://ai.google.dev/gemini-api/docs/media-resolution?hl=bn) নির্দেশিকা দেখুন।
+פרטים נוספים על פרמטר הרזולוציה של המדיה זמינים במדריך בנושא [רזולוציה של מדיה](https://ai.google.dev/gemini-api/docs/media-resolution?hl=he).
 
-### ডকুমেন্টের ধরন
+### סוגי מסמכים
 
-টেকনিক্যালি, আপনি ডকুমেন্ট বোঝার জন্য অন্যান্য MIME টাইপ পাস করতে পারেন, যেমন
-TXT, Markdown, HTML, XML ইত্যাদি। তবে, ডকুমেন্ট ভিশন ***শুধুমাত্র অর্থপূর্ণভাবে
-PDF বোঝে***। অন্যান্য ধরনের ফাইল থেকে শুধু টেক্সট এক্সট্র্যাক্ট করা হবে এবং মডেল
-সেইসব ফাইলের রেন্ডারিংয়ে যা দেখা যায় তা বুঝতে পারবে না। চার্ট, ডায়াগ্রাম, HTML ট্যাগ, মার্কডাউন ফর্ম্যাটিং ইত্যাদি
-ফাইল-টাইপ নির্দিষ্ট তথ্য
-মুছে যাবে।
+מבחינה טכנית, אפשר להעביר סוגי MIME אחרים לניתוח מסמכים, כמו TXT,‏ Markdown,‏ HTML,‏ XML וכו'. עם זאת, ניתוח מסמכים ***מבין רק קובצי PDF***. סוגים אחרים יחולצו כטקסט בלבד, והמודל לא יוכל לפרש את מה שרואים בעיבוד של הקבצים האלה. כל הפרטים הספציפיים לסוג הקובץ, כמו תרשימים, דיאגרמות, תגי HTML, עיצוב Markdown וכו', יאבדו.
 
-অন্যান্য ফাইল ইনপুট পদ্ধতি সম্পর্কে জানতে, [ফাইল ইনপুট পদ্ধতি](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=bn) নির্দেশিকা দেখুন।
+מידע על שיטות אחרות להזנת קבצים זמין במדריך בנושא [שיטות להזנת קבצים](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=he).
 
-### পেশাদার পদ্ধতি
+### שיטות מומלצות
 
-সেরা ফলাফলের জন্য:
+לקבלת התוצאות הטובות ביותר:
 
-- আপলোড করার আগে পৃষ্ঠাগুলি সঠিক ওরিয়েন্টেশনে ঘোরান।
-- অস্পষ্ট পৃষ্ঠা এড়িয়ে চলুন।
-- একটি পৃষ্ঠা ব্যবহার করলে, পৃষ্ঠার পরে টেক্সট প্রম্পটটি রাখুন।
+- לפני ההעלאה, מסובבים את הדפים לכיוון הנכון.
+- לא כדאי להשתמש בדפים מטושטשים.
+- אם משתמשים בדף יחיד, צריך למקם את הנחיית הטקסט אחרי הדף.
 
-## এর পরে কী করতে হবে
+## המאמרים הבאים
 
-আরও জানতে, নিম্নলিখিত রিসোর্স দেখুন:
+מידע נוסף זמין במקורות המידע הבאים:
 
-- [ফাইল প্রম্পটিং স্ট্র্যাটেজি](https://ai.google.dev/gemini-api/docs/files?hl=bn#prompt-guide): Gemini API
-  টেক্সট, ছবি, অডিও ও ভিডিও ডেটা সহ প্রম্পটিং কাজ করে। এটি
-  মাল্টিমোডাল প্রম্পটিং নামেও পরিচিত।
-- [সিস্টেম নির্দেশাবলী](https://ai.google.dev/gemini-api/docs/text-generation?hl=bn#system-instructions):
-  সিস্টেম নির্দেশাবলী আপনাকে নিজের
-  নির্দিষ্ট প্রয়োজন ও ব্যবহারের ক্ষেত্রে মডেলের আচরণ নিয়ন্ত্রণ করতে দেয়।
+- [אסטרטגיות לפרומפטים של קבצים](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide): Gemini API תומך בפרומפטים עם נתונים של טקסט, תמונות, אודיו וסרטונים, שנקראים גם פרומפטים מולטי-מודאליים.
+- [הוראות למערכת](https://ai.google.dev/gemini-api/docs/text-generation?hl=he#system-instructions):
+  הוראות למערכת מאפשרות לכם לכוון את התנהגות המודל בהתאם לצרכים הספציפיים ולתרחישי השימוש שלכם.
 
-মতামত জানান
+שליחת משוב
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-2026-10-08 UTC-তে শেষবার আপডেট করা হয়েছে।
+עדכון אחרון: 2026-10-08 (שעון UTC).
 
-আমাদের আরও কিছু জানাতে চান?
+רוצה לתת לנו משוב?
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-08 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-08 (שעון UTC)."],[],[]]

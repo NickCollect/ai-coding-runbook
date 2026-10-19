@@ -1,69 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=sq
-fetched_at: 2026-10-12T06:58:41.677614+00:00
-title: "Ruajtja e kontekstit n\u00eb memorien specifike \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=ru
+fetched_at: 2026-10-19T05:42:50.897224+00:00
+title: "\u041a\u0435\u0448\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435 \u043a\u043e\u043d\u0442\u0435\u043a\u0441\u0442\u0430 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash është tani në dispozicion. [Provojeni](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=sq) .
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [Faqja kryesore](https://ai.google.dev/?hl=sq)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=sq)
-- [Dokumentet](https://ai.google.dev/gemini-api/docs/generate-content?hl=sq)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs/generate-content?hl=ru)
 
-Dërgo komente
+Отправить отзыв
 
-# Ruajtja e kontekstit në memorien specifike
+# Кеширование контекста
 
-Në një fluks tipik pune të IA-së, mund t'i kalosh të njëjtët kode hyrëse vazhdimisht te një model. Gemini API ofron dy mekanizma të ndryshëm të ruajtjes në memorien specifike:
+В типичном рабочем процессе с ИИ одни и те же входные токены могут передаваться модели многократно. Gemini API предлагает два разных механизма кеширования:
 
-- Ruajtja e fshehtë e të dhënave në mënyrë të nënkuptuar (aktivizuar automatikisht në Gemini 2.5 dhe modelet më të reja, pa garanci për kursimin e kostos)
-- Ruajtja e qartë në memorien specifike (mund të aktivizohet manualisht në shumicën e modeleve, garanci për kursim kostosh)
+- Неявное кеширование (автоматически включено в Gemini 2.5 и более новых моделях, экономия средств не гарантируется).
+- Явное кеширование (можно включить вручную в моделях Gemini 3 и 2.5, гарантирует экономию средств; не поддерживается в Gemini 4 Argon и более поздних версиях).
 
-Ruajtja e qartë në memorien specifike është e dobishme në rastet kur dëshiron të garantosh kursime kostosh,
-por me pak punë shtesë nga zhvilluesi.
+Явное кеширование полезно, когда вы хотите гарантированно снизить расходы, но при этом готовы к дополнительной работе по разработке.
 
-## Ruajtja e nënkuptuar në memorien specifike
+## Неявное кеширование
 
-Ruajtja e fshehtë e të dhënave është e aktivizuar si parazgjedhje për të gjitha modelet Gemini 2.5 dhe më të reja. Ne i kalojmë automatikisht
-kursimet e kostos nëse kërkesa jote arrin te memoriet specifike. Nuk ka asgjë që duhet të bësh për ta aktivizuar këtë. Numri minimal i kodeve hyrëse
-për ruajtjen në memorien specifike të kontekstit është listuar në tabelën e mëposhtme për secilin model:
+Неявное кеширование включено по умолчанию для всех моделей Gemini 2.5 и более новых. Если ваш запрос попадает в кеш, мы автоматически снижаем стоимость. Чтобы включить ее, ничего настраивать не нужно. В таблице ниже указано минимальное количество входных токенов для каждой модели.
 
-| Modeli | Kufiri minimal i tokenëve |
+| Модель | Минимальный лимит токенов |
 | --- | --- |
-| Gemini 3.8 Flash | 4,096 |
-| Gemini 3.6 Flash | 4,096 |
-| Gemini 3.1 Pro Preview | 4,096 |
-| Gemini 2.5 Flash | 2,048 |
-| Gemini 2.5 Pro | 2,048 |
+| Gemini 4 Argon | 4096 |
+| Gemini 3.8 Flash | 4096 |
+| Gemini 3.6 Flash | 4096 |
+| Gemini 3.1 Pro Preview | 4096 |
+| Gemini 2.5 Flash | 2048 |
+| Gemini 2.5 Pro | 2048 |
 
-Për të rritur mundësinë e një përputhjeje të nënkuptuar të memories specifike:
+Чтобы повысить вероятность неявного совпадения в кеше:
 
-- Provo të vendosësh përmbajtje të mëdha dhe të zakonshme në fillim të kërkesës sate
-- Provo të dërgosh kërkesa me prefiks të ngjashëm në një kohë të shkurtër
+- Попробуйте разместить в начале запроса крупные и распространенные объекты.
+- Попробуйте отправить запросы с похожим префиксом за короткий промежуток времени.
 
-Mund të shohësh numrin e kodeve që ishin goditje të memories specifike në fushën `usage_metadata` të objektit të përgjigjes.
+Количество токенов, которые были совпадением в кеше, можно посмотреть в поле `usage_metadata` объекта ответа.
 
-## Ruajtja specifike
+## Явное кеширование
 
-Duke përdorur veçorinë e ruajtjes specifike në memorien specifike të Gemini API, mund t'i kalosh disa përmbajtje te modeli një herë, të ruash në memorien specifike kodet hyrëse dhe më pas t'i referohesh kodeve të ruajtura në memorien specifike për kërkesat vijuese. Në vëllime të caktuara, përdorimi i kodeve të ruajtura në memorien specifike është me kosto më të ulët se kalimi i të njëjtit korpus kodësh në mënyrë të përsëritur.
+С помощью функции явного кеширования Gemini API вы можете передать модели определенный контент один раз, кешировать входные токены, а затем ссылаться на них в последующих запросах. При определенных объемах использование кешированных токенов обходится дешевле, чем многократная передача одного и того же корпуса токенов.
 
-Kur ruan në memorien specifike një grup token-ësh, mund të zgjedhësh se për sa kohë dëshiron që të ekzistojë memoria specifike para se token-at të fshihen automatikisht. Kjo kohëzgjatje e ruajtjes në memorien specifike quhet *kohëzgjatja e jetës* (TTL). Nëse nuk caktohet, TTL-ja është si parazgjedhje 1 orë. Kostoja për ruajtjen në memorien specifike varet nga madhësia e kodit hyrës dhe për sa kohë dëshiron që të ruhen kodet.
+При кешировании набора токенов можно указать, как долго должен существовать кеш, прежде чем токены будут автоматически удалены. Время, в течение которого данные хранятся в кеше, называется *временем жизни* (TTL). Если значение не задано, по умолчанию используется 1 час. Стоимость кеширования зависит от размера входного токена и того, как долго вы хотите хранить токены.
 
-Ky seksion supozon se ke instaluar një Gemini SDK (ose ke të instaluar curl) dhe se ke konfiguruar një çelës API, siç tregohet në
-[Udhëzuesin e fillimit](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=sq).
+В этом разделе предполагается, что вы установили Gemini SDK (или curl) и настроили ключ API, как описано в [руководстве по началу работы](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru).
 
-### Gjenero përmbajtje duke përdorur një memorie specifike
+### Как генерировать контент с помощью кеша
 
 ### Python
 
-Shembulli i mëposhtëm tregon se si të gjenerosh përmbajtje duke përdorur një udhëzim të sistemit në memorien specifike dhe një skedar video.
+В следующем примере показано, как генерировать контент с помощью кэшированной системной инструкции и видеофайла.
 
-### Videot
+### Видео
 
 ```
 import os
@@ -122,7 +119,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### Skedarë PDF
+### Файлы PDF
 
 ```
 from google import genai
@@ -170,8 +167,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Shembulli i mëposhtëm tregon se si të gjenerosh përmbajtje duke përdorur një udhëzim të sistemit të ruajtur në memorien specifike
-dhe një skedar teksti.
+В следующем примере показано, как генерировать контент с помощью кэшированной системной инструкции и текстового файла.
 
 ```
 import {
@@ -210,9 +206,9 @@ async function main() {
 await main();
 ```
 
-### Go
+### Проложить маршрут
 
-Shembulli i mëposhtëm tregon se si të gjenerosh përmbajtje duke përdorur një memorie specifike.
+В следующем примере показано, как генерировать контент с помощью кеша.
 
 ```
 package main
@@ -280,11 +276,11 @@ func main() {
 }
 ```
 
-### QETËSI
+### REST
 
-Shembulli i mëposhtëm tregon se si të krijosh një memorie specifike dhe më pas ta përdorësh atë për të gjeneruar përmbajtje.
+В примере ниже показано, как создать кеш и использовать его для генерации контента.
 
-### Videot
+### Видео
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -335,7 +331,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
     }'
 ```
 
-### Skedarë PDF
+### Файлы PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -433,20 +429,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Listo memoriet specifike
+### Список кешей
 
-Nuk është e mundur të marrësh ose të shikosh përmbajtjet e ruajtura në memorien specifike, por mund të marrësh metadata të memories specifike (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` dhe `expire_time`).
+Получить или посмотреть кешированный контент нельзя, но можно получить метаданные кеша (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` и `expire_time`).
 
 ### Python
 
-Për të listuar metadatat për të gjitha memoriet e ngarkuara të përkohshme, përdor `CachedContent.list()`:
+Чтобы получить список метаданных для всех загруженных кешей, используйте команду `CachedContent.list()`:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Për të marrë metadatat për një objekt të memories specifike, nëse e di emrin e tij, përdor `get`:
+Чтобы получить метаданные для одного объекта кеша, если вы знаете его название, используйте `get`:
 
 ```
 client.caches.get(name=name)
@@ -454,7 +450,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Për të listuar metadatat për të gjitha memoriet e ngarkuara të përkohshme, përdor `GoogleGenAI.caches.list()`:
+Чтобы получить метаданные всех загруженных кешей, используйте `GoogleGenAI.caches.list()`:
 
 ```
 console.log("My caches:");
@@ -469,9 +465,9 @@ while (true) {
 }
 ```
 
-### Go
+### Проложить маршрут
 
-Shembulli i mëposhtëm liston të gjitha memoriet specifike.
+В следующем примере перечислены все кеши.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -484,7 +480,7 @@ for _, item := range caches {
 }
 ```
 
-Shembulli i mëposhtëm liston memoriet specifike duke përdorur një madhësi faqeje prej 2.
+В следующем примере перечислены кеши с размером страницы 2.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -511,20 +507,19 @@ for {
 }
 ```
 
-### QETËSI
+### REST
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Përditëso një memorie specifike
+### Обновление кеша
 
-Mund të caktosh një `ttl` ose `expire_time` të ri për një memorie specifike. Ndryshimi i çdo gjëje tjetër
-në lidhje me memorien specifike nuk mbështetet.
+Вы можете задать новое значение `ttl` или `expire_time` для кеша. Другие изменения кеша не поддерживаются.
 
 ### Python
 
-Shembulli i mëposhtëm tregon se si të përditësosh `ttl` të një memorie specifike duke përdorur `client.caches.update()`.
+В примере ниже показано, как обновить `ttl` кеша с помощью `client.caches.update()`.
 
 ```
 from google import genai
@@ -538,7 +533,7 @@ client.caches.update(
 )
 ```
 
-Për të caktuar kohën e skadimit, ajo pranon ose një objekt `datetime` ose një varg datë-ore të formatuar në ISO (`dt.isoformat()`, si p.sh. `2025-01-27T16:02:36.473528+00:00`). Ora jote duhet të përfshijë një brez orar (`datetime.utcnow()` nuk bashkëngjit një brez orar, `datetime.now(datetime.timezone.utc)` bashkëngjit një brez orar).
+Чтобы задать срок действия, можно использовать объект `datetime` или строку даты и времени в формате ISO (`dt.isoformat()`, например `2025-01-27T16:02:36.473528+00:00`). Необходимо указать часовой пояс (`datetime.utcnow()` не добавляет часовой пояс, а `datetime.now(datetime.timezone.utc)` – добавляет).
 
 ```
 from google import genai
@@ -558,7 +553,7 @@ client.caches.update(
 
 ### JavaScript
 
-Shembulli i mëposhtëm tregon se si të përditësosh `ttl` të një memorie specifike duke përdorur `GoogleGenAI.caches.update()`.
+В следующем примере показано, как обновить `ttl` кеша с помощью `GoogleGenAI.caches.update()`.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -569,9 +564,9 @@ const updatedCache = await ai.caches.update({
 console.log("After update (TTL):", updatedCache);
 ```
 
-### Go
+### Проложить маршрут
 
-Shembulli i mëposhtëm tregon se si të përditësosh `TTL` të një memorie specifike.
+В примере ниже показано, как обновить `TTL` кеша.
 
 ```
 // Update the TTL (2 hours).
@@ -585,9 +580,9 @@ fmt.Println("After update:")
 fmt.Println(cache)
 ```
 
-### QETËSI
+### REST
 
-Shembulli i mëposhtëm tregon se si të përditësosh `ttl` të një memorie specifike.
+В следующем примере показано, как обновить `ttl` кеша.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -595,9 +590,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Fshi një memorie specifike
+### Как удалить кеш
 
-Shërbimi i ruajtjes në memorien specifike ofron një operacion fshirjeje për heqjen manuale të përmbajtjeve nga memoria specifike. Shembulli i mëposhtëm tregon se si të fshish një memorie specifike:
+Сервис кеширования предоставляет операцию удаления для удаления контента из кеша вручную. В следующем примере показано, как удалить кеш:
 
 ### Python
 
@@ -611,7 +606,7 @@ client.caches.delete(cache.name)
 await ai.caches.delete({ name: cache.name });
 ```
 
-### Go
+### Проложить маршрут
 
 ```
 _, err = client.Caches.Delete(ctx, cache.Name, &genai.DeleteCachedContentConfig{})
@@ -621,58 +616,50 @@ if err != nil {
 fmt.Println("Cache deleted:", cache.Name)
 ```
 
-### QETËSI
+### REST
 
 ```
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Ruajtja e qartë në memorien specifike duke përdorur bibliotekën e OpenAI
+### Явное кеширование с помощью библиотеки OpenAI
 
-Nëse po përdor një [bibliotekë të OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=sq), mund të aktivizosh
-ruajtjen në memorien specifike duke përdorur karakteristikën `cached_content` në
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=sq#extra-body).
+Если вы используете [библиотеку OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ru), то можете включить явное кеширование с помощью свойства `cached_content` в [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=ru#extra-body).
 
-## Kur të përdorësh ruajtjen e qartë në memorien specifike
+## Когда использовать явное кеширование
 
-Ruajtja në memorien specifike e kontekstit është veçanërisht e përshtatshme për skenarët ku një kontekst fillestar i konsiderueshëm referohet në mënyrë të përsëritur nga kërkesa më të shkurtra. Ki parasysh të përdorësh
-ruajtjen në memorien specifike për raste përdorimi si:
+Кеширование контекста особенно хорошо подходит для сценариев, в которых на существенный начальный контекст неоднократно ссылаются более короткие запросы. Кеширование контекста можно использовать в следующих случаях:
 
-- Robotët e bisedës me [udhëzime të gjera të sistemit](https://ai.google.dev/gemini-api/docs/system-instructions?hl=sq)
-- Analiza e përsëritur e skedarëve të gjatë të videove
-- Kërkesa të përsëritura ndaj grupeve të mëdha të dokumenteve
-- Analiza e shpeshtë e depos së kodeve ose rregullimi i defekteve
+- Чат-боты с подробными [системными инструкциями](https://ai.google.dev/gemini-api/docs/system-instructions?hl=ru)
+- Повторяющийся анализ длинных видеофайлов
+- Повторяющиеся запросы к большим наборам документов
+- Частый анализ репозитория кода или исправление ошибок
 
-### Si e zvogëlon kostot ruajtja e përmbajtjeve të qarta në memorien specifike
+### Как явное кеширование помогает снизить расходы
 
-Ruajtja në memorien specifike e kontekstit është një veçori me pagesë e projektuar për të zvogëluar koston. Faturimi bazohet në faktorët e mëposhtëm:
+Кеширование контекста – это платная функция, которая позволяет снизить расходы. Стоимость услуг зависит от следующих факторов:
 
-1. **Numri i tokenëve të memories specifike:** Numri i tokenëve të hyrjes të ruajtur në memorien specifike, të faturuar me një tarifë të
-   reduktuar kur përfshihen në kërkesat e mëvonshme.
-2. **Kohëzgjatja e ruajtjes:** Koha për të cilën ruhen kodet e ruajtura në memorien specifike (TTL),
-   fakturohet bazuar në kohëzgjatjen TTL të numrit të kodeve të ruajtura në memorien specifike. Nuk ka kufij minimalë
-   ose maksimalë për TTL-në.
-3. **Faktorë të tjerë:** Zbatohen tarifa të tjera, si p.sh. për tokenat e hyrjes dhe daljes që nuk janë në memorien specifike.
+1. **Количество токенов в кеше.** Число токенов ввода, которые были закешированы и при использовании в последующих запросах оплачиваются по сниженной цене.
+2. **Продолжительность хранения.** Время, в течение которого хранятся кешированные токены (TTL). Плата взимается в зависимости от TTL количества кешированных токенов. Минимальных и максимальных ограничений для TTL нет.
+3. **Другие факторы.** Применяются другие тарифы, например за некешированные входные и выходные токены.
 
-Për detaje të përditësuara të çmimeve, referoju [faqes së çmimeve
-të Gemini API](https://ai.google.dev/pricing?hl=sq). Për të mësuar se si të numërosh kodet, shiko [Udhëzuesin e kodeve](https://ai.google.dev/gemini-api/docs/tokens?hl=sq).
+Актуальную информацию о ценах можно найти на [странице Gemini API](https://ai.google.dev/pricing?hl=ru). Чтобы узнать, как подсчитывать токены, ознакомьтесь с [руководством по токенам](https://ai.google.dev/gemini-api/docs/tokens?hl=ru).
 
-### Të tjera për t'u marrë parasysh
+### В видео есть другие нарушения?
 
-Ki parasysh konsideratat e mëposhtme kur përdor ruajtjen në memorien specifike të kontekstit:
+При использовании кеширования контекста учитывайте следующее:
 
-- Numri *minimal* i kodeve hyrëse për ruajtjen e kontekstit në memorien specifike ndryshon sipas modelit. *Maksimumi*
-  është i njëjtë me maksimumin për modelin e dhënë. (Për më shumë rreth numërimit të kodeve, shiko [Udhëzuesin e kodeve](https://ai.google.dev/gemini-api/docs/tokens?hl=sq)).
-- Modeli nuk bën asnjë dallim midis kodeve të ruajtura në memorien specifike dhe kodeve të rregullta të hyrjes. Përmbajtja e ruajtur në memorien specifike është një prefiks për kërkesën.
-- Nuk ka kufij të veçantë të normës ose përdorimit për ruajtjen në memorien specifike të kontekstit; zbatohen kufijtë standardë të normës për `GenerateContent` dhe kufijtë e kodeve përfshijnë kodet e ruajtura në memorien specifike.
-- Numri i kodeve të ruajtura në memorien specifike kthehet në `usage_metadata` nga veprimet e krijimit, marrjes dhe listimit të shërbimit të memories specifike, si dhe në `GenerateContent` kur përdoret memoria specifike.
+- *Минимальное* количество входных токенов для кеширования контекста зависит от модели. *Максимальное значение* совпадает с максимальным значением для данной модели. Подробнее о том, [как подсчитываются токены](https://ai.google.dev/gemini-api/docs/tokens?hl=ru)…
+- Модель не делает различий между кешированными и обычными входными токенами. Кешированный контент – это префикс запроса.
+- Для кеширования контекста не предусмотрено специальных ограничений на частоту запросов или использование. Действуют стандартные ограничения на частоту запросов для `GenerateContent`, а ограничения на количество токенов включают кешированные токены.
+- Количество кешированных токенов возвращается в поле `usage_metadata` при выполнении операций создания, получения и вывода списка в сервисе кеширования, а также в поле `GenerateContent` при использовании кеша.
 
-Dërgo komente
+Отправить отзыв
 
-Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-Përditësimi i fundit: 2026-10-09 UTC.
+Последнее обновление: 2026-10-13 UTC.
 
-Duhet të na tregosh më shumë?
+Хотите рассказать подробнее?
 
-[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-09 UTC."],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-13 UTC."],[],[]]

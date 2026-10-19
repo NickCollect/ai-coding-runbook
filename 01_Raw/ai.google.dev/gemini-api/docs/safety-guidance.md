@@ -1,141 +1,125 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja
-fetched_at: 2026-10-12T06:54:50.586819+00:00
-title: "\u5b89\u5168\u6027\u3068\u4e8b\u5b9f\u6027\u306b\u95a2\u3059\u308b\u30ac\u30a4\u30c0\u30f3\u30b9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pt-BR
+fetched_at: 2026-10-19T05:43:10.606583+00:00
+title: "Orienta\u00e7\u00f5es sobre seguran\u00e7a e veracidade \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# 安全性と事実性に関するガイダンス
+# Orientações sobre segurança e veracidade
 
-生成 AI モデルは強力なツールですが、制限がないわけではありません。汎用性と適用性により、不正確、偏見のある、不適切な出力など、予期しない出力が生成されることがあります。このような出力による危害のリスクを抑えるには、後処理と厳格な手動評価が不可欠です。
+Os modelos de inteligência artificial generativa são ferramentas poderosas, mas têm limitações. A versatilidade e a aplicabilidade delas podem levar a resultados inesperados, como respostas imprecisas, tendenciosas ou ofensivas. O pós-processamento e a avaliação manual rigorosa são essenciais para limitar o risco de danos causados por essas respostas.
 
-Gemini API で提供されるモデルは、さまざまな生成 AI アプリケーションや自然言語処理（NLP）アプリケーションに使用できます。これらの
-機能は、Gemini API または Google AI Studio ウェブ
-アプリでのみ使用できます。Gemini API の使用には、[生成 AI の使用禁止に関する
-ポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)と
-[Gemini API の利用規約](https://ai.google.dev/terms?hl=ja)も適用されます。
+Os modelos fornecidos pela API Gemini podem ser usados em uma ampla variedade de aplicativos de IA generativa e processamento de linguagem natural (PLN). O uso dessas funções só está disponível na API Gemini ou no web app Google AI Studio. O uso da API Gemini também está sujeito à [Política de uso proibido da IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br) e aos [Termos de Serviço da API Gemini](https://ai.google.dev/terms?hl=pt-br).
 
-大規模言語モデル（LLM）が非常に有用な理由の一つは、さまざまな言語タスクに対応できるクリエイティブなツールであることです。残念ながら、大規模言語モデルでは、不適切なテキスト、配慮に欠けるテキスト、事実と異なるテキストなど、予期しない出力が生成される場合があります。
-さらに、これらのモデルには驚くべき汎用性があるため、生成される可能性のある望ましくない出力を正確に予測することも難しくなっています。[Gemini API は Google の AI の原則を念頭に置いて設計されていますが、これらのモデルを責任を持って適用するのはデベロッパーの責任です。](https://ai.google/principles/?hl=ja)安全で責任あるアプリケーションの作成をデベロッパーが支援できるよう、Gemini API には、組み込みのコンテンツ フィルタリングと、4 つの有害性の側面で調整可能な安全性設定が用意されています。詳細については、
-[安全性設定](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)ガイドをご覧ください。また、Google 検索によるグラウンディングを有効にして事実性を向上させることもできます。ただし、ユースケースがよりクリエイティブで、情報収集を目的としないデベロッパーの場合は、この機能を無効にできます。
+Parte do que torna os modelos de linguagem grandes (LLMs) tão úteis é que eles são ferramentas criativas que podem lidar com muitas tarefas de linguagem diferentes. No entanto, isso também significa que os LLMs podem gerar resultados inesperados, incluindo texto ofensivo, insensível ou incorreto. Além disso, a incrível versatilidade desses modelos também dificulta a previsão exata de quais tipos de resultados indesejáveis eles podem produzir. Embora a API Gemini tenha sido projetada com os [princípios de IA do Google](https://ai.google/principles/?hl=pt-br) em mente, a responsabilidade de aplicar esses modelos é dos desenvolvedores. Para ajudar os desenvolvedores a criar aplicativos seguros e responsáveis, a API Gemini tem uma filtragem de conteúdo integrada e configurações de segurança ajustáveis em quatro dimensões de danos. Consulte o guia de [configurações de segurança](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pt-br) para saber mais. Ela também oferece o recurso de embasamento com a Pesquisa Google ativada para melhorar a veracidade, mas isso pode ser desativado para desenvolvedores cujos casos de uso são mais criativos e não buscam informações.
 
-このドキュメントでは、LLM の使用時に発生する可能性のある安全性のリスクについて説明し、新たに登場した安全性設計と開発に関する推奨事項を紹介します （法律や規制によって制限が課される場合もありますが、そのような考慮事項はこのガイドの範囲外です）。
+Este documento apresenta alguns riscos de segurança que podem surgir ao usar LLMs e recomendações emergentes de design e desenvolvimento de segurança. As leis e regulamentações também podem impor restrições, mas essas considerações estão fora do escopo deste guia.
 
-LLM を使用してアプリケーションを構築する際は、次の手順をおすすめします。
+As etapas a seguir são recomendadas ao criar aplicativos com LLMs:
 
-- アプリケーションの安全性のリスクを把握する
-- 安全性のリスクを軽減するための調整を検討する
-- ユースケースに適した安全性テストを実施する
-- ユーザーからのフィードバックを求め、使用状況をモニタリングする
+- Entender os riscos de segurança do seu aplicativo
+- Considerando ajustes para evitar riscos de segurança
+- Realizar testes de segurança de acordo com seu caso de uso
+- Pedir feedback dos usuários e monitorar o uso
 
-調整とテストのフェーズは、アプリケーションに適したパフォーマンスに達するまで繰り返す必要があります。
+As fases de ajuste e teste devem ser iterativas até que você alcance
+o desempenho adequado para seu aplicativo.
 
-![モデルの実装サイクル](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=ja)
+![Ciclo de implementação do modelo](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=pt-br)
 
-## アプリケーションの安全性のリスクを把握する
+## Entenda os riscos de segurança do seu aplicativo
 
-このコンテキストでは、安全性は、有害な表現やステレオタイプを助長するコンテンツを生成するなど、LLM がユーザーに危害を加えないようにする能力として定義されます。Gemini API で利用できるモデルは、
-[Google の AI に関する原則](https://ai.google/principles/?hl=ja)を念頭に置いて設計されており、
-その使用には[生成 AI の使用禁止
-に関するポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)が適用されます。この API には、有害な表現やヘイトスピーチなどの一般的な言語モデルの問題に対処し、包括性を目指し、ステレオタイプを回避するための組み込みの安全性フィルタが用意されています。ただし、各アプリケーションは、ユーザーにさまざまなリスクをもたらす可能性があります。そのため、アプリケーションのオーナーは、ユーザーと、アプリケーションが引き起こす可能性のある危害を把握し、アプリケーションが LLM を安全かつ責任を持って使用するようにする必要があります。
+Nesse contexto, a segurança é definida como a capacidade de um LLM evitar causar danos aos usuários, por exemplo, gerando linguagem ou conteúdo tóxico que promova estereótipos. Os modelos disponíveis na API Gemini foram projetados com os [princípios de IA do Google](https://ai.google/principles/?hl=pt-br) em mente, e seu uso está sujeito à [Política de uso proibido de IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br). A API oferece filtros de segurança integrados para ajudar a resolver alguns problemas comuns de modelos de linguagem, como linguagem tóxica e discurso de ódio, além de buscar a inclusão e evitar estereótipos. No entanto, cada aplicativo pode apresentar um conjunto diferente de riscos aos usuários. Portanto, como proprietário do aplicativo, você é responsável por conhecer seus usuários e os possíveis danos que seu aplicativo pode causar, além de garantir que ele use LLMs de maneira segura e responsável.
 
-この評価の一環として、危害が発生する可能性を考慮し、その重大度と軽減策を判断する必要があります。たとえば、事実に基づいたイベントに基づいてエッセイを生成するアプリは、エンターテイメント用のフィクション ストーリーを生成するアプリと比較して、誤った情報を回避するようより注意する必要があります。潜在的な安全性のリスクを調査する良い方法は、エンドユーザーや、アプリケーションの結果の影響を受ける可能性のある他のユーザーを調査することです。これには、アプリのドメインの最先端の研究を調査する、同様のアプリをユーザーがどのように使用しているかを観察する、ユーザー調査やアンケートを実施する、潜在的なユーザーに非公式なインタビューを行うなど、さまざまな方法があります。
+Como parte dessa avaliação, considere a probabilidade de ocorrência de danos e determine a gravidade e as etapas de mitigação. Por exemplo, um app que gera redações com base em eventos reais precisa ter mais cuidado para evitar desinformação do que um app que gera histórias fictícias para entretenimento. Uma boa maneira de começar a analisar possíveis riscos à segurança é pesquisar seus usuários finais e outras pessoas que possam ser afetadas pelos resultados do seu aplicativo. Isso pode assumir muitas formas, incluindo pesquisar estudos de ponta no domínio do seu app, observar como as pessoas estão usando apps semelhantes ou realizar um estudo de usuário, uma pesquisa ou entrevistas informais com usuários em potencial.
 
-### 高度なヒント
+### Dicas avançadas
 
-- ターゲット ユーザー層のさまざまな見込みユーザーに、アプリケーションとその目的について話を聞き、潜在的なリスクについて幅広い視点を得て、必要に応じて多様性の基準を調整します。
-- 米国政府の
-  NIST（National Institute of Standards and Technology）が公開した[AI リスク管理フレームワーク](https://www.nist.gov/itl/ai-risk-management-framework)
-  には、AI リスク管理に関する詳細なガイダンスと追加の学習リソースが用意されています。
-- DeepMind's 言語モデルによる危害の
-  [倫理的および社会的リスク](https://arxiv.org/abs/2112.04359)
-  に関する出版物では、言語モデル
-  アプリケーションが危害を引き起こす可能性のある方法について詳しく説明しています。
+- Converse com um grupo diversificado de usuários em potencial dentro da população-alvo sobre seu aplicativo e a finalidade dele para ter uma perspectiva mais ampla sobre possíveis riscos e ajustar os critérios de diversidade conforme necessário.
+- O [Framework de gerenciamento de riscos de IA](https://www.nist.gov/itl/ai-risk-management-framework) (em inglês) lançado pelo Instituto Nacional de Padrões e Tecnologia (NIST, na sigla em inglês) do governo dos EUA oferece orientações mais detalhadas e recursos de aprendizado adicionais para o gerenciamento de riscos de IA.
+- A publicação do DeepMind sobre os [riscos éticos e sociais de danos causados por modelos de linguagem](https://arxiv.org/abs/2112.04359) descreve em detalhes as maneiras como os aplicativos de modelos de linguagem podem causar danos.
 
-## 安全性のリスクと事実性のリスクを軽減するための調整を検討する
+## Faça ajustes para evitar riscos de segurança e veracidade.
 
-リスクを把握したら、リスクを軽減する方法を決定できます。どのリスクを優先するか、リスクを防ぐためにどの程度の対策を講じるかは、ソフトウェア プロジェクトのバグのトリアージと同様に、重要な判断です。優先順位を決定したら、最も適切な軽減策の種類について検討を開始できます。多くの場合、簡単な変更でリスクを軽減できます。
+Agora que você entende os riscos, pode decidir como mitigá-los. Determinar quais riscos priorizar e o que fazer para tentar evitá-los é uma decisão crítica, semelhante à triagem de bugs em um projeto de software. Depois de determinar as prioridades, comece a pensar nos tipos de mitigação mais adequados. Muitas vezes, mudanças simples podem fazer a diferença e reduzir os riscos.
 
-たとえば、アプリケーションを設計する際は、次の点を考慮してください。
+Por exemplo, ao criar um aplicativo, considere:
 
-- アプリケーションのコンテキストで許容される内容をより適切に反映するように**モデルの出力をチューニング** します。チューニングにより、モデルの出力の予測可能性と一貫性が高まり、特定のリスクを軽減できます。
-- **より安全な出力を促進する入力方法を提供する** 。LLM に与える正確な入力によって、出力の品質が異なります。
-  入力プロンプトを試して、ユースケースで最も安全に機能するものを特定することは、労力に見合う価値があります。特定できたら、それを促進する UX を提供できます。たとえば、入力プロンプトのプルダウン リストからのみ選択できるように制限したり、アプリケーションのコンテキストで安全に機能することがわかっている説明フレーズを含むポップアップ候補を表示したりできます。
-- **安全でない入力をブロックし、ユーザーに表示する前に出力をフィルタリングする** 。シンプルなケースでは、ブロックリストを使用して、プロンプトやレスポンス内の安全でない単語やフレーズを特定してブロックしたり、人間のレビュー担当者がそのようなコンテンツを手動で変更またはブロックしたりできます。
-- **トレーニング済みの分類器を使用して、有害となる可能性のある、または敵対的なシグナルを含む各プロンプトにラベルを付ける** 。こうすると、そのリクエストの扱い方について、検出された有害性の種類に応じた戦略を別々に当てはめることができます。たとえば、入力が過度に敵対的または罵倒的である場合、ブロックして、事前にスクリプト化された回答を出力できます。
-  **高度なヒント:** シグナルによって出力が有害であると判断された場合、アプリケーションは次のオプションを使用できます。
+- **Ajustar a saída do modelo** para refletir melhor o que é aceitável no contexto do seu aplicativo. O ajuste pode tornar a saída do modelo mais previsível e consistente e, portanto, ajudar a mitigar determinados riscos.
+- **Fornecer um método de entrada que facilite saídas mais seguras**: a entrada exata que você dá a um LLM pode fazer a diferença na qualidade da saída. Vale a pena testar comandos de entrada para encontrar o que funciona com mais segurança no seu caso de uso, já que você pode fornecer uma UX que facilite isso. Por exemplo, é possível restringir os usuários a escolher apenas em uma lista suspensa de comandos de entrada ou oferecer sugestões pop-up com frases descritivas que você descobriu que funcionam com segurança no contexto do seu aplicativo.
+- **Bloqueio de entradas não seguras e filtragem da saída antes de ela ser mostrada ao usuário**.Em situações simples, as listas de bloqueio podem ser usadas para identificar e bloquear palavras ou frases não seguras em comandos ou respostas, ou exigir que revisores humanos alterem ou bloqueiem manualmente esse conteúdo.
+- **Usar classificadores treinados para rotular cada comando com possíveis danos ou sinais adversários.** Diferentes estratégias podem ser usadas para lidar com a solicitação com base no tipo de dano detectado. Por exemplo, se a entrada for muito nociva ou abusiva por natureza, ela poderá ser bloqueada e, em vez disso, gerar uma resposta com roteiro pré-estruturado.
+  **Dica avançada**:se os indicadores determinarem que a saída é prejudicial, o aplicativo poderá usar as seguintes opções:
 
-  - エラー メッセージまたは事前にスクリプト化された出力を提供します。
-  - 同じプロンプトでも異なる出力が生成される場合があるため、代替の安全な出力が生成されるかどうかを確認するため、プロンプトをもう一度試します。
-- **意図的な誤用に対する保護措置を講じる** 。たとえば、各ユーザーに一意の ID を割り当て、特定の期間に送信できるユーザー クエリの量に制限を設けます。もう一つの保護措置は、プロンプト インジェクションの可能性から保護することです。プロンプト インジェクションは、SQL インジェクションと同様に、悪意のあるユーザーがモデルの出力を操作する入力プロンプトを設計する方法です。たとえば、以前の例を無視するようにモデルに指示する入力プロンプトを送信します。意図的な誤用について詳しくは、
-  [生成 AI の使用禁止に関するポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)
-  をご覧ください。
-- **機能の調整により、本質的にリスクの低いものにする** 。範囲が狭いタスク（テキストのパッセージからキーワードを抽出するなど）や、人間の監督が強化されているタスク（人間がレビューする短いコンテンツを生成するなど）は、リスクが低いことがよくあります。たとえば、メールの返信を最初から作成するアプリケーションを作成するのではなく、アウトラインの拡張や代替フレーズの提案に限定できます。
-- **有害なコンテンツの安全性設定を調整して、有害な可能性があるレスポンスが表示される可能性を減らす** 。Gemini API には、プロトタイピングの段階で調整できる安全性設定が用意されています。これにより、アプリケーションに対してより厳しいまたは緩い安全性構成が必要かどうかを判断できます。これらの設定は、5 つのフィルタ カテゴリにわたって調整し、特定の種類のコンテンツを制限または許可できます。Gemini API で利用できる調整可能な安全性設定については、[安全性設定ガイド](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)をご覧ください。
-- **Google 検索によるグラウンディングを有効にして、事実の不正確さやハルシネーションの可能性を減らす** 。多くの AI モデルは試験運用版であり、事実と異なる情報が表示されたり、ハルシネーションが発生したり、その他の問題のある出力が生成されたりする可能性があります。Google 検索によるグラウンディング機能は、Gemini モデルをリアルタイムのウェブ コンテンツに接続し、利用可能なすべての言語で機能します。これにより、Gemini はより正確な回答を提供して、モデルのナレッジ カットオフ以降の検証可能な情報源を引用することができます。
+  - Fornecer uma mensagem de erro ou uma saída com roteiro pré-estruturado.
+  - Tente de novo, caso uma saída alternativa segura seja gerada, já que às vezes o mesmo comando gera respostas diferentes.
+- **Implementar salvaguardas contra uso indevido intencional**, como atribuir a cada usuário um ID exclusivo e impor um limite ao volume de consultas que podem ser enviadas em um determinado período. Outra salvaguarda é tentar proteger contra possível injeção de comando. A injeção de comando, assim como a injeção de SQL, é uma maneira de usuários mal-intencionados criarem um comando de entrada que manipula a saída do modelo. Por exemplo, enviando um comando de entrada que instrui o modelo a ignorar exemplos anteriores. Consulte a [política de uso proibido da IA generativa](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br) para mais detalhes sobre uso indevido intencional.
+- **Ajustar a funcionalidade para algo que seja inerentemente de menor risco**. Tarefas de escopo mais restrito (por exemplo, extrair palavras-chave de trechos de texto) ou que têm maior supervisão humana (por exemplo, gerar conteúdo curto que será revisado por um humano) geralmente representam um risco menor. Por exemplo, em vez de criar um aplicativo para escrever uma resposta de e-mail do zero, você pode limitar a expansão de um esboço ou sugerir frases alternativas.
+- **Ajustar as configurações de segurança de conteúdo nocivo para diminuir a probabilidade de
+  receber respostas que possam ser prejudiciais**.A API Gemini oferece configurações de segurança
+  que podem ser ajustadas durante a fase de prototipagem para determinar se o
+  aplicativo requer uma configuração de segurança mais ou menos restritiva. É possível
+  ajustar essas configurações em cinco categorias de filtro para restringir ou permitir
+  determinados tipos de conteúdo. Consulte o [guia de configurações de segurança](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pt-br) para saber mais sobre
+  as configurações de segurança ajustáveis disponíveis na API Gemini.
+- **Diminua possíveis imprecisões factuais ou alucinações ativando o embasamento com a Pesquisa Google**. Muitos modelos de IA são experimentais
+  e podem apresentar informações factualmente imprecisas, alucinar ou
+  produzir resultados problemáticos. O recurso de embasamento com a Pesquisa Google conecta o modelo do Gemini ao conteúdo da web em tempo real e funciona com todos os idiomas disponíveis. Isso permite que o Gemini forneça respostas mais precisas e cite fontes verificáveis além do limite de conhecimento dos modelos.
 
-## ユースケースに適した安全性テストを実施する
+## Realize testes de segurança de acordo com seu caso de uso.
 
-テストは、堅牢で安全なアプリケーションを構築するうえで重要な要素ですが、テストの範囲、スコープ、戦略は異なります。たとえば、単なる楽しみのための俳句ジェネレータは、法律事務所が法的文書を要約して契約書の作成を支援するために使用するアプリケーションよりも、リスクが低い可能性があります。ただし、俳句ジェネレータはさまざまなユーザーが使用する可能性があるため、敵対的な試みや意図しない有害な入力の可能性が高くなる可能性があります。実装のコンテキストも重要です。たとえば、アクションを実行する前に人間の専門家がレビューする出力を含むアプリケーションは、そのような監督のない同一のアプリケーションよりも、有害な出力を生成する可能性が低いと見なされる可能性があります。
+Os testes são uma parte fundamental da criação de aplicativos robustos e seguros, mas a extensão, o escopo e as estratégias variam. Por exemplo, um gerador de haicai por diversão provavelmente apresenta riscos menos graves do que um aplicativo projetado para uso por escritórios de advocacia para resumir documentos jurídicos e ajudar a redigir contratos. Mas
+o gerador de haicai pode ser usado por uma variedade maior de usuários, o que significa que o
+potencial de tentativas adversárias ou até mesmo entradas prejudiciais não intencionais pode ser
+maior. O contexto da implementação também é importante. Por exemplo, um aplicativo com saídas revisadas por especialistas humanos antes de qualquer ação ser tomada pode ser considerado menos propenso a produzir resultados prejudiciais do que o aplicativo idêntico sem essa supervisão.
 
-比較的リスクの低いアプリケーションでも、変更とテストを数回繰り返してから、リリースする準備ができたと確信することは珍しくありません。AI アプリケーションでは、次の 2 種類のテストが特に役立ちます。
+É comum passar por várias iterações de mudanças e testes antes de se sentir confiante para lançar, mesmo para aplicativos de risco relativamente baixo. Dois tipos de testes são particularmente úteis para aplicativos de IA:
 
-- **安全性ベンチマーク** では、アプリケーションが使用される可能性のあるコンテキストで安全でない可能性がある方法を反映する安全性指標を設計し、評価データセットを使用して、アプリケーションが指標でどの程度適切に機能するかをテストします。テストを行う前に、安全性指標の最小許容レベルについて検討することをおすすめします。これにより、1）テスト結果を期待値と比較して評価し、2）最も重要な指標を評価するテストに基づいて評価データセットを収集できます。
+- O **benchmarking de segurança** envolve a criação de métricas que refletem as maneiras como seu aplicativo pode ser inseguro no contexto de como ele provavelmente será usado. Em seguida, é feito um teste para verificar o desempenho do aplicativo nas métricas usando conjuntos de dados de avaliação. É recomendável pensar nos níveis mínimos aceitáveis de métricas de segurança antes do teste para que 1) você possa avaliar os resultados do teste em relação a essas expectativas e 2) possa coletar o conjunto de dados de avaliação com base nos testes que avaliam as métricas mais importantes para você.
 
-  **高度なヒント:**
+  **Dicas avançadas:**
 
-  - 「既製の」アプローチに過度に依存しないように注意してください。アプリケーションのコンテキストに完全に適合させるには、人間の評価者を使用して独自のテスト データセットを構築する必要がある可能性があります。
-  - 複数の指標がある場合は、変更によって一方の指標が改善され、もう一方の指標が損なわれる場合に、どのようにトレードオフするかを決定する必要があります。他のパフォーマンス エンジニアリングと同様に、平均パフォーマンスではなく、評価セット全体のワーストケースのパフォーマンスに重点を置くことをおすすめします。
-- **敵対的テスト** では、アプリケーションを積極的に破壊しようとします。目的は、弱点を特定し、必要に応じて修正するための措置を講じることです。敵対的テストでは、アプリケーションの専門知識を持つ評価者がかなりの時間と労力を費やす可能性がありますが、実施すればするほど、問題、特にまれに発生する問題や、アプリケーションを繰り返し実行した後にのみ発生する問題を特定できる可能性が高くなります。
+  - Não confie demais em abordagens prontas, porque é provável que você precise criar seus próprios conjuntos de dados de teste usando avaliadores humanos para se adequar totalmente ao contexto do seu aplicativo.
+  - Se você tiver mais de uma métrica, será necessário decidir como fazer a compensação se uma mudança levar a melhorias em uma métrica em detrimento de outra. Assim como em outras engenharias de performance, talvez seja melhor focar no desempenho do pior caso no conjunto de avaliação em vez do desempenho médio.
+- O **teste adversário** envolve tentar quebrar seu aplicativo de maneira proativa. O objetivo é identificar pontos fracos para que você possa tomar medidas para corrigi-los, conforme necessário. O teste adversarial pode exigir muito tempo/esforço dos avaliadores com experiência no seu aplicativo, mas quanto mais você faz, maior é a chance de identificar problemas, principalmente aqueles que ocorrem raramente ou apenas após execuções repetidas do aplicativo.
 
-  - 敵対的テストは ML モデルを体系的に評価するためのメソッドであり、悪意のある、または不注意による有害な入力が与えられた場合に、モデルがどのように動作するかを確認するために実施します。
-    - 入力が明らかに安全でない、または有害な出力を生成するように設計されている場合、その入力は悪意があるとみなされます。たとえば、テキスト生成モデルに特定の宗教についてヘイトスピーチを生成するよう求める場合です。
-    - 入力自体は無害でも、有害な出力を生成する場合、その入力は不注意による有害な入力とみなされます。たとえば、テキスト生成モデルに特定の民族の人を説明するように求める入力をして、人種差別的な出力を返す場合です。
-  - 敵対的テストと標準評価の違いは、テストに使用されるデータの構成です。敵対的テストでは、
-    モデルから問題のある出力が生成される可能性が最も高いテストデータ
-    を選択します。つまり、まれな例や異常な例、安全性ポリシーに関連するエッジケースなど、考えられるすべての種類の危害について、モデルの動作を調査します。また、構造、意味、長さなど、文のさまざまな側面で多様性を含める必要があります。テスト データセットの作成時に考慮すべき事項について詳しくは、[Google の責任ある AI
-    の取り組みの
-    公平性](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=ja)
-    をご覧ください。**高度なヒント:**
-  - アプリケーションを破壊しようとする「レッド
-    チーム」に人を参加させる従来の方法ではなく、[自動テスト](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=ja)
-    を使用します。自動テストでは、「レッドチーム」は、テスト対象のモデルから有害な出力を引き出す入力テキストを見つける別の言語モデルです。
+  - O teste adversário é um método para avaliar sistematicamente um modelo de ML com a intenção de aprender como ele se comporta quando são fornecidas entradas acidentalmente nocivas ou maliciosas:
+    - Uma entrada pode ser maliciosa quando é claramente projetada para produzir uma saída que não é segura ou é nociva. Por exemplo, pedir a um modelo de geração de texto para gerar um discurso de ódio sobre uma religião específica.
+    - Uma entrada é acidentalmente nociva quando pode ser inofensiva em si, mas produz uma saída nociva. Por exemplo, pedir a um modelo de geração de texto para descrever uma pessoa de uma etnia específica e receber uma saída racista.
+  - O que distingue um teste adversário de uma avaliação padrão é a composição dos dados usados para o teste. Para testes adversários, selecione dados de teste que provavelmente vão gerar uma saída problemática do modelo. Isso significa testar o comportamento do modelo para todos os tipos de danos possíveis, incluindo exemplos raros ou incomuns e casos extremos relevantes para as políticas de segurança. Ela também precisa incluir diversidade nas diferentes dimensões de uma frase, como estrutura, significado e extensão. Consulte as [práticas de IA responsável do Google em relação à justiça](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=pt-br) para mais detalhes sobre o que considerar ao criar um conjunto de dados de teste.
+    **Dicas avançadas:**
+  - Use [testes automatizados](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=pt-br) em vez do método tradicional de recrutar pessoas em "equipes vermelhas" para tentar quebrar seu aplicativo. Nos testes automatizados, a "equipe vermelha" é outro modelo de linguagem que encontra textos de entrada que geram saídas prejudiciais do modelo testado.
 
-## 問題がないかモニタリングする
+## Monitorar problemas
 
-どれだけテストして軽減しても、完璧を保証することはできません。そのため、発生する問題を特定して対処する方法を事前に計画してください。一般的なアプローチとしては、ユーザーがフィードバックを共有するためのモニタリング対象のチャネルを設定する（例: 高評価/低評価）や、ユーザー調査を実施して、さまざまなユーザーから積極的にフィードバックを求めるなどがあります。使用パターンが予想と異なる場合は特に有効です。
+Não importa o quanto você teste e reduza os riscos, nunca é possível garantir a perfeição. Por isso, planeje com antecedência como identificar e lidar com os problemas que surgirem.As abordagens comuns incluem configurar um canal monitorado para que os usuários compartilhem feedback (por exemplo, classificação de positivo/negativo) e realizar um estudo com usuários para solicitar feedback de forma proativa de um grupo diversificado de pessoas. Isso é especialmente valioso se os padrões de uso forem diferentes das expectativas.
 
-### 高度なヒント
+### Dicas avançadas
 
-- ユーザーが AI プロダクトにフィードバックを提供すると、プロンプト チューニングに適した例を選択するのに役立つなど、AI のパフォーマンスとユーザー エクスペリエンスを長期的に大幅に改善できます。Google の
-  [People and AI ガイドブック](https://pair.withgoogle.com/chapter/feedback-controls/)
-  の[フィードバックと制御の章](https://pair.withgoogle.com/guidebook/chapters)
-  では、フィードバック メカニズムを設計する際に考慮すべき重要な事項について説明しています。
+- Quando os usuários enviam feedback sobre produtos de IA, isso pode melhorar muito a performance da IA e a experiência do usuário ao longo do tempo. Por exemplo, isso ajuda você a escolher exemplos melhores para o ajuste de comandos. O [capítulo "Feedback e controle"](https://pair.withgoogle.com/chapter/feedback-controls/) do [Guia de pessoas e IA do Google](https://pair.withgoogle.com/guidebook/chapters) destaca considerações importantes a serem levadas em conta ao projetar mecanismos de feedback.
 
-## 次のステップ
+## Próximas etapas
 
-- Gemini API で利用できる調整可能な
-  安全性設定については、安全性設定
-  [ガイド](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)をご覧ください。
-- 最初のプロンプトの作成を開始するには、[プロンプトの概要](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ja)をご覧ください。
+- Consulte o guia de [configurações de segurança](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pt-br) para saber mais sobre as configurações ajustáveis disponíveis na API Gemini.
+- Consulte a [introdução à criação de comandos](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pt-br) para começar a escrever seus primeiros comandos.
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-06-05 UTC。
+Última atualização 2026-06-05 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-05 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-05 UTC."],[],[]]

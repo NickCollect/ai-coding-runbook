@@ -1,10 +1,10 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=zh-TW
-fetched_at: 2026-10-12T07:07:19.397024+00:00
+fetched_at: 2026-10-19T05:52:40.721818+00:00
 title: "\u4f7f\u7528 Lyria RealTime \u5373\u6642\u751f\u6210\u97f3\u6a02 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 

@@ -1,178 +1,184 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ko
-fetched_at: 2026-10-12T06:56:20.875539+00:00
-title: "Google AI Studio\uc5d0\uc11c \ud480 \uc2a4\ud0dd \uc571 \uac1c\ubc1c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419
+fetched_at: 2026-10-19T05:35:16.740420+00:00
+title: "Desarrolla apps de pila completa en Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 4 Argon ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=es-419).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-의견 보내기
+Enviar comentarios
 
-# Google AI Studio에서 풀 스택 앱 개발
+# Desarrolla apps de pila completa en Google AI Studio
 
-이제 Google AI Studio에서 풀 스택 개발을 지원하므로 클라이언트 측 프로토타입을 넘어선 애플리케이션을 빌드할 수 있습니다. 서버 측 런타임을 사용하면 보안 비밀을 관리하고, 외부 API에 연결하고, 실시간 멀티플레이어 환경을 빌드할 수 있습니다.
+Google AI Studio ahora admite el desarrollo de pila completa, lo que te permite compilar aplicaciones que van más allá de los prototipos del cliente. Con un entorno de ejecución del servidor, puedes administrar secretos, conectarte a APIs externas y crear experiencias multijugador en tiempo real.
 
-## 서버 측 런타임
+## Entorno de ejecución del servidor
 
-이제 Google AI Studio 애플리케이션에 서버 측 구성요소 (Node.js)를 포함할 수 있습니다.
-그러면 다음과 같은 이점을 얻을 수 있습니다.
+Las aplicaciones de Google AI Studio ahora pueden incluir un componente del servidor (Node.js).
+Esto te permite hacer lo siguiente:
 
-- **서버 측 로직 실행**: 클라이언트에 노출해서는 안 되는 코드를 실행합니다.
-- **npm 패키지 액세스**: [Antigravity 에이전트](https://antigravity.google/docs/agent?hl=ko)
-  는 광범위한 npm 생태계에서 패키지를 설치하고 사용할 수 있습니다.
-- **보안 비밀 처리**: API 키와 사용자 인증 정보를 안전하게 사용합니다.
+- **Ejecutar lógica del servidor**: Ejecuta código que no debe exponerse al
+  cliente.
+- **Acceder a paquetes de npm**: El [agente Antigravity](https://antigravity.google/docs/agent?hl=es-419)
+  puede instalar y usar paquetes del vasto ecosistema de npm.
+- **Administrar secretos**: Usa de forma segura las claves de API y las credenciales.
 
-### npm 패키지 사용
+### Usar paquetes de npm
 
-`npm install`을 수동으로 실행할 필요가 없습니다. 에이전트에게 패키지가 필요한 기능을 추가해 달라고 요청하기만 하면 설치 및 가져오기를 처리합니다.
+No es necesario que ejecutes `npm install` de forma manual. Solo pídele al agente que agregue la funcionalidad que requiere un paquete, y se encargará de la instalación y la importación.
 
-**예**: > "`axios`를 사용하여 외부 API에서 데이터를 가져와 줘."
+**Ejemplo**: > "Usa `axios` para recuperar datos de la API externa".
 
-## 보안 비밀 안전하게 관리
+## Administrar secretos de forma segura
 
-이제 서버 측 코드와 보안 비밀 관리를 통해 세상과 상호작용하는 앱을 빌드할 수 있습니다.
+Con el código del servidor y la administración de secretos, ahora puedes compilar apps que interactúen con el mundo.
 
-### Gemini API 키
+### Clave de API de Gemini
 
-Gemini API를 사용하는 새 앱을 만들면 AI Studio에서 `GEMINI_API_KEY`를 서버 측 보안 비밀로 자동으로 구성하므로 수동으로 설정할 필요가 없습니다. 이 키는 설정의 **보안 비밀** 패널에서 볼 수 있습니다. 앱의 Gemini API 호출은 이 키를 사용하여 서버 측 코드에서 이루어지므로 브라우저에 노출되지 않습니다.
+Cuando creas una app nueva que usa la API de Gemini, AI Studio configura automáticamente tu `GEMINI_API_KEY` como un secreto del servidor, sin necesidad de configuración manual. Puedes ver esta clave en el panel **Secretos** de Configuración. Las llamadas a la API de Gemini de tu app se realizan desde el código del servidor con esta clave, por lo que nunca se expone en el navegador.
 
-### 서드 파티 API 키
+### Claves de API de terceros
 
-다른 서비스의 경우 API 키를 수동으로 추가할 수 있습니다.
+Para otros servicios, puedes agregar claves de API de forma manual:
 
-- **서드 파티 API**: Stripe, SendGrid 또는 커스텀
-  REST API와 같은 서비스에 연결합니다.
-- **데이터베이스**: 외부 데이터베이스 (예: Supabase, Firebase,
-  또는 MongoDB Atlas를 통해)에 연결하여 세션 외에 데이터를 유지합니다.
+- **APIs de terceros**: Conéctate a servicios como Stripe, SendGrid o APIs de REST personalizadas.
+- **Bases de datos**: Conéctate a bases de datos externas (p.ej., a través de Supabase, Firebase,
+  o MongoDB Atlas) para conservar los datos más allá de la sesión.
 
-실제 앱을 빌드할 때는 API 키가 필요한 서드 파티 서비스(예: Twilio, Slack 또는 데이터베이스)에 연결해야 하는 경우가 많습니다. 다음 단계에 따라 키를 수동으로 추가할 수 있습니다.
+Cuando compilas apps del mundo real, a menudo necesitas conectarte a servicios de terceros (como Twilio, Slack o bases de datos) que requieren claves de API. Puedes agregar claves de forma manual con los siguientes pasos:
 
-1. **보안 비밀 추가**: Google AI Studio의 **설정** 메뉴로 이동하여 보안 비밀 섹션을 찾습니다.
-2. **키 저장**: 여기에 API 키 또는 보안 비밀 토큰을 추가합니다.
-3. **코드에서 액세스**: 에이전트는 이러한
-   보안 비밀에 안전하게 액세스하는 서버 측 코드를 작성할 수 있습니다 (일반적으로 환경 변수를 통해). 이렇게 하면 클라이언트 측 브라우저에
-   노출되지 않습니다.
+1. **Agrega un secreto**: Ve al menú **Configuración** en Google AI Studio y busca
+   la sección Secretos.
+2. **Almacena tu clave**: Agrega aquí tus claves de API o tokens secretos.
+3. **Accede al código**: El agente puede escribir código del servidor que acceda a estos
+   secretos de forma segura (por lo general, a través de variables de entorno), lo que garantiza que nunca se
+   expongan al navegador del cliente.
 
-필요한 경우 에이전트는 새 보안 비밀이 필요하거나 프로젝트의 env 변수에서 새 키가 감지될 때마다 키를 추가하라는 메시지를 표시하는 카드를 채팅에 표시합니다.
+Cuando sea necesario, el agente también mostrará una tarjeta en el chat que te solicitará que agregues claves cada vez que se necesite un secreto nuevo o cuando se detecte una clave nueva en las variables de entorno del proyecto.
 
-### 데이터베이스 및 인증을 위한 Firebase 통합
+### Integración de Firebase para la base de datos y la autenticación
 
-이제 Google AI Studio를 사용하면 Firebase 통합을 통해 앱에 데이터베이스 또는 인증을 쉽게 추가할 수 있습니다.
-Antigravity 에이전트는 다음 서비스를 자동으로 프로비저닝하고 설정할 수 있습니다.
+Google AI Studio ahora facilita la adición de una base de datos o la autenticación a tu
+app a través de una
+[integración de Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=es-419).
+El agente Antigravity puede aprovisionar y configurar automáticamente los siguientes servicios:
 
-- **Firestore 데이터베이스**: 클라이언트 및 서버 측 개발을 위한 데이터를 저장하고 동기화하기 위한 유연하고 확장 가능한 NoSQL 클라우드 데이터베이스입니다.
-- **Firebase 인증**: 사용자가 Google 계정으로 로그인 흐름을 사용하여 애플리케이션에 안전하게 로그인할 수 있도록 합니다.
+- **Base de datos de Firestore**: Una base de datos NoSQL flexible, escalable y en la nube para almacenar
+  y sincronizar datos para el desarrollo en el cliente y el servidor.
+- **Firebase Authentication**: Permite que los usuarios accedan de forma segura a tu
+  aplicación con los flujos de "Acceder con Google".
 
-에이전트에게 '앱에 데이터베이스 추가' 또는 'Google 로그인 설정'을 요청하기만 하면 필요한 구성 및 코드 생성을 처리합니다.
+Solo pídele al agente que "agregue una base de datos a mi app" o que "configure el acceso con Google", y se encargará de la configuración necesaria y la generación de código por ti.
 
-Firebase를 사용하면 무료로 시작할 수 있으며, 할당량을 늘리거나 유료 기능을 사용할 준비가 되면 유료 계정으로 확장할 수 있습니다.
+Firebase te permite comenzar de forma gratuita y, de manera opcional, escalar con una cuenta pagada cuando estés listo para obtener más cuota o usar funciones pagadas.
 
-## Google Workspace API
+## APIs de Google Workspace
 
-Google AI Studio를 사용하면 Google Workspace API에 연결되는 앱을 빌드할 수 있으므로 사용자는 앱 내에서 이메일, 스프레드시트, 문서, 캘린더 일정 등 실제 데이터를 사용할 수 있습니다. 더 이상 Google Cloud 프로젝트를 설정하거나, OAuth를 구성하거나, API를 수동으로 관리할 필요가 없습니다.
+Google AI Studio te permite compilar apps que se conectan a las APIs de Google Workspace, de modo que los usuarios puedan trabajar con sus datos reales: correos electrónicos, hojas de cálculo, documentos, eventos del calendario y mucho más, todo dentro de tu app. Ya no necesitas configurar un proyecto de Google Cloud, configurar OAuth ni administrar tu API de forma manual.
 
-### 작동 방식
+### Cómo funciona
 
-다음 두 가지 방법으로 Workspace 통합을 추가할 수 있습니다.
+Puedes agregar una integración de Workspace de dos maneras:
 
-- **채팅 패널에서 설명**: 하단의 채팅 패널에서 원하는 내용을 에이전트에게 알려주기만 하면 됩니다. 예를 들어 *"영수증을 내 Google Sheets에 기록하는 비용 추적기를 빌드해 줘"* 또는 *"읽지 않은 Gmail 메시지를 요약하는 대시보드를 만들어 줘"*와 같이 요청할 수 있습니다.
-- **통합 패널에서 선택**: 빌드 모드의 오른쪽 사이드바에서 **통합** 패널을 열고 연결하려는 Workspace 앱을 사용 설정합니다.
+- **Descríbela en el panel de chat**: Solo dile al agente lo que quieres en el panel de chat en la parte inferior. Por ejemplo, *"Compila un registro de gastos que registre recibos en mi Hoja de cálculo de Google"* o *"Crea un panel que resuma mis mensajes no leídos de Gmail"*
+- **Selecciona en el panel de integraciones**: Abre el panel **Integraciones** en la barra lateral derecha del modo de compilación y habilita la app de Workspace a la que deseas conectarte.
 
-Workspace 앱을 추가하면 AI Studio에서 자동으로 다음 작업을 실행합니다.
+Cuando agregas una app de Workspace, AI Studio hace lo siguiente de forma automática:
 
-1. 앱에 필요한 Google API를 연결합니다.
-2. API를 호출하는 서버 측 코드를 생성합니다.
-3. 앱의 최종 사용자가 자체 데이터에 대한 액세스 권한을 부여할 수 있도록 안전한 'Google 계정으로 로그인' 흐름을 추가합니다.
+1. Conecta la API de Google necesaria para tu app.
+2. Genera el código del servidor para llamar a la API.
+3. Agrega un flujo seguro de "Acceder con Google" para que los usuarios finales de tu app puedan autorizar el acceso a sus propios datos.
 
-### 지원되는 앱
+### Apps compatibles
 
-다음 Google Workspace 앱을 사용할 수 있습니다.
+Las siguientes apps de Google Workspace están disponibles:
 
-| 앱 | 빌드할 수 있는 항목 |
+| Aplicación | Qué puedes compilar |
 | --- | --- |
-| Google Calendar | 일정 및 캘린더 읽기, 만들기, 관리 |
-| Google Chat | 대화 및 그룹 스페이스 읽기 및 상호작용 |
-| Google Docs | 문서 만들기, 읽기, 업데이트, 서식 지정 |
-| Google Drive | 파일 및 폴더 정리, 검색, 관리 |
-| Google Forms | 설문조사 만들기, 질문 업데이트, 응답 검색 |
-| Gmail | 이메일 콘텐츠 읽기, 보내기, 관리 |
-| Google Keep | 노트, 목록, 첨부파일 관리 |
-| Google Meet | 영상 통화 예약 및 관리 |
-| 연락처 | 연락처 동기화 및 관리 |
-| Google Sheets | 스프레드시트 데이터 읽기, 쓰기, 서식 지정 |
-| Google Slides | 프레젠테이션 만들기 및 수정 |
-| Google Tasks | 작업 만들기, 관리, 정리 |
+| Calendario de Google | Leer, crear y administrar eventos y calendarios |
+| Google Chat | Leer e interactuar con conversaciones y espacios grupales |
+| Documentos de Google | Crear, leer, actualizar y dar formato a documentos |
+| Google Drive | Organizar, buscar y administrar archivos y carpetas |
+| Formularios de Google | Crear encuestas, actualizar preguntas y recuperar respuestas |
+| Gmail | Leer, enviar y administrar contenido de correo electrónico |
+| Google Keep | Administrar notas, listas y archivos adjuntos |
+| Google Meet | Programar y administrar videollamadas |
+| Contactos | Sincronizar y administrar contactos |
+| Hojas de cálculo de Google | Leer, escribir y dar formato a datos de hojas de cálculo |
+| Presentaciones de Google | Crear y modificar presentaciones |
+| Google Tasks | Crear, administrar y organizar tareas |
 
-### 인증 및 권한
+### Autenticación y permisos
 
-빌더는 OAuth 클라이언트를 구성하거나, 사용자 인증 정보를 관리하거나, Google Cloud 프로젝트를 설정할 필요가 없습니다. AI Studio에서 이 모든 작업을 처리합니다.
+Como compilador, no necesitas configurar clientes de OAuth, administrar credenciales ni configurar un proyecto de Google Cloud. AI Studio se encarga de todo esto por ti.
 
-Workspace API가 통합된 앱은 'Google 계정으로 로그인'을 사용하여 최종 사용자를 인증합니다. 사용자가 앱을 열면 로그인하고 앱에 필요한 특정 권한 (예: 캘린더에 대한 읽기 전용 액세스 권한 또는 스프레드시트를 수정하는 기능)을 부여하라는 메시지가 표시됩니다. 앱은 앱을 사용하는 사람의 데이터에만 액세스합니다. 각 사용자는 자신의 계정에 대한 액세스 권한을 부여합니다.
+Las apps con APIs de Workspace integradas usan "Acceder con Google" para autenticar a los usuarios finales. Cuando un usuario abre tu app, se le solicita que acceda y otorgue los permisos específicos que necesita tu app (por ejemplo, acceso de solo lectura a su calendario o la capacidad de editar una hoja de cálculo). Tu app solo accede a los datos de la persona que la usa. Cada usuario autoriza el acceso a su propia cuenta.
 
-### 프롬프트 예시
+### Ejemplos de instrucciones
 
-다음은 Workspace 통합을 시작하는 데 도움이 되는 몇 가지 아이디어입니다.
+Estas son algunas ideas para comenzar a usar las integraciones de Workspace:
 
-- *"내 Google Calendar를 읽고 각 회의에 대한 준비 이메일을
-  Gmail에서 작성하는 앱을 빌드해 줘."*
-- *"Google Docs를 가져와 Google Slides에서 5페이지 요약
-  프레젠테이션을 생성하는 도구를 만들어 줘."*
-- *"영수증을 업로드하면 Gemini가 세부정보를 추출하고 내 Google Sheets에 새 행을 기록하는 비용 추적기를 만들어 줘."*
+- *"Compila una app que lea mi Calendario de Google y redacte correos electrónicos de preparación en
+  Gmail para cada reunión."*
+- *"Crea una herramienta que tome un Documento de Google y genere una presentación de resumen de 5 diapositivas
+  en Presentaciones de Google."*
+- *"Crea un registro de gastos en el que suba un recibo, Gemini extraiga los
+  detalles y registre una fila nueva en mi Hoja de cálculo de Google"*
 
-### OAuth 설정
+### Configura OAuth
 
-보안 비밀 관리의 주요 사용 사례 중 하나는 OAuth를 설정하여 다른 웹사이트 또는 앱에 연결하는 것입니다. 프롬프트에 OAuth 인증이 필요한 서드 파티 앱에 연결하는 방법에 관한 안내가 포함되어 있으면 에이전트가 해당 애플리케이션에 OAuth를 설정하는 방법을 안내합니다. 이 안내에는 OAuth 애플리케이션을 구성하는 데 필요한 콜백 URL이 포함됩니다.
-설정 패널의 **통합** 에서 콜백 URL을 찾을 수도 있습니다.
+Un caso de uso clave para la administración de secretos es configurar OAuth para conectarse a otros sitios web o apps. Cuando tu instrucción incluye instrucciones para conectarse a una app de terceros que requiere autenticación de OAuth, el agente proporcionará instrucciones para configurar OAuth para esa aplicación. Estas instrucciones incluirán las URLs de devolución de llamada necesarias para configurar tu aplicación de OAuth.
+También puedes encontrar las URLs de devolución de llamada en **Integraciones** en el panel Configuración.
 
-## 멀티플레이어 환경 빌드
+## Crea experiencias multijugador
 
-풀 스택 런타임은 실시간 공동작업 기능을 지원합니다.
+El entorno de ejecución de pila completa habilita las funciones de colaboración en tiempo real.
 
-- **실시간 상태**: 에이전트에게 "실시간
-  채팅", "공동 화이트보드" 또는 "멀티플레이어 게임"과 같은 기능을 빌드해 달라고 요청할 수 있습니다.
-- **동기화된 세션**: 서버가 상태를 관리하므로 여러 사용자가
-  동일한 애플리케이션 인스턴스와 실시간으로 상호작용할 수 있습니다.
+- **Estado en tiempo real**: Puedes pedirle al agente que compile funciones como "un chat
+  en vivo", "una pizarra colaborativa" o "un juego multijugador".
+- **Sesiones sincronizadas**: El servidor administra el estado, lo que permite que varios usuarios
+  interactúen con la misma instancia de la aplicación en tiempo real.
 
-**프롬프트 예시**: > "플레이어가 서로의 커서를 볼 수 있는 멀티플레이어 게임을 만들어 줘."
+**Ejemplo de instrucción**: > "Haz que este sea un juego multijugador en el que los jugadores puedan ver los cursores de los demás."
 
-### 멀티플레이어 앱 테스트를 위한 도움말
+### Sugerencias para probar apps multijugador
 
-앱을 배포하기 전에 두 가지 방법으로 멀티플레이어 모드를 테스트할 수 있습니다.
+Puedes probar el modo multijugador de dos maneras antes de implementar tu app.
 
-1. 여러 탭에서 Google AI Studio 빌드 모드로 앱을 엽니다. 빌드 모드에서 개발할 때 앱은 개발 컨테이너에 있습니다. 여러 탭에서 앱을 열면 앱을 사용하는 여러 플레이어를 시뮬레이션할 수 있습니다.
-2. 오른쪽 상단의 **공유** 메뉴를 사용하여 다른 사용자와 앱을 공유합니다. 그런 다음 **공유** 메뉴의 **통합** 탭에서 **공유 URL** 을 사용하여 앱을 공유한 플레이어와 함께 앱을 사용합니다.
+1. Abre tu app en el modo de compilación de Google AI Studio en varias pestañas. Cuando desarrollas en el modo de compilación, tu app está en un contenedor de desarrollo. Abrir la app en varias pestañas te permitirá simular varios jugadores que usan tu app.
+2. Comparte la app con otras personas usando el menú **Compartir** en la esquina superior derecha. Luego, usa la **URL compartida** de la pestaña **Integraciones** del menú **Compartir** para usar la app con los jugadores con los que la compartiste.
 
-## 권장사항
+## Prácticas recomendadas
 
-- **Gemini API 호출**: `GEMINI_API_KEY`는
-  서버 측 보안 비밀로 자동 구성됩니다. 이 키를 사용하여 서버 측 코드에서 Gemini API를 호출합니다. **보안 비밀** 패널에서 볼 수 있습니다.
-- **보안 비밀 보안**: 민감한 키에는 항상 보안 비밀 관리자를 사용합니다.
-  파일에 하드 코딩하지 마세요.
-- **관심사 분리**: UI 로직은 클라이언트 측 프레임워크
-  (React/Angular)에, 비즈니스 로직/데이터 처리는 서버 측에 유지합니다.
-- **오류 처리**: 앱이 비정상 종료되지 않도록 서버 측 코드가 외부 API 호출의 오류를
-  강력하게 처리하는지 확인합니다.
+- **Llamadas a la API de Gemini**: Tu `GEMINI_API_KEY` se configura automáticamente como un
+  secreto del servidor. Realiza llamadas a la API de Gemini desde el código del servidor con esta clave. Puedes verlo en el panel **Secretos**.
+- **Seguridad de secretos**: Siempre usa el administrador de secretos para las claves sensibles.
+  Nunca los codifiques de forma rígida en tus archivos.
+- **Separación de intereses**: Mantén la lógica de la IU en el framework del cliente
+  (React/Angular) y la lógica empresarial o el manejo de datos en el servidor.
+- **Manejo de errores**: Asegúrate de que el código del servidor controle de forma sólida los errores
+  de las llamadas a la API externa para evitar que la app falle.
 
-## 다음 단계
+## ¿Qué sigue?
 
-- [Google AI Studio에서 앱 빌드](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ko)
-- [Google AI Studio에서 배포](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko)
-- [앱 갤러리](https://aistudio.google.com/apps?source=showcase&hl=ko)
+- [Compila apps en Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=es-419)
+- [Implementa desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419)
+- [Galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419)
 
-의견 보내기
+Enviar comentarios
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-최종 업데이트: 2026-08-19(UTC)
+Última actualización: 2026-08-19 (UTC)
 
-의견을 전달하고 싶나요?
+¿Quieres brindar más información?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-08-19(UTC)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-08-19 (UTC)"],[],[]]

@@ -1,36 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=fa
-fetched_at: 2026-10-12T06:50:05.853865+00:00
-title: "\u0627\u0633\u062a\u0646\u0628\u0627\u0637 \u0627\u0648\u0644\u0648\u06cc\u062a \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/priority-inference?hl=sq
+fetched_at: 2026-10-19T05:42:12.044166+00:00
+title: "Konkludimi me p\u00ebrpar\u00ebsi \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash اکنون در دسترس است. [آن را امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fa) .
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [صفحه اصلی](https://ai.google.dev/?hl=fa)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fa)
-- [سندنگار](https://ai.google.dev/gemini-api/docs/generate-content?hl=fa)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs/generate-content?hl=sq)
 
-ارسال بازخورد
+Dërgo komente
 
-# استنباط اولویت
+# Konkludimi me përparësi
 
-شرح: با لایه استنباط «اولویت‌دار»، نحوه بهینه‌سازی تأخیر را بیاموزید
+Përshkrimi: Mëso se si të optimizosh vonesën me nivelin e përparësisë së përfundimit
 
-‫Gemini Priority API سطح استنباط ممتاز است که برای حجم‌های کاری حیاتی کسب‌وکار طراحی شده است و در ازای قیمت ممتاز، تأخیر پایین‌تر و بالاترین قابلیت اطمینان را ارائه می‌دهد. ترافیک سطح اولویت بالاتر از ترافیک سطح Flex و
-میانای برنامه‌سازی کاربردی استاندارد اولویت‌بندی می‌شود.
+Gemini Priority API është një nivel i parashikimit premium i krijuar për ngarkesat e punës që janë kritike për biznesin që kërkojnë vonesë më të ulët dhe besueshmëri më të lartë me një çmim premium. Trafiku i nivelit të përparësisë ka përparësi ndaj
+trafikut të nivelit standard të API-së dhe Flex.
 
-استنباط اولویت برای کاربران [سطح ۲ و سطح ۳](https://ai.google.dev/gemini-api/docs/billing?hl=fa#about-billing) در سراسر نقاط پایانی «میانای برنامه‌سازی کاربردی GenerateContent»
-و «میانای برنامه‌سازی کاربردی Interactions» دردسترس است.
+Konkludimi i përparësisë ofrohet për përdoruesit e [nivelit 2 dhe nivelit 3](https://ai.google.dev/gemini-api/docs/billing?hl=sq#about-billing) nëpër pikat fundore të API-së së "Gjenerimit të përmbajtjes" dhe API-së së "Ndërveprimeve".
 
-## نحوه استفاده از «اولویت»
+## Si të përdorësh "Përparësinë"
 
-برای استفاده از سطح «اولویت‌دار»، فیلد `service_tier` را در بدنه درخواست روی
-`priority` تنظیم کنید. اگر این فیلد حذف شود، سطح پیش‌فرض استاندارد است.
+Për të përdorur nivelin e përparësisë, cakto fushën `service_tier` në trupin e kërkesës në
+`priority`. Niveli i parazgjedhur është standard nëse fusha hiqet.
 
 ### Python
 
@@ -87,7 +86,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -128,7 +127,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=$GEMINI_API_KEY" \
@@ -141,88 +140,85 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-## نحوه عملکرد استنباط «اولویت»
+## Si funksionon përfundimi për "Prioritetin"
 
-استنتاج اولویت درخواست‌ها را به صف‌های محاسباتی با اهمیت بالا هدایت می‌کند و
-عملکرد سریع و قابل‌پیش‌بینی برای برنامه‌های سَمت کاربر ارائه می‌دهد. سازوکار اصلی آن
-تنزل سطح سمت سرور به‌صورت تدریجی به پردازش استاندارد برای ترافیکی است که
-از حدود پویا فراتر می‌رود، و به‌جای رد کردن درخواست، پایداری برنامه را تضمین می‌کند.
+Itineraret e përfundimeve me përparësi i drejtojnë kërkesat te radhët e llogaritjeve me nivel të lartë kritik, duke ofruar performancë të parashikueshme dhe të shpejtë për aplikacionet e përdoruesve. Mekanizmi i tij kryesor është një ulje e nivelit të shërbimit në anën e serverit në përpunimin standard për trafikun që tejkalon kufijtë dinamikë, duke siguruar stabilitetin e aplikacionit në vend që të dështojë kërkesa.
 
-| ویژگی | اولویت | استاندارد | به‌رخ کشیدن | دسته |
+| Veçoria | Me përparësi | Standard | Tregim force | Paketë |
 | --- | --- | --- | --- | --- |
-| **قیمت‌گذاری** | ‫۷۵ تا ۱۰۰٪ بیشتر از «استاندارد» | قیمت کامل | ‫٪۵۰ تخفیف | ‫٪۵۰ تخفیف |
-| **تأخیر** | ثانیه | ثانیه به دقیقه | دقیقه (هدف ۱ تا ۱۵ دقیقه) | حداکثر ۲۴ ساعت |
-| **قابلیت اطمینان** | زیاد (غیرقابل ریزش) | زیاد / متوسط روبه‌بالا | نهایت تلاش (قابل‌حذف) | بالا (برای توان گذرداد) |
-| **میانای** | هم‌زمان | هم‌زمان | هم‌زمان | غیرهمگام |
+| **Çmimet** | 75-100% më shumë se standarde | Çmimi i plotë | 50% zbritje | 50% zbritje |
+| **Vonesa** | Sekonda | Sekonda në minuta | Minuta (objektivi 1-15 min.) | Deri në 24 orë |
+| **Besueshmëria** | E lartë (jo e heqshme) | E lartë / mesatarisht e lartë | Me përpjekjen më të mirë (i heqshëm) | E lartë (për rendiment) |
+| **Ndërfaqja** | Sinkron | Sinkron | Sinkron | Josinkron |
 
-### مزایای کلیدی
+### Përfitimet kryesore
 
-- **تأخیر کم**: برای زمان‌های پاسخ ثانیه‌ای برای ابزارهای هوش مصنوعی تعاملی و کاربرپسند طراحی شده است.
-- **قابلیت اطمینان بالا**: ترافیک با بالاترین سطح اهمیت حیاتی درنظر گرفته می‌شود و
-  به‌هیچ‌وجه نباید حذف شود.
-- **تنزل تدریجی**: افزایش ناگهانی ترافیک که از حدود پویا فراتر می‌رود به‌طور خودکار به سطح «استاندارد» برای پردازش تنزل داده می‌شود و از خرابی جلوگیری می‌کند و مانع از قطعی سرویس می‌شود.
-- **اصطکاک کم**: از همان روش هم‌زمان `generateContent` به‌عنوان سطوح استاندارد و Flex استفاده می‌کند.
+- **Vonesë e ulët**: Projektuar për kohë përgjigjeje në sekonda për vegla interaktive të IA-së për përdoruesit.
+- **Besueshmëri e lartë**: Trafiku trajtohet me nivelin më të lartë të kriticitetit dhe është
+  rreptësisht i pandërprerë.
+- **Degradimi i butë**: Rritjet e trafikut që tejkalojnë kufijtë dinamikë ulen automatikisht në nivelin "Standard" për përpunim në vend që të dështojnë, duke parandaluar ndërprerjet e shërbimit.
+- **Fërkimi i ulët**: Përdor të njëjtën metodë sinkrone `generateContent` si nivelet standarde dhe Flex.
 
-### موارد استفاده
+### Rastet e përdorimit
 
-پردازش اولویت‌دار برای گردش کارهای حیاتی کسب‌وکار که در آن‌ها عملکرد و قابلیت اطمینان اهمیت زیادی دارد ایده‌آل است.
+Përpunimi me përparësi është ideal për flukset e punës që janë kritikë për biznesin ku performanca dhe besueshmëria janë parësore.
 
-- **برنامه‌های هوش مصنوعی تعاملی**: روبات‌های گپ خدمات مشتری و دستیارهای هوش مصنوعی که در آن‌ها کاربران هزینه ممتاز پرداخت می‌کنند و انتظار دارند پاسخ‌های سریع و یکنواخت دریافت کنند.
-- **موتورهای تصمیم‌گیری هم‌زمان**: سیستم‌هایی که به نتایج بسیار قابل‌اعتماد و با تأخیر کم نیاز دارند، مانند اولویت‌بندی زنده درخواست‌های پشتیبانی یا تشخیص کلاهبرداری.
-- **ویژگی‌های مشتری ممتاز**: توسعه‌دهندگانی که باید اهداف سطح خدمات (SLO) بالاتری را برای مشتریان پولی تضمین کنند.
+- **Aplikacionet ndërvepruese të IA-së**: Robotët bisedarë të shërbimit ndaj klientit dhe pilotët ndihmës ku përdoruesit paguajnë një tarifë premium dhe presin përgjigje të shpejta dhe të qëndrueshme.
+- **Motorët e vendimeve në kohë reale**: Sistemet që kërkojnë rezultate shumë të besueshme me vonesë të ulët, si p.sh. triazhimi i biletave të drejtpërdrejta ose zbulimi i mashtrimeve.
+- **Veçoritë premium për klientët**: Zhvilluesit që duhet të garantojnë objektiva më të lartë të nivelit të shërbimit (SLO) për klientët me pagesë.
 
-### محدودیت‌های نرخ
+### Kufijtë e normës
 
-مصرف اولویت‌دار نرخ محدودیت‌های خود را دارد، حتی اگر مصرف در [محدودیت‌های نرخ ترافیک تعاملی کلی](https://aistudio.google.com/rate-limit?hl=fa) محاسبه شود. حدود نرخ پیش‌فرض
-برای استنباط «اولویت‌دار» **۰٫۳ برابر حد نرخ استاندارد برای «مدل / سطح»** است
+Konsumimi me përparësi ka kufijtë e vet të normës edhe pse konsumimi llogaritet për [kufijtë e normës së përgjithshme të trafikut interaktiv](https://aistudio.google.com/rate-limit?hl=sq). Kufijtë e parazgjedhur të normës
+për përfundimin e "Përparësisë" janë **0,3 herë kufiri standard i normës për modelin / nivelin**
 
-### منطق تنزل ایمن
+### Logjika e uljes normale të nivelit
 
-اگر به‌دلیل ازدحام، از حدود «اولویت» فراتر بروید، درخواست‌های سرریز به‌جای اینکه با خطای ۵۰۳ یا ۴۲۹ ناموفق شوند، **به‌طور خودکار و به‌نحوی مناسب** به پردازش «استاندارد» تنزل داده می‌شوند. هزینه درخواست‌های تنزل‌یافته براساس نرخ استاندارد محاسبه می‌شود، نه نرخ ممتاز «اولویت‌دار».
+Nëse kufijtë e "Prioritetit" tejkalohen për shkak të mbingarkesës, kërkesat e tepërta **zbresin automatikisht dhe pa probleme** në përpunim standard në vend që të dështojnë me një gabim 503 ose 429. Kërkesat e ulura në nivel tarifohen me tarifën standarde, jo me tarifën premium të përparësisë.
 
-### مسئولیت کارخواه
+### Përgjegjësia e klientit
 
-- **پایش پاسخ**: توسعه‌دهندگان باید `x-gemini-service-tier`
-  سرایند در پاسخ API را پایش کنند تا تشخیص دهند آیا درخواست‌ها به‌طور مکرر به
-  `standard` تنزل داده می‌شوند یا نه.
-- **تلاش‌های مجدد**: کارخواه‌ها باید منطق تلاش مجدد/پس‌گیری نمایی را برای خطاهای استاندارد، مثل `DEADLINE_EXCEEDED`، پیاده‌سازی کنند.
+- **Monitorimi i përgjigjes**: Zhvilluesit duhet të monitorojnë `x-gemini-service-tier`
+  titullin në përgjigjen e API-së për të zbuluar nëse kërkesat po ulen shpesh në nivelin `standard`.
+- **Riprovat**: Klientët duhet të zbatojnë logjikën e riprovës/kohën e pritjes eksponenciale për gabimet standarde, si p.sh. `DEADLINE_EXCEEDED`.
 
-## قیمت‌گذاری
+## Çmimet
 
-قیمت استنباط اولویت ۷۵ تا ۱۰۰٪ بیشتر از [میانای برنامه‌سازی کاربردی استاندارد](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) است و براساس تعداد نشان صورت‌حساب می‌شود.
+Përfundimi me përparësi ka një çmim 75-100% më të lartë se [API-ja standarde](https://ai.google.dev/gemini-api/docs/pricing?hl=sq) dhe faturohet për çdo kod.
 
-## مدل‌های پشتیبانی‌شده
+## Modelet e mbështetura
 
-مدل‌های زیر از «استنباط اولویت‌دار» پشتیبانی می‌کنند:
+Modelet e mëposhtme mbështesin përfundimin me përparësi:
 
-| مدل | استنباط اولویت |
+| Modeli | Konkludimi me përparësi |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fa) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fa) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fa) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fa) | ✔️ |
-| [پیش‌نمایش Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fa) | ✔️ |
-| [پیش‌نمایش Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fa) | ✔️ |
-| [پیش‌نمایش تصویر Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=fa) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fa) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fa) | ✔️ |
-| [تصویر Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fa) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fa) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=sq) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=sq) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=sq) | ✔️ |
+| [Versioni paraprak i Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) | ✔️ |
+| [Pamja paraprake e Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq) | ✔️ |
+| [Pamja paraprake e imazheve të Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=sq) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=sq) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=sq) | ✔️ |
+| [Imazhi i Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=sq) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=sq) | ✔️ |
 
-## قدم بعدی چیست
+## Çfarë ka më pas
 
-درباره سایر گزینه‌های [استنباط و بهینه‌سازی](https://ai.google.dev/gemini-api/docs/optimization?hl=fa) Gemini بخوانید:
+Lexo rreth opsioneve të tjera të [përfundimit dhe optimizimit](https://ai.google.dev/gemini-api/docs/optimization?hl=sq) të Gemini:
 
-- برای کاهش ۵۰٪ هزینه، از [استنتاج انعطاف‌پذیر](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fa) استفاده کنید.
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=fa) برای پردازش ناهمزمان در عرض ۲۴ ساعت.
-- [ذخیره کردن بافت در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa) برای کاهش هزینه‌های کد ورودی.
+- [Deduksioni Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=sq) për 50% ulje të kostos.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=sq) për përpunim asinkron brenda 24 orëve.
+- [Ruajtja në memorien specifike e kontekstit](https://ai.google.dev/gemini-api/docs/caching?hl=sq) për kosto të reduktuara të kodeve të hyrjes.
 
-ارسال بازخورد
+Dërgo komente
 
-جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی.
+Përditësimi i fundit: 2026-10-13 UTC.
 
-می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
+Duhet të na tregosh më shumë?
 
-[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی."],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-13 UTC."],[],[]]

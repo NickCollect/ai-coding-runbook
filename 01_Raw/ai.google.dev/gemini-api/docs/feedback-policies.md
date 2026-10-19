@@ -1,63 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=tr
-fetched_at: 2026-10-12T07:08:24.127949+00:00
-title: "Geri bildirim \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=hi
+fetched_at: 2026-10-19T05:51:37.246636+00:00
+title: "\u0938\u0941\u091d\u093e\u0935 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Geri bildirim
+# सुझाव
 
-Google AI Studio, model çıkışları, oluşturulan yapılar ve API isteği günlükleri hakkında geri bildirim göndermeniz için birden fazla yöntem sunar. Bu politika, Google AI Studio'da gönderilen tüm geri bildirimler için geçerlidir. Bunlara yanıt derecelendirmeleri (ör. beğeni ve beğenmeme), yazılı yorumlar ve tercih oylaması (ör. satır içi tercih oylaması ve Build Arena modu) dahildir.
+Google AI Studio में, मॉडल के आउटपुट, जनरेट किए गए आर्टफ़ैक्ट, और एपीआई अनुरोध लॉग के बारे में सुझाव/राय देने या शिकायत करने के कई तरीके उपलब्ध हैं. यह नीति, Google AI Studio पर सबमिट किए गए सभी सुझाव/राय या शिकायत पर लागू होती है. इनमें जवाबों को रेटिंग देना (जैसे कि पसंद और नापसंद करना), लिखित टिप्पणियां, और पसंद के हिसाब से वोट करना (जैसे कि इनलाइन प्रेफ़रेंस वोटिंग और बिल्ड अरीना मोड) शामिल है.
 
-## Bunu neden yapıyoruz?
+## हम ऐसा क्यों कर रहे हैं?
 
-Yapay zeka modellerimizi ve hizmetlerimizi iyileştirmek için sürekli çalışıyoruz. Geri bildiriminiz, [Gemini API Ek Hizmet Şartları](https://ai.google.dev/gemini-api/terms?hl=tr) ve [Gizlilik Politikası](https://policies.google.com/privacy?hl=tr)'na uygun olarak Google'ın kurumsal özellikleri, ürünleri ve hizmetleri de dahil olmak üzere Google ürünlerini, hizmetlerini ve makine öğrenimi teknolojilerini sunmamıza, iyileştirmemize ve geliştirmemize yardımcı olur.
+हम अपने एआई मॉडल और सेवाओं को बेहतर बनाने के लिए लगातार काम कर रहे हैं. आपके सुझाव, राय या शिकायत से हमें Google के प्रॉडक्ट, सेवाओं, और मशीन लर्निंग टेक्नोलॉजी को उपलब्ध कराने, उन्हें बेहतर बनाने, और डेवलप करने में मदद मिलती है. इनमें Google की एंटरप्राइज़ सुविधाएं, प्रॉडक्ट, और सेवाएं भी शामिल हैं. ऐसा [Gemini API की सेवा की अतिरिक्त शर्तों](https://ai.google.dev/gemini-api/terms?hl=hi) और [निजता नीति](https://policies.google.com/privacy?hl=hi) के मुताबिक किया जाता है.
 
-## Geri bildirime hangi veriler dahil edilir?
+## सुझाव/राय या शिकायत में कौनसा डेटा शामिल होता है?
 
-Modellerimiz ve özelliklerimiz hakkında bilinçli kararlar vermek için Google AI Studio'da geri bildirim gönderdiğinizde belirli verileri toplarız:
+अपने मॉडल और सुविधाओं के बारे में बेहतर फ़ैसले लेने के लिए, हम कुछ डेटा इकट्ठा करते हैं. यह डेटा तब इकट्ठा किया जाता है, जब Google AI Studio में सुझाव/राय दी जाती है या शिकायत की जाती है:
 
-- **İstemler ve Yanıtlar:** Geri bildirim gönderdiğiniz etkileşim veya sohbetteki istemleri ve yanıtları (yüklenen dosyalar veya medya dahil) kaydederiz. Karşılaştırmalı tercih değerlendirmelerine katıldığınızda, seçiminizin bağlamını anlayabilmemiz için sunulan birden fazla yanıt seçeneğini de kaydederiz.
-- **Puanınız, oyunuz veya yorumlarınız:** Verdiğiniz puanı (ör. beğenme veya beğenmeme), oylamada tercih ettiğiniz yanıtı, seçilen geri bildirim kategorilerini ve gönderdiğiniz yazılı yorumları kaydederiz.
-- **Kullanım Ayrıntıları:** Bu, etkileşiminiz veya sohbetinizle ilgili teknik ve operasyonel ayrıntıları (ör. yanıtı hangi modelin oluşturduğu, model parametreleri ve sistem meta verileri) içerir.
+- **प्रॉम्प्ट और जवाब:** हम प्रॉम्प्ट और जवाब रिकॉर्ड करते हैं. इनमें अपलोड की गई फ़ाइलें या मीडिया भी शामिल होता है. यह वह इंटरैक्शन या बातचीत होती है जिसके बारे में आपने सुझाव/राय दी है या शिकायत की है. जब तुलनात्मक प्राथमिकता के आधार पर आकलन में हिस्सा लिया जाता है, तो हम जवाब के कई विकल्पों को भी रिकॉर्ड करते हैं. इससे हमें यह समझने में मदद मिलती है कि आपने किस आधार पर कोई विकल्प चुना.
+- **आपकी रेटिंग, वोट या टिप्पणियां:** हम आपकी दी गई रेटिंग (जैसे, पसंद या नापसंद), वोट में चुना गया विकल्प, चुनी गई सुझाव/राय देने या शिकायत करने की कैटगरी, और सबमिट की गई टिप्पणियां रिकॉर्ड करते हैं.
+- **इस्तेमाल की जानकारी:** इसमें आपके इंटरैक्शन या बातचीत से जुड़ी तकनीकी और ऑपरेशनल जानकारी शामिल होती है. जैसे, किस मॉडल ने जवाब जनरेट किया, मॉडल के पैरामीटर, और सिस्टम मेटाडेटा.
 
-### Yüzeye göre geri bildirim
+### प्लैटफ़ॉर्म के हिसाब से सुझाव/राय दें या शिकायत करें
 
-Geri bildirimler, Google AI Studio'daki farklı platformlarda gönderilebilir. Bağlamda küçük farklılıklar olabilir:
+Google AI Studio के अलग-अलग प्लैटफ़ॉर्म पर सुझाव/राय दी जा सकती है या शिकायत की जा सकती है. हालांकि, हर प्लैटफ़ॉर्म पर कॉन्टेक्स्ट में थोड़ा अंतर हो सकता है:
 
-- **AI Studio Playground:** Playground'da yanıt derecelendirmeleri (beğen veya beğenme) ya da yan yana satır içi tercih oylaması kullanılarak geri bildirim gönderilebilir. Kaydedilen veriler arasında sohbet geçmişi, istemler, model yanıtları, yüklenen medya veya dosyalar, parametre ayarları, geri bildirim ve kullanım ayrıntıları yer alır.
-- **AI Studio Build:** Build Arena dahil olmak üzere Build'de oluşturulan kod, uygulama çıkışları ve karşılaştırmalı model değerlendirmeleri hakkında geri bildirim gönderilebilir.
-  Kaydedilen veriler arasında derleme talimatları ve istemler, oluşturulan uygulama kodu ve çıkışlar, karşılaştırmalı oylar veya derecelendirmeler, eşlik eden yorumlar ve kullanım ayrıntıları yer alır.
-- **Gemini API günlükleri:** Günlükler ve Veri Kümeleri Görüntüleyici'de, tek tek Gemini API istek günlükleri hakkında geri bildirim gönderilebilir. Kaydedilen veriler arasında, belirli API günlük girişi (istek yükü, model yanıtı, parametreler ve meta veriler dahil) ile birlikte geri bildirimler ve kullanım ayrıntıları yer alır. Günlük verilerinin depolanması ve veri kümesi paylaşımı hakkında daha fazla bilgi için [Veri Günlüğü ve Paylaşımı](https://ai.google.dev/gemini-api/docs/logs-policy?hl=tr) Politikası'nı inceleyin.
+- **AI Studio का Playground:** Playground में, जवाबों को रेटिंग देकर (पसंद या नापसंद) या साइड-बाय-साइड इनलाइन प्रेफ़रेंस वोटिंग का इस्तेमाल करके सुझाव/राय दी जा सकती है या शिकायत की जा सकती है. रिकॉर्ड किए गए डेटा में बातचीत का इतिहास, प्रॉम्प्ट, मॉडल के जवाब, अपलोड किया गया मीडिया या फ़ाइलें, पैरामीटर सेटिंग, सुझाव/राय/शिकायत, और इस्तेमाल की जानकारी शामिल होती है.
+- **AI Studio Build:** Build (इसमें Build Arena भी शामिल है) में, जनरेट किए गए कोड, ऐप्लिकेशन के आउटपुट, और मॉडल की तुलनात्मक परफ़ॉर्मेंस के बारे में सुझाव/राय दी जा सकती है या शिकायत की जा सकती है.
+  रिकॉर्ड किए गए डेटा में, ऐप्लिकेशन बनाने के निर्देश और प्रॉम्प्ट, जनरेट किया गया ऐप्लिकेशन कोड और आउटपुट, तुलनात्मक वोट या रेटिंग, साथ में दिए गए कोई भी सुझाव/राय/शिकायत और इस्तेमाल की जानकारी शामिल होती है.
+- **Gemini API के लॉग:** लॉग और डेटासेट व्यूअर में, Gemini API के अनुरोध के अलग-अलग लॉग पर सुझाव/राय दी जा सकती है या शिकायत की जा सकती है. रिकॉर्ड किए गए डेटा में, एपीआई लॉग की खास एंट्री (इसमें अनुरोध का पेलोड, मॉडल का जवाब, पैरामीटर, और मेटाडेटा शामिल है) के साथ-साथ सुझाव, राय या शिकायत और इस्तेमाल की जानकारी शामिल होती है. लॉग डेटा स्टोरेज और डेटासेट शेयर करने के बारे में ज़्यादा जानने के लिए, [डेटा लॉग करने और शेयर करने](https://ai.google.dev/gemini-api/docs/logs-policy?hl=hi) से जुड़ी नीति देखें.
 
-## Satır İçi Tercih Oylaması
+## इनलाइन वोटिंग की सुविधा
 
-Google AI Studio'da, isteminize verilen iki farklı yanıtın yan yana karşılaştırmasını görebilirsiniz. Bu, tercihli oylama sistemimizin bir parçasıdır. Hangi yanıtı tercih ettiğinizi seçmeniz istenir. Bu sayede, kullanıcıların hangi model çıkışlarını en faydalı bulduğunu anlayabiliriz.
+Google AI Studio में, आपको कभी-कभी अपने प्रॉम्प्ट के दो अलग-अलग जवाबों की तुलना एक साथ दिख सकती है. यह हमारे प्राथमिकता के हिसाब से वोट करने वाले सिस्टम का हिस्सा है. आपसे पूछा जाएगा कि आपको कौनसा जवाब ज़्यादा पसंद आया. इससे हमें यह समझने में मदद मिलेगी कि उपयोगकर्ताओं को कौनसा मॉडल सबसे ज़्यादा मददगार लगता है.
 
-## Gizliliğiniz
+## आपकी निजता
 
-**Hassas, gizli veya kişisel bilgiler içeren görüşmeler, istemler, yanıtlar ya da günlükler hakkında geri bildirim göndermeyin.** Geri bildirimde bulunmak
-her zaman isteğe bağlıdır.
+**ऐसी बातचीत, प्रॉम्प्ट, जवाब या लॉग के बारे में सुझाव/राय या शिकायत सबमिट न करें जिनमें संवेदनशील, गोपनीय या निजी जानकारी शामिल हो.** सुझाव/राय देना या शिकायत करना
+हमेशा आपकी मर्ज़ी पर निर्भर करता है.
 
-Google AI Studio'yu geliştirmemize yardımcı olduğunuz için teşekkür ederiz.
+Google AI Studio को बेहतर बनाने में हमारी मदद करने के लिए धन्यवाद!
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-09-25 UTC.
+आखिरी बार 2026-09-25 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-25 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-25 (UTC) को अपडेट किया गया."],[],[]]

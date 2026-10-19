@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he
-fetched_at: 2026-10-12T07:10:53.192073+00:00
-title: "\u05e1\u05d5\u05db\u05df Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it
+fetched_at: 2026-10-19T05:50:42.943824+00:00
+title: "Agente Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-שליחת משוב
+Invia feedback
 
-# סוכן Antigravity
+# Agente Antigravity
 
-סוכן Antigravity הוא סוכן מנוהל לשימוש כללי ב-Gemini API. קריאה יחידה ל-API מספקת לכם סוכן שמבצע ניתוח, מריץ קוד, מנהל קבצים ומבצע חיפוש באינטרנט בתוך ארגז חול מאובטח של Linux, שמארחת Google.
+L'agente Antigravity è un agente gestito per uso generico nell'API Gemini. Una singola chiamata API ti fornisce un agente che ragiona, esegue codice, gestisce file e naviga sul web all'interno del tuo sandbox Linux sicuro, ospitato da Google.
 
-הוא מבוסס על Gemini 3.8 Flash ומשתמש באותו מנגנון כמו Antigravity IDE. אתם יכולים להגדיר את מודל Gemini הבסיסי באמצעות `agent_config`. זמין דרך [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) ו-[Google AI Studio](https://aistudio.google.com?hl=he).
+È basato su Gemini 3.8 Flash e utilizza lo stesso harness dell'IDE Antigravity. Puoi configurare il modello Gemini sottostante utilizzando `agent_config`. Disponibile tramite l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) e [Google AI Studio](https://aistudio.google.com?hl=it).
 
 ### Python
 
@@ -128,33 +128,33 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## יכולות
+## Funzionalità
 
-כל שיחה יכולה להקצות ארגז חול של Linux ולהתחיל לולאה של שימוש בכלי. הסוכן מתכנן, פועל, בודק את התוצאות וחוזר על הפעולות עד שהמשימה מסתיימת.
+Ogni chiamata può eseguire il provisioning di una sandbox Linux e avviare un loop di utilizzo degli strumenti. L'agente pianifica, agisce, osserva i risultati e ripete l'operazione fino al completamento dell'attività.
 
-- **הרצת קוד:** הרצת פקודות Bash,‏ Python ו-Node.js. התקנת חבילות, הרצת בדיקות, פיתוח אפליקציות.
-- **ניהול קבצים:** קריאה, כתיבה, עריכה, חיפוש ורישום של קבצים בארגז החול. הקבצים נשמרים בכל האינטראקציות.
-- **גישה לאינטרנט:** חיפוש ב-Google ואחזור כתובות URL של נתונים.
-- **דחיסת הקשר:** דחיסת הקשר אוטומטית (מופעלת בערך ב-135, 000 טוקנים) כדי לתמוך בסשנים ארוכים עם כמה תורות בלי לאבד את ההקשר או להגיע למגבלות הטוקנים.
+- **Esecuzione di codice**:esegui comandi Bash, Python e Node.js. Installa pacchetti, esegui test, crea app.
+- **Gestione dei file:** leggi, scrivi, modifica, cerca ed elenca i file nella sandbox. I file rimangono disponibili tra un'interazione e l'altra.
+- **Accesso al web**:Ricerca Google e recupero di URL per i dati.
+- **Compattazione del contesto**:compattazione automatica del contesto (attivata a circa 135.000 token) per supportare sessioni multi-turno di lunga durata senza perdere il contesto o raggiungere i limiti di token.
 
-מידע על שימוש בסטרימינג ועל שימוש בשיחות מרובות תפניות זמין במאמר [מדריך למתחילים](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he).
+Consulta la [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it) per l'utilizzo e lo streaming multiformato.
 
-## כלים נתמכים
+## Strumenti supportati
 
-כברירת מחדל, לסוכן יש גישה ל-`code_execution`, ל-`google_search` ול-`url_context`. הכלים של מערכת הקבצים מופעלים אוטומטית כשמציינים את הפרמטר `environment`. אפשר גם להגדיר **פונקציות בהתאמה אישית** כדי לחבר את הסוכן לממשקי ה-API ולכלים שלכם. צריך לציין את הפרמטר `tools` רק כשמתאימים אישית את קבוצת ברירת המחדל או מגבילים אותה, או כשמוסיפים פונקציות מותאמות אישית.
+Per impostazione predefinita, l'agente ha accesso a `code_execution`, `google_search` e `url_context`. Gli strumenti del file system vengono attivati automaticamente quando specifichi il parametro `environment`. Puoi anche definire **funzioni personalizzate** per connettere l'agente alle tue API e ai tuoi strumenti. Devi specificare il parametro `tools` solo quando personalizzi o limiti il set predefinito oppure quando aggiungi funzioni personalizzate.
 
-| כלי | הקלדת ערך | תיאור |
+| Strumento | Tipo di valore | Descrizione |
 | --- | --- | --- |
-| הרצת קוד | `code_execution` | הרצת פקודות של מעטפת (bash, ‏ Python, ‏ Node) עם לכידה של stdout/stderr. |
-| חיפוש Google | `google_search` | לחפש באינטרנט. |
-| URL Context | `url_context` | אחזור וקריאה של דפי אינטרנט. |
-| מערכת קבצים | *(מופעל באמצעות `environment`)* | קריאה, כתיבה, עריכה, חיפוש ורישום של קבצים בארגז החול. המערכת מפעילה את הכלים האלה באופן אוטומטי כשמגדירים את `environment`. |
-| פונקציות מותאמות אישית | `function` | הגדרת פונקציות בהתאמה אישית שהסוכן יכול לבקש להפעיל. מידע נוסף מופיע במאמר בנושא [בקשה להפעלת פונקציה](#function-calling). |
-| שרת MCP מרוחק | `mcp_server` | רישום שרתים חיצוניים של Model Context Protocol‏ (MCP) ככלים. [שרתי MCP](#mcp-servers) |
+| esegui il codice | `code_execution` | Esegui i comandi della shell (bash, Python, Node) con l'acquisizione di stdout/stderr. |
+| Ricerca Google | `google_search` | Cercare sul web pubblico. |
+| Contesto URL | `url_context` | Recupera e leggi le pagine web. |
+| Filesystem | *(attivato tramite `environment`)* | Leggere, scrivere, modificare, cercare ed elencare i file nel sandbox. Il sistema attiva automaticamente questi strumenti quando imposti `environment`. |
+| Funzioni personalizzate | `function` | Definisci funzioni personalizzate che l'agente può richiedere di eseguire. Consulta [Chiamata di funzione](#function-calling). |
+| Server MCP remoto | `mcp_server` | Registra server Model Context Protocol (MCP) esterni come strumenti. Consulta [Server MCP](#mcp-servers). |
 
-אתם יכולים ליירט ולאמת את ההרצה של כלי `code_execution` ו-`filesystem` ישירות בארגז החול המרוחק באמצעות [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=he) סינכרוניים.
+Puoi intercettare e convalidare l'esecuzione degli strumenti `code_execution` e `filesystem` direttamente nella sandbox remota utilizzando gli [hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=it) sincroni.
 
-כדי להגביל את הסוכן לכלים ספציפיים, מעבירים רק את הכלים שרוצים:
+Per limitare l'agente a strumenti specifici, passa solo quelli di cui hai bisogno:
 
 ### Python
 
@@ -285,9 +285,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## קלט מולטי-מודאלי
+## Input multimodale
 
-הסוכן Antigravity תומך בקלט רב-אופני. בשלב הזה יש תמיכה רק בקלט בשפות `text` ו`image`. צריך לספק את התמונות כמחרוזות מוטבעות בקידוד Base64 ‏ (`data`).
+L'agente Antigravity supporta input multimodali. Al momento sono supportati solo gli input `text` e `image`. Le immagini devono essere fornite come stringhe incorporate con codifica base64 (`data`).
 
 ### Python
 
@@ -453,11 +453,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## בקשה להפעלת פונקציה
+## Chiamata di funzione
 
-התכונה 'קריאה להפעלת פונקציות' מאפשרת לכם לחבר את סוכן Antigravity לממשקי API ולמסדי נתונים חיצוניים על ידי הגדרת כלים מותאמים אישית שהסוכן יכול להפעיל. למידע על מושגים כלליים, אפשר לעיין במאמר [בקשות להפעלת פונקציות באמצעות Gemini API](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
+La chiamata di funzione ti consente di connettere l'agente Antigravity ad API e database esterni definendo strumenti personalizzati che l'agente può richiamare. Per i concetti generali, consulta [Chiamata di funzione con l'API Gemini](https://ai.google.dev/gemini-api/docs/function-calling?hl=it).
 
-בדוגמה הבאה מוצגת אינטראקציה של 2 תורות. הסוכן מבקש קודם `get_weather` בקשה להפעלת פונקציה בהתאמה אישית, והלקוח מבצע אותה ומחזיר את התוצאה בתור השני.
+L'esempio seguente mostra un'interazione di due turni. L'agente richiede prima una chiamata di funzione `get_weather` personalizzata, che il client esegue e restituisce il risultato nel secondo turno.
 
 ### Python
 
@@ -542,31 +542,28 @@ import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
-// 1. Define the custom function
-const get_weather_tool = {
-  type: "function",
-  name: "get_weather",
-  description: "Gets the current weather for a given location.",
-  parameters: {
-    type: "object",
-    properties: {
-      location: {
-        type: "string",
-        description: "The city and country, e.g. San Francisco, USA",
-      },
-    },
-    required: ["location"],
-  },
-};
-
-// 2. Call the agent with the custom tool (Turn 1)
+// 1. Call the agent with the custom tool (Turn 1)
 const interaction = await client.interactions.create({
   agent: "antigravity-preview-09-2026",
   input: "What is the weather in Tokyo?",
   environment: "remote",
   tools: [
     { type: "code_execution" },
-    get_weather_tool,
+    {
+      type: "function",
+      name: "get_weather",
+      description: "Gets the current weather for a given location.",
+      parameters: {
+        type: "object",
+        properties: {
+          location: {
+            type: "string",
+            description: "The city and country, e.g. San Francisco, USA",
+          },
+        },
+        required: ["location"],
+      },
+    },
   ],
 }, { timeout: 300000 });
 
@@ -575,39 +572,41 @@ if (interaction.status === "requires_action") {
   // Filesystem tools (like write_to_file) are also represented as function calls
   // but are executed automatically by the environment.
   const executedCalls = new Set(
-    interaction.steps
+    (interaction.steps || [])
       .filter(s => s.type === "function_result")
       .map(s => s.call_id)
   );
-  const pendingCalls = interaction.steps.filter(
+  const pendingCalls = (interaction.steps || []).filter(
     s => s.type === "function_call" && !executedCalls.has(s.id)
   );
 
   if (pendingCalls.length > 0) {
     const fcStep = pendingCalls[0];
-    console.log(`Function to call: ${fcStep.name} (ID: ${fcStep.id})`);
+    if (fcStep.type === "function_call") {
+      console.log(`Function to call: ${fcStep.name} (ID: ${fcStep.id})`);
 
-    // 3. Execute the function locally (simulated get_weather()) and send the result back (Turn 2)
-    const functionResult = {
-      temperature: 23,
-      unit: "celsius"
-    };
+      // Execute the function locally (simulated get_weather()) and send the result back (Turn 2)
+      const functionResult = {
+        temperature: 23,
+        unit: "celsius"
+      };
 
-    const finalInteraction = await client.interactions.create({
-      agent: "antigravity-preview-09-2026",
-      previous_interaction_id: interaction.id, // Reference the interaction ID
-      environment: interaction.environment_id,
-      input: [
-        {
-          type: "function_result",
-          name: fcStep.name,
-          call_id: fcStep.id,
-          result: functionResult,
-        }
-      ],
-    }, { timeout: 300000 });
+      const finalInteraction = await client.interactions.create({
+        agent: "antigravity-preview-09-2026",
+        previous_interaction_id: interaction.id, // Reference the interaction ID
+        environment: interaction.environment_id,
+        input: [
+          {
+            type: "function_result",
+            name: fcStep.name,
+            call_id: fcStep.id,
+            result: functionResult,
+          }
+        ],
+      }, { timeout: 300000 });
 
-    console.log(finalInteraction.output_text);
+      console.log(finalInteraction.output_text);
+    }
   } else {
     console.log("No pending function calls.");
   }
@@ -878,19 +877,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## שרתי MCP
+## Server MCP
 
-כדי לחבר את סוכן Antigravity לכלים חיצוניים, צריך לרשום שרתי Model Context Protocol‏ (MCP) מרוחקים. הסוכן תומך בשרתי MCP מרוחקים באמצעות HTTP שניתן להזרמה.
+Puoi connettere l'agente Antigravity a strumenti esterni registrando server Model Context Protocol (MCP) remoti. L'agente supporta i server MCP remoti tramite HTTP trasmissibile in streaming.
 
-כשרושמים שרת MCP, צריך לציין את השדות הבאים במערך `tools`:
+Quando registri un server MCP, devi specificare i seguenti campi nell'array `tools`:
 
-| שדה | סוג | נדרש | תיאור |
+| Campo | Tipo | Obbligatorio | Descrizione |
 | --- | --- | --- | --- |
-| `type` | מחרוזת | כן | חייב להיות `"mcp_server"`. |
-| `name` | מחרוזת | כן | מזהה ייחודי של השרת. הערך חייב להיות אלפאנומרי (בהתאם ל-`^[a-z0-9_-]+$`) ובאותיות קטנות בלבד. |
-| `url` | מחרוזת | כן | כתובת ה-URL של נקודת הקצה של שרת ה-MCP המרוחק. |
-| `headers` | אובייקט | לא | כותרות מותאמות אישית (למשל, אימות) שנשלחות עם בקשות. |
-| `allowed_tools` | מערך | לא | רשימה של שמות הכלים שמותר להפעיל. אם לא מציינים כלים, כל הכלים מותרים. |
+| `type` | stringa | Sì | Deve essere `"mcp_server"`. |
+| `name` | stringa | Sì | Un identificatore univoco del server. Deve essere rigorosamente in minuscolo e alfanumerico (corrispondente a `^[a-z0-9_-]+$`). |
+| `url` | stringa | Sì | L'URL dell'endpoint del server MCP remoto. |
+| `headers` | oggetto | No | Intestazioni personalizzate (ad es. autenticazione) inviate con le richieste. |
+| `allowed_tools` | matrice | No | Elenco dei nomi degli strumenti che possono essere eseguiti. Se omesso, sono consentiti tutti gli strumenti. |
 
 ### Python
 
@@ -1030,11 +1029,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## בחירת מודל
+## Selezione del modello
 
-ב-`antigravity-preview-09-2026`, מודל ברירת המחדל הוא **Gemini 3.8 Flash** (`gemini-3.8-flash`). אם לא מציינים את `agent_config`, ברירת המחדל של הסוכן היא `gemini-3.8-flash`.
+Per `antigravity-preview-09-2026`, il modello predefinito è **Gemini 3.8 Flash** (`gemini-3.8-flash`). Se ometti `agent_config`, l'agente utilizza `gemini-3.8-flash` per impostazione predefinita.
 
-אתם יכולים להגדיר את מודל Gemini הבסיסי באמצעות `agent_config` כדי לבצע אופטימיזציה של המהירות, העלות או יכולת ההסקה.
+Puoi configurare il modello Gemini sottostante utilizzando `agent_config` per ottimizzare velocità, costi o capacità di ragionamento. Ad esempio, imposta `model` su **Gemini 4 Argon** (`gemini-4-argon`) per attività complesse di progettazione software e ragionamento:
 
 ### Python
 
@@ -1049,7 +1048,7 @@ interaction = client.interactions.create(
     environment="remote",
     agent_config={
         "type": "antigravity",
-        "model": "gemini-3.5-flash-lite",
+        "model": "gemini-4-argon",
     },
 )
 
@@ -1069,7 +1068,7 @@ const interaction = await client.interactions.create({
     environment: "remote",
     agent_config: {
         type: "antigravity",
-        model: "gemini-3.5-flash-lite",
+        model: "gemini-4-argon",
     },
 }, { timeout: 300000 });
 
@@ -1096,7 +1095,7 @@ CreateAgentInteraction params = CreateAgentInteraction.builder()
     .environment(CreateAgentInteractionEnvironment.of("remote"))
     .agentConfig(
         AntigravityAgentConfig.builder()
-            .model("gemini-3.5-flash-lite")
+            .model("gemini-4-argon")
             .build()
     )
     .build();
@@ -1133,7 +1132,7 @@ func main() {
             Input:       interactions.NewInteractionsInput("Summarize the key differences between functional and object-oriented programming."),
             Environment: genai.Ptr(interactions.NewCreateAgentInteractionEnvironment("remote")),
             AgentConfig: genai.Ptr(interactions.NewCreateAgentInteractionAgentConfig(interactions.AntigravityAgentConfig{
-                Model: genai.Ptr("gemini-3.5-flash-lite"),
+                Model: genai.Ptr("gemini-4-argon"),
             })),
         }),
     })
@@ -1158,30 +1157,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
       "environment": "remote",
       "agent_config": {
           "type": "antigravity",
-          "model": "gemini-3.5-flash-lite"
+          "model": "gemini-4-argon"
       }
   }'
 ```
 
-הערכים הנתמכים של `agent_config.model` הם:
+I valori supportati per `agent_config.model` sono:
 
-| מודל | הערך ב-`agent_config.model` | תיאור |
+| Modello | Valore in `agent_config.model` | Descrizione |
 | --- | --- | --- |
-| ‫**Gemini 3.8 Flash** (ברירת מחדל) | `gemini-3.8-flash` | מודל מאוזן שמוגדר כברירת מחדל לנימוקים, לקידוד ולשימוש בכלי. |
-| ‫**Gemini 3.6 Flash** | `gemini-3.6-flash` | מודל Flash מאוזן לתהליכי עבודה Agentic Workflows כלליים. |
-| ‫**Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | מודל קל שעבר אופטימיזציה לזמן אחזור קצר ולמשימות שבהן העלות היא שיקול חשוב. |
+| **Gemini 3.8 Flash** (predefinito) | `gemini-3.8-flash` | Modello bilanciato predefinito per ragionamento, programmazione e utilizzo degli strumenti. |
+| **Gemini 4 Argon** | `gemini-4-argon` | Modello di ragionamento all'avanguardia per l'ingegneria del software complessa, la risoluzione approfondita dei problemi e le attività agentiche a lungo termine. |
+| **Gemini 3.6 Flash** | `gemini-3.6-flash` | Modello Flash bilanciato per workflow agentici generici. |
+| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | Modello leggero ottimizzato per attività a bassa latenza e sensibili ai costi. |
 
-כשיוצרים סוכן מנוהל באמצעות `agents.create`, מגדירים את המודל בדיוק באותו אופן על ידי העברת `base_agent` ו-`agent_config`. שימו לב שאי אפשר לבטל את המודל במועד האינטראקציה לסוכן מנוהל שנוצר באמצעות `agents.create`. המודל נעול למה שהוגדר כשהסוכן נוצר. כך אפשר לוודא שההתנהגות של הכלי תהיה צפויה, שהניפוי באגים יהיה עקבי ושגבולות האבטחה יישמרו.
+Quando crei un agente gestito con `agents.create`, configuri il modello esattamente nello stesso modo passando `base_agent` e `agent_config`. Tieni presente che non puoi eseguire l'override del modello al momento dell'interazione per un agente gestito creato con `agents.create`. Il modello è bloccato su ciò che è stato impostato al momento della creazione dell'agente. In questo modo, il comportamento di chiamata degli strumenti è prevedibile, il debug è coerente e i limiti di sicurezza vengono rispettati.
 
-## התאמה אישית של הנציג
+## Personalizzare l'agente
 
-אפשר להרחיב את סוכן Antigravity על ידי התאמה אישית של ההוראות, הכלים והסביבה שלו. הסוכן תומך בגישה מקורית למערכת הקבצים להתאמה אישית: אתם יכולים לטעון קבצים כמו `AGENTS.md` להוראות ולסקילים ב-`.agents/skills/` ישירות לארגז החול, או להעביר את ההגדרה בשורה במועד האינטראקציה. אפשר לבצע איטרציות על ההגדרה בשורה ואז לשמור אותה כסוכן מנוהל כשמוכנים.
+Puoi estendere l'agente Antigravity personalizzando le sue istruzioni, i suoi strumenti e il suo ambiente. L'agente supporta un approccio di personalizzazione nativo del file system: puoi montare file come `AGENTS.md` per le istruzioni e le skill in `.agents/skills/` direttamente nella sandbox o passare la configurazione in linea al momento dell'interazione. Puoi iterare la configurazione in linea e salvarla come agente gestito quando è pronta.
 
-לפרטים מלאים על בניית סוכנים בהתאמה אישית, אפשר לעיין במאמר [בניית סוכנים מנוהלים](https://ai.google.dev/gemini-api/docs/custom-agents?hl=he).
+Per informazioni dettagliate su come creare agenti personalizzati, consulta [Creazione di agenti gestiti](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it).
 
-## ביצוע ברקע
+## Esecuzione in background
 
-משימות של סוכנים שכוללות חשיבה רציונלית רב-שלבית, הרצת קוד או פעולות על קבצים יכולות להימשך כמה דקות. כדי להריץ את האינטראקציה באופן אסינכרוני, משתמשים ב-`background=True`. ה-API מחזיר מיד מזהה אינטראקציה שאתם שולחים עליו שאילתות עד שהסטטוס הוא `completed` או `failed`.
+Le attività dell'agente che prevedono ragionamento multi-step, esecuzione di codice o operazioni su file possono richiedere alcuni minuti. Utilizza `background=True` per eseguire l'interazione in modo asincrono. L'API restituisce immediatamente un ID interazione che esegue il polling finché lo stato non è `completed` o `failed`.
 
 ### Python
 
@@ -1363,9 +1363,9 @@ curl -s -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/$I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-כדי להריץ ברקע צריך להשתמש ב-`store=True`, שמוגדר כברירת מחדל. כדי לראות עדכוני התקדמות בזמן אמת במהלך הפעלה ברקע, אפשר לעיין במאמר בנושא [הזרמת אינטראקציות ברקע](https://ai.google.dev/gemini-api/docs/background-execution?hl=he#streaming-pattern).
+L'esecuzione in background richiede `store=True`, che è l'impostazione predefinita. Per aggiornamenti in tempo reale sullo stato di avanzamento durante l'esecuzione in background, consulta [Interazioni in background in streaming](https://ai.google.dev/gemini-api/docs/background-execution?hl=it#streaming-pattern).
 
-אפשר לבטל אינטראקציה ברקע באמצעות השיטה `cancel`.
+Puoi annullare un'interazione in background in esecuzione utilizzando il metodo `cancel`.
 
 ### Python
 
@@ -1424,9 +1424,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions/INTE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-**שיחה מרובת תפניות עם ביצוע ברקע**
+**Multi-turn con esecuzione in background**
 
-כשאינטראקציה ברקע כוללת כלים עם מצב (כמו הרצת קוד בסביבת ארגז חול), משתמשים ב-`environment_id` מהאינטראקציה שהושלמה כדי להמשיך באותה סביבה. כך הסוכן ימשיך מהמקום שבו הוא הפסיק, עם כל הקבצים והמצב הקודם.
+Quando un'interazione in background coinvolge strumenti stateful (come l'esecuzione di codice in una sandbox), utilizza il `environment_id` dell'interazione completata per continuare nello stesso ambiente. In questo modo, l'agente riprende da dove aveva interrotto con tutti i file e lo stato intatti.
 
 ### Python
 
@@ -1667,27 +1667,27 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }"
 ```
 
-## סביבה
+## Ambienti
 
-כל קריאה יוצרת ארגז חול של Linux או משתמשת בארגז חול קיים. הפרמטר `environment` יכול להופיע בשלוש צורות:
+Ogni chiamata crea o riutilizza una sandbox Linux. Il parametro `environment` assume tre forme:
 
-| טופס | תיאור |
+| Modulo | Descrizione |
 | --- | --- |
-| `"remote"` | הקצאת ארגז חול חדש עם הגדרות ברירת מחדל. |
-| `"env_abc123"` | אפשר לעשות שימוש חוזר בסביבה קיימת לפי מזהה, ולשמור את כל הקבצים והמצב. |
-| `{...}` | מלא `EnvironmentConfig` עם מקורות מותאמים אישית וכללי רשת. |
+| `"remote"` | Esegui il provisioning di una nuova sandbox con le impostazioni predefinite. |
+| `"env_abc123"` | Riutilizza un ambiente esistente in base all'ID, conservando tutti i file e lo stato. |
+| `{...}` | `EnvironmentConfig` completo con origini personalizzate e regole di rete. |
 
-פרטים על מקורות (Git,‏ GCS,‏ inline), רשתות, מחזור חיים ומגבלות משאבים זמינים במאמר [סביבות](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he).
+Consulta [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it) per i dettagli su origini (Git, GCS, in linea), networking, ciclo di vita e limiti delle risorse.
 
-## טריגרים
+## Trigger
 
-טריגרים מאפשרים לתזמן הפעלה אוטומטית של סוכן לפי לוח זמנים של cron. טריגר קושר סוכן, סביבה, הנחיה ולוח זמנים למקור נתונים קבוע שמופעל ללא התערבות ידנית. כל הרצה משתמשת מחדש באותה סביבה, כך שקבצים שנוצרו בהרצה אחת נשמרים וגלויים להרצה הבאה.
+I trigger consentono di pianificare l'esecuzione automatica di un agente in base a una pianificazione cron. Un trigger associa un agente, un ambiente, un prompt e una pianificazione in una risorsa persistente che si attiva senza intervento manuale. Ogni esecuzione riutilizza lo stesso ambiente, quindi i file creati in un'esecuzione persistono e sono visibili a quella successiva.
 
-### יצירת טריגר
+### Crea un trigger
 
-כדי ליצור טריגר, מציינים לוח זמנים של cron, אזור זמן והגדרת האינטראקציה. הטריגר מתחיל בסטטוס `active` ויופעל בזמן ה-cron התואם הבא. שומרים את הערך `id` שמוחזר כדי לנהל את הטריגר בקריאות הבאות.
+Crea un trigger specificando una pianificazione cron, un fuso orario e la configurazione dell'interazione. Il trigger inizia con lo stato `active` e si attiverà alla successiva ora cron corrispondente. Salva il valore `id` restituito per gestire il trigger nelle chiamate successive.
 
-מכיוון שטריגר פועל ללא השגחה לפי לוח זמנים, צריך להפנות אל [אישור](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=he) מאוחסן ולא אל טוקן מוטבע. פרוקסי היציאה פותר את הבעיה בכל הפעלה, ואתם מסובבים את הסוד בלי לגעת בטריגר. גם כללי `transform` מוטבעים פועלים כאן, רק צריך לעדכן את הטריגר בכל פעם שהערך משתנה.
+Poiché un trigger viene eseguito in modo automatico in base a una pianificazione, fai riferimento a una [credenziale](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=it) archiviata anziché a un token incorporato. Il proxy di uscita lo risolve a ogni esecuzione e ruoti il secret senza toccare il trigger. Anche le regole `transform` in linea funzionano qui, ma richiedono l'aggiornamento dell'attivatore ogni volta che il valore cambia.
 
 ### Python
 
@@ -1912,29 +1912,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers" \
   }'
 ```
 
-הבקשה `CreateTrigger` מקבלת את השדות הבאים:
+La richiesta `CreateTrigger` accetta i seguenti campi:
 
-| שדה | סוג | נדרש | תיאור |
+| Campo | Tipo | Obbligatorio | Descrizione |
 | --- | --- | --- | --- |
-| `schedule` | מחרוזת | כן | ביטוי Cron (למשל, `0 * * * *` לשעה, `0 9 * * 1-5` לבוקר של יום חול). |
-| `time_zone` | מחרוזת | כן | אזור זמן של IANA (למשל, `UTC`, ‏ `America/Argentina/Buenos_Aires`). |
-| `display_name` | מחרוזת | לא | שם הטריגר שקריא לבני אדם. |
-| `max_consecutive_failures` | מספר שלם | לא | מספר הכשלים המקסימלי לפני שהטריגר מושהה באופן אוטומטי. ברירת מחדל: 5. |
-| `execution_timeout_seconds` | מספר שלם | לא | זמן קצוב לתפוגה לכל הפעלה בשניות. ברירת מחדל: 600. |
-| `interaction` | אובייקט | כן | `CreateInteractionRequest` שמגדיר את הסוכן, הקלט, הכלים והסביבה. |
+| `schedule` | stringa | Sì | Espressione cron (ad es. `0 * * * *` per ogni ora, `0 9 * * 1-5` per le mattine dei giorni feriali). |
+| `time_zone` | stringa | Sì | Fuso orario IANA (ad es. `UTC`, `America/Argentina/Buenos_Aires`). |
+| `display_name` | stringa | No | Nome leggibile per il trigger. |
+| `max_consecutive_failures` | integer | No | Numero massimo di errori prima che il trigger venga messo in pausa automaticamente. Valore predefinito: 5. |
+| `execution_timeout_seconds` | integer | No | Timeout per esecuzione in secondi. Valore predefinito: 600. |
+| `interaction` | oggetto | Sì | Un `CreateInteractionRequest` che definisce l'agente, l'input, gli strumenti e l'ambiente. |
 
-התשובה כוללת את השדות העיקריים הבאים:
+La risposta include i seguenti campi chiave:
 
-| שדה | סוג | תיאור |
+| Campo | Tipo | Descrizione |
 | --- | --- | --- |
-| `id` | מחרוזת | מזהה ייחודי של הטריגר. משתמשים בערך הזה בכל הפעולות הבאות. |
-| `status` | מחרוזת | הסטטוס הנוכחי: `active`,‏ `paused` או `disabled`. |
-| `next_run_time` | מחרוזת | חותמת זמן בפורמט ISO 8601 של ההפעלה המתוזמנת הבאה. |
-| `consecutive_failure_count` | מספר שלם | מספר הביצועים הרצופים שנכשלו מאז ההצלחה האחרונה. |
+| `id` | stringa | Identificatore univoco dell'attivatore. Utilizzalo in tutte le operazioni successive. |
+| `status` | stringa | Stato attuale: `active`, `paused` o `disabled`. |
+| `next_run_time` | stringa | Timestamp ISO 8601 della prossima esecuzione pianificata. |
+| `consecutive_failure_count` | integer | Numero di esecuzioni non riuscite consecutive dall'ultima esecuzione riuscita. |
 
-### הצגת רשימת הטריגרים
+### Elenca trigger
 
-אחזור של כל הטריגרים שמשויכים לפרויקט.
+Recupera tutti i trigger associati al tuo progetto.
 
 ### Python
 
@@ -2014,9 +2014,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### קבלת טריגר
+### Ottenere un trigger
 
-אחזור ההגדרה המלאה והמצב הנוכחי של טריגר יחיד.
+Recupera la configurazione completa e lo stato attuale di un singolo trigger.
 
 ### Python
 
@@ -2092,9 +2092,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### השהיה והמשך
+### Mettere in pausa e riprendere
 
-אתם יכולים להשהות טריגר כדי להפסיק את ההפעלות המתוזמנות, ולהמשיך אותו כדי להפעיל מחדש את התזמון. השהיה לא משפיעה על הפעלות ידניות.
+Puoi mettere in pausa un trigger per interrompere le esecuzioni pianificate e riprenderlo per riattivare la pianificazione. La sospensione non influisce sulle esecuzioni manuali.
 
 ### Python
 
@@ -2198,9 +2198,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER
   -d '{"status": "active"}'
 ```
 
-### מחיקת טריגר
+### Elimina un trigger
 
-להסיר טריגר לצמיתות. היסטוריית ההרצה הקודמת לא נמחקת.
+Rimuovere definitivamente un trigger. La cronologia delle esecuzioni passate non viene eliminata.
 
 ### Python
 
@@ -2265,9 +2265,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### הפעלת טריגר באופן מיידי
+### Eseguire un trigger immediatamente
 
-הפעלת טריגר על פי דרישה בלי לחכות למועד המתוזמן הבא. הפעולה הזו תתבצע גם אם הטריגר מושהה.
+Attiva un trigger on demand senza attendere il successivo orario programmato. Funziona anche se il trigger è in pausa.
 
 ### Python
 
@@ -2332,9 +2332,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### הצגת רשימת ההרצות
+### Recupero elenco esecuzioni
 
-עיון בהיסטוריית הביצוע של טריגר. כל הרצה כוללת `status`, חותמות זמן, `interaction_id` שאפשר להשתמש בו כדי לאחזר את הפלט המלא של האינטראקציה ו`environment_id` שמאשר שכל ההרצות משתמשות באותו ארגז חול.
+Visualizza la cronologia delle esecuzioni di un trigger. Ogni esecuzione include un `status`, timestamp, un `interaction_id` che puoi utilizzare per recuperare l'output completo dell'interazione e un `environment_id` che conferma che tutte le esecuzioni condividono la stessa sandbox.
 
 ### Python
 
@@ -2449,20 +2449,26 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## זמינות ומחירים
+## Disponibilità e prezzi
 
-הסוכן Antigravity זמין בגרסת Preview דרך [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) ב-Google AI Studio וב-Gemini API, גם בפרויקטים בתוכנית בחינם וגם בפרויקטים בתוכנית בתשלום.
+L'agente Antigravity è disponibile in anteprima tramite l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) in Google AI Studio e l'API Gemini per i progetti sia del Livello senza costi sia del Livello a pagamento.
 
-התמחור מבוסס על [מודל תשלום לפי שימוש](https://ai.google.dev/gemini-api/docs/pricing?hl=he#pricing-for-agents), לפי הטוקנים של מודל Gemini הבסיסי והכלים שבהם הסוכן משתמש. בניגוד לבקשת צ'אט רגילה שמפיקה פלט יחיד, אינטראקציה של Antigravity היא Agentic Workflows. בקשה אחת מפעילה לולאה אוטונומית של ניתוח, הפעלת כלי, הפעלת קוד וניהול קבצים. בפרויקטים בתוכנית ללא תשלום יש מכסת שימוש ומגבלת קצב ללא תשלום.
+I prezzi seguono un [modello di pagamento a consumo](https://ai.google.dev/gemini-api/docs/pricing?hl=it#pricing-for-agents)
+basato sui token del modello Gemini sottostante e sugli strumenti utilizzati dall'agente. A differenza di una
+richiesta di chat standard che produce un singolo output, un'interazione Antigravity è un
+flusso di lavoro autonomo. Una singola richiesta attiva un loop autonomo di ragionamento, esecuzione di strumenti, esecuzione di codice e gestione dei file. I progetti del Livello senza costi includono una limitazione di frequenza e una quota di utilizzo senza costi.
 
-אינטראקציות Antigravity מפעילות לולאות אוטונומיות רב-שלביות, ויכולות לצרוך כמות משמעותית של טוקנים. הגדרת [אמצעי בקרה להגבלת השימוש בטוקנים](#budget-controls) בבקשה כדי להגביל את השימוש באסימונים. אפשר גם לעקוב אחר ההתקדמות בזמן אמת באמצעות [SSE streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=he), או לבטל בקשות פעילות.
+Le interazioni con Antigravity eseguono loop autonomi multi-turno e possono consumare un numero significativo di token. Imposta i [controlli del budget](#budget-controls) sulla richiesta per limitare l'utilizzo dei token. Puoi anche monitorare l'avanzamento in tempo reale con lo [streaming SSE](https://ai.google.dev/gemini-api/docs/streaming?hl=it) o annullare le richieste in esecuzione.
 
-### אמצעי בקרה להגבלת השימוש בטוקנים
+### Controlli del budget
 
-בנוסף ל[בחירת המודל](#model-selection), מגדירים את `max_total_tokens` בתוך `agent_config` (עם `"type": "antigravity"`) כדי להגביל את המספר הכולל של הטוקנים (קלט + פלט + חשיבה) שאינטראקציה יכולה לצרוך.
-טוקנים ששמורים במטמון לא נכללים במגבלה הזו. כשסוכן ה-AI מגיע למגבלה, האינטראקציה נפסקת ומוחזרת עם `status: "incomplete"`. המגבלה היא בגדר מאמץ מרבי: השימוש בפועל עשוי לחרוג ממנה מעט, בהתאם למועד שבו הסוכן בודק את התקציב בין השלבים.
+Oltre alla [selezione del modello](#model-selection), imposta `max_total_tokens` all'interno di `agent_config` (con `"type": "antigravity"`) per limitare
+il numero totale di token (input + output + pensiero) che un'interazione può consumare.
+I token memorizzati nella cache non vengono conteggiati ai fini di questo limite. Quando l'agente raggiunge il limite, l'interazione si interrompe e restituisce `status: "incomplete"`. Il limite è il risultato di un impegno:
+l'utilizzo effettivo potrebbe superarlo leggermente a seconda di quando l'agente controlla il budget
+tra i passaggi.
 
-מגדירים את התקציב בבקשת האינטראקציה ב-`agent_config` לצד `agent` ו-`input`.
+Imposta il budget nella richiesta di interazione in `agent_config` insieme a `agent` e `input`.
 
 ### Python
 
@@ -2505,7 +2511,7 @@ const interaction = await client.interactions.create({
     input: "Analyze the dataset in /workspace/data.csv and generate a summary report.",
     agent_config: {
         type: "antigravity",
-        max_total_tokens: 50000
+        max_total_tokens: "50000"
     },
     environment: {
         type: "remote",
@@ -2519,7 +2525,7 @@ const interaction = await client.interactions.create({
     },
 });
 console.log(`Status: ${interaction.status}`);
-console.log(`Tokens used: ${interaction.usage.total_tokens}`);
+console.log(`Tokens used: ${interaction.usage?.total_tokens}`);
 ```
 
 ### Java
@@ -2646,9 +2652,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### המשך אינטראקציה שלא הושלמה
+#### Continuare un'interazione incompleta
 
-כשאינטראקציה חוזרת `status: "incomplete"`, העבודה וההקשר של הנציג נשמרים. שולחים אינטראקציה חדשה עם הפניה לאינטראקציה המקורית `id` ו`environment_id` כדי להמשיך מהמקום שבו האינטראקציה המקורית הסתיימה. לאינטראקציה החדשה מוקצה תקציב משלה `max_total_tokens`.
+Quando un'interazione restituisce `status: "incomplete"`, il lavoro e il contesto dell'agente vengono conservati. Invia una nuova interazione che faccia riferimento all'interazione originale `id` e
+`environment_id` per riprendere da dove era stata interrotta. La nuova interazione ha un proprio
+budget `max_total_tokens`.
 
 ### Python
 
@@ -2677,7 +2685,7 @@ const continuation = await client.interactions.create({
     environment: interaction.environment_id,
     agent_config: {
         type: "antigravity",
-        max_total_tokens: 50000
+        max_total_tokens: "50000"
     }
 });
 console.log(`Status: ${continuation.status}`);
@@ -2779,48 +2787,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### עלויות משוערות
+### Costi stimati
 
-העלויות משתנות בהתאם למורכבות המשימה. הסוכן קובע באופן אוטונומי כמה קריאות לכלים, הרצות קוד ופעולות על קבצים נדרשות. האומדנים הבאים מבוססים על הרצות.
+I costi variano in base alla complessità dell'attività. L'agente determina autonomamente il numero di chiamate di strumenti, esecuzioni di codice e operazioni su file necessarie. Le seguenti stime si basano sulle corse.
 
-| קטגוריית המשימה | טוקנים של קלט | טוקנים של פלט | עלות טיפוסית |
+| Categoria attività | Token di input | Token di output | Costo tipico |
 | --- | --- | --- | --- |
-| **מחקר וסינתזת מידע** | ‫100,000 עד 500,000 | ‫10,000 עד 40,000 | ‫0.30$ – 1.00$ |
-| **יצירת מסמכים ותוכן** | ‫100,000 עד 500,000 | ‫15,000 עד 50,000 | ‫0.30$ – 1.30$ |
-| **עיצוב תהליכים ומערכות** | ‫100,000 עד 400,000 | ‫10,000 עד 30,000 | ‫0.25$-0.80$ |
-| **עיבוד וניתוח נתונים** | ‫300,000 עד 3 מיליון | ‫30,000 עד 150,000 | ‫0.70$ – 3.25$ |
+| **Ricerca e sintesi delle informazioni** | 100.000 - 500.000 | 10.000-40.000 | 0,30 $-1 $ |
+| **Generazione di documenti e contenuti** | 100.000 - 500.000 | 15.000 - 50.000 | 0,30 $-1,30 $ |
+| **Progettazione di processi e sistemi** | 100.000-400.000 | 10.000-30.000 | 0,25-0,80 $ |
+| **Trattamento dati e analisi** | 300.000 - 3.000.000 | 30.000-150.000 | 0,70 €-3,25 € |
 
-בדרך כלל, 50-70% מאסימוני הקלט נשמרים במטמון. בתהליכי עבודה מורכבים של סוכנים עם הרבה קריאות לכלים, יכולים להצטבר 3-5 מיליון טוקנים באינטראקציה אחת, והעלויות יכולות להגיע ל-5$בערך.
+In genere, il 50-70% dei token di input viene memorizzato nella cache. I workflow agentici complessi con molte chiamate di strumenti possono accumulare 3-5 milioni di token in una singola interazione, con costi fino a ~5 $.
 
-**חישוב הסביבה** (CPU, זיכרון, הרצת ארגז חול) **לא מחויב** במהלך תקופת התצוגה המקדימה.
+**Il calcolo dell'ambiente** (CPU, memoria, esecuzione sandbox) **non viene fatturato** durante il periodo di anteprima.
 
-## מגבלות
+## Limitazioni
 
-- **סטטוס תצוגה מקדימה:** סוכן Antigravity ו-Interactions API. יכולים להיות שינויים בתכונות ובסכימות.
-- **הגדרות יצירה לא נתמכות:** הפרמטרים הבאים לא נתמכים ומחזירים שגיאת 400: ‏`temperature`, ‏`top_p`, ‏`top_k`, ‏`stop_sequences`, ‏`max_output_tokens`.
-- **פלט מובנה:** סוכן Antigravity לא תומך בפלט מובנה.
-- **כלים שלא זמינים:** הכלים `file_search`,‏ `computer_use` ו-`google_maps` עדיין לא נתמכים.
-- **מגבלות של MCP מרוחק:** אין תמיכה בתעבורת אירועים שנשלחים מהשרת (SSE) (צריך להשתמש ב-HTTP ניתן להזרמה). בנוסף, השרת `name` חייב להיות באותיות קטנות בלבד ואלפאנומרי (שימוש באותיות רישיות יגרום לשגיאה כללית `400 Bad Request`).
-- **כלי למערכת הקבצים:** אין כלי למערכת הקבצים בשלב הזה. היא חלק מ-`environment`.
-- **דרישה של החנות:** כדי להריץ סוכן באמצעות `background=True`, צריך `store=True`.
-- **קריאה להפעלת פונקציות רק במצב עם שמירת מצב:** קריאה להפעלת פונקציות נתמכת רק במצב עם שמירת מצב. כדי להמשיך את התור, צריך להשתמש ב-`previous_interaction_id`. אי אפשר לשחזר את ההיסטוריה באופן ידני (מצב בלי שמירת מצב).
-- **סוגים לא נתמכים של מודלים מולטימודאליים.** בשלב הזה, אין תמיכה בקלט של אודיו, וידאו ומסמכים. מותר להעלות רק טקסט ותמונות.
+- **Stato dell'anteprima**:l'agente Antigravity e l'API Interactions. Le funzionalità e gli schemi potrebbero cambiare.
+- **Configurazione di generazione non supportata**:i seguenti parametri non sono supportati e restituiscono un errore 400: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
+- **Output strutturato**:l'agente Antigravity non supporta gli output strutturati.
+- **Strumenti non disponibili:** `file_search`, `computer_use` e `google_maps` non sono ancora supportati.
+- **Limitazioni dell'MCP remoto:** il trasporto Server-Sent Events (SSE) non è supportato (utilizza Streamable HTTP). Inoltre, il server `name` deve essere rigorosamente in minuscolo e alfanumerico (l'utilizzo di lettere maiuscole attiva un errore `400 Bad Request` generico).
+- **Strumento per il file system:** al momento non è disponibile alcuno strumento per il file system. Fa parte di `environment`.
+- **Requisito dello store:** l'esecuzione dell'agente utilizzando `background=True` richiede `store=True`.
+- **Chiamata di funzione solo stateful**:la chiamata di funzione è supportata solo in modalità stateful. Devi utilizzare `previous_interaction_id` per continuare il turno; la ricostruzione manuale della cronologia (modalità stateless) non è supportata.
+- **Tipi multimodali non supportati.** Al momento, gli input audio, video e di documenti non sono supportati. Sono consentiti solo testo e immagini.
 
-## המאמרים הבאים
+## Passaggi successivi
 
-- [מדריך למתחילים](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he): שיחות מרובות תפניות וסטרימינג.
-- [יצירת סוכנים בהתאמה אישית](https://ai.google.dev/gemini-api/docs/custom-agents?hl=he): הוראות בהתאמה אישית, מיומנויות ושמירת סוכנים.
-- [סביבות](https://ai.google.dev/gemini-api/docs/agent-environment?hl=he): הגדרת ארגז חול, מקורות, רשת.
-- [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=he): אכיפה של שערי אבטחה ואימות של תופעות לוואי בתוך ארגז החול.
-- [סוכן Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he): משימות מחקר ארוכות.
-- ‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he): ממשק ה-API הבסיסי.
+- [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): conversazioni multi-turno e streaming.
+- [Creazione di agenti personalizzati](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it): istruzioni, competenze e salvataggio degli agenti personalizzati.
+- [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): configurazione della sandbox, origini, networking.
+- [Hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=it): applica i controlli di sicurezza e la convalida degli effetti collaterali all'interno della sandbox.
+- [Agente Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it): attività di ricerca di lunga durata.
+- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it): l'API sottostante.
 
-שליחת משוב
+Invia feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-עדכון אחרון: 2026-10-09 (שעון UTC).
+Ultimo aggiornamento 2026-10-16 UTC.
 
-רוצה לתת לנו משוב?
+Vuoi dirci altro?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-09 (שעון UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-16 UTC."],[],[]]

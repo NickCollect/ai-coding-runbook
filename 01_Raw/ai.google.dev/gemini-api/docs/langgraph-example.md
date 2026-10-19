@@ -1,42 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=tr
-fetched_at: 2026-10-12T07:00:05.995092+00:00
-title: "Gemini ve LangGraph ile s\u0131f\u0131rdan ReAct temsilcisi olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=id
+fetched_at: 2026-10-19T05:56:41.769195+00:00
+title: "Agen ReAct dari awal dengan Gemini dan LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-# Gemini ve LangGraph ile sıfırdan ReAct temsilcisi oluşturma
+# Agen ReAct dari awal dengan Gemini dan LangGraph
 
-LangGraph, durum bilgisi olan LLM uygulamaları oluşturmaya yönelik bir çerçeve olduğundan ReAct (Reasoning and Acting) aracıları oluşturmak için iyi bir seçimdir.
+LangGraph adalah framework untuk membangun aplikasi LLM stateful, sehingga menjadi pilihan yang baik untuk membuat Agen ReAct (Reasoning and Acting).
 
-ReAct aracıları, LLM muhakemesini işlem yürütmeyle birleştirir. Kullanıcı hedeflerine ulaşmak için yinelemeli olarak düşünür, araçları kullanır ve gözlemlerden yararlanarak hareket eder. Yaklaşımını dinamik olarak uyarlar. ["ReAct: Synergizing Reasoning and Acting<0x0x0A>in Language Models"](https://arxiv.org/abs/2210.03629) (2023) adlı makalede tanıtılan bu kalıp, katı iş akışları yerine insan benzeri, esnek problem çözme yöntemlerini yansıtmaya çalışır.
+Agen ReAct menggabungkan penalaran LLM dengan eksekusi tindakan. Agen ini berpikir secara berulang, menggunakan alat, dan bertindak berdasarkan pengamatan untuk mencapai sasaran pengguna, serta menyesuaikan pendekatan secara dinamis. Diperkenalkan dalam ["ReAct: Synergizing Reasoning and Acting
+in Language Models"](https://arxiv.org/abs/2210.03629) (2023), pola ini
+mencoba meniru pemecahan masalah yang fleksibel dan mirip manusia melalui alur kerja yang kaku.
 
-LangGraph, ReAct uygulamalarınızda daha fazla kontrol ve özelleştirme istediğinizde öne çıkan, önceden oluşturulmuş bir ReAct aracısı ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)) sunar. Bu kılavuzda basitleştirilmiş bir sürüm gösterilmektedir.
+LangGraph menawarkan agen ReAct bawaan ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
+yang sangat berguna saat Anda memerlukan lebih banyak kontrol dan penyesuaian untuk penerapan ReAct. Panduan ini akan menunjukkan versi yang disederhanakan.
 
-LangGraph, üç temel bileşeni kullanarak aracıları grafik olarak modeller:
+Agen model LangGraph sebagai grafik menggunakan tiga komponen utama:
 
-- `State`: Uygulamanın mevcut anlık görüntüsünü temsil eden paylaşılan veri yapısı (genellikle `TypedDict` veya `Pydantic BaseModel`).
-- `Nodes`: Temsilcilerinizin mantığını kodlar. Mevcut durumu giriş olarak alırlar, bazı hesaplamalar veya yan etkiler gerçekleştirirler ve LLM çağrıları ya da araç çağrıları gibi güncellenmiş bir durumu döndürürler.
-- `Edges`: Mevcut `State`'ye göre yürütülecek bir sonraki `Node`'yi tanımlayın. Bu sayede koşullu mantık ve sabit geçişler sağlanır.
+- `State`: Struktur data bersama (biasanya `TypedDict` atau `Pydantic BaseModel`) yang mewakili snapshot saat ini dari aplikasi.
+- `Nodes`: Mengenkode logika agen Anda. Agen ini menerima Status saat ini sebagai input, melakukan beberapa komputasi atau efek samping, dan menampilkan Status yang diperbarui, seperti panggilan LLM atau panggilan alat.
+- `Edges`: Menentukan `Node` berikutnya yang akan dieksekusi berdasarkan `State` saat ini, sehingga memungkinkan logika kondisional dan transisi tetap.
 
-Henüz bir API anahtarınız yoksa [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'dan edinebilirsiniz.
+Jika belum memiliki Kunci API, Anda bisa mendapatkannya dari [Google AI
+Studio](https://aistudio.google.com/apikey?hl=id).
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-API anahtarınızı `GEMINI_API_KEY` ortam değişkeninde ayarlayın.
+Tetapkan kunci API Anda dalam variabel lingkungan `GEMINI_API_KEY`.
 
 ```
 import os
@@ -45,11 +49,12 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-LangGraph kullanarak ReAct aracısını nasıl uygulayacağınızı daha iyi anlamak için bu kılavuzda pratik bir örnek açıklanmaktadır. Amacı, belirli bir konumun güncel hava durumunu bulmak için bir araç kullanmak olan bir ajan oluşturacaksınız.
+Untuk lebih memahami cara menerapkan agen ReAct menggunakan LangGraph, panduan ini akan membahas contoh praktis. Anda akan membuat agen yang tujuannya adalah menggunakan alat untuk menemukan cuaca saat ini untuk lokasi tertentu.
 
-Bu hava durumu aracısı için `State`, devam eden görüşme geçmişini (mesaj listesi olarak) ve örnekleme amacıyla atılan adım sayısını (tam sayı olarak) tutar.
+Untuk agen cuaca ini, `State` akan mempertahankan histori percakapan yang sedang berlangsung (sebagai daftar pesan) dan penghitung (sebagai bilangan bulat) untuk jumlah langkah yang diambil, untuk tujuan ilustrasi.
 
-LangGraph, durum mesajı listelerini güncellemek için `add_messages` yardımcı işlevini sağlar. Mevcut listeyi ve yeni mesajları alıp birleştirilmiş bir liste döndüren bir [indirgeyici](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers) olarak işlev görür. Güncellemeleri mesaj kimliğine göre işler ve yeni, görülmemiş mesajlar için varsayılan olarak "yalnızca ekleme" davranışını kullanır.
+LangGraph menyediakan fungsi helper, `add_messages`, untuk memperbarui daftar pesan status. Fungsi ini berfungsi sebagai [peredam](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers),
+mengambil daftar saat ini, ditambah pesan baru, dan menampilkan daftar gabungan. Fungsi ini menangani pembaruan berdasarkan ID pesan dan secara default menggunakan perilaku "hanya tambahkan" untuk pesan baru yang belum dilihat.
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -63,7 +68,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-Ardından, hava durumu aracınızı tanımlayın.
+Selanjutnya, tentukan alat cuaca Anda.
 
 ```
 from langchain_core.tools import tool
@@ -102,7 +107,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-Şimdi modeli başlatın ve araçları modele bağlayın.
+Sekarang, inisialisasi model dan ikat alat ke model.
 
 ```
 from datetime import datetime
@@ -125,14 +130,16 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-Temsilcinizi çalıştırmadan önceki son adım, düğümlerinizi ve kenarlarınızı tanımlamaktır.
-Bu örnekte iki düğüm ve bir kenar vardır.
+Langkah terakhir sebelum Anda dapat menjalankan agen adalah menentukan node dan edge.
+Dalam contoh ini, Anda memiliki dua node dan satu edge.
 
-- `call_tool` aracınızın yöntemini yürüten düğüm. LangGraph'ta bu amaçla kullanılan, önceden oluşturulmuş bir düğüm vardır: [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- Modeli çağırmak için `model_with_tools` kullanan `call_model` düğümü.
-- `should_continue` Aracı mı yoksa modeli mi çağıracağını belirleyen bir sınır.
+- Node `call_tool` yang menjalankan metode alat Anda. LangGraph memiliki node bawaan
+  untuk ini yang disebut
+  [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
+- Node `call_model` yang menggunakan `model_with_tools` untuk memanggil model.
+- Edge `should_continue` yang menentukan apakah akan memanggil alat atau model.
 
-Düğüm ve kenar sayısı sabit değildir. Grafiğinize istediğiniz kadar düğüm ve kenar ekleyebilirsiniz. Örneğin, yapılandırılmış çıkış eklemek için bir düğüm veya aracı ya da modeli çağırmadan önce model çıkışını kontrol etmek için bir kendi kendine doğrulama/yansıtma düğümü ekleyebilirsiniz.
+Jumlah node dan edge tidak tetap. Anda dapat menambahkan node dan edge sebanyak yang Anda inginkan ke grafik. Misalnya, Anda dapat menambahkan node untuk menambahkan output terstruktur atau node verifikasi/refleksi mandiri untuk memeriksa output model sebelum memanggil alat atau model.
 
 ```
 from langchain_core.messages import ToolMessage
@@ -176,7 +183,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-Tüm aracı bileşenleri hazır olduğunda bunları bir araya getirebilirsiniz.
+Dengan semua komponen agen siap, Anda kini dapat merakitnya.
 
 ```
 from langgraph.graph import StateGraph, END
@@ -212,7 +219,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-Grafiğinizi `draw_mermaid_png` yöntemini kullanarak görselleştirebilirsiniz.
+Anda dapat memvisualisasikan grafik menggunakan metode `draw_mermaid_png`.
 
 ```
 from IPython.display import Image, display
@@ -220,9 +227,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=tr)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=id)
 
-Şimdi aracı çalıştırın.
+Sekarang jalankan agen.
 
 ```
 from datetime import datetime
@@ -235,7 +242,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Artık sohbetinize devam edebilir, başka bir şehirdeki hava durumunu sorabilir veya karşılaştırma isteğinde bulunabilirsiniz.
+Anda kini dapat melanjutkan percakapan, meminta cuaca di kota lain, atau meminta perbandingan.
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -245,12 +252,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-09-12 UTC.
+Terakhir diperbarui pada 2026-09-12 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-12 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-12 UTC."],[],[]]

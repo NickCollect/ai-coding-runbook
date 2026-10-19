@@ -1,30 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=pt-BR
-fetched_at: 2026-10-12T06:57:07.380206+00:00
-title: "Guia para desenvolvedores do Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=sq
+fetched_at: 2026-10-19T05:49:28.693717+00:00
+title: "Udh\u00ebzuesi i zhvilluesit t\u00eb Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
 
-Envie comentários
+Dërgo komente
 
-# Guia para desenvolvedores do Gemini 3
+# Udhëzuesi i zhvilluesit të Gemini 3
 
-O Gemini 3 é nossa família de modelos mais inteligente até o momento, criada com base em um raciocínio de última geração. Ele foi projetado para dar vida a qualquer ideia com Agentic Workflows, programação autônoma e tarefas multimodais complexas.
-Este guia aborda os principais recursos da família de modelos Gemini 3 e como aproveitar ao máximo.
+Gemini 3 është familja jonë më inteligjente e modeleve deri më sot, e ndërtuar mbi bazën e arsyetimit të nivelit më të lartë. Ai është krijuar për t'i dhënë jetë çdo ideje duke zotëruar flukset e punës agjentike, kodimin autonom dhe detyrat komplekse me shumë modalitete.
+Ky udhëzues mbulon veçoritë kryesore të familjes së modeleve Gemini 3 dhe se si të përfitosh sa më shumë prej tyre.
 
-Conheça nossa [coleção de apps do Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=pt-br) para
-ver como o modelo lida com raciocínio avançado, programação autônoma e tarefas
-multimodais complexas.
+Eksploro [koleksionin tonë të aplikacioneve të Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=sq) për të parë se si modeli administron arsyetimin e përparuar, kodimin autonom dhe detyrat komplekse multimodale.
 
-Comece com algumas linhas de código:
+Fillo me disa rreshta kodi:
 
 ### Python
 
@@ -123,7 +121,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -135,50 +133,50 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Conheça a série Gemini 3
+## Njihu me serinë Gemini 3
 
-O Gemini 3.1 Pro é ideal para tarefas complexas que exigem amplo conhecimento geral e raciocínio avançado em várias modalidades.
+Gemini 3.1 Pro është më i miri për detyra komplekse që kërkojnë njohuri të gjera për botën dhe arsyetim të përparuar nëpër modalitete.
 
-O Gemini 3 Flash é nosso modelo mais recente da série 3, com inteligência de nível Pro na velocidade e nos preços do Flash.
+Gemini 3 Flash është modeli ynë më i fundit i serisë 3, me inteligjencë të nivelit Pro me shpejtësinë dhe çmimin e Flash.
 
-O Nano Banana Pro (também conhecido como Gemini 3 Pro Image) é nosso modelo de geração de imagens de mais alta qualidade, e o Nano Banana 2 (também conhecido como Gemini 3.1 Flash Image) é o equivalente de alto volume, alta eficiência e menor faixa de preços.
+Nano Banana Pro (i njohur edhe si Gemini 3 Pro Image) është modeli ynë i gjenerimit të imazheve me cilësinë më të lartë dhe Nano Banana 2 (i njohur edhe si Gemini 3.1 Flash Image) është njëkuivalent me volum të lartë, efikasitet të lartë dhe me çmim më të ulët.
 
-O Gemini 3.1 Flash-Lite é nosso modelo de trabalho criado para ser econômico e realizar tarefas de grande volume.
+Gemini 3.1 Flash-Lite është modeli ynë i fuqishëm i krijuar për efikasitetin e kostos dhe detyrat me volum të lartë.
 
-Todos os modelos do Gemini 3 estão em pré-lançamento.
+Të gjitha modelet e Gemini 3 janë aktualisht në versionin paraprak.
 
-| ID do modelo | Janela de contexto (dentro / fora) | Limite de conhecimento | Preços (entrada / saída)\* |
+| ID-ja e modelit | Dritarja kontekstuale (brenda / jashtë) | Kufiri kohor i njohurive | Çmimi (hyrja / dalja)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite** | 1M / 64k | Jan 2025 | US$ 0,25 (texto, imagem, vídeo), US$ 0,50 (áudio) / US$ 1,50 |
-| **gemini-3.1-flash-image-preview** | 128k / 32k | Jan 2025 | US$ 0,25 (entrada de texto) / US$ 0,067 (saída de imagem)\*\* |
-| **gemini-3.1-pro-preview** | 1M / 64k | Jan 2025 | US$ 2 / US$ 12 (<200 mil tokens)   US $4 / US$ 18 (>200 mil tokens) |
-| **gemini-3-flash-preview** | 1M / 64k | Jan 2025 | US$ 0,50 / US$ 3 |
-| **gemini-3-pro-image-preview** | 65 mil / 32 mil | Jan 2025 | US$ 2 (entrada de texto) / US$ 0,134 (saída de imagem)\*\* |
+| **gemini-3.1-flash-lite** | 1M / 64k | Janar 2025 | $0.25 (tekst, imazh, video), $0.50 (audio) / $1.50 |
+| **gemini-3.1-flash-image-preview** | 128k / 32k | Janar 2025 | $0.25 (Hyrja e tekstit) / $0.067 (Dalja e imazhit)\*\* |
+| **gemini-3.1-pro-preview** | 1M / 64k | Janar 2025 | 2 USD / 12 USD (<200 000 tokenë)   4 USD / 18 USD (>200 000 tokenë) |
+| **gemini-3-flash-preview** | 1M / 64k | Janar 2025 | $0.50 / $3 |
+| **gemini-3-pro-image-preview** | 65k / 32k | Janar 2025 | $2 (hyrja e tekstit) / $0,134 (dalja e imazhit)\*\* |
 
-*\* Os preços são por 1 milhão de tokens, a menos que indicado de outra forma.*
-*\*\* O preço das imagens varia de acordo com a resolução. Consulte a [página de preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br) para mais detalhes.*
+*\* Çmimi është për 1 milion tokenë, përveçse nëse shënohet ndryshe.*
+*\*\* Çmimi i imazhit varion sipas rezolucionit. Shiko [faqen e çmimeve](https://ai.google.dev/gemini-api/docs/pricing?hl=sq) për detaje.*
 
-Para limites detalhados, preços e mais informações, consulte a
-[página de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br).
+Për kufijtë e detajuar, çmimet dhe informacionet shtesë, shiko
+[faqen e modeleve](https://ai.google.dev/gemini-api/docs/models/gemini?hl=sq).
 
-## Novos recursos da API no Gemini 3
+## Veçori të reja të API-së në Gemini 3
 
-O Gemini 3 apresenta novos parâmetros projetados para dar aos desenvolvedores mais controle sobre latência, custo e fidelidade multimodal.
+Gemini 3 prezanton parametra të rinj të projektuar për t'u dhënë zhvilluesve më shumë kontroll mbi vonesën, koston dhe besnikërinë e modaliteteve të ndryshme.
 
-### Nível de raciocínio
+### Niveli i të menduarit
 
-Por padrão, os modelos da série Gemini 3 usam o raciocínio dinâmico para analisar comandos. Você pode usar o parâmetro `thinking_level`, que controla a
-profundidade **máxima** do processo de raciocínio interno do modelo antes de gerar uma
-resposta. O Gemini 3 trata esses níveis como permissões relativas para raciocínio, e não como garantias estritas de tokens.
+Modelet e serisë Gemini 3 përdorin si parazgjedhje të menduarit dinamik për të arsyetuar nëpërmjet kërkesave. Mund të përdorësh parametrin `thinking_level`, i cili kontrollon thellësinë
+**maksimale** të procesit të arsyetimit të brendshëm të modelit para se të prodhojë një përgjigje. Gemini 3 i trajton këto nivele si lejime relative për të menduarit
+në vend të garancive të rrepta për tokenat.
 
-Se `thinking_level` não for especificado, o Gemini 3 vai usar `high` como padrão. Para respostas mais rápidas e com menor latência quando não é necessário um raciocínio complexo, você pode restringir o nível de pensamento do modelo a `low`.
+Nëse `thinking_level` nuk specifikohet, Gemini 3 do të kalojë si parazgjedhje te `high`. Për përgjigje më të shpejta me më pak vonesë kur nuk kërkohet arsyetim kompleks, mund ta kufizosh nivelin e të menduarit të modelit në `low`.
 
-| Nível de raciocínio | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Descrição |
+| Niveli i arsyetimit | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Përshkrimi |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | incompatível | Compatível (padrão) | Compatível | Corresponde à configuração "sem pensar" para a maioria das consultas. O modelo pode pensar de forma muito minimalista para tarefas de programação complexas. Minimiza a latência para aplicativos de chat ou de alta capacidade de processamento. Vale lembrar que `minimal` não garante que o pensamento esteja desativado. |
-| **`low`** | Compatível | Compatível | Compatível | Minimiza a latência e o custo. Ideal para seguir instruções simples, conversar ou aplicativos de alta capacidade de processamento. |
-| **`medium`** | Compatível | Compatível | Compatível | Pensamento equilibrado para a maioria das tarefas. |
-| **`high`** | Compatível (padrão, dinâmico) | Compatível (dinâmico) | Compatível (padrão, dinâmico) | Maximiza a profundidade do raciocínio. O modelo pode levar muito mais tempo para gerar o primeiro token de saída (sem pensar), mas a saída será mais bem fundamentada. |
+| **`minimal`** | Nuk mbështetet | Mbështetur (Parazgjedhja) | Mbështetur | Përputhet me cilësimin "pa mendim" për shumicën e kërkesave. Modeli mund të mendojë shumë pak për detyra komplekse të kodimit. Minimizon vonesën për aplikacionet e bisedës ose me kapacitet të lartë. Ki parasysh se `minimal` nuk garanton që të menduarit është joaktiv. |
+| **`low`** | Mbështetur | Mbështetur | Mbështetur | Minimizon vonesën dhe koston. Më i miri për ndjekjen e thjeshtë të udhëzimeve, bisedën ose aplikacionet me kapacitet të lartë. |
+| **`medium`** | Mbështetur | Mbështetur | Mbështetur | Arsyetim i balancuar për shumicën e detyrave. |
+| **`high`** | Mbështetur (Parazgjedhja, dinamike) | Mbështetur (Dinamike) | Mbështetur (Parazgjedhja, dinamike) | Maksimizon thellësinë e arsyetimit. Modelit mund t'i duhet shumë më tepër kohë për të arritur një shenjë të parë dalëse (jo të menduar), por dalja do të jetë më e arsyetuar me kujdes. |
 
 ### Python
 
@@ -284,7 +282,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -301,22 +299,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ### Temperatura
 
-Para todos os modelos do Gemini 3, recomendamos manter o parâmetro de temperatura no valor padrão de `1.0`.
+Për të gjithë modelet e Gemini 3, ne rekomandojmë shumë që ta mbash parametrin e temperaturës në vlerën e tij të parazgjedhur prej `1.0`.
 
-Embora os modelos anteriores se beneficiassem da temperatura de ajuste para controlar a criatividade em relação ao determinismo, os recursos de raciocínio do Gemini 3 são otimizados para a configuração padrão. Mudar a temperatura (definindo-a abaixo de 1,0) pode levar a um comportamento inesperado, como looping ou desempenho degradado, principalmente em tarefas complexas de matemática ou raciocínio.
+Ndërkohë që modelet e mëparshme përfitonin shpesh nga rregullimi i temperaturës për të kontrolluar<0x0Akreativitetin kundrejt determinizmit, aftësitë arsyetuese të Gemini 3 janë optimizuar<0x0Apër cilësimin e parazgjedhur. Ndryshimi i temperaturës (vendosja e saj nën 1,0) mund të çojë në sjellje të papritura, si p.sh. përsëritje ose performancë të degraduar, veçanërisht në detyra komplekse matematikore ose arsyetimi.
 
-### Assinaturas de raciocínio
+### Nënshkrimet e mendimeve
 
-Os modelos do Gemini 3 usam assinaturas de pensamento para manter o contexto de raciocínio em todas as chamadas de API. Essas assinaturas são representações criptografadas do processo de raciocínio interno do modelo.
+Modelet Gemini 3 përdorin nënshkrimet e mendimeve për të ruajtur kontekstin e arsyetimit nëpër thirrjet e API-së. Këto nënshkrime janë përfaqësime të enkriptuara të procesit të brendshëm të të menduarit të modelit.
 
-- **Modo com estado (recomendado)**: ao usar a API Interactions no modo com estado (fornecendo `previous_interaction_id`), o servidor gerencia automaticamente o histórico de conversas e as assinaturas de pensamento.
-- **Modo sem estado**: se você estiver gerenciando o histórico de conversas manualmente, inclua blocos de pensamento com as assinaturas deles em solicitações subsequentes para validar a autenticidade.
+- **Modaliteti me gjendje (i rekomanduar)**: Kur përdor API-n e ndërveprimeve në modalitetin me gjendje (duke ofruar `previous_interaction_id`), serveri menaxhon automatikisht historikun e bisedave dhe nënshkrimet e mendimeve.
+- **Modaliteti pa gjendje**: Nëse po menaxhon manualisht historikun e bisedave, duhet të përfshish blloqet e mendimeve me nënshkrimet e tyre në kërkesat vijuese për të verifikuar vërtetësinë.
 
-Para informações detalhadas, consulte a página [Assinaturas de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
+Për informacione të detajuara, shiko faqen [Nënshkrimet e mendimeve](https://ai.google.dev/gemini-api/docs/thinking?hl=sq).`
 
-### Respostas estruturadas com ferramentas
+### Daljet e strukturuara me veglat
 
-Os modelos do Gemini 3 permitem combinar [saídas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br) com ferramentas integradas, incluindo [embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br), [contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br), [execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) e [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br).
+Modelet e Gemini 3 të lejojnë të kombinosh [Daljet e strukturuara](https://ai.google.dev/gemini-api/docs/structured-output?hl=sq) me veglat e integruara, duke përfshirë
+[Bazimin me "Kërko në Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq), [Kontekstin e URL-së](https://ai.google.dev/gemini-api/docs/url-context?hl=sq), [Ekzekutimin e kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq) dhe [Thirrjen e funksioneve](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq).
 
 ### Python
 
@@ -520,7 +519,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -553,18 +552,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Geração de imagens
+### Gjenerimi i imazhit
 
-Com o Gemini 3.1 Flash Image e o Gemini 3 Pro Image, você pode gerar e editar imagens
-com comandos de texto. Ele usa o raciocínio para "pensar" em um comando e pode recuperar dados em tempo real, como previsões do tempo ou gráficos de ações, antes de usar a fundamentação da [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) e gerar imagens de alta fidelidade.
+"Imazhi i Gemini 3.1 Flash" dhe "Imazhi i Gemini 3 Pro" të lejojnë të gjenerosh dhe modifikosh imazhe nga kërkesat me tekst. Ai përdor arsyetimin për të "menduar" nëpërmjet një kërkese dhe mund të marrë të dhëna në kohë reale, si p.sh. parashikimet e motit ose grafikët e aksioneve, para se të përdorë bazën e ["Kërko në Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq) përpara se të gjenerojë imazhe me besnikëri të lartë.
 
-**Recursos novos e aprimorados:**
+**Aftësi të reja dhe të përmirësuara:**
 
-- **Renderização de texto e 4K**:gere textos e diagramas nítidos e legíveis com resoluções de até 2K e 4K.
-- **Geração embasada**:use a ferramenta `google_search` para verificar fatos e gerar imagens com base em informações do mundo real. O embasamento com a Pesquisa de *Imagens* do Google está disponível para o Gemini 3.1 Flash Image.
-- **Edição conversacional**:edição de imagens multiturno. Basta pedir as mudanças que você quer (por exemplo, "Mude o plano de fundo para um pôr do sol"). Esse fluxo de trabalho usa as **assinaturas de pensamento** para preservar o contexto visual entre as interações.
+- **Paraqitja e tekstit dhe 4K:** Gjenero tekst dhe diagrame të qarta dhe të lexueshme me rezolucione deri në 2K dhe 4K.
+- **Gjenerimi i bazuar në të dhëna:** Përdor veglën `google_search` për të verifikuar faktet dhe për të gjeneruar imazhe bazuar në informacionet e botës reale. Bazimi me Google *Image*
+  Search ofrohet për Gemini 3.1 Flash Image.
+- **Modifikimi bisedor:** Modifikimi i imazheve me disa hapa thjesht duke kërkuar për ndryshime (p.sh. "Bëje sfondin një perëndim dielli"). Ky fluks pune mbështetet te
+  **Nënshkrimet e mendimeve** për të ruajtur kontekstin vizual mes radhëve.
 
-Para detalhes completos sobre proporções, fluxos de trabalho de edição e opções de configuração, consulte o [guia de geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br).
+Për detaje të plota mbi raportet e pamjes, flukset e punës të modifikimit dhe opsionet e konfigurimit, shiko [Udhëzuesin e "Gjenerimit të imazheve"](https://ai.google.dev/gemini-api/docs/image-generation?hl=sq).
 
 ### Python
 
@@ -726,7 +726,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -744,21 +744,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Exemplo de resposta**
+**Shembull përgjigjeje**
 
-![Clima em Tóquio](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=pt-br)
+![Moti në Tokio](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=sq)
 
-### Execução de código com imagens
+### Ekzekutimi i kodit me imazhe
 
-O Gemini 3 Flash pode tratar a visão como uma investigação ativa, não apenas um olhar estático. Ao combinar o raciocínio com a [execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br), o modelo formula um plano, escreve e executa código Python para ampliar, cortar, anotar ou manipular imagens etapa por etapa para fundamentar visualmente as respostas.
+Gemini 3 Flash mund ta trajtojë shikimin si një hetim aktiv, jo vetëm si një vështrim statik. Duke kombinuar arsyetimin me [ekzekutimin e kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq), modeli formulon një plan dhe më pas shkruan dhe ekzekuton kodin në Python për të zmadhuar, prerë, shënuar ose manipuluar imazhet në një mënyrë tjetër hap pas hapi për të bazuar vizualisht përgjigjet e tij.
 
-**Casos de uso:**
+**Rastet e përdorimit:**
 
-- **Zoom e inspeção**:o modelo detecta implicitamente quando os detalhes estão muito pequenos (por exemplo, ao ler um medidor ou número de série distante) e escreve código para cortar e reexaminar a área em uma resolução mais alta.
-- **Matemática e criação de gráficos visuais**:o modelo pode executar cálculos de várias etapas usando código (por exemplo, somar itens de linha em um recibo ou gerar um gráfico do Matplotlib com base em dados extraídos).
-- **Anotação de imagem**:o modelo pode desenhar setas, caixas delimitadoras ou outras anotações diretamente nas imagens para responder a perguntas espaciais, como "Onde este item deve ser colocado?".
+- **Zmadho dhe inspekto:** Modeli zbulon në mënyrë të nënkuptuar kur detajet janë shumë të vogla (p.sh. leximi i një matësi në distancë ose i një numri serial) dhe shkruan kod për të prerë dhe riekzaminuar zonën në rezolucion më të lartë.
+- **Matematika vizuale dhe grafikët:** Modeli mund të ekzekutojë llogaritje me shumë hapa duke përdorur kodin (p.sh. duke mbledhur artikujt e rreshtave në një faturë ose duke gjeneruar një grafik të Matplotlib nga të dhënat e nxjerra).
+- **Shënimi i imazhit:** Modeli mund të vizatojë shigjeta, kuti kufizuese ose shënime të tjera drejtpërdrejt mbi imazhe për t'u përgjigjur pyetjeve hapësinore si "Ku duhet të shkojë ky artikull?".
 
-Para ativar o pensamento visual, configure a [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) como uma ferramenta. O modelo vai usar automaticamente o código para manipular imagens quando necessário.
+Për të aktivizuar të menduarit vizual, konfiguro [Ekzekutimin e kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq) si një vegël. Modeli do të përdorë automatikisht kodin për të manipuluar imazhet kur të jetë e nevojshme.
 
 ### Python
 
@@ -994,7 +994,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 IMG_URL="https://goo.gle/instrument-img"
@@ -1030,14 +1030,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-Para mais detalhes sobre a execução de código com imagens, consulte [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br#images).
+Për më shumë detaje mbi ekzekutimin e kodit me imazhe, shiko [Ekzekutimin e kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq#images).
 
-### Respostas de funções multimodais
+### Përgjigjet e funksionit multimodal
 
-A [chamada de função multimodal](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#multimodal)
-permite que os usuários tenham respostas de função que contenham
-objetos multimodais, melhorando a utilização dos recursos de chamada de função
-do modelo. A chamada de função padrão só é compatível com respostas de função baseadas em texto:
+[Thirrja e funksioneve multimodale](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq#multimodal)
+u lejon përdoruesve të kenë përgjigje të funksioneve që përmbajnë
+objekte multimodale, duke lejuar përdorimin e përmirësuar të aftësive të thirrjes së funksioneve të modelit. Thirrja standarde e funksionit mbështet vetëm përgjigjet e funksionit të bazuara në tekst:
 
 ### Python
 
@@ -1372,7 +1371,7 @@ func main() {
 }
 ```
 
-### REST
+### QETËSI
 
 ```
 IMG_URL="https://goo.gle/instrument-img"
@@ -1420,9 +1419,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Combinar ferramentas integradas e chamadas de função
+### Kombino veglat e integruara dhe telefonatat e funksioneve
 
-O Gemini 3 permite o uso de ferramentas integradas (como a Pesquisa Google, contexto de URL e [mais](https://ai.google.dev/gemini-api/docs/tools?hl=pt-br)) e ferramentas personalizadas de [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) na mesma chamada de API, permitindo fluxos de trabalho mais complexos.
+Gemini 3 lejon përdorimin e veglave të integruara (si p.sh. "Kërko në Google", konteksti i URL-së dhe [më shumë](https://ai.google.dev/gemini-api/docs/tools?hl=sq)) dhe veglave të personalizuara të [thirrjes së funksioneve](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq) në të njëjtën thirrje të API-së, duke lejuar flukse pune më komplekse.
 
 ### Python
 
@@ -1696,70 +1695,66 @@ func main() {
 }
 ```
 
-## Migração do Gemini 2.5
+## Migrimi nga Gemini 2.5
 
-O Gemini 3 é nossa família de modelos mais avançada até o momento e oferece uma melhoria gradual em relação ao Gemini 2.5. Ao migrar, considere o seguinte:
+Gemini 3 është familja jonë më e aftë e modeleve deri më sot dhe ofron një përmirësim gradual në krahasim me Gemini 2.5. Kur migron, merr parasysh sa më poshtë:
 
-- **Raciocínio**:se você usava engenharia de comandos complexa (como cadeia de pensamento) para forçar o Gemini 2.5 a raciocinar, teste o Gemini 3 com `thinking_level: "high"` e comandos simplificados.
-- **Configurações de temperatura**:se o código atual definir explicitamente a temperatura (especialmente para valores baixos em saídas determinísticas), recomendamos remover esse parâmetro e usar o padrão do Gemini 3, que é 1,0, para evitar possíveis problemas de loop ou degradação de desempenho em tarefas complexas.
-- **PDF e compreensão de documentos**:se você dependia de um comportamento específico para a análise de documentos densos, teste a nova configuração
-  `media_resolution_high` para garantir a precisão contínua.
-- **Consumo de tokens**:a migração para os padrões do Gemini 3 pode **aumentar** o uso de tokens para PDFs, mas **diminuir** o uso de tokens para vídeos. Se as solicitações excederem a janela de contexto devido a resoluções padrão mais altas, recomendamos reduzir explicitamente a resolução da mídia.
-- **Segmentação de imagens**:os recursos de segmentação de imagens (que retornam máscaras no nível do pixel para objetos) não são compatíveis com o Gemini 3 Pro ou o Gemini 3 Flash. Para
-  fluxos de trabalho que exigem segmentação de imagens integrada, recomendamos continuar usando
-  o Gemini 2.5 Flash com o recurso de pensamento desativado.
-- **Uso de computador**:o Gemini 3 Pro e o Gemini 3 Flash são compatíveis com o [Uso de computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br). Ao contrário da série 2.5, não é necessário usar um modelo separado para acessar a ferramenta "Uso do computador".
-- **Suporte a ferramentas**: agora é possível [combinar ferramentas integradas com a chamada de função](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-br) nos modelos do Gemini 3. Agora, a [ancoragem do Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br) também é compatível com os modelos do Gemini 3.
+- **Arsyetimi:** Nëse ke përdorur më parë inxhinieri të ndërlikuar të kërkesave (si p.sh. zinxhiri i mendimit) për të detyruar Gemini 2.5 të arsyetojë, provo Gemini 3 me
+  `thinking_level: "high"` dhe kërkesa të thjeshtuara.
+- **Cilësimet e temperaturës:** Nëse kodi yt ekzistues e cakton në mënyrë të qartë temperaturën
+  (sidomos në vlera të ulëta për dalje deterministe), ne rekomandojmë që ta heqësh këtë parametër
+  dhe të përdorësh vlerën e parazgjedhur 1,0 të Gemini 3 për të shmangur problemet e mundshme me përsëritjen
+  ose degradimin e performancës në detyra komplekse.
+- **Kuptimi i dokumenteve dhe PDF-ve:**
+  Nëse je mbështetur në sjellje specifike për analizimin e dokumenteve të dendura, testo cilësimin e ri të `media_resolution_high` për të siguruar saktësinë e vazhdueshme.
+- **Konsumimi i tokenit:** Migrimi në parazgjedhjet e Gemini 3 mund të **rritë** përdorimin e tokenit
+  për skedarët PDF, por mund të **ulë** përdorimin e tokenit për videot. Nëse kërkesat tani e tejkalojnë dritaren e kontekstit për shkak të rezolucioneve të parazgjedhura më të larta, ne rekomandojmë zvogëlimin e rezolucionit të medias.
+- **Segmentimi i imazheve:** Aftësitë e segmentimit të imazheve (që kthejnë maska në nivel pikseli për objektet) nuk mbështeten në Gemini 3 Pro ose Gemini 3 Flash. Për ngarkesat e punës që kërkojnë segmentimin e integruar të imazheve, ne rekomandojmë që të vazhdosh të përdorësh Gemini 2.5 Flash me aftësinë e të menduarit të çaktivizuar.
+- **Përdorimi në kompjuter:** Gemini 3 Pro dhe Gemini 3 Flash mbështesin [Përdorimin në kompjuter](https://ai.google.dev/gemini-api/docs/computer-use?hl=sq). Ndryshe nga seria 2.5, nuk ke nevojë të përdorësh një model të veçantë për t'u qasur te veglat e përdorimit të kompjuterit.
+- **Mbështetja e veglave**: [Kombinimi i veglave të integruara me thirrjen e funksioneve](https://ai.google.dev/gemini-api/docs/tool-combination?hl=sq) tani mbështetet për modelet Gemini 3. [Bazimi i Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=sq) mbështetet gjithashtu tani për modelet e Gemini 3.
 
-## Compatibilidade com a OpenAI
+## Përputhshmëria me OpenAI
 
-Para usuários que utilizam a [compatibilidade com a OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pt-br),
-os parâmetros padrão (`reasoning_effort` do OpenAI) são mapeados automaticamente para
-equivalentes do Gemini (`thinking_level`).
+Për përdoruesit që përdorin [shtresën e përputhshmërisë me OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=sq), parametrat standardë (`reasoning_effort` të OpenAI) mapohen automatikisht në
+ekuivalentët e Gemini (`thinking_level`).
 
-## Práticas recomendadas para comandos
+## Praktikat më të mira për nxitjen
 
-O Gemini 3 é um modelo de raciocínio, o que muda a forma como você precisa dar comandos.
+Gemini 3 është një model arsyetimi, i cili ndryshon mënyrën se si duhet të japësh kërkesat.
 
-- **Instruções precisas**:seja conciso nos comandos de entrada. O Gemini 3 responde melhor a instruções diretas e claras. Ela pode analisar demais técnicas de engenharia de comandos detalhadas ou complexas usadas em modelos mais antigos.
-- **Nível de detalhe da saída**:por padrão, o Gemini 3 é menos detalhista e prefere dar respostas diretas e eficientes. Se o caso de uso exigir uma persona mais conversacional ou "falante", você precisa direcionar explicitamente o modelo no comando (por exemplo, "Explique isso como um assistente amigável e falante").
-- **Gerenciamento de contexto**:ao trabalhar com grandes conjuntos de dados (por exemplo, livros inteiros, bases de código ou vídeos longos), coloque suas instruções ou perguntas específicas no final do comando, depois do contexto de dados. Ancore o raciocínio do modelo nos dados fornecidos começando sua pergunta com uma frase como "Com base nas informações anteriores...".
+- **Udhëzime të sakta:** Bëhu i përmbledhur në kërkesat e tua të hyrjes. Gemini 3 përgjigjet më mirë ndaj udhëzimeve të drejtpërdrejta dhe të qarta. Ajo mund të analizojë në mënyrë të tepruar teknikat e detyrave të detajuara ose tepër komplekse që përdoren për modelet më të vjetra.
+- **Detajimi i daljes:** Si parazgjedhje, Gemini 3 është më pak i detajuar dhe preferon të japë përgjigje të drejtpërdrejta dhe efikase. Nëse rasti yt i përdorimit kërkon një personazh më bisedor ose "bisedues", duhet ta drejtosh në mënyrë të qartë modelin në kërkesë (p.sh. "Shpjegoje këtë si një asistent miqësor dhe bisedues").
+- **Menaxhimi i kontekstit:** Kur punon me grupe të mëdha të dhënash (p.sh. libra të tërë, baza kodesh ose video të gjata), vendos udhëzimet ose pyetjet e tua specifike në fund të kërkesës, pas kontekstit të të dhënave. Ankoro arsyetimin e modelit te të dhënat e dhëna duke e nisur pyetjen tënde me një frazë si "Bazuar në informacionet e mësipërme...".
 
-Saiba mais sobre estratégias de design de comandos no [guia de engenharia de comandos](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br).
+Mëso më shumë rreth strategjive të projektimit të kërkesave në [udhëzuesin e inxhinierisë së kërkesave](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=sq).
 
-## Perguntas frequentes
+## Pyetjet e shpeshta
 
-1. **Qual é o limite de conhecimento do Gemini 3?** Os modelos do Gemini 3 têm uma data limite de conhecimento de janeiro de 2025. Para informações mais recentes, use a ferramenta [Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br).
-2. **Quais são os limites da janela de contexto?** Os modelos do Gemini 3 oferecem suporte a uma janela de contexto de entrada de 1 milhão de tokens e até 64 mil tokens de saída.
-3. **Existe um nível sem custo financeiro para o Gemini 3?** O Gemini 3 Flash
-   `gemini-3-flash-preview` tem um nível sem custo financeiro na API Gemini. Você pode testar o
-   Gemini 3.1 Pro e o 3 Flash sem custo no Google AI Studio, mas não
-   há um nível sem custo financeiro disponível para `gemini-3.1-pro-preview` na API Gemini.
-4. **Meu código `thinking_budget` antigo ainda vai funcionar?** Sim, o `thinking_budget` ainda tem suporte para compatibilidade com versões anteriores, mas recomendamos migrar para o `thinking_level` para ter uma performance mais previsível. Não use os dois na mesma
-   solicitação.
-5. **O Gemini 3 é compatível com a API Batch?** Sim, o Gemini 3 é compatível com a
-   [API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br).
-6. **O armazenamento em cache de contexto é compatível?** Sim, o [armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br) é compatível com o Gemini 3.
-7. **Quais ferramentas são compatíveis com o Gemini 3?** O Gemini 3 é compatível com
-   [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br),
-   [Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br),
-   [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br),
-   [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br) e
-   [Contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br). Ele também oferece suporte a
-   [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) padrão para
-   suas próprias ferramentas personalizadas e em
-   [combinação com ferramentas integradas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pt-br).
-8. **O que é `gemini-3.1-pro-preview-customtools`?** Se você estiver usando
-   `gemini-3.1-pro-preview` e o modelo ignorar suas ferramentas personalizadas em favor de
-   comandos bash, tente o modelo `gemini-3.1-pro-preview-customtools`.
-   Mais informações [aqui][customtools-model].
+1. **Cili është kufiri i njohurive për Gemini 3?** Modelet e Gemini 3 kanë një kufi njohurish në janar 2025. Për informacione më të fundit, përdor veglën e
+   [Argumentimit me "Kërko"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq).
+2. **Cilat janë kufijtë e dritares kontekstuale?** Modelet e Gemini 3 mbështesin një dritare kontekstuale hyrëse me 1 milion tokenë dhe deri në 64 000 tokenë dalje.
+3. **A ka një nivel falas për Gemini 3?** Gemini 3 Flash
+   `gemini-3-flash-preview` ka një nivel falas në Gemini API. Mund të provosh Gemini 3.1 Pro dhe 3 Flash pa kosto në Google AI Studio, por nuk ka nivel falas të disponueshëm për `gemini-3.1-pro-preview` në Gemini API.
+4. **A do të funksionojë përsëri kodi im i vjetër i `thinking_budget`?** Po, `thinking_budget` mbështetet akoma për përputhshmëri me versionet e mëparshme, por ne rekomandojmë migrimin te `thinking_level` për performancë më të parashikueshme. Mos i përdor të dyja në të njëjtën kërkesë.
+5. **A e mbështet Gemini 3 Batch API?** Po, Gemini 3 mbështet
+   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=sq).
+6. **A mbështetet "Ruajtja në memorien specifike"?** Po, [Ruajtja në memorien specifike e kontekstit](https://ai.google.dev/gemini-api/docs/caching?hl=sq) mbështetet për Gemini 3.
+7. **Cilat vegla mbështeten në Gemini 3?** Gemini 3 mbështet
+   ["Kërko në Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq),
+   [Argumentimin me Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=sq),
+   [Kërkimin në skedarë](https://ai.google.dev/gemini-api/docs/file-search?hl=sq),
+   [Ekzekutimin e kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq) dhe
+   [Kontekstin e URL-së](https://ai.google.dev/gemini-api/docs/url-context?hl=sq). Ai mbështet gjithashtu [Thirrjen e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq) standard për veglat e tua të personalizuara dhe në [kombinim me veglat e integruara](https://ai.google.dev/gemini-api/docs/tool-combination?hl=sq).
+8. **Çfarë është `gemini-3.1-pro-preview-customtools`?** Nëse po përdor
+   `gemini-3.1-pro-preview` dhe modeli i shpërfill veglat e personalizuara në favor të komandave të bash, provo modelin `gemini-3.1-pro-preview-customtools` më mirë.
+   Më shumë informacione [këtu][customtools-model].
 
-Envie comentários
+Dërgo komente
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Última atualização 2026-10-09 UTC.
+Përditësimi i fundit: 2026-10-09 UTC.
 
-Quer enviar seu feedback?
+Duhet të na tregosh më shumë?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-09 UTC."],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-09 UTC."],[],[]]

@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=zh-CN
-fetched_at: 2026-10-12T06:52:52.657310+00:00
-title: "\u8bed\u97f3\u8bbe\u8ba1 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/voice-design?hl=de
+fetched_at: 2026-10-19T05:38:35.685719+00:00
+title: "Sprachdesign \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-发送反馈
+Feedback geben
 
-# 语音设计
+# Sprachdesign
 
-借助语音设计，您可以使用 Gemini API Voices 端点 (`POST /v1beta/voices`) 通过自然语言描述来创建全新的持久性声音角色。您无需局限于预建的语音或录制参考音频，只需描述角色的年龄、音色、口音和基准发音，即可获得保存到项目中的可重复使用的 `voice_...` ID。
+Mit Voice Design können Sie mithilfe des Gemini API-Endpunkts „Voices“ (`POST /v1beta/voices`) eine völlig neue, dauerhafte stimmliche Persona aus einer natürlichsprachlichen Beschreibung erstellen. Anstatt auf vorgefertigte Stimmen beschränkt zu sein oder Referenz-Audio aufzunehmen, können Sie das Alter, das Stimm-Timbre, den Akzent und die grundlegende Sprechweise einer Figur beschreiben und erhalten eine wiederverwendbare `voice_...`-ID, die in Ihrem Projekt gespeichert wird.
 
-在 [Google AI Studio](https://aistudio.google.com/generate-speech?hl=zh-cn) 中使用交互式**语音设计**工作室，可以快速设计、试听和迭代自定义语音。您可以根据文本提示生成自定义角色，使用示例脚本对其进行测试，然后将生成的 `voice_...` ID 直接复制到应用代码中。
+Die schnellste Möglichkeit, benutzerdefinierte Stimmen zu entwerfen, zu testen und zu iterieren, ist das interaktive **Voice Design**-Studio in [Google AI Studio](https://aistudio.google.com/generate-speech?hl=de). Sie können benutzerdefinierte Identitäten aus Text-Prompts generieren, sie mit Beispielskripts testen und die resultierende `voice_...`-ID direkt in Ihren Anwendungscode kopieren.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com/generate-speech?hl=zh-cn)
+[In Google AI Studio ausprobieren](https://aistudio.google.com/generate-speech?hl=de)
 
-[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=zh-cn) (`gemini-3.8-flash-tts`) 和 [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=zh-cn) (`gemini-3.8-flash-lite-tts`) 均支持语音设计。
+Sowohl [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=de) (`gemini-3.8-flash-tts`) als auch [Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=de) (`gemini-3.8-flash-lite-tts`) unterstützen Voice Design.
 
-## 创建设计的语音
+## Design-Stimme erstellen
 
-使用 Google GenAI SDK（`google-genai` 2.25.0+ / `@google/genai` 2.24.0+）或 REST API，根据文本说明创建自定义语音。对于 `"prompted"` 语音，`voices.create` (`CreateVoice`) 和 `voices.get` (`GetVoice`) 都会返回仅输出的 `sample_audio` 字段（`mime_type: "audio/wav"`，以 base64 编码的 `data`），以便您可以立即试听生成的语音：
+Mit dem Google GenAI SDK (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) oder der REST API können Sie eine benutzerdefinierte Stimme aus einer Textbeschreibung erstellen. Bei `"prompted"`-Stimmen geben sowohl `voices.create` (`CreateVoice`) als auch `voices.get` (`GetVoice`) ein reines Ausgabefeld `sample_audio` (`mime_type: "audio/wav"`, base64-codiertes `data`) zurück, sodass Sie die generierte Stimme sofort anhören können:
 
 ### Python
 
@@ -122,15 +122,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }' | tee created_voice.json | jq -r '.sample_audio.data' | base64 --decode > voice_preview.wav
 ```
 
-## 语音设计的工作原理
+## So funktioniert das Voice-Design
 
-1. **创建提示语音**：使用 `type="prompted"` 和 `store=True` 调用 `voices.create` (`POST /v1beta/voices`)。
-2. **接收持久性 `voice_id` 和 `sample_audio` 预览**：API 会生成声音身份，将其存储在您的项目中，并返回永久性 ID（例如 `voice_abc123...`）以及 `sample_audio`（`mime_type: "audio/wav"`，base64 编码的 `data`），其中包含为该声音生成的预览音频。
-3. **合成语音**：调用 `generateContent` 时，传入 `speechConfig.voiceConfig.voice` 中的 `voice_id`。
+1. **Sprache mit Prompt erstellen**:Rufen Sie `voices.create` (`POST /v1beta/voices`) mit `type="prompted"` und `store=True` auf.
+2. **Dauerhafte `voice_id`- und `sample_audio`-Vorschau erhalten**:Die API generiert die stimmliche Identität, speichert sie in Ihrem Projekt und gibt eine dauerhafte ID (z. B. `voice_abc123...`) zusammen mit `sample_audio` (`mime_type: "audio/wav"`, base64-codiertes `data`) zurück, das die generierte Vorschau-Audio für die Stimme enthält.
+3. **Sprache synthetisieren**:Übergeben Sie `voice_id` in `speechConfig.voiceConfig.voice`, wenn Sie `generateContent` aufrufen.
 
-## 使用您设计的语音合成语音
+## Sprache mit Ihrer benutzerdefinierten Stimme synthetisieren
 
-在调用 `generateContent` 时，传入 `voiceConfig.voice` 中返回的 `id` (`voice_...`)：
+Übergeben Sie den zurückgegebenen `id` (`voice_...`) in `voiceConfig.voice`, wenn Sie `generateContent` aufrufen:
 
 ### Python
 
@@ -223,13 +223,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash-t
   }'
 ```
 
-## 管理声音
+## Stimmen verwalten
 
-您可以随时使用 Voices API 列出、过滤、检查和删除已存储的声音（有关所有过滤参数，请参阅[扩展语音库和过滤](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=zh-cn#voice-library)）。
+Sie können Ihre gespeicherten Stimmen jederzeit mit der Voices API auflisten, filtern, prüfen und löschen (alle Filterparameter finden Sie unter [Erweiterte Stimmenbibliothek und Filterung](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=de#voice-library)).
 
-- **存储空间限制和 TTL**：有状态的声音（`store=True`，在提示的声音和复制的声音之间共享）的限制为**每个项目 200 个声音**，并且**存留时间 (TTL) 为 1 年**。
-- **`sample_audio` 可用性**： `voices.create()` (`CreateVoice`) 和 `voices.get()` (`GetVoice`) 会为 `"prompted"` 语音填充 `sample_audio`（`mime_type:
-  "audio/wav"`，base64 编码的 `data`）。为了保持列表的轻量级，`voices.list()` (`ListVoices`) 会省略 `sample_audio`（对于 `"replicated"` 和 `"prebuilt"` 语音，`sample_audio` 未设置）。
+- **Speicherlimits und TTL**:Für zustandsbehaftete Stimmen (`store=True`, die für angeforderte und replizierte Stimmen freigegeben sind) gilt ein Limit von **200 Stimmen pro Projekt** und eine **Gültigkeitsdauer von 1 Jahr** (Time-to-Live, TTL).
+- **Verfügbarkeit von `sample_audio`**:`voices.create()` (`CreateVoice`) und `voices.get()` (`GetVoice`) füllen `sample_audio` (`mime_type:
+  "audio/wav"`, base64-codiertes `data`) für `"prompted"`-Stimmen aus. Damit der Eintrag übersichtlich bleibt, wird in `voices.list()` (`ListVoices`) `sample_audio` ausgelassen (und `sample_audio` ist für `"replicated"`- und `"prebuilt"`-Stimmen nicht festgelegt).
 
 ### Python
 
@@ -295,23 +295,23 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 语音设计的提示最佳实践
+## Best Practices für Prompts für das Voice-Design
 
-- **将永久性声音特征放在 Voice 设计中，而不是 `style` 中**：在 `voices.create` 中创建声音时，定义不可变的特征，例如年龄、性别、音色、声音质感和地区口音。
-- **预留 `speech_metadata.style` 用于表达情境情绪**：创建自定义声音后，使用简短的 `style` 提示（例如 `"whispered urgently"` 或 `"cheerful and energetic"`）来引导逐轮表演，而不会改变说话者的核心身份。
-- **内容要具体且简洁**：清晰的 1-2 句话描述（例如*“一位 30 多岁的体育播报员，声音清脆有力，略带中西部口音”*）比矛盾或过长的段落能生成更清晰、更一致的结果。
+- **Dauerhafte stimmliche Merkmale im Voice-Design festlegen, nicht in `style`**:Lege unveränderliche Merkmale wie Alter, Geschlecht, Klangfarbe, stimmliche Textur und regionalen Akzent beim Erstellen der Stimme in `voices.create` fest.
+- **`speech_metadata.style` für situationsbezogene Emotionen reservieren**:Nachdem Sie Ihre benutzerdefinierte Stimme erstellt haben, verwenden Sie kurze `style`-Prompts (z. B. `"whispered urgently"` oder `"cheerful and energetic"`), um die schrittweise Darstellung zu steuern, ohne die grundlegende Identität des Sprechers zu ändern.
+- **Spezifisch und prägnant sein**:Eine klare Beschreibung in ein bis zwei Sätzen (z. B. *„Eine dynamische Sportmoderatorin in den Dreißigern mit leichtem Akzent aus dem Mittleren Westen“*) führt zu besseren, konsistenteren Ergebnissen als widersprüchliche oder zu lange Absätze.
 
-## 后续步骤
+## Nächste Schritte
 
-- 了解如何在[语音复刻](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=zh-cn)中复刻现有说话者的声音。
-- 如需了解回合级样式、内嵌标记和多发言人对话，请参阅[文字转语音指南](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=zh-cn)。
+- [Weitere Informationen zur Stimmreplikation](https://ai.google.dev/gemini-api/docs/generate-content/voice-replication?hl=de)
+- Weitere Informationen zu Stil auf Turn-Ebene, Inline-Tags und Dialogen mit mehreren Sprechern finden Sie im [Leitfaden zur Sprachsynthese](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=de).
 
-发送反馈
+Feedback geben
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最后更新时间 (UTC)：2026-09-24。
+Zuletzt aktualisiert: 2026-09-24 (UTC).
 
-需要向我们提供更多信息？
+Haben Sie Feedback für uns?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-24 (UTC)."],[],[]]

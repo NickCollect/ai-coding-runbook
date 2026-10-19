@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/veo?hl=he
-fetched_at: 2026-10-12T06:57:27.552310+00:00
-title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05e1\u05e8\u05d8\u05d5\u05e0\u05d9\u05dd \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Veo 3.1 \u05d1-Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/veo?hl=vi
+fetched_at: 2026-10-19T05:48:40.814668+00:00
+title: "T\u1ea1o video b\u1eb1ng Veo 3.1 trong Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# יצירת סרטונים באמצעות Veo 3.1 ב-Gemini API
+# Tạo video bằng Veo 3.1 trong Gemini API
 
-> מידע נוסף על הבנת סרטונים זמין במדריך בנושא [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he).
+> Để tìm hiểu về tính năng hiểu video, hãy xem hướng dẫn về [Tính năng hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi).
 
-‫[Veo 3.1](https://deepmind.google/models/veo/?hl=he) הוא מודל ליצירת סרטונים באורך 8 שניות (720p, ‏ 1, 080p או 4k) עם אודיו שנוצר באופן טבעי. אפשר לגשת למודל הזה באופן פרוגרמטי באמצעות Gemini API. מידע נוסף על הגרסאות הזמינות של מודל Veo זמין בקטע [גרסאות המודל](#model-versions).
+[Veo 3.1](https://deepmind.google/models/veo/?hl=vi) là một mô hình tạo video dài 8 giây (720p, 1080p hoặc 4k) có âm thanh được tạo tự nhiên. Bạn có thể truy cập vào mô hình này theo cách lập trình bằng Gemini API. Để tìm hiểu thêm về các biến thể mô hình Veo hiện có, hãy xem phần [Các phiên bản mô hình](#model-versions).
 
-‫Veo 3.1 מצטיין במגוון רחב של סגנונות ויזואליים וקולנועיים, וכולל כמה יכולות חדשות:
+Veo 3.1 có khả năng tạo ra nhiều phong cách hình ảnh và điện ảnh, đồng thời có một số tính năng mới:
 
-- **סרטונים לאורך**: אפשר לבחור בין סרטונים לרוחב (`16:9`) לבין סרטונים לאורך (`9:16`).
-- **הארכת סרטון**: הארכת סרטונים שנוצרו בעבר באמצעות Veo.
-- **יצירה של פריים ספציפי**: אפשר ליצור סרטון על ידי ציון הפריים הראשון והאחרון.
-- **הנחיה מבוססת-תמונה**: אפשר להשתמש בעד שלוש תמונות לדוגמה כדי להנחות את התוכן של הסרטון שנוצר.
+- **Video dọc**: Chọn giữa video ngang (`16:9`) và video dọc (`9:16`).
+- **Phần mở rộng video**: Kéo dài thời lượng của những video đã được tạo trước đó bằng Veo.
+- **Tạo theo khung hình cụ thể**: Tạo video bằng cách chỉ định khung hình đầu tiên và khung hình cuối cùng.
+- **Chỉ dẫn dựa trên hình ảnh**: Sử dụng tối đa 3 hình ảnh tham khảo để định hướng nội dung cho video được tạo.
 
-מידע נוסף על כתיבת פרומפטים טקסטואליים יעילים ליצירת סרטונים זמין [במדריך לכתיבת פרומפטים ל-Veo](#prompt-guide)
+Để biết thêm thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#prompt-guide)
 
-## יצירת סרטונים לפי טקסט
+## Tạo video từ văn bản
 
-בדוגמאות הבאות אפשר לראות איך ליצור סרטון עם [דיאלוג](#dialogue), [ריאליזם קולנועי](#realism) או [אנימציה יצירתית](#style):
+Các ví dụ sau đây cho thấy cách bạn có thể tạo video có [lời thoại](#dialogue), [mức độ chân thực như phim điện ảnh](#realism) hoặc [ảnh động sáng tạo](#style):
 
-### דיאלוג ואפקטים קוליים
+### Lời thoại và hiệu ứng âm thanh
 
 ### Python
 
@@ -216,7 +216,7 @@ while true; do
 done
 ```
 
-### ריאליזם קולנועי
+### Tính chân thực đậm chất điện ảnh
 
 ### Python
 
@@ -397,7 +397,7 @@ while true; do
 done
 ```
 
-### אנימציה של קריאייטיב
+### Ảnh động sáng tạo
 
 ### Python
 
@@ -572,9 +572,9 @@ while true; do
 done
 ```
 
-## שליטה ביחס הגובה-רוחב
+## Kiểm soát tỷ lệ khung hình
 
-‫Veo 3.1 מאפשר ליצור סרטונים לרוחב (`16:9`, הגדרת ברירת המחדל) או לאורך (`9:16`). אפשר לציין למודל באיזה מהם רוצים להשתמש באמצעות הפרמטר `aspect_ratio`:
+Veo 3.1 cho phép bạn tạo video ở chế độ ngang (`16:9`, chế độ cài đặt mặc định) hoặc dọc (`9:16`). Bạn có thể cho mô hình biết bạn muốn sử dụng mô hình nào bằng cách dùng tham số `aspect_ratio`:
 
 ### Python
 
@@ -736,13 +736,13 @@ while true; do
 done
 ```
 
-## שליטה ברזולוציה
+## Kiểm soát độ phân giải
 
-‫Veo 3.1 יכול גם ליצור ישירות סרטונים באיכות 720p, ‏ 1080p או 4k (איכות 4k לא זמינה ב-Veo 3.1 Lite).
+Veo 3.1 cũng có thể trực tiếp tạo video 720p, 1080p hoặc 4k (Veo 3.1 Lite không hỗ trợ video 4k).
 
-שימו לב: ככל שהרזולוציה גבוהה יותר, כך זמן האחזור יהיה ארוך יותר. סרטונים באיכות 4K גם יקרים יותר (ראו [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#veo-3.1)).
+Xin lưu ý rằng độ phân giải càng cao thì độ trễ càng lớn. Video 4K cũng có giá cao hơn (xem [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1)).
 
-[תוסף הווידאו](#extending_veo_videos) מוגבל גם הוא לסרטונים ברזולוציה 720p.
+[Phần mở rộng video](#extending_veo_videos) cũng chỉ hỗ trợ video 720p.
 
 ### Python
 
@@ -904,9 +904,9 @@ while true; do
 done
 ```
 
-## יצירת סרטון מתמונה
+## Tạo video từ hình ảnh
 
-בדוגמה הבאה מוצג קוד ליצירת תמונה באמצעות [Gemini 3.1 Flash Image (שנקרא גם Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=he), ואז שימוש בתמונה הזו כפריים הפתיחה ליצירת סרטון באמצעות Veo 3.1.
+Đoạn mã sau đây minh hoạ cách tạo hình ảnh bằng [Gemini 3.1 Flash Image (còn gọi là Nano Banana 2)](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi), sau đó dùng hình ảnh đó làm khung hình bắt đầu để tạo video bằng Veo 3.1.
 
 ### Python
 
@@ -1094,15 +1094,15 @@ client.files.download(video, "veo3_with_image_input.mp4", null);
 System.out.println("Generated video saved to veo3_with_image_input.mp4");
 ```
 
-### שימוש בתמונות לדוגמה
+### Sử dụng hình ảnh tham khảo
 
-מעכשיו אפשר להעלות עד 3 תמונות לדוגמה ל-Veo 3.1 כדי להנחות את ה-AI ליצור סרטון עם תוכן שמתאים לסגנון החזותי שלכם. כדי לשמור על המראה של הנושא בסרטון הפלט, צריך לספק תמונות של אדם, דמות או מוצר.
+Giờ đây, Veo 3.1 chấp nhận tối đa 3 hình ảnh tham khảo để hướng dẫn nội dung của video được tạo. Cung cấp hình ảnh về một người, nhân vật hoặc sản phẩm để giữ nguyên diện mạo của chủ thể trong video đầu ra.
 
-לדוגמה, אם משתמשים בשלוש התמונות האלה שנוצרו באמצעות [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) כדוגמאות עם [פרומפט כתוב היטב](#use-reference-images), נוצר הסרטון הבא:
+Ví dụ: khi dùng 3 hình ảnh được tạo bằng [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) làm hình ảnh tham khảo cùng với một [câu lệnh được viết kỹ lưỡng](#use-reference-images), bạn sẽ tạo được video sau:
 
 | `` `dress_image` `` | `` `woman_image` `` | `` `glasses_image` `` |
 | --- | --- | --- |
-| שמלת פלמינגו אופנתית עם שכבות של נוצות ורודות ופוקסיה | אישה יפה עם שיער כהה ועיניים חומות חמות | משקפי שמש ורודים בצורת לב |
+| Đầm hồng hạc cao cấp với nhiều lớp lông màu hồng và màu cánh sen | Người phụ nữ xinh đẹp với mái tóc sẫm màu và đôi mắt nâu ấm áp | Kính râm hình trái tim màu hồng độc đáo |
 
 ### Python
 
@@ -1329,9 +1329,9 @@ while true; do
 done
 ```
 
-### שימוש בפריים הראשון ובפריים האחרון
+### Sử dụng khung hình đầu tiên và cuối cùng
 
-עם Veo 3.1, אתם יכולים ליצור סרטונים באמצעות אינטרפולציה, או על ידי ציון הפריימים הראשון והאחרון של הסרטון. למידע על כתיבת פרומפטים טקסטואליים יעילים ליצירת סרטונים, ראו את [מדריך לכתיבת פרומפטים ל-Veo](#use-reference-images).
+Veo 3.1 cho phép bạn tạo video bằng cách sử dụng phương pháp nội suy hoặc chỉ định khung hình đầu tiên và cuối cùng của video. Để biết thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#use-reference-images).
 
 ### Python
 
@@ -1503,31 +1503,31 @@ done
 
 | `` `first_image` `` | `` `last_image` `` | *veo3.1\_with\_interpolation.mp4* |
 | --- | --- | --- |
-| אישה רפאים עם שיער לבן ארוך ושמלה מתנפנפת מתנדנדת בעדינות על נדנדת חבלים | האישה הדמוית-רוח נעלמת מהנדנדה | סרטון קולנועי ומטריד של אישה מוזרה שנעלמת מנדנדה בערפל |
+| Một người phụ nữ ma quái với mái tóc dài màu trắng và chiếc váy bồng bềnh nhẹ nhàng đu đưa trên chiếc đu dây | Người phụ nữ ma biến mất khỏi xích đu | Một video điện ảnh, ám ảnh về một người phụ nữ kỳ lạ biến mất khỏi xích đu trong sương mù |
 
-## הארכת סרטונים ב-Veo
+## Kéo dài video trên Veo
 
-אפשר להשתמש ב-Veo 3.1 כדי להאריך סרטונים שנוצרו קודם באמצעות Veo ב-7 שניות ומעלה, ועד 20 פעמים.
+Sử dụng Veo 3.1 để kéo dài video mà bạn đã tạo trước đó bằng Veo thêm 7 giây và tối đa 20 lần.
 
-מגבלות על סרטוני קלט:
+Các hạn chế đối với video đầu vào:
 
-- אפשר ליצור ב-Veo סרטונים באורך של עד 141 שניות בלבד.
-- ‫Gemini API תומך בהארכת סרטונים רק בסרטונים שנוצרו ב-Veo.
-- הסרטון צריך להיות מדור קודם, כמו
+- Video do Veo tạo chỉ dài tối đa 141 giây.
+- Gemini API chỉ hỗ trợ tiện ích video cho video do Veo tạo.
+- Video phải thuộc thế hệ trước, chẳng hạn như
   `operation.response.generated_videos[0].video`
-- הסרטונים נשמרים למשך יומיים, אבל אם נעשה שימוש בסרטון כדי להאריך את השיחה, טיימר האחסון של היומיים מתאפס. אפשר להאריך רק סרטונים שנוצרו או שהייתה אליהם הפניה ביומיים האחרונים.
-- הסרטונים שמוזנים צריכים להיות באורך מסוים, ביחס גובה-רוחב מסוים ובגודל מסוים:
-  - יחס גובה-רוחב: 9:16 או 16:9
-  - רזולוציה: 720p
-  - אורך הסרטון: 141 שניות או פחות
+- Video được lưu trữ trong 2 ngày, nhưng nếu được dùng làm tài liệu tham khảo cho tiện ích, thì bộ hẹn giờ lưu trữ 2 ngày của video sẽ được đặt lại. Bạn chỉ có thể kéo dài thời lượng của những video được tạo hoặc tham chiếu trong 2 ngày gần nhất.
+- Video đầu vào phải có độ dài, tỷ lệ khung hình và kích thước nhất định:
+  - Tỷ lệ khung hình: 9:16 hoặc 16:9
+  - Độ phân giải: 720p
+  - Thời lượng video: Tối đa 141 giây
 
-הפלט של התוסף הוא סרטון אחד שמשלב את סרטון הקלט של המשתמש ואת הסרטון המורחב שנוצר, באורך של עד 148 שניות.
+Đầu ra của tính năng này là một video duy nhất kết hợp video hoạt động đầu vào của người dùng và video mở rộng được tạo với thời lượng tối đa là 148 giây.
 
-בדוגמה הזו, סרטון שנוצר ב-Veo, שמוצג כאן עם הפרומפט המקורי שלו, מורחב באמצעות הפרמטר `video` ופרומפט חדש:
+Ví dụ này lấy một video do Veo tạo (xuất hiện ở đây cùng với câu lệnh gốc) và mở rộng video đó bằng cách sử dụng tham số `video` và một câu lệnh mới:
 
-| פרומפט | פלט: `butterfly_video` |
+| Câu lệnh | Đầu ra: `butterfly_video` |
 | --- | --- |
-| פרפר אוריגמי מנפנף בכנפיו ועף מחוץ לדלתות הצרפתיות אל הגן. | פרפר אוריגמי מנפנף בכנפיו ועף מחוץ לדלתות הצרפתיות אל הגן. |
+| Một con bướm làm bằng giấy gấp vỗ cánh và bay ra khỏi cửa kiểu Pháp vào vườn. | Một con bướm làm bằng giấy xếp vỗ cánh và bay ra khỏi cửa sổ kiểu Pháp vào vườn. |
 
 ### Python
 
@@ -1702,13 +1702,13 @@ while true; do
 done
 ```
 
-מידע על כתיבת פרומפטים טקסטואליים יעילים ליצירת סרטונים זמין [במדריך לכתיבת פרומפטים ל-Veo](#extend-prompt).
+Để biết thông tin về cách viết câu lệnh dạng văn bản hiệu quả để tạo video, hãy xem [hướng dẫn về câu lệnh cho Veo](#extend-prompt).
 
-## טיפול בפעולות אסינכרוניות
+## Xử lý các thao tác không đồng bộ
 
-יצירת סרטונים היא משימה שדורשת הרבה כוח מחשוב. כששולחים בקשה ל-API, מתחילה משימה ארוכה ומוחזר מיד אובייקט `operation`. לאחר מכן, צריך לשלוח בקשות חוזרות עד שהסרטון יהיה מוכן, כלומר עד שהסטטוס `done` יהיה true.
+Tạo video là một tác vụ đòi hỏi nhiều tài nguyên tính toán. Khi bạn gửi yêu cầu đến API, API sẽ bắt đầu một công việc chạy trong thời gian dài và trả về ngay một đối tượng `operation`. Sau đó, bạn phải thăm dò cho đến khi video sẵn sàng, được biểu thị bằng trạng thái `done` là true.
 
-הליבה של התהליך הזה היא לולאת דגימה, שבודקת מעת לעת את סטטוס העבודה.
+Cốt lõi của quy trình này là một vòng lặp thăm dò ý kiến, định kỳ kiểm tra trạng thái của công việc.
 
 ### Python
 
@@ -1875,285 +1875,283 @@ while true; do
 done
 ```
 
-## פרמטרים ומפרטים של Veo API
+## Thông số và quy cách của Veo API
 
-אלה הפרמטרים שאפשר להגדיר בבקשת ה-API כדי לשלוט בתהליך יצירת הסרטון.
+Đây là những tham số bạn có thể đặt trong yêu cầu API để kiểm soát quy trình tạo video.
 
-| פרמטר | ‫Veo 3.1 ו-Veo 3.1 Fast | Veo 3.1 Lite | ‫Veo 3 ו-Veo 3 Fast |
+| Tham số | Veo 3.1 và Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 và Veo 3 Fast |
 | --- | --- | --- | --- |
-| קולאז' מתמונה | | | |
-| ‫`prompt`: תיאור הטקסט של הסרטון. תומך בסימנים קוליים. | `string` | `string` | `string` |
-| ‫`image`: תמונה ראשונית ליצירת אנימציה. | אובייקט `Image` | אובייקט `Image` | אובייקט `Image` |
-| ‫`lastFrame`: התמונה הסופית של סרטון אינטרפולציה למעבר. חובה להשתמש בו בשילוב עם הפרמטר `image`. | אובייקט `Image` | אובייקט `Image` | אובייקט `Image` |
-| ‫`referenceImages`: עד שלוש תמונות שישמשו כרפרנס לסגנון ולתוכן. | אובייקט `VideoGenerationReferenceImage` | אובייקט `n/a` | לא רלוונטי |
-| ‫`video`:  סרטון לשימוש בתוסף סרטון. | אובייקט `Video` מדור קודם | לא רלוונטי | לא רלוונטי |
-| פרמטרים | | | |
-| ‫`aspectRatio`: יחס הגובה-רוחב של הסרטון. | ‫`"16:9"` (ברירת מחדל), `"9:16"` | ‫`"16:9"` (ברירת מחדל), `"9:16"` | ‫`"16:9"` (ברירת מחדל), `"9:16"` |
-| ‫`durationSeconds`: אורך הסרטון שנוצר. | `"4"`, `"6"`, `"8"`.   *הערך חייב להיות 8 כשמשתמשים בתוסף, בתמונות לדוגמה או ברזולוציות של 1080p ו-4k* | `"4"`, `"6"`, `"8"`.   *הערך חייב להיות 8 כשמשתמשים בתמונות לדוגמה או ברזולוציה של 1080p* | `"4"`, `"6"`, `"8"`.   *הערך חייב להיות 8 כשמשתמשים בתוסף, בתמונות לדוגמה או ברזולוציות של 1080p ו-4k* |
-| ‫`personGeneration`: שליטה ביצירת אנשים. (הגבלות אזוריות מפורטות בקטע [מגבלות](#limitations)) | סרטון לפי טקסט ותוסף: `"allow_all"` בלבד   סרטון לפי תמונה, אינטרפולציה ותמונות להשוואה: `"allow_adult"` בלבד | סרטון לפי טקסט: `"allow_all"` בלבד   סרטון לפי תמונה, אינטרפולציה ותמונות עזר: `"allow_adult"` בלבד | טקסט לווידאו: `"allow_all"` בלבד   תמונה לווידאו: `"allow_adult"` בלבד |
-| ‫`resolution`: הרזולוציה של הסרטון. | ‫`"720p"` (ברירת מחדל),  `"1080p"` (תמיכה רק במשך 8 שניות), `"4k"` (תמיכה רק במשך 8 שניות)   *`"720p"` רק לתוסף* | ‫`"720p"` (ברירת מחדל),  `"1080p"` (תמיכה רק במשך 8 שניות) | ‫`"720p"` (ברירת מחדל),  `"1080p"` (תמיכה רק במשך 8 שניות), `"4k"` (תמיכה רק במשך 8 שניות)   *`"720p"` רק לתוסף* |
+| Nhiều mảnh ghép | | | |
+| `prompt`: Nội dung mô tả bằng văn bản cho video. Hỗ trợ dấu hiệu âm thanh. | `string` | `string` | `string` |
+| `image`: Một hình ảnh ban đầu để tạo ảnh động. | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` |
+| `lastFrame`: Hình ảnh cuối cùng của video nội suy để chuyển đổi. Bạn phải sử dụng thông số này cùng với thông số `image`. | Đối tượng `Image` | Đối tượng `Image` | Đối tượng `Image` |
+| `referenceImages`: Tối đa 3 hình ảnh được dùng làm tài liệu tham khảo về kiểu và nội dung. | Đối tượng `VideoGenerationReferenceImage` | Đối tượng `n/a` | Không có |
+| `video`: Video sẽ được dùng cho tiện ích video. | `Video` đối tượng của thế hệ trước | Không có | Không có |
+| Thông số | | | |
+| `aspectRatio`: Tỷ lệ khung hình của video. | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` | `"16:9"` (mặc định), `"9:16"` |
+| `durationSeconds`: Thời lượng của video được tạo. | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng phần mở rộng, hình ảnh tham khảo hoặc có độ phân giải 1080p và 4K* | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng hình ảnh tham khảo hoặc có độ phân giải 1080p* | `"4"`, `"6"`, `"8"`.   *Phải là "8" khi sử dụng phần mở rộng, hình ảnh tham khảo hoặc có độ phân giải 1080p và 4K* |
+| `personGeneration`: Kiểm soát việc tạo hình ảnh có người. (Xem phần [Các điểm hạn chế](#limitations) để biết các quy định hạn chế theo khu vực) | Chuyển văn bản thành video và Nội dung bổ sung: `"allow_all"` chỉ   Chuyển hình ảnh thành video, Nội suy và Hình ảnh tham khảo: `"allow_adult"` chỉ | Chuyển văn bản thành video: `"allow_all"` chỉ   Chuyển hình ảnh thành video, Nội suy và Hình ảnh tham khảo: `"allow_adult"` chỉ | Chuyển văn bản thành video: `"allow_all"` chỉ   Chuyển hình ảnh thành video: `"allow_adult"` chỉ |
+| `resolution`: Độ phân giải của video. | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây), `"4k"` (chỉ hỗ trợ thời lượng 8 giây)   *`"720p"` chỉ dành cho tiện ích* | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây) | `"720p"` (mặc định),  `"1080p"` (chỉ hỗ trợ thời lượng 8 giây), `"4k"` (chỉ hỗ trợ thời lượng 8 giây)   *`"720p"` chỉ dành cho tiện ích* |
 
-שימו לב שפרמטר `seed` זמין גם במודלים של Veo 3.
-הפעולה הזו לא מבטיחה דטרמיניזם, אבל היא משפרת אותו קצת.
+Xin lưu ý rằng tham số `seed` cũng có sẵn cho các mô hình Veo 3.
+Điều này không đảm bảo tính xác định, nhưng sẽ cải thiện một chút.
 
-## תכונות המודל
+## Các tính năng của mô hình
 
-| תכונה | ‫Veo 3.1 ו-Veo 3.1 Fast | Veo 3.1 Lite | ‫Veo 3 ו-Veo 3 Fast |
+| Tính năng | Veo 3.1 và Veo 3.1 Fast | Veo 3.1 Lite | Veo 3 và Veo 3 Fast |
 | --- | --- | --- | --- |
-| **אודיו:** יצירת אודיו באופן טבעי עם וידאו. | ✔️ תמיד מופעל | ✔️ תמיד מופעל | ✔️ תמיד מופעל |
-| **אמצעי קלט:**  סוג הקלט שמשמש ליצירה. | סרטון לפי טקסט, סרטון לפי תמונה, סרטון לפי סרטון | סרטון לפי טקסט, סרטון לפי תמונה | סרטון לפי טקסט, סרטון לפי תמונה |
-| **רזולוציה:** רזולוציית הפלט של הסרטון. | ‫720p, ‏ 1080p (אורך 8 שניות בלבד), ‏ 4k (אורך 8 שניות בלבד)  *‫720p רק כשמשתמשים בתוסף סרטונים.* | ‫720p, ‏1080p (אורך של 8 שניות בלבד) | ‫720p ו-1080p (רק ביחס גובה-רוחב של 16:9) |
-| **קצב פריימים:**  קצב הפריימים של פלט הסרטון. | 24 פריימים לשנייה | 24 פריימים לשנייה | 24 פריימים לשנייה |
-| **משך נכס הווידאו:**  אורך הסרטון שנוצר. | ‫8 שניות, 6 שניות, 4 שניות  *8 שניות רק אם הרזולוציה היא 1080p או 4k או אם משתמשים בתמונות להשוואה* | ‫8 שניות, 6 שניות, 4 שניות  *8 שניות רק אם הרזולוציה היא 1080p או אם משתמשים בתמונות להשוואה* | 8 שניות |
-| **סרטונים לכל בקשה:** מספר הסרטונים שנוצרו לכל בקשה. | 1 | 1 | 1 |
-| **סטטוס:**  זמינות המודל | [לתצוגה המקדימה](https://ai.google.dev/gemini-api/docs/models?hl=he#preview) | [לתצוגה המקדימה](https://ai.google.dev/gemini-api/docs/models?hl=he#preview) | [יציב](https://ai.google.dev/gemini-api/docs/models?hl=he#stable) |
+| **Âm thanh:** Tạo âm thanh gốc cùng với video. | ✔️ Luôn bật | ✔️ Luôn bật | ✔️ Luôn bật |
+| **Phương thức nhập:** Loại phương thức nhập được dùng để tạo. | Chuyển văn bản thành video, chuyển hình ảnh thành video, chuyển video thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video | Chuyển văn bản thành video, chuyển hình ảnh thành video |
+| **Độ phân giải:** Độ phân giải đầu ra của video. | 720p, 1080p (chỉ dài 8 giây), 4k (chỉ dài 8 giây)  *Chỉ 720p khi sử dụng tiện ích video.* | 720p, 1080p (chỉ dài 8 giây) | 720p và 1080p (chỉ tỷ lệ khung hình 16:9) |
+| **Tốc độ khung hình:** Tốc độ khung hình đầu ra của video. | 24fps | 24fps | 24fps |
+| **Thời lượng video:** Thời lượng của video được tạo. | 8 giây, 6 giây, 4 giây  *Chỉ 8 giây nếu là video 1080p hoặc 4k hoặc sử dụng hình ảnh tham khảo* | 8 giây, 6 giây, 4 giây  *Chỉ 8 giây nếu ở độ phân giải 1080p hoặc sử dụng hình ảnh tham khảo* | 8 giây |
+| **Số video trên mỗi yêu cầu:** Số lượng video được tạo trên mỗi yêu cầu. | 1 | 1 | 1 |
+| **Trạng thái:** Phạm vi cung cấp mô hình | [Xem trước](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) | [Xem trước](https://ai.google.dev/gemini-api/docs/models?hl=vi#preview) | [Ổn định](https://ai.google.dev/gemini-api/docs/models?hl=vi#stable) |
 
-## מגבלות
+## Các điểm hạn chế
 
-- **הנחיות לכמה סרטונים:** נכון לעכשיו, אי אפשר להפנות לכמה סרטונים או להסיק מסקנות לגבי כמה סרטונים. ניסיון ליצור הנחיות לכמה סרטונים עלול להוביל לירידה בביצועי המודל או לפלטים לא צפויים.
-- **תמיכה בשפות:** יש תמיכה מלאה באנגלית (EN), אבל לא בוצעה הערכה של שפות אחרות, כך שהן עשויות לפעול אבל התוצאות יכולות להיות שונות.
-- **זמן האחזור של הבקשה:** מינימום: 11 שניות; מקסימום: 6 דקות (בשעות השיא).
-- **הגבלות אזוריות:** במיקומים באיחוד האירופי, בבריטניה, בשווייץ ובמזרח התיכון וצפון אפריקה, `allow_adult` הוא הערך המותר היחיד ל`personGeneration`.
-- **שמירת סרטונים:** סרטונים שנוצרו מאוחסנים בשרת למשך יומיים, ולאחר מכן הם מוסרים. כדי לשמור עותק מקומי, צריך להוריד את הסרטון תוך יומיים ממועד היצירה. סרטונים מורחבים נחשבים לסרטונים שנוצרו לאחרונה.
-- **הוספת סימני מים:** לסרטונים שנוצרו על ידי Veo מתווסף סימן מים באמצעות [SynthID](https://deepmind.google/technologies/synthid/?hl=he), הכלי שלנו להוספת סימני מים ולזיהוי תוכן שנוצר על ידי AI. אפשר לאמת סרטונים באמצעות פלטפורמת האימות [SynthID](https://deepmind.google/science/synthid/?hl=he).
-- **בטיחות:** הסרטונים שנוצרים עוברים דרך מסנני בטיחות ותהליכי בדיקה של זיכרון, שעוזרים לצמצם את הסיכונים לפגיעה בפרטיות, בזכויות יוצרים ובדעות קדומות.
-- **שגיאה באודיו:** לפעמים Veo 3.1 חוסם יצירת סרטון בגלל מסנני בטיחות או בעיות אחרות בעיבוד האודיו. לא נחייב אתכם אם הסרטון שלכם ייחסם ולא תתאפשר יצירה שלו.
+- **Câu lệnh cho nhiều video:** Hiện tại, chúng tôi chưa hỗ trợ tính năng tham chiếu hoặc suy luận trên nhiều video. Việc thử tạo câu lệnh cho nhiều video có thể làm giảm hiệu suất của mô hình hoặc tạo ra kết quả không mong muốn.
+- **Hỗ trợ ngôn ngữ:** Chúng tôi hỗ trợ đầy đủ tiếng Anh (EN), nhưng chưa đánh giá các ngôn ngữ khác. Do đó, các ngôn ngữ khác có thể hoạt động nhưng kết quả có thể khác nhau.
+- **Độ trễ của yêu cầu:** Tối thiểu: 11 giây; Tối đa: 6 phút (trong giờ cao điểm).
+- **Hạn chế theo khu vực:** Ở các vị trí thuộc Liên minh Châu Âu, Vương quốc Anh, Thuỵ Sĩ và Trung Đông – Bắc Phi, `allow_adult` là giá trị duy nhất được phép dùng cho `personGeneration`.
+- **Thời gian lưu giữ video:** Các video được tạo sẽ được lưu trữ trên máy chủ trong 2 ngày, sau đó sẽ bị xoá. Để lưu bản sao cục bộ, bạn phải tải video xuống trong vòng 2 ngày kể từ khi tạo. Video mở rộng được coi là video mới được tạo.
+- **Thêm hình mờ:** Các video do Veo tạo đều được thêm hình mờ bằng [SynthID](https://deepmind.google/technologies/synthid/?hl=vi), công cụ của chúng tôi để thêm hình mờ và xác định nội dung do AI tạo. Bạn có thể xác minh video bằng nền tảng xác minh [SynthID](https://deepmind.google/science/synthid/?hl=vi).
+- **An toàn:** Các video được tạo sẽ trải qua bộ lọc an toàn và quy trình kiểm tra khả năng ghi nhớ để giúp giảm thiểu các rủi ro về quyền riêng tư, bản quyền và thiên kiến.
+- **Lỗi âm thanh:** Đôi khi, Veo 3.1 sẽ chặn video được tạo do bộ lọc an toàn hoặc các vấn đề khác về xử lý âm thanh. Bạn sẽ không bị tính phí nếu video của bạn bị chặn tạo.
 
-## מדריך לכתיבת פרומפטים ב-Veo
+## Hướng dẫn về câu lệnh cho Veo
 
-בקטע הזה יש דוגמאות לסרטונים שאפשר ליצור באמצעות Veo, והסברים על שינוי ההנחיות כדי לקבל תוצאות שונות.
+Phần này chứa các ví dụ về video bạn có thể tạo bằng Veo và hướng dẫn bạn cách sửa đổi câu lệnh để tạo ra kết quả riêng biệt.
 
-### מסנני בטיחות
+### Bộ lọc an toàn
 
-ב-Gemini יש מסנני בטיחות שמופעלים ב-Veo כדי לוודא שהסרטונים שנוצרו והתמונות שהועלו לא מכילים תוכן פוגעני.
-הנחיות שמפירות את [התנאים וההנחיות](https://ai.google.dev/gemini-api/docs/usage-policies?hl=he#abuse-monitoring) שלנו נחסמות.
+Veo áp dụng các bộ lọc an toàn trên Gemini để giúp đảm bảo rằng video được tạo và ảnh được tải lên không chứa nội dung phản cảm.
+Những câu lệnh vi phạm [điều khoản và nguyên tắc](https://ai.google.dev/gemini-api/docs/usage-policies?hl=vi#abuse-monitoring) của chúng tôi sẽ bị chặn.
 
-### יסודות כתיבת פרומפטים
+### Kiến thức cơ bản về cách viết câu lệnh
 
-ההנחיות הטובות הן ברורות ומפורטות. כדי להפיק את המרב מ-Veo, כדאי להתחיל בזיהוי הרעיון המרכזי, לשפר את הרעיון על ידי הוספת מילות מפתח ומשנים, ולשלב בהנחיות מינוח ספציפי לסרטונים.
+Lời nhắc hiệu quả là lời nhắc mô tả và rõ ràng. Để khai thác tối đa Veo, hãy bắt đầu bằng cách xác định ý tưởng cốt lõi, tinh chỉnh ý tưởng bằng cách thêm từ khoá và các từ bổ nghĩa, đồng thời đưa thuật ngữ dành riêng cho video vào câu lệnh.
 
-האלמנטים הבאים צריכים להיכלל בהנחיה:
+Câu lệnh của bạn phải có những thành phần sau:
 
-- **נושא**: האובייקט, האדם, החיה או הנוף שרוצים בסרטון, כמו *נוף עירוני*, *טבע*, *כלי רכב* או *גורי כלבים*.
-- **פעולה**: מה הנושא עושה (לדוגמה, *הליכה*, *ריצה* או *הפניית הראש*).
-- **סגנון**: מציינים כיוון קריאייטיבי באמצעות מילות מפתח ספציפיות של סגנון סרט, כמו *מדע בדיוני*, *סרט אימה*, *סרט אפל* או סגנונות אנימציה כמו *סרט מצויר*.
-- **מיקום המצלמה ותנועת המצלמה**: [אופציונלי] שליטה במיקום המצלמה ובתנועה שלה באמצעות מונחים כמו *תצוגה אווירית*, *גובה העיניים*, *צילום מלמעלה למטה*, *צילום בעגלת דולי* או *מבט מלמטה למעלה*.
-- **קומפוזיציה**: [אופציונלי] איך הצילום ממוסגר, למשל *צילום רחב*, *תקריב*, *צילום של אדם אחד* או *צילום של שני אנשים*.
-- **פוקוס ואפקטים של עדשה**: [אופציונלי] אפשר להשתמש במונחים כמו *פוקוס רדוד*, *פוקוס עמוק*, *פוקוס רך*, *עדשת מאקרו* ו*עדשה רחבה* כדי להשיג אפקטים חזותיים ספציפיים.
-- **אווירה**: [אופציונלי] איך הצבע והאור תורמים לסצנה, למשל *גוונים כחולים*, *לילה* או *גוונים חמים*.
+- **Chủ thể**: Đối tượng, người, động vật hoặc cảnh vật mà bạn muốn xuất hiện trong video, chẳng hạn như *cảnh quan thành phố*, *thiên nhiên*, *xe cộ* hoặc *chó con*.
+- **Hành động**: Hành động của chủ thể (ví dụ: *đi bộ*, *chạy* hoặc *quay đầu*).
+- **Phong cách**: Chỉ định hướng sáng tạo bằng cách sử dụng các từ khoá cụ thể về phong cách phim, chẳng hạn như *khoa học viễn tưởng*, *phim kinh dị*, *phim đen* hoặc các phong cách hoạt hình như *phim hoạt hình*.
+- **Vị trí và chuyển động của camera**: [Không bắt buộc] Kiểm soát vị trí và chuyển động của camera bằng các thuật ngữ như *góc nhìn từ trên cao*, *góc ngang tầm mắt*, *cảnh quay từ trên xuống*, *cảnh quay bằng xe đẩy* hoặc *góc nhìn từ dưới lên*.
+- **Bố cục**: [Không bắt buộc] Cách đặt máy quay, chẳng hạn như *quay toàn cảnh*, *quay cận cảnh*, *quay một cảnh* hoặc *quay hai cảnh*.
+- **Hiệu ứng tiêu cự và ống kính**: [Không bắt buộc] Sử dụng các thuật ngữ như *tiêu cự nông*, *tiêu cự sâu*, *tiêu điểm mềm*, *ống kính macro* và *ống kính góc rộng* để đạt được các hiệu ứng hình ảnh cụ thể.
+- **Bầu không khí**: [Không bắt buộc] Cách màu sắc và ánh sáng góp phần tạo nên cảnh, chẳng hạn như *tông màu xanh dương*, *ban đêm* hoặc *tông màu ấm*.
 
-#### טיפים נוספים לכתיבת הנחיות
+#### Các mẹo khác để viết câu lệnh
 
-- **שימוש בשפה תיאורית**: השתמשו בשמות תואר ובתוארי פועל כדי ליצור תמונה ברורה ב-Veo.
-- **שיפור הפרטים של הפנים**: מציינים פרטים של הפנים כמוקד של התמונה, למשל באמצעות המילה *דיוקן* בהנחיה.
+- **Sử dụng ngôn ngữ mô tả**: Sử dụng tính từ và trạng từ để giúp Veo hình dung rõ ràng.
+- **Cải thiện chi tiết khuôn mặt**: Chỉ định chi tiết khuôn mặt làm tiêu điểm của bức ảnh, chẳng hạn như dùng từ *chân dung* trong câu lệnh.
 
-*למידע נוסף על אסטרטגיות מקיפות יותר ליצירת הנחיות, אפשר לעיין במאמר [מבוא לתכנון הנחיות](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=he).*
+*Để biết các chiến lược tạo câu lệnh toàn diện hơn, hãy truy cập vào bài viết [Giới thiệu về thiết kế câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi).*
 
-### הנחיות לאודיו
+### Nhắc nhở về âm thanh
 
-אתם יכולים לספק ל-Veo רמזים לאפקטים קוליים, לרעשי הסביבה ולדיאלוג.
-המודל מזהה את הניואנסים של הרמזים האלה כדי ליצור פסקול מסונכרן.
+Bạn có thể cung cấp cho Veo các tín hiệu về hiệu ứng âm thanh, tiếng ồn xung quanh và lời thoại.
+Mô hình này nắm bắt sắc thái của những tín hiệu này để tạo ra một bản nhạc đồng bộ.
 
-- **דיאלוג:** משתמשים במירכאות לציטוט של דיבור ספציפי. (דוגמה: "זו בטח
-  המפתח", הוא לחש.)
-- **אפקטים קוליים (SFX):** מתארים במפורש את הצלילים. (דוגמה: צמיגים
-  חורקים בעוצמה, מנוע שואג).
-- **רעשי הסביבה:** תיאור של נוף הצלילים בסביבה. (דוגמה: המהום חלש ומפחיד נשמע ברקע).
+- **Lời thoại:** Sử dụng dấu ngoặc kép cho lời nói cụ thể. (Ví dụ: "Đây chắc chắn là chìa khoá," anh lẩm bẩm.)
+- **Hiệu ứng âm thanh (SFX):** Mô tả rõ ràng âm thanh. (Ví dụ: tiếng lốp xe rít lên, tiếng động cơ gầm rú.)
+- **Tiếng ồn xung quanh:** Mô tả không gian âm thanh của môi trường. (Ví dụ: Một tiếng ù ù nhỏ, rợn người vang vọng ở phía sau.)
 
-בסרטונים האלה מוצגות הנחיות ליצירת אודיו ב-Veo 3 עם רמות פירוט שונות.
+Những video này minh hoạ cách nhắc Veo 3 tạo âm thanh với mức độ chi tiết tăng dần.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **יותר פרטים (דיאלוג ואווירה)**  צילום רחב של יער מעורפל באזור הפסיפיק נורת' וסט. שני מטיילים מותשים, גבר ואישה, עוברים בין שרכים כשהגבר עוצר בפתאומיות ובוהה בעץ. תקריב: סימני שריטות עמוקים וטריים חרוטים בקליפת העץ. גבר: (יד על סכין הציד) "זה לא דוב רגיל". אישה: (קולה מתוח מפחד, סורקת את היער) "אז מה זה?" נביחה חדה, ענפים נשברים, צעדים על האדמה הלחה. ציפור בודדה מצייצת. | שני אנשים ביער נתקלים בסימנים של דוב. |
-| **פחות פרטים (דיאלוג)** אנימציה של נייר חתוך. ספרן חדש: "איפה אתם שומרים את הספרים האסורים?" האוצר הישן: "לא. הם שומרים אותם אצלם". | ספרנים עם אנימציה דנים בספרים אסורים |
+| **Chi tiết hơn (Đối thoại và không gian xung quanh)** Cảnh quay rộng về một khu rừng mờ sương ở vùng Tây Bắc Thái Bình Dương. Hai người đi bộ đường dài (một nam, một nữ) đang kiệt sức, cố gắng vượt qua những cây dương xỉ thì người đàn ông đột ngột dừng lại và nhìn chằm chằm vào một cái cây. Cận cảnh: Vỏ cây bị cào xé bởi những vết móng vuốt sâu và còn mới. Người đàn ông: (Tay cầm dao săn) "Đó không phải là một con gấu bình thường." Người phụ nữ: (Giọng lo sợ, nhìn quanh khu rừng) "Vậy đó là gì?" Vỏ cây thô ráp, cành cây gãy, tiếng bước chân trên đất ẩm. Một chú chim hót líu lo. | Hai người trong rừng phát hiện dấu hiệu của một con gấu. |
+| **Less detail (Dialogue)** Paper Cut-Out Animation. Thủ thư mới: "Bạn cất những cuốn sách bị cấm ở đâu?" Người tuyển chọn cũ: "Không. Họ giữ chúng ta." | Hình ảnh động về các thủ thư đang thảo luận về những cuốn sách bị cấm |
 
-כדאי לנסות את הפרומפטים האלה בעצמכם כדי לשמוע את האודיו.
-[רוצה לנסות את Veo?](https://deepmind.google/models/veo/?hl=he)
+Hãy tự mình thử những câu lệnh này để nghe âm thanh!
+[Dùng thử Veo](https://deepmind.google/models/veo/?hl=vi)
 
-### יצירת פרומפטים עם תמונות רפרנס
+### Đặt câu lệnh bằng hình ảnh tham khảo
 
-אתם יכולים להשתמש בתמונה אחת או יותר כקלט כדי להנחות את הסרטונים שנוצרו, באמצעות היכולות של Veo ליצירת [סרטון מתמונה](https://ai.google.dev/gemini-api/docs/veo?hl=he#generate-from-images). ‫Veo משתמש בתמונת הקלט כפריים הראשוני. בוחרים תמונה שהכי קרובה למה שרוצים שתהיה הסצנה הראשונה בסרטון, כדי להנפיש חפצים יומיומיים, להפיח חיים בציורים, ולהוסיף תנועה וקול לסצנות טבע.
+Bạn có thể dùng một hoặc nhiều hình ảnh làm dữ liệu đầu vào để hướng dẫn video được tạo bằng các tính năng [chuyển đổi hình ảnh sang video](https://ai.google.dev/gemini-api/docs/veo?hl=vi#generate-from-images) của Veo. Veo sử dụng hình ảnh đầu vào làm khung hình ban đầu. Chọn một hình ảnh gần giống nhất với cảnh đầu tiên mà bạn hình dung trong video để tạo hiệu ứng chuyển động cho các đồ vật hằng ngày, thổi hồn vào các bức vẽ và bức tranh, đồng thời thêm hiệu ứng chuyển động và âm thanh cho các cảnh thiên nhiên.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **תמונת קלט (נוצרה על ידי Nano Banana)** תמונת מאקרו היפר-ריאליסטית של גולשים זעירים שגולשים על גלי האוקיינוס בתוך כיור אבן כפרי בחדר אמבטיה. ברז פליז ישן פתוח, ויוצר גל מתמשך. סוריאליסטי, גחמני, תאורה טבעית בהירה. | גולשים זעירים רוכבים על גלי האוקיינוס בתוך כיור אבן כפרי בחדר רחצה. |
-| **סרטון הפלט (נוצר על ידי Veo 3.1)** סרטון מאקרו סוריאליסטי בסגנון קולנועי. גולשים קטנים גולשים על גלים מתגלגלים בכיור אבן בחדר רחצה. ברז פליז ישן שפועל יוצר את הגלים האינסופיים. המצלמה מבצעת פנינג איטי על פני הסצנה המוזרה והמוארת בשמש, כשדמויות מיניאטוריות חורטות במיומנות את מי הטורקיז. | גולשים קטנים שמסתובבים סביב הגלים בכיור של חדר אמבטיה. |
+| **Hình ảnh đầu vào (Do Nano Banana tạo)** Ảnh chụp cận cảnh siêu thực về những người lướt sóng thu nhỏ đang cưỡi sóng biển bên trong một bồn rửa mặt bằng đá mộc mạc. Một vòi nước bằng đồng thau cổ điển đang chảy, tạo ra dòng nước chảy liên tục. Siêu thực, kỳ ảo, ánh sáng tự nhiên rực rỡ. | Những người lướt sóng tí hon đang cưỡi trên những con sóng biển bên trong một bồn rửa mặt bằng đá mộc mạc. |
+| **Video đầu ra (Do Veo 3.1 tạo)** Một video siêu thực, đậm chất điện ảnh ở chế độ cận cảnh. Những người lướt sóng tí hon cưỡi trên những con sóng vĩnh cửu trong một bồn rửa bằng đá trong phòng tắm. Một vòi nước bằng đồng thau cổ điển đang chảy tạo ra tiếng sóng biển bất tận. Máy quay từ từ quét qua cảnh vật độc đáo, ngập tràn ánh nắng khi những nhân vật thu nhỏ khéo léo lướt trên làn nước xanh ngọc. | Những người lướt sóng tí hon đang lướt trên những con sóng trong bồn rửa mặt. |
 
-ב-Veo 3.1 אפשר להשתמש ב[תמונות לדוגמה](https://ai.google.dev/gemini-api/docs/veo?hl=he#reference-images) או ב"מרכיבים" כדי לכוון את התוכן של הסרטון שנוצר. אפשר לספק עד שלוש תמונות של נכס שמציגות אדם אחד, דמות אחת או מוצר אחד. ‫Veo שומר על המראה של האובייקט בסרטון הפלט.
+Veo 3.1 cho phép bạn [tham khảo hình ảnh](https://ai.google.dev/gemini-api/docs/veo?hl=vi#reference-images) hoặc các thành phần để định hướng nội dung của video được tạo. Cung cấp tối đa 3 hình ảnh tài sản của một người, nhân vật hoặc sản phẩm. Veo giữ nguyên diện mạo của chủ thể trong video đầu ra.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **תמונת רפרנס (נוצרה על ידי Nano Banana)** דג חכאי ממעמקי הים אורב במים העמוקים והחשוכים, השיניים חשופות והפיתיון זוהר. | דג חכה כהה וזוהר |
-| **תמונת הפניה (נוצרה על ידי Nano Banana)** תחפושת נסיכה לילדות בצבע ורוד, כולל שרביט וכתר, על רקע מוצר פשוט. | תחפושת נסיכה ורודה לילדה |
-| **סרטון הפלט (נוצר על ידי Veo 3.1)** צור גרסת קריקטורה מטופשת של הדג כשהוא לובש את התחפושת, שוחה ומנופף בשרביט. | דג חכה לבוש בתחפושת של נסיכה |
+| **Hình ảnh tham khảo (Do Nano Banana tạo)** Một con cá vây chân biển sâu ẩn nấp trong vùng nước sâu tối tăm, răng nhe ra và mồi nhử phát sáng. | Một con cá cần câu tối tăm và phát sáng |
+| **Hình ảnh tham khảo (Do Nano Banana tạo)** Một bộ trang phục công chúa màu hồng cho trẻ em, bao gồm cả đũa phép và vương miện, trên nền sản phẩm đơn giản. | Trang phục công chúa màu hồng dành cho trẻ em |
+| **Video đầu ra (Do Veo 3.1 tạo)** Tạo một phiên bản hoạt hình ngộ nghĩnh về chú cá đang mặc trang phục, bơi và vẫy đũa phép. | Một con cá cần câu mặc trang phục công chúa |
 
-בעזרת Veo 3.1, אתם יכולים גם ליצור סרטונים על ידי ציון [הפריים הראשון והפריים האחרון](https://ai.google.dev/gemini-api/docs/veo?hl=he#using-first-and-last-video-frames) של הסרטון.
+Khi dùng Veo 3.1, bạn cũng có thể tạo video bằng cách chỉ định [khung hình đầu tiên và cuối cùng](https://ai.google.dev/gemini-api/docs/veo?hl=vi#using-first-and-last-video-frames) của video.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **התמונה הראשונה (נוצרה על ידי Nano Banana)** תמונה מציאותית באיכות גבוהה של חתול ג'ינג'י נוהג במכונית מרוץ אדומה עם גג נפתח בחוף הריביירה הצרפתית. | חתול ג'ינג'י נוהג במכונית מרוץ אדומה עם גג נפתח |
-| **התמונה האחרונה (נוצרה על ידי Nano Banana)** תראה מה קורה כשהמכונית ממריאה מצוק. | חתול ג'ינג'י נוהג במכונית קבריולט אדומה ונופל מצוק |
-| **פלט וידאו (נוצר על ידי Veo 3.1)** אופציונלי | חתול נוהג במכונית וקופץ מצוק |
+| **Hình ảnh đầu tiên (Do Nano Banana tạo)** Hình ảnh chân thực như ảnh chụp chất lượng cao về một chú mèo tam thể đang lái chiếc xe đua mui trần màu đỏ trên bờ biển Riviera của Pháp. | Một chú mèo vàng lái chiếc xe đua mui trần màu đỏ |
+| **Hình ảnh cuối cùng (Do Nano Banana tạo)** Cho biết điều gì xảy ra khi chiếc xe lao xuống vách đá. | Một chú mèo lông vàng lái chiếc xe mui trần màu đỏ lao xuống vách đá |
+| **Video đầu ra (Do Veo 3.1 tạo)** Không bắt buộc | Một chú mèo lái xe lao xuống vách đá và cất cánh |
 
-התכונה הזו מאפשרת לכם לשלוט במדויק בקומפוזיציה של הצילום, כי אתם יכולים להגדיר את פריים ההתחלה ופריים הסיום. כדי לוודא שהסצנה מתחילה ומסתיימת בדיוק כמו שדמיינתם, אתם יכולים להעלות תמונה או להשתמש בפריים מסרטון קודם שיצרתם.
+Tính năng này giúp bạn kiểm soát chính xác bố cục của cảnh quay bằng cách cho phép bạn xác định khung hình bắt đầu và kết thúc. Tải một hình ảnh lên hoặc dùng một khung hình từ video được tạo trước đó để đảm bảo cảnh của bạn bắt đầu và kết thúc đúng như bạn hình dung.
 
-### מתן פרומפט לתוסף
+### Nhắc kéo dài
 
-כדי [להאריך](https://ai.google.dev/gemini-api/docs/veo?hl=he#extending-veo-videos) סרטון שנוצר ב-Veo באמצעות Veo 3.1 (לא זמין ב-Veo 3.1 Lite), משתמשים בסרטון כקלט יחד עם פרומפט טקסטואלי אופציונלי. הארכה – המצלמה ממשיכה לצלם את הסצנה בלי הפרעה, ומסיימת את השנייה האחרונה או את 24 הפריימים האחרונים של הסרטון.
+Để [kéo dài](https://ai.google.dev/gemini-api/docs/veo?hl=vi#extending-veo-videos) video do Veo tạo bằng Veo 3.1 (không dùng được cho Veo 3.1 Lite), hãy dùng video đó làm dữ liệu đầu vào cùng với một câu lệnh văn bản (không bắt buộc). Kéo dài sẽ hoàn tất giây cuối cùng hoặc 24 khung hình cuối cùng của video và tiếp tục hành động.
 
-שימו לב: אי אפשר להאריך את משך ההשמעה של קטע דיבור בצורה יעילה אם הוא לא מופיע בשנייה האחרונה של הסרטון.
+Xin lưu ý rằng bạn không thể mở rộng giọng nói một cách hiệu quả nếu giọng nói không xuất hiện trong 1 giây cuối cùng của video.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **סרטון קלט (נוצר על ידי Veo 3.1)** הדאון-היל מתחיל מפסגת ההר ומתחיל לגלוש במורד ההרים שמשקיפים על העמקים המכוסים בפרחים למטה. | מצנח רחיפה ממריא מפסגת הר |
-| **סרטון פלט (נוצר על ידי Veo 3.1)** תאריך את הסרטון הזה עם מצנח רחיפה שיורד לאט. | מצנח רחיפה ממריא מפסגת הר, ואז יורד לאט |
+| **Video đầu vào (Do Veo 3.1 tạo)** Người chơi dù lượn cất cánh từ đỉnh núi và bắt đầu lượn xuống những ngọn núi nhìn ra các thung lũng phủ đầy hoa bên dưới. | Một người dù lượn cất cánh từ đỉnh núi |
+| **Video đầu ra (Do Veo 3.1 tạo)** Kéo dài video này với cảnh người dù lượn từ từ hạ xuống. | Một người dù lượn cất cánh từ đỉnh núi, sau đó từ từ hạ xuống |
 
-### פרומפטים ופלט לדוגמה
+### Ví dụ về câu lệnh và kết quả
 
-בקטע הזה מוצגות כמה הנחיות, שמדגימות איך פרטים תיאוריים יכולים לשפר את התוצאה של כל סרטון.
+Phần này trình bày một số câu lệnh, nêu bật cách thông tin chi tiết mang tính mô tả có thể nâng cao kết quả của mỗi video.
 
-#### נטיפי קרח
+#### Sôi động
 
-בסרטון הזה מוצגות דוגמאות לשימוש ברכיבים של [כתיבת הנחיות בסיסית](#basics) בהנחיה.
+Video này minh hoạ cách bạn có thể sử dụng các thành phần của [kiến thức cơ bản về cách viết câu lệnh](#basics) trong câu lệnh của mình.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| תקריב (קומפוזיציה) של נטיפי קרח נמסים (נושא) על קיר סלע קפוא (הקשר) עם גוונים כחולים קרירים (אווירה), בהגדלה (תנועת מצלמה) תוך שמירה על פרטי התקריב של טיפות מים (פעולה). | נטיפי קרח מטפטפים על רקע כחול. |
+| Cảnh quay cận cảnh (bố cục) về những cột băng tan chảy (chủ thể) trên một bức tường đá đóng băng (bối cảnh) với tông màu xanh dương lạnh (bầu không khí), phóng to (chuyển động của camera) duy trì chi tiết cận cảnh của những giọt nước (hành động). | Những cột băng đang tan chảy trên nền xanh dương. |
 
-#### גבר בטלפון
+#### Người đàn ông đang nói chuyện điện thoại
 
-בסרטונים האלה מוצגות דוגמאות לאופן שבו אפשר לשנות את ההנחיה ולהוסיף לה פרטים ספציפיים יותר כדי לשפר את הפלט ב-Veo כך שיתאים לטעם שלכם.
+Những video này minh hoạ cách bạn có thể sửa đổi câu lệnh bằng cách cung cấp thông tin chi tiết ngày càng cụ thể để Veo tinh chỉnh kết quả theo ý bạn.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **פחות פרטים**  המצלמה מתקרבת כדי להציג תקריב של גבר נואש במעיל גשם ירוק. הוא מתקשר בטלפון קיר עם חוגה, עם תאורת ניאון ירוקה. זה נראה כמו סצנה מסרט. | גבר מדבר בטלפון. |
-| **פרטים נוספים** תקריב קולנועי של גבר נואש במעיל גשם ירוק דהוי, מחייג בטלפון חוגה שמחובר לקיר לבנים מחוספס, שטוף באור המפחיד של שלט ניאון ירוק. המצלמה מתקרבת אליו, ורואים את המתח בלסת שלו ואת הייאוש שמוטבע בפניו כשהוא מנסה להתקשר. עומק השדה הרדוד מתמקד במצח המקומט ובטלפון השחור עם החוגה, ומטשטש את הרקע לים של צבעי ניאון וצללים לא ברורים, ויוצר תחושה של דחיפות ובידוד. | גבר מדבר בטלפון |
+| **Ít chi tiết hơn** Camera di chuyển để cho thấy cận cảnh một người đàn ông tuyệt vọng mặc áo khoác măng tô màu xanh lục. Anh ấy đang gọi điện thoại quay số gắn trên tường dưới ánh đèn neon màu xanh lục. Có vẻ như đây là một cảnh trong phim. | Người đàn ông đang nói chuyện điện thoại. |
+| **Chi tiết khác** Cảnh quay cận cảnh theo phong cách điện ảnh cho thấy một người đàn ông tuyệt vọng mặc áo khoác măng tô màu xanh lục cũ kỹ đang quay số trên một chiếc điện thoại quay số gắn trên bức tường gạch thô ráp, chìm trong ánh sáng kỳ lạ của một biển hiệu neon màu xanh lục. Camera di chuyển vào trong, cho thấy sự căng thẳng ở quai hàm và vẻ tuyệt vọng hằn trên khuôn mặt khi anh cố gắng thực hiện cuộc gọi. Độ sâu trường ảnh nông tập trung vào vầng trán nhăn nheo và chiếc điện thoại quay số màu đen của anh, làm mờ hậu cảnh thành một biển màu neon và bóng tối không rõ ràng, tạo cảm giác thôi thúc và cô lập. | Người đàn ông nói chuyện điện thoại |
 
-#### נמר השלג
+#### Báo tuyết
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **הנחיה פשוטה:** יצור חמוד עם פרווה כמו של נמר שלג הולך ביער חורפי, רינדור בסגנון סרטים מצוירים בתלת ממד. | נמר השלג רדום. |
-| **הנחיה מפורטת:**  תיצור סצנת אנימציה קצרה בתלת-ממד בסגנון סרטים מצוירים שמח. יצור חמוד עם פרווה כמו של נמר שלג, עיניים גדולות ומלאות הבעה וגוף ידידותי ומעוגל, רוקד בשמחה ביער חורפי קסום. הסצנה צריכה לכלול עצים מעוגלים ומכוסים בשלג, פתיתי שלג עדינים שנופלים ואור שמש חמים שמסתנן מבעד לענפים. התנועות הקופצניות של היצור והחיוך הרחב שלו צריכים לשדר שמחה טהורה. השתמש בטון אופטימי ומרגש עם צבעים בהירים ועליזים ואנימציה שובבה. | הנמר השלג רץ מהר יותר. |
+| **Câu lệnh đơn giản:** Một sinh vật dễ thương có bộ lông giống như báo tuyết đang đi bộ trong rừng mùa đông, ảnh kết xuất theo phong cách hoạt hình 3D. | Báo tuyết đang uể oải. |
+| **Câu lệnh chi tiết:** Tạo một cảnh hoạt hoạ 3D ngắn theo phong cách hoạt hình vui nhộn. Một sinh vật dễ thương có bộ lông giống như báo tuyết, đôi mắt to biểu cảm và dáng vẻ tròn trịa, thân thiện đang vui vẻ tung tăng trong một khu rừng mùa đông kỳ diệu. Cảnh này phải có những cây tròn trịa phủ đầy tuyết, những bông tuyết rơi nhẹ nhàng và ánh nắng ấm áp xuyên qua các cành cây. Chuyển động nảy của sinh vật và nụ cười tươi tắn phải thể hiện niềm vui thuần khiết. Hãy hướng đến một giọng điệu lạc quan, ấm áp với màu sắc tươi sáng, vui vẻ và ảnh động vui nhộn. | Báo tuyết đang chạy nhanh hơn. |
 
-### דוגמאות לפי אלמנטים של כתיבה
+### Ví dụ theo thành phần viết
 
-בדוגמאות האלה מוסבר איך לשפר את ההנחיות לפי כל אחד מהרכיבים הבסיסיים.
+Những ví dụ này cho thấy cách tinh chỉnh câu lệnh theo từng phần tử cơ bản.
 
-#### נושא והקשר
+#### Chủ đề và bối cảnh
 
-מציינים את המיקוד העיקרי (הנושא) ואת הרקע או הסביבה (ההקשר).
+Xác định tiêu điểm chính (chủ thể) và nền hoặc môi trường (bối cảnh).
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| הדמיה אדריכלית של בניין דירות מבטון לבן עם צורות אורגניות זורמות, שמשתלבות בצורה חלקה עם צמחייה עשירה ואלמנטים עתידניים | פלייסהולדר. |
-| לוויין שמרחף בחלל החיצון עם הירח וכמה כוכבים ברקע. | לוויין שמרחף באטמוספירה. |
+| Bản dựng kiến trúc của một toà nhà chung cư bê tông trắng với các hình dạng hữu cơ uyển chuyển, hoà quyện liền mạch với cây xanh tươi tốt và các yếu tố tương lai | Phần giữ chỗ. |
+| Một vệ tinh trôi nổi trong không gian vũ trụ, với mặt trăng và một số ngôi sao ở phía sau. | Vệ tinh trôi nổi trong khí quyển. |
 
-#### פעולה
+#### Hành động
 
-מציינים מה הנושא עושה (למשל, הליכה, ריצה או סיבוב הראש).
+Chỉ định hành động của đối tượng (ví dụ: đi bộ, chạy hoặc quay đầu).
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| צילום רחב של אישה הולכת לאורך החוף, נראית מרוצה ורגועה, ומביטה אל האופק בשקיעה. | השקיעה יפהפייה. |
+| Ảnh chụp toàn cảnh một người phụ nữ đang đi bộ dọc bãi biển, trông có vẻ hài lòng và thư thái khi nhìn về phía đường chân trời lúc hoàng hôn. | Cảnh hoàng hôn tuyệt đẹp. |
 
-#### סגנון
+#### Kiểu
 
-מוסיפים מילות מפתח כדי להכווין את היצירה לאסתטיקה ספציפית (למשל, סוריאליסטי, וינטג', עתידני, פילם נואר).
+Thêm từ khoá để hướng quá trình tạo đến một phong cách thẩm mỹ cụ thể (ví dụ: siêu thực, cổ điển, tương lai, phim đen).
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| סגנון פילם נואר, גבר ואישה הולכים ברחוב, מסתורין, קולנועי, שחור-לבן. | סגנון הפילם נואר יפהפה. |
+| Phong cách phim đen trắng, người đàn ông và phụ nữ đi bộ trên đường, bí ẩn, điện ảnh, đen trắng. | Phong cách phim đen trắng vô cùng đẹp mắt. |
 
-#### תנועת המצלמה והקומפוזיציה
+#### Chuyển động và bố cục của camera
 
-מציינים איך המצלמה זזה (צילום מנקודת מבט מסוימת, צילום אווירי, צילום במעקב עם רחפן) ואיך התמונה ממוסגרת (צילום רחב, תקריב, צילום מזווית נמוכה).
+Nêu rõ cách camera di chuyển (cảnh quay từ góc nhìn thứ nhất, cảnh quay từ trên không, cảnh quay bằng máy bay không người lái) và cách đặt máy quay (cảnh quay toàn cảnh, cảnh quay cận cảnh, cảnh quay từ góc thấp).
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| צילום מנקודת מבט של נסיעה במכונית וינטג' בגשם, קנדה בלילה, בסגנון קולנועי. | השקיעה יפהפייה. |
-| תקריב קיצוני של עין שהעיר משתקפת בה. | השקיעה יפהפייה. |
+| Cảnh quay theo góc nhìn của nhân vật (POV) từ một chiếc ô tô cổ đang lái xe dưới trời mưa, Canada vào ban đêm, mang phong cách điện ảnh. | Hoàng hôn ở đây đẹp tuyệt vời. |
+| Cảnh cận siêu gần của một con mắt phản chiếu hình ảnh thành phố. | Cảnh hoàng hôn tuyệt đẹp. |
 
-#### אווירה
+#### Môi trường
 
-לוחות הצבעים והתאורה משפיעים על האווירה. אפשר לנסות מונחים כמו "כתום מושתק, גוונים חמים", "אור טבעי", "זריחה" או "גוונים כחולים קרירים".
+Bảng màu và ánh sáng ảnh hưởng đến tâm trạng. Hãy thử dùng các cụm từ như "tông màu cam nhạt ấm áp", "ánh sáng tự nhiên", "bình minh" hoặc "tông màu xanh dương lạnh".
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| תקריב של ילדה שמחזיקה גור גולדן רטריבר חמוד בפארק, באור שמש. | גור כלבים בזרועותיה של ילדה צעירה. |
-| תקריב קולנועי של אישה עצובה שנוסעת באוטובוס בגשם, עם גוונים כחולים קרירים ואווירה עצובה. | אישה נוסעת באוטובוס ונראית עצובה. |
+| Ảnh cận cảnh một cô gái đang bế chú chó golden retriever đáng yêu trong công viên, ánh sáng mặt trời. | Một chú cún trong vòng tay của một cô bé. |
+| Cảnh quay cận cảnh theo phong cách điện ảnh về một người phụ nữ buồn bã đang đi xe buýt dưới mưa, tông màu xanh dương lạnh, tâm trạng buồn bã. | Một người phụ nữ đang đi xe buýt cảm thấy buồn. |
 
-### יחסי גובה-רוחב
+### Tỷ lệ khung hình
 
-ב-Veo אפשר לציין את יחס הגובה-רוחב של הסרטון.
+Veo cho phép bạn chỉ định tỷ lệ khung hình cho video.
 
-| **פרומפט** | **פלט שנוצר באמצעות AI** |
+| **Câu lệnh** | **Nội dung tạo sinh** |
 | --- | --- |
-| **מסך רחב (16:9)** יצירת סרטון עם צילום מרחפן שעוקב אחרי גבר שנוהג במכונית קבריולט אדומה בפאלם ספרינגס, שנות ה-70, אור שמש חם, צללים ארוכים. | גבר נוהג במכונית קבריולט אדומה בפאלם ספרינגס, בסגנון שנות ה-70. |
-| **לאורך (9:16)** יוצרים סרטון שמציג את התנועה החלקה של מפל מפואר בהוואי בתוך יער גשם עשיר. התמקדות בזרימת מים ריאליסטית, בעלווה מפורטת ובתאורה טבעית כדי להעביר תחושה של שלווה. צלם את המים הזורמים, את האווירה הערפילית ואת אור השמש המנוקד שמסתנן מבעד לצמרות העצים הצפופות. כדאי להשתמש בתנועות מצלמה חלקות בסגנון קולנועי כדי להציג את המפל ואת הסביבה שלו. הסרטון צריך להיות שליו וריאליסטי, ולשדר לצופים את היופי השליו של יער הגשם בהוואי. | מפל מרשים בהוואי, בתוך יער גשם עשיר בצמחייה. |
+| **Màn hình rộng (16:9)** Tạo một video có góc nhìn từ trên cao xuống của một người đàn ông đang lái chiếc xe mui trần màu đỏ ở Palm Springs, thập niên 1970, ánh nắng ấm áp, bóng đổ dài. | Một người đàn ông lái chiếc xe mui trần màu đỏ ở Palm Springs, theo phong cách những năm 1970. |
+| **Dọc (9:16)** Tạo video làm nổi bật chuyển động mượt mà của một thác nước hùng vĩ ở Hawaii trong một khu rừng nhiệt đới tươi tốt. Tập trung vào dòng nước chảy chân thực, tán lá chi tiết và ánh sáng tự nhiên để truyền tải sự yên bình. Ghi lại cảnh nước chảy xiết, bầu không khí mờ sương và ánh nắng loang lổ xuyên qua tán cây rậm rạp. Sử dụng các chuyển động mượt mà, mang tính điện ảnh của camera để giới thiệu thác nước và cảnh quan xung quanh. Hãy hướng đến một giọng điệu bình dị và chân thực, đưa người xem đến với vẻ đẹp thanh bình của rừng mưa nhiệt đới ở Hawaii. | Một thác nước hùng vĩ ở Hawaii trong một khu rừng mưa tươi tốt. |
 
-## גרסאות המודלים
+## Phiên bản mô hình
 
-פרטים נוספים על השימוש במודלים של Veo זמינים בדף [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#veo-3.1) ובמאמר [מגבלות קצב](https://aistudio.google.com/rate-limit?hl=he).
+Hãy xem trang [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#veo-3.1) và [Hạn mức sử dụng](https://aistudio.google.com/rate-limit?hl=vi) để biết thêm thông tin chi tiết về việc sử dụng mô hình Veo.
 
-### ‫Veo 3.1 (גרסת טרום-השקה)
+### Veo 3.1 (Bản xem trước)
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | ינואר 2026 |
+| Mã kiểu id\_card | **Gemini API**  `veo-3.1-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 1 năm 2026 |
 
-### גרסת טרום-השקה של Veo 3.1 Fast
+### Veo 3.1 Fast Preview
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-fast-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | ינואר 2026 |
+| Mã kiểu id\_card | **Gemini API**  `veo-3.1-fast-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 1 năm 2026 |
 
-### Veo 3.1 Lite Preview
+### Veo 3.1 Lite (Bản xem trước)
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.1-lite-generate-preview` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | מרץ 2026 |
+| Mã kiểu id\_card | **Gemini API**  `veo-3.1-lite-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 3 năm 2026 |
 
-### ‫Veo 3 (הוצא משימוש)
+### Veo 3 (Không dùng nữa)
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.0-generate-001` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | יולי 2025 |
+| Mã kiểu id\_card | **Gemini API**  `veo-3.0-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 7 năm 2025 |
 
-### ‫Veo 3 Fast (הוצא משימוש)
+### Veo 3 Fast (Không dùng nữa)
 
-| נכס | תיאור |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| id\_cardקוד מודל | ‫**Gemini API**  `veo-3.0-fast-generate-001` |
-| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה  **פלט**  סרטון עם אודיו |
-| token\_autoמגבלות | **קלט טקסט**  ‫1,024 טוקנים  **סרטון הפלט**  1 |
-| calendar\_monthהעדכון האחרון | יולי 2025 |
+| Mã kiểu id\_card | **Gemini API**  `veo-3.0-fast-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh  **Đầu ra**  Video có âm thanh |
+| Giới hạn token\_auto | **Nhập văn bản**  1.024 mã thông báo  **Video đầu ra**  1 |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 7 năm 2025 |
 
-גרסאות Veo Fast מאפשרות למפתחים ליצור סרטונים עם סאונד, תוך שמירה על איכות גבוהה ואופטימיזציה של מהירות ותרחישי שימוש עסקיים. הם מתאימים במיוחד לשירותי קצה עורפי (backend) שמייצרים מודעות באופן פרוגרמטי, לכלים לבדיקות A/B מהירות של רעיונות קריאייטיב או לאפליקציות שצריכות ליצור במהירות תוכן לרשתות החברתיות.
+Các phiên bản Veo Fast cho phép nhà phát triển tạo video có âm thanh trong khi vẫn duy trì chất lượng cao và tối ưu hoá tốc độ cũng như các trường hợp sử dụng cho doanh nghiệp. Các công cụ này rất phù hợp với những dịch vụ phụ trợ tạo quảng cáo theo chương trình, các công cụ để kiểm thử A/B nhanh các ý tưởng sáng tạo hoặc những ứng dụng cần nhanh chóng tạo nội dung trên mạng xã hội.
 
-## המאמרים הבאים
+## Bước tiếp theo
 
-- כדי להתחיל להשתמש ב-Veo 3.1 API, אפשר להתנסות ב-[Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=he) וב-[Veo 3.1 applet](https://aistudio.google.com/apps/bundled/veo_studio?hl=he).
-- כדי ללמוד איך לכתוב הנחיות טובות עוד יותר, אפשר לעיין ב[מבוא לעיצוב הנחיות](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=he).
+- Bắt đầu sử dụng Veo 3.1 API bằng cách thử nghiệm trong [Veo Quickstart Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Veo.ipynb?hl=vi) và [tiện ích Veo 3.1](https://aistudio.google.com/apps/bundled/veo_studio?hl=vi).
+- Tìm hiểu cách viết câu lệnh hiệu quả hơn nữa qua bài viết [Giới thiệu về thiết kế câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=vi).
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-10-08 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-10-08 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-08 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-08 UTC."],[],[]]

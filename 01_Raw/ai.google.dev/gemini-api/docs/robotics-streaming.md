@@ -1,64 +1,63 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=de
-fetched_at: 2026-10-12T07:06:59.012026+00:00
-title: "Robotik mit Streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-CN
+fetched_at: 2026-10-19T05:58:08.278629+00:00
+title: "\u652f\u6301\u6d41\u5f0f\u4f20\u8f93\u7684\u673a\u5668\u4eba \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=de).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Robotik mit Streaming
+# 支持流式传输的机器人
 
-Der Modellendpunkt `gemini-robotics-er-2-streaming-preview` stellt einen dedizierten Streaming-Endpunkt bereit, der in die [Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=de) eingebunden ist und eine bidirektionale Echtzeitinteraktion zwischen Ihrer Anwendung und dem Roboter ermöglicht. Daher eignet es sich für Agents, die schnelle Feedbackschleifen und reaktive Antworten auf die Umgebung benötigen.
+`gemini-robotics-er-2-streaming-preview` 模型端点公开了一个与 [Live API](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-cn) 集成的专用流式传输端点，可实现应用与机器人之间的实时双向互动。因此，它非常适合需要快速反馈环和对环境做出反应式响应的代理。
 
-[In Google AI Studio ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=de)
-[Beispiel-Apps von GitHub klonen](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-streaming-preview&hl=zh-cn)
+[从 GitHub 克隆示例应用](https://github.com/google-gemini/robotics-samples/tree/main/live-api)
 
-## Anwendungsfälle
+## 使用场景
 
-- **Koordination mehrerer Roboter**: Mehrere Roboter, die den Aufgabenstatus über eine gemeinsame Sitzung kommunizieren und Unteraufgaben delegieren.
-- **Kontinuierliches Monitoring**: Roboter, die eine Szene beobachten und Aktionen auslösen, wenn bestimmte Ereignisse eintreten, z. B. wenn ein Container einen bestimmten Füllstand erreicht.
-- **Lager und Logistik**: Kommissionierungs- und Verpackungs-Agents, die Artikel visuell prüfen, den Verpackungsfortschritt verfolgen und Fehler beheben.
+- **多机器人协调**：多个机器人通过共享会话通信任务状态并委托子任务。
+- **持续监控**：观察场景并在发生特定事件（例如容器达到填充水平）时触发操作的机器人。
+- **仓储和物流**：可直观地验证商品、跟踪打包进度并从错误中恢复的拣货和打包代理。
 
-## Technische Spezifikationen
+## 技术规范
 
-In der folgenden Tabelle sind die technischen Spezifikationen für die Live API aufgeführt:
+下表列出了 Live API 的技术规范：
 
-| Kategorie | Details |
+| 类别 | 详细信息 |
 | --- | --- |
-| Eingabemodalitäten | Audio (rohes 16-Bit-PCM-Audio, 16 kHz, Little Endian), Bilder (JPEG <= 1 FPS), Text |
-| Ausgabemodalitäten | Text |
-| Protokoll | Statusbehaftete WebSocket-Verbindung (WSS) |
+| 输入模态 | 音频（原始 16 位 PCM 音频，16kHz，小端序）、图片（JPEG <= 1FPS）、文本 |
+| 输出模态 | 文本 |
+| 协议 | 有状态 WebSocket 连接 (WSS) |
 
-## Agentische Einrichtung erstellen
+## 构建代理式设置
 
-Jeder auf der Live API basierende Roboter-Agent durchläuft drei Schritte:
+基于 Live API 构建的每个机器人代理都遵循以下三个步骤：
 
-1. **Roboterfunktionen als Tools deklarieren**: Jede Aktion, die der Roboter ausführen kann (z. B. navigieren, greifen, sprechen), wird zu einer Funktionsdeklaration mit einem Namen, einer Beschreibung und einem Parameterschema. Bei physischen Aktionen muss `"behavior": "BLOCKING"` verwendet werden, damit das Modell wartet, bis der Roboter fertig ist, bevor es den nächsten Schritt auswählt.
-2. **Multimodale Eingabe in eine persistente Sitzung streamen** Öffnen Sie eine `live.connect`-Sitzung und lassen Sie sie für die gesamte Dauer der Aufgabe geöffnet. Senden von Videobildern, Audio oder Text, sobald sie von den Sensoren des Roboters empfangen werden.
-3. **Toolaufrufe in einer Empfangsschleife verarbeiten**: Jedes Mal, wenn das Modell eine Aktion auswählt, wird eine `tool_call`-Nachricht gesendet. In der Empfangsschleife wird die Funktion für Ihr Roboter-SDK ausgeführt und eine `tool_response` zurückgesendet. Die Sitzung bleibt geöffnet und das Modell wählt die nächste Aktion basierend auf dem Ergebnis aus.
+1. **将机器人功能声明为工具。**机器人可以执行的每项操作（导航、抓取、说话）都成为一个函数声明，其中包含名称、说明和参数架构。实体操作必须使用 `"behavior": "BLOCKING"`，这样模型才能在机器人完成操作后选择下一步。
+2. **将多模态输入流式传输到持久会话中。**打开 `live.connect` 会话，并在任务的整个生命周期内保持该会话处于打开状态。发送从机器人传感器接收到的视频帧、音频或文本。
+3. **在接收循环中处理工具调用。**每次模型选择操作时，都会发送 `tool_call` 消息。您的接收循环针对机器人 SDK 执行该函数，并发送回 `tool_response`。会话保持打开状态，模型会根据结果选择下一个操作。
 
-In den folgenden Abschnitten wird gezeigt, wie Sie diese Schritte auf drei gängige Muster anwenden: einen Baseline-Agent-Loop, die proaktive Szenenüberwachung mit einem Heartbeat und das Weiterleiten von Sprache über TTS als Tool.
+以下部分展示了如何将这些步骤应用于三种常见模式：基准智能体循环、通过检测信号进行主动场景监控，以及通过 TTS 将语音作为工具进行路由。
 
-## Roboter über Funktionsaufrufe steuern
+## 通过函数调用编排机器人
 
-Im folgenden Beispiel sind alle drei Schritte in einem einzigen Python-Skript miteinander verbunden.
+以下示例展示了如何在一个 Python 脚本中将这三个步骤连接在一起。
 
-Schritt 1 – Tooldefinitionen – deklariert Roboterfunktionen als Funktionsdeklarationen. Die Funktion `navigate` verwendet `"behavior": "BLOCKING"`, sodass das Modell wartet, bis der Roboter den Wegpunkt erreicht hat, bevor ein anderes Tool aufgerufen wird.
-Fügen Sie der Liste weitere Funktionsdeklarationen hinzu, um zusätzliche Roboterfunktionen verfügbar zu machen.
+第 1 步 - 工具定义 - 将机器人功能声明为函数声明。`navigate` 函数使用 `"behavior": "BLOCKING"`，因此模型会等待机器人到达途经点，然后再调用另一个工具。在同一列表中添加更多函数声明，以公开其他机器人功能。
 
-Schritt 2 – Eingabehilfen – zeigt drei Funktionen, mit denen verschiedene Modalitätseingaben in die Sitzung gestreamt werden: `send_text` für Befehle, `send_image` für Kamerabilder mit einem optionalen Text-Prompt und `send_audio` für rohes PCM-Audio von einem Mikrofon.
+第 2 步 - 输入辅助函数 - 显示了三个将不同模态输入流式传输到会话中的函数：`send_text` 用于命令，`send_image` 用于包含可选文本提示的相机帧，以及 `send_audio` 用于来自麦克风的原始 PCM 音频。
 
-Schritt 3 – die Empfangsschleife – wird gleichzeitig ausgeführt und verarbeitet zwei Arten von Nachrichten: `server_content`-Nachrichten (die Textausgabe des Modells) und `tool_call`-Nachrichten (das Modell fordert eine Roboteraktion an). Wenn ein Tool-Aufruf eingeht, ruft die Schleife `execute_tool` auf – einen Stub, den Sie durch Ihr echtes Roboter-SDK ersetzen – und sendet dann `tool_response` zurück, damit das Modell die nächste Aktion auswählen kann.
+第 3 步（接收循环）同时运行，并处理两种类型的消息：`server_content` 消息（模型的文本输出）和 `tool_call` 消息（模型请求机器人执行操作）。当工具调用到达时，该循环会调用 `execute_tool`（您用实际的机器人 SDK 替换的桩），然后发送回 `tool_response`，以便模型可以选择下一个操作。
 
 ```
 import asyncio
@@ -163,18 +162,18 @@ async def main():
 asyncio.run(main())
 ```
 
-Der Empfangsvorgang bleibt nach jeder Tool-Antwort aktiv. Das Modell erstellt und überarbeitet einen Plan mit langem Horizont, ohne dass Sie die gesamte Aktionssequenz im Voraus codieren müssen.
+在每次工具响应后，接收循环都会保持活跃状态。该模型可构建和修订长时程计划，而无需您预先对整个行动序列进行编码。
 
-## Proaktives räumlich-zeitliches Denken
+## 主动时空推理
 
-Die Live API streamt Videoinhalte, aber Videoframes allein lösen keinen neuen Reasoning-Turn aus. Videoframes müssen von einem Text- oder Audio-Prompt begleitet werden, um eine Modellantwort auszulösen. Weitere Informationen finden Sie unter [Live API-Funktionen](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=de).
+Live API 会以流式传输方式接收视频，但仅有视频帧不会触发新的推理轮次。视频帧必须附带文本或音频提示，才能触发模型回答。如需了解详情，请参阅 [Live API 功能](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=zh-cn)。
 
-Um proaktives Reasoning zu aktivieren, implementieren Sie einen **Heartbeat**: Senden Sie regelmäßig den letzten Kamerabild gefolgt von einem kurzen Text-Prompt, der das Modell dazu zwingt, die Szene zu untersuchen und eine explizite Entscheidung zu treffen. Die Videoeingabe ist auf ein Bild pro Sekunde begrenzt.
+如需启用主动推理，请实现**心跳**：定期发送最新的相机帧，然后发送一个简短的文本提示，强制模型检查场景并做出明确的决策。视频输入速率限制为每秒一帧。
 
-### Heartbeat implementieren
+### 实现心跳
 
-Die Heartbeat-Coroutine wird als separate `asyncio`-Aufgabe in derselben Sitzung ausgeführt.
-Es wird opportunistisch auf eine Häufigkeit von 1 Hz ausgerichtet (entsprechend dem Ratenlimit für die Videoeingabe), während auf den Abschluss jeder Runde (`er_turn_done`) gewartet wird, um laufende Schlussfolgerungen nicht zu unterbrechen:
+心跳协程在同一会话中作为单独的 `asyncio` 任务运行。
+它会在等待每个回合完成 (`er_turn_done`) 时，根据情况将节奏调整为 1 Hz（与视频输入速率限制相符），以避免中断正在进行的推理：
 
 ```
 async def heartbeat(session, camera, er_turn_done: asyncio.Event):
@@ -208,9 +207,9 @@ async def heartbeat(session, camera, er_turn_done: asyncio.Event):
             await asyncio.sleep(remaining)
 ```
 
-### Empfangsschleife aktualisieren
+### 更新接收循环
 
-Um zu signalisieren, wann das Modell seinen Zug beendet hat, aktualisieren Sie `receive_loop`, um `er_turn_done` festzulegen:
+如需在模型完成其回合时发出信号，请更新 `receive_loop` 以设置 `er_turn_done`：
 
 ```
 # In receive_loop: signal when the model finishes its turn
@@ -218,12 +217,11 @@ if sc.turn_complete:
     er_turn_done.set()
 ```
 
-## Audioausgabe über externe TTS
+## 通过外部 TTS 进行音频输出
 
-Gemini Robotics ER 2 gibt Text zurück. Ihre Anwendung leitet vollständige Antworten über einen eingefügten Callback an einen separaten TTS-Anbieter (z. B. [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)) weiter.
-So behalten Sie die Kontrolle über die Sprachlatenz, die Auswahl der Stimme und das Unterbrechungsverhalten und können TTS-Back-Ends austauschen, ohne die Agentenlogik zu ändern.
+Gemini Robotics ER 2 返回文本。您的应用通过注入的回调将完成的响应路由到单独的 TTS 提供程序（例如 [Gemini TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)）。这样一来，您就可以控制语音延迟、语音选择和中断行为，并且无需更改代理逻辑即可切换 TTS 后端。
 
-Sie können die Sprachausgabe auch als Tool deklarieren, damit das Modell „Sag etwas“ genauso behandelt wie „Bewege den Arm“. Fügen Sie der Liste `tools` aus dem ersten Abschnitt die folgende Funktionsdeklaration hinzu:
+您还可以将 TTS 声明为工具，以便模型将“说点什么”与“移动手臂”同等对待。将以下函数声明添加到第一部分中的 `tools` 列表：
 
 ```
 TOOLS = [
@@ -253,24 +251,24 @@ TOOLS = [
 ]
 ```
 
-Durch das Einbetten von TTS in eine Funktionsdeklaration verarbeitet das Modell Sprache über denselben Tool-Aufruf-Pfad wie jede andere Roboteraktion. Ihre Anwendung führt den Aufruf mit einem eingefügten Callback aus.
+通过将 TTS 封装在函数声明中，模型可以通过与任何其他机器人操作相同的工具调用路径来处理语音。您的应用通过注入的回调来完成调用。
 
-## Beispiele auf GitHub
+## GitHub 上的示例
 
-Vollständig funktionierende Beispiele, darunter die Spot-Roboter-Demo zum Holen von Snacks und die Tinybot-Schwenk-/Neige-Demo „Hello World“, finden Sie unter [Robotics Live API-Beispiele](https://github.com/google-gemini/robotics-samples/tree/main/live-api).
+如需查看完整的有效示例，包括 Spot 机器人零食获取演示和 Tinybot 云台“Hello World”演示，请参阅 [Robotics Live API 示例](https://github.com/google-gemini/robotics-samples/tree/main/live-api)。
 
-## Nächste Schritte
+## 后续步骤
 
-- [Videoanalyse](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=de): Momente finden und Fortschritt klassifizieren.
-- [Aufgabenorchestrierung](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=de): Aufgaben mit langem Horizont ohne Streaming.
-- [Live API – Übersicht](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=de): Vollständige API-Dokumentation zur Live API.
+- [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) - 时刻查找和进度分类。
+- [任务编排](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-cn) - 无需流式传输的长时程任务。
+- [Live API 概览](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-cn) - 完整的 Live API 文档。
 
-Feedback geben
+发送反馈
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Zuletzt aktualisiert: 2026-09-16 (UTC).
+最后更新时间 (UTC)：2026-09-16。
 
-Haben Sie Feedback für uns?
+需要向我们提供更多信息？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-16 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-16。"],[],[]]

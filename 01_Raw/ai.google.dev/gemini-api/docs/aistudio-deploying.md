@@ -1,134 +1,140 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=th
-fetched_at: 2026-10-12T06:56:28.178793+00:00
-title: "\u0e01\u0e32\u0e23\u0e17\u0e33\u0e43\u0e2b\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e44\u0e14\u0e49\u0e08\u0e32\u0e01 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it
+fetched_at: 2026-10-19T05:47:13.501065+00:00
+title: "Deployment da Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-ส่งความคิดเห็น
+Invia feedback
 
-# การทำให้ใช้งานได้จาก Google AI Studio
+# Deployment da Google AI Studio
 
-Google AI Studio ช่วยให้คุณสามารถติดตั้งใช้งานแอปพลิเคชัน Full Stack ได้โดยตรง
-จากโหมดสร้าง ซึ่งช่วยให้คุณเปลี่ยนจากต้นแบบไปสู่สภาพแวดล้อมฮาร์ดแวร์และซอฟต์แวร์ที่ได้รับการจัดการและรองรับการปรับขนาดได้อย่างรวดเร็ว
+Google AI Studio ti consente di eseguire il deployment delle applicazioni full-stack direttamente
+dalla modalità Build. In questo modo, il prototipo può essere trasformato rapidamente in un ambiente di produzione gestito e scalabile.
 
-## ตัวเลือกการติดตั้งใช้งาน
+## Opzioni di deployment
 
-หากต้องการติดตั้งใช้งานแอปพลิเคชันจากโหมด AI Studio Build ข้อกำหนดจะขึ้นอยู่กับระดับที่คุณใช้ ดังนี้
+Per eseguire il deployment dell'applicazione dalla modalità di creazione di AI Studio, i requisiti dipendono
+dal livello che utilizzi:
 
-- [**ระดับเริ่มต้นของ Google Cloud**](https://docs.cloud.google.com/docs/starter-tier?hl=th):
-  ช่วยให้บัญชีที่มีสิทธิ์เผยแพร่แอปพลิเคชันแบบฟูลสแต็กได้สูงสุด 2 รายการโดยไม่ต้อง
-  ตั้งค่าโปรเจ็กต์ Google Cloud หรือบัญชีสำหรับการเรียกเก็บเงิน
-- **การติดตั้งใช้งานมาตรฐาน**: ต้องมีโปรเจ็กต์ที่อยู่ในระบบคลาวด์ของ Google ที่ลิงก์กับบัญชี AI Studio และเปิดใช้การเรียกเก็บเงินในโปรเจ็กต์นั้น
+- [**Livello iniziale Google Cloud**](https://docs.cloud.google.com/docs/starter-tier?hl=it):
+  Consente agli account idonei di pubblicare fino a due applicazioni full-stack senza
+  configurare un progetto Google Cloud o un account di fatturazione.
+- **Deployment standard**: richiede un progetto Google Cloud collegato al tuo
+  account AI Studio e la fatturazione abilitata per il progetto.
 
-## เกี่ยวกับ Starter Tier
+## Informazioni sullo Starter Tier
 
-Google Cloud Starter Tier มอบเส้นทางที่คล่องตัวสำหรับบัญชีที่มีสิทธิ์
-ในการทำให้แอปพลิเคชันใช้งานได้ใน Google Cloud โดยตรงจาก Google AI Studio คุณไม่จำเป็นต้องตั้งค่าสภาพแวดล้อม Google Cloud หรือบัญชีสำหรับการเรียกเก็บเงินทั้งหมด
+Il livello Starter Tier di Google Cloud offre un percorso semplificato per gli account idonei per eseguire il deployment di applicazioni su Google Cloud direttamente da Google AI Studio. Non devi
+configurare un ambiente Google Cloud o un account di fatturazione completo.
 
-การติดตั้งใช้งาน Google AI Studio แต่ละครั้งจะสร้างบริการที่เกี่ยวข้องใน
-Cloud Run สำหรับบริการที่ติดตั้งใช้งานใน Google AI Studio ด้วย Starter
-Tier จะมีข้อจำกัดต่อไปนี้
+Ogni deployment di Google AI Studio crea un servizio corrispondente in
+Cloud Run. Per i servizi di cui è stato eseguito il deployment in Google AI Studio con il livello
+Starter, si applicano le seguenti limitazioni:
 
-- คุณสามารถติดตั้งใช้งานบริการได้สูงสุด 2 รายการ
-- บริการของคุณได้รับการติดตั้งใช้งานใน[ภูมิภาค Cloud Run เดียว](https://docs.cloud.google.com/run/docs/locations?hl=th)
+- Puoi eseguire il deployment di un massimo di due servizi.
+- I tuoi servizi vengono implementati in una
+  [singola regione Cloud Run](https://docs.cloud.google.com/run/docs/locations?hl=it).
 
-### การมีสิทธิ์ใช้ Starter Tier
+### Idoneità a Starter Tier
 
-บางบัญชีอาจไม่มีสิทธิ์ใช้ Google Cloud Starter Tier บัญชีของคุณอาจไม่มีสิทธิ์หากตรงกับข้อใดต่อไปนี้
+Non tutti gli account sono idonei per lo Starter Tier di Google Cloud. Il tuo account
+potrebbe non essere idoneo se si verifica una delle seguenti condizioni:
 
-- คุณลงชื่อเข้าใช้ด้วยบัญชี Google Workspace (รวมถึงการสมัครใช้บริการ Google Workspace, Google Workspace for Education หรือ Google เพื่อการกุศล แบบชำระเงินหรือฟรี)
-- คุณมีบัญชีสำหรับการเรียกเก็บเงินของ Google Cloud แบบชำระเงินที่ใช้งานอยู่หรือที่เคยใช้งาน
-- เรามีหลักฐานจากกิจกรรมในบัญชีของคุณไม่เพียงพอที่จะให้สิทธิ์เข้าถึงระดับเริ่มต้นในขณะนี้
+- Hai eseguito l'accesso con un account Google Workspace (inclusi abbonamenti Google Workspace, Google Workspace for Education o Google per il non profit a pagamento o senza costi).
+- Hai un account di fatturazione Google Cloud a pagamento attivo o precedente.
+- Al momento non disponiamo di prove sufficienti dall'attività del tuo account per concedere l'accesso al livello Starter.
 
-ทีมสนับสนุนของ Google AI Studio ไม่สามารถลบล้างการมีสิทธิ์ใช้ระดับเริ่มต้นได้ หากบัญชีไม่มีสิทธิ์ ให้แนบบัญชีสำหรับการเรียกเก็บเงินและใช้[การติดตั้งใช้งานมาตรฐาน](#standard-deployment)เพื่อเผยแพร่แอป
+Il team di assistenza di Google AI Studio non può ignorare l'idoneità allo Starter Tier. Se
+il tuo account non è idoneo, collega un account di fatturazione e utilizza
+l'[implementazione standard](#standard-deployment) per pubblicare le app.
 
-## ติดตั้งใช้งานด้วยระดับเริ่มต้น
+## Esegui il deployment con lo Starter Tier
 
-หลังจากออกแบบแอปในโหมดสร้างแล้ว ให้ทำให้แอปใช้งานได้ด้วย Starter Tier โดยทำดังนี้
+Dopo aver progettato l'app in modalità Build, esegui il deployment con Starter Tier:
 
-1. คลิกปุ่ม**เผยแพร่**ที่มุมขวาบน
-2. คลิก**เริ่มต้น**
-3. คลิก**เผยแพร่แอป**
+1. Fai clic sul pulsante **Pubblica** nell'angolo in alto a destra.
+2. Fai clic su **Inizia**.
+3. Fai clic su **Pubblica app**.
 
-เมื่อการติดตั้งใช้งานเสร็จสมบูรณ์แล้ว AI Studio จะระบุ URL ของ Cloud Run ซึ่งคุณสามารถ
-เข้าถึงแอปพลิเคชันที่ใช้งานจริงได้
+Una volta completato il deployment, AI Studio fornisce un URL Cloud Run in cui puoi
+accedere alla tua applicazione live.
 
-## URL ที่กำหนดเองสำหรับ AI Studio
+## URL personalizzati per AI Studio
 
-เมื่อเผยแพร่แอปพลิเคชันจาก Google AI Studio คุณจะตั้งค่าโดเมนย่อยที่กำหนดเองและจดจำง่ายได้ในส่วน `ai.studio` (เช่น `https://your-app-name.ai.studio`)
+Quando pubblichi un'applicazione da Google AI Studio, puoi impostare un sottodominio personalizzato e memorabile in `ai.studio` (ad esempio, `https://your-app-name.ai.studio`).
 
-Google AI Studio กำหนดให้โดเมนย่อยต้องไม่ซ้ำกันทั่วโลกในทุกโปรเจ็กต์
-และจะกำหนดโดเมนย่อยตามลำดับการลงทะเบียน หากโปรเจ็กต์อื่น
-ใช้ชื่ออยู่แล้ว AI Studio จะแจ้งให้คุณเลือกชื่ออื่น หากคุณ
-เลิกเผยแพร่หรือลบแอปพลิเคชัน ระบบจะปล่อย URL ที่กำหนดเองของแอปพลิเคชันนั้นและ
-ผู้ใช้รายอื่นจะอ้างสิทธิ์ URL นั้นได้
+Google AI Studio richiede che i sottodomini siano univoci a livello globale in tutti i progetti
+e li assegna in base all'ordine di arrivo. Se un altro progetto
+utilizza già un nome, AI Studio ti chiede di sceglierne uno diverso. Se annulli la pubblicazione o elimini un'applicazione, il relativo URL personalizzato viene rilasciato e diventa disponibile per altri utenti.
 
-### ตั้งค่า URL ที่กำหนดเอง
+### Impostare un URL personalizzato
 
-วิธีตั้งค่าหรืออัปเดต URL ที่กำหนดเองสำหรับแอปพลิเคชัน
+Per impostare o aggiornare un URL personalizzato per la tua applicazione:
 
-1. เปิดแอปพลิเคชันใน Google AI Studio ในโหมด**สร้าง**
-2. คลิก**เผยแพร่**ที่มุมขวาบน
-3. ในการกำหนดค่าการติดตั้งใช้งาน ให้ป้อนโดเมนย่อยที่ต้องการในช่อง **URL ที่กำหนดเอง** หรือยอมรับ URL ที่แนะนำ
-4. คลิก**เผยแพร่แอป**
+1. Apri l'applicazione in Google AI Studio in modalità **Build**.
+2. Fai clic su **Pubblica** nell'angolo in alto a destra.
+3. Nella configurazione del deployment, inserisci il sottodominio che preferisci nel campo
+   **URL personalizzato** o accetta l'URL suggerito.
+4. Fai clic su **Pubblica app**.
 
-หากต้องการโอน URL ที่กำหนดเองที่มีอยู่ไปยังแอปพลิเคชันอื่น คุณต้อง
-ยกเลิกการเผยแพร่หรือลบแอปพลิเคชันที่กำหนด URL ที่กำหนดเองนั้นก่อน แล้วจึง
-เผยแพร่แอปพลิเคชันใหม่โดยใช้โดเมนย่อยที่เลือก
+Per trasferire un URL personalizzato esistente a un'altra applicazione, devi prima
+annullare la pubblicazione o eliminare l'applicazione a cui è assegnato l'URL personalizzato, quindi
+pubblicare la nuova applicazione utilizzando il sottodominio scelto.
 
-### รายงานปัญหาเกี่ยวกับเครื่องหมายการค้าหรือลิขสิทธิ์
+### Segnalare problemi relativi a marchi o copyright
 
-โดเมนย่อยที่กำหนดเองต้องเป็นไปตาม[ข้อกำหนดในการให้บริการของ Google](https://policies.google.com/terms?hl=th) หากพบ
-URL ที่กำหนดเองซึ่งละเมิดเครื่องหมายการค้าหรือใช้ชื่อที่มีลิขสิทธิ์โดยไม่ได้รับอนุญาต
-คุณสามารถรายงานโดยใช้[เครื่องมือแก้ปัญหาทางกฎหมายของ Google](https://support.google.com/legal/troubleshooter/1114905?hl=th)
+I sottodomini personalizzati devono essere conformi ai
+[Termini di servizio di Google](https://policies.google.com/terms?hl=it). Se noti un URL personalizzato che viola un marchio o utilizza un nome protetto da copyright senza autorizzazione, puoi segnalarlo utilizzando lo [strumento per la risoluzione dei problemi legali di Google](https://support.google.com/legal/troubleshooter/1114905?hl=it).
 
-## การติดตั้งใช้งานมาตรฐาน
+## Deployment standard
 
-เมื่อแอปพลิเคชันของคุณพัฒนาขึ้น คุณอาจต้องใช้ความสามารถที่นอกเหนือจากระดับเริ่มต้น
-เช่น โควต้าที่สูงขึ้นหรือทรัพยากรการประมวลผลที่เพิ่มขึ้น หรือผลิตภัณฑ์อื่นๆ ของ
-Google Cloud ที่ไม่มีให้บริการในระดับเริ่มต้น หากต้องการปลดล็อกความสามารถเหล่านี้ คุณสามารถแปลงโปรเจ็กต์ระดับเริ่มต้นที่มีการจัดการเต็มรูปแบบเป็นโปรเจ็กต์ Google Cloud มาตรฐานได้
+Man mano che le tue applicazioni si evolvono, potresti aver bisogno di funzionalità che vanno oltre lo Starter Tier, come quote più elevate o maggiori risorse di calcolo o altri prodotti Google Cloud non disponibili nello Starter Tier. Per sbloccare
+queste funzionalità, puoi convertire il tuo progetto di livello base completamente gestito in
+un progetto Google Cloud standard.
 
-ซึ่งจะช่วยให้คุณปรับขนาดได้อย่างราบรื่นโดยไม่สูญเสีย
-ความคืบหน้า ทำตามขั้นตอนเพื่อ
-[สร้างบัญชีสำหรับการเรียกเก็บเงินใน Cloud](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=th#create-new-billing-account)
-ยอมรับข้อกำหนดในการให้บริการมาตรฐานของ Google Cloud อย่างเป็นทางการ และ
-[อัปเกรดเป็นโปรเจ็กต์ที่อยู่ในระบบคลาวด์มาตรฐานของ Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=th#upgradee)
-ดูข้อมูลเพิ่มเติมได้ที่
-[การตั้งค่าสำหรับบัญชีแบบชำระเงิน](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=th#paid-setup)
+In questo modo, puoi scalare senza problemi senza perdere
+i tuoi progressi. Segui i passaggi per
+[creare un account di fatturazione Cloud](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=it#create-new-billing-account),
+accettare formalmente i Termini di servizio standard di Google Cloud e
+[eseguire l'upgrade a un progetto Google Cloud standard](https://docs.cloud.google.com/docs/starter-tier?hl=it#upgradee).
+Per saperne di più, consulta
+[Configurazione per gli account a pagamento](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=it#paid-setup).
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับระดับการเรียกเก็บเงินได้ที่[การเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th)
+Per saperne di più sui livelli di fatturazione, consulta [Fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it).
 
-## ลบแอปพลิเคชัน
+## Eliminare la richiesta
 
-หากไม่ต้องการใช้แอปอีกต่อไป คุณสามารถลบแอปใน Google AI Studio ได้
-โดยทำตามวิธีการต่อไปนี้
+Se non hai più bisogno della tua app, puoi eliminarla in Google AI Studio
+seguendo queste istruzioni:
 
-1. ไปที่[หน้าแอป](https://aistudio.google.com/app/apps?hl=th)ใน Google AI Studio
-2. เลือก**แอป**ในเมนูด้านซ้าย
-3. วางเคอร์เซอร์เหนือแอปที่ต้องการลบ
-4. คลิกไอคอนถังขยะทางด้านขวาของแถวเพื่อลบแอป
+1. In Google AI Studio, vai alla
+   [pagina App](https://aistudio.google.com/app/apps?hl=it).
+2. Nel menu a sinistra, seleziona **App**.
+3. Tieni il puntatore sopra l'app che vuoi eliminare.
+4. Fai clic sull'icona del cestino sul lato destro della riga per eliminare l'app.
 
-## ขั้นตอนถัดไป
+## Passaggi successivi
 
-- ดูข้อมูลเพิ่มเติมเกี่ยวกับ[ระดับเริ่มต้นของ Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=th)
-- อ่านเกี่ยวกับ[การเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th)ใน Gemini API
+- Scopri di più sullo
+  [Starter Tier di Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=it).
+- Scopri di più sulla [fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it) nell'API Gemini.
 
-ส่งความคิดเห็น
+Invia feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-อัปเดตล่าสุด 2026-09-28 UTC
+Ultimo aggiornamento 2026-09-28 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Vuoi dirci altro?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-28 UTC"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-28 UTC."],[],[]]

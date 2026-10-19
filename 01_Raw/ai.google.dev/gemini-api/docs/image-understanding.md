@@ -1,38 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=es-419
-fetched_at: 2026-10-12T06:53:19.853569+00:00
-title: "Comprensi\u00f3n de im\u00e1genes \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=it
+fetched_at: 2026-10-19T05:53:06.295308+00:00
+title: "Comprensione delle immagini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Enviar comentarios
+Invia feedback
 
-# Comprensión de imágenes
+# Comprensione delle immagini
 
-Los modelos de Gemini se diseñaron para ser multimodales desde cero, lo que permite realizar una amplia variedad de tareas de procesamiento de imágenes y visión artificial, incluidos, sin limitaciones, la descripción de imágenes, la clasificación y la respuesta a preguntas visuales, sin tener que entrenar modelos de AA especializados.
+I modelli Gemini sono progettati per essere multimodali fin dalla base, consentendo un'ampia gamma di attività di elaborazione delle immagini e visione artificiale, tra cui, a titolo esemplificativo, la descrizione di immagini, la classificazione e la risposta a domande visive, senza dover addestrare modelli di ML specializzati.
 
-Además de sus capacidades multimodales generales, los modelos de Gemini ofrecen una **mayor precisión** para casos de uso específicos, como la [detección de objetos](#object-detection) y la [segmentación](#segmentation), a través de entrenamiento adicional.
+Oltre alle funzionalità multimodali generali, i modelli Gemini offrono
+**maggiore accuratezza** per casi d'uso specifici come il [rilevamento di oggetti](#object-detection)
+e la [segmentazione](#segmentation), grazie a un addestramento aggiuntivo.
 
-## Cómo pasar imágenes a Gemini
+## Trasferire immagini a Gemini
 
-Puedes proporcionar imágenes como entrada a Gemini de varias maneras:
+Puoi fornire immagini come input a Gemini utilizzando diversi metodi:
 
-- [Pasa la imagen con la URL](#url-image): Es ideal para imágenes de acceso público.
-- [Cómo pasar datos de imágenes intercaladas](#inline-image): Para datos de imágenes codificados en Base64
-- [Cómo subir imágenes con la API de File](#upload-image): Se recomienda para archivos más grandes o para reutilizar imágenes en varias solicitudes.
+- [Trasmissione dell'immagine tramite URL](#url-image): ideale per le immagini accessibili pubblicamente.
+- [Passaggio di dati immagine incorporati](#inline-image): per i dati immagine con codifica base64.
+- [Caricamento di immagini tramite l'API File](#upload-image): consigliato per file di dimensioni maggiori o per riutilizzare le immagini in più richieste.
 
-### Cómo pasar una imagen con una URL
+### Trasmissione dell'immagine tramite URL
 
-Puedes subir una imagen con la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419) y pasarla en la solicitud:
+Puoi caricare un'immagine utilizzando l'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) e passarla
+nella richiesta:
 
 ### Python
 
@@ -200,9 +203,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Cómo pasar datos de imágenes intercaladas
+### Trasferimento dei dati delle immagini in linea
 
-Puedes proporcionar datos de imágenes como cadenas codificadas en base64:
+Puoi fornire i dati immagine come stringhe con codifica base64:
 
 ### Python
 
@@ -378,9 +381,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Cómo subir imágenes con la API de File
+### Caricamento di immagini utilizzando l'API File
 
-Para archivos grandes o para poder usar el mismo archivo de imagen varias veces, usa la API de Files. Consulta la [guía de la API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419).
+Per file di grandi dimensioni o per poter utilizzare ripetutamente lo stesso file immagine, utilizza l'API Files. Consulta la [guida all'API Files](https://ai.google.dev/gemini-api/docs/files?hl=it).
 
 ### Python
 
@@ -550,9 +553,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Instrucciones con varias imágenes
+## Prompt con più immagini
 
-Puedes proporcionar varias imágenes en una sola instrucción incluyendo varios objetos de imagen en el array `input`:
+Puoi fornire più immagini in un singolo prompt includendo più oggetti immagine
+nell'array `input`:
 
 ### Python
 
@@ -723,9 +727,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Detección de objetos
+## Rilevamento di oggetti
 
-Los modelos se entrenan para detectar objetos en una imagen y obtener las coordenadas de su cuadro delimitador. Las coordenadas, relativas a las dimensiones de la imagen, se ajustan a una escala de [0, 1000]. Debes ajustar estas coordenadas según el tamaño de la imagen original.
+I modelli vengono addestrati per rilevare gli oggetti in un'immagine e ottenere le coordinate del riquadro di delimitazione. Le coordinate, relative alle dimensioni dell'immagine, vengono scalate a [0, 1000]. Devi ridimensionare queste coordinate in base
+alle dimensioni delle immagini originali.
 
 ### Python
 
@@ -1012,13 +1017,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Para obtener más ejemplos, visita la [guía de soluciones de Gemini](https://github.com/google-gemini/cookbook).
+Per altri esempi, visita il [cookbook di Gemini](https://github.com/google-gemini/cookbook).
 
-## Segmentación
+## Segmentazione
 
-Los modelos de Gemini no solo detectan elementos, sino que también los segmentan y proporcionan sus máscaras de contorno.
+I modelli Gemini non solo rilevano gli elementi, ma li segmentano e forniscono le relative maschere di contorno.
 
-El modelo predice una lista JSON, en la que cada elemento representa una máscara de segmentación. Cada elemento tiene un cuadro delimitador ("`box_2d`") en el formato `[ymin, xmin, ymax, xmax]` con coordenadas normalizadas entre 0 y 1,000, una etiqueta ("`label`") que identifica el objeto y, por último, la máscara de segmentación dentro del cuadro delimitador como un polígono de coordenadas `[x, y]` normalizadas de 0 a 1,000.
+Il modello prevede un elenco JSON, in cui ogni elemento rappresenta una maschera di segmentazione. Ogni elemento ha un riquadro di delimitazione ("`box_2d`") nel formato `[ymin, xmin, ymax, xmax]` con coordinate normalizzate tra 0 e 1000, un'etichetta ("`label`") che identifica l'oggetto e infine la maschera di segmentazione all'interno del riquadro di delimitazione come un poligono di coordinate `[x, y]` normalizzate a 0-1000.
 
 ### Python
 
@@ -1338,75 +1343,87 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Una mesa con cupcakes, con los objetos de madera y vidrio destacados](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=es-419)
+![Un tavolo con cupcake, con gli oggetti in legno e vetro evidenziati](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=it)
 
-Un ejemplo de resultado de segmentación con objetos y máscaras de segmentación
+Un output di segmentazione di esempio con oggetti e maschere di segmentazione
 
-## Formatos de imagen compatibles
+## Formati di immagine supportati
 
-Gemini admite los siguientes tipos de MIME de formato de imagen:
+Gemini supporta i seguenti tipi MIME di formati immagine:
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
 - WEBP - `image/webp`
-- HEIC: `image/heic`
+- HEIC - `image/heic`
 - HEIF - `image/heif`
 
-Para obtener información sobre otros métodos de entrada de archivos, consulta la guía [Métodos de entrada de archivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=es-419).
+Per scoprire altri metodi di input dei file, consulta la guida
+[Metodi di input dei file](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=it).
 
-## Funciones
+## Funzionalità
 
-Todas las versiones de los modelos de Gemini son multimodales y se pueden utilizar en una amplia variedad de tareas de procesamiento de imágenes y visión artificial, incluidas, sin limitaciones, la descripción de imágenes, las preguntas y respuestas visuales, la clasificación de imágenes, la detección y segmentación de objetos.
+Tutte le versioni del modello Gemini sono multimodali e possono essere utilizzate in un'ampia gamma
+di attività di elaborazione delle immagini e visione artificiale, tra cui, a titolo esemplificativo,
+la descrizione di immagini, le domande e risposte visive, la classificazione delle immagini,
+il rilevamento di oggetti e la segmentazione.
 
-Gemini puede reducir la necesidad de usar modelos de AA especializados según tus requisitos de calidad y rendimiento.
+Gemini può ridurre la necessità di utilizzare modelli di ML specializzati a seconda dei tuoi requisiti di qualità e prestazioni.
 
-Las versiones más recientes del modelo se entrenan específicamente para mejorar la precisión de las tareas especializadas, además de las capacidades genéricas, como la [detección](#object-detection) y la [segmentación](#segmentation) de objetos mejoradas.
+Le versioni più recenti del modello sono addestrate in modo specifico per migliorare l'accuratezza di attività specializzate, oltre alle funzionalità generiche, come il [rilevamento di oggetti](#object-detection) e la [segmentazione](#segmentation) avanzati.
 
-## Limitaciones e información técnica clave
+## Limitazioni e informazioni tecniche chiave
 
-### Límite de archivos
+### Limite di file
 
-Los modelos de Gemini admiten un máximo de 3,600 archivos de imagen por solicitud.
+I modelli Gemini supportano un massimo di 3600 file immagine per richiesta.
 
-### Cálculo de tokens
+### Calcolo dei token
 
-- 258 tokens si ambas dimensiones son <= 384 píxeles
-  Las imágenes más grandes se dividen en mosaicos de 768 × 768 píxeles, y cada uno cuesta 258 tokens.
+- 258 token se entrambe le dimensioni sono <= 384 pixel.
+  Le immagini più grandi vengono suddivise in riquadri di 768 x 768 pixel, ognuno dei quali costa 258 token.
 
-Una fórmula aproximada para calcular la cantidad de segmentos es la siguiente:
+Una formula approssimativa per calcolare il numero di tessere è la seguente:
 
-- Calcula el tamaño de la unidad de recorte, que es aproximadamente `floor(min(width, height)` / 1.5.
-- Divide cada dimensión por el tamaño de la unidad de recorte y multiplica los resultados para obtener la cantidad de mosaicos.
+- Calcola la dimensione dell'unità di ritaglio, che è approssimativamente: `floor(min(width, height)` / 1,5).
+- Dividi ogni dimensione per le dimensioni dell'unità di ritaglio e moltiplica i risultati per ottenere il
+  numero di riquadri.
 
-Por ejemplo, una imagen de dimensiones 960 x 540 tendría un tamaño de unidad de recorte de 360. Divide cada dimensión por 360, y la cantidad de mosaicos es 3 \* 2 = 6.
+Ad esempio, per un'immagine di dimensioni 960 x 540, la dimensione dell'unità di ritaglio
+è 360. Dividi ogni dimensione per 360 e il numero di riquadri è 3 \* 2 = 6.
 
-### Resolución de contenido multimedia
+### Risoluzione dei contenuti multimediali
 
-Gemini 3 introduce un control detallado sobre el procesamiento de la visión multimodal con el parámetro `media_resolution`. El parámetro `media_resolution` determina la **cantidad máxima de tokens asignados por imagen de entrada o fotograma de video.**
-Las resoluciones más altas mejoran la capacidad del modelo para leer texto pequeño o identificar detalles pequeños, pero aumentan el uso de tokens y la latencia.
+Gemini 3 introduce un controllo granulare sull'elaborazione della visione multimodale con il parametro
+`media_resolution`. Il parametro `media_resolution` determina il
+**numero massimo di token allocati per ogni immagine di input o frame video.**
+Le risoluzioni più elevate migliorano la capacità del modello di leggere testi piccoli o identificare piccoli dettagli, ma aumentano l'utilizzo di token e la latenza.
 
-## Sugerencias y prácticas recomendadas
+## Suggerimenti e best practice
 
-- Verifica que las imágenes estén rotadas correctamente.
-- Usa imágenes claras y no borrosas.
-- Cuando uses una sola imagen con texto, coloca la instrucción de texto *antes* de la imagen en el array `input`.
+- Verifica che le immagini siano ruotate correttamente.
+- Utilizza immagini chiare e non sfocate.
+- Quando utilizzi una singola immagine con testo, posiziona il prompt testuale *prima* dell'immagine nell'array `input`.
 
-## ¿Qué sigue?
+## Passaggi successivi
 
-En esta guía, se muestra cómo subir archivos de imagen y generar resultados de texto a partir de entradas de imágenes. Para obtener más información, consulta los siguientes recursos:
+Questa guida mostra come caricare file immagine e generare output di testo
+dagli input immagine. Per saperne di più, consulta le seguenti risorse:
 
-- [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419): Obtén más información para subir y administrar archivos para usarlos con Gemini.
-- [Instrucciones del sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419#system-instructions):
-  Las instrucciones del sistema te permiten dirigir el comportamiento del modelo según tus necesidades y casos de uso específicos.
-- [Estrategias de instrucciones con archivos](https://ai.google.dev/gemini-api/docs/files?hl=es-419#prompt-guide): La API de Gemini admite instrucciones con datos de texto, imagen, audio y video, lo que también se conoce como instrucciones multimodales.
-- [Orientación sobre seguridad](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419): A veces, los modelos de IA generativa producen resultados inesperados, como resultados inexactos, sesgados o ofensivos. El procesamiento posterior y la evaluación humana son fundamentales para limitar el riesgo de daño que pueden causar estos resultados.
+- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=it): scopri di più sul caricamento e sulla gestione dei file da utilizzare con Gemini.
+- [Istruzioni di sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#system-instructions):
+  Le istruzioni di sistema ti consentono di orientare il comportamento del modello in base alle tue
+  esigenze e ai tuoi casi d'uso specifici.
+- [Strategie di prompt dei file](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide): l'API
+  Gemini supporta i prompt con dati di testo, immagini, audio e video, noti anche come prompt multimodali.
+- [Linee guida per la sicurezza](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=it): a volte i modelli di AI generativa producono output inaspettati, ad esempio output imprecisi, distorti o offensivi. Il post-processing e la valutazione umana sono essenziali per
+  limitare il rischio di danni derivanti da questi output.
 
-Enviar comentarios
+Invia feedback
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última actualización: 2026-09-24 (UTC)
+Ultimo aggiornamento 2026-09-24 UTC.
 
-¿Quieres brindar más información?
+Vuoi dirci altro?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-09-24 (UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-24 UTC."],[],[]]

@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=vi
-fetched_at: 2026-10-12T07:09:24.603626+00:00
-title: "K\u1ebft qu\u1ea3 c\u00f3 c\u1ea5u tr\u00fac \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=tr
+fetched_at: 2026-10-19T05:51:56.610751+00:00
+title: "Yap\u0131land\u0131r\u0131lm\u0131\u015f \u00e7\u0131k\u0131\u015flar \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Kết quả có cấu trúc
+# Yapılandırılmış çıkışlar
 
-Bạn có thể thiết lập các mô hình Gemini để tạo câu trả lời tuân thủ một JSON Schema được cung cấp. Điều này đảm bảo kết quả có thể dự đoán và an toàn về kiểu, đồng thời đơn giản hoá việc trích xuất dữ liệu có cấu trúc từ văn bản không có cấu trúc.
+Gemini modellerini, sağlanan JSON şemasına uygun yanıtlar üretecek şekilde yapılandırabilirsiniz. Bu sayede, tahmin edilebilir ve tip güvenliği olan sonuçlar elde edilir ve yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
 
-Sử dụng đầu ra có cấu trúc là lựa chọn lý tưởng cho:
+Yapılandırılmış çıkışlar aşağıdaki durumlarda idealdir:
 
-- **Trích xuất dữ liệu:** Lấy thông tin cụ thể như tên và ngày từ văn bản.
-- **Phân loại có cấu trúc:** Phân loại văn bản vào các danh mục xác định trước.
-- **Quy trình công việc dựa trên tác nhân:** Tạo thông tin đầu vào có cấu trúc cho các công cụ hoặc API.
+- **Veri ayıklama:** Metinden ad ve tarih gibi belirli bilgileri ayıklayın.
+- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
+- **Temsilci tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
 
-Ngoài việc hỗ trợ giản đồ JSON trong API REST, Google GenAI SDK còn giúp bạn dễ dàng xác định giản đồ bằng [Pydantic](https://docs.pydantic.dev/latest/) (Python) và [Zod](https://zod.dev/) (JavaScript).
+Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanarak şema tanımlamayı kolaylaştırır.
 
-## Ví dụ về đầu ra có cấu trúc
+## Yapılandırılmış çıkış örnekleri
 
-### Công cụ trích xuất công thức
+### Yemek Tarifi Ayıklayıcı
 
-Ví dụ này minh hoạ cách trích xuất dữ liệu có cấu trúc từ văn bản bằng các loại Giản đồ JSON cơ bản như `object`, `array`, `string` và `integer`.
+Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şeması türleri kullanılarak metinden yapılandırılmış verilerin nasıl çıkarılacağı gösterilmektedir.
 
 ### Python
 
@@ -72,7 +72,8 @@ response = client.models.generate_content(
     model="gemini-3.8-flash",
     contents=prompt,
     config={
-        "response_format": {"text": {"mime_type": "application/json", "schema": Recipe.model_json_schema()}},
+        "response_mime_type": "application/json",
+        "response_json_schema": Recipe.model_json_schema(),
     },
 )
 
@@ -119,7 +120,8 @@ const response = await ai.models.generateContent({
   model: "gemini-3.8-flash",
   contents: prompt,
   config: {
-    responseFormat: { text: { mimeType: "application/json", schema: zodToJsonSchema(recipeSchema) } },
+    responseMimeType: "application/json",
+    responseJsonSchema: zodToJsonSchema(recipeSchema),
   },
 });
 
@@ -228,43 +230,43 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
       "generationConfig": {
         "responseFormat": {
           "text": {
-            "mimeType": "application/json",
+            "mimeType": "APPLICATION_JSON",
             "schema": {
-          "type": "object",
-          "properties": {
-            "recipe_name": {
-              "type": "string",
-              "description": "The name of the recipe."
-            },
-            "prep_time_minutes": {
-                "type": "integer",
-                "description": "Optional time in minutes to prepare the recipe."
-            },
-            "ingredients": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": { "type": "string", "description": "Name of the ingredient."},
-                  "quantity": { "type": "string", "description": "Quantity of the ingredient, including units."}
-          }
-        }
-      },
-                "required": ["name", "quantity"]
-              }
-            },
-            "instructions": {
-              "type": "array",
-              "items": { "type": "string" }
+              "type": "object",
+              "properties": {
+                "recipe_name": {
+                  "type": "string",
+                  "description": "The name of the recipe."
+                },
+                "prep_time_minutes": {
+                  "type": "integer",
+                  "description": "Optional time in minutes to prepare the recipe."
+                },
+                "ingredients": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string", "description": "Name of the ingredient."},
+                      "quantity": { "type": "string", "description": "Quantity of the ingredient, including units."}
+                    },
+                    "required": ["name", "quantity"]
+                  }
+                },
+                "instructions": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              },
+              "required": ["recipe_name", "ingredients", "instructions"]
             }
-          },
-          "required": ["recipe_name", "ingredients", "instructions"]
+          }
         }
       }
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**Örnek yanıt:**
 
 ```
 {
@@ -319,9 +321,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### Kiểm duyệt nội dung
+### İçerik Denetimi
 
-Ví dụ này minh hoạ `anyOf` cho các giản đồ có điều kiện và `enum` cho việc phân loại, cho phép cấu trúc đầu ra thay đổi dựa trên nội dung.
+Bu örnekte, koşullu şemalar için `anyOf` ve sınıflandırma için `enum` kullanılarak çıkış yapısının içeriğe göre değişmesi sağlanır.
 
 ### Python
 
@@ -352,7 +354,8 @@ response = client.models.generate_content(
     model="gemini-3.8-flash",
     contents=prompt,
     config={
-        "response_format": {"text": {"mime_type": "application/json", "schema": ModerationResult.model_json_schema()}},
+        "response_mime_type": "application/json",
+        "response_json_schema": ModerationResult.model_json_schema(),
     },
 )
 
@@ -392,7 +395,8 @@ const response = await ai.models.generateContent({
   model: "gemini-3.8-flash",
   contents: prompt,
   config: {
-    responseFormat: { text: { mimeType: "application/json", schema: zodToJsonSchema(moderationResultSchema) } },
+    responseMimeType: "application/json",
+    responseJsonSchema: zodToJsonSchema(moderationResultSchema),
   },
 });
 
@@ -500,40 +504,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
       "generationConfig": {
         "responseFormat": {
           "text": {
-            "mimeType": "application/json",
+            "mimeType": "APPLICATION_JSON",
             "schema": {
-          "type": "object",
-          "properties": {
-            "decision": {
-              "anyOf": [
-                {
-                  "type": "object",
-                  "title": "SpamDetails",
-                  "description": "Details for content classified as spam.",
-                  "properties": {
-                    "reason": { "type": "string", "description": "The reason why the content is considered spam." },
-                    "spam_type": { "type": "string", "enum": ["phishing", "scam", "unsolicited promotion", "other"], "description": "The type of spam." }
+              "type": "object",
+              "properties": {
+                "decision": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "title": "SpamDetails",
+                      "description": "Details for content classified as spam.",
+                      "properties": {
+                        "reason": { "type": "string", "description": "The reason why the content is considered spam." },
+                        "spam_type": { "type": "string", "enum": ["phishing", "scam", "unsolicited promotion", "other"], "description": "The type of spam." }
+                      },
+                      "required": ["reason", "spam_type"]
+                    },
+                    {
+                      "type": "object",
+                      "title": "NotSpamDetails",
+                      "description": "Details for content classified as not spam.",
+                      "properties": {
+                        "summary": { "type": "string", "description": "A brief summary of the content." },
+                        "is_safe": { "type": "boolean", "description": "Whether the content is safe for all audiences." }
+                      },
+                      "required": ["summary", "is_safe"]
+                    }
+                  ]
+                }
+              },
+              "required": ["decision"]
+            }
           }
         }
-      },
-                   "required": ["reason", "spam_type"]
-                 },
-                 {
-                   "type": "object",
-                   "title": "NotSpamDetails",
-                   "description": "Details for content classified as not spam.",
-                   "properties": {
-                     "summary": { "type": "string", "description": "A brief summary of the content." },
-                     "is_safe": { "type": "boolean", "description": "Whether the content is safe for all audiences." }
-                   },
-                   "required": ["summary", "is_safe"]
-                 }
-               ]
-             }
-           },
-           "required": ["decision"]
-         }
-       }
+      }
      }'
  ```
 
@@ -548,9 +552,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-### Cấu trúc đệ quy
+### Yinelemeli Yapılar
 
-Ví dụ này minh hoạ cách xác định một giản đồ đệ quy, chẳng hạn như biểu đồ tổ chức.
+Bu örnekte, kuruluş şeması gibi özyinelemeli bir şemanın nasıl tanımlanacağı gösterilmektedir.
 
 ### Python
 
@@ -579,7 +583,8 @@ response = client.models.generate_content(
     model="gemini-3.8-flash",
     contents=prompt,
     config={
-        "response_format": {"text": {"mime_type": "application/json", "schema": Employee.model_json_schema()}},
+        "response_mime_type": "application/json",
+        "response_json_schema": Employee.model_json_schema(),
     },
 )
 
@@ -611,7 +616,8 @@ const response = await ai.models.generateContent({
   model: "gemini-3.8-flash",
   contents: prompt,
   config: {
-    responseFormat: { text: { mimeType: "application/json", schema: zodToJsonSchema(employeeSchema) } },
+    responseMimeType: "application/json",
+    responseJsonSchema: zodToJsonSchema(employeeSchema),
   },
 });
 
@@ -691,29 +697,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
       "generationConfig": {
         "responseFormat": {
           "text": {
-            "mimeType": "application/json",
+            "mimeType": "APPLICATION_JSON",
             "schema": {
-          "type": "object",
-          "properties": {
-            "name": { "type": "string" },
-            "employee_id": { "type": "integer" },
-            "reports": {
-              "type": "array",
-              "description": "A list of employees reporting to this employee.",
-              "items": {
-                "$ref": "#"
-              }
+              "type": "object",
+              "properties": {
+                "name": { "type": "string" },
+                "employee_id": { "type": "integer" },
+                "reports": {
+                  "type": "array",
+                  "description": "A list of employees reporting to this employee.",
+                  "items": {
+                    "$ref": "#"
+                  }
+                }
+              },
+              "required": ["name", "employee_id", "reports"]
+            }
           }
-        }
-      }
-          },
-          "required": ["name", "employee_id", "reports"]
         }
       }
     }'
 ```
 
-**Ví dụ về câu trả lời:**
+**Örnek yanıt:**
 
 ```
 {
@@ -740,11 +746,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-## Phát trực tiếp
+## Canlı Yayın
 
-Bạn có thể truyền trực tuyến các đầu ra có cấu trúc, cho phép bạn bắt đầu xử lý phản hồi khi phản hồi đang được tạo mà không cần phải đợi toàn bộ đầu ra hoàn tất. Điều này có thể cải thiện hiệu suất cảm nhận của ứng dụng.
+Yapılandırılmış çıktıları akış olarak alabilirsiniz. Bu sayede, tüm çıktının tamamlanmasını beklemeden yanıtı oluşturulurken işlemeye başlayabilirsiniz. Bu sayede uygulamanızın algılanan performansını artırabilirsiniz.
 
-Các khối được truyền trực tuyến sẽ là các chuỗi JSON hợp lệ một phần, có thể được nối để tạo thành đối tượng JSON hoàn chỉnh cuối cùng.
+Akışla aktarılan parçalar, geçerli kısmi JSON dizeleri olur ve bunlar birleştirilerek nihai, eksiksiz JSON nesnesi oluşturulabilir.
 
 ### Python
 
@@ -764,7 +770,8 @@ response_stream = client.models.generate_content_stream(
     model="gemini-3.8-flash",
     contents=prompt,
     config={
-        "response_format": {"text": {"mime_type": "application/json", "schema": Feedback.model_json_schema()}},
+        "response_mime_type": "application/json",
+        "response_json_schema": Feedback.model_json_schema(),
     },
 )
 
@@ -791,7 +798,8 @@ const stream = await ai.models.generateContentStream({
   model: "gemini-3.8-flash",
   contents: prompt,
   config: {
-    responseFormat: { text: { mimeType: "application/json", schema: zodToJsonSchema(feedbackSchema) } },
+    responseMimeType: "application/json",
+    responseJsonSchema: zodToJsonSchema(feedbackSchema),
   },
 });
 
@@ -800,9 +808,14 @@ for await (const chunk of stream) {
 }
 ```
 
-## Đầu ra có cấu trúc bằng các công cụ
+## Araçlarla yapılandırılmış çıkışlar
 
-Gemini 3 cho phép bạn kết hợp Đầu ra có cấu trúc với các công cụ tích hợp, bao gồm [Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Bối cảnh từ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi#structured-output) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
+Gemini 3, yapılandırılmış çıkışları yerleşik araçlarla birleştirmenize olanak tanır. Bu araçlar arasında şunlar bulunur:
+[Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr),
+[URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr),
+[Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr),
+[Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#structured-output) ve
+[İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr).
 
 ### Python
 
@@ -819,14 +832,15 @@ class MatchResult(BaseModel):
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.1-pro-preview",
+    model="gemini-4-argon",
     contents="Search for all details for the latest Euro.",
     config={
         "tools": [
             {"google_search": {}},
             {"url_context": {}}
         ],
-        "response_format": {"text": {"mime_type": "application/json", "schema": MatchResult.model_json_schema()}},
+        "response_mime_type": "application/json",
+        "response_json_schema": MatchResult.model_json_schema(),
     },  
 )
 
@@ -851,14 +865,15 @@ const matchSchema = z.object({
 
 async function run() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.1-pro-preview",
+    model: "gemini-4-argon",
     contents: "Search for all details for the latest Euro.",
     config: {
       tools: [
         { googleSearch: {} },
         { urlContext: {} }
       ],
-      responseFormat: { text: { mimeType: "application/json", schema: zodToJsonSchema(matchSchema) } },
+      responseMimeType: "application/json",
+      responseJsonSchema: zodToJsonSchema(matchSchema),
     },
   });
 
@@ -872,7 +887,7 @@ run();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -885,125 +900,126 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
       {"urlContext": {}}
     ],
     "generationConfig": {
-        "responseFormat": {
-          "text": {
-            "mimeType": "application/json",
-            "schema": {
+      "responseFormat": {
+        "text": {
+          "mimeType": "APPLICATION_JSON",
+          "schema": {
             "type": "object",
             "properties": {
-                "winner": {"type": "string", "description": "The name of the winner."},
-                "final_match_score": {"type": "string", "description": "The final score."},
-                "scorers": {
-                    "type": "array",
-                    "items": {"type": "string"},
-                    "description": "The name of the scorer."
-                }
+              "winner": {"type": "string", "description": "The name of the winner."},
+              "final_match_score": {"type": "string", "description": "The final score."},
+              "scorers": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "The name of the scorer."
+              }
+            },
+            "required": ["winner", "final_match_score", "scorers"]
           }
         }
-      },
-            "required": ["winner", "final_match_score", "scorers"]
-        }
+      }
     }
   }'
 ```
 
-## Hỗ trợ giản đồ JSON
+## JSON şeması desteği
 
-Để tạo một đối tượng JSON, hãy đặt `response_format` trong cấu hình tạo. Giản đồ phải là một [Giản đồ JSON](https://json-schema.org/) hợp lệ mô tả định dạng đầu ra mong muốn.
+JSON nesnesi oluşturmak için oluşturma yapılandırmasında `response_json_schema` (veya REST'te `responseFormat.text.schema`) değerini ayarlayın. Şema, istenen çıkış biçimini açıklayan geçerli bir [JSON şeması](https://json-schema.org/) olmalıdır.
 
-Sau đó, mô hình sẽ tạo ra một phản hồi là chuỗi JSON hợp lệ về mặt cú pháp, khớp với giản đồ được cung cấp. Khi sử dụng dữ liệu đầu ra có cấu trúc, mô hình sẽ tạo dữ liệu đầu ra theo cùng thứ tự với các khoá trong giản đồ.
+Ardından model, sağlanan şemayla eşleşen ve söz dizimi açısından geçerli bir JSON dizesi olan bir yanıt oluşturur. Yapılandırılmış çıkışlar kullanıldığında model, şemadaki anahtarlarla aynı sırada çıkışlar üretir.
 
-Chế độ đầu ra có cấu trúc của Gemini hỗ trợ một phần của quy cách [Giản đồ JSON](https://json-schema.org).
+Gemini'ın yapılandırılmış çıkış modu, [JSON Şeması](https://json-schema.org) spesifikasyonunun bir alt kümesini destekler.
 
-Sau đây là các giá trị được hỗ trợ của `type`:
+`type` için aşağıdaki değerler desteklenir:
 
-- **`string`**: Đối với văn bản.
-- **`number`**: Đối với số dấu phẩy động.
-- **`integer`**: Đối với số nguyên.
-- **`boolean`**: Đối với giá trị đúng/sai.
-- **`object`**: Đối với dữ liệu có cấu trúc có các cặp khoá-giá trị.
-- **`array`**: Đối với danh sách các mục.
-- **`null`**: Để cho phép một thuộc tính có giá trị rỗng, hãy thêm `"null"` vào mảng loại (ví dụ: `{"type": ["string", "null"]}`).
+- **`string`**: Metin için.
+- **`number`**: Kayan noktalı sayılar için.
+- **`integer`**: Tam sayılar için.
+- **`boolean`**: Doğru/yanlış değerleri için.
+- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
+- **`array`**: Öğe listeleri için kullanılır.
+- **`null`**: Bir özelliğin boş olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
 
-Những thuộc tính mô tả này giúp hướng dẫn mô hình:
+Bu açıklayıcı özellikler, modele yol gösterir:
 
-- **`title`**: Nội dung mô tả ngắn về một thuộc tính.
-- **`description`**: Nội dung mô tả dài và chi tiết hơn về một tài sản.
+- **`title`**: Bir mülkün kısa açıklaması.
+- **`description`**: Bir mülkün daha uzun ve daha ayrıntılı açıklaması.
 
-### Thuộc tính dành riêng cho từng loại
+### Türe özel özellikler
 
-**Đối với các giá trị `object`:**
+**`object` değerleri için:**
 
-- **`properties`**: Một đối tượng trong đó mỗi khoá là tên thuộc tính và mỗi giá trị là một giản đồ cho thuộc tính đó.
-- **`required`**: Một mảng gồm các chuỗi, liệt kê những thuộc tính bắt buộc.
-- **`additionalProperties`**: Kiểm soát xem các thuộc tính không có trong `properties` có được phép hay không. Có thể là một giá trị boolean hoặc một giản đồ.
+- **`properties`**: Her anahtarın bir özellik adı ve her değerin bu özelliğin şeması olduğu bir nesne.
+- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dize dizisi.
+- **`additionalProperties`**: `properties` içinde listelenmeyen mülklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
 
-**Đối với các giá trị `string`:**
+**`string` değerleri için:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các chuỗi có thể có cho các tác vụ phân loại.
-- **`format`**: Chỉ định cú pháp cho chuỗi, chẳng hạn như `date-time`, `date`, `time`.
+- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir grubunu listeler.
+- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
 
-**Đối với các giá trị `number` và `integer`:**
+**`number` ve `integer` değerleri için:**
 
-- **`enum`**: Liệt kê một tập hợp cụ thể gồm các giá trị bằng số có thể có.
-- **`minimum`**: Giá trị tối thiểu bao gồm.
-- **`maximum`**: Giá trị tối đa (bao gồm).
+- **`enum`**: Belirli bir olası sayısal değerler kümesini listeler.
+- **`minimum`**: Minimum dahil edilen değer.
+- **`maximum`**: Maksimum dahil edilen değer.
 
-**Đối với các giá trị `array`:**
+**`array` değerleri için:**
 
-- **`items`**: Xác định giản đồ cho tất cả các mục trong mảng.
-- **`prefixItems`**: Xác định danh sách giản đồ cho N mục đầu tiên, cho phép các cấu trúc giống như bộ giá trị.
-- **`minItems`**: Số lượng tối thiểu các mục trong mảng.
-- **`maxItems`**: Số lượng tối đa của các mục trong mảng.
+- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
+- **`prefixItems`**: İlk N öğe için şema listesi tanımlayarak tuple benzeri yapılara olanak tanır.
+- **`minItems`**: Dizideki minimum öğe sayısı.
+- **`maxItems`**: Dizideki maksimum öğe sayısı.
 
-## Hỗ trợ mô hình
+## Model desteği
 
-Các mô hình sau đây hỗ trợ đầu ra có cấu trúc:
+Aşağıdaki modeller yapılandırılmış çıkışı destekler:
 
-| Mô hình | Đầu ra có cấu trúc |
+| Model | Yapılandırılmış Çıkışlar |
 | --- | --- |
+| Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Gemini 3.1 Pro (Bản xem trước) | ✔️ |
-| Bản xem trước Gemini 3.1 Flash-Lite | ✔️ |
+| Gemini 3.1 Pro Preview | ✔️ |
+| Gemini 3.1 Flash-Lite Preview | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* Xin lưu ý rằng Gemini 2.0 yêu cầu danh sách `propertyOrdering` rõ ràng trong dữ liệu đầu vào JSON để xác định cấu trúc ưu tiên. Bạn có thể xem ví dụ trong [sổ tay](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) này.*
+*\* Gemini 2.0'ın, tercih edilen yapıyı tanımlamak için JSON girişinde açık bir `propertyOrdering` listesi gerektirdiğini unutmayın. Bu [yemek kitabında](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) bir örnek bulabilirsiniz.*
 
-## Đầu ra có cấu trúc so với gọi hàm
+## Yapılandırılmış çıkışlar ve işlev çağrısı
 
-Cả đầu ra có cấu trúc và lệnh gọi hàm đều sử dụng giản đồ JSON, nhưng chúng phục vụ các mục đích khác nhau:
+Hem yapılandırılmış çıkışlar hem de işlev çağrısı JSON şemalarını kullanır ancak farklı amaçlara hizmet eder:
 
-| Tính năng | Trường hợp sử dụng chính |
+| Özellik | Birincil Kullanım Alanı |
 | --- | --- |
-| **Đầu ra có cấu trúc** | **Định dạng câu trả lời cuối cùng cho người dùng.** Hãy sử dụng tham số này khi bạn muốn *câu trả lời* của mô hình ở một định dạng cụ thể (ví dụ: trích xuất dữ liệu từ một tài liệu để lưu vào cơ sở dữ liệu). |
-| **Lệnh gọi hàm** | **Thực hiện hành động trong cuộc trò chuyện.** Hãy sử dụng câu lệnh này khi mô hình cần *hỏi bạn* thực hiện một việc (ví dụ: "xem thời tiết hiện tại") trước khi có thể đưa ra câu trả lời cuối cùng. |
+| **Yapılandırılmış çıkışlar** | **Kullanıcıya verilecek son yanıtı biçimlendirme** Modelin *yanıtının* belirli bir biçimde olmasını istediğinizde (ör. bir belgeden veri ayıklayıp veritabanına kaydetme) bu yöntemi kullanın. |
+| **İşlev Çağırma** | **Görüşme sırasında harekete geçme** Modelin nihai bir yanıt verebilmesi için bir görevi yerine getirmenizi *istemesi* gerektiğinde (ör. "mevcut hava durumunu öğren") bu seçeneği kullanın. |
 
-## Các phương pháp hay nhất
+## En iyi uygulamalar
 
-- **Nội dung mô tả rõ ràng:** Sử dụng trường `description` trong giản đồ để cung cấp hướng dẫn rõ ràng cho mô hình về ý nghĩa của từng thuộc tính. Điều này rất quan trọng để hướng dẫn đầu ra của mô hình.
-- **Nhập mạnh:** Sử dụng các loại cụ thể (`integer`, `string`, `enum`) bất cứ khi nào có thể. Nếu một tham số có một tập hợp giới hạn các giá trị hợp lệ, hãy sử dụng `enum`.
-- **Thiết kế câu lệnh:** Nêu rõ trong câu lệnh những việc bạn muốn mô hình thực hiện. Ví dụ: "Trích xuất thông tin sau đây từ văn bản..." hoặc "Phân loại ý kiến phản hồi này theo lược đồ được cung cấp...".
-- **Xác thực:** Mặc dù đầu ra có cấu trúc đảm bảo JSON có cú pháp chính xác, nhưng không đảm bảo các giá trị có ngữ nghĩa chính xác. Luôn xác thực đầu ra cuối cùng trong mã xử lý ứng dụng trước khi sử dụng.
-- **Xử lý lỗi:** Triển khai quy trình xử lý lỗi mạnh mẽ trong ứng dụng của bạn để quản lý một cách thích hợp các trường hợp mà đầu ra của mô hình, mặc dù tuân thủ giản đồ, nhưng có thể không đáp ứng các yêu cầu về logic nghiệp vụ của bạn.
+- **Net açıklamalar:** Modele her bir özelliğin neyi temsil ettiğiyle ilgili net talimatlar vermek için şemanızdaki `description` alanını kullanın. Bu, modelin çıkışını yönlendirmek için çok önemlidir.
+- **Güçlü yazma:** Mümkün olduğunda belirli türleri (`integer`, `string`, `enum`) kullanın. Bir parametrenin sınırlı sayıda geçerli değeri varsa `enum` kullanın.
+- **İstem mühendisliği:** İsteminizde modelin ne yapmasını istediğinizi açıkça belirtin. Örneğin, "Metinden aşağıdaki bilgileri çıkarın..." veya "Bu geri bildirimi sağlanan şemaya göre sınıflandırın...".
+- **Doğrulama:** Yapılandırılmış çıkış, söz dizimi açısından doğru JSON'u garanti etse de değerlerin anlamsal olarak doğru olduğunu garanti etmez. Uygulama kodunuzdaki nihai çıkışı kullanmadan önce her zaman doğrulayın.
+- **Hata işleme:** Modelin çıkışının şemaya uygun olsa da iş mantığı gereksinimlerinizi karşılamadığı durumları sorunsuz bir şekilde yönetmek için uygulamanızda güçlü hata işleme özellikleri uygulayın.
 
-## Các điểm hạn chế
+## Sınırlamalar
 
-- **Tập hợp con của giản đồ:** Không phải tất cả các tính năng của quy cách Giản đồ JSON đều được hỗ trợ. Mô hình này bỏ qua các thuộc tính không được hỗ trợ.
-- **Độ phức tạp của giản đồ:** API có thể từ chối các giản đồ quá lớn hoặc được lồng sâu. Nếu bạn gặp lỗi, hãy thử đơn giản hoá giản đồ bằng cách rút ngắn tên thuộc tính, giảm số lượng lớp lồng nhau hoặc giới hạn số lượng ràng buộc.
+- **Şema alt kümesi:** JSON Şeması spesifikasyonunun tüm özellikleri desteklenmez. Model, desteklenmeyen özellikleri yoksayar.
+- **Şema karmaşıklığı:** API, çok büyük veya derinlemesine iç içe yerleştirilmiş şemaları reddedebilir. Hatalarla karşılaşırsanız özellik adlarını kısaltarak, iç içe yerleştirmeyi azaltarak veya kısıtlama sayısını sınırlayarak şemanızı basitleştirmeyi deneyin.
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-10-09 UTC.
+Son güncelleme tarihi: 2026-10-19 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-09 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-19 UTC."],[],[]]

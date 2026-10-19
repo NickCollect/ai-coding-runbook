@@ -1,70 +1,81 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id
-fetched_at: 2026-10-12T06:52:33.281875+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi
+fetched_at: 2026-10-19T05:44:17.117652+00:00
 title: "Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
 # Interactions API
 
-Interactions API adalah cara terbaik untuk membangun dengan model dan agen Gemini. Mulai Juni 2026, fitur ini Tersedia Secara Umum dan direkomendasikan untuk semua project baru. Meskipun kini dianggap sebagai API lama, API
-[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=id) asli
-tetap didukung sepenuhnya.
+Interactions API là cách tốt nhất để xây dựng bằng các mô hình và tác nhân Gemini. Kể từ tháng 6 năm 2026, API này sẽ được cung cấp rộng rãi và được đề xuất cho tất cả các dự án mới. Mặc dù hiện được coi là API cũ, nhưng API
+[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=vi)
+vẫn được hỗ trợ đầy đủ.
 
-## Mengapa menggunakan Interactions API?
+## Tại sao bạn nên sử dụng Interactions API?
 
-- **Antarmuka universal untuk semua aplikasi**: Dirancang sebagai antarmuka standar untuk setiap kasus penggunaan, termasuk pembuatan teks satu giliran, pemahaman multimodal, output terstruktur, orkestrasi alat, dan Agentic Workflows.
-- **Satu API untuk model dan agen**: Satu endpoint dan pola terpadu untuk memanggil model Gemini standar serta agen khusus secara langsung (seperti Deep Research dan agen yang dikelola kustom).
-- **Kemampuan baru siap pakai**: Fitur seperti status percakapan sisi server opsional menggunakan `previous_interaction_id`, langkah-langkah eksekusi yang dapat diamati untuk proses debug dan rendering UI, serta [eksekusi di latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) untuk tugas yang berjalan lama menggunakan `background=true`.
-- **Biaya lebih rendah dengan rasio hit cache yang lebih tinggi**: Saat menggunakan percakapan multi-giliran, pengelolaan status sisi server opsional memungkinkan penyiapan cache konteks yang lebih efisien di seluruh giliran, sehingga mengurangi biaya token.
-- **Tempat peluncuran fitur baru**: Ke depannya, semua model baru, kemampuan multimodal, alat, dan fitur berbasis agen akan diluncurkan di Interactions API.
+- **Giao diện chung cho tất cả ứng dụng**: Được thiết kế làm giao diện tiêu chuẩn
+  cho mọi trường hợp sử dụng, bao gồm tạo văn bản một lượt,
+  hiểu nhiều phương thức, đầu ra có cấu trúc, điều phối công cụ và
+  quy trình công việc theo tác nhân.
+- **Một API cho các mô hình và tác nhân**: Một điểm cuối và mẫu hợp nhất để
+  gọi trực tiếp các mô hình Gemini tiêu chuẩn cũng như các tác nhân chuyên biệt (chẳng hạn
+  như Deep Research và các tác nhân được quản lý tuỳ chỉnh).
+- **Các tính năng mới ngay khi dùng**: Các tính năng như trạng thái cuộc trò chuyện không bắt buộc ở phía máy chủ
+  bằng cách sử dụng `previous_interaction_id`, các bước thực thi có thể quan sát được
+  để gỡ lỗi và kết xuất giao diện người dùng, cũng như thực thi ở chế độ [nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi) cho các tác vụ chạy trong thời gian dài
+  bằng cách sử dụng `background=true`.
+- **Chi phí thấp hơn với tỷ lệ kết quả tìm kiếm trong bộ nhớ cache cao hơn**: Khi sử dụng các cuộc trò chuyện nhiều lượt, tính năng quản lý trạng thái không bắt buộc ở phía máy chủ cho phép lưu vào bộ nhớ đệm ngữ cảnh hiệu quả hơn trên các lượt, giúp giảm chi phí token.
+- **Nơi ra mắt các tính năng mới**: Trong tương lai, tất cả các mô hình mới, tính năng nhiều phương thức
+  , công cụ và tính năng theo tác nhân sẽ ra mắt trên Interactions
+  API.
 
-Secara default, Interactions API menyimpan permintaan sehingga Anda dapat memanfaatkan fitur pengelolaan status sisi server menggunakan `previous_interaction_id`. Anda dapat memilih untuk menggunakan perilaku tanpa status dengan menyetel
-`store=false`. Lihat bagian [retensi data](#data-storage-retention) untuk mengetahui detailnya.
+Theo mặc định, Interactions API sẽ lưu trữ các yêu cầu để bạn có thể tận dụng các tính năng quản lý trạng thái ở phía máy chủ bằng cách sử dụng `previous_interaction_id`. Bạn có thể chọn hành vi không trạng thái bằng cách đặt `store=false`. Hãy xem phần [giữ lại dữ liệu](#data-storage-retention) để biết thông tin chi tiết.
 
-## Mulai
+## Bắt đầu
 
-- **Siapkan agen coding Anda**: Hubungkan ke **MCP Dokumen Gemini** dan instal
-  keterampilan `gemini-api-dev` untuk memberi asisten Anda akses langsung ke
-  dokumentasi developer dan praktik terbaik terbaru. Untuk mengetahui langkah-langkah mendetail, lihat
-  [panduan Menyiapkan agen coding Anda](https://ai.google.dev/gemini-api/docs/coding-agents?hl=id)
-- **Bermigrasi dari `generateContent`**: Jika Anda memiliki integrasi yang sudah ada, ikuti [Panduan migrasi](https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=id) untuk beralih ke Interactions API.
-- **Mulai**: Ikuti langkah-langkah dalam panduan [Mulai menggunakan Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=id).
+- **Thiết lập tác nhân lập trình**: Kết nối với **Gemini Docs MCP** và cài đặt
+  kỹ năng `gemini-api-dev` để cấp cho trợ lý của bạn quyền truy cập trực tiếp vào
+  tài liệu mới nhất dành cho nhà phát triển và các phương pháp hay nhất. Để biết các bước chi tiết, hãy xem
+  [hướng dẫn Thiết lập tác nhân lập trình](https://ai.google.dev/gemini-api/docs/coding-agents?hl=vi)
+- **Di chuyển từ `generateContent`**: Nếu bạn đã tích hợp,
+  hãy làm theo [Hướng dẫn di chuyển](https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=vi) để
+  chuyển sang Interactions API.
+- **Bắt đầu**: Làm theo các bước trong hướng dẫn [Bắt đầu sử dụng Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=vi).
 
-### Panduan fitur
+### Hướng dẫn về tính năng
 
-Jelajahi kemampuan spesifik Interactions API melalui panduan ini. Anda dapat menggunakan tombol di halaman ini untuk beralih antara generateContent dan Interactions API:
+Khám phá các tính năng cụ thể của Interactions API thông qua các hướng dẫn này. Bạn có thể sử dụng nút bật/tắt trên các trang này để chuyển đổi giữa generateContent và Interactions API:
 
-- [Pembuatan teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id)
-- [Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)
-- [Pemahaman gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id)
-- [Pemahaman audio](https://ai.google.dev/gemini-api/docs/audio?hl=id)
-- [Pemahaman video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id)
-- [Pemrosesan dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id)
-- [Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
-- [Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)
-- [Agen Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id)
-- [Inferensi Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)
-- [Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi)
+- [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)
+- [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi)
+- [Hiểu âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi)
+- [Hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi)
+- [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi)
+- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)
+- [Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)
+- [Tác nhân Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi)
+- [Suy luận linh hoạt](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi)
+- [Suy luận theo mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi)
 
-## Cara kerja Interactions API
+## Cách thức hoạt động của Interactions API
 
-Interactions API berpusat pada resource inti: [**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=id#Resource:Interaction). `Interaction` mewakili giliran yang lengkap dalam percakapan atau tugas. Objek ini berfungsi sebagai catatan sesi, yang berisi seluruh histori interaksi sebagai urutan **langkah eksekusi** secara kronologis. Langkah-langkah ini mencakup pemikiran model, panggilan dan hasil alat sisi server atau sisi klien (seperti `function_call` dan `function_result`), serta `model_output` akhir. Resource yang disimpan (diambil melalui `interactions.get`) juga mencakup langkah-langkah `user_input` untuk konteks lengkap, meskipun respons `interactions.create` hanya menampilkan langkah-langkah yang dihasilkan model.
+Interactions API tập trung vào một tài nguyên cốt lõi: [**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=vi#Resource:Interaction). `Interaction` đại diện cho một lượt hoàn chỉnh trong cuộc trò chuyện hoặc tác vụ. Đối tượng này hoạt động như một bản ghi phiên, chứa toàn bộ nhật ký tương tác dưới dạng một chuỗi **các bước thực thi** theo trình tự thời gian. Các bước này bao gồm ý tưởng của mô hình, lệnh gọi và kết quả của công cụ ở phía máy chủ hoặc phía máy khách (chẳng hạn như `function_call` và `function_result`) và `model_output` cuối cùng. Tài nguyên được lưu trữ (truy xuất thông qua `interactions.get`) cũng bao gồm các bước `user_input` cho toàn bộ bối cảnh, mặc dù phản hồi `interactions.create` chỉ trả về các bước do mô hình tạo.
 
-Saat melakukan panggilan ke
-[`interactions.create`](https://ai.google.dev/api/interactions-api?hl=id#CreateInteraction), Anda
-membuat resource `Interaction` baru:
+Khi bạn gọi
+[`interactions.create`](https://ai.google.dev/api/interactions-api?hl=vi#CreateInteraction), bạn đang
+tạo một tài nguyên `Interaction` mới:
 
 ### Python
 
@@ -169,9 +180,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Pengelolaan status sisi server
+### Quản lý trạng thái ở phía máy chủ
 
-Anda dapat menggunakan `id` interaksi yang telah selesai dalam panggilan berikutnya menggunakan parameter `previous_interaction_id` untuk melanjutkan percakapan. Server menggunakan ID ini untuk mengambil histori percakapan, sehingga Anda tidak perlu mengirim ulang seluruh histori chat:
+Bạn có thể sử dụng `id` của một lượt tương tác đã hoàn tất trong lệnh gọi tiếp theo bằng cách sử dụng
+`previous_interaction_id` để tiếp tục cuộc trò chuyện. Máy chủ sử dụng mã nhận dạng này để truy xuất nhật ký trò chuyện, giúp bạn không phải gửi lại toàn bộ nhật ký trò chuyện:
 
 ### Python
 
@@ -325,130 +337,125 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Parameter `previous_interaction_id` hanya mempertahankan histori percakapan (input dan output) menggunakan `previous_interaction_id`. Parameter lainnya adalah **cakupan interaksi**
-dan hanya berlaku untuk interaksi tertentu yang saat ini Anda buat:
+Tham số `previous_interaction_id` chỉ giữ lại nhật ký trò chuyện (dữ liệu đầu vào và đầu ra) bằng cách sử dụng `previous_interaction_id`. Các tham số khác là **theo phạm vi tương tác** và chỉ áp dụng cho lượt tương tác cụ thể mà bạn hiện đang tạo:
 
 - `tools`
 - `system_instruction`
-- `generation_config` (termasuk `thinking_level`, `temperature`, dll.)
+- `generation_config` (bao gồm `thinking_level`, `temperature`, v.v.)
 
-Artinya, Anda harus menentukan ulang parameter ini di setiap interaksi baru jika ingin menerapkannya. Pengelolaan status sisi server ini bersifat opsional; Anda juga dapat
-beroperasi dalam mode stateless dengan mengirimkan histori percakapan lengkap di setiap
-permintaan.
+Điều này có nghĩa là bạn phải chỉ định lại các tham số này trong mỗi lượt tương tác mới nếu muốn áp dụng các tham số đó. Bạn có thể chọn quản lý trạng thái ở phía máy chủ; bạn cũng có thể hoạt động ở chế độ không trạng thái bằng cách gửi toàn bộ nhật ký trò chuyện trong mỗi yêu cầu.
 
-### Penyimpanan dan retensi data
+### Lưu trữ và giữ lại dữ liệu
 
-Secara default, API menyimpan semua objek Interaksi (`store=true`) untuk
-menyederhanakan penggunaan fitur pengelolaan status sisi server (dengan
-`previous_interaction_id`), [eksekusi latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) (menggunakan `background=true`), dan
-tujuan observasi.
+Theo mặc định, API sẽ lưu trữ tất cả đối tượng Tương tác (`store=true`) để
+đơn giản hoá việc sử dụng các tính năng quản lý trạng thái ở phía máy chủ (với
+`previous_interaction_id`), [thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi) (sử dụng `background=true`) và
+mục đích quan sát.
 
-- **Paket berbayar**: Sistem menyimpan interaksi selama **55 hari**.
-- **Paket gratis**: Sistem menyimpan interaksi selama **1 hari**.
+- **Cấp trả phí**: Hệ thống giữ lại các lượt tương tác trong **55 ngày**.
+- **Cấp miễn phí**: Hệ thống giữ lại các lượt tương tác trong **1 ngày**.
 
-Jika tidak menginginkannya, Anda dapat
-menetapkan `store=false` dalam permintaan Anda. Kontrol ini terpisah dari pengelolaan status
-; Anda dapat menonaktifkan penyimpanan untuk interaksi apa pun. Namun, perhatikan bahwa
-`store=false` tidak kompatibel dengan [eksekusi di latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) dan mencegah penggunaan
-`previous_interaction_id` untuk giliran berikutnya.
+Nếu không muốn điều này, bạn có thể đặt `store=false` trong yêu cầu. Chế độ kiểm soát này tách biệt với tính năng quản lý trạng thái; bạn có thể chọn không lưu trữ cho bất kỳ lượt tương tác nào. Tuy nhiên, xin lưu ý rằng
+`store=false` không tương thích với [tính năng thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi) và ngăn việc sử dụng
+`previous_interaction_id` cho các lượt tiếp theo.
 
-Untuk project Tingkat Berbayar, Anda dapat mengonfigurasi periode retensi di
-[AI Studio](https://aistudio.google.com/logs?hl=id) untuk otomatis menandai log agar
-dihapus dari penyimpanan project setelah 7, 14, 28, atau 55 hari. Periode retensi yang lebih singkat dapat memengaruhi pengambilan percakapan sebelumnya.
+Đối với các dự án ở Cấp trả phí, bạn có thể định cấu hình khoảng thời gian giữ lại trong
+[AI Studio](https://aistudio.google.com/logs?hl=vi) để tự động đánh dấu nhật ký cần
+xoá khỏi bộ nhớ dự án sau 7, 14, 28 hoặc 55 ngày. Thời gian giữ lại ngắn hơn có thể ảnh hưởng đến việc truy xuất các cuộc trò chuyện trước đây.
 
-Anda dapat menghapus interaksi tersimpan kapan saja menggunakan metode
-[`delete`](https://ai.google.dev/api/interactions-api?hl=id#deleteInteraction) secara terprogram,
-yang memerlukan ID interaksi. Anda juga dapat melihat dan mengelola log interaksi tersimpan, termasuk penghapusan dari penyimpanan project, di [AI Studio](https://aistudio.google.com/logs?hl=id).
+Bạn có thể xoá các lượt tương tác đã lưu trữ bất cứ lúc nào bằng phương thức
+[`delete`](https://ai.google.dev/api/interactions-api?hl=vi#deleteInteraction) theo lập trình,
+phương thức này yêu cầu mã lượt tương tác. Bạn cũng có thể xem và quản lý nhật ký các lượt tương tác đã lưu trữ, bao gồm cả việc xoá khỏi bộ nhớ dự án, trong
+[AI Studio](https://aistudio.google.com/logs?hl=vi).
 
-Setelah periode retensi berakhir, data Anda akan dihapus secara otomatis.
+Sau khi hết thời gian giữ lại, dữ liệu của bạn sẽ tự động bị xoá.
 
-Objek interaksi diproses sesuai dengan [persyaratan](https://ai.google.dev/gemini-api/terms?hl=id).
+Các đối tượng tương tác được xử lý theo các [điều khoản](https://ai.google.dev/gemini-api/terms?hl=vi).
 
-### Melihat interaksi di AI Studio
+### Xem các lượt tương tác trong AI Studio
 
-API menyimpan permintaan Interactions API yang dieksekusi dengan `store=true` untuk
-project di Tingkat Berbayar. Anda dapat melihatnya langsung dari
-[halaman Log di Google AI Studio](https://aistudio.google.com/logs?hl=id). Lihat
-[Panduan log](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=id) untuk mengetahui informasi selengkapnya.
+API lưu trữ các yêu cầu Interactions API được thực thi bằng `store=true` cho các dự án ở Cấp trả phí. Bạn có thể xem trực tiếp các yêu cầu này từ trang
+[Nhật ký trong Google AI Studio](https://aistudio.google.com/logs?hl=vi). Xem hướng dẫn
+[Nhật ký](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=vi) để biết thêm thông tin.
 
-## Praktik terbaik
+## Các phương pháp hay nhất
 
-- **Rasio hit cache**: Peng-cache-an implisit didukung dalam mode stateful dan stateless (lihat [Panduan memulai](https://ai.google.dev/gemini-api/docs/get-started?hl=id#4_multi-turn_conversations)). Penggunaan
-  `previous_interaction_id` (berstatus) untuk melanjutkan percakapan memungkinkan
-  sistem lebih mudah memanfaatkan caching implisit untuk histori
-  percakapan, yang meningkatkan performa dan mengurangi biaya.
-- **Mencampur interaksi**: Anda memiliki fleksibilitas untuk mencampur dan mencocokkan interaksi Agen dan Model dalam percakapan. Misalnya, Anda dapat menggunakan agen khusus, seperti agen Deep Research, untuk pengumpulan data awal, lalu menggunakan model Gemini standar untuk tugas lanjutan seperti meringkas atau memformat ulang, dengan menautkan langkah-langkah ini dengan `previous_interaction_id`.
+- **Tỷ lệ kết quả tìm kiếm trong bộ nhớ cache**: Tính năng lưu vào bộ nhớ đệm ngầm được hỗ trợ ở cả chế độ có trạng thái và
+  chế độ không lưu trạng thái (xem phần
+  [Bắt đầu nhanh](https://ai.google.dev/gemini-api/docs/get-started?hl=vi#4_multi-turn_conversations)). Việc sử dụng `previous_interaction_id` (có trạng thái) để tiếp tục cuộc trò chuyện cho phép hệ thống dễ dàng sử dụng tính năng lưu vào bộ nhớ đệm ngầm cho nhật ký trò chuyện, giúp cải thiện hiệu suất và giảm chi phí.
+- **Kết hợp các lượt tương tác**: Bạn có thể linh hoạt kết hợp các lượt tương tác của Tác nhân và
+  Mô hình trong một cuộc trò chuyện. Ví dụ: bạn có thể sử dụng một tác nhân chuyên biệt, chẳng hạn như tác nhân Deep Research, để thu thập dữ liệu ban đầu, sau đó sử dụng mô hình Gemini tiêu chuẩn cho các tác vụ tiếp theo như tóm tắt hoặc định dạng lại, liên kết các bước này với `previous_interaction_id`.
 
-## Model & agen yang didukung
+## Các mô hình và tác nhân được hỗ trợ
 
-| Nama Model | Jenis | ID Model |
+| Tên mô hình | Loại | Mã kiểu máy |
 | --- | --- | --- |
-| Gemini 3.8 Flash | Model | `gemini-3.8-flash` |
-| Gemini 3.6 Flash | Model | `gemini-3.6-flash` |
-| Pratinjau Gemini 3.1 Pro | Model | `gemini-3.1-pro-preview` |
-| Gemini 3.5 Flash-Lite | Model | `gemini-3.5-flash-lite` |
-| Gemini 3.1 Flash-Lite | Model | `gemini-3.1-flash-lite` |
-| Pratinjau Gemini 3 Flash | Model | `gemini-3-flash-preview` |
-| Gemini 2.5 Pro | Model | `gemini-2.5-pro` |
-| Gemini 2.5 Flash | Model | `gemini-2.5-flash` |
-| Gemini 2.5 Flash-lite | Model | `gemini-2.5-flash-lite` |
-| Gemini 3 Pro Image | Model | `gemini-3-pro-image` |
-| Gambar Gemini 3.1 Flash | Model | `gemini-3.1-flash-image` |
-| Pratinjau Gemini 3.1 Flash TTS | Model | `gemini-3.1-flash-tts-preview` |
-| Gemma 4 31B IT | Model | `gemma-4-31b-it` |
-| Gemma 4 26B MoE IT | Model | `gemma-4-26b-a4b-it` |
-| Lyria 3.5 | Model | `lyria-3.5` |
-| Pratinjau Klip Lyria 3 | Model | `lyria-3-clip-preview` |
-| Pratinjau Lyria 3 Pro | Model | `lyria-3-pro-preview` |
-| Pratinjau Deep Research | Agen | `deep-research-preview-04-2026` |
-| Pratinjau Deep Research | Agen | `deep-research-max-preview-04-2026` |
-| Pratinjau Antigravity | Agen | `antigravity-preview-09-2026` |
+| Gemini 4 Argon | Mô hình | `gemini-4-argon` |
+| Gemini 3.8 Flash | Mô hình | `gemini-3.8-flash` |
+| Gemini 3.6 Flash | Mô hình | `gemini-3.6-flash` |
+| Bản xem trước Gemini 3.1 Pro | Mô hình | `gemini-3.1-pro-preview` |
+| Gemini 3.5 Flash-Lite | Mô hình | `gemini-3.5-flash-lite` |
+| Gemini 3.1 Flash-Lite | Mô hình | `gemini-3.1-flash-lite` |
+| Bản xem trước Gemini 3 Flash | Mô hình | `gemini-3-flash-preview` |
+| Gemini 2.5 Pro | Mô hình | `gemini-2.5-pro` |
+| Gemini 2.5 Flash | Mô hình | `gemini-2.5-flash` |
+| Gemini 2.5 Flash-lite | Mô hình | `gemini-2.5-flash-lite` |
+| Hình ảnh Gemini 3 Pro | Mô hình | `gemini-3-pro-image` |
+| Hình ảnh Gemini 3.1 Flash | Mô hình | `gemini-3.1-flash-image` |
+| Bản xem trước Gemini 3.1 Flash TTS | Mô hình | `gemini-3.1-flash-tts-preview` |
+| Gemma 4 31B IT | Mô hình | `gemma-4-31b-it` |
+| Gemma 4 26B MoE IT | Mô hình | `gemma-4-26b-a4b-it` |
+| Lyria 3.5 | Mô hình | `lyria-3.5` |
+| Bản xem trước Lyria 3 Clip | Mô hình | `lyria-3-clip-preview` |
+| Bản xem trước Lyria 3 Pro | Mô hình | `lyria-3-pro-preview` |
+| Bản xem trước Deep Research | Tác nhân | `deep-research-preview-04-2026` |
+| Bản xem trước Deep Research | Tác nhân | `deep-research-max-preview-04-2026` |
+| Bản xem trước Antigravity | Tác nhân | `antigravity-preview-09-2026` |
 
 ## SDK
 
-Anda dapat menggunakan Google GenAI SDK versi terbaru untuk mengakses
-Interactions API.
+Bạn có thể sử dụng phiên bản mới nhất của SDK Google GenAI để truy cập vào Interactions API.
 
-- Di Python, ini adalah paket `google-genai` dari versi `2.3.0` dan seterusnya.
-- Di JavaScript, ini adalah paket `@google/genai` dari versi `2.3.0` dan yang lebih baru.
-- Di Go, ini adalah paket `google.golang.org/genai`.
-- Di Java, ini adalah paket `com.google.genai:google-genai`.
+- Trên Python, đây là gói `google-genai` từ phiên bản `2.3.0` trở lên.
+- Trên JavaScript, đây là gói `@google/genai` từ phiên bản `2.3.0` trở lên.
+- Trên Go, đây là gói `google.golang.org/genai`.
+- Trên Java, đây là gói `com.google.genai:google-genai`.
 
-Anda dapat mempelajari lebih lanjut cara menginstal SDK di halaman
-[Libraries](https://ai.google.dev/gemini-api/docs/libraries?hl=id).
+Bạn có thể tìm hiểu thêm về cách cài đặt SDK trên trang
+[Thư viện](https://ai.google.dev/gemini-api/docs/libraries?hl=vi).
 
-## Batasan
+## Các điểm hạn chế
 
-- **MCP Jarak Jauh**: Gemini 3 tidak mendukung MCP jarak jauh, fitur ini akan segera hadir.
-- **Kompatibilitas model multi-giliran**: Saat menggabungkan model yang berbeda dalam percakapan (baik yang memiliki status maupun tidak), model berikutnya harus mendukung modalitas output model sebelumnya sebagai input. Misalnya, jika Anda membuat gambar menggunakan `gemini-3.1-flash-image`, Anda tidak dapat melanjutkan percakapan tersebut dengan model yang tidak menerima input gambar (seperti model khusus teks atau model pembuatan musik seperti Lyria).
+- **MCP từ xa**: Gemini 3 không hỗ trợ MCP từ xa, tính năng này sẽ sớm ra mắt.
+- **Khả năng tương thích của mô hình nhiều lượt**: Khi kết hợp các mô hình khác nhau trong một
+  cuộc trò chuyện (có trạng thái hoặc không trạng thái), các mô hình tiếp theo phải hỗ trợ
+  các phương thức đầu ra của các mô hình trước đó làm dữ liệu đầu vào. Ví dụ: nếu bạn tạo một hình ảnh bằng `gemini-3.1-flash-image`, bạn không thể tiếp tục cuộc trò chuyện đó với một mô hình không chấp nhận dữ liệu đầu vào là hình ảnh (chẳng hạn như mô hình chỉ có văn bản hoặc mô hình tạo nhạc như Lyria).
 
-Fitur berikut didukung oleh API
-[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=id), tetapi **belum
-tersedia** di Interactions API:
+Các tính năng sau được API
+[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=vi) hỗ trợ nhưng **chưa có**trong Interactions API:
 
-- **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**
-- **[Pemanggilan fungsi otomatis (Python)](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=id#automatic_function_calling_python_only)**
-- **[Penyimpanan dalam cache eksplisit](https://ai.google.dev/gemini-api/docs/caching?hl=id)**: Perhatikan bahwa penyimpanan dalam cache implisit sisi server tersedia di Interactions API
-  melalui `previous_interaction_id`.
-- **[Setelan keamanan](https://ai.google.dev/gemini-api/docs/safety-settings?hl=id)**: Setelan keamanan kustom tidak didukung di Interactions API.
+- **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**
+- **[Tự động gọi hàm (Python)](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=vi#automatic_function_calling_python_only)**
+- **[Lưu vào bộ nhớ đệm rõ ràng](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**: Xin lưu ý rằng tính năng lưu vào bộ nhớ đệm ngầm ở phía máy chủ có trong Interactions API
+  thông qua `previous_interaction_id`.
 
-## Masukan
+## Phản hồi
 
-Masukan Anda sangat penting untuk pengembangan Interactions API.
-Sampaikan pendapat Anda, laporkan bug, atau minta fitur di
-[Forum Komunitas Developer AI Google](https://discuss.ai.google.dev/c/gemini-api/4?hl=id) kami.
+Ý kiến phản hồi của bạn rất quan trọng đối với việc phát triển Interactions API.
+Hãy chia sẻ ý kiến, báo cáo lỗi hoặc yêu cầu tính năng trên
+[Diễn đàn cộng đồng nhà phát triển AI của Google](https://discuss.ai.google.dev/c/gemini-api/4?hl=vi).
 
-## Langkah berikutnya
+## Bước tiếp theo
 
-- Coba [notebook panduan memulai Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=id).
-- Pelajari lebih lanjut [agen Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id).
+- Dùng thử [sổ tay bắt đầu nhanh Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=vi).
+- Tìm hiểu thêm về [tác nhân Deep Research của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi).
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-10-09 UTC.
+Cập nhật lần gần đây nhất: 2026-10-15 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-09 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-15 UTC."],[],[]]

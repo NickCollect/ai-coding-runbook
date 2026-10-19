@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=id
-fetched_at: 2026-10-12T07:01:02.264604+00:00
-title: "Grounding with Google Search \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=fr
+fetched_at: 2026-10-19T05:53:53.096236+00:00
+title: "Ancrage avec la recherche\u00a0Google \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Kirim masukan
+Envoyer des commentaires
 
-# Grounding with Google Search
+# Ancrage avec la recherche Google
 
-Grounding with Google Search menghubungkan model Gemini ke konten web real-time dan berfungsi dengan semua bahasa yang tersedia. Dengan fitur ini, Gemini dapat memberikan jawaban yang lebih akurat dan mengutip sumber yang dapat diverifikasi di luar batas informasinya.
+L'ancrage avec la recherche Google permet d'associer le modèle Gemini à des contenus Web en temps réel et fonctionne avec toutes les langues disponibles. Cela permet à Gemini de fournir des réponses plus précises et de citer des sources vérifiables au-delà de sa date limite de connaissances.
 
-Perujukan membantu Anda membangun aplikasi yang dapat:
+L'ancrage vous aide à créer des applications capables de :
 
-- **Meningkatkan akurasi faktual:** Mengurangi halusinasi model dengan mendasarkan respons pada informasi dunia nyata.
-- **Mengakses informasi real-time:** Menjawab pertanyaan tentang peristiwa dan topik terbaru.
-- **Memberikan kutipan:** Bangun kepercayaan pengguna dengan menampilkan sumber klaim model.
+- **Améliorer la justesse factuelle** : réduisez les hallucinations du modèle en basant les réponses sur des informations réelles.
+- **Accéder à des informations en temps réel** : répondez à des questions sur des événements et des sujets récents.
+- **Fournir des citations** : gagnez la confiance des utilisateurs en indiquant les sources des affirmations du modèle.
 
 ### Python
 
@@ -139,25 +139,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cara kerja perujukan dengan Google Penelusuran
+## Fonctionnement de l'ancrage avec la recherche Google
 
-Saat Anda mengaktifkan alat `google_search`, model akan menangani seluruh alur kerja
-untuk menelusuri, memproses, dan mengutip informasi secara otomatis.
+Lorsque vous activez l'outil `google_search`, le modèle gère automatiquement l'ensemble du workflow de recherche, de traitement et de citation des informations.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=id)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=fr)
 
-1. **Perintah Pengguna:** Aplikasi Anda mengirimkan perintah pengguna ke Gemini API
-   dengan mengaktifkan alat `google_search`.
-2. **Analisis Perintah:** Model menganalisis perintah dan menentukan apakah Google Penelusuran dapat meningkatkan kualitas jawaban.
-3. **Google Penelusuran:** Jika diperlukan, model akan otomatis membuat satu atau beberapa kueri penelusuran dan menjalankannya.
-4. **Pemrosesan Hasil Penelusuran:** Model memproses hasil penelusuran, menyintesis informasi, dan merumuskan respons.
-5. **Respons yang Di-grounding:** API menampilkan respons akhir yang mudah digunakan dan
-   didasarkan pada hasil penelusuran. Respons ini mencakup jawaban teks model dengan `annotations` inline yang berisi kutipan, serta langkah-langkah `google_search_call` dan `google_search_result` dengan kueri penelusuran dan saran penelusuran.
+1. **Requête utilisateur** : votre application envoie la requête d'un utilisateur à l'API Gemini avec l'outil `google_search` activé.
+2. **Analyse de la requête** : le modèle analyse la requête et détermine si une recherche Google peut améliorer la réponse.
+3. **Recherche Google** : si nécessaire, le modèle génère automatiquement une ou plusieurs requêtes de recherche et les exécute.
+4. **Traitement des résultats de recherche** : le modèle traite les résultats de recherche, synthétise les informations et formule une réponse.
+5. **Réponse ancrée** : l'API renvoie une réponse finale et conviviale qui est ancrée dans les résultats de recherche. Cette réponse inclut la réponse textuelle du modèle avec des `annotations` intégrées contenant les citations, ainsi que les étapes `google_search_call` et `google_search_result` avec les requêtes de recherche et les suggestions de recherche.
 
-## Memahami respons perujukan
+## Comprendre la réponse d'ancrage
 
-Jika respons berhasil dirujuk, output teks model akan menyertakan `annotations` inline langsung di blok konten teks. Anotasi ini
-memberikan informasi kutipan yang menautkan bagian respons ke sumbernya.
+Lorsqu'une réponse est correctement ancrée, la sortie textuelle du modèle inclut des `annotations` intégrées directement dans le bloc de contenu textuel. Ces annotations fournissent des informations de citation qui associent des parties de la réponse à leurs sources.
 
 ```
 {
@@ -216,21 +212,20 @@ memberikan informasi kutipan yang menautkan bagian respons ke sumbernya.
 }
 ```
 
-Kolom utama dalam respons:
+Les champs clés de la réponse sont les suivants :
 
-- `google_search_call` : Berisi penelusuran `queries` yang dijalankan model.
-- `google_search_result` : Berisi `search_suggestions`, cuplikan HTML
-  untuk merender saran penelusuran di UI Anda. Persyaratan penggunaan lengkap dijelaskan dalam [Persyaratan Layanan](https://ai.google.dev/gemini-api/terms?hl=id#grounding-with-google-search).
-- `text` dengan `annotations` : Jawaban yang disintesis model dengan kutipan inline. Setiap anotasi `url_citation` menautkan segmen teks (ditentukan
-  oleh `start_index` dan `end_index`) ke URL sumber. Langkah ini adalah kunci untuk membuat kutipan sebaris.
+- `google_search_call` : contient les `queries` de recherche exécutées par le modèle.
+- `google_search_result` : contient `search_suggestions`, un extrait HTML permettant d'afficher des suggestions de recherche dans votre UI. Les conditions d'utilisation complètes sont
+  détaillées dans les [Conditions d'utilisation](https://ai.google.dev/gemini-api/terms?hl=fr#grounding-with-google-search).
+- `text` avec `annotations` : réponse synthétisée du modèle avec des citations intégrées. Chaque annotation `url_citation` associe un segment de texte (défini par `start_index` et `end_index`) à une URL source. C'est la clé pour créer des citations intégrées.
 
-Pen-groundingan dengan Google Penelusuran juga dapat digunakan bersama dengan [alat konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id) untuk men-grounding respons dalam
-data web publik dan URL tertentu yang Anda berikan.
+L'ancrage avec la recherche Google peut également être utilisé en combinaison avec l'outil de contexte d'[URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) pour ancrer les réponses à la fois dans
+les données Web publiques et les URL spécifiques que vous fournissez.
 
-## Mengatribusikan sumber dengan kutipan di dalam teks
+## Attribuer des sources avec des citations intégrées
 
-API menampilkan anotasi `url_citation` inline pada blok konten teks, sehingga Anda memiliki kontrol penuh atas cara menampilkan sumber di antarmuka pengguna.
-Setiap anotasi menyertakan `start_index` dan `end_index` untuk mengidentifikasi bagian teks yang dikutipnya. Berikut cara mengekstrak dan menampilkannya.
+L'API renvoie des annotations `url_citation` intégrées dans le bloc de contenu textuel, ce qui vous permet de contrôler entièrement la façon dont vous affichez les sources dans votre interface utilisateur.
+Chaque annotation inclut `start_index` et `end_index` pour identifier la partie du texte qu'elle cite. Voici comment les extraire et les afficher.
 
 ### Python
 
@@ -419,7 +414,7 @@ func main() {
 }
 ```
 
-Output akan menampilkan teks yang diikuti dengan kutipannya:
+La sortie affiche le texte suivi de ses citations :
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -431,58 +426,61 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## Harga
+## Tarifs
 
-Saat Anda menggunakan Grounding with Google Search dengan Gemini 3 dan model yang lebih baru, project Anda akan ditagih untuk **setiap** kueri penelusuran yang diputuskan untuk dijalankan oleh model.
-Model penagihan per kueri ini mencakup 5.000 permintaan penelusuran gratis per bulan yang dibagikan di semua model Gemini 3 dan yang lebih baru, lalu dikenai biaya **$14 per 1.000 permintaan penelusuran**.
+Lorsque vous utilisez l'ancrage avec la recherche Google avec les modèles Gemini 3 et versions ultérieures, votre projet est facturé pour **chaque** requête de recherche que le modèle décide d'exécuter.
+Ce modèle de facturation par requête inclut 5 000 requêtes de recherche sans frais par mois partagées entre tous les modèles Gemini 3 et versions ultérieures, puis coûte **14 $ pour 1 000 requêtes de recherche**.
 
-Misalnya, jika model memutuskan untuk menjalankan beberapa kueri penelusuran untuk menjawab satu perintah (misalnya, menelusuri `"UEFA Euro 2024 winner"` dan `"Spain vs
-England Euro 2024 final score"` dalam panggilan API yang sama), hal ini dihitung sebagai dua penggunaan alat yang dapat ditagih untuk permintaan tersebut. Untuk tujuan penagihan, kami mengabaikan
-kueri penelusuran web kosong saat menghitung kueri unik.
+Par exemple, si le modèle décide d'exécuter plusieurs requêtes de recherche pour répondre
+à une seule requête (par exemple, en recherchant `"UEFA Euro 2024 winner"` et `"Spain vs
+England Euro 2024 final score"` dans le même appel d'API), cela compte comme deux
+utilisations facturables de l'outil pour cette requête. À des fins de facturation, nous ignorons les requêtes de recherche Web vides lors du comptage des requêtes uniques.
 
-Saat Anda menggunakan perujukan penelusuran dengan model Gemini 2.5 atau yang lebih lama, project Anda ditagih per perintah.
+Lorsque vous utilisez l'ancrage de recherche avec les modèles Gemini 2.5 ou versions antérieures, votre projet est facturé par requête.
 
-Untuk mengetahui informasi harga mendetail, lihat [halaman harga Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=id).
+Pour obtenir des informations détaillées sur les tarifs, consultez la [page Tarifs de l'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
 
-## Model yang didukung
+## Modèles compatibles
 
-Anda dapat menemukan kemampuan lengkap di halaman [ringkasan model](https://ai.google.dev/gemini-api/docs/models?hl=id).
+Vous trouverez toutes les fonctionnalités sur la page de présentation du [modèle
+vue d'ensemble](https://ai.google.dev/gemini-api/docs/models?hl=fr).
 
-| Model | Grounding dengan Google Penelusuran |
+| Modèle | Ancrage avec la recherche Google |
 | --- | --- |
+| Gemini 4 Argon | ✔️ |
 | Gemini 3.8 Flash | ✔️ |
 | Gemini 3.6 Flash | ✔️ |
 | Gemini 3.5 Flash-Lite | ✔️ |
-| Pratinjau Gambar Gemini 3.1 Flash | ✔️ |
-| Pratinjau Gemini 3.1 Pro | ✔️ |
-| Pratinjau Gambar Gemini 3 Pro | ✔️ |
-| Pratinjau Gemini 3 Flash | ✔️ |
+| Preview Gemini 3.1 Flash Image | ✔️ |
+| Preview Gemini 3.1 Pro | ✔️ |
+| Preview Gemini 3 Pro Image | ✔️ |
+| Preview Gemini 3 Flash | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## Kombinasi alat yang didukung
+## Combinaisons d'outils compatibles
 
-Anda dapat menggunakan Grounding dengan Google Penelusuran bersama alat lain seperti
-[eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
-[konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id), dan
-[Grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id) (didukung di
-Gemini 3.5 Flash-Lite dan model yang lebih baru) untuk mendukung kasus penggunaan yang lebih kompleks.
-Model Gemini 3 juga mendukung penggabungan alat bawaan ini dengan alat kustom (panggilan fungsi). Pelajari lebih lanjut di halaman
-[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
+Vous pouvez utiliser l'ancrage avec la Recherche Google avec d'autres outils tels que
+[l'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr),
+[le contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) et
+[l'ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr) (compatible avec les modèles
+Gemini 3.5 Flash-Lite et versions ultérieures) pour gérer des cas d'utilisation plus complexes.
+Les modèles Gemini 3 sont également compatibles avec la combinaison de ces outils intégrés avec des outils personnalisés (appels de fonction). Pour en savoir plus, consultez la
+[page Combinaisons d'outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
 
-## Langkah berikutnya
+## Étape suivante
 
-- Pelajari alat lain yang tersedia, seperti [Panggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
-- Pelajari cara memperkaya perintah dengan URL tertentu menggunakan [alat konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id).
+- Découvrez d'autres outils disponibles, comme les [appels de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
+- Découvrez comment augmenter les requêtes avec des URL spécifiques à l'aide de l'[outil de contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr).
 
-Kirim masukan
+Envoyer des commentaires
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Terakhir diperbarui pada 2026-10-09 UTC.
+Dernière mise à jour le 2026/10/13 (UTC).
 
-Ada masukan untuk kami?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-09 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/13 (UTC)."],[],[]]

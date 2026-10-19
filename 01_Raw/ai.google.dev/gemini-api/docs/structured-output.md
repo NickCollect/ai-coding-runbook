@@ -1,38 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-TW
-fetched_at: 2026-10-12T06:57:14.379298+00:00
-title: "\u7d50\u69cb\u5316\u8f38\u51fa\u5167\u5bb9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=id
+fetched_at: 2026-10-19T05:36:17.309922+00:00
+title: "Output terstruktur \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-提供意見
+Kirim masukan
 
-# 結構化輸出內容
+# Output terstruktur
 
-您可以設定 Gemini 模型，生成符合所提供 JSON 結構定義的回覆。這可確保結果可預測且類型安全，並簡化從非結構化文字中擷取結構化資料的程序。
+Anda dapat mengonfigurasi model Gemini untuk menghasilkan respons yang sesuai dengan Skema JSON yang diberikan. Hal ini memastikan hasil yang dapat diprediksi dan aman untuk jenis, serta menyederhanakan
+ekstraksi data terstruktur dari teks tidak terstruktur.
 
-使用結構化輸出內容的理想情境包括：
+Penggunaan output terstruktur sangat ideal untuk:
 
-- **資料擷取：**從文字中擷取特定資訊，例如姓名和日期。
-- **結構化分類：**將文字分類至預先定義的類別。
-- **代理工作流程：**為工具或 API 產生結構化輸入內容。
+- **Ekstraksi data:** Mengambil informasi tertentu seperti nama dan tanggal dari teks.
+- **Klasifikasi terstruktur:** Mengklasifikasikan teks ke dalam kategori yang telah ditentukan.
+- **Alur kerja agentic:** Membuat input terstruktur untuk alat atau API.
 
-除了在 REST API 中支援 JSON 結構定義，Google GenAI SDK 也允許使用 [Pydantic](https://docs.pydantic.dev/latest/) (Python) 和 [Zod](https://zod.dev/) (JavaScript) 定義結構定義。
+Selain mendukung Skema JSON di REST API, Google GenAI SDK
+memungkinkan penentuan skema menggunakan
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) dan
+[Zod](https://zod.dev/) (JavaScript).
 
-## 結構化輸出內容範例
+## Contoh output terstruktur
 
-### 食譜擷取器
+### Pengekstrak Resep
 
-這個範例說明如何使用基本 JSON 結構定義型別 (例如 `object`、`array`、`string` 和 `integer`)，從文字中擷取結構化資料。
+Contoh ini menunjukkan cara mengekstrak data terstruktur dari teks menggunakan jenis Skema JSON dasar seperti `object`, `array`, `string`, dan `integer`.
 
 ### Python
 
@@ -390,7 +394,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**回覆範例：**
+**Contoh Respons:**
 
 ```
 {
@@ -418,9 +422,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 內容審核
+### Moderasi Konten
 
-這個範例展示條件式結構定義的 `anyOf`，以及分類的 `enum`，可根據內容調整輸出結構。
+Contoh ini menampilkan `anyOf` untuk skema bersyarat dan `enum` untuk
+klasifikasi, sehingga struktur output dapat bervariasi berdasarkan konten.
 
 ### Python
 
@@ -751,7 +756,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**回覆範例：**
+**Contoh Respons:**
 
 ```
 {
@@ -762,9 +767,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### 遞迴結構
+### Struktur Rekursif
 
-這個範例說明如何定義遞迴結構定義，例如組織結構圖。
+Contoh ini menggambarkan cara menentukan skema rekursif seperti
+diagram organisasi.
 
 ### Python
 
@@ -1016,7 +1022,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**回覆範例：**
+**Contoh Respons:**
 
 ```
 {
@@ -1043,9 +1049,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## 串流結果
+## Hasil streaming
 
-您可以串流輸出結構化資料，在生成回覆的同時開始處理回覆內容。串流區塊是有效的局部 JSON 字串，可串連形成最終的 JSON 物件。
+Anda dapat mengalirkan output terstruktur, sehingga Anda dapat mulai memproses respons saat respons tersebut sedang dibuat. Potongan yang di-streaming adalah string JSON parsial yang valid yang dapat digabungkan untuk membentuk objek JSON akhir.
 
 ### Python
 
@@ -1288,9 +1294,14 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## 使用工具輸出結構化內容
+## Output terstruktur dengan alat
 
-Gemini 3 可讓您將結構化輸出內容與內建工具結合使用，包括[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)、[網址背景資訊](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)、[程式碼執行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)、[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw#structured-output)和[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
+Gemini 3 memungkinkan Anda menggabungkan Output Terstruktur dengan alat bawaan, termasuk
+[Perujukan dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id),
+[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id),
+[Eksekusi Kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
+[Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id#structured-output), dan
+[Pemanggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
 
 ### Python
 
@@ -1307,7 +1318,7 @@ class MatchResult(BaseModel):
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.1-pro-preview",
+    model="gemini-4-argon",
     input="Search for all details for the latest Euro.",
     tools=[{"type": "google_search"}, {"type": "url_context"}],
     response_format={
@@ -1343,7 +1354,7 @@ const matchSchema = z.fromJSONSchema(matchJsonSchema);
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.1-pro-preview",
+  model: "gemini-4-argon",
   input: "Search for all details for the latest Euro.",
   tools: [{type: "google_search"}, {type: "url_context"}],
   response_format: {
@@ -1412,7 +1423,7 @@ CreateModelInteractionResponseFormat format =
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model(Model.of("gemini-3.1-pro-preview"))
+        .model(Model.of("gemini-4-argon"))
         .input(InteractionsInput.of("Search for all details for the latest Euro."))
         .tools(Arrays.asList(GoogleSearch.builder().build(), URLContext.builder().build()))
         .responseFormat(format)
@@ -1478,7 +1489,7 @@ func main() {
     resp, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(
             interactions.CreateModelInteraction{
-                Model: interactions.Model("gemini-3.1-pro-preview"),
+                Model: interactions.Model("gemini-4-argon"),
                 Input: interactions.NewInteractionsInput("Search for all details for the latest Euro."),
                 Tools: []interactions.Tool{
                     interactions.NewTool(interactions.GoogleSearch{}),
@@ -1503,7 +1514,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.1-pro-preview",
+    "model": "gemini-4-argon",
     "input": "Search for all details for the latest Euro.",
     "tools": [{"type": "google_search"}, {"type": "url_context"}],
     "response_format": {
@@ -1522,79 +1533,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 支援 JSON 結構定義
+## Dukungan skema JSON
 
-如要產生 JSON 物件，請使用 `text` 類型的物件 (或包含物件的陣列) 設定 `response_format`，並將其 `mime_type` 設為 `application/json`。結構定義應在 `schema` 欄位中提供。
+Untuk membuat objek JSON, konfigurasi `response_format` dengan objek (atau array yang berisi objek) berjenis `text` dan tetapkan `mime_type`-nya ke `application/json`. Skema harus diberikan di kolom `schema`.
 
-Gemini 的結構化輸出模式支援部分 [JSON 結構定義](https://json-schema.org/)規格。
+Mode output terstruktur Gemini mendukung subset spesifikasi
+[JSON Schema](https://json-schema.org/).
 
-支援的 `type` 值如下：
+Nilai `type` berikut didukung:
 
-- **`string`**：文字。
-- **`number`**：適用於浮點數。
-- **`integer`**：適用於整數。
-- **`boolean`**：適用於 true 或 false 值。
-- **`object`**：適用於含有鍵/值組合的結構化資料。
-- **`array`**：適用於項目清單。
-- **`null`**：如要允許屬性為空值，請在型別陣列中加入 `"null"` (例如 `{"type": ["string", "null"]}`)。
+- **`string`**: Untuk teks.
+- **`number`**: Untuk bilangan floating point.
+- **`integer`**: Untuk bilangan bulat.
+- **`boolean`**: Untuk nilai benar atau salah.
+- **`object`**: Untuk data terstruktur dengan pasangan nilai kunci.
+- **`array`**: Untuk daftar item.
+- **`null`**: Untuk mengizinkan properti bernilai null, sertakan `"null"` dalam array jenis (misalnya, `{"type": ["string", "null"]}`).
 
-這些描述性屬性有助於引導模型：
+Properti deskriptif ini membantu memandu model:
 
-- **`title`**：屬性的簡短說明。
-- **`description`**：房源的詳細說明。
+- **`title`**: Deskripsi singkat properti.
+- **`description`**: Deskripsi properti yang lebih panjang dan mendetail.
 
-### 特定類型屬性
+### Properti spesifik per jenis
 
-**適用於 `object` 值：**
+**Untuk nilai `object`:**
 
-- **`properties`**：物件，其中每個鍵都是屬性名稱，每個值都是該屬性的結構定義。
-- **`required`**：字串陣列，列出哪些屬性為必要屬性。
-- **`additionalProperties`**：控制是否允許不在 `properties` 中列出的屬性。可以是布林值或結構定義。
+- **`properties`**: Objek dengan setiap kunci adalah nama properti dan setiap nilai adalah skema untuk properti tersebut.
+- **`required`**: Array string, yang mencantumkan properti mana yang wajib diisi.
+- **`additionalProperties`**: Mengontrol apakah properti yang tidak tercantum dalam `properties` diizinkan. Dapat berupa boolean atau skema.
 
-**`string` 值：**
+**Untuk nilai `string`:**
 
-- **`enum`**：列出分類工作的一組特定可能字串。
-- **`format`**：指定字串的語法，例如 `date-time`、`date`、`time`。
+- **`enum`**: Mencantumkan kumpulan string tertentu yang mungkin untuk tugas klasifikasi.
+- **`format`**: Menentukan sintaksis untuk string, seperti `date-time`, `date`, `time`.
 
-**`number` 和 `integer` 值：**
+**Untuk nilai `number` dan `integer`:**
 
-- **`enum`**：列出特定的一組可能數值。
-- **`minimum`**：最小值 (含)。
-- **`maximum`**：最大值 (含)。
+- **`enum`**: Mencantumkan serangkaian nilai numerik tertentu yang mungkin.
+- **`minimum`**: Nilai inklusif minimum.
+- **`maximum`**: Nilai inklusif maksimum.
 
-**適用於 `array` 值：**
+**Untuk nilai `array`:**
 
-- **`items`**：定義陣列中所有項目的結構定義。
-- **`prefixItems`**：定義前 N 個項目的結構定義清單，允許使用類似元組的結構。
-- **`minItems`**：陣列中的項目數量下限。
-- **`maxItems`**：陣列中的項目數量上限。
+- **`items`**: Menentukan skema untuk semua item dalam array.
+- **`prefixItems`**: Menentukan daftar skema untuk N item pertama, sehingga memungkinkan struktur seperti tuple.
+- **`minItems`**: Jumlah minimum item dalam array.
+- **`maxItems`**: Jumlah maksimum item dalam array.
 
-## 結構化輸出與函式呼叫
+## Output terstruktur versus pemanggilan fungsi
 
-| 功能 | 主要用途 |
+| Fitur | Kasus Penggunaan Utama |
 | --- | --- |
-| **結構化輸出內容** | **設定最終回覆的格式。**當您希望模型以特定格式*回答*時，請使用這項功能。 |
-| **函式呼叫** | **在對話期間採取行動。**如果模型需要*請您*執行工作，才能提供最終答案，請使用這項功能。 |
+| **Output Terstruktur** | **Memformat respons akhir.** Gunakan saat Anda menginginkan *jawaban* model dalam format tertentu. |
+| **Pemanggilan Fungsi** | **Mengambil tindakan selama percakapan.** Gunakan saat model perlu *meminta Anda* melakukan tugas sebelum memberikan jawaban akhir. |
 
-## 最佳做法
+## Praktik terbaik
 
-- **清楚的說明：**使用 `description` 欄位指引模型。
-- **嚴格型別：**使用特定型別 (`integer`、`string`、`enum`)。
-- **提示工程：**清楚說明您希望模型執行的動作。
-- **驗證：**雖然輸出內容是語法正確的 JSON，但請務必在應用程式中驗證值。
-- **錯誤處理：**針對符合結構定義但語意有誤的輸出內容，導入完善的錯誤處理機制。
+- **Deskripsi yang jelas:** Gunakan kolom `description` untuk memandu model.
+- **Pengetikan kuat:** Gunakan jenis tertentu (`integer`, `string`, `enum`).
+- **Rekayasa perintah:** Nyatakan dengan jelas apa yang Anda ingin model lakukan.
+- **Validasi:** Meskipun output adalah JSON yang benar secara sintaksis, selalu validasi nilai di aplikasi Anda.
+- **Penanganan error:** Terapkan penanganan error yang andal untuk output yang sesuai dengan skema, tetapi salah secara semantik.
 
-## 限制
+## Batasan
 
-- **結構定義子集：**系統不支援所有 JSON 結構定義功能。
-- **結構定義複雜度：**如果結構定義過於龐大或巢狀結構過深，可能會遭到拒絕。
+- **Subkumpulan skema:** Tidak semua fitur Skema JSON didukung.
+- **Kompleksitas skema:** Skema yang sangat besar atau memiliki banyak tingkat mungkin ditolak.
 
-提供意見
+Kirim masukan
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-上次更新時間：2026-09-24 (世界標準時間)。
+Terakhir diperbarui pada 2026-10-13 UTC.
 
-想進一步說明嗎？
+Ada masukan untuk kami?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-13 UTC."],[],[]]

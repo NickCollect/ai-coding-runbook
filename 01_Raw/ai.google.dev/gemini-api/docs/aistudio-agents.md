@@ -1,139 +1,141 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=id
-fetched_at: 2026-10-12T06:54:34.896011+00:00
-title: "Agen di playground AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=fr
+fetched_at: 2026-10-19T05:56:30.793284+00:00
+title: "Agents dans l'atelier AI\u00a0Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Kirim masukan
+Envoyer des commentaires
 
-# Agen di playground AI Studio
+# Agents dans l'atelier AI Studio
 
-Google AI Studio Playground menyediakan antarmuka visual untuk membuat prototipe dan mempelajari cara membuat agen terkelola tanpa harus membuat dan menulis panggilan API.
+Google AI Studio Playground fournit une interface visuelle pour prototyper et apprendre à créer des agents gérés sans avoir à créer ni à écrire d'appels d'API.
 
-Untuk memulai, buka tab **Playground** di panel navigasi Google AI Studio, dan alihkan tombol ke **Agents**.
+Pour commencer, accédez à l'onglet **Playground** dans le panneau de navigation de Google AI Studio, puis activez le bouton **Agents**.
 
-## Template bawaan
+## Modèles prédéfinis
 
-Tab **Agents** memiliki serangkaian template yang telah mengonfigurasi Agen Antigravity dasar dengan menetapkan konfigurasi alat dan lingkungan. Semua template bersifat open source dan dipublikasikan di
-repositori [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/). Mempelajari template ini adalah cara yang bagus untuk mempelajari cara membuat dan menyusun agen terkelola Anda sendiri.
+L'onglet **Agents** comporte une série de modèles qui préconfigurent l'agent Antigravity de base en définissant les configurations d'outil et d'environnement. Tous les modèles sont Open Source et publiés sous
+le [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) dépôt. L'exploration de ces modèles est un excellent moyen d'apprendre à créer et à structurer votre propre agent géré.
 
-Misalnya, saat Anda memilih template AI Radio, semua alat yang diizinkan akan diaktifkan, dan file `AGENTS.md` serta keterampilan khusus untuk produksi acara radio akan ditautkan. Anda dapat melihat setelan ini di UI Playground di bagian **Environment**, dengan mengklik tombol **Sources**.
+Par exemple, lorsque vous sélectionnez le modèle AI Radio, il active tous les outils autorisés et associe un fichier `AGENTS.md` spécialisé ainsi que des compétences pour la production d'émissions de radio. Vous pouvez afficher ces paramètres dans l'interface utilisateur de Playground, dans la section **Environnement** , en cliquant sur le bouton **Sources**.
 
-## Konfigurasi alat
+.
 
-Di bagian Agent settings di Playground, Anda dapat mengalihkan akses ke alat bawaan berikut:
+## Configuration de l'outil
 
-- **Google Search:** Mengakses web terbuka untuk grounding informasi real-time.
-- **URL Context:** Mengambil dan mengurai konten teks URL halaman web tertentu.
-- **Code Execution:** Menjalankan perintah Bash dan Python langsung dalam lingkungan sandbox terisolasi.
-- **Filesystem Tools:** Membaca, menulis, mencantumkan, dan menghapus file di dalam ruang kerja.
+Dans les paramètres de l'agent de Playground, vous pouvez activer ou désactiver l'accès aux outils intégrés suivants :
 
-## Konfigurasi Lingkungan
+- **Recherche Google** : accédez au Web ouvert pour l'ancrage d'informations en temps réel.
+- **Contexte d'URL** : récupérez et analysez le contenu textuel d'URL de pages Web spécifiques.
+- **Exécution de code** : exécutez des commandes Bash et Python directement dans l'environnement de bac à sable isolé.
+- **Outils de système de fichiers** : lisez, écrivez, listez et supprimez des fichiers dans l'espace de travail.
 
-Agen terkelola berjalan dalam sandbox Linux efemeral yang aman (lingkungan) yang menyediakan ruang kerja dan alat yang diperlukan untuk beroperasi. Untuk mempelajari lebih lanjut, lihat panduan [lingkungan agen terkelola](https://ai.google.dev/gemini-api/docs/agent-environment?hl=id).
+## Configuration de l'environnement
 
-### Mengontrol perilaku agen
+Les agents gérés s'exécutent dans un bac à sable Linux éphémère et sécurisé (l'environnement) qui fournit l'espace de travail et les outils dont ils ont besoin pour fonctionner. Pour en savoir plus, consultez le guide de l'environnement d'agent [géré](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr).
 
-Perilaku, persona, dan kemampuan agen sebagian besar ditentukan oleh file yang ada di lingkungannya. Agen akan otomatis mendeteksi dan memuat konfigurasi dari folder `.agents` khusus:
+### Contrôler le comportement de l'agent
 
-- **`AGENTS.md`**: Dimuat sebelumnya ke dalam konteks agen untuk menentukan persona dan petunjuk sistem.
-- **`SKILL.md`**: Terletak di folder keterampilan masing-masing (misalnya, `.agents/skills/my-skill/SKILL.md`) untuk menentukan kemampuan dan alur kerja tertentu.
+Le comportement, la personnalité et les capacités de l'agent sont principalement déterminés par les fichiers présents dans son environnement. L'agent détecte et charge automatiquement les configurations à partir d'un dossier `.agents` spécial :
 
-### Menyediakan Lingkungan
+- **`AGENTS.md`**: préchargé dans le contexte de l'agent pour définir les instructions système et la personnalité.
+- **`SKILL.md`** : situé dans les dossiers de compétences respectifs (par exemple, `.agents/skills/my-skill/SKILL.md`) pour définir des capacités et des workflows spécifiques.
 
-Anda dapat mengonfigurasi lingkungan yang akan digunakan oleh agen dengan memasang file ke lingkungan sebelum memulai sesi. Anda dapat membuat lingkungan baru dengan memasang sumber, atau memulihkan lingkungan sebelumnya:
+### Provisionner l'environnement
 
-- **Untuk membuat lingkungan baru**, klik **Add Sources** di panel Environment settings dan pilih dari jenis sumber berikut:
+Vous pouvez configurer l'environnement à utiliser par l'agent en montant des fichiers dans l'environnement avant de démarrer une session. Vous pouvez créer un environnement en montant des sources ou en restaurer un précédent :
 
-| Jenis sumber | Deskripsi | Jalur pemasangan |
+- **Pour créer un environnement**, cliquez sur **Ajouter des sources** dans le panneau des paramètres d'environnement, puis choisissez parmi les types de sources suivants :
+
+| Type de source | Description | Chemin de montage |
 | --- | --- | --- |
-| **File Sebaris** | Menulis atau menempel file konfigurasi, set data tiruan, atau skrip utilitas (hingga 100 KB) langsung ke UI Playground. | Jalur tujuan yang ditentukan pengguna (misalnya, `/workspace/scripts/parser.py`). |
-| **Google Cloud Storage** | Memasang bucket Cloud Storage publik atau pribadi.  Bucket pribadi memerlukan token Bearer OAuth 2.0 standar. Untuk mengetahui informasi selengkapnya, lihat [Sumber pribadi](https://ai.google.dev/gemini-api/docs/agent-environment?hl=id#private-sources). | Memetakan jalur bucket GCS (misalnya, `gs://your-bucket-name/data/`) ke direktori ruang kerja (misalnya, `/workspace/data/`). |
-| **Repositori GitHub** | Meng-clone codebase publik atau pribadi.  Repositori pribadi memerlukan Autentikasi dasar dengan Token Akses Pribadi (PAT) GitHub Anda. Untuk mengetahui informasi selengkapnya, lihat [Sumber pribadi](https://ai.google.dev/gemini-api/docs/agent-environment?hl=id#private-sources). | Di-clone langsung ke `/workspace/` (biasanya di bagian `/workspace/<repo-name>`). |
+| **Fichiers intégrés** | Écrivez ou collez des fichiers de configuration, des ensembles de données fictifs ou des scripts utilitaires (jusqu'à 100 Ko) directement dans l'interface utilisateur de Playground. | Chemin de destination défini par l'utilisateur (par exemple, `/workspace/scripts/parser.py`). |
+| **Google Cloud Storage** | Montez un bucket Cloud Storage public ou privé.  Les buckets privés nécessitent un jeton porteur OAuth 2.0 standard. Pour en savoir plus, consultez la section [Sources privées](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr#private-sources). | Mappe un chemin d'accès à un bucket GCS (par exemple, `gs://your-bucket-name/data/`) vers un répertoire d'espace de travail (par exemple, `/workspace/data/`). |
+| **Dépôts GitHub** | Clonez des bases de code publiques ou privées.  Les dépôts privés nécessitent une authentification de base avec votre jeton d'accès personnel (PAT) GitHub. Pour en savoir plus, consultez la section [Sources privées](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr#private-sources). | Cloné directement dans `/workspace/` (généralement sous `/workspace/<repo-name>`). |
 
-- **Untuk memulihkan lingkungan sebelumnya**, Anda dapat [menggunakan kembali ID lingkungan yang ada](#reusing-an-existing-environment-id) untuk meng-clone dan membuat fork statusnya yang sama persis.
+- **Pour restaurer un environnement précédent**, vous pouvez [réutiliser un ID d'environnement existant](#reusing-an-existing-environment-id) pour cloner et dupliquer son état exact.
 
-### Menggunakan kembali ID lingkungan yang ada
+### Réutiliser un ID d'environnement existant
 
-Jika sudah menghabiskan waktu untuk menyiapkan lingkungan sandbox, Anda tidak perlu memulai dari awal. Untuk menggunakan lingkungan yang ada:
+Si vous avez déjà configuré un environnement de bac à sable, vous n'avez pas besoin de recommencer à zéro. Pour utiliser un environnement existant :
 
-1. Buka panel Environments di AI Studio dan alihkan **Type** ke **Existing**
-2. Masukkan **Environment ID** (misalnya, `env_abc123`)
+1. Accédez au panneau "Environnements" dans AI Studio, puis activez le bouton **Type** sur **Existant**.
+2. Saisissez l'**ID d'environnement** (par exemple, `env_abc123`).
 
-Untuk mengetahui informasi selengkapnya, lihat [Mengonfigurasi lingkungan](https://ai.google.dev/gemini-api/docs/agent-environment?hl=id#configure-an-environment). Anda juga dapat mengambil Environment ID sesi saat ini dari tab Environment di UI.
+Pour en savoir plus, consultez la section [Configurer un environnement](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr#configure-an-environment). Vous pouvez également récupérer l'ID d'environnement de la session en cours à partir de l'onglet "Environnement" de l'interface utilisateur.
 
-Setelah Anda mengirim pesan pertama ke agen, konfigurasi lingkungan akan ditetapkan untuk sesi tersebut. Anda tidak dapat memasang sumber baru atau mengubah daftar yang diizinkan jaringan saat interaksi sedang berjalan aktif.
+Une fois que vous avez envoyé votre premier message à l'agent, la configuration de l'environnement est fixe pour cette session. Vous ne pouvez pas monter de nouvelles sources ni modifier la liste d'autorisation du réseau pendant que l'interaction est en cours d'exécution.
 
-## Mendownload lingkungan
+## Télécharger l'environnement
 
-Setelah lingkungan dibuat, Anda dapat mendownload snapshot lingkungan kapan saja menggunakan tombol **Download** di Environment settings AI Studio Playground untuk mengambil file lingkungan sebagai tarball.
+Une fois un environnement créé, vous pouvez télécharger son instantané à tout moment à l'aide du bouton **Télécharger** dans les paramètres d'environnement d'AI Studio Playground pour récupérer les fichiers d'environnement sous forme de fichier tar.
 
-## Pengelolaan Keamanan dan Biaya
+## Sécurité et gestion des coûts
 
-### Mengelola Penggunaan Token
+### Gérer la consommation de jetons
 
-Tidak seperti permintaan chat standar yang menghasilkan satu output, Agen Antigravity menjalankan alur kerja otonom. Agen ini merencanakan, menjalankan kode, mengamati hasil, dan melakukan iterasi. Artinya, satu perintah dapat menghasilkan penggunaan token tanpa batas.
+Contrairement à une requête de chat standard qui produit une seule sortie, l'agent Antigravity exécute un workflow autonome. Il planifie, exécute du code, observe les résultats et itère. Cela signifie qu'un seul prompt peut entraîner une consommation illimitée de jetons.
 
-Untuk mengelola biaya, **berikan kriteria penghentian yang jelas dalam perintah Anda dan batasi tugas untuk agen**. Contoh yang baik adalah perintah seperti *Tinjau permintaan pull dan berhenti setelah Anda membuat ringkasan markdown.
-Jangan mencoba menulis perbaikan sendiri*.
+Pour gérer les coûts, **fournissez des critères d'arrêt clairs dans vos prompts et limitez les tâches de l'agent**. Un bon exemple pourrait être une invite de commande telle que *Vérifiez la demande d'extraction et arrêtez-vous une fois que vous avez généré le résumé Markdown.
+N'essayez pas d'écrire le correctif vous-même*.
 
-### Biaya Tambahan
+### Coûts supplémentaires
 
-Secara default, semua template agen di Playground memiliki akses ke layanan Gemini API dan dapat melakukan panggilan API dari lingkungan untuk memenuhi permintaan. Hal ini dapat dikenai biaya tambahan yang tidak akan tercermin dalam penggunaan token.
+Par défaut, tous les modèles d'agent de Playground ont accès au service de l'API Gemini et peuvent effectuer des appels d'API à partir de l'environnement pour répondre aux requêtes. Cela peut entraîner des coûts supplémentaires qui ne seront pas reflétés dans la consommation de jetons.
 
-Demikian pula, jika Anda menambahkan layanan eksternal lainnya, agen dapat dikenai biaya tambahan dengan memanggil layanan ini atas nama Anda.
+De même, si vous ajoutez d'autres services externes, l'agent peut entraîner des coûts supplémentaires en appelant ces services en votre nom.
 
-### Daftar yang Diizinkan Jaringan
+### Liste d'autorisation du réseau
 
-Secara default, di AI Studio, semua permintaan jaringan keluar dari dalam lingkungan sandbox agen Anda dikontrol dan dibatasi secara ketat untuk memastikan keamanan. Untuk memberikan kemampuan kepada agen Anda untuk menjangkau API eksternal, layanan web, atau pengelola paket, Anda harus mendeklarasikannya secara eksplisit:
+Par défaut, dans AI Studio, toutes les requêtes réseau sortantes de l'environnement de bac à sable de votre agent sont étroitement contrôlées et limitées pour garantir la sécurité. Pour autoriser votre agent à accéder à des API externes, à des services Web ou à des gestionnaires de paquets, vous devez les déclarer explicitement :
 
-1. Buka panel Environments di AI Studio.
-2. Pilih tombol **rules** di samping **Network**.
-3. Di panel **Network configuration**, klik **Add to allowlist** dan isi detail yang relevan:
-   - **Domain Restriction:** Hanya domain atau pola karakter pengganti tertentu yang ditambahkan ke daftar yang dapat diakses oleh mesin virtual agen. Misalnya, Anda dapat memasukkan domain yang sama persis seperti `api.github.com` atau pola luas seperti `*.googleapis.com`.
-   - **Add HTTP Header and Token Injection:** Gunakan opsi **Add HTTP header** untuk menyuntikkan kredensial yang diperlukan (seperti token API) secara aman untuk domain tertentu. Kredensial ini diteruskan dengan aman melalui proxy keluar dan tidak pernah diekspos secara langsung sebagai teks mentah di dalam sandbox agen.
+1. Accédez au panneau "Environnements" dans AI Studio.
+2. Sélectionnez le bouton **Règles** à côté de **Réseau**.
+3. Dans le panneau **Configuration réseau** , cliquez sur **Ajouter à la liste d'autorisation** , puis saisissez les informations pertinentes :
+   - **Restriction de domaine** : seule la machine virtuelle de l'agent peut accéder aux domaines spécifiques ou aux modèles de caractères génériques ajoutés à la liste. Par exemple, vous pouvez saisir des domaines exacts tels que `api.github.com` ou des modèles généraux tels que `*.googleapis.com`.
+   - **Ajouter un en-tête HTTP et une injection de jeton** : utilisez l'option **Ajouter un en-tête HTTP** pour injecter de manière sécurisée les identifiants requis (tels qu'un jeton d'API) pour un domaine spécifique. Ces identifiants passent en toute sécurité par un proxy de sortie et ne sont jamais exposés directement sous forme de texte brut dans le bac à sable de l'agent.
 
-Selalu berhati-hatilah saat menambahkan domain ke daftar yang diizinkan. Memberikan akses agen ke layanan yang diautentikasi berarti agen dapat bertindak atas nama Anda, yang dapat menyebabkan tindakan yang tidak diinginkan jika tidak dipantau dengan cermat.
+Soyez toujours prudent lorsque vous ajoutez des domaines à votre liste d'autorisation. Accorder à l'agent l'accès à des services authentifiés signifie qu'il peut agir en votre nom, ce qui peut entraîner des actions involontaires si vous ne le surveillez pas attentivement.
 
-### Praktik terbaik kredensial
+### Bonnes pratiques concernant les identifiants
 
-Jika alur kerja Anda mengharuskan agen untuk melakukan autentikasi dengan layanan eksternal, Anda bertanggung jawab untuk menyediakan dan menentukan cakupan kredensial tersebut. Ikuti panduan ini untuk mengurangi risiko:
+Si votre workflow nécessite que l'agent s'authentifie auprès de services externes, vous êtes responsable du provisionnement et de la définition du champ d'application de ces identifiants. Suivez ces consignes pour réduire les risques :
 
-- **Gunakan kredensial hak istimewa terendah:** Buat akun layanan atau kunci API hanya dengan izin yang diperlukan agen Anda. Hindari meneruskan kredensial dengan akses administratif atau luas.
-- **Pilih token yang memiliki masa aktif singkat:** Jika memungkinkan, gunakan kredensial atau token yang memiliki batas waktu yang akan berakhir masa berlakunya, bukan kunci API yang memiliki masa aktif lama.
-- **Asumsikan akses penuh:** Agen dapat menggunakan kredensial apa pun yang dapat diaksesnya untuk menyelesaikan tugas yang telah Anda berikan. Hanya berikan kredensial yang cakupan aksesnya sepenuhnya ingin Anda berikan.
-- **Rotasi kredensial secara rutin:** Perlakukan kredensial yang dibagikan dengan agen dengan cara yang sama seperti Anda memperlakukan kredensial terprogram; rotasi secara rutin.
+- **Utilisez des identifiants avec le principe du moindre privilège** : créez des comptes de service ou des clés API avec uniquement les autorisations dont votre agent a besoin. Évitez de transmettre des identifiants avec un accès étendu ou administratif.
+- **Privilégiez les jetons de courte durée** : dans la mesure du possible, utilisez des identifiants ou des jetons à durée limitée qui expirent plutôt que des clés API à longue durée de vie.
+- **Partez du principe que l'accès est complet** : l'agent peut utiliser n'importe quel identifiant auquel il a accès pour effectuer la tâche que vous lui avez confiée. Ne fournissez que les identifiants dont vous êtes prêt à accorder l'accès complet.
+- **Effectuez régulièrement une rotation des identifiants** : traitez les identifiants partagés avec l'agent de la même manière que vous le feriez pour n'importe quel identifiant programmatique. Effectuez une rotation régulière.
 
-### Menghubungkan alat dan API eksternal
+### Connecter des outils et des API externes
 
-Anda dapat menghubungkan alat dan API eksternal (seperti server Model Context Protocol / MCP) untuk memperluas kemampuan agen. Saat melakukannya:
+Vous pouvez connecter des outils et des API externes (tels que des serveurs MCP [Model Context Protocol]) pour étendre les capacités de l'agent. Dans ce cas :
 
-- Hanya hubungkan alat dari sumber yang Anda percaya. Alat yang berbahaya atau ditulis dengan buruk dapat mengekspos data atau melakukan tindakan yang tidak diinginkan.
-- Konfigurasi alat dengan izin minimum yang diperlukan untuk kasus penggunaan Anda. Jika alat mendukung mode hanya baca, sebaiknya gunakan mode tersebut kecuali jika penulisan benar-benar diperlukan.
-- Sebelum menghubungkan alat ke sumber data produksi, uji alat tersebut terhadap data sampel atau sintetis untuk memverifikasi bahwa agen menggunakannya seperti yang diharapkan.
+- Ne connectez que des outils provenant de sources fiables. Un outil malveillant ou mal écrit peut exposer des données ou effectuer des actions involontaires.
+- Configurez les outils avec les autorisations minimales requises pour votre cas d'utilisation. Si un outil est compatible avec le mode lecture seule, préférez-le, sauf si des écritures sont strictement nécessaires.
+- Avant de connecter un outil à une source de données de production, testez-le sur des exemples de données ou des données synthétiques pour vérifier que l'agent l'utilise comme prévu.
 
-### Pengawasan manusia
+### Supervision humaine
 
-Agen dapat melakukan penalaran, perencanaan, dan menjalankan alur kerja multi-langkah dengan tingkat otonomi yang tinggi. Meskipun efektif, hal ini juga berarti Anda harus menerapkan pengawasan yang sesuai, terutama untuk tugas yang mengubah data atau berinteraksi dengan sistem eksternal.
+Les agents peuvent raisonner, planifier et exécuter des workflows en plusieurs étapes avec un degré d'autonomie élevé. Bien que cela soit puissant, vous devez également appliquer une supervision appropriée, en particulier pour les tâches qui modifient des données ou interagissent avec des systèmes externes.
 
-Selalu verifikasi output penting seperti kode yang dihasilkan, transformasi data, atau perubahan konfigurasi sebelum Anda men-deploy-nya.
+Vérifiez toujours les sorties critiques telles que le code généré, les transformations de données ou les modifications de configuration avant de les déployer.
 
-Kirim masukan
+Envoyer des commentaires
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Terakhir diperbarui pada 2026-08-19 UTC.
+Dernière mise à jour le 2026/08/19 (UTC).
 
-Ada masukan untuk kami?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-08-19 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/08/19 (UTC)."],[],[]]

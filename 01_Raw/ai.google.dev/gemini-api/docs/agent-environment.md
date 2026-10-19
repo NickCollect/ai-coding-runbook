@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr
-fetched_at: 2026-10-12T07:04:40.948148+00:00
-title: "Environnements dans les agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-CN
+fetched_at: 2026-10-19T05:47:10.854081+00:00
+title: "\u6258\u7ba1\u5f0f\u667a\u80fd\u4f53\u4e2d\u7684\u73af\u5883 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Envoyer des commentaires
+发送反馈
 
-# Environnements dans les agents gérés
+# 托管式智能体中的环境
 
-Les environnements sont des bacs à sable Linux gérés qui offrent aux agents un espace isolé pour exécuter du code et conserver des fichiers. Ils sont dissociés du contexte d'interaction. Vous pouvez donc réutiliser le même environnement pour plusieurs interactions ou repartir de zéro à tout moment.
+环境是受管理的 Linux 沙盒，可为代理提供一个隔离的空间来执行代码和持久保留文件。它们与互动情境分离，因此您可以在多次互动中重复使用同一环境，也可以随时从头开始。
 
-L'exemple suivant montre comment créer une interaction avec un environnement distant et récupérer son ID :
+以下示例演示了如何创建与全新远程环境的互动并检索其 ID：
 
 ### Python
 
@@ -129,17 +129,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Paramètre `environment`
+## `environment` 参数
 
-Le paramètre `environment` accepte trois formes :
+`environment` 参数接受以下三种形式：
 
-| Formulaire | Exemple | Quand les utiliser ? |
+| 表单 | 示例 | 适用情形 |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Provisionnez un bac à sable. |
-| ID de l'environnement | `environment="env_abc123"` | Réutilisez un bac à sable existant avec tous ses fichiers et packages. |
-| Objet de configuration | `environment={...}` | Provisionnez un bac à sable avec des sources, des règles réseau, des variables d'environnement ou une combinaison de ces éléments. |
+| `"remote"` | `environment="remote"` | 预配新的沙盒。 |
+| 环境 ID | `environment="env_abc123"` | 重用包含所有文件和软件包的现有沙盒。 |
+| 配置对象 | `environment={...}` | 预配包含来源、网络规则、环境变量或组合的新沙盒。 |
 
-Les exemples suivants illustrent les trois façons d'utiliser le paramètre `environment`.
+以下示例演示了使用 `environment` 参数的三种方式。
 
 ### Python
 
@@ -400,10 +400,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Configurer un environnement
+## 配置环境
 
-Une façon de configurer un environnement consiste à indiquer à l'agent ce que vous devez installer.
-Il gère la résolution des dépendances et le dépannage. Une fois l'environnement prêt, enregistrez le `environment_id` et réutilisez-le.
+设置环境的一种方法是告知代理您需要安装哪些内容。
+它负责处理依赖项解析和问题排查。环境准备就绪后，保存 `environment_id` 并重复使用。
 
 ### Python
 
@@ -589,15 +589,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Monter à partir d'une source
+### 从来源装载
 
-Si vous savez exactement quels fichiers l'agent a besoin, installez-les en un seul appel au lieu d'itérer. L'objet de configuration `environment` accepte un tableau `sources` avec trois types :
+如果您确切知道代理需要哪些文件，请通过一次调用装载这些文件，而不是进行迭代。`environment` 配置对象接受包含以下三种类型的 `sources` 数组：
 
-| Type de source | Valeur `type` | Description | Limite |
+| 来源类型 | `type` 值 | 说明 | 限制 |
 | --- | --- | --- | --- |
-| Dépôt Git | `repository` | Clone un dépôt à partir d'une URL dans le bac à sable à l'adresse `target`. | 500 Mo |
-| Cloud Storage | `gcs` | Copie un fichier ou un répertoire depuis Cloud Storage dans le bac à sable à l'emplacement `target`. | 2 Go |
-| Contenu intégré | `inline` | Écrit le contenu du texte brut dans un fichier du bac à sable à l'emplacement `target`. | 1 Mo par fichier, 2 Mo au total |
+| Git 代码库 | `repository` | 将代码库从网址克隆到沙盒中的 `target`。 | 500 MB |
+| Cloud Storage | `gcs` | 将 Cloud Storage 中的文件或目录复制到沙盒中的 `target`。 | 2 GB |
+| 内嵌内容 | `inline` | 将原始文本内容写入沙盒中 `target` 的文件。 | 每个文件 1 MB，总共 2 MB |
 
 ### Python
 
@@ -807,17 +807,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Vous pouvez combiner les deux approches : monter les sources connues de manière déclarative, puis itérer avec des interactions de suivi pour installer des packages ou exécuter des scripts de configuration. Vous ne pouvez pas définir la racine (`/`) comme cible lorsque vous ajoutez une source personnalisée. Vous devez toujours spécifier un sous-répertoire.
+您可以将这两种方法结合使用：以声明方式装载已知来源，然后通过后续互动来安装软件包或运行设置脚本。添加自定义来源时，您无法将根目录 (`/`) 设置为目标，必须始终指定子目录。
 
-### Accroches
+### 引子
 
-Vous pouvez également monter un fichier de configuration `.agents/hooks.json` et des scripts d'interception personnalisés dans le bac à sable pour appliquer des mesures de sécurité ou exécuter des validations automatiques chaque fois que des outils sont exécutés. Pour obtenir des définitions de schéma et des exemples de code, consultez [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fr).
+您还可以将 `.agents/hooks.json` 配置文件和自定义拦截脚本装载到沙盒中，以强制执行安全防护措施或在每次执行工具时运行自动验证。如需查看架构定义和代码示例，请参阅[钩子](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-cn)。
 
-### Sources privées
+### 私人来源
 
-Vous pouvez également télécharger des fichiers à partir de dépôts GitHub privés ou de buckets Cloud Storage privés en authentifiant le domaine source dans la configuration réseau.
+您还可以通过在网络配置中对源网域进行身份验证，从私有 GitHub 代码库或私有 Cloud Storage 存储桶下载内容。
 
-Une option consiste à utiliser des [identifiants](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stockés référencés par ID. Vous stockez ainsi le secret une seule fois, et chaque environnement qui a besoin de cette source peut le référencer :
+一种选择是使用按 ID 引用的存储[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)，这样您只需存储一次密钥，需要该来源的每个环境都可以引用它：
 
 ```
 "network": {
@@ -828,10 +828,10 @@ Une option consiste à utiliser des [identifiants](https://ai.google.dev/gemini-
 }
 ```
 
-Vous pouvez également définir l'en-tête en ligne avec `transform`, comme le font les exemples suivants. Le proxy de sortie applique les deux formes de la même manière, et dans aucun des cas, le secret n'atterrit dans le bac à sable.
+您还可以使用 `transform` 内嵌设置标头，如下例所示。出站代理会以相同的方式应用这两种形式，并且在任何一种情况下，密钥都不会进入沙盒。
 
-Pour les **dépôts Git privés**, utilisez l'authentification `Basic` avec votre [jeton d'accès personnel (PAT) GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Encodez le jeton en utilisant `x-oauth-basic` comme nom d'utilisateur :
+对于**私有 Git 代码库**，请使用 `Basic` 身份验证，并提供您的 [GitHub 个人访问令牌 (PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)。
+使用 `x-oauth-basic` 作为用户名对令牌进行编码：
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -1055,7 +1055,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Pour les **buckets Cloud Storage privés**, utilisez un jeton de support OAuth 2.0 standard :
+对于**私有 Cloud Storage 存储桶**，请使用标准 OAuth 2.0 不记名令牌：
 
 ```
 gcloud auth print-access-token
@@ -1279,24 +1279,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Logiciel pré-installé
+## 预装软件
 
-Le bac à sable s'exécute sur Ubuntu et est fourni avec des environnements d'exécution et des packages courants préinstallés. L'agent peut installer des packages supplémentaires au moment de l'exécution à l'aide de `pip
-install` ou `npm install`. Les packages installés lors d'une interaction persistent lorsque vous réutilisez le même `environment_id`.
+沙盒在 Ubuntu 上运行，并预安装了运行时和常用软件包。代理可以在运行时使用 `pip
+install` 或 `npm install` 安装其他软件包。当您重复使用同一 `environment_id` 时，在互动期间安装的软件包会保留。
 
-| Catégorie | Packages pré-installés |
+| 类别 | 预装软件包 |
 | --- | --- |
-| **Outils UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
-| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
-| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
+| **UNIX 工具** | `curl`、`wget`、`git`、`rsync`、`unzip`、`ripgrep`、`fd-find`、`gawk`、`bc`、`tree`、`which`、`lsof`、`htop`、`jq`、`iproute2`、`procps`、`gcloud CLI` |
+| **Python 3.12** | `numpy`，`pandas`，`requests`，`google-genai`，`beautifulsoup4`，`pyyaml`，`ast-grep-cli` |
+| **Node.js 22** | `create-next-app`、`create-vite`、`typescript` |
 
-## Variables d'environnement
+## 环境变量
 
-Utilisez le champ `env` pour définir les variables d'environnement dans le bac à sable. Chaque entrée mappe un nom de variable à une chaîne littérale pour la configuration ou à une référence à un [identifiant](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stocké pour un secret. L'agent les voit comme dans n'importe quel shell. Les outils et les scripts qui lisent l'environnement de processus les récupèrent donc sans câblage supplémentaire.
+使用 `env` 字段可在沙盒内设置环境变量。每个条目都将变量名称映射到配置的字面量字符串或密钥的存储[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)的引用。智能体看到的它们与在任何 shell 中看到的相同，因此从进程环境读取的工具和脚本无需额外连接即可获取它们。
 
-| Champ | Type | Description |
+| 字段 | 类型 | 说明 |
 | --- | --- | --- |
-| `env` | `object` | Mappage du nom de la variable à la valeur. Une valeur est soit un littéral `string`, soit une référence d'identifiant au format `{"credential": "credential-id"}`. |
+| `env` | `object` | 变量名称到值的映射。值可以是字面量 `string`，也可以是 `{"credential": "credential-id"}` 形式的凭据引用。 |
 
 ### Python
 
@@ -1364,20 +1364,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Les variables s'appliquent à chaque commande exécutée par l'agent lors de cette interaction, y compris les commandes shell, les étapes de compilation et tout processus qu'il lance.
+变量适用于代理在该互动中运行的每个命令，包括 shell 命令、构建步骤以及它启动的任何进程。
 
-Ces deux types de valeurs se comportent différemment. Une chaîne littérale est écrite dans le conteneur en tant que texte brut. Une référence d'identifiant n'est pas : la variable reçoit un espace réservé, et le proxy de sortie remplace le véritable secret uniquement dans les requêtes sortantes vers les domaines de confiance de cet identifiant. Pour en savoir plus, consultez [Utiliser des identifiants comme variables d'environnement](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr#environment-variables).
+这两种值类型的行为方式不同。字面值字符串会以纯文本形式写入容器。凭据引用不是：变量接收占位符，并且出站代理仅在向相应凭据的可信网域发送的出站请求中替换为真实密钥。如需了解其运作方式，请参阅[将凭据用作环境变量](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn#environment-variables)。
 
-## Configuration du réseau
+## 网络配置
 
-Par défaut, les environnements disposent d'un accès réseau sortant illimité. Utilisez le champ `network` pour limiter le trafic sortant à des domaines spécifiques. Chaque règle spécifie un `domain`, ainsi qu'un `credential` facultatif pour injecter un secret stocké et un objet `transform` facultatif pour injecter des en-têtes dans les requêtes correspondantes.
-Ces en-têtes peuvent être uniques pour chaque interaction et vous pouvez les mettre à jour pour le même environnement.
+默认情况下，环境具有不受限制的出站网络访问权限。使用 `network` 字段将出站流量限制为特定网域。每条规则都指定一个 `domain`，以及一个可选的 `credential`（用于注入存储的密钥）和一个可选的 `transform` 对象（用于将标头注入到匹配的请求中）。这些标头在每次互动中都可以是唯一的，并且您可以针对同一环境更新这些标头。
 
-| Champ | Type | Description |
+| 字段 | 类型 | 说明 |
 | --- | --- | --- |
-| `domain` | `string` | Domaine à mettre en correspondance. Utilisez un nom d'hôte exact ou `*` pour tous les domaines. |
-| `credential` | `string` | ID d'un [identifiant](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stocké. Le proxy de sortie le résout et injecte l'en-tête d'authentification au moment de la requête. |
-| `transform` | `object` | Objet contenant des paires clé/valeur plates représentant les en-têtes à injecter dans les requêtes correspondantes, par exemple `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | 要匹配的网域。使用确切的主机名或 `*` 来指定所有网域。 |
+| `credential` | `string` | 已存储的[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)的 ID。出站代理会解析该变量，并在请求时注入身份验证标头。 |
+| `transform` | `object` | 包含扁平键值对的对象，表示要注入到匹配请求中的标头，例如 `{"Authorization": "Bearer ..."}`。 |
 
 ### Python
 
@@ -1571,14 +1570,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Lorsqu'une liste d'autorisation est définie, seules les requêtes adressées aux domaines explicitement listés sont autorisées. Vous pouvez utiliser des caractères génériques pour faire correspondre des sous-domaines (par exemple, `{"domain":
-"*.example.com"}`), mais notez que cela ne correspond pas au domaine racine `example.com`, qui doit être ajouté séparément. Pour autoriser tout autre trafic, comme le routage de domaines non listés sans en-têtes injectés, ajoutez `{"domain": "*"}` en tant qu'entrée générique.
+设置许可名单后，系统仅允许向明确列出的网域发送请求。您可以使用通配符来匹配子网域（例如 `{"domain":
+"*.example.com"}`），但请注意，这不会匹配根域名 `example.com`，后者必须单独添加。如需允许所有其他流量（例如在没有注入标头的情况下路由未列出的网域），请添加 `{"domain": "*"}` 作为全方位捕获条目。
 
-### Identifiants
+### 凭证
 
-Il existe deux façons d'authentifier le trafic sortant : un identifiant d'informations d'identification stockées et un `transform` intégré à la règle de liste d'autorisation. Le proxy de sortie s'applique à la fois sur le réseau. Dans les deux cas, le secret n'entre jamais dans le bac à sable et n'apparaît jamais dans vos charges utiles d'interaction.
+有两种方式可以对出站流量进行身份验证：通过 ID 引用的存储凭据，以及许可名单规则中的内嵌 `transform`。出站代理在有线连接和无线连接上均适用，因此在两种情况下，密钥都不会进入沙盒，也不会出现在您的互动载荷中。
 
-Les [identifiants gérés](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) sont ceux à utiliser lorsque vous souhaitez stocker le secret une seule fois et le réutiliser. Chaque environnement, agent et déclencheur de votre projet peut faire référence au même ID, et vous pouvez le faire pivoter à un seul endroit.
+如果您想存储一次密钥并重复使用，请使用[受管理的凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)。项目中的每个环境、代理和触发器都可以引用同一 ID，并且您可以在一个位置轮换该 ID。
 
 ### Python
 
@@ -1673,9 +1672,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Un identifiant `oauth2` actualise également son jeton d'accès de manière autonome. Ainsi, une interaction de longue durée ne s'interrompt pas lorsque le jeton expire. Pour obtenir la liste complète des types d'identifiants et des opérations de gestion, consultez [Identifiants](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr).
+`oauth2` 凭据也会自行刷新其访问令牌，因此当令牌过期时，长时间运行的互动不会中断。如需查看凭据类型和管理操作的完整列表，请参阅[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)。
 
-Vous pouvez également définir des en-têtes en ligne avec `transform`. Cela convient lorsque la valeur appartient à un seul appel, par exemple un jeton que vous générez juste avant de créer l'interaction. Les en-têtes définis de cette manière sont injectés par le même proxy de sortie. Ils ne sont jamais exposés dans le bac à sable en tant que variables d'environnement ou fichiers.
+您还可以使用 `transform` 内嵌设置标头。如果值属于单个调用，例如在创建互动之前生成的令牌，则适合使用此方法。以这种方式设置的标头由同一出站代理注入，绝不会在沙盒内作为环境变量或文件公开。
 
 ### Python
 
@@ -1880,11 +1879,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-`credential` et `transform` peuvent apparaître dans la même règle. L'identifiant est appliqué en premier, et `transform` est fusionné par-dessus. Par conséquent, un en-tête `transform` explicite est prioritaire si les deux définissent la même clé. Un modèle courant est un identifiant pour l'en-tête d'authentification, plus un `transform` pour les en-têtes supplémentaires attendus par le service.
+`credential` 和 `transform` 可以出现在同一条规则中。凭据会先应用，然后 `transform` 会在顶部合并，因此如果两者都设置了相同的键，则显式 `transform` 标头会胜出。一种常见模式是身份验证标头的凭据，外加服务预期会随之提供的额外标头的 `transform`。
 
-### Désactiver l'accès au réseau
+### 停用网络访问权限
 
-Pour bloquer tous les accès réseau sortants, définissez `network` sur `disabled` :
+如需屏蔽所有出站网络访问权限，请将 `network` 设置为 `disabled`：
 
 ### Python
 
@@ -2012,12 +2011,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Actualiser les identifiants
+### 刷新凭据
 
-Les jetons intégrés tels que les jetons d'accès et les clés API de courte durée expirent.
-Vous pouvez les actualiser en transmettant le `environment_id` existant avec une nouvelle configuration `network` lors de la prochaine interaction. Les nouvelles règles réseau remplacent entièrement les précédentes, tandis que l'état du système de fichiers de l'environnement (packages, fichiers, dépôts installés) est conservé.
+内嵌令牌（例如访问令牌和短期有效的 API 密钥）会过期。您可以在下一次互动时传递现有 `environment_id` 以及新的 `network` 配置，以刷新这些令牌。新网络规则会完全取代之前的规则，同时保留环境的文件系统状态（已安装的软件包、文件、代码库）。
 
-Si vous utilisez un [identifiant](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=fr) stocké, vous n'en avez pas besoin. Un identifiant `oauth2` s'actualise automatiquement. La rotation d'un identifiant est une `PATCH` sur l'identifiant qui laisse intactes toutes les règles de liste autorisée le référençant.
+如果您改用存储的[凭据](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=zh-cn)，则无需执行此操作。`oauth2` 凭据会自行刷新，轮换任何凭据都是对凭据的 `PATCH` 操作，不会影响引用该凭据的任何许可名单规则。
 
 ### Python
 
@@ -2295,26 +2293,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Cycle de vie de l'environnement
+## 环境生命周期
 
-Les environnements suivent ce cycle de vie :
+环境遵循以下生命周期：
 
-| État | Comportement |
+| 州 | 行为 |
 | --- | --- |
-| **Créé** | Fourni lorsqu'une interaction spécifie `environment: "remote"` ou un objet de configuration. |
-| **Actif** | S'exécuter pendant qu'une interaction est en cours. |
-| **Inactif** | Instantané automatique et arrêt après 15 minutes d'inactivité. |
-| **Hors connexion** | Conservées pendant sept jours après la dernière activité. Vous pouvez la reprendre en transmettant son ID. |
-| **Supprimé** | Supprimés automatiquement du système une fois le délai de conservation de sept jours expiré ou en cas de suppression manuelle. |
+| **创建时间** | 当互动指定 `environment: "remote"` 或配置对象时，系统会提供此值。 |
+| **有效** | 在互动进行期间运行。 |
+| **空闲** | 自动拍摄快照，并在闲置 15 分钟后停止。 |
+| **离线** | 自上次活跃以来保留 7 天。可以通过传递其 ID 来恢复。 |
+| **已删除** | 在 7 天 TTL 保留期限到期后或手动删除时，自动从系统中移除。 |
 
-## API Environments
+## Environments API
 
-Vous pouvez utiliser l'API Environments pour gérer les sessions de bac à sable de manière programmatique.
-L'énumération des environnements vous permet de découvrir les ID de session actifs et de récupérer l'état si une connexion client se termine lors d'une tâche de longue durée. Vous pouvez également inspecter les métadonnées de session et supprimer explicitement les environnements à la fin des workflows au lieu d'attendre l'expiration automatique de la durée de vie.
+您可以使用 Environments API 以编程方式管理沙盒会话。
+通过枚举环境，您可以发现有效会话 ID，并在客户端连接在长时间运行的任务期间终止时恢复状态。您还可以检查会话元数据，并在工作流程结束时显式删除环境，而不是等待自动 TTL 过期。
 
-### Répertorier les environnements
+### 列出环境
 
-Répertoriez les environnements actifs appartenant à votre projet. Utilisez les paramètres de pagination pour contrôler la taille de lot des réponses.
+列出属于项目的有效环境。使用分页参数控制响应批次大小。
 
 ### Python
 
@@ -2407,7 +2405,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments?pageS
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La réponse ressemble à ce qui suit :
+响应类似于以下内容：
 
 ```
 {
@@ -2425,9 +2423,9 @@ La réponse ressemble à ce qui suit :
 }
 ```
 
-### Obtenir un environnement
+### 获取环境
 
-Récupérez les métadonnées et les informations de configuration d'un environnement spécifique à l'aide de son nom de ressource.
+按资源名称检索特定环境的元数据和配置详细信息。
 
 ### Python
 
@@ -2505,7 +2503,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/YOUR_
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La réponse ressemble à ce qui suit :
+响应类似于以下内容：
 
 ```
 {
@@ -2531,9 +2529,9 @@ La réponse ressemble à ce qui suit :
 }
 ```
 
-### Supprimer un environnement
+### 删除环境
 
-Mettez fin à un environnement et supprimez-le explicitement pour nettoyer les ressources du bac à sable une fois vos tâches ou pipelines terminés.
+在任务或流水线完成时，明确终止并删除环境，以清理沙盒资源。
 
 ### Python
 
@@ -2603,19 +2601,19 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/environments/YO
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Gérer les fichiers dans l'environnement
+## 管理环境中的文件
 
-L'agent crée et modifie des fichiers dans le bac à sable lors de l'exécution. Vous pouvez parcourir le contenu des répertoires, obtenir les métadonnées des fichiers, télécharger des fichiers individuels ou des répertoires entiers sous forme d'archives TAR, et importer des fichiers ou extraire des archives directement dans l'environnement. Le stockage dans les environnements de bac à sable est soumis à des limites d'utilisation équitable.
+代理在执行期间会在沙盒内创建和修改文件。您可以浏览目录内容、获取文件元数据、下载单个文件或整个目录（以 tar 归档的形式），以及直接将文件上传到环境中或将归档提取到环境中。沙盒环境中的存储空间受合理使用限额限制。
 
-### Lister les fichiers d'un répertoire
+### 列出目录中的文件
 
-Affichez le contenu d'un répertoire dans l'environnement. Par défaut, la liste affiche le répertoire racine.
+列出环境中的目录内容。默认情况下，列出根目录。
 
-#### Paramètres de requête
+#### 查询参数
 
-| Paramètre | Type | Description |
+| 参数 | 类型 | 说明 |
 | --- | --- | --- |
-| `recursive` | booléen | Lorsque la valeur est `true`, liste tous les fichiers et répertoires de manière récursive. Valeur par défaut : `false`. |
+| `recursive` | 布尔值 | 如果值为 `true`，则以递归方式列出所有文件和目录。默认值：`false`。 |
 
 ### Python
 
@@ -2685,7 +2683,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La réponse renvoie un tableau `files` avec les métadonnées de chaque entrée :
+响应会返回一个 `files` 数组，其中包含每个条目的元数据：
 
 ```
 {
@@ -2710,21 +2708,21 @@ La réponse renvoie un tableau `files` avec les métadonnées de chaque entrée�
 }
 ```
 
-#### Champs de saisie de fichier
+#### 文件条目字段
 
-| Champ | Type | Description |
+| 字段 | 类型 | 说明 |
 | --- | --- | --- |
-| `name` | chaîne | Nom du fichier ou du répertoire. |
-| `path` | chaîne | Chemin d'accès complet par rapport à la racine de l'environnement. |
-| `type` | chaîne | `FILE` ou `DIRECTORY`. |
-| `size_bytes` | chaîne | Taille du fichier en octets (fichiers uniquement). |
-| `mime_type` | chaîne | Type MIME (fichiers uniquement). |
-| `created` | chaîne | Code temporel de création au format ISO 8601. |
-| `modified` | chaîne | Code temporel de la dernière modification au format ISO 8601. |
+| `name` | 字符串 | 文件或目录名称。 |
+| `path` | 字符串 | 相对于环境根目录的完整路径。 |
+| `type` | 字符串 | `FILE` 或 `DIRECTORY`。 |
+| `size_bytes` | 字符串 | 文件大小（以字节为单位，仅限文件）。 |
+| `mime_type` | 字符串 | MIME 类型（仅限文件）。 |
+| `created` | 字符串 | ISO 8601 创建时间戳。 |
+| `modified` | 字符串 | ISO 8601 上次修改时间戳。 |
 
-### Obtenir les métadonnées d'un fichier
+### 获取文件元数据
 
-Obtenez les métadonnées d'un fichier spécifique par chemin d'accès.
+按路径获取特定文件的元数据。
 
 ### Python
 
@@ -2763,7 +2761,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-La réponse renvoie les métadonnées du fichier encapsulées dans un tableau `files` :
+响应会返回封装在 `files` 数组中的文件元数据：
 
 ```
 {
@@ -2781,7 +2779,7 @@ La réponse renvoie les métadonnées du fichier encapsulées dans un tableau `f
 }
 ```
 
-Si le fichier n'existe pas, l'API renvoie une erreur `404` :
+如果文件不存在，API 会返回 `404` 错误：
 
 ```
 {
@@ -2792,9 +2790,9 @@ Si le fichier n'existe pas, l'API renvoie une erreur `404` :
 }
 ```
 
-### Télécharger un seul fichier
+### 下载单个文件
 
-Téléchargez le contenu d'un fichier spécifique. Dans les SDK, utilisez la méthode `download()`. Dans les requêtes REST, ajoutez le paramètre de requête `?alt=media` au chemin d'accès au fichier. Le serveur répond avec `200 OK` et diffuse le contenu brut du fichier.
+下载特定文件的内容。在 SDK 中，使用 `download()` 方法。在 REST 请求中，将 `?alt=media` 查询参数附加到文件路径。服务器会返回 `200 OK` 并以流式传输原始文件内容。
 
 ### Python
 
@@ -2836,9 +2834,9 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
   -o main.py
 ```
 
-### Télécharger un répertoire en tant qu'archive tar
+### 将目录下载为 tar 归档文件
 
-Téléchargez un répertoire entier sous forme d'archive tar en demandant le chemin d'accès au répertoire avec `?alt=media`. Cela renvoie un fichier tar POSIX (non compressé). Utilisez `recursive=true` pour inclure les sous-répertoires imbriqués.
+通过使用 `?alt=media` 请求目录路径，将整个目录下载为 tar 归档文件。此命令会返回一个 POSIX tar 文件（未经过 gzip 压缩）。使用 `recursive=true` 可包含嵌套的子目录。
 
 ### Python
 
@@ -2902,30 +2900,30 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$E
 tar xf snapshot.tar -C ./extracted
 ```
 
-#### Matrice de comportement
+#### 行为矩阵
 
-La matrice de comportement suivante récapitule la réponse attendue et le comportement d'archivage pour les points de terminaison de fichiers et de répertoires, les méthodes HTTP et les paramètres de requête :
+下表总结了文件和目录端点、HTTP 方法和查询参数的预期响应和归档行为：
 
-| Requête | `alt` | `recursive` | `extract` | `overwrite` | Réponse |
+| 请求 | `alt` | `recursive` | `extract` | `overwrite` | 响应 |
 | --- | --- | --- | --- | --- | --- |
-| `GET /files` | (aucun) | (aucun) | - | - | Liste JSON du répertoire racine |
-| `GET /files/{path}` (fichier) | (aucun) | - | - | - | Métadonnées JSON du fichier |
-| `GET /files/{path}` (dir) | (aucun) | `false` | - | - | Liste JSON des enfants immédiats |
-| `GET /files/{path}` (dir) | (aucun) | `true` | - | - | Liste JSON de tous les descendants |
-| `GET /files/{path}?alt=media` (fichier) | `media` | - | - | - | Contenu brut du fichier |
-| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | Archive tar des fichiers immédiats dans le répertoire |
-| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | Archive TAR de tous les fichiers de manière récursive |
-| `GET /files?alt=media` | `media` | `false` | - | - | Archive TAR des fichiers de niveau racine uniquement |
-| `PUT /files/{path}` (fichier) | - | - | `false` | `false` | Écrit le fichier au chemin d'accès. Renvoie `409 Conflict` s'il existe déjà |
-| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | Écrit ou écrase le fichier au chemin d'accès |
-| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | Décompresse l'archive dans le répertoire de destination. Renvoie `409 Conflict` si un fichier cible existe. |
-| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | Décompresse l'archive en remplaçant les fichiers existants |
+| `GET /files` | （无） | （无） | - | - | 根目录的 JSON 列表 |
+| `GET /files/{path}`（文件） | （无） | - | - | - | 文件的 JSON 元数据 |
+| `GET /files/{path}` (dir) | （无） | `false` | - | - | 直属子项的 JSON 列表 |
+| `GET /files/{path}` (dir) | （无） | `true` | - | - | 所有后代的 JSON 列表 |
+| `GET /files/{path}?alt=media`（文件） | `media` | - | - | - | 原始文件内容 |
+| `GET /files/{path}?alt=media` (dir) | `media` | `false` | - | - | 目录中直接文件的 tar 归档 |
+| `GET /files/{path}?alt=media` (dir) | `media` | `true` | - | - | 以递归方式归档所有文件的 Tar 归档 |
+| `GET /files?alt=media` | `media` | `false` | - | - | 仅包含根级文件的 tar 归档 |
+| `PUT /files/{path}`（文件） | - | - | `false` | `false` | 写入路径中的文件。如果该账号已存在，则返回 `409 Conflict` |
+| `PUT /files/{path}?overwrite=true` | - | - | `false` | `true` | 写入或覆盖路径中的文件 |
+| `PUT /files/{path}?extract=true` | - | - | `true` | `false` | 将归档解压缩到目标目录中。如果存在任何目标文件，则返回 `409 Conflict` |
+| `PUT /files/{path}?extract=true&overwrite=true` | - | - | `true` | `true` | 解压缩归档文件，替换所有现有文件 |
 
-### Importer des fichiers dans l'environnement
+### 将文件上传到环境
 
-Importez des fichiers individuels ou des archives de répertoire directement dans un bac à sable d'environnement existant à l'aide de HTTP `PUT`. Les répertoires parents sont créés automatiquement s'ils n'existent pas. Le stockage dans les environnements est soumis à des limites d'utilisation équitable.
+使用 HTTP `PUT` 将单个文件或目录归档文件直接上传到现有环境沙盒。如果父目录不存在，系统会自动创建。环境中的存储空间受合理使用限额限制。
 
-#### Importer un seul fichier
+#### 上传单个文件
 
 ### Python
 
@@ -2977,7 +2975,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @local_file.txt
 ```
 
-La réponse renvoie les métadonnées du fichier importé, encapsulées dans un tableau `files` pour assurer la cohérence avec les points de terminaison list et get :
+响应会返回上传文件的元数据，这些元数据封装在 `files` 数组中，以便与 list 和 get 端点保持一致：
 
 ```
 {
@@ -2993,9 +2991,9 @@ La réponse renvoie les métadonnées du fichier importé, encapsulées dans un 
 }
 ```
 
-#### Importer et extraire une archive de répertoire
+#### 上传并提取目录归档文件
 
-Pour amorcer une codebase ou une structure de répertoire entières en une seule requête, importez une archive `.tar` ou `.tar.gz` avec `extract=true`.
+如需在单个请求中为整个代码库或目录结构提供初始数据，请使用 `extract=true` 上传 `.tar` 或 `.tar.gz` 归档文件。
 
 ### Python
 
@@ -3046,7 +3044,7 @@ curl -X PUT "https://generativelanguage.googleapis.com/upload/v1beta/environment
   --data-binary @source.tar.gz
 ```
 
-La réponse liste tous les fichiers écrits par l'archive :
+响应会列出归档写入的每个文件：
 
 ```
 {
@@ -3069,11 +3067,11 @@ La réponse liste tous les fichiers écrits par l'archive :
 }
 ```
 
-#### Importer des fichiers volumineux avec une session avec reprise
+#### 使用可续传会话上传大文件
 
-Pour les charges utiles volumineuses ou lorsque vous importez des données sur une connexion peu fiable, utilisez une session avec reprise au lieu d'envoyer l'intégralité du corps dans une seule requête. Une importation avec reprise divise le transfert en blocs qui peuvent être réessayés individuellement. Ainsi, en cas d'échec en cours de transfert, vous n'avez pas besoin de tout recommencer.
+对于大型载荷，或者通过不可靠的连接上传时，请使用可续传会话，而不是在一个请求中发送整个正文。可续传上传会将传输拆分为可单独重试的块，因此即使传输中途失败，您也不必重新开始。
 
-Commencez par lancer la session avec `uploadType=resumable`. Envoyez un corps vide et utilisez les en-têtes `X-Upload-Content-Type` et `X-Upload-Content-Length` pour déclarer le type de contenu et la taille totale de la charge utile que vous souhaitez importer :
+首先，使用 `uploadType=resumable` 启动会话。发送空正文，并使用 `X-Upload-Content-Type` 和 `X-Upload-Content-Length` 标头声明您打算上传的载荷的媒体类型和总大小：
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable HTTP/1.1
@@ -3084,7 +3082,7 @@ Content-Length: 0
 x-goog-api-key: $GEMINI_API_KEY
 ```
 
-La réponse contient l'URL de la session dans l'en-tête `Location`. Cette URL contient déjà un `upload_id`. La clé API n'est donc pas nécessaire :
+响应在 `Location` 标头中携带会话网址。此网址已包含 `upload_id`，因此无需再次添加 API 密钥：
 
 ```
 HTTP/1.1 200 OK
@@ -3092,7 +3090,7 @@ Location: https://generativelanguage.googleapis.com/upload/v1beta/environments/$
 Content-Length: 0
 ```
 
-Importez la charge utile à cette URL par blocs. Chaque bloc déclare sa plage d'octets et la taille totale avec un en-tête `Content-Range` :
+将载荷分块上传到该网址。每个块都通过 `Content-Range` 标头声明其字节范围和总大小：
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -3104,7 +3102,7 @@ Content-Length: 10485760
 <10 MB binary payload>
 ```
 
-Chaque bloc, à l'exception du dernier, renvoie `308 Resume Incomplete`. L'en-tête `Range` indique le nombre d'octets validés par le serveur, à partir duquel vous pouvez reprendre l'importation en cas d'échec d'un bloc :
+除最后一个块之外的每个块都会返回 `308 Resume Incomplete`。`Range` 标头会告知您服务器已提交的字节数，如果某个块失败，您将从该位置恢复：
 
 ```
 HTTP/1.1 308 Resume Incomplete
@@ -3112,7 +3110,7 @@ Range: bytes=0-10485759
 Content-Length: 0
 ```
 
-Envoyez les autres blocs de la même manière :
+以相同方式发送剩余的块：
 
 ```
 PUT /upload/v1beta/environments/$ENV_ID/files/workspace/data/large_dataset.bin?uploadType=resumable&upload_id=AJjja9bfHjiYlGi60pUazCaTuPY HTTP/1.1
@@ -3124,7 +3122,7 @@ Content-Length: 10485760
 <remaining 10 MB binary payload>
 ```
 
-Le dernier bloc termine l'importation et renvoie les métadonnées du fichier, dans la même enveloppe `files` qu'une importation en une seule fois :
+最后一个块完成上传并返回文件元数据，该元数据位于与单次上传相同的 `files` 信封中：
 
 ```
 {
@@ -3140,11 +3138,11 @@ Le dernier bloc termine l'importation et renvoie les métadonnées du fichier, d
 }
 ```
 
-Les sessions réactivables fonctionnent également avec `extract` et `overwrite`. Définissez ces paramètres de requête sur la requête d'origine, et non sur les blocs individuels.
+可恢复会话也适用于 `extract` 和 `overwrite`。在初始请求中设置这些查询参数，而不是在各个块中设置。
 
-#### Protection contre l'écrasement
+#### 覆盖保护
 
-La valeur par défaut de `overwrite` est `false`. Si le chemin de destination existe déjà, la requête renvoie une erreur `409 Conflict` et rien n'est écrit :
+默认情况下，`overwrite` 为 `false`。如果目标路径已存在，则请求会返回 `409 Conflict` 错误，并且不会写入任何内容：
 
 ```
 {
@@ -3155,13 +3153,13 @@ La valeur par défaut de `overwrite` est `false`. Si le chemin de destination e
 }
 ```
 
-Pour remplacer un fichier ou un répertoire existant, définissez `overwrite=true` (ou ajoutez `?overwrite=true` dans REST). Avec `extract=true`, la vérification des conflits s'applique à chaque fichier de l'archive. La requête échoue donc si un fichier cible existe.
+如需替换现有文件或目录，请设置 `overwrite=true`（或在 REST 中附加 `?overwrite=true`）。使用 `extract=true` 时，冲突检查会应用于归档中的每个文件，因此如果存在任何目标文件，请求都会失败。
 
-### Télécharger l'instantané complet (obsolète)
+### 下载完整快照（已废弃）
 
-Pour migrer le code existant vers l'API Environment Files :
+如需将现有代码迁移到环境文件 API，请执行以下操作：
 
-- **Python** : remplacez les anciennes requêtes de téléchargement de fichiers par :
+- **Python**：将旧版文件下载请求替换为：
 
   ```
   archive = client.environments.files.download(
@@ -3171,7 +3169,7 @@ Pour migrer le code existant vers l'API Environment Files :
   with open("snapshot.tar", "wb") as f:
       f.write(archive)
   ```
-- **JavaScript** : remplacez les anciennes requêtes de téléchargement de fichiers par :
+- **JavaScript**：将旧版文件下载请求替换为：
 
   ```
   const bytes = await client.environments.files.download({
@@ -3180,7 +3178,7 @@ Pour migrer le code existant vers l'API Environment Files :
   });
   fs.writeFileSync("snapshot.tar", Buffer.from(bytes));
   ```
-- **REST** : remplacez `GET /v1beta/files/environment-$ENV_ID:download?alt=media` par :
+- **REST**：将 `GET /v1beta/files/environment-$ENV_ID:download?alt=media` 替换为：
 
   ```
   curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/environments/$ENV_ID/files?alt=media" \
@@ -3188,41 +3186,41 @@ Pour migrer le code existant vers l'API Environment Files :
     -o snapshot.tar
   ```
 
-## Tarifs et ressources
+## 价格和资源
 
-Chaque environnement s'exécute avec des allocations de ressources fixes :
+每个环境都以固定的资源分配运行：
 
-| Ressource | Valeur |
+| 资源 | 值 |
 | --- | --- |
-| **Processeur** | 4 cœurs |
-| **Mémoire** | 16 Go |
+| **CPU** | 4 个核心 |
+| **内存** | 16 GB |
 
-Le calcul de l'environnement (CPU, mémoire, exécution du bac à sable) n'est **pas facturé** pendant la période de preview. Pour en savoir plus sur les coûts des jetons d'agent, consultez la page [Tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#pricing-for-agents).
+在预览版期间，环境计算资源（CPU、内存、沙盒执行）**不计费**。如需了解代理令牌费用，请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn#pricing-for-agents)。
 
-## Limites
+## 限制
 
-- **État de l'aperçu** : les environnements et les agents gérés sont en version bêta. Les fonctionnalités et les schémas peuvent changer.
-- **Taille des sources intégrées** : les sources intégrées sont limitées à 1 Mo par fichier et à 2 Mo au total pour tous les fichiers.
-- **Taille de la source** : les dépôts Git sont limités à 500 Mo et les dépôts Cloud Storage à 2 Go.
-- **Démarrage de l'environnement** : le provisionnement d'un nouvel environnement prend environ cinq secondes. Les dépôts sources volumineux peuvent augmenter ce délai.
-- **Expiration de l'environnement** : les environnements hors connexion inactifs sont conservés pendant sept jours avant d'expirer à l'aide du nettoyage automatique de la valeur TTL. Si vous transmettez un ID d'environnement expiré ou non valide, une erreur `404 Not Found` s'affiche.
-- **Fichiers compatibles** : l'agent est actuellement limité à la lecture des fichiers texte et image. La prise en charge des fichiers binaires n'est pas encore disponible.
-- **Pas de montage à partir de la racine** : vous ne pouvez pas définir la racine (`/`) comme cible lorsque vous ajoutez une source personnalisée. Vous devez toujours spécifier un sous-répertoire.
+- **预览状态**：环境和受管理的代理处于预览状态。功能和架构可能会发生变化。
+- **内嵌来源大小**：内嵌来源的文件大小上限为 1 MB，所有文件的总大小上限为 2 MB。
+- **源代码大小**：Git 代码库的大小上限为 500 MB，Cloud Storage 代码库的大小上限为 2 GB。
+- **环境启动**：预配新环境最多需要约 5 秒。大型源代码库可能会延长此时间。
+- **环境过期**：不活跃的离线环境会在过期前保留 7 天，然后使用自动 TTL 清理功能将其清理掉。传递过期或无效的环境 ID 会返回 `404 Not Found` 错误。
+- **文件支持**：智能体目前只能读取文本和图片文件。尚不支持二进制文件。
+- **无法从根目录装载**：添加自定义来源时，您无法将根目录 (`/`) 设置为目标，必须始终指定子目录。
 
-## Étape suivante
+## 后续步骤
 
-- [Présentation des agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) : découvrez les concepts de base des agents gérés.
-- [Guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) : commencez à créer des conversations multitours et du streaming.
-- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) : découvrez les fonctionnalités, les outils, la sélection de modèles et la tarification de l'agent par défaut.
-- [Créer des agents personnalisés](https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr) : définissez vos propres agents à l'aide de `AGENTS.md` et `SKILL.md`.
-- [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=fr) : appliquez des garde-fous de sécurité et exécutez des validations d'effets secondaires dans le bac à sable.
+- [代理概览](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn)：了解受管代理的核心概念。
+- [快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)：开始构建多轮对话和流式传输。
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)：了解默认代理的功能、工具、模型选择和定价。
+- [构建自定义代理](https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-cn)：使用 `AGENTS.md` 和 `SKILL.md` 定义您自己的代理。
+- [钩子](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=zh-cn)：在沙盒内强制执行安全防护措施并运行副作用验证。
 
-Envoyer des commentaires
+发送反馈
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Dernière mise à jour le 2026/10/07 (UTC).
+最后更新时间 (UTC)：2026-10-07。
 
-Voulez-vous nous donner plus d'informations ?
+需要向我们提供更多信息？
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/10/07 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-07。"],[],[]]

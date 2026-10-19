@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=it
-fetched_at: 2026-10-12T06:57:43.987411+00:00
-title: "Interazioni di streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=zh-CN
+fetched_at: 2026-10-19T05:57:43.471460+00:00
+title: "\u6d41\u5f0f\u4f20\u8f93\u4e92\u52a8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash è ora disponibile. [Mettiti alla prova](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=it).
+Gemini 4 Argon 现已上架。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-cn)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Invia feedback
+发送反馈
 
-# Interazioni di streaming
+# 流式传输互动
 
-Quando crei un'interazione, puoi impostare `stream: true` per trasmettere in streaming la risposta in modo incrementale utilizzando gli [eventi inviati dal server](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
+创建 Interaction 时，您可以将 `stream: true` 设置为使用[服务器发送的事件](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE) 逐步流式传输回答。
 
 ### Python
 
@@ -200,24 +200,24 @@ event: done
 data: [DONE]
 ```
 
-## Tipi di evento
+## 事件类型
 
-Ogni evento inviato dal server include un `event_type` denominato e dati JSON associati. L'API Interactions utilizza un modello di streaming simmetrico in cui tutti i contenuti (testo, chiamate di strumenti, pensiero) scorrono attraverso un evento **basato su passaggi** coerente.
+每个服务器发送的事件都包含一个名为 `event_type` 的名称和关联的 JSON 数据。Interactions API 使用对称的流式传输模型，其中所有内容（文本、工具调用、思考）都通过一致的**基于步骤**的事件流动。
 
-Ogni stream segue questo flusso di eventi:
+每个数据流都遵循以下事件流：
 
-1. `interaction.created`: l'interazione viene creata e include i metadati (ID, modello, stato).
-2. Una serie di **passaggi**, ciascuno composto da:
-   - Un evento `step.start`, che indica il tipo di passaggio (ad es. `model_output`, `thought`, `function_call`).
-   - Uno o più eventi `step.delta` con dati incrementali per questo passaggio.
-   - Un evento `step.stop` che contrassegna il passaggio come completato.
-3. Un evento `interaction.completed` con statistiche `usage` finali.
+1. `interaction.created`：创建互动，包括元数据（ID、模型、状态）。
+2. 一系列**步骤**，每个步骤都包含：
+   - `step.start` 事件，用于指示步骤类型（例如 `model_output`、`thought`、`function_call`）。
+   - 一个或多个 `step.delta` 事件，其中包含相应步骤的增量数据。
+   - 用于将步骤标记为已完成的 `step.stop` 事件。
+3. 具有最终 `usage` 统计信息的 `interaction.completed` 事件。
 
-Quando imposti `stream: false`, l'API restituisce un singolo oggetto `interaction` con un array `steps`. Ogni elemento in `steps` è la versione completamente assemblata di un ciclo `step.start` → `step.delta` → `step.stop`.
+设置 `stream: false` 后，API 会返回一个包含 `steps` 数组的 `interaction` 对象。`steps` 中的每个元素都是一个 `step.start` → `step.delta`(s) → `step.stop` 周期的完全组装版本。
 
 ### `interaction.created`
 
-Inviato al momento della creazione dell'interazione. Contiene l'ID interazione, il modello e lo stato iniziale.
+在首次创建互动时发送。包含互动 ID、模型和初始状态。
 
 ```
 event: interaction.created
@@ -226,7 +226,7 @@ data: {"interaction": {"id": "...", "model": "gemini-3.8-flash", "status": "in_p
 
 ### `interaction.status_update`
 
-Indica una transizione di stato a livello di interazione. Potrebbe essere visualizzato tra i passaggi.
+表示互动级状态转换。可能会显示在步骤之间。
 
 ```
 event: interaction.status_update
@@ -235,23 +235,23 @@ data: {"interaction_id": "...", "status": "in_progress", "event_type": "interact
 
 ### `step.start`
 
-Indica l'inizio di un nuovo passaggio. Contiene i passaggi `type` e `index`. Il tipo di passaggio determina quali tipi di delta prevedere e come viene visualizzato il passaggio in una risposta non in streaming:
+标记新步骤的开始。包含步骤 `type` 和 `index`。步进类型决定了要预期哪些增量类型，以及步进在非流式响应中的显示方式：
 
-| Tipo di passaggio | Tipi di delta previsti | Descrizione |
+| 步骤类型 | 预期增量类型 | 说明 |
 | --- | --- | --- |
-| `model_output` | `text`, `image` e `audio` | Il contenuto della risposta finale del modello. |
-| `thought` | `thought_signature`, `thought_summary` | Ragionamento Chain-of-Thought. `summary` è presente solo quando `thinking_summaries` è abilitato. |
-| `function_call` | `arguments_delta` | Una richiesta al client di eseguire una funzione. Imposta lo stato dell'interazione su `requires_action`. |
-| Strumenti lato server | Varia in base allo strumento | Strumenti eseguiti dall'API (ad es. `google_search_call`, `google_search_result`, `code_execution_call`, `code_execution_result`). |
+| `model_output` | `text`、`image`、`audio` | 模型的最终回答内容。 |
+| `thought` | `thought_signature`、`thought_summary` | 思维链推理。仅当 `thinking_summaries` 处于启用状态时，才会显示 `summary`。 |
+| `function_call` | `arguments_delta` | 客户端执行函数的请求。将互动状态设置为 `requires_action`。 |
+| 服务器端工具 | 因工具而异 | 由 API 执行的工具（例如 `google_search_call`、`google_search_result`、`code_execution_call`、`code_execution_result`）。 |
 
-Per l'elenco completo, consulta il [riferimento all'API Interactions](https://ai.google.dev/api/interactions-api?hl=it).
+如需查看完整列表，请参阅[Interactions API 参考文档](https://ai.google.dev/api/interactions-api?hl=zh-cn)。
 
 ```
 event: step.start
 data: {"index": 0, "step": {"type": "model_output"}, "event_type": "step.start"}
 ```
 
-Per le chiamate di funzioni, il passaggio include il nome della funzione, l'ID e gli argomenti vuoti `{}`.
+对于函数调用，该步骤包括函数名称、ID 和空实参 `{}`。
 
 ```
 event: step.start
@@ -260,11 +260,11 @@ data: {"index": 0, "step": {"type": "function_call", "id":"un6k8t18", "name": "g
 
 ### `step.delta`
 
-Dati incrementali per il passaggio attuale. L'oggetto `delta` contiene un campo `type` che ne determina la forma.
+当前步的增量数据。`delta` 对象包含一个用于确定其形状的 `type` 字段。
 
-**Esempi:**
+**示例**：
 
-**`text`:** token di testo incrementale di un passaggio `model_output`:
+**`text`**：来自 `model_output` 步骤的增量文本令牌：
 
 ```
 event: step.delta
@@ -274,43 +274,42 @@ event: step.delta
 data: {"index": 0, "delta": {"type": "text", "text": ", and I live in Germany." }, "event_type": "step.delta"}
 ```
 
-**`image`:** dati immagine con codifica Base64 da un passaggio `model_output`:
+**`image`**：来自 `model_output` 步骤的 Base64 编码图片数据：
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCg..."}, "event_type": "step.delta"}
 ```
 
-**`thought_summary`:** contenuti di riepilogo del pensiero di un passaggio `thought`:
+**`thought_summary`**：来自 `thought` 步骤的思考总结内容：
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "thought_summary", "content": {"type": "text", "text": "I need to find the GCD..."}}, "event_type": "step.delta"}
 ```
 
-**`arguments_delta`:** stringa JSON (parziale) per gli argomenti della chiamata di funzione. Devono essere accumulati in tutti i delta:
+**`arguments_delta`**：函数调用实参的（部分）JSON 字符串。必须在多个增量中累积：
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "arguments_delta", "arguments": "{\"location\": \"San Francisco, CA\"}"}, "event_type": "step.delta"}
 ```
 
-Questi sono alcuni dei tipi di delta più comuni. Per l'elenco completo di tutti i tipi di delta, consulta il [riferimento API Interactions](https://ai.google.dev/api/interactions-api?hl=it).
+以下是一些最常见的增量类型。如需查看所有增量类型的完整列表，请参阅 [Interactions API 参考文档](https://ai.google.dev/api/interactions-api?hl=zh-cn)。
 
 ### `step.stop`
 
-Indica la fine di un passaggio. Contiene il passaggio `index`.
+标记步骤的结束。包含步骤 `index`。
 
 ```
 event: step.stop
 data: {"index": 0, "event_type": "step.stop"}
 ```
 
-Quando utilizzi l'[agente antigravità](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it), l'evento
-`step.stop` può includere anche statistiche sull'utilizzo:
+使用 [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn) 时，`step.stop` 事件可能还会包含使用情况统计信息：
 
-- **`usage`**: l'utilizzo accumulato (totale parziale) dall'inizio dell'interazione.
-- **`step_usage`**: l'utilizzo di questo passaggio specifico.
+- **`usage`**：自互动开始以来的累计使用量（运行总计）。
+- **`step_usage`**：相应步骤的用途。
 
 ```
 event: step.stop
@@ -319,7 +318,7 @@ data: {"index": 2, "event_type": "step.stop", "usage": {"total_tokens": 4650, "t
 
 ### `interaction.completed`
 
-Inviato al termine dell'interazione. Contiene l'oggetto dell'interazione finale con le statistiche `usage`. In modalità non streaming, questo è l'oggetto di risposta di primo livello. Non include `steps` nella risposta.
+互动结束时发送。包含具有 `usage` 统计信息的最终互动对象。在非流式模式下，这是顶级响应对象本身。不在回答中包含 `steps`。
 
 ```
 event: interaction.completed
@@ -328,31 +327,23 @@ data: {"interaction": {"id": "v1_abc123", "status": "completed", "usage": {"tota
 
 ### `error`
 
-Inviato quando si verifica un errore durante l'interazione. Contiene un oggetto di errore con un messaggio e un codice.
+在互动期间发生错误时发送。包含一个带有消息和代码的错误对象。
 
 ```
 event: error
 data: {"error":{"message":"Deadline expired before operation could complete.","code":"gateway_timeout"},"event_type":"error"}
 ```
 
-## Streaming con gli strumenti
+## 使用工具进行流式传输
 
-L'API Interactions supporta lo streaming con strumenti lato client (chiamata di funzione) e lato server (Ricerca Google, esecuzione di codice e così via) in un'unica richiesta. Durante lo streaming, le chiamate agli strumenti vengono visualizzate come passaggi digitati nello stream di eventi. Per le chiamate di funzione, l'evento `step.start` fornisce il nome della funzione e gli eventi `step.delta` trasmettono gli argomenti come stringhe JSON (`arguments_delta`). Devi accumulare questi delta per ottenere gli argomenti completi.
-Gli strumenti lato server come la Ricerca Google vengono eseguiti automaticamente dall'API, producendo i passaggi `google_search_call` e `google_search_result`.
+Interactions API 支持在单个请求中通过客户端工具（函数调用）和服务器端工具（Google 搜索、代码执行等）进行流式传输。在流式传输期间，工具调用会以输入步骤的形式显示在事件流中。对于函数调用，`step.start` 事件会传递函数名称，而 `step.delta` 事件会以 JSON 字符串 (`arguments_delta`) 的形式流式传输实参。您必须累积这些增量才能获得完整的实参。Google 搜索等服务器端工具由 API 自动执行，从而生成 `google_search_call` 和 `google_search_result` 步骤。
 
-### Streaming con la chiamata di funzione
+### 使用函数调用进行流式传输
 
-Per eseguire la chiamata di funzione con lo streaming, il client deve gestire una conversazione
-multiturno:
+如需使用流式处理执行函数调用，客户端必须处理多轮对话：
 
-1. **Turno 1 (richiesta di funzione):** chiama `interactions.create` con `stream: true`
-   e il tuo `tools` definito. L'API trasmetterà in streaming un passaggio `function_call`. Devi
-   accumulare le stringhe JSON degli argomenti incrementali (`arguments_delta`) dagli
-   eventi `step.delta` finché l'interazione non viene completata con lo stato
-   `requires_action`.
-2. **Turno 2 (invio del risultato):** chiama di nuovo `interactions.create`, passando
-   `previous_interaction_id` (corrispondente all'ID della prima interazione) e
-   inviando un blocco `function_result` all'interno dell'array `input`. In questo modo, il flusso viene ripreso e il modello può generare la risposta finale.
+1. **第 1 轮（函数请求）**：使用 `stream: true` 和您定义的 `tools` 调用 `interactions.create`。该 API 将以流式传输 `function_call` 步。您必须从 `step.delta` 事件中累积增量实参 JSON 字符串 (`arguments_delta`)，直到互动以状态 `requires_action` 完成。
+2. **第 2 轮（发送结果）**：再次调用 `interactions.create`，传递 `previous_interaction_id`（与第一次互动的 ID 匹配），并在 `input` 数组中发送 `function_result` 块。这会恢复流，使模型能够生成最终回答。
 
 ### Python
 
@@ -691,7 +682,7 @@ func main() {
 
 ### REST
 
-**Turno 1:** richiesta di chiamata di funzione
+**第 1 轮**：请求函数调用
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -722,7 +713,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Turno 2:** invia il risultato della funzione utilizzando `previous_interaction_id` e `call_id` del Turno 1
+**第 2 轮**：使用第 1 轮中的 `previous_interaction_id` 和 `call_id` 发送函数结果
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -751,9 +742,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Streaming con più strumenti
+### 使用多种工具进行直播
 
-L'esempio seguente utilizza sia uno strumento `function` sia `google_search` in una sola richiesta:
+以下示例在一个请求中同时使用了 `function` 工具和 `google_search`：
 
 ### Python
 
@@ -1145,9 +1136,9 @@ event: done
 data: [DONE]
 ```
 
-## Streaming con pensiero
+## 包含思考的流式传输
 
-Quando il modello utilizza la funzionalità di pensiero, riceverai `thought` passaggi con due tipi di delta distinti: `thought_summary` (contenuti di riepilogo incrementali di testo o immagine) e `thought_signature` (una rappresentazione criptata del ragionamento interno del modello, inviata come ultimo delta prima di `step.stop`). Se `thinking_summaries` è abilitato, i delta `thought_summary` trasmettono in streaming un riepilogo del ragionamento del modello. Per maggiori dettagli sul pensiero, consulta la [guida al pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it).
+当模型使用思考功能时，您会收到 `thought` 步，其中包含两种不同的增量类型：`thought_summary`（增量文本或图片摘要内容）和 `thought_signature`（模型内部推理的加密表示形式，在 `step.stop` 之前作为最后一个增量发送）。如果启用 `thinking_summaries`，`thought_summary` 增量会流式传输模型推理的摘要。如需详细了解思考，请参阅[思考指南](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)。
 
 ### Python
 
@@ -1378,9 +1369,9 @@ data: {"index":1,"step":{"type":"model_output"},"event_type":"step.start"}
 ...
 ```
 
-## Streaming con gli agenti
+## 使用代理进行流式传输
 
-L'API Interactions supporta agenti come Deep Research. Gli agenti utilizzano `background=True` e restituiscono i risultati in modo asincrono, ma puoi anche trasmettere in streaming le interazioni degli agenti per ricevere aggiornamenti sui progressi e passaggi intermedi man mano che si verificano. Per maggiori dettagli, consulta la [guida all'esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it) e la [guida a Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it).
+Interactions API 支持 Deep Research 等智能体。代理使用 `background=True` 并异步返回结果，但您也可以流式传输代理互动，以便在互动发生时接收进度更新和中间步骤。如需了解详情，请参阅[后台执行指南](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-cn)和 [Deep Research 指南](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn)。
 
 ### Python
 
@@ -1639,11 +1630,11 @@ event: done
 data: [DONE]
 ```
 
-## Generazione di immagini in streaming
+## 流式图片生成
 
-L'API Interactions supporta lo streaming simultaneo di più modalità di output. Se richiedi sia `text` sia `image` in `response_format`, puoi ricevere testo alternato e immagini generate nello stesso stream.
+Interactions API 支持同时以流式传输多种输出模态。通过在 `response_format` 中同时请求 `text` 和 `image`，您可以在同一数据流中接收交织的文本和生成的图片。
 
-L'esempio seguente utilizza `gemini-3.1-flash-image` (Nano Banana 2) per cercare informazioni e generare una storia con illustrazioni intercalate.
+以下示例使用 `gemini-3.1-flash-image` (Nano Banana 2) 搜索信息并生成包含插图的故事。
 
 ### Python
 
@@ -1950,24 +1941,24 @@ event: done
 data: [DONE]
 ```
 
-## Gestione di eventi sconosciuti
+## 处理未知事件
 
-In conformità con le norme di controllo delle versioni dell'API, nel tempo potrebbero essere aggiunti nuovi tipi di eventi e tipi di delta. Il codice deve gestire i tipi di eventi sconosciuti in modo controllato: registra e salta gli eventi che non riconosci anziché generare un errore.
+根据 API 的版本控制政策，随着时间的推移，可能会添加新的事件类型和增量类型。您的代码应妥善处理未知事件类型，记录并跳过任何无法识别的事件，而不是抛出错误。
 
-## Passaggi successivi
+## 后续步骤
 
-- Scopri di più sull'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it).
-- Esplora la [chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) con gli strumenti.
-- Scopri di più sulla [funzione Pensa](https://ai.google.dev/gemini-api/docs/thinking?hl=it) per un ragionamento avanzato.
-- Prova l'[agente Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) per le attività di lunga durata.
-- Per tutti i tipi di eventi e delta, consulta il [riferimento API Interactions](https://ai.google.dev/api/interactions-api?hl=it).
+- 详细了解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)。
+- 探索使用工具进行[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)。
+- 了解如何通过[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)来增强推理能力。
+- 对于长时间运行的任务，请尝试使用 [Deep Research 智能体](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn)。
+- 如需查看所有事件类型和增量类型，请参阅[Interactions API 参考文档](https://ai.google.dev/api/interactions-api?hl=zh-cn)。
 
-Invia feedback
+发送反馈
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ultimo aggiornamento 2026-09-24 UTC.
+最后更新时间 (UTC)：2026-09-24。
 
-Vuoi dirci altro?
+需要向我们提供更多信息？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-09-24 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-09-24。"],[],[]]

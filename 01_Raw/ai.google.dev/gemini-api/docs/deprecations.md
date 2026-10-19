@@ -1,204 +1,204 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=pl
-fetched_at: 2026-10-12T06:58:23.825355+00:00
-title: "Wycofanie Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deprecations?hl=he
+fetched_at: 2026-10-19T05:41:16.096011+00:00
+title: "\u05d4\u05d5\u05e6\u05d0\u05d4 \u05de\u05e9\u05d9\u05de\u05d5\u05e9 \u05e9\u05dc Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Prześlij opinię
+שליחת משוב
 
-# Wycofanie Gemini
+# הוצאה משימוש של Gemini
 
-Na tej stronie znajdziesz harmonogramy wycofywania [stabilnych (ogólnodostępnych)](https://ai.google.dev/gemini-api/docs/models?hl=pl#stable) i [wersji podglądowych](https://ai.google.dev/gemini-api/docs/models?hl=pl#preview) modeli oraz zarządzanych agentów w interfejsie Gemini API. „**Wycofanie**” to ogłoszenie, że nie będziemy już obsługiwać danego modelu i w najbliższej przyszłości zostanie on „**wyłączony**”. Gdy model zostanie „**wyłączony**”, zostanie całkowicie wyłączony, a punkt końcowy przestanie być dostępny.
+בדף הזה מפורטים לוחות הזמנים הידועים להוצאה משימוש של מודלים [יציבים (GA)](https://ai.google.dev/gemini-api/docs/models?hl=he#stable) ו[בגרסת טרום-השקה (Preview)](https://ai.google.dev/gemini-api/docs/models?hl=he#preview), ושל סוכנים מנוהלים ב-Gemini API. **הוצאה משימוש** היא הודעה על כך שאנחנו כבר לא מספקים תמיכה במודל מסוים, ושהוא **יושבת** בעתיד הקרוב. אחרי שמודל **מושבת**, הוא מושבת לחלוטין ונקודת הקצה כבר לא זמינה.
 
-Ogłoszenia o wycofaniu są publikowane na stronie [Informacje o wersji](https://ai.google.dev/gemini-api/docs/changelog?hl=pl), a ogłoszone najwcześniejsze daty wyłączenia są śledzone na tej stronie.
-Modele, które zostały już wyłączone, są oznaczone szarym tłem.
+הודעות על הוצאה משימוש מתפרסמות בדף [נתוני הגרסה](https://ai.google.dev/gemini-api/docs/changelog?hl=he), והתאריכים המוקדמים ביותר להשבתה שפורסמו מופיעים בדף הזה.
+מודלים שכבר הושבתו מסומנים ברקע אפור.
 
-## Modele Gemini 3
+## המודלים של Gemini 3
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-3.8-flash-tts` | 22 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.8-flash-lite-tts` | 22 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.8-live` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.8-live-extended-thinking` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.8-flash` | 2 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.7-flash` | 13 sierpnia 2026 r. | Nie ogłoszono daty wyłączenia | `gemini-3.8-flash` (żądania do `gemini-3.7-flash` są automatycznie przekierowywane do `gemini-3.8-flash`) |
-| `gemini-3.6-flash` | 21 lipca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.5-flash-lite` | 21 lipca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.5-flash` | 19 maja 2026 r. | Nie ogłoszono daty wyłączenia | `gemini-3.6-flash` (żądania do `gemini-3.5-flash` są automatycznie przekierowywane do `gemini-3.6-flash`) |
-| `gemini-3.1-flash-lite` | 7 maja 2026 r. | 7 maja 2027 r. | `gemini-3.5-flash-lite` |
-| Podgląd modeli | | | |
-| `gemini-3.1-flash-tts-preview` | 26 lutego 2026 r. | 17 listopada 2026 r. | `gemini-3.8-flash-tts` lub `gemini-3.8-flash-lite-tts` |
-| `gemini-3.1-pro-preview` | 19 lutego 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3-flash-preview` | 17 grudnia 2025 r. | Nie ogłoszono daty wyłączenia | `gemini-3.6-flash` |
-| `gemini-3-pro-preview` | 18 listopada 2025 r. | 9 marca 2026 r. | `gemini-3.1-pro-preview` |
-| `gemini-3.1-flash-lite-preview` | 3 marca 2026 r. | 25 maja 2026 r. | `gemini-3.1-flash-lite` |
+| `gemini-3.8-flash-tts` | ‫22 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.8-flash-lite-tts` | ‫22 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.8-live` | ‫15 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.8-live-extended-thinking` | ‫15 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.8-flash` | ‫2 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.7-flash` | ‫13 באוגוסט 2026 | לא רלוונטי | ‫`gemini-3.8-flash` (לא זמין לבחירה ב-Google AI Studio; נקודת הקצה לא מושבתת ומנתבת אוטומטית בקשות API אל `gemini-3.8-flash`) |
+| `gemini-3.6-flash` | ‫21 ביולי 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.5-flash-lite` | ‫21 ביולי 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.5-flash` | 19 במאי 2026 | לא רלוונטי | ‫`gemini-3.6-flash` (לא זמין לבחירה ב-Google AI Studio; נקודת הקצה לא מושבתת ומנתבת באופן אוטומטי בקשות API אל `gemini-3.6-flash`) |
+| `gemini-3.1-flash-lite` | ‫7 במאי 2026 | ‫7 במאי 2027 | `gemini-3.5-flash-lite` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-3.1-flash-tts-preview` | ‫26 בפברואר 2026 | ‫17 בנובמבר 2026 | `gemini-3.8-flash-tts` או `gemini-3.8-flash-lite-tts` |
+| `gemini-3.1-pro-preview` | ‫19 בפברואר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3-flash-preview` | ‫17 בדצמבר 2025 | לא הוכרז תאריך להפסקת התמיכה | `gemini-3.6-flash` |
+| `gemini-3-pro-preview` | ‫18 בנובמבר 2025 | ‫9 במרץ 2026 | `gemini-3.1-pro-preview` |
+| `gemini-3.1-flash-lite-preview` | ‫3 במרץ 2026 | ‫25 במאי 2026 | `gemini-3.1-flash-lite` |
 
-## modele Gemini 2.5 Pro,
+## מודלים של Gemini 2.5 Pro
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-2.5-pro` | 17 czerwca 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `gemini-2.5-computer-use-preview-10-2025` | 7 października 2025 r. | 28 lipca 2026 r. | `gemini-3.8-flash` |
-| `gemini-2.5-pro-preview-03-25` | 3 marca 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-05-06` | 6 maja 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
-| `gemini-2.5-pro-preview-06-05` | 5 czerwca 2025 r. | 2 grudnia 2025 r. | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro` | ‫17 ביוני 2025 | לא הוכרז תאריך להפסקת התמיכה |  |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-2.5-computer-use-preview-10-2025` | ‫7 באוקטובר 2025 | ‫28 ביולי 2026 | `gemini-3.8-flash` |
+| `gemini-2.5-pro-preview-03-25` | ‫3 במרץ 2025 | ‫2 בדצמבר 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-05-06` | ‫6 במאי 2025 | ‫2 בדצמבר 2025 | `gemini-3.1-pro-preview` |
+| `gemini-2.5-pro-preview-06-05` | ‫5 ביוני 2025 | ‫2 בדצמבר 2025 | `gemini-3.1-pro-preview` |
 
-## modele Gemini 2.5 Flash,
+## מודלים של Gemini 2.5 Flash
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-2.5-flash` | 17 czerwca 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.5-flash-lite` | 22 lipca 2025 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `gemini-2.5-flash-lite-preview-09-2025` | 25 września 2025 r. | 31 marca 2026 r. | `gemini-3.1-flash-lite` |
-| `gemini-2.5-flash-preview-05-20` | 20 maja 2025 r. | 18 listopada 2025 r. | `gemini-3.6-flash` |
-| `gemini-2.5-flash-preview-09-25` | 25 września 2025 r. | 17 lutego 2026 r. | `gemini-3.6-flash` |
+| `gemini-2.5-flash` | ‫17 ביוני 2025 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-2.5-flash-lite` | ‫22 ביולי 2025 | לא הוכרז תאריך להפסקת התמיכה |  |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-2.5-flash-lite-preview-09-2025` | ‫25 בספטמבר 2025 | ‫31 במרץ 2026 | `gemini-3.1-flash-lite` |
+| `gemini-2.5-flash-preview-05-20` | ‫20 במאי 2025 | ‫18 בנובמבר 2025 | `gemini-3.6-flash` |
+| `gemini-2.5-flash-preview-09-25` | ‫25 בספטמבר 2025 | ‫17 בפברואר 2026 | `gemini-3.6-flash` |
 
-## Modele Gemini 2.0
+## מודלים של Gemini 2.0
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-2.0-flash` | 5 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.6-flash` |
-| `gemini-2.0-flash-001` | 5 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.6-flash` |
-| `gemini-2.0-flash-lite` | 25 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.1-flash-lite` |
-| `gemini-2.0-flash-lite-001` | 25 lutego 2025 r. | 1 czerwca 2026 r. | `gemini-3.1-flash-lite` |
-| Podgląd modeli | | | |
-| `gemini-2.0-flash-lite-preview` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
-| `gemini-2.0-flash-lite-preview-02-05` | 5 lutego 2025 r. | 9 grudnia 2025 r. | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash` | ‫5 בפברואר 2025 | ‫1 ביוני 2026 | `gemini-3.6-flash` |
+| `gemini-2.0-flash-001` | ‫5 בפברואר 2025 | ‫1 ביוני 2026 | `gemini-3.6-flash` |
+| `gemini-2.0-flash-lite` | ‫25 בפברואר 2025 | ‫1 ביוני 2026 | `gemini-3.1-flash-lite` |
+| `gemini-2.0-flash-lite-001` | ‫25 בפברואר 2025 | ‫1 ביוני 2026 | `gemini-3.1-flash-lite` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-2.0-flash-lite-preview` | ‫5 בפברואר 2025 | ‫9 בדצמבר 2025 | `gemini-2.5-flash-lite` |
+| `gemini-2.0-flash-lite-preview-02-05` | ‫5 בפברואר 2025 | ‫9 בדצמבר 2025 | `gemini-2.5-flash-lite` |
 
-## Modele Live API
+## מודלים של Live API
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-3.8-live` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.8-live-extended-thinking` | 15 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.5-transcribe-live` | Sierpień 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.0-flash-live-001` | 9 kwietnia 2025 r. | 9 grudnia 2025 r. | `gemini-3.8-live` |
-| Podgląd modeli | | | |
-| `gemini-3.5-live-translate-preview` | Czerwiec 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.1-flash-live-preview` | 11 marca 2026 r. | 17 listopada 2026 r. | `gemini-3.8-live` |
-| `gemini-2.5-flash-native-audio-preview-12-2025` | 12 grudnia 2025 r. | 17 listopada 2026 r. | `gemini-3.8-live` |
-| `gemini-live-2.5-flash-preview` | 17 czerwca 2025 r. | 9 grudnia 2025 r. | `gemini-3.8-live` |
+| `gemini-3.8-live` | ‫15 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.8-live-extended-thinking` | ‫15 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.5-transcribe-live` | אוגוסט 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-2.0-flash-live-001` | 9 באפריל 2025 | ‫9 בדצמבר 2025 | `gemini-3.8-live` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-3.5-live-translate-preview` | יוני 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.1-flash-live-preview` | ‫11 במרץ 2026 | ‫17 בנובמבר 2026 | `gemini-3.8-live` |
+| `gemini-2.5-flash-native-audio-preview-12-2025` | ‫12 בדצמבר 2025 | ‫17 בנובמבר 2026 | `gemini-3.8-live` |
+| `gemini-live-2.5-flash-preview` | ‫17 ביוני 2025 | ‫9 בדצמבר 2025 | `gemini-3.8-live` |
 
-## Modele audio
+## מודלים של אודיו
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-3.5-transcribe` | Sierpień 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `gemini-2.5-flash-preview-tts` | 20 maja 2025 r. | 17 listopada 2026 r. | `gemini-3.8-flash-tts` lub `gemini-3.8-flash-lite-tts` |
-| `gemini-2.5-pro-preview-tts` | 20 maja 2025 r. | 17 listopada 2026 r. | `gemini-3.8-flash-tts` lub `gemini-3.8-flash-lite-tts` |
+| `gemini-3.5-transcribe` | אוגוסט 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-2.5-flash-preview-tts` | ‫20 במאי 2025 | ‫17 בנובמבר 2026 | `gemini-3.8-flash-tts` או `gemini-3.8-flash-lite-tts` |
+| `gemini-2.5-pro-preview-tts` | ‫20 במאי 2025 | ‫17 בנובמבר 2026 | `gemini-3.8-flash-tts` או `gemini-3.8-flash-lite-tts` |
 
-## Modele wektorów dystrybucyjnych
+## מודלים של הטמעה
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-embedding-2` | 22 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-embedding-001` | 14 lipca 2025 r. | 14 maja 2028 r. | `gemini-embedding-2` |
-| `text-embedding-004` | 9 kwietnia 2024 r. | 14 stycznia 2026 r. | `gemini-embedding-2` |
-| Podgląd modeli | | | |
-| `embedding-2-preview` | 10 marca 2026 r. | 10 sierpnia 2026 r. | `gemini-embedding-2` |
-| `embedding-001` | 9 kwietnia 2024 r. | 30 października 2025 r. | `gemini-embedding-2` |
-| `embedding-gecko-001` |  | 30 października 2025 r. | `gemini-embedding-2` |
-| `gemini-embedding-exp` |  | 30 października 2025 r. | `gemini-embedding-2` |
-| `gemini-embedding-exp-03-07` |  | 30 października 2025 r. | `gemini-embedding-2` |
+| `gemini-embedding-2` | ‫22 באפריל 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-embedding-001` | ‫14 ביולי 2025 | ‫14 במאי 2028 | `gemini-embedding-2` |
+| `text-embedding-004` | ‫9 באפריל 2024 | ‫14 בינואר 2026 | `gemini-embedding-2` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `embedding-2-preview` | ‫10 במרץ 2026 | ‫10 באוגוסט 2026 | `gemini-embedding-2` |
+| `embedding-001` | ‫9 באפריל 2024 | ‫30 באוקטובר 2025 | `gemini-embedding-2` |
+| `embedding-gecko-001` |  | ‫30 באוקטובר 2025 | `gemini-embedding-2` |
+| `gemini-embedding-exp` |  | ‫30 באוקטובר 2025 | `gemini-embedding-2` |
+| `gemini-embedding-exp-03-07` |  | ‫30 באוקטובר 2025 | `gemini-embedding-2` |
 
-## Modele Nano Banana
+## מודלים של Nano Banana
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-nano-banana-2.1` | 6 października 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.1-flash-lite-image` | 30 czerwca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-3.1-flash-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia | `gemini-nano-banana-2.1` |
-| `gemini-3-pro-image` | 28 maja 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `gemini-2.5-flash-image` | 2 października 2025 r. | 15 marca 2027 r. | `gemini-3.1-flash-lite-image` |
-| Podgląd modeli | | | |
-| `gemini-3.1-flash-image-preview` | 26 lutego 2026 r. | 25 czerwca 2026 r. | `gemini-nano-banana-2.1` |
-| `gemini-3-pro-image-preview` | 20 listopada 2025 r. | 25 czerwca 2026 r. | `gemini-3-pro-image` |
-| `gemini-2.5-flash-image-preview` | 7 maja 2025 r. | 15 stycznia 2026 r. | `gemini-nano-banana-2.1` |
-| `gemini-2.0-flash-preview-image-generation` | 7 maja 2025 r. | 14 listopada 2025 r. | `gemini-nano-banana-2.1` |
+| `gemini-nano-banana-2.1` | ‫6 באוקטובר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.1-flash-lite-image` | ‫30 ביוני 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-3.1-flash-image` | ‫28 במאי 2026 | לא הוכרז תאריך להפסקת התמיכה | `gemini-nano-banana-2.1` |
+| `gemini-3-pro-image` | ‫28 במאי 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `gemini-2.5-flash-image` | ‫2 באוקטובר 2025 | ‫15 במרץ 2027 | `gemini-3.1-flash-lite-image` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-3.1-flash-image-preview` | ‫26 בפברואר 2026 | ‫25 ביוני 2026 | `gemini-nano-banana-2.1` |
+| `gemini-3-pro-image-preview` | ‫20 בנובמבר 2025 | ‫25 ביוני 2026 | `gemini-3-pro-image` |
+| `gemini-2.5-flash-image-preview` | ‫7 במאי 2025 | ‫15 בינואר 2026 | `gemini-nano-banana-2.1` |
+| `gemini-2.0-flash-preview-image-generation` | ‫7 במאי 2025 | ‫14 בנובמבר 2025 | `gemini-nano-banana-2.1` |
 
-## Modele Imagen
+## מודלים של Imagen
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `imagen-4.0-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-nano-banana-2.1` |
-| `imagen-4.0-ultra-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-nano-banana-2.1` |
-| `imagen-4.0-fast-generate-001` | 24 czerwca 2025 r. | 17 sierpnia 2026 r. | `gemini-nano-banana-2.1` |
-| `imagen-3.0-generate-002` | 6 lutego 2025 r. | 10 listopada 2025 r. | `imagen-4.0-generate-001` |
-| Podgląd modeli | | | |
-| `imagen-4.0-generate-preview-06-06` | 24 czerwca 2025 r. | 17 lutego 2026 r. | `imagen-4.0-generate-001` |
-| `imagen-4.0-ultra-generate-preview-06-06` | 24 czerwca 2025 r. | 17 lutego 2026 r. | `imagen-4.0-ultra-generate-001` |
+| `imagen-4.0-generate-001` | ‫24 ביוני 2025 | ‫17 באוגוסט 2026 | `gemini-nano-banana-2.1` |
+| `imagen-4.0-ultra-generate-001` | ‫24 ביוני 2025 | ‫17 באוגוסט 2026 | `gemini-nano-banana-2.1` |
+| `imagen-4.0-fast-generate-001` | ‫24 ביוני 2025 | ‫17 באוגוסט 2026 | `gemini-nano-banana-2.1` |
+| `imagen-3.0-generate-002` | ‫6 בפברואר 2025 | ‫10 בנובמבר 2025 | `imagen-4.0-generate-001` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `imagen-4.0-generate-preview-06-06` | ‫24 ביוני 2025 | ‫17 בפברואר 2026 | `imagen-4.0-generate-001` |
+| `imagen-4.0-ultra-generate-preview-06-06` | ‫24 ביוני 2025 | ‫17 בפברואר 2026 | `imagen-4.0-ultra-generate-001` |
 
-## Modele Veo
+## מודלים של Veo
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `veo-3.0-generate-001` | 9 września 2025 r. | 30 czerwca 2026 r. | `veo-3.1-generate-preview` lub modele GA na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
-| `veo-3.0-fast-generate-001` | 9 września 2025 r. | 30 czerwca 2026 r. | `veo-3.1-fast-generate-preview` lub modele GA na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
-| `veo-2.0-generate-001` | 9 kwietnia 2025 r. | 30 czerwca 2026 r. | `veo-3.1-generate-preview` lub modele GA na [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=pl). |
-| Podgląd modeli | | | |
-| `veo-3.1-lite-generate-preview` | 31 marca 2026 r. | 22 października 2026 r. | `gemini-omni-1.1-flash` |
-| `veo-3.1-generate-preview` | 15 października 2025 r. | 22 października 2026 r. | `gemini-omni-1.1-flash` |
-| `veo-3.1-fast-generate-preview` | 15 października 2025 r. | 22 października 2026 r. | `gemini-omni-1.1-flash` |
-| `veo-3.0-generate-preview` | 31 lipca 2025 r. | 12 listopada 2025 r. | `veo-3.1-generate-preview` |
-| `veo-3.0-fast-generate-preview` | 31 lipca 2025 r. | 12 listopada 2025 r. | `veo-3.1-fast-generate-preview` |
+| `veo-3.0-generate-001` | ‫9 בספטמבר 2025 | ‫30 ביוני 2026 | `veo-3.1-generate-preview` או במודלים של GA ב-[Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=he) |
+| `veo-3.0-fast-generate-001` | ‫9 בספטמבר 2025 | ‫30 ביוני 2026 | ‫`veo-3.1-fast-generate-preview` או המודלים של GA ב-[Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=he) |
+| `veo-2.0-generate-001` | 9 באפריל 2025 | ‫30 ביוני 2026 | `veo-3.1-generate-preview` או במודלים של GA ב-[Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=he) |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `veo-3.1-lite-generate-preview` | ‫31 במרץ 2026 | ‫22 באוקטובר 2026 | `gemini-omni-1.1-flash` |
+| `veo-3.1-generate-preview` | ‫15 באוקטובר 2025 | ‫22 באוקטובר 2026 | `gemini-omni-1.1-flash` |
+| `veo-3.1-fast-generate-preview` | ‫15 באוקטובר 2025 | ‫22 באוקטובר 2026 | `gemini-omni-1.1-flash` |
+| `veo-3.0-generate-preview` | ‫31 ביולי 2024 | ‫12 בנובמבר 2025 | `veo-3.1-generate-preview` |
+| `veo-3.0-fast-generate-preview` | ‫31 ביולי 2024 | ‫12 בנובמבר 2025 | `veo-3.1-fast-generate-preview` |
 
-## modele Gemini Omni Flash,
+## מודלים מסוג Gemini Omni Flash
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `gemini-omni-1.1-flash` | 27 sierpnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `gemini-omni-flash-preview` | 30 czerwca 2026 r. | 22 października 2026 r. | `gemini-omni-1.1-flash` |
+| `gemini-omni-1.1-flash` | ‫27 באוגוסט 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-omni-flash-preview` | ‫30 ביוני 2026 | ‫22 באוקטובר 2026 | `gemini-omni-1.1-flash` |
 
-## Modele Lyria
+## מודלים של Lyria
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| `lyria-3.5` | 3 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| Podgląd modeli | | | |
-| `lyria-3-clip-preview` | 25 marca 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `lyria-3-pro-preview` | 25 marca 2026 r. | Nie ogłoszono daty wyłączenia | `lyria-3.5` |
-| `lyria-realtime-exp` | 20 maja 2025 r. | Nie ogłoszono daty wyłączenia |  |
+| `lyria-3.5` | ‫3 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `lyria-3-clip-preview` | ‫25 במרץ 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `lyria-3-pro-preview` | ‫25 במרץ 2026 | לא הוכרז תאריך להפסקת התמיכה | `lyria-3.5` |
+| `lyria-realtime-exp` | ‫20 במאי 2025 | לא הוכרז תאריך להפסקת התמיכה |  |
 
-## Modele robotów
+## מודלים של רובוטיקה
 
-| **Model** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **מודל** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| Podgląd modeli | | | |
-| `gemini-robotics-er-1.6-preview` | 14 kwietnia 2026 r. | 31 sierpnia 2026 r. | gemini-robotics-er-2-preview |
-| `gemini-robotics-er-1.5-preview` | 25 września 2025 r. | 30 kwietnia 2026 r. | `gemini-robotics-er-1.6-preview` |
+| מודלים בגרסת טרום-השקה (Preview) | | | |
+| `gemini-robotics-er-1.6-preview` | ‫14 באפריל 2026 | ‫31 באוגוסט 2026 | gemini-robotics-er-2-preview |
+| `gemini-robotics-er-1.5-preview` | ‫25 בספטמבר 2025 | ‫30 באפריל 2026 | `gemini-robotics-er-1.6-preview` |
 
-## Zarządzane agenty
+## סוכנים מנוהלים
 
-| **Agent** | **Data premiery** | **Data wyłączenia** | **Zalecany zamiennik** |
+| **Agent** | **תאריך השקה** | **תאריך הפסקת התמיכה** | **החלפה מומלצת** |
 | --- | --- | --- | --- |
-| Wyświetlanie podglądu agentów | | | |
-| `antigravity-preview-09-2026` | 17 września 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `antigravity-preview-05-2026` | 19 maja 2026 r. | 5 października 2026 r. | `antigravity-preview-09-2026` |
-| `deep-research-preview-04-2026` | 21 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `deep-research-max-preview-04-2026` | 21 kwietnia 2026 r. | Nie ogłoszono daty wyłączenia |  |
-| `deep-research-pro-preview-12-2025` | 11 grudnia 2025 r. | 23 października 2026 r. | `deep-research-preview-04-2026` |
+| תצוגה מקדימה של סוכנים | | | |
+| `antigravity-preview-09-2026` | ‫17 בספטמבר 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `antigravity-preview-05-2026` | 19 במאי 2026 | ‫5 באוקטובר 2026 | `antigravity-preview-09-2026` |
+| `deep-research-preview-04-2026` | ‫21 באפריל 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `deep-research-max-preview-04-2026` | ‫21 באפריל 2026 | לא הוכרז תאריך להפסקת התמיכה |  |
+| `deep-research-pro-preview-12-2025` | ‫11 בדצמבר 2025 | ‫23 באוקטובר 2026 | `deep-research-preview-04-2026` |
 
-Prześlij opinię
+שליחת משוב
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ostatnia aktualizacja: 2026-10-09 UTC.
+עדכון אחרון: 2026-10-12 (שעון UTC).
 
-Chcesz przekazać coś jeszcze?
+רוצה לתת לנו משוב?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-09 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-12 (שעון UTC)."],[],[]]

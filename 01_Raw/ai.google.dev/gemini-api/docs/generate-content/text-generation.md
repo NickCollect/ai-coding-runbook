@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=fa
-fetched_at: 2026-10-12T06:53:40.504266+00:00
-title: "\u062a\u0648\u0644\u06cc\u062f \u0646\u0648\u0634\u062a\u0627\u0631 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=he
+fetched_at: 2026-10-19T05:54:42.566535+00:00
+title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05d8\u05e7\u05e1\u05d8 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash اکنون در دسترس است. [آن را امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fa) .
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [صفحه اصلی](https://ai.google.dev/?hl=fa)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fa)
-- [سندنگار](https://ai.google.dev/gemini-api/docs/generate-content?hl=fa)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
 
-ارسال بازخورد
+שליחת משוב
 
-# تولید نوشتار
+# יצירת טקסט
 
-«میانای برنامه‌سازی کاربردی Gemini» می‌تواند از ورودی‌های نوشتار، تصویر، ویدیو، و صدا برونداد نوشتاری تولید کند.
+‫Gemini API יכול ליצור פלט של טקסט מקלט של טקסט, תמונות, וידאו ואודיו.
 
-در اینجا یک مثال ساده آورده شده است:
+הנה דוגמה בסיסית:
 
 ### Python
 
@@ -55,7 +55,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -86,7 +86,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -160,13 +160,11 @@ function main() {
 }
 ```
 
-## اندیشیدن با Gemini
+## ‫Thinking with Gemini
 
-مدل‌های Gemini اغلب به‌طور پیش‌فرض [«تفکر»](https://ai.google.dev/gemini-api/docs/thinking?hl=fa) را فعال دارند که به مدل اجازه می‌دهد قبل‌از پاسخ دادن به درخواست، استدلال کند.
+במודלים של Gemini, בדרך כלל מופעלת כברירת מחדל האפשרות ["חשיבה"](https://ai.google.dev/gemini-api/docs/thinking?hl=he), שמאפשרת למודל להסיק מסקנות לפני שהוא מגיב לבקשה.
 
-هر مدل از پیکربندی‌های مختلف تفکر پشتیبانی می‌کند که به شما امکان می‌دهد
-بر هزینه، تأخیر، و هوش کنترل داشته باشید. برای جزئیات بیشتر،
-[راهنمای تفکر](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=fa#set-budget) را ببینید.
+כל מודל תומך בהגדרות שונות של חשיבה, שמאפשרות לכם לשלוט בעלות, בחביון ובאינטליגנציה. מידע נוסף זמין ב[מדריך החשיבה](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=he#set-budget).
 
 ### Python
 
@@ -209,7 +207,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -246,7 +244,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -338,11 +336,9 @@ function main() {
 }
 ```
 
-## دستورالعمل‌های سیستم و پیکربندی‌های دیگر
+## הוראות מערכת והגדרות אחרות
 
-می‌توانید رفتار مدل‌های Gemini را با دستورالعمل‌های سیستم هدایت کنید. برای انجام این کار،
-شیء [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerationConfig)
-را بگذرانید.
+אתם יכולים להנחות את ההתנהגות של מודלי Gemini באמצעות הוראות מערכת. כדי לעשות את זה, מעבירים אובייקט [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig).
 
 ### Python
 
@@ -383,7 +379,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -418,7 +414,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -514,9 +510,7 @@ function main() {
 }
 ```
 
-شیء [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerationConfig)
-همچنین به شما امکان می‌دهد پارامترهای تولید پیش‌فرض، مانند
-[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerationConfig) را ملغی کنید.
+האובייקט [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) מאפשר גם לשנות את פרמטרי ברירת המחדל של הגנרציה, כמו [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) או [`thinking_config`](https://ai.google.dev/api/generate-content?hl=he#ThinkingConfig).
 
 ### Python
 
@@ -557,7 +551,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -593,7 +587,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -651,7 +645,7 @@ const apiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_K
 function main() {
   const generationConfig = {
     maxOutputTokens: 1000,
-    responseFormat: { text: { mimeType: "text/plain" } },
+    responseFormat: { text: { mimeType: "TEXT_PLAIN" } },
   };
 
   const payload = {
@@ -682,12 +676,11 @@ function main() {
 }
 ```
 
-برای فهرست کامل پارامترهای پیکربندی‌شدنی و توضیحات آن‌ها، به [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerationConfig)
-در مرجع API ما مراجعه کنید.
+כדי לראות רשימה מלאה של הפרמטרים שאפשר להגדיר והתיאורים שלהם, עיינו ב-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerationConfig) במאמרי העזרה של ה-API.
 
-## ورودی‌های چندحالته
+## קלט מולטי-מודאלי
 
-«میانای برنامه‌سازی کاربردی Gemini» از ورودی‌های چندحالته پشتیبانی می‌کند و به شما امکان می‌دهد نوشتار را با فایل‌های رسانه‌ای ترکیب کنید. مثال زیر نحوه ارائه تصویر را نشان می‌دهد:
+‫Gemini API תומך בקלט מרובה-אופנים, ומאפשר לכם לשלב טקסט עם קובצי מדיה. בדוגמה הבאה מוצג איך מספקים תמונה:
 
 ### Python
 
@@ -735,7 +728,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -783,7 +776,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -895,19 +888,14 @@ function getImageData(url) {
 }
 ```
 
-برای روش‌های جایگزین ارائه تصاویر و پردازش تصویر پیشرفته‌تر،
-به [راهنمای درک تصویر](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fa) ما مراجعه کنید.
-این API از ورودی‌ها و درک [سند](https://ai.google.dev/gemini-api/docs/document-processing?hl=fa)،
-[ویدیو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fa)، و
-[صوت](https://ai.google.dev/gemini-api/docs/audio?hl=fa) نیز پشتیبانی می‌کند.
+ב[מדריך להבנת תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he) מוסבר איך לספק תמונות בדרכים אחרות ואיך לעבד תמונות בצורה מתקדמת יותר.
+ממשק ה-API תומך גם בהבנה של קלט מסוג [מסמך](https://ai.google.dev/gemini-api/docs/document-processing?hl=he), [סרטון](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he) ו[אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he).
 
-## جاری‌سازی پاسخ‌ها
+## הצגת התשובות באופן שוטף
 
-به‌طور پیش‌فرض، مدل تنها پس‌از تکمیل کل فرایند تولید پاسخ می‌دهد.
+כברירת מחדל, המודל מחזיר תשובה רק אחרי שכל תהליך היצירה מסתיים.
 
-برای تعاملات روان‌تر، از جاری‌سازی برای دریافت
-[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerateContentResponse)
-نمونه‌ها به‌صورت افزایشی درحین تولید شدن استفاده کنید.
+כדי לקבל אינטראקציות חלקות יותר, אפשר להשתמש בסטרימינג כדי לקבל מופעים של [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerateContentResponse) באופן מצטבר בזמן שהם נוצרים.
 
 ### Python
 
@@ -945,7 +933,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -979,7 +967,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -1061,9 +1049,9 @@ function main() {
 }
 ```
 
-## مکالمه‌های چندنوبتی (گپ)
+## שיחות עם זיכרון (צ'אט)
 
-«کیت‌های توسعه نرم‌افزار» ما قابلیت جمع‌آوری چندین دور پیام‌واره و پاسخ در گپ را فراهم می‌کنند و به شما روشی آسان برای پیگیری سابقه مکالمه ارائه می‌دهند.
+ערכות ה-SDK שלנו מספקות פונקציונליות לאיסוף כמה סבבים של הנחיות ותשובות בצ'אט, וכך מאפשרות לכם לעקוב בקלות אחרי היסטוריית השיחות.
 
 ### Python
 
@@ -1120,7 +1108,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -1154,7 +1142,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Chat;
@@ -1271,7 +1259,7 @@ function main() {
 }
 ```
 
-از جاری‌سازی می‌توان برای مکالمه‌های چند نوبتی نیز استفاده کرد.
+אפשר להשתמש בסטרימינג גם לשיחות בכמה שלבים.
 
 ### Python
 
@@ -1336,7 +1324,7 @@ async function main() {
 await main();
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -1371,7 +1359,7 @@ func main() {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Chat;
@@ -1490,45 +1478,36 @@ function main() {
 }
 ```
 
-## نکته‌های پیام‌واره
+## טיפים לכתיבת פרומפטים
 
-برای دریافت پیشنهادهایی درباره استفاده حداکثری از Gemini، به [راهنمای مهندسی پیام‌واره](https://ai.google.dev/gemini/docs/prompting-strategies?hl=fa) ما مراجعه کنید.
+כדאי לעיין ב[מדריך שלנו להנדסת פרומפטים](https://ai.google.dev/gemini/docs/prompting-strategies?hl=he) כדי לקבל הצעות שיעזרו לכם להפיק את המרב מ-Gemini.
 
-## قدم بعدی چیست
+## המאמרים הבאים
 
-- ‫[Gemini در Google AI Studio](https://aistudio.google.com?hl=fa) را امتحان کنید.
-- برای پاسخ‌های شبیه به JSON، [بروندادهای ساختاریافته](https://ai.google.dev/gemini-api/docs/structured-output?hl=fa) را آزمایش کنید.
-- قابلیت‌های درک [تصویر](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fa)،
-  [ویدیو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fa)، [صدا](https://ai.google.dev/gemini-api/docs/audio?hl=fa)
-  ، و [سند](https://ai.google.dev/gemini-api/docs/document-processing?hl=fa) Gemini را کاوش کنید.
-- درباره
-  [استراتژی‌های پیام‌واره فایل](https://ai.google.dev/gemini-api/docs/files?hl=fa#prompt-guide) چندوجهی بیشتر بدانید.
+- כדאי לנסות את [Gemini ב-Google AI Studio](https://aistudio.google.com?hl=he).
+- אפשר להתנסות ב[פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כדי לקבל תשובות שדומות ל-JSON.
+- ‫Gemini יכול להבין [תמונות](https://ai.google.dev/gemini-api/docs/image-understanding?hl=he), [סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he), [אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he).
+- [מידע ולמידה על אסטרטגיות ליצירת פרומפטים לקבצים ב-multimodal](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide)
 
-## تولید محتوا
+## יצירת תוכן
 
-این نقطه پایانی مرکزی برای ارسال پیام‌واره به مدل است. دو نقطه پایانی برای تولید محتوا وجود دارد، تفاوت اصلی در نحوه دریافت پاسخ است:
+זו נקודת הקצה המרכזית לשליחת הנחיות למודל. יש שתי נקודות קצה ליצירת תוכן, וההבדל העיקרי ביניהן הוא האופן שבו מקבלים את התשובה:
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=fa#method:-models.generatecontent)
-  (REST)**:
-  درخواستی دریافت می‌کند و پس‌از اینکه مدل کل تولید خود را به‌پایان رساند،
-  یک پاسخ واحد ارائه می‌دهد.
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=fa#method:-models.streamgeneratecontent)
-  (SSE)**: همان درخواست را دریافت می‌کند، اما مدل بخش‌هایی از پاسخ را به‌محض تولید جاری‌سازی می‌کند. این کار تجربه کاربری بهتری برای
-  برنامه‌های تعاملی ارائه می‌دهد زیرا به شما امکان می‌دهد نتایج جزئی را بلافاصله نمایش دهید.
+- ‫**[`generateContent`](https://ai.google.dev/api/generate-content?hl=he#method:-models.generatecontent) (REST)**: מקבלת בקשה ומספקת תשובה אחת אחרי שהמודל מסיים את כל תהליך היצירה.
+- ‫**[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=he#method:-models.streamgeneratecontent)
+  (SSE)**: מקבל את אותה בקשה בדיוק, אבל המודל מעביר בחזרה נתחים של התשובה בזמן שהם נוצרים. כך אפשר לשפר את חוויית המשתמש באפליקציות אינטראקטיביות, כי אפשר להציג תוצאות חלקיות באופן מיידי.
 
-### ساختار متن درخواست
+### מבנה גוף הבקשה
 
-[بدنه درخواست](https://ai.google.dev/api/generate-content?hl=fa#request-body) یک شیء JSON است که برای هر دو حالت استاندارد و جاری‌سازی **یکسان** است و از چند شیء اصلی ساخته شده است:
+[גוף הבקשה](https://ai.google.dev/api/generate-content?hl=he#request-body) הוא אובייקט JSON שהוא **זהה** גם במצב רגיל וגם במצב סטרימינג, והוא מורכב מכמה אובייקטים מרכזיים:
 
-- شیء [`Content`](https://ai.google.dev/api/caching?hl=fa#Content): نشان‌دهنده یک نوبت در مکالمه است.
-- [`Part`](https://ai.google.dev/api/caching?hl=fa#Part) شیء: بخشی از داده‌ها در `Content` نوبت
-  (مثل نوشتار یا تصویر).
-- ‫`inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=fa#Blob)): محتوی بایت‌های رسانه خام
-  و نوع MIME آن‌ها.
+- אובייקט [`Content`](https://ai.google.dev/api/caching?hl=he#Content): מייצג תור יחיד בשיחה.
+- אובייקט [`Part`](https://ai.google.dev/api/caching?hl=he#Part): נתון בתוך תור `Content` (למשל טקסט או תמונה).
+- ‫`inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=he#Blob)): מאגר של בייטים גולמיים של מדיה וסוג ה-MIME שלהם.
 
-در بالاترین سطح، بدنه درخواست حاوی یک شیء `contents` است که فهرستی از اشیای `Content` است و هرکدام نشان‌دهنده نوبت در مکالمه است. در اکثر موارد، برای تولید نوشتار پایه، یک `Content` شیء خواهید داشت، اما اگر می‌خواهید سابقه مکالمه را حفظ کنید، می‌توانید از چندین `Content` شیء استفاده کنید.
+ברמה הגבוהה ביותר, גוף הבקשה מכיל אובייקט `contents`, שהוא רשימה של אובייקטים מסוג `Content`, שכל אחד מהם מייצג תור בשיחה. ברוב המקרים, ליצירת טקסט בסיסי, יהיה לכם אובייקט `Content` אחד, אבל אם אתם רוצים לשמור את היסטוריית השיחות, אתם יכולים להשתמש בכמה אובייקטים של `Content`.
 
-در زیر، متن درخواست `generateContent` معمولی نشان داده شده است:
+למטה מוצג גוף בקשה אופייני של `generateContent`:
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -1553,26 +1532,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### ساختار بدنه پاسخ
+### מבנה גוף התשובה
 
-[بدنه پاسخ](https://ai.google.dev/api/generate-content?hl=fa#response-body) برای هر دو حالت جاری‌سازی و استاندارد مشابه است، به‌جز موارد زیر:
+[גוף התגובה](https://ai.google.dev/api/generate-content?hl=he#response-body) דומה בשני המצבים – סטרימינג ורגיל – למעט המקרים הבאים:
 
-- حالت استاندارد: بدنه پاسخ حاوی نمونه‌ای از
-  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerateContentResponse) است.
-- حالت جاری‌سازی: بدنه پاسخ حاوی جاری‌سازی
-  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=fa#v1beta.GenerateContentResponse)
-  نمونه است.
+- מצב רגיל: גוף התשובה מכיל מופע של [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerateContentResponse).
+- מצב סטרימינג: גוף התשובה מכיל סטרימינג של מופעי [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=he#v1beta.GenerateContentResponse).
 
-در سطح بالا، بدنه پاسخ حاوی یک شیء `candidates` است که
-فهرستی از اشیای `Candidate` است. شیء `Candidate` حاوی شیء `Content`
-است که پاسخ تولیدشده برگشتی از مدل را دارد.
+באופן כללי, גוף התשובה מכיל אובייקט `candidates`, שהוא רשימה של אובייקטים מסוג `Candidate`. האובייקט `Candidate` מכיל אובייקט `Content` שכולל את התשובה שנוצרה והוחזרה מהמודל.
 
-## نمونه‌های REST API
+## דוגמאות ל-API בארכיטקטורת REST
 
-### پیام‌واره چندحالته (نوشتار و تصویر)
+### פרומפט מולטי-מודאלי (טקסט ותמונה)
 
-برای ارائه هم نوشتار و هم تصویر در پیام‌واره، آرایه `parts` باید حاوی
-دو شیء `Part` باشد: یکی برای نوشتار و یکی برای تصویر `inline_data`.
+כדי לספק גם טקסט וגם תמונה בפרומפט, המערך `parts` צריך להכיל שני אובייקטים מסוג `Part`: אחד לטקסט ואחד לתמונה `inline_data`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -1594,10 +1567,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### مکالمه‌های چندنوبتی (گپ)
+### שיחות עם זיכרון (צ'אט)
 
-برای ساختن مکالمه‌ای با چند نوبت، آرایه `contents` را با چند شیء `Content` تعریف می‌کنید. «میانای برنامه‌سازی کاربردی» از کل این سابقه به‌عنوان بافت
-برای پاسخ بعدی استفاده خواهد کرد. `role` برای هر شیء `Content` باید بین `user` و `model` متناوب باشد.
+כדי ליצור שיחה עם כמה תורות, מגדירים את המערך `contents` עם כמה אובייקטים מסוג `Content`. ה-API ישתמש בכל ההיסטוריה הזו כהקשר לתשובה הבאה. הערך של `role` בכל אובייקט `Content` צריך להתחלף בין `user` ל-`model`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
@@ -1628,33 +1600,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-### برداشت‌های کلیدی
+### מסקנות עיקריות
 
-- `Content` پاکت است: این پاکت ظرف سطح بالای پیام است،
-  چه از کاربر باشد چه از مدل.
-- `Part` امکان چندحالتی بودن را فراهم می‌کند: از چندین شیء `Part` در یک شیء `Content`
-  استفاده کنید تا انواع مختلف داده‌ها (نوشتار، تصویر، نشانی وب ویدیو، و غیره) را ترکیب کنید.
-- روش داده را انتخاب کنید:
-  - برای رسانه‌های کوچک و مستقیماً جاسازی‌شده (مثل اکثر تصاویر)، از `Part` با
-    `inline_data` استفاده کنید.
-  - برای فایل‌های بزرگ‌تر یا فایل‌هایی که می‌خواهید در درخواست‌های مختلف از آن‌ها استفاده کنید، از
-    File API برای بارگذاری فایل و ارجاع دادن به آن با بخش `file_data` استفاده کنید.
-- مدیریت سابقه مکالمه: برای برنامه‌های گپ که از REST API استفاده می‌کنند،
-  با پیوست کردن `Content` شیء برای هر نوبت، آرایه `contents` را بسازید و
-  نقش‌های `"user"` و `"model"` را به‌صورت متناوب استفاده کنید. اگر از کیت توسعه نرم‌افزار استفاده می‌کنید،
-  برای اطلاع از روش توصیه‌شده برای مدیریت
-  سابقه مکالمه، به اسناد کیت توسعه نرم‌افزار مراجعه کنید.
+- ‫`Content` הוא המעטפה: זהו מאגר ברמה העליונה של תור הודעות, בין אם הוא מהמשתמש או מהמודל.
+- ‫`Part` מאפשר שימוש בכמה סוגי נתונים: אפשר להשתמש בכמה אובייקטים מסוג `Part` בתוך אובייקט `Content` אחד כדי לשלב סוגים שונים של נתונים (טקסט, תמונה, URI של סרטון וכו').
+- בוחרים את שיטת הנתונים:
+  - למדיה קטנה שמוטמעת ישירות (כמו רוב התמונות), משתמשים ב-`Part` עם `inline_data`.
+  - אם אתם רוצים להעלות קבצים גדולים יותר או קבצים שאתם רוצים להשתמש בהם שוב בבקשות שונות, אתם יכולים להשתמש ב-File API כדי להעלות את הקובץ ולהפנות אליו באמצעות חלק `file_data`.
+- ניהול היסטוריית השיחות: באפליקציות צ'אט שמשתמשות ב-API בארכיטקטורת REST, צריך ליצור את מערך `contents` על ידי הוספת אובייקטים של `Content` לכל תור, לסירוגין בין תפקידי `"user"` ו-`"model"`. אם אתם משתמשים ב-SDK, עיינו במסמכי התיעוד של ה-SDK כדי לראות את הדרך המומלצת לניהול היסטוריית השיחות.
 
-## نمونه‌های پاسخ
+## דוגמאות לתשובות
 
-مثال‌های زیر نشان می‌دهد که چگونه این عناصر برای انواع مختلف درخواست‌ها با هم ترکیب می‌شوند.
+בדוגמאות הבאות אפשר לראות איך הרכיבים האלה משתלבים בסוגים שונים של בקשות.
 
-### پاسخ فقط نوشتاری
+### תשובה בטקסט בלבד
 
-پاسخ نوشتاری پیش‌فرض از آرایه‌ای `candidates` با یک یا چند
-`content` شیء تشکیل شده است که حاوی پاسخ مدل است.
+תשובת טקסט שמוגדרת כברירת מחדל מורכבת ממערך `candidates` עם אובייקט `content` אחד או יותר שמכילים את התשובה של המודל.
 
-در زیر نمونه‌ای از پاسخ **استاندارد** آورده شده است:
+הדוגמה הבאה היא של תשובה **רגילה**:
 
 ```
 {
@@ -1675,8 +1638,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-در ادامه، مجموعه‌ای از پاسخ‌های **جاری‌سازی** آمده است. هر پاسخ حاوی
-`responseId` است که پاسخ کامل را به هم پیوند می‌دهد:
+התשובות הבאות הן חלק מ**שידור**. כל תשובה מכילה `responseId` שמקשר בין כל חלקי התשובה:
 
 ```
 {
@@ -1724,45 +1686,38 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }
 ```
 
-## Live API (BidiGenerateContent) WebSockets API
+## ‫Live API (BidiGenerateContent) WebSockets API
 
-‫Live API یک میانای برنامه‌سازی کاربردی مبتنی بر WebSocket حالت‌دار برای جاری‌سازی دوطرفه ارائه می‌دهد تا موارد استفاده از جاری‌سازی هم‌زمان را فعال کند. برای جزئیات بیشتر می‌توانید
-[راهنمای Live API](https://ai.google.dev/gemini-api/docs/live?hl=fa) و [مرجع Live API](https://ai.google.dev/api/live?hl=fa)
-را بررسی کنید.
+‫Live API הוא ממשק API מבוסס-WebSocket עם שמירת מצב (stateful) לסטרימינג דו-כיווני, שמאפשר תרחישי שימוש של סטרימינג בזמן אמת. פרטים נוספים זמינים [במדריך ל-Live API](https://ai.google.dev/gemini-api/docs/live?hl=he) ו[במאמרי העזרה של Live API](https://ai.google.dev/api/live?hl=he).
 
-## مدل‌های تخصصی
+## מודלים ייעודיים
 
-علاوه‌بر خانواده مدل‌های Gemini، «میانای برنامه‌سازی کاربردی Gemini» نقطه‌های پایانی برای مدل‌های تخصصی مثل [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=fa)،
-[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=fa)، و مدل‌های
-[جاسازی](https://ai.google.dev/gemini-api/docs/embeddings?hl=fa) ارائه می‌دهد. می‌توانید این راهنماها را در بخش «مدل‌ها» بررسی کنید.
+בנוסף למשפחת המודלים של Gemini, ‏ Gemini API מציע נקודות קצה למודלים ייעודיים כמו [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=he),‏ [Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=he) ו[מודלים של הטמעה](https://ai.google.dev/gemini-api/docs/embeddings?hl=he). אפשר לעיין במדריכים האלה בקטע 'מודלים'.
 
-## میاناهای برنامه‌سازی کاربردی پلاتفرم
+## ממשקי API של הפלטפורמה
 
-بقیه نقطه‌های پایانی قابلیت‌های بیشتری را برای استفاده با نقطه‌های پایانی اصلی که تاکنون توضیح داده شده است فعال می‌کنند. برای کسب اطلاعات بیشتر، موضوعات
-[حالت دسته‌ای](https://ai.google.dev/gemini-api/docs/batch-mode?hl=fa) و
-[میانای برنامه‌سازی کاربردی فایل](https://ai.google.dev/gemini-api/docs/files?hl=fa) را در بخش «راهنماها» بررسی کنید.
+שאר נקודות הקצה מאפשרות להשתמש ביכולות נוספות עם נקודות הקצה העיקריות שתוארו עד עכשיו. למידע נוסף, עיינו בנושאים [מצב אצווה](https://ai.google.dev/gemini-api/docs/batch-mode?hl=he) ו-[File API](https://ai.google.dev/gemini-api/docs/files?hl=he) בקטע Guides.
 
-## قدم بعدی چیست
+## המאמרים הבאים
 
-اگر تازه شروع کرده‌اید، راهنماهای زیر را بررسی کنید که به شما کمک می‌کند
-مدل برنامه‌نویسی «میانای برنامه‌سازی کاربردی Gemini» را درک کنید:
+אם אתם רק מתחילים, כדאי לעיין במדריכים הבאים, שיעזרו לכם להבין את מודל התכנות של Gemini API:
 
-- [راهنمای شروع کار با Gemini API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fa)
-- [راهنمای مدل Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fa)
+- [מדריך למתחילים ב-Gemini API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [מדריך למודלים של Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he)
 
-همچنین می‌توانید راهنمای قابلیت‌ها را بررسی کنید که ویژگی‌های مختلف
-Gemini API را معرفی می‌کند و نمونه‌های کد ارائه می‌دهد:
+כדאי גם לעיין במדריכי היכולות, שכוללים הסברים על תכונות שונות של Gemini API ודוגמאות קוד:
 
-- [تولید نوشتار](https://ai.google.dev/gemini-api/docs/text-generation?hl=fa)
-- [ذخیره کردن بافت در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa)
-- [جاسازی‌ها](https://ai.google.dev/gemini-api/docs/embeddings?hl=fa)
+- [יצירת טקסט](https://ai.google.dev/gemini-api/docs/text-generation?hl=he)
+- [שמירת נתונים במטמון לפי הקשר](https://ai.google.dev/gemini-api/docs/caching?hl=he)
+- thought
+  [הטמעות](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)
 
-ارسال بازخورد
+שליחת משוב
 
-جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی.
+עדכון אחרון: 2026-10-19 (שעון UTC).
 
-می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
+רוצה לתת לנו משוב?
 
-[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-10-19 (שעון UTC)."],[],[]]

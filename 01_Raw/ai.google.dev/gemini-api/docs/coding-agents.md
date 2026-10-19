@@ -1,47 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=ru
-fetched_at: 2026-10-12T07:07:24.258142+00:00
-title: "\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0430 \u0430\u0433\u0435\u043d\u0442\u0430 \u0434\u043b\u044f \u043d\u0430\u043f\u0438\u0441\u0430\u043d\u0438\u044f \u043a\u043e\u0434\u0430 \u0438 \u0440\u0435\u0441\u0443\u0440\u0441\u044b \u0434\u043b\u044f \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a\u043e\u0432 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=sq
+fetched_at: 2026-10-19T05:40:26.012944+00:00
+title: "Konfigurimi i agjentit t\u00eb kodimit dhe burimet p\u00ebr zhvilluesit \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Флэш-память Gemini 3.8 теперь доступна. [Попробуйте!](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ru)
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [Главная](https://ai.google.dev/?hl=ru)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
-- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-Отправить отзыв
+Dërgo komente
 
-# Настройка агента для написания кода и ресурсы для разработчиков
+# Konfigurimi i agjentit të kodimit dhe burimet për zhvilluesit
 
-Агенты для написания кода на основе ИИ используют данные для обучения, собранные до определенной даты. Из-за этого агенты часто предлагают устаревшие модели (`gemini-1.5`), более ранние версии SDK (`google-generativeai`) или устаревшие шаблоны кода.
+Agjentët e kodimit me IA-në mbështeten në të dhënat e trajnimit që ndërpriten në një datë të caktuar. Për këtë arsye, agjentët shpesh sugjerojnë modele të zhvlerësuara (`gemini-1.5`), SDK-të më të vjetra (`google-generativeai`) ose modele të vjetruara të kodeve.
 
-Подключив агента к официальным ресурсам для разработчиков Gemini, вы поможете ему писать точный код с помощью актуальных моделей, SDK `google-genai` и [API взаимодействий](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ru).
+Lidhja e agentit tënd me burimet zyrtare të zhvilluesve të Gemini e ndihmon atë të shkruajë kode të sakta duke përdorur modelet aktuale, SDK-në e `google-genai` dhe [API-në e Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=sq).
 
-Вы можете предоставить агенту по написанию кода доступ к документации и правилам Gemini четырьмя способами:
+Mund t'i japësh qasje agjentit të kodimit te dokumentacioni dhe rregullat e Gemini në katër mënyra:
 
-## Сводка ресурсов агента
+## Përmbledhja e burimeve të agjentit
 
-| Ресурс | Что можно делать с помощью этого инструмента | Доступность |
+| Burimi | Çfarë ofron | Disponueshmëria |
 | --- | --- | --- |
-| **[Навыки агента Gemini](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ru#available-skills)** | Пошаговые правила, шаблоны SDK и вспомогательные скрипты для определенных функций (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`). | Предварительно установлен в [AI Studio Build](https://ai.studio/build); можно установить с помощью `skills.sh`, Context7 или управляемых агентов. |
-| **[Gemini Docs MCP Server](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ru#mcp-setup)** | Поиск в реальном времени (`gemini_search_docs`) и чтение всей страницы (`gemini_get_doc`) во всей документации. | Поддерживается в Claude Code, Cursor, OpenAI Codex и VS Code. |
-| **[Плагин Gemini API](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ru#gemini-api-plugin)** | Пакет с официальными навыками Gemini, сервером MCP для Документов и инструментами для работы с ключами API. | Antigravity. |
-| **[Документы, распознаваемые машиной](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ru#machine-readable-docs)** | Очистка страниц Markdown и индексов `llms.txt`. | Все страницы документации на сайте `ai.google.dev/gemini-api/docs`. |
+| **[Aftësitë e Gemini Agent](https://ai.google.dev/gemini-api/docs/coding-agents?hl=sq#available-skills)** | Rregullat hap pas hapi, modelet e SDK-së dhe skriptet ndihmëse për veçori specifike (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`). | Instaluar paraprakisht në [AI Studio Build](https://ai.studio/build); instalo me `skills.sh`, Context7 ose "Agjentët e menaxhuar". |
+| **[Serveri MCP i "Dokumenteve" të Gemini](https://ai.google.dev/gemini-api/docs/coding-agents?hl=sq#mcp-setup)** | Kërkimi në drejtpërdrejt (`gemini_search_docs`) dhe leximet e faqeve të plota (`gemini_get_doc`) në të gjithë dokumentacionin. | Mbështetur në Claude Code, Cursor, OpenAI Codex dhe VS Code. |
+| **[Shtesa e Gemini API](https://ai.google.dev/gemini-api/docs/coding-agents?hl=sq#gemini-api-plugin)** | Paketa e integruar me aftësitë zyrtare të Gemini, serverin MCP të "Dokumenteve" dhe veglat e çelësave të API-së. | Antigravity. |
+| **[Dokumente të lexueshme nga makineria](https://ai.google.dev/gemini-api/docs/coding-agents?hl=sq#machine-readable-docs)** | Pastro faqet e "Shënimeve të formatuara" dhe indekset e `llms.txt`. | Të gjitha faqet e dokumentacionit në `ai.google.dev/gemini-api/docs`. |
 
-## Как установить специализированные действия агента Gemini
+## Instalo aftësitë e Gemini Agent
 
-Навыки агента предоставляют агенту по написанию кода процедурные правила, названия текущих моделей и шаблоны кода SDK. Вам не нужно добавлять в запрос длинные инструкции – агент загружает навыки только при необходимости. Это поможет агенту избежать устаревших SDK и использовать современные шаблоны Gemini.
+Aftësitë e agjentit i japin agjentit të kodimit rregullat procedurale, emrat aktualë të modeleve dhe
+modelet e kodeve të SDK-së. Në vend që të shtosh udhëzime të gjata te kërkesa jote, agjenti yt i ngarkon aftësitë vetëm kur është e nevojshme. Kjo e ndihmon agjentin tënd të shmangë SDK-të e zhvlerësuara dhe të përdorë modelet moderne të Gemini.
 
-Навыки работают вместе с MCP-сервером Gemini Документов. Если на устройстве агента не установлен сервер MCP, навык переходит на [`llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=ru). Подробнее о том, [как работают навыки Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=ru)…
+Aftësitë funksionojnë në krah të serverit MCP të Gemini Docs. Nëse agjenti yt nuk ka të instaluar serverin MCP, aftësia kthehet te
+[`llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=sq). Për të mësuar më shumë rreth mënyrës se si funksionojnë aftësitë, lexo [udhëzuesin e aftësive të Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=sq).
 
-### Установка с помощью CLI (`skills.sh` или Context7)
+### Instalo me CLI (`skills.sh` ose Context7)
 
-Установите навыки с помощью файла [skills.sh](https://skills.sh) (рекомендуется) или [Context7](https://context7.com):
+Instalo aftësitë duke përdorur [skills.sh](https://skills.sh) (rekomandohet) ose
+[Context7](https://context7.com):
 
 ```
 # List all available skills in the repository
@@ -54,16 +57,19 @@ npx skills add google-gemini/gemini-skills --skill <skill-name> --global
 npx ctx7 skills install /google-gemini/gemini-skills <skill-name>
 ```
 
-### Доступные навыки
+### Aftësitë e disponueshme
 
 #### `gemini-api-dev`
 
-Навыки создания приложений с помощью [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ru) и официальных SDK Gemini API (`google-genai` для Python и `@google/genai` для TypeScript). Этот навык включает:
+Aftësia për të ndërtuar aplikacione me [API-n e ndërveprimeve](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=sq) dhe SDK-të zyrtare të Gemini API
+(`google-genai` për Python dhe `@google/genai` për TypeScript). Kjo aftësi
+mbulon:
 
-- Генерация текста, многоходовые диалоги, потоковая передача, структурированные выходные данные и вызов функций
-- Генерация изображений, преобразование текста в речь и мультимодальные запросы
-- Управление состоянием чата на стороне сервера, выполнение в фоновом режиме, Deep Research и управляемые агенты
-- Названия текущих моделей и перенос устаревшего кода `generateContent` или `google-generativeai`
+- Gjenerimi i tekstit, biseda me shumë kthesa, transmetimi, daljet e strukturuara dhe thirrja e funksioneve
+- Gjenerimi i imazheve, teksti në ligjërim (TTS) dhe hyrjet multimodale
+- Menaxhimi i gjendjes së bisedës nga ana e serverit, ekzekutimi në sfond, Deep
+  Research dhe agjentët e menaxhuar
+- Emrat e modeleve aktuale dhe migrimi i kodit të sistemit të vjetër `generateContent` ose `google-generativeai`
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
@@ -71,11 +77,13 @@ npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
 
 #### `gemini-live-api-dev`
 
-Навык создания приложений для потоковой передачи аудио и видео в реальном времени с помощью [Gemini Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ru). Этот навык включает:
+Aftësia për të krijuar aplikacione të transmetimit të audios dhe videos në kohë reale me
+[Gemini Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=sq). Kjo aftësi mbulon:
 
-- Управление сеансами WebSocket, временные токены клиента и возобновление сеансов
-- Потоковая передача аудио, видео и текста с обнаружением голосовой активности (VAD) и поддержкой перебивания.
-- Обоснование ответа (расширенное мышление), асинхронные вызовы инструментов без блокировки, транскрипция и перевод речи в реальном времени
+- Menaxhimi i seancës së WebSocket, kodet e përkohshme të klientit dhe vazhdimi i seancës
+- Transmetimi i audios, videos dhe tekstit me zbulimin e aktivitetit zanor (VAD) dhe
+  mbështetjen e ndërprerjes
+- Arsyetimi në sfond (mendimi i zgjeruar), thirrjet asinkrone jo bllokuese të veglave, transkriptimi dhe përkthimi i ligjërimit në çast
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
@@ -83,19 +91,22 @@ npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
 
 #### `gemini-omni-flash-api`
 
-Навык для создания и редактирования видео с помощью Gemini Omni Flash с использованием Interactions API. Включает вспомогательные скрипты (`upload_file.py`, `generate_video.py`, `prep_video.py`, `inspect_video.py`) и охватывает:
+Aftësia për të gjeneruar dhe modifikuar video me Gemini Omni Flash duke përdorur API-n e "Ndërveprimeve". Përfshin skriptet ndihmëse (`upload_file.py`,
+`generate_video.py`, `prep_video.py`, `inspect_video.py`) dhe mbulon:
 
-- Создание видео из текста и составление запросов
-- Переходы между первым и последним кадрами и генерация видео на основе референсных изображений
-- Расширения для видео и рабочие процессы предварительной обработки медиаконтента
+- Gjenerimi i videos nga teksti dhe krijimi i kërkesës
+- Tranzicionet e kuadrit të parë dhe të fundit dhe gjenerimi i videove i udhëhequr nga referencat
+- Shtesat e videos dhe flukset e punës për parapërpunimin e mediave
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-omni-flash-api --global
 ```
 
-### Как подключить специализированные действия в управляемых агентах
+### Montoni aftësitë në agjentët e menaxhuar
 
-При запуске управляемых агентов с помощью Interactions API вы можете подключить репозиторий `google-gemini/gemini-skills` к рабочей области агента. Подробная информация приведена в [руководстве по навыкам Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=ru).
+Kur ekzekuton agjentë të menaxhuar në distancë me API-n e ndërveprimeve, mund të montosh depon e `google-gemini/gemini-skills` në hapësirën e punës të agjentit. Shiko
+[udhëzuesin e aftësive të Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=sq)
+për detaje:
 
 ```
 from google import genai
@@ -118,34 +129,35 @@ interaction = client.interactions.create(
 )
 ```
 
-## Как подключить MCP-сервер Gemini Docs
+## Lidh serverin MCP të "Dokumenteve" të Gemini
 
-Общедоступный **MCP-сервер Gemini Docs** (`https://gemini-api-docs-mcp.dev`) предоставляет вашему агенту прямой доступ ко всему сайту с документацией. Ваш агент может искать и читать страницы документации, чтобы проверять схемы запросов, ограничения моделей и новые функции:
+**Serveri publik MCP i Gemini Docs** (`https://gemini-api-docs-mcp.dev`) i jep
+agjentit tënd qasje të drejtpërdrejtë në të gjithë sajtin e dokumentacionit. Agjenti yt mund të kërkojë dhe të lexojë faqet e dokumentacionit për të kontrolluar skemat e kërkesave, kufijtë e modeleve dhe veçoritë e reja:
 
-- `gemini_search_docs`: ищет в документации Gemini API по теме или запросу.
-- `gemini_get_doc`: читает весь контент в формате Markdown на определенной странице документации.
+- `gemini_search_docs`: Kërkon në dokumentacionin e Gemini API sipas temës ose kërkesës.
+- `gemini_get_doc`: Lexon përmbajtjen e plotë të Markdown të një faqeje specifike dokumentacioni.
 
-### Быстрая настройка
+### Konfigurimi i shpejtë
 
-Чтобы автоматически настроить обнаруженных агентов кодирования, выполните следующую команду в терминале или корневом каталоге проекта:
+Ekzekuto këtë komandë në terminalin ose rrënjën e projektit për të konfiguruar automatikisht agjentët e kodimit që janë zbuluar:
 
 ```
 npx add-mcp "https://gemini-api-docs-mcp.dev"
 ```
 
-### Настройка по среде
+### Konfigurimi sipas mjedisit
 
 ### Claude Code
 
-Выполните в терминале следующую команду:
+Ekzekuto në terminalin tënd:
 
 ```
 $ claude mcp add --transport http geminiDocs https://gemini-api-docs-mcp.dev
 ```
 
-### Курсор
+### Kursori
 
-Добавить в `~/.cursor/mcp.json` (глобально) или `.cursor/mcp.json` (в проекте):
+Shto te `~/.cursor/mcp.json` (globale) ose `.cursor/mcp.json` (projekt):
 
 ```
 {
@@ -159,13 +171,13 @@ $ claude mcp add --transport http geminiDocs https://gemini-api-docs-mcp.dev
 
 ### OpenAI Codex
 
-Выполните в терминале следующую команду:
+Ekzekuto në terminalin tënd:
 
 ```
 $ codex mcp add geminiDocs --url https://gemini-api-docs-mcp.dev
 ```
 
-Или добавьте в `~/.codex/config.toml`:
+Ose shto te `~/.codex/config.toml`:
 
 ```
 [mcp_servers.geminiDocs]
@@ -174,7 +186,7 @@ url = "https://gemini-api-docs-mcp.dev"
 
 ### VS Code (Copilot)
 
-Добавить в папку "`.vscode/mcp.json`" в рабочей области:
+Shto te "`.vscode/mcp.json`" në vendin tënd të punës:
 
 ```
 {
@@ -187,27 +199,29 @@ url = "https://gemini-api-docs-mcp.dev"
 }
 ```
 
-## Плагин Gemini API
+## Shtesa e Gemini API
 
-Если вы используете **Antigravity**, самый быстрый способ настроить рабочее пространство – **плагин Gemini API**. Он включает MCP-сервер Gemini Docs, все официальные навыки Gemini (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`) и инструменты для работы с ключами API.
+Nëse përdor **Antigravity**, **shtesa e Gemini API** është mënyra më e shpejtë për të konfiguruar hapësirën tënde të punës. Ai përfshin serverin MCP të Gemini Docs, të gjitha aftësitë zyrtare të Gemini (`gemini-api-dev`, `gemini-live-api-dev`, `gemini-omni-flash-api`) dhe veglat e çelësave të API-së në një shkarkim të vetëm.
 
-- **Установка в Antigravity (интерфейс):** перейдите в раздел **Настройки > Специальные возможности > Плагины Google** и скачайте **Gemini API**.
-- **Установка с помощью CLI:**
+- **Instalo në Antigravity (UI):** Shko te **Cilësimet > Personalizimet > Krijo me shtesat e Google** dhe shkarko **Gemini API**.
+- **Instalo me CLI:**
   `bash
   agy plugin install https://github.com/google-gemini/gemini-skills`
 
-## Документация, доступная для машинного считывания
+## Dokumentacioni i lexueshëm nga makineria
 
-Стандартные веб-страницы содержат HTML-теги, панели навигации и скрипты, которые занимают место в окне контекста. `ai.google.dev` предоставляет конечные точки, которые можно считывать с помощью машинного обучения, чтобы агенты и скрипты могли получать чистый код Markdown напрямую:
+Faqet standarde të uebit përfshijnë etiketa HTML, shiritat e navigimit dhe skriptet që zënë hapësirën e dritares së kontekstit. `ai.google.dev` ofron pika përfundimtare të lexueshme nga makina në mënyrë që agjentët dhe skriptet të mund të marrin drejtpërdrejt "Shënimin e formatit" të pastër:
 
-- **`llms.txt` index**
-  ([`https://ai.google.dev/gemini-api/docs/llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=ru)):
-  список всех страниц документации по Gemini API со ссылками на каждую из них.
-- **Прямые URL Markdown (`.md.txt`).** Добавьте `.md.txt` к любому URL документации на сайте `ai.google.dev` (например, [`https://ai.google.dev/gemini-api/docs/coding-agents.md.txt`](https://ai.google.dev/gemini-api/docs/coding-agents.md.txt?hl=ru)), чтобы получить исходный код Markdown для сохраненных запросов, правил `AGENTS.md` или автоматизированных скриптов.
+- Indeksi i **`llms.txt`**
+  ([`https://ai.google.dev/gemini-api/docs/llms.txt`](https://ai.google.dev/gemini-api/docs/llms.txt?hl=sq)):
+  Liston të gjitha faqet e dokumentacionit të Gemini API me lidhje për secilën faqe.
+- **URL-të e drejtpërdrejta të Markdown (`.md.txt`)**: Shto `.md.txt` në çdo URL të dokumentacionit në `ai.google.dev` (për shembull,
+  [`https://ai.google.dev/gemini-api/docs/coding-agents.md.txt`](https://ai.google.dev/gemini-api/docs/coding-agents.md.txt?hl=sq))
+  për të marrë burimin e pastër të Markdown për kërkesat e ruajtura, rregullat e `AGENTS.md` ose skriptet e automatizuara.
 
-## Рекомендуемые правила проекта (`AGENTS.md`)
+## Rregullat e rekomanduara të projektit (`AGENTS.md`)
 
-Файл правил проекта (`AGENTS.md`, `.cursorrules` или `CLAUDE.md`) задает базовые правила, которые загружаются в начале каждого сеанса агента. Добавьте эти правила в корневой каталог проекта, чтобы агенты по умолчанию использовали текущие модели и SDK:
+Një skedar rregullash projekti (`AGENTS.md`, `.cursorrules` ose `CLAUDE.md`) përcakton rregullat bazë që ngarkohen në fillim të çdo seance të agjentit. Shto këto udhëzime në rrënjën e projektit që agjentët e kodimit të parazgjedhin modelet dhe SDK-të aktuale:
 
 ```
 # Gemini API Guidelines
@@ -218,50 +232,51 @@ url = "https://gemini-api-docs-mcp.dev"
 - Use current recommended models (see https://ai.google.dev/gemini-api/docs/models) and avoid deprecated models.
 ```
 
-## Проверка и устранение неполадок
+## Verifiko dhe zgjidh problemet
 
-### Проверка правильности настроек
+### Verifiko konfigurimin tënd
 
-Чтобы проверить настройки, попросите агента программирования:
+Për të testuar konfigurimin, pyet agjentin tënd të kodimit:
 
 ```
 Look up the request schema for the Gemini Interactions API in the documentation.
 ```
 
-Настроенный агент будет использовать `gemini_search_docs` на сервере MCP `geminiDocs` и писать код с помощью `client.interactions.create` с SDK `google-genai` или `@google/genai`.
+Një agjent i konfiguruar do të përdorë `gemini_search_docs` në serverin e MCP-së `geminiDocs` dhe do të shkruajë kod duke përdorur `client.interactions.create` me `google-genai` ose SDK-në `@google/genai`.
 
-### Команды статуса
+### Komandat e statusit
 
-| Среда | Подтверждение MCP | Подтверждение навыков |
+| Mjedisi | Verifikimi i MCP-së | Verifikimi i aftësive |
 | --- | --- | --- |
-| **Claude Code** | Запуск по расписанию: `/mcp` | Запуск по расписанию: `/skills` |
-| **Курсор** | Откройте **Настройки > Функции > MCP**. | Откройте **Настройки > Правила**. |
-| **OpenAI Codex** | Запуск по расписанию: `codex mcp list` | Проверьте `.codex/skills/` или `~/.codex/skills/` |
-| **Antigravity** | Откройте **Настройки > Подключения**. | Откройте **Настройки > Правила** или выполните команду `/skills list`. |
-| **VS Code (Copilot)** | Откройте **Расширения > MCP** или панель вывода. | Нажмите **Выбрать инструменты** в чате Copilot. |
+| **Claude Code** | Ekzekuto `/mcp` | Ekzekuto `/skills` |
+| **Kursori** | Hap **Cilësimet > Veçoritë > MCP** | Hap **Cilësimet > Rregullat** |
+| **OpenAI Codex** | Ekzekuto `codex mcp list` | Kontrollo `.codex/skills/` ose `~/.codex/skills/` |
+| **Antigravity** | Hap **Personalizimet > Lidhjet** | Hap **Personalizimet > Rregullat** ose ekzekuto `/skills list` |
+| **VS Code (Copilot)** | Hap **Shtesat > MCP** ose panelin e daljes | Kliko te **Zgjidh veglat** te "Biseda me Copilot" |
 
-### Устранение неполадок
+### Zgjidhja e problemeve
 
-- **Не удалось обнаружить навык или MCP-сервер.** Перезапустите редактор (Cursor или VS Code) или сеанс терминала (Claude Code или Codex). Большинство агентов загружают MCP-серверы и навыки только при запуске.
-- **Конфликт глобальных навыков.** Если ваш агент игнорирует глобально установленный навык, установите его в корневой каталог проекта без `--global`:
+- **Serveri i aftësive ose MCP nuk u zbulua:** Rinis seancën e modifikuesit (Cursor ose VS Code) ose terminalit (Claude Code ose Codex). Shumica e agjentëve ngarkojnë serverët MCP dhe aftësitë vetëm kur fillojnë.
+- **Konflikt i aftësisë globale:** Nëse agjenti yt shpërfill një aftësi të instaluar në nivel global, instalo aftësinë në rrënjën e projektit tënd pa `--global`:
   `bash
   npx skills add google-gemini/gemini-skills --skill gemini-api-dev`
-- **Правила игнорируются.** Убедитесь, что файл `AGENTS.md`, `.cursorrules` или `CLAUDE.md` находится в корневом каталоге проекта.
+- **Rregullat e shpërfillura:** Sigurohu që skedari yt `AGENTS.md`, `.cursorrules` ose `CLAUDE.md`
+  është në direktorinë rrënjë të projektit tënd.
 
-## Дальнейшие действия
+## Çfarë ka më pas
 
-- [Руководство по навыкам Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=ru)
-- [Навыки работы с Gemini API на GitHub](https://github.com/google-gemini/gemini-skills)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ru)
-- [Доступные модели](https://ai.google.dev/gemini-api/docs/models?hl=ru)
-- [Библиотеки и SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ru)
+- [Udhëzuesi i aftësive të Gemini API](https://aistudio.google.com/learn/gemini-api-skills?hl=sq)
+- [Aftësitë e Gemini API në GitHub](https://github.com/google-gemini/gemini-skills)
+- [API-ja e ndërveprimeve](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=sq)
+- [Modelet e disponueshme](https://ai.google.dev/gemini-api/docs/models?hl=sq)
+- [Bibliotekat dhe SDK-të](https://ai.google.dev/gemini-api/docs/libraries?hl=sq)
 
-Отправить отзыв
+Dërgo komente
 
-Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-Последнее обновление: 2026-10-06 UTC.
+Përditësimi i fundit: 2026-10-06 UTC.
 
-Хотите рассказать подробнее?
+Duhet të na tregosh më shumë?
 
-[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-06 UTC."],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-06 UTC."],[],[]]

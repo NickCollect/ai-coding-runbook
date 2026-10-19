@@ -1,76 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=pt-BR
-fetched_at: 2026-10-12T07:06:13.671974+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=tr
+fetched_at: 2026-10-19T05:49:37.788099+00:00
 title: "Gemini 3.8 Live Extended Thinking \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O Gemini 3.8 Flash já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pt-br).
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envie comentários
+Geri bildirim gönderin
 
 # Gemini 3.8 Live Extended Thinking
 
-O Gemini 3.8 Live Extended Thinking é nosso modelo de raciocínio avançado de áudio para áudio recomendado quando é necessário um raciocínio mais elaborado para resolver problemas complexos e de várias etapas durante interações de voz em tempo real. Ele processa o raciocínio em segundo plano e as chamadas de ferramentas assíncronas enquanto transmite respostas de áudio contínuas.
+Gemini 3.8 Live Extended Thinking, yüksek akıl yürütme özelliğine sahip sesli etkileşimlerde karmaşık ve çok adımlı sorunları çözerken daha fazla arka plan akıl yürütme gerektiğinde önerilen, sesli etkileşimden sesli etkileşime akıl yürütme modelimizdir. Sürekli sesli yanıtlar akışını yaparken arka planda gerekçelendirme ve eşzamansız araç çağrılarını işler.
 
-[Testar no Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=pt-br)
+[Google AI Studio'da deneme](https://aistudio.google.com/live?model=gemini-3.8-live-extended-thinking&hl=tr)
 
-## Documentação
+## Belgeler
 
-Acesse o guia da [API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br) para conferir a cobertura completa
-de recursos e funcionalidades.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) kılavuzunu ziyaret edin.
 
 ## gemini-3.8-live-extended-thinking
 
-| Propriedade | Descrição |
+| Mülk | Açıklama |
 | --- | --- |
-| Código do modelo id\_card | `gemini-3.8-live-extended-thinking` |
-| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagens, áudio, vídeo  **Saída**  Texto e áudio |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  65.536 |
-| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  Compatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  incompatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  incompatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  Compatível (somente assíncrono)  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  incompatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  Compatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  incompatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
-| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  incompatível |
-| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-3.8-live-extended-thinking` |
-| calendar\_monthÚltima atualização | Setembro de 2026 |
-| id\_cardCard de modelo | [Card de modelo](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=pt-br) |
+| id\_cardModel kodu | `gemini-3.8-live-extended-thinking` |
+| saveDesteklenen veri türleri | **Girişler**  Metin, resim, ses, video  **Çıkış**  Metin ve ses |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
+| handymanÖzellikler | **[Ses üretme](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr)**  Destekleniyor  **[Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr)**  Desteklenmiyor  **[Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr)**  Desteklenmiyor  **[Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr)**  Desteklenmiyor  **[İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)**  Desteklenir (yalnızca eş zamansız)  **[Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr)**  Desteklenmiyor  **[Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr)**  Desteklenmiyor  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)**  Destekleniyor  **[Arama temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr)**  Destekleniyor  **[Yapılandırılmış çıkışlar](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**  Desteklenmiyor  **[Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)** (Thinking)  Destekleniyor  **[URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr)**  Desteklenmiyor |
+| speedTüketim seçenekleri | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)**  Desteklenmiyor |
+| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-3.8-live-extended-thinking` |
+| calendar\_monthSon güncelleme | Eylül 2026 |
+| id\_cardModel kartı | [Model kartı](https://deepmind.google/models/model-cards/gemini-3-8-audio/?hl=tr) |
 
-## Upgrade para o Gemini 3.8 Live Extended Thinking
+## Gemini 3.8 Live Extended Thinking'e yükseltme
 
-O Gemini 3.8 Live Extended Thinking apresenta o raciocínio em segundo plano durante as sessões de áudio ao vivo. Ao integrar esse modelo, atualize o gerenciamento de estado do cliente
-para processar indicadores de raciocínio assíncronos:
+Gemini 3.8 Live Extended Thinking, canlı ses oturumları sırasında arka plan muhakemesi özelliğini sunar. Bu modeli entegre ederken istemci durumu yönetiminizi eşzamansız muhakeme sinyallerini işleyecek şekilde güncelleyin:
 
-- **Protocolo de raciocínio assíncrono**: ao interagir com modelos que usam raciocínio assíncrono, o `turnComplete: true` não indica mais que o modelo está inativo. O servidor pode continuar processando o raciocínio em segundo plano ou
-  chamadas de ferramentas. O cliente precisa continuar detectando mensagens subsequentes do servidor (como chamadas de função ou frames de áudio) depois que `turnComplete: true` chegar.
-- **Monitoramento `interaction_status`**: use o campo `interaction_status` nas mensagens
-  do servidor recebidas para determinar o estado atual do servidor:
-  - `IN_PROGRESS`: o servidor está processando ativamente a entrada do usuário, executando
-    raciocínio em segundo plano ou aguardando respostas para chamadas de ferramentas assíncronas.
-    Outras saídas do modelo ou chamadas de ferramentas podem aparecer.
-  - `IDLE`: o servidor concluiu todo o processamento, o raciocínio e as chamadas de ferramentas.
-    A sessão está inativa e aguardando a entrada do usuário.
-- **Chamada de função assíncrona**: apenas a execução assíncrona não bloqueadora
-  (`behavior: NON_BLOCKING`) é compatível. O modo de bloqueio síncrono não é aceito e retorna um erro grave. As configurações de programação de funções não são compatíveis.
-- **Configuração de pensamento**: configure o raciocínio em segundo plano usando
-  `thinking_config` na configuração de configuração (`thinking_level`: `low`,
-  `medium` ou `high`). Observe que `MINIMAL` não é compatível.
-- **Atualizações de conteúdo do cliente**: o `send_client_content` é compatível com todo o ciclo de vida da sessão com funções explícitas (`user` ou `model`). Definir `turn_complete=true` interrompe imediatamente a geração ativa.
-- **Áudio proativo**: ativado permanentemente. Definir `proactive_audio: false`
-  retorna um erro.
+- **Asenkron muhakeme protokolü**: Asenkron muhakeme kullanan modellerle etkileşimde bulunurken `turnComplete: true` artık modelin boşta olduğunu belirtmiyor. Sunucu, arka planda akıl yürütme veya araç çağrılarını işlemeye devam edebilir. İstemciniz, `turnComplete: true` geldikten sonra sonraki sunucu mesajlarını (ör. araç çağrıları veya ses çerçeveleri) dinlemeye devam etmelidir.
+- **İzleme `interaction_status`**: Geçerli sunucu durumunu belirlemek için gelen sunucu mesajlarındaki `interaction_status` alanını kullanın:
+  - `IN_PROGRESS`: Sunucu, kullanıcı girişini etkin bir şekilde işliyor, arka planda akıl yürütme yapıyor veya eşzamansız araç çağrıları için yanıt bekliyor.
+    Ek model çıkışı veya araç çağrıları gelebilir.
+  - `IDLE`: Sunucu tüm işleme, muhakeme ve araç çağrılarını tamamlamıştır.
+    Oturum boşta ve kullanıcı girişi bekleniyor.
+- **Eşzamansız işlev çağrısı**: Yalnızca eşzamansız engellemeyen yürütme (`behavior: NON_BLOCKING`) desteklenir. Eşzamanlı engelleme modu desteklenmez ve kesin bir hata döndürür. İşlev planlama yapılandırmaları desteklenmez.
+- **Yapılandırmayı düşünme**: Kurulum yapılandırmanızda (`thinking_level`: `low`, `medium` veya `high`) `thinking_config` kullanarak arka plan gerekçelendirmesini yapılandırın. `MINIMAL` desteklenmez.
+- **İstemci içeriği güncellemeleri**: `send_client_content`, açık rollerle (`user` veya `model`) tüm oturum yaşam döngüsü boyunca desteklenir. `turn_complete=true` ayarı, etkin oluşturma işlemini anında kesintiye uğratır.
+- **Proaktif ses**: Kalıcı olarak etkindir. `proactive_audio: false` ayarı hata döndürüyor.
 
-Para uma comparação de recursos em todos os modelos da API Live, consulte a tabela de [Comparação de modelos](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=pt-br#model-comparison).
+Tüm Live API modelleri arasındaki özellik karşılaştırması için [Model karşılaştırma](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr#model-comparison) tablosuna bakın.
 
-Envie comentários
+Geri bildirim gönderin
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Última atualização 2026-09-17 UTC.
+Son güncelleme tarihi: 2026-09-17 UTC.
 
-Quer enviar seu feedback?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-09-17 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-17 UTC."],[],[]]

@@ -1,26 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-TW
-fetched_at: 2026-10-12T06:55:34.314358+00:00
-title: "\u6a94\u6848\u8f38\u5165\u65b9\u5f0f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=fa
+fetched_at: 2026-10-19T05:38:46.268890+00:00
+title: "\u0631\u0648\u0634\u200c\u0647\u0627\u06cc \u0648\u0631\u0648\u062f\u06cc \u0641\u0627\u06cc\u0644 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-提供意見
+ارسال بازخورد
 
-# 檔案輸入方式
+# روش‌های ورودی فایل
 
-本指南說明向 Gemini API 提出要求時，如何加入圖片、音訊、影片和文件等媒體檔案。所有 Gemini API 端點都支援這些新方法，包括 Batch、Interactions 和 Live API。選擇合適的方法取決於檔案大小、資料儲存位置，以及檔案的使用頻率。
+این راهنما روش‌های مختلفی را که می‌توانید هنگام درخواست از Gemini API فایل‌های رسانه‌ای مثل
+تصاویر، صدا، ویدیو، و اسناد را اضافه کنید توضیح می‌دهد.
+روش‌های جدید در همه نقاط پایانی «میانای برنامه‌سازی کاربردی Gemini»، ازجمله
+میانای برنامه‌سازی کاربردی «دسته‌ای»، «تعامل‌ها»، و «زنده» پشتیبانی می‌شوند.
+انتخاب روش صحیح به اندازه فایل، محل ذخیره داده‌ها، و تعداد دفعاتی که قصد دارید از فایل استفاده کنید بستگی دارد.
 
-如要將檔案做為輸入內容，最簡單的方法是讀取本機檔案，然後將檔案納入提示。以下範例說明如何讀取本機 PDF 檔案。透過這種方法上傳的 PDF 檔案大小上限為 50 MB。如需檔案輸入類型和限制的完整清單，請參閱「[輸入法比較表](#method-comparison)」。
+ساده‌ترین راه برای افزودن فایل به‌عنوان ورودی این است که فایل محلی را بخوانید و آن را در پیام‌واره بگنجانید. مثال زیر نحوه خواندن فایل PDF محلی را نشان می‌دهد. فایل‌های PDF برای این روش محدود به ۵۰ مگابایت است. برای فهرست کامل انواع ورودی فایل و محدودیت‌ها،
+[جدول مقایسه روش ورودی](#method-comparison) را ببینید.
 
 ### Python
 
@@ -73,7 +78,7 @@ async function main() {
 main();
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -119,7 +124,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -196,26 +201,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 輸入法比較
+## مقایسه روش ورودی
 
-下表比較各輸入方式的檔案限制和最佳用途。請注意，檔案大小上限可能因檔案類型和用於處理檔案的型號或權杖化工具而異。
+جدول زیر هر روش ورودی را با محدودیت‌های فایل و موارد استفاده بهینه مقایسه می‌کند. توجه داشته باشید که محدودیت اندازه فایل ممکن است بسته به نوع فایل و مدل یا نشانه‌گذاری استفاده‌شده برای پردازش فایل متفاوت باشد.
 
-| 方法 | 適用情境 | 檔案大小上限 | 保留設定 |
+| روش | بهترین برای | حداکثر اندازه فایل | ماندگاری |
 | --- | --- | --- | --- |
-| **內嵌資料** | 快速測試、小型檔案、即時應用程式。 | 每個要求或酬載 100 MB   (PDF 為 **50 MB**) | 無 (隨每個要求傳送) |
-| **透過 File API 上傳** | 大型檔案、多次使用的檔案。 | 每個檔案 2 GB， 每個專案最多 20 GB | 48 小時 |
-| **檔案 API GCS URI 註冊** | Google Cloud Storage 中已有的檔案、多次使用的檔案。 | 每個檔案 2 GB，沒有總儲存空間限制 | 無 (每個要求都會擷取)。一次註冊最多可存取 30 天。 |
-| **外部網址** | 公用資料或雲端 bucket (AWS、Azure、GCS) 中的資料，不必重新上傳。 | 每個檔案 15 MB | 無 (每個要求都會擷取) |
+| **داده‌های درون‌خطی** | آزمایش سریع، فایل‌های کوچک، برنامه‌های بلادرنگ. | ‫۱۰۰ مگابایت در هر درخواست یا داده‌بار   (**۵۰ مگابایت برای فایل‌های PDF**) | هیچ‌کدام (با هر درخواست ارسال می‌شود) |
+| **بارگذاری File API** | فایل‌های بزرگ، فایل‌هایی که چندین بار استفاده شده‌اند. | ۲ گیگابایت برای هر فایل،   تا ۲۰ گیگابایت برای هر پروژه | ‫۴۸ ساعت |
+| **ثبت نشانی وب یکنواخت GCS میانای برنامه‌سازی کاربردی فایل** | فایل‌های بزرگی که ازقبل در Google Cloud Storage هستند، فایل‌هایی که چندین بار استفاده شده‌اند. | ۲ گیگابایت برای هر فایل، بدون محدودیت کلی فضای ذخیره‌سازی | هیچ‌کدام (براساس درخواست واکشی می‌شود). ثبت‌نام یک‌باره می‌تواند تا ۳۰ روز دسترسی بدهد. |
+| **نشانی‌های وب خارجی** | داده‌های عمومی یا داده‌های موجود در دسته‌های ابری (AWS،‏ Azure،‏ GCS) بدون بارگذاری مجدد. | ‫۱۵ مگابایت برای هر فایل | هیچ‌کدام (براساس درخواست واکشی شد) |
 
-## 內嵌資料
+## داده‌های به‌خط
 
-如果是較小的檔案 (小於 100 MB，PDF 檔案則為小於 50 MB)，您可以直接在要求酬載中傳遞資料。這是最簡單的方法，適用於快速測試或處理即時暫時性資料的應用程式。您可以提供 base64 編碼字串形式的資料，也可以直接讀取本機檔案。
+برای فایل‌های کوچک‌تر (کمتر از ۱۰۰ مگابایت، یا ۵۰ مگابایت برای فایل‌های PDF)، می‌توانید داده‌ها را
+مستقیماً در محتوای درخواست بگذرانید. این ساده‌ترین روش برای آزمون‌های سریع یا
+برنامه‌هایی است که داده‌های گذرا و هم‌زمان را مدیریت می‌کنند. می‌توانید داده‌ها را به‌صورت
+رشته‌های کدبندی‌شده base64 ارائه دهید یا فایل‌های محلی را مستقیماً بخوانید.
 
-如需從本機檔案讀取的範例，請參閱本頁開頭的範例。
+برای نمونه‌ای از خواندن از فایل محلی، نمونه ابتدای
+این صفحه را ببینید.
 
-### 從網址擷取
+### واکشی از نشانی وب
 
-您也可以從網址擷取檔案、轉換為位元組，然後納入輸入內容。
+همچنین می‌توانید فایلی را از نشانی وب واکشی کنید، آن را به بایت تبدیل کنید، و در
+ورودی بگنجانید.
 
 ### Python
 
@@ -270,7 +280,7 @@ async function main() {
 main();
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -321,7 +331,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -428,11 +438,11 @@ jq ".outputs[] | select(.type == \"text\") | .text" response.json
 
 ## Gemini File API
 
-File API 適用於較大的檔案 (最多 2 GB)，或您打算在多項要求中使用的檔案。
+«میانای برنامه‌سازی کاربردی فایل» برای فایل‌های بزرگ‌تر (تا ۲ گیگابایت) یا فایل‌هایی که قصد دارید در چندین درخواست استفاده کنید طراحی شده است.
 
-### 標準檔案上傳
+### بارگذاری فایل استاندارد
 
-將本機檔案上傳至 Gemini API。以這種方式上傳的檔案會暫時儲存 (48 小時)，並經過處理，方便模型有效檢索。
+فایل محلی را در «میانای برنامه‌سازی کاربردی Gemini» بارگذاری کنید. فایل‌هایی که به این روش بارگذاری می‌شوند به‌طور موقت (۴۸ ساعت) ذخیره می‌شوند و برای بازیابی کارآمد توسط مدل پردازش می‌شوند.
 
 ### Python
 
@@ -483,7 +493,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -530,7 +540,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -630,43 +640,52 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### 註冊 Google Cloud Storage 檔案
+### ثبت فایل‌های Google Cloud Storage
 
-如果資料已儲存在 Google Cloud Storage，就不需要下載並重新上傳。您可以直接透過 File API 註冊。
+اگر داده‌هایتان ازقبل در Google Cloud Storage است، نیازی نیست آن را
+بارگیری و دوباره بارگذاری کنید. می‌توانید آن را مستقیماً در «میانای برنامه‌سازی کاربردی فایل» ثبت کنید.
 
-1. 授予每個值區的「服務代理」存取權
+1. دسترسی **عامل سرویس** را به هر مخزن اعطا کنید
 
-   1. 在 Google Cloud 專案中啟用 Gemini API。
-   2. 建立服務代理：
+   1. «میانای برنامه‌سازی کاربردی Gemini» را در پروژه Google Cloud خود فعال کنید.
+   2. ایجاد «عامل خدمات»:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **授予 Gemini API 服務代理讀取儲存空間 bucket 的權限**。
+   3. **اجازه‌های «عامل سرویس API Gemini» را** برای خواندن
+      فضای ذخیره‌سازی اعطا کنید.
 
-      使用者必須在打算使用的特定儲存空間 bucket 中，為這個服務代理指派 `Storage Object Viewer`
-      [IAM 角色](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=zh-tw#storage.objectViewer)。
+      کاربر باید `Storage Object Viewer`
+      [نقش IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=fa#storage.objectViewer)
+      را به این عامل سرویس در باکت‌های ذخیره‌سازی خاصی که قصد دارد استفاده کند اختصاص دهد.
 
-   這項存取權預設不會過期，但隨時可以變更。您也可以使用 [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=zh-tw) 指令授予權限。
-2. 驗證服務
+   این دسترسی به‌طور پیش‌فرض منقضی نمی‌شود، اما در هر زمانی قابل تغییر است. همچنین می‌توانید از دستورات
+   [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=fa)
+   برای اعطای اجازه‌ها استفاده کنید.
+2. اصالت‌سنجی سرویس
 
-   **必要條件**
+   **پیش‌نیازها**
 
-   - 啟用 API
-   - 建立具備適當權限的服務帳戶或代理程式。
+   - فعال کردن API
+   - حساب خدمات یا کارگزاری با مجوزهای مناسب ایجاد کنید.
 
-   您必須先以具備儲存空間物件檢視者權限的服務身分進行驗證。這項作業的執行方式取決於檔案管理程式碼的執行環境。
+   ابتدا باید به‌عنوان سرویسی که مجوزهای
+   بیننده شیء فضای ذخیره‌سازی دارد اصالت‌سنجی کنید. نحوه انجام این کار به محیطی که کد مدیریت فایل شما در آن اجرا می‌شود بستگی دارد.
 
-   **Google Cloud 以外的服務**
+   **خارج از Google Cloud**
 
-   如果您的程式碼是從 Google Cloud 外部 (例如桌面) 執行，請按照下列步驟，從 Google Cloud 控制台下載帳戶憑證：
+   اگر کدتان از خارج Google Cloud اجرا می‌شود، مثلاً از رایانه،
+   اطلاعات اعتباری حساب را با مراحل زیر از «کنسول Google Cloud» بارگیری کنید:
 
-   1. 瀏覽至[服務帳戶控制台](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=zh-tw)
-   2. 選取相關服務帳戶
-   3. 選取「金鑰」分頁，然後依序選擇「新增金鑰」和「建立新的金鑰」
-   4. 選擇「JSON」金鑰類型，並記下檔案下載至您電腦的位置。
+   1. به [کنسول حساب سرویس](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=fa) مرور کنید
+   2. حساب سرویس مربوطه را انتخاب کنید
+   3. برگه **کلیدها** را انتخاب کنید و **افزودن کلید، ایجاد کلید جدید** را انتخاب کنید
+   4. نوع کلید **JSON** را انتخاب کنید و توجه داشته باشید که فایل در کجا در دستگاهتان بارگیری شده است.
 
-   詳情請參閱 Google Cloud 官方說明文件，瞭解如何[管理服務帳戶金鑰](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=zh-tw)。
+   برای جزئیات بیشتر، به اسناد رسمی Google Cloud درباره
+   [مدیریت کلید حساب سرویس](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=fa) مراجعه کنید.
 
-   然後使用下列指令進行驗證。這些指令會假設服務帳戶檔案位於目前目錄中，且名為 `service-account.json`。
+   سپس از فرمان‌های زیر برای اصالت‌سنجی استفاده کنید. این فرمان‌ها فرض می‌کنند فایل حساب خدمات شما در
+   دایرکتوری کنونی قرار دارد و نام آن `service-account.json` است.
 
    ### Python
 
@@ -686,7 +705,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    )
    ```
 
-   ### JavaScript
+   ### جاوا اسکریپت
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -712,13 +731,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **在 Google Cloud 上**
+   **در Google Cloud**
 
-   如果您直接在 Google Cloud 中執行，例如使用 [Cloud Run functions](https://cloud.google.com/functions?hl=zh-tw) 或 [Compute Engine 執行個體](https://cloud.google.com/products/compute?hl=zh-tw)，您會擁有隱含憑證，但需要重新驗證，才能授予適當的範圍。
+   اگر مستقیماً در Google Cloud اجرا می‌کنید، برای مثال بااستفاده از [توابع Cloud Run](https://cloud.google.com/functions?hl=fa) یا
+   [نمونه Compute Engine](https://cloud.google.com/products/compute?hl=fa)، اطلاعات اعتباری ضمنی خواهید داشت اما برای اعطای دامنه‌های مناسب باید دوباره اصالت‌سنجی کنید.
 
    ### Python
 
-   這段程式碼預期服務會在可自動取得[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)的環境中執行，例如 Cloud Run 或 Compute Engine。
+   این کد انتظار دارد که سرویس در محیطی اجرا شود که در آن
+   [اطلاعات اعتباری پیش‌فرض برنامه](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=fa)
+   را بتوان به‌طور خودکار دریافت کرد، مثل Cloud Run یا Compute Engine.
 
    ```
    import google.auth
@@ -733,7 +755,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
    ### JavaScript
 
-   這段程式碼預期服務會在可自動取得[應用程式預設憑證](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=zh-tw)的環境中執行，例如 Cloud Run 或 Compute Engine。
+   این کد انتظار دارد که سرویس در محیطی اجرا شود که در آن
+   [اطلاعات اعتباری پیش‌فرض برنامه](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=fa)
+   را بتوان به‌طور خودکار دریافت کرد، مثل Cloud Run یا Compute Engine.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -746,7 +770,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    });
    ```
 
-### Java
+### جاوا
 
 ```
 import com.google.auth.oauth2.GoogleCredentials;
@@ -766,7 +790,7 @@ GoogleCredentials credentials =
         .createScoped(gcsReadScopes);
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -788,15 +812,17 @@ func main() {
 
 ### CLI
 
-這是互動式指令。對於 Compute Engine 等服務，您可以在設定層級將範圍附加至執行中的服務。如需範例，請參閱[使用者管理的服務文件](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=zh-tw#using)。
+این یک فرمان تعاملی است. برای سرویس‌هایی مثل Compute Engine می‌توانید محدوده‌ها را در سطح پیکربندی به سرویس درحال اجرا پیوست کنید. برای مثال، [اسناد سرویس مدیریت‌شده توسط کاربر](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=fa#using)
+را ببینید.
 
 ```
 gcloud auth application-default login \
 --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
 ```
 
-1. 註冊檔案 (Files API)
-   使用 Files API 註冊檔案，並產生可直接在 Gemini API 中使用的 Files API 路徑。
+1. ثبت فایل (میانای برنامه‌سازی کاربردی Files)
+   از میانای برنامه‌سازی کاربردی Files برای ثبت فایل‌ها و تولید مسیر میانای برنامه‌سازی کاربردی Files استفاده کنید که می‌تواند
+   مستقیماً در «میانای برنامه‌سازی کاربردی Gemini» استفاده شود.
 
    ### Python
 
@@ -853,7 +879,7 @@ gcloud auth application-default login \
    main();
    ```
 
-### Java
+### جاوا
 
 ```
 import com.google.auth.oauth2.GoogleCredentials;
@@ -913,7 +939,7 @@ for (File f : registeredGcsFiles.files().orElse(Collections.emptyList())) {
 }
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -989,10 +1015,11 @@ curl -X POST https://generativelanguage.googleapis.com/v1beta/files:register \
     -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
 ```
 
-## 外部 HTTP / 簽署網址
+## HTTP خارجی / نشانی‌های وب امضاشده
 
-您可以直接在要求中傳遞可公開存取的 HTTPS 網址或預先簽署的網址。Gemini API 會在處理期間安全地擷取內容。
-這項功能非常適合不想重新上傳的檔案。每個檔案的大小上限為 15 MB。如要上傳較大的檔案，請使用 [File API](#file-api)。
+می‌توانید نشانی‌های وب HTTPS دردسترس عموم یا نشانی‌های وب پیش‌امضاشده را مستقیماً در
+درخواستتان بگذرانید. ‫Gemini API محتوا را درطول پردازش به‌طور ایمن واکشی می‌کند.
+این برای فایل‌هایی که نمی‌خواهید دوباره بارگذاری کنید ایده‌آل است. هر فایل می‌تواند تا ۱۵ مگابایت باشد. برای فایل‌های بزرگ‌تر، از [File API](#file-api) استفاده کنید.
 
 ### Python
 
@@ -1014,7 +1041,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript
+### جاوا اسکریپت
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1057,20 +1084,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### 無障礙設定
+### دسترس‌پذیری
 
-確認您提供的網址不會導向需要登入或位於付費牆後的網頁。如果是私人資料庫，請務必建立具備正確存取權限和有效期限的經簽署的網址。
+تأیید کنید که نشانی‌های وبی که ارائه می‌کنید به صفحه‌هایی که نیاز به ورود به سیستم دارند یا
+پشت دیوار پرداخت هستند منتهی نمی‌شوند. برای پایگاه‌های داده خصوصی، مطمئن شوید نشانی وب امضاشده‌ای با اجازه‌های دسترسی و انقضای صحیح ایجاد کنید.
 
-### 安全檢查
+### بررسی‌های ایمنی
 
-系統會對網址執行內容審核檢查，確認網址符合安全和政策標準。如果網址未通過這項檢查，您會收到 `url_retrieval_status` 的 `URL_RETRIEVAL_STATUS_UNSAFE`。
+سیستم بررسی محتوای نشانی وب را انجام می‌دهد تا تأیید کند که با استانداردهای ایمنی و خط‌مشی مطابقت دارد. اگر نشانی وب در این بررسی ناموفق باشد،
+`url_retrieval_status` از `URL_RETRIEVAL_STATUS_UNSAFE` دریافت خواهید کرد.
 
-### 支援的內容類型
+### انواع محتوای پشتیبانی‌شده
 
-這份支援的檔案類型和限制清單僅為初步指引，並未涵蓋所有項目。支援的有效型別組合可能會變更，且會因使用的特定模型和權杖化工具版本而異。如果類型不受支援，就會發生錯誤。
-此外，擷取這些檔案類型的內容時，僅支援可公開存取的網址。
+این فهرست از انواع فایل پشتیبانی‌شده و محدودیت‌ها به‌عنوان راهنمایی اولیه درنظر گرفته شده است و جامع نیست. مجموعه مؤثر انواع پشتیبانی‌شده ممکن است تغییر کند و براساس مدل خاص و نسخه نشانه‌گذار درحال استفاده متفاوت باشد. انواع پشتیبانی‌نشده منجر به خطا می‌شود.
+علاوه‌براین، واکشی محتوا برای این نوع فایل‌ها فقط از نشانی‌های وب دردسترس عمومی پشتیبانی می‌کند.
 
-#### 文字檔案類型
+#### انواع فایل نوشتاری
 
 - `text/html`
 - `text/css`
@@ -1080,19 +1109,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/rtf`
 - `text/javascript`
 
-#### 應用程式檔案類型
+#### انواع فایل برنامه
 
 - `application/json`
 - `application/pdf`
 
-#### 圖片檔案類型
+#### انواع فایل تصویری
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### 影片檔案類型
+#### انواع فایل ویدیو
 
 - `video/mp4`
 - `video/mpeg`
@@ -1104,32 +1133,37 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `video/wmv`
 - `video/3gpp`
 
-## 最佳做法
+## روال‌های مطلوب
 
-- **選擇合適的方法：**針對小型暫時性檔案使用內嵌資料。
-  如要處理較大或經常使用的檔案，請使用 File API。使用外部網址，
-  匯入已在線上託管的資料。
-- **指定 MIME 類型：**請務必為檔案資料提供正確的 MIME 類型，確保系統能正確處理。
-- **處理錯誤：**在程式碼中實作錯誤處理機制，管理網路連線失敗、檔案存取問題或 API 錯誤等潛在問題。
+- **روش صحیح را انتخاب کنید:** برای فایل‌های کوچک و موقت از داده‌های درون‌خطی استفاده کنید.
+  برای فایل‌های بزرگ‌تر یا فایل‌هایی که اغلب استفاده می‌شوند، از «میانای برنامه‌سازی کاربردی فایل» استفاده کنید. از نشانی‌های وب خارجی
+  برای داده‌هایی که قبلاً به‌صورت آنلاین میزبانی شده‌اند استفاده کنید.
+- **مشخص کردن انواع MIME:** همیشه نوع MIME صحیح را برای داده‌های فایل ارائه دهید تا پردازش به‌درستی انجام شود.
+- **مدیریت خطاها:** مدیریت خطا را در کد خود پیاده‌سازی کنید تا مشکلات احتمالی مانند خرابی شبکه، مشکلات دسترسی به فایل، یا خطاهای API را مدیریت کنید.
 
-## 限制
+## محدودیت‌ها
 
-- 檔案大小限制會因方法 (請參閱[比較表](#method-comparison)) 和檔案類型而異。
-- 內嵌資料會增加要求酬載大小。
-- 檔案 API 上傳作業是暫時性的，會在 48 小時後失效。
-- 每個檔案的外部網址擷取上限為 15 MB，且支援特定內容類型。
+- محدودیت‌های اندازه فایل براساس روش (به [جدول مقایسه](#method-comparison) مراجعه کنید)
+  و نوع فایل متفاوت است.
+- داده‌های درون‌خطی اندازه پایه‌بار درخواست را افزایش می‌دهد.
+- بارگذاری‌های «میانای برنامه‌سازی کاربردی فایل» موقتی هستند و پس‌از ۴۸ ساعت منقضی می‌شوند.
+- واکشی نشانی وب خارجی به ۱۵ مگابایت در هر فایل محدود است و از انواع محتوای خاصی پشتیبانی می‌کند.
 
-## 後續步驟
+## قدم بعدی چیست
 
-- 使用 [Google AI Studio](http://aistudio.google.com/?hl=zh-tw) 撰寫自己的多模態提示。
-- 如要瞭解如何在提示中加入檔案，請參閱「[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=zh-tw)」、「[Audio](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)」和「[Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-tw)」指南。
+- بااستفاده از [Google AI Studio](http://aistudio.google.com/?hl=fa)، پیام‌واره‌های چندوجهی خودتان را بنویسید.
+- برای کسب اطلاعات درباره افزودن فایل به پیام‌واره‌هایتان، راهنمای
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=fa)،
+  [صوت](https://ai.google.dev/gemini-api/docs/audio?hl=fa)، و
+  [پردازش سند](https://ai.google.dev/gemini-api/docs/document-processing?hl=fa)
+  را ببینید.
 
-提供意見
+ارسال بازخورد
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-上次更新時間：2026-10-07 (世界標準時間)。
+تاریخ آخرین به‌روزرسانی 2026-10-07 به‌وقت ساعت هماهنگ جهانی.
 
-想進一步說明嗎？
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-07 (世界標準時間)。"],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-07 به‌وقت ساعت هماهنگ جهانی."],[],[]]

@@ -1,26 +1,23 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=bn
-fetched_at: 2026-10-12T06:50:20.760663+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content?hl=ru
+fetched_at: 2026-10-19T05:48:10.400671+00:00
 title: "Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-জেমিনি ৩.৮ ফ্ল্যাশ এখন পাওয়া যাচ্ছে। [ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=bn) ।
+Доступна новая модель Gemini 4 Argon. [Попробовать](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ru)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs/generate-content?hl=bn)
+- [Главная](https://ai.google.dev/?hl=ru)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
+- [Документация](https://ai.google.dev/gemini-api/docs/generate-content?hl=ru)
 
 # Gemini API
 
-Gemini API হল Gemini, Veo,
-Nano Banana ও আরও অনেক কিছুর মাধ্যমে প্রম্পট থেকে প্রোডাকশনে যাওয়ার সবচেয়ে দ্রুত উপায়। এটি আপনাকে টেক্সট ও ছবি জেনারেট করতে, মাল্টিমোডাল ইনপুট বিশ্লেষণ করতে এবং
-কথোপকথনমূলক এজেন্ট তৈরি করতে আপনার
-অ্যাপ্লিকেশনে এইসব জেনারেটিভ মডেল ইন্টিগ্রেট করতে দেয়।
+Gemini API – это самый быстрый способ перейти от запроса к готовому продукту с помощью Gemini, Veo, Nano Banana и других моделей. Он позволяет интегрировать эти генеративные модели в приложения, чтобы создавать сгенерированный текст и изображения, анализировать мультимодальные входные данные и разрабатывать разговорных агентов.
 
 ### Python
 
@@ -30,14 +27,14 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.8-flash",
+    model="gemini-4-argon",
     contents="Explain how AI works in a few words",
 )
 
 print(response.text)
 ```
 
-### জাভাস্ক্রিপ্ট
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -46,7 +43,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.8-flash",
+    model: "gemini-4-argon",
     contents: "Explain how AI works in a few words",
   });
   console.log(response.text);
@@ -55,7 +52,7 @@ async function main() {
 await main();
 ```
 
-### খুলুন
+### Проложить маршрут
 
 ```
 package main
@@ -76,7 +73,7 @@ func main() {
 
     result, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3.8-flash",
+        "gemini-4-argon",
         genai.Text("Explain how AI works in a few words"),
         nil,
     )
@@ -101,7 +98,7 @@ public class GenerateTextFromTextInput {
 
     GenerateContentResponse response =
         client.models.generateContent(
-            "gemini-3.8-flash",
+            "gemini-4-argon",
             "Explain how AI works in a few words",
             null);
 
@@ -121,7 +118,7 @@ public class GenerateContentSimpleText {
   public static async Task main() {
     var client = new Client();
     var response = await client.Models.GenerateContentAsync(
-      model: "gemini-3.8-flash", contents: "Explain how AI works in a few words"
+      model: "gemini-4-argon", contents: "Explain how AI works in a few words"
     );
     Console.WriteLine(response.Candidates[0].Content.Parts[0].Text);
   }
@@ -131,7 +128,7 @@ public class GenerateContentSimpleText {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-4-argon:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -148,124 +145,124 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
   }'
 ```
 
-[তৈরি করা শুরু করুন](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=bn)
+[Начать](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ru)
 
 ---
 
-## মডেলদের সাথে পরিচিত হন
+## Модели
 
-[সবকটি দেখুন](https://ai.google.dev/gemini-api/docs/models?hl=bn)
+[Весь список](https://ai.google.dev/gemini-api/docs/models?hl=ru)
 
 [auto\_awesome
-Gemini 3.1 Pro
-নতুন
+Gemini 4 Argon
+Новое
 
-আমাদের সবচেয়ে বুদ্ধিমান মডেল, মাল্টিমোডাল বোঝার জন্য বিশ্বের সেরা, সব অত্যাধুনিক রিজনিংয়ের উপর ভিত্তি করে তৈরি।](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn)
+Наша флагманская модель с окном контекста на 1 млн токенов и длинными декодированиями до 1 млн токенов.](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ru)
 [spark
 Gemini 3.6 Flash
-নতুন
+Новинка
 
-আমাদের লেটেস্ট মডেল যা এজেন্টিক ও মাল্টিমোডাল টাস্কে শক্তিশালী পারফর্ম্যান্স ডেলিভার করার জন্য স্পিড ও ইন্টেলিজেন্সের মধ্যে ব্যালেন্স করে।](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=bn)
+Наша последняя модель, которая сочетает в себе скорость и интеллект, чтобы обеспечивать высокую производительность при выполнении агентских и мультимодальных задач.](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ru)
 [graphic\_eq
 Gemini 3.8 Flash TTS
-নতুন
+Новинка
 
-এক্সপ্রেসিভ অ্যাক্টিং, কাস্টম ভয়েস ডিজাইন ও ভয়েস রেপ্লিকেশন সহ স্টুডিও-গ্রেড টেক্সট-টু-স্পিচ মডেল।](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=bn)
+Модель студийного уровня для преобразования текста в речь с выразительной интонацией, возможностью создания собственного голоса и его копирования.](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=ru)
 [spark
 Gemini 3.5 Flash-Lite
-নতুন
+Новинка
 
-কম লেটেন্সি ও হাই থ্রুপুট সাব-এজেন্ট টাস্কের জন্য অপ্টিমাইজ করা বেশি ভলিউম ও খরচ-সংবেদনশীল মডেল।](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=bn)
+Модель для больших объемов данных, оптимизированная для задач субагентов с высокой пропускной способностью и низкой задержкой.](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ru)
 [spark
 Gemini 3.1 Flash-Lite
 
-Gemini 3 সিরিজের পারফর্ম্যান্স ও কোয়ালিটি সহ হাই-ভলিউম, খরচ-সংবেদনশীল মডেল।](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn)
+Модель с высокой производительностью и качеством серии Gemini 3, которая позволяет снизить расходы.](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ru)
 [spark
 Gemini 3 Flash
 
-ফ্রন্টিয়ার-ক্লাস পারফর্ম্যান্স যা অনেক কম খরচে বড় মডেলের সাথে প্রতিদ্বন্দ্বিতা করতে পারে।](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=bn)
+Производительность на уровне передовых моделей при значительно меньших затратах.](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ru)
 [🍌
 Nano Banana
 
-অত্যাধুনিক ইমেজ জেনারেশন ও এডিটিং মডেল।](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn)
+Передовые модели для создания и редактирования изображений.](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)
 [video\_library
 Veo 3.1
 
-আমাদের অত্যাধুনিক ভিডিও জেনারেশন মডেল, সাথে নেটিভ অডিও।](https://ai.google.dev/gemini-api/docs/video?hl=bn)
+Наша передовая модель генерации видео с нативным аудио.](https://ai.google.dev/gemini-api/docs/video?hl=ru)
 [spark
 Gemini Robotics
 
-একটি ভিশন-ল্যাঙ্গুয়েজ মডেল (VLM) যা রোবোটিক্সের ক্ষেত্রে Gemini-র এজেন্ট সংক্রান্ত ক্ষমতা নিয়ে আসে এবং বাস্তব জগতে উন্নত রিজনিং করার সুবিধা দেয়।](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=bn)
+Визуально-языковая модель (VLM), которая позволяет использовать агентные возможности Gemini в робототехнике и обеспечивает расширенные возможности рассуждения в физическом мире.](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ru)
 
-## ক্ষমতা এক্সপ্লোর করা
+## Изучить возможности
 
 [imagesmode
 
-নেটিভ ইমেজ জেনারেশন (Nano Banana)
+Встроенная генерация изображений (Nano Banana)
 
-Gemini 2.5 Flash Image-এর মাধ্যমে অত্যন্ত প্রাসঙ্গিক ছবি নেটিভভাবে তৈরি ও এডিট করুন।](https://ai.google.dev/gemini-api/docs/image-generation?hl=bn)
+Генерируйте и редактируйте изображения с учетом контекста с помощью Gemini 2.5 Flash Image.](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)
 [article
 
-অনেক বড় প্রসঙ্গ
+Большое окно контекста
 
-Gemini মডেলে লক্ষ লক্ষ টোকেন ইনপুট করুন এবং আনস্ট্রাকচার্ড ছবি, ভিডিও ও ডকুমেন্ট থেকে তথ্য পান।](https://ai.google.dev/gemini-api/docs/long-context?hl=bn)
+Передавайте моделям Gemini миллионы токенов и получайте информацию из неструктурированных изображений, видео и документов.](https://ai.google.dev/gemini-api/docs/long-context?hl=ru)
 [code
 
-স্ট্রাকচার্ড আউটপুট
+Structured Outputs
 
-Gemini-কে JSON-এর মাধ্যমে উত্তর দেওয়ার জন্য সীমাবদ্ধ করুন, এটি হল অটোমেটিক প্রসেসিংয়ের জন্য উপযুক্ত একটি স্ট্রাকচার্ড ডেটা ফর্ম্যাট।](https://ai.google.dev/gemini-api/docs/structured-output?hl=bn)
+Задайте Gemini ограничение, чтобы он отвечал в формате JSON – формате структурированных данных, подходящем для автоматической обработки.](https://ai.google.dev/gemini-api/docs/structured-output?hl=ru)
 [functions
 
-ফাংশন কলিং
+Вызов функций
 
-এক্সটার্নাল API ও টুলের সাথে Gemini কানেক্ট করে এজেন্টিক ওয়ার্কফ্লো তৈরি করুন।](https://ai.google.dev/gemini-api/docs/function-calling?hl=bn)
+Создавайте рабочие процессы с агентами, подключая Gemini к внешним API и инструментам.](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru)
 [videocam
 
-Veo 3.1-এর মাধ্যমে ভিডিও জেনারেশন
+Создание видео с помощью Veo 3.1
 
-আমাদের অত্যাধুনিক মডেলের সাহায্যে টেক্সট বা ছবির প্রম্পট থেকে খুব ভালো কোয়ালিটির ভিডিও কন্টেন্ট তৈরি করুন।](https://ai.google.dev/gemini-api/docs/video?hl=bn)
+Создавайте высококачественный видеоконтент по текстовым или графическим запросам с помощью нашей передовой модели.](https://ai.google.dev/gemini-api/docs/video?hl=ru)
 [android\_recorder
 
-Live API সহ ভয়েস এজেন্ট
+Голосовые агенты с Live API
 
-Live API-এর সাহায্যে রিয়েল-টাইম ভয়েস অ্যাপ্লিকেশন ও এজেন্ট তৈরি করুন।](https://ai.google.dev/gemini-api/docs/live-api?hl=bn)
+Создавайте голосовые приложения и агентов, работающих в реальном времени, с помощью Live API.](https://ai.google.dev/gemini-api/docs/live-api?hl=ru)
 [build
 
-টুল
+Инструменты
 
-Google Search, URL Context, Google Maps, Code Execution ও Computer Use-এর মতো বিল্ট-ইন টুলের মাধ্যমে Gemini-কে বিশ্বের সাথে কানেক্ট করুন।](https://ai.google.dev/gemini-api/docs/tools?hl=bn)
+Подключите Gemini к миру с помощью встроенных инструментов, таких как Google Поиск, контекст URL, Google Карты, выполнение кода и использование компьютера.](https://ai.google.dev/gemini-api/docs/tools?hl=ru)
 [stacks
 
-ডকুমেন্ট বোঝা
+Распознавание документов
 
-সম্পূর্ণ মাল্টিমোডাল জ্ঞান বা অন্যান্য টেক্সট-ভিত্তিক ফাইলের ধরন সহ সর্বাধিক ১০০০ পৃষ্ঠার পিডিএফ ফাইল প্রসেস করুন।](https://ai.google.dev/gemini-api/docs/document-processing?hl=bn)
+Обрабатывайте до 1000 страниц PDF-файлов с полным пониманием мультимодальных запросов или другие текстовые файлы.](https://ai.google.dev/gemini-api/docs/document-processing?hl=ru)
 [cognition\_2
 
-Thinking
+Думающая
 
-জটিল টাস্ক ও এজেন্টের ক্ষেত্রে চিন্তাশক্তি কীভাবে যুক্তিনির্ভর কারণ নির্ণয় করার ক্ষমতাকে উন্নত করে তা এক্সপ্লোর করুন।](https://ai.google.dev/gemini-api/docs/thinking?hl=bn)
+Узнайте, как возможности рассуждения улучшают логическое мышление при выполнении сложных задач и работе агентов.](https://ai.google.dev/gemini-api/docs/thinking?hl=ru)
 
 [Google AI Studio
 
-প্রম্পট পরীক্ষা করা, API কী ম্যানেজ করা, ব্যবহার মনিটর করা এবং প্রোটোটাইপ তৈরি করা।](https://aistudio.google.com?hl=bn)
+Тестируйте запросы, управляйте ключами API, отслеживайте использование и создавайте прототипы.](https://aistudio.google.com?hl=ru)
 [group
 
-ডেভেলপার কমিউনিটি
+Сообщество разработчиков
 
-অন্যান্য ডেভেলপার ও Google ইঞ্জিনিয়ারদের থেকে প্রশ্ন জিজ্ঞাসা ও সমাধান খুঁজে নেওয়া।](https://discuss.ai.google.dev/c/gemini-api/4?hl=bn)
+Задавайте вопросы и находите решения вместе с другими разработчиками и инженерами Google.](https://discuss.ai.google.dev/c/gemini-api/4?hl=ru)
 [menu\_book
 
-API রেফারেন্স
+Документация по API
 
-অফিসিয়াল রেফারেন্স ডকুমেন্টেশনে Gemini API সম্পর্কে বিস্তারিত তথ্য পাবেন।](https://ai.google.dev/api?hl=bn)
+Подробную информацию о Gemini API можно найти в официальной справочной документации.](https://ai.google.dev/api?hl=ru)
 [sensors
 
-স্ট্যাটাস
+Статус
 
-Gemini API, Google AI Studio ও আমাদের মডেল পরিষেবার স্ট্যাটাস চেক করুন।](https://aistudio.google.com/status?hl=bn)
+Проверьте статус Gemini API, Google AI Studio и наших сервисов моделей.](https://aistudio.google.com/status?hl=ru)
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
 
-2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।
+Последнее обновление: 2026-10-16 UTC.
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-16 UTC."],[],[]]

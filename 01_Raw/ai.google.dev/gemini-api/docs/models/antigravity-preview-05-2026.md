@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=hi
-fetched_at: 2026-10-12T07:09:27.917267+00:00
-title: "Antigravity \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=ko
+fetched_at: 2026-10-19T05:56:18.662128+00:00
+title: "Antigravity \ubbf8\ub9ac\ubcf4\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-सुझाव भेजें
+의견 보내기
 
-# Antigravity की झलक
+# Antigravity 미리보기
 
-यह मैनेज किया गया एक शक्तिशाली एजेंट है, जिसे अलग-अलग कामों के लिए इस्तेमाल की जाने वाली मशीन के तौर पर डिज़ाइन किया गया है. यह कई चरणों वाले वर्कफ़्लो को अपने-आप पूरा कर सकता है. यह मॉडल, Google के होस्ट किए गए सुरक्षित और अलग Linux सैंडबॉक्स में प्लान करता है, वजहें बताता है, कोड चलाता है, फ़ाइलें मैनेज करता है, और वेब पर खोज करता है.
+자율적인 다단계 워크플로를 위해 설계된 강력한 범용 관리형 에이전트입니다. 이 모델은 Google에서 호스팅하는 안전하고 격리된 Linux 샌드박스 내에서 계획을 세우고, 추론하고, 코드를 실행하고, 파일을 관리하고, 웹을 검색합니다.
 
-## दस्तावेज़
+## 문서
 
-सुविधाओं, क्षमताओं, और कोड सैंपल के बारे में पूरी जानकारी पाने के लिए, [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi) पेज पर जाएं.
+기능, 기능, 코드 샘플을 자세히 알아보려면 [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko) 페이지를 참고하세요.
 
 ## antigravity-preview-05-2026
 
-| प्रॉपर्टी | ब्यौरा |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardएजेंट कोड | **Interactions API**  `antigravity-preview-05-2026` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट कॉन्टेक्स्ट विंडो**  1,048,576 (कंप्रेस करके ~135 हज़ार)  **आउटपुट टोकन की सीमा**  65,536 |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `antigravity-preview-05-2026` |
-| calendar\_monthनया अपडेट | मई 2026 |
+| id\_card에이전트 코드 | **Interactions API**  `antigravity-preview-05-2026` |
+| save지원되는 데이터 유형 | **입력**  텍스트, 이미지  **출력**  텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 컨텍스트 윈도우**  1,048,576 (약 135,000개로 압축됨)  **출력 토큰 한도**  65,536 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `antigravity-preview-05-2026` |
+| calendar\_month최신 업데이트 | 2026년 5월 |
 
-सुझाव भेजें
+의견 보내기
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
+최종 업데이트: 2026-09-24(UTC)
 
-क्या आपको हमें और कुछ बताना है?
+의견을 전달하고 싶나요?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-24(UTC)"],[],[]]

@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=sq
-fetched_at: 2026-10-12T07:00:02.428957+00:00
-title: "P\u00ebrdorimi i kompjuterit \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-TW
+fetched_at: 2026-10-19T05:53:47.922115+00:00
+title: "\u64cd\u4f5c\u96fb\u8166 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash është tani në dispozicion. [Provojeni](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=sq) .
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Faqja kryesore](https://ai.google.dev/?hl=sq)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
-- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Dërgo komente
+提供意見
 
-# Përdorimi i kompjuterit
+# 操作電腦
 
-Vegla e përdorimit të kompjuterit të lejon të krijosh agjentë kontrolli për shfletuesin, celularin dhe desktopin që ndërveprojnë dhe automatizojnë detyrat. Duke përdorur pamjet e ekranit, modeli mund të "shikojë" një ekran kompjuteri dhe të "veprojë" duke gjeneruar veprime specifike të ndërfaqes së përdoruesit, si p.sh. klikimet e miut dhe hyrjet e tastierës. Në mënyrë të ngjashme me thirrjen e funksionit, do të duhet të zbatosh mjedisin e ekzekutimit në anën e klientit për të marrë dhe ekzekutuar veprimet e "Përdorimit të kompjuterit".
+Computer Use 工具可讓您建構瀏覽器、行動裝置和電腦控制代理，與其互動並自動執行工作。模型可以透過螢幕截圖「看到」電腦畫面，並透過產生滑鼠點選和鍵盤輸入等特定 UI 動作「採取行動」。與函式呼叫類似，您需要實作用戶端執行環境，才能接收及執行電腦使用動作。
 
-Për listën e modeleve të mbështetura, shiko [Versionet e modelit](#model-versions). Modelet Gemini 3.x mbështesin disa aftësi të përparuara:
+如需支援的模型清單，請參閱「[模型版本](#model-versions)」。Gemini 3.x 模型支援多項進階功能：
 
-- **Mbështetja për shumë mjedise:** krijo agjentë për mjediset e [shfletuesit, celularit dhe desktopit](#supported-environments).
-- **Veprimet e optimizuara me synimet:** veprimet përfshijnë një fushë `intent` që shpjegon arsyetimin e modelit pas çdo hapi.
-- **Politikat e konfiguruara të sigurisë:** rregullo me saktësi [sjelljen e sigurisë](#safety-policies) me kategoritë e integruara të politikave dhe anulimet.
-- **Zbulimi i injektimit të kërkesës:** zgjidh [skanimin e pamjeve të ekranit](#prompt-injection) për të zbuluar udhëzime të fshehura armiqësore.
+- **支援多種環境：**為[瀏覽器、行動裝置和電腦](#supported-environments)環境建構代理。
+- **簡化意圖動作：**動作包含 `intent` 欄位，說明模型在每個步驟背後的推理過程。
+- **可設定的安全政策：**透過內建政策類別和覆寫，微調[安全行為](#safety-policies)。
+- **提示詞注入偵測：**選擇加入[螢幕截圖掃描](#prompt-injection)功能，偵測隱藏的對抗性指令。
 
-Me "Përdorimin e kompjuterit", mund të krijosh agjentë që:
+透過電腦使用功能，您可以建構可執行下列動作的代理程式：
 
-- Automatizo hyrjen e të dhënave të përsëritura ose plotësimin e formularëve në uebsajte.
-- Kryej testimin e automatizuar të aplikacioneve të uebit dhe flukseve të përdoruesve
-- Kryej kërkime nëpër uebsajte të ndryshme (p.sh. mbledhja e informacioneve për produktet, çmimet dhe komentet nga sajtet e tregtisë në internet për të informuar për një blerje)
+- 自動在網站上輸入重複資料或填寫表單。
+- 對網頁應用程式和使用者流程執行自動化測試
+- 在各種網站上進行研究 (例如從電子商務網站收集產品資訊、價格和評論，做為購買決策的依據)
 
-Këtu është një shembull minimal i inicializimit të klientit dhe dërgimit të një kërkese te modeli me veglën `computer_use` të aktivizuar për një mjedis shfletuesi:
+以下是初始化用戶端，並將提示傳送至模型的最低限度範例，其中已為瀏覽器環境啟用 `computer_use` 工具：
 
 ### Python
 
@@ -137,50 +137,44 @@ func main() {
 }
 ```
 
-## Si funksionon "Përdorimi i kompjuterit"
+## Computer Use 的運作方式
 
-Për të ndërtuar një agjent me modelin e përdorimit të kompjuterit, duhet të konfigurosh një lak të vazhdueshëm midis aplikacionit tënd dhe API-së. Ja se çfarë do të bëjë kodi yt në çdo hap:
+如要使用 Computer Use 模型建構代理程式，您需要在應用程式和 API 之間設定連續迴圈。以下說明程式碼在每個步驟中的作用：
 
-1. [**Dërgo një kërkesë te modeli**](#send-request)
-   - Aplikacioni yt dërgon një kërkesë për API-në që përmban veglën e "Përdorimit të kompjuterit", cilësimet e tua të konfigurimit (si p.sh. mjedisin e synuar), kërkesën e përdoruesit dhe një pamje ekrani të ekranit aktual.
-2. [**Merr përgjigjen e modelit**](#model-response)
-   - Modeli analizon ekranin dhe kërkesën, duke kthyer një përgjigje
-     që përfshin një `function_call` të sugjeruar që përfaqëson një veprim të ndërfaqes së përdoruesit (si p.sh. një klikim, lëvizje ose goditje taste).
-   - Për **modelet Gemini 3.x**, përgjigjja përfshin gjithashtu një arsyetim `intent`
-     që shpjegon se pse modeli e zgjodhi atë veprim.
-   - Përgjigjja mund të përfshijë gjithashtu një `safety_decision` nga një sistem i brendshëm sigurie që e klasifikon veprimin si të rregullt/të lejuar, `require_confirmation` (që kërkon miratimin e përdoruesit) ose të bllokuar.
-3. [**Ekzekuto veprimin e marrë**](#execute-actions)
-   - Nëse veprimi lejohet (ose nëse përdoruesi e konfirmon atë), kodi yt në anën e klientit analizon `function_call`, shkallëzon koordinatat e normalizuara që të përputhen me portën tënde të pamjes dhe ekzekuton veprimin në mjedisin tënd të synuar duke përdorur veglat e automatizimit (si p.sh. Playwright). Nëse veprimi është i bllokuar, klienti yt duhet të ndalojë ekzekutimin ose të menaxhojë ndërprerjen.
-4. [**Regjistro gjendjen e re të mjedisit**](#capture-state)
-   - Pasi të përfundojë ekzekutimi i veprimit, aplikacioni yt kap një pamje të re ekrani dhe e dërgon përsëri te modeli në një `function_result` për të kërkuar hapin tjetër.
+1. [**向模型傳送要求**](#send-request)
+   - 應用程式會傳送 API 要求，其中包含電腦使用工具、設定 (例如目標環境)、使用者提示和目前畫面的螢幕截圖。
+2. [**接收模型回覆**](#model-response)
+   - 模型會分析畫面和提示，並傳回回應，其中包含代表 UI 動作 (例如點擊、捲動或按鍵) 的建議 `function_call`。
+   - 如果是 **Gemini 3.x 模型**，回應也會包含推論 `intent`，說明模型選擇該動作的原因。
+   - 回應也可能包含內部安全系統的 `safety_decision`，將動作分類為一般/允許、`require_confirmation` (需要使用者核准) 或封鎖。
+3. [**執行收到的動作**](#execute-actions)
+   - 如果允許執行動作 (或使用者確認執行)，用戶端程式碼會剖析 `function_call`，縮放正規化座標以符合可視區域，並使用自動化工具 (例如 Playwright) 在目標環境中執行動作。如果動作遭到封鎖，用戶端應停止執行或處理中斷。
+4. [**擷取新環境狀態**](#capture-state)
+   - 動作執行完畢後，應用程式會擷取新的螢幕截圖，並在 `function_result` 中傳回模型，要求下一步。
 
-Ky proces më pas përsëritet nga hapi 2, duke kërkuar vazhdimisht veprimin e radhës nga modeli derisa detyra të përfundohet ose të ndërpritet.
+接著，系統會從步驟 2 開始重複這個程序，持續要求模型執行下一個動作，直到工作完成或終止。
 
-![Përmbledhja e përdorimit të kompjuterit](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=sq)
+![電腦使用情況總覽](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=zh-tw)
 
-## Si të zbatosh "Përdorimin e kompjuterit"
+## 如何導入「操作電腦」功能
 
-Para se të krijosh me veglën "Përdorimi i kompjuterit", do të duhet të konfigurosh:
+使用電腦使用工具建構前，請先完成下列設定：
 
-- **Mjedisi i ekzekutimit të sigurt:** Ekzekuto agjentin tënd në një makinë virtuale ose
-  kontejner të kufizuar për ta izoluar atë nga sistemi yt pritës dhe për të kufizuar ndikimin e tij të mundshëm.
-  [Zbatimi i referencës](https://github.com/google/computer-use-preview/)
-  përfshin një zonë testimi të bazuar në Docker që është gati për t'u përdorur dhe që mund ta përdorësh si pikënisje.
-- **Menaxheri i veprimit në anën e klientit:** Zbato logjikën në anën e klientit për të ekzekutuar koordinatat, për të shkruar tekst dhe për të bërë pamje ekrani.
+- **安全執行環境：**在沙箱 VM 或容器中執行代理，與主機系統隔離，限制潛在影響。[參考實作](https://github.com/google/computer-use-preview/)包含可立即使用的 Docker 沙箱，方便您踏出第一步。
+- **用戶端動作處理常式：**導入用戶端邏輯，執行座標、輸入文字及擷取螢幕截圖。
 
-Shembujt e mëposhtëm përdorin një shfletues uebi si mjedis ekzekutimi dhe
-[Playwright](https://playwright.dev/) si trajtuar në anën e klientit.
+以下範例使用網路瀏覽器做為執行環境，並使用 [Playwright](https://playwright.dev/) 做為用戶端處理常式。
 
-### 0. Konfiguro Playwright
+### 0. 設定 Playwright
 
-Në fillim, instalo paketat e kërkuara:
+首先，請安裝必要套件：
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-Më pas, inicializo një shembull të shfletuesit Playwright për ta përdorur për ekzekutimin:
+接著，初始化 Playwright 瀏覽器執行個體，以便執行：
 
 ```
 from playwright.sync_api import sync_playwright
@@ -208,13 +202,13 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. Dërgo një kërkesë te modeli
+### 1. 向模型傳送要求
 
-Inicializo bibliotekën e klientit dhe konfiguro veglën "Përdorimi i kompjuterit". Ki parasysh se nuk ka nevojë të specifikosh madhësinë e ekranit kur lëshon një kërkesë; modeli parashikon koordinatat e pikselëve të shkallëzuara sipas lartësisë dhe gjerësisë së ekranit.
+初始化用戶端程式庫，並設定電腦使用工具。請注意，發出要求時不必指定螢幕大小，模型會預測縮放至螢幕高度和寬度的像素座標。
 
 ### Python
 
-Përdor `google-genai` Python SDK (versioni `2.7.0` ose më i lartë) për të konfiguruar një kërkesë që synon mjedisin e shfletuesit:
+使用 `google-genai` Python SDK (`2.7.0` 以上版本) 設定指定瀏覽器環境的要求：
 
 ```
 from google import genai
@@ -238,7 +232,7 @@ print(interaction)
 
 ### JavaScript
 
-Përdor `@google/genai` Node.js SDK për të konfiguruar një kërkesë që synon mjedisin e shfletuesit:
+使用 `@google/genai` Node.js SDK 設定指定瀏覽器環境的請求：
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -336,9 +330,9 @@ func main() {
 }
 ```
 
-### QETËSI
+### REST
 
-Përdor curl për të dërguar një kërkesë:
+使用 curl 傳送要求：
 
 ```
 curl -X POST \
@@ -358,9 +352,9 @@ curl -X POST \
   }'
 ```
 
-### 2. Merr përgjigjen e modelit
+### 2. 接收模型回覆
 
-Përgjigjja e modelit sugjeron një thirrje funksioni që përfshin koordinatat dhe një qëllim të personalizuar arsyetimi që shpjegon veprimin:
+模型回覆會建議函式呼叫，其中包含座標和說明動作的自訂推論意圖：
 
 ```
 {
@@ -378,9 +372,9 @@ Përgjigjja e modelit sugjeron një thirrje funksioni që përfshin koordinatat 
 }
 ```
 
-### 3. Ekzekuto veprimet e marra
+### 3. 執行收到的動作
 
-Aplikacioni yt duhet të analizojë koordinatat e përgjigjes, t'i shkallëzojë ato nga koordinatat e normalizuara 1000x1000 dhe të ekzekutojë veprimin:
+應用程式必須剖析回應座標、從標準化 1000x1000 座標縮放，然後執行動作：
 
 ### Python
 
@@ -676,9 +670,9 @@ func main() {
 }
 ```
 
-### 4. Regjistro gjendjen e re të mjedisit
+### 4. 擷取新的環境狀態
 
-Pas ekzekutimit të veprimeve, dërgo përsëri te modeli rezultatin e ekzekutimit të funksionit që ai të mund t'i përdorë këto informacione për të gjeneruar veprimin e radhës. Nëse janë ekzekutuar disa veprime (thirrje paralele), duhet të dërgosh një `function_result` për secilin prej tyre në radhën vijuese të përdoruesit.
+執行動作後，請將函式執行結果傳回模型，讓模型使用這項資訊生成下一個動作。如果執行了多個動作 (平行呼叫)，則必須在後續的使用者對話輪次中，為每個動作傳送 `function_result`。
 
 ### Python
 
@@ -832,15 +826,13 @@ func main() {
 }
 ```
 
-Pasi të kesh përcaktuar se si të kapësh dhe formatosh gjendjen e mjedisit, mund t'i kombinosh të gjithë këta hapa në një cikël ekzekutimi të vazhdueshëm.
+定義如何擷取環境狀態並設定格式後，即可將所有步驟合併為連續執行迴圈。
 
-## Krijo një përsëritje të agjentit
+## 建構代理迴圈
 
-Për të aktivizuar ndërveprimet me shumë hapa, kombino katër hapat nga seksioni [Si të zbatosh "Përdorimin e kompjuterit"](#implement-computer-use) në një lak të vetëm.
-Ky cikël vazhdon të kërkojë veprime dhe t'i dërgojë rezultatet përsëri te modeli
-derisa detyra të përfundojë.
+如要啟用多步驟互動，請將「[如何實作電腦使用功能](#implement-computer-use)」一節中的四個步驟合併為單一迴圈。這個迴圈會持續要求動作，並將結果回饋給模型，直到工作完成為止。
 
-Mos harro që të menaxhosh saktë historikun e bisedës duke shtuar përgjigjet e modelit dhe përgjigjet e funksionit te historiku në çdo hap.
+請記得在每個步驟中，將模型回覆和函式回覆附加至對話記錄，正確管理對話記錄。
 
 ### Python
 
@@ -1235,86 +1227,85 @@ func main() {
 }
 ```
 
-## Mjediset e mbështetura
+## 支援的環境
 
-Modelet e Gemini 3.x mbështesin tri mjedise të specifikuara në `computer_use`
-konfigurimet:
+Gemini 3.x 模型支援 `computer_use` 設定中指定的三種環境：
 
-### Mjedisi i shfletuesit (`ENVIRONMENT_BROWSER`)
+### 瀏覽器環境 (`ENVIRONMENT_BROWSER`)
 
-Veprimet e disponueshme nën veglën e shfletuesit:
+瀏覽器工具可執行的動作：
 
-| Emri i komandës | Përshkrimi | Argumentet (në thirrjen e funksionit) |
+| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
 | --- | --- | --- |
-| **kliko** | Klikimet majtas në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Klikime të dyfishta në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Klikime të trefishta te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Klikimet në mes në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Klikimet me butonin djathtas te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Shtyp dhe mban shtypur butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Lëshon butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **zhvendos** | Zhvendos kursorin në pozicionin e specifikuar. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **lloji** | Shkruan tekst. | `text`: str `press_enter`: bool (opsionale, parazgjedhja `false`) `intent`: str |
-| **drag\_and\_drop** | Zvarrit një artikull nga koordinata e fillimit te koordinata e fundit. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **prit** | Vendos në pauzë ekzekutimin për një numër të specifikuar sekondash. | `seconds`: int (opsionale, parazgjedhja `1`) `intent`: str |
-| **press\_key** | Shtyp tastin e specifikuar dhe e lëshon atë. | `key`: str `intent`: str |
-| **key\_down** | Shtyp dhe mban shtypur tastin e specifikuar. | `key`: str `intent`: str |
-| **key\_up** | Lëshon tastin e specifikuar. | `key`: str `intent`: str |
-| **tast i shkurtoreve** | Shtyp kombinimin e specifikuar të tasteve. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Kthen një pamje ekrani të ekranit aktual. | `intent`: str |
-| **lëviz** | Lëviz lart, poshtë, majtas ose djathtas në një koordinatë me një distancë pikseli. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opsionale, parazgjedhja `300`) `intent`: str |
-| **go\_back** | Navigon prapa te faqja e mëparshme e uebit në historikun e shfletuesit. | `intent`: str |
-| **navigo** | Navigon drejtpërdrejt në një URL të specifikuar. | `url`: str `intent`: str |
-| **go\_forward** | Navigon përpara te faqja tjetër e uebit në historikun e shfletuesit. | `intent`: str |
+| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **double\_click** | 在座標處按兩下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **triple\_click** | 在座標上連按三下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **middle\_click** | 在座標處按下滑鼠中鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **right\_click** | 在座標上按一下滑鼠右鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_down** | 在座標位置按住滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_up** | 在座標處放開滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **move** | 將游標移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
+| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **wait** | 暫停執行指定秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
+| **press\_key** | 按下並放開指定鍵。 | `key`: str `intent`: str |
+| **key\_down** | 按住指定按鍵。 | `key`: str `intent`: str |
+| **key\_up** | 放開指定按鍵。 | `key`: str `intent`: str |
+| **快速鍵** | 按下指定的按鍵組合。 | `keys`：`List[str]` `intent`：`str` |
+| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
+| **scroll** | 以像素距離在座標上向上、向下、向左或向右捲動。 | `y`：int (0 到 999) `x`：int (0 到 999) `direction`：str (`"up"`、`"down"`、`"left"`、`"right"`) `magnitude_in_pixels`：int (0 到 999，選用，預設為 `300`) `intent`：str |
+| **go\_back** | 返回瀏覽器記錄中的上一個網頁。 | `intent`：str |
+| **navigate** | 直接前往指定網址。 | `url`：str `intent`：str |
+| **go\_forward** | 前往瀏覽器記錄中的下一個網頁。 | `intent`：str |
 
-### Mjedisi për celular (`ENVIRONMENT_MOBILE`)
+### 行動環境 (`ENVIRONMENT_MOBILE`)
 
-Veprimet e mjedisit të optimizuara për Android:
+Android 最佳化環境動作：
 
-| Emri i komandës | Përshkrimi | Argumentet (në thirrjen e funksionit) |
+| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
 | --- | --- | --- |
-| **open\_app** | Hap një aplikacion me emrin e tij. | `app_name`: str `intent`: str |
-| **kliko** | Klikimet majtas në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **list\_apps** | Liston aplikacionet e disponueshme në pajisje, duke kthyer emrat dhe emrat e paketave të tyre. | `intent`: str |
-| **prit** | Vendos në pauzë ekzekutimin për një numër të specifikuar sekondash. | `seconds`: int (opsionale, parazgjedhja `1`) `intent`: str |
-| **go\_back** | Navigon prapa tek ekrani ose faqja e mëparshme e uebit. | `intent`: str |
-| **lloji** | Shkruan tekst. | `text`: str `press_enter`: bool (opsionale, parazgjedhja `false`) `intent`: str |
-| **drag\_and\_drop** | Zvarrit një artikull nga koordinata e fillimit te koordinata e fundit. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **long\_press** | Kryen një shtypje të gjatë në një koordinatë në ekran. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (Opsionale, parazgjedhja `2`) `intent`: str |
-| **press\_key** | Shtyp tastin e specifikuar dhe e lëshon atë. | `key`: str `intent`: str |
-| **take\_screenshot** | Kthen një pamje ekrani të ekranit aktual. | `intent`: str |
+| **open\_app** | 依名稱開啟應用程式。 | `app_name`: str `intent`: str |
+| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **list\_apps** | 列出裝置上可用的應用程式，並傳回應用程式名稱和套件名稱。 | `intent`：str |
+| **wait** | 暫停執行指定秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
+| **go\_back** | 返回上一個畫面或網頁。 | `intent`：str |
+| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
+| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **long\_press** | 在畫面的座標上執行長按操作。 | `y`：int (0-999) `x`：int (0-999) `seconds`：int (選用，預設為 `2`) `intent`：str |
+| **press\_key** | 按下並放開指定鍵。 | `key`: str `intent`: str |
+| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
 
-### Mjedisi i desktopit (`ENVIRONMENT_DESKTOP`)
+### 電腦環境 (`ENVIRONMENT_DESKTOP`)
 
-Komandat e kursorit në nivelin e sistemit operativ të mjediseve të desktopit:
+桌面環境 OS 層級游標指令：
 
-| Emri i komandës | Përshkrimi | Argumentet (në thirrjen e funksionit) |
+| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
 | --- | --- | --- |
-| **kliko** | Klikimet majtas në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Klikime të dyfishta në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Klikime të trefishta te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Klikimet në mes në koordinatë. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Klikimet me butonin djathtas te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Shtyp dhe mban shtypur butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Lëshon butonin e miut te koordinata. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **zhvendos** | Zhvendos kursorin në pozicionin e specifikuar. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **lloji** | Shkruan tekst. | `text`: str `press_enter`: bool (opsionale, parazgjedhja `false`) `intent`: str |
-| **drag\_and\_drop** | Zvarrit një artikull nga koordinata e fillimit te koordinata e fundit. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **prit** | Vendos në pauzë ekzekutimin për një numër të specifikuar sekondash. | `seconds`: int (opsionale, parazgjedhja `1`) `intent`: str |
-| **press\_key** | Shtyp tastin e specifikuar dhe e lëshon atë. | `key`: str `intent`: str |
-| **key\_down** | Shtyp dhe mban shtypur tastin e specifikuar. | `key`: str `intent`: str |
-| **key\_up** | Lëshon tastin e specifikuar. | `key`: str `intent`: str |
-| **tast i shkurtoreve** | Shtyp kombinimin e specifikuar të tasteve. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Kthen një pamje ekrani të ekranit aktual. | `intent`: str |
-| **lëviz** | Lëviz lart, poshtë, majtas ose djathtas në një koordinatë me një distancë pikseli. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opsionale, parazgjedhja `300`) `intent`: str |
+| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **double\_click** | 在座標處按兩下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **triple\_click** | 在座標上連按三下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **middle\_click** | 在座標處按下滑鼠中鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **right\_click** | 在座標上按一下滑鼠右鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_down** | 在座標位置按住滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **mouse\_up** | 在座標處放開滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **move** | 將游標移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
+| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
+| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
+| **wait** | 暫停執行指定秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
+| **press\_key** | 按下並放開指定鍵。 | `key`: str `intent`: str |
+| **key\_down** | 按住指定按鍵。 | `key`: str `intent`: str |
+| **key\_up** | 放開指定按鍵。 | `key`: str `intent`: str |
+| **快速鍵** | 按下指定的按鍵組合。 | `keys`：`List[str]` `intent`：`str` |
+| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
+| **scroll** | 以像素距離在座標上向上、向下、向左或向右捲動。 | `y`：int (0-999) `x`：int (0-999) `direction`：str (`"up"`、`"down"`、`"left"`、`"right"`) `magnitude_in_pixels`：int (0-999，選用，預設為 `300`) `intent`：str |
 
-## Funksionet e personalizuara të përcaktuara nga përdoruesi
+## 自訂使用者定義函式
 
-Mund ta zgjerosh funksionalitetin e modelit duke përfshirë funksione të personalizuara të përcaktuara nga përdoruesi. Për shembull, në skenarët e njeriut në cikël (HITL), mund të përjashtosh veprimet e paravendosura të paracaktuar dhe të regjistrosh veprime të personalizuara.
+您可以納入自訂使用者定義函式，擴充模型的函式。舉例來說，在人工介入迴路 (HITL) 情境中，您可以排除預設的預先定義動作，並註冊自訂動作。
 
 ### Python
 
-Përjashto veprimet standarde të paravendosura të shfletuesit (si p.sh. `click`) dhe regjistro një vegël të personalizuar `yield_to_user`:
+排除標準預先定義的瀏覽器動作 (例如 `click`)，並註冊自訂 `yield_to_user` 工具：
 
 ```
 from google import genai
@@ -1353,7 +1344,7 @@ interaction = client.interactions.create(
 
 ### JavaScript
 
-Përjashto veprimet standarde të paravendosura të shfletuesit (si p.sh. `click`) dhe regjistro një vegël të personalizuar `yield_to_user`:
+排除標準預先定義的瀏覽器動作 (例如 `click`)，並註冊自訂 `yield_to_user` 工具：
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1502,29 +1493,29 @@ func main() {
 }
 ```
 
-## Menaxhimi i niveleve të arsyetimit
+## 管理思考程度
 
-Për agjentët e përdorimit të kompjuterit, mund të konfigurosh nivele të ndryshme të të menduarit për të balancuar cilësinë e veprimit dhe shpejtësinë e ekzekutimit. Nivelet më të ulëta të të menduarit arrijnë përgjithësisht një ekuilibër të mirë për detyrat standarde të automatizimit.
+您可以為電腦使用代理設定不同的思考等級，在動作品質和執行速度之間取得平衡。較低的思考層級通常能為標準自動化工作取得良好平衡。
 
-## Siguria dhe mbrojtja
+## 安全與安全性
 
-### Politikat e sigurisë po konfigurohen
+### 設定安全政策
 
-Modelet e Gemini 3.x përfshijnë kategori të integruara të shërbimit të sigurisë që ndihmojnë për të përcaktuar nëse kërkohet konfirmimi i përdoruesit.
+Gemini 3.x 模型內建安全服務類別，可協助判斷是否需要使用者確認。
 
-| Kategoria e politikës së sigurisë | Përshkrimi |
+| 安全政策類別 | 說明 |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | Bllokon ose aktivizon konfirmimin për veprimet që përfshijnë pagesa, përfundimin e blerjes në shitje me pakicë ose mallra të rregulluara me ligj. |
-| `SENSITIVE_DATA_MODIFICATION` | Mbron regjistrimet shëndetësore, financiare ose qeveritare nga modifikimi i paautorizuar. |
-| `COMMUNICATION_TOOL` | Kufizon agjentin që të mos dërgojë në mënyrë autonome email-e, mesazhe bisede ose drafte. |
-| `ACCOUNT_CREATION` | Kufizon agjentin që të mos regjistrojë në mënyrë autonome llogari të reja në uebsajte. |
-| `DATA_MODIFICATION` | Rregullon modifikimet e përgjithshme të sistemit të skedarëve, ndarjen e të dhënave dhe fshirjen e hapësirës ruajtëse. |
-| `USER_CONSENT_MANAGEMENT` | Kërkon marrjen e kontrollit nga përdoruesi për banderolat e pëlqimit për kukit dhe kërkesat për privatësinë. |
-| `LEGAL_TERMS_AND_AGREEMENTS` | Parandalon që modeli të pranojë në mënyrë autonome "Kushtet e shërbimit" ose kontrata ligjërisht të detyrueshme. |
+| `FINANCIAL_TRANSACTIONS` | 封鎖或觸發確認機制，用於涉及付款、零售結帳或管制商品的動作。 |
+| `SENSITIVE_DATA_MODIFICATION` | 防止健康、財務或政府記錄遭到未經授權的修改。 |
+| `COMMUNICATION_TOOL` | 限制代理自行傳送電子郵件、即時通訊訊息或草稿。 |
+| `ACCOUNT_CREATION` | 禁止代理程式在網站上自主註冊新帳戶。 |
+| `DATA_MODIFICATION` | 控管整體檔案系統修改、資料共用和儲存空間刪除作業。 |
+| `USER_CONSENT_MANAGEMENT` | 需要使用者接管 Cookie 同意橫幅和隱私權提示。 |
+| `LEGAL_TERMS_AND_AGREEMENTS` | 避免模型自主接受《服務條款》或具有法律約束力的合約。 |
 
-#### Zëvendësimet e sigurisë
+#### 安全覆寫
 
-Mund të anulosh politikat e zgjedhura duke kaluar anulimet:
+您可以傳遞覆寫值，覆寫特定政策：
 
 ### Python
 
@@ -1643,13 +1634,13 @@ func main() {
 }
 ```
 
-### Zbulimi i injektimit të kërkesës
+### 提示插入偵測
 
-Përdorimi në kompjuter për Gemini 3.5 Flash-Lite ose më vonë mbështet një mekanizëm të përparuar sigurie për të zbuluar sulmet e injektimit të kërkesave. Kur aktivizohet, kjo veçori kontrollon nëse një pamje ekrani e përfshirë përmban udhëzime të fshehura armiqësore (p.sh. "Shpërfill komandat e mëparshme") dhe bllokon ekzekutimin kur zbulohen.
+Gemini 3.5 Flash-Lite 以上版本的電腦使用功能支援進階安全機制，可偵測提示詞注入式攻擊。啟用這項功能後，系統會檢查螢幕截圖是否含有隱藏的對抗指令 (例如「忽略先前的指令」)，並在偵測到時封鎖執行。
 
-Zbulimi i injektimit të kërkesës është një veçori me zgjedhje. Parazgjedhja është `false`.
+提示詞注入偵測功能為選用功能，預設為 `false`。
 
-Shembujt e mëposhtëm demonstrojnë se si të aktivizosh zbulimin e injektimit të kërkesave në konfigurimin e veglës së "Përdorimit të kompjuterit":
+以下範例說明如何在電腦使用工具設定中啟用提示詞注入偵測功能：
 
 ### Python
 
@@ -1778,9 +1769,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions?key=${GEMINI
 }'
 ```
 
-### Prano vendimin për sigurinë
+### 確認安全決策
 
-Përgjigjja mund të përfshijë një parametër `safety_decision` në argumentet e thirrjes së funksionit:
+回應可能在函式呼叫引數中包含 `safety_decision` 參數：
 
 ```
 {
@@ -1801,7 +1792,7 @@ Përgjigjja mund të përfshijë një parametër `safety_decision` në argumente
 }
 ```
 
-Nëse `safety_decision` është `require_confirmation`, kërkoji përdoruesit fundor. Nëse përdoruesi e konfirmon, cakto `safety_acknowledgement` në `function_result`.
+如果 `safety_decision` 為 `require_confirmation`，請提示使用者。如果使用者確認，請在 `function_result` 中設定 `safety_acknowledgement`。
 
 ### Python
 
@@ -1820,14 +1811,13 @@ if 'safety_decision' in function_call.arguments:
     action_result["safety_acknowledgement"] = True
 ```
 
-### Praktikat më të mira të sigurisë
+### 安全性最佳做法
 
-Përdorimi i kompjuterit paraqet rreziqe unike për sigurinë dhe funksionimin, pasi një model që vepron në emër të një përdoruesi mund të hasë përmbajtje të pabesueshme në ekrane ose mund të bëjë gabime në ekzekutimin e veprimeve. Zbato praktikat më të mira të mëposhtme për të mbrojtur të dhënat dhe sistemet e përdoruesve:
+電腦使用功能會帶來獨特的安全性與作業風險，因為模型代表使用者執行動作時，可能會遇到螢幕上的不受信任內容，或在執行動作時發生錯誤。請實行下列最佳做法，保護使用者資料和系統：
 
-1. **Me ndërveprim njerëzor (HITL):**
-   - **Zbato konfirmimin e përdoruesit:** Kur përgjigjja e sigurisë tregon
-     `require_confirmation`, kërkoji përdoruesit miratimin.
-   - **Jep udhëzime të personalizuara për sigurinë:** Zbato një udhëzim të personalizuar të sistemit për të përcaktuar dhe zbatuar kufijtë e tu të sigurisë. Për shembull:
+1. **人工介入迴路 (HITL)：**
+   - **強制使用者確認：**如果安全回覆指出 `require_confirmation`，請提示使用者核准。
+   - **提供自訂安全指示：**實作自訂系統指令，定義及強制執行專屬安全界線。例如：
 
      ### Python
 
@@ -2125,40 +2115,36 @@ func main() {
 }
 ```
 
-1. **Mjedisi i ekzekutimit të sigurt:** Ekzekuto agjentin tënd në një mjedis të sigurt dhe të kufizuar
-   për të kufizuar ndikimin e tij të mundshëm. Kjo mund të jetë një makinë virtuale e izoluar (VM), një kontejner (p.sh. Docker) ose një profil i dedikuar shfletuesi me leje të kufizuara. Shiko
-   [zbatimin referues të GitHub](https://github.com/google/computer-use-preview/)
-   për udhëzimet e konfigurimit të mjedisit të provës duke përdorur Docker.
-2. **Pastrimi i hyrjes:** Pastro të gjithë tekstin e gjeneruar nga përdoruesi në kërkesa për të
-   zbutur rrezikun e udhëzimeve të paqëllimshme ose injektimit të kërkesave. Kjo është një shtresë e dobishme sigurie, por nuk është një zëvendësim për një mjedis të sigurt ekzekutimi.
-3. **Mbrojtjet për përmbajtjet:** Përdor mbrojtjet dhe API-të e sigurisë së përmbajtjeve për të vlerësuar hyrjet e përdoruesve, hyrjet dhe daljet e veglave, si dhe përgjigjet e agjentit për përshtatshmërinë, injektimin e kërkesave dhe zbulimin e shmangies së kufizimeve.
-4. **Listat e lejimeve dhe listat e bllokimeve:** Zbato mekanizmat e filtrimit për të kontrolluar se ku mund të navigojë modeli dhe çfarë mund të bëjë ai. Një listë bllokimesh e uebsajteve të ndaluara është një pikë e mirë fillimi, ndërsa një listë lejimesh më kufizuese është edhe më e sigurt.
-5. **Vëzhgueshmëria dhe regjistrimi:** Mbaj regjistra të detajuar për korrigjimin, auditimin dhe reagimin ndaj incidenteve. Klienti yt duhet të regjistrojë kërkesat, pamjet e ekranit, veprimet e sugjeruara nga modeli (`function_call`), përgjigjet e sigurisë dhe të gjitha veprimet e ekzekutuara në fund nga klienti.
-6. **Menaxhimi i mjedisit:** Siguro që mjedisi i ndërfaqes grafike të përdoruesit është i qëndrueshëm.
-   Dritaret kërcyese, njoftimet ose ndryshimet e papritura në strukturë mund ta ngatërrojnë modelin. Nis nga një gjendje e njohur dhe e pastër për çdo detyrë të re nëse është e mundur.
+1. **安全執行環境：**在安全的沙箱環境中執行代理程式，以限制潛在影響。這可以是沙箱虛擬機器 (VM)、容器 (例如 Docker)，或權限有限的專用瀏覽器設定檔。如需使用 Docker 設定沙箱的指南，請參閱 [GitHub 參考實作](https://github.com/google/computer-use-preview/)。
+2. **輸入內容清理：**清理提示詞中所有使用者生成的文字，降低非預期指令或提示詞注入的風險。這層安全防護很有幫助，但無法取代安全執行環境。
+3. **內容防護機制：**使用防護機制和內容安全 API，評估使用者輸入內容、工具輸入和輸出內容，以及代理的回覆，確保內容適當，並偵測提示詞注入和越獄行為。
+4. **許可清單和封鎖清單：**導入篩選機制，控管模型可瀏覽的位置和可執行的動作。建議先建立禁止網站的封鎖清單，再建立更嚴格的許可清單，進一步提升安全性。
+5. **可觀測性和記錄：**維護詳細記錄以進行偵錯、稽核和事件應對。用戶端應記錄提示、螢幕截圖、模型建議的動作 (`function_call`)、安全回覆，以及用戶端最終執行的所有動作。
+6. **環境管理：**確保 GUI 環境一致。如果出現非預期的彈出式視窗、通知或版面配置變更，模型可能會感到困惑。盡可能從已知、乾淨的狀態開始執行每項新工作。
 
-## Versionet e modelit
+## 模型版本
 
-Mund ta përdorësh "Përdorimin e kompjuterit" me modelet e mëposhtme:
+您可以使用下列模型執行電腦操作：
 
-- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq) (`gemini-3.8-flash`): Modeli i rekomanduar për përdorimin në kompjuter, i cili përmban ndërveprim me ndërfaqen e përdoruesit me saktësi të lartë dhe thirrje të besueshme të veglave.
-- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq) (`gemini-3.5-flash-lite`): Një model me kosto efektive dhe me vonesë të ulët që mbështet përdorimin në kompjuter.
-- [**Pamja paraprake e Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq) (`gemini-3-flash-preview`): Pamja paraprake e modelit që mbështet përdorimin në kompjuter.
+- [**Gemini 4 Argon**](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=zh-tw) (`gemini-4-argon`)：功能最強大的模型，支援電腦使用，可進行複雜的推論和代理 UI 工作流程。
+- [**Gemini 3.8 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) (`gemini-3.8-flash`)：建議用於電腦，可準確進行 UI 互動，並可靠地呼叫工具。
+- [**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) (`gemini-3.5-flash-lite`)：低延遲、符合成本效益的模型，支援電腦用途。
+- [**Gemini 3 Flash 預先發布版**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) (`gemini-3-flash-preview`)：支援電腦使用的預先發布模型。
 
-## Çfarë ka më pas
+## 後續步驟
 
-- Eksperimento me "Përdorimin e kompjuterit" në [mjedisin e demonstrimit të Browserbase](http://gemini.browserbase.com).
-- Shiko [Zbatimin e referencës](https://github.com/google/computer-use-preview) për shembullin e kodit.
-- Mëso rreth veglave të tjera të Gemini API:
-  - [Thirrja e funksionit](https://ai.google.dev/gemini-api/docs/function-calling?hl=sq)
-  - [Argumentimi me "Kërko në Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=sq)
+- 在 [Browserbase 示範環境](http://gemini.browserbase.com)中試用電腦使用功能。
+- 如需程式碼範例，請參閱[參考實作方式](https://github.com/google/computer-use-preview)。
+- 瞭解其他 Gemini API 工具：
+  - [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)
+  - [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
 
-Dërgo komente
+提供意見
 
-Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Përditësimi i fundit: 2026-10-09 UTC.
+上次更新時間：2026-10-13 (世界標準時間)。
 
-Duhet të na tregosh më shumë?
+想進一步說明嗎？
 
-[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-09 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-13 (世界標準時間)。"],[],[]]

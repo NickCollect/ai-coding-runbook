@@ -1,40 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/voice-design?hl=id
-fetched_at: 2026-10-12T06:51:09.563011+00:00
-title: "Desain suara \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/voice-design?hl=th
+fetched_at: 2026-10-19T05:59:14.876659+00:00
+title: "\u0e01\u0e32\u0e23\u0e2d\u0e2d\u0e01\u0e41\u0e1a\u0e1a\u0e40\u0e2a\u0e35\u0e22\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Kirim masukan
+ส่งความคิดเห็น
 
-# Desain suara
+# การออกแบบเสียง
 
-Desain suara memungkinkan Anda membuat persona vokal persisten yang benar-benar baru dari deskripsi bahasa alami menggunakan endpoint Suara Gemini API (`POST /v1beta/voices`). Daripada terbatas pada suara bawaan atau merekam audio referensi, Anda dapat mendeskripsikan usia, timbre vokal, aksen, dan penyampaian dasar karakter, serta menerima ID `voice_...` yang dapat digunakan kembali dan disimpan ke project Anda.
+การออกแบบเสียงช่วยให้คุณสร้างลักษณะเสียงใหม่ถาวรจาก
+คำอธิบายภาษาธรรมชาติโดยใช้ปลายทางเสียงของ Gemini API
+(`POST /v1beta/voices`) แทนที่จะจำกัดอยู่แค่เสียงที่สร้างไว้ล่วงหน้าหรือ
+การบันทึกเสียงอ้างอิง คุณสามารถอธิบายอายุของตัวละคร น้ำเสียง
+สำเนียง และการเปล่งเสียงพื้นฐาน แล้วรับรหัส `voice_...` ที่นำกลับมาใช้ใหม่ได้ซึ่งบันทึกไว้ใน
+โปรเจ็กต์ของคุณ
 
-Cara tercepat untuk mendesain, menguji, dan melakukan iterasi pada suara kustom adalah dengan studio **Desain Suara** interaktif di [Google AI Studio](https://aistudio.google.com/generate-speech?hl=id). Anda dapat
-membuat persona kustom dari perintah teks, mengujinya dengan skrip contoh, dan
-menyalin ID `voice_...` yang dihasilkan langsung ke kode aplikasi Anda.
+วิธีที่เร็วที่สุดในการออกแบบ ทดลอง และทำซ้ำเสียงที่กำหนดเองคือการใช้สตูดิโอ**การออกแบบเสียง**แบบอินเทอร์แอกทีฟใน [Google AI Studio](https://aistudio.google.com/generate-speech?hl=th) คุณสามารถ สร้างลักษณะตัวตนที่กำหนดเองจากพรอมต์ข้อความ ทดสอบด้วยสคริปต์ตัวอย่าง และ คัดลอก`voice_...`รหัสที่ได้ลงในโค้ดของแอปพลิเคชันได้โดยตรง
 
-[Coba di Google AI Studio](https://aistudio.google.com/generate-speech?hl=id)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com/generate-speech?hl=th)
 
-[Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=id)
-(`gemini-3.8-flash-tts`) dan
-[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=id)
-(`gemini-3.8-flash-lite-tts`) mendukung Desain suara.
+ทั้ง [Gemini 3.8 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=th)
+(`gemini-3.8-flash-tts`) และ
+[Gemini 3.8 Flash-Lite TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=th)
+(`gemini-3.8-flash-lite-tts`) รองรับการออกแบบเสียง
 
-## Membuat suara yang didesain
+## สร้างเสียงที่ออกแบบ
 
-Gunakan Google GenAI SDK (`google-genai` 2.25.0+ / `@google/genai` 2.24.0+) atau REST API
-untuk membuat suara kustom dari deskripsi teks. Untuk suara `"prompted"`, `voices.create` (`CreateVoice`) dan `voices.get` (`GetVoice`) menampilkan kolom `sample_audio` hanya output (`mime_type: "audio/wav"`, `data` yang dienkode base64) sehingga Anda dapat langsung mencoba suara yang dihasilkan:
+ใช้ Google GenAI SDK (`google-genai` 2.25.0 ขึ้นไป / `@google/genai` 2.24.0 ขึ้นไป) หรือ REST API
+เพื่อสร้างเสียงที่กำหนดเองจากคำอธิบายข้อความ สำหรับเสียง `"prompted"` ทั้ง `voices.create` (`CreateVoice`) และ `voices.get` (`GetVoice`) จะแสดงฟิลด์ `sample_audio` ที่เป็นเอาต์พุตเท่านั้น (`mime_type: "audio/wav"`, `data` ที่เข้ารหัส Base64) เพื่อให้คุณทดลองฟังเสียงที่สร้างขึ้นได้ทันที
 
 ### Python
 
@@ -127,21 +130,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/voices" \
   }' | tee created_voice.json | jq -r '.sample_audio.data' | base64 --decode > voice_preview.wav
 ```
 
-## Cara kerja desain Voice
+## วิธีการออกแบบเสียง
 
-1. **Membuat suara yang dipicu:** Panggil `voices.create` (`POST /v1beta/voices`)
-   dengan `type="prompted"` dan `store=True`.
-2. **Menerima pratinjau `voice_id` dan `sample_audio` persisten:** API
-   membuat identitas vokal, menyimpannya di project Anda, dan menampilkan
-   ID permanen (misalnya, `voice_abc123...`) bersama dengan `sample_audio`
-   (`mime_type: "audio/wav"`, `data` berenkode base64) yang berisi
-   audio pratinjau yang dihasilkan untuk suara.
-3. **Sintesis ucapan:** Teruskan `voice_id` di mana pun nama suara diterima
-   dalam permintaan sintesis Anda.
+1. **สร้างเสียงที่พร้อมใช้งาน:** โทรหา `voices.create` (`POST /v1beta/voices`)
+   ด้วย `type="prompted"` และ `store=True`
+2. **รับตัวอย่าง `voice_id` และ `sample_audio` แบบถาวร:** API จะสร้างเอกลักษณ์เสียง จัดเก็บไว้ในโปรเจ็กต์ และแสดงรหัสถาวร (เช่น `voice_abc123...`) พร้อมกับ `sample_audio`
+   (`mime_type: "audio/wav"`, `data` ที่เข้ารหัส Base64) ซึ่งมีตัวอย่างเสียงที่สร้างขึ้นสำหรับเสียงนั้น
+3. **สังเคราะห์เสียง:** ส่ง `voice_id` ในตำแหน่งใดก็ได้ที่ยอมรับชื่อเสียง
+   ในคำขอการสังเคราะห์
 
-## Menyintesis ucapan dengan suara yang Anda rancang
+## สังเคราะห์เสียงด้วยเสียงที่คุณออกแบบ
 
-Setelah membuat suara, teruskan `id` (`voice_...`) ke Interactions API untuk menghasilkan ucapan:
+เมื่อสร้างเสียงแล้ว ให้ส่ง `id` (`voice_...`) ของเสียงนั้นไปยัง Interactions
+API เพื่อสร้างคำพูดโดยทำดังนี้
 
 ### Python
 
@@ -240,19 +241,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }' | jq -r '[.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio")] | last | .data' | base64 --decode > out.wav
 ```
 
-## Mengelola suara Anda
+## จัดการเสียงของคุณ
 
-Anda dapat mencantumkan, memfilter, memeriksa, dan menghapus suara tersimpan Anda kapan saja menggunakan
-Voices API (lihat
-[Library Suara yang Diperluas dan pemfilteran](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id#voice-library)
-untuk semua parameter filter).
+คุณสามารถแสดง กรอง ตรวจสอบ และลบเสียงที่จัดเก็บไว้ได้ทุกเมื่อโดยใช้
+Voices API (ดู
+[คลังเสียงและการกรองเพิ่มเติม](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th#voice-library)
+สำหรับพารามิเตอร์ตัวกรองทั้งหมด)
 
-- **Batas penyimpanan dan TTL:** Suara stateful (`store=True`, dibagikan di seluruh suara yang diminta dan direplikasi) memiliki batas **200 suara per project**
-  dan **TTL 1 tahun** (time-to-live).
-- **Ketersediaan `sample_audio`:** `voices.create()` (`CreateVoice`) dan
-  `voices.get()` (`GetVoice`) mengisi `sample_audio` (`mime_type:
-  "audio/wav"`, `data` berenkode base64) untuk suara `"prompted"`. Agar listingan tetap ringan, `voices.list()` (`ListVoices`) menghilangkan `sample_audio`
-  (dan `sample_audio` tidak disetel untuk suara `"replicated"` dan `"prebuilt"`).
+- **ขีดจำกัดพื้นที่เก็บข้อมูลและ TTL:** เสียงแบบมีสถานะ (`store=True` แชร์ใน
+  เสียงที่พรอมต์และเสียงที่จำลอง) มีขีดจำกัดอยู่ที่ **200 เสียงต่อโปรเจ็กต์**
+  และมี **TTL 1 ปี** (Time to Live)
+- **ความพร้อมใช้งานของ `sample_audio`:** `voices.create()` (`CreateVoice`) และ
+  `voices.get()` (`GetVoice`) จะแสดง `sample_audio` (`mime_type:
+  "audio/wav"`, `data` ที่เข้ารหัส Base64) สำหรับเสียง `"prompted"` `voices.list()` (`ListVoices`) จะไม่รวม `sample_audio` เพื่อให้ข้อมูลมีขนาดเล็ก
+  (และจะไม่มีการตั้งค่า `sample_audio` สำหรับเสียง `"replicated"` และ `"prebuilt"`)
 
 ### Python
 
@@ -318,28 +320,27 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/voices/voice_YO
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Praktik terbaik perintah untuk desain Voice
+## แนวทางปฏิบัติแนะนำในการเขียนพรอมต์สำหรับการออกแบบเสียง
 
-- **Masukkan ciri vokal permanen dalam Desain suara, bukan `style`:** Tentukan karakteristik tetap—seperti usia, gender, timbre, karakter suara, dan aksen regional—saat membuat suara di `voices.create`.
-- **Cadangkan `speech_metadata.style` untuk emosi situasional:** Setelah suara kustom Anda dibuat, gunakan perintah `style` singkat (misalnya, `"whispered urgently"` atau `"cheerful and energetic"`) untuk mengarahkan akting belokan demi belokan tanpa mengubah identitas inti pembicara.
-- **Buat perintah yang spesifik dan ringkas:** Deskripsi 1–2 kalimat yang jelas (seperti
-  *"Seorang komentator olahraga yang bersemangat dan fasih di usia 30-an dengan sedikit aksen
-  Midwest"*) akan menghasilkan hasil yang lebih bersih dan konsisten daripada paragraf yang
-  bertentangan atau terlalu panjang.
+- **ใส่ลักษณะเสียงร้องถาวรในการออกแบบเสียง ไม่ใช่`style`:** กำหนดลักษณะที่ไม่เปลี่ยนแปลง เช่น อายุ เพศ โทนเสียง ลักษณะเสียงร้อง และสำเนียงท้องถิ่น เมื่อสร้างเสียงใน `voices.create`
+- **เก็บ `speech_metadata.style` ไว้สำหรับอารมณ์ตามสถานการณ์:** เมื่อสร้าง
+  เสียงที่กำหนดเองแล้ว ให้ใช้พรอมต์สั้นๆ `style` (เช่น
+  `"whispered urgently"` หรือ `"cheerful and energetic"`) เพื่อควบคุมการแสดงตามคำสั่ง
+  แบบเลี้ยวต่อเลี้ยวโดยไม่เปลี่ยนตัวตนหลักของผู้พูด
+- **ให้ข้อมูลที่เฉพาะเจาะจงและกระชับ:** คำอธิบายที่ชัดเจน 1-2 ประโยค (เช่น *"ผู้ประกาศข่าวกีฬาที่กระตือรือร้นและเฉียบคมในวัย 30 ปีที่มีสำเนียง
+  เล็กน้อยแบบมิดเวสต์"*) จะให้ผลลัพธ์ที่สะอาดและสม่ำเสมอกว่าย่อหน้าที่ขัดแย้งกันหรือยาวเกินไป
 
-## Langkah berikutnya
+## ขั้นตอนถัดไป
 
-- Pelajari cara mereplikasi suara penutur yang ada di
-  [Replikasi suara](https://ai.google.dev/gemini-api/docs/voice-replication?hl=id).
-- Pelajari gaya tingkat giliran bicara, tag inline, dan dialog multi-penutur dalam
-  [Panduan text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id).
+- ดูวิธีจำลองเสียงของลำโพงที่มีอยู่แล้วใน[การจำลองเสียง](https://ai.google.dev/gemini-api/docs/voice-replication?hl=th)
+- ดูข้อมูลเกี่ยวกับการจัดรูปแบบระดับคำ การใช้แท็กในบรรทัด และบทสนทนาแบบหลายผู้พูดได้ใน[คู่มือ Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)
 
-Kirim masukan
+ส่งความคิดเห็น
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Terakhir diperbarui pada 2026-09-24 UTC.
+อัปเดตล่าสุด 2026-09-24 UTC
 
-Ada masukan untuk kami?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-24 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-24 UTC"],[],[]]

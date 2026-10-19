@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419
-fetched_at: 2026-10-12T06:56:05.063849+00:00
-title: "C\u00f3mo crear agentes administrados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja
+fetched_at: 2026-10-19T05:40:09.191204+00:00
+title: "\u30de\u30cd\u30fc\u30b8\u30c9 \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u69cb\u7bc9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash ya está disponible. [Pruébalo](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=es-419).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Enviar comentarios
+フィードバックを送信
 
-# Cómo crear agentes administrados
+# マネージド エージェントの構築
 
-Los agentes administrados en la API de Gemini te permiten extender el agente de Antigravity con tus propias instrucciones, habilidades y datos. Puedes [personalizar el agente de forma intercalada](#customize-inline) en el momento de la interacción o [guardar la configuración](#save-agent) como un agente administrado al que invocas por ID.
+Gemini API のマネージド エージェントを使用すると、独自の指示、スキル、データで Antigravity エージェントを拡張できます。インタラクション時に[エージェントをインラインでカスタマイズ](#customize-inline)するか、ID で呼び出すマネージド エージェントとして[構成を保存](#save-agent)できます。
 
-## Personaliza el agente de Antigravity
+## Antigravity エージェントをカスタマイズする
 
-La forma más rápida de compilar un agente personalizado es pasar tu configuración intercalada mientras creas una interacción nueva sin necesidad de un paso de registro. Puedes extender el agente de varias maneras clave:
+カスタム エージェントを構築する最も簡単な方法は、新しいインタラクションを作成するときに構成をインラインで渡すことです。登録手順は必要ありません。エージェントは、次のようないくつかの方法で拡張できます。
 
-- **[Selección de modelo](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#model-selection)**: Elige el modelo de Gemini subyacente a través de `agent_config` (de forma predeterminada, se usa **Gemini 3.8 Flash**).
-- **Instrucciones del sistema**: Pasa texto intercalado a través de `system_instruction` para dar forma al comportamiento.
-- **Herramientas**: Anula las herramientas predeterminadas (ejecución de código, búsqueda, contexto de URL), registra servidores de MCP remotos o define funciones personalizadas (llamadas a funciones).
-- **Archivos y habilidades**: Se montan archivos como `AGENTS.md` y `SKILL.md` en el entorno.
+- **[モデルの選択](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#model-selection)**: `agent_config` で基盤となる Gemini モデルを選択します（デフォルトは **Gemini 3.8 Flash**）。
+- **システム指示**: `system_instruction` を介してインライン テキストを渡し、動作を形成します。
+- **ツール**: デフォルトのツール（コード実行、検索、URL コンテキスト）をオーバーライドする、リモート MCP サーバーを登録する、カスタム関数（関数呼び出し）を定義する。
+- **ファイルとスキル**: `AGENTS.md` や `SKILL.md` などのファイルを環境にマウントします。
 
-Aquí tienes un ejemplo de cómo pasar los tres parámetros de forma intercalada:
+3 つすべてをインラインで渡す例を次に示します。
 
 ### Python
 
@@ -218,22 +218,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Todo se define en el momento de la interacción. No es necesario registrar nada primero. El arnés del agente de Antigravity proporciona el entorno de ejecución (ejecución de código, administración de archivos, acceso web) y tus capas de configuración en la parte superior.
+すべてはインタラクション時に定義されます。事前に登録する必要はありません。Antigravity エージェント ハーネスは、ランタイム（コード実行、ファイル管理、ウェブアクセス）を提供し、その上に構成レイヤを配置します。
 
-### Instrucciones del sistema y herramientas
+### ツールとシステム指示
 
-Puedes personalizar el comportamiento y las capacidades del agente para una interacción específica con los parámetros `system_instruction` y `tools`.
+`system_instruction` パラメータと `tools` パラメータを使用して、特定インタラクションのエージェントの動作と機能をカスタマイズできます。
 
-- **Instrucciones del sistema**: Usa el parámetro `system_instruction` para pasar texto intercalado que defina el comportamiento del agente. Esto es ideal para los ajustes rápidos que deseas cambiar por llamada. `system_instruction` y `AGENTS.md` son aditivos; ambos se aplican cuando están presentes.
-- **Herramientas**: De forma predeterminada, el agente de Antigravity tiene acceso a `code_execution`, `google_search` y `url_context`. Puedes anular esta lista pasando el parámetro `tools` en el momento de la interacción. También puedes registrar [servidores de MCP remotos](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#mcp-servers) o definir [funciones personalizadas (llamadas a funciones)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#function-calling) para conectar el agente a tus propias APIs y bases de datos. Para obtener todos los detalles sobre las herramientas disponibles, consulta [Agente de Antigravity: Herramientas compatibles](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#supported-tools).
+- **システム指示**: `system_instruction` パラメータを使用して、エージェントの動作を形作るインライン テキストを渡します。これは、呼び出しごとに変更する簡単な調整に最適です。`system_instruction` と `AGENTS.md` は加算的です。両方が存在する場合は両方が適用されます。
+- **ツール**: デフォルトでは、Antigravity エージェントは `code_execution`、`google_search`、`url_context` にアクセスできます。このリストは、インタラクション時に `tools` パラメータを渡すことでオーバーライドできます。[リモート MCP サーバー](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#mcp-servers)を登録したり、[カスタム関数（関数呼び出し）](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#function-calling)を定義して、エージェントを独自の API やデータベースに接続することもできます。利用可能なツールの詳細については、[Antigravity エージェント: サポートされているツール](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#supported-tools)をご覧ください。
 
-### Personalización basada en archivos
+### ファイルベースのカスタマイズ
 
-#### Estructura del directorio del agente
+#### エージェントのディレクトリ構造
 
-Si bien puedes pasar la configuración de forma intercalada, te recomendamos que organices los archivos de tu agente en un directorio estructurado. Esto facilita la administración, el control de versiones y el montaje en el entorno del agente.
+構成をインラインで渡すこともできますが、エージェントのファイルを構造化されたディレクトリに整理することをおすすめします。これにより、管理、バージョン管理、エージェントの環境へのマウントが容易になります。
 
-Un directorio típico de proyectos de agentes se ve de la siguiente manera:
+一般的なエージェント プロジェクト ディレクトリは次のようになります。
 
 ```
 my-agent/
@@ -244,13 +244,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-El entorno de ejecución de Antigravity analiza `.agents/` (y la raíz del entorno) en busca de estos archivos.
+Antigravity ランタイムは、これらのファイルについて `.agents/`（および環境のルート）をスキャンします。
 
 #### AGENTS.md
 
-El agente carga automáticamente `.agents/AGENTS.md` (o `/.agents/AGENTS.md`) desde el entorno como instrucciones del sistema al inicio. Usa `AGENTS.md` para definiciones de arquetipos de formato largo, instrucciones detalladas y pautas que quieras controlar por versión junto con tu código.
+エージェントは、起動時に環境から `.agents/AGENTS.md`（または `/.agents/AGENTS.md`）をシステム指示として自動的に読み込みます。コードとともにバージョン管理する長い形式のペルソナ定義、詳細なガイドライン、手順には `AGENTS.md` を使用します。
 
-Cómo unir un `AGENTS.md` con una fuente intercalada:
+インライン ソースを使用して `AGENTS.md` をマウントします。
 
 ### Python
 
@@ -414,9 +414,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Habilidades: SKILL.md
+#### スキル: SKILL.md
 
-Las habilidades son archivos que amplían las capacidades del agente. Colócalos debajo del `.agents/skills/<skill-name>/SKILL.md`, y el arnés los detectará y registrará automáticamente.
+スキルは、エージェントの機能を拡張するファイルです。`.agents/skills/<skill-name>/SKILL.md` の下に配置すると、ハーネスが自動的に検出して登録します。
 
 ```
 .agents/
@@ -426,7 +426,7 @@ Las habilidades son archivos que amplían las capacidades del agente. Colócalos
         └── SKILL.md
 ```
 
-Activa una skill con una fuente intercalada:
+インライン ソースを使用してスキルをマウントします。
 
 ### Python
 
@@ -590,17 +590,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Las habilidades cargadas desde `.agents/skills/` y `/.agents/skills/` se descubren automáticamente.
+`.agents/skills/` と `/.agents/skills/` から読み込まれたスキルはどちらも自動的に検出されます。
 
-## Crea un agente administrado
+## マネージド エージェントを作成する
 
-Una vez que hayas iterado en tu configuración, puedes crearla como un agente administrado con `agents.create`. Esto te permite invocar el agente por ID sin repetir la configuración cada vez.
+構成を反復処理したら、`agents.create` を使用してマネージド エージェントとして作成できます。これにより、構成を毎回繰り返すことなく、ID でエージェントを呼び出すことができます。
 
-El `id` que especifiques cuando crees un agente administrado debe ser único para tu proyecto y no debe comenzar con prefijos reservados (p.ej., `google-`, `gemini-`). Consulta las [restricciones del ID del agente](#agent-id-restrictions) para ver la lista completa de prefijos restringidos.
+マネージド エージェントの作成時に指定する `id` は、プロジェクト内で一意である必要があり、予約済みの接頭辞（`google-`、`gemini-` など）で始めることはできません。制限付き接頭辞の完全なリストについては、[エージェント ID の制限事項](#agent-id-restrictions)をご覧ください。
 
-### De fuentes
+### ソースから
 
-Especifica `base_agent`, `id`, `agent_config`, `system_instruction` y `base_environment` con fuentes. La plataforma aprovisiona un entorno de pruebas nuevo con tus archivos en cada invocación. Consulta [Entornos](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419) para ver los tipos de fuentes disponibles (Git, GCS, intercalado).
+ソースとともに `base_agent`、`id`、`agent_config`、`system_instruction`、`base_environment` を指定します。プラットフォームは、呼び出しごとにファイルを含む新しいサンドボックスをプロビジョニングします。使用可能なソースタイプ（Git、GCS、インライン）については、[環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja)をご覧ください。
 
 ### Python
 
@@ -832,9 +832,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### Desde un entorno existente (fork)
+### 既存の環境から（フォーク）
 
-Itera con el agente de Antigravity base hasta que el entorno sea el adecuado (paquetes instalados, archivos en su lugar) y, luego, crea una bifurcación en un agente administrado.
+環境が適切になるまで（パッケージがインストールされ、ファイルが配置されるまで）、ベースの Antigravity エージェントで反復処理を行い、その後、マネージド エージェントにフォークします。
 
 ### Python
 
@@ -987,13 +987,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Con reglas de red
+### ネットワーク ルールを使用する
 
-Puedes bloquear el acceso saliente o insertar credenciales cuando guardas un agente administrado. Para ver el esquema completo de la lista de entidades permitidas, los patrones de credenciales y los comodines, consulta [Entornos: Configuración de red](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#network-configuration).
+マネージド エージェントを保存するときに、アウトバウンド アクセスをロックダウンしたり、認証情報を挿入したりできます。許可リストの完全なスキーマ、認証情報のパターン、ワイルドカードについては、[環境: ネットワーク構成](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#network-configuration)をご覧ください。
 
-Haz referencia a una [credencial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=es-419) almacenada por ID en una regla de lista de entidades permitidas (`"credential": "github-production"`), y el proxy de salida inserta el secreto en el momento de la solicitud, por lo que nunca llega a la definición de tu agente. En este ejemplo, se establece el encabezado intercalado con `transform`. El proxy aplica ambas formas de la misma manera, y una credencial también te permite reutilizar el secreto en todos los agentes y rotarlo en un solo lugar.
+許可リストルール（`"credential": "github-production"`）で ID を使用して保存された[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)を参照すると、下り（外向き）プロキシがリクエスト時にシークレットを挿入するため、エージェント定義にシークレットが保存されることはありません。この例では、代わりに `transform` でヘッダーをインラインで設定しています。プロキシは両方の形式を同じように適用します。認証情報を使用すると、エージェント間でシークレットを再利用し、1 か所でローテーションできます。
 
-En el siguiente ejemplo, se crea un agente `issue-resolver` que solo puede acceder a GitHub y PyPI, con credenciales insertadas para GitHub:
+次の例では、GitHub と PyPI にのみアクセスできる `issue-resolver` エージェントを作成し、GitHub の認証情報を挿入します。
 
 ### Python
 
@@ -1218,9 +1218,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Invoca el agente
+## エージェントを呼び出す
 
-Crea una interacción nueva para llamar a tu agente administrado con tu ID de agente. Cada invocación bifurca el entorno base, por lo que cada ejecución comienza de forma limpia.
+新しいインタラクションを作成して、エージェント ID を使用してマネージド エージェントを呼び出します。呼び出しごとにベース環境がフォークされるため、実行は常にクリーンな状態から開始されます。
 
 ### Python
 
@@ -1320,15 +1320,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Para conversaciones de varios turnos y transmisión, consulta la [guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419). Los mismos patrones de `previous_interaction_id` y `environment` se aplican a los agentes administrados.
+マルチターンの会話とストリーミングについては、[クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)をご覧ください。同じ `previous_interaction_id` パターンと `environment` パターンがマネージド エージェントに適用されます。
 
-Los agentes administrados también admiten la ejecución en segundo plano y la cancelación. Para obtener detalles y ejemplos de código, consulta [Agente de Antigravity: Ejecución en segundo plano](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#background-execution).
+マネージド エージェントは、バックグラウンド実行とキャンセルもサポートしています。詳細とコード例については、[Antigravity エージェント: バックグラウンド実行](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#background-execution)をご覧ください。
 
-## Anulación de la configuración en la invocación
+## 呼び出し時の構成のオーバーライド
 
-Puedes anular la configuración de red predeterminada `system_instruction`, `tools` y `environment` del agente cuando crees una interacción. Esto te permite modificar el comportamiento, las capacidades o las credenciales del agente para una ejecución específica sin cambiar la definición almacenada del agente.
+インタラクションの作成時に、エージェントのデフォルトの `system_instruction`、`tools`、`environment` ネットワーク構成をオーバーライドできます。これにより、保存されているエージェント定義を変更せずに、特定実行のエージェントの動作、機能、認証情報を変更できます。
 
-### Anula las instrucciones y herramientas del sistema
+### システム指示とツールをオーバーライドする
 
 ### Python
 
@@ -1439,11 +1439,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Anula la configuración de red (actualiza las credenciales)
+### ネットワーク構成をオーバーライドする（認証情報を更新する）
 
-Si tu agente administrado tiene credenciales de red integradas en su `base_environment`, puedes anularlas en el momento de la invocación para actualizar los tokens vencidos o rotar las claves de API. Pasa un objeto `environment` con una nueva configuración de `network`. Las nuevas reglas de red reemplazan por completo las anteriores para esa interacción. Se conservan las fuentes (archivos, repositorios) del entorno base.
+マネージド エージェントの `base_environment` にネットワーク認証情報が組み込まれている場合は、呼び出し時にオーバーライドして、有効期限切れのトークンを更新したり、API キーをローテーションしたりできます。新しい `network` 構成を含む `environment` オブジェクトを渡します。新しいネットワーク ルールは、そのインタラクションの以前のルールを完全に置き換えます。ベース環境のソース（ファイル、リポジトリ）は保持されます。
 
-Si el objeto `base_environment` hace referencia a una [credencial](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=es-419) almacenada en lugar de un token intercalado, no es necesario que anules nada. Rota la credencial con un `PATCH` y cada agente que la referencia recupera el nuevo secreto en la próxima ejecución.
+`base_environment` がインライン トークンではなく保存された[認証情報](https://ai.google.dev/gemini-api/docs/agent-credentials?hl=ja)を参照している場合は、何もオーバーライドする必要はありません。`PATCH` を使用して認証情報をローテーションすると、それを参照するすべてのエージェントが次の実行時に新しいシークレットを取得します。
 
 ### Python
 
@@ -1626,11 +1626,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Administrar los agentes
+## エージェントの管理
 
-Puedes enumerar, obtener y borrar agentes.
+エージェントの一覧表示、取得、削除を行うことができます。
 
-### Mostrar lista de agentes
+### エージェントのリスト表示
 
 ### Python
 
@@ -1707,7 +1707,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Obtén un agente
+### エージェントを取得する
 
 ### Python
 
@@ -1774,9 +1774,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Borra un agente
+### エージェントを削除する
 
-Si borras la configuración, se quitará. Los entornos y las interacciones existentes creados por el agente no se ven afectados.
+削除すると、構成が削除されます。エージェントによって作成された既存の環境とインタラクションは影響を受けません。
 
 ### Python
 
@@ -1836,24 +1836,24 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Referencia de la definición del agente
+## エージェント定義のリファレンス
 
-| Campo | Tipo | Obligatorio | Descripción |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `id` | string | Sí | Es el identificador único del agente dentro del proyecto de Google Cloud. Se usa para invocar al agente. No debe usar prefijos reservados. Consulta las [restricciones del ID de agente](#agent-id-restrictions). |
-| `description` | string | No | Es una descripción del agente legible por humanos. |
-| `base_agent` | string | Sí | Es el ID del agente base (p.ej., `antigravity-preview-09-2026`). |
-| `agent_config` | objeto | No | Es la configuración del agente base, incluida la selección del modelo (`{"type": "antigravity", "model": "gemini-3.8-flash"}`). El valor predeterminado es `gemini-3.8-flash` si se omite. No se puede anular en el momento de la interacción para los agentes con nombre. |
-| `system_instruction` | string | No | Es la instrucción del sistema que define el comportamiento y la personificación. |
-| `tools` | array | No | Son las herramientas que el agente puede usar. Si se omite, el valor predeterminado es `code_execution`, `google_search` y `url_context`. Las herramientas admitidas incluyen `code_execution`, `google_search`, `url_context`, `mcp_server` y definiciones personalizadas de `function`. |
-| `base_environment` | cadena o objeto | No | `"remote"`, un `environment_id` o un objeto de configuración con `sources` y `network`. Consulta la sección sobre entornos. |
+| `id` | 文字列 | ○ | Google Cloud プロジェクト内の一意のエージェント識別子。エージェントの呼び出しに使用されます。予約済みの接頭辞は使用できません。[エージェント ID の制限事項](#agent-id-restrictions)をご覧ください。 |
+| `description` | 文字列 | いいえ | 人が読める形式のエージェントの説明。 |
+| `base_agent` | 文字列 | ○ | ベース エージェント ID（例: `antigravity-preview-09-2026`）。 |
+| `agent_config` | オブジェクト | いいえ | モデル選択（`{"type": "antigravity", "model": "gemini-3.8-flash"}`）を含むベース エージェントの構成。省略した場合のデフォルトは `gemini-3.8-flash` です。名前付きエージェントの場合、インタラクション時にオーバーライドできません。 |
+| `system_instruction` | 文字列 | いいえ | 行動とペルソナを定義するシステム プロンプト。 |
+| `tools` | 配列 | いいえ | エージェントが使用できるツール。省略した場合、デフォルトは `code_execution`、`google_search`、`url_context` です。サポートされているツールには、`code_execution`、`google_search`、`url_context`、`mcp_server`、カスタム `function` 定義が含まれます。 |
+| `base_environment` | 文字列またはオブジェクト | いいえ | `"remote"`、`environment_id`、または `sources` と `network` を含む構成オブジェクト。環境をご覧ください。 |
 
-### Restricciones del ID del agente
+### エージェント ID の制限事項
 
-Cuando crees un agente administrado, el `id` que especifiques debe cumplir con las siguientes reglas:
+マネージド エージェントを作成するときに指定する `id` は、次のルールに従う必要があります。
 
-- Debe ser único para tu proyecto de Google Cloud.
-- **No** debe comenzar con ninguno de los siguientes prefijos reservados (no distingue mayúsculas de minúsculas); de lo contrario, fallará la creación:
+- Google Cloud プロジェクト内で一意である必要があります。
+- 次の予約済み接頭辞（大文字と小文字を区別しない）で**始まっては**なりません。そうしないと、作成が失敗します。
   - `antigravity-`
   - `veo-`
   - `omni-`
@@ -1871,35 +1871,35 @@ Cuando crees un agente administrado, el `id` que especifiques debe cumplir con l
   - `nest-`
   - `kaggle-`
 
-## Flujo de trabajo de iteración
+## イテレーションのワークフロー
 
-1. **Prototipa** con el agente de Antigravity base. Pasa la instrucción del sistema y las fuentes del entorno de forma intercalada. Probar instrucciones, habilidades y configuración del entorno de forma interactiva
-2. **Estabiliza** el entorno. Instala paquetes, conecta fuentes y verifica que todo funcione.
-3. **Persiste** como un agente administrado creando un agente nuevo, ya sea a partir de fuentes o bifurcando el entorno.
-4. **Actualiza** la definición del agente. Cambiar la instrucción del sistema, intercambiar habilidades o agregar fuentes La siguiente invocación recupera la configuración nueva.
+1. ベースの Antigravity エージェントで**プロトタイプ**を作成します。システム指示と環境ソースをインラインで渡します。手順、スキル、環境設定をインタラクティブにテストします。
+2. 環境を**安定化**します。パッケージをインストールし、ソースをマウントして、すべてが機能することを確認します。
+3. ソースから新しいエージェントを作成するか、環境をフォークして、マネージド エージェントとして**永続化**します。
+4. エージェントの定義を**更新**します。システム指示を変更したり、スキルを入れ替えたり、ソースを追加したりできます。次の呼び出しでは、新しい構成が取得されます。
 
-## Limitaciones
+## 制限事項
 
-- **Estado de vista previa**: Los agentes administrados están en versión preliminar. Las funciones y los esquemas pueden cambiar.
-- **Agente y modelos básicos**: Solo se admite `antigravity-preview-09-2026` como `base_agent`. Las opciones de modelos admitidas en `agent_config` son `gemini-3.8-flash` (predeterminado), `gemini-3.6-flash` y `gemini-3.5-flash-lite`. En el caso de los agentes con nombre, el modelo no se puede anular en el momento de la interacción.
-- **Sin control de versiones**: El control de versiones y la reversión del agente aún no están disponibles.
-- **No se admite la anidación de subagentes**: Aún no se admite la delegación de subagentes.
-- Puedes tener hasta 1,000 agentes administrados.
+- **プレビュー ステータス**: マネージド エージェントはプレビュー版です。機能とスキーマは変更される可能性があります。
+- **ベース エージェントとモデル**: `base_agent` としてサポートされているのは `antigravity-preview-09-2026` のみです。`agent_config` でサポートされているモデル オプションは、`gemini-3.8-flash`（デフォルト）、`gemini-3.6-flash`、`gemini-3.5-flash-lite` です。名前付きエージェントの場合、インタラクション時にモデルをオーバーライドすることはできません。
+- **バージョニングなし**: エージェントのバージョニングとロールバックはまだ利用できません。
+- **サブエージェントのネストなし**: サブエージェントの委任はまだサポートされていません。
+- 管理対象エージェントは最大 1,000 個まで設定できます。
 
-## ¿Qué sigue?
+## 次のステップ
 
-- [Descripción general de los agentes](https://ai.google.dev/gemini-api/docs/agents?hl=es-419): Obtén información sobre los conceptos básicos de los agentes administrados.
-- [Guía de inicio rápido](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419): Comienza a compilar con conversaciones de varios turnos y transmisión.
-- [Agente de antigravedad](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419): Explora las capacidades, las herramientas y los precios del agente predeterminado.
-- [Entornos de agentes](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419): Configura zonas de pruebas, fuentes y redes.
-- [API de Managed Agents en Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=es-419): Para crear agentes con administración organizacional integrada.
+- [エージェントの概要](https://ai.google.dev/gemini-api/docs/agents?hl=ja): マネージド エージェントの基本コンセプトについて学習します。
+- [クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja): マルチターン会話とストリーミングを使用して構築を開始します。
+- [Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja): デフォルトのエージェントの機能、ツール、料金を確認します。
+- [エージェント環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja): サンドボックス、ソース、ネットワーキングを構成します。
+- [Agent Platform の Managed Agents API](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=ja): 組織のガバナンスが組み込まれたエージェントを作成する場合に使用します。
 
-Enviar comentarios
+フィードバックを送信
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última actualización: 2026-10-09 (UTC)
+最終更新日 2026-10-09 UTC。
 
-¿Quieres brindar más información?
+ご意見をお聞かせください
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-10-09 (UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-09 UTC。"],[],[]]

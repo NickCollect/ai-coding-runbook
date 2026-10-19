@@ -1,28 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-TW
-fetched_at: 2026-10-12T07:05:50.418993+00:00
-title: "Gemini Deep Research \u4ee3\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=bn
+fetched_at: 2026-10-19T05:37:24.753582+00:00
+title: "Gemini Deep Research \u098f\u099c\u09c7\u09a8\u09cd\u099f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
 
-提供意見
+মতামত জানান
 
-# Gemini Deep Research 代理
+# Gemini Deep Research এজেন্ট
 
-Gemini Deep Research 代理程式會自主規劃、執行及統整多步驟研究工作。這項功能採用 Gemini，可瀏覽複雜的資訊環境，生成詳細且附有出處的報告。新功能可讓您與代理共同規劃、使用 MCP 伺服器連線至外部工具、加入視覺化內容 (例如圖表)，以及直接提供文件做為輸入內容。
+Gemini Deep Research এজেন্ট নিজে থেকেই মাল্টি-স্টেপ রিসার্চ টাস্ক প্ল্যান, এক্সিকিউট এবং সিন্থেসাইজ
+করে। Gemini দ্বারা পরিচালিত, এটি বিস্তারিত, উদ্ধৃত রিপোর্ট তৈরি করতে জটিল
+তথ্য ল্যান্ডস্কেপ নেভিগেট করে। নতুন
+ক্ষমতা আপনাকে এজেন্টের সাথে মিলেমিশে প্ল্যান করতে, MCP সার্ভার ব্যবহার করে
+এক্সটার্নাল টুলের সাথে কানেক্ট করতে,
+ভিজ্যুয়ালাইজেশন (যেমন চার্ট ও গ্রাফ) যোগ করতে এবং সরাসরি
+ইনপুট হিসেবে ডকুমেন্ট প্রদান করতে দেয়।
 
-研究工作需要反覆搜尋和閱讀，可能需要幾分鐘才能完成。您必須使用[背景執行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-tw) (設定 `background=true`)，以非同步方式執行代理程式，並輪詢結果或串流更新。詳情請參閱「[處理長時間執行的工作](#long-running-tasks)」。
+রিসার্চ টাস্কে বারবার সার্চ করা ও পড়া অন্তর্ভুক্ত থাকে এবং এটি সম্পূর্ণ হতে কয়েক মিনিট সময় লাগতে পারে। এজেন্টকে অ্যাসিঙ্ক্রোনাসভাবে চালাতে এবং ফলাফলের জন্য পোল করতে বা আপডেট স্ট্রিম করতে আপনাকে অবশ্যই [ব্যাকগ্রাউন্ড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/background-execution?hl=bn) (`background=true` সেট করুন)
+ব্যবহার করতে হবে। আরও জানতে
+[দীর্ঘ সময় ধরে চলা টাস্ক ম্যানেজ করা](#long-running-tasks) দেখুন।
 
-以下範例說明如何在背景啟動研究工作，並輪詢結果。
+ব্যাকগ্রাউন্ডে কীভাবে রিসার্চ টাস্ক শুরু করতে হয় এবং ফলাফলের জন্য পোল করতে হয়
+তা নিম্নলিখিত উদাহরণে দেখানো হয়েছে।
 
 ### Python
 
@@ -51,7 +60,7 @@ while True:
     time.sleep(10)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -122,7 +131,7 @@ while (true) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -182,7 +191,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 # 1. Start the research task
@@ -200,20 +209,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 支援的版本
+## যেসব ভার্সনে কাজ করে
 
-Deep Research 代理有兩種版本：
+Deep Research এজেন্টের দুটি ভার্সন আছে:
 
-- **深入研究** (`deep-research-preview-04-2026`)：專為速度和效率而設計，非常適合串流回用戶端 UI。
-- **Deep Research Max** (`deep-research-max-preview-04-2026`)：自動收集及統整內容，提供最全面的資訊。
+- **Deep Research** (`deep-research-preview-04-2026`): দ্রুত ও দক্ষতার সাথে কাজ করার জন্য ডিজাইন করা হয়েছে, ক্লায়েন্ট UI-তে স্ট্রিম করার জন্য আদর্শ।
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): অটোমেটেড প্রসঙ্গ সংগ্রহ ও সিন্থেসিসের জন্য সর্বাধিক ব্যাপকতা।
 
-## 共同規劃
+## কোলাবরেটিভ প্ল্যানিং
 
-協作規劃功能可讓您在代理程式開始工作前，先查看並修正研究計畫，控管研究方向。啟用後，代理程式會傳回建議的研究計畫，而不是立即執行。接著，您可以透過多輪互動查看、修改或核准計畫。
+কোলাবোরেটিভ প্ল্যানিং আপনাকে রিসার্চের দিকনির্দেশের উপর কন্ট্রোল দেয়। এর ফলে, এজেন্ট কাজ শুরু করার আগে আপনি রিসার্চ প্ল্যান পর্যালোচনা ও রিফাইন করতে পারেন। চালু করা থাকলে, এজেন্ট অবিলম্বে এক্সিকিউট করার পরিবর্তে একটি প্রস্তাবিত রিসার্চ প্ল্যান
+রিটার্ন করে। তারপর আপনি মাল্টি-টার্ন ইন্টার‍্যাকশনের মাধ্যমে প্ল্যানটি পর্যালোচনা, পরিবর্তন বা অনুমোদন করতে পারবেন।
 
-### 步驟 1：申請方案
+### ধাপ ১: প্ল্যানের জন্য অনুরোধ করা
 
-在第一次互動中設定 `collaborative_planning=True`。代理會傳回研究計畫，而不是完整報告。
+প্রথম ইন্টার‍্যাকশনে `collaborative_planning=True` সেট করুন। এজেন্ট
+সম্পূর্ণ রিপোর্টের পরিবর্তে একটি রিসার্চ প্ল্যান রিটার্ন করে।
 
 ### Python
 
@@ -240,7 +251,7 @@ while (result := client.interactions.get(id=plan_interaction.id)).status != "com
 print(result.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const planInteraction = await client.interactions.create({
@@ -308,7 +319,7 @@ while (true) {
 System.out.println(result.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -370,7 +381,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -388,9 +399,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 步驟 2：修正計畫 (選用)
+### ধাপ ২: প্ল্যান রিফাইন করুন (ঐচ্ছিক)
 
-使用 `previous_interaction_id` 繼續對話，並反覆修正行程。按住 `collaborative_planning=True` 即可繼續規劃模式。
+কথোপকথন চালিয়ে যেতে এবং প্ল্যানটি বারবার
+দেখতে `previous_interaction_id` ব্যবহার করুন। প্ল্যানিং মোডে থাকতে `collaborative_planning=True`
+রাখুন।
 
 ### Python
 
@@ -413,7 +426,7 @@ while (result := client.interactions.get(id=refined_plan.id)).status != "complet
 print(result.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const refinedPlan = await client.interactions.create({
@@ -485,7 +498,7 @@ while (true) {
 System.out.println(result.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -548,7 +561,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -567,9 +580,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 步驟 3：核准並執行
+### ধাপ ৩: অনুমোদন ও প্রয়োগ করা
 
-設為 `collaborative_planning=False` (或省略)，即可核准計畫並開始研究。
+প্ল্যান অনুমোদন করতে এবং রিসার্চ শুরু করতে
+`collaborative_planning=False` সেট করুন (বা এটি বাদ দিন)।
 
 ### Python
 
@@ -592,7 +606,7 @@ while (result := client.interactions.get(id=final_report.id)).status != "complet
 print(result.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const finalReport = await client.interactions.create({
@@ -662,7 +676,7 @@ while (true) {
 System.out.println(result.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -744,9 +758,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 圖表
+## ভিজুয়ালাইজেশান
 
-如果 `visualization` 設為 `"auto"`，代理程式可以生成圖表和其他視覺元素，為研究發現提供證據。生成圖片會納入回覆步驟，並以 `image` 差異串流傳輸。為獲得最佳結果，請在查詢中明確要求提供圖像，例如「請附上顯示一段時間內趨勢的圖表」或「請生成比較市占率的圖形」。將 `visualization` 設為 `"auto"` 即可啟用這項功能，但只有在提示要求時，代理程式才會生成圖像。
+`visualization` `"auto"` হিসেবে সেট করা থাকলে, এজেন্ট তার রিসার্চের ফলাফলকে সমর্থন করার জন্য চার্ট,
+গ্রাফ এবং অন্যান্য ভিজ্যুয়াল এলিমেন্ট তৈরি করতে পারে।
+জেনারেট করা ছবি উত্তরের ধাপে অন্তর্ভুক্ত করা হয় এবং
+`image` ডেল্টা হিসেবে স্ট্রিম করা হয়। সেরা ফলাফল পেতে, আপনার কোয়েরিতে স্পষ্টভাবে ভিজ্যুয়াল চান — যেমন, "সময়ের সাথে সাথে ট্রেন্ড দেখানো চার্ট অন্তর্ভুক্ত করুন" অথবা "মার্কেট শেয়ারের তুলনা করে গ্রাফিক্স তৈরি করুন।" `visualization`-কে `"auto"`-এ সেট করলে এই ক্ষমতা চালু হয়, তবে এজেন্ট শুধু তখনই ভিজ্যুয়াল তৈরি করে
+যখন প্রম্পট সেগুলির জন্য অনুরোধ করে।
 
 ### Python
 
@@ -783,7 +801,7 @@ for step in result.steps:
                 print(f"Received image: {len(image_bytes)} bytes")
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -887,7 +905,7 @@ for (Step step : result.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -979,21 +997,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 支援的工具
+## মানানসই টুল
 
-Deep Research 支援多種內建和外部工具。根據預設 (未提供 `tools` 參數時)，代理程式可存取 Google 搜尋、網址背景資訊和程式碼執行功能。您可以明確指定工具，限制或擴展代理程式的功能。
+Deep Research-এ একাধিক বিল্ট-ইন ও এক্সটার্নাল টুল কাজ করে। ডিফল্ট হিসেবে
+(কোনও `tools` প্যারামিটার প্রদান করা না হলে), এজেন্টের কাছে Google
+Search, URL কনটেক্সট ও কোড এক্সিকিউশনের অ্যাক্সেস থাকে। এজেন্টের ক্ষমতা সীমিত বা প্রসারিত করতে আপনি স্পষ্টভাবে
+টুল নির্দিষ্ট করতে পারেন।
 
-| 工具 | 輸入值 | 說明 |
+| টুল | মান টাইপ করুন | বিবরণ |
 | --- | --- | --- |
-| Google 搜尋 | `google_search` | 搜尋公開網路。(預設為啟用)。 |
-| 網址背景資訊 | `url_context` | 閱讀並摘要網頁內容。(預設為啟用)。 |
-| 程式碼執行 | `code_execution` | 執行程式碼以進行計算和資料分析。(預設為啟用)。 |
-| MCP 伺服器 | `mcp_server` | 連線至遠端 MCP 伺服器，存取外部工具。 |
-| 檔案搜尋 | `file_search` | 搜尋上傳的文件語料庫。 |
+| Google Search | `google_search` | পাবলিক ওয়েবে সার্চ করুন। ডিফল্ট হিসেবে চালু করা থাকে। |
+| URL কন্টেক্সট | `url_context` | ওয়েব পৃষ্ঠার কন্টেন্ট পড়া ও সারসংক্ষেপ করা। ডিফল্ট হিসেবে চালু করা থাকে। |
+| কোড এক্সিকিউশন | `code_execution` | গণনা ও ডেটা বিশ্লেষণ করার জন্য কোড এক্সিকিউট করা। ডিফল্ট হিসেবে চালু করা থাকে। |
+| MCP সার্ভার | `mcp_server` | এক্সটার্নাল টুল অ্যাক্সেস করার জন্য রিমোট MCP সার্ভারে কানেক্ট করুন। |
+| ফাইল সার্চ | `file_search` | আপনার আপলোড করা ডকুমেন্ট কর্পোরা সার্চ করুন। |
 
-### Google 搜尋
+### Google Search
 
-明確啟用 Google 搜尋做為唯一工具：
+একমাত্র টুল হিসেবে Google Search স্পষ্টভাবে চালু করুন:
 
 ### Python
 
@@ -1006,7 +1027,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
@@ -1042,7 +1063,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1079,7 +1100,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1093,9 +1114,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 網址背景資訊
+### URL কন্টেক্সট
 
-讓代理程式讀取及摘要特定網頁內容：
+এজেন্টকে নির্দিষ্ট ওয়েব পেজ পড়ার ও তার সারসংক্ষেপ তৈরি করার অনুমতি দিন:
 
 ### Python
 
@@ -1108,7 +1129,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
@@ -1144,7 +1165,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1181,7 +1202,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1195,9 +1216,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 程式碼執行
+### কোড এক্সিকিউশন
 
-允許代理執行程式碼，進行計算和資料分析：
+এজেন্টকে গণনা ও ডেটা বিশ্লেষণের জন্য কোড এক্সিকিউট করার অনুমতি দিন:
 
 ### Python
 
@@ -1210,7 +1231,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
@@ -1246,7 +1267,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1283,7 +1304,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1297,21 +1318,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP 伺服器
+### MCP সার্ভার
 
-連線至遠端 MCP 伺服器，讓代理存取外部工具和服務。
+এজেন্টকে এক্সটার্নাল টুল ও পরিষেবার অ্যাক্সেস দিতে রিমোট MCP সার্ভারে কানেক্ট করুন।
 
-在工具設定中提供伺服器 `name` 和 `url`。您也可以傳遞驗證憑證，並限制代理程式可呼叫的工具。
+টুল কনফিগারেশনে সার্ভার `name` এবং `url` প্রদান করুন। এছাড়াও, আপনি
+যাচাইকরণ সংক্রান্ত ক্রেডেনশিয়াল পাস করতে এবং এজেন্ট কোন টুল কল করতে পারবে তা সীমাবদ্ধ করতে পারবেন।
 
-| 欄位 | 類型 | 必要 | 說明 |
+| ফিল্ড | ধরন | প্রয়োজনীয় | বিবরণ |
 | --- | --- | --- | --- |
-| `type` | `string` | 是 | 必須為 `"mcp_server"`。 |
-| `name` | `string` | 否 | MCP 伺服器的顯示名稱。 |
-| `url` | `string` | 否 | MCP 伺服器端點的完整網址。 |
-| `headers` | `object` | 否 | 以 HTTP 標頭形式傳送至伺服器的鍵/值配對 (例如驗證權杖)。 |
-| `allowed_tools` | `array` | 否 | 限制代理程式可呼叫伺服器的哪些工具。 |
+| `type` | `string` | হ্যাঁ | `"mcp_server"` হতে হবে। |
+| `name` | `string` | না | MCP সার্ভারের জন্য ডিসপ্লে নাম। |
+| `url` | `string` | না | MCP সার্ভার এন্ডপয়েন্টের সম্পূর্ণ URL. |
+| `headers` | `object` | না | সার্ভারে পাঠানো প্রতিটি অনুরোধের সাথে HTTP হেডার হিসেবে কী-ভ্যালু পেয়ার (যেমন, যাচাইকরণ টোকেন) পাঠানো হয়। |
+| `allowed_tools` | `array` | না | এজেন্ট সার্ভার থেকে কোন টুল কল করতে পারে তা সীমাবদ্ধ করুন। |
 
-#### 基本用法
+#### প্রাথমিক ব্যবহার
 
 ### Python
 
@@ -1331,7 +1353,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
@@ -1381,7 +1403,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1424,7 +1446,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1445,9 +1467,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 檔案搜尋
+### ফাইল সার্চ
 
-使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，授予代理存取自有資料的權限。
+[ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn) টুল ব্যবহার করে এজেন্টকে আপনার ডেটা অ্যাক্সেস করার অনুমতি দিন।
 
 ### Python
 
@@ -1470,7 +1492,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
@@ -1514,7 +1536,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1569,11 +1591,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 可控性和格式
+## স্টিয়ারেবিলিটি ও ফর্ম্যাটিং
 
-您可以在提示中提供具體的格式設定指示，引導代理程式輸出內容。您可以將報表劃分為特定章節和子章節、加入資料表，或針對不同目標對象調整語氣 (例如「技術」、「高階主管」、「輕鬆」)。
+আপনার প্রম্পটে নির্দিষ্ট ফর্ম্যাটিং নির্দেশাবলী
+প্রদান করে আপনি এজেন্টের আউটপুটকে গাইড করতে পারেন। এটি আপনাকে নির্দিষ্ট বিভাগ এবং উপবিভাগে রিপোর্ট সাজাতে, ডেটা টেবিল অন্তর্ভুক্ত করতে বা বিভিন্ন দর্শকের জন্য টোন অ্যাডজাস্ট করতে দেয় (যেমন, "টেকনিক্যাল," "এক্সিকিউটিভ," "ক্যাজুয়াল")।
 
-在輸入文字中明確定義所需的輸出格式。
+আপনার ইনপুট টেক্সটে পছন্দসই আউটপুট ফর্ম্যাট স্পষ্টভাবে উল্লেখ করুন।
 
 ### Python
 
@@ -1594,7 +1617,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const prompt = `
@@ -1642,7 +1665,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1682,7 +1705,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -1695,9 +1718,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 多模態輸入內容
+## মাল্টিমোডাল ইনপুট
 
-Deep Research 支援多模態輸入內容，包括圖片和文件 (PDF)，可讓代理程式分析視覺內容，並根據提供的輸入內容進行網路研究。
+Deep Research-এ ছবি ও ডকুমেন্ট (PDF) সহ মাল্টিমোডাল ইনপুট কাজ করে। এর ফলে
+এজেন্ট ভিজ্যুয়াল কন্টেন্ট বিশ্লেষণ করতে এবং প্রদান করা ইনপুটের
+প্রসঙ্গে ওয়েব-ভিত্তিক রিসার্চ করতে পারে।
 
 ### Python
 
@@ -1740,7 +1765,7 @@ while True:
     time.sleep(10)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -1845,7 +1870,7 @@ while (true) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -1918,7 +1943,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 # 1. Start the research task with image input
@@ -1939,9 +1964,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 文件解讀
+### ডকুমেন্ট বোঝা
 
-文件解讀功能可直接將文件做為多模態輸入內容傳遞。代理程式會分析提供的文件，並根據文件內容進行研究。
+ডকুমেন্ট বোঝার সুবিধা, মাল্টিমোডাল ইনপুট হিসেবে সরাসরি ডকুমেন্ট পাস করার অনুমতি দেয়।
+এজেন্ট প্রদত্ত ডকুমেন্ট বিশ্লেষণ করে
+এবং সেগুলির কন্টেন্টের উপর ভিত্তি করে রিসার্চ করে।
 
 ### Python
 
@@ -1964,7 +1991,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -2018,7 +2045,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2075,27 +2102,37 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 處理長時間執行的工作
+## দীর্ঘ সময় ধরে চলা টাস্ক ম্যানেজ করা
 
-Deep Research 包含規劃、搜尋、閱讀和撰寫等多個步驟。這個週期通常會超過同步 API 呼叫的標準逾時限制。
+Deep Research হল একাধিক ধাপের একটি প্রসেস যার মধ্যে পরিকল্পনা, সার্চ, পড়া
+ও লেখার মতো কাজ অন্তর্ভুক্ত। এই চক্রটি সাধারণত সিঙ্ক্রোনাস API কলের স্ট্যান্ডার্ড টাইমআউট সীমা অতিক্রম করে।
 
-服務專員必須使用 `background=True`。API 會立即傳回部分 `Interaction` 物件。您可以使用 `id` 屬性擷取輪詢的互動。互動狀態會從 `in_progress` 轉換為 `completed` 或 `failed`。如需管理背景工作的完整指南，請參閱「[背景執行](https://ai.google.dev/gemini-api/docs/background-execution?hl=zh-tw)」。
+`background=True` ব্যবহার করার জন্য এজেন্ট প্রয়োজন। API অবিলম্বে একটি আংশিক
+`Interaction` অবজেক্ট রিটার্ন করে। পোলিংয়ের জন্য ইন্টার‍্যাকশন ফিরিয়ে আনতে আপনি `id` প্রপার্টি ব্যবহার করতে পারবেন। ইন্টার‌্যাকশন স্টেট `in_progress` থেকে `completed` বা `failed`-এ
+ট্রানজিশন করবে। ব্যাকগ্রাউন্ড টাস্ক ম্যানেজ করার বিষয়ে বিস্তারিত গাইডের জন্য, [ব্যাকগ্রাউন্ড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/background-execution?hl=bn) দেখুন।
 
-### 串流
+### স্ট্রিমিং
 
-Deep Research 支援串流功能，可即時更新研究進度，包括想法摘要、文字輸出內容和生成的圖片。您必須設定 `stream=True` 和 `background=True`。
+Deep Research, রিসার্চের প্রগতি সম্পর্কে রিয়েল-টাইম আপডেট পেতে স্ট্রিমিং সাপোর্ট করে,
+যার মধ্যে চিন্তার সারসংক্ষেপ, টেক্সট আউটপুট ও জেনারেট করা ছবি অন্তর্ভুক্ত।
+আপনাকে অবশ্যই `stream=True` ও `background=True` সেট করতে হবে।
 
-如要接收中介推論步驟 (想法) 和進度更新，請在 `agent_config` 中將 `thinking_summaries` 設為 `"auto"`，啟用**思考摘要**。否則串流可能只會提供最終結果。
+ইন্টারমিডিয়েট রিজনিং স্টেপ (চিন্তাভাবনা) ও প্রগ্রেস আপডেট পেতে,
+আপনাকে **চিন্তাভাবনার সারসংক্ষেপ** চালু করতে হবে। এর জন্য `agent_config`-এ `thinking_summaries`-এর মান
+`"auto"` হিসেবে সেট করুন। এটি না থাকলে, স্ট্রিমটি শুধুমাত্র চূড়ান্ত ফলাফল প্রদান করতে পারে।
 
-#### 串流事件類型
+#### স্ট্রিম ইভেন্টের ধরন
 
-| 事件類型 | 差異類型 | 說明 |
+| ইভেন্টের প্রকার | ডেল্টার ধরন | বিবরণ |
 | --- | --- | --- |
-| `step.delta` | `thought` | 代理程式的中間推論步驟。 |
-| `step.delta` | `text` | 最終文字輸出內容的一部分。 |
-| `step.delta` | `image` | 生成的圖片 (Base64 編碼)。 |
+| `step.delta` | `thought` | এজেন্টের থেকে পাওয়া মধ্যবর্তী রিজনিং স্টেপ। |
+| `step.delta` | `text` | চূড়ান্ত টেক্সট আউটপুটের অংশ। |
+| `step.delta` | `image` | জেনারেট করা ছবি (base64-এনকোডেড)। |
 
-以下範例會啟動研究工作，並處理自動重新連線的串流。這項功能會追蹤 `interaction_id` 和 `last_event_id`，因此如果連線中斷 (例如在 600 秒逾時後)，可以從中斷處繼續。
+নিম্নলিখিত উদাহরণটি একটি রিসার্চ টাস্ক শুরু করে এবং অটোমেটিক রিকানেকশন সহ
+স্ট্রিম প্রসেস করে। এটি `interaction_id` এবং `last_event_id` ট্র্যাক করে যাতে
+কানেকশন ড্রপ হলে (যেমন, ৬০০ সেকেন্ড টাইমআউটের পরে), এটি যেখান থেকে বন্ধ হয়েছিল সেখান থেকে
+আবার শুরু করতে পারে।
 
 ### Python
 
@@ -2143,7 +2180,7 @@ while not is_complete and interaction_id:
     process_stream(stream)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -2296,7 +2333,7 @@ while (!processor.isComplete && processor.interactionId != null) {
 }
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2391,7 +2428,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 # 1. Start the stream (save the INTERACTION_ID from the interaction.start event
@@ -2415,9 +2452,10 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 後續問題和互動
+## ফলো-আপ প্রশ্ন ও ইন্টার‍্যাকশন
 
-代理傳回最終報告後，你可以使用 `previous_interaction_id` 繼續對話。這樣一來，您就能要求釐清、總結或詳細說明研究的特定部分，不必重新啟動整項工作。
+এজেন্ট `previous_interaction_id` ব্যবহার করে চূড়ান্ত রিপোর্ট জমা দেওয়ার পরে আপনি কথোপকথন চালিয়ে যেতে পারবেন। এর ফলে আপনি পুরো টাস্কটি আবার শুরু না করেই রিসার্চের নির্দিষ্ট বিভাগের বিষয়ে স্পষ্টীকরণ,
+সারসংক্ষেপ বা বিশদ বিবরণ চাইতে পারবেন।
 
 ### Python
 
@@ -2429,19 +2467,19 @@ client = genai.Client()
 
 interaction = client.interactions.create(
     input="Can you elaborate on the second point in the report?",
-    model="gemini-3.1-pro-preview",
+    model="gemini-4-argon",
     previous_interaction_id="COMPLETED_INTERACTION_ID"
 )
 
 print(interaction.steps[-1].content[0].text)
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
     input: 'Can you elaborate on the second point in the report?',
-    model: 'gemini-3.1-pro-preview',
+    model: 'gemini-4-argon',
     previous_interaction_id: 'COMPLETED_INTERACTION_ID'
 });
 console.log(interaction.steps.at(-1).content[0].text);
@@ -2460,7 +2498,7 @@ Client client = new Client();
 
 CreateModelInteraction params =
     CreateModelInteraction.builder()
-        .model("gemini-3.1-pro-preview")
+        .model("gemini-4-argon")
         .input(InteractionsInput.of("Can you elaborate on the second point in the report?"))
         .previousInteractionId("COMPLETED_INTERACTION_ID")
         .build();
@@ -2471,7 +2509,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2495,7 +2533,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model:                 interactions.Model("gemini-3.1-pro-preview"),
+            Model:                 interactions.Model("gemini-4-argon"),
             Input:                 interactions.NewInteractionsInput("Can you elaborate on the second point in the report?"),
             PreviousInteractionID: genai.Ptr("COMPLETED_INTERACTION_ID"),
         }),
@@ -2510,7 +2548,7 @@ func main() {
 }
 ```
 
-### REST
+### বিশ্রাম
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -2518,32 +2556,34 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
     "input": "Can you elaborate on the second point in the report?",
-    "model": "gemini-3.1-pro-preview",
+    "model": "gemini-4-argon",
     "previous_interaction_id": "COMPLETED_INTERACTION_ID"
 }'
 ```
 
-## Gemini Deep Research 代理程式的使用時機
+## Gemini Deep Research এজেন্ট কখন ব্যবহার করবেন
 
-Deep Research 是**代理**，而不只是模型。這項功能最適合需要「分析師即時服務」方法的工作負載，而非低延遲的即時通訊。
+Deep Research হল একটি **এজেন্ট**, শুধু একটি মডেল নয়। এটি এমন কাজের জন্য সবচেয়ে উপযুক্ত
+যেখানে কম-লেটেন্সি চ্যাটের পরিবর্তে "অ্যানালিস্ট-ইন-এ-বক্স" পদ্ধতির প্রয়োজন হয়।
 
-| 功能 | 標準 Gemini 模型 | Gemini Deep Research 代理 |
+| ফিচার | স্ট্যান্ডার্ড Gemini মডেল | Gemini Deep Research এজেন্ট |
 | --- | --- | --- |
-| **延遲** | 秒 | 分鐘 (非同步/背景) |
-| **流程** | 生成 -> 輸出內容 | 規劃 -> 搜尋 -> 閱讀 -> 疊代 -> 輸出 |
-| **輸出內容** | 對話文字、程式碼、簡短摘要 | 詳細報表、長篇分析、比較表 |
-| **最佳用途** | 聊天機器人、擷取、創意寫作 | 市場分析、盡職調查、文獻回顧、競爭環境 |
+| **লেটেন্সি** | সেকেন্ড | মিনিট (অ্যাসিঙ্ক/ব্যাকগ্রাউন্ড) |
+| **প্রসেস** | জেনারেট করুন -> আউটপুট | প্ল্যান -> সার্চ -> পড়া -> পুনরাবৃত্তি -> আউটপুট |
+| **আউটপুট** | কথোপকথনমূলক টেক্সট, কোড, সংক্ষিপ্তসার | বিস্তারিত রিপোর্ট, দীর্ঘ বিশ্লেষণ, তুলনামূলক টেবিল |
+| **এগুলির জন্য সেরা** | চ্যাটবট, এক্সট্র্যাকশন, ক্রিয়েটিভ রাইটিং | মার্কেট অ্যানালিসিস, ডিউ ডিলিজেন্স, লিটারেচার রিভিউ, কম্পিটিটিভ ল্যান্ডস্কেপিং |
 
-## 代理程式設定
+## এজেন্ট কনফিগারেশন
 
-Deep Research 使用 `agent_config` 參數控制行為。以字典形式傳遞，並包含下列欄位：
+Deep Research, আচরণ কন্ট্রোল করার জন্য `agent_config` প্যারামিটার ব্যবহার করে।
+নিম্নলিখিত ফিল্ড সহ একটি অভিধান হিসেবে এটি পাস করুন:
 
-| 欄位 | 類型 | 預設 | 說明 |
+| ফিল্ড | ধরন | ডিফল্ট | বিবরণ |
 | --- | --- | --- | --- |
-| `type` | `string` | 必填 | 必須為 `"deep-research"`。 |
-| `thinking_summaries` | `string` | `"none"` | 設為 `"auto"` 即可在串流期間接收中間推論步驟。如要停用，請設為 `"none"`。 |
-| `visualization` | `string` | `"auto"` | 設為 `"auto"` 即可啟用代理生成的圖表和圖片。如要停用，請設為 `"off"`。 |
-| `collaborative_planning` | `boolean` | `false` | 設為 `true`，即可在開始研究前啟用多輪計畫審查。 |
+| `type` | `string` | প্রয়োজনীয় | `"deep-research"` হতে হবে। |
+| `thinking_summaries` | `string` | `"none"` | স্ট্রিমিং চলাকালীন ইন্টারমিডিয়েট রিজনিং স্টেপ পেতে `"auto"`-এ সেট করুন। বন্ধ করতে `"none"`-এ সেট করুন। |
+| `visualization` | `string` | `"auto"` | এজেন্ট-জেনারেটেড চার্ট ও ছবি চালু করতে `"auto"`-এ সেট করুন। বন্ধ করতে `"off"`-এ সেট করুন। |
+| `collaborative_planning` | `boolean` | `false` | রিসার্চ শুরু হওয়ার আগে মাল্টি-টার্ন প্ল্যান রিভিউ চালু করতে `true`-এ সেট করুন। |
 
 ### Python
 
@@ -2563,7 +2603,7 @@ interaction = client.interactions.create(
 )
 ```
 
-### JavaScript
+### জাভাস্ক্রিপ্ট
 
 ```
 const interaction = await client.interactions.create({
@@ -2612,7 +2652,7 @@ Interaction interaction =
     client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
 ```
 
-### Go
+### খুলুন
 
 ```
 package main
@@ -2672,58 +2712,74 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 適用情形與定價
+## উপলভ্যতা ও দাম
 
-您可以使用 Google AI Studio 和 Gemini API 中的 Interactions API，存取 Gemini Deep Research 代理程式。
+আপনি Google AI Studio এবং Gemini API-তে Interactions API ব্যবহার করে Gemini Deep Research এজেন্ট অ্যাক্সেস করতে পারবেন।
 
-定價採用[即付即用模式](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#pricing-for-agents)，依據基礎 Gemini 模型和代理使用的特定工具計費。標準的聊天要求會產生一個輸出結果，但 Deep Research 工作是代理式工作流程。只要提出要求，系統就會自主規劃、搜尋、閱讀和推論。
+মূল্য নির্ধারণ [যখন ব্যবহার করবেন তখন পেমেন্ট করুন মডেল](https://ai.google.dev/gemini-api/docs/pricing?hl=bn#pricing-for-agents) অনুসরণ করে, যা অন্তর্নিহিত Gemini মডেল এবং এজেন্ট ব্যবহার করে এমন নির্দিষ্ট টুলের উপর ভিত্তি করে। স্ট্যান্ডার্ড চ্যাট অনুরোধের ক্ষেত্রে একটি অনুরোধের জন্য একটিই আউটপুট পাওয়া যায়, কিন্তু Deep Research টাস্ক হল একটি এজেন্টিক ওয়ার্কফ্লো। একটি অনুরোধের মাধ্যমে প্ল্যানিং, সার্চিং, রিডিং ও রিজনিংয়ের অটোনোমাস লুপ ট্রিগার হয়।
 
-### 預估費用
+### আনুমানিক খরচ
 
-費用會因所需研究的深度而異。代理會自主判斷回答提示詞需要多少閱讀和搜尋量。
+কতটা গভীর রিসার্চ প্রয়োজন তার উপর ভিত্তি করে খরচ আলাদা হয়। আপনার প্রম্পটের উত্তর দিতে কতটা পড়া এবং সার্চ করা প্রয়োজন তা এজেন্ট স্বয়ংক্রিয়ভাবে নির্ধারণ করে।
 
-- **Deep Research** (`deep-research-preview-04-2026`)：對於需要中等程度分析的典型查詢，代理程式可能會使用約 80 個搜尋查詢、約 25 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 6 萬個輸出權杖。
-  - **預估總金額：**每項工作約$1.00 美元至 $3.00 美元
-- **Deep Research Max** (`deep-research-max-preview-04-2026`)：如要深入分析競爭環境或進行詳盡的盡職調查，代理程式最多可能會使用約 160 個搜尋查詢、約 90 萬個輸入權杖 (約 50% 至 70% 的權杖會快取)，以及約 8 萬個輸出權杖。
-  - **預估總金額：**每項工作約$3.00 美元至 $7.00 美元
+- **Deep Research** (`deep-research-preview-04-2026`): মাঝারি ধরনের বিশ্লেষণ প্রয়োজন এমন সাধারণ কোয়েরির ক্ষেত্রে, এজেন্ট ~৮০টি সার্চ কোয়েরি, ~২৫০ হাজার ইনপুট টোকেন (~৫০-৭০% ক্যাশে করা) এবং ~৬০ হাজার আউটপুট টোকেন ব্যবহার করতে পারে।
+  - **আনুমানিক মোট:** ~$১.০০ – $৩.০০ প্রতি টাস্ক
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): গভীর প্রতিযোগিতামূলক ল্যান্ডস্কেপ বিশ্লেষণ বা ব্যাপক ডিউ ডিলিজেন্সের জন্য, এজেন্ট সর্বাধিক ~১৬০টি সার্চ কোয়েরি, ~৯০০ হাজার ইনপুট টোকেন (~৫০-৭০% ক্যাশে করা) এবং ~৮০ হাজার আউটপুট টোকেন ব্যবহার করতে পারে।
+  - **মোট আনুমানিক:** প্রতি টাস্কের জন্য ~$৩.০০ – $৭.০০
 
-## 安全考量
+## নিরাপত্তা সংক্রান্ত বিষয়
 
-授予代理程式網路和私人檔案的存取權時，請務必謹慎評估安全風險。
+কোনও এজেন্টকে ওয়েব এবং আপনার ব্যক্তিগত ফাইল অ্যাক্সেস করার অনুমতি দেওয়ার আগে,
+নিরাপত্তা সংক্রান্ত ঝুঁকি সম্পর্কে সতর্কভাবে বিবেচনা করা প্রয়োজন।
 
-- **使用檔案進行提示詞注入：**代理程式會讀取您提供的檔案內容。請確認上傳的文件 (PDF、文字檔) 來自可信來源。惡意檔案可能含有隱藏的文字，用於操縱代理程式的輸出內容。
-- **網路內容風險：**代理程式會搜尋公開網路，雖然我們導入了強大的安全篩選器，但代理程式仍可能遇到並處理惡意網頁。建議您查看回覆中`citations`提供的資訊
-  ，確認來源是否正確。
-- **資料外洩：**如果允許代理程式瀏覽網頁，要求代理程式摘要說明機密內部資料時，請務必謹慎。
+- **ফাইলের মাধ্যমে প্রম্পট ইনজেকশন:** আপনার দেওয়া ফাইলের কন্টেন্ট
+  এজেন্ট পড়ে। আপলোড করা ডকুমেন্ট (PDF, টেক্সট ফাইল) বিশ্বস্ত সোর্স থেকে এসেছে কিনা তা
+  নিশ্চিত করুন। ক্ষতিকারক ফাইলে লুকানো টেক্সট থাকতে পারে যা এজেন্টের আউটপুট
+  ম্যানিপুলেট করার জন্য ডিজাইন করা হয়েছে।
+- **ওয়েব কন্টেন্ট সংক্রান্ত ঝুঁকি:** এজেন্ট পাবলিক ওয়েব সার্চ করে। আমরা শক্তিশালী নিরাপত্তা ফিল্টার প্রয়োগ করলেও, এজেন্ট ক্ষতিকারক ওয়েব পৃষ্ঠাগুলির সম্মুখীন হতে পারে এবং
+  প্রসেস করতে পারে এমন ঝুঁকি রয়েছে। সোর্স যাচাই করার জন্য উত্তরে দেওয়া `citations`
+  পর্যালোচনা করে দেখার সাজেশন আমরা দিই।
+- **এক্সফিলট্রেশন:** আপনি যদি এজেন্টকে ওয়েব ব্রাউজ করার অনুমতি দেন, তাহলে সংবেদনশীল অভ্যন্তরীণ ডেটার সারসংক্ষেপ করতে বলার সময় সতর্ক থাকুন।
 
-## 最佳做法
+## পেশাদার পদ্ধতি
 
-- **提示未知事項：**指示代理程式如何處理遺漏的資料。
-  舉例來說，在提示中加入「如果無法取得 2025 年的具體數據，請明確指出這些是預測或無法取得，而非估算」。
-- **提供脈絡：**直接在輸入提示中提供背景資訊或限制，做為代理程式研究的基準。
-- **使用協作規劃功能：**對於複雜的查詢，請啟用協作規劃功能，以便在執行前查看及修正研究計畫。
-- **多模態輸入內容：**Deep Research 代理支援多模態輸入內容。
-  請謹慎使用，因為這會增加成本，並可能導致脈絡窗口溢位。
+- **অজানা তথ্যের জন্য প্রম্পট:** অনুপস্থিত ডেটা কীভাবে ম্যানেজ করতে হবে সেই বিষয়ে এজেন্টকে নির্দেশ দিন।
+  যেমন, আপনার প্রম্পটে *"২০২৫ সালের নির্দিষ্ট পরিসংখ্যান উপলভ্য না থাকলে,
+  অনুমান করার পরিবর্তে স্পষ্টভাবে উল্লেখ করুন যে সেগুলি অনুমান বা উপলভ্য নয়"* যোগ করুন।
+- **প্রাসঙ্গিক তথ্য দিন:** ইনপুট প্রম্পটে সরাসরি ব্যাকগ্রাউন্ড
+  তথ্য বা সীমাবদ্ধতা প্রদান করে এজেন্টের রিসার্চকে গ্রাউন্ড করুন।
+- **কোলাবরেটিভ প্ল্যানিং ব্যবহার করুন:** জটিল কোয়েরির জন্য, কোলাবরেটিভ প্ল্যানিং চালু করুন
+  যাতে এক্সিকিউট করার আগে রিসার্চ প্ল্যান পর্যালোচনা ও রিফাইন করা যায়।
+- **মাল্টিমোডাল ইনপুট:** Deep Research এজেন্ট মাল্টিমোডাল ইনপুট সাপোর্ট করে।
+  সতর্কতার সাথে ব্যবহার করুন, কারণ এটি খরচ বাড়ায় এবং কন্টেক্সট উইন্ডো ওভারফ্লো হওয়ার ঝুঁকি থাকে।
 
-## 限制
+## সীমাবদ্ধতা
 
-- **自訂工具：**目前無法提供自訂函式呼叫工具，但您可以搭配 Deep Research 代理使用遠端 MCP (Model Context Protocol) 伺服器。
-- **結構化輸出內容：**Deep Research 代理程式目前不支援結構化輸出內容。
-- **研究時間上限：**Deep Research 代理的研究時間上限為 60 分鐘。大多數工作應會在 20 分鐘內完成。
-- **商店規定：**使用 `background=True` 執行代理程式時，必須提供 `store=True`。
-- **Google 搜尋：** [Google 搜尋](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)預設為啟用，且[特定限制](https://ai.google.dev/gemini-api/terms?hl=zh-tw#use-restrictions2)適用於有依據的結果。
+- **কাস্টম টুল:** আপনি বর্তমানে কাস্টম ফাংশন কলিং টুল প্রদান করতে পারবেন না
+  তবে আপনি Deep Research এজেন্টের সাথে রিমোট MCP (মডেল কন্টেক্সট প্রোটোকল) সার্ভার ব্যবহার করতে পারবেন।
+- **স্ট্রাকচার্ড আউটপুট:** Deep Research এজেন্ট বর্তমানে
+  স্ট্রাকচার্ড আউটপুট প্রদান করে না।
+- **রিসার্চের সর্বাধিক সময়:** Deep Research এজেন্ট সর্বাধিক ৬০ মিনিট পর্যন্ত
+  রিসার্চ করতে পারে। বেশিরভাগ টাস্ক ২০ মিনিটের মধ্যেই সম্পূর্ণ হয়ে যাওয়া উচিত।
+- **স্টোর সংক্রান্ত প্রয়োজনীয়তা:** `background=True` ব্যবহার করে এজেন্ট এক্সিকিউশনের জন্য
+  `store=True` প্রয়োজন।
+- **Google Search:** ডিফল্ট হিসেবে [Google
+  Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn) চালু করা থাকে এবং গ্রাউন্ডেড ফলাফলের ক্ষেত্রে [নির্দিষ্ট
+  বিধিনিষেধ](https://ai.google.dev/gemini-api/terms?hl=bn#use-restrictions2)
+  প্রযোজ্য হয়।
 
-## 後續步驟
+## এর পরে কী করতে হবে
 
-- 進一步瞭解 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)。
-- 瞭解如何使用[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)工具，存取自己的資料。
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=bn) সম্পর্কে আরও জানুন।
+- [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn)
+  টুল ব্যবহার করে কীভাবে আপনার নিজের ডেটা ব্যবহার করবেন তা জানুন।
 
-提供意見
+মতামত জানান
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-上次更新時間：2026-09-24 (世界標準時間)。
+2026-10-13 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-想進一步說明嗎？
+আমাদের আরও কিছু জানাতে চান?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-24 (世界標準時間)。"],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-13 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

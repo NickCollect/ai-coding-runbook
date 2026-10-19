@@ -1,144 +1,146 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=tr
-fetched_at: 2026-10-12T07:10:35.502545+00:00
-title: "\u0130\u015f orta\u011f\u0131 ve kitapl\u0131k entegrasyonlar\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=de
+fetched_at: 2026-10-19T05:33:31.817648+00:00
+title: "Partner- und Bibliotheksintegrationen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Geri bildirim gönderin
+Feedback geben
 
-# İş ortağı ve kitaplık entegrasyonları
+# Partner- und Bibliotheksintegrationen
 
-Bu kılavuzda, Gemini API'nin üzerinde kitaplıklar, platformlar ve ağ geçitleri oluşturmaya yönelik mimari stratejiler özetlenmektedir. Resmi üretken yapay zeka SDK'larını, Direct API'yi (REST/gRPC) ve OpenAI uyumluluk katmanını kullanmanın teknik avantaj ve dezavantajları ayrıntılı olarak açıklanır.
+In diesem Leitfaden werden Architekturstrategien für die Entwicklung von Bibliotheken, Plattformen und Gateways auf Grundlage der Gemini API beschrieben. Außerdem werden die technischen Kompromisse zwischen der Verwendung der offiziellen GenAI SDKs, der Direct API (REST/gRPC) und der OpenAI-Kompatibilitätsebene erläutert.
 
-Diğer geliştiriciler için araçlar (ör. açık kaynaklı çerçeveler, kurumsal ağ geçitleri veya SaaS toplayıcılar) oluşturuyorsanız ve bağımlılık temizliği, paket boyutu ya da özellik eşliği için optimizasyon yapmanız gerekiyorsa bu kılavuzu kullanın.
+Dieser Leitfaden richtet sich an Entwickler, die Tools für andere Entwickler erstellen, z. B. Open-Source-Frameworks, Enterprise-Gateways oder SaaS-Aggregatoren, und die die Abhängigkeitshygiene, die Bundle-Größe oder die Feature-Parität optimieren müssen.
 
-## İş ortağı entegrasyonu nedir?
+## Was ist eine Partnerintegration?
 
-İş ortağı, Gemini API ile son kullanıcı geliştiricileri arasında entegrasyon oluşturan herkesi ifade eder. İş ortaklarını dört arketipe ayırırız. Hangisiyle en çok eşleştiğinizi belirlemek doğru entegrasyon yolunu seçmenize yardımcı olur.
+Ein Partner ist jeder, der eine Integration zwischen der Gemini API und Endnutzerentwicklern erstellt. Wir unterteilen Partner in vier Archetypen. Wenn Sie wissen, zu welchem Archetyp Sie am besten passen, können Sie den richtigen Integrationspfad auswählen.
 
-#### Ekosistem çerçevesi
+#### Ökosystem-Framework
 
-- **Kim olduğunuz:** Açık kaynaklı bir çerçeve (ör. LangChain, LlamaIndex, Spring AI) veya dile özgü istemcilerin bakımını yapan kişi.
-- **Hedefiniz:** Geniş kapsamlı uyumluluk. Kitaplığınızın, kullanıcınızın seçtiği herhangi bir ortamda çakışmaya neden olmadan çalışmasını istiyorsunuz.
+- **Wer Sie sind**:Maintainer eines Open-Source-Frameworks (z.B. LangChain, LlamaIndex, Spring AI) oder sprachspezifischer Clients.
+- **Ihr Ziel**:Breite Kompatibilität. Ihre Bibliothek soll in jeder Umgebung funktionieren, die der Nutzer auswählt, ohne Konflikte zu verursachen.
 
-#### Çalışma zamanı ve kenar platformu
+#### Laufzeit- und Edge-Plattform
 
-- **Kim olduğunuz:** Kod yürütmenin kısıtlanmış ortamlarda gerçekleştiği SaaS platformları, yapay zeka ağ geçitleri veya bulut altyapısı sağlayıcıları (ör. Vercel, Cloudflare, Zapier).
-- **Hedefiniz:** Performans. Düşük gecikme süresi, minimum paket boyutu ve hızlı soğuk başlatma gerekir.
+- **Wer Sie sind**:SaaS-Plattformen, KI-Gateways oder Cloud-Infrastrukturanbieter (z.B. Vercel, Cloudflare, Zapier), bei denen die Codeausführung in eingeschränkten Umgebungen erfolgt.
+- **Ihr Ziel**:Leistung. Sie benötigen eine geringe Latenz, eine minimale Bundle-Größe und schnelle Kaltstarts.
 
-#### Toplayıcı
+#### Dienstleister
 
-- **Kim olduğunuz:** Birçok farklı büyük dil modeli sağlayıcısında (ör. OpenAI, Anthropic, Google) erişimi tek bir arayüzde normalleştiren platformlar, proxy'ler veya dahili "Model Bahçeleri".
-- **Hedefiniz:** Taşınabilirlik ve tekdüzelik.
+- **Wer Sie sind**:Plattformen, Proxys oder interne „Model Gardens“, die den Zugriff auf viele verschiedene LLM-Anbieter (z.B. OpenAI, Anthropic, Google) über eine einzige Schnittstelle normalisieren.
+- **Ihr Ziel**:Portabilität und Einheitlichkeit.
 
-#### Kurumsal ağ geçidi
+#### Enterprise-Gateway
 
-- **Kimler için uygundur?** Büyük şirketlerdeki dahili platform mühendisliği ekipleri, yüzlerce dahili geliştirici için "altın yollar" oluşturur.
-- **Hedefiniz:** Standartlaştırma, yönetim ve birleştirilmiş kimlik doğrulama.
+- **Wer Sie sind**:Interne Platform Engineering-Teams in großen Unternehmen, die „Golden Paths“ für Hunderte von internen Entwicklern erstellen.
+- **Ihr Ziel**:Standardisierung, Governance und einheitliche Authentifizierung.
 
-## Bir bakışta karşılaştırma
+## Vergleich auf einen Blick
 
-**Küresel en iyi uygulama:** Seçilen yoldan bağımsız olarak tüm iş ortakları [`x-goog-api-client`
-başlığını](#client-id) göndermelidir.
+**Globale Best Practice:** Alle Partner müssen den [`x-goog-api-client`
+Header](#client-id) senden, unabhängig vom gewählten Pfad.
 
-| Şu durumlarda: | Önerilen yol | Temel avantaj | Önemli denge | En iyi uygulama |
+| Wenn Sie... | Empfohlener Pfad | Vorteil | Wichtigster Kompromiss | Best Practice |
 | --- | --- | --- | --- | --- |
-| **Kurumsal ağ geçidi, ekosistem çerçevesi** | **[Google GenAI SDK'sı](#genai-sdk)** | **Gemini Enterprise Ajan Platformu'nun eşitliği ve hızı** Türler, kimlik doğrulama ve karmaşık özellikler (ör. dosya yüklemeleri) için yerleşik işleme. Google Cloud'a sorunsuz taşıma | **Bağımlılık ağırlığı.** Geçişli bağımlılıklar karmaşık olabilir ve kontrolünüz dışında kalabilir. Desteklenen dillerle (Python/Node/Go/Java) sınırlıdır. | **Sürümleri kilitleme** Ekipler arasında tutarlılık sağlamak için dahili temel resimlerinizdeki SDK sürümlerini sabitleyin. |
-| **Ekosistem çerçevesi, uç platformlar ve toplayıcılar** | **[Direct API](#rest)**  *(REST / gRPC)* | **Bağımlılık yok.** HTTP istemcisini ve tam paket boyutunu kontrol edebilirsiniz. Tüm API ve model özelliklerine tam erişim. | **Geliştiricinin yüksek ek yükü.** JSON yapıları derinlemesine iç içe yerleştirilebilir ve sıkı manuel doğrulama ile tür kontrolü gerektirir. | **OpenAPI spesifikasyonlarını kullanın.** Türleri manuel olarak yazmak yerine resmi spesifikasyonlarımızı kullanarak otomatik olarak oluşturun. |
-| **Yalnızca metin tabanlı iş akışları gerektiren OpenAI SDK'larını kullanan toplayıcı**  *(Eski taşınabilirlik için optimizasyon)* | **[OpenAI uyumluluğu](#openai)** | **Anında taşınabilirlik.** Mevcut OpenAI uyumlu kodları veya kitaplıkları yeniden kullanın. | **Özellik sınırı.** Modele özgü özellikler (doğal video reklam, önbelleğe alma) kullanılamayabilir. | **Taşıma planı.** Hızlı doğrulama için bu yöntemi kullanın ancak API'nin tüm özelliklerinden yararlanmak için Direct API'ye yükseltmeyi planlayın. |
+| **Enterprise-Gateway, Ökosystem-Framework** | **[Google GenAI SDK](#genai-sdk)** | **Parität und Geschwindigkeit der Gemini Enterprise Agent Platform.** Integrierte Verarbeitung von Typen, Authentifizierung und komplexen Funktionen (z.B. Datei-Uploads). Nahtlose Migration zu Google Cloud. | **Gewicht der Abhängigkeiten.** Transitive Abhängigkeiten können komplex sein und außerhalb Ihrer Kontrolle liegen. Beschränkt auf unterstützte Sprachen (Python/Node/Go/Java). | **Versionen sperren.** Fixieren Sie SDK-Versionen in Ihren internen Basis-Images, um die Stabilität teamübergreifend zu gewährleisten. |
+| **Ökosystem-Framework, Edge-Plattformen und Aggregatoren** | **[Direct API](#rest)**  *(REST / gRPC)* | **Keine Abhängigkeiten.** Sie steuern den HTTP-Client und die genaue Bundle-Größe. Vollständiger Zugriff auf alle API- und Modellfunktionen. | **Hoher Entwicklungsaufwand.** JSON-Strukturen können tief verschachtelt sein und erfordern eine strenge manuelle Validierung und Typüberprüfung. | **OpenAPI-Spezifikationen verwenden.** Automatisieren Sie die Typerstellung mit unseren offiziellen Spezifikationen, anstatt sie manuell zu schreiben. |
+| **Aggregator, der OpenAI SDKs verwendet, die nur textbasierte Workflows erfordern**  *(Optimierung für Legacy-Portabilität)* | **[OpenAI-Kompatibilität](#openai)** | **Sofortige Portabilität.** Vorhandenen OpenAI-kompatiblen Code oder Bibliotheken wiederverwenden. | **Funktionsbeschränkungen.** Modellspezifische Funktionen (native Videoanzeige, Caching) sind möglicherweise nicht verfügbar. | **Migrationsplan.** Verwenden Sie dies für die schnelle Validierung, planen Sie aber ein Upgrade auf die Direct API für die vollständige API-Funktionalität. |
 
-## Google GenAI SDK entegrasyonu
+## Google GenAI SDK-Integration
 
-Desteklenen dillerde en az kod satırı içeren [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=tr)'sını uygulamak, çerçeveler için genellikle en basit yoldur.
+Für Frameworks ist die Implementierung des [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=de)
+oft der einfachste Weg, da in den unterstützten
+Sprachen die wenigsten Codezeilen erforderlich sind.
 
-Dahili platform ekipleri için temel çıktı genellikle ürün mühendislerinin güvenlik politikalarına uyarken hızlı hareket etmesini sağlayan bir "altın yol"dur.
+Für interne Plattformteams ist das wichtigste Ergebnis oft ein „Golden Path“, mit dem Produktentwickler schnell arbeiten und gleichzeitig die Sicherheitsrichtlinien einhalten können.
 
-**Avantajları:**
+**Vorteile** :
 
-- **Gemini Enterprise Agent Platform'a taşıma için birleşik arayüz:** Şirket içi geliştiriciler genellikle API anahtarlarını (Gemini API) kullanarak prototip oluşturur ve üretim uyumluluğu için Gemini Enterprise Agent Platform'a (IAM) dağıtım yapar. SDK, bu kimlik doğrulama farklılıklarını soyutlar.
-  Benzer şekilde, çerçeveler için tek bir kod yolu uygulayabilir ve iki kullanıcı grubunu destekleyebilirsiniz.
-- **İstemci tarafı yardımcıları:** SDK, karmaşık görevler için standart kodları azaltan deyimsel yardımcı programlar içerir.
-  - *Örnekler:* Doğrudan istemlerde `PIL` görüntü nesnelerini destekleme, otomatik işlev çağrısı ve kapsamlı türler.
-- **İlk günden itibaren özellik erişimi:** Yeni API özellikleri, SDK'lar aracılığıyla lansman sırasında kullanılabilir.
-- **Geliştirilmiş kod oluşturma desteği:** Yerel SDK yüklemesi, tür tanımlarını ve doküman dizelerini kodlama asistanlarına (ör. Cursor, Copilot) sunar.
-  Bu bağlam, ham REST istekleri oluşturmaya kıyasla kod oluşturma doğruluğunu artırır.
+- **Einheitliche Schnittstelle für die Migration zur Gemini Enterprise Agent Platform**:Interne Entwickler erstellen oft Prototypen mit API-Schlüsseln (Gemini API) und stellen sie zur Einhaltung der Produktionsanforderungen auf der Gemini Enterprise Agent Platform (IAM) bereit. Das SDK abstrahiert diese Authentifizierungsunterschiede.
+  Ähnlich wie bei Frameworks können Sie einen Codepfad implementieren und zwei Nutzergruppen unterstützen.
+- **Clientseitige Hilfsfunktionen**:Das SDK enthält idiomatische Dienstprogramme, die den Boilerplate-Code für komplexe Aufgaben reduzieren.
+  - *Beispiele*:Direkte Unterstützung von `PIL`-Bildobjekten in Prompts, automatische Funktionsaufrufe und umfassende Typen.
+- **Zugriff auf Funktionen ab dem ersten Tag**:Neue API-Funktionen sind zum Zeitpunkt der Einführung über die SDKs verfügbar.
+- **Verbesserte Unterstützung für die Codegenerierung**:Bei der lokalen SDK-Installation werden Typdefinitionen und Docstrings für Coding-Assistenten (z.B. Cursor, Copilot) verfügbar gemacht.
+  Dieser Kontext verbessert die Genauigkeit der Codegenerierung im Vergleich zur Generierung von Roh-REST-Anfragen.
 
-**Değiş-tokuş:**
+**Der Kompromiss** :
 
-- **Bağımlılık ağırlığı ve karmaşıklığı:** SDK'ların kendi bağımlılıkları vardır. Bu bağımlılıklar, paket boyutunu artırabilir ve tedarik zinciri riskine yol açabilir.
-- **Sürüm oluşturma:** Yeni API özellikleri genellikle minimum SDK sürümlerine sabitlenir.
-  Yeni özelliklere veya modellere erişmek için kullanıcıları güncellemeye zorlamanız gerekebilir. Bu durumda, kullanıcılarınızı etkileyen geçişli bağımlılıklarda değişiklik yapmanız gerekebilir.
-- **Protokol sınırları:** SDK'lar, ana API için yalnızca HTTPS'yi, Canlı API için ise yalnızca WebSocket'leri (WSS) destekler. gRPC, üst düzey SDK istemcileri kullanılarak desteklenmez.
-- **Dil desteği:** SDK'lar, *mevcut* dil sürümlerini destekler. Destek sonu sürümlerini (ör. Python 3.9) desteklemeniz gerekiyorsa bir çatallanmayı sürdürmeniz gerekir.
+- **Gewicht und Komplexität der Abhängigkeiten**:Die SDKs haben eigene Abhängigkeiten, die die Bundle-Größe erhöhen und potenziell das Risiko in der Lieferkette erhöhen können.
+- **Versionsverwaltung**:Neue API-Funktionen sind oft an Mindestversionen des SDK gebunden.
+  Möglicherweise müssen Sie Updates für Nutzer bereitstellen, um auf neue Funktionen oder Modelle zuzugreifen. In einigen Fällen sind dazu Änderungen an transitiven Abhängigkeiten erforderlich, die sich auf Ihre Nutzer auswirken.
+- **Protokollbeschränkungen**:Die SDKs unterstützen nur HTTPS für die Haupt-API und WebSockets (WSS) für die Live API. gRPC wird mit den SDK-Clients der höheren Ebene nicht unterstützt.
+- **Sprachunterstützung**:Die SDKs unterstützen die *aktuellen* Sprachversionen. Wenn Sie EOL-Versionen (z.B. Python 3.9) unterstützen müssen, müssen Sie einen Fork verwalten.
 
-**En iyi uygulama:**
+**Best Practice** :
 
-- **Sürümleri kilitleme:** Ekipler arasında kararlılığı sağlamak için dahili temel resimlerinizdeki SDK sürümünü sabitleyin.
+- **Versionen sperren**:Fixieren Sie die SDK-Version in Ihren internen Basis-Images, um die Stabilität teamübergreifend zu gewährleisten.
 
-## Doğrudan API entegrasyonu
+## Direkte API-Integration
 
-Binlerce geliştiriciye kitaplık dağıtıyorsanız, kısıtlanmış bir ortamda çalışıyorsanız veya Gemini'ın en yeni özelliklerini gerektiren bir toplayıcı oluşturuyorsanız REST veya gRPC kullanarak doğrudan API ile entegrasyon yapmanız gerekebilir.
+Wenn Sie eine Bibliothek an Tausende von Entwicklern verteilen, in einer eingeschränkten Umgebung ausführen oder einen Aggregator erstellen, der die neuesten Funktionen von Gemini erfordert, müssen Sie die API möglicherweise direkt mit REST oder gRPC einbinden.
 
-**Avantajları:**
+**Vorteile** :
 
-- **Tüm özelliklere erişim:** OpenAI uyumluluk katmanının aksine, API'yi doğrudan kullanmak, Gemini'a özgü özellikleri (ör. File API'ye yükleme, içerik önbelleğe alma oluşturma ve çift yönlü Live API'yi kullanma) etkinleştirir.
-- **Minimum bağımlılık:** Bağımlılıkların boyut veya denetim maliyetleri nedeniyle hassas olduğu bir ortamda. API'yi doğrudan `fetch` gibi standart bir kitaplık veya `httpx` gibi bir sarmalayıcı aracılığıyla kullanmak kitaplığınızın hafif kalmasını sağlar.
-- **Dilden bağımsız:** Dil kısıtlaması olmadığından bu, SDK'ların kapsamadığı diller (ör. Rust, PHP ve Ruby) için tek yoldur.
-- **Performans:** Direct API'nin başlatma ek yükü yoktur. Bu sayede, sunucusuz işlevlerdeki soğuk başlatmalar en aza indirilir.
+- **Vollständiger Zugriff auf alle Funktionen**:Im Gegensatz zur OpenAI-Kompatibilitätsebene können Sie bei der direkten Verwendung der API Gemini-spezifische Funktionen nutzen, z. B. das Hochladen in die File API, das Erstellen von Content-Caching und die Verwendung der bidirektionalen Live API.
+- **Minimale Abhängigkeiten**:In einer Umgebung, in der Abhängigkeiten aufgrund der Größe oder der Auditkosten kritisch sind. Wenn Sie die API direkt über eine Standardbibliothek wie `fetch` oder einen Wrapper wie `httpx` verwenden, bleibt Ihre Bibliothek schlank.
+- **Sprachunabhängig**:Dies ist der einzige Weg für Sprachen, die nicht von den SDKs abgedeckt werden, z. B. Rust, PHP und Ruby, da es keine Sprachbeschränkungen gibt.
+- **Leistung**:Die Direct API hat keinen Initialisierungsaufwand, wodurch Kaltstarts in serverlosen Funktionen minimiert werden.
 
-**Değiş-tokuş:**
+**Der Kompromiss** :
 
-- **Gemini Enterprise Agent Platform'un manuel olarak uygulanması:** SDK'dan farklı olarak, API'nin doğrudan kullanılması, AI Studio (API anahtarı) ile Gemini Enterprise Agent Platform (IAM) arasındaki kimlik doğrulama farklılıklarını otomatik olarak işlemez. Her iki ortamı da desteklemek istiyorsanız ayrı kimlik doğrulama işleyicileri uygulamanız gerekir.
-- **Yerel türler veya yardımcılar yok:** İstek nesneleri için kod tamamlama veya derleme zamanı kontrolleri almazsınız. Bunları kendiniz uygulamanız gerekir. İstemci "yardımcıları" (ör. işlevden şemaya dönüştürücüler) olmadığından bu mantığı kendiniz manuel olarak yazmanız gerekir.
+- **Manuelle Implementierung der Gemini Enterprise Agent Platform**:Im Gegensatz zum SDK werden bei der direkten Verwendung der API die Authentifizierungsunterschiede zwischen AI Studio (API-Schlüssel) und der Gemini Enterprise Agent Platform (IAM) nicht automatisch verarbeitet. Sie müssen separate Authentifizierungs-Handler implementieren, wenn Sie beide Umgebungen unterstützen möchten.
+- **Keine nativen Typen oder Hilfsfunktionen**:Sie erhalten keine Codevervollständigungen oder Kompilierzeitprüfungen für Anfrageobjekte, es sei denn, Sie implementieren sie selbst. Es gibt keine Client-Hilfsfunktionen (z.B. Konverter von Funktionen zu Schemas), daher müssen Sie diese Logik manuell schreiben.
 
-**En iyi uygulama**
+**Best Practice**
 
-Kitaplığınız için tür tanımları oluşturmak üzere kullanabileceğiniz, makine tarafından okunabilir bir spesifikasyon sunuyoruz. Böylece, bu tanımları manuel olarak yazmak zorunda kalmazsınız. Derleme işleminiz sırasında spesifikasyonu indirin, türleri oluşturun ve derlenmiş kodu gönderin.
+Wir stellen eine maschinenlesbare Spezifikation zur Verfügung, mit der Sie Typdefinitionen für Ihre Bibliothek generieren können, sodass Sie sie nicht manuell schreiben müssen. Laden Sie die Spezifikation während des Build-Prozesses herunter, generieren Sie die Typen und liefern Sie den kompilierten Code aus.
 
-- **Uç nokta:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **Endpunkt**:`https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## OpenAI SDK entegrasyonu
+## OpenAI SDK-Integration
 
-Modelden bağımsız özellikler yerine birleşik şemaya (OpenAI Chat Completions) öncelik veren bir platformsanız bu, en hızlı rotanızdır.
+Wenn Sie eine Plattform verwenden, bei der ein einheitliches Schema (OpenAI Chat Completions) wichtiger ist als modellspezifische Funktionen, ist dies die schnellste Route.
 
-**Avantajları:**
+**Vorteile** :
 
-- **Kolaylık:** Genellikle `baseURL` ve `apiKey` değiştirerek Gemini desteği ekleyebilirsiniz. Bu, "Kendi Anahtarını Getir" uygulamalarını entegre etmenin ve yeni kod yazmadan Gemini desteği eklemenin hızlı bir yoludur.
-- **Kısıtlamalar:** Bu yol yalnızca OpenAI SDK ile sınırlıysanız ve File API gibi gelişmiş Gemini özelliklerine ya da Google Arama ile Temellendirme gibi araçlar için manuel olarak destek eklemeye ihtiyacınız yoksa önerilir.
+- **Geringer Aufwand**:Oft können Sie die Gemini-Unterstützung hinzufügen, indem Sie `baseURL` und `apiKey` ändern. Dies ist eine schnelle Möglichkeit, „Bring Your Own Key“-Implementierungen einzubinden und die Gemini-Unterstützung hinzuzufügen, ohne neuen Code schreiben zu müssen.
+- **Einschränkungen**:Dieser Pfad wird nur empfohlen, wenn Sie auf das OpenAI SDK beschränkt sind und keine erweiterten Gemini-Funktionen wie die File API benötigen oder die Unterstützung für Tools wie Fundierung mit der Google Suche manuell hinzufügen müssen.
 
-**Değiş-tokuş:**
+**Der Kompromiss** :
 
-- **Özellik sınırlamaları:** Uyumluluk katmanı, temel Gemini özelliklerinde sınırlamalar sunar. Kullanılabilir sunucu tarafı araçları platformlar arasında farklılık gösterir ve Gemini API araçlarıyla çalışmak için manuel işlem gerektirebilir.
-- **Çeviri ek yükü:** OpenAI şeması Gemini'ın mimarisiyle bire bir eşlenmediğinden uyumluluk katmanını kullanmak, çözmek için ek uygulama çalışması gerektiren bazı karmaşıklıklara yol açar. Örneğin, kullanıcının "arama" aracını doğru platform aracıyla eşlemek gibi.
-  Özel durumların önemli bir bölümünü ele almanız gerekiyorsa her platform için özel bir SDK veya API kullanmak daha faydalı olabilir.
+- **Funktionsbeschränkungen**:Die Kompatibilitätsebene schränkt die Kernfunktionen von Gemini ein. Die verfügbaren serverseitigen Tools unterscheiden sich je nach Plattform und erfordern möglicherweise eine manuelle Verarbeitung, um mit den Gemini API-Tools zu funktionieren.
+- **Aufwand für die Übersetzung**:Da das OpenAI-Schema nicht 1:1 der Gemini-Architektur entspricht, führt die Verwendung der Kompatibilitätsebene zu einigen Komplexitäten, die zusätzlichen Implementierungsaufwand erfordern, z. B. die Zuordnung eines Nutzer-„Such“-Tools zum richtigen Plattformtool.
+  Wenn Sie eine erhebliche Anzahl von Sonderfällen benötigen, ist es möglicherweise sinnvoller, für jede Plattform ein eigenes SDK oder eine eigene API zu verwenden.
 
-**En iyi uygulama**
+**Best Practice**
 
-Mümkün olduğunda doğrudan Gemini API ile entegrasyon yapın. Ancak maksimum uyumluluk için farklı sağlayıcıların farkında olan ve araç ile mesaj eşlemeyi sizin için yapabilen bir kitaplık kullanmayı düşünebilirsiniz.
+Binden Sie die Gemini API nach Möglichkeit direkt ein. Für maximale Kompatibilität sollten Sie jedoch eine Bibliothek verwenden, die verschiedene Anbieter kennt und die Tool- und Nachrichtenzuordnung für Sie übernehmen kann.
 
-## Tüm iş ortakları için en iyi uygulama: müşteri tanımlama
+## Best Practice für alle Partner: Client-Identifikation
 
-Platform veya kitaplık olarak Gemini API'ye çağrı yaparken `x-goog-api-client` üstbilgisini kullanarak istemcinizi tanımlamanız gerekir.
+Wenn Sie als Plattform oder Bibliothek Aufrufe an die Gemini API senden, müssen Sie Ihren Client mit dem Header `x-goog-api-client` identifizieren.
 
-Bu sayede Google, belirli trafik segmentlerinizi tanımlayabilir. Kitaplığınız belirli bir hata kalıbı üretiyorsa hata ayıklama konusunda yardımcı olmak için sizinle iletişime geçebiliriz.
+So kann Google Ihre spezifischen Traffic-Segmente identifizieren. Wenn Ihre Bibliothek ein bestimmtes Fehlermuster erzeugt, können wir Sie kontaktieren, um bei der Fehlerbehebung zu helfen.
 
-`company-product/version` biçimini kullanın (ör. `acme-framework/1.2.0`).
+Verwenden Sie das Format `company-product/version` (z.B. `acme-framework/1.2.0`).
 
-### Uygulama örnekleri
+### Implementierungsbeispiele
 
 ### GenAI SDK
 
-API istemcisini sağladığınızda SDK, özel başlığınızı dahili başlıklarına otomatik olarak ekler.
+Wenn Sie den API-Client angeben, fügt das SDK Ihren benutzerdefinierten Header automatisch an die internen Header an.
 
 ```
 from google import genai
@@ -163,7 +165,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d '{...}'
 ```
 
-### OpenAI SDK'sı
+### OpenAI SDK
 
 ```
 from openai import OpenAI
@@ -177,18 +179,19 @@ client = OpenAI(
 )
 ```
 
-## Sonraki adımlar
+## Nächste Schritte
 
-- GenAI SDK'ları hakkında bilgi edinmek için [kitaplığa genel bakış](https://ai.google.dev/gemini-api/docs/libraries?hl=tr) sayfasını ziyaret edin.
-- [API referansına](https://ai.google.dev/api?hl=tr) göz atın.
-- [OpenAI uyumluluk kılavuzunu](https://ai.google.dev/gemini-api/docs/openai?hl=tr) okuyun.
+- Besuchen Sie die [Bibliotheksübersicht](https://ai.google.dev/gemini-api/docs/libraries?hl=de), um mehr über
+  die GenAI SDKs zu erfahren
+- Durchsuchen Sie die [API-Referenz](https://ai.google.dev/api?hl=de)
+- Leitfaden zur [OpenAI-Kompatibilität](https://ai.google.dev/gemini-api/docs/openai?hl=de) lesen
 
-Geri bildirim gönderin
+Feedback geben
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Son güncelleme tarihi: 2026-09-30 UTC.
+Zuletzt aktualisiert: 2026-09-30 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Haben Sie Feedback für uns?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-30 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-09-30 (UTC)."],[],[]]

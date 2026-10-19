@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=fr
-fetched_at: 2026-10-12T06:59:49.840108+00:00
-title: "Journaux et ensembles de donn\u00e9es \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=hi
+fetched_at: 2026-10-19T05:36:40.329604+00:00
+title: "\u0932\u0949\u0917 \u0914\u0930 \u0921\u0947\u091f\u093e\u0938\u0947\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 4 Argon अब उपलब्ध है. [इसे आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=hi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Envoyer des commentaires
+सुझाव भेजें
 
-# Journaux et ensembles de données
+# लॉग और डेटासेट
 
-Ce guide vous explique comment afficher les journaux d'utilisation de l'API Gemini dans le tableau de bord Google AI Studio pour mieux comprendre le comportement des modèles et la façon dont les utilisateurs interagissent avec vos applications. Utilisez la journalisation pour observer, déboguer et *partager éventuellement des commentaires sur l'utilisation avec Google afin d'améliorer Gemini pour les cas d'utilisation des développeurs*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=fr)
+इस गाइड में, आपको यह जानकारी मिलेगी कि Google AI Studio के डैशबोर्ड में, Gemini API के इस्तेमाल से जुड़े लॉग कैसे देखे जा सकते हैं. इससे आपको मॉडल के व्यवहार और उपयोगकर्ताओं के आपके ऐप्लिकेशन से इंटरैक्ट करने के तरीके को बेहतर ढंग से समझने में मदद मिलेगी. लॉगिंग का इस्तेमाल करके, Gemini के इस्तेमाल से जुड़ी समस्याओं को ठीक करें और *Google के साथ इस्तेमाल से जुड़ा सुझाव/राय दें या शिकायत करें. इससे डेवलपर के इस्तेमाल के उदाहरणों के हिसाब से, Gemini को बेहतर बनाने में मदद मिलेगी*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=hi)
 
-Tous les appels d'API `GenerateContent`, `BatchGenerateContent` et `StreamGenerateContent`, ainsi que les appels d'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr) (à l'exception des Managed Agents) sont acceptés. Cela inclut les appels effectués via les points de terminaison [compatibles avec OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=fr).
+सभी `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent` एपीआई कॉल और [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=hi) API कॉल काम करते हैं. हालांकि, एजेंट बनाने और मैनेज करने की सुविधा के लिए ये काम नहीं करते. इसमें [OpenAI के साथ काम करने वाले](https://ai.google.dev/gemini-api/docs/openai?hl=hi) एंडपॉइंट से किए गए कॉल शामिल हैं.
 
-## Configurer la journalisation du projet
+## प्रोजेक्ट के लिए लॉगिंग की सुविधा कॉन्फ़िगर करना
 
-Par défaut, l'API stocke tous les objets d'interaction (`store=true`) afin de simplifier l'utilisation des fonctionnalités de gestion de l'état côté serveur. En revanche, l'API Generate Content ne stocke pas les requêtes par défaut. Le stockage doit être activé pour chaque requête ou au niveau du projet dans AI Studio.
+डिफ़ॉल्ट रूप से, एपीआई सभी इंटरैक्शन ऑब्जेक्ट (`store=true`) को सेव करता है, ताकि सर्वर-साइड स्टेट मैनेजमेंट की सुविधाओं का इस्तेमाल करना आसान हो. इसके उलट, Generate Content API डिफ़ॉल्ट रूप से अनुरोधों को सेव नहीं करता है. इसके लिए, हर अनुरोध के हिसाब से या प्रोजेक्ट-लेवल पर, AI Studio से स्टोरेज की सुविधा चालू करनी होती है.
 
-Dans Google [AI Studio](https://aistudio.google.com/logs?hl=fr), vous pouvez activer ou désactiver la journalisation pour tous les projets ou pour des projets spécifiques. Vous pouvez modifier ces préférences à tout moment dans le panneau **Paramètres** de la page [Journaux et ensembles de données](https://aistudio.google.com/logs?hl=fr). Vous pouvez activer ou désactiver la journalisation indépendamment pour l'API `generateContent` et l'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr) afin de modifier le comportement de stockage par défaut d'un projet.
+Google [AI Studio](https://aistudio.google.com/logs?hl=hi) में, सभी प्रोजेक्ट या कुछ प्रोजेक्ट के लिए लॉगिंग की सुविधा चालू या बंद की जा सकती है. साथ ही, [लॉग और डेटासेट](https://aistudio.google.com/logs?hl=hi) पेज पर मौजूद **सेटिंग** पैनल में जाकर, इन प्राथमिकताओं को कभी भी बदला जा सकता है. किसी प्रोजेक्ट के लिए, स्टोरेज के डिफ़ॉल्ट तरीके को बदलने के लिए, `generateContent` API और [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=hi) API के लिए लॉगिंग को अलग-अलग चालू या बंद किया जा सकता है.
 
-### Journalisation au niveau de la requête
+### अनुरोध के लेवल पर लॉगिंग
 
-Le comportement de stockage et de journalisation diffère selon l'API :
+स्टोरेज और लॉगिंग का तरीका, एपीआई के हिसाब से अलग-अलग होता है:
 
-- **[API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr)** : stocke les requêtes par défaut (`store=true`) pour simplifier la gestion de l'état côté serveur.
-- **Generate Content API (`generateContent`)** : ne stocke pas les requêtes par défaut (`store=false`).
+- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=hi):** यह कुकी, अनुरोधों को डिफ़ॉल्ट रूप से (`store=true`) सेव करती है, ताकि सर्वर-साइड स्टेट मैनेजमेंट को आसान बनाया जा सके.
+- **Content API (`generateContent`) जनरेट करता है:** यह डिफ़ॉल्ट रूप से अनुरोधों को सेव नहीं करता (`store=false`).
 
-Voici comment définir la propriété `store` :
+`store` प्रॉपर्टी को इस तरह सेट किया जा सकता है:
 
-**API GenerateContent**
+**GenerateContent API**
 
 ### Python
 
@@ -92,7 +92,7 @@ GenerateContentResponse response =
 System.out.println(response.text());
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -126,7 +126,7 @@ func main() {
 }
 ```
 
-**API Interactions**
+**Interactions API**
 
 ### Python
 
@@ -185,7 +185,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -223,60 +223,60 @@ func main() {
 }
 ```
 
-## Afficher les journaux du projet dans AI Studio
+## AI Studio में प्रोजेक्ट लॉग देखना
 
-1. Accédez à la page "Journaux" dans [AI Studio](https://aistudio.google.com/logs?hl=fr).
-2. Sélectionnez un projet dans le menu déroulant.
-3. Si des journaux existent pour l'API Interactions, ils s'affichent dans le tableau dans l'ordre chronologique inverse.
-4. Pour observer les journaux du projet pour l'API Generate Content, commencez par l'activer dans le [panneau des paramètres](#configure-logging).
+1. [AI Studio](https://aistudio.google.com/logs?hl=hi) में लॉग पेज पर जाएं.
+2. ड्रॉप-डाउन से कोई प्रोजेक्ट चुनें.
+3. अगर Interactions API के लिए लॉग मौजूद हैं, तो वे टेबल में उल्टे कालानुक्रम में दिखेंगे.
+4. Generate Content API के लिए प्रोजेक्ट लॉग देखने के लिए, पहले इसे [सेटिंग पैनल](#configure-logging) में चालू करें.
 
-Cliquez sur une entrée pour obtenir un aperçu de la charge utile. Vous pouvez inspecter l'intégralité du prompt et de la réponse de Gemini, ainsi que le contexte des tours précédents. Pour les requêtes de l'**API Interactions**, les journaux incluent également un lien direct vers le `previous_interaction_id`.
+पेलोड की झलक देखने के लिए, किसी एंट्री पर क्लिक करें. Gemini से मिले जवाब और पूरे प्रॉम्प्ट के साथ-साथ, पिछली बातचीत का कॉन्टेक्स्ट देखा जा सकता है. **Interactions API** के अनुरोधों के लिए, लॉग में `previous_interaction_id` का डायरेक्ट लिंक भी शामिल होता है.
 
-## Configurer la durée de conservation du stockage d'un projet
+## प्रोजेक्ट के स्टोरेज के रखरखाव की अवधि कॉन्फ़िगर करना
 
-Les journaux expirent et sont marqués pour suppression après une période de conservation par défaut de 55 jours (sauf s'ils sont [enregistrés dans un ensemble de données](#create), auquel cas ils n'expirent pas).
-Vous pouvez configurer la période de conservation des journaux d'un projet sur 7, 14, 28 ou 55 jours maximum.
+लॉग, डिफ़ॉल्ट रूप से 55 दिनों तक सेव रहते हैं. इसके बाद, उन्हें मिटाने के लिए मार्क कर दिया जाता है. हालांकि, अगर उन्हें [डेटासेट में सेव किया जाता है](#create), तो वे कभी नहीं मिटते.
+किसी प्रोजेक्ट के लॉग के रखरखाव की अवधि को ज़्यादा से ज़्यादा 7, 14, 28 या 55 दिनों के लिए कॉन्फ़िगर किया जा सकता है.
 
-## Créer et partager des ensembles de données
+## डेटासेट बनाना और उन्हें शेयर करना
 
-Vous pouvez enregistrer les journaux dans des ensembles de données pour les organiser et les exporter plus efficacement.
+लॉग को डेटासेट में सेव किया जा सकता है, ताकि उन्हें ज़्यादा बेहतर तरीके से व्यवस्थित और एक्सपोर्ट किया जा सके.
 
-- Sur la [page "Journaux"](https://aistudio.google.com/logs?hl=fr), localisez la barre de filtres en haut de la page et sélectionnez une propriété à filtrer.
-- Dans votre vue filtrée, utilisez les cases à cocher pour sélectionner tous les journaux ou certains d'entre eux.
-- Cliquez sur le bouton **Créer un ensemble de données** qui s'affiche en haut de la liste.
-- Attribuez un nom et éventuellement une description à votre nouvel ensemble de données.
-- L'ensemble de données que vous venez de créer s'affiche avec l'ensemble de journaux sélectionnés.
-- Exportez votre ensemble de données pour une analyse plus approfondie au format CSV ou JSONL, ou vers Google Sheets.
+- [लॉग पेज](https://aistudio.google.com/logs?hl=hi) पर सबसे ऊपर मौजूद फ़िल्टर बार ढूंढें. इसके बाद, फ़िल्टर करने के लिए कोई प्रॉपर्टी चुनें.
+- फ़िल्टर किए गए व्यू में, सभी या अलग-अलग लॉग चुनने के लिए चेकबॉक्स का इस्तेमाल करें.
+- सूची में सबसे ऊपर मौजूद, **डेटासेट बनाएं** बटन पर क्लिक करें.
+- अपने नए डेटासेट को नाम दें और उससे जुड़ी जानकारी दें. हालांकि, जानकारी देना ज़रूरी नहीं है.
+- आपको अभी-अभी बनाया गया डेटासेट दिखेगा. इसमें लॉग का चुना गया सेट होगा.
+- अपने डेटासेट को CSV, JSONL फ़ाइलों या Google Sheets के तौर पर एक्सपोर्ट करें, ताकि उसका बेहतर तरीके से विश्लेषण किया जा सके.
 
-Les ensembles de données peuvent être utiles pour différents cas d'utilisation.
+डेटासेट, कई तरह के कामों के लिए मददगार हो सकते हैं.
 
-- **Créez des ensembles de défis** : favorisez les futures améliorations dans les domaines où vous souhaitez que votre IA progresse.
-- **Organisez des ensembles d'échantillons** : par exemple, un échantillon d'utilisation réelle pour générer des réponses à partir d'un autre modèle, ou une collection de cas extrêmes pour les vérifications de routine avant le déploiement.
-- **Ensembles d'évaluation** : ensembles représentatifs de l'utilisation réelle des fonctionnalités importantes, pour la comparaison avec d'autres modèles ou itérations d'instructions système.
+- **चुनौती सेट तैयार करना:** उन क्षेत्रों को टारगेट करके, आने वाले समय में एआई को बेहतर बनाएं जिनमें आपको एआई को बेहतर बनाना है.
+- **सैंपल सेट तैयार करना:** उदाहरण के लिए, किसी अन्य मॉडल से जवाब जनरेट करने के लिए, असली इस्तेमाल का सैंपल या डिप्लॉयमेंट से पहले रूटीन जांच के लिए, कुछ मुश्किल मामलों का कलेक्शन.
+- **इवैलुएशन सेट:** ये ऐसे सेट होते हैं जो अहम सुविधाओं के लिए, असल इस्तेमाल को दिखाते हैं. इनका इस्तेमाल, अन्य मॉडल या सिस्टम के निर्देश के वर्शन की तुलना करने के लिए किया जाता है.
 
-Vous pouvez contribuer à la recherche et au développement de Gemini en choisissant de partager vos ensembles de données avec Google à titre d'exemples.
+Google के साथ अपने डेटासेट शेयर करके, Gemini की रिसर्च और डेवलपमेंट में योगदान दिया जा सकता है.
 
-## Limites
+## सीमाएं
 
-La journalisation n'est actuellement pas disponible pour les éléments suivants :
+फ़िलहाल, इनके लिए लॉगिंग की सुविधा उपलब्ध नहीं है:
 
-- Modèles Imagen et Veo
-- Modèles d'embedding Gemini
-- Modèle Gemini Robotics
-- Entrées contenant des vidéos, des GIF ou des PDF
-- Agents en version Preview publique dans l'API Gemini
+- Imagen और Veo मॉडल
+- Gemini के एम्बेडिंग मॉडल
+- Gemini Robotics मॉडल
+- वीडियो, GIF या PDF फ़ाइलों वाले इनपुट
+- Gemini API में एजेंट की पब्लिक प्रीव्यू सुविधा
 
-## Étape suivante
+## आगे क्या करना है
 
-- **Prototyper avec l'historique des sessions** : utilisez [AI Studio Build](https://aistudio.google.com/apps?hl=fr) pour coder des applications et ajoutez votre clé API afin d'activer un historique des journaux de l'API Gemini pour les fonctionnalités d'IA.
-- **Réexécuter les journaux avec l'API Gemini Batch** : utilisez des ensembles de données pour l'échantillonnage des réponses et l'évaluation des modèles ou de la logique d'application en réexécutant les journaux avec l'[API Gemini Batch](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+- **सेशन के इतिहास के साथ प्रोटोटाइप बनाएं:** [AI Studio Build](https://aistudio.google.com/apps?hl=hi) का इस्तेमाल करके, कोड ऐप्लिकेशन बनाएं. साथ ही, एआई सुविधाओं के लिए Gemini API लॉग का इतिहास चालू करने के लिए, अपना एपीआई पासकोड जोड़ें.
+- **Gemini Batch API की मदद से लॉग फिर से चलाएं:** जवाब के सैंपल के लिए डेटासेट का इस्तेमाल करें. साथ ही, [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) की मदद से लॉग फिर से चलाकर, मॉडल या ऐप्लिकेशन लॉजिक का आकलन करें.
 
-Envoyer des commentaires
+सुझाव भेजें
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Dernière mise à jour le 2026/09/24 (UTC).
+आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया.
 
-Voulez-vous nous donner plus d'informations ?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/24 (UTC)."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-09-24 (UTC) को अपडेट किया गया."],[],[]]

@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=zh-TW
-fetched_at: 2026-10-12T07:02:50.390299+00:00
-title: "\u5f48\u6027\u63a8\u8ad6 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=tr
+fetched_at: 2026-10-19T05:44:04.325145+00:00
+title: "Flex \u00e7\u0131kar\u0131m\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 4 Argon hemen oynayabilirsiniz. [Deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=tr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
 
-提供意見
+Geri bildirim gönderin
 
-# 彈性推論
+# Flex çıkarımı
 
-說明：瞭解如何透過 Flex 推論層級節省費用
+Açıklama: Flex çıkarımı katmanıyla maliyetleri nasıl optimize edeceğinizi öğrenin
 
-Gemini Flex API 是推論層級，與標準費率相比，可節省 50% 的成本，但延遲時間不固定，且盡力提供服務。這項 API 適用於可容許延遲的工作負載，需要同步處理，但不需要標準 API 的即時效能。
+Gemini Flex API, değişken gecikme ve en iyi çaba kullanılabilirliği karşılığında standart ücretlere kıyasla% 50 maliyet tasarrufu sunan bir çıkarım katmanıdır. Bu API, eşzamanlı işleme gerektiren ancak standart API'nin gerçek zamanlı performansına ihtiyaç duymayan, gecikmeye toleranslı iş yükleri için tasarlanmıştır.
 
-## 如何使用 Flex
+## Flex nasıl kullanılır?
 
-如要使用彈性層級，請在要求主體中將 `service_tier` 指定為 `flex`。如果省略這個欄位，要求預設會使用標準層級。
+Esnek katmanı kullanmak için istek gövdesinde `service_tier` değerini `flex` olarak belirtin. Bu alan atlanırsa istekler varsayılan olarak standart katmanı kullanır.
 
 ### Python
 
@@ -116,57 +116,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
 }'
 ```
 
-## Flex 推論的運作方式
+## Flex çıkarımının işleyiş şekli
 
-Gemini Flex 推論可填補標準 API 與 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw) 24 小時處理時間之間的落差。這項服務會利用離峰時段的「可卸除」運算容量，為背景工作和循序工作流程提供符合成本效益的解決方案。
+Gemini Flex çıkarımı, standart API ile [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)'nin 24 saatlik geri dönüş süresi arasındaki boşluğu doldurur. Arka plan görevleri ve sıralı iş akışları için uygun maliyetli bir çözüm sunmak amacıyla yoğun olmayan saatlerde "atılabilir" işlem kapasitesini kullanır.
 
-| 功能 | Flex | 優先順序 | 標準 | 批次 |
+| Özellik | Yaratıcılığınızı | Öncelik | Standart | Toplu |
 | --- | --- | --- | --- | --- |
-| **定價** | 50% 折扣 | 比 Standard 方案多 75% 至 100% | 原價 | 50% 折扣 |
-| **延遲** | 分鐘 (目標為 1 至 15 分鐘) | 低 (秒) | 秒數轉換為分鐘數 | 長達 24 小時 |
-| **穩定性** | 盡可能取得容量 (可捨棄) | 高 (不會脫落) | 高 / 中高 | 高 (處理量) |
-| **介面** | 同步 | 同步 | 同步 | 非同步 |
+| **Fiyatlandırma** | %50 indirim | Standard'dan% 75-100 daha fazla | Tam fiyat | %50 indirim |
+| **Gecikme** | Dakika (1-15 dakika hedefi) | Düşük (saniye) | Saniyelerden dakikalara | En fazla 24 saat |
+| **Güvenilirlik** | En iyi sonuç (Sheddable) | Yüksek (Yük atılamaz) | Yüksek / Yüksek-orta | Yüksek (aktarım hızı için) |
+| **Arayüz** | Eşzamanlı | Eşzamanlı | Eşzamanlı | Eşzamansız |
 
-### 主要優點
+### Temel avantajlar
 
-- **成本效益**：大幅節省非正式評估、背景代理程式和資料充實的費用。
-- **輕鬆上手**：不必管理批次物件、工作 ID 或輪詢，只要在現有要求中新增單一參數即可。
-- **同步工作流程**：適合用於循序 API 鏈結，其中下一個要求取決於前一個要求的輸出內容，因此比代理功能工作流程的批次更具彈性。
+- **Maliyet verimliliği**: Üretim dışı değerlendirmeler, arka plan aracıları ve veri zenginleştirme için önemli ölçüde tasarruf sağlar.
+- **Düşük sürtünme**: Toplu nesneleri, iş kimliklerini veya yoklamayı yönetmeniz gerekmez. Mevcut isteklerinize tek bir parametre eklemeniz yeterlidir.
+- **Eşzamanlı iş akışları**: Bir sonraki isteğin bir öncekinin çıkışına bağlı olduğu sıralı API zincirleri için idealdir. Bu nedenle, ajan tabanlı iş akışları için toplu işlerden daha esnektir.
 
-### 用途
+### Kullanım alanları
 
-- **離線評估**：執行「LLM 做為評審」迴歸測試或排行榜。
-- **背景代理**：可接受延遲幾分鐘的循序工作，例如更新客戶關係管理系統、建立個人資料或內容審查。
-- **預算不足的研究**：學術實驗需要大量符記，但預算有限。
+- **Çevrimdışı değerlendirmeler**: "LLM-as-a-judge" regresyon testleri veya skor tabloları çalıştırma.
+- **Arka plan aracıları**: CRM güncellemeleri, profil oluşturma veya içerik denetleme gibi sıralı görevlerde birkaç dakikalık gecikme kabul edilebilir.
+- **Bütçe kısıtlamalı araştırma**: Sınırlı bir bütçeyle yüksek jeton hacmi gerektiren akademik denemeler.
 
-### 頻率限制
+### Hız sınırları
 
-Flex 推論流量會計入一般[頻率限制](https://aistudio.google.com/rate-limit?hl=zh-tw)，不會像 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw) 一樣提供延長的頻率限制。
+Esnek çıkarım trafiği, genel [hız sınırlarınıza](https://aistudio.google.com/rate-limit?hl=tr) dahil edilir. [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr) gibi genişletilmiş hız sınırları sunmaz.
 
-### 可卸除容量
+### Sheddable capacity (Yük atma kapasitesi)
 
-彈性流量的優先順序較低，如果標準流量突然暴增，系統可能會搶先處理或清除 Flex 要求，確保高優先順序使用者的容量。如要瞭解高優先順序推論，請參閱「[優先順序推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)」一文。
+Esnek trafik daha düşük öncelikli olarak değerlendirilir. Standart trafikte ani bir artış olursa yüksek öncelikli kullanıcılar için kapasite sağlamak amacıyla esnek istekler öncelikli olarak işlenebilir veya çıkarılabilir. Yüksek öncelikli çıkarım arıyorsanız [Öncelikli çıkarım](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr)'ı inceleyin.
 
-### 錯誤代碼
+### Hata kodları
 
-如果 Flex 容量不足或系統壅塞，API 會傳回標準錯誤代碼：
+Esnek kapasite kullanılamadığında veya sistemde yoğunluk olduğunda API, standart hata kodlarını döndürür:
 
-- **503 Service Unavailable**：目前已達用量上限。
-- **429 要求過多**：超過頻率限制或資源耗盡。
+- **503 Hizmet Kullanılamıyor**: Sistem şu anda tam kapasiteyle çalışıyor.
+- **429 Çok Fazla İstek**: Sıklık sınırlamaları veya kaynakların tükenmesi.
 
-### 客戶責任
+### Müşterinin sorumluluğunda
 
-- **沒有伺服器端備援**：為避免產生預期外的費用，如果 Flex 容量已滿，系統不會自動將 Flex 要求升級為標準層級。
-- **重試**：您必須自行導入用戶端重試邏輯，並採用指數輪詢策略。
-- **逾時**：由於 Flex 請求可能會排隊等候，建議將用戶端逾時時間延長至 10 分鐘以上，以免連線過早關閉。
+- **Sunucu tarafında yedek yok**: Beklenmedik ücretlendirmeleri önlemek için sistem, Flex kapasitesi doluysa Flex isteğini otomatik olarak Standart katmana yükseltmez.
+- **Yeniden denemeler**: Üstel geri çekilme ile kendi istemci tarafı yeniden deneme mantığınızı uygulamanız gerekir.
+- **Zaman aşımları**: Flex istekleri bir sırada bekleyebileceğinden, bağlantının erken kapatılmasını önlemek için istemci tarafı zaman aşımlarını 10 dakika veya daha uzun bir süreye çıkarmanızı öneririz.
 
-## 調整逾時視窗
+## Zaman aşımı aralıklarını ayarlama
 
-您可以為 REST API 和用戶端程式庫設定個別要求的逾時時間，但只有在使用用戶端程式庫時，才能設定全域逾時時間。
+REST API ve istemci kitaplıkları için istek başına zaman aşımlarını, yalnızca istemci kitaplıklarını kullanırken ise genel zaman aşımlarını yapılandırabilirsiniz.
 
-請務必確保用戶端逾時涵蓋預期的伺服器等待時間範圍 (例如 Flex 等候佇列為 600 秒以上)。SDK 逾時值的單位為毫秒。
+İstemci tarafı zaman aşımınızın her zaman amaçlanan sunucu bekleme süresini (ör. Flex bekleme sıraları için 600 saniye ve üzeri) kapsadığından emin olun. SDK'lar, zaman aşımı değerlerinin milisaniye cinsinden olmasını bekler.
 
-### 每個要求的逾時
+### İstek başına zaman aşımları
 
 ### Python
 
@@ -313,11 +313,11 @@ func main() {
 
 ### REST
 
-發出 REST 呼叫時，您可以結合使用 HTTP 標頭和 `curl` 選項來控管逾時：
+REST çağrıları yaparken HTTP üstbilgileri ve `curl` seçeneklerini birlikte kullanarak zaman aşımlarını kontrol edebilirsiniz:
 
-- **`X-Server-Timeout` 標頭 (伺服器端逾時)**：這個標頭會向 Gemini API 伺服器建議偏好的逾時時間長度 (預設為 600 秒)。伺服器會盡量遵守這項要求，但無法保證一定會這麼做。值應以秒為單位。
-- **`--max-time` in `curl` (用戶端逾時)**：`curl --max-time
-  <seconds>` 選項會為 `curl` 等待整個作業完成的總時間 (以秒為單位) 設定硬性限制。這是用戶端安全措施。
+- **`X-Server-Timeout` header (sunucu tarafı zaman aşımı)**: Bu başlık, Gemini API sunucusu için tercih edilen bir zaman aşımı süresi (varsayılan 600 saniye) önerir. Sunucu bu isteği yerine getirmeye çalışır ancak bu garanti edilmez. Değer saniye cinsinden olmalıdır.
+- **`curl` içinde `--max-time` (İstemci Tarafı Zaman Aşımı)**: `curl --max-time
+  <seconds>` seçeneği, `curl` aracının tüm işlemin tamamlanmasını bekleyeceği toplam süre (saniye cinsinden) için kesin bir sınır belirler. Bu, istemci tarafında uygulanan bir güvenlik önlemidir.
 
 ```
  # Set a server timeout hint of 120 seconds and a client-side curl timeout of 125 seconds.
@@ -333,9 +333,9 @@ func main() {
  }'
 ```
 
-### 全域逾時
+### Genel zaman aşımı
 
-如要讓透過特定 `genai.Client` 執行個體 (僅限用戶端程式庫) 發出的所有 API 呼叫都採用預設逾時，您可以在使用 `http_options` 和 `genai.types.HttpOptions` 初始化用戶端時設定這項功能。
+Belirli bir `genai.Client` örneği (yalnızca istemci kitaplıkları) üzerinden yapılan tüm API çağrılarının varsayılan bir zaman aşımı olmasını istiyorsanız `http_options` ve `genai.types.HttpOptions` kullanarak istemciyi başlatırken bunu yapılandırabilirsiniz.
 
 ### Python
 
@@ -482,9 +482,9 @@ await main();
  }
 ```
 
-## 實作重試機制
+## Yeniden deneme uygulama
 
-由於 Flex 可捨棄，且會發生 503 錯誤，以下是選擇性實作重試邏輯的範例，可繼續處理失敗的要求：
+Flex, yükü azaltılabilir olduğundan ve 503 hatalarıyla başarısız olduğundan, başarısız isteklerle devam etmek için isteğe bağlı olarak yeniden deneme mantığını uygulamanın bir örneğini aşağıda bulabilirsiniz:
 
 ### Python
 
@@ -626,42 +626,43 @@ print(response.text)
  }
 ```
 
-## 定價
+## Fiyatlandırma
 
-Flex 推論的價格為[標準 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw) 的 50%，並以每詞元計費。
+Flex çıkarımı, [standart API](https://ai.google.dev/gemini-api/docs/pricing?hl=tr)'nin% 50'si oranında fiyatlandırılır ve parça başına faturalandırılır.
 
-## 支援的模型
+## Desteklenen modeller
 
-下列模型支援 Flex 推論：
+Aşağıdaki modeller Flex çıkarımını destekler:
 
-| 模型 | Flex 推論 |
+| Model | Flex çıkarımı |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3 Pro Image 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=tr) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=tr) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=tr) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=tr) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=tr) | ✔️ |
+| [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=tr) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=tr) | ✔️ |
 
-## 後續步驟
+## Sırada ne var?
 
-請參閱 Gemini 的其他[推論和最佳化](https://ai.google.dev/gemini-api/docs/optimization?hl=zh-tw)選項：
+Gemini'ın diğer [çıkarım ve optimizasyon](https://ai.google.dev/gemini-api/docs/optimization?hl=tr) seçenekleri hakkında bilgi edinin:
 
-- [優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)，實現超低延遲。
-- [批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)：在 24 小時內非同步處理。
-- [脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)功能可降低輸入詞元費用。
+- Ultra düşük gecikme için [öncelikli çıkarım](https://ai.google.dev/gemini-api/docs/priority-inference?hl=tr).
+- 24 saat içinde eşzamansız işleme için [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr).
+- Giriş jetonu maliyetlerini azaltmak için [bağlam önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr).
 
-提供意見
+Geri bildirim gönderin
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-上次更新時間：2026-10-09 (世界標準時間)。
+Son güncelleme tarihi: 2026-10-13 UTC.
 
-想進一步說明嗎？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-09 (世界標準時間)。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-13 UTC."],[],[]]

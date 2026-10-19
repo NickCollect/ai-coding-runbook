@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi
-fetched_at: 2026-10-12T06:51:05.621826+00:00
-title: "Google Maps \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0917\u094d\u0930\u093e\u0909\u0902\u0921\u093f\u0902\u0917 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi
+fetched_at: 2026-10-19T05:37:34.126367+00:00
+title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# Google Maps की मदद से ग्राउंडिंग करना
+# Căn cứ vào Google Maps
 
-Google Maps से सटीक जानकारी पाने की सुविधा, Gemini की जनरेटिव क्षमताओं को Google Maps के सटीक, तथ्यों पर आधारित, और अप-टू-डेट डेटा से कनेक्ट करती है. इस सुविधा की मदद से डेवलपर, अपने ऐप्लिकेशन में जगह की जानकारी का इस्तेमाल करने वाली सुविधा को आसानी से शामिल कर सकते हैं. जब किसी उपयोगकर्ता की क्वेरी में Maps के डेटा से जुड़ा कॉन्टेक्स्ट होता है, तो Gemini मॉडल, Google Maps का इस्तेमाल करता है. इससे वह उपयोगकर्ता को तथ्यों पर आधारित और अप-टू-डेट जवाब दे पाता है. ये जवाब, उपयोगकर्ता की बताई गई जगह या जगह की अनुमानित जानकारी के हिसाब से होते हैं.
+Tính năng Neo bám vào Google Maps kết nối các khả năng tạo nội dung của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng tích hợp chức năng nhận biết vị trí vào ứng dụng của họ. Khi một truy vấn của người dùng có bối cảnh liên quan đến dữ liệu trên Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời mới và chính xác về mặt thực tế, đồng thời phù hợp với vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
 
-- **सटीक जवाब, जो जगह के हिसाब से हों:** भौगोलिक रूप से खास क्वेरी के लिए, Google Maps के बड़े और मौजूदा डेटा का इस्तेमाल करें.
-- **बेहतर तरीके से मनमुताबिक बनाना:** उपयोगकर्ता की ओर से दी गई जगहों के आधार पर, सुझाव और जानकारी को मनमुताबिक बनाना.
+- **Câu trả lời chính xác và nhận biết vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các truy vấn cụ thể về mặt địa lý.
+- **Nâng cao khả năng cá nhân hoá:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
 
-## अपनी प्रोफ़ाइल बनाना शुरू करें
+## Bắt đầu
 
-इस उदाहरण में, Google Maps के साथ ग्राउंडिंग को अपने ऐप्लिकेशन में इंटिग्रेट करने का तरीका बताया गया है. इससे उपयोगकर्ता की क्वेरी के जवाब सटीक और जगह के हिसाब से दिए जा सकते हैं. इस प्रॉम्प्ट में, स्थानीय सुझावों के बारे में पूछा गया है. इसमें उपयोगकर्ता की जगह की जानकारी देने का विकल्प भी है. इससे Gemini मॉडल को Google Maps का डेटा इस्तेमाल करने की अनुमति मिलती है.
+Ví dụ này minh hoạ cách tích hợp tính năng Neo bám vào Google Maps vào ứng dụng của bạn để cung cấp câu trả lời chính xác và nhận biết vị trí cho các truy vấn của người dùng. Câu lệnh yêu cầu các đề xuất tại địa phương kèm theo vị trí không bắt buộc của người dùng, cho phép mô hình Gemini sử dụng dữ liệu của Google Maps.
 
 ### Python
 
@@ -163,7 +163,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -251,38 +251,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Google Maps से जानकारी लेने की सुविधा कैसे काम करती है
+## Cách hoạt động của tính năng Neo bám vào Google Maps
 
-Google Maps के साथ Grounding की सुविधा, Gemini API को Google Geo के साथ इंटिग्रेट करती है. इसके लिए, Maps API को Grounding सोर्स के तौर पर इस्तेमाल किया जाता है. जब किसी उपयोगकर्ता की क्वेरी में भौगोलिक कॉन्टेक्स्ट शामिल होता है, तब Gemini मॉडल, Google Maps से जानकारी लेने की सुविधा का इस्तेमाल कर सकता है. इसके बाद, मॉडल, दी गई जगह से जुड़े Google Maps के डेटा के आधार पर जवाब जनरेट कर सकता है.
+Tính năng Neo bám vào Google Maps tích hợp Gemini API với hệ sinh thái Google Geo bằng cách sử dụng Maps API làm nguồn neo bám. Khi truy vấn của người dùng chứa bối cảnh địa lý, mô hình Gemini có thể gọi công cụ Neo bám vào Google Maps. Sau đó, mô hình này có thể tạo câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
 
-आम तौर पर, इस प्रोसेस में ये काम शामिल होते हैं:
+Quá trình này thường bao gồm:
 
-1. **उपयोगकर्ता की क्वेरी:** कोई उपयोगकर्ता आपके ऐप्लिकेशन पर क्वेरी सबमिट करता है.इसमें भौगोलिक जानकारी शामिल हो सकती है. उदाहरण के लिए, "मेरे आस-पास की कॉफ़ी शॉप", "सैन फ़्रांसिस्को के म्यूज़ियम".
-2. **टूल का इस्तेमाल करना:** Gemini मॉडल, भौगोलिक जानकारी से जुड़े इंटेंट को पहचानकर, Grounding with Google Maps टूल का इस्तेमाल करता है. इस टूल को उपयोगकर्ता के `latitude` और `longitude` के साथ भी इस्तेमाल किया जा सकता है. यह टूल, टेक्स्ट के आधार पर खोज करने वाला टूल है. यह Maps पर खोज करने की सुविधा की तरह ही काम करता है. इसमें स्थानीय क्वेरी ("मेरे आस-पास") के लिए निर्देशांकों का इस्तेमाल किया जाएगा. वहीं, खास या गैर-स्थानीय क्वेरी पर, जगह की जानकारी का कोई असर नहीं पड़ेगा.
-3. **डेटा वापस पाना:** 'Google Maps के साथ ग्राउंडिंग' सेवा, Google Maps से काम की जानकारी (जैसे, जगहें, समीक्षाएं, फ़ोटो, पते, कारोबार के खुले होने का समय) के बारे में क्वेरी करती है.
-4. **भरोसेमंद स्रोतों से जानकारी लेकर जवाब जनरेट करना:** Maps से मिले डेटा का इस्तेमाल, Gemini मॉडल के जवाब में जानकारी देने के लिए किया जाता है. इससे यह पक्का किया जाता है कि जवाब में दी गई जानकारी सही और काम की हो.
-5. **जवाब और एनोटेशन:** मॉडल, Google Maps के सोर्स से लिंक करने वाले इनलाइन एनोटेशन के साथ टेक्स्ट वाला जवाब देता है. इससे डेवलपर, उद्धरण दिखा पाते हैं.
+1. **Truy vấn của người dùng:** Người dùng gửi một truy vấn đến ứng dụng của bạn, có thể bao gồm cả bối cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
+2. **Gọi công cụ:** Mô hình Gemini nhận ra ý định địa lý và gọi công cụ Neo bám vào Google Maps. Bạn có thể cung cấp `latitude` và `longitude` của người dùng cho công cụ này (không bắt buộc). Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như tìm kiếm trên Maps, trong đó các truy vấn tại địa phương ("gần tôi") sẽ sử dụng toạ độ, còn các truy vấn cụ thể hoặc không phải tại địa phương sẽ ít bị ảnh hưởng bởi vị trí rõ ràng.
+3. **Truy xuất dữ liệu:** Dịch vụ Neo bám vào Google Maps truy vấn Google Maps để tìm thông tin liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
+4. **Tạo nội dung dựa trên dữ liệu:** Dữ liệu trên Maps được truy xuất sẽ được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ phù hợp về mặt thực tế.
+5. **Câu trả lời và chú thích:** Mô hình này trả về một câu trả lời bằng văn bản kèm theo chú thích nội tuyến liên kết đến các nguồn trên Google Maps, cho phép nhà phát triển hiển thị trích dẫn.
 
-## Google Maps से जानकारी लेने की सुविधा का इस्तेमाल कब और क्यों करना चाहिए
+## Lý do và thời điểm nên sử dụng tính năng Neo bám vào Google Maps
 
-Google Maps के साथ ग्राउंडिंग की सुविधा उन ऐप्लिकेशन के लिए सबसे सही है जिन्हें सटीक, अप-टू-डेट, और जगह के हिसाब से जानकारी चाहिए. यह लोगों को काम का और उनकी दिलचस्पी के हिसाब से कॉन्टेंट उपलब्ध कराता है. इससे लोगों को बेहतर अनुभव मिलता है. यह कॉन्टेंट, Google Maps के विशाल डेटाबेस से लिया जाता है. इस डेटाबेस में, दुनिया भर की 25 करोड़ से ज़्यादा जगहों की जानकारी मौजूद है.
+Tính năng Neo bám vào Google Maps là lựa chọn lý tưởng cho những ứng dụng yêu cầu thông tin chính xác, mới nhất và cụ thể về vị trí. Tính năng này giúp nâng cao trải nghiệm người dùng bằng cách cung cấp nội dung phù hợp và được cá nhân hoá dựa trên cơ sở dữ liệu phong phú của Google Maps về hơn 250 triệu địa điểm trên toàn thế giới.
 
-Google Maps से जानकारी लेने की सुविधा का इस्तेमाल तब करना चाहिए, जब आपके ऐप्लिकेशन को:
+Bạn nên sử dụng tính năng Neo bám vào Google Maps khi ứng dụng của bạn cần:
 
-- जगह के हिसाब से पूछे गए सवालों के पूरे और सटीक जवाब दें.
-- बातचीत करके ट्रिप प्लान करने वाले टूल और लोकल गाइड तैयार करना.
-- जगह की जानकारी और उपयोगकर्ता की प्राथमिकताओं के आधार पर, लोकप्रिय जगहों के सुझाव दो. जैसे, रेस्टोरेंट या दुकानें.
-- सोशल मीडिया, खुदरा कारोबार या खाना डिलीवर करने वाली सेवाओं के लिए, जगह की जानकारी के हिसाब से अनुभव बनाएं.
+- Cung cấp câu trả lời đầy đủ và chính xác cho các câu hỏi cụ thể về địa lý.
+- Xây dựng chuyên gia lên kế hoạch chuyến đi và Local Guides dựa trên cuộc trò chuyện.
+- Đề xuất các địa điểm yêu thích dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
+- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ xã hội, bán lẻ hoặc giao đồ ăn.
 
-Google Maps के साथ ग्राउंडिंग की सुविधा, उन मामलों में सबसे ज़्यादा काम आती है जहां आस-पास की जगह और मौजूदा तथ्यों से जुड़ा डेटा ज़रूरी होता है. जैसे, "मेरे आस-पास सबसे अच्छी कॉफ़ी शॉप" खोजना या दिशा-निर्देश पाना.
+Tính năng Neo bám vào Google Maps vượt trội trong các trường hợp sử dụng mà khoảng cách và dữ liệu thực tế hiện tại là rất quan trọng, chẳng hạn như tìm "quán cà phê ngon nhất gần tôi" hoặc xem chỉ đường.
 
-## उपयोग के उदाहरण
+## Trường hợp sử dụng
 
-Google Maps से जानकारी लेने की सुविधा का इस्तेमाल, जगह की जानकारी के हिसाब से अलग-अलग तरह के कामों के लिए किया जा सकता है.
+Tính năng Neo bám vào Google Maps hỗ trợ nhiều trường hợp sử dụng nhận biết vị trí.
 
-### जगह के हिसाब से पूछे गए सवालों के जवाब देना
+### Xử lý các câu hỏi cụ thể về địa điểm
 
-किसी जगह के बारे में ज़्यादा जानकारी वाले सवाल पूछें. इससे आपको Google पर लोगों की समीक्षाओं और Maps के अन्य डेटा के आधार पर जवाब मिलेंगे.
+Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên bài đánh giá của người dùng Google và các dữ liệu khác trên Maps.
 
 ### Python
 
@@ -417,7 +417,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -486,9 +486,9 @@ func main() {
 }
 ```
 
-### जगह की जानकारी के आधार पर मनमुताबिक अनुभव देना
+### Cung cấp tính năng cá nhân hoá dựa trên vị trí
 
-किसी उपयोगकर्ता की प्राथमिकताओं और किसी खास इलाके के हिसाब से सुझाव पाएं.
+Nhận các đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
 
 ### Python
 
@@ -622,7 +622,7 @@ if (interaction.steps().isPresent()) {
 }
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -691,9 +691,9 @@ func main() {
 }
 ```
 
-### यात्रा की योजना बनाने में मदद करना
+### Hỗ trợ lập kế hoạch hành trình
 
-एक से ज़्यादा दिनों की यात्रा के प्लान जनरेट करना. इनमें अलग-अलग जगहों के बारे में जानकारी और वहाँ जाने का रास्ता शामिल होता है. यह सुविधा, यात्रा से जुड़े ऐप्लिकेशन के लिए सबसे सही है.
+Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
 
 ### Python
 
@@ -772,7 +772,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### ऐप पर जाएं
+### Go
 
 ```
 package main
@@ -837,98 +837,103 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## सेवा के इस्तेमाल से जुड़ी ज़रूरी शर्तें
+## Yêu cầu về việc sử dụng dịch vụ
 
-इस सेक्शन में, Google Maps के साथ Grounding की सुविधा इस्तेमाल करने की ज़रूरी शर्तों के बारे में बताया गया है.
+Phần này mô tả các yêu cầu về việc sử dụng dịch vụ đối với tính năng Neo bám vào Google Maps.
 
-### उपयोगकर्ता को Google Maps के सोर्स के इस्तेमाल के बारे में जानकारी देना
+### Thông báo cho người dùng về việc sử dụng các nguồn trên Google Maps
 
-Google Maps से मिले हर भरोसेमंद जवाब के साथ, आपको `model_output` चरण के कॉन्टेंट ब्लॉक पर सोर्स के एनोटेशन मिलेंगे. ये एनोटेशन, हर जवाब के साथ दिखेंगे. यह मेटाडेटा दिखता है:
+Với mỗi kết quả dựa trên dữ liệu của Google Maps, bạn sẽ nhận được chú thích nguồn trên các khối nội dung của bước `model_output` hỗ trợ từng câu trả lời. Siêu dữ liệu sau đây sẽ được trả về:
 
-- सोर्स यूआरएल
-- नाम
+- URL nguồn
+- tên
 
-Google Maps से जानकारी लेने की सुविधा के ज़रिए मिले नतीजे दिखाते समय, आपको Google Maps के जुड़े हुए सोर्स के बारे में बताना होगा. साथ ही, अपने उपयोगकर्ताओं को यह जानकारी देनी होगी:
+Khi trình bày kết quả từ tính năng Neo bám vào Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng của bạn về những điều sau:
 
-- Google Maps के सोर्स, जनरेट किए गए कॉन्टेंट के ठीक बाद दिखने चाहिए. साथ ही, सोर्स में मौजूद कॉन्टेंट, जनरेट किए गए कॉन्टेंट से मिलता-जुलता होना चाहिए. जनरेट किए गए इस कॉन्टेंट को, Google Maps के भरोसेमंद नतीजे भी कहा जाता है.
-- Google Maps के सोर्स, उपयोगकर्ता के एक इंटरैक्शन में दिखने चाहिए.
+- Các nguồn trên Google Maps phải xuất hiện ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả dựa trên dữ liệu của Google Maps.
+- Người dùng phải xem được các nguồn trên Google Maps trong một lượt tương tác.
 
-### Google Maps में किसी जगह पर ले जाने वाले लिंक के साथ Google Maps के सोर्स दिखाना
+### Hiển thị các nguồn trên Google Maps kèm theo đường liên kết đến Google Maps
 
-हर सोर्स एनोटेशन के लिए, लिंक की झलक इन ज़रूरी शर्तों के मुताबिक जनरेट की जानी चाहिए:
+Đối với mỗi chú thích nguồn, bạn phải tạo bản xem trước đường liên kết theo các yêu cầu sau:
 
-- Google Maps के टेक्स्ट [एट्रिब्यूशन के दिशा-निर्देशों](#maps-attribution-guidelines) का पालन करते हुए, हर सोर्स को Google Maps के लिए एट्रिब्यूट करें.
-- जवाब में दिए गए सोर्स का नाम दिखाएं.
-- एनोटेशन में मौजूद `url` का इस्तेमाल करके, सोर्स से लिंक करें.
+- Ghi công từng nguồn cho Google Maps theo nguyên tắc ghi công văn bản của Google Maps
+  .
+- Hiển thị tên nguồn được cung cấp trong câu trả lời.
+- Liên kết đến nguồn bằng cách sử dụng `url` từ chú thích.
 
-### Google Maps में टेक्स्ट एट्रिब्यूशन के लिए दिशा-निर्देश
+### Nguyên tắc ghi công văn bản của Google Maps
 
-Google Maps में टेक्स्ट के तौर पर सोर्स एट्रिब्यूट करते समय, इन दिशा-निर्देशों का पालन करें:
+Khi ghi công các nguồn cho Google Maps bằng văn bản, hãy tuân theo các nguyên tắc sau:
 
-- Google Maps के टेक्स्ट में किसी भी तरह का बदलाव न करें:
-  - Google Maps के कैपिटलाइज़ेशन में बदलाव न करें.
-  - Google Maps को एक से ज़्यादा लाइनों में न लिखें.
-  - Google Maps को किसी दूसरी भाषा में स्थानीयकृत न करें.
-  - एचटीएमएल एट्रिब्यूट translate="no" का इस्तेमाल करके, ब्राउज़र को Google Maps का अनुवाद करने से रोकें.
+- Không sửa đổi văn bản Google Maps theo bất kỳ cách nào:
+  - Không thay đổi cách viết hoa của Google Maps.
+  - Không chuyển Google Maps sang nhiều dòng.
+  - Không bản địa hoá Google Maps sang ngôn ngữ khác.
+  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
 
-Google Maps के लिए डेटा उपलब्ध कराने वाली कुछ कंपनियों और उनके लाइसेंस की शर्तों के बारे में ज़्यादा जानने के लिए, [Google Maps और Google Earth के कानूनी नोटिस](https://www.google.com/help/legalnotices_maps/?hl=hi) देखें.
+Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và điều khoản cấp phép của họ, hãy xem [thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
 
-## सबसे सही तरीके
+## Các phương pháp hay nhất
 
-- **उपयोगकर्ता की जगह की जानकारी दें:** उपयोगकर्ता को उसकी दिलचस्पी के हिसाब से सबसे सटीक जवाब देने के लिए, `google_maps` टूल कॉन्फ़िगरेशन में हमेशा `latitude` और `longitude` शामिल करें. ऐसा तब करें, जब आपको उपयोगकर्ता की जगह की जानकारी पता हो.
-- **असली उपयोगकर्ताओं को जानकारी दें:** असली उपयोगकर्ताओं को साफ़ तौर पर बताएं कि उनकी क्वेरी के जवाब देने के लिए, Google Maps के डेटा का इस्तेमाल किया जा रहा है. खास तौर पर, तब जब टूल चालू हो.
-- **ज़रूरत न होने पर टॉगल बंद करें:** Google Maps के साथ ग्राउंडिंग की सुविधा डिफ़ॉल्ट रूप से बंद होती है. इसे सिर्फ़ तब चालू करें (`"tools": [{"type": "google_maps"}]`), जब किसी क्वेरी में भौगोलिक संदर्भ साफ़ तौर पर दिया गया हो. इससे परफ़ॉर्मेंस और लागत को ऑप्टिमाइज़ किया जा सकता है.
+- **Cung cấp vị trí của người dùng:** Để có câu trả lời phù hợp và được cá nhân hoá nhất, hãy luôn thêm `latitude` và `longitude` vào cấu hình công cụ `google_maps` khi bạn biết vị trí của người dùng.
+- **Thông báo cho người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu của Google Maps đang được sử dụng để trả lời truy vấn của họ, đặc biệt là khi công cụ này được bật.
+- **Tắt khi không cần:** Tính năng Neo bám vào Google Maps sẽ tắt theo mặc định. Chỉ bật tính năng này (`"tools": [{"type": "google_maps"}]`) khi một truy vấn có bối cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
 
-## सीमाएं
+## Các điểm hạn chế
 
-- फ़िलहाल, Google Maps के साथ बातचीत करने की सुविधा सिर्फ़ अंग्रेज़ी में उपलब्ध है. इसमें प्रॉम्प्ट और जवाब, दोनों अंग्रेज़ी में ही मिलते हैं.
-- ऐसा हो सकता है कि यह टूल सभी देशों/इलाकों में उपलब्ध न हो.
-- जगह की सटीक जानकारी और Maps पर उपलब्ध डेटा के आधार पर, नतीजे अलग-अलग हो सकते हैं.
-- **देश या इलाके के हिसाब से उपलब्धता:** Google Maps के साथ ग्राउंडिंग की सुविधा, दुनिया भर में उपलब्ध है.
-- **डिफ़ॉल्ट स्थिति:** 'Google Maps से जानकारी लेने की सुविधा' टूल डिफ़ॉल्ट रूप से बंद होता है.
-  आपको इसे अपने एपीआई अनुरोधों में साफ़ तौर पर चालू करना होगा.
+- Tính năng Neo bám vào Google Maps hiện chỉ hỗ trợ câu lệnh và câu trả lời bằng tiếng Anh.
+- Công cụ này có thể không được cung cấp ở một số khu vực.
+- Kết quả có thể khác nhau dựa trên độ chính xác của vị trí và dữ liệu có sẵn trên Maps.
+- **Phạm vi địa lý:** Tính năng Neo bám vào Google Maps được cung cấp trên toàn cầu.
+- **Trạng thái mặc định:** Công cụ Neo bám vào Google Maps sẽ tắt theo mặc định.
+  Bạn phải bật công cụ này một cách rõ ràng trong các yêu cầu API.
 
-## कीमत और दर की सीमाएं
+## Giá và hạn mức
 
-Google Maps से जानकारी लेने की सुविधा की कीमत, मॉडल जनरेशन के हिसाब से अलग-अलग होती है:
+Giá của tính năng Neo bám vào Google Maps sẽ khác nhau tuỳ thuộc vào thế hệ mô hình:
 
-- **Gemini 3 और नए मॉडल:** आपके प्रोजेक्ट के लिए, हर उस सर्च क्वेरी का शुल्क लिया जाता है जिसे मॉडल पूरा करता है. Gemini 3 और नए मॉडल के लिए, हर महीने 5,000 अनुरोध मुफ़्त में किए जा सकते हैं. इसके बाद, **हर 1,000 सर्च क्वेरी के लिए 14 डॉलर** का शुल्क लिया जाता है. एक खोज प्रॉम्प्ट (मॉडल को भेजा गया आपका एपीआई अनुरोध) के जवाब में, मॉडल ज़रूरी जानकारी पाने के लिए कई सर्च क्वेरी चला सकता है. इनमें से हर क्वेरी को, टूल के बिल किए जाने वाले इस्तेमाल के तौर पर गिना जाता है.
-- **Gemini 2.5 और इससे पुराने मॉडल:** आपके प्रोजेक्ट के लिए, हर सर्च प्रॉम्प्ट के हिसाब से बिल भेजा जाता है. इसके लिए, 1,000 ग्राउंडेड प्रॉम्प्ट के लिए 25 डॉलर लिए जाते हैं. किसी अनुरोध के लिए बिलिंग सिर्फ़ तब की जाती है, जब प्रॉम्प्ट से Google Maps के कम से कम एक भरोसेमंद नतीजे मिलते हैं. भले ही, उस नतीजे को पाने के लिए मॉडल ने कितनी भी सर्च क्वेरी की हों.
+- **Mô hình Gemini 3 trở lên:** Dự án của bạn sẽ bị tính phí cho mỗi cụm từ tìm kiếm mà mô hình quyết định thực thi, với 5.000 yêu cầu miễn phí mỗi tháng được chia sẻ trên tất cả các mô hình Gemini 3 trở lên, sau đó là **14 USD cho mỗi 1.000 cụm từ tìm kiếm**. Một câu lệnh tìm kiếm (yêu cầu API của bạn đối với mô hình) có thể khiến mô hình thực thi nhiều cụm từ tìm kiếm để tìm thông tin cần thiết. Mỗi truy vấn này được tính là một lần sử dụng công cụ có tính phí.
+- **Mô hình Gemini 2.5 trở xuống:** Dự án của bạn sẽ bị tính phí cho mỗi câu lệnh tìm kiếm (25 USD cho mỗi 1.000 câu lệnh dựa trên dữ liệu). Yêu cầu chỉ bị tính phí nếu câu lệnh trả về thành công ít nhất một kết quả dựa trên dữ liệu của Google Maps, bất kể mô hình đã thực hiện bao nhiêu truy vấn tìm kiếm riêng lẻ ở nội bộ để nhận được kết quả đó.
 
-Google Maps से जानकारी लेने की सुविधा के लिए तय किया गया कोटा, आम तौर पर Gemini मॉडल के लिए अनुरोध संख्या सीमित करने के मुताबिक होता है. शुल्क के बारे में ज़्यादा जानकारी के लिए, [Gemini API के शुल्क वाला पेज](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) देखें.
+Hạn mức cho tính năng Neo bám vào Google Maps thường phù hợp với hạn mức của mô hình Gemini cơ bản. Để biết thông tin chi tiết về giá, hãy xem trang [Giá của Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
 
-## इन मॉडल के साथ काम करता है
+## Mô hình được hỗ trợ
 
-Google Maps से जानकारी लेने की सुविधा, इन मॉडल के साथ काम करती है:
+Các mô hình sau đây hỗ trợ tính năng Neo bám vào Google Maps:
 
-| मॉडल | Google Maps से सटीक जानकारी पाने की सुविधा |
+| Mô hình | Neo bám vào Google Maps |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=hi) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=hi) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=hi) | ✔️ |
-| [Gemini 3.1 Pro की झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=hi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi) | ✔️ |
-| [Gemini 3 Flash की झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=hi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=hi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=vi) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=vi) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=vi) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3.1 Pro (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3 Flash (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
 
-## इस्तेमाल किए जा सकने वाले टूल कॉम्बिनेशन
+## Các tổ hợp công cụ được hỗ trợ
 
-ज़्यादा मुश्किल सवालों के जवाब पाने के लिए, Google Maps के साथ-साथ पहले से मौजूद अन्य टूल का इस्तेमाल किया जा सकता है. जैसे, [Google Search के साथ ग्राउंडिंग](https://ai.google.dev/gemini-api/docs/google-search?hl=hi). यह सुविधा Gemini 3.5 Flash-Lite और इसके बाद के मॉडल पर काम करती है.
-Gemini 3 मॉडल, इन बिल्ट-इन टूल को कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ इस्तेमाल करने की सुविधा भी देते हैं. [टूल कॉम्बिनेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) पेज पर जाकर ज़्यादा जानें.
+Bạn có thể sử dụng tính năng Neo bám vào Google Maps với các công cụ tích hợp khác như
+[Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) (được hỗ trợ trên
+mô hình Gemini 3.5 Flash-Lite trở lên) để hỗ trợ các trường hợp sử dụng phức tạp hơn.
+Các mô hình Gemini 3 cũng hỗ trợ việc kết hợp các công cụ tích hợp này với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang về các
+[tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
-## आगे क्या करना है
+## Bước tiếp theo
 
-- [उपलब्ध अन्य टूल](https://ai.google.dev/gemini-api/docs/tools?hl=hi) के बारे में जानें.
-- ज़िम्मेदारी से एआई का इस्तेमाल करने के सबसे सही तरीकों और Gemini API के सुरक्षा फ़िल्टर के बारे में ज़्यादा जानने के लिए, [सुरक्षा सेटिंग से जुड़ी गाइड](https://ai.google.dev/gemini-api/docs/safety-settings?hl=hi) देखें.
+- Tìm hiểu về các [công cụ khác hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi).
+- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [hướng dẫn về chế độ cài đặt An toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-10-09 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-10-13 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-10-09 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]

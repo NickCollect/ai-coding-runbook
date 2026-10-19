@@ -1,52 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video?hl=pl
-fetched_at: 2026-10-12T06:59:32.919999+00:00
-title: "Generowanie film\u00f3w w interfejsie Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video?hl=he
+fetched_at: 2026-10-19T05:57:50.081630+00:00
+title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05e1\u05e8\u05d8\u05d5\u05e0\u05d9\u05dd \u05d1-Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+‫Gemini 4 Argon זמין עכשיו. [רוצים לנסות?](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=he)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Prześlij opinię
+שליחת משוב
 
-# Generowanie filmów w interfejsie Gemini API
+# יצירת סרטונים ב-Gemini API
 
-Interfejs Gemini API oferuje 2 modele do generowania filmów,
-[Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=pl) i [Veo](https://ai.google.dev/gemini-api/docs/veo?hl=pl).
-Każdy z nich jest przeznaczony do innych procesów.
+‫Gemini API מציע שני מודלים ליצירת סרטונים: [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=he) ו-[Veo](https://ai.google.dev/gemini-api/docs/veo?hl=he).
+כל אחד מהם מיועד לתהליכי עבודה שונים.
 
-Używaj Gemini Omni Flash jako domyślnego modelu do generowania filmów. Zapewnia on lepszą spójność filmów, rozumowanie wieloźródłowe (obsługuje jednocześnie tekst, obrazy, dźwięk i wideo), spójność postaci, dokładność faktów oraz wieloetapowe edytowanie w trybie konwersacyjnym (np. zastępowanie elementów lub zmiany perspektywy). Używaj Veo 3.1, jeśli potrzebujesz konkretnych funkcji, takich jak rozszerzanie scen, sterowanie ostatnią klatką lub integracja z starszymi potokami.
+להשתמש ב-Gemini Omni Flash כמודל ברירת המחדל ליצירת סרטונים. הוא מספק עקביות מעולה בסרטונים, חשיבה רציונלית מרובת קלטים (תמיכה בקלטים של טקסט, תמונות, אודיו וסרטונים בו-זמנית), עקביות של הדמויות, דיוק עובדתי ועריכה רב-שלבית בממשק שיחה (למשל, החלפת רכיבים או שינויים בפרספקטיבה). אם אתם צריכים יכולות ספציפיות כמו הרחבת סצנה, שליטה בפריים האחרון או שילוב עם צינורות עיבוד נתונים מדור קודם.
 
 ## Gemini Omni Flash
 
-Gemini Omni Flash to szybki, multimodalny model do generowania filmów i konwersacyjnej edycji filmów. Doskonale radzi sobie z szybkim przekształcaniem podpowiedzi tekstowych i obrazów w krótkie filmy oraz umożliwia dopracowywanie wyników w wielu etapach za pomocą interfejsu Interactions API.
+‫Gemini Omni Flash הוא מודל מהיר ומולטי-מודאלי ליצירת סרטונים ולעריכה של סרטונים בשיחה. הכלי מצטיין בהפיכת הנחיות טקסט ותמונות לסרטונים קצרים במהירות, ומאפשר לשפר את התוצאות בכמה שלבים באמצעות Interactions API.
 
-[Pierwsze kroki z Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=pl)
+[איך מתחילים להשתמש ב-Gemini Omni Flash →](https://ai.google.dev/gemini-api/docs/omni?hl=he)
 
 ## Veo 3.1
 
-Veo 3.1 to model do generowania filmów z natywnym dźwiękiem. Obsługuje funkcje takie jak rozszerzanie filmów, generowanie klatek i kierowanie na podstawie obrazów za pomocą interfejsu `generateContent` API.
+‫Veo 3.1 הוא מודל ליצירת סרטונים עם אודיו מובנה. הוא תומך בתכונות כמו הרחבת סרטונים, יצירה ספציפית של פריימים והנחיות מבוססות-תמונות באמצעות `generateContent` API.
 
-[Pierwsze kroki z Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=pl)
+[איך מתחילים לעבוד עם Veo 3.1 →](https://ai.google.dev/gemini-api/docs/veo?hl=he)
 
-## Rozpoznawanie filmów
+## הבנת סרטונים
 
-Jeśli musisz wczytać i przeanalizować istniejące treści wideo, a nie generować
-nowych filmów, zapoznaj się z przewodnikiem [Rozpoznawanie filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl).
+אם אתם צריכים להטמיע ולנתח תוכן וידאו קיים במקום ליצור סרטון חדש, כדאי לעיין ב[מדריך להבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he).
 
-Prześlij opinię
+שליחת משוב
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ostatnia aktualizacja: 2026-06-30 UTC.
+עדכון אחרון: 2026-06-30 (שעון UTC).
 
-Chcesz przekazać coś jeszcze?
+רוצה לתת לנו משוב?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-30 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-30 (שעון UTC)."],[],[]]

@@ -1,37 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=fa
-fetched_at: 2026-10-12T07:04:18.565100+00:00
-title: "\u202bGemini \u062f\u0631\u062d\u0627\u0644 \u0641\u06a9\u0631 \u06a9\u0631\u062f\u0646 \u0627\u0633\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=ja
+fetched_at: 2026-10-19T05:55:04.634696+00:00
+title: "Gemini \u306e\u601d\u8003 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash اکنون در دسترس است. [آن را امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fa) .
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [صفحه اصلی](https://ai.google.dev/?hl=fa)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
-- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-ارسال بازخورد
+フィードバックを送信
 
-# ‫Gemini درحال فکر کردن است
+# Gemini の思考
 
-[مدل‌های سری Gemini 3 و 2.5](https://ai.google.dev/gemini-api/docs/models?hl=fa) از «فرایند تفکر» استفاده می‌کنند که توانایی‌های استدلال و برنامه‌ریزی چندمرحله‌ای آن‌ها را به‌طور قابل‌توجهی بهبود می‌بخشد و آن‌ها را برای انجام تکالیف پیچیده مانند کدنویسی، ریاضیات پیشرفته، و تجزیه‌وتحلیل داده‌ها بسیار مؤثر می‌کند.
+[Gemini モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja)は
+「思考プロセス」を使用して、推論能力と複数ステップの
+計画能力を大幅に向上させています。これにより、
+コーディング、高度な数学、データ分析などの複雑なタスクで高い効果を発揮します。
 
-وقتی از مدل تفکر استفاده می‌کنید، Gemini پیش‌از پاسخ دادن، درونی استدلال می‌کند. «میانای برنامه‌سازی کاربردی تعاملات» این استدلال را ازطریق `thought` مرحله، مراحل اختصاصی که به‌ترتیب زمانی در کنار فراخوانی‌های تابع، ورودی‌های کاربر، یا بروندادهای مدل در آرایه `steps` ظاهر می‌شوند، نمایان می‌کند.
+思考モデルを使用すると、Gemini はレスポンスを返す前に内部で推論を行います。Interactions API は、この推論を `thought` ステップで表面化します。これは、`steps` 配列内の関数呼び出し、ユーザー入力、モデル出力とともに時系列で表示される専用のステップです。
 
-هر مرحله فکر شامل دو فیلد است:
+思考ステップには次の 2 つのフィールドがあります。
 
-| فیلد | الزامی | شرح |
+| フィールド | 必須 | 説明 |
 | --- | --- | --- |
-| `signature` | ✅ بله | نمایشی رمزگذاری‌شده از وضعیت استدلال داخلی مدل. همیشه ارائه می‌شود، حتی وقتی مدل حداقل استدلال را انجام می‌دهد. |
-| `summary` | ❌ نه | مجموعه‌ای از محتوا (نوشتار و/یا تصاویر) که استدلال را خلاصه می‌کند. بسته به پیکربندی [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=fa)، اینکه مدل استدلال کافی انجام داده است یا نه، یا نوع محتوا (برای مثال، تصاویر پنهان ممکن است خلاصه نوشتاری نداشته باشند) ممکن است خالی باشد. |
+| `signature` | ✅ はい | モデルの内部推論状態を暗号化した表現。モデルが最小限の推論を行う場合でも常に存在します。 |
+| `summary` | ❌ 不可 | 推論を要約するコンテンツ（テキストや画像）の配列。[`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=ja) 構成、モデルが十分な推論を行ったかどうか、コンテンツ タイプ（画像レイテンシにテキストの要約がない場合など）によって空になることがあります。 |
 
-## تعامل با فکر کردن
+## 思考とのインタラクション
 
-شروع تعامل با مدل تفکر مشابه با هر درخواست تعامل دیگری است. یکی از [مدل‌های دارای پشتیبانی از تفکر](#thinking-levels) را در فیلد `model` مشخص کنید:
+思考モデルとのインタラクションを開始する手順は、他のインタラクション リクエストと同様です。`model` フィールドで、[思考をサポートするモデル](#thinking-levels)のいずれかを指定します。
 
 ### Python
 
@@ -61,7 +64,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -87,7 +90,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -111,7 +114,7 @@ func main() {
 
     res, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{
         Body: operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{
-            Model: interactions.Model("gemini-3.8-pro"),
+            Model: interactions.Model("gemini-3.8-flash"),
             Input: interactions.NewInteractionsInput("Explain the concept of Occam's Razor and provide a simple, everyday example."),
         }),
     })
@@ -137,10 +140,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## خلاصه‌های فکر
+## 思考の要約
 
-خلاصه‌های فکر بینش‌هایی درباره فرایند استدلال داخلی مدل ارائه می‌دهند.
-به‌طور پیش‌فرض، فقط برونداد نهایی برگردانده می‌شود. می‌توانید خلاصه فکر را با `thinking_summaries` فعال کنید:
+思考の要約は、モデルの内部推論プロセスに関する分析情報を提供します。
+デフォルトでは、最終出力のみが返されます。`thinking_summaries` を使用して思考の要約を有効にできます。
 
 ### Python
 
@@ -207,7 +210,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -260,7 +263,7 @@ for (Step step : interaction.steps().orElse(Collections.emptyList())) {
 }
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -316,24 +319,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-در این موارد، یک بلوک فکر ممکن است **فقط حاوی امضا بدون خلاصه** باشد:
+思考ブロックには、次の場合に**要約のない署名のみ** が含まれることがあります。
 
-- درخواست‌های ساده، جایی که مدل برای تولید خلاصه به‌اندازه کافی استدلال نکرده است
-- ‫`thinking_summaries: "none"`، جایی که خلاصه به‌طور صریح غیرفعال شده است
-- برخی‌از انواع محتوای فکری، مثل تصاویر، ممکن است خلاصه نوشتاری نداشته باشند
+- モデルが要約を生成するのに十分な推論を行わなかったシンプルなリクエスト
+- `thinking_summaries: "none"`: 要約が明示的に無効になっている場合
+- 画像など、特定の思考コンテンツ タイプにはテキストの要約がない場合があります
 
-کد شما باید همیشه بلوک‌های فکری را در جایی که `summary` خالی یا وجود ندارد مدیریت کند.
+コードでは、`summary` が空または存在しない思考ブロックを常に処理する必要があります。
 
-## جاری‌سازی با اندیشیدن
+## 思考を伴うストリーミング
 
-از جاری‌سازی برای دریافت خلاصه‌های تدریجی فکر درطول تولید استفاده کنید.
-بلوک‌های فکر بااستفاده از «رویدادهای ارسالی سرور» (SSE) با دو نوع
-دلتا متمایز ارائه می‌شوند:
+ストリーミングを使用して、生成中に段階的な思考の要約を受け取ります。
+思考ブロックは、サーバー送信イベント（SSE）を使用して配信されます。デルタタイプは 2 つあります。
 
-| نوع دلتا | شامل می‌شود | زمان ارسال |
+| デルタタイプ | 次を含む | 送信されるタイミング |
 | --- | --- | --- |
-| `thought_summary` | خلاصه محتوای نوشتار یا تصویر | یک یا چند دلتا با خلاصه افزایشی |
-| `thought_signature` | امضای رمزنگارانه | آخرین تغییر قبل‌از `step.stop` |
+| `thought_summary` | テキストまたは画像の要約コンテンツ | 段階的な要約を含む 1 つ以上のデルタ |
+| `thought_signature` | 暗号署名 | `step.stop` の前の最後のデルタ |
 
 ### Python
 
@@ -418,7 +420,7 @@ for await (const event of stream) {
 }
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -493,7 +495,7 @@ try (EventStream<InteractionSSEStreamEvent> stream = response.events()) {
 }
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -562,7 +564,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-پاسخ جاری‌سازی از «رویدادهای ارسالی سرور» (SSE) استفاده می‌کند و از مراحل و رویدادها تشکیل شده است، برای مثال:
+ストリーミング レスポンスはサーバー送信イベント（SSE）を使用し、ステップとイベントで構成されます。例:
 
 ```
 event: interaction.created
@@ -593,23 +595,24 @@ event: done
 data: [DONE]
 ```
 
-## کنترل کردن اندیشیدن
+## 思考の制御
 
-مدل‌های Gemini به‌طور پیش‌فرض درگیر تفکر پویا می‌شوند و به‌طور خودکار میزان تلاش برای استدلال را براساس پیچیدگی درخواست تنظیم می‌کنند. بااستفاده از پارامتر `thinking_level` می‌توانید این رفتار را کنترل کنید.
+Gemini モデルはデフォルトで動的な思考を行い、リクエストの複雑さに応じて推論の労力を自動的に調整します。この動作は、`thinking_level` パラメータを使用して制御できます。
 
-| مدل | اندیشیدن پیش‌فرض | سطوح پشتیبانی‌شده |
+| モデル | デフォルトの思考 | サポートされているレベル |
 | --- | --- | --- |
-| gemini-3.8-flash | روشن (متوسط) | کم، متوسط، زیاد |
-| gemini-3.6-flash | روشن (متوسط) | حداقل، کم، متوسط، زیاد |
-| gemini-3.5-flash-lite | روشن (کمینه) | حداقل، کم، متوسط، زیاد |
-| gemini-3.1-pro-preview | روشن (زیاد) | کم، متوسط، زیاد |
-| gemini-3.1-flash-lite-image | روشن (کمینه) | کمینه، زیاد |
-| gemini-3-flash-preview | روشن (زیاد) | حداقل، کم، متوسط، زیاد |
-| gemini-3-pro-preview | روشن (زیاد) | کم، زیاد |
-| gemini-2.5-pro | روشن | کم، متوسط، زیاد |
-| gemini-2.5-flash | روشن | کم، متوسط، زیاد |
-| gemini-2.5-flash-lite | خاموش | کم، متوسط، زیاد |
-| gemini-robotics-er-2-preview | روشن (زیاد) | حداقل، کم، متوسط، زیاد |
+| gemini-4-argon | オン（中） | 低、中、高 |
+| gemini-3.8-flash | オン（中） | 低、中、高 |
+| gemini-3.6-flash | オン（中） | 最小、低、中、高 |
+| gemini-3.5-flash-lite | オン（最小） | 最小、低、中、高 |
+| gemini-3.1-pro-preview | オン（高） | 低、中、高 |
+| gemini-3.1-flash-lite-image | オン（最小） | 最小、高 |
+| gemini-3-flash-preview | オン（高） | 最小、低、中、高 |
+| gemini-3-pro-preview | オン（高） | 低、高 |
+| gemini-2.5-pro | オン | 低、中、高 |
+| gemini-2.5-flash | オン | 低、中、高 |
+| gemini-2.5-flash-lite | オフ | 低、中、高 |
+| gemini-robotics-er-2-preview | オン（高） | 最小、低、中、高 |
 
 ### Python
 
@@ -645,7 +648,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -674,7 +677,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -747,39 +750,44 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### محدودیت‌های کد و `max_output_tokens`
+### トークンの上限と `max_output_tokens`
 
-پارامتر تولید [`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=fa#request-body) حداکثر تعداد نشانه‌هایی را که یک پاسخ می‌تواند تولید کند، ازجمله نشانه‌های فکری، تعیین می‌کند.
+The [`max_output_tokens`](https://ai.google.dev/api/interactions-api?hl=ja#request-body) 生成
+パラメータは、レスポンスが生成できるトークンの最大数（思考トークンを含む）を設定します。
 
-وقتی تنظیم شود، این پارامتر به‌عنوان برش سخت‌گیرانه‌ای عمل می‌کند که زیرساخت آن را اعمال می‌کند
-بدون اینکه نحوه تخصیص بودجه فکری مدل را تغییر دهد
-(`thinking_level`).
+このパラメータを設定すると、モデルが思考予算（`thinking_level`）を割り当てる方法を変更することなく、インフラストラクチャによって適用されるハードカットオフとして機能します。
 
-اگر مدل درحین استدلال به این حد مجاز برسد، تولید را با وضعیت
-`"incomplete"` متوقف می‌کند و برونداد کوتاه یا خالی برمی‌گرداند (درحالی‌که همچنان هزینه
-هر نشانه فکری تولیدشده را محاسبه می‌کند). برای کاهش هزینه یا تأخیر بدون کوتاه کردن پاسخ‌ها، به‌جای تنظیم `max_output_tokens` کوچک، `thinking_level` (`low` یا `medium`) را کاهش دهید.
+推論中にモデルがこの上限に達すると、ステータス
+`"incomplete"`で生成を停止し、切り捨てられた出力または空の出力を返します（
+生成された思考トークンに対しては課金されます）。レスポンスを切り捨てずに費用やレイテンシを削減するには、小さい `max_output_tokens` を設定するのではなく、`thinking_level` を下げます（`low` または `medium`）。
 
-## امضاهای فکری
+Gemini 4 モデル（`gemini-4-argon`）の場合は、次のコンテキストと出力の上限に注意してください。
 
-امضاهای فکری نمایشی رمزگذاری‌شده از استدلال داخلی مدل است. این مدل‌ها باید پیوستگی استدلال را در تعاملات چندنوبتی حفظ کنند.
+- **共有 100 万トークンのコンテキスト ウィンドウ:** 入力トークン、思考トークン、出力トークンは、1 つの 100 万トークンのコンテキスト ウィンドウ（`1,048,576` トークン）を共有します。入力トークンと `max_output_tokens` の合計が 1,048,576 トークンを超える場合、API は出力上限をコンテキスト ウィンドウの残りのスペース（`1,048,576` から入力トークンを引いた値）に自動的に制限します。
+- **デフォルトの同期出力上限（64K）:** `background=False` の場合（ストリーミング リクエストと非ストリーミング リクエストの両方）、デフォルトと最大 `max_output_tokens` の上限は `65,536` トークンです。`background=False` で `max_output_tokens > 65536` を設定すると、`400` エラーが返されます。
+- **長いデコード（最大 100 万トークン）:** Gemini 4 が `65,536` トークン（最大 `1,048,576` トークン）を超えて推論して生成できるようにするには、`background=True` を設定し、`max_output_tokens` を `65,536` より大きい値に構成します。詳細については、[長いデコード](https://ai.google.dev/gemini-api/docs/long-decode?hl=ja)をご覧ください。
 
-«میانای برنامه‌سازی کاربردی تعامل‌ها» مدیریت امضاهای فکری را بسیار ساده‌تر از `generateContent` API می‌کند.
+## 思考シグネチャ
 
-### حالت Stateful (توصیه می‌شود)
+思考シグネチャは、モデルの内部推論を暗号化した表現です。マルチターンのインタラクション全体で推論の継続性を維持するために必要です。
 
-به‌طور پیش‌فرض، وقتی از «میاناهای برنامه‌سازی کاربردی تعاملات» در حالت با وضعیت (با تنظیم `store: true` و ارسال `previous_interaction_id` در نوبت‌های بعدی) استفاده می‌کنید، سرور به‌طور خودکار وضعیت مکالمه را مدیریت می‌کند، ازجمله همه بلوک‌های فکر و امضاها. در این حالت، نیازی نیست کاری درخصوص امضاها انجام دهید. این‌ها کاملاً در سمت سرور مدیریت می‌شوند.
+Interactions API を使用すると、`generateContent` API よりも思考シグネチャの処理がはるかに簡単になります。
 
-### حالت بدون وضعیت
+### ステートフル モード（推奨）
 
-اگر خودتان وضعیت مکالمه را مدیریت می‌کنید (حالت بدون وضعیت) و سابقه کامل ورودی‌ها و خروجی‌ها را در هر درخواست ارسال می‌کنید:
+デフォルトでは、ステートフル モードで Interactions API を使用する場合（`store: true` を設定し、後続のターンで `previous_interaction_id` を渡す場合）、サーバーはすべての思考ブロックと署名を含む会話の状態を自動的に管理します。このモードでは、署名に関して何もする必要はありません。サーバー側で完全に処理されます。
 
-- شما **باید** همیشه همه بلوک‌های `thought` را دقیقاً همان‌گونه که از مدل دریافت شده‌اند دوباره ارسال کنید.
-- شما باید بلوک‌های فکری را از سابقه **حذف نکنید** یا آن‌ها را تغییر ندهید، زیرا این بلوک‌ها حاوی امضاهای لازم برای ادامه استدلال مدل هستند.
-- هنگام تغییر مدل‌ها در یک جلسه، همچنان باید بلوک‌های فکری مدل قبلی را دوباره ارسال کنید. سازگاری را زیرینه مدیریت می‌کند.
+### ステートレス モード
 
-## قیمت‌گذاری
+会話の状態を自分で管理し（ステートレス モード）、各リクエストで入力と出力の完全な履歴を渡す場合:
 
-وقتی اندیشیدن روشن باشد، قیمت پاسخ مجموع داده‌واحدهای برونداد و داده‌واحدهای اندیشیدن است. می‌توانید تعداد کل نشانه‌های فکری تولیدشده را از فیلد `total_thought_tokens` دریافت کنید.
+- モデルから受信したとおりに、すべての `thought` ブロックを常に再送信する**必要があります** 。
+- モデルが推論を続行するために必要な署名が含まれているため、履歴から思考ブロックを削除または変更**しないでください** 。
+- セッション内でモデルを切り替える場合は、前のモデルの思考ブロックを再送信する必要があります。バックエンドで互換性が管理されます。
+
+## 料金
+
+思考がオンの場合、レスポンスの料金は出力トークンと思考トークンの合計です。生成された思考トークンの合計数は、`total_thought_tokens` フィールドから取得できます。
 
 ### Python
 
@@ -795,7 +803,7 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-### جاوا
+### Java
 
 ```
 import com.google.genai.Client;
@@ -824,7 +832,7 @@ if (interaction.usage().isPresent()) {
 }
 ```
 
-### رفتن
+### Go
 
 ```
 package main
@@ -881,33 +889,36 @@ func main() {
 }
 ```
 
-مدل‌های اندیشگر برای بهبود کیفیت پاسخ نهایی، اندیشه‌های کامل تولید می‌کنند و سپس [خلاصه‌هایی](#summaries) را به‌عنوان برونداد ارائه می‌دهند تا بینشی درباره فرایند اندیشیدن ارائه دهند. قیمت‌گذاری براساس تعداد کامل نشانه‌های فکری است که مدل برای تولید نیاز دارد،
-حتی اگر فقط خلاصه از API برونداد شود.
+思考モデルは、最終的な
+レスポンスの品質を高めるために完全な思考を生成し、思考プロセスに関する
+分析情報を提供するために[要約](#summaries)を出力します。料金は、API から出力されるのは要約のみですが、モデルが生成する必要がある完全な思考トークンに基づきます。
 
-در راهنمای [شمارش نشان](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) می‌توانید درباره نشان‌ها بیشتر بدانید.
+トークンについて詳しくは、[トークンのカウント](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) ガイドをご覧ください。
 
-## روال‌های مطلوب
+## ベスト プラクティス
 
-با دنبال کردن این دستورالعمل‌ها، از مدل‌های فکری به‌طور کارآمد استفاده کنید.
+次のガイドラインに沿って、思考モデルを効率的に使用してください。
 
-- **مرور استدلال**: خلاصه‌های فکر را تجزیه‌وتحلیل کنید تا دلیل شکست‌ها را بفهمید و پیام‌واره‌ها را بهبود دهید.
-- **کنترل بودجه تفکر**: برای صرفه‌جویی در تعداد نشانه‌ها، مدل را ترغیب کنید برای بروندادهای طولانی کمتر فکر کند.
-- **وظایف ساده**: برای بازیابی یا طبقه‌بندی حقایق از حداقل یا سطح پایین تفکر استفاده کنید (برای نمونه، «DeepMind در کجا تأسیس شد؟»).
-- **تکالیف میانه‌روی**: از اندیشیدن پیش‌فرض برای مقایسه مفاهیم یا استدلال خلاقانه استفاده کنید (برای نمونه، مقایسه خودروهای برقی و هیبریدی).
-- **کارهای پیچیده**: از حداکثر توان فکری برای کدنویسی پیشرفته، ریاضیات، یا برنامه‌ریزی چندمرحله‌ای استفاده کنید (برای نمونه، مسائل ریاضی AIME را حل کنید).
+- **推論の確認**: 思考の要約を分析して、失敗の原因を把握し、プロンプトを改善します。
+- **思考予算の管理**: 長い出力の場合は、モデルの思考を減らしてトークンを節約します。
+- **シンプルなタスク**: 事実の取得や分類（例: 「DeepMind はどこで設立されましたか？」）には、最小限または低い思考を使用します。
+- **中程度のタスク**: 概念の比較やクリエイティブな推論（例: 電気自動車とハイブリッド車の比較）には、デフォルトの思考を使用します。
+- **複雑なタスク**: 高度なコーディング、数学、複数ステップの計画（例: AIME の数学の問題を解く）には、最大限の思考を使用します。
 
-## قدم بعدی چیست
+## 次のステップ
 
-- [تولید نوشتار](https://ai.google.dev/gemini-api/docs/text-generation?hl=fa): پاسخ‌های نوشتاری پایه
-- [فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?hl=fa): اتصال به ابزارها
-- [راهنمای Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=fa): ویژگی‌های مختص مدل
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja): 基本的なテキスト レスポンス
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja): ツールに接続する
+- [Gemini 4 ガイド](https://ai.google.dev/gemini-api/docs/latest-model?hl=ja): Gemini 4 の新機能
+- [Gemini 3 ガイド](https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.8?hl=ja): モデル固有の
+  機能
 
-ارسال بازخورد
+フィードバックを送信
 
-جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی.
+最終更新日 2026-10-14 UTC。
 
-می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
+ご意見をお聞かせください
 
-[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-09 به‌وقت ساعت هماهنگ جهانی."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-14 UTC。"],[],[]]

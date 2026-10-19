@@ -1,32 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-CN
-fetched_at: 2026-10-12T07:08:52.900135+00:00
-title: "\u4f18\u5148\u7ea7\u63a8\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=fa
+fetched_at: 2026-10-19T05:43:03.275019+00:00
+title: "\u0627\u0633\u062a\u0646\u0628\u0627\u0637 \u0627\u0648\u0644\u0648\u06cc\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-发送反馈
+ارسال بازخورد
 
-# 优先级推理
+# استنباط اولویت
 
-说明：了解如何通过 Interactions API 中的 Priority 推理层优化延迟时间
+توضیحات: با نحوه بهینه‌سازی تأخیر بااستفاده از سطح استنتاج «اولویت» در Interactions API آشنا شوید
 
-Gemini Priority API 是一种高级推理层级，专为需要低延迟和最高可靠性的业务关键型工作负载而设计，价格较高。优先层级的流量优先于标准 API 和灵活层级的流量。
+Gemini Priority API یک سطح استنتاج ممتاز است که برای
+حجم‌های کاری حیاتی کسب‌وکار طراحی شده است که به تأخیر کمتر و بالاترین
+قابلیت اطمینان با قیمت ممتاز نیاز دارند. ترافیک سطح اولویت بالاتر از ترافیک سطح Flex و
+میانای برنامه‌سازی کاربردی استاندارد اولویت‌بندی می‌شود.
 
-优先推理功能适用于所有 Interactions API 端点。
+استنباط اولویت‌دار در سراسر نقاط پایانی «میانای برنامه‌سازی کاربردی تعاملات» دردسترس است.
 
-## 如何使用“优先级”
+## نحوه استفاده از «اولویت»
 
-如需使用 Priority 层级，请将请求中的 `service_tier` 字段设置为 `priority`。如果省略此字段，则默认层级为标准。
+برای استفاده از سطح «اولویت»، فیلد `service_tier` را در درخواستتان روی `priority` تنظیم کنید. اگر فیلد حذف شود، سطح پیش‌فرض استاندارد است.
 
 ### Python
 
@@ -62,7 +65,7 @@ async function main() {
 await main();
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -88,7 +91,7 @@ Interaction interaction =
 System.out.println(interaction.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -126,7 +129,7 @@ func main() {
 }
 ```
 
-### REST
+### استراحت
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -139,76 +142,82 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 优先级推理的工作原理
+## نحوه عملکرد استنتاج «اولویت»
 
-优先级推理会将请求路由到高关键性计算队列，从而为面向用户的应用提供可预测的快速性能。其主要机制是，当流量超出动态限制时，服务器端会平稳降级为标准处理，从而确保应用稳定性，而不是使请求失败。
+استنتاج اولویت‌دار درخواست‌ها را به صف‌های محاسباتی با اهمیت بالا هدایت می‌کند و عملکردی قابل‌پیش‌بینی و سریع برای برنامه‌های سَمت کاربر ارائه می‌دهد. سازوکار اصلی آن تنزل تدریجی سمت سرور به پردازش استاندارد برای ترافیکی است که از محدودیت‌های پویا فراتر می‌رود، که این امر پایداری برنامه را به‌جای رد کردن درخواست تضمین می‌کند.
 
-| 功能 | 优先级 | 标准 | Flex | 批量 |
+| ویژگی | اولویت | استاندارد | به‌رخ کشیدن | دسته |
 | --- | --- | --- | --- | --- |
-| **价格** | 比标准版多 75-100% | 全价票 | 5 折优惠 | 5 折优惠 |
-| **延迟时间** | 秒 | 秒到分钟 | 分钟数（目标为 1-15 分钟） | 最长 24 小时 |
-| **可靠性** | 高（不可脱落） | 高 / 中高 | 尽力而为（可舍弃） | 高（针对吞吐量） |
-| **接口** | 同步 | 同步 | 同步 | 异步 |
+| **قیمت‌گذاری** | ‫۷۵ تا ۱۰۰٪ بیشتر از «استاندارد» | قیمت کامل | ‫٪۵۰ تخفیف | ‫٪۵۰ تخفیف |
+| **تأخیر** | ثانیه | ثانیه به دقیقه | دقیقه (هدف ۱ تا ۱۵ دقیقه) | حداکثر ۲۴ ساعت |
+| **قابلیت اطمینان** | زیاد (غیرقابل ریزش) | زیاد / متوسط روبه‌بالا | نهایت تلاش (قابل‌حذف) | بالا (برای توان گذرداد) |
+| **میانا** | همگام | هم‌زمان | همگام | غیرهمگام |
 
-### 主要优势
+### مزایای کلیدی
 
-- **低延迟**：专为面向用户的交互式 AI 工具而设计，可实现秒级响应时间。
-- **高可靠性**：流量被视为具有最高严重性，并且严格不可丢弃。
-- **平稳降级**：如果流量峰值超出动态限额，系统会自动将流量降级到标准层级进行处理，而不是失败，从而防止服务中断。
-- **低摩擦**：使用与标准层级和 Flex 层级相同的同步 `create` 方法。
+- **تأخیر کم**: برای زمان‌های پاسخ ثانیه‌ای برای ابزارهای هوش مصنوعی تعاملی و کاربرپسند طراحی شده است.
+- **قابلیت اطمینان بالا**: ترافیک با بالاترین سطح اهمیت حیاتی درنظر گرفته می‌شود و
+  به‌هیچ‌وجه نباید حذف شود.
+- **تنزل متین**: جهش‌های ترافیکی که از حدود پویا فراتر می‌روند، به‌جای اینکه ناموفق شوند، به‌طور خودکار به سطح «استاندارد» برای پردازش تنزل می‌یابند تا از قطعی سرویس جلوگیری شود.
+- **اصطکاک کم**: از همان روش هم‌زمان `create` به‌عنوان سطوح استاندارد و Flex استفاده می‌کند.
 
-### 使用场景
+### موارد استفاده
 
-优先处理非常适合性能和可靠性至关重要的关键业务工作流。
+پردازش اولویت‌دار برای گردش کارهای حیاتی کسب‌وکار که در آن‌ها عملکرد و قابلیت اطمینان اهمیت زیادی دارد ایده‌آل است.
 
-- **交互式 AI 应用**：客户服务聊天机器人和 Copilot，用户支付高价，希望获得快速、一致的回答。
-- **实时决策引擎**：需要高度可靠、低延迟结果的系统，例如实时工单分流或欺诈检测。
-- **高级客户功能**：需要为付费客户保证更高服务等级目标 (SLO) 的开发者。
+- **برنامه‌های هوش مصنوعی تعاملی**: روبات‌های گپ خدمات مشتری و دستیارهای هوش مصنوعی که در آن‌ها کاربران هزینه ممتاز پرداخت می‌کنند و انتظار دارند پاسخ‌های سریع و یکنواخت دریافت کنند.
+- **موتورهای تصمیم‌گیری هم‌زمان**: سیستم‌هایی که به نتایج بسیار قابل‌اعتماد و با تأخیر کم نیاز دارند، مانند اولویت‌بندی زنده درخواست‌های پشتیبانی یا تشخیص کلاهبرداری.
+- **ویژگی‌های مشتری ممتاز**: توسعه‌دهندگانی که باید اهداف سطح خدمات (SLO) بالاتری را برای مشتریان پولی تضمین کنند.
 
-### 速率限制
+### محدودیت‌های نرخ
 
-即使优先级消耗量计入[总体互动流量速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)，优先级消耗量也有自己的速率限制。优先级推理的默认速率限制为**模型 / 层级的标准速率限制的 0.3 倍**
+مصرف اولویت‌دار حد نرخ خودش را دارد، هرچند که مصرف در
+[حد نرخ ترافیک تعاملی کلی](https://aistudio.google.com/rate-limit?hl=fa) حساب می‌شود. حدود نرخ پیش‌فرض
+برای استنباط «اولویت‌دار» **۰٫۳ برابر حد نرخ استاندارد برای «مدل / سطح»** است
 
-### 安全降级逻辑
+### منطق تنزل ایمن
 
-如果因拥塞而超出优先级限制，溢出请求会**自动且平稳地**降级为标准处理，而不是因 503 或 429 错误而失败。降级后的请求按标准费率计费，而不是按 Priority 优先费率计费。
+اگر محدودیت‌های «اولویت» به‌دلیل ازدحام فراتر رود، درخواست‌های سرریز به‌جای ناموفق شدن با خطای ۵۰۳ یا ۴۲۹، **به‌طور خودکار و به‌آرامی** به پردازش «استاندارد» تنزل می‌یابند. درخواست‌های تنزل‌یافته با نرخ استاندارد صورت‌حساب می‌شوند، نه نرخ ممتاز «اولویت».
 
-### 客户责任
+### مسئولیت کارخواه
 
-- **响应监控**：开发者应监控 API 响应中的 `x-gemini-service-tier` 标头，以检测请求是否经常降级为 `standard`。
-- **重试**：客户端必须针对标准错误（例如 `DEADLINE_EXCEEDED`）实现重试逻辑/指数退避算法。
+- **پایش پاسخ**: توسعه‌دهندگان باید `x-gemini-service-tier`
+  سرایند در پاسخ API را پایش کنند تا تشخیص دهند آیا درخواست‌ها به‌طور مکرر به
+  `standard` تنزل داده می‌شوند یا نه.
+- **تلاش‌های مجدد**: کارخواه‌ها باید منطق تلاش مجدد/پس‌گیری نمایی را برای خطاهای استاندارد، مثل `DEADLINE_EXCEEDED`، پیاده‌سازی کنند.
 
-## 价格
+## قیمت‌گذاری
 
-优先推理的价格比[标准 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn) 高出 75-100%，按 token 收费。
+قیمت استنباط اولویت ۷۵ تا ۱۰۰٪ بیشتر از [میانای برنامه‌سازی کاربردی استاندارد](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) است و براساس تعداد نشان صورت‌حساب می‌شود.
 
-## 支持的模型
+## مدل‌های پشتیبانی‌شده
 
-以下模型支持优先推理：
+مدل‌های زیر از استنتاج «اولویت‌دار» پشتیبانی می‌کنند:
 
-| 模型 | 优先级推理 |
+| مدل | استنتاج اولویت‌دار |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-cn) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
-| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
-| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=fa) | ✔️ |
+| [‫Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=fa) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=fa) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=fa) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fa) | ✔️ |
+| [پیش‌نمایش Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fa) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fa) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fa) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fa) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fa) | ✔️ |
 
-## 后续步骤
+## قدم بعدی چیست
 
-- [灵活推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)，以降低成本。
-- [token](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn)：了解 token。
+- [استنتاج انعطاف‌پذیر](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fa) برای کاهش هزینه.
+- [کدها](https://ai.google.dev/gemini-api/docs/tokens?hl=fa): با کدها آشنا شوید.
 
-发送反馈
+ارسال بازخورد
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-最后更新时间 (UTC)：2026-10-09。
+تاریخ آخرین به‌روزرسانی 2026-10-13 به‌وقت ساعت هماهنگ جهانی.
 
-需要向我们提供更多信息？
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-09。"],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-13 به‌وقت ساعت هماهنگ جهانی."],[],[]]

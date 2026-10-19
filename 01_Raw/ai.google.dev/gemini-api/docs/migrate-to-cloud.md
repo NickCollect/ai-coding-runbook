@@ -1,38 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=ja
-fetched_at: 2026-10-12T06:53:44.653873+00:00
-title: "Gemini Developer API \u3068 Gemini \u30d7\u30e9\u30c3\u30c8\u30d5\u30a9\u30fc\u30e0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=sq
+fetched_at: 2026-10-19T05:40:12.734533+00:00
+title: "Gemini Developer API kundrejt platform\u00ebs Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-フィードバックを送信
+Dërgo komente
 
-# Gemini Developer API と Gemini プラットフォーム
+# Gemini Developer API kundrejt platformës Gemini
 
-Gemini を使用して生成 AI ソリューションを開発する場合、Google は [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=ja) と [Gemini プラットフォーム API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ja) の 2 つの API プロダクトを提供しています。
+Kur zhvillon zgjidhje gjeneruese të IA-së me Gemini, Google ofron dy produkte API: [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=sq) dhe [Gemini platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=sq).
 
-Gemini Developer API は、Gemini を活用したアプリケーションの構築、本番環境への移行、スケーリングを最速で実現します。特定のエンタープライズ コントロールが必要な場合を除き、ほとんどのデベロッパーは Gemini Developer API を使用する必要があります。
+Gemini Developer API ofron shtegun më të shpejtë për të ndërtuar, prodhuar dhe shkallëzuar aplikacionet e mundësuara nga Gemini. Shumica e zhvilluesve duhet të përdorin Gemini Developer API, përveçse nëse ka nevojë për kontrolle specifike të ndërmarrjes.
 
-Gemini プラットフォームは、Google Cloud を基盤とする生成 AI アプリケーションの構築とデプロイのための、エンタープライズ対応の機能とサービスの包括的なエコシステムを提供します。
+Platforma Gemini ofron një ekosistem gjithëpërfshirës veçorish dhe shërbimesh të gatshme për ndërmarrjen për ndërtimin dhe vendosjen e aplikacioneve të IA-së gjeneruese të mbështetura nga Google Cloud.
 
-最近、これらのサービス間の移行を簡素化しました。Gemini Developer API と Gemini プラットフォーム API の両方に、統合された [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) と [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) を介してアクセスできるようになりました。
+Ne e kemi thjeshtuar së fundi migrimin midis këtyre shërbimeve. Gemini
+Developer API dhe Gemini platform API janë të dyja të qasshme tani
+nëpërmjet [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=sq) të unifikuar dhe
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=sq).
 
-## コードの比較: Interactions API（推奨）
+## Krahasimi i kodeve: API-ja e ndërveprimeve (rekomandohet)
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) は、Gemini モデルとエージェントを使用して構築する場合に推奨される方法です。次の例では、Gemini Developer API と Gemini プラットフォーム間のテキスト生成を比較しています。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=sq) është mënyra e rekomanduar për të ndërtuar me modelet dhe agjentët e Gemini. Shembujt e mëposhtëm
+krahasojnë gjenerimin e tekstit midis Gemini Developer API dhe platformës Gemini.
 
 ### Python
 
-`google-genai` ライブラリ（`>= 2.3.0`）を介して、Gemini Developer API と Gemini プラットフォーム サービスの両方にアクセスできます。`google-genai` のインストール方法については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) ページをご覧ください。
+Mund të qasesh si te Gemini Developer API, ashtu edhe te shërbimet e platformës Gemini nëpërmjet bibliotekës `google-genai` (`>= 2.3.0`). Shiko faqen e
+[bibliotekave](https://ai.google.dev/gemini-api/docs/libraries?hl=sq) për udhëzime se si të instalosh
+`google-genai`.
 
 ### Gemini Developer API
 
@@ -48,7 +54,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### Gemini プラットフォーム API
+### Gemini platform API
 
 ```
 from google import genai
@@ -64,9 +70,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### JavaScript と TypeScript
+### JavaScript dhe TypeScript
 
-`@google/genai` ライブラリ（`>= 2.3.0`）を介して、Gemini Developer API と Gemini プラットフォーム サービスの両方にアクセスできます。`@google/genai` のインストール方法については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) ページをご覧ください。
+Mund të qasesh si te Gemini Developer API, ashtu edhe te shërbimet e platformës Gemini nëpërmjet bibliotekës `@google/genai` (`>= 2.3.0`). Shiko faqen e
+[bibliotekave](https://ai.google.dev/gemini-api/docs/libraries?hl=sq) për udhëzime se si të instalosh
+`@google/genai`.
 
 ### Gemini Developer API
 
@@ -82,7 +90,7 @@ const interaction = await ai.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### Gemini プラットフォーム API
+### Gemini platform API
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -100,13 +108,16 @@ const interaction = await ai.interactions.create({
 console.log(interaction.output_text);
 ```
 
-## コードの比較: generateContent API
+## Krahasimi i kodeve: API-ja generateContent
 
-新しいプロジェクトには Interactions API をおすすめしますが、`generateContent` API も引き続きサポートされます。
+Ndërkohë që API-ja e "Ndërveprimeve" rekomandohet për projektet e reja, API-ja e
+`generateContent` vazhdon të mbështetet.
 
 ### Python
 
-Gemini Developer API と Gemini プラットフォーム サービスの両方に、`google-genai` ライブラリからアクセスできます。`google-genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
+Mund të qasesh si te Gemini Developer API, ashtu edhe te shërbimet e platformës Gemini nëpërmjet bibliotekës `google-genai`. Shiko faqen e
+[bibliotekave](https://ai.google.dev/gemini-api/docs/libraries?hl=sq) për udhëzime se si të instalosh
+`google-genai`.
 
 ### Gemini Developer API
 
@@ -121,7 +132,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### Gemini プラットフォーム API
+### Gemini platform API
 
 ```
 from google import genai
@@ -136,9 +147,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript と TypeScript
+### JavaScript dhe TypeScript
 
-`@google/genai` ライブラリを介して、Gemini Developer API と Gemini プラットフォーム サービスの両方にアクセスできます。`@google/genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
+Mund të qasesh si te Gemini Developer API, ashtu edhe te shërbimet e platformës Gemini nëpërmjet bibliotekës `@google/genai`. Shiko faqen e [bibliotekave](https://ai.google.dev/gemini-api/docs/libraries?hl=sq) për udhëzime se si të instalosh `@google/genai`.
 
 ### Gemini Developer API
 
@@ -158,7 +169,7 @@ async function main() {
 main();
 ```
 
-### Gemini プラットフォーム API
+### Gemini platform API
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -181,7 +192,7 @@ main();
 
 ### Go
 
-`google.golang.org/genai` ライブラリを介して、Gemini Developer API と Gemini プラットフォーム サービスの両方にアクセスできます。`google.golang.org/genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
+Mund të qasesh si te Gemini Developer API, ashtu edhe te shërbimet e platformës Gemini nëpërmjet bibliotekës `google.golang.org/genai`. Shiko faqen e [bibliotekave](https://ai.google.dev/gemini-api/docs/libraries?hl=sq) për udhëzime se si të instalosh `google.golang.org/genai`.
 
 ### Gemini Developer API
 
@@ -210,7 +221,7 @@ func main() {
 }
 ```
 
-### Gemini プラットフォーム API
+### Gemini platform API
 
 ```
 import (
@@ -242,41 +253,55 @@ func main() {
 }
 ```
 
-### その他のユースケースとプラットフォーム
+### Raste të tjera përdorimi dhe platforma
 
-他のプラットフォームとユースケースについては、[Gemini Developer API ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)と [Gemini プラットフォーム ドキュメント](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ja)のユースケース固有のガイドをご覧ください。
+Referoju udhëzuesve specifikë për rastet e përdorimit në [Dokumentacionin e Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=sq)
+dhe [dokumentacionin e platformës Gemini](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=sq)
+për platforma dhe raste të tjera përdorimi.
 
-## 移行に関する考慮事項
+## Konsideratat për migrimin
 
-移行すると、次のようになります。
+Kur migron:
 
-- 認証には Google Cloud サービス アカウントを使用する必要があります。詳細については、[Gemini プラットフォームのドキュメント](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ja)をご覧ください。
-- 既存の Google Cloud プロジェクト（API キーの生成に使用したプロジェクト）を使用することも、[新しい Google Cloud プロジェクトを作成](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ja)することもできます。
-- サポート対象の地域は、Gemini Developer API と Gemini プラットフォーム API で異なる場合があります。プレビュー期間中、[Gemini プラットフォームの Interactions API](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/interactions/?hl=ja) は `global` エンドポイント（`location="global"`）のみをサポートします。[Google Cloud の生成 AI でサポート対象の地域](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=ja)のリストをご覧ください。
-- Google AI Studio で作成したモデルは、Gemini プラットフォームで再トレーニングする必要があります。
+- Do të duhet të përdorësh llogaritë e shërbimit të Google Cloud për t'u identifikuar. Shiko
+  [dokumentacionin e platformës Gemini](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=sq)
+  për më shumë informacione.
+- Mund të përdorësh projektin tënd ekzistues të Google Cloud
+  (të njëjtin që ke përdorur për të gjeneruar çelësin e API-së) ose mund të
+  [krijosh një projekt të ri të Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=sq).
+- Rajonet e mbështetura mund të ndryshojnë midis Gemini Developer API dhe Gemini platform API. Gjatë "Versionit paraprak",
+  [Interactions API në platformën Gemini](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/interactions/?hl=sq)
+  mbështet vetëm pikën përfundimtare `global` (`location="global"`). Shih listën e
+  [rajoneve të mbështetura për IA-në gjeneruese në Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=sq).
+- Çdo model që ke krijuar në Google AI Studio duhet të ritrajnohet në platformën Gemini.
 
-Gemini Developer API で Gemini API キーを使用する必要がなくなった場合は、セキュリティのベスト プラクティスに従ってキーを削除します。
+Nëse nuk ke më nevojë të përdorësh çelësin e Gemini API për Gemini Developer API, atëherë ndiq praktikat më të mira të sigurisë dhe fshije atë.
 
-API キーを削除するには:
+Për të fshirë një çelës API:
 
-1. [Google Cloud API 認証情報](https://console.cloud.google.com/apis/credentials?hl=ja)ページを開きます。
-2. 削除する API キーを見つけて、[**操作**] アイコンをクリックします。
-3. [**API キーを削除**] を選択します。
-4. [**認証情報の削除**] モーダルで、[**削除**] を選択します。
+1. Hap faqen e
+   [Kredencialeve të Google Cloud API](https://console.cloud.google.com/apis/credentials?hl=sq).
+2. Gjej çelësin API që dëshiron të fshish dhe kliko ikonën **Veprimet**.
+3. Zgjidh **Fshi çelësin API**.
+4. Në modalen **Fshi kredencialet**, zgjidh **Fshi**.
 
-   API キーの削除が反映されるまでには数分かかることがあります。削除が反映されると、以降その API キーを使ったトラフィックはすべて拒否されます。
+   Fshirja e një çelësi API kërkon disa minuta që të përhapet. Pasi të përfundojë
+   përhapja, çdo trafik që përdor çelësin e fshirë të API-së do të refuzohet.
 
-## 次のステップ
+## Hapat e radhës
 
-- [Gemini プラットフォームの Interactions API](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/interactions/?hl=ja) デベロッパー ガイドをご覧ください。
-- Gemini プラットフォームの生成 AI ソリューションの詳細については、[Gemini プラットフォームの生成 AI の概要](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ja)をご覧ください。
+- Eksploro udhëzuesin e zhvilluesit të
+  [Interactions API në platformën Gemini](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/capabilities/interactions/?hl=sq).
+- Shiko
+  [Përmbledhjen e IA-së gjeneruese në platformën Gemini](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=sq)
+  për të mësuar më shumë rreth zgjidhjeve të IA-së gjeneruese në platformën Gemini.
 
-フィードバックを送信
+Dërgo komente
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-最終更新日 2026-10-08 UTC。
+Përditësimi i fundit: 2026-10-08 UTC.
 
-ご意見をお聞かせください
+Duhet të na tregosh më shumë?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-08 UTC。"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-08 UTC."],[],[]]

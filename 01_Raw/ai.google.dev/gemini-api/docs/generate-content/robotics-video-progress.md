@@ -1,34 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=pl
-fetched_at: 2026-10-12T06:59:25.420222+00:00
-title: "Rozpoznawanie film\u00f3w \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-video-progress?hl=id
+fetched_at: 2026-10-19T05:42:15.797647+00:00
+title: "Pemahaman video \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=pl).
+Gemini 4 Argon kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=id).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs/generate-content?hl=pl)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
 
-Prześlij opinię
+Kirim masukan
 
-# Rozpoznawanie filmów
+# Pemahaman video
 
-Model Gemini Robotics ER 2 może śledzić postępy zadań na podstawie ciągłych strumieni wideo dzięki 2 funkcjom:
+Gemini Robotics ER 2 dapat melacak progres tugas dari feed video berkelanjutan menggunakan dua kemampuan:
 
-- Wyszukiwanie momentów: identyfikuje dokładny znacznik czasu, w którym występuje kluczowe zdarzenie.
-- Klasyfikacja postępów: przypisuje każdy film do jednego z 5 przedziałów ukończenia (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
+- Penemuan momen: mengidentifikasi stempel waktu yang tepat saat peristiwa utama terjadi.
+- Klasifikasi progres: menetapkan setiap video ke salah satu dari lima rentang
+  penyelesaian (0–20%, 20–40%, 40–60%, 60–80%, 80–100%).
 
-## Wyszukiwanie momentów
+## Menemukan momen
 
-Wyszukiwanie momentów identyfikuje dokładną klatkę wideo, w której występuje krytyczne zdarzenie – na przykład gdy kubek jest pełny lub węzeł jest zawiązany. Roboty używają tej funkcji do weryfikowania powodzenia, sekwencjonowania kroków i wywoływania korekt.
+Penemuan momen mengidentifikasi frame video yang tepat saat peristiwa penting terjadi —
+misalnya, saat cangkir terisi penuh atau simpul terikat. Robot menggunakan ini untuk memverifikasi keberhasilan, langkah-langkah urutan, dan memicu koreksi.
 
-Poniższy przykład prompta prosi model o zidentyfikowanie momentu ukończenia danego zadania w filmie:
+Contoh perintah berikut meminta model untuk mengidentifikasi momen penyelesaian
+untuk tugas tertentu dalam video:
 
 ```
 from google import genai
@@ -56,15 +59,16 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Poniżej przedstawiamy przykładowe klatki z filmu, w którym wyszukiwane są momenty. Model identyfikuje znacznik czasu ukończenia zadania:
+Berikut ini menunjukkan contoh frame dari video pencarian momen, dengan model mengidentifikasi stempel waktu penyelesaian tugas:
 
-![Przykładowe klatki filmu pokazujące moment znalezienia wyniku z nałożoną sygnaturą czasową](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=pl)
+![Contoh frame video yang menunjukkan output penemuan momen dengan overlay stempel waktu](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-moment-finding.png?hl=id)
 
-## Klasyfikacja postępów
+## Klasifikasi progres
 
-Klasyfikacja postępów przypisuje film do jednego z 5 przedziałów ukończenia: 0–20%, 20–40%, 40–60%, 60–80% lub 80–100%. Dzięki temu roboty mają świadomość sytuacji w czasie rzeczywistym, co pozwala im dostosowywać działania lub ponawiać nieudane kroki bez konieczności ponownego uruchamiania całego przepływu pracy.
+Klasifikasi progres menetapkan video ke salah satu dari lima rentang penyelesaian:
+0–20%, 20–40%, 40–60%, 60–80%, atau 80–100%. Hal ini memberi robot kesadaran situasional secara real-time sehingga mereka dapat menyesuaikan tindakan atau mencoba kembali langkah-langkah yang gagal tanpa memulai ulang seluruh alur kerja.
 
-Poniższy przykład prompta prosi model o sklasyfikowanie bieżącego poziomu postępu na podstawie filmu:
+Contoh perintah berikut meminta model untuk mengklasifikasikan tingkat progres saat ini dari video:
 
 ```
 from google import genai
@@ -92,27 +96,27 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-Poniżej przedstawiamy przykładowe klatki z filmu, w którym klasyfikowane są postępy. Model przypisuje przedział postępu:
+Berikut menunjukkan contoh frame dari video klasifikasi progres, dengan model menetapkan rentang progres:
 
-![Przykładowe klatki filmu pokazujące wynik klasyfikacji postępu z etykietą przedziału postępu](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=pl)
+![Contoh frame video yang menampilkan output klasifikasi progres dengan label rentang progres](https://ai.google.dev/static/gemini-api/docs/images/robotics/video-progress-classification.png?hl=id)
 
-## Przykłady
+## Contoh
 
-Pełne przykłady, które można uruchomić, w tym śledzenie zadań wieloetapowych, znajdziesz w
-[przewodniku Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+Untuk contoh yang dapat dijalankan sepenuhnya, termasuk pelacakan tugas multi-langkah, lihat
+[Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
 
-## Co dalej?
+## Langkah berikutnya
 
-- [Interfejs Live API dla robotyki](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=pl) – dwukierunkowe przesyłanie strumieniowe w czasie rzeczywistym.
-- [Orkiestracja zadań](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=pl) – zadania długoterminowe z rozumowaniem przestrzennym.
-- [Omówienie modelu Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl) – porównanie modeli i możliwości.
+- [Live API untuk robotik](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=id) — streaming dua arah real-time.
+- [Orkestrasi tugas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=id) — tugas dengan cakrawala panjang dengan penalaran spasial.
+- [Ringkasan Gemini Robotics ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=id) — perbandingan dan kemampuan model.
 
-Prześlij opinię
+Kirim masukan
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Ostatnia aktualizacja: 2026-09-08 UTC.
+Terakhir diperbarui pada 2026-09-08 UTC.
 
-Chcesz przekazać coś jeszcze?
+Ada masukan untuk kami?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-09-08 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-08 UTC."],[],[]]

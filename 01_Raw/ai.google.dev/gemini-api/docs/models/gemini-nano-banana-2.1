@@ -1,59 +1,58 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=th
-fetched_at: 2026-10-12T07:07:10.154483+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=pt-BR
+fetched_at: 2026-10-19T05:53:21.963708+00:00
 title: "Gemini Nano Banana 2.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+O Gemini 4 Argon já está disponível. [Faça um teste](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pt-br).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-ส่งความคิดเห็น
+Envie comentários
 
 # Gemini Nano Banana 2.1
 
-**Gemini Nano Banana 2.1** (`gemini-nano-banana-2.1`) เป็นโมเดลการสร้างรูปภาพและการแก้ไขโดยใช้การสนทนาที่มีประสิทธิภาพสูงรุ่นล่าสุด การอัปเดตเป็น Nano Banana 2 ([รูปภาพ Gemini 3.1 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=th)) ซึ่งยังคงรักษาความเร็วและประสิทธิภาพด้านต้นทุนในระดับ Flash ไว้ พร้อมทั้งปรับปรุงคุณภาพของภาพ การปฏิบัติตามพรอมต์ ความสอดคล้องของตัวละครแบบการสนทนาไปมา และการแสดงข้อความอย่างมีนัยสำคัญ ซึ่งเป็นรุ่นที่มีประสิทธิภาพมากกว่า[Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=th) (Nano Banana Pro)
+O **Gemini Nano Banana 2.1** (`gemini-nano-banana-2.1`) é o mais recente modelo de alta eficiência para geração de imagens e edição conversacional. Uma atualização do Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br)), ele mantém a velocidade e a eficiência de custo do Flash, além de oferecer melhorias significativas na qualidade visual, na fidelidade aos comandos, na consistência de personagens multiturno e na renderização de texto. Ele é a contraparte mais eficiente do [Gemini 3 Pro para imagens](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br) (Nano Banana Pro).
 
-**ข้อมูลอัปเดตที่สำคัญ**
+**Atualizações importantes**:
 
-- คุณภาพของภาพและความสมจริงที่ดียิ่งขึ้นในความละเอียดเอาต์พุต `1K`, `2K` และ `4K` (ค่าเริ่มต้นคือ `1K`)
-- แก้ไขอาร์ติแฟกต์การเรียงต่อกันในสัดส่วนภาพแบบกว้างและพาโนรามา (`1:4`, `4:1`,
-  `1:8`, `8:1`) ที่ความละเอียด `2K` และ `4K`
-- การแสดงข้อความและความแม่นยำของเลย์เอาต์อินโฟกราฟิกที่ดียิ่งขึ้น
-- การผสานรูปภาพหลายรูปที่รองรับรูปภาพอ้างอิงสูงสุด 14 รูป (ความสม่ำเสมอของตัวละครสำหรับตัวละครสูงสุด 4 ตัวและความแม่นยำของออบเจ็กต์สำหรับออบเจ็กต์สูงสุด 10 รายการ)
-- การเชื่อมต่อแหล่งข้อมูลกับ Google Web Search และ Image Search
-- ระดับการคิดที่กำหนดค่าได้ (`minimal`, `medium` ค่าเริ่มต้น และ `high`)
+- Melhoria na qualidade visual e no realismo em resoluções de saída `1K`, `2K` e `4K` (padrão `1K`)
+- Correção de artefatos de mosaico em proporções de tela grande e panorâmica (`1:4`, `4:1`, `1:8`, `8:1`) nas resoluções `2K` e `4K`.
+- Renderização de texto aprimorada e precisão do layout de infográficos
+- Fusão de várias imagens com suporte para até 14 imagens de referência (consistência de personagens para até 4 personagens e fidelidade de objetos para até 10 objetos)
+- Embasamento com a Pesquisa Google (web e imagens)
+- Níveis de raciocínio configuráveis (`minimal`, `medium` padrão e `high`)
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-nano-banana-2.1&hl=th)
+[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-nano-banana-2.1&hl=pt-br)
 
-## เอกสารประกอบ
+## Documentação
 
-ไปที่หน้า[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)เพื่อดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์และความสามารถ
+Acesse a página [Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
 
 ## gemini-nano-banana-2.1
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Propriedade | Descrição |
 | --- | --- |
-| รหัสโมเดล id\_card | `gemini-nano-banana-2.1` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ และ PDF  **เอาต์พุต**  รูปภาพและข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  32,768 |
-| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำไม่ได้  **[ค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำไม่ได้  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  สิ่งที่ทำไม่ได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำไม่ได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  สิ่งที่ทำไม่ได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  สิ่งที่ทำไม่ได้ |
-| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำได้  **[Flex Inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - เสถียร: `gemini-nano-banana-2.1` |
-| calendar\_monthการอัปเดตล่าสุด | ตุลาคม 2026 |
+| Código do modelo id\_card | `gemini-nano-banana-2.1` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagem, vídeo e PDF  **Saída**  Imagem e texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  131.072  **Limite de token de saída**  32.768 |
+| handymanRecursos | **[Geração de áudio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br)**  incompatível  **[Armazenamento em cache](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)**  incompatível  **[Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br)**  incompatível  **[Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br)**  incompatível  **[Chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)**  incompatível  **[Embasamento com o Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br)**  incompatível  **[Geração de imagens](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br)**  Compatível  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=pt-br)**  incompatível  **[Embasamento da pesquisa](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br)**  Compatível  **[Respostas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br)**  incompatível  **[Raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br)**  Compatível  **[Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br)**  incompatível |
+| speedOpções de consumo | **[API em lote](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br)**  Compatível  **[Inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br)**  incompatível  **[Inferência de prioridade](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)**  incompatível |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-nano-banana-2.1` |
+| calendar\_monthÚltima atualização | Outubro de 2026 |
 
-ส่งความคิดเห็น
+Envie comentários
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-อัปเดตล่าสุด 2026-10-06 UTC
+Última atualização 2026-10-06 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Quer enviar seu feedback?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-06 UTC"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-10-06 UTC."],[],[]]

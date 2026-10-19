@@ -1,10 +1,10 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=vi
-fetched_at: 2026-10-12T07:08:32.219553+00:00
+fetched_at: 2026-10-19T05:58:53.360990+00:00
 title: "B\u1ea3n xem tr\u01b0\u1edbc Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 

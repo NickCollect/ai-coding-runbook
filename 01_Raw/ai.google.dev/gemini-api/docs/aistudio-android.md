@@ -1,145 +1,149 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ar
-fetched_at: 2026-10-12T06:50:01.125777+00:00
-title: "\u0625\u0646\u0634\u0627\u0621 \u062a\u0637\u0628\u064a\u0642\u0627\u062a Android \u0641\u064a Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja
+fetched_at: 2026-10-19T05:55:14.746284+00:00
+title: "Google AI Studio \u3067 Android \u30a2\u30d7\u30ea\u3092\u69cb\u7bc9\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-# إنشاء تطبيقات Android في Google AI Studio
+# Google AI Studio で Android アプリを構築する
 
-يتيح لك Google AI Studio إنشاء تطبيقات Android أصلية من خلال طلب مكتوب بلغة طبيعية. يمكنك وصف التطبيق الذي تريده، وسينشئ
-[وكيل Antigravity](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ar#antigravity-agent)
-مشروعًا كاملاً بلغتَي Kotlin و[Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=ar). من المتصفّح، يمكنك معاينة تطبيقك في محاكي Android مستند إلى المتصفّح وتثبيته على جهاز فعلي ونشره للاختبار.
+Google AI Studio を使用すると、自然言語プロンプトからネイティブ Android アプリを構築できます。必要なアプリについて説明すると、
+[Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja#antigravity-agent)
+が完全な Kotlin プロジェクトと[Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=ja)
+プロジェクトを生成します。ブラウザから、ブラウザベースの Android エミュレータでアプリをプレビューしたり、実機にインストールしたり、テスト用に公開したりできます。
 
-## البدء
+## 始める
 
-لبدء إنشاء تطبيق Android:
+Android アプリの構築を開始する手順は次のとおりです。
 
-1. انتقِل إلى [وضع "الإنشاء"](https://aistudio.google.com/apps?hl=ar) في Google AI Studio باستخدام لوحة التنقّل على يمين الشاشة.
-2. اختَر **Android** من أداة اختيار النظام الأساسي.
-3. أدخِل طلبًا يصف التطبيق الذي تريد إنشاءه (مثلاً، *"إنشاء أداة لتتبُّع المهام اليومية مع مساحة تخزين محلية"* أو *"إنشاء آلة حاسبة بسيطة"*).
-4. ينشئ الوكيل المشروع ويشغّله في محاكي Android المستند إلى المتصفّح.
+1. 左側のナビゲーション パネルを使用して、Google AI Studio の [[ビルド] モード](https://aistudio.google.com/apps?hl=ja)に移動します。
+2. プラットフォーム ピッカーから [**Android**] を選択します。
+3. 構築するアプリの説明を入力します（例: *「ローカル ストレージを使用して毎日のタスク トラッカーを作成する」* または *「シンプルな電卓を作成する」*）。
+4. エージェントがプロジェクトを生成し、ブラウザベースの Android エミュレータで起動します。
 
-يمكنك بعد ذلك تكرار عملية إنشاء تطبيقك باستخدام لوحة المحادثة، تمامًا كما في تجربة الويب. يدير الوكيل جميع الملفات في مشروع Android وينشر التغييرات في قاعدة التعليمات البرمجية.
+チャットパネルを使用して、ウェブと同じようにアプリを反復処理できます。エージェントは Android プロジェクト内のすべてのファイルを管理し、コードベース全体に変更を反映します。
 
-## محاكي Android المستند إلى المتصفّح
+## ブラウザベースの Android エミュレータ
 
-يعمل محاكي Android بالكامل في السحابة الإلكترونية ويتم بثّه إلى متصفّحك.
-لست بحاجة إلى تثبيت حزمة تطوير البرامج (SDK) لنظام التشغيل Android أو "استوديو Android" أو محاكي محلي.
+Android エミュレータはクラウドで完全に実行され、ブラウザにストリーミングされます。
+Android SDK、Android Studio、ローカル エミュレータをインストールする必要はありません。
 
-يوفّر المحاكي ما يلي:
+エミュレータには次の機能があります。
 
-- **محاكاة جهاز يشبه Pixel**: يمكنك النقر على تطبيقك والتمرير فيه والتفاعل معه
-  تمامًا كما لو كنت تستخدم جهازًا فعليًا.
-- **إمكانية تدوير الشاشة**: يمكنك التبديل بين الوضعَين العمودي والأفقي.
-- **معاينة مباشرة**: عندما يُجري الوكيل تغييرات في التعليمات البرمجية، تتم إعادة إنشاء التطبيق و
-  يتم تحديث المحاكي تلقائيًا.
+- **Pixel のようなデバイスのシミュレーション**: 実機と同じように、アプリをタップ、スクロール、操作できます。
+- **回転のサポート**: 縦向きと横向きを切り替えます。
+- **ライブプレビュー**: エージェントがコードを変更すると、アプリが再ビルドされ、
+  エミュレータが自動的に更新されます。
 
-### قيود المحاكي
+### エミュレータの制限事項
 
-لا يتوافق المحاكي المستند إلى المتصفّح مع جميع ميزات الأجهزة. لا تتوفّر الميزات التالية في المحاكي:
+ブラウザベースのエミュレータは、すべてのハードウェア機能をサポートしていません。エミュレータでは次の機能は使用できません。
 
-- الكاميرا والتقاط الصور
-- الاتصال عبر NFC والبلوتوث
-- نظام تحديد المواقع العالمي (يتم محاكاة الموقع الجغرافي)
-- خدمات Google Play (تعمل ميزات "تسجيل الدخول باستخدام حساب Google" و"خرائط Google" وميزات خدمات Play الأخرى على جهاز فعلي، ولكن لا تعمل في المحاكي)
+- カメラと写真のキャプチャ
+- NFC と Bluetooth
+- GPS（位置情報はシミュレートされます）
+- Google Play 開発者サービス（Google ログイン、マップ、その他の Google Play 開発者サービスの機能は、実機では動作しますが、エミュレータでは動作しません）
 
-## التثبيت على جهاز باستخدام ADB
+## ADB を使用してデバイスにインストールする
 
-يمكنك تثبيت ملف APK الذي تم إنشاؤه مباشرةً على جهاز Android فعلي متصل بجهاز الكمبيوتر باستخدام USB. يستخدم هذا الإجراء
-[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=ar) للتواصل مع جهازك من خلال المتصفّح. لست بحاجة إلى تثبيت ADB محليًا.
+ビルドした APK は、USB でパソコンに接続された実機の Android デバイスに直接インストールできます。これには、
+[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=ja) を
+使用してブラウザ経由でデバイスと通信します。ローカル ADB のインストールは不要です。
 
-### المتطلبات الأساسية
+### 前提条件
 
-- متصفّح Chrome أو Edge يتيح استخدام WebUSB
-- جهاز Android تم تفعيل
-  [خيارات المطوّرين وتصحيح الأخطاء عبر USB](https://developer.android.com/studio/debug/dev-options?hl=ar)
-  عليه
-- كابل USB يربط جهازك بجهاز الكمبيوتر
+- WebUSB をサポートする Chrome または Edge ブラウザ。
+- [[デベロッパー向けオプション] と [USB デバッグ](https://developer.android.com/studio/debug/dev-options?hl=ja)]
+  が有効になっている Android デバイス。
+- デバイスをパソコンに接続する USB ケーブル。
 
-### تثبيت التطبيق على جهازك
+### デバイスにアプリをインストールする
 
-1. انقر على **التثبيت على الجهاز** في لوحة المعاينة.
-2. اختَر جهاز Android من أداة اختيار أجهزة USB في المتصفّح.
-3. يتم نقل ملف APK وتثبيته على جهازك.
-4. يتم تشغيل التطبيق تلقائيًا.
+1. プレビュー パネルで [**Install on Device**] をクリックします。
+2. ブラウザの USB デバイス ピッカーから Android デバイスを選択します。
+3. APK が転送され、デバイスにインストールされます。
+4. アプリが自動的に起動します。
 
-## النشر على "متجر Play"
+## Google Play ストアに公開する
 
-يمكنك نشر تطبيق Android في
-[مسار الاختبار الداخلي](https://play.google.com/console?hl=ar) على Google Play Console، ما يتيح لك توزيع التطبيق على ما يصل إلى 100 مختبِر.
+Android アプリを
+[Google Play Console](https://play.google.com/console?hl=ja) の内部
+テストトラックに公開して、最大 100 人のテスターにアプリを配布できます。
 
-### المتطلبات الأساسية
+### 前提条件
 
-- حساب مطوّر على [Google Play](https://play.google.com/console/signup?hl=ar)
-  (يتطلّب دفع رسوم تسجيل لمرة واحدة بقيمة 25 دولارًا أمريكيًا)
-- ملف شخصي مكتمل للمطوّر في Play Console
+- [Google Play デベロッパー アカウント](https://play.google.com/console/signup?hl=ja)
+  （1 回限りの登録料 25 ドルが必要です）。
+- Google Play Console でデベロッパー プロファイルが完成していること。
 
-### نشر تطبيقك
+### アプリを公開する
 
-1. افتح **الإعدادات > النشر** في Google AI Studio.
-2. انقر على **النشر على "متجر Play"**.
-3. أثبِت هويتك باستخدام حساب المطوّر على Google Play.
-4. يوقّع AI Studio ملف APK وينشئ بيانات التطبيق (أو يحمِّل إصدارًا جديدًا) وينشر التطبيق في مسار الاختبار الداخلي.
-5. ستتلقّى رابطًا لمشاركته مع المختبِرين.
+1. Google AI Studio で **[Settings] > [Publish]** を開きます。
+2. [**Google Play ストアに公開**] をクリックします。
+3. Google Play デベロッパー アカウントで認証します。
+4. AI Studio が APK に署名し、アプリの掲載情報を作成（または新しいバージョンをアップロード）して、内部テストトラックに公開します。
+5. テスターと共有するリンクが届きます。
 
-يدير AI Studio عملية توقيع ملف APK تلقائيًا باستخدام مخزن مفاتيح مُدار. يمكنك تخصيص بيانات التطبيق (الرمز ولقطات الشاشة والوصف) لاحقًا في Play Console.
+AI Studio は、マネージド キーストアを使用して APK の署名を自動的に管理します。アプリの掲載情報（アイコン、スクリーンショット、説明）は、後で Google Play Console でカスタマイズできます。
 
-## العناصر التي يتم إنشاؤها
+## 生成されるもの
 
-عند إنشاء تطبيق Android، ينشئ الوكيل مشروعًا عاديًا يستند إلى Gradle ويتضمّن البنية التالية:
+Android アプリをビルドすると、エージェントは次の構造で標準の Gradle ベースのプロジェクトを生成します。
 
-- **إعدادات الإصدار**: `build.gradle.kts` ملفات (على مستوى المشروع والتطبيق)
-  باستخدام لغة Kotlin الخاصة بالنطاق (DSL)
-- **طبقة واجهة المستخدم**: [مكوّنات Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=ar)
-  مع تخصيص التصميم المتعدد الأبعاد [3](https://m3.material.io/)
-- **البنية**: بنية نشاط واحد مع ViewModels وفئات البيانات
-- **الموارد**: `AndroidManifest.xml` والرسومات المتجهة والسلاسل وموارد Android الأخرى
+- **ビルド構成**: `build.gradle.kts` ファイル（プロジェクト レベルとアプリレベル）
+  Kotlin DSL を使用。
+- **UI レイヤ**: [マテリアル デザイン 3](https://developer.android.com/develop/ui/compose?hl=ja) のテーマ設定を使用した [Jetpack Compose](https://m3.material.io/)
+  コンポーネント。
+- **アーキテクチャ**: ViewModel とデータ
+  クラスを使用した単一アクティビティ アーキテクチャ。
+- **リソース**: `AndroidManifest.xml`、ドローアブル、文字列、その他の Android
+  リソース。
 
-يدير الوكيل تلقائيًا تبعيات Gradle، ويضيف الحِزم من مستودعَي Maven وGoogle حسب الحاجة.
+エージェントは Gradle の依存関係を自動的に管理し、必要に応じて Maven リポジトリと Google リポジトリからパッケージを追加します。
 
-يمكنك عرض التعليمات البرمجية التي تم إنشاؤها وتعديلها باستخدام علامة التبويب **التعليمات البرمجية** في لوحة المعاينة. لمتابعة التطوير في "استوديو Android"، نزِّل المشروع كـ **ملف ZIP**.
+生成されたコードは、プレビュー パネルの [**Code**] タブで表示、編集できます。Android Studio で開発を続行するには、プロジェクトを**ZIP ファイル** としてダウンロードします。
 
-## القيود
+## 制限事項
 
-يخضع إنشاء تطبيقات Android في AI Studio للقيود التالية:
+AI Studio での Android アプリのビルドには、次の制限があります。
 
-### قيود النظام الأساسي
+### プラットフォームの制限
 
-- **من جهة العميل فقط**: لا تتضمّن تطبيقات Android مكوّنًا من جهة الخادم.
-  لا تتوفّر الميزات التي تتطلّب وقت تشغيل على جانب الخادم (إدارة الأسرار والوضع المتعدّد اللاعبين وFirebase وواجهات برمجة التطبيقات في Google Workspace).
-- **بنية نشاط واحد**: لا تتوفّر إلا المشاريع التي تتضمّن نشاطًا واحدًا ووحدة واحدة.
-- **‫Jetpack Compose فقط**: تستخدم التطبيقات لغتَي Kotlin وJetpack Compose. لا تتوفّر تنسيقات Java وXML.
-- **لا تتوفّر حزمة NDK أو رموز برمجية أصلية**: لا تتوفّر الرموز البرمجية بلغتَي C وC++‎.
-- **لا تتوفّر Wear OS أو Android TV**: لا تتوفّر إلا أشكال الهواتف والأجهزة اللوحية.
+- **クライアントサイドのみ**: Android アプリにはサーバーサイド コンポーネントが含まれていません。サーバー ランタイムを必要とする機能（シークレット管理、マルチプレイヤー、Firebase、Google Workspace API）は使用できません。
+- **単一アクティビティ アーキテクチャ**: 単一アクティビティ、単一モジュール
+  プロジェクトのみがサポートされています。
+- **Jetpack Compose のみ**: アプリは Kotlin と Jetpack Compose を使用します。Java と XML レイアウトはサポートされていません。
+- **NDK またはネイティブ コードなし**: C コードと C++ コードはサポートされていません。
+- **Wear OS または Android TV なし**: スマートフォンとタブレットのフォーム ファクタのみが
+  サポートされています。
 
-### قيود التصدير
+### エクスポートの制限事項
 
-- **تنزيل ملف ZIP فقط**: يمكنك تنزيل المشروع كملف ZIP. لا تتوفّر بعد ميزة التصدير إلى GitHub لمشاريع Android.
+- **ZIP ダウンロードのみ**: プロジェクトを ZIP ファイルとしてダウンロードできます。Android プロジェクトでは、GitHub エクスポートはまだ使用できません。
 
-## الخطوات التالية
+## 次のステップ
 
-- [إنشاء تطبيقات في Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ar)
-- [تطوير تطبيقات متكاملة](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ar) (ويب)
-- الاطّلاع على أمثلة في [معرض التطبيقات](https://aistudio.google.com/apps?source=showcase&hl=ar).
+- [Google AI Studio でアプリをビルドする](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja)
+- [フルスタック アプリの開発](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ja)（ウェブ）
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=ja) で例を見る。
 
-إرسال ملاحظات
+フィードバックを送信
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)
+最終更新日 2026-08-19 UTC。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+ご意見をお聞かせください
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-08-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-08-19 UTC。"],[],[]]

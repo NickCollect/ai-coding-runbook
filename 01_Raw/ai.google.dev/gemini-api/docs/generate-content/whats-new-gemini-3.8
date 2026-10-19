@@ -1,0 +1,211 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.8?hl=vi
+fetched_at: 2026-10-19T05:57:53.512689+00:00
+title: "T\u00ednh n\u0103ng m\u1edbi trong Gemini 3.8 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+---
+
+Gemini 4 Argon hiện đã ra mắt. [Hãy dùng thử](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=vi).
+
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+
+Gửi ý kiến phản hồi
+
+# Tính năng mới trong Gemini 3.8 Flash
+
+[Mô hình mới nhất](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=vi)
+[Các mô hình khác](#other-models)
+
+Gemini 3.8 Flash (`gemini-3.8-flash`) là mô hình Flash thông minh nhất của chúng tôi, được thiết kế cho kỹ thuật phần mềm dài hạn, tác nhân tự động và quy trình công việc phức tạp của doanh nghiệp.
+
+Hướng dẫn này giải thích những điểm mới trong Gemini 3.8 Flash, các thay đổi về API, ví dụ về mã và hướng dẫn di chuyển.
+
+## Mô hình mới
+
+| Mô hình | Mã kiểu máy | Cấp độ tư duy mặc định | Giá | Mô tả |
+| --- | --- | --- | --- | --- |
+| Gemini 3.8 Flash | `gemini-3.8-flash` | `medium` | 3.8 Flash được cung cấp cho đến hết năm với mức giá ưu đãi là 0,75 USD/1 triệu token đầu vào và 3,75 USD/1 triệu token đầu ra; hãy xem phần [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) để biết thêm thông tin chi tiết. | Mô hình Flash thông minh nhất của chúng tôi, được thiết kế cho kỹ thuật phần mềm dài hạn, tác nhân tự động và quy trình công việc phức tạp của doanh nghiệp. |
+
+Gemini 3.8 Flash hỗ trợ cửa sổ ngữ cảnh 1 triệu token, tối đa 64 nghìn token đầu ra, các cấp độ tư duy có thể điều chỉnh (`low`, `medium`, `high`) và cùng một bộ công cụ tích hợp.
+
+Để biết thông số kỹ thuật đầy đủ, hãy xem [trang mô hình Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=vi). Để biết thông tin chi tiết về giá ưu đãi, hãy xem [phần giá](#pricing) bên dưới hoặc [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.8-flash).
+
+## Bắt đầu nhanh
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents="Write a three.js script that renders a realistic 3D black hole."
+)
+
+print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: "Write a three.js script that renders a realistic 3D black hole.",
+});
+
+console.log(response.text);
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [{
+      "parts": [{"text": "Write a three.js script that renders a realistic 3D black hole."}]
+    }]
+  }'
+```
+
+## Điểm mới trong Gemini 3.8 Flash
+
+- **Kỹ thuật phần mềm dài hạn:** Mang lại kết quả tốt trên các tiêu chuẩn mã hoá trong thế giới thực, tái cấu trúc phức tạp nhiều tệp và thực thi công cụ xác định. Xem [phương pháp đánh giá](https://deepmind.google/models/evals-methodology/gemini-3-8-flash/?hl=vi) để biết thông tin chi tiết.
+- **Tác nhân tự động:** Cho phép bạn xây dựng quy trình công việc lập kế hoạch nhiều bước và điều phối công cụ linh hoạt, giảm đáng kể các vòng lặp và lỗi không thành công.
+- **Quy trình công việc phức tạp của doanh nghiệp:** Mang lại độ chính xác vượt trội, khả năng suy luận sâu sắc và tính chính xác cao về mặt thực tế trên các nhiệm vụ đòi hỏi khắt khe trong miền và các quy trình dữ liệu quy mô lớn.
+- **Mô hình mặc định cho Tác nhân được quản lý:** Tác nhân mặc định cho các tác nhân được quản lý: tác nhân [Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi), hiện sử dụng Gemini 3.8 Flash. [Antigravity SDK](https://antigravity.google/docs/sdk/overview/?hl=vi) cũng sử dụng Gemini 3.8 Flash theo mặc định.
+- **Giá ưu đãi:** Gemini 3.8 Flash được cung cấp với mức giá ưu đãi là 0,75 USD/1 triệu token đầu vào và 3,75 USD/1 triệu token đầu ra cho đến hết ngày 31 tháng 12 năm 2026. Giá thông thường là 1,50 USD/1 triệu token đầu vào và 7,50 USD/1 triệu token đầu ra sẽ có hiệu lực từ ngày 1 tháng 1 năm 2027.
+
+Theo thiết kế, Gemini 3.8 Flash có thể sử dụng nhiều token hơn cho các tác vụ phức tạp và chạy lâu hơn. Để mang lại kết quả chất lượng cao hơn cho các mục tiêu khó và nhiều bước, mô hình này sẽ thực hiện các bước suy luận nhỏ hơn, gọi các công cụ một cách lặp đi lặp lại và xác minh công việc của mình trong quá trình thực hiện. Không phải quy trình công việc nào cũng cần mức độ xác minh này. Đối với các công việc hằng ngày, bạn có thể giảm nỗ lực [suy luận](#understanding-reasoning-levels) để giảm mức tiêu thụ token. Ngoài ra, Gemini 3.6 Flash vẫn được hỗ trợ.
+
+## Tìm hiểu về các cấp độ suy luận
+
+Gemini 3.8 Flash cho phép bạn linh hoạt kiểm soát độ trễ và trí tuệ bằng cách điều chỉnh cấp độ tư duy của mô hình:
+
+- **Nỗ lực tư duy thấp**: Giảm thời gian trả lời cho các tác vụ quan trọng về độ trễ như quy trình phản hồi sự cố, trò chuyện theo thời gian thực, viết bản nháp và phân tích dữ liệu nhanh.
+- **Trung bình (mặc định):** Chất lượng tốt nhất cho hầu hết các tác vụ. Được đề xuất cho các trường hợp sử dụng phức tạp về mã và tác nhân, mang lại độ chính xác cao hơn trong lần đầu tiên.
+- **Mức độ tư duy cao**: Tối đa hoá khả năng suy luận và điều phối công cụ của mô hình. Tốt nhất cho suy luận sâu sắc, toán học và các tác vụ phức tạp nhiều bước.
+
+Ví dụ sau đây đặt `thinking_level` thành `medium` cho yêu cầu phân tích mã phức tạp:
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+
+response = client.models.generate_content(
+    model="gemini-3.8-flash",
+    contents="Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely.",
+    config=types.GenerateContentConfig(
+        thinking_config=types.ThinkingConfig(
+            thinking_level="medium"  # Balanced reasoning effort for complex tasks
+        ),
+    ),
+)
+
+print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+const response = await ai.models.generateContent({
+  model: "gemini-3.8-flash",
+  contents: "Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely.",
+  config: {
+    thinkingConfig: {
+      thinkingLevel: "medium", // Balanced reasoning effort for complex tasks
+    },
+  },
+});
+
+console.log(response.text);
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [{
+      "parts": [{"text": "Analyze this payment processing pipeline for race conditions during retry attempts and rewrite the transaction locks safely."}]
+    }],
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingLevel": "medium"
+      }
+    }
+  }'
+```
+
+## Tác nhân Antigravity đã cập nhật
+
+## Danh sách kiểm tra cho quá trình di chuyển
+
+```
+  `/gemini-api-dev migrate my app to Gemini 3.8 Flash`
+```
+
+### Di chuyển sang gemini-3.8-flash
+
+- **Cập nhật Mã mô hình:** Thay đổi chuỗi mô hình mục tiêu thành `gemini-3.8-flash`.
+- **Định cấu hình cấp độ tư duy:** Thay thế `thinking_budget` bằng enum chuỗi `thinking_level`. Xin lưu ý rằng Gemini 3.8 Flash không hỗ trợ `minimal`; hãy chọn `low`, `medium` (mặc định) hoặc `high`.
+- **Áp dụng các thay đổi về tham số API Gemini 3:** Xoá các tham số lấy mẫu không dùng nữa (`temperature`, `top_p`, `top_k`), `candidate_count` (không được hỗ trợ trong Gemini 3 trở lên) và lượt phản hồi điền sẵn của mô hình. Xem
+  [Các thay đổi về API Gemini 3.6 và các bản cập nhật tham số](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=vi#api-changes-and-parameter-updates).
+- **Thực thi các quy tắc xác thực lượt:** Xoá các lượt phản hồi điền sẵn của mô hình và đảm bảo lượt người dùng cuối cùng chứa văn bản không trống.
+- **Kiểm tra lệnh gọi hàm:**
+  - Đặt các thành phần nhiều phương thức bên trong tải trọng phản hồi.
+  - Định dạng hướng dẫn nội tuyến bằng `\n\n`.
+  - Nếu bạn thấy các lỗi `Malformed_Function_Call` liên quan đến văn bản trước công cụ, hãy xem phần [Giải pháp cho các yêu cầu về văn bản trước công cụ](https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=vi#workarounds-for-pre-tool-text-requirements).
+  - Chỉ khi sử dụng API generateContent: Đảm bảo tất cả các đối tượng `FunctionResponse` đều bao gồm `call_id` và `name`.
+- **Các yêu cầu cơ bản của Gemini 3:** Để biết thông tin về các bản cập nhật SDK và việc giữ lại chữ ký tư duy, hãy xem phần [Chữ ký tư duy](https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=vi#signatures).
+
+## Giá
+
+Tận dụng mức giá ưu đãi trên Google AI Studio và Nền tảng tác nhân Gemini Enterprise cho đến hết ngày 31 tháng 12 năm 2026 đối với Gemini 3.8 Flash và Gemini 3.6 Flash. Giá thông thường sẽ có hiệu lực từ ngày 1 tháng 1 năm 2027. Để biết đầy đủ các bậc giá, hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.8-flash).
+
+## Các mô hình khác
+
+- [Gemini 4 Argon (Mới nhất)](https://ai.google.dev/gemini-api/docs/generate-content/latest-model?hl=vi)
+- [Gemini 3.6 Flash và 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.6?hl=vi)
+- [Xem tất cả các mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi)
+
+## Bước tiếp theo
+
+- Xem lại thông số kỹ thuật của API trên phần [Tổng quan về các mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi).
+- Khám phá quy trình điều phối nhiều tác nhân trong phần [Tổng quan về Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi).
+- Kiểm thử và tinh chỉnh câu lệnh trong [Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=vi).
+
+Gửi ý kiến phản hồi
+
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+
+Cập nhật lần gần đây nhất: 2026-10-13 UTC.
+
+Bạn muốn chia sẻ thêm với chúng tôi?
+
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-10-13 UTC."],[],[]]

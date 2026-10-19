@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=id
-fetched_at: 2026-10-12T07:00:18.146235+00:00
-title: "Penalaran spasial \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=ja
+fetched_at: 2026-10-19T05:52:04.149512+00:00
+title: "\u7a7a\u9593\u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Kirim masukan
+フィードバックを送信
 
-# Penalaran spasial
+# 空間推論
 
-Model Gemini Robotics ER dapat menunjuk objek, melacaknya dalam video, mendeteksinya dengan kotak pembatas, dan membuat lintasan pergerakan.
+Gemini Robotics ER モデルは、オブジェクトを指し示したり、動画内でオブジェクトを追跡したり、境界ボックスでオブジェクトを検出したり、移動軌跡を生成したりできます。
 
-Untuk kode yang dapat dijalankan sepenuhnya, lihat
-[Cookbook Robotics](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+実行可能な完全なコードについては、
+[ロボット工学のクックブック](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)をご覧ください。
 
-## Menunjuk objek
+## オブジェクトを指し示す
 
-Contoh berikut menemukan objek tertentu dalam gambar dan menampilkan koordinat `[y, x]` yang dinormalisasi:
+次の例では、画像内の特定のオブジェクトを検索し、正規化された `[y, x]` 座標を返します。
 
 ### Python
 
@@ -93,7 +93,7 @@ curl -X POST \
   }'
 ```
 
-Outputnya akan berupa array JSON yang berisi objek, masing-masing dengan `point` (koordinat `[y, x]` yang dinormalisasi) dan `label` yang mengidentifikasi objek.
+出力は、オブジェクトを含む JSON 配列になります。各オブジェクトには、`point`（正規化された `[y, x]` 座標）と、オブジェクトを識別する `label` が含まれます。
 
 ### JSON
 
@@ -112,14 +112,14 @@ Outputnya akan berupa array JSON yang berisi objek, masing-masing dengan `point`
 ]
 ```
 
-Gambar berikut adalah contoh cara titik-titik ini dapat ditampilkan:
+次の画像は、これらの点を表示する方法の例です。
 
-![Contoh yang menampilkan titik objek dalam gambar](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=id)
+![画像内のオブジェクトのポイントを表示する例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ja)
 
-## Melacak objek dalam video
+## 動画内のオブジェクトを追跡する
 
-Gemini Robotics ER 2 juga dapat menganalisis frame video untuk melacak objek dari waktu ke waktu. Lihat [Input video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id#supported-formats)
-untuk mengetahui daftar format video yang didukung.
+Gemini Robotics ER 2 では、動画フレームを分析して、オブジェクトを時間経過とともに追跡することもできます。サポートされている動画形式の一覧については、[動画入力](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#supported-formats)
+をご覧ください。
 
 ### Python
 
@@ -153,9 +153,9 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## Deteksi objek dan kotak pembatas
+## オブジェクト検出と境界ボックス
 
-Selain titik, Anda dapat meminta model untuk menampilkan kotak pembatas 2D, yang memberikan detail spasial yang lebih banyak untuk objek yang terdeteksi.
+点に加えて、検出されたオブジェクトの空間的な詳細情報を提供する 2D 境界ボックスを返すようにモデルに指示することもできます。
 
 ### Python
 
@@ -189,11 +189,11 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-## Lintasan
+## 軌跡
 
-Gemini Robotics ER 2 dapat membuat urutan titik yang menentukan lintasan, yang berguna untuk memandu pergerakan robot.
+Gemini Robotics ER 2 は、軌跡を定義する点のシーケンスを生成できます。これは、ロボットの動きを誘導するのに役立ちます。
 
-Contoh ini meminta lintasan untuk memindahkan pena merah ke organizer, termasuk perkiraan titik jalan menengah. Kode telah dikurangi untuk hanya menampilkan perintah.
+この例では、赤いペンをオーガナイザーに移動する軌跡をリクエストします。これには、中間ウェイポイントの推定が含まれます。コードはプロンプトのみを表示するように短縮されています。
 
 ### Python
 
@@ -206,9 +206,9 @@ prompt = """
         """
 ```
 
-## Membuat ruang untuk laptop
+## ノートパソコンのスペースを作る
 
-Contoh ini menunjukkan bagaimana Gemini Robotics ER dapat memahami ruang. Perintah meminta model untuk mengidentifikasi objek mana yang perlu dipindahkan untuk membuat ruang bagi item lain.
+この例では、Gemini Robotics ER が空間について推論する方法を示します。プロンプトは、別のアイテムのスペースを作成するために移動する必要があるオブジェクトを特定するようにモデルに指示します。
 
 ### Python
 
@@ -240,7 +240,7 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-Respons berisi koordinat 2D objek yang menjawab pertanyaan pengguna, dalam hal ini, objek yang harus dipindahkan untuk memberi ruang bagi laptop.
+レスポンスには、ユーザーの質問に答えるオブジェクトの 2D 座標が含まれます。この場合、ノートパソコンのスペースを作るために移動する必要があるオブジェクトです。
 
 ```
 [
@@ -248,11 +248,11 @@ Respons berisi koordinat 2D objek yang menjawab pertanyaan pengguna, dalam hal i
 ]
 ```
 
-![Contoh yang menunjukkan objek mana yang perlu dipindahkan untuk objek lain](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=id)
+![別のオブジェクトのために移動する必要があるオブジェクトを示す例](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ja)
 
-## Mengemas makan siang
+## ランチを詰める
 
-Model ini juga dapat memberikan petunjuk untuk tugas multi-langkah dan menunjuk objek yang relevan untuk setiap langkah. Contoh ini menunjukkan cara model merencanakan serangkaian langkah untuk mengemas tas makan siang.
+モデルは、複数ステップのタスクの手順を提供し、各ステップに関連するオブジェクトを指し示すこともできます。この例では、モデルがランチバッグを詰める一連のステップを計画する方法を示します。
 
 ### Python
 
@@ -285,13 +285,13 @@ image_response = client.interactions.create(
 print(image_response.output_text)
 ```
 
-Respons perintah ini adalah serangkaian petunjuk langkah demi langkah tentang cara mengemas tas makan siang dari input gambar.
+このプロンプトのレスポンスは、画像入力からランチバッグを詰める方法に関するステップごとの手順です。
 
-**Gambar input**
+**入力画像**
 
-![Gambar kotak makan siang dan item yang akan dimasukkan ke dalamnya](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=id)
+![お弁当箱と中に入れるものの画像](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ja)
 
-**Output model**
+**モデル出力**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -314,19 +314,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## Langkah berikutnya
+## 次のステップ
 
-- [Kemampuan agen](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=id) — eksekusi kode, pembacaan instrumen, anotasi gambar.
-- [Orkestrasi tugas](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=id) — tugas jangka panjang dengan API robot kustom.
-- [Robotika dengan streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=id) — streaming dua arah real-time (khusus Gemini Robotics ER 2).
-- [Pemahaman video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=id) — menemukan momen dan klasifikasi progres (khusus Gemini Robotics ER 2).
+- [エージェント機能](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ja) - コード実行、機器の読み取り、画像の注釈。
+- [タスク オーケストレーション](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ja) - カスタム ロボット API を使用した長期的なタスク。
+- [ストリーミングによるロボット工学](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ja) - リアルタイム双方向ストリーミング（Gemini Robotics ER 2 のみ）。
+- [動画理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ja) - モーメントの検出と進捗状況の分類（Gemini Robotics ER 2 のみ）。
 
-Kirim masukan
+フィードバックを送信
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Terakhir diperbarui pada 2026-09-08 UTC.
+最終更新日 2026-09-08 UTC。
 
-Ada masukan untuk kami?
+ご意見をお聞かせください
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-09-08 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-09-08 UTC。"],[],[]]

@@ -1,45 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=zh-CN
-fetched_at: 2026-10-12T06:58:56.616325+00:00
-title: "Deep Research Pro \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=bn
+fetched_at: 2026-10-19T05:51:59.817171+00:00
+title: "Deep Research Pro \u09aa\u09cd\u09b0\u09bf\u09ad\u09bf\u0989 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+Gemini 4 Argon এখন উপলভ্য। [এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=bn)।
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [হোম](https://ai.google.dev/?hl=bn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
+- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
 
-发送反馈
+মতামত জানান
 
-# Deep Research Pro 预览版
+# Deep Research Pro প্রিভিউ
 
-一款强大的智能体研究员，专为自主进行多步骤调查而设计，可将复杂信息整合为内容详实、附有参考文献的报告。此模型由 Gemini 3.1 Pro 提供支持，经过优化，可处理长时间运行的任务，并对数百个公共网站来源和 Gmail、云端硬盘等私密工作区数据进行准确性至关重要的分析。
+স্বতন্ত্র, একাধিক ধাপের তদন্তের জন্য ডিজাইন করা একটি শক্তিশালী এজেন্টিক গবেষক
+যা জটিল তথ্যকে বিস্তারিত, উদ্ধৃত রিপোর্টে সংশ্লেষণ করে। Gemini 3.1 Pro দ্বারা পরিচালিত, এই মডেলটি দীর্ঘমেয়াদী টাস্ক এবং
+Gmail এবং Drive-এর মতো শত শত পাবলিক ওয়েব সোর্স এবং ব্যক্তিগত
+Workspace ডেটা জুড়ে নির্ভুলতা-সমালোচনামূলক বিশ্লেষণের জন্য অপ্টিমাইজ করা হয়েছে।
 
-## 文档
+## ডকুমেন্টেশন
 
-如需全面了解功能和特性，请访问 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 页面。
+ফিচার ও ক্ষমতার সম্পূর্ণ কভারেজ পেতে [ডিপ রিসার্চ](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn) পৃষ্ঠা দেখুন।
 
 ## deep-research-pro-preview-12-2025
 
-| 属性 | 说明 |
+| প্রপার্টি | বিবরণ |
 | --- | --- |
-| id\_card 代理机构代码 | **Interactions API**  `deep-research-pro-preview-12-2025` |
-| 保存支持的数据类型 | **输入**  文本、图片、PDF、音频、视频  **输出**  文字（引用报告） |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入上下文窗口**  1,048,576  **输出 token 限制**  65536 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`deep-research-pro-preview-12-2025` |
-| calendar\_month最新更新 | 2025 年 12 月 |
+| id\_cardএজেন্ট কোড | **Interactions API**  `deep-research-pro-preview-12-2025` |
+| সেভ করাডেটার ধরন | **ইনপুট**  টেক্সট, ছবি, পিডিএফ, অডিও, ভিডিও  **আউটপুট**  টেক্সট (উল্লেখ করা রিপোর্ট) |
+| token\_autoটোকেন সীমা[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=bn) | **ইনপুট কন্টেক্সট উইন্ডো**  ১,০৪৮,৫৭৬  **আউটপুট টোকেনের সীমা**  ৬৫,৫৩৬ |
+| 123ভার্সন | আরও বিবরণের জন্য [মডেল ভার্সন প্যাটার্ন](https://ai.google.dev/gemini-api/docs/models/gemini?hl=bn#model-versions) পড়ুন।  - প্রিভিউ: `deep-research-pro-preview-12-2025` |
+| calendar\_monthলেটেস্ট আপডেট | ডিসেম্বর ২০২৫ |
 
-发送反馈
+মতামত জানান
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
 
-最后更新时间 (UTC)：2026-10-09。
+2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।
 
-需要向我们提供更多信息？
+আমাদের আরও কিছু জানাতে চান?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-09。"],[],[]]
+[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]

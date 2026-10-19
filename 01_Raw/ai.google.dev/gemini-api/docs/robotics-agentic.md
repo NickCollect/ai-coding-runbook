@@ -1,35 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ko
-fetched_at: 2026-10-12T07:01:13.359017+00:00
-title: "\uc5d0\uc774\uc804\ud2b8\ud615 \ube44\uc804 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=zh-TW
+fetched_at: 2026-10-19T05:52:44.272850+00:00
+title: "\u4ee3\u7406\u5f0f\u9858\u666f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 Gemini 3.8 Flash를 사용할 수 있습니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ko).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-의견 보내기
+提供意見
 
-# 에이전트형 비전
+# 代理式願景
 
-Gemini Robotics ER 모델은 Python 코드를 작성하고 실행하여 이미지를 조작하고 답변하기 전에 로직을 적용할 수 있습니다. 이 페이지에서는 코드 실행 예시(확대/축소 및 자르기를 사용한 객체 감지, 계측기 읽기, 유체 측정, 회로 기판 읽기, 이미지 주석)를 다룹니다.
+Gemini Robotics ER 模型可以撰寫及執行 Python 程式碼來處理圖片，並在回答問題前套用邏輯。本頁面涵蓋程式碼執行範例：使用縮放和裁剪功能進行物件偵測、儀表讀取、液體測量、電路板讀取，以及圖像註解。
 
-이러한 예시를 자체 사용 사례에 맞게 조정하려면 프롬프트 텍스트와 업로드된 이미지 파일을 자체 파일로 바꾸세요. 프롬프트에서 요청된 JSON 스키마를 애플리케이션에 필요한 출력 구조와 일치하도록 조정하거나 `system_instruction`을 추가하여 출력 형식과 정밀도를 적용할 수도 있습니다.
+如要根據自己的用途調整這些範例，請將提示文字和上傳的圖片檔案換成自己的內容。您也可以在提示中調整要求的 JSON 結構定義，以符合應用程式所需的輸出結構，或新增 `system_instruction` 來強制執行輸出格式和精確度。
 
-실행 가능한 전체 코드는
-[로봇공학 Cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
+如需完整的可執行程式碼，請參閱「[機器人食譜](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)」。
 
-## 사고 수준
+## 思考程度
 
-모델의 사고 수준을 제어하여 지연 시간과 정확도를 절충할 수 있습니다. 객체 감지와 같은 공간 작업은 낮은 사고 수준에서 잘 작동합니다. 계산 또는 무게 추정과 같은 복잡한 작업은 더 높은 사고 수준에서 이점을 얻습니다.
+你可以控制模型的思考程度，以延遲換取準確度。物件偵測等空間工作在低思考層級下表現良好。對於計數或重量估算等複雜工作，較高的思考層次有助於提升準確度。
 
-다음 예시에서는 복잡한 계산 작업의 사고 수준을 `high`로 설정합니다.
+以下範例會將複雜的計數工作思考層級設為 `high`：
 
 ### Python
 
@@ -58,11 +57,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-자세한 내용은 [사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)를 참고하세요.
+詳情請參閱「[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)」一節。
 
-## 객체 감지 (확대/축소 및 자르기)
+## 物件偵測 (縮放及裁剪)
 
-다음 예시에서는 코드 실행을 사용하여 객체를 감지하고 경계 상자를 반환할 때 더 명확하게 볼 수 있도록 이미지를 확대/축소하고 자릅니다.
+以下範例使用執行程式碼，在偵測到物件並傳回定界框時，縮放及裁剪圖片，以獲得更清楚的檢視畫面。
 
 ### Python
 
@@ -96,7 +95,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-모델 출력은 다음 JSON 응답과 유사합니다.
+模型輸出內容會類似下列 JSON 回應：
 
 ```
 [
@@ -108,13 +107,13 @@ print(interaction.output_text)
 ]
 ```
 
-다음 이미지는 모델에서 반환된 상자를 보여줍니다.
+下圖顯示模型傳回的方塊。
 
-![발견된 객체의 경계 상자를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=ko)
+![範例：顯示找到的物件的定界框](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=zh-tw)
 
-## 아날로그 게이지 읽기 및 로직 적용
+## 讀取類比儀表並套用邏輯
 
-다음 예시에서는 모델을 사용하여 아날로그 게이지를 읽고 시간 계산을 실행하는 방법을 보여줍니다. 시스템 명령어를 사용하여 JSON 출력을 적용합니다.
+以下範例說明如何使用模型讀取類比儀表，並執行時間計算。並使用系統指令強制輸出 JSON 格式。
 
 ### Python
 
@@ -145,9 +144,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## 컨테이너의 유체 측정
+## 測量容器中的液體
 
-다음 예시에서는 코드 실행을 사용하여 컨테이너의 유체 수준을 측정하는 방법을 보여줍니다.
+以下範例說明如何使用執行程式碼功能，測量容器中的液體量。
 
 ### Python
 
@@ -177,9 +176,9 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-## 회로 기판의 표시 읽기
+## 解讀電路板上的標記
 
-다음 예시에서는 코드 실행을 사용하여 회로 기판의 표시를 읽는 방법을 보여줍니다.
+以下範例說明如何使用程式碼執行功能，讀取電路板上的標記。
 
 ### Python
 
@@ -209,11 +208,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-![회로 기판의 표시를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=ko)
+![電路板上標記的範例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=zh-tw)
 
-## 이미지 주석
+## 圖片註解
 
-다음 예시에서는 코드 실행을 사용하여 이미지에 주석을 달고 (예: 폐기 안내 화살표 그리기) 수정된 이미지를 반환하는 방법을 보여줍니다.
+以下範例說明如何使用執行程式碼功能為圖片加上註解 (例如繪製箭頭表示處理說明)，並傳回修改後的圖片。
 
 ### Python
 
@@ -247,11 +246,11 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-다음은 이미지 입력의 예입니다.
+以下是圖片輸入內容範例。
 
-![읽을 시계를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=ko)
+![顯示時鐘的範例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=zh-tw)
 
-모델 출력은 다음과 유사합니다.
+模型輸出內容會與下列內容類似：
 
 ```
   The annotated image shows the suggested disposal locations for the items on the table:
@@ -260,18 +259,18 @@ print(interaction.output_text)
   - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## 다음 단계
+## 後續步驟
 
-- [작업 조정](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko) - 맞춤 로봇 API를 사용한 장기 작업
-- [스트리밍을 사용한 로봇공학](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko) - 실시간 양방향 스트리밍 (Gemini Robotics ER 2만 해당)
-- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko) - 순간 찾기 및 진행률 분류 (Gemini Robotics ER 2만 해당)
+- [工作流程協調](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-tw)：使用自訂機器人 API 執行長期任務。
+- [串流機器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)：即時雙向串流 (僅限 Gemini Robotics ER 2)。
+- [影片理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-tw)：尋找特定時刻和進度分類 (僅限 Gemini Robotics ER 2)。
 
-의견 보내기
+提供意見
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-최종 업데이트: 2026-09-08(UTC)
+上次更新時間：2026-09-08 (世界標準時間)。
 
-의견을 전달하고 싶나요?
+想進一步說明嗎？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-08(UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-08 (世界標準時間)。"],[],[]]

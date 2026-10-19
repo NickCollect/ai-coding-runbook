@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=zh-TW
-fetched_at: 2026-10-12T07:03:40.743490+00:00
-title: "\u4f7f\u7528 Lyria 3.5 \u751f\u6210\u97f3\u6a02 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=it
+fetched_at: 2026-10-19T05:54:15.429299+00:00
+title: "Generare musica con Lyria 3.5 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 4 Argon è ora disponibile. [Provalo](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=it).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
 
-提供意見
+Invia feedback
 
-# 使用 Lyria 3.5 生成音樂
+# Generare musica con Lyria 3.5
 
-Lyria 3.5 是 Google 的音樂生成模型系列，可透過 Gemini API 使用。使用 Lyria 3.5，你可以根據文字提示或圖片生成高品質的 44.1 kHz 立體聲音訊。這類模型可提供結構一致的音樂，包括人聲、歌詞時間碼和完整樂器編曲。
+Lyria 3.5 è la famiglia di modelli di generazione di musica di Google, disponibile tramite l'API Gemini. Con Lyria 3.5, puoi generare audio stereo di alta qualità a 44, 1 kHz da prompt testuali o da immagini. Questi modelli offrono coerenza strutturale, tra cui voci, testi sincronizzati e arrangiamenti strumentali completi.
 
-Lyria 系列包含以下模型：
+La famiglia Lyria include i modelli:
 
-| 模型 | 模型 ID | 適用情境 | 時間長度 | 輸出內容 |
+| Modello | ID modello | Ideale per | Durata | Output |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | 短片、循環播放、預覽 | 30 秒 | MP3 |
-| **Lyria 3.5** | `lyria-3.5` | 含主歌、副歌和橋段的完整歌曲 | 幾分鐘 (可透過提示詞控制) | MP3 |
+| **Clip di Lyria 3** | `lyria-3-clip-preview` | Clip brevi, loop, anteprime | 30 secondi | MP3 |
+| **Lyria 3.5** | `lyria-3.5` | Brani completi con strofe, ritornelli e bridge | Un paio di minuti (controllabile tramite prompt) | MP3 |
 
-這兩款模型都可透過標準 `generateContent` 方法和新的 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 使用，支援多模態輸入 (文字和圖片)，並生成 **44.1 kHz 高精準度立體聲**音訊。
+Entrambi i modelli possono essere utilizzati con il metodo `generateContent` standard e la nuova [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it), supportano input multimodali (testo e immagini) e producono audio stereo ad alta fedeltà a 44,1 kHz.
 
-## 生成音樂短片
+## Genera un clip musicale
 
-Lyria 3 Clip 模型一律會生成 **30 秒**的片段。如要生成短片，請使用文字提示詞呼叫 `generateContent` 方法。回覆一律會包含生成的歌詞和歌曲結構，以及音訊。
+Il modello Lyria 3 Clip genera sempre un clip di **30 secondi**. Per generare un clip, chiama il metodo `generateContent` con un prompt testuale. La risposta include sempre il testo e la struttura della canzone generati insieme all'audio.
 
 ### Python
 
@@ -213,9 +213,9 @@ public class GenerateMusicClip {
 }
 ```
 
-## 生成完整歌曲
+## Genera un brano completo
 
-使用 `lyria-3.5` 模型生成完整歌曲，長度約為幾分鐘。Pro 版模型可理解音樂結構，並創作具有不同主歌、副歌和橋段的樂曲。如要影響時長，可以在提示中指定 (例如「創作 2 分鐘的歌曲」)，或使用[時間戳記](#timing)定義結構。
+Utilizza il modello `lyria-3.5` per generare brani completi della durata di un paio di minuti. Il modello Pro comprende la struttura musicale e può creare composizioni con strofe, ritornelli e bridge distinti. Puoi influenzare la durata specificandola nel prompt (ad es. "crea un brano di 2 minuti") o utilizzando i [timestamp](#timing) per definire la struttura.
 
 ### Python
 
@@ -290,82 +290,9 @@ var response = await client.Models.GenerateContentAsync(
 );
 ```
 
-## 選取輸出格式
+## Seleziona formato di output
 
-根據預設，Lyria 3.5 模型會生成 **MP3** 格式的音訊。對於 Lyria 3.5，您也可以在 `generationConfig` 中設定 `response_format`，要求以 **WAV** 格式輸出。
-
-### Python
-
-```
-from google.genai import types
-
-response = client.models.generate_content(
-    model="lyria-3.5",
-    contents="An atmospheric ambient track.",
-    config=types.GenerateContentConfig(
-        response_modalities=["AUDIO", "TEXT"],
-        response_format={"audio": {"mime_type": "audio/wav"}},
-    ),
-)
-```
-
-### JavaScript
-
-```
-const response = await ai.models.generateContent({
-  model: "lyria-3.5",
-  contents: "An atmospheric ambient track.",
-  config: {
-    responseModalities: ["AUDIO", "TEXT"],
-    responseFormat: { audio: { mimeType: "audio/wav" } },
-  },
-});
-```
-
-### Go
-
-```
-config := &genai.GenerateContentConfig{
-    ResponseModalities: []string{"AUDIO", "TEXT"},
-    ResponseMIMEType:   "audio/wav",
-}
-
-result, err := client.Models.GenerateContent(
-    ctx,
-    "lyria-3.5",
-    genai.Text("An atmospheric ambient track."),
-    config,
-)
-```
-
-### Java
-
-```
-GenerateContentConfig config = GenerateContentConfig.builder()
-    .responseModalities("AUDIO", "TEXT")
-    .responseFormat(ResponseFormat.builder().audio(AudioFormat.builder().mimeType("audio/wav").build()).build())
-    .build();
-
-GenerateContentResponse response = client.models.generateContent(
-    "lyria-3.5",
-    "An atmospheric ambient track.",
-    config);
-```
-
-### C#
-
-```
-var config = new GenerateContentConfig {
-  ResponseModalities = { "AUDIO", "TEXT" },
-  ResponseMimeType = "audio/wav"
-};
-
-var response = await client.Models.GenerateContentAsync(
-  model: "lyria-3.5",
-  contents: "An atmospheric ambient track.",
-  config: config
-);
-```
+Per impostazione predefinita, i modelli Lyria 3.5 generano audio in formato **MP3**. Per Lyria 3.5, puoi anche richiedere l'output in formato **WAV** (`AUDIO_WAV`) impostando `generationConfig.responseFormat.audio.mimeType` su `"AUDIO_WAV"`.
 
 ### REST
 
@@ -382,14 +309,14 @@ curl -s -X POST \
     }],
     "generationConfig": {
       "responseModalities": ["AUDIO", "TEXT"],
-      "responseFormat": { "audio": { "mimeType": "audio/wav" } }
+      "responseFormat": { "audio": { "mimeType": "AUDIO_WAV" } }
     }
   }'
 ```
 
-## 剖析回應
+## Analizza la risposta
 
-Lyria 3.5 的回覆包含多個部分。文字部分包含生成的歌詞，或歌曲結構的 JSON 說明。含有音訊位元組的部分為 `inline_data`。
+La risposta di Lyria 3.5 contiene più parti. Le parti di testo contengono il testo generato o una descrizione JSON della struttura del brano. Le parti con `inline_data` contengono i byte audio.
 
 ### Python
 
@@ -515,9 +442,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## 根據圖片生成音樂
+## Genera musica dalle immagini
 
-Lyria 3.5 支援多模態輸入，您最多可以提供 **10 張圖片**和文字提示詞，模型會根據視覺內容創作音樂。
+Lyria 3.5 supporta input multimodali: puoi fornire fino a **10 immagini** insieme al prompt testuale e il modello comporrà musica ispirata ai contenuti visivi.
 
 ### Python
 
@@ -638,9 +565,9 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## 提供自訂歌詞
+## Fornisci testi personalizzati
 
-你可以自行撰寫歌詞，並加入提示。使用 `[Verse]`、`[Chorus]` 和 `[Bridge]` 等區段標記，協助模型瞭解歌曲結構：
+Puoi scrivere i tuoi testi e includerli nel prompt. Utilizza i tag di sezione come `[Verse]`, `[Chorus]` e `[Bridge]` per aiutare il modello a comprendere la struttura del brano:
 
 ### Python
 
@@ -819,9 +746,9 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## 控制時間和結構
+## Controlla i tempi e la struttura
 
-你可以使用時間戳記，在歌曲的特定時間點指定要執行的動作。這項功能可控制樂器進入的時間、歌詞的傳送時間，以及歌曲的進展方式：
+Puoi specificare esattamente cosa succede in momenti specifici del brano utilizzando i timestamp. Questo è utile per controllare quando entrano gli strumenti, quando vengono pronunciate le parole e come procede la canzone:
 
 ### Python
 
@@ -936,9 +863,9 @@ curl -s -X POST \
   }'
 ```
 
-## 生成配樂
+## Genera tracce strumentali
 
-如要製作背景音樂、遊戲配樂，或任何不需要人聲的用途，可以提示模型製作純音樂曲目：
+Per la musica di sottofondo, le colonne sonore dei giochi o qualsiasi caso d'uso in cui non sono richieste parti vocali, puoi chiedere al modello di produrre tracce solo strumentali:
 
 ### Python
 
@@ -1008,9 +935,9 @@ curl -s -X POST \
   }'
 ```
 
-## 生成不同語言的音樂
+## Genera musica in lingue diverse
 
-Lyria 3.5 會以提示詞的語言生成歌詞。如要生成法文歌詞的歌曲，請用法文撰寫提示。模型會根據語言調整語音風格和發音。
+Lyria 3.5 genera i testi nella lingua del prompt. Per generare un brano con testi in francese, scrivi il prompt in francese. Il modello adatta lo stile vocale e la pronuncia alla lingua.
 
 ### Python
 
@@ -1085,13 +1012,14 @@ curl -s -X POST \
   }'
 ```
 
-## 模型智慧
+## Intelligence del modello
 
-Lyria 3.5 會分析提示程序，模型會根據提示，推論音樂結構 (前奏、主歌、副歌、橋段等)。這項程序會在生成音訊前執行，確保結構一致性和音樂性。
+Lyria 3.5 analizza il processo del prompt in cui il modello ragiona sulla struttura musicale (intro, strofa, ritornello, bridge e così via) in base al prompt.
+Questo avviene prima della generazione dell'audio e garantisce coerenza strutturale e musicalità.
 
-## Interactions API
+## API Interactions
 
-您可以使用 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 搭配 Lyria 3.5 模型，這個 API 是與 Gemini 模型和代理程式互動的統一介面。可簡化複雜多模態用途的狀態管理和長時間執行的工作。
+Puoi utilizzare i modelli Lyria 3.5 con l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it), un'interfaccia unificata per interagire con i modelli e gli agenti Gemini. Semplifica la gestione dello stato e le attività a lunga esecuzione per casi d'uso multimodali complessi.
 
 ### Python
 
@@ -1158,41 +1086,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 提示指南
+## Guida ai prompt
 
-如要瞭解如何為音樂類型、樂器、歌曲結構、自訂歌詞和演唱風格撰寫有效的提示詞，請參閱 [Lyria 提示詞指南](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=zh-tw)。
+Per scoprire come creare prompt efficaci per generi musicali, strumenti, struttura dei brani, testi personalizzati e stili di esecuzione vocale, consulta la [guida ai prompt di Lyria](https://ai.google.dev/gemini-api/docs/lyria-prompt-guide?hl=it).
 
-## 最佳做法
+## Best practice
 
-- **先使用 Clip 進行疊代。**使用速度較快的 `lyria-3-clip-preview` 模型實驗提示詞，再使用 `lyria-3.5` 生成完整長度的內容。
-- 提供**清楚明確**的說明，籠統的提示詞只會產出一般結果。提及樂器、BPM、調性、情境和結構，以獲得最佳輸出內容。
-- **語言要相符。**以所需語言輸入提示。
-- **使用章節標記。**`[Verse]`、`[Chorus]`、`[Bridge]` 標記可為模型提供明確的結構。
-- **將歌詞與操作說明分開。**提供自訂歌詞時，請清楚區分歌詞和音樂方向指令。
+- **Esegui l'iterazione con Clip prima di tutto.** Utilizza il modello `lyria-3-clip-preview` più veloce per sperimentare con i prompt prima di impegnarti in una generazione completa con `lyria-3.5`.
+- **Usa un testo specifico.** I prompt vaghi producono risultati generici. Per ottenere i risultati migliori, menziona strumenti, BPM, tonalità, mood e struttura.
+- **Corrispondere alla tua lingua.** Scrivi il prompt nella lingua in cui vuoi i testi.
+- **Utilizza i tag di sezione.** I tag `[Verse]`, `[Chorus]`, `[Bridge]` forniscono al modello una struttura chiara da seguire.
+- **Separa i testi dalle istruzioni.** Quando fornisci testi personalizzati, separali chiaramente dalle istruzioni per la direzione musicale.
 
-## 限制
+## Limitazioni
 
-- **安全性**：所有提示都會經過安全篩選器檢查。系統會封鎖觸發篩選器的提示。包括要求特定藝人聲音的提示，或是生成受著作權保護的歌詞。
-- **浮水印**：所有生成的音訊都會加上 [SynthID 音訊浮水印](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=zh-tw)，方便識別。這種浮水印人耳無法辨識，不會影響聆聽體驗。
-- **多輪遞進編輯**：音樂生成是單輪程序。目前版本的 Lyria 3.5 不支援透過多個提示，反覆編輯或修正生成的片段。
-- **長度**：Clip 模型一律會生成 30 秒的短片。Pro 模型會生成幾分鐘的歌曲，確切時長取決於提示。
-- **決定性**：即使使用相同提示，每次通話的結果也可能不同。
+- **Sicurezza**: tutti i prompt vengono controllati dai filtri di sicurezza. I prompt che attivano i filtri verranno bloccati. Ciò include i prompt che richiedono voci di artisti specifici o la generazione di testi protetti da copyright.
+- **Filigrana**: tutti gli audio generati includono una [filigrana audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=it) per l'identificazione. Questa filigrana è impercettibile all'orecchio umano e non influisce sull'esperienza di ascolto.
+- **Editing multi-turno**: la generazione di musica è un processo a turno singolo.
+  La modifica iterativa o il perfezionamento di un clip generato tramite più prompt non sono supportati nella versione attuale di Lyria 3.5.
+- **Durata**: il modello Clip genera sempre clip di 30 secondi. Il modello Pro genera brani che durano un paio di minuti; la durata esatta può essere influenzata dal prompt.
+- **Determinismo**: i risultati possono variare tra le chiamate, anche con lo stesso prompt.
 
-## 後續步驟
+## Passaggi successivi
 
-- 查看 Lyria 3.5 模型的[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)。
-- 使用 Lyria RealTime [即時生成串流音樂](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=zh-tw)。
-- 使用 [TTS 模型](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)生成多人對話。
-- 瞭解如何生成[圖片](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)或[影片](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)。
-- 瞭解 Gemini 如何[解讀音訊檔案](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)。
-- 使用 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw) 與 Gemini 即時對話。
+- Controlla i [prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it) dei modelli Lyria 3.5.
+- Prova la [generazione di musica in streaming in tempo reale](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=it) con Lyria RealTime.
+- Genera conversazioni con più relatori con i [modelli TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it).
+- Scopri come generare [immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) o [video](https://ai.google.dev/gemini-api/docs/video?hl=it).
+- Scopri come Gemini può [comprendere i file audio](https://ai.google.dev/gemini-api/docs/audio?hl=it).
+- Avvia una conversazione in tempo reale con Gemini utilizzando l'[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it).
 
-提供意見
+Invia feedback
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-上次更新時間：2026-10-09 (世界標準時間)。
+Ultimo aggiornamento 2026-10-19 UTC.
 
-想進一步說明嗎？
+Vuoi dirci altro?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-09 (世界標準時間)。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-10-19 UTC."],[],[]]

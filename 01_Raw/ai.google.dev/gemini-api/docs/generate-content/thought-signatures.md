@@ -1,101 +1,98 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=fr
-fetched_at: 2026-10-12T06:59:29.891869+00:00
-title: "Signatures de r\u00e9flexion \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=ja
+fetched_at: 2026-10-19T05:58:28.998428+00:00
+title: "\u601d\u8003\u30b7\u30b0\u30cd\u30c1\u30e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# Signatures de réflexion
+# 思考シグネチャ
 
-Les signatures de réflexion sont des représentations chiffrées du processus de réflexion interne du modèle. Elles permettent de préserver le contexte de raisonnement lors d'interactions en plusieurs étapes.
-Lorsque vous utilisez des modèles de réflexion (tels que les séries Gemini 3 et 2.5), l'API peut
-renvoyer un champ `thoughtSignature` dans les [parties de contenu](https://ai.google.dev/api/caching?hl=fr#Part)
-de la réponse (par exemple, les parties `text` ou `functionCall`).
+思考シグネチャは、モデルの内部的な思考プロセスを暗号化したもので、マルチステップのやり取りで推論コンテキストを維持するために使用されます。
+思考モデル（Gemini 4、3、2.5 シリーズなど）を使用する場合、API は
+`thoughtSignature` フィールドをレスポンスの[コンテンツ部分](https://ai.google.dev/api/caching?hl=ja#Part)
+（`text` 部分や `functionCall` 部分など）に返すことがあります。
 
-En règle générale, si vous recevez une signature de réflexion dans une réponse de modèle, vous devez la renvoyer exactement telle qu'elle a été reçue lorsque vous envoyez l'historique de la conversation au tour suivant.
-**Lorsque vous utilisez des modèles Gemini 3, vous devez renvoyer les signatures de réflexion lors de l'appel de fonction. Sinon, vous recevrez une erreur de validation** (code d'état 4xx).
-Cela inclut l'utilisation du `minimal`
-[paramètre de niveau de réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#thinking-levels) pour Gemini 3
-Flash.
+原則として、モデル レスポンスで思考シグネチャを受け取った場合は、次のターンで会話履歴を送信するときに、受け取ったとおりに返します。
+**Gemini 4 モデルと Gemini 3 モデルを使用する場合は、関数呼び出し中に思考シグネチャを返す必要があります。そうしないと、検証エラー** （4xx ステータス コード）が発生します。
+これには、Gemini 3
+Flash で `minimal`
+[思考レベル](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#thinking-levels)の設定を使用する場合も含まれます。
 
-## Fonctionnement
+## 仕組み
 
-Le graphique ci-dessous illustre la signification des termes "tour" et "étape" tels qu'ils s'appliquent à
-[l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) dans l'API Gemini. Un "tour" est un échange unique et complet dans une conversation entre un utilisateur et un modèle. Une "étape" est une action ou une opération plus précise effectuée par le modèle, souvent dans le cadre d'un processus plus vaste pour terminer un tour.
+下の図は、Gemini API での
+[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)における「ターン」と「ステップ」の意味を視覚化したものです。「ターン」とは、ユーザーとモデルの間の会話における 1 回の完全なやり取りです。「ステップ」とは、モデルが実行するより細かいアクションまたはオペレーションです。多くの場合、ターンを完了するための大きなプロセスの一部として実行されます。
 
-![Diagramme des tours et des étapes d'appel de fonction](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=fr)
+![関数呼び出しのターンとステップの図](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=ja)
 
-*Ce document se concentre sur la gestion des appels de fonction pour les modèles Gemini 3. Pour connaître les différences avec la version 2.5, consultez la section [Comportement du modèle](#model-behavior).*
+*このドキュメントでは、Gemini 4 モデルと Gemini 3 モデルの関数呼び出しの処理に焦点を当てています。2.5 との違いについては、[モデルの動作](#model-behavior)のセクションをご覧ください。*
 
-Gemini 3 renvoie des signatures de réflexion pour toutes les réponses de modèle (réponses de l'API) avec un appel de fonction. Les signatures de réflexion s'affichent dans les cas suivants :
+Gemini 4 と Gemini 3 は、関数呼び出しを含むすべてのモデル レスポンス（API からのレスポンス）に対して思考シグネチャを返します。思考シグネチャは、次のような場合に表示されます。
 
-- En cas d'appels de fonction [parallèles](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#parallel_function_calling), la première partie d'appel de fonction renvoyée par la réponse du modèle comporte une
-  signature de réflexion.
-- En cas d'appels de fonction séquentiels (en plusieurs étapes), chaque appel de fonction comporte une signature, et vous devez renvoyer toutes les signatures.
-- Les réponses de modèle sans appel de fonction renvoient une signature de réflexion dans la dernière partie renvoyée par le modèle.
+- [並列関数](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#parallel_function_calling)
+  呼び出しがある場合、モデル レスポンスから返される最初の関数呼び出し部分には
+  思考シグネチャが含まれます。
+- 順次関数呼び出しがある場合（マルチステップ）、各関数呼び出しにシグネチャがあり、すべてのシグネチャを返す必要があります。
+- 関数呼び出しのないモデル レスポンスでは、モデルによって返される最後の部分に思考シグネチャを返します。
 
-Le tableau suivant fournit une visualisation des appels de fonction en plusieurs étapes, combinant les définitions des tours et des étapes avec le concept de signatures présenté ci-dessus :
+次の表は、マルチステップ関数呼び出しの視覚化を示しています。ターンとステップの定義と、前述のシグネチャの概念を組み合わせています。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Aucun |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | なし |
 
-## Signatures dans les parties d'appel de fonction
+## 関数呼び出し部分のシグネチャ
 
-Lorsque Gemini génère un `functionCall`, il s'appuie sur la `thought_signature` pour traiter correctement la sortie de l'outil au tour suivant.
+Gemini は `functionCall` を生成するときに、`thought_signature` を使用して次のターンでツールの出力を正しく処理します。
 
-- **Comportement**:
-  - **Appel de fonction unique** : la partie `functionCall` contient une `thought_signature`.
-  - **Appels de fonction parallèles** : si le modèle génère des appels de fonction parallèles
-    dans une réponse, la `thought_signature` n'est associée **qu'à la première**
-    `functionCall` partie. Les parties `functionCall` suivantes de la même réponse **ne contiennent pas** de signature.
-- **Exigence** : vous **devel** renvoyer cette signature dans la partie exacte où elle
-  a été reçue lors de l'envoi de l'historique de la conversation.
-- **Validation** : une validation stricte est appliquée à tous les appels de fonction dans
-  le tour actuel . (Seul le tour actuel est requis. Nous n'effectuons pas de validation sur les tours précédents.)
-  - L'API revient dans l'historique (du plus récent au plus ancien) pour trouver le message **Utilisateur** le plus récent contenant du contenu standard (par exemple, `text`) ( qui correspond au début du tour actuel). Il ne s'agit **be** d'une `functionResponse`.
-  - **Tous** les tours `functionCall` du modèle qui se produisent après ce message d'utilisation spécifique sont considérés comme faisant partie du tour.
-  - La **première** partie `functionCall` de **chaque étape** du tour actuel **doit** inclure sa `thought_signature`.
-  - Si vous omettez une `thought_signature` pour la première partie `functionCall` d'une étape du tour actuel, la requête échoue avec une erreur 400.
-- **Si les signatures appropriées ne sont pas renvoyées, voici comment vous recevrez une erreur**
-  - Modèles Gemini 3 : si vous n'incluez pas de signatures, vous recevrez une erreur 400. La formulation sera la suivante :
-    - L'appel de fonction `<Function Call>` dans le bloc de contenu `<index of contents array>`
-      ne comporte pas de `thought_signature`. Par exemple, *L'appel de
-      fonction `FC1` dans le bloc de contenu `1.` ne comporte pas de `thought_signature`.*
+- **動作**:
+  - **単一の関数呼び出し**: `functionCall` 部分に `thought_signature` が含まれます。
+  - **並列関数呼び出し**: モデルがレスポンスで並列関数呼び出しを生成する場合、`thought_signature` は**最初の**
+    `functionCall` 部分にのみ付加されます。同じレスポンス内の後続の `functionCall` 部分にはシグネチャは**含まれません** 。
+- **要件**: 会話履歴を返す際は、このシグネチャを受け取った部分に正確に返す**必要があります**。
+- **検証**: 現在のターン内のすべての関数呼び出しに対して厳格な検証が適用されます。（現在のターンのみが必要です。以前のターンでは検証されません）
+  - API は履歴を遡って（最新から最古まで）、標準コンテンツ（`text` など）を含む最新の**ユーザー** メッセージ（現在のターンの開始）を検索します。これは `functionResponse` **be** 。
+  - その特定のユーザー メッセージの後に発生する**すべての** モデル `functionCall` ターンは、ターンの一部と見なされます。
+  - 現在のターンの**各ステップ** の**最初の** `functionCall` 部分には、その `thought_signature` を含める**必要があります** 。
+  - 現在のターンのいずれかのステップの最初の `functionCall` 部分の `thought_signature` を省略すると、リクエストは失敗し、400 エラーが返されます。
+- **適切なシグネチャが返されない場合、エラーは次のように発生します**
+  - Gemini 3 モデル: シグネチャを含めないと、400 エラーが発生します。文言は次の形式になります。
+    - `<index of contents array>`
+      コンテンツ ブロックの関数呼び出し `<Function Call>` に `thought_signature` がありません。例: *関数
+      呼び出し `FC1` コンテンツ ブロックに `1.` `thought_signature`がありません。*
 
-### Exemple d'appel de fonction séquentiel
+### 順次関数呼び出しの例
 
-Cette section présente un exemple d'appels de fonction multiples dans lequel l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+このセクションでは、ユーザーが複数のタスクを必要とする複雑な質問をした場合の、複数の関数呼び出しの例を示します。
 
-Examinons un exemple d'appel de fonction multitours dans lequel l'utilisateur pose
-une question complexe nécessitant plusieurs tâches : `"Check flight status for AA100 and
-book a taxi if delayed"`.
+ユーザーが複数のタスクを必要とする複雑な質問（`"Check flight status for AA100 and
+book a taxi if delayed"`）をした場合の、マルチターン関数呼び出しの例を見てみましょう。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+次のコードは、上の表のシーケンスを示しています。
 
-**Tour 1, étape 1 (requête utilisateur)**
+**ターン 1、ステップ 1（ユーザーのリクエスト）**
 
 ```
 {
@@ -150,7 +147,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**ターン 1、ステップ 1（モデルのレスポンス）**
 
 ```
 {
@@ -171,8 +168,8 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)** Comme ce tour utilisateur ne contient qu'une `functionResponse` (pas de nouveau texte), nous sommes toujours au tour 1. Nous
-devons conserver `<Signature_A>`.
+**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）** このユーザーのターンには `functionResponse` のみ（新しいテキストなし）が含まれているため、まだターン 1 です。
+は保持する必要があります`<Signature_A>`。
 
 ```
 {
@@ -213,7 +210,7 @@ devons conserver `<Signature_A>`.
 }
 ```
 
-**Tour 1, étape 2 (modèle)** Le modèle décide maintenant de réserver un taxi en fonction de la sortie d'outil précédente.
+**ターン 1、ステップ 2（モデル）** モデルは、前のツールの出力に基づいてタクシーを予約することにしました。
 
 ```
 {
@@ -234,7 +231,7 @@ devons conserver `<Signature_A>`.
 }
 ```
 
-**Tour 1, étape 3 (utilisateur – envoi de la sortie d'outil)** Pour envoyer la confirmation de réservation du taxi, nous devons inclure des signatures pour **TOUS** les appels de fonction de cette boucle(`<Signature A>` + `<Signature B>`).
+**ターン 1、ステップ 3（ユーザー - ツールの出力を送信）** タクシーの予約確認を送信するには、このループ内の**すべての** 関数呼び出し（`<Signature A>` + `<Signature B>`）の署名を含める必要があります。
 
 ```
 {
@@ -303,19 +300,19 @@ devons conserver `<Signature_A>`.
 }
 ```
 
-### Exemple d'appel de fonction parallèle
+### 並列関数呼び出しの例
 
-Examinons un exemple d'appel de fonction parallèle dans lequel l'utilisateur demande
-`"Check weather in Paris and London"` pour voir où le modèle effectue la validation.
+ユーザーが
+`"Check weather in Paris and London"`と尋ねた場合の並列関数呼び出しの例を見てみましょう。モデルが検証を行う場所を確認できます。
 
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (no FCs) | Aucun |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  （FC なし） | なし |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+次のコードは、上の表のシーケンスを示しています。
 
-**Tour 1, étape 1 (requête utilisateur)**
+**ターン 1、ステップ 1（ユーザーのリクエスト）**
 
 ```
 {
@@ -354,7 +351,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**ターン 1、ステップ 1（モデルのレスポンス）**
 
 ```
 {
@@ -382,8 +379,8 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)** Nous devons conserver
-`<Signature_A>` sur la première partie exactement telle qu'elle a été reçue.
+**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）** 最初の部分の
+`<Signature_A>` は、受け取ったとおりに保持する必要があります。
 
 ```
 [
@@ -441,20 +438,18 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 ]
 ```
 
-## Signatures dans les parties non `functionCall`
+## `functionCall` 以外のパーツのシグネチャ
 
-Gemini peut également renvoyer des `thought_signatures` dans la dernière partie de la réponse dans les parties qui ne sont pas des appels de fonction.
+関数呼び出し以外の部分のレスポンスの最後の部分に、`thought_signatures` が返されることもあります。
 
-- **Comportement** : la dernière partie de contenu (`text, inlineData…`) renvoyée par le
-  modèle peut contenir une `thought_signature`.
-- **Recommandation** : il est **recommandé** de renvoyer ces signatures pour s'assurer que
-  le modèle maintient un raisonnement de haute qualité, en particulier pour les instructions complexes
-  ou les workflows d'agent simulés.
-- **Validation** : l'API **n'applique pas** strictement la validation. Vous ne recevrez pas d'erreur bloquante si vous les omettez, mais les performances peuvent se dégrader.
+- **動作**: モデルから返される最終的なコンテンツ部分（`text, inlineData…`）に
+  `thought_signature`が含まれることがあります。
+- **推奨事項**: 特に複雑な指示の実行や Agentic Workflows のシミュレーションで、モデルが高品質の推論を維持するために、これらのシグネチャを返すことを**おすすめします** 。
+- **検証**: API は検証を厳密に適用**しません** 。省略してもブロッキング エラーは発生しませんが、パフォーマンスが低下する可能性があります。
 
-### Raisonnement textuel/contextuel (aucune validation)
+### テキスト/コンテキスト推論（検証なし）
 
-**Tour 1, étape 1 (réponse de modèle)**
+**ターン 1、ステップ 1（モデルのレスポンス）**
 
 ```
 {
@@ -468,7 +463,7 @@ Gemini peut également renvoyer des `thought_signatures` dans la dernière parti
 }
 ```
 
-**Tour 2, étape 1 (utilisateur)**
+**ターン 2、ステップ 1（ユーザー）**
 
 ```
 [
@@ -486,31 +481,31 @@ Gemini peut également renvoyer des `thought_signatures` dans la dernière parti
 ]
 ```
 
-## Signatures pour la compatibilité avec OpenAI
+## OpenAI 互換性のシグネチャ
 
-Les exemples suivants montrent comment gérer les signatures de réflexion pour une API de complétion de chat
-à l'aide de [la compatibilité avec OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=fr).
+次の例は、[OpenAI 互換性](https://ai.google.dev/gemini-api/docs/openai?hl=ja)を使用してチャット
+補完 API の思考シグネチャを処理する方法を示しています。
 
-### Exemple d'appel de fonction séquentiel
+### 順次関数呼び出しの例
 
-Voici un exemple d'appels de fonction multiples dans lequel l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+これは、ユーザーが複数のタスクを必要とする複雑な質問をした場合の、複数の関数呼び出しの例です。
 
-Examinons un exemple d'appel de fonction multitours dans lequel l'utilisateur demande `Check flight status for AA100 and book a taxi if delayed`. Vous pouvez voir ce qui se passe lorsque l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+ユーザーが `Check flight status for AA100 and book a taxi if delayed` と尋ねた場合の、マルチターン関数呼び出しの例を見てみましょう。ユーザーが複数のタスクを必要とする複雑な質問をした場合に何が起こるかを確認できます。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant décrit la séquence donnée.
+次のコードは、指定されたシーケンスを示しています。
 
-**Tour 1, étape 1 (requête utilisateur)**
+**ターン 1、ステップ 1（ユーザーのリクエスト）**
 
 ```
 {
-  "model": "google/gemini-3.1-pro-preview",
+  "model": "google/gemini-4-argon",
   "messages": [
     {
       "role": "user",
@@ -560,7 +555,7 @@ Le code suivant décrit la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**ターン 1、ステップ 1（モデルのレスポンス）**
 
 ```
 {
@@ -583,10 +578,9 @@ Le code suivant décrit la séquence donnée.
     }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)**
+**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）**
 
-Comme ce tour utilisateur ne contient qu'une `functionResponse` (pas de nouveau texte), nous sommes
-toujours au tour 1 et devons conserver `<Signature_A>`.
+このユーザーのターンには `functionResponse` のみ（新しいテキストなし）が含まれているため、まだターン 1 です。`<Signature_A>` は保持する必要があります。
 
 ```
 "messages": [
@@ -621,9 +615,9 @@ toujours au tour 1 et devons conserver `<Signature_A>`.
   ]
 ```
 
-**Tour 1, étape 2 (modèle)**
+**ターン 1、ステップ 2（モデル）**
 
-Le modèle décide maintenant de réserver un taxi en fonction de la sortie d'outil précédente.
+モデルは、前のツールの出力に基づいてタクシーを予約することにしました。
 
 ```
 {
@@ -646,10 +640,10 @@ Le modèle décide maintenant de réserver un taxi en fonction de la sortie d'ou
 }
 ```
 
-**Tour 1, étape 3 (utilisateur – envoi de la sortie d'outil)**
+**ターン 1、ステップ 3（ユーザー - ツールの出力を送信）**
 
-Pour envoyer la confirmation de réservation du taxi, nous devons inclure des signatures pour TOUS
-les appels de fonction de cette boucle (`<Signature A>` + `<Signature B>`).
+タクシーの予約確認を送信するには、このループ内のすべての
+関数呼び出し（`<Signature A>` + `<Signature B>`）の署名を含める必要があります。
 
 ```
 "messages": [
@@ -708,21 +702,21 @@ les appels de fonction de cette boucle (`<Signature A>` + `<Signature B>`).
   ]
 ```
 
-### Exemple d'appel de fonction parallèle
+### 並列関数呼び出しの例
 
-Examinons un exemple d'appel de fonction parallèle dans lequel l'utilisateur demande
-`"Check weather in Paris and London"` pour voir où le modèle effectue la
-validation.
+ユーザーが
+`"Check weather in Paris and London"`と尋ねた場合の並列関数呼び出しの例を見てみましょう。モデルが
+検証を行う場所を確認できます。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tour** | **Étape** | **Requête utilisateur** | **Réponse de modèle** | **FunctionResponse** |
+| **ターン** | **ステップ** | **ユーザー リクエスト** | **モデルのレスポンス** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Voici le code permettant de parcourir la séquence donnée.
+指定されたシーケンスを示すコードは次のとおりです。
 
-**Tour 1, étape 1 (requête utilisateur)**
+**ターン 1、ステップ 1（ユーザーのリクエスト）**
 
 ```
 {
@@ -761,7 +755,7 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse de modèle)**
+**ターン 1、ステップ 1（モデルのレスポンス）**
 
 ```
 {
@@ -792,9 +786,9 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 2 (réponse utilisateur – envoi des sorties d'outil)**
+**ターン 1、ステップ 2（ユーザーのレスポンス - ツールの出力を送信）**
 
-Vous devez conserver `<Signature_A>` sur la première partie exactement telle qu'elle a été reçue.
+最初の部分の `<Signature_A>` は、受け取ったとおりに保持する必要があります。
 
 ```
 "messages": [
@@ -843,51 +837,44 @@ Vous devez conserver `<Signature_A>` sur la première partie exactement telle qu
   ]
 ```
 
-## Questions fréquentes
+## よくある質問
 
-1. **Comment transférer l'historique d'un autre modèle vers Gemini 3 avec une partie d'appel de fonction dans le tour et l'étape actuels ? Je dois fournir des parties d'appel de fonction
-   qui n'ont pas été générées par l'API et qui ne comportent donc pas de signature de réflexion associée
-   ?**
+1. **現在のターンとステップに関数呼び出し部分がある場合に、別のモデルから Gemini 4 または Gemini 3 に履歴を転送するにはどうすればよいですか？API で生成されなかったため、関連する
+   思考シグネチャがない関数呼び出し
+   部分を提供する必要があります。**
 
-   Bien qu'il soit fortement
-   déconseillé d'injecter des blocs d'appel de fonction personnalisés dans la requête, dans les cas où cela ne peut pas être évité (par exemple, fournir des informations
-   au modèle sur les appels de fonction et les réponses qui ont été exécutés
-   de manière déterministe par le client, ou transférer une trace d'un autre
-   modèle qui n'inclut pas de signatures de réflexion), vous pouvez définir les signatures
-   factices suivantes de `"context_engineering_is_the_way_to_go"` ou
-   `"skip_thought_signature_validator"` dans le champ de signature de réflexion pour ignorer
-   la validation.
-2. **Je renvoie des appels et des réponses de fonction parallèles entrelacés, et l'API renvoie un code 400. Pourquoi ?**
+   リクエストにカスタム関数呼び出しブロックを挿入することは強く
+   推奨されませんが、回避できない場合（クライアントによって決定論的に実行された関数呼び出しとレスポンスに関する情報をモデルに提供する場合や、思考シグネチャを含まない別のモデルからトレースを転送する場合など）は、思考シグネチャ フィールドに `"context_engineering_is_the_way_to_go"` または
+   `"skip_thought_signature_validator"` のダミー シグネチャを設定して、検証をスキップできます。
+2. **並列関数呼び出しとレスポンスをインターリーブして返していますが、API から 400 が返されます。なぜですか？**
 
-   Lorsque l'API renvoie des appels de fonction parallèles "FC1 + signature, FC2", la réponse utilisateur attendue est "FC1+ signature, FC2, FR1, FR2". Si vous les entrelacez comme "FC1 + signature, FR1, FC2, FR2", l'API renvoie une erreur 400.
-3. **Lors de la diffusion en streaming, le modèle ne renvoie pas d'appel de fonction. Je ne trouve pas
-   la signature de réflexion**
+   API が並列関数呼び出し「FC1 + signature, FC2」を返す場合、想定されるユーザー レスポンスは「FC1+ signature, FC2, FR1, FR2」です。「FC1 + signature, FR1, FC2, FR2」のようにインターリーブすると、API は 400 エラーを返します。
+3. **ストリーミング中にモデルが関数呼び出しを返さない場合、
+   思考シグネチャが見つかりません**
 
-   Lors d'une réponse de modèle ne contenant pas de FC avec une requête de diffusion en streaming, le modèle peut renvoyer la signature de réflexion dans une partie avec une partie de contenu textuel vide. Il est conseillé d'analyser l'intégralité de la requête jusqu'à ce que le modèle renvoie `finish_reason`.
+   ストリーミング リクエストで FC を含まないモデル レスポンスの場合、モデルはテキスト コンテンツ部分が空の部分に思考シグネチャを返すことがあります。モデルから `finish_reason` が返されるまで、リクエスト全体を解析することをおすすめします。
 
-## Signatures de réflexion pour différents modèles
+## モデルごとの思考シグネチャ
 
-[Les modèles Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=fr#gemini-3) et Gemini 2.5
-se comportent différemment avec les signatures de réflexion dans les appels de fonction :
+[Gemini 4](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=ja)、[Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)、Gemini 2.5 モデルでは、関数呼び出しの思考シグネチャの動作が異なります。
 
-- S'il existe des appels de fonction dans une réponse,
-  - Gemini 3 comporte toujours la signature sur la première partie d'appel de fonction.
-    Il est **obligatoire** de renvoyer cette partie.
-  - Gemini 2.5 comporte la signature dans la première partie (quel que soit le type). Il est **facultatif** de renvoyer cette partie.
-- S'il n'y a pas d'appels de fonction dans une réponse,
-  - Gemini 3 comporte la signature sur la dernière partie si le modèle génère une réflexion.
-  - Gemini 2.5 ne comporte pas de signature dans aucune partie.
+- レスポンスに関数呼び出しがある場合、
+  - Gemini 4 と Gemini 3 では、最初の関数呼び出し部分に常にシグネチャが含まれます。
+    その部分を返すことは**必須** です。
+  - Gemini 2.5 では、最初の部分にシグネチャが含まれます（タイプに関係なく）。その部分を返すことは**省略可能** です。
+- レスポンスに関数呼び出しがない場合、
+  - Gemini 4 と Gemini 3 では、モデルが思考を生成すると、最後の部分にシグネチャが含まれます。
+  - Gemini 2.5 では、どの部分にもシグネチャはありません。
 
-Pour plus de détails sur la comparaison, consultez la page [Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#signatures).
-Pour les modèles d'image Gemini 3, consultez la section Processus de réflexion du
-[guide de génération](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr#thinking-process) d'images.
+比較の詳細については、[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#signatures)のページをご覧ください。Gemini 3 Image モデルについては、
+[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja#thinking-process)ガイドの思考プロセスをご覧ください。
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/09/08 (UTC).
+最終更新日 2026-10-13 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/08 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-13 UTC。"],[],[]]

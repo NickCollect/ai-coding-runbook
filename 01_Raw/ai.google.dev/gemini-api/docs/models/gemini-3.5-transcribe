@@ -1,113 +1,113 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=th
-fetched_at: 2026-10-12T07:00:56.110876+00:00
-title: "Gemini 3.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=fr
+fetched_at: 2026-10-19T05:49:06.090667+00:00
+title: "Gemini\u00a03.5 Transcribe \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash พร้อมให้บริการแล้ว [ลองเลย](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=th)
+Gemini 4 Argon est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fr).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-# Gemini 3.5 Transcribe
+# Gemini 3.5 Transcribe
 
-Gemini 3.5 Transcribe เป็นโมเดลการแปลงเสียงเป็นข้อความที่อิงตามความสามารถในการทำความเข้าใจเสียงของ Gemini โดยจะให้การถอดเสียงที่แม่นยำและมีเวลาในการตอบสนองต่ำ พร้อมการตรวจหาภาษาตามคำพูด การระบุผู้พูด การประทับเวลาที่ระดับคำ การถอดเสียงอัจฉริยะ และการปรับคำพูดตามคำศัพท์ที่กำหนดเอง
+Gemini 3.5 Transcribe est un modèle de reconnaissance vocale basé sur les capacités de compréhension audio de Gemini. Il fournit une transcription précise et à faible latence avec détection de la langue basée sur les énoncés, identification du locuteur, codes temporels au niveau du mot, transcription intelligente et pondération vocale avec vocabulaire personnalisé.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=th)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-transcribe&hl=fr)
 
-## เอกสารประกอบ
+## Documentation
 
-Gemini 3.5 Transcribe จะแปลงเสียงพูดเป็นข้อความจากไฟล์เสียง โดยจะตรวจจับภาษาได้มากกว่า 85 ภาษาโดยอัตโนมัติ จัดการการสลับภาษาในโค้ด ระบุผู้พูดแต่ละคน แสดงการประทับเวลาที่ระดับคำ และปรับให้เข้ากับคำศัพท์เฉพาะโดเมนผ่านการกำหนดค่าคำศัพท์ที่กำหนดเอง
+Gemini 3.5 Transcribe convertit la parole en texte à partir de fichiers audio. Il détecte automatiquement plus de 85 langues, gère le changement de code multilingue, identifie les locuteurs individuels, génère des codes temporels au niveau des mots et s'adapte aux termes spécifiques à un domaine grâce au biais de vocabulaire personnalisé.
 
-ดูคำแนะนำเกี่ยวกับ[การถอดเสียงเป็นคำของเสียง](https://ai.google.dev/gemini-api/docs/transcribe?hl=th)เพื่อดูข้อมูลทั้งหมดเกี่ยวกับฟีเจอร์ที่ไม่ใช่การสตรีม หากต้องการถอดเสียงสตรีมแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำผ่าน WebSockets โปรดไปที่คู่มือ[การถอดเสียงเป็นคำแบบสด](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=th)โดยใช้ `gemini-3.5-transcribe-live` ดูราคาโดยละเอียดได้ที่[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3.5-transcribe)
+Consultez le guide [Transcription audio](https://ai.google.dev/gemini-api/docs/transcribe?hl=fr) pour en savoir plus sur les fonctionnalités non liées au streaming. Pour la transcription en temps réel à faible latence via WebSockets, consultez le guide [Transcription instantanée](https://ai.google.dev/gemini-api/docs/live-api/live-transcribe?hl=fr) à l'aide de `gemini-3.5-transcribe-live`. Pour en savoir plus sur les tarifs, consultez la [page des tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr#gemini-3.5-transcribe).
 
 ## gemini-3.5-transcribe
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Propriété | Description |
 | --- | --- |
-| รหัสโมเดล id\_card | `gemini-3.5-transcribe` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  เสียง (สูงสุด 1 ชั่วโมง)  **เอาต์พุต**  ข้อความ คำอธิบายประกอบ Word |
-| token\_autoขีดจำกัดของเสียง | **ขีดจำกัดเสียงแบบเอกภาค**  สูงสุด 1 ชั่วโมงต่อคำขอ (สูงสุด 30 นาทีเมื่อเปิดใช้การแยกแยะเสียงผู้พูดหรือการประทับเวลาที่ระดับคำ) |
-| handymanความสามารถ | **[การถอดเสียงเป็นคำ](https://ai.google.dev/gemini-api/docs/transcribe?hl=th)**  สิ่งที่ทำได้  **[การแยกแยะเสียงผู้พูด](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#speaker-diarization)**  สิ่งที่ทำได้  **[การประทับเวลาระดับคำ](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#word-timestamps)**  สิ่งที่ทำได้  **[คำศัพท์ที่กำหนดเอง](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#custom-vocabulary)**  สิ่งที่ทำได้  **[การถอดเสียงอัจฉริยะ](https://ai.google.dev/gemini-api/docs/transcribe?hl=th#transcription-modes)**  สิ่งที่ทำได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำไม่ได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำไม่ได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำไม่ได้ |
-| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำไม่ได้  **[Flex Inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - `gemini-3.5-transcribe` (Unary) - `gemini-3.5-transcribe-live` (Live API) |
-| calendar\_monthการอัปเดตล่าสุด | สิงหาคม 2569 |
+| Code du modèle id\_card | `gemini-3.5-transcribe` |
+| Types de données acceptés pour save | **Entrées**  Audio (jusqu'à une heure)  **Résultat**  Annotations de texte et de mots |
+| token\_autoLimites audio | **Limite audio unaire**  Jusqu'à 1 heure par requête (jusqu'à 30 minutes lorsque l'identification du locuteur ou les codes temporels au niveau du mot sont activés) |
+| handyman Fonctionnalités | **[Transcription audio](https://ai.google.dev/gemini-api/docs/transcribe?hl=fr)**  Compatible  **[Identification du locuteur](https://ai.google.dev/gemini-api/docs/transcribe?hl=fr#speaker-diarization)**  Compatible  **[Codes temporels au niveau du mot](https://ai.google.dev/gemini-api/docs/transcribe?hl=fr#word-timestamps)**  Compatible  **[Vocabulaire personnalisé](https://ai.google.dev/gemini-api/docs/transcribe?hl=fr#custom-vocabulary)**  Compatible  **[Transcription intelligente](https://ai.google.dev/gemini-api/docs/transcribe?hl=fr#transcription-modes)**  Compatible  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Not supported  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Not supported  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Not supported  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Not supported  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Not supported  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Not supported |
+| speed Options de consommation | **[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Not supported  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Not supported  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Not supported |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - `gemini-3.5-transcribe` (unaire) - `gemini-3.5-transcribe-live` (API Live) |
+| calendar\_monthDernière mise à jour | Août 2026 |
 
-## การรองรับฟีเจอร์และข้อจำกัด
+## Compatibilité des fonctionnalités et limites
 
-Gemini 3.5 Transcribe รองรับฟีเจอร์ต่อไปนี้ใน 2 Endpoint
+Gemini 3.5 Transcribe est compatible avec les fonctionnalités suivantes sur ses deux points de terminaison :
 
-| ฟีเจอร์ | การไลฟ์สด (`gemini-3.5-transcribe-live`) | การประมวลผลไฟล์เสียง (`gemini-3.5-transcribe`) | หมายเหตุ / ข้อจำกัด |
+| Fonctionnalité | Streaming en direct (`gemini-3.5-transcribe-live`) | Traitement des fichiers audio (`gemini-3.5-transcribe`) | Remarques / Limites |
 | --- | --- | --- | --- |
-| **การตรวจหาภาษาอัตโนมัติ** | รองรับ (มากกว่า 85 ภาษา) | รองรับ (มากกว่า 85 ภาษา) | รวมถึงการผสมภาษาในระหว่างเซสชัน |
-| **การประทับเวลาระดับคำ** | ไม่รองรับ | รองรับ | ลดความแม่นยำของการถอดเสียงเป็นคำ |
-| **การเอนเอียงคำศัพท์ที่กำหนดเอง** | รองรับ (สูงสุด 1,000 คำ) | รองรับ (สูงสุด 1,000 คำ) | โดยปกติแล้ว ลูกค้าจะได้รับผลลัพธ์ที่ดีที่สุดเมื่อใช้คำไม่เกิน 100 คำ |
-| **การเขียนตามคำบอกและการจัดรูปแบบอัจฉริยะ** | รองรับ | รองรับ | รวมถึงการนำคำพูดที่ไม่มีความหมายออกและการจัดรูปแบบตัวอักษรและตัวเลขโดยพิจารณาจากเจตนา |
-| **การระบุผู้พูด** | ไม่รองรับ | รองรับ (สูงสุด 8 ลำโพง) | การระบุแหล่งที่มาสำหรับลำโพง 3 เครื่องขึ้นไปอยู่ในขั้นทดลอง |
-| **ระยะเวลาเสียงสูงสุด** | 10 นาทีต่อเซสชัน | นานสูงสุด 1 ชั่วโมง | การประมวลผลไฟล์จะจำกัดไว้ที่ 30 นาทีเมื่อเปิดใช้ฟีเจอร์ต่างๆ เช่น การระบุผู้พูดหรือการประทับเวลา |
+| **Détection automatique de la langue** | Prise en charge (plus de 85 langues) | Prise en charge (plus de 85 langues) | Inclut le mélange de codes en cours de session. |
+| **Codes temporels au niveau du mot** | Non compatible | Compatible | Dégrade la précision de la transcription. |
+| **Pondération personnalisée du vocabulaire** | Accepté (jusqu'à 1 000 termes) | Accepté (jusqu'à 1 000 termes) | Les clients obtiennent généralement les meilleurs résultats avec un maximum de 100 termes. |
+| **Dictée et mise en forme intelligentes** | Compatible | Compatible | Inclut la suppression des mots de remplissage et la mise en forme alphanumérique en fonction de l'intention. |
+| **Identification du locuteur** | Non compatible | Pris en charge (jusqu'à huit enceintes) | L'attribution pour trois enceintes ou plus est expérimentale. |
+| **Durée audio max.** | 10 minutes par session. | Jusqu'à une heure | Le traitement des fichiers est limité à 30 minutes lorsque des fonctionnalités telles que la diarisation ou les codes temporels sont activées. |
 
-## ภาษาที่รองรับ
+## Langues disponibles
 
-Gemini 3.5 Transcribe รองรับภาษาและรหัสภาษา BCP-47 ต่อไปนี้
+Les langues et les codes de langue BCP-47 suivants sont compatibles avec Gemini 3.5 Transcribe :
 
-| ภาษา | รหัส BCP-47 | ภาษา | รหัส BCP-47 |
+| Langue | Code BCP-47 | Langue | Code BCP-47 |
 | --- | --- | --- | --- |
-| อาฟรีกานส์ | `af-ZA` | ญี่ปุ่น | `ja-JP` |
-| อัมฮาริก | `am-ET` | ชวา | `jv-ID` |
-| อาหรับ (อียิปต์) | `ar-EG` | คาบูเวอร์เดียนู | `kea-CV` |
-| อาร์เมเนีย | `hy-AM` | กันนาดา | `kn-IN` |
-| อัสสัม | `as-IN` | คาซัค | `kk-KZ` |
-| อาร์เซอร์ไบจัน | `az-AZ` | เกาหลี | `ko-KR` |
-| เบลารุส | `be-BY` | คีร์กิซ | `ky-KG` |
-| เบงกาลี (บังกลาเทศ) | `bn-BD` | ลัตเวีย | `lv-LV` |
-| เบงกาลี (อินเดีย) | `bn-IN` | ลิงกาลา | `ln-CD` |
-| บอสเนีย | `bs-BA` | ลิทัวเนีย | `lt-LT` |
-| บัลแกเรีย | `bg-BG` | มาซีโดเนีย | `mk-MK` |
-| บัลแกเรีย (อโรมาเนีย) | `rup-BG` | มาเลย์ | `ms-MY` |
-| พม่า | `my-MM` | มาลายาลัม | `ml-IN` |
-| จีนกวางตุ้ง (ตัวเต็ม) | `yue-Hant-HK` | มอลตา | `mt-MT` |
-| คาตาลัน | `ca-ES` | จีนกลาง (ตัวย่อ) | `cmn-Hans-CN` |
-| ซีบัวโน | `ceb` | มราฐี | `mr-IN` |
-| เขมรตอนกลาง | `km-KH` | มองโกเลีย | `mn-MN` |
-| โครเอเชีย | `hr-HR` | เนปาล | `ne-NP` |
-| เช็ก | `cs-CZ` | นอร์เวย์ | `nb-NO` |
-| เดนมาร์ก | `da-DK` | โอริยา | `or-IN` |
-| ดัตช์ | `nl-NL` | โปแลนด์ | `pl-PL` |
-| อังกฤษ (บริเตนใหญ่) | `en-GB` | โปรตุเกส (บราซิล) | `pt-BR` |
-| อังกฤษ (อินเดีย) | `en-IN` | โปรตุเกส (โปรตุเกส) | `pt-PT` |
-| อังกฤษ (สหรัฐอเมริกา) | `en-US` | ปัญจาบ | `pa-IN` |
-| เอสโตเนีย | `et-EE` | ปัญจาบ (สคริปต์คุรมุขี) | `pa-Guru-IN` |
-| ฟาร์ซี | `fa-IR` | โรมาเนีย | `ro-RO` |
-| ฟิลิปปินส์ | `fil-PH` | รัสเซีย | `ru-RU` |
-| ฟินแลนด์ | `fi-FI` | เซอร์เบีย | `sr-RS` |
-| ฝรั่งเศส | `fr-FR` | ภาษาสินธี (อักษรอาหรับ) | `sd-Arab-IN` |
-| กาลิเชียน | `gl-ES` | สโลวัก | `sk-SK` |
-| จอร์เจีย | `ka-GE` | สโลวีเนีย | `sl-SI` |
-| เยอรมัน | `de-DE` | สเปน (ลาตินอเมริกา) | `es-419` |
-| กรีก | `el-GR` | สเปน (สหรัฐอเมริกา) | `es-US` |
-| คุชราต | `gu-IN` | สวาฮีลี (เคนยา) | `sw-KE` |
-| เฮาซา | `ha-NG` | สวีเดน | `sv-SE` |
-| ฮีบรู | `he-IL` | ทาจิก | `tg-TJ` |
-| ฮินดี | `hi-IN` | เตลูกู | `te-IN` |
-| ฮังการี | `hu-HU` | ไทย | `th-TH` |
-| ไอซ์แลนด์ | `is-IS` | ตุรกี | `tr-TR` |
-| อังกฤษ (อินเดีย) | `en-IN` | ยูเครน | `uk-UA` |
-| อินโดนีเซีย | `id-ID` | อุซเบก | `uz-UZ` |
-| อิตาลี | `it-IT` | เวียดนาม | `vi-VN` |
+| Afrikaans | `af-ZA` | Japonais | `ja-JP` |
+| Amharique | `am-ET` | Javanais | `jv-ID` |
+| Arabe (Égypte) | `ar-EG` | Kabuverdianu | `kea-CV` |
+| Arménien | `hy-AM` | Kannada | `kn-IN` |
+| Assamais | `as-IN` | Kazakh | `kk-KZ` |
+| Azéri | `az-AZ` | Coréen | `ko-KR` |
+| Biélorusse | `be-BY` | Kirghiz | `ky-KG` |
+| Bengali (Bangladesh) | `bn-BD` | Letton | `lv-LV` |
+| Bengali (Inde) | `bn-IN` | Lingala | `ln-CD` |
+| Bosniaque | `bs-BA` | Lituanien | `lt-LT` |
+| Bulgare | `bg-BG` | Macédonien | `mk-MK` |
+| Bulgare (aroumain) | `rup-BG` | Malaisien | `ms-MY` |
+| Birman | `my-MM` | Malayalam | `ml-IN` |
+| Cantonais (traditionnel) | `yue-Hant-HK` | Maltais | `mt-MT` |
+| Catalan | `ca-ES` | Chinois mandarin (simplifié) | `cmn-Hans-CN` |
+| Cebuano | `ceb` | Marathi | `mr-IN` |
+| Khmer central | `km-KH` | Mongol | `mn-MN` |
+| Croate | `hr-HR` | Népalais | `ne-NP` |
+| Tchèque | `cs-CZ` | Norvégien | `nb-NO` |
+| Danois | `da-DK` | Oriya | `or-IN` |
+| Néerlandais | `nl-NL` | Polonais | `pl-PL` |
+| Anglais (Grande-Bretagne) | `en-GB` | Portugais (Brésil) | `pt-BR` |
+| Anglais (Inde) | `en-IN` | Portugais (Portugal) | `pt-PT` |
+| Anglais (États-Unis) | `en-US` | Panjabi | `pa-IN` |
+| Estonien | `et-EE` | Panjabi (écriture gurmukhī) | `pa-Guru-IN` |
+| Farsi | `fa-IR` | Roumain | `ro-RO` |
+| Tagalog | `fil-PH` | Russe | `ru-RU` |
+| Finnois | `fi-FI` | Serbe | `sr-RS` |
+| Français | `fr-FR` | Sindhi (écriture arabe) | `sd-Arab-IN` |
+| Galicien | `gl-ES` | Slovaque | `sk-SK` |
+| Géorgien | `ka-GE` | Slovène | `sl-SI` |
+| Allemand | `de-DE` | Espagnol (Amérique latine) | `es-419` |
+| Grec | `el-GR` | Espagnol (États-Unis) | `es-US` |
+| Gujarati | `gu-IN` | Swahili (Kenya) | `sw-KE` |
+| Haoussa | `ha-NG` | Suédois | `sv-SE` |
+| Hébreu | `he-IL` | Tadjik | `tg-TJ` |
+| Hindi | `hi-IN` | Telugu | `te-IN` |
+| Hongrois | `hu-HU` | Thaï | `th-TH` |
+| Islandais | `is-IS` | Turc | `tr-TR` |
+| Anglais (Inde) | `en-IN` | Ukrainien | `uk-UA` |
+| Indonésien | `id-ID` | Ouzbek | `uz-UZ` |
+| Italien | `it-IT` | Vietnamien | `vi-VN` |
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-อัปเดตล่าสุด 2026-09-10 UTC
+Dernière mise à jour le 2026/09/10 (UTC).
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Voulez-vous nous donner plus d'informations ?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-09-10 UTC"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/10 (UTC)."],[],[]]

@@ -1,31 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=vi
-fetched_at: 2026-10-12T06:55:08.440005+00:00
-title: "Suy lu\u1eadn kh\u00f4ng gian \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-spatial?hl=ko
+fetched_at: 2026-10-19T05:45:03.837803+00:00
+title: "\uacf5\uac04 \ucd94\ub860 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Suy luận không gian
+# 공간 추론
 
-Các mô hình Gemini Robotics ER có thể chỉ vào các đối tượng, theo dõi các đối tượng đó trong video, phát hiện các đối tượng đó bằng khung hình chữ nhật và tạo quỹ đạo chuyển động. Tất cả ví dụ trên trang này đều sử dụng câu lệnh bằng ngôn ngữ tự nhiên với `generateContent`.
+Gemini Robotics ER 모델은 객체를 가리키고, 동영상에서 객체를 추적하고, 경계 상자로 객체를 감지하고, 이동 궤적을 생성할 수 있습니다. 이 페이지의 모든 예시에서는 `generateContent`를 사용하는 자연어 프롬프트를 사용합니다.
 
-Để xem toàn bộ mã có thể chạy, hãy xem [Sổ tay về robot học](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+실행 가능한 전체 코드는
+[로봇공학 Cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)을 참고하세요.
 
-## Chỉ vào các đối tượng
+## 객체 가리키기
 
-Ví dụ sau đây tìm các đối tượng cụ thể trong một hình ảnh và trả về toạ độ `[y, x]` được chuẩn hoá của các đối tượng đó:
+다음 예시에서는 이미지에서 특정 객체를 찾고 정규화된 `[y, x]` 좌표를 반환합니다.
 
 ### Python
 
@@ -98,7 +99,7 @@ curl -X POST \
   }'
 ```
 
-Đầu ra sẽ là một mảng JSON chứa các đối tượng, mỗi đối tượng có một `point` (toạ độ `[y, x]` được chuẩn hoá) và một `label` xác định đối tượng.
+출력은 객체를 포함하는 JSON 배열이며, 각 객체에는 `point`(정규화된 `[y, x]` 좌표)와 객체를 식별하는 `label`이 있습니다.
 
 ### JSON
 
@@ -117,13 +118,14 @@ curl -X POST \
 ]
 ```
 
-Hình ảnh sau đây là ví dụ về cách hiển thị các điểm này:
+다음 이미지는 이러한 점이 표시되는 방식을 보여주는 예시입니다.
 
-![Ví dụ minh hoạ các điểm của đối tượng trong hình ảnh](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=vi)
+![이미지에서 객체의 점을 표시하는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ko)
 
-## Theo dõi đối tượng trong video
+## 동영상에서 객체 추적
 
-Gemini Robotics ER 2 cũng có thể phân tích các khung hình video để theo dõi các đối tượng theo thời gian. Hãy xem phần [Đầu vào video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#supported-formats) để biết danh sách các định dạng video được hỗ trợ.
+Gemini Robotics ER 2는 동영상 프레임을 분석하여 시간이 지남에 따라 객체를 추적할 수도 있습니다. 지원되는 동영상 형식의 목록은 [동영상 입력](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko#supported-formats)
+을 참고하세요.
 
 ### Python
 
@@ -162,9 +164,9 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-## Phát hiện đối tượng và khung hình chữ nhật
+## 객체 감지 및 경계 상자
 
-Ngoài các điểm, bạn có thể nhắc mô hình trả về các khung hình chữ nhật 2D, cung cấp thêm thông tin chi tiết về không gian cho các đối tượng được phát hiện.
+점을 사용하는 것 외에도 모델에 감지된 객체에 대한 더 많은 공간적 세부정보를 제공하는 2D 경계 상자를 반환하도록 프롬프트를 표시할 수 있습니다.
 
 ### Python
 
@@ -202,11 +204,11 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-## Quỹ đạo
+## 궤적
 
-Gemini Robotics ER 2 có thể tạo ra các chuỗi điểm xác định quỹ đạo, hữu ích cho việc hướng dẫn chuyển động của robot.
+Gemini Robotics ER 2는 로봇 이동을 안내하는 데 유용한 궤적을 정의하는 점 시퀀스를 생성할 수 있습니다.
 
-Ví dụ này yêu cầu một quỹ đạo để di chuyển bút đỏ đến một ngăn chứa, bao gồm cả ước tính về các điểm tham chiếu trung gian. Mã đã được rút gọn để chỉ hiển thị lời nhắc.
+이 예시에서는 중간 경유지의 추정치를 포함하여 빨간색 펜을 주최자로 이동하는 궤적을 요청합니다. 프롬프트만 표시되도록 코드가 축소되었습니다.
 
 ### Python
 
@@ -219,9 +221,9 @@ prompt = """
         """
 ```
 
-## Dành chỗ cho máy tính xách tay
+## 노트북을 위한 공간 만들기
 
-Ví dụ này cho thấy cách Gemini Robotics ER có thể suy luận về một không gian. Câu lệnh yêu cầu mô hình xác định đối tượng nào cần được di chuyển để tạo không gian cho một mục khác.
+이 예시에서는 Gemini Robotics ER이 공간에 대해 추론하는 방법을 보여줍니다. 프롬프트는 모델에 다른 항목을 위한 공간을 만들기 위해 이동해야 하는 객체를 식별하도록 요청합니다.
 
 ### Python
 
@@ -257,7 +259,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Phản hồi chứa toạ độ 2D của đối tượng trả lời câu hỏi của người dùng, trong trường hợp này là đối tượng cần di chuyển để nhường chỗ cho máy tính xách tay.
+응답에는 사용자의 질문에 답변하는 객체의 2D 좌표가 포함되어 있습니다. 이 경우 노트북을 위한 공간을 만들기 위해 이동해야 하는 객체입니다.
 
 ```
 [
@@ -265,11 +267,11 @@ Phản hồi chứa toạ độ 2D của đối tượng trả lời câu hỏi 
 ]
 ```
 
-![Ví dụ cho thấy đối tượng nào cần được di chuyển cho một đối tượng khác](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=vi)
+![다른 객체를 위해 이동해야 하는 객체를 보여주는 예](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ko)
 
-## Chuẩn bị bữa trưa
+## 점심 포장하기
 
-Mô hình này cũng có thể cung cấp hướng dẫn cho các tác vụ nhiều bước và chỉ đến các đối tượng có liên quan cho từng bước. Ví dụ này cho thấy cách mô hình lên kế hoạch cho một loạt các bước để đóng gói túi đựng bữa trưa.
+모델은 여러 단계 작업에 관한 안내를 제공하고 각 단계와 관련된 객체를 가리킬 수도 있습니다. 이 예시에서는 모델이 점심 가방을 포장하기 위한 일련의 단계를 계획하는 방법을 보여줍니다.
 
 ### Python
 
@@ -306,13 +308,13 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-Câu trả lời cho câu lệnh này là một bộ hướng dẫn từng bước về cách đóng gói một túi đựng bữa trưa từ dữ liệu đầu vào là hình ảnh.
+이 프롬프트의 응답은 이미지 입력에서 점심 가방을 포장하는 방법에 관한 단계별 안내입니다.
 
-**Hình ảnh đầu vào**
+**입력 이미지**
 
-![Hình ảnh hộp đựng bữa trưa và các vật phẩm cần bỏ vào hộp](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=vi)
+![도시락과 도시락에 넣을 물건의 이미지](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ko)
 
-**Đầu ra của mô hình**
+**모델 출력**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -335,19 +337,19 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-## Bước tiếp theo
+## 다음 단계
 
-- [Khả năng của tác nhân AI](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=vi) – thực thi mã, đọc công cụ, chú thích hình ảnh.
-- [Điều phối tác vụ](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=vi) – các tác vụ có thời hạn dài bằng API robot tuỳ chỉnh.
-- [Robot học có tính năng truyền trực tuyến](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=vi) — truyền trực tuyến hai chiều theo thời gian thực (chỉ Gemini Robotics ER 2).
-- [Hiểu video](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=vi) – tìm khoảnh khắc và phân loại tiến trình (chỉ Gemini Robotics ER 2).
+- [에이전트 기능](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=ko): 코드 실행, 기기 읽기, 이미지 주석 처리
+- [작업 조정](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=ko): 커스텀 로봇 API를 사용하는 장기 작업
+- [스트리밍을 통한 로봇공학](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=ko): 실시간 양방향 스트리밍 (Gemini Robotics ER 2만 해당)
+- [동영상 이해](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=ko): 순간 찾기 및 진행률 분류 (Gemini Robotics ER 2만 해당)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-09-09 UTC.
+최종 업데이트: 2026-09-09(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-09-09 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-09-09(UTC)"],[],[]]

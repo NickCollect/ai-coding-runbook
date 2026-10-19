@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=he
-fetched_at: 2026-10-12T07:07:38.538367+00:00
-title: "\u05d4\u05e1\u05d1\u05e8 \u05e2\u05dc \u05d0\u05e1\u05d9\u05de\u05d5\u05e0\u05d9\u05dd \u05d5\u05e1\u05e4\u05d9\u05e8\u05d4 \u05e9\u05dc\u05d4\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ko
+fetched_at: 2026-10-19T05:42:58.898237+00:00
+title: "\ud1a0\ud070 \uc774\ud574 \ubc0f \uacc4\uc0b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Gemini 4 Argon을 지금 이용 가능합니다. [사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ko).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-שליחת משוב
+의견 보내기
 
-# הסבר על אסימונים וספירה שלהם
+# 토큰 이해 및 계산
 
-‫Gemini ומודלים אחרים של AI גנרטיבי מעבדים קלט ופלט ברמת פירוט שנקראת *טוקן*.
+Gemini 및 기타 생성형 AI 모델은 *토큰* 이라는 세분화된 수준에서 입력 및 출력을 처리합니다.
 
-**במודלים של Gemini, טוקן שווה בערך ל-4 תווים.
-‫100 טוקנים שווים לכ-60-80 מילים באנגלית.**
+**Gemini 모델의 경우 토큰은 약 4자와 같습니다.
+토큰 100개는 약 60~80개의 영어 단어와 같습니다.**
 
-## מידע על אסימונים
+## 토큰 정보
 
-האסימונים יכולים להיות תווים בודדים כמו `z` או מילים שלמות כמו `cat`. מילים ארוכות
-מפוצלות לכמה טוקנים. קבוצת כל האסימונים שבהם נעשה שימוש במודל נקראת אוצר מילים, והתהליך של פיצול טקסט לאסימונים נקרא *tokenization*.
+토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화* 라고 합니다.
 
-כשמופעל חיוב, [העלות של קריאה ל-Gemini API](https://ai.google.dev/pricing?hl=he) נקבעת בין היתר לפי מספר הטוקנים של הקלט והפלט, ולכן כדאי לדעת איך לספור טוקנים.
+결제가 사용 설정된 경우 Gemini API 호출의 [비용](https://ai.google.dev/pricing?hl=ko)은
+입력 및 출력 토큰 수에 따라 결정되므로 토큰을
+집계하는 방법을 알아두면 유용합니다.
 
-## ספירת טוקנים
+## 토큰 집계
 
-כל הקלט והפלט של Gemini API עוברים טוקניזציה, כולל טקסט, קובצי תמונות וסוגים אחרים של נתונים שאינם טקסט.
+Gemini API의 모든 입력 및 출력은 텍스트, 이미지 파일, 기타 비텍스트 모달리티를 포함하여 토큰화됩니다.
 
-אפשר לספור טוקנים בדרכים הבאות:
+다음과 같은 방법으로 토큰을 집계할 수 있습니다.
 
-- **מתקשרים אל `count_tokens` ומזינים את הבקשה.** הפונקציה מחזירה את המספר הכולל של הטוקנים *בקלט בלבד*. כדאי לבצע את הקריאה הזו לפני שליחת קלט כדי לבדוק את גודל הבקשות.
-- **משתמשים בלחצן `usage` בתגובה לאינטראקציה.** מחזירה את מספר הטוקנים של הקלט (`total_input_tokens`), הפלט (`total_output_tokens`), החשיבה (`total_thought_tokens`), התוכן שנשמר במטמון (`total_cached_tokens`), השימוש בכלי (`total_tool_use_tokens`) והסך הכולל (`total_tokens`).
+- **요청의 입력으로 `count_tokens`를 호출합니다.** *입력에만* 있는 총 토큰 수를 반환합니다. 입력을 전송하기 전에 이 호출을 실행하여 요청의 크기를 확인합니다.
+- **상호작용 응답에서 `usage`를 사용합니다.** 입력 (`total_input_tokens`), 출력 (`total_output_tokens`), 생각 (`total_thought_tokens`), 캐시된 콘텐츠(`total_cached_tokens`), 도구 사용 (`total_tool_use_tokens`), 총계 (`total_tokens`)의 토큰 수를 반환합니다.
 
-### ספירת טוקנים של טקסט
+### 텍스트 토큰 집계
 
 ### Python
 
@@ -89,7 +90,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.usage);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -160,9 +161,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### ספירת טוקנים רב-שלביים
+### 다중 턴 토큰 집계
 
-ספירת טוקנים בהיסטוריית השיחות באמצעות `previous_interaction_id`:
+`previous_interaction_id`를 사용하여 대화 기록에서 토큰을 집계합니다.
 
 ### Python
 
@@ -208,7 +209,7 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -314,16 +315,17 @@ func main() {
 }
 ```
 
-### ספירת טוקנים מולטי-מודאליים
+### 멀티모달 토큰 집계
 
-כל הקלט ל-Gemini API עובר טוקניזציה, כולל תמונות, סרטונים ואודיו.
-נקודות חשובות לגבי יצירת טוקנים:
+Gemini API의 모든 입력은 이미지, 동영상, 오디오를 포함하여 토큰화됩니다.
+토큰화에 관한 핵심 사항은 다음과 같습니다.
 
-- **תמונות**: תמונות בגודל של ‎384 פיקסלים או פחות בשני הממדים נחשבות כ-258 טוקנים. תמונות גדולות יותר מחולקות למשבצות של ‎768x768 פיקסלים, וכל משבצת נחשבת כ-258 טוקנים.
-- **סרטון**: 263 אסימונים לשנייה (רלוונטי לעיבוד סטטי). במקרה של עיבוד מבוסס-סוכן, השימוש בטוקנים משתנה. [כאן אפשר לראות את השימוש באסימוני וידאו לפי מצב העיבוד](#video-token-usage).
-- **אודיו**: 32 טוקנים לשנייה
+- **이미지**: 두 치수가 모두 384픽셀 이하인 이미지는 토큰 258개로 집계됩니다. 더 큰 이미지는 768x768픽셀 타일로 바둑판식으로 배열되며 각 타일은 토큰 258개로 집계됩니다.
+- **동영상**: 초당 토큰 263개 (정적 처리에 적용됨) 에이전트 처리의 경우 토큰 사용량이 다릅니다. 처리 모드별 동영상 토큰 사용량을 참고하세요
+  [.](#video-token-usage)
+- **오디오**: 초당 토큰 32개
 
-#### טוקנים של תמונות
+#### 이미지 토큰
 
 ### Python
 
@@ -369,7 +371,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -482,7 +484,7 @@ func main() {
 }
 ```
 
-**דוגמה לנתונים מוטבעים:**
+**인라인 데이터 예:**
 
 ### Python
 
@@ -507,7 +509,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### טוקנים של סרטונים
+#### 동영상 토큰
 
 ### Python
 
@@ -540,25 +542,25 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### שימוש באסימוני וידאו לפי מצב עיבוד
+#### 처리 모드별 동영상 토큰 사용량
 
-השימוש באסימונים עבור סרטונים תלוי במצב העיבוד:
+동영상 토큰 사용량은 처리 모드에 따라 다릅니다.
 
-| **מצב עיבוד** | **חישוב הטוקנים** | **שימוש רגיל** |
+| **처리 모드** | **토큰 계산** | **일반적인 용도** |
 | --- | --- | --- |
-| **סטטי** (ברירת מחדל) | כ-100 טוקנים/שנייה כברירת מחדל (רזולוציה נמוכה) או כ-300 טוקנים/שנייה (רזולוציה גבוהה). כל הפריימים נדגמים בקצב של 1 FPS. | צפוי, ביחס ישר למשך נכס הווידאו. |
-| **Agentic** | משתנה בהתאם למורכבות התוכן. המערכת טוענת רק את התמליל, את הפריימים או את האודיו שנדרשים כדי לענות על ההנחיה. | עד 88% פחות טוקנים לתוכן ארוך. |
+| **정적** (기본값) | 기본적으로 초당 ~100개 토큰 (저해상도) 또는 초당 ~300개 토큰 (고해상도) 모든 프레임은 1FPS로 샘플링됩니다. | 예측 가능하며 동영상 길이에 비례합니다. |
+| **에이전트** | 콘텐츠 복잡성에 따라 다릅니다. 모델은 프롬프트에 답변하는 데 필요한 스크립트 또는 프레임 또는 오디오만 로드합니다. | 긴 형식 콘텐츠의 경우 최대 88% 적은 토큰 |
 
-בעיבוד מבוסס-סוכן, הרצאה של שעה שבה נעשה שימוש ב-1.08 מיליון טוקנים במצב סטטי, עשויה להשתמש ב-108,000 טוקנים, בהתאם להנחיה ולתוכן.
+에이전트 처리의 경우 정적 모드에서 ~108만 개의 토큰을 사용하는 1시간 강의는 프롬프트와 콘텐츠에 따라 ~10만 8천 개의 토큰을 사용할 수 있습니다.
 
-כדי לבדוק את השימוש בפועל בטוקנים בבקשה, בודקים את `interaction.usage`. אסימונים של סרטונים עם סוכנים מדווחים בשדות הבאים:
+요청의 실제 토큰 사용량을 확인하려면 `interaction.usage`를 검사하세요. 에이전트 동영상 토큰은 다음 필드에 보고됩니다.
 
-- **ההנחיה הראשונית** (קובץ עזר של סרטון + הנחיית משתמש): `total_input_tokens`
-- **ניווט**: `total_thought_tokens`
-- **תמליל, פריימים ואודיו נטענים לפי דרישה**: `total_tool_use_tokens`
-- **תשובה סופית**: `total_output_tokens`
+- **초기 프롬프트** (동영상 참조 + 사용자 프롬프트): `total_input_tokens`
+- **탐색 생각**: `total_thought_tokens`
+- **주문형으로 로드된 스크립트, 프레임, 오디오**: `total_tool_use_tokens`
+- **최종 답변**: `total_output_tokens`
 
-#### אסימוני אודיו
+#### 오디오 토큰
 
 ### Python
 
@@ -584,9 +586,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### ספירת טוקנים של הוראות למערכת
+### 시스템 안내 토큰 집계
 
-ההוראות למערכת נספרות כחלק מאסימוני הקלט:
+시스템 안내는 입력 토큰의 일부로 집계됩니다.
 
 ### Python
 
@@ -602,9 +604,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### ספירת טוקנים בכלי
+### 도구 토큰 집계
 
-גם כלים (פונקציות, הפעלת קוד, חיפוש Google) נספרים:
+도구 (함수, 코드 실행, Google 검색)도 집계됩니다.
 
 ### Python
 
@@ -634,11 +636,14 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## חלון ההקשר
+## 컨텍스트 윈도우
 
-לכל מודל Gemini יש מספר מקסימלי של טוקנים שהוא יכול לטפל בהם. חלון ההקשר מגדיר את המגבלה המשולבת של טוקנים של קלט ופלט.
+각 Gemini 모델에는 처리할 수 있는 최대 토큰 수가 있습니다.
 
-### קבלת גודל חלון ההקשר באופן פרוגרמטי
+- **Gemini 4 모델 (`gemini-4-argon`):** 입력, 생각, 출력 토큰 간에 단일 100만 개 토큰 컨텍스트 윈도우 (`1,048,576` 토큰)를 공유합니다. 기본적으로 동기 응답 (`background=False`, 스트리밍 또는 비스트리밍)은 `65,536` 출력 토큰으로 제한되거나 [긴 디코드](https://ai.google.dev/gemini-api/docs/long-decode?hl=ko)를 사용하여 최대 `1,048,576` 토큰을 생성할 수 있습니다. 입력 토큰과 `max_output_tokens`가 1,048,576 토큰을 초과하면 API는 자동으로 출력 한도를 컨텍스트 윈도우의 남은 공간 (`1,048,576`에서 입력 토큰을 뺀 값)으로 제한합니다.
+- **Gemini 3 및 2.5 모델:** 별도의 입력 (`1,048,576` 토큰) 및 출력 (`65,536` 토큰) 예산을 사용합니다.
+
+### 프로그래매틱 방식으로 컨텍스트 윈도우 크기 가져오기
 
 ### Python
 
@@ -658,7 +663,7 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-### Java
+### 자바
 
 ```
 import com.google.genai.Client;
@@ -744,20 +749,20 @@ func main() {
 }
 ```
 
-אפשר לראות את גודל חלון ההקשר בדף [מודלים](https://ai.google.dev/gemini-api/docs/models?hl=he).
+[모델](https://ai.google.dev/gemini-api/docs/models?hl=ko) 페이지에서 컨텍스트 윈도우 크기를 확인하세요.
 
-## המאמרים הבאים
+## 다음 단계
 
-- [יצירת טקסט](https://ai.google.dev/gemini-api/docs/text-generation?hl=he): יסודות היצירה
-- [שמירה במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he): הפחתת עלויות באמצעות שמירה במטמון
-- [תמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he): הסבר על העלויות
+- [텍스트 생성](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko): 생성 기본사항
+- [캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko): 캐싱으로 비용 절감
+- [가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko): 비용 이해
 
-שליחת משוב
+의견 보내기
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-עדכון אחרון: 2026-09-24 (שעון UTC).
+최종 업데이트: 2026-10-13(UTC)
 
-רוצה לתת לנו משוב?
+의견을 전달하고 싶나요?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-09-24 (שעון UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-10-13(UTC)"],[],[]]

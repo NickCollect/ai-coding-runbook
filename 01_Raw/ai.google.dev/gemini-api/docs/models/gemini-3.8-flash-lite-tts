@@ -1,126 +1,127 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=ru
-fetched_at: 2026-10-12T06:58:19.087324+00:00
-title: "Gemini 3.8 Flash-Lite TTS \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=pl
+fetched_at: 2026-10-19T05:33:24.375959+00:00
+title: "Gemini\u00a03.8 Flash-Lite TTS \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Флэш-память Gemini 3.8 теперь доступна. [Попробуйте!](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=ru)
+Model Gemini 4 Argon jest już dostępny. [Przećwicz to samodzielnie](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=pl).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ru)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Чтобы переводить контент на ваш предпочитаемый язык, Google использует технологии на основе искусственного интеллекта. Переводы от ИИ могут содержать ошибки.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Главная](https://ai.google.dev/?hl=ru)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ru)
-- [Документация](https://ai.google.dev/gemini-api/docs?hl=ru)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Отправить отзыв
+Prześlij opinię
 
-# Gemini 3.8 Flash-Lite TTS
+# Gemini 3.8 Flash-Lite TTS
 
-Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) – это быстрая и экономичная модель синтеза речи от Google, которая призвана заменить `gemini-3.1-flash-tts-preview` для рабочих нагрузок с высокой пропускной способностью.
+Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) to szybki i ekonomiczny model Google do zamiany tekstu na mowę, który został stworzony z myślą o zastąpieniu modelu `gemini-3.1-flash-tts-preview` w przypadku zbiorów zadań produkcyjnych o wysokiej przepustowości.
 
-[Попробовать в Google AI Studio](https://aistudio.google.com?model=gemini-3.8-flash-lite-tts&hl=ru)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=gemini-3.8-flash-lite-tts&hl=pl)
 
-## Обзор и возможности
+## Omówienie i możliwości
 
-Gemini 3.8 Flash-Lite TTS сочетает низкую задержку с выразительной и естественной речью:
+Technologia Gemini 3.8 Flash-Lite TTS łączy krótki czas oczekiwania z wyrazistą, naturalną mową:
 
-- **Высокая эффективность.** Оптимизировано для массового производства, каскадов разговорных голосовых агентов, функций чтения вслух и повседневной генерации речи одним говорящим на основных языках.
-- **Совместимость со схемой.** Использует ту же схему API и формат структурированных запросов, что и `gemini-3.8-flash-tts`, поэтому вы можете переключаться между моделями, изменив всего один параметр.
-- **Полная поддержка голосовой экосистемы.** Поддерживаются встроенные голоса, расширенная библиотека голосов (`GET /v1beta/voices`), персонализированные [дизайны голосов](https://ai.google.dev/gemini-api/docs/voice-design?hl=ru) и [репликация голоса](https://ai.google.dev/gemini-api/docs/voice-replication?hl=ru) (по умолчанию используются сохраненные голоса, а также можно использовать ключи без сохранения состояния). Вы также можете создавать и воспроизводить голоса в интерактивном режиме в [Google AI Studio](https://aistudio.google.com/generate-speech?hl=ru).
+- **Wysoka wydajność:** zoptymalizowany pod kątem produkcji masowej, kaskadowych agentów głosowych, funkcji czytania na głos i codziennego generowania mowy przez jednego głośnika w głównych językach.
+- **Zgodność schematów typu drop-in:** korzysta z tego samego schematu API i formatu promptów strukturalnych co `gemini-3.8-flash-tts`, co umożliwia przełączanie modeli za pomocą jednej zmiany parametru.
+- **Pełna obsługa ekosystemu głosowego:** obsługuje gotowe głosy, rozszerzoną bibliotekę głosów (`GET /v1beta/voices`), niestandardowe persony [projektu głosu](https://ai.google.dev/gemini-api/docs/voice-design?hl=pl) i [replikację głosu](https://ai.google.dev/gemini-api/docs/voice-replication?hl=pl) (domyślnie pamięć trwała głosów oraz opcjonalne klucze bezstanowe). Możesz też projektować i interaktywnie odtwarzać głosy w [Google AI Studio](https://aistudio.google.com/generate-speech?hl=pl).
 
-Подробную информацию о функциях, рекомендации по составлению запросов и примеры кода можно найти в [руководстве по преобразованию текста в речь](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ru).
+W przewodniku [Text-to-speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl) znajdziesz pełne informacje o funkcjach, sprawdzone metody tworzenia promptów i przykłady kodu.
 
-## Когда использовать ту или иную модель TTS
+## Kiedy używać którego modelu TTS
 
-Обе модели Gemini 3.8 TTS используют одну и ту же схему API и структуру запросов.
-Выберите модель, которая подходит для вашей рабочей нагрузки:
+Oba modele Gemini 3.8 TTS mają ten sam schemat API i strukturę promptów.
+Wybierz model, który pasuje do Twojego zbioru zadań:
 
-| Функция или рабочая нагрузка | Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) | Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) |
+| Funkcja / zbiór zadań | Gemini 3.8 Flash-Lite TTS (`gemini-3.8-flash-lite-tts`) | Gemini 3.8 Flash TTS (`gemini-3.8-flash-tts`) |
 | --- | --- | --- |
-| **Основная сила** | высокая пропускная способность, низкая задержка и экономичность; | Максимальная точность передачи голоса, нюансов игры и диалектов |
-| **Примеры использования** | Массовое производство, каскады голосовых агентов в реальном времени, функции озвучивания текста, копирование голоса, повседневная генерация речи одним говорящим | Аудиокниги, студийная озвучка, сложные диалоги с несколькими говорящими, эмоциональные реплики, сложное произношение, региональные диалекты. |
-| **Поддерживаемые языки** | 101 язык | 130 языков |
-| **Рекомендуемая замена** | `gemini-3.1-flash-tts-preview` | Новый уровень креативов |
+| **Główna mocna strona** | Wysoka przepustowość, krótkie czasy oczekiwania i opłacalność | Maksymalna wierność głosu, niuanse w grze aktorskiej i różnorodność dialektów |
+| **Najlepsze zastosowania** | produkcja na dużą skalę, kaskady agentów głosowych działających w czasie rzeczywistym, funkcje odczytywania na głos, replikacja głosu, codzienne generowanie głosu pojedynczego głośnika. | Audiobooki, lektor w studiu, złożone dialogi z udziałem wielu osób, intensywne występy wokalne, trudna wymowa, regionalne dialekty |
+| **Obsługiwane języki** | 101 języków | 130 języków |
+| **Zalecany zamiennik** | `gemini-3.1-flash-tts-preview` | Nowy poziom kreacji flagowych |
 
-## Руководство по переходу
+## Przewodnik po migracji
 
-Если вы переходите с `gemini-3.1-flash-tts-preview` на `gemini-3.8-flash-lite-tts`, обновите запросы для схемы Gemini 3.8 TTS:
+Jeśli przechodzisz z `gemini-3.1-flash-tts-preview` na `gemini-3.8-flash-lite-tts`, zaktualizuj prośby o schemat Gemini 3.8 TTS:
 
-1. **Перенос пошаговых инструкций в `speech_metadata`.** Gemini 3.8 TTS воспринимает входной текст как дословную транскрипцию. Встроенные текстовые инструкции, например `"Say cheerfully: Hello!"` или `"Speaker 1: Hello!"`, могут быть озвучены.
-   Перенесите инструкции по непрерывной доставке (`style`) и ярлыки говорящих (`speaker`) в структурированные метаданные:
-   - **Interactions API.** Добавьте аннотацию с помощью `"type":
-     "speech_metadata"`, `"speaker"` и `"style"` к каждому блоку текстового контента.
-   - **GenerateContent API:** добавьте `"speech_metadata": {"speaker": "...",
-     "style": "..."}` к каждому `part`.
-2. **Используйте встроенные теги в угловых скобках только для обозначения вокальных событий, происходящих в определенный момент времени.** Кратковременные неречевые вокализации и паузы следует обозначать в тексте с помощью угловых скобок (например, `<laugh>`, `<sigh>`, `<cough>`, `<breath>` или `<short pause>`). Стиль речи, например шепот, указывайте в тегах `speech_metadata.style`.
-3. **Указывайте `speaker` в каждом ответе на запрос с несколькими говорящими.** Каждый ответ на запрос с несколькими говорящими должен явно содержать `speaker` внутри `speech_metadata`, соответствующий одному из настроенных говорящих.
-4. **Создайте персонажей с помощью функции "Дизайн голоса".** Замените длинные блоки "Аудиопрофиль" или "Заметки режиссера" на пользовательский голос, созданный в [Дизайне голоса](https://ai.google.dev/gemini-api/docs/voice-design?hl=ru), а затем передайте этот идентификатор `voice_...` в запросах TTS с минимальными или пустыми строками `style`.
-5. **Учитывайте, что по умолчанию для запросов с одним ответом используется формат WAV (`audio/wav`).** В отличие от модели `gemini-3.1-flash-tts-preview` и более ранних моделей TTS (которые по умолчанию возвращали необработанные данные PCM без заголовка `audio/l16`), модель Gemini 3.8 TTS по умолчанию возвращает аудио в формате WAV (`audio/wav` / `AUDIO_WAV`) со стандартным заголовком RIFF для запросов с одним ответом.
-   - Если ваш код ранее оборачивал необработанные байты PCM в заголовок WAV (например, с помощью модуля `wave` Python или `ffmpeg`), удалите оболочку заголовка и запишите возвращенные байты непосредственно в файл `.wav`.
-   - Если для конвейера требуется аудио в формате headerless raw PCM, mu-law или A-law, явно задайте для параметра `response_format.mime_type` значение `"audio/l16"`, `"audio/mulaw"` или `"audio/alaw"` (например, `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` в Interactions API или `AUDIO_L16`, `AUDIO_MULAW` или `AUDIO_ALAW` в `generateContent`). Подробнее [о форматах аудиовыхода](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ru#audio-output-formats)…
+1. **Przenoszenie wskazówek dotyczących poszczególnych zakrętów do `speech_metadata`:** funkcja zamiany tekstu na mowę w Gemini 3.8 traktuje tekst wejściowy jako dosłowny zapis. Wskazówki tekstowe w tekście, takie jak
+   `"Say cheerfully: Hello!"` lub `"Speaker 1: Hello!"`, mogą być odczytywane na głos.
+   Przenieś instrukcje dotyczące ciągłego dostarczania (`style`) i etykiety mówców (`speaker`) do metadanych strukturalnych:
+   - **Interfejs Interactions API:** do każdego bloku tekstu dołączaj adnotację z wartościami `"type":
+     "speech_metadata"`, `"speaker"` i `"style"`.
+   - **Interfejs GenerateContent API:** dołącz `"speech_metadata": {"speaker": "...",
+     "style": "..."}` do każdego `part`.
+2. **Używaj tagów w nawiasach ostrych tylko w przypadku krótkotrwałych zdarzeń głosowych:** krótkotrwałe wokalizacje inne niż mowa i pauzy w transkrypcji umieszczaj w nawiasach ostrych (np. `<laugh>`, `<sigh>`, `<cough>`, `<breath>` lub `<short pause>`). Style wypowiedzi, takie jak szept, umieszczaj w nawiasach `speech_metadata.style`.
+3. **Określ `speaker` w każdej turze w przypadku żądań z udziałem wielu osób:** każda tura w żądaniu z udziałem wielu osób musi zawierać `speaker` w `speech_metadata`, które odpowiada jednemu ze skonfigurowanych głośników.
+4. **Projektowanie person z wyprzedzeniem za pomocą funkcji Projektowanie głosu:** zastąp długie bloki starszych profili audio lub notatek reżysera niestandardowym głosem utworzonym w [funkcji Projektowanie głosu](https://ai.google.dev/gemini-api/docs/voice-design?hl=pl), a następnie przesyłaj ten identyfikator `voice_...` w żądaniach zamiany tekstu na mowę z minimalną liczbą ciągów `style` lub bez nich.
+5. **Uwzględnij domyślne wyjście WAV (`audio/wav`) w przypadku żądań binarnych:** w przeciwieństwie do modeli TTS w wersji `gemini-3.1-flash-tts-preview` i starszych (które domyślnie zwracały surowe dane PCM bez nagłówka `audio/l16`) model Gemini 3.8 TTS domyślnie zwraca dźwięk WAV (`audio/wav` / `AUDIO_WAV`) ze standardowym nagłówkiem RIFF w przypadku żądań binarnych.
+   - Jeśli Twój kod wcześniej opakowywał surowe bajty PCM w nagłówek WAV (np. za pomocą modułu `wave` w Pythonie lub `ffmpeg`), usuń ręczny wrapper nagłówka i zapisz zwrócone bajty bezpośrednio w pliku `.wav`.
+   - Jeśli Twój potok wymaga dźwięku PCM bez nagłówka, mu-law lub A-law, ustaw parametr `response_format.mime_type` na `"audio/l16"`, `"audio/mulaw"` lub `"audio/alaw"` (np. `{"response_format": {"type": "audio", "mime_type": "audio/l16"}}` w interfejsie Interactions API lub `AUDIO_L16`, `AUDIO_MULAW` lub `AUDIO_ALAW` w `generateContent`). Więcej informacji znajdziesz w sekcji [Formaty wyjściowe audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl#audio-output-formats).
 
 ## gemini-3.8-flash-lite-tts
 
-| Свойство | Описание |
+| Właściwość | Opis |
 | --- | --- |
-| Код модели id\_card | `gemini-3.8-flash-lite-tts` |
-| saveПоддерживаемые типы данных | **Входные данные**  Текст  **Выходные данные**  Аудио |
-| token\_autoОграничения на количество токенов[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ru) | **Лимит на количество входных токенов**  8192  **Лимит на количество выходных токенов**  16 384 (ограничение Gemini API) |
-| handymanВозможности | **[Генератор аудио](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ru)**  Что пользователь может  **[Кеширование](https://ai.google.dev/gemini-api/docs/caching?hl=ru)**  Чего пользователь не может  **[Выполнение кода](https://ai.google.dev/gemini-api/docs/code-execution?hl=ru)**  Чего пользователь не может  **[Поиск файлов](https://ai.google.dev/gemini-api/docs/file-search?hl=ru)**  Чего пользователь не может  **[Вызов функций](https://ai.google.dev/gemini-api/docs/function-calling?hl=ru)**  Чего пользователь не может  **[Обоснование с Google Картами](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ru)**  Чего пользователь не может  **[Генерирование изображений](https://ai.google.dev/gemini-api/docs/image-generation?hl=ru)**  Чего пользователь не может  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ru)**  Чего пользователь не может  **[Находите информацию из надежных источников](https://ai.google.dev/gemini-api/docs/google-search?hl=ru)**  Чего пользователь не может  **[Структурированные выходные данные](https://ai.google.dev/gemini-api/docs/structured-output?hl=ru)**  Чего пользователь не может  **[Размышления](https://ai.google.dev/gemini-api/docs/thinking?hl=ru)**  Чего пользователь не может  **[Контекст URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ru)**  Чего пользователь не может |
-| speedВарианты просмотра | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ru)**  Что пользователь может  **[Гибкий инференс](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ru)**  Что пользователь может  **[Определение приоритета](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ru)**  Что пользователь может |
-| 123Версии | Подробнее [о шаблонах версий моделей](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ru#model-versions)…  - `gemini-3.8-flash-lite-tts` |
-| calendar\_monthПоследнее обновление | Сентябрь 2026 г. |
+| Kod modelu id\_card | `gemini-3.8-flash-lite-tts` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst  **Dane wyjściowe**  Audio |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  8192  **Limit tokenów wyjściowych**  16 384 (limit Gemini API) |
+| handyman Możliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Obsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Nieobsługiwane  **[Wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Nieobsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Nieobsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Nieobsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Nieobsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Nieobsługiwane  **[Uporządkowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Nieobsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Nieobsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Nieobsługiwane |
+| speed Opcje wykorzystania | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Obsługiwane  **[Wnioskowanie o priorytecie](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Obsługiwane |
+| Wersje 123 | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - `gemini-3.8-flash-lite-tts` |
+| calendar\_monthOstatnia aktualizacja | Wrzesień 2026 r. |
 
-## Поддерживаемые языки
+## Obsługiwane języki
 
-`gemini-3.8-flash-lite-tts` автоматически определяет язык ввода и поддерживает **более 100 языков**:
+`gemini-3.8-flash-lite-tts` automatycznie wykrywa język wejściowy i obsługuje **ponad 100 języków**:
 
-| Язык | Язык | Язык |
+| Język | Język | Język |
 | --- | --- | --- |
-| Ачехский (арабская письменность) | Немецкий | Манипури |
-| Африкаанс | Греческий | Маратхи |
-| Акан | Гуджарати | Минангкабау (арабское письмо) |
-| Амхарский | Гаитянский креольский | Мизо |
-| Армянский | Халха-монгольский | Непальский (отдельный язык) |
-| Ассамский | Хауса | Фула (Нигерия) |
-| Авадхи | Иврит | Североазербайджанский |
-| Балийский | хинди | Сото северный |
-| Бенгальский | Венгерский | Северный узбекский |
-| Банджарский (латиница) | Исландский | Норвежский букмол |
-| Баскский | илоканский | Норвежский (новонорвежский) |
-| Belarusian | Индонезийский | Ньянджа |
-| Бходжпури | Персидский (Иран) | Одия (отдельный язык) |
-| Боснийский | Итальянский | Персидский (Афганистан) |
-| Бугийский | Японский | Польский |
-| Болгарский | Яванский | Португальский |
-| Кантонский | Камба | Пенджабский |
-| Каталанский | Каннада | Румынский |
-| Себуанский | Кашмири (арабское письмо) | Русский |
-| Центральнокурдский | Кашмири (деванагари) | Сантали |
-| Чхаттисгархи | Казахский | Сербский |
-| Китайский (упрощенный) | Кхмерский | Сингальский |
-| Китайский (традиционное письмо) | Кикуйю | Словацкий |
-| Хорватский | Киньяруанда | Южноазербайджанский |
-| Чешский | Конго | Южный пушту |
-| Датский | Корейский | Испанский |
-| Нидерландский | Киргизский | Стандартный арабский (арабский шрифт) |
-| арабский (Египет) | Лаосский | Стандартный арабский (латиница) |
-| Английский | Лингала | Стандартный латышский |
-| Эстонский | Македонский | Стандартный малайский |
-| Филиппинский | Магахи | Тамильский |
-| Французский | Майтхили | Телугу |
-| Галисийский | Малаялам | Турецкий |
-| Ganda | Мальтийский | Вьетнамский |
-| Грузинский | — | — |
+| aceh (alfabet arabski), | niemiecki | manipuri, |
+| afrikaans | grecki | marathi |
+| akan | gudżarati | minangkabau (pismo arabskie), |
+| amharski | kreolski haitański | mizo |
+| ormiański | mongolski chałchaski, | nepalski (osobny język), |
+| asamski | hausa | fulfulde nigeryjski, |
+| awadhi | hebrajski | północnoazerski, |
+| balijski | hindi | sotho północny |
+| bengalski | węgierski | północnouzbecki, |
+| banjar (alfabet łaciński) | islandzki | norweski bokmål |
+| baskijski | iloko | norweski (Nynorsk) |
+| białoruski | indonezyjski | njandża |
+| bhodźpuri | perski irański, | Odia (pojedynczy język) |
+| bośniacki | włoski | perski (Afganistan) |
+| Bugiński | japoński | polski |
+| bułgarski | jawajski | portugalski |
+| kantoński | kamba | pendżabski |
+| kataloński | kannada | rumuński |
+| cebuański | kaszmirski (alfabet arabski), | rosyjski |
+| centralny kurdyjski | kaszmirski (pismo dewa) | santali |
+| ćhattisgarhi | kazachski | serbski |
+| chiński (pismo han) | khmerski | syngaleski |
+| chiński (pismo tradycyjne), | kikuyu | słowacki |
+| chorwacki | ruanda-rundi | południowoazerbejdżański, |
+| czeski | kongo | paszto południowy, |
+| duński | koreański | hiszpański |
+| niderlandzki | kirgiski | arabski standardowy (alfabet arabski), |
+| arabski egipski | laotański | arabski standardowy (alfabet łaciński) |
+| angielski | lingala | standardowy łotewski, |
+| estoński | macedoński | malajski standardowy, |
+| filipiński | magahi | tamilski |
+| francuski | maithili | telugu |
+| galicyjski | malajalam | turecki |
+| luganda | maltański | wietnamski |
+| gruziński | – | – |
 
-Отправить отзыв
+Prześlij opinię
 
-Если не указано иное, контент на этой странице предоставляется по [лицензии Creative Commons "С указанием авторства 4.0"](https://creativecommons.org/licenses/by/4.0/), а примеры кода – по [лицензии Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Подробнее об этом написано в [правилах сайта](https://developers.google.com/site-policies?hl=ru). Java – это зарегистрированный товарный знак корпорации Oracle и ее аффилированных лиц.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Последнее обновление: 2026-10-09 UTC.
+Ostatnia aktualizacja: 2026-10-09 UTC.
 
-Хотите рассказать подробнее?
+Chcesz przekazać coś jeszcze?
 
-[[["Прост для понимания","easyToUnderstand","thumb-up"],["Помог мне решить мою проблему","solvedMyProblem","thumb-up"],["Другое","otherUp","thumb-up"]],[["Отсутствует нужная мне информация","missingTheInformationINeed","thumb-down"],["Слишком сложен/слишком много шагов","tooComplicatedTooManySteps","thumb-down"],["Устарел","outOfDate","thumb-down"],["Проблема с переводом текста","translationIssue","thumb-down"],["Проблемы образцов/кода","samplesCodeIssue","thumb-down"],["Другое","otherDown","thumb-down"]],["Последнее обновление: 2026-10-09 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-10-09 UTC."],[],[]]

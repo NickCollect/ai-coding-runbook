@@ -1,60 +1,76 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-CN
-fetched_at: 2026-10-12T06:53:49.205389+00:00
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=fa
+fetched_at: 2026-10-19T05:43:44.270803+00:00
 title: "Gemini Robotics ER \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash 现已推出。[试试看](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=zh-cn)。
+‫Gemini 4 Argon اکنون دردسترس است. [امتحان کنید](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=fa).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fa)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+‫Google برای ترجمه محتوا به زبان ترجیحی شما از فناوری هوشواره استفاده می‌کند. ترجمه‌های هوشواره‌ای ممکن است اشتباه داشته باشند.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [صفحه اصلی](https://ai.google.dev/?hl=fa)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fa)
+- [سندنگار](https://ai.google.dev/gemini-api/docs?hl=fa)
 
-发送反馈
+ارسال بازخورد
 
 # Gemini Robotics ER
 
-Gemini Robotics ER（具身推理）模型是一种视觉-语言模型 (VLM)，可让机器人感知物理世界并与之互动。它们可以解读视觉数据、执行空间和时间推理、规划多步骤任务，以及协调机器人和工具。
+مدل‌های Gemini Robotics ER (استدلال تجسمی) مدل‌های زبان-دیداری
+(VLMs) هستند که به روبات‌ها امکان می‌دهند
+دنیای فیزیکی را درک کنند و با آن تعامل داشته باشند. این ربات‌ها داده‌های دیداری را تفسیر می‌کنند، استدلال فضایی و زمانی انجام می‌دهند، تکالیف چندمرحله‌ای را برنامه‌ریزی می‌کنند، و ربات‌ها و ابزارها را هماهنگ می‌کنند.
 
-## 模型
+## مدل‌ها
 
-Gemini Robotics ER 2 模型是 Gemini Robotics 中的最新模型。
-这是我们更新后的推理模型，可让机器人精确了解其环境。它专注于具身推理能力，例如机器人（例如使用 VLA）的智能体编排、机器人视频理解（包括进度理解和成功检测）、仪表读数、指点和空间推理。
+مدل Gemini Robotics ER 2 جدیدترین مدل در Gemini Robotics است.
+این مدل استدلالی به‌روزشده ما است که به روبات‌ها امکان می‌دهد محیط اطرافشان را به‌دقت درک کنند. این مدل در قابلیت‌های استدلال تجسمی، مثل هماهنگی عاملان روبات‌ها (برای نمونه، بااستفاده از VLAs)، درک ویدیو روبات شامل درک پیشرفت و تشخیص موفقیت، خواندن ابزار، اشاره کردن، و استدلال فضایی تخصص دارد.
 
-Gemini Robotics ER 2 模型引入了两个模型端点：
+مدل Gemini Robotics ER 2 دو نقطه پایانی مدل را معرفی می‌کند:
 
-- **`gemini-robotics-er-2-preview`**：标准 ER 2 模型。以 Gemini 3.5 Flash 为基础，在空间推理、视频精彩片段查找、视频进度分类、多机器人编排和多步工具使用方面有所改进。
-- **`gemini-robotics-er-2-streaming-preview`**：使用 [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn) 针对实时流式传输进行了优化。此模型适用于处理连续音频和视频输入的低延迟机器人代理。
+- **‫`gemini-robotics-er-2-preview`**: مدل استاندارد ER 2. برپایه
+  Gemini 3.5 Flash با استدلال فضایی بهبودیافته، یافتن لحظات ویدیو،
+  طبقه‌بندی پیشرفت ویدیو، هماهنگی چندروباتی، و استفاده از ابزار چندمرحله‌ای.
+- **`gemini-robotics-er-2-streaming-preview`**: بهینه‌سازی‌شده برای جاری‌سازی هم‌زمان بااستفاده از [Live API](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fa). از این مدل برای عامل‌های روبات با تأخیر کم استفاده کنید که ورودی صوتی و ویدیویی پیوسته را پردازش می‌کنند.
 
-Gemini Robotics ER 1.6 已于 [2026 年 8 月 31 日弃用](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn#robotics-models)。如果您仍在使用 Gemini Robotics ER 1.6，请在 API 调用中将 `model="gemini-robotics-er-1.6-preview"` 替换为 `model="gemini-robotics-er-2-preview"` 或 `model="gemini-robotics-er-2-streaming-preview"`，以升级到 Gemini Robotics ER 2。
+‫Gemini Robotics ER 1.6 در
+[۳۱ اوت ۲۰۲۶ منسوخ شد](https://ai.google.dev/gemini-api/docs/deprecations?hl=fa#robotics-models).
+اگر هنوز از Gemini Robotics ER 1.6 استفاده می‌کنید، با جایگزین کردن `model="gemini-robotics-er-1.6-preview"` با
+`model="gemini-robotics-er-2-preview"` یا
+`model="gemini-robotics-er-2-streaming-preview"` در فراخوانی‌های API، به Gemini Robotics ER 2 ارتقا دهید.
 
-[在 Google AI Studio 中试用 Gemini Robotics ER 2](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=zh-cn)
+[امتحان کردن Gemini Robotics ER 2 در Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-2-preview&hl=fa)
 
-## 机器人功能
+## قابلیت‌های روباتیک
 
-Gemini Robotics ER 支持一系列具身推理功能。选择一项功能即可了解详情：
+‫Gemini Robotics ER از طیف وسیعی از قابلیت‌های استدلال تجسمی پشتیبانی می‌کند.
+برای کسب اطلاعات بیشتر، قابلیتی را انتخاب کنید:
 
-| 能力 | 说明 | 指南 |
+| قابلیت | شرح | راهنما |
 | --- | --- | --- |
-| 空间推理 | 指向对象、在视频中跟踪对象、使用边界框进行检测、规划轨迹。 | [空间推理](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-cn) |
-| Agentic Vision | 利用图片处理工具，通过代码执行来增强其他功能。 | [Agentic vision](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=zh-cn) |
-| 任务编排 | 将空间推理与自定义机器人 API 相结合，以完成长期任务。 | [任务编排](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-cn) |
-| 流式传输（仅限 Gemini Robotics ER 2 流式传输端点） | 双向流式传输，适用于低延迟函数调用的实时机器人代理。 | [机器人流式传输](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn) |
-| 视频进度（仅限 Gemini Robotics ER 2） | 从连续视频源中查找精彩瞬间并对进度进行分类。 | [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) |
+| استدلال فضایی | به اشیا اشاره کنید، آن‌ها را در ویدیو ردیابی کنید، با چارگوش‌های محدودکننده تشخیص دهید، مسیرها را برنامه‌ریزی کنید. | [استدلال فضایی](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=fa) |
+| بینایی عامل‌گرا | با بهره‌گیری از ابزارهای دستکاری تصویر، از اجرای کد برای بهبود قابلیت‌های دیگر استفاده کنید. | [بینش عامل‌گرا](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=fa) |
+| هماهنگ‌سازی تکلیف | برای انجام تکالیف بلندمدت، استدلال فضایی را با میاناهای برنامه‌سازی کاربردی روبات سفارشی ترکیب کنید. | [هماهنگی تکلیف](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=fa) |
+| جاری‌سازی (فقط نقطه پایانی جاری‌سازی Gemini Robotics ER 2) | جاری‌سازی دوطرفه برای کارگزاران روبات هم‌زمان با تأخیر کم فراخوانی تابع. | [جاری‌سازی برای روباتیک](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fa) |
+| پیشرفت ویدیو (فقط Gemini Robotics ER 2) | یافتن لحظه و طبقه‌بندی پیشرفت از فیدهای ویدیو پیوسته. | [درک ویدیو](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=fa) |
 
-## 准备工作
+## قبل‌از شروع
 
-Gemini Robotics ER 模型可通过 **Gemini Developer API** 使用。首先，从 [Google AI Studio](https://aistudio.google.com/apikey?hl=zh-cn) 或 [Google Cloud 控制台](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn#cloud-console)创建 [Gemini API 密钥](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn)，然后[设置您的环境](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn#setup-environment)。
+مدل‌های Gemini Robotics ER ازطریق **Gemini Developer
+API** دردسترس هستند. برای شروع، از
+[Google AI Studio](https://aistudio.google.com/apikey?hl=fa) یا
+[کنسول Google Cloud](https://ai.google.dev/gemini-api/docs/api-key?hl=fa#cloud-console)، [کلید Gemini API](https://ai.google.dev/gemini-api/docs/api-key?hl=fa) ایجاد کنید و
+[محیطتان را راه‌اندازی کنید](https://ai.google.dev/gemini-api/docs/api-key?hl=fa#setup-environment).
 
-如需详细了解密钥类型、安全性以及如何在 Python、JavaScript 和其他语言中配置密钥，请参阅[使用 Gemini API 密钥](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn)。
+برای جزئیات مربوط به انواع کلید، امنیت، و نحوه پیکربندی کلید در
+Python،‏ JavaScript، و زبان‌های دیگر، به
+[استفاده از کلیدهای میانای برنامه‌سازی کاربردی Gemini](https://ai.google.dev/gemini-api/docs/api-key?hl=fa) مراجعه کنید.
 
-## 使用入门
+## درحال شروع کردن
 
-以下示例用于查找图片中的对象，并返回其归一化的二维坐标和标签。您可以将此输出直接传递给机器人 API 或 VLA 模型，以生成机器人动作。
+مثال زیر اشیای موجود در تصویر را پیدا می‌کند و مختصات و برچسب‌های دوبعدی عادی‌سازی‌شده آن‌ها را برمی‌گرداند. می‌توانید این برونداد را مستقیماً به میانای برنامه‌سازی کاربردی روباتیک یا مدل
+VLA منتقل کنید تا کنش‌های روبات را تولید کند.
 
 ### Python
 
@@ -120,7 +136,7 @@ const imageResponse = await client.interactions.create({
 console.log(imageResponse.output_text);
 ```
 
-### Java
+### جاوا
 
 ```
 import com.google.genai.Client;
@@ -174,7 +190,7 @@ Interaction imageResponse =
 System.out.println(imageResponse.outputText().orElse(""));
 ```
 
-### Go
+### رفتن
 
 ```
 package main
@@ -269,9 +285,10 @@ curl -X POST \
   }'
 ```
 
-输出将是一个包含对象的 JSON 数组，每个对象都包含一个 `point`（归一化的 `[y, x]` 坐标）和一个用于标识对象的 `label`。
+برونداد آرایه JSON حاوی اشیایی خواهد بود که هرکدام دارای `point`
+(مختصات `[y, x]` عادی‌سازی‌شده) و `label` شناسایی‌کننده شیء است.
 
-### JSON
+### (قالب) JSON
 
 ```
 [
@@ -288,108 +305,124 @@ curl -X POST \
 ]
 ```
 
-下图展示了这些点可以如何显示：
+تصویر زیر نمونه‌ای از نحوه نمایش این نقاط است:
 
-![显示图片中对象点的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=zh-cn)
+![مثالی که نقاط اشیا را در تصویر نشان می‌دهد](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=fa)
 
-## 运作方式
+## روش کار
 
-Gemini Robotics ER 接受图片、视频或音频输入，并使用自然语言提示。该模型可识别对象、推理场景上下文和空间关系，并返回坐标或边界框等结构化输出。
+‫Gemini Robotics ER با پیام‌واره‌های زبان طبیعی ورودی تصویر، ویدیو، یا صدا را دریافت می‌کند. این ویژگی اشیا را شناسایی می‌کند، درباره بافت صحنه و روابط فضایی استدلال می‌کند، و برونداد ساختاریافته‌ای مثل مختصات یا چارگوش‌های محدودکننده برمی‌گرداند.
 
-Gemini Robotics ER 也是智能体：它会将复杂任务分解为子任务，并通过调用机器人函数或运行生成的代码来执行这些子任务。例如，“把苹果放到碗里”这个动作会分解为定位、抓取和放置这三个步骤。
+‫Gemini Robotics ER همچنین عامل است: این مدل تکالیف پیچیده را به تکالیف فرعی تقسیم می‌کند و
+با فراخوانی کردن عملکردهای ربات شما یا اجرای کد تولیدشده، آن‌ها را اجرا می‌کند. برای مثال، «سیب را در کاسه بگذار» به توالی مراحل مکان‌یابی، گرفتن، و
+قرار دادن تبدیل می‌شود.
 
-如需详细了解 Gemini 如何执行工具调用，请参阅[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=zh-cn#how-it-works)。
+برای جزئیات نحوه اجرای تماس‌های ابزار توسط Gemini، [فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=fa#how-it-works) را ببینید.
 
-## 安全
+## ایمنی
 
-虽然 Gemini Robotics ER 在设计时就考虑到了安全性，但您有责任确保机器人周围的环境安全。生成式 AI 模型可能会出错，而实体机器人可能会造成损坏。如需了解详情，请访问 [Gemini Robotics 安全性页面](https://deepmind.google/models/gemini-robotics/safety?hl=zh-cn)。
+اگرچه Gemini Robotics ER با درنظر گرفتن ایمنی ساخته شده است، اما مسئولیت شما است که محیطی ایمن در اطراف ربات حفظ کنید. مدل‌های هوش مصنوعی زایا ممکن است اشتباه کنند و روبات‌های فیزیکی ممکن است آسیب برسانند. برای کسب اطلاعات بیشتر،
+به
+[صفحه ایمنی «روباتیک Gemini»](https://deepmind.google/models/gemini-robotics/safety?hl=fa) مراجعه کنید.
 
-## 最佳做法
+## روال‌های مطلوب
 
-1. 使用简单自然的语言。像对人一样描述您希望机器人执行的操作。如果某个字词不起作用，请尝试使用常用的同义词。
-2. 优化视觉输入。在发送图片之前，先剪裁或放大图片中较小或不清晰的对象。光线和低色彩对比度可能会影响检测。
-3. 将复杂任务分解为多个步骤。将每个步骤作为单独的提示发送，以使模型保持专注并提高准确性。
-4. 多次查询并对结果求平均值，以执行高精度任务。这种一致性方法可减少空间输出的方差。
+1. از زبان ساده و طبیعی استفاده کنید. کاری را که می‌خواهید روبات انجام دهد همان‌طور که به یک شخص می‌گویید توصیف کنید. اگر اصطلاحی کار نمی‌کند، مترادف رایجی را امتحان کنید.
+2. ورودی دیداری را بهینه کنید. پیش‌از ارسال تصویر، اشیای کوچک یا نامشخص را برش دهید یا زوم‌پیش کنید. نور و کنتراست رنگ پایین می‌تواند روی تشخیص تأثیر بگذارد.
+3. تکالیف پیچیده را به مراحل تقسیم کنید. هر مرحله را به‌عنوان پیام‌واره جداگانه‌ای ارسال کنید تا مدل متمرکز بماند و دقت بهبود یابد.
+4. برای کارهای با دقت بالا، چندین بار پُرسمان کنید و نتایج را میانگین بگیرید. این رویکرد اجماعی باعث کاهش تغییرات در بروندادهای فضایی می‌شود.
 
-## 限制
+## محدودیت‌ها
 
-使用 Gemini Robotics ER 进行开发时，请考虑以下限制：
+هنگام توسعه با Gemini Robotics ER، محدودیت‌های زیر را درنظر بگیرید:
 
-- **API 密钥限制**：Gemini API 不接受来自不受限 API 密钥的请求，并会返回 `403 Forbidden` 错误。在 [AI Studio](https://aistudio.google.com/api-keys?hl=zh-cn) 中添加限制，确保 API 密钥安全无虞。
-  如需了解详情，请参阅[保护不受限制的 API 密钥](https://ai.google.dev/gemini-api/docs/api-key?hl=zh-cn#secure-unrestricted-keys)。
-- **延迟时间与性能**：复杂的查询、高分辨率输入或高思维水平可能会导致处理时间增加。对于思考级别，请使用中等，以便在延迟时间和性能之间取得良好的平衡。
-- **幻觉**：与所有大语言模型一样，Gemini Robotics ER 模型有时也会产生“幻觉”或提供不正确的信息，尤其是在提示不明确或输入超出分布范围时。
-- **对提示质量的依赖性**：输出质量取决于输入提示的清晰度。使用具体且结构合理的提示。
-- **计算成本**：运行模型（尤其是使用视频输入或高 `thinking_budget` 时）会消耗计算资源并产生费用。如需了解详情，请参阅[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)页面。
-- **输入类型**：如需详细了解每种模式的限制，请参阅以下主题。
-  - [图片输入](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn#technical-details-image)
-  - [视频输入](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn#supported-formats)
-  - [音频输入](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn#supported-formats)
+- **محدودیت‌های کلید API:** «میانای برنامه‌سازی کاربردی Gemini» درخواست‌های کلیدهای API بدون محدودیت را نمی‌پذیرد و خطای `403 Forbidden` برمی‌گرداند. با افزودن محدودیت‌ها در [AI Studio](https://aistudio.google.com/api-keys?hl=fa)، کلید API خود را ایمن کنید.
+  برای جزئیات، [کلیدهای API نامحدود ایمن](https://ai.google.dev/gemini-api/docs/api-key?hl=fa#secure-unrestricted-keys)
+  را ببینید.
+- **تأخیر دربرابر عملکرد:** پُرسمان‌های پیچیده، ورودی‌های با وضوح بالا، یا سطوح بالای
+  تفکر می‌تواند منجر به افزایش زمان پردازش شود. برای سطح تفکر
+  از متوسط برای ایجاد تعادل خوب بین تأخیر و عملکرد استفاده کنید.
+- **توهمات:** مانند همه مدل‌های زبانی بزرگ، مدل‌های Gemini Robotics ER
+  گاهی اوقات می‌توانند «توهم» داشته باشند یا اطلاعات نادرست ارائه دهند،
+  به‌ویژه برای پیام‌واره‌های مبهم یا ورودی‌های خارج از توزیع.
+- **وابستگی به کیفیت پیام‌واره:** کیفیت برونداد به وضوح پیام‌واره ورودی بستگی دارد. از پیام‌واره‌های مشخص و خوش‌ساخت استفاده کنید.
+- **هزینه محاسباتی:** اجرای مدل، به‌ویژه با ورودی‌های ویدیویی یا
+  `thinking_budget` بالا، منابع محاسباتی را مصرف می‌کند و هزینه‌هایی را به‌همراه دارد.
+  برای جزئیات بیشتر، صفحه [تفکر](https://ai.google.dev/gemini-api/docs/thinking?hl=fa) را ببینید.
+- **انواع ورودی:** برای جزئیات مربوط به محدودیت‌های هر حالت، موضوعات زیر را ببینید.
+  - [ورودی‌های تصویر](https://ai.google.dev/gemini-api/docs/image-understanding?hl=fa#technical-details-image)
+  - [ورودی‌های ویدیو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=fa#supported-formats)
+  - [ورودی‌های صوتی](https://ai.google.dev/gemini-api/docs/audio?hl=fa#supported-formats)
 
-## 隐私权声明
+## اعلامیه حریم خصوصی
 
-您确认，本文档中提及的机器人模型（以下简称“机器人模型”）会利用视频和音频数据来运行并根据您的指令移动硬件。因此，您可能会操作机器人模型，以便机器人模型收集可识别个人的数据，例如语音、图像和肖像数据（“个人数据”）。如果您选择以会收集个人数据的方式操作机器人模型，则表示您同意，除非且直到可识别身份的个人充分了解并同意其个人数据可能会按照 [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=zh-cn)（以下简称“条款”）中所述的方式提供给 Google 并由 Google 使用（包括根据标题为“Google 如何使用您的数据”的部分），否则您不得允许任何可识别身份的个人与机器人模型互动或出现在机器人模型周围的区域。您应确保此类通知允许收集和使用本条款中规定的个人数据，并应尽商业上合理的努力，通过使用面部模糊处理等技术和在不包含可识别人员的区域运行机器人模型，尽可能减少个人数据的收集和分发。
+تصدیق می‌کنید که مدل‌های ارجاع‌شده در این سند («مدل‌های رباتیک») از داده‌های ویدیویی و صوتی برای عملکرد و حرکت سخت‌افزار شما مطابق با دستورالعمل‌هایتان استفاده می‌کنند. بنابراین ممکن است «مدل‌های رباتیک» را به‌گونه‌ای به‌کار ببرید که داده‌های افراد قابل‌شناسایی، مثل صدا، تصاویر، و داده‌های شباهت («داده‌های شخصی») توسط «مدل‌های رباتیک» جمع‌آوری شود. اگر انتخاب کنید «مدل‌های رباتیک» را به روشی که «داده‌های شخصی» را جمع‌آوری می‌کند اداره کنید، موافقت می‌کنید که به هیچ فرد قابل‌شناسایی اجازه ندهید با «مدل‌های رباتیک» تعامل داشته باشد یا در اطراف آن حضور داشته باشد، مگر اینکه و تا زمانی که به این افراد قابل‌شناسایی به‌اندازه کافی اطلاع داده شود و آن‌ها موافقت کنند که «داده‌های شخصی» آن‌ها ممکن است طبق آنچه در «شرایط خدمات تکمیلی Gemini API» در [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=fa) (این «شرایط») آمده است، ازجمله مطابق با بخش با عنوان «Google چگونه از داده‌های شما استفاده می‌کند»، به Google ارائه شود و Google از آن استفاده کند. تضمین می‌کنید که چنین
+اعلامیه‌ای اجازه جمع‌آوری و استفاده از «داده‌های شخصی» را همان‌گونه که در «شرایط» ذکر شده است می‌دهد،
+و تا حد امکان از تلاش‌های تجاری معقولی برای به‌حداقل رساندن جمع‌آوری و
+توزیع «داده‌های شخصی» بااستفاده از فنونی مانند محو کردن چهره و
+به‌کارگیری «مدل‌های رباتیک» در مناطقی که حاوی افراد قابل‌شناسایی نیستند استفاده خواهید کرد.
 
-## 价格
+## قیمت‌گذاری
 
-如需详细了解价格和可用地区，请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面。
+برای اطلاعات دقیق درباره قیمت‌گذاری و مناطق دردسترس، به صفحه
+[قیمت‌گذاری](https://ai.google.dev/gemini-api/docs/pricing?hl=fa) مراجعه کنید.
 
-## 模型端点
+## نقطه‌های پایان مدل
 
-### Gemini Robotics ER 2 预览版
+### پیش‌نمایش Gemini Robotics ER 2
 
-| 属性 | 说明 |
+| دارایی | شرح |
 | --- | --- |
-| id\_card 模型代码 | `gemini-robotics-er-2-preview` |
-| 保存支持的数据类型 | **输入源**  文字、图片、视频、音频  **输出**  文本 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  65536 |
-| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  不受支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  支持  **[计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)**  支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  支持  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  不受支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  不受支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  支持  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  支持 |
-| speed使用选项 | **[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  支持  **[Flex 推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)**  不受支持  **[优先级推理](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)**  不受支持 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-robotics-er-2-preview` |
-| calendar\_month最新更新 | 2026 年 7 月 |
-| id\_card模型卡片 | [模型卡片](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=zh-cn) |
+| id\_cardکد مدل | `gemini-robotics-er-2-preview` |
+| انواع داده‌های پشتیبانی‌شده برای ذخیره کردن | **ورودی‌ها**  نوشتار، تصاویر، ویدیو، صدا  **برونداد**  نوشتار |
+| token\_autoمحدودیت‌های نشان[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) | **محدودیت داده‌واحد ورودی**  ۱۳۱٬۰۷۲  **محدودیت داده‌واحد برونداد**  ۶۵۵۳۶ |
+| ‫handymanقابلیت‌ها | **[تولید صدا](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fa)**  پشتیبانی نمی‌شود  **[ذخیره در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa)**  پشتیبانی‌شده  **[اجرای کد](https://ai.google.dev/gemini-api/docs/code-execution?hl=fa)**  پشتیبانی‌شده  **[استفاده از رایانه](https://ai.google.dev/gemini-api/docs/computer-use?hl=fa)**  پشتیبانی‌شده  **[جستجوی فایل](https://ai.google.dev/gemini-api/docs/file-search?hl=fa)**  پشتیبانی‌شده  **[فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?hl=fa)**  پشتیبانی‌شده  **[پایه‌مندسازی با Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fa)**  پشتیبانی‌شده  **[تولید تصویر](https://ai.google.dev/gemini-api/docs/image-generation?hl=fa)**  پشتیبانی نمی‌شود  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=fa)**  پشتیبانی نمی‌شود  **[زمینه‌سازی جستجو](https://ai.google.dev/gemini-api/docs/google-search?hl=fa)**  پشتیبانی‌شده  **[بروندادهای ساختاریافته](https://ai.google.dev/gemini-api/docs/structured-output?hl=fa)**  پشتیبانی‌شده  **[درحال فکر کردن](https://ai.google.dev/gemini-api/docs/thinking?hl=fa)**  پشتیبانی‌شده  **[بافت نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa)**  پشتیبانی‌شده |
+| ‫speedگزینه‌های مصرف | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=fa)**  پشتیبانی‌شده  **[استنتاج انعطاف‌پذیر](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fa)**  پشتیبانی نمی‌شود  **[استنباط اولویت](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fa)**  پشتیبانی نمی‌شود |
+| ‫۱۲۳نسخه | برای جزئیات بیشتر، [الگوهای نسخه مدل](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fa#model-versions) را بخوانید.  - پیش‌نمایش: `gemini-robotics-er-2-preview` |
+| calendar\_monthآخرین به‌روزرسانی | ژوئیه ۲۰۲۶ |
+| کارت id\_cardمدل | [کارت مدل](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=fa) |
 
-### Gemini Robotics ER 2 流式预览版
+### پیش‌نمایش جاری‌سازی Gemini Robotics ER 2
 
-| 属性 | 说明 |
+| دارایی | شرح |
 | --- | --- |
-| id\_card 模型代码 | `gemini-robotics-er-2-streaming-preview` |
-| 保存支持的数据类型 | **输入源**  文字、图片、视频、音频  **输出**  文本 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  65536 |
-| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  不受支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  不受支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  不受支持  **[计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)**  不受支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  不受支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  支持  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  不受支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  不受支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  不受支持  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  不受支持 |
-| speed使用选项 | **[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  不受支持  **[Flex 推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)**  不受支持  **[优先级推理](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)**  不受支持 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-robotics-er-2-streaming-preview` |
-| calendar\_month最新更新 | 2026 年 7 月 |
-| id\_card模型卡片 | [模型卡片](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=zh-cn) |
+| id\_cardکد مدل | `gemini-robotics-er-2-streaming-preview` |
+| انواع داده‌های پشتیبانی‌شده برای ذخیره کردن | **ورودی‌ها**  نوشتار، تصاویر، ویدیو، صدا  **برونداد**  نوشتار |
+| token\_autoمحدودیت‌های نشان[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) | **محدودیت داده‌واحد ورودی**  ۱۳۱٬۰۷۲  **محدودیت داده‌واحد برونداد**  ۶۵۵۳۶ |
+| ‫handymanقابلیت‌ها | **[تولید صدا](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fa)**  پشتیبانی نمی‌شود  **[ذخیره در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa)**  پشتیبانی نمی‌شود  **[اجرای کد](https://ai.google.dev/gemini-api/docs/code-execution?hl=fa)**  پشتیبانی نمی‌شود  **[استفاده از رایانه](https://ai.google.dev/gemini-api/docs/computer-use?hl=fa)**  پشتیبانی نمی‌شود  **[جستجوی فایل](https://ai.google.dev/gemini-api/docs/file-search?hl=fa)**  پشتیبانی نمی‌شود  **[فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?hl=fa)**  پشتیبانی‌شده  **[پایه‌مندسازی با Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fa)**  پشتیبانی نمی‌شود  **[تولید تصویر](https://ai.google.dev/gemini-api/docs/image-generation?hl=fa)**  پشتیبانی نمی‌شود  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=fa)**  پشتیبانی‌شده  **[زمینه‌سازی جستجو](https://ai.google.dev/gemini-api/docs/google-search?hl=fa)**  پشتیبانی‌شده  **[بروندادهای ساختاریافته](https://ai.google.dev/gemini-api/docs/structured-output?hl=fa)**  پشتیبانی نمی‌شود  **[درحال فکر کردن](https://ai.google.dev/gemini-api/docs/thinking?hl=fa)**  پشتیبانی‌شده  **[بافت نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa)**  پشتیبانی نمی‌شود |
+| ‫speedگزینه‌های مصرف | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=fa)**  پشتیبانی نمی‌شود  **[استنتاج انعطاف‌پذیر](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fa)**  پشتیبانی نمی‌شود  **[استنباط اولویت](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fa)**  پشتیبانی نمی‌شود |
+| ‫۱۲۳نسخه | برای جزئیات بیشتر، [الگوهای نسخه مدل](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fa#model-versions) را بخوانید.  - پیش‌نمایش: `gemini-robotics-er-2-streaming-preview` |
+| calendar\_monthآخرین به‌روزرسانی | ژوئیه ۲۰۲۶ |
+| کارت id\_cardمدل | [کارت مدل](https://deepmind.google/models/model-cards/gemini-robotics-er-2/?hl=fa) |
 
-### Gemini Robotics ER 1.6 预览版
+### پیش‌نمایش Gemini Robotics ER 1.6
 
-| 属性 | 说明 |
+| دارایی | شرح |
 | --- | --- |
-| id\_card 模型代码 | `gemini-robotics-er-1.6-preview` |
-| 保存支持的数据类型 | **输入源**  文字、图片、视频、音频  **输出**  文本 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  65536 |
-| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  不受支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  支持  **[计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)**  支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  支持  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  不受支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  不受支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  支持  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  支持 |
-| speed使用选项 | **[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  支持  **[Flex 推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)**  不受支持  **[优先级推理](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)**  不受支持 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-robotics-er-1.6-preview` |
-| calendar\_month最新更新 | 2025 年 12 月 |
-| cognition\_2知识截点 | 2025 年 1 月 |
+| id\_cardکد مدل | `gemini-robotics-er-1.6-preview` |
+| انواع داده‌های پشتیبانی‌شده برای ذخیره کردن | **ورودی‌ها**  نوشتار، تصاویر، ویدیو، صدا  **برونداد**  نوشتار |
+| token\_autoمحدودیت‌های نشان[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fa) | **محدودیت داده‌واحد ورودی**  ۱۳۱٬۰۷۲  **محدودیت داده‌واحد برونداد**  ۶۵۵۳۶ |
+| ‫handymanقابلیت‌ها | **[تولید صدا](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fa)**  پشتیبانی نمی‌شود  **[ذخیره در حافظه نهان](https://ai.google.dev/gemini-api/docs/caching?hl=fa)**  پشتیبانی‌شده  **[اجرای کد](https://ai.google.dev/gemini-api/docs/code-execution?hl=fa)**  پشتیبانی‌شده  **[استفاده از رایانه](https://ai.google.dev/gemini-api/docs/computer-use?hl=fa)**  پشتیبانی‌شده  **[جستجوی فایل](https://ai.google.dev/gemini-api/docs/file-search?hl=fa)**  پشتیبانی‌شده  **[فراخوانی تابع](https://ai.google.dev/gemini-api/docs/function-calling?hl=fa)**  پشتیبانی‌شده  **[پایه‌مندسازی با Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fa)**  پشتیبانی‌شده  **[تولید تصویر](https://ai.google.dev/gemini-api/docs/image-generation?hl=fa)**  پشتیبانی نمی‌شود  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=fa)**  پشتیبانی نمی‌شود  **[زمینه‌سازی جستجو](https://ai.google.dev/gemini-api/docs/google-search?hl=fa)**  پشتیبانی‌شده  **[بروندادهای ساختاریافته](https://ai.google.dev/gemini-api/docs/structured-output?hl=fa)**  پشتیبانی‌شده  **[درحال فکر کردن](https://ai.google.dev/gemini-api/docs/thinking?hl=fa)**  پشتیبانی‌شده  **[بافت نشانی وب](https://ai.google.dev/gemini-api/docs/url-context?hl=fa)**  پشتیبانی‌شده |
+| ‫speedگزینه‌های مصرف | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=fa)**  پشتیبانی‌شده  **[استنتاج انعطاف‌پذیر](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fa)**  پشتیبانی نمی‌شود  **[استنباط اولویت](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fa)**  پشتیبانی نمی‌شود |
+| ‫۱۲۳نسخه | برای جزئیات بیشتر، [الگوهای نسخه مدل](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fa#model-versions) را بخوانید.  - پیش‌نمایش: `gemini-robotics-er-1.6-preview` |
+| calendar\_monthآخرین به‌روزرسانی | دسامبر ۲۰۲۵ |
+| cognition\_2تاریخ برش دانش | ژانویه ۲۰۲۵ |
 
-## 后续步骤
+## قدم بعدی چیست
 
-- [空间推理](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-cn) - 指向、跟踪、边界框、轨迹。
-- [智能体功能](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=zh-cn) - 代码执行、乐器读谱、图片注释。
-- [任务编排](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=zh-cn) - 使用自定义机器人 API 的长时程任务。
-- [支持流式传输的机器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-cn) - 实时双向流式传输（仅限 Gemini Robotics ER 2）。
-- [视频理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-cn) - 时刻查找和进度分类（仅限 Gemini Robotics ER 2）。
-- [Gemini Robotics 安全性](https://deepmind.google/models/gemini-robotics/safety?hl=zh-cn) - 模型系列背后的安全研究。
+- [استدلال فضایی](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=fa) — اشاره کردن، ردیابی کردن، چارگوش‌های محصورکننده، مسیرها.
+- [قابلیت‌های عامل‌گرایی](https://ai.google.dev/gemini-api/docs/robotics-agentic?hl=fa) — اجرای کد، خواندن ابزار، حاشیه‌نویسی تصویر.
+- [هماهنگ‌سازی تکلیف](https://ai.google.dev/gemini-api/docs/robotics-orchestration?hl=fa) — تکالیف بلندمدت با APIهای سفارشی ربات.
+- [روباتیک با جاری‌سازی](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fa) — جاری‌سازی دوطرفه هم‌زمان (فقط Gemini Robotics ER 2).
+- [درک ویدیو](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=fa) — یافتن لحظه و طبقه‌بندی پیشرفت (فقط Gemini Robotics ER 2).
+- [ایمنی Gemini Robotics](https://deepmind.google/models/gemini-robotics/safety?hl=fa) — پژوهش ایمنی پشت خانواده مدل.
 
-发送反馈
+ارسال بازخورد
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+جز در مواردی که غیر از این ذکر شده باشد،‌محتوای این صفحه تحت مجوز [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) است. نمونه کدها نیز دارای مجوز [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) است. برای اطلاع از جزئیات، به [خطمشی‌های سایت Google Developers‏](https://developers.google.com/site-policies?hl=fa) مراجعه کنید. جاوا علامت تجاری ثبت‌شده Oracle و/یا شرکت‌های وابسته به آن است.
 
-最后更新时间 (UTC)：2026-10-06。
+تاریخ آخرین به‌روزرسانی 2026-10-06 به‌وقت ساعت هماهنگ جهانی.
 
-需要向我们提供更多信息？
+می‌خواهید موارد بیشتری را با ما درمیان بگذارید؟
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-10-06。"],[],[]]
+[[["درک آسان","easyToUnderstand","thumb-up"],["مشکلم را برطرف کرد","solvedMyProblem","thumb-up"],["غیره","otherUp","thumb-up"]],[["اطلاعاتی که نیاز دارم وجود ندارد","missingTheInformationINeed","thumb-down"],["بیش‌ازحد پیچیده/ مراحل بسیار زیاد","tooComplicatedTooManySteps","thumb-down"],["قدیمی","outOfDate","thumb-down"],["مشکل ترجمه","translationIssue","thumb-down"],["مشکل کد / نمونه‌ها","samplesCodeIssue","thumb-down"],["غیره","otherDown","thumb-down"]],["تاریخ آخرین به‌روزرسانی 2026-10-06 به‌وقت ساعت هماهنگ جهانی."],[],[]]

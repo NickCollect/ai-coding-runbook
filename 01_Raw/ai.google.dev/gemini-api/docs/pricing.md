@@ -1,1244 +1,1279 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=bn
-fetched_at: 2026-10-12T06:50:27.052200+00:00
-title: "Gemini Developer API-\u098f\u09b0 \u09a6\u09be\u09ae \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=sq
+fetched_at: 2026-10-19T05:43:34.030909+00:00
+title: "\u00c7mimi i Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-জেমিনি ৩.৮ ফ্ল্যাশ এখন পাওয়া যাচ্ছে। [ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=bn) ।
+Gemini 4 Argon tani është i disponueshëm. [Provoje](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=bn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=sq)
 
-আপনার পছন্দের ভাষায় কন্টেন্ট অনুবাদ করতে Google তার AI প্রযুক্তি ব্যবহার করে। AI-এর মাধ্যমে করা অনুবাদে ভুল থাকতে পারে।
+Google përdor teknologjinë e IA-së për të përkthyer përmbajtjet në gjuhën tënde të preferuar. Përkthimet nga IA-ja mund të përmbajnë gabime.
 
-- [হোম](https://ai.google.dev/?hl=bn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=bn)
-- [দস্তাবেজ](https://ai.google.dev/gemini-api/docs?hl=bn)
+- [Faqja kryesore](https://ai.google.dev/?hl=sq)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=sq)
+- [Dokumentet](https://ai.google.dev/gemini-api/docs?hl=sq)
 
-# Gemini Developer API-এর দাম
+# Çmimi i Gemini Developer API
 
-প্রচুর সীমা সহ ফ্রিতে তৈরি করা শুরু করুন, তারপর আপনার প্রোডাকশন রেডি অ্যাপ্লিকেশনের জন্য
-প্রিপেড ও পে-অ্যাজ-ইউ-গো মূল্য নির্ধারণের মাধ্যমে স্কেল-আপ করুন।
+Fillo të ndërtosh pa pagesë me kufij bujarë dhe më pas zgjeroje me çmime me parapagim dhe me pagesë sipas përdorimit për aplikacionet e tua gati për prodhim.
 
-### ফ্রি
+### Falas
 
-Gemini API-এর ব্যবহার শুরু করেছেন এমন ডেভেলপার ও ছোট ছোট প্রোজেক্টের জন্য
+Për zhvilluesit dhe projektet e vogla që po fillojnë me Gemini API.
 
-- check\_circleনির্দিষ্ট কিছু মডেলে সীমিত অ্যাক্সেস
-- check\_circleফ্রি ইনপুট ও আউটপুট টোকেন
-- check\_circleGoogle AI Studio অ্যাক্সেস
-- check\_circleআমাদের প্রোডাক্ট উন্নত করতে কন্টেন্ট ব্যবহার করা হয়[\*](https://ai.google.dev/gemini-api/terms?hl=bn)
+- check\_circleQasje e kufizuar në modele të caktuara
+- check\_circleTokenë falas të hyrjes dhe daljes
+- check\_circleQasja në Google AI Studio
+- check\_circlePërmbajtjet e përdorura për të përmirësuar produktet tona[\*](https://ai.google.dev/gemini-api/terms?hl=sq)
 
-[ফ্রি প্ল্যান দিয়ে শুরু করুন](https://aistudio.google.com?hl=bn)
+[Fillo falas](https://aistudio.google.com?hl=sq)
 
-### পেমেন্ট করতে হয়
+### Me pagesë
 
-আরও বেশি মাত্রার ভলিউম ও উন্নত ফিচার প্রয়োজন, এমন সব প্রোডাকশন অ্যাপ্লিকেশনের জন্য।
+Për aplikacionet e prodhimit që kërkojnë volume më të larta dhe veçori të përparuara.
 
-- check\_circleপ্রোডাকশন ডিপ্লয়মেন্টের জন্য আরও বেশি রেট লিমিট
-- check\_circleকন্টেক্সট ক্যাশে করার অ্যাক্সেস
-- check\_circleব্যাচ API (৫০% খরচ কম)
-- check\_circleGoogle-এর সবচেয়ে উন্নত মডেলে অ্যাক্সেস
-- check\_circleআমাদের প্রোডাক্ট উন্নত করতে **না** ব্যবহার করা কন্টেন্ট[\*](https://ai.google.dev/gemini-api/terms?hl=bn)
+- check\_circleKufij më të lartë të normave për përdorimet në prodhim
+- check\_circleQasje te "Ruajtja specifike e kontekstit"
+- check\_circleBatch API (50% ulje kostoje)
+- check\_circleQasje në modelet më të përparuara të Google
+- check\_circlePërmbajtjet **nuk** përdoren për të përmirësuar produktet tona[\*](https://ai.google.dev/gemini-api/terms?hl=sq)
 
-[পেড ভার্সনে আপগ্রেড করুন](https://aistudio.google.com/api-keys?hl=bn)
+[Përmirësoje në versionin me pagesë](https://aistudio.google.com/api-keys?hl=sq)
 
-### এন্টারপ্রাইজ
+### Ndërmarrje
 
-এন্টারপ্রাইজ ডেপ্লয়মেন্টের জন্য, [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=bn) দ্বারা পরিচালিত।
+Për integrimet në ndërmarrje, mundësuar nga [Platforma e agjentit të Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=sq).
 
-- check\_circleপেড প্ল্যানের সব ফিচার, সাথে এগুলিতে ঐচ্ছিক অ্যাক্সেস:
-- check\_circleনির্দিষ্ট সহায়তা চ্যানেল
-- check\_circleউন্নত নিরাপত্তা ও নিয়ম মেনে চলা
-- check\_circleপ্রভিশন করা থ্রুপুট
-- check\_circleভলিউম-ভিত্তিক ডিসকাউন্ট (ব্যবহারের উপর ভিত্তি করে)
-- check\_circleML Ops, Model Garden ও আরও অনেক কিছু
+- check\_circleTë gjitha veçoritë në planin me pagesë, si dhe qasje opsionale në:
+- check\_circleKanalet e dedikuara të mbështetjes
+- check\_circleSiguri dhe përputhshmëri e përparuar
+- check\_circleKapaciteti i ofruar
+- check\_circleZbritje bazuar në vëllim (bazuar në përdorim)
+- check\_circleOperacionet e ML, kopshti i modelit etj.
 
-[সেলস টিমের সাথে যোগাযোগ করুন](https://cloud.google.com/contact?hl=bn)
+[Kontakto me ekipin e shitjeve](https://cloud.google.com/contact?hl=sq)
 
-## Gemini 3.8 Flash
+## Gemini 4 Argon
 
-*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=bn)*
+*[`gemini-4-argon`](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=sq)
 
-আমাদের সবচেয়ে বুদ্ধিমান Flash মডেল, যা দীর্ঘমেয়াদী সফ্টওয়্যার ইঞ্জিনিয়ারিং, স্বতন্ত্র এজেন্ট ও জটিল এন্টারপ্রাইজ ওয়ার্কফ্লোর জন্য তৈরি করা হয়েছে।
+Modeli ynë kryesor arsyetues, i ndërtuar për inxhinieri komplekse softuerike, zgjidhje të thellë të problemeve matematikore dhe shkencore, agjentë autonomë me shumë hapa dhe gjenerim me dekodime të gjata deri në 1 milion tokenë.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১.৫০। |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$৭.৫০। |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.১৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 2, 00 USD deri më 30 nëntor 2026. 4, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 10, 00 USD deri më 30 nëntor 2026. 20, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 10 USD deri më 30 nëntor 2026. 0, 20 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtje implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1, 00 USD deri më 30 nëntor 2026. 2, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5, 00 USD deri më 30 nëntor 2026. 10, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 05 USD deri më 30 nëntor 2026. 0, 10 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1, 00 USD deri më 30 nëntor 2026. 2, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5, 00 USD deri më 30 nëntor 2026. 10, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 05 USD deri më 30 nëntor 2026. 0, 10 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৩৫। ১ জানুয়ারি, ২০২৭ থেকে$২.৭০। |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৬.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১৩.৫০। |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.১৩৫। ১ জানুয়ারি, ২০২৭ থেকে$০.২৭। ৩১ ডিসেম্বর,২০২৬ পর্যন্ত$০.৫০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে$১.০০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 3, 60 USD deri më 30 nëntor 2026. 7, 20 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 18, 00 USD deri më 30 nëntor 2026. 36, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 18 USD deri më 30 nëntor 2026. 0, 36 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+
+### Kontribues
+
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Nuk ofrohet | 1, 00 USD deri më 30 nëntor 2026. 2, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5, 00 USD deri më 30 nëntor 2026. 10, 00 USD duke filluar nga data 1 dhjetor 2026. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0, 05 USD deri më 30 nëntor 2026. 0, 10 USD duke filluar nga data 1 dhjetor 2026. Vetëm ruajtja implicite në memorien specifike (ruajtja eksplicite në memorien specifike nuk mbështetet). |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
+
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+
+## Gemini 3.8 Flash
+
+*[`gemini-3.8-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=sq)*
+
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=sq)
+
+Modeli ynë më inteligjent Flash, i projektuar për inxhinieri softuerike afatgjatë, agjentë autonomë dhe flukse pune komplekse të ndërmarrjeve.
+
+### Standard
+
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Pa pagesë | 0, 75 USD deri më 31 dhjetor 2026. 1, 50 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 3, 75 USD deri më 31 dhjetor 2026. 7, 50 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,075 USD deri më 31 dhjetor 2026. 0,15 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+
+### Paketë
+
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+
+### Tregim force
+
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+
+### Me përparësi
+
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Pa pagesë | 1, 35 USD deri më 31 dhjetor 2026. 2, 70 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 6, 75 USD deri më 31 dhjetor 2026. 13, 50 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,135 USD deri më 31 dhjetor 2026. 0,27 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
+
+### Kontribues
+
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Pa pagesë | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
 
 ## Gemini 3.6 Flash
 
-*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=bn)*
+*[`gemini-3.6-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.6-flash&hl=sq)
 
-আমাদের আগের জেনারেশনের Flash মডেল, যা সাধারণ এজেন্টিক ও দৈনন্দিন টাস্ক জুড়ে স্পিড ও মাল্টিমোডাল ক্ষমতার মধ্যে ব্যালেন্স করে।
+Modeli ynë Flash i gjeneratës së mëparshme, që balancon shpejtësinë dhe aftësitë multimodale në detyrat e përgjithshme të agjentëve dhe ato të përditshme.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১.৫০। |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$৭.৫০। |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.১৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0, 75 USD deri më 31 dhjetor 2026. 1, 50 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 3, 75 USD deri më 31 dhjetor 2026. 7, 50 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,075 USD deri më 31 dhjetor 2026. 0,15 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.৭৫. |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৮৭৫. ১ জানুয়ারি, ২০২৭ থেকে$৩.৭৫. |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৩৭৫. ১ জানুয়ারি, ২০২৭ থেকে$০.০৭৫. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 375 USD deri më 31 dhjetor 2026. 0, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1, 875 USD deri më 31 dhjetor 2026. 3, 75 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0375 USD deri më 31 dhjetor 2026. 0,075 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.৩৫। ১ জানুয়ারি, ২০২৭ থেকে$২.৭০। |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৬.৭৫। ১ জানুয়ারি, ২০২৭ থেকে$১৩.৫০। |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.১৩৫। ১ জানুয়ারি, ২০২৭ থেকে$০.২৭। ৩১ ডিসেম্বর,২০২৬ পর্যন্ত$০.৫০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে$১.০০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 1, 35 USD deri më 31 dhjetor 2026. 2, 70 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 6, 75 USD deri më 31 dhjetor 2026. 13, 50 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,135 USD deri më 31 dhjetor 2026. 0,27 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
 
-\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+\*\* Mund të testohet në Google AI Studio.
 
-## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking এবং Gemini 3.1 Flash Live Preview
+## Gemini 3.8 Live, Gemini 3.8 Live Extended Thinking dhe Gemini 3.1 Flash Live Preview
 
-*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=bn), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=bn) এবং [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=bn)*
+*[`gemini-3.8-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live?hl=sq), [`gemini-3.8-live-extended-thinking`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-live-extended-thinking?hl=sq) dhe [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/live?model=gemini-3.8-live&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/live?model=gemini-3.8-live&hl=sq)
 
-আমাদের কম লেটেন্সি, অডিও-টু-অডিও মডেল রিয়েল-টাইম ভয়েস এজেন্ট এবং
-লাইভ ডায়ালগের জন্য অপ্টিমাইজ করা হয়েছে, এর মধ্যে এক্সটেন্ডেড থিঙ্কিং সহ ব্যাকগ্রাউন্ড রিজনিং সাপোর্ট অন্তর্ভুক্ত।
+Modelet tona audio-në-audio me vonesë të ulët të optimizuara për agjentët zanorë në kohë reale dhe dialogun e drejtpërdrejtë, duke përfshirë mbështetjen e arsyetimit në sfond me "Arsyetimin e zgjeruar".
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৭৫ (টেক্সট) $৩.০০ বা $০.০০৫/মিনিট (অডিও) $১.০০ বা $০.০০২/মিনিট (ছবি/ভিডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৪.৫০ (টেক্সট) $১২.০০ বা $০.০১৮/মিনিট (অডিও) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | কাজ করে | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,75 USD (tekst) 3,00 USD ose 0,005 USD/min (audio) 1,00 USD ose 0,002 USD/min (imazh/video) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 4,50 USD (tekst) 12,00 USD ose 0,018 USD/min. (audio) |
+| Argumentimi me "Kërko në Google"\* | Mbështetet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
 
 ## Gemini 3.5 Live Translate
 
-*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=bn)*
+*[`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=sq)
 
-আমাদের কম লেটেন্সি, রিয়েল-টাইম স্পিচ থেকে স্পিচ অনুবাদ মডেল যা ৭০টিরও বেশি ভাষায় কাজ করে।
+Modeli ynë i përkthimit të ligjërimit në ligjërim në kohë reale me vonesë të ulët që mbështet mbi 70 gjuhë.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $৩.৫০ বা $০.০০৫৩/মিনিট\* (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২১.০০ বা $০.০৩১৫/মিনিট\* (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 3,50 USD ose 0,0053 USD/min.\* (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 21,00 USD ose 0,0315 USD/min.\* (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* বিলিং ইনপুট ও আউটপুট অডিও টোকেনের মোট ব্যবহারের উপর ভিত্তি করে করা হয়, যা প্রতি সেকেন্ডের অডিওর জন্য ২৫টি টোকেন হিসেবে হিসেব করা হয়, এর ফলে প্রতি মিনিটের কার্যকর দাম আনুমানিক $০.০৩৬৮ হয়।
+\* Faturimi bazohet në konsumin total të tokenave të audios hyrëse dhe dalëse, të llogaritur me një normë prej 25 tokenash për sekondë audioje, që barazohet me një çmim efektiv prej rreth 0,0368 USD për minutë.
 
 ## Gemini 3.5 Transcribe Live
 
-*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=bn)*
+*[`gemini-3.5-transcribe-live`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe-live&hl=sq)
 
-আমাদের কম লেটেন্সি, রিয়েল-টাইম স্পিচ-টু-টেক্সট মডেল যা WebSockets-এর মাধ্যমে দ্বিমুখী স্ট্রিমিং অডিও ট্রান্সক্রিপশন প্রদান করে।
+Modeli ynë i ligjërimit në tekst në kohë reale me vonesë të ulët për transkriptimin e audios së transmetimit dydrejtimësh nëpërmjet WebSocket.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $৩.৫০ বা $০.০০৫/মিনিট\* (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২১.০০ বা $০.০০৪/মিনিট\* (টেক্সট) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কাজ করে না |  |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 3,50 USD ose 0,005 USD/min.\* (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 21,00 USD ose 0,004 USD/min.\* (tekst) |
+| Argumentimi me "Kërko në Google" | Nuk mbështetet |  |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* আনুমানিক মূল্য ইনপুটের জন্য প্রতি সেকেন্ডে ২৫টি অডিও টোকেন
-এবং আউটপুটের জন্য প্রতি মিনিটে ১৭৫টি টেক্সট টোকেনের উপর ভিত্তি করে হিসেব করা হয়। এর ফলে Live Transcribe-এর জন্য
-প্রতি মিনিটে ~$০.০০৯-এর একটি কার্যকর মিশ্রিত রেট পাওয়া যায়।
+\* Çmimi i përllogaritur bazohet në 25 kode audio për sekondë për hyrjen
+dhe 175 kode teksti për minutë për daljen, për një normë të përzier efektive prej
+~0,009 USD për minutë për "Transkriptimin në çast".
 
 ## Gemini 3.5 Transcribe
 
-*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=bn)*
+*[`gemini-3.5-transcribe`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-transcribe?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-3.5-transcribe&hl=sq)
 
-আমাদের স্পিচ-টু-টেক্সট মডেল, যাতে অটোমেটিক ভাষা শনাক্তকরণ, স্পিকার ডায়ারাইজেশন, শব্দ-লেভেল টাইমস্ট্যাম্প ও কাস্টম শব্দভাণ্ডার বায়াসিং আছে।
+Modeli ynë i ligjërimit në tekst me zbulimin automatik të gjuhës, identifikimin e folësit, vulat kohore në nivel fjalësh dhe anshmërinë e fjalorit të personalizuar.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $২.০০ বা $০.০০৩/মিনিট\* (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১২.০০ বা $০.০০২/মিনিট\* (টেক্সট) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কাজ করে না |  |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 2,00 USD ose 0,003 USD/min.\* (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 12,00 USD ose 0,002 USD/min.\* (tekst) |
+| Argumentimi me "Kërko në Google" | Nuk mbështetet |  |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* আনুমানিক দাম ইনপুটের জন্য প্রতি সেকেন্ডে ২৫টি অডিও টোকেন
-এবং আউটপুটের জন্য প্রতি মিনিটে ১৭৫টি টেক্সট টোকেনের উপর ভিত্তি করে হিসেব করা হয়। এর ফলে
-ট্রান্সক্রাইব ফিচারের জন্য প্রতি মিনিটের কার্যকর মিশ্রিত রেট হল ~$০.০০৫।
+\* Çmimi i përllogaritur bazohet në 25 jetonë audio për sekondë për hyrjen
+dhe 175 jetonë teksti për minutë për daljen, për një normë të kombinuar efektive prej
+rreth 0,005 USD për minutë për Transkriptimin.
 
 ## Gemini 3.5 Flash-Lite
 
-*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=bn)*
+*[`gemini-3.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=sq)
 
-এটি একটি কম খরচে মডেল যা বেশি ভলিউমের এজেন্টিক টাস্ক,
-অনুবাদ এবং সাধারণ ডেটা প্রসেসিংয়ের জন্য অপ্টিমাইজ করা হয়েছে।
+Një model me kosto efikase, i optimizuar për detyra agjentike me volum të lartë,
+përkthim dhe përpunim të thjeshtë të të dhënave.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৩০ (টেক্সট / ছবি / ভিডিও / অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ $১.০০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,30 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.50 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১৫ (টেক্সট / ছবি / ভিডিও / অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১.২৫ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০২ $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,15 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $1.25 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | $0.02 $1.00 / 1,000,000 token-e në orë (çmimi i ruajtjes) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১৫ (টেক্সট / ছবি / ভিডিও / অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১.২৫ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০২ $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,15 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $1.25 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | $0.02 $1.00 / 1,000,000 token-e në orë (çmimi i ruajtjes) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫৪ (টেক্সট / ছবি / ভিডিও / অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৪.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৫ $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,54 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $4.50 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,05 USD 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+### Kontribues
 
-\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Pa pagesë | 0,15 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $1.25 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,015 USD 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
 
-\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+
+\*\* Mund të testohet në Google AI Studio.
+
+\*\* Mund të testohet në Google AI Studio.
 
 ## Gemini 3.1 Flash-Lite
 
-*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=bn)*
+*[`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=sq)
 
-এটি একটি কম খরচে মডেল যা বেশি ভলিউমের এজেন্টিক টাস্ক,
-অনুবাদ এবং সাধারণ ডেটা প্রসেসিংয়ের জন্য অপ্টিমাইজ করা হয়েছে।
+Një model me kosto efikase, i optimizuar për detyra agjentike me volum të lartë,
+përkthim dhe përpunim të thjeshtë të të dhënave.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.২৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০২৫ (টেক্সট / ছবি / ভিডিও) $০.০৫ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,25 USD (tekst / imazh / video) 0,50 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 1,50 USD |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,025 USD (tekst / imazh / video) 0,05 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১২৫ (টেক্সট / ছবি / ভিডিও) $০.২৫ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৭৫ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১২৫ (টেক্সট / ছবি / ভিডিও) $০.০২৫ (অডিও) $০.৫০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,125 USD (tekst / imazh / video) 0,25 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $0.75 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0125 USD (tekst / imazh / video) 0,025 USD (audio) 0,50 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.১২৫ (টেক্সট / ছবি / ভিডিও) $০.২৫ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৭৫ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১২৫ (টেক্সট / ছবি / ভিডিও) $০.০২৫ (অডিও) $০.৫০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,125 USD (tekst / imazh / video) 0,25 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $0.75 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,0125 USD (tekst / imazh / video) 0,025 USD (audio) 0,50 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৪৫ (টেক্সট / ছবি / ভিডিও) $০.৯০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.৭০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৪৫ (টেক্সট / ছবি / ভিডিও) $০.০৯ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,45 USD (tekst / imazh / video) 0,90 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.70 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,045 USD (tekst / imazh / video) 0,09 USD (audio) 1,80 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
 
-\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+\*\* Mund të testohet në Google AI Studio.
 
 ## Gemini Omni Flash
 
-*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=bn)*
+*[`gemini-omni-1.1-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-1.1-flash&hl=sq)
 
-আমাদের নেক্সট-জেনারেশন ভিডিও জেনারেশন ও এডিটিং মডেল, এখন Gemini API-এর পেড টিয়ারে থাকা
-ডেভেলপারদের জন্য সাধারণভাবে উপলভ্য।
+Modeli ynë i gjenerimit dhe modifikimit të videove i gjeneratës së ardhshme, tani i disponueshëm në përgjithësi për zhvilluesit në nivelin me pagesë të Gemini API.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.৫০ (টেক্সট / ছবি / ভিডিও / অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৯.০০ (টেক্সট) $১৭.৫০ (ভিডিও)\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1,50 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 9,00 USD (tekst) 17,50 USD (video)\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* বিলিং মোট আউটপুট টোকেন ব্যবহারের উপর ভিত্তি করে করা হয়, যা
-৭২০p ভিডিওর প্রতি সেকেন্ডে ৫,৭৯২ টোকেন রেটে গণনা করা হয়। স্ট্যান্ডার্ড প্রাইসিংয়ের অধীনে, এটি
-প্রতি সেকেন্ডে প্রায় $০.১০-এর সমান কার্যকর মূল্য।
+\* Faturimi bazohet në konsumin total të tokenëve të rezultatit, i llogaritur me një normë prej 5 792 tokenësh për sekondë për video 720p. Sipas çmimit standard, kjo
+është e barasvlershme me një çmim efektiv prej rreth 0,10 USD për sekondë.
 
-## Gemini Omni Flash প্রিভিউ
+## Gemini Omni Flash Preview
 
-*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=bn)*
+*[`gemini-omni-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=sq)
 
-আমাদের পরবর্তী-জেনারেশনের ভিডিও জেনারেশন ও এডিটিং মডেল।
+Modeli ynë i gjeneratës së ardhshme për gjenerimin dhe modifikimin e videove.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.৫০ (টেক্সট / ছবি / ভিডিও / অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৯.০০ (টেক্সট) $১৭.৫০ (ভিডিও)\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1,50 USD (tekst / imazh / video / audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 9,00 USD (tekst) 17,50 USD (video)\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* বিলিং মোট আউটপুট টোকেন ব্যবহারের উপর ভিত্তি করে করা হয়, যা ৭২০p ভিডিওর প্রতি সেকেন্ডে ৫,৭৯২টি টোকেনের হারে গণনা করা হয়। স্ট্যান্ডার্ড প্রাইসিংয়ের অধীনে, এটি প্রতি সেকেন্ডে আনুমানিক $০.১০-এর কার্যকর দামের সমান।
+\* Faturimi bazohet në konsumin total të tokenëve të daljes, i llogaritur me një normë prej 5 792 tokenësh për sekondë për video 720p. Sipas çmimit standard, kjo barazohet me një çmim efektiv prej rreth 0,10 USD për sekondë.
 
-## Gemini 3.1 Pro প্রিভিউ
+## Gemini 3.1 Pro Preview
 
-*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn) এবং [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn#gemini-31-pro-preview-customtools)*
+*[`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) dhe [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq#gemini-31-pro-preview-customtools)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=sq)
 
-আমাদের থার্ড-জেনারেশন Pro মডেল, যা মাল্টিমোডাল বোঝা,
-এজেন্টিক ক্ষমতা এবং ভাইব-কোডিংয়ের জন্য তৈরি করা হয়েছে।
+Modeli ynë Pro i gjeneratës së 3-të, i ndërtuar për të kuptuarit multimodal, aftësitë agjentike dhe programimin "vibe coding".
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $২.০০, প্রম্পট <= ২০০ হাজার টোকেন $৪.০০, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১২.০০, প্রম্পট <= ২০০ হাজার টোকেন $১৮.০০, প্রম্পট > ২০০ হাজার টোকেন |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.২০, প্রম্পট <= ২০০,০০০ টোকেন $০.৪০, প্রম্পট > ২০০,০০০ $৪.৫০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 2,00 USD, kërkesa <= 200 000 tokenë 4,00 USD, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 12,00 USD, kërkesa <= 200 000 tokenë 18,00 USD, kërkesa > 200 000 tokenë |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,20 USD, kërkesa <= 200 000 kodesh 0,40 USD, kërkesa > 200 000 kodesh 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | Nuk ka | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০, প্রম্পট <= ২০০ হাজার টোকেন $২.০০, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৬.০০, প্রম্পট <= ২০০ হাজার টোকেন $৯.০০, প্রম্পট > ২০০ হাজার টোকেন |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতো একই*  $০.২০, প্রম্পট <= ২০০,০০০ টোকেন $০.৪০, প্রম্পট > ২০০,০০০ টোকেন $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | $1,00, kërkesa <= 200 000 tokenë $2,00, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 6,00 USD, kërkesa <= 200 000 tokenë 9,00 USD, kërkesa > 200 000 tokenë |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,20 USD, kërkesa <= 200 000 token-ë 0,40 USD, kërkesa > 200 000 4,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০, প্রম্পট <= ২০০ হাজার টোকেন $২.০০, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৬.০০, প্রম্পট <= ২০০ হাজার টোকেন $৯.০০, প্রম্পট > ২০০ হাজার টোকেন |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতো একই*  $০.২০, প্রম্পট <= ২০০,০০০ টোকেন $০.৪০, প্রম্পট > ২০০,০০০ টোকেন $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | $1,00, kërkesa <= 200 000 tokenë $2,00, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 6,00 USD, kërkesa <= 200 000 tokenë 9,00 USD, kërkesa > 200 000 tokenë |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,20 USD, kërkesa <= 200 000 token-ë 0,40 USD, kërkesa > 200 000 4,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $৩.৬০, প্রম্পট <= ২০০ হাজার টোকেন $৭.২০, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $২১.৬০, প্রম্পট <= ২০০ হাজার টোকেন $৩২.৪০, প্রম্পট > ২০০ হাজার |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.৩৬, প্রম্পট <= ২০০,০০০ টোকেন $০.৭২, প্রম্পট > ২০০,০০০ $৮.১০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 3,60 USD, kërkesa <= 200 000 tokenë 7,20 USD, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 21,60 USD, kërkesa <= 200 000 tokenë 32,40 USD, kërkesa > 200 000 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,36 USD, kërkesa <= 200 000 kodesh 0,72 USD, kërkesa > 200 000 kodesh 8,10 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+### Kontribues
 
-\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
+| --- | --- | --- |
+| Fut çmimin | Nuk ofrohet | $1,00, kërkesa <= 200 000 tokenë $2,00, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 6,00 USD, kërkesat <= 200 000 tokenë 9,00 USD, kërkesat > 200 000 tokenë |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,10 USD, kërkesa <= 200 000 tokenë 0,20 USD, kërkesa > 200 000 tokenë 4,50 USD / 1 000 000 tokenë në orë (çmimi i hapësirës ruajtëse) |
+| Përdoret për të përmirësuar produktet tona | Nuk ka | [Po](https://ai.google.dev/gemini-api/docs/logs-policy?hl=sq#contributor-tier) |
+
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
+
+\*\* Mund të testohet në Google AI Studio.
 
 ## Gemini Nano Banana 2.1 🍌
 
-*[`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=bn)*
+*[`gemini-nano-banana-2.1`](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-nano-banana-2.1&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-nano-banana-2.1&hl=sq)
 
-Nano Banana 2 (Gemini 3.1 Flash Image)-এর আপডেট, যা উন্নত ভিজ্যুয়াল কোয়ালিটি,
-মাল্টি-টার্ন ক্যারেক্টার কনসিস্টেন্সি, নির্ভুল টেক্সট রেন্ডারিং এবং ১০০০, ২০০০ ও ৪০০০ রেজোলিউশন জুড়ে সার্চ-গ্রাউন্ডেড
-জেনারেশনের সাথে হাই-এফিসিয়েন্সি
-ইমেজ জেনারেশন ও কনভার্সনাল এডিটিংয়ের জন্য তৈরি করা হয়েছে।
+Një përditësim për Nano Banana 2 (Gemini 3.1 Flash Image), i krijuar për gjenerimin e imazheve me efikasitet të lartë dhe modifikime përmes bisedës me cilësi të përmirësuar vizuale, konsekuencë personazhi me disa kthesa, paraqitje të saktë të tekstit dhe gjenerim të bazuar në kërkim në rezolucionet 1K, 2K dhe 4K.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.৫০ (টেক্সট/ছবি/ভিডিও) |
-| আউটপুটের দাম | উপলভ্য নয় | $৭.৫০ (টেক্সট ও থিঙ্কিং)  $৩০.০০ (ছবি)  ১০০০টি ছবির জন্য $০.০৩৩৬\*,  ২০০০টি ছবির জন্য $০.০৫০৪\*,  এবং ৪০০০টি ছবির জন্য $০.১১৩\* খরচ হয়। |
-| Google ওয়েব ও ছবি সার্চের মাধ্যমে গ্রাউন্ডিং\*\* | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে টেক্সট ও ছবি-ভিত্তিক গ্রাউন্ডিংয়ের জন্য প্রতি ১,০০০টি কোয়েরিতে $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1,50 USD (tekst/imazh/video) |
+| Çmimi i rezultatit | Nuk ofrohet | 7,50 USD (tekst dhe përpunim mendimi)  30,00 USD (imazhe)  Ekuivalente me 0,0336 USD për imazh 1K\*,  0,0504 USD për imazh 2K\*,  dhe 0,113 USD për imazh 4K\*. |
+| Argumentimi me "Kërko në ueb dhe imazhe me Google"\*\* | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa për bazimin në tekst dhe imazhe. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৭৫ (টেক্সট, ছবি, ভিডিও) |
-| আউটপুটের দাম | উপলভ্য নয় | $৩.৭৫ (টেক্সট ও থিংকিং)  $১৫.০০ (ছবি)  ১০০০টি ছবির জন্য $০.০১৬৮ মূল্যের সমান\*,  ২০০০টি ছবির জন্য $০.০২৫২ মূল্যের সমান\*,  এবং ৪০০০টি ছবির জন্য $০.০৫৬৭ মূল্যের সমান\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,75 USD (tekst/imazh/video) |
+| Çmimi i rezultatit | Nuk ofrohet | 3,75 USD (tekst dhe arsyetim)  15,00 USD (imazhe)  Ekuivalente me 0,0168 USD për imazh 1K\*,  0,0252 USD për imazh 2K\*,  dhe 0,0567 USD për imazh 4K\*. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* ছবি আউটপুটের মূল্য ১,০০০,০০০ টোকেন পিছু $৩০ (স্ট্যান্ডার্ড) এবং
-১,০০০,০০০ টোকেন পিছু $১৫ (ব্যাচ)। 1K (১০২৪x১০২৪px) রেজোলিউশনে আউটপুট ছবি ১১২০
-টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৩৩৬ খরচ হয়। 2K
-(২০৪৮x২০৪৮px) রেজোলিউশনে আউটপুট ছবি ১৬৮০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৫০৪ খরচ হয়।
-4K (৪০৯৬x৪০৯৬px) রেজোলিউশনে আউটপুট ছবি তৈরি করতে ৩৭৮০টি টোকেন খরচ হয় এবং এটি
-প্রতি ছবি $০.১১৩-এর সমান।
+\* Çmimi i daljes së imazheve është 30 USD për 1 000 000 tokenë (Standard) dhe
+15 USD për 1 000 000 tokenë (Batch). Imazhet e nxjerra në 1K (1024x1024px) konsumojnë 1120
+tokenë dhe janë të barasvlershme me 0,0336 USD për imazh. Nxjerrja e imazheve në 2K (2048x2048px) konsumon 1680 tokena dhe është e barasvlershme me 0,0504 USD për imazh.
+Imazhet e nxjerra në 4K (4096x4096px) konsumojnë 3780 jeto dhe janë të barasvlershme me
+0,113 USD për imazh.
 
-\*\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে। Grounding with Google-এর মাধ্যমে পাওয়া প্রাসঙ্গিক তথ্য (টেক্সট বা ছবি)
-সার্চকে ইনপুট টোকেন হিসেবে চার্জ করা হয় না।
+\*\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer. Konteksti i tërhequr (tekst ose imazhe) i ofruar nga "Argumentimi me 'Kërko në Google'" nuk tarifohet si token hyrës.
 
 ## Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
-*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=bn)*
+*[`gemini-3.1-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=sq)
 
-দ্রুততা ও দক্ষতার জন্য ডিজাইন করা, Gemini 3.1 Flash ইমেজ জেনারেশন মডেল
-দ্রুত, ইন্ট্যার‍্যাক্টিভ উত্তর ও হাই থ্রুপুটের জন্য কার্যকর।
+I projektuar për shpejtësi dhe efikasitet, modeli i gjenerimit të imazheve Gemini 3.1 Flash është efektiv për përgjigje të shpejta dhe ndërvepruese dhe rendiment të lartë.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫০ (টেক্সট/ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | $৩ (টেক্সট ও চিন্তাভাবনা)  $৬০.০০ (ছবি)  ০.৫K ছবি পিছু $০.০৪৫-এর সমতুল্য\*  ১K ছবি পিছু $০.০৬৭\*, ২K ছবি পিছু $০.১০১\*, এবং ৪K ছবি পিছু $০.১৫১\*. |
-| Google ওয়েব ও ছবি সার্চের মাধ্যমে গ্রাউন্ডিং\*\* | উপলভ্য নেই\*\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে টেক্সট ও ছবি-ভিত্তিক গ্রাউন্ডিংয়ের জন্য প্রতি ১,০০০টি কোয়েরিতে $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,50 USD (tekst/imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 3 USD (tekst dhe arsyetim)  60,00 USD (imazhe)  Ekuivalente me 0,045 USD për imazh 0,5K\*  0,067 USD për imazh 1K\*, 0,101 USD për imazh 2K\*, dhe 0,151 USD për imazh 4K\*. |
+| Argumentimi me "Kërko në ueb dhe imazhe me Google"\*\* | Nuk ofrohet\*\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa për bazimin në tekst dhe imazhe. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট, ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | $১.৫০ (টেক্সট ও চিন্তাভাবনা)  $৩০.০০ (ছবি)  ০.৫কে ছবি পিছু $০.০২২-এর সমতুল্য\*  ১কে ছবি পিছু $০.০৩৪\*,  ২কে ছবি পিছু $০.০৫০\*,  এবং ৪কে ছবি পিছু $০.০৭৬\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst, imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 1,50 USD (tekst dhe mendim)  30,00 USD (imazhe)  Ekuivalente me 0,022 USD për imazh 0,5K\*  0,034 USD për imazh 1K\*,  0,050 USD për imazh 2K\*,  dhe 0,076 USD për imazh 4K\*. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $৬০।
-0.5K (৫১২ পিক্সেল) রেজোলিউশনের আউটপুট ছবি ৭৪৭টি টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৪৫
-খরচ হয়। 1K (1024x1024px) রেজোলিউশনের আউটপুট ছবি ১১২০টি টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৬৭ খরচ হয়। 2K (২০৪৮x২০৪৮px) রেজোলিউশনে আউটপুট ছবি ১৬৮০ টোকেন ব্যবহার করে এবং
-প্রতিটি ছবির জন্য $০.১০১ খরচ হয়। 4K (৪০৯৬x৪০৯৬px) রেজোলিউশনে আউটপুট ছবি
-২৫২০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.১৫১ খরচ হয়।
+\* Nxjerra e imazheve kushton 60 USD për 1 000 000 tokenë.
+Imazhet e rezultateve në 0,5K (512 pikselë) konsumojnë 747 tokenë dhe janë të barasvlershme me 0,045 USD për imazh. Imazhet e prodhuara në 1K (1024x1024 pikselë) konsumojnë 1120 tokenë dhe janë të barasvlershme me 0,067 USD për imazh. Imazhet e prodhuara në 2K (2048x2048px) konsumojnë 1680 tokenë dhe
+janë të barasvlershme me 0,101 USD për imazh. Imazhet e nxjerra në 4K (4096x4096px) konsumojnë
+2520 tokenë dhe janë të barasvlershme me 0,151 USD për imazh.
 
-\*\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে। Grounding with Google-এর মাধ্যমে পাওয়া প্রাসঙ্গিক তথ্য (টেক্সট বা ছবি)
-সার্চকে ইনপুট টোকেন হিসেবে চার্জ করা হয় না।
+\*\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer. Konteksti i tërhequr (tekst ose imazhe) i ofruar nga "Argumentimi me 'Kërko në Google'" nuk tarifohet si token hyrës.
 
-\*\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+\*\*\* Mund të testohet në Google AI Studio.
 
 ## Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite) 🍌
 
-*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=bn)*
+*[`gemini-3.1-flash-lite-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=sq)
 
-ইমেজ জেনারেশন ফ্যামিলির দক্ষতা বিশেষজ্ঞ হিসেবে ডিজাইন করা, Gemini 3.1
-Flash Lite ইমেজ মডেলটি অতি-নিম্ন লেটেন্সি এবং সাশ্রয়ী ইমেজ
-জেনারেশন ও এডিটিংয়ের জন্য ডিজাইন করা হয়েছে।
+I projektuar si specialisti i efikasitetit i familjes së gjenerimit të imazheve, modeli i imazheve Gemini 3.1 Flash Lite është projektuar për vonesë tepër të ulët dhe gjenerim dhe modifikim imazhesh me kosto efektive.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট/ছবি/ভিডিও) |
-| আউটপুটের দাম | উপলভ্য নয় | $১.৫০ (টেক্সট ও চিন্তাভাবনা)  $৩০.০০ (ছবি)  ১০০০ রেজোলিউশনের ছবির জন্য $০.০৩৩৬-এর সমতুল্য\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst/imazh/video) |
+| Çmimi i rezultatit | Nuk ofrohet | 1,50 USD (teksti dhe arsyetimi)  30,00 USD (imazhet)  Ekuivalente me 0,0336 USD për imazh me rezolucion 1K\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.১২৫ (টেক্সট/ছবি/ভিডিও) |
-| আউটপুটের দাম | উপলভ্য নয় | $০.৭৫ (টেক্সট ও চিন্তাভাবনা)  $১৫.০০ (ছবি)  1K রেজোলিউশনের প্রতি ছবির জন্য $০.০১৬৮ মূল্যের সমান\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,125 USD (tekst/imazh/video) |
+| Çmimi i rezultatit | Nuk ofrohet | 0,75 USD (tekst dhe arsyetim)  15,00 USD (imazhe)  Ekuivalente me 0,0168 USD për imazh me rezolucion 1K\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $৩০। 1K (১০২৪x১০২৪ পিক্সেল) রেজোলিউশনে আউটপুট ছবি ১১২০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৩৩৬ খরচ হয়।
+\* Nxerrja e imazheve kushton 30 USD për 1 000 000 tokenë. Imazhet e prodhuara në 1K (1024x1024px) konsumojnë 1120 jeto dhe janë të barasvlershme me 0,0336 USD për imazh.
 
 ## Gemini 3.8 Flash TTS
 
-*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=bn)*
+*[`gemini-3.8-flash-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-tts?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-tts&hl=sq)
 
-আমাদের 3.8 Flash টেক্সট-টু-স্পিচ অডিও মডেল স্টুডিও-গ্রেড ভয়েস ফিডেলিটি, সাবলীল অভিনয় এবং দীর্ঘ-ফর্মের স্থিতিশীলতার জন্য ডিজাইন করা হয়েছে।
+Modeli ynë i audios 3.8 Flash "Tekst në ligjërim" i projektuar për besnikëri të zërit të nivelit të studios, aktrim shprehës dhe qëndrueshmëri në formë të gjatë.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৫০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.০০ (টেক্সট)। |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৯.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$১৮.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০২২৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৪৫\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0, 50 USD (tekst) deri më 31 dhjetor 2026. 1, 00 USD (tekst) duke filluar nga data 1 janar 2027. |
+| Çmimi i rezultatit | Pa pagesë | 9, 00 USD (audio) deri më 31 dhjetor 2026. 18, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00225 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0045 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
-| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৪.৫০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৯.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০১১২৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০২২৫\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
+| Çmimi i rezultatit | Nuk ofrohet | 4, 50 USD (audio) deri më 31 dhjetor 2026. 9, 00 USD (audio) duke filluar nga 1 janari 2027. Ekuivalente me 0, 001125 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 00225 USD për 10 sekonda audio\* duke filluar nga 1 janari 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
-| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৪.৫০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৯.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০১১২৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০২২৫\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
+| Çmimi i rezultatit | Nuk ofrohet | 4, 50 USD (audio) deri më 31 dhjetor 2026. 9, 00 USD (audio) duke filluar nga 1 janari 2027. Ekuivalente me 0, 001125 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 00225 USD për 10 sekonda audio\* duke filluar nga 1 janari 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৯০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.৮০ (টেক্সট)। |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১৬.২০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৩২.৪০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০৪০৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৮১\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0, 90 USD (tekst) deri më 31 dhjetor 2026. 1, 80 USD (tekst) duke filluar nga data 1 janar 2027. |
+| Çmimi i rezultatit | Pa pagesë | 16, 20 USD (audio) deri më 31 dhjetor 2026. 32, 40 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00405 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0081 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* অডিও টোকেন, অডিওর প্রতি সেকেন্ডে ২৫টি টোকেনের সাথে সম্পর্কিত।
+\* Kodet e audios korrespondojnë me 25 kode për sekondë të audios.
 
 ## Gemini 3.8 Flash-Lite TTS
 
-*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=bn)*
+*[`gemini-3.8-flash-lite-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash-lite-tts?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash-lite-tts&hl=sq)
 
-আমাদের 3.8 Flash-Lite টেক্সট-টু-স্পিচ অডিও মডেল হাই-থ্রুপুট, লো-লেটেন্সি ও কম খরচে কথোপকথনমূলক স্পিচের জন্য অপ্টিমাইজ করা হয়েছে।
+Modeli ynë i audios 3.8 Flash-Lite për "Tekstin në ligjërim" i optimizuar për ligjërim bisedor me rendiment të lartë, vonesë të ulët dhe kosto-efektiv.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৫০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.০০ (টেক্সট)। |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৬.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$১২.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০১৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৩\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0, 50 USD (tekst) deri më 31 dhjetor 2026. 1, 00 USD (tekst) duke filluar nga data 1 janar 2027. |
+| Çmimi i rezultatit | Pa pagesë | 6, 00 USD (audio) deri më 31 dhjetor 2026. 12, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 0015 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 003 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
-| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৬.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০৭৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০১৫\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
+| Çmimi i rezultatit | Nuk ofrohet | 3, 00 USD (audio) deri më 31 dhjetor 2026. 6, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00075 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0015 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.২৫ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$০.৫০ (টেক্সট)। |
-| আউটপুটের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৩.০০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$৬.০০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০০৭৫\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০১৫\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 25 USD (tekst) deri më 31 dhjetor 2026. 0, 50 USD (tekst) duke filluar nga 1 janari 2027. |
+| Çmimi i rezultatit | Nuk ofrohet | 3, 00 USD (audio) deri më 31 dhjetor 2026. 6, 00 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 00075 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0015 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৯০ (টেক্সট)। ১ জানুয়ারি, ২০২৭ থেকে$১.৮০ (টেক্সট)। |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১০.৮০ (অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$২১.৬০ (অডিও)। ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত ১০ সেকেন্ডের অডিও পিছু $০.০০২৭\*। ১ জানুয়ারি, ২০২৭ থেকে ১০ সেকেন্ডের অডিও পিছু $০.০০৫৪\*। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0, 90 USD (tekst) deri më 31 dhjetor 2026. 1, 80 USD (tekst) duke filluar nga data 1 janar 2027. |
+| Çmimi i rezultatit | Pa pagesë | 10, 80 USD (audio) deri më 31 dhjetor 2026. 21, 60 USD (audio) duke filluar nga data 1 janar 2027. Ekuivalente me 0, 0027 USD për 10 sekonda audio\* deri më 31 dhjetor 2026. Ekuivalente me 0, 0054 USD për 10 sekonda audio\* duke filluar nga data 1 janar 2027. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* অডিও টোকেন, অডিওর প্রতি সেকেন্ডে ২৫টি টোকেনের সাথে সম্পর্কিত।
+\* Kodet e audios korrespondojnë me 25 kode për sekondë të audios.
 
-## Gemini 3.1 Flash TTS প্রিভিউ
+## Gemini 3.1 Flash TTS Preview
 
-*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=bn)*
+*[`gemini-3.1-flash-tts-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=sq)
 
-আমাদের 3.1 Flash টেক্সট-টু-স্পিচ অডিও মডেল, যা দামের সাথে পারফর্ম্যান্সের দিক থেকে অপ্টিমাইজ করা,
-কম লেটেন্সি, কন্ট্রোল করা যায় এমন স্পিচ জেনারেশন।
+Modeli ynë i audios 3.1 Flash i tekstit në ligjërim i optimizuar për gjenerim të kontrollueshëm të ligjërimit me performancë të lartë, vonesë të ulët dhe kosto të ulët.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $১.০০ (টেক্সট) |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | $২০.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | $1.00 (text) |
+| Çmimi i rezultatit | Pa pagesë | 20,00 USD (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫০ (টেক্সট) |
-| আউটপুটের দাম | উপলভ্য নয় | $১০.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,50 USD (tekst) |
+| Çmimi i rezultatit | Nuk ofrohet | 10,00 USD (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* অডিও টোকেন, অডিওর প্রতি সেকেন্ডে ২৫টি টোকেনের সাথে সম্পর্কিত।
+\* Kodet e audios korrespondojnë me 25 kode për sekondë të audios.
 
-## Gemini 3 Flash প্রিভিউ
+## Gemini 3 Flash Preview
 
-*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=bn)*
+*[`gemini-3-flash-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-3-flash-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=sq)
 
-আমাদের পুরনো Flash মডেল, যা বেসলাইন স্পিড ও ইন্টেলিজেন্স প্রদান করে।
+Modeli ynë i vjetër Flash, i cili ofron shpejtësi dhe inteligjencë bazë.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫০ (টেক্সট / ছবি / ভিডিও) $১.০০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৩.০০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | $০.০৫ (টেক্সট / ছবি / ভিডিও) $০.১০ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,50 USD (tekst / imazh / video) 1,00 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $3.00 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,05 USD (tekst / imazh / video) 0,10 USD (audio) 1,00 USD / 1 000 000 jeto për orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতোই*  $০.০৫ (টেক্সট / ছবি / ভিডিও)  $০.১০ (অডিও)  $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst / imazh / video) 0,50 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1,50 USD |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,05 USD (tekst / imazh / video)  0,10 USD (audio)  1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | *স্ট্যান্ডার্ডের মতোই*  $০.০৫ (টেক্সট / ছবি / ভিডিও)  $০.১০ (অডিও)  $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,25 USD (tekst / imazh / video) 0,50 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 1,50 USD |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | *Njësoj si Standard*  0,05 USD (tekst / imazh / video)  0,10 USD (audio)  1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৯০ (টেক্সট / ছবি / ভিডিও) $১.৮০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | হংকং ডলার (HKD) |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | $০.০৯ (টেক্সট / ছবি / ভিডিও) $০.১৮ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\* | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নেই\*\* | প্রতি মাসে ৫,০০০টি অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে $১৪ / ১,০০০টি সার্চ কোয়েরি। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,90 USD (tekst / imazh / video) 1,80 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $5.40 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | 0,09 USD (tekst / imazh / video) 0,18 USD (audio) 1,80 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google"\* | Nuk ofrohet\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Argumentimi me Google Maps | Nuk ofrohet\*\* | 5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
 
-\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+\*\* Mund të testohet në Google AI Studio.
 
 ## Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
-*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=bn)*
+*[`gemini-3-pro-image`](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=sq)
 
-আমাদের নেটিভ ইমেজ জেনারেশন মডেল, যা স্পিড, ফ্লেক্সিবিলিটি ও
-প্রসঙ্গগত বোঝার জন্য অপ্টিমাইজ করা হয়েছে। **টেক্সট ইনপুট ও আউটপুট**-এর দাম
-[Gemini 3.1 Pro](#gemini-3.1-pro-preview)-এর সমান।
+Modeli ynë origjinal i gjenerimit të imazheve, i optimizuar për shpejtësi, fleksibilitet dhe
+kuptim kontekstual. **Hyrja dhe dalja e tekstit** ka të njëjtin çmim si
+[Gemini 3.1 Pro](#gemini-3.1-pro-preview).
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $২.০০ (টেক্সট/ছবি),  প্রতিটি ছবির জন্য $০.০০১১\* |
-| আউটপুটের দাম | উপলভ্য নয় | $১২.০০ (টেক্সট ও চিন্তাভাবনা)  $১২০.০০ (ছবি)  ১কে/২কে ছবি পিছু $০.১৩৪ মূল্যের সমান\*\*  এবং ৪কে ছবি পিছু $০.২৪ মূল্যের সমান\*\* |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\*\*\* | উপলভ্য নেই\*\*\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 2,00 USD (tekst/imazh),  ekuivalente me 0,0011 USD për imazh\* |
+| Çmimi i rezultatit | Nuk ofrohet | 12,00 USD (tekst dhe arsyetim)  120,00 USD (imazhe)  Ekuivalente me 0,134 USD për imazh 1K/2K\*\*  dhe 0,24 USD për imazh 4K\*\* |
+| Argumentimi me "Kërko në Google"\*\*\* | Nuk ofrohet\*\*\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০ (টেক্সট), $০.০০০৬ (ছবি)\* |
-| আউটপুটের দাম | উপলভ্য নয় | $৬.০০ (টেক্সট ও থিংকিং)  ১K/২K ছবি পিছু $০.০৬৭\*\*  ৪K ছবি পিছু $০.১২\*\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1,00 USD (tekst), 0,0006 USD (imazh)\* |
+| Çmimi i rezultatit | Nuk ofrohet | 6,00 USD (tekst dhe arsyetim)  0,067 USD për imazh 1K/2K\*\*  0,12 USD për imazh 4K\*\* |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০ (টেক্সট), $০.০০০৬ (ছবি)\* |
-| আউটপুটের দাম | উপলভ্য নয় | $৬.০০ (টেক্সট ও থিংকিং)  ১K/২K ছবি পিছু $০.০৬৭\*\*  ৪K ছবি পিছু $০.১২\*\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 1,00 USD (tekst), 0,0006 USD (imazh)\* |
+| Çmimi i rezultatit | Nuk ofrohet | 6,00 USD (tekst dhe arsyetim)  0,067 USD për imazh 1K/2K\*\*  0,12 USD për imazh 4K\*\* |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $৩.৬০ (টেক্সট/ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | $২১.৬০ (টেক্সট ও চিন্তাভাবনা)  $২১৬.০০ (ছবি) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং\*\*\* | উপলভ্য নেই\*\*\*\* | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 3,60 USD (tekst/imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 21,60 USD (tekst dhe arsyetim)  216,00 USD (imazhe) |
+| Argumentimi me "Kërko në Google"\*\*\* | Nuk ofrohet\*\*\*\* | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Përdoret për të përmirësuar produktet tona | Nuk ofrohet | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-\* ছবি ইনপুট ৫৬০ টোকেন বা ছবি পিছু $০.০০১১ হিসেবে সেট করা আছে।
+\* Hyrja e imazhit është caktuar në 560 jetonë ose 0,0011 USD për imazh.
 
-\*\* ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $১২০। ১০২৪x১০২৪px (1K) থেকে ২০৪৮x২০৪৮px (2K) পর্যন্ত আউটপুট
-ইমেজের জন্য ১১২০টি টোকেন খরচ হয় এবং
-প্রতিটি ইমেজের জন্য $০.১৩৪ খরচ হয়। সর্বাধিক ৪০৯৬x৪০৯৬px (4K) আউটপুট ছবি তৈরি করতে ২০০০ টোকেন খরচ হয়
-এবং প্রতিটি ছবির জন্য $০.২৪ খরচ হয়।
+\*\* Rezultati i imazhit ka çmimin 120 USD për 1 000 000 tokenë. Imazhet
+e prodhuara nga 1024x1024px (1K) dhe deri në 2048x2048px (2K) konsumojnë 1120 tokenë dhe
+janë të barasvlershme me 0,134 USD për imazh. Imazhet dalëse deri në 4096x4096px (4K) konsumojnë
+2000 token-ë dhe janë të barasvlershme me 0,24 USD për imazh.
 
-\*\*\* Gemini-তে গ্রাহকের জমা দেওয়া অনুরোধের ফলে Google Search-এ এক বা একাধিক
-কোয়েরি করা হতে পারে। প্রতিটি স্বতন্ত্র সার্চ কোয়েরির জন্য আপনাকে চার্জ করা হবে
-যা পারফর্ম করা হয়েছে।
+\*\*\* Një kërkesë e dërguar nga klienti te Gemini mund të rezultojë në një ose më shumë kërkesa në "Kërko në Google". Do të tarifohesh për çdo kërkesë individuale kërkimi të kryer.
 
-\*\*\*\* Google AI Studio-তে পরীক্ষা করা যেতে পারে।
+\*\*\*\* Mund të testohet në Google AI Studio.
 
 ## Gemini 2.5 Pro
 
-*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=bn)*
+*[`gemini-2.5-pro`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-pro&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=sq)
 
-একটি Pro মডেল যা কোডিং ও জটিল রিজনিং টাস্কে পারদর্শী।
+Një model Pro që shkëlqen në kodim dhe detyra komplekse arsyetimi.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $১.২৫, প্রম্পট <= ২০০ হাজার টোকেন $২.৫০, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১০.০০, প্রম্পট <= ২০০k টোকেন $১৫.০০, প্রম্পট > ২০০k |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.১২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.২৫, প্রম্পট > ২০০,০০০ $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১০,০০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 1,25 USD, kërkesa <= 200 000 tokenë 2,50 USD, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 10,00 USD, kërkesa <= 200 000 tokenë 15,00 USD, kërkesa > 200 000 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,125 USD, kërkesa <= 200 000 kode 0,25 USD, kërkesa > 200 000 kode 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | 10 000 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৬২৫, প্রম্পট <= ২০০ হাজার টোকেন $১.২৫, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৫.০০, প্রম্পট <= ২০০ হাজার টোকেন $৭.৫০, প্রম্পট > ২০০ হাজার |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.১২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.২৫, প্রম্পট > ২০০,০০০ $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,625 USD, kërkesa <= 200 000 tokenë 1,25 USD, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5,00 USD, kërkesa <= 200 000 tokenë 7,50 USD, kërkesa > 200 000 tokenë |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,125 USD, kërkesa <= 200 000 kode 0,25 USD, kërkesa > 200 000 kode 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৬২৫, প্রম্পট <= ২০০ হাজার টোকেন $১.২৫, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $৫.০০, প্রম্পট <= ২০০ হাজার টোকেন $৭.৫০, প্রম্পট > ২০০ হাজার |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.১২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.২৫, প্রম্পট > ২০০,০০০ $৪.৫০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,625 USD, kërkesa <= 200 000 tokenë 1,25 USD, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 5,00 USD, kërkesa <= 200 000 tokenë 7,50 USD, kërkesa > 200 000 tokenë |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,125 USD, kërkesa <= 200 000 kode 0,25 USD, kërkesa > 200 000 kode 4,50 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $২.২৫, প্রম্পট <= ২০০ হাজার টোকেন $৪.৫০, প্রম্পট > ২০০ হাজার টোকেন |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $১৮.০০, প্রম্পট <= ২০০ হাজার টোকেন $২৭.০০, প্রম্পট > ২০০ হাজার |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.২২৫, প্রম্পট <= ২০০,০০০ টোকেন $০.৪৫, প্রম্পট > ২০০,০০০ $৮.১০ / ১,০০০,০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১০,০০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 2,25 USD, kërkesa <= 200 000 tokenë 4,50 USD, kërkesa > 200 000 tokenë |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 18,00 USD, kërkesat <= 200 000 tokenë 27,00 USD, kërkesat > 200 000 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,225 USD, kërkesa <= 200 000 kode 0,45 USD, kërkesa > 200 000 kode 8,10 USD / 1 000 000 kode në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | 10 000 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
 ## Gemini 2.5 Flash
 
-*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=bn)*
+*[`gemini-2.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=sq)
 
-আমাদের প্রথম হাইব্রিড রিজনিং মডেল যা ১ মিলিয়ন টোকেন কন্টেক্সট উইন্ডো সাপোর্ট করে এবং
-এতে থিঙ্কিং বাজেট আছে।
+Modeli ynë i parë hibrid arsyetues që mbështet një dritare kontekstuale me 1 milion tokenë dhe ka buxhete të mendimit.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৩০ (টেক্সট / ছবি / ভিডিও) $১.০০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ (টেক্সট / ছবি / ভিডিও) $০.১ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash-Lite RPD-র সাথে শেয়ার করা সীমা) | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,30 USD (tekst / imazh / video) 1,00 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.50 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD (tekst / imazh / video) 0,1 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash-Lite RPD) | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.২৫ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ (টেক্সট / ছবি / ভিডিও) $০.১ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh / video) 0,50 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $1.25 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD (tekst / imazh / video) 0,1 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি / ভিডিও) $০.৫০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $১.২৫ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৩ (টেক্সট / ছবি / ভিডিও) $০.১ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh / video) 0,50 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $1.25 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,03 USD (tekst / imazh / video) 0,1 USD (audio) 1,00 USD / 1 000 000 jeto në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫৪ (টেক্সট / ছবি / ভিডিও) $১.৮০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $৪.৫০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০৫৪ (টেক্সট / ছবি / ভিডিও) $০.১৮ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ প্রাইস) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash-Lite RPD-র সাথে শেয়ার করা সীমা) | ১,৫০০ RPD (ফ্রি, Flash-Lite RPD-র সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,54 USD (tekst / imazh / video) 1,80 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $4.50 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,054 USD (tekst / imazh / video) 0,18 USD (audio) 1,80 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash-Lite RPD) | 1 500 RPD (falas, kufiri i ndarë me Flash-Lite RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
 ## Gemini 2.5 Flash-Lite
 
-*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=bn)*
+*[`gemini-2.5-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=sq)
 
-কম খরচে বেশি ব্যবহারের জন্য তৈরি একটি ছোট মডেল।
+Një model i vogël dhe kostoefektiv, i ndërtuar për përdorim në shkallë të gjerë.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | কোনও চার্জ ছাড়াই | $০.১০ (টেক্সট / ছবি / ভিডিও) $০.৩০ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৪০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১ (টেক্সট / ছবি / ভিডিও) $০.০৩ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash RPD-এর সাথে সীমা শেয়ার করা হয়) | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i hyrjes (tekst, imazh, video) | Pa pagesë | 0,10 USD (tekst / imazh / video) 0,30 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $0.40 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,01 USD (tekst / imazh / video) 0,03 USD (audio) 1,00 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash RPD) | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | উপলভ্য নয় | $০.০৫ (টেক্সট / ছবি / ভিডিও) $০.১৫ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $০.২০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১ (টেক্সট / ছবি / ভিডিও) $০.০৩ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i hyrjes (tekst, imazh, video) | Nuk ofrohet | 0,05 USD (tekst / imazh / video) 0,15 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $0.20 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,01 USD (tekst / imazh / video) 0,03 USD (audio) 1,00 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | উপলভ্য নয় | $০.০৫ (টেক্সট / ছবি / ভিডিও) $০.১৫ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | $০.২০ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১ (টেক্সট / ছবি / ভিডিও) $০.০৩ (অডিও) $১.০০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i hyrjes (tekst, imazh, video) | Nuk ofrohet | 0,05 USD (tekst / imazh / video) 0,15 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | $0.20 |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,01 USD (tekst / imazh / video) 0,03 USD (audio) 1,00 USD / 1 000 000 jetoçipe në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস (টেক্সট, ছবি, ভিডিও) | কোনও চার্জ ছাড়াই | $০.১৮ (টেক্সট / ছবি / ভিডিও) $০.৫৪ (অডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $০.৭২ |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | $০.০১৮ (টেক্সট / ছবি / ভিডিও) $০.০৫৪ (অডিও) $১.৮০ / প্রতি ঘণ্টায় ১,০০০,০০০ টোকেন (স্টোরেজ মূল্য) |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | কোনও চার্জ লাগে না, সর্বাধিক ৫০০ RPD (Flash RPD-এর সাথে সীমা শেয়ার করা হয়) | ১,৫০০ RPD (ফ্রি, Flash RPD-এর সাথে সীমা শেয়ার করা হয়), তারপর $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| Google Maps-এর মাধ্যমে গ্রাউন্ডিং | ৫০০ RPD | ১,৫০০ RPD (ফ্রি), তারপর $২৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i hyrjes (tekst, imazh, video) | Pa pagesë | 0,18 USD (tekst / imazh / video) 0,54 USD (audio) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 0,72 USD |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,018 USD (tekst / imazh / video) 0,054 USD (audio) 1,80 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) |
+| Argumentimi me "Kërko në Google" | Pa pagesë, deri në 500 RPD (kufiri i ndarë me Flash RPD) | 1 500 RPD (falas, kufiri ndahet me Flash RPD), më pas 35 USD / 1 000 kërkesa të bazuara |
+| Argumentimi me Google Maps | 500 RPD | 1 500 RPD (falas), më pas 25 USD / 1 000 kërkesa të bazuara |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
 ## Gemini 2.5 Flash Native Audio (Live API)
 
-*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=bn)*
+*[`gemini-2.5-flash-native-audio-preview-12-2025`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/app/live?hl=bn#gemini-2.5-flash-native-audio-preview-12-2025)
+[Provoje në Google AI Studio](https://aistudio.google.com/app/live?hl=sq#gemini-2.5-flash-native-audio-preview-12-2025)
 
-আমাদের [Live API](https://ai.google.dev/gemini-api/docs/live?hl=bn) নেটিভ অডিও মডেল, আরও ভালো পেসিং, ভয়েসের স্বাভাবিকতা, বাচালতা ও
-মুড সহ আরও ভালো কোয়ালিটির অডিও আউটপুটের জন্য অপ্টিমাইজ করা হয়েছে।
+Modelet tona të integruara të audios të [Live API](https://ai.google.dev/gemini-api/docs/live?hl=sq) të optimizuara për nxjerrje të audios me cilësi më të lartë me ritëm, natyrshmëri të zërit, detajim zanor dhe atmosferë më të mirë.
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫০ (টেক্সট) $৩.০০ (অডিও / ভিডিও) |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | $২.০০ (টেক্সট) $১২.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,50 USD (tekst) 3,00 USD (audio / video) |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | $2.00 (text) $12.00 (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
 ## Gemini 2.5 Flash Image (Nano Banana) 🍌
 
-*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=bn)*
+*[`gemini-2.5-flash-image`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=sq)
 
-একটি নেটিভ ইমেজ জেনারেশন মডেল, যা স্পিড, নমনীয়তা ও
-প্রসঙ্গ বোঝার জন্য অপ্টিমাইজ করা হয়েছে। টেক্সট ইনপুট ও আউটপুটের দাম
-[2.5 Flash](#gemini-2.5-flash)-এর সমান।
+Një model origjinal i gjenerimit të imazheve, i optimizuar për shpejtësi, fleksibilitet dhe
+kuptim kontekstual. Hyrja dhe dalja e tekstit kanë të njëjtin çmim si
+[2.5 Flash](#gemini-2.5-flash).
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৩০ (টেক্সট / ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | ছবি পিছু $০.০৩৯\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,30 USD (tekst / imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 0,039 USD për imazh\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | ছবি পিছু $০.০১৯৫\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 0,0195 USD për imazh\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ফ্লেক্স
+### Tregim force
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.১৫ (টেক্সট / ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | ছবি পিছু $০.০১৯৫\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,15 USD (tekst / imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 0,0195 USD për imazh\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### অগ্রাধিকার
+### Me përparësi
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫৪ (টেক্সট / ছবি) |
-| আউটপুটের দাম | উপলভ্য নয় | প্রতিটি ছবির জন্য $০.০৭০২\* |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,54 USD (tekst / imazh) |
+| Çmimi i rezultatit | Nuk ofrohet | 0,0702 USD për imazh\* |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-[\*] ১,০০০,০০০ টোকেন পিছু ছবি আউটপুটের মূল্য $৩০। ১০২৪x১০২৪px পর্যন্ত
-আউটপুট ছবি ১২৯০ টোকেন ব্যবহার করে এবং প্রতিটি ছবির জন্য $০.০৩৯ খরচ হয়।
+[\*] Nxjerra e imazheve ka çmimin 30 USD për 1 000 000 tokenë. Imazhet e prodhuara deri në
+1024x1024px konsumojnë 1290 tokenë dhe janë ekuivalente me 0,039 USD për imazh.
 
-## Gemini 2.5 Flash প্রিভিউ TTS
+## Gemini 2.5 Flash Preview TTS
 
-*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=bn)*
+*[`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/generate-speech?hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/generate-speech?hl=sq)
 
-আমাদের 2.5 Flash টেক্সট-টু-স্পিচ অডিও মডেলটি দাম-পারফর্ম্যান্স,
-কম লেটেন্সি, কন্ট্রোল করা যায় এমন স্পিচ জেনারেশনের জন্য অপ্টিমাইজ করা হয়েছে।
+Modeli ynë i audios i "tekstit në ligjërim" i 2.5 Flash i optimizuar për gjenerim të kontrollueshëm të ligjërimit me vonesë të ulët dhe me performancë të lartë për çmimin.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $০.৫০ (টেক্সট) |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | $১০.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 0,50 USD (tekst) |
+| Çmimi i rezultatit | Pa pagesë | 10,00 USD (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.২৫ (টেক্সট) |
-| আউটপুটের দাম | উপলভ্য নয় | $৫.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | $0.25 (text) |
+| Çmimi i rezultatit | Nuk ofrohet | $5.00 (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## Gemini 2.5 Pro প্রিভিউ TTS
+## Gemini 2.5 Pro Preview TTS
 
-*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=bn)*
+*[`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com/generate-speech?hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com/generate-speech?hl=sq)
 
-আমাদের 2.5 Pro টেক্সট-টু-স্পিচ অডিও মডেলটি শক্তিশালী, কম লেটেন্সি
-স্পিচ জেনারেশনের জন্য অপ্টিমাইজ করা হয়েছে যাতে আরও স্বাভাবিক আউটপুট পাওয়া যায় এবং প্রম্পটগুলি সহজে স্টিয়ার করা যায়।
+Modeli ynë i audios i tekstit në ligjërim 2.5 Pro i optimizuar për gjenerim të fuqishëm të ligjërimit me vonesë të ulët për rezultate më natyrale dhe kërkesa më të lehta për t'u drejtuar.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $১.০০ (টেক্সট) |
-| আউটপুটের দাম | উপলভ্য নয় | $২০.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | $1.00 (text) |
+| Çmimi i rezultatit | Nuk ofrohet | 20,00 USD (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | $০.৫০ (টেক্সট) |
-| আউটপুটের দাম | উপলভ্য নয় | $১০.০০ (অডিও) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0,50 USD (tekst) |
+| Çmimi i rezultatit | Nuk ofrohet | 10,00 USD (audio) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
 ## Veo 3.1
 
-*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=bn), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=bn), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=bn)*
+*[`veo-3.1-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=sq), [`veo-3.1-fast-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=sq), [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=sq)*
 
-[Veo 3.1 ব্যবহার করে দেখুন](https://deepmind.google/models/veo/?hl=bn)
+[Provo Veo 3.1](https://deepmind.google/models/veo/?hl=sq)
 
-দ্রুত ভিডিও জেনারেশন মডেল।
+Një model i shpejtë i gjenerimit të videove.
 
-|  | ফ্রি টিয়ার | পেইড টিয়ার, মার্কিন ডলারে প্রতি সেকেন্ড |
+|  | Niveli falas | Niveli me pagesë, për sekondë në USD |
 | --- | --- | --- |
-| অডিও সহ Veo 3.1 স্ট্যান্ডার্ড ভিডিওর দাম (ডিফল্ট) | উপলভ্য নয় | $০.৪০ (৭২০p ও ১০৮০p) $০.৬০ (4k) |
-| অডিও সহ Veo 3.1 Fast ভিডিওর দাম (ডিফল্ট) | উপলভ্য নয় | $০.১০ (৭২০p) $০.১২ (১০৮০p) $০.৩০ (4k) |
-| অডিও সহ Veo 3.1 Lite ভিডিওর দাম (ডিফল্ট) | উপলভ্য নয় | $০.০৫ (৭২০p) $০.০৮ (১০৮০p) (4k আউটপুট কাজ করে না) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i videos standarde me audio me Veo 3.1 (parazgjedhje) | Nuk ofrohet | 0,40 USD (720p dhe 1080p) 0,60 USD (4k) |
+| Çmimi i videos me audio me Veo 3.1 Fast (parazgjedhje) | Nuk ofrohet | 0,10 USD (720p) 0,12 USD (1080p) 0,30 USD (4k) |
+| Çmimi i videos Veo 3.1 Lite me audio (parazgjedhje) | Nuk ofrohet | 0,05 USD (720p) 0,08 USD (1080p) (nxjerrja në 4k nuk mbështetet) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
 ## Lyria 3.5
 
-*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=bn)*
+*[`lyria-3.5`](https://ai.google.dev/gemini-api/docs/models/lyria-3.5?hl=sq)*
 
-Google-এর মিউজিক জেনারেশন মডেল।
+Modeli i gjenerimit të muzikës i Google.
 
-|  | ফ্রি টিয়ার | পেড টিয়ার, মার্কিন ডলারে অনুরোধ পিছু |
+|  | Niveli falas | Niveli me pagesë, për kërkesë në USD |
 | --- | --- | --- |
-| Lyria 3.5 (সম্পূর্ণ গান) | উপলভ্য নয় | প্রতিটি গানের জন্য $০.০৮ |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Lyria 3.5 (Kënga e plotë) | Nuk ofrohet | 0,08 USD për këngë |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## Lyria 3
+## Lyria 3
 
-*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=bn) এবং [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=bn)*
+*[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=sq) dhe [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=sq)*
 
-Google-এর লেগ্যাসি মিউজিক জেনারেশন মডেলের ফ্যামিলি।
+Familja e modeleve të trashëguara të gjenerimit të muzikës të Google.
 
-|  | ফ্রি টিয়ার | পেড টিয়ার, মার্কিন ডলারে অনুরোধ পিছু |
+|  | Niveli falas | Niveli me pagesë, për kërkesë në USD |
 | --- | --- | --- |
-| Lyria 3 ক্লিপ প্রিভিউ (৩০ সেকেন্ড) | উপলভ্য নয় | প্রতিটি গানের জন্য $০.০৪ |
-| Lyria 3 Pro প্রিভিউ (সম্পূর্ণ গান) | উপলভ্য নয় | প্রতিটি গানের জন্য $০.০৮ |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Pamja paraprake e klipit të Lyria 3 (30 sekonda) | Nuk ofrohet | 0,04 USD për këngë |
+| Lyria 3 Pro Preview (Full Song) | Nuk ofrohet | 0,08 USD për këngë |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## Gemini Embedding 2
+## Gemini Embedding 2
 
-*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=bn)*
+*[`gemini-embedding-2`](https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=sq)*
 
-[API ব্যবহার করে দেখুন](https://ai.google.dev/gemini-api/docs/embeddings?hl=bn)
+[Provo API-në](https://ai.google.dev/gemini-api/docs/embeddings?hl=sq)
 
-আমাদের প্রথম মাল্টিমোডাল এম্বেডিং মডেল, যা টেক্সট, ছবি, ভিডিও, অডিও এবং
-পিডিএফকে একটি ইউনিফায়েড এম্বেডিং স্পেসে ম্যাপ করে।
+Modeli ynë i parë i integrimit multimodal, që integron tekstin, imazhet, videot, audion dhe skedarët PDF në një hapësirë të unifikuar integrimi.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| টেক্সট ইনপুট মূল্য | কোনও চার্জ ছাড়াই | $০.২০ |
-| ছবি ইনপুট করার দাম | কোনও চার্জ ছাড়াই | $০.৪৫ ($০.০০০০১২ প্রতি ছবি) |
-| অডিও ইনপুট মূল্য | কোনও চার্জ ছাড়াই | $৬.৫০ ($0.00016 প্রতি সেকেন্ডে) |
-| ভিডিও ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | $১২.০০ (প্রতি ফ্রেমের জন্য $০.০০০৭৯) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i hyrjes së tekstit | Pa pagesë | $0.20 |
+| Çmimi i hyrjes së imazhit | Pa pagesë | 0,45 USD (0,00012 USD për imazh) |
+| Çmimi i hyrjes së audios | Pa pagesë | 6,50 USD (0,00016 USD për sekondë) |
+| Çmimi i hyrjes së videos | Pa pagesë | 12,00 USD (0,00079 USD për kuadër) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| টেক্সট ইনপুট মূল্য | উপলভ্য নয় | $০.১০ |
-| ছবি ইনপুট করার দাম | উপলভ্য নয় | $০.২২৫ ($০.০০০১৬ প্রতি ছবি) |
-| অডিও ইনপুট মূল্য | উপলভ্য নয় | $৩.২৫ ($0.0000৮ প্রতি সেকেন্ড) |
-| ভিডিও ইনপুট প্রাইস | উপলভ্য নয় | $৬.০০ (প্রতি ফ্রেমের জন্য $০.০০০৩৯৫) |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Çmimi i hyrjes së tekstit | Nuk ofrohet | $0.10 |
+| Çmimi i hyrjes së imazhit | Nuk ofrohet | 0,225 USD (0,00006 USD për imazh) |
+| Çmimi i hyrjes së audios | Nuk ofrohet | 3,25 USD (0,00008 USD për sekondë) |
+| Çmimi i hyrjes së videos | Nuk ofrohet | 6,00 USD (0,000395 USD për kuadër) |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## Gemini Robotics ER 2 প্রিভিউ
+## Gemini Robotics ER 2 Preview
 
-*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=bn)*
+*[`gemini-robotics-er-2-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-preview?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=sq)
 
-Gemini Robotics ER 2, যার পুরো নাম হল Gemini Robotics Embodied Reasoning 2, এটি হল
-ভিশন-ল্যাঙ্গুয়েজ মডেল এন্ডপয়েন্ট যা রোবটকে তার পরিবেশ
-সঠিকভাবে বুঝতে সাহায্য করে। এটি রোবটের এজেন্টিক অর্কেস্ট্রেশন, ভিডিও প্রগ্রেস
-বোঝা, একাধিক রোবটের কোলাবরেশন ও উন্নত স্পেশিয়াল রিজনিংয়ের মতো বিষয়গুলি সমর্থন করে।
+Gemini Robotics ER 2, shkurt për Gemini Robotics Embodied Reasoning 2, është një pikë fundore e modelit të gjuhës së vizionit që u mundëson robotëve të kuptojnë mjediset e tyre me saktësi, duke mbështetur orkestrimin agjentik të robotëve, kuptimin e progresit të videove, bashkëpunimin me shumë robotë dhe arsyetimin hapësinor të përparuar.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$২.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৫.০০। ১ জানুয়ারি, ২০২৭ থেকে$১০.০০। |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.১০। ১ জানুয়ারি, ২০২৭ থেকে$০.২০। ৩১ ডিসেম্বর,২০২৬ পর্যন্ত$০.৫০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে$১.০০ / ১,০০০, ০০০ টোকেন প্রতি ঘণ্টা (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 1, 00 USD (tekst / imazh / video / audio) deri më 31 dhjetor 2026. 2, 00 USD (tekst / imazh / video / audio) duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Pa pagesë | 5, 00 USD deri më 31 dhjetor 2026. 10, 00 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,10 USD deri më 31 dhjetor 2026. 0,20 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 jetonë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-### ব্যাচ
+### Paketë
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.৫০ (টেক্সট / ছবি / ভিডিও / অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$১.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। |
-| আউটপুট প্রাইস (থিংকিং টোকেন সহ) | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $২.৫০। ১ জানুয়ারি, ২০২৭ থেকে$৫.০০। |
-| কন্টেক্সট ক্যাশিংয়ের দাম | উপলভ্য নয় | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $০.০৫. ১ জানুয়ারি, ২০২৭ থেকে$০.১০. ৩১ ডিসেম্বর,২০২৬ পর্যন্ত প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$০.৫০ (স্টোরেজ প্রাইস)। ১ জানুয়ারি,২০২৭ থেকে প্রতি ঘণ্টায় ১,০০০, ০০০ টোকেনের জন্য$১.০০ (স্টোরেজ প্রাইস)। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Nuk ofrohet | 0, 50 USD (tekst / imazh / video / audio) deri më 31 dhjetor 2026. 1, 00 USD (tekst / imazh / video / audio) duke filluar nga data 1 janar 2027. |
+| Çmimi i daljes (duke përfshirë tokenët e arsyetimit) | Nuk ofrohet | 2, 50 USD deri më 31 dhjetor 2026. 5, 00 USD duke filluar nga data 1 janar 2027. |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Nuk ofrohet | 0,05 USD deri më 31 dhjetor 2026. 0,10 USD duke filluar nga data 1 janar 2027. 0,50 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) deri më 31 dhjetor 2026. 1,00 USD / 1 000 000 token-ë në orë (çmimi i hapësirës ruajtëse) duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## Gemini Robotics ER 2 স্ট্রিমিং প্রিভিউ
+## Gemini Robotics ER 2 Streaming Preview
 
-*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=bn)*
+*[`gemini-robotics-er-2-streaming-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-2-streaming-preview?hl=sq)*
 
-[Google AI Studio-তে এটি ব্যবহার করে দেখুন](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=bn)
+[Provoje në Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=sq)
 
-Gemini Robotics ER 2 Streaming হল রোবোটিক্সের জন্য একটি ভিশন-ল্যাঙ্গুয়েজ মডেল এন্ডপয়েন্ট যা
-Live API ব্যবহার করে রিয়েল-টাইম টেক্সট স্ট্রিমিংয়ের জন্য অপ্টিমাইজ করা হয়েছে। এটি টেক্সট,
-ছবি, ভিডিও ও অডিও ইনপুট নেয় এবং ফাংশন কলিংয়ের সাথে
-দ্বিমুখী স্ট্রিমিং কাজ করে।
+Gemini Robotics ER 2 Streaming është një pikë fundore e modelit të gjuhës së vizionit për robotikën, e optimizuar për transmetimin e tekstit në kohë reale duke përdorur Live API. Ai pranon hyrje me tekst, imazh, video dhe audio dhe mbështet transmetimin dydrejtimësh me thirrjen e funksionit.
 
-### মানক
+### Standard
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $১.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। ১ জানুয়ারি, ২০২৭ থেকে$২.০০ (টেক্সট / ছবি / ভিডিও / অডিও)। |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | ৩১ ডিসেম্বর, ২০২৬ পর্যন্ত $৫.০০। ১ জানুয়ারি, ২০২৭ থেকে$১০.০০। |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | প্রতি মাসে ৫,০০০টি ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের ভার্সনের মডেল জুড়ে শেয়ার করা হয়), তারপরে প্রতি ১,০০০টি কোয়েরির জন্য $১৪। |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | 1, 00 USD (tekst / imazh / video / audio) deri më 31 dhjetor 2026. 2, 00 USD (tekst / imazh / video / audio) duke filluar nga data 1 janar 2027. |
+| Çmimi i rezultatit | Pa pagesë | 5, 00 USD deri më 31 dhjetor 2026. 10, 00 USD duke filluar nga data 1 janar 2027. |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | 5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=bn)
+## [Gemma 4](https://ai.google.dev/gemma/docs/core/model_card_4?hl=sq)
 
-আমাদের হালকা ওজনের, অত্যাধুনিক, ওপেন মডেল যা একই প্রযুক্তি
-ব্যবহার করে তৈরি করা হয়েছে যা আমাদের Gemini মডেলকে শক্তিশালী করে।
+Modeli ynë i hapur, i nivelit më të lartë dhe me gjurmë të vogël në memorie, i krijuar nga e njëjta teknologji që mundëson modelet tona të Gemini.
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| ইনপুট প্রাইস | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
-| আউটপুটের দাম | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
-| কন্টেক্সট ক্যাশিংয়ের দাম | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
-| কনটেক্সট ক্যাশিং (স্টোরেজ) | কোনও চার্জ ছাড়াই | উপলভ্য নয় |
-| টিউনিংয়ের দাম | উপলভ্য নয় | উপলভ্য নয় |
-| Google Search-এর মাধ্যমে গ্রাউন্ডিং | উপলভ্য নয় | উপলভ্য নয় |
-| আমাদের প্রোডাক্ট উন্নত করতে ব্যবহার করা হয় | [হ্যাঁ](https://ai.google.dev/gemini-api/terms?hl=bn) | [না](https://ai.google.dev/gemini-api/terms?hl=bn) |
+| Fut çmimin | Pa pagesë | Nuk ofrohet |
+| Çmimi i rezultatit | Pa pagesë | Nuk ofrohet |
+| Çmimi i ruajtjes në memorien specifike të kontekstit | Pa pagesë | Nuk ofrohet |
+| Ruajtja e kontekstit në memorien specifike (hapësira ruajtëse) | Pa pagesë | Nuk ofrohet |
+| Çmimi i akordimit | Nuk ofrohet | Nuk ofrohet |
+| Argumentimi me "Kërko në Google" | Nuk ofrohet | Nuk ofrohet |
+| Përdoret për të përmirësuar produktet tona | [Po](https://ai.google.dev/gemini-api/terms?hl=sq) | [Jo](https://ai.google.dev/gemini-api/terms?hl=sq) |
 
-## টুলের দাম
+## Çmimet për veglat
 
-টুলগুলির নিজস্ব মূল্য নির্ধারণ করা হয় এবং সেগুলি যে মডেলে ব্যবহার করা হয় তার উপর প্রযোজ্য হয়।
-প্রতিটি মডেলের জন্য কোন টুল উপলভ্য তা জানতে [মডেল](https://ai.google.dev/gemini-api/docs/models?hl=bn) পৃষ্ঠা দেখুন
-।
+Veglat kanë çmime sipas tarifave të tyre, të zbatuara për modelin që i përdor ato.
+Kontrollo faqen [Modelet](https://ai.google.dev/gemini-api/docs/models?hl=sq) për të parë se cilat vegla ofrohen për secilin model.
 
-|  | ফ্রি টিয়ার | পেমেন্ট করা টিয়ার, প্রতি ১ মিলিয়ন টোকেনের জন্য মার্কিন ডলারে |
+|  | Niveli falas | Niveli me pagesë, për 1 milion tokenë në USD |
 | --- | --- | --- |
-| [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=bn#pricing) | ৫০০ RPD ফ্রি (Flash ও Flash-Lite-এর জন্য শেয়ার করা সীমা)। Pro-তে উপলভ্য নয়। | Gemini 2.5 মডেল:  ১,৫০০ RPD ফ্রি (Flash ও Flash-Lite-এর জন্য শেয়ার করা সীমা)। তারপরে $৩৫ / ১,০০০ গ্রাউন্ডেড প্রম্পট   Gemini 3 ও এর পরের যেকোনও মডেল:  প্রতি মাসে ৫,০০০ ফ্রি সার্চ কোয়েরি (সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে ১,০০০ কোয়েরি পিছু $১৪। |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=bn#pricing-and-rate-limits) | ৫০০ RPD Pro-এর জন্য উপলভ্য নয়। | Gemini 2.5 মডেল:  ১,৫০০ RPD ফ্রি (Flash ও Flash-Lite-এর জন্য শেয়ার করা সীমা) Pro-এর জন্য ১০,০০০ RPD ফ্রি। তারপরে ১,০০০ গ্রাউন্ডেড প্রম্পটের জন্য $২৫   Gemini 3 ও এর পরের যেকোনও মডেল:  প্রতি মাসে ৫,০০০ অনুরোধ (ফ্রি, সব Gemini 3 ও এর পরের যেকোনও মডেল জুড়ে শেয়ার করা হয়), তারপরে ১,০০০ সার্চ কোয়েরির জন্য $১৪। |
-| [কোড এক্সিকিউশন](https://ai.google.dev/gemini-api/docs/code-execution?hl=bn#billing) | কোনও চার্জ ছাড়াই | বেছে নেওয়া মডেলের জন্য স্ট্যান্ডার্ড টোকেন রেট অনুযায়ী কোড এক্সিকিউশনের বিল করা হয়। টুল ব্যবহারের উপর ভিত্তি করেই খরচ নির্ধারণ করা হয়, সেশন রানটাইমের জন্য কোনও চার্জ করা হয় না। জেনারেট করা কোড ও এক্সিকিউশনের ফলাফল তৈরি করার সময় **আউটপুট টোকেন** হিসেবে এবং মডেলটি সেগুলিকে ইটারেটিভ রিজনিং প্রসেসের অংশ হিসেবে ব্যবহার করার সময় **ইনপুট টোকেন** হিসেবে বিল করা হয়। |
-| [URL প্রসঙ্গ](https://ai.google.dev/gemini-api/docs/url-context?hl=bn#limitations) | কোনও চার্জ ছাড়াই | মডেলের দাম অনুযায়ী ইনপুট টোকেন হিসেবে চার্জ করা হয়। |
-| [কম্পিউটার ব্যবহার](https://ai.google.dev/gemini-api/docs/computer-use?hl=bn) | উপলভ্য নয় | মডেলের দাম অনুযায়ী সাধারণ টোকেন হিসেবে চার্জ করা হয় (যেমন, স্ট্যান্ডার্ড [Gemini 3.8 Flash](#gemini-3.8-flash)-এর দাম)। |
-| [ফাইল সার্চ](https://ai.google.dev/gemini-api/docs/file-search?hl=bn#pricing) | কোনও চার্জ ছাড়াই | [এমবেডিং](#gemini-embedding-2)-এর জন্য $০.১৫ / ১ মিলিয়ন টোকেন হিসেবে চার্জ করা হয়। মডেলের দাম অনুযায়ী, ফিরিয়ে আনা ডকুমেন্ট টোকেনের জন্য সাধারণ টোকেন হিসেবে চার্জ করা হয়। |
-| [কাস্টম টুল এন্ডপয়েন্ট (Gemini 3.1 Pro প্রিভিউ)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=bn) | উপলভ্য নয় | [Gemini 3.1 Pro প্রিভিউ](#gemini-3.1-pro-preview)-এর দামের সমান |
+| [Kërko në Google](https://ai.google.dev/gemini-api/docs/google-search?hl=sq#pricing) | 500 RPD falas (kufiri i ndarë për Flash dhe Flash-Lite). Nuk ofrohet për Pro. | Modelet Gemini 2.5:  1 500 kërkesa në ditë falas (kufiri i ndarë për Flash dhe Flash-Lite). Më pas 35 USD / 1 000 kërkesa të bazuara   Modelet Gemini 3 dhe më të reja:  5 000 kërkesa kërkimi falas në muaj (të ndara në të gjitha modelet Gemini 3 dhe më të reja), më pas 14 USD për 1 000 kërkesa. |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=sq#pricing-and-rate-limits) | 500 RPD Nuk ofrohet për Pro. | Modelet e Gemini 2.5:  1 500 RPD falas (kufiri i ndarë për Flash dhe Flash-Lite) 10 000 RPD falas për Pro. Më pas 25 USD / 1 000 kërkesa të bazuara   Modelet e Gemini 3 dhe më të reja:  5 000 kërkesa në muaj (falas, të ndara në të gjitha modelet e Gemini 3 dhe më të reja), më pas 14 USD / 1 000 kërkesa kërkimi. |
+| [Ekzekutimi i kodit](https://ai.google.dev/gemini-api/docs/code-execution?hl=sq#billing) | Pa pagesë | Ekzekutimi i kodit faturohet me tarifat standarde të tokenit për modelin e zgjedhur. Kostot përcaktohen vetëm nga përdorimi i veglës, nuk mblidhen tarifa për kohën e ekzekutimit të seancës. Kodi i gjeneruar dhe rezultatet e ekzekutimit faturohen si **Tokenë të rezultatit** kur krijohen dhe si **Tokenë të hyrjes** kur modeli i përdor ato si pjesë të procesit të tij të arsyetimit përsëritës. |
+| [Konteksti me URL](https://ai.google.dev/gemini-api/docs/url-context?hl=sq#limitations) | Pa pagesë | Tarifuar si tokenë hyrës sipas çmimit të modelit. |
+| [Përdorimi i kompjuterit](https://ai.google.dev/gemini-api/docs/computer-use?hl=sq) | Nuk ofrohet | Tarifuar si jetohet e rregullta sipas çmimit të modelit (p.sh. çmimi standard i [Gemini 3.8 Flash](#gemini-3.8-flash)). |
+| [Kërkimi i skedarëve](https://ai.google.dev/gemini-api/docs/file-search?hl=sq#pricing) | Pa pagesë | Tarifuar për [integrimet](#gemini-embedding-2) me 0,15 USD / 1 milion tokenë. Tokenët e dokumenteve të tërhequra tarifohen si tokenë të rregullt sipas çmimeve të modelit. |
+| [Pika fundore e "Veglave të personalizuara" (Gemini 3.1 Pro Preview)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=sq) | Nuk ofrohet | Njësoj si çmimet e [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
 
-## এজেন্টদের জন্য দাম
+## Çmimet për agjentët
 
-এজেন্ট ব্যবহারের খরচ, অন্তর্নিহিত টোকেন
-ব্যবহার এবং টুলের ব্যবহারের উপর ভিত্তি করে গণনা করা হয়।
+Kostot e përdorimit të agjentit llogariten bazuar në përdorimin e tokenit bazë dhe përdorimin e veglave.
 
-|  | মডেল | টুল |
+|  | Modeli | Vegla |
 | --- | --- | --- |
-| [Gemini Deep Research এজেন্ট](https://ai.google.dev/gemini-api/docs/deep-research?hl=bn) | সমস্ত মডেল ইনফারেন্সের জন্য স্ট্যান্ডার্ড Gemini তালিকা রেট চার্জ করা হয়, এজেন্টিক লুপ চলাকালীন ইনপুট, আউটপুট এবং মধ্যবর্তী ইনপুট / রিজনিং টোকেন সহ । | আগে থেকে থাকা প্রাইসিং স্ট্রাকচার অনুযায়ী টুল ব্যবহারের ফি প্রযোজ্য হয়। এর মধ্যে Search Grounding (রিট্রিভ করা টোকেন বাদ দেওয়া হয়েছে) এবং Url\_context / File Search (রিট্রিভ করা টোকেন অন্যান্য সব টুলে অন্তর্ভুক্ত) সংক্রান্ত স্ট্যান্ডার্ড পার্থক্য বজায় রাখা হয়। |
-| [Gemini API-তে ম্যানেজ করা এজেন্ট](https://ai.google.dev/gemini-api/docs/agents?hl=bn) | সমস্ত মডেল ইনফারেন্সের জন্য স্ট্যান্ডার্ড Gemini তালিকা রেট চার্জ করা হয়, এজেন্টিক লুপ চলাকালীন ইনপুট, আউটপুট এবং মধ্যবর্তী ইনপুট / রিজনিং টোকেন সহ । ([মূল্যের বিবরণ](https://ai.google.dev/gemini-api/docs/agents?hl=bn#pricing) দেখুন)। | প্রিভিউ চলাকালীন এনভায়রনমেন্ট কম্পিউট (CPU, মেমরি, স্যান্ডবক্স এক্সিকিউশন) করার জন্য কোনও চার্জ নেওয়া হয় না। |
-| [Antigravity এজেন্ট](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=bn) | সমস্ত মডেল ইনফারেন্সের জন্য স্ট্যান্ডার্ড Gemini তালিকা রেট চার্জ করা হয়, এজেন্টিক লুপ চলাকালীন ইনপুট, আউটপুট এবং মধ্যবর্তী ইনপুট / রিজনিং টোকেন সহ । ([মূল্যের বিবরণ](https://ai.google.dev/gemini-api/docs/agents?hl=bn#pricing) দেখুন)। | প্রিভিউ চলাকালীন এনভায়রনমেন্ট কম্পিউট (CPU, মেমরি, স্যান্ডবক্স এক্সিকিউশন) করার জন্য কোনও চার্জ নেওয়া হয় না। |
+| [agjenti i Deep Research i Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=sq) | Të gjitha nxjerrjet e përfundimeve të modelit tarifohen me tarifat standarde të listës së Gemini, duke përfshirë hyrjen, daljen dhe hyrjen e ndërmjetme / tokenët e gjeneruar të arsyetimit gjatë cikleve agjentike. | Tarifat e përdorimit të veglave zbatohen sipas strukturës ekzistuese të çmimeve, duke mbajtur dallimet standarde për "Arsyetimin e kërkimit" (përjashtuar kodet e rikuperuara) kundrejt "Kontekstit me URL" / "Kërkimit të skedarëve" (kodet e rikuperuara të përfshira në të gjitha veglat e tjera). |
+| [Agjentët e menaxhuar në Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=sq) | Të gjitha nxjerrjet e përfundimeve të modelit tarifohen me tarifat standarde të listës së Gemini, duke përfshirë hyrjen, daljen dhe hyrjen e ndërmjetme / tokenët e gjeneruar të arsyetimit gjatë cikleve agjentike. (Shiko [detajet e çmimeve](https://ai.google.dev/gemini-api/docs/agents?hl=sq#pricing)). | Përpunimi i mjedisit (CPU-ja, memoria, ekzekutimi i mjedisit të izoluar) nuk faturohet gjatë periudhës së versionit paraprak. |
+| [Agjenti i Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=sq) | Të gjitha nxjerrjet e përfundimeve të modelit tarifohen me tarifat standarde të listës së Gemini, duke përfshirë hyrjen, daljen dhe hyrjen e ndërmjetme / tokenët e gjeneruar të arsyetimit gjatë cikleve agjentike. (Shiko [detajet e çmimeve](https://ai.google.dev/gemini-api/docs/agents?hl=sq#pricing)). | Përpunimi i mjedisit (CPU-ja, memoria, ekzekutimi i mjedisit të izoluar) nuk faturohet gjatë periudhës së versionit paraprak. |
 
-## নোট
+## Shënimet
 
-- **এজেন্টিক ভিডিও বোঝা:** এজেন্টিক ভিডিও বোঝার ক্ষেত্রে,
-  সম্পূর্ণ ভিডিওর দৈর্ঘ্যের পরিবর্তে মডেলের লোড করা কন্টেন্টের উপর ভিত্তি করে টোকেন ব্যবহার
-  পরিবর্তনযোগ্য হয়। এর ফলে সাধারণত বড় দৈর্ঘ্যের ভিডিওর জন্য ৮৮% পর্যন্ত কম ইনপুট টোকেন
-  প্রয়োজন হয়, যদিও টোকেনের সংখ্যা কোয়েরির জটিলতা এবং ডায়নামিক
-  স্যাম্পলিং ডেপথের উপর নির্ভর করে (যা বিস্তারিত ভিজ্যুয়াল সেগমেন্টের জন্য ১ FPS-এর বেশি হতে পারে)।
-  [এজেন্টিক ভিডিও বোঝা](https://ai.google.dev/gemini-api/docs/video-understanding?hl=bn#agentic-video-understanding) দেখুন।
-- **ডকুমেন্ট টোকেন বিলিং:** `DOCUMENT` মোডালিটির (যেমন, পিডিএফ) টোকেনকে ইমেজ টোকেন রেটে বিল করা হয়। API উত্তরের মধ্যে, এইসব টোকেন `promptTokensDetails`-এর মধ্যে `DOCUMENT` মডালিটির অধীনে দেখা যায়।
-- [উপলভ্য সব অঞ্চলে](https://ai.google.dev/gemini-api/docs/available-regions?hl=bn) Google AI Studio ব্যবহার করার জন্য কোনও চার্জ লাগে না। আরও বিবরণের জন্য [বিলিং সংক্রান্ত প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী](https://ai.google.dev/gemini-api/docs/billing?hl=bn) দেখুন।
-- এখানে তালিকাভুক্ত দাম এবং
-  Gemini Enterprise Agent Platform-এ অফার করা দামের মধ্যে পার্থক্য থাকতে পারে। Gemini Enterprise Agent Platform-এর দাম জানতে, [Gemini Enterprise Agent Platform-এর দামের পৃষ্ঠা](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=bn) দেখুন।
-- আপনি খরচ অপ্টিমাইজ করার জন্য [ডায়নামিক রিট্রিভাল](https://ai.google.dev/gemini-api/docs/grounding?hl=bn) ব্যবহার করলে, শুধুমাত্র সেইসব অনুরোধের জন্য Google Search-এর মাধ্যমে গ্রাউন্ডিংয়ের চার্জ নেওয়া হয় যেগুলির উত্তরে
-  ওয়েব থেকে অন্তত একটি গ্রাউন্ডিং সাপোর্ট URL থাকে।
-  Gemini-এর জন্য খরচ সবসময় প্রযোজ্য হয়। রেট লিমিট পরিবর্তন হতে পারে।
+- **Kuptimi i videos nga agjenti:** Kur përdor kuptimin e videos nga agjenti,
+  përdorimi i token-ëve është i ndryshueshëm bazuar në përmbajtjen e ngarkuar nga modeli dhe jo
+  në gjatësinë e plotë të videos. Kjo zakonisht rezulton në deri në 88% më pak tokenë hyrës për videot me metrazh të gjatë, megjithëse numri i tokenëve varet nga ndërlikueshmëria e kërkesës dhe thellësia e kampionimit dinamik (që mund të kalojë 1 FPS për segmentet vizuale të detajuara). Shiko
+  [Kuptimi i videove nga agjentët](https://ai.google.dev/gemini-api/docs/video-understanding?hl=sq#agentic-video-understanding).
+- **Faturimi i tokenëve të dokumenteve:** Tokenët për modalitetin `DOCUMENT` (p.sh. skedarët PDF) faturohen me tarifën e tokenëve të imazheve. Në përgjigjet e API-së, këto kode shfaqen nën modalitetin `DOCUMENT` brenda `promptTokensDetails`.
+- Përdorimi i Google AI Studio është pa pagesë në të gjitha [rajonet e disponueshme](https://ai.google.dev/gemini-api/docs/available-regions?hl=sq). Shiko [Pyetjet e shpeshta për faturimin](https://ai.google.dev/gemini-api/docs/billing?hl=sq) për detaje.
+- Çmimet mund të ndryshojnë nga çmimet e listuara këtu dhe çmimet e ofruara në
+  Gemini Enterprise Agent Platform. Për çmimet e platformës së agjentit të Gemini Enterprise, shiko [faqen e çmimeve të platformës së agjentit të Gemini Enterprise](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=sq).
+- Nëse po përdor [rikthimin dinamik](https://ai.google.dev/gemini-api/docs/grounding?hl=sq) për të optimizuar kostot, vetëm kërkesat që përmbajnë të paktën një URL të mbështetjes së argumentimit nga uebi në përgjigjen e tyre tarifohen për "Argumentimin me 'Kërko në Google'".
+  Kostot për Gemini zbatohen gjithmonë. Kufijtë e vlerësimit mund të ndryshojnë.
 
-অন্য কিছু উল্লেখ না করা থাকলে, এই পৃষ্ঠার কন্টেন্ট [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/)-এর অধীনে এবং কোডের নমুনাগুলি [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)-এর অধীনে লাইসেন্স প্রাপ্ত। আরও জানতে, [Google Developers সাইট নীতি](https://developers.google.com/site-policies?hl=bn) দেখুন। Java হল Oracle এবং/অথবা তার অ্যাফিলিয়েট সংস্থার রেজিস্টার্ড ট্রেডমার্ক।
+Përveçse siç përcaktohet ndryshe, përmbajtja e kësaj faqeje është e licencuar sipas [licencës së atribuimit 4.0 të Creative Commons](https://creativecommons.org/licenses/by/4.0/) dhe kampionët e kodit janë licencuar sipas [licencës së Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Për detaje, shiko [Politikat e sajtit të Google Developers](https://developers.google.com/site-policies?hl=sq). Java është një markë tregtare e regjistruar e Oracle dhe/ose filialeve të tij.
 
-2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।
+Përditësimi i fundit: 2026-10-16 UTC.
 
-[[["সহজে বোঝা যায়","easyToUnderstand","thumb-up"],["আমার সমস্যার সমাধান হয়েছে","solvedMyProblem","thumb-up"],["অন্যান্য","otherUp","thumb-up"]],[["এতে আমার প্রয়োজনীয় তথ্য নেই","missingTheInformationINeed","thumb-down"],["খুব জটিল / অনেক ধাপ","tooComplicatedTooManySteps","thumb-down"],["পুরনো","outOfDate","thumb-down"],["অনুবাদ সংক্রান্ত সমস্যা","translationIssue","thumb-down"],["নমুনা / কোড সংক্রান্ত সমস্যা","samplesCodeIssue","thumb-down"],["অন্যান্য","otherDown","thumb-down"]],["2026-10-09 UTC-তে শেষবার আপডেট করা হয়েছে।"],[],[]]
+[[["E lehtë për t'u kuptuar","easyToUnderstand","thumb-up"],["E zgjidhi problemin tim","solvedMyProblem","thumb-up"],["Tjetër","otherUp","thumb-up"]],[["Mungojnë informacionet që më nevojiten","missingTheInformationINeed","thumb-down"],["Shumë e ndërlikuar/shumë hapa","tooComplicatedTooManySteps","thumb-down"],["E papërditësuar","outOfDate","thumb-down"],["Problem përkthimi","translationIssue","thumb-down"],["Problem me kampionët/kodin","samplesCodeIssue","thumb-down"],["Tjetër","otherDown","thumb-down"]],["Përditësimi i fundit: 2026-10-16 UTC."],[],[]]

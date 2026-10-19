@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=tr
-fetched_at: 2026-10-12T06:59:22.146154+00:00
-title: "Arka planda y\u00fcr\u00fctme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ja
+fetched_at: 2026-10-19T05:58:05.265385+00:00
+title: "\u30d0\u30c3\u30af\u30b0\u30e9\u30a6\u30f3\u30c9\u5b9f\u884c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 4 Argon が今すぐチェックできるようになりました。[試してみる](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=ja)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Arka planda yürütme
+# バックグラウンド実行
 
-Derin araştırma, karmaşık muhakeme veya çok adımlı aracı yürütme gibi uzun süren görevlerde bağlantı zaman aşımları, standart HTTP isteklerini (genellikle 60 saniye sonra kapanır) kesintiye uğratabilir. [Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr), bu görevleri eşzamansız olarak çalıştırmak için **arka planda yürütme** sağlar.
+Deep Research、複雑な推論、多段階のエージェント実行など、長時間実行されるタスクでは、接続タイムアウトによって標準の HTTP リクエスト（通常は 60 秒後に終了）が中断されることがあります。[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) は、これらのタスクを非同期で実行するための**バックグラウンド実行**を提供します。
 
-Etkileşimin sunucudaki görevi tamamlayana kadar çalışmasına izin vermek için etkileşimi oluştururken `"background": true` değerini ayarlayın. API, istemci uygulamalarının durumu yoklamak, akış ilerleme durumunu kontrol etmek veya bağlantısı kesilmiş bir akışa yeniden bağlanmak için kullanabileceği bir etkileşim kimliğini hemen döndürür.
+サーバーでタスクが完了するまでインタラクションを実行するには、インタラクションの作成時に `"background": true` を設定します。API はすぐにインタラクション ID を返します。クライアント アプリケーションは、この ID を使用してステータスのポーリング、進行状況のストリーミング、切断されたストリームへの再接続を行うことができます。
 
-Arka planda yürütme, standart Gemini modelleri (ör. `gemini-3.8-flash` ve `gemini-3.1-pro-preview`) ve Yönetilen Aracılar (ör. `antigravity-preview-09-2026`) için desteklenir.
+バックグラウンド実行は、標準の Gemini モデル（`gemini-4-argon` や `gemini-3.8-flash` など）とマネージド エージェント（`antigravity-preview-09-2026` など）でサポートされています。
 
-## Arka plan etkileşimi oluşturma
+## バックグラウンド インタラクションを作成する
 
-Arka plan etkileşimi başlatmak için kaynağı oluştururken `background` parametresini `true` olarak ayarlayın.
+バックグラウンド インタラクションを開始するには、リソースの作成時に `background` パラメータを `true` に設定します。
 
 ### Python
 
@@ -133,31 +133,39 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Arka planda yürütme nasıl çalışır?
+## バックグラウンド実行の仕組み
 
-Arka plan etkileşimi oluşturduğunuzda görev sunucuda eşzamansız olarak çalışır. Etkileşim, çeşitli yürütme durumlarından geçer:
+バックグラウンド インタラクションを作成すると、タスクはサーバー上で非同期に実行されます。インタラクションは、さまざまな実行状態に遷移します。
 
-- `in_progress`: Sunucu, etkileşimi etkin bir şekilde yürütüyor (ör. kod çalıştırma veya araştırma).
-- `requires_action`: Etkileşim duraklatıldı ve istemci girişi (ör. bir araç yürütme işlemini onaylama veya bir soruyu yanıtlama) bekleniyor.
-- `completed`: Etkileşim başarıyla tamamlandı ve çıkış kullanılabilir.
-- `failed`: Yürütme sırasında bir hata oluştu (ör. araç arızası veya sıklık sınırları).
-- `cancelled`: Bir istemci isteği yürütmeyi durdurdu.
+- `in_progress`: サーバーがインタラクションをアクティブに実行しています（コードの実行や調査など）。
+- `requires_action`: インタラクションが一時停止し、クライアントの入力（ツールの実行の確認や質問への回答など）を待機しています。
+- `completed`: インタラクションが正常に終了し、出力が利用可能です。
+- `failed`: 実行中にエラーが発生しました（ツールの障害やレート制限など）。
+- `cancelled`: クライアント リクエストにより実行が停止しました。
 
-### Kullanım alanları
+### ユースケース
 
-Arka planda yürütmeyi şu amaçlarla kullanabilirsiniz:
+バックグラウンド実行は、次の場合に使用します。
 
-- **Ajan yürütmeleri:** Kod yürütme, web'de gezinme veya alt ajan düzenleme (ör. `antigravity-preview-09-2026`) gerektiren görevler.
-- **Deep Research:** Birkaç dakika süren `deep-research-preview-04-2026` veya `deep-research-max-preview-04-2026` kullanılarak çalıştırılır.
-- **Uzun gerekçe:** Model düşünme adımlarının standart HTTP bağlantı sınırlarını aştığı görevler.
+- **エージェントの実行:** コード実行、ウェブ ブラウジング、サブエージェントのオーケストレーション（`antigravity-preview-09-2026` など）を必要とするタスク。
+- **Deep Research:** `deep-research-preview-04-2026` または `deep-research-max-preview-04-2026` を使用して実行されます。これには数分かかります。
+- **長い推論:** 拡張モデルの思考ステップが標準の HTTP 接続制限を超えるタスク。
+- **長いデコード（Gemini 4）:** `65,536` トークンを超える拡張補完を生成するタスク。`gemini-4-argon` では、[長いデコード](https://ai.google.dev/gemini-api/docs/long-decode?hl=ja)を使用して、`max_output_tokens` を最大 `1,048,576` トークンまで設定できます。
 
-## Sonuçları alma
+### バックグラウンド実行のデータの保持
 
-**Yoklama** veya **akış** kullanarak arka plan etkileşimi sonuçlarını alın.
+`background=True` が設定されている場合、サーバーはインタラクションをプロジェクトのストレージに保存するため、結果をポーリングまたはストリーミングできます。`store` パラメータを設定することで、インタラクションの保存期間を構成できます。
 
-### Yoklama deseni (engellemeyen)
+- **`store=True`（デフォルト）:** プロジェクトの永続ストレージに **7 日間**保存されます。
+- `store=False`:プロジェクトに **24 時間**（TTL）保存され、`GET` リクエストを使用して結果を取得できます。
 
-Yoklama, son duruma ulaşana kadar engellemeyen GET isteklerini kullanarak etkileşim durumunu düzenli olarak kontrol eder.
+## 結果を取得する
+
+**ポーリング**または**ストリーミング**を使用して、バックグラウンド インタラクションの結果を取得します。
+
+### ポーリング パターン（ブロックなし）
+
+ポーリングでは、非ブロッキング GET リクエストを使用して、完了状態に達するまでインタラクションのステータスを定期的に確認します。
 
 ### Python
 
@@ -293,9 +301,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### Yayın deseni
+### ストリーミング パターン
 
-Ağ kesintisi nedeniyle bağlantısı kesilen yayınlar, son alınan etkinlikten itibaren devam edebilir. Her delta, yükünde benzersiz bir `event_id` içerir. Bu kimliğin `last_event_id` olarak iletilmesi, akışı bu etkinlikten itibaren devam ettirir.
+ネットワークの中断によりストリームが切断された場合、最後に受信したイベントからストリーミングを再開できます。各デルタのペイロードには一意の `event_id` が含まれます。この ID を `last_event_id` として渡すと、そのイベントからストリームが再開されます。
 
 ### Python
 
@@ -500,14 +508,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Çok aşamalı etkileşimli görüşmeler
+## マルチターンの会話
 
-Sonraki etkileşimler, aşağıdaki kısıtlamalara tabi olarak `previous_interaction_id` kullanılarak arka plan görüşmesine bağlanabilir:
+後続のインタラクションは、次の制約に従って `previous_interaction_id` を使用してバックグラウンド会話にチェーンできます。
 
-1. **Etkin yürütmeler engellenir:** Bir sonraki etkileşimi `in_progress` durumundaki bir etkileşime bağlamak `400 Bad Request` hatası döndürür. Bir sonraki etkileşimi başlatmadan önce etkileşimin `completed` durumuna ulaşmasını bekleyin.
-2. **Yönetilen Aracılar için Ortam Parametresi:** Yönetilen Aracılar (ör. `antigravity-preview-09-2026`) için etkileşimler zincirlenirken isteklere hem `previous_interaction_id` hem de `environment` dahil edilmelidir.
+1. **アクティブな実行がブロックされる:** `in_progress` ステータスのインタラクションに後続のインタラクションをチェーンすると、`400 Bad Request` エラーが返されます。次のインタラクションを開始する前に、インタラクションが `completed` 状態になるまで待ちます。
+2. **マネージド エージェントの環境パラメータ:** マネージド エージェント（`antigravity-preview-09-2026` など）のインタラクションをチェーンする場合、リクエストには `previous_interaction_id` と `environment` の両方を含める必要があります。
 
-Aşağıdaki örneklerde etkileşimlerin nasıl zincirleneceği gösterilmektedir:
+次の例は、インタラクションを連結する方法を示しています。
 
 ### Python
 
@@ -717,12 +725,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## İptal ve silme
+## キャンセルと削除
 
-İptal etme ve silme isteklerini kullanarak çalışan yürütmeleri kontrol edin ve depolama alanını yönetin:
+キャンセル リクエストと削除リクエストを使用して、実行中の実行を制御し、ストレージを管理します。
 
-- **İptal (`POST /interactions/{id}/cancel`):** Çalışan görevi durdurur. Durum `cancelled` olarak değişir. Sunucudaki temizleme işlemleri, GET isteklerindeki durum güncellemelerinden önce küçük bir gecikmeye neden olabilir.
-- **Sil (`DELETE /interactions/{id}`):** Etkileşim kayıtlarını sunucudan kaldırır. Sonraki GET istekleri `404 Not Found` hatası döndürür.
+- **キャンセル（`POST /interactions/{id}/cancel`）:** 実行中のタスクを停止します。ステータスが `cancelled` に移行します。サーバーでのクリーンアップ アクションにより、GET リクエストでステータスが更新されるまでにわずかな遅延が発生することがあります。
+- **削除（`DELETE /interactions/{id}`）:** サーバーからインタラクション レコードを削除します。以降の GET リクエストは `404 Not Found` エラーを返します。
 
 ### Python
 
@@ -818,18 +826,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## Sonraki adımlar
+## 次のステップ
 
-- Oturum ve durum yönetimi hakkında bilgi edinmek için [Interactions API'ye genel bakış](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) başlıklı makaleyi inceleyin.
-- Gerçek zamanlı etkinlik güncellemeleri hakkında ayrıntılı bilgi için [Akış etkileşimleri](https://ai.google.dev/gemini-api/docs/streaming?hl=tr) kılavuzuna bakın.
-- Durum bilgili çok aşamalı etkileşimli ajanlar oluşturmak için [Yönetilen ajanlar hızlı başlangıç kılavuzu](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr)'nu inceleyin.
+- セッションと状態の管理については、[Interactions API の概要](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)をご覧ください。
+- リアルタイム イベントの更新の詳細については、[ストリーミング インタラクション](https://ai.google.dev/gemini-api/docs/streaming?hl=ja)のガイドをご覧ください。
+- [マネージド エージェントのクイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)で、ステートフル マルチターン エージェントを構築する。
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-09-24 UTC.
+最終更新日 2026-10-14 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-09-24 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-10-14 UTC。"],[],[]]

@@ -1,33 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=zh-TW
-fetched_at: 2026-10-12T07:06:34.611372+00:00
-title: "\u7db2\u5740\u80cc\u666f\u8cc7\u8a0a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=th
+fetched_at: 2026-10-19T05:50:02.585217+00:00
+title: "\u0e1a\u0e23\u0e34\u0e1a\u0e17 URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+Gemini 4 Argon พร้อมให้บริการแล้ว [ลองใช้เลย](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=th)
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-提供意見
+ส่งความคิดเห็น
 
-# 網址背景資訊
+# บริบท URL
 
-網址背景資訊工具可讓你以網址形式，為模型提供額外背景資訊。在要求中加入網址後，模型會存取這些網頁的內容 (只要網址類型未列於[限制一節](#limitations))，藉此提供更完善的回覆。
+เครื่องมือบริบท URL ช่วยให้คุณระบุบริบทเพิ่มเติมให้กับโมเดลในรูปแบบ URL ได้ การใส่ URL ในคำขอจะช่วยให้โมเดลเข้าถึงเนื้อหาจากหน้าเว็บเหล่านั้นได้ (ตราบใดที่ URL ไม่ใช่ประเภทที่ระบุไว้ในส่วน[ข้อจำกัด](#limitations)) เพื่อให้ข้อมูลและปรับปรุงการตอบกลับ
 
-網址脈絡工具適用於下列工作：
+เครื่องมือบริบท URL มีประโยชน์สำหรับงานต่างๆ เช่น
 
-- **擷取資料**：從多個網址擷取特定資訊，例如價格、名稱或重要發現。
-- **比較文件**：分析多份報表、文章或 PDF，找出差異並追蹤趨勢。
-- **統整及建立內容**：整合多個來源網址的資訊，生成準確的摘要、網誌文章或報告。
-- **分析程式碼和文件**：指向 GitHub 存放區或技術文件，說明程式碼、生成設定說明或回答問題。
+- **ดึงข้อมูล**: ดึงข้อมูลที่เฉพาะเจาะจง เช่น ราคา ชื่อ หรือผลการค้นพบที่สำคัญ
+  จาก URL หลายรายการ
+- **เปรียบเทียบเอกสาร**: วิเคราะห์รายงาน บทความ หรือ PDF หลายรายการเพื่อ
+  ระบุความแตกต่างและติดตามแนวโน้ม
+- **สังเคราะห์และสร้างเนื้อหา**: รวมข้อมูลจาก URL แหล่งที่มาหลายรายการเพื่อสร้างสรุปที่ถูกต้อง บล็อกโพสต์ หรือรายงาน
+- **วิเคราะห์โค้ดและเอกสาร**: ชี้ไปยังที่เก็บ GitHub หรือเอกสารทางเทคนิคเพื่ออธิบายโค้ด สร้างวิธีการตั้งค่า หรือตอบคำถาม
 
-以下範例說明如何比較不同網站的兩個食譜。
+ตัวอย่างต่อไปนี้แสดงวิธีเปรียบเทียบสูตรอาหาร 2 สูตรจากเว็บไซต์ต่างๆ
 
 ### Python
 
@@ -172,19 +174,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 運作方式
+## วิธีการทำงาน
 
-網址內容工具採用兩步驟的擷取程序，兼顧速度、成本和最新資料存取權。提供網址後，這項工具會先嘗試從內部索引快取擷取內容。這項功能可做為經過高度最佳化的快取。如果網址不在索引中 (例如網頁剛發布)，工具會自動改為即時擷取。這會直接存取網址，即時擷取內容。
+เครื่องมือบริบท URL ใช้กระบวนการดึงข้อมูล 2 ขั้นตอนเพื่อสร้างสมดุลระหว่างความเร็ว ต้นทุน และการเข้าถึงข้อมูลล่าสุด เมื่อคุณระบุ URL เครื่องมือจะพยายามดึงเนื้อหาจากแคชดัชนีภายในก่อน ซึ่งทำหน้าที่เป็นแคชที่ได้รับการเพิ่มประสิทธิภาพอย่างสูง หาก URL ไม่พร้อมใช้งานในดัชนี (เช่น หากเป็นหน้าเว็บใหม่มาก) เครื่องมือจะกลับไปดึงข้อมูลแบบสดโดยอัตโนมัติ
+ซึ่งจะเข้าถึง URL โดยตรงเพื่อดึงเนื้อหาแบบเรียลไทม์
 
-## 與其他工具搭配使用
+## การใช้ร่วมกับเครื่องมืออื่นๆ
 
-您可以將網址內容工具與其他工具結合，建立更強大的工作流程。
+คุณสามารถใช้เครื่องมือบริบท URL ร่วมกับเครื่องมืออื่นๆ เพื่อสร้างเวิร์กโฟลว์ที่มีประสิทธิภาพมากขึ้น
 
-[Gemini 3 模型](#supported-models)支援結合內建工具 (例如網址背景資訊) 和自訂工具 (函式呼叫)。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
+[โมเดล Gemini 3](#supported-models) รองรับการใช้เครื่องมือในตัว
+(เช่น บริบท URL) ร่วมกับเครื่องมือที่กำหนดเอง (การเรียกใช้ฟังก์ชัน) ดูข้อมูลเพิ่มเติมได้ในหน้าการใช้เครื่องมือร่วมกัน
 
-### 以搜尋結果為基準
+### การเชื่อมต่อแหล่งข้อมูลกับ Search
 
-同時啟用網址背景資訊和 [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)後，模型就能使用搜尋功能在網路上尋找相關資訊，然後使用網址背景資訊工具深入瞭解找到的網頁。這種做法非常適合需要廣泛搜尋，並深入分析特定網頁的提示。
+เมื่อเปิดใช้ทั้งบริบท URL และ
+[การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/grounding?hl=th) โมเดลจะใช้ความสามารถในการค้นหาเพื่อค้นหา
+ข้อมูลที่เกี่ยวข้องทางออนไลน์ แล้วใช้เครื่องมือบริบท URL เพื่อทำความเข้าใจหน้าเว็บที่พบในเชิงลึกมากขึ้น แนวทางนี้มีประสิทธิภาพสำหรับพรอมต์ที่ต้องใช้ทั้งการค้นหาแบบกว้างและการวิเคราะห์หน้าเว็บที่เฉพาะเจาะจงในเชิงลึก
 
 ### Python
 
@@ -305,19 +311,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 瞭解回覆內容
+## ทำความเข้าใจการตอบกลับ
 
-模型使用網址背景資訊工具時，文字回覆會包含文字內容區塊的內嵌`url_citation`註解。每則註解都會將回覆文字的某個片段 (透過 `start_index` 和 `end_index`) 連結至衍生來源網址。這是應用程式中顯示引文的主要方式，請參閱[上方的主要範例](#get-started)，瞭解如何擷取引文。
+เมื่อโมเดลใช้เครื่องมือบริบท URL การตอบกลับที่เป็นข้อความจะมีคำอธิบายประกอบ `url_citation` แบบอินไลน์ในบล็อกเนื้อหาข้อความ คำอธิบายประกอบแต่ละรายการจะลิงก์ส่วนของข้อความตอบกลับ (ผ่าน `start_index` และ `end_index`) กับ URL แหล่งที่มา นี่คือวิธีหลักในการแสดงคำอ้างอิงในแอปพลิเคชันของคุณ
+โปรดดูวิธีแยกคำอ้างอิงใน[ตัวอย่างหลักด้านบน](#get-started)
 
-回覆中也會納入 `url_context_result` 步驟，其中含有各網址擷取嘗試的中繼資料 (狀態、擷取的網址)。這項功能主要用於偵錯。
+การตอบกลับจะมีขั้นตอน `url_context_result` พร้อมข้อมูลเมตาเกี่ยวกับการพยายามดึงข้อมูล URL แต่ละครั้ง (สถานะ, URL ที่ดึงข้อมูล) ซึ่งมีประโยชน์สำหรับการแก้ไขข้อบกพร่องเป็นหลัก
 
-### 安全檢查
+### การตรวจสอบความปลอดภัย
 
-系統會對網址執行內容審查檢查，確認網址符合安全標準。如果網址未通過這項檢查，對應的`url_context_result`步驟會顯示`status`的`"unsafe"`。
+ระบบจะตรวจสอบการกลั่นกรองเนื้อหาใน URL เพื่อยืนยันว่า URL เป็นไปตามมาตรฐานความปลอดภัย หาก URL ไม่ผ่านการตรวจสอบนี้ ขั้นตอนที่เกี่ยวข้อง
+`url_context_result` จะแสดง `status` เป็น `"unsafe"`
 
-### 符記數量
+### จำนวนโทเค็น
 
-系統會將從提示中指定網址擷取的內容，計為輸入權杖。您可以在互動的 `usage` 物件中查看權杖數量。範例如下：
+ระบบจะนับเนื้อหาที่ดึงมาจาก URL ที่คุณระบุในพรอมต์เป็นส่วนหนึ่งของโทเค็นอินพุต คุณดูจำนวนโทเค็นได้ในออบเจ็กต์ `usage` ของการโต้ตอบ ตัวอย่างเช่น
 
 ```
 'usage': {
@@ -331,57 +339,62 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-每個權杖的價格取決於使用的模型，詳情請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)頁面。
+ราคาต่อโทเค็นจะขึ้นอยู่กับโมเดลที่ใช้ โปรดดูรายละเอียดในหน้าราคา
 
-## 支援的模型
+## โมเดลที่รองรับ
 
-| 模型 | 網址背景資訊 |
+| รุ่น | บริบท URL |
 | --- | --- |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs/models/gemini-4-argon?hl=th) | ✔️ |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash?hl=th) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=th) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=th) | ✔️ |
+| [Gemini 3.1 Pro (เวอร์ชันทดลอง)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th) | ✔️ |
+| [Gemini 3 Flash (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th) | ✔️ |
 
-## 最佳做法
+## แนวทางปฏิบัติแนะนำ
 
-- **提供具體網址**：為獲得最佳結果，請提供您希望模型分析的內容的直接網址。模型只會從您提供的網址擷取內容，不會從巢狀連結擷取任何內容。
-- **檢查存取方式**：確認提供的網址不會導向需要登入或位於付費牆後的網頁。
-- **使用完整網址**：提供完整網址，包括通訊協定 (例如：https://www.google.com，而非只有 google.com)。
+- **ระบุ URL ที่เฉพาะเจาะจง**: เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด ให้ระบุ URL โดยตรงไปยัง
+  เนื้อหาที่ต้องการให้โมเดลวิเคราะห์ โมเดลจะดึงเนื้อหาจาก URL ที่คุณระบุเท่านั้น ไม่ดึงเนื้อหาจากลิงก์ที่ซ้อนกัน
+- **ตรวจสอบการเข้าถึง**: ตรวจสอบว่า URL ที่คุณระบุไม่ได้นำไปยัง
+  หน้าเว็บที่ต้องเข้าสู่ระบบหรืออยู่หลังเพย์วอลล์
+- **ใช้ URL ที่สมบูรณ์**: ระบุ URL แบบเต็ม รวมถึงโปรโตคอล
+  (เช่น https://www.google.com แทนที่จะเป็น google.com)
 
-## 限制
+## ข้อจำกัด
 
-- 要求限制：這項工具每次最多可處理 20 個網址。
-- 網址內容大小：從單一網址擷取的內容大小上限為 34 MB。
-- 公開存取權：網址必須可在網路上公開存取。
-  系統不支援本機主機位址 (例如 localhost、127.0.0.1)、私人網路和通道服務 (例如 ngrok、pinggy)。
+- ขีดจำกัดคำขอ: เครื่องมือสามารถประมวลผล URL ได้สูงสุด 20 รายการต่อคำขอ
+- ขนาดเนื้อหา URL: ขนาดสูงสุดของเนื้อหาที่ดึงมาจาก URL เดียวคือ 34 MB
+- การเข้าถึงแบบสาธารณะ: URL ต้องเข้าถึงได้แบบสาธารณะบนเว็บ
+  ระบบไม่รองรับที่อยู่ localhost (เช่น localhost, 127.0.0.1), เครือข่ายส่วนตัว และบริการทันเนล (เช่น ngrok, pinggy)
 
-### 支援及不支援的內容類型
+### ประเภทเนื้อหาที่รองรับและไม่รองรับ
 
-這項工具可從下列內容類型的網址中擷取內容：
+เครื่องมือสามารถแยกเนื้อหาจาก URL ที่มีประเภทเนื้อหาต่อไปนี้
 
-- 文字 (text/html、application/json、text/plain、text/xml、text/css、
-  text/javascript、text/csv、text/rtf)
-- 圖片 (image/png、image/jpeg、image/bmp、image/webp)
+- ข้อความ (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
+- รูปภาพ (image/png, image/jpeg, image/bmp, image/webp)
 - PDF (application/pdf)
 
-系統**不**支援下列內容類型：
+ระบบ**ไม่** รองรับเนื้อหาประเภทต่อไปนี้
 
-- 付費牆內容
-- YouTube 影片 (請參閱[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，瞭解如何處理 YouTube 網址)
-- Google Workspace 檔案，例如 Google 文件或試算表
-- 影片和音訊檔案
+- เนื้อหาเพย์วอลล์
+- วิดีโอ YouTube (ดู
+  [การทำความเข้าใจวิดีโอ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=th#youtube)เพื่อเรียนรู้วิธีประมวลผล URL ของ YouTube
+  )
+- ไฟล์ Google Workspace เช่น Google เอกสารหรือชีต
+- ไฟล์วิดีโอและเสียง
 
-提供意見
+ส่งความคิดเห็น
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-上次更新時間：2026-10-09 (世界標準時間)。
+อัปเดตล่าสุด 2026-10-13 UTC
 
-想進一步說明嗎？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-10-09 (世界標準時間)。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-10-13 UTC"],[],[]]

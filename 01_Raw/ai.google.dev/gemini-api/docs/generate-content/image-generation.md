@@ -1,119 +1,115 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=tr
-fetched_at: 2026-10-12T06:55:55.399112+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=de
+fetched_at: 2026-10-19T05:48:03.115308+00:00
 title: "Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-Geri bildirim gönderin
+Feedback geben
 
-# Nano Banana ile görüntü üretme
+# Bildgenerierung mit Nano Banana
 
-Tam işlevli, kullanıcı arayüzü eksiksiz uygulamaların prototipini oluşturmak için istem girin ve Nano Banana 2'nin gerçek dünya araçları, verileri ve Gemini ekosistemiyle entegre edildiğini görün. Üstelik tek bir kod satırı yazmadan.
+Erstellen Sie per Prompt Prototypen für voll funktionsfähige Apps mit vollständiger Benutzeroberfläche und sehen Sie, wie Nano Banana 2 in reale Tools, Daten und das Gemini-Ökosystem integriert ist. Und das alles, bevor Sie eine einzige Zeile Code schreiben.
 
-- [Nano Banana 2 uygulamasını deneyin](https://aistudio.google.com/apps/bundled/pet_passport?hl=tr)
-- Dilerseniz istemleri kullanarak kendi uygulamanızı oluşturabilirsiniz:
+- [Nano Banana 2-App ausprobieren](https://aistudio.google.com/apps/bundled/pet_passport?hl=de)
+- Sie können auch eigene Prompts erstellen:
 
-- ![dergi](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![geri yükle](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![muz](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![kafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![makale](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![köpek](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![izometrik](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![dergi](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![Zeitschrift](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![London](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![Wiederherstellen](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![Banane](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![Artikel](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![Hund](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![isometrisch](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![Zeitschrift](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Nano Banana 2 tarafından üretildi
+  Von Nano Banana 2 generiert
 
-  **İstem:** "Parlak bir dergi kapağının fotoğrafı. Minimalist mavi kapakta büyük ve kalın Nano Banana yazıyor. Metin, serif yazı tipinde ve görünümü dolduruyor. Başka metin yok. Metnin önünde, şık ve minimalist bir elbise giymiş bir kişinin portresi var. Odak noktası olan 2 rakamını eğlenceli bir şekilde tutuyor.
+  **Prompt:** „Ein Foto eines Hochglanzmagazin-Covers, das minimalistische blaue Cover hat die großen, fettgedruckten Wörter Nano Banana. Der Text ist in einer Serifenschriftart und füllt die Ansicht aus. Kein weiterer Text. Vor dem Text ist ein Porträt einer Person in einem eleganten und minimalistischen Kleid zu sehen. Sie hält spielerisch die Zahl 2, die den Schwerpunkt bildet.
     
-  Köşeye barkodla birlikte sayı ve "Şubat 2026" tarihini ekleyin. Dergi, tasarımcı mağazasında turuncu sıvalı bir duvarın önündeki rafta duruyor."
+  Füge die Ausgabennummer und das Datum „Feb 2026“ in der Ecke zusammen mit einem Barcode hinzu. Das Magazin liegt in einem Designergeschäft auf einem Regal vor einer orangefarbenen verputzten Wand.“
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=tr)'da [profesyonel ürün çekimleri](#4_product_mockups_commercial_photography) oluşturma
-- ![londra](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  [Professionelle Produktfotos](#4_product_mockups_commercial_photography) in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=de) erstellen
+- ![London](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Nano Banana Pro ile üretildi
+  Mit Nano Banana Pro generiert
 
-  **İstem:** "Londra'nın en ikonik simge yapılarını ve mimari unsurlarını içeren, 45 derecelik yukarıdan bakış açılı net bir izometrik minyatür 3D çizgi film sahnesi oluştur. Gerçekçi PBR malzemeleri ve yumuşak, gerçekçi ışıklandırma ve gölgelerle yumuşak, zarif dokular kullanın. Yoğun bir atmosferik ruh hali oluşturmak için mevcut hava koşullarını doğrudan şehir ortamına entegre edin. Yumuşak ve tek renkli bir arka planla temiz ve minimalist bir kompozisyon kullan. En üstte ortada büyük ve kalın harflerle "Londra" başlığını, altında belirgin bir hava durumu simgesini, ardından tarihi (küçük metin) ve sıcaklığı (orta boy metin) yerleştirin. Tüm metinler, tutarlı aralıklarla ortalanmalı ve binaların üst kısımlarıyla hafifçe çakışabilir."
+  **Prompt:** „Erstelle eine klare, isometrische 3D-Miniatur-Cartoon-Szene von London aus der 45°-Draufsicht, die die bekanntesten Sehenswürdigkeiten und architektonischen Elemente der Stadt zeigt. Verwende weiche, feine Texturen mit realistischen PBR-Materialien und sanfter, lebensechter Beleuchtung und Schatten. Integrieren Sie die aktuellen Wetterbedingungen direkt in die Stadtumgebung, um eine immersive atmosphärische Stimmung zu erzeugen. Verwende eine klare, minimalistische Komposition mit einem weichen, einfarbigen Hintergrund. Platziere oben in der Mitte den Titel „London“ in großer Schrift im Fettdruck, darunter ein auffälliges Wettersymbol, dann das Datum (kleine Schrift) und die Temperatur (mittelgroße Schrift). Der gesamte Text muss zentriert sein und einen einheitlichen Abstand haben. Er darf die Oberseiten der Gebäude leicht überlappen.“
 
-  [Arama temellendirmesi](#use-with-grounding) hakkında daha fazla bilgi edinin ve [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=tr)'da deneyin.
-- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  Weitere Informationen zur [Fundierung mit der Google Suche](#use-with-grounding) und zum Ausprobieren in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=de)
+- ![Quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Nano Banana 2 tarafından üretildi
+  Von Nano Banana 2 generiert
 
-  **İstem:** "Görsel arama kullanarak parlak bir ketsal kuşunun doğru resimlerini bul. Bu kuşun, yukarıdan aşağıya doğal bir renk geçişi ve minimal bir kompozisyonla 3:2 oranında güzel bir duvar kağıdını oluştur."
+  **Prompt:** „Finde über die Bildersuche Bilder, die einen Quetzal genau darstellen. Erstelle ein schönes Hintergrundbild im Format 3:2 von diesem Vogel mit einem natürlichen Farbverlauf von oben nach unten und einer minimalistischen Komposition.“
 
-  Nano Banana 2 ile Google [Görsel Arama](#image-search)'yı kullanın. [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=tr)'da deneyin.
-- ![muz](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  Verwenden Sie die Google [Bildersuche](#image-search) als Fundierung für Nano Banana 2. In [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=de) testen
+- ![Banane](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Nano Banana Pro ile üretildi
+  Mit Nano Banana Pro generiert
 
-  **İstem:** "Bu logoyu muz kokulu bir parfümün üst düzey reklamına yerleştir. Logo, şişeye mükemmel şekilde entegre edilmiş."
+  **Prompt:** „Platziere dieses Logo auf einer hochwertigen Anzeige für ein Parfüm mit Bananenduft. Das Logo ist perfekt in die Flasche integriert.“
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=tr)'da Nano Banana'nın [yüksek kaliteli ayrıntı koruma](#5_high-fidelity_detail_preservation) özelliğini deneyin.
-- ![kafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  Testen Sie die [hohe Detailtreue](#5_high-fidelity_detail_preservation) von Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=de).
+- ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Nano Banana Pro ile üretildi
+  Mit Nano Banana Pro generiert
 
-  **İstem:** "Kahvaltı servisi yapan kalabalık bir kafedeki günlük bir sahnenin fotoğrafı. Ön planda mavi saçlı bir anime karakteri var. Kişilerden biri kalemle çizilmiş, diğeri ise kil animasyon karakteri.
+  **Prompt:** „Ein Foto einer Alltagsszene in einem gut besuchten Café, in dem Frühstück serviert wird. Im Vordergrund ist ein Anime-Mann mit blauen Haaren zu sehen, eine der Personen ist eine Bleistiftskizze, eine andere ist eine Claymation-Figur.“
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=tr)'da Nano Banana ile farklı [sanat stillerini](#3_style_transfer) deneyin.
-- ![makale](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  Mit Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=de) verschiedene [künstlerische Stile](#3_style_transfer) ausprobieren
+- ![Artikel](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Nano Banana Pro ile üretildi
+  Mit Nano Banana Pro generiert
 
-  **İstem:** "Gemini 3 Flash'in kullanıma sunulmasının nasıl karşılandığını bulmak için aramayı kullan. Bu bilgileri kullanarak konuyla ilgili kısa bir makale yaz (başlıklarla birlikte). Makalenin, tasarıma odaklanan parlak bir dergide göründüğü şeklinin fotoğrafını döndür. Bu resimde, Gemini 3 Flash ile ilgili makalenin yer aldığı, katlanmış tek bir sayfa gösteriliyor. Bir hero fotoğrafı. Başlık, serif yazı tipiyle yazılmış."
+  **Prompt:** „Finde über die Suche heraus, wie die Einführung von Gemini 3 Flash aufgenommen wurde. Verfasse anhand dieser Informationen einen kurzen Artikel mit Überschriften. Gib ein Foto des Artikels zurück, wie er in einem designorientierten Hochglanzmagazin erschienen ist. Es ist ein Foto einer einzelnen umgeklappten Seite, auf der der Artikel über Gemini 3 Flash zu sehen ist. Ein Hero-Foto. Headline in serif."
 
-  [Arama](#use-with-grounding) sonuçlarından [doğru metinler](#3_accurate_text_in_images) oluşturun. [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=tr)'da Nano Banana'yı deneyin
-- ![köpek](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  [Präzisen Text](#3_accurate_text_in_images) aus der [Suche](#use-with-grounding) generieren. Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=de) ausprobieren
+- ![Hund](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Nano Banana Pro ile üretildi
+  Mit Nano Banana Pro generiert
 
-  **İstem:** "Sevimli bir köpeği temsil eden simge. Arka plan beyaz olmalı. Simgeleri renkli ve dokunma hissi uyandıran 3D tarzında oluştur. Metin yok."
+  **Prompt:** „Ein Symbol, das einen niedlichen Hund darstellt. Der Hintergrund ist weiß. Erstelle die Symbole in einem farbenfrohen und haptischen 3D-Stil. Kein Text.“
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=tr)'da Nano Banana ile [simge, çıkartma ve öğe](#2_stylized_illustrations_stickers) oluşturma
-- ![izometrik](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  Mit Nano Banana in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=de) [Symbole, Sticker und Assets](#2_stylized_illustrations_stickers) erstellen
+- ![isometrisch](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Nano Banana 2 tarafından üretildi
+  Von Nano Banana 2 generiert
 
-  **İstem:** "Tamamen izometrik bir fotoğraf oluştur. Bu bir minyatür değil, sadece mükemmel bir şekilde izometrik olan bir fotoğraf. Bu, güzel bir modern bahçenin fotoğrafı. Büyük bir 2 şeklinde havuz ve "Nano Banana 2" yazısı var."
+  **Prompt:** „Erstelle ein Foto, das perfekt isometrisch ist. Es ist keine Miniatur, sondern ein Foto, das zufällig perfekt isometrisch ist. Es ist ein Foto eines schönen modernen Gartens. Es gibt einen großen Pool in Form einer 2 und den Text „Nano Banana 2“.“
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=tr)'da [gerçekçi görüntü üretme](#1_photorealistic_scenes) özelliğini deneyin
+  [Fotorealistische Bildgenerierung](#1_photorealistic_scenes) in [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=de) testen
 
-**Nano Banana**, Gemini'ın yerel görüntü üretme özelliklerinin adıdır.
-Gemini, metin, resim, video veya bunların kombinasyonuyla etkileşimli olarak resim oluşturabilir ve işleyebilir. Bu sayede, görselleri benzeri görülmemiş bir kontrolle oluşturabilir, düzenleyebilir ve yineleyebilirsiniz.
+**Nano Banana** ist der Name für die nativen Funktionen zur Bildgenerierung von Gemini.
+Gemini kann Bilder dialogorientiert generieren und verarbeiten, und zwar mit Text, Bildern, Videos oder einer Kombination daraus. So können Sie visuelle Elemente mit beispielloser Kontrolle erstellen, bearbeiten und iterieren.
 
-## Model seçimi
+## Modellauswahl
 
-Nano Banana, Gemini API'de bulunan aşağıdaki modelleri ifade eder:
+Nano Banana bezieht sich auf die folgenden Modelle, die in der Gemini API verfügbar sind:
 
-- **Nano Banana 2.1 ([Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=tr))
-  (`gemini-nano-banana-2.1`):** Nano Banana 2'nin güncellenmiş sürümü. Görüntü üretme ve
-  sohbete dayalı düzenleme için kullanılan birincil yüksek verimli modeldir. 1.000, 2.000 ve 4.000 çözünürlükte daha iyi görsel kalite, metin oluşturma, çok aşamalı etkileşim tutarlılığı ve Google Arama'da temellendirme sunarken Flash düzeyinde hız ve maliyet verimliliğini korur.
-- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=tr))
-  (`gemini-3.1-flash-lite-image`):** Hız ve maliyetin temel operasyonel kısıtlamalar olduğu durumlarda hız ve ölçek için tasarlanmış en hızlı ve en ucuz Gemini görüntü modelidir. Birden fazla referans girişi veya çok aşamalı etkileşimli sıralı düzenleme için optimize edilmemiştir.
-- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=tr))
-  (`gemini-3.1-flash-image`):** Hızı 4K görüntü üretimi, dünya bilgisi ve çok referanslı görüntü tutarlılığı ile dengeleyen, önceki nesil yüksek verimli iş modeli. Tüm yeni projelerde Nano Banana 2.1'in kullanılması önerilir.
-- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=tr))
-  (`gemini-3-pro-image`):** En karmaşık görsel görevler için premium seçenek. En yüksek düzeyde dünya bilgisi, gelişmiş yerelleştirme, doğru marka tutarlılığı ve hassas yaratıcı kontrol sunar.
-- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=tr))
-  (`gemini-2.5-flash-image`):** Nano Banana serisinin eski öncüsü.
-  Güvenilir bir araç olsa da gelişmiş kalite, daha hızlı üretim ve daha düşük API fiyatlandırması için Nano Banana 2 Lite'a geçiş yapmanız önerilir.
+- **Nano Banana 2.1 ([Gemini Nano Banana 2.1](https://ai.google.dev/gemini-api/docs/models/gemini-nano-banana-2.1?hl=de)) (`gemini-nano-banana-2.1`):** Ein Update für Nano Banana 2, das als primäres, hocheffizientes Modell für die Bildgenerierung und die Bearbeitung im Dialog dient. Es bietet die Geschwindigkeit und Kosteneffizienz von Flash, liefert aber eine verbesserte visuelle Qualität, Textrendering, Konsistenz über mehrere Runden und Fundierung in der Google Suche bei Auflösungen von 1K, 2K und 4K.
+- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=de)) (`gemini-3.1-flash-lite-image`):** Das schnellste und günstigste Gemini-Bildmodell, das für Geschwindigkeit und Skalierbarkeit entwickelt wurde, wenn Geschwindigkeit und Kosten die primären operativen Einschränkungen sind. Nicht für mehrere Referenzeingaben oder sequenzielle Bearbeitung in mehreren Schritten optimiert.
+- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=de))
+  (`gemini-3.1-flash-image`):** Das hocheffiziente Arbeitstier der vorherigen Generation, das Geschwindigkeit mit 4K-Generierung, Weltwissen und Konsistenz bei mehreren Referenzbildern verbindet. Für alle neuen Projekte wird die Verwendung von Nano Banana 2.1 empfohlen.
+- **Nano Banana Pro ([Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=de))
+  (`gemini-3-pro-image`):** Die Premium-Option für die komplexesten visuellen Aufgaben. Sie bietet das höchste Maß an Weltwissen, erweiterte Lokalisierung, genaue Markenkonsistenz und präzise kreative Kontrolle.
+- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=de)) (`gemini-2.5-flash-image`):** Der ursprüngliche Pionier der Nano Banana-Serie.
+  Es ist zwar ein zuverlässiges Modell, aber wir empfehlen, zu Nano Banana 2 Lite zu migrieren, um von einer besseren Qualität, schnelleren Generierungsgeschwindigkeiten und niedrigeren API-Preisen zu profitieren.
 
-Üretilen tüm görüntülerde [SynthID filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur.
+Alle generierten Bilder enthalten ein [SynthID-Wasserzeichen](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=de).
 
-## Görüntü üretme (metinden görüntü oluşturma)
+## Bildgenerierung (Text-zu-Bild)
 
 ### Python
 
@@ -170,7 +166,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -302,15 +298,15 @@ curl -s -X POST \
   }'
 ```
 
-## Görüntü düzenleme (metin ve görüntüden görüntüye)
+## Bildbearbeitung (Text-und-Bild-zu-Bild)
 
-**Hatırlatma**: Yüklediğiniz tüm resimlerle ilgili gerekli haklara sahip olduğunuzdan emin olun.
-Başkalarının haklarını ihlal eden içerikler (ör. yanıltıcı, taciz edici veya zarar verici videolar ya da görüntüler) üretmeyin. Bu üretken yapay zeka hizmetini kullanımınız [Yasaklanan Kullanım Politikamıza](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) tabidir.
+**Zur Erinnerung**: Sie müssen die erforderlichen Rechte an den Bildern haben, die Sie hochladen möchten.
+Erstellen Sie keine Inhalte, durch die die Rechte anderer verletzt werden, einschließlich Videos oder Bildern, durch die andere getäuscht, belästigt oder geschädigt werden. Ihre Verwendung dieses auf generativer KI basierenden Dienstes unterliegt unserer [Richtlinie zur unzulässigen Nutzung](https://policies.google.com/terms/generative-ai/use-policy?hl=de).
 
-Resim sağlayın ve metin istemlerini kullanarak öğe ekleyin, kaldırın veya değiştirin, stili değiştirin ya da renk derecelendirmesini ayarlayın.
+Sie können ein Bild bereitstellen und Text-Prompts verwenden, um Elemente hinzuzufügen, zu entfernen oder zu ändern, den Stil zu ändern oder die Farbkorrektur anzupassen.
 
-Aşağıdaki örnekte, `base64` kodlu resimlerin nasıl yükleneceği gösterilmektedir.
-Birden fazla resim, daha büyük yükler ve desteklenen MIME türleri için [Resim anlama](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) sayfasını inceleyin.
+Im folgenden Beispiel wird das Hochladen von `base64`-codierten Bildern veranschaulicht.
+Informationen zu mehreren Bildern, größeren Nutzlasten und unterstützten MIME-Typen finden Sie auf der Seite [Bildverständnis](https://ai.google.dev/gemini-api/docs/image-understanding?hl=de).
 
 ### Python
 
@@ -385,7 +381,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -553,9 +549,9 @@ curl -s -X POST \
     }"
 ```
 
-### Çok aşamalı etkileşimli görüntü düzenleme
+### Multi-Turn-Bildbearbeitung
 
-Görsel oluşturmaya ve düzenlemeye sohbet ederek devam edin. Resimler üzerinde yineleme yapmak için sohbet veya çok turlu görüşme önerilir. Aşağıdaki örnekte, fotosentez hakkında bir infografik oluşturma istemi gösterilmektedir.
+Du kannst weiterhin Bilder im Dialog generieren und bearbeiten. Chat- oder Multi-Turn-Konversationen sind die empfohlene Methode, um Bilder zu iterieren. Im folgenden Beispiel wird ein Prompt zum Generieren einer Infografik zur Fotosynthese gezeigt.
 
 ### Python
 
@@ -619,7 +615,7 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -787,11 +783,11 @@ curl -s -X POST \
   }'
 ```
 
-![Fotosentez hakkında yapay zekayla üretilmiş infografik](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=tr)
+![KI-generierte Infografik zur Fotosynthese](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=de)
 
-Fotosentez hakkında yapay zekayla üretilmiş infografik
+KI-generierte Infografik zur Fotosynthese
 
-Ardından, grafikteki dili İspanyolca olarak değiştirmek için aynı sohbeti kullanabilirsiniz.
+Anschließend können Sie im selben Chat die Sprache der Grafik in Spanisch ändern.
 
 ### Python
 
@@ -802,7 +798,10 @@ resolution = "2K" # "1K", "2K", "4K"
 
 response = chat.send_message(message,
     config=types.GenerateContentConfig(
-        response_format={"image": {aspect_ratio: aspect_ratio,                 image_size: resolution}},
+        image_config=types.ImageConfig(
+            aspect_ratio=aspect_ratio,
+            image_size=resolution
+        ),
     ))
 
 for part in response.parts:
@@ -823,12 +822,10 @@ let response = await chat.sendMessage({
   message,
   config: {
     responseModalities: ['TEXT', 'IMAGE'],
-    responseFormat: {
-    image: {
+    imageConfig: {
       aspectRatio: aspectRatio,
       imageSize: resolution,
-    }
-  },
+    },
     tools: [{googleSearch: {}}],
   },
 });
@@ -845,7 +842,7 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-### Go
+### Ok
 
 ```
 message = "Update this infographic to be in Spanish. Do not change any other elements of the image."
@@ -975,47 +972,43 @@ curl -s -X POST \
     "tools": [{"google_search": {}}],
     "generationConfig": {
       "responseModalities": ["TEXT", "IMAGE"],
-      "responseFormat": {
-    "image": {
+      "imageConfig": {
         "aspectRatio": "16:9",
         "imageSize": "2K"
       }
-  }
     }
   }'
 ```
 
-![İspanyolca fotosentez infografiği (yapay zekayla üretilmiş)](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=tr)
+![KI-generierte Infografik zur Fotosynthese auf Spanisch](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=de)
 
-İspanyolca fotosentez infografiği oluştur
+KI-generierte Infografik zur Fotosynthese auf Spanisch
 
-## Nano Banana'nın özellikleri
+## Funktionen von Nano Banana
 
-Nano Banana modelleri, son teknoloji ürünü görüntü üretme ve düzenleme özellikleri sunar. Gemini
-Nano Banana 2.1 ve Gemini 3.1 Flash Image, hız ve yüksek hacimli kullanım alanları için, Gemini 3 Pro Image ise profesyonel öğe üretimi için optimize edilmiştir.
-Gelişmiş akıl yürütme yoluyla en zorlu iş akışlarının üstesinden gelmek için tasarlanan bu modeller, karmaşık ve çok aşamalı etkileşim içerik oluşturma ve değiştirme görevlerinde üstün performans gösterir.
+Nano Banana-Modelle bieten hochmoderne Bildgenerierung und ‑bearbeitung. Gemini Nano Banana 2.1 und Gemini 3.1 Flash Image sind für Geschwindigkeit und Anwendungsfälle mit hohem Volumen optimiert, während Gemini 3 Pro Image für die professionelle Asset-Produktion optimiert ist.
+Sie wurden entwickelt, um die anspruchsvollsten Workflows durch logisches Schlussfolgern zu bewältigen, und eignen sich hervorragend für komplexe, mehrstufige Erstellungs- und Änderungsaufgaben.
 
-- **Yüksek çözünürlüklü çıktı**: 1K, 2K ve 4K görseller için yerleşik üretim özellikleri.
-  - **Gemini 3.1 Flash Image**, daha küçük olan 512 (0,5K) çözünürlüğü ekler (Gemini Nano Banana 2.1'de desteklenmez).
-  - **Gemini 3.1 Flash Lite Image** yalnızca 1K çözünürlüğü destekler.
-- **Gelişmiş metin oluşturma**: İnfografikler, menüler, diyagramlar ve pazarlama öğeleri için okunaklı ve stilize metinler oluşturabilir.
-- **Google Arama ile temellendirme**: Model, Google Arama'yı bir araç olarak kullanarak gerçekleri doğrulayabilir ve gerçek zamanlı verilere (ör. güncel hava durumu haritaları, borsa grafikleri, son olaylar) dayalı görüntüler oluşturabilir.
-  - **Gemini 3.1 Flash Lite Image modeli tarafından desteklenmez.**
-  - **Gemini Nano Banana 2.1 ve Gemini 3.1 Flash Image**, Google Web Arama'nın yanı sıra Görseller için Google Arama ile Temellendirme'nin entegrasyonunu ekler.
-- **Düşünme modu**: Model, karmaşık istemleri değerlendirmek için "düşünme" sürecini kullanır. Son yüksek kaliteli çıktıyı üretmeden önce kompozisyonu iyileştirmek için geçici "düşünce resimleri" oluşturur (arka uçta görünür ancak ücretlendirilmez).
-- **En fazla 14 referans görsel**: Son resmi oluşturmak için en fazla 14 referans görseli karıştırın.
-- **Yeni en boy oranları**: Gemini 3.1 Flash Lite Image, `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`
-  [en boy oranlarını](#aspect-ratios-and-image-size) ekler.
+- **Hochauflösende Ausgabe**: Integrierte Funktionen zur Generierung von 1K-, 2K- und 4K-Bildern.
+  - **Gemini 3.1 Flash Image** fügt die kleinere Auflösung 512 (0,5K) hinzu (nicht unterstützt auf Gemini Nano Banana 2.1).
+  - **Gemini 3.1 Flash Lite Image** unterstützt nur die 1K-Auflösung.
+- **Erweitertes Text-Rendering**: Kann lesbaren, stilisierten Text für Infografiken, Menüs, Diagramme und Marketing-Assets generieren.
+- **Fundierung mit der Google Suche**: Das Modell kann die Google Suche als Tool verwenden, um Fakten zu überprüfen und Bilder basierend auf Echtzeitdaten zu generieren (z.B. aktuelle Wetterkarten, Börsencharts, aktuelle Ereignisse).
+  - **Wird vom Gemini 3.1 Flash Lite Image-Modell nicht unterstützt.**
+  - **Gemini Nano Banana 2.1 und Gemini 3.1 Flash Image** bieten neben der Websuche auch die Integration der Fundierung mit der Google Bildersuche.
+- **Thinking-Modus**: Das Modell verwendet einen „Thinking“-Prozess, um komplexe Prompts zu durchdenken. Es generiert Zwischenbilder (im Backend sichtbar, aber nicht in Rechnung gestellt), um die Komposition zu verfeinern, bevor die endgültige Ausgabe in hoher Qualität erstellt wird.
+- **Bis zu 14 Referenzbilder**: Sie können bis zu 14 Referenzbilder kombinieren, um das endgültige Bild zu erstellen.
+- **Neue Seitenverhältnisse**: Gemini 3.1 Flash Lite Image bietet die [Seitenverhältnisse](#aspect-ratios-and-image-size) `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9` und `21:9`.
 
-### En fazla 14 referans görsel kullanın
+### Bis zu 14 Referenzbilder verwenden
 
-Nano Banana modelleri, 14 referans görüntüsünü karıştırmanıza olanak tanır. Bu 14 resim aşağıdakileri içerebilir:
+Mit Nano Banana-Modellen können Sie bis zu 14 Referenzbilder kombinieren. Diese 14 Bilder können Folgendes enthalten:
 
-| Gemini 3.1 Flash Lite Image | Gemini Nano Banana 2.1 ve Gemini 3.1 Flash Görüntüsü | Gemini 3 Pro Image |
+| Gemini 3.1 Flash Lite Image | Gemini Nano Banana 2.1 und Gemini 3.1 Flash Image | Gemini 3 Pro Image |
 | --- | --- | --- |
-| Son resme eklenecek, yüksek çözünürlüklü en fazla 14 nesne resmi | Son resme eklenecek, yüksek çözünürlüklü en fazla 10 nesne resmi | Son resme eklenecek, yüksek çözünürlüklü en fazla 6 nesne resmi |
-| Yok | Karakter tutarlılığını korumak için en fazla 4 karakter resmi | Karakter tutarlılığını korumak için en fazla 5 karakter resmi |
-| Yok | Yok | Stil referansı olarak kullanılacak en fazla 3 resim |
+| Bis zu 14 Bilder von Objekten mit hoher Wiedergabetreue, die in das endgültige Bild eingefügt werden sollen | Bis zu 10 Bilder von Objekten mit hoher Wiedergabetreue, die in das endgültige Bild aufgenommen werden sollen | Bis zu 6 Bilder von Objekten mit hoher Wiedergabetreue, die in das endgültige Bild aufgenommen werden sollen |
+| – | Bis zu 4 Bilder von Charakteren, um die Charakterkonsistenz beizubehalten | Bis zu 5 Bilder von Charakteren, um die Charakterkonsistenz beizubehalten |
+| – | – | Bis zu 3 Bilder, die als Stilreferenzen verwendet werden sollen |
 
 ### Python
 
@@ -1042,7 +1035,10 @@ response = client.models.generate_content(
     ],
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
-        response_format={"image": {aspect_ratio: aspect_ratio,                 image_size: resolution}},
+        image_config=types.ImageConfig(
+            aspect_ratio=aspect_ratio,
+            image_size=resolution
+        ),
     )
 )
 
@@ -1107,12 +1103,10 @@ const response = await ai.models.generateContent({
     contents: contents,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
-      responseFormat: {
-    image: {
+      imageConfig: {
         aspectRatio: aspectRatio,
         imageSize: resolution,
-      }
-  },
+      },
     },
   });
 
@@ -1132,7 +1126,7 @@ const response = await ai.models.generateContent({
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -1324,25 +1318,23 @@ curl -s -X POST \
       }],
       \"generationConfig\": {
         \"responseModalities\": [\"TEXT\", \"IMAGE\"],
-        \"responseFormat\": {
-        \"image\": {
+        \"imageConfig\": {
           \"aspectRatio\": \"5:4\",
           \"imageSize\": \"2K\"
         }
       }
-      }
     }"
 ```
 
-![Yapay zekayla üretilmiş ofis grubu fotoğrafı](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=tr)
+![KI-generiertes Gruppenfoto im Büro](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=de)
 
-Yapay zekayla üretilmiş ofis grubu fotoğrafı
+KI-generiertes Gruppenfoto im Büro
 
-### Google Arama ile Temellendirme
+### Fundierung mit der Google Suche
 
-Hava durumu tahminleri, borsa grafikleri veya son olaylar gibi anlık bilgilere dayalı görüntüler oluşturmak için [Google Arama aracını](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) kullanın.
+Mit dem [Google-Suchtool](https://ai.google.dev/gemini-api/docs/google-search?hl=de) können Sie Bilder auf Grundlage von Echtzeitinformationen wie Wettervorhersagen, Börsendiagrammen oder aktuellen Ereignissen generieren.
 
-Google Arama ile temellendirme, görsel üretimiyle birlikte kullanıldığında görsele dayalı arama sonuçlarının üretim modeline aktarılmadığını ve yanıttan çıkarıldığını unutmayın (bkz. [Görseller için Google Arama ile temellendirme](#image-search)).
+Wenn Sie die Fundierung mit der Google Suche für die Bildgenerierung verwenden, werden bildbasierte Suchergebnisse nicht an das Generierungsmodell übergeben und sind nicht in der Antwort enthalten (siehe [Fundierung mit der Google Suche für Bilder](#image-search)).
 
 ### Python
 
@@ -1358,7 +1350,9 @@ response = client.models.generate_content(
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=['Text', 'Image'],
-        response_format={"image": {aspect_ratio: aspect_ratio,}},
+        image_config=types.ImageConfig(
+            aspect_ratio=aspect_ratio,
+        ),
         tools=[{"google_search": {}}]
     )
 )
@@ -1389,13 +1383,11 @@ const response = await ai.models.generateContent({
     contents: prompt,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
-      responseFormat: {
-    image: {
+      imageConfig: {
         aspectRatio: aspectRatio,
         imageSize: resolution,
-      }
-  },
-    tools: [{ googleSearch: {} }]
+      },
+      tools: [{ googleSearch: {} }]
     },
   });
 
@@ -1524,30 +1516,29 @@ curl -s -X POST \
     "tools": [{"google_search": {}}],
     "generationConfig": {
       "responseModalities": ["TEXT", "IMAGE"],
-      "responseFormat": {
-    "image": {"aspectRatio": "16:9"}
-  }
+      "imageConfig": {
+        "aspectRatio": "16:9"
+      }
     }
   }'
 ```
 
-![San Francisco için yapay zekayla üretilmiş beş günlük hava durumu grafiği](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=tr)
+![KI-generiertes 5-Tage-Wetterdiagramm für San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=de)
 
-San Francisco için yapay zekayla üretilmiş beş günlük hava durumu grafiği
+KI-generiertes 5-Tage-Wetterdiagramm für San Francisco
 
-Yanıtta aşağıdaki zorunlu alanları içeren `groundingMetadata` yer alıyor:
+Die Antwort enthält `groundingMetadata` mit den folgenden erforderlichen Feldern:
 
-- **`searchEntryPoint`**: Gerekli arama önerilerini oluşturmak için HTML ve CSS'yi içerir.
-- **`groundingChunks`**: Oluşturulan görüntünün temelini oluşturan ilk 3 web kaynağını döndürür.
+- **`searchEntryPoint`**: Enthält den HTML- und CSS-Code zum Rendern der erforderlichen Suchvorschläge.
+- **`groundingChunks`**: Gibt die drei wichtigsten Webquellen zurück, die zum Fundieren des generierten Bildes verwendet wurden.
 
-### Görüntüler için Google Arama ile temellendirme (Nano Banana 2.1 ve 3.1 Flash)
+### Fundierung mit der Google Suche für Bilder (Nano Banana 2.1 und 3.1 Flash)
 
-Görseller için Google Arama ile temellendirme, modellerin Google Arama aracılığıyla alınan web görsellerini görüntü oluşturma için görsel bağlam olarak kullanmasına olanak tanır. Görsel Arama, mevcut Google Arama ile Temellendirme aracındaki yeni bir arama türüdür ve standart [Web Arama](#use-with-grounding) ile birlikte çalışır.
+Die Fundierung mit der Google Suche für Bilder ermöglicht es Modellen, Webbilder, die über die Google Suche abgerufen wurden, als visuellen Kontext für die Bildgenerierung zu verwenden. Die Bildersuche ist ein neuer Suchtyp im bestehenden Tool „Fundierung mit der Google Suche“, der neben der standardmäßigen [Websuche](#use-with-grounding) funktioniert.
 
-Görsel Arama'yı etkinleştirmek için API isteğinizde `googleSearch` aracını yapılandırın
-ve `searchTypes` nesnesinde `imageSearch` değerini belirtin. Görsel Arama, bağımsız olarak veya Web Arama ile birlikte kullanılabilir.
+Wenn Sie die Bildersuche aktivieren möchten, konfigurieren Sie das Tool `googleSearch` in Ihrer API-Anfrage und geben Sie `imageSearch` im Objekt `searchTypes` an. Die Bildersuche kann unabhängig von der Websuche oder zusammen mit ihr verwendet werden.
 
-Resimler için Google Arama ile Temellendirme özelliğinin, insan aramak için kullanılamadığını unutmayın.
+Die Fundierung mit der Google Suche für Bilder kann nicht für die Suche nach Personen verwendet werden.
 
 ### Python
 
@@ -1616,7 +1607,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -1774,33 +1765,33 @@ curl -s -X POST \
   }'
 ```
 
-**Görüntüleme koşulları**
+**Displayanforderungen**
 
-Google Arama ile Temellendirme'de Görsel Arama'yı kullanırken aşağıdaki koşullara uymanız gerekir:
+Wenn Sie die Bildersuche im Rahmen der Fundierung mit der Google Suche verwenden, müssen Sie die folgenden Bedingungen erfüllen:
 
-- **Kaynak atfı**: Kaynak resmi içeren web sayfasına (resim dosyası değil,"içeren sayfa") kullanıcı tarafından bağlantı olarak tanınacak şekilde bir bağlantı sağlamanız gerekir.
-- **Doğrudan gezinme**: Kaynak resimleri de göstermeyi seçerseniz kaynak resimlerden bunları içeren kaynak web sayfasına doğrudan, tek tıklamayla erişilebilen bir yol sağlamanız gerekir. Son kullanıcının kaynak web sayfasına erişimini geciktiren veya soyutlayan diğer tüm uygulamalara (ör. çok tıklamalı yollar veya ara resim görüntüleyici kullanımı) izin verilmez.
+- **Quellenangabe**: Sie müssen einen Link zu der Webseite angeben, die das Quellbild enthält (die „enthaltende Seite“, nicht die Bilddatei selbst). Der Link muss für den Nutzer als solcher erkennbar sein.
+- **Direkte Navigation**: Wenn Sie auch die Quellbilder anzeigen möchten, müssen Sie einen direkten Pfad mit einem Klick von den Quellbildern zur zugehörigen Quellwebseite angeben. Andere Implementierungen, die den Zugriff des Endnutzers auf die Quellwebseite verzögern oder abstrahieren, einschließlich, aber nicht beschränkt auf Pfade mit mehreren Klicks oder die Verwendung eines Zwischenbildbetrachters, sind nicht zulässig.
 
-**Yanıt**
+**Antwort**
 
-API, görsel arama kullanılarak kaynağa dayalı yanıtlarda çıkışını doğrulanmış kaynaklara bağlamak için net atıf ve meta veri sağlar. `groundingMetadata` nesnesindeki temel alanlar şunlardır:
+Bei fundierten Antworten, die auf der Bildersuche basieren, stellt die API klare Quellenangaben und Metadaten bereit, um die Ausgabe mit verifizierten Quellen zu verknüpfen. Zu den wichtigsten Feldern im Objekt `groundingMetadata` gehören:
 
-- **`imageSearchQueries`**: Modelin görsel bağlam (görsel arama) için kullandığı belirli sorgular.
-- **`groundingChunks`**: Alınan sonuçlarla ilgili kaynak bilgilerini içerir.
-  Resim kaynakları için bunlar, yeni bir resim parçası türü kullanılarak yönlendirme URL'leri olarak döndürülür. Bu parça şunları içerir:
+- **`imageSearchQueries`**: Die spezifischen Abfragen, die das Modell für den visuellen Kontext (Bildersuche) verwendet.
+- **`groundingChunks`**: Enthält Quellinformationen für abgerufene Ergebnisse.
+  Bei Bildquellen werden diese als Weiterleitungs-URLs mit einem neuen Bild-Chunk-Typ zurückgegeben. Dieser Abschnitt umfasst:
 
-  - **`uri`**: İlişkilendirme için kullanılan web sayfası URL'si (açılış sayfası).
-  - **`image_uri`**: Doğrudan resim URL'si.
-- **`groundingSupports`**: Oluşturulan içeriği parçalardaki ilgili alıntı kaynağına bağlayan belirli eşlemeler sağlar.
-- **`searchEntryPoint`**: Arama Önerileri'ni oluşturmak için uyumlu HTML ve CSS içeren "Google Arama" çipini içerir.
+  - **`uri`**: Die Webseiten-URL für die Attribution (die Landingpage).
+  - **`image_uri`**: Die direkte Bild-URL.
+- **`groundingSupports`**: Bietet spezifische Zuordnungen, die den generierten Inhalt mit der relevanten Zitationsquelle in den Chunks verknüpfen.
+- **`searchEntryPoint`**: Enthält den Chip „Google Suche“ mit konformem HTML und CSS zum Rendern von Suchvorschlägen.
 
-### Video-görüntü üretimi (Nano Banana 2.1, 3.1 Flash ve 3.1 Flash Lite)
+### Video-zu-Bild-Generierung (Nano Banana 2.1, 3.1 Flash und 3.1 Flash Lite)
 
-Video-görüntü üretimi, çok formatlı bir referans olarak videonun bağlamını kullanarak yeni görüntüler oluşturmanıza olanak tanır. Bu özellik; yüksek kaliteli video küçük resimleri, sinematik posterler, özet infografikleri veya bir video sahnesinden ilham alan yeni sanat eserleri oluşturmak için kullanışlıdır.
+Mit der Video-zu-Bild-Generierung können Sie neue Bilder generieren, indem Sie den Kontext eines Videos als multimodale Referenz verwenden. Das ist nützlich, um hochwertige Video-Thumbnails, Filmplakate, zusammenfassende Infografiken oder neue Kunstwerke zu erstellen, die von einer Videoszene inspiriert sind.
 
-Oluşturma sırasında model, görsel temaları ve önemli etkinlikleri ayıklamak için video karelerini bağlam içinde (modelin giriş jetonu sınırı olan 131.072 jetona kadar) analiz eder. Ardından, çıkış resmini sentezlemek için bunları metin isteminizle birlikte kullanır.
+Während der Generierung analysiert das Modell die Videoframes im Kontext (bis zum Eingabe-Token-Limit des Modells von 131.072 Tokens), um visuelle Themen und Schlüsselereignisse zu extrahieren. Diese werden dann zusammen mit Ihrem Text-Prompt verwendet, um das Ausgabebild zu synthetisieren.
 
-Herkese açık [YouTube URL'lerini](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr#youtube) doğrudan API isteğinize iletebilir veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yerel video dosyalarını yükleyebilirsiniz.
+Sie können öffentliche [YouTube-URLs](https://ai.google.dev/gemini-api/docs/video-understanding?hl=de#youtube) direkt in Ihrer API-Anfrage übergeben oder lokale Videodateien mit der [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) hochladen.
 
 ### Python
 
@@ -1873,7 +1864,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -2056,15 +2047,15 @@ curl -s -X POST \
   }'
 ```
 
-![YouTube videosundan yapay zekayla üretilmiş infografik](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=tr)
+![KI-generierte Infografik aus einem YouTube-Video](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=de)
 
-YouTube videosundan yapay zekayla üretilmiş bilgi grafiği
+KI-generierte Infografik aus einem YouTube-Video
 
-### 4K çözünürlüğe kadar görüntü oluşturma
+### Bilder mit einer Auflösung von bis zu 4K generieren
 
-Gemini 3 görüntü modelleri varsayılan olarak 1.000 görüntü oluşturur ancak 2.000, 4.000 ve 512 (0, 5K) görüntü de üretebilir (yalnızca Gemini 3.1 Flash Image). Daha yüksek çözünürlüklü öğeler oluşturmak için `generation_config` içinde `image_size` değerini belirtin.
+Gemini 3-Bildmodelle generieren standardmäßig 1K-Bilder, können aber auch 2K-, 4K- und 512-Bilder (0,5K) (nur Gemini 3.1 Flash Image) ausgeben. Wenn Sie Assets mit höherer Auflösung generieren möchten, geben Sie die `image_size` in der `generation_config` an.
 
-Büyük harf "K" kullanmanız gerekir (ör. 1K, 2K, 4K). `512` değerinde "K" soneki kullanılmıyor. Küçük harfli parametreler (ör. 1k) reddedilir.
+Sie müssen ein großes „K“ verwenden (z.B. 1K, 2K, 4K). Der Wert `512` verwendet kein „K“-Suffix. Parameter in Kleinbuchstaben (z.B. „1k“) werden abgelehnt.
 
 ### Python
 
@@ -2083,7 +2074,10 @@ response = client.models.generate_content(
     contents=prompt,
     config=types.GenerateContentConfig(
         response_modalities=['TEXT', 'IMAGE'],
-        response_format={"image": {aspect_ratio: aspect_ratio,                 image_size: resolution}},
+        image_config=types.ImageConfig(
+            aspect_ratio=aspect_ratio,
+            image_size=resolution
+        ),
     )
 )
 
@@ -2114,12 +2108,10 @@ async function main() {
     contents: prompt,
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
-      responseFormat: {
-    image: {
+      imageConfig: {
         aspectRatio: aspectRatio,
         imageSize: resolution,
-      }
-  },
+      },
     },
   });
 
@@ -2139,7 +2131,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -2296,26 +2288,27 @@ curl -s -X POST \
     "tools": [{"google_search": {}}],
     "generationConfig": {
       "responseModalities": ["TEXT", "IMAGE"],
-      "responseFormat": {
-    "image": {"aspectRatio": "1:1", "imageSize": "1K"}
-  }
+      "imageConfig": {
+        "aspectRatio": "1:1",
+        "imageSize": "1K"
+      }
     }
   }'
 ```
 
-Aşağıda, bu istemden oluşturulan örnek bir resim verilmiştir:
+Hier ist ein Beispielbild, das mit diesem Prompt generiert wurde:
 
-![Yapay zeka tarafından üretilmiş, Da Vinci tarzında, parçalanmış bir kral kelebeğinin anatomik çizimi.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=tr)
+![KI-generierte anatomische Skizze eines sezierten Monarchfalters im Stil von Leonardo da Vinci.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=de)
 
-Disseke edilmiş bir kral kelebeğinin Da Vinci tarzında yapay zekayla üretilmiş anatomik çizimi.
+KI-generierte anatomische Skizze eines sezierten Monarchfalters im Stil von Leonardo da Vinci.
 
-### Düşünme süreci
+### Denkprozess
 
-Gemini 3 görüntü modelleri, karmaşık istemler için akıl yürütme süreci ("Düşünme") kullanan düşünen modellerdir. Bu özellik varsayılan olarak etkindir ve API'de devre dışı bırakılamaz. Düşünme süreci hakkında daha fazla bilgi edinmek için [Gemini Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) rehberine bakın.
+Gemini 3-Bildmodelle sind Thinking Models, die für komplexe Prompts einen Denkprozess („Thinking“) verwenden. Diese Funktion ist standardmäßig aktiviert und kann in der API nicht deaktiviert werden. Weitere Informationen zum Denkprozess finden Sie im Leitfaden zu [Gemini Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=de).
 
-Model, kompozisyonu ve mantığı test etmek için en fazla iki ara görüntü oluşturur. Düşünme sürecindeki son görüntü, aynı zamanda son oluşturulan görüntüdür.
+Das Modell generiert bis zu zwei Zwischenbilder, um die Komposition und Logik zu testen. Das letzte Bild im Bereich „Thinking“ ist auch das endgültige gerenderte Bild.
 
-Son görüntünün üretilmesine yol açan düşünceleri kontrol edebilirsiniz.
+Sie können sich die Gedanken ansehen, die zur Erstellung des endgültigen Bildes geführt haben.
 
 ### Python
 
@@ -2381,20 +2374,20 @@ foreach (var candidate in response.Candidates) {
 }
 ```
 
-#### Düşünme seviyelerini kontrol etme
+#### Denkaufwand steuern
 
-Gemini Nano Banana 2.1, Gemini 3.1 Flash Image ve Gemini 3.1 Flash Lite Image ile modelin kalite ve gecikmeyi dengelemek için kullandığı düşünme miktarını kontrol edebilirsiniz:
+Mit Gemini Nano Banana 2.1, Gemini 3.1 Flash Image und Gemini 3.1 Flash Lite Image können Sie den Umfang der Denkprozesse des Modells steuern, um Qualität und Latenz auszubalancieren:
 
-| Model | Desteklenen düşünme düzeyleri | Varsayılan |
+| Modell | Unterstützte Denkaufwände | Standard |
 | --- | --- | --- |
-| **Gemini Nano Banana 2.1** | `minimal`, `medium` ve `high` | `medium` |
+| **Gemini Nano Banana 2.1** | `minimal`, `medium`, `high` | `medium` |
 | **Gemini 3.1 Flash Image** | `minimal`, `high` | `minimal` |
 | **Gemini 3.1 Flash Lite Image** | `minimal`, `high` | `minimal` |
 
-`thinkingLevel` değerini `minimal` olarak ayarladığınızda en düşük gecikmeli yanıtlar elde edilir.
-Minimal düşünme, modelin hiç düşünmediği anlamına gelmez.
+Wenn Sie `thinkingLevel` auf `minimal` festlegen, erhalten Sie Antworten mit der niedrigsten Latenz.
+Minimales Denken bedeutet nicht, dass das Modell überhaupt nicht denkt.
 
-Modelin oluşturduğu düşüncelerin yanıtta döndürülüp döndürülmeyeceğini veya gizli kalıp kalmayacağını belirlemek için `includeThoughts` Boole değerini ekleyebilirsiniz.
+Sie können den booleschen Wert `includeThoughts` hinzufügen, um festzulegen, ob die vom Modell generierten Gedanken in der Antwort zurückgegeben werden oder ausgeblendet bleiben.
 
 ### Python
 
@@ -2461,7 +2454,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -2633,20 +2626,19 @@ curl -s -X POST \
   }'
 ```
 
-`includeThoughts`, `true` veya `false` olarak ayarlanmış olsun ya da olmasın, düşünme jetonlarının faturalandırıldığını unutmayın. Çünkü [düşünme süreci](#thinking-process), süreci görüntüleyip görüntülememenizden bağımsız olarak her zaman varsayılan olarak gerçekleşir.
+Beachten Sie, dass Thinking-Tokens unabhängig davon abgerechnet werden, ob `includeThoughts` auf `true` oder `false` gesetzt ist, da der [Denkprozess](#thinking-process) standardmäßig immer stattfindet, unabhängig davon, ob Sie den Prozess sehen oder nicht.
 
-#### Düşünce imzaları
+#### Gedankensignaturen
 
-Düşünce imzaları, modelin dahili düşünce sürecinin şifrelenmiş gösterimleridir ve çok aşamalı etkileşimlerde muhakeme bağlamını korumak için kullanılır. Tüm yanıtlarda `thought_signature` alanı bulunur. Genel bir kural olarak, bir model yanıtında düşünce imzası alırsanız bir sonraki turda görüşme geçmişini gönderirken bunu aynen iletmeniz gerekir. Düşünce imzalarının dolaşıma sokulamaması yanıtın başarısız olmasına neden olabilir. İmzalarla ilgili daha fazla açıklama için [düşünce imzası](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr)
-belgelerine göz atın.
+Gedankensignaturen sind verschlüsselte Darstellungen des internen Denkprozesses des Modells und werden verwendet, um den Kontext der Schlussfolgerung über mehrere Interaktionen hinweg beizubehalten. Alle Antworten enthalten ein `thought_signature`-Feld. Als allgemeine Regel gilt: Wenn Sie in einer Modellantwort eine Gedankensignatur erhalten, sollten Sie sie genau so zurückgeben, wie Sie sie erhalten haben, wenn Sie den Unterhaltungsverlauf im nächsten Schritt senden. Wenn Gedankensignaturen nicht weitergegeben werden, kann die Antwort fehlschlagen. Weitere Erläuterungen zu Signaturen finden Sie in der Dokumentation zur [Gedankensignatur](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=de).
 
-Düşünce imzalarının işleyiş şekli:
+So funktionieren Gedankensignaturen:
 
-- Yanıtta yer alan, resim `mimetype` içeren tüm `inline_data` bölümlerinde imza bulunmalıdır.
-- Düşüncelerden hemen sonra (resimlerden önce) metin bölümleri varsa ilk metin bölümünde de imza bulunmalıdır.
-- `inline_data`Resim içeren `mimetype` bölümler düşüncelerin bir parçasıysa imza içermez.
+- Alle `inline_data`-Teile mit dem Bild `mimetype`, die Teil der Antwort sind, sollten eine Signatur haben.
+- Wenn es am Anfang (vor einem Bild) direkt nach den Gedanken einige Textteile gibt, sollte der erste Textteil auch eine Signatur haben.
+- Wenn `inline_data`-Teile mit dem Bild `mimetype` Teil von Überlegungen sind, haben sie keine Signaturen.
 
-Aşağıdaki kodda, düşünce imzalarının nerede yer aldığına dair bir örnek gösterilmektedir:
+Der folgende Code zeigt ein Beispiel dafür, wo Thought-Signaturen enthalten sind:
 
 ```
 [
@@ -2706,182 +2698,179 @@ Aşağıdaki kodda, düşünce imzalarının nerede yer aldığına dair bir ör
 ]
 ```
 
-## Diğer görüntü üretme modları
+## Andere Modi zur Bildgenerierung
 
-Gemini, istem yapısına ve bağlama dayalı olarak diğer görüntü etkileşimi modlarını da destekler. Örneğin:
+Gemini unterstützt je nach Prompt-Struktur und Kontext weitere Modi für die Bildinteraktion, darunter:
 
-- **Metinden resimlere ve metne (araya eklenmiş):** İlgili metinleri içeren resimler oluşturur.
-  - İstem örneği: "Paella için resimli bir tarif oluştur."
-- **Resimler ve metinden resimlere ve metne (dönüşümlü)**: Yeni ilgili resimler ve metinler oluşturmak için giriş resimlerini ve metinlerini kullanır.
-  - İstem örneği: (Döşenmiş bir odanın resmiyle birlikte) "Mekanıma hangi renklerde kanepeler yakışır? Resmi güncelleyebilir misin?"
+- **Text zu Bild(ern) und Text (verschachtelt):** Gibt Bilder mit zugehörigem Text aus.
+  - Beispiel-Prompt: „Erstelle ein illustriertes Rezept für eine Paella.“
+- **Bild(er) und Text zu Bild(ern) und Text (verschachtelt)**: Verwendet Eingabebilder und ‑text, um neue, verwandte Bilder und Texte zu erstellen.
+  - Beispiel-Prompt: (Mit einem Bild eines möblierten Zimmers) „Welche anderen Sofafarben würden in mein Zimmer passen? Kannst du das Bild aktualisieren?“
 
-## Toplu olarak resim oluşturma
+## Bilder im Batch generieren
 
-Çok sayıda resim oluşturmanız gerekiyorsa [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr)'yi kullanabilirsiniz. 24 saate kadar yanıt süresi karşılığında daha yüksek [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) elde edersiniz.
+Wenn Sie viele Bilder generieren müssen, können Sie die [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de) verwenden. Sie erhalten höhere [Ratenbegrenzungen](https://ai.google.dev/gemini-api/docs/rate-limits?hl=de) im Austausch für eine Bearbeitungszeit von bis zu 24 Stunden.
 
-Batch API görüntü üretme örnekleri ve kodu için [Batch API görüntü üretme belgelerini](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#image-generation) ve [çözüm kitabını](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=tr) inceleyin.
+Weitere Informationen zur Bildgenerierung mit der Batch API finden Sie in der [Dokumentation zur Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de#image-generation) und im [Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=de). Dort finden Sie auch Beispiele und Code.
 
-## İstem yazma kılavuzu ve stratejileri
+## Anleitung und Strategien für Prompts
 
-Görüntü oluşturmada ustalaşmak için temel bir ilkeyi anlamanız gerekir:
+Die Bildgenerierung basiert auf einem grundlegenden Prinzip:
 
-> **Yalnızca anahtar kelimeleri listelemeyin, sahneyi açıklayın.**
-> Modelin temel gücü, dili derinlemesine anlamasıdır. Bir anlatı, açıklayıcı paragraf neredeyse her zaman bağlantısız kelimelerden oluşan bir listeden daha iyi ve tutarlı bir görüntü oluşturur.
+> **Beschreiben Sie die Szene, anstatt nur Keywords aufzulisten.**
+> Die größte Stärke des Modells ist sein tiefes Sprachverständnis. Ein beschreibender Absatz führt fast immer zu einem besseren, stimmigeren Bild als eine Liste unzusammenhängender Wörter.
 
-### Görüntü üretme istemleri
+### Prompts zum Generieren von Bildern
 
-Aşağıdaki stratejiler, tam olarak aradığınız resimleri oluşturmak için etkili istemler oluşturmanıza yardımcı olacaktır.
+Mit den folgenden Strategien können Sie effektive Prompts erstellen, um genau die Bilder zu generieren, die Sie suchen.
 
-#### Fotoğrafçılık
+#### Fotografie
 
-Gerçekçi görüntüler için fotoğrafçılık terimlerini kullanın. Modeli gerçekçi bir sonuca yönlendirmek için kamera açıları, lens türleri, ışıklandırma ve ince ayrıntılardan bahsedin.
+Verwenden Sie für realistische Bilder Begriffe aus der Fotografie. Erwähnen Sie Kamerawinkel, Objektivtypen, Beleuchtung und feine Details, um das Modell zu einem realistischen Ergebnis zu führen.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| Güneşten etkilenmiş derin kırışıklıkları ve sıcak, bilgili bir gülümsemesi olan yaşlı bir Japon seramik sanatçısının yakın çekim portre fotoğrafı. Yeni sırlanmış bir çay kasesini dikkatlice inceliyor. Ortam, güneş ışığı alan rustik atölyesi. Sahne, pencereden süzülen yumuşak, altın saat ışığıyla aydınlatılıyor ve kilden yapılmış ürünün ince dokusu vurgulanıyor. 85 mm portre lensiyle çekilmiş, yumuşak ve bulanık bir arka plan (bokeh) oluşturulmuş. Genel atmosfer sakin ve ustaca olmalı. Dikey portre yönü. | Yaşlı Japon seramik sanatçısı |
+| Ein Foto einer Nahaufnahme eines älteren japanischen Keramikers mit tiefen, von der Sonne gezeichneten Falten und einem warmen, wissenden Lächeln. Er begutachtet sorgfältig eine frisch glasierte Teeschale. Die Szene spielt in seiner rustikalen, sonnendurchfluteten Werkstatt. Die Szene ist in weiches Licht der Goldenen Stunde getaucht, das durch ein Fenster fällt und die feine Textur des Tons hervorhebt. Aufgenommen mit einem 85‑mm-Porträtobjektiv, was zu einem weichen, unscharfen Hintergrund (Bokeh) führt. Die Stimmung ist ruhig und meisterhaft. Vertikales Hochformat. | Älterer japanischer Keramiker |
 
-#### Stilize edilmiş resimler ve çıkartmalar
+#### Stilisierte Illustrationen und Sticker
 
-Çıkartma, simge veya öğe oluşturmak için stil hakkında net olun ve beyaz arka plan isteyin.
+Wenn Sie Sticker, Symbole oder Assets erstellen möchten, geben Sie den Stil genau an und fordern Sie einen weißen Hintergrund an.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| Küçük bir bambu şapka takmış mutlu bir kırmızı pandanın kawaii tarzı çıkartması. Yeşil bir bambu yaprağını yiyor. Tasarımda kalın ve net ana hatlar, basit selüloit gölgeleme ve canlı bir renk paleti kullanılıyor. Arka plan beyaz olmalıdır. | Kawaii tarzında kızıl panda çıkartması |
+| Ein Sticker im Kawaii-Stil mit einem fröhlichen Roten Panda, der einen winzigen Bambushut trägt. Er kaut auf einem grünen Bambusblatt. Das Design zeichnet sich durch kräftige, klare Umrisse, einfaches Cel-Shading und eine lebendige Farbpalette aus. Der Hintergrund muss weiß sein. | Kawaii-Sticker mit einem Roten Panda |
 
-#### Resimlerdeki metinlerin doğruluğu
+#### Korrekter Text in Bildern
 
-Gemini, metin oluşturma konusunda mükemmeldir. Metin, yazı tipi stili (açıklayıcı bir şekilde) ve genel tasarım hakkında net olun. Profesyonel öğe üretimi için Gemini 3 Pro Image'i kullanın.
+Gemini ist hervorragend darin, Text zu rendern. Geben Sie den Text, die Schriftart (beschreibend) und das Gesamtdesign genau an. Mit Gemini 3 Pro Image professionelle Assets erstellen.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| "The Daily Grind" adlı bir kafe için modern ve minimalist bir logo oluştur. Metin, sade, kalın ve sans-serif yazı tipinde olmalıdır. Renk şeması siyah beyazdır. Logoyu daire içine alın. Kahve çekirdeklerini akıllıca kullanın. | Kafe logosu |
+| Erstelle ein modernes, minimalistisches Logo für ein Café namens „The Daily Grind“. Der Text sollte in einer klaren, fetten, serifenlosen Schriftart sein. Das Farbschema ist schwarz-weiß. Füge das Logo in einen Kreis ein. Verwende eine Kaffeebohne auf clevere Weise. | Logo eines Cafés |
 
-#### Ürün maketleri ve ticari fotoğrafçılık
+#### Produkt-Mockups und kommerzielle Fotografie
 
-E-ticaret, reklam veya markalama için net ve profesyonel ürün fotoğrafları oluşturmak üzere idealdir.
+Perfekt für saubere, professionelle Produktaufnahmen für E-Commerce, Werbung oder Branding.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| Parlak beton yüzey üzerinde sunulan, mat siyah renkte minimalist seramik kahve kupasının yüksek çözünürlüklü, stüdyo ışıklı ürün fotoğrafı. Işıklandırma, yumuşak ve dağınık parlak alanlar oluşturmak ve sert gölgeleri ortadan kaldırmak için tasarlanmış üç noktalı bir softbox kurulumudur. Temiz çizgilerini göstermek için kamera açısı hafifçe yükseltilmiş 45 derecelik bir çekimdir. Kahveden yükselen buhara net bir şekilde odaklanılmış, ultra gerçekçi bir görüntü. Kare resim. | Seramik kahve kupası ürün fotoğrafı |
+| Eine hochauflösende, im Studio beleuchtete Produktfotografie einer minimalistischen Keramik-Kaffeetasse in mattem Schwarz, die auf einer polierten Betonoberfläche präsentiert wird. Die Beleuchtung ist ein Softbox-Setup mit Dreipunktlicht, das weiche, diffuse Highlights erzeugt und harte Schatten eliminiert. Der Kamerawinkel ist eine leicht erhöhte 45-Grad-Aufnahme, um die klaren Linien zu zeigen. Ultrarealistisch, mit scharfem Fokus auf den Dampf, der vom Kaffee aufsteigt. Quadratisches Bild. | Produktaufnahme einer Kaffeetasse aus Keramik |
 
-#### Minimalist ve öğeler arasındaki boşluk tasarımı
+#### Minimalistisches Design und Negativraum
 
-Metnin yerleştirileceği web siteleri, sunumlar veya pazarlama materyalleri için arka plan oluşturmak üzere mükemmeldir.
+Hervorragend geeignet, um Hintergründe für Websites, Präsentationen oder Marketingmaterialien zu erstellen, auf denen Text eingeblendet wird.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| Kadrajın sağ alt kısmında yer alan tek bir narin kırmızı akçaağaç yaprağının yer aldığı minimalist bir kompozisyon. Arka plan, metin için önemli bir negatif alan oluşturan geniş ve boş bir kirli beyaz tuvaldir. Sol üstten gelen yumuşak ve eşit dağılmış ışıklandırma. Kare resim. | Kırmızı akçaağaç yaprağı içeren minimalist tasarım |
+| Eine minimalistische Komposition mit einem einzelnen, zarten roten Ahornblatt unten rechts im Bild. Der Hintergrund ist ein großer, leerer, cremefarbener Canvas, der viel Negativraum für Text bietet. Weiches, diffuses Licht von links oben. Quadratisches Bild. | Minimalistisches Design mit rotem Ahornblatt |
 
-#### Sıralı sanat (çizgi roman paneli / resimli taslak)
+#### Sequenzielle Kunst (Comic-Panel / Storyboard)
 
-Görsel hikaye anlatımı için paneller oluşturmak üzere karakter tutarlılığı ve sahne açıklaması üzerine kuruludur. Metin doğruluğu ve hikaye anlatma becerisi için bu istemler en iyi sonucu Gemini 3.1 Pro ve Gemini 3.1 Flash Image ile verir.
+Baut auf der Charakterkonsistenz und der Szenenbeschreibung auf, um Panels für visuelles Storytelling zu erstellen. Für die Genauigkeit von Text und die Fähigkeit zum Storytelling funktionieren diese Prompts am besten mit Gemini 3.1 Pro und Gemini 3.1 Flash Image.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resmi:**  Beyaz gözlüklü adam   Giriş resmi   **İstem:** Yüksek kontrastlı siyah beyaz mürekkeplerle, sert ve karanlık bir sanat tarzında 3 panelli bir çizgi roman oluştur. Karakteri komik bir sahneye yerleştir. | Kasvetli kara film tarzında çizgi roman paneli |
+| **Eingabebild:**  Mann mit weißer Brille   Eingabebild   **Prompt**:Erstelle einen Comic mit drei Panels im düsteren Noir-Stil mit kontrastreichen Schwarz-Weiß-Farben. Platziere die Figur in einer humorvollen Szene. | Düsteres Noir-Comic-Panel |
 
-#### Google Arama ile Temellendirme
+#### Fundierung mit der Google Suche
 
-Google Arama'yı kullanarak güncel veya gerçek zamanlı bilgilere dayalı görseller oluşturabilirsiniz.
-Bu özellik; haberler, hava durumu ve zamana duyarlı diğer konular için yararlıdır.
+Mit der Google Suche können Sie Bilder auf Grundlage aktueller oder Echtzeitinformationen generieren.
+Das ist nützlich für Nachrichten, Wetter und andere zeitkritische Themen.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| Şampiyonlar Ligi'nde dün geceki Arsenal maçının basit ama şık bir grafiğini oluştur. | Arsenal futbol maçının skor grafiği |
+| Erstelle eine einfache, aber stilvolle Grafik des gestrigen Arsenal-Spiels in der Champions League. | Grafik mit dem Ergebnis eines Fußballspiels von Arsenal |
 
-### Resimleri düzenleme istemleri
+### Prompts zum Bearbeiten von Bildern
 
-Bu örneklerde, düzenleme, kompozisyon ve stil aktarımı için metin istemlerinizle birlikte nasıl resim sağlayacağınız gösterilmektedir.
+In diesen Beispielen wird gezeigt, wie Sie Bilder zusammen mit Ihren Text-Prompts für die Bearbeitung, Komposition und Stilübertragung bereitstellen.
 
-#### Öğe ekleme ve kaldırma
+#### Elemente hinzufügen und entfernen
 
-Bir resim sağlayın ve değişikliğinizi açıklayın. Model, orijinal resmin stili, aydınlatması ve perspektifiyle eşleşir.
+Stellen Sie ein Bild bereit und beschreiben Sie die gewünschte Änderung. Das Modell entspricht dem Stil, der Beleuchtung und der Perspektive des Originalbilds.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resmi:**  Kızıl tüylü bir kedinin fotogerçekçi resmi...   Giriş resmi   **İstem:** Kedimin sağlanan resmini kullanarak lütfen başına küçük, örgü bir büyücü şapkası ekleyin. Köpeğin rahat bir şekilde oturduğu ve fotoğrafın yumuşak ışığıyla uyumlu olduğu bir görüntü oluştur. | Sihirbaz şapkalı kedi |
+| **Eingabebild:**  Ein fotorealistisches Bild einer flauschigen, rötlichen Katze…   Eingabebild   **Prompt:** Füge dem bereitgestellten Bild meiner Katze einen kleinen, gestrickten Zaubererhut auf ihrem Kopf hinzu. Es soll so aussehen, als würde es bequem sitzen und zum weichen Licht des Fotos passen. | Katze mit Zauberhut |
 
-#### İç boyama (anlamsal maskeleme)
+#### Inpainting (semantische Maskierung)
 
-Resmin geri kalanına dokunmadan belirli bir bölümünü düzenlemek için "maske"yi sohbet ederek tanımlayın.
+Sie können im Gespräch eine „Maske“ definieren, um einen bestimmten Teil eines Bildes zu bearbeiten, während der Rest unverändert bleibt.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resmi:**  Modern ve iyi aydınlatılmış bir oturma odasının geniş çekimi...   Giriş resmi   **İstem:** Oturma odasının sağlanan resmini kullanarak yalnızca mavi kanepenin yerine eski tarz, kahverengi deri bir Chesterfield kanepe koy. Odanın geri kalanını (ör. koltuktaki yastıklar ve aydınlatma) değiştirmeyin. | Kahverengi deri kanepeli oturma odası |
+| **Eingabebild:**  Eine Weitwinkelaufnahme eines modernen, gut beleuchteten Wohnzimmers…   Eingabebild   **Prompt:** Ändere auf dem bereitgestellten Bild eines Wohnzimmers nur das blaue Sofa in ein braunes Chesterfield-Sofa aus Leder im Vintage-Stil. Der Rest des Raums, einschließlich der Kissen auf dem Sofa und der Beleuchtung, soll unverändert bleiben. | Wohnzimmer mit braunem Ledersofa |
 
-#### Stil aktarımı
+#### Stilübertragung
 
-Bir resim sağlayın ve modelden içeriğini farklı bir sanatsal tarzda yeniden oluşturmasını isteyin.
+Stellen Sie ein Bild bereit und bitten Sie das Modell, den Inhalt in einem anderen künstlerischen Stil neu zu erstellen.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resmi:**  Kalabalık bir şehir caddesinin fotogerçekçi ve yüksek çözünürlüklü fotoğrafı...   Giriş resmi   **İstem:** Gece çekilmiş modern bir şehir caddesinin fotoğrafını, Vincent van Gogh'un "Yıldızlı Gece" adlı eserinin sanatsal tarzına dönüştür. Binaların ve arabaların orijinal kompozisyonunu koruyun ancak tüm öğeleri, derin maviler ve parlak sarılardan oluşan dramatik bir paletle, girdaplı, impasto fırça darbeleriyle oluşturun. | Yıldızlı Gece tarzında şehir sokağı |
+| **Eingabebild:**  Ein fotorealistisches, hochauflösendes Foto einer belebten Straße in einer Stadt...   Eingabebild   **Prompt:** Verwandle das bereitgestellte Foto einer modernen Stadtstraße bei Nacht in den künstlerischen Stil von Vincent van Goghs „Sternennacht“. Behalte die ursprüngliche Komposition von Gebäuden und Autos bei, aber rendere alle Elemente mit wirbelnden, pastosen Pinselstrichen und einer dramatischen Farbpalette aus tiefen Blautönen und leuchtenden Gelbtönen. | Straße in einer Stadt im Stil von „Sternennacht“ |
 
-#### Gelişmiş kompozisyon: Birden fazla görüntüyü birleştirme
+#### Erweiterte Komposition: mehrere Bilder kombinieren
 
-Yeni bir kompozit sahne oluşturmak için bağlam olarak birden fazla resim sağlayın. Bu özellik, ürün maketleri veya yaratıcı kolajlar için idealdir.
+Stellen Sie mehrere Bilder als Kontext bereit, um eine neue, zusammengesetzte Szene zu erstellen. Das ist ideal für Produkt-Mockups oder kreative Collagen.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resimleri:**  Mavi çiçekli bir yazlık elbisenin profesyonelce çekilmiş fotoğrafı...   Giriş 1: Elbise   Saçları topuz yapılmış bir kadının tam boy fotoğrafı...   Giriş 2: Model   **İstem:** Profesyonel bir e-ticaret moda fotoğrafı oluştur. İlk resimdeki mavi çiçekli elbiseyi al ve ikinci resimdeki kadına giydir. Elbiseyi giyen kadının, dış ortamla uyumlu olacak şekilde ışık ve gölgeler ayarlanmış, gerçekçi ve tam vücut fotoğrafını oluştur. | Moda e-ticaret çekimi |
+| **Eingabebilder:**  Ein professionelles Foto eines blauen Sommerkleids mit Blumenmuster...   Eingabe 1: Kleid   Ganzkörperaufnahme einer Frau mit einem Dutt…   Eingabe 2: Model   **Prompt:** Erstelle ein professionelles E-Commerce-Modefoto. Nimm das blaue Blumenkleid aus dem ersten Bild und lass die Frau aus dem zweiten Bild es tragen. Erstelle eine realistische Ganzkörperaufnahme der Frau im Kleid, wobei die Beleuchtung und die Schatten an die Umgebung im Freien angepasst sind. | E-Commerce-Foto für Modeartikel |
 
-#### Yüksek doğrulukta ayrıntı koruma
+#### High-Fidelity-Detailerhaltung
 
-Düzenleme sırasında önemli ayrıntıların (ör. yüz veya logo) korunmasını sağlamak için düzenleme isteğinizle birlikte bu ayrıntıları ayrıntılı bir şekilde açıklayın.
+Damit wichtige Details (z. B. ein Gesicht oder Logo) bei einer Bearbeitung erhalten bleiben, beschreiben Sie sie zusammen mit Ihrer Bearbeitungsanfrage ausführlich.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resimleri:**  Kahverengi saçlı ve mavi gözlü bir kadının profesyonel portre fotoğrafı...   Giriş 1: Kadın   &quot;G&quot; ve &quot;A&quot; harflerinin yer aldığı basit ve modern bir logo...   Giriş 2: Logo   **İstem:** Kahverengi saçlı, mavi gözlü ve ifadesiz bir kadının ilk resmini al. İkinci resimdeki logoyu kadının siyah tişörtüne ekle. Kadının yüzünün ve özelliklerinin tamamen değişmeden kalmasını sağla. Logo, gömleğin kıvrımlarını takip ederek kumaşa doğal bir şekilde basılmış gibi görünmelidir. | Tişörtünde logo olan kadın |
+| **Eingabebilder:**  Ein professionelles Porträt einer Frau mit braunen Haaren und blauen Augen...   Eingabe 1: Frau   Ein einfaches, modernes Logo mit den Buchstaben „G“ und „A“...   Eingabe 2: Logo   **Prompt:** Nimm das erste Bild der Frau mit braunen Haaren, blauen Augen und einem neutralen Gesichtsausdruck. Füge das Logo aus dem zweiten Bild auf ihrem schwarzen T-Shirt hinzu. Das Gesicht und die Gesichtszüge der Frau müssen vollständig unverändert bleiben. Das Logo soll so aussehen, als wäre es auf den Stoff gedruckt, und den Falten des Hemds folgen. | Frau mit Logo auf dem T-Shirt |
 
-#### Bir şeyi hayata geçirmek
+#### Etwas zum Leben erwecken
 
-Kaba bir taslak veya çizim yükleyip modelden bunu tamamlanmış bir resme dönüştürmesini isteyin.
+Laden Sie eine grobe Skizze oder Zeichnung hoch und bitten Sie das Modell, sie zu einem fertigen Bild zu verfeinern.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resmi:**  Araba eskizi   Arabanın kaba taslağı   **İstem:** Fütüristik bir arabanın bu taslak karakalem çizimini, galerideki bitmiş konsept arabanın kusursuz bir fotoğrafına dönüştür. Eskizdeki şık çizgileri ve alçak profili koruyun ancak metalik mavi boya ve neon jant ışığı ekleyin. | Konsept arabanın şık fotoğrafı |
+| **Eingabebild:**  Skizze eines Autos   Grobe Skizze eines Autos   **Prompt:** Verwandle diese grobe Bleistiftskizze eines futuristischen Autos in ein ausgefeiltes Foto des fertigen Konzeptfahrzeugs in einem Showroom. Behalte die eleganten Linien und das flache Profil aus der Skizze bei, füge aber eine metallisch blaue Lackierung und Neonfelgenbeleuchtung hinzu. | Hochglanzfoto eines Konzeptfahrzeugs |
 
-#### Karakter tutarlılığı: 360 görünüm
+#### Gleichbleibende Darstellung von Charakteren: 360-Grad-Ansicht
 
-Farklı açılar için yinelemeli olarak istemde bulunarak bir karakterin 360 derece görünümlerini oluşturabilirsiniz. En iyi sonuçlar için tutarlılığı korumak amacıyla sonraki istemlere daha önce oluşturulan resimleri ekleyin. Karmaşık pozlar için istenen pozun referans görselini ekleyin.
+Sie können 360-Grad-Ansichten einer Figur generieren, indem Sie iterativ Prompts für verschiedene Winkel eingeben. Die besten Ergebnisse erzielen Sie, wenn Sie zuvor generierte Bilder in nachfolgende Prompts einbeziehen, um die Konsistenz zu wahren. Fügen Sie für komplexe Posen ein Referenzbild der gewünschten Pose hinzu.
 
-| **İstem** | **Üretilen çıkış** |
+| **Eingabeaufforderung** | **Generierte Ausgabe** |
 | --- | --- |
-| **Giriş resmi:**  Beyaz gözlüklü bir adamın orijinal girişi   Orijinal resim   **İstem:** Bu adamın beyaz arka plan üzerinde, sağa doğru profilden çekilmiş stüdyo portresi | Beyaz gözlüklü bir adamın sağa bakarkenki görüntüsü   Beyaz gözlüklü adam sağa bakıyor   Beyaz gözlüklü bir adamın ileriye doğru baktığı görsel   Beyaz gözlüklü adam öne bakıyor |
+| **Eingabebild:**  Originaleingabe eines Mannes mit weißer Brille   Originalbild   **Prompt:** Ein Studioporträt dieses Mannes vor weißem Hintergrund, im Profil nach rechts blickend | Ausgabe eines Mannes mit weißer Brille, der nach rechts blickt   Mann mit weißer Brille, der nach rechts blickt   Ausgabe eines Mannes mit weißer Brille, der nach vorn blickt   Mann mit weißer Brille, der nach vorn blickt |
 
-### En iyi uygulamalar
+### Best Practices
 
-Sonuçlarınızı iyi seviyeden mükemmel seviyeye taşımak için aşağıdaki profesyonel stratejileri iş akışınıza dahil edin.
+Wenn Sie Ihre Ergebnisse von gut zu großartig verbessern möchten, sollten Sie diese professionellen Strategien in Ihren Workflow einbinden.
 
-- **Aşırı ayrıntılı olun:** Ne kadar çok ayrıntı verirseniz o kadar fazla kontrol sahibi olursunuz. "Fantezi zırh" yerine "gümüş yaprak desenleriyle kazınmış, yüksek yakalı ve şahin kanatları şeklinde omuzlukları olan, süslü elf zırhı" gibi bir açıklama yapın.
-- **Bağlam ve amaç sağlama:** Resmin *amacını* açıklayın. Modelin bağlamı anlama şekli nihai çıktıyı etkiler. Örneğin, "Üst düzey, minimalist bir cilt bakımı markası için logo oluştur" istemi, yalnızca "Logo oluştur" istemine kıyasla daha iyi sonuçlar verir.
-- **İterasyon yapın ve iyileştirin:** İlk denemede mükemmel bir resim elde etmeyi beklemeyin. Küçük değişiklikler yapmak için modelin etkileşimli yapısından yararlanın. "Bu harika, ancak ışığı biraz daha sıcak yapabilir misin?" veya "Her şeyi aynı tut ama karakterin ifadesini daha ciddi olacak şekilde değiştir" gibi istemlerle devam edin.
-- **Adım adım talimatlar kullanın:** Çok sayıda öğe içeren karmaşık sahneler için isteminizi adımlara ayırın. "Öncelikle şafakta sakin ve sisli bir orman arka planı oluştur. Ardından, ön plana yosun kaplı eski bir taş sunak ekleyin.
-  Son olarak, sunakın üzerine tek bir parlayan kılıç yerleştirin."
-- **"Anlamsal olumsuz istemler" kullanın:** "Araba yok" demek yerine istediğiniz sahneyi olumlu bir şekilde tanımlayın: "Trafik işareti olmayan boş ve ıssız bir sokak."
-- **Kamerayı kontrol etme:** Kompozisyonu kontrol etmek için fotoğraf ve sinema dilini kullanın. `wide-angle shot`, `macro shot`, `low-angle
-  perspective` gibi terimler.
+- **Seien Sie so genau wie möglich**:Je mehr Details Sie angeben, desto mehr Kontrolle haben Sie. Statt „Fantasy-Rüstung“ beschreiben Sie sie: „aufwendige Elfen-Rüstung mit eingravierten Silberblattmustern, mit einem hohen Kragen und Schulterstücken in Form von Falkenflügeln“.
+- **Kontext und Absicht angeben:** Erklären Sie den *Zweck* des Bildes. Das Verständnis des Modells für den Kontext beeinflusst die endgültige Ausgabe. Beispiel: „Erstelle ein Logo für eine exklusive, minimalistische Hautpflegemarke“ liefert bessere Ergebnisse als nur „Erstelle ein Logo“.
+- **Wiederholen und verfeinern:** Erwarten Sie nicht, dass Sie beim ersten Versuch ein perfektes Bild erhalten. Nutzen Sie die Konversationsfähigkeit des Modells, um kleine Änderungen vorzunehmen. Anschließend können Sie weitere Prompts eingeben, z. B. „Das ist toll, aber kannst du die Beleuchtung etwas wärmer machen?“ oder „Lass alles so, wie es ist, aber ändere den Gesichtsausdruck der Figur, sodass sie ernster wirkt.“
+- **Detaillierte Anleitung verwenden**:Bei komplexen Szenen mit vielen Elementen sollten Sie Ihren Prompt in Schritte unterteilen. „Erstelle zuerst einen Hintergrund mit einem ruhigen, nebligen Wald im Morgengrauen. Füge dann im Vordergrund einen moosbedeckten, alten Steinaltar hinzu.
+  Platziere dann ein einzelnes, leuchtendes Schwert auf dem Altar.“
+- **Semantische negative Prompts verwenden:** Beschreiben Sie die gewünschte Szene positiv, anstatt „keine Autos“ zu sagen: „eine leere, verlassene Straße ohne Anzeichen von Verkehr“.
+- **Kamera steuern:** Verwenden Sie fotografische und filmische Begriffe, um die Komposition zu steuern. Begriffe wie `wide-angle shot`, `macro shot`, `low-angle
+  perspective`.
 
-## Sınırlamalar
+## Beschränkungen
 
-- En iyi performans için şu dilleri kullanın: EN, ar-EG, de-DE, es-MX,
-  fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
-- Görüntü üretme özelliği, ses girişlerini desteklemez. Video girişleri yalnızca Gemini Nano Banana 2.1, Gemini 3.1 Flash Image ve Gemini 3.1 Flash Lite Image için desteklenir.
-- Model, kullanıcının açıkça istediği resim çıkışlarının sayısını her zaman tam olarak karşılamaz.
-- `gemini-2.5-flash-image`, giriş olarak en fazla 3 resimle en iyi şekilde çalışır. `gemini-3-pro-image` ise yüksek doğrulukta 5 resmi ve toplamda 14 resmi destekler. `gemini-nano-banana-2.1` ve `gemini-3.1-flash-image`
-  tek bir iş akışında en fazla 4 karakterin benzerliğini ve 10 nesnenin doğruluğunu destekler.
-- Gemini, bir görüntü için metin oluştururken önce metni oluşturup ardından metni içeren bir görüntü istemeniz durumunda en iyi şekilde çalışır.
-- `gemini-nano-banana-2.1` ve `gemini-3.1-flash-image` Google Arama ile temellendirme, şu anda web aramasından elde edilen gerçek hayattaki insan fotoğraflarının kullanılmasını desteklemiyor.
-- Üretilen tüm görüntülerde [SynthID filigranı](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=tr) bulunur.
+- Die beste Leistung erzielen Sie mit den folgenden Sprachen: EN, ar-EG, de-DE, es-MX, fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
+- Die Bildgenerierung unterstützt keine Audioeingaben. Videoeingaben werden nur für Gemini Nano Banana 2.1, Gemini 3.1 Flash Image und Gemini 3.1 Flash Lite Image unterstützt.
+- Das Modell gibt nicht immer genau die Anzahl von Bildern aus, die der Nutzer explizit anfordert.
+- `gemini-2.5-flash-image` funktioniert am besten mit bis zu 3 Bildern als Eingabe, während `gemini-3-pro-image` 5 Bilder mit hoher Qualität und insgesamt bis zu 14 Bilder unterstützt. `gemini-nano-banana-2.1` und `gemini-3.1-flash-image` unterstützen die Ähnlichkeit von bis zu 4 Zeichen und die Genauigkeit von bis zu 10 Objekten in einem einzigen Workflow.
+- Wenn Sie Text für ein Bild generieren, funktioniert Gemini am besten, wenn Sie zuerst den Text generieren und dann nach einem Bild mit dem Text fragen.
+- `gemini-nano-banana-2.1` und `gemini-3.1-flash-image` Fundierung mit der Google Suche unterstützen derzeit nicht die Verwendung von realen Bildern von Personen aus der Websuche.
+- Alle generierten Bilder enthalten ein [SynthID-Wasserzeichen](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=de).
 
-## İsteğe bağlı yapılandırmalar
+## Optionale Konfigurationen
 
-İsteğe bağlı olarak, `generate_content` çağrılarının `config` alanında modelin çıkışının yanıt biçimlerini ve en-boy oranını yapılandırabilirsiniz.
+Optional können Sie die Antwortmodalitäten und das Seitenverhältnis der Modellausgabe im Feld `config` von `generate_content`-Aufrufen konfigurieren.
 
-### Çıkış türleri
+### Ausgabetypen
 
-Model, varsayılan olarak metin ve resim yanıtları (ör. `response_modalities=['Text', 'Image']`) döndürür.
-`response_modalities=['Image']` kullanarak yanıtı yalnızca metin içermeyen resimleri döndürecek şekilde yapılandırabilirsiniz.
+Das Modell gibt standardmäßig Text- und Bildantworten zurück (d. h. `response_modalities=['Text', 'Image']`). Sie können die Antwort so konfigurieren, dass nur Bilder ohne Text zurückgegeben werden. Verwenden Sie dazu `response_modalities=['Image']`.
 
 ### Python
 
@@ -2907,7 +2896,7 @@ const response = await ai.models.generateContent({
   });
 ```
 
-### Go
+### Ok
 
 ```
 result, _ := client.Models.GenerateContent(
@@ -2964,10 +2953,10 @@ curl -s -X POST \
   }'
 ```
 
-### En boy oranları ve resim boyutu
+### Seitenverhältnisse und Bildgröße
 
-Model, varsayılan olarak çıkış resminin boyutunu giriş resminizin boyutuyla eşleştirir veya 1:1 kareler oluşturur.
-Yanıt isteğindeki `response_format` altında bulunan `aspect_ratio` alanını kullanarak çıkış görüntüsünün en boy oranını kontrol edebilirsiniz. Bu alan burada gösterilmiştir:
+Das Modell passt die Größe des Ausgabebildes standardmäßig an die Größe des Eingabebildes an oder generiert andernfalls quadratische Bilder im Format 1:1.
+Sie können das Seitenverhältnis des Ausgabebilds mit dem Feld `aspect_ratio` unter `image_config` in der Antwortanfrage steuern, wie hier gezeigt:
 
 ### Python
 
@@ -2977,7 +2966,9 @@ response = client.models.generate_content(
     model="gemini-2.5-flash-image",
     contents=[prompt],
     config=types.GenerateContentConfig(
-        response_format={"image": {aspect_ratio: "16:9",}}
+        image_config=types.ImageConfig(
+            aspect_ratio="16:9",
+        )
     )
 )
 
@@ -2986,7 +2977,10 @@ response = client.models.generate_content(
     model="gemini-nano-banana-2.1",
     contents=[prompt],
     config=types.GenerateContentConfig(
-        response_format={"image": {aspect_ratio: "16:9",                 image_size: "2K",}}
+        image_config=types.ImageConfig(
+            aspect_ratio="16:9",
+            image_size="2K",
+        )
     )
 )
 ```
@@ -2999,11 +2993,9 @@ const response = await ai.models.generateContent({
     model: "gemini-2.5-flash-image",
     contents: prompt,
     config: {
-      responseFormat: {
-    image: {
+      imageConfig: {
         aspectRatio: "16:9",
-      }
-  },
+      },
     }
   });
 
@@ -3012,17 +3004,15 @@ const response_gemini3 = await ai.models.generateContent({
     model: "gemini-nano-banana-2.1",
     contents: prompt,
     config: {
-      responseFormat: {
-    image: {
+      imageConfig: {
         aspectRatio: "16:9",
         imageSize: "2K",
-      }
-  },
+      },
     }
   });
 ```
 
-### Go
+### Ok
 
 ```
 // For gemini-2.5-flash-image
@@ -3124,11 +3114,9 @@ curl -s -X POST \
       ]
     }],
     "generationConfig": {
-      "responseFormat": {
-    "image": {
+      "imageConfig": {
         "aspectRatio": "16:9"
       }
-  }
     }
   }'
 
@@ -3144,119 +3132,117 @@ curl -s -X POST \
       ]
     }],
     "generationConfig": {
-      "responseFormat": {
-    "image": {
+      "imageConfig": {
         "aspectRatio": "16:9",
         "imageSize": "2K"
       }
-  }
     }
   }'
 ```
 
-Kullanılabilen farklı oranlar ve oluşturulan resmin boyutu aşağıdaki tablolarda listelenmiştir:
+Die verschiedenen verfügbaren Seitenverhältnisse und die Größe des generierten Bildes sind in den folgenden Tabellen aufgeführt:
 
-### Nano Banana 2.1
+### Nano Banana 2.1
 
-| En boy oranı | 1K çözünürlük | 1.000 parça | 2K çözünürlük | 2 bin parça | 4K çözünürlük | 4 bin parça |
+| Seitenverhältnis | 1K-Auflösung | 1.000 Tokens | 2K-Auflösung | 2.000 Tokens | 4K-Auflösung | 4.000 Tokens |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
-| **1:8** | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
-| **2:3** | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
-| **3:2** | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
-| **4:1** | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
-| **8:1** | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
-| **21:9** | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
+| **1:1** | 1024x1024 | 1.120 | 2.048 x 2.048 | 1680 | 4096 x 4096 | 2520 |
+| **1:4** | 512 × 2048 | 1.120 | 1024 × 4096 | 1680 | 2048 × 8192 | 2520 |
+| **1:8** | 384 × 3072 | 1.120 | 768 × 6144 | 1680 | 1536x12288 | 2520 |
+| **2:3** | 848 x 1264 | 1.120 | 1696 × 2528 | 1680 | 3392 × 5056 | 2520 |
+| **3:2** | 1264 × 848 | 1.120 | 2528 × 1696 | 1680 | 5056 × 3392 | 2520 |
+| **3:4** | 896 × 1200 | 1.120 | 1792 × 2400 | 1680 | 3584 × 4800 | 2520 |
+| **4:1** | 2048 × 512 | 1.120 | 4096 x 1024 | 1680 | 8192 × 2048 | 2520 |
+| **4:3** | 1200 × 896 | 1.120 | 2400 × 1792 | 1680 | 4800 × 3584 | 2520 |
+| **4:5** | 928 × 1152 | 1.120 | 1856 × 2304 | 1680 | 3712 × 4608 | 2520 |
+| **5:4** | 1152 x 928 | 1.120 | 2304 × 1856 | 1680 | 4608 × 3712 | 2520 |
+| **8:1** | 3072 x 384 | 1.120 | 6144 × 768 | 1680 | 12288x1536 | 2520 |
+| **9:16** | 768 × 1376 | 1.120 | 1536 × 2752 | 1680 | 3072 × 5504 | 2520 |
+| **16:9** | 1376 × 768 | 1.120 | 2752 × 1536 | 1680 | 5504 × 3072 | 2520 |
+| **21:9** | 1584 × 672 | 1.120 | 3168 × 1344 | 1680 | 6336 × 2688 | 2520 |
 
-### 3.1 Flash Image
+### 3.1 Flash Image
 
-| En boy oranı | 512 çözünürlük | 500 jeton | 1K çözünürlük | 1.000 parça | 2K çözünürlük | 2 bin parça | 4K çözünürlük | 4 bin parça |
+| Seitenverhältnis | 512 Auflösung | 500 Tokens | 1K-Auflösung | 1.000 Tokens | 2K-Auflösung | 2.000 Tokens | 4K-Auflösung | 4.000 Tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
-| **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
-| **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
-| **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 600x448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
-| **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
+| **1:1** | 512 x 512 | 747 | 1024x1024 | 1.120 | 2.048 x 2.048 | 1680 | 4096 x 4096 | 2520 |
+| **1:4** | 256 × 1024 | 747 | 512 × 2048 | 1.120 | 1024 × 4096 | 1680 | 2048 × 8192 | 2520 |
+| **1:8** | 192 x 1536 | 747 | 384 × 3072 | 1.120 | 768 × 6144 | 1680 | 1536x12288 | 2520 |
+| **2:3** | 424 × 632 | 747 | 848 x 1264 | 1.120 | 1696 × 2528 | 1680 | 3392 × 5056 | 2520 |
+| **3:2** | 632 × 424 | 747 | 1264 × 848 | 1.120 | 2528 × 1696 | 1680 | 5056 × 3392 | 2520 |
+| **3:4** | 448 × 600 | 747 | 896 × 1200 | 1.120 | 1792 × 2400 | 1680 | 3584 × 4800 | 2520 |
+| **4:1** | 1024 × 256 | 747 | 2048 × 512 | 1.120 | 4096 x 1024 | 1680 | 8192 × 2048 | 2520 |
+| **4:3** | 600 × 448 | 747 | 1200 × 896 | 1.120 | 2400 × 1792 | 1680 | 4800 × 3584 | 2520 |
+| **4:5** | 464 x 576 | 747 | 928 × 1152 | 1.120 | 1856 × 2304 | 1680 | 3712 × 4608 | 2520 |
+| **5:4** | 576 x 464 | 747 | 1152 x 928 | 1.120 | 2304 × 1856 | 1680 | 4608 × 3712 | 2520 |
+| **8:1** | 1536 × 192 | 747 | 3072 x 384 | 1.120 | 6144 × 768 | 1680 | 12288x1536 | 2520 |
+| **9:16** | 384 x 688 | 747 | 768 × 1376 | 1.120 | 1536 × 2752 | 1680 | 3072 × 5504 | 2520 |
+| **16:9** | 688 × 384 | 747 | 1376 × 768 | 1.120 | 2752 × 1536 | 1680 | 5504 × 3072 | 2520 |
+| **21:9** | 792 x 168 | 747 | 1584 × 672 | 1.120 | 3168 × 1344 | 1680 | 6336 × 2688 | 2520 |
 
-### 3.1 Flash Lite Image
+### 3.1 Flash Lite Image
 
-| En boy oranı | 512 çözünürlük | 500 jeton | 1K çözünürlük | 1.000 parça |
+| Seitenverhältnis | 512 Auflösung | 500 Tokens | 1K-Auflösung | 1.000 Tokens |
 | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024x1024 | 1120 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 |
-| **1:8** | 192x1536 | 747 | 384x3072 | 1120 |
-| **2:3** | 424x632 | 747 | 848x1264 | 1120 |
-| **3:2** | 632x424 | 747 | 1264x848 | 1120 |
-| **3:4** | 448x600 | 747 | 896x1200 | 1120 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 |
-| **4:3** | 600x448 | 747 | 1200x896 | 1120 |
-| **4:5** | 464x576 | 747 | 928x1152 | 1120 |
-| **5:4** | 576x464 | 747 | 1152x928 | 1120 |
-| **8:1** | 1536x192 | 747 | 3072x384 | 1120 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 |
-| **21:9** | 792x168 | 747 | 1584x672 | 1120 |
+| **1:1** | 512 x 512 | 747 | 1024x1024 | 1.120 |
+| **1:4** | 256 × 1024 | 747 | 512 × 2048 | 1.120 |
+| **1:8** | 192 x 1536 | 747 | 384 × 3072 | 1.120 |
+| **2:3** | 424 × 632 | 747 | 848 x 1264 | 1.120 |
+| **3:2** | 632 × 424 | 747 | 1264 × 848 | 1.120 |
+| **3:4** | 448 × 600 | 747 | 896 × 1200 | 1.120 |
+| **4:1** | 1024 × 256 | 747 | 2048 × 512 | 1.120 |
+| **4:3** | 600 × 448 | 747 | 1200 × 896 | 1.120 |
+| **4:5** | 464 x 576 | 747 | 928 × 1152 | 1.120 |
+| **5:4** | 576 x 464 | 747 | 1152 x 928 | 1.120 |
+| **8:1** | 1536 × 192 | 747 | 3072 x 384 | 1.120 |
+| **9:16** | 384 x 688 | 747 | 768 × 1376 | 1.120 |
+| **16:9** | 688 × 384 | 747 | 1376 × 768 | 1.120 |
+| **21:9** | 792 x 168 | 747 | 1584 × 672 | 1.120 |
 
-### 3.1 Pro Image
+### 3.1 Pro Image
 
-| En boy oranı | 1K çözünürlük | 1.000 parça | 2K çözünürlük | 2 bin parça | 4K çözünürlük | 4 bin parça |
+| Seitenverhältnis | 1K-Auflösung | 1.000 Tokens | 2K-Auflösung | 2.000 Tokens | 4K-Auflösung | 4.000 Tokens |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
-| **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
-| **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
-| **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
-| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
-| **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
-| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
-| **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
-| **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
+| **1:1** | 1024x1024 | 1.120 | 2.048 x 2.048 | 1.120 | 4096 x 4096 | 2000 |
+| **2:3** | 848 x 1264 | 1.120 | 1696 × 2528 | 1.120 | 3392 × 5056 | 2000 |
+| **3:2** | 1264 × 848 | 1.120 | 2528 × 1696 | 1.120 | 5056 × 3392 | 2000 |
+| **3:4** | 896 × 1200 | 1.120 | 1792 × 2400 | 1.120 | 3584 × 4800 | 2000 |
+| **4:3** | 1200 × 896 | 1.120 | 2400 × 1792 | 1.120 | 4800 × 3584 | 2000 |
+| **4:5** | 928 × 1152 | 1.120 | 1856 × 2304 | 1.120 | 3712 × 4608 | 2000 |
+| **5:4** | 1152 x 928 | 1.120 | 2304 × 1856 | 1.120 | 4608 × 3712 | 2000 |
+| **9:16** | 768 × 1376 | 1.120 | 1536 × 2752 | 1.120 | 3072 × 5504 | 2000 |
+| **16:9** | 1376 × 768 | 1.120 | 2752 × 1536 | 1.120 | 5504 × 3072 | 2000 |
+| **21:9** | 1584 × 672 | 1.120 | 3168 × 1344 | 1.120 | 6336 × 2688 | 2000 |
 
-### Gemini 2.5 Flash Image
+### Gemini 2.5 Flash Image
 
-| En boy oranı | Çözünürlük | Token'lar |
+| Seitenverhältnis | Auflösung | Tokens |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
-| 2:3 | 832x1248 | 1290 |
-| 3:2 | 1248x832 | 1290 |
-| 3:4 | 864x1184 | 1290 |
-| 4:3 | 1184x864 | 1290 |
-| 4:5 | 896x1152 | 1290 |
-| 5:4 | 1152x896 | 1290 |
-| 9:16 | 768x1344 | 1290 |
-| 16:9 | 1344x768 | 1290 |
-| 21:9 | 1536x672 | 1290 |
+| 2:3 | 832 × 1248 | 1290 |
+| 3:2 | 1248 × 832 | 1290 |
+| 3:4 | 864 x 1184 | 1290 |
+| 4:3 | 1184 × 864 | 1290 |
+| 4:5 | 896 × 1152 | 1290 |
+| 5:4 | 1152 × 896 | 1290 |
+| 9:16 | 768 × 1344 | 1290 |
+| 16:9 | 1344 × 768 | 1290 |
+| 21:9 | 1536 × 672 | 1290 |
 
-## Imagen'ı ne zaman kullanmalısınız?
+## Wann Imagen verwendet werden sollte
 
-## Sırada ne var?
+## Nächste Schritte
 
-- Daha fazla örnek ve kod örneğini [çözüm kitabı kılavuzunda](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=tr) bulabilirsiniz.
-- Gemini API ile nasıl video oluşturacağınızı öğrenmek için [Veo kılavuzuna](https://ai.google.dev/gemini-api/docs/video?hl=tr) göz atın.
-- Gemini modelleri hakkında daha fazla bilgi edinmek için [Gemini modelleri](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) başlıklı makaleyi inceleyin.
+- Weitere Beispiele und Codebeispiele finden Sie im [Cookbook-Leitfaden](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=de).
+- Im [Veo-Leitfaden](https://ai.google.dev/gemini-api/docs/video?hl=de) erfahren Sie, wie Sie mit der Gemini API Videos generieren.
+- Weitere Informationen zu Gemini-Modellen finden Sie unter [Gemini-Modelle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de).
 
-Geri bildirim gönderin
+Feedback geben
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Son güncelleme tarihi: 2026-10-09 UTC.
+Zuletzt aktualisiert: 2026-10-19 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Haben Sie Feedback für uns?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-10-09 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-19 (UTC)."],[],[]]

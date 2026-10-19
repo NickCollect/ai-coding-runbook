@@ -1,35 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=id
-fetched_at: 2026-10-12T07:00:24.341646+00:00
-title: "Pemikiran Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=de
+fetched_at: 2026-10-19T05:53:18.130733+00:00
+title: "Gemini-Denken \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash kini tersedia. [Coba praktikkan](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=id).
+Gemini 4 Argon ist jetzt verfügbar. [Jetzt ausprobieren](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=de).
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs/generate-content?hl=id)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
 
-Kirim masukan
+Feedback geben
 
-# Pemikiran Gemini
+# Gemini-Denken
 
-[Model seri Gemini 3 dan 2.5](https://ai.google.dev/gemini-api/docs/models?hl=id) menggunakan "proses berpikir" internal yang secara signifikan meningkatkan kemampuan penalaran dan perencanaan multi-langkahnya, sehingga sangat efektif untuk tugas-tugas kompleks seperti coding, matematika tingkat lanjut, dan analisis data.
+[Gemini-Modelle](https://ai.google.dev/gemini-api/docs/models?hl=de) verwenden einen internen
+„Denkprozess“, der ihre Fähigkeiten zum Schlussfolgern und zur mehrstufigen
+Planung erheblich verbessert. Dadurch sind sie sehr effektiv für komplexe Aufgaben wie
+Programmieren, fortgeschrittene Mathematik und Datenanalyse.
 
-Panduan ini menunjukkan cara menggunakan kemampuan penalaran Gemini menggunakan
-Gemini API.
+In dieser Anleitung erfahren Sie, wie Sie die Denkfunktionen von Gemini mit der Gemini API nutzen.
 
-## Membuat konten dengan pemikiran
+## Inhalte mit Denkprozess generieren
 
-Memulai permintaan dengan model pemikiran serupa dengan permintaan pembuatan konten lainnya. Perbedaan utamanya terletak pada penentuan salah satu
-[model dengan dukungan pemikiran](#tools) di kolom `model`, seperti
-yang ditunjukkan dalam contoh
-[pembuatan teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id) berikut:
+Das Initiieren einer Anfrage mit einem Thinking-Modell ähnelt jeder anderen Anfrage zur Inhaltserstellung. Der Hauptunterschied besteht darin, eines der
+[Modelle mit Thinking-Unterstützung](#tools) im `model` Feld anzugeben, wie
+im folgenden
+[Beispiel zur Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de) gezeigt:
 
 ### Python
 
@@ -67,7 +69,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -117,17 +119,13 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
  ```
 ```
 
-## Ringkasan penalaran
+## Zusammenfassungen der Gedanken
 
-Ringkasan pemikiran adalah versi ringkas dari pemikiran mentah model dan menawarkan insight tentang proses penalaran internal model. Perhatikan bahwa
-tingkat pemikiran dan anggaran berlaku untuk pemikiran mentah model, bukan untuk ringkasan
-pemikiran.
+Zusammenfassungen der Gedanken sind zusammengefasste Versionen der Rohgedanken des Modells und bieten Einblicke in den internen Denkprozess des Modells. Die Denkaufwände und -budgets gelten für die Rohgedanken des Modells und nicht für Zusammenfassungen der Gedanken.
 
-Anda dapat mengaktifkan ringkasan pemikiran dengan menyetel `includeThoughts` ke `true` dalam konfigurasi permintaan. Kemudian, Anda dapat mengakses ringkasan dengan melakukan iterasi pada `parts` parameter `response`, dan memeriksa boolean `thought`.
+Sie können Zusammenfassungen der Gedanken aktivieren, indem Sie `includeThoughts` in der Anfragekonfiguration auf `true` setzen. Anschließend können Sie auf die Zusammenfassung zugreifen, indem Sie die `parts` des Parameters `response` durchlaufen und den booleschen Wert `thought` prüfen.
 
-Berikut adalah contoh yang menunjukkan cara mengaktifkan dan mengambil ringkasan pemikiran
-tanpa streaming, yang menampilkan satu ringkasan pemikiran akhir dengan
-respons:
+Hier ein Beispiel, wie Sie Zusammenfassungen der Gedanken ohne Streaming aktivieren und abrufen. Dabei wird mit der Antwort eine einzelne, endgültige Zusammenfassung der Gedanken zurückgegeben:
 
 ### Python
 
@@ -196,7 +194,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -237,7 +235,7 @@ func main() {
 }
 ```
 
-Berikut adalah contoh penggunaan berpikir dengan streaming, yang menampilkan ringkasan inkremental yang terus diperbarui selama pembuatan:
+Und hier ein Beispiel für die Verwendung von Thinking mit Streaming, bei dem während der Generierung fortlaufende, inkrementelle Zusammenfassungen zurückgegeben werden:
 
 ### Python
 
@@ -335,7 +333,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -390,26 +388,25 @@ func main() {
 }
 ```
 
-## Mengendalikan pemikiran
+## Denkprozess steuern
 
-Model Gemini terlibat dalam pemikiran dinamis secara default, dengan otomatis menyesuaikan jumlah upaya penalaran berdasarkan kompleksitas permintaan pengguna.
-Namun, jika Anda memiliki batasan latensi tertentu atau memerlukan model untuk melakukan penalaran yang lebih mendalam dari biasanya, Anda dapat menggunakan parameter secara opsional untuk mengontrol perilaku berpikir.
+Gemini-Modelle führen standardmäßig dynamische Denkprozesse durch und passen den Aufwand für das Schlussfolgern automatisch an die Komplexität der Nutzeranfrage an.
+Wenn Sie jedoch bestimmte Latenzbeschränkungen haben oder das Modell tiefergehende Schlussfolgerungen als üblich ziehen soll, können Sie optional Parameter verwenden, um das Denkverhalten zu steuern.
 
-### Tingkat penalaran (Gemini 3)
+### Denkaufwände (Gemini 4 und Gemini 3)
 
-Parameter `thinkingLevel`, yang direkomendasikan untuk model Gemini 3 dan yang lebih baru,
-memungkinkan Anda mengontrol perilaku penalaran.
+Mit dem Parameter `thinkingLevel`, der für Gemini 4 erforderlich und für Gemini 3-Modelle empfohlen wird, können Sie das Verhalten beim Schlussfolgern steuern. Gemini 4 (`gemini-4-argon`) unterstützt `low`, `medium` (Standard) und `high`.
 
-Tabel berikut menjelaskan setelan `thinkingLevel` untuk setiap jenis model:
+In der folgenden Tabelle sind die Einstellungen für `thinkingLevel` für jeden Modelltyp aufgeführt:
 
-| Tingkat Pemikiran | Gemini 3.8 Flash | Gemini 3.6 Flash | Gemini 3.1 Pro | Gemini 3.5 & 3.1 Flash-Lite | Gambar Gemini 3.1 Flash-Lite | Gemini 3 Flash | Gemini Robotics ER 2 | Deskripsi |
+| Denkaufwand | Gemini 3.8 Flash | Gemini 3.6 Flash | Gemini 4 Argon | Gemini 3.5 &3.1 Flash-Lite | Gemini 3.1 Flash-Lite Image | Gemini 3 Flash | Gemini Robotics ER 2 | Beschreibung |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Tidak didukung (error) | Didukung | Tidak didukung | Didukung (Default) | Didukung (Default) | Didukung | Didukung | Cocok dengan setelan "tanpa penalaran" untuk sebagian besar kueri. Perhatikan, `minimal` tidak menjamin bahwa penalaran dinonaktifkan, model mungkin bernalar sangat minimal untuk tugas yang kompleks. |
-| **`low`** | Didukung | Didukung | Didukung | Didukung | Tidak Didukung | Didukung | Didukung | Meminimalkan latensi dan biaya. |
-| **`medium`** | Didukung (Default) | Didukung (Default) | Didukung | Didukung | Tidak didukung | Didukung | Didukung | Pemikiran yang seimbang untuk sebagian besar tugas. |
-| **`high`** | Didukung (Dinamis) | Didukung (Dinamis) | Didukung (Default, Dinamis) | Didukung (Dinamis) | Didukung (Dinamis) | Didukung (Default, Dinamis) | Didukung (Default, Dinamis) | Memaksimalkan kedalaman penalaran. Model mungkin memerlukan waktu yang jauh lebih lama untuk mencapai token output pertama (non-pemikiran), tetapi outputnya akan lebih beralasan. |
+| **`minimal`** | Nicht unterstützt (Fehler) | Unterstützt | Nicht unterstützt (Fehler) | Unterstützt (Standard) | Unterstützt (Standard) | Unterstützt | Unterstützt | Entspricht für die meisten Anfragen der Einstellung „Kein Denkprozess“. Beachten Sie, dass `minimal` nicht garantiert, dass der Denkprozess deaktiviert ist. Das Modell kann für komplexe Aufgaben sehr wenig Schlussfolgern. |
+| **`low`** | Unterstützt | Unterstützt | Unterstützt | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt | Minimiert Latenz und Kosten. |
+| **`medium`** | Unterstützt (Standard) | Unterstützt (Standard) | Unterstützt (Standard) | Unterstützt | Nicht unterstützt | Unterstützt | Unterstützt | Ausgewogener Denkprozess für die meisten Aufgaben. |
+| **`high`** | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (dynamisch) | Unterstützt (Standard, dynamisch) | Unterstützt (Standard, dynamisch) | Maximiert die Tiefe des Denkprozesses. Es kann deutlich länger dauern, bis das Modell ein erstes Ausgabetoken (ohne Denkprozess) erreicht, aber die Ausgabe ist sorgfältiger durchdacht. |
 
-Contoh berikut menunjukkan cara menetapkan tingkat pemikiran.
+Das folgende Beispiel zeigt, wie Sie den Denkaufwand festlegen.
 
 ### Python
 
@@ -454,7 +451,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -512,44 +509,47 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:g
 }'
 ```
 
-Anda tidak dapat menonaktifkan kemampuan berpikir Gemini 3.1 Pro. Gemini 3 Flash dan Flash-Lite juga tidak mendukung penonaktifan penalaran sepenuhnya. Jika Anda tidak menentukan tingkat penalaran, Gemini akan menggunakan tingkat penalaran default model Gemini 3 (misalnya, `"high"` untuk Gemini 3.1 Pro, dan `"medium"` untuk Gemini 3.8 Flash dan Gemini 3.6 Flash).
+Sie können den Denkprozess für Gemini 4 Argon nicht deaktivieren. Gemini 3 Flash und Flash-Lite
+unterstützen auch keine vollständige Deaktivierung des Denkprozesses.
+Wenn Sie keinen Denkaufwand angeben, verwendet Gemini den
+Standard-Denkaufwand des Modells (z.B. `"medium"` für Gemini 4 Argon, Gemini 3.8 Flash und Gemini 3.6 Flash).
 
-Model seri Gemini 2.5 tidak mendukung `thinkingLevel`; gunakan `thinkingBudget` sebagai gantinya.
+Modelle der Gemini 2.5-Serie unterstützen `thinkingLevel` nicht. Verwenden Sie stattdessen `thinkingBudget`.
 
-### Batas token dan `max_output_tokens`
+### Tokenlimits und `max_output_tokens`
 
-Parameter pembuatan [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig) menetapkan jumlah maksimum token yang dapat dihasilkan respons, termasuk token pemikiran.
+Mit dem [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=de#v1beta.GenerationConfig)
+Generierungsparameter wird die maximale Anzahl von Tokens festgelegt, die eine Antwort generieren kann,
+einschließlich der Thinking-Tokens.
 
-Jika ditetapkan, parameter ini bertindak sebagai batas akhir yang diterapkan oleh infrastruktur
-tanpa mengubah cara model mengalokasikan anggaran penalaran
-(`thinking_level`).
+Wenn dieser Parameter festgelegt ist, fungiert er als harte Begrenzung, die von der Infrastruktur erzwungen wird, ohne die Zuweisung des Thinking-Budgets (`thinking_level`) durch das Modell zu ändern.
 
-Jika model mencapai batas ini saat melakukan penalaran, model akan berhenti membuat dengan
-`finish_reason: MAX_TOKENS` dan menampilkan output yang terpotong atau kosong (sambil tetap
-menagih token penalaran yang dihasilkan). Untuk mengurangi biaya atau latensi tanpa
-memangkas respons, turunkan `thinking_level` (`low` atau `medium`) daripada
-menetapkan `max_output_tokens` kecil.
+Wenn das Modell diese Begrenzung beim Schlussfolgern erreicht, wird die Generierung mit `finish_reason: MAX_TOKENS` beendet und eine gekürzte oder leere Ausgabe zurückgegeben (wobei alle generierten Thinking-Tokens weiterhin in Rechnung gestellt werden). Um Kosten oder Latenz zu reduzieren, ohne Antworten zu kürzen, senken Sie stattdessen `thinking_level` (`low` oder `medium`), anstatt einen kleinen Wert für `max_output_tokens` festzulegen.
 
-### Anggaran penalaran
+Beachten Sie bei Gemini 4-Modellen (`gemini-4-argon`) die folgenden Kontext- und Ausgabebegrenzungen:
 
-Parameter `thinkingBudget`, yang diperkenalkan dengan seri Gemini 2.5, memandu
-model tentang jumlah token penalaran tertentu yang akan digunakan untuk melakukan penalaran.
+- **Gemeinsames Kontextfenster mit 1 Mio. Tokens:** Eingabe-, Thinking- und Ausgabetokens teilen sich ein gemeinsames Kontextfenster mit 1 Mio. Tokens (`1,048,576` Tokens). Wenn Ihre Eingabetokens plus `max_output_tokens` 1.048.576 Tokens überschreiten, begrenzt die API die Ausgabe automatisch auf den verbleibenden Platz im Kontextfenster (`1,048,576` minus Ihre Eingabetokens).
+- **Ausgabebegrenzungen pro Anfrage (64.000 für Streaming / 32.000 für Nicht-Streaming) und lange Decodierung (bis zu 1 Mio. Tokens)**: Eine einzelne Streaming-Anfrage (`streamGenerateContent`) gibt bis zu `65,536` Tokens zurück und eine einzelne Nicht-Streaming-Anfrage (`generateContent`) bis zu `32,768` Tokens. Wenn Sie mehr als die Begrenzung pro Anfrage generieren möchten (bis zu `1,048,576` Tokens minus Ihre Eingabe), legen Sie für `max_output_tokens` einen Wert über der Begrenzung fest. Die neuesten Google GenAI SDKs werden standardmäßig automatisch über mehrere Hops hinweg fortgesetzt (`automatic_continuation=True`). Alternativ können Sie eine Clientschleife mit dem `continuation_token` ausführen, das zurückgegeben wird, wenn ein Hop mit `finish_reason: "CONTINUATION"` beendet wird. Codebeispiele finden Sie unter [Lange Decodierung](https://ai.google.dev/gemini-api/docs/generate-content/long-decode?hl=de).
 
-Berikut adalah detail konfigurasi `thinkingBudget` untuk setiap jenis model.
-Anda dapat menonaktifkan pemikiran dengan menyetel `thinkingBudget` ke 0.
-Menetapkan `thinkingBudget` ke -1 akan mengaktifkan
-**pemikiran dinamis**, yang berarti model akan menyesuaikan anggaran berdasarkan
-kompleksitas permintaan.
+### Thinking-Budgets
 
-| Model | Setelan default (Anggaran penalaran tidak ditetapkan) | Rentang | Menonaktifkan penalaran | Mengaktifkan pemikiran dinamis |
+Mit dem Parameter `thinkingBudget`, der mit der Gemini 2.5-Serie eingeführt wurde, wird dem Modell die genaue Anzahl der Thinking-Tokens vorgegeben, die für das Schlussfolgern verwendet werden sollen.
+
+Im Folgenden finden Sie Konfigurationsdetails für `thinkingBudget` für jeden Modelltyp.
+Sie können den Denkprozess deaktivieren, indem Sie `thinkingBudget` auf 0 setzen.
+Wenn Sie das `thinkingBudget` auf -1 setzen, wird
+**dynamisches Thinking** aktiviert. Das bedeutet, dass das Modell das Budget an die
+Komplexität der Anfrage anpasst.
+
+| Modell | Standardeinstellung (Thinking-Budget ist nicht festgelegt) | Bereich | Denkprozess deaktivieren | Dynamisches Thinking aktivieren |
 | --- | --- | --- | --- | --- |
-| **2.5 Pro** | Pemikiran dinamis | `128` hingga `32768` | T/A: Tidak dapat menonaktifkan pemikiran | `thinkingBudget = -1` (Default) |
-| **2.5 Flash** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
-| **Pratinjau 2.5 Flash** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
-| **2.5 Flash Lite** | Model tidak berpikir | `512` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **Pratinjau 2.5 Flash Lite** | Model tidak berpikir | `512` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **Pratinjau Robotics-ER 1.6** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
-| **Pratinjau Audio Native Live 2.5 Flash (09-2025)** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
+| **2.5 Pro** | Dynamisches Thinking | `128` bis `32768` | –: Denkprozess kann nicht deaktiviert werden | `thinkingBudget = -1` (Standard) |
+| **2.5 Flash** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
+| **2.5 Flash Preview** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
+| **2.5 Flash Lite** | Modell denkt nicht | `512` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **2.5 Flash Lite Preview** | Modell denkt nicht | `512` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Robotics-ER 1.6 Preview** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
+| **2.5 Flash Live Native Audio Preview (09-2025)** | Dynamisches Thinking | `0` bis `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Standard) |
 
 ### Python
 
@@ -602,7 +602,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -664,36 +664,32 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:g
 }'
 ```
 
-Bergantung pada perintahnya, model dapat melampaui atau tidak memenuhi anggaran token.
+Je nach Prompt kann das Modell das Tokenbudget über- oder unterschreiten.
 
-## Tanda tangan penalaran
+## Gedankensignaturen
 
-Gemini API bersifat stateless, sehingga model memperlakukan setiap permintaan API secara independen
-dan tidak memiliki akses ke konteks pemikiran dari giliran sebelumnya dalam interaksi
-multi-giliran.
+Die Gemini API ist zustandslos. Das Modell behandelt daher jede API-Anfrage unabhängig und hat keinen Zugriff auf den Denkkontext aus früheren Runden in Multi-Turn-Interaktionen.
 
-Untuk memungkinkan pemeliharaan konteks pemikiran di seluruh interaksi multi-giliran, Gemini menampilkan tanda tangan pemikiran, yang merupakan representasi terenkripsi dari proses pemikiran internal model.
+Um den Denkkontext über mehrere Runden hinweg beizubehalten, gibt Gemini Gedankensignaturen zurück. Das sind verschlüsselte Darstellungen des internen Denkprozesses des Modells.
 
-- **Model Gemini 2.5** menampilkan tanda tangan pemikiran saat fitur penalaran diaktifkan dan
-  permintaan mencakup [panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#thinking),
-  khususnya [deklarasi fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-2).
-- **Model Gemini 3** dapat menampilkan tanda tangan pemikiran untuk semua jenis [bagian](https://ai.google.dev/api/caching?hl=id#Part).
-  Sebaiknya Anda selalu meneruskan semua tanda tangan yang diterima, tetapi hal ini *wajib* untuk tanda tangan panggilan fungsi. Baca halaman
-  [Thought Signatures](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk
-  mempelajari lebih lanjut.
+- **Gemini 2.5-Modelle** geben Gedankensignaturen zurück, wenn der Denkprozess aktiviert ist und
+  die Anfrage [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de#thinking) enthält,
+  insbesondere [Funktionsdeklarationen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de#step-2).
+- **Gemini 4- und Gemini 3-Modelle** können Gedankensignaturen für alle Arten
+  von [Teilen](https://ai.google.dev/api/caching?hl=de#Part) zurückgeben. Wir empfehlen, alle Signaturen immer so zurückzugeben, wie sie empfangen wurden. Für Funktionsaufrufsignaturen ist dies jedoch *erforderlich*. Weitere Informationen finden Sie auf der Seite
+  [Gedankensignaturen](https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=de).
 
-Batasan penggunaan lain yang perlu dipertimbangkan dengan panggilan fungsi mencakup:
+Weitere Nutzungslimits, die bei Funktionsaufrufen zu beachten sind:
 
-- Tanda tangan ditampilkan dari model dalam bagian lain dalam respons,
-  misalnya panggilan fungsi atau bagian teks.
-  [Kembalikan seluruh respons](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-4)
-  dengan semua bagian kembali ke model pada giliran berikutnya.
-- Jangan menggabungkan bagian dengan tanda tangan.
-- Jangan menggabungkan satu bagian dengan tanda tangan dengan bagian lain tanpa tanda tangan.
+- Signaturen werden vom Modell innerhalb anderer Teile in der Antwort zurückgegeben, z. B. Funktionsaufrufe oder Textteile.
+  [Geben Sie die gesamte Antwort](https://ai.google.dev/gemini-api/docs/function-calling?hl=de#step-4)
+  mit allen Teilen in nachfolgenden Runden an das Modell zurück.
+- Verketten Sie keine Teile mit Signaturen.
+- Führen Sie keinen Teil mit einer Signatur mit einem anderen Teil ohne Signatur zusammen.
 
-## Harga
+## Preise
 
-Jika penalaran diaktifkan, harga respons adalah jumlah token output dan token penalaran. Anda bisa mendapatkan total jumlah token pemikiran yang dihasilkan dari kolom `thoughtsTokenCount`.
+Wenn der Denkprozess aktiviert ist, setzt sich der Preis für die Antwort aus den Ausgabetokens und den Thinking-Tokens zusammen. Die Gesamtzahl der generierten Thinking-Tokens finden Sie im Feld `thoughtsTokenCount`.
 
 ### Python
 
@@ -711,7 +707,7 @@ console.log(`Thoughts tokens: ${response.usageMetadata.thoughtsTokenCount}`);
 console.log(`Output tokens: ${response.usageMetadata.candidatesTokenCount}`);
 ```
 
-### Go
+### Ok
 
 ```
 // ...
@@ -719,65 +715,64 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-Model pemikiran menghasilkan pemikiran lengkap untuk meningkatkan kualitas respons akhir, lalu menghasilkan [ringkasan](#summaries) untuk memberikan insight tentang proses pemikiran. Jadi, harga didasarkan pada token pemikiran penuh yang dibutuhkan model untuk membuat ringkasan, meskipun hanya ringkasan yang dihasilkan dari API.
+Thinking-Modelle generieren vollständige Gedanken, um die Qualität der endgültigen
+Antwort zu verbessern, und geben dann [Zusammenfassungen](#summaries) aus, um Einblicke in den
+Denkprozess zu geben. Die Preise basieren also auf den vollständigen Thinking-Tokens, die das Modell zum Erstellen einer Zusammenfassung benötigt, obwohl nur die Zusammenfassung von der API ausgegeben wird.
 
-Anda dapat mempelajari lebih lanjut token dalam panduan [Penghitungan token](https://ai.google.dev/gemini-api/docs/tokens?hl=id).
+Weitere Informationen zu Tokens finden Sie in der [Anleitung zum Zählen von Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
 
-## Praktik terbaik
+## Best Practices
 
-Bagian ini mencakup beberapa panduan untuk menggunakan model berpikir secara efisien.
-Seperti biasa, mengikuti
-[panduan dan praktik terbaik perintah](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id)
-kami akan memberikan hasil terbaik.
+Dieser Abschnitt enthält einige Hinweise zur effizienten Verwendung von Thinking-Modellen.
+Wie immer erzielen Sie die besten Ergebnisse, wenn Sie unsere
+[Anleitung zu Prompts und Best Practices](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=de)
+befolgen.
 
-### Proses debug dan pengarahan
+### Debugging und Steuerung
 
-- **Tinjau penalaran**: Jika Anda tidak mendapatkan respons yang diharapkan dari model pemikiran, Anda dapat menganalisis ringkasan pemikiran Gemini dengan cermat.
-  Anda dapat melihat cara model memecah tugas dan mencapai kesimpulannya, serta menggunakan informasi tersebut untuk mengoreksi hasil yang salah.
-- **Memberikan Panduan dalam Penalaran**: Jika Anda menginginkan output yang sangat panjang, Anda dapat memberikan panduan dalam perintah untuk membatasi [jumlah pemikiran](#set-budget) yang digunakan model. Dengan begitu, Anda dapat mencadangkan lebih banyak output token untuk respons Anda.
+- **Schlussfolgerungen überprüfen**: Wenn Sie nicht die erwartete Antwort von den
+  Thinking-Modellen erhalten, kann es hilfreich sein, die Zusammenfassungen der Gedanken von Gemini sorgfältig zu analysieren.
+  Sie können sehen, wie die Aufgabe aufgeschlüsselt und die Schlussfolgerung erreicht wurde, und diese Informationen verwenden, um die Ergebnisse zu korrigieren.
+- **Anleitung zum Schlussfolgern geben**: Wenn Sie eine besonders lange
+  Ausgabe erwarten, können Sie in Ihrem Prompt eine Anleitung geben, um den
+  [Aufwand für den Denkprozess](#set-budget) des Modells zu begrenzen. So können Sie mehr Ausgabetokens für Ihre Antwort reservieren.
 
-### Kompleksitas tugas
+### Aufgabenkomplexität
 
-- **Tugas Mudah (Pemikiran dapat DINONAKTIFKAN):** Untuk permintaan langsung yang tidak memerlukan penalaran yang kompleks, seperti pengambilan fakta atau klasifikasi, pemikiran tidak diperlukan. Contohnya antara lain:
-  - "Di mana DeepMind didirikan?"
-  - "Apakah email ini meminta rapat atau hanya memberikan informasi?"
-- **Tugas Sedang (Default/Beberapa Pemikiran):** Banyak permintaan umum yang diuntungkan dari
-  pemrosesan langkah demi langkah atau pemahaman yang lebih mendalam. Gemini dapat menggunakan kemampuan berpikir secara fleksibel untuk tugas-tugas seperti:
-  - Analogi fotosintesis dan tumbuh dewasa.
-  - Bandingkan dan bedakan mobil listrik dan mobil hibrida.
-- **Tugas Sulit (Kemampuan Berpikir Maksimum):** Untuk tantangan yang benar-benar kompleks,
-  seperti menyelesaikan soal matematika yang rumit atau tugas coding, sebaiknya tetapkan
-  anggaran berpikir yang tinggi. Jenis tugas ini mengharuskan model menggunakan kemampuan penalaran dan perencanaan sepenuhnya, yang sering kali melibatkan banyak langkah internal sebelum memberikan jawaban. Contohnya antara lain:
-  - Pecahkan soal 1 di AIME 2025: Temukan jumlah semua bilangan bulat b > 9 yang
-    membuat 17b menjadi pembagi 97b.
-  - Tulis kode Python untuk aplikasi web yang memvisualisasikan data pasar saham real-time, termasuk autentikasi pengguna. Buat seefisien mungkin.
+- **Einfache Aufgaben (Denkprozess kann deaktiviert werden)** : Für einfache Anfragen, bei denen kein komplexes Schlussfolgern erforderlich ist, z. B. das Abrufen von Fakten oder die Klassifizierung, ist kein Denkprozess erforderlich. Beispiele:
+  - „Wo wurde DeepMind gegründet?“
+  - „Wird in dieser E‑Mail um ein Meeting gebeten oder werden nur Informationen bereitgestellt?“
+- **Mittelschwere Aufgaben (Standard/Teilweise Denkprozess)** : Viele häufige Anfragen profitieren von einer schrittweisen Verarbeitung oder einem tieferen Verständnis. Gemini kann die Denkfunktion flexibel für Aufgaben wie die folgenden verwenden:
+  - Analogie zwischen Photosynthese und Erwachsenwerden
+  - Vergleich und Gegenüberstellung von Elektroautos und Hybridautos
+- **Schwierige Aufgaben (maximale Denkfähigkeit)** : Für wirklich komplexe Aufgaben wie das Lösen komplexer mathematischer Probleme oder Programmieraufgaben empfehlen wir, ein hohes Thinking-Budget festzulegen. Bei diesen Aufgaben muss das Modell seine gesamten Fähigkeiten zum Schlussfolgern und Planen einsetzen. Oft sind viele interne Schritte erforderlich, bevor eine Antwort gegeben wird. Beispiele:
+  - Lösen Sie Aufgabe 1 in AIME 2025: Ermitteln Sie die Summe aller ganzzahligen Basen b > 9 für
+    die 17b ein Teiler von 97b ist.
+  - Schreiben Sie Python-Code für eine Webanwendung, die Echtzeit-Aktienmarktdaten visualisiert, einschließlich der Nutzerauthentifizierung. Machen Sie sie so effizient wie möglich.
 
-## Model, alat, dan kemampuan yang didukung
+## Unterstützte Modelle, Tools und Funktionen
 
-Fitur penalaran didukung di semua model seri 3 dan 2.5.
-Anda dapat menemukan semua kemampuan model di halaman
-[ringkasan model](https://ai.google.dev/gemini-api/docs/models?hl=id).
+Thinking-Funktionen werden für alle Modelle der Serien 4, 3 und 2.5 unterstützt.
+Alle Modellfunktionen finden Sie auf der
+[Seite Modellübersicht](https://ai.google.dev/gemini-api/docs/models?hl=de).
 
-Model Penalaran berfungsi dengan semua alat dan kemampuan Gemini. Hal ini memungkinkan
-model berinteraksi dengan sistem eksternal, menjalankan kode, atau mengakses informasi
-real-time, dengan menggabungkan hasilnya ke dalam penalaran dan respons akhir.
+Thinking-Modelle funktionieren mit allen Tools und Funktionen von Gemini. So können die Modelle mit externen Systemen interagieren, Code ausführen oder auf Echtzeitinformationen zugreifen und die Ergebnisse in ihre Schlussfolgerungen und die endgültige Antwort einbeziehen.
 
-Anda dapat mencoba contoh penggunaan alat dengan model pemikiran di
-[Thinking cookbook][Colab].
+Beispiele für die Verwendung von Tools mit Thinking-Modellen finden Sie im [Thinking-Kochbuch][Colab].
 
-## Apa langkah selanjutnya?
+## Nächste Schritte
 
-- Cakupan Thinking tersedia di panduan
-  [Kompatibilitas OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id#thinking) kami.
+- Informationen zur Thinking-Abdeckung finden Sie in unserer
+  [Anleitung zur OpenAI-Kompatibilität](https://ai.google.dev/gemini-api/docs/openai?hl=de#thinking).
 
 [Colab]: https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get\_started\_thinking.ipynb
 
-Kirim masukan
+Feedback geben
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Terakhir diperbarui pada 2026-10-09 UTC.
+Zuletzt aktualisiert: 2026-10-14 (UTC).
 
-Ada masukan untuk kami?
+Haben Sie Feedback für uns?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-10-09 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-10-14 (UTC)."],[],[]]

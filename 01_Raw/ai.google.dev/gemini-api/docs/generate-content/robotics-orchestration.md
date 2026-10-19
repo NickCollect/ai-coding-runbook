@@ -1,39 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=fr
-fetched_at: 2026-10-12T07:03:19.489205+00:00
-title: "Orchestration des t\u00e2ches \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/robotics-orchestration?hl=zh-TW
+fetched_at: 2026-10-19T05:49:03.229398+00:00
+title: "\u5de5\u4f5c\u81ea\u52d5\u5316\u8abf\u5ea6\u7ba1\u7406 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Gemini 3.8 Flash est désormais disponible. [À vous de jouer](https://aistudio.google.com/prompts/new_chat?model=gemini-3.8-flash&hl=fr).
+Gemini 4 Argon 現已推出，[立即試用](https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon&hl=zh-tw)。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-tw)
 
-Envoyer des commentaires
+提供意見
 
-# Orchestration des tâches
+# 工作自動化調度管理
 
-Les modèles Gemini Robotics ER peuvent planifier des tâches et raisonner sur l'espace, en déduisant les actions à entreprendre et les objets à déplacer pour atteindre un objectif. Cette page
-présente un exemple de pilotage d'une opération de [prise et de dépose](#calling-custom-robot-api)
-via une API de robot personnalisée pour orchestrer la tâche consistant à placer un élément
-dans un bol.
+Gemini Robotics ER 模型可以規劃工作和推論空間，推斷要採取哪些動作和移動哪些物體才能達成目標。本頁提供範例，說明如何[透過自訂機器人 API 驅動取放](#calling-custom-robot-api)作業，協調將物品放入碗中的工作。
 
-Pour obtenir le code exécutable complet, consultez le
-[livre de recettes sur la robotique](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+如需完整的可執行程式碼，請參閱「[機器人食譜](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)」。
 
-## Utiliser une API de robot personnalisée
+## 使用自訂機器人 API
 
-Cet exemple illustre l'orchestration des tâches avec une API de robot personnalisée. Il présente une API fictive conçue pour une opération de prise et de dépose. La tâche consiste à prendre un bloc bleu et à le placer dans un bol orange :
+這個範例說明如何使用自訂機器人 API 編排工作。這個 API 專為取放作業設計，這項工作的目標是拿起藍色積木，然後放入橘色碗中：
 
-![Image du bloc et du bol](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=fr)
+![木塊和碗的圖片](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=zh-tw)
 
-Cet exemple utilise les définitions d'API et d'outil de robot fictifs suivantes :
+這個範例使用下列模擬機器人 API 和工具定義：
 
 ### Python
 
@@ -81,7 +77,7 @@ set_gripper_state_declaration = types.FunctionDeclaration(
 robot_tools = types.Tool(function_declarations=[move_declaration, set_gripper_state_declaration])
 ```
 
-L'exemple suivant envoie le prompt et l'image au modèle avec les définitions d'outil. Il exécute ensuite une boucle d'agent : après chaque réponse du modèle, il exécute tous les appels de fonction demandés (`move`, `setGripperState`), renvoie les résultats au modèle et répète l'opération jusqu'à ce que le modèle cesse d'appeler des fonctions ou que la limite d'étapes soit atteinte.
+以下範例會將提示和圖片連同工具定義傳送給模型。接著執行代理迴圈：在每次模型回覆後，執行任何要求的函式呼叫 (`move`、`setGripperState`)，將結果傳回模型，並重複執行，直到模型停止呼叫函式或達到步驟限制為止。
 
 ### Python
 
@@ -155,7 +151,7 @@ while step_count < max_steps:
     contents.append(types.Content(role="user", parts=function_response_parts))
 ```
 
-L'exemple suivant montre une sortie possible du modèle en fonction du prompt et de l'API de robot fictive. La sortie inclut la sortie des appels de fonction de robot que le modèle a séquencés ensemble.
+以下是根據提示和模擬機器人 API，模型可能輸出的內容。輸出內容包含模型依序執行的機器人函式呼叫輸出內容。
 
 ```
 --- Executing Orchestrated Plan ---
@@ -172,18 +168,18 @@ Sequence complete.
 Model Summary: I have completed the task of picking up the blue block and placing it into the orange bowl.
 ```
 
-## Étape suivante
+## 後續步驟
 
-- [Robotique avec streaming](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=fr) : streaming en temps réel avec appel de fonction (Gemini Robotics ER 2 uniquement)
-- [Compréhension vidéo](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=fr) : suivi de la progression des tâches à partir de la vidéo (ER 2 uniquement)
-- [Raisonnement spatial](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=fr) : exemples de pointage, de suivi et de cadre de délimitation
+- [串流機器人](https://ai.google.dev/gemini-api/docs/robotics-streaming?hl=zh-tw)：透過函式呼叫進行即時串流 (僅限 Gemini Robotics ER 2)。
+- [影片理解](https://ai.google.dev/gemini-api/docs/robotics-video-progress?hl=zh-tw)：追蹤影片中的工作進度 (僅限 ER 2)。
+- [空間推論](https://ai.google.dev/gemini-api/docs/robotics-spatial?hl=zh-tw)：指向、追蹤和定界框範例。
 
-Envoyer des commentaires
+提供意見
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Dernière mise à jour le 2026/09/08 (UTC).
+上次更新時間：2026-09-08 (世界標準時間)。
 
-Voulez-vous nous donner plus d'informations ?
+想進一步說明嗎？
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/09/08 (UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-09-08 (世界標準時間)。"],[],[]]
