@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-10-12T06:49:46.096393+00:00
+fetched_at: 2026-10-19T05:32:47.046763+00:00
 fetch_method: mintlify_md
 ---
 
@@ -259,7 +259,7 @@ The reference below covers the tokens you can set in `overrides`. The interactiv
 
   #### Fullscreen mode
 
-  Claude Code paints `userMessageBackground`, `bashMessageBackgroundColor`, and `memoryBackgroundColor` in both the default and fullscreen renderers. It uses `userMessageBackgroundHover` and `selectionBg` only in [fullscreen rendering mode](/docs/en/fullscreen).
+  Claude Code uses `userMessageBackgroundHover`, `selectionBg`, and `composerSidebarBackground` only in [fullscreen rendering mode](/docs/en/fullscreen). It paints `userMessageBackground`, `bashMessageBackgroundColor`, and `memoryBackgroundColor` in both the default and fullscreen renderers.
 
   | Token | Controls |
   | :- | :- |
@@ -268,6 +268,7 @@ The reference below covers the tokens you can set in `overrides`. The interactiv
   | `bashMessageBackgroundColor` | Background behind `!` shell command entries in the transcript |
   | `memoryBackgroundColor` | Background behind `#` memory entries in the transcript |
   | `selectionBg` | Background of text selected with the mouse |
+  | `composerSidebarBackground` | Background of the panel beside the conversation, such as the [diff panel](/docs/en/fullscreen#watch-your-changes-in-the-diff-panel) or a [mod's pane](/docs/en/plugins/mods/interface) |
 
   #### Usage meter and speaker labels
 

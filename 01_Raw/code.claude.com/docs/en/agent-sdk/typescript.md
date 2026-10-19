@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript
-fetched_at: 2026-10-12T06:49:41.026722+00:00
+fetched_at: 2026-10-19T05:32:44.822178+00:00
 fetch_method: mintlify_md
 ---
 
@@ -656,7 +656,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 | `interrupt()` | Interrupts the query. Only available in streaming input mode. When the CLI advertises the `interrupt_receipt_v1` capability in [`SDKSystemMessage.capabilities`](#sdksystemmessage), resolves with an [`SDKControlInterruptResponse`](#sdkcontrolinterruptresponse) listing the messages that were pending when the interrupt arrived. Resolves `undefined` on CLIs before v2.1.205 |
 | `rewindFiles(userMessageId, options?)` | Restores files to their state at the specified user message. Pass `{ dryRun: true }` to preview changes. Requires `enableFileCheckpointing: true`. See [File checkpointing](/docs/en/agent-sdk/file-checkpointing) |
 | `setPermissionMode()` | Changes the permission mode (only available in streaming input mode) |
-| `setModel()` | Changes the model (only available in streaming input mode). Passing `undefined` or the string `"default"` resets to [Claude Code's default model](/docs/en/model-config) |
+| `setModel()` | Changes the model (only available in streaming input mode). Passing `undefined` or the string `"default"` resets to [Claude Code's default model](/docs/en/model-config). A session in `auto` mode [changes to `default` mode](/docs/en/agent-sdk/permissions#auto-mode-auto) if the new model doesn't support auto mode |
 | `setMaxThinkingTokens()` | *Deprecated:* Use the `thinking` option instead. Changes the maximum thinking tokens. Passing `null` resets thinking to the session default: a mid-session override is cleared, and thinking stays off for sessions that have it disabled |
 | `applyFlagSettings(settings)` | Merges settings into the session's flag settings layer at runtime (only available in streaming input mode). See [`applyFlagSettings()`](#applyflagsettings) |
 | `updateSettings(source, settings)` | Writes one allowlisted key to the project's local settings file or your user settings file, so the value persists for later sessions. See [`updateSettings()`](#updatesettings). Requires TypeScript SDK v0.3.257 or later, which bundles Claude Code v2.1.257 |
@@ -812,6 +812,7 @@ type SDKControlInitializeResponse = {
     | "malformed"
     | "not_honoured"
   >;
+  claude_code_version?: string;
 };
 ```
 
@@ -825,6 +826,11 @@ Claude Code omits the field when the request carried no hooks. When the request 
 Before Agent SDK v0.3.238, the response never carried the field, and Claude Code ignored `hooks` on every repeated initialize.
 
 The request's `sdkMcpServerManifests` field and the response's `sdk_mcp_manifests_parked` field are for the in-process [SDK MCP servers](/docs/en/agent-sdk/custom-tools) you created with [`createSdkMcpServer()`](#createsdkmcpserver). Your application doesn't set or read either field.
+
+`claude_code_version` is the Claude Code version of the process that runs the session's turns. It is the same value the [`SDKSystemMessage`](#sdksystemmessage) init message carries, so you can read the CLI version before the first turn.
+
+* The field requires Agent SDK v0.3.296 or later, which bundles Claude Code v2.1.296.
+* If the field is `undefined` and you set `pathToClaudeCodeExecutable`, point it at Claude Code v2.1.296 or later.
 
 The response always reports `fast_mode_state`, and when something blocks [fast mode](/docs/en/fast-mode), `fast_mode_disabled_reason` carries the reason code alongside it, so you can explain the blocked state instead of re-deriving availability. Both behaviors require Claude Code v2.1.219 or later. Before v2.1.219, the response omitted `fast_mode_state` when fast mode wasn't available and never carried a reason. For the reason codes and their meanings, see [`fast_mode_disabled_reason`](#sdkresultmessage) on the result message.
 
@@ -1106,6 +1112,7 @@ type AgentDefinition = {
   skills?: string[];
   initialPrompt?: string;
   maxTurns?: number;
+  autoCompactWindow?: number;
   background?: boolean;
   omitClaudeMd?: boolean;
   memory?: "user" | "project" | "local";
@@ -1126,8 +1133,9 @@ type AgentDefinition = {
 | `skills` | No | Array of skill names to preload into the agent context |
 | `initialPrompt` | No | Auto-submitted as the first user turn when this agent runs as the main thread agent |
 | `maxTurns` | No | Maximum number of agentic turns (API round-trips) before stopping |
+| `autoCompactWindow` | No | Lower the [auto-compact window](/docs/en/sub-agents#subagent-auto-compact-window) for this agent when it runs as a subagent, to a token count from `100000` to `1000000`. Requires TypeScript Agent SDK v0.3.296 or later |
 | `background` | No | Run this agent as a non-blocking background task when invoked |
-| `omitClaudeMd` | No | Run this agent without the user, project, and local CLAUDE.md files when it runs as a subagent; managed policy files still load. Use it for agents that take everything they need from the Agent tool prompt. Ignored when this agent runs as the main thread agent. Requires TypeScript Agent SDK v0.3.271 or later |
+| `omitClaudeMd` | No | Leave the user, project, and local CLAUDE.md files out of this agent's initial context; managed policy files still load. Use it for agents that take everything they need from the Agent tool prompt. Ignored when this agent runs as the main thread agent. Requires TypeScript Agent SDK v0.3.271 or later |
 | `memory` | No | Memory source for this agent: `'user'`, `'project'`, or `'local'` |
 | `effort` | No | Reasoning effort level for this agent. Accepts a named level or an integer |
 | `permissionMode` | No | Permission mode for tool execution within this agent. The [subagent inheritance rules](/docs/en/agent-sdk/permissions#available-modes) decide when it applies. See [`PermissionMode`](#permissionmode) |
@@ -2238,7 +2246,7 @@ A `peer` origin identifies which agent sent the message: an in-process [teammate
 * `fromMode`: the sending session's permission class, `bypass` or `prompting`, declared by a host that relays a peer message between your sessions, such as the [desktop app](/docs/en/desktop#work-across-sessions). Claude Code reads it in the receiving session when it applies the [inbound controls](/docs/en/cross-session-messaging#control-inbound-messages). Requires Agent SDK v0.3.234 or later.
 * `senderTaskId`: the teammate's task ID. Absent for a cross-session peer.
 * `name`: the sender's display name, normalized by Claude Code: it strips Unicode control, format, surrogate, and line or paragraph separator code points, then trims the result and caps it at 64 code points with an ellipsis. Requires Claude Code v2.1.205 or later.
-* `body`: the decoded message body with the peer envelope stripped, byte-exact with what the model sees. Always present for a teammate message; for a cross-session peer, present only when the turn is exactly one peer envelope formed by Claude Code. Render `name` and `body` instead of re-parsing the message text. Requires Claude Code v2.1.205 or later.
+* `body`: the decoded message body with the peer envelope stripped, byte-exact with what the model sees. Present for a single teammate message, absent when several are merged; for a cross-session peer, present only when the turn is exactly one peer envelope formed by Claude Code. Render `name` and `body` instead of re-parsing the message text. Before v2.1.299, merged messages kept the first message's `body`. Requires Claude Code v2.1.205 or later.
 * `fromSession`: the sender's host-openable session ID, set by the sender's host so your UI can link back to the sending session. Like `from`, it is sender-asserted: use it as a navigation target only, and don't treat it as proof of the sender's identity. Requires Claude Code v2.1.216 or later.
 * `verifiedPeerPid`: the process ID of the process that connected to this session's cross-session messaging socket, verified by the kernel and read from the connection itself, never from the payload. Use it, not `from`, to identify the sender: `from` is forgeable by any same-user process. The field is absent when Claude Code can't verify it, such as on Windows or non-socket ingress, so an absent value means the sender is unverified. For relayed traffic it identifies the relay rather than the message's author, and process IDs are recyclable, so treat it as provenance rather than an authentication token. Requires Claude Code v2.1.216 or later.
 
@@ -3148,10 +3156,14 @@ type FileReadInput = {
   offset?: number;
   limit?: number;
   pages?: string;
+  allow_large?: boolean;
 };
 ```
 
-Reads files from the local filesystem, including text, images, PDFs, and Jupyter notebooks. Use `pages` for PDF page ranges (for example, `"1-5"`).
+Reads files from the local filesystem, including text, images, PDFs, and Jupyter notebooks.
+
+* Use `pages` for PDF page ranges (for example, `"1-5"`).
+* `allow_large` lets Claude read a text file past the [usual size limits](/docs/en/tools-reference#large-files) when the session's context window has room. It requires Agent SDK v0.3.296 or later, which bundles Claude Code v2.1.296.
 
 For a PDF, Claude receives the file's contents inside the Read call's `tool_result` content. A read that returns the `pdf` [output](#tool-output-types) carries a summary `text` block followed by a `document` block. One that returns the `parts` output carries the summary `text` block followed by one block per extracted page: an `image` block, or a `text` block naming the page when Claude Code couldn't render it as an image. Before Agent SDK v0.3.242, Claude Code delivered the file's contents as a separate `user` message after the tool result.
 
@@ -3311,7 +3323,7 @@ type TodoWriteInput = {
 Creates and manages a structured task list for tracking progress.
 
 <Note>
-  The following tools are available by default only on Claude 3.x models, Opus 4 through 4.7, Sonnet 4 through 4.6, and Haiku 4.5. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
+  The following tools are available by default only on Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, and earlier models. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
 
   * `TodoWrite`
   * `TaskCreate`
@@ -4263,7 +4275,7 @@ type TodoWriteOutput = {
 Returns the previous and updated task lists.
 
 <Note>
-  The following tools are available by default only on Claude 3.x models, Opus 4 through 4.7, Sonnet 4 through 4.6, and Haiku 4.5. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
+  The following tools are available by default only on Claude Opus 4.7, Claude Sonnet 4.6, Claude Haiku 4.5, and earlier models. On every other model, including model IDs Claude Code doesn't recognize, they aren't available unless you opt in:
 
   * `TodoWrite`
   * `TaskCreate`
@@ -5810,7 +5822,7 @@ type SandboxFilesystemConfig = {
 | Property | Type | Default | Description |
 | :- | :- | :- | :- |
 | `allowWrite` | `string[]` | `[]` | File path patterns to allow write access to |
-| `denyWrite` | `string[]` | `[]` | File path patterns to deny write access to |
+| `denyWrite` | `string[]` | `[]` | File path patterns to deny write access to. To block sandboxed writes to a file in the session's working directory, list its absolute path. |
 | `denyRead` | `string[]` | `[]` | File path patterns to deny read access to |
 
 ### Permissions Fallback for Unsandboxed Commands

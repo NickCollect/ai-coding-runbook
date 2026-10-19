@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/interactive-mode
-fetched_at: 2026-10-12T06:49:43.519173+00:00
+fetched_at: 2026-10-19T05:32:45.931753+00:00
 fetch_method: mintlify_md
 ---
 
@@ -200,6 +200,7 @@ Claude Code reads this setting from your user settings file, the `--settings` fl
 | `T{char}` | Jump to just after previous occurrence of character on the current line |
 | `;` | Repeat last f/F/t/T motion |
 | `,` | Repeat last f/F/t/T motion in reverse |
+| `%` | Jump to the matching `()`, `[]`, or `{}` bracket, starting from the next bracket on the current line when the cursor isn't on a bracket. Requires Claude Code v2.1.301 or later |
 | `/` | Open reverse history search, same as `Ctrl+R`. The empty search prompt shows a hint: press `Esc` then `i` then `/` to open the command menu instead |
 
 <Note>
@@ -219,6 +220,7 @@ Claude Code reads this setting from your user settings file, the `--settings` fl
 | `dj`/`dk` | Delete the current line and the line below or above |
 | `dgg`/`dG` | Delete from the current line to the first or last line |
 | `d0`/`c0`/`y0` | Delete, change, or yank from the cursor back to the beginning of the line. Requires Claude Code v2.1.281 or later |
+| `d%`/`c%`/`y%` | Delete, change, or yank from the cursor through the bracket that `%` jumps to. Requires Claude Code v2.1.301 or later |
 | `cc` | Change line |
 | `C` | Change to end of line |
 | `cw`/`ce`/`cb` | Change word/to end/back |
@@ -441,6 +443,60 @@ To disable prompt suggestions entirely, use any of the following:
 
 To turn prompt suggestions off across an organization, set `promptSuggestionEnabled` to `false` in [managed settings](/docs/en/managed-settings). Also set `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION` to `false` under the managed [`env`](/docs/en/settings-reference#env) key so that users can't re-enable them with their own environment variable.
 
+## You should know suggestions
+
+"You should know" looks for one thing you should know but might have missed, such as a tradeoff Claude chose without calling it out or a result that may be off. When it finds one, it shows a short note above the prompt input:
+
+```text theme={null}
+✦ Heads up · There was a change to how folder sharing starts in June, which may have bumped usage metrics artificially.
+  1: Learn more   2: Knew this already   0: Dismiss
+```
+
+It's one of Claude Code's [built-in mods](/docs/en/plugins/mods/overview#mods-built-into-claude-code), a plugin built into Claude Code that is off by default. Requires Claude Code v2.1.287 or later.
+
+While it's on, a side agent rereads the conversation from time to time as Claude works through a longer task. The side agent is a separate request to the same model and has no tools, so it can't read files, run commands, or change what Claude does.
+
+If the mod is available for your organization, `/plugin` lists it when you connect to the Claude API directly with a claude.ai account or a Console API key. It doesn't when you connect through an [LLM gateway](/docs/en/llm-gateway) or a [Claude apps gateway](/docs/en/claude-apps-gateway), or get your key from an [`apiKeyHelper`](/docs/en/settings-reference#apikeyhelper). Even with a direct connection, these sessions don't list it:
+
+* A session that [doesn't fetch the feature flags](/docs/en/env-vars#features-that-need-feature-flag-fetching) the mod depends on, such as one with `DISABLE_TELEMETRY` set
+* A [first session after an install or upgrade](/docs/en/env-vars#first-session-after-an-install-or-upgrade) whose flags haven't arrived yet
+
+To turn it on, run this at the Claude Code prompt:
+
+```text theme={null}
+/plugin enable cc-plugin-you-should-know@builtin
+```
+
+Where `/plugin` doesn't list the mod, the enable command answers `Plugin "cc-plugin-you-should-know@builtin" is not installed in this project`.
+
+### Cost of checks
+
+While the mod is on, checks are background requests to the same model your session is using, and they count toward your plan's usage limits or your API costs. Each check sends what's already in Claude's context, meaning the conversation so far with its tool results, followed by the mod's own instructions and the text of your recent notes. The conversation part is read from the session's [prompt cache](/docs/en/prompt-caching) on the same terms as Claude's own next request. The instructions, several thousand tokens of them, and the side agent's reply are billed in full on every check.
+
+To watch the checks happen, set [`CLAUDE_CODE_YOU_SHOULD_KNOW_DEBUG=1`](/docs/en/env-vars) in your shell before you start Claude Code.
+
+### Answer a note
+
+Type the choice's digit on its own into an empty prompt input. A note offers these choices:
+
+* **Learn more**: opens a short explanation under the note, with its own choices:
+  * **Understood**: closes it and marks the topic as known
+  * **Chat in main session**: quotes the note into your prompt input so you can add a question and send it to Claude
+  * **Dismiss**: closes it without marking the topic as known
+* **Knew this already**: closes the note and marks the topic as known.
+* **Dismiss**: closes the note.
+
+The main agent doesn't see a note unless you send it with **Chat in main session**.
+
+Claude Code keeps your recent notes and the topics you marked as known in a file whose name starts with `cc-plugin-you-should-know` under `~/.claude/plugins/store/`. Each check, in this session and later ones, lists them to the side agent as ones not to repeat. Claude Code deletes the file once it has gone [`cleanupPeriodDays`](/docs/en/settings-reference#cleanupperioddays) without a session reading or writing it. To clear them sooner, delete that file while no session is running.
+
+### Turn off You should know
+
+To turn off You should know, use either of the following:
+
+* At the Claude Code prompt, run `/plugin disable cc-plugin-you-should-know@builtin`, or turn it off from the **Installed** tab of `/plugin`
+* After you choose **Dismiss** on a note without opening **Learn more** first, choose **Turn off suggestions** on the `Dismissed.` line, which clears after 20 seconds
+
 ## Emoji shortcodes
 
 Type a `:` followed by an emoji shortcode in the prompt input to insert the emoji. Requires Claude Code v2.1.217 or later.
@@ -644,7 +700,7 @@ In an attached [background session](/docs/en/agent-view#attach-to-a-session), `L
 
 The task list is Claude's to-do checklist: items Claude created to plan multi-step work, with indicators showing what's pending, in progress, or complete. It's separate from the background-task view. To see running shells and subagents, use [`/tasks`](/docs/en/commands) instead.
 
-The list fills only in sessions that have the task-tracking tools, which Claude Code provides by default on [Claude 3.x models, Opus 4 through 4.7, Sonnet 4 through 4.6, and Haiku 4.5](/docs/en/tools-reference#task-tool-availability). On any other model, including a model ID Claude Code doesn't recognize, the list stays empty unless you opt in with `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` or one of the other ways under [Task tool availability](/docs/en/tools-reference#task-tool-availability). When the session has the tools, the task list works as follows:
+The list fills only in sessions that have the task-tracking tools, which Claude Code provides by default on [Opus 4.7, Sonnet 4.6, Haiku 4.5, and earlier models](/docs/en/tools-reference#task-tool-availability). On any other model, including a model ID Claude Code doesn't recognize, the list stays empty unless you opt in with `CLAUDE_CODE_ENABLE_TODO_TOOLS=1` or one of the other ways under [Task tool availability](/docs/en/tools-reference#task-tool-availability). When the session has the tools, the task list works as follows:
 
 * Press `Ctrl+T` to toggle the task list view. The display shows up to five tasks at a time. When Claude hasn't created any checklist items yet, the toggle has no visible effect because there's nothing to display
 * If you leave the list expanded, Claude Code restores the expanded view the next time you launch into a session that still has tasks, such as with `--resume` or `--continue`. When the task list is empty, Claude Code starts it collapsed

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp-quickstart
-fetched_at: 2026-10-05T06:27:12.057978+00:00
+fetched_at: 2026-10-19T05:32:46.087280+00:00
 fetch_method: mintlify_md
 ---
 
@@ -358,6 +358,8 @@ If a server doesn't connect, check its status with `/mcp` inside a session or `c
     ```powershell theme={null}
     $env:MCP_TIMEOUT = "60000"; claude
     ```
+
+    Before v2.1.299, some connections to HTTP servers that were up timed out at startup regardless of `MCP_TIMEOUT`. If you use one of those versions and an HTTP server that is up still times out after you raise the limit, [update Claude Code](/docs/en/setup#update-claude-code).
   </Accordion>
 
   <Accordion title="Server already exists">

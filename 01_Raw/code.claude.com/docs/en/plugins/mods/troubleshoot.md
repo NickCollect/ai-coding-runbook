@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/troubleshoot
-fetched_at: 2026-10-12T06:49:45.063122+00:00
+fetched_at: 2026-10-19T05:32:46.583298+00:00
 fetch_method: mintlify_md
 ---
 
@@ -189,6 +189,19 @@ Look them up in [Messages from the built-in guard](#messages-from-the-built-in-g
 
 The mod loaded, and its pane, band, toast, or controls don't behave as you expect.
 
+<h3 id="another-mods-band-shows-and-yours-doesnt">
+  Another mod's band shows and yours doesn't
+</h3>
+
+There is one band above the prompt, and every mod shares it. A mod that runs [before yours](/docs/en/plugins/mods/events#the-order-mods-run-in) replaces your band when it returns a tree without the result of `next(e)` in it. To show both bands, change that mod's hook, or ask its author to:
+
+* **Keep the bands after it**: put the result of `await next(e)` among the children of a `Box` in its tree, as in the Band above the prompt tab of [Pick where to draw](/docs/en/plugins/mods/interface#pick-where-to-draw)
+* **Keep the tree valid**: don't give that `Box`, or any `Box` around it, a `width`, `height`, `minWidth`, `minHeight`, `position`, `top`, `left`, `right`, `bottom`, `display`, or `overflow` prop
+
+To find that mod, [write a debug log](#read-the-debug-log) and search it for `answered ui.render without next()`. A line such as `other-mod (user) answered ui.render without next()` names a mod that returned its tree without calling `next(e)`. It doesn't name the [render site](/docs/en/plugins/mods/reference#render-sites), so a pane-only mod can appear too. A mod that calls `next(e)` and drops the result gets no line, so check the hooks before yours too.
+
+After the change, you see nothing in the band if any of the mods returns a tree that doesn't validate. To read the reason, look for a `ui.render (AbovePrompt) refused:` line in the transcript of a `--plugin-dir` session, or search the debug log for `does not validate`. With several mods in the band, neither line names a mod, so check each mod's tree.
+
 ### A pane or band is empty or shows Claude Code's usual content
 
 The [tree](/docs/en/plugins/mods/interface#build-a-tree-from-elements) your hook returned didn't validate. With `--plugin-dir`, the transcript says `ui.render (Pane) refused:` with the reason, as in `first-mod: ui.render (Pane) refused: Box prop "flexDirection" must be one of row, column, row-reverse, column-reverse; the engine drew its own`. The debug log has `a hook returned a tree that does not validate` with the same reason.
@@ -231,15 +244,18 @@ Before v2.1.290, Claude Code dropped a toast raised within two seconds of the la
 
 ### Hotkeys do nothing
 
-Your pane doesn't have keyboard focus.
+Your pane doesn't have keyboard focus, or the drawing is in the VS Code extension, where buttons have no hotkeys. Do the one that matches:
 
-Press Ctrl+X then Tab, or click the pane. Open it with `focus: true` from a command.
+* **No keyboard focus**: press Ctrl+X then Tab, or click the pane. To have the pane take focus when it opens, open it with `focus: true` from a command.
+* **In the VS Code extension**: click the button, or press Enter on it once it has focus
 
-### A drawing works in the terminal and not in the Desktop app
+### A drawing works in the terminal and not in the Desktop app or VS Code
 
-The site or element isn't available there.
+Either that app doesn't draw the site or element, or the session is one where the VS Code extension draws nothing for mods. The mod's other hooks still run. Check for these causes:
 
-Check the [render sites](/docs/en/plugins/mods/reference#render-sites) and [elements](/docs/en/plugins/mods/reference#elements) tables.
+* **The site or element isn't drawn in that app**: look up your site in the [render sites](/docs/en/plugins/mods/reference#render-sites) table and your elements in the [elements](/docs/en/plugins/mods/reference#elements) table. For an element the app lacks, check `e.surface` in the hook and return a tree the app can draw.
+* **The VS Code extension is older than 2.1.299**: the chat panel draws for mods from [extension version](/docs/en/vs-code#install-the-extension) 2.1.299. Check the version in VS Code's Extensions view and update the extension there.
+* **The VS Code session doesn't fetch feature flags**: drawing in the chat panel requires it. Sessions on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or through a [Claude apps gateway](/docs/en/claude-apps-gateway), skip it, among others that [Features that need feature-flag fetching](/docs/en/env-vars#features-that-need-feature-flag-fetching) lists. To see the drawing in such a session, run `claude` in a terminal instead, such as VS Code's integrated terminal.
 
 ## An edit or a value is lost
 

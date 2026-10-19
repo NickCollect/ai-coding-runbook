@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/routines
-fetched_at: 2026-10-12T06:49:45.436380+00:00
+fetched_at: 2026-10-19T05:32:46.706979+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,19 +54,9 @@ Create a routine from the web at [claude.ai/code/routines](https://claude.ai/cod
 
 The creation form sets up the routine's prompt, repositories, environment, connectors, and triggers.
 
-Routines run autonomously as full Claude Code cloud sessions: there is no permission-mode picker, and the session runs shell commands, uses [skills](/docs/en/skills) committed to the cloned repository, and calls any connectors you include, all without stopping for approval apart from some [artifact](/docs/en/artifacts) actions.
+Routines run autonomously as full Claude Code cloud sessions: there is no permission-mode picker, and the session runs shell commands, uses [skills](/docs/en/skills) committed to the cloned repository, and calls any connectors you include, all without stopping for approval apart from some [artifact actions](#when-a-run-publishes-an-artifact-without-asking).
 
 What a routine can reach is determined by the repositories you select, the [environment's](/docs/en/cloud-environments) network access and variables, and the connectors you include. Scope each of those to what the routine actually needs.
-
-When the routine's schedule or **Run now** starts a run, Claude republishes an existing artifact without asking only when all of these hold:
-
-* You can edit the artifact and it belongs to your own organization
-* The artifact isn't shared publicly
-* If the artifact is shared with specific people or your organization, its viewers don't automatically see each new version
-* The publish carries only the page, with no supporting files or anything else added, and doesn't force over a newer version
-* The page holds no grant that reaches beyond the page, such as [connector calls](/docs/en/artifacts#pull-live-data-with-mcp-connectors)
-
-In every other case, including publishing a new artifact, Claude asks first. When a routine's job is to keep a page current, give it an artifact you already published.
 
 Routines belong to your individual claude.ai account. They are not shared with teammates, and their runs count against your account's [usage and limits](#usage-and-limits). Anything a routine does through your connected GitHub identity or connectors appears as you: commits and pull requests carry your GitHub user, and Slack messages, Linear tickets, or other connector actions use your linked accounts for those services.
 
@@ -93,7 +83,7 @@ Routines belong to your individual claude.ai account. They are not shared with t
     Pick a [cloud environment](/docs/en/cloud-environments) for the routine. Environments control what the cloud session has access to:
 
     * **Network access**: set the level of internet access available during each run
-    * **Environment variables**: provide values Claude can use during each run. They're [visible to anyone who uses the environment](/docs/en/cloud-environments#what-carries-over-from-your-setup), so on Pro and Max plans, store keys for the APIs Claude calls during a run as [network secrets](/docs/en/cloud-environments#add-network-secrets) instead. That section also lists the requests that never get a secret
+    * **Environment variables**: provide values Claude can use during each run. They're [visible to anyone who uses the environment](/docs/en/cloud-environments#what-carries-over-from-your-setup), so in an Anthropic-hosted environment, store keys for the APIs Claude calls during a run as [network secrets](/docs/en/cloud-environments#add-network-secrets) instead. That section also lists the requests that never get a secret
     * **Setup script**: install dependencies and tools the routine needs. The result is [cached](/docs/en/cloud-environments#environment-caching), so the script doesn't re-run on every session
 
     A **Default** environment is provided with **Trusted** network access, which allows only the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) of package registries, cloud provider APIs, container registries, and common development domains through the session's network. Connectors you add to the routine reach their services through Anthropic's servers, so they don't need allowlist changes. If your routine needs to reach your own services directly, or a domain outside that list, edit the environment's [network access](/docs/en/cloud-environments#network-access) before running. To use a separate environment, [create one](/docs/en/cloud-environments#configure-your-environment) first.
@@ -172,7 +162,7 @@ One-off runs count against the same hourly limit as other scheduled runs. See [U
 
 An API trigger gives a routine a dedicated HTTP endpoint. POSTing to the endpoint with the routine's bearer token starts a new session and returns a session URL. Use this to wire Claude Code into alerting systems, deploy pipelines, internal tools, or anywhere you can make an authenticated HTTP request.
 
-API triggers are added to an existing routine from the web. The CLI cannot currently create or revoke tokens.
+API triggers are added to an existing routine from the web. The CLI can't currently create, regenerate, or delete tokens.
 
 <Steps>
   <Step title="Open the routine for editing">
@@ -192,7 +182,10 @@ API triggers are added to an existing routine from the web. The CLI cannot curre
   </Step>
 </Steps>
 
-Each routine has its own token, scoped to triggering that routine only. To rotate or revoke it, return to the same modal and click **Regenerate** or **Revoke**.
+Each routine has its own token, scoped to triggering that routine only. To turn off API access or rotate the token, return to the same modal:
+
+* **Turn off API access**: click **Delete token**, the trash icon next to **Regenerate**
+* **Rotate the token**: click **Regenerate**
 
 #### Trigger a routine
 
@@ -347,6 +340,24 @@ When you create a routine, all of your currently connected connectors are includ
 
 To manage or add connectors outside of the routine form, visit [claude.ai/customize/connectors](https://claude.ai/customize/connectors) or use `/schedule update` in the CLI.
 
+### When a run publishes an artifact without asking
+
+When a routine's schedule or **Run now** starts a run, Claude can publish a new [artifact](/docs/en/artifacts) without asking. The new artifact is visible only to you until you [share it](/docs/en/artifacts#share-an-artifact). If the publish declares runtime capabilities for the page, such as [connector calls](/docs/en/artifacts#pull-live-data-with-mcp-connectors) or [file downloads](/docs/en/artifacts#offer-a-file-download), Claude asks first.
+
+In those runs, Claude republishes an existing artifact without asking only when all of these hold:
+
+* You can edit the artifact and it belongs to your own organization
+* If the publish carries more than the page, such as supporting files, you own the artifact
+* The artifact isn't shared publicly
+* If the artifact is shared with specific people or your organization, its viewers don't automatically see each new version
+* The publish doesn't force over a newer version
+* The publish doesn't declare runtime capabilities for the page
+* The existing page holds no grant that reaches beyond the page, such as [connector calls](/docs/en/artifacts#pull-live-data-with-mcp-connectors)
+
+In every other case, including a run that an API or GitHub trigger starts, Claude asks first.
+
+When a routine's job is to keep a page current, give it an artifact you already published.
+
 ### Environments and network access
 
 Each routine uses a [cloud environment](/docs/en/cloud-environments) that controls network access, environment variables, and setup scripts. The routine inherits the environment's network policy on every run.
@@ -369,7 +380,7 @@ To allow additional domains on one of your own environments, follow these steps.
   </Step>
 
   <Step title="Change the network access level">
-    In the **Edit environment** dialog, change **Network access** to **Custom** and enter your domains in **Allowed domains**. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead for unrestricted access.
+    In the **Edit cloud environment** dialog, change **Network access** to **Custom** and enter your domains in **Allowed domains**. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead for unrestricted access.
   </Step>
 
   <Step title="Save">

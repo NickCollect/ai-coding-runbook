@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/workflows
-fetched_at: 2026-10-12T06:49:47.290767+00:00
+fetched_at: 2026-10-19T05:32:47.491443+00:00
 fetch_method: mintlify_md
 ---
 
@@ -97,7 +97,7 @@ The progress view shows each phase with its agent counts. The footer lists the k
 | :- | :- |
 | `↑` / `↓` | Select a phase or agent |
 | `Enter` or `→` | Drill into the selected phase, then into an agent's detail. In the detail, `Enter` expands or collapses it |
-| `Esc` or `←` | Back out one level. In v2.1.203 through v2.1.205, `←` didn't step back out of a phase or agent; use `Esc` on those versions |
+| `Esc` or `←` | Back out one level |
 | `j` / `k` | Scroll within the agent detail when it overflows |
 | `f` | Filter the agent list in the selected phase by status. Press again to cycle |
 | `p` | Pause or resume the run |
@@ -155,7 +155,7 @@ Ultracode is a Claude Code setting that turns on automatic workflow orchestratio
 /effort ultracode
 ```
 
-To start a session with ultracode already on, launch with `claude --effort ultracode`, which also sets the effort level to `xhigh`. Requires Claude Code v2.1.203 or later.
+To start a session with ultracode already on, launch with `claude --effort ultracode`, which also sets the effort level to `xhigh`.
 
 To turn it on from the `/effort` slider, press `Tab` to flip the **Ultracode** toggle, then `Enter` to apply it. [Adjust effort level](/docs/en/model-config#adjust-effort-level) lists the routes that turn ultracode on.
 
@@ -191,10 +191,10 @@ Whether you see this prompt depends on your [permission mode](/docs/en/permissio
 
 In `claude -p` and the Agent SDK, Claude Code never shows this prompt. It runs the Workflow tool call through the same [permission evaluation](/docs/en/agent-sdk/permissions#how-permissions-are-evaluated) as the rest of the session, so deny rules, ask rules, and `dontAsk` mode apply to the launch as they apply to every tool call. To let the workflow start in these runs, use one of these:
 
-* **Permission rule**: `Workflow` in your allow rules approves every workflow, and `Workflow(<name>)` approves one saved workflow by name.
-* **Auto permission mode**: the [classifier](/docs/en/permission-modes#eliminate-prompts-with-auto-mode) reviews the call and can approve it.
-* **Bypass permissions mode**: Claude Code approves the call.
-* **A hook**: a [`PreToolUse`](/docs/en/hooks#pretooluse) hook that allows the call approves it.
+* **Permission rule**: add `Workflow` to your allow rules to approve every workflow, or `Workflow(<name>)` to approve one saved workflow by name.
+* **Auto permission mode**: run in [auto mode](/docs/en/permission-modes#eliminate-prompts-with-auto-mode), where the classifier reviews the call and can approve it.
+* **Bypass permissions mode**: run in bypass permissions mode.
+* **A hook**: return `"allow"` for the call from a [`PreToolUse`](/docs/en/hooks#pretooluse) hook. In [plan mode](/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode), the workflow doesn't start on the hook's approval alone, so use a permission rule or your host's approval there instead.
 * **Your host**: a [`--permission-prompt-tool`](/docs/en/cli-reference#cli-flags) or, with the Agent SDK, a [`canUseTool`](/docs/en/agent-sdk/permissions) callback approves it.
 
 In the Desktop app, an approval card shows the workflow name, the phase list, and a token-usage caution, with **Once**, **Always**, and **Deny** actions. The progress view appears in the Background tasks side pane.
@@ -467,7 +467,7 @@ When your organization's [`availableModels` allowlist](/docs/en/model-config#res
 
 ### Set a size guideline
 
-A size guideline tells Claude how many agents to aim for when it writes a dynamic workflow. Claude Code sends the guideline to Claude as advice, not a cap, so a prompt that calls for a different scale still overrides it. Requires Claude Code v2.1.202 or later.
+A size guideline tells Claude how many agents to aim for when it writes a dynamic workflow. Claude Code sends the guideline to Claude as advice, not a cap, so a prompt that calls for a different scale still overrides it.
 
 Each value maps to an agent count:
 

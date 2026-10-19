@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/common-workflows
-fetched_at: 2026-10-12T06:49:42.338699+00:00
+fetched_at: 2026-10-19T05:32:45.414030+00:00
 fetch_method: mintlify_md
 ---
 
@@ -400,6 +400,8 @@ Use @ to quickly include files or directories without waiting for Claude to read
   * Directory references show file listings, not contents
   * You can reference multiple files in a single message (for example, "@file1.js and @file2.js")
 </Tip>
+
+To stop `@` references from including file contents and directory listings in your message, set [`CLAUDE_CODE_DISABLE_FILE_MENTIONS=1`](/docs/en/env-vars#variables) in your shell or user settings. Claude then receives the paths you referenced with a note to read them using its file tools. The variable requires Claude Code v2.1.299 or later, and Claude Code ignores it in project and local settings.
 
 ***
 

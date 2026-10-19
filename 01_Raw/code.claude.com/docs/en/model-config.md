@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/model-config
-fetched_at: 2026-10-12T06:49:44.079379+00:00
+fetched_at: 2026-10-19T05:32:46.150839+00:00
 fetch_method: mintlify_md
 ---
 
@@ -791,6 +791,7 @@ You can set the auto-compact window in these places:
 * **For every model**: set [`autoCompactWindow`](/docs/en/settings-reference#autocompactwindow) in a settings file, such as `"autoCompactWindow": 200000` in `~/.claude/settings.json`. A window you saved for a model with `/autocompact` takes precedence over this key in the same file for that model.
 * **For one launch**: pass [`--autocompact`](/docs/en/cli-reference#cli-flags) when starting Claude Code. The flag overrides your saved setting for that launch without changing it, and `claude --autocompact auto` runs the session at the tuned window even if your saved setting has a value. Unlike `/autocompact`, the flag isn't preempted by a higher-priority settings scope such as managed settings.
 * **In scripts and cloud environments**: set [`CLAUDE_CODE_AUTO_COMPACT_WINDOW`](/docs/en/env-vars). While it's set, it takes precedence over the command, the flag, and the setting, and `/autocompact` reports the override instead of changing the window.
+* **For one subagent**: see [Set the auto-compact window for one subagent](/docs/en/sub-agents#subagent-auto-compact-window).
 
 The command and the flag accept a window size from 100K to 1M tokens, in any of these forms:
 
@@ -810,7 +811,29 @@ If you don't set an auto-compact window, Claude Code compacts when the conversat
 * Models running with a native 1M window compact before the window fills, at about 967K tokens by default. These include the Fable models, Sonnet 5 and later, Haiku 5.5, and Opus 4.7 and later. Behind a custom `ANTHROPIC_BASE_URL`, see [the context window behind a gateway](#context-window-behind-a-gateway)
 * Sessions on a model ID Claude Code doesn't recognize, such as an [LLM gateway](/docs/en/llm-gateway) alias, compact at the context window Claude Code assumes for the ID; see [Correct the window for a gateway or custom model ID](#correct-the-window-for-a-gateway-or-custom-model-id)
 
+See the [`idleCompaction`](/docs/en/settings-reference#idlecompaction) setting for when Claude Code also compacts a conversation you leave idle.
+
 ### Correct the window for a gateway or custom model ID
+
+Either of these startup warnings means Claude Code doesn't recognize your session's model ID, so it can't tell the model's context window and assumes 200K tokens:
+
+```text theme={null}
+⚠ Model "my-gateway-opus" isn't recognized · context assumed to be 200k tokens · ...
+Claude Code doesn't recognize the model "my-gateway-opus", so it assumes a context window of 200k tokens. Update Claude Code, or see https://code.claude.com/docs/en/model-config#correct-the-window-for-a-gateway-or-custom-model-id to set the window.
+```
+
+Claude Code [auto-compacts](#default-auto-compact-thresholds) the conversation at the assumed 200K, so if the model's real context window is 200K, there is nothing to correct. Otherwise, give Claude Code the real window in whichever of these ways fits your ID:
+
+* **A model newer than your Claude Code version**: run `claude update` in your shell. If Claude Code recognizes the ID after the update, you don't need to configure anything else.
+* **Your gateway's or provider's name for a model Claude Code knows**: add a [`modelOverrides`](#override-model-ids-per-version) entry that maps the Anthropic model ID to your ID, such as `"claude-opus-4-8": "my-gateway-opus"`. You can instead list your ID in a [`modelPicker`](/docs/en/settings-reference#fields-for-modelpicker) row with `behavesAs` set to that model. Either way, Claude Code then treats the ID as that model.
+* **A model with a 1M window**: append `[1m]` to the ID where you set the model, such as `claude --model 'my-gateway-opus[1m]'` in your shell. If you [turned off 1M context](#turn-off-1m-context), you get the same window with or without the suffix.
+* **Any other window**: set [`CLAUDE_CODE_MAX_CONTEXT_TOKENS`](/docs/en/env-vars) to the window size in tokens in the environment that starts Claude Code, such as `CLAUDE_CODE_MAX_CONTEXT_TOKENS=400000`. For an unrecognized ID that doesn't start with `claude-` and has no `[1m]` suffix, the variable takes effect on its own. For any other ID, check [which IDs it applies to](#which-ids-claude_code_max_context_tokens-applies-to) first.
+
+Once Claude Code recognizes the ID or uses the window you gave it, the warning no longer appears when you start a session on that ID.
+
+<h4 id="which-ids-claude_code_max_context_tokens-applies-to">
+  Which IDs `CLAUDE_CODE_MAX_CONTEXT_TOKENS` applies to
+</h4>
 
 On an [LLM gateway](/docs/en/llm-gateway) or other custom deployment, Claude Code can assume a context window for the model ID that differs from the model's real window, whether or not it resolves the ID to a Claude model. Set [`CLAUDE_CODE_MAX_CONTEXT_TOKENS`](/docs/en/env-vars) to the window Claude Code should assume instead.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/errors
-fetched_at: 2026-10-12T06:49:42.955699+00:00
+fetched_at: 2026-10-19T05:32:45.743586+00:00
 fetch_method: mintlify_md
 ---
 
@@ -76,6 +76,7 @@ Match the message you see to a section below.
 | `Claude.ai login was rejected — run /login, then /remote-control` | [Authentication](#remote-control-couldnt-refresh-your-login) |
 | `OAuth token unavailable — run /login to restore Remote Control` | [Authentication](#remote-control-couldnt-refresh-your-login) |
 | `Signed out of Claude — run /login, then /remote-control` | [Authentication](#remote-control-couldnt-refresh-your-login) |
+| `Remote Control could not renew this computer's connection` | [Authentication](#remote-control-could-not-renew-this-computers-connection) |
 | `signed-in claude.ai account or organization changed on this machine` | [Authentication](#remote-control-stopped-because-the-signed-in-account-changed) |
 | `Remote Control stopped — the app running this session is now signed in to a different Claude account` | [Authentication](#remote-control-stopped-because-the-app-running-the-session-signed-out-or-switched-accounts) |
 | `Remote Control stopped — the app running this session is signed out of Claude` | [Authentication](#remote-control-stopped-because-the-app-running-the-session-signed-out-or-switched-accounts) |
@@ -138,6 +139,7 @@ Match the message you see to a section below.
 | `proxy refused the connection` | [Network](#the-proxy-refused-the-connection) |
 | `403` with `GitHub GraphQL is not available from Claude Code sessions` in a cloud session | [GitHub proxy](/docs/en/cloud-environments#github-proxy) |
 | `The cloud environments service returned an empty response` / `The cloud environments service returned a response in an unexpected format` | [Network](#the-cloud-environments-service-returned-an-empty-or-unexpected-response) |
+| `Failed to fetch session from Sessions API: Failed to fetch session logs` | [Network](#failed-to-fetch-session-from-sessions-api) |
 | `Couldn't reconnect to your Remote Control session` | [Network](#couldnt-reconnect-to-your-remote-control-session) |
 | `N sessions ended while this machine was offline — the environment was cleaned up on the server and can't be resumed.` | [Network](#sessions-ended-while-this-machine-was-offline) |
 | `Couldn't share the transcript.` | [Network](#couldnt-share-the-transcript) |
@@ -156,10 +158,14 @@ Match the message you see to a section below.
 | `Request too large` | [Request errors](#request-too-large) |
 | `Request too large for the API's 32MB request limit` | [Request errors](#request-too-large) |
 | `Image was too large` | [Request errors](#image-was-too-large) |
+| `API Error: an image in the conversation could not be processed and was removed` | [Request errors](#image-was-too-large) |
 | `Unable to resize image` | [Request errors](#unable-to-resize-image) |
+| `Request rejected as unprocessable by the model` | [Request errors](#request-rejected-as-unprocessable-by-the-model) |
 | `PDF too large` / `PDF is password protected` / `pdftoppm is not installed` | [Request errors](#pdf-errors) |
 | `Extra inputs are not permitted` | [Request errors](#extra-inputs-are-not-permitted) |
 | `API Error: 400 ... tools.N.custom.input_schema: JSON schema is invalid` / `Property keys should match pattern` | [Request errors](#tool-input-schema-is-invalid) |
+| `Tool "mcp__<server>__<tool>" is not sent to Claude: its name has <N> characters and the API accepts at most 128` | [Request errors](#mcp-tool-name-over-128-characters) |
+| `tools.N.custom.name: String should have at most 128 characters` | [Request errors](#mcp-tool-name-over-128-characters) |
 | `tool_use.name: String should have at most 200 characters` | [Request errors](#tool-use-name-over-200-characters) |
 | `There's an issue with the selected model` | [Request errors](#theres-an-issue-with-the-selected-model) |
 | `Model ... is not a recognized model id` | [Request errors](#model-is-not-a-recognized-model-id) |
@@ -179,6 +185,7 @@ Match the message you see to a section below.
 | `Effort '<level>' isn't available with thinking turned off on this model` | [Request errors](#effort-isnt-available-with-thinking-turned-off) |
 | `effort '<level>' is not supported when thinking is disabled` | [Request errors](#effort-isnt-available-with-thinking-turned-off) |
 | `max_tokens must be greater than thinking.budget_tokens` | [Request errors](#thinking-budget-exceeds-output-limit) |
+| `Claude's response exceeded the ... output token maximum` | [Request errors](#response-exceeded-the-output-token-maximum) |
 | `API Error: 400 due to tool use concurrency issues` | [Request errors](#tool-use-or-thinking-block-mismatch) |
 | `API Error: 400 orphaned tool_result in conversation history` | [Request errors](#tool-use-or-thinking-block-mismatch) |
 | `API Error: 400 duplicate tool_use ID in conversation history` | [Request errors](#tool-use-or-thinking-block-mismatch) |
@@ -199,11 +206,15 @@ Match the message you see to a section below.
 | `The connection dropped while downloading the update` | [Troubleshoot installation and login](/docs/en/troubleshoot-install#the-connection-dropped-while-downloading-the-update) |
 | `Download timed out: exceeded the total deadline` | [Troubleshoot installation and login](/docs/en/troubleshoot-install#the-connection-dropped-while-downloading-the-update) |
 | `--bg and --print conflict` | [Command-line errors](#conflict-between-bg-and-print) |
+| `Couldn't tell whether --bg is a flag or text here, so nothing was started` | [Command-line errors](#couldnt-tell-whether-bg-is-a-flag-or-text) |
 | `Error: Cannot use both --append-subagent-system-prompt and --append-subagent-system-prompt-file. Please use only one.` | [Command-line errors](#conflict-between-a-system-prompt-flag-and-its-file-form) |
 | `Cloud sessions cannot be created from a --restricted session` | [Command-line errors](#cloud-sessions-cannot-be-created-from-a-restricted-session) |
 | `Cloud sessions are disabled by your organization's policy` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
-| `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#cloud-sessions-are-disabled-by-your-organizations-policy) |
+| `Cloud sessions use your claude.ai login`, at the end of a policy denial that names a credential | [Command-line errors](#cloud-sessions-use-your-claude-ai-login) |
+| `Couldn't verify your organization's policy for cloud sessions` | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
+| `Cloud sessions aren't available:` followed by why your organization's policy couldn't be loaded | [Command-line errors](#couldnt-verify-your-organizations-policy-for-cloud-sessions) |
 | `Cloud sessions need a claude.ai sign-in` | [Unable to get organization UUID](/docs/en/claude-code-on-the-web#unable-to-get-organization-uuid) |
+| `Nothing was stashed: "<path>" is now a folder in place of a tracked file or link` / `are now folders in place of tracked files or links` | [Command-line errors](#nothing-was-stashed-because-a-folder-replaced-a-tracked-file) |
 | `Error: --json-schema is not a valid JSON Schema` | [Command-line errors](#the-json-schema-value-is-not-a-valid-json-schema) |
 | `Error: Invalid --agents configuration:` | [Command-line errors](#invalid-agents-configuration) |
 | `Error: --agents takes a JSON object, or a file path only with --print (-p)` | [Command-line errors](#invalid-agents-configuration) |
@@ -214,6 +225,7 @@ Match the message you see to a section below.
 | `couldn't be resolved to a real location, so its skills, commands, and agents weren't loaded` | [Command-line errors](#directory-couldnt-be-resolved-to-a-real-location) |
 | `Error: Workspace not trusted` when starting Remote Control | [Command-line errors](#workspace-not-trusted-when-starting-remote-control) |
 | `` `<flag>` before `remote-control` is not carried over to the sessions Remote Control starts `` | [Command-line errors](#not-carried-over-to-the-sessions-remote-control-starts) |
+| `--sandbox is not supported by claude remote-control` / `--no-sandbox is not supported by claude remote-control` | [Command-line errors](#sandbox-is-not-supported-by-claude-remote-control) |
 | `` `claude import` is not yet available in this build `` | [Command-line errors](#claude-import-is-not-yet-available-in-this-build) |
 | `Could not read Claude Code config` | [Command-line errors](#could-not-read-claude-code-config) |
 | `Could not import <server>: <reason>` | [Command-line errors](#could-not-import-a-server-from-claude-desktop) |
@@ -230,6 +242,7 @@ Match the message you see to a section below.
 | `Shell command failed for pattern "..."`, from `/security-review` or any skill that injects dynamic context | [Command-line errors](#security-review-fails-without-origin-head) |
 | `Shell command permission check failed for pattern "..."`, from a skill that injects dynamic context | [Command-line errors](#security-review-fails-without-origin-head) |
 | ``Skill <name> requires bash (`shell: bash` in frontmatter) but Git Bash was not found`` | [Command-line errors](#security-review-fails-without-origin-head) |
+| `No shell command in <name> was run, because the <tool> tool does not accept one of them` | [Command-line errors](#no-shell-command-was-run) |
 | `Input must be provided either through stdin or as a prompt argument when using --print` | [Command-line errors](#input-must-be-provided-when-using-print) |
 | `Claude Code can't read the keyboard here: stdin is not a terminal` | [Command-line errors](#claude-code-cant-read-the-keyboard-here) |
 | `Error: Input contained only whitespace` | [Command-line errors](#input-contained-only-whitespace) |
@@ -263,6 +276,7 @@ Match the message you see to a section below.
 | `Output styles are saved to local settings (.claude/settings.local.json), which this session doesn't load` | [Command-line errors](#output-styles-are-saved-to-local-settings-which-this-session-doesnt-load) |
 | `/recap only runs when you ask for it yourself in this session` | [Command-line errors](#recap-only-runs-when-you-ask-for-it-yourself) |
 | `` `plugin eval` is currently in early access `` / `` `plugin eval` is currently unavailable `` | [Plugin errors](#plugin-eval-is-currently-in-early-access) |
+| `cannot be evaluated where sessions load it` | [Test plugins with evals](/docs/en/plugin-evals#cannot-be-evaluated-where-sessions-load-it) |
 | `Marketplace "<name>" is registered from an untrusted source` | [Plugin errors](#marketplace-is-registered-from-an-untrusted-source) |
 | `Claude Code refuses the marketplace name "<name>"` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
 | `Marketplace name impersonates an official Anthropic/Claude marketplace` | [Plugin errors](#claude-code-refuses-the-marketplace-name) |
@@ -336,6 +350,7 @@ Match the message you see to a section below.
 | `Can't open — this session is running in another terminal` | [Background session errors](#this-session-is-running-in-another-terminal) |
 | `This conversation is already open in another running Claude session` | [Background session errors](#this-session-is-running-in-another-terminal) |
 | `This session's saved conversation is no longer on disk` | [Background session errors](#this-sessions-saved-conversation-is-no-longer-on-disk) |
+| `Bypass permissions was requested at launch and ignored` | [Skip all checks with bypassPermissions mode](/docs/en/permission-modes#bypass-permissions-acceptance) |
 | `kept <id> — its worktree is still at <path>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
 | `kept <id> — <n> unpushed commits on <branch>` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
 | `kept <id> — worktree has commits that are not pushed anywhere` | [Background session errors](#worktree-has-commits-that-are-not-pushed-anywhere) |
@@ -362,7 +377,10 @@ Match the message you see to a section below.
 | `Claude Code's fullscreen renderer didn't finish starting last time on this machine` / `Claude Code's fullscreen renderer has repeatedly failed to start on this machine` | [Fullscreen rendering](/docs/en/fullscreen#fullscreen-renderer-didnt-finish-starting) |
 | `Claude Code exited after an unrecoverable interface error (...)` | [Configuration warnings](#exited-after-an-unrecoverable-interface-error) |
 | `Agent descriptions are over the 15.0k-token limit` | [Configuration warnings](#agent-descriptions-are-over-the-15000-token-limit) |
+| `hook needs quotes around a path with a space` | [Configuration warnings](#hook-needs-quotes-around-a-path-with-a-space) |
+| `Instruction file not loaded` | [Configuration warnings](#instruction-file-not-loaded) |
 | `Not loaded: rename <path>, then restart — its name uses "<name>", a name reserved for the skills synced from your claude.ai account` | [Configuration warnings](#a-skill-command-or-workflow-wasnt-loaded-because-its-name-is-reserved) |
+| `N skill or command names refused: run with --debug to see which ([names]), rename, then restart` | [Configuration warnings](#skill-or-command-name-refused) |
 | `Ignoring N permissions.allow entries from ... this workspace has not been trusted` | [Configuration warnings](#workspace-has-not-been-trusted) |
 | `is a network path, which cannot be added as a working directory` | [Configuration warnings](#working-directory-is-a-network-path) |
 | `Remote managed settings failed to load (<cause>)` | [Configuration warnings](#remote-managed-settings-failed-to-load) |
@@ -371,9 +389,11 @@ Match the message you see to a section below.
 | `Your organization's managed settings allow Claude Code to use: <providers>` | [Configuration warnings](#managed-settings-dont-allow-this-api-provider) |
 | `Your organization's managed settings allow Claude Code to use no API provider at all` | [Configuration warnings](#managed-settings-dont-allow-this-api-provider) |
 | `MCP server <name> is blocked by enterprise managed policy` | [Configuration warnings](#mcp-server-is-blocked-by-enterprise-managed-policy) |
+| `"<name>" is a reserved MCP server name and was not loaded` | [Configuration warnings](#mcp-server-name-is-reserved) |
 | `Managed settings document could not be parsed as a JSON object; none of its settings are in effect. Fix or remove it.` | [Configuration warnings](#managed-settings-document-could-not-be-parsed) |
 | `Managed settings drop-in directory could not be read` | [Configuration warnings](#managed-settings-document-could-not-be-parsed) |
 | `Unable to read managed policy settings` | [Configuration warnings](#unable-to-read-managed-policy-settings) |
+| `Managed settings contain invalid entries, including PreToolUse/PermissionRequest hooks that are NOT loaded; fix or remove each entry:` | [Configuration warnings](#managed-settings-hooks-not-loaded) |
 | `otelHeadersHelper failed; telemetry is not being exported. See /status: ...` | [Configuration warnings](#otelheadershelper-failed) |
 | `"crossSessionInbound" must be one of "accept", "hold", "refuse"` | [Configuration warnings](#crosssessioninbound-must-be-one-of-accept-hold-refuse) |
 | `API Error: ANTHROPIC_FOUNDRY_RESOURCE must be a Foundry resource name` | [Configuration warnings](#anthropic-foundry-resource-must-be-a-foundry-resource-name) |
@@ -383,7 +403,10 @@ Match the message you see to a section below.
 | `... has a wildcard before the rest of the command` | [Configuration warnings](#has-a-wildcard-before-the-rest-of-the-command) |
 | `Denying Bash also turns off the PowerShell tool, so Claude has neither` | [Configuration warnings](#denying-bash-also-turns-off-the-powershell-tool) |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT is set, but the 200K limit isn't enforced` | [Configuration warnings](#the-200k-limit-isnt-enforced) |
+| `Model "<model>" isn't recognized · context assumed to be 200k tokens` | [Correct the window for a gateway or custom model ID](/docs/en/model-config#correct-the-window-for-a-gateway-or-custom-model-id) |
+| `Claude Code doesn't recognize the model "<model>", so it assumes a context window of 200k tokens` | [Correct the window for a gateway or custom model ID](/docs/en/model-config#correct-the-window-for-a-gateway-or-custom-model-id) |
 | `[claude-code:unrecognized_model]` | [Configuration warnings](#unrecognized-model-id-on-a-request) |
+| `is ignored — managed settings set allowManagedReadPathsOnly` / `is ignored — managed settings set allowManagedDomainsOnly` | [Configuration warnings](#sandbox-allow-entries-are-ignored-under-a-managed-lock) |
 | `Stale sandbox mask files left by a killed session` | [Configuration warnings](#stale-sandbox-mask-files-left-by-a-killed-session) |
 | Responses seem lower quality than usual | [Response quality](#responses-seem-lower-quality-than-usual) |
 
@@ -398,7 +421,7 @@ Claude Code retries these failures:
 * Dropped connections. When a connection drops partway through a request before Claude has completed any part of its response, including its thinking, Claude Code re-issues the request with the same backoff and the turn continues, even if some text had already started streaming. When it drops after Claude has finished thinking but before it has started any text or tool call, Claude Code instead re-issues the request up to two times in quick succession, and ends the turn with `Connection lost before a response was produced` if the connection keeps dropping at that point.
 * A connection that Claude Code detects was broken by your computer going to sleep partway through a request. Claude Code counts it as a dropped connection under the rules above; once the retry label names the specific reason, it reads `Connection lost while your computer was asleep`, and if the turn ends after Claude has finished thinking but before any text or tool call, the message reads `Your computer went to sleep before a response was produced`.
 * A stalled response stream, when the response headers have arrived but none of Claude's response has arrived, or when Claude has finished thinking but hasn't started any text or tool call: Claude Code aborts the stalled connection and streams the request again at most once. If the response stalls a second time after Claude has finished thinking but before any text or tool call, Claude Code ends the turn with `The response stalled before a response was produced`.
-* A streaming request the API never answers with response headers, on a connection where the [first-byte deadline runs](/docs/en/network-config#streaming-idle-watchdogs): Claude Code aborts it at the deadline and re-sends it at most once per model request, within the retry budget, then ends the turn with [No response from API](#no-response-from-api) if that attempt goes unanswered too. On other connections, the request waits out `API_TIMEOUT_MS`. When you set `CLAUDE_CODE_RETRY_WATCHDOG`, the one-retry cap doesn't apply.
+* A streaming request the API never answers with response headers, on a connection where the [first-byte deadline runs](/docs/en/network-config#streaming-idle-watchdogs): Claude Code aborts it at the deadline and re-sends it at most once per model request, within the retry budget, then ends the turn with [No response from API](#no-response-from-api) if that attempt goes unanswered too. When you set `CLAUDE_CODE_RETRY_WATCHDOG`, the one-retry cap doesn't apply.
 * A streaming response that the API's output content filter stops before Claude has either finished thinking or started any text or tool call. Claude Code re-sends the request once, within the retry budget, and shows [Output blocked by content filtering policy](#output-blocked-by-content-filtering-policy) if the filter stops the second response too.
 * Temporary 429 throttles, but not a gateway's spend-limit `429`, which isn't a throttle; see [Spend limit reached](#spend-limit-reached).
   * When you're signed in with a claude.ai subscription, this includes 429 throttles that don't carry your plan's quota headers. Before v2.1.199, Claude Code retried those throttles only for API key and Enterprise sign-ins.
@@ -445,6 +468,7 @@ You can tune retry behavior with these environment variables:
 | [`CLAUDE_CODE_RETRY_WATCHDOG`](/docs/en/env-vars) | unset | Set to `1` in unattended sessions such as CI jobs to retry `429` and `529` capacity errors indefinitely instead of failing after `CLAUDE_CODE_MAX_RETRIES` attempts. Claude Code fails at once when a standard-speed request gets a `429` that reports a spend limit or exhausted usage credits, even one from a [gateway spend cap](#spend-limit-reached) that resets on a schedule. Before v2.1.239, the watchdog retried these indefinitely. For fast mode requests, see [Handle rate limits](/docs/en/fast-mode#handle-rate-limits). On v2.1.199 or later it also raises the default retry count for other transient errors, such as server errors, timeouts, and dropped connections, to 300, roughly three hours of backoff, and removes the cap of 15 on `CLAUDE_CODE_MAX_RETRIES` if you set that variable explicitly. |
 | [`CLAUDE_CODE_RETRY_WATCHDOG_MAX_WAIT_MS`](/docs/en/env-vars) | unset | Maximum time in milliseconds that each API request spends waiting out `429` and `529` errors when `CLAUDE_CODE_RETRY_WATCHDOG` is set. When unset, the wait has no limit. Requires Claude Code v2.1.295 or later. |
 | [`CLAUDE_CODE_OVERLOADED_RETRY_BASE_DELAY_MS`](/docs/en/env-vars) | 500 | Starting delay in milliseconds of the backoff between retries of a request that the API rejects with a `529` overloaded error. Raise it, up to 32000, to spread the retries over a longer window when the API is at capacity. Has no effect when `CLAUDE_CODE_RETRY_WATCHDOG` is set to `1`, or when the rejected request was sent in [fast mode](/docs/en/fast-mode#handle-rate-limits). Requires Claude Code v2.1.292 or later. |
+| [`CLAUDE_CODE_OVERLOADED_RETRY_MAX_DELAY_MS`](/docs/en/env-vars) | 32000 | Ceiling in milliseconds on the backoff between retries of a request that the API rejects with a `529` overloaded error. Raise it, up to 64000, so that later retries keep spreading apart when the API is at capacity. Has no effect when `CLAUDE_CODE_RETRY_WATCHDOG` is set to `1`, or when the rejected request was sent in [fast mode](/docs/en/fast-mode#handle-rate-limits). Requires Claude Code v2.1.296 or later. |
 | [`API_TIMEOUT_MS`](/docs/en/env-vars) | 600000 | Per-request timeout in milliseconds. Raise it for slow networks or proxies. It also caps how long Claude Code waits for response headers, described in [No response from API](#no-response-from-api). |
 | [`CLAUDE_CODE_NONSTREAMING_TIMEOUT_RETRIES`](/docs/en/env-vars) | unset | Limit on re-sends of a [non-streaming request](#streaming-response-ended-before-any-complete-data-was-received) that times out. At the limit, the request fails. A response from Claude that takes longer than the timeout to generate times out again on every re-send, so set a low number such as `0` to fail sooner. Each non-streaming attempt times out after 300 seconds in a local session, or after `API_TIMEOUT_MS` when you set a positive value. Requires Claude Code v2.1.285 or later. |
 | [`CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS`](/docs/en/env-vars) | unset | Deadline in milliseconds for the first response byte of a streaming request. Requires Claude Code v2.1.242 or later. For how Claude Code picks the deadline when this is unset, see [No response from API](#no-response-from-api). |
@@ -1143,6 +1167,21 @@ Claude Code names the cause in the middle of the message:
 Before v2.1.224, `OAuth token refresh failed — run /login to re-authenticate` read `OAuth token refresh failed — re-authenticate, then re-enable Remote Control`, and `JWT refresh failed: no OAuth token — run /login` read `no OAuth token available for recovery (code <N>)`. The `Claude.ai login expired`, `Claude.ai login was rejected`, and `OAuth token unavailable` messages were added in v2.1.225.
 
 Before v2.1.238, Claude Code reported the cases that now say `Signed out of Claude` as `JWT refresh failed: no OAuth token — run /login`, and stopped Remote Control with `Claude.ai login expired — run /login to restore Remote Control` as soon as one login refresh got no answer.
+
+<h3 id="remote-control-could-not-renew-this-computers-connection">
+  Remote Control could not renew this computer's connection
+</h3>
+
+This warning appears in the terminal running [`claude remote-control`](/docs/en/remote-control#start-a-remote-control-session) when the server can't use your claude.ai login to renew its connection's credential before it expires. The warning's last sentence says how long the current credential still works, or that it has already expired:
+
+```text theme={null}
+Remote Control could not renew this computer's connection: claude.ai did not accept the sign-in it uses. Run `claude /login` to sign in again. The connection keeps working for about 26 hours; if it still cannot sign in then, it stops.
+```
+
+**What to do:**
+
+* If the warning tells you to run `claude /login`, open another terminal on the machine running the server, run `claude /login` there, and sign in with your claude.ai account
+* If the server still can't sign in once the connection's credential has expired, it prints an error containing `Poll: Authentication failed (401)` and stops. Sign in again as the warning's second sentence says, then run `claude remote-control` again in the terminal where the server stopped.
 
 <h3 id="remote-control-stopped-because-the-signed-in-account-changed">
   Remote Control stopped because the signed-in account changed
@@ -1925,7 +1964,7 @@ This is not a client-side network problem. Cloud sessions and [routines](/docs/e
 These steps change one of your own environments. An [organization-shared environment](/docs/en/cloud-environments#organization-shared-environments) opens read-only in the selector, so ask an Owner to change its network access from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings).
 
 * Open your environment for editing, either from the [routine's form](/docs/en/routines#environments-and-network-access) or from the [environment selector](/docs/en/cloud-environments#configure-your-environment) where you start cloud sessions.
-* In the **Edit environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
+* In the **Edit cloud environment** dialog, change **Network access** from **Trusted** to **Custom**, then add the blocked domain to **Allowed domains**. Enter one domain per line. Check **Also include default list of common package managers** to keep the [default allowlist](/docs/en/cloud-environments#default-allowed-domains) alongside your custom domains. Select **Full** instead if you want unrestricted access.
 * Click **Save changes**. The next run uses the updated allowlist. For a cloud session that's already open, see [when a network access change reaches existing sessions](/docs/en/cloud-environments#network-access).
 
 See [Network access](/docs/en/cloud-environments#network-access) for access levels and the default allowlist. Local CLI sessions are not affected by this policy.
@@ -1976,6 +2015,24 @@ The server accepted the request but answered with a body that isn't the environm
 * If the message keeps appearing, check [status.claude.com](https://status.claude.com) for active incidents
 
 Before v2.1.236, Claude Code showed a raw JavaScript TypeError instead of these messages.
+
+<h3 id="failed-to-fetch-session-from-sessions-api">
+  Failed to fetch session from Sessions API
+</h3>
+
+This message means Claude Code found the [cloud session you asked to pull into your terminal](/docs/en/claude-code-on-the-web#from-cloud-to-terminal) but couldn't read its conversation history from Anthropic's servers, so it didn't open it:
+
+```text theme={null}
+Failed to fetch session from Sessions API: Failed to fetch session logs
+```
+
+You see it after `claude --teleport`, `/teleport`, or choosing the session in the [`/tasks`](/docs/en/commands) list. `claude --teleport <session-id>` prints it and exits with code 1.
+
+**What to do:**
+
+* Run the same teleport again. If it fails the same way, [report the problem](#report-an-error)
+
+Before v2.1.296, Claude Code didn't retry a failed read, and after one it could open the session with an empty conversation and report success instead of printing this message.
 
 <h3 id="couldnt-reconnect-to-your-remote-control-session">
   Couldn't reconnect to your Remote Control session
@@ -2126,6 +2183,7 @@ Before v2.1.162, Claude Code attempted the compaction anyway and surfaced the ba
 * Disable MCP servers you are not using with `/mcp disable <name>` to remove their tool definitions from context
 * Trim large `CLAUDE.md` memory files, or move instructions into [path-scoped rules](/docs/en/memory#path-specific-rules) that load only when relevant
 * Auto-compact is on by default and normally prevents this error. If you turned it off in `/config` or with [`DISABLE_AUTO_COMPACT`](/docs/en/env-vars), turn it back on. If you keep it off, run `/compact` yourself before the window fills.
+* If the error appears near 200K tokens on a model that accepts more, one cause is a model ID that Claude Code doesn't recognize. Claude Code assumes a 200K window for such an ID, so to keep working past that point, [give it the model's real context window](/docs/en/model-config#correct-the-window-for-a-gateway-or-custom-model-id).
 
 See [Explore the context window](/docs/en/context-window) for an interactive view of how context fills up.
 
@@ -2181,9 +2239,16 @@ A pasted or attached image exceeds the API's size or dimension limits.
 ```text theme={null}
 Image was too large. Double press esc to go back and try again with a smaller image.
 API Error: 400 ... image dimensions exceed max allowed size
+API Error: an image in the conversation could not be processed and was removed.
 ```
 
-Claude Code replaces the unprocessable image with a text placeholder and retries, so subsequent messages succeed. On versions before 2.1.142, a pasted image could remain in the conversation and repeat the same error on every subsequent message. To recover on those versions, press Esc twice and step back past the turn where the image was added.
+The `could not be processed and was removed` line means the API refused an image in the conversation, such as one over the size or dimension limits.
+
+If one of these errors keeps coming back, update Claude Code. On older versions, an image error could repeat for reasons such as these:
+
+* Before v2.1.299, in a long conversation with many images, Claude Code could remove the images you attached last instead of the one over the limit. The `was removed` line then repeated on every turn, and Claude didn't see your new images.
+* Before v2.1.299, in VS Code, the Desktop app, and the Agent SDK, images you attached while Claude was working didn't get the resizing that other attached images get. They reached the API at their original size, which led to repeated image errors in long conversations.
+* Before v2.1.166, a pasted image could remain in the conversation, and the same error then repeated on every subsequent message
 
 **What to do:**
 
@@ -2211,6 +2276,20 @@ Claude Code normally resizes large images automatically. These errors mean the i
 * If the message asks you to convert the image, convert it to PNG, JPEG, GIF, or WebP and attach it again. Claude Code can verify dimensions for these formats from the file header, without decoding the image.
 * If the message reports a dimension or size limit, resize or recompress the image below that limit before attaching.
 * If the message names a cause, such as a CMYK JPEG, an animated WebP, or a possibly damaged file, re-save the image in the format the message suggests and attach it again.
+
+### Request rejected as unprocessable by the model
+
+The API refused the request as one the model can't process. The message is the API's own.
+
+```text theme={null}
+API Error: 400 Request rejected as unprocessable by the model (too many or oversized images, or unsupported parameters)
+```
+
+Claude Code can remove the oldest images and documents from a refused request and send it again. Before v2.1.290, Claude Code didn't remove images on this refusal, so a long session that accumulated hundreds of them could fail with this error on every turn.
+
+**What to do:**
+
+* If the message keeps appearing in a conversation with images or documents, remove them yourself. Press Esc twice to step back past the turns that added them, or run `/clear` to start fresh.
 
 ### PDF errors
 
@@ -2274,6 +2353,24 @@ Before v2.1.216, no deployment ran the exclusion checks.
 * If your Claude Code version is earlier than v2.1.216, run `claude update`.
 * Remove or [disable](/docs/en/mcp#disable-a-server-without-removing-it) the MCP server that declares the invalid schema. The error names the tool only by position. On v2.1.216 or later, check each server's log for a line naming a tool whose input schema would be rejected. If no log names one, disable servers one at a time.
 * If you maintain the server, fix the tool's `input_schema`. The schema must be valid JSON Schema, and top-level property names must be 1 to 64 characters long and use only ASCII letters and digits, `_`, `.`, and `-`. See [Tools with invalid input schemas](/docs/en/mcp#tools-with-invalid-input-schemas).
+
+<h3 id="mcp-tool-name-over-128-characters">
+  MCP tool name over 128 characters
+</h3>
+
+An MCP server lists a tool whose full name, such as `mcp__<server>__<tool>`, is longer than the 128 characters the API accepts. Claude Code [leaves that tool out of the tools it sends to Claude](/docs/en/mcp#tools-with-names-longer-than-128-characters), and the server's other tools keep working. In a session you start with `claude --debug` from your shell, Claude Code writes this message to the debug log at `~/.claude/debug/<session-id>.txt`:
+
+```text theme={null}
+Tool "mcp__<server>__<tool>" is not sent to Claude: its name has <N> characters and the API accepts at most 128
+```
+
+**What to do:**
+
+* If you maintain the server, shorten the tool's name.
+* If the server is in your [MCP configuration](/docs/en/mcp#mcp-installation-scopes), give it a shorter name there, such as `db` in place of `analytics-database`. Then update what refers to the server or its tools by the old name, such as [permission rules](/docs/en/permissions#mcp) and [hook matchers](/docs/en/hooks#match-mcp-tools).
+* If a [plugin bundles the server](/docs/en/mcp#plugin-provided-mcp-servers), the tool's full name also includes the plugin name. Ask the plugin's maintainer to shorten the server or tool name.
+
+Before v2.1.292, Claude Code sent the tool anyway, and the API rejected every request that included it with `API Error: 400 ... tools.N.custom.name: String should have at most 128 characters`.
 
 <h3 id="tool-use-name-over-200-characters">
   tool\_use.name over 200 characters
@@ -2583,6 +2680,23 @@ API Error: 400 ... max_tokens must be greater than thinking.budget_tokens
 * Raise [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](/docs/en/env-vars) above the thinking budget
 * See [Extended thinking](/docs/en/model-config#extended-thinking) for how the budget interacts with output length
 
+### Response exceeded the output token maximum
+
+Claude's reply reached the largest number of output tokens the request allowed and was cut off there:
+
+```text theme={null}
+API Error: Claude's response exceeded the ... output token maximum. To configure this behavior, set the CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable.
+API Error: Claude's response exceeded the 64000 output token maximum for a request sent without streaming. The CLAUDE_CODE_MAX_OUTPUT_TOKENS environment variable cannot raise this limit.
+```
+
+The form that names `a request sent without streaming` means a streaming request failed and Claude Code re-sent it without streaming, which limits the reply to 64,000 output tokens. Before v2.1.299, a reply cut off on such a re-sent request ended the turn without this message, as if the reply were complete.
+
+**What to do:**
+
+* If Claude wrote some text before the reply was cut off, reply `continue` in an interactive session to ask for the rest. That text stays in the conversation.
+* If the message says to set `CLAUDE_CODE_MAX_OUTPUT_TOKENS`, see [`CLAUDE_CODE_MAX_OUTPUT_TOKENS`](/docs/en/env-vars) for how the value is capped and [Set environment variables](/docs/en/env-vars#set-environment-variables) for where to set it
+* To keep each reply under the limit, ask Claude for the output in smaller pieces, such as one file or one section per reply
+
 ### Tool use or thinking block mismatch
 
 The conversation history reached the API in an inconsistent state.
@@ -2711,7 +2825,7 @@ Before v2.1.219, the message read `Claude Code is unable to respond to this requ
 The model's safety measures flagged content in the conversation as a cybersecurity topic. The message names the model that flagged the request:
 
 ```text theme={null}
-API Error: Opus 4.8's safeguards flagged this message. Our intentionally broad safeguards allow us to deliver more capabilities faster, but can sometimes flag legitimate cybersecurity work. Apply to the Cyber Verification Program to reduce these interruptions. Send feedback with /feedback or learn more: https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude
+API Error: Opus 4.8's safeguards flagged this message. Our intentionally broad safeguards allow us to deliver more capabilities faster, but can sometimes flag legitimate cybersecurity work. Send feedback with /feedback or learn more: https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude
 ```
 
 If the message includes the line `` Details: `[reasoning_extraction]` ``, see [Safeguards flagged a request for Claude's reasoning](#safeguards-flagged-a-request-for-claudes-reasoning).
@@ -2720,15 +2834,17 @@ This message links to the [Cyber Verification Program](https://support.claude.co
 
 On [Amazon Bedrock](/docs/en/amazon-bedrock), [Google Cloud's Agent Platform](/docs/en/google-vertex-ai), and [Microsoft Foundry](/docs/en/microsoft-foundry), a cybersecurity flag produces the [Usage Policy refusal](#usage-policy-refusal) message instead.
 
-The safeguard itself is server-side and predates v2.1.203; client releases since then have changed only the message's wording.
-From v2.1.203 through v2.1.218, the message read `<model> has safety measures that flagged this message for a cybersecurity topic. To learn about the Cyber Verification Program and apply for access, visit our help center:` followed by the same help-center link, and interactive sessions appended `If you were not engaging in a cybersecurity topic, please send feedback via /feedback.`
-Before v2.1.203, it read `<model>'s safeguards flagged this message for a cybersecurity topic. If your work requires this access, you can apply for an exemption:` followed by an exemption form link.
-
 **What to do:**
 
 * If your work requires this content, apply for access through the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude)
 * If your request wasn't about a cybersecurity topic, run `/feedback` to report the false positive
 * To keep working in the same session, press Esc twice or run `/rewind` to step back to a checkpoint before the turn that triggered the flag, then take a different approach. See [Checkpointing](/docs/en/checkpointing).
+
+If the message you see is worded like one of these instead, it's the same flag on an earlier Claude Code version:
+
+* From v2.1.219 through v2.1.296, the message could also include `Apply to the Cyber Verification Program to reduce these interruptions.` before its closing sentence
+* From v2.1.203 through v2.1.218, the message read `<model> has safety measures that flagged this message for a cybersecurity topic. To learn about the Cyber Verification Program and apply for access, visit our help center:` followed by the same help-center link. In interactive sessions, it continued with `If you were not engaging in a cybersecurity topic, please send feedback via /feedback.`
+* Before v2.1.203, it read `<model>'s safeguards flagged this message for a cybersecurity topic. If your work requires this access, you can apply for an exemption:` followed by an exemption form link
 
 <h3 id="safeguards-flagged-a-request-for-claudes-reasoning">
   Safeguards flagged a request for Claude's reasoning
@@ -2782,6 +2898,22 @@ This message requires Claude Code v2.1.198 or later. You combined `--bg` with `-
 
 * Drop `-p` or `--print`. `--bg` takes the prompt as its positional argument, so `claude --bg "<task>"` is the complete command. See [Dispatch new agents from your shell](/docs/en/agent-view#from-your-shell).
 * To run the prompt non-interactively and print the result instead of creating a background session, drop `--bg` and run `claude -p "<task>"`
+
+<h3 id="couldnt-tell-whether-bg-is-a-flag-or-text">
+  Couldn't tell whether `--bg` is a flag or text
+</h3>
+
+You ran `claude` with `--bg` or `--background` at a position where Claude Code couldn't tell whether you meant it as the background flag or as text. The command started nothing, printed this line, and exited with code 1:
+
+```text theme={null}
+Couldn't tell whether --bg is a flag or text here, so nothing was started. To start a background session put it first: claude --bg <prompt>
+```
+
+If you typed `--background`, the line names `--background` instead.
+
+**What to do:**
+
+* To start a [background session](/docs/en/agent-view#from-your-shell), run the command again in your shell with the flag first: `claude --bg --name nightly-audit "<task>"`
 
 <h3 id="conflict-between-a-system-prompt-flag-and-its-file-form">
   Conflict between a system prompt flag and its file form
@@ -2856,14 +2988,68 @@ Cloud sessions are disabled by your organization's policy. Contact your organiza
 
 The message appears when you [create a cloud session from the terminal](/docs/en/claude-code-on-the-web#from-terminal-to-cloud) and when you submit a command that needs cloud sessions, such as `/teleport`, `/remote-env`, or `/web-setup`. Before v2.1.268, submitting one of those commands returned [`Unknown command`](#unknown-command) instead.
 
-This is a server-side organization policy, so it can't be overridden from local settings, environment variables, or CLI flags.
-
-If Claude Code hasn't loaded your organization's policy yet or can't fetch it, those commands answer `Couldn't verify your organization's policy for cloud sessions. Check your network connection, then restart Claude Code and try again.` instead.
+If the message instead names a credential this session is using and ends with `Cloud sessions use your claude.ai login.`, see [Cloud sessions use your claude.ai login](#cloud-sessions-use-your-claude-ai-login). If Claude Code couldn't load your organization's policy at all, you see [a different message](#couldnt-verify-your-organizations-policy-for-cloud-sessions) instead.
 
 **What to do:**
 
 * Ask an [Owner](/docs/en/server-managed-settings#access-control) in your organization to enable cloud sessions in the Claude Code admin settings at [claude.ai/admin-settings/claude-code](https://claude.ai/admin-settings/claude-code)
-* If the message says it couldn't verify the policy, check your network connection, then restart Claude Code and try again
+
+<h3 id="cloud-sessions-use-your-claude-ai-login">
+  Cloud sessions use your claude.ai login
+</h3>
+
+When the [policy denial](#cloud-sessions-are-disabled-by-your-organizations-policy) names a credential this session is using and ends with this sentence, Claude Code checked the cloud-session policy of the organization that issued that credential. That organization can differ from the one your claude.ai login belongs to:
+
+```text theme={null}
+Cloud sessions are disabled by your organization's policy. This session is using ANTHROPIC_API_KEY, so Claude Code checked the policy for the organization that key belongs to. Cloud sessions use your claude.ai login.
+```
+
+The last sentence means that cloud sessions run on your claude.ai login rather than on that credential. This form appears when you start, resume, or message a cloud session from your shell, such as with `--cloud` or `--teleport`. Before v2.1.296, Claude Code printed the form that tells you to contact your organization admin in this case too.
+
+<h3 id="couldnt-verify-your-organizations-policy-for-cloud-sessions">
+  Couldn't verify your organization's policy for cloud sessions
+</h3>
+
+These messages mean Claude Code couldn't load your organization's policy, which it checks before it creates, resumes, or messages a [cloud session](/docs/en/claude-code-on-the-web). While the policy request hasn't finished, the message is:
+
+```text theme={null}
+Couldn't verify your organization's policy for cloud sessions. Check your network connection and try again.
+```
+
+Inside a session, a command that needs cloud sessions, such as `/teleport` or `/web-setup`, gives this message too. It does so even where your shell would print a `Cloud sessions aren't available:` form, and its second sentence reads `Check your network connection, then restart Claude Code and try again.`
+
+Once the policy request has failed, the message says what failed. This applies when you start, resume, or message a cloud session from your shell with a flag such as `--cloud` or `--teleport`. With no route to the API, it reads:
+
+```text theme={null}
+Cloud sessions aren't available: couldn't reach api.anthropic.com to load your organization's policy. Check your network or proxy.
+```
+
+Other failures follow the same opening with their own cause, such as a proxy that refused the request with HTTP 403, a server error, or credentials the API didn't accept. When the API didn't accept a credential that this session uses in place of your claude.ai login, such as an `ANTHROPIC_API_KEY` environment variable, the message can also name it and say to unset it:
+
+```text theme={null}
+Cloud sessions aren't available: api.anthropic.com didn't accept this session's credentials when Claude Code asked for your organization's policy. Cloud sessions use your claude.ai login. ANTHROPIC_API_KEY is set, so this session is using API-key auth — unset it (or run in a shell without it) to use cloud sessions.
+```
+
+Before v2.1.296, these failures printed the `Couldn't verify` message too.
+
+**What to do:**
+
+* For the `Couldn't verify` message, check your network connection and try again. Inside a session, restart Claude Code first
+* For a `Cloud sessions aren't available:` message, do what its cause calls for, such as checking your proxy or unsetting the credential it names, then run the command again
+
+<h3 id="nothing-was-stashed-because-a-folder-replaced-a-tracked-file">
+  Nothing was stashed because a folder replaced a tracked file
+</h3>
+
+This message means a folder in your checkout now sits where a git-tracked file or link used to be. It appears after you choose the stash option while pulling a [cloud session](/docs/en/claude-code-on-the-web#from-cloud-to-terminal) into your terminal, for example with `claude --teleport` or `/teleport`. Stashing that state could delete the files inside the folder, so Claude Code refuses the stash and leaves your checkout and index unchanged:
+
+```text wrap theme={null}
+Error: Nothing was stashed: "f" is now a folder in place of a tracked file or link, and stashing could delete what's in it for good. Commit the change or move the folder somewhere else, then try again.
+```
+
+**What to do:**
+
+* Commit the change or move the folder somewhere else, as the message says, then run the teleport again
 
 <h3 id="the-json-schema-value-is-not-a-valid-json-schema">
   The `--json-schema` value is not a valid JSON Schema
@@ -3006,6 +3192,24 @@ Claude Code also refuses to start for a global flag it doesn't yet recognize as 
 * When the refused flag is `--permission-mode`, run `claude remote-control --permission-mode <mode>` to set the permission mode for the sessions Remote Control starts
 
 Before v2.1.248, `claude remote-control` didn't accept its own flags when a global flag came first, and the command failed with an `unknown option` error.
+
+<h3 id="sandbox-is-not-supported-by-claude-remote-control">
+  `--sandbox` or `--no-sandbox` is not supported by claude remote-control
+</h3>
+
+This error means the command that starts your [Remote Control](/docs/en/remote-control) server passes `--sandbox` or `--no-sandbox` after `remote-control`, and `claude remote-control` accepts neither flag. The server exits with code 1 instead of starting:
+
+```text theme={null}
+Error: --sandbox is not supported by claude remote-control. The flag had no effect and was removed. To sandbox sessions, set sandbox.enabled to true in settings.
+Error: --no-sandbox is not supported by claude remote-control. The flag had no effect and was removed. Remove it from the command.
+```
+
+**What to do:**
+
+* Remove the flag from the command, including in a script or service definition that starts the server for you, then run it again
+* To sandbox the sessions the server starts, turn on [sandboxing](/docs/en/sandboxing) by setting [`sandbox.enabled`](/docs/en/settings-reference#sandbox-enabled) to `true` in a [settings file](/docs/en/settings#where-settings-live)
+
+Both flags were removed from `claude remote-control` in v2.1.300, so a command written for an earlier version can still carry one.
 
 ### claude import is not yet available in this build
 
@@ -3239,16 +3443,36 @@ The message may quote `git log` or a different `git diff` instead. Git creates `
 * A remote whose server-side HEAD points at a branch nobody pushed
 * A repository with no `origin` remote, or one you never fetched
 
-Claude Code shows the same error for any skill that [injects dynamic context](/docs/en/skills#when-an-injected-command-fails), and a failed injected command aborts that skill's invocation. Two sibling strings fire before the command runs at all:
+Claude Code shows the same error for any skill that [injects dynamic context](/docs/en/skills#when-an-injected-command-fails), and a failed injected command aborts that skill's invocation.
+
+Sibling strings fire before the command runs at all:
 
 * `Shell command permission check failed for pattern "..."`: the command's permission check didn't allow it. [Permission checks on injected commands](/docs/en/skills#permission-checks-on-injected-commands) covers which results abort in each permission mode and how to pre-approve a command with `allowed-tools`
 * ``Skill <name> requires bash (`shell: bash` in frontmatter) but Git Bash was not found``: the skill's frontmatter demands bash on a machine without it. Install Git for Windows or change the frontmatter to `shell: powershell`. See [How injected commands run](/docs/en/skills#how-injected-commands-run)
+* `No shell command in <name> was run`: one of the file's `!` commands contains a raw control character other than tab or newline, so none of them runs. See [how to find and remove the character](#no-shell-command-was-run)
 
 **What to do:**
 
 * Create the ref by naming your remote's default branch: `git remote set-head origin <default-branch>`. This works whenever the local tracking ref `origin/<default-branch>` exists. If it doesn't, as in single-branch clones, fetch the branch first: run `git remote set-branches --add origin <branch>`, then `git fetch origin`, then rerun the set-head command. Rerun `/security-review`.
 * If you'd rather not name the branch, run `git fetch origin` and then `git remote set-head origin --auto`, which asks the remote which branch is its default. It fails with `error: Cannot determine remote HEAD` when the remote advertises no default branch, because it is empty or its HEAD points at a branch nobody pushed; name the branch explicitly instead. It fails with `error: Not a valid ref` when your clone doesn't fetch that branch; widen the refspec as above first.
 * If the repository has no remote, add one with `git remote add origin <url>` and fetch before creating the ref. If the remote is empty, push your branch first with `git push -u origin HEAD` and name that branch in the set-head command; `origin/HEAD` then points at the branch you just pushed, so `/security-review` sees an empty diff until the branch diverges from it.
+
+<h3 id="no-shell-command-was-run">
+  No shell command in a skill or command was run
+</h3>
+
+One of the `` !`<command>` `` [dynamic context commands](/docs/en/skills#inject-dynamic-context) in a skill or custom command file contains a raw control character other than tab or newline. Claude Code refuses the whole invocation before any of the file's commands runs.
+
+The message names the shell tool that would have run the commands, Bash or PowerShell, and ends with the refused command. Each such character is replaced by `�` so you can see where it is:
+
+```text theme={null}
+No shell command in /my-skill was run, because the Bash tool does not accept one of them: command contains control characters that would be hidden in the approval dialog. Unprintable characters are shown as � below: remove them from the skill or command file, or from the arguments or options substituted into it.
+build.sh --target�dist
+```
+
+**What to do:**
+
+* Find each `�` in the command quoted at the end of the message. Remove the character it stands for from the skill or command file, or from the arguments or options substituted into the file.
 
 <h3 id="input-must-be-provided-when-using-print">
   Input must be provided when using `--print`
@@ -3633,7 +3857,7 @@ Each reason the message can show in parentheses:
   Claude Code couldn't restart
 </h3>
 
-Claude Code was restarting, for example to switch to or from fullscreen rendering after you ran [`/tui`](/docs/en/fullscreen#enable-fullscreen-rendering). It closed the session but couldn't start the new process, so it printed this message and exited with status 1:
+When this message says your conversation is saved, the conversation is on disk and you can pick it up where it stopped. Claude Code was restarting itself, for example to switch to or from fullscreen rendering after you ran [`/tui`](/docs/en/fullscreen#enable-fullscreen-rendering), and couldn't start the new process, so it exited with status 1:
 
 ```text theme={null}
 Claude Code couldn't restart. Your conversation is saved. Start Claude Code again and run /resume to pick it up.
@@ -3643,7 +3867,7 @@ When the restart had no conversation to reopen, for example because `/tui` was y
 
 **What to do:**
 
-* Run `claude` again in your shell from the same directory. If the message said your conversation is saved, run [`/resume`](/docs/en/sessions#resume-a-session) in the new session and select it
+* Run `claude` again in your shell. If the message said your conversation is saved, run [`/resume`](/docs/en/sessions#resume-a-session) in the new session and select the conversation. If it isn't in the list, [widen the session picker](/docs/en/sessions#where-the-session-picker-looks)
 * If restarts keep failing, start Claude Code from your shell with [`claude --debug-file claude-debug.log`](/docs/en/cli-reference#cli-flags). If a restart from that session fails, `claude-debug.log` in the directory you started from records a `Failed to relaunch:` line with the operating system's error. Include that line when you [report the problem](#report-an-error)
 
 <h3 id="couldnt-open-claude-desktop">
@@ -4101,6 +4325,7 @@ Agent 'code-reviewer' would be spawned with zero tools — refusing. Its tools l
 
 * Correct each entry the error names against the [tools available to subagents](/docs/en/sub-agents#available-tools)
 * Remove entries for tools the session doesn't have, such as MCP tools from a server that isn't connected
+* If the entry names a connected MCP server, compare the entry with that server's name as the server's [tool names](/docs/en/permissions#mcp) spell it, such as `reports__v2` in `mcp__reports__v2__get_totals`. For that server, write `mcp__reports__v2__*`, which is `mcp__` followed by the whole name and `__*`. With the shorter `mcp__reports`, which names a server called `reports`, the subagent gets none of the `reports__v2` tools
 * For a tool that [background subagents drop](/docs/en/sub-agents#available-tools), such as `CronCreate`, remove the entry. To keep the tool, [turn fork mode off](/docs/en/sub-agents#turn-fork-mode-on-or-off) and ask Claude to run the subagent in the foreground
 * Delete the `tools` field instead of listing tools to give the subagent every [tool available to subagents](/docs/en/sub-agents#available-tools)
 * For a `tools` list that contains only `Agent`, raise the [depth limit](/docs/en/sub-agents#let-subagents-spawn-their-own-subagents) or give the agent at least one other tool: Claude Code withholds `Agent` at that limit, so a list with nothing else in it resolves to no tools
@@ -5090,6 +5315,50 @@ Agent descriptions are over the 15.0k-token limit (~16.2k tokens) · ask Claude 
 * Shorten the `description` frontmatter of your agent files, or ask Claude to trim them for you.
 * Remove agent files you no longer use.
 
+<h3 id="hook-needs-quotes-around-a-path-with-a-space">
+  Hook needs quotes around a path with a space
+</h3>
+
+This notification in the conversation view means a hook's script didn't run because its path has a space and isn't quoted. That hook is an [`asyncRewake`](/docs/en/hooks#run-hooks-in-the-background) hook in shell form. In its `command`, an interpreter such as `python3` is followed by an unquoted path placeholder, and the resolved path contains a space.
+
+The notification starts with the hook's event name and names the script:
+
+```text theme={null}
+Stop hook needs quotes around a path with a space (check.py)
+```
+
+**What to do:**
+
+* In the `command` of the hook that runs the script the notification names, wrap the path in double quotes. In a JSON file, write it as `"command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/check.py\""`.
+
+<h3 id="instruction-file-not-loaded">
+  Instruction file not loaded
+</h3>
+
+This notice in the conversation view of an interactive session means a [memory file](/docs/en/memory#how-claude-md-files-load) that exists wasn't loaded. A read restriction is in force.
+
+```text theme={null}
+Instruction file not loaded (a Read deny rule covers it):
+path: .claude/rules/shared.md
+```
+
+The parenthetical names the reason, for example:
+
+* **`a Read deny rule covers it`**: a `Read` [deny rule](/docs/en/permissions#read-and-edit) matches the file's path as written or where a link on it leads
+* **`it's read from outside your working directories, where reads are blocked`**: the file resolves outside the [working directories](/docs/en/settings-reference#permissions-blockreadsoutsideworkingdirectories) while [`permissions.blockReadsOutsideWorkingDirectories`](/docs/en/settings-reference#permissions-blockreadsoutsideworkingdirectories) is on
+* **`where it leads couldn't be worked out`**: for example, the file is a link that leads back to itself, directly or through other links
+
+When a subdirectory's own memory file can't be loaded as Claude works with files there, the same lines appear in the conversation during the turn. When more files are withheld than the lines name, a final line counts the rest, such as `and 3 more instruction files not loaded`.
+
+**What to do:**
+
+* Nothing, if the restriction is intended: the session runs without that file's instructions.
+* To load a file withheld because `a Read deny rule covers it`, [remove or narrow that rule](/docs/en/permissions#manage-permissions). Then start a new session.
+* To load a file withheld because `it's read from outside your working directories, where reads are blocked`, move it or its link target inside the working directories. Then start a new session.
+* To load a file withheld because `where it leads couldn't be worked out`, check whether the file is a link that leads back to itself. If it is, point the link at a file that exists or put a regular file in its place. Then start a new session.
+
+Before v2.1.292, the notice named the file at the end of the same line after the reason.
+
 <h3 id="a-skill-command-or-workflow-wasnt-loaded-because-its-name-is-reserved">
   A skill, command, or workflow wasn't loaded because its name is reserved
 </h3>
@@ -5109,6 +5378,24 @@ The notice names what to change for the first item it refused: a folder or file 
 * Rename the item the notice names, or edit the `name:` line it points to, then restart the session.
 
 Before v2.1.282, Claude Code loaded skills and commands with these names.
+
+<h3 id="skill-or-command-name-refused">
+  Skill or command name refused
+</h3>
+
+This startup notice means Claude Code refused the name of at least one [skill or custom command](/docs/en/skills), so it didn't load or loaded without its `name` field:
+
+```text theme={null}
+1 skill or command name refused: run with --debug to see which ([names]), rename, then restart — a name may not hold hidden, direction-changing or blank-like characters, < or >, or be over 256 characters
+```
+
+* **Not loaded**: Claude Code refused the name a skill or command goes by, such as its directory name or a command file's name or subfolder. It's missing from the `/` menu and Claude can't invoke it. Its line in the debug log reads `<name> is not offered`.
+* **`name` field ignored**: Claude Code refused a skill's frontmatter `name`. The skill still loads, but the `/` menu doesn't show the `name` value and typing it doesn't invoke the skill. Its line in the debug log reads `<name value> is not shown for <skill>`.
+
+**What to do:**
+
+* Start Claude Code with `claude --debug` from your shell and search the [debug log](/docs/en/debug-your-config) for `[names]`. Each name the notice counts has one line there. The line spells out some hidden characters as codes, such as `\u{200B}` for a zero-width space, so you can see where they are.
+* Remove the [characters a skill name can't hold](/docs/en/skills#characters-a-skill-name-cant-hold) by renaming the folder or file or editing the `name:` line, or shorten a name that is over 256 characters. Then restart the session, unless the file is in a directory Claude Code [watches for changes](/docs/en/skills#live-change-detection). For a skill from a plugin you didn't write, ask the plugin's author to rename it.
 
 ### Workspace has not been trusted
 
@@ -5252,6 +5539,21 @@ Any of these settings can produce the message:
 
 Before v2.1.257, **Reconnect** and re-enable in `/mcp` could connect a server that a mid-session policy update blocked.
 
+<h3 id="mcp-server-name-is-reserved">
+  MCP server name is reserved
+</h3>
+
+This message names one of your MCP servers, whose name is among those Claude Code reserves, such as the names of its built-in servers:
+
+```text theme={null}
+"workspace" is a reserved MCP server name and was not loaded
+```
+
+**What to do:**
+
+* Rename the server where you define it, for example from `workspace` to `my-workspace`
+* For other reserved names to avoid, see [MCP configuration warnings](/docs/en/mcp#configuration-warnings)
+
 <h3 id="managed-settings-document-could-not-be-parsed">
   Managed settings document could not be parsed
 </h3>
@@ -5305,6 +5607,27 @@ A read that the operating system denied, such as on a root-only file, doesn't pr
 * If you don't, send the message to your administrator. Nothing in your own settings files causes or clears this error
 
 Before v2.1.285, only sessions signed in with claude.ai or Claude Console credentials exited with this message, and a read that the operating system denied produced it too.
+
+<h3 id="managed-settings-hooks-not-loaded">
+  Managed settings contain invalid entries, including PreToolUse/PermissionRequest hooks that are NOT loaded
+</h3>
+
+This stderr block from a `-p` run means that a [managed settings](/docs/en/managed-settings) source holds a hook entry Claude Code can't load. That hook doesn't run, and when a line lists the source's `hooks` field as ignored, none of that source's hooks run.
+
+Each line names the source, the field when there is one, and the problem, such as an unknown hook `type` or a hook declared outside the `hooks` key:
+
+```text theme={null}
+Managed settings contain invalid entries, including PreToolUse/PermissionRequest hooks that are NOT loaded; fix or remove each entry:
+  <source> (<field>): <message>
+```
+
+**What to do:**
+
+* If you administer the source, fix or remove each entry the block lists. [Hook configuration](/docs/en/hooks#configuration) shows the shape Claude Code expects under `hooks`.
+* If a line's source is `parent managed settings`, the application that launched Claude Code passed that entry in as [parent settings](/docs/en/managed-settings#parent-settings-from-embedding-hosts), so report it to that application's developer
+* Otherwise, send the block to your administrator
+
+Before v2.1.300, a `-p` run listed this case under the `Managed settings failed to load; policies from the failed source are NOT in effect:` header.
 
 <h3 id="otelheadershelper-failed">
   otelHeadersHelper failed
@@ -5515,6 +5838,24 @@ Claude Code doesn't write the line for provider IDs it resolves to a model it re
 * If the ID is a typo, fix it in whichever of the [places you can set a model](/docs/en/model-config#setting-your-model) or [alias variables](/docs/en/model-config#environment-variables) holds it. If `query_source` starts with `agent:`, fix it where you set the [subagent's model](/docs/en/sub-agents#choose-a-model) instead.
 
 Before v2.1.233, Claude Code wrote no line when it sent a request for a model ID it didn't recognize.
+
+<h3 id="sandbox-allow-entries-are-ignored-under-a-managed-lock">
+  Sandbox allow entries are ignored under a managed lock
+</h3>
+
+This warning in `/status` and `claude doctor` means managed settings set [`allowManagedReadPathsOnly`](/docs/en/settings-reference#sandbox-filesystem-allowmanagedreadpathsonly) or [`allowManagedDomainsOnly`](/docs/en/settings-reference#sandbox-network-allowmanageddomainsonly), so the [`allowRead`](/docs/en/settings-reference#sandbox-filesystem-allowread) or [`allowedDomains`](/docs/en/settings-reference#sandbox-network-alloweddomains) entries in the file it names don't apply:
+
+```text wrap theme={null}
+sandbox.filesystem.allowRead is ignored — managed settings set allowManagedReadPathsOnly, so only allowRead paths from managed settings are honored. The 3 entries in /home/you/.claude/settings.json will NOT apply (see https://code.claude.com/docs/en/settings#sandbox-settings).
+```
+
+For the network lock, the warning names `sandbox.network.allowedDomains` and `allowManagedDomainsOnly`, and says `only allowed domains (and WebFetch domain rules) from managed settings are honored`.
+
+**What to do:**
+
+* You don't have to act on the warning
+* If you need those paths or domains and your organization's managed settings set the lock, ask your administrator to add them to those settings. The warning stays until you also remove the entries from the named file.
+* To clear the warning, remove the entries from the named file. For a file you share, such as a project's `.claude/settings.json`, you can leave the entries in for teammates without the lock and leave the warning showing.
 
 ### Stale sandbox mask files left by a killed session
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/mcp
-fetched_at: 2026-10-12T06:49:40.403997+00:00
+fetched_at: 2026-10-19T05:32:44.522695+00:00
 fetch_method: mintlify_md
 ---
 
@@ -188,7 +188,16 @@ MCP tools require explicit permission before Claude can use them. Without permis
 
 ### Tool naming convention
 
-MCP tools follow the naming pattern `mcp__<server-name>__<tool-name>`. For example, a GitHub server named `"github"` with a `list_issues` tool becomes `mcp__github__list_issues`.
+MCP tools are named `mcp__<server-name>__<tool-name>`, where `<server-name>` is the name you register the server under, such as its key in `mcpServers`.
+
+Characters in the server name such as `.` and spaces are replaced by `_`. This table shows the full name of a `list_issues` tool for two server keys:
+
+| Key in `mcpServers` | Full tool name |
+| :- | :- |
+| `github` | `mcp__github__list_issues` |
+| `my.server` | `mcp__my_server__list_issues` |
+
+Use the full tool names in `allowedTools` and in [MCP permission rules](/docs/en/permissions#mcp). For a server that a [plugin](/docs/en/agent-sdk/plugins) provides, `<server-name>` takes the [plugin-scoped form](/docs/en/mcp#plugin-provided-mcp-servers) and starts with `plugin_`.
 
 ### Auto-approve with allowedTools
 
@@ -817,7 +826,7 @@ Check for `"failed"` or `"needs-auth"` to detect servers that won't be usable:
 
 A remote server's status can also change after it reports `"connected"`. When the connection to it drops mid-session, Claude Code moves the server back to `"pending"` while [reconnecting](/docs/en/mcp#automatic-reconnection). A later `mcpServerStatus()` call in TypeScript, or [`ClaudeSDKClient.get_mcp_status()`](/docs/en/agent-sdk/python#methods) in Python, can then report `"pending"` for a server you saw connected earlier, with no configuration change on your side.
 
-After five reconnection attempts fail, the server reports `"failed"`, or `"needs-auth"` when it needs authorizing again. To retry manually, call [`reconnectMcpServer()`](/docs/en/agent-sdk/typescript#methods) in TypeScript or [`ClaudeSDKClient.reconnect_mcp_server()`](/docs/en/agent-sdk/python#methods) in Python.
+After five reconnection attempts fail, the server reports `"failed"`, or `"needs-auth"` when it needs authorizing again. A `"failed"` HTTP or SSE server can still return to `"connected"` without a call from you, because Claude Code keeps [retrying in the background](/docs/en/mcp#mid-session-drops-of-a-remote-server) after a transient error. To retry manually, call [`reconnectMcpServer()`](/docs/en/agent-sdk/typescript#methods) in TypeScript or [`ClaudeSDKClient.reconnect_mcp_server()`](/docs/en/agent-sdk/python#methods) in Python.
 
 ## Troubleshooting
 

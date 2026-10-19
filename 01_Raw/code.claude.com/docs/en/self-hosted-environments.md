@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/self-hosted-environments
-fetched_at: 2026-10-12T06:49:45.609197+00:00
+fetched_at: 2026-10-19T05:32:46.797191+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,7 +94,7 @@ When a developer starts a session and selects your environment, Anthropic's cont
 1. A runner with free capacity claims the session and holds a lease on it.
 2. The runner clones the repository into its working directory and spawns a child Claude Code process.
 3. The child streams events back over HTTPS while the runner keeps polling; each poll refreshes the lease and doubles as the heartbeat.
-4. If the runner stops polling, its lease lapses after about 60 seconds, and the server requeues the session for another runner within a few minutes.
+4. If the runner stops polling, its lease lapses after about 60 seconds. The server can then take a few minutes and sometimes longer to requeue the session for another runner.
 
 The runner gives each poll request 10 seconds. When a request times out, is lost, or gets a response the runner can't parse, the runner keeps serving its live sessions and retries after a second or two instead of waiting for the next scheduled poll. For example, an intercepting proxy that answers the poll with its own page produces a response the runner can't parse. Each time another request fails in one of those ways, the runner doubles the gap before the next retry, up to 20 seconds, and shortens the gap whenever the lease is close to expiring.
 

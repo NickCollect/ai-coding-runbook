@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/corporate-launcher
-fetched_at: 2026-10-12T06:49:42.492219+00:00
+fetched_at: 2026-10-19T05:32:45.475300+00:00
 fetch_method: mintlify_md
 ---
 
@@ -124,6 +124,7 @@ When the launcher can't run, Claude Code refuses to start the process instead of
 * **Tolerate being invoked from inside itself.** Claude Code applies the launcher to every nested self-spawn, so a launcher that acquires an exclusive resource must detect that it already holds it.
 * **Don't write to the terminal before Claude Code starts.** Anything printed before the `exec` is reported as the crash cause if the session dies before initializing.
 * **Don't depend on how arguments are spelled.** A flag's value can arrive as its own argument, `--flag value`, or joined to the flag, `--flag=value`. Which form a flag uses can change between versions.
+* **Run `exec` from the directory the launcher started in.** Claude Code works in the directory it starts in, so a launcher that changes directory can start a session in the wrong project. If the launcher must enter a namespace or sandbox that resets the working directory, change back to the starting directory inside it, before the `exec`.
 
 ### Format of the launcher value
 

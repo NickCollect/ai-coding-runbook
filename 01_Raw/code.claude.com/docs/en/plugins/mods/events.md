@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugins/mods/events
-fetched_at: 2026-10-12T06:49:44.907266+00:00
+fetched_at: 2026-10-19T05:32:46.486563+00:00
 fetch_method: mintlify_md
 ---
 
@@ -204,11 +204,14 @@ on('tool.check', { tool: 'Bash' }, async ($, e, next) => {
 })
 ```
 
-On `main`, the hook returns `deny`, even when a rule allows `git push`. On another branch, and for other commands, the call gets the decision it would get without the mod.
+The hook denies `git push` on `main` and passes every other call through:
+
+* **On `main`**: the hook returns `deny`, even when a rule allows `git push`
+* **On another branch, and for other commands**: the call gets the decision it would get without the mod
 
 The hook matches the text of the command, so treat it as a reminder for Claude. To block pushes to `main` for everyone, protect the branch on your Git host.
 
-A hook can return `allow`, `ask`, or `deny`, so it can also approve a call that a `PreToolUse` hook outside managed settings blocked. [Extend permissions with hooks](/docs/en/permissions#extend-permissions-with-hooks) lists which decisions hold over a mod.
+A hook can return `allow`, `ask`, or `deny`, so it can also approve a call that a `PreToolUse` hook outside managed settings blocked. In [plan mode](/docs/en/permissions#hook-approvals-in-plan-mode), for a call that isn't read-only, such as a file edit, your hook can tighten the decision `next(e)` returns but can't loosen it. [Extend permissions with hooks](/docs/en/permissions#extend-permissions-with-hooks) lists which decisions hold over a mod.
 
 ### Rewrite or add to a prompt
 
@@ -238,7 +241,7 @@ When you send a prompt such as `open a PR for this change`, your message looks t
 
 To stop a prompt, return `{ drop: 'the reason' }` without calling `next`. The text goes back into the user's prompt input, and they see `Prompt dropped by a hook:` followed by your reason, so address the reason to them. If your hook returns a `drop` after its `next(e)` call let the prompt through, the turn still runs, and the hook [fails](#handle-a-hook-that-fails) with a message that includes `a drop after its next() was answered`.
 
-[Other events](/docs/en/plugins/mods/reference#prompts-and-what-claude-reads) cover the rest of what Claude reads: `prompt.section` for each section of the system prompt, `prompt.context` for the context sent with the first message, and `skill.prompt` for a skill's text. Text from these hooks that changes between requests [invalidates the prompt cache](/docs/en/prompt-caching).
+[Other events](/docs/en/plugins/mods/reference#prompts-and-what-claude-reads) cover the rest of what Claude reads: `prompt.section` for each section of the system prompt, `prompt.context` for the context sent with the first message, and `skill.prompt` for a skill's text. Text from these hooks that changes between requests [invalidates the prompt cache](/docs/en/prompt-caching). In a `skill.prompt` hook, you can also read [which plugin or file the skill came from](/docs/en/plugins/mods/reference#skill-prompt-fields).
 
 ### Follow a turn
 
@@ -315,7 +318,7 @@ The `PreToolUse` hooks configured in settings files also run during a tool call,
 * **`PreToolUse` hooks from managed settings**: run before the first mod's `tool.call` hook, and a block from one of them is final, so no mod sees the call.
 * **`PreToolUse` hooks from every other settings file and from plugins' `hooks/hooks.json`**: run after the last mod calls `next`, as part of Claude Code's own behavior. A mod that answers `tool.call` without calling `next` keeps them from running, and a mod that calls `next` sees their decision in the result it returns.
 
-[`tool.check`](#approve-or-refuse-a-tool-call-before-the-user-is-asked) fires after those hooks and the permission rules have decided, so a hook on it can approve a call that a hook in the second group blocked.
+A [`tool.check`](#approve-or-refuse-a-tool-call-before-the-user-is-asked) hook can approve a call that a `PreToolUse` hook outside managed settings blocked, because `tool.check` fires after those hooks and the permission rules have decided. In plan mode, a `tool.check` hook can approve such a call when it's read-only, but not a file edit or another call that isn't read-only.
 
 ### Handle a hook that fails
 
