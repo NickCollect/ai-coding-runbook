@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes
-fetched_at: 2026-10-12T06:49:46.794752+00:00
+fetched_at: 2026-10-19T05:32:44.789908+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,13 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control. The agent's files, processes, and network traffic stay in your environment.
-
-Self-hosting is a good fit when the agent needs to:
-
-* Operate on data that cannot leave your network boundary
-* Reach internal services that are not publicly routable
-* Run under your organization's own compliance and audit controls
+Self-hosted sandboxes move the agent's tool execution from Anthropic-managed cloud sandboxes into infrastructure you control, while Anthropic keeps running the agent. To learn what that means and decide whether it fits your agent, see [Choosing an agent environment](https://platform.claude.com/docs/en/managed-agents/choosing-an-environment).
 
 ## How it works
 
@@ -47,7 +41,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 * **An agent:** If you don't have one, complete [Get started with Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/quickstart) first and note the agent ID.
 * **A Linux host:** The host needs `/bin/bash` at that exact path. The worker needs only outbound HTTPS.
 * **A Claude API key:** You use it from your own machine to create sessions and read queue stats. Keep it off the worker host, where agent tool calls could read it.
-* **The `ant` CLI on your own machine:** The session and stats commands in this quickstart run there, not on the worker host. Install it the same way the [install step](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes#run-your-first-session) does for the worker.
+* **The `ant` CLI or the SDK on your own machine:** The stats and session steps in this quickstart run there, not on the worker host. Install the CLI the same way the [install step](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes#run-your-first-session) does for the worker, or install the [SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview).
 
 <Note>
   On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
@@ -57,7 +51,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 
 <Steps>
   <Step title="Create a self-hosted environment">
-    In the [Console](https://platform.claude.com/workspaces/default/environments): **Workspace > Environments > New > Self-hosted**
+    In the Claude Console, go to the [Environments](https://platform.claude.com/environments) page (`platform.claude.com/environments`), click **Create environment**, and under **Hosting** select **Self-hosted**.
 
     Or through the API:
 
@@ -156,7 +150,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
       ```
 
       ```php PHP
-      $client = new Anthropic\Client();
+      $client = new \Anthropic\Client();
 
       $environment = $client->beta->environments->create(
           name: 'self-hosted',
@@ -196,7 +190,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
         For Linux environments, download the release binary directly.
 
         ```bash
-        VERSION=1.40.0
+        VERSION=1.42.0
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         case $(uname -m) in
           x86_64) ARCH=amd64 ;;
@@ -229,32 +223,284 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
   </Step>
 
   <Step title="Verify the worker is connected">
-    On your own machine, set `ANTHROPIC_API_KEY` to your Claude API key (not the environment key) and `ANTHROPIC_ENVIRONMENT_ID` to the environment ID. Confirm that `workers_polling` is at least 1:
+    On your own machine, set `ANTHROPIC_API_KEY` to your Claude API key (not the environment key) and `ANTHROPIC_ENVIRONMENT_ID` (python, ruby: `environment_id`; typescript, java, csharp: `environmentId`; go: `environmentID`; php: `$environmentId`) to the environment ID. Confirm that `workers_polling` (java, php: `workersPolling`; csharp, go: `WorkersPolling`) is at least 1:
 
-    ```bash
-    ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
-    ```
+    <CodeGroup>
+      ```bash cURL
+      curl -sS --fail-with-body "https://api.anthropic.com/v1/environments/$ANTHROPIC_ENVIRONMENT_ID/work/stats" \
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-beta: managed-agents-2026-04-01"
+      ```
 
-    If `workers_polling` stays at 0, see [Troubleshooting](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations#troubleshooting).
+      ```bash CLI
+      ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
+      ```
+
+      ```python Python
+      client = anthropic.Anthropic()
+
+      stats = client.beta.environments.work.stats(environment_id)
+      print(f"workers_polling={stats.workers_polling}")
+      ```
+
+      ```typescript TypeScript
+      const client = new Anthropic();
+
+      const stats = await client.beta.environments.work.stats(environmentId);
+
+      console.log(`workers_polling=${stats.workers_polling}`);
+      ```
+
+      ```csharp C#
+      var client = new AnthropicClient();
+
+      var stats = await client.Beta.Environments.Work.Stats(environmentId);
+
+      Console.WriteLine($"workers_polling={stats.WorkersPolling}");
+      ```
+
+      ```go Go
+      client := anthropic.NewClient()
+
+      stats, err := client.Beta.Environments.Work.Stats(
+      	context.Background(),
+      	environmentID,
+      	anthropic.BetaEnvironmentWorkStatsParams{},
+      )
+      if err != nil {
+      	panic(err)
+      }
+
+      fmt.Printf("workers_polling=%d\n", stats.WorkersPolling)
+      ```
+
+      ```java Java
+      var client = AnthropicOkHttpClient.fromEnv();
+
+      var stats = client.beta().environments().work().stats(environmentId);
+
+      IO.println("workers_polling=" + stats.workersPolling().orElse(null));
+      ```
+
+      ```php PHP
+      $client = new Client();
+
+      $stats = $client->beta->environments->work->stats($environmentId);
+
+      printf("workers_polling=%d\n", $stats->workersPolling);
+      ```
+
+      ```ruby Ruby
+      client = Anthropic::Client.new
+
+      stats = client.beta.environments.work.stats(environment_id)
+
+      puts "workers_polling=#{stats.workers_polling}"
+      ```
+    </CodeGroup>
+
+    If `workers_polling` (java, php: `workersPolling`; csharp, go: `WorkersPolling`) stays at 0, see [Troubleshooting](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations#troubleshooting).
   </Step>
 
   <Step title="Start a session">
-    Set `AGENT_ID` to your agent's ID. Create a session that targets the environment, then send it a task:
+    Set `AGENT_ID` (python, ruby: `agent_id`; typescript, java, csharp: `agentId`; go: `agentID`; php: `$agentId`) to your agent's ID. Create a session that targets the environment, then send it a task:
 
-    ```bash
-    SESSION_ID=$(ant beta:sessions create \
-      --agent "$AGENT_ID" \
-      --environment-id "$ANTHROPIC_ENVIRONMENT_ID" \
-      --transform id --raw-output)
+    <CodeGroup>
+      ```bash cURL
+      SESSION_ID=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-beta: managed-agents-2026-04-01" \
+        -H "content-type: application/json" \
+        -d '{
+          "agent": "'"$AGENT_ID"'",
+          "environment_id": "'"$ANTHROPIC_ENVIRONMENT_ID"'"
+        }' | jq -er '.id'
+      )
 
-    ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
-    events:
-      - type: user.message
-        content:
-          - type: text
-            text: Write the output of "uname -a" to hello.txt in your working directory.
-    YAML
-    ```
+      curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-beta: managed-agents-2026-04-01" \
+        -H "content-type: application/json" \
+        -d '{
+          "events": [
+            {
+              "type": "user.message",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Write the output of \"uname -a\" to hello.txt in your working directory."
+                }
+              ]
+            }
+          ]
+        }'
+      ```
+
+      ```bash CLI
+      SESSION_ID=$(ant beta:sessions create \
+        --agent "$AGENT_ID" \
+        --environment-id "$ANTHROPIC_ENVIRONMENT_ID" \
+        --transform id --raw-output)
+
+      ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
+      events:
+        - type: user.message
+          content:
+            - type: text
+              text: Write the output of "uname -a" to hello.txt in your working directory.
+      YAML
+      ```
+
+      ```python Python
+      session = client.beta.sessions.create(
+          agent=agent_id,
+          environment_id=environment_id,
+      )
+
+      client.beta.sessions.events.send(
+          session.id,
+          events=[
+              {
+                  "type": "user.message",
+                  "content": [
+                      {
+                          "type": "text",
+                          "text": 'Write the output of "uname -a" to hello.txt in your working directory.',
+                      },
+                  ],
+              },
+          ],
+      )
+      ```
+
+      ```typescript TypeScript
+      const session = await client.beta.sessions.create({
+        agent: agentId,
+        environment_id: environmentId
+      });
+
+      await client.beta.sessions.events.send(session.id, {
+        events: [
+          {
+            type: "user.message",
+            content: [
+              {
+                type: "text",
+                text: 'Write the output of "uname -a" to hello.txt in your working directory.'
+              }
+            ]
+          }
+        ]
+      });
+      ```
+
+      ```csharp C#
+      var session = await client.Beta.Sessions.Create(new()
+      {
+          Agent = agentId,
+          EnvironmentID = environmentId,
+      });
+
+      await client.Beta.Sessions.Events.Send(session.ID, new()
+      {
+          Events =
+          [
+              new BetaManagedAgentsUserMessageEventParams
+              {
+                  Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
+                  Content =
+                  [
+                      new BetaManagedAgentsTextBlock
+                      {
+                          Type = BetaManagedAgentsTextBlockType.Text,
+                          Text = "Write the output of \"uname -a\" to hello.txt in your working directory.",
+                      },
+                  ],
+              },
+          ],
+      });
+      ```
+
+      ```go Go
+      session, err := client.Beta.Sessions.New(context.Background(), anthropic.BetaSessionNewParams{
+      	Agent:         anthropic.BetaSessionNewParamsAgentUnion{OfString: anthropic.String(agentID)},
+      	EnvironmentID: environmentID,
+      })
+      if err != nil {
+      	panic(err)
+      }
+
+      _, err = client.Beta.Sessions.Events.Send(context.Background(), session.ID, anthropic.BetaSessionEventSendParams{
+      	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
+      		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
+      			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
+      			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
+      				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
+      					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
+      					Text: "Write the output of \"uname -a\" to hello.txt in your working directory.",
+      				},
+      			}},
+      		},
+      	}},
+      })
+      if err != nil {
+      	panic(err)
+      }
+      ```
+
+      ```java Java
+      var session = client.beta().sessions().create(SessionCreateParams.builder()
+          .agent(agentId)
+          .environmentId(environmentId)
+          .build());
+
+      client.beta().sessions().events().send(
+          session.id(),
+          EventSendParams.builder()
+              .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
+                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
+                  .addTextContent("Write the output of \"uname -a\" to hello.txt in your working directory.")
+                  .build())
+              .build());
+      ```
+
+      ```php PHP
+      $session = $client->beta->sessions->create(
+          agent: $agentId,
+          environmentID: $environmentId,
+      );
+
+      $client->beta->sessions->events->send(
+          $session->id,
+          events: [
+              [
+                  'type' => 'user.message',
+                  'content' => [['type' => 'text', 'text' => 'Write the output of "uname -a" to hello.txt in your working directory.']],
+              ],
+          ],
+      );
+      ```
+
+      ```ruby Ruby
+      session = client.beta.sessions.create(
+        agent: agent_id,
+        environment_id: environment_id
+      )
+
+      client.beta.sessions.events.send_(
+        session.id,
+        events: [
+          {
+            type: :"user.message",
+            content: [{type: :text, text: 'Write the output of "uname -a" to hello.txt in your working directory.'}]
+          }
+        ]
+      )
+      ```
+    </CodeGroup>
 
     The session waits in the environment's queue until a worker claims it. If no worker is connected, the session stays queued rather than failing.
   </Step>
@@ -270,19 +516,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
   </Step>
 </Steps>
 
-## How it differs from cloud environments
-
-|                               | Cloud environment                      | Self-hosted sandbox                                   |
-| ----------------------------- | -------------------------------------- | ----------------------------------------------------- |
-| Where tools run               | Anthropic-managed sandboxes            | Your infrastructure                                   |
-| Network reach                 | Anthropic's egress controls            | Your network policy                                   |
-| File and GitHub repo mounting | Managed by Anthropic                   | Managed by you                                        |
-| Memory stores                 | Mounted by Anthropic at `/mnt/memory/` | Downloaded to `/mnt/memory/` and synced by the worker |
-| Lifecycle                     | Managed by Anthropic                   | Managed by you                                        |
-
-For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#feature-eligibility).
-
-### Session resources
+## Session resources
 
 Self-hosted sandboxes support `memory_store` resources only. A session on a self-hosted environment that includes a `file` or `github_repository` resource is rejected with a 400 error:
 
@@ -296,7 +530,7 @@ Environment env_... is a self-hosted environment. `resources` are not supported 
 
 Self-hosting controls *where the agent's code executes*. [MCP tunnels](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview) control *how Anthropic reaches MCP servers in your network*. The two are independent:
 
-* A session in Anthropic's cloud sandboxes can reach private MCP servers through a tunnel.
+* A session in Anthropic's cloud sandboxes can reach private MCP servers through a tunnel. For example, a private MCP server might sit in front of a database or an internal API behind your firewall.
 * A self-hosted session can use either tunneled or public MCP servers.
 
 Use both when you want execution and tool access to stay inside your boundary. To skip the tunnel, [wrap the MCP server as custom tools](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-custom-tools#wrap-an-mcp-server-as-custom-tools) that your worker serves.

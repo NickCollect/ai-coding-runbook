@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/count_tokens
-fetched_at: 2026-10-12T06:49:53.409021+00:00
+fetched_at: 2026-10-19T05:32:50.209282+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1190,6 +1190,16 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
     - `schema: map[unknown]`
 
       The JSON schema of the format
+
+- `speed: optional "standard" or "fast" or null`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode?sdk_languages=http) for which models.
+
+  - `"standard"`
+
+  - `"fast"`
 
 - `system: optional string or array of TextBlockParam`
 
@@ -2975,7 +2985,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               "role": "user"
             }
           ],
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "system": [
             {
               "text": "Today'\''s date is 2024-06-01.",

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/list
-fetched_at: 2026-10-12T06:49:59.096198+00:00
+fetched_at: 2026-10-19T05:32:54.392293+00:00
 fetch_method: mintlify_md
 ---
 
@@ -146,6 +146,8 @@ List work items in an environment.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ## Returns
 

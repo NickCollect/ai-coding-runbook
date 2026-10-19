@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/data-residency
-fetched_at: 2026-10-12T06:49:48.644193+00:00
+fetched_at: 2026-10-19T05:32:46.473740+00:00
 fetch_method: mintlify_md
 ---
 
@@ -250,9 +250,9 @@ Workspace geo is set when you create a workspace and can't be changed afterward.
 
 To set workspace geo, create a new workspace in the [Console](https://platform.claude.com):
 
-1. Go to **Settings** > **Workspaces**.
-2. Create a new workspace.
-3. Select the workspace geo.
+1. In the Console, go to the [Workspaces](https://platform.claude.com/settings/workspaces) page (`platform.claude.com/settings/workspaces`).
+2. Click **Create workspace** to open the [Create workspace](https://platform.claude.com/settings/workspaces/new) page (`platform.claude.com/settings/workspaces/new`) in the Console.
+3. Enter a name, confirm the value in the **Workspace geo** field, and click **Create workspace**.
 
 <Note>
   **Claude Platform on AWS:** Workspace geo is not configurable. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) for data residency considerations specific to that platform.

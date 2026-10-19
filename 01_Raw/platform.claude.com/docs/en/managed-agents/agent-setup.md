@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/agent-setup
-fetched_at: 2026-10-12T06:49:46.547398+00:00
+fetched_at: 2026-10-19T05:32:44.444708+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,23 +22,23 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 
 ## Agent configuration fields
 
-| Field                                                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name` (java, php; csharp, go: `Name`)                                          | Required. A human-readable name for the agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `model` (java, php; csharp, go: `Model`)                                        | Required. The Claude [model](https://platform.claude.com/docs/en/models/overview) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts `speed`, `effort`, and `inference_geo` fields; see the tips under [Create an agent](https://platform.claude.com/docs/en/managed-agents/agent-setup#create-an-agent), [Effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels), and [Pin the inference geo](https://platform.claude.com/docs/en/managed-agents/agent-setup#pin-the-inference-geo). |
-| `system` (java, php; csharp, go: `System`; ruby: `system_`)                     | A [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](https://platform.claude.com/docs/en/managed-agents/reference#event-types), which should describe the work to be done.                                                                                                                                                                                                                                                                               |
-| `tools` (java, php; csharp, go: `Tools`)                                        | The tools available to the agent. Combines [pre-built agent tools](https://platform.claude.com/docs/en/managed-agents/tools), [MCP tools](https://platform.claude.com/docs/en/managed-agents/mcp-connector), and [custom tools](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools).                                                                                                                                                                                                                                                                                                                                              |
-| `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`) | [MCP servers](https://platform.claude.com/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| `skills` (java, php; csharp, go: `Skills`)                                      | [Skills](https://platform.claude.com/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| `multiagent` (java, php; csharp, go: `Multiagent`)                              | Lets the agent hand work to other agents, as subagents or in [dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#dynamic-workflows), and optionally consult an [advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor) model. With the `multiagent_20261001` type, dynamic workflows are on unless you disable them. See [Multiagent orchestration](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration).                                                                                                             |
-| `description` (java, php; csharp, go: `Description`)                            | A description of what the agent does.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| `metadata` (java, php; csharp, go: `Metadata`)                                  | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Field                                                                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name` (csharp, go: `Name`)                                                     | Required. A human-readable name for the agent.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `model` (csharp, go: `Model`)                                                   | Required. The Claude [model](https://platform.claude.com/docs/en/models/overview) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5-5"}`. Claude 4.5 and later models are supported. The object form also accepts `speed`, `effort`, and `inference_geo` fields; see the tips under [Create an agent](https://platform.claude.com/docs/en/managed-agents/agent-setup#create-an-agent), [Effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels), and [Pin the inference geo](https://platform.claude.com/docs/en/managed-agents/agent-setup#pin-the-inference-geo). |
+| `system` (csharp, go: `System`; ruby: `system_`)                                | A [system prompt](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](https://platform.claude.com/docs/en/managed-agents/reference#event-types), which should describe the work to be done.                                                                                                                                                                                                                                                                                 |
+| `tools` (csharp, go: `Tools`)                                                   | The tools available to the agent. Combines [pre-built agent tools](https://platform.claude.com/docs/en/managed-agents/tools), [MCP tools](https://platform.claude.com/docs/en/managed-agents/mcp-connector), and [custom tools](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools).                                                                                                                                                                                                                                                                                                                                                |
+| `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`) | [MCP servers](https://platform.claude.com/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `skills` (csharp, go: `Skills`)                                                 | [Skills](https://platform.claude.com/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `multiagent` (csharp, go: `Multiagent`)                                         | Lets the agent hand work to other agents, as subagents or in [dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#dynamic-workflows), and optionally consult an [advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor) model. With the `multiagent_20261001` type, dynamic workflows are on unless you disable them. See [Multiagent orchestration](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration).                                                                                                               |
+| `description` (csharp, go: `Description`)                                       | A description of what the agent does.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `metadata` (csharp, go: `Metadata`)                                             | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
-You can also override `model` (java, php; csharp, go: `Model`), `system` (java, php; csharp, go: `System`; ruby: `system_`), `tools` (java, php; csharp, go: `Tools`), `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`), and `skills` (java, php; csharp, go: `Skills`) for a single session without changing the agent. A `model` (java, php; csharp, go: `Model`) override replaces the agent's `model` (java, php; csharp, go: `Model`) object in full, so the agent's own `effort` (java, php; csharp, go: `Effort`) isn't carried over. To run the session at a specific effort level, set `effort` (java, php; csharp, go: `Effort`) inside the override's `model` (java, php; csharp, go: `Model`) object. See [Override agent configuration for a session](https://platform.claude.com/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session).
+You can also override `model` (csharp, go: `Model`), `system` (csharp, go: `System`; ruby: `system_`), `tools` (csharp, go: `Tools`), `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`), and `skills` (csharp, go: `Skills`) for a single session without changing the agent. A `model` (csharp, go: `Model`) override replaces the agent's `model` (csharp, go: `Model`) object in full, so the agent's own `effort` (csharp, go: `Effort`) isn't carried over. To run the session at a specific effort level, set `effort` (csharp, go: `Effort`) inside the override's `model` (csharp, go: `Model`) object. See [Override agent configuration for a session](https://platform.claude.com/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session).
 
 ## Create an agent
 
-The following example defines a coding agent that uses Claude Opus 5 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](https://platform.claude.com/docs/en/managed-agents/tools) for the full list of supported tools.
+The following example defines a coding agent that uses the newest Claude Opus model with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](https://platform.claude.com/docs/en/managed-agents/tools) for the full list of supported tools.
 
 The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one up, the [quickstart](https://platform.claude.com/docs/en/managed-agents/quickstart#install-the-cli) covers installation and client setup.
 
@@ -182,7 +182,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "name": "Coding Assistant",
   "model": {
     "id": "claude-opus-5-5",
-    "effort": { "type": "high" },
+    "effort": { "type": "medium" },
     "speed": "standard"
   },
   "system": "You are a helpful coding agent.",
@@ -209,18 +209,18 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
 The `default_config` on the toolset shows its default [permission policy](https://platform.claude.com/docs/en/managed-agents/permission-policies), `always_allow`, which applies unless you configure one.
 
 <Tip>
-  To use Claude Opus 5.5, Claude Opus 5, or Claude Opus 4.8 with [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See the fast mode page's [supported models](https://platform.claude.com/docs/en/build-with-claude/fast-mode#supported-models).
+  To use Claude Opus 5.5, Claude Opus 5, or Claude Opus 4.8 with [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-5-5", "speed": "fast"}`. See the fast mode page's [supported models](https://platform.claude.com/docs/en/build-with-claude/fast-mode#supported-models).
 </Tip>
 
 <Tip>
-  To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) for what each level does.
+  To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](https://platform.claude.com/docs/en/build-with-claude/effort#effort-levels) for what each level does.
 </Tip>
 
 ### Pin the inference geo
 
-Like `speed` (java, php; csharp, go: `Speed`) and `effort` (java, php; csharp, go: `Effort`), `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) is set through the object form of `model` (java, php; csharp, go: `Model`): pass `model` (java, php; csharp, go: `Model`) as an object and set `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) alongside `id` (java, php; csharp, go: `ID`). The field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](https://platform.claude.com/docs/en/manage-claude/data-residency) for the workspace-level geo controls and pricing.
+Like `speed` (csharp, go: `Speed`) and `effort` (csharp, go: `Effort`), `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) is set through the object form of `model` (csharp, go: `Model`): pass `model` (csharp, go: `Model`) as an object and set `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) alongside `id` (csharp, go: `ID`). The field accepts `"us"` or `"global"`. When it's unset, each model request follows the workspace's default inference geo at the time it's served. See [Data residency](https://platform.claude.com/docs/en/manage-claude/data-residency) for the workspace-level geo controls and pricing.
 
-The following example pins an agent to US inference and prints the `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) value from the agent's `model` (java, php; csharp, go: `Model`) object:
+The following example pins an agent to US inference and prints the `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) value from the agent's `model` (csharp, go: `Model`) object:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -354,11 +354,11 @@ The following example pins an agent to US inference and prints the `inference_ge
 
 An `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) pin is validated against the workspace's [`allowed_inference_geos`](https://platform.claude.com/docs/en/manage-claude/data-residency#workspace-level-restrictions) when the agent is saved, when a session is created from it, and on every turn the session serves. If the workspace allowlist narrows so a pin is no longer allowed, new sessions can't be created from the agent and running sessions refuse further turns; pins are never exempted, because workspaces rely on them for compliance and data residency.
 
-Setting `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) on a model that doesn't support geographic inference pinning returns a 400 error; see [Model availability](https://platform.claude.com/docs/en/manage-claude/data-residency#model-availability) for the models that do. In a `multiagent` (java, php; csharp, go: `Multiagent`) configuration, the agent's pin and the pin of every agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (java, php; csharp, go: `Subagents`) or `workflows` (java, php; csharp, go: `Workflows`) must all be set to the same value or all be unset; see [Multiagent orchestration](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration). To change or clear the pin later, update the agent's `model` (java, php; csharp, go: `Model`) object; supplying `model` (java, php; csharp, go: `Model`) without `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) clears it, as described under [Update semantics](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-semantics).
+Setting `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) on a model that doesn't support geographic inference pinning returns a 400 error; see [Model availability](https://platform.claude.com/docs/en/manage-claude/data-residency#model-availability) for the models that do. In a `multiagent` (csharp, go: `Multiagent`) configuration, the agent's pin and the pin of every agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) or `workflows` (csharp, go: `Workflows`) must all be set to the same value or all be unset; see [Multiagent orchestration](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration). To change or clear the pin later, update the agent's `model` (csharp, go: `Model`) object; supplying `model` (csharp, go: `Model`) without `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) clears it, as described under [Update semantics](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-semantics).
 
 ## Update an agent
 
-Updating an agent generates a new version when the configuration changes. The `version` (java, php; csharp, go: `Version`) field is optional: supply it for optimistic concurrency (a mismatch returns a 409), or omit it to apply the update unconditionally (last write wins). Updates to archived agents are rejected.
+Updating an agent generates a new version when the configuration changes. The `version` (csharp, go: `Version`) field is optional: supply it for optimistic concurrency (a mismatch returns a 409), or omit it to apply the update unconditionally (last write wins). Updates to archived agents are rejected.
 
 With the CLI, edit the agent's file and run `ant apply` again; apply supplies `version` for you.
 
@@ -369,12 +369,10 @@ With the CLI, edit the agent's file and run `ant apply` again; apply supplies `v
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<EOF
-  {
-    "version": $AGENT_VERSION,
-    "system": "You are a helpful coding agent. Always write tests."
-  }
-  EOF
+    -d '{
+      "version": '"$AGENT_VERSION"',
+      "system": "You are a helpful coding agent. Always write tests."
+    }'
   )
 
   echo "New version: $(jq -r '.version' <<< "$updated_agent")"
@@ -475,7 +473,7 @@ With the CLI, edit the agent's file and run `ant apply` again; apply supplies `v
 
 The preceding example supplies `version` from the create response, so the update only applies if nothing else has changed the agent since you read it. To apply an update unconditionally, omit `version` from the request:
 
-<CodeGroup exclude="shell:CLI, python, typescript, csharp, go, java, php, ruby">
+<CodeGroup>
   ```bash cURL
   updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -488,29 +486,101 @@ The preceding example supplies `version` from the create response, so the update
 
   echo "New version: $(jq -r '.version' <<< "$updated_agent")"
   ```
+
+  ```bash CLI
+  ant beta:agents update \
+    --agent-id "$AGENT_ID" \
+    --description "Writes and reviews code."
+  ```
+
+  ```python Python
+  unconditional_agent = client.beta.agents.update(
+      agent.id,
+      description="Writes and reviews code.",
+  )
+
+  print(f"New version: {unconditional_agent.version}")
+  ```
+
+  ```typescript TypeScript
+  const unconditionalAgent = await client.beta.agents.update(agent.id, {
+    description: "Writes and reviews code.",
+  });
+
+  console.log(`New version: ${unconditionalAgent.version}`);
+  ```
+
+  ```csharp C#
+  var unconditionalAgent = await client.Beta.Agents.Update(agent.ID, new()
+  {
+      Description = "Writes and reviews code.",
+  });
+
+  Console.WriteLine($"New version: {unconditionalAgent.Version}");
+  ```
+
+  ```go Go
+  unconditionalAgent, err := client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
+  	Description: anthropic.String("Writes and reviews code."),
+  })
+  if err != nil {
+  	panic(err)
+  }
+
+  fmt.Printf("New version: %d\n", unconditionalAgent.Version)
+  ```
+
+  ```java Java
+  var unconditionalAgent = client.beta().agents().update(
+      agent.id(),
+      AgentUpdateParams.builder()
+          .description("Writes and reviews code.")
+          .build()
+  );
+
+  IO.println("New version: " + unconditionalAgent.version());
+  ```
+
+  ```php PHP
+  $unconditionalAgent = $client->beta->agents->update(
+      $agent->id,
+      description: 'Writes and reviews code.',
+  );
+
+  echo "New version: {$unconditionalAgent->version}\n";
+  ```
+
+  ```ruby Ruby
+  unconditional_agent = client.beta.agents.update(
+    agent.id,
+    description: "Writes and reviews code."
+  )
+
+  puts "New version: #{unconditional_agent.version}"
+  ```
 </CodeGroup>
 
 ### Update semantics
 
-* **`version` (java, php; csharp, go: `Version`)** is optional and must be at least 1 when supplied. When supplied, the request returns a 409 if it doesn't match the agent's current version, even when the fields you send already match the stored values; re-read the agent and retry. When omitted, the update applies unconditionally and the most recent update silently replaces any concurrent one, with no error to either caller. Supplying `version` (java, php; csharp, go: `Version`) is the recommended default for interactive callers, and omitting it fits declarative apply loops, such as a CI job that syncs checked-in agent definitions, where the loop owns the agent.
+* **`version` (csharp, go: `Version`)** is optional and must be at least 1 when supplied. When supplied, the request returns a 409 if it doesn't match the agent's current version, even when the fields you send already match the stored values; re-read the agent and retry. When omitted, the update applies unconditionally and the most recent update silently replaces any concurrent one, with no error to either caller. Supplying `version` (csharp, go: `Version`) is the recommended default for interactive callers, and omitting it fits declarative apply loops, such as a CI job that syncs checked-in agent definitions, where the loop owns the agent.
 
 * **Omitted fields are preserved.** You only need to include the fields you want to change.
 
-* **Scalar fields** (`model` (java, php; csharp, go: `Model`), `system` (java, php; csharp, go: `System`; ruby: `system_`), `name` (java, php; csharp, go: `Name`), `description` (java, php; csharp, go: `Description`)) are replaced with the new value. `system` (java, php; csharp, go: `System`; ruby: `system_`) and `description` (java, php; csharp, go: `Description`) can be cleared by passing `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `param.Null[string]()`; php: `requestOptions: ['extraBodyParams' => ['system' => null, 'description' => null]]`). `model` (java, php; csharp, go: `Model`) and `name` (java, php; csharp, go: `Name`) are mandatory and cannot be cleared. Within a `model` (java, php; csharp, go: `Model`) object you supply, `effort` (java, php; csharp, go: `Effort`) is the sole exception: if the model `id` (java, php; csharp, go: `ID`) is unchanged, omitting `effort` (java, php; csharp, go: `Effort`) leaves the stored effort level unchanged. If you change the model `id` (java, php; csharp, go: `ID`), an omitted `effort` (java, php; csharp, go: `Effort`) resets to the new model's default. Other `model` (java, php; csharp, go: `Model`) fields are replaced along with the object: supplying `model` (java, php; csharp, go: `Model`) without `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) clears the agent's inference geo pin.
+* **Scalar fields** (`model` (csharp, go: `Model`), `system` (csharp, go: `System`; ruby: `system_`), `name` (csharp, go: `Name`), `description` (csharp, go: `Description`)) are replaced with the new value. `system` (csharp, go: `System`; ruby: `system_`) and `description` (csharp, go: `Description`) can be cleared by passing `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `param.Null[string]()`; php: `requestOptions: ['extraBodyParams' => ['system' => null, 'description' => null]]`). `model` (csharp, go: `Model`) and `name` (csharp, go: `Name`) are mandatory and cannot be cleared. Within a `model` (csharp, go: `Model`) object you supply, `effort` (csharp, go: `Effort`) is the sole exception: if the model `id` (csharp, go: `ID`) is unchanged, omitting `effort` (csharp, go: `Effort`) leaves the stored effort level unchanged. If you change the model `id` (csharp, go: `ID`), an omitted `effort` (csharp, go: `Effort`) resets to the new model's default. Other `model` (csharp, go: `Model`) fields are replaced along with the object: supplying `model` (csharp, go: `Model`) without `inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) clears the agent's inference geo pin.
 
-* **Array fields** (`tools` (java, php; csharp, go: `Tools`), `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`), `skills` (java, php; csharp, go: `Skills`)) are fully replaced by the new array. To clear an array field entirely, pass `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `param.NullSlice[[]anthropic.BetaAgentUpdateParamsToolUnion]()`; php: `requestOptions: ['extraBodyParams' => ['mcp_servers' => null]]`) or an empty array.
+* **Array fields** (`tools` (csharp, go: `Tools`), `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`), `skills` (csharp, go: `Skills`)) are fully replaced by the new array. To clear an array field entirely, pass `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `param.NullSlice[[]anthropic.BetaAgentUpdateParamsToolUnion]()`; php: `requestOptions: ['extraBodyParams' => ['mcp_servers' => null]]`) or an empty array.
 
-* **`multiagent` (java, php; csharp, go: `Multiagent`)** is merged into the stored block level by level when the update keeps the `multiagent_20261001` type. A setting that you omit keeps its stored value, and a `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list that you send replaces the stored list. Any other update that sends `multiagent` (java, php; csharp, go: `Multiagent`) replaces the stored block as a whole, and the settings that it omits take their defaults. Pass `"multiagent": null` (python: `multiagent=None`; typescript: `multiagent: null`; ruby: `multiagent: nil`; go: `Multiagent: param.NullStruct[anthropic.BetaManagedAgentsMultiagentParamsUnion]()`; java: `.multiagent(Optional.empty())`; csharp: `Multiagent = null`; php: `requestOptions: ['extraBodyParams' => ['multiagent' => null]]`) to clear the whole block. Inside the block, `null` resets a setting to its default, so setting `workflows` (java, php; csharp, go: `Workflows`) to `null` turns dynamic workflows on. See [Turn on dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#turn-on-dynamic-workflows).
+* **`multiagent` (csharp, go: `Multiagent`)** is merged into the stored block level by level when the update keeps the `multiagent_20261001` type. A setting that you omit keeps its stored value, and a `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list that you send replaces the stored list. Any other update that sends `multiagent` (csharp, go: `Multiagent`) replaces the stored block as a whole, and the settings that it omits take their defaults. Pass `"multiagent": null` (python: `multiagent=None`; typescript: `multiagent: null`; ruby: `multiagent: nil`; go: `Multiagent: param.NullStruct[anthropic.BetaManagedAgentsMultiagentParamsUnion]()`; java: `.multiagent(Optional.empty())`; csharp: `Multiagent = null`; php: `requestOptions: ['extraBodyParams' => ['multiagent' => null]]`) to clear the whole block. Inside the block, `null` resets a setting to its default, so setting `workflows` (csharp, go: `Workflows`) to `null` turns dynamic workflows on. See [Turn on dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#turn-on-dynamic-workflows).
 
 * **Metadata** is merged at the key level. Keys you provide are added or updated. Keys you omit are preserved. To delete a specific key, set its value to `null`.
 
 * **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
 
-* **Other agents' `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) lists are not updated.** Agents that list this agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (java, php; csharp, go: `Subagents`) or `workflows` (java, php; csharp, go: `Workflows`) keep the version that was pinned when they were created or when an update last sent that list, even if the reference omits `version` (java, php; csharp, go: `Version`). To delegate to the new version, [update the agent that lists it](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#list-the-subagents) so that the list references the new version.
+* **Other agents' `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) lists are not updated.** Agents that list this agent in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) or `workflows` (csharp, go: `Workflows`) keep the version that was pinned when they were created or when an update last sent that list, even if the reference omits `version` (csharp, go: `Version`). To delegate to the new version, [update the agent that lists it](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#list-the-subagents) so that the list references the new version.
 
-The following update clears the description, deletes the `team` key from `metadata` (java, php; csharp, go: `Metadata`), and sets `workflows` (java, php; csharp, go: `Workflows`) to `null`, which turns dynamic workflows on:
+The following update clears the description, deletes the `team` key from `metadata` (csharp, go: `Metadata`), and sets `workflows` (csharp, go: `Workflows`) to `null`, which turns dynamic workflows on:
 
-<CodeGroup exclude="shell:CLI">
+<CodeGroup defaultLanguage="CLI">
   ```bash cURL
   cleared_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -525,6 +595,32 @@ The following update clears the description, deletes the `team` key from `metada
 
   echo "Description: $(jq -r '.description' <<< "$cleared_agent")"
   ```
+
+  <CodeGroupItem>
+    ```bash CLI
+    ant apply code-reviewer.md
+    ```
+
+    <File filename="code-reviewer.md">
+      ```markdown
+      ---
+      name: Code Reviewer
+      model: claude-opus-5-5
+      tools:
+        - type: agent_toolset_20260401
+      metadata:
+        owner: docs
+      multiagent:
+        type: multiagent_20261001
+        workflows: null
+      ---
+
+      You are a helpful coding agent.
+      ```
+    </File>
+
+    The file no longer has `description` or the `team` key, so `ant apply` sends `null` for them. Deleting a setting inside `multiagent` keeps its stored value, so the file sets `workflows` to `null`.
+  </CodeGroupItem>
 
   ```python Python
   cleared_agent = client.beta.agents.update(
@@ -687,7 +783,7 @@ Fetch the full version history to track how an agent has changed over time. Resu
 
   ```php PHP
   foreach ($client->beta->agents->versions->list($agent->id)->pagingEachItem() as $version) {
-      echo "Version {$version->version}: {$version->updatedAt->format(DateTimeInterface::ATOM)}\n";
+      echo "Version {$version->version}: {$version->updatedAt->format(\DateTimeInterface::ATOM)}\n";
   }
   ```
 
@@ -748,7 +844,7 @@ Archiving makes the agent read-only and cannot be undone. Existing sessions cont
   ```php PHP
   $archived = $client->beta->agents->archive($agent->id);
 
-  echo "Archived at: {$archived->archivedAt->format(DateTimeInterface::ATOM)}\n";
+  echo "Archived at: {$archived->archivedAt->format(\DateTimeInterface::ATOM)}\n";
   ```
 
   ```ruby Ruby

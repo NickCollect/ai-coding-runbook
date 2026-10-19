@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent
-fetched_at: 2026-10-05T06:27:21.629583+00:00
+fetched_at: 2026-10-19T05:32:42.196181+00:00
 fetch_method: mintlify_md
 ---
 
@@ -3827,7 +3827,7 @@ Tools fail. A calendar API might reject an event with too many attendees, or a d
   {
       if ($name === 'create_calendar_event') {
           if (count($input['attendees'] ?? []) > 10) {
-              throw new InvalidArgumentException('Too many attendees (max 10)');
+              throw new \InvalidArgumentException('Too many attendees (max 10)');
           }
 
           return json_encode([
@@ -3842,7 +3842,7 @@ Tools fail. A calendar API might reject an event with too many attendees, or a d
           ]);
       }
 
-      throw new InvalidArgumentException("Unknown tool: {$name}");
+      throw new \InvalidArgumentException("Unknown tool: {$name}");
   }
 
   // Build a request that exceeds the tool's attendee limit so the error path runs.
@@ -3871,7 +3871,7 @@ Tools fail. A calendar API might reject an event with too many attendees, or a d
                       'tool_use_id' => $block->id,
                       'content' => runTool($block->name, $block->input),
                   ];
-              } catch (Exception $e) {
+              } catch (\Exception $e) {
                   // Signal failure so Claude can retry or ask for clarification.
                   $toolResults[] = [
                       'type' => 'tool_result',
@@ -4025,27 +4025,14 @@ Rings 2 through 4 wrote the same loop by hand: call the API, check `stop_reason`
 
 Each SDK provides a helper that turns an ordinary function into a runnable tool and derives the input schema from its signature; the tabs below show the idiomatic form for each language.
 
-<CodeGroup>
-  ```bash cURL
-  #!/bin/bash
-  # Ring 5: The Tool Runner SDK abstraction.
+<CodeGroup exclude="shell">
+  <CodeGroupItem language="cURL">
+    The Tool Runner is a helper in the Claude SDK. Raw HTTP requests have no equivalent. To keep using curl, use the loop from [Ring 4](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent#ring-4-error-handling).
+  </CodeGroupItem>
 
-  # The Tool Runner SDK abstraction is available in all seven SDKs: Python,
-  # TypeScript, C#, Go, Java, PHP, and Ruby. There is no equivalent for raw
-  # curl requests. Switch to any SDK tab to see Ring 5, or keep the Ring 4
-  # loop as your shell implementation.
-  ```
-
-  ```bash CLI
-  #!/usr/bin/env bash
-  # Ring 5: The Tool Runner SDK abstraction.
-  set -euo pipefail
-
-  # The Tool Runner SDK abstraction is available in all seven SDKs: Python,
-  # TypeScript, C#, Go, Java, PHP, and Ruby. The ant CLI exposes the Messages
-  # API directly and has no equivalent helper. Switch to any SDK tab to see
-  # Ring 5, or keep the Ring 4 loop as your CLI implementation.
-  ```
+  <CodeGroupItem language="CLI">
+    The Tool Runner is a helper in the Claude SDK. The `ant` CLI has no equivalent. To keep using the CLI, use the loop from [Ring 4](https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent#ring-4-error-handling).
+  </CodeGroupItem>
 
   ```python Python
   # Ring 5: The Tool Runner SDK abstraction.
@@ -4523,7 +4510,7 @@ Each SDK provides a helper that turns an ordinary function into a runnable tool 
       ],
       run: function (array $input): string {
           if (count($input['attendees'] ?? []) > 10) {
-              throw new InvalidArgumentException('Too many attendees (max 10)');
+              throw new \InvalidArgumentException('Too many attendees (max 10)');
           }
 
           return json_encode([

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/create
-fetched_at: 2026-10-12T06:49:53.527165+00:00
+fetched_at: 2026-10-19T05:32:50.326777+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1298,6 +1298,16 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
       - `"auto"`
 
       - `"standard_only"`
+
+    - `speed: optional "standard" or "fast" or null`
+
+      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+      Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode?sdk_languages=http) for which models.
+
+      - `"standard"`
+
+      - `"fast"`
 
     - `stop_sequences: optional array of string`
 
@@ -3240,7 +3250,7 @@ curl https://api.anthropic.com/v1/messages/batches \
                     "role": "user"
                   }
                 ],
-                "model": "claude-opus-5"
+                "model": "claude-opus-5-5"
               }
             }
           ]

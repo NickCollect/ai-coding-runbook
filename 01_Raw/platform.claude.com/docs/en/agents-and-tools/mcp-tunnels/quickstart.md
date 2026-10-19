@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/quickstart
-fetched_at: 2026-09-14T05:36:05.661761+00:00
+fetched_at: 2026-10-19T05:32:43.858854+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ A two-container [tunnel stack](https://platform.claude.com/docs/en/agents-and-to
 
 <Steps>
   <Step title="Create a tunnel">
-    In the Claude Console sidebar, go to **Manage > MCP tunnels** and click **New tunnel**. Give it a name. Leave **Set up programmatic access** off; this quickstart uses manual credential provisioning.
+    In the Claude Console, go to the [MCP tunnels](https://platform.claude.com/settings/workspaces/default/mcp-tunnels) page (`platform.claude.com/settings/workspaces/default/mcp-tunnels`). Each tunnel belongs to one workspace. Select the workspace you want in the workspace picker in the sidebar. Click **New tunnel** and give it a name. Leave **Set up programmatic access** off; this quickstart uses manual credential provisioning.
 
     After it's created, open the tunnel. Copy two values from the **Connection** section:
 
@@ -113,7 +113,7 @@ A two-container [tunnel stack](https://platform.claude.com/docs/en/agents-and-to
       </Tab>
     </Tabs>
 
-    Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The tunnel status flips to **Active**.
+    Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The **Needs certificate** badge next to the tunnel's name goes away.
   </Step>
 
   <Step title="Write the sample MCP server">
@@ -267,7 +267,7 @@ A two-container [tunnel stack](https://platform.claude.com/docs/en/agents-and-to
   </Step>
 
   <Step title="Call it from Claude">
-    In the Console, go to **Managed Agents > Sessions** and create a session. In the agent picker choose **Create new agent**, give the agent a name, and keep the pre-filled model. Click **+ MCP Server**, select your tunnel, set **Subdomain** to `echo` and **Path** to `mcp`. Then ask:
+    In the Console, go to the [Sessions](https://platform.claude.com/sessions) page (`platform.claude.com/sessions`) and create a session. In the agent picker choose **Create new agent**, give the agent a name, and keep the pre-filled model. Click **+ MCP Server**, select your tunnel, set **Subdomain** to `echo` and **Path** to `mcp`. Then ask:
 
     > Use the hello tool to greet tunnel.
 

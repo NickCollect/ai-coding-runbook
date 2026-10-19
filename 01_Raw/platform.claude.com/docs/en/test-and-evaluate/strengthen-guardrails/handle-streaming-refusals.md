@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals
-fetched_at: 2026-10-12T06:49:42.987585+00:00
+fetched_at: 2026-10-19T05:32:41.761621+00:00
 fetch_method: mintlify_md
 ---
 
@@ -286,7 +286,7 @@ Here's how to detect and handle streaming refusals in your application:
               break;
           }
       }
-  } catch (Exception $e) {
+  } catch (\Exception $e) {
       echo "Error: " . $e->getMessage() . "\n";
   }
   ```

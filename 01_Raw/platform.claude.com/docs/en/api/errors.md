@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/errors
-fetched_at: 2026-10-12T06:49:52.882868+00:00
+fetched_at: 2026-10-19T05:32:49.773540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,7 +78,7 @@ In accordance with the [versioning](https://platform.claude.com/docs/en/api/vers
 
 ## SDK error types
 
-The official SDK raises typed exceptions for these errors instead of returning raw JSON. For example, a 404 surfaces as `anthropic.NotFoundError` (python; typescript: `Anthropic.NotFoundError`; ruby: `Anthropic::Errors::NotFoundError`; java: `com.anthropic.errors.NotFoundException`; csharp: `AnthropicNotFoundException`; php: `Anthropic\Core\Exceptions\NotFoundException`; go: `*anthropic.Error`). The Go SDK has one error type for every status, `*anthropic.Error`: branch on `StatusCode`. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Your SDK's page documents the full exception hierarchy:
+The official SDK raises typed exceptions for these errors instead of returning raw JSON. For example, a 404 surfaces as `anthropic.NotFoundError` (typescript: `Anthropic.NotFoundError`; ruby: `Anthropic::Errors::NotFoundError`; java: `com.anthropic.errors.NotFoundException`; csharp: `AnthropicNotFoundException`; php: `Anthropic\Core\Exceptions\NotFoundException`; go: `*anthropic.Error`). The Go SDK has one error type for every status, `*anthropic.Error`: branch on `StatusCode`. Catch the SDK's typed classes rather than string-matching error messages, handling the most specific classes first. Your SDK's page documents the full exception hierarchy:
 
 * [Python](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/python#handling-errors) · [TypeScript](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/typescript#handling-errors) · [C#](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/csharp#error-handling) · [Go](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/go#error-handling) · [Java](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/java#error-handling) · [PHP](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php#error-handling) · [Ruby](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/ruby#handling-errors)
 
@@ -230,7 +230,7 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
   client = AnthropicAWS(aws_region="us-west-2")
 
   response = client.messages.with_raw_response.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
@@ -246,7 +246,7 @@ The Python and TypeScript SDKs expose the request ID as a `_request_id` property
 
   const { response: raw, request_id } = await client.messages
     .create({
-      model: "claude-opus-4-8",
+      model: "claude-opus-5-5",
       max_tokens: 1024,
       messages: [{ role: "user", content: "Hello, Claude" }]
     })
@@ -275,11 +275,10 @@ The [SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) vali
 
 If you don't need to process events incrementally, the SDK can consume the stream for you and return the complete `Message` object, identical to what a non-streaming call returns:
 
-<CodeGroup>
-  ```bash cURL
-  # Raw SSE output requires handling events; there is no single-command way
-  # to accumulate the final message with curl. Use the SDK examples instead.
-  ```
+<CodeGroup exclude="shell:cURL">
+  <CodeGroupItem language="cURL">
+    A curl request prints the raw stream events and can't combine them into the final message. To get the complete `Message` object from a stream, use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview).
+  </CodeGroupItem>
 
   ```bash CLI
   # The CLI streams events; --format jsonl emits one event per line

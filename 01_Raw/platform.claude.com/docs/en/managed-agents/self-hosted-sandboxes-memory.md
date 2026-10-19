@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory
-fetched_at: 2026-10-12T06:49:46.842363+00:00
+fetched_at: 2026-10-19T05:32:44.762960+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Sessions on a self-hosted environment attach [memory stores](https://platform.claude.com/docs/en/managed-agents/memory) exactly as sessions on cloud environments do. List them in `resources` (java, php; csharp, go: `Resources`) when you create the session, as shown in [Attach a memory store to a session](https://platform.claude.com/docs/en/managed-agents/memory#attach-a-memory-store-to-a-session). A session accepts up to 8 memory stores.
+Sessions on a self-hosted environment attach [memory stores](https://platform.claude.com/docs/en/managed-agents/memory) exactly as sessions on cloud environments do. List them in `resources` (csharp, go: `Resources`) when you create the session, as shown in [Attach a memory store to a session](https://platform.claude.com/docs/en/managed-agents/memory#attach-a-memory-store-to-a-session). A session accepts up to 8 memory stores.
 
 The difference is who materializes the store. On a self-hosted environment your worker, rather than Anthropic's infrastructure, downloads each store into the sandbox and syncs the agent's changes back.
 
@@ -74,18 +74,18 @@ Two `EnvironmentWorker` options control memory behavior. Set them wherever you c
 
 `memory_sync_interval` (typescript: `memorySyncIntervalMs`; go: `MemorySyncInterval`) sets how often attached stores reconcile with the server while the session runs.
 
-| Setting                | Value                                                       |
-| ---------------------- | ----------------------------------------------------------- |
-| Default                | 15 seconds                                                  |
-| Minimum                | 5 seconds                                                   |
-| Example (10 seconds)   | `10` (python; typescript: `10_000`; go: `10 * time.Second`) |
-| Disable memory support | `None` (python; typescript: `null`; go: `-1`)               |
+| Setting                | Value                                               |
+| ---------------------- | --------------------------------------------------- |
+| Default                | 15 seconds                                          |
+| Minimum                | 5 seconds                                           |
+| Example (10 seconds)   | `10` (typescript: `10_000`; go: `10 * time.Second`) |
+| Disable memory support | `None` (typescript: `null`; go: `-1`)               |
 
 A shorter interval narrows the window in which another session sees stale memories, at the cost of more memory store requests.
 
 Disable memory support only on workers whose sessions attach no memory stores. A disabled worker neither downloads nor syncs stores, so a session with stores attached runs without them even though its system prompt still describes them.
 
-While memory support is enabled, a work item that arrives without a `secret` (java, php; csharp, go: `Secret`) for a session with attached stores fails rather than running without memory. See [Memory stores fail to mount](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations#memory-stores-fail-to-mount).
+While memory support is enabled, a work item that arrives without a `secret` (csharp, go: `Secret`) for a session with attached stores fails rather than running without memory. See [Memory stores fail to mount](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations#memory-stores-fail-to-mount).
 
 ### Deletions
 
@@ -99,7 +99,7 @@ While memory support is enabled, a work item that arrives without a `secret` (ja
 
 For example, to sync every 10 seconds and only log the deletes the worker would have made:
 
-<CodeGroup exclude="shell">
+<CodeGroup exclude="shell, csharp, java, php, ruby">
   ```python Python
   worker = EnvironmentWorker(
       client,
@@ -122,9 +122,9 @@ For example, to sync every 10 seconds and only log the deletes the worker would 
   });
   ```
 
-  ```csharp C#
-  // EnvironmentWorker is not currently available in the C# SDK.
-  ```
+  <CodeGroupItem language="C#">
+    The C# SDK does not have `EnvironmentWorker`.
+  </CodeGroupItem>
 
   ```go Go
   worker := environments.NewEnvironmentWorker(client, environments.EnvironmentWorkerOptions{
@@ -136,17 +136,17 @@ For example, to sync every 10 seconds and only log the deletes the worker would 
   })
   ```
 
-  ```java Java
-  // EnvironmentWorker is not currently available in the Java SDK.
-  ```
+  <CodeGroupItem language="Java">
+    The Java SDK does not have `EnvironmentWorker`.
+  </CodeGroupItem>
 
-  ```php PHP
-  // EnvironmentWorker is not currently available in the PHP SDK.
-  ```
+  <CodeGroupItem language="PHP">
+    The PHP SDK does not have `EnvironmentWorker`.
+  </CodeGroupItem>
 
-  ```ruby Ruby
-  # EnvironmentWorker is not currently available in the Ruby SDK.
-  ```
+  <CodeGroupItem language="Ruby">
+    The Ruby SDK does not have `EnvironmentWorker`.
+  </CodeGroupItem>
 </CodeGroup>
 
 ## Read-only stores and conflicts

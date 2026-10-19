@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/download
-fetched_at: 2026-10-12T06:50:02.006513+00:00
+fetched_at: 2026-10-19T05:32:56.783214+00:00
 fetch_method: mintlify_md
 ---
 
@@ -134,6 +134,8 @@ Download File
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 

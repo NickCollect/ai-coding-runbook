@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php
-fetched_at: 2026-09-28T06:10:45.509545+00:00
+fetched_at: 2026-10-19T05:32:49.587582+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,8 +78,8 @@ foreach ($stream as $event) {
 Streaming requires an HTTP client that returns the response body incrementally. When Guzzle is the discovered PSR-18 client, the SDK configures it for streaming automatically. With a buffering client, the `foreach` loop yields every event at once when the response completes instead of incrementally; if you observe that symptom, install Guzzle or supply a streaming-capable PSR-18 client through the `streamingTransporter` request option:
 
 ```php
-$client = new Anthropic\Client(
-  requestOptions: Anthropic\RequestOptions::with(streamingTransporter: $myStreamingClient),
+$client = new \Anthropic\Client(
+  requestOptions: \Anthropic\RequestOptions::with(streamingTransporter: $myStreamingClient),
 );
 ```
 
@@ -166,8 +166,10 @@ foreach ($page->getItems() as $item) {
   echo $item->id, PHP_EOL;
 }
 // make additional network requests to fetch items from all pages, including and after the current page
+// ...
 foreach ($page->pagingEachItem() as $item) {
   echo $item->id, PHP_EOL;
+// ...
 }
 ```
 

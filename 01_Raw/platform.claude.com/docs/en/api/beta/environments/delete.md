@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/delete
-fetched_at: 2026-10-12T06:49:58.748142+00:00
+fetched_at: 2026-10-19T05:32:54.174421+00:00
 fetch_method: mintlify_md
 ---
 
@@ -132,6 +132,8 @@ Delete an environment by ID. Returns a confirmation of the deletion.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 

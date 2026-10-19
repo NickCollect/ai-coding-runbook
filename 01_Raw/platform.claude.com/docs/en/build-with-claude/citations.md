@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-09-28T06:10:38.412413+00:00
+fetched_at: 2026-10-19T05:32:41.628713+00:00
 fetch_method: mintlify_md
 ---
 
@@ -758,30 +758,28 @@ Plain text documents are automatically chunked into sentences. You can provide t
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -H "content-type: application/json" \
-        -d @- <<EOF
-      {
-        "model": "claude-opus-5-5",
-        "max_tokens": 1024,
-        "messages": [
-          {
-            "role": "user",
-            "content": [
-              {
-                "type": "document",
-                "source": {"type": "file", "file_id": "$FILE_ID"},
-                "title": "Document Title",
-                "context": "Context about the document that will not be cited from",
-                "citations": {"enabled": true}
-              },
-              {
-                "type": "text",
-                "text": "Summarize this document."
-              }
-            ]
-          }
-        ]
-      }
-      EOF
+        -d '{
+          "model": "claude-opus-5-5",
+          "max_tokens": 1024,
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "document",
+                  "source": {"type": "file", "file_id": "'"$FILE_ID"'"},
+                  "title": "Document Title",
+                  "context": "Context about the document that will not be cited from",
+                  "citations": {"enabled": true}
+                },
+                {
+                  "type": "text",
+                  "text": "Summarize this document."
+                }
+              ]
+            }
+          ]
+        }'
       ```
 
       ```bash CLI
@@ -1579,30 +1577,28 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -H "content-type: application/json" \
-        -d @- <<EOF
-      {
-        "model": "claude-opus-5-5",
-        "max_tokens": 1024,
-        "messages": [
-          {
-            "role": "user",
-            "content": [
-              {
-                "type": "document",
-                "source": {"type": "file", "file_id": "$FILE_ID"},
-                "title": "Document Title",
-                "context": "Context about the document that will not be cited from",
-                "citations": {"enabled": true}
-              },
-              {
-                "type": "text",
-                "text": "Summarize this document."
-              }
-            ]
-          }
-        ]
-      }
-      EOF
+        -d '{
+          "model": "claude-opus-5-5",
+          "max_tokens": 1024,
+          "messages": [
+            {
+              "role": "user",
+              "content": [
+                {
+                  "type": "document",
+                  "source": {"type": "file", "file_id": "'"$FILE_ID"'"},
+                  "title": "Document Title",
+                  "context": "Context about the document that will not be cited from",
+                  "citations": {"enabled": true}
+                },
+                {
+                  "type": "text",
+                  "text": "Summarize this document."
+                }
+              ]
+            }
+          ]
+        }'
       ```
 
       ```bash CLI

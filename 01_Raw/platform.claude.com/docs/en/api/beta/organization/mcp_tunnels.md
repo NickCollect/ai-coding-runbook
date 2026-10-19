@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/mcp_tunnels
-fetched_at: 2026-10-12T06:50:06.488295+00:00
+fetched_at: 2026-10-19T05:33:00.059798+00:00
 fetch_method: mintlify_md
 ---
 
@@ -163,6 +163,8 @@ archived tunnels are excluded unless `include_archived` is set.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Returns
 
@@ -368,6 +370,8 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Returns
 
 - `BetaOrganizationTunnel object`
@@ -567,6 +571,8 @@ tunnel returns the existing record unchanged.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Returns
 
@@ -769,6 +775,8 @@ access logs.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 ### Returns
 
 - `BetaOrganizationTunnelToken object`
@@ -941,6 +949,8 @@ restarted after rotation must use the new value. An optional
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Body parameters
 
@@ -1189,6 +1199,8 @@ holds at most two non-archived certificates.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Body parameters
 
 - `ca_certificate_pem: string`
@@ -1419,6 +1431,8 @@ Archived certificates are excluded unless `include_archived` is set.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Returns
 
 - `data: array of BetaOrganizationTunnelCertificate`
@@ -1627,6 +1641,8 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   - `"spend-limit-reads-2026-09-26"`
 
+  - `"telemetry-destinations-2026-08-11"`
+
 #### Returns
 
 - `BetaOrganizationTunnelCertificate object`
@@ -1829,6 +1845,8 @@ certificate is added.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 #### Returns
 

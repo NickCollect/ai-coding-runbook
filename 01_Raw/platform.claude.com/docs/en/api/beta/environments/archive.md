@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/archive
-fetched_at: 2026-10-12T06:49:58.794837+00:00
+fetched_at: 2026-10-19T05:32:54.212335+00:00
 fetch_method: mintlify_md
 ---
 
@@ -132,6 +132,8 @@ Archive an environment by ID. Archived environments cannot be used to create new
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 

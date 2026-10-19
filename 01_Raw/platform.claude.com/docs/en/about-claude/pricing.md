@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/pricing
-fetched_at: 2026-10-12T06:49:51.524388+00:00
+fetched_at: 2026-10-19T05:32:48.606882+00:00
 fetch_method: mintlify_md
 ---
 
@@ -171,14 +171,12 @@ For more information, see [Data residency](https://platform.claude.com/docs/en/m
 
 ### Fast mode pricing
 
-[Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode), in research preview, provides significantly faster output for Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8 at premium pricing. Fast mode pricing applies across the full context window, including requests over 200k input tokens. Fast mode is available on the Claude API (first-party) only; it is not available on Claude Platform on AWS or partner-operated cloud platforms.
+[Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) provides significantly faster output for Claude Opus 5.5, Claude Opus 5, and Claude Opus 4.8 at premium pricing. Fast mode for Claude Opus 5 and Claude Opus 4.8 is in research preview. Fast mode pricing applies across the full context window, including requests over 200k input tokens. Fast mode is available on the Claude API (first-party) and, for Claude Opus 5.5, on [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) for deployments hosted on Azure; it is not available on Claude Platform on AWS or partner-operated cloud platforms.
 
-| Model                           | Input      | Output     |
-| ------------------------------- | ---------- | ---------- |
-| Claude Opus 5.5                 | $8 / MTok  | $40 / MTok |
-| Claude Opus 5 / Claude Opus 4.8 | $10 / MTok | $50 / MTok |
-
-Fast mode is not available on Claude Opus 4.7 (requests with `speed: "fast"` return an error) or Claude Opus 4.6 (requests run at standard speed and are billed at standard rates). See [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode#supported-models).
+| Model                           | Input          | Output         |
+| ------------------------------- | -------------- | -------------- |
+| Claude Opus 5.5                 | $8 USD / MTok  | $40 USD / MTok |
+| Claude Opus 5 / Claude Opus 4.8 | $10 USD / MTok | $50 USD / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
@@ -449,24 +447,24 @@ Runtime is measured to the millisecond and accrues only while the session's stat
 
 ### Worked example
 
-A one-hour coding session using Claude Opus 5 that consumes 50,000 input tokens and 15,000 output tokens:
+A one-hour coding session using Claude Opus 5.5 that consumes 50,000 input tokens and 15,000 output tokens:
 
-| Line item       | Calculation              | Cost       |
-| --------------- | ------------------------ | ---------- |
-| Input tokens    | 50,000 × $5 / 1,000,000  | $0.25      |
-| Output tokens   | 15,000 × $25 / 1,000,000 | $0.375     |
-| Session runtime | 1.0 hour × $0.08         | $0.08      |
-| **Total**       |                          | **$0.705** |
+| Line item       | Calculation              | Cost      |
+| --------------- | ------------------------ | --------- |
+| Input tokens    | 50,000 × $4 / 1,000,000  | $0.20     |
+| Output tokens   | 15,000 × $20 / 1,000,000 | $0.30     |
+| Session runtime | 1.0 hour × $0.08         | $0.08     |
+| **Total**       |                          | **$0.58** |
 
 If prompt caching is active and 40,000 of the input tokens are cache reads:
 
-| Line item             | Calculation                   | Cost       |
-| --------------------- | ----------------------------- | ---------- |
-| Uncached input tokens | 10,000 × $5 / 1,000,000       | $0.05      |
-| Cache read tokens     | 40,000 × $5 × 0.1 / 1,000,000 | $0.02      |
-| Output tokens         | 15,000 × $25 / 1,000,000      | $0.375     |
-| Session runtime       | 1.0 hour × $0.08              | $0.08      |
-| **Total**             |                               | **$0.525** |
+| Line item             | Calculation                    | Cost       |
+| --------------------- | ------------------------------ | ---------- |
+| Uncached input tokens | 10,000 × $4 / 1,000,000        | $0.04      |
+| Cache read tokens     | 40,000 × $4 × 0.05 / 1,000,000 | $0.008     |
+| Output tokens         | 15,000 × $20 / 1,000,000       | $0.30      |
+| Session runtime       | 1.0 hour × $0.08               | $0.08      |
+| **Total**             |                                | **$0.428** |
 
 ## Additional pricing considerations
 
@@ -537,6 +535,6 @@ Batch API and prompt caching discounts can be combined. For example, using both 
 
 ### What payment methods are accepted?
 
-Major credit cards are accepted for standard accounts. Enterprise customers can arrange invoicing and other payment methods.
+Major credit cards are accepted for standard accounts. To buy credits or manage your payment methods, go to the [Billing](https://platform.claude.com/settings/billing) page (`platform.claude.com/settings/billing`) in the Claude Console. Enterprise customers can arrange invoicing and other payment methods.
 
 For additional questions about pricing, contact [support@anthropic.com](mailto:support@anthropic.com).

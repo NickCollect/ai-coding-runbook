@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/workspaces/list
-fetched_at: 2026-10-12T06:50:04.543594+00:00
+fetched_at: 2026-10-19T05:32:58.582566+00:00
 fetch_method: mintlify_md
 ---
 
@@ -154,6 +154,8 @@ rules with `applies_to_all_workspaces` or a legacy single
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ## Returns
 

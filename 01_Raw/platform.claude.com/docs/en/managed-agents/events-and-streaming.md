@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-10-12T06:49:47.103478+00:00
+fetched_at: 2026-10-19T05:32:45.017674+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ These event type strings follow a `{domain}.{action}` naming convention. See [Ev
 
 Stream events from the session to receive real-time updates as the agent works. A stream delivers only the events emitted after it opens, so open the stream before you send events to avoid a race condition.
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   # Open the stream first, then send the user message
   exec {stream}< <(
@@ -52,16 +52,14 @@ Stream events from the session to receive real-time updates as the agent works. 
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- >/dev/null <<'EOF'
-  {
-    "events": [
-      {
-        "type": "user.message",
-        "content": [{"type": "text", "text": "Summarize the repo README"}]
-      }
-    ]
-  }
-  EOF
+    -d '{
+      "events": [
+        {
+          "type": "user.message",
+          "content": [{"type": "text", "text": "Summarize the repo README"}]
+        }
+      ]
+    }' >/dev/null
 
   while IFS= read -r -u "$stream" event_line; do
     [[ $event_line == data:* ]] || continue
@@ -82,10 +80,9 @@ Stream events from the session to receive real-time updates as the agent works. 
   exec {stream}<&-
   ```
 
-  ```bash CLI
-  # This workflow does not translate well to a one-off shell command.
-  # Use one of the SDK examples in this code group instead.
-  ```
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   ```python Python
   # Open the stream first, then send the user message
@@ -267,6 +264,10 @@ Stream events from the session to receive real-time updates as the agent works. 
   ```
 
   ```php PHP
+  use Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent;
+  use Anthropic\Beta\Sessions\Events\ManagedAgentsSessionErrorEvent;
+  use Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock;
+
   // Open the stream first, then send the user message
   $stream = $client->beta->sessions->events->streamStream($session->id);
   $client->beta->sessions->events->send(
@@ -281,11 +282,11 @@ Stream events from the session to receive real-time updates as the agent works. 
 
   foreach ($stream as $event) {
       match (true) {
-          $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent => array_walk(
+          $event instanceof ManagedAgentsAgentMessageEvent => array_walk(
               $event->content,
-              static fn ($block) => $block instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock ? print($block->text) : null,
+              static fn ($block) => $block instanceof ManagedAgentsTextBlock ? print($block->text) : null,
           ),
-          $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsSessionErrorEvent => printf("\n[Error: %s]", $event->error?->message ?? 'unknown'),
+          $event instanceof ManagedAgentsSessionErrorEvent => printf("\n[Error: %s]", $event->error?->message ?? 'unknown'),
           default => null,
       };
       if ($event->type === 'session.status_idle' || $event->type === 'session.error') {
@@ -335,7 +336,7 @@ To reconnect to an existing session without missing events, combine a new stream
 2. [List the full event history](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#list-past-events) to seed a set of seen event IDs.
 3. Tail the live stream, skipping any events already returned by the history list.
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   exec {stream}< <(
     curl --fail-with-body -sS -N \
@@ -379,10 +380,9 @@ To reconnect to an existing session without missing events, combine a new stream
   exec {stream}<&-
   ```
 
-  ```bash CLI
-  # This workflow does not translate well to a one-off shell command.
-  # Use one of the SDK examples in this code group instead.
-  ```
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   ```python Python
   with client.beta.sessions.events.stream(session.id) as stream:
@@ -419,8 +419,12 @@ To reconnect to an existing session without missing events, combine a new stream
   // Tail live events, skipping anything already seen
   tail: for await (const event of stream) {
     // Preview events (event_start/event_delta) carry no top-level id
-    if (event.type === "event_start" || event.type === "event_delta") continue;
-    if (seenEventIds.has(event.id)) continue;
+    if (event.type === "event_start" || event.type === "event_delta") {
+      continue;
+    }
+    if (seenEventIds.has(event.id)) {
+      continue;
+    }
     seenEventIds.add(event.id);
     switch (event.type) {
       case "agent.message":
@@ -531,6 +535,9 @@ To reconnect to an existing session without missing events, combine a new stream
   ```
 
   ```php PHP
+  use Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent;
+  use Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock;
+
   $stream = $client->beta->sessions->events->streamStream($session->id);
 
   // Stream is open and buffering. List history before tailing live.
@@ -546,9 +553,9 @@ To reconnect to an existing session without missing events, combine a new stream
       }
       $seenEventIds[$event->id] = true;
       match (true) {
-          $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsAgentMessageEvent => array_walk(
+          $event instanceof ManagedAgentsAgentMessageEvent => array_walk(
               $event->content,
-              static fn ($block) => $block instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock ? print($block->text) : null,
+              static fn ($block) => $block instanceof ManagedAgentsTextBlock ? print($block->text) : null,
           ),
           default => null,
       };
@@ -592,18 +599,16 @@ Send a `user.message` event to start or continue the agent's work:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-  {
-    "events": [
-      {
-        "type": "user.message",
-        "content": [
-          {"type": "text", "text": "Analyze the performance of the sort function in utils.py"}
-        ]
-      }
-    ]
-  }
-  EOF
+    -d '{
+      "events": [
+        {
+          "type": "user.message",
+          "content": [
+            {"type": "text", "text": "Analyze the performance of the sort function in utils.py"}
+          ]
+        }
+      ]
+    }'
   ```
 
   ```bash CLI
@@ -734,7 +739,7 @@ Send a `user.message` event to start or continue the agent's work:
   ```
 </CodeGroup>
 
-Every event in the session's history includes a `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) timestamp, set when the event finishes processing. On events you send, `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) is null while the event is still queued behind earlier events. The exceptions are `user.define_outcome`, `user.custom_tool_result`, and `user.tool_result`, which are processed on receipt and echoed back with `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) already populated.
+Every event in the session's history includes a `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) timestamp, set when the event finishes processing. On events you send, `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) is `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `time.Time{}`) while the event is still queued behind earlier events. The exceptions are `user.define_outcome`, `user.custom_tool_result`, and `user.tool_result`, which are processed on receipt and echoed back with `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) already populated.
 
 ## Respond when the session goes idle
 
@@ -769,7 +774,7 @@ When you [reconnect](https://platform.claude.com/docs/en/managed-agents/events-a
 
 The following example answers each call as it arrives:
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   exec {stream_fd}< <(curl --fail-with-body -sS -N \
     "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
@@ -806,10 +811,9 @@ The following example answers each call as it arrives:
   exec {stream_fd}<&-
   ```
 
-  ```bash CLI
-  # This workflow does not translate well to a one-off shell command.
-  # Use one of the SDK examples in this code group instead.
-  ```
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   ```python Python
   with client.beta.sessions.events.stream(session.id) as stream:
@@ -857,7 +861,9 @@ The following example answers each call as it arrives:
         break;
       }
       case "session.status_idle":
-        if (event.stop_reason.type === "end_turn") break loop;
+        if (event.stop_reason.type === "end_turn") {
+          break loop;
+        }
         break;
     }
   }
@@ -1027,11 +1033,11 @@ If the agent has [workflow runs](https://platform.claude.com/docs/en/managed-age
 
 ### Confirm a tool call
 
-Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id` (java: `toolUseId`; php: `toolUseID`; csharp, go: `ToolUseID`) parameter. Set `result` (java, php; csharp, go: `Result`) to `"allow"` or `"deny"`. See [Respond to confirmation requests](https://platform.claude.com/docs/en/managed-agents/permission-policies#respond-to-confirmation-requests) for which calls wait for a confirmation and how to explain a denial.
+Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id` (java: `toolUseId`; php: `toolUseID`; csharp, go: `ToolUseID`) parameter. Set `result` (csharp, go: `Result`) to `"allow"` or `"deny"`. See [Respond to confirmation requests](https://platform.claude.com/docs/en/managed-agents/permission-policies#respond-to-confirmation-requests) for which calls wait for a confirmation and how to explain a denial.
 
 The following example approves every pending call:
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   exec {stream_fd}< <(curl --fail-with-body -sS -N \
     "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
@@ -1068,10 +1074,9 @@ The following example approves every pending call:
   exec {stream_fd}<&-
   ```
 
-  ```bash CLI
-  # This workflow does not translate well to a one-off shell command.
-  # Use one of the SDK examples in this code group instead.
-  ```
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   ```python Python
   with client.beta.sessions.events.stream(session.id) as stream:
@@ -1099,9 +1104,15 @@ The following example approves every pending call:
   const stream = await client.beta.sessions.events.stream(session.id);
 
   for await (const event of stream) {
-    if (event.type !== "session.status_idle") continue;
-    if (event.stop_reason.type === "end_turn") break;
-    if (event.stop_reason.type !== "requires_action") continue;
+    if (event.type !== "session.status_idle") {
+      continue;
+    }
+    if (event.stop_reason.type === "end_turn") {
+      break;
+    }
+    if (event.stop_reason.type !== "requires_action") {
+      continue;
+    }
 
     for (const eventId of event.stop_reason.event_ids) {
       // Approve the pending tool call
@@ -1271,18 +1282,16 @@ Sessions persist between interactions. To resume a session, send a `user.message
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-  {
-    "events": [
-      {
-        "type": "user.message",
-        "content": [
-          {"type": "text", "text": "Now run the tests against the changes you made earlier."}
-        ]
-      }
-    ]
-  }
-  EOF
+    -d '{
+      "events": [
+        {
+          "type": "user.message",
+          "content": [
+            {"type": "text", "text": "Now run the tests against the changes you made earlier."}
+          ]
+        }
+      ]
+    }'
   ```
 
   ```bash CLI
@@ -1444,19 +1453,17 @@ Send a `user.interrupt` event to stop the agent mid-execution, then follow up wi
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-  {
-    "events": [
-      {"type": "user.interrupt"},
-      {
-        "type": "user.message",
-        "content": [
-          {"type": "text", "text": "Instead, focus on fixing the bug in line 42."}
-        ]
-      }
-    ]
-  }
-  EOF
+    -d '{
+      "events": [
+        {"type": "user.interrupt"},
+        {
+          "type": "user.message",
+          "content": [
+            {"type": "text", "text": "Instead, focus on fixing the bug in line 42."}
+          ]
+        }
+      ]
+    }'
   ```
 
   ```bash CLI
@@ -1621,7 +1628,7 @@ Send a `user.interrupt` event to stop the agent mid-execution, then follow up wi
 
 The call returns as soon as the events are queued. The interrupt then takes effect in this order:
 
-1. The agent applies the interrupt. Until then, the interrupt's `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) stays null and the session stays `running`. A model response in progress stops immediately, but the interrupt can take longer to apply while tool calls are running.
+1. The agent applies the interrupt. Until then, the interrupt's `processed_at` (java, php: `processedAt`; csharp, go: `ProcessedAt`) stays `null` (python: `None`; ruby: `nil`; java: `Optional.empty()`; go: `time.Time{}`) and the session stays `running`. A model response in progress stops immediately, but the interrupt can take longer to apply while tool calls are running.
 2. The `user.interrupt` event appears on the stream, and the interrupted turn ends with a `session.status_idle` event.
 3. The agent starts its next turn with the `user.message` you sent after the interrupt.
 
@@ -1699,7 +1706,7 @@ Retrieve the full event history for a session:
   ```
 </CodeGroup>
 
-Pass a `types` (java, php; csharp, go: `Types`) filter to return only specific event types:
+Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to return only specific event types:
 
 <CodeGroup>
   ```bash cURL
@@ -1775,7 +1782,14 @@ Pass a `types` (java, php; csharp, go: `Types`) filter to return only specific e
   ```
 
   ```php PHP
-  // In PHP, pass the types you want on EventListParams; see the Anthropic PHP SDK.
+  $events = $client->beta->sessions->events->list(
+      $session->id,
+      types: ['agent.tool_use', 'agent.tool_result'],
+  );
+  foreach ($events->data as $event) {
+      $processedAt = ($event->processedAt ?? null)?->format(DATE_RFC3339) ?? 'null';
+      echo "[{$event->type}] {$processedAt}\n";
+  }
   ```
 
   ```ruby Ruby
@@ -1791,7 +1805,7 @@ Pass a `types` (java, php; csharp, go: `Types`) filter to return only specific e
 
 On a [supported model](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#supported-models), send a `system.message` event to give the agent privileged system-level context. The context applies to the accompanying turn and all subsequent turns. Use it when the agent needs updated system-level guidance mid-session, for example a different persona, revised constraints, or context fetched at runtime.
 
-The event's `content` (java, php; csharp, go: `Content`) accepts 1–1000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (java, php; csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
+The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
 
 <CodeGroup>
   ```bash cURL
@@ -1800,18 +1814,16 @@ The event's `content` (java, php; csharp, go: `Content`) accepts 1–1000 text i
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-  {
-    "events": [
-      {
-        "type": "system.message",
-        "content": [
-          {"type": "text", "text": "The user's current timezone is America/New_York."}
-        ]
-      }
-    ]
-  }
-  EOF
+    -d '{
+      "events": [
+        {
+          "type": "system.message",
+          "content": [
+            {"type": "text", "text": "The current timezone of the user is America/New_York."}
+          ]
+        }
+      ]
+    }'
   ```
 
   ```bash CLI

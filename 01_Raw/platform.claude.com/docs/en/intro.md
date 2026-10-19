@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/intro
-fetched_at: 2026-10-12T06:49:42.395166+00:00
+fetched_at: 2026-10-19T05:32:41.201695+00:00
 fetch_method: mintlify_md
 ---
 
@@ -79,7 +79,7 @@ Follow these steps to go from zero to a working Claude integration.
 Anthropic provides developer tools to help you build and scale applications with Claude.
 
 <CardGroup cols={3}>
-  <Card title="Developer Console" icon="computer" href="https://platform.claude.com/">
+  <Card title="Claude Console" icon="computer" href="https://platform.claude.com/">
     Explore and understand the API in your browser with playground.
   </Card>
 

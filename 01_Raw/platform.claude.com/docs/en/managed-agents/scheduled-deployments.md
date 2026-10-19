@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
-fetched_at: 2026-10-12T06:49:47.680589+00:00
+fetched_at: 2026-10-19T05:32:45.340841+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,11 +22,19 @@ For the launch context and examples of what teams run on schedules, see [schedul
 
 ## Create a scheduled deployment
 
-When creating a deployment, you pass the [session configurations](https://platform.claude.com/docs/en/managed-agents/sessions) required for execution, in addition to a `schedule` (java, php; csharp, go: `Schedule`).
+When creating a deployment, you pass the [session configurations](https://platform.claude.com/docs/en/managed-agents/sessions) required for execution, in addition to a `schedule` (csharp, go: `Schedule`).
 
 * Deployments require [agent configuration](https://platform.claude.com/docs/en/managed-agents/agent-setup) and [environment configuration](https://platform.claude.com/docs/en/managed-agents/environments), and optionally accept [files](https://platform.claude.com/docs/en/managed-agents/files), [GitHub](https://platform.claude.com/docs/en/managed-agents/github), [memory stores](https://platform.claude.com/docs/en/managed-agents/memory), and [vaults](https://platform.claude.com/docs/en/managed-agents/vaults). A deployment that targets a [self-hosted environment](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
 * Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work. In a deployment file for `ant apply`, the text below the frontmatter becomes that `user.message`.
-* In the `schedule` (java, php; csharp, go: `Schedule`), you define a cron `expression` (java, php; csharp, go: `Expression`) and a `timezone` (java, php; csharp, go: `Timezone`). Maximum granularity supported is at the minute level.
+* In the `schedule` (csharp, go: `Schedule`), you define a cron `expression` (csharp, go: `Expression`) and a `timezone` (csharp, go: `Timezone`). Maximum granularity supported is at the minute level.
+
+<Note>
+  On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), each run creates its session as an IAM role in your AWS account. Before you create the deployment, set `execution_identity` on the agent to `{"type": "aws_role", "role_arn": "arn:aws:iam::123456789012:role/example-role"}`. Creating a deployment for an agent without this field returns a 400 error.
+
+  * **Trust policy:** Allow the `aws-external-anthropic.amazonaws.com` service principal to call `sts:AssumeRole` and `sts:SetSourceIdentity`.
+  * **Role permissions:** Allow `aws-external-anthropic:CreateSession`, `sts:GetWebIdentityToken`, and `sts:TagGetWebIdentityToken`.
+  * **Caller permissions:** The IAM principal that sets the role on the agent needs `iam:PassRole` on that role. The role must be in the same AWS account. No [managed policy](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions#managed-policies) grants `iam:PassRole`.
+</Note>
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -35,21 +43,19 @@ When creating a deployment, you pass the [session configurations](https://platfo
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<EOF
-  {
-    "name": "Weekly compliance scan",
-    "agent": "$AGENT_ID",
-    "environment_id": "$ENVIRONMENT_ID",
-    "initial_events": [
-      {"type": "user.message", "content": [{"type": "text", "text": "Run the weekly compliance scan."}]}
-    ],
-    "schedule": {
-      "type": "cron",
-      "expression": "0 20 * * 5",
-      "timezone": "America/New_York"
-    }
-  }
-  EOF
+    -d '{
+      "name": "Weekly compliance scan",
+      "agent": "'"$AGENT_ID"'",
+      "environment_id": "'"$ENVIRONMENT_ID"'",
+      "initial_events": [
+        {"type": "user.message", "content": [{"type": "text", "text": "Run the weekly compliance scan."}]}
+      ],
+      "schedule": {
+        "type": "cron",
+        "expression": "0 20 * * 5",
+        "timezone": "America/New_York"
+      }
+    }'
   ```
 
   <CodeGroupItem>
@@ -272,7 +278,7 @@ See the [Create Deployment reference](https://platform.claude.com/docs/en/api/be
 
 ### Set a budget on each run
 
-Pass the optional `budget` (java, php; csharp, go: `Budget`) object when you create or update the deployment. It takes the same shape as a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
+Pass the optional `budget` (csharp, go: `Budget`) object when you create or update the deployment. It takes the same shape as a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
 
 A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](https://platform.claude.com/docs/en/managed-agents/session-operations#updating-the-session-budget). Unlike a session budget, a deployment's budget can be removed with `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: `budget: nil`; go: `Budget: param.NullStruct[anthropic.BetaManagedAgentsBudgetLimitParam]()`; java: `.budget(Optional.empty())`; csharp: `Budget = null`; php: `requestOptions: ['extraBodyParams' => ['budget' => null]]`; cli: `--budget null`) and set again later.
 
@@ -285,14 +291,12 @@ The following example sets a budget on an existing deployment:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-  {
-    "budget": {
-      "type": "limit",
-      "max_list_cost": {"amount": "2000", "currency": "USD"}
-    }
-  }
-  EOF
+    -d '{
+      "budget": {
+        "type": "limit",
+        "max_list_cost": {"amount": "2000", "currency": "USD"}
+      }
+    }'
   ```
 
   <CodeGroupItem>

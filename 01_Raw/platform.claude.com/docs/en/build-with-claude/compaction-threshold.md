@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction-threshold
-fetched_at: 2026-10-12T06:49:45.378214+00:00
+fetched_at: 2026-10-19T05:32:43.538833+00:00
 fetch_method: mintlify_md
 ---
 
@@ -164,7 +164,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -221,7 +221,7 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .addUserMessage("Help me build a website")
               .contextManagement(BetaContextManagementConfig.builder()
@@ -394,7 +394,7 @@ Configure when compaction triggers using the `trigger` parameter:
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Betas = ["compact-2026-01-12"],
       Messages = messages,
@@ -442,7 +442,7 @@ Configure when compaction triggers using the `trigger` parameter:
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .addUserMessage("Hello, Claude")
@@ -610,7 +610,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages =
       [
@@ -665,7 +665,7 @@ You can provide custom instructions through the `instructions` parameter. Custom
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .addUserMessage("Help me build a Python web scraper")
               .addAssistantMessage("I'll help you build a web scraper...")
@@ -869,7 +869,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Betas = ["compact-2026-01-12"],
       Messages = messages,
@@ -894,7 +894,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
 
       parameters = new()
       {
-          Model = "claude-opus-5-5",
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 4096,
           Betas = ["compact-2026-01-12"],
           Messages = messages,
@@ -963,7 +963,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .addUserMessage("Help me build a website")
@@ -982,7 +982,7 @@ When enabled, the API returns a message with the `compaction` stop reason after 
               // Append the compaction block and continue the request
               // by building a new request with the compacted context
               MessageCreateParams continueParams = MessageCreateParams.builder()
-                  .model("claude-opus-5-5")
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(4096L)
                   .addBeta("compact-2026-01-12")
                   .addUserMessage("Help me build a website")
@@ -1170,7 +1170,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
   var response = await client.Beta.Messages.Create(new()
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1265,7 +1265,7 @@ This example appears in the SDK languages only: its value is the budget-tracking
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .messages(messages)
               .contextManagement(BetaContextManagementConfig.builder()
@@ -1534,7 +1534,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   var response = await client.Beta.Messages.Create(new()
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1554,7 +1554,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
   var nextResponse = await client.Beta.Messages.Create(new()
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1618,7 +1618,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
           BetaMessage response = client.beta().messages().create(
               MessageCreateParams.builder()
                   .addBeta("compact-2026-01-12")
-                  .model("claude-opus-5-5")
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(4096L)
                   .addUserMessage("Help me build a web scraper")
                   .contextManagement(BetaContextManagementConfig.builder()
@@ -1631,7 +1631,7 @@ You must pass the `compaction` block back to the API on subsequent requests to c
           BetaMessage nextResponse = client.beta().messages().create(
               MessageCreateParams.builder()
                   .addBeta("compact-2026-01-12")
-                  .model("claude-opus-5-5")
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(4096L)
                   .addUserMessage("Help me build a web scraper")
                   .addMessage(response)
@@ -1859,7 +1859,7 @@ The compaction block streams differently from text blocks. You receive a `conten
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
@@ -1942,7 +1942,7 @@ The compaction block streams differently from text blocks. You receive a `conten
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .addUserMessage("Hello, Claude")
@@ -2193,7 +2193,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
   var parameters = new MessageCreateParams
   {
       Betas = ["compact-2026-01-12"],
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       System = new List<BetaTextBlockParam>
       {
@@ -2248,7 +2248,7 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .addBeta("compact-2026-01-12")
               .systemOfBetaTextBlockParams(List.of(
@@ -2461,7 +2461,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
   var countParams = new MessageCountTokensParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       Messages = messages,
       ContextManagement = new BetaContextManagementConfig
       {
@@ -2506,7 +2506,7 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCountTokensParams params = MessageCountTokensParams.builder()
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .addUserMessage("Hello, Claude")
               .contextManagement(BetaContextManagementConfig.builder()
                   .addEdit(BetaCompact20260112Edit.builder().build())
@@ -2706,7 +2706,7 @@ Here's a complete example of a long-running conversation with compaction:
       var parameters = new MessageCreateParams
       {
           Betas = ["compact-2026-01-12"],
-          Model = "claude-opus-5-5",
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 4096,
           Messages = messages,
           ContextManagement = new BetaContextManagementConfig
@@ -2809,7 +2809,7 @@ Here's a complete example of a long-running conversation with compaction:
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .messages(messages)
               .contextManagement(BetaContextManagementConfig.builder()
@@ -3145,7 +3145,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
       var response = await client.Beta.Messages.Create(new()
       {
           Betas = ["compact-2026-01-12"],
-          Model = "claude-opus-5-5",
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 4096,
           Messages = messages,
           ContextManagement = new BetaContextManagementConfig
@@ -3192,7 +3192,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
           response = await client.Beta.Messages.Create(new()
           {
               Betas = ["compact-2026-01-12"],
-              Model = "claude-opus-5-5",
+              Model = Model.ClaudeOpus5_5,
               MaxTokens = 4096,
               Messages = messagesAfterCompaction,
               ContextManagement = new BetaContextManagementConfig
@@ -3334,7 +3334,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
 
           MessageCreateParams params = MessageCreateParams.builder()
               .addBeta("compact-2026-01-12")
-              .model("claude-opus-5-5")
+              .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(4096L)
               .messages(messages)
               .contextManagement(BetaContextManagementConfig.builder()
@@ -3377,7 +3377,7 @@ Here's an example that uses `pause_after_compaction` to preserve the prior excha
               // Continue the request with the compacted context + preserved messages
               MessageCreateParams continueParams = MessageCreateParams.builder()
                   .addBeta("compact-2026-01-12")
-                  .model("claude-opus-5-5")
+                  .model(Model.CLAUDE_OPUS_5_5)
                   .maxTokens(4096L)
                   .messages(messagesAfterCompaction)
                   .contextManagement(BetaContextManagementConfig.builder()

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-10-12T06:49:46.303170+00:00
+fetched_at: 2026-10-19T05:32:44.340640+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,7 +49,7 @@ This guide walks you through creating an agent, setting up an environment, start
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.40.0
+    VERSION=1.42.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -100,7 +100,7 @@ ant --version
 
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.71.0")
+    implementation("com.anthropic:anthropic-java:2.73.0")
     ```
   </Tab>
 
@@ -152,16 +152,14 @@ export ANTHROPIC_API_KEY="your-api-key-here"
             -H "anthropic-version: 2023-06-01" \
             -H "anthropic-beta: managed-agents-2026-04-01" \
             -H "content-type: application/json" \
-            -d @- <<'EOF'
-        {
-          "name": "Coding Assistant",
-          "model": "claude-opus-5-5",
-          "system": "You are a helpful coding assistant. Write clean, well-documented code.",
-          "tools": [
-            {"type": "agent_toolset_20260401"}
-          ]
-        }
-        EOF
+            -d '{
+              "name": "Coding Assistant",
+              "model": "claude-opus-5-5",
+              "system": "You are a helpful coding assistant. Write clean, well-documented code.",
+              "tools": [
+                {"type": "agent_toolset_20260401"}
+              ]
+            }'
         )
 
         AGENT_ID=$(jq -er '.id' <<<"$agent")
@@ -391,15 +389,13 @@ export ANTHROPIC_API_KEY="your-api-key-here"
             -H "anthropic-version: 2023-06-01" \
             -H "anthropic-beta: managed-agents-2026-04-01" \
             -H "content-type: application/json" \
-            -d @- <<'EOF'
-        {
-          "name": "quickstart-env",
-          "config": {
-            "type": "cloud",
-            "networking": {"type": "limited", "allow_package_managers": true}
-          }
-        }
-        EOF
+            -d '{
+              "name": "quickstart-env",
+              "config": {
+                "type": "cloud",
+                "networking": {"type": "limited", "allow_package_managers": true}
+              }
+            }'
         )
 
         ENVIRONMENT_ID=$(jq -er '.id' <<<"$environment")
@@ -551,9 +547,13 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     </CodeGroup>
 
     <Tip>
-      To run the sandbox on your own infrastructure instead of a cloud sandbox, see 
+      This quickstart uses a cloud environment. To decide whether to run tools on your own infrastructure with a 
 
-      [Self-hosted sandboxes](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes)
+      [self-hosted sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes)
+
+       instead, see 
+
+      [Choosing an agent environment](https://platform.claude.com/docs/en/managed-agents/choosing-an-environment)
 
       .
     </Tip>
@@ -570,13 +570,11 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           -H "anthropic-version: 2023-06-01" \
           -H "anthropic-beta: managed-agents-2026-04-01" \
           -H "content-type: application/json" \
-          -d @- <<EOF
-      {
-        "agent": "$AGENT_ID",
-        "environment_id": "$ENVIRONMENT_ID",
-        "title": "Quickstart session"
-      }
-      EOF
+          -d '{
+            "agent": "'"$AGENT_ID"'",
+            "environment_id": "'"$ENVIRONMENT_ID"'",
+            "title": "Quickstart session"
+          }'
       )
 
       SESSION_ID=$(jq -er '.id' <<<"$session")
@@ -673,16 +671,14 @@ export ANTHROPIC_API_KEY="your-api-key-here"
   <Step title="Send a message and stream the response">
     Open a stream, send a user event, then process events as they arrive:
 
-    <CodeGroup>
-      ```bash cURL
-      # This workflow does not translate well to a one-off shell command.
-      # Use one of the SDK examples in this code group instead.
-      ```
+    <CodeGroup exclude="shell">
+      <CodeGroupItem language="cURL">
+        This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+      </CodeGroupItem>
 
-      ```bash CLI
-      # This workflow does not translate well to a one-off shell command.
-      # Use one of the SDK examples in this code group instead.
-      ```
+      <CodeGroupItem language="CLI">
+        This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+      </CodeGroupItem>
 
       ```python Python
       with client.beta.sessions.events.stream(session.id) as stream:

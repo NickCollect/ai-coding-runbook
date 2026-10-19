@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry
-fetched_at: 2026-10-12T06:49:46.232773+00:00
+fetched_at: 2026-10-19T05:32:44.513801+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ Before you begin, ensure you have:
 
 * An active Azure subscription
 * Access to the [Foundry portal](https://ai.azure.com/)
-* The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL example, optional otherwise)
+* The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) installed (required for the Entra ID cURL and CLI examples, optional otherwise)
 * An Azure RBAC role that allows you to use the resource, such as **Foundry User** (formerly Azure AI User) or **Cognitive Services User**
 
 ## Install an SDK
@@ -86,8 +86,8 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:2.71.0")
-        implementation("com.anthropic:anthropic-java-foundry:2.71.0")
+        implementation("com.anthropic:anthropic-java:2.73.0")
+        implementation("com.anthropic:anthropic-java-foundry:2.73.0")
 
         // For Entra ID authentication, also add the Azure Identity library
         implementation("com.azure:azure-identity:1.18.3")
@@ -99,12 +99,12 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>2.71.0</version>
+            <version>2.73.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-foundry</artifactId>
-            <version>2.71.0</version>
+            <version>2.73.0</version>
         </dependency>
         <!-- For Entra ID authentication, also add the Azure Identity library -->
         <dependency>
@@ -155,7 +155,7 @@ After creating your resource, deploy a Claude model to make it available for API
 
 1. Sign in to the Foundry portal. From the portal homepage, select **Discover** in the upper-right navigation, then **Models** in the left pane to open the model catalog.
 
-2. Search for and select a Claude model (for example, claude-opus-5). Each model appears once in the catalog regardless of how many hosting options it supports.
+2. Search for and select a Claude model (for example, claude-opus-5-5). Each model appears once in the catalog regardless of how many hosting options it supports.
 
 3. On the model card, select **Deploy**, then **Custom settings** to open the deployment settings pane. If you choose **Default settings** instead, the deployment is automatically configured as Hosted on Azure for models available in both hosting options.
 
@@ -425,11 +425,16 @@ Entra ID authentication lets you manage access with Azure RBAC, integrate with y
   ```
 
   ```bash CLI
-  # The ant CLI can send a bearer token with --auth-token, but a set
-  # ANTHROPIC_API_KEY environment variable takes precedence over it (the CLI
-  # prints only a console notice), so your request could authenticate with
-  # the wrong credential. For the Entra ID flow, use the cURL example or one
-  # of the SDK examples instead.
+  # Get Microsoft Entra ID token
+  ACCESS_TOKEN=$(az account get-access-token --resource https://ai.azure.com --query accessToken -o tsv)
+
+  # Make request with token. Replace {resource} with your resource name
+  # env -u unsets ANTHROPIC_API_KEY, which the CLI would send instead of the token
+  env -u ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN="$ACCESS_TOKEN" ant messages create \
+    --base-url https://{resource}.services.ai.azure.com/anthropic \
+    --model claude-opus-5-5 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -772,7 +777,7 @@ Foundry does not include Anthropic's standard rate limit headers (`anthropic-rat
 
 **Error:** `Model not found` or `Deployment not found`
 
-* **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-5).
+* **Solution:** Verify you're using the correct deployment name. If you haven't created a custom deployment, use the default model ID (for example, claude-opus-5-5).
 * **Solution:** Ensure the model/deployment is available in your Azure region.
 
 **Error:** `Invalid model parameter`

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/models/list
-fetched_at: 2026-10-12T06:49:57.620874+00:00
+fetched_at: 2026-10-19T05:32:53.296599+00:00
 fetch_method: mintlify_md
 ---
 
@@ -160,6 +160,8 @@ The Models API response can be used to determine which models are available for 
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -405,7 +407,7 @@ curl https://api.anthropic.com/v1/models \
 {
   "data": [
     {
-      "id": "claude-opus-5",
+      "id": "claude-opus-5-5",
       "allowed_fallback_models": [
         "string"
       ],
@@ -488,9 +490,9 @@ curl https://api.anthropic.com/v1/models \
           }
         }
       },
-      "created_at": "2026-07-24T00:00:00Z",
+      "created_at": "2026-09-21T00:00:00Z",
       "deprecated_at": "2019-12-27T18:11:19.117Z",
-      "display_name": "Claude Opus 5",
+      "display_name": "Claude Opus 5.5",
       "lifecycle": "active",
       "line": "haiku",
       "max_input_tokens": 0,

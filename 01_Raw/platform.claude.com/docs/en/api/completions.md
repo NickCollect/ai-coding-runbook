@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions
-fetched_at: 2026-10-12T06:49:53.210538+00:00
+fetched_at: 2026-10-19T05:32:50.030319+00:00
 fetch_method: mintlify_md
 ---
 
@@ -144,6 +144,8 @@ Future models and features will not be compatible with Text Completions. See our
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ### Body parameters
 

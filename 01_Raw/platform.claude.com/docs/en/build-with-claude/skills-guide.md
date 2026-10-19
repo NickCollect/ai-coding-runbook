@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
-fetched_at: 2026-09-28T06:10:40.627943+00:00
+fetched_at: 2026-10-19T05:32:43.840223+00:00
 fetch_method: mintlify_md
 ---
 
@@ -176,7 +176,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -202,7 +202,7 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -491,7 +491,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
   // Step 1: Use a Skill to create a file
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -543,7 +543,7 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
   	// Step 1: Use a Skill to create a file
   	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-5-5",
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 4096,
   		Container: anthropic.MessageCreateParamsContainerUnion{
   			OfContainers: &anthropic.ContainerParams{
@@ -942,13 +942,10 @@ To provide input files for Skills to work on, [upload them with the Files API](h
 
 The response's `container` object carries the container's `id` and `expires_at` timestamp (see [Container reuse](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#container-reuse) for lifetime details). Reuse the same container across multiple messages by specifying the container ID:
 
-<CodeGroup>
-  ```bash cURL
-  # Multi-turn container reuse doesn't translate well to a one-off shell
-  # command; one of the SDK options would be a better fit. Capture
-  # container.id from the first response, then pass it in the next request as
-  # "container": {"id": "...", "skills": [...]} with the conversation history.
-  ```
+<CodeGroup exclude="shell:cURL">
+  <CodeGroupItem language="cURL">
+    Multi-turn container reuse needs more logic than a single shell command, so use the Claude SDK for it. To build the requests yourself, capture `container.id` from the first response. Then pass it in the next request as `"container": {"id": "...", "skills": [...]}`, together with the conversation history.
+  </CodeGroupItem>
 
   ```bash CLI
   # First request creates container
@@ -1075,7 +1072,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   // First request with a Skill
   var parameters1 = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -1104,7 +1101,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
 
   var parameters2 = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -1136,7 +1133,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   client := anthropic.NewClient()
 
   response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1170,7 +1167,7 @@ The response's `container` object carries the container's `id` and `expires_at` 
   assistantText := strings.Join(textParts, "\n")
 
   response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1556,7 +1553,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   {
       var parameters = new MessageCreateParams
       {
-          Model = "claude-opus-5-5",
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 4096,
           Container = containerId is null
               ? new ContainerParams
@@ -1613,7 +1610,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   maxRetries := 10
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -1643,7 +1640,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
   	messages = append(messages, response.ToParam())
 
   	response, err = client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     "claude-opus-5-5",
+  		Model:     anthropic.ModelClaudeOpus5_5,
   		MaxTokens: 4096,
   		Container: anthropic.MessageCreateParamsContainerUnion{
   			OfContainers: &anthropic.ContainerParams{
@@ -1969,7 +1966,7 @@ Combine multiple Skills in a single request to handle complex workflows:
 
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -2007,7 +2004,7 @@ Combine multiple Skills in a single request to handle complex workflows:
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -3014,7 +3011,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
   // Use specific version
   var specificVersionParams = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -3038,7 +3035,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
   // Use latest version
   var latestVersionParams = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -3091,7 +3088,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use specific version
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -3118,7 +3115,7 @@ A new version is a complete snapshot, not a delta: upload the Skill's full file 
 
   // Use latest version
   latestResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -3592,7 +3589,7 @@ Then use it with the Excel Skill to create a financial model. Pass the ID of the
   // Use with Excel to create financial model
   var parameters = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -3628,7 +3625,7 @@ Then use it with the Excel Skill to create a financial model. Pass the ID of the
 
   // Use with Excel to create financial model
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -4226,7 +4223,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
   // Skills render into the system prompt in a fixed, cache-friendly order
   var parameters1 = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -4250,7 +4247,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
   // Different Skill set ([xlsx] vs [xlsx, pptx]) = a different prefix: a cache miss (an identical set is a cache hit)
   var parameters2 = new MessageCreateParams
   {
-      Model = "claude-opus-5-5",
+      Model = Model.ClaudeOpus5_5,
       MaxTokens = 4096,
       Container = new ContainerParams
       {
@@ -4283,7 +4280,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   // Skills render into the system prompt in a fixed, cache-friendly order
   response1, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -4310,7 +4307,7 @@ If you use [Prompt caching](https://platform.claude.com/docs/en/build-with-claud
 
   // Changing the Skills list ([xlsx] vs [xlsx, pptx]) changes the prefix: a cache miss, while an identical list is a cache hit
   response2, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{
@@ -4475,13 +4472,10 @@ For best caching performance, keep your Skills list, including its order, consis
 
 Handle Skill-related errors gracefully:
 
-<CodeGroup>
-  ```bash cURL
-  # This error-handling flow doesn't translate well to a one-off shell
-  # command; one of the SDK options would be a better fit. A failing request
-  # returns HTTP 400 with an error JSON whose .error.message names the
-  # Skill problem.
-  ```
+<CodeGroup exclude="shell:cURL">
+  <CodeGroupItem language="cURL">
+    This error-handling flow needs more logic than a single shell command, so use the Claude SDK for it. A request that fails because of a Skill problem returns HTTP 400. The `error.message` field in the JSON response body describes the problem.
+  </CodeGroupItem>
 
   ```bash CLI
   if ! RESULT=$(ant messages create \
@@ -4577,7 +4571,7 @@ Handle Skill-related errors gracefully:
   {
       var parameters = new MessageCreateParams
       {
-          Model = "claude-opus-5-5",
+          Model = Model.ClaudeOpus5_5,
           MaxTokens = 4096,
           Container = new ContainerParams
           {
@@ -4608,7 +4602,7 @@ Handle Skill-related errors gracefully:
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     "claude-opus-5-5",
+  	Model:     anthropic.ModelClaudeOpus5_5,
   	MaxTokens: 4096,
   	Container: anthropic.MessageCreateParamsContainerUnion{
   		OfContainers: &anthropic.ContainerParams{

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/inference-hooks-configuration
-fetched_at: 2026-10-12T06:49:49.163774+00:00
+fetched_at: 2026-10-19T05:32:46.822647+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ There are three enforcement states: **off** (**Enforce verdicts** is off: your A
     Clicking **Next** on the signing secret dialog reopens the endpoint dialog, now with two more controls:
 
     * **Custom request headers:** up to 16 static headers sent with every verdict request so your AI security server can authenticate the caller. Header values are stored encrypted and never shown again; after saving, only the header names are displayed. Because values are write-only, saving any change to the headers requires re-entering every value. Changing the endpoint URL clears all stored header values so your credentials are never sent to a new destination; re-enter them after a URL change. Header names must use standard HTTP token characters with `-` rather than `_`, and must not collide with reserved names (request-framing headers such as `Content-*` and `Host`, proxy and cookie headers, client-address headers such as `X-Forwarded-*`, the `webhook-*` signature headers, and the `X-Anthropic-*` prefix). Values must be printable ASCII.
-    * **Test connection:** Claude sends a synthetic test prompt to the URL and headers currently in the form, not the saved values, so re-enter any stored header values before testing. On success, the result reports whether your AI security server returned an allow or a deny verdict for the test prompt, which surfaces a deny-everything default before you start enforcing.
+    * **Test connection:** Claude sends a synthetic test prompt to the URL and headers currently in the form, not the saved values, so re-enter any stored header values before testing. On success, the result reports whether your AI security server returned an allow or a deny verdict for the test prompt, which surfaces a deny-everything default before you start enforcing. It also shows the round-trip time Anthropic measured for that one test request, on a new connection, including the connection handshake.
 
     Click **Save** to store any headers you entered.
 

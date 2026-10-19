@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/use-case-guides/customer-support-chat
-fetched_at: 2026-10-12T06:49:49.666990+00:00
+fetched_at: 2026-10-19T05:32:47.163530+00:00
 fetch_method: mintlify_md
 ---
 
@@ -193,7 +193,7 @@ Here are criteria and benchmarks that can be used to evaluate the business impac
 
 The choice of model depends on the trade-offs between cost, accuracy, and response time.
 
-For customer support chat, Claude Opus 5 is well suited to balance intelligence, latency, and cost, including the most complex support scenarios that require deep reasoning across long, multi-step conversations. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, or long-context prompts, Claude Haiku 5.5 may be more suitable to optimize for latency. [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) is its main control for speed: `low` is the fastest level, suited to chat and short tool tasks.
+For customer support chat, Claude Opus 5.5 is well suited to balance intelligence, latency, and cost, including the most complex support scenarios that require deep reasoning across long, multi-step conversations. However, for instances where you have conversation flow with multiple prompts including RAG, tool use, or long-context prompts, Claude Haiku 5.5 may be more suitable to optimize for latency. [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) is its main control for speed: `low` is the fastest level, suited to chat and short tool tasks.
 
 ### Build a strong prompt
 
@@ -993,7 +993,7 @@ The class should have two main methods: one that calls the API to generate a mes
                   static fn ($block): bool => $block instanceof TextBlock,
               );
               if (!$firstBlock instanceof TextBlock) {
-                  throw new RuntimeException('An error occurred: Unexpected response type');
+                  throw new \RuntimeException('An error occurred: Unexpected response type');
               }
 
               $this->messages[] = MessageParam::with(role: 'assistant', content: $firstBlock->text);
@@ -1008,7 +1008,7 @@ The class should have two main methods: one that calls the API to generate a mes
               return $firstBlock->text;
           }
 
-          throw new RuntimeException('An error occurred: Unexpected response type');
+          throw new \RuntimeException('An error occurred: Unexpected response type');
       }
 
       /**
@@ -1022,7 +1022,7 @@ The class should have two main methods: one that calls the API to generate a mes
               return sprintf('Quote generated: $%.2f per month', $premium);
           }
 
-          throw new RuntimeException('An unexpected tool was used');
+          throw new \RuntimeException('An unexpected tool was used');
       }
   }
   ```

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
-fetched_at: 2026-10-12T06:49:44.860191+00:00
+fetched_at: 2026-10-19T05:32:43.071059+00:00
 fetch_method: mintlify_md
 ---
 
@@ -485,11 +485,11 @@ Automatic caching is the simplest way to enable prompt caching. Instead of placi
 
 With automatic caching, the cache point moves forward automatically as conversations grow. Each new request caches everything up to the last cacheable block, and previous content is read from cache.
 
-| Request   | Content                                                                                  | Cache behavior                                                             |
-| --------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Request 1 | System + User(1) + Asst(1) + **User(2)** ◀ cache                                         | Everything written to cache                                                |
-| Request 2 | System + User(1) + Asst(1) + User(2) + Asst(2) + **User(3)** ◀ cache                     | System through User(2) read from cache; Asst(2) + User(3) written to cache |
-| Request 3 | System + User(1) + Asst(1) + User(2) + Asst(2) + User(3) + Asst(3) + **User(4)** ◀ cache | System through User(3) read from cache; Asst(3) + User(4) written to cache |
+| Request   | Content                                                                                                      | Cache behavior                                                                  |
+| --------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| Request 1 | System<br />+ User(1) + Asst(1)<br />+ **User(2)** ◀ cache                                                   | Everything written to cache                                                     |
+| Request 2 | System<br />+ User(1) + Asst(1)<br />+ User(2) + Asst(2)<br />+ **User(3)** ◀ cache                          | System through User(2) read from cache;<br />Asst(2) + User(3) written to cache |
+| Request 3 | System<br />+ User(1) + Asst(1)<br />+ User(2) + Asst(2)<br />+ User(3) + Asst(3)<br />+ **User(4)** ◀ cache | System through User(3) read from cache;<br />Asst(3) + User(4) written to cache |
 
 The cache breakpoint automatically moves to the last cacheable block in each request, so you don't need to update any `cache_control` markers as the conversation grows.
 

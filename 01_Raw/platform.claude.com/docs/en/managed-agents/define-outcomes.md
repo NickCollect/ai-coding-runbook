@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/define-outcomes
-fetched_at: 2026-10-12T06:49:47.296819+00:00
+fetched_at: 2026-10-19T05:32:45.109865+00:00
 fetch_method: mintlify_md
 ---
 
@@ -300,13 +300,11 @@ The following examples create a [session](https://platform.claude.com/docs/en/ma
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
-    --json @- <<EOF
-  {
-    "agent": "$AGENT_ID",
-    "environment_id": "$ENVIRONMENT_ID",
-    "title": "Financial analysis on Costco"
-  }
-  EOF
+    --json '{
+      "agent": "'"$AGENT_ID"'",
+      "environment_id": "'"$ENVIRONMENT_ID"'",
+      "title": "Financial analysis on Costco"
+    }'
   )
   SESSION_ID=$(jq -r '.id' <<<"$session")
 
@@ -315,19 +313,17 @@ The following examples create a [session](https://platform.claude.com/docs/en/ma
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
-    --json @- >/dev/null <<EOF
-  {
-    "events": [
-      {
-        "type": "user.define_outcome",
-        "description": "Build a DCF model for Costco in .xlsx",
-        "rubric": {"type": "text", "content": "# DCF Model Rubric\n..."},
-        "max_iterations": 5
-      }
-    ]
-  }
-  EOF
-  # or: "rubric": {"type": "file", "file_id": "$RUBRIC_ID"}
+    --json '{
+      "events": [
+        {
+          "type": "user.define_outcome",
+          "description": "Build a DCF model for Costco in .xlsx",
+          "rubric": {"type": "text", "content": "# DCF Model Rubric\n..."},
+          "max_iterations": 5
+        }
+      ]
+    }' >/dev/null
+  # or: "rubric": {"type": "file", "file_id": "'"$RUBRIC_ID"'"}
   # "max_iterations" is optional; default 3, max 20
   ```
 
@@ -547,7 +543,7 @@ Progress on an outcome-oriented session is surfaced on the events [stream](https
 * `agent.*` events (such as messages and tool use) show progress toward the outcome.
 * `span.outcome_evaluation_*` events are only emitted for outcome-oriented sessions and show the number of iteration loops and the grader's feedback process.
 * You can also send `user.message` [events](https://platform.claude.com/docs/en/managed-agents/reference#event-types) to an outcome-oriented session to direct the agent's work as it progresses, but it isn't required: the agent works toward the outcome on its own, iterating until it succeeds or runs out of iterations.
-* A `user.interrupt` event pauses work on the current outcome and marks the `result` (java, php; csharp, go: `Result`) of the `span.outcome_evaluation_end` event as `interrupted`, allowing you to kick off a new outcome.
+* A `user.interrupt` event pauses work on the current outcome and marks the `result` (csharp, go: `Result`) of the `span.outcome_evaluation_end` event as `interrupted`, allowing you to kick off a new outcome.
 * After the final outcome evaluation, the session can be continued as a conversational session, or a new outcome can be started. The session retains history of the prior outcome.
 
 ### Define outcome user event

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/results
-fetched_at: 2026-10-12T06:49:53.756332+00:00
+fetched_at: 2026-10-19T05:32:50.541725+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1173,6 +1173,14 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `"priority"`
 
             - `"batch"`
+
+          - `speed: "standard" or "fast" or null`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
 
     - `MessageBatchErroredResult object`
 

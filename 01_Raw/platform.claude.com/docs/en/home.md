@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/home
-fetched_at: 2026-10-12T06:49:42.398600+00:00
+fetched_at: 2026-10-19T05:32:41.274957+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ with Claude"
 
     var msg = client.messages().create(
       MessageCreateParams.builder()
-        .model("claude-opus-5-5")
+        .model(Model.CLAUDE_OPUS_5_5)
         .maxTokens(1024)
         .addUserMessage("Hello, Claude")
         .build()
@@ -156,7 +156,7 @@ with Claude"
 
     var msg = await client.Messages
       .Create(new() {
-        Model = "claude-opus-5-5",
+        Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
         Messages = [new() {
           Role = Role.User,

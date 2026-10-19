@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill
-fetched_at: 2026-10-12T06:49:53.189285+00:00
+fetched_at: 2026-10-19T05:32:49.976108+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,7 +83,9 @@ The skill ships with [Claude Code](https://code.claude.com/docs/en/overview) and
 
 You can also invoke it directly:
 
-```text wrap
+Use this skill in Claude Code
+
+```text
 /claude-api
 ```
 
@@ -97,26 +99,43 @@ The skill source is available in the [Anthropic skills repository](https://githu
 npx skills add https://github.com/anthropics/skills --skill claude-api
 ```
 
-Or install it as a [Claude Code plugin](https://code.claude.com/docs/en/plugins):
+Or ask Claude Code to install it as a [Claude Code plugin](https://code.claude.com/docs/en/plugins):
 
-```text wrap
-/plugin marketplace add anthropics/skills
-/plugin install claude-api@anthropic-agent-skills
+Let Claude Code install this for you
+
+```text
+Install the claude-api plugin from the anthropics/skills plugin marketplace
 ```
+
+<Accordion title="Manual install commands">
+  ```text wrap
+  /plugin marketplace add anthropics/skills
+  /plugin install claude-api@anthropic-agent-skills
+  ```
+</Accordion>
 
 ## Migrating to a newer Claude model
 
 The Claude API skill can perform Claude model migrations across a code base. Invoke it directly with `/claude-api migrate`:
 
-```text wrap
-/claude-api migrate this project to claude-opus-5-5
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate this project to the latest Claude Opus model
 ```
 
 You can also pass a specific scope up front to skip the scope-confirmation question:
 
-```text wrap
-/claude-api migrate everything under src/ to claude-opus-5-5
-/claude-api migrate apps/api.py and apps/worker.py to claude-opus-5-5
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate everything under src/ to the latest Claude Opus model
+```
+
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate apps/api.py and apps/worker.py to the latest Claude Opus model
 ```
 
 When the scope is ambiguous (for example, a bare `/claude-api migrate to claude-opus-5-5`), the skill asks you to choose between the entire working directory, a specific subdirectory, or an explicit file list before editing any files. This applies to both Messages API and Managed Agents callers.
@@ -127,7 +146,7 @@ The skill handles:
 * **Cloud platform detection**, preserving platform-specific model ID formats (for example, the `anthropic.` prefix on Amazon Bedrock) and skipping changes for features that are unavailable on partner-operated platforms
 * **Breaking parameter changes**, such as removing `temperature`, `top_p`, and `top_k` for Claude Opus 4.8 and Claude Opus 4.7, and converting `thinking: {type: "enabled", budget_tokens: N}` to `thinking: {type: "adaptive"}`
 * **Prefill replacement**, converting assistant-message prefill patterns to [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) where applicable
-* **Beta header cleanup**, removing beta headers that the target model doesn't require (for example, `effort-2025-11-24`, `fine-grained-tool-streaming-2025-05-14`, `interleaved-thinking-2025-05-14`) and switching back from `client.beta.messages.create()` (python, typescript, ruby; go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; csharp: `client.Beta.Messages.Create()`; php: `$client->beta->messages->create()`) to `client.messages.create()` (python, typescript, ruby; go: `client.Messages.New()`; java: `client.messages().create()`; csharp: `client.Messages.Create()`; php: `$client->messages->create()`)
+* **Beta header cleanup**, removing beta headers that the target model doesn't require (for example, `effort-2025-11-24`, `fine-grained-tool-streaming-2025-05-14`, `interleaved-thinking-2025-05-14`) and switching back from `client.beta.messages.create()` (go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; csharp: `client.Beta.Messages.Create()`; php: `$client->beta->messages->create()`) to `client.messages.create()` (go: `client.Messages.New()`; java: `client.messages().create()`; csharp: `client.Messages.Create()`; php: `$client->messages->create()`)
 * **Effort calibration**, recommending an `output_config.effort` starting point for the target model (for example, the default `high` on Claude Opus 5, and `xhigh` for coding and agentic use cases on Claude Opus 4.8 and Claude Opus 4.7)
 * **Prompt-behavior tuning**, flagging length-control, tool-triggering, subagent, and instruction-following prompts that may behave differently on the target model
 * **Silent default handling**, opting back into thinking summarization (`thinking.display: "summarized"`) when reasoning is surfaced to users on Claude Opus 4.8 and Claude Opus 4.7
@@ -141,7 +160,9 @@ For the full list of model-specific changes the skill applies, see [Migrating to
 
 [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking) keeps a `thinking` block valid only while the `system` prompt, `tools`, and messages before it stay unchanged. To find and fix the places where your code edits that history, open the repository that builds your requests and invoke the `preserved-thinking-migration` subcommand:
 
-```text wrap
+Let Claude Code check your code for you
+
+```text
 /claude-api preserved-thinking-migration
 ```
 
@@ -161,7 +182,9 @@ The test requests and replays are real Messages API requests, billed at the mode
 
 To scaffold a new Managed Agent from scratch, invoke the `managed-agents-onboard` subcommand:
 
-```text wrap
+Let Claude Code set up your agent for you
+
+```text
 /claude-api managed-agents-onboard
 ```
 
@@ -175,19 +198,25 @@ Here are examples of tasks the skill helps Claude handle:
 
 **Building a chat application:**
 
-```text wrap
+Let Claude Code build this for you
+
+```text
 Build a streaming chat UI with the Claude API in TypeScript
 ```
 
 **Migrating an existing project:**
 
-```text wrap
-/claude-api migrate this codebase to claude-opus-5-5 and re-tune effort
+Let Claude Code migrate your code for you
+
+```text
+/claude-api migrate this code base to the latest Claude Opus model and re-tune effort
 ```
 
 **Onboarding a new Managed Agent:**
 
-```text wrap
+Let Claude Code set up your agent for you
+
+```text
 /claude-api managed-agents-onboard
 ```
 

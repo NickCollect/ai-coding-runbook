@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
-fetched_at: 2026-10-12T06:49:46.126363+00:00
+fetched_at: 2026-10-19T05:32:44.149784+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,20 +51,20 @@ First, install Anthropic's [client SDK](https://platform.claude.com/docs/en/cli-
   <Tab title="Java">
     <CodeGroup exclude="shell, python, typescript, csharp, go, php, ruby">
       ```groovy Gradle
-      implementation("com.anthropic:anthropic-java:2.71.0")
-      implementation("com.anthropic:anthropic-java-vertex:2.71.0")
+      implementation("com.anthropic:anthropic-java:2.73.0")
+      implementation("com.anthropic:anthropic-java-vertex:2.73.0")
       ```
 
       ```xml Maven
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java</artifactId>
-          <version>2.71.0</version>
+          <version>2.73.0</version>
       </dependency>
       <dependency>
           <groupId>com.anthropic</groupId>
           <artifactId>anthropic-java-vertex</artifactId>
-          <version>2.71.0</version>
+          <version>2.73.0</version>
       </dependency>
       ```
 
@@ -161,7 +161,7 @@ Before running requests you might need to run `gcloud auth application-default l
 
 The following examples show how to generate text from Claude on Agent Platform:
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   MODEL_ID=claude-opus-5-5
   PROJECT_ID=MY_PROJECT_ID
@@ -176,9 +176,9 @@ The following examples show how to generate text from Claude on Agent Platform:
     }'
   ```
 
-  ```bash CLI
-  # The ant CLI does not support Agent Platform.
-  ```
+  <CodeGroupItem language="CLI">
+    The `ant` CLI doesn't support Agent Platform.
+  </CodeGroupItem>
 
   ```python Python
   from anthropic import AnthropicVertex
@@ -437,7 +437,7 @@ Regional and multi-region endpoints include a 10% pricing premium over global en
 
 Set the `region` parameter to `"global"` when initializing the client:
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   MODEL_ID=claude-opus-5-5
   PROJECT_ID=MY_PROJECT_ID
@@ -452,9 +452,9 @@ Set the `region` parameter to `"global"` when initializing the client:
     }'
   ```
 
-  ```bash CLI
-  # The ant CLI does not support Agent Platform.
-  ```
+  <CodeGroupItem language="CLI">
+    The `ant` CLI doesn't support Agent Platform.
+  </CodeGroupItem>
 
   ```python Python
   from anthropic import AnthropicVertex
@@ -625,7 +625,7 @@ Set the `region` parameter to `"global"` when initializing the client:
 
 Set the `region` parameter to a multi-region identifier: `"us"` for the United States or `"eu"` for the European Union. The SDK routes requests to the corresponding multi-region endpoint (`https://aiplatform.us.rep.googleapis.com` or `https://aiplatform.eu.rep.googleapis.com`), which dynamically balances traffic across regions within that geography.
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   MODEL_ID=claude-opus-5-5
   LOCATION=us # Multi-region identifier: "us" or "eu"
@@ -641,9 +641,9 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
     }'
   ```
 
-  ```bash CLI
-  # The ant CLI does not support Agent Platform.
-  ```
+  <CodeGroupItem language="CLI">
+    The `ant` CLI doesn't support Agent Platform.
+  </CodeGroupItem>
 
   ```python Python
   from anthropic import AnthropicVertex
@@ -814,7 +814,7 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
 
 Specify a specific region such as `"us-east5"` or `"europe-west1"`:
 
-<CodeGroup>
+<CodeGroup exclude="shell:CLI">
   ```bash cURL
   # Specific regional endpoints support Claude Sonnet 4.6 and earlier; newer models use the global or multi-region endpoints
   MODEL_ID=claude-sonnet-4-6
@@ -831,9 +831,9 @@ Specify a specific region such as `"us-east5"` or `"europe-west1"`:
     }'
   ```
 
-  ```bash CLI
-  # The ant CLI does not support Agent Platform.
-  ```
+  <CodeGroupItem language="CLI">
+    The `ant` CLI doesn't support Agent Platform.
+  </CodeGroupItem>
 
   ```python Python
   from anthropic import AnthropicVertex

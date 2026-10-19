@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/versions/retrieve
-fetched_at: 2026-10-12T06:50:02.528959+00:00
+fetched_at: 2026-10-19T05:32:57.118098+00:00
 fetch_method: mintlify_md
 ---
 
@@ -142,6 +142,8 @@ Get Skill Version
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 - `"anthropic-workspace-id": optional string`
 

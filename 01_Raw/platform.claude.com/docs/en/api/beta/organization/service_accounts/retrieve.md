@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/service_accounts/retrieve
-fetched_at: 2026-10-12T06:50:04.893070+00:00
+fetched_at: 2026-10-19T05:32:58.862902+00:00
 fetch_method: mintlify_md
 ---
 
@@ -136,6 +136,8 @@ Retrieve a service account by its ID (`svac_...`).
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ## Returns
 

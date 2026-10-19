@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/mid-conversation-effort-example
-fetched_at: 2026-10-12T06:49:44.926768+00:00
+fetched_at: 2026-10-19T05:32:43.257867+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1237,7 +1237,7 @@ The bash handler runs the requested command with a timeout, captures combined st
   if (DOC_TEST_MODE) {
       $workDir = sys_get_temp_dir() . '/orchestration-' . bin2hex(random_bytes(8));
       if (!mkdir($workDir, 0700)) {
-          throw new RuntimeException("could not create working directory {$workDir}");
+          throw new \RuntimeException("could not create working directory {$workDir}");
       }
       file_put_contents(
           $workDir . '/sample.py',
@@ -1782,7 +1782,7 @@ Each workflow subtask becomes its own small agent loop with the bash tool, runni
    */
   function drainMessageStream(iterable $events): array
   {
-      $stringValue = fn ($value) => $value instanceof BackedEnum ? $value->value : $value;
+      $stringValue = fn ($value) => $value instanceof \BackedEnum ? $value->value : $value;
       $blocks = [];
       $jsonBuffers = [];
       $stopReason = null;
@@ -2707,7 +2707,7 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
       if (is_string($raw)) {
           try {
               $raw = json_decode($raw, true, flags: JSON_THROW_ON_ERROR);
-          } catch (JsonException) {
+          } catch (\JsonException) {
               $raw = str_contains($raw, "\n") ? explode("\n", $raw) : [$raw];
           }
       }
@@ -2752,7 +2752,7 @@ The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the jo
       $runOne = function (string $prompt) use ($client, $model): string {
           try {
               return journaled($prompt, fn () => runSubagent($client, $model, $prompt));
-          } catch (Throwable $error) {
+          } catch (\Throwable $error) {
               // Isolation boundary: one bad subagent should not end the run.
               return '(subagent failed: ' . $error::class . ': ' . $error->getMessage() . ')';
           }
@@ -2878,42 +2878,40 @@ The agent appends the user's message first, then any system messages that are du
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d @- <<'EOF'
-  {
-    "model": "claude-opus-5-5",
-    "max_tokens": 64000,
-    "system": "You are a helpful general-purpose agent. Answer the user's request directly.",
-    "output_config": {"effort": "xhigh"},
-    "tools": [
-      {
-        "name": "Workflow",
-        "description": "Orchestrate a multiagent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results. Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on. Granularity: scope each subtask to a distinct concern rather than per line or file section; a review of a small module rarely needs more than about ten. Standing consent: while a system message confirms orchestration mode is on, author and run a workflow for every substantive task by default; work solo only on conversational turns or trivial mechanical edits.",
-        "input_schema": {
-          "type": "object",
-          "properties": {
-            "subtasks": {
-              "type": "array",
-              "items": {"type": "string"},
-              "description": "Independent subtask prompts to run as parallel agents"
-            }
-          },
-          "required": ["subtasks"]
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 64000,
+      "system": "You are a helpful general-purpose agent. Answer the request from the user directly.",
+      "output_config": {"effort": "xhigh"},
+      "tools": [
+        {
+          "name": "Workflow",
+          "description": "Orchestrate a multiagent workflow: split a large task into independent subtasks and run them as parallel agents, then collect their results. Opt-in: only use this tool when the user explicitly asks for a workflow, or when a system message confirms that orchestration mode is on. Granularity: scope each subtask to a distinct concern rather than per line or file section; a review of a small module rarely needs more than about ten. Standing consent: while a system message confirms orchestration mode is on, author and run a workflow for every substantive task by default; work solo only on conversational turns or trivial mechanical edits.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "subtasks": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Independent subtask prompts to run as parallel agents"
+              }
+            },
+            "required": ["subtasks"]
+          }
+        },
+        {"type": "bash_20250124", "name": "bash"}
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": "Explore the current directory, then give a thorough review: what it does, code-quality issues, and concrete improvements."
+        },
+        {
+          "role": "system",
+          "content": "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than the fastest one. Use the Workflow tool on every substantive task, sized to the natural decomposition of the problem rather than the maximum the tool allows. See the description of the Workflow tool for standing consent, granularity guidance, and quality patterns. Work solo only on conversational or trivial turns."
         }
-      },
-      {"type": "bash_20250124", "name": "bash"}
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "Explore the current directory, then give a thorough review: what it does, code-quality issues, and concrete improvements."
-      },
-      {
-        "role": "system",
-        "content": "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than the fastest one. Use the Workflow tool on every substantive task, sized to the problem's natural decomposition rather than the maximum the tool allows. See the Workflow tool's description for standing consent, granularity guidance, and quality patterns. Work solo only on conversational or trivial turns."
-      }
-    ]
-  }
-  EOF
+      ]
+    }'
   ```
 
   ```bash CLI

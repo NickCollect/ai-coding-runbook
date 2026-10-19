@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/issuers/list
-fetched_at: 2026-10-12T06:50:04.044977+00:00
+fetched_at: 2026-10-19T05:32:58.287564+00:00
 fetch_method: mintlify_md
 ---
 
@@ -150,6 +150,8 @@ Archived issuers are excluded unless `include_archived=true`.
   - `"ce-plugins-2026-09-01"`
 
   - `"spend-limit-reads-2026-09-26"`
+
+  - `"telemetry-destinations-2026-08-11"`
 
 ## Returns
 

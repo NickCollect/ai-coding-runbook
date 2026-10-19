@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/workload-identity-federation
-fetched_at: 2026-10-12T06:49:48.103494+00:00
+fetched_at: 2026-10-19T05:32:45.807585+00:00
 fetch_method: mintlify_md
 ---
 
@@ -65,7 +65,7 @@ The **Connect workload** wizard creates all three resources (the issuer, the ser
 
 <Steps>
   <Step title="Open Connect workload">
-    In the Claude Console, go to **Settings → Workload identity** and select **Connect workload**.
+    In the Claude Console, go to the [Workload identity](https://platform.claude.com/settings/workload-identity-federation) page (`platform.claude.com/settings/workload-identity-federation`) and select **Connect workload**.
   </Step>
 
   <Step title="Choose your provider">
@@ -95,7 +95,7 @@ With federation configured, your workload exchanges its IdP-issued JWT for an An
 
 You can construct the client with explicit credentials or with no arguments. With no arguments, the SDK resolves credentials from environment variables or the active profile, as described under [Credential precedence](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#credential-precedence). The zero-argument form is the recommended pattern for production workloads: ship the same container image everywhere and inject `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, `ANTHROPIC_WORKSPACE_ID`, and `ANTHROPIC_IDENTITY_TOKEN_FILE` per environment.
 
-<CodeGroup exclude="shell:CLI">
+<CodeGroup>
   ```bash cURL
   # 1. Acquire your IdP's JWT (platform-specific; see the per-provider guides).
   JWT=$(cat /var/run/secrets/anthropic.com/token)
@@ -116,20 +116,32 @@ You can construct the client with explicit credentials or with no arguments. Wit
   )
 
   ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
-  EXPIRES_IN=$(jq -r .expires_in <<<"$RESPONSE")  # seconds; re-exchange before this elapses
+  # The response's expires_in is the token's lifetime in seconds; re-exchange before it elapses.
 
   # 3. Call the API with the access token in the Authorization: Bearer header.
   curl -sS https://api.anthropic.com/v1/messages \
     -H "authorization: Bearer $ACCESS_TOKEN" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d @- <<'JSON' | jq -r '.content[] | select(.type == "text") | .text'
-  {
-    "model": "claude-opus-5-5",
-    "max_tokens": 1024,
-    "messages": [{"role": "user", "content": "Hello, Claude"}]
-  }
-  JSON
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 1024,
+      "messages": [{"role": "user", "content": "Hello, Claude"}]
+    }'
+  ```
+
+  ```bash CLI
+  # The CLI exchanges the identity token for an access token itself.
+  export ANTHROPIC_IDENTITY_TOKEN_FILE=/var/run/secrets/anthropic.com/token
+  export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
+  export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
+  export ANTHROPIC_SERVICE_ACCOUNT_ID=svac_...
+  export ANTHROPIC_WORKSPACE_ID=wrkspc_...
+
+  ant messages create \
+    --model claude-opus-5-5 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello, Claude"}'
   ```
 
   ```python Python
@@ -354,7 +366,7 @@ To switch an existing workload from a static API key to federation without downt
 1. **Configure federation in parallel.** Complete the [setup walkthrough](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#set-up-federation) and confirm the federation rule matches your workload's token. Leave the existing `ANTHROPIC_API_KEY` in place for now.
 2. **Smoke-test which credential wins.** Run `ant auth status` from inside the workload (or inspect SDK debug logs). Because `ANTHROPIC_API_KEY` sits above the federation tiers in the precedence chain, the API key still wins at this stage.
 3. **Unset `ANTHROPIC_API_KEY` everywhere it is injected.** Remove it from CI secrets, container environment, and shell profiles (see the preceding warning). Re-run `ant auth status` and confirm the federation source is now selected.
-4. **Delete the API key.** Once the workload is running on the federated token, delete the key in the Claude Console under **Settings → API keys**.
+4. **Delete the API key.** Once the workload is running on the federated token, delete the key on the [API keys](https://platform.claude.com/settings/keys) page (`platform.claude.com/settings/keys`) in the Claude Console.
 
 ## Token lifetime and refresh
 
@@ -367,7 +379,7 @@ The SDK caches the token and refreshes it on a two-tier schedule modeled on `bot
 
 Because the SDK re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on every exchange, it transparently picks up rotated projected tokens (Kubernetes service-account tokens, for example, rotate well before their `exp`).
 
-By default, identity tokens that carry a `jti` claim are single-use: each exchange must present a JWT that has not been exchanged before, and re-presenting one fails with the reason `jti_reused` on the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history). If your workload fetches its own tokens from your identity provider, mint a fresh JWT for each exchange instead of reusing a cached one (retry loops are the common culprit). The same applies to a token read from `ANTHROPIC_IDENTITY_TOKEN_FILE`: the SDK re-reads the file on every exchange, so the file must hold a new token before each refresh. A refresh that re-reads an unrotated token, or a restarted process that re-presents a token it already exchanged, is rejected the same way. Rotating the token well within the minted token's lifetime keeps the file ahead of the refresh schedule; if your token source cannot rotate that often, you can disable `check_jti` for that issuer as a last resort (this removes replay protection for every rule on the issuer). See [JWT verification](https://platform.claude.com/docs/en/manage-claude/wif-reference#jwt-verification) for details.
+By default, identity tokens that carry a `jti` claim are single-use: each exchange must present a JWT that has not been exchanged before, and re-presenting one fails with the reason `jti_reused` on the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console. If your workload fetches its own tokens from your identity provider, mint a fresh JWT for each exchange instead of reusing a cached one (retry loops are the common culprit). The same applies to a token read from `ANTHROPIC_IDENTITY_TOKEN_FILE`: the SDK re-reads the file on every exchange, so the file must hold a new token before each refresh. A refresh that re-reads an unrotated token, or a restarted process that re-presents a token it already exchanged, is rejected the same way. Rotating the token well within the minted token's lifetime keeps the file ahead of the refresh schedule; if your token source cannot rotate that often, you can disable `check_jti` for that issuer as a last resort (this removes replay protection for every rule on the issuer). See [JWT verification](https://platform.claude.com/docs/en/manage-claude/wif-reference#jwt-verification) for details.
 
 ## Identity providers
 
@@ -391,7 +403,7 @@ Each guide covers where the JWT comes from on that platform, what its claims loo
   </Card>
 
   <Card title="Kubernetes" icon="cube" href="https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes">
-    Self-managed and on-premises clusters using projected service-account tokens.
+    Self-managed and on-premise clusters using projected service-account tokens.
   </Card>
 
   <Card title="SPIFFE" icon="fingerprint" href="https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe">

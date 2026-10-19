@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages
-fetched_at: 2026-10-12T06:49:53.335635+00:00
+fetched_at: 2026-10-19T05:32:50.233342+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1280,6 +1280,16 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
   - `"auto"`
 
   - `"standard_only"`
+
+- `speed: optional "standard" or "fast" or null`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode?sdk_languages=http) for which models.
+
+  - `"standard"`
+
+  - `"fast"`
 
 - `stop_sequences: optional array of string`
 
@@ -4206,6 +4216,14 @@ Learn more about the Messages API in our [user guide](https://platform.claude.co
 
       - `"batch"`
 
+    - `speed: "standard" or "fast" or null`
+
+      The inference speed mode used for this request.
+
+      - `"standard"`
+
+      - `"fast"`
+
 - `RawMessageStreamEvent = RawMessageStartEvent or RawMessageDeltaEvent or RawMessageStopEvent or 3 more`
 
   - `RawMessageStartEvent object`
@@ -4417,7 +4435,7 @@ curl https://api.anthropic.com/v1/messages \
               "role": "user"
             }
           ],
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "stream": false,
           "system": [
             {
@@ -4488,7 +4506,7 @@ curl https://api.anthropic.com/v1/messages \
       "type": "model_changed"
     }
   },
-  "model": "claude-opus-5",
+  "model": "claude-opus-5-5",
   "role": "assistant",
   "stop_details": {
     "category": "cyber",
@@ -4515,7 +4533,8 @@ curl https://api.anthropic.com/v1/messages \
       "web_fetch_requests": 2,
       "web_search_requests": 0
     },
-    "service_tier": "standard"
+    "service_tier": "standard",
+    "speed": "standard"
   }
 }
 ```
@@ -5701,6 +5720,16 @@ Learn more about token counting in our [user guide](https://platform.claude.com/
     - `schema: map[unknown]`
 
       The JSON schema of the format
+
+- `speed: optional "standard" or "fast" or null`
+
+  The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+  Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode?sdk_languages=http) for which models.
+
+  - `"standard"`
+
+  - `"fast"`
 
 - `system: optional string or array of TextBlockParam`
 
@@ -7486,7 +7515,7 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
               "role": "user"
             }
           ],
-          "model": "claude-opus-5",
+          "model": "claude-opus-5-5",
           "system": [
             {
               "text": "Today'\''s date is 2024-06-01.",
@@ -21040,6 +21069,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
       - `"batch"`
 
+    - `speed: "standard" or "fast" or null`
+
+      The inference speed mode used for this request.
+
+      - `"standard"`
+
+      - `"fast"`
+
 ### Message Count Tokens Tool
 
 - `MessageCountTokensTool = Tool or ToolBash20250124 or CodeExecutionTool20250522 or 18 more`
@@ -26264,6 +26301,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
         - `"batch"`
 
+      - `speed: "standard" or "fast" or null`
+
+        The inference speed mode used for this request.
+
+        - `"standard"`
+
+        - `"fast"`
+
 ### Raw Message Stop Event
 
 - `RawMessageStopEvent object`
@@ -27392,6 +27437,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
           - `"priority"`
 
           - `"batch"`
+
+        - `speed: "standard" or "fast" or null`
+
+          The inference speed mode used for this request.
+
+          - `"standard"`
+
+          - `"fast"`
 
   - `RawMessageDeltaEvent object`
 
@@ -33831,6 +33884,14 @@ curl https://api.anthropic.com/v1/messages/count_tokens \
 
     - `"batch"`
 
+  - `speed: "standard" or "fast" or null`
+
+    The inference speed mode used for this request.
+
+    - `"standard"`
+
+    - `"fast"`
+
 ### User Location
 
 - `UserLocation object`
@@ -37475,6 +37536,16 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
       - `"standard_only"`
 
+    - `speed: optional "standard" or "fast" or null`
+
+      The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
+
+      Some models require the `fast-mode-2026-02-01` beta header for any `speed` value. See [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode?sdk_languages=http) for which models.
+
+      - `"standard"`
+
+      - `"fast"`
+
     - `stop_sequences: optional array of string`
 
       Custom text sequences that will cause the model to stop generating.
@@ -39416,7 +39487,7 @@ curl https://api.anthropic.com/v1/messages/batches \
                     "role": "user"
                   }
                 ],
-                "model": "claude-opus-5"
+                "model": "claude-opus-5-5"
               }
             }
           ]
@@ -41215,6 +41286,14 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
             - `"priority"`
 
             - `"batch"`
+
+          - `speed: "standard" or "fast" or null`
+
+            The inference speed mode used for this request.
+
+            - `"standard"`
+
+            - `"fast"`
 
     - `MessageBatchErroredResult object`
 

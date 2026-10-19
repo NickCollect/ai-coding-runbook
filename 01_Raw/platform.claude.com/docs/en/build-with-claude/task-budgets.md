@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-10-12T06:49:42.748931+00:00
+fetched_at: 2026-10-19T05:32:41.536644+00:00
 fetch_method: mintlify_md
 ---
 
@@ -520,9 +520,24 @@ The right budget depends on how much work your agentic loop currently does. Rath
 
 Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` across every request in the loop, plus the tokens of the tool results you append between requests:
 
-<CodeGroup exclude="shell:cURL">
+<CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 4096,
+      "messages": [{
+        "role": "user",
+        "content": "Review the codebase and propose a refactor plan."
+      }]
+    }'
+  ```
+
   ```bash CLI
-  ant messages create --transform 'usage.output_tokens' <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 4096
   messages:

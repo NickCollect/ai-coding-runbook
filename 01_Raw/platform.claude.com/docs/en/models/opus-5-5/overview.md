@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/opus-5-5/overview
-fetched_at: 2026-10-12T06:49:50.407258+00:00
+fetched_at: 2026-10-19T05:32:47.747219+00:00
 fetch_method: mintlify_md
 ---
 
@@ -114,7 +114,7 @@ Claude Opus 5.5 is built for long-running agentic coding and knowledge work, pri
   </Card>
 
   <Card title="Fast mode" icon="lightning" href="https://platform.claude.com/docs/en/build-with-claude/fast-mode">
-    Lower-latency Claude Opus 5.5 on the Claude API (research preview), priced separately.
+    Lower-latency Claude Opus 5.5 on the Claude API, priced separately.
   </Card>
 </CardGroup>
 

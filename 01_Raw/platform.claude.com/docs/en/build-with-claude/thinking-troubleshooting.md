@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking-troubleshooting
-fetched_at: 2026-10-12T06:49:43.349880+00:00
+fetched_at: 2026-10-19T05:32:41.933589+00:00
 fetch_method: mintlify_md
 ---
 
@@ -128,9 +128,7 @@ messages.N: output_config.effort 'low' differs from the 'high' in effect before 
 
 The message says thinking is disabled because `between_tools` has no up-front thinking. With `between_tools`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. `messages.N` is the position of the message that set the new level.
 
-Claude Haiku 5.5 returns the same message for a per-message effort change while `thinking: {type: "disabled"}` is set.
-
-Remove that per-message effort, or set it to the level in effect. To vary effort per turn, use adaptive thinking, which is what the message means by "enable thinking".
+Remove that per-message effort, or set it to the level in effect. To vary effort per turn, use adaptive thinking: omit the `thinking` field or send `thinking: {"type": "adaptive"}`. That's what the message means by "enable thinking".
 
 Claude Haiku 5.5 returns the same message when a request with `thinking: {type: "disabled"}` sets a per-message effort that differs from the level in effect. Remove that per-message effort, or set `thinking` to `{"type": "adaptive"}` to vary effort per turn.
 

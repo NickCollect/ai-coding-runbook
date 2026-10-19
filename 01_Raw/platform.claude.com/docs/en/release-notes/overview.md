@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/overview
-fetched_at: 2026-10-12T06:49:53.415820+00:00
+fetched_at: 2026-10-19T05:32:50.198090+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,6 +17,18 @@ The Claude Platform release notes list changes to the Claude API, the client SDK
 
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
+
+### October 15, 2026
+
+* The [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) now returns the text each organization member saved as **Instructions for Claude** in claude.ai and as **Global instructions** in Cowork, in beta for Claude Enterprise organizations. Call `GET /v1/compliance/organizations/{org_uuid}/user_preferences` with your existing Compliance Access Key and the `read:compliance_user_data` scope. See [List user preferences](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#list-user-preferences).
+* [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) is out of research preview for Claude Opus 5.5, and you no longer need to request access. Requests to Claude Opus 5.5 no longer require the `fast-mode-2026-02-01` beta header, and requests that still send it keep working. Claude Opus 5.5 now has a default fast mode rate limit in the Start, Build, and Scale usage tiers. Fast mode for Claude Opus 5 and Claude Opus 4.8 remains in research preview. Keep sending the beta header with fast mode requests to those models.
+* [Fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) for Claude Opus 5.5 is now available on [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry) for deployments hosted on Azure.
+
+### October 14, 2026
+
+* We've launched [OpenTelemetry export](https://platform.claude.com/docs/en/manage-claude/opentelemetry) in beta, so you can trace Messages API requests and Claude Managed Agents sessions in your observability backend. The Claude SDK emits spans in Python, TypeScript, C#, Go, Java, PHP, and Ruby. To get spans from the API, [add an OpenTelemetry destination](https://platform.claude.com/docs/en/manage-claude/opentelemetry/api#add-a-destination) in the Claude Console.
+
+- Claude Managed Agents [scheduled deployments](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments) are now available on [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#claude-managed-agents).
 
 ### October 9, 2026
 

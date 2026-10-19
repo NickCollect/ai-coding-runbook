@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/opus-5-5/migration-guide
-fetched_at: 2026-10-12T06:49:50.460480+00:00
+fetched_at: 2026-10-19T05:32:47.753955+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,9 @@ description: Switch to Claude Opus 5.5 from earlier Opus models or Claude Sonnet
 <Tip>
   **Automate your migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model). It works for any current Claude model as the target:
 
-  ```text wrap
+  Let Claude Code migrate your code for you
+
+  ```text
   /claude-api migrate this project to claude-opus-5-5
   ```
 
@@ -315,7 +317,7 @@ Work down the groups and stop after the one that names your current model: every
 * Remove any context-window beta header.
 * If you rebuild conversation history to update instructions, consider switching to a mid-conversation system message to preserve prompt cache hits.
 * Verify your stop-reason handling reads `stop_details` on refusals.
-* If you want fast mode, which Claude Opus 4.7 rejects, set `speed: "fast"` with the `fast-mode-2026-02-01` beta header on the Claude API.
+* If you want fast mode, which Claude Opus 4.7 rejects, set `speed: "fast"` on your Claude API requests. Claude Opus 5.5 doesn't need a beta header.
 
 ### Claude Opus 4.6 or earlier
 
@@ -334,7 +336,7 @@ Work down the groups and stop after the one that names your current model: every
 
 * Remove any assistant-message prefills; Claude Opus 4.6 already rejects them.
 * Verify tool call JSON parsing uses a standard JSON parser.
-* Move from `client.beta.messages.create()` (python, typescript, ruby; csharp: `client.Beta.Messages.Create()`; go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; php: `$client->beta->messages->create()`; cli: `ant beta:messages create`) to `client.messages.create()` (python, typescript, ruby; csharp: `client.Messages.Create()`; go: `client.Messages.New()`; java: `client.messages().create()`; php: `$client->messages->create()`; cli: `ant messages create`): adaptive thinking and effort need no beta namespace.
+* Move from `client.beta.messages.create()` (csharp: `client.Beta.Messages.Create()`; go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; php: `$client->beta->messages->create()`; cli: `ant beta:messages create`) to `client.messages.create()` (csharp: `client.Messages.Create()`; go: `client.Messages.New()`; java: `client.messages().create()`; php: `$client->messages->create()`; cli: `ant messages create`): adaptive thinking and effort need no beta namespace.
 * Remove the `effort-2025-11-24` beta header (the effort parameter does not require it).
 * Remove the `fine-grained-tool-streaming-2025-05-14` beta header.
 * Remove the `interleaved-thinking-2025-05-14` beta header (adaptive thinking enables interleaved thinking automatically).
@@ -1210,7 +1212,7 @@ None of these items adds a breaking change to those in the earlier sections; the
 
 4. **Refusal stop details:** When the model declines a request, Claude Opus 5.5 returns a `stop_details` object that names the category of refusal, alongside the `refusal` stop reason. Claude Opus 4.7 returns the same object, so this matters only if your stop-reason handling does not read it yet. No beta header is required, and there is no opt-out. If your stop-reason handling doesn't read it yet, see [Handling stop reasons](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons). Claude Opus 5.5 declines in more categories; see [Safety classifiers and fallback](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#safety-classifiers-and-fallback).
 
-5. **Fast mode:** Claude Opus 5.5 supports [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) (research preview) on the Claude API. Fast mode is not available on Claude Opus 4.7, where requests with `speed: "fast"` return an error. Set `speed: "fast"` with the `fast-mode-2026-02-01` beta header.
+5. **Fast mode:** Claude Opus 5.5 supports [fast mode](https://platform.claude.com/docs/en/build-with-claude/fast-mode) on the Claude API. Fast mode is not available on Claude Opus 4.7, where requests with `speed: "fast"` return an error. Set `speed: "fast"` on your requests. Claude Opus 5.5 doesn't need a beta header.
 
 6. **Computer use toolset and browser use tool:** On the Claude API and Google Cloud, Claude Opus 5.5 supports [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) as the `computer_toolset_20260801` toolset and the [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) for tasks inside webpages. Claude Opus 4.7 supports neither. On those platforms Claude Opus 5.5 doesn't accept the earlier `computer_20251124` tool; see the [computer use breaking change](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#computer-use-toolset).
 
@@ -1287,7 +1289,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
 
      var parameters = new MessageCreateParams
      {
-         Model = "claude-opus-4-6",
+         Model = Model.ClaudeOpus4_6,
          MaxTokens = 16000,
          Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
          Messages = [new() { Role = Role.User, Content = "..." }]
@@ -1301,7 +1303,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      client := anthropic.NewClient()
 
      response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-     	Model:     "claude-opus-4-6",
+     	Model:     anthropic.ModelClaudeOpus4_6,
      	MaxTokens: 16000,
      	Thinking:  anthropic.ThinkingConfigParamOfEnabled(10000),
      	Messages: []anthropic.MessageParam{
@@ -1318,7 +1320,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
      MessageCreateParams params = MessageCreateParams.builder()
-         .model("claude-opus-4-6")
+         .model(Model.CLAUDE_OPUS_4_6)
          .maxTokens(16000L)
          .enabledThinking(10000L)
          .addUserMessage("...")
@@ -1424,7 +1426,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
 
      var parameters = new MessageCreateParams
      {
-         Model = "claude-opus-5-5",
+         Model = Model.ClaudeOpus5_5,
          MaxTokens = 16000,
          Thinking = new ThinkingConfigAdaptive(),
          OutputConfig = new OutputConfig { Effort = Effort.High }, // or Max, Xhigh, Medium, Low
@@ -1439,7 +1441,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      client := anthropic.NewClient()
 
      response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-     	Model:     "claude-opus-5-5",
+     	Model:     anthropic.ModelClaudeOpus5_5,
      	MaxTokens: 16000,
      	Thinking: anthropic.ThinkingConfigParamUnion{
      		OfAdaptive: &anthropic.ThinkingConfigAdaptiveParam{},
@@ -1461,7 +1463,7 @@ This section adds what changed in Claude Opus 4.7, with `claude-opus-4-6` as the
      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
      MessageCreateParams params = MessageCreateParams.builder()
-         .model("claude-opus-5-5")
+         .model(Model.CLAUDE_OPUS_5_5)
          .maxTokens(16000L)
          .thinking(ThinkingConfigAdaptive.builder().build())
          .outputConfig(OutputConfig.builder()
@@ -1552,7 +1554,7 @@ If you are migrating from Claude Opus 4.5, Claude Opus 4.1, or an earlier model 
 
 The first item is required on Claude Opus 5.5; the rest are recommended.
 
-1. **Migrate to adaptive thinking (required):** `thinking: {"type": "enabled", "budget_tokens": N}` returns a 400 error on Claude Opus 4.7 and later models. The before and after is item 1 of the [breaking changes for migrating from Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#opus-46-breaking-changes). The migration also moves from `client.beta.messages.create()` (python, typescript, ruby; csharp: `client.Beta.Messages.Create()`; go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; php: `$client->beta->messages->create()`; cli: `ant beta:messages create`) to `client.messages.create()` (python, typescript, ruby; csharp: `client.Messages.Create()`; go: `client.Messages.New()`; java: `client.messages().create()`; php: `$client->messages->create()`; cli: `ant messages create`): adaptive thinking and effort do not require the beta SDK namespace or any beta headers.
+1. **Migrate to adaptive thinking (required):** `thinking: {"type": "enabled", "budget_tokens": N}` returns a 400 error on Claude Opus 4.7 and later models. The before and after is item 1 of the [breaking changes for migrating from Claude Opus 4.6](https://platform.claude.com/docs/en/models/opus-5-5/migration-guide#opus-46-breaking-changes). The migration also moves from `client.beta.messages.create()` (csharp: `client.Beta.Messages.Create()`; go: `client.Beta.Messages.New()`; java: `client.beta().messages().create()`; php: `$client->beta->messages->create()`; cli: `ant beta:messages create`) to `client.messages.create()` (csharp: `client.Messages.Create()`; go: `client.Messages.New()`; java: `client.messages().create()`; php: `$client->messages->create()`; cli: `ant messages create`): adaptive thinking and effort do not require the beta SDK namespace or any beta headers.
 
 2. **Remove effort beta header:** The effort parameter does not require a beta header. Remove the `effort-2025-11-24` beta from your requests.
 
