@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-10-05T06:27:20.170099+00:00
+fetched_at: 2026-10-19T05:32:44.194645+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,11 +49,13 @@ You can see which environment is active, along with all past active versions, by
 
 Cursor resolves environment configuration by repository or repo group, using the first match:
 
-1. `.cursor/environment.json` in the repository
-2. A personal saved environment
-3. A team saved environment
+1. A personal saved environment
+2. A team saved environment
+3. `.cursor/environment.json` in the repository (single-repo runs only)
 
-This gives you predictable defaults at the team level while still letting individual users override with a personal environment when a repo-level `.cursor/environment.json` is not present. User overrides are also useful to allow testing out a new environment configuration before rolling it out to the entire team.
+This gives you predictable defaults at the team level while still letting individual users override with a personal environment. User overrides are also useful to allow testing out a new environment configuration before rolling it out to the entire team.
+
+A saved environment runs with the configuration saved in it. It reads `.cursor/environment.json` from a repository only when its **environment.json location** points at that file. New environments start with the location set to **None (skip environment.json)**. To use a committed file, pick its repository when you create the environment.
 
 Environment configuration applies to Cursor-hosted Cloud Agents. A run on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines) uses only the environment's repositories and never reads `.cursor/environment.json`.
 
@@ -271,7 +273,7 @@ To federate with AWS STS `AssumeRoleWithWebIdentity`, or with GCP, Azure, or ano
 
 ## Configuration in code with environment.json
 
-If you prefer to keep your environment configuration defined in code, you can commit a `.cursor/environment.json` to your repository.
+If you prefer to keep your environment configuration defined in code, you can commit a `.cursor/environment.json` to your repository. A saved environment uses the file only when its **environment.json location** points at it. See [Environment resolution order](https://cursor.com/docs/cloud-agent/setup.md#environment-resolution-order).
 
 Builds use the configuration from the environment's default branch. For feature branch changes, commit and push the configuration, then start an agent on the branch. Cursor checks out the requested branch on top of the active Build, and the agent can rerun the install command when the branch changes dependencies.
 
@@ -298,7 +300,9 @@ Here is a sample `.cursor/environment.json` referencing a `.cursor/Dockerfile` (
 
 ### Important path behavior
 
-The `dockerfile` and `context` paths in `build` are relative to `.cursor`. When
+The `dockerfile` and `context` paths in `build` are relative to the repository's
+`.cursor` folder, wherever the environment file lives. A path that already
+starts with `.cursor`, such as `.cursor/Dockerfile`, is used as written. When
 you omit `context`, it defaults to `.cursor`. The values `.`, `./`, and `..` are
 special-cased to mean the repository root rather than `.cursor`, so to `COPY`
 files that live in `.cursor` with bare filenames, omit `context`. The `install`

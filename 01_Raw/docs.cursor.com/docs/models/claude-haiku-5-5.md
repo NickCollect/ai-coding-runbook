@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-haiku-5-5
-fetched_at: 2026-10-12T06:49:42.140674+00:00
+fetched_at: 2026-10-19T05:32:45.046298+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Haiku 5.5 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Haiku 5.5 is a third-party model, so it isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#third-party-models). On The X Subscription it's billed at the rates below from your prepaid credit. On legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 Requests up to 100k input tokens bill at $0.10/M input and $0.50/M output. Prompt-cache writes are $0.125/M and cache reads are $0.01/M.
 

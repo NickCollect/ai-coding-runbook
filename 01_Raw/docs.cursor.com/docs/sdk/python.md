@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-10-12T06:49:43.179645+00:00
+fetched_at: 2026-10-19T05:32:46.606488+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1196,9 +1196,9 @@ for run in usage.runs:
 ```python
 @dataclass(frozen=True)
 class AgentUsage:
-    usage: TokenUsage              # summed across `runs`
+    usage: TokenUsage              # total for the agent
     runs: Sequence[RunUsage] = ()
-    cost: UsageCost | None = None  # summed across `runs`
+    cost: UsageCost | None = None  # total for the agent
 
 @dataclass(frozen=True)
 class RunUsage:
@@ -1211,6 +1211,8 @@ class UsageCost:
     raw_cost_cents: float  # undiscounted model token cost; 0 for request-priced usage
     charged_cents: float   # amount charged, discounts and the Cursor Token Fee included
 ```
+
+For a cloud agent called without `run_id`, `usage` and `cost` also count the agent's Task subagents and side chats, so they can be larger than the sum of `runs`. With `run_id`, `usage`, `cost`, and the run's entry also count subagent and side chat usage from when the run started until the agent's next run started, as described in [Get Agent Usage](https://cursor.com/docs/cloud-agent/api/endpoints.md#get-agent-usage).
 
 Cost includes discounts and can take a moment to settle after a run ends; `cost` is `None` until it does. `charged_cents` is `0.0` for plan-included, BYOK, and credit-grant usage.
 

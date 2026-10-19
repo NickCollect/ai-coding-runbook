@@ -1,12 +1,14 @@
 ---
 source_url: https://cursor.com/docs/enterprise/network-configuration
-fetched_at: 2026-10-05T06:27:20.569471+00:00
+fetched_at: 2026-10-19T05:32:44.383074+00:00
 fetch_method: mintlify_md
 ---
 
 # Network Configuration
 
 Cursor needs to communicate with backend services and AI providers. This documentation covers how to configure Cursor to work within your network infrastructure, including proxies, firewalls, and encryption requirements.
+
+To limit which organizations and teams can use Cursor from this network, send the [tenancy restriction header](https://cursor.com/docs/enterprise/tenancy-restriction.md) from your proxy.
 
 ## Proxy configuration
 

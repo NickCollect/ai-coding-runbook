@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/model-and-integration-management
-fetched_at: 2026-10-05T06:27:20.499792+00:00
+fetched_at: 2026-10-19T05:32:44.378742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ Enterprise teams can control which AI models team members can use, [contact sale
 
 Configure model access in two places:
 
-1. **Team Settings → Models** in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) (Enterprise only). From Team Settings, open the **Model Providers** section to manage providers, models, defaults, and personal API key (BYOK) controls. This is the team baseline.
+1. **Team Settings → Models** in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) (Enterprise only). Turn models on or off under **Cursor Models** and **Other Models**, set defaults for new providers and models under **Model Defaults**, and control whether members can use their own API keys under **Personal API Keys (BYOK)**. This is the team baseline.
 2. **Organization → Groups → \[group] → Models**, when you use [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md#model-access). Use this to widen access for specific cohorts.
 
 You can also manage the team baseline programmatically with the [Admin API model access](https://cursor.com/docs/account/teams/admin-api.md#model-access) routes, or across linked teams with the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api.md#model-access).
@@ -41,7 +41,13 @@ See [Models](https://cursor.com/docs/models-and-pricing.md) for the current list
 
 ### Auto-review and model access
 
-[Auto-review](https://cursor.com/docs/agent/security/run-modes.md#run-mode) uses a background classifier that runs on Gemini 3.5 Flash Lite, with [Claude 4.5 Haiku](https://cursor.com/docs/models/claude-4-5-haiku.md) as the fallback. Keep Claude 4.5 Haiku allowed. Blocking it can disable Auto-review in the IDE, even when team Run Modes includes it. See [Auto-review classifier requirements](https://cursor.com/docs/agent/security/run-modes.md#auto-review-model-requirements).
+[Auto-review](https://cursor.com/docs/agent/security/run-modes.md#run-mode) uses a background classifier that runs on [Gemini 3.5 Flash Lite](https://cursor.com/docs/models/gemini-3-5-flash-lite.md), with Haiku as the fallback. Keep Claude 4.5 Haiku allowed. Blocking it can disable Auto-review in the IDE, even when team Run Modes includes it. See [Auto-review classifier requirements](https://cursor.com/docs/agent/security/run-modes.md#auto-review-model-requirements).
+
+Gemini 3.5 Flash Lite is only available in Cursor as a model for Auto-review. For that reason, enabling it for an organization will not make it available for coding agents.
+
+### Bugbot and model access
+
+[Bugbot](https://cursor.com/docs/bugbot.md) reviews only with models your team allows. When your model settings block every model Bugbot can use, the review stops instead of running on a blocked model. On a pull request, the [Bugbot check](https://cursor.com/docs/bugbot.md#ci-check-statuses) finishes as `neutral`.
 
 ## Restrict personal API keys (BYOK controls)
 
@@ -170,7 +176,7 @@ Local command-based (`stdio`) servers run in a sandbox with one of these network
 
 You can prevent Cursor from accessing specific repositories.
 
-Add repository URLs or patterns in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) under "Repository Blocklist" (Enterprise only). Cursor will refuse to index or work with blocked repositories.
+Add repository URLs or patterns in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) under "Repository Blocklist" (Enterprise only). Cursor will refuse to index or work with blocked repositories. This applies to the editor and CLI, not to Cloud Agents, Automations, or Bugbot.
 
 ## Protected Git Scopes
 

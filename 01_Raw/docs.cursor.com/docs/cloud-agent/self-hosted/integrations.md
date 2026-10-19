@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/integrations
-fetched_at: 2026-10-05T06:27:20.053741+00:00
+fetched_at: 2026-10-19T05:32:44.084376+00:00
 fetch_method: mintlify_md
 ---
 
@@ -44,7 +44,7 @@ The platform changes, but the worker requirements stay the same:
 
 - A **Cursor Enterprise plan**, with Self-Hosted Machines enabled by a team admin in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#self-hosted).
 - A [service account API key](https://cursor.com/docs/account/enterprise/service-accounts.md) in `CURSOR_API_KEY`. See [Authenticate workers](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#authenticate-workers).
-- Outbound HTTPS to `api2.cursor.sh`, `api2direct.cursor.sh`, and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com`. See [Networking](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#networking).
+- Outbound HTTPS to `api2.cursor.sh`, `api2direct.cursor.sh`, `agent-stores.s3.us-east-1.amazonaws.com`, and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com`. See [Networking](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#networking).
 - A [pool name](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#pool-names) or [labels](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#labels) so Cursor routes the right requests to workers on that platform.
 
 For a single personal machine instead of a platform-managed fleet, use [My Machines](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md).

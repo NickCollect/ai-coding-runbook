@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/settings
-fetched_at: 2026-10-12T06:49:41.250112+00:00
+fetched_at: 2026-10-19T05:32:44.165719+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,7 +50,7 @@ All security options require admin privileges.
 - **Display agent summary** – controls whether Cursor shows the agent's file-diff images and code snippets. Disable this if you prefer not to expose file paths or code in the sidebar.
 - **Display agent summary in external channels** – extends the previous toggle to Slack or any external channel you've connected.
 - **Team follow-ups** – controls whether team members can send follow-up messages to cloud agents created by other users on the team. See [team follow-ups](https://cursor.com/docs/cloud-agent/settings.md#team-follow-ups) below.
-- **Automatically allow Projects to place their work** – lets agents in a [Project](https://cursor.com/docs/agent/projects.md) start work on any [self-hosted](https://cursor.com/docs/cloud-agent/self-hosted.md) machine or pool the Project owner can reach, without asking first. When it's off, the agent asks for approval in the Project's chat before it uses a new machine or pool. It starts off for Enterprise teams and on for other teams.
+- **Automatically allow Projects to place their work** – lets agents in a [Project](https://cursor.com/docs/agent/projects.md) start work on any [self-hosted](https://cursor.com/docs/cloud-agent/self-hosted.md) machine or pool the Project owner can reach, without asking first. When it's off, the agent asks for approval in the Project's chat before it uses a new machine or pool. It's off by default for every team.
 
 ## Team feature settings
 

@@ -1,15 +1,17 @@
 ---
 source_url: https://cursor.com/docs/models/muse-spark-1-3
-fetched_at: 2026-09-14T05:36:11.054229+00:00
+fetched_at: 2026-10-19T05:32:46.252158+00:00
 fetch_method: mintlify_md
 ---
+
+We recommend using [Muse Wonder](https://cursor.com/docs/models/muse-wonder.md). It's Meta's latest flagship model.
 
 Meta is a new model provider in Cursor. Teams and Enterprise admins who
 configured [model access](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control)
 before Meta was available need to enable the Meta provider before Muse Spark
 1.3 appears for their members.
 
-Muse Spark 1.3 is Meta's flagship model and the first Meta model available in Cursor. It is built for agentic coding: long tool-use chains, multi-step debugging, and large-repository work.
+Muse Spark 1.3 is Meta's previous flagship model and the first Meta model available in Cursor. It is built for agentic coding: long tool-use chains, multi-step debugging, and large-repository work.
 
 ## Strengths
 
@@ -25,7 +27,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Muse Spark 1.3 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Muse Spark 1.3 is a third-party model, so it isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#third-party-models). On The X Subscription it's billed at the rates below from your prepaid credit. On legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 Prompts bill at the base per-token rates above, including in Max Mode above 300k tokens. Cached input is billed at $0.15 per million tokens; there is no long-context multiplier and no cache-write charge.
 

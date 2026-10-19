@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/cursor-composer-1
-fetched_at: 2026-08-31T06:29:33.386935+00:00
+fetched_at: 2026-10-19T05:32:45.277361+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Composer 1 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Composer 1 isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#cursor-models); only Composer 2.5 and the Grok models are. It's billed at the rates below from your prepaid credit, and on legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 
 ---

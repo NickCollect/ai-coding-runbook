@@ -1,62 +1,71 @@
 ---
 source_url: https://cursor.com/docs/account/teams/members
-fetched_at: 2026-10-05T06:27:18.386524+00:00
+fetched_at: 2026-10-19T05:32:42.846064+00:00
 fetch_method: mintlify_md
 ---
 
 # Members, Roles, and Seat Types
 
-Cursor Teams use roles for permissions and seat types for usage limits.
+Cursor Teams use roles for permissions and seat tiers for usage limits.
 
 ## Roles
 
-**Members** are the default role with access to Cursor's Pro features.
+**Members** are the default role with full access to Cursor's paid features.
 
-- Full access to Cursor's Pro features
+- Full access to Cursor's paid features
 - No access to billing settings or admin dashboard
 - Can see their own usage and remaining included usage
 
 **Admins** control team management and security settings.
 
-- Full access to Pro features
+- Full access to Cursor's paid features
 - Add/remove members, modify roles, set up SSO
-- Configure on-demand usage and spending limits
+- Configure top-ups and the team's monthly additional usage limit
 - Access to team analytics
 
 **Unpaid Admins** manage teams without using a paid seat - ideal for IT or finance staff who don't need Cursor access.
 
-- Not billable, no Pro features
+- Not billable, no paid Cursor features
 - Same administrative capabilities as Admins
 
 Unpaid Admins require at least one paid user on the team.
 
-## Seat Types
+## Seat Tiers
 
-Teams offers two paid seat types, plus a free admin-only seat type:
+On [The X Subscription](https://cursor.com/docs/account/teams/pricing.md), Teams offers three paid seat tiers, plus a Free seat. Each paid tier matches the individual plan of the same name in price and weekly usage.
 
-**Standard seats** are for light coding agent users.
+**Premium seats** are for everyday coding agent users.
 
-- $40/user/mo
-- Includes the standard Teams usage allowance
+- $30/user/mo
+- Includes the Premium weekly usage pool
 - Can be assigned to Members or Admins
 
-**Premium seats** are for coding agent power users who need more included usage.
+**Super seats** are for daily agent users who need more included usage.
 
-- $120/user/mo
-- Includes 5x the usage of a Standard seat
+- $100/user/mo
+- Includes the Super weekly usage pool, 3.75x Premium
 - Can be assigned to Members or Admins
 
-**Unpaid Admin seats** are for IT, security, or finance admins who manage Cursor without using it.
+**Ultra seats** are for power users running several agents or Automations.
 
-- Free
-- No Cursor product access or included usage
-- Can only be assigned to Unpaid Admins
+- $200/user/mo
+- Includes the Ultra weekly usage pool, 12.5x Premium
+- Can be assigned to Members or Admins
 
-### Change a seat type
+**Free seats** are for members who don't need a team usage allowance, including IT, security, or finance admins who manage Cursor without using it.
 
-Admins can upgrade a paid user from Standard to Premium from the member context menu. The upgrade takes effect immediately, and billing is adjusted for the rest of the billing cycle.
+- $0/user/mo
+- No team usage allowance. The member's usage draws from their own personal plan, or the small free allowance if they have none
+- Any Member or Admin can hold a Free seat
+- Assigned through email invites or the Seat menu, not invite links
 
-Admins can downgrade a paid user from Premium to Standard from the member context menu. The user keeps Premium through the end of the current billing cycle, then moves to Standard at the next renewal.
+Teams created before The X Subscription use **Standard** ($40/user/mo) and **Premium** ($120/user/mo, 5x Standard) seats instead. Those teams keep their seat types until they switch. See [Legacy Teams seats](https://cursor.com/docs/account/teams/pricing.md#legacy-teams-seats).
+
+### Change a seat tier
+
+Admins change a paid user's seat tier from the member context menu, or from the **Seat** menu next to their name under **Members** at [grok.com/dashboard](https://grok.com/dashboard).
+
+Upgrades take effect immediately, and the team's card is charged the pro-rated difference for the rest of the billing period. Downgrades apply at the end of the billing period; until then, the user keeps their current tier, and you can pick it again to cancel the change.
 
 ## Role Comparison
 
@@ -157,10 +166,12 @@ Domain verification is required to enable SSO.
 
 Access usage settings to:
 
-- Enable on-demand usage
+- Buy prepaid credit and turn on Auto Top-up
+- Set the team's monthly additional usage limit, the default per-member limit, and per-member overrides
 - Set admin-only modifications
-- Set monthly spending limits
 - Monitor team-wide usage
+
+On legacy Teams plans, the same settings cover on-demand usage and the team spend limit. See [Spend limits](https://cursor.com/help/account-and-billing/spend-limits.md).
 
 ## Billing
 
@@ -170,7 +181,7 @@ When adding team members:
 - New members are charged pro-rata for their remaining time in the billing period
 - Unpaid admin seats aren't counted
 
-Mid-month additions charge only for days used. The seat price depends on whether the user has a Standard or Premium seat. When removing members who have used credits, their seat remains occupied until the end of the billing cycle.
+Mid-month additions charge only for days used. The seat price depends on the user's seat tier. When removing members who have used credits, their seat remains occupied until the end of the billing cycle.
 
 Role changes (e.g., Admin to Unpaid Admin) adjust billing from the change date. Choose monthly or yearly billing.
 

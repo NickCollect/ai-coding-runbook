@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/canvas
-fetched_at: 2026-09-14T05:36:05.153772+00:00
+fetched_at: 2026-10-19T05:32:43.193372+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 Canvases let Cursor create interactive artifacts that render next to the chat. Instead of scrolling through a long markdown table or code block, you get a standalone view, laid out with sections, stats, and tables, that you can reopen, edit, and iterate on.
 
-Ask agents for a dashboard, analysis, audit, or report, and Cursor opens the result in a canvas when that is a better fit.
+Ask agents for a dashboard, analysis, audit, or report, and Cursor opens the result in a canvas when that is a better fit. [Cloud agents](https://cursor.com/docs/cloud-agent.md) can also build canvases as part of their work.
 
 ## How it works
 
@@ -31,7 +31,7 @@ Sharing a canvas gives teammates a link to a live snapshot of the view: same lay
 
 The **Shared Canvases** page on the [dashboard](https://cursor.com/dashboard/shared-canvases) lists the canvases you published yourself, so you can reopen, copy, or delete your own shares. It does not list canvases published by teammates. To open a teammate's canvas, ask them for its share link.
 
-Shared canvases are available on paid plans (Pro, Teams, and Enterprise). Free accounts cannot create shares. Because only members of your team can open a share, you need to be on a team; Pro users on a team can share too. Sharing also requires a privacy mode that allows data storage (Legacy Privacy Mode blocks it).
+Shared canvases are available on paid plans (Premium and higher, Teams, Enterprise, and legacy Pro, Pro+, and Ultra). Free accounts cannot create shares. Because only members of your team can open a share, you need to be on a team; members on an individual paid plan who also belong to a team can share too. Sharing also requires a privacy mode that allows data storage (Legacy Privacy Mode blocks it).
 
 Team admins can turn shared canvases off for the organization from [team settings](https://cursor.com/dashboard/settings#shared-canvases) under **Shared Canvases**.
 

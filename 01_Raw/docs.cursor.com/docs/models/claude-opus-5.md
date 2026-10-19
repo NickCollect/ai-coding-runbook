@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-5
-fetched_at: 2026-09-28T06:10:43.616839+00:00
+fetched_at: 2026-10-19T05:32:45.192449+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Claude Opus 5 is Anthropic's previous Opus model and replaces Opus 4.8. It is a 
 ## Limitations
 
 - Costs more than [Opus 5.5](https://cursor.com/docs/models/claude-opus-5-5.md) per token ($5/$25 vs $4/$20) while scoring lower on CursorBench.
-- Same per-token price as Opus 4.8, so it still consumes the Other Models pool faster than Sonnet or Composer.
+- Same per-token price as Opus 4.8, so it still uses prepaid credit (or the Other Models pool on legacy Cursor plans) faster than Sonnet or Composer.
 - Can over-elaborate in long sessions where brevity matters more than depth.
 
 ## Tools
@@ -29,7 +29,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 5 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Opus 5 is a third-party model, so it isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#third-party-models). On The X Subscription it's billed at the rates below from your prepaid credit. On legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 A **Fast mode** tier (`claude-opus-5-fast`) is available at launch for higher-priority output. On legacy request-based plans, it requires Max Mode. It bills at $10/M input and $50/M output tokens. Use it selectively for time-sensitive or critical work.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-fable-5-1
-fetched_at: 2026-09-28T06:10:43.379332+00:00
+fetched_at: 2026-10-19T05:32:45.048742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -59,7 +59,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Fable 5.1 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Fable 5.1 is a third-party model, so it isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#third-party-models). On The X Subscription it's billed at the rates below from your prepaid credit. On legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 Fable 5.1 bills at $10 per million input tokens and $50 per million output tokens, the same as Fable 5. Prompt-cache reads are $0.25 per million tokens, 75% below Fable 5's $1.00 cache-read rate. Cache writes stay at $12.50 per million tokens.
 

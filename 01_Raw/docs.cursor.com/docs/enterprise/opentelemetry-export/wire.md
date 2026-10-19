@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export/wire
-fetched_at: 2026-10-05T06:27:20.547673+00:00
+fetched_at: 2026-10-19T05:32:44.414072+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,7 +40,7 @@ Family ids match the toggles in Team Settings. All default on for a new destinat
 | `model_usage`            | metrics + logs | On                                                   | `token.usage`, `cost.usage`; `api.request`, `api.error`, `api.correction`                                                                                                                                                                                                                        |
 | `tool_calls`             | metrics        | On                                                   | `tool.calls`                                                                                                                                                                                                                                                                                     |
 | `skills_hooks_plugins`   | logs           | On                                                   | `skill.activated` (every surface, Grok Bot included), `hook.execution_complete`, `plugin.installed`                                                                                                                                                                                              |
-| `cloud_agents`           | logs           | On                                                   | `cloud_agent.pull_request`, `cloud_agent.setup`, `cloud_agent.artifact`, `cloud_agent.mcp_auth_error`                                                                                                                                                                                            |
+| `cloud_agents`           | logs           | On                                                   | Every `cloud_agent.*` event                                                                                                                                                                                                                                                                      |
 | `grok_bot_agent_actions` | logs           | On (needs Action Recording)                          | `grok_bot.mcp_tool_call`, `grok_bot.shell_command`, `grok_bot.browser_navigation`, `grok_bot.computer_use_session`, `grok_bot.tool_result`, `grok_bot.tool_decision`, `grok_bot.file_transfer`, `grok_bot.message_delivery`, `grok_bot.routine_run`, `grok_bot.guardrail`, `grok_bot.delegation` |
 | `conversation_content`   | logs           | **Off** (team opt-in + per-kind destination toggles) | `conversation.user_message`, `conversation.assistant_message`, `conversation.tool_io`                                                                                                                                                                                                            |
 
@@ -164,15 +164,16 @@ INFO, body `plugin_installed`. Family `skills_hooks_plugins`. No `conversation.i
 
 ### `cursor.cloud_agent.pull_request`
 
-INFO (`opened`) / WARN (`creation_failed`), body `cloud_agent_pull_request_<kind>`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+INFO (`opened` / `merged` / `closed`) / WARN (`creation_failed`), body `cloud_agent_pull_request_<kind>`. Family `cloud_agents`. `conversation.id` = `bc-...`.
 
-| Attribute                                | Type   | Presence      | Values / notes                |
-| ---------------------------------------- | ------ | ------------- | ----------------------------- |
-| `cursor.cloud_agent.pull_request.kind`   | string | Always        | `opened` \| `creation_failed` |
-| `cursor.cloud_agent.pull_request.number` | int    | `opened` only |                               |
-| `cursor.cloud_agent.pull_request.draft`  | bool   | `opened` only |                               |
+| Attribute                                | Type   | Presence                                                             | Values / notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ---------------------------------------- | ------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.cloud_agent.pull_request.kind`   | string | Always                                                               | `opened` (the agent created a pull request, including through an automation's open-PR action; linking a pull request that already existed exports nothing) \| `merged` \| `closed` (closed without merging) \| `creation_failed` (the agent tried to open a pull request and creation failed). `merged` and `closed` come from the forge's webhook for a pull request linked to the agent's run                                                                                             |
+| `cursor.cloud_agent.pull_request.number` | int    | `opened`, `merged`, `closed`                                         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `cursor.cloud_agent.pull_request.draft`  | bool   | `opened` only                                                        | Draft state at creation                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `vcs.repository.url`                     | string | Optional on `opened`, `merged`, `closed`; never on `creation_failed` | The repository the pull request lives in, as `https://<host>[:port]/<path>`. For a multi-repo agent, it isn't necessarily the agent's primary repository. Credentials, query, fragment, and a trailing `.git` are stripped, the host and path are lowercased, and SSH forms (`git@host:path`, `ssh://`) are rewritten to `https`. Absent when the run has no repository URL or it does not normalize. An OpenTelemetry VCS semantic-convention name, outside the `cursor.` namespace (open) |
 
-`creation_failed` is live. `opened` may be sparse while the producer rolls out.
+`cursor.event.id` on `opened`, `merged`, and `closed` is deterministic per agent, repository, pull request number, and kind, so a redelivered webhook or a retried creation dedupes. A pull request closed, reopened, and closed again carries the same `closed` id both times. Branch names, the pull request URL, and the head SHA are not exported.
 
 ### `cursor.cloud_agent.setup`
 
@@ -183,6 +184,20 @@ INFO (`started` / `completed`) / ERROR (`failed`), body `cloud_agent_setup_<kind
 | `cursor.cloud_agent.setup.kind`        | string | Always                      | `started` \| `completed` \| `failed`            |
 | `cursor.cloud_agent.setup.duration_ms` | int    | Terminal kinds when present | `completed` / `failed`                          |
 | `cursor.cloud_agent.setup.reason`      | string | `failed` only               | Open vocabulary (e.g. `install_command_failed`) |
+
+### `cursor.cloud_agent.commit`
+
+INFO, body `cloud_agent_commit`. Family `cloud_agents`. `conversation.id` = `bc-...`.
+
+One record per commit a cloud agent pushed to its branch, emitted when GitHub's push webhook first records the commit for the agent. Only GitHub repositories emit, on github.com and GitHub Enterprise. Agents working in GitLab, Bitbucket, or other hosted repositories produce no commit records. Merge commits, branch-sync commits, and commits already on the repository's default branch don't emit, and neither do commits made locally in the IDE or CLI. `cursor.event.id` is derived from the repository and the SHA, so a redelivered push of the same commit carries the same id. Branch names and commit messages are not exported.
+
+| Attribute                     | Type   | Presence | Values / notes                                                                                                                                                                                                                                                     |
+| ----------------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `vcs.ref.head.revision`       | string | Always   | The full commit SHA. An OpenTelemetry VCS semantic-convention name, outside the `cursor.` namespace                                                                                                                                                                |
+| `vcs.repository.url`          | string | Always   | The agent's repository as `https://<host>[:port]/<owner>/<repo>`. Credentials, query, fragment, and a trailing `.git` are stripped, the host and path are lowercased, and SSH forms are rewritten to `https`. An OpenTelemetry VCS semantic-convention name (open) |
+| `cursor.commit.files_changed` | int    | Always   | Files the commit touched                                                                                                                                                                                                                                           |
+| `cursor.commit.lines_added`   | int    | Optional | Present exactly when `lines_removed` is. Counts come from GitHub's per-file diff stats for the commit. Both are absent when that lookup fails or returns no files, because the push payload's file lists carry no line counts                                      |
+| `cursor.commit.lines_removed` | int    | Optional | Present exactly when `lines_added` is                                                                                                                                                                                                                              |
 
 ### `cursor.cloud_agent.artifact`
 
@@ -202,6 +217,23 @@ An MCP server you connected rejected the run's credentials. That server's tool c
 | Attribute                | Type   | Presence | Values / notes                                                                                                               |
 | ------------------------ | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `cursor.mcp.server.name` | string | Always   | Customer-defined server display name (open), e.g. `github`. Same value space as the `cursor.tool.calls` datapoint attribute. |
+
+### `cursor.cloud_agent.review_followup`
+
+INFO, body `cloud_agent_review_followup`. Family `cloud_agents`. `conversation.id` = `bc-...`, the agent that runs the follow-up.
+
+A review signal started a cloud agent run on an existing pull request. Two signals produce it today. A pull request comment, review, or review comment that mentions Cursor follows up on the pull request's active agent, or starts a new agent when none can take it. [Bugbot Autofix](https://cursor.com/docs/bugbot.md#autofix) starts an agent to fix Bugbot findings. One record per started run. No comment, review, or finding text is exported.
+
+| Attribute                       | Type      | Presence              | Values / notes                                                                                                                                                                                                                  |
+| ------------------------------- | --------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cursor.review.source`          | string    | Always                | `github_comment` \| `bugbot_autofix` \| `slack` \| `linear` (`slack` and `linear` are reserved, not emitted today)                                                                                                              |
+| `vcs.repository.url`            | string    | Always                | The http(s) repository URL with no credentials, query, fragment, trailing slash, or `.git` suffix, and with the host and path lowercased. An OpenTelemetry VCS semantic-convention name, outside the `cursor.` namespace (open) |
+| `vcs.change.id`                 | string    | Always                | The pull request number, in decimal. An OpenTelemetry VCS semantic-convention name                                                                                                                                              |
+| `cursor.parent.conversation.id` | string    | Optional              | The `bc-...` id of the same team's cloud agent that opened the pull request (the earliest agent recorded against it). Absent when none is recorded, or when it is the agent in `cursor.conversation.id`                         |
+| `cursor.review.comment.id`      | string    | `github_comment` only | The forge's id for the triggering comment, or for the review when a review submission triggered the run (open)                                                                                                                  |
+| `cursor.bugbot.finding.id`      | string\[] | `bugbot_autofix` only | One entry per Bugbot finding the run was started to fix (open)                                                                                                                                                                  |
+
+The resource carries `cursor.entrypoint=github_pr` for `github_comment` and `unspecified` otherwise.
 
 ### Shared `grok_bot.*` attributes
 

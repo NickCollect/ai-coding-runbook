@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/identity
-fetched_at: 2026-09-14T05:36:06.969920+00:00
+fetched_at: 2026-10-19T05:32:43.955353+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,8 @@ https://cursor.com/docs/cloud-agent/identity
 This API is local to the machine running the agent. It is unrelated to the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md), which uses Cursor API keys and manages agents from outside that machine. On a Cursor-managed VM, this socket also serves [agent metadata](https://cursor.com/docs/cloud-agent/metadata.md).
 
 Cursor-managed Cloud Agent VMs serve the token socket. Every token they mint carries `agent_runtime: managed`. [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md) workers serve it when you start them with `--identity-socket`. Their tokens carry `agent_runtime: self_hosted`. See [Self-hosted workers](https://cursor.com/docs/cloud-agent/identity.md#self-hosted-workers).
+
+Team Pool controllers can also get a token in the claim response, before any worker starts. See [Claim tokens](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens).
 
 ## How it works
 
@@ -112,6 +114,8 @@ Publish these URLs to your identity provider or resource server:
 | Discovery | `https://api.cursor.com/.well-known/openid-configuration` |
 | JWKS      | `https://api.cursor.com/keys`                             |
 
+[Claim tokens](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens) use a different issuer.
+
 ```bash
 curl -sS https://api.cursor.com/.well-known/openid-configuration
 curl -sS https://api.cursor.com/keys
@@ -141,7 +145,7 @@ Header: `alg=RS256`, `typ=JWT`, plus `kid`.
 
 | Claim                      | Always present        | Description                                                                                                                                                                                                                  |
 | :------------------------- | :-------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `iss`                      | Yes                   | `https://api.cursor.com`                                                                                                                                                                                                     |
+| `iss`                      | Yes                   | `https://api.cursor.com`, or `https://api.cursor.com/self-hosted/claims` on [claim tokens](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens).                                                                    |
 | `sub`                      | Yes                   | Stable owner subject: `user:<id>` or `service_account:<id>` by default, or `<claim>:<value>` (for example `team_id:123`) when the mint request set `sub_claim`. Not an email.                                                |
 | `aud`                      | Yes                   | Audience from the mint request.                                                                                                                                                                                              |
 | `iat`                      | Yes                   | Issued-at, Unix seconds.                                                                                                                                                                                                     |
@@ -151,6 +155,7 @@ Header: `alg=RS256`, `typ=JWT`, plus `kid`.
 | `cloud_agent_id`           | Yes                   | Cloud Agent id (`bcId`).                                                                                                                                                                                                     |
 | `nonce`                    | No                    | Present only when the mint request included one.                                                                                                                                                                             |
 | `agent_runtime`            | Yes                   | `managed` on Cursor-managed Cloud Agent VMs, `self_hosted` on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/identity.md#self-hosted-workers) workers.                                                           |
+| `worker_id`                | Self-hosted only      | Id of the self-hosted worker: the worker serving the socket, or the `workerId` of a [claim](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens).                                                                   |
 | `owner_email`              | When known            | Lowercased user email. Prefer `sub` or `owner_user_id` for allowlists; email can change.                                                                                                                                     |
 | `owner_user_id`            | When known            | Cursor user id, as a decimal string.                                                                                                                                                                                         |
 | `owner_service_account_id` | When known            | Service account id when a service account owns the agent.                                                                                                                                                                    |
@@ -167,6 +172,81 @@ Header: `alg=RS256`, `typ=JWT`, plus `kid`.
 
 `repo_url` is the primary repository. To confine an agent to specific repositories, pin the complete set with `repo_urls`.
 
+## Claim tokens
+
+A [Team Pool controller](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#build-your-own-controller) can get a token when it [claims a pending request](https://cursor.com/docs/cloud-agent/api/endpoints.md#claim-a-pending-request), before any worker starts. The token tells your systems which agent and owner the claim is for, so you can check both before you create the machine or give it credentials. The controller requests it with its service account API key. No socket is involved. The built-in controller requests one on every claim with [`--identity-audience`](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#identity-tokens).
+
+### Request a claim token
+
+Add `identityToken` to the claim body. `audience` is required. Send a fresh `nonce` with every claim.
+
+```bash
+curl --request POST \
+  --url "https://api.cursor.com/v0/private-workers/claim" \
+  -u "$CURSOR_API_KEY:" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": "bc-00000000-0000-0000-0000-000000000002",
+    "workerId": "pw_123",
+    "identityToken": {
+      "audience": "https://provisioner.example.com",
+      "nonce": "3f9c1e7a-claim-pw_123"
+    }
+  }'
+```
+
+The response carries the JWT in `identityToken.token`:
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000002",
+  "workerId": "pw_123",
+  "identityToken": {
+    "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii4uLiJ9...",
+    "expiresAt": "2026-10-02T21:05:00.000Z"
+  }
+}
+```
+
+Claim tokens are valid for **5 minutes**, and `expiresAt` matches the JWT `exp` claim. If Cursor can't issue the token, nothing is claimed. [Claim A Pending Request](https://cursor.com/docs/cloud-agent/api/endpoints.md#claim-a-pending-request) lists the field limits, the error codes, and what to do when a claim response is lost.
+
+### Claim token issuer
+
+Claim tokens have their own issuer. Tokens minted on the socket keep `https://api.cursor.com`. Both issuers publish the same JWKS.
+
+| Endpoint  | URL                                                                          |
+| :-------- | :--------------------------------------------------------------------------- |
+| Issuer    | `https://api.cursor.com/self-hosted/claims`                                  |
+| Discovery | `https://api.cursor.com/self-hosted/claims/.well-known/openid-configuration` |
+| JWKS      | `https://api.cursor.com/keys`                                                |
+
+The claim discovery document lists the same `claims_supported` as the root document. Its `x_cursor_sub_claims_supported` is empty because claim requests take no `sub_claim`.
+
+A verifier or identity provider set up for `https://api.cursor.com`, such as the [AWS IAM example](https://cursor.com/docs/cloud-agent/identity.md#aws-iam-example), rejects claim tokens. Add the claim issuer only to the services that should accept them.
+
+Claim tokens carry the same [JWT claims](https://cursor.com/docs/cloud-agent/identity.md#jwt-claims) as socket tokens, with these differences:
+
+- `iss` is `https://api.cursor.com/self-hosted/claims`.
+- `agent_runtime` is `self_hosted`.
+- `worker_id` is the `workerId` from the claim.
+- `sub` and the owner claims name the agent's owner, not the service account that made the claim. `sub` is always `user:<id>` or `service_account:<id>`.
+
+### Verify a claim token
+
+Check at least:
+
+- Signature with RS256 and the JWKS `kid`
+- `iss` is `https://api.cursor.com/self-hosted/claims`
+- `aud` is the audience you sent
+- `nbf` / `exp` with a small clock-skew allowance
+- `nonce` is the value you sent with this claim
+- `cloud_agent_id` is the claimed `id`, and `worker_id` is the claimed `workerId`
+- `team_id` is your team
+
+Identify the user by `sub` or `owner_user_id`, not `owner_email`. Email can change.
+
+Cursor doesn't track whether a token was used. To make each token single-use, store its `jti` (or your nonce) and reject a repeat until the token expires.
+
 ## Trust model
 
 The token identifies the Cloud Agent run, not a specific process on the machine. Any process that can reach the socket can mint a token: the agent, code it runs, and hooks. Scope permissions to what you would grant that run as a whole.
@@ -174,6 +254,8 @@ The token identifies the Cloud Agent run, not a specific process on the machine.
 You don't choose which agent the token is for. Cursor fills claims from this run, so a process on the machine can't mint a token for a different agent.
 
 On a self-hosted worker, the agent and the worker process run as the same OS user. Any process running as that user can mint a token for the claimed run. Scope the role to what you would grant that user on the machine.
+
+A [claim token](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens) names the claimed agent and its owner. Anyone holding the pool's service account key can claim the team's pending requests within the key's repository scope and get a token naming the teammate who started each one. Keep the key on the controller, and accept claim tokens only for an audience you expect.
 
 ## Rate limits and errors
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security/run-modes
-fetched_at: 2026-10-12T06:49:40.309592+00:00
+fetched_at: 2026-10-19T05:32:43.191192+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,11 +42,13 @@ The classifier can make mistakes. It can allow a call you would have blocked, or
 
 ### Auto-review classifier requirements
 
-Auto-review's classifier runs on small Cursor-managed models. Today it uses Gemini 3.5 Flash Lite, with [Claude 4.5 Haiku](https://cursor.com/docs/models/claude-4-5-haiku.md) as the fallback.
+Auto-review's classifier runs on small Cursor-managed models. Today it uses [Gemini 3.5 Flash Lite](https://cursor.com/docs/models/gemini-3-5-flash-lite.md), with Haiku as the fallback.
 
 Enterprise [model access controls](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) apply to both. Keep Claude 4.5 Haiku allowed for the team. Allowing it keeps Auto-review available in **Settings > Agents > Approvals & Execution**, and Auto-review uses it for every review when Gemini 3.5 Flash Lite is blocked. Blocking Claude 4.5 Haiku can disable Auto-review there, even when team Run Modes includes it. Members then use Allowlist instead.
 
 If Auto-review is grayed out, enable Claude 4.5 Haiku in [Team Settings → Models](https://cursor.com/dashboard/team-settings/models), fully quit and reopen Cursor, then check Approvals & Execution again.
+
+Gemini 3.5 Flash Lite is only available in Cursor as a model for Auto-review. For that reason, enabling it for an organization will not make it available for coding agents.
 
 ### Configuring Auto-review
 

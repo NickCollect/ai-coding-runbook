@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/gitlab
-fetched_at: 2026-10-05T06:27:20.903094+00:00
+fetched_at: 2026-10-19T05:32:44.648166+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,6 +35,7 @@ GitLab Self-Hosted requires a [Teams](https://cursor.com/docs/account/teams/pric
 ### Networking
 
 - GitLab self-hosted requires secure inbound access from Cursor and outbound access for webhook notifications.
+- Your instance's OAuth token endpoint (`/oauth/token`) and token check (`/api/v4/personal_access_tokens/self`) can redirect only within the same scheme, host, and port, for up to 5 redirects. Cursor refuses any other redirect, and the request fails.
 - You need admin privileges on your GitLab instance to create the application.
 
 #### IP whitelisting (recommended)
@@ -97,27 +98,27 @@ Go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations)
 
 ## Advanced networking
 
-Self-hosted instances support multiple connection methods beyond IP whitelisting.
+Self-hosted instances support multiple connection methods beyond IP whitelisting. For setup details and supported private networking options, see [Private Connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md).
 
-### AWS PrivateLink or Cloudflare Tunnel
+### AWS PrivateLink
 
-Available for Enterprise customers. Allow Cursor to access your instance over a private network connection. See [Private Connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md) or [contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-private-network) for setup.
+Available for Enterprise customers. Use AWS PrivateLink when your GitLab instance is in AWS or can sit behind an AWS Network Load Balancer. PrivateLink can cover Cursor accessing GitLab and, when needed, GitLab sending webhooks back to Cursor without public internet egress.
 
-**Best for:** Instances behind a firewall on a private network, including AWS-hosted instances and environments that can run `cloudflared`
+**Best for:** AWS-hosted GitLab instances and teams that want private VPC endpoint connectivity
 
-**Security:** HTTPS encryption, AWS PrivateLink, Cloudflare Tunnel, VPC allowlisting, service account access tokens
+**Security:** HTTPS encryption, AWS PrivateLink, VPC endpoint policies, service account access tokens
 
-**Drawbacks:** Requires coordination with Cursor. Google Private Service Connect is not currently supported.
+**Drawbacks:** Requires coordination with Cursor and AWS endpoint service setup.
 
-### Reverse Proxy Tunnel
+### Cloudflare Tunnel
 
-Available for Enterprise customers. Run a reverse proxy tunnel on-premises that establishes a long-lived websocket connection to Cursor's servers. Network requests are forwarded through to your instance. Requires no inbound network access. [Contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-on-prem-proxy) for setup.
+Available for Enterprise customers. Use Cloudflare Tunnel when AWS PrivateLink is not practical or when you need an outbound-only deployment model. Cursor creates and owns the tunnel, and provides the hostname and token. You run `cloudflared` outbound from your network. You do not need a Cloudflare account or contract.
 
 **Best for:** Environments without inbound network access
 
-**Security:** HTTPS encryption, service account access tokens
+**Security:** HTTPS encryption, Cloudflare Tunnel, service account access tokens
 
-**Drawbacks:** Introduces additional complexity, maintenance requirements, and potential security considerations compared to more direct connection methods
+**Drawbacks:** Requires running and maintaining `cloudflared` in your environment.
 
 ## Protected Git Scopes
 

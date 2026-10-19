@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/projects
-fetched_at: 2026-10-12T06:49:40.229390+00:00
+fetched_at: 2026-10-19T05:32:43.101729+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 A Project takes on a larger body of work, such as a feature, a migration, or a full app. You direct it by chatting with its coordinator agent. The coordinator doesn't write code itself. It plans the work, delegates it to [agents](https://cursor.com/docs/agent/overview.md) that write the code, and brings the finished work back to you to check. Projects live in the left-hand nav of the [Agents Window](https://cursor.com/docs/agent/agents-window.md) and run on [Cloud Agents](https://cursor.com/docs/cloud-agent.md).
 
-Projects is available on all paid plans, including Enterprise. Enterprise teams need Cursor 3.21.9 or later. Projects isn't available on the free Hobby plan, which doesn't include Cloud Agents. It also isn't available with Privacy Mode (Legacy), because Projects run on Cloud Agents, which store code in the cloud while they run.
+Projects is available on every plan that includes Cloud Agents: Premium and higher, Teams, Enterprise, and legacy paid Cursor plans. Enterprise teams need Cursor 3.21.9 or later. Projects isn't available on Free, Plus, or the legacy Hobby plan, which don't include Cloud Agents. It also isn't available with Privacy Mode (Legacy), because Projects run on Cloud Agents, which store code in the cloud while they run.
 
 ## How a Project works
 

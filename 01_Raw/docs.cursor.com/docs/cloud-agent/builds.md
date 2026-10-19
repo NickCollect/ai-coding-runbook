@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/builds
-fetched_at: 2026-10-05T06:27:19.678729+00:00
+fetched_at: 2026-10-19T05:32:43.868753+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,6 +32,8 @@ If a new Build fails, agents continue to use the last successful Build. A broken
 
 Builds are for Cursor-hosted Cloud Agents. Runs on [Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted.md#environments-on-self-hosted-machines) start on your machine as is and never boot a Build.
 
+Builds are turned off for teams that [require Self-Hosted Machines](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#triggering-pool-agents), because Builds run on Cursor-hosted machines. Cursor doesn't build the team's environments or the personal environments of its members. The Builds tab says environment builds are turned off and doesn't offer **Trigger build**. Saving an environment snapshot is refused for the same teams and members, and from any run on a Self-Hosted Machine.
+
 ## When Builds occur
 
 Cursor starts a Build for four reasons. The Builds tab labels each one with its trigger type.
@@ -49,9 +51,9 @@ Cursor regularly checks each environment and rebuilds it when something changed.
 
 ### Skipped Builds
 
-A recurring check skips the Build when nothing changed since the last completed one: no new commits on the default branch of any repository in the environment, and no configuration or secret changes. The Builds tab records these checks with a **Skipped** status. They complete in seconds, run no install commands, and leave the active Build in place.
+A recurring check skips the Build when nothing changed since the last completed one: no new commits on the default branch of any repository in the environment, and no configuration or secret changes. A skipped check runs no install commands and leaves the active Build in place. It doesn't appear in the Builds tab.
 
-A steady stream of Recurring entries mixing Skipped and Success statuses is the expected state for a healthy environment. Quiet repositories produce mostly Skipped entries. Active repositories rebuild more often.
+Quiet repositories show few Recurring Builds. Active repositories rebuild more often.
 
 Cursor only skips recurring Builds. Manual, agent-requested, and configuration-change Builds always run.
 
@@ -129,7 +131,7 @@ You can also start an agent from a specific Build when testing or debugging.
 
 ### What happens before the first successful Build?
 
-Agents use the standard environment startup flow until the first Build completes successfully. A failed Build doesn't interrupt existing agent workflows.
+Until an environment has a successful Build, agents start on Cursor's default image without the environment's setup, such as its snapshot, Dockerfile, or `install` command. A failed Build doesn't interrupt existing agent workflows.
 
 ### How fresh is the source code?
 

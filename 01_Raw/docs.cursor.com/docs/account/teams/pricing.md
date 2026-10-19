@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/account/teams/pricing
-fetched_at: 2026-10-12T06:49:40.006592+00:00
+fetched_at: 2026-10-19T05:32:42.873251+00:00
 fetch_method: mintlify_md
 ---
 
 # Team Pricing
 
-There are two business plans: Teams and Enterprise (Custom). Teams offers two types of seats: Standard ($40/user/mo) and Premium (5x usage at $120/user/mo).
+There are two business plans: Teams and Enterprise (Custom). On [The X Subscription](https://cursor.com/docs/models-and-pricing.md), Teams is priced per seat, and each seat is Premium ($30/user/mo), Super ($100/user/mo), or Ultra ($200/user/mo), the same prices and weekly usage as the matching individual plans.
 
 Team plans provide additional features like:
 
@@ -15,55 +15,51 @@ Team plans provide additional features like:
 - Agentic code reviews with Bugbot
 - Cloud agents and automations with shared team context
 - Usage analytics to understand team behavior
-- Team-wide privacy mode enforcement
+- Team-wide privacy mode enforcement and custom Chat data retention
 - SAML/OIDC SSO
 
 We recommend Teams for any customer that is happy self-serving. We recommend [Enterprise](https://cursor.com/docs/enterprise.md) for customers that need priority support, pooled usage, invoicing, SCIM, or advanced security controls. [Contact sales](https://cursor.com/contact-sales?source=docs-teams-pricing) to get started.
 
+Teams created before The X Subscription use Standard ($40/user/mo) and Premium ($120/user/mo) seats with two monthly usage pools and on-demand usage. Those teams keep working as they are. See [Legacy Teams seats](https://cursor.com/docs/account/teams/pricing.md#legacy-teams-seats).
+
 ## How pricing works
 
-Teams pricing is based on paid seats and usage. Each paid seat includes monthly usage, and you can continue using Cursor beyond that with on-demand usage.
+Teams pricing is based on paid seats and usage. Each paid seat includes weekly usage for Cursor models, and the team shares a prepaid balance for usage beyond that.
 
-### Seat types
+### Seat tiers
 
-Teams has two paid seat types and one free admin-only seat type:
+Teams has three paid seat tiers and one free seat:
 
-- **Standard**: $40/user/mo with the standard Teams usage allowance
-- **Premium**: $120/user/mo with 5x the usage of a Standard seat
-- **Free**: $0/user/mo for Unpaid Admins who manage the team without Cursor access
+- **Premium**: $30/user/mo with the Premium weekly usage pool
+- **Super**: $100/user/mo with the Super weekly usage pool, 3.75x Premium
+- **Ultra**: $200/user/mo with the Ultra weekly usage pool, 12.5x Premium
+- **Free**: $0/user/mo. Any Member or Admin can hold a Free seat. It has no team usage allowance; the member's usage draws from their own personal plan, or the small free allowance if they have none. Free seats are assigned through email invites or the Seat menu, not invite links
 
-Seat type is separate from role. Members and Admins can have either a Standard or Premium seat. Unpaid Admins don't use a paid seat.
+Seat tier is separate from role. Members and Admins can have any seat tier, and one team can mix tiers, for example three Premium seats and one Super seat. Plus isn't available for teams.
 
 ### Included usage
 
-Each paid seat comes with included usage across two pools:
+Each paid seat has its own weekly pool for Cursor models (Grok 4.7, Grok 4.6, Grok 4.5, and Composer 2.5), shared across Cursor and Grok for that person. Seats don't share weekly pools with each other, and usage doesn't transfer between team members. The pool refreshes weekly.
 
-- Cursor Models (Grok 4.7, Grok 4.6, Grok 4.5, and Composer 2.5)
-- Other Models (third-party models)
+Third-party models aren't included. They're billed at public list API prices plus the Cursor Token Rate, paid from the team's prepaid balance from the first request. This includes when Cursor Router (Balance or Intelligence) routes to a third-party model. Cost mode requests and Cursor models, including Grok and Composer, are exempt from the Cursor Token Rate.
 
-Usage is allocated per user based on seat type, does not transfer between team members, and resets at the start of each billing cycle. Third-party Other Models usage is charged at public list API prices plus the Cursor Token Rate. This includes when Auto routes to a third-party model. Cursor Models, including Grok and Composer, are exempt from the Cursor Token Rate.
-
-The [usage dashboard](https://cursor.com/dashboard/usage) tracks included usage separately for:
-
-- Cursor Models
-- Other Models (third-party models)
+Admins can see team usage under **Usage** at [grok.com/dashboard](https://grok.com/dashboard) and per-member spend through the [Admin API](https://cursor.com/docs/account/teams/admin-api.md).
 
 Our [Enterprise plan](https://cursor.com/docs/enterprise.md) offers pooled usage shared between all users in a team. [Get in touch](https://cursor.com/contact-sales?source=docs-teams-pricing) with our team to learn more.
 
-### On-demand usage
+### Additional usage and top-ups
 
-On-demand usage allows you to continue using models after included usage is consumed, billed in arrears.
+Additional usage is any third-party model usage, plus any Cursor model usage after a seat's weekly pool runs out. It's paid from a prepaid balance the whole team shares.
 
-When a team member consumes all of their included third-party Other Models usage, Cursor switches them to the Cursor Models pool. If they continue using third-party Other Models, or if they fully consume their Cursor Models pool usage, they continue with **on-demand usage** if it is enabled.
-
-- Third-party models are billed monthly at public list API prices plus the Cursor Token Rate
-- First-party Cursor models, including Grok and Composer, are billed monthly at their token rates with no Cursor Token Rate
-- All Auto modes bill at the list price of the model each request is routed to. Third-party models also incur the Cursor Token Rate
+- Admins buy credit with one-time top-ups, or turn on **Auto Top-up** to refill the balance when it drops below a threshold
+- Third-party models are billed at public list API prices plus the Cursor Token Rate
+- Cursor models beyond the weekly pool are billed at their token rates with no Cursor Token Rate
+- Cost mode (classic Auto) bills as a Cursor-model request. With Cursor Router on, Balance and Intelligence bill at the routed model's list price, and a third-party route also incurs the Cursor Token Rate
 - No interruption in service or quality
 - Tracked per user in your admin dashboard (see [spending data API](https://cursor.com/docs/account/teams/admin-api.md#get-spending-data))
-- Can be controlled with spending limits
+- Capped with a monthly additional usage limit
 
-On-demand usage is enabled by default for the Teams plan.
+Additional usage stops when the prepaid balance is empty or the team's monthly additional usage limit is reached, whichever comes first. Manage the balance, Auto Top-up, and the limit under **Additional usage credits** at [grok.com/dashboard/billing](https://grok.com/dashboard/billing). Only admins can change these settings.
 
 ### Cursor Token Rate
 
@@ -72,28 +68,34 @@ The Cursor Token Rate is $0.25 per million tokens and is charged on third-party 
 - Custom model execution (Tab, Apply, etc.)
 - Infrastructure and processing costs
 
-The Cursor Token Rate applies to input tokens, output tokens, and cached tokens on eligible third-party model requests. This includes when Auto routes to a third-party model. This applies to [BYOK](https://cursor.com/help/models-and-usage/api-keys.md) as well. First-party Cursor models, including Grok and Composer, are exempt.
+The Cursor Token Rate applies to input tokens, output tokens, and cached tokens on eligible third-party model requests. This includes when Cursor Router (Balance or Intelligence) routes to a third-party model. This applies to [BYOK](https://cursor.com/help/models-and-usage/api-keys.md) as well. Cost mode requests are exempt, and so are Cursor models, including Grok and Composer.
 
 See [Auto modes](https://cursor.com/docs/models-and-pricing.md#auto-modes) for Auto pricing.
 
 ## Active seats
 
-Cursor bills per active paid seat, not pre-allocated seats. Add, remove, upgrade, or downgrade users anytime and billing will adjust based on seat type.
+Cursor bills per active paid seat, not pre-allocated seats. Add, remove, upgrade, or downgrade users anytime and billing will adjust based on seat tier.
 
-- Adding a member mid-cycle creates a pro-rated charge
-- Removing a member who used credits keeps the seat occupied until the cycle ends
-- Billing adjustments appear as account credit on a future invoice when applicable
+- Adding a member mid-cycle creates a pro-rated charge for the rest of the billing period
+- Upgrading a seat applies right away and charges the pro-rated difference; downgrading applies at the end of the billing period
+- Removing a member frees their seat for the next person who joins. Reduce seats in billing to stop paying for it at the end of the period
 - Your renewal date stays the same
 
 ## Spending controls
 
-Teams can configure monthly team-wide spending limits. You can manage these limits through the dashboard. Per-member spend limits are available on [Enterprise](https://cursor.com/docs/enterprise.md) plans.
+Admins set one monthly additional usage limit for the whole team (no limit or a fixed amount), plus a default monthly limit per member and per-member overrides from the Members page. When the team limit is reached, paid additional usage pauses until next month or until an admin raises it, even if prepaid credit remains.
 
 Contact `enterprise@cursor.com` for volume discounts on larger teams.
 
+## Legacy Teams seats
+
+Teams created before The X Subscription have two paid seat types, Standard ($40/user/mo) and Premium ($120/user/mo, with 5x the Standard allowance), plus a free Unpaid Admin seat. Each paid seat includes monthly usage across two pools, Cursor Models and Other Models, and keeps working with on-demand usage after included usage is consumed. On-demand usage is on by default, billed in arrears, and capped with a team-wide spend limit.
+
+Existing teams can keep adding seats and changing seat types without switching. A team owner or admin can move the team to The X Subscription at [cursor.com/unify/team](https://cursor.com/unify/team). See [Legacy Cursor plans](https://cursor.com/docs/account/pricing/legacy-cursor-plans.md) for the full comparison and [Team plans on The X Subscription](https://cursor.com/help/the-x-subscription/overview.md) for what happens when a team switches.
+
 ## Model Pricing
 
-All prices are per million tokens. Teams are charged at public list API prices plus [Cursor Token Rate](https://cursor.com/docs/account/teams/pricing.md#cursor-token-rate) for third-party model requests, including when Auto routes to a third-party model.
+All prices are per million tokens. Teams are charged at public list API prices plus [Cursor Token Rate](https://cursor.com/docs/account/teams/pricing.md#cursor-token-rate) for third-party model requests, including when Cursor Router (Balance or Intelligence) routes to a third-party model.
 
 | Model                                                                                         | Provider  | Input | Cache write | Cache read | Output | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------------------------------------- | --------- | ----- | ----------- | ---------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -122,9 +124,11 @@ All prices are per million tokens. Teams are charged at public list API prices p
 | [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs)                           | Google    | $2    | -           | $0.2       | $12    | Hidden by default; Native image generation model optimized for speed, flexibility, and contextual understanding; Text input and output priced the same as Gemini 3 Pro; Image output: $120/1M tokens (\~$0.134 per 1K/2K image, \~$0.24 per 4K image); Preview models may change before becoming stable and have more restrictive rate limits                                                                                                                                                                                                 |
 | [Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs)                                       | Google    | $2    | -           | $0.2       | $12    | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $1.5  | -           | $0.15      | $9     | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [Gemini 3.5 Flash Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite)   | Google    | $0.3  | -           | $0.03      | $2.5   | Hidden by default; Used only for the Auto-review classifier. It is not selectable as a chat or agent model                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $1.5  | -           | $0.15      | $7.5   | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $0.75 | -           | $0.075     | $3.5   | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $0.75 | -           | $0.075     | $3.5   | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [Gemini 3.7 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $0.75 | -           | $0.075     | $3.75  | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [Gemini 3.8 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $0.75 | -           | $0.075     | $3.75  | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [Gemini 4 Argon](https://ai.google.dev/gemini-api/docs)                                       | Google    | $2    | -           | $0.1       | $10    | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | [GLM 5.2](https://z.ai)                                                                       | Z.ai      | $1.4  | -           | $0.26      | $4.4   | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | [GLM 5.3](https://z.ai)                                                                       | Z.ai      | $1.4  | -           | $0.26      | $4.4   | Hidden by default; Same per-token rates as GLM 5.2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | [GLM 5.3 Flash](https://z.ai)                                                                 | Z.ai      | $0.15 | -           | $0.029     | $0.5   | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -150,7 +154,8 @@ All prices are per million tokens. Teams are charged at public list API prices p
 | [Grok 4.7](https://x.ai/news/grok-4-7)                                                        | Cursor    | $2    | -           | $0.5       | $6     | Jointly trained by Cursor and SpaceXAI; Long context (>256k input tokens) is billed at 2x standard rates, up to 500k; Fast mode is available at 2x pricing; Fast mode for long context (>256k) is billed at 3x standard rates                                                                                                                                                                                                                                                                                                                 |
 | Kimi K2.7 Code                                                                                | Moonshot  | $0.95 | -           | $0.19      | $4     | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | [Kimi K3](https://www.moonshot.ai)                                                            | Moonshot  | $3    | -           | $0.3       | $15    | Hidden by default; Requires Max Mode on legacy request-based plans; Up to 1M tokens with extended context at the same per-token rates (no long-context surcharge); No separate cache-write fee                                                                                                                                                                                                                                                                                                                                                |
-| [Muse Spark 1.3](https://dev.meta.ai/docs/models)                                             | Meta      | $1.25 | -           | $0.15      | $4.25  | Requires Max Mode on legacy request-based plans; Up to 1M tokens in Max Mode at the same per-token rates (no long-context surcharge); Cached input is billed at $0.15 per million tokens with no separate cache-write charge                                                                                                                                                                                                                                                                                                                  |
+| [Muse Spark 1.3](https://dev.meta.ai/docs/models)                                             | Meta      | $1.25 | -           | $0.15      | $4.25  | Hidden by default; Requires Max Mode on legacy request-based plans; Up to 1M tokens in Max Mode at the same per-token rates (no long-context surcharge); Cached input is billed at $0.15 per million tokens with no separate cache-write charge                                                                                                                                                                                                                                                                                               |
+| [Muse Wonder](https://dev.meta.ai/docs/models)                                                | Meta      | $4    | -           | $0.2       | $20    | Up to 1M tokens in Max Mode at the same per-token rates (no long-context surcharge); Cached input is billed at $0.20 per million tokens with no separate cache-write charge                                                                                                                                                                                                                                                                                                                                                                   |
 
 
 ---

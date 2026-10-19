@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/grok-4-6
-fetched_at: 2026-09-28T06:10:44.448211+00:00
+fetched_at: 2026-10-19T05:32:46.497688+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Grok 4.6 is a frontier model from Cursor and SpaceXAI for complex coding and kno
 
 Grok 4.6 supports four effort levels: xhigh, high (default), medium, and low. Higher effort gives the model more time to work through difficult tasks.
 
-Fast is the default speed tier on Pro and higher plans. On the [Start plan](https://cursor.com/docs/models-and-pricing.md#start-india-only) (India only), Grok 4.6 is fixed at medium effort at standard speed.
+Fast is the default speed tier on Premium and higher, and on the legacy Pro, Pro+, and Ultra plans. On Plus and on the legacy [Start plan](https://cursor.com/docs/account/pricing/legacy-cursor-plans.md#start-india-only) (India only), Grok 4.6 is fixed at medium effort at standard speed.
 
 ## Tools
 
@@ -28,9 +28,9 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Grok 4.6 is part of the [Cursor Models pool](https://cursor.com/docs/models-and-pricing.md#cursor-models) on individual and team plans. This pool also includes Grok 4.7, Grok 4.5, and Composer 2.5.
+Grok 4.6 draws from the weekly pool of [Cursor models](https://cursor.com/docs/models-and-pricing.md#cursor-models) included with every paid plan, alongside Grok 4.7, Grok 4.5, and Composer 2.5. On [legacy Cursor plans](https://cursor.com/docs/account/pricing/legacy-cursor-plans.md), it draws from the monthly Cursor Models pool.
 
-Standard on-demand usage is priced at $2/M input tokens, $0.50/M cached input tokens, and $6/M output tokens. The Fast variant is priced at $4/M input tokens, $1/M cached input tokens, and $12/M output tokens. All prices are per million tokens.
+Additional usage beyond the pool at standard speed is priced at $2/M input tokens, $0.50/M cached input tokens, and $6/M output tokens. The Fast variant is priced at $4/M input tokens, $1/M cached input tokens, and $12/M output tokens. All prices are per million tokens.
 
 
 ---

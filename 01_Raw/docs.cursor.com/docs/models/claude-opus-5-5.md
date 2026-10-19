@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-5-5
-fetched_at: 2026-10-05T06:27:21.507916+00:00
+fetched_at: 2026-10-19T05:32:45.218764+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Claude Opus 5.5 is Anthropic's latest Opus model and replaces [Opus 5](https://c
 
 ## Limitations
 
-- Still an Opus-tier price. It consumes the Other Models pool faster than [Sonnet 5.5](https://cursor.com/docs/models/claude-sonnet-5-5.md) or Composer.
+- Still an Opus-tier price. It uses prepaid credit (or the Other Models pool on legacy Cursor plans) faster than [Sonnet 5.5](https://cursor.com/docs/models/claude-sonnet-5-5.md) or Composer.
 
 ## Tools
 
@@ -26,7 +26,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 5.5 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Opus 5.5 is a third-party model, so it isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#third-party-models). On The X Subscription it's billed at the rates below from your prepaid credit. On legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 Opus 5.5 bills at $4 per million input tokens and $20 per million output tokens, down from $5 and $25 for Opus 5. Prompt-cache reads are $0.20 per million tokens (0.05x the input rate), down from 0.10x on Opus 5.
 

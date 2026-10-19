@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-3-5-flash
-fetched_at: 2026-09-07T05:31:29.842558+00:00
+fetched_at: 2026-10-19T05:32:45.519987+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Gemini 3.5 Flash draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
+Gemini 3.5 Flash is a third-party model, so it isn't part of the usage included with Cursor [plans](https://cursor.com/docs/models-and-pricing.md#third-party-models). On The X Subscription it's billed at the rates below from your prepaid credit. On legacy Cursor plans it draws from the **Other Models** pool. All prices are per million tokens.
 
 
 ---

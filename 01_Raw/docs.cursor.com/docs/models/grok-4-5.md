@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/grok-4-5
-fetched_at: 2026-09-28T06:10:44.439835+00:00
+fetched_at: 2026-10-19T05:32:46.149180+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Grok 4.5 is a joint model from Cursor and SpaceXAI for long-running tasks across
 
 Grok 4.5 supports three effort levels: high (the default), medium, and low. Higher effort gives the model more time to think through difficult tasks. Use high for the hardest work; drop to medium or low when you want faster, cheaper responses on simpler tasks.
 
-On the [Start plan](https://cursor.com/docs/models-and-pricing.md#start-india-only) (India only), Grok 4.5 is fixed at medium effort in non-fast mode. Effort switching and Fast mode are available on Pro and higher plans.
+On Plus and on the legacy [Start plan](https://cursor.com/docs/account/pricing/legacy-cursor-plans.md#start-india-only) (India only), Grok 4.5 is fixed at medium effort in non-fast mode. Effort switching and Fast mode are available on Premium and higher, and on the legacy Pro, Pro+, and Ultra plans.
 
 ## Tools
 
@@ -28,9 +28,9 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Grok 4.5 is part of the [Cursor Models pool](https://cursor.com/docs/models-and-pricing.md#cursor-models) on individual and team plans. This pool also includes Grok 4.7, Grok 4.6, and Composer 2.5.
+Grok 4.5 draws from the weekly pool of [Cursor models](https://cursor.com/docs/models-and-pricing.md#cursor-models) included with every paid plan, alongside Grok 4.7, Grok 4.6, and Composer 2.5. On [legacy Cursor plans](https://cursor.com/docs/account/pricing/legacy-cursor-plans.md), it draws from the monthly Cursor Models pool.
 
-Standard on-demand usage is priced at $2/M input tokens and $6/M output tokens. The Fast variant is priced at $4/M input tokens and $18/M output tokens. All prices are per million tokens.
+Additional usage beyond the pool at standard speed is priced at $2/M input tokens and $6/M output tokens. The Fast variant is priced at $4/M input tokens and $18/M output tokens. All prices are per million tokens.
 
 
 ---

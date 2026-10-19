@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/identity-and-access-management
-fetched_at: 2026-08-31T06:29:32.213575+00:00
+fetched_at: 2026-10-19T05:32:44.324816+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,7 +60,7 @@ See [Deployment Patterns](https://cursor.com/docs/enterprise/deployment-patterns
 
 ### Allowed Team IDs
 
-The most important MDM policy prevents users from logging into personal Cursor accounts on corporate devices.
+The most important MDM policy prevents users from logging into personal Cursor accounts on corporate devices. Device management enforces this policy on the computer. The [tenancy restriction header](https://cursor.com/docs/enterprise/tenancy-restriction.md) limits organizations and teams on traffic from your network.
 
 When you set an allowed team ID policy, Cursor only permits authentication to those specific team IDs. If a user tries to log in with a different team ID (like a personal account), Cursor logs them out immediately.
 

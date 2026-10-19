@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted/my-machines
-fetched_at: 2026-10-05T06:27:20.042373+00:00
+fetched_at: 2026-10-19T05:32:44.094054+00:00
 fetch_method: mintlify_md
 ---
 
@@ -156,7 +156,7 @@ Start the machine with [`--name`](https://cursor.com/docs/cloud-agent/self-hoste
 
 - In Slack, use `@Cursor worker=my-devbox fix the flaky test` or `@Cursor machine=my-devbox fix the flaky test`.
 - In GitHub, comment `@cursoragent worker=my-devbox fix the flaky test` or `@cursoragent machine=my-devbox fix the flaky test`. You must be a trusted repo commenter, and the target machine must belong to the Cursor user linked to your GitHub account.
-- In Linear, add `worker=my-devbox` or `machine=my-devbox` to the issue body. You can also use a parent label named `worker` or `machine` with a child label named `my-devbox`.
+- In Linear, mention `@Cursor` in a comment to start the run. Cursor honors `worker=my-devbox` or `machine=my-devbox` in the issue body only when that comment triggers the run. Cursor honors a parent label named `worker` or `machine` with a child label named `my-devbox` only for that same trigger. Assigning or delegating the issue to Cursor ignores the issue body and those labels.
 
 ### How Cursor picks your machine
 
@@ -198,7 +198,7 @@ Artifact behavior is identical on self-hosted workers and Cursor-hosted agents. 
 
 Artifacts are on by default. See [Capabilities](https://cursor.com/docs/cloud-agent/capabilities.md#demos-and-artifacts) for what they look like in the UI.
 
-To disable artifact uploads, block outbound traffic to `cloud-agent-artifacts.s3.us-east-1.amazonaws.com`. The agent session keeps working; artifacts produced during the session fail to upload.
+To disable artifact uploads, block outbound traffic to `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com`. Workers upload artifacts to the first host and use the second only when the agent's store isn't available, so blocking `cloud-agent-artifacts` alone doesn't stop uploads. The agent session keeps working; artifacts produced during the session fail to upload.
 
 ## Networking
 
@@ -206,20 +206,20 @@ Workers need outbound HTTPS access to:
 
 - `api2.cursor.sh` and `api2direct.cursor.sh` for the agent session
 - `downloads.cursor.com` for CLI updates and the first-time [Cursor Computer Use](https://cursor.com/docs/cloud-agent/self-hosted/computer-use.md#macos) install on macOS
-- `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for [artifact](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#artifacts) uploads
+- `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for [artifact](https://cursor.com/docs/cloud-agent/self-hosted/my-machines.md#artifacts) uploads
 
-If your firewall can only match wildcards, `*.s3.us-east-1.amazonaws.com` covers the artifact host, but also opens every other bucket in the region. Prefer an exact-host rule when the firewall supports it.
+If your firewall can only match wildcards, `*.s3.us-east-1.amazonaws.com` covers both artifact hosts, but also opens every other bucket in the region. Prefer an exact-host rule when the firewall supports it.
 
 No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, set `HTTPS_PROXY` or `https_proxy` in the worker environment.
 
 ### Failure modes
 
-| If you block...                                       | Effect                                                                                                                                                                        |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `api2.cursor.sh` or `api2direct.cursor.sh`            | The worker can't start or continue an agent session.                                                                                                                          |
-| `downloads.cursor.com`                                | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                             |
-| `cloud-agent-artifacts.s3.us-east-1.amazonaws.com`    | Artifact uploads fail. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
-| An outbound host a specific tool or integration needs | Only that tool or integration fails. The agent continues.                                                                                                                     |
+| If you block...                                                                                  | Effect                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `api2.cursor.sh` or `api2direct.cursor.sh`                                                       | The worker can't start or continue an agent session.                                                                                                                          |
+| `downloads.cursor.com`                                                                           | CLI updates and the first-time Cursor Computer Use install on macOS fail. A worker that already has both installed keeps running.                                             |
+| `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` | Artifact uploads fail. PR embeds, dashboard previews, and notification attachments that depend on artifacts are missing. The agent session and other tool calls keep working. |
+| An outbound host a specific tool or integration needs                                            | Only that tool or integration fails. The agent continues.                                                                                                                     |
 
 ## MCP servers
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin/acting-as-users
-fetched_at: 2026-09-28T06:10:41.057017+00:00
+fetched_at: 2026-10-19T05:32:43.281870+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ Use the [Origin API](https://cursor.com/docs/api/origin.md) base URL and [error 
 ## How it works
 
 1. A workspace admin approves the `namespace:user_tokens:write` scope for your app's installation.
-2. Optionally, [confirm the user's Cursor identity](https://cursor.com/docs/api/origin/acting-as-users.md#user-confirmation). Origin returns a signed receipt with their `user_…` ID.
+2. Optionally, [confirm the user's Cursor identity](https://cursor.com/docs/api/origin/acting-as-users.md#user-confirmation). Origin returns a signed receipt with their `user_…` ID and the installation they confirmed for.
 3. Sign an app JWT and [mint an installation user token](https://cursor.com/docs/api/origin/acting-as-users.md#mint-an-installation-user-token) for the user's ID or email.
 4. Use the installation user token with the REST API or Git over HTTPS until `expiresAt`, then mint another.
 
@@ -46,7 +46,7 @@ Receipts prove identity and grant no permissions. Create Installation User Token
 
 ### Send the user to Origin
 
-Open this URL in the user's browser:
+Open this URL in the user's browser. Name the installation when you know which of the user's namespaces your app is installed in:
 
 ```text
 https://cursor.com/codebase/apps/user-confirmation
@@ -55,17 +55,29 @@ https://cursor.com/codebase/apps/user-confirmation
   &state=RANDOM_ANTI_FORGERY_VALUE
 ```
 
-| Parameter         | Required             | Description                                                                                                                                                       |
-| ----------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `installation_id` | Yes                  | The `i_…` ID of your app's active installation in the user's namespace.                                                                                           |
-| `redirect_uri`    | Yes                  | Callback URI. Must exactly match an entry in the app's `installationRedirectUris`, the installation flow's allowlist.                                             |
-| `state`           | Strongly recommended | Random anti-forgery value, echoed as the `state` claim of the [confirmation receipt](https://cursor.com/docs/api/origin/acting-as-users.md#confirmation-receipt). |
+Name your app instead when you don't. Origin finds the installations the user can confirm for:
 
-Send each parameter at most once. Missing required parameters or repeated parameters produce an error after sign-in.
+```text
+https://cursor.com/codebase/apps/user-confirmation
+  ?client_id=APP_ID
+  &redirect_uri=REGISTERED_CALLBACK
+  &state=RANDOM_ANTI_FORGERY_VALUE
+```
+
+| Parameter         | Required                                | Description                                                                                                                                                                                                                                                                    |
+| ----------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `installation_id` | One of `installation_id` or `client_id` | The `i_…` ID of your app's active installation in the user's namespace.                                                                                                                                                                                                        |
+| `client_id`       | One of `installation_id` or `client_id` | Your app's `app_…` ID. On its own, it resolves to the app's active installations in the namespaces the user belongs to. Alongside `installation_id`, the installation is used and `client_id` must be the ID of the app it belongs to; any other value makes the link invalid. |
+| `redirect_uri`    | Yes                                     | Callback URI. Must exactly match an entry in the app's `installationRedirectUris`, the installation flow's allowlist. A loopback URI, such as `http://127.0.0.1:PORT/callback` or `http://localhost:PORT/callback`, is accepted on any port without being registered.          |
+| `state`           | Strongly recommended                    | Random anti-forgery value, echoed as the `state` claim of the [confirmation receipt](https://cursor.com/docs/api/origin/acting-as-users.md#confirmation-receipt).                                                                                                              |
+
+Send each parameter at most once. A link that names neither an installation nor an app, omits `redirect_uri`, or repeats a parameter produces an error after sign-in.
 
 ### What the user sees
 
 Signed-out users sign in to Cursor, then return to the same link with its parameters. Origin validates parameters after sign-in, so even malformed links go through sign-in before showing an error.
+
+A link that names your app resolves to one installation first. Origin lists the app's active installations in the namespaces the user belongs to: their personal namespace, then their teams by slug. With one installation, the page continues as if the link had named it. With several, the user picks the namespace whose membership they want to confirm. With none, the user sees an error and nothing is confirmed; see [Confirmation errors](https://cursor.com/docs/api/origin/acting-as-users.md#confirmation-errors).
 
 Origin shows your app's name, icon, and description alongside the installation's namespace. It also lists the details your app will receive:
 
@@ -121,7 +133,7 @@ Claims:
 ```
 
 - `aud` is your app ID; `sub` is the confirmed user's `user_…` ID, used as `userId` when minting.
-- `installation_id` and `namespace_id` identify the installation and namespace where membership was confirmed.
+- `installation_id` and `namespace_id` identify the installation and namespace where membership was confirmed. For a link that named your app, they tell you which installation the user chose.
 - `email` is the user's account email at confirmation time.
 - Receipts expire five minutes after issuance. `jti` is unique per receipt.
 - `state` is included only if the confirmation URL supplied a non-empty value.
@@ -131,7 +143,7 @@ Verify the receipt before trusting the callback:
 1. Resolve the signing key from the [JWKS](https://cursor.com/docs/api/origin/reference/discovery-and-signing-keys.md) by the `kid` header.
 2. Require `alg: EdDSA` and `typ: origin-user-confirmation-receipt+jwt` to distinguish confirmation receipts from installation receipts and access tokens.
 3. Validate the signature, `iss`, `aud`, and `exp`.
-4. Match `installation_id` and the signed `state` to the values you sent.
+4. Match the signed `state` to the value you sent. When the link named an installation, also match `installation_id`. When it named your app, read `installation_id` from the receipt; it's the installation to mint for.
 
 Reject the callback when any check fails.
 
@@ -139,11 +151,12 @@ Reject the callback when any check fails.
 
 Failures stay on the Cursor page without calling your callback.
 
-| Error                   | Cause                                                                                                                                                                                |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Invalid link            | `installation_id` or `redirect_uri` is missing or empty, or a parameter is repeated.                                                                                                 |
-| Not authorized          | The installation doesn't exist or isn't active, `redirect_uri` isn't registered for the app, or the user isn't a member of the installation's namespace. The page doesn't say which. |
-| Temporarily unavailable | Origin couldn't sign the receipt after confirmation. The user can retry.                                                                                                             |
+| Error                   | Cause                                                                                                                                                                                                                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Invalid link            | The link names neither an installation nor an app, omits `redirect_uri`, repeats a parameter, or pairs `installation_id` with a `client_id` that isn't the app the installation belongs to.                                                                                                                                 |
+| Not authorized          | The installation doesn't exist or isn't active, `redirect_uri` isn't registered for the app, or the user isn't a member of the installation's namespace. For a link that names an app, the app doesn't exist, or only its owner can install it and the user has no installation to confirm for. The page doesn't say which. |
+| Not installed           | The link names an app anyone can install, and the app has no active installation in a namespace the user belongs to. The page names the app.                                                                                                                                                                                |
+| Temporarily unavailable | Origin couldn't sign the receipt after confirmation. The user can retry.                                                                                                                                                                                                                                                    |
 
 ## Mint an installation user token
 

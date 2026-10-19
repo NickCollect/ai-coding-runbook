@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-10-05T06:27:20.093214+00:00
+fetched_at: 2026-10-19T05:32:44.103056+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,11 +46,11 @@ providers.
 Workers need outbound HTTPS access to:
 
 - `api2.cursor.sh` and `api2direct.cursor.sh` for the agent session
-- `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for artifact uploads
+- `agent-stores.s3.us-east-1.amazonaws.com` and `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` for artifact uploads
 
 No inbound ports, public IPs, or VPN tunnels are required. If you use a proxy, set `HTTPS_PROXY` or `https_proxy` in the worker environment.
 
-To disable artifact uploads, block outbound traffic to `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` on the worker. This only prevents artifacts from uploading. The agent continues to work, including tool calls and results, but its artifacts won't appear in pull requests or the dashboard.
+To disable artifact uploads, block outbound traffic to both artifact hosts on the worker. Workers upload artifacts to `agent-stores.s3.us-east-1.amazonaws.com` and use `cloud-agent-artifacts.s3.us-east-1.amazonaws.com` only when the agent's store isn't available, so blocking `cloud-agent-artifacts` alone doesn't stop uploads. Blocking both only prevents artifacts from uploading. The agent continues to work, including tool calls and results, but its artifacts won't appear in pull requests or the dashboard.
 
 You can connect up to 200 workers per user and 1000 per team. For
 larger company-wide deployments, [contact

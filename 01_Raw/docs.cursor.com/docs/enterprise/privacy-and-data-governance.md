@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/privacy-and-data-governance
-fetched_at: 2026-09-07T05:31:28.789206+00:00
+fetched_at: 2026-10-19T05:32:44.471156+00:00
 fetch_method: mintlify_md
 ---
 
@@ -102,7 +102,7 @@ Data residency applies across three independent layers for supported features an
 | **Data storage**    | Customer Data is stored only in the selected region, including backups. |
 
 - Today, customers can enroll in **US-only data residency** (inference, processing, and storage in the US).
-- EU + Iceland inference-only coverage is available on request. Broader EU support and additional regions are in active development.
+- EU + UK inference-only coverage is available on request. Broader EU support and additional regions are in active development.
 - Contact your account executive if you are interested in either option.
 
 ### US data residency
@@ -115,7 +115,7 @@ Under US-only data residency, only the following model families run in-region:
 - Claude 4.6 and above
 - Gemini 2.5 Flash
 - Composer
-- Grok 4.5
+- Grok 4.5, Grok 4.6, Grok 4.7
 
 Selecting a model that isn't eligible returns an error, and the model is unavailable while data residency is enabled. Auto will select from only models on this list.
 

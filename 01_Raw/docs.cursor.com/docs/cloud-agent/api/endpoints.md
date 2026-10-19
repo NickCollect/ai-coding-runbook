@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-10-12T06:49:40.873970+00:00
+fetched_at: 2026-10-19T05:32:43.808239+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,7 +82,7 @@ Named Cursor-hosted environment, pool, or machine name. For `env.type: "pool"`, 
 
 `repos` array (optional)
 
-Repository configuration. Mutually exclusive with a named cloud environment. Omit both `repos` and `env` to start a no-repo agent. You can also omit `repos` when `env.type` is `pool` to target an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools). Maximum 20 repositories.
+Repository configuration. Mutually exclusive with a named cloud environment. Omit both `repos` and `env` to start a no-repo agent. You can also omit `repos` when `env.type` is `pool` to target an [any-repo pool](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#any-repo-pools). Maximum 500 repositories.
 
 On self-hosted targets, only a named any-repo pool takes more than one repository. `machine`, the `default` pool, and repo-backed pools take one; sending more returns `400 validation_error` with the message "My Machines and repo-bound pools accept one repo in repos. To start an agent with several repos, set env.name to an any-repo pool."
 
@@ -731,7 +731,7 @@ GET
 
 `/v1/agents/{id}/usage`
 
-Retrieve token usage for an agent, broken down per run. The response totals usage across every run on the agent and lists usage for each individual run. Token usage matches the `tokenUsage` reported by the team [usage events](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint.
+Retrieve token usage for an agent, broken down per run. The response lists usage for each of the agent's runs and totals usage for the agent, including its Task subagents and side chats. Token usage matches the `tokenUsage` reported by the team [usage events](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint.
 
 #### Path Parameters
 
@@ -749,7 +749,7 @@ Scope the response to a single run (for example, `run-00000000-0000-0000-0000-00
 
 `totalUsage` object
 
-Token usage summed across the returned runs. Contains the same fields as each run's `usage` object.
+Token usage for the request. Without `runId`, it also counts usage from the agent's Task subagents and side chats, and usage not tied to a run, so it can be larger than the sum of `runs`. With `runId`, it covers that run, plus the Task subagent, side chat, and other usage not tied to a run from when the run started until the agent's next run started. The first run to start also gets such usage from before it started, and a run that never started gets none. The run's entry in `runs` includes the same usage. Contains the same fields as each run's `usage` object.
 
 `runs` array
 
@@ -1007,7 +1007,7 @@ Display name, up to 255 characters. It must differ from the names of the owner's
 
 `repos` array (required)
 
-Repositories for the environment. Each entry has a `url` (for example, `https://github.com/your-org/your-repo`). Maximum 100 repositories. Send an empty array for an environment without repositories. A repository Cursor can't reach through your source control integration returns `400 repository_access`.
+Repositories for the environment. Each entry has a `url` (for example, `https://github.com/your-org/your-repo`). Maximum 500 repositories. Send an empty array for an environment without repositories. A repository Cursor can't reach through your source control integration returns `400 repository_access`.
 
 `environmentJson` string (required)
 
@@ -2676,6 +2676,18 @@ Worker id to reserve for the request. Start the worker with the same id via `CUR
 
 Also mint a [session token](https://cursor.com/docs/cloud-agent/self-hosted/pool.md#session-tokens) for this claim, so the worker can start without the service account key. If the token can't be minted, the claim fails and the request stays unclaimed.
 
+`identityToken` object (optional)
+
+Also return a [claim token](https://cursor.com/docs/cloud-agent/identity.md#claim-tokens): a signed OIDC JWT that names the claimed agent, its owner, and `workerId`. If the token can't be issued, the claim fails and the request stays unclaimed.
+
+`identityToken.audience` string (required if `identityToken` provided)
+
+Audience your verifier checks, set as the JWT `aud` claim. Printable ASCII, up to 512 characters. Cursor doesn't allowlist audiences.
+
+`identityToken.nonce` string (optional)
+
+Value echoed into the JWT `nonce` claim. Printable ASCII, up to 512 characters. Send a fresh value with each claim.
+
 #### Response Fields
 
 `id`, `workerId` string
@@ -2689,6 +2701,14 @@ Session token that serves only this claim. Present when the request sent `sessio
 `expiresAt` string (optional)
 
 ISO 8601 timestamp, 7 days after minting. Present with `token`.
+
+`identityToken.token` string (optional)
+
+Signed claim token. Present when the request sent `identityToken`. [Verify it](https://cursor.com/docs/cloud-agent/identity.md#verify-a-claim-token) before you act on it.
+
+`identityToken.expiresAt` string (optional)
+
+ISO 8601 timestamp, 5 minutes after minting. Matches the JWT `exp` claim.
 
 ```bash
 curl --request POST \
@@ -2752,6 +2772,40 @@ printf '%s' "$TOKEN" > /run/cursor/token
 export CURSOR_AGENT_WORKER_ID="pw_123"
 agent worker --pool gpu --worker-dir /workspace --auth-token-file /run/cursor/token start
 ```
+
+With a claim token:
+
+```bash
+curl --request POST \
+  --url "https://api.cursor.com/v0/private-workers/claim" \
+  -u "$CURSOR_API_KEY:" \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "id": "bc-00000000-0000-0000-0000-000000000002",
+    "workerId": "pw_123",
+    "identityToken": {
+      "audience": "https://provisioner.example.com",
+      "nonce": "3f9c1e7a-claim-pw_123"
+    }
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "id": "bc-00000000-0000-0000-0000-000000000002",
+  "workerId": "pw_123",
+  "identityToken": {
+    "token": "eyJ...",
+    "expiresAt": "2026-10-02T21:05:00.000Z"
+  }
+}
+```
+
+When the request sends `identityToken` and Cursor can't issue the token, nothing is claimed. HTTP `403` means this agent isn't allowed to mint tokens; don't retry. HTTP `429` means the agent is over its budget of 30 claim tokens per minute; retry after the `Retry-After` header. HTTP `503` means token signing is unavailable; retry with backoff.
+
+HTTP `409` returns no token, and nothing is signed. Cursor returns it when another agent holds `workerId`, or when an earlier try of this claim committed but its response never arrived. After a lost response, [release the claim](https://cursor.com/docs/cloud-agent/api/endpoints.md#release-a-claim), then claim again.
 
 ### Create A Session Token
 

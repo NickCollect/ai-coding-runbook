@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/api/origin
-fetched_at: 2026-10-12T06:49:40.543127+00:00
+fetched_at: 2026-10-19T05:32:43.390005+00:00
 fetch_method: mintlify_md
 ---
 
@@ -174,6 +174,8 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Get Pull Request](https://cursor.com/docs/api/origin/reference/get-pull-request.md)
 - [Create Pull Request](https://cursor.com/docs/api/origin/reference/create-pull-request.md)
 - [Update Pull Request](https://cursor.com/docs/api/origin/reference/update-pull-request.md)
+- [Enable Pull Request Auto Merge](https://cursor.com/docs/api/origin/reference/enable-pull-request-auto-merge.md)
+- [Disable Pull Request Auto Merge](https://cursor.com/docs/api/origin/reference/disable-pull-request-auto-merge.md)
 - [List Pull Request Comments](https://cursor.com/docs/api/origin/reference/list-pull-request-comments.md)
 - [Get Pull Request Comment](https://cursor.com/docs/api/origin/reference/get-pull-request-comment.md)
 - [Delete Pull Request Comment](https://cursor.com/docs/api/origin/reference/delete-pull-request-comment.md)
@@ -238,6 +240,8 @@ Every link below is a Markdown page. Each reference section, endpoint, and webho
 - [Repository Push](https://cursor.com/docs/api/origin/reference/repository-push.md)
 - [Repository Metadata Updated](https://cursor.com/docs/api/origin/reference/repository-metadata-updated.md)
 - [Pull Request Events](https://cursor.com/docs/api/origin/reference/pull-request-events.md)
+- [Pull Request Auto Merge Enabled](https://cursor.com/docs/api/origin/reference/pull-request-auto-merge-enabled.md)
+- [Pull Request Auto Merge Disabled](https://cursor.com/docs/api/origin/reference/pull-request-auto-merge-disabled.md)
 - [Pull Request Label Events](https://cursor.com/docs/api/origin/reference/pull-request-label-events.md)
 - [Pull Request Comment](https://cursor.com/docs/api/origin/reference/pull-request-comment.md)
 - [Pull Request Comment Reaction Events](https://cursor.com/docs/api/origin/reference/pull-request-comment-reaction-events.md)

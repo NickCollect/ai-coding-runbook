@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/opentelemetry-export
-fetched_at: 2026-10-05T06:27:20.624107+00:00
+fetched_at: 2026-10-19T05:32:44.386743+00:00
 fetch_method: mintlify_md
 ---
 
@@ -201,9 +201,11 @@ Everything below is on by default for a new destination, except `conversation_co
 - `cursor.hook.execution_complete`
 - `cursor.plugin.installed`
 - `cursor.cloud_agent.setup`: `started` / `completed` / `failed`
+- `cursor.cloud_agent.commit`: a commit a cloud agent pushed to a GitHub repository, with its SHA and change counts
 - `cursor.cloud_agent.artifact`
-- `cursor.cloud_agent.pull_request`: `opened` / `creation_failed`
+- `cursor.cloud_agent.pull_request`: `opened` / `merged` / `closed` / `creation_failed`, with the repository URL
 - `cursor.cloud_agent.mcp_auth_error`: an MCP server rejected the run's credentials
+- `cursor.cloud_agent.review_followup`: a pull request comment or review, or Bugbot Autofix, started a cloud agent run on an existing pull request
 - `cursor.grok_bot.tool_result`: every builtin tool call a Bot made, with its outcome and duration
 - `cursor.grok_bot.tool_decision`: who allowed or refused a Bot tool call (a person, Auto-review, a hook, or no gate)
 - `cursor.grok_bot.mcp_tool_call`: a Bot connector (MCP) tool call
@@ -316,7 +318,7 @@ With [MCP tool I/O](https://cursor.com/docs/enterprise/opentelemetry-export.md#m
 3. Left-join other logs on the same `cursor.conversation.id`:
    - `cursor.skill.activated` shows which skills ran
    - `cursor.hook.execution_complete` shows hooks
-   - `cursor.cloud_agent.*` shows setup, pull requests, artifacts, and MCP auth failures (cloud agents only)
+   - `cursor.cloud_agent.*` shows what a cloud agent did (cloud agents only)
    - `cursor.grok_bot.*` shows what a Bot did (Grok Bot only, with Action Recording on)
    - `cursor.conversation.user_message` and `cursor.conversation.assistant_message` show the prompts and responses (Cloud Agents and Grok Bot, only with the `conversation_content` opt-in)
    - `cursor.conversation.tool_io` shows what each Grok Bot MCP call sent and received (Grok Bot, only with the [tool I/O opt-in](https://cursor.com/docs/enterprise/opentelemetry-export.md#mcp-tool-io))
