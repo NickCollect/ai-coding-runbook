@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide
-fetched_at: 2026-10-19T05:32:47.868566+00:00
+fetched_at: 2026-10-26T05:40:12.238599+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ description: Switch to Claude Haiku 5.5 from earlier Haiku models with this migr
 </Note>
 
 <Tip>
-  **Automate your migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model). It works for any current Claude model as the target:
+  **Automate your migration with the [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).** It comes bundled with Claude Code and works for any current Claude model as the target:
 
   Let Claude Code migrate your code for you
 
@@ -40,11 +40,10 @@ Work down the groups and stop after the one that names your current model. If yo
 4. If your code reads the first content block as the answer, select blocks by `type` instead. See [Configure thinking](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#configure-thinking).
 5. Remove `temperature`, `top_p`, and `top_k` from your requests. See [Remove sampling parameters](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#remove-sampling-parameters).
 6. If your requests end `messages` with an assistant turn for the model to continue, end them with a user turn instead. See [Replace assistant prefill](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#replace-assistant-prefill).
-7. If you use computer use, replace `computer_20250124`: on the Claude API and Google Cloud, with the `computer_toolset_20260801` toolset; on Amazon Bedrock, with `computer_20251124` and the `computer-use-2025-11-24` beta header. See [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset).
+7. If you use computer use, replace `computer_20250124`: on the Claude API and Claude Models on Google Cloud (Google managed), with the `computer_toolset_20260801` toolset; on Amazon Bedrock, with `computer_20251124` and the `computer-use-2025-11-24` beta header. See [Move computer use to the toolset](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#computer-use-toolset).
 8. If you replay stored conversations through a different account, replay each one through the account that produced it. See [Replay thinking blocks through the account that produced them](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#replay-thinking-blocks-through-the-producing-account).
 9. If your code changes `system`, `tools`, or earlier `messages` between requests in a conversation and sends thinking blocks back, keep the conversation append-only. See [Keep earlier turns unchanged](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#keep-earlier-turns-unchanged).
 10. Handle `stop_reason: "refusal"`. Claude Haiku 5.5 runs safety classifiers that can decline a request, and it has no server-side fallback. See [Safeguard refusals](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5#safeguard-refusals).
-11. If you use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) (`output_config.format` or `strict: true` tools) on Amazon Bedrock, describe the format in the prompt or use a tool without `strict`, and validate the output in your code. Structured outputs aren't available for Claude Haiku 5.5 on Amazon Bedrock.
 
 If your organization has a [Priority Tier](https://platform.claude.com/docs/en/api/service-tiers#supported-models) commitment on Claude Haiku 4.5, plan capacity separately: Priority Tier is not supported on Claude Haiku 5.5.
 
@@ -61,23 +60,23 @@ If your organization has a [Priority Tier](https://platform.claude.com/docs/en/a
 
 Replace the Claude Haiku 4.5 model ID with the Claude Haiku 5.5 ID for your platform.
 
-| Platform               | Claude Haiku 4.5                                  | Claude Haiku 5.5             |
-| ---------------------- | ------------------------------------------------- | ---------------------------- |
-| Claude API             | `claude-haiku-4-5-20251001` or `claude-haiku-4-5` | `claude-haiku-5-5`           |
-| Amazon Bedrock         | `anthropic.claude-haiku-4-5`                      | `anthropic.claude-haiku-5-5` |
-| Claude Platform on AWS | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
-| Google Cloud           | `claude-haiku-4-5@20251001`                       | `claude-haiku-5-5`           |
-| Microsoft Foundry      | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
+| Platform                                       | Claude Haiku 4.5                                  | Claude Haiku 5.5             |
+| ---------------------------------------------- | ------------------------------------------------- | ---------------------------- |
+| Claude API                                     | `claude-haiku-4-5-20251001` or `claude-haiku-4-5` | `claude-haiku-5-5`           |
+| Amazon Bedrock                                 | `anthropic.claude-haiku-4-5`                      | `anthropic.claude-haiku-5-5` |
+| Claude Platform on AWS                         | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
+| Claude Models on Google Cloud (Google managed) | `claude-haiku-4-5@20251001`                       | `claude-haiku-5-5`           |
+| Microsoft Foundry                              | `claude-haiku-4-5`                                | `claude-haiku-5-5`           |
 
 `claude-haiku-5-5` is a fixed model ID with no date suffix and no separate alias.
 
 ## Recount tokens
 
-Claude Haiku 5.5 uses the same newer tokenizer as Claude 4.7 and later models. As with all models that use this tokenizer, the same input text produces approximately 30% more tokens on Claude Haiku 5.5 than on Claude Haiku 4.5. The exact increase depends on the content. Requests, responses, and streaming events keep the same shape. What changes is anything you measure or budget in tokens:
+Claude Haiku 5.5 uses the same newer tokenizer as Claude 4.7 and later models. As with all models that use this tokenizer, the same input text produces approximately 30 percent more tokens on Claude Haiku 5.5 than on Claude Haiku 4.5. The exact increase depends on the content. Requests, responses, and streaming events keep the same shape. What changes is anything you measure or budget in tokens:
 
 * `usage` fields and [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting) results are higher for the same text.
 * A given number of tokens holds less text.
-* A `max_tokens` limit tuned for Claude Haiku 4.5 may cut off equivalent output.
+* A `max_tokens` limit tuned for Claude Haiku 4.5 might cut off equivalent output.
 * Cost estimates made from Claude Haiku 4.5's token counts need recomputing with Claude Haiku 5.5's counts and [prices](https://platform.claude.com/docs/en/about-claude/pricing), including its higher prices for long prompts. See [Long context pricing](https://platform.claude.com/docs/en/about-claude/pricing#long-context-pricing).
 
 Large images can also cost more tokens. Claude Haiku 5.5 uses the high-resolution image tier, which downscales images above 2,576 pixels on the long edge or 4,784 visual tokens. Claude Haiku 4.5 and earlier Haiku models use the standard tier, which downscales images above 1,568 pixels on the long edge or 1,568 visual tokens. An image of 2,000 by 1,500 pixels costs about 2.5 times as many visual tokens on Claude Haiku 5.5 as on Claude Haiku 4.5. See [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size).
@@ -111,42 +110,42 @@ After, the same request to Claude Haiku 5.5 uses adaptive thinking. The `thinkin
 }
 ```
 
-Adaptive thinking is on by default, so a response can begin with one or more `thinking` blocks even when the request doesn't set `thinking`. Leave `thinking` unset or set it to `{"type": "adaptive"}`, and use [effort](https://platform.claude.com/docs/en/build-with-claude/effort) as the lever: where Claude Haiku 4.5 ran without thinking, or with a small budget to save tokens, choose a lower effort level. At a lower level the model thinks less, and it can skip thinking entirely on simpler requests. For prompting guidance, see [Use effort to control thinking](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5#use-effort-to-control-thinking). Select content blocks by their `type` field rather than by position, and pass `thinking` blocks back unmodified with tool results.
+Adaptive thinking is on by default, so a response can start with one or more `thinking` blocks even when the request doesn't set `thinking`. Leave `thinking` unset or set it to `{"type": "adaptive"}`, and use [effort](https://platform.claude.com/docs/en/build-with-claude/effort) as the control: where Claude Haiku 4.5 ran without thinking, or with a small budget to save tokens, choose a lower effort level. At a lower level the model thinks less, and it can skip thinking entirely on simpler requests. For prompting guidance, see [Use effort to control thinking](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5#use-effort-to-control-thinking). Select content blocks by their `type` field rather than by position, and pass `thinking` blocks back unmodified with tool results.
 
 Thinking tokens count toward `max_tokens`, so a request with a small `max_tokens` can stop with `stop_reason: "max_tokens"` after a `thinking` block and before any text. If you set a small `max_tokens` for Claude Haiku 4.5, raise it to leave room for thinking, or choose a lower [effort](https://platform.claude.com/docs/en/build-with-claude/effort) level.
 
-Thinking blocks from earlier assistant turns stay in context and count as input tokens, where Claude Haiku 4.5 kept only the latest turn's. Multi-turn conversations therefore carry more input tokens than the tokenizer change alone explains. To remove older blocks, use [thinking block clearing](https://platform.claude.com/docs/en/build-with-claude/context-editing#thinking-block-clearing). See [Thinking block preservation by model](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-block-preservation-by-model).
+Thinking blocks from earlier assistant turns stay in context and count as input tokens, where Claude Haiku 4.5 keeps only the latest turn's. Multi-turn conversations therefore carry more input tokens than the tokenizer change alone explains. To remove older blocks, use [thinking block clearing](https://platform.claude.com/docs/en/build-with-claude/context-editing#thinking-block-clearing). See [Thinking block preservation by model](https://platform.claude.com/docs/en/build-with-claude/thinking#thinking-block-preservation-by-model).
 
-By default, Claude Haiku 5.5 returns each `thinking` block with an empty `thinking` field and only a `signature`, where Claude Haiku 4.5 returned summarized thinking. To receive summarized thinking, set `thinking: {"type": "adaptive", "display": "summarized"}`.
+By default, Claude Haiku 5.5 returns each `thinking` block with an empty `thinking` field and only a `signature`, where Claude Haiku 4.5 returns summarized thinking. To receive summarized thinking, set `thinking: {"type": "adaptive", "display": "summarized"}`.
 
 Claude Haiku 5.5 accepts a forced `tool_choice` (`any` or a named tool), but the response starts with the tool call and has no `thinking` block. To let the model think before it calls a tool, use `tool_choice: {"type": "auto"}` and say in the prompt when to use the tool.
 
-Claude Haiku 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, so a conversation you switch from Claude Haiku 4.5 onto Claude Haiku 5.5 keeps its reasoning. It doesn't read blocks from Claude Opus 5, Claude Opus 5.5, Claude Sonnet 5.5, or any Claude Fable or Claude Mythos model; the API drops those without an error. On the Claude API and Google Cloud, Claude Opus 5.5 and Claude Sonnet 5.5 read Claude Haiku 5.5's blocks. See [Switching models mid-conversation](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#switching-models).
+Claude Haiku 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, so a conversation you switch from Claude Haiku 4.5 onto Claude Haiku 5.5 keeps its reasoning. It doesn't read blocks from Claude Opus 5, Claude Opus 5.5, Claude Sonnet 5.5, or any Claude Fable or Claude Mythos model; the API drops those without an error. On the Claude API and Claude Models on Google Cloud (Google managed), Claude Opus 5.5 and Claude Sonnet 5.5 read Claude Haiku 5.5's blocks. See [Switching models mid-conversation](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#switching-models).
 
 ## Remove sampling parameters
 
-Claude Haiku 4.5 accepts `temperature`, `top_p`, and `top_k`. On Claude Haiku 5.5, omit all three and use prompting to guide the model's behavior instead. If a request includes `temperature`, it must be `1`. If it includes `top_p`, it must be `0.99`, its default. Any other `temperature` or `top_p` value returns a 400 error, including a `top_p` of `1`. So does any `top_k` value, and so does a request that includes both `temperature` and `top_p`.
+On Claude Haiku 5.5, omit `temperature`, `top_p`, and `top_k` and use prompting to guide the model's behavior instead.
 
 ## Replace assistant prefill
 
 A prefill is a final assistant turn in `messages` that the model continues. Claude Haiku 4.5 accepts one when thinking is off. Claude Haiku 5.5 rejects it with a 400 error, even with thinking turned off. End `messages` with a user turn, and replace each prefill according to what it was for:
 
-* **Output format:** use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), or tools with enum fields for classification. On Amazon Bedrock, structured outputs aren't available for Claude Haiku 5.5. There, describe the format in the prompt or use a tool without `strict`, and validate the output in your code.
+* **Output format:** use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), or tools with enum fields for classification.
 * **Preambles:** ask in the system prompt for a direct answer.
 * **Continuations:** move them to the user message, for example "Your previous response was interrupted and ended with `[previous_response]`. Continue from where you left off."
 * **Context reminders:** put them in the user turn.
 
 ## Move computer use to the toolset
 
-Claude Haiku 4.5 supports [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) through the `computer_20250124` tool, with the `computer-use-2025-01-24` beta header. On the Claude API and Google Cloud, Claude Haiku 5.5 supports computer use only through the `computer_toolset_20260801` toolset, and a request that declares `computer_20250124` returns a 400 error. On Amazon Bedrock, Claude Haiku 5.5 doesn't accept `computer_20250124` either; use the `computer_20251124` tool version with the `computer-use-2025-11-24` beta header.
+Claude Haiku 4.5 supports [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool) through the `computer_20250124` tool, with the `computer-use-2025-01-24` beta header. On the Claude API and Claude Models on Google Cloud (Google managed), Claude Haiku 5.5 supports computer use only through the `computer_toolset_20260801` toolset, and a request that declares `computer_20250124` returns a 400 error. On Amazon Bedrock, Claude Haiku 5.5 doesn't accept `computer_20250124` either; use the `computer_20251124` tool version with the `computer-use-2025-11-24` beta header.
 
 To move an integration to the toolset, drop the `computer-use-2025-01-24` beta header and replace the `tools` entry with `{"type": "computer_toolset_20260801"}`. Then make the other request and agent-loop changes in [Migrate from `computer_20251124`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#migrate-from-computer-20251124): dispatch on each member `tool_use` block's `name` and `toolset_name` rather than on `input.action`, handle every such block in a turn, and echo `toolset_name` on results. Zoom is on by default in the toolset; if your environment doesn't implement it, add `"configs": {"zoom": {"enabled": false}}`. If you send the `fine-grained-tool-streaming-2025-05-14` beta header, remove it. Alongside a toolset entry, it returns a 400 error. For other platforms, see the computer use tool's [Compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#compatibility) section.
 
-On the Claude API and Google Cloud, Claude Haiku 5.5 also supports the [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) (`browser_toolset_20260801`) for tasks inside webpages. Claude Haiku 4.5 doesn't support it.
+On the Claude API and Claude Models on Google Cloud (Google managed), Claude Haiku 5.5 also supports the [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool) (`browser_toolset_20260801`) for tasks inside webpages. Claude Haiku 4.5 doesn't support it.
 
 ## Replay thinking blocks through the account that produced them
 
-Thinking blocks from Claude Haiku 5.5 work only in the account that produced them, or in an account linked to it. When another account sends one of these blocks, the API drops the block before the model sees it, and the request succeeds without that reasoning. This affects code that stores conversations and replays them through a different account, for example a service that serves several customers from one conversation store. Replay each conversation through the account that produced it. See [Thinking blocks stay with the account that produced them](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#account-bound-thinking).
+Thinking blocks from Claude Haiku 5.5 work only in the account that produced them, or in an account linked to it. When another account sends one of these blocks, the API drops the block before the model receives it, and the request succeeds without that reasoning. This affects code that stores conversations and replays them through a different account, for example a service that serves several customers from one conversation store. Replay each conversation through the account that produced it. See [Thinking blocks stay with the account that produced them](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#account-bound-thinking).
 
 ## Keep earlier turns unchanged
 
@@ -154,11 +153,11 @@ A Claude Haiku 5.5 thinking block stays valid only while everything sent before 
 
 ## Migrating to Claude Haiku 5.5 from Claude Haiku 3.5 and earlier Haiku models
 
-Claude Haiku 3.5 is retired on the Claude API and Amazon Bedrock, and Claude Haiku 3 is retired on the Claude API and Google Cloud. Requests to a retired model fail. Google Cloud lists Claude Haiku 3.5 as deprecated and available only to existing customers. See [Model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations).
+Claude Haiku 3.5 is retired on the Claude API and Amazon Bedrock, and Claude Haiku 3 is retired on the Claude API and Claude Models on Google Cloud (Google managed). Requests to a retired model fail. Claude Models on Google Cloud (Google managed) lists Claude Haiku 3.5 as deprecated and available only to existing customers. See [Model deprecations](https://platform.claude.com/docs/en/about-claude/model-deprecations).
 
 From either model, first apply every preceding section, then these changes:
 
-* **Model ID:** Replace `claude-3-5-haiku-20241022`, its alias `claude-3-5-haiku-latest`, or `claude-3-haiku-20240307` with `claude-haiku-5-5`. On Google Cloud, replace `claude-3-5-haiku@20241022` with `claude-haiku-5-5`. On Amazon Bedrock, use the Claude Haiku 5.5 ID from [Use the Claude Haiku 5.5 model ID](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#use-the-claude-haiku-5-5-model-id).
+* **Model ID:** Replace `claude-3-5-haiku-20241022`, its alias `claude-3-5-haiku-latest`, or `claude-3-haiku-20240307` with `claude-haiku-5-5`. On Claude Models on Google Cloud (Google managed), replace `claude-3-5-haiku@20241022` with `claude-haiku-5-5`. On Amazon Bedrock, use the Claude Haiku 5.5 ID from [Use the Claude Haiku 5.5 model ID](https://platform.claude.com/docs/en/models/haiku-5-5/migration-guide#use-the-claude-haiku-5-5-model-id).
 * **Code execution:** Claude Haiku 5.5 accepts `code_execution_20250825` and later versions. If you use the legacy Python-only `code_execution_20250522`, move to one of them. See [Upgrade to latest tool version](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#upgrade-to-latest-tool-version).
 * **Text editor:** If you use the text editor tool, move to `text_editor_20250728` (tool name `str_replace_based_edit_tool`), which has no `undo_edit` command. See [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool).
 * **Stop reasons:** Handle `refusal` and `model_context_window_exceeded`. See [Handling stop reasons](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons).

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/middleware
-fetched_at: 2026-10-19T05:32:49.313074+00:00
+fetched_at: 2026-10-26T05:40:14.750848+00:00
 fetch_method: mintlify_md
 ---
 
@@ -136,22 +136,26 @@ Each middleware is a function that receives the outgoing request and the next ha
       .build();
   ```
 
-  ```php PHP
-  $loggingMiddleware = function (RequestInterface $request, callable $next): ResponseInterface {
-      // Before the request
-      error_log("-> {$request->getMethod()} {$request->getUri()}");
+  <CodeGroupItem>
+    ```php PHP
+    $loggingMiddleware = function (RequestInterface $request, callable $next): ResponseInterface {
+        // Before the request
+        error_log("-> {$request->getMethod()} {$request->getUri()}");
 
-      // Forward the request to the rest of the chain
-      $response = $next($request);
+        // Forward the request to the rest of the chain
+        $response = $next($request);
 
-      // After the request
-      error_log("<- {$response->getStatusCode()}");
+        // After the request
+        error_log("<- {$response->getStatusCode()}");
 
-      return $response;
-  };
+        return $response;
+    };
 
-  $client = new Client(requestOptions: ['middleware' => [$loggingMiddleware]]);
-  ```
+    $client = new Client(requestOptions: ['middleware' => [$loggingMiddleware]]);
+    ```
+
+    For middleware classes, the request options argument, and how middleware interacts with retries, errors, and request signing, see [Middleware in the PHP SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/sdks/php#middleware).
+  </CodeGroupItem>
 
   ```ruby Ruby
   logging_middleware = lambda do |request, call_next|
@@ -179,7 +183,7 @@ In the Go SDK, repeated `option.WithMiddleware` calls concatenate (client first,
 
 ## Replacing the HTTP client
 
-The SDK also accepts a custom HTTP client (for proxy configuration, custom TLS, or connection pooling). Only one HTTP client is used per SDK client; setting it replaces the default. The custom HTTP client receives requests after all middleware has run.
+The SDK also accepts a custom HTTP client (for proxy configuration, custom TLS, or connection pooling). Only one HTTP client is used for each SDK client; setting it replaces the default. The custom HTTP client receives requests after all middleware has run.
 
 ## Built-in middleware
 

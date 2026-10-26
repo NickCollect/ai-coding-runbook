@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/download
-fetched_at: 2026-10-12T06:49:53.975079+00:00
+fetched_at: 2026-10-26T05:40:17.669789+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,6 +39,6 @@ Download File
 
 ```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```

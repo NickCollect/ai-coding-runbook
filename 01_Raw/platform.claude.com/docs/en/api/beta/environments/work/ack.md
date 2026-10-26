@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/ack
-fetched_at: 2026-10-19T05:32:54.361353+00:00
+fetched_at: 2026-10-26T05:40:24.472697+00:00
 fetch_method: mintlify_md
 ---
 
@@ -139,6 +139,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Returns
 
 - `BetaSelfHostedWork object`
@@ -226,9 +228,9 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 ```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/ack \
     -X POST \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/retrieve
-fetched_at: 2026-10-19T05:32:54.144539+00:00
+fetched_at: 2026-10-26T05:40:24.120369+00:00
 fetch_method: mintlify_md
 ---
 
@@ -134,6 +134,8 @@ Retrieve a specific environment by ID.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -279,9 +281,9 @@ Retrieve a specific environment by ID.
 
 ```bash
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

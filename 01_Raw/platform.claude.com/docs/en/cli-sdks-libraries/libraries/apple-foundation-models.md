@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models
-fetched_at: 2026-10-19T05:32:49.592539+00:00
+fetched_at: 2026-10-26T05:40:15.329720+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ description: Use Claude on Apple platforms through the Foundation Models framewo
 
 [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) is a Swift package that makes Claude available as a server-side language model in Apple's [Foundation Models](https://developer.apple.com/documentation/foundationmodels) framework. The package conforms Claude to the framework's `LanguageModel` protocol, so you drive it with the same `LanguageModelSession` API you use for Apple's on-device model: `respond(to:)`, streaming, guided generation, and tool calling all work the same way.
 
-Requests go directly from your app to the Claude API; Apple is not in the request path and does not see prompts or responses. Usage is billed to your Anthropic account at [standard API pricing](https://platform.claude.com/docs/en/about-claude/pricing), so your organization needs an available credit balance or an active billing method. Your app decides when to use Claude and when to use Apple's on-device model: pass whichever model you want to each session.
+Requests go directly from your app to the Claude API; Apple is not in the request path and does not see prompts or responses. Usage is billed to your Anthropic account at [standard API pricing](https://platform.claude.com/docs/en/about-claude/pricing), so your organization needs an available credit balance or an active billing method. Your app determines when to use Claude and when to use Apple's on-device model: pass whichever model you want to each session.
 
 <Note>
   **Beta.** This package targets the Foundation Models server-side language model API introduced in the OS 27 betas. APIs might change during the beta.
@@ -137,7 +137,7 @@ To set up App Attest, you need your Apple Developer Team ID and the admin, owner
 
 The first time your app uses Claude on a device, the app requests a challenge from Anthropic, attests the device with Apple's `DCAppAttestService`, and exchanges the verified attestation for an access token. The Claude for Foundation Models package runs this flow automatically and requests new tokens as they expire; there is no attestation code for you to write.
 
-Tokens are scoped to your workspace, expire after one hour, and authorize only [Messages API](https://platform.claude.com/docs/en/api/messages/create) calls. They carry no end-user identity: App Attest identifies your app, not the person using it, so handle any per-user logic in your app.
+Tokens are scoped to your workspace, expire after 1 hour, and authorize only [Messages API](https://platform.claude.com/docs/en/api/messages/create) calls. They carry no end-user identity: App Attest identifies your app, not the person using it, so handle any per-user logic in your app.
 
 To stop a compromised or retired app, revoke its integration. In the Claude Console, go to the [App integrations](https://platform.claude.com/settings/workspaces/default/app-integrations) page (`platform.claude.com/settings/workspaces/default/app-integrations`). Each app integration belongs to one workspace. In the workspace picker in the sidebar, select the workspace that holds the integration. Select the integration and click **Revoke**, then confirm. Revoking an integration revokes its outstanding tokens, and its registered devices can no longer request new ones. Revocation is permanent, so create a new app integration to restore access.
 
@@ -153,7 +153,7 @@ ClaudeLanguageModel(
 )
 ```
 
-Your proxy receives standard [Messages API](https://platform.claude.com/docs/en/api/messages/create) requests, attaches the `x-api-key` header, and forwards them to `https://api.anthropic.com`.
+Your proxy receives standard [Messages API](https://platform.claude.com/docs/en/api/messages/create) requests, attaches your API key as `Authorization: Bearer <key>`, and forwards them to `https://api.anthropic.com`.
 
 ### API key (development)
 
@@ -199,7 +199,7 @@ Structured output requires a model whose capabilities include it (all compiled-i
 
 ### Client-side tools
 
-The framework's `tools:` array works unchanged. Conform your types to `Tool`, pass them to `LanguageModelSession`, and the framework invokes them on the device when Claude calls them. See [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview).
+The framework's `tools:` array works unchanged. Conform your types to `Tool`, pass them to `LanguageModelSession`, and the framework runs them on the device when Claude calls them. See [Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview).
 
 ```swift
 let session = LanguageModelSession(model: model, tools: [FindRestaurantsTool()])
@@ -207,7 +207,7 @@ let session = LanguageModelSession(model: model, tools: [FindRestaurantsTool()])
 
 ### Server-side tools
 
-[Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) (web search, web fetch, and code execution) run on Anthropic's infrastructure within a single round trip, with nothing for the framework to invoke on the device. Configure them for each model with `serverTools:`:
+[Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) (web search, web fetch, and code execution) run on Anthropic's infrastructure within a single round trip, with nothing for the framework to call on the device. Configure them for each model with `serverTools:`:
 
 ```swift
 let model = ClaudeLanguageModel(
@@ -241,7 +241,7 @@ do {
 } catch ClaudeError.missingCredential {
   // Prompt for an API key.
 } catch let error as LanguageModelError {
-  // Framework-shaped errors (rate limits, guardrails, context length, decoding).
+  // Framework-shaped errors (rate limits, guardrails, context-window overflow, decoding).
 } catch {
   // Transport errors.
 }

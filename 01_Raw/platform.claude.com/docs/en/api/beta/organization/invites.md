@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/invites
-fetched_at: 2026-10-19T05:32:58.642414+00:00
+fetched_at: 2026-10-26T05:40:32.629531+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,8 +138,8 @@ On plans that draw members from a finite pool of purchased seats, the invite aut
 ```bash
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "email": "user@emaildomain.com",
           "role": "user"
@@ -310,8 +310,8 @@ List the organization's invites.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/invites \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -439,8 +439,8 @@ Retrieve an invite by ID.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -500,8 +500,8 @@ Delete a pending invite.
 ```bash
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)

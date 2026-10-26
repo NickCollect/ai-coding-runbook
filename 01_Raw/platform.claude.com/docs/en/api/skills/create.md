@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/skills/create
-fetched_at: 2026-10-12T06:49:54.093929+00:00
+fetched_at: 2026-10-26T05:40:17.748694+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ Create Skill
 
 ## Body parameters (form-data)
 
-- `files: array of string`
+- `files: array of file`
 
   Files to upload for the skill.
 
@@ -118,8 +118,8 @@ Create Skill
 ```bash
 curl https://api.anthropic.com/v1/skills \
     -H 'Content-Type: multipart/form-data' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -F 'files[]=@/path/to/file'
 ```
 

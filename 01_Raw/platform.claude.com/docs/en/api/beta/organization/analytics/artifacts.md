@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/analytics/artifacts
-fetched_at: 2026-10-12T06:50:07.460524+00:00
+fetched_at: 2026-10-26T05:40:36.174802+00:00
 fetch_method: mintlify_md
 ---
 
@@ -115,8 +115,8 @@ can be broken out per product, per member, or per RBAC group via
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/artifacts \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/create
-fetched_at: 2026-10-19T05:32:58.416151+00:00
+fetched_at: 2026-10-26T05:40:32.207230+00:00
 fetch_method: mintlify_md
 ---
 
@@ -146,6 +146,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ## Body parameters
 
@@ -367,8 +369,8 @@ manage rules whose `oauth_scope` is `workspace:developer` or
 ```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "issuer_id": "issuer_id",
           "match": {},

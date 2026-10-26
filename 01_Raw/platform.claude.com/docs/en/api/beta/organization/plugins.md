@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/plugins
-fetched_at: 2026-10-19T05:33:01.918975+00:00
+fetched_at: 2026-10-26T05:40:38.119985+00:00
 fetch_method: mintlify_md
 ---
 
@@ -157,9 +157,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Body parameters (form-data)
 
-- `files: array of string`
+- `files: array of file`
 
   The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
 
@@ -221,7 +223,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -237,7 +239,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -297,7 +299,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: string`
 
@@ -349,7 +351,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -363,11 +369,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `served_version_pinned: boolean`
 
-    False while the served version follows each new version; true once it has been pinned to one.
+    True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
   - `updated_at: string`
 
-    RFC 3339. Moves on a new version and on a served-version change; a change to the Plugin's installation settings or shares does not move it.
+    RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
 
@@ -376,9 +382,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins \
     -H 'Content-Type: multipart/form-data' \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -F 'files[]=@/path/to/file'
 ```
 
@@ -556,6 +562,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaPlugin object`
@@ -604,7 +612,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -620,7 +628,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -680,7 +688,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: string`
 
@@ -732,7 +740,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -746,11 +758,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `served_version_pinned: boolean`
 
-    False while the served version follows each new version; true once it has been pinned to one.
+    True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
   - `updated_at: string`
 
-    RFC 3339. Moves on a new version and on a served-version change; a change to the Plugin's installation settings or shares does not move it.
+    RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
 
@@ -758,9 +770,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -818,10 +830,13 @@ Pass the version as `served_version_id`: an earlier one to roll back, a later on
 start serving a version that was stored without being served, or the one already
 served to pin it without changing what is served. No new version is created.
 
-When the organization has content scanning enabled, a version whose scan is still
-running is refused with a 409 (`error_code` `scan_pending`; retry once the scan
-finishes) and one whose scan failed, errored or reached no verdict with a 400
-(`scan_failed`; a `warn` is accepted). When the Plugin is in the organization's
+When the organization has content scanning enabled, a version whose
+`content_scan.status` is `processing` is refused with a 409 (`error_code`
+`scan_pending`; retry once the scan finishes). A version whose `content_scan.status`
+is `errored`, or whose `content_scan.assessment` is `fail` or `unknown`, is refused
+with a 400 (`error_code` `scan_failed`); a `warn` is accepted. If the scan outcome
+cannot be read at that moment, the request fails with a retryable 503 instead.
+When the Plugin is in the organization's
 library marketplace, a version other than the one served is also refused with a 409
 when one of its skills has a name that an organization skill (one an administrator
 uploaded for the whole organization in claude.ai) has since taken: `error_code`
@@ -951,6 +966,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Body parameters
 
 - `served_version_id: string`
@@ -1005,7 +1022,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -1021,7 +1038,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -1081,7 +1098,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: string`
 
@@ -1133,7 +1150,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -1147,11 +1168,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `served_version_pinned: boolean`
 
-    False while the served version follows each new version; true once it has been pinned to one.
+    True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
   - `updated_at: string`
 
-    RFC 3339. Moves on a new version and on a served-version change; a change to the Plugin's installation settings or shares does not move it.
+    RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
 
@@ -1160,9 +1181,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "served_version_id": "pluginver_01KaZmQpRsTuVwXyZ2b4c6d8"
         }'
@@ -1396,6 +1417,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `data: array of BetaPlugin`
@@ -1444,7 +1467,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -1460,7 +1483,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -1520,7 +1543,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: string`
 
@@ -1572,7 +1595,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -1586,11 +1613,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `served_version_pinned: boolean`
 
-    False while the served version follows each new version; true once it has been pinned to one.
+    True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
   - `updated_at: string`
 
-    RFC 3339. Moves on a new version and on a served-version change; a change to the Plugin's installation settings or shares does not move it.
+    RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
 
@@ -1602,9 +1629,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -1791,6 +1818,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ### Returns
 
 - `BetaDeletedPlugin object`
@@ -1810,9 +1839,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -1888,7 +1917,7 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -1904,7 +1933,7 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -1964,7 +1993,7 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
   - `manifest_version: string or null`
 
-    The version string the served version's manifest declares.
+    The served version's manifest `version`, normalized for display, or `null` (the Plugin Version's `manifest_version` says how and when).
 
   - `marketplace_id: string`
 
@@ -2016,7 +2045,11 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the served version reaches: `remote` when it declares an MCP server or a CLI, `privileged` when it declares a hook, monitor, language server or settings but nothing remote, `contained` otherwise; null when not classifiable.
+    How far the served version reaches, or `null` if it is not classified.
+
+    `remote` means it declares an MCP server or a CLI. `privileged` means it declares no MCP server or CLI, but declares a hook, monitor, language server, or settings, or has a skill, command, or other Markdown file whose frontmatter pre-approves tools (`allowed-tools` with any value other than an empty one or one that names only `AskUserQuestion`, `TodoWrite`, and `ToolSearch`). Otherwise it is `contained`.
+
+    If the frontmatter of a skill, command, or other Markdown file that could change the value could not be read, or was past a size limit, the version is `null` or `privileged` (or `remote`, if it declares an MCP server or a CLI), not `contained`. The value is normally worked out when a version is stored, under the rules of that time, so an older version can be `null`, or `contained` where the same files stored today would be `privileged` or `null`.
 
     - `"contained"`
 
@@ -2030,11 +2063,11 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
   - `served_version_pinned: boolean`
 
-    False while the served version follows each new version; true once it has been pinned to one.
+    True once the served version has been pinned, through Update Plugin or in claude.ai. While false, a new version normally becomes the served version when it is stored. While the newest version is not the served version, as when a version saved in claude.ai is waiting for its content scan, `served_version_id` differs from `latest_version_id`.
 
   - `updated_at: string`
 
-    RFC 3339. Moves on a new version and on a served-version change; a change to the Plugin's installation settings or shares does not move it.
+    RFC 3339. Moves on a served-version change (including pinning an unpinned Plugin to the version it already serves) and, normally, on a new version. A version saved in claude.ai that waits for its content scan moves it when it becomes the served version, and not necessarily when it is stored. A change to the Plugin's installation settings or shares does not move it.
 
     format: date-time
 
@@ -2086,7 +2119,7 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
   - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-    The scan's verdict; set only when `status` is `completed`.
+    The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
     - `"fail"`
 
@@ -2102,7 +2135,7 @@ curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID \
 
   - `status: "completed" or "errored" or "processing"`
 
-    `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+    `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
     - `"completed"`
 
@@ -2337,9 +2370,11 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Body parameters (form-data)
 
-- `files: array of string`
+- `files: array of file`
 
   The version's files: one part per file, the part's filename being the file's path within the Plugin (for example `skills/review-pr/SKILL.md`), or a single `.zip` or `.plugin` archive holding them all. On the wire each part is named `files[]`, and a part named plain `files` is not read; with cURL, `-F 'files[]=@SKILL.md;filename=skills/review-pr/SKILL.md'`. The files must include the manifest, `.claude-plugin/plugin.json`.
 
@@ -2397,7 +2432,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -2413,7 +2448,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -2469,7 +2504,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `plugin_id: string`
 
@@ -2477,7 +2512,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `"contained"`
 
@@ -2494,9 +2529,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/versions \
     -H 'Content-Type: multipart/form-data' \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -F 'files[]=@/path/to/file'
 ```
 
@@ -2682,6 +2717,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `data: array of BetaPluginVersion`
@@ -2730,7 +2767,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -2746,7 +2783,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -2802,7 +2839,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `plugin_id: string`
 
@@ -2810,7 +2847,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `"contained"`
 
@@ -2830,9 +2867,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/versions \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -3009,6 +3046,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `BetaPluginVersion object`
@@ -3057,7 +3096,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `assessment: "fail" or "pass" or "unknown" or "warn" or null`
 
-      The scan's verdict; set only when `status` is `completed`.
+      The scan's verdict; set only when `status` is `completed`. A `warn` can mean a `fail` that was allowed in claude.ai.
 
       - `"fail"`
 
@@ -3073,7 +3112,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
     - `status: "completed" or "errored" or "processing"`
 
-      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run or its outcome cannot be read.
+      `processing` while a scan runs, `completed` when it ran to completion, `errored` when it could not run. Once a scan of the version has completed, `content_scan` describes the newest completed scan, even while a later scan runs. While the scan outcome cannot be read, `status` is `errored` instead.
 
       - `"completed"`
 
@@ -3129,7 +3168,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `manifest_version: string or null`
 
-    The version string the manifest declares; null when it declares none.
+    The manifest's `version`, normalized for display: one leading `v` or `V` is dropped, and the result is returned only if it is 1 to 64 characters, starts with a digit, and uses only ASCII letters, digits, `.`, `+`, and `-`; otherwise `null`. For example, `"v1.4.0"` is returned as `"1.4.0"`, and `"latest"` as `null`. For a synchronized plugin, the `version` of its `marketplace.json` entry can take the place of the manifest's `version`. It is also `null` for a version stored before claude.ai began recording this field (August 2026).
 
   - `plugin_id: string`
 
@@ -3137,7 +3176,7 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `reach: "contained" or "privileged" or "remote" or null`
 
-    How far the version reaches: `remote`, `privileged` or `contained`, as on the Plugin; null when not classifiable.
+    How far the version reaches: `remote`, `privileged`, `contained`, or `null`, as defined on the Plugin's `reach`.
 
     - `"contained"`
 
@@ -3153,9 +3192,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/versions/$VERSION \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -3343,13 +3382,15 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Example
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/versions/$VERSION/content \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ## Plugins › Installation Settings
@@ -3513,6 +3554,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `data: array of BetaPluginInstallationSetting`
@@ -3595,9 +3638,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/installation_settings \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -3762,6 +3805,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Body parameters
 
 - `installation_preference: "auto_install" or "available" or "not_available" or "required"`
@@ -3859,9 +3904,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/installation_settings/$TARGET \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "installation_preference": "required"
         }'
@@ -4028,6 +4073,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `BetaDeletedPluginInstallationSetting object`
@@ -4086,9 +4133,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/installation_settings/$TARGET \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -4268,6 +4315,8 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 #### Returns
 
 - `data: array of BetaPluginShare`
@@ -4332,9 +4381,9 @@ Every request must include the beta header `anthropic-beta: ce-plugins-2026-09-0
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/plugins/$PLUGIN_ID/shares \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: ce-plugins-2026-09-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)

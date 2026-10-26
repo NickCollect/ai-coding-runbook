@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-custom-tools
-fetched_at: 2026-10-19T05:32:44.925642+00:00
+fetched_at: 2026-10-26T05:40:05.075940+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-[Custom tools](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools) are tools your own code executes: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. Your worker can be that code. Because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more.
+[Custom tools](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools) are tools your own code runs: the agent emits an `agent.custom_tool_use` event and waits for a matching `user.custom_tool_result`. Your worker can be that code. Because it runs inside your sandbox, the tool reaches the internal services, credentials, and network egress you configured for the sandbox, and nothing more.
 
 The environment key authorizes posting custom tool results, so your Claude API key stays off the worker host.
 
@@ -129,11 +129,11 @@ The environment key authorizes posting custom tool results, so your Claude API k
       	"os/signal"
       	"syscall"
 
-      	"github.com/anthropics/anthropic-sdk-go"
-      	"github.com/anthropics/anthropic-sdk-go/lib/environments"
-      	"github.com/anthropics/anthropic-sdk-go/option"
-      	"github.com/anthropics/anthropic-sdk-go/toolrunner"
-      	"github.com/anthropics/anthropic-sdk-go/tools/agenttoolset"
+      	"github.com/anthropics/anthropic-sdk-go/v2"
+      	"github.com/anthropics/anthropic-sdk-go/v2/lib/environments"
+      	"github.com/anthropics/anthropic-sdk-go/v2/option"
+      	"github.com/anthropics/anthropic-sdk-go/v2/toolrunner"
+      	"github.com/anthropics/anthropic-sdk-go/v2/tools/agenttoolset"
       )
 
       type orderStatusInput struct {
@@ -178,7 +178,6 @@ The environment key authorizes posting custom tool results, so your Claude API k
       		log.Fatalf("worker: %v", err)
       	}
       }
-
       ```
 
       <CodeGroupItem language="Java">
@@ -214,7 +213,7 @@ At runtime the model calls a wrapped tool like any other custom tool:
 
 The SDK's [Client-side MCP helpers](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#client-side-mcp-helpers) convert the server's tools into the runnable tools the worker accepts. Install an MCP SDK alongside the Anthropic SDK: `pip install "anthropic[mcp]" "mcp>=1.24"` (typescript: `npm install @modelcontextprotocol/sdk`; go: `go get github.com/modelcontextprotocol/go-sdk`; csharp: `dotnet add package ModelContextProtocol`; java: `com.anthropic:anthropic-java-mcp`; php: `composer require mcp/sdk`; ruby: `bundle add mcp faraday event_stream_parser`).
 
-The examples connect without authentication. To send credentials, configure the `http_client` (typescript: `requestInit`; go: `HTTPClient`; csharp: `AdditionalHeaders`; java: `customizeRequest`; php, ruby: `headers`) you hand to the MCP transport.
+The examples connect without authentication. To send credentials, configure the `http_client` (typescript: `requestInit`; go: `HTTPClient`; csharp: `AdditionalHeaders`; java: `.customizeRequest()`; php, ruby: `headers`) you hand to the MCP transport.
 
 ### Declare and serve the tools
 
@@ -229,6 +228,7 @@ The examples connect without authentication. To send credentials, configure the 
       from anthropic import AsyncAnthropic
       from anthropic.types.beta import BetaManagedAgentsCustomToolParams
       from mcp import ClientSession, types
+
       # Requires mcp >= 1.24, which renamed streamablehttp_client to streamable_http_client.
       from mcp.client.streamable_http import streamable_http_client
 
@@ -321,10 +321,7 @@ The examples connect without authentication. To send credentials, configure the 
       );
       var mcpTools = await mcpClient.ListToolsAsync();
 
-      List<Tool> tools =
-      [
-          new BetaManagedAgentsAgentToolset20260401Params { Type = "agent_toolset_20260401" },
-      ];
+      List<Tool> tools = [new BetaManagedAgentsAgentToolset20260401Params()];
       foreach (var tool in mcpTools)
       {
           var description = tool.Description;
@@ -338,7 +335,6 @@ The examples connect without authentication. To send credentials, configure the 
           tools.Add(
               new BetaManagedAgentsCustomToolParams
               {
-                  Type = "custom",
                   Name = tool.Name,
                   Description = description,
                   InputSchema = new(
@@ -366,7 +362,7 @@ The examples connect without authentication. To send credentials, configure the 
       	"fmt"
       	"log"
 
-      	"github.com/anthropics/anthropic-sdk-go"
+      	"github.com/anthropics/anthropic-sdk-go/v2"
       	mcpsdk "github.com/modelcontextprotocol/go-sdk/mcp"
       )
 
@@ -412,7 +408,6 @@ The examples connect without authentication. To send credentials, configure the 
       	}
       	return anthropic.BetaAgentNewParamsToolUnion{
       		OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
-      			Type:        anthropic.BetaManagedAgentsCustomToolParamsTypeCustom,
       			Name:        tool.Name,
       			Description: description,
       			InputSchema: inputSchema,
@@ -440,9 +435,7 @@ The examples connect without authentication. To send credentials, configure the 
       	}
 
       	tools := []anthropic.BetaAgentNewParamsToolUnion{
-      		{OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-      			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-      		}},
+      		{OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{}},
       	}
       	for _, tool := range listed.Tools {
       		custom, err := toCustomTool(tool)
@@ -462,7 +455,6 @@ The examples connect without authentication. To send credentials, configure the 
       	}
       	fmt.Println(agent.ID)
       }
-
       ```
 
       ```java Java
@@ -479,7 +471,7 @@ The examples connect without authentication. To send credentials, configure the 
 
       // The MCP fields map one to one onto a custom tool declaration. The MCP Java
       // SDK keeps only these top-level keywords of a tool's input schema: type,
-      // properties, required, additionalProperties, $defs and definitions.
+      // properties, required, additionalProperties, $defs, and definitions.
       BetaManagedAgentsCustomToolParams toCustomTool(McpSchema.Tool tool) {
           var description = tool.description();
           if (description == null || description.isEmpty()) {
@@ -487,7 +479,6 @@ The examples connect without authentication. To send credentials, configure the 
           }
 
           return BetaManagedAgentsCustomToolParams.builder()
-              .type(BetaManagedAgentsCustomToolParams.Type.CUSTOM)
               .name(tool.name())
               .description(description)
               .inputSchema(JsonValue.from(tool.inputSchema())
@@ -512,9 +503,7 @@ The examples connect without authentication. To send credentials, configure the 
               var params = AgentCreateParams.builder()
                   .name("Internal tools agent")
                   .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-                  .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-                      .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                      .build());
+                  .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build());
               for (var tool : mcpClient.listTools().tools()) {
                   params.addTool(toCustomTool(tool));
               }
@@ -603,7 +592,7 @@ The examples connect without authentication. To send credentials, configure the 
   </Step>
 
   <Step title="Serve the tools from the worker">
-    Connect to the same MCP server at startup, convert its tools with `async_mcp_tool` (typescript: `mcpTools`; go: `mcp.NewBetaTools`), and register them alongside `beta_agent_toolset_20260401` (typescript: `betaAgentToolset20260401`; go: `agenttoolset.BetaAgentToolset20260401`). Keep one MCP session open for the life of the worker.
+    Connect to the same MCP server at startup, convert its tools with `async_mcp_tool()` (typescript: `mcpTools()`; go: `mcp.NewBetaTools()`), and register them alongside `beta_agent_toolset_20260401()` (typescript: `betaAgentToolset20260401()`; go: `agenttoolset.BetaAgentToolset20260401()`). Keep one MCP session open for the life of the worker.
 
     <CodeGroup exclude="shell, csharp, java, php, ruby">
       ```python Python
@@ -615,6 +604,7 @@ The examples connect without authentication. To send credentials, configure the 
       from anthropic.lib.tools.agent_toolset import beta_agent_toolset_20260401
       from anthropic.lib.tools.mcp import async_mcp_tool
       from mcp import ClientSession
+
       # Requires mcp >= 1.24, which renamed streamablehttp_client to streamable_http_client.
       from mcp.client.streamable_http import streamable_http_client
 
@@ -629,7 +619,9 @@ The examples connect without authentication. To send credentials, configure the 
           # result instead of a stalled call.
           async with (
               streamable_http_client(MCP_SERVER_URL) as (read, write, _),
-              ClientSession(read, write, read_timeout_seconds=timedelta(seconds=60)) as mcp_session,
+              ClientSession(
+                  read, write, read_timeout_seconds=timedelta(seconds=60)
+              ) as mcp_session,
               AsyncAnthropic(auth_token=environment_key) as client,
           ):
               await mcp_session.initialize()
@@ -703,11 +695,11 @@ The examples connect without authentication. To send credentials, configure the 
       	"os/signal"
       	"syscall"
 
-      	"github.com/anthropics/anthropic-sdk-go"
-      	"github.com/anthropics/anthropic-sdk-go/lib/environments"
-      	"github.com/anthropics/anthropic-sdk-go/mcp"
-      	"github.com/anthropics/anthropic-sdk-go/option"
-      	"github.com/anthropics/anthropic-sdk-go/tools/agenttoolset"
+      	"github.com/anthropics/anthropic-sdk-go/v2"
+      	"github.com/anthropics/anthropic-sdk-go/v2/lib/environments"
+      	"github.com/anthropics/anthropic-sdk-go/v2/mcp"
+      	"github.com/anthropics/anthropic-sdk-go/v2/option"
+      	"github.com/anthropics/anthropic-sdk-go/v2/tools/agenttoolset"
       	mcpsdk "github.com/modelcontextprotocol/go-sdk/mcp"
       )
 
@@ -752,7 +744,6 @@ The examples connect without authentication. To send credentials, configure the 
       		log.Fatalf("worker: %v", err)
       	}
       }
-
       ```
 
       <CodeGroupItem language="Java">
@@ -793,13 +784,13 @@ The MCP helpers keep the server's names and descriptions, and most schemas pass 
 Two cases need extra work:
 
 * **Two servers expose the same tool name:** Define the wrapper yourself under a prefixed name and have it call the server's original tool name.
-* **A generator such as pydantic factors schemas into `$defs`:** Inline those schemas before you declare the tool.
+* **A generator such as Pydantic factors schemas into `$defs`:** Inline those schemas before you declare the tool.
 
 ### Tool failures surface as error tool results
 
 When the MCP server reports a tool error, the worker posts an error tool result the model can react to. MCP content with no tool result equivalent, such as audio blocks and resource links, also surfaces as an error.
 
-Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. See [A wrapped MCP tool call hangs](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations#a-wrapped-mcp-tool-call-hangs) for what happens without one.
+Set a timeout on the MCP client for a faster and clearer failure, as the Python worker example does with `read_timeout_seconds`. See [A wrapped MCP tool call hangs](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-operations#a-wrapped-mcp-tool-call-hangs) for what occurs without one.
 
 ### Wrap only servers you operate or trust
 
@@ -807,4 +798,4 @@ A wrapped tool's name, description, and results enter the model's context like a
 
 ### Permission policies do not apply
 
-[Permission policies](https://platform.claude.com/docs/en/managed-agents/permission-policies#custom-tools) govern the built-in and MCP toolsets. The worker executes every wrapped tool call the model makes, so put any approval step in your own tool code.
+[Permission policies](https://platform.claude.com/docs/en/managed-agents/permission-policies#custom-tools) govern the built-in and MCP toolsets. The worker runs every wrapped tool call the model makes, so put any approval step in your own tool code.

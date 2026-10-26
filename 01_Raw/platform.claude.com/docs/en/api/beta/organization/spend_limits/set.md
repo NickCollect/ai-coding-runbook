@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits/set
-fetched_at: 2026-10-19T05:33:01.135491+00:00
+fetched_at: 2026-10-26T05:40:36.857342+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,6 +138,8 @@ Anthropic account team.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ## Body parameters
 
@@ -322,8 +324,8 @@ Anthropic account team.
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "amount": "50000",
           "scope": {

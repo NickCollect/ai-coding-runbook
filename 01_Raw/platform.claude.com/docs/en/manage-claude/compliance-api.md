@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-api
-fetched_at: 2026-10-19T05:32:46.708976+00:00
+fetched_at: 2026-10-26T05:40:09.299366+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/manage-claude/compliance-api
 description: Programmatic access to your organization's Claude activity, chats, files, projects, sessions in Claude apps, and users for compliance, audit, and governance.
 ---
 
-The Compliance API gives Claude Enterprise and Claude Console customers programmatic access to their organization's Activity Feed. For Claude Enterprise organizations, it also covers the directory of users, roles, and groups across every linked organization; the effective settings in force for each organization; the underlying chats, files, and projects in claude.ai organizations; and sessions in Cowork, Claude Code, Claude Science, Claude for Microsoft 365, Claude in Chrome, and the Claude add-ins for Google Docs, Google Sheets, and Google Slides. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
+The Compliance API gives Claude Enterprise and Claude Console customers programmatic access to their organization's Activity Feed. For Claude Enterprise organizations, it also covers the directory of users, roles, and groups across every linked organization; the effective settings in force for each organization; the underlying chats, files, and projects in claude.ai organizations; and sessions in Cowork, Claude Code, Claude Science, Claude for Microsoft 365, the Claude add-ins for Google Docs, Google Sheets, and Google Slides, and Claude in Chrome. Security, legal, and compliance teams use it to audit activity, retrieve or delete content, and feed events into downstream tooling.
 
 <Note>
   Two key types unlock the Compliance API. A **Compliance Access Key** (created in claude.ai) reaches every endpoint, and an **Admin API key** (created in Claude Console) reaches the Activity Feed only. See [Which key do you need?](https://platform.claude.com/docs/en/manage-claude/compliance-api-access#which-key-do-you-need) for the full key-type comparison.
@@ -21,8 +21,8 @@ The following call returns the most recent activity event in your organization. 
 ```bash cURL
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=1" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01"
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01"
 ```
 
 A successful response returns a JSON object containing `data` (an array of `Activity` records), `has_more`, `first_id`, and `last_id`:
@@ -31,7 +31,7 @@ A successful response returns a JSON object containing `data` (an array of `Acti
 {
   "data": [
     {
-      "id": "activity_01XyDMpzjS89pFZXqSFUBDr6",
+      "id": "activity_01DeFgHjKmNpQrStUvWxYzAb",
       "created_at": "2026-04-10T08:09:10Z",
       "organization_id": "org_01Wv6QeBcDfGhJkLmNpQrSt8",
       "organization_uuid": "abcdef01-2345-6789-abcd-ef0123456789",
@@ -43,13 +43,13 @@ A successful response returns a JSON object containing `data` (an array of `Acti
         "user_agent": "Mozilla/5.0..."
       },
       "type": "claude_chat_created",
-      "claude_chat_id": "claude_chat_01XyDMpzjS89pFZXqSFUBDr6",
+      "claude_chat_id": "claude_chat_01CdEfGhJkMnPqRsTuVwXyZa",
       "claude_project_id": "claude_proj_01KGp4eZNug9ri4kE35RSppq"
     }
   ],
   "has_more": true,
-  "first_id": "activity_01XyDMpzjS89pFZXqSFUBDr6",
-  "last_id": "activity_01XyDMpzjS89pFZXqSFUBDr6"
+  "first_id": "activity_01DeFgHjKmNpQrStUvWxYzAb",
+  "last_id": "activity_01DeFgHjKmNpQrStUvWxYzAb"
 }
 ```
 
@@ -61,9 +61,9 @@ Every endpoint lives under `/v1/compliance/*` on `https://api.anthropic.com`, au
 
 The Activity Feed (`GET /v1/compliance/activities`) is available to any key that carries the `read:compliance_activities` scope; see [Query the Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) for filters, pagination, and the full `Activity` object. The remaining endpoints require a Compliance Access Key carrying the relevant scope.
 
-A Claude Enterprise tenant has one parent organization (the top-level container that centralizes identity) with linked organizations of two kinds: claude.ai organizations, where users chat and store content, and Claude Console organizations, where users manage Claude API workloads. For a key that covers the parent organization, the directory endpoints (organizations, users, roles, and groups) return data from every linked organization of either kind. The content endpoints (chats, files, projects, project attachments, and sessions) serve Claude Enterprise data only. The chat, file, and project endpoints return claude.ai chats, files, and projects. The session endpoints return transcripts of sessions on users' machines (local sessions), captured while users are signed in with their Claude Enterprise account: sessions in Cowork, Claude Code, Claude Science, Claude for Microsoft 365, Claude in Chrome, and the Claude add-ins for Google Docs, Google Sheets, and Google Slides. They also return transcripts of Cowork sessions started on claude.ai web or mobile, which run in the cloud in Anthropic-managed environments (remote sessions). A standalone Claude Console organization (one with no parent organization) is not part of a Claude Enterprise tenant; it uses Admin API keys and can query the Activity Feed only.
+A Claude Enterprise tenant has one parent organization (the top-level container that centralizes identity) with linked organizations of two kinds: claude.ai organizations, where users chat and store content, and Claude Console organizations, where users manage Claude API workloads. For a key that covers the parent organization, the directory endpoints (organizations, users, roles, and groups) return data from every linked organization of either kind. The content endpoints (chats, files, projects, project attachments, and sessions) serve Claude Enterprise data only. The chat, file, and project endpoints return claude.ai chats, files, and projects. The session endpoints return transcripts of sessions on users' machines (local sessions), captured while users are signed in with their Claude Enterprise account: sessions in Cowork, Claude Code, Claude Science, Claude for Microsoft 365, the Claude add-ins for Google Docs, Google Sheets, and Google Slides, and Claude in Chrome. They also return transcripts of Cowork sessions started on claude.ai web or mobile, which run in the cloud in Anthropic-managed environments (remote sessions). A standalone Claude Console organization (one with no parent organization) is not part of a Claude Enterprise tenant; it uses Admin API keys and can query the Activity Feed only.
 
-All `/v1/compliance/*` endpoints share a rate limit of 600 requests per minute per parent organization (for a standalone Claude Console organization, per organization). The local session endpoints count only against that shared limit, and the remote session endpoints carry a second request budget on top. See [429 Too Many Requests](https://platform.claude.com/docs/en/manage-claude/compliance-errors#429-too-many-requests) for the response headers and retry contract.
+All `/v1/compliance/*` endpoints share a rate limit of 600 requests per minute for each parent organization (for a standalone Claude Console organization, for each organization). The local session endpoints count only against that shared limit, and the remote session endpoints carry a second request budget on top. See [429 Too Many Requests](https://platform.claude.com/docs/en/manage-claude/compliance-errors#429-too-many-requests) for the response headers and retry contract.
 
 ***
 
@@ -87,11 +87,11 @@ Anthropic provides two analytics APIs: the Claude Enterprise Analytics API and t
 
 ### OpenTelemetry logging
 
-[Cowork's OpenTelemetry logging](https://support.claude.com/en/articles/14477985-monitor-claude-cowork-activity-with-opentelemetry) and [Claude Code monitoring](https://code.claude.com/docs/en/monitoring-usage) stream per-event telemetry, including token, cost, and host metadata, to a collector you run as activity happens, whereas the Compliance API returns retained per-session transcripts from Anthropic on request and works with your existing Compliance Access Key. OpenTelemetry logging can also capture prompts and responses, but Anthropic recommends the Compliance API for retrieving the content of Cowork and Claude Code sessions. For a table comparing local sessions, remote sessions, and OpenTelemetry logging, see the introduction to [Retrieve session transcripts](https://platform.claude.com/docs/en/manage-claude/compliance-sessions).
+[Cowork's OpenTelemetry logging](https://support.claude.com/en/articles/14477985-monitor-claude-cowork-activity-with-opentelemetry) and [Claude Code monitoring](https://code.claude.com/docs/en/monitoring-usage) stream per-event telemetry, including token, cost, and host metadata, to a collector you run as activity occurs, whereas the Compliance API returns retained per-session transcripts from Anthropic on request and works with your existing Compliance Access Key. OpenTelemetry logging can also capture prompts and responses, but Anthropic recommends the Compliance API for retrieving the content of Cowork and Claude Code sessions. For a table comparing local sessions, remote sessions, and OpenTelemetry logging, see the introduction to [Retrieve session transcripts](https://platform.claude.com/docs/en/manage-claude/compliance-sessions).
 
 ### Inference hooks
 
-[Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks) (beta) act inline: your organization's AI security server receives each governed prompt before inference and can deny it in real time, whereas the Compliance API retrieves records after the fact and returns richer data, such as organization settings and full non-text files.
+[Inference hooks](https://platform.claude.com/docs/en/manage-claude/inference-hooks) act inline: your organization's AI security server receives each governed prompt before inference and can deny it in real time, whereas the Compliance API retrieves records after the fact and returns richer data, such as organization settings and full non-text files.
 
 ***
 

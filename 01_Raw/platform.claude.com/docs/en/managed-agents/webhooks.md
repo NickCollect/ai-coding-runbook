@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/webhooks
-fetched_at: 2026-10-19T05:32:45.093053+00:00
+fetched_at: 2026-10-26T05:40:05.805609+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Subscribe to webhooks
 url: https://platform.claude.com/docs/en/managed-agents/webhooks
-description: Get notified when major events happen without polling.
+description: Get notified when major events occur without polling.
 featureMetadata:
   topic:
     title: Managed Agents
@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Sessions are long-running interactions. While most real-time interactions happen through the [SSE event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming), webhooks notify you of major state changes.
+Sessions are long-running interactions. Although most real-time interactions occur through the [SSE event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming), webhooks notify you of major state changes.
 
 Webhook events return the event `type` and `id`, not the full object. When you receive a webhook event, you need to fetch the object directly with a `GET` call. This avoids delivering stale data on retries and keeps every delivery small.
 
@@ -28,7 +28,7 @@ Webhook events return the event `type` and `id`, not the full object. When you r
 
     | Event                              | Trigger                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
     | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `session.status_run_started`       | Agent execution started. This triggers at every session status transition to `running`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+    | `session.status_run_started`       | The agent started running. This triggers at every session status transition to `running`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
     | `session.status_idled`             | Agent awaiting input, for example, a tool permission approval or a new user message.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
     | `session.budget_reached`           | The session reached its [budget](https://platform.claude.com/docs/en/managed-agents/budgets) and paused. Fires at most once for each budget value you set; changing the budget arms it again.                                                                                                                                                                                                                                                                                                                                                               |
     | `session.status_rescheduled`       | A transient error occurred and the session is retrying automatically.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -76,11 +76,11 @@ Webhook events return the event `type` and `id`, not the full object. When you r
   </Tab>
 
   <Tab title="Deployment run events">
-    | Event                      | Trigger                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-    | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `deployment_run.started`   | A scheduled run started. Only scheduled runs emit `deployment_run` events; [manual runs](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#trigger-a-manual-run) do not.                                                                                                                                                                                                                                          |
-    | `deployment_run.succeeded` | A scheduled run created its session. The event carries the same `data.id` (the run ID) as the run's `deployment_run.started` event. To follow the session's work, subscribe to its session events (the Session events tab), or fetch the [deployment run](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#deployment-runs) for its `session_id` (java: `sessionId`; php: `sessionID`; csharp, go: `SessionID`). |
-    | `deployment_run.failed`    | A scheduled run did not create a session. The event carries the same `data.id` as the run's `deployment_run.started` event. Fetch the [deployment run](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#deployment-runs) for the error details.                                                                                                                                                                  |
+    | Event                      | Trigger                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+    | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `deployment_run.started`   | A scheduled run started. Only scheduled runs emit `deployment_run` events; [manual runs](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#trigger-a-manual-run) do not.                                                                                                                                                                                                                                              |
+    | `deployment_run.succeeded` | A scheduled run created its session. The event carries the same `data.id` (the run ID) as the run's `deployment_run.started` event. To follow the session's work, subscribe to its session events (the **Session events** tab), or fetch the [deployment run](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#deployment-runs) for its `session_id` (java: `sessionId`; php: `sessionID`; csharp, go: `SessionID`). |
+    | `deployment_run.failed`    | A scheduled run did not create a session. The event carries the same `data.id` as the run's `deployment_run.started` event. Fetch the [deployment run](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#deployment-runs) for the error details.                                                                                                                                                                      |
   </Tab>
 
   <Tab title="Environment events">
@@ -219,7 +219,7 @@ Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at end
   	"io"
   	"net/http"
 
-  	"github.com/anthropics/anthropic-sdk-go"
+  	"github.com/anthropics/anthropic-sdk-go/v2"
   )
 
   var client = anthropic.NewClient() // reads ANTHROPIC_WEBHOOK_SIGNING_KEY from env
@@ -346,9 +346,9 @@ Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at end
 
 ## Handle an event
 
-Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Any other response counts against the endpoint: a `3xx` disables it immediately (redirects are never followed), while other failures are retried; see [Delivery behavior](https://platform.claude.com/docs/en/managed-agents/webhooks#delivery-behavior) for the retry and auto-disable rules.
+Parse the body, switch on `data.type`, and fetch the resource by ID. Return any `2xx` to acknowledge. Any other response counts against the endpoint: a `3xx` disables it immediately (redirects are never followed), whereas other failures are retried; see [Delivery behavior](https://platform.claude.com/docs/en/managed-agents/webhooks#delivery-behavior) for the retry and auto-disable rules.
 
-Every event payload has the same structure, including the event type, identifier, and the timestamp of when the event occurred.
+Every event payload has the same structure, including the event type, the identifier, and the timestamp of when the event occurred.
 
 ```json
 {
@@ -425,7 +425,7 @@ Every event payload has the same structure, including the event type, identifier
   ```
 </CodeGroup>
 
-The top-level `event.id` is unique per event, not per delivery. If you receive the same `event.id` twice, it's a retry and you can discard it.
+The top-level `event.id` is unique for each event, not for each delivery. If you receive the same `event.id` twice, it's a retry and you can discard it.
 
 ## Delivery behavior
 
@@ -433,7 +433,7 @@ The top-level `event.id` is unique per event, not per delivery. If you receive t
 
 * **Subscription scope:** An event is delivered only to endpoints subscribed to its type at the moment it's emitted. An event emitted while no endpoint is subscribed to its type is never delivered, and subscribing later doesn't backfill it, so subscribe to an event type before you need it.
 
-* **Ordering is not guaranteed.** Events aren't delivered in the order they occurred: `session.status_idled` might arrive before `session.outcome_evaluation_ended` even if the outcome was produced first, and a `.deleted` event can arrive before the `.archived` event for the same resource. Drive your state from the resource you fetch, not from the order events arrive in.
+* **Ordering:** Events aren't guaranteed to be delivered in the order they occurred: `session.status_idled` might arrive before `session.outcome_evaluation_ended` even if the outcome was produced first, and a `.deleted` event can arrive before the `.archived` event for the same resource. Drive your state from the resource you fetch, not from the order events arrive in.
 
 * **Retries:** For each endpoint and event, Anthropic makes up to three delivery attempts (a response that triggers auto-disable, described later in this section, is never retried) with jittered exponential backoff between 5 and 120 seconds. Every attempt delivers the same `event.id`. After the last attempt fails, the event is dropped: it isn't queued for later delivery and there's no signal that it was lost. Webhooks aren't a durable log, so if you need to observe every transition, reconcile by listing or fetching the resource through the API.
 
@@ -443,6 +443,6 @@ The top-level `event.id` is unique per event, not per delivery. If you receive t
 
   * The endpoint returns a `3xx` response. Redirects are never followed; this disables the endpoint immediately, on the first attempt, with the reason `auto-disabled: endpoint URL returned a redirect (3xx)`. If your endpoint moves, update the URL in Console and re-enable the endpoint.
   * The endpoint's URL resolves to a non-public IP address when Anthropic connects. This disables the endpoint immediately, with the reason `auto-disabled: endpoint URL resolved to an invalid address`.
-  * Deliveries to the endpoint fail continuously for a sustained period, with the reason `auto-disabled after sustained delivery failures`. The trigger is how long the endpoint has been failing without interruption, not a delivery count. A single `2xx` resets the window, so one flaky event can't disable the endpoint.
+  * Deliveries to the endpoint fail continuously for a sustained period, with the reason `auto-disabled after sustained delivery failures`. The trigger is how long the endpoint has been failing without interruption, not a delivery count. A single `2xx` resets the window, so one event that fails intermittently can't disable the endpoint.
 
   All three are reversible: re-enable the endpoint in Console after you resolve the issue. Events emitted while the endpoint was disabled aren't replayed.

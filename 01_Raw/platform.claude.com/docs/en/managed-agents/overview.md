@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/overview
-fetched_at: 2026-10-19T05:32:44.183513+00:00
+fetched_at: 2026-10-26T05:40:03.888931+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and run code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs. To build your own agent loop with direct model access instead, see [Using the Messages API](https://platform.claude.com/docs/en/build-with-claude/working-with-messages).
 
 <Note>
-  Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#claude-managed-agents) in the Claude Platform on AWS guide.
+  Claude Managed Agents is also available on Claude Platform on AWS and Claude Models on Google Cloud (Anthropic managed), with some differences in feature availability and session behavior. See [Claude Managed Agents](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#claude-managed-agents) in the Claude Platform on AWS guide or the [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#claude-managed-agents) guide.
 </Note>
 
 <CardGroup cols={3}>
@@ -74,7 +74,7 @@ Claude Managed Agents is built around four concepts:
   </Step>
 
   <Step title="Steer or interrupt">
-    Send additional user events to guide the agent mid-execution, or interrupt it to change direction.
+    Send additional user events to guide the agent while it runs, or interrupt it to change direction.
   </Step>
 </Steps>
 
@@ -108,7 +108,7 @@ See [Tools](https://platform.claude.com/docs/en/managed-agents/tools) for the fu
 
 To get started, you need:
 
-1. A [Claude API key](https://platform.claude.com/settings/keys)
+1. A [Claude API key](https://platform.claude.com/settings/keys) from the Claude Console
 2. The `managed-agents-2026-04-01` beta header on all requests
 3. Access to Claude Managed Agents (enabled by default for all API accounts)
 

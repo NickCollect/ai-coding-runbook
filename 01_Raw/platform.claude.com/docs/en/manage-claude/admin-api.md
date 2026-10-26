@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/admin-api
-fetched_at: 2026-10-19T05:32:45.575532+00:00
+fetched_at: 2026-10-26T05:40:06.764782+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,35 +10,33 @@ url: https://platform.claude.com/docs/en/manage-claude/admin-api
 description: Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key, an `org:admin` OAuth token, or a personal or service account key.
 ---
 
-<Tip>
-  **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
-</Tip>
-
 The [Admin API](https://platform.claude.com/docs/en/api/organization) lets you manage your organization's members, workspaces, invites, and API keys programmatically instead of by hand in the [Claude Console](https://platform.claude.com/).
 
-<Check>
-  **The Admin API requires special access**
+## Availability
 
-  The Admin API accepts three credentials:
+The Admin API is unavailable for individual accounts. To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 
-  * An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys).
-  * An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](https://platform.claude.com/docs/en/manage-claude/admin-api#oauth-bearer-token).
-  * A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](https://platform.claude.com/docs/en/manage-claude/authentication#key-types).
-</Check>
+Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](https://platform.claude.com/docs/en/manage-claude/spend-limits-api). The [Plugins API](https://platform.claude.com/docs/en/manage-claude/plugins-api), also Enterprise-only, is in beta. So is the [Claude Tag API](https://platform.claude.com/docs/en/manage-claude/claude-tag-api). See [User management](https://platform.claude.com/docs/en/manage-claude/user-management).
 
-<Note>
-  **Claude Enterprise:** Claude Enterprise (claude.ai) organizations call the Admin API with a scoped API key created in claude.ai. From this page, only the members and invites endpoints apply to them. They also get Enterprise-only endpoints: group and custom-role reads, and [spend limits](https://platform.claude.com/docs/en/manage-claude/spend-limits-api). See [User management](https://platform.claude.com/docs/en/manage-claude/user-management).
-</Note>
+On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), only these Admin API endpoints are available:
 
-<Note>
-  **Claude Platform on AWS:** Only the workspace endpoints (create, get, list, update, and archive on `/v1/organizations/workspaces`), the external key endpoints (register, get, list, update, and delete on `/v1/organizations/external_keys`, for [CMEK](https://platform.claude.com/docs/en/manage-claude/cmek-claude-platform-on-aws); there is no validate endpoint, because keys are validated when attached to a workspace), and the [telemetry destination endpoints](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions#telemetry-destinations) are available on Claude Platform on AWS. Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't. See [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws).
-</Note>
+* The workspace endpoints: create, get, list, update, and archive on `/v1/organizations/workspaces`.
+* The external key endpoints, for [CMEK](https://platform.claude.com/docs/en/manage-claude/cmek-claude-platform-on-aws): register, get, list, update, and delete on `/v1/organizations/external_keys`. There is no validate endpoint, because keys are validated when attached to a workspace.
+* The [telemetry destination endpoints](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions#telemetry-destinations).
+
+Organization members, workspace members, invites, API keys, and the usage, cost, and rate limit reports aren't available on Claude Platform on AWS.
 
 ## Authentication
 
-Authenticate with any of the three credentials. An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](https://platform.claude.com/docs/en/manage-claude/admin-api#accessing-organization-info) with an OAuth token and with an Admin API key.
+The Admin API accepts any of these three credentials:
 
-The Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs expose the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](https://platform.claude.com/docs/en/api/organization).
+* An **Admin API key** (starting with `sk-ant-admin...`) sent in the `x-api-key` header. Only organization members with the admin role can provision one. See [Create an Admin API key](https://platform.claude.com/docs/en/manage-claude/admin-api-keys).
+* An **OAuth bearer token** with the `org:admin` scope sent in the `authorization: Bearer` header. Only members with the admin, owner, or primary owner role can obtain one. See [Obtain an OAuth bearer token](https://platform.claude.com/docs/en/manage-claude/admin-api#oauth-bearer-token).
+* A **personal key** or **service account key** that isn't scoped to a specific workspace, sent in the `x-api-key` header. The key has the same permissions as the linked account. See [Key types](https://platform.claude.com/docs/en/manage-claude/authentication#key-types).
+
+An Admin API key covers most endpoints. The service-account, federation-issuer, and federation-rule endpoints accept only an `org:admin` OAuth token. Send a personal key or service account key in the `x-api-key` header, as you would an Admin API key. The following examples call the [organization info endpoint](https://platform.claude.com/docs/en/manage-claude/admin-api#accessing-organization-info) with an OAuth token and with an Admin API key.
+
+In Python, TypeScript, C#, Go, Java, PHP, and Ruby, the SDK exposes the endpoints on this page under `client.organization` (csharp, go: `client.Organization`; java: `client.organization()`; php: `$client->organization`), and the `ant` CLI under `ant organization`. The examples on this page use the default client, which reads an Admin API key from `ANTHROPIC_API_KEY` or an OAuth bearer token from `ANTHROPIC_AUTH_TOKEN`. SDK list methods in Python, TypeScript, C#, Go, and Java return an iterator that fetches more pages on demand, so `limit` sets the page size, not the total. The PHP, Ruby, and curl examples return one page. In the CLI, `--limit` caps the results on the member, invite, workspace, workspace-member, and API-key lists. For each endpoint's parameters and responses, see the [Admin API reference](https://platform.claude.com/docs/en/api/organization).
 
 ### OAuth bearer token
 
@@ -51,7 +49,7 @@ export ANTHROPIC_AUTH_TOKEN=$(ant auth print-credentials --profile admin --acces
 
 Interactive tokens are short-lived. If requests start returning 401, re-run the `export` command to refresh the token.
 
-The SDKs and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically. Leave `ANTHROPIC_API_KEY` unset in the same shell so they send the bearer token. Automated workloads skip the login: they authenticate through workload identity federation, and the SDKs and CLI perform the token exchange from the federation environment variables. See [Bootstrap a workload to manage WIF](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#bootstrap-a-workload-to-manage-wif).
+The SDK and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically. Leave `ANTHROPIC_API_KEY` unset in the same shell so they send the bearer token. Automated workloads skip the login: they authenticate through workload identity federation, and the SDK and CLI perform the token exchange from the federation environment variables. See [Bootstrap a workload to manage WIF](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#bootstrap-a-workload-to-manage-wif).
 
 Call the Admin API with the exported token:
 
@@ -353,7 +351,7 @@ Update a member's role:
 
 <CodeGroup>
   ```bash cURL
-  curl "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS89pFZXqSFUBDr6" \
+  curl "https://api.anthropic.com/v1/organizations/users/user_01WxYzAbCdEfGhJkMnPqRsTu" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -362,7 +360,7 @@ Update a member's role:
 
   ```bash CLI
   ant organization:users update \
-    --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+    --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
     --role developer
   ```
 
@@ -370,7 +368,7 @@ Update a member's role:
   client = anthropic.Anthropic()
 
   user = client.organization.users.update(
-      "user_01XyDMpzjS89pFZXqSFUBDr6", role="developer"
+      "user_01WxYzAbCdEfGhJkMnPqRsTu", role="developer"
   )
 
   print(f"id: {user.id}")
@@ -380,7 +378,7 @@ Update a member's role:
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const user = await client.organization.users.update("user_01XyDMpzjS89pFZXqSFUBDr6", {
+  const user = await client.organization.users.update("user_01WxYzAbCdEfGhJkMnPqRsTu", {
     role: "developer"
   });
 
@@ -395,7 +393,7 @@ Update a member's role:
   AnthropicClient client = new();
 
   var user = await client.Organization.Users.Update(
-      "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_01WxYzAbCdEfGhJkMnPqRsTu",
       new() { Role = Role.Developer }
   );
 
@@ -408,7 +406,7 @@ Update a member's role:
 
   user, err := client.Organization.Users.Update(
   	context.Background(),
-  	"user_01XyDMpzjS89pFZXqSFUBDr6",
+  	"user_01WxYzAbCdEfGhJkMnPqRsTu",
   	anthropic.OrganizationUserUpdateParams{
   		Role: anthropic.OrganizationUserUpdateParamsRoleDeveloper,
   	},
@@ -431,7 +429,7 @@ Update a member's role:
           .role(UserUpdateParams.Role.DEVELOPER)
           .build();
       var user = client.organization().users()
-          .update("user_01XyDMpzjS89pFZXqSFUBDr6", params);
+          .update("user_01WxYzAbCdEfGhJkMnPqRsTu", params);
 
       IO.println("id: " + user.id());
       IO.println("role: " + user.role().asString());
@@ -445,7 +443,7 @@ Update a member's role:
   $client = new Client();
 
   $user = $client->organization->users->update(
-      userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+      userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
       role: Role::DEVELOPER,
   );
 
@@ -456,7 +454,7 @@ Update a member's role:
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+  user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
   user = client.organization.users.update(user_id, role: :developer)
 
   puts "id: #{user.id}"
@@ -468,19 +466,19 @@ Remove a member from the organization:
 
 <CodeGroup>
   ```bash cURL
-  curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01XyDMpzjS89pFZXqSFUBDr6" \
+  curl -X DELETE "https://api.anthropic.com/v1/organizations/users/user_01WxYzAbCdEfGhJkMnPqRsTu" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
-  ant organization:users remove --user-id user_01XyDMpzjS89pFZXqSFUBDr6
+  ant organization:users remove --user-id user_01WxYzAbCdEfGhJkMnPqRsTu
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
-  removed_user = client.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6")
+  removed_user = client.organization.users.remove("user_01WxYzAbCdEfGhJkMnPqRsTu")
 
   print(f"id: {removed_user.id}")
   ```
@@ -488,7 +486,7 @@ Remove a member from the organization:
   ```typescript TypeScript
   const client = new Anthropic();
 
-  const removedUser = await client.organization.users.remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+  const removedUser = await client.organization.users.remove("user_01WxYzAbCdEfGhJkMnPqRsTu");
 
   console.log(`id: ${removedUser.id}`);
   ```
@@ -496,7 +494,7 @@ Remove a member from the organization:
   ```csharp C#
   AnthropicClient client = new();
 
-  var removedUser = await client.Organization.Users.Remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+  var removedUser = await client.Organization.Users.Remove("user_01WxYzAbCdEfGhJkMnPqRsTu");
 
   Console.WriteLine($"id: {removedUser.ID}");
   ```
@@ -504,7 +502,7 @@ Remove a member from the organization:
   ```go Go
   client := anthropic.NewClient()
 
-  removedUser, err := client.Organization.Users.Remove(context.Background(), "user_01XyDMpzjS89pFZXqSFUBDr6")
+  removedUser, err := client.Organization.Users.Remove(context.Background(), "user_01WxYzAbCdEfGhJkMnPqRsTu")
   if err != nil {
   	log.Fatal(err)
   }
@@ -516,7 +514,7 @@ Remove a member from the organization:
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   var removedUser = client.organization().users()
-      .remove("user_01XyDMpzjS89pFZXqSFUBDr6");
+      .remove("user_01WxYzAbCdEfGhJkMnPqRsTu");
 
   IO.println("id: " + removedUser.id());
   ```
@@ -525,7 +523,7 @@ Remove a member from the organization:
   $client = new Client();
 
   $removedUser = $client->organization->users->remove(
-      userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+      userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
   );
 
   echo "id: {$removedUser->id}\n";
@@ -534,7 +532,7 @@ Remove a member from the organization:
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+  user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
   removed_user = client.organization.users.remove(user_id)
 
   puts "id: #{removed_user.id}"
@@ -867,7 +865,7 @@ Add a member to a workspace:
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "user_id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "workspace_role": "workspace_developer"
     }'
   ```
@@ -875,7 +873,7 @@ Add a member to a workspace:
   ```bash CLI
   ant organization:workspaces:members add \
     --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
-    --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+    --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
     --workspace-role workspace_developer
   ```
 
@@ -884,7 +882,7 @@ Add a member to a workspace:
 
   member = client.organization.workspaces.members.add(
       "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
-      user_id="user_01XyDMpzjS89pFZXqSFUBDr6",
+      user_id="user_01WxYzAbCdEfGhJkMnPqRsTu",
       workspace_role="workspace_developer",
   )
 
@@ -898,7 +896,7 @@ Add a member to a workspace:
   const member = await client.organization.workspaces.members.add(
     "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
     {
-      user_id: "user_01XyDMpzjS89pFZXqSFUBDr6",
+      user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
       workspace_role: "workspace_developer"
     }
   );
@@ -916,7 +914,7 @@ Add a member to a workspace:
       "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       new()
       {
-          UserID = "user_01XyDMpzjS89pFZXqSFUBDr6",
+          UserID = "user_01WxYzAbCdEfGhJkMnPqRsTu",
           WorkspaceRole = NoBillingWorkspaceRole.WorkspaceDeveloper
       }
   );
@@ -932,7 +930,7 @@ Add a member to a workspace:
   	context.Background(),
   	"wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   	anthropic.OrganizationWorkspaceMemberAddParams{
-  		UserID:        "user_01XyDMpzjS89pFZXqSFUBDr6",
+  		UserID:        "user_01WxYzAbCdEfGhJkMnPqRsTu",
   		WorkspaceRole: anthropic.NoBillingWorkspaceRoleWorkspaceDeveloper,
   	},
   )
@@ -952,7 +950,7 @@ Add a member to a workspace:
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       var params = MemberAddParams.builder()
-          .userId("user_01XyDMpzjS89pFZXqSFUBDr6")
+          .userId("user_01WxYzAbCdEfGhJkMnPqRsTu")
           .workspaceRole(NoBillingWorkspaceRole.WORKSPACE_DEVELOPER)
           .build();
       var member = client.organization().workspaces().members()
@@ -971,7 +969,7 @@ Add a member to a workspace:
 
   $member = $client->organization->workspaces->members->add(
       workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
-      userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+      userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
       workspaceRole: NoBillingWorkspaceRole::WORKSPACE_DEVELOPER,
   );
 
@@ -985,7 +983,7 @@ Add a member to a workspace:
   workspace_id = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   member = client.organization.workspaces.members.add(
     workspace_id,
-    user_id: "user_01XyDMpzjS89pFZXqSFUBDr6",
+    user_id: "user_01WxYzAbCdEfGhJkMnPqRsTu",
     workspace_role: :workspace_developer
   )
 
@@ -1115,7 +1113,7 @@ Update a workspace member's role:
 
 <CodeGroup>
   ```bash cURL
-  curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01XyDMpzjS89pFZXqSFUBDr6" \
+  curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01WxYzAbCdEfGhJkMnPqRsTu" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -1124,7 +1122,7 @@ Update a workspace member's role:
 
   ```bash CLI
   ant organization:workspaces:members update \
-    --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+    --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
     --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ \
     --workspace-role workspace_admin
   ```
@@ -1133,7 +1131,7 @@ Update a workspace member's role:
   client = anthropic.Anthropic()
 
   member = client.organization.workspaces.members.update(
-      "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_01WxYzAbCdEfGhJkMnPqRsTu",
       workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       workspace_role="workspace_admin",
   )
@@ -1146,7 +1144,7 @@ Update a workspace member's role:
   const client = new Anthropic();
 
   const member = await client.organization.workspaces.members.update(
-    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_01WxYzAbCdEfGhJkMnPqRsTu",
     {
       workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
       workspace_role: "workspace_admin"
@@ -1163,7 +1161,7 @@ Update a workspace member's role:
   AnthropicClient client = new();
 
   var member = await client.Organization.Workspaces.Members.Update(
-      "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_01WxYzAbCdEfGhJkMnPqRsTu",
       new()
       {
           WorkspaceID = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
@@ -1180,7 +1178,7 @@ Update a workspace member's role:
 
   member, err := client.Organization.Workspaces.Members.Update(
   	context.Background(),
-  	"user_01XyDMpzjS89pFZXqSFUBDr6",
+  	"user_01WxYzAbCdEfGhJkMnPqRsTu",
   	anthropic.OrganizationWorkspaceMemberUpdateParams{
   		WorkspaceID:   "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   		WorkspaceRole: anthropic.WorkspaceRoleWorkspaceAdmin,
@@ -1206,7 +1204,7 @@ Update a workspace member's role:
           .workspaceRole(WorkspaceRole.WORKSPACE_ADMIN)
           .build();
       var member = client.organization().workspaces().members()
-          .update("user_01XyDMpzjS89pFZXqSFUBDr6", params);
+          .update("user_01WxYzAbCdEfGhJkMnPqRsTu", params);
 
       IO.println("user_id: " + member.userId());
       IO.println("workspace_role: " + member.workspaceRole().asString());
@@ -1220,7 +1218,7 @@ Update a workspace member's role:
   $client = new Client();
 
   $member = $client->organization->workspaces->members->update(
-      userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+      userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
       workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
       workspaceRole: WorkspaceRole::WORKSPACE_ADMIN,
   );
@@ -1232,7 +1230,7 @@ Update a workspace member's role:
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+  user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
   member = client.organization.workspaces.members.update(
     user_id,
     workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
@@ -1248,14 +1246,14 @@ Remove a member from a workspace:
 
 <CodeGroup>
   ```bash cURL
-  curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01XyDMpzjS89pFZXqSFUBDr6" \
+  curl -X DELETE "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/members/user_01WxYzAbCdEfGhJkMnPqRsTu" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01"
   ```
 
   ```bash CLI
   ant organization:workspaces:members remove \
-    --user-id user_01XyDMpzjS89pFZXqSFUBDr6 \
+    --user-id user_01WxYzAbCdEfGhJkMnPqRsTu \
     --workspace-id wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ
   ```
 
@@ -1263,7 +1261,7 @@ Remove a member from a workspace:
   client = anthropic.Anthropic()
 
   removed_member = client.organization.workspaces.members.remove(
-      "user_01XyDMpzjS89pFZXqSFUBDr6", workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
+      "user_01WxYzAbCdEfGhJkMnPqRsTu", workspace_id="wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
   )
 
   print(f"user_id: {removed_member.user_id}")
@@ -1273,7 +1271,7 @@ Remove a member from a workspace:
   const client = new Anthropic();
 
   const removedMember = await client.organization.workspaces.members.remove(
-    "user_01XyDMpzjS89pFZXqSFUBDr6",
+    "user_01WxYzAbCdEfGhJkMnPqRsTu",
     { workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" }
   );
 
@@ -1284,7 +1282,7 @@ Remove a member from a workspace:
   AnthropicClient client = new();
 
   var removedMember = await client.Organization.Workspaces.Members.Remove(
-      "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_01WxYzAbCdEfGhJkMnPqRsTu",
       new() { WorkspaceID = "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ" }
   );
 
@@ -1296,7 +1294,7 @@ Remove a member from a workspace:
 
   removedMember, err := client.Organization.Workspaces.Members.Remove(
   	context.Background(),
-  	"user_01XyDMpzjS89pFZXqSFUBDr6",
+  	"user_01WxYzAbCdEfGhJkMnPqRsTu",
   	anthropic.OrganizationWorkspaceMemberRemoveParams{
   		WorkspaceID: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ",
   	},
@@ -1318,7 +1316,7 @@ Remove a member from a workspace:
           .workspaceId("wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ")
           .build();
       var removedMember = client.organization().workspaces().members()
-          .remove("user_01XyDMpzjS89pFZXqSFUBDr6", params);
+          .remove("user_01WxYzAbCdEfGhJkMnPqRsTu", params);
 
       IO.println("user_id: " + removedMember.userId());
   }
@@ -1328,7 +1326,7 @@ Remove a member from a workspace:
   $client = new Client();
 
   $removedMember = $client->organization->workspaces->members->remove(
-      userID: 'user_01XyDMpzjS89pFZXqSFUBDr6',
+      userID: 'user_01WxYzAbCdEfGhJkMnPqRsTu',
       workspaceID: 'wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ',
   );
 
@@ -1338,7 +1336,7 @@ Remove a member from a workspace:
   ```ruby Ruby
   client = Anthropic::Client.new
 
-  user_id = "user_01XyDMpzjS89pFZXqSFUBDr6"
+  user_id = "user_01WxYzAbCdEfGhJkMnPqRsTu"
   removed_member = client.organization.workspaces.members.remove(
     user_id,
     workspace_id: "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -1350,7 +1348,7 @@ Remove a member from a workspace:
 
 ### API keys
 
-Monitor and manage [API keys](https://platform.claude.com/docs/en/api/organization/api_keys/list). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](https://platform.claude.com/docs/en/manage-claude/authentication#key-expiration)) and `principal`, the identity it acts as (see [Key types](https://platform.claude.com/docs/en/manage-claude/authentication#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`; for a service account key, `{"type": "service_account_actor", "service_account_id": "svac_..."}`; and for a workspace key, `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. The top-level `workspace_id` field is deprecated and is `null` both for keys bound to the Default Workspace and for keys without a workspace scope; use `scope` to tell them apart. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
+Monitor and manage [API keys](https://platform.claude.com/docs/en/api/organization/api_keys/list). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](https://platform.claude.com/docs/en/manage-claude/authentication#key-expiration)) and `principal`, the identity it acts as (see [Key types](https://platform.claude.com/docs/en/manage-claude/authentication#key-types)). For a personal key, `principal` is `{"type": "user_actor", "user_id": "user_..."}`. For a service account key, it is `{"type": "service_account_actor", "service_account_id": "svac_..."}`. For a workspace key, it is `null`. Each key also has a `scope` object: `{"type": "workspace", "workspace_id": "wrkspc_..."}` for a key bound to one workspace, or `{"type": "organization"}` for a key that can work across any workspace the account has access to. Filtering the list by `workspace_id` with the Default Workspace's ID returns only keys bound to the Default Workspace; keys without a workspace scope aren't returned under any `workspace_id` filter.
 
 List the active API keys in a workspace:
 
@@ -1620,15 +1618,15 @@ Rename or deactivate an API key:
 
 ### Service accounts
 
-Create and manage service accounts (`svac_...`), the non-human identities that [service account keys](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) and [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) tokens act as. These endpoints, like the federation-issuer and federation-rule endpoints, require an `org:admin` OAuth token. See [Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#service-accounts).
+Create and manage service accounts (`svac_...`), the non-human identities that [service account keys](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) and [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) tokens act as. These endpoints, like the federation-issuer and federation-rule endpoints, require an `org:admin` OAuth token. See [Service accounts in Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#service-accounts).
 
 ### Federation issuers
 
-Register the OIDC identity providers (`fdis_...`) whose tokens may assert workload identity for your organization. See [Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#federation-issuers).
+Register the OIDC identity providers (`fdis_...`) whose tokens may assert workload identity for your organization. See [Federation issuers in Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#federation-issuers).
 
 ### Federation rules
 
-Manage the rules (`fdrl_...`) that map issuer tokens to service accounts and scopes. See [Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#federation-rules).
+Manage the rules (`fdrl_...`) that map issuer tokens to service accounts and scopes. See [Federation rules in Manage WIF with the Admin API](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#federation-rules).
 
 ## Accessing organization info
 
@@ -1737,6 +1735,10 @@ Read the rate limits configured for your organization and its workspaces with th
 ## Compliance API
 
 Retrieve audit and activity data for your organization with the [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api). Admin API keys can read only the Activity Feed. For full access, see [Set up the Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api-access).
+
+## Organization webhooks
+
+Register webhook endpoints for events about enforcement actions on your organization's user profiles with [organization webhooks](https://platform.claude.com/docs/en/manage-claude/organization-webhooks).
 
 ## Best practices
 

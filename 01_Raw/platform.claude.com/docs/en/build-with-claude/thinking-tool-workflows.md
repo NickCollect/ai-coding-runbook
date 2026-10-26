@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/thinking-tool-workflows
-fetched_at: 2026-10-19T05:32:41.882391+00:00
+fetched_at: 2026-10-26T05:39:58.822399+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       ```
 
       ```bash CLI
-      ant messages create --transform content <<'YAML'
+      ant messages create <<'YAML'
       model: claude-opus-5-5
       max_tokens: 16000
       thinking:
@@ -97,7 +97,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           },
       }
 
-      # First request - Claude responds with thinking and tool request
+      # First request: Claude responds with thinking and tool request
       response = client.messages.create(
           model="claude-opus-5-5",
           max_tokens=16000,
@@ -123,7 +123,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
         }
       };
 
-      // First request - Claude responds with thinking and tool request
+      // First request: Claude responds with thinking and tool request
       const response = await client.messages.create({
         model: "claude-opus-5-5",
         max_tokens: 16000,
@@ -159,7 +159,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           MaxTokens = 16000,
           Thinking = new ThinkingConfigAdaptive(),
           Tools = [weatherTool],
-          Messages = [new() { Role = Role.User, Content = "What's the weather in Paris?" }]
+          Messages = [new UserMessageParam { Content = "What's the weather in Paris?" }]
       };
 
       var message = await client.Messages.Create(parameters);
@@ -248,7 +248,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           messages: [
               ['role' => 'user', 'content' => "What's the weather in Paris?"]
           ],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
           thinking: ['type' => 'adaptive'],
           tools: [$weatherTool],
       );
@@ -271,7 +271,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       }
 
       message = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 16000,
         thinking: {
           type: "adaptive"
@@ -287,7 +287,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
   </Step>
 
   <Step title="Capture the content array to echo back">
-    You should see `thinking` and `tool_use` blocks in the response content on a run where Claude chose to think (on simpler requests, adaptive mode may skip the thinking block). A note Claude writes before the tool call comes back as a `text` block or, on models that write [progress updates](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates), as another `thinking` block. Keep this content array intact: the next step sends it back verbatim.
+    You should see `thinking` and `tool_use` blocks in the response content on a run that includes thinking (on simpler requests, adaptive mode might skip the thinking block). A note Claude writes before the tool call comes back as a `text` block or, on models that write [progress updates](https://platform.claude.com/docs/en/build-with-claude/thinking#progress-updates), as another `thinking` block. Keep this content array intact: the next step sends it back verbatim.
 
     <Note>
       To see thinking text like this output, add `display: "summarized"` to the request. On models where display defaults to omitted, including Claude Opus 5.5, the `thinking` field otherwise comes back as an empty string with only the `signature` populated. Either way, echo the content array back unchanged; see [Controlling thinking display](https://platform.claude.com/docs/en/build-with-claude/thinking#controlling-thinking-display).
@@ -319,72 +319,14 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
 
     Each sample is a self-contained script: it repeats the first request, then immediately sends the follow-up using the response it just received.
 
-    <CodeGroup exclude="shell:cURL">
+    <CodeGroup exclude="shell:cURL, shell:CLI">
       <CodeGroupItem language="cURL">
-        This workflow needs more logic than a single shell command. Use the Claude SDK to run it.
+        This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
       </CodeGroupItem>
 
-      ```bash CLI
-      # First turn: write the assistant content array (thinking and tool_use
-      # blocks, signatures intact) to a file. Routing model-generated text
-      # through a file keeps it out of shell-expansion position later.
-      ant messages create --transform content --format jsonl \
-        > assistant_content.json <<'YAML'
-      model: claude-opus-5-5
-      max_tokens: 16000
-      thinking:
-        type: adaptive
-      tools:
-        - name: get_weather
-          description: Get current weather for a location
-          input_schema:
-            type: object
-            properties:
-              location:
-                type: string
-                description: City name
-            required: [location]
-      messages:
-        - role: user
-          content: What's the weather in Paris?
-      YAML
-
-      # Second turn: jq fills the two null placeholders from the captured file,
-      # so the blocks return verbatim as the assistant message. The thinking
-      # block MUST accompany the tool_use block. The quoted delimiter keeps the
-      # shell from expanding anything in the body.
-      jq --slurpfile blocks assistant_content.json '
-        .messages[1].content = $blocks[0] |
-        .messages[2].content[0].tool_use_id =
-          ($blocks[0][] | select(.type == "tool_use") | .id)
-      ' <<'JSON' | ant messages create
-      {
-        "model": "claude-opus-5-5",
-        "max_tokens": 16000,
-        "thinking": {"type": "adaptive"},
-        "tools": [{
-          "name": "get_weather",
-          "description": "Get current weather for a location",
-          "input_schema": {
-            "type": "object",
-            "properties": {
-              "location": {"type": "string", "description": "City name"}
-            },
-            "required": ["location"]
-          }
-        }],
-        "messages": [
-          {"role": "user", "content": "What's the weather in Paris?"},
-          {"role": "assistant", "content": null},
-          {"role": "user", "content": [{
-            "type": "tool_result",
-            "tool_use_id": null,
-            "content": "Current temperature: 88°F"
-          }]}
-        ]
-      }
-      JSON
-      ```
+      <CodeGroupItem language="CLI">
+        This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+      </CodeGroupItem>
 
       ```python Python
 
@@ -408,11 +350,11 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       # Extract the tool use block to get its ID for the tool result
       tool_use_block = next(block for block in response.content if block.type == "tool_use")
 
-      # Call your actual weather API, here is where your actual API call would go
-      # Let's pretend this is what we get back
+      # This is where your actual weather API call would go
+      # Pretend this is what the weather API returns
       weather_data = {"temperature": 88}
 
-      # Second request - Include the assistant turn and the tool result
+      # Second request: include the assistant turn and the tool result
       continuation = client.messages.create(
           model="claude-opus-5-5",
           max_tokens=16000,
@@ -464,16 +406,14 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       });
 
       // Extract the tool use block to get its ID for the tool result
-      const toolUseBlock = response.content.find(
-        (block): block is Anthropic.ToolUseBlock => block.type === "tool_use"
-      );
+      const toolUseBlock = response.content.find((block) => block.type === "tool_use");
 
-      // Call your actual weather API, here is where your actual API call would go
-      // Let's pretend this is what we get back
+      // This is where your actual weather API call would go
+      // Pretend this is what the weather API returns
       const weatherData = { temperature: 88 };
 
       if (toolUseBlock) {
-        // Second request - Include the assistant turn and the tool result
+        // Second request: include the assistant turn and the tool result
         const continuation = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 16000,
@@ -525,9 +465,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           MaxTokens = 16000,
           Thinking = new ThinkingConfigAdaptive(),
           Tools = [weatherTool],
-          Messages = [
-              new() { Role = Role.User, Content = "What's the weather in Paris?" }
-          ]
+          Messages = [new UserMessageParam { Content = "What's the weather in Paris?" }]
       };
 
       var response = await client.Messages.Create(parameters);
@@ -553,17 +491,20 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
           Thinking = new ThinkingConfigAdaptive(),
           Tools = [weatherTool],
           Messages = [
-              new() { Role = Role.User, Content = "What's the weather in Paris?" },
+              new UserMessageParam { Content = "What's the weather in Paris?" },
               // response.Content includes the thinking blocks; passing them back is required
-              new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
-              new() { Role = Role.User, Content = new MessageParamContent(new List<ContentBlockParam>
+              new AssistantMessageParam { Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
+              new UserMessageParam
               {
-                  new ContentBlockParam(new ToolResultBlockParam()
+                  Content = new List<ContentBlockParam>
                   {
-                      ToolUseID = toolUseBlock?.ID ?? "",
-                      Content = $"Current temperature: {weatherData.temperature}°F"
-                  })
-              })}
+                      new ContentBlockParam(new ToolResultBlockParam()
+                      {
+                          ToolUseID = toolUseBlock?.ID ?? "",
+                          Content = $"Current temperature: {weatherData.temperature}°F"
+                      })
+                  }
+              }
           ]
       };
 
@@ -683,7 +624,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
               .addTool(weatherTool)
               .addUserMessage("What's the weather in Paris?")
               .addMessage(response)
-              .addUserMessageOfBlockParams(List.of(
+              .addUserMessageOfContentBlockParams(List.of(
                   ContentBlockParam.ofToolResult(
                       ToolResultBlockParam.builder()
                           .toolUseId(toolUseBlock.id())
@@ -773,7 +714,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       }
 
       response = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 16000,
         thinking: {
           type: "adaptive"
@@ -791,7 +732,7 @@ The example defines a `get_weather` tool, lets Claude think and request a tool c
       weather_data = { temperature: 88 }
 
       continuation = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 16000,
         thinking: {
           type: "adaptive"

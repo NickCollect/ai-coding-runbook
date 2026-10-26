@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions/create
-fetched_at: 2026-10-19T05:32:50.126018+00:00
+fetched_at: 2026-10-26T05:40:16.550472+00:00
 fetch_method: mintlify_md
 ---
 
@@ -144,6 +144,8 @@ Future models and features will not be compatible with Text Completions. See our
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ## Body parameters
 
@@ -455,8 +457,8 @@ Future models and features will not be compatible with Text Completions. See our
 ```bash
 curl https://api.anthropic.com/v1/complete \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     --max-time 600 \
     -d '{
           "max_tokens_to_sample": 256,

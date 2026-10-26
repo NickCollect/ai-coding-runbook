@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/resources/overview
-fetched_at: 2026-10-12T06:49:51.315173+00:00
+fetched_at: 2026-10-26T05:40:12.884067+00:00
 fetch_method: mintlify_md
 ---
 
@@ -88,7 +88,7 @@ description: Model cards with detailed documentation for Claude models.
   </Card>
 
   <Card title="Claude 3 Model Card" icon="file" href="https://www.anthropic.com/claude-3-model-card">
-    Detailed documentation of Claude 3 models including latest 3.5 addendum.
+    Detailed documentation of Claude 3 models including the latest 3.5 addendum.
   </Card>
 
   <Card title="Claude 2 Model Card" icon="file" href="https://www.anthropic.com/claude-2-model-card">

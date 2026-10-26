@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart
-fetched_at: 2026-10-19T05:32:49.198597+00:00
+fetched_at: 2026-10-26T05:40:14.591672+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,7 +38,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.42.0
+    VERSION=2.3.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -55,7 +55,7 @@ Compared to `curl`, `ant` builds request bodies from typed flags or piped YAML i
     You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
     ```bash
-    go install github.com/anthropics/anthropic-cli/cmd/ant@latest
+    go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
     ```
 
     The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
@@ -159,6 +159,6 @@ The CLI ships completion scripts for bash, zsh, fish, and PowerShell. Generate a
   </Card>
 
   <Card title="CLI scripting and automation" icon="code" href="https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting">
-    Version-control API resources, scripting patterns, and use from Claude Code
+    Version control for API resources, scripting patterns, and use from Claude Code
   </Card>
 </CardGroup>

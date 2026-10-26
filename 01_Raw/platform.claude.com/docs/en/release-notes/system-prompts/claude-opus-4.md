@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-4
-fetched_at: 2026-08-31T06:29:35.515635+00:00
+fetched_at: 2026-10-26T05:40:14.141821+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Claude Opus 4 system prompts
 url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-4
-description: See updates to the core system prompt for Claude Opus 4 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+description: See updates to the core system prompt for Claude Opus 4 on [claude.ai](https://claude.ai), the [Claude iOS app](https://anthropic.com/ios), and the [Claude Android app](https://anthropic.com/android).
 ---
 
 ## August 5, 2025

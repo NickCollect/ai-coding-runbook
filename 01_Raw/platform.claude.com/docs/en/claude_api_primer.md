@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/claude_api_primer
-fetched_at: 2026-10-19T05:33:04.879127+00:00
+fetched_at: 2026-10-26T05:40:43.738970+00:00
 fetch_method: mintlify_md
 ---
 
@@ -111,7 +111,7 @@ The Messages API is stateless, which means that you always send the full convers
 You can prefill part of Claude's response in the last position of the input messages list. Use this technique to shape Claude's response. The following example uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
 <Note>
-  Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The examples below use a model that supports prefill.
+  Claude 4.6 and later models and Claude Mythos Preview do not support assistant message prefill; requests to those models must end with a user message. The following examples use a model that supports prefill.
 </Note>
 
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
@@ -151,10 +151,9 @@ Claude can read both text and images in requests. Both `base64` and `url` source
 
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
-  IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
-
-  # Option 1: Base64-encoded image (@ prefix auto-encodes binary files as base64)
-  curl -sSo vision-example.jpg "$IMAGE_URL"
+  # Option 1: base64-encoded image (@ prefix auto-encodes binary files as base64)
+  curl -sSo vision-example.jpg \
+    https://platform.claude.com/docs/images/vision-example.jpg
 
   ant messages create <<'YAML'
   model: claude-opus-5-5
@@ -172,7 +171,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   YAML
 
   # Option 2: URL-referenced image
-  ant messages create <<YAML
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   messages:
@@ -181,7 +180,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
         - type: image
           source:
             type: url
-            url: $IMAGE_URL
+            url: https://platform.claude.com/docs/images/vision-example.jpg
         - type: text
           text: What is in the above image?
   YAML
@@ -192,7 +191,7 @@ Claude can read both text and images in requests. Both `base64` and `url` source
   import base64
   import httpx2
 
-  # Option 1: Base64-encoded image
+  # Option 1: base64-encoded image
   image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
   image_media_type = "image/jpeg"
   image_data = base64.standard_b64encode(httpx2.get(image_url).content).decode("utf-8")
@@ -247,8 +246,6 @@ Claude can read both text and images in requests. Both `base64` and `url` source
 
 Thinking can sometimes help Claude with very hard tasks. The current mechanism is [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) (`thinking: {"type": "adaptive"}`): Claude determines when and how much to think, and you steer thinking depth with the [`effort`](https://platform.claude.com/docs/en/build-with-claude/effort) parameter rather than a token budget. Adaptive thinking is supported on Claude 4.6 and later models and Claude Mythos Preview. On Claude 5 and later models and Claude Mythos Preview, thinking is on by default when the `thinking` parameter is omitted.
 
-Temperature must be set to 1 (or left unset) whenever thinking is enabled, on all models. On Claude 4.7 and later models and Claude Mythos Preview, `temperature` is deprecated and only its default value is accepted, even when thinking is off.
-
 Thinking is supported in the following models:
 
 * Claude Opus 5.5 (`claude-opus-5-5`, adaptive thinking only, always on)
@@ -278,7 +275,7 @@ When thinking is on, Claude creates `thinking` content blocks where it outputs i
 
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
-  ant messages create --transform content --format yaml <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 16000
   thinking:
@@ -330,67 +327,7 @@ Important limitations:
 
 ### Preserving thinking blocks
 
-<CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
-  ```bash CLI
-  # First request: capture the assistant content array (thinking + tool_use
-  # blocks, signatures intact) as compact JSON.
-  ASSISTANT_CONTENT=$(ant messages create \
-    --transform content --format jsonl <<'YAML'
-  model: claude-opus-5-5
-  max_tokens: 16000
-  thinking:
-    type: adaptive
-    display: summarized
-  tools:
-    - name: get_weather
-      description: Get the current weather for a location.
-      input_schema:
-        type: object
-        properties:
-          location:
-            type: string
-            description: The city name.
-        required: [location]
-  messages:
-    - role: user
-      content: "What's the weather in Paris?"
-  YAML
-  )
-
-  TOOL_USE_ID=$(printf '%s' "$ASSISTANT_CONTENT" \
-    | jq -r '.[] | select(.type == "tool_use") | .id')
-
-  # Second request: pass the captured blocks back unchanged as the assistant
-  # message. The thinking block must accompany the tool_use block.
-  ant messages create <<YAML
-  model: claude-opus-5-5
-  max_tokens: 16000
-  thinking:
-    type: adaptive
-    display: summarized
-  tools:
-    - name: get_weather
-      description: Get the current weather for a location.
-      input_schema:
-        type: object
-        properties:
-          location:
-            type: string
-            description: The city name.
-        required: [location]
-  messages:
-    - role: user
-      content: "What's the weather in Paris?"
-    - role: assistant
-      content: $ASSISTANT_CONTENT
-    - role: user
-      content:
-        - type: tool_result
-          tool_use_id: $TOOL_USE_ID
-          content: "Current temperature: 72°F"
-  YAML
-  ```
-
+<CodeGroup exclude="shell:cURL, shell:CLI, typescript, csharp, go, java, php, ruby">
   ```python Python
   import anthropic
 
@@ -408,7 +345,7 @@ Important limitations:
 
   weather_data = {"temperature": 72}
 
-  # First request - Claude responds with thinking and tool request
+  # First request: Claude responds with thinking and tool request
   response = client.messages.create(
       model="claude-opus-5-5",
       max_tokens=16000,
@@ -425,7 +362,7 @@ Important limitations:
       (block for block in response.content if block.type == "tool_use"), None
   )
 
-  # Second request - Include thinking block and tool result
+  # Second request: include thinking block and tool result
   continuation = client.messages.create(
       model="claude-opus-5-5",
       max_tokens=16000,
@@ -456,7 +393,7 @@ Important limitations:
 
 ### Interleaved thinking
 
-Interleaved thinking enables Claude to think between tool calls, reasoning about tool results before determining the next step.
+Interleaved thinking allows Claude to think between tool calls, reasoning about tool results before determining the next step.
 
 <Info>
   On models with [adaptive thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) (`thinking: {type: "adaptive"}`), interleaved thinking is automatically enabled. No beta header is needed. Sonnet 4.6 supports both the `interleaved-thinking-2025-05-14` beta header with manual extended thinking and adaptive thinking.
@@ -564,11 +501,11 @@ With interleaved thinking and ONLY with interleaved thinking (not regular manual
 
 Client tools are specified in the `tools` top-level parameter of the API request. Each tool definition includes:
 
-| Parameter      | Description                                                                                         |
-| -------------- | --------------------------------------------------------------------------------------------------- |
-| `name`         | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,128}$`.                                |
-| `description`  | A detailed plaintext description of what the tool does, when it should be used, and how it behaves. |
-| `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.     |
+| Parameter      | Description                                                                                          |
+| -------------- | ---------------------------------------------------------------------------------------------------- |
+| `name`         | The name of the tool. Must match the regex `^[a-zA-Z0-9_-]{1,128}$`.                                 |
+| `description`  | A detailed plain text description of what the tool does, when it should be used, and how it behaves. |
+| `input_schema` | A [JSON Schema](https://json-schema.org/) object defining the expected parameters for the tool.      |
 
 ```json
 {
@@ -601,7 +538,7 @@ Client tools are specified in the `tools` top-level parameter of the API request
 * What each parameter means and how it affects the tool's behavior
 * Any important caveats or limitations
 
-**Consider using `input_examples` for complex tools.** For tools with nested objects, optional parameters, or format-sensitive inputs, you can provide concrete examples using the `input_examples` field (beta). This helps Claude understand expected input patterns. See [Providing tool use examples](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#providing-tool-use-examples) for details.
+**Consider using `input_examples` for complex tools.** For tools with nested objects, optional parameters, or format-sensitive inputs, you can provide concrete examples using the `input_examples` field (beta). This shows Claude the expected input patterns. See [Providing tool use examples](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools#providing-tool-use-examples) for details.
 
 Example of a good tool description:
 
@@ -634,7 +571,7 @@ tool_choice = {"type": "tool", "name": "get_weather"}
 
 When working with the `tool_choice` parameter, there are four possible options:
 
-* `auto` allows Claude to determine whether to call any provided tools or not (default).
+* `auto` allows Claude to determine whether to call any provided tools (default).
 * `any` tells Claude that it must use one of the provided tools.
 * `tool` forces Claude to always use a particular tool.
 * `none` prevents Claude from using any tools.
@@ -647,7 +584,7 @@ Tools do not necessarily need to be client functions. You can use tools anytime 
 
 ### Parallel tool use
 
-By default, Claude may use multiple tools to answer a user query. You can disable this behavior by setting `disable_parallel_tool_use=true`.
+By default, Claude might use multiple tools to answer a user query. You can disable this behavior by setting `disable_parallel_tool_use=true`.
 
 ## Handling tool use and tool result content blocks
 
@@ -655,9 +592,9 @@ By default, Claude may use multiple tools to answer a user query. You can disabl
 
 The response has a `stop_reason` of `tool_use` and one or more `tool_use` content blocks that include:
 
-* `id`: A unique identifier for this particular tool use block.
-* `name`: The name of the tool being used.
-* `input`: An object containing the input being passed to the tool.
+* `id`: A unique identifier for this particular tool use block
+* `name`: The name of the tool being used
+* `input`: An object containing the input being passed to the tool
 
 ```json
 {
@@ -698,7 +635,7 @@ If Claude's response is cut off because it hits the `max_tokens` limit during to
 
 ### Handling the `pause_turn` stop reason
 
-When using server tools such as web search, the API may return a `pause_turn` stop reason. Continue the conversation by passing the paused response back as-is in a subsequent request.
+When you use server tools such as web search, the API might return a `pause_turn` stop reason. Continue the conversation by passing the paused response back as-is in a subsequent request.
 
 ## Troubleshooting errors
 
@@ -732,11 +669,10 @@ When creating a Message, you can set `"stream": true` to incrementally stream th
 
 <CodeGroup exclude="shell:cURL, typescript, csharp, go, java, php, ruby">
   ```bash CLI
-  ant messages create --stream --format jsonl \
+  ant messages create --stream \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello"}' \
-    | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
+    --message '{role: user, content: "Hello"}'
   ```
 
   ```python Python

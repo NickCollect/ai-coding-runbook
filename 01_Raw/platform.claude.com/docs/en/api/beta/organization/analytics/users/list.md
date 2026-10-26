@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/analytics/users/list
-fetched_at: 2026-10-12T06:50:07.048329+00:00
+fetched_at: 2026-10-26T05:40:35.593047+00:00
 fetch_method: mintlify_md
 ---
 
@@ -541,8 +541,8 @@ the `read:analytics` scope.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/analytics/users \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta-headers
-fetched_at: 2026-10-19T05:32:49.753877+00:00
+fetched_at: 2026-10-26T05:40:15.555892+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,15 +22,15 @@ To access beta features, include the `anthropic-beta` header in your API request
 
 ```http
 POST /v1/messages
-x-api-key: YOUR_API_KEY
+Authorization: Bearer YOUR_API_KEY
 anthropic-version: 2023-06-01
 anthropic-beta: BETA_FEATURE_NAME
 content-type: application/json
 ```
 
-Each feature's documentation states the exact beta name to send. The [API overview](https://platform.claude.com/docs/en/api/overview) lists the APIs currently in beta.
+Each feature's documentation states the exact beta name to send. The [API overview](https://platform.claude.com/docs/en/api/overview) lists the APIs in beta.
 
-The following examples show the same request with cURL, the `ant` CLI, and the SDK, using the [context editing](https://platform.claude.com/docs/en/build-with-claude/context-editing) beta as the example. The SDK takes beta names through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and sends the `anthropic-beta` header for you:
+The following example sends a request with the [context editing](https://platform.claude.com/docs/en/build-with-claude/context-editing) beta. The SDK takes beta names through `betas` (csharp, go: `Betas`; java: `.addBeta()`) and sends the `anthropic-beta` header for you:
 
 <CodeGroup>
   ```bash cURL
@@ -90,7 +90,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+          Messages = [new BetaUserMessageParam { Content = "Hello, Claude" }],
           Betas = ["context-management-2025-06-27"],
       }
   );
@@ -120,11 +120,11 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_5_5)
-    .maxTokens(1024)
-    .addUserMessage("Hello, Claude")
-    .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
-    .build();
+      .model(Model.CLAUDE_OPUS_5_5)
+      .maxTokens(1024)
+      .addUserMessage("Hello, Claude")
+      .addBeta(AnthropicBeta.CONTEXT_MANAGEMENT_2025_06_27)
+      .build();
 
   BetaMessage message = client.beta().messages().create(params);
   System.out.println(message.content());
@@ -136,7 +136,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
   $message = $client->beta->messages->create(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       betas: ['context-management-2025-06-27'],
   );
 
@@ -147,7 +147,7 @@ The following examples show the same request with cURL, the `ant` CLI, and the S
   client = Anthropic::Client.new
 
   message = client.beta.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}],
     betas: ["context-management-2025-06-27"]
@@ -186,12 +186,12 @@ With the SDK, list each feature (for example, `betas=["feature1", "feature2"]` (
 
 ### Beta features on other platforms
 
-Beta names are the same on every platform that accepts them, but not every platform accepts every beta. [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry), and [Google Cloud](https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai) take beta names in the `anthropic-beta` header, as the Claude API does. To send several betas, put their names in one header, separated by commas: Google Cloud reads only one `anthropic-beta` header and ignores the rest, so betas in the others don't take effect.
+Beta names are the same on every platform that accepts them, but not every platform accepts every beta. [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), [Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry), and [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed) take beta names in the `anthropic-beta` header, as the Claude API does. To send several betas, put their names in one header, separated by commas: Claude Models on Google Cloud (Google managed) reads only one `anthropic-beta` header and ignores the rest, so betas in the others don't take effect.
 
 On Amazon Bedrock, where beta names go depends on the API you call:
 
 * [Claude in Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock) (`bedrock-mantle` endpoints) takes them in the `anthropic-beta` header.
-* The [InvokeModel API](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy) reads them from the request body, not from a header. List them in the body's `anthropic_beta` array, one name per element, for example `"anthropic_beta": ["feature1", "feature2"]`.
+* The [InvokeModel API](https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy) reads them from the request body, not from a header. List them in the body's `anthropic_beta` array, one name for each element, for example `"anthropic_beta": ["feature1", "feature2"]`.
 
 ### Endpoint-specific headers
 
@@ -238,6 +238,6 @@ For updates to beta features, see the [release notes](https://platform.claude.co
   </Card>
 
   <Card title="API overview" icon="compass" href="https://platform.claude.com/docs/en/api/overview">
-    Explore the Claude API's features, including the APIs currently in beta.
+    Explore the Claude API's features, including the APIs in beta.
   </Card>
 </CardGroup>

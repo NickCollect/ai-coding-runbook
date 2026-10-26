@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-4-6
-fetched_at: 2026-10-19T05:32:48.763187+00:00
+fetched_at: 2026-10-26T05:40:13.710185+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Claude Sonnet 4.6 system prompts
 url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-sonnet-4-6
-description: See updates to the core system prompt for Claude Sonnet 4.6 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+description: See updates to the core system prompt for Claude Sonnet 4.6 on [claude.ai](https://claude.ai), the [Claude iOS app](https://anthropic.com/ios), and the [Claude Android app](https://anthropic.com/android).
 ---
 
 ## October 7, 2026

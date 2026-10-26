@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation
-fetched_at: 2026-10-19T05:32:47.099722+00:00
+fetched_at: 2026-10-26T05:40:10.163785+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/about-claude/use-case-guides/content-mo
 description: Content moderation is a critical aspect of maintaining a safe, respectful, and productive environment in digital applications. This guide discusses how Claude can be used to moderate content within your digital application.
 ---
 
-> Visit the [content moderation cookbook](https://platform.claude.com/cookbook/misc-building-moderation-filter) to see an example content moderation implementation using Claude.
+> Visit the [content moderation recipe](https://platform.claude.com/cookbook/misc-building-moderation-filter) in the Claude Cookbook to see an example content moderation implementation using Claude.
 
 <Tip>
   This guide is focused on moderating user-generated content within your application. If you're looking for guidance on moderating interactions with Claude, refer to 
@@ -24,7 +24,7 @@ description: Content moderation is a critical aspect of maintaining a safe, resp
 
 ### Decide whether to use Claude for content moderation
 
-Here are some key indicators that you should use an LLM like Claude instead of a traditional ML or rules-based approach for content moderation:
+Here are some key indicators that you should use an LLM such as Claude instead of a traditional ML or rules-based approach for content moderation:
 
 <AccordionGroup>
   <Accordion title="You want a cost-effective and rapid implementation">
@@ -32,41 +32,41 @@ Here are some key indicators that you should use an LLM like Claude instead of a
   </Accordion>
 
   <Accordion title="You want both semantic understanding and quick decisions">
-    Traditional ML approaches, such as bag-of-words models or simple pattern matching, often struggle to understand the tone, intent, and context of the content. While human moderation systems excel at understanding semantic meaning, they require time for content to be reviewed. Claude addresses both needs by combining semantic understanding with the ability to deliver moderation decisions quickly.
+    Traditional ML approaches, such as bag-of-words models or simple pattern matching, often have difficulty capturing the tone, intent, and context of the content. Although human moderation systems excel at understanding semantic meaning, they require time for content to be reviewed. Claude addresses both needs by combining semantic understanding with the ability to deliver moderation decisions quickly.
   </Accordion>
 
   <Accordion title="You need consistent policy decisions">
-    By leveraging its advanced reasoning capabilities, Claude can interpret and apply complex moderation guidelines uniformly. This consistency helps ensure fair treatment of all content, reducing the risk of inconsistent or biased moderation decisions that can undermine user trust.
+    With its advanced reasoning capabilities, Claude can interpret and apply complex moderation guidelines uniformly. This consistency helps ensure fair treatment of all content, reducing the risk of inconsistent or biased moderation decisions that can undermine user trust.
   </Accordion>
 
   <Accordion title="Your moderation policies are likely to change or evolve over time">
     Once a traditional ML approach has been established, changing it is a laborious and data-intensive undertaking. On the other hand, as your product or customer needs evolve, Claude can easily adapt to changes or additions to moderation policies without extensive relabeling of training data.
   </Accordion>
 
-  <Accordion title="You require interpretable reasoning for your moderation decisions">
+  <Accordion title="You need interpretable reasoning for your moderation decisions">
     If you want to provide users or regulators with clear explanations behind moderation decisions, Claude can generate detailed and coherent justifications. This transparency is important for building trust and ensuring accountability in content moderation practices.
   </Accordion>
 
   <Accordion title="You need multilingual support without maintaining separate models">
-    Traditional ML approaches typically require separate models or extensive translation processes for each supported language. Human moderation requires hiring a workforce fluent in each supported language. Claude’s multilingual capabilities allow it to classify tickets in various languages without the need for separate models or extensive translation processes, streamlining moderation for global customer bases.
+    Traditional ML approaches typically require separate models or extensive translation processes for each supported language. Human moderation requires hiring a workforce fluent in each supported language. Claude’s multilingual capabilities allow it to classify content in various languages without the need for separate models or extensive translation processes, streamlining moderation for global customer bases.
   </Accordion>
 
-  <Accordion title="You require multimodal support">
+  <Accordion title="You need multimodal support">
     Claude's multimodal capabilities allow it to analyze and interpret content across both text and images. This makes it a versatile tool for comprehensive content moderation in environments where different media types need to be evaluated together.
   </Accordion>
 </AccordionGroup>
 
 <Note>
-  All Claude models are trained with built-in safety behaviors. This may result in Claude moderating content deemed particularly dangerous (in line with the 
+  All Claude models are trained with built-in safety behaviors. This might result in Claude moderating content deemed particularly dangerous (in line with the 
 
-  [Acceptable Use Policy](https://www.anthropic.com/legal/aup)
+  [Usage Policy](https://www.anthropic.com/legal/aup)
 
-  ), regardless of the prompt used. For example, an adult website that wants to allow users to post explicit sexual content may find that Claude still flags explicit content as requiring moderation, even if they specify in their prompt not to moderate explicit sexual content. Consider reviewing the AUP in advance of building a moderation solution.
+  ), regardless of the prompt used. For example, an adult website that wants to allow users to post explicit sexual content might find that Claude still flags explicit content as requiring moderation, even if they specify in their prompt not to moderate explicit sexual content. Consider reviewing the Usage Policy in advance of building a moderation solution.
 </Note>
 
 ### Generate examples of content to moderate
 
-Before developing a content moderation solution, first create examples of content that should be flagged and content that should not be flagged. Ensure that you include edge cases and challenging scenarios that may be difficult for a content moderation system to handle effectively. Afterward, review your examples to create a well-defined list of moderation categories. For instance, the examples generated by a social media platform might include the following:
+Before developing a content moderation solution, first create examples of content that should be flagged and content that should not be flagged. Ensure that you include edge cases and challenging scenarios that might be difficult for a content moderation system to handle effectively. Afterward, review your examples to create a well-defined list of moderation categories. For instance, the examples generated by a social media platform might include the following:
 
 <CodeGroup exclude="shell">
   ```python Python
@@ -210,40 +210,39 @@ Before developing a content moderation solution, first create examples of conten
   	"Specialized Advice",
   	"Violent Crimes",
   }
-
   ```
 
   ```java Java
   final AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   final List<String> allowedUserComments = List.of(
-          "This movie was great, I really enjoyed it. The main actor really killed it!",
-          "I hate Mondays.",
-          "It is a great time to invest in gold!");
+      "This movie was great, I really enjoyed it. The main actor really killed it!",
+      "I hate Mondays.",
+      "It is a great time to invest in gold!");
 
   final List<String> disallowedUserComments = List.of(
-          "Delete this post now or you better hide. I am coming after you and your family.",
-          "Stay away from the 5G cellphones!! They are using 5G to control you.",
-          "Congratulations! You have won a $1,000 gift card. Click here to claim your prize!");
+      "Delete this post now or you better hide. I am coming after you and your family.",
+      "Stay away from the 5G cellphones!! They are using 5G to control you.",
+      "Congratulations! You have won a $1,000 gift card. Click here to claim your prize!");
 
   // Sample user comments to test the content moderation
   final List<String> userComments =
-          Stream.concat(allowedUserComments.stream(), disallowedUserComments.stream()).toList();
+      Stream.concat(allowedUserComments.stream(), disallowedUserComments.stream()).toList();
 
   // Categories considered unsafe for content moderation
   final List<String> unsafeCategories = List.of(
-          "Child Exploitation",
-          "Conspiracy Theories",
-          "Hate",
-          "Indiscriminate Weapons",
-          "Intellectual Property",
-          "Non-Violent Crimes",
-          "Privacy",
-          "Self-Harm",
-          "Sex Crimes",
-          "Sexual Content",
-          "Specialized Advice",
-          "Violent Crimes");
+      "Child Exploitation",
+      "Conspiracy Theories",
+      "Hate",
+      "Indiscriminate Weapons",
+      "Intellectual Property",
+      "Non-Violent Crimes",
+      "Privacy",
+      "Self-Harm",
+      "Sex Crimes",
+      "Sexual Content",
+      "Specialized Advice",
+      "Violent Crimes");
   ```
 
   ```php PHP
@@ -327,7 +326,7 @@ The unsafe categories can be customized to fit your specific needs. For example,
 
 ### Select the right Claude model
 
-When selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model such as Claude Haiku 5.5 is an excellent choice because of its cost-effectiveness. The following is an estimate of the cost to moderate text for a social media platform that receives one billion posts per month:
+When selecting a model, it’s important to consider the size of your data. If costs are a concern, a smaller model such as Claude Haiku 5.5 is an excellent choice because of its cost-effectiveness. The following is an estimate of the cost to moderate text for a social media platform that receives 1 billion posts per month:
 
 * **Content size**
 
@@ -361,7 +360,7 @@ When selecting a model, it’s important to consider the size of your data. If c
   * Monthly cost: $143,000 + $37,500 = $180,500 USD
 
 <Tip>
-  Actual costs may differ from these estimates. These estimates are based on the prompt highlighted in the section on 
+  Actual costs might differ from these estimates. These estimates are based on the prompt highlighted in the section on 
 
   [batch processing](https://platform.claude.com/docs/en/about-claude/use-case-guides/content-moderation#consider-batch-processing)
 
@@ -374,7 +373,7 @@ When selecting a model, it’s important to consider the size of your data. If c
 
 ### Build a strong prompt
 
-To use Claude for content moderation, Claude must understand the moderation requirements of your application. Start by writing a prompt that allows you to define your moderation needs:
+To use Claude for content moderation, Claude must interpret the moderation requirements of your application correctly. Start by writing a prompt that allows you to define your moderation needs:
 
 <CodeGroup exclude="shell">
   ```python Python
@@ -492,7 +491,7 @@ To use Claude for content moderation, Claude must understand the moderation requ
     const containsViolation = assessment.violation;
 
     // If there's a violation, get the categories and explanation; otherwise, use empty defaults
-    const violatedCategories = containsViolation ? assessment.categories ?? [] : [];
+    const violatedCategories = containsViolation ? (assessment.categories ?? []) : [];
     const explanation = containsViolation ? assessment.explanation : undefined;
 
     return { violation: containsViolation, violatedCategories, explanation };
@@ -553,7 +552,7 @@ To use Claude for content moderation, Claude must understand the moderation requ
           {
               Model = Model.ClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
               MaxTokens = 200,
-              Messages = [new() { Role = Role.User, Content = assessmentPrompt }],
+              Messages = [new UserMessageParam { Content = assessmentPrompt }],
           }
       );
 
@@ -669,7 +668,6 @@ To use Claude for content moderation, Claude must understand the moderation requ
   		}
   	}
   }
-
   ```
 
   ```java Java
@@ -701,21 +699,21 @@ To use Claude for content moderation, Claude must understand the moderation requ
               "explanation": [Optional. Only include if there is a violation.]
               }
           Do not include markdown formatting or code fences in your response."""
-              .formatted(message, unsafeCategoryStr);
+          .formatted(message, unsafeCategoryStr);
 
       // Send the request to Claude for content moderation
       Message response = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-              .maxTokens(200)
-              .addUserMessage(assessmentPrompt)
-              .build());
+          .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+          .maxTokens(200)
+          .addUserMessage(assessmentPrompt)
+          .build());
 
       // Parse the JSON response from Claude
       String assessmentJson = response.content().stream()
-              .flatMap(contentBlock -> contentBlock.text().stream())
-              .findFirst()
-              .orElseThrow()
-              .text();
+          .flatMap(contentBlock -> contentBlock.text().stream())
+          .findFirst()
+          .orElseThrow()
+          .text();
       ObjectMapper mapper = new ObjectMapper();
       JsonNode assessment = mapper.readTree(assessmentJson);
 
@@ -724,11 +722,11 @@ To use Claude for content moderation, Claude must understand the moderation requ
 
       // If there's a violation, get the categories and explanation; otherwise, use empty defaults
       List<String> violatedCategories = containsViolation && assessment.has("categories")
-              ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
-              : List.of();
+          ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
+          : List.of();
       String explanation = containsViolation && assessment.hasNonNull("explanation")
-              ? assessment.get("explanation").asText()
-              : null;
+          ? assessment.get("explanation").asText()
+          : null;
 
       return new ModerationResult(containsViolation, violatedCategories, explanation);
   }
@@ -844,7 +842,7 @@ To use Claude for content moderation, Claude must understand the moderation requ
 
     # Send the request to Claude for content moderation
     response = CLIENT.messages.create(
-      model: "claude-haiku-4-5-20251001", # Using the Haiku model for lower costs
+      model: Anthropic::Model::CLAUDE_HAIKU_4_5_20251001, # Using the Haiku model for lower costs
       max_tokens: 200,
       messages: [{role: :user, content: assessment_prompt}]
     )
@@ -885,9 +883,9 @@ The model's assessment is then parsed to determine if there is a violation. If t
 
 ### Evaluate your prompt
 
-Content moderation is a classification problem. Thus, you can use the same techniques outlined in the [classification cookbook](https://platform.claude.com/cookbook/capabilities-classification-guide) to determine the accuracy of your content moderation system.
+Content moderation is a classification problem. Thus, you can use the same techniques outlined in the Claude Cookbook's [classification recipe](https://platform.claude.com/cookbook/capabilities-classification-guide) to determine the accuracy of your content moderation system.
 
-One additional consideration is that instead of treating content moderation as a binary classification problem, you may instead create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, while users with many medium risk queries are flagged for human review.
+One additional consideration is that instead of treating content moderation as a binary classification problem, you can create multiple categories to represent various risk levels. Creating multiple risk levels allows you to adjust the aggressiveness of your moderation. For example, you might want to automatically block user queries that are deemed high risk, whereas users with many medium risk queries are flagged for human review.
 
 <CodeGroup exclude="shell">
   ```python Python
@@ -1085,7 +1083,7 @@ One additional consideration is that instead of treating content moderation as a
           {
               Model = Model.ClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
               MaxTokens = 200,
-              Messages = [new() { Role = Role.User, Content = assessmentPrompt }],
+              Messages = [new UserMessageParam { Content = assessmentPrompt }],
           }
       );
 
@@ -1206,7 +1204,6 @@ One additional consideration is that instead of treating content moderation as a
   		}
   	}
   }
-
   ```
 
   ```java Java
@@ -1246,21 +1243,21 @@ One additional consideration is that instead of treating content moderation as a
             "explanation": <Optional. Only include if risk level is greater than 0>
           }
           Do not include markdown formatting or code fences in your response."""
-              .formatted(message, unsafeCategoryStr);
+          .formatted(message, unsafeCategoryStr);
 
       // Send the request to Claude for risk assessment
       Message response = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-              .maxTokens(200)
-              .addUserMessage(assessmentPrompt)
-              .build());
+          .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+          .maxTokens(200)
+          .addUserMessage(assessmentPrompt)
+          .build());
 
       // Parse the JSON response from Claude
       String assessmentJson = response.content().stream()
-              .flatMap(contentBlock -> contentBlock.text().stream())
-              .findFirst()
-              .orElseThrow()
-              .text();
+          .flatMap(contentBlock -> contentBlock.text().stream())
+          .findFirst()
+          .orElseThrow()
+          .text();
       ObjectMapper mapper = new ObjectMapper();
       JsonNode assessment = mapper.readTree(assessmentJson);
 
@@ -1268,11 +1265,11 @@ One additional consideration is that instead of treating content moderation as a
       int riskLevel = assessment.required("risk_level").asInt();
       JsonNode categoriesNode = assessment.required("categories");
       List<String> violatedCategories = categoriesNode.isNull()
-              ? List.of()
-              : mapper.convertValue(categoriesNode, new TypeReference<List<String>>() {});
+          ? List.of()
+          : mapper.convertValue(categoriesNode, new TypeReference<List<String>>() {});
       String explanation = assessment.hasNonNull("explanation")
-              ? assessment.get("explanation").asText()
-              : null;
+          ? assessment.get("explanation").asText()
+          : null;
 
       return new RiskAssessment(riskLevel, violatedCategories, explanation);
   }
@@ -1404,7 +1401,7 @@ One additional consideration is that instead of treating content moderation as a
 
     # Send the request to Claude for risk assessment
     response = CLIENT.messages.create(
-      model: "claude-haiku-4-5-20251001", # Using the Haiku model for lower costs
+      model: Anthropic::Model::CLAUDE_HAIKU_4_5_20251001, # Using the Haiku model for lower costs
       max_tokens: 200,
       messages: [{role: :user, content: assessment_prompt}]
     )
@@ -1438,7 +1435,7 @@ This code implements an `assess_risk_level` function that uses Claude to evaluat
 
 Within the function, a prompt is generated for Claude, including the message to be assessed, the unsafe categories, and specific instructions for evaluating the risk level. The prompt instructs Claude to respond with a JSON object that includes the risk level, the violated categories, and an optional explanation.
 
-This approach enables flexible content moderation by assigning risk levels. It can be seamlessly integrated into a larger system to automate content filtering or flag comments for human review based on their assessed risk level. For instance, when running this code, the comment `Delete this post now or you better hide. I am coming after you and your family.` is identified as high risk because of its dangerous threat. Conversely, the comment `Stay away from the 5G cellphones!! They are using 5G to control you.` is categorized as medium risk.
+This approach allows flexible content moderation by assigning risk levels. It can be seamlessly integrated into a larger system to automate content filtering or flag comments for human review based on their assessed risk level. For instance, when you run this code, the comment `Delete this post now or you better hide. I am coming after you and your family.` is identified as high risk because of its dangerous threat. Conversely, the comment `Stay away from the 5G cellphones!! They are using 5G to control you.` is categorized as medium risk.
 
 ### Deploy your prompt
 
@@ -1454,7 +1451,7 @@ Once you are confident in the quality of your solution, it's time to deploy it t
 
 ## Improve performance
 
-In complex scenarios, it may be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview). Here are some advanced strategies:
+In complex scenarios, it might be helpful to consider additional strategies to improve performance beyond standard [prompt engineering techniques](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview). Here are some advanced strategies:
 
 ### Define topics and provide examples
 
@@ -1561,7 +1558,7 @@ In addition to listing the unsafe categories in the prompt, further improvements
       "Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children.",
     "Conspiracy Theories": `Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals,
           which can incite harm or undermine public trust in institutions or facts.`,
-    "Hate": `Content that is hateful toward people on the basis of their protected characteristics
+    Hate: `Content that is hateful toward people on the basis of their protected characteristics
           (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease),
           or content that perpetuates negative stereotypes.`,
     "Indiscriminate Weapons":
@@ -1570,8 +1567,7 @@ In addition to listing the unsafe categories in the prompt, further improvements
       "Content that violates the intellectual property rights of third parties.",
     "Non-Violent Crimes":
       "Content that enables, encourages, or excuses the commission of non-violent crimes.",
-    "Privacy":
-      "Content that contains sensitive, personal information about private individuals.",
+    Privacy: "Content that contains sensitive, personal information about private individuals.",
     "Self-Harm": "Content that enables, encourages, or excuses acts of intentional self-harm.",
     "Sex Crimes": "Content that enables, encourages, or excuses the commission of sex crimes.",
     "Sexual Content":
@@ -1630,7 +1626,7 @@ In addition to listing the unsafe categories in the prompt, further improvements
     const containsViolation = assessment.violation;
 
     // If there's a violation, get the categories and explanation; otherwise, use empty defaults
-    const violatedCategories = containsViolation ? assessment.categories ?? [] : [];
+    const violatedCategories = containsViolation ? (assessment.categories ?? []) : [];
     const explanation = containsViolation ? assessment.explanation : undefined;
 
     return { violation: containsViolation, violatedCategories, explanation };
@@ -1736,7 +1732,7 @@ In addition to listing the unsafe categories in the prompt, further improvements
           {
               Model = Model.ClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
               MaxTokens = 200,
-              Messages = [new() { Role = Role.User, Content = assessmentPrompt }],
+              Messages = [new UserMessageParam { Content = assessmentPrompt }],
           }
       );
 
@@ -1886,7 +1882,6 @@ In addition to listing the unsafe categories in the prompt, further improvements
   		}
   	}
   }
-
   ```
 
   ```java Java
@@ -1894,49 +1889,49 @@ In addition to listing the unsafe categories in the prompt, further improvements
   record CategoryDefinition(String category, String definition) {}
 
   final List<CategoryDefinition> unsafeCategoryDefinitions = List.of(
-          new CategoryDefinition(
-                  "Child Exploitation",
-                  "Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children."),
-          new CategoryDefinition(
-                  "Conspiracy Theories",
-                  """
-                  Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals,
-                          which can incite harm or undermine public trust in institutions or facts."""),
-          new CategoryDefinition(
-                  "Hate",
-                  """
-                  Content that is hateful toward people on the basis of their protected characteristics
-                          (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease),
-                          or content that perpetuates negative stereotypes."""),
-          new CategoryDefinition(
-                  "Indiscriminate Weapons",
-                  "Content that enables the creation of weapons of mass destruction."),
-          new CategoryDefinition(
-                  "Intellectual Property",
-                  "Content that violates the intellectual property rights of third parties."),
-          new CategoryDefinition(
-                  "Non-Violent Crimes",
-                  "Content that enables, encourages, or excuses the commission of non-violent crimes."),
-          new CategoryDefinition(
-                  "Privacy",
-                  "Content that contains sensitive, personal information about private individuals."),
-          new CategoryDefinition(
-                  "Self-Harm",
-                  "Content that enables, encourages, or excuses acts of intentional self-harm."),
-          new CategoryDefinition(
-                  "Sex Crimes",
-                  "Content that enables, encourages, or excuses the commission of sex crimes."),
-          new CategoryDefinition(
-                  "Sexual Content",
-                  "Content that contains erotic descriptions or explicit depictions of sex acts."),
-          new CategoryDefinition(
-                  "Specialized Advice",
-                  """
-                  Content that contains financial, medical, or legal advice.
-                          Financial advice includes guidance on investments, stocks, bonds, or any financial planning."""),
-          new CategoryDefinition(
-                  "Violent Crimes",
-                  "Content that enables, encourages, or excuses the commission of violent crimes."));
+      new CategoryDefinition(
+          "Child Exploitation",
+          "Content that depicts child nudity or that enables, encourages, excuses, or depicts the sexual abuse of children."),
+      new CategoryDefinition(
+          "Conspiracy Theories",
+          """
+          Content that promotes or endorses unfounded, false, or misleading theories about events, situations, or individuals,
+                  which can incite harm or undermine public trust in institutions or facts."""),
+      new CategoryDefinition(
+          "Hate",
+          """
+          Content that is hateful toward people on the basis of their protected characteristics
+                  (race, color, ethnicity, national origin, disability, religious affiliation, caste, sexual orientation, sex, gender identity and serious disease),
+                  or content that perpetuates negative stereotypes."""),
+      new CategoryDefinition(
+          "Indiscriminate Weapons",
+          "Content that enables the creation of weapons of mass destruction."),
+      new CategoryDefinition(
+          "Intellectual Property",
+          "Content that violates the intellectual property rights of third parties."),
+      new CategoryDefinition(
+          "Non-Violent Crimes",
+          "Content that enables, encourages, or excuses the commission of non-violent crimes."),
+      new CategoryDefinition(
+          "Privacy",
+          "Content that contains sensitive, personal information about private individuals."),
+      new CategoryDefinition(
+          "Self-Harm",
+          "Content that enables, encourages, or excuses acts of intentional self-harm."),
+      new CategoryDefinition(
+          "Sex Crimes",
+          "Content that enables, encourages, or excuses the commission of sex crimes."),
+      new CategoryDefinition(
+          "Sexual Content",
+          "Content that contains erotic descriptions or explicit depictions of sex acts."),
+      new CategoryDefinition(
+          "Specialized Advice",
+          """
+          Content that contains financial, medical, or legal advice.
+                  Financial advice includes guidance on investments, stocks, bonds, or any financial planning."""),
+      new CategoryDefinition(
+          "Violent Crimes",
+          "Content that enables, encourages, or excuses the commission of violent crimes."));
 
   record ModerationDecision(boolean violation, List<String> violatedCategories, String explanation) {}
 
@@ -1945,9 +1940,9 @@ In addition to listing the unsafe categories in the prompt, further improvements
           throws JsonProcessingException {
       // Format unsafe categories string, with each category and its definition on a new line
       String unsafeCategoryStr = unsafeCategoryDefinitions.stream()
-              .map(categoryDefinition ->
-                      categoryDefinition.category() + ": " + categoryDefinition.definition())
-              .collect(Collectors.joining("\n"));
+          .map(categoryDefinition ->
+              categoryDefinition.category() + ": " + categoryDefinition.definition())
+          .collect(Collectors.joining("\n"));
 
       // Construct the prompt for Claude, including the message and unsafe categories
       String assessmentPrompt = """
@@ -1970,21 +1965,21 @@ In addition to listing the unsafe categories in the prompt, further improvements
             "explanation": [Optional. Only include if there is a violation.]
           }
           Do not include markdown formatting or code fences in your response."""
-              .formatted(message, unsafeCategoryStr);
+          .formatted(message, unsafeCategoryStr);
 
       // Send the request to Claude for content moderation
       Message response = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-              .maxTokens(200)
-              .addUserMessage(assessmentPrompt)
-              .build());
+          .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+          .maxTokens(200)
+          .addUserMessage(assessmentPrompt)
+          .build());
 
       // Parse the JSON response from Claude
       String assessmentJson = response.content().stream()
-              .flatMap(contentBlock -> contentBlock.text().stream())
-              .findFirst()
-              .orElseThrow()
-              .text();
+          .flatMap(contentBlock -> contentBlock.text().stream())
+          .findFirst()
+          .orElseThrow()
+          .text();
       ObjectMapper mapper = new ObjectMapper();
       JsonNode assessment = mapper.readTree(assessmentJson);
 
@@ -1993,11 +1988,11 @@ In addition to listing the unsafe categories in the prompt, further improvements
 
       // If there's a violation, get the categories and explanation; otherwise, use empty defaults
       List<String> violatedCategories = containsViolation && assessment.has("categories")
-              ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
-              : List.of();
+          ? mapper.convertValue(assessment.get("categories"), new TypeReference<List<String>>() {})
+          : List.of();
       String explanation = containsViolation && assessment.hasNonNull("explanation")
-              ? assessment.get("explanation").asText()
-              : null;
+          ? assessment.get("explanation").asText()
+          : null;
 
       return new ModerationDecision(containsViolation, violatedCategories, explanation);
   }
@@ -2160,7 +2155,7 @@ In addition to listing the unsafe categories in the prompt, further improvements
 
     # Send the request to Claude for content moderation
     response = CLIENT.messages.create(
-      model: "claude-haiku-4-5-20251001", # Using the Haiku model for lower costs
+      model: Anthropic::Model::CLAUDE_HAIKU_4_5_20251001, # Using the Haiku model for lower costs
       max_tokens: 200,
       messages: [{role: :user, content: assessment_prompt}]
     )
@@ -2246,7 +2241,7 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
       # Send the request to Claude for content moderation
       response = client.messages.create(
           model="claude-haiku-4-5-20251001",  # Using the Haiku model for lower costs
-          max_tokens=2048,  # Increased max token count to handle batches
+          max_tokens=2048,  # Increased token limit to handle batches
           messages=[{"role": "user", "content": assessment_prompt}],
       )
 
@@ -2321,7 +2316,7 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
     // Send the request to Claude for content moderation
     const response = await client.messages.create({
       model: "claude-haiku-4-5-20251001", // Using the Haiku model for lower costs
-      max_tokens: 2048, // Increased max token count to handle batches
+      max_tokens: 2048, // Increased token limit to handle batches
       messages: [{ role: "user", content: assessmentPrompt }]
     });
 
@@ -2394,8 +2389,8 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
           new()
           {
               Model = Model.ClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
-              MaxTokens = 2048, // Increased max token count to handle batches
-              Messages = [new() { Role = Role.User, Content = assessmentPrompt }],
+              MaxTokens = 2048, // Increased token limit to handle batches
+              Messages = [new UserMessageParam { Content = assessmentPrompt }],
           }
       );
 
@@ -2481,7 +2476,7 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
   	// Send the request to Claude for content moderation
   	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
   		Model:     anthropic.ModelClaudeHaiku4_5_20251001, // Using the Haiku model for lower costs
-  		MaxTokens: 2048,                                   // Increased max token count to handle batches
+  		MaxTokens: 2048,                                   // Increased token limit to handle batches
   		Messages: []anthropic.MessageParam{
   			anthropic.NewUserMessage(anthropic.NewTextBlock(assessmentPrompt)),
   		},
@@ -2521,7 +2516,6 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
   `, userComments[violation.ID], strings.Join(violation.Categories, ", "), violation.Explanation)
   	}
   }
-
   ```
 
   ```java Java
@@ -2532,8 +2526,8 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
 
       // Format messages string, with each message wrapped in XML-like tags and given an ID
       String messagesStr = IntStream.range(0, messages.size())
-              .mapToObj(idx -> "<message id=%d>%s</message>".formatted(idx, messages.get(idx)))
-              .collect(Collectors.joining("\n"));
+          .mapToObj(idx -> "<message id=%d>%s</message>".formatted(idx, messages.get(idx)))
+          .collect(Collectors.joining("\n"));
 
       // Construct the prompt for Claude, including the messages and unsafe categories
       String assessmentPrompt = """
@@ -2564,21 +2558,21 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
           - Remember to analyze every message for a violation.
           - Select any number of violations that reasonably apply.
           - Do not include markdown formatting or code fences in your response."""
-              .formatted(messagesStr, unsafeCategoryStr);
+          .formatted(messagesStr, unsafeCategoryStr);
 
       // Send the request to Claude for content moderation
       Message response = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
-              .maxTokens(2048) // Increased max token count to handle batches
-              .addUserMessage(assessmentPrompt)
-              .build());
+          .model(Model.CLAUDE_HAIKU_4_5_20251001) // Using the Haiku model for lower costs
+          .maxTokens(2048) // Increased token limit to handle batches
+          .addUserMessage(assessmentPrompt)
+          .build());
 
       // Parse the JSON response from Claude
       String assessmentJson = response.content().stream()
-              .flatMap(contentBlock -> contentBlock.text().stream())
-              .findFirst()
-              .orElseThrow()
-              .text();
+          .flatMap(contentBlock -> contentBlock.text().stream())
+          .findFirst()
+          .orElseThrow()
+          .text();
       return new ObjectMapper().readTree(assessmentJson);
   }
 
@@ -2589,15 +2583,15 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
       ObjectMapper mapper = new ObjectMapper();
       for (JsonNode violation : response.required("violations")) {
           List<String> violatedCategories =
-                  mapper.convertValue(violation.required("categories"), new TypeReference<List<String>>() {});
+              mapper.convertValue(violation.required("categories"), new TypeReference<List<String>>() {});
           IO.println("""
-                  Comment: %s
-                  Violated Categories: %s
-                  Explanation: %s
-                  """.formatted(
-                          userComments.get(violation.required("id").asInt()),
-                          String.join(", ", violatedCategories),
-                          violation.required("explanation").asText()));
+              Comment: %s
+              Violated Categories: %s
+              Explanation: %s
+              """.formatted(
+                  userComments.get(violation.required("id").asInt()),
+                  String.join(", ", violatedCategories),
+                  violation.required("explanation").asText()));
       }
   }
   ```
@@ -2648,7 +2642,7 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
       // Send the request to Claude for content moderation
       $response = $client->messages->create(
           model: 'claude-haiku-4-5-20251001', // Using the Haiku model for lower costs
-          maxTokens: 2048, // Increased max token count to handle batches
+          maxTokens: 2048, // Increased token limit to handle batches
           messages: [['role' => 'user', 'content' => $assessmentPrompt]],
       );
 
@@ -2714,8 +2708,8 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
 
     # Send the request to Claude for content moderation
     response = CLIENT.messages.create(
-      model: "claude-haiku-4-5-20251001", # Using the Haiku model for lower costs
-      max_tokens: 2048, # Increased max token count to handle batches
+      model: Anthropic::Model::CLAUDE_HAIKU_4_5_20251001, # Using the Haiku model for lower costs
+      max_tokens: 2048, # Increased token limit to handle batches
       messages: [{role: :user, content: assessment_prompt}]
     )
 
@@ -2740,10 +2734,10 @@ To reduce costs in situations where real-time moderation isn't necessary, consid
   ```
 </CodeGroup>
 
-In this example, the `batch_moderate_messages` function handles the moderation of an entire batch of messages with a single Claude API call. Inside the function, a prompt is created that includes the list of messages to evaluate and the unsafe content categories. The prompt directs Claude to return a JSON object listing all messages that contain violations. Each message in the response is identified by its `id`, which corresponds to the message's position in the batch. Keep in mind that finding the optimal batch size for your specific needs may require some experimentation. While larger batch sizes can lower costs, they might also lead to a slight decrease in quality. Additionally, you may need to increase the `max_tokens` parameter in the Claude API call to accommodate longer responses. For details on the maximum number of tokens your chosen model can output, refer to the [model comparison table](https://platform.claude.com/docs/en/models/overview#latest-models-comparison).
+In this example, the `batch_moderate_messages` function handles the moderation of an entire batch of messages with a single Claude API call. Inside the function, a prompt is created that includes the list of messages to evaluate and the unsafe content categories. The prompt directs Claude to return a JSON object listing all messages that contain violations. Each message in the response is identified by its `id`, which corresponds to the message's position in the batch. Keep in mind that finding the optimal batch size for your specific needs might require some experimentation. Although larger batch sizes can lower costs, they might also lead to a slight decrease in quality. Additionally, you might need to increase the `max_tokens` parameter in the Claude API call to accommodate longer responses. For details on the maximum number of tokens your chosen model can output, refer to the [model comparison table](https://platform.claude.com/docs/en/models/overview#latest-models-comparison).
 
 <CardGroup cols={2}>
-  <Card title="Content moderation cookbook" icon="link" href="https://platform.claude.com/cookbook/misc-building-moderation-filter">
+  <Card title="Content moderation recipe" icon="link" href="https://platform.claude.com/cookbook/misc-building-moderation-filter">
     View a fully implemented code-based example of how to use Claude for content moderation.
   </Card>
 

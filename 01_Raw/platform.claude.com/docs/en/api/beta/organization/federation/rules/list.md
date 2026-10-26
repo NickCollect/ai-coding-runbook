@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/federation/rules/list
-fetched_at: 2026-10-19T05:32:58.408575+00:00
+fetched_at: 2026-10-26T05:40:32.195550+00:00
 fetch_method: mintlify_md
 ---
 
@@ -158,6 +158,8 @@ unless `include_archived=true`.
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Returns
 
 - `data: array of BetaFederationRule`
@@ -288,8 +290,8 @@ unless `include_archived=true`.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

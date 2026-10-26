@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes
-fetched_at: 2026-10-19T05:32:44.789908+00:00
+fetched_at: 2026-10-26T05:40:04.908796+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ A `self_hosted` environment acts as a work queue. You run an **environment worke
 2. Your worker claims the work item and downloads the agent's [skills](https://platform.claude.com/docs/en/managed-agents/skills) and the session's [memory stores](https://platform.claude.com/docs/en/managed-agents/memory).
 3. Claude runs on Anthropic's side and requests tool calls. Your worker runs each call locally and posts the result back.
 
-Tool inputs and outputs still flow to Anthropic's control plane, so the model can see results and determine what to do next. Anthropic stores skills and memory stores. Your sandbox holds a copy for the session. See [Security model](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-security) for the full data-flow boundary.
+Tool inputs and outputs still flow to Anthropic's control plane, so the model can receive results and determine what to do next. Anthropic stores skills and memory stores. Your sandbox holds a copy for the session. See [Security model](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-security) for the full data-flow boundary.
 
 Self-hosted sandboxes support every Claude model available in Managed Agents. The model is configured on the agent, not the environment.
 
@@ -45,6 +45,8 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 
 <Note>
   On [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws#api-key-authentication), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](https://platform.claude.com/docs/en/api/claude-platform-on-aws-iam-actions#managed-policies) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
+
+  On [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), the worker authenticates with [Google Cloud credentials](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#authentication), not an environment key. Grant the Google Cloud identity your worker uses `roles/claude.user` or `roles/claude.admin` on the project. Both roles include [`environments.processWork`](https://platform.claude.com/docs/en/api/claude-models-on-google-cloud-anthropic-managed-iam-permissions#environments), which the worker needs to poll for and manage work items, and the session and skill permissions it needs to run a session. Environment keys generated in the Claude Console don't work with the Claude Models on Google Cloud (Anthropic managed) endpoint. The pre-built workers in the `ant` CLI and in the Python, TypeScript, and Go SDKs don't support Claude Models on Google Cloud (Anthropic managed), so implement your own worker that calls the [Environments Work endpoints](https://platform.claude.com/docs/en/api/beta/environments/work) directly. See [Features not supported](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed#features-not-supported).
 </Note>
 
 ### Run your first session
@@ -150,7 +152,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
       ```
 
       ```php PHP
-      $client = new \Anthropic\Client();
+      $client = new Client();
 
       $environment = $client->beta->environments->create(
           name: 'self-hosted',
@@ -190,7 +192,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
         For Linux environments, download the release binary directly.
 
         ```bash
-        VERSION=1.42.0
+        VERSION=2.3.0
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
         case $(uname -m) in
           x86_64) ARCH=amd64 ;;
@@ -308,7 +310,8 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
 
     <CodeGroup>
       ```bash cURL
-      SESSION_ID=$(curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+      # Create a session
+      curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -316,9 +319,9 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
         -d '{
           "agent": "'"$AGENT_ID"'",
           "environment_id": "'"$ANTHROPIC_ENVIRONMENT_ID"'"
-        }' | jq -er '.id'
-      )
+        }'
 
+      # Send it a task: SESSION_ID is the ID from the create response
       curl -sS --fail-with-body "https://api.anthropic.com/v1/sessions/$SESSION_ID/events" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
@@ -340,11 +343,12 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
       ```
 
       ```bash CLI
-      SESSION_ID=$(ant beta:sessions create \
+      # Create a session
+      ant beta:sessions create \
         --agent "$AGENT_ID" \
-        --environment-id "$ANTHROPIC_ENVIRONMENT_ID" \
-        --transform id --raw-output)
+        --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
 
+      # Send it a task: SESSION_ID is the ID from the create response
       ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
       events:
         - type: user.message
@@ -410,12 +414,10 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
           [
               new BetaManagedAgentsUserMessageEventParams
               {
-                  Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
                   Content =
                   [
                       new BetaManagedAgentsTextBlock
                       {
-                          Type = BetaManagedAgentsTextBlockType.Text,
                           Text = "Write the output of \"uname -a\" to hello.txt in your working directory.",
                       },
                   ],
@@ -436,10 +438,8 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
       _, err = client.Beta.Sessions.Events.Send(context.Background(), session.ID, anthropic.BetaSessionEventSendParams{
       	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
       		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-      			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
       			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
       				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-      					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
       					Text: "Write the output of \"uname -a\" to hello.txt in your working directory.",
       				},
       			}},
@@ -461,7 +461,6 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
           session.id(),
           EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
                   .addTextContent("Write the output of \"uname -a\" to hello.txt in your working directory.")
                   .build())
               .build());
@@ -512,7 +511,7 @@ This quickstart runs one always-on worker with the `ant` CLI, sends it a session
     cat /workspace/hello.txt
     ```
 
-    The file describes your own host's kernel, so the agent's tool calls ran there. To follow the agent's work as it happens, see [Session event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming).
+    The file describes your own host's kernel, so the agent's tool calls ran there. To follow the agent's work in real time, see [Session event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming).
   </Step>
 </Steps>
 
@@ -528,7 +527,7 @@ Environment env_... is a self-hosted environment. `resources` are not supported 
 
 ## Self-hosted sandboxes and MCP tunnels
 
-Self-hosting controls *where the agent's code executes*. [MCP tunnels](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview) control *how Anthropic reaches MCP servers in your network*. The two are independent:
+Self-hosting controls *where the agent's code runs*. [MCP tunnels](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/overview) control *how Anthropic reaches MCP servers in your network*. The two are independent:
 
 * A session in Anthropic's cloud sandboxes can reach private MCP servers through a tunnel. For example, a private MCP server might sit in front of a database or an internal API behind your firewall.
 * A self-hosted session can use either tunneled or public MCP servers.
@@ -558,7 +557,7 @@ These pages describe how to build a worker on any sandboxing platform. Platform-
     Run the SDK worker, trigger workers from webhooks, or give each session its own sandbox.
   </Card>
 
-  <Card title="Memory stores" icon="brain" href="https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory">
+  <Card title="Memory stores in self-hosted sandboxes" icon="brain" href="https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory">
     Prepare the host, configure sync, and handle read-only stores and conflicts.
   </Card>
 

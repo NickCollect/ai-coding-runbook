@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-compose
-fetched_at: 2026-10-19T05:32:43.957521+00:00
+fetched_at: 2026-10-26T05:40:03.229130+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,11 +16,11 @@ description: Install the MCP tunnel stack on a VM using Docker Compose.
 
 This guide deploys the [tunnel stack](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts#components) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
-## Before you begin
+## Before you start
 
 You need:
 
-* **A tunnel.** With programmatic access, the [setup component](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts#components) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Console](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
+* **A tunnel.** With programmatic access, the [setup component](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts#components) creates one for you when you don't supply a tunnel ID; to attach to an existing tunnel instead, [create it in the Claude Console](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/console#create-a-tunnel) and record the tunnel ID (`tnl_...`). Manual provisioning always starts from a Console-created tunnel.
 
 * **A way for the host to authenticate to the Tunnels API.**
 
@@ -86,7 +86,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cat > docker-compose.yaml <<'EOF'
         services:
           setup:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:efb27b299d627e4134815663cb8896641eeaee025d734c0f695582b4df38f013
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:d243d30642d39857a0579e465cb3b9bf3ae7c1141e83143bb6856777a31467a5
             entrypoint: ["/setup"]
             command:
               - init
@@ -110,7 +110,7 @@ This guide provides one reference approach using Docker Compose. You are respons
             profiles: ["setup"]
 
           cloudflared:
-            image: cloudflare/cloudflared@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
+            image: cloudflare/cloudflared@sha256:0e56c13c7058fcef9c4f0e7d83372f82330548dbf8f8b366f3d8b506526d93b2
             command: tunnel --no-autoupdate run --url http://localhost:8080
             environment:
               - TUNNEL_TOKEN
@@ -130,7 +130,7 @@ This guide provides one reference approach using Docker Compose. You are respons
                 max-file: "3"
 
           mcp-proxy:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:efb27b299d627e4134815663cb8896641eeaee025d734c0f695582b4df38f013
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:d243d30642d39857a0579e465cb3b9bf3ae7c1141e83143bb6856777a31467a5
             volumes:
               - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
               - ./data:/data:ro
@@ -250,7 +250,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cd mcp-tunnel
         ```
 
-        The proxy listens on `:8080` over plain WebSocket; the [inner TLS](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts#components) handshake happens **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` per the [certificate requirements](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference#certificate-requirements).
+        The proxy listens on `:8080` over plain WebSocket; the [inner TLS](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/concepts#components) handshake occurs **inside** that WebSocket stream using these certificates. Anthropic verifies the inner handshake against the CA you register in the Console. The server certificate's Subject Alternative Name (SAN) must include `*.<tunnel-domain>` as described in the [certificate requirements](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference#certificate-requirements).
 
         ```bash
         # Self-signed CA. Explicit extensions so it satisfies the certificate
@@ -288,7 +288,7 @@ This guide provides one reference approach using Docker Compose. You are respons
       </Step>
 
       <Step title="Register the CA certificate in the Console">
-        On the tunnel detail page, scroll to the **Certificates** section and click **Add certificate**. Upload `data/ca.crt` directly with **Choose file** (the modal accepts `.pem`, `.crt`, and `.cer`), or paste its contents:
+        On the tunnel detail page, scroll to the **Certificates** section and click **Add certificate**. Upload `data/ca.crt` directly with **Choose file** (the modal window accepts `.pem`, `.crt`, and `.cer`), or paste its contents:
 
         ```bash
         cat data/ca.crt
@@ -323,7 +323,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cat > docker-compose.yaml <<'EOF'
         services:
           cloudflared:
-            image: cloudflare/cloudflared@sha256:6b599ca3e974349ead3286d178da61d291961182ec3fe9c505e1dd02c8ac31b0
+            image: cloudflare/cloudflared@sha256:0e56c13c7058fcef9c4f0e7d83372f82330548dbf8f8b366f3d8b506526d93b2
             # --url is required: no ingress rules are pushed in the manual flow,
             # so without it cloudflared 503s every request.
             command: tunnel --no-autoupdate run --url http://localhost:8080
@@ -345,7 +345,7 @@ This guide provides one reference approach using Docker Compose. You are respons
                 max-file: "3"
 
           mcp-proxy:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:efb27b299d627e4134815663cb8896641eeaee025d734c0f695582b4df38f013
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:d243d30642d39857a0579e465cb3b9bf3ae7c1141e83143bb6856777a31467a5
             volumes:
               - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
               - ./data:/data:ro
@@ -389,7 +389,7 @@ This guide provides one reference approach using Docker Compose. You are respons
   </Tab>
 </Tabs>
 
-The compose file reads `TUNNEL_TOKEN` from the host environment with no default, so the export must be repeated in every fresh shell and after a reboot.
+The compose file reads `TUNNEL_TOKEN` from the host environment with no default, so you must repeat the export in every fresh shell and after a reboot.
 
 For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `TUNNEL_TOKEN`, and run `docker compose up -d`. In the programmatic flow `TUNNEL_TOKEN` is `$(sudo cat data/tunnel-token)`; in the manual flow it's the value you copied from the Console. The same tunnel token and certificates work across all replicas.
 
@@ -415,8 +415,8 @@ With programmatic access, increment `--token-version` in the `setup` service com
 export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...
 export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
 # export ANTHROPIC_WORKSPACE_ID=wrkspc_...   # if your rule is workspace-scoped
-# Re-mint ANTHROPIC_IDENTITY_TOKEN per the WIF provider guide for your
-# environment (it will have expired since install).
+# Re-mint ANTHROPIC_IDENTITY_TOKEN as described in the WIF provider guide for
+# your environment (it will have expired since install).
 export ANTHROPIC_IDENTITY_TOKEN=...
 
 docker compose run --rm setup

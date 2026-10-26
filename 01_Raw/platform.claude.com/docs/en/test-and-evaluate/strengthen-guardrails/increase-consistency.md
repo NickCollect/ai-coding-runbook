@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency
-fetched_at: 2026-08-17T02:15:17.821571+00:00
+fetched_at: 2026-10-26T05:40:11.005749+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,9 +20,9 @@ description: Make Claude's outputs more consistent by specifying exact formats, 
 
 Here's how to make Claude's responses more consistent:
 
-## Specify the desired output format
+## Specify the output format you want
 
-Precisely define your desired output format using JSON, XML, or custom templates so that Claude follows every output formatting element you require.
+Precisely define the output format you want using JSON, XML, or custom templates so that Claude follows every output formatting element you require.
 
 <Accordion title="Example: Standardizing customer feedback">
   ```text User wrap
@@ -75,7 +75,7 @@ Precisely define your desired output format using JSON, XML, or custom templates
    on models that support it, or system prompt instructions, instead.
 </Note>
 
-Prefill the `Assistant` turn with your desired format. This trick bypasses Claude's friendly preamble and enforces your structure.
+Prefill the `Assistant` turn with the format you want. This trick bypasses Claude's friendly preamble and enforces your structure.
 
 <Accordion title="Example: Daily sales report">
   ```text User wrap
@@ -168,7 +168,7 @@ Prefill the `Assistant` turn with your desired format. This trick bypasses Claud
 
 ## Constrain with examples
 
-Provide examples of your desired output. This is more effective than abstract instructions.
+Provide examples of the output you want. This is more effective than abstract instructions.
 
 <Accordion title="Example: Generating consistent market intelligence">
   ```text User wrap
@@ -322,7 +322,7 @@ For tasks requiring consistent context (for example, chatbots, knowledge bases),
 
 ## Chain prompts for complex tasks
 
-Break down complex tasks into smaller, consistent subtasks. Each subtask gets Claude's full attention, reducing inconsistency errors across scaled workflows.
+Break down complex tasks into smaller, consistent subtasks. Each prompt then covers a single subtask, reducing inconsistency errors across scaled workflows.
 
 ## Keep Claude in character
 

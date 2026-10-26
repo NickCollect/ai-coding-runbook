@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns
-fetched_at: 2026-10-05T06:27:26.325265+00:00
+fetched_at: 2026-10-26T05:40:09.743606+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ Both patterns share these constraints:
 * Activities are queryable within 1 minute of occurring and retained for 6 years. Recording is not retroactive: it begins when the Compliance API is first enabled for your organization, and activity from before enablement is not backfilled.
 * The maximum `limit` for each page is 5,000.
 * Cursor values are opaque strings that you must not parse.
-* Requests are limited to 600 per minute per [parent organization](https://platform.claude.com/docs/en/manage-claude/compliance-api#how-the-compliance-api-works), shared across every key, every linked organization, and every `/v1/compliance/*` endpoint; unlike the local session endpoints, the remote session endpoints carry a second request budget on top. See [429 Too Many Requests](https://platform.claude.com/docs/en/manage-claude/compliance-errors#429-too-many-requests) for the response headers and retry contract.
+* Requests are limited to 600 per minute for each [parent organization](https://platform.claude.com/docs/en/manage-claude/compliance-api#how-the-compliance-api-works), shared across every key, every linked organization, and every `/v1/compliance/*` endpoint; unlike the local session endpoints, the remote session endpoints carry a second request budget on top. See [429 Too Many Requests](https://platform.claude.com/docs/en/manage-claude/compliance-errors#429-too-many-requests) for the response headers and retry contract.
 
 | Pattern                         | Choose when                                                                                                                                                                                                     |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -49,8 +49,8 @@ Set `created_at.lt` at least 1 minute in the past so that every activity in the 
 ```bash cURL
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01" \
   --data-urlencode "created_at.gte=2026-04-20T07:00:00Z" \
   --data-urlencode "created_at.lt=2026-04-20T08:00:00Z" \
   --data-urlencode "limit=5000"
@@ -67,17 +67,16 @@ Even with clean tiling, an activity that indexes after its window has closed nev
 ### Cursor-driven incremental reads
 
 ```bash cURL
-first_id="activity_01XyDMpzjS89pFZXqSFUBDr6"  # first_id from a previous response
-
+# before_id is the first_id from a previous response
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01" \
   --data-urlencode "limit=5000" \
-  --data-urlencode "before_id=$first_id"
+  --data-urlencode "before_id=activity_01DeFgHjKmNpQrStUvWxYzAb"
 ```
 
-Page through until `has_more` is `false`, then persist `first_id` from the final response and pass it unchanged as `before_id` on the next run to retrieve activities newer than the saved cursor. To walk in the opposite direction for a backfill, persist `last_id` and pass it as `after_id` instead. For the full cursor-vs-page-token reference and retry semantics, see [Paginate results](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed#paginate-results).
+Page through until `has_more` is `false`, then persist `first_id` from the final response and pass it unchanged as `before_id` on the next run to retrieve activities newer than the saved cursor. To walk in the opposite direction for a backfill, persist `last_id` and pass it as `after_id` instead. For the full cursor-versus-page-token reference and retry semantics, see [Paginate results](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed#paginate-results).
 
 A production **catch-up** loop fetches activities recorded since your last poll by driving iteration off `has_more` and `first_id`:
 

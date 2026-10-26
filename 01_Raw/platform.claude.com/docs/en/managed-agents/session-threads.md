@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/session-threads
-fetched_at: 2026-10-19T05:32:45.324905+00:00
+fetched_at: 2026-10-26T05:40:06.137964+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ In a [multiagent session](https://platform.claude.com/docs/en/managed-agents/mul
 
 The **session-level event stream** (`/v1/sessions/{session_id}/events/stream`) is considered the **primary thread**, containing a condensed view of all activity across all threads. You don't see the full activity from [subagents](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#delegate-to-subagents), but you do see the start and end of their work, and blocking events such as tool permission requests.
 
-**Session threads** are where you drill into a specific agent's activity.
+**Session threads** are where you examine a specific agent's activity.
 
 The session `status` (csharp, go: `Status`) is an aggregation of all agent activity; if at least one thread is `running`, then the overall session status is `running` as well. A [workflow run](https://platform.claude.com/docs/en/managed-agents/workflow-runs) that's running can keep the session `running` too, even while none of its threads is working. When no thread is working and a thread waits on your client, the session is `idle`; see [Know when the work is done](https://platform.claude.com/docs/en/managed-agents/workflow-runs#know-when-the-work-is-done).
 
@@ -123,7 +123,11 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d "{\"events\": [{\"type\": \"user.interrupt\", \"session_thread_id\": \"$THREAD_ID\"}]}"
+    -d '{
+      "events": [
+        {"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}
+      ]
+    }'
   ```
 
   ```bash CLI
@@ -141,21 +145,14 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
 
   ```typescript TypeScript
   await client.beta.sessions.events.send(session.id, {
-    events: [{ type: "user.interrupt", session_thread_id: thread.id }],
+    events: [{ type: "user.interrupt", session_thread_id: thread.id }]
   });
   ```
 
   ```csharp C#
   await client.Beta.Sessions.Events.Send(session.ID, new()
   {
-      Events =
-      [
-          new BetaManagedAgentsUserInterruptEventParams
-          {
-              Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-              SessionThreadID = thread.ID,
-          },
-      ],
+      Events = [new BetaManagedAgentsUserInterruptEventParams { SessionThreadID = thread.ID }],
   });
   ```
 
@@ -163,7 +160,6 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
   if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{
-  			Type:            anthropic.BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt,
   			SessionThreadID: anthropic.String(thread.ID),
   		},
   	}},
@@ -177,7 +173,6 @@ Send `user.interrupt` with `session_thread_id` (java: `sessionThreadId`; php: `s
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-              .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
               .sessionThreadId(thread.id())
               .build())
           .build());
@@ -227,7 +222,7 @@ Optionally archive a session thread when it has completed its work. Archiving a 
 
   ```typescript TypeScript
   const archived = await client.beta.sessions.threads.archive(thread.id, {
-    session_id: session.id,
+    session_id: session.id
   });
   console.log(archived.status, archived.archived_at);
   ```
@@ -267,7 +262,7 @@ Optionally archive a session thread when it has completed its work. Archiving a 
   ```
 </CodeGroup>
 
-Archive only succeeds if the thread is `idle`. A thread parked on `requires_action` counts as idle and can be archived directly; only a running thread must be interrupted first:
+Archive only succeeds if the thread is `idle`. A thread parked on `requires_action` counts as idle, so you can archive it directly. To archive a running thread, interrupt it first:
 
 <CodeGroup>
   ```bash cURL
@@ -277,7 +272,11 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    -d "{\"events\": [{\"type\": \"user.interrupt\", \"session_thread_id\": \"$THREAD_ID\"}]}"
+    -d '{
+      "events": [
+        {"type": "user.interrupt", "session_thread_id": "'"$THREAD_ID"'"}
+      ]
+    }'
 
   curl -fsS -X POST "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
@@ -306,10 +305,10 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
 
   ```typescript TypeScript
   await client.beta.sessions.events.send(session.id, {
-    events: [{ type: "user.interrupt", session_thread_id: thread.id }],
+    events: [{ type: "user.interrupt", session_thread_id: thread.id }]
   });
   const archived = await client.beta.sessions.threads.archive(thread.id, {
-    session_id: session.id,
+    session_id: session.id
   });
   console.log(archived.status, archived.archived_at);
   ```
@@ -317,14 +316,7 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
   ```csharp C#
   await client.Beta.Sessions.Events.Send(session.ID, new()
   {
-      Events =
-      [
-          new BetaManagedAgentsUserInterruptEventParams
-          {
-              Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-              SessionThreadID = thread.ID,
-          },
-      ],
+      Events = [new BetaManagedAgentsUserInterruptEventParams { SessionThreadID = thread.ID }],
   });
   archived = await client.Beta.Sessions.Threads.Archive(thread.ID, new() { SessionID = session.ID });
   Console.WriteLine($"{archived.Status} {archived.ArchivedAt}");
@@ -334,7 +326,6 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
   if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{
-  			Type:            anthropic.BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt,
   			SessionThreadID: anthropic.String(thread.ID),
   		},
   	}},
@@ -356,7 +347,6 @@ Archive only succeeds if the thread is `idle`. A thread parked on `requires_acti
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-              .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
               .sessionThreadId(thread.id())
               .build())
           .build());
@@ -427,19 +417,7 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
       curl -fsSN "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
-        -H "anthropic-beta: managed-agents-2026-04-01" |
-        while IFS= read -r line; do
-          [[ $line == data:* ]] || continue
-          json=${line#data: }
-          case $(jq -r '.type' <<<"$json") in
-            agent.message)
-              printf '%s' "$(jq -j '.content[] | select(.type == "text") | .text' <<<"$json")"
-              ;;
-            session.thread_status_idle)
-              break
-              ;;
-          esac
-        done
+        -H "anthropic-beta: managed-agents-2026-04-01"
       ```
 
       ```bash CLI
@@ -465,7 +443,7 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
 
       ```typescript TypeScript
       const stream = await client.beta.sessions.threads.events.stream(thread.id, {
-        session_id: session.id,
+        session_id: session.id
       });
 
       loop: for await (const event of stream) {
@@ -531,7 +509,9 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
       ```java Java
       try (var streamResponse = client.beta().sessions().threads().events().streamStreaming(
           thread.id(),
-          EventStreamParams.builder().sessionId(session.id()).build()
+          EventStreamParams.builder()
+              .sessionId(session.id())
+              .build()
       )) {
           loop:
           for (var event : (Iterable<BetaManagedAgentsStreamSessionThreadEvents>) streamResponse.stream()::iterator) {
@@ -593,8 +573,7 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
       curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/events" \
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
-        -H "anthropic-beta: managed-agents-2026-04-01" \
-        | jq -r '.data[] | "[\(.type)] \(.processed_at)"'
+        -H "anthropic-beta: managed-agents-2026-04-01"
       ```
 
       ```bash CLI
@@ -613,7 +592,7 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
 
       ```typescript TypeScript
       for await (const event of client.beta.sessions.threads.events.list(thread.id, {
-        session_id: session.id,
+        session_id: session.id
       })) {
         console.log(`[${event.type}] ${event.processed_at}`);
       }
@@ -643,8 +622,10 @@ A thread's stream doesn't replay earlier events. Right after `session.thread_cre
       ```java Java
       for (var event : client.beta().sessions().threads().events().list(
               thread.id(),
-              EventListParams.builder().sessionId(session.id()).build()
-          ).autoPager()) {
+              EventListParams.builder()
+                  .sessionId(session.id())
+                  .build()
+      ).autoPager()) {
           var type = event._json().orElseThrow() instanceof JsonObject json
               ? json.values().get("type").asStringOrThrow()
               : "unknown";
@@ -701,19 +682,10 @@ Under `auto`, your `user.message` events can lead the server to allow a call it 
 
 The following example goes inside the event loop of the [tool confirmation handler](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#tool-confirmation). For each ID in `stop_reason.event_ids`, it sends a `user.tool_confirmation` that allows the call. The same pattern applies to `user.custom_tool_result`, which you can also send as soon as its `agent.custom_tool_use` event arrives.
 
-<CodeGroup exclude="shell:CLI">
-  ```bash cURL
-  while IFS= read -r event_id; do
-    jq -n --arg id "$event_id" \
-      '{events: [{type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}]}' |
-      curl -fsS "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-        -H "x-api-key: $ANTHROPIC_API_KEY" \
-        -H "anthropic-version: 2023-06-01" \
-        -H "anthropic-beta: managed-agents-2026-04-01" \
-        -H "content-type: application/json" \
-        -d @-
-  done < <(jq -r '.stop_reason.event_ids[]' <<<"$data")
-  ```
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
     This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
@@ -740,9 +712,9 @@ The following example goes inside the event loop of the [tool confirmation handl
         {
           type: "user.tool_confirmation",
           tool_use_id: eventId,
-          result: "allow",
-        },
-      ],
+          result: "allow"
+        }
+      ]
     });
   }
   ```
@@ -756,7 +728,6 @@ The following example goes inside the event loop of the [tool confirmation handl
           [
               new BetaManagedAgentsUserToolConfirmationEventParams
               {
-                  Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
                   ToolUseID = eventId,
                   Result = BetaManagedAgentsUserToolConfirmationEventParamsResult.Allow,
               },
@@ -768,7 +739,6 @@ The following example goes inside the event loop of the [tool confirmation handl
   ```go Go
   for _, eventID := range stopReason.EventIDs {
   	params := anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
-  		Type:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
   		ToolUseID: eventID,
   		Result:    anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultAllow,
   	}
@@ -786,7 +756,6 @@ The following example goes inside the event loop of the [tool confirmation handl
           session.id(),
           EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                  .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                   .toolUseId(eventId)
                   .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.ALLOW)
                   .build())

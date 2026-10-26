@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-admin-api
-fetched_at: 2026-10-19T05:32:45.771539+00:00
+fetched_at: 2026-10-26T05:40:07.490953+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Every request on this page authenticates with an OAuth bearer token that carries
 
 ### Interactive (your terminal)
 
-Log in with the [`ant` CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#admin-access)), then export the bearer token. Logging in with `--profile admin` stores the `org:admin` credential under its own profile name and also makes it the CLI's active profile, and the exported variable applies to every SDK and CLI call in that shell; so use a shell you reserve for administration, unset the variable when you are done, and switch the CLI back with `ant profile activate default`:
+Log in with the [`ant` CLI](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart) under a dedicated profile, requesting the `org:admin` scope (see [Admin access](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#admin-access)), then export the bearer token. Logging in with `--profile admin` stores the `org:admin` credential under its own profile name and also makes it the CLI's active profile. The exported variable applies to every SDK and CLI call in that shell. For these reasons, use a shell you reserve for administration, unset the variable when you are done, and switch the CLI back with `ant profile activate default`:
 
 ```bash CLI
 ant auth login --profile admin --scope "org:admin"
@@ -27,11 +27,11 @@ export ANTHROPIC_AUTH_TOKEN=$(ant auth print-credentials --profile admin --acces
 
 Interactive tokens are short-lived; if requests start returning 401, re-run the export command (it refreshes the token automatically).
 
-The SDKs and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically; leave `ANTHROPIC_API_KEY` unset in the same shell, because these endpoints reject API keys and some clients prefer the key when both are set.
+The SDK and the `ant` CLI read `ANTHROPIC_AUTH_TOKEN` automatically; leave `ANTHROPIC_API_KEY` unset in the same shell, because these endpoints reject API keys and every client uses the key when both are set.
 
 ### Workload (CI and automation)
 
-Create a federation rule with `oauth_scope: org:admin` that targets a service account whose `organization_role` is `admin`. The rule itself must be created in the Claude Console: granting a workload organization-admin access is a deliberate human action, not something automation can bootstrap for itself. The next section walks through this once-per-organization setup.
+Create a federation rule with `oauth_scope: org:admin` that targets a service account whose `organization_role` is `admin`. You must create the rule itself in the Claude Console: granting a workload organization-admin access is a deliberate human action, not something automation can bootstrap for itself. The next section walks through this once-per-organization setup.
 
 ## Bootstrap a workload to manage WIF
 
@@ -47,7 +47,7 @@ One Console-created rule is enough to put the rest of your federation configurat
   </Step>
 
   <Step title="Exchange the workload's identity token">
-    A workload that uses one of the SDKs or the `ant` CLI does not perform the exchange itself. Point the client at the rule with the federation environment variables and construct it with no arguments, exactly as for inference in [Construct the SDK client](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#construct-the-sdk-client); the client exchanges the identity token on the first request and, before the resulting access token expires, re-reads the identity token and exchanges it again:
+    A workload that uses the SDK or the `ant` CLI does not perform the exchange itself. Point the client at the rule with the federation environment variables and construct it with no arguments, exactly as for inference in [Construct the SDK client](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#construct-the-sdk-client); the client exchanges the identity token on the first request and, before the resulting access token expires, re-reads the identity token and exchanges it again:
 
     ```bash
     export ANTHROPIC_FEDERATION_RULE_ID=fdrl_...        # the org:admin rule from step 1
@@ -59,7 +59,7 @@ One Console-created rule is enough to put the rest of your federation configurat
     unset ANTHROPIC_API_KEY ANTHROPIC_AUTH_TOKEN       # both take precedence over federation
     ```
 
-    The `ant` CLI reads the same variables, or takes `--federation-rule`, `--organization-id`, `--service-account-id`, and `--identity-token-file` flags. For a workload that runs more than one `ant` command, use a [federation profile](https://platform.claude.com/docs/en/manage-claude/wif-reference#profile-configuration-file) rather than flags or environment variables: with flags or variables the CLI exchanges the identity token again in every process, and identity tokens that carry a `jti` claim (GitHub Actions tokens do) are accepted only once, so a second command would be rejected; a profile is also the only way to give the CLI a `workspace_id` for the exchange when the rule is enabled for all workspaces or more than one, because unlike the SDKs the CLI does not pass `ANTHROPIC_WORKSPACE_ID` or `--workspace-id` into the exchange. Every SDK also accepts the same settings as explicit constructor arguments, shown per language in [Construct the SDK client](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#construct-the-sdk-client). See [Environment variables](https://platform.claude.com/docs/en/manage-claude/wif-reference#environment-variables) and [Credential precedence](https://platform.claude.com/docs/en/manage-claude/wif-reference#credential-precedence) for the full list and ordering.
+    The `ant` CLI reads the same variables, or takes `--federation-rule`, `--organization-id`, `--service-account-id`, and `--identity-token-file` flags. For a workload that runs more than one `ant` command, use a [federation profile](https://platform.claude.com/docs/en/manage-claude/wif-reference#profile-configuration-file) rather than flags or environment variables: with flags or variables the CLI exchanges the identity token again in every process, and identity tokens that carry a `jti` claim (GitHub Actions tokens do) are accepted only once, so a second command would be rejected; a profile is also the only way to give the CLI a `workspace_id` for the exchange when the rule is enabled for all workspaces or more than one, because unlike the SDK the CLI does not pass `ANTHROPIC_WORKSPACE_ID` or `--workspace-id` into the exchange. Every SDK also accepts the same settings as explicit constructor arguments, shown for each language in [Construct the SDK client](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#construct-the-sdk-client). See [Environment variables](https://platform.claude.com/docs/en/manage-claude/wif-reference#environment-variables) and [Credential precedence](https://platform.claude.com/docs/en/manage-claude/wif-reference#credential-precedence) for the full list and ordering.
 
     A workload that calls the API with curl exchanges the JWT for a short-lived `org:admin` bearer token itself, using the same [token exchange](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation#authenticate-from-your-workload) as any other federated workload, and sends it in the `authorization: Bearer` header.
   </Step>
@@ -75,7 +75,7 @@ For the operations a workload-minted token can and cannot perform, see [Permissi
 
 All endpoints live under `https://api.anthropic.com/v1/organizations/`. Every request to the federation and service-account endpoints needs the API version header and the bearer token:
 
-In the SDKs these endpoints are `client.organization.service_accounts` (typescript: `client.organization.serviceAccounts`; csharp, go: `client.Organization.ServiceAccounts`; java: `client.organization().serviceAccounts()`; php: `$client->organization->serviceAccounts`), `client.organization.federation.issuers` (csharp, go: `client.Organization.Federation.Issuers`; java: `client.organization().federation().issuers()`; php: `$client->organization->federation->issuers`), and `client.organization.federation.rules` (csharp, go: `client.Organization.Federation.Rules`; java: `client.organization().federation().rules()`; php: `$client->organization->federation->rules`) (`ant organization:service-accounts`, `federation:issuers`, and `federation:rules` in the CLI). The SDK and CLI examples construct the default client, which sends the bearer token from `ANTHROPIC_AUTH_TOKEN`, or, in an automated workload, performs the federation exchange itself as described in [Bootstrap a workload to manage WIF](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#bootstrap-a-workload-to-manage-wif). SDK list methods fetch further pages on demand, so `limit` sets the page size; the PHP and Ruby examples read one page.
+In the SDK, these endpoints are `client.organization.service_accounts` (typescript: `client.organization.serviceAccounts`; csharp, go: `client.Organization.ServiceAccounts`; java: `client.organization().serviceAccounts()`; php: `$client->organization->serviceAccounts`), `client.organization.federation.issuers` (csharp, go: `client.Organization.Federation.Issuers`; java: `client.organization().federation().issuers()`; php: `$client->organization->federation->issuers`), and `client.organization.federation.rules` (csharp, go: `client.Organization.Federation.Rules`; java: `client.organization().federation().rules()`; php: `$client->organization->federation->rules`) (`ant organization:service-accounts`, `federation:issuers`, and `federation:rules` in the CLI). The SDK and CLI examples construct the default client, which sends the bearer token from `ANTHROPIC_AUTH_TOKEN`, or, in an automated workload, performs the federation exchange itself as described in [Bootstrap a workload to manage WIF](https://platform.claude.com/docs/en/manage-claude/wif-admin-api#bootstrap-a-workload-to-manage-wif). SDK list methods fetch further pages on demand, so `limit` sets the page size; the PHP and Ruby examples read one page.
 
 <CodeGroup>
   ```bash cURL

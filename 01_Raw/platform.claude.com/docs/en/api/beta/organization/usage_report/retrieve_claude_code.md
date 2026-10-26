@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/usage_report/retrieve_claude_code
-fetched_at: 2026-10-19T05:33:00.018776+00:00
+fetched_at: 2026-10-26T05:40:34.783477+00:00
 fetch_method: mintlify_md
 ---
 
@@ -202,8 +202,8 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

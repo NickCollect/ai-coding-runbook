@@ -1,11 +1,11 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
-fetched_at: 2026-10-19T05:32:46.312088+00:00
+fetched_at: 2026-10-26T05:40:08.428772+00:00
 fetch_method: mintlify_md
 ---
 
 ---
-title: OpenTelemetry for the Claude API
+title: OpenTelemetry tracing for the Claude API
 url: https://platform.claude.com/docs/en/manage-claude/opentelemetry
 description: Trace your Messages API requests, tool uses, and Managed Agents sessions with OpenTelemetry spans from the Claude SDK and the Claude API.
 featureMetadata:
@@ -19,7 +19,7 @@ featureMetadata:
   OpenTelemetry export is in beta. It's provided under your agreement with Anthropic, including the Beta Services section of the [Service Specific Terms](https://www.anthropic.com/legal/service-specific-terms).
 </Note>
 
-The Claude API and the SDK can trace your Messages API requests, tool uses, and Managed Agents sessions with [OpenTelemetry](https://opentelemetry.io/). You can view these traces in the observability platform you already have. Use them to debug failed or slow requests, track token spend and latency, and build evals from real traffic. You can also see each request inside your application's own traces, linked to the user or feature that sent it.
+The Claude API and the SDK can trace your Messages API requests, tool uses, and Managed Agents sessions with [OpenTelemetry](https://opentelemetry.io/) (OTel). You can view these traces in the observability platform you already have. Use them to debug failed or slow requests, track token spend and latency, and build evals from real traffic. You can also see each request inside your application's own traces, linked to the user or feature that sent it.
 
 OpenTelemetry is a vendor-neutral standard that most observability platforms support. A *trace* is the full record of one request through your system. A *span* is one step in a trace, such as a model request or a tool use. The API and the SDK use attributes from the [GenAI semantic conventions](https://github.com/open-telemetry/semantic-conventions-genai), so platforms that support the conventions can recognize the spans without extra setup.
 
@@ -51,7 +51,7 @@ Set up OpenTelemetry tracing with the Claude API and Claude SDK
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
 | [Messages API](https://platform.claude.com/docs/en/api/messages/create) requests                                                  | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
 | [Sessions API](https://platform.claude.com/docs/en/managed-agents/sessions) requests                                              | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
-| [Token usage](https://platform.claude.com/docs/en/manage-claude/opentelemetry#count-tokens)                                       | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
+| Token usage (see [Counting tokens](https://platform.claude.com/docs/en/manage-claude/opentelemetry#count-tokens))                 | ✅                                                                           | ✅                                                                                          | ✅                                                                                          |
 | Each model run within a request                                                                                                   | —                                                                           | ✅                                                                                          | ✅                                                                                          |
 | [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) turns                                               | —                                                                           | ✅                                                                                          | ✅                                                                                          |
 | [Server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), run by the API                        | —                                                                           | ✅                                                                                          | ✅                                                                                          |
@@ -86,6 +86,14 @@ Send traces to any observability platform that accepts OTLP, including these par
     AI-powered observability and security.
   </Card>
 
+  <Card title="Dynatrace" image="https://platform.claude.com/docs/images/partner-logos/dynatrace.svg" imageDark="https://platform.claude.com/docs/images/partner-logos/dynatrace-dark.svg" imageHeight={22} href="https://docs.dynatrace.com/docs/observe/dynatrace-for-ai-observability/integrations/claude-platform">
+    Observability built for the age of AI.
+  </Card>
+
+  <Card title="Elastic" image="https://platform.claude.com/docs/images/partner-logos/elastic.svg" imageDark="https://platform.claude.com/docs/images/partner-logos/elastic-dark.svg" imageHeight={32} href="https://www.elastic.co/docs/reference/opentelemetry/motlp">
+    Observability built on open source.
+  </Card>
+
   <Card title="Grafana Cloud" image="https://platform.claude.com/docs/images/partner-logos/grafana.svg" imageDark="https://platform.claude.com/docs/images/partner-logos/grafana-dark.svg" imageHeight={34} imageOffsetLeft={2} href="https://grafana.com/docs/grafana-cloud/observe-and-act/agent-observability/guides/send-claude-platform-traces/">
     Fully managed open observability platform.
   </Card>
@@ -110,8 +118,16 @@ Send traces to any observability platform that accepts OTLP, including these par
     All-in-one platform for building successful products.
   </Card>
 
+  <Card title="Pydantic Logfire" image="https://platform.claude.com/docs/images/partner-logos/pydantic.svg" imageDark="https://platform.claude.com/docs/images/partner-logos/pydantic-dark.svg" imageHeight={24} href="https://pydantic.dev/docs/logfire/integrations/llms/claude-platform/">
+    Production-grade AI & general observability.
+  </Card>
+
   <Card title="Sentry" image="https://platform.claude.com/docs/images/partner-logos/sentry.svg" imageDark="https://platform.claude.com/docs/images/partner-logos/sentry-dark.svg" imageHeight={25} href="https://sentry.io/cookbook/trace-claude-platform-with-opentelemetry/">
     Debug your broken code and misbehaving agents.
+  </Card>
+
+  <Card title="Snowflake" image="https://platform.claude.com/docs/images/partner-logos/snowflake.svg" imageHeight={30} imageOffsetLeft={2} href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-ai-gateway/observability#trace-claude-requests">
+    Agentic control plane with built-in observability and governance.
   </Card>
 
   <Card title="Splunk" image="https://platform.claude.com/docs/images/partner-logos/splunk.svg" imageDark="https://platform.claude.com/docs/images/partner-logos/splunk-dark.svg" imageHeight={27} imageOffsetLeft={1} href="https://agent-observability-docs.splunk.com/sdk-api/third-party-integrations/claude">
@@ -138,7 +154,7 @@ With [zero data retention](https://platform.claude.com/docs/en/manage-claude/api
 
 ### Content limits
 
-With Full content, each span holds up to 0.75 MB of content by default. That fits a 200k-token context window of English text and stays below the 1 MB request limit of many observability platforms and proxies. If you choose a partner platform as the **Provider**, the Console sets a limit that the platform accepts.
+With Full content, each span holds up to 0.75 MB of content by default. That fits a 200k-token context window of English text and stays below the 1 MB request limit of many observability platforms and proxies. If you select a partner platform as the **Provider**, the Console sets a limit that the platform accepts.
 
 When content is over the limit, the SDK or the API shortens it and sets `anthropic.content.truncated` to `true`. Request spans drop the system prompt and the earliest messages first, and tool spans drop blocks from the end of the result. Images and documents appear only as their type.
 
@@ -188,7 +204,7 @@ This example follows one chat request, in which your application sends a message
 6. The session tool runner runs `list_issues` (shown as the `anthropic.custom_tool_use list_issues` span) and sends its result by calling `sessions.events.send`.
 7. A second turn starts with the tool result (shown as the last `anthropic.session.turn` span).
 
-![Example trace of a Managed Agents session: your POST /chat span, the event stream and event list requests of the session tool runner, the client and server spans for the request that sends the user message, a turn with model requests, a bash tool use and a turn on another thread, the runner running list\_issues, the client and server spans for the request that sends the tool result, and a second turn.](https://platform.claude.com/docs/images/opentelemetry-trace-shape.svg)
+![Example Managed Agents session trace: POST /chat, four session event requests, three turns, a bash tool use, and list\_issues](https://platform.claude.com/docs/images/opentelemetry-trace-shape.svg)
 
 The SDK in your application emits the [`anthropic.custom_tool_use`](https://platform.claude.com/docs/en/api/opentelemetry/spans#anthropic-tool-use-anthropic-mcp-tool-use-and-anthropic-custom-tool-use) span and each request's client span. To get these spans, [set up SDK tracing](https://platform.claude.com/docs/en/manage-claude/opentelemetry/sdk).
 

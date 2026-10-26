@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/service_accounts/create
-fetched_at: 2026-10-12T06:49:55.966480+00:00
+fetched_at: 2026-10-26T05:40:20.484117+00:00
 fetch_method: mintlify_md
 ---
 
@@ -123,8 +123,8 @@ accounts.
 ```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "name": "ci-deploy-bot"
         }'

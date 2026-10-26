@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/list
-fetched_at: 2026-10-19T05:32:57.564729+00:00
+fetched_at: 2026-10-26T05:40:30.773648+00:00
 fetch_method: mintlify_md
 ---
 
@@ -149,6 +149,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -195,9 +197,9 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
 ```bash
 curl https://api.anthropic.com/v1/tunnels \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: mcp-tunnels-2026-06-22' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

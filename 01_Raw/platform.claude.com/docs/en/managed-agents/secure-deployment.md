@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/secure-deployment
-fetched_at: 2026-10-19T05:32:45.518686+00:00
+fetched_at: 2026-10-26T05:40:06.617529+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,6 +23,7 @@ This guide lists the settings that limit what an agent on Claude Managed Agents 
 | [Choose where the agent runs](https://platform.claude.com/docs/en/managed-agents/secure-deployment#choose-where-the-agent-runs)                                                                        | Cloud or self-hosted sandbox                                                  | Cloud, unless tools must run on infrastructure you control                                                                                                                                                                     |
 | [Limit the network](https://platform.claude.com/docs/en/managed-agents/secure-deployment#limit-the-network)                                                                                            | Environment `networking.type`                                                 | `limited`, with only the hosts the agent needs                                                                                                                                                                                 |
 | [Keep credentials in vaults](https://platform.claude.com/docs/en/managed-agents/secure-deployment#keep-credentials-in-vaults)                                                                          | `injection_location` and `networking` on each environment variable credential | Request headers only, and `limited` networking with only the hosts the key is for                                                                                                                                              |
+| [Keep credentials in vaults](https://platform.claude.com/docs/en/managed-agents/secure-deployment#keep-credentials-in-vaults)                                                                          | How your application authenticates to the Claude API                          | Where you can, a Workload Identity Federation rule enabled in one workspace only, otherwise an API key scoped to one workspace                                                                                                 |
 | [Restrict web search and web fetch](https://platform.claude.com/docs/en/managed-agents/secure-deployment#restrict-web-search-and-web-fetch)                                                            | `allowed_domains` on each web tool                                            | An allowlist on each tool. On `web_fetch`, list only the sites the agent needs. On `web_search`, list the sites you want results from                                                                                          |
 | [Approve risky actions](https://platform.claude.com/docs/en/managed-agents/secure-deployment#approve-risky-actions)                                                                                    | `permission_policy` on each tool                                              | `auto` on `bash`, `write`, `edit`, `web_fetch`, and MCP tools that only read data. `always_ask` instead on a tool if you cannot undo its changes outside the sandbox, or if relayed end-user text alone should not make it run |
 | [Give the agent the smallest tool set](https://platform.claude.com/docs/en/managed-agents/secure-deployment#give-the-agent-the-smallest-tool-set)                                                      | `default_config.enabled` on the agent toolset                                 | `false`, then enable the tools the agent needs                                                                                                                                                                                 |
@@ -33,9 +34,19 @@ This guide lists the settings that limit what an agent on Claude Managed Agents 
 
 [Security risks and sandbox boundaries](https://platform.claude.com/docs/en/managed-agents/secure-deployment-risks) explains why these settings matter and what they do not protect against. To review and monitor sessions, see [Review and monitor agent sessions](https://platform.claude.com/docs/en/managed-agents/secure-deployment-monitoring).
 
+The [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill) that ships with Claude Code has a `managed-agents-secure` command that checks an agent, its environments, and its vaults against this guide:
+
+Let Claude Code check your agent against this guide
+
+```text
+/claude-api managed-agents-secure
+```
+
+The command changes nothing, and its report lists each setting to change with its recommended value and the questions only you can answer. Before you run it, update Claude Code and set up the `ant` CLI for the agent's workspace, as the [CLI quickstart](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart) shows.
+
 ## Choose where the agent runs
 
-Where the agent's tools run decides who secures the sandbox: Anthropic, with a cloud environment, or you, with a self-hosted sandbox. To choose between them and learn what reaches Anthropic with each, see [Choosing an agent environment](https://platform.claude.com/docs/en/managed-agents/choosing-an-environment).
+Where the agent's tools run determines who secures the sandbox: Anthropic, with a cloud environment, or you, with a self-hosted sandbox. To choose between them and learn what reaches Anthropic with each, see [Choosing an agent environment](https://platform.claude.com/docs/en/managed-agents/choosing-an-environment).
 
 If you use a [self-hosted sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes), keep these four points in mind:
 
@@ -48,9 +59,9 @@ Neither option changes the compliance coverage of Managed Agents or how long it 
 
 ## Limit the network
 
-Set `networking.type` to `limited` and list only the hosts the agent needs in `allowed_hosts`. An environment create request that omits `networking` might get `unrestricted`, so set `networking` in every create request. See [Risks of unrestricted networking](https://platform.claude.com/docs/en/managed-agents/environments#risks-of-unrestricted-networking).
+Use `limited` networking and list only the hosts the agent needs in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). An environment create request that omits `networking` (csharp, go: `Networking`) might get `unrestricted`, so set `networking` (csharp, go: `Networking`) in every create request. See [Risks of unrestricted networking](https://platform.claude.com/docs/en/managed-agents/environments#risks-of-unrestricted-networking).
 
-Files, memory stores, and GitHub repositories that you attach stay available to the agent regardless of `allowed_hosts`.
+Files, memory stores, and GitHub repositories that you attach stay available to the agent regardless of `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`).
 
 The examples on this page use a support agent. It reads a customer's ticket, looks up the order, reads your help center, and drafts a reply. Your application runs the order lookup, which needs no host, so this environment allows one host, the help center, for `web_fetch`:
 
@@ -150,7 +161,6 @@ The examples on this page use a support agent. It reads a customer's ticket, loo
   if err != nil {
   	panic(err)
   }
-  _ = environment
   ```
 
   ```java Java
@@ -196,21 +206,21 @@ The examples on this page use a support agent. It reads a customer's ticket, loo
 
 A `limited` environment has three networking settings:
 
-| Setting                  | What it opens to code in the sandbox                                                                                                                                                                                                                                                           | Recommended                                                                                                                                                                                                |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `allowed_hosts`          | The hosts you list, for any request                                                                                                                                                                                                                                                            | Only the hosts the agent needs, including the host of each MCP server you operate or trust                                                                                                                 |
-| `allow_package_managers` | The [package manager hosts](https://platform.claude.com/docs/en/managed-agents/environments#package-manager-hosts). They include every repository and path on `github.com`, `gitlab.com`, and `bitbucket.org`, where anyone can publish content and where code in the sandbox can upload files | `false`, unless the environment's `packages` setting lists packages, which requires `true`. If the agent installs packages while it runs, list only the registry hosts it needs in `allowed_hosts` instead |
-| `allow_mcp_servers`      | No host. Managed Agents connects to MCP servers from Anthropic's servers                                                                                                                                                                                                                       | `false`, with the host of each MCP server you operate or trust listed in `allowed_hosts`                                                                                                                   |
+| Setting                                                                                                                 | What it opens to code in the sandbox                                                                                                                                                                                                                                                           | Recommended                                                                                                                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`)                                                 | The hosts you list, for any request                                                                                                                                                                                                                                                            | Only the hosts the agent needs, including the host of each MCP server you operate or trust                                                                                                                                                                                                  |
+| `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `AllowPackageManagers`)                        | The [package manager hosts](https://platform.claude.com/docs/en/managed-agents/environments#package-manager-hosts). They include every repository and path on `github.com`, `gitlab.com`, and `bitbucket.org`, where anyone can publish content and where code in the sandbox can upload files | `false`, unless the environment's `packages` (csharp, go: `Packages`) setting lists packages, which requires `true`. If the agent installs packages while it runs, list only the registry hosts it needs in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) instead |
+| `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) | No host. Managed Agents connects to MCP servers from Anthropic's servers                                                                                                                                                                                                                       | `false`, with the host of each MCP server you operate or trust listed in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`)                                                                                                                                            |
 
-The `allow_package_managers` and `allow_mcp_servers` settings add no hosts for web search and web fetch.
+The `allow_package_managers` (java, php: `allowPackageManagers`; csharp, go: `AllowPackageManagers`) and `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) settings add no hosts for web search and web fetch.
 
-Leave `allow_mcp_servers` off, which is the default, and list the host of each MCP server you operate or trust in `allowed_hosts`. Each host you list is also open to code in the sandbox. With `allow_mcp_servers` off, a check at session creation rejects the request if an MCP server's host is not listed. See [Provide authentication at session creation](https://platform.claude.com/docs/en/managed-agents/mcp-connector#provide-authentication-at-session-creation). The same check runs when a session update changes `mcp_servers`.
+Leave `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) off, which is the default, and list the host of each MCP server you operate or trust in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`). Each host you list is also open to code in the sandbox. With `allow_mcp_servers` (java: `allowMcpServers`; php: `allowMCPServers`; csharp: `AllowMcpServers`; go: `AllowMCPServers`) off, a check at session creation rejects the request if an MCP server's host is not listed. See [Provide authentication at session creation](https://platform.claude.com/docs/en/managed-agents/mcp-connector#provide-authentication-at-session-creation). The same check runs when a session update changes `mcp_servers` (java, php: `mcpServers`; csharp: `McpServers`; go: `MCPServers`).
 
 <Warning>
-  Network access is granted for each host, not for each operation. The sandbox can send any request to an allowed host, including uploads such as `git push` and package publishing. It can also use any credential the command supplies, even one that someone hid in text the agent reads.
+  Network access is granted by host, not by operation. The sandbox can send any request to an allowed host, including uploads such as `git push` and package publishing. It can also use any credential the command supplies, even one that someone hid in text the agent reads.
 </Warning>
 
-When you choose hosts for `allowed_hosts`, follow these two rules:
+When you choose hosts for `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`), follow these two rules:
 
 * List only hosts you operate or trust.
 * Avoid `*.` wildcards and shared-hosting domains where anyone can publish content.
@@ -221,36 +231,38 @@ If the agent keeps `bash`, set the `bash` tool's [permission policy](https://pla
   After you tighten an environment, start new sessions and stop the ones that were already running. A session that is already running can keep the old limits until it ends. See [Set limits and a way to stop](https://platform.claude.com/docs/en/managed-agents/secure-deployment#set-limits-and-a-way-to-stop).
 </Note>
 
-See [Cloud environment setup](https://platform.claude.com/docs/en/managed-agents/environments#networking) for every networking setting.
+See [Networking in Cloud environment setup](https://platform.claude.com/docs/en/managed-agents/environments#networking) for every networking setting.
 
 ## Keep credentials in vaults
 
-Store every secret in a vault. For each environment variable credential, set the injection location to request headers only and list only the hosts the secret is for. Code in the sandbox sees a placeholder instead of the secret. Managed Agents swaps in the real secret only in outgoing HTTPS requests to the hosts the credential allows. So the secret stays out of direct reach of the model, unless a service sends it back, such as an endpoint that echoes request headers. If the credential's `networking` is `unrestricted`, Managed Agents swaps in the real secret in requests to any host the environment lets the sandbox reach. To use a vault, pass its ID in `vault_ids` when you create the session or deployment.
+Store every secret in a vault. For each environment variable credential, set the injection location to request headers only and list only the hosts the secret is for. Code in the sandbox sees a placeholder instead of the secret. Managed Agents swaps in the real secret only in outgoing HTTPS requests to the hosts the credential allows. So the secret stays out of direct reach of the model, unless a service sends it back, such as an endpoint that echoes request headers. If the credential's `networking` (csharp, go: `Networking`) is `unrestricted`, Managed Agents swaps in the real secret in requests to any host the environment lets the sandbox reach. To use a vault, pass its ID in `vault_ids` (java: `vaultIds`; php: `vaultIDs`; csharp: `VaultIds`; go: `VaultIDs`) when you create the session or deployment.
 
-| Setting                                                   | Set it to                                                                                                                        | Why                                                                                                                                                                                                                              | What it does not do                                                                                                                                         |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `injection_location`                                      | `{"header": true, "body": false}`, after you check that the service reads the key from a header                                  | Request bodies are often built from content the agent reads, so a key in a body is more exposed. Name both fields: a create request that omits the object enables both locations, and an update changes only the fields you send | Code can still use the key on every host the credential allows. A service that expects the key in the body receives the placeholder and rejects the request |
-| `networking` on the credential                            | `limited`, with the exact hosts the key is for                                                                                   | Responses reach the sandbox unredacted, so avoid wildcards, shared-hosting domains, and hosts that echo request headers                                                                                                          | It does not open the host. The environment must also allow it                                                                                               |
-| The key's permissions, at the service that issued the key | Only the permissions the agent needs                                                                                             | The agent can do anything the key allows                                                                                                                                                                                         | Not applicable                                                                                                                                              |
-| A mounted repository's GitHub token                       | A [fine-grained token](https://platform.claude.com/docs/en/managed-agents/github#token-permissions) with the minimum permissions | Code in the sandbox can fetch from and push to the mounted repository with it for the whole session. Grant write access only if the agent must push                                                                              | Not applicable                                                                                                                                              |
+| Setting                                                                                | Set it to                                                                                                                        | Why                                                                                                                                                                                                                              | What it does not do                                                                                                                                         |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `injection_location` (java, php: `injectionLocation`; csharp, go: `InjectionLocation`) | `{"header": true, "body": false}`, after you check that the service reads the key from a header                                  | Request bodies are often built from content the agent reads, so a key in a body is more exposed. Name both fields: a create request that omits the object enables both locations, and an update changes only the fields you send | Code can still use the key on every host the credential allows. A service that expects the key in the body receives the placeholder and rejects the request |
+| `networking` (csharp, go: `Networking`) on the credential                              | `limited`, with the exact hosts the key is for                                                                                   | Responses reach the sandbox unredacted, so avoid wildcards, shared-hosting domains, and hosts that echo request headers                                                                                                          | It does not open the host. The environment must also allow it                                                                                               |
+| The key's permissions, at the service that issued the key                              | Only the permissions the agent needs                                                                                             | The agent can do anything the key allows                                                                                                                                                                                         | Not applicable                                                                                                                                              |
+| A mounted repository's GitHub token                                                    | A [fine-grained token](https://platform.claude.com/docs/en/managed-agents/github#token-permissions) with the minimum permissions | Code in the sandbox can fetch from and push to the mounted repository with it for the whole session. Grant write access only if the agent must push                                                                              | Not applicable                                                                                                                                              |
 
 The support agent needs no vault credential, because your application holds the API key for your order API. If your agent does hold a vault credential, see [Add a credential](https://platform.claude.com/docs/en/managed-agents/vaults#add-a-credential) for the request in every language.
 
-Keep keys out of system prompts, agent definitions, and messages. Do not give the agent a Claude API key. Even when a Claude API key is in a vault, code in the sandbox can use it to call the Claude API directly. It can do anything that key allows, such as starting or deleting sessions, or using web search and web fetch. The agent's tool settings, approvals, and budget do not apply to those calls. In a `limited` environment, code can make these calls only if `allowed_hosts` lets the sandbox reach `api.anthropic.com`.
+Keep keys out of system prompts, agent definitions, and messages. Do not give the agent a Claude API key or Claude API access token. Even when one is in a vault, code in the sandbox can use it to call the Claude API directly. It can do anything that credential allows, such as starting or deleting sessions, or using web search and web fetch. The agent's tool settings, approvals, and budget do not apply to those calls. In a `limited` environment, code can make these calls only if `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) lets the sandbox reach `api.anthropic.com`.
 
-Fetch tokens yourself and store them in the vault, because a token that code in the sandbox fetches with a stored secret comes back unredacted.
+Fetch third-party tokens yourself and store them in the vault. A token that code in the sandbox fetches with a stored secret comes back unredacted.
 
-Keep vaults for workloads with different trust levels in separate [workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces), because any API key with access to a workspace can reference its vaults. Use API keys scoped to one workspace.
+Keep vaults for workloads with different trust levels in separate [workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces), because whoever can start sessions in a workspace can reference its vaults. Limit each workload to one workspace: where you can, a [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) rule enabled only in it, otherwise an API key scoped to it. Workload Identity Federation gives your application short-lived Claude API access tokens, so there is no long-lived Claude API key to leak.
 
 See [Authenticate with vaults](https://platform.claude.com/docs/en/managed-agents/vaults) for MCP credentials and rotation.
 
 ## Restrict web search and web fetch
 
-Set `allowed_domains` on `web_fetch` to the sites the agent needs. Any URL the agent fetches can carry data to the site it points to, so this list is a security control. On `web_search`, set `allowed_domains` to the sites you want results from, so that results come only from sites you trust to be accurate. The list does not stop the search query from reaching the search provider. Search results include text from pages, so the list also limits which sites' text reaches the agent. Set `allowed_domains` on both tools for every type of environment.
+Set `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) on `web_fetch` to the sites the agent needs. Any URL the agent fetches can carry data to the site it points to, so this list is a security control. On `web_search`, set `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) to the sites you want results from, so that results come only from sites you trust to be accurate. The list does not stop the search query from reaching the search provider. Search results include text from pages, so the list also limits which sites' text reaches the agent. Set `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) on both tools for every type of environment.
 
-A `blocked_domains` list blocks the hosts you list and their subdomains, and no other host. The same content can still reach the agent from web archives, caches, mirrors, or related domains you did not list. Do not rely on `blocked_domains` for security. Use `allowed_domains` and name the hosts you trust.
+A `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) list blocks the hosts you list and their subdomains, and no other host. The same content can still reach the agent from web archives, caches, mirrors, or related domains you did not list. Do not rely on `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) for security. Use `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and name the hosts you trust.
 
-In a `limited` environment, the `allowed_hosts` list from [Limit the network](https://platform.claude.com/docs/en/managed-agents/secure-deployment#limit-the-network) also limits the web tools. An `unrestricted` environment or a self-hosted sandbox does not limit the web tools.
+An administrator can turn off web search or web fetch, or restrict their domains, on the [**Capabilities**](https://platform.claude.com/settings/capabilities) page of the Claude Console. These settings also apply in a session. With a tool turned off, its calls return an error result to the agent, and the session continues. With domain restrictions set, a search result or a fetched URL must pass both the organization's restrictions and the tool's own domain lists. See [Restrict web search and web fetch domains](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions).
+
+In a `limited` environment, the `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) list from [Limit the network](https://platform.claude.com/docs/en/managed-agents/secure-deployment#limit-the-network) also limits the web tools. An `unrestricted` environment or a self-hosted sandbox does not limit the web tools.
 
 | In a `limited` environment                                                   | Result                                                                                                                                                                                                                                                       |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -267,7 +279,7 @@ The two lists match hosts differently:
 | `allowed_hosts` (environment) | `*.example.com` | Every subdomain                   | `example.com`     |
 | `allowed_domains` (web tool)  | `example.com`   | `example.com` and every subdomain | Other domains     |
 
-If the agent needs a site and all of its subdomains, list both `example.com` and `*.example.com` in `allowed_hosts`, and otherwise list exact hosts. If a tool lists `example.com` and `allowed_hosts` lists only `*.example.com`, the session is created. The check at session creation counts `example.com` as within `*.example.com`, but the tool returns nothing from `example.com` itself. See [Set domain lists on an agent](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions#set-domain-lists-on-an-agent) for how the two lists match.
+If the agent needs a site and all of its subdomains, list both `example.com` and `*.example.com` in `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`), and otherwise list exact hosts. If a tool lists `example.com` and `allowed_hosts` (java, php: `allowedHosts`; csharp, go: `AllowedHosts`) lists only `*.example.com`, the session is created. The check at session creation counts `example.com` as within `*.example.com`, but the tool returns nothing from `example.com` itself. See [Set domain lists on an agent](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions#set-domain-lists-on-an-agent) for how the two lists match.
 
 The `web_fetch` tool also opens only URLs that have already appeared in the session:
 
@@ -287,7 +299,7 @@ The `web_fetch` tool also opens only URLs that have already appeared in the sess
 
 In a multiagent session, `web_fetch` opens a URL from another agent only if it reached that agent through a source marked Yes. A custom tool's result from a direct call counts as a source marked Yes. This holds even if Claude wrote its text, for example when the tool repeats its input. A URL can count even when it is written without `https://`, such as `example.com/docs`. The `web_fetch` tool cannot always open a link that shows words instead of its URL, such as "Contact support." If the agent must fetch a URL that has not appeared in the session, send it in a user message.
 
-This rule reduces the chance that injected text builds a URL that carries private data. End-user text, search results, fetched pages, and custom tool results can still add URLs, so keep `allowed_domains` set. The Messages API applies a similar rule with a different list of sources. See [URL validation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool#url-validation).
+This rule reduces the chance that injected text builds a URL that carries private data. End-user text, search results, fetched pages, and custom tool results can still add URLs, so keep `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) set. The Messages API applies a similar rule with a different list of sources. See [URL validation](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool#url-validation).
 
 A domain list on `web_fetch` does not limit the `bash` tool. [Limit the network](https://platform.claude.com/docs/en/managed-agents/secure-deployment#limit-the-network) as well. See [Domain list rules](https://platform.claude.com/docs/en/managed-agents/tools-web-restrictions#domain-list-rules).
 
@@ -295,15 +307,15 @@ A domain list on `web_fetch` does not limit the `bash` tool. [Limit the network]
 
 Set `auto` on `bash`, `write`, `edit`, and `web_fetch`, and on MCP tools that only read data. Use `always_ask` instead on a tool if you cannot undo its changes outside the sandbox. Also use it on a tool that should not run just because end-user text you relay asks for it. A [permission policy](https://platform.claude.com/docs/en/managed-agents/permission-policies) determines whether a tool call runs, waits for your approval, or is evaluated by the server.
 
-| Tool                          | Recommended policy                                                                                                                           | Why                                                                                                  |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `read`, `glob`, `grep`        | `always_allow`                                                                                                                               | They read files in the sandbox and change nothing                                                    |
-| `bash`, `write`, `edit`       | `auto`. Use `always_ask` on a tool if you cannot undo its changes outside the sandbox. Use `always_ask` on `bash` if you relay end-user text | The agent toolset default is `always_allow`, which runs every call without approval                  |
-| `web_fetch`                   | `auto`                                                                                                                                       | A URL the agent fetches can carry data to the site it points to                                      |
-| `web_search`                  | `always_ask` if the agent handles data you would not want sent in a search query. Otherwise `always_allow`                                   | `allowed_domains` limits which sites results come from, not what the query contains                  |
-| MCP tools that only read data | `auto`, set for each tool in the toolset's `configs`                                                                                         | The toolset default stays `always_ask`, so a tool the MCP server adds later still waits for approval |
-| MCP tools that change data    | `always_ask`                                                                                                                                 | This is the MCP toolset default. Keep it                                                             |
-| Custom tools                  | Your code decides whether each call runs                                                                                                     | Permission policies do not apply                                                                     |
+| Tool                          | Recommended policy                                                                                                                           | Why                                                                                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `read`, `glob`, `grep`        | `always_allow`                                                                                                                               | They read files in the sandbox and change nothing                                                                                               |
+| `bash`, `write`, `edit`       | `auto`. Use `always_ask` on a tool if you cannot undo its changes outside the sandbox. Use `always_ask` on `bash` if you relay end-user text | The agent toolset default is `always_allow`, which runs every call without approval                                                             |
+| `web_fetch`                   | `auto`                                                                                                                                       | A URL the agent fetches can carry data to the site it points to                                                                                 |
+| `web_search`                  | `always_ask` if the agent handles data you would not want sent in a search query. Otherwise `always_allow`                                   | `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) limits which sites results come from, not what the query contains |
+| MCP tools that only read data | `auto`, set for each tool in the toolset's `configs` (csharp, go: `Configs`)                                                                 | The toolset default stays `always_ask`, so a tool the MCP server adds later still waits for approval                                            |
+| MCP tools that change data    | `always_ask`                                                                                                                                 | This is the MCP toolset default. Keep it                                                                                                        |
+| Custom tools                  | Your code determines whether each call runs                                                                                                  | Permission policies do not apply                                                                                                                |
 
 The toolset in [Give the agent the smallest tool set](https://platform.claude.com/docs/en/managed-agents/secure-deployment#give-the-agent-the-smallest-tool-set) applies these policies.
 
@@ -317,7 +329,7 @@ Review each paused call before you allow it. A client that allows every call wit
 
 ## Give the agent the smallest tool set
 
-Set `default_config.enabled` to `false` and [enable only the tools the agent needs](https://platform.claude.com/docs/en/managed-agents/tools#enabling-only-specific-tools). The agent toolset enables all eight built-in tools by default.
+Set `default_config.enabled` (java, php: `defaultConfig.enabled`; csharp, go: `DefaultConfig.Enabled`) to `false` and [enable only the tools the agent needs](https://platform.claude.com/docs/en/managed-agents/tools#enabling-only-specific-tools). The agent toolset enables all eight built-in tools by default.
 
 | Tool                      | What it does                                                              |
 | ------------------------- | ------------------------------------------------------------------------- |
@@ -328,41 +340,50 @@ Set `default_config.enabled` to `false` and [enable only the tools the agent nee
 
 The support agent needs three built-in tools: `read` and `write` for its draft, and `web_fetch` for the help center. It looks up orders through a [custom tool](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools), `lookup_order`, that your application runs. Your application holds the API key for your order API, so the agent needs neither `bash` nor a credential.
 
-The following sample limits `web_fetch` to `help.example.com` with `allowed_domains`. It sets `auto` on `write` and `web_fetch`, as [Approve risky actions](https://platform.claude.com/docs/en/managed-agents/secure-deployment#approve-risky-actions) recommends. If a customer's ticket leads the agent to use these tools, the agent can only change files in the sandbox or open help center pages. That is why neither tool needs `always_ask`. The sample also sets `always_ask` in `default_config`, so a tool you enable later without its own policy uses `always_ask`:
+The following sample limits `web_fetch` to `help.example.com` with `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`). It sets `auto` on `write` and `web_fetch`, as [Approve risky actions](https://platform.claude.com/docs/en/managed-agents/secure-deployment#approve-risky-actions) recommends. If a customer's ticket leads the agent to use these tools, the agent can only change files in the sandbox or open help center pages. That is why neither tool needs `always_ask`. The sample also sets `always_ask` in `default_config` (java, php: `defaultConfig`; csharp, go: `DefaultConfig`), so a tool you enable later without its own policy uses `always_ask`:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  tools='[
-    {
-      "type": "agent_toolset_20260401",
-      "default_config": {
-        "enabled": false,
-        "permission_policy": {"type": "always_ask"}
-      },
-      "configs": [
-        {"name": "read", "enabled": true, "permission_policy": {"type": "always_allow"}},
-        {"name": "write", "enabled": true, "permission_policy": {"type": "auto"}},
+  curl -fsSL https://api.anthropic.com/v1/agents \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "name": "Support Agent",
+      "model": "claude-opus-5-5",
+      "tools": [
         {
-          "name": "web_fetch",
-          "enabled": true,
-          "allowed_domains": ["help.example.com"],
-          "permission_policy": {"type": "auto"}
+          "type": "agent_toolset_20260401",
+          "default_config": {
+            "enabled": false,
+            "permission_policy": {"type": "always_ask"}
+          },
+          "configs": [
+            {"name": "read", "enabled": true, "permission_policy": {"type": "always_allow"}},
+            {"name": "write", "enabled": true, "permission_policy": {"type": "auto"}},
+            {
+              "name": "web_fetch",
+              "enabled": true,
+              "allowed_domains": ["help.example.com"],
+              "permission_policy": {"type": "auto"}
+            }
+          ]
+        },
+        {
+          "type": "custom",
+          "name": "lookup_order",
+          "description": "Look up one order by its ID. Returns the status, the items, and the delivery date.",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "string", "description": "The order ID from the ticket"}
+            },
+            "required": ["order_id"]
+          }
         }
       ]
-    },
-    {
-      "type": "custom",
-      "name": "lookup_order",
-      "description": "Look up one order by its ID. Returns the status, the items, and the delivery date.",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "order_id": {"type": "string", "description": "The order ID from the ticket"}
-        },
-        "required": ["order_id"]
-      }
-    }
-  ]'
+    }'
   ```
 
   <CodeGroupItem>
@@ -508,18 +529,17 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   [
       new BetaManagedAgentsAgentToolset20260401Params
       {
-          Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
           DefaultConfig = new()
           {
               Enabled = false,
-              PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy { Type = "always_ask" },
+              PermissionPolicy = new BetaManagedAgentsAlwaysAskPolicy(),
           },
           Configs =
           [
               new BetaManagedAgentsReadToolConfigParams
               {
                   Enabled = true,
-                  PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy { Type = "always_allow" },
+                  PermissionPolicy = new BetaManagedAgentsAlwaysAllowPolicy(),
               },
               new BetaManagedAgentsWriteToolConfigParams
               {
@@ -536,7 +556,6 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
       },
       new BetaManagedAgentsCustomToolParams
       {
-          Type = "custom",
           Name = "lookup_order",
           Description = "Look up one order by its ID. Returns the status, the items, and the delivery date.",
           InputSchema = new()
@@ -556,22 +575,17 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   ```go Go
   tools := []anthropic.BetaAgentNewParamsToolUnion{{
   	OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-  		Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
   		DefaultConfig: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParams{
   			Enabled: anthropic.Bool(false),
   			PermissionPolicy: anthropic.BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnion{
-  				OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{
-  					Type: anthropic.BetaManagedAgentsAlwaysAskPolicyTypeAlwaysAsk,
-  				},
+  				OfAlwaysAsk: &anthropic.BetaManagedAgentsAlwaysAskPolicyParam{},
   			},
   		},
   		Configs: []anthropic.BetaManagedAgentsAgentToolConfigParamsUnion{
   			{OfRead: &anthropic.BetaManagedAgentsReadToolConfigParams{
   				Enabled: anthropic.Bool(true),
   				PermissionPolicy: anthropic.BetaManagedAgentsReadToolConfigParamsPermissionPolicyUnion{
-  					OfAlwaysAllow: &anthropic.BetaManagedAgentsAlwaysAllowPolicyParam{
-  						Type: anthropic.BetaManagedAgentsAlwaysAllowPolicyTypeAlwaysAllow,
-  					},
+  					OfAlwaysAllow: &anthropic.BetaManagedAgentsAlwaysAllowPolicyParam{},
   				},
   			}},
   			{OfWrite: &anthropic.BetaManagedAgentsWriteToolConfigParams{
@@ -591,7 +605,6 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   	},
   }, {
   	OfCustom: &anthropic.BetaManagedAgentsCustomToolParams{
-  		Type:        anthropic.BetaManagedAgentsCustomToolParamsTypeCustom,
   		Name:        "lookup_order",
   		Description: "Look up one order by its ID. Returns the status, the items, and the delivery date.",
   		InputSchema: anthropic.BetaManagedAgentsCustomToolInputSchemaParam{
@@ -605,7 +618,6 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   		},
   	},
   }}
-  _ = tools
   ```
 
   ```java Java
@@ -617,25 +629,16 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   var tools = List.of(
       AgentCreateParams.Tool.ofAgentToolset20260401(
           BetaManagedAgentsAgentToolset20260401Params.builder()
-              .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
               .defaultConfig(
                   BetaManagedAgentsAgentToolsetDefaultConfigParams.builder()
                       .enabled(false)
-                      .permissionPolicy(
-                          BetaManagedAgentsAlwaysAskPolicy.builder()
-                              .type(BetaManagedAgentsAlwaysAskPolicy.Type.ALWAYS_ASK)
-                              .build()
-                      )
+                      .permissionPolicy(BetaManagedAgentsAlwaysAskPolicy.builder().build())
                       .build()
               )
               .addConfig(
                   BetaManagedAgentsReadToolConfigParams.builder()
                       .enabled(true)
-                      .permissionPolicy(
-                          BetaManagedAgentsAlwaysAllowPolicy.builder()
-                              .type(BetaManagedAgentsAlwaysAllowPolicy.Type.ALWAYS_ALLOW)
-                              .build()
-                      )
+                      .permissionPolicy(BetaManagedAgentsAlwaysAllowPolicy.builder().build())
                       .build()
               )
               .addConfig(
@@ -655,7 +658,6 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
       ),
       AgentCreateParams.Tool.ofCustom(
           BetaManagedAgentsCustomToolParams.builder()
-              .type(BetaManagedAgentsCustomToolParams.Type.CUSTOM)
               .name("lookup_order")
               .description("Look up one order by its ID. Returns the status, the items, and the delivery date.")
               .inputSchema(
@@ -689,15 +691,14 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
 
   $tools = [
       BetaManagedAgentsAgentToolset20260401Params::with(
-          type: 'agent_toolset_20260401',
           defaultConfig: BetaManagedAgentsAgentToolsetDefaultConfigParams::with(
               enabled: false,
-              permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(type: 'always_ask'),
+              permissionPolicy: BetaManagedAgentsAlwaysAskPolicy::with(),
           ),
           configs: [
               BetaManagedAgentsReadToolConfigParams::with(
                   enabled: true,
-                  permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(type: 'always_allow'),
+                  permissionPolicy: BetaManagedAgentsAlwaysAllowPolicy::with(),
               ),
               BetaManagedAgentsWriteToolConfigParams::with(
                   enabled: true,
@@ -711,7 +712,6 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
           ],
       ),
       BetaManagedAgentsCustomToolParams::with(
-          type: 'custom',
           name: 'lookup_order',
           description: 'Look up one order by its ID. Returns the status, the items, and the delivery date.',
           inputSchema: BetaManagedAgentsCustomToolInputSchema::with(
@@ -763,32 +763,32 @@ The following sample limits `web_fetch` to `help.example.com` with `allowed_doma
   ```
 </CodeGroup>
 
-An [agent update](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-semantics) replaces the whole `tools` array, so send every entry you want to keep.
+An [agent update](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-semantics) replaces the whole `tools` (csharp, go: `Tools`) array, so send every entry you want to keep.
 
 An agent update reaches only new sessions, so also check deployments, agents that list this agent, and existing sessions:
 
 * A deployment pins an agent version, so point each deployment at the new one.
-* An agent that lists this one in [`subagents.predefined_agents`](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#list-the-subagents) or `workflows.predefined_agents` keeps the version it pinned, so update that agent too.
-* To tighten a session that already exists, [update that session's tools](https://platform.claude.com/docs/en/managed-agents/session-operations#updating-the-agent-configuration). The session must be `idle`, and the update replaces the whole `tools` array. In a multiagent session, new `allowed_domains` and `blocked_domains` lists on the web tools of the agent the session runs also apply to every other agent. They apply from each agent's next turn. Those agents' enabled tools and permission policies do not change. To change those, update each agent, then start a new session.
+* An agent that lists this one in the [`predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`)](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#list-the-subagents) or of `workflows` (csharp, go: `Workflows`) keeps the version it pinned. Update that agent too.
+* To tighten a session that already exists, [update that session's tools](https://platform.claude.com/docs/en/managed-agents/session-operations#updating-the-agent-configuration). The session must be `idle`, and the update replaces the whole `tools` (csharp, go: `Tools`) array. In a multiagent session, new `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`) and `blocked_domains` (java, php: `blockedDomains`; csharp, go: `BlockedDomains`) lists on the web tools of the agent the session runs also apply to every other agent. They apply from each agent's next turn. Those agents' enabled tools and permission policies do not change. To change those, update each agent, then start a new session.
 
 Limit MCP servers and custom tools to what the agent needs, too:
 
-* **MCP servers:** An MCP toolset enables every tool the server exposes by default. Set `default_config.enabled` to `false` and enable named tools, so tools a server adds later stay off. Remove servers the agent does not use. See [MCP connector](https://platform.claude.com/docs/en/managed-agents/mcp-connector#configure-which-mcp-tools-are-available).
+* **MCP servers:** An MCP toolset enables every tool the server exposes by default. Set `default_config.enabled` (java, php: `defaultConfig.enabled`; csharp, go: `DefaultConfig.Enabled`) to `false` and enable named tools, so tools a server adds later stay off. Remove servers the agent does not use. See [MCP connector](https://platform.claude.com/docs/en/managed-agents/mcp-connector#configure-which-mcp-tools-are-available).
 * **Custom tools:** Your application runs them, and permission policies do not apply. Validate each call's input in your application and limit what the tool can touch.
 
 ## Keep untrusted input away from powerful tools
 
 Check which tools and credentials an agent holds whenever it reads untrusted input, which is text that someone outside your team can write. This section uses two terms:
 
-* **Untrusted input:** Web pages, search results, support tickets, emails, repository files, uploads, MCP server results, and end-user messages that you relay.
-* **Powerful tools:** `bash`, `write`, `edit`, `web_fetch`, `web_search`, MCP tools and custom tools that write or send data, and any tool that uses a credential.
+* **Untrusted input:** Webpages, search results, support tickets, emails, repository files, uploads, MCP server results, and end-user messages that you relay
+* **Powerful tools:** `bash`, `write`, `edit`, `web_fetch`, `web_search`, MCP tools and custom tools that write or send data, and any tool that uses a credential
 
 Text in untrusted input can tell the agent to use a powerful tool it holds. The support agent reads tickets, so it reaches your order API only through the custom tool `lookup_order`. Your application checks that the order belongs to the ticket's sender.
 
 | Input the agent reads           | Power it also has                                                                                                         | Do this                                                                                                                                                                                                                                                                                                      |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Tickets, emails, or uploads     | `bash` with a credential                                                                                                  | Replace `bash` with a custom tool that does one thing. If the agent must keep `bash`, approve each call with `always_ask`                                                                                                                                                                                    |
-| Web pages or search results     | Writing files or changing records                                                                                         | Turn off the web tools, or limit them to sites you operate or trust                                                                                                                                                                                                                                          |
+| Webpages or search results      | Writing files or changing records                                                                                         | Turn off the web tools, or limit them to sites you operate or trust                                                                                                                                                                                                                                          |
 | MCP results or repository files | MCP tools that write                                                                                                      | Keep the MCP toolset on `always_ask`, and enable only the tools the agent needs                                                                                                                                                                                                                              |
 | A mounted GitHub repository     | Any tool                                                                                                                  | Mount only repositories you trust. An agent with `read` loads skills from the repository's `.claude/skills` directory as agent instructions, with no review step. See [Load skills from a GitHub repository](https://platform.claude.com/docs/en/managed-agents/skills#load-skills-from-a-github-repository) |
 | Any untrusted input             | Writing to a [memory store](https://platform.claude.com/docs/en/managed-agents/memory#attach-a-memory-store-to-a-session) | Attach the store as `read_only` unless the agent must write. The default is `read_write`, and later sessions read saved text as trusted memory                                                                                                                                                               |
@@ -803,11 +803,11 @@ When an agent must read untrusted input and also act, this guide recommends one 
 
 The split uses three agents:
 
-| Agent                                  | Reads                                             | Holds                                                                                                | Passes on                                                   |
-| -------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
-| Lead (the agent that the session runs) | Your message, and what the other agents send back | No built-in tools. Its `subagents.predefined_agents` list names the fetcher and the writer           | A task to each agent                                        |
-| Fetcher                                | Web pages and search results                      | `web_fetch` and `web_search` only, each with `allowed_domains`                                       | Short results, in a format you ask for in its system prompt |
-| Writer                                 | The task from the lead                            | The tools that write files, run commands, or change records, on `auto` or `always_ask`. No web tools | Its result                                                  |
+| Agent                                  | Reads                                             | Holds                                                                                                                                                                                         | Passes on                                                   |
+| -------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Lead (the agent that the session runs) | Your message, and what the other agents send back | No built-in tools. The `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of its `subagents` (csharp, go: `Subagents`) names the fetcher and the writer | A task to each agent                                        |
+| Fetcher                                | Webpages and search results                       | `web_fetch` and `web_search` only, each with `allowed_domains` (java, php: `allowedDomains`; csharp, go: `AllowedDomains`)                                                                    | Short results, in a format you ask for in its system prompt |
+| Writer                                 | The task from the lead                            | The tools that write files, run commands, or change records, on `auto` or `always_ask`. No web tools                                                                                          | Its result                                                  |
 
 The fetcher's results are built from untrusted pages, and the lead can pass their text on to the writer. Keep `auto` or `always_ask` on the writer's tools. The fetcher can still send some of what it reads to the sites on its `web_fetch` list, and to the search provider in its queries.
 
@@ -817,14 +817,14 @@ Agents in one multiagent session [share the sandbox](https://platform.claude.com
 
 Set a budget when you create each session, and decide in advance how you stop an agent.
 
-| Control                                                                                                               | What it does                                                                                                                                                                                                                                                                                                                                                                                |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Session budget                                                                                                        | A cap on spend at public list prices. At the cap, the session and each [thread](https://platform.claude.com/docs/en/managed-agents/session-threads) pause. Requests in progress can finish and their tool calls still run, so spend can pass the cap. See [When a session reaches its budget](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget) |
-| Deployment budget                                                                                                     | The same cap, applied to each session a deployment starts                                                                                                                                                                                                                                                                                                                                   |
-| [`user.interrupt` event](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#interrupt-the-agent) | Stops the model response immediately. A running tool call can finish first. The session goes `idle`, unless a workflow run keeps it `running`, and resumes on your next message. An interrupt ends no workflow run                                                                                                                                                                          |
-| Archive or delete a session                                                                                           | Archiving keeps the history and blocks new events. Deleting removes the record, events, and sandbox                                                                                                                                                                                                                                                                                         |
-| Pause or archive a deployment                                                                                         | Pausing stops new scheduled runs but still allows manual runs. Archiving ends the schedule permanently. Sessions already running keep running                                                                                                                                                                                                                                               |
-| Archive or delete a vault or credential                                                                               | Removes the secret from running sessions without a restart. Allow for a delay. The sessions keep running, so interrupt them too. A token the agent already fetched with the secret stays in the sandbox                                                                                                                                                                                     |
+| Control                                                                                                               | What it does                                                                                                                                                                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Session budget                                                                                                        | A cap on spend at public list prices. At the cap, the session and each [thread](https://platform.claude.com/docs/en/managed-agents/session-threads) pause. Requests in progress can complete and their tool calls still run, so spend can pass the cap. See [When a session reaches its budget](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget) |
+| Deployment budget                                                                                                     | The same cap, applied to each session a deployment starts                                                                                                                                                                                                                                                                                                                                     |
+| [`user.interrupt` event](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#interrupt-the-agent) | Stops the model response immediately. A running tool call can complete first. The session goes `idle`, unless a workflow run keeps it `running`, and resumes on your next message. An interrupt ends no workflow run                                                                                                                                                                          |
+| Archive or delete a session                                                                                           | Archiving keeps the history and blocks new events. Deleting is permanent. It deletes the record, events, and sandbox                                                                                                                                                                                                                                                                          |
+| Pause or archive a deployment                                                                                         | Pausing stops new scheduled runs but still allows manual runs. Archiving ends the schedule permanently. Sessions already running keep running                                                                                                                                                                                                                                                 |
+| Archive or delete a vault or credential                                                                               | Removes the secret from running sessions without a restart. Allow for a delay. The sessions keep running, so interrupt them too. A token the agent already fetched with the secret stays in the sandbox                                                                                                                                                                                       |
 
 To stop a running agent, follow these steps:
 
@@ -837,11 +837,11 @@ To stop a running agent, follow these steps:
 
 An interrupt does not undo what the agent already did or sent. Archiving an agent does not stop its running sessions.
 
-A budget's `max_list_cost.amount` is a whole number of US cents written as a string, so `"125"` means $1.25. See [Set a budget at session creation](https://platform.claude.com/docs/en/managed-agents/budgets#set-a-budget-at-session-creation).
+A budget's `max_list_cost.amount` (java, php: `maxListCost.amount`; csharp, go: `MaxListCost.Amount`) is a whole number of US cents written as a string, so `"125"` means $1.25 USD. See [Set a budget at session creation](https://platform.claude.com/docs/en/managed-agents/budgets#set-a-budget-at-session-creation).
 
 You cannot add a budget to a session created without one. To change or remove a cap, see [Resume a session at its budget](https://platform.claude.com/docs/en/managed-agents/budgets#resume-a-session-at-its-budget). After you remove a session's cap, you cannot set a new one.
 
-A budget caps spending, but it does not limit what the agent does before the cap. To keep workloads with different trust levels apart, use separate [workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces). Give each workload an API key scoped to one workspace, because a key that can reach several workspaces can act in any of them.
+A budget caps spending, but it does not limit what the agent does before the cap. To keep workloads with different trust levels apart, use separate [workspaces](https://platform.claude.com/docs/en/manage-claude/workspaces). Limit each workload to one workspace: where you can, a [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) rule enabled only in it, otherwise an API key scoped to it. Access to several workspaces lets the workload act in any of them.
 
 See [Session budgets](https://platform.claude.com/docs/en/managed-agents/budgets), [Session operations](https://platform.claude.com/docs/en/managed-agents/session-operations#archiving-a-session), and [Scheduled deployments](https://platform.claude.com/docs/en/managed-agents/scheduled-deployments#managing-deployment-lifecycle).
 

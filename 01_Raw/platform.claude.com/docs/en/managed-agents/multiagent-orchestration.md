@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration
-fetched_at: 2026-10-19T05:32:45.385086+00:00
+fetched_at: 2026-10-26T05:40:06.384021+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,11 +28,11 @@ You decide which of these the agent can use, and the agent determines when to us
 
 With subagents, the agent itself determines what happens next. A [subagent's thread](https://platform.claude.com/docs/en/managed-agents/session-threads) stays available until you archive it, so the agent can send it follow-up messages. With dynamic workflows, Claude writes a program to orchestrate agents without Claude's direct involvement. Context and results are passed programmatically from one agent to another, freeing up the main session thread to communicate with the user and check in on one or several running workflows to report on progress. The agent can't send follow-up messages to a run's threads, and the server archives each one by the end of its run.
 
-| Approach                                                                                                                               | What happens                                                                                                                                                                                                                                               | Use it when                                                                                                                                                                                   | Consider                                                                                                                                                                                                                                                                                     |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Subagents](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#delegate-to-subagents)                         | The agent delegates tasks to its subagents. Each subagent works in its own [session thread](https://platform.claude.com/docs/en/managed-agents/session-threads), which you can list and stream.                                                            | The agent should follow up with a subagent after it reports, or it needs specialists that you list, with their own system prompts and tools.                                                  | Delegation is one level deep, and a session can have at most 25 child threads at a time, idle ones included. Advisor threads and a workflow run's threads don't count.                                                                                                                       |
-| [Dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#dynamic-workflows)                     | The agent writes a workflow: a program that runs many agents in phases and combines their results. The server runs it in the background as one workflow run, which you can follow. The workflow defines the agents or picks them from a list you give.     | Most work that needs more than one agent: work with many pieces, parallel work, or a long task that should finish sooner. Examples are audits, migrations, deep research, and cross-checking. | Every agent in a run uses tokens, so set a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets) to cap the session's spend, runs included. Tell the agent in its system prompt when to use a run. You follow the run by its phases and can read each of its threads. |
-| [Give the session an advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor) | The session's [primary thread](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#how-it-works) consults an advisor model mid-turn for guidance, such as planning an approach or reviewing work, and keeps doing the work itself. | One agent should do the work, with an advisor model's judgment at key moments such as planning or a final review.                                                                             | Only the primary thread can consult the advisor, and consultations are billed at the advisor model's rates.                                                                                                                                                                                  |
+| Approach                                                                                                                               | What happens                                                                                                                                                                                                                                               | Use it when                                                                                                                                                                                     | Consider                                                                                                                                                                                                                                                                                     |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Delegate to subagents](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#delegate-to-subagents)             | The agent delegates tasks to its subagents. Each subagent works in its own [session thread](https://platform.claude.com/docs/en/managed-agents/session-threads), which you can list and stream.                                                            | The agent should follow up with a subagent after it reports, or it needs specialists that you list, with their own system prompts and tools.                                                    | Delegation is one level deep, and a session can have at most 25 child threads at a time, idle ones included. Advisor threads and a workflow run's threads don't count.                                                                                                                       |
+| [Dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#dynamic-workflows)                     | The agent writes a workflow: a program that runs many agents in phases and combines their results. The server runs it in the background as one workflow run, which you can follow. The workflow defines the agents or picks them from a list you give.     | Most work that needs more than one agent: work with many pieces, parallel work, or a long task that should complete sooner. Examples are audits, migrations, deep research, and cross-checking. | Every agent in a run uses tokens, so set a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets) to cap the session's spend, runs included. Tell the agent in its system prompt when to use a run. You follow the run by its phases and can read each of its threads. |
+| [Give the session an advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor) | The session's [primary thread](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#how-it-works) consults an advisor model mid-turn for guidance, such as planning an approach or reviewing work, and keeps doing the work itself. | One agent should do the work, with an advisor model's judgment at key moments such as planning or a final review.                                                                               | Only the primary thread can consult the advisor, and consultations are billed at the advisor model's rates.                                                                                                                                                                                  |
 
 You set these up in the `multiagent` block of the agent's definition, which has a `type`. With the `multiagent_20261001` type, an agent can use all three together, and you can turn each one on or off. By default, `subagents` and `workflows` are both enabled. `subagents` and `workflows` each have `inline_agents` enabled, the setting for [agents that the agent or a workflow defines itself](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#predefined-and-inline-agents):
 
@@ -95,7 +95,7 @@ The following agent allows only the agents that it lists. It can delegate to one
 
 ### What to delegate
 
-Multiagent coordination is best suited for complex tasks that either require work across a variety of surfaces, or where multiple well-scoped tasks contribute to an overall goal.
+Multiagent coordination is best suited for complex tasks that either require work across a variety of surfaces or consist of multiple well-scoped tasks that contribute to an overall goal.
 
 Patterns that work well:
 
@@ -117,7 +117,7 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  lead_agent=$(curl -fsS https://api.anthropic.com/v1/agents \
+  curl -fsS https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -142,41 +142,33 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
         }
       }
     }'
-  )
   ```
 
   <CodeGroupItem>
     ```bash CLI
-    # Create the subagents, then read their IDs from the lockfile.
-    ant apply reviewer.md test-writer.md
-    REVIEWER_AGENT_ID=$(jq -er '.resources["./reviewer.md"].id' claude-lock.json)
-    TEST_WRITER_AGENT_ID=$(jq -er '.resources["./test-writer.md"].id' claude-lock.json)
-
-    # Write the agent's definition, listing each subagent by ID.
-    cat > engineering-lead.md <<EOF
-    ---
-    name: Engineering Lead
-    model: claude-opus-5-5
-    tools:
-      - type: agent_toolset_20260401
-    multiagent:
-      type: multiagent_20261001
-      subagents:
-        type: enabled
-        predefined_agents:
-          - type: agent
-            id: $REVIEWER_AGENT_ID
-          - type: agent
-            id: $TEST_WRITER_AGENT_ID
-    ---
-
-    You coordinate engineering work. Delegate code review to the reviewer agent
-    and test writing to the test agent.
-    EOF
-
-    # Create the agent.
     ant apply engineering-lead.md reviewer.md test-writer.md
     ```
+
+    <File filename="engineering-lead.md">
+      ```markdown
+      ---
+      name: Engineering Lead
+      model: claude-opus-5-5
+      tools:
+        - type: agent_toolset_20260401
+      multiagent:
+        type: multiagent_20261001
+        subagents:
+          type: enabled
+          predefined_agents: # ant apply replaces each path with {type: agent, id, version}
+            - ./reviewer.md
+            - ./test-writer.md
+      ---
+
+      You coordinate engineering work. Delegate code review to the reviewer agent
+      and test writing to the test agent.
+      ```
+    </File>
 
     <File filename="reviewer.md">
       ```markdown
@@ -235,10 +227,10 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
         type: "enabled",
         predefined_agents: [
           { type: "agent", id: reviewerAgent.id },
-          { type: "agent", id: testWriterAgent.id },
-        ],
-      },
-    },
+          { type: "agent", id: testWriterAgent.id }
+        ]
+      }
+    }
   });
   ```
 
@@ -248,13 +240,7 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
       Name = "Engineering Lead",
       Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       System = "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
-      Tools =
-      [
-          new BetaManagedAgentsAgentToolset20260401Params
-          {
-              Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
-          },
-      ],
+      Tools = [new BetaManagedAgentsAgentToolset20260401Params()],
       Multiagent = new BetaManagedAgentsMultiagent20261001Params
       {
           Subagents = new BetaManagedAgentsMultiagentSubagentsEnabledParams
@@ -271,9 +257,7 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
   	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5},
   	System: anthropic.String("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-  			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-  		},
+  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
   	}},
   	Multiagent: anthropic.BetaManagedAgentsMultiagentParamsUnion{
   		OfMultiagent20261001: &anthropic.BetaManagedAgentsMultiagent20261001Params{
@@ -299,19 +283,13 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
           .name("Engineering Lead")
           .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .system("You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.")
-          .addTool(
-              BetaManagedAgentsAgentToolset20260401Params.builder()
-                  .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                  .build()
-          )
+          .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
           .multiagent(BetaManagedAgentsMultiagent20261001Params.builder()
               .subagents(BetaManagedAgentsMultiagentSubagentsEnabledParams.builder()
                   .addPredefinedAgent(BetaManagedAgentsAgentParams.builder()
-                      .type(BetaManagedAgentsAgentParams.Type.AGENT)
                       .id(reviewerAgent.id())
                       .build())
                   .addPredefinedAgent(BetaManagedAgentsAgentParams.builder()
-                      .type(BetaManagedAgentsAgentParams.Type.AGENT)
                       .id(testWriterAgent.id())
                       .build())
                   .build())
@@ -344,7 +322,7 @@ When [defining your agent](https://platform.claude.com/docs/en/managed-agents/ag
   ```ruby Ruby
   lead_agent = client.beta.agents.create(
     name: "Engineering Lead",
-    model: "claude-opus-5-5",
+    model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     system: "You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.",
     tools: [
       {type: "agent_toolset_20260401"}
@@ -373,7 +351,7 @@ The following rules apply to the agents you list in the `predefined_agents` (jav
 
 * **Pinning:** The agent's configuration, including the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`), is snapshotted when the agent is created or updated. Referenced agents stay pinned to the versions resolved then and don't pick up later updates to their definitions. An update that doesn't send the list keeps the versions that are already pinned. To delegate to a newer version of a referenced agent, [update the agent](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-an-agent) so the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) references that version.
 * **One level:** The agent can delegate to only one level of agents. Referencing another agent that has `multiagent` (csharp, go: `Multiagent`) set fails the create or update request with a 400 validation error.
-* **Up to 20 agents:** The `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) can list up to 20 unique agents. The limit is per list: the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`) can also list up to 20. The agent can call multiple copies of each subagent, within the session's [thread limit](https://platform.claude.com/docs/en/managed-agents/session-threads).
+* **Up to 20 agents:** The `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) can list up to 20 unique agents. The limit is for each list: the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`) can also list up to 20. The agent can call multiple copies of each subagent, within the session's [thread limit](https://platform.claude.com/docs/en/managed-agents/session-threads).
 * **Inference geography:** The agent and every agent that you list, in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) or of `workflows` (csharp, go: `Workflows`), must pin the same [inference geography](https://platform.claude.com/docs/en/manage-claude/data-residency) (`inference_geo` (java, php: `inferenceGeo`; csharp, go: `InferenceGeo`) in the `model` (csharp, go: `Model`) of the [agent definition](https://platform.claude.com/docs/en/managed-agents/agent-setup)), or none of them can pin one. A mismatch in either list is rejected with a 400 validation error. That check runs both when the agent is saved and when a [session-create override](https://platform.claude.com/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session) changes any of the pins.
 
 ### Create the session
@@ -382,7 +360,7 @@ Create a session referencing the agent. The agent delegates to the agents you li
 
 <CodeGroup>
   ```bash cURL
-  session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+  curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -391,8 +369,6 @@ Create a session referencing the agent. The agent delegates to the agents you li
       "agent": "'"$LEAD_AGENT_ID"'",
       "environment_id": "'"$ENVIRONMENT_ID"'"
     }'
-  )
-  SESSION_ID=$(jq -r '.id' <<< "$session")
   ```
 
   ```bash CLI
@@ -411,7 +387,7 @@ Create a session referencing the agent. The agent delegates to the agents you li
   ```typescript TypeScript
   const session = await client.beta.sessions.create({
     agent: leadAgent.id,
-    environment_id: environment.id,
+    environment_id: environment.id
   });
   ```
 
@@ -472,55 +448,60 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  research_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data '{
-    "name": "researcher",
-    "model": "claude-haiku-5-5",
-    "mcp_servers": [{"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"}],
-    "tools": [{"type": "mcp_toolset", "mcp_server_name": "github"}]
-  }' | jq -er '.id'
-  )
+  # Create the researcher
+  curl --fail-with-body -sS https://api.anthropic.com/v1/agents \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "name": "researcher",
+      "model": "claude-haiku-5-5",
+      "mcp_servers": [{"type": "url", "name": "github", "url": "https://api.githubcopilot.com/mcp/"}],
+      "tools": [{"type": "mcp_toolset", "mcp_server_name": "github"}]
+    }'
 
-  lead_agent_id=$(curl --fail-with-body -sS "$BASE/v1/agents" "${H[@]}" --data '{
-    "name": "lead",
-    "model": "claude-opus-5-5",
-    "tools": [{"type": "agent_toolset_20260401"}],
-    "multiagent": {
-      "type": "multiagent_20261001",
-      "subagents": {
-        "type": "enabled",
-        "predefined_agents": [{"type": "agent", "id": "'"$research_agent_id"'"}]
+  # Create the agent that delegates to it: research_agent_id is the ID from the first response
+  curl --fail-with-body -sS https://api.anthropic.com/v1/agents \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "name": "lead",
+      "model": "claude-opus-5-5",
+      "tools": [{"type": "agent_toolset_20260401"}],
+      "multiagent": {
+        "type": "multiagent_20261001",
+        "subagents": {
+          "type": "enabled",
+          "predefined_agents": [{"type": "agent", "id": "'"$research_agent_id"'"}]
+        }
       }
-    }
-  }' | jq -er '.id'
-  )
+    }'
   ```
 
   <CodeGroupItem>
     ```bash CLI
-    # Create the researcher, then read its ID from the lockfile.
-    ant apply researcher.md
-    research_agent_id=$(jq -er '.resources["./researcher.md"].id' claude-lock.json)
-
-    # Write the agent's definition, listing the researcher by ID.
-    cat > lead.md <<EOF
-    ---
-    name: lead
-    model: claude-opus-5-5
-    tools:
-      - type: agent_toolset_20260401
-    multiagent:
-      type: multiagent_20261001
-      subagents:
-        type: enabled
-        predefined_agents:
-          - type: agent
-            id: $research_agent_id
-    ---
-    EOF
-
-    # Create the agent.
     ant apply lead.md researcher.md
     ```
+
+    <File filename="lead.md">
+      ```markdown
+      ---
+      name: lead
+      model: claude-opus-5-5
+      tools:
+        - type: agent_toolset_20260401
+      multiagent:
+        type: multiagent_20261001
+        subagents:
+          type: enabled
+          predefined_agents: # ant apply replaces each path with {type: agent, id, version}
+            - ./researcher.md
+      ---
+      ```
+    </File>
 
     <File filename="researcher.md">
       ```markdown
@@ -567,10 +548,8 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
   const researchAgent = await client.beta.agents.create({
     name: "researcher",
     model: "claude-haiku-5-5",
-    mcp_servers: [
-      { type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/" },
-    ],
-    tools: [{ type: "mcp_toolset", mcp_server_name: "github" }],
+    mcp_servers: [{ type: "url", name: "github", url: "https://api.githubcopilot.com/mcp/" }],
+    tools: [{ type: "mcp_toolset", mcp_server_name: "github" }]
   });
 
   const leadAgent = await client.beta.agents.create({
@@ -581,9 +560,9 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
       type: "multiagent_20261001",
       subagents: {
         type: "enabled",
-        predefined_agents: [{ type: "agent", id: researchAgent.id }],
-      },
-    },
+        predefined_agents: [{ type: "agent", id: researchAgent.id }]
+      }
+    }
   });
   ```
 
@@ -596,44 +575,23 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
       [
           new()
           {
-              Type = BetaManagedAgentsUrlMcpServerParamsType.Url,
               Name = "github",
               Url = "https://api.githubcopilot.com/mcp/",
           },
       ],
-      Tools =
-      [
-          new BetaManagedAgentsMcpToolsetParams
-          {
-              Type = BetaManagedAgentsMcpToolsetParamsType.McpToolset,
-              McpServerName = "github",
-          },
-      ],
+      Tools = [new BetaManagedAgentsMcpToolsetParams { McpServerName = "github" }],
   });
 
   var leadAgent = await client.Beta.Agents.Create(new()
   {
       Name = "lead",
       Model = BetaManagedAgentsModel.ClaudeOpus5_5,
-      Tools =
-      [
-          new BetaManagedAgentsAgentToolset20260401Params
-          {
-              Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
-          },
-      ],
+      Tools = [new BetaManagedAgentsAgentToolset20260401Params()],
       Multiagent = new BetaManagedAgentsMultiagent20261001Params
       {
           Subagents = new BetaManagedAgentsMultiagentSubagentsEnabledParams
           {
-              PredefinedAgents =
-              [
-                  new BetaManagedAgentsAgentParams
-                  {
-                      Type = BetaManagedAgentsAgentParamsType.Agent,
-                      ID = researchAgent.ID,
-                  },
-              ],
+              PredefinedAgents = [new BetaManagedAgentsAgentParams { ID = researchAgent.ID }],
           },
       },
   });
@@ -644,13 +602,11 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
   	Name:  "researcher",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeHaiku5_5},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
-  		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
   		Name: "github",
   		URL:  "https://api.githubcopilot.com/mcp/",
   	}},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfMCPToolset: &anthropic.BetaManagedAgentsMCPToolsetParams{
-  			Type:          anthropic.BetaManagedAgentsMCPToolsetParamsTypeMCPToolset,
   			MCPServerName: "github",
   		},
   	}},
@@ -663,9 +619,7 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
   	Name:  "lead",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-  			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-  		},
+  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
   	}},
   	Multiagent: anthropic.BetaManagedAgentsMultiagentParamsUnion{
   		OfMultiagent20261001: &anthropic.BetaManagedAgentsMultiagent20261001Params{
@@ -673,8 +627,7 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
   				OfEnabled: &anthropic.BetaManagedAgentsMultiagentSubagentsEnabledParams{
   					PredefinedAgents: []anthropic.BetaManagedAgentsMultiagentPredefinedAgentParamsUnion{{
   						OfBetaManagedAgentsAgents: &anthropic.BetaManagedAgentsAgentParams{
-  							Type: anthropic.BetaManagedAgentsAgentParamsTypeAgent,
-  							ID:   researcher.ID,
+  							ID: researcher.ID,
   						},
   					}},
   				},
@@ -694,11 +647,9 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
           .model(BetaManagedAgentsModel.CLAUDE_HAIKU_5_5)
           .addMcpServer(BetaManagedAgentsUrlMcpServerParams.builder()
               .name("github")
-              .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
               .url("https://api.githubcopilot.com/mcp/")
               .build())
           .addTool(BetaManagedAgentsMcpToolsetParams.builder()
-              .type(BetaManagedAgentsMcpToolsetParams.Type.MCP_TOOLSET)
               .mcpServerName("github")
               .build())
           .build()
@@ -708,13 +659,10 @@ Create the researcher, which declares the GitHub MCP server, and the agent that 
       AgentCreateParams.builder()
           .name("lead")
           .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
-          .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-              .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-              .build())
+          .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
           .multiagent(BetaManagedAgentsMultiagent20261001Params.builder()
               .subagents(BetaManagedAgentsMultiagentSubagentsEnabledParams.builder()
                   .addPredefinedAgent(BetaManagedAgentsAgentParams.builder()
-                      .type(BetaManagedAgentsAgentParams.Type.AGENT)
                       .id(researcher.id())
                       .build())
                   .build())
@@ -788,22 +736,23 @@ Then create the session with the vault that holds the GitHub credential:
 
 <CodeGroup>
   ```bash cURL
-  session_id=$(curl --fail-with-body -sS "$BASE/v1/sessions" "${H[@]}" --data '{
-    "agent": "'"$lead_agent_id"'",
-    "environment_id": "'"$environment_id"'",
-    "vault_ids": ["'"$vault_id"'"]
-  }' | jq -er '.id'
-  )
-  echo "$session_id"
+  curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "agent": "'"$lead_agent_id"'",
+      "environment_id": "'"$environment_id"'",
+      "vault_ids": ["'"$vault_id"'"]
+    }'
   ```
 
   ```bash CLI
-  session_id=$(ant beta:sessions create \
+  ant beta:sessions create \
     --agent "$lead_agent_id" \
     --environment-id "$environment_id" \
-    --vault-id "$vault_id" \
-    --transform id --raw-output)
-  echo "$session_id"
+    --vault-id "$vault_id"
   ```
 
   ```python Python
@@ -819,7 +768,7 @@ Then create the session with the vault that holds the GitHub credential:
   const session = await client.beta.sessions.create({
     agent: leadAgent.id,
     environment_id: environment.id,
-    vault_ids: [vault.id],
+    vault_ids: [vault.id]
   });
   console.log(session.id);
   ```
@@ -888,7 +837,7 @@ Each agent's session thread has its own event stream. To list, interrupt, or arc
 
 ## Dynamic workflows
 
-With dynamic workflows, an agent can take on work with many pieces, such as reviewing hundreds of documents or cross-checking many sources. The agent writes a **workflow**: a program that runs many agents in phases and combines what they return. The server runs it in the background as a **workflow run**, while the agent keeps working or ends its turn. You turn dynamic workflows on or off with the `workflows` (csharp, go: `Workflows`) setting in the agent's `multiagent` (csharp, go: `Multiagent`) block. A run's agents can work at the same time, so a long task can finish sooner than if one agent did each piece in turn.
+With dynamic workflows, an agent can take on work with many pieces, such as reviewing hundreds of documents or cross-checking many sources. The agent writes a **workflow:** a program that runs many agents in phases and combines what they return. The server runs it in the background as a **workflow run**, while the agent keeps working or ends its turn. You turn dynamic workflows on or off with the `workflows` (csharp, go: `Workflows`) setting in the agent's `multiagent` (csharp, go: `Multiagent`) block. A run's agents can work at the same time, so a long task can complete sooner than if one agent did each piece in turn.
 
 * **How a run starts:** You describe the work in a `user.message`. From that, the agent determines whether and when to start a run, so there's no additional API call. Instead, you influence the agent's determination by describing when to use a run in `user.message` or in the agent's system prompt. (Permission policies apply to the tools that a run's agents call, not to starting the run.)
 * **Which agents it uses:** [Inline agents](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#predefined-and-inline-agents) that the workflow defines, predefined agents that you list in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`), or both. If you list none, the workflow defines them all. An inline agent uses the model of the agent that the session runs. To let a run use another model for some of its agents, create them as agents and list them in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `workflows` (csharp, go: `Workflows`).
@@ -896,7 +845,7 @@ With dynamic workflows, an agent can take on work with many pieces, such as revi
 
 ### Turn on dynamic workflows
 
-When [defining your agent](https://platform.claude.com/docs/en/managed-agents/agent-setup), set `multiagent.type` to `"multiagent_20261001"` and enable `workflows`. Dynamic workflows and delegating (`subagents`) are both on by default with this type. For dynamic workflows only, add `"subagents": {"type": "disabled"}`.
+When [defining your agent](https://platform.claude.com/docs/en/managed-agents/agent-setup), set `multiagent.type` to `"multiagent_20261001"` and enable `workflows` (csharp, go: `Workflows`). Dynamic workflows and delegating (`subagents` (csharp, go: `Subagents`)) are both on by default with this type. For dynamic workflows only, also set `subagents` (csharp, go: `Subagents`) to `{"type": "disabled"}`.
 
 Before you change an existing agent's `multiagent.type`, see [how to move an agent to this type](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#move-from-the-coordinator-type).
 
@@ -956,7 +905,7 @@ Before you change an existing agent's `multiagent.type`, see [how to move an age
     system:
       "You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
     tools: [{ type: "agent_toolset_20260401" }],
-    multiagent: { type: "multiagent_20261001", workflows: { type: "enabled" } },
+    multiagent: { type: "multiagent_20261001", workflows: { type: "enabled" } }
   });
   ```
 
@@ -966,14 +915,7 @@ Before you change an existing agent's `multiagent.type`, see [how to move an age
       Name = "Contract Reviewer",
       Model = BetaManagedAgentsModel.ClaudeOpus5_5,
       System = "You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
-      Tools =
-      [
-          new BetaManagedAgentsAgentToolset20260401Params
-          {
-              Type = BetaManagedAgentsAgentToolset20260401ParamsType.AgentToolset20260401,
-          },
-      ],
-      // The configuration class sets the type for you.
+      Tools = [new BetaManagedAgentsAgentToolset20260401Params()],
       Multiagent = new BetaManagedAgentsMultiagent20261001Params
       {
           Workflows = new BetaManagedAgentsMultiagentWorkflowsEnabledParams(),
@@ -987,9 +929,7 @@ Before you change an existing agent's `multiagent.type`, see [how to move an age
   	Model:  anthropic.BetaManagedAgentsModelConfigParams{ID: anthropic.BetaManagedAgentsModelClaudeOpus5_5},
   	System: anthropic.String("You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-  			Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-  		},
+  		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
   	}},
   	Multiagent: anthropic.BetaManagedAgentsMultiagentParamsUnion{
   		OfMultiagent20261001: &anthropic.BetaManagedAgentsMultiagent20261001Params{
@@ -1010,12 +950,7 @@ Before you change an existing agent's `multiagent.type`, see [how to move an age
           .name("Contract Reviewer")
           .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
           .system("You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.")
-          .addTool(
-              BetaManagedAgentsAgentToolset20260401Params.builder()
-                  .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                  .build()
-          )
-          // The configuration class sets the type for you.
+          .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
           .multiagent(BetaManagedAgentsMultiagent20261001Params.builder()
               .workflows(BetaManagedAgentsMultiagentWorkflowsEnabledParams.builder().build())
               .build())
@@ -1026,7 +961,7 @@ Before you change an existing agent's `multiagent.type`, see [how to move an age
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Contract Reviewer',
-      model: 'claude-opus-5-5',
+      model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
       system: "You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
       tools: [
           ['type' => 'agent_toolset_20260401'],
@@ -1038,7 +973,7 @@ Before you change an existing agent's `multiagent.type`, see [how to move an age
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Contract Reviewer",
-    model: "claude-opus-5-5",
+    model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
     system_: "You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.",
     tools: [
       {type: "agent_toolset_20260401"}
@@ -1088,9 +1023,9 @@ Keep the following in mind:
   * A setting or field you send as `null` takes its default, and so does everything inside it, whatever you had stored.
   * A `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list you send replaces the stored list.
   * A setting you send with a different `type` replaces the stored setting, and the fields you leave out of it take their defaults.
-  * Every object you send needs its `type`, and an enabled `advisor` needs its `model`.
+  * Every object you send needs its `type`, and an enabled `advisor` (csharp, go: `Advisor`) needs its `model` (csharp, go: `Model`).
 
-* **Turning it off:** Set `workflows` to `{"type": "disabled"}`. It stays off until an update turns it on again. Sending `null` turns it on, because its default is enabled. The same applies to `subagents`.
+* **Turning it off:** Set `workflows` (csharp, go: `Workflows`) to `{"type": "disabled"}`. It stays off until an update turns it on again. Sending `null` turns it on, because its default is enabled. The same applies to `subagents` (csharp, go: `Subagents`).
 
 * **Existing sessions:** A session copies the setting when it is created, so changing the agent later doesn't change a session that already exists.
 
@@ -1102,7 +1037,7 @@ Keep the following in mind:
 
 ### Tell the agent when to use a run
 
-Turning dynamic workflows on gives the agent the ability to start workflow runs. The agent determines when to start one. To guide that choice, add an instruction like the following to the agent's system prompt. The contract-review agent in [Turn on dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#turn-on-dynamic-workflows) uses this system prompt:
+Turning dynamic workflows on gives the agent the ability to start workflow runs. The agent determines when to start one. To guide that choice, add an instruction such as the following to the agent's system prompt. The contract-review agent in [Turn on dynamic workflows](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#turn-on-dynamic-workflows) uses this system prompt:
 
 ```text wrap
 You review contracts. When you're asked to review more than a few contracts, start a workflow run that reads them in parallel and combines the findings. Review one or two contracts yourself, without a run.
@@ -1123,7 +1058,7 @@ For a run's events, interrupting a session with runs open, what changes while a 
 
 ## Give the session an advisor
 
-An enabled `advisor` setting in the agent's `multiagent` (csharp, go: `Multiagent`) block gives the session's primary thread an **advisor**: a model it can consult mid-turn for strategic guidance, such as planning an approach, getting unstuck, or reviewing work before finishing. The setting is disabled by default. To enable it, set `advisor` to `{"type": "enabled", "model": "..."}`, which has exactly two fields, `type` and `model`:
+An enabled `advisor` (csharp, go: `Advisor`) setting in the agent's `multiagent` (csharp, go: `Multiagent`) block gives the session's primary thread an **advisor:** a model it can consult mid-turn for strategic guidance, such as planning an approach, moving past an obstacle, or reviewing work before finishing. The setting is disabled by default. To enable it, set `advisor` (csharp, go: `Advisor`) to `{"type": "enabled", "model": "..."}`, which has exactly two fields, `type` and `model`:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
@@ -1186,8 +1121,8 @@ An enabled `advisor` setting in the agent's `multiagent` (csharp, go: `Multiagen
       "You implement backend features end to end. Consult the advisor before major backend design decisions.",
     multiagent: {
       type: "multiagent_20261001",
-      advisor: { type: "enabled", model: "claude-opus-5-5" },
-    },
+      advisor: { type: "enabled", model: "claude-opus-5-5" }
+    }
   });
   console.log(agent.id);
   ```
@@ -1246,7 +1181,7 @@ An enabled `advisor` setting in the agent's `multiagent` (csharp, go: `Multiagen
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Backend engineer',
-      model: 'claude-sonnet-5',
+      model: BetaManagedAgentsModel::CLAUDE_SONNET_5,
       system: 'You implement backend features end to end. Consult the advisor before major backend design decisions.',
       multiagent: [
           'type' => 'multiagent_20261001',
@@ -1259,7 +1194,7 @@ An enabled `advisor` setting in the agent's `multiagent` (csharp, go: `Multiagen
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Backend engineer",
-    model: "claude-sonnet-5",
+    model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_SONNET_5,
     system_: "You implement backend features end to end. Consult the advisor before major backend design decisions.",
     multiagent: {
       type: "multiagent_20261001",
@@ -1274,7 +1209,7 @@ This example sets only `advisor` (csharp, go: `Advisor`). The other two settings
 
 You can't list the advisor in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) or `workflows` (csharp, go: `Workflows`). An enabled `advisor` (csharp, go: `Advisor`) reserves the name `anthropic.advisor`. While it is enabled, neither list can hold an agent literally named `anthropic.advisor`: the request is rejected with a 400 validation error.
 
-The advisor model must meet a minimum capability bar, and the agent's own model must not be more capable than its advisor; models of equal capability can pair. An invalid pairing is rejected with a 400 validation error when the agent is saved, and again when a session is created. The pairing is also checked when each consultation starts: if it's no longer valid, that consultation fails and the session continues. Valid pairings follow the advisor tool's [model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) table.
+The advisor model must meet a minimum capability level, and the agent's own model must not be more capable than its advisor; models of equal capability can pair. An invalid pairing is rejected with a 400 validation error when the agent is saved, and again when a session is created. The pairing is also checked when each consultation starts: if it's no longer valid, that consultation fails and the session continues. Valid pairings follow the advisor tool's [model compatibility](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool#model-compatibility) table.
 
 The advisor is also available as a [server tool on the Messages API](https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool). The Managed Agents surface differs in configuration and delivery: the `advisor` (csharp, go: `Advisor`) setting has no `max_uses`, `max_tokens`, or `caching` fields, and advice arrives through thread events rather than `advisor_tool_result` blocks.
 
@@ -1304,7 +1239,7 @@ Prompt caching on the advisor's side is automatic; there is nothing to configure
 
 ### Removing the advisor
 
-To remove the advisor, [update the agent](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-an-agent) with `advisor` set to `{"type": "disabled"}`. On an agent that already has the `multiagent_20261001` type, a setting that the update leaves out keeps its stored value, so you don't need to send `subagents` or `workflows` again. For the same reason, an update that leaves `advisor` out keeps the advisor. Before you change an existing agent's `multiagent.type`, see [how to move an agent to this type](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#move-from-the-coordinator-type).
+To remove the advisor, [update the agent](https://platform.claude.com/docs/en/managed-agents/agent-setup#update-an-agent) with `advisor` (csharp, go: `Advisor`) set to `{"type": "disabled"}`. On an agent that already has the `multiagent_20261001` type, a setting that the update leaves out keeps its stored value, so you don't need to send `subagents` (csharp, go: `Subagents`) or `workflows` (csharp, go: `Workflows`) again. For the same reason, an update that leaves `advisor` (csharp, go: `Advisor`) out keeps the advisor. Before you change an existing agent's `multiagent.type`, see [how to move an agent to this type](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#move-from-the-coordinator-type).
 
 ## Move from the `coordinator` type
 

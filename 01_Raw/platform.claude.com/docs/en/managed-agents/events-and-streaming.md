@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-10-19T05:32:45.017674+00:00
+fetched_at: 2026-10-26T05:40:05.570926+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Session event stream
 url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-description: Send events, stream responses, and interrupt or redirect your session mid-execution.
+description: Send events, stream responses, and interrupt or redirect your session while it runs.
 featureMetadata:
   topic:
     title: Managed Agents
@@ -33,56 +33,21 @@ These event type strings follow a `{domain}.{action}` naming convention. See [Ev
 
 Stream events from the session to receive real-time updates as the agent works. A stream delivers only the events emitted after it opens, so open the stream before you send events to avoid a race condition.
 
-<CodeGroup exclude="shell:CLI">
+<CodeGroup>
   ```bash cURL
-  # Open the stream first, then send the user message
-  exec {stream}< <(
-    curl --fail-with-body -sS -N \
-      "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "content-type: application/json" \
-      -H "accept: text/event-stream"
-  )
-
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
+  # Open the stream before you send the first event: only later events are delivered.
+  curl --fail-with-body -sS -N \
+    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -d '{
-      "events": [
-        {
-          "type": "user.message",
-          "content": [{"type": "text", "text": "Summarize the repo README"}]
-        }
-      ]
-    }' >/dev/null
-
-  while IFS= read -r -u "$stream" event_line; do
-    [[ $event_line == data:* ]] || continue
-    event_json=${event_line#data: }
-    case $(jq -r '.type' <<<"$event_json") in
-      agent.message)
-        jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
-        ;;
-      session.status_idle)
-        break
-        ;;
-      session.error)
-        printf '\n[Error: %s]\n' "$(jq -r '.error.message // "unknown"' <<<"$event_json")"
-        break
-        ;;
-    esac
-  done
-  exec {stream}<&-
+    -H "accept: text/event-stream"
   ```
 
-  <CodeGroupItem language="CLI">
-    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
-  </CodeGroupItem>
+  ```bash CLI
+  # Open the stream before you send the first event: only later events are delivered.
+  ant beta:sessions:events stream --session-id "$SESSION_ID"
+  ```
 
   ```python Python
   # Open the stream first, then send the user message
@@ -150,15 +115,7 @@ Stream events from the session to receive real-time updates as the agent works. 
       [
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
-              Content =
-              [
-                  new BetaManagedAgentsTextBlock
-                  {
-                      Type = BetaManagedAgentsTextBlockType.Text,
-                      Text = "Summarize the repo README",
-                  },
-              ],
+              Content = [new BetaManagedAgentsTextBlock { Text = "Summarize the repo README" }],
           },
       ],
   });
@@ -195,10 +152,8 @@ Stream events from the session to receive real-time updates as the agent works. 
   	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   						Text: "Summarize the repo README",
   					},
   				}},
@@ -235,7 +190,6 @@ Stream events from the session to receive real-time updates as the agent works. 
           session.id(),
           EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
                   .addTextContent("Summarize the repo README")
                   .build())
               .build()
@@ -326,7 +280,7 @@ Stream events from the session to receive real-time updates as the agent works. 
 
 The session reports errors through the `session.error` event. See [Event types](https://platform.claude.com/docs/en/managed-agents/reference#event-types) for its fields.
 
-The agent's response text arrives as buffered `agent.message` events, each emitted only after the model request that produced it finishes. To render the text while the model is still generating it, see [Preview responses with event deltas](https://platform.claude.com/docs/en/managed-agents/event-deltas).
+The agent's response text arrives as buffered `agent.message` events, each emitted only after the model request that produced it completes. To render the text while the model is still generating it, see [Preview responses with event deltas](https://platform.claude.com/docs/en/managed-agents/event-deltas).
 
 ### Reconnect without missing events
 
@@ -336,49 +290,10 @@ To reconnect to an existing session without missing events, combine a new stream
 2. [List the full event history](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#list-past-events) to seed a set of seen event IDs.
 3. Tail the live stream, skipping any events already returned by the history list.
 
-<CodeGroup exclude="shell:CLI">
-  ```bash cURL
-  exec {stream}< <(
-    curl --fail-with-body -sS -N \
-      "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "content-type: application/json" \
-      -H "accept: text/event-stream"
-  )
-
-  # Stream is open and buffering. List history before tailing live.
-  declare -A seen_event_ids
-  while IFS= read -r event_id; do
-    seen_event_ids[$event_id]=1
-  done < <(
-    curl --fail-with-body -sS \
-      "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "content-type: application/json" | jq -r '.data[].id'
-  )
-
-  # Tail live events, skipping anything already seen
-  while IFS= read -r -u "$stream" event_line; do
-    [[ $event_line == data:* ]] || continue
-    event_json=${event_line#data: }
-    event_id=$(jq -r '.id' <<<"$event_json")
-    [[ -n ${seen_event_ids[$event_id]+seen} ]] && continue
-    seen_event_ids[$event_id]=1
-    case $(jq -r '.type' <<<"$event_json") in
-      agent.message)
-        jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
-        ;;
-      session.status_idle)
-        break
-        ;;
-    esac
-  done
-  exec {stream}<&-
-  ```
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
     This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
@@ -418,7 +333,7 @@ To reconnect to an existing session without missing events, combine a new stream
 
   // Tail live events, skipping anything already seen
   tail: for await (const event of stream) {
-    // Preview events (event_start/event_delta) carry no top-level id
+    // Preview events (event_start/event_delta) carry no top-level `id`
     if (event.type === "event_start" || event.type === "event_delta") {
       continue;
     }
@@ -573,7 +488,7 @@ To reconnect to an existing session without missing events, combine a new stream
   seen_event_ids = Set.new
   client.beta.sessions.events.list(session.id).auto_paging_each { seen_event_ids << it.id }
 
-  # Tail live events, skipping anything already seen — Set#add? returns nil for duplicates
+  # Tail live events, skipping anything already seen (Set#add? returns nil for duplicates)
   stream.each do |event|
     next unless seen_event_ids.add?(event.id)
     case event
@@ -646,11 +561,11 @@ Send a `user.message` event to start or continue the agent's work:
         content: [
           {
             type: "text",
-            text: "Analyze the performance of the sort function in utils.py",
-          },
-        ],
-      },
-    ],
+            text: "Analyze the performance of the sort function in utils.py"
+          }
+        ]
+      }
+    ]
   });
   ```
 
@@ -661,12 +576,10 @@ Send a `user.message` event to start or continue the agent's work:
       [
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
               Content =
               [
                   new BetaManagedAgentsTextBlock
                   {
-                      Type = BetaManagedAgentsTextBlockType.Text,
                       Text = "Analyze the performance of the sort function in utils.py",
                   },
               ],
@@ -679,10 +592,8 @@ Send a `user.message` event to start or continue the agent's work:
   if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   					Text: "Analyze the performance of the sort function in utils.py",
   				},
   			}},
@@ -698,7 +609,6 @@ Send a `user.message` event to start or continue the agent's work:
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-              .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
               .addTextContent("Analyze the performance of the sort function in utils.py")
               .build())
           .build());
@@ -755,7 +665,7 @@ No event you send resumes a session paused at its budget. The work that the budg
 
 ## Answer tool calls that pause the session
 
-A session pauses when the agent invokes a [custom tool](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools), and when a tool call needs your confirmation under a [permission policy](https://platform.claude.com/docs/en/managed-agents/permission-policies). Both pauses follow the same sequence:
+A session pauses when the agent calls a [custom tool](https://platform.claude.com/docs/en/managed-agents/tools#custom-tools), and when a tool call needs your confirmation under a [permission policy](https://platform.claude.com/docs/en/managed-agents/permission-policies). Both pauses follow the same sequence:
 
 1. The session emits the tool call as an `agent.custom_tool_use`, `agent.tool_use`, or `agent.mcp_tool_use` event.
 2. The session pauses with a `session.status_idle` event whose `stop_reason.type` is `requires_action`. The blocking event IDs are in the `stop_reason.event_ids` array.
@@ -774,42 +684,10 @@ When you [reconnect](https://platform.claude.com/docs/en/managed-agents/events-a
 
 The following example answers each call as it arrives:
 
-<CodeGroup exclude="shell:CLI">
-  ```bash cURL
-  exec {stream_fd}< <(curl --fail-with-body -sS -N \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -H "accept: text/event-stream")
-
-  while IFS= read -r -u "$stream_fd" line; do
-    [[ $line == data:* ]] || continue
-    event_json="${line#data: }"
-    case $(jq -r '.type' <<<"$event_json") in
-      agent.custom_tool_use)
-        # Execute the tool and send the result back
-        result=$(call_tool "$(jq -r '.name' <<<"$event_json")" "$(jq -c '.input' <<<"$event_json")")
-        jq --arg result "$result" \
-          '{events: [{type: "user.custom_tool_result", custom_tool_use_id: .id, content: [{type: "text", text: $result}]}]}' <<<"$event_json" |
-          curl --fail-with-body -sS \
-            "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-beta: managed-agents-2026-04-01" \
-            -H "content-type: application/json" \
-            -d @-
-        ;;
-      session.status_idle)
-        if [[ $(jq -r '.stop_reason.type' <<<"$event_json") == end_turn ]]; then
-          break
-        fi
-        ;;
-    esac
-  done
-  exec {stream_fd}<&-
-  ```
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
     This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
@@ -820,10 +698,8 @@ The following example answers each call as it arrives:
       for event in stream:
           match event.type:
               case "agent.custom_tool_use":
-                  # Execute the tool
                   result = call_tool(event.name, event.input)
 
-                  # Send the result back
                   client.beta.sessions.events.send(
                       session.id,
                       events=[
@@ -845,18 +721,16 @@ The following example answers each call as it arrives:
   loop: for await (const event of stream) {
     switch (event.type) {
       case "agent.custom_tool_use": {
-        // Execute the tool
         const result = await callTool(event.name, event.input);
 
-        // Send the result back
         await client.beta.sessions.events.send(session.id, {
           events: [
             {
               type: "user.custom_tool_result",
               custom_tool_use_id: event.id,
-              content: [{ type: "text", text: result }],
-            },
-          ],
+              content: [{ type: "text", text: result }]
+            }
+          ]
         });
         break;
       }
@@ -874,26 +748,16 @@ The following example answers each call as it arrives:
   {
       if (streamEvent.Value is BetaManagedAgentsAgentCustomToolUseEvent toolUse)
       {
-          // Execute the tool
           var result = await CallTool(toolUse.Name, toolUse.Input);
 
-          // Send the result back
           await client.Beta.Sessions.Events.Send(session.ID, new()
           {
               Events =
               [
                   new BetaManagedAgentsUserCustomToolResultEventParams
                   {
-                      Type = BetaManagedAgentsUserCustomToolResultEventParamsType.UserCustomToolResult,
                       CustomToolUseID = toolUse.ID,
-                      Content =
-                      [
-                          new BetaManagedAgentsTextBlock
-                          {
-                              Type = BetaManagedAgentsTextBlockType.Text,
-                              Text = result,
-                          },
-                      ],
+                      Content = [new BetaManagedAgentsTextBlock { Text = result }],
                   },
               ],
           });
@@ -914,17 +778,13 @@ The following example answers each call as it arrives:
   	for stream.Next() {
   		switch event := stream.Current().AsAny().(type) {
   		case anthropic.BetaManagedAgentsAgentCustomToolUseEvent:
-  			// Execute the tool
   			result := callTool(event.Name, event.Input)
-  			// Send the result back
   			if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   				Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   					OfUserCustomToolResult: &anthropic.BetaManagedAgentsUserCustomToolResultEventParams{
-  						Type:            anthropic.BetaManagedAgentsUserCustomToolResultEventParamsTypeUserCustomToolResult,
   						CustomToolUseID: event.ID,
   						Content: []anthropic.BetaManagedAgentsUserCustomToolResultEventParamsContentUnion{{
   							OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  								Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   								Text: result,
   							},
   						}},
@@ -950,16 +810,13 @@ The following example answers each call as it arrives:
       for (var event : (Iterable<BetaManagedAgentsStreamSessionEvents>) stream.stream()::iterator) {
           switch (event.type().value()) {
               case AGENT_CUSTOM_TOOL_USE -> {
-                  // Execute the tool
                   var toolUse = event.asAgentCustomToolUse();
                   var result = callTool(toolUse.name(), toolUse.input());
 
-                  // Send the result back
                   client.beta().sessions().events().send(
                       session.id(),
                       EventSendParams.builder()
                           .addEvent(BetaManagedAgentsUserCustomToolResultEventParams.builder()
-                              .type(BetaManagedAgentsUserCustomToolResultEventParams.Type.USER_CUSTOM_TOOL_RESULT)
                               .customToolUseId(toolUse.id())
                               .addTextContent(result)
                               .build())
@@ -981,10 +838,8 @@ The following example answers each call as it arrives:
   foreach ($stream as $event) {
       switch (true) {
           case $event instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsAgentCustomToolUseEvent:
-              // Execute the tool
               $result = callTool($event->name, $event->input);
 
-              // Send the result back
               $client->beta->sessions->events->send(
                   $session->id,
                   events: [
@@ -1009,9 +864,7 @@ The following example answers each call as it arrives:
   client.beta.sessions.events.stream_events(session.id).each do |event|
     case event
     when Anthropic::Beta::Sessions::BetaManagedAgentsAgentCustomToolUseEvent
-      # Execute the tool
       result = call_tool.call(event.name, event.input)
-      # Send the result back
       client.beta.sessions.events.send_(
         session.id,
         events: [
@@ -1037,42 +890,10 @@ Send a `user.tool_confirmation` event, passing the event ID in the `tool_use_id`
 
 The following example approves every pending call:
 
-<CodeGroup exclude="shell:CLI">
-  ```bash cURL
-  exec {stream_fd}< <(curl --fail-with-body -sS -N \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -H "accept: text/event-stream")
-
-  while IFS= read -r -u "$stream_fd" line; do
-    [[ $line == data:* ]] || continue
-    event_json="${line#data: }"
-    stop_reason=$(jq -r 'select(.type == "session.status_idle") | .stop_reason.type // empty' <<<"$event_json")
-    case "$stop_reason" in
-      requires_action)
-        while IFS= read -r event_id; do
-          # Approve the pending tool call
-          jq -n --arg id "$event_id" \
-            '{events: [{type: "user.tool_confirmation", tool_use_id: $id, result: "allow"}]}' |
-            curl --fail-with-body -sS \
-              "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-              -H "x-api-key: $ANTHROPIC_API_KEY" \
-              -H "anthropic-version: 2023-06-01" \
-              -H "anthropic-beta: managed-agents-2026-04-01" \
-              -H "content-type: application/json" \
-              -d @-
-        done < <(jq -r '.stop_reason.event_ids[]' <<<"$event_json")
-        ;;
-      end_turn)
-        break
-        ;;
-    esac
-  done
-  exec {stream_fd}<&-
-  ```
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
     This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
@@ -1085,7 +906,6 @@ The following example approves every pending call:
               match stop_reason.type:
                   case "requires_action":
                       for event_id in stop_reason.event_ids:
-                          # Approve the pending tool call
                           client.beta.sessions.events.send(
                               session.id,
                               events=[
@@ -1115,15 +935,14 @@ The following example approves every pending call:
     }
 
     for (const eventId of event.stop_reason.event_ids) {
-      // Approve the pending tool call
       await client.beta.sessions.events.send(session.id, {
         events: [
           {
             type: "user.tool_confirmation",
             tool_use_id: eventId,
-            result: "allow",
-          },
-        ],
+            result: "allow"
+          }
+        ]
       });
     }
   }
@@ -1138,14 +957,12 @@ The following example approves every pending call:
       {
           foreach (var eventId in requiresAction.EventIds)
           {
-              // Approve the pending tool call
               await client.Beta.Sessions.Events.Send(session.ID, new()
               {
                   Events =
                   [
                       new BetaManagedAgentsUserToolConfirmationEventParams
                       {
-                          Type = BetaManagedAgentsUserToolConfirmationEventParamsType.UserToolConfirmation,
                           ToolUseID = eventId,
                           Result = BetaManagedAgentsUserToolConfirmationEventParamsResult.Allow,
                       },
@@ -1173,11 +990,9 @@ The following example approves every pending call:
   		switch stopReason := event.StopReason.AsAny().(type) {
   		case anthropic.BetaManagedAgentsSessionRequiresAction:
   			for _, eventID := range stopReason.EventIDs {
-  				// Approve the pending tool call
   				if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   					Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   						OfUserToolConfirmation: &anthropic.BetaManagedAgentsUserToolConfirmationEventParams{
-  							Type:      anthropic.BetaManagedAgentsUserToolConfirmationEventParamsTypeUserToolConfirmation,
   							ToolUseID: eventID,
   							Result:    anthropic.BetaManagedAgentsUserToolConfirmationEventParamsResultAllow,
   						},
@@ -1203,12 +1018,10 @@ The following example approves every pending call:
           .takeWhile(stopReason -> !stopReason.isEndTurn())
           .filter(stopReason -> stopReason.isRequiresAction())
           .flatMap(stopReason -> stopReason.asRequiresAction().eventIds().stream())
-          // Approve each pending tool call
           .forEach(toolUseId -> client.beta().sessions().events().send(
               session.id(),
               EventSendParams.builder()
                   .addEvent(BetaManagedAgentsUserToolConfirmationEventParams.builder()
-                      .type(BetaManagedAgentsUserToolConfirmationEventParams.Type.USER_TOOL_CONFIRMATION)
                       .toolUseId(toolUseId)
                       .result(BetaManagedAgentsUserToolConfirmationEventParams.Result.ALLOW)
                       .build())
@@ -1224,7 +1037,6 @@ The following example approves every pending call:
           switch (true) {
               case $event->stopReason instanceof \Anthropic\Beta\Sessions\Events\ManagedAgentsSessionRequiresAction:
                   foreach ($event->stopReason->eventIDs as $eventId) {
-                      // Approve the pending tool call
                       $client->beta->sessions->events->send(
                           $session->id,
                           events: [
@@ -1252,7 +1064,6 @@ The following example approves every pending call:
       case stop_reason
       when Anthropic::Beta::Sessions::BetaManagedAgentsSessionRequiresAction
         stop_reason.event_ids.each do |event_id|
-          # Approve the pending tool call
           client.beta.sessions.events.send_(
             session.id,
             events: [
@@ -1334,11 +1145,11 @@ Sessions persist between interactions. To resume a session, send a `user.message
         content: [
           {
             type: "text",
-            text: "Now run the tests against the changes you made earlier.",
-          },
-        ],
-      },
-    ],
+            text: "Now run the tests against the changes you made earlier."
+          }
+        ]
+      }
+    ]
   });
   ```
 
@@ -1351,12 +1162,10 @@ Sessions persist between interactions. To resume a session, send a `user.message
       [
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
               Content =
               [
                   new BetaManagedAgentsTextBlock
                   {
-                      Type = BetaManagedAgentsTextBlockType.Text,
                       Text = "Now run the tests against the changes you made earlier.",
                   },
               ],
@@ -1371,10 +1180,8 @@ Sessions persist between interactions. To resume a session, send a `user.message
   if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   					Text: "Now run the tests against the changes you made earlier.",
   				},
   			}},
@@ -1392,7 +1199,6 @@ Sessions persist between interactions. To resume a session, send a `user.message
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-              .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
               .addTextContent("Now run the tests against the changes you made earlier.")
               .build())
           .build());
@@ -1418,7 +1224,7 @@ Sessions persist between interactions. To resume a session, send a `user.message
   ```
 
   ```ruby Ruby
-  # Resuming a session is just sending the next event to it. In production,
+  # To resume a session, send it the next event. In production,
   # pass the session ID you stored when the session was created.
   client.beta.sessions.events.send_(
     session.id,
@@ -1442,7 +1248,7 @@ Conversation history is preserved unless the session is explicitly deleted. When
 
 ## Interrupt the agent
 
-Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
+Send a `user.interrupt` event to stop the agent while it runs, then follow up with a `user.message` event to redirect it:
 
 <CodeGroup>
   ```bash cURL
@@ -1510,11 +1316,11 @@ Send a `user.interrupt` event to stop the agent mid-execution, then follow up wi
         content: [
           {
             type: "text",
-            text: "Instead, focus on fixing the bug in line 42.",
-          },
-        ],
-      },
-    ],
+            text: "Instead, focus on fixing the bug in line 42."
+          }
+        ]
+      }
+    ]
   });
   ```
 
@@ -1525,18 +1331,13 @@ Send a `user.interrupt` event to stop the agent mid-execution, then follow up wi
   {
       Events =
       [
-          new BetaManagedAgentsUserInterruptEventParams
-          {
-              Type = BetaManagedAgentsUserInterruptEventParamsType.UserInterrupt,
-          },
+          new BetaManagedAgentsUserInterruptEventParams(),
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
               Content =
               [
                   new BetaManagedAgentsTextBlock
                   {
-                      Type = BetaManagedAgentsTextBlockType.Text,
                       Text = "Instead, focus on fixing the bug in line 42.",
                   },
               ],
@@ -1551,16 +1352,12 @@ Send a `user.interrupt` event to stop the agent mid-execution, then follow up wi
   if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{
   		{
-  			OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{
-  				Type: anthropic.BetaManagedAgentsUserInterruptEventParamsTypeUserInterrupt,
-  			},
+  			OfUserInterrupt: &anthropic.BetaManagedAgentsUserInterruptEventParams{},
   		},
   		{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   						Text: "Instead, focus on fixing the bug in line 42.",
   					},
   				}},
@@ -1578,11 +1375,8 @@ Send a `user.interrupt` event to stop the agent mid-execution, then follow up wi
   client.beta().sessions().events().send(
       session.id(),
       EventSendParams.builder()
-          .addEvent(BetaManagedAgentsUserInterruptEventParams.builder()
-              .type(BetaManagedAgentsUserInterruptEventParams.Type.USER_INTERRUPT)
-              .build())
+          .addEvent(BetaManagedAgentsUserInterruptEventParams.builder().build())
           .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-              .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
               .addTextContent("Instead, focus on fixing the bug in line 42.")
               .build())
           .build());
@@ -1632,7 +1426,7 @@ The call returns as soon as the events are queued. The interrupt then takes effe
 2. The `user.interrupt` event appears on the stream, and the interrupted turn ends with a `session.status_idle` event.
 3. The agent starts its next turn with the `user.message` you sent after the interrupt.
 
-The idle event's `stop_reason.type` is `end_turn`, the same value as a turn that finishes on its own. If workflow runs are open, the interrupt ends none of them. A run that's running can keep the session `running`, so the `session.status_idle` event in step 2 might not arrive. See [Interrupt a session with runs open](https://platform.claude.com/docs/en/managed-agents/workflow-runs#interrupt-a-session-with-runs-open).
+The idle event's `stop_reason.type` is `end_turn`, the same value as a turn that completes on its own. If workflow runs are open, the interrupt ends none of them. A run that's running can keep the session `running`, so the `session.status_idle` event in step 2 might not arrive. See [Interrupt a session with runs open](https://platform.claude.com/docs/en/managed-agents/workflow-runs#interrupt-a-session-with-runs-open).
 
 ## List past events
 
@@ -1733,7 +1527,7 @@ Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to r
 
   ```typescript TypeScript
   const events = await client.beta.sessions.events.list(session.id, {
-    types: ["agent.tool_use", "agent.tool_result"],
+    types: ["agent.tool_use", "agent.tool_result"]
   });
   for (const event of events.data) {
     console.log(`[${event.type}] ${event.processed_at}`);
@@ -1775,9 +1569,9 @@ Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to r
           .build());
   for (var event : events.data()) {
       event.agentToolUse().ifPresent(toolUse ->
-          IO.println("[" + toolUse.type() + "] " + toolUse.processedAt()));
+          IO.println("[" + toolUse._type() + "] " + toolUse.processedAt()));
       event.agentToolResult().ifPresent(toolResult ->
-          IO.println("[" + toolResult.type() + "] " + toolResult.processedAt()));
+          IO.println("[" + toolResult._type() + "] " + toolResult.processedAt()));
   }
   ```
 
@@ -1805,7 +1599,7 @@ Pass a `types` (curl: `types[]`; cli: `--type`; csharp, go: `Types`) filter to r
 
 On a [supported model](https://platform.claude.com/docs/en/managed-agents/events-and-streaming#supported-models), send a `system.message` event to give the agent privileged system-level context. The context applies to the accompanying turn and all subsequent turns. Use it when the agent needs updated system-level guidance mid-session, for example a different persona, revised constraints, or context fetched at runtime.
 
-The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
+The event's `content` (csharp, go: `Content`) accepts 1–1,000 text items. The content is appended to the session's system context as a `role: "system"` turn. It doesn't replace the top-level system prompt, which the `system` (csharp, go: `System`; ruby: `system_`) field on the agent definition sets.
 
 <CodeGroup>
   ```bash cURL
@@ -1861,11 +1655,11 @@ The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The c
         content: [
           {
             type: "text",
-            text: "The user's current timezone is America/New_York.",
-          },
-        ],
-      },
-    ],
+            text: "The user's current timezone is America/New_York."
+          }
+        ]
+      }
+    ]
   });
   ```
 
@@ -1876,12 +1670,10 @@ The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The c
       [
           new BetaManagedAgentsSystemMessageEventParams
           {
-              Type = BetaManagedAgentsSystemMessageEventParamsType.SystemMessage,
               Content =
               [
                   new BetaManagedAgentsSystemContentBlock
                   {
-                      Type = BetaManagedAgentsSystemContentBlockType.Text,
                       Text = "The user's current timezone is America/New_York.",
                   },
               ],
@@ -1894,9 +1686,7 @@ The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The c
   if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   	Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   		OfSystemMessage: &anthropic.BetaManagedAgentsSystemMessageEventParams{
-  			Type: anthropic.BetaManagedAgentsSystemMessageEventParamsTypeSystemMessage,
   			Content: []anthropic.BetaManagedAgentsSystemContentBlockParam{{
-  				Type: anthropic.BetaManagedAgentsSystemContentBlockTypeText,
   				Text: "The user's current timezone is America/New_York.",
   			}},
   		},
@@ -1911,7 +1701,6 @@ The event's `content` (csharp, go: `Content`) accepts 1–1000 text items. The c
       session.id(),
       EventSendParams.builder()
           .addEvent(BetaManagedAgentsSystemMessageEventParams.builder()
-              .type(BetaManagedAgentsSystemMessageEventParams.Type.SYSTEM_MESSAGE)
               .addTextContent("The user's current timezone is America/New_York.")
               .build())
           .build());
@@ -1981,7 +1770,7 @@ While the session is idle with a `requires_action` stop reason, a `system.messag
   </Card>
 
   <Card title="Subscribe to webhooks" icon="link" href="https://platform.claude.com/docs/en/managed-agents/webhooks">
-    Get notified when major events happen without polling.
+    Get notified when major events occur without polling.
   </Card>
 
   <Card title="Event types" icon="book" href="https://platform.claude.com/docs/en/managed-agents/reference#event-types">

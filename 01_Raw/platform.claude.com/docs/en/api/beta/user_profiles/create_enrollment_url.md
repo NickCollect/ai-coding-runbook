@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/user_profiles/create_enrollment_url
-fetched_at: 2026-10-19T05:32:57.292320+00:00
+fetched_at: 2026-10-26T05:40:30.061352+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ Create Enrollment URL
 
 - `"anthropic-beta": optional array of AnthropicBeta`
 
-  This endpoint is in beta: requests must send `user-profiles-2026-03-24`, `user-profiles-2026-08-18`, or `user-profiles-2026-09-04` in this header.
+  Optional header to specify the beta version(s) you want to use.
 
   - `string`
 
@@ -137,6 +137,8 @@ Create Enrollment URL
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -147,7 +149,7 @@ Create Enrollment URL
 
 - `BetaUserProfileEnrollmentURL object`
 
-  A URL to give to the entity that a user profile represents, so that the entity can enroll for a trust grant.
+  A URL to give to the entity that a user profile represents, so that the entity can enroll in a program.
 
   - `type: "enrollment_url"`
 
@@ -168,9 +170,9 @@ Create Enrollment URL
 ```bash
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url \
     -X POST \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: user-profiles-2026-08-18' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

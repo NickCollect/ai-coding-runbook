@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/models/retrieve
-fetched_at: 2026-10-19T05:32:53.408348+00:00
+fetched_at: 2026-10-26T05:40:22.601025+00:00
 fetch_method: mintlify_md
 ---
 
@@ -138,6 +138,8 @@ The Models API response can be used to determine information about a specific mo
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -289,9 +291,13 @@ The Models API response can be used to determine information about a specific mo
 
           Whether the model accepts thinking with type 'adaptive' (the model decides whether and how much to think).
 
+        - `between_tools: BetaCapabilitySupport`
+
+          Whether the model accepts thinking with type 'between_tools' (thinking turned off, and any short progress updates the model writes between tool calls come back as thinking blocks). False exactly when a request that sends it gets a 400 from this model. A request that sends 'between_tools' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
+
         - `disabled: BetaCapabilitySupport`
 
-          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking.
+          Whether the model accepts thinking with type 'disabled' (thinking turned off). False exactly when a request that sends it gets a 400 from this model. True on a model that does not support thinking. A request that sends 'disabled' can still be rejected for another reason, such as an effort level the model does not allow with thinking off.
 
         - `enabled: BetaCapabilitySupport`
 
@@ -361,8 +367,8 @@ The Models API response can be used to determine information about a specific mo
 
 ```bash
 curl https://api.anthropic.com/v1/models/$MODEL_ID \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -441,6 +447,9 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
       "supported": true,
       "types": {
         "adaptive": {
+          "supported": true
+        },
+        "between_tools": {
           "supported": true
         },
         "disabled": {

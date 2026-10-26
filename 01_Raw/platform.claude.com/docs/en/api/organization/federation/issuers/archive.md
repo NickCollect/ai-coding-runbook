@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/federation/issuers/archive
-fetched_at: 2026-10-12T06:49:55.388712+00:00
+fetched_at: 2026-10-26T05:40:19.649845+00:00
 fetch_method: mintlify_md
 ---
 
@@ -180,8 +180,8 @@ issuer cannot be changed), or recreate them against another issuer.
 ```bash
 curl https://api.anthropic.com/v1/organizations/federation_issuers/$FEDERATION_ISSUER_ID/archive \
     -X POST \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

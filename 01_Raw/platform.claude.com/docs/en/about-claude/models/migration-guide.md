@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/models/migration-guide
-fetched_at: 2026-10-12T06:49:51.150430+00:00
+fetched_at: 2026-10-26T05:40:12.807589+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ description: Guides for migrating to the latest Claude models from previous Clau
 
 ## Get help
 
-* Check the [API documentation](https://platform.claude.com/docs/en/api/overview) for detailed specifications
-* Review [model capabilities](https://platform.claude.com/docs/en/models/overview) for performance comparisons
-* Review [API release notes](https://platform.claude.com/docs/en/release-notes/overview) for API updates
-* Contact support if you encounter any issues during migration
+* Check the [API overview](https://platform.claude.com/docs/en/api/overview) for detailed specifications.
+* Review [model capabilities](https://platform.claude.com/docs/en/models/overview) for performance comparisons.
+* Review [Claude Platform release notes](https://platform.claude.com/docs/en/release-notes/overview) for API updates.
+* Contact support if you encounter any issues during migration.

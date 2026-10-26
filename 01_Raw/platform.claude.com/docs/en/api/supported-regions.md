@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/supported-regions
-fetched_at: 2026-08-17T02:15:18.805409+00:00
+fetched_at: 2026-10-26T05:40:15.930661+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Supported regions
 url: https://platform.claude.com/docs/en/api/supported-regions
-description: "Here are the countries, regions, and territories we can currently support access from:"
+description: "Here are the countries, regions, and territories Anthropic can support access from:"
 ---
 
 * Albania

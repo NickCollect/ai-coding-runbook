@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-haiku-3
-fetched_at: 2026-08-31T06:29:35.672324+00:00
+fetched_at: 2026-10-26T05:40:14.454651+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Claude Haiku 3 system prompts
 url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-haiku-3
-description: See updates to the core system prompt for Claude Haiku 3 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+description: See updates to the core system prompt for Claude Haiku 3 on [claude.ai](https://claude.ai), the [Claude iOS app](https://anthropic.com/ios), and the [Claude Android app](https://anthropic.com/android).
 ---
 
 ## July 12, 2024

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rbac_groups/members/list
-fetched_at: 2026-10-12T06:50:08.584511+00:00
+fetched_at: 2026-10-26T05:40:37.530152+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,12 +75,6 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
     ID of the User.
 
-  - `group_id: string`
-
-    **Deprecated**: Use `rbac_group_id` instead; `group_id` always has the same value.
-
-    Deprecated: use `rbac_group_id` instead. ID of the RBAC Group; always the same value as `rbac_group_id`.
-
 - `has_more: boolean`
 
   Indicates if there are more results in the requested page direction.
@@ -93,8 +87,8 @@ The RBAC Groups API is available to Claude Enterprise organizations only.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/members \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -105,7 +99,6 @@ curl https://api.anthropic.com/v1/organizations/rbac_groups/$RBAC_GROUP_ID/membe
     {
       "created_at": "2024-10-30T23:58:27.427722Z",
       "email": "user@emaildomain.com",
-      "group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "type": "rbac_group_member",
       "user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q"

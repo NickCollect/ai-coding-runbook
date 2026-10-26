@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock
-fetched_at: 2026-10-19T05:32:44.091182+00:00
+fetched_at: 2026-10-26T05:40:03.795680+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,10 +22,10 @@ Amazon Bedrock sets access criteria for each Claude model individually. Claude F
 
 ## Prerequisites
 
-Before you begin, ensure you have:
+Before you start, ensure you have:
 
-* An AWS account with [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) enabled for the Claude models you intend to use.
-* The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed and configured (optional, for credential management).
+* An AWS account with [Amazon Bedrock model access](https://console.aws.amazon.com/bedrock/home#/modelaccess) enabled for the Claude models you intend to use
+* The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed and configured (optional, for credential management)
 
 Claude Mythos Preview additionally requires a dedicated AWS account that has been allowlisted by the Bedrock Marketplace team. Your Anthropic account executive can submit your account ID for allowlisting (typically processed within 24 hours), and AWS sends a welcome email once it's complete.
 
@@ -43,7 +43,7 @@ Use a Bedrock service role with AWS-managed keys for the most secure, long-lived
   </Step>
 
   <Step title="Developer: pass the role">
-    When calling the API, Bedrock assumes the service role on your behalf. See the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-mantle.html) for how to associate the role with your requests.
+    When you call the API, Bedrock assumes the service role on your behalf. See the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/bedrock-mantle.html) for how to associate the role with your requests.
   </Step>
 </Steps>
 
@@ -100,7 +100,7 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
 
   <Tab title="Go">
     ```bash
-    go get github.com/anthropics/anthropic-sdk-go/bedrock
+    go get github.com/anthropics/anthropic-sdk-go/v2/bedrock
     ```
   </Tab>
 
@@ -108,8 +108,8 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:2.73.0")
-        implementation("com.anthropic:anthropic-java-bedrock:2.73.0")
+        implementation("com.anthropic:anthropic-java:3.3.0")
+        implementation("com.anthropic:anthropic-java-bedrock:3.3.0")
         ```
       </Tab>
 
@@ -118,12 +118,12 @@ Anthropic's [client SDKs](https://platform.claude.com/docs/en/cli-sdks-libraries
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>2.73.0</version>
+            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-bedrock</artifactId>
-            <version>2.73.0</version>
+            <version>3.3.0</version>
         </dependency>
         ```
       </Tab>
@@ -156,7 +156,7 @@ The SDK resolves credentials and region using the standard AWS precedence: const
     ```bash
     curl https://bedrock-mantle.us-east-1.api.aws/anthropic/v1/messages \
       --aws-sigv4 "aws:amz:us-east-1:bedrock-mantle" \
-      --user "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
+      -u "$AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY" \
       -H "x-amz-security-token: $AWS_SESSION_TOKEN" \
       -H "content-type: application/json" \
       -H "anthropic-version: 2023-06-01" \
@@ -222,7 +222,7 @@ The SDK resolves credentials and region using the standard AWS precedence: const
     {
         Model = "anthropic.claude-opus-5-5",
         MaxTokens = 1024,
-        Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
+        Messages = [new UserMessageParam { Content = "Hello, Claude" }],
     });
 
     foreach (var item in message.Content)
@@ -288,9 +288,9 @@ The SDK resolves credentials and region using the standard AWS precedence: const
         );
 
         message.content().stream()
-                .filter(ContentBlock::isText)
-                .findFirst()
-                .ifPresent(block -> IO.println(block.asText().text()));
+            .filter(ContentBlock::isText)
+            .findFirst()
+            .ifPresent(block -> IO.println(block.asText().text()));
     }
     ```
   </Tab>
@@ -331,7 +331,7 @@ The SDK resolves credentials and region using the standard AWS precedence: const
 </Tabs>
 
 <Tip>
-  You can also create the standard client with `Anthropic` (go: `anthropic.NewClient()`; java: `AnthropicOkHttpClient.builder()`; csharp: `AnthropicClient`; php: `Anthropic\Client`; ruby: `Anthropic::Client`): set `base_url` (typescript: `baseURL`; go: `option.WithBaseURL()`; java: `.baseUrl()`; csharp: `BaseUrl`; php: `baseUrl`) to `https://bedrock-mantle.{region}.api.aws/anthropic` and pass your bearer token as `api_key` (typescript, php: `apiKey`; go: `option.WithAPIKey()`; java: `.apiKey()`; csharp: `ApiKey`). This path supports bearer-token authentication only. SigV4 signing requires `AnthropicBedrockMantle` (csharp: `AnthropicBedrockMantleClient`; go: `bedrock.NewMantleClient`; java: `BedrockMantleBackend`; php: `MantleClient`; ruby: `Anthropic::BedrockMantleClient`).
+  You can also create the standard client with `Anthropic` (go: `anthropic.NewClient()`; java: `AnthropicOkHttpClient.builder()`; csharp: `AnthropicClient`; php: `Anthropic\Client`; ruby: `Anthropic::Client`): set `base_url` (typescript: `baseURL`; go: `option.WithBaseURL()`; java: `.baseUrl()`; csharp: `BaseUrl`; php: `baseUrl`) to `https://bedrock-mantle.{region}.api.aws/anthropic` and pass your bearer token as `api_key` (typescript, php: `apiKey`; go: `option.WithAPIKey()`; java: `.apiKey()`; csharp: `ApiKey`). This path supports bearer-token authentication only. SigV4 signing requires `AnthropicBedrockMantle` (csharp: `AnthropicBedrockMantleClient`; go: `bedrock.NewMantleClient()`; java: `BedrockMantleBackend`; php: `MantleClient`; ruby: `Anthropic::BedrockMantleClient`).
 </Tip>
 
 ## Supported models
@@ -357,7 +357,15 @@ Model IDs in Claude in Amazon Bedrock carry an `anthropic.` provider prefix. Mod
 Use the latest version of Claude Code with Claude in Amazon Bedrock; run `claude update` to upgrade.
 
 <Tip>
-  Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to apply model ID swaps and breaking parameter changes across your codebase. The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform. See [Migrating to a newer Claude model](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).
+  Upgrading to a newer Claude model? The [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model) in Claude Code applies model ID swaps and breaking parameter changes across your code base:
+
+  Let Claude Code migrate your code for you
+
+  ```text
+  /claude-api migrate this project to the latest Claude Opus model
+  ```
+
+  The skill detects which cloud platform your code targets and adjusts model ID formats and feature changes for that platform.
 </Tip>
 
 ## Feature support
@@ -371,10 +379,10 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 * [Thinking](https://platform.claude.com/docs/en/build-with-claude/thinking)
 * [Tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview), including the [Bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool), [Computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool), [Memory tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool), and [Text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool)
 * [Citations](https://platform.claude.com/docs/en/build-with-claude/citations)
+* [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 
 ### Features not supported
 
-* [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
 * Input sources (URL sources for images and documents, Files API)
 * Server-side tools (code execution, web search, web fetch, advisor)
 * Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
@@ -388,7 +396,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 Claude in Amazon Bedrock is available in the following AWS regions. Amazon Bedrock offers two endpoint types:
 
 * **Global:** dynamic routing across all available regions for maximum availability. No pricing premium.
-* **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10% pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
+* **Regional:** the endpoint resolves to the single AWS region you specify, for data-residency requirements. Regional endpoints carry a 10 percent pricing premium over global endpoints. To route across multiple regions within a geography, use an [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html) (US, EU, JP, or AU). Regions marked **In-region only** in the table support direct single-region routing without an inference profile.
 
 The global endpoint is available for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5.5, Claude Sonnet 5, Claude Haiku 5.5, and Claude Haiku 4.5. For Claude Fable 5.1, regional endpoints are currently available in `us-east-1` only. Claude Mythos Preview is regional only and is available in `us-east-1`.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-10-19T05:32:44.340640+00:00
+fetched_at: 2026-10-26T05:40:04.061534+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,13 @@ featureMetadata:
 This guide walks you through creating an agent, setting up an environment, starting a session, and streaming agent responses.
 
 <Tip>
-  **Prefer an interactive walkthrough?** Run `/claude-api managed-agents-onboard` in the latest version of [Claude Code](https://claude.com/product/claude-code) for a guided setup and interactive question-answering.
+  **Prefer an interactive walkthrough?** The latest version of [Claude Code](https://claude.com/product/claude-code) can guide you through the setup and answer your questions:
+
+  Let Claude Code set up your agent for you
+
+  ```text
+  /claude-api managed-agents-onboard
+  ```
 </Tip>
 
 ## Core concepts
@@ -33,8 +39,8 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ## Prerequisites
 
-* A [Claude Console account](https://platform.claude.com)
-* An [API key](https://platform.claude.com/settings/keys)
+* A [Claude Console account](https://platform.claude.com/)
+* An [API key](https://platform.claude.com/settings/keys) from the Console
 
 ## Install the CLI
 
@@ -49,7 +55,7 @@ This guide walks you through creating an agent, setting up an environment, start
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.42.0
+    VERSION=2.3.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -66,7 +72,7 @@ This guide walks you through creating an agent, setting up an environment, start
     You can also install the CLI from source using `go install`. Requires Go 1.25 or later.
 
     ```bash
-    go install github.com/anthropics/anthropic-cli/cmd/ant@latest
+    go install github.com/anthropics/anthropic-cli/v2/cmd/ant@latest
     ```
 
     The binary is placed in `$(go env GOPATH)/bin`. Add it to your `PATH` if it isn't already:
@@ -100,13 +106,13 @@ ant --version
 
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.73.0")
+    implementation("com.anthropic:anthropic-java:3.3.0")
     ```
   </Tab>
 
   <Tab title="Go">
     ```bash
-    go get github.com/anthropics/anthropic-sdk-go
+    go get github.com/anthropics/anthropic-sdk-go/v2
     ```
   </Tab>
 
@@ -144,28 +150,19 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     <CodeGroup defaultLanguage="CLI">
       <CodeGroupItem>
         ```bash cURL
-        set -euo pipefail
-
-        agent=$(
-          curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-beta: managed-agents-2026-04-01" \
-            -H "content-type: application/json" \
-            -d '{
-              "name": "Coding Assistant",
-              "model": "claude-opus-5-5",
-              "system": "You are a helpful coding assistant. Write clean, well-documented code.",
-              "tools": [
-                {"type": "agent_toolset_20260401"}
-              ]
-            }'
-        )
-
-        AGENT_ID=$(jq -er '.id' <<<"$agent")
-        AGENT_VERSION=$(jq -er '.version' <<<"$agent")
-
-        echo "Agent ID: $AGENT_ID, version: $AGENT_VERSION"
+        curl -sS --fail-with-body https://api.anthropic.com/v1/agents \
+          -H "x-api-key: $ANTHROPIC_API_KEY" \
+          -H "anthropic-version: 2023-06-01" \
+          -H "anthropic-beta: managed-agents-2026-04-01" \
+          -H "content-type: application/json" \
+          -d '{
+            "name": "Coding Assistant",
+            "model": "claude-opus-5-5",
+            "system": "You are a helpful coding assistant. Write clean, well-documented code.",
+            "tools": [
+              {"type": "agent_toolset_20260401"}
+            ]
+          }'
         ```
 
         Save the returned `agent.id`. You'll reference it in every session you create.
@@ -223,9 +220,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           name: "Coding Assistant",
           model: "claude-opus-5-5",
           system: "You are a helpful coding assistant. Write clean, well-documented code.",
-          tools: [
-            { type: "agent_toolset_20260401" },
-          ],
+          tools: [{ type: "agent_toolset_20260401" }]
         });
 
         console.log(`Agent ID: ${agent.id}, version: ${agent.version}`);
@@ -249,13 +244,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
             Name = "Coding Assistant",
             Model = BetaManagedAgentsModel.ClaudeOpus5_5,
             System = "You are a helpful coding assistant. Write clean, well-documented code.",
-            Tools =
-            [
-                new BetaManagedAgentsAgentToolset20260401Params
-                {
-                    Type = "agent_toolset_20260401",
-                },
-            ],
+            Tools = [new BetaManagedAgentsAgentToolset20260401Params()],
         });
 
         Console.WriteLine($"Agent ID: {agent.ID}, version: {agent.Version}");
@@ -272,7 +261,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
         	"context"
         	"fmt"
 
-        	"github.com/anthropics/anthropic-sdk-go"
+        	"github.com/anthropics/anthropic-sdk-go/v2"
         )
 
         func main() {
@@ -286,9 +275,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
         		},
         		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
         		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
-        			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
-        				Type: anthropic.BetaManagedAgentsAgentToolset20260401ParamsTypeAgentToolset20260401,
-        			},
+        			OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{},
         		}},
         	})
         	if err != nil {
@@ -322,9 +309,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
                 .name("Coding Assistant")
                 .model(BetaManagedAgentsModel.CLAUDE_OPUS_5_5)
                 .system("You are a helpful coding assistant. Write clean, well-documented code.")
-                .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
-                    .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
-                    .build())
+                .addTool(BetaManagedAgentsAgentToolset20260401Params.builder().build())
                 .build());
 
             IO.println("Agent ID: " + agent.id() + ", version: " + agent.version());
@@ -335,13 +320,14 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       <CodeGroupItem>
         ```php PHP
+        use Anthropic\Beta\Agents\BetaManagedAgentsModel;
         use Anthropic\Client;
 
         $client = new Client();
 
         $agent = $client->beta->agents->create(
             name: 'Coding Assistant',
-            model: 'claude-opus-5-5',
+            model: BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
             system: 'You are a helpful coding assistant. Write clean, well-documented code.',
             tools: [
                 ['type' => 'agent_toolset_20260401'],
@@ -362,7 +348,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
         agent = client.beta.agents.create(
           name: "Coding Assistant",
-          model: "claude-opus-5-5",
+          model: Anthropic::Beta::BetaManagedAgentsModel::CLAUDE_OPUS_5_5,
           system_: "You are a helpful coding assistant. Write clean, well-documented code.",
           tools: [{type: "agent_toolset_20260401"}]
         )
@@ -383,24 +369,18 @@ export ANTHROPIC_API_KEY="your-api-key-here"
     <CodeGroup defaultLanguage="CLI">
       <CodeGroupItem>
         ```bash cURL
-        environment=$(
-          curl -sS --fail-with-body https://api.anthropic.com/v1/environments \
-            -H "x-api-key: $ANTHROPIC_API_KEY" \
-            -H "anthropic-version: 2023-06-01" \
-            -H "anthropic-beta: managed-agents-2026-04-01" \
-            -H "content-type: application/json" \
-            -d '{
-              "name": "quickstart-env",
-              "config": {
-                "type": "cloud",
-                "networking": {"type": "limited", "allow_package_managers": true}
-              }
-            }'
-        )
-
-        ENVIRONMENT_ID=$(jq -er '.id' <<<"$environment")
-
-        echo "Environment ID: $ENVIRONMENT_ID"
+        curl -sS --fail-with-body https://api.anthropic.com/v1/environments \
+          -H "x-api-key: $ANTHROPIC_API_KEY" \
+          -H "anthropic-version: 2023-06-01" \
+          -H "anthropic-beta: managed-agents-2026-04-01" \
+          -H "content-type: application/json" \
+          -d '{
+            "name": "quickstart-env",
+            "config": {
+              "type": "cloud",
+              "networking": {"type": "limited", "allow_package_managers": true}
+            }
+          }'
         ```
 
         Save the returned `environment.id` too.
@@ -448,8 +428,8 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           name: "quickstart-env",
           config: {
             type: "cloud",
-            networking: { type: "limited", allow_package_managers: true },
-          },
+            networking: { type: "limited", allow_package_managers: true }
+          }
         });
 
         console.log(`Environment ID: ${environment.id}`);
@@ -564,32 +544,23 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
     <CodeGroup>
       ```bash cURL
-      session=$(
-        curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
-          -H "x-api-key: $ANTHROPIC_API_KEY" \
-          -H "anthropic-version: 2023-06-01" \
-          -H "anthropic-beta: managed-agents-2026-04-01" \
-          -H "content-type: application/json" \
-          -d '{
-            "agent": "'"$AGENT_ID"'",
-            "environment_id": "'"$ENVIRONMENT_ID"'",
-            "title": "Quickstart session"
-          }'
-      )
-
-      SESSION_ID=$(jq -er '.id' <<<"$session")
-
-      echo "Session ID: $SESSION_ID"
+      curl -sS --fail-with-body https://api.anthropic.com/v1/sessions \
+        -H "x-api-key: $ANTHROPIC_API_KEY" \
+        -H "anthropic-version: 2023-06-01" \
+        -H "anthropic-beta: managed-agents-2026-04-01" \
+        -H "content-type: application/json" \
+        -d '{
+          "agent": "'"$AGENT_ID"'",
+          "environment_id": "'"$ENVIRONMENT_ID"'",
+          "title": "Quickstart session"
+        }'
       ```
 
       ```bash CLI
-      SESSION_ID=$(ant beta:sessions create \
+      ant beta:sessions create \
         --agent "$AGENT_ID" \
         --environment-id "$ENVIRONMENT_ID" \
-        --title "Quickstart session" \
-        --transform id --raw-output)
-
-      echo "Session ID: $SESSION_ID"
+        --title "Quickstart session"
       ```
 
       ```python Python
@@ -606,7 +577,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       const session = await client.beta.sessions.create({
         agent: agent.id,
         environment_id: environment.id,
-        title: "Quickstart session",
+        title: "Quickstart session"
       });
 
       console.log(`Session ID: ${session.id}`);
@@ -723,11 +694,11 @@ export ANTHROPIC_API_KEY="your-api-key-here"
             content: [
               {
                 type: "text",
-                text: "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt",
-              },
-            ],
-          },
-        ],
+                text: "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt"
+              }
+            ]
+          }
+        ]
       });
 
       // Process streaming events
@@ -760,12 +731,10 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           [
               new BetaManagedAgentsUserMessageEventParams
               {
-                  Type = "user.message",
                   Content =
                   [
                       new BetaManagedAgentsTextBlock
                       {
-                          Type = "text",
                           Text = "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt",
                       },
                   ],
@@ -774,9 +743,9 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       });
 
       // Process streaming events
-      await foreach (var ev in stream)
+      await foreach (var streamEvent in stream)
       {
-          if (ev.Value is BetaManagedAgentsAgentMessageEvent message)
+          if (streamEvent.Value is BetaManagedAgentsAgentMessageEvent message)
           {
               foreach (var block in message.Content)
               {
@@ -786,11 +755,11 @@ export ANTHROPIC_API_KEY="your-api-key-here"
                   }
               }
           }
-          else if (ev.Value is BetaManagedAgentsAgentToolUseEvent toolUse)
+          else if (streamEvent.Value is BetaManagedAgentsAgentToolUseEvent toolUse)
           {
               Console.WriteLine($"\n[Using tool: {toolUse.Name}]");
           }
-          else if (ev.Value is BetaManagedAgentsSessionStatusIdleEvent)
+          else if (streamEvent.Value is BetaManagedAgentsSessionStatusIdleEvent)
           {
               Console.WriteLine("\n\nAgent finished.");
               break;
@@ -806,10 +775,8 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       	_, err = client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
       		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
       			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-      				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
       				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
       					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-      						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
       						Text: "Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt",
       					},
       				}},
@@ -847,7 +814,6 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           // Send the user message after the stream opens
           client.beta().sessions().events().send(session.id(), EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
                   .addTextContent("Create a Python script that generates the first 20 Fibonacci numbers and saves them to fibonacci.txt")
                   .build())
               .build());
@@ -988,7 +954,7 @@ Each of these quickstarts pairs Claude Managed Agents with a popular chat framew
   </Card>
 
   <Card title="Session event stream" icon="lightning" href="https://platform.claude.com/docs/en/managed-agents/events-and-streaming">
-    Handle events and steer the agent mid-execution
+    Handle events and steer the agent while it runs
   </Card>
 
   <Card title="Scheduled deployments" icon="arrows-clockwise" href="https://platform.claude.com/docs/en/managed-agents/scheduled-deployments">

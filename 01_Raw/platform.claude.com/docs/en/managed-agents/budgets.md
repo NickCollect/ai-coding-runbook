@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/budgets
-fetched_at: 2026-10-19T05:32:45.080139+00:00
+fetched_at: 2026-10-26T05:40:05.564395+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-A session budget is an optional hard spend ceiling you set when you [create a session](https://platform.claude.com/docs/en/managed-agents/sessions). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still finishes, so the final list cost can land [a fraction past the budget](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](https://platform.claude.com/docs/en/managed-agents/session-operations#session-statuses) rather than terminating; changing or removing the budget resumes the work that the budget paused. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](https://platform.claude.com/docs/en/managed-agents/budgets#budgets-on-deployments).
+A session budget is an optional hard spend ceiling you set when you [create a session](https://platform.claude.com/docs/en/managed-agents/sessions). The platform continuously prices everything the session consumes at public list rates (the session's **list cost**) and stops issuing new model requests once that cost reaches the budget. The request in flight when the cap is crossed still completes, so the final list cost can land [a fraction past the budget](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget). A session at its budget pauses and goes [idle](https://platform.claude.com/docs/en/managed-agents/session-operations#session-statuses) rather than terminating; changing or removing the budget resumes the work that the budget paused. Deployments accept the same budget and apply it to each session they start; see [Budgets on deployments](https://platform.claude.com/docs/en/managed-agents/budgets#budgets-on-deployments).
 
 ## Set a budget at session creation
 
@@ -78,7 +78,6 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
       EnvironmentID = environment.ID,
       Budget = new()
       {
-          Type = BetaManagedAgentsBudgetLimitType.Limit,
           MaxListCost = new() { Amount = "125", Currency = BetaCurrency.Usd },
       },
   });
@@ -92,7 +91,6 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
   	},
   	EnvironmentID: environment.ID,
   	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-  		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
   		MaxListCost: anthropic.BetaMonetaryAmountParam{
   			Amount:   "125",
   			Currency: anthropic.BetaCurrencyUsd,
@@ -110,7 +108,6 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
       .agent(agent.id())
       .environmentId(environment.id())
       .budget(BetaManagedAgentsBudgetLimit.builder()
-          .type(BetaManagedAgentsBudgetLimit.Type.LIMIT)
           .maxListCost(BetaMonetaryAmount.builder()
               .amount("125")
               .currency(BetaCurrency.USD)
@@ -148,7 +145,7 @@ Pass the optional `budget` (csharp, go: `Budget`) field when you create the sess
 The `budget` (csharp, go: `Budget`) object has two fields:
 
 * `type` (csharp, go: `Type`) is always `"limit"`.
-* `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`) is the cap itself: `amount` (csharp, go: `Amount`) is a whole number of US cents written as a string with no leading zeros (`"125"` is $1.25 and `"50"` is 50 cents) and must be greater than zero. Decimal forms such as `"25.00"` are rejected. The amount is a string rather than a number so no float rounding is ever applied to it. `currency` (csharp, go: `Currency`) is an uppercase ISO-4217 currency code; `USD` is the only supported currency.
+* `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`) is the cap itself: `amount` (csharp, go: `Amount`) is a whole number of US cents written as a string with no leading zeros (`"125"` is $1.25 USD and `"50"` is 50 cents) and must be greater than zero. Decimal forms such as `"25.00"` are rejected. The amount is a string rather than a number so no float rounding is ever applied to it. `currency` (csharp, go: `Currency`) is an uppercase ISO-4217 currency code; `USD` is the only supported currency.
 
 A budget can only be attached when the session is created. Adding a budget to an existing session that doesn't have one is rejected with a 400 error. A budgeted session's cap can be [changed](https://platform.claude.com/docs/en/managed-agents/budgets#change-the-budget) or [removed](https://platform.claude.com/docs/en/managed-agents/budgets#remove-the-budget) at any time.
 
@@ -166,7 +163,7 @@ Enforcement uses the exact, unrounded list cost. The `list_cost` (java, php: `li
 
 ## When a session reaches its budget
 
-The cap is enforced between model requests, not mid-request. Before each model request, the platform checks the session's consumed list cost, and once that total reaches the cap every thread pauses before its next request. The request that carried the total past the cap was admitted while the session was still under it and runs to completion, so a paused session's recorded `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) reads at or a fraction past `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`): a session capped at `"50"` (50 cents) can pause with a `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) of `"53"`. This is expected, not a billing error. Model spend past the cap is at most the cost of one model request for each thread. The tool calls in that request's response still run, and their web searches and running time also count toward list cost. Treat the budget as a bound on new work rather than an exact stopping point, and size the cap with that margin in mind.
+The cap is enforced between model requests, not mid-request. Before each model request, the platform checks the session's consumed list cost, and once that total reaches the cap every thread pauses before its next request. The request that carried the total past the cap was admitted while the session was still under it and runs to completion. As a result, a paused session's recorded `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) reads at or a fraction past `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`). For example, a session capped at `"50"` (50 cents) can pause with a `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) of `"53"`. This is expected, not a billing error. Model spend past the cap is at most the cost of one model request for each thread. The tool calls in that request's response still run, and their web searches and running time also count toward list cost. Treat the budget as a bound on new work rather than an exact stopping point, and size the cap with that margin in mind.
 
 A session that reaches its budget goes idle with a `stop_reason` (java, php: `stopReason`; csharp, go: `StopReason`) of `budget_reached`; it is not terminated, and its history and sandbox are preserved like any other idle session's. On the [event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) you'll see, in order:
 
@@ -191,7 +188,7 @@ Any event that would start new work, such as `user.message`, is rejected with a 
 
 A `user.interrupt` sent while the session is paused at its budget (all threads paused at the cap) is accepted, and it does not appear in the event list. It stops no thread, because every thread is already paused. Change or remove the budget to continue.
 
-If the session has open [workflow runs](https://platform.claude.com/docs/en/managed-agents/workflow-runs#interrupt-a-session-with-runs-open), the interrupt can pause them, as an interrupt at any other time can. A run that an interrupt paused doesn't resume when you change or remove the budget. To continue it, change or remove the budget, then send a `user.message` asking the agent to continue its runs.
+If the session has open workflow runs, the interrupt can pause them, as an interrupt at any other time can. A run that an interrupt paused doesn't resume when you change or remove the budget. To continue it, change or remove the budget, then send a `user.message` asking the agent to continue its runs. See [Interrupt a session with runs open](https://platform.claude.com/docs/en/managed-agents/workflow-runs#interrupt-a-session-with-runs-open).
 
 ## Resume a session at its budget
 
@@ -250,7 +247,6 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
   {
       Budget = new()
       {
-          Type = BetaManagedAgentsBudgetLimitType.Limit,
           MaxListCost = new() { Amount = "500", Currency = BetaCurrency.Usd },
       },
   });
@@ -260,7 +256,6 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
   ```go Go
   updatedSession, err := client.Beta.Sessions.Update(ctx, session.ID, anthropic.BetaSessionUpdateParams{
   	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-  		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
   		MaxListCost: anthropic.BetaMonetaryAmountParam{
   			Amount:   "500",
   			Currency: anthropic.BetaCurrencyUsd,
@@ -276,7 +271,6 @@ Update the session with a new `max_list_cost` (java, php: `maxListCost`; csharp,
   ```java Java
   var updatedSession = client.beta().sessions().update(session.id(), SessionUpdateParams.builder()
       .budget(BetaManagedAgentsBudgetLimit.builder()
-          .type(BetaManagedAgentsBudgetLimit.Type.LIMIT)
           .maxListCost(BetaMonetaryAmount.builder()
               .amount("500")
               .currency(BetaCurrency.USD)
@@ -345,7 +339,7 @@ Pass `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: 
 
   ```go Go
   // A zero-value Budget is omitted from the request; param.NullStruct (from
-  // github.com/anthropics/anthropic-sdk-go/packages/param) sends an explicit null.
+  // github.com/anthropics/anthropic-sdk-go/v2/packages/param) sends an explicit null.
   unbudgetedSession, err := client.Beta.Sessions.Update(ctx, session.ID, anthropic.BetaSessionUpdateParams{
   	Budget: param.NullStruct[anthropic.BetaManagedAgentsBudgetLimitParam](),
   })
@@ -384,7 +378,7 @@ Pass `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: 
 
 ## Monitor spend
 
-The session object carries its `budget` (csharp, go: `Budget`) and a `usage` (csharp, go: `Usage`) object with the tracked spend: `usage.list_cost` (java, php: `usage.listCost`; csharp, go: `Usage.ListCost`) is the session's consumed list cost, and `usage.active_seconds` (java, php: `usage.activeSeconds`; csharp, go: `Usage.ActiveSeconds`) is the running time its runtime cost is priced on. On a session paused at `budget_reached`, expect `usage.list_cost` (java, php: `usage.listCost`; csharp, go: `Usage.ListCost`) to read at or a fraction past `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`): the [request that crossed the cap](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget) finished before the pause. Session-level `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`) counts overlapping activity from concurrent threads once. Thread retrieval responses carry the same two fields on the thread's own `usage` (csharp, go: `Usage`), priced per thread. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost` (java, php: `listCost`; csharp, go: `ListCost`); the session figure is the one the budget is enforced against.
+The session object carries its `budget` (csharp, go: `Budget`) and a `usage` (csharp, go: `Usage`) object with the tracked spend: `usage.list_cost` (java, php: `usage.listCost`; csharp, go: `Usage.ListCost`) is the session's consumed list cost, and `usage.active_seconds` (java, php: `usage.activeSeconds`; csharp, go: `Usage.ActiveSeconds`) is the running time its runtime cost is priced on. On a session paused at `budget_reached`, expect `usage.list_cost` (java, php: `usage.listCost`; csharp, go: `Usage.ListCost`) to read at or a fraction past `max_list_cost` (java, php: `maxListCost`; csharp, go: `MaxListCost`): the [request that crossed the cap](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget) completed before the pause. Session-level `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`) counts overlapping activity from concurrent threads once. Thread retrieval responses carry the same two fields on the thread's own `usage` (csharp, go: `Usage`), priced for each thread. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost` (java, php: `listCost`; csharp, go: `ListCost`); the session figure is the one the budget is enforced against.
 
 The `session.usage` event is a snapshot of the session's cumulative usage and tracked list cost. It carries the session's token totals, `list_cost` (java, php: `listCost`; csharp, go: `ListCost`), `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`), `server_tool_use` (java, php: `serverToolUse`; csharp, go: `ServerToolUse`) request counts (`web_search_requests` (java, php: `webSearchRequests`; csharp, go: `WebSearchRequests`), priced into list cost per request, and `web_fetch_requests` (java, php: `webFetchRequests`; csharp, go: `WebFetchRequests`), which reads `0` because web fetch requests carry no per-request charge and aren't metered), and the session's `budget` (csharp, go: `Budget`) if the session has one. It appears in the events list and the session stream. The session emits one immediately before it goes idle, whatever the stop reason, so a session that reaches its budget always emits one immediately before the budget-reached idle event.
 
@@ -392,7 +386,7 @@ To read usage from the stream and the session object, see [Track usage](https://
 
 ## Budgets in multiagent sessions
 
-A [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration) session has a single budget shared across all of its threads; there are no per-thread caps. Each thread's consumption is priced at its own served model, and threads pause independently as the shared cap is reached. [Advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor) consultations count against the same budget, priced at the advisor model's rates. One thread can pause at `budget_reached` while another finishes its in-flight request.
+A [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration) session has a single budget shared across all of its threads; there are no per-thread caps. Each thread's consumption is priced at its own served model, and threads pause independently as the shared cap is reached. [Advisor](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor) consultations count against the same budget, priced at the advisor model's rates. One thread can pause at `budget_reached` while another completes its in-flight request.
 
 A pending ask outranks the cap: a session with one thread waiting on `requires_action` and another paused at `budget_reached` reports `requires_action` at the session level. The pending request still needs an answer, and answering it is a [settle event](https://platform.claude.com/docs/en/managed-agents/budgets#events-accepted-at-the-cap) the budget doesn't block.
 
@@ -413,7 +407,13 @@ The cap is copied onto each session the deployment starts, so it bounds each run
 
 ## Models without a list price
 
-A budget can only track consumption the platform can price. Creating a budgeted session whose agent, or any agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) or `workflows` (csharp, go: `Workflows`), or the advisor set in its [multiagent configuration](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration), uses a model with no public list price is rejected with a 400 error stating that no list price is available for the model.
+A budget can only track consumption the platform can price. Creating a budgeted session is rejected with a 400 error if any of the following uses a model with no public list price:
+
+* The session's agent
+* Any agent listed in the `predefined_agents` (java, php: `predefinedAgents`; csharp, go: `PredefinedAgents`) list of `subagents` (csharp, go: `Subagents`) or `workflows` (csharp, go: `Workflows`)
+* The advisor set in the agent's [multiagent configuration](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration)
+
+The error states that no list price is available for the model.
 
 If a budgeted session's usage comes to include a model with no list price, the budget can no longer measure the session's spend: the session can pause with a `stop_reason` (java, php: `stopReason`; csharp, go: `StopReason`) of `budget_reached`, and changing the budget is rejected. Remove the budget to resume the session.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory
-fetched_at: 2026-10-19T05:32:44.762960+00:00
+fetched_at: 2026-10-26T05:40:04.903281+00:00
 fetch_method: mintlify_md
 ---
 
@@ -29,6 +29,8 @@ The difference is who materializes the store. On a self-hosted environment your 
 
 <Note>
   Memory stores cannot be attached to sessions on self-hosted environments on [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws).
+
+  On [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), memory stores aren't supported for sessions on self-hosted environments.
 </Note>
 
 ## Prepare the host
@@ -45,7 +47,7 @@ In the [sandbox-per-session pattern](https://platform.claude.com/docs/en/managed
 
 ### Isolate sessions that share a store
 
-Two sessions cannot mount the same store on one host at the same time, because both need the same path. If your sessions attach the same store, run one session per filesystem. Giving each session [its own sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers#run-one-sandbox-per-session) satisfies this rule.
+Two sessions cannot mount the same store on one host at the same time, because both need the same path. If your sessions attach the same store, run one session for each filesystem. Giving each session [its own sandbox](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-workers#run-one-sandbox-per-session) satisfies this rule.
 
 ## How the worker handles memory
 
@@ -56,7 +58,7 @@ When the worker claims a work item whose session has memory stores attached, it:
 3. **Reconciles changes after tool calls,** at most once per sync interval (15 seconds by default). Memories that changed in the store are written to disk, and files the agent changed are uploaded to the store.
 4. **Runs a final sync when the session ends.** It flushes any uploads still pending for up to 30 seconds, then removes the directories it created.
 
-The memory store on Anthropic's side remains the source of truth. [Memory versions](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes), redaction, and viewing or editing memories in the Console work as they do for cloud sessions. The agent's memory reads and writes appear in the [event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) as ordinary tool events.
+The memory store on Anthropic's side remains the source of truth. [Memory versions](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes), redaction, and viewing or editing memories in the Claude Console work as they do for cloud sessions. The agent's memory reads and writes appear in the [event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) as ordinary tool events.
 
 Because each worker syncs on an interval, a change written in one session becomes visible to another running session only after both have synced. That is typically well under a minute at the default interval. Sessions on cloud sandboxes see each other's changes almost immediately.
 

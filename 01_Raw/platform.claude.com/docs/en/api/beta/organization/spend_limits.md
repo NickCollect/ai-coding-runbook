@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/spend_limits
-fetched_at: 2026-10-19T05:33:01.219172+00:00
+fetched_at: 2026-10-26T05:40:36.844301+00:00
 fetch_method: mintlify_md
 ---
 
@@ -140,6 +140,8 @@ Anthropic account team.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Body parameters
 
@@ -324,8 +326,8 @@ Anthropic account team.
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "amount": "50000",
           "scope": {
@@ -505,8 +507,8 @@ Retrieve a spend limit by ID.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -568,8 +570,8 @@ workspace limits through the API is in an early access preview.
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
     -X DELETE \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -587,10 +589,12 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 
 List the organization's spend limits.
 
-Limits are grouped by scope type, in the order `organization`, `seat_tier`,
-`rbac_group`, `organization_service`, `user`; within a type they come in a
-fixed order that is not creation order. Supported for Claude Enterprise
-organizations only, not for Claude Console organizations.
+A Claude Console organization's limits, including any read-only `usage_tier`
+limit, come newest first. Listing them is in an early access preview. To
+request access, contact your Anthropic account team. A Claude Enterprise
+organization's limits are grouped by scope type, in the order `organization`,
+`seat_tier`, `rbac_group`, `organization_service`, `user`; within a type they
+come in a fixed order that is not creation order.
 
 ### Query parameters
 
@@ -604,9 +608,9 @@ organizations only, not for Claude Console organizations.
 
   Opaque cursor from a previous response's `next_page` field.
 
-- `scope_type: optional array of "organization" or "organization_service" or "rbac_group" or 3 more`
+- `scope_type: optional array of "organization" or "organization_service" or "rbac_group" or 4 more`
 
-  Return only limits with these scope types. Omit for all.
+  Return only limits with these scope types. Omit for all. A scope type that doesn't apply to the organization gets a 400 error.
 
   maxItems: 100
 
@@ -618,9 +622,15 @@ organizations only, not for Claude Console organizations.
 
   - `"seat_tier"`
 
+  - `"usage_tier"`
+
   - `"user"`
 
   - `"workspace"`
+
+- `workspace_id: optional string`
+
+  Return only the limits whose `scope.workspace_id` is this workspace (`wrkspc_...`). Claude Console organizations only; other organizations get a 400 error.
 
 ### Headers
 
@@ -737,6 +747,8 @@ organizations only, not for Claude Console organizations.
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 ### Returns
 
@@ -868,9 +880,9 @@ organizations only, not for Claude Console organizations.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: spend-limit-reads-2026-09-26' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 #### Response (200)
@@ -1575,8 +1587,8 @@ organizations.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -1882,8 +1894,8 @@ Requests whose requester is no longer a member are excluded.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -2189,8 +2201,8 @@ requester at the request's period.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ##### Response (200)
@@ -2578,8 +2590,8 @@ the member was blocked on. Anthropic emails the requester unless
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID/approve \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "amount": "50000",
           "period": "monthly"
@@ -2903,8 +2915,8 @@ Idempotent on `denied`; denying an already-`approved` request returns
 ```bash
 curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$SPEND_LIMIT_INCREASE_REQUEST_ID/deny \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{}'
 ```
 

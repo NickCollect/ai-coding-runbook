@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/messages/list
-fetched_at: 2026-10-12T06:50:10.828143+00:00
+fetched_at: 2026-10-26T05:40:41.446911+00:00
 fetch_method: mintlify_md
 ---
 
@@ -167,13 +167,19 @@ Retrieves message history and file metadata for a specific chat.
 
         default: text
 
+      - `added_as_context: boolean`
+
+        True when this text block was added to a human message as context for the assistant: the user did not type it in the message box. The wording of the app's own notes for the assistant is not exported: such a block has an empty `text`. Other added text is exported and can include content that the user or their app chose. False does not mean that the user typed the text. Always false on the last text block of a message, on assistant messages, and on messages sent before 2026-10-09, whose notes are exported in full.
+
+        default: false
+
       - `text: string`
 
         Text content from human or assistant
 
       - `thinking_redacted: boolean`
 
-        True when content enclosed in the assistant's internal-reasoning tags (or the tag markup itself) was removed from `text` during export. Removal never occurs with this field false. Always false on human messages, whose text is exported verbatim.
+        True when content enclosed in the assistant's internal-reasoning tags (or the tag markup itself) was removed from `text` during export. Removal never occurs with this field false. Always false on human messages.
 
         default: false
 
@@ -436,7 +442,8 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
           "type": "text",
           "text": "Can you help me draft requirements for our new dashboard feature?",
           "truncated": false,
-          "thinking_redacted": false
+          "thinking_redacted": false,
+          "added_as_context": false
         }
       ],
       "files": [
@@ -459,7 +466,8 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
           "type": "text",
           "text": "I'd be happy to help you draft requirements for your dashboard feature...",
           "truncated": false,
-          "thinking_redacted": false
+          "thinking_redacted": false,
+          "added_as_context": false
         }
       ],
       "artifacts": [
@@ -480,7 +488,8 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
           "type": "text",
           "text": "Are there any open support tickets about the dashboard?",
           "truncated": false,
-          "thinking_redacted": false
+          "thinking_redacted": false,
+          "added_as_context": false
         }
       ]
     },
@@ -517,7 +526,8 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
           "type": "text",
           "text": "There are two open tickets: one about slow loading and one about a missing export button.",
           "truncated": false,
-          "thinking_redacted": false
+          "thinking_redacted": false,
+          "added_as_context": false
         }
       ]
     }

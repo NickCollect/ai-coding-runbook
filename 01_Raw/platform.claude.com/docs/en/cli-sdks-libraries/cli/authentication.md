@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication
-fetched_at: 2026-10-05T06:27:29.210212+00:00
+fetched_at: 2026-10-26T05:40:14.601048+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication
 description: Authenticate the ant CLI with interactive login, API keys, named profiles, and Workload Identity Federation.
 ---
 
-The `ant` CLI supports several credential sources. The [Quickstart](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart#authentication) covers the one-command happy path (`ant auth login`). This page covers every option in full.
+The `ant` CLI supports several credential sources. The [Quickstart](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart#authentication) covers the one-command login (`ant auth login`). This page covers every option in full.
 
 ## Interactive login
 
@@ -27,7 +27,7 @@ ant auth login --workspace-id wrkspc_01...
 
 # If the named profile you pass with --profile doesn't exist,
 # a new named profile will be created with that name.
-ant auth login --profile <profile-name>
+ant auth login --profile work
 ```
 
 During the browser flow, you select an organization and then a [workspace](https://platform.claude.com/docs/en/manage-claude/workspaces). The issued token is [scoped to that workspace](https://platform.claude.com/docs/en/manage-claude/workspaces#api-keys-and-resource-scoping), so the CLI can only see resources that belong to it. Pass `--workspace-id` to bind directly and skip the picker. To work in more than one workspace, see [Switch between workspaces](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#switch-between-workspaces).
@@ -77,9 +77,9 @@ The CLI also reads your API key from the `ANTHROPIC_API_KEY` environment variabl
   </Tab>
 </Tabs>
 
-To override the key for a single invocation, pass `--api-key`. To point at a different API host, set `ANTHROPIC_BASE_URL` or pass `--base-url`.
+To override the key for a single run, pass [`--api-key-stdin`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#global-flags) and pipe the key to the command. To point at a different API host, set `ANTHROPIC_BASE_URL` or pass `--base-url`.
 
-If you are using an API key scoped to multiple workspaces, such as a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types), you must [specify the workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#global-flags). The value must be a `wrkspc_...` ID.
+If you are using a [personal or service account key](https://platform.claude.com/docs/en/manage-claude/authentication#key-types) that isn't scoped to a workspace, you must [specify the workspace](https://platform.claude.com/docs/en/manage-claude/authentication#select-a-workspace) to run your command in. Do this by setting an `ANTHROPIC_WORKSPACE_ID` environment variable, which the CLI reads automatically, or by using the [`--workspace-id` flag](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/using#global-flags). The value must be a `wrkspc_...` ID.
 
 ```bash CLI
 ant messages create \
@@ -91,7 +91,7 @@ ant messages create \
 
 ## Check authentication status
 
-`ant auth status` prints the credential source the CLI selected (API key environment variable, OAuth login, federation, or profile), the active profile, the workspace the active token is bound to, and the configuration directory paths. Use it to diagnose why a workload picked the wrong credential or workspace.
+`ant auth status` prints the credential source the CLI selected (API key environment variable, OAuth login, federation, Google Cloud, or profile), the active profile, the workspace the active token is bound to, and the configuration directory paths. Use it to diagnose why a workload picked the wrong credential or workspace.
 
 ```bash CLI
 ant auth status
@@ -133,7 +133,7 @@ ANTHROPIC_PROFILE=other-ws ant models list
 Run [`ant auth status`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status) to confirm which profile and workspace are active.
 
 <Note>
-  Profiles are only consulted when no API key is set. If `ANTHROPIC_API_KEY` is present in your environment, it overrides every profile and these commands all use that key's workspace (or, for a multi-workspace key, the workspace set with `ANTHROPIC_WORKSPACE_ID` or `--workspace-id`). Unset it before switching profiles.
+  An `ANTHROPIC_API_KEY` or `ANTHROPIC_AUTH_TOKEN` in your environment takes precedence over every profile (see [Credential precedence](https://platform.claude.com/docs/en/manage-claude/wif-reference#credential-precedence)). Until you unset it, API requests use that credential, whichever profile you select, and `ant` prints a message to stderr that says so.
 </Note>
 
 ## Manage profiles
@@ -158,7 +158,7 @@ For the profile file schema and the federation block, see [Profile configuration
   </Card>
 
   <Card title="CLI scripting and automation" icon="code" href="https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting">
-    Version-control API resources, scripting patterns, and use from Claude Code
+    Version control for API resources, scripting patterns, and use from Claude Code
   </Card>
 
   <Card title="Workload Identity Federation" icon="cloud" href="https://platform.claude.com/docs/en/manage-claude/workload-identity-federation">

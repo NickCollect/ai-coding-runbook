@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/additional-resources
-fetched_at: 2026-09-07T05:31:29.603432+00:00
+fetched_at: 2026-10-26T05:40:11.161176+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,7 @@ description: Learning resources and documentation formats optimized for AI inges
     Step-by-step lessons on building with Claude.
   </Card>
 
-  <Card title="Cookbook" icon="fork-knife" href="https://platform.claude.com/cookbook">
+  <Card title="Claude Cookbook" icon="fork-knife" href="https://platform.claude.com/cookbook">
     Replicable code samples and implementations.
   </Card>
 

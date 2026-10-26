@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/claude-code-analytics-api
-fetched_at: 2026-10-19T05:32:46.287814+00:00
+fetched_at: 2026-10-26T05:40:08.201500+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,9 +14,9 @@ description: Programmatically access your organization's Claude Code usage analy
   **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization on the [Organization](https://platform.claude.com/settings/organization) page (`platform.claude.com/settings/organization`) in the Claude Console.
 </Tip>
 
-The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, enabling organizations to analyze developer productivity and build custom dashboards. This API provides more detail than the basic [Analytics dashboard](https://platform.claude.com/claude-code) without the complexity of the OpenTelemetry integration.
+The Claude Code Analytics Admin API provides programmatic access to daily aggregated usage metrics for Claude Code users, allowing organizations to analyze developer productivity and build custom dashboards. This API provides more detail than the basic [Analytics dashboard](https://platform.claude.com/claude-code) in the Claude Console, without the complexity of the OpenTelemetry integration.
 
-This API enables you to better monitor, analyze, and optimize your Claude Code adoption:
+This API allows you to better monitor, analyze, and optimize your Claude Code adoption:
 
 * **Developer productivity analysis:** Track sessions, lines of code added/removed, commits, and pull requests created using Claude Code
 * **Tool usage metrics:** Monitor acceptance and rejection rates for different Claude Code tools (Edit, MultiEdit, Write, NotebookEdit)
@@ -69,7 +69,7 @@ Track Claude Code usage, productivity metrics, and developer activity across you
 * **Productivity metrics:** Track sessions, lines of code, commits, pull requests, and tool usage
 * **Token and cost data:** Monitor usage and estimated costs broken down by Claude model
 * **Cursor-based pagination:** Handle large datasets with stable pagination using opaque cursors
-* **Data freshness:** Metrics are available with up to 1-hour delay for consistency
+* **Data freshness:** Metrics are available with up to a 1-hour delay for consistency
 
 For complete parameter details and response schemas, see the [Claude Code Analytics API reference](https://platform.claude.com/docs/en/api/beta/organization/usage_report/retrieve_claude_code).
 
@@ -119,7 +119,7 @@ Each response record contains the following metrics for a single user on a singl
 * **date:** Date in RFC 3339 format (UTC timestamp)
 * **actor:** The user or API key that performed the Claude Code actions (either `user_actor` with `email_address` or `api_actor` with `api_key_name`)
 * **organization\_id:** Organization UUID
-* **customer\_type:** Type of customer account (`api` for API customers, `subscription` for Pro/Team customers)
+* **customer\_type:** Type of customer account (`api` or `subscription`); records cover only usage authenticated against your Claude Console organization
 * **terminal\_type:** Type of terminal or environment where Claude Code was used (for example, `vscode`, `iTerm.app`, `tmux`)
 
 #### Core metrics
@@ -218,7 +218,7 @@ The API returns data in the following format:
 
 The API supports cursor-based pagination for organizations with large numbers of users:
 
-1. Make your initial request with optional `limit` parameter.
+1. Make your initial request with the optional `limit` parameter.
 2. If `has_more` is `true` in the response, use the `next_page` value in your next request.
 3. Continue until `has_more` is `false`.
 
@@ -250,7 +250,17 @@ Users are identified through the `actor` field in two ways:
 * **`user_actor`:** Contains `email_address` for users who authenticate through OAuth (most common)
 * **`api_actor`:** Contains `api_key_name` for users who authenticate with an API key
 
-The `customer_type` field indicates whether the usage is from `api` customers (pay-as-you-go API) or `subscription` customers (Pro/Team plans).
+The `customer_type` field is either `api` or `subscription`. Every record, whichever value it has, describes usage authenticated against your Claude Console organization.
+
+### Does this API include usage from Claude subscription plans?
+
+No. When someone signs in to Claude Code with a Claude subscription plan, such as Pro, Max, Team, or Enterprise, their usage is attributed to their claude.ai organization, and this API doesn't return it.
+
+To track that usage, use one of these options:
+
+* **Claude Enterprise Analytics API:** Reports Claude Code activity for Claude Enterprise organizations and isn't available on other plans. See [Analytics APIs](https://platform.claude.com/docs/en/manage-claude/analytics-api).
+* **Analytics dashboard in claude.ai:** Available on Team and Enterprise plans. See [Track team usage with analytics](https://code.claude.com/docs/en/analytics).
+* **OpenTelemetry export:** Works on any plan. See [Monitoring usage with OpenTelemetry](https://code.claude.com/docs/en/monitoring-usage).
 
 ### What's the data retention period?
 
@@ -258,7 +268,7 @@ Historical Claude Code analytics data is retained and accessible through the API
 
 ### Which Claude Code deployments are supported?
 
-This API only tracks Claude Code usage on the Claude API. Usage through [Claude in Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry), [Claude on Google Cloud](https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai), or [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) is not included.
+This API only tracks Claude Code usage on the Claude API. Usage through [Claude in Amazon Bedrock](https://platform.claude.com/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude in Microsoft Foundry](https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry), [Claude Models on Google Cloud](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/overview), or [Claude Platform on AWS](https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws) is not included.
 
 ### What does it cost to use this API?
 
@@ -266,7 +276,7 @@ The Claude Code Analytics API is free to use for all organizations with access t
 
 ### How do I calculate tool acceptance rates?
 
-Tool acceptance rate = `accepted / (accepted + rejected)` for each tool type. For example, if the edit tool shows 45 accepted and 5 rejected, the acceptance rate is 90%.
+Tool acceptance rate = `accepted / (accepted + rejected)` for each tool type. For example, if the edit tool shows 45 accepted and 5 rejected, the acceptance rate is 90 percent.
 
 ### What time zone is used for the date parameter?
 
@@ -278,7 +288,7 @@ The Claude Code Analytics API helps you understand and optimize your team's deve
 
 * [Admin API](https://platform.claude.com/docs/en/manage-claude/admin-api)
 * [Admin API reference](https://platform.claude.com/docs/en/api/beta/organization)
-* [Claude Code Analytics dashboard](https://platform.claude.com/claude-code)
+* [Claude Code Analytics dashboard](https://platform.claude.com/claude-code) in the Claude Console
 * [Usage and Cost API](https://platform.claude.com/docs/en/manage-claude/usage-cost-api) - Track API usage across all Anthropic services
 * [Compliance API](https://platform.claude.com/docs/en/manage-claude/compliance-api) - Retrieve audit and activity data
 * [Identity and access management](https://code.claude.com/docs/en/iam)

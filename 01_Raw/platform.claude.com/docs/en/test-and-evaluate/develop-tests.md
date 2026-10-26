@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/develop-tests
-fetched_at: 2026-10-19T05:32:47.478268+00:00
+fetched_at: 2026-10-26T05:40:11.131108+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ Good success criteria are:
     **Quantitative methods:**
 
     * A/B testing: Compare performance against a baseline model or earlier version.
-    * User feedback: Implicit measures like task completion rates.
+    * User feedback: Implicit measures such as task completion rates.
     * Edge case analysis: Percentage of edge cases handled without errors.
 
     **Qualitative scales:**
@@ -69,7 +69,7 @@ Here are some criteria that might be important for your use case. This list is n
 
 <AccordionGroup>
   <Accordion title="Task fidelity">
-    How well does the model need to perform on the task? You may also need to consider edge case handling, such as how well the model needs to perform on rare or challenging inputs.
+    How well does the model need to perform on the task? You might also need to consider edge case handling, such as how well the model needs to perform on rare or challenging inputs.
   </Accordion>
 
   <Accordion title="Consistency">
@@ -77,7 +77,7 @@ Here are some criteria that might be important for your use case. This list is n
   </Accordion>
 
   <Accordion title="Relevance and coherence">
-    How well does the model directly address the user's questions or instructions? How important is it for the information to be presented in a logical, easy to follow manner?
+    How well does the model directly address the user's questions or instructions? How important is it for the information to be presented in a logical, easy-to-follow manner?
   </Accordion>
 
   <Accordion title="Tone and style">
@@ -97,17 +97,17 @@ Here are some criteria that might be important for your use case. This list is n
   </Accordion>
 
   <Accordion title="Price">
-    What is your budget for running the model? Consider factors like the cost for each API call, the size of the model, and the frequency of usage.
+    What is your budget for running the model? Consider factors such as the cost for each API call, the size of the model, and the frequency of usage.
   </Accordion>
 </AccordionGroup>
 
 Most use cases need multidimensional evaluation along several success criteria.
 
 <Accordion title="Example multidimensional criteria for sentiment analysis">
-  |      | Criteria                                                                                                                                                                                                                                                                               |
-  | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-  | Bad  | The model should classify sentiments well                                                                                                                                                                                                                                              |
-  | Good | On a held-out test set of 10,000 diverse Twitter posts, the sentiment analysis model should achieve:<br />- an F1 score of at least 0.85<br />- 99.5% of outputs are non-toxic<br />- 90% of errors would cause inconvenience, not egregious error\*<br />- 95% response time \< 200ms |
+  |      | Criteria                                                                                                                                                                                                                                                                        |
+  | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+  | Bad  | The model should classify sentiments well                                                                                                                                                                                                                                       |
+  | Good | On a held-out test set of 10,000 diverse Twitter posts, the sentiment analysis model should achieve:<br />- an F1 score of at least 0.85<br />- 99.5% non-toxic outputs<br />- 90% of errors would cause inconvenience, not egregious error\*<br />- 95% response time \< 200ms |
 
   \*In reality, you would also define what "inconvenience" and "egregious" mean.
 </Accordion>
@@ -131,8 +131,8 @@ Most use cases need multidimensional evaluation along several success criteria.
 ### Example evals
 
 <AccordionGroup>
-  <Accordion title="Task fidelity (sentiment analysis) - exact match evaluation">
-    **What it measures:** Exact match evals measure whether the model's output matches a predefined correct answer, typically after normalizing whitespace and case. It's a simple, unambiguous metric that's perfect for tasks with clear-cut, categorical answers like sentiment analysis (positive, negative, neutral).
+  <Accordion title="Task fidelity (sentiment analysis): exact match evaluation">
+    **What it measures:** Exact match evals measure whether the model's output matches a predefined correct answer, typically after normalizing whitespace and case. It's a simple, unambiguous metric that's perfect for tasks with clear-cut, categorical answers such as sentiment analysis (positive, negative, neutral).
 
     **Example eval test cases:** 1,000 tweets with human-labeled sentiments.
 
@@ -244,7 +244,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -493,7 +493,7 @@ Most use cases need multidimensional evaluation along several success criteria.
     </CodeGroup>
   </Accordion>
 
-  <Accordion title="Consistency (FAQ bot) - cosine similarity evaluation">
+  <Accordion title="Consistency (FAQ bot): cosine similarity evaluation">
     **What it measures:** Cosine similarity measures the similarity between two vectors (in this case, sentence embeddings of the model's output using [Sentence-BERT (SBERT)](https://sbert.net/)) by computing the cosine of the angle between them. Values closer to 1 indicate higher similarity. It's ideal for evaluating consistency because similar questions should yield semantically similar answers, even if the wording varies.
 
     **Example eval test cases:** 50 groups with a few paraphrased versions each.
@@ -670,7 +670,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 2048,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           foreach (var block in message.Content)
           {
@@ -1039,7 +1039,7 @@ Most use cases need multidimensional evaluation along several success criteria.
     </CodeGroup>
   </Accordion>
 
-  <Accordion title="Relevance and coherence (summarization) - ROUGE-L evaluation">
+  <Accordion title="Relevance and coherence (summarization): ROUGE-L evaluation">
     **What it measures:** ROUGE-L (Recall-Oriented Understudy for Gisting Evaluation - Longest Common Subsequence) evaluates the quality of generated summaries. It measures the length of the longest common subsequence between the candidate and reference summaries. High ROUGE-L scores indicate that the generated summary captures key information in a coherent order.
 
     **Example eval test cases:** 200 articles with reference summaries.
@@ -1124,7 +1124,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       function rougeL(candidate: string, reference: string): number {
         const candidateWords = candidate.toLowerCase().trim().split(/\s+/);
         const referenceWords = reference.toLowerCase().trim().split(/\s+/);
@@ -1186,14 +1186,14 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       double RougeL(string candidate, string reference)
       {
           var candidateWords = Regex.Split(candidate.ToLowerInvariant().Trim(), @"\s+");
@@ -1296,7 +1296,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       func rougeL(candidate, reference string) float64 {
       	candidateWords := strings.Fields(strings.ToLower(candidate))
       	referenceWords := strings.Fields(strings.ToLower(reference))
@@ -1377,7 +1377,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       double rougeL(String candidate, String reference) {
           var candidateWords = candidate.toLowerCase().strip().split("\\s+");
           var referenceWords = reference.toLowerCase().strip().split("\\s+");
@@ -1449,7 +1449,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       // ROUGE-L measures the longest common subsequence (LCS) of words between the
       // candidate and reference summaries, reported here as an F1 score. Tokenization
-      // is simplified to whitespace words; scores may differ from the Python rouge library.
+      // is simplified to whitespace words; scores might differ from the Python rouge library.
       function rougeL(string $candidate, string $reference): float
       {
           $candidateWords = preg_split('/\s+/', strtolower(trim($candidate)));
@@ -1533,7 +1533,7 @@ Most use cases need multidimensional evaluation along several success criteria.
 
       # ROUGE-L measures the longest common subsequence (LCS) of words between the
       # candidate and reference summaries, reported here as an F1 score. Tokenization
-      # is simplified to whitespace words; scores may differ from the Python rouge library.
+      # is simplified to whitespace words; scores might differ from the Python rouge library.
       def rouge_l(candidate, reference)
         candidate_words = candidate.downcase.split
         reference_words = reference.downcase.split
@@ -1566,8 +1566,8 @@ Most use cases need multidimensional evaluation along several success criteria.
     </CodeGroup>
   </Accordion>
 
-  <Accordion title="Tone and style (customer service) - LLM-based Likert scale">
-    **What it measures:** The LLM-based Likert scale is a psychometric scale that uses an LLM to judge subjective attitudes or perceptions. Here, it's used to rate the tone of responses on a scale from 1 to 5. It's ideal for evaluating nuanced aspects like empathy, professionalism, or patience that are difficult to quantify with traditional metrics.
+  <Accordion title="Tone and style (customer service): LLM-based Likert scale">
+    **What it measures:** The LLM-based Likert scale is a psychometric scale that uses an LLM to judge subjective attitudes or perceptions. Here, it's used to rate the tone of responses on a scale from 1 to 5. It's ideal for evaluating nuanced aspects such as empathy, professionalism, or patience that are difficult to quantify with traditional metrics.
 
     **Example eval test cases:** 100 customer inquiries with target tone (empathetic, patient, professional).
 
@@ -1608,7 +1608,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           5: Perfectly {target_tone}
           Output only the number."""
 
-          # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=1024,
@@ -1666,7 +1666,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly ${targetTone}
       Output only the number.`;
 
-        // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         const response = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 1024,
@@ -1712,7 +1712,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 2048,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -1727,12 +1727,12 @@ Most use cases need multidimensional evaluation along several success criteria.
               Output only the number.
               """;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = tonePrompt }],
+              Messages = [new UserMessageParam { Content = tonePrompt }],
           });
           return int.Parse(ContentText(response).Trim());
       }
@@ -1810,7 +1810,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly %[1]s
       Output only the number.`, targetTone, modelOutput)
 
-      	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+      	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
       		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
@@ -1879,7 +1879,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               5: Perfectly %1$s
               Output only the number.""".formatted(targetTone, modelOutput);
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
@@ -1937,7 +1937,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number.
           PROMPT;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           $response = $client->messages->create(
               model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 1024,
@@ -2014,7 +2014,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number.
         PROMPT
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         response = client.messages.create(
           model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
@@ -2037,8 +2037,8 @@ Most use cases need multidimensional evaluation along several success criteria.
     </CodeGroup>
   </Accordion>
 
-  <Accordion title="Privacy preservation (medical chatbot) - LLM-based binary classification">
-    **What it measures:** Binary classification determines if an input belongs to one of two classes. Here, it's used to classify whether a response contains PHI or not. This method can account for context and identify subtle or implicit forms of PHI that rule-based systems might miss.
+  <Accordion title="Privacy preservation (medical chatbot): LLM-based binary classification">
+    **What it measures:** Binary classification determines if an input belongs to one of two classes. Here, it's used to classify whether a response contains PHI. This method can account for context and identify subtle or implicit forms of PHI that rule-based systems might miss.
 
     **Example eval test cases:** 500 simulated patient queries, some with PHI.
 
@@ -2088,7 +2088,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           <response>{model_output}</response>
           Output only 'yes' or 'no'."""
 
-          # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=1024,
@@ -2165,7 +2165,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       <response>${modelOutput}</response>
       Output only 'yes' or 'no'.`;
 
-        // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         const response = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 1024,
@@ -2208,7 +2208,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = prompt }],
+              Messages = [new UserMessageParam { Content = prompt }],
           });
           return ContentText(message);
       }
@@ -2233,12 +2233,12 @@ Most use cases need multidimensional evaluation along several success criteria.
               Output only 'yes' or 'no'.
               """;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = binaryPrompt }],
+              Messages = [new UserMessageParam { Content = binaryPrompt }],
           });
           return ContentText(response).Trim().ToLowerInvariant() == "no";
       }
@@ -2330,7 +2330,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       <response>%s</response>
       Output only 'yes' or 'no'.`, modelOutput)
 
-      	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+      	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
       		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
@@ -2407,7 +2407,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               <response>%s</response>
               Output only 'yes' or 'no'.""".formatted(modelOutput);
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
@@ -2478,7 +2478,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only 'yes' or 'no'.
           PROMPT;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           $response = $client->messages->create(
               model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 1024,
@@ -2564,7 +2564,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only 'yes' or 'no'.
         PROMPT
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         response = client.messages.create(
           model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
@@ -2590,7 +2590,7 @@ Most use cases need multidimensional evaluation along several success criteria.
     </CodeGroup>
   </Accordion>
 
-  <Accordion title="Context utilization (conversation assistant) - LLM-based ordinal scale">
+  <Accordion title="Context utilization (conversation assistant): LLM-based ordinal scale">
     **What it measures:** Similar to the Likert scale, the ordinal scale measures on a fixed, ordered scale (1–5). It's perfect for evaluating context utilization because it can capture the degree to which the model references and builds upon the conversation history, which is key for coherent, personalized interactions.
 
     **Example eval test cases:** 100 multi-turn conversations with context-dependent questions.
@@ -2662,7 +2662,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           5: Perfectly utilizes context
           Output only the number and nothing else."""
 
-          # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           response = client.messages.create(
               model="claude-opus-5-5",
               max_tokens=1024,
@@ -2754,7 +2754,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly utilizes context
       Output only the number and nothing else.`;
 
-        // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         const response = await client.messages.create({
           model: "claude-opus-5-5",
           max_tokens: 1024,
@@ -2812,11 +2812,10 @@ Most use cases need multidimensional evaluation along several success criteria.
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [.. conversation.Select(turn => new MessageParam
-              {
-                  Role = turn.Role == "user" ? Role.User : Role.Assistant,
-                  Content = turn.Content,
-              })],
+              Messages = [.. conversation.Select<Turn, MessageParam>(turn =>
+                  turn.Role == "user"
+                      ? new UserMessageParam { Content = turn.Content }
+                      : new AssistantMessageParam { Content = turn.Content })],
           });
           return ContentText(message);
       }
@@ -2836,12 +2835,12 @@ Most use cases need multidimensional evaluation along several success criteria.
               Output only the number and nothing else.
               """;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var response = await client.Messages.Create(new MessageCreateParams
           {
               Model = Model.ClaudeOpus5_5,
               MaxTokens = 1024,
-              Messages = [new() { Role = Role.User, Content = ordinalPrompt }],
+              Messages = [new UserMessageParam { Content = ordinalPrompt }],
           });
           return int.Parse(ContentText(response).Trim());
       }
@@ -2947,7 +2946,7 @@ Most use cases need multidimensional evaluation along several success criteria.
       5: Perfectly utilizes context
       Output only the number and nothing else.`, conversationText.String(), modelOutput)
 
-      	// Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+      	// Generally best practice to evaluate with a different model from the one used to generate the evaluated output
       	response, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
       		Model:     anthropic.ModelClaudeOpus5_5,
       		MaxTokens: 1024,
@@ -3036,7 +3035,7 @@ Most use cases need multidimensional evaluation along several success criteria.
               5: Perfectly utilizes context
               Output only the number and nothing else.""".formatted(conversationText, modelOutput);
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           var params = MessageCreateParams.builder()
               .model(Model.CLAUDE_OPUS_5_5)
               .maxTokens(1024L)
@@ -3107,7 +3106,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number and nothing else.
           PROMPT;
 
-          // Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+          // Generally best practice to evaluate with a different model from the one used to generate the evaluated output
           $response = $client->messages->create(
               model: Model::CLAUDE_OPUS_5_5,
               maxTokens: 1024,
@@ -3194,7 +3193,7 @@ Most use cases need multidimensional evaluation along several success criteria.
           Output only the number and nothing else.
         PROMPT
 
-        # Generally best practice to use a different model to evaluate than the model used to generate the evaluated output
+        # Generally best practice to evaluate with a different model from the one used to generate the evaluated output
         response = client.messages.create(
           model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 1024,
@@ -3239,15 +3238,15 @@ When deciding which method to use to grade evals, choose the fastest, most relia
 
 2. **Human grading:** Most flexible and high quality, but slow and expensive. Avoid if possible.
 
-3. **LLM-based grading:** Fast and flexible, scalable and suitable for complex judgment. Test to ensure reliability first then scale.
+3. **LLM-based grading:** Fast and flexible, scalable and suitable for complex judgment. Test to ensure reliability first, then scale.
 
 ### Tips for LLM-based grading
 
 * **Have detailed, clear rubrics:** "The answer should always mention 'Acme Inc.' in the first sentence. If it does not, the answer is automatically graded as 'incorrect.'"
   <Note>
-    A given use case, or even a specific success criteria for that use case, might require several rubrics for holistic evaluation.
+    A given use case, or even a specific success criterion for that use case, might require several rubrics for holistic evaluation.
   </Note>
-* **Empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
+* **Be empirical or specific:** For example, instruct the LLM to output only 'correct' or 'incorrect', or to judge from a scale of 1–5. Purely qualitative evaluations are hard to assess quickly and at scale.
 * **Encourage reasoning:** Use a grader model with [thinking](https://platform.claude.com/docs/en/build-with-claude/thinking) on, so that it reasons before it produces an evaluation score. This increases evaluation performance, particularly for tasks requiring complex judgment.
 
 <Accordion title="Example: LLM-based grading">
@@ -3385,7 +3384,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
         {
             Model = Model.ClaudeOpus5_5,
             MaxTokens = 2048,
-            Messages = [new() { Role = Role.User, Content = BuildGraderPrompt(output, goldenAnswer) }],
+            Messages = [new UserMessageParam { Content = BuildGraderPrompt(output, goldenAnswer) }],
         });
         return ContentText(graderResponse).ToLowerInvariant().Contains("<result>correct</result>")
             ? "correct"
@@ -3407,7 +3406,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
         {
             Model = Model.ClaudeOpus5_5,
             MaxTokens = 1024,
-            Messages = [new() { Role = Role.User, Content = prompt }],
+            Messages = [new UserMessageParam { Content = prompt }],
         });
         return ContentText(message);
     }
@@ -3723,7 +3722,7 @@ When deciding which method to use to grade evals, choose the fastest, most relia
     **Tip:** Drop this page into the chat as guidance for Claude!
   </Card>
 
-  <Card title="Evals cookbook" icon="link" href="https://platform.claude.com/cookbook/misc-building-evals">
+  <Card title="Evals recipe" icon="link" href="https://platform.claude.com/cookbook/misc-building-evals">
     More code examples of human-, code-, and LLM-graded evals.
   </Card>
 </CardGroup>

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/cost_report/retrieve
-fetched_at: 2026-10-19T05:33:00.066642+00:00
+fetched_at: 2026-10-26T05:40:34.847711+00:00
 fetch_method: mintlify_md
 ---
 
@@ -170,6 +170,8 @@ Get Cost Report
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Returns
 
 - `BetaCostReport object`
@@ -287,8 +289,8 @@ Get Cost Report
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/cost_report \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/telemetry_destinations/test
-fetched_at: 2026-10-19T05:33:02.760623+00:00
+fetched_at: 2026-10-26T05:40:39.274792+00:00
 fetch_method: mintlify_md
 ---
 
@@ -137,6 +137,8 @@ Send one test span, named `anthropic.test`, to the destination with its register
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Returns
 
 - `BetaTelemetryDestinationTestResponse object`
@@ -170,9 +172,9 @@ Send one test span, named `anthropic.test`, to the destination with its register
 ```bash
 curl https://api.anthropic.com/v1/organizations/telemetry_destinations/$DESTINATION_ID/test \
     -X POST \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: telemetry-destinations-2026-08-11' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

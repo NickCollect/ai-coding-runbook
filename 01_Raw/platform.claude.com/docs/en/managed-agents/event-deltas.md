@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/event-deltas
-fetched_at: 2026-10-19T05:32:45.020153+00:00
+fetched_at: 2026-10-26T05:40:05.402643+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,13 +16,13 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-By default, the agent's response text reaches the [session event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) as buffered `agent.message` events. Each one is emitted only after the model request that produced it finishes. Event deltas let you render that text incrementally, as a live preview, while the model is still generating it.
+By default, the agent's response text reaches the [session event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) as buffered `agent.message` events. Each one is emitted only after the model request that produced it completes. Event deltas let you render that text incrementally, as a live preview, while the model is still generating it.
 
 Previews are a best-effort display aid, and the buffered `agent.message` is always the authoritative record. A client that ignores previews still receives a complete, correct stream.
 
 ## Opt in to previews
 
-Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to the stream you're reading, and repeat it once for each event type you want previewed. The accepted values are `agent.message` and `agent.thinking`. Any other value returns a 400 error, as does a request with more than 100 values.
+Previews are opt-in for each stream connection. Add the `event_deltas[]` query parameter to the stream you're reading, and repeat it once for each event type you want previewed. The accepted values are `agent.message` and `agent.thinking`. Any other value returns a 400 error, as does a request with more than 100 values.
 
 Both stream endpoints accept the parameter:
 
@@ -35,7 +35,7 @@ A subagent's previews appear on [that subagent's own thread stream](https://plat
 
 ### Preview events
 
-When a previewed event begins, the stream emits an `event_start` carrying the upcoming event's type and `id`:
+When a previewed event starts, the stream emits an `event_start` carrying the upcoming event's type and `id`:
 
 ```json
 {
@@ -74,9 +74,9 @@ Unlike persisted events, `event_start` and `event_delta` have no `id` or `proces
 
 ## Accumulate and reconcile
 
-Every SDK that supports event deltas includes an [accumulator helper](https://platform.claude.com/docs/en/managed-agents/event-deltas#sdk-accumulator-helpers) that handles the `index` bookkeeping for you. The manual pattern in this section works in every language when you need custom bookkeeping. Apply it to the generated event types.
+Every SDK that supports event deltas includes an [accumulator helper](https://platform.claude.com/docs/en/managed-agents/event-deltas#sdk-accumulator-helpers) that handles the `index` (csharp, go: `Index`) bookkeeping for you. The manual pattern in this section works in every language when you need custom bookkeeping. Apply it to the generated event types.
 
-In the manual pattern, hold preview text in a temporary map keyed by `(event_id, index)`, and treat the buffered event as the record. Reconcile the two per model request.
+In the manual pattern, hold preview text in a temporary map keyed by `(event_id, index)`, and treat the buffered event as the record. Reconcile the two for each model request.
 
 A turn opens with a single `session.status_running` event. On a turn that completes normally, each model request then produces these events, in order:
 
@@ -84,7 +84,7 @@ A turn opens with a single `session.status_running` event. On a turn that comple
 2. `event_start`
 3. The `event_delta` events
 4. The buffered `agent.message`
-5. [`span.model_request_end`](https://platform.claude.com/docs/en/managed-agents/reference#event-types) (in the Span events tab)
+5. [`span.model_request_end`](https://platform.claude.com/docs/en/managed-agents/reference#event-types) (in the **Span events** tab)
 
 On the wire, this is the previewed portion of that sequence, interleaved with the connection's other buffered events:
 
@@ -95,7 +95,7 @@ event_delta     {"event_id": "sevt_01abc...", "delta": {"type": "content_delta",
 agent.message   {"id": "sevt_01abc...", "content": [...]}
 ```
 
-The `event_delta` line repeats once per text fragment. Process each event as it arrives:
+The `event_delta` line repeats once for each text fragment. Process each event as it arrives:
 
 1. On `event_start`, note the announced `id`. The identifiers always line up: `event_start.event.id`, every `event_delta.event_id`, and the buffered `agent.message`'s `id` are the same value.
 2. On each `event_delta`, append `delta.content.text` to the entry at `(event_id, delta.index)` and render the running text. The first delta for an `index` creates that entry.
@@ -105,7 +105,7 @@ The `event_delta` line repeats once per text fragment. Process each event as it 
 The pattern relies on two guarantees:
 
 * Concatenating a preview's deltas in arrival order, keyed by `(event_id, index)`, gives a prefix of `content[index].text` in the buffered event. It is not necessarily the whole text, because deltas might be [shed under load](https://platform.claude.com/docs/en/managed-agents/event-deltas#limitations).
-* A connection emits at most one `event_start` per `event_id`, and the buffered event is the last thing that connection delivers for that `id`.
+* A connection emits at most one `event_start` for each `event_id`, and the buffered event is the last thing that connection delivers for that `id`.
 
 ### SDK accumulator helpers
 
@@ -113,78 +113,17 @@ Each SDK's helper handles the `index` (csharp, go: `Index`) bookkeeping. The Go,
 
 The following examples opt in to `agent.message` previews and reconcile them with the buffered event:
 
-<CodeGroup exclude="shell:CLI">
-  ```bash cURL
-  # Opt in to agent.message previews via event_deltas, then accumulate manually.
-  exec {stream}< <(
-    curl --fail-with-body -sS -N \
-      "https://api.anthropic.com/v1/sessions/$SESSION_ID/events/stream?beta=true&event_deltas%5B%5D=agent.message" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "accept: text/event-stream"
-  )
-
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/sessions/$SESSION_ID/events?beta=true" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
-    -H "content-type: application/json" \
-    -d '{
-      "events": [
-        {
-          "type": "user.message",
-          "content": [{"type": "text", "text": "In one short sentence, describe what an event delta is."}]
-        }
-      ]
-    }' >/dev/null
-
-  # Accumulate deltas keyed by (message id, content index); the final
-  # agent.message carries the full text, so it replaces every preview for that id.
-  declare -A preview
-  while IFS= read -r -u "$stream" event_line; do
-    [[ $event_line == data:* ]] || continue
-    event_json=${event_line#data: }
-    case $(jq -r '.type' <<<"$event_json") in
-      event_start)
-        preview_id=$(jq -r '.event.id' <<<"$event_json")
-        printf '[event_start id=%s]\n' "$preview_id"
-        ;;
-      event_delta)
-        preview_key=$(jq -r '.event_id + ":" + (.delta.index | tostring)' <<<"$event_json")
-        preview[$preview_key]+=$(jq -r '.delta.content.text' <<<"$event_json")
-        printf '[event_delta] %s\n' "${preview[$preview_key]}"
-        ;;
-      agent.message)
-        msg_id=$(jq -r '.id' <<<"$event_json")
-        for preview_key in "${!preview[@]}"; do
-          [[ $preview_key == "$msg_id":* ]] && unset "preview[$preview_key]"
-        done
-        printf '[agent.message id=%s] ' "$msg_id"
-        jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
-        printf '\n'
-        ;;
-      span.model_request_end)
-        for preview_key in "${!preview[@]}"; do
-          printf '[closing unreconciled preview for %s]\n' "${preview_key%%:*}"
-        done
-        preview=()
-        ;;
-      session.status_idle)
-        break
-        ;;
-    esac
-  done
-  exec {stream}<&-
-  ```
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   <CodeGroupItem language="CLI">
     This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
   </CodeGroupItem>
 
   ```python Python
-  # Preview snapshots, keyed by event id. accumulate_managed_agents_event folds each
+  # Preview snapshots, keyed by event ID. accumulate_managed_agents_event folds each
   # event_start / event_delta into an agent.message snapshot; the buffered
   # agent.message replaces it.
   previews: dict[str, BetaManagedAgentsAgentMessageEvent] = {}
@@ -198,7 +137,9 @@ The following examples opt in to `agent.message` previews and reconcile them wit
           events=[
               {
                   "type": "user.message",
-                  "content": [{"type": "text", "text": "Describe the repo in one sentence."}],
+                  "content": [
+                      {"type": "text", "text": "Describe the repo in one sentence."}
+                  ],
               },
           ],
       )
@@ -211,14 +152,18 @@ The following examples opt in to `agent.message` previews and reconcile them wit
                       previews[event.event.id] = snapshot
                   print(f"event_start             {event.event.type} {event.event.id}")
               case "event_delta":
-                  preview = accumulate_managed_agents_event(previews.get(event.event_id), event)
+                  preview = accumulate_managed_agents_event(
+                      previews.get(event.event_id), event
+                  )
                   if preview is not None:
                       previews[event.event_id] = preview
                       text = "".join(block.text for block in preview.content)
                       print(f"event_delta             preview: {text!r}")
               case "agent.message":
                   # The buffered event is the record: it replaces and closes the preview
-                  preview = accumulate_managed_agents_event(previews.pop(event.id, None), event)
+                  preview = accumulate_managed_agents_event(
+                      previews.pop(event.id, None), event
+                  )
                   text = "".join(block.text for block in preview.content)
                   print(f"agent.message           {event.id} {text!r}")
               case "span.model_request_end":
@@ -232,13 +177,13 @@ The following examples opt in to `agent.message` previews and reconcile them wit
   ```
 
   ```typescript TypeScript
-  // Preview snapshots, keyed by event id. `accumulateManagedAgentsEvent`
+  // Preview snapshots, keyed by event ID. `accumulateManagedAgentsEvent`
   // folds event_start / event_delta previews into an agent.message snapshot.
   const previews = new Map<string, BetaManagedAgentsAgentMessageEvent>();
 
   // Opt in to agent.message previews for this connection only
   const stream = await client.beta.sessions.events.stream(session.id, {
-    event_deltas: ["agent.message"],
+    event_deltas: ["agent.message"]
   });
   await client.beta.sessions.events.send(session.id, {
     events: [
@@ -252,8 +197,8 @@ The following examples opt in to `agent.message` previews and reconcile them wit
   deltas: for await (const event of stream) {
     switch (event.type) {
       case "event_start": {
-        // 1. Note the announced id and open the snapshot. Deltas and the
-        //    buffered event carry the same id.
+        // 1. Note the announced ID and open the snapshot. Deltas and the
+        //    buffered event carry the same ID.
         const preview = accumulateManagedAgentsEvent(undefined, event);
         if (preview) {
           previews.set(event.event.id, preview);
@@ -309,20 +254,15 @@ The following examples opt in to `agent.message` previews and reconcile them wit
       [
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
               Content =
               [
-                  new BetaManagedAgentsTextBlock
-                  {
-                      Type = BetaManagedAgentsTextBlockType.Text,
-                      Text = "Write a haiku about event streams.",
-                  },
+                  new BetaManagedAgentsTextBlock { Text = "Write a haiku about event streams." },
               ],
           },
       ],
   });
 
-  // Accumulate preview fragments per (event id, content index). The buffered
+  // Accumulate preview fragments for each (event ID, content index). The buffered
   // agent.message that follows carries the complete content, so it replaces the
   // accumulated preview rather than appending to it.
   Dictionary<string, SortedDictionary<long, string>> previews = [];
@@ -331,12 +271,12 @@ The following examples opt in to `agent.message` previews and reconcile them wit
   {
       if (streamEvent.TryPickStartEvent(out var start))
       {
-          // A preview opened for the event with this id. This stream only opts in
+          // A preview opened for the event with this ID. This stream only opts in
           // to agent.message deltas; TryPick* returns false instead of throwing,
           // so other preview types (including ones added later) are skipped.
           if (start.Event.TryPickAgentMessage(out var preview))
           {
-              Console.WriteLine($"event_start             {preview.Type.Raw()} {preview.ID}");
+              Console.WriteLine($"event_start             {preview.Type.GetString()} {preview.ID}");
           }
       }
       else if (streamEvent.TryPickDeltaEvent(out var delta))
@@ -385,10 +325,8 @@ The following examples opt in to `agent.message` previews and reconcile them wit
   	if _, err := client.Beta.Sessions.Events.Send(ctx, session.ID, anthropic.BetaSessionEventSendParams{
   		Events: []anthropic.BetaManagedAgentsEventParamsUnion{{
   			OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  				Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   				Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   					OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  						Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   						Text: "Write a haiku about the ocean.",
   					},
   				}},
@@ -399,7 +337,7 @@ The following examples opt in to `agent.message` previews and reconcile them wit
   	}
 
   	// The accumulator folds event_start / event_delta fragments into
-  	// per-event-id agent.message snapshots. The zero value is ready to use.
+  	// agent.message snapshots, one for each event ID. The zero value is ready to use.
   	var previews anthropic.BetaManagedAgentsEventAccumulator
 
   deltas:
@@ -446,7 +384,6 @@ The following examples opt in to `agent.message` previews and reconcile them wit
           session.id(),
           EventSendParams.builder()
               .addEvent(BetaManagedAgentsUserMessageEventParams.builder()
-                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
                   .addTextContent("Describe the repo in one sentence.")
                   .build())
               .build()
@@ -459,7 +396,7 @@ The following examples opt in to `agent.message` previews and reconcile them wit
               case EVENT_START -> {
                   if (event.asEventStart().event().isAgentMessage()) {
                       var preview = event.asEventStart().event().asAgentMessage();
-                      IO.println("event_start             " + preview.type().asString() + " " + preview.id());
+                      IO.println("event_start             " + preview._type() + " " + preview.id());
                   }
               }
               case EVENT_DELTA -> {
@@ -505,7 +442,7 @@ The following examples opt in to `agent.message` previews and reconcile them wit
   use Anthropic\Beta\Sessions\Events\ManagedAgentsTextBlock;
   use Anthropic\Lib\Sessions\EventAccumulator;
 
-  // Preview snapshots, keyed by event id. EventAccumulator::accumulate() adds each
+  // Preview snapshots, keyed by event ID. EventAccumulator::accumulate() adds each
   // event_start / event_delta to an agent.message snapshot; the buffered
   // agent.message replaces it.
   $previews = [];
@@ -592,7 +529,7 @@ The following examples opt in to `agent.message` previews and reconcile them wit
 
   # Accumulate preview fragments by (event_id, index) into explicitly mutable
   # (`+""`) buffers so `<<` can append in place. The buffered agent.message with
-  # the same id is authoritative and replaces whatever the deltas built up.
+  # the same ID is authoritative and replaces whatever the deltas built up.
   buffers = Hash.new do |by_event, event_id|
     by_event[event_id] = Hash.new { |fragments, index| fragments[index] = +"" }
   end
@@ -631,89 +568,27 @@ A connection previews only the thread it's reading. The session-level stream pre
 
 A thread stream's path ends in `/threads/{thread_id}/stream`. `/events/stream` exists only at the session level, so there is no `/threads/{thread_id}/events/stream` endpoint.
 
-`event_start` and `event_delta` have the same shape on a thread stream as on the session-level stream, and the [accumulate and reconcile](https://platform.claude.com/docs/en/managed-agents/event-deltas#accumulate-and-reconcile) pattern applies as written. Run one accumulator instance per stream connection.
+`event_start` and `event_delta` have the same shape on a thread stream as on the session-level stream, and the [accumulate and reconcile](https://platform.claude.com/docs/en/managed-agents/event-deltas#accumulate-and-reconcile) pattern applies as written. Run one accumulator instance for each stream connection.
 
 <CodeGroup>
   ```bash cURL
-  # List the session's threads and pick a child: child threads carry a non-null
-  # parent_thread_id, and the primary thread's parent_thread_id is null.
-  THREAD_ID=$(
-    curl --fail-with-body -sS \
-      "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads?beta=true" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" |
-      jq -er 'first(.data[] | select(.parent_thread_id != null)).id'
-  )
-
-  # The child thread's stream takes the same event_deltas[] parameter as the
-  # session stream. Percent-encode the brackets (%5B%5D) and quote the URL.
-  exec {stream}< <(
-    curl --fail-with-body -sS -N \
-      "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true&event_deltas%5B%5D=agent.message" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01" \
-      -H "accept: text/event-stream"
-  )
-
-  while IFS= read -r -u "$stream" event_line; do
-    [[ $event_line == data:* ]] || continue
-    event_json=${event_line#data: }
-    case $(jq -r '.type' <<<"$event_json") in
-      event_delta)
-        jq -j '.delta.content.text' <<<"$event_json"
-        ;;
-      agent.message)
-        # The buffered event is the authoritative record; render its content.
-        printf '\n'
-        jq -j '.content[] | select(.type == "text") | .text' <<<"$event_json"
-        printf '\n'
-        ;;
-      session.thread_status_idle)
-        break
-        ;;
-    esac
-  done
-  exec {stream}<&-
+  # The thread stream takes the same event_deltas[] parameter as the session stream.
+  # Percent-encode the brackets (%5B%5D) and quote the URL.
+  curl --fail-with-body -sS -N \
+    "https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream?beta=true&event_deltas%5B%5D=agent.message" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "accept: text/event-stream"
   ```
 
   ```bash CLI
-  # List the session's threads and pick a child: child threads carry a non-null
-  # parent_thread_id, and the primary thread's parent_thread_id is null
-  # (--transform's #(parent_thread_id!=~null) query matches non-null values).
-  THREAD_ID=$(ant beta:sessions:threads list \
-    --session-id "$SESSION_ID" \
-    --format raw --transform 'data.#(parent_thread_id!=~null).id' --raw-output)
-
-  # The child thread's stream takes the same event_deltas parameter as the
-  # session stream, one --event-delta flag per event type to preview. @tostr
-  # re-encodes each text field as a JSON string, so every value stays on one
-  # YAML line and jq's fromjson recovers the original text.
-  transform='{type,frag:delta.content.text|@tostr,text:content.#(type=="text").text|@tostr}'
-  exec {stream}< <(ant beta:sessions:threads:events stream \
+  # The thread stream takes the same event_deltas parameter as the session stream,
+  # one --event-delta flag for each event type to preview.
+  ant beta:sessions:threads:events stream \
     --session-id "$SESSION_ID" \
     --thread-id "$THREAD_ID" \
-    --event-delta agent.message \
-    --transform "$transform" \
-    --format yaml)
-
-  type=
-  while IFS= read -r -u "$stream" line; do
-    case "$line" in
-      type:\ session.thread_status_idle) break ;;
-      type:\ *) type=${line#type: } ;;
-      frag:*)
-        [[ $type == event_delta ]] || continue
-        jq -j fromjson <<<"${line#frag: }" ;;
-      text:*)
-        [[ $type == agent.message ]] || continue
-        # The buffered event is the authoritative record; render its content.
-        printf '\n'
-        jq -r fromjson <<<"${line#text: }" ;;
-    esac
-  done
-  exec {stream}<&-
+    --event-delta agent.message
   ```
 
   ```python Python
@@ -737,7 +612,7 @@ A thread stream's path ends in `/threads/{thread_id}/stream`. `/events/stream` e
               case "event_delta":
                   print(event.delta.content.text, end="")
               case "agent.message":
-                  # The buffered event is the authoritative record; render its content
+                  # The buffered event is the authoritative record; render its content.
                   print()
                   for block in event.content:
                       if block.type == "text":
@@ -765,7 +640,7 @@ A thread stream's path ends in `/threads/{thread_id}/stream`. `/events/stream` e
   // session stream.
   const stream = await client.beta.sessions.threads.events.stream(childThreadId, {
     session_id: session.id,
-    event_deltas: ["agent.message"],
+    event_deltas: ["agent.message"]
   });
 
   threadDeltas: for await (const event of stream) {
@@ -839,7 +714,7 @@ A thread stream's path ends in `/threads/{thread_id}/stream`. `/events/stream` e
   	}
 
   	// The child thread's stream takes the same event_deltas parameter as the
-  	// session stream; run one read loop per stream connection.
+  	// session stream; run one read loop for each stream connection.
   	stream := client.Beta.Sessions.Threads.Events.StreamEvents(ctx, childThreadID, anthropic.BetaSessionThreadEventStreamParams{
   		SessionID: session.ID,
   		EventDeltas: []anthropic.BetaManagedAgentsDeltaType{
@@ -937,7 +812,7 @@ A thread stream's path ends in `/threads/{thread_id}/stream`. `/events/stream` e
               echo $event->delta->content->text;
               break;
           case $event instanceof ManagedAgentsAgentMessageEvent:
-              // The buffered event is the authoritative record; render its content
+              // The buffered event is the authoritative record; render its content.
               echo "\n";
               foreach ($event->content as $block) {
                   if ($block instanceof ManagedAgentsTextBlock) {
@@ -984,7 +859,7 @@ A thread stream's path ends in `/threads/{thread_id}/stream`. `/events/stream` e
   ```
 </CodeGroup>
 
-The read loop exits on [`session.thread_status_idle`](https://platform.claude.com/docs/en/managed-agents/reference#event-types), the event emitted when the session thread's turn finishes and the thread goes idle.
+The read loop exits on [`session.thread_status_idle`](https://platform.claude.com/docs/en/managed-agents/reference#event-types), the event emitted when the session thread's turn completes and the thread goes idle.
 
 ## Limitations
 
@@ -1006,7 +881,7 @@ The read loop exits on [`session.thread_status_idle`](https://platform.claude.co
 
 <CardGroup cols={2}>
   <Card title="Session event stream" icon="lightning" href="https://platform.claude.com/docs/en/managed-agents/events-and-streaming">
-    Send events, stream responses, and interrupt or redirect your session mid-execution.
+    Send events, stream responses, and interrupt or redirect your session while it runs.
   </Card>
 
   <Card title="Multiagent orchestration" icon="stack" href="https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration">

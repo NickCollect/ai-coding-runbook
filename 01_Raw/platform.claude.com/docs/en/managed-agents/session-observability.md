@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/session-observability
-fetched_at: 2026-10-19T05:32:45.055397+00:00
+fetched_at: 2026-10-26T05:40:05.486799+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-Use the session viewer in the Claude Console to inspect what an agent did in a session, without writing any code. Use the session's `usage` (csharp, go: `Usage`) totals to see what that work consumed.
+Use the session viewer in the Claude Console to inspect what an agent did in a session, without writing any code. Use the session's `usage` (csharp, go: `Usage`) totals to see what that work consumed. To see a session's turns, model requests, and tool uses in your observability platform, set up [OpenTelemetry tracing](https://platform.claude.com/docs/en/manage-claude/opentelemetry).
 
 ## Inspect a session in the Console
 
@@ -24,7 +24,7 @@ The session viewer is only accessible to Developers and Admins. To open it, go t
 
 The session viewer shows:
 
-* **Timeline minimap:** A zoomable overview of the session's activity over time, with one lane per thread in [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration) sessions. Select a lane to view that thread, or select a mark to jump to its event.
+* **Timeline minimap:** A zoomable overview of the session's activity over time, with one lane for each thread in [multiagent](https://platform.claude.com/docs/en/managed-agents/multiagent-orchestration) sessions. Select a lane to view that thread, or select a mark to jump to its event.
 * **Transcript:** The conversation grouped by model request, including thinking, tool calls with their inputs and results, and message text as it streams. You can filter the events and copy or download them as JSON.
 * **Inspector:** A resizable side panel with details about the session, in five tabs.
 
@@ -85,7 +85,7 @@ The session's `stats` object has its own `active_seconds`, which sums each threa
 
 ### Per-thread usage
 
-Each [session thread](https://platform.claude.com/docs/en/managed-agents/session-threads)'s own `usage` carries `list_cost` and `active_seconds` too. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost`. The session figure is the authoritative one.
+Each [session thread](https://platform.claude.com/docs/en/managed-agents/session-threads)'s own `usage` (csharp, go: `Usage`) carries `list_cost` (java, php: `listCost`; csharp, go: `ListCost`) and `active_seconds` (java, php: `activeSeconds`; csharp, go: `ActiveSeconds`) too. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost` (java, php: `listCost`; csharp, go: `ListCost`). The session figure is the authoritative one.
 
 ### Read usage from the stream
 
@@ -103,7 +103,7 @@ To enforce a spend limit, set a session budget rather than polling usage and sto
 ## Debugging tips
 
 * **Check session events:** The session reports errors through [`session.error`](https://platform.claude.com/docs/en/managed-agents/reference#event-types) events.
-* **Review tool results:** Tool execution failures often explain unexpected agent behavior. The Inspector's **Tools** tab shows each tool's failures.
+* **Review tool results:** Tool failures often explain unexpected agent behavior. The Inspector's **Tools** tab shows each tool's failures.
 * **Use system prompts:** Add logging instructions to the system prompt so the agent summarizes what it did and what it found.
 * **Troubleshoot previews:** If a stream that opts in to event deltas doesn't behave as you expect, see [Troubleshoot previews](https://platform.claude.com/docs/en/managed-agents/event-deltas#troubleshoot-previews).
 
@@ -111,7 +111,7 @@ To enforce a spend limit, set a session budget rather than polling usage and sto
 
 <CardGroup cols={2}>
   <Card title="Session event stream" icon="lightning" href="https://platform.claude.com/docs/en/managed-agents/events-and-streaming">
-    Send events, stream responses, and interrupt or redirect your session mid-execution.
+    Send events, stream responses, and interrupt or redirect your session while it runs.
   </Card>
 
   <Card title="Session budgets" icon="coins" href="https://platform.claude.com/docs/en/managed-agents/budgets">

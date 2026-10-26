@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token
-fetched_at: 2026-10-19T05:32:57.743425+00:00
+fetched_at: 2026-10-26T05:40:30.882164+00:00
 fetch_method: mintlify_md
 ---
 
@@ -139,6 +139,8 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -174,9 +176,9 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 ```bash
 curl https://api.anthropic.com/v1/tunnels/$TUNNEL_ID/rotate_token \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: mcp-tunnels-2026-06-22' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{}'
 ```
 

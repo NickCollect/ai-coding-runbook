@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/gcp
-fetched_at: 2026-10-19T05:32:45.962184+00:00
+fetched_at: 2026-10-26T05:40:07.711869+00:00
 fetch_method: mintlify_md
 ---
 
@@ -69,7 +69,7 @@ Google issues identity tokens automatically to any workload with an attached ser
   </Tab>
 
   <Tab title="GKE with Workload Identity">
-    Enable [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) on your cluster and bind your Kubernetes service account to a Google service account with the `iam.gke.io/gcp-service-account` annotation:
+    Enable [GKE Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) on your cluster and bind your Kubernetes service account to a Google service account with the `iam.gke.io/gcp-service-account` annotation:
 
     ```yaml
     apiVersion: v1
@@ -83,7 +83,7 @@ Google issues identity tokens automatically to any workload with an attached ser
 
     With this binding in place, the GKE metadata server returns a Google-signed token identical to the Cloud Run and GCE case: same `https://accounts.google.com` issuer, same `email` claim, same fetch URL. Configure Anthropic exactly as in the next section.
 
-    A `format=full` token from GKE additionally includes `google.compute_engine.project_id`, `google.compute_engine.zone`, and `google.compute_engine.instance_name` claims, which you can reference in a federation rule's `condition` matcher (a CEL expression like `claims.google.compute_engine.project_id == "my-project"`) to scope access to a specific cluster or node pool.
+    A `format=full` token from GKE additionally includes `google.compute_engine.project_id`, `google.compute_engine.zone`, and `google.compute_engine.instance_name` claims, which you can reference in a federation rule's `condition` matcher (a CEL expression such as `claims.google.compute_engine.project_id == "my-project"`) to scope access to a specific cluster or node pool.
 
     <Note>
       If you do not want to bind Kubernetes service accounts to Google service accounts, GKE pods can instead use the cluster's own OIDC issuer (`https://container.googleapis.com/v1/projects/PROJECT/locations/REGION/clusters/CLUSTER`) with a projected `serviceAccountToken` volume. That path uses a per-cluster issuer rather than `accounts.google.com`. See [Use WIF with Kubernetes](https://platform.claude.com/docs/en/manage-claude/wif-providers/kubernetes) for that pattern.
@@ -107,7 +107,7 @@ The wizard creates these resources for you. Use the following values whether you
 }
 ```
 
-**Federation rule:** Match on both the `sub` and `email` claims. `email` is the readable service-account address; `sub` is the service account's numeric unique ID, which Google never reuses, so pinning it protects the rule if the service account is deleted and a new one is later created with the same email. Find the unique ID with `gcloud iam service-accounts describe SA_EMAIL --format='value(uniqueId)'`.
+**Federation rule:** Match on both the `sub` and `email` claims. `email` is the readable service-account address; `sub` is the service account's numeric unique ID, which Google never reuses, so pinning it protects the rule if the service account is deleted and a new one is later created with the same email. Find the unique ID with `gcloud iam service-accounts describe inference-worker@my-project.iam.gserviceaccount.com --format='value(uniqueId)'`.
 
 ```json
 {
@@ -132,7 +132,7 @@ The wizard creates these resources for you. Use the following values whether you
 
 ## Acquire and use the token
 
-Inside your Google Cloud workload, fetch the identity token from the metadata server, exchange it at `POST /v1/oauth/token`, and use the returned bearer token to call the Claude API. The Claude SDK handles the exchange and refresh loop for you when you supply `identity_token_provider` (typescript: `identityTokenProvider`; php: `identityProvider`; csharp: `IdentityTokenProvider`; go: `option.WithFederationTokenProvider`; java: `IdentityTokenConfig`), as shown in the following examples. Except in Java (see the comment in that example), that option takes a token provider that returns a fresh identity token from the metadata server.
+Inside your Google Cloud workload, fetch the identity token from the metadata server, exchange it at `POST /v1/oauth/token`, and use the returned bearer token to call the Claude API. The Claude SDK handles the exchange and refresh loop for you when you supply `identity_token_provider` (typescript: `identityTokenProvider`; php: `identityProvider`; csharp: `IdentityTokenProvider`; go: `option.WithFederationTokenProvider()`; java: `IdentityTokenConfig`), as shown in the following examples. Except in Java (see the comment in that example), that option takes a token provider that returns a fresh identity token from the metadata server.
 
 <CodeGroup>
   ```bash cURL
@@ -143,7 +143,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   # Exchange it for an Anthropic access token
   RESPONSE=$(curl -sS https://api.anthropic.com/v1/oauth/token \
     -H "content-type: application/json" \
-    --data @- <<JSON
+    -d @- <<JSON
   {
     "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
     "assertion": "$JWT",
@@ -154,7 +154,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   }
   JSON
   )
-  ACCESS_TOKEN=$(echo "$RESPONSE" | jq -r .access_token)
+  ACCESS_TOKEN=$(jq -r .access_token <<<"$RESPONSE")
 
   # Call the Claude API
   curl -sS https://api.anthropic.com/v1/messages \
@@ -165,7 +165,22 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from Cloud Run"}]
-    }' | jq -r '.content[] | select(.type == "text") | .text'
+    }'
+  ```
+
+  ```bash CLI
+  # Write the Google-signed identity token to a file the CLI can read
+  export ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
+  curl -sS -H "Metadata-Flavor: Google" \
+    "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full" \
+    > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
+
+  # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
+  # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment.
+  ant messages create \
+    --model claude-opus-5-5 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello from Cloud Run"}'
   ```
 
   ```python Python
@@ -239,6 +254,51 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   }
   ```
 
+  ```csharp C#
+  using Anthropic.Credentials;
+  // ...
+
+  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
+  {
+      FederationRuleId = Environment.GetEnvironmentVariable("ANTHROPIC_FEDERATION_RULE_ID")!,
+      OrganizationId = Environment.GetEnvironmentVariable("ANTHROPIC_ORGANIZATION_ID"),
+      ServiceAccountId = Environment.GetEnvironmentVariable("ANTHROPIC_SERVICE_ACCOUNT_ID"),
+      WorkspaceId = Environment.GetEnvironmentVariable("ANTHROPIC_WORKSPACE_ID"),
+      IdentityTokenProvider = new MetadataTokenProvider(),
+  });
+  using var client = new AnthropicClient(new ClientOptions { Credentials = credentials });
+
+  var message = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeOpus5_5,
+      MaxTokens = 1024,
+      Messages = [new UserMessageParam { Content = "Hello from Cloud Run" }],
+  });
+  foreach (var block in message.Content)
+  {
+      if (block.Value is TextBlock textBlock)
+      {
+          Console.WriteLine(textBlock.Text);
+      }
+  }
+
+  class MetadataTokenProvider : IIdentityTokenProvider
+  {
+      private const string METADATA_URL =
+          "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full";
+
+      private static readonly HttpClient httpClient = new()
+      {
+          DefaultRequestHeaders = { { "Metadata-Flavor", "Google" } },
+      };
+
+      public async Task<string> GetIdentityTokenAsync(CancellationToken ct = default)
+      {
+          return await httpClient.GetStringAsync(METADATA_URL, ct);
+      }
+  }
+  ```
+
   ```go Go
   const audience = "https://api.anthropic.com"
 
@@ -296,9 +356,9 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   void main() throws Exception {
       HttpClient http = HttpClient.newHttpClient();
       HttpRequest metadataRequest = HttpRequest.newBuilder()
-              .uri(URI.create("http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full"))
-              .header("Metadata-Flavor", "Google")
-              .build();
+          .uri(URI.create("http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full"))
+          .header("Metadata-Flavor", "Google")
+          .build();
 
       // The Java SDK takes the token itself or a file path, not a function; with
       // source("value"), path(...) holds the token. The SDK sends that same token
@@ -309,90 +369,29 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
       String googleIdentityToken = http.send(metadataRequest, HttpResponse.BodyHandlers.ofString()).body();
 
       AnthropicClient client = AnthropicOkHttpClient.builder()
-              .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
-                      .organizationId(System.getenv("ANTHROPIC_ORGANIZATION_ID"))
-                      .workspaceId(System.getenv("ANTHROPIC_WORKSPACE_ID"))
-                      .authentication(AuthenticationConfig.builder()
-                              .type(AuthenticationType.OIDC_FEDERATION)
-                              .federationRuleId(System.getenv("ANTHROPIC_FEDERATION_RULE_ID"))
-                              .serviceAccountId(System.getenv("ANTHROPIC_SERVICE_ACCOUNT_ID"))
-                              .identityToken(IdentityTokenConfig.builder()
-                                      .source("value")
-                                      .path(googleIdentityToken)
-                                      .build())
-                              .build())
-                      .build()))
-              .build();
+          .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
+              .organizationId(System.getenv("ANTHROPIC_ORGANIZATION_ID"))
+              .workspaceId(System.getenv("ANTHROPIC_WORKSPACE_ID"))
+              .authentication(AuthenticationConfig.builder()
+                  .type(AuthenticationType.OIDC_FEDERATION)
+                  .federationRuleId(System.getenv("ANTHROPIC_FEDERATION_RULE_ID"))
+                  .serviceAccountId(System.getenv("ANTHROPIC_SERVICE_ACCOUNT_ID"))
+                  .identityToken(IdentityTokenConfig.builder()
+                      .source("value")
+                      .path(googleIdentityToken)
+                      .build())
+                  .build())
+              .build()))
+          .build();
 
       var message = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5_5)
-              .maxTokens(1024)
-              .addUserMessage("Hello from Cloud Run")
-              .build());
+          .model(Model.CLAUDE_OPUS_5_5)
+          .maxTokens(1024)
+          .addUserMessage("Hello from Cloud Run")
+          .build());
 
       IO.println(message.content());
   }
-  ```
-
-  ```csharp C#
-  using Anthropic.Credentials;
-  // ...
-
-  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
-  {
-      FederationRuleId = Environment.GetEnvironmentVariable("ANTHROPIC_FEDERATION_RULE_ID")!,
-      OrganizationId = Environment.GetEnvironmentVariable("ANTHROPIC_ORGANIZATION_ID"),
-      ServiceAccountId = Environment.GetEnvironmentVariable("ANTHROPIC_SERVICE_ACCOUNT_ID"),
-      WorkspaceId = Environment.GetEnvironmentVariable("ANTHROPIC_WORKSPACE_ID"),
-      IdentityTokenProvider = new MetadataTokenProvider(),
-  });
-  using var client = new AnthropicClient(new ClientOptions { Credentials = credentials });
-
-  var message = await client.Messages.Create(new()
-  {
-      Model = Model.ClaudeOpus5_5,
-      MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello from Cloud Run" }],
-  });
-  foreach (var block in message.Content)
-  {
-      if (block.Value is TextBlock textBlock)
-      {
-          Console.WriteLine(textBlock.Text);
-      }
-  }
-
-  class MetadataTokenProvider : IIdentityTokenProvider
-  {
-      private const string METADATA_URL =
-          "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full";
-
-      private static readonly HttpClient httpClient = new()
-      {
-          DefaultRequestHeaders = { { "Metadata-Flavor", "Google" } },
-      };
-
-      public async Task<string> GetIdentityTokenAsync(CancellationToken ct = default)
-      {
-          return await httpClient.GetStringAsync(METADATA_URL, ct);
-      }
-  }
-  ```
-
-  ```bash CLI
-  # Write the Google-signed identity token to a file the CLI can read
-  ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
-  curl -sS -H "Metadata-Flavor: Google" \
-    "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full" \
-    > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
-  export ANTHROPIC_IDENTITY_TOKEN_FILE
-
-  # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, and
-  # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment.
-  ant messages create \
-    --model claude-opus-5-5 \
-    --max-tokens 1024 \
-    --message '{role: user, content: "Hello from Cloud Run"}'
   ```
 
   ```php PHP
@@ -460,7 +459,7 @@ Inside your Google Cloud workload, fetch the identity token from the metadata se
   ```
 </CodeGroup>
 
-Google identity tokens expire after roughly one hour. Except in Java (see the comment in that example), the SDK re-invokes the token provider and re-exchanges automatically before expiry. For shell scripts that run longer than the access token's `expires_in`, refresh on a timer and repeat the exchange.
+Google identity tokens expire after roughly 1 hour. Except in Java (see the comment in that example), the SDK calls the token provider again and re-exchanges automatically before expiry. For shell scripts that run longer than the access token's `expires_in`, refresh on a timer and repeat the exchange.
 
 ## Verify the setup
 
@@ -472,7 +471,7 @@ curl -sS -H "Metadata-Flavor: Google" \
   | jq -rR 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson'
 ```
 
-Check that `iss` is `https://accounts.google.com`, `aud` is `https://api.anthropic.com`, and `email` matches the value in your federation rule. Then run the exchange from the previous section. A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason and see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange); the most common Google Cloud-side cause is the `email` claim missing (request the token with `format=full` so it is included).
+Check that `iss` is `https://accounts.google.com`, `aud` is `https://api.anthropic.com`, and `email` matches the value in your federation rule. Then run the exchange from the previous section. A successful exchange returns an `access_token` starting with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason and see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange). The most common Google Cloud-side cause is the `email` claim missing (request the token with `format=full` so it is included).
 
 ## Scope your rule
 
@@ -490,4 +489,4 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 ## Next steps
 
 * Read the [Workload Identity Federation](https://platform.claude.com/docs/en/manage-claude/workload-identity-federation) page for the full resource model and SDK credential precedence.
-* Add a separate federation rule per environment (production, staging) so you can revoke one without affecting the others.
+* Add a separate federation rule for each environment (production, staging) so you can revoke one without affecting the others.

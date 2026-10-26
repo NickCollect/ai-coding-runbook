@@ -1,19 +1,19 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/retrieve
-fetched_at: 2026-10-19T05:32:55.971003+00:00
+fetched_at: 2026-10-26T05:40:27.876508+00:00
 fetch_method: mintlify_md
 ---
 
 ---
-title: Get Credential
+title: Retrieve a Credential
 url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/retrieve
 ---
 
-# Get Credential
+# Retrieve a Credential
 
 **GET** `/v1/vaults/{vault_id}/credentials/{credential_id}`
 
-Get Credential
+Retrieve a Credential
 
 ## Path parameters
 
@@ -141,6 +141,8 @@ Get Credential
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 - `"anthropic-workspace-id": optional string`
 
   Optional header to select the Workspace for this request. The value is a Workspace ID (for example, `wrkspc_011CZkZaBF1tNoB5wlCeusgy`).
@@ -157,7 +159,7 @@ Get Credential
 
   - `id: string`
 
-    Unique identifier for the credential.
+    The unique ID of the credential (`vcrd_...`).
 
   - `archived_at: string or null`
 
@@ -181,7 +183,7 @@ Get Credential
 
       - `expires_at: optional string or null`
 
-        A timestamp in RFC 3339 format
+        When the credential's access token expires, in RFC 3339. Absent if the expiry isn't known.
 
         format: date-time
 
@@ -191,7 +193,7 @@ Get Credential
 
         - `client_id: string`
 
-          OAuth client ID.
+          The OAuth client ID used when refreshing the access token.
 
         - `token_endpoint: string`
 
@@ -271,7 +273,9 @@ Get Credential
 
           - `allowed_hosts: array of string`
 
-            Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+            The destination hosts of the outbound requests that the credential's secret is substituted into.
+
+            An entry matches the request host exactly. An entry such as `*.example.com` matches any subdomain of `example.com` but not `example.com` itself.
 
       - `secret_name: string`
 
@@ -305,9 +309,9 @@ Get Credential
 
 ```bash
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

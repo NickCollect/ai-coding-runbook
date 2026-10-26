@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/dreams
-fetched_at: 2026-10-19T05:32:45.350379+00:00
+fetched_at: 2026-10-26T05:40:06.285991+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Dreams
 url: https://platform.claude.com/docs/en/managed-agents/dreams
-description: Let Claude reflect on past sessions to curate an agent's memory and surface new insights.
+description: Let Claude review past sessions to curate an agent's memory and surface new insights.
 ---
 
 <Tip>
@@ -42,7 +42,7 @@ The dream produces another **output memory store**, separate from the input. The
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21" \
     -H "content-type: application/json" \
-    --data '{
+    -d '{
       "inputs": [
         { "type": "memory_store", "memory_store_id": "'"$store_id"'" },
         { "type": "sessions", "session_ids": ["'"$session_a"'", "'"$session_b"'"] }
@@ -80,10 +80,10 @@ The dream produces another **output memory store**, separate from the input. The
   let dream = await client.beta.dreams.create({
     inputs: [
       { type: "memory_store", memory_store_id: storeId },
-      { type: "sessions", session_ids: [sessionA, sessionB] },
+      { type: "sessions", session_ids: [sessionA, sessionB] }
     ],
     model: "claude-opus-5-5",
-    instructions: "Focus on coding-style preferences; ignore one-off debugging notes.",
+    instructions: "Focus on coding-style preferences; ignore one-off debugging notes."
   });
   console.log(dream.id); // drm_01...
   ```
@@ -93,16 +93,8 @@ The dream produces another **output memory store**, separate from the input. The
   {
       Inputs =
       [
-          new BetaDreamMemoryStoreInput
-          {
-              Type = BetaDreamMemoryStoreInputType.MemoryStore,
-              MemoryStoreID = storeID,
-          },
-          new BetaDreamSessionsInput
-          {
-              Type = BetaDreamSessionsInputType.Sessions,
-              SessionIds = [sessionA, sessionB],
-          },
+          new BetaDreamMemoryStoreInput { MemoryStoreID = storeID },
+          new BetaDreamSessionsInput { SessionIds = [sessionA, sessionB] },
       ],
       Model = "claude-opus-5-5",
       Instructions = "Focus on coding-style preferences; ignore one-off debugging notes.",
@@ -202,7 +194,7 @@ The response is the full `dream` resource with `status: "pending"`:
 
 The optional `instructions` (csharp, go: `Instructions`) field steers what the dreaming pipeline synthesizes. It is applied throughout the pipeline: what to read closely, what to merge or drop, and how to structure the output store.
 
-Use `instructions` (csharp, go: `Instructions`) for high-level synthesis guidance such as focus areas ("focus on coding-style preferences"), content to preserve unchanged, or output conventions you want applied across the store. The pipeline is a synthesis pass over the inputs, not an editor applied to the text of the store, so imperative directives that target specific lines ("change sentence X to Y", "fix the count in section Z") generally produce no change. To make targeted edits to individual memories, use the [Memory Stores API](https://platform.claude.com/docs/en/managed-agents/memory#view-and-edit-memories) on the output store directly.
+Use `instructions` (csharp, go: `Instructions`) for high-level synthesis guidance such as focus areas ("focus on coding-style preferences"), content to preserve unchanged, or output conventions you want applied across the store. The pipeline is a synthesis pass over the inputs, not an editor applied to the text of the store, so imperative directives that target specific lines ("change sentence X to Y," "fix the count in section Z") generally produce no change. To make targeted edits to individual memories, use the [Memory Stores API](https://platform.claude.com/docs/en/managed-agents/memory#view-and-edit-memories) on the output store directly.
 
 ## Track progress
 
@@ -210,16 +202,10 @@ Dreams run asynchronously and typically take minutes to a few hours, driven by t
 
 <CodeGroup>
   ```bash cURL
-  while true; do
-    dream=$(curl -s "https://api.anthropic.com/v1/dreams/$dream_id" \
-      -H "x-api-key: $ANTHROPIC_API_KEY" \
-      -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21")
-    status=$(jq -r '.status' <<< "$dream")
-    echo "status=$status input_tokens=$(jq -r '.usage.input_tokens' <<< "$dream")"
-    [[ "$status" == "pending" || "$status" == "running" ]] || break
-    sleep 10
-  done
+  curl -s "https://api.anthropic.com/v1/dreams/$dream_id" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01,dreaming-2026-04-21"
   ```
 
   ```bash CLI
@@ -235,7 +221,7 @@ Dreams run asynchronously and typically take minutes to a few hours, driven by t
 
   ```typescript TypeScript
   while (dream.status === "pending" || dream.status === "running") {
-    await sleep(10_000);
+    await new Promise((resolve) => setTimeout(resolve, 10_000));
     dream = await client.beta.dreams.retrieve(dream.id);
     console.log(`status=${dream.status} input_tokens=${dream.usage.input_tokens}`);
   }
@@ -303,22 +289,20 @@ Once a dream is `running`, its `session_id` (java: `sessionId`; php: `sessionID`
 
 ## Use the output
 
-When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` entry in `outputs` (csharp, go: `Outputs`) references a fully populated store. It's an ordinary memory store in your workspace. Review it with the [Memory Stores API](https://platform.claude.com/docs/en/managed-agents/memory#view-and-edit-memories) or in the Console, then either:
+When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` entry in `outputs` (csharp, go: `Outputs`) references a fully populated store. It's an ordinary memory store in your workspace. Review it with the [Memory Stores API](https://platform.claude.com/docs/en/managed-agents/memory#view-and-edit-memories) or in the Claude Console, then either:
 
-* **Leverage it:** attach it to future sessions as a `memory_store` resource in place of (or alongside) the input memory store, or
+* **Use it:** attach it to future sessions as a `memory_store` resource in place of (or alongside) the input memory store, or
 * **Discard it:** [delete the memory store](https://platform.claude.com/docs/en/api/beta/memory_stores/delete) or [archive the memory store](https://platform.claude.com/docs/en/api/beta/memory_stores/archive).
 
 <CodeGroup>
   ```bash cURL
-  # After the dream ends, the memory_store output holds the rebuilt store
-  output_store_id=$(jq -r 'first(.outputs[] | select(.type == "memory_store")).memory_store_id' <<< "$dream")
-
+  # $output_store_id is the memory_store_id of the completed dream's memory_store output
   curl -s https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    --data '{
+    -d '{
       "agent": "'"$agent_id"'",
       "environment_id": "'"$environment_id"'",
       "resources": [
@@ -328,9 +312,7 @@ When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` ent
   ```
 
   ```bash CLI
-  output_store_id=$(ant beta:dreams retrieve --dream-id "$dream_id" --format json |
-    jq -r 'first(.outputs[] | select(.type == "memory_store")).memory_store_id')
-
+  # $output_store_id is the memory_store_id of the completed dream's memory_store output
   ant beta:sessions create <<YAML
   agent: $agent_id
   environment_id: $environment_id
@@ -363,14 +345,12 @@ When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` ent
   await client.beta.sessions.create({
     agent: agentId,
     environment_id: environmentId,
-    resources: [
-      { type: "memory_store", memory_store_id: outputStoreId },
-    ],
+    resources: [{ type: "memory_store", memory_store_id: outputStoreId }]
   });
   ```
 
   ```csharp C#
-  var output = dream.Outputs.FirstOrDefault(entry => entry.Type == "memory_store");
+  var output = dream.Outputs.FirstOrDefault(entry => entry.Type.GetString() == "memory_store");
   if (output is { MemoryStoreID: var outputStoreID })
   {
       await client.Beta.Sessions.Create(new()
@@ -379,11 +359,7 @@ When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` ent
           EnvironmentID = environmentID,
           Resources =
           [
-              new BetaManagedAgentsMemoryStoreResourceParam
-              {
-                  Type = BetaManagedAgentsMemoryStoreResourceParamType.MemoryStore,
-                  MemoryStoreID = outputStoreID,
-              },
+              new BetaManagedAgentsMemoryStoreResourceParam { MemoryStoreID = outputStoreID },
           ],
       });
   }
@@ -403,7 +379,6 @@ When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` ent
   		EnvironmentID: environmentID,
   		Resources: []anthropic.BetaSessionNewParamsResourceUnion{{
   			OfMemoryStore: &anthropic.BetaManagedAgentsMemoryStoreResourceParam{
-  				Type:          anthropic.BetaManagedAgentsMemoryStoreResourceParamTypeMemoryStore,
   				MemoryStoreID: outputStoreID,
   			},
   		}},
@@ -418,7 +393,7 @@ When `status` (csharp, go: `Status`) reaches `completed`, the `memory_store` ent
 
   ```java Java
   var output = dream.outputs().stream()
-      .filter(entry -> entry.type().equals(BetaDreamOutput.Type.MEMORY_STORE))
+      .filter(entry -> entry._type().equals(JsonValue.from("memory_store")))
       .findFirst();
   if (output.isPresent()) {
       var outputStoreId = output.get().memoryStoreId();
@@ -619,7 +594,9 @@ Returns all non-archived dreams in the workspace, newest first. Use `limit` (csh
 
   ```java Java
   for (var listedDream : client.beta().dreams().list(
-      DreamListParams.builder().limit(20).build()
+      DreamListParams.builder()
+          .limit(20)
+          .build()
   ).autoPager()) {
       IO.println(listedDream.id() + " " + listedDream.status());
   }

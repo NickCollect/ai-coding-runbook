@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/onboarding
-fetched_at: 2026-09-28T06:10:41.079645+00:00
+fetched_at: 2026-10-26T05:40:04.079393+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Build in Console
 url: https://platform.claude.com/docs/en/managed-agents/onboarding
-description: Create, test, and iterate on agents visually in Console, then run them from your code with the API.
+description: Create, test, and iterate on agents visually in the Claude Console, then run them from your code with the API.
 featureMetadata:
   topic:
     title: Managed Agents
@@ -16,11 +16,11 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-[Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
+The [Claude Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
 ## How to build an agent
 
-The [visual interface](https://platform.claude.com/workspaces/default/agent-quickstart/) walks you through each field of an agent definition:
+The [visual interface](https://platform.claude.com/workspaces/default/agent-quickstart/) in the Claude Console walks you through each field of an agent definition:
 
 * **Model and system prompt:** Pick a model and write the system prompt in a full-width editor.
 * **MCP servers:** Add remote MCP servers by URL and authenticate your agent to take action on your behalf.
@@ -33,7 +33,7 @@ As you configure, Console shows the equivalent API request so you can copy it in
 
 Console includes an inline session runner. After configuring your agent, you can start a test session directly, send messages, and watch the event stream without leaving the page. This is the fastest way to check that your system prompt and tool selection produce the behavior you expect.
 
-## From Console to your codebase
+## From Console to your code base
 
 Once your agent works as expected:
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/dreams/retrieve
-fetched_at: 2026-10-19T05:32:57.701392+00:00
+fetched_at: 2026-10-26T05:40:30.389970+00:00
 fetch_method: mintlify_md
 ---
 
@@ -140,6 +140,8 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -375,9 +377,9 @@ See the [Dreams guide](https://platform.claude.com/docs/en/managed-agents/dreams
 
 ```bash
 curl https://api.anthropic.com/v1/dreams/$DREAM_ID \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: dreaming-2026-04-21' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

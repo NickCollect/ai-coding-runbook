@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/upload
-fetched_at: 2026-10-12T06:49:53.907100+00:00
+fetched_at: 2026-10-26T05:40:17.455018+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ Upload File
 
 ## Body parameters (form-data)
 
-- `file: string`
+- `file: file`
 
   The file to upload. Only the final path component of the part's `filename` is kept; an absent or empty `filename` is replaced with `unnamed` plus the extension for the file's stored `mime_type`, when known.
 
@@ -100,8 +100,8 @@ Upload File
 ```bash
 curl https://api.anthropic.com/v1/files \
     -H 'Content-Type: multipart/form-data' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -F 'file=@/path/to/file'
 ```
 

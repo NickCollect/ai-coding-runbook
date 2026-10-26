@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/cli/scripting
-fetched_at: 2026-09-28T06:10:45.181171+00:00
+fetched_at: 2026-10-26T05:40:14.941309+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,14 +78,12 @@ The CLI is designed to compose with standard shell tooling.
 
 ### Chain list output into a second command
 
-`--transform id --raw-output` on a list endpoint emits one bare ID per line, so standard tools such as `head` and `xargs` apply directly. Capture the first result, then pass it to a follow-up command:
+`--transform id --raw-output` on a list endpoint emits one bare ID on each line, so standard tools such as `head` and `xargs` apply directly. Capture the first result, then pass it to a follow-up command:
 
 ```bash
 FIRST_AGENT=$(ant beta:agents list --transform id --raw-output | head -1)
 
-ant beta:agents:versions list \
-  --agent-id "$FIRST_AGENT" \
-  --transform "{version,created_at}" --format jsonl
+ant beta:agents:versions list --agent-id "$FIRST_AGENT" --format jsonl
 ```
 
 ### Inspect errors
@@ -110,7 +108,7 @@ Agent not found.
 * "Upload every PDF in `./reports` to the Files API and print the resulting IDs."
 * "Pull the events for session `session_01...` and tell me where the agent got stuck."
 
-Claude Code shells out to `ant`, parses the structured output, and reasons over the results (no custom integration code required).
+Claude Code runs `ant` commands, parses the structured output, and reasons over the results (no custom integration code required).
 
 ## Authenticate curl requests with CLI credentials
 
@@ -130,8 +128,4 @@ curl https://api.anthropic.com/v1/messages \
   }'
 ```
 
-<Note>
-  Keep `ANTHROPIC_API_KEY` and `ANTHROPIC_AUTH_TOKEN` unset when working from a CLI login. Either variable takes precedence over the login for `ant` commands (see [Credential precedence](https://platform.claude.com/docs/en/manage-claude/wif-reference#credential-precedence)) and can silently route them to a different organization or workspace.
-</Note>
-
-Run [`ant auth status`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login.
+Run [`ant auth status`](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication#check-authentication-status) to confirm which organization and workspace you are logged in to; it warns when an environment variable is overriding your login. For the full ordering of credential sources, see [Credential precedence](https://platform.claude.com/docs/en/manage-claude/wif-reference#credential-precedence).

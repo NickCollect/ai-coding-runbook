@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool
-fetched_at: 2026-10-19T05:32:42.770578+00:00
+fetched_at: 2026-10-26T05:40:00.755432+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ featureMetadata:
     - claude-haiku-5-5
   supportedPlatforms:
     Claude API: ga
-    Google Cloud: ga
+    Claude Models on Google Cloud (Google managed): ga
 ---
 
 <Note>
@@ -35,7 +35,7 @@ featureMetadata:
 
 The browser use tool lets Claude navigate, read, and interact with webpages in a browser that your application runs. Claude works with the page both through its structure (the accessibility tree, elements, forms, and tabs) and through screenshots and viewport coordinates.
 
-The tool is an Anthropic-defined [client toolset](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference#client-toolsets): one `browser_toolset_20260801` entry in `tools` gives Claude 27 member tools by default, such as `navigate`, `read_page`, `left_click`, and `screenshot`, plus four more when you [enable them](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#enable-optional-member-tools). Your application runs every call against its own browser automation; nothing runs on Anthropic's side. The tool isn't currently available in [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/tools).
+The tool is an Anthropic-defined [client toolset](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference#client-toolsets): one `browser_toolset_20260801` entry in `tools` gives Claude 27 member tools by default, such as `navigate`, `read_page`, `left_click`, and `screenshot`, plus four more when you [enable optional members](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#enable-optional-member-tools). Your application runs every call against its own browser automation; nothing runs on Anthropic's side. The tool isn't currently available in [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/tools).
 
 Choose browser use when the task stays inside webpages and means acting on them, or when pages build their content with JavaScript. When a task needs a whole desktop, use the [computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool), which works through screenshots and coordinates alone. For reading pages you can point Claude to, or finding sources on the web, the [web fetch tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool) and [web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool) are lighter. They're [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) that the API runs for you, with no browser to operate.
 
@@ -43,7 +43,7 @@ With browser use, Claude reads and acts on live webpages, so everything a page s
 
 ## Quick start
 
-The browser use tool is available on the Claude API and [Google Cloud](https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai): add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](https://platform.claude.com/docs/en/api/messages/create) request.
+The browser use tool is available on the Claude API and [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed): add one entry of type `browser_toolset_20260801`, with no `name`, to the `tools` array of a [Messages API](https://platform.claude.com/docs/en/api/messages/create) request.
 
 <CodeGroup>
   ```bash cURL
@@ -125,11 +125,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
       Tools = [new BrowserToolset20260801()],
       Messages =
       [
-          new MessageParam
-          {
-              Role = Role.User,
-              Content = "Open example.com/docs and tell me how to get started.",
-          },
+          new UserMessageParam { Content = "Open example.com/docs and tell me how to get started." },
       ],
   };
 
@@ -183,7 +179,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
       messages: [
           ['role' => 'user', 'content' => 'Open example.com/docs and tell me how to get started.'],
       ],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       tools: [
           ['type' => 'browser_toolset_20260801'],
       ],
@@ -196,7 +192,7 @@ The browser use tool is available on the Claude API and [Google Cloud](https://p
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 2048,
     tools: [
       { type: "browser_toolset_20260801" }
@@ -246,7 +242,7 @@ Claude's first response ends with `stop_reason: "tool_use"` and carries one or m
 }
 ```
 
-Your executor (the part of your application that drives the browser and produces tool results) runs `navigate`, then `read_page`. Your application returns one `tool_result` per block in its next request, echoing `toolset_name` on each. The `navigate` result reports the tab it loaded in a `browser_state` block; the `read_page` result is text in which every element carries a reference:
+Your executor (the part of your application that drives the browser and produces tool results) runs `navigate`, then `read_page`. Your application returns one `tool_result` for each block in its next request, echoing `toolset_name` on each. The `navigate` result reports the tab it loaded in a `browser_state` block; the `read_page` result is text in which every element carries a reference:
 
 ```json
 {
@@ -305,7 +301,7 @@ Browser use runs as an agent loop in your application: Claude returns member too
 
   <Step title="Run the calls in order and return results">
     * Iterate every `tool_use` block in `response.content` (don't assume there's exactly one) and run them sequentially, in the order they appear, because later calls usually depend on earlier ones.
-    * Return one `tool_result` per block in a new `user` message, matched by `tool_use_id`, and echo `"toolset_name": "browser"` on each. Every call must be answered or the next request is rejected.
+    * Return one `tool_result` for each block in a new `user` message, matched by `tool_use_id`, and echo `"toolset_name": "browser"` on each. Answer every call, or the next request is rejected.
     * If a call fails, return `is_error: true` with a text description for that block, then apply the halt rule in [Batch actions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#batch-actions) to every later block in the turn.
   </Step>
 
@@ -347,7 +343,11 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
       return [
           {
               "type": "image",
-              "source": {"type": "base64", "media_type": "image/png", "data": PLACEHOLDER_PNG},
+              "source": {
+                  "type": "base64",
+                  "media_type": "image/png",
+                  "data": PLACEHOLDER_PNG,
+              },
           }
       ]
 
@@ -369,7 +369,8 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
 
   ```typescript TypeScript
   // Placeholder image data; a real executor captures the viewport as PNG bytes
-  const PLACEHOLDER_PNG = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+  const PLACEHOLDER_PNG =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
 
   function navigate(url: string): string {
     return `navigated to ${url}`;
@@ -399,18 +400,17 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
         source: {
           type: "base64",
           media_type: "image/png",
-          data: PLACEHOLDER_PNG,
-        },
-      },
+          data: PLACEHOLDER_PNG
+        }
+      }
     ];
   }
 
   function handleBrowserAction(
     action: string,
-    input: unknown,
+    input: unknown
   ): string | Anthropic.ImageBlockParam[] {
-    const params: object =
-      typeof input === "object" && input !== null ? input : {};
+    const params: object = typeof input === "object" && input !== null ? input : {};
     if (action === "navigate" && "url" in params) {
       return navigate(String(params.url));
     } else if (action === "read_page") {
@@ -418,9 +418,7 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
     } else if (action === "left_click" && "target" in params) {
       // target is an element reference from read_page or a viewport coordinate
       const target: object =
-        typeof params.target === "object" && params.target !== null
-          ? params.target
-          : {};
+        typeof params.target === "object" && params.target !== null ? params.target : {};
       if ("type" in target && target.type === "ref" && "ref" in target) {
         return clickElement(String(target.ref));
       } else if ("x" in target && "y" in target) {
@@ -562,7 +560,6 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
   	// Reached when a member's input is missing a field or a field has the wrong type
   	return nil, fmt.Errorf("invalid input for %s", action)
   }
-
   ```
 
   ```java Java
@@ -571,13 +568,13 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
 
   ToolResultBlockParam.Content captureScreenshot() {
       ImageBlockParam image = ImageBlockParam.builder()
-              .source(Base64ImageSource.builder()
-                      .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
-                      .data(PLACEHOLDER_PNG)
-                      .build())
-              .build();
+          .source(Base64ImageSource.builder()
+              .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+              .data(PLACEHOLDER_PNG)
+              .build())
+          .build();
       return ToolResultBlockParam.Content.ofBlocks(
-              List.of(ToolResultBlockParam.Content.Block.ofImage(image)));
+          List.of(ToolResultBlockParam.Content.Block.ofImage(image)));
   }
 
   String navigate(String url) {
@@ -586,8 +583,8 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
 
   String readPage() {
       return """
-              link "Docs" [ref_1]
-              button "Search" [ref_2]""";
+          link "Docs" [ref_1]
+          button "Search" [ref_2]""";
   }
 
   String clickRef(String ref) {
@@ -613,7 +610,7 @@ Here's a skeleton of that loop's tool-call step in two parts. First, stub member
           case "left_click" -> {
               // target is {"type": "ref", "ref": "ref_1"} or {"type": "coordinate", "x": 640, "y": 380}
               Map<String, JsonValue> target =
-                      (Map<String, JsonValue>) input.get("target").asObject().get();
+                  (Map<String, JsonValue>) input.get("target").asObject().get();
               if (target.get("type").asStringOrThrow().equals("ref")) {
                   yield clickRef(target.get("ref").asStringOrThrow());
               }
@@ -787,20 +784,18 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   function browserResult(
     toolUseId: string,
     content: string | Anthropic.ImageBlockParam[],
-    isError?: boolean,
+    isError?: boolean
   ): Anthropic.ToolResultBlockParam {
     return {
       type: "tool_result",
       tool_use_id: toolUseId,
       toolset_name: "browser",
       content,
-      is_error: isError,
+      is_error: isError
     };
   }
 
-  function processToolCalls(
-    response: Anthropic.Message,
-  ): Anthropic.ToolResultBlockParam[] {
+  function processToolCalls(response: Anthropic.Message): Anthropic.ToolResultBlockParam[] {
     const toolResults: Anthropic.ToolResultBlockParam[] = [];
     let failed = false;
     for (const block of response.content) {
@@ -813,7 +808,7 @@ The second part runs a batch in order, dispatches each block to those handlers, 
         continue;
       }
       if (failed) {
-        // A batch stops at its first failure; answer later actions unexecuted
+        // A batch stops at its first failure; answer later actions without running them
         toolResults.push(browserResult(block.id, HALT_TEXT, true));
         continue;
       }
@@ -912,7 +907,7 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   }
 
   // processToolCalls runs the browser actions in Claude's response in order and
-  // builds one tool_result per tool_use block. After the first failure it skips
+  // builds one tool_result for each tool_use block. After the first failure it skips
   // the rest: Claude planned them assuming the earlier actions succeeded.
   func processToolCalls(response *anthropic.Message) []anthropic.ContentBlockParamUnion {
   	var toolResults []anthropic.ContentBlockParamUnion
@@ -943,7 +938,6 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   	}
   	return toolResults
   }
-
   ```
 
   ```java Java
@@ -953,13 +947,13 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   /** Every result answering a browser toolset member echoes toolset_name. */
   ToolResultBlockParam.Builder browserResult(ToolUseBlock toolUse) {
       return ToolResultBlockParam.builder()
-              .toolUseId(toolUse.id())
-              .toolsetName("browser");
+          .toolUseId(toolUse.id())
+          .toolsetName("browser");
   }
 
   /**
    * Run the browser actions in Claude's response in order and build one
-   * tool_result per tool_use block. After the first failure, skip the rest:
+   * tool_result for each tool_use block. After the first failure, skip the rest:
    * Claude planned them assuming the earlier actions succeeded.
    */
   List<ContentBlockParam> processToolCalls(Message response) {
@@ -973,18 +967,26 @@ The second part runs a batch in order, dispatches each block to those handlers, 
           ToolUseBlock toolUse = block.asToolUse();
           ToolResultBlockParam result;
           if (failed) {
-              result = browserResult(toolUse).content(HALT_TEXT).isError(true).build();
+              result = browserResult(toolUse)
+                  .content(HALT_TEXT)
+                  .isError(true)
+                  .build();
           } else {
               try {
                   Map<String, JsonValue> input =
-                          (Map<String, JsonValue>) toolUse._input().asObject().get();
+                      (Map<String, JsonValue>) toolUse._input().asObject().get();
                   ToolResultBlockParam.Content output = handleBrowserAction(toolUse.name(), input);
                   // A real executor also adds a browser_state block to navigation and
                   // tab-management results; see "Track tabs with browser_state" on this page.
-                  result = browserResult(toolUse).content(output).build();
+                  result = browserResult(toolUse)
+                      .content(output)
+                      .build();
               } catch (RuntimeException e) {
                   failed = true;
-                  result = browserResult(toolUse).content("Error: " + e.getMessage()).isError(true).build();
+                  result = browserResult(toolUse)
+                      .content("Error: " + e.getMessage())
+                      .isError(true)
+                      .build();
               }
           }
           toolResults.add(ContentBlockParam.ofToolResult(result));
@@ -1028,7 +1030,7 @@ The second part runs a batch in order, dispatches each block to those handlers, 
   NOT_EXECUTED = "Not executed: an earlier action in this turn failed."
 
   # Run the browser actions in Claude's response in order and build one
-  # tool_result per tool_use block. After the first failure, skip the rest:
+  # tool_result for each tool_use block. After the first failure, skip the rest:
   # Claude planned them assuming the earlier actions succeeded.
   def process_tool_calls(response)
     tool_results = []
@@ -1099,7 +1101,7 @@ Your application returns three `tool_result` blocks in one `user` message, each 
 
 You don't need to return a screenshot after every call. Claude typically ends a batch with an observation call (`screenshot`, `read_page`, or `get_page_text`), and your application can also attach its own observation, such as a fresh screenshot or accessibility tree, as an extra content block on the last result in the batch to save a round trip. Because a tab-management result must be exactly one `browser_state` block, attach it to the last result that isn't a tab-management call.
 
-If your executor can run only one call per round trip, set `disable_parallel_tool_use` to `true` in `tool_choice` and Claude returns at most one member call per turn, at the cost of more round trips ([Disable parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use#disable-parallel-tool-use)). The rest of the contract under [Batch actions for the computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#batch-actions) carries over, including one `tool_result` for every `tool_use` in the next `user` message, except for two things: the halt text and what a successful result's `content` holds. Result content follows [Member tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#member-tools) on this page instead: a `new_tab`, `switch_tab`, `close_tab`, or `list_tabs` result is exactly one `browser_state` block with no text or image ([Tab management results](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#tab-management-results)), and any other member's result may add a `browser_state` block to its text or image ([Tab context on other results](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#tab-context-on-other-results)). Where cache breakpoints inside a batch take effect is described in the `cache_control` row of the computer use tool's [Tool parameters](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#tool-parameters).
+If your executor can run only one call for each round trip, set `disable_parallel_tool_use` to `true` in `tool_choice` and Claude returns at most one member call for each turn, at the cost of more round trips ([Disable parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use#disable-parallel-tool-use)). The rest of the contract under [Batch actions for the computer use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#batch-actions) carries over, including one `tool_result` for every `tool_use` in the next `user` message, except for two things: the halt text and what a successful result's `content` holds. Result content follows [Member tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#member-tools) on this page instead: a `new_tab`, `switch_tab`, `close_tab`, or `list_tabs` result is exactly one `browser_state` block with no text or image ([Tab management results](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#tab-management-results)), and any other member's result may add a `browser_state` block to its text or image ([Tab context on other results](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#tab-context-on-other-results)). Where cache breakpoints inside a batch take effect is described in the `cache_control` row of the computer use tool's [Tool parameters](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#tool-parameters).
 
 ### Targets and coordinates
 
@@ -1110,7 +1112,7 @@ Member tools that act on a location take a `target` object, which is either a vi
 | `CoordinateTarget` | `"coordinate"` | `x`, `y` (integers, viewport pixels)           | `left_click`, `right_click`, `middle_click`, `double_click`, `triple_click`, `hover`, `left_click_drag` (`from` and `target`), `left_mouse_down`, `left_mouse_up`, `mouse_move`, `scroll` |
 | `RefTarget`        | `"ref"`        | `ref` (an element reference such as `"ref_2"`) | `left_click`, `right_click`, `middle_click`, `double_click`, `triple_click`, `hover`, `scroll_to`, `form_input`, `file_upload`                                                            |
 
-**Coordinates are viewport pixels**, the pixel space of a full-viewport `screenshot` with the origin at the top left of the rendered page; there's no surrounding desktop or window frame. The toolset declares no display dimensions and Claude infers the viewport size from the screenshots you return, so keep them one consistent size. A `zoom` doesn't change the frame, so its `region` and any coordinates Claude emits after seeing the zoomed image are still full-viewport pixels.
+**Coordinates are viewport pixels**, the pixel space of a full-viewport `screenshot` with the origin at the top left of the rendered page; there's no surrounding desktop or window frame. The toolset declares no display dimensions and Claude infers the viewport size from the screenshots you return, so keep them one consistent size. A `zoom` doesn't change the frame, so its `region` and any coordinates Claude emits after receiving the zoomed image are still full-viewport pixels.
 
 **Screenshots must fit the image limits.** The API doesn't downscale toolset images: a screenshot or zoom image over your model's [image size limits](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size), or over the stricter per-image limit that applies once a request holds [more than 20 images](https://platform.claude.com/docs/en/build-with-claude/vision#request-limits), is rejected. Resize before returning, and scale Claude's coordinates back up by the inverse of your factor before dispatching them ([Size screenshots to fit image limits](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool#handle-coordinate-scaling-for-higher-resolutions)).
 
@@ -1130,7 +1132,7 @@ References are scoped to the tab that produced them and stay valid until that ta
 
 Claude uses both targeting styles and switches between them based on what the page exposes; your prompt and what your executor returns steer the choice:
 
-* **Prefer references where the page has a usable accessibility tree.** A reference survives layout shifts and reflows that make pixel coordinates fragile, and lets Claude act on controls that are hard to hit with a pointer.
+* **Prefer references where the page has a usable accessibility tree.** A reference survives layout shifts and reflows that make pixel coordinates fragile, and lets Claude act on controls that are hard to click with a pointer.
 * **Fall back to coordinates for content the tree doesn't describe.** Canvas-rendered interfaces, embedded video or remote-desktop surfaces, heavily virtualized lists, and elements inside cross-origin iframes often have no useful node, so Claude works from `screenshot` and `zoom` and clicks by coordinate; your executor resolves which frame a coordinate lands in.
 * **Scope reads, and read the tree before you screenshot.** On large pages, `read_page` with `filter: "interactive"` or the `ref` of a container returns a focused subtree, and a tree read of a typical page often costs fewer input tokens than a screenshot while giving Claude references it can act on immediately. Screenshots remain the right observation when visual layout, images, or rendering state matter.
 
@@ -1143,7 +1145,7 @@ Browser use carries risks that standard API features don't, because Claude reads
 
   1. Run the browser and your executor in a dedicated container or virtual machine with minimal privileges, a fresh profile that holds no credentials, and no access to sensitive filesystems or internal networks; isolate any tool you run alongside it the same way.
   2. Restrict the hosts the browser can reach to a domain allowlist enforced at the network layer and re-checked in your `navigate` handler after redirects, and block loopback, link-local, and private ranges unless the task needs them.
-  3. Treat everything a page supplies as untrusted input, including the tab titles and URLs, and each download's `url`, `path`, and `error`, that you report in a [`browser_state`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#track-tabs-and-page-state) block, and build page reads from what the page renders (the accessibility tree or visible text), not raw DOM source, so hidden text doesn't reach Claude.
+  3. Treat everything a page supplies as untrusted input. That includes the tab titles and URLs, and each download's `url`, `path`, and `error`, that you report in a [`browser_state`](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#track-tabs-and-page-state) block. Build page reads from what the page renders (the accessibility tree or visible text), not raw DOM source, so hidden text doesn't reach Claude.
   4. In your `navigate` handler, accept the history keywords `"back"`, `"forward"`, and `"reload"`, treat a URL without a scheme as `https://`, then parse the URL and refuse any scheme other than `http` or `https` (`javascript:`, `file:`, `data:`, `chrome:`, and so on) with an [error result](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#return-errors-from-your-executor). Check the scheme with a URL parser rather than a string prefix; the API doesn't filter the URLs Claude opens, so it can't reject one for you.
   5. Leave `javascript_exec` and `file_upload` disabled unless you need them, and read [Enable optional members](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#enable-optional-member-tools) before turning either on.
   6. Have a human confirm consequential actions and anything that requires affirmative consent (purchasing, modifying accounts, messaging, and accepting terms), and make that check in your executor before each call, because one turn can carry several.
@@ -1153,15 +1155,15 @@ Claude sometimes follows instructions found in page content even when they confl
 
 Anthropic has trained the model to resist these prompt injections and has added an extra layer of defense. If you use the browser use tool, classifiers will automatically scan what the browser returns, such as page text or screenshots, to flag potential prompt injections. When these classifiers identify a potential prompt injection, they will automatically steer the model to check whether the instruction really came from you before acting on it.
 
-This extra protection won't be ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/). The precautions above remain important even with these classifiers in place.
+This extra protection isn't ideal for every use case (for example, use cases without a human in the loop), so if you'd like to opt out and turn it off, [contact support](https://support.claude.com/en/). The precautions listed earlier remain important even with these classifiers in place.
 
 Because the browser runs in your environment, the sites Claude visits see your executor's network identity, and page content reaches the API only as the tool results you return. Inform end users of the relevant risks and obtain their consent before enabling browser use in your products.
 
 ## Member tools
 
-The `browser_toolset_20260801` entry declares 31 member tools; each call's `input` is exactly the parameters listed here, and `tab_id`, where optional, defaults to the active tab. `Target`, `CoordinateTarget`, and `RefTarget` are the shapes described in [Targets and coordinates](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#targets-and-coordinates). Four members (`javascript_exec`, `file_upload`, `read_console`, and `read_network`) are disabled by default and appear only when you [enable them](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#enable-optional-member-tools). The input bounds and output conventions noted in each member's row are stated to Claude, not enforced by the API, so validate inputs (including coordinates against your viewport) and apply the conventions in your executor.
+The `browser_toolset_20260801` entry declares 31 member tools; each call's `input` is exactly the parameters listed here, and `tab_id`, where optional, defaults to the active tab. `Target`, `CoordinateTarget`, and `RefTarget` are the shapes described in [Targets and coordinates](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#targets-and-coordinates). Four members (`javascript_exec`, `file_upload`, `read_console`, and `read_network`) are disabled by default and appear only when you enable them (see [Enable optional members](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#enable-optional-member-tools)). The input bounds and output conventions noted in each member's row are stated to Claude, not enforced by the API, so validate inputs (including coordinates against your viewport) and apply the conventions in your executor.
 
-Only `screenshot` and `zoom` require an [`image` block](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls#handling-results-from-client-tools) in their result, and the four tab-management members (`new_tab`, `list_tabs`, `switch_tab`, and `close_tab`) return exactly one `browser_state` block (see [Tab management results](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#tab-management-results)). Every other member returns a `text` block: either a short acknowledgment such as `Clicked element ref_2.` or the member's output. Any result other than a tab-management result may also carry an `image` block, typically a screenshot taken after the action, so Claude sees the outcome without a separate `screenshot` call; [Batch actions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#batch-actions) shows where to attach one in a batch. A member `tool_result` may contain only `text`, `image`, and `browser_state` content blocks.
+Only `screenshot` and `zoom` require an [`image` block](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls#handling-results-from-client-tools) in their result, and the four tab-management members (`new_tab`, `list_tabs`, `switch_tab`, and `close_tab`) return exactly one `browser_state` block (see [Tab management results](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#tab-management-results)). Every other member returns a `text` block: either a short acknowledgment such as `Clicked element ref_2.` or the member's output. Any result other than a tab-management result may also carry an `image` block, typically a screenshot taken after the action, so Claude receives the outcome without a separate `screenshot` call; [Batch actions](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#batch-actions) shows where to attach one in a batch. A member `tool_result` may contain only `text`, `image`, and `browser_state` content blocks.
 
 ### Navigation and capture
 
@@ -1202,7 +1204,7 @@ Only `screenshot` and `zoom` require an [`image` block](https://platform.claude.
 | Member          | Input                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | --------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `read_page`     | `filter?`, `depth?`, `ref?`, `tab_id?` | Return the page's accessibility tree as text with each element tagged with a reference such as `[ref_2]`. With `filter` omitted, return every visible element; with `"interactive"`, only visible interactive elements; with `"all"`, also elements outside the viewport. `depth` caps the tree depth (minimum 1, default 15) and `ref` scopes the read to that element's subtree. Cap the output at 50,000 characters and say so in the text; Claude then narrows with a smaller `depth` or a `ref`. |
-| `find`          | `query`, `tab_id?`                     | Search for elements matching a natural-language description such as `"search field"` or `"add to cart button"`, and return up to 20 matches in the same tagged format as `read_page`.                                                                                                                                                                                                                                                                                                                 |
+| `find`          | `query`, `tab_id?`                     | Find elements matching a natural-language description such as `"search field"` or `"add to cart button"`, and return up to 20 matches in the same tagged format as `read_page`.                                                                                                                                                                                                                                                                                                                       |
 | `get_page_text` | `tab_id?`                              | Return the page's visible text as plain text, prioritizing the main article content; suited to articles, documentation, and other text-heavy pages.                                                                                                                                                                                                                                                                                                                                                   |
 
 ### Forms and files
@@ -1256,7 +1258,7 @@ List only the members you want to change in `configs`; every member you omit kee
 }
 ```
 
-A disabled member disappears from the definition Claude sees; that doesn't guarantee Claude never names it, so your executor still answers such a call with an [error result](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#return-errors-from-your-executor).
+A disabled member disappears from the definition Claude receives; that doesn't guarantee Claude never names it, so your executor still answers such a call with an [error result](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#return-errors-from-your-executor).
 
 ### Combine with other tools
 
@@ -1297,13 +1299,13 @@ Claude writes these paths while it's reading untrusted pages, so an unrestricted
 
 ### Read console and network activity
 
-`read_console` returns the tab's console entries and `read_network` returns its network requests, each as text with one line per entry accumulated since the previous read of that tab. A console line carries a log, warning, or error entry; a network line carries the method, URL, status, MIME type, and timing. Entries exist only from the moment your browser automation attached to the tab, so an empty result doesn't mean a tab that was already open had no traffic.
+`read_console` returns the tab's console entries and `read_network` returns its network requests, each as text with one line for each entry accumulated since the previous read of that tab. A console line carries a log, warning, or error entry; a network line carries the method, URL, status, MIME type, and timing. Entries exist only from the moment your browser automation attached to the tab, so an empty result doesn't mean a tab that was already open had no traffic.
 
-These members let Claude diagnose a misbehaving page (a failed request behind a spinner, a script error behind a dead button) without repeated screenshots. Console and network entries are page-controlled and often contain secrets such as tokens in request URLs, so redact credential-like values you don't want in Claude's context and truncate very long entries before returning them.
+These members let Claude diagnose a misbehaving page (a failed request behind a spinner, a script error behind an unresponsive button) without repeated screenshots. Console and network entries are page-controlled and often contain secrets such as tokens in request URLs, so redact credential-like values you don't want in Claude's context and truncate very long entries before returning them.
 
 ## Track tabs with `browser_state`
 
-Claude addresses tabs by `tab_id`, your application is the source of truth for which tabs exist, and you report that state in a `browser_state` content block that Claude never sees directly: the API renders the text Claude reads from it.
+Claude addresses tabs by `tab_id`, your application is the source of truth for which tabs exist, and you report that state in a `browser_state` content block that Claude never receives directly: the API renders the text Claude reads from it.
 
 ```json
 {
@@ -1321,8 +1323,8 @@ Claude addresses tabs by `tab_id`, your application is the source of truth for w
 ```
 
 * `tabs` is the full inventory of open tabs after the call, not a delta. It may be empty; whenever it isn't, exactly one entry carries `"active": true`.
-* `state_changes` (not shown here) reports side effects of the call: a `tab_opened` entry for each tab the call opened that's still open when it finishes, whose `tab_id` must also appear in `tabs`, and [download events](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#report-downloads). Omit the field when there's nothing to report; an empty array is rejected.
-* Send the block only on results that answer a browser member call, at most once per `tool_result`, and never on a result with `is_error: true`. You express "no tab state to report" by omitting the block.
+* `state_changes` (not shown here) reports side effects of the call: a `tab_opened` entry for each tab the call opened that's still open when it completes, whose `tab_id` must also appear in `tabs`, and [download events](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#report-downloads). Omit the field when there's nothing to report; an empty array is rejected.
+* Send the block only on results that answer a browser member call, at most once for each `tool_result`, and never on a result with `is_error: true`. You express "no tab state to report" by omitting the block.
 * The API renders `tabs`, and any download entries in `state_changes`, into text for Claude. The next two sections and [Report downloads](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#report-downloads) show that text.
 
 **You assign `tab_id` values.** Any stable string works, such as your automation library's page identifier or your own counter, as long as you don't reuse a `tab_id` while a tab with that identifier is still listed as open in an earlier result. The API enforces these limits on the block:
@@ -1332,14 +1334,14 @@ Claude addresses tabs by `tab_id`, your application is the source of truth for w
 * The same limits apply to the `tab_id` Claude passes to `switch_tab` and `close_tab`, because the API renders it into the result text, so answer a call whose `tab_id` violates them with an error result instead of a `browser_state` block.
 
 <Warning>
-  Tab titles and URLs come from the page and render into text Claude reads, so they're a prompt-injection surface. The API renders tab URLs verbatim, so sanitize page-supplied URLs before populating `tabs`. It escapes double quotes and backslashes in titles when it renders them, so don't pre-escape titles (a pre-escaped title reaches Claude double-escaped); truncating or dropping suspicious titles is still worthwhile. A download entry's `url`, `path`, and `error` also render into text Claude reads, so treat them as untrusted too; the API quotes and escapes them as it does titles. The length and character limits the API enforces are a floor, not a defense.
+  Tab titles and URLs come from the page and render into text Claude reads, so they're a prompt-injection surface. The API renders tab URLs verbatim, so sanitize page-supplied URLs before populating `tabs`. It escapes double quotes and backslashes in titles when it renders them, so don't pre-escape titles (a pre-escaped title reaches Claude double-escaped); truncating or dropping suspicious titles is still worthwhile. A download entry's `url`, `path`, and `error` also render into text Claude reads, so treat them as untrusted too; the API quotes and escapes them as it does titles. The length and character limits the API enforces are a minimum, not a defense.
 </Warning>
 
 ### Tab management results
 
-For `new_tab`, `switch_tab`, `close_tab`, and `list_tabs`, a successful result's `content` is exactly one `browser_state` block with no text or image, and the API writes the text Claude sees. A `new_tab` result's block must also carry exactly one `tab_opened` state change whose `tab_id` matches the entry marked `active: true`.
+For `new_tab`, `switch_tab`, `close_tab`, and `list_tabs`, a successful result's `content` is exactly one `browser_state` block with no text or image, and the API writes the text Claude receives. A `new_tab` result's block must also carry exactly one `tab_opened` state change whose `tab_id` matches the entry marked `active: true`.
 
-| Member       | Text Claude sees                                                                                                            |
+| Member       | Text Claude receives                                                                                                        |
 | ------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | `switch_tab` | `Switched to tab {tab_id}`, taken from the call's `input.tab_id`                                                            |
 | `close_tab`  | `Closed tab {tab_id}`, taken from the call's `input.tab_id`                                                                 |
@@ -1382,7 +1384,7 @@ For example, when Claude calls `new_tab` (its `input` is empty), your executor o
 }
 ```
 
-Claude sees `Created new tab with tab_id: tab-3, URL: about:blank. It is now the current tab.` Report the URL the tab was opened at, as here, not one it later redirects to; later results report the tab's then-current URL.
+Claude receives `Created new tab with tab_id: tab-3, URL: about:blank. It is now the current tab.` Report the URL the tab was opened at, as here, not one it later redirects to; later results report the tab's then-current URL.
 
 ### Tab context on other results
 
@@ -1401,7 +1403,7 @@ Tab Context:
 Three cases render no footer even when the block is present:
 
 * Any `zoom` result.
-* A result with no `text` block (an image-only `screenshot` result, for example). Nothing is rendered or remembered for that result; the tab context appears on the next result that carries both text and a `browser_state` block, so include a short text block alongside the image when you want Claude to see a tab change on that same result. The exception is a result whose block reports a [download event](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#report-downloads). The API adds the download lines as a text block, and the footer follows them as it would on any result with text.
+* A result with no `text` block (an image-only `screenshot` result, for example). Nothing is rendered or remembered for that result; the tab context appears on the next result that carries both text and a `browser_state` block, so include a short text block alongside the image when you want the tab change to reach Claude on that same result. The exception is a result whose block reports a [download event](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool#report-downloads). The API adds the download lines as a text block, and the footer follows them as it would on any result with text.
 * A result whose `tabs` list is empty on a call that carried no `tab_id`, because there's no tab to name.
 
 For example, when Claude clicked the "Pricing" link (`ref_5`) earlier in this session, the page opened it in a new tab Claude didn't ask for, and without a report Claude would have to call `list_tabs` to discover it. Return the click's acknowledgment plus a block whose `state_changes` names the opened tab, marking whichever tab your executor left active:
@@ -1435,17 +1437,17 @@ For example, when Claude clicked the "Pricing" link (`ref_5`) earlier in this se
 }
 ```
 
-Claude sees `Clicked element ref_5.` followed by the Tab Context footer shown earlier. A tab opened during a call that failed gets no `tab_opened` entry, because error results carry no `browser_state`; it appears in the `tabs` inventory of the next successful result instead. In a batch, attach the block to the result of the call during which the change happened, and give every successful tab-management result its own block even when an earlier result in the same turn reported the same state.
+Claude receives `Clicked element ref_5.` followed by the Tab Context footer shown earlier. A tab opened during a call that failed gets no `tab_opened` entry, because error results carry no `browser_state`; it appears in the `tabs` inventory of the next successful result instead. In a batch, attach the block to the result of the call during which the change occurred, and give every successful tab-management result its own block even when an earlier result in the same turn reported the same state.
 
 ### Report downloads
 
-When a click or navigation starts a file download, report it in `state_changes` on the result of the call during which it happened, correlated across results by a `download_id` you assign. Downloads run asynchronously and can span several results, so there are three event types:
+When a click or navigation starts a file download, report it in `state_changes` on the result of the call during which it occurred, correlated across results by a `download_id` you assign. Downloads run asynchronously and can span several results, so there are three event types:
 
-| `type`               | Fields                                       | When to send                                                                                                                                                                                                                                                                                                                                            |
-| -------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `download_started`   | `download_id`, `url`                         | On the result of the call during which the download began. `url` is the final URL the file is served from, after redirects.                                                                                                                                                                                                                             |
-| `download_completed` | `download_id`, `url`, `path?`, `size_bytes?` | On the result of whichever later call is running when the download finishes. Include `path` only when another tool in the same environment (for example, the [bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool) or `file_upload`) can read the file there; otherwise `download_id` is the download's only identifier. |
-| `download_failed`    | `download_id`, `url`, `error?`               | When the download fails or is canceled, with the reason in `error` if the browser provides one.                                                                                                                                                                                                                                                         |
+| `type`               | Fields                                       | When to send                                                                                                                                                                                                                                                                                                                                             |
+| -------------------- | -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `download_started`   | `download_id`, `url`                         | On the result of the call during which the download started. `url` is the final URL the file is served from, after redirects.                                                                                                                                                                                                                            |
+| `download_completed` | `download_id`, `url`, `path?`, `size_bytes?` | On the result of whichever later call is running when the download completes. Include `path` only when another tool in the same environment (for example, the [bash tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool) or `file_upload`) can read the file there; otherwise `download_id` is the download's only identifier. |
+| `download_failed`    | `download_id`, `url`, `error?`               | When the download fails or is canceled, with the reason in `error` if the browser provides one.                                                                                                                                                                                                                                                          |
 
 The API renders each entry as one line of text for Claude, in the order the entries appear. It adds the lines after the result's text, separated by a blank line, and before any Tab Context footer. Every kind of member result carries the lines, including `zoom` and tab-management results. A result with no `text` block gets them as a text block of its own. Each line gives the `download_id` and `url`, plus `path` and `size_bytes` (for `download_completed`) or `error` (for `download_failed`) when you send them. You don't need to describe the download in your own text. The API wraps `url`, `path`, and `error` in double quotes and escapes double quotes and backslashes inside them, so don't pre-escape these values.
 
@@ -1475,7 +1477,7 @@ For example, a click on "Download price list (CSV)" (`ref_8`) in the Pricing tab
 }
 ```
 
-Claude sees `Screenshot captured.` followed by a blank line and a line like this:
+Claude receives `Screenshot captured.` followed by a blank line and a line like this:
 
 ```text wrap
 Download completed with download_id: dl-1, URL: "https://example.com/pricing/price-list.csv". Saved to "/home/user/downloads/price-list.csv". Size: 48213 bytes.
@@ -1483,7 +1485,7 @@ Download completed with download_id: dl-1, URL: "https://example.com/pricing/pri
 
 Download reports follow these rules:
 
-* At most one entry per `download_id` in a single block, so a download that starts and finishes during the same call reports only `download_completed`.
+* Send at most one entry for each `download_id` in a single block, so a download that starts and finishes during the same call reports only `download_completed`.
 * Never send `state_changes` on an `is_error: true` result; report a download event that occurred during a failed call on the next successful result.
 * `state_changes` isn't an inventory of downloads in progress; report each event once.
 * Each entry carries only the fields its `type` declares. `size_bytes` is a non-negative integer, `download_id` is non-empty, and `download_id`, `url`, `path`, and `error` are each at most 4,096 characters with no control characters or Unicode line or paragraph separators. The `url` comes from the remote server and often carries signed query-string credentials after redirects, so strip query parameters you don't want in Claude's context and sanitize it before reporting it or using it in a filesystem path.
@@ -1565,7 +1567,7 @@ The API validates the toolset entry and every member `tool_use` and `tool_result
 
 ## Limitations
 
-* **Platform availability:** Browser use is available on the Claude API and [Google Cloud](https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai).
+* **Platform availability:** Browser use is available on the Claude API and [Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/google-managed).
 * **Whole-input streaming only:** When you stream, each member's `input` arrives as one complete `input_json_delta` ([Client toolsets](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-reference#client-toolsets)).
 * **Element references are best-effort:** Highly dynamic pages (virtualized lists, canvas-rendered interfaces, pages that re-render on scroll) might not expose stable references, and Claude falls back to screenshots and coordinate clicks there.
 * **`read_console` and `read_network` depend on your browser automation:** They report only what it can capture, and only from the moment it attached to a tab.

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use
-fetched_at: 2026-09-28T06:10:39.102665+00:00
+fetched_at: 2026-10-26T05:39:59.682892+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ description: Enforce JSON Schema compliance on Claude's tool inputs with grammar
 
 Setting `strict: true` on a tool definition guarantees Claude's tool inputs match your JSON Schema by constraining the model's token sampling to schema-valid outputs (a technique called grammar-constrained sampling). This page covers why strict mode matters for agents, how to enable it, and common use cases. For the supported JSON Schema subset, see [JSON Schema limitations](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#json-schema-limitations). For non-strict schema guidance, see [Define tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools).
 
-Strict tool use validates tool parameters, ensuring Claude calls your functions with correctly-typed arguments. Use strict tool use when you need to:
+Strict tool use validates tool parameters, ensuring Claude calls your functions with correctly typed arguments. Use strict tool use when you need to:
 
 * Validate tool parameters
 * Build agentic workflows
@@ -25,7 +25,7 @@ Building reliable agentic systems requires guaranteed schema conformance. Withou
 
 Strict tool use guarantees type-safe parameters:
 
-* Functions receive correctly-typed arguments every time
+* Correctly typed function arguments every time
 * No need to validate and retry tool calls
 * Production-ready agents that work consistently at scale
 
@@ -69,7 +69,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   ```
 
   ```bash CLI
-  ant messages create --transform content <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   messages:
@@ -178,7 +178,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "What's the weather like in San Francisco?" }],
+      Messages = [new UserMessageParam { Content = "What's the weather like in San Francisco?" }],
       Tools = [
           new ToolUnion(new Tool()
           {
@@ -321,7 +321,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [
       { role: "user", content: "What's the weather like in San Francisco?" }
@@ -523,7 +523,7 @@ The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = "Search for flights to Tokyo departing June 1, 2026" }],
+          Messages = [new UserMessageParam { Content = "Search for flights to Tokyo departing June 1, 2026" }],
           Tools = [
               new ToolUnion(new Tool()
               {
@@ -662,7 +662,7 @@ The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use
       client = Anthropic::Client.new
 
       message = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 1024,
         messages: [
           { role: "user", content: "Search for flights to Tokyo departing June 1, 2026" }
@@ -884,7 +884,7 @@ The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
+          Messages = [new UserMessageParam { Content = "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }],
           Tools = [
               new ToolUnion(new Tool()
               {
@@ -1078,7 +1078,7 @@ The [computer use](https://platform.claude.com/docs/en/agents-and-tools/tool-use
       client = Anthropic::Client.new
 
       message = client.messages.create(
-        model: "claude-opus-5-5",
+        model: Anthropic::Model::CLAUDE_OPUS_5_5,
         max_tokens: 1024,
         messages: [
           { role: "user", content: "Help me plan a trip from New York to Paris for 2 people, departing June 1, 2026" }

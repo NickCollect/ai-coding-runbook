@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/rate_limits/list
-fetched_at: 2026-10-12T06:50:06.149447+00:00
+fetched_at: 2026-10-26T05:40:34.486587+00:00
 fetch_method: mintlify_md
 ---
 
@@ -79,11 +79,11 @@ the remaining entries.
 
   - `id: string`
 
-    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`.
+    Identifier of this rate-limit entry. It is stable within the organization and differs between organizations; the group's own identifier is `group.id`. Pass it as `rate_limit_id` to set a workspace's overrides for this group.
 
   - `group: BetaOrganizationRateLimitModelGroup or BetaOrganizationRateLimitBatchGroup or BetaOrganizationRateLimitTokenCountGroup or 3 more`
 
-    The rate-limit group this entry's limits apply to. Its `type` equals `group_type`.
+    The rate-limit group this entry's limits apply to.
 
     - `BetaOrganizationRateLimitModelGroup object`
 
@@ -175,25 +175,7 @@ the remaining entries.
 
   - `models: array of string or null`
 
-    Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
-
-  - `group_type: "batch" or "files" or "model_group" or 3 more`
-
-    **Deprecated**: Use `group.type` instead. `group_type` is still returned and always equals `group.type`.
-
-    Deprecated: use `group.type` instead. The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`. Always equal to `group.type`.
-
-    - `"batch"`
-
-    - `"files"`
-
-    - `"model_group"`
-
-    - `"skills"`
-
-    - `"token_count"`
-
-    - `"web_search"`
+    Model names this entry's limits apply to, including aliases. `null` when `group.type` is not `"model_group"`. The list covers the models your organization has access to, so it can differ between organizations.
 
 - `next_page: string or null`
 
@@ -203,8 +185,8 @@ the remaining entries.
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/rate_limits \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)
@@ -219,7 +201,6 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
         "display_name": "display_name",
         "type": "model_group"
       },
-      "group_type": "batch",
       "limits": [
         {
           "type": "type",

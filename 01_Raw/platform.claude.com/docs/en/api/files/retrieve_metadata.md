@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/files/retrieve_metadata
-fetched_at: 2026-10-12T06:49:54.046300+00:00
+fetched_at: 2026-10-26T05:40:17.650185+00:00
 fetch_method: mintlify_md
 ---
 
@@ -91,8 +91,8 @@ Get File Metadata
 
 ```bash
 curl https://api.anthropic.com/v1/files/$FILE_ID \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

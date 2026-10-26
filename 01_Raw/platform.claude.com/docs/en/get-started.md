@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/get-started
-fetched_at: 2026-10-19T05:32:41.188679+00:00
+fetched_at: 2026-10-26T05:39:57.557629+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ description: Make your first API call to Claude and build a simple web search as
 
 ## Prerequisites
 
-* A [Claude Console account](https://platform.claude.com)
+* A [Claude Console account](https://platform.claude.com/)
 * An [API key](https://platform.claude.com/docs/en/get-api-key)
 
 ## Call the API
@@ -21,7 +21,7 @@ description: Make your first API call to Claude and build a simple web search as
   <Tab title="cURL">
     <Steps>
       <Step title="Set your API key">
-        Export your API key as an environment variable. The cURL command below reads it from `$ANTHROPIC_API_KEY`.
+        Export your API key as an environment variable. The cURL command in the following step reads it from `$ANTHROPIC_API_KEY`.
 
         ```bash
         export ANTHROPIC_API_KEY="your-api-key-here"
@@ -100,7 +100,7 @@ description: Make your first API call to Claude and build a simple web search as
         ant auth status
         ```
 
-        On a remote host without a browser, pass `--no-browser` to get a URL you can open on another device, then paste the returned code back into the terminal. If `ANTHROPIC_API_KEY` is set in your environment, it takes precedence over the login credentials. For non-interactive environments such as CI, see [CLI authentication options](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication).
+        On a remote host without a browser, pass `--no-browser` to get a URL you can open on another device, then paste the returned code back into the terminal. For non-interactive environments such as CI, see [CLI authentication options](https://platform.claude.com/docs/en/cli-sdks-libraries/cli/authentication).
       </Step>
 
       <Step title="Make your first API call">
@@ -296,9 +296,8 @@ description: Make your first API call to Claude and build a simple web search as
             MaxTokens = 1000,
             Messages =
             [
-                new()
+                new UserMessageParam
                 {
-                    Role = Role.User,
                     Content = "What should I search for to find the latest developments in renewable energy?",
                 },
             ],
@@ -346,7 +345,7 @@ description: Make your first API call to Claude and build a simple web search as
         ```bash
         mkdir claude-quickstart && cd claude-quickstart
         go mod init claude-quickstart
-        go get github.com/anthropics/anthropic-sdk-go
+        go get github.com/anthropics/anthropic-sdk-go/v2
         ```
       </Step>
 
@@ -361,7 +360,7 @@ description: Make your first API call to Claude and build a simple web search as
         	"fmt"
         	"log"
 
-        	"github.com/anthropics/anthropic-sdk-go"
+        	"github.com/anthropics/anthropic-sdk-go/v2"
         )
 
         func main() {
@@ -442,7 +441,7 @@ description: Make your first API call to Claude and build a simple web search as
             }
 
             dependencies {
-                implementation("com.anthropic:anthropic-java:2.73.0")
+                implementation("com.anthropic:anthropic-java:3.3.0")
             }
 
             application {
@@ -468,7 +467,7 @@ description: Make your first API call to Claude and build a simple web search as
                 <dependency>
                   <groupId>com.anthropic</groupId>
                   <artifactId>anthropic-java</artifactId>
-                  <version>2.73.0</version>
+                  <version>3.3.0</version>
                 </dependency>
               </dependencies>
             </project>

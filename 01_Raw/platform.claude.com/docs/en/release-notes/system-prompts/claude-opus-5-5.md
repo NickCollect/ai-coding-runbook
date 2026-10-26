@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-5-5
-fetched_at: 2026-09-28T06:10:44.664592+00:00
+fetched_at: 2026-10-26T05:40:13.305468+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Claude Opus 5.5 system prompts
 url: https://platform.claude.com/docs/en/release-notes/system-prompts/claude-opus-5-5
-description: See updates to the core system prompt for Claude Opus 5.5 on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
+description: See updates to the core system prompt for Claude Opus 5.5 on [claude.ai](https://claude.ai), the [Claude iOS app](https://anthropic.com/ios), and the [Claude Android app](https://anthropic.com/android).
 ---
 
 ## September 22, 2026

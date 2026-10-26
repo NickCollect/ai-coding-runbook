@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/federation/rules/workspaces/list
-fetched_at: 2026-10-12T06:49:55.678946+00:00
+fetched_at: 2026-10-26T05:40:20.095548+00:00
 fetch_method: mintlify_md
 ---
 
@@ -87,8 +87,8 @@ rules with `applies_to_all_workspaces` or a legacy single
 
 ```bash
 curl https://api.anthropic.com/v1/organizations/federation_rules/$FEDERATION_RULE_ID/workspaces \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```
 
 ### Response (200)

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-10-19T05:32:45.203096+00:00
+fetched_at: 2026-10-26T05:40:05.782229+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,14 +24,15 @@ First, upload a file using the [Files API](https://platform.claude.com/docs/en/b
 
 <CodeGroup>
   ```bash cURL
-  file=$(curl --fail-with-body -sS "${auth[@]}" \
-    "${base_url}/files" \
-    -F file=@data.csv)
-  FILE_ID=$(jq -er '.id' <<<"${file}")
+  curl --fail-with-body -sS https://api.anthropic.com/v1/files \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -F file=@data.csv
   ```
 
   ```bash CLI
-  FILE_ID=$(ant files upload --file data.csv --transform id --raw-output)
+  ant files upload --file data.csv
   ```
 
   ```python Python
@@ -41,7 +42,7 @@ First, upload a file using the [Files API](https://platform.claude.com/docs/en/b
 
   ```typescript TypeScript
   const file = await client.files.upload({
-    file: await toFile(readFile("data.csv"), "data.csv", { type: "text/csv" }),
+    file: await toFile(readFile("data.csv"), "data.csv", { type: "text/csv" })
   });
   console.log(`File ID: ${file.id}`);
   ```
@@ -70,7 +71,9 @@ First, upload a file using the [Files API](https://platform.claude.com/docs/en/b
 
   ```java Java
   var file = client.files().upload(
-      FileUploadParams.builder().file(dataCsv).build()
+      FileUploadParams.builder()
+          .file(dataCsv)
+          .build()
   );
   IO.println("File ID: " + file.id());
   ```
@@ -98,21 +101,22 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
 
 <CodeGroup>
   ```bash cURL
-  jq -n \
-    --arg agent_id "${AGENT_ID}" \
-    --arg environment_id "${ENVIRONMENT_ID}" \
-    --arg file_id "${FILE_ID}" \
-    '{
-      agent: $agent_id,
-      environment_id: $environment_id,
-      resources: [
+  curl --fail-with-body -sS https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "agent": "'"$AGENT_ID"'",
+      "environment_id": "'"$ENVIRONMENT_ID"'",
+      "resources": [
         {
-          type: "file",
-          file_id: $file_id,
-          mount_path: "/data.csv"
+          "type": "file",
+          "file_id": "'"$FILE_ID"'",
+          "mount_path": "/data.csv"
         }
       ]
-    }' | curl --fail-with-body -sS "${auth[@]}" "${base_url}/sessions" --json @-
+    }'
   ```
 
   ```bash CLI
@@ -148,9 +152,9 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
       {
         type: "file",
         file_id: file.id,
-        mount_path: "/data.csv",
-      },
-    ],
+        mount_path: "/data.csv"
+      }
+    ]
   });
   ```
 
@@ -163,7 +167,6 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
       [
           new BetaManagedAgentsFileResourceParams
           {
-              Type = "file",
               FileID = file.ID,
               MountPath = "/data.csv",
           },
@@ -179,7 +182,6 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
   	EnvironmentID: environment.ID,
   	Resources: []anthropic.BetaSessionNewParamsResourceUnion{{
   		OfFile: &anthropic.BetaManagedAgentsFileResourceParams{
-  			Type:      anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
   			FileID:    file.ID,
   			MountPath: anthropic.String("/data.csv"),
   		},
@@ -197,7 +199,6 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
           .environmentId(environment.id())
           .addResource(
               BetaManagedAgentsFileResourceParams.builder()
-                  .type(BetaManagedAgentsFileResourceParams.Type.FILE)
                   .fileId(file.id())
                   .mountPath("/data.csv")
                   .build()
@@ -212,7 +213,6 @@ Mount uploaded files into the sandbox by adding them to the `resources` (csharp,
       environmentID: $environment->id,
       resources: [
           BetaManagedAgentsFileResourceParams::with(
-              type: 'file',
               fileID: $file->id,
               mountPath: '/data.csv',
           ),
@@ -311,9 +311,9 @@ Mount multiple files by adding entries to the `resources` (csharp, go: `Resource
 
   var resources = new[]
   {
-      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_abc123", MountPath = "/data.csv" },
-      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_def456", MountPath = "/config.json" },
-      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_ghi789", MountPath = "/src/main.py" },
+      new BetaManagedAgentsFileResourceParams { FileID = "file_abc123", MountPath = "/data.csv" },
+      new BetaManagedAgentsFileResourceParams { FileID = "file_def456", MountPath = "/config.json" },
+      new BetaManagedAgentsFileResourceParams { FileID = "file_ghi789", MountPath = "/src/main.py" },
   };
   ```
 
@@ -331,11 +331,17 @@ Mount multiple files by adding entries to the `resources` (csharp, go: `Resource
 
   var resources = List.of(
       BetaManagedAgentsFileResourceParams.builder()
-          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_abc123").mountPath("/data.csv").build(),
+          .fileId("file_abc123")
+          .mountPath("/data.csv")
+          .build(),
       BetaManagedAgentsFileResourceParams.builder()
-          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_def456").mountPath("/config.json").build(),
+          .fileId("file_def456")
+          .mountPath("/config.json")
+          .build(),
       BetaManagedAgentsFileResourceParams.builder()
-          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_ghi789").mountPath("/src/main.py").build()
+          .fileId("file_ghi789")
+          .mountPath("/src/main.py")
+          .build()
   );
   ```
 
@@ -356,7 +362,7 @@ Mount multiple files by adding entries to the `resources` (csharp, go: `Resource
   ```
 </CodeGroup>
 
-A maximum of 500 files is supported per session.
+A maximum of 500 files is supported for each session.
 
 ## Managing files on a running session
 
@@ -364,9 +370,15 @@ You can add or remove files from a session after creation using the session reso
 
 <CodeGroup>
   ```bash cURL
-  jq -n --arg file_id "${FILE_ID}" '{type: "file", file_id: $file_id}' \
-    | curl --fail-with-body -sS "${auth[@]}" \
-        "${base_url}/sessions/${SESSION_ID}/resources" --json @-
+  curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "type": "file",
+      "file_id": "'"$FILE_ID"'"
+    }'
   ```
 
   ```bash CLI
@@ -388,7 +400,7 @@ You can add or remove files from a session after creation using the session reso
   ```typescript TypeScript
   const resource = await client.beta.sessions.resources.add(session.id, {
     type: "file",
-    file_id: file.id,
+    file_id: file.id
   });
   if (resource.type !== "file") {
     throw new Error(`Unexpected resource type: ${resource.type}`);
@@ -399,7 +411,6 @@ You can add or remove files from a session after creation using the session reso
   ```csharp C#
   var resource = await client.Beta.Sessions.Resources.Add(session.ID, new()
   {
-      Type = "file",
       FileID = file.ID,
   });
   Console.WriteLine(resource.ID);  // "sesrsc_01ABC..."
@@ -408,7 +419,6 @@ You can add or remove files from a session after creation using the session reso
   ```go Go
   resource, err := client.Beta.Sessions.Resources.Add(ctx, session.ID, anthropic.BetaSessionResourceAddParams{
   	BetaManagedAgentsFileResourceParams: anthropic.BetaManagedAgentsFileResourceParams{
-  		Type:   anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
   		FileID: file.ID,
   	},
   })
@@ -424,7 +434,6 @@ You can add or remove files from a session after creation using the session reso
       ResourceAddParams.builder()
           .betaManagedAgentsFileResourceParams(
               BetaManagedAgentsFileResourceParams.builder()
-                  .type(BetaManagedAgentsFileResourceParams.Type.FILE)
                   .fileId(file.id())
                   .build()
           )
@@ -436,7 +445,6 @@ You can add or remove files from a session after creation using the session reso
   ```php PHP
   $resource = $client->beta->sessions->resources->add(
       $session->id,
-      type: 'file',
       fileID: $file->id,
   );
   echo "{$resource->id}\n";  // "sesrsc_01ABC..."
@@ -456,11 +464,15 @@ List all resources on a session with `GET /v1/sessions/{session_id}/resources` (
 
 <CodeGroup>
   ```bash cURL
-  curl --fail-with-body -sS "${auth[@]}" \
-    "${base_url}/sessions/${SESSION_ID}/resources"
+  curl --fail-with-body -sS "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01"
 
-  curl --fail-with-body -sS "${auth[@]}" -X DELETE \
-    "${base_url}/sessions/${SESSION_ID}/resources/${RESOURCE_ID}" >/dev/null
+  curl --fail-with-body -sS -X DELETE "https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01"
   ```
 
   ```bash CLI
@@ -488,7 +500,7 @@ List all resources on a session with `GET /v1/sessions/{session_id}/resources` (
   }
 
   await client.beta.sessions.resources.delete(resource.id, {
-    session_id: session.id,
+    session_id: session.id
   });
   ```
 
@@ -496,8 +508,7 @@ List all resources on a session with `GET /v1/sessions/{session_id}/resources` (
   var listed = await client.Beta.Sessions.Resources.List(session.ID);
   await foreach (var entry in listed.Paginate())
   {
-      var type = entry.Match<string>(repo => repo.Type, fileRes => fileRes.Type, memoryStore => memoryStore.Type);
-      Console.WriteLine($"{entry.ID} {type}");
+      Console.WriteLine($"{entry.ID} {entry.Type.Raw()}");
   }
 
   await client.Beta.Sessions.Resources.Delete(resource.ID, new() { SessionID = session.ID });
@@ -525,18 +536,20 @@ List all resources on a session with `GET /v1/sessions/{session_id}/resources` (
       switch (entry.type().value()) {
           case FILE -> {
               var fileResource = entry.asFile();
-              IO.println(fileResource.id() + " " + fileResource.type());
+              IO.println(fileResource.id() + " " + fileResource._type());
           }
           case GITHUB_REPOSITORY -> {
               var repoResource = entry.asGitHubRepository();
-              IO.println(repoResource.id() + " " + repoResource.type());
+              IO.println(repoResource.id() + " " + repoResource._type());
           }
       }
   }
 
   client.beta().sessions().resources().delete(
       resource.id(),
-      ResourceDeleteParams.builder().sessionId(session.id()).build()
+      ResourceDeleteParams.builder()
+          .sessionId(session.id())
+          .build()
   );
   ```
 
@@ -559,7 +572,7 @@ List all resources on a session with `GET /v1/sessions/{session_id}/resources` (
 
 ## Listing and downloading session files
 
-Use the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) to list files scoped to a session and download them. Files the agent writes to `/mnt/session/outputs/` appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If an output file you expect is missing, list again after a short delay; once it appears in the list, its upload has finished.
+Use the [Files API](https://platform.claude.com/docs/en/build-with-claude/files) to list files scoped to a session and download them. Files the agent writes to `/mnt/session/outputs/` appear in the list shortly after the agent finishes writing them, sometimes a few seconds after the session goes idle. If an output file you expect is missing, list again after a short delay; once it appears in the list, its upload is complete.
 
 Filtering by `scope_id` (java: `scopeId`; php: `scopeID`; csharp, go: `ScopeID`) requires the `managed-agents-2026-04-01` beta header, so the list examples call `GET /v1/files` (python, typescript, ruby: `client.beta.files.list()`; go, csharp: `client.Beta.Files.List()`; java: `client.beta().files().list()`; php: `$client->beta->files->list()`; cli: `ant beta:files list`) and pass that header explicitly.
 
@@ -716,8 +729,8 @@ The agent can work with any file type, including:
   Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 </Note>
 
-* The path you specify is rooted under the session's uploads directory: a `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
-* If you omit `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`), the file is placed at `/mnt/session/uploads/<file_id>`
-* Parent directories are created automatically
-* Paths should be absolute (starting with `/`)
-* Files the agent writes to `/mnt/session/outputs/` become available through the Files API, scoped to the session; see [Listing and downloading session files](https://platform.claude.com/docs/en/managed-agents/files#listing-and-downloading-session-files)
+* The path you specify is rooted under the session's uploads directory: a `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox.
+* If you omit `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`), the file is placed at `/mnt/session/uploads/<file_id>`.
+* Parent directories are created automatically.
+* Paths should be absolute (starting with `/`).
+* Files the agent writes to `/mnt/session/outputs/` become available through the Files API, scoped to the session; see [Listing and downloading session files](https://platform.claude.com/docs/en/managed-agents/files#listing-and-downloading-session-files).

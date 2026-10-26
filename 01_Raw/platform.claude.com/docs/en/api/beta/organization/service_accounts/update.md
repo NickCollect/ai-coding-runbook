@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/organization/service_accounts/update
-fetched_at: 2026-10-19T05:32:58.943123+00:00
+fetched_at: 2026-10-26T05:40:33.008494+00:00
 fetch_method: mintlify_md
 ---
 
@@ -144,6 +144,8 @@ interactive credential (a user OAuth token or a Console session).
 
   - `"telemetry-destinations-2026-08-11"`
 
+  - `"webhooks-2026-10-07"`
+
 ## Body parameters
 
 - `description: optional string or null`
@@ -228,8 +230,8 @@ interactive credential (a user OAuth token or a Console session).
 ```bash
 curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUNT_ID \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{}'
 ```
 

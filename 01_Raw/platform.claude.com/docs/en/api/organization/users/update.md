@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/organization/users/update
-fetched_at: 2026-10-19T05:32:52.480977+00:00
+fetched_at: 2026-10-26T05:40:21.095514+00:00
 fetch_method: mintlify_md
 ---
 
@@ -104,8 +104,8 @@ Update a member's organization role.
 ```bash
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'Content-Type: application/json' \
-    -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY" \
+    -H 'anthropic-version: 2026-10-21' \
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY" \
     -d '{
           "role": "user"
         }'

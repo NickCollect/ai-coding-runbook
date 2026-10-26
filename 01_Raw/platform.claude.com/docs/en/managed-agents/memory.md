@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-10-19T05:32:45.232982+00:00
+fetched_at: 2026-10-26T05:40:06.068513+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,7 +40,10 @@ Give the store a `name` (csharp, go: `Name`) and a `description` (csharp, go: `D
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
-    -d '{"name": "User Preferences", "description": "Per-user preferences and project context."}'
+    -d '{
+      "name": "User Preferences",
+      "description": "Per-user preferences and project context."
+    }'
   ```
 
   <CodeGroupItem>
@@ -141,15 +144,17 @@ Pre-load a store with reference material before any agent runs:
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
-    -d '{"path": "/formatting_standards.md", "content": "All reports use GAAP formatting. Dates are ISO-8601..."}' > /dev/null
+    -d '{
+      "path": "/formatting_standards.md",
+      "content": "All reports use GAAP formatting. Dates are ISO-8601..."
+    }'
   ```
 
   ```bash CLI
   ant beta:memory-stores:memories create \
     --memory-store-id "$store_id" \
     --path "/formatting_standards.md" \
-    --content "All reports use GAAP formatting. Dates are ISO-8601..." \
-    > /dev/null
+    --content "All reports use GAAP formatting. Dates are ISO-8601..."
   ```
 
   ```python Python
@@ -213,7 +218,7 @@ Pre-load a store with reference material before any agent runs:
 </CodeGroup>
 
 <Tip>
-  Individual memories within the store are capped at 100 kB (\~25k tokens). A store holds a maximum of 10,000 memories. Structure memory as many small focused files, not a few large ones.
+  Individual memories within the store are capped at 100 kB (\~25k tokens). A store holds a maximum of 10,000 memories. Structure memory as many small focused files, not a few large ones.
 </Tip>
 
 ## Attach a memory store to a session
@@ -231,7 +236,7 @@ You can configure `access` (csharp, go: `Access`) as well. It defaults to `read_
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    --data '{
+    -d '{
       "agent": "'"$agent_id"'",
       "environment_id": "'"$environment_id"'",
       "resources": [
@@ -296,7 +301,6 @@ You can configure `access` (csharp, go: `Access`) as well. It defaults to `read_
       [
           new BetaManagedAgentsMemoryStoreResourceParam
           {
-              Type = "memory_store",
               MemoryStoreID = store.ID,
               Access = "read_write",
               Instructions = "User preferences and project context. Check before starting any task.",
@@ -313,7 +317,6 @@ You can configure `access` (csharp, go: `Access`) as well. It defaults to `read_
   	EnvironmentID: environment.ID,
   	Resources: []anthropic.BetaSessionNewParamsResourceUnion{{
   		OfMemoryStore: &anthropic.BetaManagedAgentsMemoryStoreResourceParam{
-  			Type:          anthropic.BetaManagedAgentsMemoryStoreResourceParamTypeMemoryStore,
   			MemoryStoreID: store.ID,
   			Access:        anthropic.BetaManagedAgentsMemoryStoreResourceParamAccessReadWrite,
   			Instructions:  anthropic.String("User preferences and project context. Check before starting any task."),
@@ -332,7 +335,6 @@ You can configure `access` (csharp, go: `Access`) as well. It defaults to `read_
           .environmentId(environment.id())
           .addResource(
               BetaManagedAgentsMemoryStoreResourceParam.builder()
-                  .type(BetaManagedAgentsMemoryStoreResourceParam.Type.MEMORY_STORE)
                   .memoryStoreId(store.id())
                   .access(BetaManagedAgentsMemoryStoreResourceParam.Access.READ_WRITE)
                   .instructions("User preferences and project context. Check before starting any task.")
@@ -377,17 +379,17 @@ You can configure `access` (csharp, go: `Access`) as well. It defaults to `read_
   Memory stores attach with `read_write` access by default. If the agent processes untrusted input (user-supplied prompts, fetched web content, or third-party tool output), a successful prompt injection could write malicious content into the store. Later sessions then read that content as trusted memory. Use `read_only` for reference material, shared lookups, and any store the agent does not need to modify.
 </Warning>
 
-A maximum of **8 memory stores** are supported per session. Attach multiple stores when different parts of memory have different owners or access rules. Common reasons:
+A maximum of **8 memory stores** is supported for each session. Attach multiple stores when different parts of memory have different owners or access rules. Common reasons:
 
-* **Shared reference material:** one read-only store attached to many sessions (standards, conventions, domain knowledge), kept separate from each session's own read-write store.
-* **Mapping to your product's structure:** one store per end user, per team, or per project, while sharing a single agent configuration.
-* **Different lifecycles:** a store that outlives any single session, or one you want to archive on its own schedule.
+* **Shared reference material:** one read-only store attached to many sessions (standards, conventions, domain knowledge), kept separate from each session's own read-write store
+* **Mapping to your product's structure:** one store for each end user, team, or project, while sharing a single agent configuration
+* **Different lifecycles:** a store that outlives any single session, or one you want to archive on its own schedule
 
 ### How the agent accesses memory
 
-Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`. The directory name is the store's display name sanitized to a filesystem-safe slug (lowercased; non-alphanumeric runs become a single hyphen), so a store named "Demo Memory" mounts at `/mnt/memory/demo-memory/`. The exact path is returned in the `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) field on the session's memory-store resource; read it from there rather than constructing it yourself. The agent reads and writes the store with the standard [agent toolset](https://platform.claude.com/docs/en/managed-agents/tools). Writes under the mount path are persisted back to the store and stay in sync across sessions that share it; writes to any other path under `/mnt/memory/` fail, because the sandbox mounts that parent directory read-only. A short description of each mount (display name, mount path, access mode, store `description` (csharp, go: `Description`), and any `instructions` (csharp, go: `Instructions`)) is automatically added to the system prompt.
+Each attached store is mounted inside the session's sandbox as a directory under `/mnt/memory/`. The directory name is the store's display name sanitized to a filesystem-safe slug (lowercased, with each non-alphanumeric run replaced by a single hyphen), so a store named "Demo Memory" mounts at `/mnt/memory/demo-memory/`. The exact path is returned in the `mount_path` (java, php: `mountPath`; csharp, go: `MountPath`) field on the session's memory-store resource; read it from there rather than constructing it yourself. The agent reads and writes the store with the standard [agent toolset](https://platform.claude.com/docs/en/managed-agents/tools). Writes under the mount path are persisted back to the store and stay in sync across sessions that share it; writes to any other path under `/mnt/memory/` fail, because the sandbox mounts that parent directory read-only. A short description of each mount (display name, mount path, access mode, store `description` (csharp, go: `Description`), and any `instructions` (csharp, go: `Instructions`)) is automatically added to the system prompt.
 
-`access` (csharp, go: `Access`) is enforced at the filesystem level: a `read_only` mount rejects writes, while writes to a `read_write` mount produce [memory versions](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes) attributed to the session.
+`access` (csharp, go: `Access`) is enforced at the filesystem level: a `read_only` mount rejects writes, whereas writes to a `read_write` mount produce [memory versions](https://platform.claude.com/docs/en/managed-agents/memory#audit-memory-changes) attributed to the session.
 
 <Note>
   On [self-hosted sandboxes](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory), each store's directory is a local copy that the worker manages rather than a live mount. The worker reconciles each copy with its store after tool calls, at most once per sync interval (15 seconds by default), and once more when the session ends. The agent's `write` and `edit` tools change only the local copy; the worker uploads those changes at its next sync, so another session running on a self-hosted sandbox sees a change only after both workers have synced. Paths under `/mnt/memory/` outside the store directories are not scratch space there: the worker's file tools refuse to write to them, and anything a shell command writes there is never synced to a store.
@@ -406,7 +408,7 @@ Memory stores can be managed directly through the API. Use this for building rev
 List the memories in a store. Results are returned in a stable, server-defined order.
 
 * `path_prefix` scopes the list to one directory. It must end with `/` and matches whole path segments, so `path_prefix=/notes/` returns `/notes/todo.md` but not `/notes-archive/todo.md`.
-* `depth` controls how deep the listing goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
+* `depth` controls how deep the list goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
 
 <CodeGroup>
   ```bash cURL
@@ -447,7 +449,9 @@ List the memories in a store. Results are returned in a stable, server-defined o
   });
   await foreach (var item in page.Paginate())
   {
-      var line = item.Match(m => $"memory  {m.Path}", p => $"memory_prefix  {p.Path}");
+      var line = item.Match(
+          memoryItem => $"memory  {memoryItem.Path}",
+          prefixItem => $"memory_prefix  {prefixItem.Path}");
       Console.WriteLine(line);
   }
   ```
@@ -472,8 +476,8 @@ List the memories in a store. Results are returned in a stable, server-defined o
           .build()
   );
   for (var item : page.data()) {
-      item.memory().ifPresent(m -> IO.println("memory  " + m.path()));
-      item.memoryPrefix().ifPresent(p -> IO.println("memory_prefix  " + p.path()));
+      item.memory().ifPresent(memoryItem -> IO.println("memory  " + memoryItem.path()));
+      item.memoryPrefix().ifPresent(prefixItem -> IO.println("memory_prefix  " + prefixItem.path()));
   }
   ```
 
@@ -498,7 +502,7 @@ List the memories in a store. Results are returned in a stable, server-defined o
   ```
 </CodeGroup>
 
-See the [List memories reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list) for full parameters and response schema.
+See the [List memories](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/list) reference for full parameters and response schema.
 
 ### Read a memory
 
@@ -554,7 +558,9 @@ Fetching an individual memory returns the full content.
   ```java Java
   var retrieved = client.beta().memoryStores().memories().retrieve(
       mem.id(),
-      MemoryRetrieveParams.builder().memoryStoreId(store.id()).build()
+      MemoryRetrieveParams.builder()
+          .memoryStoreId(store.id())
+          .build()
   );
   IO.println(retrieved.content().orElseThrow());
   ```
@@ -573,11 +579,11 @@ Fetching an individual memory returns the full content.
   ```
 </CodeGroup>
 
-See the [Retrieve a memory reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve) for full parameters and response schema.
+See the [Retrieve a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve) reference for full parameters and response schema.
 
 ### Create a memory
 
-`POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) creates a memory at a given `path` (csharp, go: `Path`). Create does not overwrite; to change an existing memory, [update it](https://platform.claude.com/docs/en/managed-agents/memory#update-a-memory) with `POST /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.update()`; typescript: `client.beta.memoryStores.memories.update()`; go, csharp: `client.Beta.MemoryStores.Memories.Update()`; java: `client.beta().memoryStores().memories().update()`; php: `$client->beta->memoryStores->memories->update()`; cli: `ant beta:memory-stores:memories update`).
+`POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) creates a memory at a given `path` (csharp, go: `Path`). Create does not overwrite; to [update an existing memory](https://platform.claude.com/docs/en/managed-agents/memory#update-a-memory), use `POST /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.update()`; typescript: `client.beta.memoryStores.memories.update()`; go, csharp: `client.Beta.MemoryStores.Memories.Update()`; java: `client.beta().memoryStores().memories().update()`; php: `$client->beta->memoryStores->memories->update()`; cli: `ant beta:memory-stores:memories update`).
 
 <CodeGroup>
   ```bash cURL
@@ -586,7 +592,10 @@ See the [Retrieve a memory reference](https://platform.claude.com/docs/en/api/be
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
-    -d '{"path": "/preferences/formatting.md", "content": "Always use tabs, not spaces."}'
+    -d '{
+      "path": "/preferences/formatting.md",
+      "content": "Always use tabs, not spaces."
+    }'
   ```
 
   ```bash CLI
@@ -656,7 +665,7 @@ See the [Retrieve a memory reference](https://platform.claude.com/docs/en/api/be
   ```
 </CodeGroup>
 
-See the [Create a memory reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/create) for full parameters and response schema.
+See the [Create a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/create) reference for full parameters and response schema.
 
 ### Update a memory
 
@@ -669,15 +678,14 @@ See the [Create a memory reference](https://platform.claude.com/docs/en/api/beta
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
-    -d '{"path": "/archive/2026_q1_formatting.md"}' > /dev/null
+    -d '{"path": "/archive/2026_q1_formatting.md"}'
   ```
 
   ```bash CLI
   ant beta:memory-stores:memories update \
     --memory-store-id "$store_id" \
     --memory-id "$mem_id" \
-    --path "/archive/2026_q1_formatting.md" \
-    > /dev/null
+    --path "/archive/2026_q1_formatting.md"
   ```
 
   ```python Python
@@ -740,11 +748,11 @@ See the [Create a memory reference](https://platform.claude.com/docs/en/api/beta
   ```
 </CodeGroup>
 
-See the [Update a memory reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update) for full parameters and response schema.
+See the [Update a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update) reference for full parameters and response schema.
 
 #### Safe content edits (optimistic concurrency)
 
-To avoid clobbering a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored content hash still matches the one you read; on mismatch, re-read the memory and retry against the fresh state.
+To avoid overwriting a concurrent write, pass a `content_sha256` precondition. The update only applies if the stored content hash still matches the one you read; on mismatch, re-read the memory and retry against the fresh state.
 
 <CodeGroup>
   ```bash cURL
@@ -753,10 +761,10 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
-    --data '{
+    -d '{
       "content": "CORRECTED: Always use 2-space indentation.",
       "precondition": {"type": "content_sha256", "content_sha256": "'"$mem_sha"'"}
-    }' > /dev/null
+    }'
   ```
 
   ```bash CLI
@@ -764,8 +772,7 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
     --memory-store-id "$store_id" \
     --memory-id "$mem_id" \
     --content "CORRECTED: Always use 2-space indentation." \
-    --precondition "{type: content_sha256, content_sha256: $mem_sha}" \
-    > /dev/null
+    --precondition "{type: content_sha256, content_sha256: $mem_sha}"
   ```
 
   ```python Python
@@ -790,11 +797,7 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   {
       MemoryStoreID = store.ID,
       Content = "CORRECTED: Always use 2-space indentation.",
-      Precondition = new BetaManagedAgentsPrecondition
-      {
-          Type = "content_sha256",
-          ContentSha256 = mem.ContentSha256,
-      },
+      Precondition = new BetaManagedAgentsPrecondition { ContentSha256 = mem.ContentSha256 },
   });
   ```
 
@@ -803,7 +806,6 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   	MemoryStoreID: store.ID,
   	Content:       anthropic.String("CORRECTED: Always use 2-space indentation."),
   	Precondition: anthropic.BetaManagedAgentsPreconditionParam{
-  		Type:          anthropic.BetaManagedAgentsPreconditionTypeContentSha256,
   		ContentSha256: anthropic.String(mem.ContentSha256),
   	},
   })
@@ -820,7 +822,6 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
           .content("CORRECTED: Always use 2-space indentation.")
           .precondition(
               BetaManagedAgentsPrecondition.builder()
-                  .type(BetaManagedAgentsPrecondition.Type.CONTENT_SHA256)
                   .contentSha256(mem.contentSha256())
                   .build()
           )
@@ -854,14 +855,13 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   curl -s -X DELETE "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: agent-memory-2026-07-22" > /dev/null
+    -H "anthropic-beta: agent-memory-2026-07-22"
   ```
 
   ```bash CLI
   ant beta:memory-stores:memories delete \
     --memory-store-id "$store_id" \
-    --memory-id "$mem_id" \
-    > /dev/null
+    --memory-id "$mem_id"
   ```
 
   ```python Python
@@ -896,7 +896,9 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   ```java Java
   client.beta().memoryStores().memories().delete(
       mem.id(),
-      MemoryDeleteParams.builder().memoryStoreId(store.id()).build()
+      MemoryDeleteParams.builder()
+          .memoryStoreId(store.id())
+          .build()
   );
   ```
 
@@ -912,13 +914,13 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   ```
 </CodeGroup>
 
-See the [Delete a memory reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/delete) for full parameters and response schema.
+See the [Delete a memory](https://platform.claude.com/docs/en/api/beta/memory_stores/memories/delete) reference for full parameters and response schema.
 
 ## Audit memory changes
 
 Every mutation to a memory creates an immutable **memory version** (`memver_...`). Use the version endpoints to audit who changed what and when, to inspect or restore a prior snapshot, and to scrub sensitive content out of history with redact.
 
-Versions belong to the store (not the individual memory) and are not deleted when the memory itself is deleted, so the audit trail also covers deleted memories, subject to the retention described below. Versions are retained for 30 days after they are written; however, the recent versions of a live memory are always kept regardless of age, so memories that change infrequently might retain history beyond 30 days. The live `GET /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.retrieve()`; typescript: `client.beta.memoryStores.memories.retrieve()`; go: `client.Beta.MemoryStores.Memories.Get()`; java: `client.beta().memoryStores().memories().retrieve()`; csharp: `client.Beta.MemoryStores.Memories.Retrieve()`; php: `$client->beta->memoryStores->memories->retrieve()`; cli: `ant beta:memory-stores:memories retrieve`) call always returns the latest version; the version endpoints give you the retained history.
+Versions belong to the store (not the individual memory) and are not deleted when the memory itself is deleted, so the audit trail also covers deleted memories, subject to the retention described later. Versions are retained for 30 days after they are written; however, the recent versions of a live memory are always kept regardless of age, so memories that change infrequently might retain history beyond 30 days. The live `GET /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.retrieve()`; typescript: `client.beta.memoryStores.memories.retrieve()`; go: `client.Beta.MemoryStores.Memories.Get()`; java: `client.beta().memoryStores().memories().retrieve()`; csharp: `client.Beta.MemoryStores.Memories.Retrieve()`; php: `$client->beta->memoryStores->memories->retrieve()`; cli: `ant beta:memory-stores:memories retrieve`) call always returns the latest version; the version endpoints give you the retained history.
 
 There is no dedicated restore endpoint; to roll back, retrieve the version you want and write its `content` (csharp, go: `Content`) back with `POST /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.update()`; typescript: `client.beta.memoryStores.memories.update()`; go, csharp: `client.Beta.MemoryStores.Memories.Update()`; java: `client.beta().memoryStores().memories().update()`; php: `$client->beta->memoryStores->memories->update()`; cli: `ant beta:memory-stores:memories update`) (or `POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) if the parent memory has been deleted, provided the version you want is still retained).
 
@@ -958,8 +960,8 @@ List version history for a store, newest first. The example filters to a single 
   const versions = await client.beta.memoryStores.memoryVersions.list(store.id, {
     memory_id: mem.id
   });
-  for await (const v of versions) {
-    console.log(`${v.id}: ${v.operation}`);
+  for await (const memoryVersion of versions) {
+    console.log(`${memoryVersion.id}: ${memoryVersion.operation}`);
   }
 
   const versionId = versions.data[1].id;
@@ -971,10 +973,10 @@ List version history for a store, newest first. The example filters to a single 
       MemoryID = mem.ID,
   });
   var versionIds = new List<string>();
-  await foreach (var v in versions.Paginate())
+  await foreach (var memoryVersion in versions.Paginate())
   {
-      Console.WriteLine($"{v.ID}: {v.Operation.Raw()}");
-      versionIds.Add(v.ID);
+      Console.WriteLine($"{memoryVersion.ID}: {memoryVersion.Operation.Raw()}");
+      versionIds.Add(memoryVersion.ID);
   }
 
   var versionId = versionIds[1];
@@ -985,8 +987,8 @@ List version history for a store, newest first. The example filters to a single 
   	MemoryID: anthropic.String(mem.ID),
   })
   for versions.Next() {
-  	v := versions.Current()
-  	fmt.Printf("%s: %s\n", v.ID, v.Operation)
+  	memoryVersion := versions.Current()
+  	fmt.Printf("%s: %s\n", memoryVersion.ID, memoryVersion.Operation)
   }
   if err := versions.Err(); err != nil {
   	panic(err)
@@ -1004,10 +1006,12 @@ List version history for a store, newest first. The example filters to a single 
   ```java Java
   var versions = client.beta().memoryStores().memoryVersions().list(
       store.id(),
-      MemoryVersionListParams.builder().memoryId(mem.id()).build()
+      MemoryVersionListParams.builder()
+          .memoryId(mem.id())
+          .build()
   );
-  for (var v : versions.autoPager()) {
-      IO.println(v.id() + ": " + v.operation());
+  for (var memoryVersion : versions.autoPager()) {
+      IO.println(memoryVersion.id() + ": " + memoryVersion.operation());
   }
 
   var versionId = versions.data().get(1).id();
@@ -1018,8 +1022,8 @@ List version history for a store, newest first. The example filters to a single 
       $store->id,
       memoryID: $mem->id,
   );
-  foreach ($versions->pagingEachItem() as $v) {
-      echo "{$v->id}: {$v->operation}\n";
+  foreach ($versions->pagingEachItem() as $memoryVersion) {
+      echo "{$memoryVersion->id}: {$memoryVersion->operation}\n";
   }
 
   $versionId = $versions->data[1]->id;
@@ -1038,7 +1042,7 @@ List version history for a store, newest first. The example filters to a single 
   ```
 </CodeGroup>
 
-See the [List memory versions reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list) for full parameters and response schema.
+See the [List memory versions](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list) reference for full parameters and response schema.
 
 ### Retrieve a version
 
@@ -1094,7 +1098,9 @@ Fetching an individual version returns the same fields as the list response plus
   ```java Java
   var version = client.beta().memoryStores().memoryVersions().retrieve(
       versionId,
-      MemoryVersionRetrieveParams.builder().memoryStoreId(store.id()).build()
+      MemoryVersionRetrieveParams.builder()
+          .memoryStoreId(store.id())
+          .build()
   );
   IO.println(version.content().orElseThrow());
   ```
@@ -1116,11 +1122,11 @@ Fetching an individual version returns the same fields as the list response plus
   ```
 </CodeGroup>
 
-See the [Retrieve a memory version reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/retrieve) for full parameters and response schema.
+See the [Retrieve a memory version](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/retrieve) reference for full parameters and response schema.
 
 ### Redact a version
 
-Redact scrubs content out of a historical version while preserving the audit trail (who did what, when). Use it for compliance workflows such as removing leaked secrets, PII, or user deletion requests.
+Redact scrubs content out of a historical version while preserving the audit trail (who did what, when). Use it for compliance workflows such as removing leaked secrets or PII, or fulfilling user deletion requests.
 
 A version that is the current head of a live memory cannot be redacted. Write a new version first (or delete the memory), then redact the old one.
 
@@ -1172,7 +1178,9 @@ A version that is the current head of a live memory cannot be redacted. Write a 
   ```java Java
   client.beta().memoryStores().memoryVersions().redact(
       versionId,
-      MemoryVersionRedactParams.builder().memoryStoreId(store.id()).build()
+      MemoryVersionRedactParams.builder()
+          .memoryStoreId(store.id())
+          .build()
   );
   ```
 
@@ -1191,7 +1199,7 @@ A version that is the current head of a live memory cannot be redacted. Write a 
   ```
 </CodeGroup>
 
-See the [Redact a memory version reference](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/redact) for full parameters and response schema.
+See the [Redact a memory version](https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/redact) reference for full parameters and response schema.
 
 ## Manage memory stores
 
@@ -1219,16 +1227,16 @@ List stores in the workspace. Archived stores are excluded by default; set `incl
   ```
 
   ```typescript TypeScript
-  for await (const s of client.beta.memoryStores.list({ include_archived: true })) {
-    console.log(s.id, s.name, s.archived_at);
+  for await (const memoryStore of client.beta.memoryStores.list({ include_archived: true })) {
+    console.log(memoryStore.id, memoryStore.name, memoryStore.archived_at);
   }
   ```
 
   ```csharp C#
   var stores = await client.Beta.MemoryStores.List(new() { IncludeArchived = true });
-  await foreach (var s in stores.Paginate())
+  await foreach (var memoryStore in stores.Paginate())
   {
-      Console.WriteLine($"{s.ID} {s.Name} {s.ArchivedAt}");
+      Console.WriteLine($"{memoryStore.ID} {memoryStore.Name} {memoryStore.ArchivedAt}");
   }
   ```
 
@@ -1237,8 +1245,8 @@ List stores in the workspace. Archived stores are excluded by default; set `incl
   	IncludeArchived: anthropic.Bool(true),
   })
   for stores.Next() {
-  	s := stores.Current()
-  	fmt.Println(s.ID, s.Name, s.ArchivedAt)
+  	memoryStore := stores.Current()
+  	fmt.Println(memoryStore.ID, memoryStore.Name, memoryStore.ArchivedAt)
   }
   if err := stores.Err(); err != nil {
   	panic(err)
@@ -1246,18 +1254,20 @@ List stores in the workspace. Archived stores are excluded by default; set `incl
   ```
 
   ```java Java
-  for (var s : client.beta().memoryStores().list(
-      MemoryStoreListParams.builder().includeArchived(true).build()
+  for (var memoryStore : client.beta().memoryStores().list(
+      MemoryStoreListParams.builder()
+          .includeArchived(true)
+          .build()
   ).autoPager()) {
-      IO.println(s.id() + " " + s.name() + " " + s.archivedAt());
+      IO.println(memoryStore.id() + " " + memoryStore.name() + " " + memoryStore.archivedAt());
   }
   ```
 
   ```php PHP
-  foreach ($client->beta->memoryStores->list(includeArchived: true)->pagingEachItem() as $s) {
+  foreach ($client->beta->memoryStores->list(includeArchived: true)->pagingEachItem() as $memoryStore) {
       // archivedAt is only set on archived stores.
-      $archivedAt = isset($s->archivedAt) ? $s->archivedAt->format(DATE_ATOM) : '';
-      echo "{$s->id} {$s->name} {$archivedAt}\n";
+      $archivedAt = isset($memoryStore->archivedAt) ? $memoryStore->archivedAt->format(DATE_ATOM) : '';
+      echo "{$memoryStore->id} {$memoryStore->name} {$archivedAt}\n";
   }
   ```
 
@@ -1268,7 +1278,7 @@ List stores in the workspace. Archived stores are excluded by default; set `incl
   ```
 </CodeGroup>
 
-See the [List memory stores reference](https://platform.claude.com/docs/en/api/beta/memory_stores/list) for full parameters and response schema.
+See the [List memory stores](https://platform.claude.com/docs/en/api/beta/memory_stores/list) reference for full parameters and response schema.
 
 ### Archive a store
 
@@ -1279,7 +1289,7 @@ Archiving makes a store read-only and prevents it from being attached to new ses
   curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: agent-memory-2026-07-22" > /dev/null
+    -H "anthropic-beta: agent-memory-2026-07-22"
   ```
 
   ```bash CLI
@@ -1318,15 +1328,15 @@ Archiving makes a store read-only and prevents it from being attached to new ses
   ```
 </CodeGroup>
 
-See the [Archive a memory store reference](https://platform.claude.com/docs/en/api/beta/memory_stores/archive) for full parameters and response schema.
+See the [Archive a memory store](https://platform.claude.com/docs/en/api/beta/memory_stores/archive) reference for full parameters and response schema.
 
-To [permanently remove a store](https://platform.claude.com/docs/en/api/beta/memory_stores/delete) along with all of its memories and versions, call `DELETE /v1/memory_stores/{memory_store_id}` (python, ruby: `client.beta.memory_stores.delete()`; typescript: `client.beta.memoryStores.delete()`; go, csharp: `client.Beta.MemoryStores.Delete()`; java: `client.beta().memoryStores().delete()`; php: `$client->beta->memoryStores->delete()`; cli: `ant beta:memory-stores delete`).
+To [permanently delete a store](https://platform.claude.com/docs/en/api/beta/memory_stores/delete) along with all of its memories and versions, call `DELETE /v1/memory_stores/{memory_store_id}` (python, ruby: `client.beta.memory_stores.delete()`; typescript: `client.beta.memoryStores.delete()`; go, csharp: `client.Beta.MemoryStores.Delete()`; java: `client.beta().memoryStores().delete()`; php: `$client->beta->memoryStores->delete()`; cli: `ant beta:memory-stores delete`).
 
 ## Best practices for memory management
 
 When a store reaches its 10,000-memory limit, writes to new memories fail: both direct `POST /v1/memory_stores/{memory_store_id}/memories` (python, ruby: `client.beta.memory_stores.memories.create()`; typescript: `client.beta.memoryStores.memories.create()`; go: `client.Beta.MemoryStores.Memories.New()`; java: `client.beta().memoryStores().memories().create()`; csharp: `client.Beta.MemoryStores.Memories.Create()`; php: `$client->beta->memoryStores->memories->create()`; cli: `ant beta:memory-stores:memories create`) calls and the agent's file writes to unmapped paths. Existing memories remain readable and editable. The following practices help you stay well under the limit and recover gracefully if you reach it.
 
-* **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores: one per user, one for shared domain knowledge, and one for project-specific context. Each store has its own 10,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
+* **Use focused stores.** Rather than one large general-purpose store, use smaller purpose-built stores: one for each user, one for shared domain knowledge, and one for project-specific context. Each store has its own 10,000-memory limit, so keeping stores scoped reduces the chance any single one fills up.
 
 * **Condense or prune before the store fills up.** Delete stale or redundant memories with `DELETE /v1/memory_stores/{memory_store_id}/memories/{memory_id}` (python, ruby: `client.beta.memory_stores.memories.delete()`; typescript: `client.beta.memoryStores.memories.delete()`; go, csharp: `client.Beta.MemoryStores.Memories.Delete()`; java: `client.beta().memoryStores().memories().delete()`; php: `$client->beta->memoryStores->memories->delete()`; cli: `ant beta:memory-stores:memories delete`). You can also run a [dreaming session](https://platform.claude.com/docs/en/managed-agents/dreams), which consolidates fragmented content into a separate new output store rather than modifying the original. Switch your sessions over to that output store, then archive or delete the original.
 

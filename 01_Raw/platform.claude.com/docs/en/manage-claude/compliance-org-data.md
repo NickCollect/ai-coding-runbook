@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-org-data
-fetched_at: 2026-10-19T05:32:46.977798+00:00
+fetched_at: 2026-10-26T05:40:09.683246+00:00
 fetch_method: mintlify_md
 ---
 
@@ -79,10 +79,8 @@ See [List organization users](https://platform.claude.com/docs/en/api/compliance
 Results are sorted by organization join date ascending. Unlike the Activity Feed's `before_id`/`after_id` cursors (see [Paginate results](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed#paginate-results)), the directory endpoints paginate with a `next_page` token: when `has_more` is `true`, pass `next_page` back unchanged as the `page` query parameter on the next request.
 
 ```bash cURL
-org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
-
 curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/users" \
+  "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/users" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   -H "anthropic-version: 2023-06-01" \
   --data-urlencode "limit=500"
@@ -92,7 +90,7 @@ curl --fail-with-body -sS -G \
 {
   "data": [
     {
-      "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "full_name": "Priya Sharma",
       "email": "priya@example.com",
       "organization_role": "admin",
@@ -104,7 +102,7 @@ curl --fail-with-body -sS -G \
 }
 ```
 
-The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) `actor_ids[]` filter and the `user_ids[]` filters on [Retrieve chats and messages](https://platform.claude.com/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages) and the [remote session list](https://platform.claude.com/docs/en/manage-claude/compliance-sessions#retrieve-remote-sessions); the [local session list](https://platform.claude.com/docs/en/manage-claude/compliance-sessions#retrieve-local-sessions) has no user filter, so attribute local sessions by the `user.id` on each session object. The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
+The user IDs returned here are the same `user_...` identifiers accepted by the [Query the Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) `actor_ids[]` filter. The `user_ids[]` filters on [Retrieve chats and messages](https://platform.claude.com/docs/en/manage-claude/compliance-content-data#retrieve-chats-and-messages) and the [remote session list](https://platform.claude.com/docs/en/manage-claude/compliance-sessions#retrieve-remote-sessions) accept the same identifiers. The [local session list](https://platform.claude.com/docs/en/manage-claude/compliance-sessions#retrieve-local-sessions) has no user filter, so attribute local sessions by the `user.id` on each session object. The `organization_role` field carries the user's built-in membership level within the listed organization (one of `admin`, `billing`, `claude_code_user`, `developer`, `managed`, `membership_admin`, `owner`, `primary_owner`, or `user`), an axis independent of any custom RBAC role assignments returned by [List roles](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#list-roles). A typical eDiscovery flow lists users for one or more organizations, filters against your own external records, and feeds the resulting IDs into chat and project queries.
 
 A user only appears here while they are an active member of the organization. Removed users are dropped from the list immediately. Their historical activity remains queryable through the Activity Feed for the full retention window, indexed by the same `user_...` ID.
 
@@ -117,10 +115,8 @@ This endpoint requires `read:compliance_user_data`, not `read:compliance_org_dat
 By default, the response lists only members who have set at least one of the two values. Pass `include_unset=true` to list every current member, with `null` for each value that is not set. To return specific members only, pass up to 10 user IDs in `user_ids[]`. Results paginate with `limit` (default 20, maximum 100) and `page`. As on the [organization users endpoint](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#list-organization-users), pass `next_page` back unchanged as `page`; also send the same `include_unset` and `user_ids[]` values with every page, or the call returns [400 Bad Request](https://platform.claude.com/docs/en/manage-claude/compliance-errors#invalid-pagination-cursor). A page can hold fewer results than `limit`, or none, and still not be the last, so keep requesting pages until `next_page` is `null`.
 
 ```bash cURL
-org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
-
 curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/user_preferences" \
+  "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/user_preferences" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   -H "anthropic-version: 2023-06-01"
 ```
@@ -130,7 +126,7 @@ curl --fail-with-body -sS \
   "data": [
     {
       "user": {
-        "id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+        "id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
         "email_address": "priya@example.com"
       },
       "conversation_preferences": "Keep answers brief and cite sources.",
@@ -149,10 +145,8 @@ The [List Compliance Roles](https://platform.claude.com/docs/en/api/compliance/o
 Both role endpoints require `read:compliance_org_data`. The list endpoint accepts the same `limit` and `page` parameters as the [organization users endpoint](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#list-organization-users).
 
 ```bash cURL
-org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
-
 curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/compliance/organizations/${org_uuid}/roles" \
+  "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/roles" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   -H "anthropic-version: 2023-06-01"
 ```
@@ -213,10 +207,8 @@ curl --fail-with-body -sS -G \
 For each group ID, list its members:
 
 ```bash cURL
-group_id="rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK"
-
 curl --fail-with-body -sS -G \
-  "https://api.anthropic.com/v1/compliance/groups/$group_id/members" \
+  "https://api.anthropic.com/v1/compliance/groups/rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK/members" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   -H "anthropic-version: 2023-06-01"
 ```
@@ -225,7 +217,7 @@ curl --fail-with-body -sS -G \
 {
   "data": [
     {
-      "user_id": "user_01XyDMpzjS89pFZXqSFUBDr6",
+      "user_id": "user_01WxYzAbCdEfGhJkMnPqRsTu",
       "email": "priya@example.com",
       "created_at": "2025-06-01T10:00:00Z",
       "updated_at": "2025-06-15T14:30:00Z"
@@ -242,17 +234,22 @@ See the [List Compliance Group Members](https://platform.claude.com/docs/en/api/
 
 The [Get effective organization settings](https://platform.claude.com/docs/en/api/compliance/organizations/settings/retrieve) endpoint returns the settings in force for one organization under your parent: the enforced state after regulatory restrictions (such as HIPAA), feature-availability rules, organization-type defaults, and inter-feature dependencies are applied, which can differ from what an administrator configured. Use it to attest that retention windows, content redaction, single sign-on enforcement, the IP allowlist, and session-duration controls match your documented baseline, without administrator Console access.
 
-This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](https://platform.claude.com/docs/en/manage-claude/compliance-errors#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. An unknown organization, an organization ID that is not a valid UUID, an organization outside your parent's tree, and a parent organization that does not yet have access to this endpoint all return the same [404 Not Found](https://platform.claude.com/docs/en/manage-claude/compliance-errors#404-not-found), so a 404 does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
+This endpoint requires `read:compliance_org_data`; a key without that scope returns [403 Forbidden](https://platform.claude.com/docs/en/manage-claude/compliance-errors#403-forbidden). The target must be one of the parent's linked organizations: the parent organization itself is not a valid target. All of the following return the same [404 Not Found](https://platform.claude.com/docs/en/manage-claude/compliance-errors#404-not-found):
+
+* An unknown organization
+* An organization ID that is not a valid UUID
+* An organization outside your parent's tree
+* A parent organization that does not yet have access to this endpoint
+
+A 404 therefore does not reveal whether an organization exists. The settings endpoint is enabled per parent organization separately from the rest of the Compliance API; if every request returns 404, contact your Anthropic representative.
 
 <Note>
   Before June 30, 2026, this endpoint required the separate `read:compliance_org_settings` scope. That scope has been retired: it can no longer be selected or granted when creating a key, and a key that carries only the retired scope returns [403 Forbidden](https://platform.claude.com/docs/en/manage-claude/compliance-errors#403-forbidden). Create a new Compliance Access Key with `read:compliance_org_data` instead.
 </Note>
 
 ```bash cURL
-org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
-
 curl --fail-with-body -sS \
-  "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/settings" \
+  "https://api.anthropic.com/v1/compliance/organizations/91012d09-e48b-438e-a489-1bebfd8fa6f9/settings" \
   -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
   -H "anthropic-version: 2023-06-01"
 ```
@@ -303,11 +300,15 @@ The response is a list of typed setting rows, and which rows appear varies by or
 
 Each row carries `name`, `type`, and `value`; the `type` field (`boolean`, `integer`, `string_list`, `provisioning_mode`, or `data_retention`) tells you the shape of `value`. The full list of setting names, and the `value` schema for each type, is in [Get effective organization settings](https://platform.claude.com/docs/en/api/compliance/organizations/settings/retrieve) in the API reference.
 
-The `api_keys` array lists every Compliance Access Key configured for your parent organization, so the same list is returned regardless of which linked organization you query. Each entry carries the key's `type` (`compliance_api_key`), `id`, `name`, `scopes`, `is_active` flag, `created_at` and `expires_at` timestamps, and `created_by_id` (the ID of the user who created the key; may be `null`). The key's secret value is never returned. Deactivated keys are included with `is_active: false` so you can review keys that previously had access, and keys that carry only the retired `read:compliance_org_settings` scope remain in the list for audit and cleanup visibility even though that scope no longer grants access.
+The `api_keys` array lists every Compliance Access Key configured for your parent organization, so the same list is returned regardless of which linked organization you query. Each entry carries the key's `type` (`compliance_api_key`), `id`, `name`, `scopes`, `is_active` flag, `created_at` and `expires_at` timestamps, and `created_by_id` (the ID of the user who created the key, or `null`). The key's secret value is never returned. Deactivated keys are included with `is_active: false` so you can review keys that previously had access, and keys that carry only the retired `read:compliance_org_settings` scope remain in the list for audit and cleanup visibility even though that scope no longer grants access.
 
 The top-level `organization_id` is the organization's bare UUID: the same value as `uuid` in the organizations list, not the `org_`-prefixed form that `organization_id` carries on Activity Feed, chat, and project records (see the [organization identifier table](https://platform.claude.com/docs/en/manage-claude/compliance-org-data#list-organizations)).
 
-Rows reflect the enforced state rather than the last-stored configuration: for example, `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled, `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range, and `code_execution_network_egress_enabled` is `false` whenever code execution is off.
+Rows reflect the enforced state rather than the last-stored configuration, as in these examples:
+
+* `sso_provisioning_mode` reports a configured SCIM mode only while directory sync is enabled.
+* `ip_allowlist_enabled` is `true` only while the allowlist is on and has at least one active range.
+* `code_execution_network_egress_enabled` is `false` whenever code execution is off.
 
 The response reflects the state at read time; nothing is snapshotted. Changes to most of these settings surface as events in the [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed); use this endpoint for the current resolved state and the feed to audit who changed what, and when.
 

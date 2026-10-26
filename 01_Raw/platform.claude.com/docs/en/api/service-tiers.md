@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/service-tiers
-fetched_at: 2026-10-12T06:49:52.913646+00:00
+fetched_at: 2026-10-26T05:40:15.737910+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,8 +42,8 @@ Anthropic counts usage against Priority Tier capacity as follows:
 **Input tokens**
 
 * Cache reads as 0.1 tokens per token read from the cache
-* Cache writes as 1.25 tokens per token written to the cache with a 5 minute TTL
-* Cache writes as 2.00 tokens per token written to the cache with a 1 hour TTL
+* Cache writes as 1.25 tokens per token written to the cache with a 5-minute TTL
+* Cache writes as 2.00 tokens per token written to the cache with a 1-hour TTL
 * For [US-only inference](https://platform.claude.com/docs/en/manage-claude/data-residency) (`inference_geo: "us"`) requests on Claude 4.6 and later models, input tokens are 1.1 tokens per token
 * All other input tokens are 1 token per token
 
@@ -81,13 +81,13 @@ You can control which service tiers can be used for a request by setting the `se
   ```
 
   ```bash CLI
-  ant messages create --transform usage.service_tier --raw-output <<'YAML'
+  ant messages create <<'YAML'
   model: claude-opus-4-8
   max_tokens: 1024
   messages:
     - role: user
       content: Hello, Claude!
-  service_tier: auto  # Automatically use Priority Tier when available, fallback to standard
+  service_tier: auto  # Automatically use Priority Tier when available, fall back to standard
   YAML
   ```
 
@@ -98,7 +98,7 @@ You can control which service tiers can be used for a request by setting the `se
       model="claude-opus-4-8",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude!"}],
-      service_tier="auto",  # Automatically use Priority Tier when available, fallback to standard
+      service_tier="auto",  # Automatically use Priority Tier when available, fall back to standard
   )
   print(message.usage.service_tier)
   ```
@@ -110,7 +110,7 @@ You can control which service tiers can be used for a request by setting the `se
     model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude!" }],
-    service_tier: "auto" // Automatically use Priority Tier when available, fallback to standard
+    service_tier: "auto" // Automatically use Priority Tier when available, fall back to standard
   });
   console.log(message.usage.service_tier);
   ```
@@ -122,8 +122,8 @@ You can control which service tiers can be used for a request by setting the `se
   {
       Model = Model.ClaudeOpus4_8,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello, Claude!" }],
-      ServiceTier = ServiceTier.Auto, // Automatically use Priority Tier when available, fallback to standard
+      Messages = [new UserMessageParam { Content = "Hello, Claude!" }],
+      ServiceTier = ServiceTier.Auto, // Automatically use Priority Tier when available, fall back to standard
   });
   Console.WriteLine(message.Usage.ServiceTier);
   ```
@@ -137,7 +137,7 @@ You can control which service tiers can be used for a request by setting the `se
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude!")),
   	},
-  	// Automatically use Priority Tier when available, fallback to standard
+  	// Automatically use Priority Tier when available, fall back to standard
   	ServiceTier: anthropic.MessageNewParamsServiceTierAuto,
   })
   if err != nil {
@@ -153,7 +153,7 @@ You can control which service tiers can be used for a request by setting the `se
       .model(Model.CLAUDE_OPUS_4_8)
       .maxTokens(1024L)
       .addUserMessage("Hello, Claude!")
-      // Automatically use Priority Tier when available, fallback to standard
+      // Automatically use Priority Tier when available, fall back to standard
       .serviceTier(MessageCreateParams.ServiceTier.AUTO)
       .build();
 
@@ -165,10 +165,10 @@ You can control which service tiers can be used for a request by setting the `se
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: Model::CLAUDE_OPUS_4_8,
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude!']],
-      serviceTier: 'auto', // Automatically use Priority Tier when available, fallback to standard
+      serviceTier: 'auto', // Automatically use Priority Tier when available, fall back to standard
   );
   echo $message->usage->serviceTier;
   ```
@@ -177,10 +177,10 @@ You can control which service tiers can be used for a request by setting the `se
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: Anthropic::Model::CLAUDE_OPUS_4_8,
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude!" }],
-    service_tier: :auto # Automatically use Priority Tier when available, fallback to standard
+    service_tier: :auto # Automatically use Priority Tier when available, fall back to standard
   )
   puts(message.usage.service_tier)
   ```
@@ -189,7 +189,7 @@ You can control which service tiers can be used for a request by setting the `se
 The `service_tier` parameter accepts the following values:
 
 * `"auto"` (default) - Uses the Priority Tier capacity if available, falling back to your other capacity if not
-* `"standard_only"` - Only use standard tier capacity, useful if you don't want to use your Priority Tier capacity
+* `"standard_only"` - Uses only standard tier capacity, useful if you don't want to use your Priority Tier capacity
 
 The response `usage` object also includes the service tier assigned to the request:
 
@@ -229,7 +229,7 @@ A Priority Tier commitment consists of:
 * A commitment duration (1, 3, 6, or 12 months)
 * A specific model version
 
-Priority Tier targets 99.5% uptime with prioritized computational resources. Requests beyond your committed capacity automatically fall back to standard tier.
+Priority Tier targets 99.5 percent uptime with prioritized computational resources. Requests beyond your committed capacity automatically fall back to standard tier.
 
 ### Supported models
 

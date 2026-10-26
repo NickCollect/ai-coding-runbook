@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-10-19T05:32:44.728739+00:00
+fetched_at: 2026-10-26T05:40:04.643005+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ featureMetadata:
 
 Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) overview.
 
-Skills reach your agent in two ways: attach them through the agent's `skills` (csharp, go: `Skills`) array, or [load them from a GitHub repository](https://platform.claude.com/docs/en/managed-agents/skills#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent invokes them automatically when they are relevant to the task.
+Skills reach your agent in two ways: attach them through the agent's `skills` (csharp, go: `Skills`) array, or [load them from a GitHub repository](https://platform.claude.com/docs/en/managed-agents/skills#load-skills-from-a-github-repository) mounted on the session. Attached skills come in two types. All skills work the same way: your agent uses them automatically when they are relevant to the task.
 
 * **Pre-built Anthropic skills:** Common document tasks such as PowerPoint, Excel, Word, and PDF handling (`pptx`, `xlsx`, `docx`, `pdf`).
 * **Custom skills:** Skills you author and upload to your workspace.
@@ -119,7 +119,7 @@ These examples omit the optional `display_name` (java, php: `displayName`; cshar
   	"log"
   	"os"
 
-  	"github.com/anthropics/anthropic-sdk-go"
+  	"github.com/anthropics/anthropic-sdk-go/v2"
   )
 
   func main() {
@@ -204,7 +204,7 @@ These examples omit the optional `display_name` (java, php: `displayName`; cshar
   ```
 </CodeGroup>
 
-To list, retrieve, delete, and version custom skills, see [Managing custom skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide#managing-custom-skills). For the full request and response schemas, see the [Create Skill API reference](https://platform.claude.com/docs/en/api/skills/create). Skill bundles upload directly to the Skills API rather than through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files).
+To list, retrieve, delete, and version custom skills, see [Managing custom skills](https://platform.claude.com/docs/en/build-with-claude/skills-guide#managing-custom-skills). For the full request and response schemas, see the [Create Skill](https://platform.claude.com/docs/en/api/skills/create) API reference. Skill bundles upload directly to the Skills API rather than through the [Files API](https://platform.claude.com/docs/en/build-with-claude/files).
 
 ## Attach skills to an agent
 
@@ -224,7 +224,7 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
 
 <CodeGroup defaultLanguage="CLI">
   ```bash cURL
-  agent=$(curl -sS https://api.anthropic.com/v1/agents \
+  curl -sS https://api.anthropic.com/v1/agents \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
@@ -237,7 +237,6 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
         {"type": "custom", "skill_id": "skill_01AbCdEfGhIjKlMnOpQrStUv", "version": "latest"}
       ]
     }'
-  )
   ```
 
   <CodeGroupItem>
@@ -311,8 +310,8 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
       System = "You are a financial analysis agent.",
       Skills =
       [
-          new BetaManagedAgentsAnthropicSkillParams { Type = BetaManagedAgentsAnthropicSkillParamsType.Anthropic, SkillID = "xlsx" },
-          new BetaManagedAgentsCustomSkillParams { Type = BetaManagedAgentsCustomSkillParamsType.Custom, SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
+          new BetaManagedAgentsAnthropicSkillParams { SkillID = "xlsx" },
+          new BetaManagedAgentsCustomSkillParams { SkillID = "skill_01AbCdEfGhIjKlMnOpQrStUv", Version = "latest" },
       ],
   });
   ```
@@ -327,11 +326,9 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
   	Skills: []anthropic.BetaManagedAgentsSkillParamsUnion{
   		{OfAnthropic: &anthropic.BetaManagedAgentsAnthropicSkillParams{
   			SkillID: "xlsx",
-  			Type:    anthropic.BetaManagedAgentsAnthropicSkillParamsTypeAnthropic,
   		}},
   		{OfCustom: &anthropic.BetaManagedAgentsCustomSkillParams{
   			SkillID: "skill_01AbCdEfGhIjKlMnOpQrStUv",
-  			Type:    anthropic.BetaManagedAgentsCustomSkillParamsTypeCustom,
   			Version: anthropic.String("latest"),
   		}},
   	},
@@ -339,7 +336,6 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
   if err != nil {
   	panic(err)
   }
-  _ = agent
   ```
 
   ```java Java
@@ -352,13 +348,11 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
           .system("You are a financial analysis agent.")
           .addSkill(
               BetaManagedAgentsAnthropicSkillParams.builder()
-                  .type(BetaManagedAgentsAnthropicSkillParams.Type.ANTHROPIC)
                   .skillId("xlsx")
                   .build()
           )
           .addSkill(
               BetaManagedAgentsCustomSkillParams.builder()
-                  .type(BetaManagedAgentsCustomSkillParams.Type.CUSTOM)
                   .skillId("skill_01AbCdEfGhIjKlMnOpQrStUv")
                   .version("latest")
                   .build()
@@ -394,10 +388,10 @@ Each entry in the `skills` (csharp, go: `Skills`) array uses the following field
 
 ## Load skills from a GitHub repository
 
-Skills can also live in your codebase. When a session mounts a repository through the [`github_repository` resource](https://platform.claude.com/docs/en/managed-agents/github), the repository's root `.claude/skills` directory is scanned at session start, and each skill found there becomes available to the agent. No upload and no entry in the agent's `skills` (csharp, go: `Skills`) array are required. The agent sees each discovered skill's name, description, and path in the sandbox, and reads the skill's `SKILL.md` when a task matches, including any scripts and resources the skill ships. Discovery relies on the agent's `read` tool from the [agent toolset](https://platform.claude.com/docs/en/managed-agents/tools), which is enabled by default; an agent with `read` disabled doesn't load repository skills.
+Skills can also live in your code base. When a session mounts a repository through the [`github_repository` resource](https://platform.claude.com/docs/en/managed-agents/github), the repository's root `.claude/skills` directory is scanned at session start, and each skill found there becomes available to the agent. No upload and no entry in the agent's `skills` (csharp, go: `Skills`) array are required. The agent receives each discovered skill's name, description, and path in the sandbox, and reads the skill's `SKILL.md` when a task matches, including any scripts and resources the skill ships. Discovery relies on the agent's `read` tool from the [agent toolset](https://platform.claude.com/docs/en/managed-agents/tools), which is enabled by default; an agent with `read` disabled doesn't load repository skills.
 
 <Warning>
-  Repository skills are agent instructions, so a mounted repository is part of your agent's trust boundary. Anyone who can commit to the repository (a merged external pull request, a compromised dependency, a contributor) can add or change a skill, the platform loads it at session start without a review step, and session tools such as `bash` and `web_fetch` give those instructions real reach. Mount only repositories you trust, and review `.claude/skills` before mounting a repository that accepts outside contributions.
+  Repository skills are agent instructions, so a mounted repository is part of your agent's trust boundary. Anyone who can commit to the repository (a merged external pull request, a compromised dependency, a contributor) can add or change a skill. The platform loads that skill at session start without a review step, and session tools such as `bash` and `web_fetch` give its instructions real reach. Mount only repositories you trust, and review `.claude/skills` before mounting a repository that accepts outside contributions.
 </Warning>
 
 <Note>
@@ -437,12 +431,12 @@ To load skills from a repository, create a session that mounts it. This is the s
 
 <CodeGroup>
   ```bash cURL
-  session_id=$(curl -fsS https://api.anthropic.com/v1/sessions \
+  curl -fsS https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: managed-agents-2026-04-01" \
     -H "content-type: application/json" \
-    --data @- <<JSON | jq -r '.id'
+    -d @- <<JSON
   {
     "agent": "$agent_id",
     "environment_id": "$environment_id",
@@ -456,21 +450,18 @@ To load skills from a repository, create a session that mounts it. This is the s
     ]
   }
   JSON
-  )
   ```
 
   ```bash CLI
-  SESSION_ID=$(ant beta:sessions create \
+  ant beta:sessions create \
     --agent "$AGENT_ID" \
-    --environment-id "$ENVIRONMENT_ID" \
-    --transform id --raw-output <<'EOF'
+    --environment-id "$ENVIRONMENT_ID" <<'EOF'
   resources:
     - type: github_repository
       url: https://github.com/org/repo
       mount_path: /workspace/repo
       authorization_token: ghp_your_github_token
   EOF
-  )
   ```
 
   ```python Python
@@ -497,9 +488,9 @@ To load skills from a repository, create a session that mounts it. This is the s
         type: "github_repository",
         url: "https://github.com/org/repo",
         mount_path: "/workspace/repo",
-        authorization_token: "ghp_your_github_token",
-      },
-    ],
+        authorization_token: "ghp_your_github_token"
+      }
+    ]
   });
   ```
 
@@ -512,7 +503,6 @@ To load skills from a repository, create a session that mounts it. This is the s
       [
           new BetaManagedAgentsGitHubRepositoryResourceParams
           {
-              Type = "github_repository",
               Url = "https://github.com/org/repo",
               MountPath = "/workspace/repo",
               AuthorizationToken = "ghp_your_github_token",
@@ -528,7 +518,6 @@ To load skills from a repository, create a session that mounts it. This is the s
   	Resources: []anthropic.BetaSessionNewParamsResourceUnion{
   		{
   			OfGitHubRepository: &anthropic.BetaManagedAgentsGitHubRepositoryResourceParams{
-  				Type:               anthropic.BetaManagedAgentsGitHubRepositoryResourceParamsTypeGitHubRepository,
   				URL:                "https://github.com/org/repo",
   				MountPath:          anthropic.String("/workspace/repo"),
   				AuthorizationToken: "ghp_your_github_token",
@@ -546,7 +535,6 @@ To load skills from a repository, create a session that mounts it. This is the s
       .agent(agent.id())
       .environmentId(environment.id())
       .addResource(BetaManagedAgentsGitHubRepositoryResourceParams.builder()
-          .type(BetaManagedAgentsGitHubRepositoryResourceParams.Type.GITHUB_REPOSITORY)
           .url("https://github.com/org/repo")
           .mountPath("/workspace/repo")
           .authorizationToken("ghp_your_github_token")

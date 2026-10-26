@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
-fetched_at: 2026-10-19T05:32:45.340841+00:00
+fetched_at: 2026-10-26T05:40:06.260532+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ featureMetadata:
   betaHeader: managed-agents-2026-04-01
 ---
 
-A **scheduled deployment** allows an [agent](https://platform.claude.com/docs/en/managed-agents/agent-setup) to start [sessions](https://platform.claude.com/docs/en/managed-agents/sessions) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
+A **scheduled deployment** allows an [agent](https://platform.claude.com/docs/en/managed-agents/agent-setup) to start [sessions](https://platform.claude.com/docs/en/managed-agents/sessions) autonomously, so the agent can complete tasks on a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
 
 For the launch context and examples of what teams run on schedules, see [scheduled deployments and vaults in Claude Managed Agents](https://claude.com/blog/whats-new-in-claude-managed-agents) on the blog.
 
@@ -24,7 +24,7 @@ For the launch context and examples of what teams run on schedules, see [schedul
 
 When creating a deployment, you pass the [session configurations](https://platform.claude.com/docs/en/managed-agents/sessions) required for execution, in addition to a `schedule` (csharp, go: `Schedule`).
 
-* Deployments require [agent configuration](https://platform.claude.com/docs/en/managed-agents/agent-setup) and [environment configuration](https://platform.claude.com/docs/en/managed-agents/environments), and optionally accept [files](https://platform.claude.com/docs/en/managed-agents/files), [GitHub](https://platform.claude.com/docs/en/managed-agents/github), [memory stores](https://platform.claude.com/docs/en/managed-agents/memory), and [vaults](https://platform.claude.com/docs/en/managed-agents/vaults). A deployment that targets a [self-hosted environment](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or an SDK instead.
+* Deployments require [agent configuration](https://platform.claude.com/docs/en/managed-agents/agent-setup) and [environment configuration](https://platform.claude.com/docs/en/managed-agents/environments), and optionally accept [files](https://platform.claude.com/docs/en/managed-agents/files), [GitHub](https://platform.claude.com/docs/en/managed-agents/github), [memory stores](https://platform.claude.com/docs/en/managed-agents/memory), and [vaults](https://platform.claude.com/docs/en/managed-agents/vaults). A deployment that targets a [self-hosted environment](https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes-memory) can attach memory stores; `file` and `github_repository` resources require a cloud environment. The Claude Console deployment form does not currently offer memory stores for self-hosted environments; attach them through the API or the SDK instead.
 * Deployments also require at least one initial event, a `user.message` or `user.define_outcome`, that starts each session's work. In a deployment file for `ant apply`, the text below the frontmatter becomes that `user.message`.
 * In the `schedule` (csharp, go: `Schedule`), you define a cron `expression` (csharp, go: `Expression`) and a `timezone` (csharp, go: `Timezone`). Maximum granularity supported is at the minute level.
 
@@ -109,14 +109,14 @@ When creating a deployment, you pass the [session configurations](https://platfo
     initial_events: [
       {
         type: "user.message",
-        content: [{ type: "text", text: "Run the weekly compliance scan." }],
-      },
+        content: [{ type: "text", text: "Run the weekly compliance scan." }]
+      }
     ],
     schedule: {
       type: "cron",
       expression: "0 20 * * 5",
-      timezone: "America/New_York",
-    },
+      timezone: "America/New_York"
+    }
   });
   ```
 
@@ -130,20 +130,11 @@ When creating a deployment, you pass the [session configurations](https://platfo
       [
           new BetaManagedAgentsUserMessageEventParams
           {
-              Type = BetaManagedAgentsUserMessageEventParamsType.UserMessage,
-              Content =
-              [
-                  new BetaManagedAgentsTextBlock
-                  {
-                      Type = BetaManagedAgentsTextBlockType.Text,
-                      Text = "Run the weekly compliance scan.",
-                  },
-              ],
+              Content = [new BetaManagedAgentsTextBlock { Text = "Run the weekly compliance scan." }],
           },
       ],
       Schedule = new BetaManagedAgentsScheduleParams
       {
-          Type = BetaManagedAgentsScheduleParamsType.Cron,
           Expression = "0 20 * * 5",
           Timezone = "America/New_York",
       },
@@ -157,17 +148,14 @@ When creating a deployment, you pass the [session configurations](https://platfo
   	EnvironmentID: environment.ID,
   	InitialEvents: []anthropic.BetaManagedAgentsDeploymentInitialEventParamsUnion{{
   		OfUserMessage: &anthropic.BetaManagedAgentsUserMessageEventParams{
-  			Type: anthropic.BetaManagedAgentsUserMessageEventParamsTypeUserMessage,
   			Content: []anthropic.BetaManagedAgentsUserMessageEventParamsContentUnion{{
   				OfText: &anthropic.BetaManagedAgentsTextBlockParam{
-  					Type: anthropic.BetaManagedAgentsTextBlockTypeText,
   					Text: "Run the weekly compliance scan.",
   				},
   			}},
   		},
   	}},
   	Schedule: anthropic.BetaManagedAgentsScheduleParams{
-  		Type:       anthropic.BetaManagedAgentsScheduleParamsTypeCron,
   		Expression: "0 20 * * 5",
   		Timezone:   "America/New_York",
   	},
@@ -185,13 +173,11 @@ When creating a deployment, you pass the [session configurations](https://platfo
           .environmentId(environment.id())
           .addInitialEvent(
               BetaManagedAgentsUserMessageEventParams.builder()
-                  .type(BetaManagedAgentsUserMessageEventParams.Type.USER_MESSAGE)
                   .addTextContent("Run the weekly compliance scan.")
                   .build()
           )
           .schedule(
               BetaManagedAgentsScheduleParams.builder()
-                  .type(BetaManagedAgentsScheduleParams.Type.CRON)
                   .expression("0 20 * * 5")
                   .timezone("America/New_York")
                   .build()
@@ -260,11 +246,11 @@ The response includes a deployment object with a populated `schedule.upcoming_ru
 }
 ```
 
-The upcoming run timestamps reflect the exact schedule configured. However, to distribute load, actual execution applies jitter of up to 15% of the interval between runs, with a minimum of 5 seconds and a maximum of 9 minutes.
+The upcoming run timestamps reflect the exact schedule configured. However, to distribute load, actual execution applies jitter of up to 15 percent of the interval between runs, with a minimum of 5 seconds and a maximum of 9 minutes.
 
-A maximum of **1,000 scheduled deployments** is supported per organization. Contact Anthropic support if you need more.
+A maximum of **1,000 scheduled deployments** is supported for each organization. Contact Anthropic support if you need more.
 
-See the [Create Deployment reference](https://platform.claude.com/docs/en/api/beta/deployments/create) for full parameters and response schema.
+See the [Create Deployment](https://platform.claude.com/docs/en/api/beta/deployments/create) reference for full parameters and response schema.
 
 ### Cron and timezone semantics
 
@@ -278,7 +264,7 @@ See the [Create Deployment reference](https://platform.claude.com/docs/en/api/be
 
 ### Set a budget on each run
 
-Pass the optional `budget` (csharp, go: `Budget`) object when you create or update the deployment. It takes the same shape as a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 on every run.
+Pass the optional `budget` (csharp, go: `Budget`) object when you create or update the deployment. It takes the same shape as a [session budget](https://platform.claude.com/docs/en/managed-agents/budgets). The deployment copies the cap onto each session it starts, so the budget bounds every run separately rather than acting as a cumulative ceiling across runs: a deployment with a `"2000"` cap can spend up to about $20 USD on every run.
 
 A session started by the deployment behaves exactly like any other budgeted session: it pauses with `budget_reached` when its own list cost [reaches the cap](https://platform.claude.com/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget). Changing the deployment's budget applies to runs started afterward; a session already running keeps the cap it started with, which you can [change through the session itself](https://platform.claude.com/docs/en/managed-agents/session-operations#updating-the-session-budget). Unlike a session budget, a deployment's budget can be removed with `"budget": null` (python: `budget=None`; typescript: `budget: null`; ruby: `budget: nil`; go: `Budget: param.NullStruct[anthropic.BetaManagedAgentsBudgetLimitParam]()`; java: `.budget(Optional.empty())`; csharp: `Budget = null`; php: `requestOptions: ['extraBodyParams' => ['budget' => null]]`; cli: `--budget null`) and set again later.
 
@@ -341,8 +327,8 @@ The following example sets a budget on an existing deployment:
   const updatedDeployment = await client.beta.deployments.update(deployment.id, {
     budget: {
       type: "limit",
-      max_list_cost: { amount: "2000", currency: "USD" },
-    },
+      max_list_cost: { amount: "2000", currency: "USD" }
+    }
   });
   console.log(updatedDeployment.budget?.max_list_cost.amount); // 2000
   ```
@@ -352,7 +338,6 @@ The following example sets a budget on an existing deployment:
   {
       Budget = new()
       {
-          Type = BetaManagedAgentsBudgetLimitType.Limit,
           MaxListCost = new() { Amount = "2000", Currency = BetaCurrency.Usd },
       },
   });
@@ -362,7 +347,6 @@ The following example sets a budget on an existing deployment:
   ```go Go
   updatedDeployment, err := client.Beta.Deployments.Update(ctx, deployment.ID, anthropic.BetaDeploymentUpdateParams{
   	Budget: anthropic.BetaManagedAgentsBudgetLimitParam{
-  		Type: anthropic.BetaManagedAgentsBudgetLimitTypeLimit,
   		MaxListCost: anthropic.BetaMonetaryAmountParam{
   			Amount:   "2000",
   			Currency: anthropic.BetaCurrencyUsd,
@@ -380,7 +364,6 @@ The following example sets a budget on an existing deployment:
       deployment.id(),
       DeploymentUpdateParams.builder()
           .budget(BetaManagedAgentsBudgetLimit.builder()
-              .type(BetaManagedAgentsBudgetLimit.Type.LIMIT)
               .maxListCost(BetaMonetaryAmount.builder()
                   .amount("2000")
                   .currency(BetaCurrency.USD)
@@ -416,9 +399,9 @@ The following example sets a budget on an existing deployment:
 
 ## Deployment runs
 
-Deployments can fail to trigger for a variety of reasons: for example, if the `environment` resource has been archived, or if session creation is rate-limited. Each attempt at executing a deployment generates a **deployment run** record, allowing you to track successes and failures independent of the session lifecycle.
+Deployments can fail to trigger for a variety of reasons: for example, if the `environment` resource has been archived, or if session creation is rate-limited. Each attempt generates a **deployment run** record, allowing you to track successes and failures independent of the session lifecycle.
 
-Successful deployments generate active sessions, and a successful deployment run contains the associated `session_id` (java: `sessionId`; php: `sessionID`; csharp, go: `SessionID`). To follow a session's lifecycle, track the session events through the [event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) or [webhooks](https://platform.claude.com/docs/en/managed-agents/webhooks). Deployment lifecycle changes and the outcome of each scheduled run are also delivered as webhook events, listed in the Deployment events and Deployment run events tabs of [Supported event types](https://platform.claude.com/docs/en/managed-agents/webhooks#supported-event-types).
+Successful deployments generate active sessions, and a successful deployment run contains the associated `session_id` (java: `sessionId`; php: `sessionID`; csharp, go: `SessionID`). To follow a session's lifecycle, track the session events through the [event stream](https://platform.claude.com/docs/en/managed-agents/events-and-streaming) or [webhooks](https://platform.claude.com/docs/en/managed-agents/webhooks). Deployment lifecycle changes and the outcome of each scheduled run are also delivered as webhook events, listed in the **Deployment events** and **Deployment run events** tabs of [Supported event types](https://platform.claude.com/docs/en/managed-agents/webhooks#supported-event-types).
 
 List all deployment runs for a deployment as follows:
 
@@ -443,7 +426,7 @@ List all deployment runs for a deployment as follows:
 
   ```typescript TypeScript
   for await (const run of client.beta.deploymentRuns.list({
-    deployment_id: deployment.id,
+    deployment_id: deployment.id
   })) {
     console.log(run.created_at, run.session_id ?? run.error?.type);
   }
@@ -534,7 +517,7 @@ You can additionally filter on deployment runs with errors:
   ```typescript TypeScript
   for await (const run of client.beta.deploymentRuns.list({
     deployment_id: deployment.id,
-    has_error: true,
+    has_error: true
   })) {
     console.log(run.created_at, run.error?.type, run.error?.message);
   }
@@ -595,7 +578,7 @@ You can additionally filter on deployment runs with errors:
   ```
 </CodeGroup>
 
-A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`). See the [List Deployment Runs reference](https://platform.claude.com/docs/en/api/beta/deployment_runs/list) for all filter parameters and the response schema.
+A failed run includes an `error` with a `type` describing why session creation was rejected (for example, `environment_archived_error`, `agent_archived_error`, or `session_rate_limited_error`). See the [List Deployment Runs](https://platform.claude.com/docs/en/api/beta/deployment_runs/list) reference for all filter parameters and the response schema.
 
 ```json
 {
@@ -617,9 +600,9 @@ To retrieve a single run by ID, call [`GET /v1/deployment_runs/{deployment_run_i
 
 ## Managing deployment lifecycle
 
-Each lifecycle change emits a [webhook event](https://platform.claude.com/docs/en/managed-agents/webhooks#supported-event-types), so you can react to a paused, unpaused, or archived deployment without polling; see the Deployment events tab.
+Each lifecycle change emits a [webhook event](https://platform.claude.com/docs/en/managed-agents/webhooks#supported-event-types), so you can react to a paused, unpaused, or archived deployment without polling; see the **Deployment events** tab.
 
-**Pause** suppresses scheduled triggers on a go-forward basis; running sessions from a prior deployment run continue to execute. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
+**Pause** suppresses scheduled triggers from that point on; sessions already running from a prior deployment run continue. Manual runs through the `run` endpoint are still allowed while paused. Pausing sets `paused_reason` to `{"type": "manual"}`; unpausing clears it.
 
 <CodeGroup>
   ```bash cURL
@@ -709,7 +692,7 @@ Each lifecycle change emits a [webhook event](https://platform.claude.com/docs/e
   ```
 </CodeGroup>
 
-**Archive**, unlike **pause**, is terminal: the schedule terminates and the deployment cannot be modified.
+**Archive**, unlike **pause**, is terminal: the schedule ends and the deployment cannot be modified.
 
 <CodeGroup>
   ```bash cURL

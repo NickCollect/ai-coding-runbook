@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide
-fetched_at: 2026-10-19T05:32:48.360071+00:00
+fetched_at: 2026-10-26T05:40:12.095365+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ This guide lists the code changes for moving to Claude Sonnet 5.5 from Claude So
 </Note>
 
 <Tip>
-  **Automate your migration with the Claude API skill.** In Claude Code, run `/claude-api migrate` to invoke the bundled [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model). It works for any current Claude model as the target:
+  **Automate your migration with the [Claude API skill](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/claude-api-skill#migrating-to-a-newer-claude-model).** It comes bundled with Claude Code and works for any current Claude model as the target:
 
   Let Claude Code migrate your code for you
 
@@ -28,11 +28,11 @@ This guide lists the code changes for moving to Claude Sonnet 5.5 from Claude So
   The skill applies the model ID swap and, as needed, breaking parameter changes, prefill replacement, and effort calibration for your target model across your code base, then produces a checklist of items to verify manually. It asks you to confirm the migration scope (entire working directory, a subdirectory, or a specific file list) before editing any files. The skill also detects Amazon Bedrock and Claude Platform on AWS clients and adjusts model ID formats and feature changes for those platforms.
 </Tip>
 
-Claude Sonnet 5.5 has the same prices as Claude Sonnet 5, except for prompt cache reads, which cost $0.10 USD per million tokens, half the Claude Sonnet 5 rate. See [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing). For its context window and output limits, see the [Claude Sonnet 5.5 model page](https://platform.claude.com/docs/en/models/sonnet-5-5/overview). For features and prompting, see [What's new in Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5#feature-support) and [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5).
+Claude Sonnet 5.5 has the same prices as Claude Sonnet 5, except for prompt cache reads, which cost $0.10 USD per million tokens, half the Claude Sonnet 5 rate. See [Claude pricing](https://platform.claude.com/docs/en/about-claude/pricing). For its context window and output limits, see the [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) model page. For features and prompting, see [What's new in Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/whats-new-sonnet-5-5#feature-support) and [Prompting Claude Sonnet 5.5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5).
 
 ## Send a request to Claude Sonnet 5.5
 
-This request works on Claude Sonnet 5.5 as written. It sets an effort level, and the SDK tabs read the reply by block type. It leaves out five settings that return a 400 error: [thinking budgets](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [sampling parameters](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [assistant prefill](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-sonnet-45), [forced tool choice](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use), and [`thinking: {"type": "disabled"}`](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#turn-off-up-front-thinking).
+This request works on Claude Sonnet 5.5 as written. It sets an effort level, and the SDK example reads the reply by block type. It leaves out five settings that return a 400 error: [thinking budgets](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [sampling parameters](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes), [assistant prefill](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#migrating-from-sonnet-45), [forced tool choice](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use), and [`thinking: {"type": "disabled"}`](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#turn-off-up-front-thinking).
 
 <CodeGroup>
   ```bash cURL
@@ -100,9 +100,7 @@ This request works on Claude Sonnet 5.5 as written. It sets an effort level, and
   });
 
   console.log(`Stop reason: ${response.stop_reason}`);
-  const textBlock = response.content.find(
-    (block): block is Anthropic.TextBlock => block.type === "text"
-  );
+  const textBlock = response.content.find((block) => block.type === "text");
   console.log(textBlock?.text);
   ```
 
@@ -114,8 +112,8 @@ This request works on Claude Sonnet 5.5 as written. It sets an effort level, and
       Model = Model.ClaudeSonnet5_5,
       MaxTokens = 4096,
       Messages = [
-          new() {
-              Role = Role.User,
+          new UserMessageParam
+          {
               Content = "Analyze the trade-offs between microservices and monolithic architectures"
           }
       ],
@@ -207,7 +205,7 @@ This request works on Claude Sonnet 5.5 as written. It sets an effort level, and
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-sonnet-5-5",
+    model: Anthropic::Model::CLAUDE_SONNET_5_5,
     max_tokens: 4096,
     messages: [
       { role: "user", content: "Analyze the trade-offs between microservices and monolithic architectures" }
@@ -239,7 +237,7 @@ On Claude Sonnet 5.5, a request with no `thinking` field runs with [adaptive thi
 
 Code that ran without thinking needs all three items. Code from Claude Sonnet 5 likely has the first two.
 
-* **Read content blocks by `type`.** A response can begin with `thinking` blocks, so code that reads `content[0].text` breaks.
+* **Read content blocks by `type`.** A response can start with `thinking` blocks, so code that reads `content[0].text` breaks.
 * **Pass `thinking` blocks back unchanged** in tool-use loops, including empty ones. See [Preserving thinking blocks](https://platform.claude.com/docs/en/build-with-claude/thinking#preserving-thinking-blocks).
 * **Revisit `max_tokens`.** It covers thinking plus text, and thinking tokens are billed as output tokens. See [Cost control](https://platform.claude.com/docs/en/build-with-claude/thinking-steering-and-cost#cost-control).
 
@@ -255,7 +253,7 @@ To turn thinking off on this model, send "thinking": {"type": "between_tools"} i
 
 `between_tools` works on every platform that offers Claude Sonnet 5.5, with no beta header. It's accepted at `low`, `medium`, and `high` effort. At `xhigh` or `max`, it returns a 400 error. To run at those levels, use adaptive thinking: omit the `thinking` field or send `thinking: {"type": "adaptive"}`. `between_tools` takes no other field: `display`, `budget_tokens`, or `block_binding` sent with it returns a 400 error. With [server-side fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback), a `between_tools` request that falls back to Claude Sonnet 5 runs there with `thinking: {"type": "disabled"}`.
 
-With `between_tools`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. To vary effort per turn, use adaptive thinking. For prompting guidance, see [Running without up-front thinking](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5#running-without-up-front-thinking).
+With `between_tools`, effort can't change mid-conversation: a per-message `output_config.effort` that differs from the level in effect returns a 400 error. To vary effort for each turn, use adaptive thinking. For prompting guidance, see [Running without up-front thinking](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5#running-without-up-front-thinking).
 
 Before (Claude Sonnet 5):
 
@@ -310,7 +308,7 @@ Before (Claude Sonnet 5):
       MaxTokens = 16000,
       Thinking = new ThinkingConfigDisabled(),
       OutputConfig = new() { Effort = Effort.Xhigh },
-      Messages = [new() { Role = Role.User, Content = "..." }],
+      Messages = [new UserMessageParam { Content = "..." }],
   });
   ```
 
@@ -418,7 +416,7 @@ After (Claude Sonnet 5.5):
       MaxTokens = 16000,
       Thinking = new ThinkingConfigBetweenTools(),
       OutputConfig = new() { Effort = Effort.High },
-      Messages = [new() { Role = Role.User, Content = "..." }],
+      Messages = [new UserMessageParam { Content = "..." }],
   });
   ```
 
@@ -475,17 +473,17 @@ After (Claude Sonnet 5.5):
 
 ## Migration checklist by starting model
 
-Work down the groups and stop after the one that names your model. On Claude Haiku 4.5, apply every group except "Claude Sonnet 4 or earlier", ending with "Claude Haiku 4.5 only".
+Work down the groups and stop after the one that names your model. On Claude Haiku 4.5, apply every group except "Claude Sonnet 4 or earlier," ending with "Claude Haiku 4.5 only."
 
 ### Every starting model
 
 * Change the model ID to `claude-sonnet-5-5`.
 * [Read content blocks by `type`](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#thinking-in-responses), and pass `thinking` blocks back unchanged.
-* To keep running without up-front thinking, send [the lowest thinking setting](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#turn-off-up-front-thinking) at `high` effort or below.
-* Replace [forced tool use](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use) with `auto` and strict tools, or with `auto` alone on Amazon Bedrock.
+* To keep running without up-front thinking, send the [lowest thinking setting](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#turn-off-up-front-thinking) at `high` effort or below.
+* Replace [forced tool use](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#forced-tool-use) with `auto` and strict tools.
 * Keep conversations [append-only](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#thinking-blocks).
-* On the Claude API and Google Cloud, move computer use to the [toolset](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#computer-use-toolset), without the `fine-grained-tool-streaming-2025-05-14` beta header.
-* Pair the [advisor tool](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#advisor-tool) with a supported advisor, and expect encrypted advice.
+* On the Claude API and Claude Models on Google Cloud (Google managed), move computer use to the [toolset](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#computer-use-toolset), without the `fine-grained-tool-streaming-2025-05-14` beta header.
+* [Pair the advisor tool](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#advisor-tool) with a supported advisor, and expect encrypted advice.
 * Read [text between tool calls](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#text-between-tool-calls) from `thinking` blocks.
 * [Handle refusals](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#safety-classifiers-and-fallback), and configure fallback.
 * [Re-run your effort sweep](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#recommended-changes), and re-baseline cost.
@@ -494,7 +492,7 @@ Work down the groups and stop after the one that names your model. On Claude Hai
 
 * Expect [thinking on requests with no `thinking` field](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#thinking-on-by-default), and revisit `max_tokens`.
 * Replace [thinking budgets](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#sonnet-46-breaking-changes) with an effort level.
-* Remove non-default `temperature`, `top_p`, and `top_k` values.
+* Remove `temperature`, `top_p`, and `top_k`.
 * If you [show thinking text](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#thinking-in-responses), set `display: "summarized"`.
 * [Recount tokens](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#other-changes-from-claude-sonnet-4-6), and re-budget image tokens.
 
@@ -534,7 +532,7 @@ Every earlier model on this page accepts a `tool_choice` of type `any` or `tool`
 tool_choice: type "tool" and "any" are not supported for this model.
 ```
 
-Send `tool_choice: {"type": "auto"}`, and mark the tool `strict: true` so its input matches the schema. The model can then answer without calling the tool, so say in the prompt when to use it. [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use) supports a subset of JSON Schema and needs `additionalProperties: false` on every object. See [JSON Schema limitations](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#json-schema-limitations). On Amazon Bedrock, [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), which include strict tool use, aren't available for Claude Sonnet 5.5. There, send `auto` without `strict`, say in the prompt when to call the tool, and validate the tool input in your code.
+Send `tool_choice: {"type": "auto"}`, and mark the tool `strict: true` so its input matches the schema. The model can then answer without calling the tool, so say in the prompt when to use it. [Strict tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use) supports a subset of JSON Schema and needs `additionalProperties: false` on every object. See [JSON Schema limitations](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#json-schema-limitations).
 
 Before (Claude Sonnet 5):
 
@@ -618,7 +616,7 @@ Before (Claude Sonnet 5):
       MaxTokens = 1024,
       Tools = [.. tools],
       ToolChoice = new ToolChoiceTool { Name = "get_weather" },
-      Messages = [new() { Role = Role.User, Content = "What's the weather in Paris?" }],
+      Messages = [new UserMessageParam { Content = "What's the weather in Paris?" }],
   });
   ```
 
@@ -770,9 +768,8 @@ After (Claude Sonnet 5.5):
       ToolChoice = new ToolChoiceAuto(),
       Messages =
       [
-          new()
+          new UserMessageParam
           {
-              Role = Role.User,
               Content = "What's the weather in Paris? Use the get_weather tool.",
           },
       ],
@@ -807,7 +804,9 @@ After (Claude Sonnet 5.5):
       // strict tool use: every call matches the tool's input_schema
       .tools(tools.stream()
           .map(tool -> tool.tool()
-              .map(customTool -> customTool.toBuilder().strict(true).build())
+              .map(customTool -> customTool.toBuilder()
+                  .strict(true)
+                  .build())
               .map(ToolUnion::ofTool)
               .orElse(tool))
           .toList())
@@ -852,18 +851,18 @@ The example marks every tool in the list strict. A request can have at most 20 s
 
 ### Thinking blocks are tied to the model and the conversation
 
-Claude Sonnet 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, and, on the Claude API and Google Cloud, from Claude Haiku 5.5. It doesn't read blocks from Claude Opus 5, Claude Opus 5.5, or any Claude Fable or Claude Mythos model. The API drops blocks the model can't read. The request still returns 200, and dropped blocks aren't billed. See [Switching models mid-conversation](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#switching-models).
+Claude Sonnet 5.5 reads thinking blocks from Claude Sonnet 5, Claude Opus 4.8, Claude Haiku 4.5, and earlier models, and, on the Claude API and Claude Models on Google Cloud (Google managed), from Claude Haiku 5.5. It doesn't read blocks from Claude Opus 5, Claude Opus 5.5, or any Claude Fable or Claude Mythos model. The API drops blocks the model can't read. The request still returns 200, and dropped blocks aren't billed. See [Switching models mid-conversation](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#switching-models).
 
-Each Claude Sonnet 5.5 thinking block is also signed over the conversation before it. For accounts created on or after August 31, 2026, 00:00 UTC, the API enforces this by default, on the Claude API, Amazon Bedrock, and Google Cloud. On those accounts, a request that replays a block after an edit to earlier history returns a 400 error. Keep conversations append-only, and change instructions or tools with [mid-conversation system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages). Thinking blocks that Claude Sonnet 5.5 produces work only in the account that produced them, or in an account linked to it. See [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#account-bound-thinking).
+Each Claude Sonnet 5.5 thinking block is also signed over the conversation before it. For accounts created on or after August 31, 2026, 00:00 UTC, the API enforces this by default, on the Claude API, Amazon Bedrock, and Claude Models on Google Cloud (Google managed). On those accounts, a request that replays a block after an edit to earlier history returns a 400 error. Keep conversations append-only, and change instructions or tools with [mid-conversation system messages](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages). Thinking blocks that Claude Sonnet 5.5 produces work only in the account that produced them, or in an account linked to it. See [Preserved thinking](https://platform.claude.com/docs/en/build-with-claude/preserved-thinking#account-bound-thinking).
 
-### Computer use needs the toolset on the Claude API and Google Cloud
+### Computer use needs the toolset on the Claude API and Claude Models on Google Cloud (Google managed)
 
-On the Claude API and Google Cloud, Claude Sonnet 5.5 supports computer use only through the `computer_toolset_20260801` toolset. There, `computer_20251124` returns a 400 error. Claude Sonnet 5.5 doesn't accept `computer_20250124` on any platform. Find the version you send today:
+On the Claude API and Claude Models on Google Cloud (Google managed), Claude Sonnet 5.5 supports computer use only through the `computer_toolset_20260801` toolset. There, `computer_20251124` returns a 400 error. Claude Sonnet 5.5 doesn't accept `computer_20250124` on any platform. Find the version you send today:
 
-| Version you send today | Starting models that send it                         | Send on the Claude API and Google Cloud | Send on Amazon Bedrock |
-| ---------------------- | ---------------------------------------------------- | --------------------------------------- | ---------------------- |
-| `computer_20251124`    | Claude Sonnet 5, Claude Sonnet 4.6                   | `computer_toolset_20260801`             | `computer_20251124`    |
-| `computer_20250124`    | Claude Sonnet 4.5, Claude Haiku 4.5, Claude Sonnet 4 | `computer_toolset_20260801`             | `computer_20251124`    |
+| Version you send today | Starting models that send it                         | Send on the Claude API and Claude Models on Google Cloud (Google managed) | Send on Amazon Bedrock |
+| ---------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------- | ---------------------- |
+| `computer_20251124`    | Claude Sonnet 5, Claude Sonnet 4.6                   | `computer_toolset_20260801`                                               | `computer_20251124`    |
+| `computer_20250124`    | Claude Sonnet 4.5, Claude Haiku 4.5, Claude Sonnet 4 | `computer_toolset_20260801`                                               | `computer_20251124`    |
 
 If you send the `fine-grained-tool-streaming-2025-05-14` beta header, remove it when you move to the toolset. Alongside a toolset entry, it returns a 400 error. Set `eager_input_streaming: true` on each tool that needs it instead.
 
@@ -885,11 +884,11 @@ Claude Sonnet 5.5 declines in more categories than Claude Sonnet 5. A decline re
 
 * **`"cyber"`:** The request could enable cyber harm, such as malware or exploit development.
 * **`"bio"`:** The request could enable biological harm, such as dangerous lab methods.
-* **`"frontier_llm"`:** The request could assist the development of competing AI models.
+* **`"frontier_llm"`:** The request could help with the development of competing AI models.
 * **`"reasoning_extraction"`:** The request asks the model to reproduce its internal reasoning in the response text.
 * **`"general_harms"`:** The request falls under another usage-policy area. Benign work can also trigger this category.
 
-[Server-side fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback) (`fallbacks: "default"`, beta, Claude API only) retries `"cyber"` and `"frontier_llm"` declines on Claude Sonnet 5. It doesn't retry `"bio"`, `"reasoning_extraction"`, or `"general_harms"` declines. See [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) and [How refusals are billed](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#how-refusals-are-billed).
+[Server-side fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback) (`fallbacks: "default"`), in beta on the Claude API and on [Claude Models on Google Cloud (Anthropic managed)](https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/anthropic-managed), retries `"cyber"` and `"frontier_llm"` declines on Claude Sonnet 5. It doesn't retry `"bio"`, `"reasoning_extraction"`, or `"general_harms"` declines. See [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) and [How refusals are billed](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#how-refusals-are-billed).
 
 Real-time cyber safeguards are new for code from Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5. For legitimate security work, apply to the [Cyber Verification Program](https://support.claude.com/en/articles/14604842-real-time-cyber-safeguards-on-claude-opus-and-sonnet).
 
@@ -984,7 +983,7 @@ Before (Claude Sonnet 4.6):
       Model = Model.ClaudeSonnet4_6,
       MaxTokens = 16000,
       Thinking = new ThinkingConfigEnabled(budgetTokens: 10000),
-      Messages = [new() { Role = Role.User, Content = "..." }]
+      Messages = [new UserMessageParam { Content = "..." }]
   };
 
   var response = await client.Messages.Create(parameters);
@@ -1037,7 +1036,7 @@ Before (Claude Sonnet 4.6):
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-sonnet-4-6",
+    model: Anthropic::Model::CLAUDE_SONNET_4_6,
     max_tokens: 16000,
     thinking: {
       type: "enabled",
@@ -1122,7 +1121,7 @@ After (Claude Sonnet 5.5):
       MaxTokens = 16000,
       Thinking = new ThinkingConfigAdaptive(),
       OutputConfig = new OutputConfig { Effort = Effort.High }, // or Max, Xhigh, Medium, Low
-      Messages = [new() { Role = Role.User, Content = "..." }]
+      Messages = [new UserMessageParam { Content = "..." }]
   };
 
   var response = await client.Messages.Create(parameters);
@@ -1174,7 +1173,7 @@ After (Claude Sonnet 5.5):
   $message = $client->messages->create(
       maxTokens: 16000,
       messages: [['role' => 'user', 'content' => '...']],
-      model: 'claude-sonnet-5-5',
+      model: Model::CLAUDE_SONNET_5_5,
       thinking: ['type' => 'adaptive'],
       outputConfig: ['effort' => 'high'], // or 'max', 'xhigh', 'medium', 'low'
   );
@@ -1184,7 +1183,7 @@ After (Claude Sonnet 5.5):
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-sonnet-5-5",
+    model: Anthropic::Model::CLAUDE_SONNET_5_5,
     max_tokens: 16000,
     thinking: {
       type: "adaptive"
@@ -1199,15 +1198,15 @@ After (Claude Sonnet 5.5):
   ```
 </CodeGroup>
 
-**Sampling parameters return an error.** Claude Sonnet 4.6 and earlier models and Claude Haiku 4.5 accept `temperature`, `top_p`, and `top_k`. On Claude Sonnet 5.5, a non-default value returns a 400 error. Remove them.
+**Sampling parameters return an error.** Remove `temperature`, `top_p`, and `top_k`.
 
 **Thinking text is omitted by default.** See [Handle thinking in responses](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#thinking-in-responses).
 
 ### Other changes
 
-* **About 30% more tokens:** Claude Sonnet 5.5 uses Claude Sonnet 5's tokenizer. Against Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5, the same text produces about 30% more tokens, depending on the content. Recount with [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting), and revisit `max_tokens` and cost.
+* **About 30 percent more tokens:** Claude Sonnet 5.5 uses Claude Sonnet 5's tokenizer. Against Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5, the same text produces about 30 percent more tokens, depending on the content. Recount with [token counting](https://platform.claude.com/docs/en/build-with-claude/token-counting), and revisit `max_tokens` and cost.
 * **Effort:** `xhigh` is new, and the levels are recalibrated. See [Recommended changes](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#recommended-changes).
-* **Images:** Claude Sonnet 5.5 uses the high-resolution image tier, up to 2576 pixels on the long edge and 4,784 visual tokens per image. Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 stop at 1568 pixels and 1,568 tokens. A 2000×1500 image costs about 2.5 times as many tokens on Claude Sonnet 5.5. See [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size).
+* **Images:** Claude Sonnet 5.5 uses the high-resolution image tier, up to 2,576 pixels on the long edge and up to 4,784 visual tokens for an image. Claude Sonnet 4.6, Claude Sonnet 4.5, and Claude Haiku 4.5 stop at 1,568 pixels and 1,568 tokens. A 2000×1500 image costs about 2.5 times as many tokens on Claude Sonnet 5.5. See [Resolution and token cost](https://platform.claude.com/docs/en/build-with-claude/vision#evaluate-image-size).
 
 ### Migrating from Claude Sonnet 4.5 or earlier
 
@@ -1221,7 +1220,7 @@ This model does not support assistant message prefill. The conversation must end
 
 Replace each prefill according to what it was for:
 
-* **Output format:** use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), or tools with enum fields for classification. On Amazon Bedrock, structured outputs aren't available for Claude Sonnet 5.5. There, describe the format in the prompt or use a tool without `strict`, and validate the output in your code.
+* **Output format:** use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs), or tools with enum fields for classification.
 * **Preambles:** ask in the system prompt for a direct answer.
 * **Unwanted refusals:** clear instructions in the user message are usually enough.
 * **Continuations:** move them to the user message, for example "Your previous response was interrupted and ended with `[previous_response]`. Continue from where you left off."
@@ -1233,15 +1232,15 @@ Replace each prefill according to what it was for:
 
 **Effort.** Claude Sonnet 4.5 has no effort parameter. Set an effort level explicitly, as [Recommended changes](https://platform.claude.com/docs/en/models/sonnet-5-5/migration-guide#recommended-changes) describes.
 
-**Context and output.** Claude Sonnet 5.5 has a larger context window, with no beta header, and a higher output limit. See the [model page](https://platform.claude.com/docs/en/models/sonnet-5-5/overview). Remove any context-window beta header.
+**Context and output.** Claude Sonnet 5.5 has a larger context window, with no beta header, and a higher output limit. See the [Claude Sonnet 5.5](https://platform.claude.com/docs/en/models/sonnet-5-5/overview) model page. Remove any context-window beta header.
 
-**Beta headers.** Remove `interleaved-thinking-2025-05-14`, since adaptive thinking interleaves automatically. Replace `fine-grained-tool-streaming-2025-05-14` with `eager_input_streaming: true` on each tool that needs it. That header returns a 400 error alongside a computer use or browser use toolset entry. See [Fine-grained tool streaming](https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming).
+**Beta headers.** Remove `interleaved-thinking-2025-05-14`, because adaptive thinking interleaves automatically. Replace `fine-grained-tool-streaming-2025-05-14` with `eager_input_streaming: true` on each tool that needs it. That header returns a 400 error alongside a computer use or browser use toolset entry. See [Fine-grained tool streaming](https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming).
 
-**Structured outputs.** The `output_format` parameter is deprecated and will be removed in the future. To use it anyway, add the `structured-outputs-2025-11-13` beta header. Without it, the API returns a 400 error. Use `output_config.format` instead.
+**Structured outputs.** The `output_format` parameter is deprecated. To use it anyway, add the `structured-outputs-2025-11-13` beta header. Without it, the API returns a 400 error. Use `output_config.format` instead.
 
 ### Migrating from Claude Sonnet 4 or earlier
 
-Claude Sonnet 4 is retired on the Claude API and still available on Amazon Bedrock and Google Cloud. Claude 3.7 Sonnet is retired. From either model, first apply every preceding section, then these changes:
+Claude Sonnet 4 is retired on the Claude API and still available on Amazon Bedrock and Claude Models on Google Cloud (Google managed). Claude 3.7 Sonnet is retired. From either model, first apply every preceding section, then these changes:
 
 * **Tool versions:** Use `text_editor_20250728`, with the tool name `str_replace_based_edit_tool` and no `undo_edit` command. Use `code_execution_20260521`. See the [text editor tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool) and the [code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#upgrade-to-latest-tool-version).
 * **Stop reasons:** Handle `refusal`. Claude 4.5 and later models also stop with `model_context_window_exceeded` at the context window limit. See [Handling stop reasons](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons).

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/access-transparency
-fetched_at: 2026-10-05T06:27:25.834087+00:00
+fetched_at: 2026-10-26T05:40:08.709953+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ Learn how Access Transparency creates a record of human access to your organizat
 
 Anthropic personnel access customer content only under defined conditions. Access Transparency is designed to make such access visible to you. The design rests on the following principles:
 
-* **Human access happens only under a published reason code.**
+* **Human access occurs only under a published reason code.**
 * **Human views of your covered content are recorded.** Anthropic's internal tooling that can reach your covered content is instrumented to emit an event on each view.
 * **Events represent human access, not automated processing.** Anthropic's automated safety systems process your content in a secured pipeline with no interactive human access; that processing does not generate `anthropic_access` events. The one event automated processing can initiate is a `cmek_preserve` preservation record (see [CMEK content preservation](https://platform.claude.com/docs/en/manage-claude/access-transparency#cmek-content-preservation)).
 * **Events arrive on your existing feed.** Activities are accessible through your [Compliance API Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed). Existing credentials, audit, export, and SIEM integrations for the Compliance API still apply.
@@ -33,7 +33,7 @@ Anthropic personnel access customer content only under defined conditions. Acces
 
 ## What Access Transparency covers
 
-* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. Anthropic's [general ZDR documentation](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention) explains which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
+* **Covered content:** Access Transparency covers prompt and response content sent through the Claude Messages API or Claude Code sessions. The [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention) page explains which APIs and features are covered by ZDR. The same APIs and features are covered by Access Transparency.
 * **Manual views by Anthropic personnel:** Manual views of your covered content by Anthropic reviewers generate events.
 
 ## What Access Transparency does not cover
@@ -42,8 +42,8 @@ Anthropic personnel access customer content only under defined conditions. Acces
 * **Your own organization's activity:** Your API calls, admin actions, and Compliance API reads are covered by standard [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed) event types.
 * **Claude for Enterprise and Claude Apps:** claude.ai Enterprise seats, Claude for Work, Cowork, and Claude in Chrome are not covered.
 * **Claude consumer products:** Claude Free, Pro, or Max plans.
-* **Partner-operated platforms:** Amazon Bedrock and Google Cloud; refer to those platforms' transparency controls.
-* **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [ZDR documentation](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#zero-data-retention-zdr-scope) for additional details.
+* **Partner-operated platforms:** Amazon Bedrock and Claude Models on Google Cloud (Google managed). Refer to those platforms' transparency controls.
+* **Anything ZDR does not cover:** Products that are not covered by ZDR (for example, the Files API, Anthropic-hosted stateful applications, and the Batch API) are not covered by Access Transparency. See [Zero data retention (ZDR)](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#zero-data-retention-zdr-scope) for additional details.
 
 ## Getting started
 
@@ -74,8 +74,8 @@ curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=anthropic_access" \
   --data-urlencode "limit=50" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01"
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01"
 ```
 
 Pagination, date-range filtering (`created_at.gte` / `.lt`), and the response envelope (`has_more`, `first_id`, `last_id`) are shared with the rest of the Activity Feed. See [Query the Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed).
@@ -132,8 +132,8 @@ curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
   --data-urlencode "activity_types[]=cmek_preserve" \
   --data-urlencode "limit=50" \
-  --header "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-  --header "anthropic-version: 2023-06-01"
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  -H "anthropic-version: 2023-06-01"
 ```
 
 Example JSON message:
@@ -171,28 +171,28 @@ The set of reason codes is closed. Anthropic will update this page in the event 
 
 The following table lists which surfaces are covered by Access Transparency. Coverage means human access to content from that surface generates `anthropic_access` events.
 
-| Surface                                         | Covered | Details                                                                                                    |
-| ----------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
-| Claude API (`api.anthropic.com`)                | Yes     | Prompts, completions, and data directly embedded in the API inputs                                         |
-| Claude Code (using an API key)                  | Yes     | API traffic from Claude Code is covered as Claude API traffic                                              |
-| Claude Platform on AWS                          | Yes     | Claude Platform on AWS generates Access Transparency events within the Compliance API (not AWS CloudTrail) |
-| Claude API (`api.anthropic.com`) (Batch, Files) | No      | The Claude API Batch and Files APIs are not covered, just like they are not covered by ZDR                 |
-| Claude for Enterprise (claude.ai seats)         | No      | Not covered                                                                                                |
-| Claude for Work                                 | No      | Not covered                                                                                                |
-| Claude Free, Pro, Max                           | No      | Consumer plans are not eligible                                                                            |
-| Playground (Claude Console)                     | No      | Not covered                                                                                                |
-| Microsoft Foundry                               | No      | Not available                                                                                              |
-| Amazon Bedrock, Google Cloud                    | No      | Partner-operated platforms; refer to those platforms' transparency controls                                |
+| Surface                                                        | Covered | Details                                                                                                    |
+| -------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| Claude API (`api.anthropic.com`)                               | Yes     | Prompts, completions, and data directly embedded in the API inputs                                         |
+| Claude Code (using an API key)                                 | Yes     | API traffic from Claude Code is covered as Claude API traffic                                              |
+| Claude Platform on AWS                                         | Yes     | Claude Platform on AWS generates Access Transparency events within the Compliance API (not AWS CloudTrail) |
+| Claude API (`api.anthropic.com`) (Batch, Files)                | No      | The Claude API Batch and Files APIs are not covered, just like they are not covered by ZDR                 |
+| Claude for Enterprise (claude.ai seats)                        | No      | Not covered                                                                                                |
+| Claude for Work                                                | No      | Not covered                                                                                                |
+| Claude Free, Pro, Max                                          | No      | Consumer plans are not eligible                                                                            |
+| Playground (Claude Console)                                    | No      | Not covered                                                                                                |
+| Microsoft Foundry                                              | No      | Not available                                                                                              |
+| Amazon Bedrock, Claude Models on Google Cloud (Google managed) | No      | Partner-operated platforms; refer to those platforms' transparency controls                                |
 
 ## Limitations and exclusions
 
 ### Coverage timing
 
-Access Transparency applies from the time it is enabled for your organization. Content already in your retention window at enablement might also generate events when accessed, but Anthropic does not guarantee coverage for content written before enablement. Treat your enablement date as the start of reliable coverage. There might be a delay of up to two hours between enabling Access Transparency and your content being covered.
+Access Transparency applies from the time it is enabled for your organization. Content already in your retention window at enablement might also generate events when accessed, but Anthropic does not guarantee coverage for content written before enablement. Treat your enablement date as the start of reliable coverage. There might be a delay of up to 2 hours between enabling Access Transparency and your content being covered.
 
 ### Notification timing
 
-`anthropic_access` and `cmek_preserve` events are delivered to your Compliance API feed within two business days of the access or preservation they record. This feed should not be treated as a real-time alerting channel, and the `accessed_at` timestamp reflects when the access occurred, which might be up to two business days before the activity becomes visible in your feed. The `created_at` field reflects the time Anthropic recorded the event, and the event usually becomes visible in your feed shortly after that time. These events do not follow the Activity Feed's usual 1-minute [indexing lag](https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns#window-polling): an event can become visible up to two business days after its `created_at`. If you poll the feed by `created_at` window, overlap consecutive windows by at least two business days for `anthropic_access` and `cmek_preserve` events so that a late-indexed event is not dropped.
+`anthropic_access` and `cmek_preserve` events are delivered to your Compliance API feed within 2 business days of the access or preservation they record. Do not treat this feed as a real-time alerting channel. The `accessed_at` timestamp reflects when the access occurred, which might be up to 2 business days before the activity becomes visible in your feed. The `created_at` field reflects the time Anthropic recorded the event, and the event usually becomes visible in your feed shortly after that time. These events do not follow the Activity Feed's usual 1-minute [indexing lag](https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns#window-polling): an event can become visible up to 2 business days after its `created_at`. If you poll the feed by `created_at` window, overlap consecutive windows by at least 2 business days for `anthropic_access` and `cmek_preserve` events so that a late-indexed event is not dropped.
 
 ### Automated processing does not generate access events
 
@@ -217,16 +217,16 @@ For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, C
     No. Automated processing does not generate `anthropic_access` events; you will see an `anthropic_access` event only if a human reviewer subsequently views the content. Separately, a `cmek_preserve` event is written when content is preserved, whether the preservation was initiated by a human reviewer or an automated safety pipeline.
   </Accordion>
 
-  <Accordion title="We are a platform that serves Claude to our own end users. Can we enable Access Transparency?">
+  <Accordion title="Can a platform that serves Claude to its own end users enable Access Transparency?">
     Access Transparency is not available for platform deployments. Contact your Anthropic account representative to discuss your use case.
   </Accordion>
 
-  <Accordion title="Will I see events for access that happened before we enrolled, or for our older data?">
+  <Accordion title="Will I see events for access that occurred before my organization enrolled, or for its older data?">
     Access Transparency is not guaranteed to be retroactive. It covers human access to content written to the Claude API on or after your enrollment date. You might see events for access to content that was written before enrollment.
   </Accordion>
 
   <Accordion title="How soon after an access will I see the event?">
-    Within two business days of the access. Configure any SIEM alerting or scheduled exports with a matching lookback window rather than assuming real-time arrival.
+    Within 2 business days of the access. Configure any SIEM alerting or scheduled exports with a matching lookback window rather than assuming real-time arrival.
   </Accordion>
 
   <Accordion title="How do I know which request an anthropic_access event refers to?">
@@ -238,7 +238,7 @@ For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, C
   </Accordion>
 
   <Accordion title="How does Access Transparency relate to CMEK?">
-    They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](https://platform.claude.com/docs/en/manage-claude/access-transparency#cmek-content-preservation) and [CMEK](https://platform.claude.com/docs/en/manage-claude/cmek).
+    They are independent. With CMEK, safety preservation outside your key emits a separate `cmek_preserve` event on the same feed. See [CMEK content preservation](https://platform.claude.com/docs/en/manage-claude/access-transparency#cmek-content-preservation) and [Limited preservation outside your key](https://platform.claude.com/docs/en/manage-claude/cmek-data-retention#limited-preservation-outside-your-key).
   </Accordion>
 
   <Accordion title="How can I tell that my Access Transparency record has not been altered?">
@@ -256,6 +256,6 @@ For organizations that also enable CMEK, your cloud KMS audit log (CloudTrail, C
 * [Compliance API overview](https://platform.claude.com/docs/en/manage-claude/compliance-api)
 * [Activity Feed](https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed)
 * [API and data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention)
-* [Customer-Managed Encryption Keys (CMEK)](https://platform.claude.com/docs/en/manage-claude/cmek)
+* [Customer-managed encryption keys (CMEK)](https://platform.claude.com/docs/en/manage-claude/cmek)
 * [Claude Code data usage](https://code.claude.com/docs/en/data-usage)
 * [Trust Center](https://trust.anthropic.com/resources)

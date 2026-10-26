@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/home
-fetched_at: 2026-10-19T05:32:41.274957+00:00
+fetched_at: 2026-10-26T05:39:57.522891+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ with Claude"
     </HomeQuickChip>
 
     <HomeQuickChip icon="Key" href="https://platform.claude.com/settings/keys">
-      Get API key
+      Get API key in Claude Console
     </HomeQuickChip>
 
     <HomeQuickChip icon="CodeBrackets" href="https://platform.claude.com/docs/en/api/overview">
@@ -72,7 +72,7 @@ with Claude"
     ```
 
     ```go Go
-    import "github.com/anthropics/anthropic-sdk-go"
+    import "github.com/anthropics/anthropic-sdk-go/v2"
 
     client := anthropic.NewClient()
     msg, _ := client.Messages.New(
@@ -158,8 +158,7 @@ with Claude"
       .Create(new() {
         Model = Model.ClaudeOpus5_5,
         MaxTokens = 1024,
-        Messages = [new() {
-          Role = Role.User,
+        Messages = [new UserMessageParam {
           Content = "Hello, Claude"
         }]
       });
@@ -236,7 +235,7 @@ with Claude"
         Amazon Bedrock
       </HomeCloudPartnerLink>
 
-      <HomeCloudPartnerLink icon="cloud" href="https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai">
+      <HomeCloudPartnerLink icon="cloud" href="https://platform.claude.com/docs/en/build-with-claude/claude-models-on-google-cloud/overview">
         Google Cloud
       </HomeCloudPartnerLink>
 
@@ -257,7 +256,7 @@ with Claude"
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="lock" href="https://platform.claude.com/settings/keys">
-            Get API key
+            Get API key in Claude Console
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="settings" href="https://platform.claude.com/docs/en/models/overview">
@@ -269,7 +268,7 @@ with Claude"
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="message" href="https://platform.claude.com/playground">
-            Try the API in playground
+            Try the API in Console playground
           </HomeJourneyLink>
         </HomeJourneyStep>
 
@@ -343,7 +342,7 @@ with Claude"
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="lock" href="https://platform.claude.com/settings/keys">
-            API key management
+            API keys in Claude Console
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="chart" href="https://platform.claude.com/docs/en/manage-claude/usage-cost-api">
@@ -363,7 +362,7 @@ with Claude"
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="lock" href="https://platform.claude.com/settings/keys">
-            Get API key
+            Get API key in Claude Console
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="message" href="https://platform.claude.com/docs/en/managed-agents/onboarding">
@@ -401,7 +400,7 @@ with Claude"
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="lock" href="https://platform.claude.com/settings/keys">
-            API key management
+            API keys in Claude Console
           </HomeJourneyLink>
 
           <HomeJourneyLink icon="chart" href="https://platform.claude.com/docs/en/manage-claude/usage-cost-api">

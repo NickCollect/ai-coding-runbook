@@ -1,18 +1,18 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-fetched_at: 2026-10-12T06:49:43.453742+00:00
+fetched_at: 2026-10-26T05:39:59.129775+00:00
 fetch_method: mintlify_md
 ---
 
 ---
 title: Tool use with Claude
 url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-description: Connect Claude to external tools and APIs. See where tools execute, when Claude calls them, and which tool fits your task.
+description: Connect Claude to external tools and APIs. See where tools run, when Claude calls them, and which tool fits your task.
 ---
 
-Tool use (also called function calling) lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application executes (client tools) or that Anthropic executes (server tools).
+Tool use (also called function calling) lets Claude call functions that you define or that Anthropic provides. Claude determines when to call a tool based on the user's request and the tool's description. It then returns a structured call that your application runs (client tools) or that Anthropic runs (server tools).
 
-Here's a minimal example using a server tool, the [Web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool), which Anthropic executes for you:
+Here's a minimal example using a server tool, the [Web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool), which Anthropic runs for you:
 
 <CodeGroup>
   ```bash cURL
@@ -29,7 +29,7 @@ Here's a minimal example using a server tool, the [Web search tool](https://plat
   ```
 
   ```bash CLI
-  ant messages create --transform content --format yaml \
+  ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
     --tool '{type: web_search_20260209, name: web_search}' \
@@ -66,7 +66,7 @@ Here's a minimal example using a server tool, the [Web search tool](https://plat
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       Tools = [new ToolUnion(new WebSearchTool20260209())],
-      Messages = [new() { Role = Role.User, Content = "What's the latest on the Mars rover?" }]
+      Messages = [new UserMessageParam { Content = "What's the latest on the Mars rover?" }]
   };
 
   var message = await client.Messages.Create(parameters);
@@ -131,7 +131,7 @@ Here's a minimal example using a server tool, the [Web search tool](https://plat
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     tools: [{ type: "web_search_20260209", name: "web_search" }],
     messages: [{ role: "user", content: "What's the latest on the Mars rover?" }]
@@ -140,120 +140,22 @@ Here's a minimal example using a server tool, the [Web search tool](https://plat
   ```
 </CodeGroup>
 
-Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then execute the call when Claude returns a `tool_use` block. [How tool use works](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) and [handling tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls).
+Claude runs the search on Anthropic's infrastructure and returns the cited results in the same response. To have Claude call a function that you define, pass a tool with an `input_schema`, then run the call when Claude returns a `tool_use` block. The [client tool example](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview#how-tool-use-works) shows that round trip end to end. Learn more about [defining tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools) and [handling tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls).
 
 ## How tool use works
 
-Tools differ primarily by where the code executes. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code executes the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#tool-use)).
+Tools differ primarily by where the code runs. **Client tools** (including user-defined tools and tools with Anthropic-defined schemas, such as `bash` and `text_editor`) run in your application. Claude responds with `stop_reason: "tool_use"` and one or more `tool_use` blocks. Your code runs the operation and sends back a `tool_result`. **Server tools** (such as `web_search`, `web_fetch`, `code_execution`, and `tool_search`) run on Anthropic's infrastructure: you see the results directly without handling execution, unless Claude calls the tool in the same group of parallel tool calls as one of your client tools (see [Stop reasons and fallback](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#tool-use)).
 
 Here's that round trip in full for a client tool. The first request defines a `get_weather` tool, and Claude answers the question by calling it: the response carries a `tool_use` block, your code runs the lookup, and a second request sends the result back in a `tool_result` block so Claude can reply with the answer.
 
-<CodeGroup>
-  ```bash cURL
-  # Claude replies with a tool_use block naming the tool and its arguments.
-  TOOLS='[
-    {
-      "name": "get_weather",
-      "description": "Get the current weather for a given location.",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "location": {"type": "string", "description": "City and state, e.g. San Francisco, CA"}
-        },
-        "required": ["location"]
-      }
-    }
-  ]'
-  USER_MSG="What's the weather in San Francisco?"
-  RESPONSE=$(curl -s https://api.anthropic.com/v1/messages \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "content-type: application/json" \
-    -d "$(jq -n --argjson tools "$TOOLS" --arg msg "$USER_MSG" '{
-      model: "claude-opus-5-5",
-      max_tokens: 1024,
-      tools: $tools,
-      # Ask for at most one tool call per turn.
-      tool_choice: {type: "auto", disable_parallel_tool_use: true},
-      messages: [{role: "user", content: $msg}]
-    }')")
-  TOOL_USE=$(echo "$RESPONSE" | jq '.content[] | select(.type == "tool_use")')
-  echo "Claude called $(echo "$TOOL_USE" | jq -r '.name') with $(echo "$TOOL_USE" | jq -c '.input')"
+<CodeGroup exclude="shell:cURL, shell:CLI">
+  <CodeGroupItem language="cURL">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
-  # Run the tool, then send the result back in a tool_result block.
-  # Claude uses the result to answer the original question.
-  WEATHER="15 degrees Celsius, partly cloudy"
-  curl -s https://api.anthropic.com/v1/messages \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "content-type: application/json" \
-    -d "$(jq -n \
-      --argjson tools "$TOOLS" \
-      --arg msg "$USER_MSG" \
-      --argjson assistant "$(echo "$RESPONSE" | jq '.content')" \
-      --arg tool_use_id "$(echo "$TOOL_USE" | jq -r '.id')" \
-      --arg weather "$WEATHER" \
-      '{
-        model: "claude-opus-5-5",
-        max_tokens: 1024,
-        tools: $tools,
-        tool_choice: {type: "auto", disable_parallel_tool_use: true},
-        messages: [
-          {role: "user", content: $msg},
-          {role: "assistant", content: $assistant},
-          {role: "user", content: [
-            {type: "tool_result", tool_use_id: $tool_use_id, content: $weather}
-          ]}
-        ]
-      }')"
-  ```
-
-  ```bash CLI
-  # ant reads the request body as YAML on stdin; jq carries the conversation
-  # state into the second request.
-  USER_MSG="What's the weather in San Francisco?"
-  MESSAGES=$(jq -n --arg msg "$USER_MSG" '[{role: "user", content: $msg}]')
-  call_api() {
-    {
-      cat <<'YAML'
-  model: claude-opus-5-5
-  max_tokens: 1024
-  # Ask for at most one tool call per turn.
-  tool_choice: {type: auto, disable_parallel_tool_use: true}
-  tools:
-    - name: get_weather
-      description: Get the current weather for a given location.
-      input_schema:
-        type: object
-        properties:
-          location: {type: string, description: "City and state, e.g. San Francisco, CA"}
-        required: [location]
-  YAML
-      printf 'messages: %s\n' "$MESSAGES"
-    } | ant messages create --format json
-  }
-
-  # Claude replies with a tool_use block naming the tool and its arguments.
-  RESPONSE=$(call_api)
-  TOOL_USE=$(jq '.content[] | select(.type == "tool_use")' <<<"$RESPONSE")
-  echo "Claude called $(jq -r '.name' <<<"$TOOL_USE") with $(jq -c '.input' <<<"$TOOL_USE")"
-
-  # Run the tool, then send the result back in a tool_result block.
-  WEATHER="15 degrees Celsius, partly cloudy"
-  MESSAGES=$(jq \
-    --argjson assistant "$(jq '.content' <<<"$RESPONSE")" \
-    --arg tool_use_id "$(jq -r '.id' <<<"$TOOL_USE")" \
-    --arg weather "$WEATHER" \
-    '. + [
-      {role: "assistant", content: $assistant},
-      {role: "user", content: [
-        {type: "tool_result", tool_use_id: $tool_use_id, content: $weather}
-      ]}
-    ]' <<<"$MESSAGES")
-
-  # Claude uses the result to answer the original question.
-  call_api
-  ```
+  <CodeGroupItem language="CLI">
+    This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+  </CodeGroupItem>
 
   ```python Python
   client = anthropic.Anthropic()
@@ -281,7 +183,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
       model="claude-opus-5-5",
       max_tokens=1024,
       tools=tools,
-      # Ask for at most one tool call per turn.
+      # Ask for at most one tool call in each turn.
       tool_choice={"type": "auto", "disable_parallel_tool_use": True},
       messages=messages,
   )
@@ -337,13 +239,11 @@ Here's that round trip in full for a client tool. The first request defines a `g
     model: "claude-opus-5-5",
     max_tokens: 1024,
     tools,
-    // Ask for at most one tool call per turn.
+    // Ask for at most one tool call in each turn.
     tool_choice: { type: "auto", disable_parallel_tool_use: true },
     messages
   });
-  const toolUse = response.content.find(
-    (block): block is Anthropic.ToolUseBlock => block.type === "tool_use"
-  )!;
+  const toolUse = response.content.find((block) => block.type === "tool_use")!;
   console.log(`Claude called ${toolUse.name} with ${JSON.stringify(toolUse.input)}`);
 
   // Run the tool, then send the result back in a tool_result block.
@@ -364,9 +264,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
   });
 
   // Claude uses the result to answer the original question.
-  const finalText = followup.content.find(
-    (block): block is Anthropic.TextBlock => block.type === "text"
-  )!;
+  const finalText = followup.content.find((block) => block.type === "text")!;
   console.log(finalText.text);
   ```
 
@@ -394,7 +292,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
       }),
   ];
 
-  // Ask for at most one tool call per turn.
+  // Ask for at most one tool call in each turn.
   var toolChoice = new ToolChoice(new ToolChoiceAuto { DisableParallelToolUse = true });
 
   const string userPrompt = "What's the weather in San Francisco?";
@@ -406,7 +304,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
       MaxTokens = 1024,
       Tools = tools,
       ToolChoice = toolChoice,
-      Messages = [new() { Role = Role.User, Content = userPrompt }],
+      Messages = [new UserMessageParam { Content = userPrompt }],
   });
   ToolUseBlock? toolUse = null;
   foreach (var block in response.Content)
@@ -437,9 +335,9 @@ Here's that round trip in full for a client tool. The first request defines a `g
       ToolChoice = toolChoice,
       Messages =
       [
-          new() { Role = Role.User, Content = userPrompt },
-          new() { Role = Role.Assistant, Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
-          new() { Role = Role.User, Content = new MessageParamContent(toolResults) },
+          new UserMessageParam { Content = userPrompt },
+          new AssistantMessageParam { Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList() },
+          new UserMessageParam { Content = toolResults },
       ],
   });
 
@@ -472,7 +370,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
   		},
   	}},
   }
-  // Ask for at most one tool call per turn.
+  // Ask for at most one tool call in each turn.
   toolChoice := anthropic.ToolChoiceUnionParam{
   	OfAuto: &anthropic.ToolChoiceAutoParam{DisableParallelToolUse: anthropic.Bool(true)},
   }
@@ -557,7 +455,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
               .build())
           .build();
 
-      // Ask for at most one tool call per turn.
+      // Ask for at most one tool call in each turn.
       ToolChoiceAuto toolChoice = ToolChoiceAuto.builder()
           .disableParallelToolUse(true)
           .build();
@@ -587,7 +485,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
           .toolChoice(toolChoice)
           .addUserMessage(userPrompt)
           .addMessage(response)
-          .addUserMessageOfBlockParams(List.of(ContentBlockParam.ofToolResult(
+          .addUserMessageOfContentBlockParams(List.of(ContentBlockParam.ofToolResult(
               ToolResultBlockParam.builder()
                   .toolUseId(toolUse.id())
                   .content(weather)
@@ -624,7 +522,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
   ];
   $userMessage = ['role' => 'user', 'content' => "What's the weather in San Francisco?"];
 
-  // Ask for at most one tool call per turn.
+  // Ask for at most one tool call in each turn.
   $toolChoice = ToolChoiceAuto::with(disableParallelToolUse: true);
 
   // Claude replies with a tool_use block naming the tool and its arguments.
@@ -695,10 +593,10 @@ Here's that round trip in full for a client tool. The first request defines a `g
 
   # Claude replies with a tool_use block naming the tool and its arguments.
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     tools: tools,
-    # Ask for at most one tool call per turn.
+    # Ask for at most one tool call in each turn.
     tool_choice: {type: "auto", disable_parallel_tool_use: true},
     messages: messages
   )
@@ -717,7 +615,7 @@ Here's that round trip in full for a client tool. The first request defines a `g
     }
   ]
   followup = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     tools: tools,
     tool_choice: {type: "auto", disable_parallel_tool_use: true},
@@ -735,7 +633,7 @@ Claude called get_weather with {"location": "San Francisco, CA"}
 The current weather in San Francisco is 15 degrees Celsius with partly cloudy skies.
 ```
 
-[Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) covers each step in detail, including result formatting and error signaling; [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use) covers responses that call several tools at once. To skip writing this round trip yourself, use [Tool Runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner): the SDK executes your tools and sends the results back automatically.
+[Handle tool calls](https://platform.claude.com/docs/en/agents-and-tools/tool-use/handle-tool-calls) covers each step in detail, including result formatting and error signaling; [Parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use) covers responses that call several tools at once. To skip writing this round trip yourself, use the [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner): the SDK runs your tools and sends the results back automatically.
 
 For the full conceptual model including the agentic loop and when to choose each approach, see [How tool use works](https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works).
 
@@ -780,7 +678,7 @@ For `type` strings, versions, and beta headers, see [Tool reference](https://pla
 
 ### Your own tools
 
-For tools you define, you write the schema and your application executes each call.
+For tools you define, you write the schema and your application runs each call.
 
 <CardGroup cols={2}>
   <Card title="Define tools" icon="hammer" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools">
@@ -794,7 +692,7 @@ For tools you define, you write the schema and your application executes each ca
 
 ### Anthropic-schema client tools
 
-Anthropic publishes the schema and trains Claude on it. Your application still executes each call and returns the `tool_result`.
+Anthropic publishes the schema and trains Claude on it. Your application still runs each call and returns the `tool_result`.
 
 <CardGroup cols={2}>
   <Card title="Memory tool" icon="brain" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">
@@ -828,11 +726,11 @@ Server tools run on Anthropic's infrastructure, with no handler code in your app
   </Card>
 
   <Card title="Web fetch tool" icon="download" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-fetch-tool">
-    Retrieve the full content of specified web pages and PDF documents.
+    Retrieve the full content of specified webpages and PDF documents.
   </Card>
 
   <Card title="Code execution tool" icon="code" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool">
-    Run Python and bash code in a sandboxed container to analyze data and generate files.
+    Run Python and Bash code in a sandboxed container to analyze data and generate files.
   </Card>
 
   <Card title="Advisor tool" icon="lightbulb" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool">
@@ -870,24 +768,24 @@ The additional tokens from tool use come from:
 
 When you use `tools`, the API also automatically includes a special system prompt for the model that enables tool use. The number of tool use tokens required for each model is listed in the following table (excluding the additional tokens listed earlier). Note that the table assumes at least 1 tool is provided. If no `tools` are provided, then a tool choice of `none` uses 0 additional system prompt tokens.
 
-| Model                                                                                                                                | Tool use system prompt tokens: auto, none | Tool use system prompt tokens: any, tool |
-| :----------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------- | :--------------------------------------- |
-| Claude Opus 5.5                                                                                                                      | 286 tokens                                |                                          |
-| Claude Opus 5                                                                                                                        | 286 tokens                                | 406 tokens                               |
-| Claude Opus 4.8                                                                                                                      | 290 tokens                                | 410 tokens                               |
-| Claude Opus 4.7                                                                                                                      | 675 tokens                                | 804 tokens                               |
-| Claude Opus 4.6                                                                                                                      | 497 tokens                                | 589 tokens                               |
-| Claude Opus 4.5                                                                                                                      | 496 tokens                                | 588 tokens                               |
-| Claude Opus 4.1 ([retired, except on Bedrock and Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | 313 tokens                                | 315 tokens                               |
-| Claude Opus 4 ([retired, except on Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations))               | 313 tokens                                | 315 tokens                               |
-| Claude Sonnet 5.5                                                                                                                    | 286 tokens                                |                                          |
-| Claude Sonnet 5                                                                                                                      | 354 tokens                                | 474 tokens                               |
-| Claude Sonnet 4.6                                                                                                                    | 497 tokens                                | 589 tokens                               |
-| Claude Sonnet 4.5                                                                                                                    | 496 tokens                                | 588 tokens                               |
-| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | 313 tokens                                | 315 tokens                               |
-| Claude Haiku 5.5                                                                                                                     | 286 tokens                                | 406 tokens                               |
-| Claude Haiku 4.5                                                                                                                     | 496 tokens                                | 588 tokens                               |
-| Claude Haiku 3.5 ([retired, except on Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations))            | 264 tokens                                | 355 tokens                               |
+| Model                                                                                                                                                                  | Tool use system prompt tokens: auto, none | Tool use system prompt tokens: any, tool |
+| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------- | :--------------------------------------- |
+| Claude Opus 5.5                                                                                                                                                        | 286 tokens                                |                                          |
+| Claude Opus 5                                                                                                                                                          | 286 tokens                                | 406 tokens                               |
+| Claude Opus 4.8                                                                                                                                                        | 290 tokens                                | 410 tokens                               |
+| Claude Opus 4.7                                                                                                                                                        | 675 tokens                                | 804 tokens                               |
+| Claude Opus 4.6                                                                                                                                                        | 497 tokens                                | 589 tokens                               |
+| Claude Opus 4.5                                                                                                                                                        | 496 tokens                                | 588 tokens                               |
+| Claude Opus 4.1 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | 313 tokens                                | 315 tokens                               |
+| Claude Opus 4 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations))               | 313 tokens                                | 315 tokens                               |
+| Claude Sonnet 5.5                                                                                                                                                      | 286 tokens                                |                                          |
+| Claude Sonnet 5                                                                                                                                                        | 354 tokens                                | 474 tokens                               |
+| Claude Sonnet 4.6                                                                                                                                                      | 497 tokens                                | 589 tokens                               |
+| Claude Sonnet 4.5                                                                                                                                                      | 496 tokens                                | 588 tokens                               |
+| Claude Sonnet 4 ([retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)) | 313 tokens                                | 315 tokens                               |
+| Claude Haiku 5.5                                                                                                                                                       | 286 tokens                                | 406 tokens                               |
+| Claude Haiku 4.5                                                                                                                                                       | 496 tokens                                | 588 tokens                               |
+| Claude Haiku 3.5 ([retired, except on Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations))            | 264 tokens                                | 355 tokens                               |
 
 * **auto, none:** The count when tool\_choice is auto or none.
 * **any, tool:** The count when tool\_choice is any or tool.
@@ -899,13 +797,13 @@ See the [Models overview](https://platform.claude.com/docs/en/models/overview#la
 
 When you send a tool use prompt, like any other API request, the response includes both input and output token counts in the reported `usage` metrics.
 
-Some server tools add usage-based charges on top of tokens: see [Web search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool#usage-and-pricing) and [Code execution tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing) for their rates.
+Some server tools add usage-based charges on top of tokens: see [Web search tool usage and pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool#usage-and-pricing) and [Code execution tool usage and pricing](https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool#usage-and-pricing) for their rates.
 
 ## Next steps
 
 <CardGroup cols={3}>
   <Card href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/how-tool-use-works" title="How tool use works" icon="compass">
-    Understand the tool use loop, where tools execute, and when to use tools instead of prose.
+    Understand the tool use loop, where tools run, and when to use tools instead of prose.
   </Card>
 
   <Card href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/build-a-tool-using-agent" title="Tutorial: Build a tool-using agent" icon="graduation-cap">

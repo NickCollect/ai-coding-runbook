@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics
-fetched_at: 2026-10-19T05:32:43.251442+00:00
+fetched_at: 2026-10-26T05:40:01.755437+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,7 +36,7 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
 <CodeGroup>
   ```bash cURL
   # Turn 1: establish the cache and opt in to diagnostics
-  response=$(curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
+  curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -47,11 +47,10 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
       "system": "You are an AI assistant analyzing a large document. <document>...</document>",
       "messages": [{"role": "user", "content": "Summarize section 1."}],
       "diagnostics": {"previous_message_id": null}
-    }')
-  jq '{id, diagnostics}' <<< "$response"
-  message_id=$(jq -r '.id' <<< "$response")
+    }'
 
-  # Turn 2: reference the previous turn so the API can compare prefixes
+  # Turn 2: pass the id from the turn 1 response as previous_message_id, so the API can compare prefixes.
+  # In the response, diagnostics: null means no divergence was found.
   curl -sS --fail-with-body https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
@@ -67,13 +66,12 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
         {"role": "user", "content": "Now summarize section 2."}
       ],
       "diagnostics": {"previous_message_id": "'"$message_id"'"}
-    }' | jq '{id, diagnostics}'  # diagnostics: null means no divergence was found
+    }'
   ```
 
   ```bash CLI
-  # Turn 1
-  turn1=$(ant beta:messages create \
-    --transform '{id,usage,diagnostics}' <<'YAML'
+  # Turn 1: establish the cache and opt in to diagnostics
+  ant beta:messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   cache_control:
@@ -85,13 +83,9 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
   diagnostics:
     previous_message_id: null
   YAML
-  )
-  printf '%s\n' "$turn1"
 
-  # Turn 2: pass the id from turn 1 as previous_message_id
-  message_id=$(jq -r '.id' <<<"$turn1")
-  ant beta:messages create \
-    --transform '{id,usage,diagnostics}' <<YAML
+  # Turn 2: pass the id from the turn 1 response as previous_message_id
+  ant beta:messages create <<YAML
   model: claude-opus-5-5
   max_tokens: 1024
   cache_control:
@@ -197,10 +191,7 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
           MaxTokens = 1024,
           CacheControl = new(),
           System = system,
-          Messages =
-          [
-              new() { Role = Role.User, Content = "Summarize section 1." },
-          ],
+          Messages = [new BetaUserMessageParam { Content = "Summarize section 1." }],
           Diagnostics = new() { PreviousMessageID = null },
       }
   );
@@ -214,13 +205,12 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
           System = system,
           Messages =
           [
-              new() { Role = Role.User, Content = "Summarize section 1." },
-              new()
+              new BetaUserMessageParam { Content = "Summarize section 1." },
+              new BetaAssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = r1.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
               },
-              new() { Role = Role.User, Content = "Now summarize section 2." },
+              new BetaUserMessageParam { Content = "Now summarize section 2." },
           ],
           Diagnostics = new() { PreviousMessageID = r1.ID },
       }
@@ -230,7 +220,7 @@ Include the `diagnostics` object on every turn. The object is the opt-in: the AP
   {
       null => "No divergence detected.",
       { CacheMissReason: null } => "Comparison still pending.",
-      { CacheMissReason.Type: var type } => $"cache_miss_reason: {type.GetString()}",
+      { CacheMissReason.Type: var type } => $"cache_miss_reason: {type.Raw()}",
   });
   ```
 
@@ -429,14 +419,13 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
         {"role": "user", "content": "Now summarize section 2."}
       ],
       "diagnostics": {"previous_message_id": "'"$message_id"'"}
-    }' | jq -R 'select(startswith("data: ")) | ltrimstr("data: ") | fromjson | select(.type == "message_start") | .message.diagnostics'
+    }'
   ```
 
   ```bash CLI
   # Turn 2: stream. With --stream the CLI emits each SSE event as one JSON object.
-  # diagnostics arrives on the message_start event; pick it out with jq.
-  ant beta:messages create \
-    --stream --format jsonl <<YAML |
+  # diagnostics arrives on the message_start event.
+  ant beta:messages create --stream <<YAML
   model: claude-opus-5-5
   max_tokens: 1024
   cache_control:
@@ -452,7 +441,6 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
   diagnostics:
     previous_message_id: $message_id
   YAML
-    jq -c 'select(.type == "message_start") | .message | {id,usage,diagnostics}'
   ```
 
   ```python Python
@@ -529,13 +517,12 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
           System = system,
           Messages =
           [
-              new() { Role = Role.User, Content = "Summarize section 1." },
-              new()
+              new BetaUserMessageParam { Content = "Summarize section 1." },
+              new BetaAssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = r1.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
               },
-              new() { Role = Role.User, Content = "Now summarize section 2." },
+              new BetaUserMessageParam { Content = "Now summarize section 2." },
           ],
           Diagnostics = new() { PreviousMessageID = r1.ID },
       }
@@ -559,7 +546,7 @@ In streaming responses, `diagnostics` appears on the `message_start` event.
   {
       null => "No divergence detected.",
       { CacheMissReason: null } => "Comparison still pending.",
-      { CacheMissReason.Type: var type } => $"cache_miss_reason: {type.GetString()}",
+      { CacheMissReason.Type: var type } => $"cache_miss_reason: {type.Raw()}",
   });
   ```
 
@@ -721,13 +708,13 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
 <Tabs>
   <Tab title="cURL">
     <Info>
-      This workflow doesn't translate well to a one-off shell command. See the SDK tabs for the loop pattern; the per-turn HTTP request is identical to [Basic usage](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#basic-usage).
+      This workflow doesn't translate well to a one-off shell command. Use the Claude SDK to run the loop; the per-turn HTTP request is identical to [Basic usage](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#basic-usage).
     </Info>
   </Tab>
 
   <Tab title="CLI">
     <Info>
-      This workflow doesn't translate well to a one-off shell command. See the SDK tabs for the loop pattern; the per-turn CLI invocation is identical to [Basic usage](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#basic-usage).
+      This workflow doesn't translate well to a one-off shell command. Use the Claude SDK to run the loop; the per-turn CLI command is identical to [Basic usage](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics#basic-usage).
     </Info>
   </Tab>
 
@@ -807,7 +794,7 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
 
     for (int i = 0; i < prompts.Length; i++)
     {
-        messages.Add(new() { Role = Role.User, Content = prompts[i] });
+        messages.Add(new BetaUserMessageParam { Content = prompts[i] });
 
         var r = await client.Beta.Messages.Create(
             new()
@@ -823,13 +810,12 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
 
         if (r.Diagnostics?.CacheMissReason is { Type: var type })
         {
-            Console.WriteLine($"Turn {i + 1} cache_miss_reason: {type.GetString()}");
+            Console.WriteLine($"Turn {i + 1} cache_miss_reason: {type.Raw()}");
         }
 
         messages.Add(
-            new()
+            new BetaAssistantMessageParam
             {
-                Role = Role.Assistant,
                 Content = r.Content.Select(block => new BetaContentBlockParam(block.Json)).ToList(),
             }
         );
@@ -890,12 +876,7 @@ In a multi-turn conversation, carry the latest response `id` forward as `previou
     String prevId = null;
 
     for (var turn = 0; turn < prompts.size(); turn++) {
-        messages.add(
-            BetaMessageParam.builder()
-                .role(BetaMessageParam.Role.USER)
-                .content(prompts.get(turn))
-                .build()
-        );
+        messages.add(BetaMessageParam.ofUser(prompts.get(turn)));
 
         var r = client.beta().messages().create(
             MessageCreateParams.builder()
@@ -993,7 +974,7 @@ The `diagnostics` field on the response `Message` has three possible values:
 | Value                          | Meaning                                                                                                                                                                                         |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `null`                         | The request did not include the `diagnostics` object, `previous_message_id` was `null` (first turn, nothing to compare), or a comparison ran and found no divergence.                           |
-| `{"cache_miss_reason": null}`  | The comparison was still running when the response was serialized. This can happen when the response starts very quickly. Treat it as inconclusive and check the next turn.                     |
+| `{"cache_miss_reason": null}`  | The comparison was still running when the response was serialized. This can occur when the response starts very quickly. Treat it as inconclusive and check the next turn.                      |
 | `{"cache_miss_reason": {...}}` | A `cache_miss_reason` is attached. For `*_changed` types this identifies the first divergence point; `previous_message_not_found` and `unavailable` are cases where no comparison was produced. |
 
 When `cache_miss_reason` is non-null, it looks like this:
@@ -1021,7 +1002,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 
 ## Cache miss reason types
 
-`cache_miss_reason` is a discriminated union on `type`. The response reports the earliest divergence only, so fix it first; later ones may be hidden behind it.
+`cache_miss_reason` is a discriminated union on `type`. The response reports the earliest divergence only, so fix it first; later ones might be hidden behind it.
 
 | Type                         | What it means                                                                                                                                                                                                                                                                                                                                                                                                                                   | What to change                                                                                                                                                                                                                                                                                                |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1038,7 +1019,7 @@ When `cache_miss_reason` is non-null, it looks like this:
 
 ## Reading diagnostics alongside usage
 
-`diagnostics` answers "did my request change?" while `usage.cache_read_input_tokens` answers "did the cache hit?". Combining them tells you where to look.
+`diagnostics` answers "did my request change?" whereas `usage.cache_read_input_tokens` answers "did the cache hit?" Combining them tells you where to look.
 
 This matrix applies to turns where you passed a real `previous_message_id`. On the first turn (`previous_message_id: null`), `diagnostics` is always `null` and `cache_read_input_tokens` is normally zero because the cache is being written, not read; no troubleshooting is needed. The matrix also does not apply when `cache_miss_reason` is `null` (the comparison is still pending; check the next turn) or when its `type` is `previous_message_not_found` or `unavailable` (no comparison was produced).
 
@@ -1046,15 +1027,15 @@ This matrix applies to turns where you passed a real `previous_message_id`. On t
 | ----------------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `null`                                    | high              | Working as expected. Your prefix is stable and the cache hit.                                                                                                                                                                        |
 | `null`                                    | low or zero       | Your requests match but the cache entry was no longer available. Consider shortening gaps between turns or using the [1-hour cache TTL](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#1-hour-cache-duration). |
-| `cache_miss_reason` is a `*_changed` type | low or zero       | Your bug. The request changed; fix the cause indicated by `type`.                                                                                                                                                                    |
+| `cache_miss_reason` is a `*_changed` type | low or zero       | The request changed; fix the cause indicated by `type`.                                                                                                                                                                              |
 | `cache_miss_reason` is a `*_changed` type | high              | Rare. A change occurred late in the prompt but an earlier `cache_control` breakpoint still hit. Worth fixing, but low impact.                                                                                                        |
 
 ## Limitations
 
-* **Claude API only:** Not available on Amazon Bedrock or Google Cloud.
+* **Claude API only:** Not available on Amazon Bedrock or Claude Models on Google Cloud (Google managed).
 * **Limited retention:** Fingerprints for `previous_message_id` lookup expire after a short period. Run diagnostic comparisons between closely spaced requests.
 * **Same workspace:** The previous request must have run in the same organization and workspace. To check, compare the `anthropic-workspace-id` [response header](https://platform.claude.com/docs/en/api/overview#response-headers) on the two responses.
-* **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response may be `unavailable` rather than a precise location.
+* **Comparison horizon:** For very long conversations where the only change is deep in the message list, the response might be `unavailable` rather than a precise location.
 * **Best-effort:** Diagnostics never blocks or fails your request. If diagnostic information is not available, the response returns `unavailable`, or `cache_miss_reason: null` when the comparison was still running.
 
 ## Data retention

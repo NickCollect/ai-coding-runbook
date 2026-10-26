@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-connector
-fetched_at: 2026-10-19T05:32:43.893725+00:00
+fetched_at: 2026-10-26T05:40:03.327932+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ featureMetadata:
     Microsoft Foundry: beta
 ---
 
-Claude's Model Context Protocol (MCP) connector feature enables you to connect to remote MCP servers directly from the Messages API without a separate MCP client.
+Claude's Model Context Protocol (MCP) connector feature allows you to connect to remote MCP servers directly from the Messages API without a separate MCP client.
 
 <Note>
   The previous version of this feature (`mcp-client-2025-04-04`) is deprecated. See [Deprecated version: mcp-client-2025-04-04](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#deprecated-version-mcp-client-2025-04-04).
@@ -166,7 +166,7 @@ This example enables all tools from an MCP server with default configuration:
       MaxTokens = 1000,
       Messages = new List<BetaMessageParam>
       {
-          new() { Role = Role.User, Content = "What tools do you have available?" }
+          new BetaUserMessageParam { Content = "What tools do you have available?" }
       },
       McpServers = new List<BetaRequestMcpServerUrlDefinition>
       {
@@ -325,7 +325,7 @@ Each MCP server in the `mcp_servers` array defines the connection details:
 | Property              | Type   | Required | Description                                                                                                                                                                                                                                                                                                            |
 | --------------------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `type`                | string | Yes      | Currently only "url" is supported.                                                                                                                                                                                                                                                                                     |
-| `url`                 | string | Yes      | The URL of the MCP server. Must start with https\://.                                                                                                                                                                                                                                                                  |
+| `url`                 | string | Yes      | The URL of the MCP server. Must start with `https://`.                                                                                                                                                                                                                                                                 |
 | `name`                | string | Yes      | A unique identifier for this MCP server. Must be referenced by exactly one MCPToolset in the `tools` array.                                                                                                                                                                                                            |
 | `authorization_token` | string | No       | OAuth authorization token if required by the MCP server. See [Authentication](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#authentication) for how to obtain one, or the [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) for protocol details. |
 
@@ -359,7 +359,7 @@ The MCPToolset lives in the `tools` array and configures which tools from the MC
 | `type`            | string | Yes      | Must be "mcp\_toolset".                                                                                                                 |
 | `mcp_server_name` | string | Yes      | Must match a server name defined in the `mcp_servers` array.                                                                            |
 | `default_config`  | object | No       | Default configuration applied to all tools in this set. Individual tool configs in `configs` override these defaults.                   |
-| `configs`         | object | No       | Per-tool configuration overrides. Keys are tool names, values are configuration objects.                                                |
+| `configs`         | object | No       | Per-tool configuration overrides. Keys are tool names; values are configuration objects.                                                |
 | `cache_control`   | object | No       | [Prompt caching](https://platform.claude.com/docs/en/build-with-claude/prompt-caching) cache breakpoint configuration for this toolset. |
 
 With the `mcp-client-2026-09-15` beta header, an MCPToolset also accepts `tools`, a pinned copy of the server's tool list. See [Pin an MCP server's tool list](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#pin-mcp-tool-list).
@@ -402,8 +402,8 @@ Example:
 
 Results in:
 
-* `search_events`: `enabled: false` (from configs), `defer_loading: true` (from default\_config)
-* All other tools: `enabled: true` (system default), `defer_loading: true` (from default\_config)
+* `search_events`: `enabled: false` (from `configs`), `defer_loading: true` (from `default_config`)
+* All other tools: `enabled: true` (system default), `defer_loading: true` (from `default_config`)
 
 ## Common configuration patterns
 
@@ -485,18 +485,18 @@ Combine allowlisting with custom configuration for each tool:
 
 In this example:
 
-* `search_events` is enabled with `defer_loading: false`
-* `list_events` is enabled with `defer_loading: true` (inherited from default\_config)
-* All other tools are disabled
+* `search_events` is enabled with `defer_loading: false`.
+* `list_events` is enabled with `defer_loading: true` (inherited from `default_config`).
+* All other tools are disabled.
 
 ## Validation rules
 
 The API enforces these validation rules:
 
-* **Server must exist:** The `mcp_server_name` in an MCPToolset must match a server defined in the `mcp_servers` array
-* **Server must be used:** Every MCP server defined in `mcp_servers` must be referenced by exactly one MCPToolset
-* **Unique toolset per server:** Each MCP server can only be referenced by one MCPToolset
-* **Unknown tool names:** If a tool name in `configs` doesn't exist on the MCP server, a backend warning is logged but no error is returned (MCP servers may have dynamic tool availability)
+* **Server must exist:** The `mcp_server_name` in an MCPToolset must match a server defined in the `mcp_servers` array.
+* **Server must be used:** Every MCP server defined in `mcp_servers` must be referenced by exactly one MCPToolset.
+* **Unique toolset for each server:** Each MCP server can only be referenced by one MCPToolset.
+* **Unknown tool names:** If a tool name in `configs` doesn't exist on the MCP server, a backend warning is logged but no error is returned (MCP servers might have dynamic tool availability).
 
 ## Response content types
 
@@ -532,7 +532,7 @@ When Claude uses MCP tools, the response includes two new content block types:
 
 ## Pin an MCP server's tool list (beta)
 
-An MCP server can change its tools at any time. The `mcp-client-2026-09-15` beta header records the tool list each server returns and lets you pin it, so a server that changes its tools doesn't change what Claude sees partway through a conversation. It includes everything `mcp-client-2025-11-20` does, so send it in place of that header. It's available on the Claude API.
+An MCP server can change its tools at any time. The `mcp-client-2026-09-15` beta header records the tool list each server returns and lets you pin it, so a server that changes its tools doesn't change what Claude receives partway through a conversation. It includes everything `mcp-client-2025-11-20` does, so send it in place of that header. It's available on the Claude API.
 
 When the API asks an MCP server for its tools while producing a response, the response starts with an `mcp_tool_listing` block for that server, one block for each server it asked:
 
@@ -582,58 +582,87 @@ The following example sends one request with an unpinned toolset, copies the ret
 
 <CodeGroup>
   ```bash cURL
-  BODY='{
-    "model": "claude-opus-5-5",
-    "max_tokens": 1024,
-    "mcp_servers": [
-      {
-        "type": "url",
-        "url": "https://example-server.modelcontextprotocol.io/sse",
-        "name": "example-mcp",
-        "authorization_token": "YOUR_TOKEN"
-      }
-    ],
-    "tools": [
-      {
-        "type": "mcp_toolset",
-        "mcp_server_name": "example-mcp"
-      }
-    ],
-    "messages": [
-      {
-        "role": "user",
-        "content": "What tools do you have available?"
-      }
-    ]
-  }'
-
   # First request: the toolset isn't pinned, so the API asks the server for
   # its tools and the response starts with an mcp_tool_listing block.
-  # tee shows the response on stderr while the variable captures it.
-  FIRST=$(curl -sS https://api.anthropic.com/v1/messages \
-    -H "content-type: application/json" \
-    -H "x-api-key: $ANTHROPIC_API_KEY" \
-    -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: mcp-client-2026-09-15" \
-    -d "$BODY" | tee /dev/stderr)
-
-  # Pin the list: copy the block's tools into the toolset. The API uses
-  # exactly these entries and doesn't ask the server again.
-  TOOLS=$(jq '.content[] | select(.type == "mcp_tool_listing") | .tools' \
-    <<<"$FIRST")
-  PINNED=$(jq --argjson tools "$TOOLS" '.tools[0].tools = $tools' <<<"$BODY")
-
-  # With a pinned toolset, the response has no mcp_tool_listing block.
   curl https://api.anthropic.com/v1/messages \
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: mcp-client-2026-09-15" \
-    -d "$PINNED"
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 1024,
+      "mcp_servers": [
+        {
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse",
+          "name": "example-mcp",
+          "authorization_token": "YOUR_TOKEN"
+        }
+      ],
+      "tools": [
+        {
+          "type": "mcp_toolset",
+          "mcp_server_name": "example-mcp"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": "What tools do you have available?"
+        }
+      ]
+    }'
+
+  # Pin the list: copy the block's tools into the toolset. The API uses
+  # exactly these entries and doesn't ask the server again, so the response
+  # has no mcp_tool_listing block.
+  curl https://api.anthropic.com/v1/messages \
+    -H "content-type: application/json" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: mcp-client-2026-09-15" \
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 1024,
+      "mcp_servers": [
+        {
+          "type": "url",
+          "url": "https://example-server.modelcontextprotocol.io/sse",
+          "name": "example-mcp",
+          "authorization_token": "YOUR_TOKEN"
+        }
+      ],
+      "tools": [
+        {
+          "type": "mcp_toolset",
+          "mcp_server_name": "example-mcp",
+          "tools": [
+            {
+              "name": "echo",
+              "description": "Returns the text it receives.",
+              "input_schema": {
+                "type": "object",
+                "properties": { "text": { "type": "string" } },
+                "required": ["text"]
+              }
+            }
+          ]
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": "What tools do you have available?"
+        }
+      ]
+    }'
   ```
 
   ```bash CLI
-  request=$(cat <<'YAML'
+  # First request: the toolset isn't pinned, so the API asks the server for
+  # its tools and the response starts with an mcp_tool_listing block.
+  ant beta:messages create --beta mcp-client-2026-09-15 <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   mcp_servers:
@@ -648,22 +677,35 @@ The following example sends one request with an unpinned toolset, copies the ret
     - role: user
       content: What tools do you have available?
   YAML
-  )
 
-  # First request: the toolset isn't pinned, so the API asks the server for
-  # its tools and the response starts with an mcp_tool_listing block.
-  # tee shows the response on stderr while the variable captures it.
-  first=$(ant beta:messages create --beta mcp-client-2026-09-15 --format json \
-    <<<"$request" | tee /dev/stderr)
-  tools=$(jq -c '.content[] | select(.type == "mcp_tool_listing") | .tools' \
-    <<<"$first")
-
-  # Pin the list: copy the block's tools into the toolset. The --tool flag
-  # replaces the body's tools array. The API uses exactly these entries and
-  # doesn't ask the server again, so the response has no mcp_tool_listing block.
-  ant beta:messages create --beta mcp-client-2026-09-15 \
-    --tool "{type: mcp_toolset, mcp_server_name: example-mcp, tools: $tools}" \
-    <<<"$request"
+  # Pin the list: copy the block's tools into the toolset. The API uses
+  # exactly these entries and doesn't ask the server again, so the response
+  # has no mcp_tool_listing block.
+  ant beta:messages create --beta mcp-client-2026-09-15 <<'YAML'
+  model: claude-opus-5-5
+  max_tokens: 1024
+  mcp_servers:
+    - type: url
+      url: https://example-server.modelcontextprotocol.io/sse
+      name: example-mcp
+      authorization_token: YOUR_TOKEN
+  tools:
+    - type: mcp_toolset
+      mcp_server_name: example-mcp
+      tools:
+        - name: echo
+          description: Returns the text it receives.
+          input_schema:
+            type: object
+            properties:
+              text:
+                type: string
+            required:
+              - text
+  messages:
+    - role: user
+      content: What tools do you have available?
+  YAML
   ```
 
   ```python Python
@@ -799,7 +841,7 @@ The following example sends one request with an unpinned toolset, copies the ret
   ];
   List<BetaMessageParam> messages =
   [
-      new() { Role = Role.User, Content = "What tools do you have available?" },
+      new BetaUserMessageParam { Content = "What tools do you have available?" },
   ];
 
   // First request: the toolset isn't pinned, so the API asks the server for
@@ -847,7 +889,7 @@ The following example sends one request with an unpinned toolset, copies the ret
   });
 
   // With a pinned toolset, the response has no mcp_tool_listing block.
-  Console.WriteLine(string.Join(", ", second.Content.Select(block => block.Type)));
+  Console.WriteLine(string.Join(", ", second.Content.Select(block => block.Type.Raw())));
   ```
 
   ```go Go
@@ -1141,7 +1183,7 @@ You can connect to multiple MCP servers by including multiple server definitions
 }
 ```
 
-With many tools available, Claude selects based on tool names and descriptions. Clear, specific tool descriptions improve selection accuracy. For large tool sets (dozens of tools across several servers), consider enabling [`defer_loading`](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#tool-configuration-options) with the [Tool search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool) so only relevant tools are surfaced per query.
+With many tools available, Claude selects based on tool names and descriptions. Clear, specific tool descriptions improve selection accuracy. For large tool sets (dozens of tools across several servers), consider enabling [`defer_loading`](https://platform.claude.com/docs/en/agents-and-tools/mcp-connector#tool-configuration-options) with the [Tool search tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool) so only relevant tools are surfaced for each query.
 
 ## Authentication
 
@@ -1173,7 +1215,7 @@ The MCP inspector can guide you through the process of obtaining an access token
 
 ### Using the access token
 
-Once you've obtained an access token using either of the preceding OAuth flows, you can use it in your MCP server configuration:
+Once you've obtained an access token, you can use it in your MCP server configuration:
 
 ```json
 {
@@ -1230,7 +1272,7 @@ Install both the Anthropic SDK and the MCP SDK:
     The helpers live in the `mcp` subpackage of the Go SDK, which builds on the [MCP Go SDK](https://github.com/modelcontextprotocol/go-sdk):
 
     ```bash
-    go get github.com/anthropics/anthropic-sdk-go/mcp
+    go get github.com/anthropics/anthropic-sdk-go/v2/mcp
     ```
   </Tab>
 
@@ -1240,8 +1282,8 @@ Install both the Anthropic SDK and the MCP SDK:
     <Tabs>
       <Tab title="Gradle">
         ```kotlin
-        implementation("com.anthropic:anthropic-java:2.73.0")
-        implementation("com.anthropic:anthropic-java-mcp:2.73.0")
+        implementation("com.anthropic:anthropic-java:3.3.0")
+        implementation("com.anthropic:anthropic-java-mcp:3.3.0")
         ```
       </Tab>
 
@@ -1250,12 +1292,12 @@ Install both the Anthropic SDK and the MCP SDK:
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java</artifactId>
-            <version>2.73.0</version>
+            <version>3.3.0</version>
         </dependency>
         <dependency>
             <groupId>com.anthropic</groupId>
             <artifactId>anthropic-java-mcp</artifactId>
-            <version>2.73.0</version>
+            <version>3.3.0</version>
         </dependency>
         ```
       </Tab>
@@ -1309,9 +1351,8 @@ Import the helpers for your language:
 
   ```go Go
   import (
-  	"github.com/anthropics/anthropic-sdk-go/mcp"
+  	"github.com/anthropics/anthropic-sdk-go/v2/mcp"
   )
-
   ```
 
   ```java Java
@@ -1431,14 +1472,7 @@ Convert MCP tools for use with the SDK's [tool runner](https://platform.claude.c
       {
           Model = Messages::Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages =
-          [
-              new BetaMessageParam
-              {
-                  Role = Role.User,
-                  Content = "What tools do you have available?",
-              },
-          ],
+          Messages = [new BetaUserMessageParam { Content = "What tools do you have available?" }],
       },
       tools
   );
@@ -1452,7 +1486,7 @@ Convert MCP tools for use with the SDK's [tool runner](https://platform.claude.c
   // ...
 
   // ...
-  	"github.com/anthropics/anthropic-sdk-go/mcp"
+  	"github.com/anthropics/anthropic-sdk-go/v2/mcp"
   	mcpsdk "github.com/modelcontextprotocol/go-sdk/mcp"
   )
 
@@ -1494,7 +1528,6 @@ Convert MCP tools for use with the SDK's [tool runner](https://platform.claude.c
   	}
   	fmt.Println(finalMessage.RawJSON())
   }
-
   ```
 
   ```java Java
@@ -1517,7 +1550,7 @@ Convert MCP tools for use with the SDK's [tool runner](https://platform.claude.c
 
       // Connect to an MCP server
       StdioClientTransport transport = new StdioClientTransport(
-              ServerParameters.builder("mcp-server").build(), McpJsonDefaults.getMapper());
+          ServerParameters.builder("mcp-server").build(), McpJsonDefaults.getMapper());
 
       try (McpSyncClient mcpClient = McpClient.sync(transport)
               .clientInfo(new McpSchema.Implementation("my-client", "1.0.0"))
@@ -1529,13 +1562,13 @@ Convert MCP tools for use with the SDK's [tool runner](https://platform.claude.c
           List<McpBetaTool> betaTools = BetaMcp.mcpTools(mcpClient.listTools().tools(), mcpClient);
 
           MessageCreateParams params = MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_5_5)
-                  .maxTokens(1024L)
-                  .addUserMessage("What tools do you have available?")
-                  .addTools(betaTools)
-                  .build();
+              .model(Model.CLAUDE_OPUS_5_5)
+              .maxTokens(1024L)
+              .addUserMessage("What tools do you have available?")
+              .addTools(betaTools)
+              .build();
 
-          // The runner yields one message per assistant turn; the last is the final response
+          // The runner yields one message for each assistant turn; the last is the final response
           BetaToolRunner runner = anthropic.beta().messages().toolRunner(params);
           BetaMessage finalMessage = null;
           for (BetaMessage message : runner) {
@@ -1665,13 +1698,13 @@ Convert MCP prompt messages into Claude API message format:
 
   ```java Java
   McpSchema.GetPromptResult prompt = mcpClient.getPrompt(
-          new McpSchema.GetPromptRequest("my-prompt", Map.of()));
+      new McpSchema.GetPromptRequest("my-prompt", Map.of()));
 
   BetaMessage response = anthropic.beta().messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5_5)
-          .maxTokens(1024L)
-          .messages(BetaMcp.mcpMessages(prompt.messages()))
-          .build());
+      .model(Model.CLAUDE_OPUS_5_5)
+      .maxTokens(1024L)
+      .messages(BetaMcp.mcpMessages(prompt.messages()))
+      .build());
 
   IO.println(response);
   ```
@@ -1775,10 +1808,9 @@ Convert MCP resources into content blocks to include in messages, or into file o
           MaxTokens = 1024,
           Messages =
           [
-              new BetaMessageParam
+              new BetaUserMessageParam
               {
-                  Role = Role.User,
-                  Content = new BetaMessageParamContent(
+                  Content = new BetaMessageContentParam(
                       [
                           BetaMcp.ResourceToContent(resource),
                           new BetaTextBlockParam { Text = "Summarize this document" },
@@ -1795,7 +1827,7 @@ Convert MCP resources into content blocks to include in messages, or into file o
   var fileResource = await mcpClient.ReadResourceAsync("file:///path/to/data.json");
   var (filename, data, mediaType) = BetaMcp.ResourceToFile(fileResource);
 
-  // Build the file part explicitly so the resource's filename and MIME type
+  // Build the file part explicitly so the resource's file name and MIME type
   // carry through to the upload.
   var file = new BinaryContent { Stream = new MemoryStream(data), FileName = filename };
   if (mediaType is not null)
@@ -1859,39 +1891,39 @@ Convert MCP resources into content blocks to include in messages, or into file o
   ```java Java
   // As a content block in a message
   McpSchema.ReadResourceResult resource = mcpClient.readResource(
-          new McpSchema.ReadResourceRequest("file:///path/to/doc.txt"));
+      new McpSchema.ReadResourceRequest("file:///path/to/doc.txt"));
 
   List<BetaContentBlockParam> content =
-          new ArrayList<>(BetaMcp.mcpResourceContents(resource));
+      new ArrayList<>(BetaMcp.mcpResourceContents(resource));
   content.add(BetaContentBlockParam.ofText(
-          BetaTextBlockParam.builder().text("Summarize this document").build()));
+      BetaTextBlockParam.builder()
+          .text("Summarize this document")
+          .build()));
 
   BetaMessage response = anthropic.beta().messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_5_5)
-          .maxTokens(1024L)
-          .addUserMessageOfBetaContentBlockParams(content)
-          .build());
+      .model(Model.CLAUDE_OPUS_5_5)
+      .maxTokens(1024L)
+      .addUserMessageOfContentBlockParams(content)
+      .build());
 
   IO.println(response);
 
   // As a file upload
   McpSchema.ReadResourceResult fileResource = mcpClient.readResource(
-          new McpSchema.ReadResourceRequest("file:///path/to/data.json"));
+      new McpSchema.ReadResourceRequest("file:///path/to/data.json"));
 
   McpResourceFile resourceFile = BetaMcp.mcpResourceFiles(fileResource).getFirst();
 
-  // Build the file part explicitly so the resource's filename and MIME type
+  // Build the file part explicitly so the resource's file name and MIME type
   // carry through to the upload.
   MultipartField.Builder<InputStream> fileField = MultipartField.<InputStream>builder()
-          .value(new ByteArrayInputStream(resourceFile.content()))
-          .filename(resourceFile.filename());
-  if (resourceFile.mimeType() != null) {
-      fileField.contentType(resourceFile.mimeType());
-  }
+      .value(new ByteArrayInputStream(resourceFile.content()))
+      .filename(resourceFile.filename());
+  resourceFile.mimeType().ifPresent(fileField::contentType);
 
   var uploaded = anthropic.files().upload(FileUploadParams.builder()
-          .file(fileField.build())
-          .build());
+      .file(fileField.build())
+      .build());
 
   IO.println(uploaded.id());
   ```
@@ -1952,7 +1984,7 @@ Convert MCP resources into content blocks to include in messages, or into file o
 
 ### Error handling
 
-The conversion functions fail with `UnsupportedMCPValueError` (go: `UnsupportedValueError`; java, csharp: `AnthropicInvalidDataException`) if an MCP value isn't supported by the Claude API (thrown, or in Go returned as an error). This can happen with unsupported content types, MIME types, or resource links (resolve resource links with your MCP client before converting).
+The conversion functions fail with `UnsupportedMCPValueError` (go: `UnsupportedValueError`; java, csharp: `AnthropicInvalidDataException`) if an MCP value isn't supported by the Claude API (thrown, or in Go returned as an error). This can occur with unsupported content types, MIME types, or resource links (resolve resource links with your MCP client before converting).
 
 ## Batch requests
 
@@ -1970,9 +2002,9 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ### Key changes
 
-1. **New beta header:** Change from `mcp-client-2025-04-04` to `mcp-client-2025-11-20`
-2. **Tool configuration moved:** Tool configuration now lives in the `tools` array as MCPToolset objects, not in the MCP server definition
-3. **More flexible configuration:** New pattern supports allowlisting, denylisting, and per-tool configuration
+1. **New beta header:** Change from `mcp-client-2025-04-04` to `mcp-client-2025-11-20`.
+2. **Tool configuration moved:** Tool configuration now lives in the `tools` array as MCPToolset objects, not in the MCP server definition.
+3. **More flexible configuration:** The new pattern supports allowlisting, denylisting, and per-tool configuration.
 
 ### Migration steps
 

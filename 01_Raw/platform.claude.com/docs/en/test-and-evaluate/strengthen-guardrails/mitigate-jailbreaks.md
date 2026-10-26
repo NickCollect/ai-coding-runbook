@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks
-fetched_at: 2026-10-12T06:49:50.066289+00:00
+fetched_at: 2026-10-26T05:40:11.040934+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,18 +10,18 @@ url: https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails
 description: Defend your application against jailbreaks and prompt injection with input screening, hardened system prompts, and safe handling of untrusted tool content.
 ---
 
-Jailbreaking and prompt injection are attempts to make Claude ignore its guidelines or your instructions. While Claude is inherently resilient to such attacks, the additional steps on this page strengthen your guardrails, particularly against uses that violate Anthropic's [Terms of Service](https://www.anthropic.com/legal/commercial-terms) or [Usage Policy](https://www.anthropic.com/legal/aup).
+Jailbreaking and prompt injection are attempts to make Claude ignore its guidelines or your instructions. Although Claude is inherently resilient to such attacks, the additional steps on this page strengthen your guardrails, particularly against uses that violate Anthropic's [Terms of Service](https://www.anthropic.com/legal/commercial-terms) or [Usage Policy](https://www.anthropic.com/legal/aup).
 
 These attacks fall into two categories with different threat models:
 
 * **Jailbreaks and direct prompt injection**, where the *user* of your application is the adversary and crafts inputs intended to bypass your guardrails.
-* **Indirect prompt injection**, where the user is trusted but Claude processes *third-party content* (web pages, emails, documents, tool results) that contains adversarial instructions.
+* **Indirect prompt injection**, where the user is trusted but Claude processes *third-party content* (webpages, emails, documents, tool results) that contains adversarial instructions.
 
 ## Jailbreaks and direct prompt injection
 
 In this threat model, a user is deliberately crafting inputs to manipulate your application into producing content or taking actions you don't want it to. These mitigations strengthen your application's guardrails:
 
-* **Harmlessness screens:** Use a lightweight model like Claude Haiku 5.5 to pre-screen user input before it reaches your main conversation. Use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) to constrain the response to a simple classification. Claude Haiku 5.5 runs [safety classifiers](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) that can decline the screening request itself, so treat a response with `stop_reason: "refusal"` as a harmful verdict.
+* **Harmlessness screens:** Use a lightweight model such as Claude Haiku 5.5 to pre-screen user input before it reaches your main conversation. Use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) to constrain the response to a simple classification. Claude Haiku 5.5 runs [safety classifiers](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) that can decline the screening request itself, so treat a response with `stop_reason: "refusal"` as a harmful verdict.
 
   <Accordion title="Example: Harmlessness screen for content moderation">
     ```text User wrap
@@ -76,7 +76,7 @@ In this threat model, a user is deliberately crafting inputs to manipulate your 
 
 ## Indirect prompt injection
 
-In this threat model, you're protecting your users from instructions embedded in content that Claude reads on their behalf: the body of an inbound email, a fetched web page, OCR output from an uploaded file, or the result of a tool call. An attacker who can influence that content may embed instructions that try to redirect Claude.
+In this threat model, you're protecting your users from instructions embedded in content that Claude reads on their behalf: the body of an inbound email, a fetched webpage, OCR output from an uploaded file, or the result of a tool call. An attacker who can influence that content might embed instructions that try to redirect Claude.
 
 Structure your application so that Claude can reliably distinguish untrusted content from your instructions:
 
@@ -117,7 +117,7 @@ Structure your application so that Claude can reliably distinguish untrusted con
     The email body is a JSON string inside a JSON object. Even though it contains text that looks like an instruction, the encoding makes it unambiguous that this is data, not a directive.
   </Accordion>
 
-* **Don't put your own instructions in tool results.** Because Claude treats tool-result content as untrusted data, instructions you place there may be ignored or flagged as a potential injection. Send your instructions in a `user` turn that follows the `tool_result` block. On supported models, you can also use a [mid-conversation system message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages).
+* **Don't put your own instructions in tool results.** Because Claude treats tool-result content as untrusted data, instructions you place there might be ignored or flagged as a potential injection. Send your instructions in a `user` turn that follows the `tool_result` block. On supported models, you can also use a [mid-conversation system message](https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages).
 
 * **Limit Claude's access to sensitive data and actions.** Apply the principle of least privilege so that a successful injection can do minimal damage: don't give Claude access to secrets it doesn't need, run tools in sandboxed environments, and scope permissions as narrowly as possible.
 
@@ -169,7 +169,7 @@ Structure your application so that Claude can reliably distinguish untrusted con
 
   [browser use tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-tool)
 
-  , Anthropic runs additional classifiers that scan what the tools return, such as screenshots or page text, for potential prompt injections and steer Claude to check whether the instruction really came from you before acting. See those pages for details and opt-out information.
+  , Anthropic runs additional classifiers on what the tools return, such as screenshots or page text. The classifiers scan this content for potential prompt injections and steer Claude to check whether the instruction really came from you before acting. See those pages for details and opt-out information.
 </Note>
 
 ## Continuous monitoring
@@ -210,7 +210,7 @@ Combine strategies for robust protection. Here's an enterprise-grade example wit
   Evaluate if this query violates SEC rules, FINRA guidelines, or client privacy.
   ```
 
-  Use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) to constrain the response to a boolean classification.
+  Use [structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) to constrain the response to a Boolean classification.
 </Accordion>
 
 By layering these strategies, you create a robust defense against jailbreaking and prompt injections, ensuring your Claude-powered applications maintain the highest standards of safety and compliance.

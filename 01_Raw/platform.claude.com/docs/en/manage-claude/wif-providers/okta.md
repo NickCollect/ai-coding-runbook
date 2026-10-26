@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/okta
-fetched_at: 2026-10-19T05:32:46.111552+00:00
+fetched_at: 2026-10-26T05:40:08.112500+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ At a high level you need to:
 The exact navigation depends on your Okta org configuration and admin console version. The following numbered steps walk through one common path:
 
 1. **Create a service app integration.** In the Okta Admin Console, create a new app integration of type **API Services** (OIDC, machine-to-machine). Note the generated **Client ID**.
-2. **Configure client authentication.** For a keyless setup, choose **Public key / Private key** (`private_key_jwt`) and register your workload's public JWK. Alternatively, use a client secret if your environment can store one securely. For the following example you may need to disable the DPoP requirement on the application; ensure that your production setup adheres to your organization's security requirements.
+2. **Configure client authentication.** For a keyless setup, select **Public key / Private key** (`private_key_jwt`) and register your workload's public JWK. Alternatively, use a client secret if your environment can store one securely. For the following example you might need to disable the DPoP requirement on the application; ensure that your production setup adheres to your organization's security requirements.
 3. **Set the audience.** On your custom authorization server, set the audience to `https://api.anthropic.com` so issued access tokens carry that `aud` claim. Anthropic validates `aud` against this fixed value.
 4. **Grant a scope.** On your custom authorization server, ensure at least one scope exists that the service app is allowed to request (for example, `anthropic.access`). Okta rejects `client_credentials` requests that do not include a granted scope.
 5. **Create an access policy.** On your custom authorization server, create an access policy with at least one rule that allows your service app to request the scope you granted in step 4.
@@ -112,8 +112,30 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
     -H "authorization: Bearer $ACCESS_TOKEN" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d '{"model": "claude-opus-5-5", "max_tokens": 1024, "messages": [{"role": "user", "content": "Hello, Claude"}]}' \
-    | jq -r '.content[] | select(.type == "text") | .text'
+    -d '{
+      "model": "claude-opus-5-5",
+      "max_tokens": 1024,
+      "messages": [{"role": "user", "content": "Hello, Claude"}]
+    }'
+  ```
+
+  ```bash CLI
+  # 1. Request an access token from Okta and write it to a temp file.
+  export ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
+  curl -sS "$OKTA_ISSUER/v1/token" \
+    -d grant_type=client_credentials \
+    -d scope=anthropic.access \
+    -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
+    --data-urlencode client_assertion="$SIGNED_CLIENT_ASSERTION" \
+    | jq -r .access_token > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
+
+  # 2. Call the Claude API. The CLI reads ANTHROPIC_FEDERATION_RULE_ID,
+  # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and
+  # ANTHROPIC_IDENTITY_TOKEN_FILE and performs the exchange.
+  ant messages create \
+    --model claude-opus-5-5 \
+    --max-tokens 1024 \
+    --message '{role: user, content: "Hello, Claude"}'
   ```
 
   ```python Python
@@ -200,6 +222,58 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
   }
   ```
 
+  ```csharp C#
+  using Anthropic.Credentials;
+  // ...
+
+  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
+  {
+      FederationRuleId = Environment.GetEnvironmentVariable("ANTHROPIC_FEDERATION_RULE_ID")!,
+      OrganizationId = Environment.GetEnvironmentVariable("ANTHROPIC_ORGANIZATION_ID"),
+      ServiceAccountId = Environment.GetEnvironmentVariable("ANTHROPIC_SERVICE_ACCOUNT_ID"),
+      WorkspaceId = Environment.GetEnvironmentVariable("ANTHROPIC_WORKSPACE_ID"),
+      IdentityTokenProvider = new OktaTokenProvider(),
+  });
+  using var client = new AnthropicClient(new ClientOptions { Credentials = credentials });
+
+  var message = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeOpus5_5,
+      MaxTokens = 1024,
+      Messages = [new UserMessageParam { Content = "Hello, Claude" }],
+  });
+  foreach (var block in message.Content)
+  {
+      if (block.Value is TextBlock textBlock)
+      {
+          Console.WriteLine(textBlock.Text);
+      }
+  }
+
+  class OktaTokenProvider : IIdentityTokenProvider
+  {
+      private static readonly HttpClient Http = new();
+
+      public async Task<string> GetIdentityTokenAsync(CancellationToken ct = default)
+      {
+          var form = new FormUrlEncodedContent(new Dictionary<string, string>
+          {
+              ["grant_type"] = "client_credentials",
+              ["scope"] = "anthropic.access",
+              ["client_assertion_type"] = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+              // Build the RFC 7523 client_assertion JWT signed with your Okta app's private key
+              ["client_assertion"] = BuildSignedClientAssertion(),
+          });
+          var response = await Http.PostAsync(
+              $"{Environment.GetEnvironmentVariable("OKTA_ISSUER")}/v1/token", form, ct);
+          response.EnsureSuccessStatusCode();
+          using var json = await JsonDocument.ParseAsync(
+              await response.Content.ReadAsStreamAsync(ct), default, ct);
+          return json.RootElement.GetProperty("access_token").GetString()!;
+      }
+  }
+  ```
+
   ```go Go
   package main
 
@@ -212,8 +286,8 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
   	"os"
   	"strings"
 
-  	"github.com/anthropics/anthropic-sdk-go"
-  	"github.com/anthropics/anthropic-sdk-go/option"
+  	"github.com/anthropics/anthropic-sdk-go/v2"
+  	"github.com/anthropics/anthropic-sdk-go/v2/option"
   )
 
   func fetchOktaToken(ctx context.Context) (string, error) {
@@ -291,18 +365,18 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
 
   void main() throws Exception {
       var form = Map.of(
-                      "grant_type", "client_credentials",
-                      "scope", "anthropic.access",
-                      "client_assertion_type", "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-                      // Build the RFC 7523 client_assertion JWT signed with your Okta app's private key
-                      "client_assertion", buildSignedClientAssertion())
-              .entrySet().stream()
-              .map(entry -> entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), UTF_8))
-              .collect(Collectors.joining("&"));
+              "grant_type", "client_credentials",
+              "scope", "anthropic.access",
+              "client_assertion_type", "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+              // Build the RFC 7523 client_assertion JWT signed with your Okta app's private key
+              "client_assertion", buildSignedClientAssertion())
+          .entrySet().stream()
+          .map(entry -> entry.getKey() + "=" + URLEncoder.encode(entry.getValue(), UTF_8))
+          .collect(Collectors.joining("&"));
       var request = HttpRequest.newBuilder(URI.create(System.getenv("OKTA_ISSUER") + "/v1/token"))
-              .header("content-type", "application/x-www-form-urlencoded")
-              .POST(HttpRequest.BodyPublishers.ofString(form))
-              .build();
+          .header("content-type", "application/x-www-form-urlencoded")
+          .POST(HttpRequest.BodyPublishers.ofString(form))
+          .build();
 
       // The Java SDK takes the token itself or a file path, not a function; with
       // source("value"), path(...) holds the token. The SDK sends that same token
@@ -314,101 +388,29 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
       String oktaToken = new ObjectMapper().readTree(response.body()).get("access_token").asText();
 
       AnthropicClient client = AnthropicOkHttpClient.builder()
-              .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
-                      .organizationId(System.getenv("ANTHROPIC_ORGANIZATION_ID"))
-                      .workspaceId(System.getenv("ANTHROPIC_WORKSPACE_ID"))
-                      .authentication(AuthenticationConfig.builder()
-                              .type(AuthenticationType.OIDC_FEDERATION)
-                              .federationRuleId(System.getenv("ANTHROPIC_FEDERATION_RULE_ID"))
-                              .serviceAccountId(System.getenv("ANTHROPIC_SERVICE_ACCOUNT_ID"))
-                              .identityToken(IdentityTokenConfig.builder()
-                                      .source("value")
-                                      .path(oktaToken)
-                                      .build())
-                              .build())
-                      .build()))
-              .build();
+          .configurationProvider(InMemoryProfileConfigProvider.of(ProfileConfig.builder()
+              .organizationId(System.getenv("ANTHROPIC_ORGANIZATION_ID"))
+              .workspaceId(System.getenv("ANTHROPIC_WORKSPACE_ID"))
+              .authentication(AuthenticationConfig.builder()
+                  .type(AuthenticationType.OIDC_FEDERATION)
+                  .federationRuleId(System.getenv("ANTHROPIC_FEDERATION_RULE_ID"))
+                  .serviceAccountId(System.getenv("ANTHROPIC_SERVICE_ACCOUNT_ID"))
+                  .identityToken(IdentityTokenConfig.builder()
+                      .source("value")
+                      .path(oktaToken)
+                      .build())
+                  .build())
+              .build()))
+          .build();
 
       var message = client.messages().create(MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_5_5)
-              .maxTokens(1024)
-              .addUserMessage("Hello, Claude")
-              .build());
+          .model(Model.CLAUDE_OPUS_5_5)
+          .maxTokens(1024)
+          .addUserMessage("Hello, Claude")
+          .build());
 
       IO.println(message.content());
   }
-  ```
-
-  ```csharp C#
-  using Anthropic.Credentials;
-  // ...
-
-  var credentials = new WorkloadIdentityCredentials(new WorkloadIdentityOptions
-  {
-      FederationRuleId = Environment.GetEnvironmentVariable("ANTHROPIC_FEDERATION_RULE_ID")!,
-      OrganizationId = Environment.GetEnvironmentVariable("ANTHROPIC_ORGANIZATION_ID"),
-      ServiceAccountId = Environment.GetEnvironmentVariable("ANTHROPIC_SERVICE_ACCOUNT_ID"),
-      WorkspaceId = Environment.GetEnvironmentVariable("ANTHROPIC_WORKSPACE_ID"),
-      IdentityTokenProvider = new OktaTokenProvider(),
-  });
-  using var client = new AnthropicClient(new ClientOptions { Credentials = credentials });
-
-  var message = await client.Messages.Create(new()
-  {
-      Model = Model.ClaudeOpus5_5,
-      MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
-  });
-  foreach (var block in message.Content)
-  {
-      if (block.Value is TextBlock textBlock)
-      {
-          Console.WriteLine(textBlock.Text);
-      }
-  }
-
-  class OktaTokenProvider : IIdentityTokenProvider
-  {
-      private static readonly HttpClient Http = new();
-
-      public async Task<string> GetIdentityTokenAsync(CancellationToken ct = default)
-      {
-          var form = new FormUrlEncodedContent(new Dictionary<string, string>
-          {
-              ["grant_type"] = "client_credentials",
-              ["scope"] = "anthropic.access",
-              ["client_assertion_type"] = "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-              // Build the RFC 7523 client_assertion JWT signed with your Okta app's private key
-              ["client_assertion"] = BuildSignedClientAssertion(),
-          });
-          var response = await Http.PostAsync(
-              $"{Environment.GetEnvironmentVariable("OKTA_ISSUER")}/v1/token", form, ct);
-          response.EnsureSuccessStatusCode();
-          using var json = await JsonDocument.ParseAsync(
-              await response.Content.ReadAsStreamAsync(ct), default, ct);
-          return json.RootElement.GetProperty("access_token").GetString()!;
-      }
-  }
-  ```
-
-  ```bash CLI
-  # 1. Request an access token from Okta and write it to a temp file.
-  ANTHROPIC_IDENTITY_TOKEN_FILE=$(mktemp)
-  curl -sS "$OKTA_ISSUER/v1/token" \
-    -d grant_type=client_credentials \
-    -d scope=anthropic.access \
-    -d client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer \
-    --data-urlencode client_assertion="$SIGNED_CLIENT_ASSERTION" \
-    | jq -r .access_token > "$ANTHROPIC_IDENTITY_TOKEN_FILE"
-  export ANTHROPIC_IDENTITY_TOKEN_FILE
-
-  # 2. Call the Claude API. The CLI reads ANTHROPIC_FEDERATION_RULE_ID,
-  # ANTHROPIC_ORGANIZATION_ID, ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and
-  # ANTHROPIC_IDENTITY_TOKEN_FILE and performs the exchange.
-  ant messages create \
-    --model claude-opus-5-5 \
-    --max-tokens 1024 \
-    --message '{role: user, content: "Hello, Claude"}'
   ```
 
   ```php PHP
@@ -496,11 +498,11 @@ Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a t
   ```
 </CodeGroup>
 
-Except in Java (see the comment in that example), the SDK example passes your Okta token fetch to `identity_token_provider` (typescript: `identityTokenProvider`; php: `identityProvider`; csharp: `IdentityTokenProvider`; go: `option.WithFederationTokenProvider`; java: `IdentityTokenConfig`) as a token provider. The Claude SDK calls it each time the Anthropic access token approaches expiry, so your Okta fetcher should return a fresh token on each call rather than caching one indefinitely. The `ant` CLI re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on each exchange, so refresh that file on a timer for long-running shells.
+Except in Java (see the comment in that example), the SDK example passes your Okta token fetch to `identity_token_provider` (typescript: `identityTokenProvider`; php: `identityProvider`; csharp: `IdentityTokenProvider`; go: `option.WithFederationTokenProvider()`; java: `IdentityTokenConfig`) as a token provider. The Claude SDK calls it each time the Anthropic access token approaches expiry, so your Okta fetcher should return a fresh token on each call rather than caching one indefinitely. The `ant` CLI re-reads `ANTHROPIC_IDENTITY_TOKEN_FILE` on each exchange, so refresh that file on a timer for long-running shells.
 
 ## Verify the setup
 
-A successful exchange returns an `access_token` beginning with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason and see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange); the most common Okta-side cause is an `issuer_url` mismatch (it must include the `/oauth2/<auth-server-id>` path; the Okta org authorization server is not usable).
+A successful exchange returns an `access_token` starting with `sk-ant-oat01-` and an `expires_in` value in seconds. If the exchange fails with the opaque `401` `authentication_error` response (message `Authentication failed`), check the [authentication history page](https://platform.claude.com/settings/workload-identity-federation?tab=history) in the Claude Console for the deny reason and see [Troubleshoot a failed exchange](https://platform.claude.com/docs/en/manage-claude/wif-reference#troubleshoot-a-failed-exchange). The most common Okta-side cause is an `issuer_url` mismatch. The `issuer_url` must include the `/oauth2/<auth-server-id>` path, and the Okta org authorization server is not usable.
 
 ## Scope your rule
 
@@ -513,9 +515,9 @@ Lock the rule's `match` block to the narrowest scope that fits your use case:
 * **Pin the exact Client ID:** Set `subject_prefix` to the service app's full Client ID with no trailing `*`.
 * **Pin the audience:** Match the `audience` value you configured on the authorization server so tokens minted for a different audience are rejected.
 * **Match on custom claims:** For finer-grained scoping, add claims in the authorization server's **Claims** tab and match them with the rule's `claims` map or a CEL `condition`.
-* **Use one rule per service app:** Create a separate federation rule for each service app rather than sharing one rule across apps.
+* **Use one rule for each service app:** Create a separate federation rule for each service app rather than sharing one rule across apps.
 
 ## Next steps
 
 * Review the [WIF reference](https://platform.claude.com/docs/en/manage-claude/wif-reference) for the full credential resolution order and profile configuration.
-* See the [WIF reference](https://platform.claude.com/docs/en/manage-claude/wif-reference#rule-matching-semantics) to match on custom Okta claims with CEL expressions.
+* See [Rule matching semantics](https://platform.claude.com/docs/en/manage-claude/wif-reference#rule-matching-semantics) to match on custom Okta claims with CEL expressions.

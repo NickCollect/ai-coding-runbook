@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/results
-fetched_at: 2026-10-19T05:32:53.784306+00:00
+fetched_at: 2026-10-26T05:40:23.565289+00:00
 fetch_method: mintlify_md
 ---
 
@@ -140,6 +140,8 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
   - `"spend-limit-reads-2026-09-26"`
 
   - `"telemetry-destinations-2026-08-11"`
+
+  - `"webhooks-2026-10-07"`
 
 - `"anthropic-workspace-id": optional string`
 
@@ -3333,6 +3335,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `BetaCacheMissModelChanged object`
 
+              A `cache_miss_reason` for a request whose `model` or `speed` differs from the previous request's.
+
+              See the [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+
               - `type: "model_changed"`
 
                 default: model_changed
@@ -3342,6 +3348,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `BetaCacheMissSystemChanged object`
+
+              A `cache_miss_reason` for a request whose `system` differs from the previous request's.
+
+              See the [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "system_changed"`
 
@@ -3353,6 +3363,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `BetaCacheMissToolsChanged object`
 
+              A `cache_miss_reason` for a request whose `tools` differ from the previous request's, for example because tools were added, removed, or reordered.
+
+              See the [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+
               - `type: "tools_changed"`
 
                 default: tools_changed
@@ -3362,6 +3376,10 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
                 Approximate number of input tokens that would have been read from cache had the prefix matched the previous request.
 
             - `BetaCacheMissMessagesChanged object`
+
+              A `cache_miss_reason` for a request whose `messages` differ from the previous request's in an earlier entry, instead of only having entries appended. The `model`, `system`, and `tools` match.
+
+              See the [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "messages_changed"`
 
@@ -3373,11 +3391,23 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
             - `BetaCacheMissPreviousMessageNotFound object`
 
+              A `cache_miss_reason` for when the API doesn't have a stored record of the request that `diagnostics.previous_message_id` references.
+
+              This doesn't mean that this request changed.
+
+              See the [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
+
               - `type: "previous_message_not_found"`
 
                 default: previous_message_not_found
 
             - `BetaCacheMissUnavailable object`
+
+              A `cache_miss_reason` for when the API can't give a diagnosis. The request itself was processed normally.
+
+              This includes a request whose `model`, `system`, and `tools` match the previous request's but whose other prompt-affecting parameters, such as `thinking` or `tool_choice`, differ.
+
+              See the [cache diagnostics guide](https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics?sdk_languages=http#cache-miss-reason-types) to learn what to change for each reason.
 
               - `type: "unavailable"`
 
@@ -4120,7 +4150,7 @@ Learn more about the Message Batches API in our [user guide](https://platform.cl
 
 ```bash
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/results \
-    -H 'anthropic-version: 2023-06-01' \
+    -H 'anthropic-version: 2026-10-21' \
     -H 'anthropic-beta: message-batches-2024-09-24' \
-    -H "X-Api-Key: $ANTHROPIC_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_API_KEY"
 ```

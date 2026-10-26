@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
-fetched_at: 2026-10-12T06:49:42.653702+00:00
+fetched_at: 2026-10-26T05:39:57.925795+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ For the full response schema, see the [Messages API reference](https://platform.
 
 | Value                                                                                                                                        | When it occurs                                  | What to do                                                                                                                                              |
 | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`end_turn`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#end-turn)                                           | Claude finished its response naturally.         | Use the response.                                                                                                                                       |
+| [`end_turn`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#end-turn)                                           | Claude completed its response naturally.        | Use the response.                                                                                                                                       |
 | [`max_tokens`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#max-tokens)                                       | The response reached your `max_tokens` limit.   | Raise `max_tokens` or [continue the response](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#ensuring-complete-responses). |
 | [`stop_sequence`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#stop-sequence)                                 | Claude emitted one of your `stop_sequences`.    | Read `stop_sequence` to see which one fired.                                                                                                            |
 | [`tool_use`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#tool-use)                                           | Claude is calling a tool.                       | Run the tool and return the result. A server tool call still missing its result block completes in a later response.                                    |
@@ -55,7 +55,7 @@ The `stop_reason` field is part of every successful Messages API response. Unlik
 
 ### end\_turn
 
-The most common stop reason. Indicates Claude finished its response naturally.
+The most common stop reason. Indicates Claude completed its response naturally.
 
 <CodeGroup>
   ```bash cURL
@@ -67,15 +67,14 @@ The most common stop reason. Indicates Claude finished its response naturally.
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello!"}]
-    }' | jq 'if .stop_reason == "end_turn" then (.content[] | select(.type == "text") | .text) else . end'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello!"}' \
-    --format json | jq 'if .stop_reason == "end_turn" then (.content[] | select(.type == "text") | .text) else . end'
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -104,9 +103,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
   if (response.stop_reason === "end_turn") {
     // Process the complete response
-    const textBlock = response.content.find(
-      (block): block is Anthropic.TextBlock => block.type === "text"
-    );
+    const textBlock = response.content.find((block) => block.type === "text");
     console.log(textBlock?.text);
   }
   ```
@@ -118,7 +115,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello!" }]
+      Messages = [new UserMessageParam { Content = "Hello!" }]
   });
 
   if (response.StopReason == "end_turn")
@@ -200,7 +197,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   )
@@ -215,11 +212,11 @@ The most common stop reason. Indicates Claude finished its response naturally.
 </CodeGroup>
 
 <Accordion title="Empty responses with end_turn">
-  Sometimes Claude returns an empty response (exactly 2–3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude interprets that the assistant turn is complete, particularly after tool results.
+  Sometimes Claude returns an empty response (exactly 2–3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude determines that the assistant turn is complete, particularly after tool results.
 
   **Common causes:**
 
-  * Adding text blocks immediately after tool results (Claude learns to expect the user to always insert text after tool results, so it ends its turn to follow the pattern)
+  * Adding text blocks immediately after tool results (the history then shows user text after every tool result, so Claude ends its turn to follow that pattern)
   * Sending Claude's completed response back without adding anything (Claude already determined it's done, so it will remain done)
 
   **How to prevent empty responses:**
@@ -271,7 +268,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
             "content": [
                 {"type": "tool_result", "tool_use_id": "toolu_123", "content": "6912"}
             ],
-        },  # Just the tool_result, no additional text
+        },  # Only the tool_result, no additional text
     ]
     ```
 
@@ -315,7 +312,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
       },
       {
         role: "user",
-        // Just the tool_result, no additional text
+        // Only the tool_result, no additional text
         content: [{ type: "tool_result", tool_use_id: "toolu_123", content: "6912" }]
       }
     ];
@@ -332,18 +329,16 @@ The most common stop reason. Indicates Claude finished its response naturally.
     // INCORRECT: Adding text immediately after tool_result
     List<MessageParam> messages =
     [
-        new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
-        new()
+        new UserMessageParam { Content = "Calculate the sum of 1234 and 5678" },
+        new AssistantMessageParam
         {
-            Role = Role.Assistant,
             Content = new List<ContentBlockParam>
             {
                 new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
             }
         },
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
             Content = new List<ContentBlockParam>
             {
                 new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" },
@@ -355,19 +350,17 @@ The most common stop reason. Indicates Claude finished its response naturally.
     // CORRECT: Send tool results directly without additional text
     messages =
     [
-        new() { Role = Role.User, Content = "Calculate the sum of 1234 and 5678" },
-        new()
+        new UserMessageParam { Content = "Calculate the sum of 1234 and 5678" },
+        new AssistantMessageParam
         {
-            Role = Role.Assistant,
             Content = new List<ContentBlockParam>
             {
                 new ToolUseBlockParam { ID = "toolu_123", Name = "calculator", Input = input }
             }
         },
-        new()
+        new UserMessageParam
         {
-            Role = Role.User,
-            // Just the tool_result, no additional text
+            // Only the tool_result, no additional text
             Content = new List<ContentBlockParam>
             {
                 new ToolResultBlockParam { ToolUseID = "toolu_123", Content = "6912" }
@@ -397,7 +390,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
     	anthropic.NewAssistantMessage(
     		anthropic.NewToolUseBlock("toolu_123", input, "calculator"),
     	),
-    	// Just the tool_result, no additional text
+    	// Only the tool_result, no additional text
     	anthropic.NewUserMessage(
     		anthropic.NewToolResultBlock("toolu_123", "6912", false),
     	),
@@ -417,31 +410,33 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
     // INCORRECT: Adding text immediately after tool_result
     List<MessageParam> messages = List.of(
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .content("Calculate the sum of 1234 and 5678").build(),
-        MessageParam.builder().role(MessageParam.Role.ASSISTANT)
-            .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .contentOfBlockParams(List.of(
-                ContentBlockParam.ofToolResult(
-                    ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build()),
-                // Don't add text after tool_result
-                ContentBlockParam.ofText(TextBlockParam.builder().text("Here's the result").build())
-            )).build()
+        MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
+        MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
+        MessageParam.ofUserOfContentBlockParams(List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder()
+                    .toolUseId("toolu_123")
+                    .content("6912")
+                    .build()),
+            // Don't add text after tool_result
+            ContentBlockParam.ofText(TextBlockParam.builder()
+                .text("Here's the result")
+                .build())
+        ))
     );
 
     // CORRECT: Send tool results directly without additional text
     messages = List.of(
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .content("Calculate the sum of 1234 and 5678").build(),
-        MessageParam.builder().role(MessageParam.Role.ASSISTANT)
-            .contentOfBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))).build(),
-        // Just the tool_result, no additional text
-        MessageParam.builder().role(MessageParam.Role.USER)
-            .contentOfBlockParams(List.of(
-                ContentBlockParam.ofToolResult(
-                    ToolResultBlockParam.builder().toolUseId("toolu_123").content("6912").build())
-            )).build()
+        MessageParam.ofUser("Calculate the sum of 1234 and 5678"),
+        MessageParam.ofAssistantOfContentBlockParams(List.of(ContentBlockParam.ofToolUse(toolUse))),
+        // Only the tool_result, no additional text
+        MessageParam.ofUserOfContentBlockParams(List.of(
+            ContentBlockParam.ofToolResult(
+                ToolResultBlockParam.builder()
+                    .toolUseId("toolu_123")
+                    .content("6912")
+                    .build())
+        ))
     );
     ```
 
@@ -486,7 +481,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
         ],
         [
             'role' => 'user',
-            // Just the tool_result, no additional text
+            // Only the tool_result, no additional text
             'content' => [
                 ['type' => 'tool_result', 'tool_use_id' => 'toolu_123', 'content' => '6912'],
             ],
@@ -535,7 +530,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
       },
       {
         role: "user",
-        # Just the tool_result, no additional text
+        # Only the tool_result, no additional text
         content: [
           { type: "tool_result", tool_use_id: "toolu_123", content: "6912" }
         ]
@@ -556,7 +551,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
         # Check if response is empty
         if response.stop_reason == "end_turn" and not response.content:
             # INCORRECT: Don't just retry with the empty response
-            # This won't work because Claude already decided it's done
+            # This won't work because Claude already determined it's done
 
             # CORRECT: Add a continuation prompt in a NEW user message
             messages.append({"role": "user", "content": "Please continue"})
@@ -582,7 +577,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
       // Check if response is empty
       if (response.stop_reason === "end_turn" && response.content.length === 0) {
         // INCORRECT: Don't just retry with the empty response
-        // This won't work because Claude already decided it's done
+        // This won't work because Claude already determined it's done
 
         // CORRECT: Add a continuation prompt in a NEW user message
         messages.push({ role: "user", content: "Please continue" });
@@ -612,7 +607,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
         if (response.StopReason == "end_turn" && response.Content.Count == 0)
         {
             // CORRECT: Add a continuation prompt in a NEW user message
-            messages.Add(new() { Role = Role.User, Content = "Please continue" });
+            messages.Add(new UserMessageParam { Content = "Please continue" });
 
             response = await client.Messages.Create(new MessageCreateParams
             {
@@ -671,10 +666,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
         if (isEndTurn && response.content().isEmpty()) {
             // CORRECT: Add a continuation prompt in a NEW user message
             List<MessageParam> extended = new ArrayList<>(messages);
-            extended.add(MessageParam.builder()
-                .role(MessageParam.Role.USER)
-                .content("Please continue")
-                .build());
+            extended.add(MessageParam.ofUser("Please continue"));
 
             response = client.messages().create(
                 MessageCreateParams.builder()
@@ -741,7 +733,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
   **Best practices:**
 
-  1. **Never add text blocks immediately after tool results:** This teaches Claude to expect user input after every tool use.
+  1. **Never add text blocks immediately after tool results:** This sets a pattern of user input after every tool use, and Claude follows that pattern by ending its turn.
   2. **Don't retry empty responses without modification:** Sending the empty response back won't help.
   3. **Use continuation prompts as a last resort:** Only if these fixes don't resolve the issue.
 </Accordion>
@@ -760,15 +752,14 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
       "model": "claude-opus-5-5",
       "max_tokens": 10,
       "messages": [{"role": "user", "content": "Explain quantum physics"}]
-    }' | jq '.stop_reason'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 10 \
-    --message '{role: user, content: "Explain quantum physics"}' \
-    --format json | jq '.stop_reason'
+    --message '{role: user, content: "Explain quantum physics"}'
   ```
 
   ```python Python
@@ -811,7 +802,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 10,
-      Messages = [new() { Role = Role.User, Content = "Explain quantum physics" }]
+      Messages = [new UserMessageParam { Content = "Explain quantum physics" }]
   });
 
   if (response.StopReason == "max_tokens")
@@ -870,7 +861,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
   $response = $client->messages->create(
       maxTokens: 10,
       messages: [['role' => 'user', 'content' => 'Explain quantum physics']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   if ($response->stopReason === 'max_tokens') {
@@ -885,7 +876,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 
   # Request with limited tokens
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 10,
     messages: [{ role: "user", content: "Explain quantum physics" }]
   )
@@ -901,49 +892,14 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 <Accordion title="Incomplete tool use blocks">
   If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-  <CodeGroup exclude="shell:cURL">
-    ```bash CLI
-    RESPONSE=$(ant messages create --max-tokens 1024 --format jsonl <<'YAML'
-    model: claude-opus-5-5
-    tools:
-      - name: get_weather
-        description: Get the current weather in a given location
-        input_schema:
-          type: object
-          properties:
-            location:
-              type: string
-          required:
-            - location
-    messages:
-      - role: user
-        content: What is the weather in San Francisco?
-    YAML
-    )
+  <CodeGroup exclude="shell:cURL, shell:CLI">
+    <CodeGroupItem language="cURL">
+      This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    </CodeGroupItem>
 
-    # Check if the response was truncated mid tool use
-    STOP_REASON=$(jq -r '.stop_reason' <<<"$RESPONSE")
-    LAST_TYPE=$(jq -r '.content[-1].type' <<<"$RESPONSE")
-    if [ "$STOP_REASON" = "max_tokens" ] && [ "$LAST_TYPE" = "tool_use" ]; then
-      # Retry with a higher max_tokens
-      ant messages create --max-tokens 4096 <<'YAML'
-    model: claude-opus-5-5
-    tools:
-      - name: get_weather
-        description: Get the current weather in a given location
-        input_schema:
-          type: object
-          properties:
-            location:
-              type: string
-          required:
-            - location
-    messages:
-      - role: user
-        content: What is the weather in San Francisco?
-    YAML
-    fi
-    ```
+    <CodeGroupItem language="CLI">
+      This workflow needs more logic than a single shell command. Use the [Claude SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) to run it.
+    </CodeGroupItem>
 
     ```python Python
     # Check if response was truncated during tool use
@@ -1073,7 +1029,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 
     ```ruby Ruby
     response = client.messages.create(
-      model: "claude-opus-5-5",
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 1024,
       messages: messages,
       tools: tools
@@ -1083,7 +1039,7 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
       last_block = response.content.last
       if last_block.type == :tool_use
         response = client.messages.create(
-          model: "claude-opus-5-5",
+          model: Anthropic::Model::CLAUDE_OPUS_5_5,
           max_tokens: 4096,
           messages: messages,
           tools: tools
@@ -1109,7 +1065,7 @@ Claude encountered one of your custom stop sequences.
       "max_tokens": 1024,
       "stop_sequences": ["END", "STOP"],
       "messages": [{"role": "user", "content": "Generate text until you say END"}]
-    }' | jq '{stop_reason, stop_sequence}'
+    }'
   ```
 
   ```bash CLI
@@ -1117,8 +1073,7 @@ Claude encountered one of your custom stop sequences.
     --model claude-opus-5-5 \
     --max-tokens 1024 \
     --stop-sequence END --stop-sequence STOP \
-    --message '{role: user, content: "Generate text until you say END"}' \
-    --format json | jq '{stop_reason, stop_sequence}'
+    --message '{role: user, content: "Generate text until you say END"}'
   ```
 
   ```python Python
@@ -1157,7 +1112,7 @@ Claude encountered one of your custom stop sequences.
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       StopSequences = ["END", "STOP"],
-      Messages = [new() { Role = Role.User, Content = "Generate text until you say END" }]
+      Messages = [new UserMessageParam { Content = "Generate text until you say END" }]
   });
 
   if (response.StopReason == "stop_sequence")
@@ -1210,7 +1165,7 @@ Claude encountered one of your custom stop sequences.
   $response = $client->messages->create(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Generate text until you say END']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
       stopSequences: ['END', 'STOP'],
   );
 
@@ -1223,7 +1178,7 @@ Claude encountered one of your custom stop sequences.
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     stop_sequences: ["END", "STOP"],
     messages: [{ role: "user", content: "Generate text until you say END" }]
@@ -1237,7 +1192,7 @@ Claude encountered one of your custom stop sequences.
 
 ### tool\_use
 
-Claude is calling a tool and expects you to run it.
+Claude is calling a tool that you need to run.
 
 <Note>
   For most tool use implementations, use the [tool runner](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner), which automatically handles tool execution, result formatting, and conversation management.
@@ -1262,11 +1217,11 @@ Claude is calling a tool and expects you to run it.
         }
       }],
       "messages": [{"role": "user", "content": "What is the weather in San Francisco?"}]
-    }' | jq '.stop_reason, (.content[] | select(.type == "tool_use"))'
+    }'
   ```
 
   ```bash CLI
-  ant messages create --format json <<'YAML' | jq '.stop_reason, (.content[] | select(.type == "tool_use"))'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 1024
   messages:
@@ -1299,7 +1254,7 @@ Claude is calling a tool and expects you to run it.
 
 
   def execute_tool(name, tool_input):
-      """Execute a tool and return the result."""
+      """Run a tool and return the result."""
       return f"Weather in {tool_input.get('location', 'unknown')}: 72°F"
 
 
@@ -1311,7 +1266,7 @@ Claude is calling a tool and expects you to run it.
   )
 
   if response.stop_reason == "tool_use":
-      # Extract and execute the tool
+      # Extract and run the tool
       for block in response.content:
           if block.type == "tool_use":
               result = execute_tool(block.name, block.input)
@@ -1344,7 +1299,7 @@ Claude is calling a tool and expects you to run it.
   });
 
   if (response.stop_reason === "tool_use") {
-    // Extract and execute the tool
+    // Extract and run the tool
     for (const block of response.content) {
       if (block.type === "tool_use") {
         const result = executeTool(block.name, block.input as Record<string, string>);
@@ -1378,17 +1333,17 @@ Claude is calling a tool and expects you to run it.
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
       Tools = [weatherTool],
-      Messages = [new() { Role = Role.User, Content = "What is the weather in San Francisco?" }]
+      Messages = [new UserMessageParam { Content = "What is the weather in San Francisco?" }]
   });
 
   if (response.StopReason == "tool_use")
   {
-      // Extract and execute the tool
+      // Extract and run the tool
       foreach (var block in response.Content)
       {
           if (block.TryPickToolUse(out var toolUse))
           {
-              // Execute toolUse.Name with toolUse.Input and return the result to Claude
+              // Run toolUse.Name with toolUse.Input and return the result to Claude
           }
       }
   }
@@ -1421,7 +1376,7 @@ Claude is calling a tool and expects you to run it.
   }
 
   if response.StopReason == "tool_use" {
-  	// Extract and execute the tool
+  	// Extract and run the tool
   	for _, block := range response.Content {
   		if toolUse, ok := block.AsAny().(anthropic.ToolUseBlock); ok {
   			fmt.Println(toolUse.Name, toolUse.Input)
@@ -1456,10 +1411,10 @@ Claude is calling a tool and expects you to run it.
       );
 
       if (response.stopReason().map(StopReason.TOOL_USE::equals).orElse(false)) {
-          // Extract and execute the tool
+          // Extract and run the tool
           for (ContentBlock block : response.content()) {
               block.toolUse().ifPresent(toolUse -> {
-                  // Execute toolUse.name() with toolUse.input() and return the result to Claude
+                  // Run toolUse.name() with toolUse.input() and return the result to Claude
               });
           }
       }
@@ -1488,10 +1443,10 @@ Claude is calling a tool and expects you to run it.
   );
 
   if ($response->stopReason === 'tool_use') {
-      // Extract and execute the tool
+      // Extract and run the tool
       foreach ($response->content as $block) {
           if ($block->type === 'tool_use') {
-              // Execute $block->name with $block->input and return the result to Claude
+              // Run $block->name with $block->input and return the result to Claude
           }
       }
   }
@@ -1520,19 +1475,19 @@ Claude is calling a tool and expects you to run it.
   )
 
   if response.stop_reason == :tool_use
-    # Extract and execute the tool
+    # Extract and run the tool
     response.content.each do |block|
       next unless block.type == :tool_use
-      # Execute block.name with block.input and return the result to Claude
+      # Run block.name with block.input and return the result to Claude
     end
   end
   ```
 </CodeGroup>
 
-A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not finished, and this response does not carry its result. In the common case, Claude calls a [server tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
+A `tool_use` response can also contain a `server_tool_use` block whose `id` has no matching result block. That server tool call is not complete, and this response does not carry its result. In the common case, Claude calls a [server tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) and one of your client tools in the same group of parallel tool calls: the API returns without running the server tool so that you can run the client tools first. There is no other marker for the state; detect it by checking each `server_tool_use` or `mcp_tool_use` block's `id` for a matching result block.
 
 <Note>
-  With [programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code finishes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
+  With [programmatic tool calling](https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling), the same response shape means something different. The client `tool_use` block comes from code that is running in the `code_execution` tool rather than from Claude directly, and its `caller` field names the `code_execution` block that called it. That code has already started: it is paused waiting for your `tool_result` blocks, and sending them resumes the execution instead of starting a deferred tool. The `code_execution` block's own result block arrives once the code completes, which can take more than one round of tool results. The follow-up user message itself is the same in both cases; with programmatic tool calling, also pass back the `id` from the response's `container` field, as that page shows.
 </Note>
 
 ```json A mixed tool_use response
@@ -1580,9 +1535,9 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 ### pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) such as web search. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while running [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools) such as web search. The default limit is 10 iterations for each request.
 
-When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
+When this occurs, the response might contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
 <CodeGroup>
   ```bash cURL
@@ -1597,13 +1552,13 @@ When this happens, the response may contain a `server_tool_use` block without a 
       "max_tokens": 4096,
       "tools": [{"type": "web_search_20250305", "name": "web_search"}],
       "messages": [{"role": "user", "content": "Search for latest AI news"}]
-    }' | jq '{stop_reason, content}'
+    }'
   ```
 
   ```bash CLI
   # Inspect stop_reason; if it is pause_turn, re-run with the assistant
   # response appended to --message.
-  ant messages create --format json <<'YAML' | jq '{stop_reason, content}'
+  ant messages create <<'YAML'
   model: claude-opus-5-5
   max_tokens: 4096
   tools:
@@ -1659,7 +1614,7 @@ When this happens, the response may contain a `server_tool_use` block without a 
 
   ```csharp C#
   List<ToolUnion> tools = [new ToolUnion(new WebSearchTool20250305())];
-  MessageParam userMessage = new() { Role = Role.User, Content = "Search for latest AI news" };
+  MessageParam userMessage = new UserMessageParam { Content = "Search for latest AI news" };
 
   var response = await client.Messages.Create(new MessageCreateParams
   {
@@ -1680,9 +1635,8 @@ When this happens, the response may contain a `server_tool_use` block without a 
           Messages =
           [
               userMessage,
-              new()
+              new AssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
               }
           ]
@@ -1815,15 +1769,14 @@ Claude declined to generate a response. Safety classifiers return this stop reas
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "[Unsafe request]"}]
-    }' | jq '{stop_reason, stop_details}'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "[Unsafe request]"}' \
-    --format json | jq '{stop_reason, stop_details}'
+    --message '{role: user, content: "[Unsafe request]"}'
   ```
 
   ```python Python
@@ -1863,7 +1816,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "[Unsafe request]" }]
+      Messages = [new UserMessageParam { Content = "[Unsafe request]" }]
   });
 
   if (response.StopReason == "refusal")
@@ -1919,7 +1872,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
   $response = $client->messages->create(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => '[Unsafe request]']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   if ($response->stopReason === 'refusal') {
@@ -1933,7 +1886,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [{ role: "user", content: "[Unsafe request]" }]
   )
@@ -1947,10 +1900,10 @@ Claude declined to generate a response. Safety classifiers return this stop reas
 </CodeGroup>
 
 <Tip>
-  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Google Cloud](https://platform.claude.com/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 ([deprecated](https://platform.claude.com/docs/en/about-claude/model-deprecations)) or Claude Opus 4.1 (the latter [retired, except on Bedrock and Claude Models on Google Cloud (Google managed)](https://platform.claude.com/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
-On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
+On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered in [What a refusal looks like](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
 
 A refused request on Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, or Claude Haiku 5.5 can usually be served by retrying on another Claude model. [Refusals and fallback](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback) shows how to set up that retry, server-side or in your client. Claude Haiku 5.5 has no server-side fallback, so set up its retry [in your client](https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback). If you build the retry yourself from Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, or Claude Sonnet 5.5, [fallback credit](https://platform.claude.com/docs/en/build-with-claude/fallback-credit) covers how to avoid paying the prompt-cache cost twice.
 
@@ -1959,7 +1912,7 @@ A refused request on Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude O
 Claude stopped because it reached the model's context window limit. This lets you request the maximum possible tokens without knowing the exact input size.
 
 <Note>
-  This stop reason is currently typed only in the SDK's `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
+  This stop reason is currently typed only in the SDK's `beta` (csharp, go: `Beta`; java: `beta()`) namespace, so the following examples call `client.beta.messages` (csharp, go: `client.Beta.Messages`; java: `client.beta().messages()`; php: `$client->beta->messages`) and use the `Beta`-prefixed types. On Sonnet 4.5 (deprecated) and newer models, the API returns this value without a beta header. For earlier models, add the `model-context-window-exceeded-2025-08-26` beta header to enable it.
 </Note>
 
 <CodeGroup>
@@ -1972,15 +1925,14 @@ Claude stopped because it reached the model's context window limit. This lets yo
       "model": "claude-opus-5-5",
       "max_tokens": 20000,
       "messages": [{"role": "user", "content": "Large input that uses most of context window..."}]
-    }' | jq '.stop_reason'
+    }'
   ```
 
   ```bash CLI
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 20000 \
-    --message '{role: user, content: "Large input that uses most of context window..."}' \
-    --format json | jq '.stop_reason'
+    --message '{role: user, content: "Large input that uses most of context window..."}'
   ```
 
   ```python Python
@@ -2023,7 +1975,7 @@ Claude stopped because it reached the model's context window limit. This lets yo
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 20000,
-      Messages = [new() { Role = Role.User, Content = "Large input that uses most of context window..." }]
+      Messages = [new BetaUserMessageParam { Content = "Large input that uses most of context window..." }]
   });
 
   if (response.StopReason?.Value() == BetaStopReason.ModelContextWindowExceeded)
@@ -2149,9 +2101,7 @@ Make it a habit to check the `stop_reason` in your response handling logic:
         return handleRefusal(response);
       default: {
         // Handle end_turn and other cases
-        const textBlock = response.content.find(
-          (block): block is Anthropic.Beta.BetaTextBlock => block.type === "text"
-        );
+        const textBlock = response.content.find((block) => block.type === "text");
         return textBlock?.text ?? "";
       }
     }
@@ -2272,9 +2222,7 @@ When a response is truncated because of token limits or the context window, appe
 
   ```typescript TypeScript
   function handleTruncatedResponse(response: Anthropic.Beta.BetaMessage): string {
-    const textBlock = response.content.find(
-      (block): block is Anthropic.Beta.BetaTextBlock => block.type === "text"
-    );
+    const textBlock = response.content.find((block) => block.type === "text");
     const text = textBlock?.text ?? "";
 
     if (
@@ -2384,15 +2332,15 @@ When a response is truncated because of token limits or the context window, appe
 
 ### Implement retry logic for pause\_turn
 
-When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
+When you use [server tools](https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools), the API might return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
 <CodeGroup exclude="shell">
   ```python Python
   def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
       """
-      Handle server tool conversations that may require multiple continuations.
+      Handle server tool conversations that might require multiple continuations.
 
-      The server runs a sampling loop when executing server tools. If the loop
+      The server uses a sampling loop to run server tools. If the loop
       reaches its iteration limit, the API returns pause_turn. Continue the
       conversation by sending the response back to let Claude finish.
       """
@@ -2407,7 +2355,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
           )
 
           if response.stop_reason != "pause_turn":
-              # Claude finished processing - return the final response
+              # Claude finished processing: return the final response
               return response
 
           # pause_turn: replace the full message list to maintain alternating roles
@@ -2416,7 +2364,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
               {"role": "assistant", "content": response.content},
           ]
 
-      # Reached max continuations - return the last response
+      # Reached max continuations: return the last response
       return response
   ```
 
@@ -2439,7 +2387,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
       });
 
       if (response.stop_reason !== "pause_turn") {
-        // Claude finished processing - return the final response
+        // Claude finished processing: return the final response
         return response;
       }
 
@@ -2450,7 +2398,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
       ];
     }
 
-    // Reached max continuations - return the last response
+    // Reached max continuations: return the last response
     return response!;
   }
   ```
@@ -2462,7 +2410,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
       List<ToolUnion> tools,
       int maxContinuations = 5)
   {
-      List<MessageParam> messages = [new() { Role = Role.User, Content = userQuery }];
+      List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
       Message response = null!;
 
       for (var i = 0; i < maxContinuations; i++)
@@ -2477,23 +2425,22 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
 
           if (response.StopReason != "pause_turn")
           {
-              // Claude finished processing - return the final response
+              // Claude finished processing: return the final response
               return response;
           }
 
           // pause_turn: replace the full message list to maintain alternating roles
           messages =
           [
-              new() { Role = Role.User, Content = userQuery },
-              new()
+              new UserMessageParam { Content = userQuery },
+              new AssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
               }
           ];
       }
 
-      // Reached max continuations - return the last response
+      // Reached max continuations: return the last response
       return response;
   }
   ```
@@ -2521,7 +2468,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
   		}
 
   		if response.StopReason != "pause_turn" {
-  			// Claude finished processing - return the final response
+  			// Claude finished processing: return the final response
   			return response, nil
   		}
 
@@ -2536,7 +2483,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
   		}
   	}
 
-  	// Reached max continuations - return the last response
+  	// Reached max continuations: return the last response
   	return response, nil
   }
   ```
@@ -2564,13 +2511,13 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
           response = client.messages().create(params.build());
 
           if (!response.stopReason().map(StopReason.PAUSE_TURN::equals).orElse(false)) {
-              // Claude finished processing - return the final response
+              // Claude finished processing: return the final response
               return response;
           }
           // pause_turn: loop again and send the response back
       }
 
-      // Reached max continuations - return the last response
+      // Reached max continuations: return the last response
       return response;
   }
   ```
@@ -2594,7 +2541,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
           );
 
           if ($response->stopReason !== 'pause_turn') {
-              // Claude finished processing - return the final response
+              // Claude finished processing: return the final response
               return $response;
           }
 
@@ -2605,7 +2552,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
           ];
       }
 
-      // Reached max continuations - return the last response
+      // Reached max continuations: return the last response
       return $response;
   }
   ```
@@ -2623,7 +2570,7 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
         tools: tools
       )
 
-      # Claude finished processing - return the final response
+      # Claude finished processing: return the final response
       return response unless response.stop_reason == :pause_turn
 
       # pause_turn: replace the full message list to maintain alternating roles
@@ -2633,13 +2580,13 @@ When using [server tools](https://platform.claude.com/docs/en/agents-and-tools/t
       ]
     end
 
-    # Reached max continuations - return the last response
+    # Reached max continuations: return the last response
     response
   end
   ```
 </CodeGroup>
 
-## Stop reasons vs. errors
+## Stop reasons versus errors
 
 It's important to distinguish between `stop_reason` values and actual errors:
 
@@ -2659,7 +2606,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
   ```bash cURL
   # cURL exits non-zero on HTTP errors with --fail-with-body; inspect
   # $? for errors and stop_reason for successful responses.
-  curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
+  curl --fail-with-body https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -2667,7 +2614,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
       "model": "claude-opus-5-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello!"}]
-    }' | jq '.stop_reason'
+    }'
   ```
 
   ```bash CLI
@@ -2675,8 +2622,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
   ant messages create \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello!"}' \
-    --format json | jq '.stop_reason'
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -2742,7 +2688,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 1024,
-          Messages = [new() { Role = Role.User, Content = "Hello!" }]
+          Messages = [new UserMessageParam { Content = "Hello!" }]
       });
 
       // Handle successful response with stop_reason
@@ -2825,7 +2771,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
       $response = $client->messages->create(
           maxTokens: 1024,
           messages: [['role' => 'user', 'content' => 'Hello!']],
-          model: 'claude-opus-5-5',
+          model: Model::CLAUDE_OPUS_5_5,
       );
 
       // Handle successful response with stop_reason
@@ -2845,7 +2791,7 @@ It's important to distinguish between `stop_reason` values and actual errors:
 
   begin
     response = client.messages.create(
-      model: "claude-opus-5-5",
+      model: Anthropic::Model::CLAUDE_OPUS_5_5,
       max_tokens: 1024,
       messages: [{ role: "user", content: "Hello!" }]
     )
@@ -2874,7 +2820,7 @@ When using streaming, `stop_reason` is:
 <CodeGroup>
   ```bash cURL
   # The message_delta event in the SSE stream carries stop_reason.
-  curl --no-buffer https://api.anthropic.com/v1/messages \
+  curl -N https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
@@ -2888,11 +2834,10 @@ When using streaming, `stop_reason` is:
 
   ```bash CLI
   # stop_reason appears in the message_delta event.
-  ant messages create --stream --format jsonl \
+  ant messages create --stream \
     --model claude-opus-5-5 \
     --max-tokens 1024 \
-    --message '{role: user, content: "Hello!"}' |
-    jq -c 'select(.type == "message_delta") | .delta.stop_reason'
+    --message '{role: user, content: "Hello!"}'
   ```
 
   ```python Python
@@ -2933,7 +2878,7 @@ When using streaming, `stop_reason` is:
   {
       Model = Model.ClaudeOpus5_5,
       MaxTokens = 1024,
-      Messages = [new() { Role = Role.User, Content = "Hello!" }]
+      Messages = [new UserMessageParam { Content = "Hello!" }]
   };
 
   await foreach (var streamEvent in client.Messages.CreateStreaming(parameters))
@@ -3001,7 +2946,7 @@ When using streaming, `stop_reason` is:
   $stream = $client->messages->createStream(
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello!']],
-      model: 'claude-opus-5-5',
+      model: Model::CLAUDE_OPUS_5_5,
   );
 
   foreach ($stream as $event) {
@@ -3015,7 +2960,7 @@ When using streaming, `stop_reason` is:
   client = Anthropic::Client.new
 
   stream = client.messages.stream(
-    model: "claude-opus-5-5",
+    model: Anthropic::Model::CLAUDE_OPUS_5_5,
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello!" }]
   )
@@ -3050,7 +2995,7 @@ When using streaming, `stop_reason` is:
           )
 
           if response.stop_reason == "tool_use":
-              # Execute tools and continue
+              # Run tools and continue
               tool_results = execute_tools(response.content)
               messages.append({"role": "assistant", "content": response.content})
               messages.append({"role": "user", "content": tool_results})
@@ -3076,7 +3021,7 @@ When using streaming, `stop_reason` is:
       });
 
       if (response.stop_reason === "tool_use") {
-        // Execute tools and continue
+        // Run tools and continue
         const toolResults = executeTools(response.content);
         messages.push({ role: "assistant", content: response.content });
         messages.push({ role: "user", content: toolResults });
@@ -3094,7 +3039,7 @@ When using streaming, `stop_reason` is:
       string userQuery,
       List<ToolUnion> tools)
   {
-      List<MessageParam> messages = [new() { Role = Role.User, Content = userQuery }];
+      List<MessageParam> messages = [new UserMessageParam { Content = userQuery }];
 
       while (true)
       {
@@ -3108,14 +3053,13 @@ When using streaming, `stop_reason` is:
 
           if (response.StopReason == "tool_use")
           {
-              // Execute tools and continue
+              // Run tools and continue
               var toolResults = ExecuteTools(response.Content);
-              messages.Add(new()
+              messages.Add(new AssistantMessageParam
               {
-                  Role = Role.Assistant,
                   Content = response.Content.Select(block => new ContentBlockParam(block.Json)).ToList()
               });
-              messages.Add(new() { Role = Role.User, Content = toolResults });
+              messages.Add(new UserMessageParam { Content = toolResults });
           }
           else
           {
@@ -3150,7 +3094,7 @@ When using streaming, `stop_reason` is:
   			return response, nil
   		}
 
-  		// Execute tools and continue
+  		// Run tools and continue
   		toolResults := executeTools(response.Content)
   		var contentParams []anthropic.ContentBlockParamUnion
   		for _, block := range response.Content {
@@ -3169,7 +3113,7 @@ When using streaming, `stop_reason` is:
       List<Tool> tools
   ) {
       List<MessageParam> messages = new ArrayList<>();
-      messages.add(MessageParam.builder().role(MessageParam.Role.USER).content(userQuery).build());
+      messages.add(MessageParam.ofUser(userQuery));
 
       while (true) {
           MessageCreateParams.Builder params = MessageCreateParams.builder()
@@ -3185,13 +3129,11 @@ When using streaming, `stop_reason` is:
               return response;
           }
 
-          // Execute tools and continue
+          // Run tools and continue
           List<ToolResultBlockParam> toolResults = executeTools(response.content());
           messages.add(response.toParam());
-          messages.add(MessageParam.builder()
-              .role(MessageParam.Role.USER)
-              .contentOfBlockParams(toolResults.stream().map(ContentBlockParam::ofToolResult).toList())
-              .build());
+          messages.add(MessageParam.ofUserOfContentBlockParams(
+              toolResults.stream().map(ContentBlockParam::ofToolResult).toList()));
       }
   }
   ```
@@ -3214,7 +3156,7 @@ When using streaming, `stop_reason` is:
               return $response;
           }
 
-          // Execute tools and continue
+          // Run tools and continue
           $toolResults = execute_tools($response->content);
           $messages[] = ['role' => 'assistant', 'content' => $response->content];
           $messages[] = ['role' => 'user', 'content' => $toolResults];
@@ -3237,7 +3179,7 @@ When using streaming, `stop_reason` is:
       # Final response
       return response unless response.stop_reason == :tool_use
 
-      # Execute tools and continue
+      # Run tools and continue
       tool_results = execute_tools(response.content)
       messages << { role: "assistant", content: response.content }
       messages << { role: "user", content: tool_results }
@@ -3292,9 +3234,7 @@ When using streaming, `stop_reason` is:
         messages
       });
 
-      const textBlock = response.content.find(
-        (block): block is Anthropic.TextBlock => block.type === "text"
-      );
+      const textBlock = response.content.find((block) => block.type === "text");
       fullResponse += textBlock?.text ?? "";
 
       if (response.stop_reason !== "max_tokens") {
@@ -3316,7 +3256,7 @@ When using streaming, `stop_reason` is:
   ```csharp C#
   static async Task<string> GetCompleteResponse(AnthropicClient client, string prompt, int maxAttempts = 3)
   {
-      List<MessageParam> messages = [new() { Role = Role.User, Content = prompt }];
+      List<MessageParam> messages = [new UserMessageParam { Content = prompt }];
       var fullResponse = "";
 
       for (var i = 0; i < maxAttempts; i++)
@@ -3345,9 +3285,9 @@ When using streaming, `stop_reason` is:
           // Continue from where it left off
           messages =
           [
-              new() { Role = Role.User, Content = prompt },
-              new() { Role = Role.Assistant, Content = fullResponse },
-              new() { Role = Role.User, Content = "Please continue from where you left off." }
+              new UserMessageParam { Content = prompt },
+              new AssistantMessageParam { Content = fullResponse },
+              new UserMessageParam { Content = "Please continue from where you left off." }
           ];
       }
 
@@ -3395,9 +3335,7 @@ When using streaming, `stop_reason` is:
 
   ```java Java
   static String getCompleteResponse(AnthropicClient client, String prompt, int maxAttempts) {
-      List<MessageParam> messages = List.of(
-          MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build()
-      );
+      List<MessageParam> messages = List.of(MessageParam.ofUser(prompt));
       StringBuilder fullResponse = new StringBuilder();
 
       for (int i = 0; i < maxAttempts; i++) {
@@ -3420,9 +3358,9 @@ When using streaming, `stop_reason` is:
 
           // Continue from where it left off
           messages = List.of(
-              MessageParam.builder().role(MessageParam.Role.USER).content(prompt).build(),
-              MessageParam.builder().role(MessageParam.Role.ASSISTANT).content(fullResponse.toString()).build(),
-              MessageParam.builder().role(MessageParam.Role.USER).content("Please continue from where you left off.").build()
+              MessageParam.ofUser(prompt),
+              MessageParam.ofAssistant(fullResponse.toString()),
+              MessageParam.ofUser("Please continue from where you left off.")
           );
       }
 
@@ -3550,9 +3488,7 @@ With the `model_context_window_exceeded` stop reason, you can request the maximu
         console.log(`Generated ${tokens} tokens (natural completion)`);
     }
 
-    const textBlock = response.content.find(
-      (block): block is Anthropic.Beta.BetaTextBlock => block.type === "text"
-    );
+    const textBlock = response.content.find((block) => block.type === "text");
     return textBlock?.text ?? "";
   }
   ```
@@ -3567,7 +3503,7 @@ With the `model_context_window_exceeded` stop reason, you can request the maximu
       {
           Model = Model.ClaudeOpus5_5,
           MaxTokens = 20000,
-          Messages = [new() { Role = Role.User, Content = prompt }]
+          Messages = [new BetaUserMessageParam { Content = prompt }]
       });
 
       var tokens = response.Usage.OutputTokens;
@@ -3719,7 +3655,7 @@ With the `model_context_window_exceeded` stop reason, you can request the maximu
     Retry refused requests on a fallback model, server-side or in your client.
   </Card>
 
-  <Card title="Tool Runner (SDK)" icon="wrench" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner">
+  <Card title="Tool runner (SDK)" icon="wrench" href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner">
     Let the SDK manage the `tool_use` loop, result formatting, and retries for you.
   </Card>
 
